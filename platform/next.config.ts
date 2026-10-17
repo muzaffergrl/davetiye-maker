@@ -29,12 +29,13 @@ export const THEME_FILE_CSP = "default-src 'none'; img-src 'self' data:; style-s
 /**
  * G139: the PDF route runs a headless Chromium. On Vercel it is @sparticuz/chromium: its packed browser (bin/*.br)
  * is read from disk at run time, so it is traced explicitly and both packages stay outside the bundle.
- * G159: it reads the printable invitation's parts from public/print (lib/print/render.ts) — traced explicitly; nothing
- * else of public/ (before, the whole folder was traced: ~57 MB of sales-site media in the PDF function).
+ * G159: it reads the printable invitation's parts from disk, public/print/<theme>/<part>.webp (lib/print/render.ts
+ * localAsset) — exactly those are traced; nothing else of public/ (before, the whole folder was: sales-site media, and the
+ * palettes' print parts public/print/<theme>/variants/…, which render.ts fetches from the CDN anyway; ~57 MB, growing).
  */
 export const PDF_ROUTE = '/api/edit/\\[slug\\]/download';
 const CHROMIUM_FILES = ['./node_modules/@sparticuz/chromium/bin/**'];
-const PRINT_PARTS = ['./public/print/**/*.webp'];
+export const PRINT_PARTS = ['./public/print/*/*.webp'];
 
 export const THEME_ASSET_ROUTE = '/themes/\\[theme\\]/\\[\\.\\.\\.path\\]';
 

@@ -219,7 +219,8 @@ test('tracing config: theme routes get *.html/*.json, no route any theme asset (
   const includes = nextConfig.outputFileTracingIncludes as Record<string, string[]>;
   // G139: the PDF route also carries the packed Chromium of @sparticuz/chromium; G159: and public/print (nothing else of public/)
   for (const r of THEME_ROUTES) {
-    const extra = r === PDF_ROUTE ? ['./node_modules/@sparticuz/chromium/bin/**', './public/print/**/*.webp'] : [];
+    // (only public/print/<theme>/<part>.webp: what lib/print/render.ts reads from disk; palette parts come from the CDN)
+    const extra = r === PDF_ROUTE ? ['./node_modules/@sparticuz/chromium/bin/**', './public/print/*/*.webp'] : [];
     assert.deepEqual(includes[r], ['./themes/**/*.html', './themes/**/*.json', ...extra], r);
   }
   // G159: the asset route traces nothing (theme CSS/JS/images are static copies in public/themes); every route excludes them

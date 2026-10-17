@@ -151,9 +151,10 @@ düzenler. Bu belge platformun tek kaynağıdır.
   ETag/Last-Modified ile 304, ve varlık uzantılı bir 404 de bu önbellek başlığını taşıyor (Vercel'de CDN önbelleği yayın başına,
   zararsız). Yayından sonra denenecek: `live-check` (tema CSS'i), bir palet demosu (`/start/demo/olive-ivory?variant=sage-gold`)
   ağ sekmesinde `~sage-gold/img/…` 200 ve `x-vercel-cache`, site PDF'i (tema görselleri PDF işlevine CDN'den gelir — önizleme
-  yayınında Deployment Protection bunu engelleyebilir, production'da açık). Ölçüm (yerel build, 29 tema): varlık rotası
-  101 → 2,4 MB, PDF rotası 184 → 154 MB (bütün `public/` izleniyordu), en büyük işlev artık PDF rotası; `trace-check` her işlevde
-  tema dosyası ≤ 40 MB ve toplam ≤ 200 MB arar. Ayrıntı: `gorevler/G159-statik-tema.md`, `platform/README.md` "Vercel paketleri".
+  yayınında Deployment Protection bunu engelleyebilir, production'da açık; palet baskı parçaları da öyle, eskiden beri). Ölçüm
+  (yerel build, 29 tema, 15'inde palet): varlık rotası 101 → 2,4 MB (paletlerle artık büyümez), PDF rotası 184 → 142,5 MB (bütün
+  `public/` izleniyordu; artık yalnız `public/print/<tema>/*.webp`), en büyük işlev PDF rotası; `trace-check` her işlevde tema
+  dosyası ≤ 40 MB ve toplam ≤ 200 MB arar. Ayrıntı: `gorevler/G159-statik-tema.md`, `platform/README.md` "Vercel paketleri".
 - Eski not (2026-10-13 sabah): bulut oturumunun Vercel bağlantısı proje açamıyordu (403); statik önizleme
   https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (özel; panel yok).
 

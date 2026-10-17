@@ -19,16 +19,19 @@ yeni palet dosyaları kendiliğinden yayına girsin, sınır sessizce aşılamas
 **2026-10-17 · claude-G159 — durum: inceleme.** Dal `claude/g159-statik-tema` (taban `claude/zealous-fermi-hy1o40`). Yayın
 yok, main'e dokunulmadı, PR yok.
 
-**Ölçüm (yerel `next build`, 29 tema, 9'unda palet; `.next/server/**/*.nft.json` + node_modules dahil):**
+**Ölçüm (yerel `next build`; `.next/server/**/*.nft.json` + işlevin kendi dosyası, node_modules dahil).** "Önce" = taban
+`c0717bbb` (29 tema, 9'unda palet); "Sonra" = G158 (C partisi) üzerine rebase edilmiş dal (29 tema, **15'inde palet**,
+`themes/` 141 MB):
 
 | İşlev | Önce | Sonra | Not |
 |---|---|---|---|
-| `themes/[theme]/[...path]` (varlık rotası) | **101,4 MB** (tema dosyası 99,0) | **2,4 MB** | artık yalnız Next + kendi kodu |
-| `api/edit/[slug]/download` (PDF, Chromium) | **184,1 MB** (public/ 57,1) | **153,6 MB** (public/print 27,6) | `render.ts` bütün `public/`'i izletiyordu |
+| `themes/[theme]/[...path]` (varlık rotası) | **101,4 MB** (tema dosyası 99,0) — eski yapılandırmayla bugün ~132 MB olurdu | **2,4 MB** | yalnız Next + kendi kodu; paletlerle büyümez |
+| `api/edit/[slug]/download` (PDF, Chromium) | **184,1 MB** (public/ 57,1) | **142,5 MB** (public/print 16,4) | bütün `public/` izleniyordu (satış medyası, ses, baskı paletleri) |
 | `api/edit/[slug]/*` (sharp'lı 7 rota) | 52,1–53,4 MB | 51,2–52,5 MB | sharp musl+wasm ~27 MB (değişmedi, aşağıda) |
 | sayfa/`/start`/RSVP rotaları | 6–8 MB (tema 3,3) | ~5–7 MB (tema 2,4) | bazı rotalara sızan tema görselleri de çıktı |
 
-Tema klasörü 190 MB'a çıksa da hiçbir işlev büyümez; büyüyen statik çıktıdır (`public/themes`, şu an 97,2 MB / 2405 dosya).
+Tema klasörü 190 MB'a çıksa da hiçbir işlev büyümez; büyüyen statik çıktıdır (`public/themes`: 129,5 MB / 3219 dosya; G158'in
+yeni palet dosyaları rebase sonrası build'de kendiliğinden kopyalandı, 824 dosya).
 
 **Yapılan:**
 - `platform/scripts/theme-assets.cjs` (`prebuild`): varlık rotasının servis edeceği her dosyayı (aynı kurallar: tema id'si
@@ -40,9 +43,10 @@ Tema klasörü 190 MB'a çıksa da hiçbir işlev büyümez; büyüyen statik ç
   + `themes/**/*.{varlık uzantıları}` (her rota). `VARIANT_REWRITE` (afterFiles = public dosyalardan sonra):
   `/themes/:theme/~:variant([a-z][a-z0-9-]{0,31})/:path+` → `/themes/:theme/:path+?variant=:variant` — kopyası olmayan dosya
   asıla düşer, adres değişmez (yönlendirme değil; CSS'teki göreli `url(img/…)` varyantta kalır). `THEME_ASSET_HEADERS`: rotanın
-  başlıkları (`Cache-Control: public, max-age=3600, s-maxage=86400`, `nosniff`, SVG'ye dosya CSP'si). PDF rotası `public/print/**/*.webp`'i
-  açıkça izler; `lib/print/render.ts`'te `process.cwd()` `turbopackIgnore` (bütün `public/` izleniyordu: satış sitesi medyası 27 MB,
-  ses 2,4 MB — ve kopyadan sonra `public/themes` de girecekti → ~350 MB).
+  başlıkları (`Cache-Control: public, max-age=3600, s-maxage=86400`, `nosniff`, SVG'ye dosya CSP'si). PDF rotası yalnız
+  diskten okuduğu `public/print/<tema>/<parça>.webp`'i izler (`PRINT_PARTS = ./public/print/*/*.webp`); `lib/print/render.ts`'te
+  `process.cwd()` `turbopackIgnore` (bütün `public/` izleniyordu: satış sitesi medyası 27 MB, ses 2,4 MB, baskı paletleri
+  `public/print/*/variants/` 25 MB — `render.ts` onları zaten CDN'den alıyor —; kopyadan sonra `public/themes` de girecekti → ~300 MB).
 - Varlık rotası (`lib/site/static.ts` + route): kopyası olmayanı yanıtlar (404'ler, `next dev`, testin kendi tema klasörü);
   rewrite'tan gelen isteğin paletini `?variant=`'tan ya da istenen adresten (`next start` asıl adresi verir) bulur;
   `img/variants/…` doğrudan 404 (public'te de yok — bir görselin iki adresi olmasın; yerel ↔ Vercel aynı davranış); tema 404'ü
@@ -54,8 +58,9 @@ Tema klasörü 190 MB'a çıksa da hiçbir işlev büyümez; büyüyen statik ç
   ≤ 200 MB; en büyük 6 işlev her build'de yazdırılır.
 
 **Testler:** `rm -rf .next && npx tsc --noEmit && I18N_STRICT=1 npm test && npm run build` yeşil: tsc temiz, **1514/1516**
-(2 atlanan: build çıktısı ister, .next silindiği için), build + trace-check geçti ("78 functions; theme files 2.4 / 40 MB,
-total 153.6 / 200 MB").
+(2 atlanan: build çıktısı ister, .next silindiği için), build + trace-check geçti. Rebase + `PRINT_PARTS` daraltmasından sonra
+yeniden: G159/G055/G153 testleri 27/27, build + trace-check ("78 functions; theme files 2.4 / 40 MB, total 142.5 / 200 MB"),
+`tests/g159-browser.ts` 113/113, tsc temiz, `I18N_STRICT=1 npm test` **1516/1516** (build varken; build'e bağlı 2 test de geçti).
 `tests/g159-static-themes.test.ts` (6 test: kopya kuralları, artımlılık/silme, gerçek temaların planı, rota + rewrite parametresi,
 next.config rewrite/başlık/exclude, trace-check bütçeleri), `tests/g055-share-tracing.test.ts` güncellendi.
 `tests/g159-browser.ts` (`next start`, build gerekir) **113/113**: 3 tema CSS/JS/görsel 200 + başlıklar + bayt = themes/; 2 palet
@@ -80,9 +85,9 @@ Vercel'in yayın boyutu uyarısı.
 
 **Sonraki fırsatlar (bu görevde değiştirilmedi):**
 - sharp'ın `@img/sharp-libvips-linuxmusl-x64` + `@img/sharp-wasm32` ikilileri her sharp'lı işlevde ~27 MB (Vercel glibc;
-  `outputFileTracingExcludes` ile çıkarılabilir — Vercel'de denenmeli). PDF rotası 154 → ~127 MB olur.
-- PDF rotasındaki `public/print` (27,6 MB) baskı paletleriyle büyüyecek (palet başına 0,15–0,55 MB × 5 × 21 ≈ +40 MB) →
-  ~195 MB'a yaklaşabilir; bütçe (200 MB) uyarır. Gerekirse `public/print` de izlenmez, `render.ts` CDN'den alır (kodu hazır).
+  `outputFileTracingExcludes` ile çıkarılabilir — Vercel'de denenmeli). PDF rotası 142 → ~115 MB olur.
+- PDF rotasındaki `public/print/<tema>/*.webp` (16,4 MB) yalnız yeni tasarımla büyür (palet parçaları izlenmiyor). Gerekirse
+  o da izlenmez, `render.ts` CDN'den alır (kodu hazır; önizleme yayınında Deployment Protection'a takılır).
 
 ## Günlük
 - 2026-10-17 claude-G159: alındı → kopya adımı, rewrite/başlıklar, trace-check bütçeleri, testler, belgeler; durum inceleme.

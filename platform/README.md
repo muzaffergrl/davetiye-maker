@@ -1384,8 +1384,9 @@ Calendar'a gerçek içe aktarma (dosya yapısı testle ve gözle doğrulandı), 
   varlığı izlemez: `outputFileTracingExcludes['**']` = `public/themes/**` + `themes/**/*.{uzantılar}`. Varlık rotası yalnız
   kopyası olmayanı yanıtlar (404'ler, `next dev`, testin kendi tema klasörü; `~<v>` override'ını `?variant=` ya da istenen
   adresten bulur). `npm run dev` önce kopyaları siler (dev her zaman diskten, güncel); `npm start` ve `scripts/lib/browser.ts`
-  `startNext` önce eşitler. Ölçüm (29 tema, 9'unda palet): varlık rotası **101 MB → 2,4 MB**; PDF rotası 184 → 154 MB
-  (`lib/print/render.ts` `process.cwd()` + `public` bütün `public/`'i izletiyordu; artık yalnız `public/print/**/*.webp`).
+  `startNext` önce eşitler. Ölçüm (29 tema, 15'inde palet): varlık rotası **~101 MB → 2,4 MB**; PDF rotası 184 → ~142 MB
+  (`lib/print/render.ts` `process.cwd()` + `public` bütün `public/`'i izletiyordu; artık yalnız diskten okuduğu
+  `public/print/<tema>/<parça>.webp` — palet baskı parçaları `variants/…` zaten CDN'den geliyordu).
 - `npm run build` → `trace-check` (exit 1 + liste): (1) her tema rotası her temanın `index.html`'ini izliyor; (2) bu rotalar
   `themes/`'ten `*.html`/`*.json` dışında **hiçbir** dosya taşımıyor; (3) başka hiçbir işlev de tema varlığı (`themes/` CSS/JS/
   görsel, `public/themes/` herhangi bir dosya) taşımıyor; (4) servis edilebilir her tema dosyasının `public/themes/`'te aynı

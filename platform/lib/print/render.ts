@@ -81,7 +81,8 @@ async function localAsset(url: URL, siteId: string | null): Promise<Response | n
   if (parts[0] === 'print' && parts.length === 3 && parts.every((p) => /^[a-z0-9][a-z0-9_.-]*$/.test(p) && !p.includes('..')) && parts[2].endsWith('.webp')) {
     try {
       // turbopackIgnore: otherwise the whole public/ folder (sales-site media, public/themes …) is traced into the PDF
-      // function; next.config.ts traces public/print/** for it explicitly (G159).
+      // function; next.config.ts PRINT_PARTS traces exactly public/print/<id>/<part>.webp for it (G159). A palette's parts
+      // (/print/<id>/variants/<v>/…) do not match here and come from the public address.
       const bytes = await readFile(path.join(/*turbopackIgnore: true*/ process.cwd(), 'public', ...parts));
       return new Response(new Uint8Array(bytes), { headers: { 'Content-Type': 'image/webp' } });
     } catch {
