@@ -254,15 +254,17 @@ export function DateField(props: BaseFieldProps & { value: string | undefined; l
 export function TimeField(props: BaseFieldProps & { value: string | undefined; locale: string; onChange: (value: string) => void }) {
   const { path, value, locale, onChange } = props;
   const { issues, hasError, setTyping, locked } = useFieldState(path);
-  const [deviceUses12h] = useState(() => {
+  // Read after mount, so the server's and the browser's first render match (the server's own format is not the phone's).
+  const [deviceUses12h, setDeviceUses12h] = useState<boolean | null>(null);
+  useEffect(() => {
     try {
-      return new Intl.DateTimeFormat(undefined, { hour: 'numeric' }).resolvedOptions().hour12 === true;
+      setDeviceUses12h(new Intl.DateTimeFormat(undefined, { hour: 'numeric' }).resolvedOptions().hour12 === true);
     } catch {
-      return true;
+      setDeviceUses12h(true);
     }
-  });
+  }, []);
   const siteUses12h = locale === 'en-US' || locale === 'en-CA' || locale === 'en-AU';
-  const written = deviceUses12h === siteUses12h ? null : formatTime(value, locale);
+  const written = deviceUses12h === null || deviceUses12h === siteUses12h ? null : formatTime(value, locale);
   return (
     <FieldFrame {...props} display={props.display ?? (written ? `On your website: ${written}` : null)} issues={issues}>
       <input
