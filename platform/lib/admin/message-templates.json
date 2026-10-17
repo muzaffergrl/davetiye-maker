@@ -333,7 +333,7 @@
     ],
     "body": [
       "Hi {names}, your {design} wedding website is set up with the details you sent us.",
-      "Open it as before (your private edit link, or your Etsy order number and email on any device) and check every page: names, date, venue, photos and RSVP. Your website is still a private draft until you tap Publish; your guests can then open it at {site_url}.",
+      "Open it with the same private edit link you already have (or with your Etsy order number and email on any device) and check every page: names, date, venue, photos and RSVP. Your website is still a private draft until you tap Publish; your guests can then open it at {site_url}.",
       "You can change anything yourself from now on. If you would like us to make another round of changes for you, that is a new setup purchase in our shop.",
       "{shop}"
     ],
