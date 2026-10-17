@@ -33,6 +33,7 @@ import type { PanelController } from './usePanel.ts';
 import { UrlText } from './views.tsx';
 import styles from './panel.module.css';
 import { Confetti } from '../fx/Confetti.tsx';
+import { setPanelTitle } from './title.ts';
 
 
 
@@ -146,7 +147,7 @@ export function Setup({
     writeSetup(initial.slug, { step });
     setError(null);
     headingRef.current?.focus();
-    document.title = `Step ${step} of ${SETUP_STEP_COUNT} · ${def.title}`;
+    setPanelTitle(`Step ${step} of ${SETUP_STEP_COUNT} · ${def.title}`);
   }, [step, initial.slug, def.title]);
 
   const stepIssues = validation.errors.filter((i) => def.paths.some((p) => i.path === p || i.path.startsWith(`${p}.`)));

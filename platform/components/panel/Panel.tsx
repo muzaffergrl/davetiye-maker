@@ -80,6 +80,7 @@ import { Badge, Banner, Button, cx, IconButton, SaveIndicator, SnackbarProvider,
 import { usePanel } from './usePanel.ts';
 import { EditListView, GuestPrintView, GuestsView, HelpSheet, HomeView, nextSteps, ShareView, UrlText, useReplies } from './views.tsx';
 import styles from './panel.module.css';
+import { setPanelTitle } from './title.ts';
 
 type Route =
   | { view: 'setup'; step: number }
@@ -254,7 +255,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
   useEffect(() => {
     if (!ready || route.view === 'setup') return;
     const label = route.view === 'section' ? PAGE_TITLES[route.page] : route.view === 'print' ? 'Guest list' : route.view === 'results' ? 'Results' : ROOT_VIEWS.find((v) => v.view === route.view)?.label;
-    document.title = `${label} · ${names}`;
+    setPanelTitle(`${label} · ${names}`);
     if (firstFocus.current) firstFocus.current = false;
     else {
       headingRef.current?.focus({ preventScroll: true });
