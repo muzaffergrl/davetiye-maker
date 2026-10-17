@@ -2,7 +2,7 @@
 id: G170
 baslik: 31 Sky Lantern Festival — yeni tasarım (2. dalga), platform teması (GPT parçalarından önce), coming kaydı
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G170
 oncelik: 1
 bagimli: [G138, G139, G144, G149, G159, G167]
@@ -78,3 +78,4 @@ parçalarıyla görünüm, sesin gerçekten duyulması, g051-browser ve final-sm
 ## Günlük
 - 2026-10-17 açıldı ve alındı: claude-G170 (koordinatör isteği)
 - 2026-10-17 bitti, incelemeye gönderildi
+- 2026-10-17 entegratör onayladı

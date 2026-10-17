@@ -2,7 +2,7 @@
 id: G161
 baslik: Yeni tasarım 23 Velvet Jewel Box — platform teması (coming), koleksiyon, GPT prompt'ları, basılı düzen, ilan taslağı
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G161
 oncelik: 1
 bagimli: []
@@ -95,3 +95,4 @@ aynı satır). Birleşme sonrası: `tsc` ✓, `I18N_STRICT=1 npm test` **1451/14
 ## Günlük
 - 2026-10-17 açıldı ve alındı: claude-G161 (koordinatör isteği)
 - 2026-10-17 bitti, incelemeye gönderildi
+- 2026-10-17 entegratör onayladı

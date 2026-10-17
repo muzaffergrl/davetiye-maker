@@ -2,7 +2,7 @@
 id: G168
 baslik: 29 Celestial Observatory — yeni tasarım (2. dalga), platform teması (GPT parçalarından önce), coming kaydı
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G168
 oncelik: 1
 bagimli: [G138, G139, G144, G149, G159, G167]
@@ -97,3 +97,4 @@ g051-browser ve final-smoke (bu turda koşulmadı).
 ## Günlük
 - 2026-10-17 açıldı ve alındı: claude-G168 (koordinatör isteği)
 - 2026-10-17 bitti, incelemeye gönderildi
+- 2026-10-17 entegratör onayladı

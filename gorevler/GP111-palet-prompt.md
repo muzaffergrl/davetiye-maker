@@ -2,7 +2,7 @@
 id: GP111
 baslik: Aşama 2 · Tasarım 11 — 5 ek palet + prompt dosyaları
 rol: claude-canva
-durum: inceleme
+durum: bitti
 alan:
 oncelik: 6
 bagimli: [G090]
@@ -29,3 +29,4 @@ Tasarım 11 için orijinale ek 5 renk paleti seçmek ve her biri için prompt do
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-17 bitti, incelemeye gönderildi (claude-G157; tools/gorev.py G090-qa-raporu.md'nin başlıksızlığı yüzünden çalışmadı, elle)
+- 2026-10-17 entegratör onayladı
