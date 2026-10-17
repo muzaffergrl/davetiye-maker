@@ -3,6 +3,7 @@
 // own name (LANG_NAMES) with hreflang and lang. The server renders links to each language's home page (the layout does
 // not know the page); once in the browser, the links point to the same page in each language (/tr/designs → /designs,
 // /de/designs …). The current language is marked aria-current. Esc and a click outside close the list.
+// variant="inline": the same links as a plain row (phones: inside the mobile menu, where the header has no room).
 import { Check, Globe } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import type { Lang } from '../../lib/i18n/langs.ts';
@@ -14,12 +15,14 @@ export function LangSwitch({
   langs,
   label,
   className,
+  variant = 'menu',
 }: {
   current: Lang;
   langs: Array<{ lang: Lang; name: string }>;
   /** "Language" in the page language. */
   label: string;
   className?: string;
+  variant?: 'menu' | 'inline';
 }) {
   const [path, setPath] = useState('/');
   const ref = useRef<HTMLDetailsElement>(null);
@@ -44,6 +47,31 @@ export function LangSwitch({
     };
   }, []);
 
+  const items = langs.map((l) => (
+    <li key={l.lang}>
+      <a
+        href={href(l.lang, path)}
+        hrefLang={l.lang}
+        lang={l.lang}
+        aria-current={l.lang === current ? 'true' : undefined}
+        data-track="lang_switch"
+        data-track-lang={l.lang}
+      >
+        {l.name}
+        {l.lang === current ? <Check aria-hidden size={16} strokeWidth={2} /> : null}
+      </a>
+    </li>
+  ));
+  if (variant === 'inline') {
+    return (
+      <div className={className ? `${s.langInline} ${className}` : s.langInline}>
+        <p className={s.langInlineLabel}>
+          <Globe aria-hidden size={16} strokeWidth={1.75} /> {label}
+        </p>
+        <ul aria-label={label}>{items}</ul>
+      </div>
+    );
+  }
   return (
     <details ref={ref} className={className ? `${s.lang} ${className}` : s.lang} data-lang-switch="">
       <summary className={s.langButton}>
@@ -54,21 +82,7 @@ export function LangSwitch({
         </span>
       </summary>
       <ul className={s.langList} aria-label={label}>
-        {langs.map((l) => (
-          <li key={l.lang}>
-            <a
-              href={href(l.lang, path)}
-              hrefLang={l.lang}
-              lang={l.lang}
-              aria-current={l.lang === current ? 'true' : undefined}
-              data-track="lang_switch"
-              data-track-lang={l.lang}
-            >
-              {l.name}
-              {l.lang === current ? <Check aria-hidden size={16} strokeWidth={2} /> : null}
-            </a>
-          </li>
-        ))}
+        {items}
       </ul>
     </details>
   );

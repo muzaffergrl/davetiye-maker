@@ -3245,3 +3245,53 @@
 .langRoot {
   display: contents;
 }
+/* Phones and tablets: the header has no room for the switcher (logo, "My website", menu); the languages are a row at
+   the foot of the mobile menu instead. */
+@media (max-width: 1023.98px) {
+  .lang {
+    display: none;
+  }
+}
+.langInline {
+  margin-top: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+}
+.langInlineLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.langInline ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.mobileNav .langInline li + li {
+  border-top: 0;
+}
+.mobileNav .langInline a,
+.mobileNav .langInline li:last-child a {
+  display: inline-flex;
+  gap: 4px;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+.mobileNav .langInline a[aria-current] {
+  border-color: var(--anchor);
+  color: var(--anchor);
+  font-weight: 650;
+}

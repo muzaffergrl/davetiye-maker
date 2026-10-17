@@ -42,6 +42,7 @@ export function designMetadata(id: string, m: Market) {
   const page = designPage(id, MARKETING, m.t);
   if (!page) return {};
   const d = liveDesign(id)!;
+  const { t } = m;
   return pageMetadata(page, {
     lang: m.lang,
     t: m.t,
@@ -49,7 +50,7 @@ export function designMetadata(id: string, m: Market) {
       url: designOgImage(d.id),
       width: 1200,
       height: 630,
-      alt: m.t('{name} wedding website artwork: {style}', { name: d.name, style: m.t(d.copy.style).toLowerCase() }),
+      alt: t('{name} wedding website artwork: {style}', { name: d.name, style: t(d.copy.style).toLowerCase() }),
     },
   });
 }

@@ -111,11 +111,12 @@ export function itemList(urls: Array<{ path: string; name: string }>, cfg: Marke
 export function videoObject(design: Design, cfg: MarketingConfig = MARKETING, m: Market = enMarket): JsonLdNode | null {
   const v = (assets.designs as Record<string, { opening: { file: string; poster: string; seconds: number } | null }>)[design.id]?.opening;
   if (!v) return null;
+  const { t } = m;
   return {
     '@type': 'VideoObject',
     '@id': `${absUrl(m.href(`/designs/${design.id}`), cfg)}#video`,
-    name: m.t('{name} wedding website: {thing} opening', { name: design.name, thing: thingIn(m.t, openingObject(design.copy)) }),
-    description: m.t(design.copy.opening),
+    name: t('{name} wedding website: {thing} opening', { name: design.name, thing: thingIn(t, openingObject(design.copy)) }),
+    description: t(design.copy.opening),
     thumbnailUrl: [absUrl(v.poster, cfg)],
     contentUrl: absUrl(v.file, cfg),
     uploadDate: design.updated,
@@ -133,14 +134,15 @@ export function product(design: Design, cfg: MarketingConfig = MARKETING, m: Mar
   const price = realPrice(design.price);
   const url = realEtsyUrl(design.etsyListingUrl);
   const video = videoObject(design, cfg, m);
+  const { t } = m;
   return clean({
     '@type': 'Product',
     '@id': `${absUrl(m.href(`/designs/${design.id}`), cfg)}#product`,
-    name: m.t('{name} Wedding Website', { name: design.name }),
-    description: m.t(design.copy.intro),
+    name: t('{name} Wedding Website', { name: design.name }),
+    description: t(design.copy.intro),
     sku: design.id,
     brand: real(cfg.brand.name) ? { '@id': orgId(cfg) } : null,
-    category: m.t('Wedding website'),
+    category: t('Wedding website'),
     image: images,
     subjectOf: video ? { '@id': video['@id'] } : null,
     offers:

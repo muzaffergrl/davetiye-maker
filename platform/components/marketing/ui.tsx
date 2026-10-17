@@ -124,8 +124,9 @@ export function TextLink({ href, children, track, className }: { href: string; c
 }
 
 export function Breadcrumbs({ items, m = enMarket }: { items: Array<{ name: string; href: string }>; m?: Market }) {
+  const { t } = m;
   return (
-    <nav aria-label={m.t('Breadcrumb')} className={s.breadcrumbs}>
+    <nav aria-label={t('Breadcrumb')} className={s.breadcrumbs}>
       <ol>
         {items.map((it, i) => (
           <li key={it.href}>
@@ -138,9 +139,10 @@ export function Breadcrumbs({ items, m = enMarket }: { items: Array<{ name: stri
 }
 
 export function LastUpdated({ day, label, m = enMarket }: { day: string; label?: string; m?: Market }) {
+  const { t } = m;
   return (
     <p className={s.updated}>
-      {label ?? m.t('Last updated')} <time dateTime={day}>{formatDay(day, m.lang)}</time>
+      {label ?? t('Last updated')} <time dateTime={day}>{formatDay(day, m.lang)}</time>
     </p>
   );
 }
@@ -196,6 +198,7 @@ export function InlineMd({ text, m = enMarket }: { text: string; m?: Market }) {
 }
 
 export function Prose({ blocks, className, m = enMarket }: { blocks: Block[]; className?: string; m?: Market }) {
+  const { t } = m;
   const inline_ = (nodes: Inline[]) => inline(nodes, 'i', m);
   return (
     <div className={cx(s.prose, className)}>
@@ -241,7 +244,7 @@ export function Prose({ blocks, className, m = enMarket }: { blocks: Block[]; cl
             );
           case 'table':
             return (
-              <div key={i} className={s.tableWrap} role="region" aria-label={m.t('Table')} tabIndex={0}>
+              <div key={i} className={s.tableWrap} role="region" aria-label={t('Table')} tabIndex={0}>
                 <table>
                   <thead>
                     <tr>
@@ -307,12 +310,13 @@ export function FaqList({
 }
 
 export function Swatches({ palette, m = enMarket }: { palette: Array<{ name: string; hex: string }>; m?: Market }) {
+  const { t } = m;
   return (
-    <ul className={s.swatches} aria-label={m.t('Colors')}>
+    <ul className={s.swatches} aria-label={t('Colors')}>
       {palette.map((c) => (
         <li key={c.hex}>
           <span className={s.swatch} style={{ background: c.hex }} aria-hidden />
-          {m.t(c.name)}
+          {t(c.name)}
         </li>
       ))}
     </ul>

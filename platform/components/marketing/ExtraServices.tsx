@@ -27,12 +27,13 @@ const COPY: Record<ServiceCommerce['id'], { title: string; text: string[] }> = {
 };
 
 function ServicePrice({ service, m }: { service: ServiceCommerce; m: Market }) {
+  const { t } = m;
   const price = realPrice(service.price);
   if (!price) return null;
   return (
     <p className={x.price}>
       {displayPrice(price)}
-      <span className={x.note}> {m.t('one-time, on Etsy')}</span>
+      <span className={x.note}> {t('one-time, on Etsy')}</span>
     </p>
   );
 }

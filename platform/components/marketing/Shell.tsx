@@ -81,6 +81,12 @@ export function Header({ m = enMarket }: { m?: Market }) {
                 </a>
               </li>
             </ul>
+            <LangSwitch
+              variant="inline"
+              current={m.lang}
+              langs={LANGS.map((l) => ({ lang: l, name: LANG_NAMES[l] }))}
+              label={t('Language')}
+            />
           </nav>
         </details>
       </div>
