@@ -24,5 +24,9 @@
     "branch": null,
     "stamen": null,
     "rose_ink": "deep"
+  },
+  "recolor": {
+    "mist": "keep",
+    "mist_foot": "keep"
   }
 }

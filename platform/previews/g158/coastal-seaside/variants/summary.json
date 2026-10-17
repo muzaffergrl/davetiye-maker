@@ -1,0 +1,32 @@
+{
+ "original": {
+  "measured": 113,
+  "low": 0,
+  "as_original": 1
+ },
+ "navy-sand": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 0
+ },
+ "seafoam-sage": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 0
+ },
+ "teal-coral": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 0
+ },
+ "dusty-blue-blush": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 0
+ },
+ "slate-pearl": {
+  "measured": 117,
+  "low": 0,
+  "as_original": 0
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "theme": "wildflower-meadow-vellum",
+ "summary": {
+  "original": {
+   "measured": 114,
+   "low": 0,
+   "as_original": 3
+  },
+  "blush-meadow": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 1
+  },
+  "golden-poppy": {
+   "measured": 114,
+   "low": 0,
+   "as_original": 3
+  },
+  "lilac-meadow": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 1
+  },
+  "peach-sage": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 1
+  },
+  "wine-navy": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 1
+  }
+ },
+ "errors": [],
+ "warnings": [
+  "original palette: 3 text(s) below the contrast minimum on the painted ground: home \"Days\" 4.03:1 < 4.5:1; home \"RSVP\" 1.30:1 < 4.5:1; details \"RSVP\" 1.19:1 < 4.5:1",
+  "palette blush-meadow: 1 text(s) below the minimum as in the original design: home \"Days\" 4.03:1 < 4.5:1",
+  "palette golden-poppy: 3 text(s) below the minimum as in the original design: home \"Days\" 4.06:1 < 4.5:1; home \"RSVP\" 1.30:1 < 4.5:1; details \"RSVP\" 1.19:1 < 4.5:1",
+  "palette lilac-meadow: 1 text(s) below the minimum as in the original design: home \"Days\" 4.05:1 < 4.5:1",
+  "palette peach-sage: 1 text(s) below the minimum as in the original design: home \"Days\" 4.05:1 < 4.5:1",
+  "palette wine-navy: 1 text(s) below the minimum as in the original design: home \"Days\" 4.03:1 < 4.5:1"
+ ],
+ "passed": [
+  "palette blush-meadow (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette golden-poppy (coming): 114 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette lilac-meadow (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette peach-sage (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette wine-navy (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground"
+ ]
+}

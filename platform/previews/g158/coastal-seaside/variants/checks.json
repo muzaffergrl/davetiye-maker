@@ -1,0 +1,46 @@
+{
+ "theme": "coastal-seaside",
+ "summary": {
+  "original": {
+   "measured": 113,
+   "low": 0,
+   "as_original": 1
+  },
+  "navy-sand": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 0
+  },
+  "seafoam-sage": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 0
+  },
+  "teal-coral": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 0
+  },
+  "dusty-blue-blush": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 0
+  },
+  "slate-pearl": {
+   "measured": 117,
+   "low": 0,
+   "as_original": 0
+  }
+ },
+ "errors": [],
+ "warnings": [
+  "original palette: 1 text(s) below the contrast minimum on the painted ground: home \"RSVP\" 1.27:1 < 4.5:1"
+ ],
+ "passed": [
+  "palette navy-sand (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette seafoam-sage (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette teal-coral (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette dusty-blue-blush (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette slate-pearl (coming): 117 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground"
+ ]
+}
