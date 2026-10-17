@@ -6,7 +6,7 @@ durum: inceleme
 alan: claude-G163
 oncelik: 1
 bagimli: [G138, G139, G142, G144]
-yazar: [platform/themes/orient-express-voyage/, collections/25_Orient_Express_Voyage/, platform/tests/theme-orient-express-voyage.test.ts, platform/tests/g085-designs.test.ts, platform/tests/g093-designs.test.ts, platform/tests/g094-designs.test.ts, platform/tests/g097-designs.test.ts, platform/tests/g138-extras.test.ts, platform/lib/marketing/designs.ts, platform/lib/marketing/config.ts, platform/lib/audio/catalog.ts, platform/lib/claim/demo-map.ts, platform/lib/print/layouts.ts, platform/public/print/orient-express-voyage/, platform/lib/i18n/dict/site/, platform/lib/i18n/dict/market/, tools/katalog.py, gorevler/G163-orient-express.md]
+yazar: [platform/themes/orient-express-voyage/, collections/25_Orient_Express_Voyage/, platform/tests/theme-orient-express-voyage.test.ts, platform/tests/g085-designs.test.ts, platform/tests/g093-designs.test.ts, platform/tests/g094-designs.test.ts, platform/tests/g097-designs.test.ts, platform/tests/g138-extras.test.ts, platform/lib/marketing/designs.ts, platform/lib/marketing/config.ts, platform/lib/audio/catalog.ts, platform/lib/claim/demo-map.ts, platform/lib/print/layouts.ts, platform/public/print/orient-express-voyage/, platform/lib/i18n/dict/site/, platform/lib/i18n/dict/market/, tools/katalog.py, platform/scripts/theme-check.cjs, gorevler/G163-orient-express.md]
 ---
 
 ## Amaç
