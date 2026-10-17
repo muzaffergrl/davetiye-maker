@@ -157,6 +157,16 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-17',
     },
+    // G163 (docs/24): 25 Orient Express Voyage, built before its GPT parts; sale approval and price remain pending.
+    {
+      id: 'orient-express-voyage',
+      name: 'Orient Express Voyage',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-17',
+    },
     {
       id: 'blush-garden-rose',
       name: 'Blush Garden Rose',

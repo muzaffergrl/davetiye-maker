@@ -833,6 +833,18 @@ const dict: Dict = {
   // G146: "Create your website" + continue on any device with the Etsy order number + email
   'Create your website': 'Créez votre site',
   'Create your website or continue editing': 'Créez votre site ou continuez à le modifier',
+  // G163 Orient Express Voyage
+  'A boarding pass with your reply-by date and the shared configurable reply form; a sent reply gets a boarding stamp.': 'Une carte d\'embarquement avec votre date limite de réponse et le formulaire de réponse configurable ; chaque réponse envoyée reçoit un tampon d\'embarquement.',
+  'A vintage rail journey wedding website: a leather ticket wallet opens to a first-class ticket, and a route map draws itself. Edit it in your online editor.': 'Un site de mariage façon voyage en train d’époque : un porte-billets en cuir s’ouvre sur un billet de première classe et une carte trace son itinéraire. Modifiable en ligne.',
+  'A vintage rail journey: a bottle-green leather ticket wallet, a first-class ticket, an antique route map and carriage-window photos': 'Un voyage en train d’époque : un porte-billets en cuir vert bouteille, un billet de première classe, une carte ancienne et des photos aux fenêtres du wagon',
+  'Bottle green': 'Vert bouteille',
+  'Bottle green, brass and ivory, in the style of an old travel poster. Your names rise over the poster, then the invitation with a swinging luggage tag, a departure countdown and a route that draws itself across an antique map.': 'Vert bouteille, laiton et ivoire, dans le style d’une ancienne affiche de voyage. Vos prénoms s’élèvent sur l’affiche, puis viennent l’invitation avec une étiquette de bagage qui se balance, un compte à rebours du départ et un itinéraire qui se trace sur une carte ancienne.',
+  'Brass': 'Laiton',
+  'Route red': 'Rouge itinéraire',
+  'The day as stations along a route on an antique map, one by one, then the venue, an optional map and directions, calendar links, dress code and questions and answers.': 'La journée comme les étapes d’un itinéraire sur une carte ancienne, une à une ; puis le lieu, une carte et un itinéraire en option, les liens d’agenda, le code vestimentaire et les questions-réponses.',
+  'Three photos in carriage windows on green panelling. As guests scroll, each photo glides past its window like passing scenery.': 'Trois photos aux fenêtres d’un wagon sur des boiseries vertes. Au défilement, chaque photo glisse derrière sa vitre comme un paysage qui passe.',
+  'Your guests tap the wallet. The leather strap unbuckles, the cover swings open and a separate first-class ticket with your photo slides out of its pocket. The ticket then opens into your home page.': 'Vos invités touchent le porte-billets. La sangle en cuir se déboucle, la couverture s’ouvre et un billet de première classe avec votre photo glisse hors de sa pochette. Le billet s’ouvre ensuite sur votre page d’accueil.',
+  'Your names over a travel poster, the invitation beside your portrait with a luggage tag, a departure countdown and a map whose route draws itself as guests scroll.': 'Vos prénoms sur une affiche de voyage, l’invitation près de votre portrait avec une étiquette de bagage, un compte à rebours du départ et une carte dont l’itinéraire se trace au défilement.',
 };
 
 export default dict;
