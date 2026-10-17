@@ -440,6 +440,13 @@ EK_TEMALAR = [
          dekor="Makaron, tül, şeker inci, altın kenar tabak", teknik="pastel suluboya + fotogerçekçi pasta",
          font=("Italiana", "Parisienne"), palet_adi="pistachio-rose-cream",
          hareket="Fiyonk çözülmesi (iki ilmek ayrılır, düğüm düşer), kapak kalkışı, ipek kâğıt perde gibi aralanır; raf kaydırma bileşeni; menü vitrin rafları; RSVP makaron renkli çipler; gönderimde şeker inci yağmuru."),
+    # docs/24 2. dalga (29–32)
+    dict(no=30, klasor="30_Azulejo_Mosaic", ad="Azulejo Mosaic",
+         zarf="Mavi-beyaz el boyaması azulejo çini paneli (4 × 6; köşe, bordür, alan çinileri); dokunulan çiniden başlayan dalgayla çiniler tek tek 3B döner, arkadaki kart çıkar.",
+         foto="Çini mozaiği: fotoğraf küçük çinilerin altında bekler, sahnesine gelince çiniler çapraz dalgayla dönüp kalkar.",
+         dekor="Kobalt azulejo desenleri, terrakota saksılar, badana sıva, çini friz", teknik="el boyaması seramik",
+         font=("Arizonia", "Cormorant Upright"), palet_adi="cobalt-white-terracotta",
+         hareket="Karo karo 3B çevirme ızgarası: dokunulan noktadan yayılan dalga, her çini terrakota sırtını gösterip kalkar; fotoğraflar çini mozaiğiyle açılır; RSVP teşekkürü çinilerle belirir; metin çini gibi üst kenarından yatarak yerleşir."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

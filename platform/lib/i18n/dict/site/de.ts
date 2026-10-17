@@ -286,6 +286,8 @@ const dict: Dict = {
   'Tonight\'s programme': 'Das Programm des Abends',
   'You are invited to a premiere': 'Sie sind zu einer Premiere eingeladen',
   'Your seat is saved. We look forward to the evening together.': 'Ihr Platz ist reserviert. Wir freuen uns auf den gemeinsamen Abend.',
+  // G169 Azulejo Mosaic
+  'Laid tile by tile, sent with love': 'Fliese für Fliese gelegt, mit Liebe gesendet',
 };
 
 export default dict;

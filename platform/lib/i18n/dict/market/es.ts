@@ -911,6 +911,18 @@ const dict: Dict = {
   "Color palette": "Paleta de colores",
   "Live demo in {name}": "Demo en vivo en {name}",
   "Yes, within the design: {name} comes in its original colors and {n} more palettes, each with the {thing}, cards and frames painted to match. You choose a palette when you start and can switch in your editor at any time; your texts and photos stay as they are.": "Sí, dentro del diseño: {name} viene en sus colores originales y en {n} paletas más, cada una con {thing}, tarjetas y marcos pintados a juego. Eliges una paleta al empezar y puedes cambiarla en tu editor cuando quieras; tus textos y fotos se quedan como están.",
+  // G169 Azulejo Mosaic
+  'A wall of blue-and-white azulejo tiles that turn over one by one, terracotta and whitewash, and photos revealed tile by tile': 'Una pared de azulejos azules y blancos que se dan la vuelta uno a uno, terracota y cal, y fotos que aparecen azulejo a azulejo',
+  'A wall of painted azulejo tiles turns over, tile by tile, into your wedding website. Personalize it in your online editor.': 'Una pared de azulejos pintados se da la vuelta, azulejo a azulejo, y se convierte en la web de tu boda. Personalízala en tu editor en línea.',
+  'A white reply card under a frieze of tiles; when a reply is sent, the thank-you is revealed tile by tile.': 'Una tarjeta de respuesta blanca bajo un friso de azulejos; al enviar una respuesta, el agradecimiento aparece azulejo a azulejo.',
+  'Cobalt and white painted tiles, warm terracotta and sunlit whitewash. Your invitation waits behind a wall of azulejos, and every photo is uncovered tile by tile.': 'Azulejos pintados en cobalto y blanco, terracota cálida y paredes encaladas al sol. Tu invitación espera tras una pared de azulejos y cada foto se descubre azulejo a azulejo.',
+  'Night blue': 'Azul noche',
+  'The order of the day on a white card, a venue photo uncovered tile by tile, an optional map, dress code, travel and questions and answers.': 'El programa del día en una tarjeta blanca, una foto del lugar que se descubre azulejo a azulejo, un mapa opcional, código de vestimenta, viaje y preguntas y respuestas.',
+  'Three photos, each hidden under a small mosaic of tiles that turn over in a wave as guests scroll to it.': 'Tres fotos, cada una oculta bajo un pequeño mosaico de azulejos que se dan la vuelta en ola cuando los invitados llegan a ella.',
+  'Whitewash': 'Cal',
+  'Your guests tap the wall. The blue-and-white tiles turn over one by one in a wave that starts where they touched, each showing its terracotta back as it lifts away. The card that was behind them comes forward to become your home page.': 'Tus invitados tocan la pared. Los azulejos azules y blancos se dan la vuelta uno a uno en una ola que empieza donde tocaron, y cada uno muestra su reverso de terracota al levantarse. La tarjeta que había detrás se acerca y se convierte en tu página de inicio.',
+  'Your portrait and names on a card on the cobalt wall, a frieze of tiles, then the invitation, a countdown and calendar links.': 'Tu retrato y vuestros nombres en una tarjeta sobre la pared de cobalto, un friso de azulejos y después la invitación, una cuenta atrás y enlaces de calendario.',
+  'wall': 'pared',
 };
 
 export default dict;
