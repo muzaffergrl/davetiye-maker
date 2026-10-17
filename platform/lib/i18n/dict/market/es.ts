@@ -487,7 +487,7 @@ const dict: Dict = {
   'RSVP built in': 'RSVP integrada',
   'RSVP deadline and up to {n} questions of your own': 'Fecha límite de RSVP y hasta {n} preguntas propias',
   'RSVP questions: a Meal choice question with three choices — Chicken, Fish and Vegetarian': 'Preguntas de RSVP: una pregunta de elección de menú con tres opciones — Pollo, Pescado y Vegetariano',
-  'RSVP with your own questions and an Excel download, add to calendar, a venue map, music, five languages, photo cropping, QR codes and a printable invitation.': 'RSVP con tus propias preguntas y descarga en Excel, añadir al calendario, mapa del lugar, música, cinco idiomas, recorte de fotos, códigos QR e invitación imprimible.',
+  'RSVP with your own questions and an Excel download, add to calendar, a venue map, music, five languages, photo cropping, QR codes and a printable invitation.': 'RSVP con tus preguntas y descarga en Excel, añadir al calendario, mapa del lugar, música, cinco idiomas, recorte de fotos, códigos QR e invitación imprimible.',
   'Read the FAQ': 'Leer las preguntas frecuentes',
   'Read the full comparison': 'Leer la comparación completa',
   'Read the privacy notice': 'Leer el aviso de privacidad',
