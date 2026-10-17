@@ -937,8 +937,9 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
       await page.goto(url(demo.slug, 'details'), { waitUntil: 'load' });
       await revealAll(page);
       let before = reqs.length;
+      // the platform map block ([data-map], G127) is live without urls.map: seed.ts gives every demo its city pin (72f2f26)
       const dead = await page.evaluate(() => ({ missing: document.querySelectorAll('a[data-url-missing]').length,
-        buttons: [...document.querySelectorAll('.btn')].map((b) => b.textContent.trim()).filter((t) => /map|stay|registry/i.test(t)) }));
+        buttons: [...document.querySelectorAll('.btn')].filter((b) => !b.closest('[data-map]')).map((b) => b.textContent.trim()).filter((t) => /map|stay|registry/i.test(t)) }));
       if (dead.missing || dead.buttons.length) err(`details without links: dead buttons ${JSON.stringify(dead)}`);
       else ok('details without map / hotel / registry links: no dead buttons for guests');
       if (!rsvpOn) {

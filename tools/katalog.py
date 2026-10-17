@@ -402,6 +402,13 @@ D = [
 EK_TEMALAR = [
     dict(no=21, klasor="21_Crimson_Rose_Atelier", ad="Crimson Rose Atelier"),
     dict(no=22, klasor="22_Nocturne_Lake_Estate", ad="Nocturne Lake Estate"),
+    # 23–28 dalgası (docs/24): 6 eksen + hareket imzası; `kontrol` bunları D'ye ve birbirine karşı denetler (ek_ayirt).
+    dict(no=26, klasor="26_Kintsugi_Washi", ad="Kintsugi & Washi",
+         zarf="Çivit washi kâğıdı origami gibi katlanmış, pirinç kâğıdı kuşakla sarılı; katlar sırayla açılır (üst, alt, sol, sağ), pirinç kâğıdı kart kalkar.",
+         foto="Mürekkep yayılması maskesiyle beliren fotoğraflar; sayfa boyunca sol–sağ–sol tek tek.",
+         dekor="Altın kintsugi damarları, washi dokuları, mürekkep fırçası darbeleri", teknik="sumi mürekkep + altın varak",
+         font=("Allura", "Shippori Mincho"), palet_adi="indigo-gold-rice",
+         hareket="Kat kat 3B açılma (dört kat ayrı menteşede), altın damar parıltısı, mürekkep yayılımıyla foto, süzülen altın varak pulları"),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):
@@ -2199,6 +2206,32 @@ def ayirt():
     return sorun
 
 
+def ek_ayirt():
+    """EK_TEMALAR'ın eksenli kayıtları (23–28 dalgası): D'deki ve birbirlerindeki her tasarımdan ≥4 eksende farklı,
+    hareket imzası dolu ve tek."""
+    def ayni(a, b):
+        return [e for e in EKSENLER if
+                (e == "zarf" and a["zarf"][:25] == b["zarf"][:25]) or
+                (e == "foto" and a["foto"][:25] == b["foto"][:25]) or
+                (e == "dekor" and a["dekor"] == b["dekor"]) or
+                (e == "teknik" and a["teknik"] == b["teknik"]) or
+                (e == "font" and (set(a["font"]) & set(b["font"]))) or
+                (e == "palet" and a["palet_adi"] == b["palet_adi"])]
+    ek = [t for t in EK_TEMALAR if all(k in t for k in ("zarf", "foto", "dekor", "teknik", "font", "palet_adi"))]
+    sorun = []
+    for t in ek:
+        if not t.get("hareket"):
+            sorun.append(f"{t['no']:02d}: hareket imzası yok")
+        for b in D + [x for x in ek if x["no"] < t["no"]]:
+            a = ayni(t, b)
+            if len(EKSENLER) - len(a) < 4:
+                sorun.append(f"{t['no']:02d}–{b['no']:02d}: yalnız {len(EKSENLER) - len(a)} eksende farklı ({', '.join(a)} aynı)")
+    imzalar = [t["hareket"] for t in ek if t.get("hareket")]
+    if len(set(imzalar)) != len(imzalar):
+        sorun.append("hareket imzası iki tasarımda aynı")
+    return sorun, len(ek)
+
+
 def yaz(p, metin, zorla, dene=False, degisen=None):
     """Var olan dosyanın üzerine yalnız `zorla` ile yazar; yazdıysa (`dene`: yazacaktıysa) True. İçeriği gerçekten
     değişen (ya da yeni) dosyalar `degisen` listesine eklenir. `dene`: hiçbir şey yazılmaz."""
@@ -2351,7 +2384,9 @@ def main(a):
         print("\n".join(w) if w else f"website (WEB): {len(WEB)} tasarım tam (03 elle yazıldı)")
         h = story_kontrol()
         print("\n".join(h) if h else f"story (STORY): {len(STORY)} tasarım; content.demo.json kayıtlarıyla aynı")
-        sys.exit(1 if s or w or h else 0)
+        e, n = ek_ayirt()
+        print("\n".join(e) if e else f"ek tasarımlar (EK_TEMALAR): {n} eksenli kayıt, her biri D ve birbirinden ≥4 eksende farklı, hareket imzası tek")
+        sys.exit(1 if s or w or h or e else 0)
     if a and a[0] == "paket5":
         return cmd_paket5(a[1:])
     if a and a[0] == "gorev5":

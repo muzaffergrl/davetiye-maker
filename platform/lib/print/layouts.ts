@@ -4,7 +4,7 @@
 // no decor: only the text layer, its place (box = the free area of the part, in % of the part image: top, right,
 // bottom, left) and the colours / fonts of the design's own website (themes/<id>/site.css). The part files are
 // copied at full size by scripts/build-print-assets.ts into public/print/<id>/ (card.webp, back.webp, paper.webp).
-// Designs without card parts yet (21, 22) are "composed": the trimmed sheet is the card, set from the design's existing
+// Designs without card parts yet (21, 22, 26) are "composed": the trimmed sheet is the card, set from the design's existing
 // GPT images (no shape drawn, K21) until the parts asked for in the collection's GPT_PROMPTS.md (G139) arrive.
 
 export type Box = readonly [top: number, right: number, bottom: number, left: number];
@@ -207,6 +207,25 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     composed: {
       front: { bg: cover('scene', '50% 0%'), images: [] },
       back: { bg: '#11120F', images: [sealAt('top')] },
+    },
+  },
+  // 26 (G164, interim until PAKET 6 print_front / print_back): rice paper with the indigo washi of the opened folds at
+  // its top and bottom edge — both toned papers cut by the theme build (img/rice, img/washi_indigo; no shape drawn).
+  'kintsugi-washi': {
+    collection: '26_Kintsugi_Washi',
+    sources: { rice: 'platform/themes/kintsugi-washi/img/rice-1024.webp', washi: 'platform/themes/kintsugi-washi/img/washi_indigo-1024.webp' },
+    fonts: gf('family=Allura&family=Shippori+Mincho:wght@400;600'),
+    script: "'Allura', cursive", serif: "'Shippori Mincho', Georgia, serif",
+    ink: '#1D2340', accent: '#7A5C22', front: [21, 13, 19, 13], back: [17, 12, 10, 12],
+    composed: {
+      front: {
+        bg: 'url(rice.webp) 0 0 / 2.4in repeat',
+        images: [
+          { src: 'washi', style: 'top:0;left:0;width:100%;height:12%;object-fit:cover' },
+          { src: 'washi', style: 'bottom:0;left:0;width:100%;height:11%;object-fit:cover;object-position:50% 80%' },
+        ],
+      },
+      back: { bg: 'url(rice.webp) 0 0 / 2.4in repeat', images: [{ src: 'washi', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover' }] },
     },
   },
 };

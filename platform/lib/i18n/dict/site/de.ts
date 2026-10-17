@@ -37,6 +37,7 @@ const dict: Dict = {
   'Email': 'E-Mail',
   'Enter': 'Eintreten',
   'Every chapter led to you': 'Jedes Kapitel führte uns zueinander',
+  'Folded with care, opened with joy': 'Mit Sorgfalt gefaltet, mit Freude geöffnet',
   'Get directions': 'Route anzeigen',
   'Getting here': 'Anreise',
   'Google': 'Google',
