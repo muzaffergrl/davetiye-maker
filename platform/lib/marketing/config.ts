@@ -152,6 +152,16 @@ export const MARKETING: MarketingConfig = {
       "etsyListingUrl": "[ETSY LISTING URL]",
       "updated": "2026-10-17"
     },
+    // New product (G142): platform theme ready for review; sale approval and price remain pending.
+    {
+      "id": "nocturne-lake-estate",
+      "name": "Nocturne Lake Estate",
+      "status": "coming",
+      "price": "[PRICE]",
+      "compareAtPrice": null,
+      "etsyListingUrl": "[ETSY LISTING URL]",
+      "updated": "2026-10-17"
+    },
     {
       id: 'blush-garden-rose',
       name: 'Blush Garden Rose',

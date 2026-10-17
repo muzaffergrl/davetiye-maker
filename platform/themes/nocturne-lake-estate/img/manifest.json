@@ -1,0 +1,364 @@
+{
+ "_note": "G142 interim build: envelope pieces cut from the single closed envelope (see build_images.py); PAKET 5 W2 parts ordered in GPT_PROMPTS.md.",
+ "env_flap": {
+  "src_size": [
+   1350,
+   584
+  ],
+  "ratio": 2.31164,
+  "files": [
+   {
+    "file": "env_flap-440.webp",
+    "w": 440,
+    "h": 190,
+    "bytes": 7320
+   },
+   {
+    "file": "env_flap-880.webp",
+    "w": 880,
+    "h": 381,
+    "bytes": 33584
+   }
+  ]
+ },
+ "env_pocket": {
+  "src_size": [
+   1350,
+   838
+  ],
+  "ratio": 1.61098,
+  "files": [
+   {
+    "file": "env_pocket-440.webp",
+    "w": 440,
+    "h": 273,
+    "bytes": 7002
+   },
+   {
+    "file": "env_pocket-880.webp",
+    "w": 880,
+    "h": 546,
+    "bytes": 35078
+   }
+  ]
+ },
+ "env_seal": {
+  "src_size": [
+   269,
+   269
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "env_seal-160.webp",
+    "w": 160,
+    "h": 160,
+    "bytes": 8740
+   },
+   {
+    "file": "env_seal-269.webp",
+    "w": 269,
+    "h": 269,
+    "bytes": 19254
+   }
+  ]
+ },
+ "env_inner": {
+  "src_size": [
+   1350,
+   584
+  ],
+  "ratio": 2.31164,
+  "files": [
+   {
+    "file": "env_inner-440.webp",
+    "w": 440,
+    "h": 190,
+    "bytes": 4876
+   },
+   {
+    "file": "env_inner-880.webp",
+    "w": 880,
+    "h": 381,
+    "bytes": 15998
+   }
+  ]
+ },
+ "env_back": {
+  "src_size": [
+   1350,
+   838
+  ],
+  "ratio": 1.61098,
+  "files": [
+   {
+    "file": "env_back-440.webp",
+    "w": 440,
+    "h": 273,
+    "bytes": 5120
+   },
+   {
+    "file": "env_back-880.webp",
+    "w": 880,
+    "h": 546,
+    "bytes": 11254
+   }
+  ]
+ },
+ "card_paper": {
+  "src_size": [
+   621,
+   310
+  ],
+  "ratio": 2.00323,
+  "files": [
+   {
+    "file": "card_paper-480.webp",
+    "w": 480,
+    "h": 240,
+    "bytes": 27830
+   },
+   {
+    "file": "card_paper-621.webp",
+    "w": 621,
+    "h": 310,
+    "bytes": 50326
+   }
+  ]
+ },
+ "stage": {
+  "canvas": [
+   1448,
+   1086
+  ],
+  "box": [
+   49,
+   121,
+   1350,
+   838
+  ],
+  "objAspect": 1.611,
+  "flap": {
+   "box_pct": [
+    0,
+    0,
+    100,
+    69.69
+   ],
+   "hinge_pct": 0.0,
+   "tip": [
+    723.3,
+    700.8
+   ],
+   "method": "renk"
+  },
+  "inner": {
+   "box_pct": [
+    0,
+    -69.69,
+    100,
+    69.69
+   ]
+  },
+  "seal": {
+   "center_pct": [
+    49.815,
+    60.859
+   ],
+   "width_pct": 19.926,
+   "height_pct": 32.1
+  },
+  "card_crop": [
+   412,
+   146,
+   1033,
+   456
+  ]
+ },
+ "lake_hero": {
+  "src_size": [
+   1024,
+   1536
+  ],
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "lake_hero-640.webp",
+    "w": 640,
+    "h": 960,
+    "bytes": 54424
+   },
+   {
+    "file": "lake_hero-1024.webp",
+    "w": 1024,
+    "h": 1536,
+    "bytes": 105170
+   }
+  ]
+ },
+ "lake_view": {
+  "src_size": [
+   1024,
+   768
+  ],
+  "ratio": 1.33333,
+  "files": [
+   {
+    "file": "lake_view-640.webp",
+    "w": 640,
+    "h": 480,
+    "bytes": 31360
+   },
+   {
+    "file": "lake_view-1024.webp",
+    "w": 1024,
+    "h": 768,
+    "bytes": 62172
+   }
+  ]
+ },
+ "terrace": {
+  "src_size": [
+   1024,
+   636
+  ],
+  "ratio": 1.61006,
+  "files": [
+   {
+    "file": "terrace-640.webp",
+    "w": 640,
+    "h": 398,
+    "bytes": 42906
+   },
+   {
+    "file": "terrace-1024.webp",
+    "w": 1024,
+    "h": 636,
+    "bytes": 81698
+   }
+  ]
+ },
+ "couple": {
+  "src_size": [
+   1122,
+   1402
+  ],
+  "ratio": 0.80029,
+  "files": [
+   {
+    "file": "couple-480.webp",
+    "w": 480,
+    "h": 600,
+    "bytes": 44628
+   },
+   {
+    "file": "couple-960.webp",
+    "w": 960,
+    "h": 1200,
+    "bytes": 116096
+   }
+  ]
+ },
+ "ph_portrait": {
+  "src_size": [
+   640,
+   800
+  ],
+  "ratio": 0.8,
+  "files": [
+   {
+    "file": "ph_portrait-640.webp",
+    "w": 640,
+    "h": 800,
+    "bytes": 2756
+   }
+  ]
+ },
+ "ph_land": {
+  "src_size": [
+   640,
+   480
+  ],
+  "ratio": 1.33333,
+  "files": [
+   {
+    "file": "ph_land-640.webp",
+    "w": 640,
+    "h": 480,
+    "bytes": 2236
+   }
+  ]
+ },
+ "ph_wide": {
+  "src_size": [
+   640,
+   360
+  ],
+  "ratio": 1.77778,
+  "files": [
+   {
+    "file": "ph_wide-640.webp",
+    "w": 640,
+    "h": 360,
+    "bytes": 1738
+   }
+  ]
+ },
+ "placeholders": {
+  "hero_portrait": "ph_portrait-640.webp",
+  "story": "ph_land-640.webp",
+  "venue": "ph_wide-640.webp"
+ },
+ "og": {
+  "src_size": [
+   1024,
+   1536
+  ],
+  "crop": [
+   0,
+   998,
+   1024,
+   538
+  ],
+  "align": "alt",
+  "size": [
+   1200,
+   630
+  ],
+  "file": "og-1200x630.jpg",
+  "bytes": 135755
+ },
+ "favicon": {
+  "src_box": [
+   7,
+   6,
+   256,
+   257
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.04,
+  "file": "favicon.png",
+  "bytes": 60005
+ },
+ "checks": {
+  "seal_radius_px": 114.0,
+  "green": {}
+ },
+ "theme_check": {
+  "particles": ".accent-layer",
+  "first_screen": {
+   "landscape": false,
+   "names_min_px": 32
+  },
+  "backdrop": {
+   "edge_max": 2.2,
+   "dark_max": 0.05,
+   "dark_below": 0,
+   "light_above": 110
+  }
+ },
+ "bytes_total": 1037589
+}
