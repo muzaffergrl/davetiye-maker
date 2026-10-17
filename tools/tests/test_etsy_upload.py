@@ -24,20 +24,24 @@ REPO = TOOLS.parent
 NOT_ENVELOPE = {"art-deco-black-tie": "gatefold", "lavender-provence": "pouch", "tropical-destination": "wallet",
                 "enchanted-forest-storybook": "book", "ivory-lace-pearls": "gatefold",
                 "wildflower-meadow-vellum": "sleeve"}
+COMING = {"crimson-rose-atelier"}  # G137: design 21 has a listing kit but is not open for sale (config.ts "coming")
 
 
 def test_design_table():
     nos = [no for no, _, _ in eu.DESIGNS]
-    assert nos == [f"{i:02d}" for i in range(1, 21)], nos
+    assert nos == [f"{i:02d}" for i in range(1, 22)], nos
     copy = (REPO / "platform" / "lib" / "marketing" / "designs.ts").read_text(encoding="utf-8")
     config = (REPO / "platform" / "lib" / "marketing" / "config.ts").read_text(encoding="utf-8")
     live = set(re.findall(r"id: '([a-z0-9-]+)',\s*\n\s*name: '[^']+',\s*\n\s*status: 'live'", config))
-    assert live == {t for _, _, t in eu.DESIGNS}, sorted(live ^ {t for _, _, t in eu.DESIGNS})
+    every = {t for _, _, t in eu.DESIGNS}
+    assert live == every - COMING, sorted(live ^ (every - COMING))
+    for theme in COMING:  # 21's entry has quoted keys ("id": "…")
+        assert re.search(rf'"id": "{re.escape(theme)}",\s*\n\s*"name": "[^"]+",\s*\n\s*"status": "coming"', config), theme
     for no, folder, theme in eu.DESIGNS:
         assert folder.startswith(no + "_") and (REPO / "collections" / folder).is_dir(), folder
         assert (REPO / "platform" / "themes" / theme / "theme.json").exists(), theme
-        m = re.search(rf"^  '{re.escape(theme)}': \{{\s*\n\s*id: '{re.escape(theme)}',\s*\n\s*collection: '([^']+)'",
-                      copy, re.M)
+        m = re.search(rf"^  '{re.escape(theme)}': \{{\s*\n\s*[\"']?id[\"']?: [\"']{re.escape(theme)}[\"'],\s*\n"
+                      rf"\s*[\"']?collection[\"']?: [\"']([^'\"]+)[\"']", copy, re.M)
         assert m and m.group(1) == folder, (theme, m and m.group(1), folder)
 
 
@@ -74,8 +78,8 @@ def test_select():
     assert [d[0] for d in eu.select("06-20")] == [f"{i:02d}" for i in range(6, 21)]
     assert [d[0] for d in eu.select("12,7")] == ["07", "12"]
     assert [d[0] for d in eu.select("01,06-08")] == ["01", "06", "07", "08"]
-    assert len(eu.select("all")) == 20
-    for bad in ("21", "6-x", "00", "01-25"):
+    assert len(eu.select("all")) == 21
+    for bad in ("22", "6-x", "00", "01-25"):
         try:
             eu.select(bad)
         except SystemExit:
@@ -144,14 +148,17 @@ def test_services():
 
 def test_check_exit():
     assert eu.main(["--check"]) == 0
-    # --strict counts the files Etsy needs of every listing that "all" builds: the 20 designs and (G130) the services
+    # --strict counts the files Etsy needs of every listing that "all" builds: the 21 designs and (G130) the services
     files = ("listing images", "listing video", "digital file")
-    designs_missing = any(b.startswith(files) for no, folder, theme in eu.DESIGNS
-                          for b in eu.build(no, folder, theme)[0]["blockers"])
+    missing = {no: any(b.startswith(files) for b in eu.build(no, folder, theme)[0]["blockers"])
+               for no, folder, theme in eu.DESIGNS}
+    designs_missing = any(missing.values())
     services_missing = any(b.startswith(files) for sid, price in eu.SERVICES
                            for b in eu.build_service(sid, price)[0]["blockers"])
     assert eu.main(["--check", "--strict"]) == (1 if designs_missing or services_missing else 0)
-    assert eu.main(["--check", "--strict", "--designs", "01-20"]) == (1 if designs_missing else 0)
+    first20 = any(v for no, v in missing.items() if no <= "20")
+    assert eu.main(["--check", "--strict", "--designs", "01-20"]) == (1 if first20 else 0)
+    assert eu.main(["--check", "--strict", "--designs", "21"]) == (1 if missing["21"] else 0)
     assert eu.main(["--check", "--strict", "--designs", "services"]) == (1 if services_missing else 0)
 
 

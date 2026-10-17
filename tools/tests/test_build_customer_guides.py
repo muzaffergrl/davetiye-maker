@@ -25,7 +25,7 @@ NOT_ENVELOPE = {"art-deco-black-tie": "gatefold", "lavender-provence": "pouch", 
 LANGUAGE = {"01": "cyrillic", "02": "latin-ext", "03": "cyrillic", "04": "latin", "05": "latin-ext", "06": "latin",
             "07": "latin-ext", "08": "latin-ext", "09": "latin-ext", "10": "latin-ext", "11": "latin", "12": "latin-ext",
             "13": "latin", "14": "latin-ext", "15": "latin-ext", "16": "latin-ext", "17": "latin-ext", "18": "latin",
-            "19": "cyrillic", "20": "latin-ext"}
+            "19": "cyrillic", "20": "latin-ext", "21": "cyrillic"}
 
 
 def expect_exit(fn, *args):
@@ -51,7 +51,7 @@ def test_template():
 
 
 def test_values():
-    assert [no for no, _, _ in eu.DESIGNS] == [f"{i:02d}" for i in range(1, 21)]
+    assert [no for no, _, _ in eu.DESIGNS] == [f"{i:02d}" for i in range(1, 22)]
     for no, folder, theme in eu.DESIGNS:
         v = b.values(theme)
         assert v["START_URL"] == f"https://davetiye-platform-five.vercel.app/start?theme={theme}", v

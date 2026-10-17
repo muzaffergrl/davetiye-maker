@@ -21,6 +21,23 @@ export const CONTENT_LIMITS = {
   // G075: thank-you mode (title in the design's script type on a small card; message ≤ 400 like a story text)
   thankYouTitle: 60,
   thankYouMessage: 400,
+  // G138: travel & stay, meal + menu, Details blocks
+  travelText: 300,
+  travelStays: 6,
+  stayName: 80,
+  stayAddress: 160,
+  stayCode: 60,
+  stayNote: 300,
+  stayDistance: 40,
+  mealCourses: 6,
+  courseTitle: 40,
+  courseItems: 10,
+  courseItem: 120,
+  mealNote: 300,
+  detailsBlocks: 10,
+  blockTitle: 60,
+  blockText: 600,
+  blockLinkLabel: 30,
 } as const;
 
 export type ContentLimit = keyof typeof CONTENT_LIMITS;

@@ -66,7 +66,9 @@ def opening_object(theme_id: str) -> str:
     as tools/etsy_upload.py)."""
     if theme_id not in _OPENINGS:
         copy = DESIGN_COPY.read_text(encoding="utf-8")
-        m = re.search(rf"^  '{re.escape(theme_id)}': \{{.*?\bopening:\s*'Your guests tap the ([a-z]+)\.", copy, re.S | re.M)
+        # G137: quoted keys ("opening": "…", design 21) as well as bare ones
+        m = re.search(rf"^  '{re.escape(theme_id)}': \{{.*?(?:\bopening|\"opening\"):\s*['\"]Your guests tap the ([a-z]+)\.",
+                      copy, re.S | re.M)
         if not m:
             raise RuntimeError(f"{DESIGN_COPY.relative_to(REPO)}: no opening sentence for '{theme_id}'")
         _OPENINGS[theme_id] = m.group(1)
@@ -204,6 +206,12 @@ THEMES: dict[str, Theme] = {
               tagline="A speckled sand envelope with a wave-edged flap and a scallop shell, watercolor sea and shells",
               corner_tl="platform/themes/coastal-seaside/img/decor_tl-720.webp",
               corner_br="platform/themes/coastal-seaside/img/decor_br-720.webp"),
+        # G137: design 21 (sale status "coming"); its only painted corner piece is the rose branch
+        Theme(id="crimson-rose-atelier", no="21", folder="21_Crimson_Rose_Atelier", name="Crimson Rose Atelier",
+              tagline="Crimson roses, a burgundy envelope with a gold botanical wax seal, an offset oval portrait and a "
+                      "landscape chapter album",
+              corner_tl="platform/themes/crimson-rose-atelier/img/rose-branch.webp",
+              corner_br="platform/themes/crimson-rose-atelier/img/rose-branch.webp"),
     )},
 }
 # The listing text each tool reads (G091: listing_v3.md replaced listing.md, which stays as the earlier record).

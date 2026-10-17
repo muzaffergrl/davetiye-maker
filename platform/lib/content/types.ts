@@ -95,6 +95,61 @@ export interface Maps {
   reception?: ReceptionPlace | null;
 }
 
+/** One way of getting there (G138): a short note and / or a link; both empty = not shown. */
+export interface TravelNote {
+  text?: string | null;
+  link?: string | null;
+}
+
+/** A hotel or place to stay (G138). */
+export interface TravelStay {
+  name: string;
+  address?: string | null;
+  link?: string | null;
+  /** Discount code or room block name. */
+  code?: string | null;
+  note?: string | null;
+  /** e.g. "10 min drive". */
+  distance?: string | null;
+}
+
+/** Travel & stay content of the Details page (G138); the section itself is optional_blocks.travel_stay. */
+export interface Travel {
+  airport?: TravelNote | null;
+  parking?: TravelNote | null;
+  shuttle?: TravelNote | null;
+  taxi?: TravelNote | null;
+  /** 0–6 places to stay. */
+  stays?: TravelStay[];
+}
+
+/** One heading of the menu (G138), e.g. "Main" with its dishes. */
+export interface MealCourse {
+  title: string;
+  items: string[];
+}
+
+/** Is a meal served, and its menu (G138). served missing / null = nothing shown; false = nothing shown. */
+export interface Meal {
+  served?: boolean | null;
+  courses?: MealCourse[];
+  /** Dietary note. */
+  note?: string | null;
+}
+
+/** Icons of a Details block (G138; lib/theme/extras-block.ts draws them). */
+export type DetailsBlockIcon = 'info' | 'dress' | 'kids' | 'gift' | 'car' | 'weather' | 'camera' | 'music' | 'glass' | 'heart';
+
+/** A free content block of the Details page (G138, 0–10): title + text + optional link and icon. */
+export interface DetailsBlock {
+  title: string;
+  text?: string | null;
+  link?: string | null;
+  /** Link text; empty = "Learn more". */
+  link_label?: string | null;
+  icon?: DetailsBlockIcon | null;
+}
+
 /** One question and answer of the FAQ block (G051). */
 export interface FaqItem {
   q: string;
@@ -137,6 +192,12 @@ export interface ContentRecord {
   faq?: FaqItem[];
   /** Map and directions on the Details page (G127). */
   maps?: Maps;
+  /** Travel & stay details (G138). */
+  travel?: Travel;
+  /** Is a meal served + the menu (G138). */
+  meal?: Meal;
+  /** 0–10 free content blocks on the Details page (G138). */
+  details_blocks?: DetailsBlock[];
   /** After the wedding (G075): thank-you mode settings. */
   thank_you?: ThankYou;
   /** Sound (G126): story music ('off', 'custom' = music_file, or a track id of lib/audio/catalog.ts) and sound effects. */

@@ -66,6 +66,18 @@ panelin yayın linki ve QR'ı, sayfaların mutlak `og:image`'ı ve takvim açık
 `x-forwarded-host`'un **son** girdisi — proxy'nin yazdığı; istemci yalnız başa ekleyebilir — ya da `host`; `/<slug>/event.ics` site linki ve
 UID'i de, G055 incelemesi). Üretimde tanımlanmalı: yoksa sunucu bir kez uyarı yazar.
 
+## İçerik bölümleri (G138)
+
+Details sayfasında üç isteğe bağlı ortak blok (21 tema, `lib/theme/extras-block.ts`; G127 harita bloğu gibi motor işareti +
+`/static/extras.css`, yalnız gösterilen sayfada): **Travel & stay** (`content.travel`: airport / parking / shuttle / taxi = kısa not +
+link, `stays` 0–6 kart: ad, mesafe, adres, rezervasyon linki, kod/oda bloğu, not; bölüm `optional_blocks.travel_stay`, eski
+`urls.accommodation` düğmesi aynı bölümde), **Meal & menu** (`content.meal`: `served` true/false/null — yalnız true gösterilir; `courses`
+≤ 6 başlık × ≤ 10 kalem, diyet notu; panelde "Add a meal choice question to RSVP" kısa yolu G128 soru sistemine `Meal choice`
+seçmeli sorusu ekler, `lib/panel/meal-question.ts`) ve **Good to know** (`content.details_blocks` 0–10: başlık, metin, link + link
+metni, 10 ikondan biri). Blok sözcükleri temanın düzenlenebilir metinleri (G068, `travel_*`, `menu_*`, `blocks_more`). Teşekkür
+modunda gösterilmez; eski kayıtlar göçsüz çalışır. Panel: Details sayfasında "Good to know", "Travel & stay", "Meal & menu".
+Test: `tests/g138-extras.test.ts`.
+
 ## Klasörler
 
 ```
@@ -1412,6 +1424,20 @@ tarayıcı: `tests/g055-browser.ts` (yukarıda "Çalıştırma").
   `docs/<siteId>/google-sheets.json`; blob'da ETag'li) — senkron `updatedAt`'i oynatmaz, otomatik kaydetme çakışmaz. Senkron =
   tablonun tamamı tek `batchUpdate` ile; tetikler: sayılan misafir yanıtı, çiftin ekle/düzelt/sil/tut işlemi, yayınlama
   (`after()`), "Sync now". Testler: `tests/g128-rsvp-sheets.test.ts` (sahte Google sunucusu), `tests/g128-browser.ts` (3 tema, 390 px).
+
+## Paylaşım: mesaj, uygulama linkleri, QR seçenekleri, QR kartı (G140, K45 6)
+
+Share görünümü (`components/panel/views.tsx` `ShareView` + `ShareKit.tsx`): büyük **Copy link**, Open, telefonda **Share…**
+(`navigator.share`); yayındaki sitede "Ask guests to save the link" ipucu; **Send it with a message**: hazır İngilizce mesaj
+(Invitation · Reminder; teşekkür modunda yalnız Thank you), düzenlenebilir, isimler/tarih/yanıt tarihi/link otomatik; şifre açıksa
+"Add the guest password to the message" anahtarı; WhatsApp (`wa.me`), Email (`mailto:`), Telegram (`t.me/share`) her cihazda, SMS
+(`sms:?&body=`) ve Messenger (`fb-messenger://share`) yalnız dokunmatik cihazda; Copy message yedek. **QR** (katlı): Black / Design
+colour (temanın `theme-color`'ı, beyaz üstünde ≥ 7:1 olana dek koyulaştırılır — `qrInk`), PNG Small/Medium/Large (≥ 600/1200/2400 px)
++ SVG; **Printable QR card**: 4 × 6 in PDF (tarayıcıda 300 dpi canvas → JPEG → tek sayfa PDF, `lib/panel/card-pdf.ts`, kütüphanesiz):
+temanın paylaşım görseli (`img/og-1200x630.jpg`, isimsiz GPT parçası) varsa üst şerit, yoksa yalnız tipografi; isimler, tarih, QR
+(her zaman beyaz zemin), adres, isteğe bağlı şifre. Bütün metinler `lib/panel/share.ts` `SHARE_LABELS` (5 dil için tek tablo).
+`PanelTheme.color` / `shareImage` (`lib/panel/state.ts`). Home: yanıt kartının altında tek dokunuş **Download Excel**.
+Test: `tests/g140-share.test.ts`; görüntüler `previews/g140/`.
 
 ## Güvenlik özeti
 

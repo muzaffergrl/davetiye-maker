@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 1 · alindi 0 · inceleme 18 · blokaj 88 · bitti 131 · iptal 190 · toplam 428
+Özet: hazir 2 · alindi 0 · inceleme 19 · blokaj 88 · bitti 131 · iptal 190 · toplam 430
 
 İptal edilen görevler (K22/K24 ile anlamını yitirenler) listelenmez; yalnız sayıları var. Ayrıntı: `python3 tools/gorev.py liste --hepsi`.
 
@@ -76,7 +76,7 @@ Bağımlılık bekleyen: 0 · Biten: 8 · İptal: 42
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (35)**
+**Üzerinde çalışılan / incelemede / blokaj (36)**
 
 - `G121` inceleme · claude-G121 — Panel, /start, admin ve satış sitesi — Refero turunun kalan P2'leri (docs/18) ve alıcı yolculuğu §6 kalanları (docs/19)
 - `G124` inceleme · claude-G124 — 20 tasarımın Etsy ilan görselleri (editoryal set, 8 × 2000 px) ve ilan videoları
@@ -88,6 +88,7 @@ Bağımlılık bekleyen: 0 · Biten: 8 · İptal: 42
 - `G133` inceleme · codex-crimson-rose-atelier — Crimson Rose Atelier — yeni ürün ve gezinilebilir demo
 - `G134` inceleme · claude-G134 — Entegrasyon — G126 kaydı, G127 demo pini, G096 düzeltmeleri (G135), 21 Crimson Rose Atelier; Nocturne / React Bits / ilan 9–10 incelemesi
 - `G136` inceleme · claude-G136 — Ek hizmet ilanları — görseller (3 × 4) ve Etsy teslim PDF'leri (SETUP_SERVICE, CUSTOM_DESIGN, EXTRA_REVISION)
+- `G137` inceleme · claude-G137 — 21 Crimson Rose Atelier — Etsy paketi (ilan metni, START HERE, ilan görselleri, video)
 - `G043` blokaj · - — Supabase adaptörü — şema, RLS, storage (canlı veri)
 - `G089` inceleme · - — React Bits Pro ile cila — satış sitesi, panel ve düğün sitelerini "yaşayan" hâle getir (K31)
 - `G098` inceleme · claude-G098 — Tema rötuşları — GM07 parçalarını 16/17/20'ye takma, theme-check yatay taşma açığı, 16 home fold, 17 başlık "TOGETꞪER", 12 cüzdan metinleri
@@ -145,9 +146,9 @@ Bağımlılık bekleyen: 0 · Biten: 0 · İptal: 20
 
 ## gpt-gorsel
 
-**Alınabilir (0)**
+**Alınabilir (1)**
 
-- (yok)
+- `G821` p2 — Tasarım 21 Crimson Rose Atelier — Etsy ilan sahneleri (Paket 3: 5 fotoğraf gerçekliğinde sahne, ekranlar #00FF00) → `gorevler/G821-mockup.md`
 
 **Üzerinde çalışılan / incelemede / blokaj (27)**
 

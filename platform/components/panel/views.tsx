@@ -4,15 +4,18 @@
 
 import {
   Archive,
+  Bookmark,
   ChevronRight,
   CircleCheckBig,
   Copy,
+  Download,
   ExternalLink,
   Heart,
   Hourglass,
   KeyRound,
   Link as LinkIcon,
   LockKeyhole,
+  MessageCircle,
   MessageCircleQuestionMark,
   Pencil,
   QrCode as QrIcon,
@@ -22,7 +25,7 @@ import {
   Users,
   type LucideIcon,
 } from 'lucide-react';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useMemo, useState } from 'react';
 import { formatDate, formatDateLong } from '../../lib/content/format.ts';
 import { isThankYouOn } from '../../lib/content/thank-you.ts';
 import type { ContentRecord } from '../../lib/content/types.ts';
@@ -44,12 +47,14 @@ import { rsvpClosesAt } from '../../lib/rsvp/deadline.ts';
 import type { Replies } from './guests.tsx';
 import { PAGE_TITLES, type PageId, type Readiness } from './pages.ts';
 import type { AccessOutcome } from './usePanel.ts';
-import { QrCode } from './QrCode.tsx';
+import { ShareMessage, ShareQr, type ShareFacts } from './ShareKit.tsx';
 import { GuestPasswordCard } from './GuestPassword.tsx';
 import { Sheet } from './Sheet.tsx';
 import { zoneCity } from './sections.tsx';
 import { Badge, Banner, Button, Card, cx, Disclosure, ProgressBar } from './ui.tsx';
 import styles from './panel.module.css';
+import kit from './share-kit.module.css';
+import { SHARE_LABELS as SL } from '../../lib/panel/share.ts';
 
 const DAY = 86_400_000;
 
@@ -121,6 +126,7 @@ export function HomeView({
   onContinueSetup,
   onHelp,
   onCopy,
+  excelUrl,
 }: {
   content: ContentRecord;
   meta: PanelMeta;
@@ -139,6 +145,8 @@ export function HomeView({
   onContinueSetup: () => void;
   onHelp: (topic?: string) => void;
   onCopy: () => void;
+  /** G140 (K45 item 2): the guest list as Excel, one tap from Home (same file as Guests → Download Excel). */
+  excelUrl?: string;
 }) {
   const r = meta.rights;
   const live = meta.status === 'published';
@@ -225,6 +233,13 @@ export function HomeView({
           </span>
           <ChevronRight size={18} aria-hidden="true" className={styles.chev} />
         </button>
+      ) : null}
+      {excelUrl && replies.data?.counts.responses ? (
+        <a className={cx(styles.btn, styles.btn_secondary, styles.btnBlock)} href={excelUrl} download rel="noreferrer" data-home-excel>
+          <Download size={18} strokeWidth={1.75} aria-hidden="true" />
+          <span>Download Excel</span>
+          <span className={styles.visuallyHidden}> (your guest list: replies and a summary)</span>
+        </a>
       ) : null}
 
       <Card title="Dates" titleId="dates-card">
@@ -453,8 +468,10 @@ export function EditListView({
 }
 
 // ---------------------------------------------------------------------------------------------
-// Share (K29, G121): the link with Copy / Open / Share first; the QR code, the guest password and the private edit link fold
-// away below; "Take the website offline" last, as a danger action.
+// Share (K29, G121; G140): the link with a big "Copy link" first, then Open / Share…; for a live website a short "ask guests
+// to save the link" tip, the ready message with app links (WhatsApp, SMS, email, Messenger, Telegram) and the QR code with
+// its options and printable card (folded); the guest password and the private edit link fold below; "Take the website
+// offline" last, as a danger action. Texts: SHARE_LABELS (lib/panel/share.ts).
 
 export function ShareView({
   url,
@@ -463,6 +480,12 @@ export function ShareView({
   meta,
   orderRef,
   online,
+  names,
+  date,
+  replyBy,
+  thankYouOn = false,
+  themeColor = null,
+  shareImage = null,
   onPublish,
   onOffline,
   onCopy,
@@ -474,6 +497,13 @@ export function ShareView({
   meta: PanelMeta;
   orderRef: string | null;
   online: boolean;
+  /** G140: filled into the ready message and the QR card. */
+  names: string;
+  date: string | null;
+  replyBy: string | null;
+  thankYouOn?: boolean;
+  themeColor?: string | null;
+  shareImage?: string | null;
   onPublish: () => void;
   onOffline: () => void;
   onCopy: (text: string, what: string) => void;
@@ -488,44 +518,59 @@ export function ShareView({
     setCanShare(typeof navigator !== 'undefined' && typeof navigator.share === 'function');
     setEditUrl(`${window.location.origin}/edit/${slug}?k=${encodeURIComponent(editKey)}`);
   }, [slug, editKey]);
+  const password = meta.guestAccess.enabled ? meta.guestAccess.password : null;
+  const facts: ShareFacts = useMemo(() => ({ url, names, date, replyBy, password, thankYouOn }), [url, names, date, replyBy, password, thankYouOn]);
+  const shareable = live && !archived;
   return (
     <div className={styles.stack}>
-      <Card title="Your website link" titleId="share-link" icon={LinkIcon}>
+      <Card title={SL.linkTitle} titleId="share-link" icon={LinkIcon}>
         <p className={styles.urlField} data-share-url>
           <UrlText url={url} />
         </p>
-        {!live && !archived ? <p className={styles.hint}>This address works once you publish your website.</p> : null}
-        <div className={styles.buttonRow}>
-          <Button variant={live ? 'primary' : 'secondary'} icon={Copy} onClick={() => onCopy(url, 'Link copied')}>
-            Copy
-          </Button>
+        {!live && !archived ? <p className={styles.hint}>{SL.linkNotLive}</p> : null}
+        <Button variant={live ? 'primary' : 'secondary'} block icon={Copy} className={kit.copyBig} onClick={() => onCopy(url, SL.linkCopied)} data-copy-link>
+          {SL.copyLink}
+        </Button>
+        <div className={kit.linkActions}>
           {live ? (
-            <a className={cx(styles.btn, styles.btn_secondary)} href={url} target="_blank" rel="noopener noreferrer">
+            <a className={cx(styles.btn, styles.btn_secondary)} href={url} target="_blank" rel="noopener noreferrer" data-open-site>
               <ExternalLink size={18} strokeWidth={1.75} aria-hidden="true" />
-              <span>Open</span>
+              <span>{SL.openWebsite}</span>
             </a>
           ) : null}
-          {canShare && live ? (
-            <Button icon={Share2} onClick={() => void navigator.share({ url }).catch(() => undefined)}>
-              Share
+          {canShare && shareable ? (
+            <Button icon={Share2} onClick={() => void navigator.share({ url }).catch(() => undefined)} data-share-link>
+              {SL.shareSystem}
             </Button>
           ) : null}
           {!live && !archived ? (
             <Button variant="primary" icon={Send} onClick={onPublish}>
-              {meta.publishedAt ? 'Publish again' : 'Publish'}
+              {meta.publishedAt ? SL.publishAgain : SL.publish}
             </Button>
           ) : null}
         </div>
       </Card>
 
-      {/* G121 (docs/18 §4 P2, Linktree): the first screen is the link + Copy + Share; the QR code folds away like the
-          password and the edit link (same title as before). */}
+      {shareable && !thankYouOn ? (
+        <p className={kit.tip} data-save-link-tip>
+          <Bookmark size={20} strokeWidth={1.75} aria-hidden="true" />
+          <span>
+            <strong>{SL.saveLinkTitle}</strong>
+            {SL.saveLinkText}
+          </span>
+        </p>
+      ) : null}
+
+      {shareable ? (
+        <Card title={SL.messageTitle} titleId="share-message" icon={MessageCircle}>
+          <ShareMessage facts={facts} onCopy={onCopy} />
+        </Card>
+      ) : null}
+
+      {/* G121 (docs/18 §4 P2, Linktree): the QR code folds away like the password and the edit link (same title). */}
       {live ? (
-        <Disclosure id="qr" title="QR code for printed cards" icon={QrIcon}>
-          <div className={styles.shareQr} data-share-qr>
-            <QrCode url={url} fileBase={slug} />
-            <p className={styles.hint}>Scan it once with your phone camera before you print it.</p>
-          </div>
+        <Disclosure id="qr" title={SL.qrTitle} icon={QrIcon}>
+          <ShareQr facts={facts} fileBase={slug} themeColor={themeColor} shareImage={shareImage} />
         </Disclosure>
       ) : null}
 

@@ -30,7 +30,7 @@ DARK = {"art-deco-black-tie", "emerald-gold-estate", "midnight-garden"}
 
 
 def test_theme_table():
-    assert len(lk.THEMES) == 20
+    assert len(lk.THEMES) == 21
     assert sorted((t.no, t.folder, t.id) for t in lk.THEMES.values()) == sorted(eu.DESIGNS)
     for t in lk.THEMES.values():
         assert t.name == eu.theme_name(t.id), (t.id, t.name, eu.theme_name(t.id))
@@ -106,8 +106,8 @@ def test_trust_scene_and_stills():
 
 def test_select():
     assert [t.no for t in le.select(["06-08", "13"])] == ["06", "07", "08", "13"]
-    assert [t.no for t in le.select(["olive-ivory", "01", "all"])] == [f"{i:02d}" for i in range(1, 21)]
-    for bad in (["21"], ["nope"]):
+    assert [t.no for t in le.select(["olive-ivory", "01", "all"])] == [f"{i:02d}" for i in range(1, 22)]
+    for bad in (["22"], ["nope"]):
         try:
             le.select(bad)
         except SystemExit:
@@ -123,10 +123,15 @@ def test_built_sets():
         if not files:
             continue
         built += 1
-        assert files == [f"{n}.png" for n in lk.UPLOAD_IMAGES], (t.id, files)
+        expected = [f"{n}.png" for n in lk.UPLOAD_IMAGES]
+        missing = [n for n in lk.UPLOAD_IMAGES if f"{n}.png" not in files]
+        # G137: a design without its GPT mockup scenes yet (21, G821) has only the images built without a scene
+        no_scenes = not any((t.collection / "assets" / "gpt" / "mockups" / f).exists()
+                            for f in ("cover_hand_v2.png", "cover_hand.png", "three_phones.png"))
+        assert set(files) <= set(expected) and (not missing or (no_scenes and missing == lk.UPLOAD_SCENES)), (t.id, files)
         md = (t.package / "listing" / lk.LISTING_MD).read_text(encoding="utf-8")
         rows = re.findall(r"^\| \d \| `(\d\d_\w+\.png)` \|", eu.section(md, 5), re.M)
-        assert rows == files, (t.id, rows)
+        assert rows == expected, (t.id, rows)
         for f in files:
             im = Image.open(d / f)
             assert im.size == (2000, 2000), (t.id, f, im.size)
