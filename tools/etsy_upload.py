@@ -73,6 +73,8 @@ PLACEHOLDER = re.compile(r"\[(?!VERIFY)[A-Z][A-Z /:-]*\]")
 VERIFY = re.compile(r"\s*\[VERIFY:\s*([^\]]+)\]")
 IMAGES_STATUS = ("current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 "
                  "editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)")
+SERVICE_IMAGES_STATUS = ("current: service set of 2026-10-17 (tools/listing_services.py, G136; GM06 trust scenes, real "
+                         "screens of the editor and of our ready designs' openings, no price, QR or web address)")
 DESIGN_COPY = REPO / "platform" / "lib" / "marketing" / "designs.ts"
 DEMO_LINK = re.compile(r"/start/demo/([a-z0-9-]+)")
 
@@ -116,7 +118,7 @@ def attributes(md: str) -> tuple[dict, list[dict]]:
     return out, checks
 
 
-def images(md: str, listing: Path) -> tuple[list[dict], list[dict]]:
+def images(md: str, listing: Path, status: str = IMAGES_STATUS) -> tuple[list[dict], list[dict]]:
     rows, checks = [], []
     for row in table(section(md, 5)):
         if len(row) < 3 or not row[0].isdigit():
@@ -130,7 +132,7 @@ def images(md: str, listing: Path) -> tuple[list[dict], list[dict]]:
             "file": str(path.relative_to(REPO)).replace("\\", "/"),
             "alt": VERIFY.sub("", row[2]).strip(),
             "exists": path.exists(),
-            "status": IMAGES_STATUS if path.exists() else "missing",
+            "status": status if path.exists() else "missing",
         })
     return rows, checks
 
@@ -233,7 +235,7 @@ def build_service(sid: str, price_try: int) -> tuple[dict, list[str]]:
     f = listing_fields(md)
     desc, checks = description(md)
     attrs, more = attributes(md)
-    imgs, img_checks = images(md, listing)
+    imgs, img_checks = images(md, listing, SERVICE_IMAGES_STATUS)
     checks += more + img_checks
     for ph in sorted(set(PLACEHOLDER.findall(desc))):
         checks.append({"where": "description", "check": f"decide {ph}", "text": ""})

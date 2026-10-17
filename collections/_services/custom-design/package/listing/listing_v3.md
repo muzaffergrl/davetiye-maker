@@ -15,8 +15,8 @@ language: English (US spelling).
 | Exclusivity | **Exclusive** (user, 2026-10-16): the design is never sold to anyone else |
 | How a custom design is made | The same pipeline as our 20 designs: GPT artwork (K21) → a platform theme → open on /start for this buyer only. Making a theme takes real work (G406–G420 took one task each); the turnaround must allow for it. Not tried for a single buyer yet (docs/23 §4) |
 | Etsy rule on services / custom orders | Not checked. Custom design work that results in a digital item is the usual allowed case. [VERIFY] in §4 |
-| Digital file | Proposal: a one-page `CUSTOM_DESIGN.pdf` (what happens next). **Not made yet** |
-| Images, video | None yet. Needs list in §5 |
+| Digital file | `package/customer/CUSTOM_DESIGN.pdf` (G136, 2026-10-17; `tools/build_service_guides.py`): what was bought, the questions of the admin message `custom_design_brief` word for word, first version in 3 days, 2 rounds, start link, AI note, no returns + we fix it, support |
+| Images, video | 4 images made (G136, 2026-10-17; `tools/listing_services.py`, §5). No video |
 
 ## 1. Title
 
@@ -98,7 +98,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | When was it made | Made to order |
 | Occasion | Wedding |
 | Personalization | Off (we ask in an Etsy message after the order) |
-| Digital file | `CUSTOM_DESIGN.pdf` (one page: what happens next; not made yet) |
+| Digital file | `CUSTOM_DESIGN.pdf` (`package/customer/`, G136) |
 | Price | **2,960 TL** = design 1,460 TL + 1,500 TL (about USD 59.76; K42, approved 2026-10-16; docs/23 §1) |
 | Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) |
 | Shop section | Services (proposal, docs/20 §3) |
@@ -106,12 +106,14 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 
 ## 5. Images and alt text
 
-No images yet. Show the range we can make with real screens of several of our designs (honest: "for example", not this buyer's
-design), layout and type on our brand palette (K27); GPT scenes for the cover (K21). Needs:
+Made 2026-10-17 (G136, `tools/listing_services.py`, `package/listing/images_editorial/`, 2000 × 2000). Real screens of several of
+our ready designs, each image saying so ("Shown: openings from our ready designs", "Shown: our Olive & Ivory design"); layout and
+type on our brand palette (K27) in the editorial set's style; the shop-wide GPT scenes t1 and t6 (`brand/trust/`, GM06, K21). No
+price, no QR, no web address.
 
 | # | File | Alt text |
 |---|---|---|
-| 1 | `01_cover.png` | Custom wedding website design: several phones showing different openings and color palettes, with the words "Designed just for you" |
+| 1 | `01_cover.png` | Custom wedding website design: three phones showing different openings and color palettes from our ready designs, with the words "Designed just for you" |
 | 2 | `02_steps.png` | Four steps: tell us your idea, see the first version, ask for changes, then fill in your website and publish |
 | 3 | `03_included.png` | What is included: your own design, the editor, every page, online RSVP, QR code, online until 12 months after your wedding |
 | 4 | `04_examples.png` | Examples of openings we have made: an envelope, a gatefold, a book and a travel wallet (from our ready designs) |
@@ -150,6 +152,6 @@ within 24 hours (docs/23 §4).
 - [x] Extra rounds: own listing `collections/_services/extra-revision/` (500 TL, 2026-10-16); publish both together
 - [ ] A custom theme made once end to end for one buyer (only that order can start it on /start), docs/23 §4
 - [ ] Etsy's policy on custom design listings read; category and digital-file setup checked in the listing editor
-- [ ] `CUSTOM_DESIGN.pdf` made; images made (§5)
+- [x] `CUSTOM_DESIGN.pdf` made; images made (§5) (G136, 2026-10-17)
 - [x] Quantity decided: 999 (no stock limit)
 - [ ] Renewal decided

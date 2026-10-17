@@ -12,9 +12,9 @@ sale: `docs/23_EK_HIZMETLER.md`. Product language: English (US spelling).
 | Price | **500 TL**, approved by the user on 2026-10-16 (about USD 10.09 at 49.53 TRY per USD, BloombergHT 2026-10-16 09:30). docs/23 §1 |
 | Turnaround | **3 days** after we have everything (user, 2026-10-16) |
 | Etsy rule on services | **Not checked.** Etsy's prohibited items policy limits pure services; a service that results in a digital item (here: the buyer's set-up website) is the usual exception. [VERIFY] in §4: read Etsy's current policy before publishing |
-| Digital file | Etsy delivers a file for a digital listing. Proposal: a one-page `SETUP_SERVICE.pdf` (what to send us, in the same words as §2). **Not made yet** (blocker in `etsy_upload.json`) |
+| Digital file | `package/customer/SETUP_SERVICE.pdf` (G136, 2026-10-17; `tools/build_service_guides.py`): what was bought, the list of what to send us (word for word from the admin message `setup_service_details`), 3 days, one round, no returns + we fix it, support |
 | Shop editing a buyer's website | The admin can create a website for a buyer ("Yeni sipariş") or issue a new edit link ("Yeni düzenleme linki", the old link stops working). There is no way to edit an existing website without replacing the buyer's link. The description says so (GOOD TO KNOW). docs/23 §3 |
-| Images, video | None yet. Needs list in §5 |
+| Images, video | 4 images made (G136, 2026-10-17; `tools/listing_services.py`, §5). No video |
 
 ## 1. Title
 
@@ -99,7 +99,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | When was it made | Made to order |
 | Occasion | Wedding |
 | Personalization | Off (we ask for the details in an Etsy message after the order; Etsy's box is too short for photos and a schedule) |
-| Digital file | `SETUP_SERVICE.pdf` (one page: what to send us; not made yet) |
+| Digital file | `SETUP_SERVICE.pdf` (`package/customer/`, G136) |
 | Price | **500 TL** (about USD 10.09; K42, approved 2026-10-16; docs/23 §1) |
 | Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) |
 | Shop section | Services (proposal, docs/20 §3) |
@@ -107,17 +107,18 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 
 ## 5. Images and alt text
 
-No images yet. Layout and type on our brand palette (K27) with real editor screens; artwork and mockup scenes from GPT (K21), never an
-AI-drawn QR or web address (Etsy Off-Platform policy). Needs:
+Made 2026-10-17 (G136, `tools/listing_services.py`, `package/listing/images_editorial/`, 2000 × 2000). Layout and type on our brand
+palette (K27) in the editorial set's style; real editor and site screens (Olive & Ivory, local production build); the shop-wide GPT
+scene t3 (`brand/trust/`, GM06) on the cover (K21). No price, no QR, no web address (Etsy Off-Platform policy).
 
 | # | File | Alt text |
 |---|---|---|
-| 1 | `01_cover.png` | We set it up for you: a phone showing a finished wedding website, with the words "Send us your details, we do the rest" |
+| 1 | `01_cover.png` | We set it up for you: a couple looking at a phone showing a finished wedding website, with the words "Send us your details, we do the rest" |
 | 2 | `02_steps.png` | Four steps: buy with your design, send your details in an Etsy message, we set up your website, you check and publish |
 | 3 | `03_what_we_enter.png` | What we enter for you: names, date and venue, schedule and story, up to 5 photos, RSVP questions, headings and wording |
-| 4 | `04_not_included.png` | Good to know: one round of setup, you can change everything yourself afterwards, design colors and fonts stay as designed |
+| 4 | `04_not_included.png` | Good to know: one round of setup, you can change everything yourself afterwards, the design stays as designed, you decide when to publish |
 
-Prompts for the GPT scene (cover background) go to `collections/_services/assets/gpt/GPT_PROMPTS.md` when this listing is scheduled.
+No new GPT scene was needed: the cover uses GM06's t3 (`brand/trust/GPT_PROMPTS.md`).
 
 ## 6. Video
 
@@ -151,7 +152,7 @@ gets that text too. Proposal: no change; the shop sends `setup_service_details` 
 - [x] Price approved: 500 TL (2026-10-16)
 - [x] Turnaround decided: 3 days (2026-10-16), here and in the admin messages
 - [ ] Etsy's policy on service listings read; category and digital-file setup checked in the listing editor
-- [ ] `SETUP_SERVICE.pdf` made
-- [ ] Images made (§5)
+- [x] `SETUP_SERVICE.pdf` made (G136, 2026-10-17)
+- [x] Images made (§5; G136, 2026-10-17)
 - [x] Quantity decided: 999 (no stock limit)
 - [ ] Renewal decided
