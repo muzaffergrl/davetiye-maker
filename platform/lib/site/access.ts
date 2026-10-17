@@ -36,11 +36,17 @@ const MINUTE = 60_000;
  * Wrong passwords (the right one is never counted: a whole family or a venue's Wi-Fi can open the site from one
  * address). While a window is full every attempt is refused, the right password too, so guessing cannot go on.
  */
-export const ACCESS_LIMITS: Readonly<{ wrongPerSiteIp: RateLimitRule; wrongPerIp: RateLimitRule }> = Object.freeze({
+export const ACCESS_LIMITS: Readonly<{ wrongPerSiteIp: RateLimitRule; wrongPerIp: RateLimitRule; wrongPerSite: RateLimitRule }> = Object.freeze({
   /** Wrong passwords from one address for one website. */
   wrongPerSiteIp: Object.freeze({ limit: 10, windowMs: 15 * MINUTE }),
   /** Wrong passwords from one address for all websites together (one machine trying many weddings). */
   wrongPerIp: Object.freeze({ limit: 30, windowMs: 15 * MINUTE }),
+  /**
+   * G174: wrong passwords for one website from all addresses together (many machines guessing one wedding). A real
+   * wedding stays far below it: 150 guests with a few typos each, spread over the hours after the invitation goes out.
+   * Guests who already entered the password keep their cookie and never meet this limit.
+   */
+  wrongPerSite: Object.freeze({ limit: 300, windowMs: 60 * MINUTE }),
 });
 
 /** True when guests need the password. A malformed record with enabled=true stays closed (fail closed). */

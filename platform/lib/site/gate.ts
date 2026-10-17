@@ -257,7 +257,8 @@ const FORM_MAX_BYTES = 4096;
 /**
  * POST /<slug>[/<page>] with `site_access=1&password=…` (the password page's form). Right password: the
  * site's cookie + 303 to the same address. Wrong: the page again with an error (401). Too many wrong tries from this
- * address (ACCESS_LIMITS, shared counter on blob): 429 — the right password is refused too until the window ends.
+ * address, or (G174) for this site from all addresses (ACCESS_LIMITS, shared counter on blob): 429 — the right password
+ * is refused too until the window ends.
  * Not a password form (no `site_access`): 405 like before G076. Cross-site posts: 403.
  */
 export async function handleSiteUnlock(req: Request, slug: string, target: string | null): Promise<Response> {
@@ -288,10 +289,12 @@ export async function handleSiteUnlock(req: Request, slug: string, target: strin
   const limiter = getAccessRateLimiter();
   const siteKey = `access:wrong:${site.id}:${ip}`;
   const ipKey = `access:wrong-ip:${ip}`;
+  const allKey = `access:wrong-site:${site.id}`;
   const page = async (state: 'wrong' | 'wait', status: number, retryAfterMs?: number) =>
     gatePage({ theme: await loadTheme(site.theme), content: visible, action: back, origin: publicOrigin(req.headers, url.origin), state, status, retryAfterMs });
 
-  for (const [key, rule] of [[siteKey, ACCESS_LIMITS.wrongPerSiteIp], [ipKey, ACCESS_LIMITS.wrongPerIp]] as const) {
+  const rules = [[siteKey, ACCESS_LIMITS.wrongPerSiteIp], [ipKey, ACCESS_LIMITS.wrongPerIp], [allKey, ACCESS_LIMITS.wrongPerSite]] as const;
+  for (const [key, rule] of rules) {
     // A limiter that cannot peek counts every attempt instead (stricter, never looser).
     const now = limiter.peek ? await limiter.peek(key, rule) : await limiter.hit(key, rule);
     if (!now.allowed) return page('wait', 429, now.retryAfterMs);
@@ -300,8 +303,7 @@ export async function handleSiteUnlock(req: Request, slug: string, target: strin
 
   // Only wrong passwords count; the next attempt after the limit is refused by the peek above.
   if (limiter.peek) {
-    await limiter.hit(siteKey, ACCESS_LIMITS.wrongPerSiteIp);
-    await limiter.hit(ipKey, ACCESS_LIMITS.wrongPerIp);
+    for (const [key, rule] of rules) await limiter.hit(key, rule);
   }
   return page('wrong', 401);
 }

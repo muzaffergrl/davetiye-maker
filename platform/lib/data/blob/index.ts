@@ -699,6 +699,19 @@ export class BlobAdapter implements DataAdapter {
     }
   }
 
+  async pruneUploadParts(siteId: string, before: number): Promise<number> {
+    if (!UUID_RE.test(siteId)) return 0;
+    const old: string[] = [];
+    let cursor: string | undefined;
+    do {
+      const page = await this.#client.list({ prefix: this.partsPrefix(siteId), cursor, limit: 1000, token: this.#token });
+      for (const b of page.blobs) if (new Date(b.uploadedAt).getTime() < before) old.push(b.pathname);
+      cursor = page.hasMore ? page.cursor : undefined;
+    } while (cursor);
+    for (let i = 0; i < old.length; i += DELETE_BATCH) await this.del(old.slice(i, i + DELETE_BATCH));
+    return old.length;
+  }
+
   async countPhotos(siteId: string): Promise<number> {
     if (!UUID_RE.test(siteId)) return 0;
     return (await this.listAll(this.mediaPrefix(siteId))).length;

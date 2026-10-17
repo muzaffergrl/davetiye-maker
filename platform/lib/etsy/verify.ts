@@ -18,13 +18,17 @@
 //   app settings missing, shop not connected, Etsy no longer accepts the connection, or Etsy refuses our app (401/403 on
 //   the token itself) -> pending, exactly like manual mode; the admin card shows why.
 //   Etsy timeout / network error / 429 rate limit / 5xx                -> unavailable (the buyer is asked to retry; nothing stored)
+// G174: on /start (input.cached) a receipt read is kept as ReceiptFacts for a few minutes (order-cache.ts), so repeated
+//   tries for one order number do not spend the shop's Etsy quota; the fallbacks and errors above are never cached.
 
+import { createHash } from 'node:crypto';
 import LISTINGS from './listings.json' with { type: 'json' };
 import { getDataAdapter } from '../data/index.ts';
 import type { DataAdapter } from '../data/types.ts';
 import { MAX_ORDER_SITES, type OrderCheck, type OrderCheckInput, type OrderVerifier } from '../claim/verify.ts';
 import { etsySetup } from './config.ts';
 import { canReadReceipts, EtsyError, getShopReceipt, type EtsyReceipt } from './client.ts';
+import { orderCacheKey, readCachedFacts, rememberFacts } from './order-cache.ts';
 import { clearEtsyError, connectedShop, EtsyNotConnectedError, noteEtsyError, shopAccessToken } from './shop.ts';
 
 /** listing_id -> theme id, from listings.json (bad entries are ignored). */
@@ -72,21 +76,31 @@ export function designUnits(receipt: Pick<EtsyReceipt, 'transactions'> | null, s
   return Math.max(1, Math.min(units, MAX_ORDER_SITES));
 }
 
-/** The decision for one receipt (pure; exported for the tests). */
-export function evaluateReceipt(
+/**
+ * G174: what one receipt says, without the receipt itself (kept in the short-lived /start cache, order-cache.ts): found
+ * in our shop, cancelled / fully refunded, the buyer email as a hash (null when Etsy gives none), the mapped designs, the
+ * design units, paid.
+ */
+export type ReceiptFacts =
+  | { found: false }
+  | { found: true; closed: boolean; buyer: string | null; themes: string[]; units: number; paid: boolean };
+
+/** One-way form of an email address for comparing (the cache never holds the address). */
+export function emailHash(email: string): string {
+  return createHash('sha256').update(`email:${email.trim().toLowerCase()}`).digest('hex');
+}
+
+/** The facts of one receipt for this order number (pure). */
+export function receiptFacts(
   receipt: EtsyReceipt | null,
-  input: OrderCheckInput,
+  orderNumber: string,
   opts: { listings?: Map<string, string>; services?: Map<string, ServiceKind>; sellerUserId?: number | null } = {},
-): OrderCheck {
-  if (!receipt || typeof receipt !== 'object') return { result: 'rejected', reason: 'not_found' };
-  if (typeof receipt.receipt_id === 'number' && String(receipt.receipt_id) !== input.orderNumber) return { result: 'rejected', reason: 'not_found' };
-  if (opts.sellerUserId && typeof receipt.seller_user_id === 'number' && receipt.seller_user_id !== opts.sellerUserId) {
-    return { result: 'rejected', reason: 'not_found' };
-  }
+): ReceiptFacts {
+  if (!receipt || typeof receipt !== 'object') return { found: false };
+  if (typeof receipt.receipt_id === 'number' && String(receipt.receipt_id) !== orderNumber) return { found: false };
+  if (opts.sellerUserId && typeof receipt.seller_user_id === 'number' && receipt.seller_user_id !== opts.sellerUserId) return { found: false };
   const status = (receipt.status ?? '').trim().toLowerCase();
-  if (status === 'canceled' || status === 'cancelled' || status === 'fully refunded') return { result: 'rejected', reason: 'not_paid' };
-  const buyer = typeof receipt.buyer_email === 'string' ? receipt.buyer_email.trim().toLowerCase() : '';
-  if (buyer && buyer !== input.email.trim().toLowerCase()) return { result: 'rejected', reason: 'email_mismatch' };
+  const buyer = typeof receipt.buyer_email === 'string' && receipt.buyer_email.trim() ? emailHash(receipt.buyer_email) : null;
   const listings = opts.listings ?? listingThemes();
   const themes = new Set<string>();
   for (const t of Array.isArray(receipt.transactions) ? receipt.transactions : []) {
@@ -94,19 +108,44 @@ export function evaluateReceipt(
     const theme = id ? listings.get(id) : undefined;
     if (theme) themes.add(theme);
   }
-  if (themes.size && !themes.has(input.theme)) return { result: 'rejected', reason: 'theme_mismatch' };
-  const units = designUnits(receipt, opts.services ?? listingServices());
-  if (receipt.is_paid !== true) return { result: 'pending', units };
-  return { result: 'verified', units };
+  return {
+    found: true,
+    closed: status === 'canceled' || status === 'cancelled' || status === 'fully refunded',
+    buyer,
+    themes: [...themes].sort(),
+    units: designUnits(receipt, opts.services ?? listingServices()),
+    paid: receipt.is_paid === true,
+  };
+}
+
+/** The decision for these facts and this buyer's input (pure). */
+export function decideFacts(facts: ReceiptFacts, input: OrderCheckInput): OrderCheck {
+  if (!facts.found) return { result: 'rejected', reason: 'not_found' };
+  if (facts.closed) return { result: 'rejected', reason: 'not_paid' };
+  if (facts.buyer && facts.buyer !== emailHash(input.email)) return { result: 'rejected', reason: 'email_mismatch' };
+  if (facts.themes.length && !facts.themes.includes(input.theme)) return { result: 'rejected', reason: 'theme_mismatch' };
+  if (!facts.paid) return { result: 'pending', units: facts.units };
+  return { result: 'verified', units: facts.units };
+}
+
+/** The decision for one receipt (pure; exported for the tests). */
+export function evaluateReceipt(
+  receipt: EtsyReceipt | null,
+  input: OrderCheckInput,
+  opts: { listings?: Map<string, string>; services?: Map<string, ServiceKind>; sellerUserId?: number | null } = {},
+): OrderCheck {
+  return decideFacts(receiptFacts(receipt, input.orderNumber, opts), input);
 }
 
 export class EtsyOrderVerifier implements OrderVerifier {
   readonly kind = 'etsy';
   readonly #adapter: () => DataAdapter;
+  readonly #now: () => number;
 
-  constructor(opts: { adapter?: DataAdapter } = {}) {
+  constructor(opts: { adapter?: DataAdapter; now?: () => number } = {}) {
     const given = opts.adapter;
     this.#adapter = given ? () => given : () => getDataAdapter();
+    this.#now = opts.now ?? Date.now;
   }
 
   async check(input: OrderCheckInput): Promise<OrderCheck> {
@@ -116,6 +155,17 @@ export class EtsyOrderVerifier implements OrderVerifier {
     const shop = await connectedShop(adapter);
     if (!shop) return { result: 'pending' };
     if (!/^\d{1,20}$/.test(input.orderNumber)) return { result: 'rejected', reason: 'not_found' };
+    // G174: /start answers from the last receipt read of this order while it is fresh (order-cache.ts); a receipt read
+    // or "not ours" is remembered, Etsy errors and fallbacks are not.
+    const cacheKey = input.cached ? orderCacheKey(shop.shopId, input.orderNumber) : null;
+    if (cacheKey) {
+      const hit = await readCachedFacts(adapter, cacheKey, this.#now());
+      if (hit) return decideFacts(hit, input);
+    }
+    const decide = async (facts: ReceiptFacts): Promise<OrderCheck> => {
+      if (cacheKey) await rememberFacts(adapter, cacheKey, facts, this.#now());
+      return decideFacts(facts, input);
+    };
     const cfg = setup.config;
     const read = async (force: boolean) => getShopReceipt(cfg, await shopAccessToken(adapter, cfg, { force }), shop.shopId, input.orderNumber);
     let receipt: EtsyReceipt;
@@ -130,14 +180,14 @@ export class EtsyOrderVerifier implements OrderVerifier {
     } catch (e) {
       if (e instanceof EtsyNotConnectedError) return { result: 'pending' };
       if (e instanceof EtsyError) {
-        if (e.status === 404 || e.status === 400) return { result: 'rejected', reason: 'not_found' };
+        if (e.status === 404 || e.status === 400) return decide({ found: false });
         if (e.status === 401 || e.status === 403) {
           // 403 on one receipt: "another shop's receipt" or "this app may not read receipts" (not approved / scope). One
           // list read tells them apart: it works -> the number is not ours; it is refused too -> nothing is decided against
           // the buyer: the site waits for the shop (like manual mode) and the admin card shows the code.
           if (e.status === 403) {
             try {
-              if (await canReadReceipts(cfg, await shopAccessToken(adapter, cfg), shop.shopId)) return { result: 'rejected', reason: 'not_found' };
+              if (await canReadReceipts(cfg, await shopAccessToken(adapter, cfg), shop.shopId)) return decide({ found: false });
             } catch (probe) {
               if (!(probe instanceof EtsyNotConnectedError)) {
                 console.error(`[etsy] order check unavailable: ${probe instanceof EtsyError ? probe.code : 'error'}`);
@@ -156,6 +206,6 @@ export class EtsyOrderVerifier implements OrderVerifier {
       return { result: 'unavailable' };
     }
     await clearEtsyError(adapter).catch(() => undefined);
-    return evaluateReceipt(receipt, input, { sellerUserId: shop.userId });
+    return decide(receiptFacts(receipt, input.orderNumber, { sellerUserId: shop.userId }));
   }
 }
