@@ -100,6 +100,10 @@ export interface PanelTheme {
    * "Opening" / "the opening page".
    */
   opening?: string | null;
+  /** G140: the design's colour (#rrggbb, its theme-color) for the QR and the printable card; null = none. */
+  color?: string | null;
+  /** G140: the design's share image (root-relative URL of img/og-1200x630.jpg, no names on it) for the card; null = none. */
+  shareImage?: string | null;
 }
 
 export interface PanelMeta {

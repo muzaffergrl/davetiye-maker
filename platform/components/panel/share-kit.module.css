@@ -1,0 +1,155 @@
+/* Share (G140): the big Copy link, the ready message + app links, QR options and the printable card. Panel tokens only
+   (custom properties on .app, panel.module.css); no own colours except the apps' small marks, which use currentColor. */
+
+.copyBig {
+  min-height: 56px;
+  font-size: 17px;
+}
+
+.linkActions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+  gap: var(--s-2);
+  margin-top: var(--s-2);
+}
+
+.linkActions > * {
+  width: 100%;
+  justify-content: center;
+}
+
+.tip {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: var(--s-3);
+  margin: 0;
+  padding: var(--s-3) var(--s-4);
+  border-left: 3px solid var(--c-anchor);
+  border-radius: 0 var(--r-control) var(--r-control) 0;
+  background: var(--c-accent-soft);
+  color: var(--c-text);
+  font-size: 15px;
+  line-height: 22px;
+}
+
+.tip strong {
+  display: block;
+  color: var(--c-heading);
+}
+
+.message {
+  min-height: 168px;
+  font-size: 16px;
+  line-height: 23px;
+  resize: vertical;
+}
+
+.messageFoot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+}
+
+.apps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 560px) {
+  .apps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.app {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 52px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--c-control-border);
+  border-radius: var(--r-control);
+  background: var(--c-surface);
+  color: var(--c-heading);
+  font: inherit;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.app:hover {
+  border-color: var(--c-anchor);
+}
+
+.app:focus-visible {
+  outline: 3px solid var(--c-accent-line);
+  outline-offset: 2px;
+}
+
+.appMark {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--c-surface-sunken);
+  color: var(--c-anchor);
+}
+
+.sub {
+  margin: var(--s-4) 0 var(--s-2);
+  color: var(--c-heading);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.options {
+  display: grid;
+  gap: var(--s-3);
+  width: 100%;
+}
+
+.swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
+  border-radius: 3px;
+  vertical-align: -2px;
+  box-shadow: 0 0 0 1px var(--c-border);
+}
+
+.card {
+  display: grid;
+  gap: var(--s-3);
+  margin-top: var(--s-4);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--c-border);
+}
+
+.cardPreview {
+  display: block;
+  width: min(180px, 46vw);
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.12), 0 6px 18px rgb(0 0 0 / 0.08);
+}
+
+.cardRow {
+  display: grid;
+  gap: var(--s-3);
+  align-items: start;
+}
+
+@media (min-width: 560px) {
+  .cardRow {
+    grid-template-columns: auto 1fr;
+  }
+}

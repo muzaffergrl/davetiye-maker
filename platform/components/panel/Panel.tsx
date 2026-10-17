@@ -1069,6 +1069,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
                 }}
                 onHelp={(topic) => setDialog({ kind: 'help', topic })}
                 onCopy={() => void copy(url)}
+                excelUrl={panel.api.repliesExcelUrl()}
               />
             ) : null}
             {route.view === 'edit' ? (
@@ -1157,6 +1158,12 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
                 onOffline={() => setDialog({ kind: 'offline' })}
                 onCopy={(text, what) => void copy(text, what)}
                 onGuestAccess={panel.setGuestAccess}
+                names={names}
+                date={formatDateLong(content.date, content.locale)}
+                replyBy={content.rsvp?.method !== 'none' ? formatDate(content.rsvp?.deadline, content.locale) : null}
+                thankYouOn={Boolean(theme.thankYou) && meta.status === 'published' && !rights.archived && isThankYouOn(publishedCopy ?? content)}
+                themeColor={theme.color ?? null}
+                shareImage={theme.shareImage ?? null}
               />
             ) : null}
           </main>

@@ -24,6 +24,8 @@ import {
 } from './model.ts';
 import { rightsView } from './rights.ts';
 import { panelCopyEntries, type PanelCopyEntry } from '../theme/copy.ts';
+import { themeAssetUrl } from '../theme/urls.ts';
+import { normalHex } from './share.ts';
 
 const OPTIONAL_RE = /\bdata-optional\s*=\s*["']?([a-z_]+)/g;
 /** Values of the engine markers that name content paths (data-field, data-if, data-text, data-attr-*, data-repeat). */
@@ -122,6 +124,12 @@ export function withOpeningWords(entries: PanelCopyEntry[], opening: string | nu
   return entries.map((e) => ({ ...e, label: e.label.replace(/\benvelope\b/g, word) }));
 }
 
+/** G140: the design's colour — its opening page's <meta name="theme-color"> (#rrggbb), or null. */
+export function themeColor(indexHtml: string | null | undefined): string | null {
+  const tag = /<meta\b[^>]*\bname=["']theme-color["'][^>]*>/i.exec(indexHtml ?? '')?.[0];
+  return normalHex(tag ? /\bcontent=["']([^"']+)["']/i.exec(tag)?.[1] : null);
+}
+
 export async function panelTheme(themeId: string): Promise<PanelTheme> {
   const theme = await loadTheme(themeId);
   if (!theme) throw new Error(`theme "${themeId}" not found`);
@@ -161,6 +169,8 @@ export async function panelTheme(themeId: string): Promise<PanelTheme> {
     copy: withOpeningWords(panelCopyEntries(m.copy), opening),
     opening,
     sample: (await claimableTheme(m.id))?.demo ?? null,
+    color: themeColor(pages.find(([p]) => p === 'index')?.[1]),
+    shareImage: theme.share.ogImage ? themeAssetUrl(m.id, theme.share.ogImage) : null,
   };
 }
 
