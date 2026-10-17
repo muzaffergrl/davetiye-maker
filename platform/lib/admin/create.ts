@@ -6,8 +6,9 @@
 import { OrderRefTakenError, SlugTakenError, type DataAdapter } from '../data/types.ts';
 import { draftFromDemo, findFreeSlug } from '../claim/claim.ts';
 import { cleanName, emailError, nameError, normalizeEmail, normalizeOrderNumber, normalizeSlugInput, orderNumberError, slugProblem, slugProblemMessage, suggestSlugBase } from '../claim/fields.ts';
-import { claimableTheme, claimableThemes } from '../claim/themes.ts';
+import { claimableTheme, claimableThemes, type ClaimableThemeEntry } from '../claim/themes.ts';
 import { themeOpenForClaims } from '../themes/approval.ts';
+import { themeStartable } from '../themes/offered.ts';
 import { createSiteWithKeys } from '../sites.ts';
 import { SHOP_CREATED_NOTE } from './summary.ts';
 
@@ -17,9 +18,9 @@ export type AdminCreateResult =
   | { ok: true; id: string; slug: string; editUrl: string; siteUrl: string }
   | { ok: false; message: string; fields?: Partial<Record<AdminCreateField, string>>; existingId?: string };
 
-/** Designs the shop can start a website from (claimable and open for sale). */
-export async function adminCreatableThemes(): Promise<Array<{ id: string; name: string }>> {
-  return (await claimableThemes()).filter((t) => themeOpenForClaims(t.id));
+/** Designs the shop can start a website from (claimable and open for sale) + every private custom design (G151). */
+export async function adminCreatableThemes(): Promise<ClaimableThemeEntry[]> {
+  return (await claimableThemes({ includePrivate: true })).filter((t) => t.privateOrders !== undefined || themeOpenForClaims(t.id));
 }
 
 function str(v: unknown, max = 200): string {
@@ -28,8 +29,9 @@ function str(v: unknown, max = 200): string {
 
 export async function adminCreateSite(adapter: DataAdapter, origin: string, body: Record<string, unknown>, now: Date = new Date()): Promise<AdminCreateResult> {
   const fields: Partial<Record<AdminCreateField, string>> = {};
-  const theme = await claimableTheme(str(body.theme, 80));
-  if (!theme || !themeOpenForClaims(theme.id)) fields.theme = 'Bir tasarım seçin.';
+  // G151: the shop may always use a private custom design (for any order number it types).
+  const theme = await claimableTheme(str(body.theme, 80), { trusted: true });
+  if (!theme || !themeStartable(theme)) fields.theme = 'Bir tasarım seçin.';
   const orderRaw = str(body.orderNumber, 40);
   const orderErr = orderNumberError(orderRaw);
   if (orderErr) fields.orderNumber = 'Etsy sipariş numarası 8–12 rakam olmalı.';

@@ -49,6 +49,7 @@ import { Sheet } from './Sheet.tsx';
 import { Badge, Banner, Button, Card, cx, EmptyState, OverflowMenu, Segmented, useSnackbar } from './ui.tsx';
 import styles from './panel.module.css';
 import { SheetsCard } from './SheetsCard.tsx';
+import { ReplyNoticeCard } from './ReplyNoticeCard.tsx';
 import { msg, t, tn, uiLang } from '../../lib/i18n/client.ts';
 import { LANG_TAGS } from '../../lib/i18n/langs.ts';
 
@@ -589,6 +590,9 @@ export function GuestsView({
 
       {/* G128: a live copy of the replies in the couple's Google Drive */}
       <SheetsCard api={api} online={online} archived={archived} />
+
+      {/* G152: "Email me when a guest replies" (only while the platform can send email) */}
+      <ReplyNoticeCard api={api} online={online} archived={archived} />
 
       {/* Always in reach while scrolling the list (comp u2_guests_390): add a phone reply, download the list. */}
       {!archived || counts.responses ? (

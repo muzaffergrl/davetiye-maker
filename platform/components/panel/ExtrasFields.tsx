@@ -34,9 +34,9 @@ const ICON_OPTIONS: Array<{ value: DetailsBlockIcon | ''; label: string }> = [
 ];
 
 /** One-tap starters: a title and an icon (the couple writes the text). The chip is shown in the panel's language; the
- *  title it adds is website content and stays English, as before. */
+ *  title it adds is website content and stays English, as before. G151 (K47): no "Dress code" chip — the dress code has
+ *  its own section on Details (content.dress_code); blocks added with the old chip stay as they are and still render. */
 const BLOCK_IDEAS: Array<{ title: string; icon: DetailsBlockIcon }> = [
-  { title: msg('Dress code'), icon: 'dress' },
   { title: msg('Children'), icon: 'kids' },
   { title: msg('Gifts'), icon: 'gift' },
   { title: msg('Parking'), icon: 'car' },
@@ -53,7 +53,7 @@ export function DetailsBlocksFields() {
   return (
     <>
       <p className={styles.hint}>
-        {t('Short blocks on your Details page, such as dress code, children, gifts, parking or the weather. None, a few or up to {max}.', { max: L.detailsBlocks })}
+        {t('Short blocks on your Details page, such as children, gifts, parking or the weather. None, a few or up to {max}.', { max: L.detailsBlocks })}
       </p>
       {room ? (
         <div className={styles.chips} role="group" aria-label={t('Add a block about')}>

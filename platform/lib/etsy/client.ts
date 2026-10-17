@@ -164,6 +164,8 @@ export function getShop(cfg: EtsyConfig, accessToken: string, shopId: number): P
 export interface EtsyReceiptTransaction {
   listing_id?: number | null;
   seller_user_id?: number;
+  /** Units bought of this listing (G152: a design bought twice = two websites). */
+  quantity?: number;
 }
 
 /** The fields of a ShopReceipt the order check reads (Etsy's OpenAPI schema, lib/etsy/config.ts). */

@@ -2,12 +2,23 @@
 //
 // Front = the design's invitation_card part (GPT, K21) on its paper texture; back = its info_card part. Claude draws
 // no decor: only the text layer, its place (box = the free area of the part, in % of the part image: top, right,
-// bottom, left) and the colours / fonts of the design's own website (themes/<id>/site.css). The part files are
-// copied at full size by scripts/build-print-assets.ts into public/print/<id>/ (card.webp, back.webp, paper.webp).
-// Designs without card parts yet (21, 22, 27) are "composed": the trimmed sheet is the card, set from the design's existing
+// bottom, left; bands = where decoration reaches into it, G149) and the colours / fonts of the design's own website
+// (themes/<id>/site.css). The part files are copied at full size by scripts/build-print-assets.ts into
+// public/print/<id>/ (card.webp, back.webp, paper.webp).
+// Designs without card parts yet (21, 22, 25, 26, 27) are "composed": the trimmed sheet is the card, set from the design's existing
 // GPT images (no shape drawn, K21) until the parts asked for in the collection's GPT_PROMPTS.md (G139) arrive.
 
 export type Box = readonly [top: number, right: number, bottom: number, left: number];
+
+/**
+ * G149: a stretch of the text area that decoration reaches into (a rose cluster in a corner, an arch, a sprig): from
+ * `top` to `bottom` (% of the part's height) a line may be at most `width` % of the part's width wide, centred on the
+ * text area's axis. fitText narrows (or makes smaller) every line that lies in a band; text never sits on the art.
+ * Box and bands are measured from the rendered GPT art (both sizes) with a clearance of ~2 % of the card width around
+ * every decoration (G149); tests/g149-print-layout.test.ts checks that box + bands are clear of decoration on the art and
+ * that no line of long content leaves them. New or replaced parts (e.g. the 2× print parts) need the area re-measured.
+ */
+export type Band = readonly [top: number, bottom: number, width: number];
 
 /** One side of a composed sheet. */
 export interface ComposedSide {
@@ -34,12 +45,14 @@ export interface PrintLayout {
   caps?: string;
   ink: string;
   accent: string;
-  /** Text area on the front part / on the back part. */
+  /** Text area on the front part / on the back part (the free area of the art, clear of every decoration). */
   front: Box;
   back: Box;
+  /** Narrower stretches of the text areas where decoration reaches in (G149); none = the whole box is free. */
+  bands?: { front?: readonly Band[]; back?: readonly Band[] };
   /** Paper under the card part: "tile" repeats the texture (tile size in inches); "cover": one image fills the sheet. */
   paper?: { mode: 'tile' | 'cover'; tile?: number };
-  /** No card parts yet (21, 22, 27): each side is a background with GPT images on it (see GPT_PROMPTS.md, G139). */
+  /** No card parts yet (21, 22, 25, 26, 27): each side is a background with GPT images on it (see GPT_PROMPTS.md, G139). */
   composed?: { front: ComposedSide; back: ComposedSide };
   /** Names in capitals of the caps font instead of the script font (art deco). */
   namesInCaps?: boolean;
@@ -63,129 +76,150 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     collection: '01_Olive_Ivory', sources: PARTS,
     fonts: gf('family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Great+Vibes'),
     script: "'Great Vibes', cursive", serif: "'EB Garamond', Georgia, serif",
-    ink: '#2F3A2B', accent: '#6E5A31', front: [25, 17, 17, 20], back: [19, 18, 17, 18], paper: { mode: 'tile', tile: 2.5 },
+    ink: '#2F3A2B', accent: '#6E5A31', front: [27.5, 14.5, 22, 14.5], back: [26.5, 20, 17, 20], paper: { mode: 'tile', tile: 2.5 },
+    bands: { front: [[27.5, 29.5, 24], [29, 32.5, 36], [32, 40.5, 42], [40, 45.5, 53], [45, 51, 59], [59.5, 66, 61], [65.5, 74.5, 46], [74, 78, 32]] },
   },
   'dusty-blue-champagne': {
     collection: '02_Dusty_Blue', sources: PARTS,
     fonts: gf('family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Pinyon+Script'),
     script: "'Pinyon Script', cursive", serif: "'Cormorant Garamond', Georgia, serif",
-    ink: '#2B3A4E', accent: '#765627', front: [30, 15, 19, 26], back: [20, 16, 16, 16], paper: { mode: 'tile', tile: 2.5 },
+    ink: '#2B3A4E', accent: '#765627', front: [37.5, 17.5, 27.5, 25.5], back: [29.5, 17, 15, 17], paper: { mode: 'tile', tile: 2.5 },
+    bands: { front: [[37.5, 39.5, 24], [39, 40.5, 30], [40, 43, 42], [42.5, 51, 50], [60.5, 69, 46], [68.5, 70.5, 40], [70, 72.5, 30]] },
   },
   'blush-garden-rose': {
     collection: '03_Blush_Garden_Rose', sources: { card: PARTS.card, back: PARTS.back, paper: 'parts/bg_scene.png' },
     fonts: gf('family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Great+Vibes&family=Lora:ital,wght@0,400;1,400'),
     script: "'Great Vibes', cursive", serif: "'Cormorant Garamond', Georgia, serif",
-    ink: '#3F2A2E', accent: '#A27C47', front: [27, 18, 17, 18], back: [27, 15, 22, 15], paper: { mode: 'cover' },
+    ink: '#3F2A2E', accent: '#A27C47', front: [32, 15.5, 18, 16.5], back: [29, 14.5, 19, 14.5], paper: { mode: 'cover' },
+    bands: { front: [[32, 33.5, 25], [33, 33.5, 32], [33, 35, 39], [34.5, 35.5, 45], [35, 39, 52], [38.5, 41, 60], [64.5, 72, 54], [71.5, 74.5, 43], [74, 80, 33], [79.5, 82, 26]], back: [[29, 32, 47], [31.5, 41, 56], [63, 67.5, 58], [67, 71.5, 52], [71, 76, 41], [75.5, 78, 34], [77.5, 81, 27]] },
   },
   'vintage-airmail-love-letter': {
     collection: '04_Vintage_Airmail', sources: PARTS,
     fonts: gf('family=Homemade+Apple&family=Special+Elite'),
     script: "'Homemade Apple', cursive", serif: "'Special Elite', 'Courier New', monospace",
-    ink: '#2E3B5E', accent: '#8C2F27', front: [24, 14, 19, 24], back: [14, 13, 11, 13], paper: { mode: 'tile', tile: 2.5 },
+    ink: '#2E3B5E', accent: '#8C2F27', front: [24, 16, 23, 19], back: [16.5, 12.5, 14, 13.5], paper: { mode: 'tile', tile: 2.5 },
+    bands: { front: [[24, 26.5, 24], [26, 27, 30], [26.5, 29.5, 36], [29, 30, 42], [29.5, 30.5, 49], [30, 33, 55], [32.5, 40, 61], [46, 57.5, 58], [60.5, 64.5, 60], [64, 68, 54], [67.5, 73, 43], [72.5, 74.5, 36], [74, 76.5, 30], [76, 77, 24]], back: [[16.5, 18.5, 56], [18, 19, 62], [19.5, 25.5, 68], [39, 43.5, 64], [68, 70.5, 63], [70, 79, 56], [78.5, 84, 50], [83.5, 84.5, 56], [84, 86, 61]] },
   },
   'mediterranean-lemon': {
     collection: '05_Lemon_Mediterranean', sources: PARTS,
     fonts: gf('family=Allura&family=Playfair+Display:ital,wght@0,400;0,500;1,400'),
     script: "'Allura', cursive", serif: "'Playfair Display', Georgia, serif",
-    ink: '#1F3557', accent: '#24508F', front: [27, 13, 14, 13], back: [20, 14, 11, 14], paper: { mode: 'tile', tile: 2.5 },
+    ink: '#1F3557', accent: '#24508F', front: [28.5, 12, 15, 12], back: [29.5, 16, 11.5, 16], paper: { mode: 'tile', tile: 2.5 },
+    bands: { front: [[28.5, 29.5, 24], [29, 32.5, 40], [32, 35, 46], [34.5, 36.5, 52], [36, 41, 62], [40.5, 43.5, 70]] },
   },
   'art-deco-black-tie': {
     collection: '06_Art_Deco_Noir', sources: PARTS,
     fonts: gf('family=Italiana&family=Josefin+Sans:wght@400;600'),
     script: "'Italiana', serif", serif: "'Josefin Sans', sans-serif", caps: "'Italiana', serif", namesInCaps: true,
-    ink: '#E4DCC8', accent: '#E6CF8F', front: [17, 15, 16, 15], back: [12, 13, 11, 13], paper: { mode: 'tile', tile: 2.5 },
+    ink: '#E4DCC8', accent: '#E6CF8F', front: [22.5, 17.5, 15, 18], back: [11, 16.5, 11, 17], paper: { mode: 'tile', tile: 2.5 },
+    bands: { front: [[22.5, 24.5, 46], [24, 26.5, 52], [26, 28.5, 58], [80, 82.5, 59], [82, 85, 50]], back: [[11, 14, 30], [13.5, 16.5, 38], [16, 19, 45], [18.5, 20, 51], [19.5, 28.5, 60], [82, 84.5, 64], [84, 87, 58], [86.5, 89, 52]] },
   },
   'burgundy-velvet-autumn': {
     collection: '07_Burgundy_Velvet', sources: PARTS,
     fonts: gf('family=Cinzel:wght@400..500&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Pinyon+Script'),
     script: "'Pinyon Script', cursive", serif: "'Cormorant Garamond', Georgia, serif", caps: "'Cinzel', Georgia, serif",
-    ink: '#3B1A20', accent: '#74212F', front: [33, 18, 28, 20], back: [21, 15, 16, 15], paper: { mode: 'tile', tile: 2.5 },
+    ink: '#3B1A20', accent: '#74212F', front: [37, 10.5, 25, 16.5], back: [24, 15.5, 16, 15.5], paper: { mode: 'tile', tile: 2.5 },
+    bands: { front: [[37, 39, 32], [38.5, 42.5, 38], [42, 48, 56], [47.5, 49, 68], [57.5, 64, 61], [63.5, 68, 52], [67.5, 75, 30]], back: [[78.5, 80.5, 63], [80, 84, 51]] },
   },
   'winter-evergreen': {
     collection: '08_Winter_Evergreen', sources: PARTS,
     fonts: gf('family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Parisienne'),
     script: "'Parisienne', cursive", serif: "'Libre Baskerville', Georgia, serif",
-    ink: '#1F2E26', accent: '#2B4A3A', front: [27, 14, 16, 14], back: [17, 14, 15, 14], paper: { mode: 'tile', tile: 2.5 },
+    ink: '#1F2E26', accent: '#2B4A3A', front: [33.5, 13, 18.5, 13], back: [23.5, 15, 15, 15], paper: { mode: 'tile', tile: 2.5 },
+    bands: { front: [[33.5, 37, 31], [36.5, 40, 37], [70, 74, 64], [73.5, 74.5, 56], [74, 79.5, 45], [79, 81.5, 31]], back: [[83.5, 85, 64]] },
   },
   'lavender-provence': {
     collection: '09_Lavender_Provence', sources: PARTS,
     fonts: gf('family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500'),
     script: "'Alex Brush', cursive", serif: "'Cormorant Garamond', Georgia, serif",
-    ink: '#2E2A3F', accent: '#4B4172', front: [13, 12, 12, 30], back: [21, 17, 15, 18], paper: { mode: 'tile', tile: 2.5 },
+    ink: '#2E2A3F', accent: '#4B4172', front: [25, 10, 10.5, 23], back: [24.5, 16.5, 13, 17.5], paper: { mode: 'tile', tile: 2.5 },
+    bands: { front: [[25, 27.5, 28], [27, 28, 34], [27.5, 31.5, 42], [31, 31.5, 48], [31, 45.5, 54], [45, 46.5, 62], [89, 89.5, 27]] },
   },
   'tuscan-vineyard': {
     collection: '10_Tuscan_Vineyard', sources: PARTS,
     fonts: gf('family=Italianno&family=Marcellus'),
     script: "'Italianno', cursive", serif: "'Marcellus', Georgia, serif",
-    ink: '#2F2420', accent: '#6E5228', front: [30, 14, 15, 20], back: [17, 14, 13, 14], paper: { mode: 'tile', tile: 2.5 },
+    ink: '#2F2420', accent: '#6E5228', front: [33.5, 11.5, 16, 11.5], back: [24, 16, 13.5, 16], paper: { mode: 'tile', tile: 2.5 },
+    bands: { front: [[33.5, 36, 33], [35.5, 42.5, 39], [42, 45, 50], [44.5, 47, 57], [46.5, 53, 66]], back: [[79, 85, 63], [84.5, 86.5, 57]] },
   },
   'boho-pampas-terracotta': {
     collection: '11_Boho_Pampas', sources: PARTS,
     fonts: gf('family=Josefin+Slab:ital,wght@0,400;0,600;1,400;1,600&family=Sacramento'),
     script: "'Sacramento', cursive", serif: "'Josefin Slab', Georgia, serif",
-    ink: '#3A2A22', accent: '#6C4A2A', front: [25, 32, 18, 22], back: [20, 19, 14, 19], paper: { mode: 'tile', tile: 2.5 },
+    ink: '#3A2A22', accent: '#6C4A2A', front: [30, 23.5, 34, 26.5], back: [16, 23, 23.5, 23], paper: { mode: 'tile', tile: 2.5 },
+    bands: { front: [[30, 30.5, 24], [30, 38, 32], [37.5, 42.5, 45], [55, 61.5, 38], [61, 66, 30]], back: [[16, 17, 24], [16.5, 18.5, 30], [18, 20, 36], [19.5, 22.5, 42], [22, 26.5, 48]] },
   },
   'tropical-destination': {
     collection: '12_Tropical_Destination', sources: PARTS,
     fonts: gf('family=Dancing+Script:wght@500&family=Raleway:ital,wght@0,400;0,500;0,600;1,400'),
     script: "'Dancing Script', cursive", serif: "'Raleway', Arial, sans-serif",
-    ink: '#1E3A3A', accent: '#19615B', front: [33, 18, 30, 22], back: [26, 25, 11, 25], paper: { mode: 'tile', tile: 2.5 },
+    ink: '#1E3A3A', accent: '#19615B', front: [39, 14.5, 33, 29.5], back: [28, 23.5, 10, 23.5], paper: { mode: 'tile', tile: 2.5 },
+    bands: { front: [[39, 42, 25], [41.5, 43, 31], [42.5, 46, 41], [45.5, 50, 47], [55, 57, 51], [56.5, 66.5, 37], [66, 67, 24]] },
   },
   'enchanted-forest-storybook': {
     collection: '13_Enchanted_Forest', sources: PARTS,
     fonts: gf('family=IM+Fell+English:ital@0;1&family=Tangerine:wght@700'),
     script: "'Tangerine', cursive", serif: "'IM Fell English', Georgia, serif",
-    ink: '#2B2A1F', accent: '#5E4517', front: [17, 15, 16, 15], back: [15, 11, 10, 11], paper: { mode: 'tile', tile: 2.5 },
+    ink: '#2B2A1F', accent: '#5E4517', front: [21.5, 17.5, 16.5, 17.5], back: [21, 13.5, 10, 13.5], paper: { mode: 'tile', tile: 2.5 },
+    bands: { front: [[21.5, 22, 24], [21.5, 23.5, 30], [23, 26, 45], [25.5, 26.5, 51], [26, 32, 57], [31.5, 36, 64], [35.5, 40, 56], [51.5, 65.5, 63], [68.5, 71.5, 56], [71, 77.5, 40], [77, 81, 30], [80.5, 83.5, 24]], back: [[86.5, 88.5, 71], [88, 90, 65]] },
   },
   'ivory-lace-pearls': {
     collection: '14_Ivory_Lace_Pearl', sources: PARTS,
     fonts: gf('family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Mrs+Saint+Delafield'),
     script: "'Mrs Saint Delafield', cursive", serif: "'Bodoni Moda', Georgia, serif",
-    ink: '#3A3530', accent: '#8C7350', front: [28, 14, 22, 18], back: [18, 18, 16, 18], paper: { mode: 'tile', tile: 2.5 },
+    ink: '#3A3530', accent: '#8C7350', front: [30.5, 12, 20, 14.5], back: [22, 17, 13.5, 17.5], paper: { mode: 'tile', tile: 2.5 },
+    bands: { front: [[30.5, 31.5, 24], [31, 33.5, 30], [33, 35, 36], [34.5, 35, 42], [34.5, 42, 49], [41.5, 43.5, 55], [43, 43.5, 62], [43, 48, 68], [75, 77, 68], [76.5, 79, 63], [78.5, 80, 49]] },
   },
   'cherry-blossom-spring': {
     collection: '15_Cherry_Blossom', sources: PARTS,
     fonts: gf('family=Noto+Serif+Display:ital,wght@0,400;0,500;1,400&family=Petit+Formal+Script'),
     script: "'Petit Formal Script', cursive", serif: "'Noto Serif Display', Georgia, serif",
-    ink: '#3A3438', accent: '#6F4A58', front: [28, 18, 17, 18], back: [21, 14, 13, 22], paper: { mode: 'tile', tile: 2.5 },
+    ink: '#3A3438', accent: '#6F4A58', front: [26, 18.5, 23.5, 15.5], back: [27, 15, 14, 16], paper: { mode: 'tile', tile: 2.5 },
+    bands: { front: [[26, 33, 30], [32.5, 33.5, 36], [33, 38.5, 46], [38, 39, 52], [38.5, 43, 60], [45, 52, 61], [58.5, 66.5, 53], [66, 72.5, 42], [72, 73, 36], [72.5, 76.5, 24]], back: [[27, 32, 25], [31.5, 32, 31], [31.5, 40, 54], [39.5, 40.5, 60]] },
   },
   'sunflower-rustic-barn': {
     collection: '16_Sunflower_Rustic', sources: PARTS,
     fonts: gf('family=Kaushan+Script&family=Merriweather:ital,wght@0,400;0,700;1,400'),
     script: "'Kaushan Script', cursive", serif: "'Merriweather', Georgia, serif",
-    ink: '#3A2E1F', accent: '#6A4520', front: [20, 13, 29, 24], back: [18, 11, 10, 11], paper: { mode: 'tile', tile: 2.5 },
+    ink: '#3A2E1F', accent: '#6A4520', front: [24.5, 13.5, 38, 21.5], back: [25.5, 11, 10, 10], paper: { mode: 'tile', tile: 2.5 },
+    bands: { front: [[24.5, 26, 38], [25.5, 27, 44], [26.5, 29.5, 52], [29, 33.5, 59], [45.5, 51.5, 53], [51, 55, 46], [54.5, 62, 34]] },
   },
   'emerald-gold-estate': {
     collection: '17_Emerald_Gold_Estate', sources: PARTS,
     fonts: gf('family=Cinzel+Decorative&family=Cormorant+Infant:ital,wght@0,400..600;1,400..600'),
     script: "'Cinzel Decorative', Georgia, serif", serif: "'Cormorant Infant', Georgia, serif", caps: "'Cinzel Decorative', Georgia, serif",
-    ink: '#2A2216', accent: '#74561F', front: [24, 15, 19, 15], back: [17, 15, 13, 15], paper: { mode: 'tile', tile: 2.5 },
+    ink: '#2A2216', accent: '#74561F', front: [28.5, 13, 28, 13], back: [24, 14.5, 12, 14.5], paper: { mode: 'tile', tile: 2.5 },
+    bands: { front: [[28.5, 29, 33], [28.5, 38.5, 50], [38, 43.5, 61], [43, 47, 67], [54, 61.5, 63], [61, 67, 53], [66.5, 67.5, 47], [67, 72, 36]], back: [[41.5, 47.5, 62], [80, 86, 48], [87.5, 88, 39]] },
   },
   'wildflower-meadow-vellum': {
     collection: '18_Wildflower_Vellum', sources: PARTS,
     fonts: gf('family=Satisfy&family=Spectral:ital,wght@0,400;0,600;1,400'),
     script: "'Satisfy', cursive", serif: "'Spectral', Georgia, serif",
-    ink: '#33361B', accent: '#3B4220', front: [19, 24, 35, 15], back: [12, 12, 30, 12], paper: { mode: 'tile', tile: 2.5 },
+    ink: '#33361B', accent: '#3B4220', front: [20, 18, 30.5, 18], back: [10.5, 10, 33.5, 10], paper: { mode: 'tile', tile: 2.5 },
+    bands: { front: [[20, 23.5, 36], [23, 25, 43], [24.5, 40, 50], [47.5, 55, 56], [54.5, 63, 51], [62.5, 65, 45], [64.5, 65.5, 37], [65, 69.5, 24]], back: [[47, 56.5, 49], [56, 57, 55], [56.5, 64, 43], [63.5, 66.5, 28]] },
   },
   'midnight-garden': {
     collection: '19_Midnight_Garden', sources: PARTS,
     fonts: gf('family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cormorant+SC:wght@500;600&family=Playfair+Display+SC'),
     script: "'Playfair Display SC', Georgia, serif", serif: "'Cormorant Garamond', Georgia, serif", caps: "'Cormorant SC', Georgia, serif",
     namesInCaps: true,
-    ink: '#EFE6DA', accent: '#D9B97F', front: [26, 16, 24, 20], back: [22, 15, 17, 15], paper: { mode: 'tile', tile: 2.5 },
+    ink: '#EFE6DA', accent: '#D9B97F', front: [31.5, 17.5, 31, 17.5], back: [29, 15.5, 16, 15.5], paper: { mode: 'tile', tile: 2.5 },
+    bands: { front: [[31.5, 34, 33], [33.5, 34, 39], [33.5, 35, 47], [34.5, 45.5, 54], [52.5, 62.5, 56], [62, 64.5, 50], [64, 67, 41], [66.5, 69, 34]], back: [[81.5, 84, 61]] },
   },
   'coastal-seaside': {
     collection: '20_Coastal_Seaside', sources: PARTS,
     fonts: gf('family=Allison&family=Lora:ital,wght@0,400;0,600;1,400'),
     script: "'Allison', cursive", serif: "'Lora', Georgia, serif",
-    ink: '#1D3445', accent: '#24506E', front: [27, 14, 23, 14], back: [19, 14, 22, 14], paper: { mode: 'tile', tile: 2.5 },
+    ink: '#1D3445', accent: '#24506E', front: [26, 11, 27.5, 11], back: [19, 11.5, 23.5, 11.5], paper: { mode: 'tile', tile: 2.5 },
+    bands: { front: [[26, 28.5, 31], [28, 33.5, 42], [33, 34.5, 48], [34, 39.5, 62], [39, 48.5, 68], [58, 62.5, 66], [62, 63, 72], [62.5, 64, 65], [63.5, 64.5, 53], [64, 69.5, 47], [69, 71.5, 42], [71, 72.5, 28]], back: [[72.5, 73.5, 57], [73, 74, 47], [73.5, 75.5, 41], [75, 76.5, 25]] },
   },
   'crimson-rose-atelier': {
     collection: '21_Crimson_Rose_Atelier',
     sources: { paper: 'textures/paper-background.png', branch: 'decor/rose-branch.png', seal: 'decor/seal.png' },
     fonts: gf('family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600'),
     script: "'Cormorant Garamond', Georgia, serif", serif: "'Cormorant Garamond', Georgia, serif", caps: "'Manrope', Arial, sans-serif",
-    ink: '#411C23', accent: '#4B0C17', front: [24, 12, 20, 12], back: [20, 12, 12, 12],
+    ink: '#411C23', accent: '#4B0C17', front: [27.5, 11, 27.5, 11], back: [20, 12, 12, 12],
+    bands: { front: [[27.5, 31, 28], [30.5, 33, 60], [32.5, 33, 69], [67, 69.5, 60], [69, 72.5, 28]] },
     composed: {
       front: {
         bg: cover('paper'),
@@ -207,9 +241,45 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     script: "'Cinzel', Georgia, serif", serif: "'Cormorant Garamond', Georgia, serif", caps: "'Jost', Arial, sans-serif",
     namesInCaps: true, frontShadow: '0 0.02in 0.12in #000c',
     ink: '#F1E4CC', accent: '#D8BF93', front: [5, 18, 58, 18], back: [20, 12, 8, 12],
+    bands: { front: [[32.5, 35, 62], [34.5, 37, 55], [36.5, 40, 49], [40, 41, 43], [41, 42, 36]] },
     composed: {
       front: { bg: cover('scene', '50% 0%'), images: [] },
       back: { bg: '#11120F', images: [sealAt('top')] },
+    },
+  },
+  // 25 (G163): composed until the PAKET 6 print backgrounds arrive (collections/25_Orient_Express_Voyage/assets/gpt/
+  // GPT_PROMPTS.md: print/invitation_front.png, print/invitation_back.png). Interim front = the website's ivory paper (the
+  // interim poster tones were not empty enough for the G149 free-area check); back = the same ivory with the boarding stamp.
+  // When GPT's print grounds exist, `node scripts/build-print-assets.ts --theme orient-express-voyage` picks them up and the
+  // boxes are measured again (tests/g149-print-layout.test.ts).
+  'orient-express-voyage': {
+    collection: '25_Orient_Express_Voyage',
+    sources: { scene: 'platform/themes/orient-express-voyage/img/poster-1024.webp', stamp: 'platform/themes/orient-express-voyage/img/stamp-480.webp' },
+    fonts: gf('family=Limelight&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400'),
+    script: "'Limelight', Georgia, serif", serif: "'Cormorant Garamond', Georgia, serif",
+    ink: '#1E3A2C', accent: '#7A5C24', front: [12, 12, 12, 12], back: [20, 12, 8, 12],
+    composed: {
+      front: { bg: '#F3EBD9', images: [] },
+      back: { bg: '#F3EBD9', images: [{ ...sealAt('top'), src: 'stamp' }] },
+    },
+  },
+  // 26 (G164, interim until PAKET 6 print_front / print_back): rice paper with the indigo washi of the opened folds at
+  // its top and bottom edge — both toned papers cut by the theme build (img/rice, img/washi_indigo; no shape drawn).
+  'kintsugi-washi': {
+    collection: '26_Kintsugi_Washi',
+    sources: { rice: 'platform/themes/kintsugi-washi/img/rice-1024.webp', washi: 'platform/themes/kintsugi-washi/img/washi_indigo-1024.webp' },
+    fonts: gf('family=Allura&family=Shippori+Mincho:wght@400;600'),
+    script: "'Allura', cursive", serif: "'Shippori Mincho', Georgia, serif",
+    ink: '#1D2340', accent: '#7A5C22', front: [21, 13, 19, 13], back: [17, 12, 10, 12],
+    composed: {
+      front: {
+        bg: 'url(rice.webp) 0 0 / 2.4in repeat',
+        images: [
+          { src: 'washi', style: 'top:0;left:0;width:100%;height:12%;object-fit:cover' },
+          { src: 'washi', style: 'bottom:0;left:0;width:100%;height:11%;object-fit:cover;object-position:50% 80%' },
+        ],
+      },
+      back: { bg: 'url(rice.webp) 0 0 / 2.4in repeat', images: [{ src: 'washi', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover' }] },
     },
   },
   // 27 (G165, before its GPT parts): both sides on ivory lime plaster (the same GPT plaster the theme's card is toned

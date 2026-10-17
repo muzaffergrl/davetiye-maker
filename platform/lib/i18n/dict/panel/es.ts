@@ -424,7 +424,7 @@ const dict: Dict = {
   'Is a meal served?': '¿Se sirve una comida?',
   'Is there parking at the venue?': '¿Hay aparcamiento en el lugar?',
   'It is still right': 'Sigue siendo correcto',
-  'It is the only way to open your editor. Anyone who has this link can edit your website, so keep it private.': 'Es la única forma de abrir tu editor. Cualquiera que tenga este enlace puede editar tu sitio web, así que mantenlo en privado.',
+  'It is a shortcut to your editor. On any other device you can also continue with your Etsy order number and email. Anyone who has this link can edit your website, so keep it private.': 'Es un atajo a tu editor. En cualquier otro dispositivo también puedes continuar con tu número de pedido de Etsy y tu correo electrónico. Cualquiera que tenga este enlace puede editar tu sitio web, así que mantenlo en privado.',
   'It opens your website link. Scan it once with your phone camera before you print it.': 'Abre el enlace de tu sitio web. Escanéalo una vez con la cámara del móvil antes de imprimirlo.',
   'It takes the place of your portrait on the card. Without one, the card shows the design’s own decoration.': 'Ocupa el lugar de tu retrato en la tarjeta. Sin él, la tarjeta muestra la decoración propia del diseño.',
   'Just bought a design?': '¿Acabas de comprar un diseño?',
@@ -806,7 +806,7 @@ const dict: Dict = {
   'Share…': 'Compartir…',
   'Short answer': 'Respuesta corta',
   'Short answers to what guests often ask, such as parking, children or the plan for rain. Up to {max} questions.': 'Respuestas breves a lo que los invitados suelen preguntar, como el aparcamiento, los niños o el plan si llueve. Hasta {max} preguntas.',
-  'Short blocks on your Details page, such as dress code, children, gifts, parking or the weather. None, a few or up to {max}.': 'Bloques cortos en tu página Detalles, como el código de vestimenta, los niños, los regalos, el aparcamiento o el tiempo. Ninguno, unos pocos o hasta {max}.',
+  'Short blocks on your Details page, such as children, gifts, parking or the weather. None, a few or up to {max}.': 'Bloques cortos en tu página Detalles, como los niños, los regalos, el aparcamiento o el tiempo. Ninguno, unos pocos o hasta {max}.',
   'Show': 'Mostrar',
   'Show all replies': 'Mostrar todas las respuestas',
   'Show all {n} answers': 'Mostrar las {n} respuestas',
@@ -1294,6 +1294,19 @@ const dict: Dict = {
   'Your order number and email are filled in on the next page.': 'Tu número de pedido y tu correo aparecerán ya rellenados en la página siguiente.',
   'since {date}': 'desde el {date}',
   '{addresses} no longer opens on this device, so we removed it. Enter your order number and email below to open it again.|{addresses} no longer open on this device, so we removed them. Enter your order number and email below to open them again.': '{addresses} ya no se abre en este dispositivo, así que lo hemos quitado. Introduce abajo tu número de pedido y tu correo para volver a abrirlo.|{addresses} ya no se abren en este dispositivo, así que los hemos quitado. Introduce abajo tu número de pedido y tu correo para volver a abrirlos.',
+  // G152: multi-item orders (/my chooser), reply emails
+  'Which website do you want to open?': '¿Qué web quieres abrir?',
+  'This order has more than one website.': 'Este pedido tiene más de una web.',
+  'We will email you when a guest replies.': 'Te enviaremos un email cuando un invitado responda.',
+  'Reply emails turned off.': 'Emails de respuestas desactivados.',
+  'Reply emails': 'Emails de respuestas',
+  'Email me when a guest replies': 'Avísame por email cuando responda un invitado',
+  'Sent to {email}, the address you started your website with.': 'Se envía a {email}, la dirección con la que empezaste tu web.',
+  'Your website has no email address yet. Please message the shop.': 'Tu web aún no tiene dirección de email. Escribe a la tienda.',
+  'Each email has the guest’s name and answer. At most 20 a day; after that, the next email counts the rest.': 'Cada email incluye el nombre y la respuesta del invitado. Como máximo 20 al día; después, el siguiente email cuenta el resto.',
+  'The shop\'s edit link cannot change the couple\'s reply emails.': 'El enlace de edición de la tienda no puede cambiar los emails de respuestas de la pareja.',
+  'Reply emails are not available yet.': 'Los emails de respuestas aún no están disponibles.',
+  'This website has no email address to send to. Please message the shop.': 'Esta web no tiene una dirección de email a la que enviar. Escribe a la tienda.',
 };
 
 export default dict;

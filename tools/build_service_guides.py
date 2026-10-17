@@ -90,12 +90,15 @@ def content() -> dict[str, dict]:
                  ["We message you on Etsy within 24 hours of your order. You do not have to wait: you can reply in the "
                   "Etsy conversation of this order right away with:"], ask["setup-service"]),
                 ("h2", "When it is ready"),
-                ("ul", ["We set up your website <b>within 3 days of receiving everything</b>, and send you your "
-                        "private edit link in the same Etsy conversation.",
-                        "Your website stays a private draft. Open the link, check every page, change anything you like "
-                        "yourself, and tap <b>Publish</b> when you are happy.",
-                        "If you already started your website, we send you a new edit link when we are done and your "
-                        "old link stops working. Please use the new one. We never ask you for your edit link."]),
+                # G148: since G145 the shop edits a started website with its own link (the buyer's keeps working),
+                # and since G146 the buyer's Etsy order number + e-mail open the editor on any device
+                ("ul", ["We set up your website <b>within 3 days of receiving everything</b> and tell you in the same "
+                        "Etsy conversation when it is ready (with your private edit link if we started the website "
+                        "for you).",
+                        "Your website stays a private draft. Open your editor, check every page, change anything you "
+                        "like yourself, and tap <b>Publish</b> when you are happy.",
+                        "If you already started your website, we set it up in that same website: your edit link, and "
+                        "your Etsy order number with your e-mail, keep working. We never ask you for your edit link."]),
                 ("h2", "Good to know"),
                 ("ul", ["One purchase = one round of setup for one website. After that you can change everything "
                         "yourself, as often as you like; if you want us to make another round of changes for you, "
@@ -134,8 +137,8 @@ def content() -> dict[str, dict]:
                         "for one round together in one message. Each further round is 500 TL, through our Extra design "
                         "revision listing.",
                         "When you are happy, we send you your start link: enter your Etsy order number, your e-mail "
-                        "and your first names, choose your web address, and save your private edit link when it "
-                        "appears.",
+                        "and your first names and choose your web address. Later, the same order number and e-mail "
+                        "open your editor on any phone or computer.",
                         "Add your names, date and photos in the editor (or add our setup service), and publish."]),
                 ("h2", "Good to know"),
                 ("ul", ["The artwork is created with the help of AI image tools from our own descriptions, then "

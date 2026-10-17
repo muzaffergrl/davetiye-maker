@@ -9,13 +9,17 @@
 //   3. field checks (fields.ts, same rules as the browser)          -> 400 invalid (+ fields)
 //   4. attempts for this order number (shared with /start)          -> 429 rate_limited
 //   5. no website for the order number yet                          -> 200 {next: "start"} (the page goes on to /start)
+//      (G151: when a private theme — a custom design — lists this order number, + startPath "/start?theme=<id>&order=<no>")
 //   6. a website whose owner email matches (normalised, constant time) -> a new DEVICE KEY (lib/device-keys.ts)
 //                                                                    -> 200 {next: "edit", slug, editPath, names}
+//      G152: SEVERAL websites of the order (multi-item Etsy order) match -> 200 {next: "choose", sites: [{slug, names}]}
+//      (no key yet); the page asks which one and posts again with {slug}: that one opens (same checks, same counters).
 //   7. anything else                                                -> 403 no_match, one generic message (it never says
 //                                                                       whose the order is or which email it has)
 // POST /api/my/signin-link {orderNumber, email} — only while an email provider is set up (getEditLinkMailer().enabled;
 //   503 otherwise): same checks with its own, smaller limits; on a match a device key is made and its link is emailed to
-//   the owner email ON RECORD (kind "signin"). The answer is always the same "if it matches, we sent it".
+//   the owner email ON RECORD (kind "signin"; one email per matching website, G152). The answer is always the same
+//   "if it matches, we sent it".
 // Keys, emails and full order numbers are never logged.
 
 import { createHash, timingSafeEqual } from 'node:crypto';
@@ -27,6 +31,7 @@ import { ipBucket, type RateLimiter } from '../rsvp/rate-limit.ts';
 import { emailError, normalizeEmail, normalizeOrderNumber, orderNumberError } from './fields.ts';
 import { DEFAULT_CONTINUE_LIMITS, getClaimRateLimiter, orderLimitKey, type ContinueLimits } from './limits.ts';
 import { getEditLinkMailer, type EditLinkMailer } from './mailer.ts';
+import { privateThemeForOrder } from './themes.ts';
 
 export interface ContinueContext {
   adapter: DataAdapter;
@@ -90,13 +95,20 @@ export function sameOwnerEmail(stored: string | null | undefined, typed: string)
   return equal && a !== '' && b !== '';
 }
 
-/** The order's website started with this email (the newest when several match), else null. Every site is compared. */
-export function ownedSite(sites: readonly SiteRecord[], email: string): SiteRecord | null {
-  let found: SiteRecord | null = null;
-  for (const s of sites) {
-    if (sameOwnerEmail(s.ownerEmail, email) && (!found || s.createdAt > found.createdAt)) found = s;
-  }
-  return found;
+/** Every website of the order started with this email, newest first (G152: a multi-item order can have several). */
+export function ownedSites(sites: readonly SiteRecord[], email: string): SiteRecord[] {
+  // Every site is compared (no early exit): the answer time does not depend on which one matches.
+  const out = sites.filter((s) => sameOwnerEmail(s.ownerEmail, email));
+  return out.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+/**
+ * The order's website started with this email, else null: the newest one — of `preferTheme` when one of them uses it
+ * (/start of a design opens that design's website).
+ */
+export function ownedSite(sites: readonly SiteRecord[], email: string, preferTheme: string | null = null): SiteRecord | null {
+  const owned = ownedSites(sites, email);
+  return (preferTheme ? owned.find((s) => s.theme === preferTheme) : undefined) ?? owned[0] ?? null;
 }
 
 /** The couple's names as the panel shows them (for the "On this device" list on /my). */
@@ -120,6 +132,11 @@ function fieldErrors(raw: Record<string, unknown>): Partial<Record<'orderNumber'
   return Object.keys(fields).length ? fields : null;
 }
 
+/** The start link of a private theme (G151): the order number in it is what opens the design on /start. */
+export function privateStartPath(themeId: string, orderNumber: string): string {
+  return `/start?theme=${encodeURIComponent(themeId)}&order=${encodeURIComponent(orderNumber)}`;
+}
+
 export async function continueWithOrder(ctx: ContinueContext, raw: Record<string, unknown>): Promise<ContinueResult> {
   const limiter = ctx.limiter ?? getClaimRateLimiter();
   const limits = ctx.limits ?? DEFAULT_CONTINUE_LIMITS;
@@ -137,8 +154,18 @@ export async function continueWithOrder(ctx: ContinueContext, raw: Record<string
   if (!perOrder.allowed) return continueError(429, 'rate_limited', {}, retryAfter(perOrder.retryAfterMs));
 
   const sites = await ctx.adapter.findSitesByOrderRef(orderNumber);
-  if (!sites.length) return { status: 200, body: { ok: true, next: 'start' } };
-  const site = ownedSite(sites, email);
+  if (!sites.length) {
+    const custom = await privateThemeForOrder(orderNumber);
+    return { status: 200, body: { ok: true, next: 'start', ...(custom ? { startPath: privateStartPath(custom.id, orderNumber) } : {}) } };
+  }
+  const owned = ownedSites(sites, email);
+  const wanted = typeof raw.slug === 'string' && raw.slug ? raw.slug : null;
+  if (!owned.length) return continueError(403, 'no_match');
+  if (owned.length > 1 && !wanted) {
+    // G152: names and addresses only of the websites this email started (never another buyer's).
+    return { status: 200, body: { ok: true, next: 'choose', sites: owned.map((s) => ({ slug: s.slug, names: siteNames(s) })) } };
+  }
+  const site = wanted ? owned.find((s) => s.slug === wanted) : owned[0];
   if (!site) return continueError(403, 'no_match');
   const now = new Date((ctx.now ?? Date.now)());
   const { key } = await mintDeviceKey(ctx.adapter, site, { label: deviceLabel(ctx.userAgent), via: 'continue', now });
@@ -163,8 +190,9 @@ export async function emailSignInLink(ctx: ContinueContext, raw: Record<string, 
   const perOrder = await limiter.hit(orderLimitKey('my:signin', orderNumber), limits.signInLinksPerOrder);
   if (!perOrder.allowed) return continueError(429, 'rate_limited', {}, retryAfter(perOrder.retryAfterMs));
 
-  const site = ownedSite(await ctx.adapter.findSitesByOrderRef(orderNumber), email);
-  if (site?.ownerEmail) {
+  // G152: one email per website of the order started with this address (a multi-item order can have several).
+  for (const site of ownedSites(await ctx.adapter.findSitesByOrderRef(orderNumber), email)) {
+    if (!site.ownerEmail) continue;
     const now = new Date((ctx.now ?? Date.now)());
     const { key } = await mintDeviceKey(ctx.adapter, site, { label: '', via: 'email', now });
     const origin = ctx.origin.replace(/\/+$/, '');

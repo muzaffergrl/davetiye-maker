@@ -38,6 +38,7 @@ export default async function AdminSitePage({ params }: { params: Promise<{ id: 
         content={detail.content}
         rsvp={detail.rsvp}
         previewPath={detail.previewPath}
+        devices={detail.devices}
         origin={publicOrigin(await headers())}
       />
     </AdminShell>

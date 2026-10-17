@@ -91,6 +91,8 @@ export interface CreateSiteInput {
   claimTokenHash?: string | null;
   /** The order check the claim recorded (lib/claim/verify.ts), written with the site. */
   orderCheck?: SiteRecord['orderCheck'];
+  /** G152: design unit of a multi-item order (lib/claim/claim.ts); 1 when absent. */
+  orderSlot?: number;
 }
 
 export interface CreatedSite {
@@ -119,6 +121,7 @@ export async function createSiteWithKeys(adapter: DataAdapter, input: CreateSite
     ownerEmail: input.ownerEmail ?? null,
     claimTokenHash: input.claimTokenHash ?? null,
     ...(input.orderCheck ? { orderCheck: input.orderCheck } : {}),
+    ...(input.orderSlot && input.orderSlot > 1 ? { orderSlot: input.orderSlot } : {}),
   });
   return { site, editKey: keys.editKey, previewKey: keys.previewKey };
 }

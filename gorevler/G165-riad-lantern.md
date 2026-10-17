@@ -82,3 +82,7 @@ START HERE.
 ## Günlük
 - 2026-10-17 açıldı ve alındı: claude-G165 (koordinatör isteği)
 - 2026-10-17 bitti, incelemeye gönderildi
+- 2026-10-17 koordinatör isteğiyle `origin/claude/zealous-fermi-hy1o40` (25 Orient Express, 26 Kintsugi) birleştirildi; çakışmalar
+  eklemeli çözüldü (config/designs/ses/baskı/katalog listeleri, coming testleri, g138 THEMES.length = 25, theme-check aynı düzeltme,
+  `ek_ayirt` onların sürümü). Sonrası: tsc ✓, `I18N_STRICT=1 npm test` 1449/1451 (0 hata, 2 atlanan; g149 baskı free-area 25 tasarım ✓),
+  build ✓ (trace-check 26 tema), theme-check `--stress` 112/0/1, `katalog.py kontrol` ✓ (3 ek tasarım)
