@@ -28,7 +28,11 @@ assertLaunchReady(MARKETING);
 // the heavy headlines of the comps, Montserrat 300 for the wide light labels and intros, DM Sans (variable weight)
 // for body and interface text. Montserrat is not preloaded: it only sets labels and intros. (G066 measurement: not
 // preloading DM Sans did not change Lighthouse's LCP, so it stays preloaded to keep the swap short.)
-const display = Archivo({ subsets: ['latin'], weight: ['800'], display: 'swap', variable: '--font-display' });
+// G134 (from the local G089 branch, claude/g089-react-bits): Archivo is `optional`, not `swap`. Its fallback is
+// narrower, so a late swap re-wrapped H1s (a design name going from two lines to three) and pushed the page down
+// (CLS 0.048 on /designs). `optional` never swaps late: the preloaded file is used when it arrives within ~100 ms of the
+// first paint (almost always, and always once cached); otherwise that one view keeps the fallback.
+const display = Archivo({ subsets: ['latin'], weight: ['800'], display: 'optional', variable: '--font-display' });
 const wide = Montserrat({ subsets: ['latin'], weight: ['300'], display: 'swap', variable: '--font-wide', preload: false });
 const body = DM_Sans({ subsets: ['latin'], display: 'swap', variable: '--font-body' });
 
