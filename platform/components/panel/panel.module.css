@@ -3729,6 +3729,19 @@
   box-shadow: var(--e-1);
 }
 
+/* G146: "Continue with your order number" / "Paste your edit link" on the "edit link not valid" page. */
+.noticeActions {
+  display: grid;
+  gap: var(--s-2);
+  margin: var(--s-4) 0 var(--s-3);
+}
+
+.noticeActions .btn {
+  box-sizing: border-box;
+  width: 100%;
+  text-decoration: none;
+}
+
 .noticeCard h2 {
   margin: 0 0 6px;
   color: var(--c-heading);

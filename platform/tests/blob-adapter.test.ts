@@ -463,9 +463,14 @@ test('blob: claim maps a lost order race (OrderRefTakenError) to 409 order_used'
   assert.equal(first.status, 201, JSON.stringify(first.body));
   assert.equal((await blob.findSitesByOrderRef('4055555555')).length, 1);
   // Same order via the normal path: the order index answers findSitesByOrderRef.
-  const again = await claimSite(ctx, { ...form, names: ['Other', 'Pair'] });
+  const again = await claimSite(ctx, { ...form, email: 'other@example.test', names: ['Other', 'Pair'] });
   assert.equal(again.status, 409);
   assert.equal(again.body.code, 'order_used');
+  // G146: the same email signs in to it (a device key in the site document, not a new website).
+  const mine = await claimSite(ctx, { ...form, names: ['Other', 'Pair'] });
+  assert.equal(mine.status, 200, JSON.stringify(mine.body));
+  assert.equal(mine.body.existing, true);
+  assert.ok(fake.paths().some((p) => /^docs\/[0-9a-f-]+\/devices\.json$/.test(p)), 'device key stored as a site document');
   // Another instance whose check ran before the first site existed: createSite itself refuses.
   const blind = new Proxy(blob, {
     get(target, key) {
@@ -474,7 +479,7 @@ test('blob: claim maps a lost order race (OrderRefTakenError) to 409 order_used'
       return typeof value === 'function' ? value.bind(target) : value;
     },
   }) as DataAdapter;
-  const raced = await claimSite({ ...ctx, adapter: blind, ip: '203.0.113.10' }, { ...form, names: ['Third', 'Pair'] });
+  const raced = await claimSite({ ...ctx, adapter: blind, ip: '203.0.113.10' }, { ...form, email: 'third@example.test', names: ['Third', 'Pair'] });
   assert.equal(raced.status, 409);
   assert.equal(raced.body.code, 'order_used');
   assert.equal(await blob.getSiteBySlug('third-and-pair'), null, 'its slug was released');

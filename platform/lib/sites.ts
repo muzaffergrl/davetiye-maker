@@ -5,6 +5,7 @@
 import type { ContentRecord } from './content/types.ts';
 import { validateContent, type ValidationIssue } from './content/validate.ts';
 import { NotFoundError, StaleSiteError, type DataAdapter, type PublishOptions, type SitePatch, type SiteRecord } from './data/types.ts';
+import { findDeviceKey, revokeDeviceKeys } from './device-keys.ts';
 import { generateKey, hashKey, newSiteKeys, verifyKey, verifyPanelPreviewToken } from './keys.ts';
 import {
   appendLog,
@@ -125,15 +126,37 @@ export async function createSiteWithKeys(adapter: DataAdapter, input: CreateSite
 /**
  * New edit + preview keys for an existing site (lost edit link, or a /start retry whose answer
  * never arrived). The old edit and preview links stop working. Only the hashes are stored.
+ * G146: every device key (lib/device-keys.ts) stops working too — they belong to the old edit key's generation, and
+ * their document is deleted.
  */
 export async function reissueKeys(adapter: DataAdapter, siteId: string): Promise<CreatedSite> {
   const keys = newSiteKeys();
   const site = await adapter.updateKeys(siteId, { editKeyHash: keys.editKeyHash, previewKeyHash: keys.previewKeyHash });
+  await revokeDeviceKeys(adapter, siteId);
   return { site, editKey: keys.editKey, previewKey: keys.previewKey };
 }
 
+/**
+ * The buyer's own edit key or the shop's time-limited one (synchronous; no device keys). Every request that acts with a
+ * key goes through editAccess (lib/rsvp/couple.ts authorizeEditor), which also accepts device keys.
+ */
 export function canEdit(site: SiteRecord, editKey: unknown, now: number = Date.now()): boolean {
   return verifyKey(editKey, site.editKeyHash) || isShopEditKey(site, editKey, now);
+}
+
+/**
+ * Who is editing (G146): "owner" = the private edit link's key, "shop" = the shop's time-limited key (G145), "device" =
+ * a device key from "continue with your order number" (lib/device-keys.ts; `deviceId` names its entry). Null: no access.
+ * THE one check of an edit key: the panel page, the panel API, uploads, music, map links, Google Sheets, downloads and
+ * the RSVP list / CSV / Excel all reach it through authorizeEditor.
+ */
+export type EditAccess = { kind: 'owner' } | { kind: 'shop' } | { kind: 'device'; deviceId: string };
+
+export async function editAccess(adapter: DataAdapter, site: SiteRecord, editKey: unknown, now: number = Date.now()): Promise<EditAccess | null> {
+  if (verifyKey(editKey, site.editKeyHash)) return { kind: 'owner' };
+  if (isShopEditKey(site, editKey, now)) return { kind: 'shop' };
+  const device = await findDeviceKey(adapter, site, editKey);
+  return device ? { kind: 'device', deviceId: device.id } : null;
 }
 
 /** G145: the shop's time-limited edit key (lib/admin, "Dükkân olarak düzenle"); the buyer's own key is untouched. */

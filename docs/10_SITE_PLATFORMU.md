@@ -7,6 +7,7 @@ düzenler. Bu belge platformun tek kaynağıdır.
 1. Etsy'den bir tasarım (tema) satın alır. İndirdiği kısa PDF'te **başlat linki** var: `/start?theme=<tema>`.
 2. `/start`: Etsy sipariş numarası + e-posta → taslak site oluşur → **düzenleme linki** verilir
    (gizli anahtarlı, şifresiz). Link e-postayla gönderilir (e-posta sağlayıcısı sonra; ilk sürümde ekranda gösterilir + "kaydet" uyarısı).
+   **G146:** link şart değil — her cihazda `/my` ("Create your website") → aynı sipariş no + e-posta → editör açılır (§3a).
 3. Panel (`/edit/<slug>?k=<anahtar>`), telefonda rahat (Panel v2, G060, tasarım `docs/16_PANEL_V2.md`): ilk açılışta
    6 adımlı **kurulum sihirbazı** (isimler → tarih/saat → mekân → fotoğraflar (kırpma) → kontrol → yayınla), sonra
    **Home · Edit · Guests · Share** görünümleri: bölüm bölüm düzenleme (isimler, tarih, mekân, program, hikâye, detaylar,
@@ -27,7 +28,7 @@ düzenler. Bu belge platformun tek kaynağıdır.
      misafir sayfaları 410, RSVP kapalı, panel okunur, yanıtlar CSV olarak indirilebilir. Öneri (karar bekliyor, docs/16 §15):
      en geç ilk yayından 48 ay sonra. Arşivde verinin silinmesi henüz yok.
    - **E-posta ile giriş (magic link):** arayüz notu var, e-posta sağlayıcısı olmadığı için **kapalı** (`/signin` dürüst metin,
-     `POST /api/signin` → 503).
+     `POST /api/signin` → 503). G146'dan beri asıl giriş yolu **sipariş no + e-posta** (§3a); `/signin` oraya yönlendirir.
 4. Site: `/<slug>` = kapalı zarf açılış sayfası → `/<slug>/home` → `/story`, `/details`, `/rsvp`.
 5. Misafir RSVP gönderir → çift yanıtları panelde (Guests) görür, CSV indirir.
 6. **Dükkân tarafı (G087, K30):** `/admin` — onay bekleyen siparişler (Yapılacak), siparişi onayla, yeni düzenleme linki,
@@ -149,8 +150,48 @@ düzenler. Bu belge platformun tek kaynağıdır.
   kullanıcı onayı gerekir). Ara çözüm (G060-fix): `CLAIM_ORDER_VERIFICATION=manual` — taslak hemen açılır, ama sipariş dükkân
   tarafından Etsy'de kontrol edilip `node scripts/verify-order.ts --order <no> --reason "…"` ile onaylanana kadar yayın ve
   paylaşılan önizleme kapalı. Satış sitesinin yayın kapısı `verified.orderCheck` true olmadan `launched: true` kabul etmez.
-- **E-posta gönderimi** (düzenleme linki, RSVP bildirimi): sağlayıcı seçimi sonra.
+- **E-posta gönderimi** (düzenleme linki, RSVP bildirimi, G146 giriş linki): sağlayıcı G147'de (paralel).
 - **Gizlilik metni** (misafir verisi): yayından önce.
+
+## 3a. Erişim: her cihazdan sipariş no + e-posta (G146, K46 — 2026-10-17)
+Etsy'nin anında indirmesi her alıcıya **aynı PDF'i** verir; PDF'te alıcıya özel kod/link olamaz. Alıcının "kodu" **Etsy sipariş
+numarasıdır** (Etsy → You → Purchases and reviews; Etsy onay e-postasında "Order #…"). **Sipariş no + siteyi başlatırken verdiği
+e-posta = her cihazdan erişim.** Hesap yok, şifre yok, dükkânın işi yok. Özel düzenleme linki kolaylık olarak kalır.
+- **Satış sitesi düğmesi** "My website" → **"Create your website"** (TR "Davetiye siteni oluştur"; masaüstü, mobil menü, alt bilgi).
+  Rota yine `/my` (eski linkler/PDF'ler çalışır).
+- **`/my` = "Create your invitation website":** önce bu cihazda açılmış editörler (varsa), sonra 3 adım (Etsy'den satın al → Etsy
+  anında PDF verir → sipariş no + e-postayı buraya gir; sipariş numarasının nerede olduğu), sonra **tek form** →
+  `POST /api/my/continue`: sipariş için site var ve e-posta sahibininkiyle eşleşiyor (normalize, büyük/küçük harf duyarsız, sabit
+  zamanlı) → yeni **cihaz anahtarı** → editör açılır; site yok → `/start?theme=…` (tema yoksa "Hangi tasarımı aldınız?" seçici;
+  sipariş no + e-posta **sessionStorage** ile taşınır, URL'ye yazılmaz); diğer her durum → tek genel mesaj. Katlı ikinci yol
+  "Have your private edit link?" (yapıştır). "Email me a sign-in link" yalnız e-posta sağlayıcısı açıkken (`getEditLinkMailer().enabled`;
+  G147) görünür: eşleşirse cihaz anahtarlı link **kayıtlı sahip adresine** `kind: 'signin'` ile gider; cevap her durumda aynı.
+- **Cihaz anahtarı** (`lib/device-keys.ts`): `dv-` + 32 rastgele bayt; yalnız SHA-256 saklanır, oluşturma zamanı ve kısa etiket
+  ("iPhone · Safari"). Site kaydında **değil**, site belgesinde (`docs/<site>/devices.json`, `readSiteDoc/updateSiteDoc`; blob'da
+  ETag koşullu yazma) — yeni cihazda giriş `updatedAt`'i oynatmaz, açık paneller çakışma görmez. En çok 10; en eskisi düşer.
+  Her anahtar düzenleme anahtarının **kuşağına** bağlı: anahtar yeniden üretilince (admin "Yeni link", `scripts/reissue-edit-key.ts`,
+  `/start` yeniden deneme — hepsi `reissueKeys`) tüm cihaz anahtarları anında ölür ve belge silinir. Dükkânın 72 saatlik kendi
+  linki (G145) alıcının anahtarını değiştirmediği için cihazları kapatmaz.
+- **Tek kontrol noktası:** `lib/sites.ts editAccess` (owner · shop · device) ← `lib/rsvp/couple.ts editorAccess/authorizeEditor`:
+  panel sayfası, panel API'si, foto/müzik yükleme, harita linki, Google Sheets, PDF indirme, RSVP listesi/işlemleri/CSV/Excel, cihazlar.
+  Önizleme: panel kısa ömürlü önizleme jetonunu `previewKeyHash`'ten alır (cihaz oturumunda da çalışır); paylaşılan önizleme linki
+  (düzenleme anahtarından HMAC) değişmedi.
+- **`/start` + kullanılmış sipariş:** aynı e-posta → `order_used` yerine cihaz anahtarıyla giriş, editörde "This order already has a
+  website — we opened it for you" notu (200 `existing: true`); başka e-posta → 409, mesaj `/my`'ı gösterir. Yeniden deneme (claim
+  token) davranışı aynen.
+- **Panel → Share → "Use on another device":** "<origin>/my adresini açın, sipariş no + e-posta girin" + `<origin>/my` QR'ı
+  (algoritmik, sır yok) + giriş yapılmış cihazlar listesi ("This device") + **Sign out other devices** (kullanılan cihaz dışındaki tüm
+  cihaz anahtarları silinir; özel düzenleme linki değişmez; dükkân linki bunu yapamaz). Geçersiz link sayfası ve panelin "link artık
+  çalışmıyor" ekranı **"Continue with your order number"** → `/my` düğmesi gösterir.
+- **Güvenlik:** `/api/my/continue` IP başına 10/15 dk, sipariş başına 6/saat (sipariş sayacı `/start` girişiyle ortak; sayaç adında
+  sipariş numarasının hash'i); `/api/my/signin-link` IP başına 5/saat, sipariş başına 3/saat. JSON-only, 1 KB sınırı, honeypot,
+  `no-store` + `no-referrer`; `/my` sayfası `/edit` ile aynı güvenli başlıkları alır (frame-ancestors 'none'). Anahtar, e-posta ve tam
+  sipariş numarası loglanmaz.
+- Bilinen sınır: Etsy doğrulaması kapalıyken (biçim kontrolü) sipariş no + e-postayı bilen herkes girer — K46 kararının bilinçli
+  bedeli; G147'nin Etsy doğrulayıcısı açıldığında `/start` önce siparişi doğrular. Gerçek e-posta gönderimi G147'de.
+- **Destek notu:** siparişi başkası kendi e-postasıyla kapmışsa (doğrulama kapalıyken) dükkân **önce admin'de e-postayı gerçek
+  alıcınınkiyle düzeltir, sonra "Yeni link" (reissue)** yapar: reissue cihaz anahtarlarını düşürür, düzeltilmiş e-posta da yeni
+  girişi gerçek alıcıya bağlar. (E-posta düzeltmesi tek başına cihazları kapatmaz.)
 
 ## 4. Görevler
 | ID | İş | Bağımlı |

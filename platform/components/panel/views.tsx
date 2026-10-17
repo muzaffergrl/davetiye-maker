@@ -17,6 +17,7 @@ import {
   LockKeyhole,
   MessageCircle,
   MessageCircleQuestionMark,
+  MonitorSmartphone,
   Pencil,
   QrCode as QrIcon,
   Send,
@@ -49,6 +50,7 @@ import { PAGE_TITLES, type PageId, type Readiness } from './pages.ts';
 import type { AccessOutcome } from './usePanel.ts';
 import { ShareMessage, ShareQr, type ShareFacts } from './ShareKit.tsx';
 import { DownloadsCard } from './Downloads.tsx';
+import { DevicesCard } from './DevicesCard.tsx';
 import { GuestPasswordCard } from './GuestPassword.tsx';
 import { Sheet } from './Sheet.tsx';
 import { zoneCity } from './sections.tsx';
@@ -482,6 +484,9 @@ export function ShareView({
   slug,
   editKey,
   hideEditLink = false,
+  deviceSession = false,
+  origin = '',
+  onNotice = () => undefined,
   meta,
   orderRef,
   online,
@@ -501,6 +506,12 @@ export function ShareView({
   editKey: string;
   /** G145: the shop's own link is open — never offer it as "your private edit link". */
   hideEditLink?: boolean;
+  /** G146: opened with a device key (order number + email on /my), not the private edit link. */
+  deviceSession?: boolean;
+  /** G146: the platform's public origin (the /my address and its QR code in "Use on another device"). */
+  origin?: string;
+  /** G146: a short confirmation (snackbar). */
+  onNotice?: (text: string) => void;
   meta: PanelMeta;
   orderRef: string | null;
   online: boolean;
@@ -597,10 +608,22 @@ export function ShareView({
           <Button variant="primary" block icon={Copy} disabled={!editUrl} onClick={() => onCopy(editUrl, t('Edit link copied'))} data-copy-edit-link>
             {t('Copy edit link')}
           </Button>
+          {deviceSession ? (
+            <p className={styles.hint} data-device-session="">
+              {t('This device opened your editor with your order number and email, so this link is this device’s sign-in. It stops working if you sign out other devices from another device.')}
+            </p>
+          ) : null}
           <p className={styles.hint}>{t('Tip: add this page to your Home Screen to find your editor quickly.')}</p>
           {orderRef ? <p className={styles.hint}>{t('Your Etsy order number: {order}', { order: orderRef })}</p> : null}
         </div>
       </Disclosure>
+      )}
+
+      {/* G146: continue on a phone or another computer with the order number + email (not for the shop's own link). */}
+      {hideEditLink ? null : (
+        <Disclosure id="devices" title={t('Use on another device')} icon={MonitorSmartphone}>
+          <DevicesCard slug={slug} editKey={editKey} origin={origin} orderRef={orderRef} online={online} onDone={onNotice} />
+        </Disclosure>
       )}
 
       {live && !archived ? (
@@ -652,15 +675,14 @@ export function HelpSheet({ meta, locale, onClose, topic }: { meta: PanelMeta; l
         </section>
         <section>
           <h3 className={styles.subTitle}>{t('Can my partner edit too?')}</h3>
-          <p>{t('Yes: share your edit link with your partner (Share → Your private edit link → Copy edit link). Anyone with that link can edit, so keep it private.')}</p>
+          <p>
+            {t('Yes: share your edit link with your partner (Share → Your private edit link → Copy edit link), or give them your Etsy order number and email to use on /my. Anyone with them can edit, so keep them private.')}
+          </p>
         </section>
         <section>
           <h3 className={styles.subTitle}>{t('I lost my edit link')}</h3>
           <p>
-            {t(
-              'While this page is open, copy it again under Share → Your private edit link. If it is lost, message {shop} on Etsy with your order number: we send you a new link and the old one stops working.',
-              { shop: PANEL_BRAND.shopName },
-            )}
+            {t('No problem: on any phone or computer, open /my on this website and enter your Etsy order number and the email you used when you started. Your editor opens — no account or password. While this page is open, you can also copy the link again under Share → Your private edit link.')}
           </p>
         </section>
         <section>

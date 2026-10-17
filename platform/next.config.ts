@@ -40,6 +40,8 @@ export const THEME_ROUTES = [
   '/api/rsvp/\\[slug\\]/export',
   '/api/rsvp/\\[slug\\]/responses',
   '/start',
+  // G146: /my lists the startable designs (for a new order without ?theme=).
+  '/my',
   '/start/demo/\\[theme\\]',
   '/start/demo/\\[theme\\]/\\[page\\]',
   '/start/demo/\\[theme\\]/event\\.ics',
@@ -86,6 +88,8 @@ const config: NextConfig = {
     return [
       { source: '/edit/:path*', headers: SECRET_PAGE_HEADERS },
       { source: '/start', headers: SECRET_PAGE_HEADERS },
+      // G146: /my opens editors (device keys, saved edit links): never framed, never sends its URL on.
+      { source: '/my', headers: SECRET_PAGE_HEADERS },
       // G087: the shop admin shows buyers' emails and, once, a fresh edit link.
       { source: '/admin', headers: SECRET_PAGE_HEADERS },
       { source: '/admin/:path*', headers: SECRET_PAGE_HEADERS },

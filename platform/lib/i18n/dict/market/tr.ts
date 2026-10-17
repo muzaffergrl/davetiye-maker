@@ -830,6 +830,9 @@ const dict: Dict = {
   'The evening as a timeline beside a wide venue photo, with an optional map and directions, calendar links, dress code and questions and answers.': 'Geniş bir mekân fotoğrafının yanında zaman çizelgesi olarak akşam; isteğe bağlı harita ve yol tarifi, takvim linkleri, kıyafet kuralı ve soru-cevaplar.',
   'Your guests tap the envelope. The gold wax seal lifts away, the black flap opens and a separate charcoal card with your photo rises from the pocket. The card then opens into your home page.': 'Davetlileriniz zarfa dokunur. Altın mühür mumu kalkar, siyah kapak açılır ve fotoğrafınızın olduğu ayrı bir antrasit kart cepten yükselir. Kart ardından ana sayfanıza açılır.',
   'Your names in capitals over Lake Como at dusk, then the invitation beside your portrait, a countdown and calendar links.': 'Alacakaranlıkta Como Gölü üzerinde büyük harflerle isimleriniz; ardından portrenizin yanında davetiye, geri sayım ve takvim linkleri.',
+  // G146: "Create your website" + continue on any device with the Etsy order number + email
+  'Create your website': 'Davetiye siteni oluştur',
+  'Create your website or continue editing': 'Davetiye siteni oluştur ya da düzenlemeye devam et',
 };
 
 export default dict;

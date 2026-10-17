@@ -6,7 +6,8 @@
 //
 // Uses the storage DATA_ADAPTER selects (local by default; blob needs BLOB_READ_WRITE_TOKEN).
 // New edit + preview keys are created and only their hashes stored: the OLD edit link and preview
-// link stop working at once. The new link is printed ONCE to stdout and never written anywhere;
+// link stop working at once, and so does every device signed in with the order number + email (G146 device keys).
+// The new link is printed ONCE to stdout and never written anywhere;
 // send it to the buyer through the Etsy conversation. The site's content, photos, replies and
 // publish state are not touched (the owner email kept with the site is not changed either).
 //

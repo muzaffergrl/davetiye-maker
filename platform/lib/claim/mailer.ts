@@ -17,6 +17,11 @@ export interface EditLinkMessage {
   siteUrl: string;
   themeName: string;
   orderNumber: string;
+  /**
+   * G146: "created" (default) = the link right after /start; "signin" = a sign-in link asked for on /my ("Email me a
+   * sign-in link"): `editUrl` then opens the editor with a new device key for that device.
+   */
+  kind?: 'created' | 'signin';
 }
 
 export interface EditLinkMailer {
