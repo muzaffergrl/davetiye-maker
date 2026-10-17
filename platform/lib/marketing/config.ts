@@ -365,12 +365,12 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
     },
-    // Opened for sale by the user on 2026-10-17 (G142); price still to be decided ([PRICE] until then).
+    // Opened for sale by the user on 2026-10-17 (G142); same price as the other designs (K42, etsy_upload.json price_try).
     {
       id: 'crimson-rose-atelier',
       name: 'Crimson Rose Atelier',
       status: 'live',
-      price: '[PRICE]',
+      price: '1460',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-17',
