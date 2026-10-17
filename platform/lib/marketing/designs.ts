@@ -955,32 +955,32 @@ const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening' |
   },
   'orient-express-voyage': {
     style: msg('A 1930s rail journey in bottle green, brass and ivory'),
-    opening: msg('Your guests tap the ticket wallet. It opens to reveal the invitation, presented as the start of a rail journey. This preview uses interim artwork while the final design assets are being prepared.'),
+    opening: msg('Your guests tap the wallet. It opens to reveal the invitation, presented as the start of a rail journey. This preview uses interim artwork while the final design assets are being prepared.'),
     home: msg('A vintage travel invitation with the couple’s names, wedding date, destination, countdown and itinerary details.'),
   },
   'kintsugi-washi': {
     style: msg('An indigo washi invitation folded around rice paper, with sumi ink and gold leaf'),
-    opening: msg('Your guests tap the folded invitation. The washi opens around a rice-paper card, revealing the wedding details. This preview uses interim artwork while the final design assets are being prepared.'),
+    opening: msg('Your guests tap the invitation. Folded washi opens around a rice-paper card, revealing the wedding details. This preview uses interim artwork while the final design assets are being prepared.'),
     home: msg('An origami-inspired invitation with the couple’s names, wedding date, venue, countdown and celebration details.'),
   },
   'riad-lantern-nights': {
     style: msg('A Marrakech courtyard with cedar doors, teal tadelakt, brass and lantern light'),
-    opening: msg('Your guests tap the courtyard doors. They open onto a lantern-lit courtyard and reveal the invitation. This preview uses interim artwork while the final design assets are being prepared.'),
+    opening: msg('Your guests tap the doors. They open onto a lantern-lit courtyard and reveal the invitation. This preview uses interim artwork while the final design assets are being prepared.'),
     home: msg('A lantern-lit courtyard invitation with the couple’s names, wedding date, venue, countdown and celebration details.'),
   },
   'maison-patisserie': {
     style: msg('A Paris pâtisserie window in pistachio, rose, cream and soft gold'),
-    opening: msg('Your guests tap the pastry box. It opens to reveal the invitation and its display-case details. This preview uses interim artwork while the final design assets are being prepared.'),
+    opening: msg('Your guests tap the box. It opens to reveal the invitation and its display-case details. This preview uses interim artwork while the final design assets are being prepared.'),
     home: msg('A pâtisserie-inspired invitation with the couple’s names, wedding date, venue, countdown and celebration details.'),
   },
   'celestial-observatory': {
     style: msg('A brass observatory beneath a midnight sky, with star charts and moon phases'),
-    opening: msg('Your guests tap the observatory. Its dome turns beneath the star chart and reveals the invitation. This preview uses interim artwork while the final design assets are being prepared.'),
+    opening: msg('Your guests tap the dome. It turns beneath the star chart and reveals the invitation. This preview uses interim artwork while the final design assets are being prepared.'),
     home: msg('A night-sky invitation with the couple’s names, wedding date, venue, countdown and celebration details.'),
   },
   'azulejo-mosaic': {
     style: msg('A Portuguese azulejo wall with cobalt, whitewash and patterned tiles'),
-    opening: msg('Your guests tap the mosaic wall. Its patterned tiles part to reveal the invitation. This preview uses interim artwork while the final design assets are being prepared.'),
+    opening: msg('Your guests tap the wall. Its patterned tiles part to reveal the invitation. This preview uses interim artwork while the final design assets are being prepared.'),
     home: msg('A tile-inspired invitation with the couple’s names, wedding date, venue, countdown and celebration details.'),
   },
   'sky-lantern-festival': {
@@ -990,7 +990,7 @@ const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening' |
   },
   'music-box-ballerina': {
     style: msg('A rose-quartz music box with blush satin and soft gold'),
-    opening: msg('Your guests tap the music box. A brass key winds it, the lid opens and the invitation rises from the satin interior. This preview uses interim artwork while the final design assets are being prepared.'),
+    opening: msg('Your guests tap the box. A brass key winds it, the lid opens and the invitation rises from the satin interior. This preview uses interim artwork while the final design assets are being prepared.'),
     home: msg('A music-box invitation with the couple’s names, wedding date, venue, countdown and celebration details.'),
   },
 };
