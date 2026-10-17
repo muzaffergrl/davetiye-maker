@@ -134,6 +134,20 @@ def rule_errors(record: dict) -> tuple[list[str], list[str]]:
     if blocks.get("faq") and not faq:
         warnings.append("faq bloğu açık ama hiç soru yok")
 
+    # G138: konaklama adı, menü başlığı/kalemi, Details bloğu başlığı boş olamaz
+    for i, st in enumerate((record.get("travel") or {}).get("stays") or []):
+        if is_blank(st.get("name")):
+            errors.append(f"travel.stays.{i}.name: konaklama adı boş")
+    for i, c in enumerate((record.get("meal") or {}).get("courses") or []):
+        if is_blank(c.get("title")):
+            errors.append(f"meal.courses.{i}.title: menü başlığı boş")
+        for j, it in enumerate(c.get("items") or []):
+            if is_blank(it):
+                errors.append(f"meal.courses.{i}.items.{j}: menü kalemi boş")
+    for i, b in enumerate(record.get("details_blocks") or []):
+        if is_blank(b.get("title")):
+            errors.append(f"details_blocks.{i}.title: blok başlığı boş")
+
     # G051/G128 — RSVP özel soruları: kalıcı id, okunur soru, choice = en az 2 farklı seçenek, diğer türler (text, long, yesno, number) seçeneksiz.
     seen = set()
     for i, q in enumerate((record.get("rsvp") or {}).get("questions") or []):

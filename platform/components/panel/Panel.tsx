@@ -71,6 +71,7 @@ import { BLOCK_TITLES, changedCopyPages, changedPages, changedSections, COPY_TIT
 import { PhotoSlots } from './PhotosSection.tsx';
 import { PreviewPane } from './PreviewPane.tsx';
 import { AfterPublish, afterPublishSteps, LiveShare } from './Published.tsx';
+import { DetailsBlocksFields, MealFields, TravelFields } from './ExtrasFields.tsx';
 import { DateFields, DetailsFields, FaqFields, NamesFields, RsvpFields, ScheduleFields, StoryFields, VenueFields } from './sections.tsx';
 import { ThankYouFields } from './ThankYou.tsx';
 import { firstOpenStep, readSetup, RulesBox, SampleDateGate, Setup, writeSetup } from './Setup.tsx';
@@ -859,6 +860,12 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
         return <StoryFields />;
       case 'details':
         return <DetailsFields optionalBlocks={theme.optionalBlocks} />;
+      case 'blocks':
+        return <DetailsBlocksFields />;
+      case 'travel':
+        return <TravelFields showSwitch={theme.optionalBlocks.includes('travel_stay')} />;
+      case 'menu':
+        return <MealFields />;
       case 'faq':
         return <FaqFields />;
       case 'rsvp':

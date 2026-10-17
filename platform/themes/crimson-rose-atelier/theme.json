@@ -312,6 +312,69 @@
         "details"
       ]
     },
+    "travel_getting_here": {
+      "default": "Getting here",
+      "max": 30,
+      "pages": [
+        "details"
+      ]
+    },
+    "travel_airport": {
+      "default": "Airport & station",
+      "max": 30,
+      "pages": [
+        "details"
+      ]
+    },
+    "travel_parking": {
+      "default": "Parking",
+      "max": 24,
+      "pages": [
+        "details"
+      ]
+    },
+    "travel_shuttle": {
+      "default": "Shuttle",
+      "max": 24,
+      "pages": [
+        "details"
+      ]
+    },
+    "travel_taxi": {
+      "default": "Taxi & rideshare",
+      "max": 30,
+      "pages": [
+        "details"
+      ]
+    },
+    "travel_stays": {
+      "default": "Where to stay",
+      "max": 30,
+      "pages": [
+        "details"
+      ]
+    },
+    "travel_code": {
+      "default": "Booking code",
+      "max": 24,
+      "pages": [
+        "details"
+      ]
+    },
+    "travel_more": {
+      "default": "More info",
+      "max": 20,
+      "pages": [
+        "details"
+      ]
+    },
+    "travel_book": {
+      "default": "Book a room",
+      "max": 20,
+      "pages": [
+        "details"
+      ]
+    },
     "registry_title": {
       "default": "Registry",
       "max": 30,
@@ -336,6 +399,34 @@
     "faq_title": {
       "default": "Questions & Answers",
       "max": 30,
+      "pages": [
+        "details"
+      ]
+    },
+    "menu_title": {
+      "default": "The Menu",
+      "max": 30,
+      "pages": [
+        "details"
+      ]
+    },
+    "menu_diet": {
+      "default": "Dietary needs",
+      "max": 30,
+      "pages": [
+        "details"
+      ]
+    },
+    "menu_served": {
+      "default": "A meal will be served.",
+      "max": 60,
+      "pages": [
+        "details"
+      ]
+    },
+    "blocks_more": {
+      "default": "Learn more",
+      "max": 20,
       "pages": [
         "details"
       ]

@@ -1,0 +1,47 @@
+/* Platform Details blocks (G138): lib/theme/extras-block.ts — travel & stay, the menu, 0–10 free blocks. Fonts and
+ * colours come from the theme (inherit, currentColor); links use the theme's own button classes (data-pex-btn).
+ * A theme may tune it with --pex-line, --pex-paper, --pex-radius, --pex-gap, --pex-width. */
+[data-travel], [data-menu], [data-blocks] { display: grid; gap: var(--pex-gap, 22px); width: 100%; max-width: var(--pex-width, 520px); margin-inline: auto; text-align: center; min-width: 0; }
+[data-travel] *, [data-menu] *, [data-blocks] * { box-sizing: border-box; }
+[data-travel] { margin-top: 6px; }
+.pex-group { display: grid; gap: 12px; justify-items: center; min-width: 0; }
+.pex-kicker { margin: 0; font-size: .78em; letter-spacing: .16em; text-transform: uppercase; opacity: .82; overflow-wrap: anywhere; }
+.pex-text, .pex-addr, .pex-meta, .pex-row-title, .pex-title, .pex-served { margin: 0; overflow-wrap: anywhere; }
+.pex-text { white-space: pre-line; line-height: 1.55; }
+.pex-rows, .pex-cards, .pex-dishes { list-style: none; margin: 0; padding: 0; display: grid; width: 100%; min-width: 0; }
+.pex-rows { gap: 0; }
+.pex-row { display: grid; gap: 4px; justify-items: center; padding: 14px 6px; border-top: 1px solid var(--pex-line, color-mix(in srgb, currentColor 22%, transparent)); min-width: 0; }
+.pex-row:first-child { border-top: 0; padding-top: 4px; }
+.pex-row-title { font-weight: 600; }
+.pex-cards { gap: 14px; }
+.pex-card, .pex-block, .pex-menu-card {
+  display: grid; gap: 6px; justify-items: center; min-width: 0; width: 100%; padding: 20px 18px;
+  border: 1px solid var(--pex-line, color-mix(in srgb, currentColor 26%, transparent));
+  border-radius: var(--pex-radius, 12px);
+  background: var(--pex-paper, color-mix(in srgb, currentColor 4%, transparent));
+}
+.pex-title, [data-blocks] h2.pex-title { margin: 0; font-size: 1.22em; line-height: 1.25; font-weight: inherit; letter-spacing: normal; text-transform: none; }
+.pex-meta { font-size: .8em; letter-spacing: .12em; text-transform: uppercase; opacity: .78; }
+.pex-addr { font-size: .92em; opacity: .86; }
+.pex-code { margin: 4px 0 0; display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 4px 8px; padding: 6px 12px; border: 1px dashed color-mix(in srgb, currentColor 45%, transparent); border-radius: 8px; max-width: 100%; }
+.pex-code span { font-size: .74em; letter-spacing: .14em; text-transform: uppercase; opacity: .8; }
+.pex-code strong { font-weight: 600; letter-spacing: .06em; overflow-wrap: anywhere; min-width: 0; }
+.pex-link { margin-top: 8px; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+/* without the theme's button class: a plain outlined pill */
+.pex-link:not([class*=" "]) {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 18px; border-radius: 999px; color: inherit;
+  border: 1px solid color-mix(in srgb, currentColor 40%, transparent); text-decoration: none;
+}
+.pex-menu-card { gap: 18px; padding: 26px 20px; }
+.pex-course { display: grid; gap: 8px; justify-items: center; min-width: 0; width: 100%; }
+.pex-course + .pex-course::before, .pex-diet::before { content: ""; display: block; width: 44px; height: 1px; margin: 0 auto 10px; background: currentColor; opacity: .35; }
+.pex-dishes { gap: 6px; }
+.pex-dish { font-size: 1.06em; line-height: 1.4; font-style: italic; overflow-wrap: anywhere; }
+.pex-diet { margin: 0; display: grid; gap: 6px; justify-items: center; width: 100%; min-width: 0; font-size: .92em; }
+.pex-served { font-style: italic; }
+[data-blocks] { gap: 14px; }
+.pex-block { gap: 8px; }
+.pex-icon { width: 30px; height: 30px; opacity: .78; }
+@media (min-width: 700px) {
+  [data-blocks][data-count]:not([data-count="1"]) { max-width: 760px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

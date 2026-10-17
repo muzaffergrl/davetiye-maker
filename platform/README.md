@@ -66,6 +66,18 @@ panelin yayın linki ve QR'ı, sayfaların mutlak `og:image`'ı ve takvim açık
 `x-forwarded-host`'un **son** girdisi — proxy'nin yazdığı; istemci yalnız başa ekleyebilir — ya da `host`; `/<slug>/event.ics` site linki ve
 UID'i de, G055 incelemesi). Üretimde tanımlanmalı: yoksa sunucu bir kez uyarı yazar.
 
+## İçerik bölümleri (G138)
+
+Details sayfasında üç isteğe bağlı ortak blok (21 tema, `lib/theme/extras-block.ts`; G127 harita bloğu gibi motor işareti +
+`/static/extras.css`, yalnız gösterilen sayfada): **Travel & stay** (`content.travel`: airport / parking / shuttle / taxi = kısa not +
+link, `stays` 0–6 kart: ad, mesafe, adres, rezervasyon linki, kod/oda bloğu, not; bölüm `optional_blocks.travel_stay`, eski
+`urls.accommodation` düğmesi aynı bölümde), **Meal & menu** (`content.meal`: `served` true/false/null — yalnız true gösterilir; `courses`
+≤ 6 başlık × ≤ 10 kalem, diyet notu; panelde "Add a meal choice question to RSVP" kısa yolu G128 soru sistemine `Meal choice`
+seçmeli sorusu ekler, `lib/panel/meal-question.ts`) ve **Good to know** (`content.details_blocks` 0–10: başlık, metin, link + link
+metni, 10 ikondan biri). Blok sözcükleri temanın düzenlenebilir metinleri (G068, `travel_*`, `menu_*`, `blocks_more`). Teşekkür
+modunda gösterilmez; eski kayıtlar göçsüz çalışır. Panel: Details sayfasında "Good to know", "Travel & stay", "Meal & menu".
+Test: `tests/g138-extras.test.ts`.
+
 ## Klasörler
 
 ```

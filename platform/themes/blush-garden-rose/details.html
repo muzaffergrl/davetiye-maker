@@ -78,12 +78,24 @@
     </div>
 
     <!-- link blocks are shown only with their link (no dead buttons on a live site) -->
-    <div class="block" data-scene="details-block" data-optional="travel_stay" data-if="urls.accommodation !thank_you_on">
+    <div class="block" data-scene="details-block" data-if="info_blocks !thank_you_on">
+      <div data-step="body" data-a="rise">
+        <div data-blocks data-pex-btn="btn btn-ghost btn-sm"><span data-copy="blocks_more">Learn more</span></div>
+      </div>
+    </div>
+    <div class="block" data-scene="details-block" data-optional="travel_stay" data-if="travel_block !thank_you_on">
       <h2 class="script" data-step="title" data-a="write" data-copy="travel_title">Travel <span class="amp">&amp;</span> Stay</h2>
       <div data-step="body" data-a="rise">
-        <p class="note" data-copy="travel_note">Where to stay and how to get here: see the link below.</p>
+        <p data-if="urls.accommodation" class="note" data-copy="travel_note">Where to stay and how to get here: see the link below.</p>
+        <div data-travel data-pex-btn="btn btn-ghost btn-sm"><span data-copy="travel_getting_here">Getting here</span><span data-copy="travel_airport">Airport &amp; station</span><span data-copy="travel_parking">Parking</span><span data-copy="travel_shuttle">Shuttle</span><span data-copy="travel_taxi">Taxi &amp; rideshare</span><span data-copy="travel_stays">Where to stay</span><span data-copy="travel_code">Booking code</span><span data-copy="travel_more">More info</span><span data-copy="travel_book">Book a room</span></div>
       </div>
-      <p data-step="action" data-a="rise"><a class="btn btn-ghost" href="#" data-field="urls.accommodation" target="_blank" data-copy="travel_button">Where to stay</a></p>
+      <p data-if="urls.accommodation" data-step="action" data-a="rise"><a class="btn btn-ghost" href="#" data-field="urls.accommodation" target="_blank" data-copy="travel_button">Where to stay</a></p>
+    </div>
+    <div class="block" data-scene="details-block" data-if="menu_block !thank_you_on">
+      <h2 class="script" data-step="title" data-a="write" data-copy="menu_title">The Menu</h2>
+      <div data-step="body" data-a="rise">
+        <div data-menu data-pex-btn="btn btn-ghost btn-sm"><span data-copy="menu_diet">Dietary needs</span><span data-copy="menu_served">A meal will be served.</span></div>
+      </div>
     </div>
 
     <div class="block" data-scene="details-block" data-optional="registry" data-if="urls.registry">

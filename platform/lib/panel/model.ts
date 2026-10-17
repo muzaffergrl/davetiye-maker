@@ -282,7 +282,7 @@ export function withPartnerName(
 // Sections and issues
 
 /** Panel v2 sections (G060, docs/16 §4.3); each opens as its own page (#edit/<id>). */
-export const SECTION_IDS = ['names', 'date', 'venue', 'schedule', 'thankyou', 'story', 'details', 'faq', 'rsvp', 'photos'] as const;
+export const SECTION_IDS = ['names', 'date', 'venue', 'schedule', 'thankyou', 'story', 'details', 'blocks', 'travel', 'menu', 'faq', 'rsvp', 'photos'] as const;
 export type SectionId = (typeof SECTION_IDS)[number];
 
 export const SECTION_TITLES: Record<SectionId, string> = {
@@ -294,6 +294,10 @@ export const SECTION_TITLES: Record<SectionId, string> = {
   thankyou: 'After the wedding',
   story: 'Our Story',
   details: 'Details',
+  // G138: 0–10 free blocks, travel & stay, meal + menu
+  blocks: 'Good to know',
+  travel: 'Travel & stay',
+  menu: 'Meal & menu',
   faq: 'Questions & answers',
   rsvp: 'RSVP settings',
   photos: 'Photos',
@@ -301,7 +305,7 @@ export const SECTION_TITLES: Record<SectionId, string> = {
 
 export const SECTION_GROUPS: Array<{ title: string; ids: SectionId[] }> = [
   { title: 'Wedding basics', ids: ['names', 'date', 'venue'] },
-  { title: 'Your pages', ids: ['schedule', 'story', 'details', 'faq', 'rsvp', 'thankyou'] },
+  { title: 'Your pages', ids: ['schedule', 'story', 'details', 'blocks', 'travel', 'menu', 'faq', 'rsvp', 'thankyou'] },
   { title: 'Photos', ids: ['photos'] },
 ];
 
@@ -311,7 +315,7 @@ const BLOCK_SECTION: Record<string, SectionId> = {
   countdown: 'date',
   dress_code: 'details',
   registry: 'details',
-  travel_stay: 'details',
+  travel_stay: 'travel',
   guest_policy: 'details',
   faq: 'faq',
 };
@@ -341,7 +345,13 @@ export function sectionForPath(path: string): SectionId | null {
     case 'dress_code':
       return 'details';
     case 'urls':
-      return second === 'map' ? 'venue' : 'details';
+      return second === 'map' ? 'venue' : second === 'accommodation' ? 'travel' : 'details';
+    case 'travel':
+      return 'travel';
+    case 'meal':
+      return 'menu';
+    case 'details_blocks':
+      return 'blocks';
     case 'faq':
       return 'faq';
     case 'rsvp':
@@ -367,6 +377,10 @@ function valueAt(content: unknown, path: string): unknown {
   return cur;
 }
 
+const STAY_FIELD: Record<string, string> = { name: 'name', address: 'address', link: 'link', code: 'booking code', note: 'note', distance: 'distance' };
+const TRANSPORT_FIELD: Record<string, string> = { airport: 'Airport & station', parking: 'Parking', shuttle: 'Shuttle', taxi: 'Taxi & rideshare' };
+const BLOCK_FIELD: Record<string, string> = { title: 'title', text: 'text', link: 'link', link_label: 'link text' };
+
 /**
  * The field's name as the panel shows it, for messages that are also listed away from the field ("Before you
  * publish"): two over-long names must not read as the same "Must be at most 40 characters.".
@@ -385,6 +399,12 @@ export function fieldLabel(path: string): string {
   if ((m = /^faq\.(\d+)\.(q|a)$/.exec(path))) return `Questions & answers, question ${n(m[1])}: ${m[2] === 'q' ? 'question' : 'answer'}`;
   if ((m = /^rsvp\.questions\.(\d+)\.label$/.exec(path))) return `RSVP, question ${n(m[1])}`;
   if ((m = /^rsvp\.questions\.(\d+)\.options\.(\d+)$/.exec(path))) return `RSVP, question ${n(m[1])}: choice ${n(m[2])}`;
+  if ((m = /^travel\.stays\.(\d+)\.(\w+)$/.exec(path))) return `Place to stay ${n(m[1])}: ${STAY_FIELD[m[2]] ?? 'text'}`;
+  if ((m = /^travel\.(airport|parking|shuttle|taxi)\.(text|link)$/.exec(path))) return `${TRANSPORT_FIELD[m[1]]}: ${m[2] === 'link' ? 'link' : 'note'}`;
+  if ((m = /^meal\.courses\.(\d+)\.title$/.exec(path))) return `Menu, heading ${n(m[1])}`;
+  if ((m = /^meal\.courses\.(\d+)\.items\.(\d+)$/.exec(path))) return `Menu, heading ${n(m[1])}: dish ${n(m[2])}`;
+  if (path === 'meal.note') return 'Dietary note';
+  if ((m = /^details_blocks\.(\d+)\.(\w+)$/.exec(path))) return `Good to know, block ${n(m[1])}: ${BLOCK_FIELD[m[2]] ?? 'text'}`;
   if (path === 'thank_you.title') return 'Thank-you title';
   if (path === 'thank_you.message') return 'Thank-you message';
   return 'This text';
