@@ -126,7 +126,7 @@ test('tools/validate_content.py agrees on every limit case', (t) => {
   for (const [name, record, ok] of cases()) assert.equal(pythonOk(record, dir, name), ok, `${name}: Python must give ${ok}`);
 });
 
-test('all 20 collection demo records, the theme demo copies and the bundled /start demos stay valid (TS and Python)', (t) => {
+test('all collection demo records, the theme demo copies and the bundled /start demos stay valid (TS and Python)', (t) => {
   const files = readdirSync(path.join(REPO_ROOT, 'collections'))
     .map((d) => path.join(REPO_ROOT, 'collections', d, 'content.demo.json'))
     .filter((f) => {
@@ -137,7 +137,7 @@ test('all 20 collection demo records, the theme demo copies and the bundled /sta
         return false;
       }
     });
-  assert.equal(files.length, 20);
+  assert.equal(files.length, readdirSync(path.join(REPO_ROOT, 'collections')).filter((d) => /^\d+_/.test(d)).length, 'each numbered collection has demo content');
   const themeDemos = readdirSync(path.join(PLATFORM_ROOT, 'themes'))
     .map((d) => path.join(PLATFORM_ROOT, 'themes', d, 'content.demo.json'))
     .filter((f) => spawnSync('test', ['-f', f]).status === 0);
@@ -194,3 +194,4 @@ test('/start: names up to the schema limit (characters, not UTF-16 units); the d
   const r = validateContent(draft, { platform: true });
   assert.ok(r.ok, JSON.stringify(r.errors));
 });
+

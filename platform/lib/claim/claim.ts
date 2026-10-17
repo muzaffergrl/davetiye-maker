@@ -153,6 +153,8 @@ export function draftFromDemo(demo: ContentRecord, names: readonly string[], tim
   const content = structuredClone(demo);
   content.record_kind = 'customer';
   if (timeZone) content.timezone = timeZone;
+  // Demo artwork may show fictional sample photos. A buyer always starts with empty photo slots.
+  content.media = { hero_portrait: null, memory_photos: [], couple_clip: null, venue_image: null };
   const given = names.map(cleanName);
   if (!given.some(Boolean)) return content;
   const spaced = (content.initials ?? '').includes(' & ');
@@ -361,3 +363,4 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
     return answer(slug, created.editKey, orderPending(created.site));
   });
 }
+

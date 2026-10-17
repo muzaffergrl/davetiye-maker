@@ -135,7 +135,8 @@ test('schema: maps validates (ranges, unknown fields, reception needs a name)', 
 
 test('every theme details page carries the shared block marker', () => {
   const ids = readdirSync(THEMES).filter((d) => !d.startsWith('_') && existsSync(path.join(THEMES, d, 'details.html')));
-  assert.equal(ids.length, 20);
+  const realThemes = readdirSync(THEMES).filter((d) => !d.startsWith('_') && existsSync(path.join(THEMES, d, 'theme.json')));
+  assert.deepEqual(new Set(ids), new Set(realThemes), 'every real theme has a Details page');
   for (const id of ids) {
     const html = readFileSync(path.join(THEMES, id, 'details.html'), 'utf8');
     assert.match(html, /<div data-map data-map-btn="btn btn-ghost" data-map-btn-sm="btn btn-ghost btn-sm"><\/div>/, id);
