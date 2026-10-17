@@ -183,6 +183,86 @@
         }
       }
     },
+    "travel": {
+      "type": "object", "additionalProperties": false,
+      "description": "İsteğe bağlı (G138): Ulaşım & Konaklama — Details sayfasındaki Travel & Stay bölümünün içeriği (bölüm optional_blocks.travel_stay ile açılır/kapanır). airport / parking / shuttle / taxi: kısa metin + isteğe bağlı link (ikisi de boşsa gösterilmez). stays: 0–6 otel/konaklama kartı (name zorunlu; address, link, code = indirim kodu ya da oda bloğu adı, note, distance = ör. '10 min drive'). Boşsa sitede iz yok; teşekkür modunda gösterilmez. Eski urls.accommodation linki aynı bölümün düğmesi olarak kalır.",
+      "properties": {
+        "airport": {
+          "type": ["object", "null"], "additionalProperties": false,
+          "properties": {
+            "text": { "type": ["string", "null"], "maxLength": 300 },
+            "link": { "type": ["string", "null"], "format": "uri", "maxLength": 500 }
+          }
+        },
+        "parking": {
+          "type": ["object", "null"], "additionalProperties": false,
+          "properties": {
+            "text": { "type": ["string", "null"], "maxLength": 300 },
+            "link": { "type": ["string", "null"], "format": "uri", "maxLength": 500 }
+          }
+        },
+        "shuttle": {
+          "type": ["object", "null"], "additionalProperties": false,
+          "properties": {
+            "text": { "type": ["string", "null"], "maxLength": 300 },
+            "link": { "type": ["string", "null"], "format": "uri", "maxLength": 500 }
+          }
+        },
+        "taxi": {
+          "type": ["object", "null"], "additionalProperties": false,
+          "properties": {
+            "text": { "type": ["string", "null"], "maxLength": 300 },
+            "link": { "type": ["string", "null"], "format": "uri", "maxLength": 500 }
+          }
+        },
+        "stays": {
+          "type": "array", "maxItems": 6,
+          "items": {
+            "type": "object", "required": ["name"], "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string", "maxLength": 80 },
+              "address": { "type": ["string", "null"], "maxLength": 160 },
+              "link": { "type": ["string", "null"], "format": "uri", "maxLength": 500 },
+              "code": { "type": ["string", "null"], "maxLength": 60 },
+              "note": { "type": ["string", "null"], "maxLength": 300 },
+              "distance": { "type": ["string", "null"], "maxLength": 40 }
+            }
+          }
+        }
+      }
+    },
+    "meal": {
+      "type": "object", "additionalProperties": false,
+      "description": "İsteğe bağlı (G138): yemek. served: true = yemek var (Details'te menü kartı ya da menü yoksa tek satır), false = yok, null/yok = gizli (sitede iz yok). courses: menü başlıkları (ör. Starter / Main / Dessert, en çok 6) ve altında kalemler (en çok 10). note: diyet notu (ör. 'Vegetarian and gluten-free options on request'). Teşekkür modunda gösterilmez.",
+      "properties": {
+        "served": { "type": ["boolean", "null"] },
+        "courses": {
+          "type": "array", "maxItems": 6,
+          "items": {
+            "type": "object", "required": ["title", "items"], "additionalProperties": false,
+            "properties": {
+              "title": { "type": "string", "maxLength": 40 },
+              "items": { "type": "array", "maxItems": 10, "items": { "type": "string", "maxLength": 120 } }
+            }
+          }
+        },
+        "note": { "type": ["string", "null"], "maxLength": 300 }
+      }
+    },
+    "details_blocks": {
+      "type": "array", "maxItems": 10,
+      "description": "İsteğe bağlı (G138): The Day / Details sayfasında 0–10 serbest içerik bloğu (ör. dress code, çocuk politikası, hediye, park, hava durumu). title zorunlu; text, link (+ link_label, boşsa 'Learn more') ve icon isteğe bağlı. Boş liste = sitede iz yok; teşekkür modunda gösterilmez.",
+      "items": {
+        "type": "object", "required": ["title"], "additionalProperties": false,
+        "properties": {
+          "title": { "type": "string", "maxLength": 60 },
+          "text": { "type": ["string", "null"], "maxLength": 600 },
+          "link": { "type": ["string", "null"], "format": "uri", "maxLength": 500 },
+          "link_label": { "type": ["string", "null"], "maxLength": 30 },
+          "icon": { "type": ["string", "null"], "enum": [null, "info", "dress", "kids", "gift", "car", "weather", "camera", "music", "glass", "heart"] }
+        }
+      }
+    },
     "audio": {
       "type": "object", "additionalProperties": false,
       "description": "İsteğe bağlı (G126): ses. music: varsayılan parça kimliği (platform/lib/audio/catalog.ts MUSIC_TRACKS), 'custom' = çiftin yüklediği music_file, 'off' = müzik yok; yoksa tasarımın varsayılan parçası. Müzik yalnız Our Story sayfasında çalar. music_name = yüklenen dosyanın adı (panelde gösterilir). effects: zarf açılışı, sayfa geçişi, RSVP gönderimi ses efektleri (yoksa açık).",

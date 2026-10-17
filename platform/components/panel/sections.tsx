@@ -428,7 +428,7 @@ export function DateFields({ theme, setup = false }: { theme: PanelTheme; setup?
     </>
   );
 }
-function BlockSwitch({ block, label, hint }: { block: OptionalBlockKey; label?: string; hint?: string }) {
+export function BlockSwitch({ block, label, hint }: { block: OptionalBlockKey; label?: string; hint?: string }) {
   const { content, edit } = usePanelContext();
   return (
     <Switch
@@ -640,7 +640,7 @@ export function StoryFields() {
 export function DetailsFields({ optionalBlocks }: { optionalBlocks: readonly OptionalBlockKey[] }) {
   const { content, edit, issuesAt } = usePanelContext();
   const urls = content.urls ?? {};
-  const setUrl = (key: 'registry' | 'accommodation') => (v: string | null) =>
+  const setUrl = (key: 'registry') => (v: string | null) =>
     edit((c) => {
       c.urls = { ...(c.urls ?? {}), [key]: v };
     });
@@ -659,10 +659,6 @@ export function DetailsFields({ optionalBlocks }: { optionalBlocks: readonly Opt
       <Group title="Dress code">
         {has('dress_code') ? <BlockSwitch block="dress_code" label="Show the dress code" hint="Guests see it on the Details page." /> : null}
         <TextField path="dress_code" label="Dress code" optional placeholder="Garden formal" value={content.dress_code} onChange={(v) => edit((c) => void (c.dress_code = nullIfEmpty(v)))} />
-      </Group>
-      <Group title="Travel & stay">
-        {has('travel_stay') ? <BlockSwitch block="travel_stay" label="Show travel & stay" hint="A button to your hotel or accommodation page." /> : null}
-        <UrlField path="urls.accommodation" label="Travel & stay link" optional hint="A hotel block or accommodation page for guests." value={urls.accommodation} onChange={setUrl('accommodation')} />
       </Group>
       <Group title="Registry">
         {has('registry') ? <BlockSwitch block="registry" label="Show the registry" hint="A button to your registry." /> : null}

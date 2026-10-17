@@ -53,6 +53,8 @@ export const FORBIDDEN_STRINGS = ['averyandjordan.com', '1234 Celebration Lane']
 // (two names + " & " / " and "), venue name <= 80, schedule <= 10 rows. G051 lists as before.
 const P = CONTENT_SCHEMA.properties;
 const QUESTION = P.rsvp.properties.questions.items.properties;
+const STAY = P.travel.properties.stays.items.properties;
+const BLOCK = P.details_blocks.items.properties;
 export const SCHEMA_LIMITS = {
   name: P.partners.items.properties.display_name.maxLength,
   fullName: P.partners.items.properties.full_name.maxLength,
@@ -68,6 +70,22 @@ export const SCHEMA_LIMITS = {
   questionOption: QUESTION.options.items.maxLength,
   thankYouTitle: P.thank_you.properties.title.maxLength,
   thankYouMessage: P.thank_you.properties.message.maxLength,
+  travelText: P.travel.properties.airport.properties.text.maxLength,
+  travelStays: P.travel.properties.stays.maxItems,
+  stayName: STAY.name.maxLength,
+  stayAddress: STAY.address.maxLength,
+  stayCode: STAY.code.maxLength,
+  stayNote: STAY.note.maxLength,
+  stayDistance: STAY.distance.maxLength,
+  mealCourses: P.meal.properties.courses.maxItems,
+  courseTitle: P.meal.properties.courses.items.properties.title.maxLength,
+  courseItems: P.meal.properties.courses.items.properties.items.maxItems,
+  courseItem: P.meal.properties.courses.items.properties.items.items.maxLength,
+  mealNote: P.meal.properties.note.maxLength,
+  detailsBlocks: P.details_blocks.maxItems,
+  blockTitle: BLOCK.title.maxLength,
+  blockText: BLOCK.text.maxLength,
+  blockLinkLabel: BLOCK.link_label.maxLength,
 } as const;
 
 export { CONTENT_LIMITS };
@@ -278,6 +296,24 @@ function ruleIssues(record: Record<string, any>, opts: ValidateOptions): Validat
   if (blocks.faq && !faq.length) {
     warning('faq_empty', 'faq', 'The questions & answers section is on but has no questions yet.');
   }
+
+  // G138: a stay without a name, a menu heading or dish left blank, a Details block without a title would show guests an
+  // empty line.
+  const stays: Array<Record<string, unknown>> = Array.isArray(record.travel?.stays) ? record.travel.stays : [];
+  stays.forEach((st, i) => {
+    if (isBlank(st.name)) error('travel_stay_name_empty', `travel.stays.${i}.name`, 'Please write the name of the place or remove it.');
+  });
+  const courses: Array<Record<string, any>> = Array.isArray(record.meal?.courses) ? record.meal.courses : [];
+  courses.forEach((c, i) => {
+    if (isBlank(c.title)) error('meal_course_title_empty', `meal.courses.${i}.title`, 'Please write the heading, for example Main.');
+    (Array.isArray(c.items) ? c.items : []).forEach((it: unknown, j: number) => {
+      if (isBlank(it)) error('meal_item_empty', `meal.courses.${i}.items.${j}`, 'Please write this dish or remove it.');
+    });
+  });
+  const dblocks: Array<Record<string, unknown>> = Array.isArray(record.details_blocks) ? record.details_blocks : [];
+  dblocks.forEach((b, i) => {
+    if (isBlank(b.title)) error('details_block_title_empty', `details_blocks.${i}.title`, 'Please write a title or remove this block.');
+  });
 
   // Custom RSVP questions (G051): stable ids (answers are stored under them), a readable question,
   // "choice" with at least two different choices, "text" without choices.

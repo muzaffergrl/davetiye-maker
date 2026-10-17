@@ -26,6 +26,11 @@
 //                                  when no place is on or in thank-you mode. The page then links /static/map.css + /static/map.js
 //                                  and its CSP allows the Google Maps frame. View values: map_on (a place is switched on —
 //                                  hide the old "View map" link), map_block (the block or the old link has something to show).
+//   data-travel / data-menu / data-blocks   G138: the shared Details blocks (lib/theme/extras-block.ts) — travel & stay
+//                                  (content.travel), the menu (meal.served) and 0–10 free blocks (details_blocks). Their
+//                                  words are data-copy labels inside the marker; data-pex-btn / data-pex-title = the theme's
+//                                  classes. Removed when empty or in thank-you mode; the page then links /static/extras.css.
+//                                  View values: travel_block (link or travel content), menu_block, info_blocks.
 // Relative asset paths become /themes/<theme>/..., links to theme pages become /<slug>/<page>.
 // Buyer photos with size variants (lib/photo-variants.ts) get srcset (+ the template's sizes).
 // Share image and tab icon (G055): when the theme has img/og-1200x630.jpg / img/favicon.png
@@ -46,6 +51,7 @@ import { THANK_YOU_DEFAULT_TITLE } from '../content/thank-you.ts';
 import { MAP_FRAME_ORIGIN, mapPlaces } from '../maps.ts';
 import { photoCandidates } from '../photo-variants.ts';
 import { MAP_CSS, MAP_JS, mapBlockHtml } from './map-block.ts';
+import { blocksHtml, EXTRAS_CSS, EXTRAS_LABELS, infoBlocks, menuData, menuHtml, travelData, travelHtml, type ExtrasLabel } from './extras-block.ts';
 import { AUDIO_SCRIPT_SRC, siteSound } from '../audio/site-sound.ts';
 import { COPY_ATTRS, ownCopy, parseCopyAttr, resolveCopy, type CopyManifest } from './copy.ts';
 import type { ThemeShareFiles } from './share.ts';
@@ -117,6 +123,11 @@ const ENGINE_ATTRS = new Set([
   'data-map',
   'data-map-btn',
   'data-map-btn-sm',
+  'data-travel',
+  'data-menu',
+  'data-blocks',
+  'data-pex-btn',
+  'data-pex-title',
 ]);
 const SRC_ELEMENTS = new Set(['img', 'script', 'source', 'video', 'audio', 'track', 'embed', 'iframe', 'input']);
 const OG_IMAGE = new Set(['og:image', 'og:image:url', 'twitter:image']);
@@ -252,6 +263,15 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
   view.map_block = placesShown.length > 0 || (!view.map_on && isPresent(getPath(view, 'urls.map')));
   let mapUsed = false;
   let mapFrame = false;
+  // G138: travel & stay, the menu and the free Details blocks (none after the wedding)
+  const travel = travelData(opts.content);
+  const menu = view.thank_you_on === true ? null : menuData(opts.content);
+  const infos = view.thank_you_on === true ? [] : infoBlocks(opts.content);
+  const travelOn = view.thank_you_on !== true && (travel.transport.length > 0 || travel.stays.length > 0);
+  view.travel_block = travelOn || isPresent(getPath(view, 'urls.accommodation'));
+  view.menu_block = menu !== null;
+  view.info_blocks = infos.length > 0;
+  let extrasUsed = false;
 
   const resolvePath = (expr: string, scope: string | null): string => {
     const e = expr.trim();
@@ -572,6 +592,39 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
       mapFrame = placesShown.some((p) => p.showMap);
       return;
     }
+    if ('data-travel' in a || 'data-menu' in a || 'data-blocks' in a) {
+      // the block's words: the couple's text for each data-copy label, else the template's, else the built-in default
+      const labels = new Map<string, string>();
+      $(el)
+        .find('[data-copy]')
+        .each((_, n) => {
+          if (!isTag(n)) return;
+          const key = n.attribs['data-copy'].trim();
+          labels.set(key, ownText(key) || $(n).text().trim());
+        });
+      const label = (key: ExtrasLabel) => labels.get(key) || EXTRAS_LABELS[key];
+      const o = { buttonClass: a['data-pex-btn'], titleClass: a['data-pex-title'] };
+      const html =
+        'data-travel' in a
+          ? travelOn
+            ? travelHtml(travel, label, o)
+            : ''
+          : 'data-menu' in a
+            ? menu
+              ? menuHtml(menu, label, o)
+              : ''
+            : blocksHtml(infos, label, o);
+      if (!html) {
+        $(el).remove();
+        return;
+      }
+      $(el).html(html);
+      delete a['data-pex-btn'];
+      delete a['data-pex-title'];
+      if ('data-blocks' in a) a['data-count'] = String(infos.length);
+      extrasUsed = true;
+      return;
+    }
     if ('data-repeat' in a) {
       const abs = resolvePath(a['data-repeat'], scope);
       const items = getPath(view, abs);
@@ -702,6 +755,9 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
     head.append($('<link rel="stylesheet">').attr('href', MAP_CSS));
     head.append($('<script defer></script>').attr('src', MAP_JS));
   }
+
+  // G138: the shared Details blocks' stylesheet, only on a page that shows one
+  if (extrasUsed) $('head').first().append($('<link rel="stylesheet">').attr('href', EXTRAS_CSS));
 
   // Theme inline scripts are trusted template code (content can never create a <script>:
   // every inserted value is text). Their hashes go into the page CSP.

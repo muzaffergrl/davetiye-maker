@@ -76,11 +76,21 @@
   </section>
 
   <!-- link blocks are shown only with their link (no dead buttons on a live site) -->
-  <section class="wrap block" data-scene="details-block" data-optional="travel_stay" data-if="urls.accommodation !thank_you_on" aria-label="Travel and stay">
+  <section class="wrap block" data-scene="details-block" data-if="info_blocks !thank_you_on">
+    <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
+    <div data-blocks data-step="body" data-a="fade" data-pex-btn="btn btn-ghost btn-sm"><span data-copy="blocks_more">Learn more</span></div>
+  </section>
+  <section class="wrap block" data-scene="details-block" data-optional="travel_stay" data-if="travel_block !thank_you_on" aria-label="Travel and stay">
     <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
     <h2 class="script" data-step="title" data-a="write" data-copy="travel_title">Travel <span class="amp">&amp;</span> Stay</h2>
-    <p class="note" data-step="body" data-a="fade" data-copy="travel_note">Where to stay and how to get here: see the link below.</p>
-    <p class="action" data-step="action" data-a="rise"><a class="btn btn-ghost" href="#" data-field="urls.accommodation" target="_blank" data-copy="travel_button">Where to stay</a></p>
+    <p data-if="urls.accommodation" class="note" data-step="body" data-a="fade" data-copy="travel_note">Where to stay and how to get here: see the link below.</p>
+    <div data-travel data-step="body" data-a="fade" data-pex-btn="btn btn-ghost btn-sm"><span data-copy="travel_getting_here">Getting here</span><span data-copy="travel_airport">Airport &amp; station</span><span data-copy="travel_parking">Parking</span><span data-copy="travel_shuttle">Shuttle</span><span data-copy="travel_taxi">Taxi &amp; rideshare</span><span data-copy="travel_stays">Where to stay</span><span data-copy="travel_code">Booking code</span><span data-copy="travel_more">More info</span><span data-copy="travel_book">Book a room</span></div>
+    <p data-if="urls.accommodation" class="action" data-step="action" data-a="rise"><a class="btn btn-ghost" href="#" data-field="urls.accommodation" target="_blank" data-copy="travel_button">Where to stay</a></p>
+  </section>
+  <section class="wrap block" data-scene="details-block" data-if="menu_block !thank_you_on">
+    <img class="sprig" data-step="sprig" data-a="unfurl" src="img/divider-300.webp" srcset="img/divider-300.webp 300w, img/divider-600.webp 600w" sizes="150px" alt="" loading="lazy">
+    <h2 class="script" data-step="title" data-a="write" data-copy="menu_title">The Menu</h2>
+    <div data-menu data-step="body" data-a="fade" data-pex-btn="btn btn-ghost btn-sm"><span data-copy="menu_diet">Dietary needs</span><span data-copy="menu_served">A meal will be served.</span></div>
   </section>
 
   <section class="wrap block" data-scene="details-block" data-optional="registry" data-if="urls.registry" aria-label="Registry">

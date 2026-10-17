@@ -1789,6 +1789,20 @@
   opacity: 0.5;
 }
 
+/* G138: a note and its link (travel & stay) */
+.fieldPair {
+  display: grid;
+  gap: 10px;
+}
+
+/* G138: a field with a remove button beside it (menu dishes) */
+.inlineRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 8px;
+}
+
 /* Repeatable items */
 .item {
   display: grid;

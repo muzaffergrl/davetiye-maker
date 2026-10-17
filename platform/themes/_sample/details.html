@@ -28,9 +28,17 @@
       <h3>Dress code</h3>
       <p data-field="dress_code">Dress code</p>
     </section>
-    <section data-optional="travel_stay" data-section="travel">
+    <section data-if="info_blocks" data-section="blocks">
+      <div data-blocks data-pex-btn="button"></div>
+    </section>
+    <section data-optional="travel_stay" data-if="travel_block" data-section="travel">
       <h3>Travel &amp; stay</h3>
-      <p><a class="button" href="#" data-url="accommodation" target="_blank">Accommodation</a></p>
+      <div data-travel data-pex-btn="button"></div>
+      <p data-if="urls.accommodation"><a class="button" href="#" data-url="accommodation" target="_blank">Accommodation</a></p>
+    </section>
+    <section data-if="menu_block" data-section="menu">
+      <h3>Menu</h3>
+      <div data-menu></div>
     </section>
     <section data-optional="registry" data-section="registry">
       <h3>Registry</h3>

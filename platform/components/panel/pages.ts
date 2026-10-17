@@ -30,7 +30,7 @@ export const PAGE_SECTIONS: Record<PageId, SectionId[]> = {
   day: ['date', 'venue', 'schedule', 'thankyou'],
   photos: ['photos'],
   story: ['story'],
-  details: ['details', 'faq'],
+  details: ['details', 'blocks', 'travel', 'menu', 'faq'],
   rsvp: ['rsvp'],
 };
 
@@ -42,6 +42,9 @@ export const BLOCK_TITLES: Partial<Record<SectionId, string>> = {
   date: 'Date & time',
   venue: 'Venue',
   schedule: 'Schedule',
+  blocks: 'Good to know',
+  travel: 'Travel & stay',
+  menu: 'Meal & menu',
   faq: 'Questions & answers',
 };
 
@@ -68,6 +71,9 @@ const PREVIEW_OF_SECTION: Partial<Record<SectionId, string>> = {
   schedule: 'details',
   story: 'story',
   details: 'details',
+  blocks: 'details',
+  travel: 'details',
+  menu: 'details',
   faq: 'details',
   rsvp: 'rsvp',
   photos: 'home',
