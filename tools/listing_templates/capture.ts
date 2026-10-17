@@ -425,7 +425,7 @@ try {
     const res = await page.goto(`${BASE}/start/demo/${THEME}/home?preview=demo`, { waitUntil: 'load' });
     check('demo: /start/demo/<theme>/home 200', res.status() === 200);
     await page.waitForTimeout(5200);
-    await shot(page, 'd01_demo_home', 'Public demo of the design: home (sample names, placeholder photos)', { scroll: false });
+    await shot(page, 'd01_demo_home', 'Public demo of the design: home (sample names and photos, G155)', { scroll: false });
     await ctx.close();
   }
 

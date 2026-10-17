@@ -59,7 +59,8 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
   font: 400 12px/1.6 var(--sans); letter-spacing: .26em; text-transform: uppercase; color: var(--gold-light);
   text-decoration: underline 1px; text-decoration-color: rgb(var(--c-e6cf8f)/.55); text-underline-offset: 6px;
 }
-.textlink::after { content: ""; position: absolute; inset: -14px -10px; } /* ≥ 44 px touch target */
+.textlink::after { content: ""; position: absolute; inset: -14px -10px; }
+:is(.foot,.closing,.reply-panel) .textlink{padding:14px 0;margin:-14px 0} /* G155 */
 .wrap { position: relative; width: min(100% - 40px, 420px); margin-inline: auto; }
 .section { position: relative; }
 .orn, .names-orn, .head-orn, .sec-orn, .cap-orn, .hint-orn, .card-orn, .dress-orn { display: block; height: auto; margin-inline: auto; }
@@ -412,7 +413,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .site-main > .page-end:last-child > .page-corner { bottom: var(--below); }
 .foot { position: relative; z-index: 1; }
 .foot .sign { font-size: clamp(30px, 9vw, 46px); margin-top: 6px; overflow-wrap: break-word; text-wrap: balance; }
-.foot .textlink { margin-top: 20px; }
+.foot .textlink { margin-top: 6px; }
 
 /* == long pages: the velvet, rays and clusters of W1.3–W1.5 */
 .page-long .site-main { padding-top: env(safe-area-inset-top); }
@@ -552,7 +553,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .reply-panel { margin-top: 10px; }
 .reply-panel .deco { font-size: 38px; }
 .reply-panel .note { margin-top: 6px; }
-.reply-panel .textlink { margin-top: 18px; }
+.reply-panel .textlink { margin-top: 4px; }
 .closing .title { font-size: clamp(40px, 12vw, 58px); }
 .closing .line { margin-top: 6px; font-size: 18px; color: var(--ivory); }
 .closing .kicker { margin-top: 12px; overflow-wrap: break-word; }

@@ -325,6 +325,16 @@
   margin: 6px 0 0;
 }
 
+/* K48: a site past its retention time (site page, "Siteyi sil") */
+.hintWarn {
+  font-size: 14px;
+  color: var(--c-warning);
+  background: var(--c-warning-soft);
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin: 8px 0 0;
+}
+
 .grid {
   display: grid;
   gap: 12px;

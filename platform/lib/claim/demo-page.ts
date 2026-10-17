@@ -1,6 +1,6 @@
 // Live demo of a theme for /start (G045): /start/demo/<theme> and /start/demo/<theme>/<page>.
-// The theme's own templates rendered with its demo content (fictional data, placeholder photos),
-// so the preview on /start is always the real design and needs no screenshots.
+// The theme's own templates rendered with its demo content (fictional data; G155: the design's own fictional sample
+// photos, lib/claim/demo-photos.ts), so the preview on /start is always the real design and needs no screenshots.
 //
 // Rendered in preview mode (previewKey "demo"): links between pages stay under /start/demo/<theme>,
 // the RSVP form shows its "preview, replies are not sent" panel and never posts. Same CSP as sites
@@ -16,6 +16,7 @@ import { siteCsp, isSitePage } from '../site/render.ts';
 import { renderTemplate, VARIANT_PARAM } from '../theme/engine.ts';
 import { readThemePage } from '../theme/theme.ts';
 import { withDemoMap } from './demo-map.ts';
+import { withDemoPhotos } from './demo-photos.ts';
 import { claimableTheme } from './themes.ts';
 
 /** Marks demo renders as previews (the value is not a key; demo pages accept no keys). */
@@ -56,7 +57,12 @@ export async function handleDemoPage(req: Request, themeId: string, page: string
       html: template,
       // The demo always shows the invitation (G075): its fictional wedding date passing must not turn it into a thank-you.
       // G127: the map block with a pin at the demo city's centre (lib/claim/demo-map.ts).
-      content: withDemoMap(theme.id, { ...theme.demo, thank_you: { ...(theme.demo.thank_you ?? {}), mode: 'off' } }),
+      // G155: the design's fictional sample photos in its empty photo slots (lib/claim/demo-photos.ts).
+      content: withDemoPhotos(
+        theme.id,
+        theme.manifest.photos,
+        withDemoMap(theme.id, { ...theme.demo, thank_you: { ...(theme.demo.thank_you ?? {}), mode: 'off' } }),
+      ),
       theme: theme.manifest,
       page,
       // pageRoute() builds "/<slug>/<page>": this keeps the demo's page links under /start/demo/<theme>.

@@ -60,7 +60,8 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
   font: 500 12.5px/1.6 var(--serif); letter-spacing: .22em; text-transform: uppercase; color: var(--olive);
   text-decoration: underline 1px; text-decoration-color: #b39a63e6; text-underline-offset: 6px;
 }
-.textlink::after { content: ""; position: absolute; inset: -14px -10px; }   /* ≥ 44 px touch target */
+.textlink::after { content: ""; position: absolute; inset: -14px -10px; }
+:is(.foot,.closing,.reply-panel) .textlink{padding:14px 0;margin:-14px 0} /* G155 */
 .wrap { position: relative; width: min(100% - 32px, 460px); margin-inline: auto; }
 .section { position: relative; }
 
@@ -411,7 +412,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .foot > .page-corner { right: 0; bottom: 0; width: var(--corner); }
 .foot > :not(.page-corner) { position: relative; z-index: 1; }
 .foot .sign { font-size: 40px; margin-top: 2px; overflow-wrap: break-word; }
-.foot .textlink { margin-top: 18px; }
+.foot .textlink { margin-top: 4px; }
 
 /* == long pages: corners + headings */
 .page-long .site-main { padding-top: env(safe-area-inset-top); }
@@ -563,7 +564,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .reply-panel { margin-top: 10px; }
 .reply-panel .script { font-size: 48px; }
 .reply-panel .note { margin-top: 6px; }
-.reply-panel .textlink { margin-top: 18px; }
+.reply-panel .textlink { margin-top: 4px; }
 .closing { padding: 40px 16px calc(var(--corner) * .8); text-align: center; overflow: hidden; }
 .closing > .page-corner { right: 0; bottom: 0; width: var(--corner); }
 .closing > :not(.page-corner) { position: relative; z-index: 1; }

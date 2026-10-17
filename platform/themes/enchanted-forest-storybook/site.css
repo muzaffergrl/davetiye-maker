@@ -58,7 +58,8 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
   font: 400 12px/1.6 var(--serif); letter-spacing: .22em; text-transform: uppercase; color: var(--moss-ink);
   text-decoration: underline 1px; text-decoration-color: rgb(var(--c-4a5a3a)/.55); text-underline-offset: 6px;
 }
-.textlink::after { content: ""; position: absolute; inset: -14px -10px; } /* ≥ 44 px touch target */
+.textlink::after { content: ""; position: absolute; inset: -14px -10px; }
+:is(.foot,.closing,.reply-panel) .textlink{padding:14px 0;margin:-14px 0} /* G155 */
 .wrap { position: relative; width: min(100% - 32px, 440px); margin-inline: auto; }
 .section { position: relative; }
 /* W1: a small GPT ivy sprig (two toadstools, a firefly) between two hairlines (1 px dividers) */
@@ -419,7 +420,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .foot { z-index: 1; }
 .foot .kicker { color: var(--moss-ink); }
 .foot .sign { font-size: 66px; margin-top: 2px; overflow-wrap: break-word; }
-.foot .textlink { margin-top: 18px; }
+.foot .textlink { margin-top: 4px; }
 
 /* == long pages: the misty forest of W1.3–W1.5 behind the first screen */
 .page-long .site-main { padding-top: env(safe-area-inset-top); }
@@ -574,7 +575,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .reply-panel { margin-top: 10px; }
 .reply-panel .script { font-size: 64px; }
 .reply-panel .note { margin-top: 6px; }
-.reply-panel .textlink { margin-top: 18px; }
+.reply-panel .textlink { margin-top: 4px; }
 .closing .title { font-size: 84px; }
 .closing .line { margin-top: 4px; font-style: italic; font-size: 19px; color: var(--ink); }
 .closing .kicker { margin-top: 12px; overflow-wrap: break-word; }

@@ -27,6 +27,7 @@ const TODO_LABEL: Record<AdminTodo['kind'], string> = {
   not_published: 'Hatırlat',
   closing: 'Kapanıyor',
   unpublished_changes: 'Bak',
+  retention: 'Sil',
 };
 
 export default function AdminHome() {
@@ -66,13 +67,15 @@ export default function AdminHome() {
               </h2>
               {d.todos.length === 0 ? (
                 <p className={styles.actionText} style={{ margin: 0 }}>
-                  Şu an yapılacak bir şey yok. Onay bekleyen siparişler, uzun süredir yayınlanmamış siteler ve kapanmak üzere olanlar burada görünür.
+                  Şu an yapılacak bir şey yok. Onay bekleyen siparişler, uzun süredir yayınlanmamış siteler, kapanmak üzere olanlar ve 12 aydan uzun süredir arşivde
+                  duran (silinmesi gereken) siteler burada görünür.
                 </p>
               ) : (
                 <ul className={styles.rows}>
                   {d.todos.map((t) => (
                     <li key={`${t.kind}-${t.site.id}`} className={styles.rowItem} data-todo={t.kind}>
-                      <Link href={`/admin/site/${t.site.id}`} className={styles.rowLink}>
+                      {/* K48: a retention to-do opens the site page at its "Siteyi sil" block (the existing delete path). */}
+                      <Link href={`/admin/site/${t.site.id}${t.kind === 'retention' ? '#delete' : ''}`} className={styles.rowLink}>
                         <span className={styles.rowMain}>
                           <span className={styles.rowTitle} style={{ display: 'block' }}>
                             {t.site.names}
@@ -81,7 +84,7 @@ export default function AdminHome() {
                             {t.text}
                           </span>
                         </span>
-                        <span className={t.kind === 'confirm' ? styles.badgeWarn : styles.badge}>
+                        <span className={t.kind === 'confirm' || t.kind === 'retention' ? styles.badgeWarn : styles.badge}>
                           {TODO_LABEL[t.kind]} <ChevronRight size={14} aria-hidden />
                         </span>
                       </Link>
@@ -259,6 +262,11 @@ export default function AdminHome() {
                 </li>
                 <li>Link kaybı → sitenin sayfasında <strong>Yeni düzenleme linki</strong>. Düğün ertelendi → <strong>İsim/tarih hakkı ekle</strong>. Uzatma → <strong>Yayında kalma süresi</strong>.</li>
                 <li>Her sitenin sayfasında: misafir yanıtları (CSV), taslağın önizlemesi, dükkân notu, alıcı adına yayınlama, silme.</li>
+                <li data-privacy-help="">
+                  Silme / gizlilik talebi (K48): yukarıdaki aramaya alıcının <strong>sipariş numarasını</strong> yazın → siteyi açın → <strong>Siteyi sil</strong> (site, fotoğraflar
+                  ve misafir yanıtları kalıcı silinir) → hazır <strong>Delete my website and data</strong> mesajıyla Etsy&apos;den bildirin. Söz: talepten sonra 30 gün içinde.
+                </li>
+                <li>Saklama (K48): bir site çevrimdışı olduktan (arşiv) 12 ay sonra <strong>Yapılacaklar</strong>&apos;a &quot;Sil&quot; olarak düşer; aynı yoldan silin.</li>
               </ol>
             </details>
           </>
