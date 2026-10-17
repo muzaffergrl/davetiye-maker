@@ -404,6 +404,12 @@ EK_TEMALAR = [
     dict(no=22, klasor="22_Nocturne_Lake_Estate", ad="Nocturne Lake Estate"),
     # docs/24 dalgası (23–28): eksenler + hareket imzası yazılı; `kontrol` bunları D'ye ve birbirine karşı ayırt eder
     # (ek_ayirt). Üreteçlere (yaz, paket5, gorev5, ozet) girmez: koleksiyon dosyaları elle yazıldı.
+    dict(no=23, klasor="23_Velvet_Jewel_Box", ad="Velvet Jewel Box",
+         zarf="Patlıcan moru kadife yüzük kutusu; saten fiyonk kayar, kapak menteşeden 3B açılır, saten astar ve kart yükselir.",
+         foto="3B silindir karusel (mücevher vitrini gibi döner; sürükle, kaydır, ok tuşları).",
+         dekor="Saten kurdele, inci, yüzük, şampanya saten kıvrımlar", teknik="fotogerçekçi ürün çekimi",
+         font=("Pinyon Script", "Bodoni Moda"), palet_adi="aubergine-champagne",
+         hareket="Menteşe 3B açılış, saten ışık süpürmesi, varak parıltılı başlık, silindir karusel, saten perde sayfa geçişi"),
     dict(no=25, klasor="25_Orient_Express_Voyage", ad="Orient Express Voyage",
          zarf="Deri bilet cüzdanı, pirinç tokalı kayış; kayış çözülür, kapak soldan açılır, birinci sınıf bilet cepten kayar.",
          foto="Vagon penceresi çerçeveleri; kaydırınca fotoğraf camın ardından manzara gibi geçer.",

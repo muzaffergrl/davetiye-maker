@@ -157,6 +157,16 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-17',
     },
+    // New design 23 (G161): platform theme with interim box pieces until its GPT parts arrive; not for sale yet.
+    {
+      id: 'velvet-jewel-box',
+      name: 'Velvet Jewel Box',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-17',
+    },
     // G163 (docs/24): 25 Orient Express Voyage, built before its GPT parts; sale approval and price remain pending.
     {
       id: 'orient-express-voyage',
