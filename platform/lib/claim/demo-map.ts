@@ -31,6 +31,7 @@ export const DEMO_CITY_PINS: Readonly<Record<string, { lat: number; lng: number 
   'grand-theatre-premiere': { lat: 37.5407, lng: -77.436 }, // Richmond, VA (the theatre is fictional)
   'olive-ivory': { lat: 38.2975, lng: -122.2869 }, // Napa
   'riad-lantern-nights': { lat: 31.6295, lng: -7.9811 }, // Marrakech (medina)
+  'sky-lantern-festival': { lat: 34.4208, lng: -119.6982 }, // Santa Barbara, CA
   'sunflower-rustic-barn': { lat: 35.9251, lng: -86.8689 }, // Franklin, TN
   'tropical-destination': { lat: 20.6873, lng: -156.4428 }, // Wailea
   'tuscan-vineyard': { lat: 43.0927, lng: 11.7808 }, // Montepulciano

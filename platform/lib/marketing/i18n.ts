@@ -58,6 +58,7 @@ export const OPENING_THINGS: Readonly<Record<string, string>> = {
   door: msg('door'),
   dome: msg('dome'),
   wall: msg('wall'),
+  lantern: msg('lantern'),
 };
 
 /** The opening object in the page language. */
