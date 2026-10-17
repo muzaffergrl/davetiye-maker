@@ -216,16 +216,20 @@ export function DesignPage({ id, m }: { id: string; m: Market }) {
               <CheckList items={FIXED.map((f) => t(f))} tone="no" />
               <h3 className={s.h3}>{t('Details')}</h3>
               <dl className={s.specs}>
-                <div>
-                  <dt>{t('Colors')}</dt>
-                  <dd>
-                    <Swatches palette={d.copy.palette} m={m} />
-                  </dd>
-                </div>
-                <div>
-                  <dt>{t('Fonts')}</dt>
-                  <dd>{d.copy.fonts.join(', ')}</dd>
-                </div>
+                {d.copy.palette.length > 0 ? (
+                  <div>
+                    <dt>{t('Colors')}</dt>
+                    <dd>
+                      <Swatches palette={d.copy.palette} m={m} />
+                    </dd>
+                  </div>
+                ) : null}
+                {d.copy.fonts.length > 0 ? (
+                  <div>
+                    <dt>{t('Fonts')}</dt>
+                    <dd>{d.copy.fonts.join(', ')}</dd>
+                  </div>
+                ) : null}
                 <div>
                   <dt>{t('Pages')}</dt>
                   <dd>
