@@ -2,7 +2,7 @@
 id: GP105
 baslik: Aşama 2 · Tasarım 05 — 5 ek palet + prompt dosyaları
 rol: claude-canva
-durum: inceleme
+durum: bitti
 alan:
 oncelik: 6
 bagimli: [G090]
@@ -31,3 +31,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
 - 2026-10-17 bitti, incelemeye gönderildi (claude-G156; tools/gorev.py G090-qa-raporu.md'nin başlıksızlığı yüzünden çalışmadı, elle)
+- 2026-10-17 entegratör onayladı

@@ -2,7 +2,7 @@
 id: G154
 baslik: G090 QA metin/politika düzeltmeleri — START HERE, Etsy ilanları, satış sitesi metni, gizlilik sayfası (K48)
 rol: claude-metin
-durum: inceleme
+durum: bitti
 alan: claude-G154
 oncelik: 1
 bagimli: [G090]
@@ -53,3 +53,6 @@ Yayın, main'e birleştirme, PR yok.
 - Canlı site okunamadı (ortam): canlıdaki `CLAIM_ORDER_VERIFICATION`, Google OAuth, SMTP değeri bilinmiyor → metinler her modda doğru olacak şekilde yazıldı; okumalar ilan §11'inde.
 - Çeviriler (53 yeni satır × 4 dil) ajan çevirisi; ana dili konuşan biri okumadı.
 - Gizlilik metni hukuki tavsiye değildir; AB/UK için bir uzmana okutulması önerisi docs/14 §6.10'da.
+
+## Günlük
+- 2026-10-17 entegratör onayladı

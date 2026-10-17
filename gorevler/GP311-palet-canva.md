@@ -2,7 +2,7 @@
 id: GP311
 baslik: Aşama 2 · Tasarım 11 — 5 palet Canva varyantları
 rol: claude-canva
-durum: blokaj
+durum: iptal
 alan:
 oncelik: 6
 bagimli: [GP211, G040]
@@ -28,3 +28,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
+- 2026-10-17 iptal: K24: Canva teslimi yok; paletler platformda (G153)

@@ -2,7 +2,7 @@
 id: G171
 baslik: Yeni tasarım 32 Music Box Ballerina — platform teması (coming), koleksiyon, GPT prompt'ları, basılı düzen, ilan taslağı
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G171
 oncelik: 1
 bagimli: [G126, G138, G139, G144, G149, G159, G167]
@@ -79,3 +79,4 @@ kulakla dinlenmesi.
 ## Günlük
 - 2026-10-17 açıldı ve alındı: claude-G171 (koordinatör isteği)
 - 2026-10-17 bitti, incelemeye gönderildi
+- 2026-10-17 entegratör onayladı
