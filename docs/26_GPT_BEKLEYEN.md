@@ -5,7 +5,7 @@ diskte var, hangileri eksik. Prompt metni ve kayıt yolu ilgili `GPT_PROMPTS.md`
 bu liste kendiliğinden kısalır. Sonrasında ilgili temanın `build_images.py` / `build-print-assets.ts` komutu çalıştırılır
 (prompt dosyasında yazar).
 
-**Toplam eksik: 191**
+**Toplam eksik: 206**
 
 | Prompt dosyası | Bölüm | Var | Eksik |
 |---|---|---|---|
@@ -51,6 +51,9 @@ bu liste kendiliğinden kısalır. Sonrasında ilgili temanın `build_images.py`
 | `collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 16 |
 | `collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Camille & Oliver; gerçek kişiye benzemesin) | 0 | 5 |
 | `collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK) | 0 | 4 |
+| `collections/16_Sunflower_Rustic/variants/GPT_PROMPTS.md` | V02_navy_sunflower · Navy & Sunflower (`navy-sunflower`) | 0 | 5 |
+| `collections/16_Sunflower_Rustic/variants/GPT_PROMPTS.md` | V03_burgundy_sunflower · Burgundy & Sunflower (`burgundy-sunflower`) | 0 | 5 |
+| `collections/16_Sunflower_Rustic/variants/GPT_PROMPTS.md` | V04_dusty_blue_sunflower · Dusty Blue & Sunflower (`dusty-blue-sunflower`) | 0 | 5 |
 | `collections/21_Crimson_Rose_Atelier/variants/GPT_PROMPTS.md` | İstem — fildişi güller (yalnız istenirse) | 0 | 2 |
 
 ## Eksik dosyalar
@@ -327,6 +330,24 @@ bu liste kendiliğinden kısalır. Sonrasında ilgili temanın `build_images.py`
 - `collections/28_Maison_Patisserie/assets/gpt/print/invitation_back_5x7.png` — PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK)
 - `collections/28_Maison_Patisserie/assets/gpt/print/invitation_front_a5.png` — PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK)
 - `collections/28_Maison_Patisserie/assets/gpt/print/invitation_back_a5.png` — PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK)
+
+### `collections/16_Sunflower_Rustic/variants/GPT_PROMPTS.md`
+
+- `collections/16_Sunflower_Rustic/variants/V02_navy_sunflower/gpt/closure.png` — V02_navy_sunflower · Navy & Sunflower (`navy-sunflower`)
+- `collections/16_Sunflower_Rustic/variants/V02_navy_sunflower/gpt/closure_r2_v3.png` — V02_navy_sunflower · Navy & Sunflower (`navy-sunflower`)
+- `collections/16_Sunflower_Rustic/variants/V02_navy_sunflower/gpt/invitation_card.png` — V02_navy_sunflower · Navy & Sunflower (`navy-sunflower`)
+- `collections/16_Sunflower_Rustic/variants/V02_navy_sunflower/gpt/info_card.png` — V02_navy_sunflower · Navy & Sunflower (`navy-sunflower`)
+- `collections/16_Sunflower_Rustic/variants/V02_navy_sunflower/gpt/web_hero.png` — V02_navy_sunflower · Navy & Sunflower (`navy-sunflower`)
+- `collections/16_Sunflower_Rustic/variants/V03_burgundy_sunflower/gpt/closure.png` — V03_burgundy_sunflower · Burgundy & Sunflower (`burgundy-sunflower`)
+- `collections/16_Sunflower_Rustic/variants/V03_burgundy_sunflower/gpt/closure_r2_v3.png` — V03_burgundy_sunflower · Burgundy & Sunflower (`burgundy-sunflower`)
+- `collections/16_Sunflower_Rustic/variants/V03_burgundy_sunflower/gpt/invitation_card.png` — V03_burgundy_sunflower · Burgundy & Sunflower (`burgundy-sunflower`)
+- `collections/16_Sunflower_Rustic/variants/V03_burgundy_sunflower/gpt/info_card.png` — V03_burgundy_sunflower · Burgundy & Sunflower (`burgundy-sunflower`)
+- `collections/16_Sunflower_Rustic/variants/V03_burgundy_sunflower/gpt/web_hero.png` — V03_burgundy_sunflower · Burgundy & Sunflower (`burgundy-sunflower`)
+- `collections/16_Sunflower_Rustic/variants/V04_dusty_blue_sunflower/gpt/closure.png` — V04_dusty_blue_sunflower · Dusty Blue & Sunflower (`dusty-blue-sunflower`)
+- `collections/16_Sunflower_Rustic/variants/V04_dusty_blue_sunflower/gpt/closure_r2_v3.png` — V04_dusty_blue_sunflower · Dusty Blue & Sunflower (`dusty-blue-sunflower`)
+- `collections/16_Sunflower_Rustic/variants/V04_dusty_blue_sunflower/gpt/invitation_card.png` — V04_dusty_blue_sunflower · Dusty Blue & Sunflower (`dusty-blue-sunflower`)
+- `collections/16_Sunflower_Rustic/variants/V04_dusty_blue_sunflower/gpt/info_card.png` — V04_dusty_blue_sunflower · Dusty Blue & Sunflower (`dusty-blue-sunflower`)
+- `collections/16_Sunflower_Rustic/variants/V04_dusty_blue_sunflower/gpt/web_hero.png` — V04_dusty_blue_sunflower · Dusty Blue & Sunflower (`dusty-blue-sunflower`)
 
 ### `collections/21_Crimson_Rose_Atelier/variants/GPT_PROMPTS.md`
 
