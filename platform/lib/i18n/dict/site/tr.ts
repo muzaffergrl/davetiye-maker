@@ -289,6 +289,8 @@ const dict: Dict = {
   // G168 Celestial Observatory
   'Open the dome': 'Kubbeyi açın',
   'Written in the stars': 'Yıldızlarda yazılı',
+  // G169 Azulejo Mosaic
+  'Laid tile by tile, sent with love': 'Çini çini döşendi, sevgiyle gönderildi',
 };
 
 export default dict;

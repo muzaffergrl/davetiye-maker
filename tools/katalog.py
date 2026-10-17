@@ -447,6 +447,12 @@ EK_TEMALAR = [
          dekor="Yıldız haritası, pirinç usturlap, gezegen yörüngeleri, ay evreleri", teknik="gravür + altın varak",
          font=("Imperial Script", "Forum"), palet_adi="midnight-silver-gold",
          hareket="Kubbe yarığının açılması (iki kapak yarısı), yıldızların sırayla yanması, takımyıldız çizgisinin çiftin baş harflerini birleştirmesi (UI çizgi), kaydırmayla dönen gök ve planisfer halkaları, kadran süpürmesiyle foto"),
+    dict(no=30, klasor="30_Azulejo_Mosaic", ad="Azulejo Mosaic",
+         zarf="Mavi-beyaz el boyaması azulejo çini paneli (4 × 6; köşe, bordür, alan çinileri); dokunulan çiniden başlayan dalgayla çiniler tek tek 3B döner, arkadaki kart çıkar.",
+         foto="Çini mozaiği: fotoğraf küçük çinilerin altında bekler, sahnesine gelince çiniler çapraz dalgayla dönüp kalkar.",
+         dekor="Kobalt azulejo desenleri, terrakota saksılar, badana sıva, çini friz", teknik="el boyaması seramik",
+         font=("Arizonia", "Cormorant Upright"), palet_adi="cobalt-white-terracotta",
+         hareket="Karo karo 3B çevirme ızgarası: dokunulan noktadan yayılan dalga, her çini terrakota sırtını gösterip kalkar; fotoğraflar çini mozaiğiyle açılır; RSVP teşekkürü çinilerle belirir; metin çini gibi üst kenarından yatarak yerleşir."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

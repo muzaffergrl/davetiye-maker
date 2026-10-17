@@ -240,6 +240,16 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-17',
     },
+    // New design 30 (G169, docs/24 wave 2): platform theme built before its GPT parts (interim tiles); not on sale, no price yet.
+    {
+      id: 'azulejo-mosaic',
+      name: 'Azulejo Mosaic',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-17',
+    },
     {
       id: 'blush-garden-rose',
       name: 'Blush Garden Rose',

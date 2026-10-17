@@ -1,0 +1,117 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Inês",
+      "full_name": "Inês Carvalho Duarte"
+    },
+    {
+      "display_name": "Mateo",
+      "full_name": "Mateo Alexander Reyes"
+    }
+  ],
+  "name_display": "Inês & Mateo",
+  "initials": "I&M",
+  "host_line": "Together with their families",
+  "date": "2027-06-05",
+  "ceremony_time": "17:00",
+  "timezone": "Europe/Lisbon",
+  "venue": {
+    "name": "Quinta da Andorinha Azul",
+    "city": "Sintra",
+    "region": "Lisbon",
+    "country": "Portugal",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "17:00",
+      "location": "The chapel garden"
+    },
+    {
+      "label": "Cocktail hour",
+      "time": "18:00",
+      "location": "The tiled courtyard"
+    },
+    {
+      "label": "Dinner & dancing",
+      "time": "19:30",
+      "location": "The cloister terrace"
+    }
+  ],
+  "dress_code": "Summer formal",
+  "rsvp": {
+    "deadline": "2027-04-30",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Fish",
+          "Chicken"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "Tile by tile, from a rainy afternoon in a little café to a promise on a hill above the sea, our story led us to",
+    "items": [
+      {
+        "caption": "A rainy afternoon"
+      },
+      {
+        "caption": "The tram up the hill"
+      },
+      {
+        "caption": "Our promise"
+      }
+    ]
+  },
+  "audio": {
+    "music": "garden-waltz",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony."
+    },
+    {
+      "q": "Can you accommodate dietary requirements?",
+      "a": "Please tell us about your requirements in your reply."
+    }
+  ]
+}

@@ -71,6 +71,13 @@ const sealAt = (edge: 'top' | 'bottom') => ({ src: 'seal', style: `${edge}:4%;le
 const tileRow = (edge: 'top' | 'bottom') =>
   ['tile1', 'tile2', 'tile3', 'tile2', 'tile1'].map((src, i) => ({ src, style: `${edge}:5%;left:${25 + i * 10.5}%;width:9%` }));
 
+/** 30 (G169): a row of the theme's azulejo tiles along one edge — corner, border and field tiles as on the website's wall. */
+const azulejoRow = (edge: 'top' | 'bottom') =>
+  ['tile3', 'tile2', 'tile1', 'tile4', 'tile1', 'tile2', 'tile3'].map((src, i) => ({
+    src,
+    style: `${edge}:4%;left:${11.5 + i * 11}%;width:11%;transform:rotate(${(edge === 'top' ? 0 : 180) + (i === 6 ? 90 : 0)}deg)`,
+  }));
+
 export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
   'olive-ivory': {
     collection: '01_Olive_Ivory', sources: PARTS,
@@ -396,6 +403,29 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
         ],
       },
       back: { bg: 'url(paper.webp) 0 0 / 2.4in repeat', images: [{ src: 'sky', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover' }] },
+    },
+  },
+  // 30 (G169): composed until its print grounds arrive (GPT_PROMPTS.md PAKET 6: print/invitation_front.png +
+  // print/invitation_back.png, 1819×2551, one ground per side for 5×7 and A5 at 300 ppi) — card paper (18's plain GPT
+  // cotton paper at full size) with a row of the azulejo tiles the theme build cut (img/tile_N-256): front one along the
+  // top and one along the bottom, back one on top. On arrival: sources -> { front: 'print/invitation_front.png', back:
+  // 'print/invitation_back.png' }, composed -> { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'),
+  // images: [] } }, re-measure the boxes on the art (G149), then build-print-assets — steps in GPT_PROMPTS.md PAKET 6.
+  'azulejo-mosaic': {
+    collection: '30_Azulejo_Mosaic',
+    sources: {
+      paper: '../../../18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png',
+      tile1: 'platform/themes/azulejo-mosaic/img/tile_1-256.webp',
+      tile2: 'platform/themes/azulejo-mosaic/img/tile_2-256.webp',
+      tile3: 'platform/themes/azulejo-mosaic/img/tile_3-256.webp',
+      tile4: 'platform/themes/azulejo-mosaic/img/tile_4-256.webp',
+    },
+    fonts: gf('family=Arizonia&family=Cormorant+Upright:wght@400;500;600'),
+    script: "'Arizonia', cursive", serif: "'Cormorant Upright', Georgia, serif",
+    ink: '#173A80', accent: '#8C4128', front: [17, 12, 17, 12], back: [16, 12, 10, 12],
+    composed: {
+      front: { bg: cover('paper'), images: [...azulejoRow('top'), ...azulejoRow('bottom')] },
+      back: { bg: cover('paper'), images: azulejoRow('top') },
     },
   },
 };

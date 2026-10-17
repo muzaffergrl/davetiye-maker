@@ -1,0 +1,306 @@
+{
+ "tile_1": {
+  "src_size": [
+   256,
+   256
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "tile_1-128.webp",
+    "w": 128,
+    "h": 128,
+    "bytes": 3612
+   },
+   {
+    "file": "tile_1-256.webp",
+    "w": 256,
+    "h": 256,
+    "bytes": 7110
+   }
+  ]
+ },
+ "tile_2": {
+  "src_size": [
+   256,
+   256
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "tile_2-128.webp",
+    "w": 128,
+    "h": 128,
+    "bytes": 3370
+   },
+   {
+    "file": "tile_2-256.webp",
+    "w": 256,
+    "h": 256,
+    "bytes": 6448
+   }
+  ]
+ },
+ "tile_3": {
+  "src_size": [
+   256,
+   256
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "tile_3-128.webp",
+    "w": 128,
+    "h": 128,
+    "bytes": 3044
+   },
+   {
+    "file": "tile_3-256.webp",
+    "w": 256,
+    "h": 256,
+    "bytes": 6234
+   }
+  ]
+ },
+ "tile_4": {
+  "src_size": [
+   256,
+   256
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "tile_4-128.webp",
+    "w": 128,
+    "h": 128,
+    "bytes": 3478
+   },
+   {
+    "file": "tile_4-256.webp",
+    "w": 256,
+    "h": 256,
+    "bytes": 6920
+   }
+  ]
+ },
+ "tile_back": {
+  "src_size": [
+   256,
+   256
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "tile_back-256.webp",
+    "w": 256,
+    "h": 256,
+    "bytes": 7678
+   }
+  ]
+ },
+ "wall": {
+  "src_size": [
+   640,
+   640
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "wall-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 15440
+   }
+  ]
+ },
+ "lime": {
+  "src_size": [
+   640,
+   640
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "lime-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 7944
+   }
+  ]
+ },
+ "card": {
+  "src_size": [
+   640,
+   640
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "card-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 5752
+   }
+  ]
+ },
+ "frieze": {
+  "src_size": [
+   768,
+   192
+  ],
+  "ratio": 4.0,
+  "files": [
+   {
+    "file": "frieze-768.webp",
+    "w": 768,
+    "h": 192,
+    "bytes": 18144
+   }
+  ]
+ },
+ "ph_portrait": {
+  "src_size": [
+   640,
+   800
+  ],
+  "ratio": 0.8,
+  "files": [
+   {
+    "file": "ph_portrait-640.webp",
+    "w": 640,
+    "h": 800,
+    "bytes": 1316
+   }
+  ]
+ },
+ "ph_land": {
+  "src_size": [
+   640,
+   512
+  ],
+  "ratio": 1.25,
+  "files": [
+   {
+    "file": "ph_land-640.webp",
+    "w": 640,
+    "h": 512,
+    "bytes": 868
+   }
+  ]
+ },
+ "ph_wide": {
+  "src_size": [
+   640,
+   360
+  ],
+  "ratio": 1.77778,
+  "files": [
+   {
+    "file": "ph_wide-640.webp",
+    "w": 640,
+    "h": 360,
+    "bytes": 666
+   }
+  ]
+ },
+ "placeholders": {
+  "hero_portrait": "ph_portrait-640.webp",
+  "story": "ph_land-640.webp",
+  "venue": "ph_wide-640.webp"
+ },
+ "photo_slots": {
+  "hero_portrait": {
+   "aspect": "4/5"
+  },
+  "story_1": {
+   "aspect": "4/5"
+  },
+  "story_2": {
+   "aspect": "5/4"
+  },
+  "story_3": {
+   "aspect": "4/5"
+  },
+  "venue": {
+   "aspect": "16/9"
+  }
+ },
+ "stage": {
+  "wall": {
+   "cols": 4,
+   "rows": 6,
+   "aspect": 0.6667
+  },
+  "tile_px": [
+   128,
+   256
+  ],
+  "_note": "4 × 6 tiles over the card (same 2:3 box); corners tile_3, border tile_2, field tile_1 / tile_4 turned in a 2 × 2 (site.js tileKind = build_images.tile_kind)"
+ },
+ "parts_css_rules": 0,
+ "og": {
+  "file": "og-1200x630.jpg",
+  "source": "montage: the closed tile wall (tile_1..4) on the cobalt wall",
+  "bytes": 134959
+ },
+ "favicon": {
+  "src_box": [
+   0,
+   0,
+   256,
+   256
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.02,
+  "file": "favicon.png",
+  "bytes": 49920
+ },
+ "sources": {
+  "azulejo_1": "interim (05 frame_portrait border tile, centre toned terracotta)",
+  "azulejo_2": "interim (05 frame_portrait border tile, centre toned terracotta)",
+  "azulejo_3": "interim (05 frame_portrait border tile, centre toned terracotta)",
+  "azulejo_4": "interim (05 frame_portrait border tile, centre toned terracotta)",
+  "tile_back": "interim (05 plaster toned terracotta)",
+  "cobalt_wall": "interim (05_Lemon_Mediterranean bg_tile.png toned)",
+  "lime_wash": "interim (05_Lemon_Mediterranean bg_tile.png toned)",
+  "card_paper": "interim (18_Wildflower_Vellum bg_tile.png toned)",
+  "frieze": "interim (the four tiles above, side by side)"
+ },
+ "parts": {
+  "used": [],
+  "waiting_for_gpt": [
+   "azulejo_1",
+   "azulejo_2",
+   "azulejo_3",
+   "azulejo_4",
+   "card_paper",
+   "cobalt_wall",
+   "frieze",
+   "lime_wash",
+   "tile_back",
+   "pot_left",
+   "pot_right",
+   "web_hero"
+  ]
+ },
+ "_note": "G169 interim build: tiles cut from 05's painted tile border, grounds toned from 05 / 18 plain GPT textures; the design's own PAKET 5 parts are taken as they arrive (GPT_PROMPTS.md, manifest parts). Nothing drawn.",
+ "checks": {
+  "green": {}
+ },
+ "theme_check": {
+  "first_screen": {
+   "landscape": false,
+   "names_min_px": 32
+  },
+  "backdrop": {
+   "edge_max": 2.2,
+   "dark_max": 0.05,
+   "dark_below": 0,
+   "light_above": 140
+  }
+ },
+ "bytes_total": 396561
+}

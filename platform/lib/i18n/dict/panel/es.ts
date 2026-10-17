@@ -1333,6 +1333,16 @@ const dict: Dict = {
   "The color palette could not be changed. Please try again.": "No se pudo cambiar la paleta de colores. Inténtalo de nuevo.",
   "The same design in other colors. Your change shows on your website at once; your texts and photos are not changed.": "El mismo diseño en otros colores. El cambio se ve en tu web al instante; tus textos y fotos no cambian.",
   "You can change the colors later in your editor.": "Puedes cambiar los colores más tarde en tu editor.",
+  // G169 Azulejo Mosaic
+  'Above your names on the wall': 'Sobre tus nombres en la pared',
+  'Button after the wall opens': 'Botón tras abrirse la pared',
+  'Open the wall again (RSVP page)': 'Abrir la pared de nuevo (página de RSVP)',
+  'Open the wall again (home page)': 'Abrir la pared de nuevo (página de inicio)',
+  'Open the wall again (wall page)': 'Abrir la pared de nuevo (página de la pared)',
+  'Under the wall, on computers': 'Bajo la pared, en ordenadores',
+  'Under the wall, on phones': 'Bajo la pared, en teléfonos',
+  'Wall': 'Pared',
+  'wall': 'la pared',
 };
 
 export default dict;

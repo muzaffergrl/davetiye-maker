@@ -289,6 +289,8 @@ const dict: Dict = {
   // G168 Celestial Observatory
   'Open the dome': 'Abrir la cúpula',
   'Written in the stars': 'Escrito en las estrellas',
+  // G169 Azulejo Mosaic
+  'Laid tile by tile, sent with love': 'Colocado azulejo a azulejo, enviado con amor',
 };
 
 export default dict;
