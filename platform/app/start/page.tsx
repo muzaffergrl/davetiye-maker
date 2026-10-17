@@ -16,6 +16,8 @@ import StartForm from './StartForm.tsx';
 import { offeredThemes } from '../../lib/themes/offered.ts';
 import { DesignList, StartShell } from './shell.tsx';
 import styles from './start.module.css';
+import { uiLocale } from '../../lib/i18n/server.ts';
+import { makeTranslator } from '../../lib/i18n/translate.ts';
 
 export const dynamic = 'force-dynamic';
 
@@ -35,21 +37,23 @@ export default async function StartPage({ searchParams }: Props) {
 
   // A real design that is still in review: 404 + the honest "not available yet" page (production only).
   if (found && !themeOpenForClaims(found.id)) notFound();
+  const { lang, dict } = await uiLocale();
+  const { t } = makeTranslator(lang, dict);
 
   if (!found) {
     const themes = await offeredThemes();
     return (
       <StartShell>
         <div className={styles.narrow}>
-          <p className={styles.eyebrow}>Your wedding website</p>
-          <h1 className={styles.title}>{requested ? 'This start link is not valid' : 'Choose your design'}</h1>
+          <p className={styles.eyebrow}>{t('Your wedding website')}</p>
+          <h1 className={styles.title}>{requested ? t('This start link is not valid') : t('Choose your design')}</h1>
           <p className={styles.lead}>
             {requested
-              ? 'We could not find this design. Please open the start link from your Etsy download again.'
-              : 'Please open the start link from your Etsy download.'}
-            {themes.length ? ' You can also choose the design you bought here:' : ''}
+              ? t('We could not find this design. Please open the start link from your Etsy download again.')
+              : t('Please open the start link from your Etsy download.')}
+            {themes.length ? ` ${t('You can also choose the design you bought here:')}` : ''}
           </p>
-          <DesignList themes={themes} />
+          <DesignList themes={themes} t={t} />
         </div>
       </StartShell>
     );
@@ -60,6 +64,8 @@ export default async function StartPage({ searchParams }: Props) {
       theme={{ id: found.id, name: found.name, partnerCount: found.partnerCount, demoUrl: demoBase(found.id) }}
       origin={publicOrigin(await headers())}
       emailEnabled={getEditLinkMailer().enabled}
+      lang={lang}
+      dict={dict}
     />
   );
 }

@@ -1,1 +1,157 @@
-<!doctype html><html lang="en" class="no-js"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#39090e"><title data-text="{name_display} · {copy.card_line}">Crimson Rose Atelier</title><meta name="description" content="A wedding invitation"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600&display=swap"><link rel="stylesheet" href="site.css"><script>document.documentElement.classList.replace('no-js','js');</script><script src="site.js" defer></script></head><body class="page-home"><main><section class="home-hero" data-reveal><p data-field="host_line" class="eyebrow"></p><h1 class="names"><span data-field="partners.0.display_name" class="first-name"></span><em aria-hidden="true">&amp;</em><span data-field="partners.1.display_name" class="second-name"></span></h1><p class="hero-request" data-if="!thank_you_on"><span data-copy="invite_request" >invite you to celebrate their wedding</span></p><p class="hero-request" data-if="thank_you_on" data-field="thank_you_title"></p><div class="offset-portrait"><div class="oval-photo" data-if="!thank_you_on"><img data-photo="hero_portrait" src="img/photo-placeholder.webp" alt="" data-attr-alt="{name_display}" sizes="(min-width: 900px) 540px, 90vw" fetchpriority="high"><span class="photo-placeholder-label" aria-hidden="true"></span></div><div class="oval-photo" data-if="thank_you_on thank_you.photo"><img data-field="thank_you.photo" alt="" data-attr-alt="{name_display}"></div><div class="oval-decor" data-if="thank_you_on !thank_you.photo"><img class="rose " src="img/rose-branch.webp" alt="" aria-hidden="true" loading="lazy"></div><img class="rose portrait-rose" src="img/rose-branch.webp" alt="" aria-hidden="true" loading="lazy"></div><p class="hero-bottom-date"><i data-copy="card_line">Our wedding</i><span data-field="date" ></span><small><span data-field="venue.city_region_country" ></span></small></p></section><section class="invitation page-section" data-reveal><div class="invitation-copy" data-if="!thank_you_on"><h2 data-copy="home_intro" >A day for love, a lifetime of memories.</h2><p class="formal-names"><span data-if="partners.0.full_name" data-field="partners.0.full_name"></span><span data-if="!partners.0.full_name" data-field="partners.0.display_name"></span><em>&amp;</em><span data-if="partners.1.full_name" data-field="partners.1.full_name"></span><span data-if="!partners.1.full_name" data-field="partners.1.display_name"></span></p><p class="body-text" data-copy="invite_request">invite you to celebrate their wedding</p><div class="date-block"><span data-field="date" data-format="weekday"></span><b data-field="date" data-format="day"></b><span><span data-field="date" data-format="month"></span><br><span data-field="date" data-format="year"></span></span></div><p class="venue-name" data-field="venue.name"></p><p class="eyebrow"><span data-copy="invite_at">at</span> <span data-field="ceremony_time" ></span></p><p data-if="!rsvp.method"><a class="btn" href="rsvp.html"><span data-copy="rsvp_button" >RSVP</span> <span aria-hidden="true">↗</span></a></p><p class="small" data-if="rsvp.deadline !rsvp.method"><span data-copy="rsvp_by" >Kindly reply by</span> <span data-field="rsvp.deadline" ></span></p></div><div class="thank-you-copy" data-if="thank_you_on"><h2 data-field="thank_you_title"></h2><p class="body-text" data-if="thank_you.message" data-field="thank_you.message"></p><p data-copy="love_line" class="italic">With love,</p><p data-field="name_display" class="venue-name"></p></div><div class="countdown" data-optional="countdown" data-if="countdown_target_utc !thank_you_on" data-countdown role="timer" aria-label="Countdown to the ceremony"><div class="cd-row"><div><span data-unit="days">–</span><small data-copy="cd_days" >Days</small></div><div><span data-unit="hours">–</span><small data-copy="cd_hours" >Hours</small></div><div><span data-unit="minutes">–</span><small data-copy="cd_minutes" >Minutes</small></div><div><span data-unit="seconds">–</span><small data-copy="cd_seconds" >Seconds</small></div></div><p class="cd-done" data-when="today" hidden><span data-copy="cd_today" >Today is the day — we're celebrating!</span></p><p class="cd-done" data-when="after" hidden><span data-copy="cd_after" >Thank you for celebrating with us.</span></p></div><div class="calendar" data-if="!thank_you_on"><p data-copy="calendar_title" class="eyebrow">Add to your calendar</p><div class="button-row"><a class="btn btn-ghost btn-sm" href="#" data-calendar="ics"><span data-copy="calendar_ics" >Apple / Outlook</span></a><a class="btn btn-ghost btn-sm" href="#" data-calendar="google" target="_blank" rel="noopener"><span data-copy="calendar_google" >Google</span></a></div></div></section><section class="home-memories" data-optional="our_story" data-reveal><div class="section-heading"><h2 data-copy="home_explore" >A glimpse of our story</h2><a href="story.html" class="textlink"><span data-copy="album_open" >Open our album</span> <span aria-hidden="true">↗</span></a></div><div class="memory-strip"><figure><a href="story.html#chapter-1" aria-label="Open album chapter 1"><img data-photo="story_1" src="img/photo-placeholder.webp" alt="" data-attr-alt="{name_display}" sizes="(min-width: 900px) 540px, 90vw" loading="lazy"></a><figcaption><span class="chapter-no">01</span><span data-field="story.items.0.caption" ></span></figcaption></figure><figure><a href="story.html#chapter-2" aria-label="Open album chapter 2"><img data-photo="story_2" src="img/photo-placeholder.webp" alt="" data-attr-alt="{name_display}" sizes="(min-width: 900px) 540px, 90vw" loading="lazy"></a><figcaption><span class="chapter-no">02</span><span data-field="story.items.1.caption" ></span></figcaption></figure><figure><a href="story.html#chapter-3" aria-label="Open album chapter 3"><img data-photo="story_3" src="img/photo-placeholder.webp" alt="" data-attr-alt="{name_display}" sizes="(min-width: 900px) 540px, 90vw" loading="lazy"></a><figcaption><span class="chapter-no">03</span><span data-field="story.items.2.caption" ></span></figcaption></figure></div></section><section class="home-day-link page-section" data-if="!thank_you_hides_details" data-reveal><p class="eyebrow" data-copy="home_location">Join us in</p><h2 data-field="venue.city" ></h2><a class="btn btn-ghost" href="details.html"><span data-copy="day_title" >The celebration</span> <span aria-hidden="true">→</span></a></section><footer class="page-section signature"><img class="rose " src="img/rose-branch.webp" alt="" aria-hidden="true" loading="lazy"><p data-copy="foot_kicker" class="eyebrow">With love</p><p data-field="name_display" class="signature-names"></p><a class="textlink" href="index.html?replay=1"><span data-copy="home_replay" >Open the envelope again</span></a></footer></main><nav class="site-nav" aria-label="Wedding pages"><ul><li ><a href="home.html" aria-current="page"><span data-copy="nav_home" >Home</span></a></li><li data-optional="our_story"><a href="story.html" ><span data-copy="nav_story" >Story</span></a></li><li data-if="!thank_you_hides_details"><a href="details.html" ><span data-copy="nav_details" >Details</span></a></li><li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html" ><span data-copy="nav_rsvp" >RSVP</span></a></li></ul></nav></body></html>
+<!doctype html>
+<!-- Crimson Rose Atelier · page 2 — home (/<slug>/home). Oversized left-aligned names on burgundy; the oval portrait sits
+     across the burgundy / ivory join with a rose branch (the envelope card lands here: view transition invite-card); the
+     invitation on ivory paper with the date block, countdown and calendar; a staggered memory strip (three album chapters)
+     and the way to the day. Personal text: none — filled on the server. Thank-you mode (G075): the invitation becomes the
+     thank-you card; countdown, reply call and calendar go. Design texts: data-copy (G068). -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4b0c17">
+<title data-text="{name_display} · {copy.card_line}">Crimson Rose Atelier</title>
+<meta name="description" data-if="!thank_you_on" data-attr-content="{copy.card_line} · {name_display} · {date|date-long} · {venue.city_region}" content="A wedding invitation">
+<meta name="description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {name_display} · {date|date-long}" content="Thank you">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{name_display} · {date}" content="Wedding invitation">
+<meta property="og:description" data-if="!thank_you_on" data-attr-content="{copy.card_line} · {date|date-long} · {venue.city_region}" content="Our wedding">
+<meta property="og:description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {date|date-long}" content="Thank you">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
+<script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
+(function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'',s=sessionStorage;if(s.getItem('invite:arrive'+k)){s.removeItem('invite:arrive'+k);r.classList.add('from-envelope');if(!('onpageswap' in window&&document.startViewTransition))r.classList.add('arrive-fade');}}catch(e){}})(document.documentElement);
+</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-home" data-pending="This link will be added soon.">
+<main>
+<section class="home-hero">
+  <div class="hero-title" data-scene="home-hero">
+    <p class="eyebrow host" data-if="host_line" data-field="host_line" data-step="host"></p>
+    <h1 class="names" data-step="names"><span data-field="partners.0.display_name" class="first-name"></span><span class="amp">&amp;</span><span data-field="partners.1.display_name" class="second-name"></span></h1>
+    <p class="hero-request" data-if="!thank_you_on" data-step="request"><span data-copy="invite_request">invite you to celebrate their wedding</span></p>
+    <p class="hero-request" data-if="thank_you_on" data-field="thank_you_title" data-step="request"></p>
+  </div>
+  <div class="hero-lower" data-scene="home-portrait">
+    <div class="offset-portrait" data-step="portrait">
+      <div class="oval-photo photo-slot" data-slot="hero_portrait" data-if="!thank_you_on">
+        <img data-photo="hero_portrait" src="img/ph_portrait-640.webp" alt="" data-attr-alt="Photo of {name_display}" sizes="(min-width: 700px) min(32vw, 280px), 47vw" fetchpriority="high">
+        <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+      </div>
+      <div class="oval-photo" data-if="thank_you_on thank_you.photo">
+        <img data-field="thank_you.photo" src="img/ph_portrait-640.webp" alt="" data-attr-alt="Photo of {name_display}" sizes="(min-width: 700px) min(32vw, 280px), 47vw">
+      </div>
+      <div class="oval-photo oval-decor" data-if="thank_you_on !thank_you.photo"><img class="rose" src="img/rose-branch.webp" alt=""></div>
+      <img class="rose portrait-rose" src="img/rose-branch.webp" alt="" aria-hidden="true">
+    </div>
+    <p class="hero-bottom-date" data-step="date">
+      <i data-copy="card_line">Our wedding</i>
+      <span data-field="date"></span>
+      <small data-field="venue.city_region_country"></small>
+    </p>
+  </div>
+</section>
+
+<section class="invitation page-section" data-scene="home-invite">
+  <div class="invitation-copy" data-if="!thank_you_on">
+    <h2 data-copy="home_intro" data-step="title">A day for love, a lifetime of memories.</h2>
+    <div class="formal-names" data-step="names">
+      <p data-if="partners.0.full_name" data-field="partners.0.full_name"></p>
+      <p data-if="!partners.0.full_name" data-field="partners.0.display_name"></p>
+      <p class="amp" aria-hidden="true">&amp;</p>
+      <p data-if="partners.1.full_name" data-field="partners.1.full_name"></p>
+      <p data-if="!partners.1.full_name" data-field="partners.1.display_name"></p>
+    </div>
+    <p class="body-text" data-copy="invite_request" data-step="names" data-i="1">invite you to celebrate their wedding</p>
+    <div class="date-block" data-step="date">
+      <span data-field="date" data-format="weekday"></span>
+      <b data-field="date" data-format="day"></b>
+      <span><span data-field="date" data-format="month"></span><br><span data-field="date" data-format="year"></span></span>
+    </div>
+    <p class="venue-name" data-field="venue.name" data-step="venue"></p>
+    <p class="eyebrow" data-if="ceremony_time" data-step="venue" data-i="1"><span data-copy="invite_at">at</span> <span data-field="ceremony_time"></span></p>
+    <p data-if="!rsvp.method" data-step="reply"><a class="btn" href="rsvp.html"><span data-copy="rsvp_button">RSVP</span> <span aria-hidden="true">↗</span></a></p>
+    <p class="small" data-if="rsvp.deadline !rsvp.method" data-step="reply" data-i="1"><span data-copy="rsvp_by">Kindly reply by</span> <span data-field="rsvp.deadline"></span></p>
+  </div>
+  <div class="thank-you-copy" data-if="thank_you_on">
+    <h2 data-field="thank_you_title" data-step="title"></h2>
+    <p class="body-text" data-if="thank_you.message" data-field="thank_you.message" data-step="names"></p>
+    <p data-copy="love_line" class="italic" data-step="date">With love,</p>
+    <p data-field="name_display" class="venue-name" data-step="date" data-i="1"></p>
+    <p class="eyebrow" data-field="date" data-step="venue"></p>
+  </div>
+  <div class="countdown" data-optional="countdown" data-if="countdown_target_utc !thank_you_on" data-countdown role="timer" aria-label="Countdown to the ceremony" data-step="count">
+    <div class="cd-row">
+      <div><span class="cd-num" data-unit="days">–</span><small data-copy="cd_days">Days</small></div>
+      <div><span class="cd-num" data-unit="hours">–</span><small data-copy="cd_hours">Hours</small></div>
+      <div><span class="cd-num" data-unit="minutes">–</span><small data-copy="cd_minutes">Minutes</small></div>
+      <div><span class="cd-num" data-unit="seconds">–</span><small data-copy="cd_seconds">Seconds</small></div>
+    </div>
+    <p class="cd-done" data-when="today" hidden><span data-copy="cd_today">Today is the day — we're celebrating!</span></p>
+    <p class="cd-done" data-when="after" hidden><span data-copy="cd_after">Thank you for celebrating with us.</span></p>
+  </div>
+  <div class="calendar" data-if="!thank_you_on" data-step="calendar">
+    <p data-copy="calendar_title" class="eyebrow">Add to your calendar</p>
+    <div class="button-row">
+      <a class="btn btn-ghost btn-sm" href="#" data-calendar="ics"><span data-copy="calendar_ics">Apple / Outlook</span></a>
+      <a class="btn btn-ghost btn-sm" href="#" data-calendar="google" target="_blank" rel="noopener"><span data-copy="calendar_google">Google</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="home-memories" data-optional="our_story" data-scene="home-teasers">
+  <div class="section-heading" data-step="head">
+    <h2 data-copy="home_explore">A glimpse of our story</h2>
+    <a href="story.html" class="textlink"><span data-copy="album_open">Open our album</span> <span aria-hidden="true">↗</span></a>
+  </div>
+  <div class="memory-strip">
+    <figure data-step="leaf" data-i="0">
+      <a class="photo-slot" data-slot="story_1" href="story.html#chapter-1">
+        <img data-photo="story_1" src="img/ph_land-640.webp" alt="" data-attr-alt="{story.items.0.caption}" sizes="(min-width: 700px) 330px, 78vw" loading="lazy">
+        <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+      </a>
+      <figcaption><span class="chapter-no">01</span> <span data-field="story.items.0.caption"></span></figcaption>
+    </figure>
+    <figure data-step="leaf" data-i="1">
+      <a class="photo-slot" data-slot="story_2" href="story.html#chapter-2">
+        <img data-photo="story_2" src="img/ph_land-640.webp" alt="" data-attr-alt="{story.items.1.caption}" sizes="(min-width: 700px) 330px, 78vw" loading="lazy">
+        <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+      </a>
+      <figcaption><span class="chapter-no">02</span> <span data-field="story.items.1.caption"></span></figcaption>
+    </figure>
+    <figure data-step="leaf" data-i="2">
+      <a class="photo-slot" data-slot="story_3" href="story.html#chapter-3">
+        <img data-photo="story_3" src="img/ph_land-640.webp" alt="" data-attr-alt="{story.items.2.caption}" sizes="(min-width: 700px) 330px, 78vw" loading="lazy">
+        <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+      </a>
+      <figcaption><span class="chapter-no">03</span> <span data-field="story.items.2.caption"></span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="home-day-link page-section" data-if="!thank_you_hides_details" data-scene="home-day">
+  <p class="eyebrow" data-copy="home_location" data-step="head">Join us in</p>
+  <h2 data-field="venue.city" data-step="head" data-i="1"></h2>
+  <p data-step="link"><a class="btn btn-ghost" href="details.html"><span data-copy="day_title">The celebration</span> <span aria-hidden="true">→</span></a></p>
+</section>
+
+<footer class="page-section signature" data-scene="home-foot">
+  <img class="rose" src="img/rose-branch.webp" alt="" loading="lazy" data-step="rose">
+  <p data-copy="foot_kicker" class="eyebrow" data-step="names">With love</p>
+  <p data-field="name_display" class="signature-names" data-step="names" data-i="1"></p>
+  <p data-step="links"><a class="textlink replay-link" href="index.html?replay=1"><span data-copy="home_replay">Open the envelope again</span></a></p>
+</footer>
+</main>
+<nav class="site-nav" aria-label="Wedding pages">
+  <ul>
+    <li><a href="home.html" aria-current="page"><span data-copy="nav_home">Home</span></a></li>
+    <li data-optional="our_story"><a href="story.html"><span data-copy="nav_story">Story</span></a></li>
+    <li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on" data-copy="nav_details">Details</span><span data-if="thank_you_on" data-copy="nav_day">The Day</span></a></li>
+    <li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>

@@ -1,4 +1,7 @@
 'use client';
+import { setUiLocale, t } from '../../lib/i18n/client.ts';
+import type { Lang } from '../../lib/i18n/langs.ts';
+import type { Dict } from '../../lib/i18n/translate.ts';
 // /start form and result (G045). Phone first (390 px), in the edit panel's BKE Studio look (G080: StartShell —
 // panel tokens, fonts and logo; no decorative drawings, K21).
 // Same field rules as the server (lib/claim/fields.ts). On success the edit link is shown once,
@@ -134,7 +137,9 @@ function store(value: ClaimResultView | null): void {
   }
 }
 
-export default function StartForm({ theme, origin, emailEnabled }: { theme: StartTheme; origin: string; emailEnabled: boolean }) {
+export default function StartForm({ theme, origin, emailEnabled, lang = 'en', dict }: { theme: StartTheme; origin: string; emailEnabled: boolean; lang?: Lang; dict?: Dict }) {
+  // G144: the interface language (chosen on the server) before any text renders
+  setUiLocale(lang, dict);
   const [result, setResult] = useState<ClaimResultView | null>(null);
   const [lastEmail, setLastEmail] = useState('');
 
@@ -166,10 +171,10 @@ export default function StartForm({ theme, origin, emailEnabled }: { theme: Star
       ) : (
         <div className={styles.layout}>
           <header className={styles.header}>
-            <p className={styles.eyebrow}>Your wedding website</p>
-            <h1 className={styles.title}>Start your website</h1>
+            <p className={styles.eyebrow}>{t('Your wedding website')}</p>
+            <h1 className={styles.title}>{t('Start your website')}</h1>
             <p className={styles.lead}>
-              Design: <strong>{theme.name}</strong>
+              {t('Design:')} <strong>{theme.name}</strong>
             </p>
           </header>
           <DemoPreview theme={theme} />
@@ -184,13 +189,13 @@ export default function StartForm({ theme, origin, emailEnabled }: { theme: Star
 
 function DemoPreview({ theme }: { theme: StartTheme }) {
   return (
-    <section className={styles.preview} aria-label={`${theme.name} demo`}>
+    <section className={styles.preview} aria-label={t('{design} demo', { design: theme.name })}>
       <div className={styles.frameBox}>
-        <iframe className={styles.frame} src={theme.demoUrl} title={`${theme.name} demo website`} referrerPolicy="no-referrer" />
+        <iframe className={styles.frame} src={theme.demoUrl} title={t('{design} demo website', { design: theme.name })} referrerPolicy="no-referrer" />
       </div>
-      <p className={styles.previewNote}>Sample names, dates and placeholder photos. You will add your own in the editor.</p>
+      <p className={styles.previewNote}>{t('Sample names, dates and placeholder photos. You will add your own in the editor.')}</p>
       <a className={styles.textLink} href={theme.demoUrl} target="_blank" rel="noopener">
-        Open the full demo
+        {t('Open the full demo')}
       </a>
     </section>
   );
@@ -231,7 +236,11 @@ function ClaimForm({
 
   const values = { orderNumber, email, names, slug };
   const clientErrors = claimFieldErrors(values, theme.partnerCount);
-  const errorFor = (f: ClaimField): string | null => serverErrors[f] ?? (touched[f] || submitted ? (clientErrors[f] ?? null) : null);
+  // Field errors come in English from lib/claim/fields.ts and the server; shown in the interface language.
+  const errorFor = (f: ClaimField): string | null => {
+    const err = serverErrors[f] ?? (touched[f] || submitted ? (clientErrors[f] ?? null) : null);
+    return err ? t(err) : null;
+  };
 
   const clearServer = (f: ClaimField) =>
     setServerErrors((prev) => {
@@ -276,7 +285,7 @@ function ClaimForm({
           setAdjusted({ from: value, to: body.suggestion });
           setSlug(body.suggestion);
         } else {
-          setSlugStatus({ kind: 'unavailable', message: body.message ?? 'This address is not available.', suggestion: body.suggestion ?? null });
+          setSlugStatus({ kind: 'unavailable', message: body.message ? t(body.message) : t('This address is not available.'), suggestion: body.suggestion ?? null });
         }
       } catch {
         if (seq === checkSeq.current && !ctrl.signal.aborted) setSlugStatus({ kind: 'unknown' });
@@ -370,24 +379,24 @@ function ClaimForm({
           setServerErrors(fields);
           const f = FIELD_ORDER.find((k) => fields[k]);
           if (f) focusField(f);
-          else showMessage({ tone: 'error', text: body.message ?? 'Please check the form and try again.' });
+          else showMessage({ tone: 'error', text: body.message ? t(body.message) : t('Please check the form and try again.') });
           break;
         }
         case 'order_used':
-          setServerErrors({ orderNumber: 'This order number already has a website.' });
-          showMessage({ tone: 'notice', title: 'This order already has a website', text: String(body.message) });
+          setServerErrors({ orderNumber: t('This order number already has a website.') });
+          showMessage({ tone: 'notice', title: t('This order already has a website'), text: t(String(body.message)) });
           break;
         case 'slug_taken':
           setSlugAuto(false);
-          setServerErrors({ slug: fields.slug ?? 'This address is already taken.' });
-          setSlugStatus({ kind: 'unavailable', message: fields.slug ?? 'This address is already taken.', suggestion: body.suggestion ?? null });
+          setServerErrors({ slug: fields.slug ?? t('This address is already taken.') });
+          setSlugStatus({ kind: 'unavailable', message: fields.slug ? t(fields.slug) : t('This address is already taken.'), suggestion: body.suggestion ?? null });
           focusField('slug');
           break;
         default:
-          showMessage({ tone: 'error', text: body.message ?? 'Something went wrong. Please try again in a moment.' });
+          showMessage({ tone: 'error', text: body.message ? t(body.message) : t('Something went wrong. Please try again in a moment.') });
       }
     } catch {
-      showMessage({ tone: 'error', text: 'No connection. Please check your internet connection and try again.' });
+      showMessage({ tone: 'error', text: t('No connection. Please check your internet connection and try again.') });
     } finally {
       setBusy(false);
     }
@@ -399,7 +408,7 @@ function ClaimForm({
       id: FIELD_IDS[f],
       'aria-invalid': err ? true : undefined,
       'aria-describedby': [hintId, err ? `${FIELD_IDS[f]}-error` : null].filter(Boolean).join(' ') || undefined,
-      onBlur: () => setTouched((t) => ({ ...t, [f]: true })),
+      onBlur: () => setTouched((prev) => ({ ...prev, [f]: true })),
     };
   };
 
@@ -417,7 +426,7 @@ function ClaimForm({
 
   return (
     <form className={styles.card} onSubmit={onSubmit} noValidate aria-busy={busy || undefined}>
-      <h2 className={styles.cardTitle}>Your details</h2>
+      <h2 className={styles.cardTitle}>{t('Your details')}</h2>
 
       {message ? (
         <div
@@ -433,7 +442,7 @@ function ClaimForm({
 
       <div className={styles.field}>
         <label className={styles.label} htmlFor={FIELD_IDS.orderNumber}>
-          Etsy order number
+          {t('Etsy order number')}
         </label>
         <input
           className={styles.input}
@@ -449,14 +458,14 @@ function ClaimForm({
           }}
         />
         <p className={styles.hint} id="start-order-hint">
-          Find it in your Etsy order confirmation email, or on Etsy under Purchases and reviews. One website per order.
+          {t('Find it in your Etsy order confirmation email, or on Etsy under Purchases and reviews. One website per order.')}
         </p>
         {errorText('orderNumber')}
       </div>
 
       <div className={styles.field}>
         <label className={styles.label} htmlFor={FIELD_IDS.email}>
-          Email address
+          {t('Email address')}
         </label>
         <input
           className={styles.input}
@@ -473,21 +482,21 @@ function ClaimForm({
         />
         <p className={styles.hint} id="start-email-hint">
           {emailEnabled
-            ? 'We will email your edit link to this address and keep it with your website.'
-            : 'We keep it with your website. We do not send emails yet, so you will save your edit link on the next screen.'}
+            ? t('We will email your edit link to this address and keep it with your website.')
+            : t('We keep it with your website. We do not send emails yet, so you will save your edit link on the next screen.')}
         </p>
         {errorText('email')}
       </div>
 
       <fieldset className={styles.fieldset}>
-        <legend className={styles.label}>{twoNames ? 'Your first names' : 'First name'}</legend>
+        <legend className={styles.label}>{twoNames ? t('Your first names') : t('First name')}</legend>
         <div className={twoNames ? styles.nameRow : undefined}>
           {names.map((value, i) => {
             const f: ClaimField = i === 0 ? 'name1' : 'name2';
             return (
               <div key={f} className={styles.nameCell}>
                 <label className={styles.subLabel} htmlFor={FIELD_IDS[f]}>
-                  {twoNames ? (i === 0 ? 'Your first name' : "Your partner's first name") : 'First name'}
+                  {twoNames ? (i === 0 ? t('Your first name') : t("Your partner's first name")) : t('First name')}
                 </label>
                 <input
                   className={styles.input}
@@ -509,13 +518,13 @@ function ClaimForm({
           })}
         </div>
         <p className={styles.hint} id="start-names-hint">
-          Shown on your draft and used for your website address. You can change names later in the editor.
+          {t('Shown on your draft and used for your website address. You can change names later in the editor.')}
         </p>
       </fieldset>
 
       <div className={styles.field}>
         <label className={styles.label} htmlFor={FIELD_IDS.slug}>
-          Website address
+          {t('Website address')}
         </label>
         <input
           className={styles.input}
@@ -546,7 +555,7 @@ function ClaimForm({
               clearServer('slug');
             }}
           />
-          <p className={styles.hint}>The address cannot be changed later.</p>
+          <p className={styles.hint}>{t('The address cannot be changed later.')}</p>
         </div>
         {errorText('slug')}
       </div>
@@ -560,10 +569,10 @@ function ClaimForm({
       </div>
 
       <button className={styles.primary} type="submit" disabled={busy}>
-        {busy ? 'Creating your website…' : 'Create my website'}
+        {busy ? t('Creating your website…') : t('Create my website')}
       </button>
-      <p className={styles.small}>Your website starts as a private draft. Nobody can see it until you press Publish in the editor.</p>
-      <p className={styles.small}>Need help? Message us on Etsy with your order number.</p>
+      <p className={styles.small}>{t('Your website starts as a private draft. Nobody can see it until you press Publish in the editor.')}</p>
+      <p className={styles.small}>{t('Need help? Message us on Etsy with your order number.')}</p>
     </form>
   );
 }
@@ -581,11 +590,11 @@ function SlugHint({
 }) {
   switch (status.kind) {
     case 'checking':
-      return <p className={styles.hint}>Checking…</p>;
+      return <p className={styles.hint}>{t('Checking…')}</p>;
     case 'available':
       return (
         <p className={styles.ok} data-slug-available="">
-          {adjustedFrom ? `Available. "${adjustedFrom}" is taken, so we added a number.` : 'Available'}
+          {adjustedFrom ? t('Available. "{address}" is taken, so we added a number.', { address: adjustedFrom }) : t('Available')}
         </p>
       );
     case 'unavailable':
@@ -594,13 +603,13 @@ function SlugHint({
           {hasError ? null : <p className={styles.error}>{status.message}</p>}
           {status.suggestion ? (
             <button type="button" className={styles.suggestion} onClick={() => onUse(status.suggestion!)}>
-              Use {status.suggestion}
+              {t('Use {address}', { address: status.suggestion })}
             </button>
           ) : null}
         </div>
       );
     case 'unknown':
-      return <p className={styles.hint}>We will check this address when you create your website.</p>;
+      return <p className={styles.hint}>{t('We will check this address when you create your website.')}</p>;
     default:
       return null;
   }
@@ -643,38 +652,39 @@ function ResultView({ result, themeName, onStartOver }: { result: ClaimResultVie
 
   const mailto =
     `mailto:${encodeURIComponent(result.email).replace(/%40/g, '@')}` +
-    `?subject=${encodeURIComponent('My wedding website edit link')}` +
+    `?subject=${encodeURIComponent(t('My wedding website edit link'))}` +
     `&body=${encodeURIComponent(
-      `Edit link (keep it private, anyone with it can edit the website):\n${result.editUrl}\n\n` +
-        `Website address (visible after publishing):\n${result.siteUrl}\n`,
+      `${t('Edit link (keep it private, anyone with it can edit the website):')}\n${result.editUrl}\n\n` +
+        `${t('Website address (visible after publishing):')}\n${result.siteUrl}\n`,
     )}`;
+
+  // One sentence for translators; the address sits where {address} is.
+  const [addressBefore, addressAfter = ''] = t('Your website address will be {address}. It stays a private draft until you press Publish in the editor.').split('{address}');
 
   return (
     <div className={styles.resultWrap}>
       <section className={styles.result} aria-labelledby="start-result-title">
-        <p className={styles.eyebrow}>Your wedding website</p>
+        <p className={styles.eyebrow}>{t('Your wedding website')}</p>
         <h1 id="start-result-title" ref={heading} tabIndex={-1} className={styles.title}>
-          Your website is ready to edit
+          {t('Your website is ready to edit')}
         </h1>
         <p className={styles.lead}>
-          Design: <strong>{themeName}</strong>
+          {t('Design:')} <strong>{themeName}</strong>
         </p>
 
         <div className={styles.saveBox}>
-          <h2 className={styles.saveTitle}>Save this link</h2>
-          <p>
-            It is the only way to open your editor. Anyone who has this link can edit your website, so keep it private.
-          </p>
+          <h2 className={styles.saveTitle}>{t('Save this link')}</h2>
+          <p>{t('It is the only way to open your editor. Anyone who has this link can edit your website, so keep it private.')}</p>
           {result.emailSent ? (
-            <p>We have also emailed it to {result.email}.</p>
+            <p>{t('We have also emailed it to {email}.', { email: result.email })}</p>
           ) : (
             <p>
-              <strong>We cannot email it to you yet.</strong> Copy it somewhere safe now, for example your notes app or an email to
-              yourself.
+              <strong>{t('We cannot email it to you yet.')}</strong>{' '}
+              {t('Copy it somewhere safe now, for example your notes app or an email to yourself.')}
             </p>
           )}
           <label className={styles.visuallyHidden} htmlFor="start-edit-link">
-            Your edit link
+            {t('Your edit link')}
           </label>
           <textarea
             id="start-edit-link"
@@ -688,41 +698,42 @@ function ResultView({ result, themeName, onStartOver }: { result: ClaimResultVie
           />
           <div className={styles.actions}>
             <button type="button" className={styles.secondary} onClick={copyLink} data-copy-link="">
-              {copy === 'copied' ? 'Copied' : 'Copy link'}
+              {copy === 'copied' ? t('Copied') : t('Copy link')}
             </button>
             {result.email ? (
               <a className={styles.secondary} href={mailto}>
-                Email it to myself
+                {t('Email it to myself')}
               </a>
             ) : null}
           </div>
-          <p className={styles.small} data-copy-later="">You can copy this link again later in your editor: Share → Your private edit link.</p>
+          <p className={styles.small} data-copy-later="">{t('You can copy this link again later in your editor: Share → Your private edit link.')}</p>
           <p className={styles.copyStatus} aria-live="polite">
-            {copy === 'copied' ? 'The link is copied. Paste it somewhere safe.' : copy === 'failed' ? 'Copying did not work. Select the link above and copy it.' : ''}
+            {copy === 'copied' ? t('The link is copied. Paste it somewhere safe.') : copy === 'failed' ? t('Copying did not work. Select the link above and copy it.') : ''}
           </p>
         </div>
 
         {/* G060: the editor's first-run setup starts at step 1 (names already filled in from this form). */}
         <a className={styles.primary} href={`${result.editPath}#setup/1`} data-open-editor="">
-          Open my editor
+          {t('Open my editor')}
         </a>
         <p className={styles.small}>
-          Your website address will be <strong className={styles.breakAll}>{result.siteUrl}</strong>. It stays a private draft until you
-          press Publish in the editor.
+          {addressBefore}
+          <strong className={styles.breakAll}>{result.siteUrl}</strong>
+          {addressAfter}
         </p>
         {/* G121 (docs/19 §6 B2): the editor is a web page; a Home Screen icon brings the buyer back to it. */}
         <p className={styles.small} data-home-screen-tip="">
-          Tip: once your editor is open, add it to your Home Screen.
+          {t('Tip: once your editor is open, add it to your Home Screen.')}
         </p>
         {result.orderPending ? (
           <p className={styles.small} data-order-pending="">
-            We are confirming your Etsy order. You can set up everything now; Publish opens as soon as the order is confirmed.
+            {t('We are confirming your Etsy order. You can set up everything now; Publish opens as soon as the order is confirmed.')}
           </p>
         ) : null}
         <button type="button" className={styles.linkButton} onClick={onStartOver}>
-          Start with a different order
+          {t('Start with a different order')}
         </button>
-        <p className={styles.small}>One order starts one website. Questions? Message us on Etsy with your order number.</p>
+        <p className={styles.small}>{t('One order starts one website. Questions? Message us on Etsy with your order number.')}</p>
       </section>
     </div>
   );

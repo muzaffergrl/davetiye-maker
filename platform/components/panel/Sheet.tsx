@@ -8,6 +8,7 @@ import { X } from 'lucide-react';
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { PANEL_FONTS } from './fonts.ts';
+import { t } from '../../lib/i18n/client.ts';
 import styles from './panel.module.css';
 
 const HISTORY_MARK = 'panel-sheet';
@@ -23,7 +24,7 @@ export function Sheet({
   onClose,
   children,
   wide = false,
-  closeLabel = 'Close',
+  closeLabel = t('Close'),
   testId,
   footer,
 }: {

@@ -49,6 +49,8 @@ import { Sheet } from './Sheet.tsx';
 import { Badge, Banner, Button, Card, cx, EmptyState, OverflowMenu, Segmented, useSnackbar } from './ui.tsx';
 import styles from './panel.module.css';
 import { SheetsCard } from './SheetsCard.tsx';
+import { msg, t, tn, uiLang } from '../../lib/i18n/client.ts';
+import { LANG_TAGS } from '../../lib/i18n/langs.ts';
 
 // ---------------------------------------------------------------------------------------------
 // Data (shared by Home and Guests)
@@ -106,7 +108,7 @@ export function useReplies(api: PanelApi, slug: string, active: boolean, publish
       if (res.ok) {
         setData(res.body as unknown as RepliesSummary);
         setError(null);
-      } else setError(res.status === 0 ? 'No connection. Replies could not be loaded.' : (res.body.message ?? 'Replies could not be loaded.'));
+      } else setError(res.status === 0 ? t('No connection. Replies could not be loaded.') : (res.body.message ? t(res.body.message) : t('Replies could not be loaded.')));
     });
     return () => {
       alive = false;
@@ -135,12 +137,16 @@ export type Replies = ReturnType<typeof useReplies>;
 // Small helpers
 
 const norm = (s: string) => s.normalize('NFC').replace(/\s+/g, ' ').trim().toLowerCase();
-const plural = (n: number, one: string, many: string) => `${n} ${n === 1 ? one : many}`;
+const replyCount = (n: number) => tn(n, '1 reply', '{n} replies');
+const peopleCount = (n: number) => tn(n, '1 person', '{n} people');
+const guestCount = (n: number) => tn(n, '1 guest', '{n} guests');
+/** BCP 47 tag of the panel language, for dates. */
+const dateTag = () => LANG_TAGS[uiLang()];
 
 /** "Jordan, Sam and Lee". */
 function joinNames(names: readonly string[]): string {
-  if (names.length <= 2) return names.join(' and ');
-  return `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`;
+  if (names.length < 2) return names.join('');
+  return t('{a} and {b}', { a: names.slice(0, -1).join(', '), b: names[names.length - 1] });
 }
 
 /** "With Jordan Stone + 1 more" — the people with the guest who replied (named first). */
@@ -149,20 +155,20 @@ export function partyLine(r: ReplyEntry): string | null {
   const people = replyPeople(r).slice(1);
   const named = people.filter((p) => p.named).map((p) => p.name);
   const unnamed = people.length - named.length;
-  if (!named.length) return `+ ${plural(unnamed, 'guest', 'guests')}, no names given`;
-  return `With ${joinNames(named)}${unnamed ? ` + ${unnamed} more` : ''}`;
+  if (!named.length) return tn(unnamed, '+ 1 guest, no names given', '+ {n} guests, no names given');
+  return unnamed ? t('With {names} + {n} more', { names: joinNames(named), n: unnamed }) : t('With {names}', { names: joinNames(named) });
 }
 
 const DATE_TIME: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' };
-const when = (iso: string) => new Date(iso).toLocaleString('en-US', DATE_TIME);
+const when = (iso: string) => new Date(iso).toLocaleString(dateTag(), DATE_TIME);
 
 type Filter = 'all' | 'coming' | 'not' | 'new' | 'held';
 type Sort = 'newest' | 'oldest' | 'name' | 'coming';
 const SORTS: Array<{ value: Sort; label: string }> = [
-  { value: 'newest', label: 'Newest first' },
-  { value: 'oldest', label: 'Oldest first' },
-  { value: 'name', label: 'Name (A–Z)' },
-  { value: 'coming', label: 'Coming first' },
+  { value: 'newest', label: msg('Newest first') },
+  { value: 'oldest', label: msg('Oldest first') },
+  { value: 'name', label: msg('Name (A–Z)') },
+  { value: 'coming', label: msg('Coming first') },
 ];
 
 function sortReplies(list: ReplyEntry[], sort: Sort): ReplyEntry[] {
@@ -230,8 +236,8 @@ export function GuestsView({
     setConfirm(null);
     if (res.ok) {
       replies.setData(res.body as unknown as RepliesSummary);
-      snack(action === 'remove' ? (ids.length === 1 ? 'Reply removed' : 'Replies removed') : 'Reply kept');
-    } else snack(res.body.message ?? 'The replies could not be changed. Please try again.');
+      snack(action === 'remove' ? (ids.length === 1 ? t('Reply removed') : t('Replies removed')) : t('Reply kept'));
+    } else snack(res.body.message ? t(res.body.message) : t('The replies could not be changed. Please try again.'));
   };
 
   const neverPublished = meta.status !== 'published' && !meta.publishedAt;
@@ -245,7 +251,7 @@ export function GuestsView({
       if (filter === 'not' && r.attending) return false;
       if (filter === 'new' && !replies.isNew(r)) return false;
       if (answer && !(r.answers ?? []).some((a) => a.id === answer.id && norm(a.answer) === norm(answer.value))) return false;
-      if (q && ![r.name, ...(r.party ?? []), r.email ?? ''].some((t) => t.toLowerCase().includes(q))) return false;
+      if (q && ![r.name, ...(r.party ?? []), r.email ?? ''].some((s) => s.toLowerCase().includes(q))) return false;
       return true;
     });
     return sortReplies(rows, sort);
@@ -255,14 +261,14 @@ export function GuestsView({
 
   if (neverPublished && !data?.responses.length) {
     return (
-      <EmptyState icon={Users} action={<Button variant="primary" icon={Send} onClick={onPublish}>Publish</Button>}>
-        Replies appear here after you publish your website.
+      <EmptyState icon={Users} action={<Button variant="primary" icon={Send} onClick={onPublish}>{t('Publish')}</Button>}>
+        {t('Replies appear here after you publish your website.')}
       </EmptyState>
     );
   }
   if (error && !data) {
     return (
-      <Banner tone="warning" icon={online ? TriangleAlert : WifiOff} actions={<Button small icon={RefreshCw} onClick={replies.refresh}>Try again</Button>}>
+      <Banner tone="warning" icon={online ? TriangleAlert : WifiOff} actions={<Button small icon={RefreshCw} onClick={replies.refresh}>{t('Try again')}</Button>}>
         {error}
       </Banner>
     );
@@ -283,11 +289,11 @@ export function GuestsView({
   const newCount = replies.newCount;
   // G100 (docs/18 §4, Luma / Hitchd): the status tabs, always in the same places; "Held for review" only when there is one.
   const chips: Array<{ id: Filter; label: string; count?: number }> = [
-    { id: 'all', label: 'All' },
-    { id: 'coming', label: 'Coming' },
-    { id: 'not', label: 'Not coming' },
-    { id: 'new', label: 'New', count: newCount },
-    ...(held ? [{ id: 'held' as Filter, label: 'Held', count: held }] : []),
+    { id: 'all', label: t('All') },
+    { id: 'coming', label: t('Coming') },
+    { id: 'not', label: t('Not coming') },
+    { id: 'new', label: t('New'), count: newCount },
+    ...(held ? [{ id: 'held' as Filter, label: t('Held'), count: held }] : []),
   ];
   const questions = (insights?.questions ?? []).filter((q) => q.current || q.answered);
   const hasDietQuestion = (insights?.questions ?? []).some((q) => q.current && q.dietary);
@@ -319,11 +325,11 @@ export function GuestsView({
     });
 
   const viewTabs = (
-    <nav className={styles.viewTabs} aria-label="Guests">
+    <nav className={styles.viewTabs} aria-label={t('Guests')}>
       {(
         [
-          ['list', 'Guest list', '#guests'],
-          ['results', 'Results', '#guests/results'],
+          ['list', msg('Guest list'), '#guests'],
+          ['results', msg('Results'), '#guests/results'],
         ] as const
       ).map(([id, label, href]) => (
         <a
@@ -337,7 +343,7 @@ export function GuestsView({
           }}
           data-guests-tab={id}
         >
-          {label}
+          {t(label)}
         </a>
       ))}
     </nav>
@@ -351,53 +357,53 @@ export function GuestsView({
         {viewTabs}
         <DeadlineLine insights={insights} content={content} canAdd={!archived} />
         {!counts.responses ? (
-          <EmptyState icon={ChartBar} action={<Button variant="primary" icon={Share2} onClick={onShare}>Share</Button>}>
-            No replies yet. The results of your reply form show here as guests answer.
+          <EmptyState icon={ChartBar} action={<Button variant="primary" icon={Share2} onClick={onShare}>{t('Share')}</Button>}>
+            {t('No replies yet. The results of your reply form show here as guests answer.')}
           </EmptyState>
         ) : (
           <>
-            <p className={styles.hint}>Tap a line to see who is in it.</p>
-            <Card title="Coming?" titleId="results-attending" data-results-attending>
+            <p className={styles.hint}>{t('Tap a line to see who is in it.')}</p>
+            <Card title={t('Coming?')} titleId="results-attending" data-results-attending>
               <ul className={styles.bars} aria-labelledby="results-attending">
                 {(
                   [
-                    ['coming', 'Coming', counts.attending],
-                    ['not', 'Not coming', counts.notAttending],
+                    ['coming', msg('Coming'), counts.attending],
+                    ['not', msg('Not coming'), counts.notAttending],
                   ] as const
                 ).map(([f, label, n]) => (
                   <li key={f}>
                     <button type="button" className={styles.barRow} onClick={() => pickStatus(f)} data-results-status={f}>
-                      <span className={styles.barLabel}>{label}</span>
+                      <span className={styles.barLabel}>{t(label)}</span>
                       <span className={styles.bar} aria-hidden="true">
                         <span className={styles.barFill} style={{ width: `${pct(n)}%` }} />
                       </span>
                       <span className={styles.barValue}>
-                        {n} · {pct(n)}%<span className={styles.visuallyHidden}> {n === 1 ? 'reply' : 'replies'}</span>
+                        {n} · {pct(n)}%<span className={styles.visuallyHidden}> {tn(n, 'reply', 'replies')}</span>
                       </span>
                     </button>
                   </li>
                 ))}
               </ul>
               <p className={cx(styles.hint, styles.cardFootHint)}>
-                {plural(counts.responses, 'reply', 'replies')} · {plural(counts.totalGuests, 'person', 'people')} coming in all
+                {replyCount(counts.responses)} · {tn(counts.totalGuests, '1 person coming in all', '{n} people coming in all')}
               </p>
             </Card>
             {questions.length ? (
               <>
-                <h2 className={styles.sectionHeading}>Your questions</h2>
-                <p className={styles.hint}>From guests who are coming; one answer per reply.</p>
+                <h2 className={styles.sectionHeading}>{t('Your questions')}</h2>
+                <p className={styles.hint}>{t('From guests who are coming; one answer per reply.')}</p>
                 {questions.map((q) => (
                   <QuestionCard key={q.id} q={q} active={answer?.id === q.id ? answer.value : null} onPick={pickAnswer} />
                 ))}
               </>
             ) : (
               <p className={styles.hint} data-no-questions>
-                Your reply form has no questions of your own yet (for example a meal choice).
+                {t('Your reply form has no questions of your own yet (for example a meal choice).')}
                 {archived ? null : (
                   <>
                     {' '}
                     <button type="button" className={styles.inlineLink} onClick={onSettings}>
-                      Add one in Reply settings
+                      {t('Add one in Reply settings')}
                     </button>
                     .
                   </>
@@ -419,46 +425,49 @@ export function GuestsView({
       <div className={styles.stats}>
         <div className={styles.stat} data-stat="coming">
           <span className={styles.statNum}>{counts.totalGuests}</span>
-          <span className={styles.statLabel}>Guests coming</span>
+          <span className={styles.statLabel}>{t('Guests coming')}</span>
         </div>
         <div className={styles.stat} data-stat="not">
           <span className={styles.statNum}>{counts.notAttending}</span>
-          <span className={styles.statLabel}>Not coming</span>
+          <span className={styles.statLabel}>{t('Not coming')}</span>
         </div>
         <div className={styles.stat} data-stat="replies">
           <span className={styles.statNum}>{counts.responses}</span>
-          <span className={styles.statLabel}>Replies</span>
+          <span className={styles.statLabel}>{t('Replies')}</span>
         </div>
       </div>
 
       {held ? (
         <Banner tone="warning" data-held-replies>
-          {held} {held === 1 ? 'reply' : 'replies'} arrived during an unusual number of replies in a short time, so {held === 1 ? 'it is' : 'they are'} held
-          and not counted. Keep the real ones and remove the rest.
+          {tn(
+            held,
+            '1 reply arrived during an unusual number of replies in a short time, so it is held and not counted. Keep the real ones and remove the rest.',
+            '{n} replies arrived during an unusual number of replies in a short time, so they are held and not counted. Keep the real ones and remove the rest.',
+          )}
         </Banner>
       ) : null}
 
       <section className={styles.listBlock} aria-labelledby="replies-title">
         <h2 id="replies-title" ref={listRef} tabIndex={-1} className={styles.visuallyHidden}>
-          Replies
+          {t('Replies')}
         </h2>
         {data.responses.length ? (
           <>
             <div className={styles.search}>
               <Search size={18} aria-hidden="true" />
               <label className={styles.visuallyHidden} htmlFor="reply-search">
-                Search replies by name
+                {t('Search replies by name')}
               </label>
-              <input id="reply-search" type="search" className={styles.searchInput} placeholder="Search by name" value={query} onChange={(e) => setQuery(e.target.value)} />
+              <input id="reply-search" type="search" className={styles.searchInput} placeholder={t('Search by name')} value={query} onChange={(e) => setQuery(e.target.value)} />
             </div>
-            <div className={cx(styles.chips, styles.statusTabs)} role="group" aria-label="Show">
+            <div className={cx(styles.chips, styles.statusTabs)} role="group" aria-label={t('Show')}>
               {chips.map((c) => (
                 <button
                   key={c.id}
                   type="button"
                   className={cx(styles.chip, filter === c.id && styles.chipOn)}
                   aria-pressed={filter === c.id}
-                  aria-label={c.count ? `${c.label} (${c.count})` : undefined}
+                  aria-label={c.count ? t('{label} ({n})', { label: c.label, n: c.count }) : undefined}
                   onClick={() => setFilter(c.id)}
                   data-filter={c.id}
                 >
@@ -475,10 +484,10 @@ export function GuestsView({
               <p className={styles.newLine} data-new-banner>
                 <BellDot size={18} strokeWidth={1.75} aria-hidden="true" />
                 <span>
-                  <strong>{newCount === 1 ? '1 new reply' : `${newCount} new replies`}</strong> since you last looked
+                  <strong>{tn(newCount, '1 new reply', '{n} new replies')}</strong> {t('since you last looked')}
                 </span>
                 <button type="button" className={styles.newLineButton} onClick={replies.markSeen} data-mark-seen>
-                  Mark as seen
+                  {t('Mark as seen')}
                 </button>
               </p>
             ) : null}
@@ -487,22 +496,24 @@ export function GuestsView({
                 <span>
                   {answer.label}: <strong>{answer.value}</strong>
                 </span>
-                <Button small variant="tertiary" icon={X} onClick={() => setAnswer(null)} aria-label={`Clear the filter ${answer.label}: ${answer.value}`}>
-                  Clear
+                <Button small variant="tertiary" icon={X} onClick={() => setAnswer(null)} aria-label={t('Clear the filter {question}: {answer}', { question: answer.label, answer: answer.value })}>
+                  {t('Clear')}
                 </Button>
               </div>
             ) : null}
             <div className={styles.listHead}>
               <p className={styles.listCount} aria-live="polite">
-                {list.length === data.responses.length ? plural(data.responses.length, 'reply', 'replies') : `${list.length} of ${plural(data.responses.length, 'reply', 'replies')}`}
+                {list.length === data.responses.length
+                  ? replyCount(data.responses.length)
+                  : tn(data.responses.length, '{shown} of 1 reply', '{shown} of {n} replies', { shown: list.length })}
               </p>
               <label htmlFor="reply-sort" className={styles.visuallyHidden}>
-                Sort
+                {t('Sort')}
               </label>
               <select id="reply-sort" className={cx(styles.select, styles.sortSelect)} value={sort} onChange={(e) => setSort(e.target.value as Sort)}>
                 {SORTS.map((s) => (
                   <option key={s.value} value={s.value}>
-                    {s.label}
+                    {t(s.label)}
                   </option>
                 ))}
               </select>
@@ -511,23 +522,29 @@ export function GuestsView({
         ) : null}
 
         {!data.responses.length ? (
-          <EmptyState icon={Users} action={<Button variant="primary" icon={Share2} onClick={onShare}>Share</Button>}>
-            No replies yet. Share your website so guests can reply. New replies show here; we don&rsquo;t send email notifications yet.
+          <EmptyState icon={Users} action={<Button variant="primary" icon={Share2} onClick={onShare}>{t('Share')}</Button>}>
+            {t('No replies yet. Share your website so guests can reply. New replies show here; we don’t send email notifications yet.')}
           </EmptyState>
         ) : !list.length ? (
           <EmptyState
             icon={Search}
             action={
               query ? (
-                <Button onClick={() => setQuery('')}>Clear search</Button>
+                <Button onClick={() => setQuery('')}>{t('Clear search')}</Button>
               ) : answer ? (
-                <Button onClick={() => setAnswer(null)}>Show all replies</Button>
+                <Button onClick={() => setAnswer(null)}>{t('Show all replies')}</Button>
               ) : filter !== 'all' ? (
-                <Button onClick={() => setFilter('all')}>Show all replies</Button>
+                <Button onClick={() => setFilter('all')}>{t('Show all replies')}</Button>
               ) : undefined
             }
           >
-            {query ? `No replies match “${query}”.` : answer ? `No replies chose “${answer.value}” here.` : filter === 'new' ? 'No new replies since you last looked.' : 'No replies here.'}
+            {query
+              ? t('No replies match “{query}”.', { query })
+              : answer
+                ? t('No replies chose “{answer}” here.', { answer: answer.value })
+                : filter === 'new'
+                  ? t('No new replies since you last looked.')
+                  : t('No replies here.')}
           </EmptyState>
         ) : (
           <ul className={styles.replyList}>
@@ -549,23 +566,23 @@ export function GuestsView({
       </section>
 
       <div className={styles.buttonRow}>
-        <Button icon={RefreshCw} onClick={replies.refresh} busy={replies.loading} busyLabel="Refreshing…" data-refresh-replies>
-          Refresh
+        <Button icon={RefreshCw} onClick={replies.refresh} busy={replies.loading} busyLabel={t('Refreshing…')} data-refresh-replies>
+          {t('Refresh')}
         </Button>
         {counts.responses ? (
           <Button variant="tertiary" icon={Printer} onClick={onPrint} data-print-list>
-            Print list
+            {t('Print list')}
           </Button>
         ) : null}
         {counts.responses ? (
           <a className={cx(styles.btn, styles.btn_tertiary)} href={api.repliesCsvUrl()} download rel="noreferrer" data-csv>
-            <span>Download CSV</span>
-            <span className={styles.visuallyHidden}> (one row per guest)</span>
+            <span>{t('Download CSV')}</span>
+            <span className={styles.visuallyHidden}> {t('(one row per guest)')}</span>
           </a>
         ) : null}
         {!archived ? (
           <Button variant="tertiary" onClick={onSettings}>
-            Reply settings
+            {t('Reply settings')}
           </Button>
         ) : null}
       </div>
@@ -578,32 +595,31 @@ export function GuestsView({
         <div className={styles.guestBar} data-guest-actions>
           {!archived ? (
             <Button variant="primary" icon={Plus} disabled={!online} onClick={() => setSheet({ reply: null })} data-add-reply>
-              Add a reply
+              {t('Add a reply')}
             </Button>
           ) : null}
           {counts.responses ? (
             <a className={cx(styles.btn, styles.btn_secondary)} href={api.repliesExcelUrl()} download rel="noreferrer" data-excel>
               <Download size={18} strokeWidth={1.75} aria-hidden="true" />
-              <span>Download Excel</span>
-              <span className={styles.visuallyHidden}> (replies and a summary; opens in Excel, Numbers or Google Sheets)</span>
+              <span>{t('Download Excel')}</span>
+              <span className={styles.visuallyHidden}> {t('(replies and a summary; opens in Excel, Numbers or Google Sheets)')}</span>
             </a>
           ) : null}
-          {!archived && !online ? <p className={styles.guestBarNote}>Connect to the internet to add or change replies.</p> : null}
+          {!archived && !online ? <p className={styles.guestBarNote}>{t('Connect to the internet to add or change replies.')}</p> : null}
         </div>
       ) : null}
 
       {confirm ? (
-        <Sheet title="Remove this reply?" onClose={() => setConfirm(null)} closeLabel="Cancel" testId="remove-reply">
+        <Sheet title={t('Remove this reply?')} onClose={() => setConfirm(null)} closeLabel={t('Cancel')} testId="remove-reply">
           <p>
-            The reply from <strong>{confirm.name}</strong>
-            {confirm.attending && confirm.guests > 1 ? ` (${plural(confirm.guests, 'guest', 'guests')})` : ''} is deleted for good. It is not in the list or the CSV
-            afterwards.
+            {t('The reply from')} <strong>{confirm.name}</strong>
+            {confirm.attending && confirm.guests > 1 ? ` (${guestCount(confirm.guests)})` : ''} {t('is deleted for good. It is not in the list or the CSV afterwards.')}
           </p>
           <div className={styles.buttonRow}>
-            <Button variant="danger" icon={Trash2} busy={working} busyLabel="Removing…" disabled={!online} onClick={() => void act('remove', [confirm.id])} data-confirm-remove-reply>
-              Remove reply
+            <Button variant="danger" icon={Trash2} busy={working} busyLabel={t('Removing…')} disabled={!online} onClick={() => void act('remove', [confirm.id])} data-confirm-remove-reply>
+              {t('Remove reply')}
             </Button>
-            <Button onClick={() => setConfirm(null)}>Keep it</Button>
+            <Button onClick={() => setConfirm(null)}>{t('Keep it')}</Button>
           </div>
         </Sheet>
       ) : null}
@@ -619,7 +635,7 @@ export function GuestsView({
             replies.setData(summary);
             setSheet(null);
             if (saved) setOpenIds((cur) => new Set(cur).add(saved.id));
-            snack(sheet.reply ? 'Reply saved' : 'Reply added');
+            snack(sheet.reply ? t('Reply saved') : t('Reply added'));
           }}
         />
       ) : null}
@@ -632,25 +648,25 @@ function DeadlineLine({ insights, content, canAdd }: { insights?: RsvpInsights; 
   if (!d) return null;
   const long = formatDateLong(content.rsvp?.deadline, content.locale);
   const city = zoneCity(content.timezone);
-  const add = canAdd ? 'You can still add replies you get another way.' : null;
+  const add = canAdd ? t('You can still add replies you get another way.') : null;
   let head: ReactNode;
   let detail: string | null = null;
   if (d.state === 'off') {
-    head = 'Replies on the website are off.';
+    head = t('Replies on the website are off.');
     detail = add;
   } else if (d.state === 'closed' || d.state === 'thank_you') {
     head = deadlineText(d);
     detail = add;
   } else if (d.state === 'last_day') {
-    head = <strong>Today is the last day to reply.</strong>;
-    detail = `${city} time.`;
+    head = <strong>{t('Today is the last day to reply.')}</strong>;
+    detail = t('{city} time.', { city });
   } else if (d.state === 'open') {
     head = (
       <>
-        Replies close in <strong>{d.daysLeft === 1 ? '1 day' : `${d.daysLeft} days`}</strong>.
+        {t('Replies close in')} <strong>{tn(d.daysLeft ?? 0, '1 day', '{n} days')}</strong>.
       </>
     );
-    detail = long ? `Last day: ${long} (${city} time).` : null;
+    detail = long ? t('Last day: {date} ({city} time).', { date: long, city }) : null;
   } else return null;
   return (
     <div className={styles.deadline} data-deadline={d.state}>
@@ -673,7 +689,7 @@ function QuestionCard({ q, active, onPick }: { q: QuestionInsight; active: strin
   const titleId = `question-${q.id}`;
   const unanswered = q.current ? Math.max(0, q.asked - q.answered) : 0;
   return (
-    <Card title={q.label} titleId={titleId} data-question-insight={q.id} action={!q.current ? <Badge>Removed question</Badge> : undefined}>
+    <Card title={q.label} titleId={titleId} data-question-insight={q.id} action={!q.current ? <Badge>{t('Removed question')}</Badge> : undefined}>
       {q.kind === 'text' ? (
         q.answers.length ? (
           <>
@@ -687,12 +703,12 @@ function QuestionCard({ q, active, onPick }: { q: QuestionInsight; active: strin
             </ul>
             {q.answers.length > 3 ? (
               <Button small variant="tertiary" onClick={() => setAll((v) => !v)} aria-expanded={all}>
-                {all ? 'Show fewer' : `Show all ${q.answers.length} answers`}
+                {all ? t('Show fewer') : t('Show all {n} answers', { n: q.answers.length })}
               </Button>
             ) : null}
           </>
         ) : (
-          <p className={styles.cardText}>No answers yet.</p>
+          <p className={styles.cardText}>{t('No answers yet.')}</p>
         )
       ) : (
         <ul className={styles.bars} aria-labelledby={titleId}>
@@ -703,7 +719,7 @@ function QuestionCard({ q, active, onPick }: { q: QuestionInsight; active: strin
                 <button type="button" className={cx(styles.barRow, on && styles.barRowOn)} aria-pressed={on} onClick={() => onPick(q, o.value)} data-answer-option={o.value}>
                   <span className={styles.barLabel}>
                     {o.value}
-                    {o.old ? <span className={styles.barOld}> · earlier option</span> : null}
+                    {o.old ? <span className={styles.barOld}> · {t('earlier option')}</span> : null}
                   </span>
                   <span className={styles.bar} aria-hidden="true">
                     <span className={styles.barFill} style={{ width: `${o.percent}%` }} />
@@ -719,7 +735,7 @@ function QuestionCard({ q, active, onPick }: { q: QuestionInsight; active: strin
                         {o.count} · {o.percent}%
                       </>
                     )}
-                    <span className={styles.visuallyHidden}> {o.count === 1 ? 'reply' : 'replies'}</span>
+                    <span className={styles.visuallyHidden}> {tn(o.count, 'reply', 'replies')}</span>
                   </span>
                 </button>
               </li>
@@ -728,8 +744,8 @@ function QuestionCard({ q, active, onPick }: { q: QuestionInsight; active: strin
         </ul>
       )}
       <p className={cx(styles.hint, styles.cardFootHint)}>
-        {q.answered ? plural(q.answered, 'reply answered', 'replies answered') : 'No answers yet'}
-        {unanswered ? ` · ${unanswered} did not answer` : ''}
+        {q.answered ? tn(q.answered, '1 reply answered', '{n} replies answered') : t('No answers yet')}
+        {unanswered ? ` · ${t('{n} did not answer', { n: unanswered })}` : ''}
       </p>
     </Card>
   );
@@ -738,7 +754,7 @@ function QuestionCard({ q, active, onPick }: { q: QuestionInsight; active: strin
 function DietaryCard({ insights, hasQuestion, archived, onSettings }: { insights?: RsvpInsights; hasQuestion: boolean; archived: boolean; onSettings: () => void }) {
   const notes = insights?.dietary ?? [];
   return (
-    <Card title="Food & allergy notes" titleId="dietary-title" data-dietary>
+    <Card title={t('Food & allergy notes')} titleId="dietary-title" data-dietary>
       {notes.length ? (
         <ul className={styles.dietList}>
           {notes.map((n, i) => (
@@ -747,25 +763,25 @@ function DietaryCard({ insights, hasQuestion, archived, onSettings }: { insights
               <span className={styles.dietBody}>
                 <span className={styles.dietName}>{n.name}</span>
                 <span className={styles.preLine}>{n.text}</span>
-                <span className={styles.dietFrom}>{n.from === 'message' ? 'From their message' : n.question}</span>
+                <span className={styles.dietFrom}>{n.from === 'message' ? t('From their message') : n.question}</span>
               </span>
             </li>
           ))}
         </ul>
       ) : (
-        <p className={styles.cardText}>No food or allergy notes yet.</p>
+        <p className={styles.cardText}>{t('No food or allergy notes yet.')}</p>
       )}
       {!hasQuestion ? (
         <p className={cx(styles.hint, styles.cardFootHint)}>
-          Messages that mention food or allergies show here. To ask every guest, add a question such as “Any allergies or dietary needs?”
+          {t('Messages that mention food or allergies show here. To ask every guest, add a question such as “Any allergies or dietary needs?”')}
           {archived ? (
             '.'
           ) : (
             <>
               {' '}
-              in{' '}
+              {t('in')}{' '}
               <button type="button" className={styles.inlineLink} onClick={onSettings}>
-                Reply settings
+                {t('Reply settings')}
               </button>
               .
             </>
@@ -813,19 +829,19 @@ function ReplyCard({
             <span className={styles.replyName}>{r.name}</span>
             {isNew ? (
               <Badge tone="strong" data-new-badge>
-                New
+                {t('New')}
               </Badge>
             ) : null}
           </span>
           <span className={styles.replyMeta}>
             {r.attending ? (
-              <Badge tone="success" data-dot>{`Coming · ${plural(r.guests, 'guest', 'guests')}`}</Badge>
+              <Badge tone="success" data-dot>{t('Coming · {guests}', { guests: guestCount(r.guests) })}</Badge>
             ) : (
-              <Badge data-dot>Not coming</Badge>
+              <Badge data-dot>{t('Not coming')}</Badge>
             )}
-            {r.held ? <Badge tone="warning">Held</Badge> : null}
-            {r.source === 'couple' ? <Badge tone="accent">Added by you</Badge> : r.editedAt ? <Badge>Edited by you</Badge> : null}
-            <span className={styles.replyTime}>{new Date(r.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+            {r.held ? <Badge tone="warning">{t('Held')}</Badge> : null}
+            {r.source === 'couple' ? <Badge tone="accent">{t('Added by you')}</Badge> : r.editedAt ? <Badge>{t('Edited by you')}</Badge> : null}
+            <span className={styles.replyTime}>{new Date(r.createdAt).toLocaleDateString(dateTag(), { month: 'short', day: 'numeric' })}</span>
           </span>
           {party ? (
             <span className={styles.replyParty} data-reply-party>
@@ -836,11 +852,11 @@ function ReplyCard({
         </button>
         {!archived ? (
           <OverflowMenu
-            label={`Options for the reply from ${r.name}`}
+            label={t('Options for the reply from {name}', { name: r.name })}
             items={[
-              { label: 'Edit reply', icon: Pencil, onSelect: onEdit },
-              ...(r.held ? [{ label: 'Keep this reply', onSelect: onKeep }] : []),
-              { label: 'Remove reply', danger: true, icon: Trash2, onSelect: onRemove },
+              { label: t('Edit reply'), icon: Pencil, onSelect: onEdit },
+              ...(r.held ? [{ label: t('Keep this reply'), onSelect: onKeep }] : []),
+              { label: t('Remove reply'), danger: true, icon: Trash2, onSelect: onRemove },
             ]}
           />
         ) : null}
@@ -849,17 +865,17 @@ function ReplyCard({
         <div className={styles.replyBody} id={bodyId}>
           {people.length > 1 ? (
             <div data-reply-people>
-              <span className={styles.replyKey}>Everyone in this reply</span>
+              <span className={styles.replyKey}>{t('Everyone in this reply')}</span>
               <ol className={styles.peopleList}>
                 {people.map((p) => (
-                  <li key={p.number}>{p.named ? p.name : <span className={styles.unnamed}>{p.name} · no name given</span>}</li>
+                  <li key={p.number}>{p.named ? p.name : <span className={styles.unnamed}>{p.name} · {t('no name given')}</span>}</li>
                 ))}
               </ol>
             </div>
           ) : null}
           {r.email ? (
             <p>
-              <span className={styles.replyKey}>Email</span> {r.email}
+              <span className={styles.replyKey}>{t('Email')}</span> {r.email}
             </p>
           ) : null}
           {(r.answers ?? []).map((a) => (
@@ -868,15 +884,15 @@ function ReplyCard({
             </p>
           ))}
           {r.message ? <p className={styles.replyMessage}>“{r.message}”</p> : null}
-          {!r.email && !r.message && !(r.answers ?? []).length && people.length < 2 ? <p className={styles.hint}>No message.</p> : null}
+          {!r.email && !r.message && !(r.answers ?? []).length && people.length < 2 ? <p className={styles.hint}>{t('No message.')}</p> : null}
           <p className={styles.replyStamp}>
-            {r.source === 'couple' ? `Added by you on ${when(r.createdAt)}` : `Sent on ${when(r.createdAt)}`}
-            {r.editedAt ? ` · Edited by you on ${when(r.editedAt)}` : ''}
+            {r.source === 'couple' ? t('Added by you on {date}', { date: when(r.createdAt) }) : t('Sent on {date}', { date: when(r.createdAt) })}
+            {r.editedAt ? ` · ${t('Edited by you on {date}', { date: when(r.editedAt) })}` : ''}
           </p>
           {!archived ? (
             <div className={styles.buttonRow}>
               <Button small icon={Pencil} onClick={onEdit} data-edit-reply>
-                Edit reply
+                {t('Edit reply')}
               </Button>
             </div>
           ) : null}
@@ -959,7 +975,7 @@ function ReplySheet({
     e.preventDefault();
     if (busy) return;
     if (!d.name.trim()) {
-      setErrors({ name: 'Please enter a name.' });
+      setErrors({ name: t('Please enter a name.') });
       focusFirst(['name']);
       return;
     }
@@ -987,32 +1003,32 @@ function ReplySheet({
     if (res.status === 400 && fields && Object.keys(fields).length) {
       setErrors(fields);
       focusFirst(Object.keys(fields));
-    } else setFormError(res.status === 0 ? 'No connection. The reply was not saved. Please try again.' : (res.body.message ?? 'The reply could not be saved. Please try again.'));
+    } else setFormError(res.status === 0 ? t('No connection. The reply was not saved. Please try again.') : (res.body.message ? t(res.body.message) : t('The reply could not be saved. Please try again.')));
   };
 
   const errorOf = (key: string) =>
     errors[key] ? (
       <p id={`${fieldDomId(key)}-error`} className={styles.issueError}>
-        {errors[key]}
+        {t(errors[key])}
       </p>
     ) : null;
   const describe = (key: string, hint?: string) => [hint, errors[key] ? `${fieldDomId(key)}-error` : ''].filter(Boolean).join(' ') || undefined;
 
-  const title = reply ? `Edit the reply from ${reply.name}` : 'Add a reply';
+  const title = reply ? t('Edit the reply from {name}', { name: reply.name }) : t('Add a reply');
   return (
-    <Sheet title={reply ? 'Edit reply' : 'Add a reply'} onClose={onClose} closeLabel="Cancel" testId="reply-sheet">
+    <Sheet title={reply ? t('Edit reply') : t('Add a reply')} onClose={onClose} closeLabel={t('Cancel')} testId="reply-sheet">
       <form ref={formRef} className={styles.replyForm} onSubmit={(e) => void submit(e)} noValidate aria-label={title} data-reply-form>
         <p className={styles.hint}>
           {reply
             ? reply.source === 'couple'
-              ? 'This is a reply you added.'
-              : 'Your changes are marked “Edited by you”. The guest is not told.'
-            : 'For a reply you got by phone, email or in person. It counts like any other and is marked “Added by you”.'}
+              ? t('This is a reply you added.')
+              : t('Your changes are marked “Edited by you”. The guest is not told.')
+            : t('For a reply you got by phone, email or in person. It counts like any other and is marked “Added by you”.')}
         </p>
 
         <div className={styles.field}>
           <label htmlFor={fieldDomId('name')} className={styles.label}>
-            Name
+            {t('Name')}
           </label>
           <input
             id={fieldDomId('name')}
@@ -1030,11 +1046,11 @@ function ReplySheet({
 
         <Segmented<'yes' | 'no'>
           id={fieldDomId('attending')}
-          label="Are they coming?"
+          label={t('Are they coming?')}
           value={d.attending}
           options={[
-            { value: 'yes', label: 'Coming' },
-            { value: 'no', label: 'Not coming' },
+            { value: 'yes', label: t('Coming') },
+            { value: 'no', label: t('Not coming') },
           ]}
           onChange={(v) => (set({ attending: v }), clear('attending'))}
         />
@@ -1044,7 +1060,7 @@ function ReplySheet({
           <>
             <div className={styles.field}>
               <label htmlFor={fieldDomId('guests')} className={styles.label}>
-                How many people, including them?
+                {t('How many people, including them?')}
               </label>
               <select
                 id={fieldDomId('guests')}
@@ -1056,7 +1072,7 @@ function ReplySheet({
               >
                 {Array.from({ length: cap }, (_, i) => i + 1).map((n) => (
                   <option key={n} value={n}>
-                    {n === 1 ? '1 (just them)' : n}
+                    {n === 1 ? t('1 (just them)') : n}
                   </option>
                 ))}
               </select>
@@ -1065,14 +1081,14 @@ function ReplySheet({
             {d.guests > 1 ? (
               <fieldset className={styles.partyFields}>
                 <legend className={styles.label}>
-                  Names of the others <span className={styles.optional}>(optional)</span>
+                  {t('Names of the others')} <span className={styles.optional}>{t('(optional)')}</span>
                 </legend>
                 {Array.from({ length: d.guests - 1 }, (_, i) => i + 2).map((n) => {
                   const key = `party:${n}`;
                   return (
                     <div key={n} className={styles.field}>
                       <label htmlFor={fieldDomId(key)} className={styles.hintLabel}>
-                        Guest {n}
+                        {t('Guest {n}', { n })}
                       </label>
                       <input
                         id={fieldDomId(key)}
@@ -1102,12 +1118,12 @@ function ReplySheet({
               const onChange = (v: string) => (set({ answers: { ...d.answers, [q.id]: v } }), clear(key));
               // G128: a yes / no question is a choice of Yes and No here too; long / number answers are text boxes.
               const picks = q.type === 'choice' || q.type === 'yesno';
-              const options = q.type === 'choice' ? [...(q.options ?? [])] : q.type === 'yesno' ? ['Yes', 'No'] : [];
+              const options = q.type === 'choice' ? [...(q.options ?? [])] : q.type === 'yesno' ? [t('Yes'), t('No')] : [];
               if (picks && value && !options.some((o) => norm(o) === norm(value))) options.push(value);
               return (
                 <div key={q.id} className={styles.field}>
                   <label htmlFor={fieldDomId(key)} className={styles.label}>
-                    {q.label} <span className={styles.optional}>(optional)</span>
+                    {q.label} <span className={styles.optional}>{t('(optional)')}</span>
                   </label>
                   {picks ? (
                     <select
@@ -1118,7 +1134,7 @@ function ReplySheet({
                       aria-describedby={describe(key)}
                       onChange={(e) => onChange(e.target.value)}
                     >
-                      <option value="">No answer</option>
+                      <option value="">{t('No answer')}</option>
                       {options.map((o) => (
                         <option key={o} value={o}>
                           {o}
@@ -1147,7 +1163,7 @@ function ReplySheet({
 
         <div className={styles.field}>
           <label htmlFor={fieldDomId('email')} className={styles.label}>
-            Email <span className={styles.optional}>(optional)</span>
+            {t('Email')} <span className={styles.optional}>{t('(optional)')}</span>
           </label>
           <input
             id={fieldDomId('email')}
@@ -1165,7 +1181,7 @@ function ReplySheet({
         </div>
         <div className={styles.field}>
           <label htmlFor={fieldDomId('message')} className={styles.label}>
-            Note <span className={styles.optional}>(optional)</span>
+            {t('Note')} <span className={styles.optional}>{t('(optional)')}</span>
           </label>
           <textarea
             id={fieldDomId('message')}
@@ -1185,12 +1201,12 @@ function ReplySheet({
             {formError}
           </Banner>
         ) : null}
-        {!online ? <p className={styles.hint}>Connect to the internet to save this reply.</p> : null}
+        {!online ? <p className={styles.hint}>{t('Connect to the internet to save this reply.')}</p> : null}
         <div className={cx(styles.buttonRow, styles.stickyActions)}>
-          <Button type="submit" variant="primary" busy={busy} busyLabel="Saving…" disabled={!online} data-save-reply>
-            {reply ? 'Save changes' : 'Add reply'}
+          <Button type="submit" variant="primary" busy={busy} busyLabel={t('Saving…')} disabled={!online} data-save-reply>
+            {reply ? t('Save changes') : t('Add reply')}
           </Button>
-          <Button onClick={onClose}>Cancel</Button>
+          <Button onClick={onClose}>{t('Cancel')}</Button>
         </div>
       </form>
     </Sheet>
@@ -1216,7 +1232,7 @@ export function GuestPrintView({
   const { data, error } = replies;
   if (error && !data) {
     return (
-      <Banner tone="warning" icon={TriangleAlert} actions={<Button small icon={RefreshCw} onClick={replies.refresh}>Try again</Button>}>
+      <Banner tone="warning" icon={TriangleAlert} actions={<Button small icon={RefreshCw} onClick={replies.refresh}>{t('Try again')}</Button>}>
         {error}
       </Banner>
     );
@@ -1235,64 +1251,65 @@ export function GuestPrintView({
   const coming = byName.filter((r) => r.attending);
   const notComing = byName.filter((r) => !r.attending);
   const people = data.counts.totalGuests;
-  const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  const today = new Date().toLocaleDateString(dateTag(), { month: 'long', day: 'numeric', year: 'numeric' });
   // "Meal choice: Fish", "Do you need the shuttle? Yes" (no colon after a question mark)
   const answersOf = (r: ReplyEntry) => (r.answers ?? []).map((a) => `${a.question}${/[?:!.]$/.test(a.question.trim()) ? '' : ':'} ${a.answer}`);
 
   return (
     <div className={styles.stack} data-print-view>
       <div className={styles.printTools} data-print-hide>
-        <p className={styles.hint}>Print it, or choose “Save as PDF” in your browser’s print menu. It fits A4 and US Letter paper.</p>
+        <p className={styles.hint}>{t('Print it, or choose “Save as PDF” in your browser’s print menu. It fits A4 and US Letter paper.')}</p>
         <Segmented<'coming' | 'all'>
-          label="Who to include"
+          label={t('Who to include')}
           value={who}
           options={[
-            { value: 'coming', label: 'Guests coming' },
-            { value: 'all', label: 'Everyone who replied' },
+            { value: 'coming', label: t('Guests coming') },
+            { value: 'all', label: t('Everyone who replied') },
           ]}
           onChange={setWho}
         />
         <label className={styles.checkRow}>
           <input type="checkbox" checked={notes} onChange={(e) => setNotes(e.target.checked)} />
-          <span>Include guests’ messages</span>
+          <span>{t('Include guests’ messages')}</span>
         </label>
         <div className={styles.buttonRow}>
           <Button variant="primary" icon={Printer} onClick={() => window.print()} data-print-now>
-            Print
+            {t('Print')}
           </Button>
-          <Button onClick={onBack}>Back to Guests</Button>
+          <Button onClick={onBack}>{t('Back to Guests')}</Button>
         </div>
       </div>
 
       <article className={styles.printDoc} aria-labelledby="print-title" data-print-doc>
         <header className={styles.printHead}>
           <h2 id="print-title" className={styles.printTitle}>
-            Guest list
+            {t('Guest list')}
           </h2>
           <p className={styles.printNames}>
             {names}
             {formatDateLong(content.date, content.locale) ? ` · ${formatDateLong(content.date, content.locale)}` : ''}
           </p>
           <p className={styles.printMeta}>
-            {plural(people, 'person', 'people')} coming · {data.counts.notAttending} not coming · {plural(data.counts.responses, 'reply', 'replies')} · Updated {today}
+            {tn(people, '1 person coming', '{n} people coming')} · {t('{n} not coming', { n: data.counts.notAttending })} · {replyCount(data.counts.responses)} ·{' '}
+            {t('Updated {date}', { date: today })}
           </p>
         </header>
 
         <section aria-labelledby="print-coming">
           <h3 id="print-coming" className={styles.printSection}>
-            Coming — {plural(people, 'person', 'people')}
+            {t('Coming — {people}', { people: peopleCount(people) })}
           </h3>
           {coming.length ? (
             <table className={styles.printTable}>
               <thead>
                 <tr>
                   <th scope="col" className={styles.printCheck}>
-                    <span className={styles.visuallyHidden}>Arrived</span>
+                    <span className={styles.visuallyHidden}>{t('Arrived')}</span>
                     <span aria-hidden="true">✓</span>
                   </th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Party</th>
-                  <th scope="col">{notes ? 'Answers & messages' : 'Answers'}</th>
+                  <th scope="col">{t('Name')}</th>
+                  <th scope="col">{t('Party')}</th>
+                  <th scope="col">{notes ? t('Answers & messages') : t('Answers')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -1304,8 +1321,8 @@ export function GuestPrintView({
                         <td className={styles.printCheck}>
                           <span className={styles.printBox} aria-hidden="true" />
                         </td>
-                        <td className={styles.printName}>{p.named ? p.name : <span className={styles.unnamed}>{p.name} (no name given)</span>}</td>
-                        <td className={styles.printParty}>{p.number === 1 ? (r.guests > 1 ? `Party of ${r.guests}` : 'On their own') : `with ${r.name}`}</td>
+                        <td className={styles.printName}>{p.named ? p.name : <span className={styles.unnamed}>{p.name} ({t('no name given')})</span>}</td>
+                        <td className={styles.printParty}>{p.number === 1 ? (r.guests > 1 ? t('Party of {n}', { n: r.guests }) : t('On their own')) : t('with {name}', { name: r.name })}</td>
                         <td className={styles.printNotes}>
                           {lines.map((l, i) => (
                             <Fragment key={i}>
@@ -1321,21 +1338,21 @@ export function GuestPrintView({
               </tbody>
             </table>
           ) : (
-            <p className={styles.cardText}>No guests are coming yet.</p>
+            <p className={styles.cardText}>{t('No guests are coming yet.')}</p>
           )}
         </section>
 
         {who === 'all' ? (
           <section aria-labelledby="print-not">
             <h3 id="print-not" className={styles.printSection}>
-              Not coming — {plural(notComing.length, 'reply', 'replies')}
+              {t('Not coming — {replies}', { replies: replyCount(notComing.length) })}
             </h3>
             {notComing.length ? (
               <table className={styles.printTable}>
                 <thead>
                   <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">{notes ? 'Message' : 'Email'}</th>
+                    <th scope="col">{t('Name')}</th>
+                    <th scope="col">{notes ? t('Message') : t('Email')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1348,11 +1365,11 @@ export function GuestPrintView({
                 </tbody>
               </table>
             ) : (
-              <p className={styles.cardText}>Nobody has said no.</p>
+              <p className={styles.cardText}>{t('Nobody has said no.')}</p>
             )}
           </section>
         ) : null}
-        {held ? <p className={styles.printFoot}>{plural(held, 'reply is', 'replies are')} held for review and not on this list.</p> : null}
+        {held ? <p className={styles.printFoot}>{tn(held, '1 reply is held for review and not on this list.', '{n} replies are held for review and not on this list.')}</p> : null}
       </article>
     </div>
   );

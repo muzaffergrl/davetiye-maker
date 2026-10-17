@@ -16,7 +16,7 @@ function files(dir: string): string[] {
 
 test('the label in facts.ts is the panel button\'s own label', () => {
   const guests = readFileSync(path.join(PLATFORM_ROOT, 'components/panel/guests.tsx'), 'utf8');
-  assert.ok(guests.includes(`<span>${PANEL_REPLIES_DOWNLOAD}</span>`), 'components/panel/guests.tsx no longer shows this label');
+  assert.ok(guests.includes(`<span>{t('${PANEL_REPLIES_DOWNLOAD}')}</span>`), 'components/panel/guests.tsx no longer shows this label');
   assert.ok(REPLIES_SCREEN_ALT.includes(`"${PANEL_REPLIES_DOWNLOAD}"`));
 });
 

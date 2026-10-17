@@ -1,0 +1,121 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Eleanor",
+      "full_name": "Eleanor Grace Hart"
+    },
+    {
+      "display_name": "Luca",
+      "full_name": "Luca Matteo Conti"
+    }
+  ],
+  "name_display": "Eleanor & Luca",
+  "initials": "E&L",
+  "host_line": "Together with their families",
+  "date": "2027-09-18",
+  "ceremony_time": "18:30",
+  "timezone": "Europe/Rome",
+  "venue": {
+    "name": "Villa Nocturne",
+    "city": "Lake Como",
+    "region": "Lombardy",
+    "country": "Italy",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony on the lake terrace",
+      "time": "18:30",
+      "location": "The lower terrace"
+    },
+    {
+      "label": "Champagne at golden hour",
+      "time": "19:30",
+      "location": "The balustrade garden"
+    },
+    {
+      "label": "Candlelit dinner & dancing",
+      "time": "20:30",
+      "location": "The great hall"
+    }
+  ],
+  "dress_code": "Black tie",
+  "rsvp": {
+    "deadline": "2027-08-01",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Fish",
+          "Chicken"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": "/themes/nocturne-lake-estate/img/couple-960.webp",
+    "memory_photos": [
+      "/themes/nocturne-lake-estate/img/couple-960.webp",
+      "/themes/nocturne-lake-estate/img/lake_view-1024.webp",
+      "/themes/nocturne-lake-estate/img/terrace-1024.webp"
+    ],
+    "venue_image": "/themes/nocturne-lake-estate/img/lake_view-1024.webp",
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "From a chance encounter to a lifetime together, our next chapter begins on",
+    "items": [
+      {
+        "caption": "A quiet moment, just us"
+      },
+      {
+        "caption": "Where the mountains meet the water"
+      },
+      {
+        "caption": "An evening we will always remember"
+      }
+    ]
+  },
+  "audio": {
+    "music": "evening-strings",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony."
+    },
+    {
+      "q": "Can you accommodate dietary requirements?",
+      "a": "Please tell us about your requirements in your reply."
+    }
+  ]
+}

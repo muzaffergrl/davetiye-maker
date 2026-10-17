@@ -9,6 +9,7 @@ import { GUEST_PASSWORD_MAX, GUEST_PASSWORD_MIN, cleanGuestPassword, guestPasswo
 import { Switch } from './fields.tsx';
 import type { AccessOutcome } from './usePanel.ts';
 import { Button, Card, useSnackbar } from './ui.tsx';
+import { t } from '../../lib/i18n/client.ts';
 import styles from './panel.module.css';
 import own from './guest-password.module.css';
 
@@ -44,7 +45,7 @@ export function GuestPasswordCard({
 
   const on = access.enabled || opening;
   const dirty = cleanGuestPassword(draft) !== saved;
-  const offlineNote = !online ? <p className={styles.hint}>Connect to the internet to change this.</p> : null;
+  const offlineNote = !online ? <p className={styles.hint}>{t('Connect to the internet to change this.')}</p> : null;
 
   const save = async (enabled: boolean, password?: string) => {
     if (password !== undefined) {
@@ -59,7 +60,7 @@ export function GuestPasswordCard({
     const res = await onSave(enabled, password);
     setBusy(false);
     if (!res.ok) {
-      setError(res.message ?? 'This could not be saved. Please try again.');
+      setError(res.message ?? t('This could not be saved. Please try again.'));
       return false;
     }
     setError(null);
@@ -71,7 +72,7 @@ export function GuestPasswordCard({
     if (next) {
       if (saved) {
         // Back on with the password the couple already shared.
-        if (await save(true)) snack('Password is on. Guests need it to open your website.');
+        if (await save(true)) snack(t('Password is on. Guests need it to open your website.'));
         return;
       }
       setOpening(true);
@@ -84,7 +85,7 @@ export function GuestPasswordCard({
       setDraft(saved);
       return;
     }
-    if (await save(false)) snack('Password is off. Anyone with the link can open your website.');
+    if (await save(false)) snack(t('Password is off. Anyone with the link can open your website.'));
   };
 
   const confirm = async () => {
@@ -94,10 +95,10 @@ export function GuestPasswordCard({
     setOpening(false);
     snack(
       !wasOn
-        ? 'Password is on. Guests need it to open your website.'
+        ? t('Password is on. Guests need it to open your website.')
         : res.signedOut
-          ? 'New password saved. Guests will be asked for it again.'
-          : 'Password saved.',
+          ? t('New password saved. Guests will be asked for it again.')
+          : t('Password saved.'),
     );
   };
 
@@ -117,8 +118,8 @@ export function GuestPasswordCard({
       <div className={own.switchWrap}>
         <Switch
           id="guest-password-switch"
-          label="Password protect your website"
-          hint={on ? 'Guests enter the password before they see your website.' : 'Off: anyone with the link can open your website.'}
+          label={t('Password protect your website')}
+          hint={on ? t('Guests enter the password before they see your website.') : t('Off: anyone with the link can open your website.')}
           checked={on}
           onChange={(next) => {
             if (!busy && online) void toggle(next);
@@ -130,10 +131,10 @@ export function GuestPasswordCard({
         <div className={own.body}>
           <div className={styles.field}>
             <label htmlFor={fieldId} className={styles.label}>
-              Password
+              {t('Password')}
             </label>
             <p id={`${fieldId}-hint`} className={styles.hint}>
-              {GUEST_PASSWORD_MIN} to {GUEST_PASSWORD_MAX} characters. Capital letters and spaces at the ends don’t matter.
+              {t('{min} to {max} characters. Capital letters and spaces at the ends don’t matter.', { min: GUEST_PASSWORD_MIN, max: GUEST_PASSWORD_MAX })}
             </p>
             <input
               ref={input}
@@ -162,7 +163,7 @@ export function GuestPasswordCard({
             />
             {error ? (
               <p id={`${fieldId}-error`} className={styles.issueError} role="alert">
-                {error}
+                {t(error)}
               </p>
             ) : null}
           </div>
@@ -177,34 +178,33 @@ export function GuestPasswordCard({
               }}
               data-guest-password-suggest
             >
-              Suggest a password
+              {t('Suggest a password')}
             </Button>
             {access.enabled && !dirty && saved ? (
-              <Button icon={Copy} onClick={() => onCopy(saved, 'Password copied')} data-guest-password-copy>
-                Copy password
+              <Button icon={Copy} onClick={() => onCopy(saved, t('Password copied'))} data-guest-password-copy>
+                {t('Copy password')}
               </Button>
             ) : null}
           </div>
           {access.enabled && dirty ? (
             <p className={own.warn} data-guest-password-warning>
               <KeyRound size={18} strokeWidth={1.75} aria-hidden="true" className={styles.inlineIcon} />
-              Guests who already opened your website will be asked for the new password.
+              {t('Guests who already opened your website will be asked for the new password.')}
             </p>
           ) : null}
           {dirty || opening ? (
             <div className={styles.buttonRow}>
-              <Button variant="primary" icon={LockKeyhole} busy={busy} busyLabel="Saving…" disabled={!online} onClick={() => void confirm()} data-guest-password-save>
-                {access.enabled ? 'Save new password' : 'Turn on password'}
+              <Button variant="primary" icon={LockKeyhole} busy={busy} busyLabel={t('Saving…')} disabled={!online} onClick={() => void confirm()} data-guest-password-save>
+                {access.enabled ? t('Save new password') : t('Turn on password')}
               </Button>
               <Button variant="tertiary" disabled={busy} onClick={cancel}>
-                Cancel
+                {t('Cancel')}
               </Button>
             </div>
           ) : null}
-          <p className={own.tip}>Add the password to your invitation message, so your guests can open your website. Guests type it once; their browser remembers it.</p>
+          <p className={own.tip}>{t('Add the password to your invitation message, so your guests can open your website. Guests type it once; their browser remembers it.')}</p>
           <p className={styles.hint}>
-            Guests see a page with your names and a password box — no date, place or photos. They enter it once per phone. Your
-            editor and its preview always open without it.
+            {t('Guests see a page with your names and a password box — no date, place or photos. They enter it once per phone. Your editor and its preview always open without it.')}
           </p>
         </div>
       ) : null}
@@ -215,7 +215,7 @@ export function GuestPasswordCard({
       {body}
     </div>
   ) : (
-    <Card title="Guest password" titleId="share-password" icon={LockKeyhole} data-guest-password={state}>
+    <Card title={t('Guest password')} titleId="share-password" icon={LockKeyhole} data-guest-password={state}>
       {body}
     </Card>
   );

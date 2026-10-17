@@ -9,6 +9,7 @@ import { MARKETING } from '../lib/marketing/config.ts';
 import { llmsFullTxt, llmsTxt, robotsTxt, SEARCH_BOTS, sitemapEntries, sitemapXml, TRAINING_BOTS } from '../lib/marketing/crawl.ts';
 import { liveDesigns } from '../lib/marketing/designs.ts';
 import { faqItems } from '../lib/marketing/faq.ts';
+import { LANGS, PREFIXED_LANGS } from '../lib/marketing/i18n.ts';
 import { loadGuides } from '../lib/marketing/guides.ts';
 import { corePages, MARKETING_SEGMENTS } from '../lib/marketing/site.ts';
 import { COUPLE_SITE_ROBOTS } from '../lib/site/render.ts';
@@ -106,8 +107,19 @@ test('sitemap: empty until launch; then every page, live design and guide with a
   const xml = sitemapXml(guides, cfg);
   const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
   const expected = [...corePages(cfg).map((p) => p.path), ...liveDesigns(cfg).map((d) => `/designs/${d.id}`), ...guides.map((g) => g.path)];
-  assert.equal(locs.length, expected.length);
-  for (const p of expected) assert.ok(locs.includes(`https://example.com${p === '/' ? '/' : p}`), p);
+  // G144: every page in five languages (English at the root, the others under /tr, /es, /de, /fr)
+  assert.equal(locs.length, expected.length * LANGS.length);
+  for (const p of expected) {
+    assert.ok(locs.includes(`https://example.com${p === '/' ? '/' : p}`), p);
+    for (const l of PREFIXED_LANGS) assert.ok(locs.includes(`https://example.com/${l}${p === '/' ? '' : p}`), `${l} ${p}`);
+  }
+  // each <url> lists all five languages and x-default (English) as xhtml:link alternates
+  assert.match(xml, /<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9" xmlns:xhtml="http:\/\/www\.w3\.org\/1999\/xhtml">/);
+  for (const block of xml.split('<url>').slice(1)) {
+    const langs = [...block.matchAll(/hreflang="([^"]+)"/g)].map((m) => m[1]);
+    assert.deepEqual(langs, [...LANGS, 'x-default']);
+  }
+  assert.match(xml, /<loc>https:\/\/example\.com\/tr\/designs<\/loc>[\s\S]*?hreflang="de" href="https:\/\/example\.com\/de\/designs"/);
   for (const m of xml.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)) assert.match(m[1], /^\d{4}-\d{2}-\d{2}$/);
   assert.doesNotMatch(xml, /changefreq|priority/);
   assert.ok(!locs.some((l) => /\/start|\/edit|\/api|unreleased-fixture/.test(l)), 'no private, demo or unreleased URLs');
@@ -141,7 +153,7 @@ test('route handlers answer with the right content types and noindex for llms fi
   assert.match(await robots.text(), /Disallow: \/api\//);
   const sitemap = getSitemap();
   assert.equal(sitemap.headers.get('content-type'), 'application/xml; charset=utf-8');
-  assert.match(await sitemap.text(), /<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">/);
+  assert.match(await sitemap.text(), /<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9"[^>]*>/);
   const llms = getLlms();
   assert.equal(llms.headers.get('content-type'), 'text/markdown; charset=utf-8');
   if (!MARKETING.launched) assert.equal(llms.headers.get('x-robots-tag'), 'noindex');

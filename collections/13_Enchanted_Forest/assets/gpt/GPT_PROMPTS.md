@@ -351,3 +351,29 @@ Kontrol: tek yeşil ekran; sol üçte bir boş; süsler kenarlarda; yazı/logo y
 A cozy lifestyle close-up: two hands hold a smartphone in portrait orientation at a comfortable reading angle, the screen facing the camera; one thumb rests at the very edge of the phone frame, never on the screen. The person sits on a cream linen sofa with a moss green cushion and a ceramic coffee cup; a small arrangement of ferns, moss, small mushrooms and tiny warm fairy lights is softly blurred in the background. Warm, relaxed, happy planning mood; the person's face is not visible. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: moss green, fern green, aged cream parchment and warm lantern gold. Every phone is a generic modern smartphone with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
 ```
 Kontrol: tek yeşil ekran; başparmak ekranın dışında; yüz görünmüyor; yazı/logo yok.
+
+
+---
+
+## G139 — Basılı davetiye için yüksek çözünürlüklü parçalar
+
+> Görev `G139`. Panelden indirilen 5×7 in / A5 basılı davetiye bu tasarımın `parts/invitation_card.png` (ön) ve
+> `parts/info_card.png` (arka) parçalarını kullanır. Bugünkü parçalar 1024 × 1536 px: 5×7'de ~230 ppi, A5'te ~200 ppi
+> (300 ppi hedefinin altında; büyütme yapılmadı). Aynı tasarımın **2× sürümü** istenir; gelince
+> `node scripts/build-print-assets.ts --theme <tema>` çalıştırılır (yerleşim değişmez).
+
+### P1 — invitation_card_print
+Kaydet: `collections/13_Enchanted_Forest/assets/gpt/parts/invitation_card_print.png` — **2048 × 3072 px, PNG, şeffaf arka plan**
+```
+Recreate the attached invitation_card.png of this collection exactly — same card shape, paper, colours, decor and
+decor positions, same empty text area — at 2048 × 3072 px for print. Fully transparent background around the card.
+Crisp, print-quality detail; no new elements. No text, letters, numbers, logos or watermarks.
+```
+
+### P2 — info_card_print
+Kaydet: `collections/13_Enchanted_Forest/assets/gpt/parts/info_card_print.png` — **2048 × 3072 px, PNG, şeffaf arka plan**
+```
+Recreate the attached info_card.png of this collection exactly — same card shape, paper, colours, small decor and
+its position, same empty area — at 2048 × 3072 px for print. Fully transparent background around the card. Crisp,
+print-quality detail; no new elements. No text, letters, numbers, logos or watermarks.
+```

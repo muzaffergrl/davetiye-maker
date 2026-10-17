@@ -26,18 +26,22 @@ import { Sheet } from './Sheet.tsx';
 import { Button, cx } from './ui.tsx';
 import type { IdentityOutcome } from './usePanel.ts';
 import styles from './panel.module.css';
+import { msg, t, tn } from '../../lib/i18n/client.ts';
 
 export function noChangesLeftText(total: number): string {
-  return `You've used all ${total} name and date changes. Small typo fixes, surnames and moving your date by up to ${DATE_FREE_DAYS} days are still free. If your wedding moved further or something else needs to change, contact us at ${PANEL_BRAND.supportEmail} or message ${PANEL_BRAND.shopName} on Etsy with your order number.`;
+  return t(
+    "You've used all {total} name and date changes. Small typo fixes, surnames and moving your date by up to {days} days are still free. If your wedding moved further or something else needs to change, contact us at {email} or message {shop} on Etsy with your order number.",
+    { total, days: DATE_FREE_DAYS, email: PANEL_BRAND.supportEmail, shop: PANEL_BRAND.shopName },
+  );
 }
 
 /** "Moving your date by up to 7 days is free." / "Adding a surname is free." / "Free: date moved, surname, small fix." */
 export function freeText(free: readonly FreeReason[]): string {
-  if (free.length === 1 && free[0] === 'date') return `Moving your date by up to ${DATE_FREE_DAYS} days is free.`;
-  if (free.length === 1 && free[0] === 'surname') return 'Adding a surname is free.';
-  if (free.length === 1) return 'Small fix — free.';
-  const words: Record<FreeReason, string> = { date: 'date moved by a few days', surname: 'surname', typo: 'small fix' };
-  return `Free: ${free.map((f) => words[f]).join(', ')}.`;
+  if (free.length === 1 && free[0] === 'date') return t('Moving your date by up to {days} days is free.', { days: DATE_FREE_DAYS });
+  if (free.length === 1 && free[0] === 'surname') return t('Adding a surname is free.');
+  if (free.length === 1) return t('Small fix — free.');
+  const words: Record<FreeReason, string> = { date: msg('date moved by a few days'), surname: msg('surname'), typo: msg('small fix') };
+  return t('Free: {list}.', { list: free.map((f) => t(words[f])).join(', ') });
 }
 
 type Draft = Pick<ContentRecord, 'partners' | 'name_display' | 'initials' | 'date'>;
@@ -114,30 +118,30 @@ export function IdentitySheet({
   let info: { icon: LucideIcon; tone: string; text: string };
   let primary: string;
   if (cls === 'unchanged') {
-    info = { icon: Info, tone: styles.costNeutral, text: 'Make your change above.' };
-    primary = 'Save';
+    info = { icon: Info, tone: styles.costNeutral, text: t('Make your change above.') };
+    primary = t('Save');
   } else if (cls === 'typo') {
-    info = { icon: CircleCheckBig, tone: styles.costFree, text: `${freeText(free)} You still have ${left} ${left === 1 ? 'change' : 'changes'} left.` };
-    primary = 'Save — free';
+    info = { icon: CircleCheckBig, tone: styles.costFree, text: `${freeText(free)} ${tn(left, 'You still have {n} change left.', 'You still have {n} changes left.')}` };
+    primary = t('Save — free');
   } else if (cls === 'undo') {
-    info = { icon: Undo2, tone: styles.costUndo, text: `Back to how it was before your last change — free, and you get that change back.` };
-    primary = 'Undo my last change';
+    info = { icon: Undo2, tone: styles.costUndo, text: t('Back to how it was before your last change — free, and you get that change back.') };
+    primary = t('Undo my last change');
   } else if (cls === 'sample') {
-    info = { icon: CircleCheckBig, tone: styles.costFree, text: 'Replacing the design’s sample date with your real date is free (once).' };
-    primary = 'Save my date — free';
+    info = { icon: CircleCheckBig, tone: styles.costFree, text: t('Replacing the design’s sample date with your real date is free (once).') };
+    primary = t('Save my date — free');
   } else if (left >= 2) {
     info = {
       icon: Info,
       tone: styles.costInfo,
-      text: `This uses 1 of your ${total} changes. You'll have ${left - 1} left.${dateMovedFar ? ` (Only date moves of up to ${DATE_FREE_DAYS} days are free.)` : ''}`,
+      text: `${t("This uses 1 of your {total} changes. You'll have {left} left.", { total, left: left - 1 })}${dateMovedFar ? ` ${t('(Only date moves of up to {days} days are free.)', { days: DATE_FREE_DAYS })}` : ''}`,
     };
-    primary = 'Use 1 change';
+    primary = t('Use 1 change');
   } else if (left === 1) {
-    info = { icon: TriangleAlert, tone: styles.costWarn, text: 'This is your last change. After this, only small typo fixes are possible.' };
-    primary = 'Use my last change';
+    info = { icon: TriangleAlert, tone: styles.costWarn, text: t('This is your last change. After this, only small typo fixes are possible.') };
+    primary = t('Use my last change');
   } else {
     info = { icon: Lock, tone: styles.costLocked, text: noChangesLeftText(total) };
-    primary = 'Use 1 change';
+    primary = t('Use 1 change');
   }
   const InfoIcon = info.icon;
   const blocked = cls === 'unchanged' || (cls === 'change' && left === 0);
@@ -155,25 +159,25 @@ export function IdentitySheet({
     if (res.code === 'confirm_required') {
       // The site was changed elsewhere since this sheet opened: the server counts it as a change. Ask again.
       if (typeof res.remaining === 'number') setLeft(res.remaining);
-      setError('This now uses 1 change. Please confirm again.');
+      setError(t('This now uses 1 change. Please confirm again.'));
       return;
     }
-    setError(res.issues?.[0]?.message ?? res.message ?? 'This could not be saved. Please try again.');
+    setError(t(res.issues?.[0]?.message ?? res.message ?? msg('This could not be saved. Please try again.')));
   };
 
   const fid = (name: string) => `${uid}-${name}`;
   const partners = draft.partners ?? [];
   return (
-    <Sheet title="Change names or date" onClose={onClose} testId="identity">
+    <Sheet title={t('Change names or date')} onClose={onClose} testId="identity">
       <p className={styles.hint}>
-        Your names and date are on the {openingPlace(opening)}, the page titles and the link preview. Changes show after you publish them.
+        {t('Your names and date are on the {place}, the page titles and the link preview. Changes show after you publish them.', { place: t(openingPlace(opening)) })}
       </p>
       {partners.map((p, i) => (
         <fieldset key={i} className={styles.group}>
-          <legend className={styles.groupTitle}>{i === 0 ? 'First partner' : 'Second partner'}</legend>
+          <legend className={styles.groupTitle}>{i === 0 ? t('First partner') : t('Second partner')}</legend>
           <div className={styles.field}>
             <label className={styles.label} htmlFor={fid(`first-${i}`)}>
-              First name
+              {t('First name')}
             </label>
             <input
               id={fid(`first-${i}`)}
@@ -187,7 +191,7 @@ export function IdentitySheet({
           </div>
           <div className={styles.field}>
             <label className={styles.label} htmlFor={fid(`full-${i}`)}>
-              Full name <span className={styles.optional}>(optional)</span>
+              {t('Full name')} <span className={styles.optional}>{t('(optional)')}</span>
             </label>
             <input id={fid(`full-${i}`)} className={styles.input} value={p.full_name ?? ''} maxLength={CONTENT_LIMITS.fullName} onChange={(e) => setName(i, 'full_name', e.target.value)} />
           </div>
@@ -195,21 +199,21 @@ export function IdentitySheet({
       ))}
       <div className={styles.field}>
         <label className={styles.label} htmlFor={fid('shown')}>
-          How your names appear
+          {t('How your names appear')}
         </label>
         <input id={fid('shown')} className={styles.input} value={draft.name_display ?? ''} maxLength={CONTENT_LIMITS.nameDisplay} onChange={(e) => set((d) => void (d.name_display = e.target.value))} />
       </div>
       {showInitials ? (
         <div className={styles.field}>
           <label className={styles.label} htmlFor={fid('initials')}>
-            Monogram
+            {t('Monogram')}
           </label>
           <input id={fid('initials')} className={styles.input} value={draft.initials ?? ''} maxLength={9} onChange={(e) => set((d) => void (d.initials = e.target.value))} />
         </div>
       ) : null}
       <div className={styles.field}>
         <label className={styles.label} htmlFor={fid('date')}>
-          Wedding date
+          {t('Wedding date')}
         </label>
         <input
           id={fid('date')}
@@ -233,16 +237,16 @@ export function IdentitySheet({
           <InfoIcon size={20} strokeWidth={1.75} aria-hidden="true" />
           <p>{info.text}</p>
         </div>
-        <Button variant="primary" busy={busy} busyLabel="Saving…" disabled={blocked} onClick={() => void submit()} data-identity-submit>
+        <Button variant="primary" busy={busy} busyLabel={t('Saving…')} disabled={blocked} onClick={() => void submit()} data-identity-submit>
           {primary}
         </Button>
         {dirty ? (
           <Button variant="secondary" onClick={() => setDraft(draftOf(content))}>
-            Undo my edits
+            {t('Undo my edits')}
           </Button>
         ) : (
           <Button variant="secondary" onClick={onClose}>
-            Cancel
+            {t('Cancel')}
           </Button>
         )}
       </div>

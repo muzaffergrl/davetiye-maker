@@ -22,14 +22,18 @@ import { isReservedSlug, isValidSlugFormat } from '../slug.ts';
 import { OG_IMAGE_SIZE } from '../theme/share.ts';
 import { loadTheme, readThemePage, SUB_PAGES, type LoadedTheme, type PageName } from '../theme/theme.ts';
 import { themeAssetUrl } from '../theme/urls.ts';
+import { siteLangs } from '../i18n/content.ts';
+import { isLang } from '../i18n/langs.ts';
+import { siteDict } from '../i18n/site.ts';
+import { makeTranslator, msg } from '../i18n/translate.ts';
 import { ACCESS_LIMITS, getAccessRateLimiter, guestMayEnter, guestPasswordMatches, guestSetCookie, isProtected } from './access.ts';
 
 /** Hidden field that marks a POST to a page address as the password form. */
 export const ACCESS_FIELD = 'site_access';
 /** Meta tags (link previews); the page itself shows the typographic apostrophe. */
-export const INVITED_TEXT = "You're invited";
-const LEAD_TEXT = 'This website is private. Please enter the password from your invitation.';
-const WRONG_TEXT = 'That password isn’t right. Please check your invitation and try again.';
+export const INVITED_TEXT = msg("You're invited");
+const LEAD_TEXT = msg('This website is private. Please enter the password from your invitation.');
+const WRONG_TEXT = msg('That password isn’t right. Please check your invitation and try again.');
 
 /** Where the form was shown: a page of the site. (/<slug>/event.ics without the cookie sends the guest to /<slug>.) */
 export type GateTarget = PageName;
@@ -91,7 +95,7 @@ async function themeHead(theme: LoadedTheme | null): Promise<ThemeHead> {
 // Progressive "Show" button for the password box (the form works without it). Its hash is in the page CSP.
 const SHOW_SCRIPT =
   "(function(){var i=document.getElementById('sg-password'),b=document.getElementById('sg-show');if(!i||!b)return;b.hidden=false;" +
-  "b.addEventListener('click',function(){var s=i.type==='password';i.type=s?'text':'password';b.setAttribute('aria-pressed',String(s));b.textContent=s?'Hide':'Show';i.focus();});})();";
+  "b.addEventListener('click',function(){var s=i.type==='password';i.type=s?'text':'password';b.setAttribute('aria-pressed',String(s));b.textContent=s?b.getAttribute('data-hide'):b.getAttribute('data-show');i.focus();});})();";
 const SHOW_SCRIPT_HASH = `'sha256-${createHash('sha256').update(SHOW_SCRIPT, 'utf8').digest('base64')}'`;
 
 /** CSP of the password page: the theme's own CSS and fonts, one hashed script, the form posts to this origin only. */
@@ -148,25 +152,30 @@ export interface GatePageInput {
   status?: number;
 }
 
-function minutes(ms: number): string {
-  const m = Math.max(1, Math.ceil(ms / 60_000));
-  return m === 1 ? '1 minute' : `${m} minutes`;
+function minutes(ms: number): number {
+  return Math.max(1, Math.ceil(ms / 60_000));
 }
 
 /** The password page (HTML Response). */
 export async function gatePage(input: GatePageInput): Promise<Response> {
   const state = input.state ?? 'ask';
-  const names = coupleNames(input.content);
+  // G144: the language of the page the guest opened (?lang=, one of the site's), else the site's primary language
+  const langs = siteLangs(input.content);
+  const asked = new URL(input.action, 'http://gate.invalid').searchParams.get('lang');
+  const lang = isLang(asked) && langs.all.includes(asked) ? asked : langs.primary;
+  const { t, tn } = makeTranslator(lang, await siteDict(lang));
+  const names = coupleNames(input.content) === 'Our wedding' ? t('Our wedding') : coupleNames(input.content);
+  const invited = t(INVITED_TEXT);
   const head = await themeHead(input.theme);
   const tags: string[] = [];
   const meta = (attr: 'name' | 'property', key: string, value: string) => tags.push(`<meta ${attr}="${key}" content="${esc(value)}">`);
   meta('name', 'robots', 'noindex, nofollow');
-  meta('name', 'description', INVITED_TEXT);
+  meta('name', 'description', invited);
   meta('property', 'og:type', 'website');
   meta('property', 'og:title', names);
-  meta('property', 'og:description', INVITED_TEXT);
+  meta('property', 'og:description', invited);
   meta('name', 'twitter:title', names);
-  meta('name', 'twitter:description', INVITED_TEXT);
+  meta('name', 'twitter:description', invited);
   const theme = input.theme;
   const og = theme?.share.ogImage ? themeAssetUrl(theme.manifest.id, theme.share.ogImage) : null;
   if (og) {
@@ -175,9 +184,9 @@ export async function gatePage(input: GatePageInput): Promise<Response> {
     meta('property', 'og:image:type', 'image/jpeg');
     meta('property', 'og:image:width', String(OG_IMAGE_SIZE.width));
     meta('property', 'og:image:height', String(OG_IMAGE_SIZE.height));
-    meta('property', 'og:image:alt', `${names} wedding invitation`);
+    meta('property', 'og:image:alt', t('{names} wedding invitation', { names }));
     meta('name', 'twitter:card', 'summary_large_image');
-    meta('name', 'twitter:image:alt', `${names} wedding invitation`);
+    meta('name', 'twitter:image:alt', t('{names} wedding invitation', { names }));
   }
   if (head.themeColor) meta('name', 'theme-color', head.themeColor);
   const icon = theme?.share.icon ? themeAssetUrl(theme.manifest.id, theme.share.icon) : null;
@@ -187,31 +196,31 @@ export async function gatePage(input: GatePageInput): Promise<Response> {
 
   const message =
     state === 'wrong'
-      ? WRONG_TEXT
+      ? t(WRONG_TEXT)
       : state === 'wait'
-        ? `Too many tries. Please wait ${minutes(input.retryAfterMs ?? ACCESS_LIMITS.wrongPerSiteIp.windowMs)} and try again.`
+        ? tn(minutes(input.retryAfterMs ?? ACCESS_LIMITS.wrongPerSiteIp.windowMs), 'Too many tries. Please wait 1 minute and try again.', 'Too many tries. Please wait {n} minutes and try again.')
         : null;
   const describedBy = message ? 'sg-lead sg-msg' : 'sg-lead';
   const html =
     '<!DOCTYPE html>' +
-    `<html lang="en" data-site-gate="${state}"${theme ? ` data-theme="${esc(theme.manifest.id)}"` : ''}>` +
+    `<html lang="${lang}" data-site-gate="${state}"${theme ? ` data-theme="${esc(theme.manifest.id)}"` : ''}>` +
     '<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">' +
     `<title>${esc(names)}</title>${tags.join('')}<style>${GATE_CSS}</style></head>` +
     '<body class="site-gate"><main class="sg" aria-labelledby="sg-names">' +
-    '<p class="sg-kicker">You\u2019re invited</p>' +
+    `<p class="sg-kicker">${esc(t('You\u2019re invited'))}</p>` +
     `<h1 class="sg-names" id="sg-names">${esc(names)}</h1>` +
-    `<p class="sg-lead" id="sg-lead">${esc(LEAD_TEXT)}</p>` +
+    `<p class="sg-lead" id="sg-lead">${esc(t(LEAD_TEXT))}</p>` +
     `<form class="sg-form" method="post" action="${esc(input.action)}">` +
     `<input type="hidden" name="${ACCESS_FIELD}" value="1">` +
-    '<label class="sg-label" for="sg-password">Password</label>' +
+    `<label class="sg-label" for="sg-password">${esc(t('Password'))}</label>` +
     '<div class="sg-field">' +
     `<input class="sg-input" id="sg-password" name="password" type="password" required maxlength="200" autocomplete="current-password" autocapitalize="none" autocorrect="off" spellcheck="false" aria-describedby="${describedBy}"${state === 'wrong' ? ' aria-invalid="true" autofocus' : ''}>` +
-    '<button class="sg-show" id="sg-show" type="button" aria-controls="sg-password" aria-pressed="false" hidden>Show</button>' +
+    `<button class="sg-show" id="sg-show" type="button" aria-controls="sg-password" aria-pressed="false" data-show="${esc(t('Show'))}" data-hide="${esc(t('Hide'))}" hidden>${esc(t('Show'))}</button>` +
     '</div>' +
     (message ? `<p class="sg-msg" id="sg-msg" role="alert">${esc(message)}</p>` : '') +
-    '<button class="sg-submit" type="submit">Open the invitation</button>' +
+    `<button class="sg-submit" type="submit">${esc(t('Open the invitation'))}</button>` +
     '</form>' +
-    '<p class="sg-note">You only need to enter it once on this device.</p>' +
+    `<p class="sg-note">${esc(t('You only need to enter it once on this device.'))}</p>` +
     `</main><script>${SHOW_SCRIPT}</script></body></html>`;
   const headers = new Headers({
     'Content-Type': 'text/html; charset=utf-8',

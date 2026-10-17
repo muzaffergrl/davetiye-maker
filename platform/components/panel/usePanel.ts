@@ -24,6 +24,7 @@ import { archivingDateIssue, withIdentity, type Identity, type RightsView } from
 import { NO_GUEST_ACCESS, type GuestAccessView } from '../../lib/panel/guest-access.ts';
 import { panelApi } from './api.ts';
 import { uploadMusicFile } from './music-upload.ts';
+import { t } from '../../lib/i18n/client.ts';
 
 export type SaveState = 'saved' | 'pending' | 'saving' | 'retrying' | 'offline' | 'conflict' | 'unauthorized' | 'refused';
 
@@ -304,7 +305,7 @@ export function usePanel(initial: PanelState, editKey: string) {
   };
 
   const publish = useCallback(async (): Promise<PublishOutcome> => {
-    if (!(await flush())) return { ok: false, message: 'Your latest changes are not saved yet. Please try again in a moment.' };
+    if (!(await flush())) return { ok: false, message: t('Your latest changes are not saved yet. Please try again in a moment.') };
     const res = await enqueue(() => api.publish(metaRef.current.updatedAt));
     if (res.ok) {
       setPreviewVersion((n) => n + 1);
@@ -324,7 +325,7 @@ export function usePanel(initial: PanelState, editKey: string) {
   /** Names / date after the first publish (POST /identity). intent "change" confirms using one change. */
   const changeIdentity = useCallback(
     async (identity: Identity, intent: 'fix' | 'change'): Promise<IdentityOutcome> => {
-      if (!(await flush())) return { ok: false, status: 0, message: 'Your latest changes are not saved yet. Please try again in a moment.' };
+      if (!(await flush())) return { ok: false, status: 0, message: t('Your latest changes are not saved yet. Please try again in a moment.') };
       const res = await enqueue(() => api.identity(identity, intent, metaRef.current.updatedAt));
       const body = res.body as Record<string, unknown> & { code?: string; message?: string };
       if (res.ok) {
@@ -361,7 +362,7 @@ export function usePanel(initial: PanelState, editKey: string) {
         ok: false,
         status: res.status,
         code: body.code,
-        message: res.status === 0 ? 'No connection. Please try again when you are back online.' : body.message,
+        message: res.status === 0 ? t('No connection. Please try again when you are back online.') : body.message,
       };
     },
     [api, enqueue],
@@ -369,10 +370,10 @@ export function usePanel(initial: PanelState, editKey: string) {
 
   const uploadPhoto = useCallback(
     async (slot: PanelPhotoSlot, blob: Blob): Promise<{ ok: boolean; message?: string }> => {
-      if (stopped.current) return { ok: false, message: saveMessage ?? 'Saving is paused. Please reload the page.' };
+      if (stopped.current) return { ok: false, message: saveMessage ?? t('Saving is paused. Please reload the page.') };
       const res = await api.uploadPhoto(slot.key, blob);
       if (!res.ok || typeof res.body.url !== 'string') {
-        return { ok: false, message: res.status === 0 ? 'No connection. Please try again when you are back online.' : (res.body.message ?? 'The photo could not be uploaded.') };
+        return { ok: false, message: res.status === 0 ? t('No connection. Please try again when you are back online.') : (res.body.message ?? t('The photo could not be uploaded.')) };
       }
       const url = res.body.url;
       edit((c) => withPhoto(c, slot.source, url));
@@ -385,7 +386,7 @@ export function usePanel(initial: PanelState, editKey: string) {
   // G126: the couple's own story music (sent in parts), then content.audio points to it.
   const uploadMusic = useCallback(
     async (file: File, onProgress?: (share: number) => void): Promise<{ ok: boolean; message?: string }> => {
-      if (stopped.current) return { ok: false, message: saveMessage ?? 'Saving is paused. Please reload the page.' };
+      if (stopped.current) return { ok: false, message: saveMessage ?? t('Saving is paused. Please reload the page.') };
       const res = await uploadMusicFile(initial.slug, editKey, file, onProgress);
       if (!res.ok || !res.url) return { ok: false, message: res.message };
       const url = res.url;

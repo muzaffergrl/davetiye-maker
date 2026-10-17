@@ -12,6 +12,7 @@ import { normalizeLine } from '../content/text.ts';
 import type { RsvpAnswer } from '../data/types.ts';
 import { rsvpFormConfig, type FormQuestion } from './form-config.ts';
 import { replyPeople } from './insights.ts';
+import { interpolate, msg, type Vars } from '../i18n/translate.ts';
 
 export type CellKind = 'text' | 'long' | 'number' | 'datetime' | 'yesno';
 
@@ -62,7 +63,11 @@ export interface TableReply {
 export interface TableOptions {
   content: unknown;
   now?: Date;
+  /** G144: the couple's language for headings and fixed words (lib/i18n; English when absent). */
+  t?: (en: string, vars?: Vars) => string;
 }
+
+const english = (en: string, vars?: Vars) => interpolate(en, vars);
 
 // ---------------------------------------------------------------------------------------------
 // Dates
@@ -98,29 +103,30 @@ export function localDateTime(iso: string, timeZone: string): { datetime: string
 // Columns
 
 const FIXED_BEFORE: TableColumn[] = [
-  { key: 'submitted', header: 'Submitted', kind: 'datetime', width: 20 },
-  { key: 'name', header: 'Name', kind: 'text', width: 24 },
-  { key: 'attending', header: 'Attending', kind: 'yesno', width: 11 },
-  { key: 'guests', header: 'Guests', kind: 'number', width: 9 },
-  { key: 'party', header: 'Other guests', kind: 'text', width: 30 },
-  { key: 'email', header: 'Email', kind: 'text', width: 28 },
+  { key: 'submitted', header: msg('Submitted'), kind: 'datetime', width: 20 },
+  { key: 'name', header: msg('Name'), kind: 'text', width: 24 },
+  { key: 'attending', header: msg('Attending'), kind: 'yesno', width: 11 },
+  { key: 'guests', header: msg('Guests'), kind: 'number', width: 9 },
+  { key: 'party', header: msg('Other guests'), kind: 'text', width: 30 },
+  { key: 'email', header: msg('Email'), kind: 'text', width: 28 },
 ];
 const FIXED_AFTER: TableColumn[] = [
-  { key: 'message', header: 'Note for the couple', kind: 'long', width: 40 },
+  { key: 'message', header: msg('Note for the couple'), kind: 'long', width: 40 },
 ];
-const SOURCE: TableColumn = { key: 'source', header: 'Source', kind: 'text', width: 22 };
+const SOURCE: TableColumn = { key: 'source', header: msg('Source'), kind: 'text', width: 22 };
 
 const questionKind = (q: FormQuestion): CellKind => (q.type === 'number' ? 'number' : q.type === 'yesno' ? 'yesno' : q.type === 'long' ? 'long' : 'text');
 const questionWidth = (q: FormQuestion): number =>
   q.type === 'yesno' ? Math.max(10, Math.min(24, q.label.length + 2)) : q.type === 'number' ? Math.max(10, Math.min(20, q.label.length + 2)) : q.type === 'long' ? 40 : 26;
 
 /** Header of the column of a removed question. */
-export const removedHeader = (question: string) => `${question} (removed)`;
+export const removedHeader = (question: string, t: (en: string, vars?: Vars) => string = english) => t('{question} (removed)', { question });
 
 /** Answer columns: current questions in order, then removed ones (in the order they first appear, oldest reply first). */
 export function answerColumns(
   replies: readonly Pick<TableReply, 'answers'>[],
   questions: readonly Pick<FormQuestion, 'id' | 'label' | 'type'>[],
+  t: (en: string, vars?: Vars) => string = english,
 ): Array<{ id: string; header: string; question: FormQuestion | null; removed: boolean }> {
   const out: Array<{ id: string; header: string; question: FormQuestion | null; removed: boolean }> = questions.map((q) => ({
     id: q.id,
@@ -133,26 +139,26 @@ export function answerColumns(
     for (const a of r.answers ?? []) {
       if (known.has(a.id)) continue;
       known.add(a.id);
-      out.push({ id: a.id, header: removedHeader(normalizeLine(a.question) || a.id), question: null, removed: true });
+      out.push({ id: a.id, header: removedHeader(normalizeLine(a.question) || a.id, t), question: null, removed: true });
     }
   }
   return out;
 }
 
 /** Where a reply came from, in the couple's words (G069). */
-export function sourceText(r: Pick<TableReply, 'source' | 'editedAt'>): string {
-  if (r.source === 'couple') return 'Added by you';
-  return r.editedAt ? 'Website, edited by you' : 'Website';
+export function sourceText(r: Pick<TableReply, 'source' | 'editedAt'>, t: (en: string) => string = english): string {
+  if (r.source === 'couple') return t('Added by you');
+  return r.editedAt ? t('Website, edited by you') : t('Website');
 }
 
-function otherGuests(r: TableReply): string {
+function otherGuests(r: TableReply, t: (en: string, vars?: Vars) => string): string {
   if (!r.attending) return '';
   const people = replyPeople({ id: '', name: r.name, attending: r.attending, guests: r.guests, party: r.party, createdAt: r.createdAt });
   const others = people.slice(1);
   const named = others.filter((p) => p.named).map((p) => p.name);
   const unnamed = others.length - named.length;
   const parts = [...named];
-  if (unnamed) parts.push(unnamed === 1 ? '1 guest without a name' : `${unnamed} guests without a name`);
+  if (unnamed) parts.push(unnamed === 1 ? t('1 guest without a name') : t('{n} guests without a name', { n: unnamed }));
   return parts.join(', ');
 }
 
@@ -162,7 +168,7 @@ function siteTimeZone(content: unknown): string {
 }
 
 /** "Avery & Jordan — RSVP replies" (the spreadsheet's name). */
-export function tableTitle(content: unknown): string {
+export function tableTitle(content: unknown, t: (en: string, vars?: Vars) => string = english): string {
   const c = content as { name_display?: unknown; partners?: Array<{ display_name?: unknown }> } | null;
   let names = typeof c?.name_display === 'string' ? normalizeLine(c.name_display) : '';
   if (!names && Array.isArray(c?.partners)) {
@@ -171,25 +177,26 @@ export function tableTitle(content: unknown): string {
       .filter(Boolean)
       .join(' & ');
   }
-  return `${names || 'Our wedding'} — RSVP replies`;
+  return t('{names} — RSVP replies', { names: names || t('Our wedding') });
 }
 
 /** The Replies sheet: columns from the form's field set, one row per counted reply, oldest first. */
 export function replyTable(list: readonly TableReply[], opts: TableOptions): ReplyTable {
+  const t = opts.t ?? english;
   const tz = siteTimeZone(opts.content);
   const config = rsvpFormConfig(opts.content);
   const replies = list.filter((r) => !r.held).sort((a, b) => a.createdAt.localeCompare(b.createdAt));
-  const answers = answerColumns(replies, config.questions);
+  const answers = answerColumns(replies, config.questions, t);
   const columns: TableColumn[] = [
-    ...FIXED_BEFORE,
+    ...FIXED_BEFORE.map((c) => ({ ...c, header: t(c.header) })),
     ...answers.map((a) => ({
       key: `answer:${a.id}`,
       header: a.header,
       kind: a.question ? questionKind(a.question) : ('text' as CellKind),
       width: a.question ? questionWidth(a.question) : 26,
     })),
-    ...FIXED_AFTER,
-    SOURCE,
+    ...FIXED_AFTER.map((c) => ({ ...c, header: t(c.header) })),
+    { ...SOURCE, header: t(SOURCE.header) },
   ];
   const rows = replies.map((r) =>
     columns.map((c): Cell => {
@@ -199,17 +206,17 @@ export function replyTable(list: readonly TableReply[], opts: TableOptions): Rep
         case 'name':
           return r.name;
         case 'attending':
-          return r.attending ? 'Yes' : 'No';
+          return r.attending ? t('Yes') : t('No');
         case 'guests':
           return r.attending ? r.guests : 0;
         case 'party':
-          return otherGuests(r);
+          return otherGuests(r, t);
         case 'email':
           return r.email ?? '';
         case 'message':
           return r.message ?? '';
         case 'source':
-          return sourceText(r);
+          return sourceText(r, t);
         default: {
           const id = c.key.slice('answer:'.length);
           const value = r.answers?.find((a) => a.id === id)?.answer ?? '';
@@ -219,7 +226,7 @@ export function replyTable(list: readonly TableReply[], opts: TableOptions): Rep
       }
     }),
   );
-  return { title: tableTitle(opts.content), timeZone: tz, columns, rows };
+  return { title: tableTitle(opts.content, t), timeZone: tz, columns, rows };
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -227,6 +234,7 @@ export function replyTable(list: readonly TableReply[], opts: TableOptions): Rep
 
 /** The Summary sheet: totals, then the breakdown of every choice and yes / no question (replies that said yes). */
 export function summaryRows(list: readonly TableReply[], opts: TableOptions): SummaryRow[] {
+  const t = opts.t ?? english;
   const tz = siteTimeZone(opts.content);
   const now = opts.now ?? new Date();
   const config = rsvpFormConfig(opts.content);
@@ -238,18 +246,18 @@ export function summaryRows(list: readonly TableReply[], opts: TableOptions): Su
   const locale = (opts.content as { locale?: unknown } | null)?.locale;
 
   const rows: SummaryRow[] = [
-    { kind: 'title', label: tableTitle(opts.content) },
-    { kind: 'row', label: 'Last updated', value: localDateTime(now.toISOString(), tz) },
-    { kind: 'row', label: 'Time zone', value: tz },
-    ...(typeof deadline === 'string' ? [{ kind: 'row' as const, label: 'Reply by', value: formatDate(deadline, typeof locale === 'string' ? locale : 'en-US') }] : []),
+    { kind: 'title', label: tableTitle(opts.content, t) },
+    { kind: 'row', label: t('Last updated'), value: localDateTime(now.toISOString(), tz) },
+    { kind: 'row', label: t('Time zone'), value: tz },
+    ...(typeof deadline === 'string' ? [{ kind: 'row' as const, label: t('Reply by'), value: formatDate(deadline, typeof locale === 'string' ? locale : 'en-US') }] : []),
     { kind: 'blank' },
-    { kind: 'section', label: 'Replies' },
-    { kind: 'row', label: 'Total replies', value: counted.length },
-    { kind: 'row', label: 'Coming', value: coming.length },
-    { kind: 'row', label: 'Not coming', value: counted.length - coming.length },
-    { kind: 'row', label: 'People coming (head count)', value: people },
+    { kind: 'section', label: t('Replies') },
+    { kind: 'row', label: t('Total replies'), value: counted.length },
+    { kind: 'row', label: t('Coming'), value: coming.length },
+    { kind: 'row', label: t('Not coming'), value: counted.length - coming.length },
+    { kind: 'row', label: t('People coming (head count)'), value: people },
   ];
-  if (held) rows.push({ kind: 'row', label: 'Held for review (not counted)', value: held });
+  if (held) rows.push({ kind: 'row', label: t('Held for review (not counted)'), value: held });
 
   for (const q of config.questions) {
     if (q.type === 'choice' || q.type === 'yesno') {
@@ -262,13 +270,13 @@ export function summaryRows(list: readonly TableReply[], opts: TableOptions): Su
         row.n += 1;
         counts.set(k, row);
       }
-      rows.push({ kind: 'blank' }, { kind: 'section', label: normalizeLine(q.label) || q.id, head: ['Replies', 'Share'] });
+      rows.push({ kind: 'blank' }, { kind: 'section', label: normalizeLine(q.label) || q.id, head: [t('Replies'), t('Share')] });
       for (const { label, n } of counts.values()) rows.push({ kind: 'row', label, value: n, share: given.length ? n / given.length : 0 });
-      rows.push({ kind: 'row', label: 'No answer', value: coming.length - given.length, share: null });
+      rows.push({ kind: 'row', label: t('No answer'), value: coming.length - given.length, share: null });
     } else if (q.type === 'number') {
       const values = coming.map((r) => Number(r.answers?.find((a) => a.id === q.id)?.answer)).filter((n) => Number.isFinite(n));
       rows.push({ kind: 'blank' }, { kind: 'section', label: normalizeLine(q.label) || q.id });
-      rows.push({ kind: 'row', label: 'Total', value: values.reduce((a, b) => a + b, 0) }, { kind: 'row', label: 'Answers', value: values.length });
+      rows.push({ kind: 'row', label: t('Total'), value: values.reduce((a, b) => a + b, 0) }, { kind: 'row', label: t('Answers'), value: values.length });
     }
   }
   return rows;

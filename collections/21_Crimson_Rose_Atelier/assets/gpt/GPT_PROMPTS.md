@@ -33,7 +33,7 @@ Save: `collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png`
 Use case: product-mockup. ONE isolated round champagne gold wax seal from the reference wedding invitation. A tiny embossed botanical olive sprig at its centre, luxurious real warm metal-gold wax texture, softly irregular rim, straight-on top view, soft upper-left light, no perspective. Full seal centered occupying 76 percent squarecanvas, transparentalpha background. No cast shadow, no lettering, no initials, no ribbon, no other objects, no sheet.
 
 ## couple-photo
-Save: `collections/21_Crimson_Rose_Atelier/assets/gpt/photos/couple-photo.png`
+Save: `collections/21_Crimson_Rose_Atelier/assets/gpt/photos/hero_portrait.png` (G142: renamed to the photo key; `photos/story_1.png` is the same file)
 
 Use case: photorealistic-natural. A SINGLE wide landscape elegant editorial wedding photograph of a fictional adult couple, a brunette bride with soft pinned waves and ivory lace dress and a groom with brown hair in classic black tuxedo, gently holding one another and touching foreheads on a terrace beside a quiet Italian lake at golden hour. Realistic natural skin, graceful anatomically correct hands, red roses softly blurred at the left edge, distant villas and hazy mountains, romantic intimate tasteful mood, warm film colors, shallow depth of field. Frame from waist up, leave room around heads for oval portrait crop, both centred slightly to right. 4:3 landscape. No text, no border, no watermark, no other photos, no frame. Inspired by reference mood, unique fictional people.
 
@@ -104,3 +104,32 @@ Kontrol: tek yeşil ekran; sol üçte bir boş; süsler kenarlarda; yazı/logo y
 A cozy lifestyle close-up: two hands hold a smartphone in portrait orientation at a comfortable reading angle, the screen facing the camera; one thumb rests at the very edge of the phone frame, never on the screen. The person sits on a cream linen sofa with a deep burgundy cushion and a ceramic coffee cup; a small arrangement of loose deep crimson garden roses with dark olive leaves, a deep oxblood burgundy envelope with a champagne gold botanical wax seal, a few scattered crimson rose petals and a thin cream silk ribbon is softly blurred in the background. Warm, relaxed, happy planning mood; the person's face is not visible. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: deep crimson, oxblood burgundy, warm cream and champagne gold. Every phone is a generic modern smartphone with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
 ```
 Kontrol: tek yeşil ekran; başparmak ekranın dışında; yüz görünmüyor; yazı/logo yok.
+
+
+---
+
+## G139 — Basılı davetiye parçaları (yeni; şu an kağıt + gül dalı + mühürle geçici düzen)
+
+> Görev `G139`. Panelden indirilen 5×7 in / A5 basılı davetiye bu tasarımın kendi kart parçalarını ister. Şu an
+> `paper-background`, `rose-branch` ve `seal` ile geçici düzen kuruldu (`platform/lib/print/layouts.ts`). İki parça gelince
+> `node scripts/build-print-assets.ts --theme crimson-rose-atelier` ve layouts.ts'te `composed` kaldırılır.
+
+### P1 — invitation_card (ön yüz)
+Kaydet: `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/invitation_card.png` — **2048 × 3072 px, PNG, şeffaf arka plan**
+```
+A flat printed wedding invitation card, front side, seen straight on, portrait 2:3, on a fully transparent background.
+Warm ivory cotton paper with a subtle deckled edge and a soft natural shadow. Deep crimson and wine garden roses with
+dark green leaves in a lush cluster at the top-left corner and a smaller mirrored cluster at the bottom-right corner,
+painted in the same rich, romantic, realistic style as the Crimson Rose Atelier rose branch and wax seal. A thin antique
+gold hairline frame inset from the edge. The whole centre (about 70% of the width, 55% of the height) is EMPTY paper
+for text. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp details at 2048 × 3072 px.
+```
+
+### P2 — info_card (arka yüz)
+Kaydet: `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/info_card.png` — **2048 × 3072 px, PNG, şeffaf arka plan**
+```
+The back side of the same crimson rose wedding invitation card: portrait 2:3 on a fully transparent background, the
+same ivory cotton paper, deckled edge, soft shadow and thin antique gold hairline frame. Only one small crimson rose
+sprig centred at the top edge. Everything below the sprig is EMPTY paper for a schedule and a QR code. No text,
+letters, numbers, logos or watermarks. Print quality, 2048 × 3072 px.
+```

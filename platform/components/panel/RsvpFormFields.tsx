@@ -14,22 +14,24 @@ import { QUESTION_TYPE_LABELS, QUESTION_TYPES, type RequirableField } from '../.
 import { withCopy, type PanelCopyEntry } from '../../lib/theme/copy.ts';
 import { IssueList, RepeatableItem, SelectField, TextField, usePanelContext } from './fields.tsx';
 import { Badge, Button, Segmented } from './ui.tsx';
+import { msg, t } from '../../lib/i18n/client.ts';
 import styles from './panel.module.css';
 import own from './rsvp-form-fields.module.css';
 
 type Need = 'required' | 'optional';
 const NEED_OPTIONS: Array<{ value: Need; label: string }> = [
-  { value: 'required', label: 'Required' },
-  { value: 'optional', label: 'Optional' },
+  { value: 'required', label: msg('Required') },
+  { value: 'optional', label: msg('Optional') },
 ];
+const needOptions = () => NEED_OPTIONS.map((o) => ({ ...o, label: t(o.label) }));
 
-const TYPE_OPTIONS = QUESTION_TYPES.map((t) => ({ value: t, label: QUESTION_TYPE_LABELS[t] }));
+const typeOptions = () => QUESTION_TYPES.map((type) => ({ value: type, label: t(QUESTION_TYPE_LABELS[type]) }));
 const TYPE_HINTS: Record<RsvpQuestionType, string> = {
-  choice: 'Guests pick one of your choices.',
-  yesno: 'Guests tap Yes or No.',
-  text: 'Guests write a few words.',
-  long: 'Guests can write a longer answer.',
-  number: 'Guests type a number, for example how many children are coming.',
+  choice: msg('Guests pick one of your choices.'),
+  yesno: msg('Guests tap Yes or No.'),
+  text: msg('Guests write a few words.'),
+  long: msg('Guests can write a longer answer.'),
+  number: msg('Guests type a number, for example how many children are coming.'),
 };
 
 interface FixedField {
@@ -42,11 +44,11 @@ interface FixedField {
 }
 
 const FIXED: FixedField[] = [
-  { copyKey: 'form_name', fallback: 'Your name', requirable: null, fixed: 'required' },
-  { copyKey: 'form_attend', fallback: 'Will you attend?', requirable: null, fixed: 'required' },
-  { copyKey: 'form_guests', fallback: 'Number of guests', requirable: null, fixed: 'asked' },
-  { copyKey: 'form_email', fallback: 'Email', requirable: 'email' },
-  { copyKey: 'form_note', fallback: 'A note for the couple', requirable: 'message' },
+  { copyKey: 'form_name', fallback: msg('Your name'), requirable: null, fixed: 'required' },
+  { copyKey: 'form_attend', fallback: msg('Will you attend?'), requirable: null, fixed: 'required' },
+  { copyKey: 'form_guests', fallback: msg('Number of guests'), requirable: null, fixed: 'asked' },
+  { copyKey: 'form_email', fallback: msg('Email'), requirable: 'email' },
+  { copyKey: 'form_note', fallback: msg('A note for the couple'), requirable: 'message' },
 ];
 
 function setRequired(c: ContentRecord, field: RequirableField, on: boolean) {
@@ -62,7 +64,7 @@ function setRequired(c: ContentRecord, field: RequirableField, on: boolean) {
 
 function FixedRow({ f, entry }: { f: FixedField; entry: PanelCopyEntry | undefined }) {
   const { content, edit, locked } = usePanelContext();
-  const label = entry?.default ?? f.fallback;
+  const label = entry?.default ?? t(f.fallback);
   const raw = content.copy?.[f.copyKey];
   const required = f.requirable ? content.rsvp?.required?.[f.requirable] === true : true;
   return (
@@ -70,7 +72,7 @@ function FixedRow({ f, entry }: { f: FixedField; entry: PanelCopyEntry | undefin
       {entry ? (
         <TextField
           path={`copy.${f.copyKey}`}
-          label="Label"
+          label={t('Label')}
           placeholder={entry.default}
           maxLength={entry.max}
           value={typeof raw === 'string' ? raw : ''}
@@ -81,18 +83,18 @@ function FixedRow({ f, entry }: { f: FixedField; entry: PanelCopyEntry | undefin
       )}
       {f.requirable ? (
         <Segmented<Need>
-          label="Guests must fill this in?"
+          label={t('Guests must fill this in?')}
           value={required ? 'required' : 'optional'}
-          options={NEED_OPTIONS}
+          options={needOptions()}
           disabled={locked}
           onChange={(v) => edit((c) => setRequired(c, f.requirable!, v === 'required'))}
         />
       ) : (
         <p className={own.always}>
           <Badge tone="neutral" icon={Lock}>
-            {f.fixed === 'asked' ? 'Always asked' : 'Always required'}
+            {f.fixed === 'asked' ? t('Always asked') : t('Always required')}
           </Badge>
-          <span className={styles.hint}>{f.fixed === 'asked' ? 'Guests who accept say how many are coming.' : 'Every reply needs this.'}</span>
+          <span className={styles.hint}>{f.fixed === 'asked' ? t('Guests who accept say how many are coming.') : t('Every reply needs this.')}</span>
         </p>
       )}
     </div>
@@ -106,26 +108,26 @@ function QuestionCard({ q, i, count }: { q: RsvpQuestion; i: number; count: numb
     <RepeatableItem<RsvpQuestion>
       index={i}
       count={count}
-      noun="form question"
-      title={q.label.trim() || `Question ${i + 1}`}
+      noun={t('form question')}
+      title={q.label.trim() || t('Question {n}', { n: i + 1 })}
       select={(c) => c.rsvp?.questions ?? []}
       assign={(c, list) => void (c.rsvp = { ...c.rsvp, questions: list })}
       data-question-row={i}
     >
       <TextField
         path={`rsvp.questions.${i}.label`}
-        label="Question"
+        label={t('Question')}
         maxLength={CONTENT_LIMITS.questionLabel}
-        placeholder="Meal choice"
+        placeholder={t('Meal choice')}
         value={q.label}
         onChange={(v) => change((x) => void (x.label = v))}
       />
       <SelectField
         path={`rsvp.questions.${i}.type`}
-        label="Answer"
-        hint={TYPE_HINTS[q.type] ?? undefined}
+        label={t('Answer')}
+        hint={TYPE_HINTS[q.type] ? t(TYPE_HINTS[q.type]) : undefined}
         value={q.type}
-        options={TYPE_OPTIONS}
+        options={typeOptions()}
         onChange={(v) =>
           change((x) => {
             x.type = (QUESTION_TYPES as readonly string[]).includes(v) ? (v as RsvpQuestionType) : 'text';
@@ -139,13 +141,13 @@ function QuestionCard({ q, i, count }: { q: RsvpQuestion; i: number; count: numb
             <div key={j} className={styles.choiceRow}>
               <TextField
                 path={`rsvp.questions.${i}.options.${j}`}
-                label={`Choice ${j + 1}`}
+                label={t('Choice {n}', { n: j + 1 })}
                 maxLength={CONTENT_LIMITS.questionOption}
                 value={o}
                 onChange={(v) => change((x) => void (x.options![j] = v))}
               />
-              <Button small variant="tertiary" disabled={locked} aria-label={`Remove choice ${j + 1} of question ${i + 1}`} onClick={() => change((x) => void x.options!.splice(j, 1))}>
-                Remove
+              <Button small variant="tertiary" disabled={locked} aria-label={t('Remove choice {choice} of question {question}', { choice: j + 1, question: i + 1 })} onClick={() => change((x) => void x.options!.splice(j, 1))}>
+                {t('Remove')}
               </Button>
             </div>
           ))
@@ -153,13 +155,13 @@ function QuestionCard({ q, i, count }: { q: RsvpQuestion; i: number; count: numb
       <IssueList issues={[...issuesAt(`rsvp.questions.${i}.options`), ...issuesAt(`rsvp.questions.${i}.id`)]} />
       {q.type === 'choice' && (q.options?.length ?? 0) < CONTENT_LIMITS.questionOptions ? (
         <Button small variant="secondary" icon={Plus} disabled={locked} onClick={() => change((x) => void (x.options = [...(x.options ?? []), '']))}>
-          Add a choice
+          {t('Add a choice')}
         </Button>
       ) : null}
       <Segmented<Need>
-        label="Guests must answer?"
+        label={t('Guests must answer?')}
         value={q.required ? 'required' : 'optional'}
-        options={NEED_OPTIONS}
+        options={needOptions()}
         disabled={locked}
         onChange={(v) =>
           change((x) => {
@@ -184,16 +186,16 @@ export function RsvpFormFields({ copy, questionsShown }: { copy: readonly PanelC
     });
   return (
     <div className={own.wrap} data-rsvp-form-fields>
-      <h2 className={styles.subTitle}>Reply form</h2>
+      <h2 className={styles.subTitle}>{t('Reply form')}</h2>
       <p className={styles.hint}>
-        What guests fill in. A required field must be filled in before a reply can be sent. Your Excel file and Google Sheet get a column for each field.
+        {t('What guests fill in. A required field must be filled in before a reply can be sent. Your Excel file and Google Sheet get a column for each field.')}
       </p>
-      {off ? <p className={styles.note}>Replies on the website are off, so guests do not see this form.</p> : null}
+      {off ? <p className={styles.note}>{t('Replies on the website are off, so guests do not see this form.')}</p> : null}
       <div className={own.list}>
         {FIXED.map((f) => (
           <div key={f.copyKey} className={styles.item}>
             <div className={styles.itemHead}>
-              <span className={styles.itemTitle}>{entry(f.copyKey)?.default ?? f.fallback}</span>
+              <span className={styles.itemTitle}>{entry(f.copyKey)?.default ?? t(f.fallback)}</span>
             </div>
             <FixedRow f={f} entry={entry(f.copyKey)} />
           </div>
@@ -201,10 +203,9 @@ export function RsvpFormFields({ copy, questionsShown }: { copy: readonly PanelC
       </div>
       {questionsShown ? (
         <div data-rsvp-questions className={own.list}>
-          <h3 className={own.subhead}>Your questions</h3>
+          <h3 className={own.subhead}>{t('Your questions')}</h3>
           <p className={styles.hint}>
-            Up to {CONTENT_LIMITS.rsvpQuestions}, for example a meal choice. Guests who accept answer them. Changing or removing a question later keeps the
-            answers you already have.
+            {t('Up to {max}, for example a meal choice. Guests who accept answer them. Changing or removing a question later keeps the answers you already have.', { max: CONTENT_LIMITS.rsvpQuestions })}
           </p>
           {questions.map((q, i) => (
             <QuestionCard key={q.id || i} q={q} i={i} count={questions.length} />
@@ -212,7 +213,7 @@ export function RsvpFormFields({ copy, questionsShown }: { copy: readonly PanelC
           <IssueList issues={issuesAt('rsvp.questions')} />
           {questions.length < CONTENT_LIMITS.rsvpQuestions ? (
             <Button variant="secondary" icon={Plus} disabled={locked} onClick={add} data-add-question>
-              Add a question
+              {t('Add a question')}
             </Button>
           ) : null}
         </div>

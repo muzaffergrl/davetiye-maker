@@ -8,7 +8,10 @@
 //               filter, the title merged on Summary, the file name (names may change).
 // Text goes in as stringValue: Sheets never reads it as a formula ("=1+1" from a guest stays text).
 
-import { replyTable, summaryRows, type Cell, type ReplyTable, type SummaryRow, type TableReply } from '../rsvp/table.ts';
+import { replyTable, type TableOptions, summaryRows, type Cell, type ReplyTable, type SummaryRow, type TableReply } from '../rsvp/table.ts';
+import { siteLangs } from '../i18n/content.ts';
+import { loadDict } from '../i18n/dicts.ts';
+import { makeTranslator } from '../i18n/translate.ts';
 import { GOOGLE_ENDPOINTS } from './config.ts';
 import { GoogleError, sheetsCall } from './oauth.ts';
 
@@ -195,14 +198,23 @@ export function summaryRequests(rows: readonly SummaryRow[], meta?: SheetMeta): 
   return out;
 }
 
+/**
+ * G144: the sheet's headings in the website's main language (content.languages.primary): a sync runs after a guest's
+ * reply too, without the couple's browser, so the panel's language is not known there; the main language is stable.
+ */
+async function sheetTranslator(content: unknown): Promise<TableOptions['t']> {
+  const lang = siteLangs(content).primary;
+  return makeTranslator(lang, await loadDict('panel', lang)).t;
+}
+
 /** Every request of one full sync (exported for the tests). */
-export function syncRequests(list: readonly TableReply[], content: unknown, now: Date, sheets: readonly SheetMeta[]): Json[] {
-  const table = replyTable(list, { content, now });
+export function syncRequests(list: readonly TableReply[], content: unknown, now: Date, sheets: readonly SheetMeta[], t?: TableOptions['t']): Json[] {
+  const table = replyTable(list, { content, now, t });
   const meta = (id: number) => sheets.find((s) => s.properties.sheetId === id);
   return [
     { updateSpreadsheetProperties: { properties: { title: table.title, timeZone: table.timeZone }, fields: 'title,timeZone' } },
     ...repliesRequests(table, meta(REPLIES_ID)),
-    ...summaryRequests(summaryRows(list, { content, now }), meta(SUMMARY_ID)),
+    ...summaryRequests(summaryRows(list, { content, now, t }), meta(SUMMARY_ID)),
   ];
 }
 
@@ -214,5 +226,5 @@ export async function writeSpreadsheet(token: string, id: string, list: readonly
     `${base}?fields=${encodeURIComponent('sheets(properties(sheetId,title,gridProperties),bandedRanges(bandedRangeId),merges)')}`,
     'GET',
   );
-  await sheetsCall(token, `${base}:batchUpdate`, 'POST', { requests: syncRequests(list, content, now, meta.sheets ?? []) });
+  await sheetsCall(token, `${base}:batchUpdate`, 'POST', { requests: syncRequests(list, content, now, meta.sheets ?? [], await sheetTranslator(content)) });
 }

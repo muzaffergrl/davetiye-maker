@@ -52,6 +52,11 @@ NODE_PATH=/opt/node22/lib/node_modules node tests/g055-browser.ts   # build sonr
                        # varsayılan geçici klasör; boş port kendisi seçer, $PORT ile sabitlenir)
 ```
 
+G139 PDF indirmeleri (panel Share → Downloads; `lib/print/`, `POST /api/edit/<slug>/download`): site PDF'i ve 5×7 / A5 basılı davetiye
+sunucuda başsız Chromium ile (Vercel'de `@sparticuz/chromium`, yerelde Playwright Chromium; `PRINT_CHROMIUM_PATH` ile başka bir tarayıcı).
+Davetiye parçaları `public/print/<tema>/` (`node scripts/build-print-assets.ts`), örnek PDF `node scripts/print-sample.ts --theme <id> --site
+--invite 5x7 --bleed`; ayrıntı `gorevler/G139-pdf-davetiye.md`.
+
 `npm run seed -- --theme <id> --slug <slug> --content <json> --draft` ile başka tema/içerik tohumlanır;
 `--no-photos` yer tutucu hâli, `--photos <klasör>` başka örnek fotoğraflar (dosya adı = tema foto anahtarı).
 Anahtarlar ekrana ve `.data/seed-keys.json`'a yazılır (`.data/` git'e girmez).
@@ -77,6 +82,33 @@ seçmeli sorusu ekler, `lib/panel/meal-question.ts`) ve **Good to know** (`conte
 metni, 10 ikondan biri). Blok sözcükleri temanın düzenlenebilir metinleri (G068, `travel_*`, `menu_*`, `blocks_more`). Teşekkür
 modunda gösterilmez; eski kayıtlar göçsüz çalışır. Panel: Details sayfasında "Good to know", "Travel & stay", "Meal & menu".
 Test: `tests/g138-extras.test.ts`.
+
+## Diller (G144)
+
+Satış sitesi, alıcı paneli (/edit, /start, /my, /signin) ve alıcının sitesi **EN · TR · ES · DE · FR**. Çeviri servisi
+**çalışma zamanında yok**: sabit metinleri biz önceden çevirdik (`lib/i18n/dict/<panel|site|market>/<dil>.ts`, anahtar =
+İngilizce metnin kendisi; eksik → İngilizce). Kurallar ve yardımcılar: `lib/i18n/README.md`.
+
+- **Alıcı sitesi:** `content.languages` = `{primary, extra[]}` (docs/03). Misafir `/<slug>/<sayfa>?lang=de` ile dil seçer
+  (sayfa linkleri `?lang`'i taşır; ana dil parametresiz). Birden fazla dilde: `<html lang>`, `hreflang` alternatifleri
+  (+ x-default), sağ üstte değil **sol üstte** küçük dil düğmesi (`/static/lang.css`, ses düğmesi varsa onun altında) ve
+  tarayıcı dili başka bir site diliyse ilk açılışta tek satırlık öneri (`/static/lang.js`). Tema metinleri (theme.json
+  copy varsayılanları, sabit şablon metinleri/özellikleri), RSVP formu ve hataları (`/rsvp/form.js`), harita, müzik,
+  şifre sayfası, Ekstralar blokları, tarih/saat (`lib/i18n/format.ts`, `Intl`; hiçbir dilde sayısal tarih yok, İngilizce
+  dışında 24 saat) sayfanın dilinde. Betikler yalnız o dilin metinlerini `#site-data.i18n` ile alır.
+- **Çiftin kendi metni:** `content.translations[dil][yol] = {text, src, ok, auto}` (`lib/i18n/content.ts`). Misafir yalnız
+  **onaylı** ve kaynağı değişmemiş çeviriyi görür; yoksa ana dildeki metin. Panelde **Us → Languages**: ana dil, ek diller,
+  her dil için alan alan çeviri kutuları, "Translate automatically" (önce tarayıcının cihaz üstü `Translator` API'si, yoksa
+  anahtarsız MyMemory — `lib/i18n/auto-translate.ts`: istek başına 500 bayt, IP başına günde ~5000 karakter; kota/servis
+  yoksa "kendin yaz" moduna düşer), "Approve all", kaynak değişince "Out of date". Panelin kendi dili de buradan (çerez `bke_lang`).
+- **Excel / Sheets:** Excel başlıkları panelin dilinde (çerez, yoksa Accept-Language); Google Sheet arka planda da
+  eşitlendiği için sitenin ana dilinde. START HERE rehberi bu görevde değişmedi (İngilizce).
+- **Satış sitesi:** `/tr/…`, `/es/…`, `/de/…`, `/fr/…` (next.config rewrites → `app/(marketing)/i18n/[lang]/…`), dil seçici,
+  hreflang, sitemap (ayrıntı aşağıda "Satış sitesi").
+- **Kontrol:** `npm test` içinde `tests/i18n.test.ts` her sözlükte her anahtarı arar (eksikleri tanı satırı olarak yazar;
+  `I18N_STRICT=1` ile hata), yer tutucuları ve tema uzunluk sınırlarını denetler. Eksik listesi:
+  `node scripts/i18n-missing.ts [--ns panel|site|market] [--lang tr] [--json dosya]`. G139/G142 gibi sonradan eklenen
+  metinler çevirisi gelene kadar İngilizce görünür.
 
 ## Klasörler
 

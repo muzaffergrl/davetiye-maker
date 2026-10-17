@@ -11,6 +11,8 @@ import { useCallback, useEffect, useState } from 'react';
 import type { PanelApi } from './api.ts';
 import { Sheet } from './Sheet.tsx';
 import { Badge, Banner, Button, Card, cx, useSnackbar } from './ui.tsx';
+import { t, uiLang } from '../../lib/i18n/client.ts';
+import { LANG_TAGS } from '../../lib/i18n/langs.ts';
 import styles from './panel.module.css';
 import own from './sheets-card.module.css';
 
@@ -31,9 +33,10 @@ function when(iso: string | null): string | null {
   if (!iso) return null;
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return null;
-  const time = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  const tag = LANG_TAGS[uiLang()];
+  const time = d.toLocaleTimeString(tag, { hour: 'numeric', minute: '2-digit' });
   const today = new Date().toDateString() === d.toDateString();
-  return today ? time : `${d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}, ${time}`;
+  return today ? time : `${d.toLocaleDateString(tag, { month: 'short', day: 'numeric' })}, ${time}`;
 }
 
 export function SheetsCard({ api, online, archived }: { api: PanelApi; online: boolean; archived: boolean }) {
@@ -58,7 +61,7 @@ export function SheetsCard({ api, online, archived }: { api: PanelApi; online: b
   if (!status.available) {
     return (
       <p className={cx(styles.hint)} data-sheets="soon">
-        Google Sheets: coming soon. Until then, download the Excel file — it opens in Google Sheets too.
+        {t('Google Sheets: coming soon. Until then, download the Excel file — it opens in Google Sheets too.')}
       </p>
     );
   }
@@ -76,7 +79,7 @@ export function SheetsCard({ api, online, archived }: { api: PanelApi; online: b
       return;
     }
     setBusy(null);
-    snack(res.body.message ?? 'Google Sheets could not be connected. Please try again.');
+    snack(res.body.message ? t(res.body.message) : t('Google Sheets could not be connected. Please try again.'));
   };
 
   const run = async (action: 'sync' | 'disconnect') => {
@@ -87,10 +90,10 @@ export function SheetsCard({ api, online, archived }: { api: PanelApi; online: b
     if (res.ok && res.body.status) {
       const next = res.body.status as unknown as Status;
       setStatus(next);
-      if (action === 'disconnect') snack('Google Sheets disconnected. Your spreadsheet stays in your Google Drive.');
-      else snack(next.error ? 'Sync failed. Please try again later.' : 'Your Google Sheet is up to date.');
+      if (action === 'disconnect') snack(t('Google Sheets disconnected. Your spreadsheet stays in your Google Drive.'));
+      else snack(next.error ? t('Sync failed. Please try again later.') : t('Your Google Sheet is up to date.'));
     } else {
-      snack(res.body.message ?? 'Something went wrong. Please try again.');
+      snack(res.body.message ? t(res.body.message) : t('Something went wrong. Please try again.'));
     }
   };
 
@@ -100,23 +103,23 @@ export function SheetsCard({ api, online, archived }: { api: PanelApi; online: b
       {!status.connected ? (
         <>
           <p className={styles.hint}>
-            Keep a live copy of your replies in your own Google Drive. Every new reply is added on its own, and the columns follow your reply form.
+            {t('Keep a live copy of your replies in your own Google Drive. Every new reply is added on its own, and the columns follow your reply form.')}
           </p>
           <div className={styles.buttonRow}>
-            <Button variant="primary" icon={SheetIcon} busy={busy === 'connect'} busyLabel="Opening Google…" disabled={!online || archived} onClick={() => void connect()} data-sheets-connect>
-              Connect Google Sheets
+            <Button variant="primary" icon={SheetIcon} busy={busy === 'connect'} busyLabel={t('Opening Google…')} disabled={!online || archived} onClick={() => void connect()} data-sheets-connect>
+              {t('Connect Google Sheets')}
             </Button>
           </div>
-          <p className={styles.hint}>Google asks you to allow access to the files this website makes. It cannot see anything else in your Drive.</p>
+          <p className={styles.hint}>{t('Google asks you to allow access to the files this website makes. It cannot see anything else in your Drive.')}</p>
         </>
       ) : (
         <>
           <p className={own.line}>
             <Badge tone={status.error ? 'warning' : 'success'} icon={status.error ? undefined : CircleCheckBig}>
-              {status.error ? 'Sync failed' : 'Connected'}
+              {status.error ? t('Sync failed') : t('Connected')}
             </Badge>{' '}
             <span className={styles.hint} data-sheets-synced>
-              {synced ? `Last synced ${synced}` : 'Not synced yet'}
+              {synced ? t('Last synced {time}', { time: synced }) : t('Not synced yet')}
             </span>
           </p>
           {status.error ? (
@@ -126,12 +129,12 @@ export function SheetsCard({ api, online, archived }: { api: PanelApi; online: b
               data-sheets-error
               actions={
                 status.reconnect ? (
-                  <Button small variant="primary" busy={busy === 'connect'} busyLabel="Opening Google…" disabled={!online || archived} onClick={() => void connect()}>
-                    Connect again
+                  <Button small variant="primary" busy={busy === 'connect'} busyLabel={t('Opening Google…')} disabled={!online || archived} onClick={() => void connect()}>
+                    {t('Connect again')}
                   </Button>
                 ) : (
-                  <Button small icon={RefreshCw} busy={busy === 'sync'} busyLabel="Syncing…" disabled={!online} onClick={() => void run('sync')}>
-                    Sync now
+                  <Button small icon={RefreshCw} busy={busy === 'sync'} busyLabel={t('Syncing…')} disabled={!online} onClick={() => void run('sync')}>
+                    {t('Sync now')}
                   </Button>
                 )
               }
@@ -143,28 +146,28 @@ export function SheetsCard({ api, online, archived }: { api: PanelApi; online: b
             {status.url ? (
               <a className={cx(styles.btn, styles.btn_secondary)} href={status.url} target="_blank" rel="noreferrer noopener" data-sheets-open>
                 <ExternalLink size={18} strokeWidth={1.75} aria-hidden="true" />
-                <span>Open sheet</span>
+                <span>{t('Open sheet')}</span>
               </a>
             ) : null}
             {!status.error ? (
-              <Button variant="tertiary" icon={RefreshCw} busy={busy === 'sync'} busyLabel="Syncing…" disabled={!online} onClick={() => void run('sync')} data-sheets-sync>
-                Sync now
+              <Button variant="tertiary" icon={RefreshCw} busy={busy === 'sync'} busyLabel={t('Syncing…')} disabled={!online} onClick={() => void run('sync')} data-sheets-sync>
+                {t('Sync now')}
               </Button>
             ) : null}
             <Button variant="tertiary" icon={Unplug} disabled={!online} onClick={() => setConfirm(true)} data-sheets-disconnect>
-              Disconnect
+              {t('Disconnect')}
             </Button>
           </div>
         </>
       )}
       {confirm ? (
-        <Sheet title="Disconnect Google Sheets?" onClose={() => setConfirm(false)} closeLabel="Cancel" testId="sheets-disconnect">
-          <p>Your spreadsheet stays in your Google Drive with the replies it has now. New replies are no longer added to it.</p>
+        <Sheet title={t('Disconnect Google Sheets?')} onClose={() => setConfirm(false)} closeLabel={t('Cancel')} testId="sheets-disconnect">
+          <p>{t('Your spreadsheet stays in your Google Drive with the replies it has now. New replies are no longer added to it.')}</p>
           <div className={styles.buttonRow}>
-            <Button variant="danger" icon={Unplug} busy={busy === 'disconnect'} busyLabel="Disconnecting…" disabled={!online} onClick={() => void run('disconnect')} data-sheets-confirm-disconnect>
-              Disconnect
+            <Button variant="danger" icon={Unplug} busy={busy === 'disconnect'} busyLabel={t('Disconnecting…')} disabled={!online} onClick={() => void run('disconnect')} data-sheets-confirm-disconnect>
+              {t('Disconnect')}
             </Button>
-            <Button onClick={() => setConfirm(false)}>Keep connected</Button>
+            <Button onClick={() => setConfirm(false)}>{t('Keep connected')}</Button>
           </div>
         </Sheet>
       ) : null}

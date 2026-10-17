@@ -210,7 +210,7 @@ test('15–20 are live, named as their themes, with design pages and placeholder
   }
   // 14 before them, in the order G094 left
   assert.ok(ids.indexOf('ivory-lace-pearls') < ids.indexOf('cherry-blossom-spring'));
-  assert.deepEqual(MARKETING.designs.filter((x) => x.status !== 'live').map((x) => x.id), ['crimson-rose-atelier']);
+  assert.deepEqual(MARKETING.designs.filter((x) => x.status !== 'live').map((x) => x.id), ['crimson-rose-atelier', 'nocturne-lake-estate']);
 });
 
 test('design page titles ≤ 60 characters (also with a 12-character brand)', () => {
