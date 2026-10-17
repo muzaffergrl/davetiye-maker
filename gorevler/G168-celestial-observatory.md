@@ -81,6 +81,12 @@ Görünüm şu an sade; satış öncesi GPT parçaları + göz kontrolü şart.
   takımyıldız C R, kartın yarıktan yükselişi; 360×640'ta 21+21 karakter isim (kart içi küçülür, portre daralır; M B
   takımyıldızı). Geçici kubbe maskesinde 1 px dikiş görüldü → maske dikdörtgenleri örtüştürüldü.
 
+### Birleşme (G169 Azulejo Mosaic, `claude/zealous-fermi-hy1o40`)
+Çakışmalar eklemeli çözüldü: coming listeleri 29 → 30 sırasıyla, g138 tema sayısı 30, `config.ts` / `layouts.ts` /
+`designs.ts` / `katalog.py` / sözlükler iki tarafı da tutar (yinelenen anahtar yok; denetlendi). Sonra: `tsc` ✓,
+`I18N_STRICT=1 npm test` **1601/1603, 0 hata** (2 eski atlanan), `npm run build` ✓ (trace-check 31 tema),
+`katalog.py kontrol` ✓ (8 ek kayıt), `i18n-missing` 0 eksik.
+
 **Denenmedi:** gerçek iPhone/Safari (özellikle `@property` desteği; yoksa süpürme atlanır, foto doğrudan görünür) ve
 Android Chrome, Vercel yayını, gerçek alıcı fotoğrafları, yavaş ağ, GPT parçalarıyla görünüm, sesin duyulması,
 g051-browser ve final-smoke (bu turda koşulmadı).
