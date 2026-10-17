@@ -1,0 +1,121 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Olivia",
+      "full_name": "Olivia Rose Bennett"
+    },
+    {
+      "display_name": "James",
+      "full_name": "James Alexander Reed"
+    }
+  ],
+  "name_display": "Olivia & James",
+  "initials": "O&J",
+  "host_line": "Together with their families",
+  "date": "2027-06-12",
+  "ceremony_time": "16:00",
+  "timezone": "Europe/Rome",
+  "venue": {
+    "name": "The Rosewater Estate",
+    "city": "Lake Como",
+    "region": "Lombardy",
+    "country": "Italy",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "The ceremony",
+      "time": "16:00",
+      "location": "The lakeside garden"
+    },
+    {
+      "label": "A toast to love",
+      "time": "17:00",
+      "location": "The rose terrace"
+    },
+    {
+      "label": "Dinner & dancing",
+      "time": "19:00",
+      "location": "Under the stars"
+    }
+  ],
+  "dress_code": "Black tie, with a touch of romance",
+  "rsvp": {
+    "deadline": "2027-05-15",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Fish",
+          "Chicken"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": "/themes/crimson-rose-atelier/img/couple-photo.webp",
+    "memory_photos": [
+      "/themes/crimson-rose-atelier/img/couple-photo.webp",
+      "/themes/crimson-rose-atelier/img/story_2.webp",
+      "/themes/crimson-rose-atelier/img/story_3.webp"
+    ],
+    "venue_image": "/themes/crimson-rose-atelier/img/venue.webp",
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "An unexpected hello and a thousand little adventures brought us to",
+    "items": [
+      {
+        "caption": "The beginning of everything"
+      },
+      {
+        "caption": "Our favourite place"
+      },
+      {
+        "caption": "A promise, forever"
+      }
+    ]
+  },
+  "audio": {
+    "music": "evening-strings",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony."
+    },
+    {
+      "q": "Can you accommodate dietary requirements?",
+      "a": "Please tell us about your requirements in your reply."
+    }
+  ]
+}

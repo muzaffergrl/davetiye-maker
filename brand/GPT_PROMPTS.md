@@ -209,3 +209,12 @@ Kontrol: sembol üstte ortada ve S; yazı harf harf "BKE Studio"; iki düz renk;
 A shop and social profile icon for BKE Studio: the new S symbol (B3.1 result) in the paper-neutral color (#EDE5D7) with its flat gold wedge (#D0AE6A), centered on a solid flat square of the anchor color (#2B1526). Everything stays inside a central circle whose diameter is 70% of the canvas, because platforms crop the icon to a circle. Flat vector style: crisp edges; no gradient, texture, shadow, glow or 3D; no text.
 ```
 Kontrol: daire kırpımında sembol tam; S okunuyor; tek düz zemin; yazı yok.
+
+### B3.6 Geniş marka sahnesi (S mühür; Etsy banner kaynağı) — GM09
+**Kaydet:** `brand/assets/gpt/final_s/brand_scene_wide_s.png` · 1536×1024
+**Referans:** `brand/assets/gpt/final/brand_scene_wide_v2.png` (sahne, ışık, düzen) ve `brand/assets/gpt/final_s/monogram_s.png` (yeni sembol).
+
+```
+Recreate the reference brand scene photo with one change: every wax seal and every symbol in the scene now shows the new S symbol from the second reference image (a capital S cut out of a square, with the upper-right end lifting like an envelope flap and a thin flat gold wedge behind it), pressed into deep aubergine (#2B1526) sealing wax. Keep everything else the same as the reference scene: a photographic flat lay seen from directly above, a plain modern smartphone with no brand logo on the left third whose screen shows only a closed envelope sealed with the S symbol, a real paper envelope closed with the S wax seal, a champagne-gold ribbon, a few muted petals or a small green sprig, soft natural daylight from the top-left with soft shadows. The right 45% of the image is calm, empty paper surface for a logo. Keep everything important inside the middle band between 30% and 70% of the image height, because it will be cropped to a wide 4:1 banner. No text, no words, no letters other than the S in the seals, no other logos.
+```
+Kontrol: mühürlerde açıkça **S** (K yok); sağ %45 boş; önemli öğeler orta bantta; yazı yok. Sonra Claude: `brand/etsy/etsy_banner_big_3360x840.jpg` ve mini banner'ı bu sahneden yeniden kırpar + yazı logosu.

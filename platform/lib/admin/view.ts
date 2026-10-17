@@ -126,9 +126,17 @@ export function shopDay(iso: string): string {
   return new Date(Date.parse(iso) + 3 * 3_600_000).toISOString().slice(0, 10);
 }
 
-/** Orders = sites started with an Etsy order number (demo/test sites without one are not sales). */
+/** Order reference of the demo sites `npm run seed` makes (scripts/seed.ts): never a sale. */
+export const DEMO_ORDER_PREFIX = 'DEMO-SEED-';
+
+/** A demo site from the seed script (shown in lists with a "Demo" badge, never counted as a sale). */
+export function isDemo(s: Pick<AdminSiteSummary, 'orderRef'>): boolean {
+  return (s.orderRef ?? '').startsWith(DEMO_ORDER_PREFIX);
+}
+
+/** Orders = sites started with an Etsy order number (demo/test sites without one, and seeded demos, are not sales). */
 export function isSale(s: AdminSiteSummary): boolean {
-  return Boolean(s.orderRef);
+  return Boolean(s.orderRef) && !isDemo(s);
 }
 
 export interface AdminTodo {
@@ -248,7 +256,7 @@ export function adminCustomers(list: readonly AdminSiteSummary[]): AdminCustomer
     const c = map.get(email) ?? { email, names: [], sites: [], orders: 0, firstAt: s.createdAt, lastAt: s.createdAt, replies: 0, published: 0, needsAction: false };
     c.sites.push(s);
     if (!c.names.includes(s.names)) c.names.push(s.names);
-    if (s.orderRef) c.orders++;
+    if (isSale(s)) c.orders++;
     if (s.createdAt < c.firstAt) c.firstAt = s.createdAt;
     if (s.createdAt > c.lastAt) c.lastAt = s.createdAt;
     c.replies += s.replies;

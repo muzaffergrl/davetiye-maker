@@ -111,7 +111,7 @@ Kontrast (WCAG, tam tablo `tokens.json` → `contrast.pairs`):
 | `../platform/public/brand/bke-logo-horizontal-{anchor,reverse}.svg`, `bke-monogram-small-anchor.svg` | `svg/` | Aynen kopya. |
 | `../platform/public/brand/pattern_tile.png` | `final/pattern_tile.png` ızgarası + `svg/bke-monogram-black.svg` | GPT karosunun düzeni korundu (1024 px, 4 × 4, 256 px hücre, ~169 px sembol, altın/kâğıt); K yerine S sembolünün tek renk yolu kondu. Yeni çizim yok; istenirse GPT'den S'li karo istenip bununla değiştirilir. |
 | `etsy/bke-shop-icon.svg`, `etsy_shop_icon_500.png`, `etsy_shop_icon_1000.png` | `final_s/shop_icon_s.png` | S ve kama izlendi; GPT'nin konum ve ölçüsü korundu, daire kırpımına uygun (en uzak nokta %32,4). |
-| `etsy/etsy_banner_big_3360x840.jpg`, `etsy_banner_mini_1600x213.jpg` | `final/brand_scene_wide.png` + yazı logosu SVG | **G129'da değişmedi:** sahnedeki mum mühürlerde K var (fotoğrafik GPT sahnesi). S'li yeni sahne GPT'den gerekir; o gelene kadar banner'lar yüklenmez. |
+| `etsy/etsy_banner_big_3360x840.jpg`, `etsy_banner_mini_1600x213.jpg` | `final_s/brand_scene_wide_s.png` (GM09) + `svg/bke-wordmark-anchor.svg` | 2026-10-17: S mühürlü GPT sahnesinden yeniden kırpıldı (büyük: 4:1 orta bant, mini: 7,5:1); yazı logosu sağ %45 alanın ortasında. Yeni çizim yok. Etsy'ye yeniden yüklenmeli. |
 | `badge/made-with-bke-studio-{light,dark}.svg` | küçük sembol (tek renk) + yazı logosu SVG + DM Sans 500 | G129: sembol yolu S ile değişti (24 birim yükseklik, 25,94 genişlik); "Made with" ve yazı aynı. |
 | `proofs/s_svg_proof.png`, `s_favicon_proof.png`, `s_site_proof.png` | — | Chromium çizimi. Eski K provaları (`svg_proof.png`, `favicon_proof.png`) arşiv olarak duruyor. |
 

@@ -37,37 +37,37 @@
   "digital_files": [
     {
       "file": "collections/_services/setup-service/package/customer/SETUP_SERVICE.pdf",
-      "bytes": null
+      "bytes": 34391
     }
   ],
   "images": [
     {
       "n": 1,
       "file": "collections/_services/setup-service/package/listing/images_editorial/01_cover.png",
-      "alt": "We set it up for you: a phone showing a finished wedding website, with the words \"Send us your details, we do the rest\"",
-      "exists": false,
-      "status": "missing"
+      "alt": "We set it up for you: a couple looking at a phone showing a finished wedding website, with the words \"Send us your details, we do the rest\"",
+      "exists": true,
+      "status": "current: service set of 2026-10-17 (tools/listing_services.py, G136; GM06 trust scenes, real screens of the editor and of our ready designs' openings, no price, QR or web address)"
     },
     {
       "n": 2,
       "file": "collections/_services/setup-service/package/listing/images_editorial/02_steps.png",
       "alt": "Four steps: buy with your design, send your details in an Etsy message, we set up your website, you check and publish",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: service set of 2026-10-17 (tools/listing_services.py, G136; GM06 trust scenes, real screens of the editor and of our ready designs' openings, no price, QR or web address)"
     },
     {
       "n": 3,
       "file": "collections/_services/setup-service/package/listing/images_editorial/03_what_we_enter.png",
       "alt": "What we enter for you: names, date and venue, schedule and story, up to 5 photos, RSVP questions, headings and wording",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: service set of 2026-10-17 (tools/listing_services.py, G136; GM06 trust scenes, real screens of the editor and of our ready designs' openings, no price, QR or web address)"
     },
     {
       "n": 4,
       "file": "collections/_services/setup-service/package/listing/images_editorial/04_not_included.png",
-      "alt": "Good to know: one round of setup, you can change everything yourself afterwards, design colors and fonts stay as designed",
-      "exists": false,
-      "status": "missing"
+      "alt": "Good to know: one round of setup, you can change everything yourself afterwards, the design stays as designed, you decide when to publish",
+      "exists": true,
+      "status": "current: service set of 2026-10-17 (tools/listing_services.py, G136; GM06 trust scenes, real screens of the editor and of our ready designs' openings, no price, QR or web address)"
     }
   ],
   "open_checks": [
@@ -83,8 +83,6 @@
     }
   ],
   "blockers": [
-    "listing images missing: collections/_services/setup-service/package/listing/images_editorial/01_cover.png, collections/_services/setup-service/package/listing/images_editorial/02_steps.png, collections/_services/setup-service/package/listing/images_editorial/03_what_we_enter.png, collections/_services/setup-service/package/listing/images_editorial/04_not_included.png",
-    "digital file missing: collections/_services/setup-service/package/customer/SETUP_SERVICE.pdf",
     "renewal not decided"
   ],
   "ready_to_publish": false,

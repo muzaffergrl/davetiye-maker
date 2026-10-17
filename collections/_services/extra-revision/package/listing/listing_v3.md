@@ -13,8 +13,8 @@ round of changes to the buyer's custom design, after the 2 rounds the custom des
 | Turnaround | **3 days** after the buyer tells us the changes (same as the other services) |
 | Who can buy it | Only buyers with a custom design order. Etsy cannot limit who buys; the description says so plainly, and the shop asks before anyone else's order (docs/23 §4.7) |
 | Etsy rule on services | Not checked. [VERIFY] in §4 |
-| Digital file | Proposal: a one-page `EXTRA_REVISION.pdf` (what happens next). **Not made yet** |
-| Images | None yet. Needs list in §5 |
+| Digital file | `package/customer/EXTRA_REVISION.pdf` (G136, 2026-10-17; `tools/build_service_guides.py`): what was bought, send all changes in one message (as `custom_design_extra_round`), 3 days, what a round does not cover, no returns + we fix it, support |
+| Images | 4 images made (G136, 2026-10-17; `tools/listing_services.py`, §5) |
 
 ## 1. Title
 
@@ -87,7 +87,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | When was it made | Made to order |
 | Occasion | Wedding |
 | Personalization | Off (the buyer sends the changes in an Etsy message) |
-| Digital file | `EXTRA_REVISION.pdf` (one page: what happens next; not made yet) |
+| Digital file | `EXTRA_REVISION.pdf` (`package/customer/`, G136) |
 | Price | **500 TL** (about USD 10.09; user, 2026-10-16; docs/23 §1) |
 | Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) |
 | Shop section | Services (proposal, docs/20 §3) |
@@ -95,12 +95,16 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 
 ## 5. Images and alt text
 
-No images yet. Layout and type on our brand palette (K27); no QR or web address. Needs:
+Made 2026-10-17 (G136, `tools/listing_services.py`, `package/listing/images_editorial/`, 2000 × 2000; 03 and 04 added so the
+listing has four like the others). Layout and type on our brand palette (K27) in the editorial set's style; the shop-wide GPT scene
+t6 (`brand/trust/`, GM06) on the cover; the editor screen of 03 is real (Olive & Ivory). No price, no QR, no web address.
 
 | # | File | Alt text |
 |---|---|---|
 | 1 | `01_cover.png` | Extra design revision: one more round of changes to your custom wedding website design, ready within 3 days |
 | 2 | `02_how.png` | How it works: buy this listing, send all your changes in one Etsy message, get your updated design within 3 days |
+| 3 | `03_one_round.png` | What a round covers: the opening, the artwork, the colors and fonts; your names, dates, photos and texts you change yourself in your editor, free |
+| 4 | `04_good_to_know.png` | Good to know: one purchase is one round, only for custom design orders, your design stays yours alone, and if a change does not match what you asked for we fix it |
 
 ## 6. Video
 
@@ -130,5 +134,5 @@ As for the other services: the shop-wide digital-items message talks about the S
 - [x] Quantity decided: 999 (no stock limit)
 - [ ] Renewal decided
 - [ ] Etsy's policy on service listings read; category and digital-file setup checked in the listing editor
-- [ ] `EXTRA_REVISION.pdf` made; images made (§5)
+- [x] `EXTRA_REVISION.pdf` made; images made (§5) (G136, 2026-10-17)
 - [ ] Publish together with the custom design listing (it makes no sense alone)
