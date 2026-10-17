@@ -212,12 +212,12 @@ def gpt_css(stage: dict, layers: dict) -> str:
         pt, ps, pb = card["pad_pct_of_width"]
         r += [f".hero-card{{aspect-ratio:{CARD_PX[0]}/{CARD_PX[1]};width:min(84vw,400px,calc((100svh - var(--nav-h) - 120px) * {CARD_PX[0] / CARD_PX[1]:.4f}))}}",
               ".hero-card>.card-img,.riad>.card>.card-img{object-fit:fill;z-index:1}",
-              f".hero-copy{{position:static;min-height:100%;display:flex;flex-direction:column;justify-content:center;padding:{pt}% {ps}% {pb}%}}",
+              f".hero-copy{{position:static;min-height:100%;display:flex;flex-direction:column;justify-content:center;justify-content:safe center;padding:{pt}% {ps}% {pb}%}}",
               f".hero-photo,.riad .card-photo{{position:absolute;left:{x}%;top:{y}%;width:{w}%;height:{h}%;margin:0;z-index:0}}",
               ".hero-copy>:not(.hero-photo),.card-copy>:not(.card-photo){position:relative;z-index:2;zoom:var(--k,1)}",
               ".hero-photo.ty-fill{display:block}",
               ".riad>.card{top:12%;height:76%}",
-              f".card-copy{{position:static;justify-content:center;padding:{pt}% {ps}% {pb}%}}"]
+              f".card-copy{{position:static;justify-content:center;justify-content:safe center;padding:{pt}% {ps}% {pb}%}}"]
     arch = layers.get("frame_arch")
     if arch:
         x, y, w, h = arch["window_pct"]

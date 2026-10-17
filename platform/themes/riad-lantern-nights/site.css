@@ -49,12 +49,13 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 /* the lantern's glow: borderless light (docs/11 §5.7), a slow uneven flicker like a flame behind pierced brass */
 .lantern-glow{position:absolute;left:50%;top:0;width:min(150vw,980px);aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none;z-index:0;
 mix-blend-mode:screen;background:radial-gradient(circle,#ff9a3c80 0%,#f78f384d 16%,#e9853224 34%,#e985320d 50%,transparent 64%);animation:flicker 5.2s ease-in-out infinite}
-@keyframes flicker{0%,100%{opacity:.86;filter:brightness(1)}
-18%{opacity:1;filter:brightness(1.08)}
-31%{opacity:.8}
-47%{opacity:.95;filter:brightness(1.04)}
-62%{opacity:.84}
-80%{opacity:1;filter:brightness(1.1)}}
+/* opacity + scale only: both run on the compositor (a filter here re-styled the page 60 times a second, G167) */
+@keyframes flicker{0%,100%{opacity:.86;scale:1}
+18%{opacity:1;scale:1.03}
+31%{opacity:.8;scale:.99}
+47%{opacity:.95;scale:1.015}
+62%{opacity:.84;scale:1}
+80%{opacity:1;scale:1.035}}
 
 /* layers that exist only once GPT's parts are in (doorway arch, lantern, bougainvillea, divider, carved frames): hidden
    here; the generated "@gpt-layers" block at the end (build_images.py) switches each on with its file and measured size.

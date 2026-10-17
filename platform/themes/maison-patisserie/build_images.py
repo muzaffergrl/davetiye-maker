@@ -248,6 +248,15 @@ def main() -> int:
     # ---------------------------------------------------------------- page ground, shelf, sugar pearl
     bg = gpt("bg_page")
     bg = at_width(bg.convert("RGB"), 1024) if bg is not None else tone(paper, CREAM, .5)
+    if used.get("bg_page", "").startswith("gpt"):
+        # the box page's kicker, names, date and hint sit straight on this ground (theme-check "text over painted
+        # decor"): its middle must stay light and calm (prompt W2.10). Interim: mean 247, edges 3.6.
+        mid = bg.convert("L").crop((int(bg.width * .15), int(bg.height * .15), int(bg.width * .85), int(bg.height * .85)))
+        lum, edge = float(np.asarray(mid, float).mean()), float(np.asarray(mid.filter(ImageFilter.FIND_EDGES), float).mean())
+        manifest["bg_page_middle"] = {"mean": round(lum, 1), "edges": round(edge, 2)}
+        if lum < 215 or edge > 8:
+            print(f"WARNING: bg_page.png middle is not calm/light enough for dark text (mean {lum:.0f} < 215 or edges "
+                  f"{edge:.1f} > 8) — ask GPT again (W2.10) before theme-check", file=sys.stderr)
     used.setdefault("bg_page", "interim")
     tb.webp(bg, "bg_page", [640, 1024], 76, manifest, out=OUT)
     tile = gpt("bg_tile")

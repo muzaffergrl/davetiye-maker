@@ -139,7 +139,7 @@ function fitCards() {
     const tall = () => kids[kids.length - 1].getBoundingClientRect().bottom - kids[0].getBoundingClientRect().top;
     let k = 1;
     copy.style.setProperty('--k', '1');
-    for (let i = 0; i < 12 && tall() > room && k > 0.5; i++) { k = Math.max(0.5, k * Math.min(0.95, room / tall())); copy.style.setProperty('--k', k.toFixed(3)); }
+    for (let i = 0; i < 12 && tall() > room && k > 0.42; i++) { k = Math.max(0.42, k * Math.min(0.95, room / tall())); copy.style.setProperty('--k', k.toFixed(3)); }
   });
 }
 

@@ -267,7 +267,7 @@ test('G167: the stage geometry in site.css is the build\'s measurement (manifest
     /\.curtain-r\{transform-origin:var\(--cr-o\) 50%\}/, /\.swag-l\{transform-origin:var\(--swl-o\)\}/,
     /\.theatre>\.card\{left:var\(--card-l\);top:var\(--card-t\);width:var\(--card-w\);height:var\(--card-h\)/,
     /\.theatre \.card-photo\{position:absolute;left:var\(--win-l\);top:var\(--win-t\);width:var\(--win-w\);height:var\(--win-h\);z-index:var\(--photo-z\)\}/,
-    /100%\{transform:scaleX\(var\(--gather\)\)/, /\.hero-card\{[^}]*aspect-ratio:var\(--hero-ar\)/,
+    /100%\{transform:scaleX\(var\(--gather\)\)/, /\.hero-card\{[^}]*min-height:calc\([^;]*\/ var\(--hero-ar\)\)/,
     /\.ticket-stub\{[^}]*aspect-ratio:var\(--stub-ar\)[^}]*border-top:var\(--stub-rule\)/]) assert.match(css, rule);
   assert.doesNotMatch(css, /aspect-ratio:880\/1344|scaleX\(\.34\)/);
   assert.doesNotMatch(js, /880 \/ 1344/);
