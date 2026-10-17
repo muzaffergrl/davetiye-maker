@@ -6,6 +6,7 @@ import { getClaimRateLimiter } from '../claim/limits.ts';
 import { getDataAdapter, type DataAdapter, type SiteRecord } from '../data/index.ts';
 import { BodyTooLargeError, fail, json, readLimitedBytes, requestOrigin } from '../panel/http.ts';
 import { clientIp } from '../rsvp/http.ts';
+import { ipBucket } from '../rsvp/rate-limit.ts';
 import { panelPreviewToken } from '../keys.ts';
 import { normalizeEmail } from '../claim/fields.ts';
 import { rsvpCsvForSite, rsvpSummary, type RsvpCounts, type RsvpEntry } from '../rsvp/couple.ts';
@@ -84,7 +85,8 @@ export async function signIn(req: Request): Promise<Response> {
   if (!sameOrigin(req)) return fail(403, 'bad_origin', 'Request refused.');
   const limiter = getClaimRateLimiter();
   const [perIp, global] = await Promise.all([
-    limiter.hit(`admin-login:${clientIp(req)}`, ADMIN_LOGIN_LIMITS.perIp),
+    // G172: an IPv6 address counts as its /64 (one connection owns a whole /64), like every other per-address limit
+    limiter.hit(`admin-login:${ipBucket(clientIp(req))}`, ADMIN_LOGIN_LIMITS.perIp),
     limiter.hit('admin-login:*', ADMIN_LOGIN_LIMITS.global),
   ]);
   if (!perIp.allowed || !global.allowed) {

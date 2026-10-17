@@ -10,8 +10,11 @@
 // (assertAudioUpload: MP3 / M4A / AAC signature, <= 10 MB) and stores it next to the photos (saveAudio) → {url}.
 // The panel then saves content.audio = {music: "custom", music_file: url, music_name} through the normal autosave.
 // Same authorisation, archive rule, per-site file cap and daily upload limit as photos (lib/panel/api.ts uploadPhoto).
+// G172: every part counts against MUSIC_PARTS_PER_DAY too — a part that is never assembled stays stored, and before, only
+// part 0 was counted (parts 1, 2 … under ever new upload ids filled storage without a limit).
 
 import { getClaimRateLimiter, UPLOAD_LIMITS } from '../claim/limits.ts';
+import type { RateLimitRule } from '../rsvp/rate-limit.ts';
 import { getDataAdapter } from '../data/index.ts';
 import { NotFoundError } from '../data/types.ts';
 import { authorizeEditor } from '../rsvp/couple.ts';
@@ -24,6 +27,11 @@ import { ARCHIVED_MESSAGE, isArchived } from './rights.ts';
 export const MUSIC_PART_BYTES = 3.5 * 1024 * 1024;
 export const MUSIC_MAX_PARTS = Math.ceil(MAX_AUDIO_BYTES / MUSIC_PART_BYTES);
 const UPLOAD_ID_RE = /^[0-9a-f]{32}$/;
+/** Parts per site per day (G172): as many as the daily uploads, each in the most parts a file can have. */
+export const MUSIC_PARTS_PER_DAY: RateLimitRule = {
+  limit: UPLOAD_LIMITS.perSitePerDay.limit * MUSIC_MAX_PARTS,
+  windowMs: UPLOAD_LIMITS.perSitePerDay.windowMs,
+};
 
 function intHeader(req: Request, name: string): number | null {
   const v = req.headers.get(name);
@@ -46,6 +54,14 @@ export async function uploadMusic(req: Request, slug: string): Promise<Response>
       return fail(400, 'bad_upload', 'This upload could not be read. Please try again.');
     }
     const declared = req.headers.get('x-upload-type');
+    const partRate = await getClaimRateLimiter().hit(`upload:part:${site.id}`, MUSIC_PARTS_PER_DAY);
+    if (!partRate.allowed) {
+      return json(
+        429,
+        { ok: false, code: 'upload_limit', message: 'You have uploaded a lot of files today. Please try again tomorrow.' },
+        { 'Retry-After': String(Math.max(1, Math.ceil(partRate.retryAfterMs / 1000))) },
+      );
+    }
 
     if (part === 0) {
       // Once per file: the per-site cap and the daily limit (shared with photos).
