@@ -10,6 +10,7 @@ import { COPY_PRESETS, STANDARD_COPY } from '../theme/copy.ts';
 import { EXTRAS_LABELS } from '../theme/extras-block.ts';
 import type { Namespace } from './dicts.ts';
 import { scanSource } from './scan.ts';
+import { PRINT_LABELS } from '../print/labels.ts';
 import { OPTIONAL_BLOCK_LABELS, PAGE_LABELS, SECTION_TITLES, openingPlace, openingTabLabel, shapeLabel } from '../panel/model.ts';
 import { QR_PNG_SIZES, SHARE_LABELS } from '../panel/share.ts';
 import { themeOpening } from '../panel/state.ts';
@@ -78,10 +79,15 @@ export function expectedKeys(ns: Namespace): Set<string> {
     for (const v of Object.values(EXTRAS_LABELS)) keys.add(v);
     for (const v of Object.values(DEFAULT_LABELS)) keys.add(v);
     keys.add(THANK_YOU_DEFAULT_TITLE);
+    // G139 printed invitation + website PDF (lib/print/labels.ts): everything but the panel card
+    for (const [k, v] of Object.entries(PRINT_LABELS.en)) if (!k.startsWith('panel_') && k !== 'limit_reached') keys.add(v);
   }
   if (ns === 'panel') {
     for (const e of Object.values(STANDARD_COPY)) keys.add(e.label);
     for (const p of COPY_PRESETS) keys.add(p.label);
+    // G139 Downloads card (lib/print/labels.ts) and the download API's messages (lib/print/api.ts)
+    for (const [k, v] of Object.entries(PRINT_LABELS.en)) if (k.startsWith('panel_') || k === 'limit_reached') keys.add(v);
+    for (const k of scanSource(readFileSync(join(ROOT, 'lib/print/api.ts'), 'utf8'))) keys.add(k);
     // texts of lib/ constants the panel shows with t(x)
     for (const v of Object.values(SHARE_LABELS)) if (typeof v === 'string') keys.add(v);
     for (const v of QR_PNG_SIZES) keys.add(v.label);

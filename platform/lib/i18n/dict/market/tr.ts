@@ -819,6 +819,17 @@ const dict: Dict = {
   '{price} per design.': 'Tasarım başına {price}.',
   '{refund}. Please open the live demo on your phone before you buy, so you know exactly how your design looks and opens. [Contact us](/contact) with any question first.': '{refund}. Lütfen satın almadan önce canlı demoyu telefonunuzda açın; böylece tasarımınızın nasıl göründüğünü ve açıldığını tam olarak bilirsiniz. Her soruda önce [bize ulaşın](/contact).',
   '{thing} opening': '{thing} açılışı',
+  'A black-tie wedding website with a gold-sealed black envelope, Lake Como at dusk and a photo gallery. Personalize it in your online editor.': 'Altın mühürlü siyah zarf, alacakaranlıkta Como Gölü ve fotoğraf galerisiyle black-tie bir düğün websitesi. Online düzenleyicinizde kişiselleştirin.',
+  'A dark reply card with your reply-by date and the shared configurable reply form.': 'Son yanıt tarihiniz ve ayarlanabilir ortak yanıt formuyla koyu renkli bir yanıt kartı.',
+  'An asymmetric gallery: one tall photo and two landscape frames with captions. Each opens larger in a quiet viewer.': 'Asimetrik bir galeri: bir dikey fotoğraf ve açıklamalı iki yatay çerçeve. Her biri sakin bir görüntüleyicide büyük açılır.',
+  'Black paper, champagne gold and candlelight by the water. Your names rise over a lake at dusk, then the invitation, a quiet gallery and the evening, hour by hour.': 'Siyah kâğıt, şampanya altını ve su kıyısında mum ışığı. İsimleriniz alacakaranlıkta bir gölün üzerinde yükselir; ardından davetiye, sakin bir galeri ve saat saat akşam.',
+  'Black tie by the lake: a black envelope with a gold wax seal, Lake Como at dusk and an asymmetric photo gallery': 'Göl kıyısında black tie: altın mühür mumlu siyah bir zarf, alacakaranlıkta Como Gölü ve asimetrik bir fotoğraf galerisi',
+  'Charcoal': 'Antrasit',
+  'Large names on burgundy, an oval portrait set across the burgundy and ivory join, your invitation, countdown and a staggered strip of three album chapters.': 'Bordo üzerinde büyük isimler, bordo ile fildişinin birleştiği yere yerleşen oval bir portre, davetiyeniz, geri sayım ve üç albüm bölümünden oluşan kademeli bir şerit.',
+  'Night': 'Gece',
+  'The evening as a timeline beside a wide venue photo, with an optional map and directions, calendar links, dress code and questions and answers.': 'Geniş bir mekân fotoğrafının yanında zaman çizelgesi olarak akşam; isteğe bağlı harita ve yol tarifi, takvim linkleri, kıyafet kuralı ve soru-cevaplar.',
+  'Your guests tap the envelope. The gold wax seal lifts away, the black flap opens and a separate charcoal card with your photo rises from the pocket. The card then opens into your home page.': 'Davetlileriniz zarfa dokunur. Altın mühür mumu kalkar, siyah kapak açılır ve fotoğrafınızın olduğu ayrı bir antrasit kart cepten yükselir. Kart ardından ana sayfanıza açılır.',
+  'Your names in capitals over Lake Como at dusk, then the invitation beside your portrait, a countdown and calendar links.': 'Alacakaranlıkta Como Gölü üzerinde büyük harflerle isimleriniz; ardından portrenizin yanında davetiye, geri sayım ve takvim linkleri.',
 };
 
 export default dict;

@@ -819,6 +819,17 @@ const dict: Dict = {
   '{price} per design.': '{price} por diseño.',
   '{refund}. Please open the live demo on your phone before you buy, so you know exactly how your design looks and opens. [Contact us](/contact) with any question first.': '{refund}. Abre la demo en vivo en tu móvil antes de comprar, para saber exactamente cómo se ve y cómo se abre tu diseño. [Contáctanos](/contact) primero con cualquier pregunta.',
   '{thing} opening': 'Apertura del {thing}',
+  'A black-tie wedding website with a gold-sealed black envelope, Lake Como at dusk and a photo gallery. Personalize it in your online editor.': 'Una web de boda black tie con un sobre negro sellado en oro, el lago de Como al anochecer y una galería de fotos. Personalízala en tu editor online.',
+  'A dark reply card with your reply-by date and the shared configurable reply form.': 'Una tarjeta de respuesta oscura con tu fecha límite y el formulario de respuesta configurable.',
+  'An asymmetric gallery: one tall photo and two landscape frames with captions. Each opens larger in a quiet viewer.': 'Una galería asimétrica: una foto vertical y dos marcos horizontales con pies de foto. Cada una se abre en grande en un visor tranquilo.',
+  'Black paper, champagne gold and candlelight by the water. Your names rise over a lake at dusk, then the invitation, a quiet gallery and the evening, hour by hour.': 'Papel negro, oro champán y luz de velas junto al agua. Los nombres de la pareja se alzan sobre un lago al anochecer; después, la invitación, una galería serena y la velada, hora a hora.',
+  'Black tie by the lake: a black envelope with a gold wax seal, Lake Como at dusk and an asymmetric photo gallery': 'Black tie junto al lago: un sobre negro con sello de lacre dorado, el lago de Como al anochecer y una galería asimétrica',
+  'Charcoal': 'Carbón',
+  'Large names on burgundy, an oval portrait set across the burgundy and ivory join, your invitation, countdown and a staggered strip of three album chapters.': 'Nombres grandes sobre burdeos, un retrato ovalado entre el burdeos y el marfil, tu invitación, la cuenta atrás y una tira escalonada con tres capítulos del álbum.',
+  'Night': 'Noche',
+  'The evening as a timeline beside a wide venue photo, with an optional map and directions, calendar links, dress code and questions and answers.': 'La velada como línea de tiempo junto a una foto amplia del lugar, con mapa e indicaciones opcionales, enlaces de calendario, código de vestimenta y preguntas frecuentes.',
+  'Your guests tap the envelope. The gold wax seal lifts away, the black flap opens and a separate charcoal card with your photo rises from the pocket. The card then opens into your home page.': 'Tus invitados tocan el sobre. El sello de lacre dorado se levanta, la solapa negra se abre y una tarjeta carbón con tu foto sale del bolsillo. Después, la tarjeta se abre en tu página de inicio.',
+  'Your names in capitals over Lake Como at dusk, then the invitation beside your portrait, a countdown and calendar links.': 'Los nombres de la pareja en mayúsculas sobre el lago de Como al anochecer; después, la invitación junto a su retrato, la cuenta atrás y enlaces de calendario.',
 };
 
 export default dict;

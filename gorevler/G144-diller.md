@@ -20,7 +20,7 @@ ortam değişkeni yok.
 
 ### Altyapı (`platform/lib/i18n/`, kurallar `lib/i18n/README.md`)
 - Anahtar = İngilizce metnin kendisi (`t('…')`, `tn(n,'one','{n} other')`, sabitlerde `msg()`); eksik çeviri → İngilizce.
-- Sözlükler: `dict/panel|site|market/<tr|es|de|fr>.ts` — **panel 1197, site 206, satış 817 anahtar; dört dilde 0 eksik.**
+- Sözlükler: `dict/panel|site|market/<tr|es|de|fr>.ts` — **panel 1216, site 220, satış 827 anahtar; dört dilde 0 eksik** (`I18N_STRICT=1` ile yeşil).
   Yalnız seçili dilin dosyası yüklenir (`dicts.ts`, dinamik import). Satış rehberleri: `content/guides/<dil>/*.md` (6 × 4).
 - Kapsam testi `tests/i18n.test.ts`: kaynak koddaki `t/tn/msg` sabitleri + 21 temanın copy varsayılanları ve sabit şablon
   metinleri her sözlükte var mı (eksikler tanı satırı; `I18N_STRICT=1` ile hata), yer tutucular korunmuş mu, tema `max`
@@ -71,6 +71,15 @@ ortam değişkeni yok.
   sağ üste alındı).
 - Son `npm test`: 1300 test, 1298 geçti, 0 hata, 2 atlandı (önceden de atlananlar). `npm run build` temiz (trace-check dahil);
   build sonrası g144-browser 3 temayla yeniden 105/105.
+
+### G139 / G142 birleşmesi (koordinatör, ab6bde0)
+- Taban birleştirildi (çakışmalar: `lib/slug.ts`, `lib/marketing/designs.ts` — ikisi de korunarak çözüldü).
+- G139: Downloads kartı panel dilinde (`components/panel/Downloads.tsx`, anahtar = `lib/print/labels.ts` İngilizcesi);
+  **basılı davetiye ve site PDF'i sitenin ana dilinde** üretilir (`lib/print/lang.ts`: etiketler site sözlüğünden, tarih/saat
+  `lib/i18n/format.ts`, `<html lang>`; site PDF'i sayfaları ana dilin sözlüğüyle çizer). İndirme API'sinin mesajları panelde çevrilir.
+- G142: Crimson ve yeni 22 Nocturne temasının copy varsayılanları ve satış metinleri 4 dilde.
+- Tabandan gelen bir kırmızı: `tests/g139-print.test.ts` "every platform design has a printable invitation" 22 ≠ 21
+  (Nocturne'ün baskı düzeni yok) — birleşen tabanda da aynı, G144'ün değil; koordinatöre bildirildi.
 
 ### Açık / sonraki
 - Çeviriler makine değil, ajanların yazdığı çevirilerdir; anadil gözden geçirmesi yapılmadı. Kısa menü etiketleri tema `max`

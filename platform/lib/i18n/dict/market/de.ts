@@ -819,6 +819,17 @@ const dict: Dict = {
   '{price} per design.': '{price} pro Design.',
   '{refund}. Please open the live demo on your phone before you buy, so you know exactly how your design looks and opens. [Contact us](/contact) with any question first.': '{refund}. Bitte öffnen Sie die Live-Demo auf Ihrem Handy, bevor Sie kaufen, damit Sie genau wissen, wie Ihr Design aussieht und sich öffnet. [Kontaktieren Sie uns](/contact) gern zuerst mit jeder Frage.',
   '{thing} opening': 'Öffnung: {thing}',
+  'A black-tie wedding website with a gold-sealed black envelope, Lake Como at dusk and a photo gallery. Personalize it in your online editor.': 'Eine Black-Tie-Hochzeitswebsite mit schwarzem Umschlag und goldenem Siegel, dem Comer See in der Dämmerung und einer Fotogalerie. Gestalten Sie sie in Ihrem Online-Editor.',
+  'A dark reply card with your reply-by date and the shared configurable reply form.': 'Eine dunkle Antwortkarte mit Ihrer Antwortfrist und dem gemeinsamen, anpassbaren Antwortformular.',
+  'An asymmetric gallery: one tall photo and two landscape frames with captions. Each opens larger in a quiet viewer.': 'Eine asymmetrische Galerie: ein hohes Foto und zwei Querformate mit Bildunterschriften. Jedes öffnet sich groß in einer ruhigen Ansicht.',
+  'Black paper, champagne gold and candlelight by the water. Your names rise over a lake at dusk, then the invitation, a quiet gallery and the evening, hour by hour.': 'Schwarzes Papier, Champagnergold und Kerzenlicht am Wasser. Ihre Namen erheben sich über einem See in der Dämmerung, dann folgen die Einladung, eine ruhige Galerie und der Abend, Stunde für Stunde.',
+  'Black tie by the lake: a black envelope with a gold wax seal, Lake Como at dusk and an asymmetric photo gallery': 'Black Tie am See: ein schwarzer Umschlag mit goldenem Wachssiegel, der Comer See in der Dämmerung und eine asymmetrische Fotogalerie',
+  'Charcoal': 'Anthrazit',
+  'Large names on burgundy, an oval portrait set across the burgundy and ivory join, your invitation, countdown and a staggered strip of three album chapters.': 'Große Namen auf Bordeaux, ein ovales Porträt über der Grenze von Bordeaux und Elfenbein, Ihre Einladung, ein Countdown und ein versetzter Streifen mit drei Albumkapiteln.',
+  'Night': 'Nacht',
+  'The evening as a timeline beside a wide venue photo, with an optional map and directions, calendar links, dress code and questions and answers.': 'Der Abend als Zeitleiste neben einem breiten Foto der Location, mit optionaler Karte und Wegbeschreibung, Kalenderlinks, Dresscode sowie Fragen und Antworten.',
+  'Your guests tap the envelope. The gold wax seal lifts away, the black flap opens and a separate charcoal card with your photo rises from the pocket. The card then opens into your home page.': 'Ihre Gäste tippen auf den Umschlag. Das goldene Wachssiegel hebt sich, die schwarze Lasche öffnet sich und eine separate anthrazitfarbene Karte mit Ihrem Foto steigt aus der Tasche. Die Karte öffnet dann Ihre Startseite.',
+  'Your names in capitals over Lake Como at dusk, then the invitation beside your portrait, a countdown and calendar links.': 'Ihre Namen in Großbuchstaben über dem Comer See in der Dämmerung, dann die Einladung neben Ihrem Porträt, ein Countdown und Kalenderlinks.',
 };
 
 export default dict;

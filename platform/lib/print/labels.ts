@@ -1,8 +1,8 @@
 // G139: every buyer- and guest-facing text of the PDF downloads (website PDF, printable invitation, panel card) in one
-// place, by language. Only English exists today; the five languages (K45 §3) add their own block with the same keys.
-// Placeholders: {date}, {count}, {url}.
-
-export type PrintLang = 'en';
+// place. Placeholders: {date}, {count}, {url}.
+// G144: the English text is the key of the five-language dictionaries (lib/i18n): the printed invitation and the website
+// PDF read the site dictionary of the website's main language (lib/print/lang.ts), the panel card the panel's (t()).
+// lib/i18n/keys.ts lists panel_* + limit_reached under "panel", the rest under "site".
 
 export const PRINT_LABELS = {
   en: {
@@ -41,8 +41,9 @@ export const PRINT_LABELS = {
 
 export type PrintLabelKey = keyof (typeof PRINT_LABELS)['en'];
 
-/** The label in `lang` (English while a language has no block), with {placeholders} filled. */
-export function printLabel(key: PrintLabelKey, vars: Record<string, string | number> = {}, lang: PrintLang = 'en'): string {
-  const text: string = (PRINT_LABELS[lang] ?? PRINT_LABELS.en)[key];
+/** The label translated with `dict` (a lib/i18n dictionary; none = English), with {placeholders} filled. */
+export function printLabel(key: PrintLabelKey, vars: Record<string, string | number> = {}, dict?: Readonly<Record<string, string>> | null): string {
+  const en: string = PRINT_LABELS.en[key];
+  const text = dict?.[en] || en;
   return text.replace(/\{(\w+)\}/g, (m, name: string) => (name in vars ? String(vars[name]) : m));
 }

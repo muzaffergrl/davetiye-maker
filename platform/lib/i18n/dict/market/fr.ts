@@ -819,6 +819,17 @@ const dict: Dict = {
   '{price} per design.': '{price} par design.',
   '{refund}. Please open the live demo on your phone before you buy, so you know exactly how your design looks and opens. [Contact us](/contact) with any question first.': '{refund}. Ouvrez la démo sur votre téléphone avant d’acheter, pour savoir exactement à quoi ressemble votre design et comment il s’ouvre. [Contactez-nous](/contact) d’abord pour toute question.',
   '{thing} opening': 'Ouverture : {thing}',
+  'A black-tie wedding website with a gold-sealed black envelope, Lake Como at dusk and a photo gallery. Personalize it in your online editor.': 'Un site de mariage black tie avec une enveloppe noire scellée d’or, le lac de Côme au crépuscule et une galerie photo. Personnalisez-le dans votre éditeur en ligne.',
+  'A dark reply card with your reply-by date and the shared configurable reply form.': 'Une carte réponse sombre avec votre date limite et le formulaire de réponse configurable commun.',
+  'An asymmetric gallery: one tall photo and two landscape frames with captions. Each opens larger in a quiet viewer.': 'Une galerie asymétrique : une photo verticale et deux cadres paysage légendés. Chacune s’ouvre en grand dans une visionneuse épurée.',
+  'Black paper, champagne gold and candlelight by the water. Your names rise over a lake at dusk, then the invitation, a quiet gallery and the evening, hour by hour.': 'Papier noir, or champagne et lueur des bougies au bord de l’eau. Vos prénoms s’élèvent au-dessus d’un lac au crépuscule, puis viennent le faire-part, une galerie paisible et la soirée, heure par heure.',
+  'Black tie by the lake: a black envelope with a gold wax seal, Lake Como at dusk and an asymmetric photo gallery': 'Black tie au bord du lac : une enveloppe noire au sceau de cire doré, le lac de Côme au crépuscule et une galerie photo asymétrique',
+  'Charcoal': 'Anthracite',
+  'Large names on burgundy, an oval portrait set across the burgundy and ivory join, your invitation, countdown and a staggered strip of three album chapters.': 'De grands prénoms sur bordeaux, un portrait ovale à cheval entre le bordeaux et l’ivoire, votre faire-part, le compte à rebours et une bande décalée de trois chapitres d’album.',
+  'Night': 'Nuit',
+  'The evening as a timeline beside a wide venue photo, with an optional map and directions, calendar links, dress code and questions and answers.': 'La soirée en frise chronologique à côté d’une large photo du lieu, avec carte et itinéraire en option, liens d’agenda, code vestimentaire et questions-réponses.',
+  'Your guests tap the envelope. The gold wax seal lifts away, the black flap opens and a separate charcoal card with your photo rises from the pocket. The card then opens into your home page.': 'Vos invités touchent l’enveloppe. Le sceau de cire doré se soulève, le rabat noir s’ouvre et une carte anthracite avec votre photo sort de la pochette. La carte s’ouvre ensuite sur votre page d’accueil.',
+  'Your names in capitals over Lake Como at dusk, then the invitation beside your portrait, a countdown and calendar links.': 'Vos prénoms en capitales au-dessus du lac de Côme au crépuscule, puis le faire-part à côté de votre portrait, un compte à rebours et des liens d’agenda.',
 };
 
 export default dict;
