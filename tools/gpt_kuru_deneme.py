@@ -150,18 +150,17 @@ def tema_refs(tema_dir: Path) -> set[str]:
     return refs
 
 
+# sitecustomize: build ve onun başlattığı her Python alt süreci (ör. tema_build.prep_hazirla → parts_prep) açtığı
+# dosyaları KURU_OKUNAN'a ekler (PYTHONPATH ile miras kalır)
 KANCA = r"""
-import runpy, sys, json, os
-okunan = set()
-def k(olay, arg):
+import atexit, os, sys
+_okunan = set()
+def _k(olay, arg):
     if olay == "open" and isinstance(arg[0], (str, bytes, os.PathLike)):
-        okunan.add(os.path.realpath(os.fsdecode(arg[0])))
-sys.addaudithook(k)
-try:
-    sys.argv = [sys.argv[1]]
-    runpy.run_path(sys.argv[0], run_name="__main__")
-finally:
-    json.dump(sorted(okunan), open(os.environ["KURU_OKUNAN"], "w"))
+        _okunan.add(os.path.realpath(os.fsdecode(arg[0])))
+if os.environ.get("KURU_OKUNAN"):
+    sys.addaudithook(_k)
+    atexit.register(lambda: open(os.environ["KURU_OKUNAN"], "a").write("".join(p + chr(10) for p in _okunan)))
 """
 
 
@@ -206,13 +205,16 @@ def main() -> int:
               f"{sum(b['paket'] == 2 for b in liste)} PAKET 2, {sum(b['paket'] == 6 for b in liste)} PAKET 6)")
 
         eski = {p.name for p in (tema_dir / "img").iterdir()} if (tema_dir / "img").exists() else set()
-        okunan_dosya = gecici / "okunan.json"
-        env = {**os.environ, "KURU_OKUNAN": str(okunan_dosya)}
-        r = subprocess.run([sys.executable, "-c", KANCA, str(kok / "platform/themes" / a.tema / "build_images.py")],
+        okunan_dosya = gecici / "okunan.txt"
+        (gecici / "kanca").mkdir()
+        (gecici / "kanca" / "sitecustomize.py").write_text(KANCA)
+        env = {**os.environ, "KURU_OKUNAN": str(okunan_dosya),
+               "PYTHONPATH": os.pathsep.join(filter(None, [str(gecici / "kanca"), os.environ.get("PYTHONPATH")]))}
+        r = subprocess.run([sys.executable, str(kok / "platform/themes" / a.tema / "build_images.py")],
                            cwd=kok, env=env, capture_output=True, text=True)
         if r.returncode:
             sorun.append(f"build_images.py çıkış {r.returncode}:\n{(r.stdout + r.stderr)[-3000:]}")
-        okunan = set(json.loads(okunan_dosya.read_text())) if okunan_dosya.exists() else set()
+        okunan = set(okunan_dosya.read_text().split("\n")) - {""} if okunan_dosya.exists() else set()
         r2 = subprocess.run(["node", "scripts/build-print-assets.ts", "--theme", a.tema], cwd=kok / "platform",
                             capture_output=True, text=True)
         if r2.returncode:
@@ -275,7 +277,8 @@ def main() -> int:
                                 env={**os.environ, "PORT": str(a.port), "NODE_PATH": "/opt/node22/lib/node_modules"})
             son = (r3.stdout + r3.stderr).strip().splitlines()
             print("\ntheme-check (deneme görselleriyle):")
-            for s in son[-40:]:
+            hatalar = [s for s in son[:-25] if re.search(r"\bFAIL|ERROR|✗", s)]
+            for s in hatalar + son[-25:]:  # bütün hata satırları + özet (tam liste: <out>/checks.json)
                 print("  " + s)
             if r3.returncode:
                 sorun.append("theme-check hatalı (yukarıda)")
