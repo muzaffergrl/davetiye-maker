@@ -1,6 +1,6 @@
 /* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
    python3 tools/recolor_parts.py build --design 08
-   (kaynak: collections/08_Winter_Evergreen/variants/*/palette.json + recolor.json).
+   (kaynak: collections/08_Winter_Evergreen/variants/<V0x_slug>/palette.json + recolor.json).
    :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
    yalnız paletin değiştirdiği token'lar. */
 :root {
@@ -44,7 +44,7 @@ html[data-variant="frost-blue"] {
   --c-2f5240: 60 98 129;
   --c-3e6b53: 72 124 165;
   --green: #294F6C;
-  --green-ink: #365873;
+  --green-ink: #2B4D67;
   --hair: rgba(60, 98, 129, 0.4);
   --script-ink: #2D526F;
 }
@@ -61,7 +61,7 @@ html[data-variant="ivory-pine"] {
   --c-2f5240: 34 95 74;
   --c-3e6b53: 41 122 93;
   --green: #14543F;
-  --green-ink: #215643;
+  --green-ink: #1E5441;
   --hair: rgba(34, 95, 74, 0.4);
   --script-ink: #154D38;
 }
@@ -95,7 +95,7 @@ html[data-variant="sage-holly"] {
   --c-2f5240: 69 106 77;
   --c-3e6b53: 86 134 94;
   --green: #2C5135;
-  --green-ink: #3B5C42;
+  --green-ink: #305138;
   --hair: rgba(69, 106, 77, 0.4);
   --script-ink: #39593C;
 }

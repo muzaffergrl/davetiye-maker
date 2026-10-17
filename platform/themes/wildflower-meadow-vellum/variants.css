@@ -1,6 +1,6 @@
 /* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
    python3 tools/recolor_parts.py build --design 18
-   (kaynak: collections/18_Wildflower_Vellum/variants/*/palette.json + recolor.json).
+   (kaynak: collections/18_Wildflower_Vellum/variants/<V0x_slug>/palette.json + recolor.json).
    :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
    yalnız paletin değiştirdiği token'lar. */
 :root {

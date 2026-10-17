@@ -683,7 +683,7 @@ def write_variants_css(spec, design, blocks):
     lines = [
         "/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:",
         f"   python3 tools/recolor_parts.py build --design {design.name[:2]}",
-        f"   (kaynak: collections/{design.name}/variants/*/palette.json + recolor.json).",
+        f"   (kaynak: collections/{design.name}/variants/<V0x_slug>/palette.json + recolor.json).",  # no star-slash in a CSS comment
         "   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları",
         "   yalnız paletin değiştirdiği token'lar. */",
         ":root {",
