@@ -1285,6 +1285,16 @@ const dict: Dict = {
   'Your order number and email are filled in on the next page.': 'Bestellnummer und E-Mail-Adresse sind auf der nächsten Seite schon eingetragen.',
   'since {date}': 'seit {date}',
   '{addresses} no longer opens on this device, so we removed it. Enter your order number and email below to open it again.|{addresses} no longer open on this device, so we removed them. Enter your order number and email below to open them again.': '{addresses} lässt sich auf diesem Gerät nicht mehr öffnen, daher haben wir es entfernt. Geben Sie unten Bestellnummer und E-Mail-Adresse ein, um es wieder zu öffnen.|{addresses} lassen sich auf diesem Gerät nicht mehr öffnen, daher haben wir sie entfernt. Geben Sie unten Bestellnummer und E-Mail-Adresse ein, um sie wieder zu öffnen.',
+  'Above your names on the box': 'Über Ihren Namen auf der Box',
+  'Box': 'Box',
+  'Button after the box opens': 'Button nach dem Öffnen der Box',
+  'Open the box again (RSVP page)': 'Box erneut öffnen (Antwortseite)',
+  'Open the box again (box page)': 'Box erneut öffnen (Box-Seite)',
+  'Open the box again (home page)': 'Box erneut öffnen (Startseite)',
+  'Under the box, on computers': 'Unter der Box, auf Computern',
+  'Under the box, on phones': 'Unter der Box, auf Handys',
+  'box': 'Box',
+  // G166 Maison Pâtisserie
   // G152: multi-item orders (/my chooser), reply emails
   'Which website do you want to open?': 'Welche Website möchten Sie öffnen?',
   'This order has more than one website.': 'Zu dieser Bestellung gehört mehr als eine Website.',

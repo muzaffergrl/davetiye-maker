@@ -1,0 +1,77 @@
+<!doctype html>
+<!-- Maison Pâtisserie · page 3 — story (/<slug>/story). A pâtisserie display case: the three photos stand on one glass
+     shelf and slide along it (swipe or drag, snap to the middle, arrow buttons, ← → keys on the focused shelf); the
+     photo in the middle stands forward. With reduced motion the shelf is a simple list. Personal text: none — the
+     intro, captions and photos are filled on the server. Design texts: data-copy (G068). -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f8f1e6">
+<title data-text="{copy.story_title} · {name_display}">Our sweetest moments</title>
+<meta name="description" data-attr-content="{copy.story_title} · {name_display} · {date|date-long}" content="Our sweetest moments">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{copy.story_title} · {name_display}" content="Our sweetest moments">
+<meta property="og:description" data-attr-content="{date|date-long} · {venue.city_region}" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italiana&family=Parisienne&display=swap">
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.replace('no-js','js');</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-story" data-optional="our_story" data-pending="This link will be added soon.">
+<main class="story-page">
+  <header class="page-heading" data-scene="story-head">
+    <p class="kicker-line" data-copy="story_kicker" data-step="kicker">Moments we hold dear</p>
+    <h1 data-copy="story_title" data-step="title">Our sweetest moments</h1>
+    <p class="body-text intro" data-if="story.intro" data-step="intro"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
+  </header>
+  <section class="shelf" data-scene="story-shelf">
+    <div class="shelf-track" data-shelf tabindex="0" role="group" aria-label="Our photos">
+      <figure class="shelf-card" data-step="card" data-a="settle" data-i="0">
+        <div class="photo-slot" data-slot="story_1">
+          <img data-photo="story_1" src="img/ph_portrait-640.webp" alt="" data-attr-alt="{story.items.0.caption}" sizes="min(66vw, 300px)" fetchpriority="high">
+          <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+        </div>
+        <figcaption><span class="num" aria-hidden="true">01</span> <span data-field="story.items.0.caption"></span></figcaption>
+      </figure>
+      <figure class="shelf-card" data-step="card" data-a="settle" data-i="1">
+        <div class="photo-slot" data-slot="story_2">
+          <img data-photo="story_2" src="img/ph_portrait-640.webp" alt="" data-attr-alt="{story.items.1.caption}" sizes="min(66vw, 300px)" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+        </div>
+        <figcaption><span class="num" aria-hidden="true">02</span> <span data-field="story.items.1.caption"></span></figcaption>
+      </figure>
+      <figure class="shelf-card" data-step="card" data-a="settle" data-i="2">
+        <div class="photo-slot" data-slot="story_3">
+          <img data-photo="story_3" src="img/ph_portrait-640.webp" alt="" data-attr-alt="{story.items.2.caption}" sizes="min(66vw, 300px)" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+        </div>
+        <figcaption><span class="num" aria-hidden="true">03</span> <span data-field="story.items.2.caption"></span></figcaption>
+      </figure>
+    </div>
+    <img class="shelf-plank" src="img/shelf-600.webp" srcset="img/shelf-600.webp 600w, img/shelf-1200.webp 1200w" sizes="100vw" alt="">
+    <div class="shelf-controls">
+      <button type="button" data-shelf-prev aria-label="Previous photo" data-copy-attr="aria-label:shelf_previous">‹</button>
+      <span class="shelf-count" aria-hidden="true" data-shelf-count>1 / 3</span>
+      <button type="button" data-shelf-next aria-label="Next photo" data-copy-attr="aria-label:shelf_next">›</button>
+    </div>
+  </section>
+  <footer class="signature story-next" data-scene="story-next">
+    <img class="foot-bow" src="img/bow-240.webp" srcset="img/bow-240.webp 240w, img/bow-480.webp 480w" sizes="120px" alt="" loading="lazy" data-step="names">
+    <p class="sig-names" data-field="name_display" data-step="names" data-i="1"></p>
+    <p data-step="links" data-if="!thank_you_hides_details"><a class="btn btn-ghost" href="details.html"><span data-copy="day_title">The Day</span> <span aria-hidden="true">→</span></a></p>
+    <p data-step="links" data-if="thank_you_hides_details"><a class="btn btn-ghost" href="home.html"><span data-copy="home_link">Home</span></a></p>
+  </footer>
+</main>
+<nav class="site-nav" aria-label="Wedding pages">
+  <ul>
+    <li><a href="home.html"><span data-copy="nav_home">Home</span></a></li>
+    <li data-optional="our_story"><a href="story.html" aria-current="page"><span data-copy="nav_story">Story</span></a></li>
+    <li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on" data-copy="nav_details">Details</span><span data-if="thank_you_on" data-copy="nav_day">The Day</span></a></li>
+    <li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>

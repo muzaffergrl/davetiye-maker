@@ -1,0 +1,117 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Isabelle",
+      "full_name": "Isabelle Marie Laurent"
+    },
+    {
+      "display_name": "Julian",
+      "full_name": "Julian Everett Hale"
+    }
+  ],
+  "name_display": "Isabelle & Julian",
+  "initials": "I&J",
+  "host_line": "Together with their families",
+  "date": "2027-11-13",
+  "ceremony_time": "17:00",
+  "timezone": "America/New_York",
+  "venue": {
+    "name": "Halvern House",
+    "city": "New York",
+    "region": "New York",
+    "country": "USA",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "The ceremony",
+      "time": "17:00",
+      "location": "The Amethyst Salon"
+    },
+    {
+      "label": "Cocktail Hour",
+      "time": "18:00",
+      "location": "The Mirrored Gallery"
+    },
+    {
+      "label": "Dinner & dancing",
+      "time": "19:30",
+      "location": "The Grand Ballroom"
+    }
+  ],
+  "dress_code": "Black tie optional",
+  "rsvp": {
+    "deadline": "2027-10-01",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Beef",
+          "Fish",
+          "Vegetarian"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "couple_clip": null,
+    "venue_image": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "One borrowed umbrella, a hundred dinners for two and a little velvet box led us to",
+    "items": [
+      {
+        "caption": "Our first dinner"
+      },
+      {
+        "caption": "A little velvet box"
+      },
+      {
+        "caption": "Yours, forever"
+      }
+    ]
+  },
+  "audio": {
+    "music": "music-box",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony."
+    },
+    {
+      "q": "Can you accommodate dietary requirements?",
+      "a": "Please tell us about your requirements in your reply."
+    }
+  ]
+}

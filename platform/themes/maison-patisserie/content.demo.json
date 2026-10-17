@@ -1,0 +1,144 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Camille",
+      "full_name": "Camille Rose Laurent"
+    },
+    {
+      "display_name": "Oliver",
+      "full_name": "Oliver James Bennett"
+    }
+  ],
+  "name_display": "Camille & Oliver",
+  "initials": "C&O",
+  "host_line": "Together with their families",
+  "date": "2027-06-12",
+  "ceremony_time": "16:00",
+  "timezone": "America/New_York",
+  "venue": {
+    "name": "The Belle Rive Orangery",
+    "city": "Newport",
+    "region": "Rhode Island",
+    "country": "United States",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony in the orangery",
+      "time": "16:00",
+      "location": "The Orangery"
+    },
+    {
+      "label": "Champagne & macarons on the lawn",
+      "time": "17:00",
+      "location": "The Rose Lawn"
+    },
+    {
+      "label": "Dinner & dancing",
+      "time": "18:30",
+      "location": "The Garden Pavilion"
+    }
+  ],
+  "dress_code": "Cocktail attire in soft pastels",
+  "rsvp": {
+    "deadline": "2027-05-01",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Herb-roasted chicken",
+          "Seared halibut",
+          "Wild mushroom risotto"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "From a shared table at a little pâtisserie to a lifetime together, our sweetest chapter begins on",
+    "items": [
+      {
+        "caption": "Coffee and croissants for two"
+      },
+      {
+        "caption": "A question over macarons"
+      },
+      {
+        "caption": "Forever, with a ring"
+      }
+    ]
+  },
+  "meal": {
+    "served": true,
+    "courses": [
+      {
+        "title": "To begin",
+        "items": [
+          "Chilled pea and mint velouté"
+        ]
+      },
+      {
+        "title": "The main course",
+        "items": [
+          "Herb-roasted chicken",
+          "Seared halibut, beurre blanc",
+          "Wild mushroom risotto"
+        ]
+      },
+      {
+        "title": "From the pâtisserie",
+        "items": [
+          "Pistachio and rose entremets",
+          "A display of French macarons"
+        ]
+      }
+    ],
+    "note": "Please tell us about any allergies in your reply."
+  },
+  "audio": {
+    "music": "garden-waltz",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony."
+    },
+    {
+      "q": "Will there be dessert for guests with allergies?",
+      "a": "Yes. Tell us about your allergies in your reply and our pâtissier will prepare something just for you."
+    }
+  ]
+}

@@ -1,0 +1,547 @@
+{
+ "_note": "G166 build. INTERIM layers (no Maison Pâtisserie GPT part exists yet): rectangular crops of repository GPT paper/satin toned to the palette, the ivory bow toned rose and cut at its knot (see build_images.py). PAKET 5 parts in collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md replace them layer by layer.",
+ "box_base": {
+  "src_size": [
+   1024,
+   1024
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "box_base-440.webp",
+    "w": 440,
+    "h": 440,
+    "bytes": 8332
+   },
+   {
+    "file": "box_base-880.webp",
+    "w": 880,
+    "h": 880,
+    "bytes": 57100
+   }
+  ]
+ },
+ "tissue_left": {
+  "src_size": [
+   1024,
+   1024
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "tissue_left-440.webp",
+    "w": 440,
+    "h": 440,
+    "bytes": 1784
+   },
+   {
+    "file": "tissue_left-880.webp",
+    "w": 880,
+    "h": 880,
+    "bytes": 16294
+   }
+  ]
+ },
+ "tissue_right": {
+  "src_size": [
+   1024,
+   1024
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "tissue_right-440.webp",
+    "w": 440,
+    "h": 440,
+    "bytes": 1652
+   },
+   {
+    "file": "tissue_right-880.webp",
+    "w": 880,
+    "h": 880,
+    "bytes": 16508
+   }
+  ]
+ },
+ "lid": {
+  "src_size": [
+   1024,
+   1024
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "lid-440.webp",
+    "w": 440,
+    "h": 440,
+    "bytes": 8914
+   },
+   {
+    "file": "lid-880.webp",
+    "w": 880,
+    "h": 880,
+    "bytes": 50140
+   }
+  ]
+ },
+ "ribbon_n": {
+  "src_size": [
+   1024,
+   1024
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "ribbon_n-440.webp",
+    "w": 440,
+    "h": 440,
+    "bytes": 1858
+   },
+   {
+    "file": "ribbon_n-880.webp",
+    "w": 880,
+    "h": 880,
+    "bytes": 7842
+   }
+  ]
+ },
+ "ribbon_s": {
+  "src_size": [
+   1024,
+   1024
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "ribbon_s-440.webp",
+    "w": 440,
+    "h": 440,
+    "bytes": 1700
+   },
+   {
+    "file": "ribbon_s-880.webp",
+    "w": 880,
+    "h": 880,
+    "bytes": 7422
+   }
+  ]
+ },
+ "ribbon_w": {
+  "src_size": [
+   1024,
+   1024
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "ribbon_w-440.webp",
+    "w": 440,
+    "h": 440,
+    "bytes": 1854
+   },
+   {
+    "file": "ribbon_w-880.webp",
+    "w": 880,
+    "h": 880,
+    "bytes": 7436
+   }
+  ]
+ },
+ "ribbon_e": {
+  "src_size": [
+   1024,
+   1024
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "ribbon_e-440.webp",
+    "w": 440,
+    "h": 440,
+    "bytes": 1736
+   },
+   {
+    "file": "ribbon_e-880.webp",
+    "w": 880,
+    "h": 880,
+    "bytes": 7082
+   }
+  ]
+ },
+ "bow_l": {
+  "src_size": [
+   1024,
+   1024
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "bow_l-440.webp",
+    "w": 440,
+    "h": 440,
+    "bytes": 5760
+   },
+   {
+    "file": "bow_l-880.webp",
+    "w": 880,
+    "h": 880,
+    "bytes": 15026
+   }
+  ]
+ },
+ "bow_knot": {
+  "src_size": [
+   1024,
+   1024
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "bow_knot-440.webp",
+    "w": 440,
+    "h": 440,
+    "bytes": 1682
+   },
+   {
+    "file": "bow_knot-880.webp",
+    "w": 880,
+    "h": 880,
+    "bytes": 4426
+   }
+  ]
+ },
+ "bow_r": {
+  "src_size": [
+   1024,
+   1024
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "bow_r-440.webp",
+    "w": 440,
+    "h": 440,
+    "bytes": 5266
+   },
+   {
+    "file": "bow_r-880.webp",
+    "w": 880,
+    "h": 880,
+    "bytes": 13594
+   }
+  ]
+ },
+ "bow": {
+  "src_size": [
+   598,
+   382
+  ],
+  "ratio": 1.56545,
+  "files": [
+   {
+    "file": "bow-240.webp",
+    "w": 240,
+    "h": 153,
+    "bytes": 9680
+   },
+   {
+    "file": "bow-480.webp",
+    "w": 480,
+    "h": 307,
+    "bytes": 24514
+   }
+  ]
+ },
+ "card_paper": {
+  "src_size": [
+   560,
+   740
+  ],
+  "ratio": 0.75676,
+  "files": [
+   {
+    "file": "card_paper-320.webp",
+    "w": 320,
+    "h": 423,
+    "bytes": 2820
+   },
+   {
+    "file": "card_paper-560.webp",
+    "w": 560,
+    "h": 740,
+    "bytes": 15056
+   }
+  ]
+ },
+ "stage": {
+  "canvas": [
+   1024,
+   1024
+  ],
+  "objAspect": 1.0,
+  "layers": {
+   "box_base": {
+    "box_pct": [
+     5.273,
+     5.273,
+     89.453,
+     89.453
+    ],
+    "center_pct": [
+     50.0,
+     50.0
+    ]
+   },
+   "tissue_left": {
+    "box_pct": [
+     5.273,
+     5.273,
+     48.242,
+     89.453
+    ],
+    "center_pct": [
+     29.395,
+     50.0
+    ]
+   },
+   "tissue_right": {
+    "box_pct": [
+     46.484,
+     5.273,
+     48.242,
+     89.453
+    ],
+    "center_pct": [
+     70.605,
+     50.0
+    ]
+   },
+   "lid": {
+    "box_pct": [
+     3.125,
+     3.125,
+     93.75,
+     93.75
+    ],
+    "center_pct": [
+     50.0,
+     50.0
+    ]
+   },
+   "bow_l": {
+    "box_pct": [
+     21.191,
+     30.371,
+     24.805,
+     36.523
+    ],
+    "center_pct": [
+     33.594,
+     48.633
+    ]
+   },
+   "bow_knot": {
+    "box_pct": [
+     45.996,
+     38.672,
+     8.301,
+     10.352
+    ],
+    "center_pct": [
+     50.146,
+     43.848
+    ]
+   },
+   "bow_r": {
+    "box_pct": [
+     54.297,
+     31.641,
+     24.414,
+     35.254
+    ],
+    "center_pct": [
+     66.504,
+     49.268
+    ]
+   }
+  },
+  "card": {
+   "box_pct": [
+    22.656,
+    13.867,
+    54.688,
+    72.266
+   ],
+   "aspect": "560/740"
+  },
+  "knot_cols": [
+   471,
+   556
+  ],
+  "bow_cut_overlap": 0.0
+ },
+ "bg_page": {
+  "src_size": [
+   1024,
+   1536
+  ],
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "bg_page-640.webp",
+    "w": 640,
+    "h": 960,
+    "bytes": 6384
+   },
+   {
+    "file": "bg_page-1024.webp",
+    "w": 1024,
+    "h": 1536,
+    "bytes": 35852
+   }
+  ]
+ },
+ "bg_tile": {
+  "src_size": [
+   640,
+   640
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "bg_tile-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 11286
+   }
+  ]
+ },
+ "shelf": {
+  "src_size": [
+   1200,
+   44
+  ],
+  "ratio": 27.27273,
+  "files": [
+   {
+    "file": "shelf-600.webp",
+    "w": 600,
+    "h": 22,
+    "bytes": 1522
+   },
+   {
+    "file": "shelf-1200.webp",
+    "w": 1200,
+    "h": 44,
+    "bytes": 5864
+   }
+  ]
+ },
+ "accent_1": {
+  "src_size": [
+   314,
+   325
+  ],
+  "ratio": 0.96615,
+  "files": [
+   {
+    "file": "accent_1-200.webp",
+    "w": 200,
+    "h": 207,
+    "bytes": 6096
+   }
+  ]
+ },
+ "ph_portrait": {
+  "src_size": [
+   640,
+   800
+  ],
+  "ratio": 0.8,
+  "files": [
+   {
+    "file": "ph_portrait-640.webp",
+    "w": 640,
+    "h": 800,
+    "bytes": 1270
+   }
+  ]
+ },
+ "ph_wide": {
+  "src_size": [
+   640,
+   427
+  ],
+  "ratio": 1.49883,
+  "files": [
+   {
+    "file": "ph_wide-640.webp",
+    "w": 640,
+    "h": 427,
+    "bytes": 726
+   }
+  ]
+ },
+ "placeholders": {
+  "portrait": "ph_portrait-640.webp",
+  "wide": "ph_wide-640.webp"
+ },
+ "og": {
+  "src_size": [
+   1200,
+   630
+  ],
+  "crop": [
+   0,
+   0,
+   1200,
+   630
+  ],
+  "align": "interim",
+  "file": "og-1200x630.jpg",
+  "bytes": 76236
+ },
+ "favicon": {
+  "src_box": [
+   217,
+   311,
+   590,
+   374
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.04,
+  "file": "favicon.png",
+  "bytes": 20916
+ },
+ "sources": {
+  "box_base": "interim",
+  "tissue_left": "interim",
+  "tissue_right": "interim",
+  "lid": "interim",
+  "ribbon_cross": "interim",
+  "bow_l": "interim (14 accent_3 toned rose, cut at the knot)",
+  "bow_knot": "interim (14 accent_3 toned rose, cut at the knot)",
+  "bow_r": "interim (14 accent_3 toned rose, cut at the knot)",
+  "card_small": "interim",
+  "bg_page": "interim",
+  "bg_tile": "interim",
+  "shelf": "interim",
+  "accent_1": "interim (14 accent_1, pearl body only)",
+  "web_hero": "interim"
+ },
+ "checks": {
+  "green": {},
+  "bow_cut_overlap": 0.0
+ },
+ "theme_check": {
+  "particles": ".accent-layer",
+  "first_screen": {
+   "landscape": false,
+   "names_min_px": 32
+  }
+ },
+ "bytes_total": 587832
+}

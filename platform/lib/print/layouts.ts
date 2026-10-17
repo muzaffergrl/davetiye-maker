@@ -244,6 +244,40 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
       back: { bg: '#11120F', images: [sealAt('top')] },
     },
   },
+  // 23: interim until the PAKET 6 grounds arrive (GPT_PROMPTS.md): both sides on the website's aubergine velvet ground
+  // (img/bg_velvet, toned from a GPT texture by the theme build) with the satin bow (img/closure) — at the top of the
+  // front above the text, and at the bottom of the back under the schedule and QR. Text in champagne, away from the bow.
+  'velvet-jewel-box': {
+    collection: '23_Velvet_Jewel_Box',
+    sources: { velvet: 'platform/themes/velvet-jewel-box/img/bg_velvet-1024.webp', bow: 'platform/themes/velvet-jewel-box/img/closure-236.webp' },
+    fonts: gf('family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Pinyon+Script'),
+    script: "'Pinyon Script', cursive", serif: "'Bodoni Moda', Georgia, serif",
+    ink: '#F8EDE0', accent: '#E8D3B0', front: [27, 13, 14, 13], back: [12, 12, 22, 12],
+    composed: {
+      front: { bg: cover('velvet'), images: [{ src: 'bow', style: 'top:7%;left:50%;width:24%;transform:translateX(-50%)' }] },
+      back: { bg: cover('velvet'), images: [{ src: 'bow', style: 'bottom:5%;left:50%;width:18%;transform:translateX(-50%)' }] },
+    },
+  },
+  // 24 (G162, interim until the PAKET 6 grounds in GPT_PROMPTS.md arrive): the ivory programme paper with a band of the
+  // peacock velvet across the top (and the foot of the front), both cut by the theme build from GPT textures; the text
+  // sits on the plain paper between the bands.
+  'grand-theatre-premiere': {
+    collection: '24_Grand_Theatre_Premiere',
+    sources: { paper: 'platform/themes/grand-theatre-premiere/img/paper-1024.webp', velvet: 'platform/themes/grand-theatre-premiere/img/velvet-640.webp' },
+    fonts: gf('family=Abril+Fatface&family=Playfair+Display:ital,wght@0,400;0,600;1,400'),
+    script: "'Abril Fatface', Georgia, serif", serif: "'Playfair Display', Georgia, serif",
+    ink: '#1E2626', accent: '#6E5119', front: [19, 12, 15, 12], back: [17, 12, 8, 12],
+    composed: {
+      front: {
+        bg: cover('paper'),
+        images: [
+          { src: 'velvet', style: 'top:-4%;left:-4%;width:108%;height:15%;object-fit:cover' },
+          { src: 'velvet', style: 'bottom:-4%;left:-4%;width:108%;height:12%;object-fit:cover;transform:scaleY(-1)' },
+        ],
+      },
+      back: { bg: cover('paper'), images: [{ src: 'velvet', style: 'top:-4%;left:-4%;width:108%;height:13%;object-fit:cover' }] },
+    },
+  },
   // 25 (G163): composed until the PAKET 6 print backgrounds arrive (collections/25_Orient_Express_Voyage/assets/gpt/
   // GPT_PROMPTS.md: print/invitation_front.png, print/invitation_back.png). Interim front = the website's ivory paper (the
   // interim poster tones were not empty enough for the G149 free-area check); back = the same ivory with the boarding stamp.
@@ -279,24 +313,18 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
       back: { bg: 'url(rice.webp) 0 0 / 2.4in repeat', images: [{ src: 'washi', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover' }] },
     },
   },
-  // 24 (G162, interim until the PAKET 6 grounds in GPT_PROMPTS.md arrive): the ivory programme paper with a band of the
-  // peacock velvet across the top (and the foot of the front), both cut by the theme build from GPT textures; the text
-  // sits on the plain paper between the bands.
-  'grand-theatre-premiere': {
-    collection: '24_Grand_Theatre_Premiere',
-    sources: { paper: 'platform/themes/grand-theatre-premiere/img/paper-1024.webp', velvet: 'platform/themes/grand-theatre-premiere/img/velvet-640.webp' },
-    fonts: gf('family=Abril+Fatface&family=Playfair+Display:ital,wght@0,400;0,600;1,400'),
-    script: "'Abril Fatface', Georgia, serif", serif: "'Playfair Display', Georgia, serif",
-    ink: '#1E2626', accent: '#6E5119', front: [19, 12, 15, 12], back: [17, 12, 8, 12],
+  // 28 (G166): composed until its card parts arrive (GPT_PROMPTS.md PAKET 6) — front = the website's cream paper with the
+  // rose satin bow at the top; back = the same paper with the bow small at the top. Both images come from the theme
+  // build (interim crops of repository GPT pictures, see themes/maison-patisserie/build_images.py).
+  'maison-patisserie': {
+    collection: '28_Maison_Patisserie',
+    sources: { paper: 'platform/themes/maison-patisserie/img/bg_page-1024.webp', bow: 'platform/themes/maison-patisserie/img/bow-480.webp' },
+    fonts: gf('family=Italiana&family=Parisienne'),
+    script: "'Parisienne', cursive", serif: "'Italiana', Georgia, serif",
+    ink: '#3E3A32', accent: '#9B4F5A', front: [27, 13, 12, 13], back: [21, 12, 10, 12],
     composed: {
-      front: {
-        bg: cover('paper'),
-        images: [
-          { src: 'velvet', style: 'top:-4%;left:-4%;width:108%;height:15%;object-fit:cover' },
-          { src: 'velvet', style: 'bottom:-4%;left:-4%;width:108%;height:12%;object-fit:cover;transform:scaleY(-1)' },
-        ],
-      },
-      back: { bg: cover('paper'), images: [{ src: 'velvet', style: 'top:-4%;left:-4%;width:108%;height:13%;object-fit:cover' }] },
+      front: { bg: cover('paper'), images: [{ src: 'bow', style: 'top:5%;left:50%;width:42%;transform:translateX(-50%)' }] },
+      back: { bg: cover('paper'), images: [{ src: 'bow', style: 'top:4%;left:50%;width:24%;transform:translateX(-50%)' }] },
     },
   },
 };

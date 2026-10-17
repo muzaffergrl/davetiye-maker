@@ -46,6 +46,10 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   'crimson-rose-atelier': { music: 'evening-strings', opening: [[0, 'seal'], [400, 'paper'], [1600, 'slide'], [3000, 'chime']] },
   // Nocturne Lake Estate: gold seal lifts off (closure) · flap turns up (lift) · card rises (rise) · forward
   'nocturne-lake-estate': { music: 'evening-strings', opening: [[0, 'seal'], [450, 'paper'], [1700, 'slide'], [3000, 'chime']] },
+  // Velvet Jewel Box: satin bow slides off (closure) · lid on its hinge (lid) · card rises (rise) · forward
+  'velvet-jewel-box': { music: 'music-box', opening: [[0, 'ribbon'], [650, 'clasp'], [1900, 'slide'], [3100, 'chime']] },
+  // Maison Pâtisserie: bow unties (closure) · lid lifts (lid) · tissue parts (tissue) · card lifts (rise) · forward
+  'maison-patisserie': { music: 'garden-waltz', opening: [[180, 'ribbon'], [1100, 'paper'], [1850, 'paper'], [2500, 'slide'], [3200, 'chime']] },
   // Orient Express Voyage: strap buckle (closure) · cover swings open (open) · ticket slides out (rise) · forward
   'orient-express-voyage': { music: 'evening-strings', opening: [[0, 'clasp'], [600, 'page'], [1500, 'slide'], [2600, 'chime']] },
   // Kintsugi & Washi: band slides off (closure) · top · bottom · left · right fold (one paper sound each) · card lifts (rise) · forward

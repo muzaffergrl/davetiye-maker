@@ -1,0 +1,347 @@
+{
+ "_note": "G161 interim build: stand-in box pieces cut from toned GPT textures of 17/14/01 (see build_images.py); the real velvet box is ordered in GPT_PROMPTS.md (W2.1–W2.4).",
+ "box_lid": {
+  "src_size": [
+   732,
+   192
+  ],
+  "ratio": 3.8125,
+  "files": [
+   {
+    "file": "box_lid-440.webp",
+    "w": 440,
+    "h": 115,
+    "bytes": 6552
+   },
+   {
+    "file": "box_lid-732.webp",
+    "w": 732,
+    "h": 192,
+    "bytes": 11620
+   }
+  ]
+ },
+ "box_base": {
+  "src_size": [
+   716,
+   261
+  ],
+  "ratio": 2.7433,
+  "files": [
+   {
+    "file": "box_base-440.webp",
+    "w": 440,
+    "h": 160,
+    "bytes": 6190
+   },
+   {
+    "file": "box_base-716.webp",
+    "w": 716,
+    "h": 261,
+    "bytes": 11094
+   }
+  ]
+ },
+ "box_inner": {
+  "src_size": [
+   680,
+   360
+  ],
+  "ratio": 1.88889,
+  "files": [
+   {
+    "file": "box_inner-440.webp",
+    "w": 440,
+    "h": 233,
+    "bytes": 43386
+   },
+   {
+    "file": "box_inner-680.webp",
+    "w": 680,
+    "h": 360,
+    "bytes": 99940
+   }
+  ]
+ },
+ "box_well": {
+  "src_size": [
+   704,
+   68
+  ],
+  "ratio": 10.35294,
+  "files": [
+   {
+    "file": "box_well-440.webp",
+    "w": 440,
+    "h": 42,
+    "bytes": 7666
+   },
+   {
+    "file": "box_well-704.webp",
+    "w": 704,
+    "h": 68,
+    "bytes": 16666
+   }
+  ]
+ },
+ "closure": {
+  "src_size": [
+   236,
+   150
+  ],
+  "ratio": 1.57333,
+  "files": [
+   {
+    "file": "closure-160.webp",
+    "w": 160,
+    "h": 102,
+    "bytes": 6376
+   },
+   {
+    "file": "closure-236.webp",
+    "w": 236,
+    "h": 150,
+    "bytes": 10292
+   }
+  ]
+ },
+ "card_paper": {
+  "src_size": [
+   860,
+   430
+  ],
+  "ratio": 2.0,
+  "files": [
+   {
+    "file": "card_paper-480.webp",
+    "w": 480,
+    "h": 240,
+    "bytes": 15204
+   },
+   {
+    "file": "card_paper-860.webp",
+    "w": 860,
+    "h": 430,
+    "bytes": 66716
+   }
+  ]
+ },
+ "stage": {
+  "canvas": [
+   1024,
+   1536
+  ],
+  "box": [
+   146,
+   540,
+   732,
+   689
+  ],
+  "aspect": 1.0624,
+  "closed_obj": {
+   "box_pct": [
+    0.0,
+    34.253,
+    100.0,
+    65.747
+   ],
+   "aspect": 1.6159
+  },
+  "above_closed_frac_of_width": 0.3224,
+  "seam_row": 968,
+  "hinge_row": 900,
+  "source": "interim",
+  "lid": {
+   "box_pct": [
+    0.0,
+    34.253,
+    100.0,
+    27.866
+   ]
+  },
+  "base": {
+   "box_pct": [
+    1.093,
+    62.119,
+    97.814,
+    37.881
+   ]
+  },
+  "inner": {
+   "box_pct": [
+    3.552,
+    0.0,
+    92.896,
+    52.25
+   ]
+  },
+  "well": {
+   "box_pct": [
+    1.913,
+    52.25,
+    96.175,
+    9.869
+   ]
+  },
+  "card": {
+   "box_pct": [
+    20.628,
+    65.602,
+    58.743,
+    31.205
+   ],
+   "rise_pct": -199.07
+  },
+  "closure": {
+   "box_pct": [
+    33.88,
+    37.3,
+    32.24,
+    21.771
+   ]
+  }
+ },
+ "bg_velvet": {
+  "src_size": [
+   1024,
+   1536
+  ],
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "bg_velvet-640.webp",
+    "w": 640,
+    "h": 960,
+    "bytes": 3706
+   },
+   {
+    "file": "bg_velvet-1024.webp",
+    "w": 1024,
+    "h": 1536,
+    "bytes": 7146
+   }
+  ]
+ },
+ "bg_satin": {
+  "src_size": [
+   1536,
+   1024
+  ],
+  "ratio": 1.5,
+  "files": [
+   {
+    "file": "bg_satin-768.webp",
+    "w": 768,
+    "h": 512,
+    "bytes": 7948
+   },
+   {
+    "file": "bg_satin-1280.webp",
+    "w": 1280,
+    "h": 853,
+    "bytes": 16316
+   }
+  ]
+ },
+ "ph_portrait": {
+  "src_size": [
+   640,
+   800
+  ],
+  "ratio": 0.8,
+  "files": [
+   {
+    "file": "ph_portrait-640.webp",
+    "w": 640,
+    "h": 800,
+    "bytes": 2874
+   }
+  ]
+ },
+ "ph_story": {
+  "src_size": [
+   640,
+   800
+  ],
+  "ratio": 0.8,
+  "files": [
+   {
+    "file": "ph_story-640.webp",
+    "w": 640,
+    "h": 800,
+    "bytes": 2874
+   }
+  ]
+ },
+ "ph_wide": {
+  "src_size": [
+   640,
+   360
+  ],
+  "ratio": 1.77778,
+  "files": [
+   {
+    "file": "ph_wide-640.webp",
+    "w": 640,
+    "h": 360,
+    "bytes": 1732
+   }
+  ]
+ },
+ "placeholders": {
+  "hero_portrait": "ph_portrait-640.webp",
+  "story": "ph_story-640.webp",
+  "venue": "ph_wide-640.webp"
+ },
+ "og": {
+  "src_size": [
+   1200,
+   630
+  ],
+  "crop": [
+   0,
+   0,
+   1200,
+   630
+  ],
+  "align": "interim",
+  "size": [
+   1200,
+   630
+  ],
+  "file": "og-1200x630.jpg",
+  "bytes": 44505
+ },
+ "favicon": {
+  "src_box": [
+   0,
+   0,
+   236,
+   150
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.04,
+  "file": "favicon.png",
+  "bytes": 25825
+ },
+ "checks": {
+  "green": {}
+ },
+ "theme_check": {
+  "particles": ".accent-layer",
+  "first_screen": {
+   "landscape": false,
+   "names_min_px": 32
+  },
+  "backdrop": {
+   "edge_max": 2.2,
+   "dark_max": 0.05,
+   "dark_below": 0,
+   "light_above": 120
+  }
+ },
+ "bytes_total": 535954
+}

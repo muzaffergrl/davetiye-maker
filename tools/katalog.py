@@ -404,6 +404,18 @@ EK_TEMALAR = [
     dict(no=22, klasor="22_Nocturne_Lake_Estate", ad="Nocturne Lake Estate"),
     # docs/24 dalgası (23–28): eksenler + hareket imzası yazılı; `kontrol` bunları D'ye ve birbirine karşı ayırt eder
     # (ek_ayirt). Üreteçlere (yaz, paket5, gorev5, ozet) girmez: koleksiyon dosyaları elle yazıldı.
+    dict(no=23, klasor="23_Velvet_Jewel_Box", ad="Velvet Jewel Box",
+         zarf="Patlıcan moru kadife yüzük kutusu; saten fiyonk kayar, kapak menteşeden 3B açılır, saten astar ve kart yükselir.",
+         foto="3B silindir karusel (mücevher vitrini gibi döner; sürükle, kaydır, ok tuşları).",
+         dekor="Saten kurdele, inci, yüzük, şampanya saten kıvrımlar", teknik="fotogerçekçi ürün çekimi",
+         font=("Pinyon Script", "Bodoni Moda"), palet_adi="aubergine-champagne",
+         hareket="Menteşe 3B açılış, saten ışık süpürmesi, varak parıltılı başlık, silindir karusel, saten perde sayfa geçişi"),
+    dict(no=24, klasor="24_Grand_Theatre_Premiere", ad="Grand Theatre Premiere",
+         zarf="Tavus mavisi kadife sahne perdesi, antik altın proscenium kemer; iki kanat ağır kıvrımlarla, kademeli aralanır, spot ışığı sahneyi tarar.",
+         foto="Sahne çerçevesinde 'perde arası' kartları (Scene I–III); spot ışığı dokunulanı aydınlatır.",
+         dekor="Kadife perde, püskül, altın proscenium kemer, program (playbill) kâğıdı", teknik="yağlı boya tiyatro afişi",
+         font=("Abril Fatface", "Playfair Display"), palet_adi="peacock-antique-gold",
+         hareket="Perde aralanması (kademeli, salınımlı), spot ışığı maskesi, program sayfası çevirme geçişi, RSVP'de bilet koçanı yırtılması"),
     dict(no=25, klasor="25_Orient_Express_Voyage", ad="Orient Express Voyage",
          zarf="Deri bilet cüzdanı, pirinç tokalı kayış; kayış çözülür, kapak soldan açılır, birinci sınıf bilet cepten kayar.",
          foto="Vagon penceresi çerçeveleri; kaydırınca fotoğraf camın ardından manzara gibi geçer.",
@@ -416,12 +428,12 @@ EK_TEMALAR = [
          dekor="Altın kintsugi damarları, washi dokuları, mürekkep fırçası darbeleri", teknik="sumi mürekkep + altın varak",
          font=("Allura", "Shippori Mincho"), palet_adi="indigo-gold-rice",
          hareket="Kat kat 3B açılma (dört kat ayrı menteşede), altın damar parıltısı, mürekkep yayılımıyla foto, süzülen altın varak pulları"),
-    dict(no=24, klasor="24_Grand_Theatre_Premiere", ad="Grand Theatre Premiere",
-         zarf="Tavus mavisi kadife sahne perdesi, antik altın proscenium kemer; iki kanat ağır kıvrımlarla, kademeli aralanır, spot ışığı sahneyi tarar.",
-         foto="Sahne çerçevesinde 'perde arası' kartları (Scene I–III); spot ışığı dokunulanı aydınlatır.",
-         dekor="Kadife perde, püskül, altın proscenium kemer, program (playbill) kâğıdı", teknik="yağlı boya tiyatro afişi",
-         font=("Abril Fatface", "Playfair Display"), palet_adi="peacock-antique-gold",
-         hareket="Perde aralanması (kademeli, salınımlı), spot ışığı maskesi, program sayfası çevirme geçişi, RSVP'de bilet koçanı yırtılması"),
+    dict(no=28, klasor="28_Maison_Patisserie", ad="Maison Patisserie",
+         zarf="Fıstık yeşili pasta kutusu (üstten), gül saten fiyonk; fiyonk çözülür, kurdele kolları kayar, kapak kalkar, ipek kâğıt aralanır, kart öne gelir.",
+         foto="Pastane vitrini rafları: fotoğraflar cam rafta durur, kaydırılır (sürükle, yasla, ok tuşları); ortadaki öne çıkar.",
+         dekor="Makaron, tül, şeker inci, altın kenar tabak", teknik="pastel suluboya + fotogerçekçi pasta",
+         font=("Italiana", "Parisienne"), palet_adi="pistachio-rose-cream",
+         hareket="Fiyonk çözülmesi (iki ilmek ayrılır, düğüm düşer), kapak kalkışı, ipek kâğıt perde gibi aralanır; raf kaydırma bileşeni; menü vitrin rafları; RSVP makaron renkli çipler; gönderimde şeker inci yağmuru."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

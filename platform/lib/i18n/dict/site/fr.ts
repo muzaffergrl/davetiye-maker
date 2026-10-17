@@ -228,6 +228,13 @@ const dict: Dict = {
   'View our photographs': 'Voir nos photos',
   'at {time}': 'à {time}',
   'invite you to celebrate with them': 'vous invitent à célébrer avec eux',
+  'Open the box again': 'Rouvrir l’écrin',
+  'Treasured moments': 'Moments précieux',
+  // G166 Maison Pâtisserie
+  'A sweet invitation': 'Une douce invitation',
+  'Our sweetest moments': 'Nos plus doux moments',
+  'Tap to open the box': 'Touchez pour ouvrir la boîte',
+  'Untie the bow again': 'Dénouer le ruban à nouveau',
   // G163 Orient Express Voyage
   'All aboard': 'En voiture',
   'Board': 'Embarquer',

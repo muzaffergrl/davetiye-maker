@@ -83,8 +83,10 @@ PAKET 6 gelince `card`/`back` kaynaklarına geçer.
   "Tap to raise the curtain" — ölçülsün; önceden yalnız uyarı veriyordu).
 
 ### Kontroller (Linux, Node 22, `platform/`)
-- (rebase sonrası) `npm ci` ✓ · `rm -rf .next && npx tsc --noEmit` ✓ · `I18N_STRICT=1 npm test` **1453 test: 1451 geçti, 0 hata**,
-  2 atlandı (build çıktısı isteyen iki test) · `npm run build` ✓ + trace-check (26 tema) · build'den sonra
+- (koordinatör dalı `a8ccabf` ile birleşme sonrası: 23 Velvet Jewel Box ve 28 Maison Pâtisserie dahil; coming listesi tasarım
+  sırasında, `g138-extras` 27 tema, katalog `kontrol` 5 ek kayıt ≥4 eksen) `npm ci` ✓ · `rm -rf .next && npx tsc --noEmit` ✓ ·
+  `I18N_STRICT=1 npm test` **1484 test: 1482 geçti, 0 hata**, 2 atlandı (build çıktısı isteyen iki test); G149 baskı testi 5×7 ve A5
+  27 tasarımda geçti · `npm run build` ✓ + trace-check (28 tema) · theme-check `--stress` yeniden 112/0 · g051 44/44 · build'den sonra
   `tests/marketing-build.test.ts` 2/2 (rebase öncesi tabanda Crimson'un ES/DE/FR meta açıklaması 160'ı aşıyordu; koordinatör
   dalında düzeltilmiş). Grand Theatre'nin meta açıklaması 5 dilde 145–156 karakter (live olunca bu test kapsar).
 - `theme-check --theme grand-theatre-premiere --stress --compare none`: **112 geçti, 0 hata, 1 uyarı** (PAKET 2 yok → 03 örnek

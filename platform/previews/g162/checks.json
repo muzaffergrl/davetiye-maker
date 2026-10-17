@@ -63,7 +63,7 @@
   "home @375×553 (stress record): names 32 px (≥ 32); the first screen ends at 415, above the nav (top 492)",
   "home@375×553 (stress record): no overflow, 37 fields = content record, 39 design texts, title ok, images loaded, no painted card, 2 photo slots user",
   "touch targets ≥ 44 px: envelope Skip 59×44, home \"Replay the envelope\" 162×44, rsvp \"Replay the envelope\" 130×44",
-  "envelope → /charlotte-and-theodore/home in 3622 ms, card transition flag set",
+  "envelope → /charlotte-and-theodore/home in 3591 ms, card transition flag set",
   "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
   "home first scene (home-hero): sequential entrance finished (4 steps)",
   "countdown target from the platform: 2027-10-16 17:00 America/New_York = 2027-10-16 21:00 UTC",
@@ -85,7 +85,7 @@
   "per-site session keys: another site on the same origin starts with a closed envelope",
   "countdown after the start (2027-10-16T22:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
   "countdown after the start (2027-10-21T21:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
-  "prefers-reduced-motion: straight to home without animation (154 ms), everything visible",
+  "prefers-reduced-motion: straight to home without animation (149 ms), everything visible",
   "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
   "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
   "index@390 (changed content): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
@@ -117,7 +117,7 @@
   "home first view (390×844, DPR 3, placeholders): 242 KB",
   "index first view (390×844, DPR 3, seeded sample photos): 584 KB",
   "home first view (390×844, DPR 3, seeded sample photos): 536 KB",
-  "recording: ../../../../tmp/claude-0/-home-user-davetiye-maker/f38ec095-ecf0-5617-b76c-20723415c08b/scratchpad/tc5/opening_390x844.mp4 (2543 KB, lead-in 0.50 s cut, first frame mean 19,48,48) — tap → opening → home → story → details"
+  "recording: ../../../../tmp/claude-0/-home-user-davetiye-maker/f38ec095-ecf0-5617-b76c-20723415c08b/scratchpad/tc6/opening_390x844.mp4 (2447 KB, lead-in 0.47 s cut, first frame mean 19,48,48) — tap → opening → home → story → details"
  ],
  "info": {
   "setup": {
@@ -205,7 +205,7 @@
      },
      {
       "box": "eyebrow tap-hint",
-      "edge": 0.31,
+      "edge": 0.32,
       "dark": 0
      }
     ]
@@ -527,7 +527,7 @@
     "names": 32
    }
   ],
-  "envelope_to_home_ms": 3622,
+  "envelope_to_home_ms": 3591,
   "home_card_first_frame": {
    "opacity": 1,
    "from": true
@@ -685,7 +685,7 @@
     126398
    ],
    [
-    "/media/ddf93c90-a787-4ecd-9a25-2b303d66ede2/1d80c5899f4cae9ff531644698c03bbd-640w.jpg",
+    "/media/fdb166a5-804d-40d8-a9a8-ea93f5c584ee/945643093980c0917acf5416cd6261fe-640w.jpg",
     93978
    ],
    [
@@ -712,11 +712,11 @@
   "first_view_home_kb_photos": 536,
   "first_view_home_files_photos": [
    [
-    "/media/ddf93c90-a787-4ecd-9a25-2b303d66ede2/1d80c5899f4cae9ff531644698c03bbd-1024w.jpg",
+    "/media/fdb166a5-804d-40d8-a9a8-ea93f5c584ee/945643093980c0917acf5416cd6261fe-1024w.jpg",
     198076
    ],
    [
-    "/media/ddf93c90-a787-4ecd-9a25-2b303d66ede2/00f403117f7d77f6c8e545de5f2f661b-640w.jpg",
+    "/media/fdb166a5-804d-40d8-a9a8-ea93f5c584ee/258dfa61f52558db1ec63ec05689ceed-640w.jpg",
     103538
    ],
    [
@@ -744,9 +744,9 @@
     18914
    ]
   ],
-  "video_kb": 2543,
+  "video_kb": 2447,
   "video_first_frame": {
-   "lead_in_s": 0.5,
+   "lead_in_s": 0.47,
    "mean_rgb": [
     19,
     48,
