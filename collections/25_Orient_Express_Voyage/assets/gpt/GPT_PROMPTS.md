@@ -94,9 +94,10 @@ Kontrol: yalnız cep önü; üst kenar düz ve net (bilet bunun arkasından çı
 **Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/bg_station.png` · 1024×1536 · opak
 
 ```
-A vertical phone-screen background in vintage travel-poster lithograph style: a grand railway station hall at night seen from the platform, deep bottle-green shadows (#11241B), a warm brass glow from hanging lamps at the top edge, faint iron arches and a sleeping carriage silhouette blurred at the far left and right edges. The whole central area (from 10% to 85% of the height, 70% of the width) stays calm, dark, nearly flat green and EMPTY so ivory text and the ticket wallet read on it. No people, no signs, no clock face with numbers, no text.
+A vertical phone-screen background in vintage travel-poster lithograph style: a grand railway station hall at night seen from the platform, deep bottle-green shadows (#11241B), a warm brass glow from hanging lamps only along the very top edge (the top 5% of the image), faint iron arches and a sleeping carriage silhouette blurred at the far left and right edges. The whole central area (from 7% to 92% of the height, the middle 70% of the width) stays calm, dark (deep green, well below mid-grey), nearly flat with only a very fine, low-contrast grain, and EMPTY so ivory text and the ticket wallet read on it. No people, no signs, no clock face with numbers, no text.
 ```
-Kontrol: orta sakin ve koyu yeşil; dekor yalnız kenarlarda; yazı/tabela yok.
+Kontrol: orta (%7–92) sakin, koyu yeşil ve çok ince grenli (ivory yazı üstünde — theme-check zarf zemini ölçüsü: kenar
+≤ 2,2, açık piksel ≤ %5); lamba ışığı yalnız en üst %5'te; dekor yalnız kenarlarda; yazı/tabela yok.
 
 #### W2.7 Birinci sınıf bilet (portre penceresi #00FF00)
 **Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/ticket.png` · 1024×1536 · **Şeffaf zemin**
