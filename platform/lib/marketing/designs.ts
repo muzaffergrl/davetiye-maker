@@ -162,6 +162,31 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     llmsLine: 'a vintage rail journey: a leather ticket wallet opens to a first-class ticket; a route line draws across an antique map; carriage-window photos.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
+  // G165 (coming): written against the theme as built; the doors and tiles are interim pieces until the GPT parts arrive.
+  'riad-lantern-nights': {
+    id: 'riad-lantern-nights',
+    collection: '27_Riad_Lantern_Nights',
+    demoCouple: 'Leila & Adrian',
+    style: msg('A lantern-lit riad: cedar double doors, zellige tiles in teal and saffron, and photos in tall windows'),
+    metaDescription: msg('A riad wedding website: cedar doors swing open into lantern light, zellige tiles and photos in tall windows. Personalize it in your online editor.'),
+    intro: msg('Teal walls, saffron lantern light and warm cedar. Your names wait behind a pair of doors; inside, the invitation, a row of zellige tiles and your photos in tall windows.'),
+    opening: msg('Your guests tap the door. Its two cedar leaves swing into the courtyard, lantern light pours out and a separate ivory card with your photo comes forward through the doorway. The card then opens into your home page.'),
+    pages: {
+      home: msg('Your portrait and names on an ivory card in the lantern light, then a row of zellige tiles, the invitation, a countdown and calendar links.'),
+      story: msg('Three tall windows: each photo comes out of the dark as the lantern light reaches it. Each opens larger in a quiet viewer.'),
+      details: msg('The evening hour by hour on the teal wall, a venue photo in warm light, with an optional map and directions, calendar links, dress code and questions and answers.'),
+      rsvp: msg('A reply panel under the lantern’s glow, with your reply-by date and the shared configurable reply form.'),
+    },
+    palette: [
+      { name: msg('Night teal'), hex: '#0F2F31' },
+      { name: msg('Saffron'), hex: '#E3A54A' },
+      { name: msg('Brass'), hex: '#C9A35B' },
+      { name: msg('Cedar'), hex: '#3A2114' },
+    ],
+    fonts: ['Cinzel', 'Marcellus SC', 'Marcellus'],
+    llmsLine: 'a lantern-lit riad: cedar doors swing open into the courtyard, zellige tiles in teal and saffron and photos in tall windows.',
+    relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
+  },
   'maison-patisserie': {
     id: 'maison-patisserie',
     collection: '28_Maison_Patisserie',
