@@ -41,4 +41,7 @@ kapatmak + her biri için regresyon testi. Koordinatör: session_01HP9ZrJ8mhZnig
 - `platform/tests/g174-security.test.ts` (yeni, 6 test), `platform/tests/claim.test.ts` (1 satır).
 
 ### Kontroller
-KONTROLLER_YER_TUTUCU
+`cd platform && npm ci && rm -rf .next && npx tsc --noEmit && I18N_STRICT=1 npm test && npm run build` — tsc temiz; 1644 test,
+1642 geçti, 0 hata, 2 atlandı (build çıktısı gerektiren mevcut testler); build + trace-check yeşil. `origin/claude/zealous-fermi-hy1o40`
+birleştirildikten sonra (yalnız durum/görev dosyaları geldi, `platform/` değişmedi) aynı komutlar yeniden çalıştı: aynı sonuç.
+Yeni `g174-security` testleri düzeltmesiz kodda kırılıyor (yeni modül/alanlar yok → yüklenmiyor).
