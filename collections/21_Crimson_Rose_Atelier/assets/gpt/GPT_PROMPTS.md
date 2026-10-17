@@ -33,7 +33,7 @@ Save: `collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png`
 Use case: product-mockup. ONE isolated round champagne gold wax seal from the reference wedding invitation. A tiny embossed botanical olive sprig at its centre, luxurious real warm metal-gold wax texture, softly irregular rim, straight-on top view, soft upper-left light, no perspective. Full seal centered occupying 76 percent squarecanvas, transparentalpha background. No cast shadow, no lettering, no initials, no ribbon, no other objects, no sheet.
 
 ## couple-photo
-Save: `collections/21_Crimson_Rose_Atelier/assets/gpt/photos/couple-photo.png`
+Save: `collections/21_Crimson_Rose_Atelier/assets/gpt/photos/hero_portrait.png` (G142: renamed to the photo key; `photos/story_1.png` is the same file)
 
 Use case: photorealistic-natural. A SINGLE wide landscape elegant editorial wedding photograph of a fictional adult couple, a brunette bride with soft pinned waves and ivory lace dress and a groom with brown hair in classic black tuxedo, gently holding one another and touching foreheads on a terrace beside a quiet Italian lake at golden hour. Realistic natural skin, graceful anatomically correct hands, red roses softly blurred at the left edge, distant villas and hazy mountains, romantic intimate tasteful mood, warm film colors, shallow depth of field. Frame from waist up, leave room around heads for oval portrait crop, both centred slightly to right. 4:3 landscape. No text, no border, no watermark, no other photos, no frame. Inspired by reference mood, unique fictional people.
 

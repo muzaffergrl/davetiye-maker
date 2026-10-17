@@ -44,6 +44,8 @@ export interface DesignSound {
 export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   // Crimson Rose Atelier: botanical seal, flap, card, chime.
   'crimson-rose-atelier': { music: 'evening-strings', opening: [[0, 'seal'], [400, 'paper'], [1600, 'slide'], [3000, 'chime']] },
+  // Nocturne Lake Estate: gold seal lifts off (closure) · flap turns up (lift) · card rises (rise) · forward
+  'nocturne-lake-estate': { music: 'evening-strings', opening: [[0, 'seal'], [450, 'paper'], [1700, 'slide'], [3000, 'chime']] },
   // 01 bow · lift · rise · forward
   'blush-garden-rose': { music: 'first-light', opening: [[200, 'ribbon'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
   // 02 wax seal (closure) · lift · rise · forward

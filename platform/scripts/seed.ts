@@ -183,6 +183,8 @@ async function main(): Promise<void> {
 
   const adapter = getDataAdapter();
   const content = JSON.parse(await fs.readFile(path.resolve(values.content!), 'utf8')) as ContentRecord;
+  // --no-photos = the placeholder state, also for a demo record that links bundled sample photos (21 Crimson, G142)
+  if (values['no-photos'] && content.media) content.media = { ...content.media, hero_portrait: null, memory_photos: [], venue_image: null };
   const info = await seedSite(adapter, {
     theme: values.theme!,
     slug: values.slug!,
