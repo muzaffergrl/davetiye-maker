@@ -21,7 +21,8 @@ npm run seed           # demo site /clara-and-julian (blush-garden-rose teması,
 npm run dev            # http://localhost:3000/clara-and-julian
 npm test               # node:test — motor, içerik, anahtar/slug, adaptör (local + blob), rotalar, RSVP, panel, düzenleme hakkı + arşiv (G060), /start, temalar, takvim, G055, satış sitesi (G061), site şifresi (G076), RSVP paneli v2 (G069), teşekkür modu (G075), seed (519 test, 2026-10-14 G075 — build varken; Windows dahil — bkz. "Windows notları")
 npm run typecheck      # tsc --noEmit
-npm run build          # next build (Turbopack) + postbuild: scripts/trace-check.cjs (Vercel paketleri tema şablonlarını taşıyor mu)
+npm run build          # prebuild: scripts/theme-assets.cjs (tema CSS/JS/görselleri → public/themes, G159) + next build (Turbopack)
+                       # + postbuild: scripts/trace-check.cjs (Vercel paketleri: şablonlar var mı, tema varlığı yok mu, bütçe)
 npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller (_sample) ve previews/*.png
 NODE_PATH=/opt/node22/lib/node_modules node scripts/theme-check.cjs --theme <id> [--stress] [--out <klasör>] [--compare w1|g035|none] [--no-video]
                        # build sonrası (G052): her tema — 5 genişlik, kısa telefonlar, akış, içerik, kart metni (uzayan kart piksel
@@ -1271,8 +1272,9 @@ kötüye kullanım tavanı), adres ipucu IP başına 120 / 15 dk. G060-fix: blob
   çeviri. Kalıcı `RateLimiter` hâlâ yok (aşağıda).
 - **Vercel dosya izleme:** temaları diskten okuyan bütün rotalar (`/[slug]…`, `/edit`, `/api/edit/…`, `/api/rsvp/[slug]`, `/start`,
   `/start/demo/…`, `/api/start…`) `next.config.ts` `outputFileTracingIncludes`'ta; G055'ten beri yalnız `themes/**/*.html` ve
-  `*.json` ile. Tema görselleri/CSS/JS yalnız tema varlık rotasına (`/themes/[theme]/[...path]`) izlenir. Ayrıntı ve
-  `trace-check` denetimleri aşağıda "Platform cilası (G055)".
+  `*.json` ile. Tema görselleri/CSS/JS **hiçbir işleve** izlenmez (G159): `npm run build` önce `public/themes/`'e kopyalar
+  (`scripts/theme-assets.cjs`), CDN aynı adreste (`/themes/<tema>/…`) verir. Ayrıntı ve `trace-check` denetimleri aşağıda
+  "Vercel paketleri".
 - **G146 — her cihazdan sipariş no + e-posta:** `/my` formu → `POST /api/my/continue`; eşleşince **cihaz anahtarı**
   (`lib/device-keys.ts`, site belgesi `devices`, yalnız hash, en çok 10, düzenleme anahtarının kuşağına bağlı). Her anahtar kontrolü
   `lib/sites.ts editAccess` (owner · shop · device) üzerinden. Anahtar yeniden üretimi (aşağıdaki araç dahil) tüm cihaz anahtarlarını
@@ -1370,16 +1372,30 @@ Calendar'a gerçek içe aktarma (dosya yapısı testle ve gözle doğrulandı), 
   Sosyal ağ önizlemesi (Facebook/WhatsApp/iMessage kazıyıcıları) ve gerçek tarayıcı sekmesi **denenmedi**.
 
 ### Vercel paketleri (`next.config.ts`, `scripts/trace-check.cjs`)
-- Tema okuyan 16 rota (`THEME_ROUTES`) yalnız `./themes/**/*.html` + `./themes/**/*.json` izler; tema varlık rotası
-  (`THEME_ASSET_ROUTE`) yalnız servis edilen türleri (`THEME_ASSET_EXTENSIONS` = `lib/site/static.ts` `THEME_ASSET_TYPES`).
-  Ölçüm (2 tema, yerel build): sayfa/panel/RSVP/`/start` rotası başına tema dosyaları **~2,8 MB → 69 KB**; varlık rotası 57 dosya,
-  2,7 MB. (20 tema × ~2,9 MB ≈ 55 MB her fonksiyona girecekti; şimdi yalnız varlık rotasına.)
+- Tema okuyan rotalar (`THEME_ROUTES`) yalnız `./themes/**/*.html` + `./themes/**/*.json` izler (G055: rota başına
+  ~2,8 MB → 69 KB, 2 temayla).
+- **G159 — tema dosyaları statik:** `npm run build`'in `prebuild` adımı (`scripts/theme-assets.cjs`) varlık rotasının servis
+  edeceği her dosyayı (`THEME_ASSET_EXTENSIONS` = `lib/site/static.ts` `THEME_ASSET_TYPES`, nokta dosyaları hariç, tema id'si
+  `THEME_ID_RE`) `public/themes/<tema>/<yol>`'a kopyalar (artımlı: boyut + mtime; kaybolan silinir; klasör üretilir, git'e
+  girmez). Palet görseli `img/variants/<v>/<x>` → `public/themes/<tema>/~<v>/img/<x>`; `img/variants/…` kendi yolunda yayınlanmaz
+  (rota da 404). `~<v>/` altında kopyası olmayan her dosya `next.config.ts` `VARIANT_REWRITE` (afterFiles: public dosyalardan
+  sonra) ile asıla düşer, adres değişmez (CSS'teki göreli `url(img/…)` varyantta kalır). Başlıklar `THEME_ASSET_HEADERS`
+  (rotanınkiyle aynı: `Cache-Control: public, max-age=3600, s-maxage=86400`, `nosniff`, SVG'ye dosya CSP'si). Hiçbir rota tema
+  varlığı izlemez: `outputFileTracingExcludes['**']` = `public/themes/**` + `themes/**/*.{uzantılar}`. Varlık rotası yalnız
+  kopyası olmayanı yanıtlar (404'ler, `next dev`, testin kendi tema klasörü; `~<v>` override'ını `?variant=` ya da istenen
+  adresten bulur). `npm run dev` önce kopyaları siler (dev her zaman diskten, güncel); `npm start` ve `scripts/lib/browser.ts`
+  `startNext` önce eşitler. Ölçüm (29 tema, 15'inde palet): varlık rotası **~101 MB → 2,4 MB**; PDF rotası 184 → ~142 MB
+  (`lib/print/render.ts` `process.cwd()` + `public` bütün `public/`'i izletiyordu; artık yalnız diskten okuduğu
+  `public/print/<tema>/<parça>.webp` — palet baskı parçaları `variants/…` zaten CDN'den geliyordu).
 - `npm run build` → `trace-check` (exit 1 + liste): (1) her tema rotası her temanın `index.html`'ini izliyor; (2) bu rotalar
-  `themes/`'ten `*.html`/`*.json` dışında **hiçbir** dosya taşımıyor; (3) varlık rotası her temanın servis edilebilir her dosyasını
-  (nokta dosyaları hariç) izliyor; (4) diskte paylaşım görseli/ikon varsa her tema rotası onu motorun Vercel'deki kuralıyla
+  `themes/`'ten `*.html`/`*.json` dışında **hiçbir** dosya taşımıyor; (3) başka hiçbir işlev de tema varlığı (`themes/` CSS/JS/
+  görsel, `public/themes/` herhangi bir dosya) taşımıyor; (4) servis edilebilir her tema dosyasının `public/themes/`'te aynı
+  boyutta kopyası var, fazlası yok; (5) diskte paylaşım görseli/ikon varsa her tema rotası onu motorun Vercel'deki kuralıyla
   "görüyor" (dosyanın kendisi ya da onu adlandıran izlenmiş `img/manifest.json`); manifest var olmayan bir dosyayı adlandırıyorsa da
-  hata. `require('./scripts/trace-check.cjs')` listeleri ve `checkTraces()`'i verir (test: sahte `.nft.json`'larla her hata türü,
-  eski "her şey her rotaya" yapılandırması da yakalanıyor; listelerin `next.config.ts` / `static.ts` ile aynılığı).
+  hata; (6) **bütçe**, `.next/server/**` altındaki her işlevde: tema dosyası ≤ 40 MB (`THEME_BUDGET_MB`), toplam ≤ 200 MB
+  (`FUNCTION_BUDGET_MB`, node_modules dahil; Vercel sınırı 250 MB) — en büyük 6 işlev yazdırılır. `require('./scripts/trace-check.cjs')`
+  listeleri ve `checkTraces()`'i verir (testler: `tests/g055-share-tracing.test.ts`, `tests/g159-static-themes.test.ts`; canlı
+  `next start` + 390 px: `tests/g159-browser.ts`).
 - Not (değiştirilmedi): `api/edit/*` paketleri ~49 MB — sharp'ın `linuxmusl-x64` ve `wasm32` ikilileri de izleniyor (Vercel glibc).
   250 MB sınırının altında; gerekirse `outputFileTracingExcludes` ile çıkarılabilir (Vercel'de denenmeli).
 

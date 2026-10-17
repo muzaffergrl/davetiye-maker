@@ -5,3 +5,5 @@ node_modules
 previews
 *.tsbuildinfo
 .env*
+# G159: generated from themes/ by the build (`prebuild`, scripts/theme-assets.cjs) on Vercel itself
+public/themes

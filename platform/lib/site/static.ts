@@ -11,7 +11,7 @@ import { isArchived } from '../panel/rights.ts';
 import { previewAccess } from '../sites.ts';
 import { guestMayEnter, isProtected } from './access.ts';
 import { THEME_ID_RE, themesDir } from '../theme/theme.ts';
-import { VARIANT_ID_RE, VARIANT_SEGMENT_PREFIX, variantOverridePath } from '../theme/variants.ts';
+import { VARIANT_ID_RE, VARIANT_IMG_DIR, VARIANT_SEGMENT_PREFIX, variantOverridePath } from '../theme/variants.ts';
 
 /** Only these theme files are public. Templates (.html), theme.json and anything else are not served. */
 export const THEME_ASSET_TYPES: Readonly<Record<string, string>> = {
@@ -31,12 +31,26 @@ export const THEME_ASSET_TYPES: Readonly<Record<string, string>> = {
 };
 
 const FILE_CSP = "default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'";
+/** CSP of a served SVG (G159: next.config.ts sets the same on the public copies; a test compares them). */
+export const THEME_FILE_CSP = FILE_CSP;
+/** Cache of a served theme file (G159: next.config.ts sets the same on the public copies; a test compares them). */
+export const THEME_ASSET_CACHE = 'public, max-age=3600, s-maxage=86400';
 
 function notFound(): Response {
   return new Response('Not found', {
     status: 404,
     headers: { 'Content-Type': 'text/plain; charset=utf-8', 'X-Content-Type-Options': 'nosniff' },
   });
+}
+
+/**
+ * A theme file that is not served (G159): not kept by a cache — a later deployment may have it. (For an address with an
+ * asset extension next.config.ts THEME_ASSET_HEADERS sets the asset Cache-Control over this one; per deployment on Vercel.)
+ */
+function themeNotFound(): Response {
+  const res = notFound();
+  res.headers.set('Cache-Control', 'no-store');
+  return res;
 }
 
 function safeSegments(segments: string[] | undefined): string[] | null {
@@ -51,29 +65,39 @@ function safeSegments(segments: string[] | undefined): string[] | null {
  * GET /themes/<theme>/<path>. G153: /themes/<theme>/~<variant>/<path> is a colour variant's virtual folder — an image
  * with an override in img/variants/<variant>/ is served from there, every other file (and an image without one) is
  * the original, so a variant page's relative references (site.css url(img/…), theme JS) need no change.
+ *
+ * G159: a build serves these files as static copies from public/themes/ (scripts/theme-assets.cjs), without this route.
+ * A variant URL without a copy of its own is rewritten by next.config.ts to /themes/<theme>/<path>?variant=<id>; the
+ * route passes that variant on (`opts.variant`) for when no public copy answers either (`next dev`, a test's themes
+ * folder). img/variants/… is no URL of its own (a variant image is served only through its ~<variant> folder), the
+ * same as in public/themes/.
  */
-export async function serveThemeAsset(themeId: string, segments: string[] | undefined): Promise<Response> {
+export async function serveThemeAsset(themeId: string, segments: string[] | undefined, opts: { variant?: string | null } = {}): Promise<Response> {
   let parts = safeSegments(segments);
-  if (!THEME_ID_RE.test(themeId) || !parts) return notFound();
+  if (!THEME_ID_RE.test(themeId) || !parts) return themeNotFound();
   let variant: string | null = null;
   if (parts[0].startsWith(VARIANT_SEGMENT_PREFIX)) {
     variant = parts[0].slice(VARIANT_SEGMENT_PREFIX.length);
     parts = parts.slice(1);
-    if (!VARIANT_ID_RE.test(variant) || !parts.length) return notFound();
+    if (!VARIANT_ID_RE.test(variant) || !parts.length) return themeNotFound();
+  } else if (opts.variant && VARIANT_ID_RE.test(opts.variant)) {
+    variant = opts.variant;
   }
+  const rel = parts.join('/');
+  if (rel === VARIANT_IMG_DIR || rel.startsWith(`${VARIANT_IMG_DIR}/`)) return themeNotFound();
   const ext = path.extname(parts[parts.length - 1]).slice(1).toLowerCase();
   const type = THEME_ASSET_TYPES[ext];
-  if (!type) return notFound();
+  if (!type) return themeNotFound();
   const root = path.join(themesDir(), themeId);
   try {
     const realRoot = await fs.realpath(root);
     // G153: the variant's own image first (img/variants/<id>/…), else the original
-    const override = variant ? variantOverridePath(variant, parts.join('/')) : null;
+    const override = variant ? variantOverridePath(variant, rel) : null;
     const own = override ? await fs.realpath(path.join(root, ...override.split('/'))).catch(() => null) : null;
     const real = own && own.startsWith(realRoot + path.sep) && (await fs.stat(own)).isFile() ? own : await fs.realpath(path.join(root, ...parts));
-    if (!real.startsWith(realRoot + path.sep)) return notFound();
+    if (!real.startsWith(realRoot + path.sep)) return themeNotFound();
     const stat = await fs.stat(real);
-    if (!stat.isFile()) return notFound();
+    if (!stat.isFile()) return themeNotFound();
     const bytes = await fs.readFile(real);
     return new Response(new Uint8Array(bytes), {
       status: 200,
@@ -81,12 +105,12 @@ export async function serveThemeAsset(themeId: string, segments: string[] | unde
         'Content-Type': type,
         'Content-Length': String(bytes.length),
         'X-Content-Type-Options': 'nosniff',
-        'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+        'Cache-Control': THEME_ASSET_CACHE,
         ...(ext === 'svg' ? { 'Content-Security-Policy': FILE_CSP } : {}),
       },
     });
   } catch {
-    return notFound();
+    return themeNotFound();
   }
 }
 

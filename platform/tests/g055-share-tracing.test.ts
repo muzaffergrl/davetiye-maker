@@ -24,7 +24,11 @@ const traceCheck = require('../scripts/trace-check.cjs') as {
   ROUTES: string[];
   ASSET_ROUTE: string;
   ASSET_EXTENSIONS: string[];
-  checkTraces: (o: { root: string; appDir: string; themesDir?: string }) => { problems: string[]; assetFiles: number };
+  checkTraces: (o: { root: string; appDir: string; themesDir?: string; publicDir?: string }) => { problems: string[]; assetFiles: number };
+};
+const themeAssets = require('../scripts/theme-assets.cjs') as {
+  ASSET_EXTENSIONS: string[];
+  syncThemeAssets: (o: { themesDir: string; publicDir: string }) => { files: number };
 };
 
 const BASE = 'http://sites.local.test';
@@ -211,17 +215,21 @@ test('theme 03 demo (/start/demo): og:image + icon point at its G054 files', asy
 // ---------------------------------------------------------------------------------------------
 // Vercel tracing (next.config.ts + scripts/trace-check.cjs)
 
-test('tracing config: theme routes get *.html/*.json, the asset route the servable types; lists agree everywhere', () => {
+test('tracing config: theme routes get *.html/*.json, no route any theme asset (G159); lists agree everywhere', () => {
   const includes = nextConfig.outputFileTracingIncludes as Record<string, string[]>;
-  // G139: the PDF route also carries the packed Chromium of @sparticuz/chromium
+  // G139: the PDF route also carries the packed Chromium of @sparticuz/chromium; G159: and public/print (nothing else of public/)
   for (const r of THEME_ROUTES) {
-    const extra = r === PDF_ROUTE ? ['./node_modules/@sparticuz/chromium/bin/**'] : [];
+    // (only public/print/<theme>/<part>.webp: what lib/print/render.ts reads from disk; palette parts come from the CDN)
+    const extra = r === PDF_ROUTE ? ['./node_modules/@sparticuz/chromium/bin/**', './public/print/*/*.webp'] : [];
     assert.deepEqual(includes[r], ['./themes/**/*.html', './themes/**/*.json', ...extra], r);
   }
-  assert.deepEqual(includes[THEME_ASSET_ROUTE], [`./themes/**/*.{${THEME_ASSET_EXTENSIONS.join(',')}}`]);
-  assert.deepEqual(Object.keys(includes).sort(), [...THEME_ROUTES, THEME_ASSET_ROUTE].sort());
+  // G159: the asset route traces nothing (theme CSS/JS/images are static copies in public/themes); every route excludes them
+  assert.equal(includes[THEME_ASSET_ROUTE], undefined);
+  assert.deepEqual(Object.keys(includes).sort(), [...THEME_ROUTES].sort());
+  assert.deepEqual(nextConfig.outputFileTracingExcludes, { '**': ['./public/themes/**', `./themes/**/*.{${THEME_ASSET_EXTENSIONS.join(',')}}`] });
   assert.deepEqual([...THEME_ASSET_EXTENSIONS].sort(), Object.keys(THEME_ASSET_TYPES).sort(), 'next.config.ts = lib/site/static.ts');
   assert.deepEqual([...traceCheck.ASSET_EXTENSIONS].sort(), Object.keys(THEME_ASSET_TYPES).sort(), 'trace-check = lib/site/static.ts');
+  assert.deepEqual([...themeAssets.ASSET_EXTENSIONS].sort(), Object.keys(THEME_ASSET_TYPES).sort(), 'theme-assets = lib/site/static.ts');
   // next.config route globs ('/\\[slug\\]/\\[page\\]') vs trace-check route files ('[slug]/[page]/route')
   const fromGlob = (g: string) => g.replace(/\\/g, '').slice(1);
   const fromFile = (f: string) => f.replace(/\/(route|page)$/, '').replace(/^page$/, '');
@@ -229,9 +237,12 @@ test('tracing config: theme routes get *.html/*.json, the asset route the servab
   assert.equal(fromGlob(THEME_ASSET_ROUTE), fromFile(traceCheck.ASSET_ROUTE));
 });
 
-/** A fake build: .next/server/app/<route>.js.nft.json listing the given theme files (relative to the themes folder). */
+/**
+ * A fake build: <tmp>/server/app/<route>.js.nft.json listing the given theme files (relative to the themes folder).
+ * trace-check looks at every function in <tmp>/server.
+ */
 function fakeBuild(themesDir: string, routeFiles: (route: string) => string[]): string {
-  const app = tmpDir('g055-app-');
+  const app = path.join(tmpDir('g055-app-'), 'server', 'app');
   for (const route of [...traceCheck.ROUTES, traceCheck.ASSET_ROUTE]) {
     const nft = path.join(app, `${route}.js.nft.json`);
     mkdirSync(path.dirname(nft), { recursive: true });
@@ -240,34 +251,43 @@ function fakeBuild(themesDir: string, routeFiles: (route: string) => string[]): 
   return app;
 }
 
-test('trace-check: passes a correct build; finds images in page bundles, missing assets, unseen share files, stale manifests', () => {
+test('trace-check: passes a correct build; finds images in bundles, missing static copies, unseen share files, stale manifests', () => {
   const dir = tmpDir('g055-tc-');
   const tdir = path.join(dir, 'themes');
+  const pdir = path.join(dir, 'public');
   cpSync(path.join(themes, 'shared'), path.join(tdir, 'shared'), { recursive: true });
   writeFileSync(path.join(tdir, 'shared/img/manifest.json'), JSON.stringify({ og: { file: 'og-1200x630.jpg' }, favicon: { file: 'favicon.png' } }));
   cpSync(path.join(themes, 'plain'), path.join(tdir, 'plain'), { recursive: true });
   const html = ['index.html', 'home.html', 'story.html', 'details.html', 'rsvp.html', 'theme.json'];
   const templates = ['shared', 'plain'].flatMap((t) => html.map((f) => `${t}/${f}`)).concat('shared/img/manifest.json');
   const assets = ['shared/style.css', 'shared/site.js', 'shared/assets/placeholder.svg', 'shared/img/og-1200x630.jpg', 'shared/img/favicon.png', 'plain/style.css', 'plain/site.js', 'plain/assets/placeholder.svg'];
-  const run = (fn: (route: string) => string[]) => traceCheck.checkTraces({ root: dir, appDir: fakeBuild(tdir, fn), themesDir: tdir });
+  const run = (fn: (route: string) => string[]) => traceCheck.checkTraces({ root: dir, appDir: fakeBuild(tdir, fn), themesDir: tdir, publicDir: pdir });
+  const sync = () => themeAssets.syncThemeAssets({ themesDir: tdir, publicDir: pdir });
 
-  const good = run((r) => (r === traceCheck.ASSET_ROUTE ? assets : templates));
+  // G159: the asset route traces nothing; every servable file has its static copy in public/themes
+  assert.equal(sync().files, assets.length);
+  const good = run((r) => (r === traceCheck.ASSET_ROUTE ? [] : templates));
   assert.deepEqual(good.problems, []);
   assert.equal(good.assetFiles, assets.length);
 
-  // The old config (everything everywhere) fails: images in every page bundle.
+  // The old configs fail: images in every page bundle (before G055), all of them in the asset route (before G159).
   const old = run(() => [...templates, ...assets]);
   assert.equal(old.problems.filter((p) => p.includes('other than *.html/*.json')).length, traceCheck.ROUTES.length);
-  // Asset route missing the share image.
-  assert.ok(run((r) => (r === traceCheck.ASSET_ROUTE ? assets.filter((a) => !a.endsWith('.jpg')) : templates)).problems.some((p) => p.includes('og-1200x630.jpg is not traced')));
+  const g055 = run((r) => (r === traceCheck.ASSET_ROUTE ? assets : templates));
+  assert.ok(g055.problems.some((p) => p.startsWith('app/themes/[theme]/[...path]/route: carries 8 theme asset file(s)')), g055.problems.join('\n'));
+  // A static copy missing (the build did not run scripts/theme-assets.cjs): it would 404 on Vercel.
+  rmSync(path.join(pdir, 'themes/shared/img/og-1200x630.jpg'));
+  assert.ok(run((r) => (r === traceCheck.ASSET_ROUTE ? [] : templates)).problems.some((p) => p.includes('no static copy') && p.includes('shared/img/og-1200x630.jpg')));
+  sync();
   // Page bundles without the manifest cannot see the share files (no og:image on Vercel).
-  const blind = run((r) => (r === traceCheck.ASSET_ROUTE ? assets : templates.filter((f) => !f.endsWith('manifest.json'))));
+  const blind = run((r) => (r === traceCheck.ASSET_ROUTE ? [] : templates.filter((f) => !f.endsWith('manifest.json'))));
   assert.equal(blind.problems.filter((p) => p.includes('cannot see it')).length, traceCheck.ROUTES.length * 2);
   // Templates missing.
-  assert.ok(run((r) => (r === traceCheck.ASSET_ROUTE ? assets : templates.filter((f) => f !== 'plain/index.html'))).problems.some((p) => p.includes('plain/index.html is not traced')));
+  assert.ok(run((r) => (r === traceCheck.ASSET_ROUTE ? [] : templates.filter((f) => f !== 'plain/index.html'))).problems.some((p) => p.includes('plain/index.html is not traced')));
   // A manifest naming a file that is not there.
   rmSync(path.join(tdir, 'shared/img/favicon.png'));
-  const stale = run((r) => (r === traceCheck.ASSET_ROUTE ? assets.filter((a) => !a.endsWith('favicon.png')) : templates));
+  sync();
+  const stale = run((r) => (r === traceCheck.ASSET_ROUTE ? [] : templates));
   assert.ok(stale.problems.some((p) => p.includes('names favicon.png') && p.includes('does not exist')), stale.problems.join('\n'));
   rmSync(dir, { recursive: true, force: true });
 });
