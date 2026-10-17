@@ -1,0 +1,117 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Naomi",
+      "full_name": "Naomi Ellis Hart"
+    },
+    {
+      "display_name": "Kai",
+      "full_name": "Kai Matthew Arden"
+    }
+  ],
+  "name_display": "Naomi & Kai",
+  "initials": "N&K",
+  "host_line": "Together with their families",
+  "date": "2027-10-09",
+  "ceremony_time": "16:00",
+  "timezone": "America/Los_Angeles",
+  "venue": {
+    "name": "Stillwater Garden Pavilion",
+    "city": "Hood River",
+    "region": "Oregon",
+    "country": "United States",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:00",
+      "location": "The maple lawn"
+    },
+    {
+      "label": "Cocktail hour",
+      "time": "17:00",
+      "location": "The stone terrace"
+    },
+    {
+      "label": "Dinner & dancing",
+      "time": "18:30",
+      "location": "The cedar pavilion"
+    }
+  ],
+  "dress_code": "Garden formal",
+  "rsvp": {
+    "deadline": "2027-09-01",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Fish",
+          "Chicken"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "From a borrowed umbrella to a promise by the river, every fold of our story led us to",
+    "items": [
+      {
+        "caption": "A borrowed umbrella"
+      },
+      {
+        "caption": "Tea by the river"
+      },
+      {
+        "caption": "The promise"
+      }
+    ]
+  },
+  "audio": {
+    "music": "first-light",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony."
+    },
+    {
+      "q": "Can you accommodate dietary requirements?",
+      "a": "Please tell us about your requirements in your reply."
+    }
+  ]
+}
