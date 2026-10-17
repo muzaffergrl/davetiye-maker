@@ -2,7 +2,7 @@
 id: G174
 baslik: G172 açık notları — misafir şifresi site başına küresel sınır, Etsy doğrulama sonucu önbelleği, yetim müzik parçalarının temizliği
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G174
 oncelik: 1
 bagimli: [G172]
@@ -45,3 +45,6 @@ kapatmak + her biri için regresyon testi. Koordinatör: session_01HP9ZrJ8mhZnig
 1642 geçti, 0 hata, 2 atlandı (build çıktısı gerektiren mevcut testler); build + trace-check yeşil. `origin/claude/zealous-fermi-hy1o40`
 birleştirildikten sonra (yalnız durum/görev dosyaları geldi, `platform/` değişmedi) aynı komutlar yeniden çalıştı: aynı sonuç.
 Yeni `g174-security` testleri düzeltmesiz kodda kırılıyor (yeni modül/alanlar yok → yüklenmiyor).
+
+## Günlük
+- 2026-10-17 entegratör onayladı
