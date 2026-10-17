@@ -144,11 +144,45 @@ düzenler. Bu belge platformun tek kaynağıdır.
   **kullanıcı onayı** ister. Ticari kullanımda ücretli plan gerekebilir (Vercel Hobby ticari değil;
   Supabase ücretsiz projeler hareketsizlikte duraklar) — satışa çıkmadan karar.
 - **Alan adı / marka:** marka seçilmedi; ilk sürüm `*.vercel.app`.
-- **Etsy sipariş doğrulama:** ilk sürüm biçim kontrolü + kayıt; Etsy API doğrulaması sonra (mağazanın Etsy API uygulaması +
-  kullanıcı onayı gerekir). Ara çözüm (G060-fix): `CLAIM_ORDER_VERIFICATION=manual` — taslak hemen açılır, ama sipariş dükkân
-  tarafından Etsy'de kontrol edilip `node scripts/verify-order.ts --order <no> --reason "…"` ile onaylanana kadar yayın ve
-  paylaşılan önizleme kapalı. Satış sitesinin yayın kapısı `verified.orderCheck` true olmadan `launched: true` kabul etmez.
-- **E-posta gönderimi** (düzenleme linki, RSVP bildirimi): sağlayıcı seçimi sonra.
+- **Etsy sipariş doğrulama:** üç mod (`CLAIM_ORDER_VERIFICATION`): tanımsız/`off` = yalnız biçim kontrolü; `manual` (G060-fix,
+  şu an canlıda) = taslak hemen açılır, sipariş dükkân tarafından onaylanana kadar (admin "Siparişi onayla" ya da
+  `node scripts/verify-order.ts --order <no> --reason "…"`) yayın ve paylaşılan önizleme kapalı; **`etsy` (G147, kod hazır, açılması
+  sahibin kurulumunu bekliyor)** = sipariş numarası Etsy'den bizim mağazanın makbuzu olarak okunur. Satış sitesinin yayın kapısı
+  `verified.orderCheck` true olmadan `launched: true` kabul etmez.
+  - Kurallar: makbuz bizim mağazada ve ödenmiş → site hemen yayınlanabilir; iptal / tamamı iade → reddedilir; bizim mağazada yok →
+    reddedilir; henüz ödenmemiş ("payment processing") → site açılır, bekler, ödeme gelince kendiliğinden onaylanır; Etsy alıcı
+    e-postasını veriyorsa (çoğu zaman vermez, Etsy'nin ayrıca onayı gerekir) ve farklıysa → reddedilir; ilan → tasarım eşlemesi
+    `platform/lib/etsy/listings.json` (ilanlar yayınlanınca `listing_id → tema id` doldurulur; eşlenmemiş ilan tasarım yüzünden
+    reddedilmez); Etsy cevap vermez / yoğun (429) → alıcıya "birkaç dakika sonra tekrar deneyin". Bir sipariş = bir site kuralı aynen.
+  - **Güvenli geri düşüş:** `etsy` modunda ayarlar eksik, mağaza bağlı değil ya da Etsy bağlantıyı reddediyorsa `/start` hata vermez,
+    `manual` gibi davranır (site bekler) ve admin → Özet → **Bağlantılar** kartı uyarı gösterir. Bağlantı kurulunca bekleyen siteler
+    "Bekleyen siparişleri Etsy'de kontrol et" ile, ayrıca alıcı paneli açıkken ve alıcı Publish'e basınca kendiliğinden onaylanır.
+  - **Sahibin kurulumu (bir kez):**
+    1. Mağaza sahibinin Etsy hesabıyla etsy.com/developers → **Your Apps** → yeni uygulama oluşturun (ad, kısa açıklama: "kendi
+       mağazamın siparişlerini okuyan araç").
+    2. Uygulamanın callback (redirect) adreslerine sitenin tam adresiyle `https://<site adresi>/api/etsy/callback` ekleyin.
+    3. Aynı sayfadaki **keystring** → Vercel'de `ETSY_API_KEY`, **shared secret** → `ETSY_SHARED_SECRET` (Production, "Sensitive").
+       Tokenları şifreleyen anahtar için yeni bir şey gerekmez: zaten var olan `GOOGLE_TOKEN_KEY`'den (Google Sheets) ayrı bir etiketle
+       (HKDF) türetilir. `GOOGLE_TOKEN_KEY` yoksa 32 rastgele bayt (base64) olarak eklenir; değiştirilirse Etsy yeniden bağlanır.
+    4. **Etsy'nin uygulamayı onaylaması günler–haftalar sürebilir.** Bu sürede `manual` çalışmaya devam eder, hiçbir şey bozulmaz.
+    5. Onaydan sonra (yeniden yayın sonrası) admin → Özet → Bağlantılar → **Etsy mağazasını bağla** → Etsy'de izin verin (yalnız okuma:
+       `transactions_r`, `shops_r`) → "Etsy mağazası bağlandı" → **Yönetime dön**. 10 dakika içinde, aynı tarayıcıda tamamlanmalı.
+    6. Vercel'de `CLAIM_ORDER_VERIFICATION=etsy` yapıp yeniden yayınlayın; eski bekleyenler için **Bekleyen siparişleri Etsy'de kontrol et**.
+    7. "Bağlantıyı kes" tokenları burada siler (Etsy tarafındaki izni Etsy hesap ayarlarından da kaldırabilirsiniz).
+- **E-posta gönderimi** (G147, kod hazır; `SMTP_HOST` + `SMTP_USER` + `SMTP_PASS` girilince açılır, girilmeden hiçbir şey değişmez):
+  `/start` sonrası alıcıya özel düzenleme linki + "başka cihazda `<site>/my` adresinden sipariş no + e-postayla devam" e-postası;
+  `/my`'den istenen giriş linki (G146 bağlayınca); site **onay bekleyerek** açıldığında dükkâna "New website started — order needs a
+  check" bildirimi (yalnız sipariş no, tasarım, admin linki; alıcının linki yok). Gönderim hatası siteyi açmayı bozmaz, link ekranda
+  kalır; e-posta içeriği, link ve adresler log'a yazılmaz. RSVP bildirimi henüz yok.
+  - **Sahibin kurulumu (Gmail, bir kez):**
+    1. Google hesabında **2 Adımlı Doğrulama** açık olmalı (Google Hesabı → Güvenlik).
+    2. Google Hesabı → Güvenlik → **Uygulama şifreleri** → bir ad yazın (ör. "Vercel site") → Oluştur → 16 harfli şifreyi kopyalayın
+       (hesap şifreniz değil; boşluklu da yapıştırabilirsiniz).
+    3. Vercel → proje → Settings → Environment Variables (Production, "Sensitive"): `SMTP_HOST` = `smtp.gmail.com`, `SMTP_PORT` = `465`,
+       `SMTP_USER` = Gmail adresi, `SMTP_PASS` = uygulama şifresi. İsteğe bağlı: `MAIL_FROM` (gönderen adı/adresi; varsayılan
+       "BKE Studio" + `SMTP_USER`), `ADMIN_NOTIFY_EMAIL` (bildirimlerin gideceği adres; varsayılan `SMTP_USER`). Yeniden yayınlayın.
+    4. Admin → Özet → Bağlantılar → "E-posta gönderimi: Açık" → **Test e-postası gönder** (gelen kutusu + spam klasörü).
+    Kişisel Gmail'in günlük gönderim sınırı vardır; dükkân hacmine yeter, büyürse aynı değişkenlerle başka bir SMTP servisine geçilir.
 - **Gizlilik metni** (misafir verisi): yayından önce.
 
 ## 4. Görevler

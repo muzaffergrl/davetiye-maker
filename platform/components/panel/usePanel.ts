@@ -534,6 +534,19 @@ export function usePanel(initial: PanelState, editKey: string) {
     };
   }, [api, orderPending]);
 
+  /** G147: Publish pressed while the order is pending: the server asks Etsy once more (etsy mode). True = confirmed now. */
+  const recheckOrder = useCallback(async (): Promise<boolean> => {
+    const res = await api.state({ orderCheck: true });
+    const state = (res.body as { state?: Record<string, unknown> }).state;
+    if (!res.ok || !state || state.orderPending !== false) return false;
+    if (metaRef.current.orderPending) {
+      const next = { ...metaRef.current, orderPending: false };
+      metaRef.current = next;
+      setMeta(next);
+    }
+    return true;
+  }, [api]);
+
   // G068: the design's texts within what the design carries (theme.json copy max), next to the content checks
   const copyLimits = useMemo(() => Object.fromEntries(initial.theme.copy.map((e) => [e.key, { max: e.max }])), [initial.theme.copy]);
   const copyLabels = useMemo(() => new Map(initial.theme.copy.map((e) => [e.key, e.label])), [initial.theme.copy]);
@@ -566,6 +579,7 @@ export function usePanel(initial: PanelState, editKey: string) {
     edit,
     flush,
     publish,
+    recheckOrder,
     unpublish,
     changeIdentity,
     setGuestAccess,

@@ -896,7 +896,7 @@ fotoğrafları ve marka logosu.
   `orderCheck: {status: "pending"}` ile saklanır; yayın `403 order_pending`, paylaşılan önizleme 404 (panel önizlemesi çalışır),
   panelde ve `/start` sonucunda açık not. Dükkân siparişi Etsy'de kontrol edip `node scripts/verify-order.ts (--order <no> | --slug
   <adres>) --reason "…"` (`--show`) ile onaylar. Satış sitesi kapısı: `MARKETING.verified.orderCheck` false iken `launched: true`
-  reddedilir. Gerçek `EtsyOrderVerifier` yapılmadı (mağazanın Etsy API uygulaması + onay gerekir).
+  reddedilir. G147: `CLAIM_ORDER_VERIFICATION=etsy` → `EtsyOrderVerifier` (`lib/etsy/`; kurulum `docs/10` §3).
 - **Paylaşılan sayaç:** blob adaptörü `hitCounter` (`limits/<sha256>.json`, ETag'li koşullu yazım) → `/start` ve yükleme limitleri
   bütün Vercel örneklerinde aynı pencereyi sayar (`AdapterRateLimiter`); `local` süreç içi bellekte kalır. **Foto sınırları:** site
   başına günde 60 yükleme (`429 upload_limit`), toplam 450 dosya (`countPhotos`, `429 photo_limit`).
@@ -1229,12 +1229,15 @@ kötüye kullanım tavanı), adres ipucu IP başına 120 / 15 dk. G060-fix: blob
   `CLAIM_ORDER_VERIFICATION=manual` (G060-fix, `ManualOrderVerifier`): taslak açılır, `orderCheck.status = "pending"`; yayın
   `403 order_pending` ve paylaşılan önizleme kapalı, ta ki dükkân `node scripts/verify-order.ts --order <no> --reason "…"` ile
   onaylayana kadar (`confirmOrder`). Satış sitesi kapısı `MARKETING.verified.orderCheck` ister.
-  `CLAIM_ORDER_VERIFICATION=etsy` **uygulanmadı**: bilinçli olarak hata verir (sessizce atlamak yerine 500). Uygularken
-  doğrulanacaklar dosyanın başında (mağazanın makbuzu, ödenmiş mi, alıcı e-postası erişilebilir mi, ilan → tema eşlemesi,
-  çok ürünlü sipariş). Kodda `setOrderVerifier()` ile takılır.
-- **Düzenleme linkini e-postayla gönderme** (`mailer.ts`, `docs/10` §3): `EditLinkMailer` + `DisabledMailer` (varsayılan,
-  `enabled: false`). Sağlayıcı seçilince `setEditLinkMailer()`; arayüz "We will email your edit link" metnine kendiliğinden geçer.
-  Gönderim hatası sahiplenmeyi bozmaz (site var, link ekranda) ve link log'a yazılmaz (test).
+  `CLAIM_ORDER_VERIFICATION=etsy` (G147, `lib/etsy/verify.ts`): makbuz mağazanın tek seferlik OAuth bağlantısıyla (admin →
+  Bağlantılar, PKCE, tokenlar `GOOGLE_TOKEN_KEY`'den HKDF ile türetilen anahtarla AES-GCM, site belgesi `00000000-…/etsy-shop`)
+  okunur: ödenmiş → `verified` (by `etsy`), iptal/tam iade/başka mağaza/e-posta farkı/ilan başka tasarım → `rejected`, ödenmemiş →
+  `pending`, Etsy yok/429 → `unavailable`. Ayar yok / bağlı değil → `pending` (manual gibi, 500 yok). Bekleyenler admin
+  düğmesi, panel yoklaması (2 dk) ve Publish (15 sn) ile yeniden kontrol edilir (`lib/etsy/recheck.ts`). Kodda `setOrderVerifier()`.
+- **Düzenleme linkini e-postayla gönderme** (`mailer.ts`, `lib/mail/`, G147): `SMTP_HOST` + `SMTP_USER` + `SMTP_PASS` varsa
+  `getEditLinkMailer()` = `SmtpEditLinkMailer` (nodemailer, Gmail uygulama şifresiyle çalışır; `kind`: `created` | `signin`), yoksa
+  `DisabledMailer`. Onay bekleyen yeni sitede dükkâna bildirim (`ADMIN_NOTIFY_EMAIL`). Gönderim hatası sahiplenmeyi bozmaz (site var,
+  link ekranda); içerik, link ve adres log'a yazılmaz (yalnız `EAUTH` gibi kod). Test: `tests/g147-etsy-mail.test.ts`.
 
 ### Testler
 - `tests/claim.test.ts` (node:test, 19 test; ayrıca `claimToken` ile kayıp yanıtın kurtarılması, link yenileme aracı, doğrulayıcı sırası): sipariş no / e-posta / isim / adres kuralları; tema + demo kaynağı (kendi dosyası,

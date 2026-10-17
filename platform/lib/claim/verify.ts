@@ -1,29 +1,25 @@
-// Etsy order verification for /start (G045) — an interface point, OFF by default.
+// Etsy order verification for /start (G045, G147).
 //
-// Today (docs/10 §3: "first version = format check + record") an order number is accepted when it
-// has the right format (lib/claim/fields.ts) and has not been used for another website. Nothing is
-// asked from Etsy. Setting CLAIM_ORDER_VERIFICATION selects a verifier:
+// Setting CLAIM_ORDER_VERIFICATION selects a verifier:
 //
-//   (unset) | off   FormatOnlyVerifier: no outside check (the default)
-//   manual          ManualOrderVerifier (G060-fix, stopgap until the Etsy check exists): /start still creates the
-//                   draft at once, but the site is marked "pending" (SiteRecord.orderCheck): it can be edited in
-//                   its panel, but not published and not opened with a shared preview link until the shop has
-//                   checked the order in Etsy and run `node scripts/verify-order.ts --order <no> --reason "…"`.
-//   etsy            NOT IMPLEMENTED: getOrderVerifier() throws, so /start answers 500 instead of
-//                   silently skipping a check someone switched on.
+//   (unset) | off   FormatOnlyVerifier: no outside check (the default). An order number is accepted when it has the
+//                   right format (lib/claim/fields.ts) and has not been used for another website.
+//   manual          ManualOrderVerifier (G060-fix): /start still creates the draft at once, but the site is marked
+//                   "pending" (SiteRecord.orderCheck): it can be edited in its panel, but not published and not opened
+//                   with a shared preview link until the shop confirms the order (admin "Siparişi onayla", or
+//                   `node scripts/verify-order.ts --order <no> --reason "…"`).
+//   etsy            EtsyOrderVerifier (G147, lib/etsy/verify.ts): the order number is read as a receipt of OUR Etsy shop
+//                   through the shop's one-time OAuth connection (admin → "Etsy mağazasını bağla"). Paid -> verified;
+//                   cancelled / fully refunded / not ours -> rejected; Etsy down / rate limited -> unavailable. While the
+//                   Etsy app settings are missing or the shop is not connected it answers "pending" — exactly manual
+//                   mode, never a 500 — and a later re-check (admin button; the buyer's panel; Publish) verifies the
+//                   site by itself once Etsy can be asked (lib/etsy/recheck.ts).
 //
 // The sales site's launch gate (lib/marketing/placeholders.ts) refuses `launched: true` until
-// MARKETING.verified.orderCheck is true: switch it on only once "manual" (or a real Etsy check) is live.
-//
-// TODO(G045 follow-up, needs the shop's Etsy API app + user approval): implement EtsyOrderVerifier.
-// Open points to confirm against the Etsy Open API v3 when implementing (not verified here):
-//  - read the shop's receipt by order number (OAuth token of the shop, transactions read scope);
-//  - "verified" only when the receipt belongs to our shop and is paid; refunded/cancelled -> rejected;
-//  - whether the buyer email is available to compare with the address typed on /start;
-//  - map the purchased listing to the theme id (theme_mismatch when the buyer opened another design);
-//  - multi-item orders (two designs in one order) would need "one site per order ITEM", not per order;
-//  - Etsy outages / rate limits -> "unavailable" (the buyer is asked to retry; nothing is stored).
+// MARKETING.verified.orderCheck is true: switch it on only once "manual" or "etsy" is live.
 // Register a verifier in code with setOrderVerifier() (tests do this) or by the env switch above.
+
+import { EtsyOrderVerifier } from '../etsy/verify.ts';
 
 export type OrderCheckReason = 'not_found' | 'email_mismatch' | 'theme_mismatch' | 'not_paid';
 
@@ -76,21 +72,17 @@ export class VerifierConfigError extends Error {
 
 let override: OrderVerifier | null = null;
 
-/** The verifier /start uses. Throws VerifierConfigError for "etsy" (not built) or an unknown value. */
+/** The verifier /start uses. Throws VerifierConfigError for an unknown value (a typo must not silently skip checks). */
 export function getOrderVerifier(): OrderVerifier {
   if (override) return override;
   const mode = (process.env.CLAIM_ORDER_VERIFICATION ?? '').trim().toLowerCase();
   if (mode === '' || mode === 'off') return new FormatOnlyVerifier();
   if (mode === 'manual') return new ManualOrderVerifier();
-  if (mode === 'etsy') {
-    throw new VerifierConfigError(
-      'CLAIM_ORDER_VERIFICATION=etsy is not implemented yet (docs/10 §3: Etsy API verification comes later). Unset it to use the format check.',
-    );
-  }
-  throw new VerifierConfigError(`Unknown CLAIM_ORDER_VERIFICATION "${mode}" (use "off" or "manual").`);
+  if (mode === 'etsy') return new EtsyOrderVerifier();
+  throw new VerifierConfigError(`Unknown CLAIM_ORDER_VERIFICATION "${mode}" (use "off", "manual" or "etsy").`);
 }
 
-/** Replaces the verifier (a real Etsy verifier later; fakes in tests). null restores the env choice. */
+/** Replaces the verifier (fakes in tests). null restores the env choice. */
 export function setOrderVerifier(verifier: OrderVerifier | null): void {
   override = verifier;
 }

@@ -10,7 +10,8 @@
 //   4. field checks (fields.ts, same rules as the browser)  -> 400 invalid (+ fields)
 //   --- serialised per order number (in this process) ---
 //   5. order verifier (verify.ts; off by default)           -> 403 order_not_verified / 503 verification_unavailable
-//      ("manual": accepted, the site is stored with orderCheck "pending": no publishing until the shop confirms it)
+//      ("manual": accepted, the site is stored with orderCheck "pending": no publishing until the shop confirms it;
+//       "etsy": the receipt is read from Etsy — G147; not connected yet -> "pending" like manual)
 //      (before the "used" check: with verification on, a stranger gets the same 403 for used and unused numbers)
 //   6. order number already used for a website              -> 409 order_used (no slug, email or link in the answer)
 //      … unless it is a RETRY of the same claim: same claim token (the form sends one random token
@@ -19,7 +20,8 @@
 //      link: the keys are reissued (the unseen old link stops working) -> 201 with the new link.
 //   7. website address: typed one must be free             -> 409 slug_taken (+ suggestion); otherwise the first free one from the names
 //   8. per-IP and global "sites created" limits             -> 429 rate_limited / busy
-//   9. create the draft (createSiteWithKeys), email stub    -> 201 {slug, editUrl, editPath, siteUrl, emailSent}
+//   9. create the draft (createSiteWithKeys), emails        -> 201 {slug, editUrl, editPath, siteUrl, emailSent}
+//      (G147: the edit link to the buyer when SMTP is set; a NEW pending site is also announced to the shop)
 //
 // One website per order number is enforced here with findSitesByOrderRef + an in-process lock.
 // Several server instances (Vercel) need a storage guarantee as well: the blob adapter (G048) keeps
@@ -49,6 +51,7 @@ import {
 } from './fields.ts';
 import { DEFAULT_CLAIM_LIMITS, getClaimRateLimiter, type ClaimLimits } from './limits.ts';
 import { getEditLinkMailer, type EditLinkMailer } from './mailer.ts';
+import { getShopNotifier, type ShopNotifier } from '../mail/index.ts';
 import { claimableTheme } from './themes.ts';
 import { THEME_IN_REVIEW, themeOpenForClaims, type ApprovalEnv } from '../themes/approval.ts';
 import { getOrderVerifier, type OrderVerifier } from './verify.ts';
@@ -63,6 +66,8 @@ export interface ClaimContext {
   limits?: ClaimLimits;
   verifier?: OrderVerifier;
   mailer?: EditLinkMailer;
+  /** Shop notice when a new site waits for an order check (G147; default: SMTP when configured, else off). */
+  notifier?: ShopNotifier;
   now?: () => number;
   /** Where the theme approval gate reads VERCEL_ENV / THEME_APPROVAL (default process.env; G080). */
   approvalEnv?: ApprovalEnv;
@@ -272,21 +277,32 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
   const claimToken = claimTokenOf(raw.claimToken);
   const now = ctx.now ?? Date.now;
 
-  const answer = async (slug: string, editKey: string, pending: boolean): Promise<ClaimResult> => {
+  /** `created`: a NEW site (not a retry): a pending one is announced to the shop by email (G147; never blocks the claim). */
+  const answer = async (slug: string, editKey: string, pending: boolean, created: { siteId: string } | null = null): Promise<ClaimResult> => {
     const origin = ctx.origin.replace(/\/+$/, '');
     const editPath = `/edit/${slug}?k=${encodeURIComponent(editKey)}`;
     const editUrl = `${origin}${editPath}`;
     const siteUrl = `${origin}/${slug}`;
     let emailSent = false;
     const mailer = ctx.mailer ?? getEditLinkMailer();
-    if (mailer.enabled) {
+    const notifier = ctx.notifier ?? getShopNotifier();
+    const buyerMail = async () => {
       try {
-        emailSent = (await mailer.send({ to: email, editUrl, siteUrl, themeName: theme.name, orderNumber })).sent === true;
+        emailSent = (await mailer.send({ to: email, editUrl, siteUrl, themeName: theme.name, orderNumber, kind: 'created' })).sent === true;
       } catch (e) {
         // Never log the message (it holds the secret link).
         console.error(`[claim] edit link email for "${slug}" failed: ${e instanceof Error ? e.name : 'error'}`);
       }
-    }
+    };
+    const shopNotice = async () => {
+      try {
+        // No secret in it: the order number, the design and the admin page of the site.
+        await notifier.pendingOrder({ orderNumber, themeName: theme.name, adminUrl: `${origin}/admin/site/${encodeURIComponent(created!.siteId)}` });
+      } catch (e) {
+        console.error(`[claim] shop notice for "${slug}" failed: ${e instanceof Error ? e.name : 'error'}`);
+      }
+    };
+    await Promise.all([mailer.enabled ? buyerMail() : null, created && pending && notifier.enabled ? shopNotice() : null]);
     const body: ClaimSuccessBody = { ok: true, slug, status: 'draft', editUrl, editPath, siteUrl, emailSent, orderPending: pending };
     return { status: 201, body: body as unknown as Record<string, unknown> };
   };
@@ -360,7 +376,7 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
       }
     }
 
-    return answer(slug, created.editKey, orderPending(created.site));
+    return answer(slug, created.editKey, orderPending(created.site), { siteId: created.site.id });
   });
 }
 
