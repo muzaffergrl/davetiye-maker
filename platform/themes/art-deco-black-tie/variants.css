@@ -18,6 +18,7 @@
 
 /* V05_amethyst_gold · Amethyst & Gold */
 html[data-variant="amethyst-gold"] {
+  --bronze: #785820;
   --c-0a1729: 29 12 42;
   --c-0e1626: 29 13 36;
   --c-0f1a30: 36 14 46;
@@ -32,6 +33,7 @@ html[data-variant="amethyst-gold"] {
 
 /* V04_burgundy_gold · Burgundy & Gold */
 html[data-variant="burgundy-gold"] {
+  --bronze: #785820;
   --c-0a1729: 49 7 16;
   --c-0e1626: 44 12 15;
   --c-0f1a30: 55 10 16;
@@ -46,6 +48,7 @@ html[data-variant="burgundy-gold"] {
 
 /* V03_emerald_gold · Emerald & Gold */
 html[data-variant="emerald-gold"] {
+  --bronze: #785820;
   --c-0a1729: 5 40 32;
   --c-0e1626: 9 38 34;
   --c-0f1a30: 1 44 39;
@@ -60,7 +63,7 @@ html[data-variant="emerald-gold"] {
 
 /* V06_navy_silver · Navy & Silver */
 html[data-variant="navy-silver"] {
-  --bronze: #6B6A6D;
+  --bronze: #5F5F61;
   --c-0a1729: 10 17 38;
   --c-0e1626: 13 16 35;
   --c-0f1a30: 15 20 45;
@@ -82,6 +85,7 @@ html[data-variant="navy-silver"] {
 
 /* V02_onyx_gold · Onyx Black & Gold */
 html[data-variant="onyx-gold"] {
+  --bronze: #785820;
   --c-0a1729: 7 8 8;
   --c-0e1626: 7 8 9;
   --c-0f1a30: 11 12 13;

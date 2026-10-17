@@ -185,6 +185,6 @@ def test_palette_variations_g153():
     assert len(v["options"]) == 6
     assert v["offered"] == [o["name"] for o in v["options"] if o["status"] == "live"]
     assert all(o["start_link"].endswith(f"&variant={o['variant']}") for o in v["options"][1:])
-    assert m.palette_variations("art-deco-black-tie") == (None, [])  # no palettes yet
+    assert m.palette_variations("_sample") == (None, [])  # no palettes (internal sample theme)
     data, _ = m.build("21", "21_Crimson_Rose_Atelier", "crimson-rose-atelier")
     assert data["variations"]["options"] == v["options"]

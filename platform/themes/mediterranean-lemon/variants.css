@@ -16,8 +16,8 @@
 
 /* V05_capri_turquoise · Capri Turquoise & Lemon */
 html[data-variant="capri-turquoise"] {
-  --azure: #31777C;
-  --azure-ink: #397377;
+  --azure: #20686D;
+  --azure-ink: #2D676B;
   --c-08183c: 20 52 56;
   --c-102450: 28 67 72;
   --c-1c3f80: 40 99 105;
@@ -35,8 +35,8 @@ html[data-variant="capri-turquoise"] {
 
 /* V06_dusty_blue_lemon · Dusty Blue & Lemon */
 html[data-variant="dusty-blue-lemon"] {
-  --azure: #527190;
-  --azure-ink: #56718C;
+  --azure: #446381;
+  --azure-ink: #48627D;
   --c-08183c: 43 56 71;
   --c-102450: 54 69 89;
   --c-1c3f80: 76 100 128;
@@ -54,8 +54,8 @@ html[data-variant="dusty-blue-lemon"] {
 
 /* V04_lavender_lemon · Lavender & Lemon */
 html[data-variant="lavender-lemon"] {
-  --azure: #6E669B;
-  --azure-ink: #655F8C;
+  --azure: #60578B;
+  --azure-ink: #605986;
   --c-08183c: 47 40 65;
   --c-102450: 61 52 82;
   --c-1c3f80: 90 79 123;
@@ -73,8 +73,8 @@ html[data-variant="lavender-lemon"] {
 
 /* V03_sage_lemon · Sage & Lemon */
 html[data-variant="sage-lemon"] {
-  --azure: #5D7454;
-  --azure-ink: #5F7358;
+  --azure: #4F6547;
+  --azure-ink: #51644A;
   --c-08183c: 44 57 42;
   --c-102450: 56 71 54;
   --c-1c3f80: 82 103 76;
@@ -92,8 +92,8 @@ html[data-variant="sage-lemon"] {
 
 /* V02_terracotta_lemon · Terracotta & Lemon */
 html[data-variant="terracotta-lemon"] {
-  --azure: #A25843;
-  --azure-ink: #965645;
+  --azure: #924A35;
+  --azure-ink: #8C4E3D;
   --c-08183c: 72 38 24;
   --c-102450: 91 49 32;
   --c-1c3f80: 135 71 48;

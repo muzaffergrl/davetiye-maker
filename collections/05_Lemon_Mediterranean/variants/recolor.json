@@ -193,16 +193,6 @@
         4.5
       ],
       [
-        "--azure-ink",
-        "--page",
-        4.5
-      ],
-      [
-        "--azure",
-        "--page",
-        4.5
-      ],
-      [
         "--script-ink",
         "--page",
         4.5
@@ -214,8 +204,28 @@
       ],
       [
         "--azure-ink",
+        "--page",
+        5.6
+      ],
+      [
+        "--azure",
+        "--page",
+        5.6
+      ],
+      [
+        "--script-ink",
+        "--page",
+        5.2
+      ],
+      [
         "--ivory",
-        4.5
+        "--azure",
+        4.9
+      ],
+      [
+        "--ivory",
+        "--azure-ink",
+        4.9
       ]
     ]
   }
