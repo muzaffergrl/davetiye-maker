@@ -21,7 +21,8 @@
 //     published site (Clara & Julian, sample photos, a "Meal choice" question, five fictional replies); a fictional buyer
 //     (Elena & Marco) starts a site on /start. Screens: /start form, the "Save this link" screen (key masked), panel Home,
 //     photo crop, preview, Share (QR blurred: it would point at a site that only exists in this run), Guests (totals must
-//     equal facts.ts DEMO_REPLY_TOTALS, else the run fails), RSVP questions. G061–G066 took the panel screens from the
+//     equal facts.ts DEMO_REPLY_TOTALS, else the run fails), RSVP questions; G141: Edit list, Music & sound, Map &
+//     directions, Guests scrolled to the Excel download. G061–G066 took the panel screens from the
 //     G059 JPGs, which show the panel of their day: a full run brought back an old panel (G066-B note).
 //   PLATFORM_PUBLIC_URL = --public-url (default: the live vercel.app address, as in G059) so addresses read like real ones.
 //
@@ -363,6 +364,8 @@ async function panelAssets(sharp: any): Promise<AssetManifest['panel']> {
       const page = await ctx.newPage();
       const L = `${base}/edit/${slug}?k=${demoKey}`;
       await page.goto(`${L}#share`, { waitUntil: 'load' });
+      // G121 folded the QR code away (Disclosure): open it first
+      if (!(await page.locator('[data-share-qr] svg[role="img"]').isVisible())) await page.getByRole('button', { name: /QR code for printed cards/ }).click();
       await page.waitForSelector('[data-share-qr] svg[role="img"]');
       // the QR would open a site that only exists in this local run: blurred in the picture
       await page.evaluate(() => ((document.querySelector('[data-share-qr] svg[role="img"]') as SVGElement).style.filter = 'blur(7px)'));
@@ -380,6 +383,26 @@ async function panelAssets(sharp: any): Promise<AssetManifest['panel']> {
       await pause(page, 500);
       await scrollTo(page, '[data-rsvp-questions]', 'start', 76);
       await take(page, 'questions');
+      // G141: the Edit list, Music & sound (Our Story page), Map & directions (Day & place), the Excel download
+      await page.goto(`${L}#edit`, { waitUntil: 'load' });
+      await page.waitForSelector('[data-section-row]');
+      await pause(page, 500);
+      await take(page, 'editList');
+      await page.goto(`${L}#edit/story`, { waitUntil: 'load' });
+      await page.waitForSelector('[data-music-fields]');
+      await pause(page, 500);
+      await scrollTo(page, '[data-music-fields]', 'start', 76);
+      await take(page, 'music');
+      await page.goto(`${L}#edit/venue`, { waitUntil: 'load' });
+      await page.waitForSelector('[data-map-fields]');
+      await pause(page, 1200);
+      await scrollTo(page, '[data-map-fields]', 'start', 76);
+      await take(page, 'map');
+      await page.goto(`${L}#guests`, { waitUntil: 'load' });
+      await page.waitForSelector('[data-excel]');
+      await pause(page, 600);
+      await page.evaluate(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant' }));
+      await take(page, 'excel');
       await ctx.close();
     }
   } finally {

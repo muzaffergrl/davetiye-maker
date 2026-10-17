@@ -1,12 +1,16 @@
 // A design card (home strip, /designs, related designs; G066 comp u1_designs_390): the REAL envelope screen (the home
 // screen fades in on hover), the name (link to the design page), the style line on wide cards, the Etsy price once it
 // is real, and "Live demo" (opens the demo dialog; a plain link to the demo without JavaScript).
-import { ArrowRight } from 'lucide-react';
+// G141: the media is interactive (CardOpening: the REAL opening recording plays on hover or after ▶), the live demo is a
+// button ("Try the live demo"), and gallery cards carry a "Compare" tick (Compare.tsx).
+import { Play } from 'lucide-react';
 import type { Design } from '../../lib/marketing/designs.ts';
 import { demoPath } from '../../lib/marketing/designs.ts';
 import { realPrice } from '../../lib/marketing/placeholders.ts';
+import { SHOWCASE_COPY } from '../../lib/marketing/showcase.ts';
 import { displayPrice } from '../../lib/marketing/site.ts';
-import { designScreen } from './media.ts';
+import { CardOpening } from './CardOpening.tsx';
+import { designScreen, openingVideo } from './media.ts';
 import s from './marketing.module.css';
 import { Screen } from './ui.tsx';
 
@@ -15,34 +19,50 @@ export function DesignCard({
   placement,
   headingLevel = 3,
   styles,
+  compare = false,
 }: {
   design: Design;
   placement: string;
   headingLevel?: 2 | 3;
   /** G121: the design's styles for the /designs filter (data-styles; CSS hides the cards of other styles). */
   styles?: readonly string[];
+  /** G141: show the "Compare" tick (inside a DesignGallery, which hosts the comparison). */
+  compare?: boolean;
 }) {
   const env = designScreen(design.id, 'envelope');
   const home = designScreen(design.id, 'home');
+  const v = openingVideo(design.id);
+  const video = v ? { file: v.file, poster: v.poster, width: v.width, height: v.height } : null;
   const H = headingLevel === 2 ? 'h2' : 'h3';
   const price = realPrice(design.price);
   const sizes = '(min-width: 1024px) 220px, (min-width: 600px) 30vw, 34vw';
   return (
     <article className={s.designCard} data-fx-spot data-styles={styles?.length ? styles.join(' ') : undefined}>
-      <a href={`/designs/${design.id}`} className={s.designCardMedia} aria-hidden tabIndex={-1} data-fx-tilt>
+      <CardOpening href={`/designs/${design.id}`} name={design.name} video={video}>
         {env ? <Screen file={env} alt="" sizes={sizes} className={s.cardScreen} /> : null}
-        {home ? <Screen file={home} alt="" sizes={sizes} className={`${s.cardScreen} ${s.cardScreenHover}`} /> : null}
-      </a>
+        {home && !video ? <Screen file={home} alt="" sizes={sizes} className={`${s.cardScreen} ${s.cardScreenHover}`} /> : null}
+      </CardOpening>
       <H className={s.designCardTitle}>
         <a href={`/designs/${design.id}`}>{design.name}</a>
       </H>
       {/* The style line shows on wider cards only (container query); phones get the comp's name-and-demo card. */}
       <p className={s.designCardStyle}>{design.copy.style}.</p>
       {price ? <p className={s.designCardPrice}>{displayPrice(price)} on Etsy</p> : null}
-      <a className={s.cardDemo} href={demoPath(design.id)} data-demo={design.id} data-demo-placement={placement}>
-        Live demo<span className={s.visuallyHidden}>: {design.name}</span>
-        <ArrowRight aria-hidden size={16} strokeWidth={1.75} />
-      </a>
+      <div className={s.cardFoot}>
+        <a className={`${s.btn} ${s.btnSmall} ${s.cardDemo}`} href={demoPath(design.id)} data-demo={design.id} data-demo-placement={placement}>
+          <Play aria-hidden size={14} strokeWidth={2} />
+          <span className={s.cardDemoLong}>{SHOWCASE_COPY.liveDemo}</span>
+          <span className={s.cardDemoShort}>{SHOWCASE_COPY.liveDemoShort}</span>
+          <span className={s.visuallyHidden}>: {design.name}</span>
+        </a>
+        {compare ? (
+          <label className={s.cardCompare}>
+            <input type="checkbox" data-compare={design.id} />
+            {SHOWCASE_COPY.compare}
+            <span className={s.visuallyHidden}> {design.name}</span>
+          </label>
+        ) : null}
+      </div>
     </article>
   );
 }

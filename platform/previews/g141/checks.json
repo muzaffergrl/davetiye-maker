@@ -1,0 +1,268 @@
+{
+  "tool": "tests/g141-browser.ts (G141)",
+  "date": "2026-10-17",
+  "throttling": "perf: CDP CPU 4×, 150 ms RTT, 1.6 Mbps down / 750 kbps up, cache disabled, 390 × 844 DPR 2",
+  "passed": 36,
+  "failed": 0,
+  "metrics": {
+    "/": {
+      "lcp": 1416,
+      "lcpElement": "IMG http://127.0.0.1:3491/marketing/designs/blush-garden-rose/envelope-480.webp",
+      "cls": 0,
+      "transferredKB": 394,
+      "scriptKB": 146,
+      "mp4": []
+    },
+    "/designs": {
+      "lcp": 836,
+      "lcpElement": "P",
+      "cls": 0.0133,
+      "transferredKB": 438,
+      "scriptKB": 145,
+      "mp4": []
+    },
+    "/designs/olive-ivory": {
+      "lcp": 1996,
+      "lcpElement": "IMG http://127.0.0.1:3491/marketing/designs/olive-ivory/envelope-480.webp",
+      "cls": 0,
+      "transferredKB": 453,
+      "scriptKB": 145,
+      "mp4": []
+    },
+    "/designs/coastal-seaside": {
+      "lcp": 1384,
+      "lcpElement": "IMG http://127.0.0.1:3491/marketing/designs/coastal-seaside/envelope-480.webp",
+      "cls": 0.0003,
+      "transferredKB": 408,
+      "scriptKB": 145,
+      "mp4": []
+    }
+  },
+  "checks": [
+    {
+      "name": "note: this Chromium cannot play H.264 (playback checks fall back to element + request)",
+      "ok": true
+    },
+    {
+      "name": "perf /: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
+      "ok": true,
+      "detail": {
+        "lcp": 1416,
+        "el": "IMG http://127.0.0.1:3491/marketing/designs/blush-garden-rose/envelope-480.webp"
+      }
+    },
+    {
+      "name": "perf /: CLS ≤ 0.05",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "perf /: first load ≤ 600 KB transferred",
+      "ok": true,
+      "detail": {
+        "total": 394,
+        "script": 146
+      }
+    },
+    {
+      "name": "perf /: no opening clip requested before a scroll or a tap",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "perf /designs: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
+      "ok": true,
+      "detail": {
+        "lcp": 836,
+        "el": "P"
+      }
+    },
+    {
+      "name": "perf /designs: CLS ≤ 0.05",
+      "ok": true,
+      "detail": 0.0133
+    },
+    {
+      "name": "perf /designs: first load ≤ 600 KB transferred",
+      "ok": true,
+      "detail": {
+        "total": 438,
+        "script": 145
+      }
+    },
+    {
+      "name": "perf /designs: no opening clip requested before a scroll or a tap",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "perf /designs/olive-ivory: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
+      "ok": true,
+      "detail": {
+        "lcp": 1996,
+        "el": "IMG http://127.0.0.1:3491/marketing/designs/olive-ivory/envelope-480.webp"
+      }
+    },
+    {
+      "name": "perf /designs/olive-ivory: CLS ≤ 0.05",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "perf /designs/olive-ivory: first load ≤ 600 KB transferred",
+      "ok": true,
+      "detail": {
+        "total": 453,
+        "script": 145
+      }
+    },
+    {
+      "name": "perf /designs/coastal-seaside: LCP ≤ 2.5 s (lab, CPU 4×, slow 4G)",
+      "ok": true,
+      "detail": {
+        "lcp": 1384,
+        "el": "IMG http://127.0.0.1:3491/marketing/designs/coastal-seaside/envelope-480.webp"
+      }
+    },
+    {
+      "name": "perf /designs/coastal-seaside: CLS ≤ 0.05",
+      "ok": true,
+      "detail": 0.0003
+    },
+    {
+      "name": "perf /designs/coastal-seaside: first load ≤ 600 KB transferred",
+      "ok": true,
+      "detail": {
+        "total": 408,
+        "script": 145
+      }
+    },
+    {
+      "name": "1280 /designs: hovering a card plays its opening recording",
+      "ok": true,
+      "detail": {
+        "paused": true,
+        "t": 0,
+        "src": "/marketing/designs/mediterranean-lemon/opening.mp4",
+        "requested": true
+      }
+    },
+    {
+      "name": "1280 /designs: leaving the card pauses and rewinds it",
+      "ok": true,
+      "detail": {
+        "paused": true,
+        "t": 0,
+        "src": "/marketing/designs/mediterranean-lemon/opening.mp4",
+        "requested": true
+      }
+    },
+    {
+      "name": "1280 /designs: the video only exists on the hovered card",
+      "ok": true
+    },
+    {
+      "name": "1280 /designs: two ticks show the compare tray",
+      "ok": true
+    },
+    {
+      "name": "1280 compare dialog: the two picked designs' recordings",
+      "ok": true,
+      "detail": [
+        {
+          "playing": false,
+          "src": "/marketing/designs/blush-garden-rose/opening.mp4"
+        },
+        {
+          "playing": false,
+          "src": "/marketing/designs/vintage-airmail-love-letter/opening.mp4"
+        }
+      ]
+    },
+    {
+      "name": "1280 compare dialog: Esc closes it",
+      "ok": true
+    },
+    {
+      "name": "1280 tour: a step button shows that step (Music)",
+      "ok": true,
+      "detail": "Pick the story music"
+    },
+    {
+      "name": "390 /: ▶ on a card plays its opening",
+      "ok": true,
+      "detail": {
+        "paused": true,
+        "t": 0,
+        "src": "/marketing/designs/blush-garden-rose/opening.mp4",
+        "requested": true
+      }
+    },
+    {
+      "name": "390 /: the tour moves on by itself while on screen",
+      "ok": true,
+      "detail": {
+        "before": "Start with your order number",
+        "after": "Keep your private edit link"
+      }
+    },
+    {
+      "name": "reduced motion: no section waits for a reveal on /",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "reduced motion: hover does not play a card",
+      "ok": true
+    },
+    {
+      "name": "reduced motion: the tour stays on its step",
+      "ok": true
+    },
+    {
+      "name": "/ @390: no horizontal page scroll",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/ @390: axe — no serious/critical violation",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs @390: no horizontal page scroll",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/designs @390: axe — no serious/critical violation",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/designs/olive-ivory @390: no horizontal page scroll",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/designs/olive-ivory @390: axe — no serious/critical violation",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "/ @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/designs @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/designs/olive-ivory @1280: no horizontal page scroll",
+      "ok": true,
+      "detail": 0
+    }
+  ]
+}

@@ -28,6 +28,11 @@ export const PANEL_SOURCES = {
   share: 'b10_live_qr',
   replies: 'p01_panel_replies',
   questions: 'p03_panel_questions',
+  // G141: the editing tour on the home page (captured like the others, scripts/marketing-assets.ts --panel)
+  editList: 'g141_edit_list',
+  music: 'g141_music',
+  map: 'g141_map',
+  excel: 'g141_guests_excel',
 } as const;
 export type PanelKey = keyof typeof PANEL_SOURCES;
 /** The collection whose panel shots are used (they show the same panel). */
@@ -724,6 +729,15 @@ export function featuredDesigns(cfg: MarketingConfig = MARKETING): Design[] {
   const live = liveDesigns(cfg);
   const featured = live.filter((d) => d.featured);
   return featured.length ? featured : live;
+}
+
+/**
+ * G141 (K45 item 7, "templates always in front"): the home page shows EVERY live design — the featured ones first
+ * (config order), then the rest (config order).
+ */
+export function showcaseDesigns(cfg: MarketingConfig = MARKETING): Design[] {
+  const live = liveDesigns(cfg);
+  return [...live.filter((d) => d.featured), ...live.filter((d) => !d.featured)];
 }
 
 /**

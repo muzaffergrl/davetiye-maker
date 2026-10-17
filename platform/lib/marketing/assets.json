@@ -1754,6 +1754,42 @@
         "480": "/marketing/panel/questions-480.webp",
         "640": "/marketing/panel/questions-640.webp"
       }
+    },
+    "editList": {
+      "width": 640,
+      "height": 1385,
+      "files": {
+        "320": "/marketing/panel/editList-320.webp",
+        "480": "/marketing/panel/editList-480.webp",
+        "640": "/marketing/panel/editList-640.webp"
+      }
+    },
+    "music": {
+      "width": 640,
+      "height": 1385,
+      "files": {
+        "320": "/marketing/panel/music-320.webp",
+        "480": "/marketing/panel/music-480.webp",
+        "640": "/marketing/panel/music-640.webp"
+      }
+    },
+    "map": {
+      "width": 640,
+      "height": 1385,
+      "files": {
+        "320": "/marketing/panel/map-320.webp",
+        "480": "/marketing/panel/map-480.webp",
+        "640": "/marketing/panel/map-640.webp"
+      }
+    },
+    "excel": {
+      "width": 640,
+      "height": 1385,
+      "files": {
+        "320": "/marketing/panel/excel-320.webp",
+        "480": "/marketing/panel/excel-480.webp",
+        "640": "/marketing/panel/excel-640.webp"
+      }
     }
   }
 }

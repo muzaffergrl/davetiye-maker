@@ -42,9 +42,10 @@ test('home showcase: the featured live designs from config.ts, in config order; 
   assert.ok(!featuredDesigns(coming).some((d) => d.id === 'olive-ivory'));
   const none = { ...MARKETING, designs: MARKETING.designs.map(({ featured: _f, ...d }) => d) };
   assert.equal(featuredDesigns(none).length, liveDesigns(none).length);
-  // the page reads the list (no count in the code) and offers the rest
+  // the page reads the list (no count in the code) and links the gallery. G141 (K45 item 7): the home page shows every
+  // live design, the featured ones first (showcaseDesigns, tests/g141-showcase.test.ts).
   const home = read('app/(marketing)/page.tsx');
-  assert.match(home, /featuredDesigns\(\)/);
+  assert.match(home, /showcaseDesigns\(\)/);
   assert.match(home, /See all \{designs\.length\} designs/);
   assert.doesNotMatch(home, /\.slice\(0,\s*\d+\)/);
 });
