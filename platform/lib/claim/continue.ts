@@ -9,6 +9,7 @@
 //   3. field checks (fields.ts, same rules as the browser)          -> 400 invalid (+ fields)
 //   4. attempts for this order number (shared with /start)          -> 429 rate_limited
 //   5. no website for the order number yet                          -> 200 {next: "start"} (the page goes on to /start)
+//      (G151: when a private theme — a custom design — lists this order number, + startPath "/start?theme=<id>&order=<no>")
 //   6. a website whose owner email matches (normalised, constant time) -> a new DEVICE KEY (lib/device-keys.ts)
 //                                                                    -> 200 {next: "edit", slug, editPath, names}
 //   7. anything else                                                -> 403 no_match, one generic message (it never says
@@ -27,6 +28,7 @@ import { ipBucket, type RateLimiter } from '../rsvp/rate-limit.ts';
 import { emailError, normalizeEmail, normalizeOrderNumber, orderNumberError } from './fields.ts';
 import { DEFAULT_CONTINUE_LIMITS, getClaimRateLimiter, orderLimitKey, type ContinueLimits } from './limits.ts';
 import { getEditLinkMailer, type EditLinkMailer } from './mailer.ts';
+import { privateThemeForOrder } from './themes.ts';
 
 export interface ContinueContext {
   adapter: DataAdapter;
@@ -120,6 +122,11 @@ function fieldErrors(raw: Record<string, unknown>): Partial<Record<'orderNumber'
   return Object.keys(fields).length ? fields : null;
 }
 
+/** The start link of a private theme (G151): the order number in it is what opens the design on /start. */
+export function privateStartPath(themeId: string, orderNumber: string): string {
+  return `/start?theme=${encodeURIComponent(themeId)}&order=${encodeURIComponent(orderNumber)}`;
+}
+
 export async function continueWithOrder(ctx: ContinueContext, raw: Record<string, unknown>): Promise<ContinueResult> {
   const limiter = ctx.limiter ?? getClaimRateLimiter();
   const limits = ctx.limits ?? DEFAULT_CONTINUE_LIMITS;
@@ -137,7 +144,10 @@ export async function continueWithOrder(ctx: ContinueContext, raw: Record<string
   if (!perOrder.allowed) return continueError(429, 'rate_limited', {}, retryAfter(perOrder.retryAfterMs));
 
   const sites = await ctx.adapter.findSitesByOrderRef(orderNumber);
-  if (!sites.length) return { status: 200, body: { ok: true, next: 'start' } };
+  if (!sites.length) {
+    const custom = await privateThemeForOrder(orderNumber);
+    return { status: 200, body: { ok: true, next: 'start', ...(custom ? { startPath: privateStartPath(custom.id, orderNumber) } : {}) } };
+  }
   const site = ownedSite(sites, email);
   if (!site) return continueError(403, 'no_match');
   const now = new Date((ctx.now ?? Date.now)());

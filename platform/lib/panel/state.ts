@@ -168,7 +168,7 @@ export async function panelTheme(themeId: string): Promise<PanelTheme> {
     thankYou,
     copy: withOpeningWords(panelCopyEntries(m.copy), opening),
     opening,
-    sample: (await claimableTheme(m.id))?.demo ?? null,
+    sample: (await claimableTheme(m.id, { trusted: true }))?.demo ?? null, // the site's own theme (G151: also a private one)
     color: themeColor(pages.find(([p]) => p === 'index')?.[1]),
     shareImage: theme.share.ogImage ? themeAssetUrl(m.id, theme.share.ogImage) : null,
   };

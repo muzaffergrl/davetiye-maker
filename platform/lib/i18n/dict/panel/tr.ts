@@ -800,7 +800,7 @@ const dict: Dict = {
   'Share…': 'Paylaş…',
   'Short answer': 'Kısa cevap',
   'Short answers to what guests often ask, such as parking, children or the plan for rain. Up to {max} questions.': 'Davetlilerin sık sorduklarına kısa cevaplar; örneğin otopark, çocuklar veya yağmur durumunda plan. En fazla {max} soru.',
-  'Short blocks on your Details page, such as dress code, children, gifts, parking or the weather. None, a few or up to {max}.': 'Ayrıntılar sayfanızda kısa bloklar; örneğin kıyafet kuralı, çocuklar, hediyeler, otopark veya hava durumu. Hiç, birkaç tane ya da en fazla {max}.',
+  'Short blocks on your Details page, such as children, gifts, parking or the weather. None, a few or up to {max}.': 'Ayrıntılar sayfanızda kısa bloklar; örneğin çocuklar, hediyeler, otopark veya hava durumu. Hiç, birkaç tane ya da en fazla {max}.',
   'Show': 'Göster',
   'Show all replies': 'Tüm yanıtları göster',
   'Show all {n} answers': '{n} cevabın tümünü göster',

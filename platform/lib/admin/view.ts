@@ -20,6 +20,8 @@ export interface AdminSiteSummary {
   orderCheckedAt: string | null;
   createdAt: string;
   updatedAt: string;
+  /** G151: last change of the website content (not the shop's notes, messages, links): "Son değişiklik" + the to-do. */
+  contentUpdatedAt?: string;
   publishedAt: string | null;
   firstPublishedAt: string | null;
   /** YYYY-MM-DD from the draft. */
@@ -211,7 +213,7 @@ export function adminDashboard(list: readonly AdminSiteSummary[], now: Date = ne
     }
   }
   for (const s of list) {
-    if (s.unpublishedChanges && t - Date.parse(s.updatedAt) > 2 * DAY_MS) {
+    if (s.unpublishedChanges && t - Date.parse(s.contentUpdatedAt || s.updatedAt) > 2 * DAY_MS) {
       todos.push({ kind: 'unpublished_changes', site: s, text: 'Yayınlanmamış değişiklikleri var (alıcı Publish\'e basmamış olabilir)' });
     }
   }

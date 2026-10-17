@@ -3,6 +3,7 @@
 
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import { normalizeOrderNumber } from '../claim/fields.ts';
 import { parseCopyManifest, type CopyManifest } from './copy.ts';
 import { findShareFiles, type ThemeShareFiles } from './share.ts';
 
@@ -27,6 +28,12 @@ export interface ThemeManifest {
   version?: string;
   /** Internal themes (test scaffolding) are not offered to buyers. */
   internal?: boolean;
+  /**
+   * G151 (K42/K47): a custom design made for one buyer ("Custom design" service) is never offered to anyone else.
+   * `orders` = the Etsy order number(s) allowed to start a website from it (normalised digits). A private theme is left
+   * out of every public list; /start opens it only with a listed order number; the shop admin can always use it.
+   */
+  private?: { orders: string[] };
   pages: Partial<Record<PageName, string>>;
   photos: Record<string, PhotoSlot>;
   /**
@@ -96,6 +103,20 @@ export function parseManifest(raw: unknown, folderId: string): ThemeManifest {
     }
     photos[key] = { label: s.label, source: s.source, ...(typeof s.aspect === 'string' ? { aspect: s.aspect } : {}) };
   }
+  let priv: { orders: string[] } | null = null;
+  if (m.private !== undefined) {
+    const p = m.private as Record<string, unknown> | null;
+    if (!p || typeof p !== 'object' || Array.isArray(p) || !Array.isArray(p.orders)) {
+      throw new ThemeError(`${folderId}: private must be {"orders": ["<Etsy order number>", …]}`);
+    }
+    const orders: string[] = [];
+    for (const o of p.orders) {
+      const n = normalizeOrderNumber(o);
+      if (!n) throw new ThemeError(`${folderId}: private.orders: "${String(o)}" is not an Etsy order number (8–12 digits)`);
+      if (!orders.includes(n)) orders.push(n);
+    }
+    priv = { orders };
+  }
   const copy = parseCopyManifest(m.copy);
   if (copy.problems.length) throw new ThemeError(`${folderId}: theme.json ${copy.problems.join('; ')}`);
   return {
@@ -103,6 +124,7 @@ export function parseManifest(raw: unknown, folderId: string): ThemeManifest {
     name: m.name,
     ...(typeof m.version === 'string' ? { version: m.version } : {}),
     ...(m.internal === true ? { internal: true } : {}),
+    ...(priv ? { private: priv } : {}),
     pages,
     photos,
     copy: copy.manifest,
@@ -146,8 +168,19 @@ export async function readThemePage(theme: LoadedTheme, page: PageName): Promise
   });
 }
 
-/** All themes with a valid theme.json. Internal themes are skipped unless asked for. */
-export async function listThemes(opts: { includeInternal?: boolean } = {}): Promise<ThemeManifest[]> {
+/** True for a custom design made for one buyer (theme.json "private", G151). */
+export function isPrivateTheme(manifest: Pick<ThemeManifest, 'private'>): boolean {
+  return manifest.private !== undefined;
+}
+
+/** May this (typed) order number use the private theme? Normalised like /start does; false for a public theme. */
+export function privateThemeAllowsOrder(manifest: Pick<ThemeManifest, 'private'>, order: unknown): boolean {
+  const n = normalizeOrderNumber(order);
+  return Boolean(n && manifest.private?.orders.includes(n));
+}
+
+/** All themes with a valid theme.json. Internal and private (G151) themes are skipped unless asked for. */
+export async function listThemes(opts: { includeInternal?: boolean; includePrivate?: boolean } = {}): Promise<ThemeManifest[]> {
   let entries: string[];
   try {
     entries = await fs.readdir(themesDir());
@@ -157,7 +190,10 @@ export async function listThemes(opts: { includeInternal?: boolean } = {}): Prom
   const out: ThemeManifest[] = [];
   for (const id of entries.sort()) {
     const theme = await loadTheme(id).catch(() => null);
-    if (theme && (opts.includeInternal || !theme.manifest.internal)) out.push(theme.manifest);
+    if (!theme) continue;
+    if (theme.manifest.internal && !opts.includeInternal) continue;
+    if (isPrivateTheme(theme.manifest) && !opts.includePrivate) continue;
+    out.push(theme.manifest);
   }
   return out;
 }

@@ -1006,8 +1006,8 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
         else ok('RSVP: "Send another reply" reopens the form');
       }
       // the theme demo on /start: its RSVP page asks no status from a site that does not exist (no 404, no console error)
-      if (env.internal) {
-        warn('theme demo RSVP page (/start/demo/…/rsvp): skipped — internal themes are not on /start');
+      if (env.internal || env.private) {
+        warn(`theme demo RSVP page (/start/demo/…/rsvp): skipped — ${env.internal ? 'internal themes are not on /start' : 'a private theme\'s demo is admin-only (G151)'}`);
       } else {
         const demoPage = await ctx.newPage();
         const demoProblems = watch(demoPage);

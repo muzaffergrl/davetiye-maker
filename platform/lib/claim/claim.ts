@@ -7,6 +7,8 @@
 //   2. honeypot field "website" filled                      -> 400 invalid (nothing stored)
 //   3. theme exists, is offered and has demo content        -> 404 theme_unavailable
 //      … and, in production, is approved for sale (G080, lib/themes/approval.ts) -> 403 theme_in_review
+//      (G151: a private theme — custom design — only with an order number from its theme.json list; any other order
+//       number gets the unknown-theme 404, so nobody learns that it exists)
 //   4. field checks (fields.ts, same rules as the browser)  -> 400 invalid (+ fields)
 //   --- serialised per order number (in this process) ---
 //   5. order verifier (verify.ts; off by default)           -> 403 order_not_verified / 503 verification_unavailable
@@ -60,7 +62,8 @@ import { DEFAULT_CLAIM_LIMITS, DEFAULT_CONTINUE_LIMITS, getClaimRateLimiter, ord
 import { getEditLinkMailer, type EditLinkMailer } from './mailer.ts';
 import { getShopNotifier, type ShopNotifier } from '../mail/index.ts';
 import { claimableTheme } from './themes.ts';
-import { THEME_IN_REVIEW, themeOpenForClaims, type ApprovalEnv } from '../themes/approval.ts';
+import { THEME_IN_REVIEW, type ApprovalEnv } from '../themes/approval.ts';
+import { themeStartable } from '../themes/offered.ts';
 import { getOrderVerifier, type OrderVerifier } from './verify.ts';
 
 export interface ClaimContext {
@@ -288,9 +291,10 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
 
   if (text(raw.website).trim()) return claimError(400, 'invalid'); // honeypot: a person never fills it
 
-  const theme = await claimableTheme(raw.theme);
+  // G151: a private theme (custom design) only with an order number from its list; else the same 404 as an unknown theme.
+  const theme = await claimableTheme(raw.theme, { order: raw.orderNumber });
   if (!theme) return claimError(404, 'theme_unavailable');
-  if (!themeOpenForClaims(theme.id, { env: ctx.approvalEnv })) return claimError(403, 'theme_in_review');
+  if (!themeStartable(theme, ctx.approvalEnv)) return claimError(403, 'theme_in_review');
 
   const names = (Array.isArray(raw.names) ? raw.names : []).slice(0, 2).map(text);
   const values = { orderNumber: text(raw.orderNumber), email: text(raw.email), names, slug: text(raw.slug) };
