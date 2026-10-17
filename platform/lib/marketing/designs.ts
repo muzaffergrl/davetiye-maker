@@ -932,6 +932,93 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
   },
 };
 
+
+/**
+ * These themes are present in the platform, but their final artwork and sale approval are still pending.
+ * Keep their catalogue copy explicit about that status; do not invent prices, palettes, or buyer-ready claims.
+ */
+const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening' | 'home'>> = {
+  'nocturne-lake-estate': {
+    style: msg('A Lake Como invitation in charcoal, champagne gold and candlelight'),
+    opening: msg('The gold seal lifts, the dark envelope opens and an invitation card rises from its pocket. This preview uses interim artwork while the final design assets are being prepared.'),
+    home: msg('A Lake Como evening with the couple’s names, wedding date, venue, countdown and invitation details.'),
+  },
+  'velvet-jewel-box': {
+    style: msg('A velvet ring box in aubergine, champagne satin and rose gold'),
+    opening: msg('A satin bow slips from the lid, the velvet box opens and the invitation rises from inside. This preview uses interim artwork while the final design assets are being prepared.'),
+    home: msg('A velvet and satin invitation with the couple’s names, wedding date, venue, countdown and invitation details.'),
+  },
+  'grand-theatre-premiere': {
+    style: msg('A theatre premiere with peacock velvet, antique gold and an ivory programme'),
+    opening: msg('The velvet curtains part, a spotlight crosses the stage and the programme card comes forward. This preview uses interim artwork while the final design assets are being prepared.'),
+    home: msg('A theatre-inspired wedding programme with the couple’s names, wedding date, venue, countdown and invitation details.'),
+  },
+  'orient-express-voyage': {
+    style: msg('A 1930s rail journey in bottle green, brass and ivory'),
+    opening: msg('A ticket wallet opens to reveal the invitation, presented as the start of a rail journey. This preview uses interim artwork while the final design assets are being prepared.'),
+    home: msg('A vintage travel invitation with the couple’s names, wedding date, destination, countdown and itinerary details.'),
+  },
+  'kintsugi-washi': {
+    style: msg('An indigo washi invitation folded around rice paper, with sumi ink and gold leaf'),
+    opening: msg('Folded washi opens around a rice-paper invitation, revealing the wedding details. This preview uses interim artwork while the final design assets are being prepared.'),
+    home: msg('An origami-inspired invitation with the couple’s names, wedding date, venue, countdown and celebration details.'),
+  },
+  'riad-lantern-nights': {
+    style: msg('A Marrakech courtyard with cedar doors, teal tadelakt, brass and lantern light'),
+    opening: msg('The cedar doors open onto a lantern-lit courtyard and reveal the invitation. This preview uses interim artwork while the final design assets are being prepared.'),
+    home: msg('A lantern-lit courtyard invitation with the couple’s names, wedding date, venue, countdown and celebration details.'),
+  },
+  'maison-patisserie': {
+    style: msg('A Paris pâtisserie window in pistachio, rose, cream and soft gold'),
+    opening: msg('A pâtisserie box opens to reveal the invitation and its display-case details. This preview uses interim artwork while the final design assets are being prepared.'),
+    home: msg('A pâtisserie-inspired invitation with the couple’s names, wedding date, venue, countdown and celebration details.'),
+  },
+  'celestial-observatory': {
+    style: msg('A brass observatory beneath a midnight sky, with star charts and moon phases'),
+    opening: msg('The observatory opens beneath a turning star chart and reveals the invitation. This preview uses interim artwork while the final design assets are being prepared.'),
+    home: msg('A night-sky invitation with the couple’s names, wedding date, venue, countdown and celebration details.'),
+  },
+  'azulejo-mosaic': {
+    style: msg('A Portuguese azulejo wall with cobalt, whitewash and patterned tiles'),
+    opening: msg('A mosaic wall gives way to reveal the invitation behind its patterned tiles. This preview uses interim artwork while the final design assets are being prepared.'),
+    home: msg('A tile-inspired invitation with the couple’s names, wedding date, venue, countdown and celebration details.'),
+  },
+  'sky-lantern-festival': {
+    style: msg('A dusk sky of violet, rose and amber with warm rice-paper lanterns'),
+    opening: msg('A lantern kindles and rises into the dusk sky as the invitation glows into view. This preview uses interim artwork while the final design assets are being prepared.'),
+    home: msg('A lantern-lit evening invitation with the couple’s names, wedding date, venue, countdown and celebration details.'),
+  },
+  'music-box-ballerina': {
+    style: msg('A rose-quartz music box with blush satin and soft gold'),
+    opening: msg('A brass key winds the music box, its lid opens and the invitation rises from the satin interior. This preview uses interim artwork while the final design assets are being prepared.'),
+    home: msg('A music-box invitation with the couple’s names, wedding date, venue, countdown and celebration details.'),
+  },
+};
+
+function previewDesignCopy(d: DesignCommerce): DesignCopy | undefined {
+  const preview = PREVIEW_DESIGN_COPY[d.id];
+  if (!preview) return undefined;
+  return {
+    id: d.id,
+    collection: '',
+    demoCouple: 'Sample couple',
+    style: preview.style,
+    metaDescription: msg(d.name + ' wedding website concept preview. Explore its invitation, story, event details and RSVP pages; final artwork and Etsy availability are pending.'),
+    intro: msg(preview.style + '. This catalogue preview uses interim artwork while the final design assets and Etsy availability are pending.'),
+    opening: preview.opening,
+    pages: {
+      home: preview.home,
+      story: msg('A three-photo story gallery with captions and controls to move between moments.'),
+      details: msg('A wedding schedule with venue information, calendar links and celebration details.'),
+      rsvp: msg('An RSVP page with the shared guest reply form.'),
+    },
+    palette: [],
+    fonts: [],
+    llmsLine: d.name + ': ' + preview.style + '. Preview only; final artwork and Etsy availability are pending.',
+    relatedGuides: ['what-to-put-on-your-wedding-website', 'when-to-send-your-wedding-website'],
+  };
+}
+
 export interface Design extends DesignCommerce {
   copy: DesignCopy;
 }
@@ -956,7 +1043,7 @@ export function catalogDesigns(cfg: MarketingConfig = MARKETING): Design[] {
   return cfg.designs
     .filter((d) => d.status !== 'coming')
     .map((d) => {
-      const copy = DESIGN_COPY[d.id];
+      const copy = DESIGN_COPY[d.id] ?? (d.status === 'preview' ? previewDesignCopy(d) : undefined);
       if (!copy) throw new Error('lib/marketing/designs.ts has no copy for catalog design "' + d.id + '"');
       return { ...d, copy };
     });
