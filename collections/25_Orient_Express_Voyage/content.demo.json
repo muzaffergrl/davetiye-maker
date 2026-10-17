@@ -1,0 +1,127 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Amelia",
+      "full_name": "Amelia Rose Whitfield"
+    },
+    {
+      "display_name": "Rafael",
+      "full_name": "Rafael Antonio Moreau"
+    }
+  ],
+  "name_display": "Amelia & Rafael",
+  "initials": "A&R",
+  "host_line": "Together with their families",
+  "date": "2027-09-25",
+  "ceremony_time": "16:00",
+  "timezone": "Europe/Rome",
+  "venue": {
+    "name": "Palazzo Ferrovia",
+    "city": "Venice",
+    "region": "Veneto",
+    "country": "Italy",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Welcome aboard",
+      "time": "15:30",
+      "location": "The station hall"
+    },
+    {
+      "label": "The ceremony",
+      "time": "16:00",
+      "location": "The glass atrium"
+    },
+    {
+      "label": "Cocktails on the platform",
+      "time": "17:30",
+      "location": "The garden platform"
+    },
+    {
+      "label": "Dinner in the dining car",
+      "time": "19:00",
+      "location": "The grand salon"
+    },
+    {
+      "label": "Dancing until the last train",
+      "time": "21:00",
+      "location": "The ballroom"
+    }
+  ],
+  "dress_code": "Black tie optional",
+  "rsvp": {
+    "deadline": "2027-08-01",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Fish",
+          "Beef"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "Two tickets, one long journey and many stations in between brought us to",
+    "items": [
+      {
+        "caption": "Where our journey began"
+      },
+      {
+        "caption": "A yes between two stations"
+      },
+      {
+        "caption": "Next stop: forever"
+      }
+    ]
+  },
+  "audio": {
+    "music": "evening-strings",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 30 minutes before the ceremony; the doors open at 15:30."
+    },
+    {
+      "q": "Can you accommodate dietary requirements?",
+      "a": "Of course. Please tell us about them in your reply."
+    }
+  ]
+}

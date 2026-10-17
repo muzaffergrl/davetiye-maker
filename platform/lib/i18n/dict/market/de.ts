@@ -833,6 +833,18 @@ const dict: Dict = {
   // G146: "Create your website" + continue on any device with the Etsy order number + email
   'Create your website': 'Website erstellen',
   'Create your website or continue editing': 'Website erstellen oder weiter bearbeiten',
+  // G163 Orient Express Voyage
+  'A boarding pass with your reply-by date and the shared configurable reply form; a sent reply gets a boarding stamp.': 'Eine Bordkarte mit eurem Antwortdatum und dem gemeinsamen, anpassbaren Antwortformular; eine gesendete Antwort erhält einen Bordstempel.',
+  'A vintage rail journey wedding website: a leather ticket wallet opens to a first-class ticket, and a route map draws itself. Edit it in your online editor.': 'Eine Hochzeitswebsite im Stil einer Zugreise: Eine Ticketmappe aus Leder öffnet sich zu einem Erste-Klasse-Ticket, eine Karte zeichnet ihre Route. Im Online-Editor anpassbar.',
+  'A vintage rail journey: a bottle-green leather ticket wallet, a first-class ticket, an antique route map and carriage-window photos': 'Eine Zugreise wie früher: eine flaschengrüne Ticketmappe aus Leder, ein Erste-Klasse-Ticket, eine alte Routenkarte und Fotos in Abteilfenstern',
+  'Bottle green': 'Flaschengrün',
+  'Bottle green, brass and ivory, in the style of an old travel poster. Your names rise over the poster, then the invitation with a swinging luggage tag, a departure countdown and a route that draws itself across an antique map.': 'Flaschengrün, Messing und Elfenbein im Stil eines alten Reiseplakats. Eure Namen erscheinen über dem Plakat, dann die Einladung mit einem schwingenden Gepäckanhänger, ein Abfahrts-Countdown und eine Route, die sich über eine alte Karte zeichnet.',
+  'Brass': 'Messing',
+  'Route red': 'Routenrot',
+  'The day as stations along a route on an antique map, one by one, then the venue, an optional map and directions, calendar links, dress code and questions and answers.': 'Der Tag als Stationen einer Route auf einer alten Karte, eine nach der anderen; dann der Ort, eine optionale Karte mit Wegbeschreibung, Kalenderlinks, Dresscode sowie Fragen und Antworten.',
+  'Three photos in carriage windows on green panelling. As guests scroll, each photo glides past its window like passing scenery.': 'Drei Fotos in Abteilfenstern auf grüner Holzvertäfelung. Beim Scrollen gleitet jedes Foto wie vorbeiziehende Landschaft hinter seinem Fenster vorbei.',
+  'Your guests tap the wallet. The leather strap unbuckles, the cover swings open and a separate first-class ticket with your photo slides out of its pocket. The ticket then opens into your home page.': 'Eure Gäste tippen auf die Mappe. Der Lederriemen öffnet sich, der Deckel schwingt auf und ein eigenes Erste-Klasse-Ticket mit eurem Foto gleitet aus seiner Tasche. Das Ticket öffnet dann eure Startseite.',
+  'Your names over a travel poster, the invitation beside your portrait with a luggage tag, a departure countdown and a map whose route draws itself as guests scroll.': 'Eure Namen über einem Reiseplakat, die Einladung neben eurem Porträt mit Gepäckanhänger, ein Abfahrts-Countdown und eine Karte, deren Route sich beim Scrollen zeichnet.',
 };
 
 export default dict;

@@ -66,7 +66,7 @@ test('04 Vintage Airmail Love Letter is live: fifth after 03, 01, 05 and 02, sam
   assert.equal(d.etsyListingUrl, '[ETSY LISTING URL]');
   assert.equal(d.compareAtPrice, null);
   // Existing products stay live; Crimson is a preview pending sale approval.
-  assert.deepEqual(MARKETING.designs.filter((x) => x.status !== 'live').map((x) => x.id), ['nocturne-lake-estate']);
+  assert.deepEqual(MARKETING.designs.filter((x) => x.status !== 'live').map((x) => x.id), ['nocturne-lake-estate', 'orient-express-voyage']);
 });
 
 test('design page title ≤ 60 characters: the long name keeps "Wedding Website" and drops "Envelope" (also with a 12-character brand)', () => {

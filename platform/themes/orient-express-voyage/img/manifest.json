@@ -1,0 +1,563 @@
+{
+ "_note": "G163 build. Pieces listed under 'interim' are flat palette tones with a soft light fall-off (no drawn shape) until their GPT part (GPT_PROMPTS.md PAKET 5 W2) arrives.",
+ "station_bg": {
+  "src_size": [
+   1024,
+   1536
+  ],
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "station_bg-640.webp",
+    "w": 640,
+    "h": 960,
+    "bytes": 1962
+   },
+   {
+    "file": "station_bg-1024.webp",
+    "w": 1024,
+    "h": 1536,
+    "bytes": 4550
+   }
+  ]
+ },
+ "wallet_cover": {
+  "src_size": [
+   640,
+   960
+  ],
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "wallet_cover-440.webp",
+    "w": 440,
+    "h": 660,
+    "bytes": 1220
+   },
+   {
+    "file": "wallet_cover-640.webp",
+    "w": 640,
+    "h": 960,
+    "bytes": 2270
+   }
+  ]
+ },
+ "wallet_cover_in": {
+  "src_size": [
+   640,
+   960
+  ],
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "wallet_cover_in-440.webp",
+    "w": 440,
+    "h": 660,
+    "bytes": 1096
+   },
+   {
+    "file": "wallet_cover_in-640.webp",
+    "w": 640,
+    "h": 960,
+    "bytes": 2004
+   }
+  ]
+ },
+ "wallet_inside": {
+  "src_size": [
+   640,
+   960
+  ],
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "wallet_inside-440.webp",
+    "w": 440,
+    "h": 660,
+    "bytes": 916
+   },
+   {
+    "file": "wallet_inside-640.webp",
+    "w": 640,
+    "h": 960,
+    "bytes": 1758
+   }
+  ]
+ },
+ "wallet_pocket": {
+  "src_size": [
+   640,
+   960
+  ],
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "wallet_pocket-440.webp",
+    "w": 440,
+    "h": 660,
+    "bytes": 1216
+   },
+   {
+    "file": "wallet_pocket-640.webp",
+    "w": 640,
+    "h": 960,
+    "bytes": 1946
+   }
+  ]
+ },
+ "strap_l": {
+  "src_size": [
+   480,
+   115
+  ],
+  "ratio": 4.17391,
+  "files": [
+   {
+    "file": "strap_l-240.webp",
+    "w": 240,
+    "h": 58,
+    "bytes": 172
+   },
+   {
+    "file": "strap_l-480.webp",
+    "w": 480,
+    "h": 115,
+    "bytes": 386
+   }
+  ]
+ },
+ "strap_r": {
+  "src_size": [
+   320,
+   125
+  ],
+  "ratio": 2.56,
+  "files": [
+   {
+    "file": "strap_r-160.webp",
+    "w": 160,
+    "h": 62,
+    "bytes": 132
+   },
+   {
+    "file": "strap_r-320.webp",
+    "w": 320,
+    "h": 125,
+    "bytes": 274
+   }
+  ]
+ },
+ "ticket": {
+  "src_size": [
+   640,
+   973
+  ],
+  "ratio": 0.65776,
+  "files": [
+   {
+    "file": "ticket-480.webp",
+    "w": 480,
+    "h": 730,
+    "bytes": 1726
+   },
+   {
+    "file": "ticket-640.webp",
+    "w": 640,
+    "h": 973,
+    "bytes": 2774
+   }
+  ]
+ },
+ "stage": {
+  "canvas": [
+   1024,
+   1536
+  ],
+  "box": [
+   192,
+   288,
+   640,
+   960
+  ],
+  "objAspect": 0.6667,
+  "strap": {
+   "box_pct": [
+    0,
+    53.0,
+    100,
+    9.896
+   ],
+   "buckle_cut": 0.62
+  },
+  "pocket": {
+   "top_pct": 46.0
+  },
+  "ticket": {
+   "box_pct": [
+    10.9,
+    8.0,
+    78.125,
+    79.167
+   ],
+   "window_pct": [
+    27.0,
+    7.0,
+    46.0,
+    38.0
+   ]
+  },
+  "open": "the cover turns on its left hinge to -180° (rotateY; its inside is wallet_cover_in, backface hidden); the spread is two wallets wide: site.js scales the stage to 94% of the screen (--open-scale)"
+ },
+ "poster": {
+  "src_size": [
+   1024,
+   1536
+  ],
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "poster-640.webp",
+    "w": 640,
+    "h": 960,
+    "bytes": 2682
+   },
+   {
+    "file": "poster-1024.webp",
+    "w": 1024,
+    "h": 1536,
+    "bytes": 5990
+   }
+  ]
+ },
+ "map": {
+  "src_size": [
+   1536,
+   1024
+  ],
+  "ratio": 1.5,
+  "files": [
+   {
+    "file": "map-640.webp",
+    "w": 640,
+    "h": 427,
+    "bytes": 1070
+   },
+   {
+    "file": "map-1024.webp",
+    "w": 1024,
+    "h": 683,
+    "bytes": 2326
+   },
+   {
+    "file": "map-1536.webp",
+    "w": 1536,
+    "h": 1024,
+    "bytes": 4784
+   }
+  ]
+ },
+ "tag": {
+  "src_size": [
+   360,
+   672
+  ],
+  "ratio": 0.53571,
+  "files": [
+   {
+    "file": "tag-240.webp",
+    "w": 240,
+    "h": 448,
+    "bytes": 480
+   },
+   {
+    "file": "tag-360.webp",
+    "w": 360,
+    "h": 672,
+    "bytes": 884
+   }
+  ]
+ },
+ "clock": {
+  "src_size": [
+   480,
+   480
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "clock-240.webp",
+    "w": 240,
+    "h": 240,
+    "bytes": 442
+   },
+   {
+    "file": "clock-480.webp",
+    "w": 480,
+    "h": 480,
+    "bytes": 1092
+   }
+  ]
+ },
+ "window_frame": {
+  "src_size": [
+   640,
+   853
+  ],
+  "ratio": 0.75029,
+  "files": [
+   {
+    "file": "window_frame-480.webp",
+    "w": 480,
+    "h": 640,
+    "bytes": 664
+   },
+   {
+    "file": "window_frame-640.webp",
+    "w": 640,
+    "h": 853,
+    "bytes": 1108
+   }
+  ]
+ },
+ "window": {
+  "glass_pct": [
+   0,
+   0,
+   100,
+   100
+  ],
+  "aspect": 0.75
+ },
+ "wall": {
+  "src_size": [
+   640,
+   640
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "wall-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 848
+   }
+  ]
+ },
+ "paper": {
+  "src_size": [
+   640,
+   640
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "paper-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 808
+   }
+  ]
+ },
+ "pass_top": {
+  "src_size": [
+   960,
+   230
+  ],
+  "ratio": 4.17391,
+  "files": [
+   {
+    "file": "pass_top-640.webp",
+    "w": 640,
+    "h": 153,
+    "bytes": 456
+   },
+   {
+    "file": "pass_top-960.webp",
+    "w": 960,
+    "h": 230,
+    "bytes": 824
+   }
+  ]
+ },
+ "pass_mid": {
+  "src_size": [
+   960,
+   144
+  ],
+  "ratio": 6.66667,
+  "files": [
+   {
+    "file": "pass_mid-640.webp",
+    "w": 640,
+    "h": 96,
+    "bytes": 278
+   },
+   {
+    "file": "pass_mid-960.webp",
+    "w": 960,
+    "h": 144,
+    "bytes": 464
+   }
+  ]
+ },
+ "pass_stub": {
+  "src_size": [
+   960,
+   259
+  ],
+  "ratio": 3.70656,
+  "files": [
+   {
+    "file": "pass_stub-640.webp",
+    "w": 640,
+    "h": 173,
+    "bytes": 404
+   },
+   {
+    "file": "pass_stub-960.webp",
+    "w": 960,
+    "h": 259,
+    "bytes": 706
+   }
+  ]
+ },
+ "stamp": {
+  "src_size": [
+   480,
+   480
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "stamp-240.webp",
+    "w": 240,
+    "h": 240,
+    "bytes": 390
+   },
+   {
+    "file": "stamp-480.webp",
+    "w": 480,
+    "h": 480,
+    "bytes": 964
+   }
+  ]
+ },
+ "ph_portrait": {
+  "src_size": [
+   640,
+   800
+  ],
+  "ratio": 0.8,
+  "files": [
+   {
+    "file": "ph_portrait-640.webp",
+    "w": 640,
+    "h": 800,
+    "bytes": 2084
+   }
+  ]
+ },
+ "ph_window": {
+  "src_size": [
+   640,
+   853
+  ],
+  "ratio": 0.75029,
+  "files": [
+   {
+    "file": "ph_window-640.webp",
+    "w": 640,
+    "h": 853,
+    "bytes": 2192
+   }
+  ]
+ },
+ "ph_wide": {
+  "src_size": [
+   640,
+   427
+  ],
+  "ratio": 1.49883,
+  "files": [
+   {
+    "file": "ph_wide-640.webp",
+    "w": 640,
+    "h": 427,
+    "bytes": 1266
+   }
+  ]
+ },
+ "placeholders": {
+  "hero_portrait": "ph_portrait-640.webp",
+  "story": "ph_window-640.webp",
+  "venue": "ph_wide-640.webp"
+ },
+ "og": {
+  "src_size": [
+   1024,
+   1536
+  ],
+  "crop": [
+   0,
+   499,
+   1024,
+   538
+  ],
+  "align": "orta",
+  "size": [
+   1200,
+   630
+  ],
+  "file": "og-1200x630.jpg",
+  "bytes": 9945
+ },
+ "favicon": {
+  "src_box": [
+   0,
+   0,
+   520,
+   520
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.04,
+  "file": "favicon.png",
+  "bytes": 5342
+ },
+ "interim": [
+  "bg_station.png",
+  "wallet_closed.png",
+  "wallet_inside_cover.png",
+  "wallet_inside.png",
+  "wallet_pocket.png",
+  "wallet_strap.png",
+  "ticket.png",
+  "poster_hero.png",
+  "map.png",
+  "luggage_tag.png",
+  "station_clock.png",
+  "carriage_window.png",
+  "carriage_wall.png",
+  "bg_paper.png",
+  "boarding_pass.png",
+  "stamp.png"
+ ],
+ "checks": {
+  "green": {}
+ },
+ "theme_check": {
+  "first_screen": {
+   "landscape": false,
+   "names_min_px": 32
+  },
+  "backdrop": {
+   "edge_max": 2.2,
+   "dark_max": 0.05,
+   "dark_below": 0,
+   "light_above": 110
+  }
+ },
+ "bytes_total": 183598
+}

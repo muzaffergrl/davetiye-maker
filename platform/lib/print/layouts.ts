@@ -209,6 +209,22 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
       back: { bg: '#11120F', images: [sealAt('top')] },
     },
   },
+  // 25 (G163): composed until the PAKET 6 print backgrounds arrive (collections/25_Orient_Express_Voyage/assets/gpt/
+  // GPT_PROMPTS.md: print/invitation_front.png, print/invitation_back.png). Interim front = the theme's poster image (its
+  // pale sky carries the text, like the website's first screen); back = the website's ivory with the boarding stamp. Both
+  // are the theme build's interim tones until GPT's poster / stamp exist — then `node scripts/build-print-assets.ts
+  // --theme orient-express-voyage` picks the real ones up through the theme's img/.
+  'orient-express-voyage': {
+    collection: '25_Orient_Express_Voyage',
+    sources: { scene: 'platform/themes/orient-express-voyage/img/poster-1024.webp', stamp: 'platform/themes/orient-express-voyage/img/stamp-480.webp' },
+    fonts: gf('family=Limelight&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400'),
+    script: "'Limelight', Georgia, serif", serif: "'Cormorant Garamond', Georgia, serif",
+    ink: '#1E3A2C', accent: '#7A5C24', front: [6, 14, 52, 14], back: [20, 12, 8, 12],
+    composed: {
+      front: { bg: cover('scene', '50% 0%'), images: [] },
+      back: { bg: '#F3EBD9', images: [{ ...sealAt('top'), src: 'stamp' }] },
+    },
+  },
 };
 
 export function printLayout(themeId: string): PrintLayout | null {

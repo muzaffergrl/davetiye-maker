@@ -1,0 +1,7 @@
+/* Orient Express Voyage — thank-you mode (G075, docs/11 §3.6): loaded only after the wedding (data-if="thank_you_on").
+   The same wallet and pages; the ticket and the invitation carry the couple's thank-you. No new artwork. */
+.ty-title{font:400 max(12px,9cqw)/1.15 var(--display)}
+.ticket-photo .ty-decor{background:var(--ivory)}
+.thank-you-copy .body-text{white-space:pre-line;margin:0 auto 18px;max-width:420px}
+.thank-you-copy .love{font:italic 400 24px/1.4 var(--serif);margin-top:10px;color:var(--brass-ink)}
+.pass-closed .btn{margin-top:6px}
