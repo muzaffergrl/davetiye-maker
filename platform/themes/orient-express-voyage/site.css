@@ -48,8 +48,8 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 
 /* bottom nav */
 .site-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#11241bf2;border-top:1px solid var(--line-light);padding:6px 8px max(6px,env(safe-area-inset-bottom));view-transition-name:site-nav}
-.site-nav ul{list-style:none;padding:0;display:flex;justify-content:center;gap:4px}
-.site-nav a{display:flex;align-items:center;justify-content:center;min-height:48px;min-width:68px;padding:8px 12px;font:600 12px/1 var(--serif);letter-spacing:.16em;text-transform:uppercase;color:#e6dcc6}
+.site-nav ul{list-style:none;padding:0;margin:0 auto;max-width:560px;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:2px}
+.site-nav a{display:flex;align-items:center;justify-content:center;min-height:48px;padding:6px 4px;font:600 12px/1.15 var(--serif);letter-spacing:.1em;text-transform:uppercase;color:#e6dcc6;text-align:center;overflow-wrap:anywhere}
 .site-nav a[aria-current]{color:var(--brass-light);text-decoration:underline;text-underline-offset:8px;text-decoration-color:#d8bd8499}
 
 /* ---------------------------------------------------------------- the ticket wallet (index) */
@@ -101,7 +101,9 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .is-opening .wallet{animation:spread 900ms 600ms cubic-bezier(.45,0,.2,1) forwards}
 .is-opening .w-cover{animation:cover-open 900ms 600ms cubic-bezier(.45,0,.25,1) forwards}
 .is-opening .wallet>.ticket{animation:ticket-rise 1100ms 1500ms cubic-bezier(.42,0,.18,1) forwards,ticket-forward 400ms 2600ms cubic-bezier(.45,0,.2,1) forwards}
-.is-opened .opening-heading,.is-opened .strap-l,.is-opened .strap-r{opacity:0}
+.is-opened .strap-l,.is-opened .strap-r{opacity:0}
+.is-opened .opening-heading{display:none}
+.is-opened .stage{margin-top:calc(var(--obj) * .5)}
 .is-opened .wallet{transform:scale(var(--open-scale)) translateX(50%)}
 .is-opened .w-cover{transform:perspective(1400px) rotateY(-180deg)}
 .is-opened .wallet>.ticket{z-index:7;transform:translate(-64%,-46%) scale(1.14) rotate(-2deg);view-transition-name:invite-card;filter:drop-shadow(0 18px 22px #000a)}
@@ -314,7 +316,6 @@ html[data-rsvp-replied] .rsvp-page .page-heading .body-text{display:none}
 .route-sticky{top:40px}
 .detail-notes{grid-template-columns:repeat(3,1fr)}
 .page-heading{padding-top:120px}
-.site-nav a{min-width:110px}
 .tag{width:120px;right:-6px}
 }
 @media(max-width:359px){
@@ -325,7 +326,7 @@ html[data-rsvp-replied] .rsvp-page .page-heading .body-text{display:none}
 .pass-body{padding-inline:18px}
 .stations li{grid-template-columns:54px 1fr;gap:8px}
 .cd-row{gap:6px}
-.site-nav a{min-width:60px;padding-inline:8px;letter-spacing:.08em}
+.site-nav a{letter-spacing:.04em;font-size:11px}
 }
 @media(max-height:700px) and (max-width:759px){
 .opening{padding-top:40px}

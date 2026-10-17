@@ -27,7 +27,7 @@
   },
   "schedule": [
     {
-      "label": "Welcome aboard",
+      "label": "Welcome drinks",
       "time": "15:30",
       "location": "The station hall"
     },
@@ -37,17 +37,17 @@
       "location": "The glass atrium"
     },
     {
-      "label": "Cocktails on the platform",
+      "label": "Cocktail hour",
       "time": "17:30",
       "location": "The garden platform"
     },
     {
-      "label": "Dinner in the dining car",
+      "label": "Dinner",
       "time": "19:00",
       "location": "The grand salon"
     },
     {
-      "label": "Dancing until the last train",
+      "label": "Dancing",
       "time": "21:00",
       "location": "The ballroom"
     }
@@ -117,11 +117,11 @@
   "faq": [
     {
       "q": "When should we arrive?",
-      "a": "Please arrive 30 minutes before the ceremony; the doors open at 15:30."
+      "a": "Please arrive 20 minutes before the ceremony."
     },
     {
       "q": "Can you accommodate dietary requirements?",
-      "a": "Of course. Please tell us about them in your reply."
+      "a": "Please tell us about your requirements in your reply."
     }
   ]
 }

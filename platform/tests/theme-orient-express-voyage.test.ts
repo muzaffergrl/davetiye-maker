@@ -138,7 +138,7 @@ test('motion signature: route line over the map (scroll-driven + JS fallback), s
   assert.equal(cheerio.load(html.story)('[data-scenery] .glass[data-slot]').length, 3);
   assert.match(css, /animation-timeline:--pane/);
   assert.equal(cheerio.load(html.rsvp)('.pass img.stamp[src^="img/stamp-"]').length, 1);
-  assert.match(css, /html\[data-rsvp-replied\] \.stamp\{animation:stamp-press/);
+  assert.match(css, /html\[data-rsvp-replied\] \.stamp\{visibility:visible;animation:stamp-press/);
   // reduced motion: the route is drawn, the scenery and the stamp hold still
   const reduced = css.slice(css.indexOf('@media(prefers-reduced-motion:reduce)'));
   assert.match(reduced, /\.route-line\{animation:none!important;stroke-dashoffset:0!important\}/);
