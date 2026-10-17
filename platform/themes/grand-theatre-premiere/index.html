@@ -1,0 +1,81 @@
+<!doctype html>
+<!-- Grand Theatre Premiere · page 1 — the closed curtain (/<slug>). A dark house, "You are invited to a premiere", the
+     names, the date; below them the stage: a peacock velvet curtain under its valance (the gilded proscenium arch when
+     the GPT parts arrive), the programme card waiting behind it. Opening (README "Opening", MOTION.envelope in site.js):
+     on tap the house lights dim, the two curtain panels part with heavy folds — the left first, the right a beat later,
+     both swaying as they settle into their gathered swags — a spotlight sweeps across the stage and comes to rest on the
+     programme card, which steps downstage and flies to home (view transition invite-card → the home playbill card).
+     Back wall, each curtain panel, its gathered swag, the valance and the card are separate layers (build_images.py).
+     Personal text: none — [data-field] / [data-text] / [data-photo] are filled on the server. Thank-you mode (G075): the
+     same curtain; the card carries the thank-you title and the date, its window the thank-you photo or — without one —
+     the velvet. Design texts: data-copy (G068, theme.json "copy"). -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#061416">
+<title data-text="{name_display} · {copy.envelope_kicker}">Grand Theatre Premiere</title>
+<meta name="description" data-if="!thank_you_on" data-attr-content="{copy.envelope_kicker} · {name_display} · {date|date-long} · {venue.city_region}" content="A wedding invitation">
+<meta name="description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {name_display} · {date|date-long}" content="Thank you">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{name_display} · {date}" content="Wedding invitation">
+<meta property="og:description" data-if="!thank_you_on" data-attr-content="{copy.envelope_kicker} · {date|date-long} · {venue.city_region}" content="You are invited to a premiere">
+<meta property="og:description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {date|date-long}" content="Thank you">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
+<script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
+(function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'';if(sessionStorage.getItem('invite:opened'+k)&&!/[?&]replay=1(&|$)/.test(location.search))r.classList.add('is-opened');}catch(e){}})(document.documentElement);
+</script>
+<!-- prefetch the home page: the rule points at the "Enter" link, whose href the platform has already set to /<slug>/home -->
+<script type="speculationrules">{"prefetch":[{"source":"document","where":{"selector_matches":"a[data-enter]"},"eagerness":"immediate"}]}</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-opening" data-pending="This link will be added soon.">
+<a class="textlink skip" href="home.html" data-skip><span data-copy="envelope_skip">Skip</span></a>
+<main class="opening">
+  <div class="opening-heading">
+    <p class="eyebrow" data-if="!thank_you_on" data-copy="envelope_kicker">You are invited to a premiere</p>
+    <p class="eyebrow" data-if="thank_you_on" data-copy="ty_kicker">With love and thanks</p>
+    <h1 class="names" data-fit><span data-field="partners.0.display_name"></span><span class="amp">&amp;</span><span data-field="partners.1.display_name"></span></h1>
+    <p class="opening-date eyebrow"><span data-field="date"></span><span aria-hidden="true"> · </span><span data-field="venue.city"></span></p>
+  </div>
+  <div class="stage" role="button" tabindex="0" aria-label="Open the invitation" data-copy-attr="aria-label:envelope_open">
+    <div class="theatre">
+      <!-- every layer is the same stage box of the same canvas (manifest stage.box): inset 0, stacked -->
+      <img class="th-back" src="img/th_back-440.webp" srcset="img/th_back-440.webp 440w, img/th_back-880.webp 880w" sizes="(min-width: 760px) min(60vw, 46svh, 440px), min(84vw, 34svh, 360px)" alt="">
+      <div class="card" aria-hidden="true">
+        <img class="card-img" src="img/card_paper-320.webp" srcset="img/card_paper-320.webp 320w, img/card_paper-640.webp 640w" sizes="(min-width: 760px) min(30vw, 23svh, 220px), min(42vw, 17svh, 180px)" alt="">
+        <div class="card-copy">
+          <div class="card-photo photo-slot" data-slot="hero_portrait">
+            <img data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_portrait-640.webp" sizes="(min-width: 760px) min(20vw, 15svh, 146px), min(26vw, 11svh, 112px)" alt="">
+            <span class="ph-mark" data-if="!thank_you_on"><span>Your photo here</span></span>
+            <img class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_portrait-640.webp" sizes="(min-width: 760px) min(20vw, 15svh, 146px), min(26vw, 11svh, 112px)" alt="">
+            <span class="ty-decor" data-if="thank_you_on !thank_you.photo"><img src="img/velvet-640.webp" alt=""></span>
+          </div>
+          <p class="card-kicker" data-if="!thank_you_on" data-copy="card_line">Our wedding</p>
+          <p class="card-names" data-if="!thank_you_on" data-field="name_display"></p>
+          <p class="card-names ty-title" data-if="thank_you_on" data-field="thank_you_title"></p>
+          <p class="card-date" data-field="date"></p>
+        </div>
+      </div>
+      <img class="curtain curtain-l" src="img/curtain_l-440.webp" srcset="img/curtain_l-440.webp 440w, img/curtain_l-880.webp 880w" sizes="(min-width: 760px) min(60vw, 46svh, 440px), min(84vw, 34svh, 360px)" alt="" fetchpriority="high">
+      <img class="curtain curtain-r" src="img/curtain_r-440.webp" srcset="img/curtain_r-440.webp 440w, img/curtain_r-880.webp 880w" sizes="(min-width: 760px) min(60vw, 46svh, 440px), min(84vw, 34svh, 360px)" alt="" fetchpriority="high">
+      <img class="swag swag-l" src="img/curtain_gl-440.webp" srcset="img/curtain_gl-440.webp 440w, img/curtain_gl-880.webp 880w" sizes="(min-width: 760px) min(60vw, 46svh, 440px), min(84vw, 34svh, 360px)" alt="">
+      <img class="swag swag-r" src="img/curtain_gr-440.webp" srcset="img/curtain_gr-440.webp 440w, img/curtain_gr-880.webp 880w" sizes="(min-width: 760px) min(60vw, 46svh, 440px), min(84vw, 34svh, 360px)" alt="">
+      <span class="spot" aria-hidden="true"></span>
+      <img class="th-arch" src="img/th_arch-440.webp" srcset="img/th_arch-440.webp 440w, img/th_arch-880.webp 880w" sizes="(min-width: 760px) min(60vw, 46svh, 440px), min(84vw, 34svh, 360px)" alt="">
+    </div>
+  </div>
+  <div class="opening-actions">
+    <p class="eyebrow tap-hint" aria-hidden="true"><span data-copy="envelope_hint_tap">Tap to raise the curtain</span></p>
+    <a class="btn enter" href="home.html" data-enter><span data-copy="envelope_enter">Enter</span></a>
+    <button class="textlink replay" type="button"><span data-copy="envelope_replay">Replay the curtain</span></button>
+  </div>
+  <!-- without JavaScript (no <noscript>: its content is raw text, the platform could not rewrite the link) -->
+  <p class="nojs-only"><a class="btn" href="home.html"><span data-copy="envelope_open">Open the invitation</span></a></p>
+</main>
+</body>
+</html>

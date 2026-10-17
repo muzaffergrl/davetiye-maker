@@ -24,6 +24,7 @@ export const DEMO_CITY_PINS: Readonly<Record<string, { lat: number; lng: number 
   'midnight-garden': { lat: 29.9511, lng: -90.0715 }, // New Orleans
   'nocturne-lake-estate': { lat: 45.9857, lng: 9.2617 }, // Bellagio (Lake Como)
   'orient-express-voyage': { lat: 45.4408, lng: 12.3155 }, // Venice
+  'grand-theatre-premiere': { lat: 37.5407, lng: -77.436 }, // Richmond, VA (the theatre is fictional)
   'olive-ivory': { lat: 38.2975, lng: -122.2869 }, // Napa
   'sunflower-rustic-barn': { lat: 35.9251, lng: -86.8689 }, // Franklin, TN
   'tropical-destination': { lat: 20.6873, lng: -156.4428 }, // Wailea

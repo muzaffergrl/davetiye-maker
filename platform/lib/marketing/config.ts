@@ -177,6 +177,16 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-17',
     },
+    // New design wave 23–28 (G162, docs/24): theme built before its GPT parts; interim pieces, sale waits for the parts.
+    {
+      id: 'grand-theatre-premiere',
+      name: 'Grand Theatre Premiere',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-17',
+    },
     {
       id: 'blush-garden-rose',
       name: 'Blush Garden Rose',

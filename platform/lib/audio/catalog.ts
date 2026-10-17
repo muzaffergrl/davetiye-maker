@@ -50,6 +50,8 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   'orient-express-voyage': { music: 'evening-strings', opening: [[0, 'clasp'], [600, 'page'], [1500, 'slide'], [2600, 'chime']] },
   // Kintsugi & Washi: band slides off (closure) · top · bottom · left · right fold (one paper sound each) · card lifts (rise) · forward
   'kintsugi-washi': { music: 'first-light', opening: [[0, 'ribbon'], [550, 'paper'], [1100, 'paper'], [1650, 'paper'], [2100, 'paper'], [2900, 'slide'], [3500, 'chime']] },
+  // Grand Theatre Premiere: the curtain draws a breath (tug) · the left panel parts (partL) · the card is lit (rise) · forward
+  'grand-theatre-premiere': { music: 'evening-strings', opening: [[0, 'tap'], [400, 'whoosh'], [2000, 'slide'], [2900, 'chime']] },
   // 01 bow · lift · rise · forward
   'blush-garden-rose': { music: 'first-light', opening: [[200, 'ribbon'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
   // 02 wax seal (closure) · lift · rise · forward

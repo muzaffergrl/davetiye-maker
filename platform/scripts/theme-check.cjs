@@ -360,7 +360,9 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
     const stage = document.querySelector('.stage');
     const st = stage && vis(stage);
     const sb = st && CLOSED_BOX ? { top: st.top + st.height * CLOSED_BOX[1] / 100, bottom: st.top + st.height * (CLOSED_BOX[1] + CLOSED_BOX[3]) / 100 } : st;
-    const hint = [...document.querySelectorAll('body *')].find((el) => el.children.length === 0 && /\b(tap|click) to open\b/i.test(el.textContent) && vis(el));
+    // the hint by its words, else by its class (a design that opens a curtain, a box … says "Tap to raise the curtain")
+    const hint = [...document.querySelectorAll('body *')].find((el) => el.children.length === 0 && /\b(tap|click) to open\b/i.test(el.textContent) && vis(el))
+      ?? [...document.querySelectorAll('.tap-hint')].find((el) => vis(el)) ?? null;
     const hb = hint && hint.getBoundingClientRect();
     // effective opacity (a running CSS animation can keep a hint visible that the opened state means to hide)
     const alpha = (el) => { let a = 1; for (let n = el; n && n.nodeType === 1; n = n.parentElement) a *= Number(getComputedStyle(n).opacity); return a; };

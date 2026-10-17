@@ -255,6 +255,28 @@ const dict: Dict = {
   'Your seat is reserved. We look forward to the journey together.': 'Votre place est réservée. Nous avons hâte de faire ce voyage ensemble.',
   'departing at': 'départ à',
   'invite you aboard to celebrate their wedding': 'vous invitent à bord pour célébrer leur mariage',
+  // G162: Grand Theatre Premiere (24) — the curtain, the programme, the ticket
+  'A love story in two acts': 'Une histoire d’amour en deux actes',
+  'Act': 'Acte',
+  'Admit one': 'Billet d’entrée',
+  'At the theatre': 'Au théâtre',
+  'Curtain up at': 'Rideau à',
+  'Curtain up in': 'Lever de rideau dans',
+  'Intermission': 'Entracte',
+  'Meet the players': 'Les comédiens',
+  'Raise the curtain again': 'Relever le rideau',
+  'Replay the curtain': 'Revoir le lever de rideau',
+  'Reserve your seat': 'Réservez votre place',
+  'Scene': 'Scène',
+  'Tap to raise the curtain': 'Touchez le rideau',
+  'The Programme': 'Le programme',
+  'The curtain rises on the ceremony at': 'Le rideau se lève sur la cérémonie à',
+  'The curtain rose on the ceremony at': 'Le rideau s’est levé sur la cérémonie à',
+  'The full programme': 'Tout le programme',
+  'Tonight\'s Programme': 'Le programme de la soirée',
+  'Tonight\'s programme': 'Le programme de la soirée',
+  'You are invited to a premiere': 'Vous êtes invités à une première',
+  'Your seat is saved. We look forward to the evening together.': 'Votre place est réservée. Nous nous réjouissons de partager cette soirée.',
 };
 
 export default dict;

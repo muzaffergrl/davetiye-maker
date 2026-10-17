@@ -416,6 +416,12 @@ EK_TEMALAR = [
          dekor="Altın kintsugi damarları, washi dokuları, mürekkep fırçası darbeleri", teknik="sumi mürekkep + altın varak",
          font=("Allura", "Shippori Mincho"), palet_adi="indigo-gold-rice",
          hareket="Kat kat 3B açılma (dört kat ayrı menteşede), altın damar parıltısı, mürekkep yayılımıyla foto, süzülen altın varak pulları"),
+    dict(no=24, klasor="24_Grand_Theatre_Premiere", ad="Grand Theatre Premiere",
+         zarf="Tavus mavisi kadife sahne perdesi, antik altın proscenium kemer; iki kanat ağır kıvrımlarla, kademeli aralanır, spot ışığı sahneyi tarar.",
+         foto="Sahne çerçevesinde 'perde arası' kartları (Scene I–III); spot ışığı dokunulanı aydınlatır.",
+         dekor="Kadife perde, püskül, altın proscenium kemer, program (playbill) kâğıdı", teknik="yağlı boya tiyatro afişi",
+         font=("Abril Fatface", "Playfair Display"), palet_adi="peacock-antique-gold",
+         hareket="Perde aralanması (kademeli, salınımlı), spot ışığı maskesi, program sayfası çevirme geçişi, RSVP'de bilet koçanı yırtılması"),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

@@ -93,7 +93,7 @@ test('schema: travel, meal and details_blocks validate; blanks and over-limit li
 });
 
 test('every theme: empty content leaves no trace; full content shows the three blocks in the theme', async () => {
-  assert.equal(THEMES.length, 24); // + 22 Nocturne Lake Estate (G142), 25 Orient Express Voyage (G163), 26 Kintsugi & Washi (G164)
+  assert.equal(THEMES.length, 25); // + 22 Nocturne Lake Estate (G142), 24 Grand Theatre Premiere (G162), 25 Orient Express Voyage (G163), 26 Kintsugi & Washi (G164)
   for (const theme of THEMES) {
     const empty = await details(theme, demoContent());
     assert.equal(empty.$('[data-travel], [data-menu], [data-blocks], .pex-block').length, 0, theme);

@@ -1,0 +1,349 @@
+{
+ "_note": "G162 INTERIM build: stage layers toned/cropped from two GPT textures already in the repository (06 velvet tile, 21 paper). The design's PAKET 5 / 2 / 6 parts are ordered in collections/24_Grand_Theatre_Premiere/assets/gpt/GPT_PROMPTS.md.",
+ "th_back": {
+  "src_size": [
+   880,
+   1344
+  ],
+  "ratio": 0.65476,
+  "files": [
+   {
+    "file": "th_back-440.webp",
+    "w": 440,
+    "h": 672,
+    "bytes": 1368
+   },
+   {
+    "file": "th_back-880.webp",
+    "w": 880,
+    "h": 1344,
+    "bytes": 4176
+   }
+  ]
+ },
+ "curtain_l": {
+  "src_size": [
+   880,
+   1344
+  ],
+  "ratio": 0.65476,
+  "files": [
+   {
+    "file": "curtain_l-440.webp",
+    "w": 440,
+    "h": 672,
+    "bytes": 18002
+   },
+   {
+    "file": "curtain_l-880.webp",
+    "w": 880,
+    "h": 1344,
+    "bytes": 130894
+   }
+  ]
+ },
+ "curtain_r": {
+  "src_size": [
+   880,
+   1344
+  ],
+  "ratio": 0.65476,
+  "files": [
+   {
+    "file": "curtain_r-440.webp",
+    "w": 440,
+    "h": 672,
+    "bytes": 18208
+   },
+   {
+    "file": "curtain_r-880.webp",
+    "w": 880,
+    "h": 1344,
+    "bytes": 126398
+   }
+  ]
+ },
+ "curtain_gl": {
+  "src_size": [
+   880,
+   1344
+  ],
+  "ratio": 0.65476,
+  "files": [
+   {
+    "file": "curtain_gl-440.webp",
+    "w": 440,
+    "h": 672,
+    "bytes": 2838
+   },
+   {
+    "file": "curtain_gl-880.webp",
+    "w": 880,
+    "h": 1344,
+    "bytes": 24514
+   }
+  ]
+ },
+ "curtain_gr": {
+  "src_size": [
+   880,
+   1344
+  ],
+  "ratio": 0.65476,
+  "files": [
+   {
+    "file": "curtain_gr-440.webp",
+    "w": 440,
+    "h": 672,
+    "bytes": 3028
+   },
+   {
+    "file": "curtain_gr-880.webp",
+    "w": 880,
+    "h": 1344,
+    "bytes": 22932
+   }
+  ]
+ },
+ "th_arch": {
+  "src_size": [
+   880,
+   1344
+  ],
+  "ratio": 0.65476,
+  "files": [
+   {
+    "file": "th_arch-440.webp",
+    "w": 440,
+    "h": 672,
+    "bytes": 1452
+   },
+   {
+    "file": "th_arch-880.webp",
+    "w": 880,
+    "h": 1344,
+    "bytes": 8166
+   }
+  ]
+ },
+ "card_paper": {
+  "src_size": [
+   1024,
+   1536
+  ],
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "card_paper-320.webp",
+    "w": 320,
+    "h": 480,
+    "bytes": 1370
+   },
+   {
+    "file": "card_paper-640.webp",
+    "w": 640,
+    "h": 960,
+    "bytes": 15244
+   }
+  ]
+ },
+ "stage": {
+  "canvas": [
+   1024,
+   1536
+  ],
+  "box": [
+   72,
+   96,
+   880,
+   1344
+  ],
+  "objAspect": 0.6548,
+  "method": "interim",
+  "opening_pct": [
+   0,
+   0,
+   100,
+   100
+  ],
+  "curtain_l": {
+   "box_pct": [
+    0,
+    0,
+    51.477,
+    100
+   ],
+   "origin": "0% 50%"
+  },
+  "curtain_r": {
+   "box_pct": [
+    48.523,
+    0,
+    51.477,
+    100
+   ],
+   "origin": "100% 50%"
+  },
+  "gather": 0.34,
+  "valance_pct": 8.482,
+  "card": {
+   "box_pct": [
+    25.0,
+    40.923,
+    50.0,
+    49.107
+   ]
+  }
+ },
+ "velvet": {
+  "src_size": [
+   1280,
+   1280
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "velvet-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 18914
+   }
+  ]
+ },
+ "room": {
+  "src_size": [
+   683,
+   1024
+  ],
+  "ratio": 0.66699,
+  "files": [
+   {
+    "file": "room-640.webp",
+    "w": 640,
+    "h": 960,
+    "bytes": 4072
+   }
+  ]
+ },
+ "paper": {
+  "src_size": [
+   1024,
+   1536
+  ],
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "paper-640.webp",
+    "w": 640,
+    "h": 960,
+    "bytes": 9702
+   },
+   {
+    "file": "paper-1024.webp",
+    "w": 1024,
+    "h": 1536,
+    "bytes": 46408
+   }
+  ]
+ },
+ "stub_paper": {
+  "src_size": [
+   1024,
+   341
+  ],
+  "ratio": 3.00293,
+  "files": [
+   {
+    "file": "stub_paper-480.webp",
+    "w": 480,
+    "h": 160,
+    "bytes": 948
+   },
+   {
+    "file": "stub_paper-960.webp",
+    "w": 960,
+    "h": 320,
+    "bytes": 9486
+   }
+  ]
+ },
+ "ph_portrait": {
+  "src_size": [
+   640,
+   800
+  ],
+  "ratio": 0.8,
+  "files": [
+   {
+    "file": "ph_portrait-640.webp",
+    "w": 640,
+    "h": 800,
+    "bytes": 1792
+   }
+  ]
+ },
+ "ph_land": {
+  "src_size": [
+   640,
+   427
+  ],
+  "ratio": 1.49883,
+  "files": [
+   {
+    "file": "ph_land-640.webp",
+    "w": 640,
+    "h": 427,
+    "bytes": 1022
+   }
+  ]
+ },
+ "placeholders": {
+  "hero_portrait": "ph_portrait-640.webp",
+  "venue": "ph_land-640.webp"
+ },
+ "photo_slots": {
+  "portrait": {
+   "aspect": "4/5"
+  },
+  "land": {
+   "aspect": "3/2"
+  }
+ },
+ "og": {
+  "file": "og-1200x630.jpg",
+  "source": "assembled (interim): velvet + paper",
+  "bytes": 132298
+ },
+ "favicon": {
+  "src_box": [
+   0,
+   0,
+   360,
+   360
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.04,
+  "file": "favicon.png",
+  "bytes": 41597
+ },
+ "checks": {
+  "green": {}
+ },
+ "theme_check": {
+  "particles": ".accent-layer",
+  "first_screen": {
+   "landscape": false,
+   "names_min_px": 32
+  },
+  "backdrop": {
+   "edge_max": 2.2,
+   "dark_max": 0.05,
+   "dark_below": 0,
+   "light_above": 110
+  }
+ },
+ "bytes_total": 765724
+}

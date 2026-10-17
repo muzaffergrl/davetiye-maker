@@ -1298,6 +1298,16 @@ const dict: Dict = {
   'The shop\'s edit link cannot change the couple\'s reply emails.': 'Mağazanın düzenleme bağlantısı çiftin yanıt e-postalarını değiştiremez.',
   'Reply emails are not available yet.': 'Yanıt e-postaları henüz kullanılamıyor.',
   'This website has no email address to send to. Please message the shop.': 'Bu websitenin gönderilecek bir e-posta adresi yok. Lütfen mağazaya mesaj gönderin.',
+  // G162: Grand Theatre Premiere (24) — the curtain, the programme, the ticket
+  'Above your names on the curtain': 'Perdede isimlerinizin üstünde',
+  'Button after the curtain opens': 'Perde açıldıktan sonraki düğme',
+  'Curtain': 'Perde',
+  'Open the curtain again (RSVP page)': 'Perdeyi yeniden aç (Katılım sayfası)',
+  'Open the curtain again (curtain page)': 'Perdeyi yeniden aç (perde sayfası)',
+  'Open the curtain again (home page)': 'Perdeyi yeniden aç (ana sayfa)',
+  'Under the curtain, on computers': 'Perdenin altında, bilgisayarlarda',
+  'Under the curtain, on phones': 'Perdenin altında, telefonlarda',
+  'curtain': 'perde',
 };
 
 export default dict;

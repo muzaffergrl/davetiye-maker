@@ -1298,6 +1298,16 @@ const dict: Dict = {
   'The shop\'s edit link cannot change the couple\'s reply emails.': 'El enlace de edición de la tienda no puede cambiar los emails de respuestas de la pareja.',
   'Reply emails are not available yet.': 'Los emails de respuestas aún no están disponibles.',
   'This website has no email address to send to. Please message the shop.': 'Esta web no tiene una dirección de email a la que enviar. Escribe a la tienda.',
+  // G162: Grand Theatre Premiere (24) — the curtain, the programme, the ticket
+  'Above your names on the curtain': 'Sobre sus nombres en el telón',
+  'Button after the curtain opens': 'Botón tras abrirse el telón',
+  'Curtain': 'Telón',
+  'Open the curtain again (RSVP page)': 'Abrir el telón de nuevo (página de RSVP)',
+  'Open the curtain again (curtain page)': 'Abrir el telón de nuevo (página del telón)',
+  'Open the curtain again (home page)': 'Abrir el telón de nuevo (página de inicio)',
+  'Under the curtain, on computers': 'Bajo el telón, en ordenadores',
+  'Under the curtain, on phones': 'Bajo el telón, en teléfonos',
+  'curtain': 'el telón',
 };
 
 export default dict;
