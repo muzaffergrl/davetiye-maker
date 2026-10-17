@@ -14,6 +14,9 @@ They have no theme and no demo; their TRY prices were approved on 2026-10-16 (do
 The JSON is what a browser session pastes into Etsy's listing editor (docs/20 §8). Nothing is sent to Etsy here.
 - `description` is §2 of listing_v3.md with the "[VERIFY: …]" notes taken out; each note goes to `open_checks` with
   its sentence, so the claim stays visible until it is tested. `ready_to_publish` stays false while any check is open.
+  G154 (G090 P0-03): §2 holds no VERIFY note any more (it claims only features that exist and passed G090's local
+  checks); the live-site and real-device tests are the unchecked boxes of "Before you publish this listing" (§11),
+  and each of them is an open check too ("where": "before publishing").
 - Price: 1,460 TL, approved by the user on 2026-10-16 (shop currency TRY, K38; about USD 29.48, docs/23 §1);
   quantity 999, Etsy's maximum (user: no stock limit). Renewal stays null: the user's decision (each renewal costs a fee).
 - Images: the rows of §5 with the file's real state, from package/listing/images_editorial/ (the editorial set of
@@ -103,6 +106,15 @@ def description(md: str) -> tuple[str, list[dict]]:
     return "\n".join(text).strip(), checks
 
 
+def before_publishing(md: str) -> list[dict]:
+    """G154: the unchecked boxes ("- [ ] …") of "Before you publish this listing", as open checks."""
+    m = re.search(r"^## \d+\. Before you publish this listing\s*$(.*?)(?=^## |\Z)", md, re.S | re.M)
+    if not m:
+        return []
+    return [{"where": "before publishing", "check": line[len("- [ ] "):].strip(), "text": ""}
+            for line in m.group(1).splitlines() if line.startswith("- [ ] ")]
+
+
 def table(block: str) -> list[list[str]]:
     rows = []
     for line in block.splitlines():
@@ -187,7 +199,7 @@ def build(no: str, folder: str, theme: str) -> tuple[dict, list[str]]:
     desc, checks = description(md)
     attrs, more = attributes(md)
     imgs, img_checks = images(md, listing)
-    checks += more + img_checks
+    checks += more + img_checks + before_publishing(md)
     pdf = coll / "package" / "customer" / "START_HERE.pdf"
     video = listing / "video.mp4"
     mockups = sorted(p.name for p in (coll / "assets" / "gpt" / "mockups").glob("*.png"))

@@ -1,6 +1,8 @@
-// /privacy (docs/14 §6.10). A DRAFT written from what the code does today; not legal advice. K25: no legal identity,
-// so the notice names the shop and the support email. Undecided parts stay as visible placeholders from config.
-// G144: one body for every language (the translations are courtesy texts of the same draft).
+// /privacy (docs/14 §6.10). Written from what the code does today (G154, 2026-10-17: re-read against lib/data,
+// lib/device-keys.ts, lib/google, lib/mail, lib/rsvp, lib/site/access.ts, lib/i18n/auto-translate.ts). K25: no legal
+// identity, so the notice names the shop and the support email. K48: the retention and deletion texts come from config
+// (policies); the "not legal advice, have it reviewed" note lives in the docs (docs/14 §6.10), not on the public page.
+// G144: one body for every language.
 import { MARKETING } from '../../../lib/marketing/config.ts';
 import type { Market } from '../../../lib/marketing/i18n.ts';
 import { breadcrumbs, graph, webPage } from '../../../lib/marketing/schema.ts';
@@ -31,11 +33,6 @@ export function PrivacyPage({ m }: { m: Market }) {
               { brand: b },
             )}
           </p>
-          {cfg.verified.privacyText ? null : (
-            <p className={s.callout}>
-              [PRIVACY REVIEW] {t('This notice is a draft that describes how the service works today. It is not legal advice.')}
-            </p>
-          )}
           <LastUpdated day={PAGE.updated} m={m} />
         </Container>
       </Section>
@@ -55,11 +52,28 @@ export function PrivacyPage({ m }: { m: Market }) {
             <ul>
               <li>{t('Your email address and Etsy order number, given when you start your website.')}</li>
               <li>{t('The wedding details you enter in your panel: names, date, time, venue, schedule, story, questions and answers, links.')}</li>
-              <li>{t('The photos you upload, stored in the sizes your website needs.')}</li>
+              <li>{t('The photos you upload, stored in the sizes your website needs, and the music file you upload for your Our Story page.')}</li>
+              <li>
+                {t(
+                  'For each phone or computer where you open your editor with your order number and email: a one-way hash of its key, when it was added and a short label such as “iPhone · Safari”, so you can see your devices and sign them out. The key of your edit link is also kept only as a one-way hash.',
+                )}
+              </li>
+              <li>
+                {t(
+                  'If you connect Google Sheets: an encrypted access token from Google, used only to add your guests’ replies to the spreadsheet it made in your own Google Drive.',
+                )}
+              </li>
             </ul>
             <p>
               {t(
-                'We use them to create, host and show your website, to keep one website per order and to help you when you contact us. Payment is handled by Etsy under Etsy’s own privacy policy; we never see your card details.',
+                'We use them to create, host and show your website, to keep one website per order and to help you when you contact us. To confirm an order, we may look up its number among our Etsy shop’s orders. Payment is handled by Etsy under Etsy’s own privacy policy; we never see your card details.',
+              )}
+            </p>
+
+            <h2 id="emails">{t('Emails')}</h2>
+            <p>
+              {t(
+                'When email sending is switched on, we use your email address to send you your edit link after you start, the sign-in links you ask for and, only if you turn it on under Guests, a short email for each new guest reply. These emails go through our email provider. We send no newsletters or ads.',
               )}
             </p>
 
@@ -67,23 +81,23 @@ export function PrivacyPage({ m }: { m: Market }) {
             <ul>
               <li>
                 {t(
-                  'The reply a guest sends: name, attending or not, number of guests, an optional email address and message, and answers to the couple’s questions.',
+                  'The reply a guest sends: name, attending or not, number of guests, the names of the others in the reply, an optional email address and message, and answers to the couple’s questions.',
                 )}
               </li>
             </ul>
             <p>
               {t(
-                'Replies are shown only to the couple in their private panel. To stop spam, the server briefly counts replies per network (IP) address in memory; the address is not saved with the reply. Guests can ask the couple, or us at {email}, to correct or delete their reply.',
+                'Replies are shown only to the couple in their private panel. If the couple connects Google Sheets, replies are also copied into a spreadsheet in the couple’s own Google Drive. To stop spam, the server counts requests per network (IP) address for a short time; it keeps only a one-way hash of the address with the count, never with the reply. Guests can ask the couple, or us at {email}, to correct or delete their reply.',
                 { email },
               )}
             </p>
 
             <h2 id="where">{t('Where it is kept and who can see it')}</h2>
             <ul>
-              <li>{t('Websites are hosted on Vercel in the United States. Content, replies and photos are kept in a private Vercel Blob store.')}</li>
+              <li>{t('Websites are hosted on Vercel in the United States. Content, replies, photos and music are kept in a private Vercel Blob store.')}</li>
               <li>
                 {t(
-                  'The couple sees their guests’ replies through their private edit link. Anyone who has that link can open the panel, so it must stay private.',
+                  'The couple sees their guests’ replies in their private editor, which opens with their Etsy order number and email or with their private edit link. Anyone who has these can open the editor, so they must stay private.',
                 )}
               </li>
               <li>{t('We can access the data to give support and to keep the service running. We do not sell or share it.')}</li>
@@ -93,14 +107,13 @@ export function PrivacyPage({ m }: { m: Market }) {
             <h2 id="how-long">{t('How long we keep it')}</h2>
             <p>
               {t(
-                'A website stays online until {months} months after the wedding date. After that: {retention}. When a couple unpublishes their website, its photos are no longer shown to anyone. To delete everything earlier: {deletion}.',
-                { months: cfg.hosting.monthsAfterWedding, retention: t(cfg.policies.retention), deletion: t(cfg.policies.deletion) },
+                'A website stays online until {months} months after the wedding date. {retention} When a couple takes their website offline, its photos are no longer shown to anyone.',
+                { months: cfg.hosting.monthsAfterWedding, retention: t(cfg.policies.retention) },
               )}
             </p>
 
             <h2 id="cookies">{t('Cookies and third parties')}</h2>
             <ul>
-              <li>{t('Wedding websites and the editing panel do not set cookies and have no ads or analytics.')}</li>
               <li>
                 {t('This marketing website does not set cookies and')}{' '}
                 {cfg.analytics.provider === 'vercel'
@@ -109,7 +122,25 @@ export function PrivacyPage({ m }: { m: Market }) {
               </li>
               <li>
                 {t(
+                  'Wedding websites have no ads or analytics. Their only cookie remembers for 90 days that a guest entered the right password, and only when the couple turns on a guest password.',
+                )}
+              </li>
+              <li>
+                {t(
+                  'The editor has no ads or analytics. It keeps a few things in your browser: the editors you opened on this device, changes not saved yet while you are offline, a cookie with the editor language you chose, and a short-lived cookie while you connect Google Sheets.',
+                )}
+              </li>
+              <li>
+                {t(
                   'Wedding website pages load their fonts from Google Fonts, so a guest’s browser contacts Google’s font servers. The fonts of this marketing website are served from our own domain.',
+                )}
+              </li>
+              <li>
+                {t('A venue map loads from Google Maps only when a guest taps Show map; directions open in Google Maps, Apple Maps or Waze.')}
+              </li>
+              <li>
+                {t(
+                  'Translate automatically in the editor uses your browser’s own translator when it has one, and then nothing leaves your device. Otherwise your texts are sent to the free MyMemory translation service (translated.net); the editor says so next to the button.',
                 )}
               </li>
             </ul>
@@ -117,8 +148,8 @@ export function PrivacyPage({ m }: { m: Market }) {
             <h2 id="rights">{t('Your choices')}</h2>
             <p>
               {t(
-                'You can change or remove your content in your panel at any time, unpublish your website, and ask us to delete your data by writing to {email} from the email address you used when you started your website. We may ask for your Etsy order number to confirm it is you.',
-                { email },
+                'You can change or remove your content in your panel at any time, take your website offline, sign out other devices and disconnect Google Sheets. {deletion} You can also write to {email} from the email address you used when you started your website. We confirm it is you before we delete anything.',
+                { deletion: t(cfg.policies.deletion), email },
               )}
             </p>
 

@@ -50,7 +50,7 @@ HOW IT WORKS
 
 WHAT IS NOT INCLUDED
 • Entering your details for you (add our setup service if you would like us to do it)
-• Music, printed invitations, a custom domain (yournames.com)
+• Printing or shipping anything, and a custom domain (yournames.com)
 • Changes beyond the 2 included rounds: each further round is 500 TL, through our Extra design revision listing
 
 GOOD TO KNOW

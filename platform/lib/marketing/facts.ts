@@ -10,6 +10,7 @@
 import { CONTENT_LIMITS } from '../content/limits.ts';
 import { MARKETING, type MarketingConfig } from './config.ts';
 import { enT, msg, type T } from './i18n.ts';
+import { siteHost } from './site.ts';
 
 export const LIMITS = {
   pages: 4,
@@ -30,7 +31,7 @@ export const SITE_PAGES = [
   { key: 'home', name: msg('Home'), short: msg('Your names, date and venue'), summary: msg('Your names, the date and venue, an optional countdown and your invitation card with add to calendar.') },
   { key: 'story', name: msg('Our Story'), short: msg('Three photos with captions'), summary: msg('Three photos with captions and a short intro line, in the frames of the design.') },
   { key: 'details', name: msg('Details'), short: msg('Schedule, venue and dress code'), summary: msg('The order of the day, venue photo and map link, dress code, travel and registry links, and your questions and answers.') },
-  { key: 'rsvp', name: msg('RSVP'), short: msg('Replies and your own questions'), summary: msg('A reply form with your deadline and up to three questions of your own. Replies go straight to your panel.') },
+  { key: 'rsvp', name: msg('RSVP'), short: msg('Replies and your own questions'), summary: msg('A reply form with your deadline and questions of your own. Replies go straight to your panel.') },
 ] as const;
 
 /** "Home, Our Story, Details, RSVP" in the page language. */
@@ -55,18 +56,27 @@ export const PANEL_REPLIES_DOWNLOAD = 'Download Excel';
 /** Alt text of the panel `replies` screen (home page): what the picture shows, with the button's real label. */
 export const REPLIES_SCREEN_ALT = `Replies in the couple's panel: totals, each reply and a "${PANEL_REPLIES_DOWNLOAD}" button (Excel)`;
 
-/** What one purchase includes (pricing, design pages, llms.txt). */
+/**
+ * What one purchase includes (pricing, design pages, llms.txt). G154: the features of G126 (music), G127 (map), G139
+ * (downloads), G144 (five languages) and G146 (order number + email on any device) are here; none of them depends on an
+ * email being sent (G147/G152 email only works once the shop turns it on, so it is never promised).
+ */
 export function included(cfg: MarketingConfig = MARKETING, t: T = enT): string[] {
   return [
     t('An opening page (an envelope or keepsake that opens) and four pages: Home, Our Story, Details and RSVP'),
     t('A private editing panel designed for phone screens, with a preview before you publish'),
-    t('Online RSVP: replies, head counts and a CSV download in your panel'),
+    t('Your Etsy order number and email open your editor on any phone or computer: no account, no password'),
+    t('Online RSVP: replies, head counts and an Excel or CSV download in your panel'),
     t('Up to {n} RSVP questions of your own, such as a meal choice', { n: LIMITS.rsvpQuestions }),
     t('Add to calendar for guests (Apple/Outlook and Google Calendar)'),
     t('{n} photo spots with cropping', { n: LIMITS.photoSpots }),
     t('Optional countdown, dress code, registry and travel links, and questions and answers'),
+    t('A map of your venue and directions with Google Maps, Apple Maps or Waze'),
+    t('Music on your Our Story page (one of four tracks made for your website, or your own file) and sound effects; you can turn each off'),
+    t('Your website in English, Spanish, French, German or Turkish, or in several: built-in texts come translated, and your own texts can be translated automatically as a draft you check'),
     t('A link preview with your names and date when you share your link'),
     t('A QR code to download as PNG or SVG'),
+    t('Downloads: your website as a PDF, and a printable invitation in your design (5 × 7 in or A5, with bleed and crop marks for a print shop)'),
     t('An optional guest password, so only people you give it to can open your website'),
     t('After the wedding, your website can turn into a thank-you page for your guests (automatic, or switch it off)'),
     t('Your website stays online until {months} months after your wedding date', { months: cfg.hosting.monthsAfterWedding }),
@@ -76,12 +86,11 @@ export function included(cfg: MarketingConfig = MARKETING, t: T = enT): string[]
 /** What is not included — said plainly so nobody (and no assistant) assumes it. */
 export const NOT_INCLUDED: readonly string[] = [
   msg('A custom domain (your address is on our domain)'),
-  msg('Music'),
   msg('Changing the colors, fonts or layout of a design'),
   msg('Sending invitations to guests by email'),
   msg('Guest list import'),
-  msg('A translated website: built-in messages (reply form errors, calendar text) stay in English; your own texts and headings can be in any language'),
-  msg('Printed invitations'),
+  msg('Built-in texts in languages other than English, Spanish, French, German and Turkish (your own texts can be in any language)'),
+  msg('Printing and shipping: you print the printable invitation yourself or at a print shop'),
   msg('A matching save the date (not yet)'),
 ];
 
@@ -96,11 +105,13 @@ export function editable(t: T = enT): string[] {
     t('Venue name, address and a map link'),
     t('The order of the day (up to {n} rows)', { n: LIMITS.scheduleRows }),
     t('Your story: an intro line and photo captions'),
+    t('Music for your Our Story page: one of four tracks, your own file or none'),
     t('{n} photos: a portrait, {story} story photos and the venue, each cropped to its frame', { n: LIMITS.photoSpots, story: LIMITS.storyPhotos }),
     t('Questions and answers for guests (up to {n})', { n: LIMITS.faqItems }),
     t('RSVP deadline and up to {n} questions of your own', { n: LIMITS.rsvpQuestions }),
     t('Which optional sections show: Our Story, countdown, dress code, registry, travel and stay, questions and answers'),
     t("The design's headings, labels and buttons, in your own words"),
+    t("Your website's languages: English, Spanish, French, German or Turkish"),
   ];
 }
 
@@ -145,9 +156,10 @@ export function factStrip(cfg: MarketingConfig = MARKETING, t: T = enT): string[
 export function canvaComparison(cfg: MarketingConfig = MARKETING, t: T = enT): Array<{ label: string; canva: string; ours: string }> {
   return [
     { label: t('Where you edit'), canva: t('The Canva editor'), ours: t('A simple panel designed for phone screens') },
-    { label: t('Account needed'), canva: t('A Canva account'), ours: t('None: you keep a private edit link') },
-    { label: t('RSVP'), canva: t('A separate form tool, set up by you'), ours: t('Built in; replies and CSV in your panel') },
-    { label: t('Your link'), canva: t("Canva's free site address (custom domain on a paid Canva plan)"), ours: t('{domain}/your-names', { domain: cfg.domain }) },
+    { label: t('Account needed'), canva: t('A Canva account'), ours: t('None: your Etsy order number and email open your editor') },
+    { label: t('RSVP'), canva: t('A separate form tool, set up by you'), ours: t('Built in; replies and an Excel download in your panel') },
+    // G154: the host the site really runs on (siteHost), never the "[DOMAIN]" placeholder
+    { label: t('Your link'), canva: t("Canva's free site address (custom domain on a paid Canva plan)"), ours: t('{domain}/your-names', { domain: siteHost(cfg) }) },
     { label: t('Changing the design'), canva: t('Full freedom to move and restyle everything'), ours: t('The design stays as made; you change the content and the wording') },
   ];
 }
@@ -158,7 +170,7 @@ export function definition(cfg: MarketingConfig = MARKETING, t: T = enT): { shor
   return {
     short: t(cfg.brand.shortDescription),
     long: t(
-      '{brand} is a wedding website you buy once on Etsy. Your guests tap a sealed envelope or keepsake that opens into your site: Home, Our Story, Details and RSVP. You edit names, date, venue, schedule, photos and RSVP questions from your phone, preview, and publish. Guest replies appear in your private panel and can be downloaded as a CSV. No Canva account or app is needed, and your website stays online until {months} months after your wedding date.',
+      '{brand} is a wedding website you buy once on Etsy. Your guests tap a sealed envelope or keepsake that opens into your site: Home, Our Story, Details and RSVP. You edit names, date, venue, schedule, photos and RSVP questions from your phone, preview, and publish. Guest replies appear in your private panel and can be downloaded as an Excel file. No Canva account or app is needed, and your website stays online until {months} months after your wedding date.',
       { brand: b, months: cfg.hosting.monthsAfterWedding },
     ),
   };

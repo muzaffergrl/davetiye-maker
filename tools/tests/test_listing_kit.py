@@ -269,9 +269,8 @@ def test_built_kits():
         assert any("[VERIFY" in x for x in live), live
         down = lk.prepublish_problems(t, lk.BASE_URL, get=lambda url: (0, "URLError: proxy"))
         assert sum("could not connect" in x for x in down) == 2, down
-        md_open = next(x for x in live if x.startswith("customer/START_HERE.md"))
-        pdf_open = next(x for x in live if x.startswith("START_HERE.pdf"))
-        assert md_open.split(":")[1].split()[0] == pdf_open.split(":")[1].split()[0], (md_open, pdf_open)  # same count
+        # G154 (K48): the START HERE guide has no open placeholder left, in the .md and in the PDF alike
+        assert not any(x.startswith(("customer/START_HERE.md", "START_HERE.pdf")) for x in live), live
         wrong = lk.prepublish_problems(t, lk.BASE_URL, get=lambda url: (200, "<title>Other</title>"))
         assert sum("does not name" in x for x in wrong) == 2, wrong
 

@@ -51,7 +51,7 @@ export function DesignsPage({ m }: { m: Market }) {
                 items={[
                   t('The opening page, then Home, Our Story, Details and RSVP'),
                   t('The editing panel, designed for phone screens'),
-                  t('Online RSVP with your own questions, replies and CSV'),
+                  t('Online RSVP with your own questions, replies and an Excel download'),
                   t('Add to calendar, link preview and QR code'),
                 ]}
               />
