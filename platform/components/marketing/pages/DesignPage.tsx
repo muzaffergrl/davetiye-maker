@@ -264,7 +264,17 @@ export function DesignPage({ id, m }: { id: string; m: Market }) {
                     label={t('Screen recording: the {name} {thing} opens', { name: d.name, thing })}
                   />
                 </div>
-              ) : null}
+              ) : (
+                <img
+                  src={designOgImage(d.id)}
+                  alt={t('{name} wedding website artwork: {style}', { name: d.name, style: t(d.copy.style).toLowerCase() })}
+                  width={1200}
+                  height={630}
+                  loading="lazy"
+                  decoding="async"
+                  className={s.previewArtwork}
+                />
+              )}
             </div>
             <div className={s.splitText}>
               <Eyebrow>{t('The opening')}</Eyebrow>
