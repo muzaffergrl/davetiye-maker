@@ -227,6 +227,27 @@ e-posta = her cihazdan erişim.** Hesap yok, şifre yok, dükkânın işi yok. �
   alıcınınkiyle düzeltir, sonra "Yeni link" (reissue)** yapar: reissue cihaz anahtarlarını düşürür, düzeltilmiş e-posta da yeni
   girişi gerçek alıcıya bağlar. (E-posta düzeltmesi tek başına cihazları kapatmaz.)
 
+## 3b. Özel tasarımı yalnız o alıcıya açma (G151, K42/K47 — 2026-10-17)
+"Custom design" hizmetinde alıcıya yaptığımız tasarım **başkasına satılmaz**. Tema klasörüne konur ve `theme.json`'a sipariş
+numarası yazılır — başka hiçbir yere dokunulmaz:
+```json
+"private": { "orders": ["4815162342"] }
+```
+- Numara Etsy'deki gibi yazılabilir (`"#4815 162342"` de olur; `/start` gibi rakamlara indirgenir, 8–12 rakam). Birden çok sipariş
+  (ör. ek tur, ikinci site) için listeye eklenir. Boş liste `[]` = henüz kimse başlatamaz, yalnız dükkân.
+- **Gizli olduğu her yer:** `listThemes`, `/start` ve `/my` tasarım seçicisi, üretim listesi, satış sitesi (liste, tasarım sayfası,
+  vitrin, sitemap, llms.txt — bunlar yalnız `lib/marketing/config.ts designs[]`'tan beslenir: **özel tema oraya eklenmez**;
+  `tests/g151.test.ts` gerçek tema klasörlerini tarayıp yakalar).
+- **Alıcının linki:** `/start?theme=<id>&order=<sipariş no>` (sipariş no formda dolu gelir). Ayrıca alıcı `/my`'da sipariş no +
+  e-postasını yazınca site yoksa doğrudan bu linke gider. Listede olmayan numara / numarasız link / başka tema: bilinmeyen temayla
+  **aynı cevap** ("This start link is not valid"; `POST /api/start` → 404 `theme_unavailable`) — tasarımın varlığı sızmaz. Satış
+  sitesinde olmadığı için üretimdeki onay kapısı (G080) özel temaya uygulanmaz; sipariş numarası yeterli.
+- **Dükkân:** Admin → **Yeni sipariş** özel temayı her zaman ("(özel tasarım)") ve her sipariş numarasıyla başlatır; Tasarımlar
+  sayfası rozet + sipariş numaraları + numaralı başlatma linki gösterir. **Demo** (`/start/demo/<id>`) yalnız admin oturumuyla açılır
+  (`Cache-Control: private, no-store`); alıcının `/start` sayfasında demo önizlemesi yoktur. Başlatılmış sitenin paneli, örnek tarih
+  ve yayını normal çalışır.
+- `scripts/theme-check.cjs` özel temada `/start` demo kontrolünü atlar (uyarı), diğer kontroller aynı.
+
 ## 4. Görevler
 | ID | İş | Bağımlı |
 |---|---|---|

@@ -800,7 +800,7 @@ const dict: Dict = {
   'Share…': 'Teilen …',
   'Short answer': 'Kurze Antwort',
   'Short answers to what guests often ask, such as parking, children or the plan for rain. Up to {max} questions.': 'Kurze Antworten auf häufige Fragen der Gäste, etwa zum Parken, zu Kindern oder zum Plan bei Regen. Bis zu {max} Fragen.',
-  'Short blocks on your Details page, such as dress code, children, gifts, parking or the weather. None, a few or up to {max}.': 'Kurze Blöcke auf Ihrer Seite „Details“, etwa zu Dresscode, Kindern, Geschenken, Parken oder Wetter. Keiner, einige oder bis zu {max}.',
+  'Short blocks on your Details page, such as children, gifts, parking or the weather. None, a few or up to {max}.': 'Kurze Blöcke auf Ihrer Seite „Details“, etwa zu Kindern, Geschenken, Parken oder Wetter. Keiner, einige oder bis zu {max}.',
   'Show': 'Anzeigen',
   'Show all replies': 'Alle Antworten anzeigen',
   'Show all {n} answers': 'Alle {n} Antworten anzeigen',

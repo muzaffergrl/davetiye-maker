@@ -301,7 +301,7 @@ export default function AdminSite(props: {
           </Fact>
           <Fact label="Oluşturuldu">{stamp(s.createdAt)}</Fact>
           <Fact label="İlk yayın">{stamp(s.firstPublishedAt)}</Fact>
-          <Fact label="Son değişiklik">{stamp(s.updatedAt)}</Fact>
+          <Fact label="Son değişiklik">{stamp(s.contentUpdatedAt || s.updatedAt)}</Fact>
           <Fact label="Düğün tarihi">{day(s.weddingDate)}</Fact>
           <Fact label="Yayında kalır">{s.onlineUntil ? `${day(s.onlineUntil)} dahil` : 'İlk yayından sonra belli olur'}</Fact>
           <Fact label="RSVP yanıtı">{s.replies}</Fact>

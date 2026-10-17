@@ -62,6 +62,7 @@ import {
   StaleSiteError,
   WriteConflictError,
   nextTimestamp,
+  touchContentUpdatedAt,
   type DataAdapter,
   type NewSite,
   type PhotoInput,
@@ -423,6 +424,7 @@ export class BlobAdapter implements DataAdapter {
         ownerEmail: input.ownerEmail ?? null,
         createdAt: now,
         updatedAt: now,
+        contentUpdatedAt: now,
         publishedAt: null,
         ...(input.claimTokenHash ? { claimTokenHash: input.claimTokenHash } : {}),
         ...(input.orderCheck ? { orderCheck: structuredClone(input.orderCheck) } : {}),
@@ -444,8 +446,11 @@ export class BlobAdapter implements DataAdapter {
         const current = await this.readJson<StoredSite>(this.sitePath(id));
         if (!current) throw new NotFoundError(`site ${id}`);
         const next = current.data; // freshly parsed: ours to change
+        const contentBefore = JSON.stringify(next.content);
+        const updatedBefore = next.updatedAt;
         change(next);
         next.updatedAt = nextTimestamp(next.updatedAt, this.#now());
+        touchContentUpdatedAt(next, contentBefore, updatedBefore);
         next.version = (Number.isInteger(next.version) ? next.version : 0) + 1;
         try {
           await this.putJson(this.sitePath(id), next, { ifMatch: current.etag });

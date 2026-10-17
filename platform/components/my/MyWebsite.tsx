@@ -291,6 +291,11 @@ function ContinueForm({ theme, designs, emailLinkEnabled }: { theme: MyDesign | 
     setBusy(null);
     if (status === 200 && body.ok && body.next === 'start') {
       saveStartPrefill({ orderNumber, email });
+      // G151: a custom design made for this order (a private theme) — the server names its start link.
+      if (typeof body.startPath === 'string' && body.startPath.startsWith('/start?')) {
+        window.location.assign(body.startPath);
+        return;
+      }
       if (theme) {
         window.location.assign(`/start?theme=${encodeURIComponent(theme.id)}`);
         return;

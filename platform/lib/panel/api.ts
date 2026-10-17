@@ -445,7 +445,7 @@ export async function identityChangeFor(
       return write({ content: next, firstPublishedAt: rights.firstPublishedAt, identity: reverted }, 'undo');
     }
     // First published with the design's sample date: setting the real date is free, once (the anchor's date moves).
-    const sampleDate = (await claimableTheme(site.theme))?.demo?.date ?? null;
+    const sampleDate = (await claimableTheme(site.theme, { trusted: true }))?.demo?.date ?? null;
     if (isSampleDateReplacement(rights.identity.anchor, identity, sampleDate)) {
       const moved = {
         ...rights.identity,
