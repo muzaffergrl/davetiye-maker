@@ -1192,6 +1192,8 @@ const dict: Dict = {
   '{what} — free.': '{what} — ücretsiz.',
   '{what}: link': '{what}: bağlantı',
   '— now or later; adding a surname is always free.': '— şimdi ya da sonra; soyadı eklemek her zaman ücretsizdir.',
+  'Reply-by date': 'Yanıt son tarihi',
+  'Story intro': 'Hikâye girişi',
 };
 
 export default dict;

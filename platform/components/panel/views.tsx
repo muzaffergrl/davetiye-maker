@@ -90,9 +90,9 @@ export function nextSteps(
   for (const [s, list] of bySection) {
     out.push({ key: `err-${s}`, tone: 'danger', path: list[0].path, text: `${t(SECTION_TITLES[s])}: ${list.length === 1 ? t(list[0].message) : tn(list.length, '{n} thing to fix', '{n} things to fix')}` });
   }
-  for (const s of sampleSummaries(notes.sample)) {
+  for (const s of sampleSummaries(notes.sample, { t, tn })) {
     // "Venue: replace the sample venue name and city" — names the fields, so the buyer knows what to look for.
-    out.push({ key: `sample-${s.section}`, tone: 'warning', path: s.path, text: t('{section}: replace the sample {what}', { section: t(SECTION_TITLES[s.section]), what: t(s.what) }) });
+    out.push({ key: `sample-${s.section}`, tone: 'warning', path: s.path, text: t('{section}: replace the sample {what}', { section: t(SECTION_TITLES[s.section]), what: s.what }) });
   }
   if (notes.photos.length) {
     out.push({ key: 'photos', tone: 'info', path: notes.photos[0].path, text: t('Add your photos ({n} still empty)', { n: notes.photos.length }) });

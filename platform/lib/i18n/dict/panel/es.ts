@@ -1192,6 +1192,8 @@ const dict: Dict = {
   '{what} — free.': '{what}: gratis.',
   '{what}: link': '{what}: enlace',
   '— now or later; adding a surname is always free.': '(ahora o más tarde; añadir un apellido siempre es gratis).',
+  'Reply-by date': 'Fecha límite de respuesta',
+  'Story intro': 'Introducción de la historia',
 };
 
 export default dict;
