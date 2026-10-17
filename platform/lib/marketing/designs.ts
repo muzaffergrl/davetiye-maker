@@ -951,6 +951,21 @@ export function liveDesign(id: string, cfg: MarketingConfig = MARKETING): Design
   return liveDesigns(cfg).find((d) => d.id === id) ?? null;
 }
 
+/** Live and preview designs shown in the catalogue; hidden 'coming' designs are excluded. */
+export function catalogDesigns(cfg: MarketingConfig = MARKETING): Design[] {
+  return cfg.designs
+    .filter((d) => d.status !== 'coming')
+    .map((d) => {
+      const copy = DESIGN_COPY[d.id];
+      if (!copy) throw new Error('lib/marketing/designs.ts has no copy for catalog design "' + d.id + '"');
+      return { ...d, copy };
+    });
+}
+
+export function catalogDesign(id: string, cfg: MarketingConfig = MARKETING): Design | null {
+  return catalogDesigns(cfg).find((d) => d.id === id) ?? null;
+}
+
 /**
  * G099: the home page's design showcase — the live designs marked `featured` in config.ts, in config order. With none
  * marked, every live design (the home page never shows an empty showcase).
