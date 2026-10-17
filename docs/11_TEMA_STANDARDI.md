@@ -62,9 +62,10 @@ platform/themes/<slug>/
 
 - `<slug>` = G4NN görevindeki klasör adı (ör. `art-deco-black-tie`), `[a-z0-9_-]`; `theme.json` `id` ile aynı.
 - Tema klasörüne **girmez:** `parts_prep` çıktısı / kaynak PNG'ler (`img_src/` dahil), önizlemeler, font dosyaları, test
-  dosyaları, `node_modules`, kullanılmayan görsel. Sebep: tema varlık rotasının Vercel paketi bütün temaların servis edilen
-  her dosyasını taşır (G055'ten beri sayfa/panel rotaları yalnız `themes/**/*.html` + `*.json`; `next.config.ts`
-  `THEME_ROUTES` / `THEME_ASSET_ROUTE`, `npm run build` → `trace-check`). Tema klasörü toplamı **≤ 3 MB** (03: 2,9 MB).
+  dosyaları, `node_modules`, kullanılmayan görsel. Sebep: temanın servis edilen her dosyası yayına (Vercel CDN) girer —
+  G159'dan beri `npm run build` onları `public/themes/`'e kopyalar (`scripts/theme-assets.cjs`), hiçbir işlev taşımaz; sayfa/panel
+  rotaları yalnız `themes/**/*.html` + `*.json` (G055; `next.config.ts` `THEME_ROUTES`, `npm run build` → `trace-check`).
+  Tema klasörü toplamı **≤ 3 MB** (03: 2,9 MB).
   `parts_prep` çıktısı geçici klasöre gider (03'ün `build_images.py`'si gibi; `--prep-dir` ile dışarıda); G4NN görev metinleri
   G046 incelemesinde buna göre düzeltildi.
 - Servis edilen uzantılar: `css js mjs png jpg jpeg webp avif gif svg ico mp4 webm`. `.html` yalnız `theme.json` sayfası

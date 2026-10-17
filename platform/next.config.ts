@@ -7,24 +7,59 @@ import type { NextConfig } from 'next';
 // scripts/trace-check.cjs afterwards and fails when a bundle misses what it needs or carries
 // what it must not.
 //
-// G055 (docs/11 §14 #7): theme IMAGES (and CSS/JS) go only into the theme asset route, the one
-// route that serves them. Every other theme route reads only templates and JSON (theme.json,
-// content.demo.json, img/manifest.json: lib/theme/share.ts decides from it whether a theme has
-// its share image / tab icon), so it traces *.html and *.json only. Before: every theme route
-// carried all theme images (2 themes: ~2.9 MB per function; 20 themes would be ~55 MB).
+// G055 (docs/11 §14 #7): theme routes read only templates and JSON (theme.json, content.demo.json,
+// img/manifest.json: lib/theme/share.ts decides from it whether a theme has its share image / tab
+// icon), so they trace *.html and *.json only.
+//
+// G159: theme CSS/JS/images go into NO function. `npm run build` first mirrors them into
+// public/themes/ (scripts/theme-assets.cjs, `prebuild`), and Vercel's CDN serves them at the same
+// URLs (/themes/<theme>/<path>). Until then the asset route traced every one of them (~100 MB with
+// 29 themes and the first palettes, growing ~7 MB per design). The asset route stays for what has
+// no copy (404s, `next dev`); trace-check fails the build when any function carries a theme asset
+// or more than THEME_BUDGET_MB of theme files.
 const THEME_TEMPLATES = ['./themes/**/*.html', './themes/**/*.json'];
 /** = THEME_ASSET_TYPES of lib/site/static.ts (what /themes/<theme>/<path> serves; trace-check compares them). */
 export const THEME_ASSET_EXTENSIONS = ['css', 'js', 'mjs', 'png', 'jpg', 'jpeg', 'webp', 'avif', 'gif', 'svg', 'ico', 'mp4', 'webm'];
-const THEME_ASSETS = [`./themes/**/*.{${THEME_ASSET_EXTENSIONS.join(',')}}`];
+/** Kept out of every function trace (G159): the static copies and the theme files they are copied from. */
+export const THEME_ASSET_EXCLUDES = ['./public/themes/**', `./themes/**/*.{${THEME_ASSET_EXTENSIONS.join(',')}}`];
+/** = lib/site/static.ts THEME_ASSET_CACHE / THEME_FILE_CSP: the route's headers, set on the public copies too. */
+export const THEME_ASSET_CACHE = 'public, max-age=3600, s-maxage=86400';
+export const THEME_FILE_CSP = "default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'";
 
 /**
  * G139: the PDF route runs a headless Chromium. On Vercel it is @sparticuz/chromium: its packed browser (bin/*.br)
  * is read from disk at run time, so it is traced explicitly and both packages stay outside the bundle.
+ * G159: it reads the printable invitation's parts from public/print (lib/print/render.ts) — traced explicitly; nothing
+ * else of public/ (before, the whole folder was traced: ~57 MB of sales-site media in the PDF function).
  */
 export const PDF_ROUTE = '/api/edit/\\[slug\\]/download';
 const CHROMIUM_FILES = ['./node_modules/@sparticuz/chromium/bin/**'];
+const PRINT_PARTS = ['./public/print/**/*.webp'];
 
 export const THEME_ASSET_ROUTE = '/themes/\\[theme\\]/\\[\\.\\.\\.path\\]';
+
+/**
+ * G153 + G159: a colour variant's virtual folder /themes/<theme>/~<variant>/<path>. Its own images are static copies
+ * (public/themes/<theme>/~<variant>/img/…); everything else falls through to the original, still under the variant URL
+ * (a rewrite, not a redirect: relative url(img/…) in the stylesheet must keep resolving inside ~<variant>/). afterFiles
+ * = after the public files are checked. When no copy answers (`next dev`, a test's themes folder) the asset route serves
+ * from disk and picks the override itself (from ?variant=, or from the address asked for, which `next start` passes on).
+ */
+export const VARIANT_REWRITE = {
+  source: '/themes/:theme/~:variant([a-z][a-z0-9-]{0,31})/:path+',
+  destination: '/themes/:theme/:path+?variant=:variant',
+};
+
+/**
+ * Headers of /themes/… (G159): what the asset route sets, for the public copies. They also land on the route's own
+ * answers and win there (so a 404 of a missing .webp carries the Cache-Control too: harmless, Vercel's CDN cache is per
+ * deployment).
+ */
+export const THEME_ASSET_HEADERS = [
+  { source: '/themes/:path*', headers: [{ key: 'X-Content-Type-Options', value: 'nosniff' }] },
+  { source: `/themes/:path(.*\\.(?:${THEME_ASSET_EXTENSIONS.join('|')}))`, headers: [{ key: 'Cache-Control', value: THEME_ASSET_CACHE }] },
+  { source: '/themes/:path(.*\\.svg)', headers: [{ key: 'Content-Security-Policy', value: THEME_FILE_CSP }] },
+];
 
 /** Routes that read theme templates / theme.json (not the asset route). */
 export const THEME_ROUTES = [
@@ -70,11 +105,12 @@ const config: NextConfig = {
   // G152: no app/layout.tsx (separate root layouts: components/i18n/RootDocument.tsx) → app/global-not-found.tsx answers
   // addresses no route matches.
   experimental: { globalNotFound: true },
-  // Panel, RSVP and /start read theme.json / pages too (G044: needed on Vercel). Images: asset route only (G055).
-  outputFileTracingIncludes: {
-    ...Object.fromEntries(THEME_ROUTES.map((r) => [r, r === PDF_ROUTE ? [...THEME_TEMPLATES, ...CHROMIUM_FILES] : THEME_TEMPLATES])),
-    [THEME_ASSET_ROUTE]: THEME_ASSETS,
-  },
+  // Panel, RSVP and /start read theme.json / pages too (G044: needed on Vercel). Theme CSS/JS/images: no function (G159).
+  outputFileTracingIncludes: Object.fromEntries(
+    THEME_ROUTES.map((r) => [r, r === PDF_ROUTE ? [...THEME_TEMPLATES, ...CHROMIUM_FILES, ...PRINT_PARTS] : THEME_TEMPLATES]),
+  ),
+  // Every route (picomatch over the route path; excludes are applied after the includes).
+  outputFileTracingExcludes: { '**': THEME_ASSET_EXCLUDES },
   // G144: the sales site in Turkish, Spanish, German and French lives at /tr, /es, /de, /fr (+ /<lang>/designs …). The
   // pages are app/(marketing)/i18n/[lang]/…: a dynamic [lang] folder at the root would clash with the couple sites at
   // /[slug] (slugs are 3+ characters, so two-letter prefixes are free; lib/slug.ts reserves them and "i18n" anyway).
@@ -85,12 +121,15 @@ const config: NextConfig = {
         { source: '/:lang(tr|es|de|fr)', destination: '/i18n/:lang' },
         { source: '/:lang(tr|es|de|fr)/:path*', destination: '/i18n/:lang/:path*' },
       ],
-      afterFiles: [],
+      // G159: a variant's virtual folder falls back to the original files (VARIANT_REWRITE).
+      afterFiles: [VARIANT_REWRITE],
       fallback: [],
     };
   },
   async headers() {
     return [
+      // G159: the static theme files (public/themes/) carry what the asset route sends with them (lib/site/static.ts).
+      ...THEME_ASSET_HEADERS,
       { source: '/edit/:path*', headers: SECRET_PAGE_HEADERS },
       { source: '/start', headers: SECRET_PAGE_HEADERS },
       // G146: /my opens editors (device keys, saved edit links): never framed, never sends its URL on.

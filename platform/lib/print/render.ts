@@ -2,10 +2,11 @@
 //
 // The document is opened at a private address (PRINT_ORIGIN) and every request it makes is answered here, so nothing
 // about the couple leaves the server and drafts print without a preview key:
-//   /themes/<id>/…  the theme file from disk; when this function's bundle does not carry it (Vercel traces theme images
-//                   into the asset route only, next.config.ts) it is fetched from the platform's public address;
-//   /print/<id>/…   the printable invitation's parts (public/print, scripts/build-print-assets.ts) from disk, else from
-//                   the public address (Vercel serves public/ from its CDN, not from the function);
+//   /themes/<id>/…  the theme file from disk; when this function's bundle does not carry it (on Vercel no function
+//                   carries theme images, G159: they are static files, next.config.ts) it is fetched from the platform's
+//                   public address (its CDN);
+//   /print/<id>/…   the printable invitation's parts (public/print, scripts/build-print-assets.ts) from disk — the PDF
+//                   route traces public/print and nothing else of public/ (next.config.ts) —, else from the public address;
 //   /media/<id>/…   the site's own photos straight from the data adapter (only the site being printed);
 //   other paths     fetched from the platform's public address (public/ files such as /static/map.css);
 //   Google Fonts    loaded from Google (the designs' web fonts);
@@ -79,7 +80,9 @@ async function localAsset(url: URL, siteId: string | null): Promise<Response | n
   }
   if (parts[0] === 'print' && parts.length === 3 && parts.every((p) => /^[a-z0-9][a-z0-9_.-]*$/.test(p) && !p.includes('..')) && parts[2].endsWith('.webp')) {
     try {
-      const bytes = await readFile(path.join(process.cwd(), 'public', ...parts));
+      // turbopackIgnore: otherwise the whole public/ folder (sales-site media, public/themes …) is traced into the PDF
+      // function; next.config.ts traces public/print/** for it explicitly (G159).
+      const bytes = await readFile(path.join(/*turbopackIgnore: true*/ process.cwd(), 'public', ...parts));
       return new Response(new Uint8Array(bytes), { headers: { 'Content-Type': 'image/webp' } });
     } catch {
       return null;

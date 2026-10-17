@@ -65,8 +65,17 @@ export interface NextServer {
   stop: () => void;
 }
 
-/** `next start` of the production build in platform/, on 127.0.0.1:<port>, with the given data folder. */
+const themeAssets = require('../theme-assets.cjs') as { syncThemeAssets: (o: { themesDir: string }) => unknown };
+
+/**
+ * `next start` of the production build in platform/, on 127.0.0.1:<port>, with the given data folder.
+ * G159: the build serves theme CSS/JS/images from its static copies (public/themes, scripts/theme-assets.cjs); they are
+ * brought up to date with themes/ first, so a check after a theme edit sees the edited files without a new build. (A
+ * server with its own PLATFORM_THEMES_DIR leaves them alone: its themes without a copy come from that folder.)
+ */
 export function startNext(opts: { port: number; dataDir: string; env?: Record<string, string> }): NextServer {
+  const themesDir = opts.env?.PLATFORM_THEMES_DIR ?? process.env.PLATFORM_THEMES_DIR;
+  if (!themesDir || path.resolve(themesDir) === path.join(ROOT, 'themes')) themeAssets.syncThemeAssets({ themesDir: path.join(ROOT, 'themes') });
   const proc = spawn(process.execPath, [path.join(ROOT, 'node_modules/next/dist/bin/next'), 'start', '-p', String(opts.port), '-H', '127.0.0.1'], {
     cwd: ROOT,
     env: { ...process.env, PLATFORM_DATA_DIR: opts.dataDir, NEXT_TELEMETRY_DISABLED: '1', ...(opts.env ?? {}) },
