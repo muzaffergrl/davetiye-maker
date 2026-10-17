@@ -184,5 +184,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Lavender Provence)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=lavender-provence"
+      },
+      {
+        "name": "Sage & Lavender",
+        "variant": "sage-lavender",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=lavender-provence&variant=sage-lavender"
+      },
+      {
+        "name": "Dusty Blue & Lavender",
+        "variant": "dusty-blue",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=lavender-provence&variant=dusty-blue"
+      },
+      {
+        "name": "Mauve Lavender & Blush",
+        "variant": "mauve-lavender",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=lavender-provence&variant=mauve-lavender"
+      },
+      {
+        "name": "Hidcote Violet & Plum",
+        "variant": "hidcote-plum",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=lavender-provence&variant=hidcote-plum"
+      },
+      {
+        "name": "French Cream & Lavender",
+        "variant": "french-cream",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=lavender-provence&variant=french-cream"
+      }
+    ],
+    "offered": [
+      "Original (Lavender Provence)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

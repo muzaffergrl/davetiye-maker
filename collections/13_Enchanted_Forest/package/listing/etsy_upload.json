@@ -183,5 +183,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Enchanted Forest Storybook)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=enchanted-forest-storybook"
+      },
+      {
+        "name": "Burgundy Storybook",
+        "variant": "burgundy-storybook",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=enchanted-forest-storybook&variant=burgundy-storybook"
+      },
+      {
+        "name": "Midnight Navy & Brass",
+        "variant": "midnight-navy",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=enchanted-forest-storybook&variant=midnight-navy"
+      },
+      {
+        "name": "Plum Twilight",
+        "variant": "plum-twilight",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=enchanted-forest-storybook&variant=plum-twilight"
+      },
+      {
+        "name": "Autumn Russet",
+        "variant": "autumn-russet",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=enchanted-forest-storybook&variant=autumn-russet"
+      },
+      {
+        "name": "Deep Teal & Brass",
+        "variant": "deep-teal",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=enchanted-forest-storybook&variant=deep-teal"
+      }
+    ],
+    "offered": [
+      "Original (Enchanted Forest Storybook)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

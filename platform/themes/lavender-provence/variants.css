@@ -1,0 +1,117 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 09
+   (kaynak: collections/09_Lavender_Provence/variants/*/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-1e163c: 30 22 60;
+  --c-2e2450: 46 36 80;
+  --c-2e2a3f: 46 42 63;
+  --c-4b4172: 75 65 114;
+  --c-5d5287: 93 82 135;
+  --c-76689a: 118 104 154;
+  --c-d6cce5: 214 204 229;
+  --c-dcd3e9: 220 211 233;
+  --c-e1daec: 225 218 236;
+  --c-ece6f2: 236 230 242;
+  --c-f0ecf7: 240 236 247;
+  --c-f6f3fa: 246 243 250;
+}
+
+/* V03_dusty_blue · Dusty Blue & Lavender */
+html[data-variant="dusty-blue"] {
+  --c-1e163c: 18 28 56;
+  --c-2e2450: 33 43 76;
+  --c-2e2a3f: 40 45 61;
+  --c-4b4172: 60 72 109;
+  --c-5d5287: 77 90 130;
+  --c-76689a: 103 112 150;
+  --c-d6cce5: 209 218 231;
+  --c-dcd3e9: 216 224 236;
+  --c-e1daec: 224 230 240;
+  --c-ece6f2: 237 241 248;
+  --c-f0ecf7: 243 247 252;
+  --c-f6f3fa: 249 250 255;
+  --deep: #4D5A82;
+  --deep-ink: #3C486D;
+  --hair: rgba(60, 72, 109, 0.42);
+  --ink: #282D3D;
+  --ink-soft: #353C56;
+  --lav: #8C97C0;
+  --page: #D1DAE7;
+  --page-top: #E0E6F0;
+  --script-ink: #3A4160;
+}
+
+/* V06_french_cream · French Cream & Lavender */
+html[data-variant="french-cream"] {
+  --c-d6cce5: 237 228 209;
+  --c-dcd3e9: 243 235 218;
+  --c-e1daec: 248 241 227;
+  --c-ece6f2: 255 253 243;
+  --c-f0ecf7: 255 255 250;
+  --c-f6f3fa: 255 255 255;
+  --page: #EDE4D1;
+  --page-top: #F8F1E3;
+}
+
+/* V05_hidcote_plum · Hidcote Violet & Plum */
+html[data-variant="hidcote-plum"] {
+  --c-1e163c: 13 0 34;
+  --c-2e2450: 29 3 53;
+  --c-2e2a3f: 25 15 37;
+  --c-4b4172: 56 31 86;
+  --c-5d5287: 74 47 106;
+  --c-76689a: 98 69 124;
+  --c-d6cce5: 223 205 220;
+  --c-dcd3e9: 229 212 225;
+  --c-e1daec: 233 220 230;
+  --c-ece6f2: 242 232 239;
+  --c-f0ecf7: 246 238 245;
+  --deep: #4A2F6A;
+  --deep-ink: #381F56;
+  --hair: rgba(56, 31, 86, 0.42);
+  --ink: #190F25;
+  --ink-soft: #2B193D;
+  --lav: #876AA5;
+  --page: #DFCDDC;
+  --page-top: #E9DCE6;
+  --script-ink: #321B47;
+}
+
+/* V04_mauve_lavender · Mauve Lavender & Blush */
+html[data-variant="mauve-lavender"] {
+  --c-1e163c: 64 28 54;
+  --c-2e2450: 85 42 70;
+  --c-2e2a3f: 74 52 65;
+  --c-4b4172: 119 71 101;
+  --c-5d5287: 140 88 120;
+  --c-76689a: 163 112 139;
+  --c-d6cce5: 238 218 222;
+  --c-dcd3e9: 243 225 228;
+  --c-e1daec: 247 233 235;
+  --c-ece6f2: 255 245 246;
+  --c-f0ecf7: 255 251 252;
+  --c-f6f3fa: 255 254 255;
+  --deep: #8C5878;
+  --deep-ink: #774765;
+  --hair: rgba(119, 71, 101, 0.42);
+  --ink: #4A3441;
+  --ink-soft: #624053;
+  --lav: #CD97B4;
+  --page: #EEDADE;
+  --page-top: #F7E9EB;
+  --script-ink: #6C435A;
+}
+
+/* V02_sage_lavender · Sage & Lavender */
+html[data-variant="sage-lavender"] {
+  --c-d6cce5: 213 221 202;
+  --c-dcd3e9: 220 227 211;
+  --c-e1daec: 227 233 219;
+  --c-ece6f2: 239 243 235;
+  --c-f0ecf7: 245 248 240;
+  --c-f6f3fa: 250 251 249;
+  --page: #D5DDCA;
+  --page-top: #E3E9DB;
+}

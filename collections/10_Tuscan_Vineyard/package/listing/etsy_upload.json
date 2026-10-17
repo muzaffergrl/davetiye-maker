@@ -183,5 +183,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Tuscan Vineyard)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=tuscan-vineyard"
+      },
+      {
+        "name": "Plum & Gold",
+        "variant": "plum-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=tuscan-vineyard&variant=plum-gold"
+      },
+      {
+        "name": "Rosé & Blush",
+        "variant": "rose-blush",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=tuscan-vineyard&variant=rose-blush"
+      },
+      {
+        "name": "Olive & Burgundy",
+        "variant": "olive-burgundy",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=tuscan-vineyard&variant=olive-burgundy"
+      },
+      {
+        "name": "Navy & Burgundy",
+        "variant": "navy-burgundy",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=tuscan-vineyard&variant=navy-burgundy"
+      },
+      {
+        "name": "Terracotta & Merlot",
+        "variant": "terracotta-merlot",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=tuscan-vineyard&variant=terracotta-merlot"
+      }
+    ],
+    "offered": [
+      "Original (Tuscan Vineyard)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

@@ -1,0 +1,228 @@
+{
+  "theme": "lavender-provence",
+  "note": "G157 recolour manifest (tools/recolor_parts.py, docs/25). lavender = the violet lavender sprigs (chroma floor keeps the ivory deckle paper, wheat, daisies and twine out); paper = the lilac paper ground, photo placeholders and og background (separate group, same hue). A palette maps each family to a role or #hex (null = keep). lav_ink = CSS-only family anchored on the --deep token (the art's lavender is greyer; anchoring CSS on it over-saturated the tokens).",
+  "families": {
+    "lavender": {
+      "anchor": "#5A5272",
+      "sigma": 30,
+      "cmin": 0.008,
+      "cfull": 0.022
+    },
+    "paper": {
+      "anchor": "#D2C9E3",
+      "sigma": 34,
+      "cmin": 0.004,
+      "cfull": 0.012
+    },
+    "lav_ink": {
+      "anchor": "#5D5287",
+      "sigma": 30,
+      "cmin": 0.01,
+      "cfull": 0.025
+    }
+  },
+  "groups": {
+    "floral": [
+      "lavender"
+    ],
+    "paper": [
+      "paper"
+    ]
+  },
+  "parts": {
+    "accent_1": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "accent_2": {
+      "recolor": "keep",
+      "why": "white daisy, neutral in every palette"
+    },
+    "accent_3": {
+      "recolor": "keep",
+      "why": "wild thyme sprig: green herb with its own small pink-mauve flowers"
+    },
+    "bud": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "bundle": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "card_small": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "closure": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "divider": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "favicon": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "florals_br": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "florals_tl": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "frame_landscape": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "frame_portrait": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "info_card": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "info_mid": {
+      "recolor": "keep",
+      "why": "plain ivory deckle paper"
+    },
+    "invitation_card": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "invitation_mid": {
+      "recolor": "keep",
+      "why": "plain ivory deckle paper"
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "paper"
+    },
+    "paper_tile": {
+      "recolor": "auto",
+      "group": "paper"
+    },
+    "ph_hero_portrait": {
+      "recolor": "auto",
+      "group": "paper"
+    },
+    "ph_story_1": {
+      "recolor": "auto",
+      "group": "paper"
+    },
+    "ph_story_2": {
+      "recolor": "auto",
+      "group": "paper"
+    },
+    "ph_story_3": {
+      "recolor": "auto",
+      "group": "paper"
+    },
+    "ph_venue": {
+      "recolor": "auto",
+      "group": "paper"
+    },
+    "pouch_back": {
+      "recolor": "auto",
+      "group": "paper"
+    },
+    "pouch_closed": {
+      "recolor": "keep",
+      "why": "natural linen sachet"
+    },
+    "pouch_front": {
+      "recolor": "keep",
+      "why": "natural linen sachet"
+    },
+    "tie_l": {
+      "recolor": "keep",
+      "why": "jute twine"
+    },
+    "tie_r": {
+      "recolor": "keep",
+      "why": "jute twine"
+    }
+  },
+  "print": {
+    "card": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "back": {
+      "recolor": "auto",
+      "group": "floral"
+    },
+    "paper": {
+      "recolor": "keep",
+      "why": "ivory linen paper texture"
+    }
+  },
+  "print_colors": {
+    "ink": "#2E2A3F",
+    "accent": "#4B4172",
+    "paper": "#F1EBE1"
+  },
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "lav_ink"
+    ],
+    "roles": {
+      "lav_ink": "deep"
+    },
+    "tokens": {
+      "--page": "paper",
+      "--page-top": "paper",
+      "--c-d6cce5": "paper",
+      "--c-e1daec": "paper",
+      "--c-ece6f2": "paper",
+      "--c-f0ecf7": "paper",
+      "--c-f6f3fa": "paper",
+      "--c-dcd3e9": "paper"
+    },
+    "keep": [
+      "--ivory",
+      "--c-faf8f3",
+      "--c-8a2e3a"
+    ],
+    "contrast": [
+      [
+        "--ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--page",
+        4.5
+      ],
+      [
+        "--script-ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--deep-ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--deep-ink",
+        "--page-top",
+        4.5
+      ],
+      [
+        "--c-5d5287",
+        "--ivory",
+        4.5
+      ]
+    ]
+  }
+}

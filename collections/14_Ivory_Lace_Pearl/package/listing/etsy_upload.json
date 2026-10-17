@@ -182,5 +182,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Ivory Lace & Pearls)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=ivory-lace-pearls"
+      },
+      {
+        "name": "Blush & Pearl",
+        "variant": "blush-pearl",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=ivory-lace-pearls&variant=blush-pearl"
+      },
+      {
+        "name": "Champagne & Gold",
+        "variant": "champagne-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=ivory-lace-pearls&variant=champagne-gold"
+      },
+      {
+        "name": "Dusty Blue & Ivory Lace",
+        "variant": "dusty-blue",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=ivory-lace-pearls&variant=dusty-blue"
+      },
+      {
+        "name": "Sage & Pearl",
+        "variant": "sage-pearl",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=ivory-lace-pearls&variant=sage-pearl"
+      },
+      {
+        "name": "Dusty Mauve & Lace",
+        "variant": "dusty-mauve",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=ivory-lace-pearls&variant=dusty-mauve"
+      }
+    ],
+    "offered": [
+      "Original (Ivory Lace & Pearls)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

@@ -131,7 +131,7 @@ def test_pilot_designs_are_complete(no, theme):
     css = (ROOT / "platform/themes" / theme / "variants.css").read_text()
     # every contrast pair holds in every palette's tokens
     base = {}
-    for f in spec["css"]["files"]:
+    for f in [*spec["css"]["files"], "variants.css"]:  # variants.css :root = the channel tokens (G157)
         p = ROOT / "platform/themes" / theme / f
         if p.exists():
             for k, v in rp.root_tokens(p.read_text()).items():
@@ -158,3 +158,29 @@ def test_build_dry_run_does_not_write(tmp_path, monkeypatch):
     assert rep["V03_plum_gold"]["slug"] == "plum-gold"
     assert rep["V03_plum_gold"]["images"] >= 3
     assert (theme / "variants.css").read_text() == before
+
+
+G157 = {"09": "lavender-provence", "10": "tuscan-vineyard", "11": "boho-pampas-terracotta",
+        "12": "tropical-destination", "13": "enchanted-forest-storybook", "14": "ivory-lace-pearls"}
+
+
+@pytest.mark.parametrize("no,theme", sorted(G157.items()))
+def test_g157_designs_are_complete(no, theme):
+    test_pilot_designs_are_complete(no, theme)
+
+
+def test_unchanged_parts_are_not_copied():
+    """G157: a palette that keeps every family of a part writes no copy of it (the asset route serves the original)."""
+    from PIL import Image
+    a = Image.new("RGBA", (8, 8), (120, 80, 160, 255))
+    b = Image.new("RGBA", (8, 8), (121, 80, 159, 255))
+    c = Image.new("RGBA", (8, 8), (90, 120, 160, 255))
+    assert rp.unchanged(a, b) and not rp.unchanged(a, c)
+    design = rp.design_dir("14")
+    spec = rp.load_spec(design)
+    pal = next(p for p in rp.load_palettes(design) if p["slug"] == "dusty-blue")
+    out = ROOT / "platform/themes/ivory-lace-pearls/img/variants/dusty-blue"
+    for name, part in spec["parts"].items():
+        fams = pal["families"]
+        if part["recolor"] == "auto" and all(fams.get(f) is None for f in spec["groups"][part["group"]]):
+            assert not list(out.glob(f"{name}-*")), name

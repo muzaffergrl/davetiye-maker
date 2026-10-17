@@ -271,6 +271,13 @@ def recolor_image(path, fams):
     return Image.fromarray(np.dstack([out, rgba[..., 3]]).round().astype(np.uint8), "RGBA"), im.mode
 
 
+def unchanged(src, im, tol=2):
+    """Boyama sonucu asılla aynı mı (paletin bu parçanın bütün ailelerini null bıraktığı durum): kopya yazılmaz."""
+    a = np.asarray(src.convert("RGBA"), np.int16)
+    b = np.asarray(im.convert("RGBA"), np.int16)
+    return a.shape == b.shape and int(np.abs(a - b).max()) <= tol
+
+
 def save_like(im, mode, path):
     path.parent.mkdir(parents=True, exist_ok=True)
     ext = path.suffix.lower()
@@ -550,9 +557,14 @@ def build(design, only=None, sheet=True, write=True, images=True):
             if status == "auto":
                 fams = family_map(spec, pal, spec["groups"][p["group"]])
                 im, mode = recolor_image(path, fams)
-                if write:
-                    save_like(im, mode, tdir / "img/variants" / slug / path.name)
-                written.append(path.name)
+                dst = tdir / "img/variants" / slug / path.name
+                if unchanged(src, im):  # every family of this part kept in this palette: the original serves (G157)
+                    if write and dst.exists():
+                        dst.unlink()
+                else:
+                    if write:
+                        save_like(im, mode, dst)
+                    written.append(path.name)
             else:
                 im = None
             if sheet and (not rows or rows[-1][0] != key):
@@ -563,8 +575,13 @@ def build(design, only=None, sheet=True, write=True, images=True):
                 continue
             src = PRINT / theme / f"{name}.webp"
             im, mode = recolor_image(src, family_map(spec, pal, spec["groups"][p["group"]]))
+            dst = PRINT / theme / "variants" / slug / f"{name}.webp"
+            if unchanged(Image.open(src), im):
+                if write and dst.exists():
+                    dst.unlink()
+                continue
             if write:
-                save_like(im, mode, PRINT / theme / "variants" / slug / f"{name}.webp")
+                save_like(im, mode, dst)
             art.append(name)
             if sheet:
                 rows.append((f"print:{name}", "auto", Image.open(src), im))

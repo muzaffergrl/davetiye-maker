@@ -705,10 +705,7 @@
       ],
       "status": "coming",
       "print": {
-        "art": [
-          "card",
-          "back"
-        ],
+        "art": [],
         "ink": "#3A3530",
         "accent": "#546C89"
       }
@@ -723,10 +720,7 @@
       ],
       "status": "coming",
       "print": {
-        "art": [
-          "card",
-          "back"
-        ],
+        "art": [],
         "ink": "#3A3530",
         "accent": "#5C7050"
       }

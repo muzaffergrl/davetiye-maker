@@ -770,10 +770,7 @@
       ],
       "status": "coming",
       "print": {
-        "art": [
-          "card",
-          "back"
-        ],
+        "art": [],
         "ink": "#373333",
         "accent": "#645349"
       }

@@ -140,11 +140,13 @@ test('2 every theme file referenced by the pages, site.css, thank-you.css and si
   assert.ok(existsSync(path.join(DIR, 'img/favicon.png')));
   assert.equal(MANIFEST.favicon.source, 'closure');
   for (const bad of ['img_src', 'assets', 'previews', 'node_modules', '__pycache__']) assert.ok(!existsSync(path.join(DIR, bad)), bad);
+  // G153: the colour palettes' images (img/variants/) are not part of the design's own budget (docs/25 §4)
   const walk = (d: string): number => readdirSync(d, { withFileTypes: true })
+    .filter((e) => !(e.isDirectory() && e.name === 'variants' && path.basename(d) === 'img'))
     .reduce((n, e) => n + (e.isDirectory() ? walk(path.join(d, e.name)) : statSync(path.join(d, e.name)).size), 0);
   assert.ok(walk(DIR) <= 3_000_000, `theme folder ${walk(DIR)} bytes`);
   // only files the theme uses are in img/ (no leftover parts)
-  const files = readdirSync(path.join(DIR, 'img')).filter((f) => f !== 'manifest.json');
+  const files = readdirSync(path.join(DIR, 'img')).filter((f) => f !== 'manifest.json' && f !== 'variants');
   const unused = files.filter((f) => ![...refs].some((r) => r.endsWith(f)) && !/^(og-1200x630\.jpg|favicon\.png)$/.test(f) && !/-(\d+)\.webp$/.test(f));
   assert.deepEqual(unused, [], 'unused images');
 });

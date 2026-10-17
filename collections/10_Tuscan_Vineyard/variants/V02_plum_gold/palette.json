@@ -1,0 +1,26 @@
+{
+  "id": "V02_plum_gold",
+  "slug": "plum-gold",
+  "name": "Plum & Gold",
+  "ink": "#2E2030",
+  "deep": "#4A2442",
+  "primary": "#8C6283",
+  "mist_top": "#F4ECE2",
+  "mist_bottom": "#DCC7AE",
+  "gold": "#A9874F",
+  "gold_light": "#D2B98A",
+  "ivory": "#FBF6EC",
+  "leaf": "#6F7A4C",
+  "swatch": [
+    "#FBF6EC",
+    "#4A2442",
+    "#A9874F"
+  ],
+  "status": "coming",
+  "families": {
+    "wine": "deep",
+    "rule": "primary",
+    "grape": "#53294F",
+    "wine_ink": "deep"
+  }
+}

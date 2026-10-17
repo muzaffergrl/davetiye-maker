@@ -183,5 +183,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Tropical Destination)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=tropical-destination"
+      },
+      {
+        "name": "Coral Sunset",
+        "variant": "coral-sunset",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=tropical-destination&variant=coral-sunset"
+      },
+      {
+        "name": "Fuchsia Orchid",
+        "variant": "fuchsia-orchid",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=tropical-destination&variant=fuchsia-orchid"
+      },
+      {
+        "name": "Ocean Blue & Red Hibiscus",
+        "variant": "ocean-blue",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=tropical-destination&variant=ocean-blue"
+      },
+      {
+        "name": "Golden Hibiscus & Sand",
+        "variant": "golden-sand",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=tropical-destination&variant=golden-sand"
+      },
+      {
+        "name": "Blush Paradise",
+        "variant": "blush-paradise",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=tropical-destination&variant=blush-paradise"
+      }
+    ],
+    "offered": [
+      "Original (Tropical Destination)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }
