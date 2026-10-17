@@ -453,6 +453,12 @@ EK_TEMALAR = [
          dekor="Kobalt azulejo desenleri, terrakota saksılar, badana sıva, çini friz", teknik="el boyaması seramik",
          font=("Arizonia", "Cormorant Upright"), palet_adi="cobalt-white-terracotta",
          hareket="Karo karo 3B çevirme ızgarası: dokunulan noktadan yayılan dalga, her çini terrakota sırtını gösterip kalkar; fotoğraflar çini mozaiğiyle açılır; RSVP teşekkürü çinilerle belirir; metin çini gibi üst kenarından yatarak yerleşir."),
+    dict(no=32, klasor="32_Music_Box_Ballerina", ad="Music Box Ballerina",
+         zarf="Gül kuvarsı lake müzik kutusu, yan tarafta pirinç kurma anahtarı; anahtar döner, kapak arka menteşede kalkar, aynalı iç kapak dikilir, balerin yükselip yavaşça döner, kart öne gelir.",
+         foto="Kapağın oval aynasında yansıyan fotoğraflar: tek tek, cam üstünde ışık parıltısıyla değişir; balerin her fotoğrafta çeyrek döner.",
+         dekor="Saten astar, pirinç kurma anahtarı, tül, gül yaprakları", teknik="fotogerçekçi + pastel",
+         font=("Ballet", "Gilda Display"), palet_adi="rose-quartz-gold",
+         hareket="Kurma anahtarı döner (müzik kutusu ezgisi dokunuştan sonra), kapak menteşesi, balerinin yavaş piruet kare dizisi, aynada parıltılı foto geçişi, az sayıda süzülen gül yaprağı (azaltılmış harekette yok), oval ayna sayfa geçişi."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

@@ -291,6 +291,10 @@ const dict: Dict = {
   'Written in the stars': 'In den Sternen geschrieben',
   // G169 Azulejo Mosaic
   'Laid tile by tile, sent with love': 'Fliese für Fliese gelegt, mit Liebe gesendet',
+  // G171 Music Box Ballerina
+  'Turn the key': 'Schlüssel drehen',
+  'Wind the music box again': 'Spieluhr erneut aufziehen',
+  'Reflections': 'Spiegelbilder',
 };
 
 export default dict;

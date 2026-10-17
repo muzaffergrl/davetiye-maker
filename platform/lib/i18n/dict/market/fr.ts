@@ -934,6 +934,16 @@ const dict: Dict = {
   "A chart-paper reply card under the midnight sky with your names and reply-by date, then the reply form.": "Une carte de réponse en papier de carte céleste sous le ciel de minuit, avec vos noms et la date limite, puis le formulaire de réponse.",
   "Silver": "Argent",
   "dome": "coupole",
+  // G171 Music Box Ballerina
+  'A rose-quartz music box with a brass wind-up key, a little ballerina and your photos in its oval mirror': 'Une boîte à musique quartz rose avec une clé de remontage en laiton, une petite ballerine et vos photos dans son miroir ovale',
+  'A rose-quartz music box opens into your wedding website: a ballerina turns and your photos appear in its mirror. Personalize it in your online editor.': 'Une boîte à musique quartz rose s’ouvre sur votre site de mariage : une ballerine tourne et vos photos apparaissent dans son miroir. Personnalisez-le dans votre éditeur en ligne.',
+  'Rose quartz, blush satin and soft gold, like a keepsake music box. Your invitation waits inside, a little ballerina turns, and your photos appear in the mirror of the lid.': 'Quartz rose, satin poudré et or doux, comme une boîte à musique souvenir. Votre invitation attend à l’intérieur, une petite ballerine tourne et vos photos apparaissent dans le miroir du couvercle.',
+  'Your guests tap the box. The brass key turns, the lid swings up and its mirror shows your portrait, a ballerina rises and turns slowly while a few rose petals drift down, and a separate card comes forward to become your home page.': 'Vos invités touchent la boîte. La clé en laiton tourne, le couvercle se lève et son miroir montre votre portrait, une ballerine s’élève et tourne lentement tandis que quelques pétales de rose tombent, puis une carte séparée s’avance pour devenir votre page d’accueil.',
+  'The card from the music box with your names and date, then the invitation beside your portrait in an oval mirror, a countdown and calendar links.': 'La carte de la boîte à musique avec vos prénoms et la date, puis l’invitation à côté de votre portrait dans un miroir ovale, un compte à rebours et des liens d’agenda.',
+  'Your three photos appear one at a time in the music box mirror: guests swipe or tap the arrows, and the little ballerina turns with each photo.': 'Vos trois photos apparaissent une à une dans le miroir de la boîte à musique : les invités glissent ou touchent les flèches, et la petite ballerine tourne à chaque photo.',
+  'The order of the day on blush satin beside the venue photo, an optional map, dress code, travel and the menu.': 'Le déroulé de la journée sur satin poudré à côté de la photo du lieu, une carte facultative, le code vestimentaire, le voyage et le menu.',
+  'A reply card on blush satin; a few rose petals drift down and the ballerina turns once when a reply is sent.': 'Une carte-réponse sur satin poudré ; quand une réponse est envoyée, quelques pétales de rose tombent et la ballerine tourne une fois.',
+  'Rose quartz': 'Quartz rose',
 };
 
 export default dict;

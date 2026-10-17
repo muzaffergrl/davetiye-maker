@@ -291,6 +291,10 @@ const dict: Dict = {
   'Written in the stars': 'Yıldızlarda yazılı',
   // G169 Azulejo Mosaic
   'Laid tile by tile, sent with love': 'Çini çini döşendi, sevgiyle gönderildi',
+  // G171 Music Box Ballerina
+  'Turn the key': 'Anahtarı çevirin',
+  'Wind the music box again': 'Müzik kutusunu yeniden kurun',
+  'Reflections': 'Yansımalar',
 };
 
 export default dict;
