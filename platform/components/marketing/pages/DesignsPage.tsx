@@ -1,9 +1,9 @@
-// /designs — gallery (docs/14 §6.2; G066 comp u1_designs_390). Only live designs. G121 (docs/18 §5 P2): the style filter
+// /designs — gallery (docs/14 §6.2; G066 comp u1_designs_390). Live designs and clearly marked previews. G121 (docs/18 §5 P2): the style filter
 // appears from 6 designs on — radio chips and CSS only (:has), so it works without JavaScript and never writes the URL;
 // "All" is the default and shows every card. G141: the gallery is DesignGallery (Showcase.tsx): the cards play their
 // real opening on hover / ▶ and can be compared side by side. G144: one body for every language.
 import { MARKETING } from '../../../lib/marketing/config.ts';
-import { liveDesigns } from '../../../lib/marketing/designs.ts';
+import { catalogDesigns } from '../../../lib/marketing/designs.ts';
 import { FIXED, sitePageNames } from '../../../lib/marketing/facts.ts';
 import type { Market } from '../../../lib/marketing/i18n.ts';
 import { breadcrumbs, graph, itemList, webPage } from '../../../lib/marketing/schema.ts';
@@ -20,7 +20,7 @@ export function designsMetadata(m: Market) {
 export function DesignsPage({ m }: { m: Market }) {
   const { t } = m;
   const PAGE = corePage('/designs', MARKETING, t);
-  const designs = liveDesigns();
+  const designs = catalogDesigns();
   return (
     <>
       <Section className={s.pageHead}>
