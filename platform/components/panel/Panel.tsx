@@ -79,6 +79,7 @@ import { DetailsBlocksFields, MealFields, TravelFields } from './ExtrasFields.ts
 import { DateFields, DetailsFields, FaqFields, NamesFields, RsvpFields, ScheduleFields, StoryFields, VenueFields } from './sections.tsx';
 import { ThankYouFields } from './ThankYou.tsx';
 import { LanguagesFields } from './Languages.tsx';
+import { PaletteFields } from './Palette.tsx';
 import { firstOpenStep, readSetup, RulesBox, SampleDateGate, Setup, writeSetup } from './Setup.tsx';
 import { Sheet } from './Sheet.tsx';
 import { Badge, Banner, Button, cx, IconButton, SaveIndicator, SnackbarProvider, useSnackbar } from './ui.tsx';
@@ -1197,6 +1198,19 @@ function PanelApp({
                     </section>
                   );
                 })}
+                {/* G153: the design's colour palette (Us) */}
+                {sectionPage === 'us' && theme.variants?.length ? (
+                  <section id="section-palette-body" className={styles.sectionBlock} data-section="palette">
+                    <PaletteFields
+                      variants={theme.variants}
+                      swatch={theme.swatch ?? null}
+                      current={panel.meta.variant ?? null}
+                      onPick={panel.setVariant}
+                      locked={panel.locked}
+                      online={panel.online}
+                    />
+                  </section>
+                ) : null}
                 {/* G144: the website's languages and the couple's translations (Us) */}
                 {sectionPage === 'us' ? (
                   <section id="section-languages-body" className={styles.sectionBlock} data-section="languages">

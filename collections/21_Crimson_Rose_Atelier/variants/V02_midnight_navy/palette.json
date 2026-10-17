@@ -1,0 +1,27 @@
+{
+  "id": "V02_midnight_navy",
+  "slug": "midnight-navy",
+  "name": "Midnight Navy & Wine",
+  "ink": "#1E2433",
+  "deep": "#1F2A44",
+  "primary": "#2E3B5E",
+  "mist_top": "#EBDFCF",
+  "mist_bottom": "#D8C6B0",
+  "gold": "#C9A66D",
+  "gold_light": "#DDC8A7",
+  "ivory": "#F8EFDF",
+  "leaf": "#695C52",
+  "swatch": [
+    "#F8EFDF",
+    "#1F2A44",
+    "#3A0A12"
+  ],
+  "status": "coming",
+  "families": {
+    "rose": "#3A0A12",
+    "envelope": "deep",
+    "wine": "deep",
+    "leaf": null,
+    "gold": null
+  }
+}

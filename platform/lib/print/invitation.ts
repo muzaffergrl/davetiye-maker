@@ -40,6 +40,39 @@ export interface InvitationOptions {
   /** Crop marks (only with bleed). */
   marks: boolean;
   back: boolean;
+  /**
+   * G153: the site's colour palette (theme.json variants[].print): its ink / accent replace the layout's, and the parts
+   * it lists come from public/print/<theme>/variants/<id>/ (the others are the original's). Null = the original.
+   */
+  variant?: PrintVariant | null;
+}
+
+export interface PrintVariant {
+  id: string;
+  ink?: string;
+  accent?: string;
+  art?: readonly string[];
+}
+
+/** The print variant of a theme variant (null when the variant has nothing for print). */
+export function printVariantOf(v: { id: string; print?: { ink?: string; accent?: string; art?: string[] } } | null | undefined): PrintVariant | null {
+  if (!v?.print) return null;
+  return { id: v.id, ink: v.print.ink, accent: v.print.accent, art: v.print.art ?? [] };
+}
+
+/** The layout in a palette: its text colours, and url(<part>.webp) of each recoloured part pointing at the variant's file. */
+function inVariant(l: PrintLayout, v: PrintVariant | null | undefined): { layout: PrintLayout; src: (name: string) => string } {
+  if (!v) return { layout: l, src: (name) => `${name}.webp` };
+  const own = new Set(v.art ?? []);
+  const src = (name: string) => (own.has(name) ? `variants/${v.id}/${name}.webp` : `${name}.webp`);
+  const bg = (css: string) => css.replace(/url\(([a-z][a-z0-9_-]*)\.webp\)/g, (m, name: string) => (own.has(name) ? `url(${src(name)})` : m));
+  const composed = l.composed
+    ? {
+        front: { ...l.composed.front, bg: bg(l.composed.front.bg) },
+        back: { ...l.composed.back, bg: bg(l.composed.back.bg) },
+      }
+    : undefined;
+  return { layout: { ...l, ink: v.ink ?? l.ink, accent: v.accent ?? l.accent, ...(composed ? { composed } : {}) }, src };
 }
 
 /** Sheet geometry in inches: page size, where the trim box starts, trim size and bleed. */
@@ -164,9 +197,9 @@ function cardRect(g: ReturnType<typeof sheetGeometry>) {
   return { x: g.trimX + (g.trimW - w) / 2, y: g.trimY + (g.trimH - h) / 2, w, h };
 }
 
-function sheetCss(l: PrintLayout, g: ReturnType<typeof sheetGeometry>, cardW: number): string {
+function sheetCss(l: PrintLayout, g: ReturnType<typeof sheetGeometry>, cardW: number, src: (name: string) => string = (n) => `${n}.webp`): string {
   const caps = l.caps ?? l.serif;
-  const paper = !l.paper ? 'none' : l.paper.mode === 'tile' ? `url(paper.webp) repeat 0 0 / ${l.paper.tile ?? 2.5}in` : 'url(paper.webp) center / cover no-repeat';
+  const paper = !l.paper ? 'none' : l.paper.mode === 'tile' ? `url(${src('paper')}) repeat 0 0 / ${l.paper.tile ?? 2.5}in` : `url(${src('paper')}) center / cover no-repeat`;
   return `
 @page { size: ${g.pageW}in ${g.pageH}in; margin: 0 }
 * { box-sizing: border-box; margin: 0; padding: 0 }
@@ -210,8 +243,9 @@ html, body { width: ${g.pageW}in; background: #fff; -webkit-print-color-adjust: 
 
 /** The print HTML of the invitation (front, optional back). Asset URLs are relative to /print/<id>/ (public/print). */
 export function invitationHtml(themeId: string, content: unknown, siteUrl: string, o: InvitationOptions): string {
-  const l = printLayout(themeId);
-  if (!l) throw new Error(`no print layout for theme ${themeId}`);
+  const base = printLayout(themeId);
+  if (!base) throw new Error(`no print layout for theme ${themeId}`);
+  const { layout: l, src } = inVariant(base, o.variant);
   const g = sheetGeometry({ size: o.size, bleed: o.bleed, marks: o.marks && o.bleed });
   const t = invitationText(content, siteUrl);
   const composed = l.composed;
@@ -222,8 +256,8 @@ export function invitationHtml(themeId: string, content: unknown, siteUrl: strin
     const c = composed?.[which];
     const paper = c ? `<div class="paper" style="background:${esc(c.bg)}"></div>` : '<div class="paper"></div>';
     const inner = c
-      ? c.images.map((i) => `<img class="deco" src="${esc(i.src)}.webp" style="${esc(i.style)}" alt="">`).join('')
-      : `<img class="part" src="${which === 'front' ? 'card' : 'back'}.webp" alt="">`;
+      ? c.images.map((i) => `<img class="deco" src="${esc(src(i.src))}" style="${esc(i.style)}" alt="">`).join('')
+      : `<img class="part" src="${src(which === 'front' ? 'card' : 'back')}" alt="">`;
     const text = which === 'front' ? frontText(t, l, !o.back) : backText(t);
     const bands = l.bands?.[which] ?? [];
     const bandAttr = bands.length ? ` data-bands="${esc(JSON.stringify(bands))}"` : '';
@@ -234,7 +268,7 @@ export function invitationHtml(themeId: string, content: unknown, siteUrl: strin
   };
   return (
     `<!doctype html><html lang="${t.lang}"><head><meta charset="utf-8"><title>${esc(t.nameDisplay || 'Invitation')}</title>` +
-    `<link rel="stylesheet" href="${esc(l.fonts)}"><style>${sheetCss(l, g, rect.w)}</style></head>` +
+    `<link rel="stylesheet" href="${esc(l.fonts)}"><style>${sheetCss(l, g, rect.w, src)}</style></head>` +
     `<body>${side('front')}${o.back ? side('back') : ''}</body></html>`
   );
 }

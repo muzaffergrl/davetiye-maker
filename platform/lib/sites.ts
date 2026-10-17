@@ -20,6 +20,7 @@ import {
 import { isAvailableSlugShape } from './slug.ts';
 import { copyIssues } from './theme/copy.ts';
 import { loadTheme } from './theme/theme.ts';
+import { resolveVariant } from './theme/variants.ts';
 
 export class InvalidSlugError extends Error {
   constructor(slug: string) {
@@ -91,6 +92,8 @@ export interface CreateSiteInput {
   claimTokenHash?: string | null;
   /** The order check the claim recorded (lib/claim/verify.ts), written with the site. */
   orderCheck?: SiteRecord['orderCheck'];
+  /** G152: design unit of a multi-item order (lib/claim/claim.ts); 1 when absent. */
+  orderSlot?: number;
 }
 
 export interface CreatedSite {
@@ -104,14 +107,16 @@ export interface CreatedSite {
 /** Creates a draft site with fresh keys. Throws InvalidSlugError, UnknownThemeError, ContentInvalidError, SlugTakenError. */
 export async function createSiteWithKeys(adapter: DataAdapter, input: CreateSiteInput): Promise<CreatedSite> {
   if (!isAvailableSlugShape(input.slug)) throw new InvalidSlugError(input.slug);
-  if (!(await loadTheme(input.theme))) throw new UnknownThemeError(input.theme);
+  const theme = await loadTheme(input.theme);
+  if (!theme) throw new UnknownThemeError(input.theme);
   const result = validateContent(input.content);
   if (!result.ok) throw new ContentInvalidError(result.errors);
   const keys = newSiteKeys();
   const site = await adapter.createSite({
     slug: input.slug,
     theme: input.theme,
-    variant: input.variant ?? null,
+    // G153: only a palette buyers can pick (live); anything else starts with the original
+    variant: resolveVariant(theme.manifest.variants, input.variant),
     content: input.content,
     editKeyHash: keys.editKeyHash,
     previewKeyHash: keys.previewKeyHash,
@@ -119,6 +124,7 @@ export async function createSiteWithKeys(adapter: DataAdapter, input: CreateSite
     ownerEmail: input.ownerEmail ?? null,
     claimTokenHash: input.claimTokenHash ?? null,
     ...(input.orderCheck ? { orderCheck: input.orderCheck } : {}),
+    ...(input.orderSlot && input.orderSlot > 1 ? { orderSlot: input.orderSlot } : {}),
   });
   return { site, editKey: keys.editKey, previewKey: keys.previewKey };
 }

@@ -22,6 +22,7 @@ import {
   SlugTakenError,
   StaleSiteError,
   nextTimestamp,
+  touchContentUpdatedAt,
   type DataAdapter,
   type NewSite,
   type PhotoInput,
@@ -188,9 +189,11 @@ export class LocalAdapter implements DataAdapter {
       ownerEmail: input.ownerEmail ?? null,
       createdAt: now,
       updatedAt: now,
+      contentUpdatedAt: now,
       publishedAt: null,
       ...(input.claimTokenHash ? { claimTokenHash: input.claimTokenHash } : {}),
       ...(input.orderCheck ? { orderCheck: structuredClone(input.orderCheck) } : {}),
+      ...(input.orderRef && input.orderSlot && input.orderSlot > 1 ? { orderSlot: input.orderSlot } : {}),
     };
     await this.writeJson(this.sitePath(id), site);
     return structuredClone(site);
@@ -200,8 +203,11 @@ export class LocalAdapter implements DataAdapter {
     return this.withLock(`site:${id}`, async () => {
       const site = await this.getSiteById(id);
       if (!site) throw new NotFoundError(`site ${id}`);
+      const contentBefore = JSON.stringify(site.content);
+      const updatedBefore = site.updatedAt;
       change(site);
       site.updatedAt = nextTimestamp(site.updatedAt);
+      touchContentUpdatedAt(site, contentBefore, updatedBefore);
       await this.writeJson(this.sitePath(id), site);
       return site;
     });

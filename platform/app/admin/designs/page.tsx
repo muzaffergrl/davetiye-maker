@@ -37,6 +37,8 @@ export default function DesignsPage() {
         ];
         const rows = adminDesigns(sites, catalogue);
         const startableIds = new Set(startable.map((t) => t.id));
+        // G151: private custom designs (theme.json "private"): never on the sales site; started with a listed order number.
+        const privateOrders = new Map(startable.filter((t) => t.privateOrders).map((t) => [t.id, t.privateOrders!]));
         const live = rows.filter((r) => r.live).length;
         return (
           <>
@@ -47,12 +49,16 @@ export default function DesignsPage() {
             <div className={styles.grid}>
               {rows.map((r) => {
                 const c = commerce.get(r.id);
-                const startUrl = `${origin}/start?theme=${encodeURIComponent(r.id)}`;
+                const orders = privateOrders.get(r.id);
+                const startUrl = orders?.length
+                  ? `${origin}/start?theme=${encodeURIComponent(r.id)}&order=${encodeURIComponent(orders[0])}`
+                  : `${origin}/start?theme=${encodeURIComponent(r.id)}`;
                 return (
                   <section key={r.id} className={styles.siteCard} data-design={r.id}>
                     <span className={styles.badges}>
                       {r.live ? <span className={styles.badgeOk}>Satış sitesinde</span> : <span className={styles.badgeMuted}>Satış sitesinde değil</span>}
                       {!startableIds.has(r.id) ? <span className={styles.badgeWarn}>Başlatılamaz</span> : null}
+                      {orders ? <span className={styles.badgeMuted}>Özel tasarım · sipariş {orders.length ? orders.join(', ') : 'yok'}</span> : null}
                     </span>
                     <p className={styles.siteNames}>{r.name}</p>
                     <p className={styles.siteMeta}>

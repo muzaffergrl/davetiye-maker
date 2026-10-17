@@ -1,0 +1,32 @@
+{
+ "original": {
+  "measured": 123,
+  "low": 0,
+  "as_original": 1
+ },
+ "dusty-blue": {
+  "measured": 123,
+  "low": 0,
+  "as_original": 0
+ },
+ "sage-gold": {
+  "measured": 123,
+  "low": 0,
+  "as_original": 0
+ },
+ "navy-gold": {
+  "measured": 123,
+  "low": 0,
+  "as_original": 0
+ },
+ "burgundy-sage": {
+  "measured": 123,
+  "low": 0,
+  "as_original": 0
+ },
+ "blush-sage": {
+  "measured": 123,
+  "low": 0,
+  "as_original": 0
+ }
+}

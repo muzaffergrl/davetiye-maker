@@ -25,6 +25,7 @@ import {
   type ClaimField,
 } from '../../lib/claim/fields.ts';
 import { markOpenedExisting, rememberEditor, takeStartPrefill } from '../../lib/panel/remember.ts';
+import { PalettePicker } from '../../components/palette/PalettePicker.tsx';
 import { StartShell } from './shell.tsx';
 import styles from './start.module.css';
 
@@ -33,8 +34,12 @@ export interface StartTheme {
   name: string;
   /** 1 or 2 name fields (from the theme's demo content). */
   partnerCount: number;
-  /** /start/demo/<theme> */
-  demoUrl: string;
+  /** /start/demo/<theme>; null for a private custom design (G151: its demo is admin-only). */
+  demoUrl: string | null;
+  /** G153: the original palette's swatch, the design's live color palettes and the one chosen (null = original). */
+  swatch?: string[] | null;
+  variants?: Array<{ id: string; name: string; swatch: string[] }>;
+  variant?: string | null;
 }
 
 interface ClaimResultView {
@@ -138,11 +143,27 @@ function store(value: ClaimResultView | null): void {
   }
 }
 
-export default function StartForm({ theme, origin, emailEnabled, lang = 'en', dict }: { theme: StartTheme; origin: string; emailEnabled: boolean; lang?: Lang; dict?: Dict }) {
+export default function StartForm({
+  theme,
+  origin,
+  emailEnabled,
+  initialOrder = null,
+  lang = 'en',
+  dict,
+}: {
+  theme: StartTheme;
+  origin: string;
+  emailEnabled: boolean;
+  /** G151: the order number of a private design's start link (filled in). */
+  initialOrder?: string | null;
+  lang?: Lang;
+  dict?: Dict;
+}) {
   // G144: the interface language (chosen on the server) before any text renders
   setUiLocale(lang, dict);
   const [result, setResult] = useState<ClaimResultView | null>(null);
   const [lastEmail, setLastEmail] = useState('');
+  const [variant, setVariant] = useState<string | null>(theme.variant ?? null);
 
   useEffect(() => {
     const stored = loadStored(theme.id);
@@ -178,8 +199,22 @@ export default function StartForm({ theme, origin, emailEnabled, lang = 'en', di
               {t('Design:')} <strong>{theme.name}</strong>
             </p>
           </header>
-          <DemoPreview theme={theme} />
-          <ClaimForm theme={theme} origin={origin} emailEnabled={emailEnabled} initialEmail={lastEmail} onCreated={onCreated} />
+          {theme.variants?.length ? (
+            <section className={styles.palette} aria-labelledby="start-palette">
+              <h2 id="start-palette" className={styles.paletteTitle}>
+                {t('Color palette')}
+              </h2>
+              <PalettePicker
+                label={t('Color palette')}
+                options={[{ id: null, name: t('Original'), swatch: theme.swatch ?? [] }, ...theme.variants]}
+                value={variant}
+                onChange={setVariant}
+              />
+              <p className={styles.previewNote}>{t('You can change the colors later in your editor.')}</p>
+            </section>
+          ) : null}
+          {theme.demoUrl ? <DemoPreview theme={theme} demoUrl={theme.demoUrl} variant={variant} /> : null}
+          <ClaimForm theme={theme} variant={variant} origin={origin} emailEnabled={emailEnabled} initialEmail={lastEmail} initialOrder={initialOrder} onCreated={onCreated} />
         </div>
       )}
     </StartShell>
@@ -188,14 +223,15 @@ export default function StartForm({ theme, origin, emailEnabled, lang = 'en', di
 
 // ---------------------------------------------------------------------------------------------
 
-function DemoPreview({ theme }: { theme: StartTheme }) {
+function DemoPreview({ theme, demoUrl: base, variant }: { theme: StartTheme; demoUrl: string; variant: string | null }) {
+  const demoUrl = variant ? `${base}?variant=${encodeURIComponent(variant)}` : base;
   return (
     <section className={styles.preview} aria-label={t('{design} demo', { design: theme.name })}>
       <div className={styles.frameBox}>
-        <iframe className={styles.frame} src={theme.demoUrl} title={t('{design} demo website', { design: theme.name })} referrerPolicy="no-referrer" />
+        <iframe className={styles.frame} src={demoUrl} title={t('{design} demo website', { design: theme.name })} referrerPolicy="no-referrer" />
       </div>
       <p className={styles.previewNote}>{t('Sample names, dates and placeholder photos. You will add your own in the editor.')}</p>
-      <a className={styles.textLink} href={theme.demoUrl} target="_blank" rel="noopener">
+      <a className={styles.textLink} href={demoUrl} target="_blank" rel="noopener">
         {t('Open the full demo')}
       </a>
     </section>
@@ -206,19 +242,23 @@ function DemoPreview({ theme }: { theme: StartTheme }) {
 
 function ClaimForm({
   theme,
+  variant,
   origin,
   emailEnabled,
   initialEmail,
+  initialOrder,
   onCreated,
 }: {
   theme: StartTheme;
+  variant: string | null;
   origin: string;
   emailEnabled: boolean;
   initialEmail: string;
+  initialOrder: string | null;
   onCreated: (r: ClaimResultView) => void;
 }) {
   const twoNames = theme.partnerCount >= 2;
-  const [orderNumber, setOrderNumber] = useState('');
+  const [orderNumber, setOrderNumber] = useState(initialOrder ?? '');
   const [email, setEmail] = useState(initialEmail);
   const [names, setNames] = useState<string[]>(twoNames ? ['', ''] : ['']);
   const [slug, setSlug] = useState('');
@@ -335,6 +375,8 @@ function ClaimForm({
     tokenRef.current = claimTokenFor(tokenRef.current);
     const payload = JSON.stringify({
       theme: theme.id,
+      // G153: the chosen color palette (the server keeps it only when it is one of the design's live palettes)
+      variant,
       orderNumber,
       email,
       names,

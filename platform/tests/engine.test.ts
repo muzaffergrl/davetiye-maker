@@ -380,10 +380,13 @@ test('safeJsonForScript round-trips through JSON.parse', () => {
 });
 
 test('html element gets theme/page/variant attributes and a default lang', () => {
-  const { $ } = render('<p>x</p>', demoContent(), { variant: 'champagne' });
+  // G153: a palette the theme declares (an unknown one is the original: no data-variant)
+  const variants = [{ id: 'champagne', name: 'Champagne', swatch: ['#FFFFFF'], status: 'coming' as const }];
+  const { $ } = render('<p>x</p>', demoContent(), { variant: 'champagne', theme: { ...THEME, variants } });
   assert.equal($('html').attr('data-theme'), 'testtheme');
   assert.equal($('html').attr('data-page'), 'home');
   assert.equal($('html').attr('data-variant'), 'champagne');
+  assert.equal(render('<p>x</p>', demoContent(), { variant: 'champagne' }).$('html').attr('data-variant'), undefined);
   assert.equal($('html').attr('lang'), 'en');
 });
 

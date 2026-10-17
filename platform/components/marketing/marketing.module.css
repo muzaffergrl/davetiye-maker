@@ -3300,3 +3300,44 @@
   color: var(--anchor);
   font-weight: 650;
 }
+
+/* G153: the design's colour palettes under the poster: a swatch opens the live demo in that palette. */
+.paletteRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.paletteChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 4px 12px 4px 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+.paletteChip[aria-pressed='true'] {
+  border-color: var(--anchor);
+  box-shadow: inset 0 0 0 1px var(--anchor);
+}
+.paletteDots {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+.paletteDots > span {
+  flex: 1;
+}
+.paletteName {
+  white-space: nowrap;
+}

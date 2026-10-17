@@ -10,16 +10,19 @@
 //     (buyer_email is often null: Etsy grants it case by case; then the email is not compared)
 //   a purchased listing is mapped in listings.json to another design   -> rejected theme_mismatch (unmapped: no theme check)
 //   otherwise                                                           -> verified ("partially refunded" still counts as paid)
+// G152 — multi-item orders: "verified" and "pending" carry `units`, the websites the receipt pays for: the quantities of
+//   its lines that are designs (mapped to a theme in listings.json, or not mapped at all); add-on service listings
+//   (listings.json "services": setup, custom design, extra revision) never count. lib/claim/claim.ts then allows that many
+//   websites for the order number (at least 1, at most MAX_ORDER_SITES).
 // Fallbacks (never a 500 on /start):
 //   app settings missing, shop not connected, Etsy no longer accepts the connection, or Etsy refuses our app (401/403 on
 //   the token itself) -> pending, exactly like manual mode; the admin card shows why.
 //   Etsy timeout / network error / 429 rate limit / 5xx                -> unavailable (the buyer is asked to retry; nothing stored)
-// One website per ORDER (not per item) stays the rule (lib/claim/claim.ts); multi-item orders: follow-up in the task file.
 
 import LISTINGS from './listings.json' with { type: 'json' };
 import { getDataAdapter } from '../data/index.ts';
 import type { DataAdapter } from '../data/types.ts';
-import type { OrderCheck, OrderCheckInput, OrderVerifier } from '../claim/verify.ts';
+import { MAX_ORDER_SITES, type OrderCheck, type OrderCheckInput, type OrderVerifier } from '../claim/verify.ts';
 import { etsySetup } from './config.ts';
 import { canReadReceipts, EtsyError, getShopReceipt, type EtsyReceipt } from './client.ts';
 import { clearEtsyError, connectedShop, EtsyNotConnectedError, noteEtsyError, shopAccessToken } from './shop.ts';
@@ -35,11 +38,45 @@ export function listingThemes(raw: unknown = LISTINGS): Map<string, string> {
   return out;
 }
 
+export type ServiceKind = 'setup' | 'custom_design' | 'extra_revision';
+const SERVICE_KINDS: readonly string[] = ['setup', 'custom_design', 'extra_revision'];
+
+/** listing_id -> service kind, from listings.json "services" (bad entries are ignored). */
+export function listingServices(raw: unknown = LISTINGS): Map<string, ServiceKind> {
+  const out = new Map<string, ServiceKind>();
+  const list = raw && typeof raw === 'object' ? (raw as { services?: unknown }).services : null;
+  if (!list || typeof list !== 'object') return out;
+  for (const [id, kind] of Object.entries(list as Record<string, unknown>)) {
+    if (/^\d{1,20}$/.test(id) && typeof kind === 'string' && SERVICE_KINDS.includes(kind)) out.set(id, kind as ServiceKind);
+  }
+  return out;
+}
+
+const listingIdOf = (t: unknown): string => {
+  const id = t && typeof t === 'object' ? (t as { listing_id?: unknown }).listing_id : null;
+  return typeof id === 'number' || typeof id === 'string' ? String(id) : '';
+};
+
+/**
+ * G152: the websites a receipt pays for — the summed quantity of its design lines (a service listing never counts). At
+ * least 1 (a receipt without readable lines is still one design), at most MAX_ORDER_SITES.
+ */
+export function designUnits(receipt: Pick<EtsyReceipt, 'transactions'> | null, services: Map<string, ServiceKind> = listingServices()): number {
+  let units = 0;
+  for (const t of Array.isArray(receipt?.transactions) ? receipt.transactions : []) {
+    if (!t || typeof t !== 'object') continue;
+    if (services.has(listingIdOf(t))) continue;
+    const q = typeof t.quantity === 'number' && Number.isInteger(t.quantity) && t.quantity > 0 ? t.quantity : 1;
+    units += Math.min(q, MAX_ORDER_SITES);
+  }
+  return Math.max(1, Math.min(units, MAX_ORDER_SITES));
+}
+
 /** The decision for one receipt (pure; exported for the tests). */
 export function evaluateReceipt(
   receipt: EtsyReceipt | null,
   input: OrderCheckInput,
-  opts: { listings?: Map<string, string>; sellerUserId?: number | null } = {},
+  opts: { listings?: Map<string, string>; services?: Map<string, ServiceKind>; sellerUserId?: number | null } = {},
 ): OrderCheck {
   if (!receipt || typeof receipt !== 'object') return { result: 'rejected', reason: 'not_found' };
   if (typeof receipt.receipt_id === 'number' && String(receipt.receipt_id) !== input.orderNumber) return { result: 'rejected', reason: 'not_found' };
@@ -53,13 +90,14 @@ export function evaluateReceipt(
   const listings = opts.listings ?? listingThemes();
   const themes = new Set<string>();
   for (const t of Array.isArray(receipt.transactions) ? receipt.transactions : []) {
-    const id = t && (typeof t.listing_id === 'number' || typeof t.listing_id === 'string') ? String(t.listing_id) : '';
+    const id = listingIdOf(t);
     const theme = id ? listings.get(id) : undefined;
     if (theme) themes.add(theme);
   }
   if (themes.size && !themes.has(input.theme)) return { result: 'rejected', reason: 'theme_mismatch' };
-  if (receipt.is_paid !== true) return { result: 'pending' };
-  return { result: 'verified' };
+  const units = designUnits(receipt, opts.services ?? listingServices());
+  if (receipt.is_paid !== true) return { result: 'pending', units };
+  return { result: 'verified', units };
 }
 
 export class EtsyOrderVerifier implements OrderVerifier {

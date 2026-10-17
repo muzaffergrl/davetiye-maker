@@ -1,0 +1,86 @@
+<!doctype html>
+<!-- Maison Pâtisserie · page 1 — the closed pâtisserie box (/<slug>). Cream ground with pistachio and rose light, "A sweet
+     invitation", the names in Parisienne, and below them a pistachio box seen from above, a rose satin ribbon crossing
+     its lid and tied in a bow; "Tap to open the box". Opening (docs/24 #28, own object — no envelope): on tap the bow
+     unties (its two loops part to the sides, the knot drops), the four ribbon arms slide off the lid, the lid lifts
+     away, the two sheets of tissue paper part, and the card inside — the portrait, "Our wedding", the names, the date —
+     comes forward and flies to home (view transition invite-card → the home card). Every layer is its own GPT part on
+     one canvas (build_images.py; INTERIM crops until the PAKET 5 parts in GPT_PROMPTS.md arrive). Personal text: none —
+     [data-field] / [data-text] / [data-photo] are filled on the server. Thank-you mode (G075): the same opening; the
+     card carries the thank-you title and the date, its window the thank-you photo or — without one — the satin bow.
+     Design texts: data-copy (G068, theme.json "copy"). -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f8f1e6">
+<title data-text="{name_display} · {copy.envelope_kicker}">Maison Pâtisserie</title>
+<meta name="description" data-if="!thank_you_on" data-attr-content="{copy.envelope_kicker} · {name_display} · {date|date-long} · {venue.city_region}" content="A wedding invitation">
+<meta name="description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {name_display} · {date|date-long}" content="Thank you">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{name_display} · {date}" content="Wedding invitation">
+<meta property="og:description" data-if="!thank_you_on" data-attr-content="{copy.envelope_kicker} · {date|date-long} · {venue.city_region}" content="A sweet invitation">
+<meta property="og:description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {date|date-long}" content="Thank you">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italiana&family=Parisienne&display=swap">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
+<script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
+(function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'';if(sessionStorage.getItem('invite:opened'+k)&&!/[?&]replay=1(&|$)/.test(location.search))r.classList.add('is-opened');}catch(e){}})(document.documentElement);
+</script>
+<!-- prefetch the home page: the rule points at the "Enter" link, whose href the platform has already set to /<slug>/home -->
+<script type="speculationrules">{"prefetch":[{"source":"document","where":{"selector_matches":"a[data-enter]"},"eagerness":"immediate"}]}</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-opening" data-pending="This link will be added soon.">
+<a class="textlink skip" href="home.html" data-skip><span data-copy="envelope_skip">Skip</span></a>
+<main class="opening">
+  <img class="opening-ground" src="img/bg_page-640.webp" srcset="img/bg_page-640.webp 640w, img/bg_page-1024.webp 1024w" sizes="(min-aspect-ratio: 2/3) 100vw, 150svh" alt="" fetchpriority="high">
+  <div class="opening-heading">
+    <p class="kicker-line" data-if="!thank_you_on" data-copy="envelope_kicker">A sweet invitation</p>
+    <p class="kicker-line" data-if="thank_you_on" data-copy="ty_kicker">With love and thanks</p>
+    <h1 class="names" data-fit><span data-field="partners.0.display_name"></span><span class="amp">&amp;</span><span data-field="partners.1.display_name"></span></h1>
+    <p class="opening-date"><span data-field="date"></span><span aria-hidden="true"> · </span><span data-field="venue.city"></span></p>
+  </div>
+  <div class="stage" role="button" tabindex="0" aria-label="Open the invitation" data-copy-attr="aria-label:envelope_open">
+    <!-- manifest stage: every layer is the whole 1024 × 1024 canvas, stacked at 100 % (bottom → top) -->
+    <div class="box">
+      <img class="box-base" src="img/box_base-440.webp" srcset="img/box_base-440.webp 440w, img/box_base-880.webp 880w" sizes="min(80vw, 44svh, 420px)" alt="">
+      <div class="card" aria-hidden="true">
+        <img class="card-img" src="img/card_paper-320.webp" srcset="img/card_paper-320.webp 320w, img/card_paper-560.webp 560w" sizes="min(44vw, 24svh, 230px)" alt="">
+        <div class="card-copy">
+          <div class="card-photo photo-slot" data-slot="hero_portrait">
+            <img data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_portrait-640.webp" sizes="min(28vw, 15svh, 146px)" alt="">
+            <span class="ph-mark" data-if="!thank_you_on"><span>Your photo here</span></span>
+            <img class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_portrait-640.webp" sizes="min(28vw, 15svh, 146px)" alt="">
+            <span class="ty-decor" data-if="thank_you_on !thank_you.photo"><img src="img/bow_knot-440.webp" alt=""></span>
+          </div>
+          <p class="card-kicker" data-if="!thank_you_on" data-copy="card_line">Our wedding</p>
+          <p class="card-names" data-if="!thank_you_on" data-field="name_display"></p>
+          <p class="card-names ty-title" data-if="thank_you_on" data-field="thank_you_title"></p>
+          <p class="card-date" data-field="date"></p>
+        </div>
+      </div>
+      <img class="tissue tissue-l" src="img/tissue_left-440.webp" srcset="img/tissue_left-440.webp 440w, img/tissue_left-880.webp 880w" sizes="min(80vw, 44svh, 420px)" alt="">
+      <img class="tissue tissue-r" src="img/tissue_right-440.webp" srcset="img/tissue_right-440.webp 440w, img/tissue_right-880.webp 880w" sizes="min(80vw, 44svh, 420px)" alt="">
+      <img class="lid" src="img/lid-440.webp" srcset="img/lid-440.webp 440w, img/lid-880.webp 880w" sizes="min(80vw, 44svh, 420px)" alt="" fetchpriority="high">
+      <img class="ribbon ribbon-n" src="img/ribbon_n-440.webp" srcset="img/ribbon_n-440.webp 440w, img/ribbon_n-880.webp 880w" sizes="min(80vw, 44svh, 420px)" alt="">
+      <img class="ribbon ribbon-s" src="img/ribbon_s-440.webp" srcset="img/ribbon_s-440.webp 440w, img/ribbon_s-880.webp 880w" sizes="min(80vw, 44svh, 420px)" alt="">
+      <img class="ribbon ribbon-w" src="img/ribbon_w-440.webp" srcset="img/ribbon_w-440.webp 440w, img/ribbon_w-880.webp 880w" sizes="min(80vw, 44svh, 420px)" alt="">
+      <img class="ribbon ribbon-e" src="img/ribbon_e-440.webp" srcset="img/ribbon_e-440.webp 440w, img/ribbon_e-880.webp 880w" sizes="min(80vw, 44svh, 420px)" alt="">
+      <img class="bow bow-l" src="img/bow_l-440.webp" srcset="img/bow_l-440.webp 440w, img/bow_l-880.webp 880w" sizes="min(80vw, 44svh, 420px)" alt="">
+      <img class="bow bow-r" src="img/bow_r-440.webp" srcset="img/bow_r-440.webp 440w, img/bow_r-880.webp 880w" sizes="min(80vw, 44svh, 420px)" alt="">
+      <img class="bow bow-knot" src="img/bow_knot-440.webp" srcset="img/bow_knot-440.webp 440w, img/bow_knot-880.webp 880w" sizes="min(80vw, 44svh, 420px)" alt="">
+    </div>
+  </div>
+  <div class="opening-actions">
+    <p class="tap-hint" aria-hidden="true"><span data-copy="envelope_hint_tap">Tap to open the box</span></p>
+    <a class="btn enter" href="home.html" data-enter><span data-copy="envelope_enter">Enter</span></a>
+    <button class="textlink replay" type="button"><span data-copy="envelope_replay">Replay the opening</span></button>
+  </div>
+  <!-- without JavaScript (no <noscript>: its content is raw text, the platform could not rewrite the link) -->
+  <p class="nojs-only"><a class="btn" href="home.html"><span data-copy="envelope_open">Open the invitation</span></a></p>
+</main>
+</body>
+</html>

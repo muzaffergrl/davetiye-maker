@@ -12,7 +12,7 @@ import { CopyButton } from './CopyButton.tsx';
 
 type Created = { id: string; slug: string; editUrl: string; siteUrl: string; names: string; design: string };
 
-export default function AdminNew({ themes, initialTheme }: { themes: Array<{ id: string; name: string }>; initialTheme: string }) {
+export default function AdminNew({ themes, initialTheme }: { themes: Array<{ id: string; name: string; privateOrders?: string[] }>; initialTheme: string }) {
   const router = useRouter();
   const [v, setV] = useState({ theme: initialTheme, orderNumber: '', email: '', name1: '', name2: '', slug: '' });
   const [errors, setErrors] = useState<Partial<Record<AdminCreateField, string>>>({});
@@ -126,7 +126,7 @@ export default function AdminNew({ themes, initialTheme }: { themes: Array<{ id:
             <option value="">Seçin…</option>
             {themes.map((t) => (
               <option key={t.id} value={t.id}>
-                {t.name}
+                {t.privateOrders ? `${t.name} (özel tasarım)` : t.name}
               </option>
             ))}
           </select>,

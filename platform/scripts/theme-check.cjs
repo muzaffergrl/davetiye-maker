@@ -68,6 +68,9 @@
 //   pageChecks, and no hero piece partly under the nav on the first view — each ends above the nav or starts below the
 //   first screen (top ≥ innerHeight; the hero may scroll; qa-kontrol 2026-10-14, G401 third round). --stress: names
 //   minimum + pageChecks with the §12 stress record (it may scroll).
+// G153 colour palettes (theme.json "variants", scripts/lib/variant-check.ts; alone: scripts/variant-check.cjs): every
+//   palette's demo pages at 390×844 — html[data-variant], no failed request, text contrast on the real painted ground
+//   (≥ 4.5:1 body, ≥ 3:1 large / script; a failure the original has too is a warning); <out>/variants/<palette>_<page>_390.png.
 // Recording: the blank lead-in before the first paint is cut; a white first frame is an error.
 // Output: <out>/<page>_390.png (+ index/home at every width, details_1280), *_placeholder.png,
 //   details_390_changed_content.png, compare_<page>_390.jpg, opening_390x844.mp4, checks.json.
@@ -360,7 +363,9 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
     const stage = document.querySelector('.stage');
     const st = stage && vis(stage);
     const sb = st && CLOSED_BOX ? { top: st.top + st.height * CLOSED_BOX[1] / 100, bottom: st.top + st.height * (CLOSED_BOX[1] + CLOSED_BOX[3]) / 100 } : st;
-    const hint = [...document.querySelectorAll('body *')].find((el) => el.children.length === 0 && /\b(tap|click) to open\b/i.test(el.textContent) && vis(el));
+    // the hint by its words, else by its class (a design that opens a curtain, a box … says "Tap to raise the curtain")
+    const hint = [...document.querySelectorAll('body *')].find((el) => el.children.length === 0 && /\b(tap|click) to open\b/i.test(el.textContent) && vis(el))
+      ?? [...document.querySelectorAll('.tap-hint')].find((el) => vis(el)) ?? null;
     const hb = hint && hint.getBoundingClientRect();
     // effective opacity (a running CSS animation can keep a hint visible that the opened state means to hide)
     const alpha = (el) => { let a = 1; for (let n = el; n && n.nodeType === 1; n = n.parentElement) a *= Number(getComputedStyle(n).opacity); return a; };
@@ -937,8 +942,10 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
       await page.goto(url(demo.slug, 'details'), { waitUntil: 'load' });
       await revealAll(page);
       let before = reqs.length;
+      // the platform map block ([data-map], G127) is live without urls.map: seed.ts gives every demo its city pin (72f2f26)
       const dead = await page.evaluate(() => ({ missing: document.querySelectorAll('a[data-url-missing]').length,
-        buttons: [...document.querySelectorAll('.btn')].map((b) => b.textContent.trim()).filter((t) => /map|stay|registry/i.test(t)) }));
+        buttons: [...document.querySelectorAll('.btn')].filter((b) => !b.closest('[data-map]')).map((b) => b.textContent.trim()).filter((t) => /map|stay|registry/i.test(t)) }));
+      // G127: the map block ([data-map]) shows "Show map" / directions from the venue itself, not from a link (G163)
       if (dead.missing || dead.buttons.length) err(`details without links: dead buttons ${JSON.stringify(dead)}`);
       else ok('details without map / hotel / registry links: no dead buttons for guests');
       if (!rsvpOn) {
@@ -1006,8 +1013,8 @@ const ok = (m) => { results.passed.push(m); console.log('PASS  ' + m); };
         else ok('RSVP: "Send another reply" reopens the form');
       }
       // the theme demo on /start: its RSVP page asks no status from a site that does not exist (no 404, no console error)
-      if (env.internal) {
-        warn('theme demo RSVP page (/start/demo/…/rsvp): skipped — internal themes are not on /start');
+      if (env.internal || env.private) {
+        warn(`theme demo RSVP page (/start/demo/…/rsvp): skipped — ${env.internal ? 'internal themes are not on /start' : 'a private theme\'s demo is admin-only (G151)'}`);
       } else {
         const demoPage = await ctx.newPage();
         const demoProblems = watch(demoPage);
@@ -1506,6 +1513,12 @@ s.thumbnail((900, 4000)); s.save(sys.argv[3], quality=84, optimize=True)
       compared.push(name);
     }
     results.info.compare = { source: COMPARE, pages: compared };
+
+    // ---------------------------------------------------------------- G153: colour palettes (theme.json "variants")
+    if (env.manifest.variants && env.manifest.variants.length) {
+      const { checkVariants } = await import('./lib/variant-check.ts');
+      results.info.variants = await checkVariants({ browser, base: BASE, themeId: THEME, variants: env.manifest.variants, pages: PAGES.filter((p) => env.manifest.pages[p]), out: OUT, err, warn, ok });
+    }
   } catch (e) {
     err('run: ' + (e && e.stack || e));
   } finally {

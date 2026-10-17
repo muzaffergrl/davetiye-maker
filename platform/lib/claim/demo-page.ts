@@ -5,12 +5,15 @@
 // Rendered in preview mode (previewKey "demo"): links between pages stay under /start/demo/<theme>,
 // the RSVP form shows its "preview, replies are not sent" panel and never posts. Same CSP as sites
 // (frame-ancestors 'self': /start embeds it in an iframe). Internal and unknown themes -> 404.
+// G151: a private theme (custom design for one buyer) only for the shop admin (admin session cookie); everyone else
+// gets the same 404 as an unknown theme.
 
+import { isAdminRequest } from '../admin/auth.ts';
 import { calendarEvent } from '../calendar.ts';
 import { publicOrigin } from '../panel/http.ts';
 import { icsResponse } from '../site/ics.ts';
 import { siteCsp, isSitePage } from '../site/render.ts';
-import { renderTemplate } from '../theme/engine.ts';
+import { renderTemplate, VARIANT_PARAM } from '../theme/engine.ts';
 import { readThemePage } from '../theme/theme.ts';
 import { withDemoMap } from './demo-map.ts';
 import { claimableTheme } from './themes.ts';
@@ -45,7 +48,7 @@ function demoNotFound(): Response {
 export async function handleDemoPage(req: Request, themeId: string, page: string): Promise<Response> {
   if (!isSitePage(page)) return demoNotFound();
   try {
-    const theme = await claimableTheme(themeId);
+    const theme = await claimableTheme(themeId, { trusted: isAdminRequest(req.headers.get('cookie')) });
     if (!theme) return demoNotFound();
     const template = await readThemePage(theme.loaded, page);
     if (template === null) return demoNotFound();
@@ -58,7 +61,10 @@ export async function handleDemoPage(req: Request, themeId: string, page: string
       page,
       // pageRoute() builds "/<slug>/<page>": this keeps the demo's page links under /start/demo/<theme>.
       slug: demoBase(theme.id).slice(1),
-      variant: null,
+      // G153: ?variant=<id> shows one of the design's palettes (live ones, and ones still in review for the review itself);
+      // page links keep it
+      variant: new URL(req.url).searchParams.get(VARIANT_PARAM),
+      variantInLinks: true,
       previewKey: DEMO_PREVIEW_MARK,
       origin: publicOrigin(req.headers, new URL(req.url).origin),
       share: theme.loaded.share,
@@ -72,7 +78,8 @@ export async function handleDemoPage(req: Request, themeId: string, page: string
         'X-Content-Type-Options': 'nosniff',
         'X-Robots-Tag': 'noindex, nofollow',
         'Referrer-Policy': 'strict-origin-when-cross-origin',
-        'Cache-Control': 'public, max-age=0, must-revalidate',
+        // G151: a private theme's demo was opened with the admin cookie: never kept by a shared cache.
+        'Cache-Control': theme.manifest.private ? 'private, no-store' : 'public, max-age=0, must-revalidate',
       },
     });
   } catch (e) {
@@ -87,7 +94,7 @@ export async function handleDemoPage(req: Request, themeId: string, page: string
 /** GET /start/demo/<theme>/event.ics: "Add to calendar" of the demo's fictional event (G051). */
 export async function handleDemoIcs(req: Request, themeId: string): Promise<Response> {
   try {
-    const theme = await claimableTheme(themeId);
+    const theme = await claimableTheme(themeId, { trusted: isAdminRequest(req.headers.get('cookie')) });
     if (!theme) return demoNotFound();
     const origin = publicOrigin(req.headers, new URL(req.url).origin); // same origin as the demo page's links
     const event = calendarEvent(theme.demo, { siteUrl: `${origin}${demoBase(theme.id)}` });

@@ -106,6 +106,21 @@ export interface PanelTheme {
   color?: string | null;
   /** G140: the design's share image (root-relative URL of img/og-1200x630.jpg, no names on it) for the card; null = none. */
   shareImage?: string | null;
+  /**
+   * G153: the design's extra colour palettes. `live` ones can be picked; one still in review (`live: false`) is listed only
+   * so the panel can name a site's current palette. Absent / [] = the design has only its original colours.
+   */
+  variants?: PanelVariant[];
+  /** G153: the original palette's swatch colours (theme.json "swatch"); null = not given (the panel draws none). */
+  swatch?: string[] | null;
+}
+
+/** A colour palette as the panel shows it (lib/theme/variants.ts ThemeVariant). */
+export interface PanelVariant {
+  id: string;
+  name: string;
+  swatch: string[];
+  live: boolean;
 }
 
 export interface PanelMeta {
@@ -125,6 +140,8 @@ export interface PanelMeta {
   orderPending: boolean;
   /** Optional guest password (G076): on/off and the password itself (the couple shares it with guests). */
   guestAccess: GuestAccessView;
+  /** G153: the chosen colour palette (theme.json variants id), null = the design's original colours. */
+  variant: string | null;
 }
 
 export interface PanelState extends PanelMeta {

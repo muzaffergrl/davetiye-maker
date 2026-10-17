@@ -29,7 +29,9 @@ export type DemoCopy = Record<
   | 'closeInline'
   | 'chooseDesign'
   | 'showMore'
-  | 'more',
+  | 'more'
+  | 'palette'
+  | 'paletteShown',
   string
 >;
 
@@ -42,6 +44,13 @@ export interface DemoDesign {
   designPath: string;
   /** Real Etsy listing link, or null while it is a placeholder. */
   etsyUrl: string | null;
+  /** G153: the original + the design's live colour palettes ([] = none): a swatch opens the demo in that palette. */
+  palettes?: Array<{ id: string | null; name: string; swatch: string[] }>;
+}
+
+/** The demo address in a colour palette (lib/marketing/palettes.ts withPalette; kept here for the browser bundle). */
+function demoIn(path: string, palette: string | null): string {
+  return palette ? `${path}${path.includes('?') ? '&' : '?'}variant=${encodeURIComponent(palette)}` : path;
 }
 
 /** G094: design chips shown before "+N more" on wide screens when there are more than eight designs. */
@@ -101,16 +110,17 @@ function EtsyAction({ d, placement, copy }: { d: DemoDesign; placement: string; 
 export function DemoHost({ designs, copy }: { designs: DemoDesign[]; copy: DemoCopy }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const opener = useRef<HTMLElement | null>(null);
-  const [current, setCurrent] = useState<{ d: DemoDesign; placement: string; n: number } | null>(null);
+  const [current, setCurrent] = useState<{ d: DemoDesign; placement: string; n: number; src: string } | null>(null);
   const [wide, setWide] = useState(false);
 
   const open = useCallback(
-    (id: string, placement: string) => {
+    (id: string, placement: string, palette: string | null = null) => {
       const d = designs.find((x) => x.id === id);
       if (!d) return false;
       opener.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       setWide(window.matchMedia('(min-width: 768px)').matches);
-      setCurrent((c) => ({ d, placement, n: (c?.n ?? 0) + 1 }));
+      const pal = palette && d.palettes?.some((p) => p.id === palette) ? palette : null;
+      setCurrent((c) => ({ d, placement, n: (c?.n ?? 0) + 1, src: demoIn(d.demoPath, pal) }));
       track('demo_open', { design: id, placement });
       return true;
     },
@@ -125,8 +135,8 @@ export function DemoHost({ designs, copy }: { designs: DemoDesign[]; copy: DemoC
       if (open(a.getAttribute('data-demo') || '', a.getAttribute('data-demo-placement') || 'link')) e.preventDefault();
     };
     const onEvent = (e: Event) => {
-      const { id, placement } = (e as CustomEvent<{ id: string; placement: string }>).detail;
-      open(id, placement);
+      const { id, placement, palette } = (e as CustomEvent<{ id: string; placement: string; palette?: string | null }>).detail;
+      open(id, placement, palette ?? null);
     };
     document.addEventListener('click', onClick);
     window.addEventListener('mk:demo', onEvent);
@@ -169,9 +179,9 @@ export function DemoHost({ designs, copy }: { designs: DemoDesign[]; copy: DemoC
           </div>
           <div className={s.dialogStage}>
             {wide ? (
-              <ScaledFrame key={current.n} src={current.d.demoPath} title={interpolate(copy.frameTitle, { name: current.d.name })} fit="contain" />
+              <ScaledFrame key={current.n} src={current.src} title={interpolate(copy.frameTitle, { name: current.d.name })} fit="contain" />
             ) : (
-              <iframe key={current.n} className={s.fullFrame} src={current.d.demoPath} title={interpolate(copy.frameTitle, { name: current.d.name })} />
+              <iframe key={current.n} className={s.fullFrame} src={current.src} title={interpolate(copy.frameTitle, { name: current.d.name })} />
             )}
           </div>
           <div className={s.dialogActions}>
@@ -222,8 +232,13 @@ export function HeroDemo({
   const [allChips, setAllChips] = useState(false);
   // G089: set once a chip changes the design, so the new poster eases in (the first poster is the LCP image: never)
   const [swapped, setSwapped] = useState(false);
+  // G153: the colour palette the demo opens in (null = the original)
+  const [palette, setPalette] = useState<string | null>(null);
   const chipsRef = useRef<HTMLDivElement>(null);
   const d = designs[sel];
+  const demoSrc = demoIn(d.demoPath, palette);
+  // only on a design's own page (one design); the home hero and listings stay as they are
+  const palettes = designs.length === 1 ? (d.palettes ?? []) : [];
   // G094: up to eight names show in full on wide screens (two rows at 1280 px, G093); beyond that, the first
   // CHIPS_WIDE and a "+N more" chip
   const collapse = designs.length > 8 && !allChips;
@@ -233,7 +248,7 @@ export function HeroDemo({
       setInline((x) => ({ n: (x?.n ?? 0) + 1 }));
       track('demo_open', { design: d.id, placement: `${placement}-${from}` });
     } else {
-      window.dispatchEvent(new CustomEvent('mk:demo', { detail: { id: d.id, placement: `${placement}-${from}` } }));
+      window.dispatchEvent(new CustomEvent('mk:demo', { detail: { id: d.id, placement: `${placement}-${from}`, palette } }));
     }
   };
 
@@ -241,6 +256,15 @@ export function HeroDemo({
     setSwapped(true);
     setSel(i);
     setInline(null);
+    setPalette(null);
+  };
+
+  /** G153: a swatch shows the live demo in that palette (in place on wide screens, else in the dialog). */
+  const pickPalette = (id: string | null) => {
+    setPalette(id);
+    if (window.matchMedia('(min-width: 1024px)').matches) setInline((x) => ({ n: (x?.n ?? 0) + 1 }));
+    else window.dispatchEvent(new CustomEvent('mk:demo', { detail: { id: d.id, placement: `${placement}-palette`, palette: id } }));
+    track('demo_open', { design: d.id, placement: `${placement}-palette` });
   };
 
   return (
@@ -250,11 +274,11 @@ export function HeroDemo({
         <div className={s.heroStage} data-fx-glow>
           <div className={s.heroScreen} data-fx-swap={swapped || undefined}>
             {inline ? (
-              <ScaledFrame key={`${d.id}-${inline.n}`} src={d.demoPath} title={interpolate(copy.frameTitle, { name: d.name })} fit="width" />
+              <ScaledFrame key={`${d.id}-${inline.n}`} src={demoSrc} title={interpolate(copy.frameTitle, { name: d.name })} fit="width" />
             ) : (
               <a
                 className={s.posterButton}
-                href={d.demoPath}
+                href={demoSrc}
                 onClick={(e) => {
                   if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
                   e.preventDefault();
@@ -292,6 +316,29 @@ export function HeroDemo({
               <X aria-hidden size={16} strokeWidth={1.75} />
               {copy.closeInline}
             </button>
+          </div>
+        ) : null}
+        {palettes.length > 1 ? (
+          <div className={s.paletteRow} role="group" aria-label={copy.palette} data-palettes>
+            {palettes.map((p) => (
+              <button
+                key={p.id ?? 'original'}
+                type="button"
+                className={s.paletteChip}
+                aria-pressed={p.id === palette}
+                aria-label={interpolate(copy.paletteShown, { name: p.name })}
+                title={p.name}
+                onClick={() => pickPalette(p.id)}
+                data-palette={p.id ?? 'original'}
+              >
+                <span className={s.paletteDots} aria-hidden="true">
+                  {p.swatch.map((c, i) => (
+                    <span key={i} style={{ background: c }} />
+                  ))}
+                </span>
+                <span className={s.paletteName}>{p.name}</span>
+              </button>
+            ))}
           </div>
         ) : null}
         {designs.length > 1 ? (

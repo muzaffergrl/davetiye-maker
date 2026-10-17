@@ -1,0 +1,122 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Charlotte",
+      "full_name": "Charlotte Rose Abernathy"
+    },
+    {
+      "display_name": "Theodore",
+      "full_name": "Theodore James Whitlock"
+    }
+  ],
+  "name_display": "Charlotte & Theodore",
+  "initials": "C&T",
+  "host_line": "Together with their families",
+  "date": "2027-10-16",
+  "ceremony_time": "17:00",
+  "timezone": "America/New_York",
+  "venue": {
+    "name": "The Larkmont Grand Theatre",
+    "city": "Richmond",
+    "region": "Virginia",
+    "country": "United States",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "The ceremony",
+      "time": "17:00",
+      "location": "On the main stage"
+    },
+    {
+      "label": "Champagne in the grand foyer",
+      "time": "18:00",
+      "location": "The mirrored foyer"
+    },
+    {
+      "label": "Dinner in the stalls",
+      "time": "19:15",
+      "location": "The auditorium"
+    },
+    {
+      "label": "First dance & encore",
+      "time": "21:00",
+      "location": "On the main stage"
+    }
+  ],
+  "dress_code": "Black tie optional",
+  "rsvp": {
+    "deadline": "2027-09-01",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your dinner choice",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Beef tenderloin",
+          "Sea bass",
+          "Wild mushroom risotto"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "Two seats side by side, one standing ovation after another, and every encore since has led us to",
+    "items": [
+      {
+        "caption": "Opening night"
+      },
+      {
+        "caption": "The proposal at intermission"
+      },
+      {
+        "caption": "Our curtain call"
+      }
+    ]
+  },
+  "audio": {
+    "music": "evening-strings",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "The doors open at 4:30 PM. Please be seated by 4:50 PM: the curtain rises at five."
+    },
+    {
+      "q": "Is there parking at the theatre?",
+      "a": "Yes, valet parking is available at the main entrance."
+    }
+  ]
+}

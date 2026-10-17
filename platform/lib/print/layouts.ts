@@ -5,7 +5,7 @@
 // bottom, left; bands = where decoration reaches into it, G149) and the colours / fonts of the design's own website
 // (themes/<id>/site.css). The part files are copied at full size by scripts/build-print-assets.ts into
 // public/print/<id>/ (card.webp, back.webp, paper.webp).
-// Designs without card parts yet (21, 22) are "composed": the trimmed sheet is the card, set from the design's existing
+// Designs without card parts yet (21, 22, 24, 25, 26) are "composed": the trimmed sheet is the card, set from the design's existing
 // GPT images (no shape drawn, K21) until the parts asked for in the collection's GPT_PROMPTS.md (G139) arrive.
 
 export type Box = readonly [top: number, right: number, bottom: number, left: number];
@@ -67,6 +67,9 @@ const PARTS = { card: 'parts/invitation_card.png', back: 'parts/info_card.png', 
 const gf = (q: string) => `https://fonts.googleapis.com/css2?${q}&display=swap`;
 const cover = (name: string, at = 'center') => `url(${name}.webp) ${at} / cover no-repeat`;
 const sealAt = (edge: 'top' | 'bottom') => ({ src: 'seal', style: `${edge}:4%;left:50%;width:17%;transform:translateX(-50%)` });
+
+const tileRow = (edge: 'top' | 'bottom') =>
+  ['tile1', 'tile2', 'tile3', 'tile2', 'tile1'].map((src, i) => ({ src, style: `${edge}:5%;left:${25 + i * 10.5}%;width:9%` }));
 
 export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
   'olive-ivory': {
@@ -242,6 +245,110 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     composed: {
       front: { bg: cover('scene', '50% 0%'), images: [] },
       back: { bg: '#11120F', images: [sealAt('top')] },
+    },
+  },
+  // 23: interim until the PAKET 6 grounds arrive (GPT_PROMPTS.md): both sides on the website's aubergine velvet ground
+  // (img/bg_velvet, toned from a GPT texture by the theme build) with the satin bow (img/closure) — at the top of the
+  // front above the text, and at the bottom of the back under the schedule and QR. Text in champagne, away from the bow.
+  'velvet-jewel-box': {
+    collection: '23_Velvet_Jewel_Box',
+    sources: { velvet: 'platform/themes/velvet-jewel-box/img/bg_velvet-1024.webp', bow: 'platform/themes/velvet-jewel-box/img/closure-236.webp' },
+    fonts: gf('family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Pinyon+Script'),
+    script: "'Pinyon Script', cursive", serif: "'Bodoni Moda', Georgia, serif",
+    ink: '#F8EDE0', accent: '#E8D3B0', front: [27, 13, 14, 13], back: [12, 12, 22, 12],
+    composed: {
+      front: { bg: cover('velvet'), images: [{ src: 'bow', style: 'top:7%;left:50%;width:24%;transform:translateX(-50%)' }] },
+      back: { bg: cover('velvet'), images: [{ src: 'bow', style: 'bottom:5%;left:50%;width:18%;transform:translateX(-50%)' }] },
+    },
+  },
+  // 24 (G162, interim until the PAKET 6 grounds in GPT_PROMPTS.md arrive): the ivory programme paper with a band of the
+  // peacock velvet across the top (and the foot of the front), both cut by the theme build from GPT textures; the text
+  // sits on the plain paper between the bands.
+  'grand-theatre-premiere': {
+    collection: '24_Grand_Theatre_Premiere',
+    sources: { paper: 'platform/themes/grand-theatre-premiere/img/paper-1024.webp', velvet: 'platform/themes/grand-theatre-premiere/img/velvet-640.webp' },
+    fonts: gf('family=Abril+Fatface&family=Playfair+Display:ital,wght@0,400;0,600;1,400'),
+    script: "'Abril Fatface', Georgia, serif", serif: "'Playfair Display', Georgia, serif",
+    ink: '#1E2626', accent: '#6E5119', front: [19, 12, 15, 12], back: [17, 12, 8, 12],
+    composed: {
+      front: {
+        bg: cover('paper'),
+        images: [
+          { src: 'velvet', style: 'top:-4%;left:-4%;width:108%;height:15%;object-fit:cover' },
+          { src: 'velvet', style: 'bottom:-4%;left:-4%;width:108%;height:12%;object-fit:cover;transform:scaleY(-1)' },
+        ],
+      },
+      back: { bg: cover('paper'), images: [{ src: 'velvet', style: 'top:-4%;left:-4%;width:108%;height:13%;object-fit:cover' }] },
+    },
+  },
+  // 25 (G163): composed until the PAKET 6 print backgrounds arrive (collections/25_Orient_Express_Voyage/assets/gpt/
+  // GPT_PROMPTS.md: print/invitation_front.png, print/invitation_back.png). Interim front = the website's ivory paper (the
+  // interim poster tones were not empty enough for the G149 free-area check); back = the same ivory with the boarding stamp.
+  // When GPT's print grounds exist, `node scripts/build-print-assets.ts --theme orient-express-voyage` picks them up and the
+  // boxes are measured again (tests/g149-print-layout.test.ts).
+  'orient-express-voyage': {
+    collection: '25_Orient_Express_Voyage',
+    sources: { scene: 'platform/themes/orient-express-voyage/img/poster-1024.webp', stamp: 'platform/themes/orient-express-voyage/img/stamp-480.webp' },
+    fonts: gf('family=Limelight&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400'),
+    script: "'Limelight', Georgia, serif", serif: "'Cormorant Garamond', Georgia, serif",
+    ink: '#1E3A2C', accent: '#7A5C24', front: [12, 12, 12, 12], back: [20, 12, 8, 12],
+    composed: {
+      front: { bg: '#F3EBD9', images: [] },
+      back: { bg: '#F3EBD9', images: [{ ...sealAt('top'), src: 'stamp' }] },
+    },
+  },
+  // 26 (G164, interim until PAKET 6 print_front / print_back): rice paper with the indigo washi of the opened folds at
+  // its top and bottom edge — both toned papers cut by the theme build (img/rice, img/washi_indigo; no shape drawn).
+  'kintsugi-washi': {
+    collection: '26_Kintsugi_Washi',
+    sources: { rice: 'platform/themes/kintsugi-washi/img/rice-1024.webp', washi: 'platform/themes/kintsugi-washi/img/washi_indigo-1024.webp' },
+    fonts: gf('family=Allura&family=Shippori+Mincho:wght@400;600'),
+    script: "'Allura', cursive", serif: "'Shippori Mincho', Georgia, serif",
+    ink: '#1D2340', accent: '#7A5C22', front: [21, 13, 19, 13], back: [17, 12, 10, 12],
+    composed: {
+      front: {
+        bg: 'url(rice.webp) 0 0 / 2.4in repeat',
+        images: [
+          { src: 'washi', style: 'top:0;left:0;width:100%;height:12%;object-fit:cover' },
+          { src: 'washi', style: 'bottom:0;left:0;width:100%;height:11%;object-fit:cover;object-position:50% 80%' },
+        ],
+      },
+      back: { bg: 'url(rice.webp) 0 0 / 2.4in repeat', images: [{ src: 'washi', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover' }] },
+    },
+  },
+  // 27 (G165, before its GPT parts): both sides on ivory lime plaster (the same GPT plaster the theme's card is toned
+  // from: 05's seamless bg_tile at full size, reached from this collection's assets/gpt/ by ../../../) with a row of the
+  // zellige tiles the theme build cut (img/tile_N) — front: a row along the top and one along the bottom, back: a row on
+  // top. Text in cedar on the plaster. Replaced by PAKET 6 print_front / print_back (GPT_PROMPTS.md) when they arrive.
+  'riad-lantern-nights': {
+    collection: '27_Riad_Lantern_Nights',
+    sources: {
+      paper: '../../../05_Lemon_Mediterranean/assets/gpt/parts/bg_tile.png',
+      tile1: 'platform/themes/riad-lantern-nights/img/tile_1-76.webp',
+      tile2: 'platform/themes/riad-lantern-nights/img/tile_2-76.webp',
+      tile3: 'platform/themes/riad-lantern-nights/img/tile_3-76.webp',
+    },
+    fonts: gf('family=Cinzel:wght@400;500&family=Marcellus&family=Marcellus+SC'),
+    script: "'Cinzel', Georgia, serif", serif: "'Marcellus', Georgia, serif", caps: "'Marcellus SC', Georgia, serif",
+    namesInCaps: true,
+    ink: '#3A2114', accent: '#8F5418', front: [17, 12, 17, 12], back: [16, 12, 10, 12],
+    composed: {
+      front: { bg: cover('paper'), images: [...tileRow('top'), ...tileRow('bottom')] },
+      back: { bg: cover('paper'), images: tileRow('top') },
+    },
+  },
+  // 28 (G166): composed until its card parts arrive (GPT_PROMPTS.md PAKET 6) — front = the website's cream paper with the
+  // rose satin bow at the top; back = the same paper with the bow small at the top. Both images come from the theme
+  // build (interim crops of repository GPT pictures, see themes/maison-patisserie/build_images.py).
+  'maison-patisserie': {
+    collection: '28_Maison_Patisserie',
+    sources: { paper: 'platform/themes/maison-patisserie/img/bg_page-1024.webp', bow: 'platform/themes/maison-patisserie/img/bow-480.webp' },
+    fonts: gf('family=Italiana&family=Parisienne'),
+    script: "'Parisienne', cursive", serif: "'Italiana', Georgia, serif",
+    ink: '#3E3A32', accent: '#9B4F5A', front: [27, 13, 12, 13], back: [21, 12, 10, 12],
+    composed: {
+      front: { bg: cover('paper'), images: [{ src: 'bow', style: 'top:5%;left:50%;width:42%;transform:translateX(-50%)' }] },
+      back: { bg: cover('paper'), images: [{ src: 'bow', style: 'top:4%;left:50%;width:24%;transform:translateX(-50%)' }] },
     },
   },
 };

@@ -1,0 +1,96 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 01
+   (kaynak: collections/01_Olive_Ivory/variants/*/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-28321e: 40 50 30;
+  --c-323c1e: 50 60 30;
+  --c-342e14: 52 46 20;
+  --c-343a24: 52 58 36;
+  --c-3c3c1e: 60 60 30;
+  --c-56623f: 86 98 63;
+  --c-7d8b5a: 125 139 90;
+  --c-fff6dc: 255 246 220;
+}
+
+/* V06_blush_sage · Blush & Sage */
+html[data-variant="blush-sage"] {
+  --c-323c1e: 62 39 23;
+  --c-342e14: 52 32 25;
+  --c-343a24: 55 51 33;
+  --c-3c3c1e: 66 36 32;
+  --c-56623f: 102 74 55;
+  --c-7d8b5a: 151 107 85;
+  --c-fff6dc: 254 239 221;
+  --gold-ink: #6D4C41;
+  --leaf: #976B55;
+  --olive: #654B36;
+  --olive-btn: #70523D;
+}
+
+/* V05_burgundy_sage · Burgundy & Sage */
+html[data-variant="burgundy-sage"] {
+  --c-28321e: 38 38 19;
+  --c-323c1e: 42 8 0;
+  --c-342e14: 34 8 7;
+  --c-343a24: 47 39 22;
+  --c-3c3c1e: 40 1 3;
+  --c-56623f: 82 41 21;
+  --c-7d8b5a: 131 66 44;
+  --c-fff6dc: 245 226 210;
+  --gold-ink: #5F3632;
+  --ink-soft: #403F2C;
+  --leaf: #83422C;
+  --olive: #532A14;
+  --olive-btn: #5D2F1A;
+}
+
+/* V02_dusty_blue · Dusty Blue & Ivory */
+html[data-variant="dusty-blue"] {
+  --c-28321e: 35 44 31;
+  --c-323c1e: 29 38 42;
+  --c-342e14: 26 32 29;
+  --c-343a24: 43 49 38;
+  --c-3c3c1e: 26 36 44;
+  --c-56623f: 63 73 78;
+  --c-7d8b5a: 95 109 120;
+  --c-fff6dc: 241 238 221;
+  --gold-ink: #4E5043;
+  --ink-soft: #3E4638;
+  --leaf: #5F6D78;
+  --olive: #3F494E;
+  --olive-btn: #465157;
+}
+
+/* V04_navy_gold · Navy & Gold */
+html[data-variant="navy-gold"] {
+  --c-28321e: 31 39 27;
+  --c-323c1e: 15 19 27;
+  --c-342e14: 12 17 18;
+  --c-343a24: 36 41 32;
+  --c-3c3c1e: 8 14 27;
+  --c-56623f: 47 51 62;
+  --c-7d8b5a: 77 83 104;
+  --c-fff6dc: 232 230 215;
+  --gold-ink: #3F433C;
+  --ink-soft: #394033;
+  --leaf: #4D5368;
+  --olive: #30343F;
+  --olive-btn: #363B47;
+}
+
+/* V03_sage_gold · Sage & Gold */
+html[data-variant="sage-gold"] {
+  --c-323c1e: 31 47 29;
+  --c-342e14: 36 37 17;
+  --c-343a24: 45 53 34;
+  --c-3c3c1e: 36 45 28;
+  --c-56623f: 65 84 62;
+  --c-7d8b5a: 98 123 94;
+  --c-fff6dc: 246 241 217;
+  --gold-ink: #5D5330;
+  --leaf: #627B5E;
+  --olive: #41543E;
+  --olive-btn: #485D45;
+}

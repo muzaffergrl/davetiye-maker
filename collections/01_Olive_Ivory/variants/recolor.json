@@ -1,0 +1,235 @@
+{
+  "theme": "olive-ivory",
+  "note": "G153 recolour manifest (tools/recolor_parts.py, docs/25). families = hue families of the GPT art (anchor = median colour measured on the parts); a palette maps each family to one of its roles (null = keep). Groups say which families a part may take.",
+  "families": {
+    "envelope": {
+      "anchor": "#827E54",
+      "sigma": 24,
+      "cmin": 0.03,
+      "cfull": 0.05
+    },
+    "leaf": {
+      "anchor": "#767A51",
+      "sigma": 24,
+      "cmin": 0.03,
+      "cfull": 0.05
+    },
+    "gold": {
+      "anchor": "#D3B688",
+      "sigma": 9
+    },
+    "seal_gold": {
+      "anchor": "#D3B688",
+      "sigma": 16
+    },
+    "pale_gold": {
+      "anchor": "#DCCB9F",
+      "sigma": 16
+    },
+    "stamen": {
+      "anchor": "#E3C04A",
+      "sigma": 7,
+      "cmin": 0.09,
+      "cfull": 0.11
+    }
+  },
+  "groups": {
+    "envelope": [
+      "envelope",
+      "gold",
+      "stamen"
+    ],
+    "botanical": [
+      "leaf",
+      "seal_gold",
+      "pale_gold",
+      "stamen"
+    ]
+  },
+  "parts": {
+    "accent_1": {
+      "recolor": "auto",
+      "group": "botanical"
+    },
+    "accent_2": {
+      "recolor": "keep",
+      "why": "olive fruit: plum-black in every palette"
+    },
+    "accent_3": {
+      "recolor": "keep",
+      "why": "white blossom, neutral"
+    },
+    "bg_page": {
+      "recolor": "auto",
+      "group": "botanical"
+    },
+    "bg_tile": {
+      "recolor": "keep",
+      "why": "ivory paper texture"
+    },
+    "card_small": {
+      "recolor": "keep",
+      "why": "ivory card with gold rule"
+    },
+    "closure": {
+      "recolor": "auto",
+      "group": "botanical"
+    },
+    "decor_br": {
+      "recolor": "auto",
+      "group": "botanical"
+    },
+    "decor_tl": {
+      "recolor": "auto",
+      "group": "botanical"
+    },
+    "divider": {
+      "recolor": "auto",
+      "group": "botanical"
+    },
+    "env_body": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_cflap": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_closed": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_flap": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "env_pocket": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "favicon": {
+      "recolor": "auto",
+      "group": "botanical"
+    },
+    "frame_landscape": {
+      "recolor": "auto",
+      "group": "botanical"
+    },
+    "frame_portrait": {
+      "recolor": "auto",
+      "group": "botanical"
+    },
+    "info_card": {
+      "recolor": "auto",
+      "group": "botanical"
+    },
+    "invitation_card": {
+      "recolor": "auto",
+      "group": "botanical"
+    },
+    "mist": {
+      "recolor": "auto",
+      "group": "botanical"
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "ph_hero_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: ivory paper"
+    },
+    "ph_story_1": {
+      "recolor": "keep",
+      "why": "photo placeholder: ivory paper"
+    },
+    "ph_story_2": {
+      "recolor": "keep",
+      "why": "photo placeholder: ivory paper"
+    },
+    "ph_story_3": {
+      "recolor": "keep",
+      "why": "photo placeholder: ivory paper"
+    },
+    "ph_venue": {
+      "recolor": "keep",
+      "why": "photo placeholder: ivory paper"
+    }
+  },
+  "print": {
+    "card": {
+      "recolor": "auto",
+      "group": "botanical"
+    },
+    "back": {
+      "recolor": "auto",
+      "group": "botanical"
+    },
+    "paper": {
+      "recolor": "keep",
+      "why": "ivory paper texture"
+    }
+  },
+  "print_colors": {
+    "ink": "#2F3A2B",
+    "accent": "#6E5A31",
+    "paper": "#F7F1E3"
+  },
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "envelope",
+      "gold"
+    ],
+    "roles": {
+      "envelope": "deep"
+    },
+    "keep": [
+      "--gold",
+      "--gold-light",
+      "--seal-ink",
+      "--page",
+      "--ivory",
+      "--c-b39a63",
+      "--c-d7c79f",
+      "--c-7a6539",
+      "--c-54401a",
+      "--c-8a3a2a"
+    ],
+    "contrast": [
+      [
+        "--ink",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--page",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--ivory",
+        4.5
+      ],
+      [
+        "--olive",
+        "--page",
+        3
+      ],
+      [
+        "--ivory",
+        "--olive-btn",
+        4.5
+      ],
+      [
+        "--gold-ink",
+        "--page",
+        5.7
+      ]
+    ]
+  }
+}

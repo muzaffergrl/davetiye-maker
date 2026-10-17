@@ -402,6 +402,44 @@ D = [
 EK_TEMALAR = [
     dict(no=21, klasor="21_Crimson_Rose_Atelier", ad="Crimson Rose Atelier"),
     dict(no=22, klasor="22_Nocturne_Lake_Estate", ad="Nocturne Lake Estate"),
+    # docs/24 dalgası (23–28): eksenler + hareket imzası yazılı; `kontrol` bunları D'ye ve birbirine karşı ayırt eder
+    # (ek_ayirt). Üreteçlere (yaz, paket5, gorev5, ozet) girmez: koleksiyon dosyaları elle yazıldı.
+    dict(no=23, klasor="23_Velvet_Jewel_Box", ad="Velvet Jewel Box",
+         zarf="Patlıcan moru kadife yüzük kutusu; saten fiyonk kayar, kapak menteşeden 3B açılır, saten astar ve kart yükselir.",
+         foto="3B silindir karusel (mücevher vitrini gibi döner; sürükle, kaydır, ok tuşları).",
+         dekor="Saten kurdele, inci, yüzük, şampanya saten kıvrımlar", teknik="fotogerçekçi ürün çekimi",
+         font=("Pinyon Script", "Bodoni Moda"), palet_adi="aubergine-champagne",
+         hareket="Menteşe 3B açılış, saten ışık süpürmesi, varak parıltılı başlık, silindir karusel, saten perde sayfa geçişi"),
+    dict(no=24, klasor="24_Grand_Theatre_Premiere", ad="Grand Theatre Premiere",
+         zarf="Tavus mavisi kadife sahne perdesi, antik altın proscenium kemer; iki kanat ağır kıvrımlarla, kademeli aralanır, spot ışığı sahneyi tarar.",
+         foto="Sahne çerçevesinde 'perde arası' kartları (Scene I–III); spot ışığı dokunulanı aydınlatır.",
+         dekor="Kadife perde, püskül, altın proscenium kemer, program (playbill) kâğıdı", teknik="yağlı boya tiyatro afişi",
+         font=("Abril Fatface", "Playfair Display"), palet_adi="peacock-antique-gold",
+         hareket="Perde aralanması (kademeli, salınımlı), spot ışığı maskesi, program sayfası çevirme geçişi, RSVP'de bilet koçanı yırtılması"),
+    dict(no=25, klasor="25_Orient_Express_Voyage", ad="Orient Express Voyage",
+         zarf="Deri bilet cüzdanı, pirinç tokalı kayış; kayış çözülür, kapak soldan açılır, birinci sınıf bilet cepten kayar.",
+         foto="Vagon penceresi çerçeveleri; kaydırınca fotoğraf camın ardından manzara gibi geçer.",
+         dekor="Pirinç vagon detayları, bagaj etiketi, eski harita, istasyon saati", teknik="vintage seyahat afişi (litografi)",
+         font=("Limelight", "Cormorant Garamond"), palet_adi="bottle-green-brass",
+         hareket="Haritada rota çizgisi kaydırmayla çizilir, istasyonlar sırayla gelir, bagaj etiketi sallanır, biniş kartına damga basılır."),
+    dict(no=26, klasor="26_Kintsugi_Washi", ad="Kintsugi & Washi",
+         zarf="Çivit washi kâğıdı origami gibi katlanmış, pirinç kâğıdı kuşakla sarılı; katlar sırayla açılır (üst, alt, sol, sağ), pirinç kâğıdı kart kalkar.",
+         foto="Mürekkep yayılması maskesiyle beliren fotoğraflar; sayfa boyunca sol–sağ–sol tek tek.",
+         dekor="Altın kintsugi damarları, washi dokuları, mürekkep fırçası darbeleri", teknik="sumi mürekkep + altın varak",
+         font=("Allura", "Shippori Mincho"), palet_adi="indigo-gold-rice",
+         hareket="Kat kat 3B açılma (dört kat ayrı menteşede), altın damar parıltısı, mürekkep yayılımıyla foto, süzülen altın varak pulları"),
+    dict(no=27, klasor="27_Riad_Lantern_Nights", ad="Riad Lantern Nights",
+         zarf="Oyma sedir ağacı çift kapı (riad avlu duvarında); kanatlar dış menteşelerinde avluya doğru 3B açılır, fener ışığı dışarı taşar, kart kapıdan öne gelir.",
+         foto="Fas kemeri biçimli uzun pencereler; fotoğraf karanlıkta bekler, fener ışığı ulaşınca belirir.",
+         dekor="Zellige çini, pirinç fenerler, sedir oyma, bougainvillea", teknik="gouache + gerçekçi doku",
+         font=("Cinzel", "Marcellus SC"), palet_adi="teal-saffron-brass",
+         hareket="Kapı kanatlarının 3B açılışı, fener ışığı titreşimi (ışık/filtre), zellige bordürün çini çini dizilmesi, kaydırmada kemerden ışık süzmesi."),
+    dict(no=28, klasor="28_Maison_Patisserie", ad="Maison Patisserie",
+         zarf="Fıstık yeşili pasta kutusu (üstten), gül saten fiyonk; fiyonk çözülür, kurdele kolları kayar, kapak kalkar, ipek kâğıt aralanır, kart öne gelir.",
+         foto="Pastane vitrini rafları: fotoğraflar cam rafta durur, kaydırılır (sürükle, yasla, ok tuşları); ortadaki öne çıkar.",
+         dekor="Makaron, tül, şeker inci, altın kenar tabak", teknik="pastel suluboya + fotogerçekçi pasta",
+         font=("Italiana", "Parisienne"), palet_adi="pistachio-rose-cream",
+         hareket="Fiyonk çözülmesi (iki ilmek ayrılır, düğüm düşer), kapak kalkışı, ipek kâğıt perde gibi aralanır; raf kaydırma bileşeni; menü vitrin rafları; RSVP makaron renkli çipler; gönderimde şeker inci yağmuru."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):
@@ -2199,6 +2237,29 @@ def ayirt():
     return sorun
 
 
+def ek_ayirt():
+    """EK_TEMALAR'daki eksenli kayıtlar (docs/24): D'deki her tasarımdan ve birbirinden ≥4 eksende farklı, hareket
+    imzası yazılı ve diğerlerinden farklı."""
+    sorun = []
+    ekler = [t for t in EK_TEMALAR if all(e in t for e in ("zarf", "foto", "dekor", "teknik", "font", "palet_adi"))]
+    for a in ekler:
+        if not a.get("hareket"):
+            sorun.append(f"{a['no']:02d}: hareket imzası yok")
+    for a, b in [(a, b) for a in ekler for b in D] + list(combinations(ekler, 2)):
+        ayni = [e for e in EKSENLER if
+                (e == "zarf" and a["zarf"][:25] == b["zarf"][:25]) or
+                (e == "foto" and a["foto"][:25] == b["foto"][:25]) or
+                (e == "dekor" and a["dekor"] == b["dekor"]) or
+                (e == "teknik" and a["teknik"] == b["teknik"]) or
+                (e == "font" and (set(a["font"]) & set(b["font"]))) or
+                (e == "palet" and a["palet_adi"] == b["palet_adi"])]
+        if len(EKSENLER) - len(ayni) < 4:
+            sorun.append(f"{a['no']:02d}–{b['no']:02d}: yalnız {len(EKSENLER) - len(ayni)} eksende farklı ({', '.join(ayni)} aynı)")
+        if a.get("hareket") and a.get("hareket") == b.get("hareket"):
+            sorun.append(f"{a['no']:02d}–{b['no']:02d}: hareket imzası aynı")
+    return sorun
+
+
 def yaz(p, metin, zorla, dene=False, degisen=None):
     """Var olan dosyanın üzerine yalnız `zorla` ile yazar; yazdıysa (`dene`: yazacaktıysa) True. İçeriği gerçekten
     değişen (ya da yeni) dosyalar `degisen` listesine eklenir. `dene`: hiçbir şey yazılmaz."""
@@ -2351,7 +2412,10 @@ def main(a):
         print("\n".join(w) if w else f"website (WEB): {len(WEB)} tasarım tam (03 elle yazıldı)")
         h = story_kontrol()
         print("\n".join(h) if h else f"story (STORY): {len(STORY)} tasarım; content.demo.json kayıtlarıyla aynı")
-        sys.exit(1 if s or w or h else 0)
+        e = ek_ayirt()
+        n_ek = sum(1 for t in EK_TEMALAR if "zarf" in t)
+        print("\n".join(e) if e else f"ek tasarımlar (docs/24): {n_ek} kayıt, her biri D'den ve birbirinden ≥4 eksende farklı, hareket imzası ayrı")
+        sys.exit(1 if s or w or h or e else 0)
     if a and a[0] == "paket5":
         return cmd_paket5(a[1:])
     if a and a[0] == "gorev5":

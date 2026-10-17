@@ -1,0 +1,27 @@
+{
+  "id": "V05_emerald_ruby",
+  "slug": "emerald-ruby",
+  "name": "Emerald & Ruby",
+  "ink": "#1C2A25",
+  "deep": "#1E3A30",
+  "primary": "#2B4F41",
+  "mist_top": "#EBDFCF",
+  "mist_bottom": "#D8C6B0",
+  "gold": "#C9A66D",
+  "gold_light": "#DDC8A7",
+  "ivory": "#F8EFDF",
+  "leaf": "#695C52",
+  "swatch": [
+    "#F8EFDF",
+    "#1E3A30",
+    "#5F0306"
+  ],
+  "status": "coming",
+  "families": {
+    "rose": null,
+    "envelope": "deep",
+    "wine": "deep",
+    "leaf": null,
+    "gold": null
+  }
+}

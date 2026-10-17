@@ -1,4 +1,5 @@
 {
-  "note": "G147: Etsy listing_id (digits, as text) -> theme id (platform/themes/<id>). Filled when the design listings are published on Etsy. A purchase whose listings are not here is never rejected for its design; a mapped listing for another design than the one the buyer starts -> theme_mismatch.",
-  "listings": {}
+  "note": "G147: Etsy listing_id (digits, as text) -> theme id (platform/themes/<id>). Filled when the design listings are published on Etsy. A purchase whose listings are not here is never rejected for its design; a mapped listing for another design than the one the buyer starts -> theme_mismatch. G152: 'services' = listing_id -> setup | custom_design | extra_revision (add-on listings that never count as a website); every other line of a receipt counts as one website per unit bought.",
+  "listings": {},
+  "services": {}
 }

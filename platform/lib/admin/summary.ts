@@ -1,7 +1,7 @@
 // What the shop admin shows about a site (G087). Pure functions over SiteRecord: the list, the counts and the
 // detail page read only these views, never the raw record (no key hashes, no guest password, no claim token).
 
-import type { SiteRecord } from '../data/types.ts';
+import { siteContentUpdatedAt, type SiteRecord } from '../data/types.ts';
 import { MARKETING } from '../marketing/config.ts';
 import { orderPending } from '../sites.ts';
 import { rightsView, siteArchiveDates } from '../panel/rights.ts';
@@ -57,6 +57,7 @@ export function summarizeSite(site: SiteRecord, replies: number, now: Date = new
     orderCheckedAt: site.orderCheck && site.orderCheck.status === 'verified' ? site.orderCheck.at : null,
     createdAt: site.createdAt,
     updatedAt: site.updatedAt,
+    contentUpdatedAt: siteContentUpdatedAt(site),
     publishedAt: site.publishedAt,
     firstPublishedAt: rights.firstPublishedAt,
     weddingDate: typeof date === 'string' ? date : null,

@@ -14,7 +14,7 @@ import { bearerKey, fail, json, publicOrigin, unauthorized } from '../panel/http
 import { publicSiteUrl } from '../panel/model.ts';
 import type { RateLimitRule } from '../rsvp/rate-limit.ts';
 import { loadTheme } from '../theme/theme.ts';
-import { INVITATION_SIZES, invitationPdf, type InvitationSize } from './invitation.ts';
+import { INVITATION_SIZES, invitationPdf, printVariantOf, type InvitationSize } from './invitation.ts';
 import { printLabel } from './labels.ts';
 import { msg } from '../i18n/translate.ts';
 import { printLayout } from './layouts.ts';
@@ -76,7 +76,10 @@ export async function download(req: Request, slug: string): Promise<Response> {
       if (!theme) throw new Error(`theme ${site.theme} not found`);
       pdf = await sitePdf({ theme, content: site.content, slug: site.slug, siteId: site.id, variant: site.variant, siteUrl, publicOrigin: origin });
     } else {
-      pdf = await invitationPdf({ themeId: site.theme, content: site.content, siteUrl, publicOrigin: origin, ...d });
+      // G153: the site's colour palette (its print colours and recoloured parts, if it has them)
+      const theme = await loadTheme(site.theme);
+      const variant = printVariantOf(theme?.manifest.variants.find((v) => v.id === site.variant));
+      pdf = await invitationPdf({ themeId: site.theme, content: site.content, siteUrl, publicOrigin: origin, ...d, variant });
     }
     return new Response(new Uint8Array(pdf), {
       status: 200,

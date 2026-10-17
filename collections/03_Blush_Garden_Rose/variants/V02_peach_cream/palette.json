@@ -1,0 +1,29 @@
+{
+  "id": "V02_peach_cream",
+  "slug": "peach-cream",
+  "name": "Peach & Cream",
+  "ink": "#3F2C26",
+  "deep": "#A0674A",
+  "primary": "#F0B48E",
+  "mist_top": "#FCF0E8",
+  "mist_bottom": "#F1D6C4",
+  "gold": "#C8A46E",
+  "gold_light": "#E5CFA4",
+  "ivory": "#FFF9F6",
+  "leaf": "#9DAE93",
+  "swatch": [
+    "#FCF0E8",
+    "#F0B48E",
+    "#C8A46E"
+  ],
+  "status": "coming",
+  "families": {
+    "rose": "primary",
+    "petal": "primary",
+    "envelope": "#EBCDB5",
+    "blush_paper": "mist_bottom",
+    "leaf": null,
+    "gold": null,
+    "cream": null
+  }
+}

@@ -56,15 +56,22 @@ export function designMetadata(id: string, m: Market) {
 }
 
 /** `thing` = the opening object in the page language. */
-function designFaq(name: string, thing: string, t: T) {
+function designFaq(name: string, thing: string, t: T, palettes: number) {
   return [
     {
       id: 'colors',
       q: t('Can I change the colors of {name}?', { name }),
-      a: t(
-        'No. The artwork, colors and fonts stay as designed, because the {thing}, cards and frames are painted to match. You change the content: names, details, photos and questions. [See all designs](/designs) to compare palettes.',
-        { thing },
-      ),
+      // G153: a design with live colour palettes offers them (the artwork itself is still painted to match)
+      a:
+        palettes > 0
+          ? t(
+              'Yes, within the design: {name} comes in its original colors and {n} more palettes, each with the {thing}, cards and frames painted to match. You choose a palette when you start and can switch in your editor at any time; your texts and photos stay as they are.',
+              { name, n: palettes, thing },
+            )
+          : t(
+              'No. The artwork, colors and fonts stay as designed, because the {thing}, cards and frames are painted to match. You change the content: names, details, photos and questions. [See all designs](/designs) to compare palettes.',
+              { thing },
+            ),
     },
     {
       id: 'photos',
@@ -103,7 +110,7 @@ export function DesignPage({ id, m }: { id: string; m: Market }) {
   const related = d.copy.relatedGuides.map((g) => loadGuideIn(g, m.lang)).filter((g) => !!g);
   // G099: what guests tap first here (envelope, gatefold, pouch, wallet, book or sleeve), from the design's own opening
   const thing = thingIn(t, openingObject(d.copy));
-  const faq = designFaq(d.name, thing, t);
+  const faq = designFaq(d.name, thing, t, Math.max(0, (demo[0]?.palettes?.length ?? 0) - 1));
   const etsyPrice = price ? displayPrice(price) : null;
   const opening = t('{thing} opening', { thing });
 
