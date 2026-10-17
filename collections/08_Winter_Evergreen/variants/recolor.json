@@ -167,7 +167,9 @@
       "--mist",
       "--ivory",
       "--berry",
-      "--c-8a2328"
+      "--c-8a2328",
+      "--ink",
+      "--ink-soft"
     ],
     "contrast": [
       [
@@ -178,27 +180,27 @@
       [
         "--ink-soft",
         "--page",
-        5.4
+        4.5
       ],
       [
         "--script-ink",
         "--page",
-        5.4
+        6
       ],
       [
         "--green",
         "--page",
-        5.4
+        6
       ],
       [
         "--green-ink",
         "--page",
-        5.4
+        6
       ],
       [
         "--green-ink",
         "--ivory",
-        5.4
+        6
       ],
       [
         "--ivory",

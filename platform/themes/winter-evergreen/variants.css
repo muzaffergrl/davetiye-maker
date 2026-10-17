@@ -29,8 +29,6 @@ html[data-variant="burgundy-wine"] {
   --green: #741C21;
   --green-ink: #681A1E;
   --hair: rgba(116, 28, 33, 0.4);
-  --ink: #371B18;
-  --ink-soft: #5B2827;
   --script-ink: #600016;
 }
 
@@ -45,11 +43,9 @@ html[data-variant="frost-blue"] {
   --c-284636: 53 87 115;
   --c-2f5240: 60 98 129;
   --c-3e6b53: 72 124 165;
-  --green: #39607E;
-  --green-ink: #395B76;
+  --green: #315775;
+  --green-ink: #365873;
   --hair: rgba(60, 98, 129, 0.4);
-  --ink: #2C3C45;
-  --ink-soft: #43596C;
   --script-ink: #2D526F;
 }
 
@@ -67,8 +63,6 @@ html[data-variant="ivory-pine"] {
   --green: #225F4A;
   --green-ink: #215643;
   --hair: rgba(34, 95, 74, 0.4);
-  --ink: #20362D;
-  --ink-soft: #325345;
   --script-ink: #154D38;
 }
 
@@ -86,8 +80,6 @@ html[data-variant="midnight-navy"] {
   --green: #2E3E62;
   --green-ink: #293757;
   --hair: rgba(46, 62, 98, 0.4);
-  --ink: #1A232F;
-  --ink-soft: #2D374D;
   --script-ink: #1E2C50;
 }
 
@@ -102,10 +94,8 @@ html[data-variant="sage-holly"] {
   --c-284636: 62 94 68;
   --c-2f5240: 69 106 77;
   --c-3e6b53: 86 134 94;
-  --green: #3D6245;
-  --green-ink: #406247;
+  --green: #375C3F;
+  --green-ink: #3B5C42;
   --hair: rgba(69, 106, 77, 0.4);
-  --ink: #2F3F33;
-  --ink-soft: #495F4D;
   --script-ink: #39593C;
 }
