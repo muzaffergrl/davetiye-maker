@@ -286,6 +286,8 @@ const dict: Dict = {
   'Tonight\'s programme': 'Le programme de la soirée',
   'You are invited to a premiere': 'Vous êtes invités à une première',
   'Your seat is saved. We look forward to the evening together.': 'Votre place est réservée. Nous nous réjouissons de partager cette soirée.',
+  // G169 Azulejo Mosaic
+  'Laid tile by tile, sent with love': 'Posé carreau par carreau, envoyé avec amour',
   // G171 Music Box Ballerina
   'Turn the key': 'Tournez la clé',
   'Wind the music box again': 'Remontez la boîte à musique',

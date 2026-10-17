@@ -56,6 +56,8 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   'orient-express-voyage': { music: 'evening-strings', opening: [[0, 'clasp'], [600, 'page'], [1500, 'slide'], [2600, 'chime']] },
   // Kintsugi & Washi: band slides off (closure) · top · bottom · left · right fold (one paper sound each) · card lifts (rise) · forward
   'kintsugi-washi': { music: 'first-light', opening: [[0, 'ribbon'], [550, 'paper'], [1100, 'paper'], [1650, 'paper'], [2100, 'paper'], [2900, 'slide'], [3500, 'chime']] },
+  // Azulejo Mosaic: the panel gives under the tap (press) · the tile wave (wave) · the card lifts (rise) · forward
+  'azulejo-mosaic': { music: 'garden-waltz', opening: [[0, 'tap'], [420, 'whoosh'], [2350, 'slide'], [2950, 'chime']] },
   // Riad Lantern Nights: a knock on the doors (tug) · the leaves swing in (doors) · the card comes out (rise) · forward
   'riad-lantern-nights': { music: 'evening-strings', opening: [[0, 'tap'], [300, 'whoosh'], [1900, 'slide'], [3100, 'chime']] },
   // Grand Theatre Premiere: the curtain draws a breath (tug) · the left panel parts (partL) · the card is lit (rise) · forward

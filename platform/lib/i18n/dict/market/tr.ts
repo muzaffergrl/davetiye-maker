@@ -911,6 +911,18 @@ const dict: Dict = {
   "Color palette": "Renk paleti",
   "Live demo in {name}": "{name} renklerinde canlı demo",
   "Yes, within the design: {name} comes in its original colors and {n} more palettes, each with the {thing}, cards and frames painted to match. You choose a palette when you start and can switch in your editor at any time; your texts and photos stay as they are.": "Evet, tasarımın içinde kalarak: {name} orijinal renklerinin yanında {n} palet daha sunar; her birinde {thing}, kartlar ve çerçeveler uyumlu boyanmıştır. Paleti başlarken seçersiniz ve düzenleyicinizde istediğiniz zaman değiştirebilirsiniz; metinleriniz ve fotoğraflarınız olduğu gibi kalır.",
+  // G169 Azulejo Mosaic
+  'A wall of blue-and-white azulejo tiles that turn over one by one, terracotta and whitewash, and photos revealed tile by tile': 'Tek tek dönen mavi-beyaz azulejo çinilerden bir duvar, terrakota ve badana; çini çini açılan fotoğraflar',
+  'A wall of painted azulejo tiles turns over, tile by tile, into your wedding website. Personalize it in your online editor.': 'Boyalı azulejo çinilerden bir duvar, çini çini dönerek düğün sitenize açılır. Çevrim içi düzenleyicinizde kişiselleştirin.',
+  'A white reply card under a frieze of tiles; when a reply is sent, the thank-you is revealed tile by tile.': 'Bir çini frizinin altında beyaz bir yanıt kartı; yanıt gönderilince teşekkür çini çini belirir.',
+  'Cobalt and white painted tiles, warm terracotta and sunlit whitewash. Your invitation waits behind a wall of azulejos, and every photo is uncovered tile by tile.': 'Kobalt ve beyaz boyalı çiniler, sıcak terrakota ve güneşli badana. Davetiyeniz bir azulejo duvarının ardında bekler, her fotoğraf çini çini açılır.',
+  'Night blue': 'Gece mavisi',
+  'The order of the day on a white card, a venue photo uncovered tile by tile, an optional map, dress code, travel and questions and answers.': 'Beyaz bir kartta günün akışı, çini çini açılan bir mekân fotoğrafı, isteğe bağlı harita, kıyafet kuralı, ulaşım ile sorular ve cevaplar.',
+  'Three photos, each hidden under a small mosaic of tiles that turn over in a wave as guests scroll to it.': 'Üç fotoğraf; her biri, misafirler ona kaydırdıkça dalga hâlinde dönen küçük bir çini mozaiğinin altında saklı.',
+  'Whitewash': 'Badana beyazı',
+  'Your guests tap the wall. The blue-and-white tiles turn over one by one in a wave that starts where they touched, each showing its terracotta back as it lifts away. The card that was behind them comes forward to become your home page.': 'Misafirleriniz duvara dokunur. Mavi-beyaz çiniler, dokunulan yerden başlayan bir dalgayla tek tek döner; her biri kalkarken terrakota sırtını gösterir. Arkalarındaki kart öne gelir ve ana sayfanız olur.',
+  'Your portrait and names on a card on the cobalt wall, a frieze of tiles, then the invitation, a countdown and calendar links.': 'Kobalt duvarda bir kartta portreniz ve isimleriniz, bir çini frizi; ardından davet, geri sayım ve takvim bağlantıları.',
+  'wall': 'duvar',
   // G171 Music Box Ballerina
   'A rose-quartz music box with a brass wind-up key, a little ballerina and your photos in its oval mirror': 'Pirinç kurma anahtarlı gül kuvarsı bir müzik kutusu, küçük bir balerin ve oval aynasında fotoğraflarınız',
   'A rose-quartz music box opens into your wedding website: a ballerina turns and your photos appear in its mirror. Personalize it in your online editor.': 'Gül kuvarsı bir müzik kutusu düğün sitenize açılır: bir balerin döner ve fotoğraflarınız aynasında belirir. Çevrim içi düzenleyicinizde kişiselleştirin.',
