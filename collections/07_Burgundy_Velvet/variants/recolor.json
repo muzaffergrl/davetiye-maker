@@ -1,6 +1,6 @@
 {
   "theme": "burgundy-velvet-autumn",
-  "note": "G156 recolour manifest (tools/recolor_parts.py, docs/25). velvet = the ribbons, bows, swag and envelope liner; bloom = the dahlias/roses and petal (same hue, split by part group so flowers keep natural colours: they stay burgundy in the emerald and navy palettes). og follows the flowers. Autumn leaves, berries, gold and peach paper stay.",
+  "note": "G156 recolour manifest (tools/recolor_parts.py, docs/25). velvet = the ribbons, bows, swag and envelope liner; bloom = the dahlias/roses and petal (same hue, split by part group so flowers keep natural colours: they stay burgundy in the emerald and navy palettes). og follows the flowers. Autumn leaves, berries, gold and peach paper stay. wine_css = the site's wine text/button tokens (CSS only, anchored on --wine) → the palette's velvet tone.",
   "families": {
     "velvet": {
       "anchor": "#5C0206",
@@ -13,6 +13,12 @@
       "sigma": 11,
       "cmin": 0.06,
       "cfull": 0.09
+    },
+    "wine_css": {
+      "anchor": "#6E1F2E",
+      "sigma": 26,
+      "cmin": 0.04,
+      "cfull": 0.07
     }
   },
   "groups": {
@@ -178,13 +184,16 @@
       "thank-you.css"
     ],
     "families": [
-      "velvet"
+      "wine_css"
     ],
     "keep": [
       "--page",
       "--ivory",
       "--gold",
-      "--c-8a1e2b"
+      "--c-8a1e2b",
+      "--ink",
+      "--ink-soft",
+      "--copper"
     ],
     "contrast": [
       [
@@ -193,34 +202,24 @@
         4.5
       ],
       [
-        "--ink-soft",
-        "--page",
-        4.5
-      ],
-      [
-        "--copper",
-        "--page",
-        4.5
-      ],
-      [
         "--wine",
         "--page",
-        4.5
+        6.5
       ],
       [
         "--wine-ink",
         "--page",
-        4.5
+        6.5
       ],
       [
         "--wine-ink",
         "--ivory",
-        4.5
+        6.5
       ],
       [
         "--ivory",
         "--wine",
-        4.5
+        4.8
       ]
     ]
   }

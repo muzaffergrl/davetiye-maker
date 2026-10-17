@@ -17,6 +17,7 @@
   --ease: cubic-bezier(.22, .61, .36, 1);
   --ease-soft: cubic-bezier(.33, 0, .2, 1);
   --nav-h: 56px;
+  
 }
 
 @view-transition { navigation: auto; }
@@ -68,7 +69,7 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
   padding: 12px 38px; border-radius: 999px; border: 0;
   background: linear-gradient(172deg, rgb(var(--c-9b3448)), rgb(var(--c-7a2236)) 46%, rgb(var(--c-561322))); color: var(--ivory); text-decoration: none; cursor: pointer;
   font: 500 15px/1 var(--caps); letter-spacing: .3em; text-indent: .3em; text-transform: uppercase;
-  box-shadow: 0 9px 15px -10px rgb(var(--c-3c0a16)/.85), inset 0 1px 0 #ffd6d638, inset 0 -2px 0 #1e000a42;
+  box-shadow: 0 9px 15px -10px rgb(var(--c-3c0a16)/.85), inset 0 1px 0 rgb(var(--c-ffd6d6)/.22), inset 0 -2px 0 rgb(var(--c-1e000a)/.259);
   transition: transform .25s var(--ease), filter .25s;
 }
 .btn:hover { filter: brightness(1.08); }
@@ -234,7 +235,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .env-cflap { left: 0; top: 45.209%; width: 100%; height: 17.652%; z-index: 4; transform-origin: 50% 0; backface-visibility: hidden; } /* stage.parts.env_cflap */
 /* candlelight (stage.card_front_center_pct; light, §5.7) */
 .glow { position: absolute; left: 50%; top: 30.788%; width: 150%; aspect-ratio: 1; translate: -50% -50%; opacity: 0; pointer-events: none;
-        background: radial-gradient(closest-side, #ffd6969e, #ffbe7847 46%, #ffbe7800); }
+        background: radial-gradient(closest-side, rgb(var(--c-ffd696)/.62), rgb(var(--c-ffbe78)/.278) 46%, rgb(var(--c-ffbe78)/0)); }
 .card-slot { position: absolute; inset: 0; z-index: 1; clip-path: inset(-140% -45% 1% -45%); }
 .env .card { position: absolute; left: 25.163%; top: 51.064%; width: 49.673%; } /* stage.parts.card */
 .env .card .card-img { filter: drop-shadow(0 10px 16px rgb(var(--c-46190f)/.18)); }
@@ -582,7 +583,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line { display: none; }
 .toast {
   position: fixed; left: 50%; bottom: calc(var(--nav-h) + 18px + env(safe-area-inset-bottom)); z-index: 60; translate: -50% 12px;
-  max-width: min(92vw, 420px); padding: 12px 18px; border-radius: 12px; background: #3b1a20f2; color: var(--ivory);
+  max-width: min(92vw, 420px); padding: 12px 18px; border-radius: 12px; background: rgb(var(--c-3b1a20)/.949); color: var(--ivory);
   font-size: 18px; opacity: 0; pointer-events: none; transition: opacity .3s, translate .3s;
 }
 .toast.show { opacity: 1; translate: -50% 0; }

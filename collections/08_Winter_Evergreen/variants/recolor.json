@@ -178,32 +178,32 @@
       [
         "--ink-soft",
         "--page",
-        4.5
+        5.4
       ],
       [
         "--script-ink",
         "--page",
-        4.5
+        5.4
       ],
       [
         "--green",
         "--page",
-        4.5
+        5.4
       ],
       [
         "--green-ink",
         "--page",
-        4.5
+        5.4
       ],
       [
         "--green-ink",
         "--ivory",
-        4.5
+        5.4
       ],
       [
         "--ivory",
         "--green",
-        4.5
+        4.8
       ]
     ]
   }

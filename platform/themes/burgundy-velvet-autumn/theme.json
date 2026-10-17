@@ -670,8 +670,8 @@
       "status": "coming",
       "print": {
         "art": [],
-        "ink": "#3B1A20",
-        "accent": "#5C493A"
+        "ink": "#2F2220",
+        "accent": "#0F4E3A"
       }
     },
     {
@@ -687,8 +687,8 @@
         "art": [
           "card"
         ],
-        "ink": "#3B1A20",
-        "accent": "#692E4D"
+        "ink": "#321621",
+        "accent": "#541C47"
       }
     },
     {
@@ -702,8 +702,8 @@
       "status": "coming",
       "print": {
         "art": [],
-        "ink": "#3B1A20",
-        "accent": "#51394C"
+        "ink": "#291921",
+        "accent": "#202E51"
       }
     },
     {
@@ -719,8 +719,8 @@
         "art": [
           "card"
         ],
-        "ink": "#3B1A20",
-        "accent": "#863537"
+        "ink": "#3F1E1F",
+        "accent": "#803112"
       }
     },
     {
@@ -736,8 +736,8 @@
         "art": [
           "card"
         ],
-        "ink": "#3B1A20",
-        "accent": "#944B5E"
+        "ink": "#4B2B31",
+        "accent": "#9E5564"
       }
     }
   ]

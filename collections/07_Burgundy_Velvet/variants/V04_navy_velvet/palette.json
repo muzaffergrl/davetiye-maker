@@ -19,6 +19,7 @@
   "status": "coming",
   "families": {
     "velvet": "deep",
-    "bloom": null
+    "bloom": null,
+    "wine_css": "deep"
   }
 }
