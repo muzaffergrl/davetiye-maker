@@ -164,7 +164,7 @@ to{z-index:8;transform:translateY(-8%) scale(1.14);filter:brightness(1) drop-sha
 .stage-hero::after{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 60% 46% at 50% 52%,#fff1d02e,#fff1d000 70%),linear-gradient(#06141680,#06141600 30%,#06141600 70%,#061416b3)}
 /* home's programme card: the GPT card_plain keeps its own proportion (--hero-ar) and is never cropped (fill); its
    height grows with long names; the stand-in paper is cut to the text (auto / cover) */
-.hero-card{position:relative;width:min(84vw,380px);max-width:calc((100svh - 236px) * var(--hero-ar));aspect-ratio:var(--hero-ar);display:flex;flex-direction:column;justify-content:center;padding:var(--hero-pad);color:var(--ink);view-transition-name:invite-card;filter:drop-shadow(0 18px 24px #000a)}
+.hero-card{position:relative;width:min(84vw,380px);max-width:max(240px,calc((100svh - 236px) * var(--hero-ar)));aspect-ratio:var(--hero-ar);min-height:min-content;display:flex;flex-direction:column;justify-content:center;padding:var(--hero-pad);color:var(--ink);view-transition-name:invite-card;filter:drop-shadow(0 18px 24px #000a)}
 .hero-card>.card-img{z-index:-1;object-fit:var(--hero-fit)}
 .hero-card .card-kicker{font-size:11px;margin-bottom:12px}
 .hero-card .names{font-size:clamp(34px,10vw,52px);color:var(--ink)}

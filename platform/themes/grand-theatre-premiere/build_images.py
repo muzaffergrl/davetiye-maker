@@ -392,7 +392,14 @@ def main() -> int:
     tb.webp(tile, "velvet", [640], 74, manifest, out=OUT)
     bg_page = Image.open(part_path("bg_page")).convert("RGB") if part_path("bg_page") else None
     if bg_page is not None:
-        room = bg_page
+        # the opening's names, date, hint and "Replay" sit in light ink on this ground: if GPT painted its calm centre
+        # lighter than the prompt's near-black, it is toned down (brightness only) until 95 % of the centre is ≤ 90
+        lum = np.asarray(bg_page.convert("L"))
+        h_, w_ = lum.shape
+        p95 = float(np.percentile(lum[h_ // 6:h_ * 5 // 6, w_ // 6:w_ * 5 // 6], 95))
+        k = min(1.0, 90 / max(p95, 1))
+        room = ImageEnhance.Brightness(bg_page).enhance(k) if k < 1 else bg_page
+        manifest["room_tone"] = {"centre_p95": round(p95, 1), "brightness": round(k, 3)}
         sources["room"] = "gpt:parts/bg_page.png"
     else:
         room = ImageEnhance.Brightness(tb.bulanik_fon(velvet.resize((1024, 1024)).crop((0, 0, 1024, 1024)),
