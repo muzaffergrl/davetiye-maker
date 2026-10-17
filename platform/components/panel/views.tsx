@@ -45,6 +45,7 @@ import type { Replies } from './guests.tsx';
 import { PAGE_TITLES, type PageId, type Readiness } from './pages.ts';
 import type { AccessOutcome } from './usePanel.ts';
 import { QrCode } from './QrCode.tsx';
+import { DownloadsCard } from './Downloads.tsx';
 import { GuestPasswordCard } from './GuestPassword.tsx';
 import { Sheet } from './Sheet.tsx';
 import { zoneCity } from './sections.tsx';
@@ -517,6 +518,9 @@ export function ShareView({
           ) : null}
         </div>
       </Card>
+
+      {/* G139: website PDF + printable invitation, in reach without opening anything. */}
+      {!archived ? <DownloadsCard slug={slug} editKey={editKey} live={live} online={online} /> : null}
 
       {/* G121 (docs/18 §4 P2, Linktree): the first screen is the link + Copy + Share; the QR code folds away like the
           password and the edit link (same title as before). */}

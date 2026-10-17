@@ -52,3 +52,32 @@ Save: `collections/21_Crimson_Rose_Atelier/assets/gpt/photos/venue.png`
 
 Use case: photorealistic-natural. A fictional intimate luxurious outdoor wedding ceremony on a Lake Como style Italian villa terrace. Cream chairs, an exquisite deep burgundy red rose floral arch, subtly warm gold details, mountains and blue lake in the background, soft late afternoon sun. Romantic timeless, elegant balanced composition, lush but tasteful. Wide landscape 16:9. No people, no text, no signs, no watermark. This is a fictional demo place, not a named real venue.
 
+
+
+---
+
+## G139 — Basılı davetiye parçaları (yeni; şu an kağıt + gül dalı + mühürle geçici düzen)
+
+> Görev `G139`. Panelden indirilen 5×7 in / A5 basılı davetiye bu tasarımın kendi kart parçalarını ister. Şu an
+> `paper-background`, `rose-branch` ve `seal` ile geçici düzen kuruldu (`platform/lib/print/layouts.ts`). İki parça gelince
+> `node scripts/build-print-assets.ts --theme crimson-rose-atelier` ve layouts.ts'te `composed` kaldırılır.
+
+### P1 — invitation_card (ön yüz)
+Kaydet: `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/invitation_card.png` — **2048 × 3072 px, PNG, şeffaf arka plan**
+```
+A flat printed wedding invitation card, front side, seen straight on, portrait 2:3, on a fully transparent background.
+Warm ivory cotton paper with a subtle deckled edge and a soft natural shadow. Deep crimson and wine garden roses with
+dark green leaves in a lush cluster at the top-left corner and a smaller mirrored cluster at the bottom-right corner,
+painted in the same rich, romantic, realistic style as the Crimson Rose Atelier rose branch and wax seal. A thin antique
+gold hairline frame inset from the edge. The whole centre (about 70% of the width, 55% of the height) is EMPTY paper
+for text. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp details at 2048 × 3072 px.
+```
+
+### P2 — info_card (arka yüz)
+Kaydet: `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/info_card.png` — **2048 × 3072 px, PNG, şeffaf arka plan**
+```
+The back side of the same crimson rose wedding invitation card: portrait 2:3 on a fully transparent background, the
+same ivory cotton paper, deckled edge, soft shadow and thin antique gold hairline frame. Only one small crimson rose
+sprig centred at the top edge. Everything below the sprig is EMPTY paper for a schedule and a QR code. No text,
+letters, numbers, logos or watermarks. Print quality, 2048 × 3072 px.
+```

@@ -16,7 +16,7 @@ import { createSiteWithKeys, publishSite } from '../lib/sites.ts';
 import { renderTemplate } from '../lib/theme/engine.ts';
 import { findShareFiles, ICON_FILE, NO_SHARE_FILES, OG_IMAGE_FILE } from '../lib/theme/share.ts';
 import { clearThemeCache, loadTheme, type ThemeManifest } from '../lib/theme/theme.ts';
-import nextConfig, { THEME_ASSET_EXTENSIONS, THEME_ASSET_ROUTE, THEME_ROUTES } from '../next.config.ts';
+import nextConfig, { PDF_ROUTE, THEME_ASSET_EXTENSIONS, THEME_ASSET_ROUTE, THEME_ROUTES } from '../next.config.ts';
 import { demoContent, PLATFORM_ROOT, tmpDir } from './helpers.ts';
 
 const require = createRequire(import.meta.url);
@@ -213,7 +213,11 @@ test('theme 03 demo (/start/demo): og:image + icon point at its G054 files', asy
 
 test('tracing config: theme routes get *.html/*.json, the asset route the servable types; lists agree everywhere', () => {
   const includes = nextConfig.outputFileTracingIncludes as Record<string, string[]>;
-  for (const r of THEME_ROUTES) assert.deepEqual(includes[r], ['./themes/**/*.html', './themes/**/*.json'], r);
+  // G139: the PDF route also carries the packed Chromium of @sparticuz/chromium
+  for (const r of THEME_ROUTES) {
+    const extra = r === PDF_ROUTE ? ['./node_modules/@sparticuz/chromium/bin/**'] : [];
+    assert.deepEqual(includes[r], ['./themes/**/*.html', './themes/**/*.json', ...extra], r);
+  }
   assert.deepEqual(includes[THEME_ASSET_ROUTE], [`./themes/**/*.{${THEME_ASSET_EXTENSIONS.join(',')}}`]);
   assert.deepEqual(Object.keys(includes).sort(), [...THEME_ROUTES, THEME_ASSET_ROUTE].sort());
   assert.deepEqual([...THEME_ASSET_EXTENSIONS].sort(), Object.keys(THEME_ASSET_TYPES).sort(), 'next.config.ts = lib/site/static.ts');

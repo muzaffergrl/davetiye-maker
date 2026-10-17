@@ -17,6 +17,13 @@ const THEME_TEMPLATES = ['./themes/**/*.html', './themes/**/*.json'];
 export const THEME_ASSET_EXTENSIONS = ['css', 'js', 'mjs', 'png', 'jpg', 'jpeg', 'webp', 'avif', 'gif', 'svg', 'ico', 'mp4', 'webm'];
 const THEME_ASSETS = [`./themes/**/*.{${THEME_ASSET_EXTENSIONS.join(',')}}`];
 
+/**
+ * G139: the PDF route runs a headless Chromium. On Vercel it is @sparticuz/chromium: its packed browser (bin/*.br)
+ * is read from disk at run time, so it is traced explicitly and both packages stay outside the bundle.
+ */
+export const PDF_ROUTE = '/api/edit/\\[slug\\]/download';
+const CHROMIUM_FILES = ['./node_modules/@sparticuz/chromium/bin/**'];
+
 export const THEME_ASSET_ROUTE = '/themes/\\[theme\\]/\\[\\.\\.\\.path\\]';
 
 /** Routes that read theme templates / theme.json (not the asset route). */
@@ -28,6 +35,7 @@ export const THEME_ROUTES = [
   '/api/edit/\\[slug\\]/photo',
   '/api/edit/\\[slug\\]/publish',
   '/api/edit/\\[slug\\]/unpublish',
+  '/api/edit/\\[slug\\]/download',
   '/api/rsvp/\\[slug\\]',
   '/api/rsvp/\\[slug\\]/export',
   '/api/rsvp/\\[slug\\]/responses',
@@ -54,9 +62,10 @@ const config: NextConfig = {
   reactStrictMode: true,
   // `next dev` would otherwise write platform/AGENTS.md + CLAUDE.md; the repo keeps its own agent rules at the root.
   agentRules: false,
+  serverExternalPackages: ['@sparticuz/chromium', 'playwright-core'],
   // Panel, RSVP and /start read theme.json / pages too (G044: needed on Vercel). Images: asset route only (G055).
   outputFileTracingIncludes: {
-    ...Object.fromEntries(THEME_ROUTES.map((r) => [r, THEME_TEMPLATES])),
+    ...Object.fromEntries(THEME_ROUTES.map((r) => [r, r === PDF_ROUTE ? [...THEME_TEMPLATES, ...CHROMIUM_FILES] : THEME_TEMPLATES])),
     [THEME_ASSET_ROUTE]: THEME_ASSETS,
   },
   async headers() {
