@@ -72,6 +72,7 @@ export function summarizeSite(site: SiteRecord, replies: number, now: Date = new
     noteAt: site.adminNote?.at ?? null,
     place: placeOf(site),
     madeByShop: madeByShop(site),
+    shopEditUntil: site.shopEdit && Date.parse(site.shopEdit.expiresAt) > now.getTime() ? site.shopEdit.expiresAt : null,
   };
 }
 
@@ -98,6 +99,10 @@ export function siteHistory(site: SiteRecord): AdminHistoryEntry[] {
   // G121: Etsy messages copied from the admin (template + time; the text is never kept).
   for (const m of site.messageLog ?? []) {
     out.push({ at: m.at, text: `Etsy mesajı kopyalandı: ${messageTemplate(m.id)?.title ?? m.id}`, by: 'support' });
+  }
+  // G145: the shop's own edit link (opened / ended; the key is never kept here).
+  for (const e of site.shopEditLog ?? []) {
+    out.push({ at: e.at, text: e.kind === 'issued' ? 'Dükkân düzenleme linki açıldı (72 saat; alıcının linki değişmedi)' : 'Dükkân düzenleme linki kapatıldı', by: 'support' });
   }
   return out.sort((a, b) => b.at.localeCompare(a.at));
 }

@@ -168,6 +168,17 @@
   top: 8px;
 }
 
+/* G145: the shop's own edit link is open (only the shop sees this line). */
+.shopBar {
+  margin: 0;
+  padding: 10px 16px;
+  background: var(--c-primary);
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);

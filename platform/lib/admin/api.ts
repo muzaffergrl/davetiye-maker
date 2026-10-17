@@ -9,7 +9,7 @@ import { clientIp } from '../rsvp/http.ts';
 import { panelPreviewToken } from '../keys.ts';
 import { normalizeEmail } from '../claim/fields.ts';
 import { rsvpCsvForSite, rsvpSummary, type RsvpCounts, type RsvpEntry } from '../rsvp/couple.ts';
-import { confirmOrder, grantIdentityChanges, publishSite, reissueKeys, setArchiveOverride, unpublishSite } from '../sites.ts';
+import { confirmOrder, endShopEditKey, grantIdentityChanges, issueShopEditKey, publishSite, reissueKeys, setArchiveOverride, unpublishSite } from '../sites.ts';
 import { adminCreateSite } from './create.ts';
 import { messageTemplate, withMessageLog } from './messages.ts';
 import {
@@ -233,7 +233,7 @@ export async function listRoute(req: Request): Promise<Response> {
 
 // --- actions --------------------------------------------------------------------------------------------------
 
-export const ADMIN_ACTIONS = ['confirm', 'reissue', 'grant', 'archive', 'unpublish', 'publish', 'note', 'email', 'message-log', 'rsvp-delete', 'delete'] as const;
+export const ADMIN_ACTIONS = ['confirm', 'reissue', 'shop-edit', 'shop-edit-end', 'grant', 'archive', 'unpublish', 'publish', 'note', 'email', 'message-log', 'rsvp-delete', 'delete'] as const;
 export type AdminAction = (typeof ADMIN_ACTIONS)[number];
 
 /** Turkish words for the errors lib/sites.ts throws (the admin speaks Turkish). */
@@ -243,7 +243,13 @@ function actionError(e: unknown): string {
   if (name === 'OrderPendingError') return 'Sipariş henüz onaylanmadı; önce siparişi onaylayın.';
   if (name === 'SiteArchivedError') return 'Site arşivde; önce yayında kalma süresini uzatın.';
   if (name === 'IdentityMismatchError') return 'İsim/tarih değişikliği hakkı kalmadı; alıcının taslağındaki isim/tarih yayınlanandan farklı. Önce hak ekleyin.';
-  if (name === 'ContentInvalidError') return 'Taslakta eksik ya da hatalı alan var (alıcının panelindeki Home listesi gösterir); yayınlanamadı.';
+  if (name === 'ContentInvalidError') {
+    // G145: say which fields (the panel's own words, English; the shop fixes them with "Linki değiştirmeden düzenle").
+    const issues = (e as { issues?: Array<{ path: string; message: string }> }).issues ?? [];
+    const list = issues.slice(0, 3).map((i) => `${i.path}: ${i.message}`).join(' · ');
+    const more = issues.length > 3 ? ` (+${issues.length - 3})` : '';
+    return `Taslakta eksik ya da hatalı alan var; yayınlanamadı.${list ? ` ${list}${more}` : ''}`;
+  }
   if (name === 'StaleSiteError' || name === 'WriteConflictError') return 'Site tam o sırada değişti; tekrar deneyin.';
   return message.replace(/^--add/, 'The number');
 }
@@ -275,6 +281,17 @@ export async function siteAction(req: Request, id: string, action: string): Prom
         updated = created.site;
         // Shown once in the admin; never stored or logged.
         extra = { editUrl: `${requestOrigin(req)}/edit/${created.site.slug}?k=${encodeURIComponent(created.editKey)}` };
+        break;
+      }
+      case 'shop-edit': {
+        // G145 (docs/23 §3): the shop edits with its own 72-hour link; the buyer's link keeps working. Shown once.
+        const created = await issueShopEditKey(adapter, site.id);
+        updated = created.site;
+        extra = { shopEditUrl: `${requestOrigin(req)}/edit/${created.site.slug}?k=${encodeURIComponent(created.editKey)}#home` };
+        break;
+      }
+      case 'shop-edit-end': {
+        updated = await endShopEditKey(adapter, site.id);
         break;
       }
       case 'grant': {

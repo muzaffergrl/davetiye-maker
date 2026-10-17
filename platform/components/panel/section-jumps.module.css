@@ -1,0 +1,29 @@
+/* G145: jumps to the parts of a long editor page (SectionJumps.tsx). Wraps on a phone: no hidden horizontal scroll. */
+.jumps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 20px;
+}
+
+.jump {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--c-control-border, rgba(0, 0, 0, 0.4));
+  border-radius: 999px;
+  background: var(--c-surface, #fff);
+  color: var(--c-text, inherit);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.jump:hover {
+  border-color: var(--c-primary, currentColor);
+}
+
+.jump:focus-visible {
+  outline: 2px solid var(--c-primary, currentColor);
+  outline-offset: 2px;
+}

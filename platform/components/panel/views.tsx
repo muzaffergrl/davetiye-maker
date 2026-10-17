@@ -478,6 +478,7 @@ export function ShareView({
   url,
   slug,
   editKey,
+  hideEditLink = false,
   meta,
   orderRef,
   online,
@@ -495,6 +496,8 @@ export function ShareView({
   url: string;
   slug: string;
   editKey: string;
+  /** G145: the shop's own link is open — never offer it as "your private edit link". */
+  hideEditLink?: boolean;
   meta: PanelMeta;
   orderRef: string | null;
   online: boolean;
@@ -584,6 +587,7 @@ export function ShareView({
         </Disclosure>
       ) : null}
 
+      {hideEditLink ? null : (
       <Disclosure id="edit-link" title="Your private edit link" icon={KeyRound}>
         <div className={styles.stack}>
           <p className={styles.cardText}>Anyone with this link can edit your website. Share it only with your partner.</p>
@@ -594,6 +598,7 @@ export function ShareView({
           {orderRef ? <p className={styles.hint}>Your Etsy order number: {orderRef}</p> : null}
         </div>
       </Disclosure>
+      )}
 
       {live && !archived ? (
         <div className={styles.dangerZone}>

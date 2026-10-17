@@ -1,0 +1,128 @@
+{
+  "when": "2026-10-17T11:48:20.109Z",
+  "passed": 29,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "overview search → Siparişler with the query (every filter)",
+      "ok": true
+    },
+    {
+      "name": "buyer panel keeps saving after a shop note (no \"changed in another window\")",
+      "ok": true,
+      "detail": "saved"
+    },
+    {
+      "name": "\"Düzenle\" opens the editor with a link of its own",
+      "ok": true
+    },
+    {
+      "name": "shop session: Turkish banner says until when and that the buyer link is unchanged",
+      "ok": true,
+      "detail": "Dükkân olarak düzenliyorsunuz · bu link 20 Eki 14:48 tarihine kadar çalışır · alıcının linki değişmedi. Bitince yayınlamayı alıcıya bırakın."
+    },
+    {
+      "name": "shop session: no \"Your private edit link\" to copy",
+      "ok": true
+    },
+    {
+      "name": "shop edit saved into the draft",
+      "ok": true
+    },
+    {
+      "name": "buyer link still opens the editor (status not \"unauthorized\")",
+      "ok": true
+    },
+    {
+      "name": "admin: \"Açık: … tarihine kadar\" while the shop link works",
+      "ok": true
+    },
+    {
+      "name": "overview: open shop link listed under Yapılacaklar",
+      "ok": true
+    },
+    {
+      "name": "closing picks the \"Kurulum bitti: aynı link\" message",
+      "ok": true
+    },
+    {
+      "name": "that message carries no edit link",
+      "ok": true
+    },
+    {
+      "name": "closed shop link: 404",
+      "ok": true
+    },
+    {
+      "name": "buyer link: 200",
+      "ok": true
+    },
+    {
+      "name": "Details: jumps to Good to know, Travel & stay, Meal & menu, Questions & answers",
+      "ok": true,
+      "detail": "blocks,travel,menu,faq"
+    },
+    {
+      "name": "a jump focuses the part heading",
+      "ok": true
+    },
+    {
+      "name": "the heading is in view below the bars",
+      "ok": true,
+      "detail": "313"
+    },
+    {
+      "name": "a11y (axe-core): Details with jumps (390) has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "jumps: touch targets ≥ 44 px",
+      "ok": true
+    },
+    {
+      "name": "Details: no horizontal scroll at 390",
+      "ok": true
+    },
+    {
+      "name": "Day & place: jumps to Date & time, Venue, Schedule",
+      "ok": true
+    },
+    {
+      "name": "Us (one part): no jumps",
+      "ok": true
+    },
+    {
+      "name": "a new question opens without red \"please write\" lines",
+      "ok": true,
+      "detail": "1 field still shows sample text\nGo to it\n\nAccept replies on the website\nTurn off if you collect replies another way; the form then shows as closed.\nReply by\n, still the design’s sample text\n\nReplies c"
+    },
+    {
+      "name": "…they show once its field was left",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core): admin overview with search (390) has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "admin overview: touch targets ≥ 36 px",
+      "ok": true
+    },
+    {
+      "name": "admin overview: no horizontal scroll at 390",
+      "ok": true
+    },
+    {
+      "name": "Tasarımlar: price in the shop currency (no \"$\")",
+      "ok": true
+    },
+    {
+      "name": "a11y (axe-core): admin site page (390) has no serious/critical violations",
+      "ok": true
+    },
+    {
+      "name": "admin site page: no horizontal scroll at 390",
+      "ok": true
+    }
+  ]
+}

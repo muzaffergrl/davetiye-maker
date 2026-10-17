@@ -3,7 +3,7 @@
 // order) → the customer's facts and the shop note → ready Etsy messages beside them → support actions that can be undone →
 // what is on the site, guest replies → high-impact actions apart (take offline, delete) → history. Every action calls /api/admin/sites/<id>/<action> (lib/admin/api.ts), which
 // runs the same lib/sites.ts functions the old terminal scripts used.
-import { ArrowLeft, Check, Copy, Download, ExternalLink, Eye, Hourglass, Send } from 'lucide-react';
+import { ArrowLeft, Check, Copy, Download, ExternalLink, Eye, Hourglass, Pencil, Send } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
@@ -64,6 +64,7 @@ export default function AdminSite(props: {
   const [busy, setBusy] = useState<string | null>(null);
   const [status, setStatus] = useState<Record<string, Status>>({});
   const [editUrl, setEditUrl] = useState<string | null>(null);
+  const [shopEditUrl, setShopEditUrl] = useState<string | null>(null);
   const [confirming, setConfirming] = useState<string | null>(null);
 
   const [note, setNote] = useState('Etsy\'de kontrol edildi: ödendi, iade/iptal yok, tasarım doğru');
@@ -107,7 +108,25 @@ export default function AdminSite(props: {
     await run('message-log', { template: template.id });
   }
 
+  /**
+   * G145: opens the editor with the shop's own 72-hour link (the buyer's link keeps working). The tab is opened before the
+   * request, so the browser does not block it as a pop-up; it is closed again when the link could not be made.
+   */
+  async function openShopEditor() {
+    const tab = window.open('about:blank', '_blank');
+    const res = await runFor('shop-edit', {}, 'Dükkân düzenleme linki açıldı (72 saat).');
+    if (res?.shopEditUrl && tab) {
+      tab.opener = null;
+      tab.location.href = res.shopEditUrl;
+    }
+    else tab?.close();
+  }
+
   async function run(action: string, body: Record<string, unknown> = {}, ok?: string): Promise<boolean> {
+    return Boolean(await runFor(action, body, ok));
+  }
+
+  async function runFor(action: string, body: Record<string, unknown> = {}, ok?: string): Promise<Record<string, any> | null> {
     setBusy(action);
     setStatus((m) => ({ ...m, [action]: null }));
     try {
@@ -119,16 +138,16 @@ export default function AdminSite(props: {
       const data = await res.json().catch(() => null);
       if (res.status === 401) {
         router.refresh();
-        return false;
+        return null;
       }
       if (!res.ok || !data?.ok) {
         setStatus((m) => ({ ...m, [action]: { kind: 'err', text: data?.message ?? 'Olmadı. Tekrar deneyin.' } }));
-        return false;
+        return null;
       }
       if (data.deleted) {
         router.push('/admin/orders');
         router.refresh();
-        return true;
+        return data;
       }
       setS(data.summary);
       setHistory(data.history);
@@ -136,11 +155,13 @@ export default function AdminSite(props: {
       if (data.rsvp) setRsvp(data.rsvp);
       if (data.previewPath) setPreviewPath(data.previewPath);
       if (data.editUrl) setEditUrl(data.editUrl);
+      if (action === 'shop-edit-end') setShopEditUrl(null);
+      if (data.shopEditUrl) setShopEditUrl(data.shopEditUrl);
       if (ok) setStatus((m) => ({ ...m, [action]: { kind: 'ok', text: ok } }));
-      return true;
+      return data;
     } catch {
       setStatus((m) => ({ ...m, [action]: { kind: 'err', text: 'Bağlantı kurulamadı. Tekrar deneyin.' } }));
-      return false;
+      return null;
     } finally {
       setBusy(null);
       setConfirming(null);
@@ -169,6 +190,11 @@ export default function AdminSite(props: {
         <a className={styles.btnSmall} href={previewPath} target="_blank" rel="noreferrer" data-quick-preview="">
           <Eye size={16} aria-hidden /> Taslağı gör
         </a>
+        {s.state !== 'archived' ? (
+          <button type="button" className={styles.btnSmall} disabled={busy !== null} onClick={() => void openShopEditor()} data-quick-edit="">
+            <Pencil size={16} aria-hidden /> Düzenle
+          </button>
+        ) : null}
         <a className={styles.btnSmall} href={ETSY_ORDERS_URL} target="_blank" rel="noreferrer">
           Etsy siparişleri <ExternalLink size={14} aria-hidden />
         </a>
@@ -368,9 +394,44 @@ export default function AdminSite(props: {
         </h2>
         <p className={styles.actionText}>Geri alınabilir ya da sonradan düzeltilebilir işlemler. Yayından kaldırma ve silme en altta, ayrı.</p>
 
+        <div className={styles.action} data-shop-edit="">
+          <p className={styles.actionTitle}>Linki değiştirmeden düzenle</p>
+          <p className={styles.actionText}>
+            Kurulum hizmeti ya da alıcının istediği bir düzeltme için: siteyi kendi 72 saatlik linkinizle düzenleyin. Alıcının linki aynen çalışır; bu linki
+            alıcıya göndermeyin. Bitince linki kapatın ve &quot;Kurulum bitti: aynı link&quot; mesajını gönderin.
+          </p>
+          {s.shopEditUntil ? <p className={styles.hint} data-shop-edit-until="">Açık: {stamp(s.shopEditUntil)} tarihine kadar çalışır.</p> : null}
+          <div className={styles.row}>
+            <button type="button" className={styles.btn} disabled={busy !== null || s.state === 'archived'} onClick={() => void openShopEditor()} data-action="shop-edit">
+              <ExternalLink size={16} aria-hidden /> {s.shopEditUntil ? 'Düzenleyiciyi yeniden aç' : 'Düzenleyiciyi aç'}
+            </button>
+            {s.shopEditUntil ? (
+              <button
+                type="button"
+                className={styles.btnGhost}
+                disabled={busy !== null}
+                onClick={async () => {
+                  if (await run('shop-edit-end', {}, 'Dükkân linki kapatıldı.')) setTemplateId('setup_service_done_same_link');
+                }}
+                data-action="shop-edit-end"
+              >
+                Dükkân linkini kapat
+              </button>
+            ) : null}
+          </div>
+          {shopEditUrl ? (
+            <p className={styles.hint}>
+              Sekme açılmadıysa: <a className={styles.link} href={shopEditUrl} target="_blank" rel="noreferrer" data-shop-edit-link="">düzenleyiciyi buradan açın</a>. Link
+              yalnız şimdi gösterilir; yeniden açmak eski dükkân linkini kapatır.
+            </p>
+          ) : null}
+          {s.state === 'archived' ? <p className={styles.hint}>Site arşivde; önce yayında kalma süresini uzatın.</p> : null}
+          <StatusLine status={status['shop-edit'] ?? status['shop-edit-end'] ?? null} />
+        </div>
+
         <div className={styles.action}>
           <p className={styles.actionTitle}>Yeni düzenleme linki</p>
-          <p className={styles.actionText}>Alıcı linkini kaybettiyse. Eski link hemen çalışmaz olur; site, fotoğraflar ve yanıtlar aynen kalır.</p>
+          <p className={styles.actionText}>Yalnız alıcı linkini kaybettiyse. Eski link hemen çalışmaz olur; site, fotoğraflar ve yanıtlar aynen kalır.</p>
           {editUrl ? (
             <div data-new-link="">
               <p className={styles.secret}>{editUrl}</p>
@@ -528,7 +589,7 @@ export default function AdminSite(props: {
         <h2 id="content-title" className={styles.h2}>
           Sitede ne var
         </h2>
-        <p className={styles.actionText}>Alıcının taslağındaki bilgiler (salt okunur; alıcı panelinden değiştirir). Tamamını görmek için &quot;Taslağı gör&quot;.</p>
+        <p className={styles.actionText}>Alıcının taslağındaki bilgiler (burada salt okunur; değiştirmek için yukarıdaki &quot;Linki değiştirmeden düzenle&quot;). Tamamını görmek için &quot;Taslağı gör&quot;.</p>
         <dl className={styles.facts}>
           <Fact label="İsimler">{s.names}</Fact>
           <Fact label="Tarih / saat">

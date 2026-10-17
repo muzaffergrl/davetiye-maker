@@ -69,6 +69,7 @@ import { IdentitySheet } from './IdentitySheet.tsx';
 import { PanelContext, SampleLine, useDeviceZone, type PanelContextValue } from './fields.tsx';
 import { BLOCK_TITLES, changedCopyPages, changedPages, changedSections, COPY_TITLE, PAGE_IDS, PAGE_SECTIONS, PAGE_TITLES, pageOf, parseEditTarget, previewPageFor, readiness, SETUP_STEP_COUNT, setupStepOf, type PageId } from './pages.ts';
 import { PhotoSlots } from './PhotosSection.tsx';
+import { SectionJumps } from './SectionJumps.tsx';
 import { PreviewPane } from './PreviewPane.tsx';
 import { AfterPublish, afterPublishSteps, LiveShare } from './Published.tsx';
 import { DetailsBlocksFields, MealFields, TravelFields } from './ExtrasFields.tsx';
@@ -177,7 +178,7 @@ const ROOT_VIEWS: Array<{ view: 'home' | 'edit' | 'guests' | 'share'; label: str
   { view: 'share', label: 'Share', icon: Share2 },
 ];
 
-export default function Panel(props: { initial: PanelState; editKey: string; published?: ContentRecord | null }) {
+export default function Panel(props: { initial: PanelState; editKey: string; published?: ContentRecord | null; shopUntil?: string | null }) {
   return (
     <SnackbarProvider>
       <PanelApp {...props} />
@@ -185,7 +186,18 @@ export default function Panel(props: { initial: PanelState; editKey: string; pub
   );
 }
 
-function PanelApp({ initial, editKey, published = null }: { initial: PanelState; editKey: string; published?: ContentRecord | null }) {
+function PanelApp({
+  initial,
+  editKey,
+  published = null,
+  shopUntil = null,
+}: {
+  initial: PanelState;
+  editKey: string;
+  published?: ContentRecord | null;
+  /** G145: opened with the shop's own time-limited link (admin), not the buyer's; until when it works. */
+  shopUntil?: string | null;
+}) {
   const panel = usePanel(initial, editKey);
   const { content, meta, saveState, validation, locked, online } = panel;
   const theme = initial.theme;
@@ -287,6 +299,27 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
     }
     return map;
   }, [validation]);
+  // G145: a question, choice, place to stay or block added in this visit does not open with red "please write …" lines:
+  // its errors show once one of its fields was left, or after a try to publish. Errors the draft had when the panel
+  // opened always show (Home and Review list every error either way).
+  const openedWithErrors = useRef<Set<string> | null>(null);
+  if (openedWithErrors.current === null) openedWithErrors.current = new Set(validation.errors.map((e) => e.path));
+  const [leftFields, setLeftFields] = useState<ReadonlySet<string>>(() => new Set());
+  const [showAllErrors, setShowAllErrors] = useState(false);
+  const onFieldLeft = useCallback((e: React.FocusEvent<HTMLElement>) => {
+    const id = (e.target as HTMLElement).id;
+    if (id && id.startsWith('f-')) setLeftFields((prev) => (prev.has(id) ? prev : new Set(prev).add(id)));
+  }, []);
+  const shownIssues = useCallback(
+    (p: string): ValidationIssue[] => {
+      const list = issuesByPath.get(p) ?? [];
+      if (showAllErrors || openedWithErrors.current?.has(p) || !list.some((i) => i.level === 'error')) return list;
+      const id = fieldId(p);
+      for (const left of leftFields) if (left === id || left.startsWith(`${id}-`)) return list;
+      return list.filter((i) => i.level !== 'error');
+    },
+    [issuesByPath, leftFields, showAllErrors],
+  );
   const notes = useMemo(() => prePublishNotes(content, theme, { deviceZone }), [content, theme, deviceZone]);
   const samples = useMemo(() => new Set(notes.sample.map((n) => n.path)), [notes]);
   const noteCount = notes.sample.length + notes.photos.length + notes.links.length + notes.empty.length;
@@ -320,6 +353,8 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
   );
   // "My website" on the sales site (/my) brings the buyer back here from this device (lib/panel/remember.ts).
   useEffect(() => {
+    // G145: the shop's link runs out in 72 hours and is not the buyer's: not kept on the shop's device.
+    if (shopUntil) return;
     rememberEditor({
       slug: initial.slug,
       path: `/edit/${initial.slug}?k=${encodeURIComponent(editKey)}`,
@@ -417,7 +452,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
     () => ({
       content,
       edit: panel.edit,
-      issuesAt: (p: string) => issuesByPath.get(p) ?? [],
+      issuesAt: shownIssues,
       locked,
       isSample: (p: string) => samples.has(p),
       previewToken: meta.previewToken,
@@ -434,7 +469,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
       opening: theme.opening ?? null,
       resolveMapLink: panel.api.mapLink,
     }),
-    [content, panel.edit, issuesByPath, locked, samples, meta.previewToken, theme.fields, theme.photos, rights, online, panel.uploadPhoto, panel.removePhoto, panel.uploadMusic, theme.id, fieldJump, theme.opening, panel.api],
+    [content, panel.edit, shownIssues, locked, samples, meta.previewToken, theme.fields, theme.photos, rights, online, panel.uploadPhoto, panel.removePhoto, panel.uploadMusic, theme.id, fieldJump, theme.opening, panel.api],
   );
 
   /** A jump to one of the design's texts (G068): opens "Headings & labels" on its page. */
@@ -517,7 +552,10 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
     if (!online) return setDialog({ kind: 'message', title: 'You’re offline', text: 'Connect to the internet to publish. Your changes are kept on this phone.' });
     if (upToDate) return go({ view: 'share' });
     if (meta.orderPending) return setDialog({ kind: 'message', title: 'Not yet', text: ORDER_PENDING_TEXT });
-    if (validation.errors.length) return setDialog({ kind: 'issues', issues: validation.errors });
+    if (validation.errors.length) {
+      setShowAllErrors(true);
+      return setDialog({ kind: 'issues', issues: validation.errors });
+    }
     // The first publish shows the rules (docs/16 §11.7) and what still is sample text. Later publishes go straight
     // out (K29): the reminders live on Home, and "Review" in the changes bar shows what goes live.
     if (rights.phase === 'before_publish') return setDialog({ kind: 'prepublish' });
@@ -932,10 +970,17 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
         data-status={meta.status}
         data-view={sectionPage ? `edit/${sectionPage}` : route.view}
         data-panel-root
+        onBlur={onFieldLeft}
       >
         <a href="#main" className={styles.skipLink}>
           Skip to content
         </a>
+        {/* G145: only the shop sees this (its own 72-hour link from the admin), so it speaks the shop's language. */}
+        {shopUntil ? (
+          <p className={styles.shopBar} role="note" data-shop-session="">
+            Dükkân olarak düzenliyorsunuz · bu link {shopUntilText(shopUntil)} tarihine kadar çalışır · alıcının linki değişmedi. Bitince yayınlamayı alıcıya bırakın.
+          </p>
+        ) : null}
         {/* Bar (comps u2_*): logo · [back + page title] · names (where there is room) · save state · Preview · Publish.
             A wide Publish button leaves no room for the full logo on a phone: the small monogram stands in (Brand.tsx). */}
         <header className={styles.appBar} inert={(previewOpen && !wide) || undefined}>
@@ -1099,6 +1144,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
                     if (first) goTo(first.path);
                   }}
                 />
+                <SectionJumps sections={pageSections(sectionPage)} titles={BLOCK_TITLES} />
                 {pageSections(sectionPage).map((id) => {
                   const title = pageSections(sectionPage).length > 1 ? BLOCK_TITLES[id] : undefined;
                   return (
@@ -1158,6 +1204,7 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
                 url={url}
                 slug={initial.slug}
                 editKey={editKey}
+                hideEditLink={Boolean(shopUntil)}
                 meta={meta}
                 orderRef={initial.orderRef}
                 online={online}
@@ -1183,6 +1230,13 @@ function PanelApp({ initial, editKey, published = null }: { initial: PanelState;
       {sheets}
     </PanelContext.Provider>
   );
+}
+
+/** "20 Eki 14:30" (Istanbul time: the shop's own clock). */
+function shopUntilText(iso: string): string {
+  const t = Date.parse(iso);
+  if (!Number.isFinite(t)) return iso;
+  return new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Istanbul' }).format(t);
 }
 
 function readSetupStep(slug: string): number | null {

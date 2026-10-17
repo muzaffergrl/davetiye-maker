@@ -21,6 +21,7 @@ export const metadata: Metadata = {
 
 const TODO_LABEL: Record<AdminTodo['kind'], string> = {
   confirm: 'Onayla',
+  shop_edit: 'Kapat',
   not_published: 'Hatırlat',
   closing: 'Kapanıyor',
   unpublished_changes: 'Bak',
@@ -45,6 +46,17 @@ export default function AdminHome() {
             <p className={styles.lead}>
               Bugün {d.sales.today} satış · bu ay {d.sales.thisMonth} · toplam {d.sales.total}. Satış = Etsy sipariş numarasıyla açılan site (&quot;Demo&quot; etiketli örnek siteler sayılmaz).
             </p>
+
+            {/* G145: one search box for every order (number, email, names, address, design, note) — straight to the list. */}
+            <form action="/admin/orders" method="get" role="search" className={styles.quickSearch} data-quick-search="">
+              <label className={styles.visuallyHidden} htmlFor="quick-q">
+                Sipariş ara
+              </label>
+              <input id="quick-q" name="q" type="search" className={styles.input} placeholder="Sipariş no, e-posta, isim, adres…" autoComplete="off" />
+              <button type="submit" className={styles.btnGhost}>
+                Ara
+              </button>
+            </form>
 
             <section className={styles.card} aria-labelledby="todo-h" data-todos="">
               <h2 id="todo-h" className={styles.h2}>

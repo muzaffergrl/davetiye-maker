@@ -54,6 +54,7 @@ const TITLES_TR: Record<string, [string, string]> = {
   after_wedding_tip: ['Düğün sonrası: teşekkür sayfası', 'İsteğe bağlı, düğünden birkaç gün sonra. Yalnız sipariş/destek, reklam yok (Etsy mesaj kuralları).'],
   review_request: ['Yorum isteği (bir kez)', 'Sipariş başına bir kez; site yayında, ilk yanıtlar gelmiş ve açık sorun yokken. Herkese aynı metin.'],
   setup_service_details: ['Kurulum hizmeti: bilgilerinizi gönderin', '"Biz kuralım" siparişi gelir gelmez (K42), 24 saat içinde. Gereken her şeyi bir kerede isteyin; teslim 3 gün.'],
+  setup_service_done_same_link: ['Kurulum bitti: aynı link', '"Dükkân olarak düzenle" ile bilgileri girdikten sonra (alıcının linki hiç değişmedi). Dükkân linkini kapatın; turu sitenin notuna yazın.'],
   setup_service_done: ['Kurulum bitti: düzenleme linki', 'Alıcının bilgilerini girdikten sonra, "Yeni sipariş" ya da "Yeni düzenleme linki"nden hemen sonra. Turu sitenin notuna yazın.'],
   custom_design_brief: ['Özel tasarım: fikrinizi anlatın', 'Özel tasarım siparişi gelir gelmez, tasarıma başlamadan (K42). İlk sürüm 3 gün, 2 revizyon, sonrası tur başı 500 TL.'],
   custom_design_ready: ['Özel tasarım hazır: başlatın', 'Özel tema /start\'ta açıldığında; alıcı sitesini başlatabilir.'],
@@ -74,7 +75,8 @@ const NOTES_TR: Record<string, string> = {
     'Buradaki tasarım Etsy siparişindeki tasarımdır, başlatılan sitenin tasarımı değil. Bir sitenin tasarımını değiştiren bir işlem henüz yok; ilk satıştan önce politika belirlenmeli.',
   // K42 services (G134 integration: G121/G126's English notes in Turkish, without the doc references).
   setup_service_details:
-    'Her satın alma bir kurulum turudur. Site henüz açılmadıysa "Yeni sipariş"i TASARIM siparişinin numarasıyla açın; açıldıysa "Yeni düzenleme linki" verin (alıcının eski linki çalışmaz, bunu söyleyin). Kurulum sipariş numarasını sitenin notuna yazın.',
+    'Her satın alma bir kurulum turudur. Site henüz açılmadıysa "Yeni sipariş"i TASARIM siparişinin numarasıyla açın; açıldıysa "Dükkân olarak düzenle" ile alıcının linkine dokunmadan girin (alıcı linkini kaybettiyse "Yeni düzenleme linki"). Kurulum sipariş numarasını sitenin notuna yazın.',
+  setup_service_done_same_link: 'Alıcının linki aynen çalışıyor; bu mesaj link içermez. Göndermeden önce "Dükkân linkini kapat"a basın.',
   setup_service_done:
     'Yalnız "Yeni sipariş" ya da "Yeni düzenleme linki"nden hemen sonra gönderin (taze link). Turu sitenin notuna yazın (tarih + kurulum sipariş numarası).',
   custom_design_brief: 'Karar (2026-10-16): 2 revizyon turu, sonrası tur başı 500 TL; ilk sürüm 3 gün; tasarım yalnız bu alıcıya özel.',

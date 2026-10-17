@@ -298,7 +298,7 @@
       "This is one round of setup. When we are done we send you your edit link; you can change anything yourself after that, and you decide when to publish. We finish within 3 days of receiving everything.",
       "{shop}"
     ],
-    "note": "docs/23 §3: one round per purchase. Not started yet → admin 'Yeni sipariş' with the DESIGN order number; already started → 'Yeni düzenleme linki' (the buyer's old link stops working, say so). Write the setup order number in the site note."
+    "note": "docs/23 §3: one round per purchase. Not started yet → admin 'Yeni sipariş' with the DESIGN order number; already started → 'Dükkân olarak düzenle' (the buyer's link keeps working; G145) or, if the buyer lost it, 'Yeni düzenleme linki'. Write the setup order number in the site note."
   },
   {
     "id": "setup_service_done",
@@ -320,6 +320,25 @@
       "{shop}"
     ],
     "note": "Only right after 'Yeni sipariş' or 'Yeni düzenleme linki' (fresh link). Record the round in the site note (date + setup order number)."
+  },
+  {
+    "id": "setup_service_done_same_link",
+    "title": "Setup service done: same edit link",
+    "when": "After the shop has entered the buyer's details with its own shop edit link (the buyer's link was never changed).",
+    "placeholders": [
+      "names",
+      "design",
+      "site_url",
+      "shop"
+    ],
+    "body": [
+      "Hi {names}, your {design} wedding website is set up with the details you sent us.",
+      "Open it with the same private edit link you already have and check every page: names, date, venue, photos and RSVP. Your website is still a private draft until you tap Publish; your guests can then open it at {site_url}.",
+      "Lost your edit link? Just reply here with your order number and we will send you a new one.",
+      "You can change anything yourself from now on. If you would like us to make another round of changes for you, that is a new setup purchase in our shop.",
+      "{shop}"
+    ],
+    "note": "G145: after 'Dükkân olarak düzenle' (the shop's own 72-hour link). The buyer's link still works; end the shop link when done. Record the round in the site note."
   },
   {
     "id": "custom_design_brief",

@@ -29,7 +29,7 @@ export default function AdminList({
   initialFilter?: AdminFilter | null;
   initialQuery?: string;
 }) {
-  const [filter, setFilter] = useState<AdminFilter>(initialFilter ?? (counts.needsAction > 0 ? 'action' : 'all'));
+  const [filter, setFilter] = useState<AdminFilter>(initialFilter ?? (counts.needsAction > 0 && !initialQuery ? 'action' : 'all'));
   const [query, setQuery] = useState(initialQuery);
   const [sort, setSort] = useState<AdminSort>('newest');
   const shown = useMemo(() => sortSites(filterSites(sites, filter, query), sort), [sites, filter, query, sort]);
@@ -61,7 +61,11 @@ export default function AdminList({
             type="search"
             placeholder="Sipariş no, e-posta, isimler, adres, mekân…"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              // G145: a search looks through every order, not only the ones waiting in "Yapılacak".
+              if (e.target.value.trim() && filter === 'action') setFilter('all');
+            }}
             autoComplete="off"
           />
         </div>

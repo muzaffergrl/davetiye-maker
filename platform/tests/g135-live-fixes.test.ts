@@ -58,6 +58,7 @@ function fake(over: Partial<AdminSiteSummary>): AdminSiteSummary {
     noteAt: null,
     place: null,
     madeByShop: false,
+    shopEditUntil: null,
     ...over,
   };
 }
