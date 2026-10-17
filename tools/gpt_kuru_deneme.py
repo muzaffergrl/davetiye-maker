@@ -19,7 +19,7 @@ Denetimler (çıkış kodu 1 = sorun):
 Deneme görseli: opak → yumuşak gradyan + gren (tek renk değil: tema build'lerinin yüzdelik/ton hesapları sıfıra
 bölünmesin); şeffaf → tuvalin ortasında yumuşak kenarlı opak bir dikdörtgen, kenar şeridi tam şeffaf (kit_check'ten
 geçer); prompt bloğunda `#00FF00` varsa içinde düz #00FF00 bir pencere. `--sekil` JSON'u dosya adı → {"kutu": [x0,y0,
-x1,y1] (tuval yüzdesi), "pencere": [x0,y0,x1,y1]} ile bir parçanın prompt'taki yerini verir (kat kat aynı tuvaldeki
+x1,y1] (tuval yüzdesi), "pencere": [x0,y0,x1,y1], "ton": [r,g,b], "tohum": n} ile bir parçanın prompt'taki yerini verir (kat kat aynı tuvaldeki
 sahne parçaları için gerçeğe yakın deneme). Hiçbir deneme görseli ürün değildir; K21'e dokunmaz.
 """
 from __future__ import annotations
@@ -78,13 +78,13 @@ def beklenenler(prompts: Path) -> list[dict]:
 
 def deneme_gorseli(b: dict, sekil: dict, tohum: int) -> Image.Image:
     w, h = b["olcu"] or ((1024, 1280) if b["yol"].endswith(".jpg") else (1024, 1024))
-    rng = np.random.default_rng(tohum)
-    yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
-    taban = rng.uniform(70, 190, 3)
-    egim = (xx / w * 50 + yy / h * 40)[..., None] - 45
-    rgb = np.clip(taban + egim + rng.normal(0, 9, (h, w, 1)), 0, 255)
     ad = Path(b["yol"]).name
     s = sekil.get(ad, {})
+    rng = np.random.default_rng(s.get("tohum", tohum))  # aynı "tohum" = aynı pikseller (üst üste aynı tuval parçaları)
+    yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
+    taban = np.array(s["ton"], float) if "ton" in s else rng.uniform(70, 190, 3)  # "ton": koyu temalarda zemin rengi
+    egim = (xx / w * 50 + yy / h * 40)[..., None] - 45
+    rgb = np.clip(taban + egim + rng.normal(0, 9, (h, w, 1)), 0, 255)
     if b["pencere"]:
         x0, y0, x1, y1 = s.get("pencere", [30, 16, 70, 50])
         rgb[int(y0 * h / 100):int(y1 * h / 100), int(x0 * w / 100):int(x1 * w / 100)] = (0, 255, 0)
