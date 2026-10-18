@@ -1,6 +1,6 @@
 {
- "when": "2026-10-14T16:14:37.972Z",
- "passed": 61,
+ "when": "2026-10-18T02:04:43.581Z",
+ "passed": 421,
  "failed": 0,
  "checks": [
   {
@@ -87,6 +87,89 @@
    "ok": true
   },
   {
+   "name": "dusty-blue-champagne: upload to the thank-you photo place (slot=thank_you)",
+   "ok": true,
+   "detail": "200 thank_you.photo"
+  },
+  {
+   "name": "dusty-blue-champagne: saved and published",
+   "ok": true,
+   "detail": "200 200"
+  },
+  {
+   "name": "dusty-blue-champagne: two days after the wedding the envelope page is the thank-you version by itself",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne: envelope kicker + card title",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne: the thank-you photo is in the card window",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne: tap → the envelope opens and goes to home (thank-you version)",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne: back to the envelope: opened, the thank-you card up",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne: home thank-you card with the message (line break kept)",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne: home has no countdown, RSVP link or calendar",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne: RSVP page answers old links (200) with \"Replies are closed\", no form",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne: RSVP API refuses replies: 403 closed (thank_you)",
+   "ok": true,
+   "detail": "{\"status\":403,\"body\":{\"ok\":false,\"state\":\"closed\",\"code\":\"closed\",\"reason\":\"thank_you\",\"message\":\"Replies are closed. Thank you for celebrating with us.\"}}"
+  },
+  {
+   "name": "dusty-blue-champagne 360 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne 390 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne 430 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne 1280 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne: no console or CSP error",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne: no thank-you photo → the design's decoration in the window (not a placeholder)",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne 360 × 640: a long thank-you title stays on the card",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne: the Day page hidden by the couple is 404",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne: and nothing links to it",
+   "ok": true
+  },
+  {
    "name": "blush-garden-rose: upload to the thank-you photo place (slot=thank_you)",
    "ok": true,
    "detail": "200 thank_you.photo"
@@ -167,6 +250,1417 @@
   },
   {
    "name": "blush-garden-rose: and nothing links to it",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter: upload to the thank-you photo place (slot=thank_you)",
+   "ok": true,
+   "detail": "200 thank_you.photo"
+  },
+  {
+   "name": "vintage-airmail-love-letter: saved and published",
+   "ok": true,
+   "detail": "200 200"
+  },
+  {
+   "name": "vintage-airmail-love-letter: two days after the wedding the envelope page is the thank-you version by itself",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter: envelope kicker + card title",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter: the thank-you photo is in the card window",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter: tap → the envelope opens and goes to home (thank-you version)",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter: back to the envelope: opened, the thank-you card up",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter: home thank-you card with the message (line break kept)",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter: home has no countdown, RSVP link or calendar",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter: RSVP page answers old links (200) with \"Replies are closed\", no form",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter: RSVP API refuses replies: 403 closed (thank_you)",
+   "ok": true,
+   "detail": "{\"status\":403,\"body\":{\"ok\":false,\"state\":\"closed\",\"code\":\"closed\",\"reason\":\"thank_you\",\"message\":\"Replies are closed. Thank you for celebrating with us.\"}}"
+  },
+  {
+   "name": "vintage-airmail-love-letter 360 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter 390 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter 430 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter 1280 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter: no console or CSP error",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter: no thank-you photo → the design's decoration in the window (not a placeholder)",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter 360 × 640: a long thank-you title stays on the card",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter: the Day page hidden by the couple is 404",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter: and nothing links to it",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon: upload to the thank-you photo place (slot=thank_you)",
+   "ok": true,
+   "detail": "200 thank_you.photo"
+  },
+  {
+   "name": "mediterranean-lemon: saved and published",
+   "ok": true,
+   "detail": "200 200"
+  },
+  {
+   "name": "mediterranean-lemon: two days after the wedding the envelope page is the thank-you version by itself",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon: envelope kicker + card title",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon: the thank-you photo is in the card window",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon: tap → the envelope opens and goes to home (thank-you version)",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon: back to the envelope: opened, the thank-you card up",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon: home thank-you card with the message (line break kept)",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon: home has no countdown, RSVP link or calendar",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon: RSVP page answers old links (200) with \"Replies are closed\", no form",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon: RSVP API refuses replies: 403 closed (thank_you)",
+   "ok": true,
+   "detail": "{\"status\":403,\"body\":{\"ok\":false,\"state\":\"closed\",\"code\":\"closed\",\"reason\":\"thank_you\",\"message\":\"Replies are closed. Thank you for celebrating with us.\"}}"
+  },
+  {
+   "name": "mediterranean-lemon 360 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon 390 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon 430 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon 1280 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon: no console or CSP error",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon: no thank-you photo → the design's decoration in the window (not a placeholder)",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon 360 × 640: a long thank-you title stays on the card",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon: the Day page hidden by the couple is 404",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon: and nothing links to it",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie: upload to the thank-you photo place (slot=thank_you)",
+   "ok": true,
+   "detail": "200 thank_you.photo"
+  },
+  {
+   "name": "art-deco-black-tie: saved and published",
+   "ok": true,
+   "detail": "200 200"
+  },
+  {
+   "name": "art-deco-black-tie: two days after the wedding the envelope page is the thank-you version by itself",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie: envelope kicker + card title",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie: the thank-you photo is in the card window",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie: tap → the envelope opens and goes to home (thank-you version)",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie: back to the envelope: opened, the thank-you card up",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie: home thank-you card with the message (line break kept)",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie: home has no countdown, RSVP link or calendar",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie: RSVP page answers old links (200) with \"Replies are closed\", no form",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie: RSVP API refuses replies: 403 closed (thank_you)",
+   "ok": true,
+   "detail": "{\"status\":403,\"body\":{\"ok\":false,\"state\":\"closed\",\"code\":\"closed\",\"reason\":\"thank_you\",\"message\":\"Replies are closed. Thank you for celebrating with us.\"}}"
+  },
+  {
+   "name": "art-deco-black-tie 360 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie 390 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie 430 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie 1280 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie: no console or CSP error",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie: no thank-you photo → the design's decoration in the window (not a placeholder)",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie 360 × 640: a long thank-you title stays on the card",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie: the Day page hidden by the couple is 404",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie: and nothing links to it",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn: upload to the thank-you photo place (slot=thank_you)",
+   "ok": true,
+   "detail": "200 thank_you.photo"
+  },
+  {
+   "name": "burgundy-velvet-autumn: saved and published",
+   "ok": true,
+   "detail": "200 200"
+  },
+  {
+   "name": "burgundy-velvet-autumn: two days after the wedding the envelope page is the thank-you version by itself",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn: envelope kicker + card title",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn: the thank-you photo is in the card window",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn: tap → the envelope opens and goes to home (thank-you version)",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn: back to the envelope: opened, the thank-you card up",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn: home thank-you card with the message (line break kept)",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn: home has no countdown, RSVP link or calendar",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn: RSVP page answers old links (200) with \"Replies are closed\", no form",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn: RSVP API refuses replies: 403 closed (thank_you)",
+   "ok": true,
+   "detail": "{\"status\":403,\"body\":{\"ok\":false,\"state\":\"closed\",\"code\":\"closed\",\"reason\":\"thank_you\",\"message\":\"Replies are closed. Thank you for celebrating with us.\"}}"
+  },
+  {
+   "name": "burgundy-velvet-autumn 360 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn 390 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn 430 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn 1280 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn: no console or CSP error",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn: no thank-you photo → the design's decoration in the window (not a placeholder)",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn 360 × 640: a long thank-you title stays on the card",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn: the Day page hidden by the couple is 404",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn: and nothing links to it",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen: upload to the thank-you photo place (slot=thank_you)",
+   "ok": true,
+   "detail": "200 thank_you.photo"
+  },
+  {
+   "name": "winter-evergreen: saved and published",
+   "ok": true,
+   "detail": "200 200"
+  },
+  {
+   "name": "winter-evergreen: two days after the wedding the envelope page is the thank-you version by itself",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen: envelope kicker + card title",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen: the thank-you photo is in the card window",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen: tap → the envelope opens and goes to home (thank-you version)",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen: back to the envelope: opened, the thank-you card up",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen: home thank-you card with the message (line break kept)",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen: home has no countdown, RSVP link or calendar",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen: RSVP page answers old links (200) with \"Replies are closed\", no form",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen: RSVP API refuses replies: 403 closed (thank_you)",
+   "ok": true,
+   "detail": "{\"status\":403,\"body\":{\"ok\":false,\"state\":\"closed\",\"code\":\"closed\",\"reason\":\"thank_you\",\"message\":\"Replies are closed. Thank you for celebrating with us.\"}}"
+  },
+  {
+   "name": "winter-evergreen 360 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen 390 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen 430 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen 1280 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen: no console or CSP error",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen: no thank-you photo → the design's decoration in the window (not a placeholder)",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen 360 × 640: a long thank-you title stays on the card",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen: the Day page hidden by the couple is 404",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen: and nothing links to it",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence: upload to the thank-you photo place (slot=thank_you)",
+   "ok": true,
+   "detail": "200 thank_you.photo"
+  },
+  {
+   "name": "lavender-provence: saved and published",
+   "ok": true,
+   "detail": "200 200"
+  },
+  {
+   "name": "lavender-provence: two days after the wedding the envelope page is the thank-you version by itself",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence: envelope kicker + card title",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence: the thank-you photo is in the card window",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence: tap → the envelope opens and goes to home (thank-you version)",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence: back to the envelope: opened, the thank-you card up",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence: home thank-you card with the message (line break kept)",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence: home has no countdown, RSVP link or calendar",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence: RSVP page answers old links (200) with \"Replies are closed\", no form",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence: RSVP API refuses replies: 403 closed (thank_you)",
+   "ok": true,
+   "detail": "{\"status\":403,\"body\":{\"ok\":false,\"state\":\"closed\",\"code\":\"closed\",\"reason\":\"thank_you\",\"message\":\"Replies are closed. Thank you for celebrating with us.\"}}"
+  },
+  {
+   "name": "lavender-provence 360 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence 390 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence 430 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence 1280 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence: no console or CSP error",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence: no thank-you photo → the design's decoration in the window (not a placeholder)",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence 360 × 640: a long thank-you title stays on the card",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence: the Day page hidden by the couple is 404",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence: and nothing links to it",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard: upload to the thank-you photo place (slot=thank_you)",
+   "ok": true,
+   "detail": "200 thank_you.photo"
+  },
+  {
+   "name": "tuscan-vineyard: saved and published",
+   "ok": true,
+   "detail": "200 200"
+  },
+  {
+   "name": "tuscan-vineyard: two days after the wedding the envelope page is the thank-you version by itself",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard: envelope kicker + card title",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard: the thank-you photo is in the card window",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard: tap → the envelope opens and goes to home (thank-you version)",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard: back to the envelope: opened, the thank-you card up",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard: home thank-you card with the message (line break kept)",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard: home has no countdown, RSVP link or calendar",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard: RSVP page answers old links (200) with \"Replies are closed\", no form",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard: RSVP API refuses replies: 403 closed (thank_you)",
+   "ok": true,
+   "detail": "{\"status\":403,\"body\":{\"ok\":false,\"state\":\"closed\",\"code\":\"closed\",\"reason\":\"thank_you\",\"message\":\"Replies are closed. Thank you for celebrating with us.\"}}"
+  },
+  {
+   "name": "tuscan-vineyard 360 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard 390 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard 430 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard 1280 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard: no console or CSP error",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard: no thank-you photo → the design's decoration in the window (not a placeholder)",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard 360 × 640: a long thank-you title stays on the card",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard: the Day page hidden by the couple is 404",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard: and nothing links to it",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta: upload to the thank-you photo place (slot=thank_you)",
+   "ok": true,
+   "detail": "200 thank_you.photo"
+  },
+  {
+   "name": "boho-pampas-terracotta: saved and published",
+   "ok": true,
+   "detail": "200 200"
+  },
+  {
+   "name": "boho-pampas-terracotta: two days after the wedding the envelope page is the thank-you version by itself",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta: envelope kicker + card title",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta: the thank-you photo is in the card window",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta: tap → the envelope opens and goes to home (thank-you version)",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta: back to the envelope: opened, the thank-you card up",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta: home thank-you card with the message (line break kept)",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta: home has no countdown, RSVP link or calendar",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta: RSVP page answers old links (200) with \"Replies are closed\", no form",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta: RSVP API refuses replies: 403 closed (thank_you)",
+   "ok": true,
+   "detail": "{\"status\":403,\"body\":{\"ok\":false,\"state\":\"closed\",\"code\":\"closed\",\"reason\":\"thank_you\",\"message\":\"Replies are closed. Thank you for celebrating with us.\"}}"
+  },
+  {
+   "name": "boho-pampas-terracotta 360 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta 390 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta 430 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta 1280 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta: no console or CSP error",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta: no thank-you photo → the design's decoration in the window (not a placeholder)",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta 360 × 640: a long thank-you title stays on the card",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta: the Day page hidden by the couple is 404",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta: and nothing links to it",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination: upload to the thank-you photo place (slot=thank_you)",
+   "ok": true,
+   "detail": "200 thank_you.photo"
+  },
+  {
+   "name": "tropical-destination: saved and published",
+   "ok": true,
+   "detail": "200 200"
+  },
+  {
+   "name": "tropical-destination: two days after the wedding the envelope page is the thank-you version by itself",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination: envelope kicker + card title",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination: the thank-you photo is in the card window",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination: tap → the envelope opens and goes to home (thank-you version)",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination: back to the envelope: opened, the thank-you card up",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination: home thank-you card with the message (line break kept)",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination: home has no countdown, RSVP link or calendar",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination: RSVP page answers old links (200) with \"Replies are closed\", no form",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination: RSVP API refuses replies: 403 closed (thank_you)",
+   "ok": true,
+   "detail": "{\"status\":403,\"body\":{\"ok\":false,\"state\":\"closed\",\"code\":\"closed\",\"reason\":\"thank_you\",\"message\":\"Replies are closed. Thank you for celebrating with us.\"}}"
+  },
+  {
+   "name": "tropical-destination 360 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination 390 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination 430 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination 1280 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination: no console or CSP error",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination: no thank-you photo → the design's decoration in the window (not a placeholder)",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination 360 × 640: a long thank-you title stays on the card",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination: the Day page hidden by the couple is 404",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination: and nothing links to it",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook: upload to the thank-you photo place (slot=thank_you)",
+   "ok": true,
+   "detail": "200 thank_you.photo"
+  },
+  {
+   "name": "enchanted-forest-storybook: saved and published",
+   "ok": true,
+   "detail": "200 200"
+  },
+  {
+   "name": "enchanted-forest-storybook: two days after the wedding the envelope page is the thank-you version by itself",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook: envelope kicker + card title",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook: the thank-you photo is in the card window",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook: tap → the envelope opens and goes to home (thank-you version)",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook: back to the envelope: opened, the thank-you card up",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook: home thank-you card with the message (line break kept)",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook: home has no countdown, RSVP link or calendar",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook: RSVP page answers old links (200) with \"Replies are closed\", no form",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook: RSVP API refuses replies: 403 closed (thank_you)",
+   "ok": true,
+   "detail": "{\"status\":403,\"body\":{\"ok\":false,\"state\":\"closed\",\"code\":\"closed\",\"reason\":\"thank_you\",\"message\":\"Replies are closed. Thank you for celebrating with us.\"}}"
+  },
+  {
+   "name": "enchanted-forest-storybook 360 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook 390 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook 430 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook 1280 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook: no console or CSP error",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook: no thank-you photo → the design's decoration in the window (not a placeholder)",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook 360 × 640: a long thank-you title stays on the card",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook: the Day page hidden by the couple is 404",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook: and nothing links to it",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls: upload to the thank-you photo place (slot=thank_you)",
+   "ok": true,
+   "detail": "200 thank_you.photo"
+  },
+  {
+   "name": "ivory-lace-pearls: saved and published",
+   "ok": true,
+   "detail": "200 200"
+  },
+  {
+   "name": "ivory-lace-pearls: two days after the wedding the envelope page is the thank-you version by itself",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls: envelope kicker + card title",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls: the thank-you photo is in the card window",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls: tap → the envelope opens and goes to home (thank-you version)",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls: back to the envelope: opened, the thank-you card up",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls: home thank-you card with the message (line break kept)",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls: home has no countdown, RSVP link or calendar",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls: RSVP page answers old links (200) with \"Replies are closed\", no form",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls: RSVP API refuses replies: 403 closed (thank_you)",
+   "ok": true,
+   "detail": "{\"status\":403,\"body\":{\"ok\":false,\"state\":\"closed\",\"code\":\"closed\",\"reason\":\"thank_you\",\"message\":\"Replies are closed. Thank you for celebrating with us.\"}}"
+  },
+  {
+   "name": "ivory-lace-pearls 360 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls 390 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls 430 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls 1280 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls: no console or CSP error",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls: no thank-you photo → the design's decoration in the window (not a placeholder)",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls 360 × 640: a long thank-you title stays on the card",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls: the Day page hidden by the couple is 404",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls: and nothing links to it",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring: upload to the thank-you photo place (slot=thank_you)",
+   "ok": true,
+   "detail": "200 thank_you.photo"
+  },
+  {
+   "name": "cherry-blossom-spring: saved and published",
+   "ok": true,
+   "detail": "200 200"
+  },
+  {
+   "name": "cherry-blossom-spring: two days after the wedding the envelope page is the thank-you version by itself",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring: envelope kicker + card title",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring: the thank-you photo is in the card window",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring: tap → the envelope opens and goes to home (thank-you version)",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring: back to the envelope: opened, the thank-you card up",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring: home thank-you card with the message (line break kept)",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring: home has no countdown, RSVP link or calendar",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring: RSVP page answers old links (200) with \"Replies are closed\", no form",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring: RSVP API refuses replies: 403 closed (thank_you)",
+   "ok": true,
+   "detail": "{\"status\":403,\"body\":{\"ok\":false,\"state\":\"closed\",\"code\":\"closed\",\"reason\":\"thank_you\",\"message\":\"Replies are closed. Thank you for celebrating with us.\"}}"
+  },
+  {
+   "name": "cherry-blossom-spring 360 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring 390 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring 430 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring 1280 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring: no console or CSP error",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring: no thank-you photo → the design's decoration in the window (not a placeholder)",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring 360 × 640: a long thank-you title stays on the card",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring: the Day page hidden by the couple is 404",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring: and nothing links to it",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn: upload to the thank-you photo place (slot=thank_you)",
+   "ok": true,
+   "detail": "200 thank_you.photo"
+  },
+  {
+   "name": "sunflower-rustic-barn: saved and published",
+   "ok": true,
+   "detail": "200 200"
+  },
+  {
+   "name": "sunflower-rustic-barn: two days after the wedding the envelope page is the thank-you version by itself",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn: envelope kicker + card title",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn: the thank-you photo is in the card window",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn: tap → the envelope opens and goes to home (thank-you version)",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn: back to the envelope: opened, the thank-you card up",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn: home thank-you card with the message (line break kept)",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn: home has no countdown, RSVP link or calendar",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn: RSVP page answers old links (200) with \"Replies are closed\", no form",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn: RSVP API refuses replies: 403 closed (thank_you)",
+   "ok": true,
+   "detail": "{\"status\":403,\"body\":{\"ok\":false,\"state\":\"closed\",\"code\":\"closed\",\"reason\":\"thank_you\",\"message\":\"Replies are closed. Thank you for celebrating with us.\"}}"
+  },
+  {
+   "name": "sunflower-rustic-barn 360 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn 390 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn 430 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn 1280 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn: no console or CSP error",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn: no thank-you photo → the design's decoration in the window (not a placeholder)",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn 360 × 640: a long thank-you title stays on the card",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn: the Day page hidden by the couple is 404",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn: and nothing links to it",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate: upload to the thank-you photo place (slot=thank_you)",
+   "ok": true,
+   "detail": "200 thank_you.photo"
+  },
+  {
+   "name": "emerald-gold-estate: saved and published",
+   "ok": true,
+   "detail": "200 200"
+  },
+  {
+   "name": "emerald-gold-estate: two days after the wedding the envelope page is the thank-you version by itself",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate: envelope kicker + card title",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate: the thank-you photo is in the card window",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate: tap → the envelope opens and goes to home (thank-you version)",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate: back to the envelope: opened, the thank-you card up",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate: home thank-you card with the message (line break kept)",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate: home has no countdown, RSVP link or calendar",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate: RSVP page answers old links (200) with \"Replies are closed\", no form",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate: RSVP API refuses replies: 403 closed (thank_you)",
+   "ok": true,
+   "detail": "{\"status\":403,\"body\":{\"ok\":false,\"state\":\"closed\",\"code\":\"closed\",\"reason\":\"thank_you\",\"message\":\"Replies are closed. Thank you for celebrating with us.\"}}"
+  },
+  {
+   "name": "emerald-gold-estate 360 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate 390 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate 430 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate 1280 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate: no console or CSP error",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate: no thank-you photo → the design's decoration in the window (not a placeholder)",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate 360 × 640: a long thank-you title stays on the card",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate: the Day page hidden by the couple is 404",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate: and nothing links to it",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum: upload to the thank-you photo place (slot=thank_you)",
+   "ok": true,
+   "detail": "200 thank_you.photo"
+  },
+  {
+   "name": "wildflower-meadow-vellum: saved and published",
+   "ok": true,
+   "detail": "200 200"
+  },
+  {
+   "name": "wildflower-meadow-vellum: two days after the wedding the envelope page is the thank-you version by itself",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum: envelope kicker + card title",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum: the thank-you photo is in the card window",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum: tap → the envelope opens and goes to home (thank-you version)",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum: back to the envelope: opened, the thank-you card up",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum: home thank-you card with the message (line break kept)",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum: home has no countdown, RSVP link or calendar",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum: RSVP page answers old links (200) with \"Replies are closed\", no form",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum: RSVP API refuses replies: 403 closed (thank_you)",
+   "ok": true,
+   "detail": "{\"status\":403,\"body\":{\"ok\":false,\"state\":\"closed\",\"code\":\"closed\",\"reason\":\"thank_you\",\"message\":\"Replies are closed. Thank you for celebrating with us.\"}}"
+  },
+  {
+   "name": "wildflower-meadow-vellum 360 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum 390 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum 430 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum 1280 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum: no console or CSP error",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum: no thank-you photo → the design's decoration in the window (not a placeholder)",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum 360 × 640: a long thank-you title stays on the card",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum: the Day page hidden by the couple is 404",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum: and nothing links to it",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden: upload to the thank-you photo place (slot=thank_you)",
+   "ok": true,
+   "detail": "200 thank_you.photo"
+  },
+  {
+   "name": "midnight-garden: saved and published",
+   "ok": true,
+   "detail": "200 200"
+  },
+  {
+   "name": "midnight-garden: two days after the wedding the envelope page is the thank-you version by itself",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden: envelope kicker + card title",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden: the thank-you photo is in the card window",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden: tap → the envelope opens and goes to home (thank-you version)",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden: back to the envelope: opened, the thank-you card up",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden: home thank-you card with the message (line break kept)",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden: home has no countdown, RSVP link or calendar",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden: RSVP page answers old links (200) with \"Replies are closed\", no form",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden: RSVP API refuses replies: 403 closed (thank_you)",
+   "ok": true,
+   "detail": "{\"status\":403,\"body\":{\"ok\":false,\"state\":\"closed\",\"code\":\"closed\",\"reason\":\"thank_you\",\"message\":\"Replies are closed. Thank you for celebrating with us.\"}}"
+  },
+  {
+   "name": "midnight-garden 360 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden 390 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden 430 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden 1280 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden: no console or CSP error",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden: no thank-you photo → the design's decoration in the window (not a placeholder)",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden 360 × 640: a long thank-you title stays on the card",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden: the Day page hidden by the couple is 404",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden: and nothing links to it",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside: upload to the thank-you photo place (slot=thank_you)",
+   "ok": true,
+   "detail": "200 thank_you.photo"
+  },
+  {
+   "name": "coastal-seaside: saved and published",
+   "ok": true,
+   "detail": "200 200"
+  },
+  {
+   "name": "coastal-seaside: two days after the wedding the envelope page is the thank-you version by itself",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside: envelope kicker + card title",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside: the thank-you photo is in the card window",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside: tap → the envelope opens and goes to home (thank-you version)",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside: back to the envelope: opened, the thank-you card up",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside: home thank-you card with the message (line break kept)",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside: home has no countdown, RSVP link or calendar",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside: RSVP page answers old links (200) with \"Replies are closed\", no form",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside: RSVP API refuses replies: 403 closed (thank_you)",
+   "ok": true,
+   "detail": "{\"status\":403,\"body\":{\"ok\":false,\"state\":\"closed\",\"code\":\"closed\",\"reason\":\"thank_you\",\"message\":\"Replies are closed. Thank you for celebrating with us.\"}}"
+  },
+  {
+   "name": "coastal-seaside 360 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside 390 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside 430 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside 1280 px: five thank-you pages without overflow, broken image or label",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside: no console or CSP error",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside: no thank-you photo → the design's decoration in the window (not a placeholder)",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside 360 × 640: a long thank-you title stays on the card",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside: the Day page hidden by the couple is 404",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside: and nothing links to it",
    "ok": true
   },
   {

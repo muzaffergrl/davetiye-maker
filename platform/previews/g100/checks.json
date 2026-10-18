@@ -1,7 +1,7 @@
 {
-  "when": "2026-10-18T01:32:15.211Z",
-  "passed": 51,
-  "failed": 1,
+  "when": "2026-10-18T02:24:41.104Z",
+  "passed": 52,
+  "failed": 0,
   "checks": [
     {
       "name": "setup 1 (390 × 844): both first names and the wedding date on the first screen, above the bar",
@@ -136,7 +136,7 @@
     },
     {
       "name": "Day & place: sub-headings Date & time · Venue · Schedule · After the wedding; More options folded",
-      "ok": false,
+      "ok": true,
       "detail": "Date & time | More options\nNew York · Month first | Venue | Schedule | After the wedding\nAutomatic | Headings & labels on this page"
     },
     {

@@ -1,0 +1,809 @@
+{
+ "when": "2026-10-18T01:51:34.473Z",
+ "passed": 192,
+ "failed": 0,
+ "checks": [
+  {
+   "name": "Edit keeps six pages (K29: no 7th \"Wording\" page)",
+   "ok": true,
+   "detail": "us,day,photos,story,details,rsvp"
+  },
+  {
+   "name": "Us ends with a folded \"Headings & labels on this page\"",
+   "ok": true,
+   "detail": "Headings & labels on this page"
+  },
+  {
+   "name": "…as the last part of the page",
+   "ok": true,
+   "detail": "names,palette,languages,copy"
+  },
+  {
+   "name": "the most-changed texts first (envelope line, small card, invitation line)",
+   "ok": true,
+   "detail": "envelope_kicker,card_line,invite_request,invite_at,love_line,foot_kicker,share_invited,envelope_hint_tap,envelope_hint_click,envelope_enter,envelope_replay,home_replay,envelope_skip,envelope_open"
+  },
+  {
+   "name": "a row shows the design's text in grey (placeholder) and an empty box",
+   "ok": true
+  },
+  {
+   "name": "no \"Reset\" while the design's text is used",
+   "ok": true
+  },
+  {
+   "name": "a11y (axe-core): Headings & labels (Us) has no serious/critical violations",
+   "ok": true
+  },
+  {
+   "name": "touch targets ≥ 44 px in the section",
+   "ok": true
+  },
+  {
+   "name": "typed: \"Design text: “You are invited”\" + \"Reset to design text\" under the row",
+   "ok": true,
+   "detail": "Above your names on the envelopeDesign text: You are invitedReset to design text"
+  },
+  {
+   "name": "suggestion \"Vow renewal\": fills a few lines and says so",
+   "ok": true,
+   "detail": "Wording for a vow renewal: 2 texts changed.\nUndo"
+  },
+  {
+   "name": "…the small card line is filled",
+   "ok": true
+  },
+  {
+   "name": "…its chip is pressed",
+   "ok": true
+  },
+  {
+   "name": "Undo puts the lines back (the envelope line typed before stays)",
+   "ok": true
+  },
+  {
+   "name": "the section header counts the changed texts",
+   "ok": true,
+   "detail": "Headings & labels on this page\n3 changed"
+  },
+  {
+   "name": "RSVP page: the RSVP heading first",
+   "ok": true,
+   "detail": "rsvp_title,rsvp_by,rsvp_button,home_rsvp_cue"
+  },
+  {
+   "name": "the design texts count like any edit: \"Unpublished changes: 2\" (Us, RSVP)",
+   "ok": true,
+   "detail": "2"
+  },
+  {
+   "name": "Preview this page: the RSVP page with the new heading (live preview after the autosave)",
+   "ok": true
+  },
+  {
+   "name": "Review: \"Us · Headings & labels\"",
+   "ok": true,
+   "detail": "Us Headings & labels"
+  },
+  {
+   "name": "Review: \"RSVP · Headings & labels\"",
+   "ok": true,
+   "detail": "RSVP Headings & labels"
+  },
+  {
+   "name": "Publish from Review: \"Your website is live\"",
+   "ok": true
+  },
+  {
+   "name": "no name/date change was used (rights: 0 used)",
+   "ok": true,
+   "detail": "{\"used\":0,\"remaining\":3}"
+  },
+  {
+   "name": "guest envelope: the couple's line",
+   "ok": true
+  },
+  {
+   "name": "guest envelope: the suggestion's card line",
+   "ok": true
+  },
+  {
+   "name": "guest home: the invitation line of the suggestion",
+   "ok": true
+  },
+  {
+   "name": "guest home: the RSVP heading follows everywhere it appears",
+   "ok": true
+  },
+  {
+   "name": "guest RSVP page: the new heading",
+   "ok": true
+  },
+  {
+   "name": "Reset to design text: the box is empty again, the design's text in grey",
+   "ok": true
+  },
+  {
+   "name": "after the reset + publish, guests see the design's text again",
+   "ok": true
+  },
+  {
+   "name": "panel: no page error",
+   "ok": true
+  },
+  {
+   "name": "1280: Details shows the Day page next to the editor",
+   "ok": true,
+   "detail": "/g068-panel/details?preview=1792328400.MkofoqPvRu89es90cHXS_d9-5p6dm9tMo627jF0crjg"
+  },
+  {
+   "name": "1280: a Details text shown on the Day page keeps the preview there",
+   "ok": true,
+   "detail": "/g068-panel/details?preview=1792328400.MkofoqPvRu89es90cHXS_d9-5p6dm9tMo627jF0crjg"
+  },
+  {
+   "name": "1280: focusing a text shown on the home page moves the preview to home",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory: envelope line",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory: schedule heading",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory: calendar line",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory: the menu",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory: RSVP heading, reply-by line and the form's button",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory: the tab title follows the menu's RSVP word",
+   "ok": true,
+   "detail": "Reply · Avery & Jordan"
+  },
+  {
+   "name": "olive-ivory 390: five pages without horizontal scroll or broken image",
+   "ok": true
+  },
+  {
+   "name": "olive-ivory: no console or page error",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne: envelope line",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne: schedule heading",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne: calendar line",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne: the menu",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne: RSVP heading, reply-by line and the form's button",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne: the tab title follows the menu's RSVP word",
+   "ok": true,
+   "detail": "Reply · Eleanor & Theo"
+  },
+  {
+   "name": "dusty-blue-champagne 390: five pages without horizontal scroll or broken image",
+   "ok": true
+  },
+  {
+   "name": "dusty-blue-champagne: no console or page error",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose: envelope line",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose: schedule heading",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose: calendar line",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose: the menu",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose: RSVP heading, reply-by line and the form's button",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose: the tab title follows the menu's RSVP word",
+   "ok": true,
+   "detail": "Reply · Clara & Julian"
+  },
+  {
+   "name": "blush-garden-rose 390: five pages without horizontal scroll or broken image",
+   "ok": true
+  },
+  {
+   "name": "blush-garden-rose: no console or page error",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter: envelope line",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter: schedule heading",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter: calendar line",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter: the menu",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter: RSVP heading, reply-by line and the form's button",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter: the tab title follows the menu's RSVP word",
+   "ok": true,
+   "detail": "Reply · Margot & Henry"
+  },
+  {
+   "name": "vintage-airmail-love-letter 390: five pages without horizontal scroll or broken image",
+   "ok": true
+  },
+  {
+   "name": "vintage-airmail-love-letter: no console or page error",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon: envelope line",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon: schedule heading",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon: calendar line",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon: the menu",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon: RSVP heading, reply-by line and the form's button",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon: the tab title follows the menu's RSVP word",
+   "ok": true,
+   "detail": "Reply · Isabella & Marco"
+  },
+  {
+   "name": "mediterranean-lemon 390: five pages without horizontal scroll or broken image",
+   "ok": true
+  },
+  {
+   "name": "mediterranean-lemon: no console or page error",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie: envelope line",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie: schedule heading",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie: calendar line",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie: the menu",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie: RSVP heading, reply-by line and the form's button",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie: the tab title follows the menu's RSVP word",
+   "ok": true,
+   "detail": "Reply · Vivian & Charles"
+  },
+  {
+   "name": "art-deco-black-tie 390: five pages without horizontal scroll or broken image",
+   "ok": true
+  },
+  {
+   "name": "art-deco-black-tie: no console or page error",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn: envelope line",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn: schedule heading",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn: calendar line",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn: the menu",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn: RSVP heading, reply-by line and the form's button",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn: the tab title follows the menu's RSVP word",
+   "ok": true,
+   "detail": "Reply · Rosalind & Edward"
+  },
+  {
+   "name": "burgundy-velvet-autumn 390: five pages without horizontal scroll or broken image",
+   "ok": true
+  },
+  {
+   "name": "burgundy-velvet-autumn: no console or page error",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen: envelope line",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen: schedule heading",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen: calendar line",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen: the menu",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen: RSVP heading, reply-by line and the form's button",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen: the tab title follows the menu's RSVP word",
+   "ok": true,
+   "detail": "Reply · Noelle & James"
+  },
+  {
+   "name": "winter-evergreen 390: five pages without horizontal scroll or broken image",
+   "ok": true
+  },
+  {
+   "name": "winter-evergreen: no console or page error",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence: envelope line",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence: schedule heading",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence: calendar line",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence: the menu",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence: RSVP heading, reply-by line and the form's button",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence: the tab title follows the menu's RSVP word",
+   "ok": true,
+   "detail": "Reply · Amélie & Louis"
+  },
+  {
+   "name": "lavender-provence 390: five pages without horizontal scroll or broken image",
+   "ok": true
+  },
+  {
+   "name": "lavender-provence: no console or page error",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard: envelope line",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard: schedule heading",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard: calendar line",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard: the menu",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard: RSVP heading, reply-by line and the form's button",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard: the tab title follows the menu's RSVP word",
+   "ok": true,
+   "detail": "Reply · Giulia & Matteo"
+  },
+  {
+   "name": "tuscan-vineyard 390: five pages without horizontal scroll or broken image",
+   "ok": true
+  },
+  {
+   "name": "tuscan-vineyard: no console or page error",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta: envelope line",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta: schedule heading",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta: calendar line",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta: the menu",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta: RSVP heading, reply-by line and the form's button",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta: the tab title follows the menu's RSVP word",
+   "ok": true,
+   "detail": "Reply · Luna & River"
+  },
+  {
+   "name": "boho-pampas-terracotta 390: five pages without horizontal scroll or broken image",
+   "ok": true
+  },
+  {
+   "name": "boho-pampas-terracotta: no console or page error",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination: envelope line",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination: schedule heading",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination: calendar line",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination: the menu",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination: RSVP heading, reply-by line and the form's button",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination: the tab title follows the menu's RSVP word",
+   "ok": true,
+   "detail": "Reply · Maya & Kai"
+  },
+  {
+   "name": "tropical-destination 390: five pages without horizontal scroll or broken image",
+   "ok": true
+  },
+  {
+   "name": "tropical-destination: no console or page error",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook: envelope line",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook: schedule heading",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook: calendar line",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook: the menu",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook: RSVP heading, reply-by line and the form's button",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook: the tab title follows the menu's RSVP word",
+   "ok": true,
+   "detail": "Reply · Aurora & Rowan"
+  },
+  {
+   "name": "enchanted-forest-storybook 390: five pages without horizontal scroll or broken image",
+   "ok": true
+  },
+  {
+   "name": "enchanted-forest-storybook: no console or page error",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls: envelope line",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls: schedule heading",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls: calendar line",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls: the menu",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls: RSVP heading, reply-by line and the form's button",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls: the tab title follows the menu's RSVP word",
+   "ok": true,
+   "detail": "Reply · Charlotte & William"
+  },
+  {
+   "name": "ivory-lace-pearls 390: five pages without horizontal scroll or broken image",
+   "ok": true
+  },
+  {
+   "name": "ivory-lace-pearls: no console or page error",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring: envelope line",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring: schedule heading",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring: calendar line",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring: the menu",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring: RSVP heading, reply-by line and the form's button",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring: the tab title follows the menu's RSVP word",
+   "ok": true,
+   "detail": "Reply · Hana & Ethan"
+  },
+  {
+   "name": "cherry-blossom-spring 390: five pages without horizontal scroll or broken image",
+   "ok": true
+  },
+  {
+   "name": "cherry-blossom-spring: no console or page error",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn: envelope line",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn: schedule heading",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn: calendar line",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn: the menu",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn: RSVP heading, reply-by line and the form's button",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn: the tab title follows the menu's RSVP word",
+   "ok": true,
+   "detail": "Reply · Daisy & Wyatt"
+  },
+  {
+   "name": "sunflower-rustic-barn 390: five pages without horizontal scroll or broken image",
+   "ok": true
+  },
+  {
+   "name": "sunflower-rustic-barn: no console or page error",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate: envelope line",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate: schedule heading",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate: calendar line",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate: the menu",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate: RSVP heading, reply-by line and the form's button",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate: the tab title follows the menu's RSVP word",
+   "ok": true,
+   "detail": "Reply · Evelyn & Alexander"
+  },
+  {
+   "name": "emerald-gold-estate 390: five pages without horizontal scroll or broken image",
+   "ok": true
+  },
+  {
+   "name": "emerald-gold-estate: no console or page error",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum: envelope line",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum: schedule heading",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum: calendar line",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum: the menu",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum: RSVP heading, reply-by line and the form's button",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum: the tab title follows the menu's RSVP word",
+   "ok": true,
+   "detail": "Reply · Willow & Finn"
+  },
+  {
+   "name": "wildflower-meadow-vellum 390: five pages without horizontal scroll or broken image",
+   "ok": true
+  },
+  {
+   "name": "wildflower-meadow-vellum: no console or page error",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden: envelope line",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden: schedule heading",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden: calendar line",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden: the menu",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden: RSVP heading, reply-by line and the form's button",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden: the tab title follows the menu's RSVP word",
+   "ok": true,
+   "detail": "Reply · Celeste & Damien"
+  },
+  {
+   "name": "midnight-garden 390: five pages without horizontal scroll or broken image",
+   "ok": true
+  },
+  {
+   "name": "midnight-garden: no console or page error",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside: envelope line",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside: schedule heading",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside: calendar line",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside: the menu",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside: RSVP heading, reply-by line and the form's button",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside: the tab title follows the menu's RSVP word",
+   "ok": true,
+   "detail": "Reply · Marina & Oliver"
+  },
+  {
+   "name": "coastal-seaside 390: five pages without horizontal scroll or broken image",
+   "ok": true
+  },
+  {
+   "name": "coastal-seaside: no console or page error",
+   "ok": true
+  }
+ ]
+}

@@ -89,15 +89,16 @@ Diğer ölçümler:
 - **HTML:** iskelet ve betik eklenince 45 → 56 KB ham (9,5 → 11,3 KB gzip).
 
 ### Testler
-- `npm ci && rm -rf .next && npx tsc --noEmit && I18N_STRICT=1 npm test && npm run build`: merge sonrası sonuç aşağıda
-  (Günlük). Merge öncesi: 1653/1653 geçti, build + trace-check + js-budget geçti (`/edit/[slug]` 188,0/205).
+- `npm ci && rm -rf .next && npx tsc --noEmit && I18N_STRICT=1 npm test && npm run build`: `origin/claude/zealous-fermi-hy1o40`
+  merge edildikten sonra **yeşil**. 1653 testten 1650'si geçti; 3'ü build gerektirdiği için atlandı (G181 build testi ve iki
+  G173 testi). Build sonrası bu üçü de ayrıca koşuldu, 7/7 geçti. trace-check ve js-budget geçti (`/edit/[slug]` 188,0/205).
 - **Yeni `tests/g181-panel-split.test.ts`** (`npm test` içinde):
   - Her görünümün yalnız kendine ait bir metni (işaret) kendi modülünde ve kabuk modüllerinde yok.
   - `Panel.tsx` ve kabuk modülleri hiçbir görünüm modülünü statik import etmiyor; `lazy.tsx` her birini `dynamic()` ile yüklüyor.
   - İskelet her adresi biliyor.
   - Build varsa: `/edit/[slug]`'ın ilk yük dosyalarında (js-budget'ın saydığı runtime + giriş chunk'ları) kabuğun metni var,
     hiçbir görünümün işareti yok; her görünümün chunk'ı build'de ayrı duruyor.
-- **Yeni `tests/g181-browser.ts`** (build sonrası, 77/77):
+- **Yeni `tests/g181-browser.ts`** (build sonrası, merge sonrası 79/79):
   - Hiç yayınlanmamış ve yayında iki sitede `#home`, `#edit`, `#edit/photos`, `#edit/venue` (venue bölümüne kaydırılmış),
     `#guests`, `#guests/results`, `#guests/print`, `#share`, `#setup/1` doğru görünümü açıyor. Konsol ya da sayfa hatası yok
     (hydration uyuşmazlığı dahil); iskelet kalkıyor; adreste `?view` kalmıyor.
@@ -106,11 +107,20 @@ Diğer ölçümler:
     taslak Home'u açıyor.
   - İlk yükte Share / Guests / editör / yardım kodu yok; boşta hepsi iniyor. Share / Guests / Edit / Our Story'ye dokununca
     görünüm "loading" karesi olmadan geliyor.
+  - Day & place'te "More options" bölümü, derin linkle açıldığında da panel içinden açıldığındaki gibi başlıyor. Bu bölüm
+    telefonun saat dilimine bağlı. Sayfa sunucuda çizildiğinde ilk başta açık geliyordu; g100 bunu yakaladı ve düzeltildi:
+    bağlama `settled` eklendi.
   - Ekran: `previews/g181/boot_share_390.png`.
-- **Panel tarayıcı testleri:** sonuçlar Günlük'te. `panel-browser` (2 FAIL) ve `claim-browser` (3 FAIL) taban commit'te de
-  birebir aynı başarısız. Bu iş onları değiştirmedi:
-  - panel-browser: "preview: 390 px wide" 384 px veriyor; Review metninde "Details" alt başlığı tekrarlanıyor.
-  - claim-browser: aynı siparişle ikinci başvuru mesajında `[role="status"]` 2 öğe buluyor.
+- **Panel tarayıcı testleri:**
+  - Tam geçenler: g076, g068, g075, g144, g128, g051. Merge sonrası g100 52/52 ve g145 39/39. g145'in bir koşuda tek başarısızlığı
+    vardı (admin sayfasında `<title>`, axe); tekrarda geçti, admin'e dokunulmadı.
+  - Şu başarısızlıklar taban commit 572fafc0'da da **birebir aynı**; bu iş değiştirmedi:
+    - panel-browser 2: önizleme 384 px; Review'da "Details" tekrarı.
+    - claim-browser 3: `[role="status"]` 2 öğe.
+    - g060 4: QR çözümü, Details anahtarları, Share açılır bölümleri, 20 px girişler.
+    - g121 3: Share açılır bölümleri; satış sitesi zaman aşımı.
+    - g069 1: "30/31 gün", tarih hesabı.
+    - g055 2: demo kart boyu.
 - **`tests/g173-browser.ts`:** panel koşusu `#setup/1` … `#share`, LCP ≤ 2,5 s ve CLS 0 koşullarında 12/12 geçti (iki koşu,
   `--no-a11y`). Ölçüme yeni "doğru görünüm" alanı eklendi. Süreler artık sekmenin ilk navigasyonundan sayılıyor
   (`sessionStorage` + `timeOrigin` farkı).
@@ -125,3 +135,4 @@ Diğer ölçümler:
 
 ## Günlük
 - 2026-10-18 claude-G181: bölme + derin link (iskelet → `?view=` ile sunucu çizimi), bütçe 205, testler → inceleme
+- 2026-10-18 claude-G181: `origin/claude/zealous-fermi-hy1o40` merge edildi; tam zincir, g181 (79/79), g100 ve g145 yeniden yeşil
