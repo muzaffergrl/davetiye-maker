@@ -231,7 +231,7 @@ test('next.config: the variant rewrite (afterFiles), the headers of the static c
   assert.ok(ex['**'].includes('./public/themes/**'));
   const pkg = JSON.parse(readFileSync(path.join(PLATFORM_ROOT, 'package.json'), 'utf8')) as { scripts: Record<string, string> };
   assert.equal(pkg.scripts.prebuild, 'node scripts/theme-assets.cjs', 'npm run build (and Vercel) copies first');
-  assert.equal(pkg.scripts.postbuild, 'node scripts/trace-check.cjs');
+  assert.match(pkg.scripts.postbuild, /^node scripts\/trace-check\.cjs(?: && |$)/, 'trace-check first (G173 adds js-budget after it)');
   const ignored = (file: string) => readFileSync(file, 'utf8').split('\n').map((l) => l.trim());
   assert.ok(ignored(path.join(PLATFORM_ROOT, '..', '.gitignore')).includes('platform/public/themes/'));
   assert.ok(ignored(path.join(PLATFORM_ROOT, '.vercelignore')).includes('public/themes'));

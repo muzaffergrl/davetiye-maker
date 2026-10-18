@@ -444,9 +444,16 @@ export function SampleDateGate({
   );
 }
 
-/** The opening page of the real theme (envelope, book …), scaled down (step 1 only). */
+/**
+ * The opening page of the real theme (envelope, book …), scaled down (step 1 only).
+ * G173: `src` is set only after hydration. The server renders the default route (setup) for every panel address, so with
+ * the src in the HTML every view (#home, #share …) downloaded the theme's first view (~870 KB on a phone) while the panel
+ * JS was still loading; now another view replaces setup before the frame ever loads, and on step 1 it loads after the JS.
+ */
 function PreviewMini({ slug, previewToken, version: raw, title }: { slug: string; previewToken: string; version: number; title: string }) {
   const ref = useRef<HTMLIFrameElement>(null);
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
   // Reload once typing has settled, not after every save (G060-fix).
   const version = useSettledVersion(raw);
   const first = useRef(version);
@@ -461,7 +468,7 @@ function PreviewMini({ slug, previewToken, version: raw, title }: { slug: string
   return (
     <iframe
       ref={ref}
-      src={`/${slug}?preview=${encodeURIComponent(previewToken)}`}
+      src={hydrated ? `/${slug}?preview=${encodeURIComponent(previewToken)}` : undefined}
       title={title}
       tabIndex={-1}
       aria-hidden="true"
