@@ -5,19 +5,27 @@ diskte var, hangileri eksik. Prompt metni ve kayıt yolu ilgili `GPT_PROMPTS.md`
 bu liste kendiliğinden kısalır. Sonrasında ilgili temanın `build_images.py` / `build-print-assets.ts` komutu çalıştırılır
 (prompt dosyasında yazar).
 
+## ChatGPT'de elle üretim (G179)
+
+Eksik görsellerin sıralı, kendi başına yapıştırılabilir prompt listesi: `docs/27_GPT_IS_LISTESI.html` (tarayıcıda;
+kopyalama düğmeleri, bitti işareti, süzgeç) ve `docs/27_GPT_IS_LISTESI.md`. İkisi bu komutla birlikte yeniden yazılır.
+Her görsel listedeki **indirme adıyla** kaydedilirse `python3 tools/gpt_yerlestir.py --klasor <klasör>` hepsini
+adından hedefe eşler (harita gerekmez; bilinmeyen adlar listelenir, tahmin edilmez).
+
 ## GPT görselleri gelince (G176)
 
-Gelen dosyalar (rastgele indirme adlarıyla) tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
+Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
 
-1. Claude görsellere bakar, `{"<gelen dosya>": "<aşağıdaki listeden hedef yol>"}` haritasını yazar (JSON).
-2. `python3 tools/gpt_yerlestir.py --eslestir harita.json` — KURU: her hedefin bir prompt'ta istendiğini, oran /
+1. İndirme adıyla geldiyse `--klasor <klasör>`; rastgele adlarla geldiyse Claude görsellere bakar,
+   `{"<gelen dosya>": "<aşağıdaki listeden hedef yol>"}` haritasını yazar (JSON) ve `--eslestir harita.json` verir.
+2. `python3 tools/gpt_yerlestir.py --klasor <klasör>` (ya da `--eslestir harita.json`) — KURU: her hedefin bir prompt'ta istendiğini, oran /
    şeffaflık / `#00FF00` pencere şartlarını ve var olan farklı dosyanın ezilmediğini denetler; tek red = hiçbir dosya yazılmaz.
 3. Aynı komut `--uygula` ile: kopyalar, sonra her etkilenen tasarımda sırayla `build_images.py` → `build-print-assets.ts`
    → palet (`recolor_parts.py build/check`) → img/ referans + manifest denetimi → (`--theme-check`, `--ilan`: üretim
    build'i ister) → `etsy_upload.py`; en sonda bu dosyayı yeniden yazar. Tasarım × adım tablosu ve live engelleri basılır.
    Yerleştirmeden yalnız adımlar: `--koleksiyon NN|all`. Hiçbir tasarımı live yapmaz, yayınlamaz, Etsy'ye göndermez.
 
-**Toplam eksik: 325**
+**Toplam eksik: 334**
 
 | Prompt dosyası | Bölüm | Var | Eksik |
 |---|---|---|---|
@@ -58,23 +66,23 @@ Gelen dosyalar (rastgele indirme adlarıyla) tek komutla yerleşir ve etkilenen 
 | `collections/25_Orient_Express_Voyage/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Amelia & Rafael; gerçek kişiye benzemesin) | 0 | 5 |
 | `collections/25_Orient_Express_Voyage/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi, yazı yok) | 0 | 2 |
 | `collections/25_Orient_Express_Voyage/assets/gpt/GPT_PROMPTS.md` | PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) | 0 | 5 |
-| `collections/26_Kintsugi_Washi/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 10 |
+| `collections/26_Kintsugi_Washi/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 12 |
 | `collections/26_Kintsugi_Washi/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Naomi & Kai; gerçek kişiye benzemesin) | 0 | 5 |
 | `collections/26_Kintsugi_Washi/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5) | 0 | 2 |
 | `collections/26_Kintsugi_Washi/assets/gpt/GPT_PROMPTS.md` | PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) | 0 | 5 |
-| `collections/27_Riad_Lantern_Nights/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — website katmanları (YAZI YOK) | 0 | 14 |
+| `collections/27_Riad_Lantern_Nights/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — website katmanları (YAZI YOK) | 0 | 18 |
 | `collections/27_Riad_Lantern_Nights/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — örnek fotoğraflar (kurgu çift: Leila & Adrian) | 0 | 5 |
 | `collections/27_Riad_Lantern_Nights/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK) | 0 | 2 |
 | `collections/27_Riad_Lantern_Nights/assets/gpt/GPT_PROMPTS.md` | PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) | 0 | 5 |
 | `collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 14 |
 | `collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Camille & Oliver; gerçek kişiye benzemesin) | 0 | 5 |
-| `collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK) | 0 | 3 |
+| `collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK) | 0 | 2 |
 | `collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md` | PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) | 0 | 5 |
-| `collections/29_Celestial_Observatory/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 12 |
+| `collections/29_Celestial_Observatory/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 14 |
 | `collections/29_Celestial_Observatory/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin) | 0 | 5 |
 | `collections/29_Celestial_Observatory/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5) | 0 | 2 |
 | `collections/29_Celestial_Observatory/assets/gpt/GPT_PROMPTS.md` | PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) | 0 | 5 |
-| `collections/30_Azulejo_Mosaic/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 11 |
+| `collections/30_Azulejo_Mosaic/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 12 |
 | `collections/30_Azulejo_Mosaic/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin) | 0 | 5 |
 | `collections/30_Azulejo_Mosaic/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5, 300 ppi) | 0 | 2 |
 | `collections/30_Azulejo_Mosaic/assets/gpt/GPT_PROMPTS.md` | PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) | 0 | 5 |
@@ -82,14 +90,14 @@ Gelen dosyalar (rastgele indirme adlarıyla) tek komutla yerleşir ve etkilenen 
 | `collections/31_Sky_Lantern_Festival/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel) | 0 | 5 |
 | `collections/31_Sky_Lantern_Festival/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK) | 0 | 2 |
 | `collections/31_Sky_Lantern_Festival/assets/gpt/GPT_PROMPTS.md` | PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) | 0 | 5 |
-| `collections/32_Music_Box_Ballerina/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 13 |
+| `collections/32_Music_Box_Ballerina/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 15 |
 | `collections/32_Music_Box_Ballerina/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin) | 0 | 5 |
 | `collections/32_Music_Box_Ballerina/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK) | 0 | 2 |
 | `collections/32_Music_Box_Ballerina/assets/gpt/GPT_PROMPTS.md` | PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) | 0 | 5 |
 | `collections/16_Sunflower_Rustic/variants/GPT_PROMPTS.md` | V02_navy_sunflower · Navy & Sunflower (`navy-sunflower`) | 0 | 5 |
 | `collections/16_Sunflower_Rustic/variants/GPT_PROMPTS.md` | V03_burgundy_sunflower · Burgundy & Sunflower (`burgundy-sunflower`) | 0 | 5 |
 | `collections/16_Sunflower_Rustic/variants/GPT_PROMPTS.md` | V04_dusty_blue_sunflower · Dusty Blue & Sunflower (`dusty-blue-sunflower`) | 0 | 5 |
-| `collections/21_Crimson_Rose_Atelier/variants/GPT_PROMPTS.md` | İstem — fildişi güller (yalnız istenirse) | 0 | 2 |
+| `collections/21_Crimson_Rose_Atelier/variants/GPT_PROMPTS.md` | İstem — fildişi güller (yalnız istenirse) | 0 | 1 |
 
 ## Eksik dosyalar
 
@@ -314,6 +322,8 @@ Gelen dosyalar (rastgele indirme adlarıyla) tek komutla yerleşir ve etkilenen 
 - `collections/26_Kintsugi_Washi/assets/gpt/parts/ink_bleed.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/26_Kintsugi_Washi/assets/gpt/parts/sumi_stroke.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/26_Kintsugi_Washi/assets/gpt/parts/gold_flake_1.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/26_Kintsugi_Washi/assets/gpt/parts/gold_flake_2.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/26_Kintsugi_Washi/assets/gpt/parts/gold_flake_3.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/26_Kintsugi_Washi/assets/gpt/parts/obi_band.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/26_Kintsugi_Washi/assets/gpt/parts/card_small.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/26_Kintsugi_Washi/assets/gpt/parts/web_hero.png` — PAKET 5 — Website katmanları (YAZI YOK)
@@ -340,9 +350,13 @@ Gelen dosyalar (rastgele indirme adlarıyla) tek komutla yerleşir ve etkilenen 
 - `collections/27_Riad_Lantern_Nights/assets/gpt/parts/bg_page.png` — PAKET 5 — website katmanları (YAZI YOK)
 - `collections/27_Riad_Lantern_Nights/assets/gpt/parts/bg_tile.png` — PAKET 5 — website katmanları (YAZI YOK)
 - `collections/27_Riad_Lantern_Nights/assets/gpt/parts/tile_1.png` — PAKET 5 — website katmanları (YAZI YOK)
+- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/tile_2.png` — PAKET 5 — website katmanları (YAZI YOK)
+- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/tile_3.png` — PAKET 5 — website katmanları (YAZI YOK)
+- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/tile_4.png` — PAKET 5 — website katmanları (YAZI YOK)
 - `collections/27_Riad_Lantern_Nights/assets/gpt/parts/frame_arch.png` — PAKET 5 — website katmanları (YAZI YOK)
 - `collections/27_Riad_Lantern_Nights/assets/gpt/parts/frame_landscape.png` — PAKET 5 — website katmanları (YAZI YOK)
 - `collections/27_Riad_Lantern_Nights/assets/gpt/parts/bougainvillea_tl.png` — PAKET 5 — website katmanları (YAZI YOK)
+- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/bougainvillea_br.png` — PAKET 5 — website katmanları (YAZI YOK)
 - `collections/27_Riad_Lantern_Nights/assets/gpt/parts/divider.png` — PAKET 5 — website katmanları (YAZI YOK)
 - `collections/27_Riad_Lantern_Nights/assets/gpt/parts/accent_1.png` — PAKET 5 — website katmanları (YAZI YOK)
 - `collections/27_Riad_Lantern_Nights/assets/gpt/parts/web_hero.png` — PAKET 5 — website katmanları (YAZI YOK)
@@ -382,7 +396,6 @@ Gelen dosyalar (rastgele indirme adlarıyla) tek komutla yerleşir ve etkilenen 
 - `collections/28_Maison_Patisserie/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Camille & Oliver; gerçek kişiye benzemesin)
 - `collections/28_Maison_Patisserie/assets/gpt/print/invitation_front.png` — PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK)
 - `collections/28_Maison_Patisserie/assets/gpt/print/invitation_back.png` — PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK)
-- `collections/28_Maison_Patisserie/assets/gpt/public/print/maison-patisserie/front.webp` — PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK)
 - `collections/28_Maison_Patisserie/assets/gpt/mockups/cover_hand.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/28_Maison_Patisserie/assets/gpt/mockups/three_phones.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/28_Maison_Patisserie/assets/gpt/mockups/laptop_phone.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
@@ -396,6 +409,8 @@ Gelen dosyalar (rastgele indirme adlarıyla) tek komutla yerleşir ve etkilenen 
 - `collections/29_Celestial_Observatory/assets/gpt/parts/dome.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/29_Celestial_Observatory/assets/gpt/parts/shutter.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/29_Celestial_Observatory/assets/gpt/parts/star_1.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/29_Celestial_Observatory/assets/gpt/parts/star_2.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/29_Celestial_Observatory/assets/gpt/parts/star_3.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/29_Celestial_Observatory/assets/gpt/parts/star_chart.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/29_Celestial_Observatory/assets/gpt/parts/planisphere_ring.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/29_Celestial_Observatory/assets/gpt/parts/astrolabe.png` — PAKET 5 — Website katmanları (YAZI YOK)
@@ -428,6 +443,7 @@ Gelen dosyalar (rastgele indirme adlarıyla) tek komutla yerleşir ve etkilenen 
 - `collections/30_Azulejo_Mosaic/assets/gpt/parts/card_paper.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/30_Azulejo_Mosaic/assets/gpt/parts/frieze.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/30_Azulejo_Mosaic/assets/gpt/parts/pot_left.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/30_Azulejo_Mosaic/assets/gpt/parts/pot_right.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/30_Azulejo_Mosaic/assets/gpt/parts/web_hero.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/30_Azulejo_Mosaic/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin)
 - `collections/30_Azulejo_Mosaic/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin)
@@ -481,6 +497,8 @@ Gelen dosyalar (rastgele indirme adlarıyla) tek komutla yerleşir ve etkilenen 
 - `collections/32_Music_Box_Ballerina/assets/gpt/parts/dancer_turn_b.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/32_Music_Box_Ballerina/assets/gpt/parts/card_small.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/32_Music_Box_Ballerina/assets/gpt/parts/petal_1.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/32_Music_Box_Ballerina/assets/gpt/parts/petal_2.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/32_Music_Box_Ballerina/assets/gpt/parts/petal_3.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/32_Music_Box_Ballerina/assets/gpt/parts/bg_page.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/32_Music_Box_Ballerina/assets/gpt/parts/satin_bg.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/32_Music_Box_Ballerina/assets/gpt/parts/web_hero.png` — PAKET 5 — Website katmanları (YAZI YOK)
@@ -518,4 +536,3 @@ Gelen dosyalar (rastgele indirme adlarıyla) tek komutla yerleşir ve etkilenen 
 ### `collections/21_Crimson_Rose_Atelier/variants/GPT_PROMPTS.md`
 
 - `collections/21_Crimson_Rose_Atelier/variants/V07_ivory_rose/gpt/rose-branch.png` — İstem — fildişi güller (yalnız istenirse)
-- `collections/21_Crimson_Rose_Atelier/variants/platform/themes/crimson-rose-atelier/img/variants/ivory-rose/rose-branch.webp` — İstem — fildişi güller (yalnız istenirse)
