@@ -426,7 +426,7 @@ def fix_contrast(text_rgb, ground_rgb, need):
     darker = luminance(ground_rgb) > 0.18
     for _ in range(60):
         lab = lab + np.array([-0.01 if darker else 0.01, 0, 0])
-        cand = oklab_to_rgb(lab)
+        cand = np.round(oklab_to_rgb(lab))  # G177: judge the colour as written (#RRGGBB), not the float before rounding
         if contrast(cand, ground_rgb) >= need:
             return cand, True
     return oklab_to_rgb(lab), True

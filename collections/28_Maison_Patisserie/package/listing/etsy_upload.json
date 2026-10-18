@@ -270,5 +270,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Maison Pâtisserie)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=maison-patisserie"
+      },
+      {
+        "name": "Lavender & Rose",
+        "variant": "lavender-macaron",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=maison-patisserie&variant=lavender-macaron"
+      },
+      {
+        "name": "Blush & Pistachio",
+        "variant": "blush-pistachio",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=maison-patisserie&variant=blush-pistachio"
+      },
+      {
+        "name": "Mint & Mocha",
+        "variant": "mint-mocha",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=maison-patisserie&variant=mint-mocha"
+      },
+      {
+        "name": "Lemon & Raspberry",
+        "variant": "lemon-raspberry",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=maison-patisserie&variant=lemon-raspberry"
+      },
+      {
+        "name": "Powder Blue & Rose",
+        "variant": "powder-blue",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=maison-patisserie&variant=powder-blue"
+      }
+    ],
+    "offered": [
+      "Original (Maison Pâtisserie)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }
