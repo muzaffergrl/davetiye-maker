@@ -1191,7 +1191,7 @@ for (const [id, preview] of Object.entries(PREVIEW_DESIGN_COPY)) {
 function previewDesignCopy(d: DesignCommerce): DesignCopy | undefined {
   const full = DESIGN_COPY[d.id];
   if (!PREVIEW_DESIGN_COPY[d.id] || !full) return undefined;
-  return {...full, metaDescription: msg(d.name + ' wedding website. Explore the envelope opening, invitation, photo story, details and RSVP.'), intro: msg(full.intro.replace(/[.!?]+$/, '') + '. Explore the complete demo; Etsy availability is pending.')};
+  return {...full, metaDescription: msg(d.name + ' wedding website. Explore the envelope opening, invitation, photo story, details and RSVP. Customize photos and collect guest replies.'), intro: msg(full.intro.replace(/[.!?]+$/, '') + '. Explore the complete demo; Etsy availability is pending.')};
 }
 
 export interface Design extends DesignCommerce {
