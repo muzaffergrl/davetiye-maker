@@ -1,0 +1,34 @@
+{
+  "id": "riad-lantern-nights",
+  "name": "Riad Lantern Nights",
+  "motif": "Deep teal, antique brass, ivory plaster, tiny cobalt-and-saffron Moroccan mosaic accents, one small brass lantern and restrained peach roses",
+  "shape": "VERTICAL HORSESHOE ARCH Moroccan riad window photo frame, a large horseshoe arch inner photo window",
+  "layout": "riad",
+  "motion": "lantern-light",
+  "colors": [
+    "#093c43",
+    "#f8ecdb",
+    "#c69b51"
+  ],
+  "frameSize": [
+    1024,
+    1536
+  ],
+  "window": [
+    154,
+    241,
+    877,
+    1378
+  ],
+  "windowPercent": [
+    15.03906,
+    15.6901,
+    70.60547,
+    74.02344
+  ],
+  "photoAspect": "723/1137",
+  "paperSize": [
+    978,
+    1536
+  ]
+}

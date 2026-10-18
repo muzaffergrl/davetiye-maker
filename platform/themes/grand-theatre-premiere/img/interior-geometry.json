@@ -1,0 +1,34 @@
+{
+  "id": "grand-theatre-premiere",
+  "name": "Grand Theatre Premiere",
+  "motif": "Peacock teal, antique brass, burgundy velvet curtain swags, small ivory and burgundy roses, restrained theatre ornament",
+  "shape": "wide rectangular vintage THEATRE TICKET frame with clipped scallop corners, landscape inner photo window",
+  "layout": "theatre",
+  "motion": "curtain-reveal",
+  "colors": [
+    "#082e36",
+    "#faf0df",
+    "#c3a15b"
+  ],
+  "frameSize": [
+    1672,
+    941
+  ],
+  "window": [
+    233,
+    222,
+    1439,
+    712
+  ],
+  "windowPercent": [
+    13.93541,
+    23.59192,
+    72.12919,
+    52.07226
+  ],
+  "photoAspect": "1206/490",
+  "paperSize": [
+    965,
+    1485
+  ]
+}

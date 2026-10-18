@@ -1,0 +1,29 @@
+{
+  "id": "celestial-observatory",
+  "name": "Celestial Observatory",
+  "layout": "observatory",
+  "motion": "orbit-reveal",
+  "fonts": [
+    "Pinyon Script",
+    "Cinzel",
+    "Cormorant Garamond"
+  ],
+  "frameShape": "CIRCULAR ASTROLABE portrait frame with a few thin brass concentric rings and tiny star motifs, CIRCULAR inner photo window",
+  "photoWindow": [
+    230,
+    249,
+    1019,
+    1022
+  ],
+  "photoCanvas": [
+    1254,
+    1254
+  ],
+  "cover": "unchanged",
+  "pages": {
+    "home": "A midnight observatory with a circular brass astrolabe portrait and an ivory star-chart invitation.",
+    "story": "Circular astrolabe portraits trace an asymmetric constellation across the page, each appearing in its own orbit.",
+    "details": "An observatory programme with measured celestial chart typography and circular venue framing.",
+    "rsvp": "A midnight-and-brass star-chart reply suite."
+  }
+}

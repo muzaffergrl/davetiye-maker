@@ -2174,5 +2174,50 @@
   },
   "favicon": {
     "file": "favicon.png"
+  },
+  "interior": {
+    "layout": "observatory",
+    "motion": "orbit-reveal",
+    "frame": {
+      "files": [
+        {
+          "file": "interior-frame-480.webp",
+          "w": 480,
+          "bytes": 83228
+        },
+        {
+          "file": "interior-frame-800.webp",
+          "w": 800,
+          "bytes": 202980
+        }
+      ],
+      "window": [
+        230,
+        249,
+        1019,
+        1022
+      ],
+      "canvas": [
+        1254,
+        1254
+      ]
+    },
+    "paper": {
+      "files": [
+        {
+          "file": "ph_interior-480.webp",
+          "w": 480,
+          "bytes": 68388
+        },
+        {
+          "file": "ph_interior-800.webp",
+          "w": 800,
+          "bytes": 160994
+        }
+      ]
+    },
+    "mask": {
+      "file": "interior-photo-mask.png"
+    }
   }
 }

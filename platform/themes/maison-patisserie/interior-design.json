@@ -1,0 +1,29 @@
+{
+  "id": "maison-patisserie",
+  "name": "Maison Pâtisserie",
+  "layout": "patisserie",
+  "motion": "ribbon-sweep",
+  "fonts": [
+    "Parisienne",
+    "Playfair Display",
+    "Lora"
+  ],
+  "frameShape": "oval SCALLOPED PORCELAIN patisserie plate photo frame, oval inner photo window, not an arch",
+  "photoWindow": [
+    160,
+    294,
+    864,
+    1244
+  ],
+  "photoCanvas": [
+    1024,
+    1536
+  ],
+  "cover": "unchanged",
+  "pages": {
+    "home": "A pistachio-and-strawberry salon with a porcelain portrait and scalloped menu invitation.",
+    "story": "Scalloped porcelain photo plates arranged as a Parisian scrapbook, with alternating caption positions.",
+    "details": "A Parisian menu-style programme and porcelain-framed venue photograph.",
+    "rsvp": "A cream patisserie reply menu with pink ribbon and pistachio details."
+  }
+}

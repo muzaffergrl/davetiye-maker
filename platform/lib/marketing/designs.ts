@@ -1188,6 +1188,155 @@ for (const [id, preview] of Object.entries(PREVIEW_DESIGN_COPY)) {
   full.palette = [{name: msg('Ivory paper'), hex: '#F5EEE2'}, {name: msg('Gold'), hex: '#B99459'}, ...full.palette.slice(0, 2)];
 }
 
+// Interior art/layout/motion differ for these eleven previews; envelope copy and other products are unchanged.
+const UNIQUE_INTERIORS: Record<string,{fonts:string[];home:string;story:string;details:string;rsvp:string}> = {
+  "nocturne-lake-estate": {
+    "fonts": [
+      "Cormorant Garamond",
+      "Great Vibes",
+      "Lora",
+      "Italiana"
+    ],
+    "home": "An Italian lakeside terrace: panoramic portrait, refined names and candlelit ivory invitation.",
+    "story": "Panoramic villa frames: a full-width opening photograph and two intimate moments beneath it.",
+    "details": "A villa dinner programme with generous time columns and a panoramic venue photograph.",
+    "rsvp": "A charcoal-and-champagne reply suite with Italian botanical stationery."
+  },
+  "velvet-jewel-box": {
+    "fonts": [
+      "Cormorant Garamond",
+      "Great Vibes",
+      "Lora",
+      "Pinyon Script",
+      "Cormorant Infant"
+    ],
+    "home": "An aubergine velvet jewellery suite with an oval pearl portrait and a silk-lined invitation.",
+    "story": "Three oval pearl-set locket portraits, alternating with handwritten captions like keepsakes in a jewellery case.",
+    "details": "Pearl-edged keepsake panels and an intimate evening programme.",
+    "rsvp": "A velvet-and-rose-gold reply card and silk-lined response form."
+  },
+  "grand-theatre-premiere": {
+    "fonts": [
+      "Cormorant Garamond",
+      "Great Vibes",
+      "Lora",
+      "Italianno",
+      "Bodoni Moda"
+    ],
+    "home": "A peacock-teal theatre premiere with a ticket-shaped portrait and an ivory playbill invitation.",
+    "story": "Landscape theatre-ticket photographs presented as three acts, with bold playbill captions.",
+    "details": "A playbill programme arranged in paired acts with a stage-like venue feature.",
+    "rsvp": "A premiere reply suite, framed by burgundy curtain details and antique brass."
+  },
+  "orient-express-voyage": {
+    "fonts": [
+      "Cormorant Garamond",
+      "Great Vibes",
+      "Lora",
+      "Allura",
+      "Cinzel",
+      "Libre Baskerville"
+    ],
+    "home": "A first-class travel invitation with a brass carriage-window portrait and cream ticket stationery.",
+    "story": "A horizontal carriage-window photo journey with captions under each panoramic view.",
+    "details": "A rail-journey itinerary with paired time and destination columns.",
+    "rsvp": "A green-and-brass travel-ticket reply suite."
+  },
+  "kintsugi-washi": {
+    "fonts": [
+      "Cormorant Garamond",
+      "Great Vibes",
+      "Lora",
+      "Shippori Mincho"
+    ],
+    "home": "An indigo-and-ivory washi composition with square kintsugi photo mounts and torn-paper stationery.",
+    "story": "Asymmetric washi photo mounts paired with captions, alternating gently from side to side.",
+    "details": "A quiet folded-paper programme with gold-repaired margins and a square venue mount.",
+    "rsvp": "A handmade washi reply letter with indigo type and fine kintsugi details."
+  },
+  "riad-lantern-nights": {
+    "fonts": [
+      "Cormorant Garamond",
+      "Great Vibes",
+      "Lora",
+      "Italianno",
+      "Amiri"
+    ],
+    "home": "A Moroccan courtyard suite with an arched portrait, brass lantern details and mosaic-edged stationery.",
+    "story": "A riad arcade of horseshoe-arch portraits: one central arch followed by two smaller windows.",
+    "details": "A courtyard evening programme beneath an ivory plaster arch, with teal and saffron details.",
+    "rsvp": "An arched riad reply card and a lantern-lit response form."
+  },
+  "maison-patisserie": {
+    "fonts": [
+      "Cormorant Garamond",
+      "Great Vibes",
+      "Lora",
+      "Parisienne",
+      "Playfair Display"
+    ],
+    "home": "A pistachio-and-strawberry salon with a porcelain portrait and scalloped menu invitation.",
+    "story": "Scalloped porcelain photo plates arranged as a Parisian scrapbook, with alternating caption positions.",
+    "details": "A Parisian menu-style programme and porcelain-framed venue photograph.",
+    "rsvp": "A cream patisserie reply menu with pink ribbon and pistachio details."
+  },
+  "celestial-observatory": {
+    "fonts": [
+      "Cormorant Garamond",
+      "Great Vibes",
+      "Lora",
+      "Pinyon Script",
+      "Cinzel"
+    ],
+    "home": "A midnight observatory with a circular brass astrolabe portrait and an ivory star-chart invitation.",
+    "story": "Circular astrolabe portraits trace an asymmetric constellation across the page, each appearing in its own orbit.",
+    "details": "An observatory programme with measured celestial chart typography and circular venue framing.",
+    "rsvp": "A midnight-and-brass star-chart reply suite."
+  },
+  "azulejo-mosaic": {
+    "fonts": [
+      "Cormorant Garamond",
+      "Great Vibes",
+      "Lora",
+      "Italianno"
+    ],
+    "home": "A Portuguese porcelain suite with a cobalt tile portrait and matching azulejo stationery.",
+    "story": "Square azulejo photo tiles form a porcelain mosaic gallery with cobalt captions.",
+    "details": "A tile-framed celebration programme with terracotta time accents and a square venue panel.",
+    "rsvp": "A cobalt-and-porcelain reply panel with terracotta accents."
+  },
+  "sky-lantern-festival": {
+    "fonts": [
+      "Cormorant Garamond",
+      "Great Vibes",
+      "Lora",
+      "Allura"
+    ],
+    "home": "A twilight lantern suite with a floating paper-window portrait and warm amber invitation.",
+    "story": "Tall lantern-window photographs float along a staggered twilight trail with alternating captions.",
+    "details": "A lantern-paper evening programme with softly spaced time markers.",
+    "rsvp": "A warm lantern-paper reply letter against dusky plum."
+  },
+  "music-box-ballerina": {
+    "fonts": [
+      "Cormorant Garamond",
+      "Great Vibes",
+      "Lora",
+      "Cormorant Infant"
+    ],
+    "home": "A ballet keepsake suite with an oval cameo portrait, champagne satin and blush silk stationery.",
+    "story": "Oval cameo photographs sit like pages of a ballet keepsake album, with a larger central portrait.",
+    "details": "A music-box recital programme with paired entries and porcelain cameo venue framing.",
+    "rsvp": "A blush satin-lined reply suite with gold cameo ornament."
+  }
+};
+for(const [id,p]of Object.entries(UNIQUE_INTERIORS)){
+ const full=DESIGN_COPY[id];
+ full.fonts=[...p.fonts];
+ full.intro=msg(p.home);
+ full.pages={home:msg(p.home),story:msg(p.story),details:msg(p.details),rsvp:msg(p.rsvp)};
+}
+
 function previewDesignCopy(d: DesignCommerce): DesignCopy | undefined {
   const full = DESIGN_COPY[d.id];
   if (!PREVIEW_DESIGN_COPY[d.id] || !full) return undefined;
@@ -1344,4 +1493,5 @@ export function styleFilterChips(designs: readonly Pick<Design, 'id'>[]): Array<
     (c) => c.count > 0,
   );
 }
+
 

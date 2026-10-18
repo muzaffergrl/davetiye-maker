@@ -1,0 +1,34 @@
+{
+  "id": "sky-lantern-festival",
+  "name": "Sky Lantern Festival",
+  "motif": "Dusky plum silk, warm amber lantern paper, quiet apricot blossom, a little antique gold lantern finial, twilight wedding",
+  "shape": "TALL VERTICAL ROUND CORNER lantern paper photo frame with delicate curved ribs along its outer border, inner photo window a tall rounded rectangle",
+  "layout": "lantern",
+  "motion": "lantern-rise",
+  "colors": [
+    "#392b45",
+    "#fff0db",
+    "#d4a05a"
+  ],
+  "frameSize": [
+    1024,
+    1536
+  ],
+  "window": [
+    226,
+    240,
+    796,
+    1292
+  ],
+  "windowPercent": [
+    22.07031,
+    15.625,
+    55.66406,
+    68.48958
+  ],
+  "photoAspect": "570/1052",
+  "paperSize": [
+    998,
+    1533
+  ]
+}

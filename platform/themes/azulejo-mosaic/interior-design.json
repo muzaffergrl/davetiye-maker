@@ -1,0 +1,29 @@
+{
+  "id": "azulejo-mosaic",
+  "name": "Azulejo Mosaic",
+  "layout": "mosaic",
+  "motion": "tile-stagger",
+  "fonts": [
+    "Italianno",
+    "Cormorant Garamond",
+    "Lora"
+  ],
+  "frameShape": "SQUARE PORTUGUESE TILE photo frame, large square inner photo window with straight edges",
+  "photoWindow": [
+    249,
+    251,
+    1005,
+    988
+  ],
+  "photoCanvas": [
+    1254,
+    1254
+  ],
+  "cover": "unchanged",
+  "pages": {
+    "home": "A Portuguese porcelain suite with a cobalt tile portrait and matching azulejo stationery.",
+    "story": "Square azulejo photo tiles form a porcelain mosaic gallery with cobalt captions.",
+    "details": "A tile-framed celebration programme with terracotta time accents and a square venue panel.",
+    "rsvp": "A cobalt-and-porcelain reply panel with terracotta accents."
+  }
+}

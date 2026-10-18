@@ -18,22 +18,22 @@
     "story_1": {
       "label": "Our Story photo 1",
       "source": "media.memory_photos.0",
-      "aspect": "626/868"
+      "aspect": "691/928"
     },
     "story_2": {
       "label": "Our Story photo 2",
       "source": "media.memory_photos.1",
-      "aspect": "626/868"
+      "aspect": "691/928"
     },
     "story_3": {
       "label": "Our Story photo 3",
       "source": "media.memory_photos.2",
-      "aspect": "626/868"
+      "aspect": "691/928"
     },
     "venue": {
       "label": "Venue photo",
       "source": "media.venue_image",
-      "aspect": "1172/681"
+      "aspect": "691/928"
     }
   },
   "copy": {

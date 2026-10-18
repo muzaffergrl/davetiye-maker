@@ -2174,5 +2174,50 @@
   },
   "favicon": {
     "file": "favicon.png"
+  },
+  "interior": {
+    "layout": "mosaic",
+    "motion": "tile-stagger",
+    "frame": {
+      "files": [
+        {
+          "file": "interior-frame-480.webp",
+          "w": 480,
+          "bytes": 80818
+        },
+        {
+          "file": "interior-frame-800.webp",
+          "w": 800,
+          "bytes": 201858
+        }
+      ],
+      "window": [
+        249,
+        251,
+        1005,
+        988
+      ],
+      "canvas": [
+        1254,
+        1254
+      ]
+    },
+    "paper": {
+      "files": [
+        {
+          "file": "ph_interior-480.webp",
+          "w": 480,
+          "bytes": 66684
+        },
+        {
+          "file": "ph_interior-800.webp",
+          "w": 800,
+          "bytes": 156030
+        }
+      ]
+    },
+    "mask": {
+      "file": "interior-photo-mask.png"
+    }
   }
 }

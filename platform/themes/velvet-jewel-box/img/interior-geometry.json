@@ -1,0 +1,34 @@
+{
+  "id": "velvet-jewel-box",
+  "name": "Velvet Jewel Box",
+  "motif": "Aubergine velvet, rose gold, small lustrous pearls, a restrained plum rose and champagne satin bow",
+  "shape": "VERTICAL OVAL jewellery locket frame, a wide open oval inner photo window",
+  "layout": "jewel",
+  "motion": "jewel-unfold",
+  "colors": [
+    "#2d1325",
+    "#fbf2e6",
+    "#c99c8c"
+  ],
+  "frameSize": [
+    1024,
+    1536
+  ],
+  "window": [
+    166,
+    289,
+    857,
+    1217
+  ],
+  "windowPercent": [
+    16.21094,
+    18.8151,
+    67.48047,
+    60.41667
+  ],
+  "photoAspect": "691/928",
+  "paperSize": [
+    988,
+    1504
+  ]
+}

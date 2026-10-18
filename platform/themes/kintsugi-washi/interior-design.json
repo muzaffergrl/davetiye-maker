@@ -1,0 +1,29 @@
+{
+  "id": "kintsugi-washi",
+  "name": "Kintsugi & Washi",
+  "layout": "washi",
+  "motion": "paper-unfurl",
+  "fonts": [
+    "Shippori Mincho",
+    "Cormorant Garamond",
+    "Lora"
+  ],
+  "frameShape": "asymmetric deckle edge SQUARE Japanese washi paper photo mount with subtle gold repaired ceramic corners, square inner photo window",
+  "photoWindow": [
+    250,
+    248,
+    1030,
+    1005
+  ],
+  "photoCanvas": [
+    1254,
+    1254
+  ],
+  "cover": "unchanged",
+  "pages": {
+    "home": "An indigo-and-ivory washi composition with square kintsugi photo mounts and torn-paper stationery.",
+    "story": "Asymmetric washi photo mounts paired with captions, alternating gently from side to side.",
+    "details": "A quiet folded-paper programme with gold-repaired margins and a square venue mount.",
+    "rsvp": "A handmade washi reply letter with indigo type and fine kintsugi details."
+  }
+}

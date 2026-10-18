@@ -1,0 +1,29 @@
+{
+  "id": "orient-express-voyage",
+  "name": "Orient Express Voyage",
+  "layout": "voyage",
+  "motion": "carriage-slide",
+  "fonts": [
+    "Allura",
+    "Cinzel",
+    "Libre Baskerville"
+  ],
+  "frameShape": "wide ROUND CORNER RECTANGULAR luxury sleeper train WINDOW frame with narrow brass mullion edge, landscape inner photo window",
+  "photoWindow": [
+    215,
+    224,
+    1320,
+    776
+  ],
+  "photoCanvas": [
+    1536,
+    1024
+  ],
+  "cover": "unchanged",
+  "pages": {
+    "home": "A first-class travel invitation with a brass carriage-window portrait and cream ticket stationery.",
+    "story": "A horizontal carriage-window photo journey with captions under each panoramic view.",
+    "details": "A rail-journey itinerary with paired time and destination columns.",
+    "rsvp": "A green-and-brass travel-ticket reply suite."
+  }
+}

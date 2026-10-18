@@ -2174,5 +2174,50 @@
   },
   "favicon": {
     "file": "favicon.png"
+  },
+  "interior": {
+    "layout": "theatre",
+    "motion": "curtain-reveal",
+    "frame": {
+      "files": [
+        {
+          "file": "interior-frame-480.webp",
+          "w": 480,
+          "bytes": 40960
+        },
+        {
+          "file": "interior-frame-800.webp",
+          "w": 800,
+          "bytes": 95398
+        }
+      ],
+      "window": [
+        233,
+        222,
+        1439,
+        712
+      ],
+      "canvas": [
+        1672,
+        941
+      ]
+    },
+    "paper": {
+      "files": [
+        {
+          "file": "ph_interior-480.webp",
+          "w": 480,
+          "bytes": 61430
+        },
+        {
+          "file": "ph_interior-800.webp",
+          "w": 800,
+          "bytes": 141408
+        }
+      ]
+    },
+    "mask": {
+      "file": "interior-photo-mask.png"
+    }
   }
 }

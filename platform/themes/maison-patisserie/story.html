@@ -1,9 +1,6 @@
-<!doctype html>
-<!-- Maison Pâtisserie · page 3 — Our Story (/<slug>/story): three antique-gold arch frames (comp scene 3),
+<!DOCTYPE html><!-- Maison Pâtisserie · page 3 — Our Story (/<slug>/story): three antique-gold arch frames (comp scene 3),
      photo slots story_1..3 (theme.json → media.memory_photos.0..2), captions story.items.0..2.caption.
-     The whole page is off (404) when optional_blocks.our_story is false. Kicker / title = design copy. -->
-<html lang="en" class="no-js">
-<head>
+     The whole page is off (404) when optional_blocks.our_story is false. Kicker / title = design copy. --><html lang="en" class="no-js"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title data-text="{copy.story_title} · {name_display}">Our Story</title>
@@ -13,64 +10,64 @@
 <meta property="og:description" data-attr-content="{date|date-long} · {venue.city_region}" content="">
 <meta name="theme-color" content="#F5EEE2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=Great+Vibes&amp;family=Lora:ital,wght@0,400;1,400&amp;display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Parisienne&amp;family=Playfair+Display&amp;family=Lora&amp;display=swap">
 <style>/* names fallback: scripts/font-fallback.ts */
 @font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:85.4%;ascent-override:99.5%;descent-override:46.8%;line-gap-override:0%}
 @font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:73.4%;ascent-override:115.7%;descent-override:54.5%;line-gap-override:0%}</style>
-<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="site.css"><link rel="stylesheet" href="interior.css">
 <script>document.documentElement.classList.replace('no-js','js');</script>
-<script src="site.js" defer></script>
-</head>
-<body data-optional="our_story" data-pending="This link will be added soon.">
+<script src="site.js" defer=""></script>
+<script>(function(r){if(!matchMedia("(prefers-reduced-motion: reduce)").matches){r.classList.add("u-loading");setTimeout(function(){r.classList.remove("u-loading")},2200)}})(document.documentElement);</script><script src="interior-motion.js" defer=""></script></head>
+<body data-optional="our_story" data-pending="This link will be added soon." data-interior="maison-patisserie" data-interior-layout="patisserie">
 
 <main class="site-main">
   <header class="page-head" data-scene="story-head">
-    <img class="florals florals-tl" data-step="florals" data-a="drift-tl" src="img/florals_tl-480.webp" srcset="img/florals_tl-480.webp 480w, img/florals_tl-960.webp 960w" sizes="min(56vw, 330px)" alt="">
-    <p class="kicker" data-step="kicker" data-a="fade" data-copy="story_kicker">Moments we hold dear</p>
-    <h1 class="script" data-step="title" data-a="write" data-copy="story_title">Our Story</h1>
-    <img class="divider" data-step="divider" data-a="unfurl" src="img/divider-300.webp" alt="">
-    <p class="lede" data-step="lede" data-a="fade" data-if="story.intro"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
+    
+    <p class="kicker" data-copy="story_kicker" data-u-part="kicker">Moments we hold dear</p>
+    <h1 class="script" data-copy="story_title" data-u-part="title">Our Story</h1>
+    
+    <p class="lede" data-if="story.intro" data-u-part="lede"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
   </header>
 
-  <section class="wrap frames" aria-label="Our photos">
-    <figure class="frame-fig" data-scene="story-frame">
-      <div class="frame" data-step="frame" data-a="rise-lg">
-        <div class="photo-slot mask-arch" data-slot="story_1">
-          <img data-photo="story_1" src="img/ph_story_1-300.webp" srcset="img/ph_story_1-300.webp 300w, img/ph_story_1-600.webp 600w" sizes="(min-width: 768px) 190px, 38vw" alt="" data-attr-alt="{story.items.0.caption}">
-          <span class="ph-mark" aria-hidden="true"><img src="img/petal2-200.webp" alt=""><span>Your photo here</span></span>
+  <section class="wrap u-gallery" aria-label="Our photos" data-gallery="patisserie">
+    <figure class="u-memory" data-scene="story-frame">
+      <div class="u-frame" data-u-part="frame">
+        <div class="photo-slot" data-slot="story_1">
+          <img data-photo="story_1" src="img/ph_interior-480.webp" srcset="img/ph_interior-480.webp 480w, img/ph_interior-800.webp 800w" sizes="(min-width:768px) 520px, 80vw" alt="" data-attr-alt="{story.items.0.caption}">
+          <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
         </div>
-        <img src="img/arch_frame-320.webp" srcset="img/arch_frame-320.webp 320w, img/arch_frame-640.webp 640w" sizes="(min-width: 768px) 290px, 58vw" alt="">
-      </div>
-      <figcaption data-step="caption" data-a="write" data-field="story.items.0.caption"></figcaption>
+        
+      <img class="u-art" src="img/interior-frame-480.webp" srcset="img/interior-frame-480.webp 480w, img/interior-frame-800.webp 800w" sizes="(min-width:768px) 520px, 92vw" alt="" loading="lazy"></div>
+      <figcaption data-field="story.items.0.caption" data-u-part="caption"></figcaption>
     </figure>
-    <figure class="frame-fig" data-scene="story-frame">
-      <div class="frame" data-step="frame" data-a="rise-lg">
-        <div class="photo-slot mask-arch" data-slot="story_2">
-          <img data-photo="story_2" src="img/ph_story_2-300.webp" srcset="img/ph_story_2-300.webp 300w, img/ph_story_2-600.webp 600w" sizes="(min-width: 768px) 190px, 38vw" alt="" data-attr-alt="{story.items.1.caption}" loading="lazy">
-          <span class="ph-mark" aria-hidden="true"><img src="img/petal5-200.webp" alt=""><span>Your photo here</span></span>
+    <figure class="u-memory" data-scene="story-frame">
+      <div class="u-frame" data-u-part="frame">
+        <div class="photo-slot" data-slot="story_2">
+          <img data-photo="story_2" src="img/ph_interior-480.webp" srcset="img/ph_interior-480.webp 480w, img/ph_interior-800.webp 800w" sizes="(min-width:768px) 520px, 80vw" alt="" data-attr-alt="{story.items.1.caption}" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
         </div>
-        <img src="img/arch_frame-320.webp" srcset="img/arch_frame-320.webp 320w, img/arch_frame-640.webp 640w" sizes="(min-width: 768px) 290px, 58vw" alt="" loading="lazy">
-      </div>
-      <figcaption data-step="caption" data-a="write" data-field="story.items.1.caption"></figcaption>
+        
+      <img class="u-art" src="img/interior-frame-480.webp" srcset="img/interior-frame-480.webp 480w, img/interior-frame-800.webp 800w" sizes="(min-width:768px) 520px, 92vw" alt="" loading="lazy"></div>
+      <figcaption data-field="story.items.1.caption" data-u-part="caption"></figcaption>
     </figure>
-    <figure class="frame-fig" data-scene="story-frame">
-      <div class="frame" data-step="frame" data-a="rise-lg">
-        <div class="photo-slot mask-arch" data-slot="story_3">
-          <img data-photo="story_3" src="img/ph_story_3-300.webp" srcset="img/ph_story_3-300.webp 300w, img/ph_story_3-600.webp 600w" sizes="(min-width: 768px) 190px, 38vw" alt="" data-attr-alt="{story.items.2.caption}" loading="lazy">
-          <span class="ph-mark" aria-hidden="true"><img src="img/petal6-200.webp" alt=""><span>Your photo here</span></span>
+    <figure class="u-memory" data-scene="story-frame">
+      <div class="u-frame" data-u-part="frame">
+        <div class="photo-slot" data-slot="story_3">
+          <img data-photo="story_3" src="img/ph_interior-480.webp" srcset="img/ph_interior-480.webp 480w, img/ph_interior-800.webp 800w" sizes="(min-width:768px) 520px, 80vw" alt="" data-attr-alt="{story.items.2.caption}" loading="lazy">
+          <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
         </div>
-        <img src="img/arch_frame-320.webp" srcset="img/arch_frame-320.webp 320w, img/arch_frame-640.webp 640w" sizes="(min-width: 768px) 290px, 58vw" alt="" loading="lazy">
-      </div>
-      <figcaption data-step="caption" data-a="write" data-field="story.items.2.caption"></figcaption>
+        
+      <img class="u-art" src="img/interior-frame-480.webp" srcset="img/interior-frame-480.webp 480w, img/interior-frame-800.webp 800w" sizes="(min-width:768px) 520px, 92vw" alt="" loading="lazy"></div>
+      <figcaption data-field="story.items.2.caption" data-u-part="caption"></figcaption>
     </figure>
   </section>
 
   <section class="section next-sec" data-scene="story-next">
-    <img class="florals florals-br" data-step="florals" data-a="drift-br" src="img/florals_br-480.webp" srcset="img/florals_br-480.webp 480w, img/florals_br-960.webp 960w" sizes="min(52vw, 320px)" alt="" loading="lazy">
-    <a class="btn btn-ghost" href="details.html" data-step="link" data-a="rise" data-if="!thank_you_hides_details"><span data-copy="day_title">The Day</span> <span aria-hidden="true">→</span></a>
+    
+    <a class="btn btn-ghost" href="details.html" data-if="!thank_you_hides_details" data-u-part="link"><span data-copy="day_title">The Day</span> <span aria-hidden="true">→</span></a>
     <!-- thank-you mode with the Details page hidden (G075): back home instead of a link to a closed page -->
-    <a class="btn btn-ghost" href="home.html" data-step="link" data-a="rise" data-if="thank_you_hides_details"><span data-copy="home_link">Home</span> <span aria-hidden="true">→</span></a>
+    <a class="btn btn-ghost" href="home.html" data-if="thank_you_hides_details" data-u-part="link"><span data-copy="home_link">Home</span> <span aria-hidden="true">→</span></a>
   </section>
 </main>
 
@@ -82,5 +79,6 @@
     <li data-if="!rsvp.method !thank_you_on"><a class="nav-rsvp" href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
   </ul>
 </nav>
-</body>
-</html>
+
+
+</body></html>

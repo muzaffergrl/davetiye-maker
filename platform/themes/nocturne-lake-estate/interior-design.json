@@ -1,0 +1,29 @@
+{
+  "id": "nocturne-lake-estate",
+  "name": "Nocturne Lake Estate",
+  "layout": "terrace",
+  "motion": "terrace-pan",
+  "fonts": [
+    "Italiana",
+    "Cormorant Garamond",
+    "Lora"
+  ],
+  "frameShape": "wide rectangular Italian villa balustrade picture frame, landscape inner photo window",
+  "photoWindow": [
+    207,
+    161,
+    1328,
+    749
+  ],
+  "photoCanvas": [
+    1536,
+    1024
+  ],
+  "cover": "unchanged",
+  "pages": {
+    "home": "An Italian lakeside terrace: panoramic portrait, refined names and candlelit ivory invitation.",
+    "story": "Panoramic villa frames: a full-width opening photograph and two intimate moments beneath it.",
+    "details": "A villa dinner programme with generous time columns and a panoramic venue photograph.",
+    "rsvp": "A charcoal-and-champagne reply suite with Italian botanical stationery."
+  }
+}
