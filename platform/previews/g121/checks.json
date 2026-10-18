@@ -1,7 +1,7 @@
 {
-  "when": "2026-10-16T11:14:00.945Z",
-  "passed": 82,
-  "failed": 0,
+  "when": "2026-10-18T01:34:00.483Z",
+  "passed": 60,
+  "failed": 3,
   "checks": [
     {
       "name": "setup 2: one photo place (the opening photo); no \"More photos\" fold",
@@ -76,7 +76,7 @@
     {
       "name": "Settings → Time zone: Day & place with \"More options\" open, the time zone field focused",
       "ok": true,
-      "detail": "http://127.0.0.1:3490/edit/nora-and-sam?k=ZmHqRskaOD_60NNkynkSjH1bVsq9QjjCzrNJ8_Al1GA#edit/day"
+      "detail": "http://127.0.0.1:3490/edit/nora-and-sam?k=YlVk-7PxgaZ_SJZ27as59CCPXw4S2vwKO89ldhMjkcY#edit/day"
     },
     {
       "name": "Settings → Date style: the date style choice is on screen",
@@ -129,7 +129,7 @@
     {
       "name": "Review: the preview button is a 44 px+ target",
       "ok": true,
-      "detail": "{\"x\":322,\"y\":682.4664916992188,\"width\":52,\"height\":52}"
+      "detail": "{\"x\":322,\"y\":688.9458618164062,\"width\":52,\"height\":52}"
     },
     {
       "name": "a11y (axe-core): Review sheet has no serious/critical violations",
@@ -164,38 +164,17 @@
     },
     {
       "name": "Share: the link first; QR code, guest password and edit link folded",
-      "ok": true,
-      "detail": "qr:false,password:false,edit-link:false"
+      "ok": false,
+      "detail": "qr:false,password:false,edit-link:false,devices:false"
     },
     {
       "name": "Share: the QR fold keeps its name \"QR code for printed cards\"",
       "ok": true
     },
     {
-      "name": "Share: Copy is on the first screen",
-      "ok": true
-    },
-    {
-      "name": "Share: \"Take the website offline\" is the last action",
-      "ok": true,
-      "detail": "Take the website offline"
-    },
-    {
-      "name": "a11y (axe-core): Share has no serious/critical violations",
-      "ok": true
-    },
-    {
-      "name": "Share: touch targets ≥ 44 px",
-      "ok": true
-    },
-    {
-      "name": "Share: the opened fold shows the QR code of the public address",
-      "ok": true
-    },
-    {
-      "name": "Guests (no replies): says new replies show here and no e-mail notifications are sent yet",
-      "ok": true,
-      "detail": "Guests Guest list Results 0 Guests coming 0 Not coming 0 Replies Replies No replies yet. Share your website so guests can reply. New replies show here; we don’t send email notifications yet. Share Ref"
+      "name": "share: ran to the end",
+      "ok": false,
+      "detail": "locator.boundingBox: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('main [data-share-url] ~ div button').first()\u001b[22m\n\n    at box (/home/user/davetiye-maker/platform/tests/g121-browser.ts:141:80)\n    at /home/user/davetiye-maker/platform/tests/g121-browser.ts:365:28\n    at async block (/home/user/davetiye-maker/platform/tests/g121-browser.ts:89:5)\n    at async file:///home/user/davetiye-maker/platform/tests/g121-browser.ts:352:3"
     },
     {
       "name": "/start: \"Tip: once your editor is open, add it to your Home Screen.\"",
@@ -223,6 +202,10 @@
       "ok": true
     },
     {
+      "name": "admin site: \"Publish is waiting\" can be copied as it is (G135)",
+      "ok": true
+    },
+    {
       "name": "admin site: a text with an undecided policy cannot be copied",
       "ok": true
     },
@@ -233,7 +216,7 @@
     {
       "name": "admin site: copying writes the template (not the text) into Geçmiş",
       "ok": true,
-      "detail": "Geçmiş 16 Eki 2026 14:13 · Dükkân Etsy mesajı kopyalandı: Sipariş onaylanıyor (Publish bekliyor) 16 Eki 2026 14:13 · Alıcı Site oluşturuldu (sipariş #3456789012)"
+      "detail": "Geçmiş 18 Eki 2026 04:33 · Dükkân Etsy mesajı kopyalandı: Düğün tarihi değişti 18 Eki 2026 04:32 · Alıcı Site oluşturuldu (sipariş #3456789012)"
     },
     {
       "name": "admin site: \"Şablona dön\" brings the template text back",
@@ -246,7 +229,7 @@
     {
       "name": "admin site: \"Vazgeç\" on the left, \"Kalıcı olarak sil\" on the right",
       "ok": true,
-      "detail": "{\"cancel\":{\"x\":35,\"y\":868.96875,\"width\":97.59375,\"height\":48},\"del\":{\"x\":199.21875,\"y\":868.96875,\"width\":155.78125,\"height\":48}}"
+      "detail": "{\"cancel\":{\"x\":35,\"y\":869,\"width\":97.59375,\"height\":48},\"del\":{\"x\":199.34375,\"y\":869,\"width\":155.65625,\"height\":48}}"
     },
     {
       "name": "admin site: \"Vazgeç\" clears the typed address",
@@ -290,73 +273,9 @@
       "ok": true
     },
     {
-      "name": "/designs 390: \"seasonal\" shows its 4 designs only",
-      "ok": true,
-      "detail": "4"
-    },
-    {
-      "name": "/designs 390: no horizontal scroll with a style chosen",
-      "ok": true
-    },
-    {
-      "name": "/designs 390: back to \"All\"",
-      "ok": true
-    },
-    {
-      "name": "a11y (axe-core): /designs with the filter has no serious/critical violations",
-      "ok": true
-    },
-    {
-      "name": "/designs: filter chips are 44 px tall",
-      "ok": true
-    },
-    {
-      "name": "/designs: arrow keys move through the styles (radio group)",
-      "ok": true
-    },
-    {
-      "name": "/designs 1280: style filter with \"All\" + 6 styles",
-      "ok": true,
-      "detail": "7"
-    },
-    {
-      "name": "/designs 1280: \"All\" shows every design",
-      "ok": true
-    },
-    {
-      "name": "/designs 1280: \"classic\" shows its 6 designs only",
-      "ok": true,
-      "detail": "6"
-    },
-    {
-      "name": "/designs 1280: no horizontal scroll with a style chosen",
-      "ok": true
-    },
-    {
-      "name": "/designs 1280: back to \"All\"",
-      "ok": true
-    },
-    {
-      "name": "/designs without JavaScript: the filter still works",
-      "ok": true
-    },
-    {
-      "name": "home 390: hero, then the designs, then \"What is BKE Studio?\"",
-      "ok": true,
-      "detail": "hero > designs > what-is > opening > pages"
-    },
-    {
-      "name": "home 390: no horizontal scroll",
-      "ok": true
-    },
-    {
-      "name": "home 1280: hero, then the designs, then \"What is BKE Studio?\"",
-      "ok": true,
-      "detail": "hero > designs > what-is > opening > pages"
-    },
-    {
-      "name": "home 1280: no horizontal scroll",
-      "ok": true
+      "name": "sales site: ran to the end",
+      "ok": false,
+      "detail": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#style-seasonal')\u001b[22m\n\n    at /home/user/davetiye-maker/platform/tests/g121-browser.ts:498:18\n    at async block (/home/user/davetiye-maker/platform/tests/g121-browser.ts:89:5)\n    at async file:///home/user/davetiye-maker/platform/tests/g121-browser.ts:485:3"
     }
   ]
 }
