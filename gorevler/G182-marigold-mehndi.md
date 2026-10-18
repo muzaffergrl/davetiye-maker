@@ -2,7 +2,7 @@
 id: G182
 baslik: 33 Marigold & Mehndi — yeni tasarım (3. dalga), platform teması (GPT parçalarından önce), coming kaydı
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G182
 oncelik: 2
 bagimli: [G168, G175]
@@ -107,3 +107,4 @@ ipek dikdörtgenleri + düz altın bant (kılıf). Püskül, yapraklar, kemer, k
 ## Günlük
 - 2026-10-18 koordinatör: görev açıldı, bulut oturumuna verildi.
 - 2026-10-18 claude-G182: alındı; bitti, incelemeye gönderildi.
+- 2026-10-18 entegratör onayladı

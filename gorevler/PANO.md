@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 7 · alindi 0 · inceleme 0 · blokaj 2 · bitti 212 · iptal 256 · toplam 477
+Özet: hazir 1 · alindi 0 · inceleme 0 · blokaj 2 · bitti 218 · iptal 256 · toplam 477
 
 İptal edilen görevler (K22/K24 ile anlamını yitirenler) listelenmez; yalnız sayıları var. Ayrıntı: `python3 tools/gorev.py liste --hepsi`.
 
@@ -33,20 +33,15 @@ Bağımlılık bekleyen: 0 · Biten: 8 · İptal: 42
 
 ## claude-kod
 
-**Alınabilir (6)**
+**Alınabilir (0)**
 
-- `G182` p2 — 33 Marigold & Mehndi — yeni tasarım (3. dalga), platform teması (GPT parçalarından önce), coming kaydı → `gorevler/G182-marigold-mehndi.md`
-- `G183` p2 — 34 Red Lacquer & Double Happiness — yeni tasarım (3. dalga), platform teması (GPT parçalarından önce), coming kaydı → `gorevler/G183-red-lacquer-double-happiness.md`
-- `G184` p2 — 35 Highland Tartan & Thistle — yeni tasarım (3. dalga), platform teması (GPT parçalarından önce), coming kaydı → `gorevler/G184-highland-tartan-thistle.md`
-- `G185` p2 — 36 Victorian Glasshouse — yeni tasarım (3. dalga), platform teması (GPT parçalarından önce), coming kaydı → `gorevler/G185-victorian-glasshouse.md`
-- `G186` p2 — 37 Art Nouveau Lily — yeni tasarım (3. dalga), platform teması (GPT parçalarından önce), coming kaydı → `gorevler/G186-art-nouveau-lily.md`
-- `G187` p2 — 38 Papel Picado Fiesta — yeni tasarım (3. dalga), platform teması (GPT parçalarından önce), coming kaydı → `gorevler/G187-papel-picado-fiesta.md`
+- (yok)
 
 **Üzerinde çalışılan / incelemede / blokaj (0)**
 
 - (yok)
 
-Bağımlılık bekleyen: 0 · Biten: 120 · İptal: 82
+Bağımlılık bekleyen: 0 · Biten: 126 · İptal: 82
 
 ## claude-metin
 
