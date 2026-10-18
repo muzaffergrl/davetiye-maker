@@ -465,6 +465,13 @@ EK_TEMALAR = [
          dekor="Saten astar, pirinç kurma anahtarı, tül, gül yaprakları", teknik="fotogerçekçi + pastel",
          font=("Ballet", "Gilda Display"), palet_adi="rose-quartz-gold",
          hareket="Kurma anahtarı döner (müzik kutusu ezgisi dokunuştan sonra), kapak menteşesi, balerinin yavaş piruet kare dizisi, aynada parıltılı foto geçişi, az sayıda süzülen gül yaprağı (azaltılmış harekette yok), oval ayna sayfa geçişi."),
+    # 3. dalga (33–38, docs/24; K23 sıkı: ilk sayfa kapalı zarf): aynı kurallar; GPT parçalarından önce kuruldu.
+    dict(no=34, klasor="34_Red_Lacquer_Double_Happiness", ad="Red Lacquer & Double Happiness",
+         zarf="Dikey kırmızı kâğıt zarf, cepte altın varak 囍, ip-düğme kapama; ip düğmeden dönerek çözülür ve düşer, kapak katından kalkar, kart iki kâğıt kesim şakayık penceresine sarılı yükselir, pencereler kat kat iki yana açılır.",
+         foto="Ay kapısı (moon gate) yuvarlak çerçeveler; iki kırmızı kâğıt kapı kanadı yana kayarak fotoğrafı açar; mekân fotoğrafı kafes kapılarla.",
+         dekor="Şakayık, kâğıt kesim (jianzhi) desenleri, kırmızı lake, altın bulut motifleri, püsküllü düğüm", teknik="kâğıt kesim + lake + altın varak",
+         font=("Luxurious Script", "Prata"), palet_adi="lacquer-red-gold-cream",
+         hareket="İpin düğmeden dönerek çözülmesi, kapağın katından kalkması, kâğıt kesim pencere katlarının kanat kanat açılması, altın bulutların süzülmesi, iki hızda kayan kâğıt kesim katmanlar (paralaks), ay kapısı kanatlarıyla foto, metnin üst kenarından katlanarak açılması, sallanan püsküllü düğüm"),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

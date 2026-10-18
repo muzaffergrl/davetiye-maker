@@ -297,6 +297,10 @@ const dict: Dict = {
   'Turn the key': 'Schlüssel drehen',
   'Wind the music box again': 'Spieluhr erneut aufziehen',
   'Reflections': 'Spiegelbilder',
+  // G183 Red Lacquer & Double Happiness
+  "Double happiness": "Doppeltes Glück",
+  "Open the envelope": "Den Umschlag öffnen",
+  "Together with their families": "Gemeinsam mit ihren Familien",
 };
 
 export default dict;

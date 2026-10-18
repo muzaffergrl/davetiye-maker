@@ -1,0 +1,400 @@
+/* Red Lacquer & Double Happiness (34) — deep lacquer red, cinnabar paper, warm cream and gold leaf. Visuals are GPT
+   pixels only (img/, build_images.py; the design's own parts through parts.css); CSS adds light and interface (docs/11
+   §5.7): the lamplight gloss over the red paper, contact shades, text halos, hairline rules, form fields, buttons, the
+   bottom nav, and the reveals — the doors of a moon gate (two halves of the red paper sliding apart over a round photo),
+   text that unfolds from its top edge like a paper cut opened out, the 3D turns of the envelope's flap and of the two
+   paper-cut windows over the card. The interim 囍 is a character of the Ma Shan Zheng typeface filled with the gold leaf
+   (background-clip), until GPT's gold-leaf xi_gold arrives. No frame, ornament, cloud or line is drawn here. */
+:root{--lacquer:#4a0a0e;--lacquer-deep:#2c0507;--cinnabar:#a81e24;--red-ink:#8c1a1f;--cream:#f5ecd8;--cream-2:#e9dcc0;
+--ink:#3a0d0e;--ink-soft:#6b3d34;--gold:#c9a14a;--gold-light:#e6c983;--gold-ink:#8a5f1c;--blush:#f1d9c4;
+--line:#e6c98340;--line-ink:#3a0d0e2e;--serif:'Prata','Didot','Times New Roman',serif;--script:'Luxurious Script','Snell Roundhand',cursive;
+--nav-h:62px;color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:var(--lacquer) url(img/lacquer-640.webp) 0 0/640px repeat;color:var(--cream);font:400 17px/1.75 var(--serif);padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom))}
+button,input,textarea,select{font:inherit}
+button,a,input,select,textarea,summary{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+h1,h2,h3,p,figure,ul,ol{margin:0}
+h1,h2,h3{font-weight:400;line-height:1.15}
+h1{font:400 clamp(54px,15vw,80px)/1.1 var(--script);color:var(--gold-light);overflow-wrap:anywhere}
+h2{font:400 clamp(42px,11.5vw,56px)/1.15 var(--script);color:var(--gold-light);overflow-wrap:anywhere}
+h3{font:400 18px/1.45 var(--serif);letter-spacing:.02em}
+button{cursor:pointer}
+button:disabled{opacity:.5;cursor:default}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--gold-light);outline-offset:5px}
+.nowrap{white-space:nowrap}
+.eyebrow{font:400 11.5px/1.9 var(--serif);text-transform:uppercase;letter-spacing:.24em;color:var(--gold-light);overflow-wrap:anywhere}
+.body-text{font-size:17px;line-height:1.8;color:var(--blush)}
+.small{font:400 14px/1.8 var(--serif);color:var(--blush)}
+/* cream paper (GPT texture) under the cards and bands */
+.paper,.paper-band{background:var(--cream) url(img/cream-640.webp) 0 0/480px repeat;color:var(--ink);color-scheme:light}
+.paper h2,.paper-band h2,.paper h1{color:var(--cinnabar)}
+.paper .eyebrow,.paper-band .eyebrow{color:var(--gold-ink)}
+.paper .body-text,.paper-band .body-text,.paper .small,.paper-band .small{color:var(--ink-soft)}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:12px;min-height:48px;padding:12px 28px;border:1px solid var(--gold-light);background:var(--gold-light);color:var(--ink);font:400 12.5px/1.5 var(--serif);letter-spacing:.2em;text-transform:uppercase;border-radius:3px;text-align:center;overflow-wrap:anywhere}
+.btn:hover{background:#efd89f}
+.btn-ghost{background:#2c050780;color:var(--cream);border-color:#e6c98399}
+.btn-ghost:hover{background:#e6c9831f}
+.paper .btn,.paper-band .btn{background:var(--cinnabar);border-color:var(--cinnabar);color:var(--cream)}
+.paper .btn:hover,.paper-band .btn:hover{background:#bf262c}
+.paper .btn-ghost,.paper-band .btn-ghost{background:#ffffff80;color:var(--ink);border-color:#3a0d0e66}
+.btn-sm{min-height:44px;padding:9px 18px}
+.textlink{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;font:400 13px/1.6 var(--serif);border:0;background:transparent;color:var(--gold-light);letter-spacing:.1em;padding:8px 2px;text-decoration:underline;text-decoration-color:#e6c98370;text-underline-offset:6px}
+.paper .textlink,.paper-band .textlink{color:var(--red-ink);text-decoration-color:#8c1a1f70}
+.center{text-align:center;margin:44px 0 10px}
+.button-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.no-js .nojs-only{display:block}
+.js .nojs-only{display:none}
+.names{font:400 clamp(52px,14.5vw,80px)/1.12 var(--script);color:var(--gold-light);overflow-wrap:anywhere;text-wrap:balance;text-shadow:0 0 18px var(--lacquer-deep)}
+.names .amp{font:400 .34em/1 var(--serif);letter-spacing:.1em;color:var(--cream);vertical-align:.36em}
+.paper .names{color:var(--cinnabar);text-shadow:none}
+.paper .names .amp{color:var(--gold-ink)}
+
+/* photo slots: placeholders are softened cream paper; "Your photo here" only in a preview */
+.photo-slot{position:relative;display:block;overflow:hidden;background:var(--cream-2)}
+.photo-slot>img{width:100%;height:100%;object-fit:cover;object-position:50% 38%}
+.ph-mark{display:none;position:absolute;inset:0;align-items:center;justify-content:center;pointer-events:none;font:400 11px/1.4 var(--serif);color:var(--ink-soft);text-align:center;letter-spacing:.08em}
+html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{display:flex}
+/* moon gate: the photo is round (a crop); GPT's gate (W2.16, parts.css) frames it */
+.gate{position:relative;display:block;aspect-ratio:1}
+.gate>.photo-slot{width:100%;height:100%;border-radius:50%}
+.gate>.rim{display:none;position:absolute;inset:0;pointer-events:none}
+/* the doors of the gate: two halves of the red paper over the photo slide apart when its scene enters the view */
+.door{display:none;position:absolute;top:0;bottom:0;width:50.5%;z-index:2;pointer-events:none;background:var(--cinnabar) url(img/red-640.webp) 0 0/360px repeat}
+.door.l{left:0;box-shadow:inset -7px 0 9px -7px #2c0507b3}
+.door.r{right:0;background-position:-180px 0;box-shadow:inset 7px 0 9px -7px #2c0507b3}
+.js .doors>.door{display:block;transition:transform 1.25s cubic-bezier(.62,0,.24,1)}
+.js .doors.in>.door.l{transform:translateX(-101%)}
+.js .doors.in>.door.r{transform:translateX(101%)}
+.js .doors.in>.door.r{transition-delay:90ms}
+/* paper-cut border under a heading on cream paper (GPT W2.17; hidden until it exists): it opens out from its centre */
+.band-cut{display:none;width:min(70%,300px);margin:8px auto 0}
+.js .band-cut[data-step]{clip-path:inset(0 50%);transition:clip-path 1.4s .3s cubic-bezier(.5,0,.3,1),opacity .6s}
+.js .band-cut[data-step].in{clip-path:inset(0)}
+/* GPT ornaments that wait for their parts (parts.css shows them) */
+.tassel,.cut-far,.cut-near,.string{display:none}
+.tassel{width:min(20vw,84px);margin:0 auto 12px;transform-origin:50% 0}
+.js .tassel{animation:sway 5.6s ease-in-out infinite}
+@keyframes sway{0%,100%{rotate:-3deg}
+50%{rotate:3deg}}
+/* gold clouds (GPT W2.15, named by parts.css --rl-clouds): site.js lets a few drift across */
+.clouds{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+body>.clouds{position:fixed;z-index:-1}
+.clouds img{position:absolute;left:0;opacity:.75;animation:drift linear infinite}
+@keyframes drift{from{transform:translateX(-40vw)}
+to{transform:translateX(120vw)}}
+
+/* bottom nav */
+.site-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#2c0507f2;border-top:1px solid var(--line);padding:6px 8px max(6px,env(safe-area-inset-bottom));view-transition-name:site-nav}
+.site-nav ul{list-style:none;padding:0;display:flex;justify-content:center;gap:4px}
+.site-nav a{display:flex;align-items:center;justify-content:center;min-height:48px;min-width:68px;padding:8px 12px;font:400 11.5px/1 var(--serif);letter-spacing:.16em;text-transform:uppercase;color:var(--blush)}
+.site-nav a[aria-current]{color:var(--gold-light);text-decoration:underline;text-underline-offset:8px;text-decoration-color:#e6c98399}
+
+/* ---------------------------------------------------------------- the envelope */
+.page-opening{padding-bottom:0;background:radial-gradient(ellipse at 50% 42%,#7a141a8c 0,#4a0a0e00 64%) fixed,var(--lacquer) url(img/lacquer-640.webp) 0 0/640px repeat}
+.skip{position:fixed;top:calc(6px + env(safe-area-inset-top));right:10px;z-index:20;padding-inline:14px;background:#2c0507b3;border-radius:100px;text-decoration:none}
+.opening{position:relative;min-height:100svh;max-width:760px;margin:auto;padding:52px 20px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:clip}
+.opening>.cut-far{position:absolute;left:50%;top:0;width:min(130vw,820px);translate:-50% 0;opacity:.32;pointer-events:none}
+.opening-heading{position:relative;z-index:9;max-width:100%}
+.opening-heading>.eyebrow{margin-bottom:6px}
+.opening .names{font-size:clamp(52px,15vw,72px)}
+.opening-foot{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:22px;min-height:84px;position:relative;z-index:9}
+.opening-date{font-size:11px}
+/* the closed envelope: 0.66 wide per high (manifest stage); every layer in % of it */
+.stage{--obj:min(62vw,calc(46svh * .66),300px);position:relative;width:var(--obj);margin:24px auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent;z-index:5}
+.opening:has(.names.long-names) .stage{--obj:min(54vw,calc(40svh * .66),300px)}
+.envelope{position:relative;width:100%;aspect-ratio:.66;--tex:calc(var(--obj) * 1.5);perspective:1000px}
+.envelope>*{position:absolute}
+.stage::before{content:"";position:absolute;inset:3% -2% -4%;z-index:0;background:radial-gradient(closest-side,#16020399,#0000);pointer-events:none} /* contact shade on the lacquer (light only) */
+.env-back,.pocket,.flap-out,.flap-in,.veil.vo{background:var(--cinnabar) url(img/red-640.webp) 0 0/var(--tex) repeat}
+.env-back{inset:0;z-index:1;filter:brightness(.6)}
+.card{left:6%;top:8%;width:88%;height:84%;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:9% 9% 8%;text-align:center;view-transition-name:none;container-type:inline-size;perspective:800px;background:var(--cream) url(img/cream-640.webp) 0 0/var(--tex) repeat;color:var(--ink)}
+.card-photo{width:62%;aspect-ratio:1;flex:none;border-radius:50%}
+.card.tight .card-photo{width:42%}
+.card-photo .ph-mark{font-size:8px}
+.card-photo .ty-decor,.card-photo .ty-decor img{display:block;width:100%;height:100%;object-fit:cover}
+.card-line{margin-top:7%;font-size:7.5px;letter-spacing:.22em;color:var(--gold-ink)}
+.card-names{font:400 clamp(18px,15cqw,40px)/1.15 var(--script);color:var(--cinnabar);overflow-wrap:anywhere;text-wrap:balance;margin-top:1%}
+.card-date{font-size:7.5px;margin-top:3%;color:var(--gold-ink)}
+/* the two paper-cut windows over the card (outer red, inner gold), each in two halves on their outer edges */
+.veil{position:absolute;top:0;bottom:0;width:50%;z-index:3;backface-visibility:hidden}
+.veil.l{left:0;transform-origin:0 50%}
+.veil.r{right:0;transform-origin:100% 50%}
+.veil.vo{z-index:4}
+.veil.vo.r{background-position:calc(var(--tex) * -.44) 0;filter:brightness(.94)}
+.veil.vi{background:var(--gold) url(img/gold-480.webp) 0 0/calc(var(--tex) * .7) repeat;opacity:.96}
+.veil.vi.r{background-position:calc(var(--tex) * -.31) 0}
+.pocket{left:0;right:0;top:30%;height:70%;z-index:3;box-shadow:0 -2px 5px #2c050766}
+.xi-ready .xi::before{opacity:1}
+.xi{left:33%;top:70%;width:34%;aspect-ratio:1;z-index:4;display:flex;align-items:center;justify-content:center;container-type:inline-size;pointer-events:none}
+.xi::before{content:"\56CD";content:"\56CD" / "";opacity:0;transition:opacity .6s;font:400 86cqw/1 'Ma Shan Zheng',serif;color:var(--gold);background:var(--gold) url(img/gold-480.webp) 50% 50%/160% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 1px 1px #2c0507aa)}
+.flap{left:0;top:0;width:100%;height:52%;z-index:6;transform-origin:50% 0;transform-style:preserve-3d}
+.flap-out,.flap-in{position:absolute;inset:0;backface-visibility:hidden}
+.flap-out{filter:brightness(1.07);box-shadow:0 3px 6px #2c050780}
+.flap-in{transform:rotateX(180deg);filter:brightness(.66);visibility:hidden}
+.button{left:50%;width:14%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;background:var(--gold) url(img/gold-480.webp) 50% 50%/cover;box-shadow:0 2px 3px #2c050799;z-index:7}
+.b-flap{position:absolute;top:90.4%;width:14%}
+.b-body{top:62%}
+.string{left:36%;top:41%;width:28%;height:27%;z-index:8;pointer-events:none}
+.sheen{inset:0;z-index:9;pointer-events:none;background:linear-gradient(115deg,#0000 38%,#ffe9c03d 50%,#0000 62%) 120% 0/300% 100% no-repeat;mix-blend-mode:screen;opacity:0}
+.js .sheen{animation:sheen-idle 8s 1.4s ease-in-out infinite}
+@keyframes sheen-idle{0%{opacity:0;background-position:120% 0}
+4%{opacity:1}
+22%{opacity:1;background-position:-20% 0}
+26%,100%{opacity:0;background-position:-20% 0}}
+.tap-hint{font-size:11px}
+.js .tap-hint{animation:breathe 3.2s ease-in-out infinite}
+@keyframes breathe{50%{opacity:.55}}
+.enter,.replay{display:none}
+.is-opened .enter{display:inline-flex}
+.is-opened .replay{display:inline-flex}
+.is-opened .tap-hint,.is-opening .tap-hint{display:none}
+.is-opened .skip{display:none}
+.is-opening .stage{pointer-events:none}
+/* the opening — the same numbers as MOTION.envelope in site.js */
+.is-opening .opening-heading,.is-opening .opening-date{animation:away 450ms 0ms ease-in forwards}
+.is-opening .sheen{animation:none;opacity:0}
+.is-opening .b-flap{animation:untie 900ms 0ms cubic-bezier(.4,0,.3,1) forwards}
+.is-opening .string{animation:cord-off 600ms 450ms cubic-bezier(.5,0,.8,.4) forwards}
+.is-opening .envelope>.card{animation:card-rise 700ms 1500ms cubic-bezier(.3,0,.2,1) forwards,card-forward 450ms 3150ms cubic-bezier(.45,0,.2,1) forwards}
+.is-opening .veil.vo.l{animation:veil-l 600ms 2150ms cubic-bezier(.5,0,.3,1) forwards}
+.is-opening .veil.vo.r{animation:veil-r 600ms 2150ms cubic-bezier(.5,0,.3,1) forwards}
+.is-opening .veil.vi.l{animation:veil-l 600ms 2550ms cubic-bezier(.5,0,.3,1) forwards}
+.is-opening .veil.vi.r{animation:veil-r 600ms 2550ms cubic-bezier(.5,0,.3,1) forwards}
+.is-opening .env-back,.is-opening .pocket,.is-opening .xi{animation:sink 450ms 3150ms ease-in forwards}
+.is-opening .b-body{animation:untie-body 900ms 0ms cubic-bezier(.4,0,.3,1) forwards,sink 450ms 3150ms ease-in forwards}
+.is-opening .flap{animation:flap-lift 650ms 900ms cubic-bezier(.45,0,.25,1) forwards,sink-flap 450ms 3150ms ease-in forwards}
+/* the faces of the flap swap half way up (edge-on), not by backface culling: the outside with its button goes, the inside shows */
+.is-opening .flap-out{animation:face-off 650ms 900ms linear both}
+.is-opening .flap-in{animation:face-on 650ms 900ms linear both}
+.is-opened .opening-heading,.is-opened .opening-date,.is-opened .sheen{opacity:0;animation:none}
+.is-opened .string{opacity:0}
+.is-opened .flap{transform:rotateX(180deg);z-index:0;opacity:0}
+.is-opened .flap-out{visibility:hidden}
+.is-opened .env-back,.is-opened .pocket,.is-opened .xi,.is-opened .b-body{opacity:0}
+.is-opened .veil{opacity:0}
+.is-opened .envelope>.card{z-index:8;transform:translateY(-6%) scale(1.06);view-transition-name:invite-card;filter:drop-shadow(0 18px 24px #160203cc)}
+.is-opened .opening-foot{margin-top:4px}
+@keyframes away{to{opacity:0;transform:translateY(-16px)}}
+/* the cord lets go: the flap button turns round and round as it unwinds, the body button a little the other way */
+@keyframes untie{to{transform:rotate(-720deg)}}
+@keyframes untie-body{60%{transform:rotate(160deg)}
+to{transform:rotate(200deg)}}
+@keyframes cord-off{from{opacity:1;transform:none}
+35%{opacity:1;transform:rotate(-14deg) scale(1.04)}
+to{opacity:0;transform:translateY(46%) rotate(-32deg) scale(.96)}}
+@keyframes flap-lift{0%{transform:none;z-index:6}
+99%{z-index:6}
+to{transform:rotateX(180deg);z-index:0}}
+@keyframes card-rise{from{transform:none;filter:drop-shadow(0 0 0 #0000)}
+to{transform:translateY(-40%);filter:drop-shadow(0 10px 14px #160203aa)}}
+@keyframes card-forward{from{z-index:8;transform:translateY(-40%);filter:drop-shadow(0 10px 14px #160203aa)}
+to{z-index:8;transform:translateY(-6%) scale(1.06);filter:drop-shadow(0 18px 24px #160203cc)}}
+@keyframes veil-l{60%{opacity:1}
+to{transform:rotateY(-118deg);opacity:0}}
+@keyframes veil-r{60%{opacity:1}
+to{transform:rotateY(118deg);opacity:0}}
+@keyframes face-off{0%,49%{visibility:visible}
+50%,to{visibility:hidden}}
+@keyframes face-on{0%,49%{visibility:hidden}
+50%,to{visibility:visible}}
+@keyframes sink{to{opacity:0;transform:translateY(14%)}}
+@keyframes sink-flap{from{transform:rotateX(180deg);z-index:0}
+to{transform:rotateX(180deg) translateY(-14%);z-index:0;opacity:0}}
+
+/* ---------------------------------------------------------------- home */
+.hero{position:relative;min-height:calc(100svh - var(--nav-h));display:flex;align-items:center;justify-content:center;padding:36px 20px 26px;background:radial-gradient(ellipse at 50% 40%,#7a141a80 0,#4a0a0e00 70%);overflow:clip}
+.hero>.cut-far,.hero>.cut-near{position:absolute;left:50%;pointer-events:none}
+.hero>.cut-far{top:-4%;width:min(140vw,860px);translate:-50% 0;opacity:.34}
+.hero>.cut-near{bottom:-6%;width:min(90vw,520px);translate:-50% 0;opacity:.6}
+.hero-card{position:relative;z-index:1;width:min(84vw,360px);padding:24px 22px 26px;text-align:center;view-transition-name:invite-card;filter:drop-shadow(0 18px 26px #160203bb)}
+.hero-photo{width:min(48vw,210px);margin:0 auto 16px}
+.hero .names{font-size:clamp(48px,13vw,66px);margin:4px 0 6px}
+.hero-date{font:400 16px/1.5 var(--serif);letter-spacing:.05em}
+.hero-venue{display:flex;flex-direction:column;gap:2px;margin-top:8px;font:400 16px/1.45 var(--serif);overflow-wrap:anywhere}
+.hero-venue small{font:400 10.5px/1.8 var(--serif);letter-spacing:.22em;text-transform:uppercase;color:var(--gold-ink)}
+.invitation{padding:72px 26px 64px;text-align:center}
+.invitation-copy{max-width:520px;margin:auto}
+.invitation-copy h2{margin-bottom:4px}
+.invitation-copy .band-cut{margin-bottom:12px}
+.invitation .host{margin:16px 0}
+.formal-names{font:400 22px/1.4 var(--serif);margin-bottom:12px;overflow-wrap:anywhere}
+.formal-names .amp{font:400 40px/1.1 var(--script);color:var(--gold-ink)}
+.invitation-copy .body-text{max-width:340px;margin:auto}
+.date-block{display:flex;flex-direction:column;align-items:center;gap:2px;margin:26px auto 6px;color:var(--cinnabar)}
+.date-block>span{font:400 11.5px/1.8 var(--serif);letter-spacing:.24em;text-transform:uppercase;color:var(--gold-ink)}
+.date-block b{font:400 30px/1.3 var(--serif);letter-spacing:.05em}
+.venue-name{font-size:21px;margin-top:16px;overflow-wrap:anywhere}
+.invitation-copy .btn{margin:24px 0 12px}
+.countdown{max-width:360px;margin:30px auto 0}
+.cd-row{display:flex;gap:14px;justify-content:center}
+.cd-row>div{flex:1;text-align:center}
+.cd-num{display:block;font:400 28px/1.45 var(--serif);color:var(--cinnabar);font-variant-numeric:tabular-nums}
+.cd-row small{font:400 10px/1.7 var(--serif);text-transform:uppercase;letter-spacing:.14em;color:var(--gold-ink)}
+.countdown.is-done .cd-row{display:none}
+.cd-done{font-size:17px}
+.calendar{margin:26px auto 0;text-align:center}
+.calendar>.eyebrow{font-size:11px;margin-bottom:10px}
+.teaser{display:grid;grid-template-columns:min(38vw,200px) 1fr;align-items:center;gap:22px;max-width:640px;margin:auto;padding:64px 24px}
+.teaser-text{min-width:0}
+.teaser-text h2{margin:6px 0 4px}
+.day{text-align:center;padding:64px 24px}
+.day h2{margin:10px 0 4px}
+.day .band-cut{margin-bottom:16px}
+.day-peek{list-style:none;padding:0;margin:14px auto 28px;max-width:420px;display:grid;gap:8px;font-size:17px;overflow-wrap:anywhere}
+.day-peek li:nth-child(n+5){display:none}
+.day-peek .time{font:400 13px/1 var(--serif);letter-spacing:.12em;color:var(--gold-ink);margin-right:8px}
+.signature{text-align:center;padding:56px 20px 30px}
+.sig-names{font:400 44px/1.25 var(--script);margin:6px 0 10px;color:var(--gold-light);overflow-wrap:anywhere}
+
+/* ---------------------------------------------------------------- story */
+.page-cut{position:fixed;left:50%;pointer-events:none;z-index:-1}
+.page-cut.cut-far{top:2%;width:min(150vw,900px);translate:-50% 0;opacity:.22}
+.page-cut.cut-near{bottom:-10%;width:min(110vw,640px);translate:-50% 0;opacity:.4}
+.page-heading{text-align:center;padding:84px 24px 40px;max-width:720px;margin:auto}
+.page-heading>.eyebrow{margin-bottom:10px}
+.page-heading h1{margin-bottom:16px}
+.page-heading .intro{max-width:460px;margin:auto}
+.page-heading .venue-name{margin-top:4px}
+.story-page{max-width:1000px;margin:auto}
+.moment{padding:0 24px;margin:0 0 60px;display:flex;flex-direction:column;align-items:flex-start}
+.moment-photo{width:min(66vw,380px)}
+.m-2{align-items:flex-end;text-align:right}
+.m-2 .moment-photo{width:min(58vw,340px)}
+.moment figcaption{padding-top:16px;max-width:min(74vw,420px);font-size:20px;line-height:1.45;overflow-wrap:anywhere}
+.moment figcaption .num{display:block;font:400 12px/1.6 var(--serif);letter-spacing:.24em;color:var(--gold-light);margin-bottom:2px}
+.moment figcaption [data-empty]{display:none}
+
+/* ---------------------------------------------------------------- details */
+.details-page{max-width:1100px;margin:auto}
+.details-page .venue-name{color:var(--cream)}
+.programme{padding:52px 26px 48px}
+.programme h2{text-align:center}
+.programme .band-cut{margin-bottom:22px}
+.programme h2+.band-cut+.schedule,.programme h2+.schedule{margin-top:22px}
+.schedule{list-style:none;margin:0 auto;padding:0;max-width:560px}
+.schedule li{display:grid;grid-template-columns:72px 1fr;gap:14px;padding:14px 0;border-top:1px solid var(--line-ink)}
+.schedule li:first-child{border-top:0}
+.schedule time{font:400 14px/1.75 var(--serif);color:var(--gold-ink);letter-spacing:.06em}
+.schedule h3{overflow-wrap:anywhere}
+.schedule p{font-size:15px;color:var(--ink-soft);margin-top:2px;overflow-wrap:anywhere}
+.ceremony{font-size:16px;color:var(--ink-soft);margin:22px auto 0;max-width:560px;text-align:center}
+.programme .calendar{margin-top:24px}
+.location{padding:56px 24px 10px;max-width:700px;margin:auto;text-align:center}
+.location h2{margin-bottom:22px}
+.venue-photo{aspect-ratio:16/9;margin:0 auto 16px}
+.venue-line{font-size:18px;overflow-wrap:anywhere}
+.map-section{margin-top:18px}
+.map-section .btn{white-space:normal}
+.detail-notes{display:grid;gap:26px;margin:40px auto 0;padding:0 24px;max-width:760px}
+.detail-note{border-top:1px solid var(--line);padding-top:24px}
+.detail-note h2,.faq h2{font-size:44px;margin-bottom:10px}
+.detail-note .body-text{margin-bottom:12px;overflow-wrap:anywhere}
+.faq{margin:44px auto 0;padding:0 24px;max-width:760px}
+.faq details{border-bottom:1px solid var(--line);padding:10px 0}
+.faq summary{cursor:pointer;min-height:44px;font-size:18px;padding:8px 30px 8px 0;list-style:none;position:relative;overflow-wrap:anywhere}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";content:"+" / "";position:absolute;right:4px;top:8px;color:var(--gold-light);font:400 22px/1 var(--serif)}
+.faq details[open] summary::after{content:"×";content:"×" / ""}
+.faq details .body-text{padding-block:10px;white-space:pre-line}
+
+/* ---------------------------------------------------------------- rsvp */
+.rsvp-page{max-width:640px;margin:auto;padding:0 20px}
+.rsvp-page .page-heading{padding-bottom:30px}
+.rsvp-page .page-heading>.eyebrow:last-of-type{margin-top:12px}
+.reply-cta{margin-top:20px}
+.reply-card{padding:30px 22px;filter:drop-shadow(0 14px 22px #16020399)}
+.form-title{text-align:center;margin-bottom:6px}
+.reply-box>.band-cut{margin-bottom:12px}
+.reply-form{font:400 15.5px/1.7 var(--serif)}
+.field{display:block;margin-top:18px}
+.kicker{display:block;margin-bottom:8px;font:400 12.5px/1.7 var(--serif);letter-spacing:.07em;color:var(--gold-ink);overflow-wrap:anywhere}
+.opt{color:var(--ink-soft);font-size:11.5px}
+.field input,.field textarea,.question textarea{display:block;width:100%;border:1px solid #3a0d0e59;background:#ffffffd9;color:var(--ink);min-height:48px;padding:12px;border-radius:3px;font:400 16px/1.5 var(--serif)}
+.field textarea,.question textarea{resize:vertical}
+.choice{border:0;padding:0;margin:22px 0 0;min-width:0}
+.choice legend{padding:0;width:100%}
+.choice label{display:flex;align-items:center;gap:10px;min-height:46px;color:var(--ink);overflow-wrap:anywhere}
+input[type=radio]{accent-color:var(--cinnabar);width:18px;height:18px;flex:none}
+.questions{margin-bottom:12px}
+.field-error{color:#9b2c20;font:400 14px/1.6 var(--serif);margin-top:5px;overflow-wrap:anywhere}
+.field-error:empty{display:none}
+[aria-invalid=true]{border-color:#9b2c20!important}
+.send{margin-top:26px}
+.send .btn{width:100%}
+.reply-panel{padding:18px 0;font:400 15.5px/1.8 var(--serif)}
+.panel-title{font:400 44px/1.25 var(--script);color:var(--cinnabar);margin-bottom:6px}
+.reply-panel[data-rsvp-state=error]{color:#9b2c20}
+.reply-panel[data-rsvp-state=preview]{color:var(--gold-ink);border-top:1px solid var(--line-ink);margin-top:18px}
+.note{color:var(--ink-soft)}
+html[data-rsvp-replied] .rsvp-page .page-heading .body-text{display:none}
+.thank-you-copy{text-align:center}
+.thank-you-copy h2{margin-bottom:20px}
+
+/* ---------------------------------------------------------------- view transitions + scenes (docs/11 §8, §11) */
+@view-transition{navigation:auto}
+::view-transition-group(invite-card){animation-duration:.85s;animation-timing-function:cubic-bezier(.4,0,.2,1)}
+::view-transition-new(site-nav):only-child{animation:none}
+::view-transition-old(site-nav):only-child{animation:none;opacity:0}
+/* text unfolds like a paper cut opened out: from its top edge, folded back, it turns down flat (this design's step) */
+.js [data-step]{opacity:0;transform:perspective(700px) rotateX(-72deg);transform-origin:50% 0;transition:opacity .75s cubic-bezier(.3,.6,.3,1),transform 1.05s cubic-bezier(.2,.75,.25,1)}
+.js [data-step].in{opacity:1;transform:none}
+/* a step that holds a link or a button only rises a little: folded, its tap target would be under 44 px */
+.js [data-step]:has(a,button){transform:translateY(10px)}
+.js [data-step].in:has(a,button){transform:none}
+.js .doors[data-step],.js .tassel[data-step]{opacity:1;transform:none}
+.from-envelope .hero-card [data-step]{opacity:1;transform:none;transition:none}
+.from-envelope .hero-card .door{display:none}
+.arrive-fade body{animation:fade-in .5s ease-out both}
+@keyframes fade-in{from{opacity:0}}
+.accent-layer{position:fixed;inset:0;pointer-events:none;z-index:30;overflow:hidden}
+
+@media(min-width:760px){
+.hero-card{width:400px;padding:32px}
+.invitation{padding:96px 40px 84px}
+.teaser{padding:90px 40px;gap:40px}
+.moment{padding:0 60px;margin-bottom:84px}
+.m-1,.m-3{padding-left:12%}
+.m-2{padding-right:12%}
+.detail-notes{grid-template-columns:repeat(2,1fr);gap:36px}
+.programme{padding:72px 40px}
+.page-heading{padding-top:110px}
+.site-nav a{min-width:110px}
+}
+@media(max-width:359px){
+.hero{padding-inline:12px}
+.hero-card{padding:18px 16px 20px}
+.rsvp-page{padding-inline:12px}
+.reply-card{padding:24px 16px}
+.moment,.detail-notes,.faq,.location{padding-inline:16px}
+.programme{padding-inline:16px}
+.schedule li{grid-template-columns:60px 1fr;gap:10px}
+.cd-row{gap:8px}
+.teaser{gap:16px;padding-inline:16px}
+.site-nav a{min-width:60px;padding-inline:8px;letter-spacing:.06em}
+}
+@media(max-height:700px) and (max-width:759px){
+.opening{padding-top:40px}
+.opening .names{font-size:clamp(46px,13vw,60px)}
+.stage{margin-top:18px}
+.hero{padding-top:20px;padding-bottom:16px}
+.hero-card{padding:16px 18px 18px}
+.hero-photo{width:min(32vw,140px);margin-bottom:10px}
+.hero .names{font-size:clamp(44px,12vw,54px);margin:2px 0 4px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
+*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition:none!important}
+.js [data-step]{opacity:1!important;transform:none!important}
+.js .doors>.door{display:none!important}
+.js .band-cut[data-step]{clip-path:none!important}
+.js .sheen,.js .tap-hint,.js .tassel{animation:none!important}
+.clouds,.accent-layer{display:none!important}
+.cut-far,.cut-near{transform:none!important}
+::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation-duration:1ms!important}
+}
+#reply{scroll-margin-top:64px}
+html{scroll-padding-bottom:calc(var(--nav-h) + 12px)}

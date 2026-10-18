@@ -50,6 +50,9 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   'velvet-jewel-box': { music: 'music-box', opening: [[0, 'ribbon'], [650, 'clasp'], [1900, 'slide'], [3100, 'chime']] },
   // Maison Pâtisserie: bow unties (closure) · lid lifts (lid) · tissue parts (tissue) · card lifts (rise) · forward
   // Music Box Ballerina: key winds (closure, tug) · lid swings up (lid) · the comb's first notes as she turns (turn) · card rises (rise) · forward
+  // Red Lacquer & Double Happiness: the cord unwinds (untie) · the flap lifts (flap) · the card comes up (rise) · the red
+  // window (outer) · the gold window (inner) · forward
+  'red-lacquer-double-happiness': { music: 'first-light', opening: [[0, 'ribbon'], [900, 'paper'], [1500, 'slide'], [2150, 'paper'], [2550, 'paper'], [3150, 'chime']] },
   'music-box-ballerina': { music: 'music-box', opening: [[0, 'clasp'], [450, 'clasp'], [900, 'page'], [2300, 'chime'], [2900, 'slide'], [3900, 'chime']] },
   'maison-patisserie': { music: 'garden-waltz', opening: [[180, 'ribbon'], [1100, 'paper'], [1850, 'paper'], [2500, 'slide'], [3200, 'chime']] },
   // Orient Express Voyage: strap buckle (closure) · cover swings open (open) · ticket slides out (rise) · forward

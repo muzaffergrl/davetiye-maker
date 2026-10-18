@@ -5,7 +5,7 @@
 // bottom, left; bands = where decoration reaches into it, G149) and the colours / fonts of the design's own website
 // (themes/<id>/site.css). The part files are copied at full size by scripts/build-print-assets.ts into
 // public/print/<id>/ (card.webp, back.webp, paper.webp).
-// Designs without card parts yet (21, 22, 24, 25, 26, 29) are "composed": the trimmed sheet is the card, set from the design's existing
+// Designs without card parts yet (21, 22, 24, 25, 26, 29, 34) are "composed": the trimmed sheet is the card, set from the design's existing
 // GPT images (no shape drawn, K21) until the parts asked for in the collection's GPT_PROMPTS.md (G139) arrive.
 
 export type Box = readonly [top: number, right: number, bottom: number, left: number];
@@ -471,6 +471,29 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     composed: {
       front: { bg: cover('paper'), images: [{ src: 'petal', style: 'top:6%;left:50%;width:14%;transform:translateX(-50%) rotate(-18deg)' }] },
       back: { bg: cover('paper'), images: [{ src: 'petal', style: 'bottom:5%;left:50%;width:10%;transform:translateX(-50%) rotate(12deg)' }] },
+    },
+  },
+  // 34 (G183, interim until PAKET 6 print/invitation_front_5x7.png + print/invitation_back_5x7.png, 1575×2175, one sheet
+  // per side for 5×7 and A5 — GPT_PROMPTS.md): warm cream paper with a band of the cinnabar envelope paper at its top and
+  // bottom edge — both toned textures cut by the theme build (img/cream, img/red; no shape drawn). The prompts keep the
+  // front / back boxes below empty on the art; on arrival: sources → { front, back } of those two files, composed →
+  // { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }, re-measure the boxes on the
+  // art (G149), then build-print-assets.
+  'red-lacquer-double-happiness': {
+    collection: '34_Red_Lacquer_Double_Happiness',
+    sources: { paper: 'platform/themes/red-lacquer-double-happiness/img/cream-1024.webp', red: 'platform/themes/red-lacquer-double-happiness/img/red-1024.webp' },
+    fonts: gf('family=Luxurious+Script&family=Prata'),
+    script: "'Luxurious Script', cursive", serif: "'Prata', Georgia, serif",
+    ink: '#3A0D0E', accent: '#8C1A1F', front: [17, 13, 15, 13], back: [12, 12, 10, 12],
+    composed: {
+      front: {
+        bg: 'url(paper.webp) 0 0 / 2.4in repeat',
+        images: [
+          { src: 'red', style: 'top:0;left:0;width:100%;height:11%;object-fit:cover' },
+          { src: 'red', style: 'bottom:0;left:0;width:100%;height:9%;object-fit:cover;object-position:50% 80%' },
+        ],
+      },
+      back: { bg: 'url(paper.webp) 0 0 / 2.4in repeat', images: [{ src: 'red', style: 'top:0;left:0;width:100%;height:6%;object-fit:cover' }] },
     },
   },
 };
