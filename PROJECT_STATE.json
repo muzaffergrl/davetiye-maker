@@ -1058,7 +1058,7 @@
       "git_integration": false,
       "deployed_commit": "477589f (2026-10-17; platform tree 387fcfbd77ae; G139 PDF downloads, G144 languages, G145 panel audit) — dpl_BdTLgKpin8Pfse8cEzzDdapYxaS3; last deploy recorded in docs/10 §2c. Later deploy commands were handed to the user's local session (e62dc79, then main 84e108e); none is confirmed run until docs/10 §2c gets its line",
       "undeployed_branch": "main 84e108e (PR #24): K46 access from any device (G146), Etsy auto-check + SMTP (G147, off until env), G148–G159, 21 Crimson live, 22–32 coming, palettes 01–21 (coming); claude/zealous-fermi-hy1o40 adds G172 security fixes",
-      "domain": "bkestudıo.com (IDNA xn--bkestudo-zkb.com) — bought and connected by the user, served by Vercel (main d0d2e7dc, 2026-10-18)"
+      "domain": "bkestudıo.com (IDNA xn--bkestudo-zkb.com) — bought and connected by the user, served by Vercel (main d0d2e7dc, 2026-10-18); G189 (2026-10-18): START HERE 01–32, QR, listing_v3 01–38, etsy_upload.json, listing PDFs and the Etsy shop messages (docs/20 §1.4–1.5) now use https://xn--bkestudo-zkb.com — not yet checked live from a phone"
     },
     "data": {
       "adapter": "blob",

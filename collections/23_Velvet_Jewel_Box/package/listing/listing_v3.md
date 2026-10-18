@@ -10,8 +10,8 @@ earlier `listing.md`: this is its first listing text. Design facts come from the
 | Item | Status on 2026-10-17 |
 |---|---|
 | Sales status | **Not for sale.** `coming` in `platform/lib/marketing/config.ts` (K41: not published). No Etsy listing, no Etsy URL. |
-| Start link `https://davetiye-platform-five.vercel.app/start?theme=velvet-jewel-box` | **Not live.** The design is not deployed and not open on `/start` in production. Not checked on the live site, not opened on a phone. [VERIFY: answers `200` and names "Design: Velvet Jewel Box" after deploy] |
-| Live demo `https://davetiye-platform-five.vercel.app/start/demo/velvet-jewel-box` (in the description under TRY THE LIVE DEMO, and named in planned image 8) | **Not live.** The demo route exists only after the theme is deployed. [VERIFY: answers `200` with `data-theme="velvet-jewel-box"` and the sample couple Isabelle & Julian after deploy] |
+| Start link `https://xn--bkestudo-zkb.com/start?theme=velvet-jewel-box` | **Not live.** The design is not deployed and not open on `/start` in production. Not checked on the live site, not opened on a phone. [VERIFY: answers `200` and names "Design: Velvet Jewel Box" after deploy] |
+| Live demo `https://xn--bkestudo-zkb.com/start/demo/velvet-jewel-box` (in the description under TRY THE LIVE DEMO, and named in planned image 8) | **Not live.** The demo route exists only after the theme is deployed. [VERIFY: answers `200` with `data-theme="velvet-jewel-box"` and the sample couple Isabelle & Julian after deploy] |
 | Theme files (`platform/themes/velvet-jewel-box/`) | Being built in parallel. This text follows the theme brief (opening, pages, palette, fonts, default music); it was not read against the finished theme. [VERIFY: description, §5 alt texts and §10 re-read against the theme README, theme.json and index.html] |
 | Current platform release (simpler editor K29, Headings & labels, thank-you page, guest password, RSVP v2) | Live for the designs that are open (since G079, 2026-10-15). Shared by every theme, so this design gets the same editor once deployed. Not tried with this theme. |
 | Manual order check (`CLAIM_ORDER_VERIFICATION=manual`) | Decided on (K34, 2026-10-15); the records disagree on whether it is on in production (see the design 14 listing §0). Not read in this task. The listing keeps the order sentence with [VERIFY: manual order check on in production]. |
@@ -20,7 +20,7 @@ earlier `listing.md`: this is its first listing text. Design facts come from the
 | Our Story 3D carousel | Design-specific (rotating photo carousel; swipe, drag, arrow buttons, keyboard; a simple slider with reduced motion). **Not tried** on the live site or on any phone. [VERIFY: carousel on a real phone, and with reduced motion on] |
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** No phone check of any kind has been done for this design. |
 | Edit link by email | **Not built.** The buyer copies the link or uses "Email it to myself" (their own mail app). The listing says so. |
-| Web address | `davetiye-platform-five.vercel.app` is temporary: choose the final domain before the first sale (or keep a permanent redirect from this one). |
+| Web address | `xn--bkestudo-zkb.com` (bkestudıo.com: bought and connected by the user, served by Vercel). G189 (2026-10-18) moved the start link, demo, START HERE guide and QR codes here from the earlier temporary Vercel address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
 | Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com** (shop-wide). |
 | Response time, refund policy | Shop-wide, decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, quantity | **Price open: [PRICE].** Not decided for this design. Quantity: 999 if the shop-wide rule of 2026-10-16 (no stock limit) applies. Hosting extension, renewal and the Etsy shop URL are still open. |
@@ -52,7 +52,7 @@ A closed aubergine velvet ring box tied with a champagne satin ribbon. Your gues
 
 TRY THE LIVE DEMO
 See the jewelry box open on your own phone before you buy (sample names and photos):
-https://davetiye-platform-five.vercel.app/start/demo/velvet-jewel-box
+https://xn--bkestudo-zkb.com/start/demo/velvet-jewel-box
 Copy the link into your phone's browser. [VERIFY: demo live after deploy]
 
 WHAT YOU GET
@@ -236,7 +236,7 @@ No. It is a digital product.
 ## 8. Etsy's automatic messages (shop-wide, the same for every design)
 
 Etsy's "Message to Buyers for Digital Items" applies to every digital listing, so it cannot carry this design's own start link: it links
-the design chooser `https://davetiye-platform-five.vercel.app/start` (docs/19 §4.4). The START HERE PDF carries this design's own link. Both texts are already entered in
+the design chooser `https://xn--bkestudo-zkb.com/start` (docs/19 §4.4). The START HERE PDF carries this design's own link. Both texts are already entered in
 Shop Manager (docs/20 §7.1) and need no change for this design. Until this design is deployed and open on `/start`, a buyer could not find it in the chooser: one more reason it stays unpublished.
 
 Message to Buyers for Digital Items:
@@ -244,7 +244,7 @@ Message to Buyers for Digital Items:
 ```text
 Thank you for your order! Your download is your START HERE guide (PDF). Open it and tap the start link inside.
 
-Can't open the PDF? Start here instead and choose the design you bought: https://davetiye-platform-five.vercel.app/start
+Can't open the PDF? Start here instead and choose the design you bought: https://xn--bkestudo-zkb.com/start
 
 You will enter your Etsy order number, your email and your first names. Then SAVE YOUR EDIT LINK when it appears: it opens your editor, and we cannot email it to you yet.
 
@@ -254,7 +254,7 @@ Questions? Message us here on Etsy with your order number.
 Message to Buyers (receipt):
 
 ```text
-Thank you! Start your wedding website from the START HERE PDF in your download, or at https://davetiye-platform-five.vercel.app/start (choose the design you bought). Please save your private edit link when it appears. Questions? Message us on Etsy.
+Thank you! Start your wedding website from the START HERE PDF in your download, or at https://xn--bkestudo-zkb.com/start (choose the design you bought). Please save your private edit link when it appears. Questions? Message us on Etsy.
 ```
 
 ## 9. After the sale

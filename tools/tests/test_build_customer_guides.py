@@ -67,9 +67,9 @@ def test_values():
     assert [no for no, _, _ in eu.DESIGNS] == [f"{i:02d}" for i in range(1, 33)]
     for no, folder, theme in eu.DESIGNS:
         v = b.values(theme)
-        assert v["START_URL"] == f"https://davetiye-platform-five.vercel.app/start?theme={theme}", v
-        assert v["PRIVACY_URL"] == "https://davetiye-platform-five.vercel.app/privacy"
-        assert v["MY_URL"] == "https://davetiye-platform-five.vercel.app/my"
+        assert v["START_URL"] == f"https://xn--bkestudo-zkb.com/start?theme={theme}", v
+        assert v["PRIVACY_URL"] == "https://xn--bkestudo-zkb.com/privacy"
+        assert v["MY_URL"] == "https://xn--bkestudo-zkb.com/my"
         assert v["OPENING"] == NOT_ENVELOPE.get(theme, "envelope"), (no, v["OPENING"])
         assert v["OPENING_TAB"] == v["OPENING"].capitalize(), (no, v["OPENING_TAB"])
         assert b.language_class(b.design_fonts(theme)) == LANGUAGE[no], (no, b.design_fonts(theme))
@@ -127,7 +127,7 @@ def test_pdf(tmp: Path):
     assert "Wallet is the opening page" in " ".join(text.split()), "preview tab not named after the opening"
     # G148: the box is in the PDF, with its title and the /my address
     flat = " ".join(text.split())
-    assert "Continue on another device" in flat and "davetiye-platform-five.vercel.app/my" in flat, flat[:300]
+    assert "Continue on another device" in flat and "xn--bkestudo-zkb.com/my" in flat, flat[:300]
     # G154 (G090 P0-01, P1-05, P2-04): K48 texts instead of placeholders, Downloads, and the start address as plain text
     assert "[" not in flat.replace("[{", ""), "a [PLACEHOLDER] is left in the guide"
     assert "usually within 24 hours" in flat and "we can extend it" in flat and "within 30 days" in flat

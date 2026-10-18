@@ -32,7 +32,7 @@ function arg(name: string): string | null {
 const THEME = arg('theme');
 const OUT = arg('out');
 const JOBS = arg('jobs');
-const PUBLIC_URL = 'https://davetiye-platform-five.vercel.app';
+const PUBLIC_URL = 'https://xn--bkestudo-zkb.com';
 if (!THEME || !OUT || !JOBS) {
   console.error('usage: capture.ts --theme <id> --out <dir> --jobs <jobs.json>');
   process.exit(2);

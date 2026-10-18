@@ -77,10 +77,10 @@ GOOD TO KNOW
 ```
 
 ### 1.4 Message to Buyers (makbuz + sipariş onay e-postası) [doğrulandı; alanda sınır tanımlı değil]
-docs/19 §4.4. `{START_BASE}` = `https://davetiye-platform-five.vercel.app/start` (alan adı alınınca değişir, docs/05 §C).
+docs/19 §4.4. `{START_BASE}` = `https://xn--bkestudo-zkb.com/start` (G189, 2026-10-18: marka alan adı bkestudıo.com; Etsy elle yazılmış `ı`'yı her tarayıcıda göstermeyebileceği için IDNA biçimi yazılır, docs/05 §C). **Dükkânda bu iki mesaj eski Vercel adresiyle kaydedildiyse yenisiyle değiştirilir.**
 
 ```text
-Thank you! Start your wedding website from the START HERE PDF in your download, or at https://davetiye-platform-five.vercel.app/start (choose the design you bought). Please save your private edit link when it appears. Questions? Message us on Etsy.
+Thank you! Start your wedding website from the START HERE PDF in your download, or at https://xn--bkestudo-zkb.com/start (choose the design you bought). Please save your private edit link when it appears. Questions? Message us on Etsy.
 ```
 
 ### 1.5 Message to Buyers for Digital Items (indirme sayfası; bütün dijital ilanlar) [doğrulandı; alanda sınır tanımlı değil]
@@ -88,7 +88,7 @@ Thank you! Start your wedding website from the START HERE PDF in your download, 
 ```text
 Thank you for your order! Your download is your START HERE guide (PDF). Open it and tap the start link inside.
 
-Can't open the PDF? Start here instead and choose the design you bought: https://davetiye-platform-five.vercel.app/start
+Can't open the PDF? Start here instead and choose the design you bought: https://xn--bkestudo-zkb.com/start
 
 You will enter your Etsy order number, your email and your first names. Then SAVE YOUR EDIT LINK when it appears: it opens your editor, and we cannot email it to you yet.
 

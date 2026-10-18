@@ -14,12 +14,12 @@ parts are in.
 |---|---|
 | Design artwork | **Interim.** The design's own GPT parts (night sky, chart paper, brass observatory dome and slit shutter, stars, engraved star chart, planisphere rim, astrolabe, moon phases, orbits, card, share image) and sample photos are ordered in `assets/gpt/GPT_PROMPTS.md` and do not exist yet. The theme runs on toned plain textures and a plain brass crop; there are no stars yet (the constellation line alone). No listing image or video may be made before the parts are in and the theme has been looked at again. |
 | Sale status | `coming` in `platform/lib/marketing/config.ts`: not on the sales site, and `/start?theme=celestial-observatory` is refused in production until it is `live`. |
-| Start link `https://davetiye-platform-five.vercel.app/start?theme=celestial-observatory` | **Not live** (design in review). Not deployed in this task. |
-| Live demo `https://davetiye-platform-five.vercel.app/start/demo/celestial-observatory` | Works in a local production build (2026-10-17, G168). **Not deployed**; not opened on the live site or a phone. |
+| Start link `https://xn--bkestudo-zkb.com/start?theme=celestial-observatory` | **Not live** (design in review). Not deployed in this task. |
+| Live demo `https://xn--bkestudo-zkb.com/start/demo/celestial-observatory` | Works in a local production build (2026-10-17, G168). **Not deployed**; not opened on the live site or a phone. |
 | Platform features (editor, RSVP questions, Excel / Google Sheets, music, map, guest password, thank-you page, languages) | The same for every design; see the 01–20 listings for their live status. Tried for this theme only in the local build's automated checks (theme-check, G168). |
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** |
 | Edit link by email | **Not built.** The buyer copies the link or uses "Email it to myself". |
-| Web address | `davetiye-platform-five.vercel.app` is temporary. |
+| Web address | `xn--bkestudo-zkb.com` (bkestudıo.com: bought and connected by the user, served by Vercel). G189 (2026-10-18) moved the start link, demo, START HERE guide and QR codes here from the earlier temporary Vercel address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
 | Shop name, support email | K33: **BKE Studio**, **bkestudio@gmail.com**. |
 | Response time, refund policy | docs/20 §6: 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, quantity | **Open** — `[PRICE]`. Quantity 999 like the other designs. |
@@ -49,7 +49,7 @@ A small brass observatory under a midnight sky, engraved star charts, moon phase
 
 TRY THE LIVE DEMO
 See the dome open on your own phone before you buy (sample names):
-https://davetiye-platform-five.vercel.app/start/demo/celestial-observatory
+https://xn--bkestudo-zkb.com/start/demo/celestial-observatory
 Copy the link into your phone's browser. [VERIFY: demo live after deploy]
 
 WHAT YOU GET

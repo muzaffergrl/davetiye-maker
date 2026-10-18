@@ -12,11 +12,11 @@ Thank you for choosing BKE Studio. This guide takes you from this PDF to a live 
 
 ## Start now: the first 5 steps
 
-1. Open your start link: [Start your Celestial Observatory website](https://davetiye-platform-five.vercel.app/start?theme=celestial-observatory). Or scan this QR code with your phone camera.
+1. Open your start link: [Start your Celestial Observatory website](https://xn--bkestudo-zkb.com/start?theme=celestial-observatory). Or scan this QR code with your phone camera.
 
 ![QR code of your start link](img/start_qr_page.png)
 
-Link and QR code not working? Type this address into your browser: [https://davetiye-platform-five.vercel.app/start?theme=celestial-observatory](https://davetiye-platform-five.vercel.app/start?theme=celestial-observatory)
+Link and QR code not working? Type this address into your browser: [https://xn--bkestudo-zkb.com/start?theme=celestial-observatory](https://xn--bkestudo-zkb.com/start?theme=celestial-observatory)
 
 2. Find your Etsy order number: on Etsy, go to You → Purchases and reviews, or look for "Order #…" in your Etsy confirmation email.
 3. Enter your Etsy order number, your email address and your first names. Check the website address, then tap **Create my website**.
@@ -29,7 +29,7 @@ There is no account and no password. Your Etsy order number and the email addres
 
 > **Continue on another device**
 >
-> 1. Open [https://davetiye-platform-five.vercel.app/my](https://davetiye-platform-five.vercel.app/my), or tap **Create your website** on our website.
+> 1. Open [https://xn--bkestudo-zkb.com/my](https://xn--bkestudo-zkb.com/my), or tap **Create your website** on our website.
 > 2. Under **Open or start your website**, enter the same **Etsy order number** and **Email address**, then tap **Continue**.
 > 3. Your editor opens where you left off: every change is saved online.
 
@@ -215,7 +215,7 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 **Can my partner edit too?** Yes. Give your partner your order number and email, or your edit link, and nobody else.
 
-**Can I use a computer, or more than one phone?** Yes. On each one, open [https://davetiye-platform-five.vercel.app/my](https://davetiye-platform-five.vercel.app/my) and enter your order number and email. On a computer the preview stays beside the editor.
+**Can I use a computer, or more than one phone?** Yes. On each one, open [https://xn--bkestudo-zkb.com/my](https://xn--bkestudo-zkb.com/my) and enter your order number and email. On a computer the preview stays beside the editor.
 
 **Can I change the website address?** No, it is fixed when you create your website. Your own domain (yournames.com) is not included.
 
@@ -241,7 +241,7 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 **"This edit link no longer works."** A new link may have replaced it, or only part of the link was copied. Tap **Continue with your order number** and enter your Etsy order number and email: your editor opens again.
 
-**"This order already has a website."** Open [https://davetiye-platform-five.vercel.app/my](https://davetiye-platform-five.vercel.app/my) and enter your order number with the email you used when you started (your partner's, if they started it).
+**"This order already has a website."** Open [https://xn--bkestudo-zkb.com/my](https://xn--bkestudo-zkb.com/my) and enter your order number with the email you used when you started (your partner's, if they started it).
 
 **My order number and email do not open my editor.** Check both: use the email you entered on the start page. Still stuck? Message us on Etsy with your order number.
 
@@ -267,6 +267,6 @@ Message BKE Studio on Etsy (in the conversation of your order), or write to **bk
 
 Prefer us to do it? Send us your details on Etsy and we enter them for you, as a separate Etsy purchase.
 
-Your guests' replies are visible only in your private editor, not on your website. To have your website, its photos and your guests' replies deleted sooner, message us on Etsy with your order number: we delete them within 30 days. Privacy notice: [https://davetiye-platform-five.vercel.app/privacy](https://davetiye-platform-five.vercel.app/privacy).
+Your guests' replies are visible only in your private editor, not on your website. To have your website, its photos and your guests' replies deleted sooner, message us on Etsy with your order number: we delete them within 30 days. Privacy notice: [https://xn--bkestudo-zkb.com/privacy](https://xn--bkestudo-zkb.com/privacy).
 
 The design's sample names, dates, places and photos are fictional. Replace them before you share your website.

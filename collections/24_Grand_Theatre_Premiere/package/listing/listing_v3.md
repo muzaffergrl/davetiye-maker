@@ -8,8 +8,8 @@ Internal listing kit for the seller (G162, 2026-10-17). **Draft — not publishe
 |---|---|
 | Design artwork | **Interim.** The theme runs on interim pieces toned from two existing textures; the painted curtain, gilded arch, programme card, ticket stub and sample photos are ordered in `assets/gpt/GPT_PROMPTS.md` and **do not exist yet**. Nothing in this listing may be published before they are in the theme and checked by eye. |
 | Sales status | `coming` in `platform/lib/marketing/config.ts`: not on `/start`, not on the sales site in production. |
-| Start link `https://davetiye-platform-five.vercel.app/start?theme=grand-theatre-premiere` | **Not live**: the design is not deployed and is `coming`. |
-| Live demo `https://davetiye-platform-five.vercel.app/start/demo/grand-theatre-premiere` | **Not live** (same reason). Tried only on a local build (Chromium, phone size). |
+| Start link `https://xn--bkestudo-zkb.com/start?theme=grand-theatre-premiere` | **Not live**: the design is not deployed and is `coming`. |
+| Live demo `https://xn--bkestudo-zkb.com/start/demo/grand-theatre-premiere` | **Not live** (same reason). Tried only on a local build (Chromium, phone size). |
 | Questions & answers, RSVP questions, music, map and directions, Excel / Google Sheets, printable invitation, languages | Platform features, the same for every design; this theme carries every marker (local tests). **Not tried on the live site.** |
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** The page-turn transition between pages needs cross-document view transitions (Chrome; Safari 18.2+); other browsers show a simpler page entrance. |
 | Shop name, support email | K33: **BKE Studio**, **bkestudio@gmail.com**. |
@@ -40,7 +40,7 @@ A peacock velvet curtain under an antique-gold arch. Your guests tap the curtain
 
 TRY THE LIVE DEMO
 See the curtain rise on your own phone before you buy (sample names):
-https://davetiye-platform-five.vercel.app/start/demo/grand-theatre-premiere [VERIFY: demo live]
+https://xn--bkestudo-zkb.com/start/demo/grand-theatre-premiere [VERIFY: demo live]
 Copy the link into your phone's browser.
 
 WHAT YOU GET
