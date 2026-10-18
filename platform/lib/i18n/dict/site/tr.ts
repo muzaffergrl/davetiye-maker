@@ -302,6 +302,10 @@ const dict: Dict = {
   'Open the envelope': 'Zarfı açın',
   'Together with their families': 'Aileleriyle birlikte',
   'invite you to celebrate': 'sizi kutlamaya davet ediyor',
+  // G183 Red Lacquer & Double Happiness
+  "Double happiness": "Çifte mutluluk",
+  "Open the envelope": "Zarfı açın",
+  "Together with their families": "Aileleriyle birlikte",
 };
 
 export default dict;

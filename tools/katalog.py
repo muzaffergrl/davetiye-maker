@@ -472,6 +472,13 @@ EK_TEMALAR = [
          dekor="Kadife çiçeği çelenkleri, kına desenleri, pirinç diya kandilleri, ipek püsküller", teknik="zengin minyatür + fotogerçekçi ipek",
          font=("Rozha One", "Yrsa"), palet_adi="saffron-fuchsia-gold",
          hareket="Püskül sarkacı, altın kılıfın yana kayması, düz ipek kapağın kadife iç yüze devretmesi, kadife çiçeği yapraklarının süzülmesi, diya alevlerinin sırayla yanması, kına çizgisinin kemer çevresinde akması (maske), metnin kılıf gibi yandan kayarak yerleşmesi."),
+    # 3. dalga (33–38, docs/24; K23 sıkı: ilk sayfa kapalı zarf): aynı kurallar; GPT parçalarından önce kuruldu.
+    dict(no=34, klasor="34_Red_Lacquer_Double_Happiness", ad="Red Lacquer & Double Happiness",
+         zarf="Dikey kırmızı kâğıt zarf, cepte altın varak 囍, ip-düğme kapama; ip düğmeden dönerek çözülür ve düşer, kapak katından kalkar, kart iki kâğıt kesim şakayık penceresine sarılı yükselir, pencereler kat kat iki yana açılır.",
+         foto="Ay kapısı (moon gate) yuvarlak çerçeveler; iki kırmızı kâğıt kapı kanadı yana kayarak fotoğrafı açar; mekân fotoğrafı kafes kapılarla.",
+         dekor="Şakayık, kâğıt kesim (jianzhi) desenleri, kırmızı lake, altın bulut motifleri, püsküllü düğüm", teknik="kâğıt kesim + lake + altın varak",
+         font=("Luxurious Script", "Prata"), palet_adi="lacquer-red-gold-cream",
+         hareket="İpin düğmeden dönerek çözülmesi, kapağın katından kalkması, kâğıt kesim pencere katlarının kanat kanat açılması, altın bulutların süzülmesi, iki hızda kayan kâğıt kesim katmanlar (paralaks), ay kapısı kanatlarıyla foto, metnin üst kenarından katlanarak açılması, sallanan püsküllü düğüm"),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

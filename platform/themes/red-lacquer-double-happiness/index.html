@@ -1,0 +1,98 @@
+<!doctype html>
+<!-- Red Lacquer & Double Happiness · page 1 — the closed envelope (/<slug>). On the lacquer ground "Together with their
+     families", the names in Luxurious Script, then a tall red paper envelope with a gold-leaf 囍 on its pocket, closed by a
+     red cord wound round two paper buttons; below it the date · city and "Tap to open", Skip in the corner (the layout of
+     the catalogue cover, K23). Opening (docs/24 row 34, site.js MOTION.envelope): on tap the cord unwinds — the flap
+     button turns round and round as it lets go, the cord slips off and falls — the flap lifts on its fold, the card comes
+     up out of the envelope still wrapped in two paper-cut peony windows (red, then gold), each window opens in two
+     halves like shutters, one layer after the other, gold clouds drift past (GPT), then the card comes forward and
+     flies to home (view transition invite-card → the home hero card). Envelope back, pocket, flap (two faces), buttons,
+     cord, 囍, the two window layers, card and clouds are separate layers; the paper and the gold are GPT pixels cut and
+     toned by build_images.py (interim until the PAKET 5 parts, GPT_PROMPTS.md). Personal text: none — [data-field] /
+     [data-text] / [data-photo] are filled on the server. Thank-you mode (G075): the same opening; the card carries the
+     thank-you title and the date, its window the thank-you photo or — without one — the red paper. Design texts:
+     data-copy (G068, theme.json "copy"). -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#3a080b">
+<title data-text="{name_display} · {copy.card_line}">Red Lacquer &amp; Double Happiness</title>
+<meta name="description" data-if="!thank_you_on" data-attr-content="{copy.envelope_kicker} · {name_display} · {date|date-long} · {venue.city_region}" content="A wedding invitation">
+<meta name="description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {name_display} · {date|date-long}" content="Thank you">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{name_display} · {date}" content="Wedding invitation">
+<meta property="og:description" data-if="!thank_you_on" data-attr-content="{copy.card_line} · {date|date-long} · {venue.city_region}" content="Our wedding">
+<meta property="og:description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {date|date-long}" content="Thank you">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Luxurious+Script&amp;family=Prata&amp;display=swap">
+<!-- Ma Shan Zheng for the one character 囍 (the interim gold glyph until GPT's gold-leaf xi_gold): not render-blocking —
+     media="print" until site.js switches it on; the browser then fetches only the unicode-range slice holding U+56CD -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&amp;display=swap" media="print" data-font-later>
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="parts.css">
+<link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
+<script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
+(function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'';if(sessionStorage.getItem('invite:opened'+k)&&!/[?&]replay=1(&|$)/.test(location.search))r.classList.add('is-opened');}catch(e){}})(document.documentElement);
+</script>
+<!-- prefetch the home page: the rule points at the "Enter" link, whose href the platform has already set to /<slug>/home -->
+<script type="speculationrules">{"prefetch":[{"source":"document","where":{"selector_matches":"a[data-enter]"},"eagerness":"immediate"}]}</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-opening" data-pending="This link will be added soon.">
+<a class="textlink skip" href="home.html" data-skip><span data-copy="envelope_skip">Skip</span></a>
+<main class="opening">
+  <!-- the far paper-cut layer behind the scene (GPT jianzhi_far, W2.18; hidden until it exists) -->
+  <span class="cut-far" aria-hidden="true"></span>
+  <div class="opening-heading">
+    <p class="eyebrow" data-if="!thank_you_on" data-copy="envelope_kicker">Together with their families</p>
+    <p class="eyebrow" data-if="thank_you_on" data-copy="ty_kicker">With love and thanks</p>
+    <h1 class="names" data-fit><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></h1>
+  </div>
+  <div class="stage" role="button" tabindex="0" aria-label="Open the envelope" data-copy-attr="aria-label:envelope_open">
+    <div class="envelope">
+      <!-- the back of the envelope with its lining (interim: the red paper, darker) -->
+      <span class="env-back"></span>
+      <!-- the card that comes up wrapped in two paper-cut windows (interim: cream paper toned from GPT texture;
+           card_small with a round #00FF00 window replaces it, GPT_PROMPTS.md W2.14) -->
+      <div class="card" aria-hidden="true">
+        <div class="card-photo photo-slot" data-slot="hero_portrait">
+          <img data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_round-640.webp" sizes="min(34vw, 190px)" alt="">
+          <span class="ph-mark" data-if="!thank_you_on"><span>Your photo here</span></span>
+          <img class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_round-640.webp" sizes="min(34vw, 190px)" alt="">
+          <span class="ty-decor" data-if="thank_you_on !thank_you.photo"><img src="img/red-640.webp" alt=""></span>
+        </div>
+        <p class="eyebrow card-line" data-if="!thank_you_on" data-copy="card_line">Our wedding</p>
+        <p class="card-names" data-if="!thank_you_on" data-field="name_display"></p>
+        <p class="card-names ty-title" data-if="thank_you_on" data-field="thank_you_title"></p>
+        <p class="eyebrow card-date" data-field="date"></p>
+        <!-- the two paper-cut peony windows over the card: the outer (red) opens first, then the inner (gold) -->
+        <span class="veil vi l"></span><span class="veil vi r"></span>
+        <span class="veil vo l"></span><span class="veil vo r"></span>
+      </div>
+      <!-- the pocket and its gold-leaf 囍 (interim: the character U+56CD of Ma Shan Zheng set by site.css as generated
+           content and filled with the gold leaf — no text node, never edited or translated; GPT's xi_gold replaces it,
+           docs/24: 囍 is gold leaf, not a text layer) -->
+      <span class="pocket"></span>
+      <span class="xi" aria-hidden="true"></span>
+      <!-- the flap on its fold: outside face (with the flap button), inside face (seen once it has lifted) -->
+      <span class="flap"><span class="flap-out"><span class="button b-flap"></span></span><span class="flap-in"></span></span>
+      <!-- the string-and-button closure: the body button and the cord (GPT, W2.10) wound round both buttons -->
+      <span class="button b-body"></span>
+      <span class="string"></span>
+      <!-- lamplight passing over the lacquer red (light only, docs/11 §5.7) -->
+      <span class="sheen"></span>
+    </div>
+  </div>
+  <div class="opening-foot">
+    <p class="opening-date eyebrow"><span data-field="date"></span><span aria-hidden="true"> · </span><span data-field="venue.city"></span></p>
+    <p class="eyebrow tap-hint" aria-hidden="true"><span data-copy="envelope_hint_tap">Tap to open</span></p>
+    <a class="btn enter" href="home.html" data-enter><span data-copy="envelope_enter">Enter</span></a>
+    <button class="textlink replay" type="button"><span data-copy="envelope_replay">Replay the opening</span></button>
+  </div>
+  <!-- without JavaScript (no <noscript>: its content is raw text, the platform could not rewrite the link) -->
+  <p class="nojs-only"><a class="btn" href="home.html"><span data-copy="envelope_open">Open the envelope</span></a></p>
+</main>
+</body>
+</html>

@@ -387,6 +387,32 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     llmsLine: 'a fuchsia silk envelope in a gold laser-cut paisley sleeve: the tassel swings, the sleeve slides off and the card rises from a velvet lining; carved arch photo frames traced with henna; saffron, fuchsia and gold.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
+  // G183 (coming): written against the theme as built (README); the cord, the paper-cut windows, the moon gates and the
+  // gold clouds arrive with the GPT parts.
+  'red-lacquer-double-happiness': {
+    id: 'red-lacquer-double-happiness',
+    collection: '34_Red_Lacquer_Double_Happiness',
+    demoCouple: 'Mei & Julian',
+    style: msg('A red paper envelope with a gold-leaf double happiness, a cord-and-button closure, paper-cut peonies and round moon gate photo frames'),
+    metaDescription: msg('A red paper envelope tied with a cord opens through paper-cut peony windows into your wedding website. Personalize it in your online editor.'),
+    intro: msg('Lacquer red, warm cream and gold leaf, with paper-cut peonies and the double happiness character in gold. Your invitation waits in a red envelope tied with a cord, and every photo sits in a round moon gate.'),
+    opening: msg('Your guests tap the envelope. The red cord unwinds as its button turns and slips away, the flap lifts, and the card comes up wrapped in two paper-cut peony windows that open one after the other while gold clouds drift past. The card comes forward to become your home page.'),
+    pages: {
+      home: msg('Your round portrait and names on a cream card on the lacquer red, then the invitation under a paper-cut border, a countdown, calendar links and a knot with its tassel.'),
+      story: msg('Three round photos in moon gates; the two red paper doors of each gate slide apart as guests scroll to it, while paper-cut layers drift at two speeds behind the page.'),
+      details: msg('The order of the day on cream paper, a venue photo uncovered by two sliding lattice doors, an optional map, dress code, travel and questions and answers.'),
+      rsvp: msg('A cream reply card on the lacquer red with your names and reply-by date, then the reply form; a few gold clouds rise when a reply is sent.'),
+    },
+    palette: [
+      { name: msg('Lacquer red'), hex: '#4A0A0E' },
+      { name: msg('Cinnabar'), hex: '#A81E24' },
+      { name: msg('Gold'), hex: '#C9A14A' },
+      { name: msg('Cream'), hex: '#F5ECD8' },
+    ],
+    fonts: ['Luxurious Script', 'Prata'],
+    llmsLine: 'a red paper envelope with a gold-leaf double happiness and a cord-and-button closure, opening through paper-cut peony windows; round moon gate photo frames; lacquer red, cream and gold.',
+    relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
+  },
   'blush-garden-rose': {
     id: 'blush-garden-rose',
     collection: '03_Blush_Garden_Rose',
@@ -1180,6 +1206,7 @@ export const DESIGN_STYLES: Record<string, readonly StyleId[]> = {
   'sky-lantern-festival': ['classic'],
   'music-box-ballerina': ['classic', 'storybook'],
   'marigold-mehndi': ['classic', 'floral'],
+  'red-lacquer-double-happiness': ['classic'],
   'blush-garden-rose': ['floral'],
   'olive-ivory': ['classic'],
   'mediterranean-lemon': ['destination'],
