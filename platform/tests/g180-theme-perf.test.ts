@@ -15,12 +15,13 @@ import { ROOT } from '../scripts/lib/theme-env.ts';
 
 const THEMES = path.join(ROOT, 'themes');
 const ids = readdirSync(THEMES).filter((d) => !d.startsWith('_') && existsSync(path.join(THEMES, d, 'site.css')));
-// the 32 designs G180 measured and fixed (01–32); a design added later runs scripts/font-fallback.ts and marks its
+// the designs G180 measured and fixed (01–38); a design added later runs scripts/font-fallback.ts and marks its
 // deferred parts when it is built (docs/11 §6, §12) — until then it is listed as a diagnostic, not failed
-const G180 = ['olive-ivory', 'dusty-blue-champagne', 'blush-garden-rose', 'vintage-airmail-love-letter', 'mediterranean-lemon', 'art-deco-black-tie', 'burgundy-velvet-autumn', 'winter-evergreen', 'lavender-provence', 'tuscan-vineyard', 'boho-pampas-terracotta', 'tropical-destination', 'enchanted-forest-storybook', 'ivory-lace-pearls', 'cherry-blossom-spring', 'sunflower-rustic-barn', 'emerald-gold-estate', 'wildflower-meadow-vellum', 'midnight-garden', 'coastal-seaside', 'crimson-rose-atelier', 'nocturne-lake-estate', 'velvet-jewel-box', 'grand-theatre-premiere', 'orient-express-voyage', 'kintsugi-washi', 'riad-lantern-nights', 'maison-patisserie', 'celestial-observatory', 'azulejo-mosaic', 'sky-lantern-festival', 'music-box-ballerina'];
+const G180 = ['olive-ivory', 'dusty-blue-champagne', 'blush-garden-rose', 'vintage-airmail-love-letter', 'mediterranean-lemon', 'art-deco-black-tie', 'burgundy-velvet-autumn', 'winter-evergreen', 'lavender-provence', 'tuscan-vineyard', 'boho-pampas-terracotta', 'tropical-destination', 'enchanted-forest-storybook', 'ivory-lace-pearls', 'cherry-blossom-spring', 'sunflower-rustic-barn', 'emerald-gold-estate', 'wildflower-meadow-vellum', 'midnight-garden', 'coastal-seaside', 'crimson-rose-atelier', 'nocturne-lake-estate', 'velvet-jewel-box', 'grand-theatre-premiere', 'orient-express-voyage', 'kintsugi-washi', 'riad-lantern-nights', 'maison-patisserie', 'celestial-observatory', 'azulejo-mosaic', 'sky-lantern-festival', 'music-box-ballerina', 'marigold-mehndi', 'red-lacquer-double-happiness', 'highland-tartan-thistle', 'victorian-glasshouse', 'art-nouveau-lily', 'papel-picado-fiesta'];
 const read = (id: string, f: string) => readFileSync(path.join(THEMES, id, f), 'utf8');
 const pages = (id: string) => readdirSync(path.join(THEMES, id)).filter((f) => f.endsWith('.html'));
-const FACES = /<style>\/\* names fallback: scripts\/font-fallback\.ts \*\/\n@font-face\{font-family:fb1;[^\n]*\}\n@font-face\{font-family:fb2;[^\n]*\}<\/style>\n<link rel="stylesheet" href="site\.css">/;
+// fb1 / fb2 for the names; fk1 / fk2 for the kicker's face where that face wraps differently (36)
+const FACES = /<style>\/\* names fallback: scripts\/font-fallback\.ts \*\/\n@font-face\{font-family:fb1;[^\n]*\}\n@font-face\{font-family:fb2;[^\n]*\}(?:\n@font-face\{font-family:fk1;[^\n]*\}\n@font-face\{font-family:fk2;[^\n]*\})?<\/style>\n<link rel="stylesheet" href="site\.css">/;
 const RELEASE = /<style>\.js:not\(\.parts-on\) img\[data-defer\]\{display:none!important\}<\/style>\n<script>\/\* deferred opening parts \(G180[\s\S]*?<\/script>\n/;
 
 test('names fallback faces: the same inline block before site.css on every page, fb1, fb2 in the site.css stack', (t) => {
@@ -33,7 +34,9 @@ test('names fallback faces: the same inline block before site.css on every page,
     assert.equal(new Set(blocks).size, 1, `${id}: one measurement on every page`);
     const src = /src:local\(Times New Roman\),local\(Liberation Serif\),local\(Tinos\);[\s\S]*src:local\(Noto Serif\),local\(Droid Serif\);/;
     assert.match(blocks[0]!, src, `${id}: fb1 = Times metrics, fb2 = Noto Serif`);
-    for (const d of ['size-adjust', 'ascent-override', 'descent-override', 'line-gap-override']) assert.equal(blocks[0]!.split(`${d}:`).length, 3, `${id}: ${d} on both faces`);
+    const n = blocks[0]!.split('@font-face').length - 1;
+    for (const d of ['size-adjust', 'ascent-override', 'descent-override', 'line-gap-override']) assert.equal(blocks[0]!.split(`${d}:`).length - 1, n, `${id}: ${d} on every face`);
+    if (blocks[0]!.includes('fk1')) assert.match(read(id, 'site.css'), /["'][^"',;]+["'],fk1,fk2,/, `${id}: site.css names fk1, fk2 after the kicker's web family`);
     assert.match(read(id, 'site.css'), /["'][^"',;]+["'],fb1,fb2,/, `${id}: site.css names fb1, fb2 after the web family`);
   }
 });

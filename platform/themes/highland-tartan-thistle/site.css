@@ -8,7 +8,7 @@
 :root{--ground:#20291d;--ground-2:#2c3826;--deep:#151b13;--moss:#5e6b3e;--moss-ink:#46512c;--heather:#7b5a84;--heather-light:#c4a9cc;
 --tartan:#8e2b2f;--cream:#f1eadb;--cream-2:#e2d8c3;--ink:#2a2620;--ink-soft:#5d564a;--brass:#a88437;--brass-light:#d9bb72;--brass-ink:#7a5c22;
 --leather:#6b4428;--mist:#dfe3dc;--line:#d9bb7240;--line-ink:#2a262030;--serif:'Sorts Mill Goudy','Georgia',serif;
---script:'Rouge Script','Snell Roundhand',cursive;--nav-h:62px;color-scheme:dark;
+--script:'Rouge Script',fb1,fb2,'Snell Roundhand',cursive;--nav-h:62px;color-scheme:dark;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}

@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-18T06:55:45.672Z",
+  "results": {
+    "marigold-mehndi": {
+      "load": {
+        "lcp": 2004,
+        "lcpElement": "env-back silk-640.webp",
+        "cls": 0.002,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/marigold-mehndi/img/ph_arch-640.webp"
+        ],
+        "deferred": [],
+        "kb": 292,
+        "early": [],
+        "sinceLoad": 6033
+      },
+      "lateFont": {
+        "lcp": 1656,
+        "lcpElement": "env-back silk-640.webp",
+        "cls": 0.0021,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/marigold-mehndi/img/ph_arch-640.webp"
+        ],
+        "deferred": [],
+        "kb": 292,
+        "early": [],
+        "sinceLoad": 9022
+      },
+      "geometry": {
+        "web": {
+          ".names": [
+            201,
+            52
+          ],
+          ".kicker": null,
+          ".stage": [
+            288,
+            331
+          ]
+        },
+        "fallback": {
+          ".names": [
+            201,
+            52
+          ],
+          ".kicker": null,
+          ".stage": [
+            288,
+            331
+          ]
+        }
+      },
+      "underNav": {
+        "home": [],
+        "story": [],
+        "details": [],
+        "rsvp": [],
+        "rsvp+accept": []
+      }
+    }
+  },
+  "checks": [
+    {
+      "name": "marigold-mehndi: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0.002
+    },
+    {
+      "name": "marigold-mehndi: CLS ≤ 0.1 with the fonts 3 s late",
+      "ok": true,
+      "detail": 0.0021
+    },
+    {
+      "name": "marigold-mehndi: names fallback sets the names where the web font does (±2 px)",
+      "ok": true
+    },
+    {
+      "name": "marigold-mehndi: nothing under the fixed bottom nav at the end of a page",
+      "ok": true
+    }
+  ]
+}

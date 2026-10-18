@@ -30,6 +30,9 @@
 <!-- Ma Shan Zheng for the one character 囍 (the interim gold glyph until GPT's gold-leaf xi_gold): not render-blocking —
      media="print" until site.js switches it on; the browser then fetches only the unicode-range slice holding U+56CD -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&amp;display=swap" media="print" data-font-later>
+<style>/* names fallback: scripts/font-fallback.ts */
+@font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:68.8%;ascent-override:123.5%;descent-override:50.9%;line-gap-override:0%}
+@font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:59.2%;ascent-override:143.7%;descent-override:59.2%;line-gap-override:0%}</style>
 <link rel="stylesheet" href="site.css">
 <link rel="stylesheet" href="parts.css">
 <link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">

@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-18T06:54:41.292Z",
+  "results": {
+    "art-nouveau-lily": {
+      "load": {
+        "lcp": 972,
+        "lcpElement": "env-back paper-640.webp",
+        "cls": 0.0006,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/art-nouveau-lily/img/ph_arch-640.webp"
+        ],
+        "deferred": [],
+        "kb": 166,
+        "early": [],
+        "sinceLoad": 6034
+      },
+      "lateFont": {
+        "lcp": 884,
+        "lcpElement": "env-back paper-640.webp",
+        "cls": 0.0006,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/art-nouveau-lily/img/ph_arch-640.webp"
+        ],
+        "deferred": [],
+        "kb": 166,
+        "early": [],
+        "sinceLoad": 9031
+      },
+      "geometry": {
+        "web": {
+          ".names": [
+            207,
+            63
+          ],
+          ".kicker": [
+            183,
+            19
+          ],
+          ".stage": [
+            297,
+            329
+          ]
+        },
+        "fallback": {
+          ".names": [
+            207,
+            63
+          ],
+          ".kicker": [
+            183,
+            19
+          ],
+          ".stage": [
+            297,
+            329
+          ]
+        }
+      },
+      "underNav": {
+        "home": [],
+        "story": [],
+        "details": [],
+        "rsvp": [],
+        "rsvp+accept": []
+      }
+    }
+  },
+  "checks": [
+    {
+      "name": "art-nouveau-lily: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0.0006
+    },
+    {
+      "name": "art-nouveau-lily: CLS ≤ 0.1 with the fonts 3 s late",
+      "ok": true,
+      "detail": 0.0006
+    },
+    {
+      "name": "art-nouveau-lily: names fallback sets the names where the web font does (±2 px)",
+      "ok": true
+    },
+    {
+      "name": "art-nouveau-lily: nothing under the fixed bottom nav at the end of a page",
+      "ok": true
+    }
+  ]
+}

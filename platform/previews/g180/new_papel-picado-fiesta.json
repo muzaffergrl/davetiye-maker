@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-18T06:56:18.059Z",
+  "results": {
+    "papel-picado-fiesta": {
+      "load": {
+        "lcp": 1816,
+        "lcpElement": "pocket kraft-640.webp",
+        "cls": 0.0014,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/papel-picado-fiesta/img/ph_portrait-640.webp"
+        ],
+        "deferred": [],
+        "kb": 274,
+        "early": [],
+        "sinceLoad": 6028
+      },
+      "lateFont": {
+        "lcp": 1356,
+        "lcpElement": "pocket kraft-640.webp",
+        "cls": 0.0014,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/papel-picado-fiesta/img/ph_portrait-640.webp"
+        ],
+        "deferred": [],
+        "kb": 274,
+        "early": [],
+        "sinceLoad": 9023
+      },
+      "geometry": {
+        "web": {
+          ".names": [
+            220,
+            59
+          ],
+          ".kicker": null,
+          ".stage": [
+            380,
+            306
+          ]
+        },
+        "fallback": {
+          ".names": [
+            220,
+            59
+          ],
+          ".kicker": null,
+          ".stage": [
+            380,
+            306
+          ]
+        }
+      },
+      "underNav": {
+        "home": [],
+        "story": [],
+        "details": [],
+        "rsvp": [],
+        "rsvp+accept": []
+      }
+    }
+  },
+  "checks": [
+    {
+      "name": "papel-picado-fiesta: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0.0014
+    },
+    {
+      "name": "papel-picado-fiesta: CLS ≤ 0.1 with the fonts 3 s late",
+      "ok": true,
+      "detail": 0.0014
+    },
+    {
+      "name": "papel-picado-fiesta: names fallback sets the names where the web font does (±2 px)",
+      "ok": true
+    },
+    {
+      "name": "papel-picado-fiesta: nothing under the fixed bottom nav at the end of a page",
+      "ok": true
+    }
+  ]
+}
