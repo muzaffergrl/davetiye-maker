@@ -1,5 +1,5 @@
 {
-  "when": "2026-10-14",
+  "when": "2026-10-18",
   "passed": 51,
   "total": 51,
   "checks": [
@@ -8,18 +8,23 @@
       "ok": true
     },
     {
+      "name": "Share (K29): the password section is folded and says \"Off\"",
+      "ok": true,
+      "detail": "Guest password\nOff"
+    },
+    {
       "name": "Share: the password card is there, off by default",
       "ok": true
     },
     {
       "name": "switching on suggests a password (two words + number)",
       "ok": true,
-      "detail": "RibbonClover65"
+      "detail": "WinterMarble91"
     },
     {
       "name": "\"Suggest a password\" gives another one",
       "ok": true,
-      "detail": "RibbonClover65 → SunSummer79"
+      "detail": "WinterMarble91 → MintNectar63"
     },
     {
       "name": "hint: add the password to your invitation message",
@@ -38,13 +43,18 @@
       "ok": true
     },
     {
+      "name": "Share (K29): the folded section now says \"On\"",
+      "ok": true,
+      "detail": "Guest password\nOn"
+    },
+    {
       "name": "the couple sees their password (to share it)",
       "ok": true
     },
     {
       "name": "\"Copy password\" copies it",
       "ok": true,
-      "detail": "SunSummer79"
+      "detail": "MintNectar63"
     },
     {
       "name": "Share: no horizontal scroll at 390 px",
@@ -128,7 +138,7 @@
     {
       "name": "cookie: __Host-, HttpOnly, Secure, SameSite=Lax, ~90 days",
       "ok": true,
-      "detail": "{\"name\":\"__Host-guest-347aff141b9f461dbb51df525e201504\",\"value\":\"1.1799752672.5G6TT2pCbhDHOHSRn9EBSiyuvKucb716u_sFxGQj_TY\",\"domain\":\"127.0.0.1\",\"path\":\"/\",\"expires\":1799752672.019061,\"httpOnly\":true,\"secure\":true,\"sameSite\":\"Lax\"}"
+      "detail": "{\"name\":\"__Host-guest-7d8e2289e6e746bd828a180e2abd3fbe\",\"value\":\"1.1800063517.L2ND1o7LEVFgL3BltAvLrmIROxlIUvaGmiAKghPIBmg\",\"domain\":\"127.0.0.1\",\"path\":\"/\",\"expires\":1800063517.097787,\"httpOnly\":true,\"secure\":true,\"sameSite\":\"Lax\"}"
     },
     {
       "name": "cookie: not readable by page scripts",
@@ -141,7 +151,7 @@
     {
       "name": "the couple’s photos load with the cookie",
       "ok": true,
-      "detail": "[{\"src\":\"http://127.0.0.1:3376/media/347aff14-1b9f-461d-bb51-df525e201504/5808a3175132d79190338cd07394e168-640w.jpg\",\"ok\":true,\"lazy\":false},{\"src\":\"http://127.0.0.1:3376/media/347aff14-1b9f-461d-bb51-df525e201504/e4478f9580ca95993518c3d3e0e3eeb3-640w.jpg\",\"ok\":true,\"lazy\":true}]"
+      "detail": "[{\"src\":\"http://127.0.0.1:3376/media/7d8e2289-e6e7-46bd-828a-180e2abd3fbe/e7755c5b947988e1864ec0b62a2b8833-640w.jpg\",\"ok\":true,\"lazy\":false},{\"src\":\"http://127.0.0.1:3376/media/7d8e2289-e6e7-46bd-828a-180e2abd3fbe/771dec206a3322f72514323c674f30e7-640w.jpg\",\"ok\":true,\"lazy\":true}]"
     },
     {
       "name": ".ics with the cookie: the calendar file, private",
@@ -208,14 +218,6 @@
     },
     {
       "name": "password page: no horizontal scroll at 320 px",
-      "ok": true
-    },
-    {
-      "name": "mediterranean-lemon: password page",
-      "ok": true
-    },
-    {
-      "name": "vintage-airmail-love-letter: password page",
       "ok": true
     }
   ]

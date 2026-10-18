@@ -1,5 +1,5 @@
 {
-  "when": "2026-10-17T12:05:05.481Z",
+  "when": "2026-10-18T02:25:26.692Z",
   "passed": 39,
   "failed": 0,
   "checks": [
@@ -19,7 +19,7 @@
     {
       "name": "shop session: Turkish banner says until when and that the buyer link is unchanged",
       "ok": true,
-      "detail": "Dükkân olarak düzenliyorsunuz · bu link 20 Eki 15:04 tarihine kadar çalışır · alıcının linki değişmedi. Bitince yayınlamayı alıcıya bırakın."
+      "detail": "Dükkân olarak düzenliyorsunuz · bu link 21 Eki 05:24 tarihine kadar çalışır · alıcının linki değişmedi. Bitince yayınlamayı alıcıya bırakın."
     },
     {
       "name": "shop session: no \"Your private edit link\" to copy",
@@ -132,7 +132,7 @@
     {
       "name": "Translate automatically: texts filled as drafts to check",
       "ok": true,
-      "detail": "12 drafts, 12 service calls"
+      "detail": "12 drafts, 7 service calls"
     },
     {
       "name": "Approve all: no drafts left",
