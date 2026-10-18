@@ -1536,7 +1536,7 @@ Kontrol: paket bütün ve altta boşluklu; üst %20 boş; yazı/hat yok.
 - Şart: 1024×1280 px (4:5) · opak · JPG
 
 ```
-Vertical 4:5 wedding portrait of the fictional couple Naomi and Kai (as described above; not resembling any real person) in an autumn garden: she in a simple ivory silk gown, he in a deep indigo suit, standing close under a red-gold maple, smiling at each other, three-quarter length, faces in the upper third, soft afternoon light from the left, a still pond and a cedar pavilion softly out of focus behind. Photorealistic, calm indigo, ivory and gold palette, subtle grain. No text, no frame.
+Vertical 4:5 wedding portrait of the fictional couple Naomi and Kai, in their early thirties (Naomi: shoulder-length wavy dark-brown hair, warm light-brown skin, a slim gold ring; Kai: short black hair, a neat short beard, light skin; they must not resemble any real person or celebrity) in an autumn garden: she in a simple ivory silk gown, he in a deep indigo suit, standing close under a red-gold maple, smiling at each other, three-quarter length, faces in the upper third, soft afternoon light from the left, a still pond and a cedar pavilion softly out of focus behind. Photorealistic, calm indigo, ivory and gold palette, subtle grain. No text, no frame.
 ```
 
 #### 109. 2.2 Story 1 — "A borrowed umbrella"
@@ -2657,7 +2657,7 @@ Kontrol: gözlemevi bütün ve altta boşluklu; üst %20 boş gök; yazı yok.
 - Şart: 1280×1280 px (1:1) · opak · JPG
 
 ```
-Square 1:1 wedding portrait of the fictional couple Celeste and Rowan (as described above; not resembling any real person) at blue hour on a high desert ridge: she in a simple silver-ivory satin gown, he in a midnight-blue suit, standing close and smiling at each other, waist-up, faces in the middle of the frame, the first stars appearing in a deep blue sky behind them and a small white observatory dome softly out of focus far away. Photorealistic, calm midnight, silver and gold palette, subtle grain. No text, no frame.
+Square 1:1 wedding portrait of the fictional couple Celeste and Rowan, in their early thirties (Celeste: long loose auburn waves, fair skin with light freckles, a slim gold ring; Rowan: short dark-blond hair, a light stubble, olive skin; they must not resemble any real person or celebrity) at blue hour on a high desert ridge: she in a simple silver-ivory satin gown, he in a midnight-blue suit, standing close and smiling at each other, waist-up, faces in the middle of the frame, the first stars appearing in a deep blue sky behind them and a small white observatory dome softly out of focus far away. Photorealistic, calm midnight, silver and gold palette, subtle grain. No text, no frame.
 ```
 
 #### 191. 2.2 Story 1 — "A shared telescope"
@@ -2991,7 +2991,7 @@ Kontrol: panel bütün ve altta boşluklu; üst %20 boş; limon/yazı yok.
 - Şart: 1024×1280 px (4:5) · opak · JPG
 
 ```
-Vertical 4:5 wedding portrait of the fictional couple Inês and Mateo (as described above; not resembling any real person) in a sunlit courtyard: she in a simple ivory crepe gown, he in a navy-blue suit, standing close and smiling at each other in front of a wall of blue-and-white hand-painted tiles, terracotta pots with trailing ivy beside them, three-quarter length, faces in the upper third, soft late-afternoon light from the left. Photorealistic, calm cobalt, white and terracotta palette, subtle grain. No text, no frame.
+Vertical 4:5 wedding portrait of the fictional couple Inês and Mateo, in their early thirties (Inês: long dark-brown wavy hair worn half up, olive skin, brown eyes, a slim gold ring; Mateo: short dark hair, a neat trimmed beard, light-tan skin; they must not resemble any real person or celebrity) in a sunlit courtyard: she in a simple ivory crepe gown, he in a navy-blue suit, standing close and smiling at each other in front of a wall of blue-and-white hand-painted tiles, terracotta pots with trailing ivy beside them, three-quarter length, faces in the upper third, soft late-afternoon light from the left. Photorealistic, calm cobalt, white and terracotta palette, subtle grain. No text, no frame.
 ```
 
 #### 215. 2.2 Story 1 — "A rainy afternoon"
@@ -3473,33 +3473,7 @@ Sohbetin ilk mesajı (dosyanın GPT notu):
 Generate the parts below in order and in ONE chat: PAKET 5 (website layers) first, then PAKET 2 (sample photos of the fictional couple), then PAKET 6 (printable invitation backgrounds). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, logos, monograms, price tags or watermarks in any image.** Give W2.3 `box_body.png` as the style and position reference of every later stage part, W2.6 `dancer.png` as the reference of both turn strips, and W2.11 `bg_page.png` as the palette reference of everything else.
 ```
 
-#### 250. W2.1 Açık kapak — aynalı iç yüz (dik)
-
-- İndirme adı: `32-music-box-ballerina__lid_open.png`
-- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/lid_open.png`
-- Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
-- Şart: 1024×1536 px (2:3) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
-
-```
-The INSIDE of the lid of a luxury rose-quartz lacquered music box, standing upright behind the box as when the box is open, seen straight from the front (give box_body.png as the reference; same canvas, same position): a rectangular lid panel covering x 150–874 px and y 200–905 px of a 1024 x 1536 canvas, lined with smooth blush satin (#F7E4E2) in soft gathered pleats, a thin soft-gold border along its edges, two small brass hinges at its bottom edge (y about 895–905 px). In its centre an oval MIRROR in a delicate soft-gold beaded frame; the mirror glass itself is filled with flat pure green #00FF00 (no reflection, no gradient) exactly inside the oval x 312–712 px, y 290–790 px. Only the lid panel. Front view, no perspective tilt. Soft light from the top-left. No cast shadow and no drop shadow outside the lid. No glow outside its outline. No text, letters, numbers, logo or monogram. True transparent background PNG (real alpha channel — not white, not a checkerboard).
-```
-
-Kontrol: x 150–874, y 200–905; oval ayna camı düz #00FF00 (x 312–712, y 290–790); menteşeler alt kenarda; gölge yok;
-
-#### 251. W2.2 Saten kuyu — açık kutunun içi (üst şerit)
-
-- İndirme adı: `32-music-box-ballerina__interior.png`
-- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/interior.png`
-- Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
-- Şart: 1024×1536 px (2:3) · şeffaf zemin (gerçek alfa) · PNG
-
-```
-The open top of the same music box seen from the front and slightly above (give box_body.png as the reference; same canvas and position): only the inside well, a shallow tray lined with tufted blush satin (#F7E4E2) and a deeper rose-quartz satin piping, with a small round soft-gold pedestal in the middle (centred at x 512 px, top at about y 975 px) where a figurine will stand; the well spans x 150–874 px and y 880–1010 px. Empty: no figurine, no lid, no box front. Soft light from the top-left. No cast shadow outside it. No text. True transparent background PNG (real alpha channel).
-```
-
-Kontrol: yalnız iç kuyu x 150–874, y 880–1010; ortada küçük altın kaide; figür yok; gerçek alfa.
-
-#### 252. W2.3 Kutunun önü (gövde)
+#### 250. W2.3 Kutunun önü (gövde)
 
 - İndirme adı: `32-music-box-ballerina__box_body.png`
 - Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/box_body.png`
@@ -3512,13 +3486,41 @@ A luxury music box body seen straight from the front, slightly from above: a rec
 
 Kontrol: x 112–912, y 990–1400; ön yüzde altın şerit ve gül kabartması (harf yok); pirinç ayaklar; sağ yanda anahtar
 
+#### 251. W2.1 Açık kapak — aynalı iç yüz (dik)
+
+- İndirme adı: `32-music-box-ballerina__lid_open.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/lid_open.png`
+- Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
+- Şart: 1024×1536 px (2:3) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+- Ek görsel: box_body.png (listede #250)
+
+```
+The INSIDE of the lid of a luxury rose-quartz lacquered music box, standing upright behind the box as when the box is open, seen straight from the front (give box_body.png as the reference; same canvas, same position): a rectangular lid panel covering x 150–874 px and y 200–905 px of a 1024 x 1536 canvas, lined with smooth blush satin (#F7E4E2) in soft gathered pleats, a thin soft-gold border along its edges, two small brass hinges at its bottom edge (y about 895–905 px). In its centre an oval MIRROR in a delicate soft-gold beaded frame; the mirror glass itself is filled with flat pure green #00FF00 (no reflection, no gradient) exactly inside the oval x 312–712 px, y 290–790 px. Only the lid panel. Front view, no perspective tilt. Soft light from the top-left. No cast shadow and no drop shadow outside the lid. No glow outside its outline. No text, letters, numbers, logo or monogram. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+```
+
+Kontrol: x 150–874, y 200–905; oval ayna camı düz #00FF00 (x 312–712, y 290–790); menteşeler alt kenarda; gölge yok;
+
+#### 252. W2.2 Saten kuyu — açık kutunun içi (üst şerit)
+
+- İndirme adı: `32-music-box-ballerina__interior.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/interior.png`
+- Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
+- Şart: 1024×1536 px (2:3) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: box_body.png (listede #250)
+
+```
+The open top of the same music box seen from the front and slightly above (give box_body.png as the reference; same canvas and position): only the inside well, a shallow tray lined with tufted blush satin (#F7E4E2) and a deeper rose-quartz satin piping, with a small round soft-gold pedestal in the middle (centred at x 512 px, top at about y 975 px) where a figurine will stand; the well spans x 150–874 px and y 880–1010 px. Empty: no figurine, no lid, no box front. Soft light from the top-left. No cast shadow outside it. No text. True transparent background PNG (real alpha channel).
+```
+
+Kontrol: yalnız iç kuyu x 150–874, y 880–1010; ortada küçük altın kaide; figür yok; gerçek alfa.
+
 #### 253. W2.4 Kapalı kapak
 
 - İndirme adı: `32-music-box-ballerina__lid_closed.png`
 - Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/lid_closed.png`
 - Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
 - Şart: 1024×1536 px (2:3) · şeffaf zemin (gerçek alfa) · PNG
-- Ek görsel: box_body.png (listede #252)
+- Ek görsel: box_body.png (listede #250)
 
 ```
 The CLOSED lid of the same music box (give box_body.png as the reference; same canvas, same front view slightly from above, same position): a slightly domed rose-quartz lacquered lid with a soft-gold edge band, its visible top surface a thin band and its front edge overhanging the body a little; it covers x 100–924 px and y 880–1020 px of the 1024 x 1536 canvas, so that it sits exactly on the top edge of box_body.png. A small carved rose medallion in the middle of the front edge (no letters). Only the lid. Soft light from the top-left. No cast shadow outside the lid. No glow. No text. True transparent background PNG (real alpha channel).
@@ -3532,7 +3534,7 @@ Kontrol: x 100–924, y 880–1020; gövdenin üst kenarına tam oturur; harf yo
 - Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/key.png`
 - Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
 - Şart: 1024×1536 px (2:3) · şeffaf zemin (gerçek alfa) · PNG
-- Ek görsel: box_body.png (listede #252)
+- Ek görsel: box_body.png (listede #250)
 
 ```
 Only the antique brass WIND-UP KEY of the same music box (give box_body.png as the reference; same canvas and position), seen from the front: its short shaft enters the right side of the box horizontally at about x 900 px, y 1190 px and its butterfly-shaped bow (two rounded wings, an open scroll pattern, no letters) stands upright at the end of the shaft; the whole key covers x 896–1014 px and y 1112–1268 px of the 1024 x 1536 canvas. Polished warm brass (#C9A45C) with soft highlights. Only the key — no box. Soft light from the top-left. No cast shadow. No text. True transparent background PNG (real alpha channel).
@@ -3671,7 +3673,7 @@ Kontrol: düşük kontrast; nesne yok; üzerinde koyu yazı okunur.
 - Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/web_hero.png`
 - Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
 - Şart: 1536×1024 px (3:2) · opak · PNG
-- Ek görsel: box_body.png (listede #252), interior.png (listede #251), lid_open.png (listede #250), dancer.png (listede #255)
+- Ek görsel: box_body.png (listede #250), interior.png (listede #252), lid_open.png (listede #251), dancer.png (listede #255)
 
 ```
 Wide horizontal scene in the same style: the open rose-quartz music box (as box_body.png, interior.png and lid_open.png, the oval mirror showing only a soft blurred pink reflection, no face) with the porcelain ballerina figurine (as dancer.png) on its pedestal and the brass key on its side, standing on a blush satin cloth with a few scattered rose petals and a wisp of pale tulle, soft blush wall behind. The box sits in the lower 75% of the image, fully visible; the top 20% is calm empty wall. Photorealistic, pastel. No text, letters, logos or price tags. This image is also cropped to 1200×630 for link previews.

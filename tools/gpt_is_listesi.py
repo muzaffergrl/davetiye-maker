@@ -349,6 +349,7 @@ def is_listesi(hepsi: bool = False) -> tuple[list[dict], dict[str, str]]:
             })
     maddeler.sort(key=lambda m: ("abcd".index(m["grup"]), m["istege_bagli"], m["tasarim_no"] or 0,
                                  TUR_SIRA.index(m["tur"]), m["_sira"]))
+    maddeler = _referans_once(maddeler)
     no_by_hedef = {}
     for i, m in enumerate(maddeler, 1):
         m["no"] = i
@@ -357,6 +358,46 @@ def is_listesi(hepsi: bool = False) -> tuple[list[dict], dict[str, str]]:
     for m in maddeler:
         m["referanslar"] = _referanslar(m, istenen, no_by_hedef)
     return maddeler, notlar
+
+
+REF_VER = re.compile(r"give ((?:[\w.-]+\.(?:png|jpe?g))(?:(?:,| and) [\w.-]+\.(?:png|jpe?g))*) as (?:the |its )?"
+                     r"(?:style |position )?reference|\(reference: ([\w.-]+\.(?:png|jpe?g))")
+
+
+def _referans_once(maddeler: list[dict]) -> list[dict]:
+    """Bir tasarımın içinde, prompt'u "give X.png as the reference" diyen madde X'ten önce gelmesin: X öne alınır
+    (32'de kapak ve iç kuyu, sonra tanımlanan kutu gövdesini referans alıyor). Yalnız açık referans sayılır — "where it
+    will sit in X.png" gibi konum tarifleri sırayı değiştirmez. Döngüde özgün sıra korunur."""
+    out, i = [], 0
+    while i < len(maddeler):
+        j = i
+        while j < len(maddeler) and (maddeler[j]["grup"], maddeler[j]["tasarim"]) == (maddeler[i]["grup"], maddeler[i]["tasarim"]):
+            j += 1
+        blok = maddeler[i:j]
+        ad_idx = {PurePosixPath(m["hedef"]).name: k for k, m in enumerate(blok)}
+        bagli = []
+        for k, m in enumerate(blok):
+            refs = set()
+            for a, b in REF_VER.findall(m["prompt"] or ""):
+                for ad in re.findall(r"[\w.-]+\.(?:png|jpe?g)", a + " " + b):
+                    if ad in ad_idx and ad_idx[ad] != k:
+                        refs.add(ad_idx[ad])
+            bagli.append(refs)
+        yerlesen, sira = set(), []
+
+        def yerlestir(k, yol):
+            if k in yerlesen or k in yol:
+                return
+            for r in sorted(bagli[k]):
+                yerlestir(r, yol | {k})
+            yerlesen.add(k)
+            sira.append(k)
+
+        for k in range(len(blok)):
+            yerlestir(k, frozenset())
+        out.extend(blok[k] for k in sira)
+        i = j
+    return out
 
 
 def _referanslar(m: dict, istenen: dict, no_by_hedef: dict) -> list[dict]:
@@ -387,8 +428,6 @@ def _referanslar(m: dict, istenen: dict, no_by_hedef: dict) -> list[dict]:
                 break
         if r["no"] and r["no"] > m["no"]:
             continue  # listede sonra üretilecek: bu madde için eklenemez (adı yalnız konum tarifi)
-            if istenen[h]["var"]:
-                r["yol"] = h
         if r["yol"] is None and kol_kok is not None and kol_kok.exists():
             bul = sorted(p for p in kol_kok.rglob(ad) if _rel(p) != m["hedef"] and "/variants/" not in _rel(p))
             if bul:

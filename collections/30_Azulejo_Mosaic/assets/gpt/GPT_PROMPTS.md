@@ -164,7 +164,7 @@ Gerçek bir kişiye/ünlüye benzerse yeniden üretilir.
 #### 2.1 Ana portre
 **Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/photos/hero_portrait.jpg` · Dikey 1024×1280 (4:5)
 ```
-Vertical 4:5 wedding portrait of the fictional couple Inês and Mateo (as described above; not resembling any real person) in a sunlit courtyard: she in a simple ivory crepe gown, he in a navy-blue suit, standing close and smiling at each other in front of a wall of blue-and-white hand-painted tiles, terracotta pots with trailing ivy beside them, three-quarter length, faces in the upper third, soft late-afternoon light from the left. Photorealistic, calm cobalt, white and terracotta palette, subtle grain. No text, no frame.
+Vertical 4:5 wedding portrait of the fictional couple Inês and Mateo, in their early thirties (Inês: long dark-brown wavy hair worn half up, olive skin, brown eyes, a slim gold ring; Mateo: short dark hair, a neat trimmed beard, light-tan skin; they must not resemble any real person or celebrity) in a sunlit courtyard: she in a simple ivory crepe gown, he in a navy-blue suit, standing close and smiling at each other in front of a wall of blue-and-white hand-painted tiles, terracotta pots with trailing ivy beside them, three-quarter length, faces in the upper third, soft late-afternoon light from the left. Photorealistic, calm cobalt, white and terracotta palette, subtle grain. No text, no frame.
 ```
 
 #### 2.2 Story 1 — "A rainy afternoon"

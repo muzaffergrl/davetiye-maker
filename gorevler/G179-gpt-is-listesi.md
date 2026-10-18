@@ -2,7 +2,7 @@
 id: G179
 baslik: GPT iş listesi — ChatGPT'de elle üretim için tek sıralı prompt listesi + indirme adıyla otomatik yerleştirme
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G179
 oncelik: 1
 bagimli: [G176]
@@ -80,3 +80,4 @@ A ayrıntısı: 22: 20 · 23: 19 · 24: 28 · 25: 28 · 26: 24 · 27: 30 · 28: 
 
 ## Günlük
 - 2026-10-18 claude-G179 inceleme
+- 2026-10-18 entegratör onayladı
