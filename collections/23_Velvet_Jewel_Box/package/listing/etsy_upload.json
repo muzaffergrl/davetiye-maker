@@ -290,46 +290,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=velvet-jewel-box"
+        "start_link": "/start?theme=velvet-jewel-box",
+        "image": "collections/23_Velvet_Jewel_Box/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": false
       },
       {
         "name": "Emerald Velvet & Champagne",
         "variant": "emerald-velvet",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=velvet-jewel-box&variant=emerald-velvet"
+        "start_link": "/start?theme=velvet-jewel-box&variant=emerald-velvet",
+        "image": "collections/23_Velvet_Jewel_Box/package/listing/images_editorial/palette_emerald-velvet.jpg",
+        "image_exists": false
       },
       {
         "name": "Sapphire Velvet & Gold",
         "variant": "sapphire-velvet",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=velvet-jewel-box&variant=sapphire-velvet"
+        "start_link": "/start?theme=velvet-jewel-box&variant=sapphire-velvet",
+        "image": "collections/23_Velvet_Jewel_Box/package/listing/images_editorial/palette_sapphire-velvet.jpg",
+        "image_exists": false
       },
       {
         "name": "Ruby Velvet & Gold",
         "variant": "ruby-velvet",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=velvet-jewel-box&variant=ruby-velvet"
+        "start_link": "/start?theme=velvet-jewel-box&variant=ruby-velvet",
+        "image": "collections/23_Velvet_Jewel_Box/package/listing/images_editorial/palette_ruby-velvet.jpg",
+        "image_exists": false
       },
       {
         "name": "Mauve Velvet & Rose Gold",
         "variant": "mauve-velvet",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=velvet-jewel-box&variant=mauve-velvet"
+        "start_link": "/start?theme=velvet-jewel-box&variant=mauve-velvet",
+        "image": "collections/23_Velvet_Jewel_Box/package/listing/images_editorial/palette_mauve-velvet.jpg",
+        "image_exists": false
       },
       {
         "name": "Onyx Velvet & Champagne",
         "variant": "onyx-velvet",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=velvet-jewel-box&variant=onyx-velvet"
+        "start_link": "/start?theme=velvet-jewel-box&variant=onyx-velvet",
+        "image": "collections/23_Velvet_Jewel_Box/package/listing/images_editorial/palette_onyx-velvet.jpg",
+        "image_exists": false
       }
     ],
     "offered": [
       "Original (Velvet Jewel Box)"
+    ],
+    "images": [
+      {
+        "file": "collections/23_Velvet_Jewel_Box/package/listing/images_editorial/10_palettes.jpg",
+        "exists": false,
+        "option": null,
+        "upload": false,
+        "alt": "Velvet Jewel Box in 6 color palettes: the opening page of each, side by side",
+        "status": "missing"
+      },
+      {
+        "file": "collections/23_Velvet_Jewel_Box/package/listing/images_editorial/palette_original.jpg",
+        "exists": false,
+        "option": "Original (Velvet Jewel Box)",
+        "upload": false,
+        "alt": "Velvet Jewel Box in its original palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/23_Velvet_Jewel_Box/package/listing/images_editorial/palette_emerald-velvet.jpg",
+        "exists": false,
+        "option": "Emerald Velvet & Champagne",
+        "upload": false,
+        "alt": "Velvet Jewel Box in the Emerald Velvet & Champagne palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/23_Velvet_Jewel_Box/package/listing/images_editorial/palette_sapphire-velvet.jpg",
+        "exists": false,
+        "option": "Sapphire Velvet & Gold",
+        "upload": false,
+        "alt": "Velvet Jewel Box in the Sapphire Velvet & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/23_Velvet_Jewel_Box/package/listing/images_editorial/palette_ruby-velvet.jpg",
+        "exists": false,
+        "option": "Ruby Velvet & Gold",
+        "upload": false,
+        "alt": "Velvet Jewel Box in the Ruby Velvet & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/23_Velvet_Jewel_Box/package/listing/images_editorial/palette_mauve-velvet.jpg",
+        "exists": false,
+        "option": "Mauve Velvet & Rose Gold",
+        "upload": false,
+        "alt": "Velvet Jewel Box in the Mauve Velvet & Rose Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/23_Velvet_Jewel_Box/package/listing/images_editorial/palette_onyx-velvet.jpg",
+        "exists": false,
+        "option": "Onyx Velvet & Champagne",
+        "upload": false,
+        "alt": "Velvet Jewel Box in the Onyx Velvet & Champagne palette: the opening page closed and opening",
+        "status": "missing"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

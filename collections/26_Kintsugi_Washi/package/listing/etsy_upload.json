@@ -220,46 +220,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=kintsugi-washi"
+        "start_link": "/start?theme=kintsugi-washi",
+        "image": "collections/26_Kintsugi_Washi/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": false
       },
       {
         "name": "Sumi Charcoal & Gold",
         "variant": "sumi-charcoal",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=kintsugi-washi&variant=sumi-charcoal"
+        "start_link": "/start?theme=kintsugi-washi&variant=sumi-charcoal",
+        "image": "collections/26_Kintsugi_Washi/package/listing/images_editorial/palette_sumi-charcoal.jpg",
+        "image_exists": false
       },
       {
         "name": "Moss Green & Gold",
         "variant": "moss-green",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=kintsugi-washi&variant=moss-green"
+        "start_link": "/start?theme=kintsugi-washi&variant=moss-green",
+        "image": "collections/26_Kintsugi_Washi/package/listing/images_editorial/palette_moss-green.jpg",
+        "image_exists": false
       },
       {
         "name": "Plum & Gold",
         "variant": "plum-gold",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=kintsugi-washi&variant=plum-gold"
+        "start_link": "/start?theme=kintsugi-washi&variant=plum-gold",
+        "image": "collections/26_Kintsugi_Washi/package/listing/images_editorial/palette_plum-gold.jpg",
+        "image_exists": false
       },
       {
         "name": "Deep Teal & Gold",
         "variant": "deep-teal",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=kintsugi-washi&variant=deep-teal"
+        "start_link": "/start?theme=kintsugi-washi&variant=deep-teal",
+        "image": "collections/26_Kintsugi_Washi/package/listing/images_editorial/palette_deep-teal.jpg",
+        "image_exists": false
       },
       {
         "name": "Lacquer Red & Gold",
         "variant": "lacquer-red",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=kintsugi-washi&variant=lacquer-red"
+        "start_link": "/start?theme=kintsugi-washi&variant=lacquer-red",
+        "image": "collections/26_Kintsugi_Washi/package/listing/images_editorial/palette_lacquer-red.jpg",
+        "image_exists": false
       }
     ],
     "offered": [
       "Original (Kintsugi & Washi)"
+    ],
+    "images": [
+      {
+        "file": "collections/26_Kintsugi_Washi/package/listing/images_editorial/10_palettes.jpg",
+        "exists": false,
+        "option": null,
+        "upload": false,
+        "alt": "Kintsugi & Washi in 6 color palettes: the opening page of each, side by side",
+        "status": "missing"
+      },
+      {
+        "file": "collections/26_Kintsugi_Washi/package/listing/images_editorial/palette_original.jpg",
+        "exists": false,
+        "option": "Original (Kintsugi & Washi)",
+        "upload": false,
+        "alt": "Kintsugi & Washi in its original palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/26_Kintsugi_Washi/package/listing/images_editorial/palette_sumi-charcoal.jpg",
+        "exists": false,
+        "option": "Sumi Charcoal & Gold",
+        "upload": false,
+        "alt": "Kintsugi & Washi in the Sumi Charcoal & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/26_Kintsugi_Washi/package/listing/images_editorial/palette_moss-green.jpg",
+        "exists": false,
+        "option": "Moss Green & Gold",
+        "upload": false,
+        "alt": "Kintsugi & Washi in the Moss Green & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/26_Kintsugi_Washi/package/listing/images_editorial/palette_plum-gold.jpg",
+        "exists": false,
+        "option": "Plum & Gold",
+        "upload": false,
+        "alt": "Kintsugi & Washi in the Plum & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/26_Kintsugi_Washi/package/listing/images_editorial/palette_deep-teal.jpg",
+        "exists": false,
+        "option": "Deep Teal & Gold",
+        "upload": false,
+        "alt": "Kintsugi & Washi in the Deep Teal & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/26_Kintsugi_Washi/package/listing/images_editorial/palette_lacquer-red.jpg",
+        "exists": false,
+        "option": "Lacquer Red & Gold",
+        "upload": false,
+        "alt": "Kintsugi & Washi in the Lacquer Red & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

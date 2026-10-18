@@ -115,6 +115,13 @@ mekân ekranını `img[data-photo="venue"]` ile bulur, örnek fotoğraflar teman
 | 8 | What's included | Masa üstü sahne + liste | `flatlay_phone(_v2)` + demo ekranı |
 | 9 | Any device (G148, K47) | 5'in düzeni: kâğıt üstünde iki büyük ekran; "Start on your phone" / "Continue *on any device*" | gerçek ekranlar, `tools/listing_editorial/capture_devices.ts`: `m01_my_form` (/my, sipariş no + e-posta dolu) + `m02_devices` (Share → Use on another device, aynı siparişle 3 cihaz). Web adresi/QR yok: kartın /my satırı, QR satırı ve üstteki Share kartları resimde gizli. `--capture devices --only 09_devices` |
 
+### Palet görselleri (G178, docs/25 §5)
+
+`--palettes` sekiz/dokuz görselin yerine palet görsellerini yapar: `10_palettes.jpg` (5. görselin kâğıt düzeni, bütün
+paletlerin kapalı açılış ekranı yan yana, altında palet adları) ve `palette_<id>.jpg` (iki büyük ekran: "Tap to open" /
+"The <nesne> opens", başlık palet adı). Çekim: `capture_opening.ts --variants original,<id>,…` (her palet için o palette
+yayınlanmış demo site, `opening_stills.json`'daki `open_mid` anı). JPEG q90: on altı ek PNG yerine depoda ~4 MB/tasarım.
+
 ### GM06 güven sahneleri (brand/trust/, G124 kararı)
 
 | Sahne | Kullanıldı mı | Gerekçe |

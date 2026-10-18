@@ -222,46 +222,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=boho-pampas-terracotta"
+        "start_link": "/start?theme=boho-pampas-terracotta",
+        "image": "collections/11_Boho_Pampas/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": true
       },
       {
         "name": "Sage & Blush",
         "variant": "sage-blush",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=boho-pampas-terracotta&variant=sage-blush"
+        "start_link": "/start?theme=boho-pampas-terracotta&variant=sage-blush",
+        "image": "collections/11_Boho_Pampas/package/listing/images_editorial/palette_sage-blush.jpg",
+        "image_exists": true
       },
       {
         "name": "Dusty Rose & Cream",
         "variant": "dusty-rose",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=boho-pampas-terracotta&variant=dusty-rose"
+        "start_link": "/start?theme=boho-pampas-terracotta&variant=dusty-rose",
+        "image": "collections/11_Boho_Pampas/package/listing/images_editorial/palette_dusty-rose.jpg",
+        "image_exists": true
       },
       {
         "name": "Burgundy & Blush",
         "variant": "burgundy-blush",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=boho-pampas-terracotta&variant=burgundy-blush"
+        "start_link": "/start?theme=boho-pampas-terracotta&variant=burgundy-blush",
+        "image": "collections/11_Boho_Pampas/package/listing/images_editorial/palette_burgundy-blush.jpg",
+        "image_exists": true
       },
       {
         "name": "Champagne & Nude",
         "variant": "champagne-nude",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=boho-pampas-terracotta&variant=champagne-nude"
+        "start_link": "/start?theme=boho-pampas-terracotta&variant=champagne-nude",
+        "image": "collections/11_Boho_Pampas/package/listing/images_editorial/palette_champagne-nude.jpg",
+        "image_exists": true
       },
       {
         "name": "Dusty Blue & Terracotta",
         "variant": "dusty-blue",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=boho-pampas-terracotta&variant=dusty-blue"
+        "start_link": "/start?theme=boho-pampas-terracotta&variant=dusty-blue",
+        "image": "collections/11_Boho_Pampas/package/listing/images_editorial/palette_dusty-blue.jpg",
+        "image_exists": true
       }
     ],
     "offered": [
       "Original (Boho Pampas Terracotta)"
+    ],
+    "images": [
+      {
+        "file": "collections/11_Boho_Pampas/package/listing/images_editorial/10_palettes.jpg",
+        "exists": true,
+        "option": null,
+        "upload": false,
+        "alt": "Boho Pampas Terracotta in 6 color palettes: the opening page of each, side by side",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/11_Boho_Pampas/package/listing/images_editorial/palette_original.jpg",
+        "exists": true,
+        "option": "Original (Boho Pampas Terracotta)",
+        "upload": false,
+        "alt": "Boho Pampas Terracotta in its original palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/11_Boho_Pampas/package/listing/images_editorial/palette_sage-blush.jpg",
+        "exists": true,
+        "option": "Sage & Blush",
+        "upload": false,
+        "alt": "Boho Pampas Terracotta in the Sage & Blush palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/11_Boho_Pampas/package/listing/images_editorial/palette_dusty-rose.jpg",
+        "exists": true,
+        "option": "Dusty Rose & Cream",
+        "upload": false,
+        "alt": "Boho Pampas Terracotta in the Dusty Rose & Cream palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/11_Boho_Pampas/package/listing/images_editorial/palette_burgundy-blush.jpg",
+        "exists": true,
+        "option": "Burgundy & Blush",
+        "upload": false,
+        "alt": "Boho Pampas Terracotta in the Burgundy & Blush palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/11_Boho_Pampas/package/listing/images_editorial/palette_champagne-nude.jpg",
+        "exists": true,
+        "option": "Champagne & Nude",
+        "upload": false,
+        "alt": "Boho Pampas Terracotta in the Champagne & Nude palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/11_Boho_Pampas/package/listing/images_editorial/palette_dusty-blue.jpg",
+        "exists": true,
+        "option": "Dusty Blue & Terracotta",
+        "upload": false,
+        "alt": "Boho Pampas Terracotta in the Dusty Blue & Terracotta palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

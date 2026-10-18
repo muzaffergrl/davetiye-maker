@@ -221,46 +221,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=art-deco-black-tie"
+        "start_link": "/start?theme=art-deco-black-tie",
+        "image": "collections/06_Art_Deco_Noir/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": true
       },
       {
         "name": "Onyx Black & Gold",
         "variant": "onyx-gold",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=art-deco-black-tie&variant=onyx-gold"
+        "start_link": "/start?theme=art-deco-black-tie&variant=onyx-gold",
+        "image": "collections/06_Art_Deco_Noir/package/listing/images_editorial/palette_onyx-gold.jpg",
+        "image_exists": true
       },
       {
         "name": "Emerald & Gold",
         "variant": "emerald-gold",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=art-deco-black-tie&variant=emerald-gold"
+        "start_link": "/start?theme=art-deco-black-tie&variant=emerald-gold",
+        "image": "collections/06_Art_Deco_Noir/package/listing/images_editorial/palette_emerald-gold.jpg",
+        "image_exists": true
       },
       {
         "name": "Burgundy & Gold",
         "variant": "burgundy-gold",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=art-deco-black-tie&variant=burgundy-gold"
+        "start_link": "/start?theme=art-deco-black-tie&variant=burgundy-gold",
+        "image": "collections/06_Art_Deco_Noir/package/listing/images_editorial/palette_burgundy-gold.jpg",
+        "image_exists": true
       },
       {
         "name": "Amethyst & Gold",
         "variant": "amethyst-gold",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=art-deco-black-tie&variant=amethyst-gold"
+        "start_link": "/start?theme=art-deco-black-tie&variant=amethyst-gold",
+        "image": "collections/06_Art_Deco_Noir/package/listing/images_editorial/palette_amethyst-gold.jpg",
+        "image_exists": true
       },
       {
         "name": "Navy & Silver",
         "variant": "navy-silver",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=art-deco-black-tie&variant=navy-silver"
+        "start_link": "/start?theme=art-deco-black-tie&variant=navy-silver",
+        "image": "collections/06_Art_Deco_Noir/package/listing/images_editorial/palette_navy-silver.jpg",
+        "image_exists": true
       }
     ],
     "offered": [
       "Original (Art Deco Black-Tie)"
+    ],
+    "images": [
+      {
+        "file": "collections/06_Art_Deco_Noir/package/listing/images_editorial/10_palettes.jpg",
+        "exists": true,
+        "option": null,
+        "upload": false,
+        "alt": "Art Deco Black-Tie in 6 color palettes: the opening page of each, side by side",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/06_Art_Deco_Noir/package/listing/images_editorial/palette_original.jpg",
+        "exists": true,
+        "option": "Original (Art Deco Black-Tie)",
+        "upload": false,
+        "alt": "Art Deco Black-Tie in its original palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/06_Art_Deco_Noir/package/listing/images_editorial/palette_onyx-gold.jpg",
+        "exists": true,
+        "option": "Onyx Black & Gold",
+        "upload": false,
+        "alt": "Art Deco Black-Tie in the Onyx Black & Gold palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/06_Art_Deco_Noir/package/listing/images_editorial/palette_emerald-gold.jpg",
+        "exists": true,
+        "option": "Emerald & Gold",
+        "upload": false,
+        "alt": "Art Deco Black-Tie in the Emerald & Gold palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/06_Art_Deco_Noir/package/listing/images_editorial/palette_burgundy-gold.jpg",
+        "exists": true,
+        "option": "Burgundy & Gold",
+        "upload": false,
+        "alt": "Art Deco Black-Tie in the Burgundy & Gold palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/06_Art_Deco_Noir/package/listing/images_editorial/palette_amethyst-gold.jpg",
+        "exists": true,
+        "option": "Amethyst & Gold",
+        "upload": false,
+        "alt": "Art Deco Black-Tie in the Amethyst & Gold palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/06_Art_Deco_Noir/package/listing/images_editorial/palette_navy-silver.jpg",
+        "exists": true,
+        "option": "Navy & Silver",
+        "upload": false,
+        "alt": "Art Deco Black-Tie in the Navy & Silver palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

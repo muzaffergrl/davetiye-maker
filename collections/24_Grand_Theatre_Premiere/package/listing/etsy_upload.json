@@ -208,46 +208,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=grand-theatre-premiere"
+        "start_link": "/start?theme=grand-theatre-premiere",
+        "image": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": false
       },
       {
         "name": "Crimson Velvet & Gold",
         "variant": "crimson-velvet",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=grand-theatre-premiere&variant=crimson-velvet"
+        "start_link": "/start?theme=grand-theatre-premiere&variant=crimson-velvet",
+        "image": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_crimson-velvet.jpg",
+        "image_exists": false
       },
       {
         "name": "Royal Sapphire & Gold",
         "variant": "royal-sapphire",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=grand-theatre-premiere&variant=royal-sapphire"
+        "start_link": "/start?theme=grand-theatre-premiere&variant=royal-sapphire",
+        "image": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_royal-sapphire.jpg",
+        "image_exists": false
       },
       {
         "name": "Emerald Velvet & Gold",
         "variant": "emerald-velvet",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=grand-theatre-premiere&variant=emerald-velvet"
+        "start_link": "/start?theme=grand-theatre-premiere&variant=emerald-velvet",
+        "image": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_emerald-velvet.jpg",
+        "image_exists": false
       },
       {
         "name": "Plum Velvet & Gold",
         "variant": "plum-velvet",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=grand-theatre-premiere&variant=plum-velvet"
+        "start_link": "/start?theme=grand-theatre-premiere&variant=plum-velvet",
+        "image": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_plum-velvet.jpg",
+        "image_exists": false
       },
       {
         "name": "Black Tie Onyx & Gold",
         "variant": "onyx-gold",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=grand-theatre-premiere&variant=onyx-gold"
+        "start_link": "/start?theme=grand-theatre-premiere&variant=onyx-gold",
+        "image": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_onyx-gold.jpg",
+        "image_exists": false
       }
     ],
     "offered": [
       "Original (Grand Theatre Premiere)"
+    ],
+    "images": [
+      {
+        "file": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/10_palettes.jpg",
+        "exists": false,
+        "option": null,
+        "upload": false,
+        "alt": "Grand Theatre Premiere in 6 color palettes: the opening page of each, side by side",
+        "status": "missing"
+      },
+      {
+        "file": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_original.jpg",
+        "exists": false,
+        "option": "Original (Grand Theatre Premiere)",
+        "upload": false,
+        "alt": "Grand Theatre Premiere in its original palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_crimson-velvet.jpg",
+        "exists": false,
+        "option": "Crimson Velvet & Gold",
+        "upload": false,
+        "alt": "Grand Theatre Premiere in the Crimson Velvet & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_royal-sapphire.jpg",
+        "exists": false,
+        "option": "Royal Sapphire & Gold",
+        "upload": false,
+        "alt": "Grand Theatre Premiere in the Royal Sapphire & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_emerald-velvet.jpg",
+        "exists": false,
+        "option": "Emerald Velvet & Gold",
+        "upload": false,
+        "alt": "Grand Theatre Premiere in the Emerald Velvet & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_plum-velvet.jpg",
+        "exists": false,
+        "option": "Plum Velvet & Gold",
+        "upload": false,
+        "alt": "Grand Theatre Premiere in the Plum Velvet & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_onyx-gold.jpg",
+        "exists": false,
+        "option": "Black Tie Onyx & Gold",
+        "upload": false,
+        "alt": "Grand Theatre Premiere in the Black Tie Onyx & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

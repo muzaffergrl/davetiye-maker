@@ -120,3 +120,11 @@ paleti olan temada `variants.css`'i orijinal palette de bağlar.
   `price_varies: false`, `options` (orijinal + her palet: `variant`, `status`, `offered` = live, `start_link`),
   `offered`, `fallback`. `--check --strict` palet adlarını (1–40 karakter, tekrar yok) ve durumlarını denetler.
   K41: Etsy'ye hiçbir şey gönderilmez.
+- **Palet görselleri (G178):** `python3 tools/listing_editorial.py --theme <NN|all> --palettes --capture palettes` (yerel
+  üretim derlemesi) → `package/listing/images_editorial/10_palettes.jpg` (bütün paletlerin kapalı açılış ekranı yan yana)
+  + `palette_<id>.jpg` (her palet: açılış kapalı ve açılırken, DPR 3 gerçek ekran; orijinal `palette_original.jpg`), 2000 px
+  JPEG q90 (~0,6 MB). Çekim `seed.ts --variant` ile o palette yayınlanmış demo sitedir (coming dahil, yalnız yerel).
+  GPT parçası bekleyen palet (`palette.json recolor` / `recolor.json parts` → `gpt`) görsel almaz. `etsy_upload.py` her
+  seçeneğe `image` yazar, `variations.images` = ilana eklenecek palet fotoğrafları (`upload`: seçenek satışta; genel görsel
+  gösterdiği bütün paletler satıştayken). Etsy sınırı **ilan başına 20 fotoğraf + 2 video** (Etsy Help "How to Create a
+  Listing", 2026-10-17): 9 ilan görseli + 1 genel + 6 palet = 16; aşarsa `--check` kural hatası verir.

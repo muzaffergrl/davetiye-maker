@@ -32,6 +32,10 @@ The JSON is what a browser session pastes into Etsy's listing editor (docs/20 §
   envelope (gatefold, pouch, wallet, book, sleeve, box, curtain, origami, door, dome, wall, lantern of
   platform/lib/marketing/designs.ts, `openingObject`) — no
   "envelope" in the title, tags, description or alt texts.
+- Palettes (G153, G178): `variations` (docs/25 §5) with each option's image (palette_<id>.jpg from
+  tools/listing_editorial.py --palettes) and `variations.images`, the palette photos that go on the listing after the
+  nine (`upload`: the option is offered; the overview once every palette it shows is offered). More than Etsy's 20
+  photos per listing is a rule problem; a missing image of an offered option is a blocker.
 - Missing files (the START HERE PDF that Etsy delivers, the listing images, the video) are `blockers`: they keep
   `ready_to_publish` false and fail `--check` only with `--strict` (designs 06–20 have none of them yet, G123).
 - G175: an undecided [PLACEHOLDER] left in a design's description (as in the services) is an open check.
@@ -275,6 +279,14 @@ def build(no: str, folder: str, theme: str) -> tuple[dict, list[str]]:
     problems += [f"variations: {p}" for p in palette_problems]
     if variations and len(variations["offered"]) > 1:
         checks.append({"where": "variations", "check": PALETTE_CHECK, "text": ""})
+    if variations:  # G178: the palette photos that go on the listing
+        upload = [i for i in variations["images"] if i["upload"]]
+        if len(imgs) + len(upload) > ETSY_MAX_IMAGES:
+            problems.append(f"images: {len(imgs)} listing images + {len(upload)} palette images > Etsy's "
+                            f"{ETSY_MAX_IMAGES} photos per listing")
+        gone = [i["file"] for i in upload if not i["exists"]]
+        if gone:
+            blockers.append(f"palette images missing: {', '.join(gone)}")
     data = {
         "design": no,
         "theme": theme,
@@ -315,6 +327,43 @@ PALETTE_CHECK = ("Etsy listing editor: confirm a digital listing accepts the cus
                  "for every option); if it does not, use the fallback of docs/25 §5 (no variation, palette chosen on /start)")
 
 
+PALETTE_IMAGES_STATUS = ("G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, "
+                         "local production build; docs/25 §5)")
+ETSY_MAX_IMAGES = 20  # photos per listing (Etsy Help "How to Create a Listing", checked 2026-10-17; plus 2 videos)
+
+
+def palette_image(theme: str, variant: str | None, gpt: list[str]) -> dict:
+    """G178: the listing image of one palette option (palette_<id>.jpg; palette_original.jpg for the original). A palette
+    whose parts still wait for GPT has none (it stays coming)."""
+    folder = next((f for _, f, t in DESIGNS if t == theme), None)
+    if gpt or folder is None:
+        return {"image": None, "image_note": f"waits for GPT parts: {', '.join(gpt)}" if gpt else "no listing folder"}
+    path = REPO / "collections" / folder / "package" / "listing" / lk.UPLOAD_DIR / f"palette_{variant or 'original'}.jpg"
+    return {"image": path.relative_to(REPO).as_posix(), "image_exists": path.exists()}
+
+
+def palette_listing_images(theme: str, options: list[dict]) -> list[dict]:
+    """G178: the palette photos to add after the nine listing images: the overview (10_palettes.jpg, every palette that
+    has an image) once every palette it shows is offered, and each offered option's own image (Etsy shows it when the
+    buyer picks the option; a photo must be on the listing before it can be attached)."""
+    folder = next((f for _, f, t in DESIGNS if t == theme), None)
+    if folder is None:
+        return []
+    shown = [o for o in options if o.get("image")]
+    overview = REPO / "collections" / folder / "package" / "listing" / lk.UPLOAD_DIR / "10_palettes.jpg"
+    out = [{"file": overview.relative_to(REPO).as_posix(), "exists": overview.exists(), "option": None,
+            "upload": len(shown) > 1 and all(o["offered"] for o in shown),
+            "alt": f"{theme_name(theme)} in {len(shown)} color palettes: the opening page of each, side by side",
+            "status": PALETTE_IMAGES_STATUS if overview.exists() else "missing"}]
+    for o in shown:
+        out.append({"file": o["image"], "exists": o["image_exists"], "option": o["name"],
+                    "upload": o["offered"] and sum(x["offered"] for x in options) > 1,
+                    "alt": (f"{theme_name(theme)} in its original palette" if o["variant"] is None else
+                            f"{theme_name(theme)} in the {o['name']} palette") + ": the opening page closed and opening",
+                    "status": PALETTE_IMAGES_STATUS if o["image_exists"] else "missing"})
+    return out
+
+
 def palette_variations(theme: str) -> tuple[dict | None, list[str]]:
     """G153: one listing per design with a "Color palette" variation (docs/25 §5). Options come from the theme's own
     theme.json "variants": the original first, every palette after it; only "live" ones are offered on Etsy, "coming" ones
@@ -325,12 +374,15 @@ def palette_variations(theme: str) -> tuple[dict | None, list[str]]:
     if not variants:
         return None, []
     original = f"Original ({data.get('name', theme)})"
-    options = [{"name": original, "variant": None, "status": "live", "offered": True,
-                "start_link": f"/start?theme={theme}"}]
+    # G178: each option's listing image (tools/listing_editorial.py --palettes), attached to the option in Etsy's editor
+    gpt = {p["id"]: p["gpt"] for p in lk.palettes(lk.THEMES[theme])} if theme in lk.THEMES else {}
+    options = [dict({"name": original, "variant": None, "status": "live", "offered": True,
+                     "start_link": f"/start?theme={theme}"}, **palette_image(theme, None, []))]
     for v in variants:
-        options.append({"name": v.get("name"), "variant": v.get("id"), "status": v.get("status"),
-                        "offered": v.get("status") == "live",
-                        "start_link": f"/start?theme={theme}&variant={v.get('id')}"})
+        options.append(dict({"name": v.get("name"), "variant": v.get("id"), "status": v.get("status"),
+                             "offered": v.get("status") == "live",
+                             "start_link": f"/start?theme={theme}&variant={v.get('id')}"},
+                            **palette_image(theme, v.get("id"), gpt.get(v.get("id"), []))))
     problems = []
     names = [o["name"] for o in options]
     if len(set(n.lower() for n in names if n)) != len(names):
@@ -347,6 +399,7 @@ def palette_variations(theme: str) -> tuple[dict | None, list[str]]:
         "price_varies": False,
         "options": options,
         "offered": [o["name"] for o in options if o["offered"]],
+        "images": palette_listing_images(theme, options),
         "fallback": ("No variation: the listing names the palettes in the description and shows them on one image; the "
                      "buyer picks the palette on /start (the START HERE link) and can switch it in the editor."),
     }, problems
@@ -451,9 +504,11 @@ def main(argv: list[str] | None = None) -> int:
         if not a.check:
             out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
         have = sum(i["exists"] for i in data["images"])
-        files = [b for b in data["blockers"] if b.startswith(("listing images", "listing video", "digital file"))]
+        files = [b for b in data["blockers"] if b.startswith(("listing images", "listing video", "digital file",
+                                                              "palette images"))]
+        pal = [i for i in data.get("variations", {}).get("images", []) if i["exists"]]
         print(f"{no} {theme}: title {data['title_length']}/140 · tags {len(data['tags'])}/13 · "
-              f"images {have}/{len(data['images'])} · video {'yes' if data['video']['exists'] else 'no'} · "
+              f"images {have}/{len(data['images'])}{f' (+{len(pal)} palette)' if pal else ''} · video {'yes' if data['video']['exists'] else 'no'} · "
               f"guide {'yes' if data['digital_files'][0]['bytes'] else 'no'} · mockups {len(data['gpt_mockup_scenes'])} · "
               f"open checks {len(data['open_checks'])} · {'OK' if not problems else 'PROBLEMS: ' + '; '.join(problems)}")
         bad |= bool(problems) or (a.strict and bool(files))

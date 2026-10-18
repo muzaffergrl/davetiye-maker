@@ -702,8 +702,8 @@
           "card",
           "back"
         ],
-        "ink": "#2F3A2B",
-        "accent": "#4E5043"
+        "ink": "#2C3531",
+        "accent": "#635B3E"
       }
     },
     {
@@ -720,8 +720,8 @@
           "card",
           "back"
         ],
-        "ink": "#2F3A2B",
-        "accent": "#5D5330"
+        "ink": "#303A2D",
+        "accent": "#6C5B35"
       }
     },
     {
@@ -738,8 +738,8 @@
           "card",
           "back"
         ],
-        "ink": "#2F3A2B",
-        "accent": "#3F433C"
+        "ink": "#222A28",
+        "accent": "#5A543B"
       }
     },
     {
@@ -756,8 +756,8 @@
           "card",
           "back"
         ],
-        "ink": "#2F3A2B",
-        "accent": "#5F3632"
+        "ink": "#30271D",
+        "accent": "#694E3D"
       }
     },
     {
@@ -774,8 +774,8 @@
           "card",
           "back"
         ],
-        "ink": "#2F3A2B",
-        "accent": "#6D4C41"
+        "ink": "#3C382E",
+        "accent": "#715943"
       }
     }
   ]
