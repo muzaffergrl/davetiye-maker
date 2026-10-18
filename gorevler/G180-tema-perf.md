@@ -6,7 +6,7 @@ durum: inceleme
 alan: claude-G180
 oncelik: 2
 bagimli: [G173, G177]
-yazar: [platform/scripts/font-fallback.ts, platform/scripts/lib/variant-check.ts, platform/themes/*/site.css, platform/themes/*/{index,home,story,details,rsvp}.html, platform/themes/vintage-airmail-love-letter/site.css, platform/themes/music-box-ballerina/variants.css, platform/tests/g180-theme-perf.test.ts, platform/tests/g180-browser.ts, platform/tests/theme-*.test.ts, platform/previews/g180/, docs/11_TEMA_STANDARDI.md, gorevler/G180-tema-perf.md]
+yazar: [platform/scripts/font-fallback.ts, platform/scripts/lib/variant-check.ts, platform/themes/*/site.css, platform/themes/*/{index,home,story,details,rsvp}.html, platform/themes/vintage-airmail-love-letter/site.css, platform/themes/music-box-ballerina/variants.css, platform/tests/g180-theme-perf.test.ts, platform/tests/g180-browser.ts, platform/tests/theme-*.test.ts, platform/previews/g180/, platform/previews/g173/g180_after.json, docs/11_TEMA_STANDARDI.md, gorevler/G180-tema-perf.md]
 ---
 
 ## Amaç
@@ -54,7 +54,9 @@ Gerçek telefon ve canlı ağ denenmedi. Ham veri: `previews/g180/before*.json`,
   decoding="async"` aldı (21 tema, 1–9 görsel). Kart vellumdan/kapı aralığından/cep kenarından görünen 06, 11, 14, 18'de kart erken
   kaldı. `index.html`'e bütün temalarda aynı küçük parça: `.js:not(.parts-on) img[data-defer]{display:none!important}` + betik;
   `.stage img[fetchpriority=high]` yüklenip bir kare boyandıktan sonra (rAF + setTimeout; ya da `load`, ilk
-  `pointerdown`/`keydown`, açılmış durumda hemen) `parts-on` eklenir, parçalar dokunuştan önce birlikte yüklenir. Şelalede (tuscan) parçalar artık kapalı zarf bittikten sonra başlıyor
+  `pointerdown`/`keydown`, açılmış durumda hemen) `parts-on` eklenir ve ertelenen görseller `loading=eager` olur (`tests/g180-browser.ts`
+  ilk koşuda 17 emerald'ın kart süsünü ve 09 lavender'ın kese içindeki fotoğrafını yakaladı: kırpılan lazy görsel dokunuşa kadar
+  hiç yüklenmiyordu), parçalar dokunuştan önce birlikte yüklenir. Şelalede (tuscan) parçalar artık kapalı zarf bittikten sonra başlıyor
   (önce 210 ms'de, sonra 3,97 s'de). İlk görünümde High öncelikli görsel KB'ı: olive 743 → 557, blush 787 → 442, tuscan 896 →
   584, sunflower 804 → 462, enchanted 584 → 306.
 - **Açılış aynı:** önce/sonra dokunuş kareleri (100–2600 ms) olive, coastal (dalga), art-deco (kapılar), enchanted (kitap):
@@ -63,43 +65,50 @@ Gerçek telefon ve canlı ağ denenmedi. Ham veri: `previews/g180/before*.json`,
   `decor_tl-960` 167 KB + `decor_br-960` 146 KB, ikisi de High), zemin ve 2–3 web fontu. Laboratuvar sunucusu HTTP/1.1 (6 bağlantı
   bant genişliğini eşit paylaşıyor), öncelik farkı Vercel'in HTTP/2'sinde daha çok işler — burada ölçülmedi. Sonraki adım (tema
   kararı, bu görevde yapılmadı): köşe kümelerinin `sizes`'ı/DPR 2 türevi ya da `fetchpriority="low"`.
-- 06 art-deco (1780 → 2252) ve 21 crimson (1464 → 1764) sonra biraz yüksek ölçüldü; ertelenen parçaları dışında ilk görünüm
-  aynı, fark ±300 ms ölçüm gürültüsü bandında ya da hemen üstünde — __ADCR__
+- İlk taramada 06 art-deco ve 21 crimson "sonra" daha yüksek göründü (ayrı zamanlarda ölçüm); yan yana ölçümde ikisi de iyileşti
+  (2254 → 2070, 1870 → 1462). 15 cherry yan yana ilk denemede ~+100 ms idi: parçaların serbest bırakılması kapalı zarfın
+  boyandığı kareye biniyordu; serbest bırakma bir kare sonraya (rAF + setTimeout) alındı → 2504 → 2390. Gerileme yok
+  (18 wildflower +4 ms, gürültü).
 
-| Demo | LCP ms önce → sonra | Aktarım KB önce → sonra | CLS önce → sonra | CLS, fontlar +3 s: önce → sonra |
+| Demo | LCP ms önce → sonra | İlk görünüm High görsel KB önce → sonra | CLS önce → sonra | CLS, fontlar +3 s: önce → sonra |
 |---|---|---|---|---|
-| art-deco-black-tie | 1780 → 2252 | 738 → 740 | 0,007 → 0,005 | 0,007 → 0,005 |
-| azulejo-mosaic | 828 → 772 | 222 → 223 | 0,002 → 0,002 | 0,002 → 0,002 |
-| blush-garden-rose | 5104 → 3668 | 1060 → 1054 | 0,002 → 0,002 | 0,002 → 0,002 |
-| boho-pampas-terracotta | 3608 → 3400 | 813 → 815 | 0,002 → 0,001 | 0,002 → 0,001 |
-| burgundy-velvet-autumn | 2308 → 2148 | 851 → 853 | 0,085 → 0,006 | 0,087 → 0,006 |
-| celestial-observatory | 792 → 808 | 159 → 159 | 0,009 → 0,003 | 0,010 → 0,003 |
-| cherry-blossom-spring | 2184 → 2248 | 675 → 695 | 0,024 → 0,018 | 0,012 → 0,007 |
-| coastal-seaside | 2828 → 2472 | 875 → 870 | **0,158** → 0,008 | **0,110** → 0,008 |
-| crimson-rose-atelier | 1464 → 1764 | 776 → 777 | 0,001 → 0,001 | 0,001 → 0,001 |
-| dusty-blue-champagne | 2016 → 1612 | 881 → 883 | **0,121** → 0,001 | 0,003 → 0,001 |
-| emerald-gold-estate | 3116 → 2900 | 835 → 824 | 0,084 → 0,001 | 0,095 → 0,001 |
-| enchanted-forest-storybook | 4836 → 3224 | 922 → 924 | **0,131** → 0,006 | **0,131** → 0,001 |
-| grand-theatre-premiere | 1532 → 1384 | 456 → 456 | 0,003 → 0,002 | 0,003 → 0,002 |
-| ivory-lace-pearls | 2848 → 2836 | 871 → 873 | **0,128** → 0,011 | **0,135** → 0,011 |
-| kintsugi-washi | 1544 → 1392 | 249 → 250 | 0,003 → 0,001 | 0,003 → 0,001 |
-| lavender-provence | 3424 → 3192 | 897 → 847 | 0,002 → 0,001 | 0,002 → 0,001 |
-| maison-patisserie | 1832 → 1780 | 352 → 353 | 0,003 → 0,003 | 0,003 → 0,003 |
-| mediterranean-lemon | 1408 → 1144 | 745 → 747 | 0,001 → 0,001 | 0,001 → 0,001 |
-| midnight-garden | 1848 → 1620 | 698 → 700 | 0,007 → 0,006 | 0,003 → 0,002 |
-| music-box-ballerina | 972 → 948 | 256 → 256 | 0,005 → 0,002 | 0,005 → 0,002 |
-| nocturne-lake-estate | 1416 → 1360 | 380 → 380 | 0,001 → 0,000 | 0,001 → 0,000 |
-| olive-ivory | 3472 → 3296 | 994 → 996 | 0,002 → 0,002 | 0,002 → 0,002 |
-| orient-express-voyage | 912 → 944 | 165 → 166 | 0,003 → 0,000 | 0,005 → 0,003 |
-| riad-lantern-nights | 1788 → 1824 | 327 → 327 | 0,004 → 0,002 | 0,004 → 0,002 |
-| sky-lantern-festival | 856 → 884 | 276 → 276 | 0,007 → 0,002 | 0,007 → 0,002 |
-| sunflower-rustic-barn | 5028 → 4104 | 1144 → 1146 | 0,006 → 0,006 | 0,004 → 0,004 |
-| tropical-destination | 2432 → 2248 | 799 → 802 | 0,021 → 0,000 | 0,001 → 0,000 |
-| tuscan-vineyard | 4836 → 3844 | 1115 → 1102 | **0,139** → 0,001 | **0,139** → 0,001 |
-| velvet-jewel-box | 836 → 696 | 397 → 397 | 0,002 → 0,002 | 0,002 → 0,002 |
-| vintage-airmail-love-letter | 3252 → 3208 | 901 → 887 | **0,147** → 0,001 | **0,147** → 0,001 |
-| wildflower-meadow-vellum | 952 → 992 | 567 → 569 | 0,001 → 0,001 | 0,002 → 0,001 |
-| winter-evergreen | 3388 → 3176 | 879 → 881 | 0,003 → 0,003 | 0,003 → 0,003 |
+| art-deco-black-tie | 2254 → 2070 | 573 → 421 | 0,007 → 0,005 | 0,007 → 0,005 |
+| azulejo-mosaic | 828 → 772 ¹ | 57 → 57 | 0,002 → 0,002 | 0,002 → 0,002 |
+| blush-garden-rose | 5102 → **3670** | 787 → 442 | 0,002 → 0,002 | 0,002 → 0,002 |
+| boho-pampas-terracotta | 3646 → **3382** | 605 → 487 | 0,002 → 0,001 | 0,002 → 0,001 |
+| burgundy-velvet-autumn | 2296 → **2040** | 554 → 324 | 0,085 → 0,006 | 0,087 → 0,006 |
+| celestial-observatory | 792 → 808 ¹ | 30 → 30 | 0,009 → 0,003 | 0,010 → 0,003 |
+| cherry-blossom-spring | 2504 → 2390 | 443 → 253 | 0,024 → 0,018 | 0,012 → 0,007 |
+| coastal-seaside | 2870 → **2542** | 616 → 277 | **0,158** → 0,008 | **0,110** → 0,008 |
+| crimson-rose-atelier | 1870 → **1462** | 616 → 447 | 0,001 → 0,001 | 0,001 → 0,001 |
+| dusty-blue-champagne | 1896 → **1432** | 631 → 493 | **0,121** → 0,001 | 0,003 → 0,001 |
+| emerald-gold-estate | 3154 → **2898** | 609 → 343 | 0,084 → 0,001 | 0,095 → 0,001 |
+| enchanted-forest-storybook | 4738 → **3062** | 584 → 306 | **0,131** → 0,006 | **0,131** → 0,001 |
+| grand-theatre-premiere | 1532 → 1384 ¹ | 312 → 314 | 0,003 → 0,002 | 0,003 → 0,002 |
+| ivory-lace-pearls | 2830 → 2802 | 583 → 337 | **0,128** → 0,011 | **0,135** → 0,011 |
+| kintsugi-washi | 1544 → 1392 ¹ | 44 → 44 | 0,003 → 0,001 | 0,003 → 0,001 |
+| lavender-provence | 3382 → **3172** | 675 → 462 | 0,002 → 0,001 | 0,002 → 0,001 |
+| maison-patisserie | 1832 → 1780 ¹ | 254 → 254 | 0,003 → 0,003 | 0,003 → 0,003 |
+| mediterranean-lemon | 1256 → 1240 | 500 → 315 | 0,001 → 0,001 | 0,001 → 0,001 |
+| midnight-garden | 1742 → 1678 | 397 → 216 | 0,007 → 0,006 | 0,003 → 0,002 |
+| music-box-ballerina | 972 → 948 ¹ | 138 → 138 | 0,005 → 0,002 | 0,005 → 0,002 |
+| nocturne-lake-estate | 1416 → 1360 ¹ | 245 → 245 | 0,001 → 0,000 | 0,001 → 0,000 |
+| olive-ivory | 3376 → 3366 | 743 → 557 | 0,002 → 0,002 | 0,002 → 0,002 |
+| orient-express-voyage | 912 → 944 ¹ | 11 → 11 | 0,003 → 0,000 | 0,005 → 0,003 |
+| riad-lantern-nights | 1788 → 1824 ¹ | 203 → 203 | 0,004 → 0,002 | 0,004 → 0,002 |
+| sky-lantern-festival | 856 → 884 ¹ | 152 → 152 | 0,007 → 0,002 | 0,007 → 0,002 |
+| sunflower-rustic-barn | 5252 → **4056** | 804 → 462 | 0,006 → 0,006 | 0,004 → 0,004 |
+| tropical-destination | 2422 → 2406 | 543 → 413 | 0,021 → 0,000 | 0,001 → 0,000 |
+| tuscan-vineyard | 4810 → **3830** | 896 → 584 | **0,139** → 0,001 | **0,139** → 0,001 |
+| velvet-jewel-box | 836 → 696 ¹ | 219 → 219 | 0,002 → 0,002 | 0,002 → 0,002 |
+| vintage-airmail-love-letter | 3242 → 3174 | 627 → 591 | **0,147** → 0,001 | **0,147** → 0,001 |
+| wildflower-meadow-vellum | 962 → 966 | 312 → 306 | 0,001 → 0,001 | 0,002 → 0,001 |
+| winter-evergreen | 3518 → **3200** | 662 → 408 | 0,003 → 0,003 | 0,003 → 0,003 |
+
+LCP (01–21): eski şablonlu sunucu (`PLATFORM_THEMES_DIR` = G180 öncesi `themes/`) ile yeni sunucu **aynı anda, dönüşümlü** ölçüldü,
+2'şer koşunun ortalaması (`previews/g180/lcp_head_to_head.txt`); kalın = ≥ 200 ms kazanç. ¹ 22–32: açılış parçası ertelenmedi (LCP
+zaten < 2,5 s), değerler ayrı zamanlarda alınmış önce/sonra taramasından (gürültü). Aktarım toplamı değişmedi (parçalar yine
+dokunuştan önce yükleniyor); azalan, kapalı nesneyle yarışan yüksek öncelikli görsel baytı.
 
 ### 3. Sabit alt menünün altında içerik — yok, ölçüm artefaktıydı (şablon değişikliği gerekmedi)
 - 32 tema × home/story/details/rsvp (+ RSVP'de "katılıyorum" seçili, yani "Number of guests" görünürken), 390 × 844, sayfa
@@ -117,7 +126,34 @@ Gerçek telefon ve canlı ağ denenmedi. Ham veri: `previews/g180/before*.json`,
 sabitliyordu); `check --design 32`: temiz.
 
 ### Testler
-__TESTLER__
+- `npm ci && rm -rf .next && npx tsc --noEmit && I18N_STRICT=1 npm test && npm run build`: merge sonrası **yeşil** — 1728 test,
+  1725 geçti, 3 atlandı (build'siz), 0 hata; trace-check ve js-budget geçti (`/edit/[slug]` 188,2/205 KB).
+  Tema testleri güncellendi: 20 temada index CSP hash sayısı 2 → 3 (erken durum + ertelenen parçalar + speculation rules),
+  06/14/04 yığın eşleşmeleri `,fb1,fb2,` ile, 04'te `var(--names-scale, .97)` ve "zarf sayfası ilk görünüm: lazy yalnız
+  ertelenen parçalar". Yeni `tests/g180-theme-perf.test.ts` (3 test): her sayfada aynı yedek-yüz bloğu `site.css`'ten önce,
+  `site.css` yığınında fb1/fb2, ertelenen parçalar lazy + low, kapalı nesne high, serbest bırakma parçası bütün temalarda
+  aynı, `site.css` ≤ 45 KB. Taban dalından gelen 33–38 (art-nouveau-lily, highland-tartan-thistle, marigold-mehndi,
+  papel-picado-fiesta, red-lacquer-double-happiness, victorian-glasshouse) başka oturumlarda yapılıyor; dosyalarına
+  dokunulmadı, test onları "henüz yedek yüz yok" tanısıyla listeliyor — standart (docs/11 §6, §12) onlar için de zorunlu.
+- `node scripts/font-fallback.ts --check` (32 tema, taze ölçüm): fark yok.
+- `tests/g180-browser.ts` (yeni, build sonrası elle): **170/170** — 32 demo CLS ≤ 0,1 olduğu gibi ve fontlar 3 s geç; yedek
+  fontla isim/kicker/sahne ±2 px; 21 temada hiçbir ertelenen parça kapalı nesne yüklenmeden istenmiyor ve hepsi dokunuştan önce
+  yüklü; 32 tema × 5 sayfa sonunda sabit menünün altında içerik yok. `previews/g180/metrics.json`.
+- `tests/g173-browser.ts`: **94/97** (G173 sonunda 91/97). Coastal CLS ve panel `#edit/photos`/`#share` LCP'si artık geçiyor
+  (panel: G181). Kalan 3 FAIL açık madde 2: demo LCP olive 3384, blush 3676, coastal 2652 ms (> 2,5 s). `previews/g173/g180_after.json`.
+- `theme-check --stress`, 32 tema: **32/32 hatasız** (paralel 3 işçi; 21 crimson home → story geçişinde paralel yükte bir kez 6 s
+  zaman aşımı verdi, tek başına 117/117). İki istisna önceden vardı ve G180'le ilgisiz:
+  - 01 olive "draft preview, no photos" home: kart metni boyalı süsün üstünde (pixel test, kart 720 px > görsel 260 px) — G180
+    öncesi dosyalarla (`git checkout 6cb6cf7c -- themes/olive-ivory/`) da aynı FAIL; açık bırakıldı (G180 kapsamı dışı).
+  - 30 azulejo teal-glaze "Number of guests 1,52:1": tam sayfa menü artefaktı, variant-check düzeltmesiyle temiz (yukarıda 3).
+  Uyarılar önceden olanlar: "Google font not loaded" (26 Shippori Mincho, 03 Cormorant — `document.fonts.check` 400 ağırlığı
+  sorgusu), orijinal paletten gelen kontrast uyarıları (24 "Act" 4,28, 19 "C&D" 4,13, 14 "We're getting married" 4,27).
+  Son serbest bırakma değişikliğinden sonra 17 ve 09 yeniden: 133/133.
+- `python3 tools/recolor_parts.py check --design 32`: temiz. variant-check 26/29/30: 5/5 palet, uyarısız.
+- Açılış kareleri (önce/sonra): `previews/g180/frames_{olive-ivory,coastal-seaside,art-deco-black-tie,enchanted-forest-storybook}.png`.
+
+**Denenmedi:** gerçek iPhone/Android (`local()` eşleşmesi Android Chrome'da Noto Serif adıyla — laboratuvarda yalnız Liberation
+Serif kuruluydu, fb2 metrikleri web'den indirilen Noto Serif ile ölçüldü), Vercel HTTP/2 üzerinde LCP, Safari.
 
 GPT'den görsel gerekmedi; yeni dekor çizilmedi (K21).
 
