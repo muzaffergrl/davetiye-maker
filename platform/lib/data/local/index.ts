@@ -390,6 +390,28 @@ export class LocalAdapter implements DataAdapter {
     }
   }
 
+  async pruneUploadParts(siteId: string, before: number): Promise<number> {
+    if (!UUID_RE.test(siteId)) return 0;
+    const dir = this.partsDir(siteId);
+    let names: string[];
+    try {
+      names = await fs.readdir(dir);
+    } catch (e) {
+      if ((e as NodeJS.ErrnoException).code === 'ENOENT') return 0;
+      throw e;
+    }
+    let removed = 0;
+    for (const name of names) {
+      const file = path.join(/*turbopackIgnore: true*/ dir, name);
+      const stat = await fs.stat(file).catch(() => null);
+      if (stat?.isFile() && stat.mtimeMs < before) {
+        await fs.rm(file, { force: true });
+        removed++;
+      }
+    }
+    return removed;
+  }
+
   async countPhotos(siteId: string): Promise<number> {
     if (!UUID_RE.test(siteId)) return 0;
     try {

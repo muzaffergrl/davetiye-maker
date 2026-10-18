@@ -17,6 +17,22 @@ durumu `coming` (`platform/lib/marketing/config.ts`); fiyat `[PRICE]`, onay ente
 **Denenmedi:** gerçek telefon, Vercel yayını, gerçek alıcı fotoğrafları, GPT parçalarıyla görünüm.
 Son kontrol: 2026-10-17 (G169).
 
+## G175 — paket (GPT'siz kısım, 2026-10-17)
+
+- START HERE: `package/customer/START_HERE.{md,pdf}` + `img/start_qr.{png,svg}` (yalnız `tools/make_qr.py`),
+  açılış nesnesi `wall` / panel sekmesi `Wall`; `python3 tools/build_customer_guides.py --check --designs 30` yeşil.
+  Başlat linki `/start?theme=azulejo-mosaic` yayından sonra çalışır (denenmedi).
+- Etsy verisi: `package/listing/etsy_upload.json` — `ready_to_publish: false`; blocker: görseller, video, `coming` (K41),
+  fiyat `[PRICE]`, yenileme. `python3 tools/etsy_upload.py --check --designs 30` yeşil. Etsy'ye hiçbir şey gönderilmedi.
+- GPT ilan sahneleri (PAKET 3, #00FF00 ekranlar): `assets/gpt/GPT_PROMPTS.md` → `assets/gpt/mockups/` (bekliyor).
+
+**GPT sonrası:** PAKET 5/2 parçaları tema `build_images.py` ile → PAKET 3 sahneleri `assets/gpt/mockups/`'a →
+`tools/listing_kit.py` `THEMES`'e `Theme(id="azulejo-mosaic", no="30", …)` (köşe süsleri GPT dekordan) +
+`tools/listing_editorial/opening_stills.json`'a açılış anları → `cd platform && npm run build` →
+`python3 tools/listing_editorial.py --theme azulejo-mosaic --capture --video` (9 ilan görseli + `video.mp4`) → `listing_v3.md` §5
+alt metinleri gerçek dosyalara göre → `python3 tools/listing_kit.py pdf --theme azulejo-mosaic` (ilan PDF'i) →
+`python3 tools/etsy_upload.py --designs 30` + `--check --strict --designs 30`.
+
 **Renk paletleri (G177, 2026-10-18):** 5 palet, hepsi `coming` (satışta, panelde, `/start`'ta görünmez; tasarım da `coming`):
 `manganese-violet` Manganese Violet & Terracotta; `copper-green` Copper Green & Ochre; `teal-glaze` Teal Glaze & Terracotta; `wine-ochre` Wine Glaze & Ochre; `slate-blue` Slate Blue & Terracotta. Kaynak `variants/recolor.json` + `variants/V0x_*/palette.json`; **yalnız CSS** ile kuruldu
 (`variants.css` + `theme.json variants`) çünkü temanın bütün görsel parçaları geçici. Görsel zeminler (GPT parçaları) şimdilik

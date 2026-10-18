@@ -2,7 +2,7 @@
 id: G166
 baslik: 28 Maison Pâtisserie — platform teması (GPT parçalarından önce, geçici katmanlarla), coming kaydı, prompt'lar, basılı davetiye, Etsy taslağı
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G166
 oncelik: 1
 bagimli: []
@@ -93,3 +93,4 @@ istenmedi), W1 comp karşılaştırması (comp yok), qa-kontrol kapısı. GPT pa
 - 2026-10-17 açıldı ve alındı: claude-G166 (koordinatör isteği)
 - 2026-10-17 bitti, incelemeye gönderildi
 - 2026-10-17 koordinatör isteğiyle `claude/zealous-fermi-hy1o40` birleştirildi (25 Orient Express, 26 Kintsugi kayıtlı): çakışmalar iki taraf korunarak çözüldü (coming listesi 4 tasarım, g138 THEMES 25, katalog `ek_ayirt` onların — benim `dalga_ayirt`'ım kaldırıldı, kaydım EK_TEMALAR'da). Sonra: tsc ✓, `I18N_STRICT=1 npm test` 1452/1454 (0 hata, 2 atlandı; build sonrası marketing-build 2/2), G149 baskı testi ✓, build ✓ (26 tema), theme-check --stress 111/0/1, katalog kontrol ✓ (3 ek tasarım).
+- 2026-10-17 entegratör onayladı

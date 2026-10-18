@@ -2,7 +2,7 @@
 id: G167
 baslik: Yeni tasarımlar 23–28 — GPT görselleri gelmeden QA + düzeltme (prompt eksiksizliği, bırak-çalıştır provası, hareket/bileşen denetimi)
 rol: claude-qa
-durum: inceleme
+durum: bitti
 alan: claude-G167
 oncelik: 1
 bagimli: [G161, G162, G163, G164, G165, G166]
@@ -96,3 +96,4 @@ ve fotoğrafları, gerçek zeminlerle basılı PDF; `g051-browser` / `final-smok
 ## Günlük
 - 2026-10-17 açıldı ve alındı: claude-G167 (koordinatör isteği); altı alt ajan (tasarım başına) + ortak araçlar
 - 2026-10-17 bitti, incelemeye gönderildi
+- 2026-10-17 entegratör onayladı

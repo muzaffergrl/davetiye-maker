@@ -5,7 +5,7 @@ rol: claude-kod
 durum: bitti
 alan: claude-G139
 oncelik: 1
-bagimli: [K45]
+bagimli: []
 yazar: [platform/lib/print/, platform/lib/slug.ts, platform/README.md, platform/tests/g055-share-tracing.test.ts, platform/app/api/edit/[slug]/download/, platform/components/panel/Downloads.tsx, platform/components/panel/downloads.module.css, platform/components/panel/views.tsx, platform/next.config.ts, platform/scripts/trace-check.cjs, platform/scripts/build-print-assets.ts, platform/scripts/print-sample.ts, platform/tests/g139-print.test.ts, platform/public/print/, platform/previews/g139/, platform/package.json, platform/package-lock.json, collections/*/assets/gpt/GPT_PROMPTS.md, gorevler/G139-pdf-davetiye.md]
 ---
 

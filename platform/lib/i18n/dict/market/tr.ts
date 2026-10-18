@@ -957,6 +957,18 @@ const dict: Dict = {
   'The order of the day on blush satin beside the venue photo, an optional map, dress code, travel and the menu.': 'Pudra satende günün akışı ve yanında mekân fotoğrafı, isteğe bağlı harita, kıyafet kuralı, ulaşım ve menü.',
   'A reply card on blush satin; a few rose petals drift down and the ballerina turns once when a reply is sent.': 'Pudra saten üstünde bir yanıt kartı; yanıt gönderilince birkaç gül yaprağı süzülür ve balerin bir kez döner.',
   'Rose quartz': 'Gül kuvarsı',
+  // G175 Kintsugi & Washi (26, coming) + the curtain of 24
+  "Indigo washi paper folded like origami around a rice-paper card, fine gold veins and photos that appear like spreading ink": "Origami gibi pirinç kâğıdından bir kartın etrafına katlanmış çivit washi kâğıdı, ince altın damarlar ve yayılan mürekkep gibi beliren fotoğraflar",
+  "A wedding website wrapped in folded indigo washi paper: the folds open one by one to your invitation card. Personalize it in your online editor.": "Katlanmış çivit washi kâğıdına sarılı bir düğün sitesi: katlar tek tek açılır ve davetiye kartınız çıkar. Çevrim içi düzenleyicinizde kişiselleştirin.",
+  "Deep indigo washi, ivory rice paper and gold leaf, with the calm of sumi ink. Your invitation waits inside folded paper, and every photo appears like ink spreading on paper.": "Koyu çivit washi, fildişi pirinç kâğıdı ve altın varak; sumi mürekkebinin sakinliğiyle. Davetiyeniz katlanmış kâğıdın içinde bekler, her fotoğraf kâğıda yayılan mürekkep gibi belirir.",
+  "Your guests tap the origami. The paper band slides off and the indigo folds open one by one, top, bottom, left and right, until the rice-paper card with your photo lifts out and comes forward to become your home page.": "Misafirleriniz origamiye dokunur. Kâğıt kuşak kayar ve çivit katlar tek tek açılır: üst, alt, sol ve sağ; sonunda fotoğrafınızın olduğu pirinç kâğıdı kart kalkar ve öne gelerek ana sayfanız olur.",
+  "Your portrait, names, date and venue on a rice-paper card on indigo, then the invitation on a rice-paper band, a countdown and calendar links.": "Çivit zemin üstünde pirinç kâğıdından bir kartta portreniz, isimleriniz, tarih ve mekân; ardından pirinç kâğıdı bir bantta davet, geri sayım ve takvim bağlantıları.",
+  "Three moments, left, right and left again; each photo appears like ink spreading on paper as guests scroll to it.": "Üç an: sol, sağ ve yeniden sol; misafirler her birine kaydırdıkça fotoğraf kâğıda yayılan mürekkep gibi belirir.",
+  "The order of the day on rice paper, a venue photo that appears like ink, an optional map and directions, travel, menu, registry and questions and answers.": "Pirinç kâğıdında günün akışı, mürekkep gibi beliren mekân fotoğrafı, isteğe bağlı harita ve yol tarifi, ulaşım, menü, hediye listesi ile sorular ve cevaplar.",
+  "A rice-paper reply card with your reply-by date and the shared configurable reply form.": "Son yanıt tarihinizle pirinç kâğıdından bir yanıt kartı ve ortak, ayarlanabilir yanıt formu.",
+  "Indigo": "Çivit",
+  "curtain": "perde",
+  "origami": "origami",
 };
 
 export default dict;

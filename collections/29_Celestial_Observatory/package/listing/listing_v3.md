@@ -24,17 +24,17 @@ parts are in.
 | Response time, refund policy | docs/20 §6: 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, quantity | **Open** — `[PRICE]`. Quantity 999 like the other designs. |
 | Design fonts and other languages | From the Google Fonts CSS this theme loads (2026-10-17, by family listing; not re-read from the live CSS in this task): Imperial Script (latin, latin-ext, vietnamese), Forum (latin, latin-ext, cyrillic). [VERIFY: subsets in the live Google Fonts CSS] |
-| START HERE guide | **Not produced** (`package/customer/`). |
+| START HERE guide | **Built** (G175, 2026-10-17): `package/customer/START_HERE.md` + `.pdf` with the start QR (`python3 tools/build_customer_guides.py --designs 29`, from docs/19 Ek A; QR only from `tools/make_qr.py`; `--check` passes). Its start link answers only after this design is deployed; rebuild it if Ek A or the domain changes. |
 | Listing images and video | **Not produced** — they wait for the GPT parts (no image of the interim look is to be sold). |
 
 VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence.
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 115 characters.
+Etsy limit: 140 characters. This title: 120 characters.
 
 ```text
-Celestial Wedding Website with RSVP, Observatory Opening Digital Invitation, Star Map, Online Editor, Navy and Gold
+Celestial Observatory Wedding Website with RSVP, Dome Opening Digital Invitation, Star Map, Online Editor, Navy and Gold
 ```
 
 ## 2. Description
@@ -49,8 +49,8 @@ A small brass observatory under a midnight sky, engraved star charts, moon phase
 
 TRY THE LIVE DEMO
 See the dome open on your own phone before you buy (sample names):
-[DEMO LINK: https://davetiye-platform-five.vercel.app/start/demo/celestial-observatory — after deployment]
-Copy the link into your phone's browser.
+https://davetiye-platform-five.vercel.app/start/demo/celestial-observatory
+Copy the link into your phone's browser. [VERIFY: demo live after deploy]
 
 WHAT YOU GET
 • Your wedding website in the Celestial Observatory design: observatory opening, Home, Our Story, Details and RSVP pages

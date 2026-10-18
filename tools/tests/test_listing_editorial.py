@@ -31,7 +31,9 @@ DARK = {"art-deco-black-tie", "emerald-gold-estate", "midnight-garden"}
 
 def test_theme_table():
     assert len(lk.THEMES) == 21
-    assert sorted((t.no, t.folder, t.id) for t in lk.THEMES.values()) == sorted(eu.DESIGNS)
+    # G175: etsy_upload also lists the coming designs 22–32; they join THEMES when their GPT parts and scenes exist
+    live = [d for d in eu.DESIGNS if eu.commerce(d[2])["status"] == "live"]
+    assert sorted((t.no, t.folder, t.id) for t in lk.THEMES.values()) == sorted(live)
     for t in lk.THEMES.values():
         assert t.name == eu.theme_name(t.id), (t.id, t.name, eu.theme_name(t.id))
         assert (t.collection / "palette.json").exists(), t.id

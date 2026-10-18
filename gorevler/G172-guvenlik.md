@@ -2,7 +2,7 @@
 id: G172
 baslik: Güvenlik incelemesi — alıcı erişimi, panel/admin API, OAuth, e-posta, RSVP, yüklemeler, statik tema rotası; gerçek bulguların düzeltilmesi
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G172
 oncelik: 1
 bagimli: [G146, G147, G151, G152, G159]
@@ -81,3 +81,7 @@ birleştirme, PR yok. Kritik / yüksek bulgu yok; 3 düşük–orta bulgu düzel
 - Birleştirilmeyen müzik parçaları site silinene kadar kalır; günlük sınır artık bunu sınırlıyor, temizlik (ör. 1 günden eski
   `parts/`) istenirse ayrı görev.
 - Üretimde `PLATFORM_PUBLIC_URL` tanımlı olmalı (#10).
+
+## Günlük
+- 2026-10-17 entegratör onayladı
+- 2026-10-17 entegratör onayladı
