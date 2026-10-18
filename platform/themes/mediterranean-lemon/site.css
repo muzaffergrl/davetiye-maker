@@ -12,7 +12,7 @@
   --sky: #DCE6F2;
   --lemon: #F2C94C;
   --hair: rgba(42, 93, 168, .42);
-  --script: "Allura", "Snell Roundhand", cursive;
+  --script: "Allura",fb1,fb2,"Snell Roundhand", cursive;
   --serif: "Playfair Display", "Bodoni Moda", "Didot", Georgia, serif;
   --ease: cubic-bezier(.22, .61, .36, 1);
   --ease-soft: cubic-bezier(.33, 0, .2, 1);

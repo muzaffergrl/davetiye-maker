@@ -4,7 +4,7 @@
    map that draws itself as you scroll (docs/24). */
 :root{--green:#1e3a2c;--green-deep:#11241b;--green-soft:#2e5240;--brass:#b8914b;--brass-light:#d8bd84;--brass-ink:#7a5c24;
 --ivory:#f3ebd9;--paper:#ece1c8;--ink:#1c2a21;--muted:#4b5749;--route:#8c2f39;--line:#7a5c2440;--line-light:#d8bd8445;
---display:'Limelight',Georgia,serif;--serif:'Cormorant Garamond',Georgia,serif;color-scheme:light;--nav-h:62px;
+--display:'Limelight',fb1,fb2,Georgia,serif;--serif:'Cormorant Garamond',Georgia,serif;color-scheme:light;--nav-h:62px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}

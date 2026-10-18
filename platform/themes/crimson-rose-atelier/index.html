@@ -22,10 +22,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600&display=swap">
+<style>/* names fallback: scripts/font-fallback.ts */
+@font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:96.7%;ascent-override:95.2%;descent-override:30%;line-gap-override:0%}
+@font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:83.1%;ascent-override:110.7%;descent-override:34.9%;line-gap-override:0%}</style>
 <link rel="stylesheet" href="site.css">
 <link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
 <script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
 (function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'';if(sessionStorage.getItem('invite:opened'+k)&&!/[?&]replay=1(&|$)/.test(location.search))r.classList.add('is-opened');}catch(e){}})(document.documentElement);
+</script>
+<style>.js:not(.parts-on) img[data-defer]{display:none!important}</style>
+<script>/* deferred opening parts (G180, docs/11 §6): the images that only show after the tap ([data-defer], lazy) wait until the
+   closed object's own high-priority image(s) in .stage have loaded and painted, then all load at once (eager: a lazy part clipped by its card would
+   wait for the animation) — before the tap, so the opening never waits */
+(function(d,r){var on=function(){r.classList.add('parts-on');[].forEach.call(d.querySelectorAll('img[data-defer]'),function(i){i.loading='eager'})};if(r.classList.contains('is-opened')){on();return d.addEventListener('DOMContentLoaded',on)}addEventListener('pointerdown',on,true);addEventListener('keydown',on,true);addEventListener('load',on);d.addEventListener('DOMContentLoaded',function(){var h=d.querySelectorAll('.stage img[fetchpriority=high]');h=h.length?h:d.querySelectorAll('img[fetchpriority=high]');var n=h.length,one=function(){--n||requestAnimationFrame(function(){setTimeout(on)})};if(!n)on();h.forEach(function(i){i.complete?one():(i.addEventListener('load',one),i.addEventListener('error',one))})})})(document,document.documentElement);
 </script>
 <!-- prefetch the home page: the rule points at the "Enter" link, whose href the platform has already set to /<slug>/home -->
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"selector_matches":"a[data-enter]"},"eagerness":"immediate"}]}</script>
@@ -42,12 +51,12 @@
     <p class="eyebrow"><span data-field="date"></span><span aria-hidden="true"> · </span><span data-field="venue.city"></span></p>
   </div>
   <div class="stage" role="button" tabindex="0" aria-label="Open the invitation" data-copy-attr="aria-label:envelope_open">
-    <span class="env-back" aria-hidden="true"><img src="img/envelope-open.webp" alt=""></span>
+    <span class="env-back" aria-hidden="true"><img data-defer loading="lazy" fetchpriority="low" decoding="async" src="img/envelope-open.webp" alt=""></span>
     <span class="env-card" aria-hidden="true">
       <span class="card-oval photo-slot" data-slot="hero_portrait">
-        <img data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_portrait-640.webp" alt="" sizes="min(23vw, 140px)">
+        <img data-defer loading="lazy" fetchpriority="low" decoding="async" data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_portrait-640.webp" alt="" sizes="min(23vw, 140px)">
         <span class="ph-mark" data-if="!thank_you_on"><span>Your photo here</span></span>
-        <img class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_portrait-640.webp" sizes="min(23vw, 140px)" alt="">
+        <img data-defer loading="lazy" fetchpriority="low" decoding="async" class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_portrait-640.webp" sizes="min(23vw, 140px)" alt="">
         <span class="ty-decor" data-if="thank_you_on !thank_you.photo"><img src="img/rose-branch.webp" alt=""></span>
       </span>
       <span class="card-text">

@@ -12,7 +12,7 @@
   --terra: #C9785B;            /* palette primary (decorative only) */
   --gold: #C29A5B;             /* palette gold: hairlines */
   --gold-ink: #6C4A2A;         /* small capitals in gold-brown: 5.6:1 on the sand */
-  --script: "Sacramento", "Segoe Script", cursive;
+  --script: "Sacramento",fb1,fb2,"Segoe Script", cursive;
   --slab: "Josefin Slab", "Rockwell", "Roboto Slab", Georgia, serif;
   --ease: cubic-bezier(.22, .61, .36, 1);
   --ease-soft: cubic-bezier(.33, 0, .2, 1);

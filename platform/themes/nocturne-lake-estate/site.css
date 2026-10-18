@@ -2,7 +2,7 @@
    build_images.py); CSS adds light and interface (docs/11 §5.7): text halos, a soft vignette, hairline rules, form
    fields, buttons, the bottom nav. */
 :root{--black:#11120f;--night:#181912;--paper:#f1e4cc;--gold:#c7a978;--gold-ink:#d8bf93;--muted:#c6bda9;--line:#c7a97840;
---display:'Cinzel',Georgia,serif;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',Arial,sans-serif;color-scheme:dark;--nav-h:62px;
+--display:'Cinzel',fb1,fb2,Georgia,serif;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',Arial,sans-serif;color-scheme:dark;--nav-h:62px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}

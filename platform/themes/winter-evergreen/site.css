@@ -12,7 +12,7 @@
   --green-ink: #2B4A3A;
   --berry: #8C1D26;
   --hair: rgba(47, 82, 64, .4);
-  --script: "Parisienne", "Snell Roundhand", cursive;
+  --script: "Parisienne",fb1,fb2,"Snell Roundhand", cursive;
   --serif: "Libre Baskerville", "Baskerville", Georgia, serif;
   --ease: cubic-bezier(.22, .61, .36, 1);
   --ease-soft: cubic-bezier(.33, 0, .2, 1);

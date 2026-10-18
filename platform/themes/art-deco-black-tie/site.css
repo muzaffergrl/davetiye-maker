@@ -12,7 +12,7 @@
   --card-ink: #14213D; /* on card_small 13:1 */
   --bronze: #7E5E26; /* on card_small 5:1 */
   --hair: rgba(201, 165, 92, .5);
-  --deco: "Italiana", "Josefin Sans", "Didot", serif;
+  --deco: "Italiana",fb1,fb2,"Josefin Sans", "Didot", serif;
   --sans: "Josefin Sans", "Futura", "Century Gothic", sans-serif;
   --ease: cubic-bezier(.22, .61, .36, 1);
   --ease-soft: cubic-bezier(.33, 0, .2, 1);

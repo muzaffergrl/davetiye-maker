@@ -5,7 +5,7 @@
    No frame, ornament, pattern or line is drawn: every tile is a GPT picture. */
 :root{--night:#102554;--cobalt:#1f4a9e;--cobalt-ink:#173a80;--glaze:#faf8f2;--lime:#f2ede3;--lime-2:#e6decf;--terra:#ae583a;
 --terra-deep:#8c4128;--terra-light:#e4a688;--ink:#16264f;--ink-soft:#4b5675;--mist:#d3dbec;--line:#173a8033;--line-light:#faf8f240;
---serif:'Cormorant Upright','Cormorant Garamond',Georgia,serif;--script:'Arizonia','Snell Roundhand',cursive;--nav-h:62px;
+--serif:'Cormorant Upright','Cormorant Garamond',Georgia,serif;--script:'Arizonia',fb1,fb2,'Snell Roundhand',cursive;--nav-h:62px;
 --tile-1:url(img/tile_1-256.webp);--tile-2:url(img/tile_2-256.webp);--tile-3:url(img/tile_3-256.webp);--tile-4:url(img/tile_4-256.webp);
 --tile-back:url(img/tile_back-256.webp);color-scheme:light;
 }

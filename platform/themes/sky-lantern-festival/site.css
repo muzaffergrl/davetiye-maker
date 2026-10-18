@@ -4,7 +4,7 @@
    form fields, buttons, the bottom nav. Nothing here draws a shape, a frame or an ornament. */
 :root{--night:#2b1f45;--deep:#1b1430;--violet:#4a3466;--ivory:#f7eedd;--amber:#f2a65a;--glow:#ffd08a;--rose:#e7b4a6;
 --muted:#ddd2e4;--line:#f2a65a4d;--ink:#3b2a4a;--ink-soft:#6f5a6e;
---display:'Bellefair',Georgia,serif;--script:'Corinthia','Snell Roundhand',cursive;color-scheme:dark;--nav-h:62px;
+--display:'Bellefair',Georgia,serif;--script:'Corinthia',fb1,fb2,'Snell Roundhand',cursive;color-scheme:dark;--nav-h:62px;
 }
 @property --r{syntax:'<percentage>';inherits:false;initial-value:0%}
 *{box-sizing:border-box}
