@@ -2,7 +2,7 @@
 id: G182
 baslik: 33 Marigold & Mehndi — yeni tasarım (3. dalga), platform teması (GPT parçalarından önce), coming kaydı
 rol: claude-kod
-durum: hazir
+durum: bitti
 alan: claude-G182
 oncelik: 2
 bagimli: [G168, G175]
@@ -38,8 +38,73 @@ TASARIM ÖZETİ (docs/24 satırı esas): Kapalı zarf/açılış: Fuşya ipek za
 
 BİTİŞ: dal push edildi; görev dosyasında Sonuç (yapılanlar, geçici görsel listesi, GPT bekleyen parça sayısı, kontrol komutları + sonuçları, denenmeyenler); `durum: inceleme`. Son mesajında 5 satırlık özet ver.
 
-## Sonuç
-_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+## Sonuç (2026-10-18, claude-G182)
+
+### Yapılanlar
+- **Tema** `platform/themes/marigold-mehndi/` (README, `build_images.py`, `img/manifest.json`, 5 şablon, `site.css`,
+  `site.js`, `parts.css` (üretilir), `thank-you.css`, `theme.json` 83 copy anahtarı, `content.demo.json`).
+- **İlk sayfa (K23 sıkı):** katalog kapağı düzeni — "Together with their families", "invite you to celebrate", isimler,
+  ortada kapalı zarf, altında diya sırası (GPT), tarih · şehir, "Tap to open", köşede Skip. Zarf 01–32'nin V kapak + mum
+  mühürlü zarfı **değil**: dikey fuşya ipek zarf, düz üst kapak, ortasına sarılı altın paisley **kılıf** kapağın alt
+  kenarını tutar, kılıftan ipek **püskül** sarkar.
+- **Açılış (3,65 s):** başlık kalkar (0–450) · püskül sarkaç gibi sallanıp söner (0–1400) · ipek üstünden ışık geçer ·
+  kılıf önce hafifçe sola, sonra sağa kayıp çıkar (300–1250) · düz kapak üst kenarında 0→90° döner (1250–1630) ve
+  **kadife iç yüzüne devreder** (−90→0°, 1630–2050; docs/11 §7.1) · astar ısınır (1500–2200) · kadife çiçeği yaprakları
+  dönerek süzülür (GPT, 1600'den) · diya alevleri soldan sağa tek tek yanar (GPT, 1800–2800) · kart astardan yükselir,
+  ayağı cebin arkasında (2500–3150) · öne gelir (3150–3550) · home (VT `invite-card`). Her nesne ayrı katman.
+  Ses: püskül 0 `ribbon`, kılıf 300 `slide`, kapak 1250 `paper`, kart 2500 `slide`, öne 3150 `chime` (Evening Strings).
+- **Foto sunumu:** jharokha kemeri (GPT pencere maskesiyle), foto alttan yukarı ıslak kına gibi akarak belirir
+  (`@property --flow` maske), kemer çevresindeki kına `steps(11)` ile çizgi çizgi akar; mekân fotoğrafı soldan sağa.
+  Metin adımları kılıf gibi yandan kayarak yerleşir. İmzalarda diya alevleri sırayla yanar; RSVP gönderilince kadife
+  çiçeği yaprakları yağar.
+- **Font:** Rozha One + **Yrsa** (docs/24'teki Cormorant Infant 17 Emerald Gold'da kullanıldığı için). 01–32'de yok.
+- **Platform:** G138 blokları, G127 harita (pin Jaipur — başka temada yok), G126 ses, G128 RSVP (sorular, misafir
+  adları), G144 dil (4 yeni site metni 4 dilde), G139 basılı davetiye (`composed`, safran kâğıt + fuşya ipek şerit,
+  `public/print/marigold-mehndi/`), G075 teşekkür modu, alt menü için `scroll-padding-bottom`, reduced motion, CSP
+  (yalnız `site.js` + `/rsvp/form.js`, Google Fonts).
+- **Demo:** Anaya & Kabir (Anaya Mira Desai, Kabir Arun Sethi; A&K), Gulmohar Haveli Gardens (kurgu), Jaipur,
+  Rajasthan, India, November 20, 2027, 6:00 PM; URL/medya `null`; program/kıyafet/SSS G150 sözlüğünden. Dini simge yok.
+- **Kayıtlar:** `config.ts` `coming` + `[PRICE]`; `designs.ts` DESIGN_COPY ("Your guests tap the envelope. …",
+  openingObject = envelope; `OPENING_THINGS` değişmedi) + DESIGN_STYLES `['classic','floral']`; market sözlükleri 4 dil;
+  `audio/catalog.ts`; `claim/demo-map.ts`; `print/layouts.ts`; `tools/katalog.py` EK_TEMALAR 33; testler: g085/093/094/097
+  coming listesi + `marigold-mehndi`, g138 tema sayısı 33, g175 `designs.length` 33 + `'marigold-mehndi': 'envelope'`.
+- **Koleksiyon** `collections/33_Marigold_Mehndi/`: DESIGN_BRIEF.md, COLLECTION_STATUS.md (`editable_draft`),
+  content.demo.json, `assets/gpt/GPT_PROMPTS.md` (PAKET 5 W2.1–W2.16 = 18 dosya, tam yol/ölçü/şeffaflık, #00FF00
+  pencereler: jharokha + kart; PAKET 2 5 kurgu foto; PAKET 6 ön/arka 1575×2175), `assets/gpt/kuru_sekil.json`,
+  `package/listing/listing_v3.md` (taslak, K41; başlık 125/140, 13 etiket ≤ 20).
+
+### Geçici görsel (K21) — GPT bekleyen: 25 dosya (PAKET 5: 18, PAKET 2: 5, PAKET 6: 2)
+İpek = 14'ün fildişi saten dokusu fuşyaya; kadife = 06'nın düz lacivert kâğıdı kadife-fuşyaya (zemin daha koyu); kâğıt =
+18'in pamuk kâğıdı safran-fildişine tonlandı; altın = 17'nin mührünün düz metal yüzeyinden dikdörtgen kırpım. Zarf =
+ipek dikdörtgenleri + düz altın bant (kılıf). Püskül, yapraklar, kemer, kına, diya/alev, çelenk, kına deseni **yok**
+(`display:none`; `parts.css` gelince gösterir) — görünüm şu an sade, satış öncesi GPT parçaları + göz kontrolü şart.
+
+### Kontroller (Linux, Node 22)
+- `npm ci`, `rm -rf .next`, `npx tsc --noEmit` ✓; `I18N_STRICT=1 npm test` **1662/1662 geçti**; taban birleşmesinden (`origin/claude/zealous-fermi-hy1o40` f2051280, çakışmasız) sonra yeniden: `tsc` ✓, **1663 geçti, 0 hata, 3 atlandı (tabandaki atlananlar)**, `npm run build` ✓
+  (trace-check 34 tema, js-budget ✓). İlk koşuda tek hata: demo SSS yanıtı ("30 minutes") G150 sözlüğünde yoktu →
+  sözlükteki "20 minutes" cümlesi.
+- `theme-check --theme marigold-mehndi --stress --compare none`: **112 geçti, 0 hata**, 1 uyarı (PAKET 2 yok → 03
+  fotoğrafları). İlk koşuda 32 hata: 360 px'te uzun nav etiketi taşması → nav CSS düzeltildi. İlk görünüm DPR 3: index
+  292 KB, home 145 KB (yer tutucu); fotoğraflı 382 / 337 KB.
+- Göz kontrolü (390 px ekranlar + açılış kareleri, `platform/previews/g182/`, hepsi ≤ 250 KB): ilk koşuda home'da bazı
+  metinler görünmüyordu — maske için kaydedilen `@property --ink` (yüzde) renk değişkeni `--ink` ile çakışıyordu →
+  `--flow` olarak ayrıldı, tekrar bakıldı: tam. Açılış karelerinde sıra doğru (kılıf kayar → kapak döner → kadife iç
+  yüz → kart yükselir → öne).
+- `python3 tools/gpt_kuru_deneme.py --tema marigold-mehndi --sekil …/kuru_sekil.json`: **GEÇTİ 18/20** (okunmayan yalnız
+  PAKET 6 ön/arka — bilerek elle).
+- `tests/g149-print-layout.test.ts` ✓; `node scripts/i18n-missing.ts` 0 eksik; `copy-manifest --check` ✓;
+  `python3 tools/katalog.py kontrol` ✓; `python3 -m pytest tools/tests -q` **111 geçti**.
+
+### Denenmedi / açık
+- Gerçek iPhone/Android, Vercel yayını, gerçek alıcı fotoğrafları, yavaş ağ, GPT parçalarıyla görünüm, sesin duyulması,
+  g051-browser ve final-smoke.
+- `components/marketing/InvitationCover.tsx` kapak kaydı yok (yazar listemde değil; `coming` katalogda görünmez —
+  `preview`'a geçerken eklenmeli).
+- **Önerilen görev:** START HERE + `etsy_upload.json` (G175 düzeni): `tools/etsy_upload.py` `DESIGNS`'e 33 eklemek
+  `tools/tests/test_build_customer_guides.py`'yi de değiştirmeyi gerektiriyor (1–32 bekliyor; yazar listemde değil) —
+  denedim, geri aldım. Taslak ilan `etsy_upload.py --check` kurallarından geçti (geçici kayıtla).
 
 ## Günlük
 - 2026-10-18 koordinatör: görev açıldı, bulut oturumuna verildi.
+- 2026-10-18 claude-G182: alındı; bitti, incelemeye gönderildi.
+- 2026-10-18 entegratör onayladı

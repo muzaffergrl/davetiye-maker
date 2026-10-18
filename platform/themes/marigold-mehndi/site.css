@@ -1,0 +1,384 @@
+/* Marigold & Mehndi (33) — fuchsia silk and velvet, saffron paper, marigold and gold. Visuals are GPT pixels only (img/,
+   build_images.py; the design's own parts through parts.css); CSS adds light and interface (docs/11 §5.7): the light
+   running over the silk, the warm light of the lining, text halos, hairline rules, form fields, buttons, the bottom nav,
+   and one reveal — the henna flow (a mask that uncovers a photo, and the henna round its arch, from the bottom up like
+   wet henna running along its lines). No frame, arch, ornament, flower, flame or line is drawn here. */
+@property --flow{syntax:'<percentage>';inherits:false;initial-value:0%}
+:root{--velvet:#5c0a36;--plum:#3e0726;--deep:#2a0419;--silk:#b3165e;--fuchsia:#c2185b;--fuchsia-ink:#8e1048;
+--paper:#faebd0;--paper-2:#f1d9b4;--ink:#3a0f24;--ink-soft:#6b4552;--saffron:#f2a13b;--saffron-light:#f7c27a;
+--gold:#c9a24a;--gold-light:#ebcd84;--gold-ink:#8a5a12;--cream:#fbecd5;--blush:#f3cfd9;
+--line:#ebcd8447;--line-ink:#3a0f2430;--serif:'Yrsa','Georgia',serif;--display:'Rozha One','Georgia',serif;
+--nav-h:62px;color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:var(--plum) url(img/ground-640.webp) 0 0/640px repeat;color:var(--cream);font:400 19px/1.65 var(--serif);padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom))}
+button,input,textarea,select{font:inherit}
+button,a,input,select,textarea,summary{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+h1,h2,h3,p,figure,ul,ol{margin:0}
+h1,h2,h3{font-weight:400;line-height:1.15}
+h1{font:400 clamp(40px,11.5vw,60px)/1.12 var(--display);color:var(--saffron-light);overflow-wrap:anywhere}
+h2{font:400 clamp(30px,8.6vw,42px)/1.15 var(--display);color:var(--saffron-light);overflow-wrap:anywhere}
+h3{font:500 19px/1.4 var(--serif);letter-spacing:.02em}
+button{cursor:pointer}
+button:disabled{opacity:.5;cursor:default}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--saffron-light);outline-offset:5px}
+.nowrap{white-space:nowrap}
+.eyebrow{font:500 12px/1.9 var(--serif);text-transform:uppercase;letter-spacing:.24em;color:var(--gold-light);overflow-wrap:anywhere}
+.body-text{font-size:19px;line-height:1.7;color:var(--blush)}
+.small{font:400 15px/1.8 var(--serif);color:var(--blush)}
+/* saffron paper (GPT texture) under the cards and bands */
+.paper,.paper-band{background:var(--paper) url(img/paper-640.webp) 0 0/480px repeat;color:var(--ink);color-scheme:light}
+.paper h2,.paper-band h2,.paper h1{color:var(--fuchsia-ink)}
+.paper .eyebrow,.paper-band .eyebrow{color:var(--gold-ink)}
+.paper .body-text,.paper-band .body-text,.paper .small,.paper-band .small{color:var(--ink-soft)}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:12px;min-height:48px;padding:12px 28px;border:1px solid var(--saffron);background:var(--saffron);color:var(--deep);font:500 14px/1.5 var(--serif);letter-spacing:.18em;text-transform:uppercase;border-radius:100px;text-align:center;overflow-wrap:anywhere}
+.btn:hover{background:var(--saffron-light)}
+.btn-ghost{background:#2a041980;color:var(--cream);border-color:#ebcd8480}
+.btn-ghost:hover{background:#ebcd841f}
+.paper .btn,.paper-band .btn{background:var(--fuchsia-ink);border-color:var(--fuchsia-ink);color:var(--cream)}
+.paper .btn:hover,.paper-band .btn:hover{background:var(--silk)}
+.paper .btn-ghost,.paper-band .btn-ghost{background:#ffffff80;color:var(--ink);border-color:#3a0f2466}
+.btn-sm{min-height:44px;padding:9px 18px}
+.textlink{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;font:500 14px/1.6 var(--serif);border:0;background:transparent;color:var(--saffron-light);letter-spacing:.1em;padding:8px 2px;text-decoration:underline;text-decoration-color:#f7c27a70;text-underline-offset:6px}
+.paper .textlink,.paper-band .textlink{color:var(--fuchsia-ink);text-decoration-color:#8e104870}
+.center{text-align:center;margin:44px 0 10px}
+.button-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.no-js .nojs-only{display:block}
+.js .nojs-only{display:none}
+.names{font:400 clamp(40px,11.5vw,60px)/1.12 var(--display);color:var(--saffron-light);overflow-wrap:anywhere;text-wrap:balance;text-shadow:0 2px 14px var(--deep)}
+.names .amp{font:italic 400 .62em/1 var(--serif);color:var(--gold-light);padding:0 .06em}
+.paper .names{color:var(--fuchsia-ink);text-shadow:none}
+.paper .names .amp{color:var(--gold-ink)}
+
+/* photo slots: placeholders are softened saffron paper; "Your photo here" only in a preview */
+.photo-slot{position:relative;display:block;overflow:hidden;background:var(--paper-2)}
+.photo-slot>img{width:100%;height:100%;object-fit:cover;object-position:50% 36%}
+.ph-mark{display:none;position:absolute;inset:0;align-items:center;justify-content:center;pointer-events:none;font:400 12px/1.4 var(--serif);color:var(--ink-soft);text-align:center;letter-spacing:.08em}
+html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{display:flex}
+/* jharokha: the photo sits in the window of a carved arch (GPT W2.4, parts.css: the arch and its window mask); the henna
+   round it (GPT W2.5) flows in after the photo. Until they exist the photo is a plain 4:5 crop. */
+.jharokha{position:relative;display:block;aspect-ratio:4/5}
+.jharokha>.photo-slot{width:100%;height:100%}
+.jharokha>.arch,.jharokha>.henna{display:none;position:absolute;pointer-events:none}
+/* henna flow: a photo (and the henna round its arch) is uncovered from the bottom up, like wet henna running along its
+   lines (a mask; reveal only) — the henna in short steps, line by line */
+.js .flow,.js .henna{-webkit-mask-image:linear-gradient(to top,#000 calc(var(--flow) - 16%),#0000 var(--flow));mask-image:linear-gradient(to top,#000 calc(var(--flow) - 16%),#0000 var(--flow))}
+.js .flow-x{-webkit-mask-image:linear-gradient(to right,#000 calc(var(--flow) - 16%),#0000 var(--flow));mask-image:linear-gradient(to right,#000 calc(var(--flow) - 16%),#0000 var(--flow))}
+.js .flow.in,.js .henna.in{--flow:118%}
+/* GPT ornaments that wait for their parts (parts.css shows them) */
+.garland,.diyas,.mehndi-ground{display:none}
+.tassel{display:none}
+
+/* bottom nav */
+.site-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#2a0419f2;border-top:1px solid var(--line);padding:6px 8px max(6px,env(safe-area-inset-bottom));view-transition-name:site-nav}
+.site-nav ul{list-style:none;padding:0;display:flex;justify-content:center;gap:4px}
+.site-nav li{min-width:0;flex:0 1 auto}
+.site-nav a{display:flex;align-items:center;justify-content:center;min-height:48px;min-width:68px;padding:8px 12px;font:500 13px/1 var(--serif);letter-spacing:.14em;text-transform:uppercase;color:var(--blush)}
+.site-nav a[aria-current]{color:var(--saffron-light);text-decoration:underline;text-underline-offset:8px;text-decoration-color:#f7c27a99}
+
+/* ---------------------------------------------------------------- the envelope */
+.page-opening{padding-bottom:0;background:radial-gradient(ellipse at 50% 46%,#8e104866 0,#3e072600 64%) fixed,var(--plum) url(img/ground-640.webp) 0 0/640px repeat}
+.skip{position:fixed;top:calc(6px + env(safe-area-inset-top));right:10px;z-index:20;padding-inline:14px;background:#2a0419b3;border-radius:100px;text-decoration:none}
+.opening{position:relative;min-height:100svh;max-width:760px;margin:auto;padding:50px 20px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:clip}
+.opening>.garland-top{position:absolute;left:50%;top:0;width:min(130vw,820px);translate:-50% 0;pointer-events:none}
+.opening-heading{position:relative;z-index:9;max-width:100%}
+.opening-heading>.eyebrow{margin-bottom:4px}
+.invite-line{font:italic 400 19px/1.5 var(--serif);color:var(--blush);margin-bottom:6px;overflow-wrap:anywhere}
+.opening .names{font-size:clamp(40px,12vw,58px)}
+.opening-date{font-size:12px}
+.opening-foot{position:relative;z-index:9;margin-top:22px}
+.petalfall{position:absolute;inset:0;pointer-events:none;z-index:7;overflow:hidden}
+.petalfall img{position:absolute;opacity:0}
+/* the closed envelope: 0.8 wide per high (manifest stage); flap, pocket, lining, card and sleeve in % of it */
+.stage{--obj:min(68vw,calc(46svh * .8),300px);position:relative;width:var(--obj);margin:34px auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent;z-index:5}
+.opening:has(.names.long-names) .stage{--obj:min(56vw,calc(36svh * .8),290px)}
+.parcel{position:relative;width:100%;aspect-ratio:.8;perspective:1000px;--tex:calc(var(--obj) * 1.5)}
+.parcel>*{position:absolute}
+.stage::before{content:"";position:absolute;inset:6% 0 -5%;z-index:0;background:radial-gradient(closest-side,#000b,#0000);pointer-events:none} /* contact shade on the velvet (light only) */
+/* silk (GPT texture), velvet lining (GPT texture); the pocket edge and the flap edge are the parts' own drop shadows */
+.env-back,.env-front,.flap{background:var(--silk) url(img/silk-640.webp) 0 0/var(--tex) repeat}
+.env-back{inset:0;z-index:1;filter:brightness(.78)}
+.lining{left:4%;top:3%;width:92%;height:40%;z-index:2;background:var(--velvet) url(img/velvet-640.webp) 0 0/var(--tex) repeat;filter:brightness(.62)}
+.flap-in{left:0;top:-42%;width:100%;height:42%;z-index:1;background:var(--velvet) url(img/velvet-640.webp) 50% 100%/var(--tex) repeat;transform-origin:50% 100%;transform:rotateX(-90deg);backface-visibility:hidden;opacity:0}
+.card{left:8%;top:6%;width:84%;height:92%;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8% 8% 7%;text-align:center;view-transition-name:none;container-type:inline-size}
+.card,.parcel .card{background:var(--paper) url(img/paper-640.webp) 0 0/var(--tex) repeat;color:var(--ink)}
+.card-photo{width:60%;aspect-ratio:4/5;flex:none}
+.card.tight .card-photo{width:40%}
+.card-photo .ph-mark{font-size:8px}
+.card-photo .ty-decor,.card-photo .ty-decor img{display:block;width:100%;height:100%;object-fit:cover}
+.card-line{margin-top:7%;font-size:8px;letter-spacing:.2em;color:var(--gold-ink)}
+.card-names{font:400 clamp(16px,12cqw,32px)/1.15 var(--display);color:var(--fuchsia-ink);overflow-wrap:anywhere;text-wrap:balance;margin-top:1%}
+.card-date{font-size:8px;margin-top:3%;color:var(--gold-ink)}
+.env-front{left:0;top:38%;width:100%;height:62%;z-index:4;filter:brightness(1.04) drop-shadow(0 -2px 3px #2a041980)}
+.flap{left:0;top:0;width:100%;height:42%;z-index:5;transform-origin:50% 0;backface-visibility:hidden;filter:brightness(.9) drop-shadow(0 3px 3px #2a041999)}
+/* the gold sleeve (interim: a plain band of gold cut from GPT metal; the laser-cut paisley sleeve is W2.2) */
+.sleeve{left:-4%;top:30%;width:108%;height:36%;z-index:6}
+.sleeve-gold{position:absolute;inset:0;background:linear-gradient(100deg,#ffffff38,#0000 30%,#0000 62%,#00000040),var(--gold) url(img/gold-640.webp) 50% 50%/cover;filter:drop-shadow(0 3px 4px #2a0419aa)}
+.tassel{position:absolute;left:74%;top:84%;width:13%;aspect-ratio:.3;transform-origin:50% 0;pointer-events:none}
+.js .tassel{animation:tassel-idle 5s 1s ease-in-out infinite}
+.sheen{inset:0;z-index:7;pointer-events:none;background:linear-gradient(110deg,#0000 38%,#ffe9c44d 50%,#0000 62%) 120% 0/300% 100% no-repeat;mix-blend-mode:screen;opacity:0}
+.js .sheen{animation:sheen-idle 8s 1.4s ease-in-out infinite}
+@keyframes sheen-idle{0%{opacity:0;background-position:120% 0}
+4%{opacity:1}
+22%{opacity:1;background-position:-20% 0}
+26%,100%{opacity:0;background-position:-20% 0}}
+@keyframes tassel-idle{0%,100%{transform:rotate(0)}
+50%{transform:rotate(3deg)}}
+/* the diyas under the envelope (GPT; parts.css shows the row): flames light one by one */
+.diyas{justify-content:center;gap:min(4vw,22px);margin:20px auto 0;position:relative;z-index:6}
+.diya{position:relative;width:min(11vw,52px);aspect-ratio:1.4}
+.flame{position:absolute;left:50%;bottom:62%;width:34%;aspect-ratio:.5;translate:-50% 0;transform-origin:50% 100%;opacity:0;filter:drop-shadow(0 0 6px #ffb14ecc)}
+.opening-actions{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:8px;min-height:60px;position:relative;z-index:9}
+.tap-hint{font-size:12px}
+.js .tap-hint{animation:breathe 3.2s ease-in-out infinite}
+@keyframes breathe{50%{opacity:.55}}
+.enter,.replay{display:none}
+.is-opened .enter{display:inline-flex}
+.is-opened .replay{display:inline-flex}
+.is-opened .tap-hint,.is-opening .tap-hint{display:none}
+.is-opened .skip{display:none}
+.is-opening .stage{pointer-events:none}
+.is-opening .opening-heading{animation:away 450ms ease-in forwards}
+.is-opening .tassel{animation:swing 1400ms 0ms cubic-bezier(.3,.2,.3,1) both}
+.is-opening .sheen{animation:sheen-pass 900ms 200ms ease-in-out both}
+.is-opening .sleeve{animation:sleeve-off 950ms 300ms cubic-bezier(.55,0,.3,1) forwards}
+.is-opening .flap{animation:flap-up 380ms 1250ms cubic-bezier(.5,0,.9,.5) forwards}
+.is-opening .flap-in{animation:flap-in 420ms 1630ms cubic-bezier(.1,.5,.4,1) forwards}
+.is-opening .lining{animation:lining-warm 700ms 1500ms ease-out forwards}
+.is-opening .petalfall img{animation-name:petal-fall;animation-timing-function:ease-in-out;animation-fill-mode:both}
+.is-opening .diyas .flame{animation:flame-on 600ms calc(1800ms + var(--n,0) * var(--diya-open-step,200ms)) ease-out both,flicker 1.7s calc(2400ms + var(--n,0) * 90ms) ease-in-out infinite}
+.is-opening .parcel>.card{animation:card-rise 650ms 2500ms cubic-bezier(.3,0,.2,1) forwards,card-forward 400ms 3150ms cubic-bezier(.45,0,.2,1) forwards}
+.is-opened .opening-heading,.is-opened .sheen{opacity:0;animation:none}
+.is-opened .sleeve{transform:translateX(118%);opacity:0}
+.is-opened .flap{transform:rotateX(90deg);opacity:0}
+.is-opened .flap-in{transform:none;opacity:1}
+.is-opened .lining{filter:brightness(1.05)}
+.is-opened .diyas .flame{opacity:1}
+.is-opened .parcel>.card{z-index:8;transform:translateY(-30%) scale(1.06);view-transition-name:invite-card;filter:drop-shadow(0 18px 24px #000b)}
+.is-opened .opening-foot{margin-top:30px}
+@keyframes away{to{opacity:0;transform:translateY(-18px)}}
+@keyframes swing{0%{transform:rotate(0)}
+12%{transform:rotate(17deg)}
+30%{transform:rotate(-12deg)}
+48%{transform:rotate(8deg)}
+66%{transform:rotate(-5deg)}
+82%{transform:rotate(2deg)}
+to{transform:rotate(0)}}
+@keyframes sheen-pass{0%{opacity:0;background-position:120% 0}
+20%{opacity:1}
+100%{opacity:0;background-position:-20% 0}}
+@keyframes sleeve-off{0%{transform:none}
+16%{transform:translateX(-2.5%)}
+80%{opacity:1}
+to{transform:translateX(118%);opacity:0}}
+@keyframes flap-up{from{transform:rotateX(0)}
+99.5%{opacity:1}
+to{transform:rotateX(90deg);opacity:0}}
+@keyframes flap-in{from{transform:rotateX(-90deg);opacity:1}
+to{transform:none;opacity:1}}
+@keyframes lining-warm{to{filter:brightness(1.05)}}
+@keyframes petal-fall{0%{opacity:0;transform:translate(0,0) rotate(0)}
+12%{opacity:1}
+45%{transform:translate(var(--dx),45vh) rotate(calc(var(--rot) * .45))}
+80%{opacity:1}
+to{opacity:0;transform:translate(calc(var(--dx) * -.4),92vh) rotate(var(--rot))}}
+@keyframes flame-on{from{opacity:0;transform:scale(.2)}
+60%{opacity:1;transform:scale(1.15)}
+to{opacity:1;transform:none}}
+@keyframes flicker{50%{transform:scaleY(1.08) scaleX(.94) rotate(-2deg)}}
+@keyframes card-rise{from{transform:none}
+to{transform:translateY(-62%)}}
+@keyframes card-forward{from{z-index:8;transform:translateY(-62%);filter:drop-shadow(0 10px 14px #0009)}
+to{z-index:8;transform:translateY(-30%) scale(1.06);filter:drop-shadow(0 18px 24px #000b)}}
+
+/* ---------------------------------------------------------------- home */
+.hero{position:relative;min-height:calc(100svh - var(--nav-h));display:flex;align-items:center;justify-content:center;padding:44px 20px 26px;background:radial-gradient(ellipse at 50% 40%,#8e104855 0,#3e072600 70%);overflow:clip}
+.hero>.garland-top{position:absolute;left:50%;top:0;width:min(130vw,820px);translate:-50% 0;pointer-events:none}
+.hero-card{position:relative;width:min(84vw,360px);padding:24px 22px 26px;text-align:center;view-transition-name:invite-card;filter:drop-shadow(0 18px 26px #000a)}
+.hero-photo{width:min(46vw,200px);margin:0 auto 16px}
+.hero .names{font-size:clamp(36px,10.5vw,52px);margin:4px 0 6px}
+.hero-date{font:500 18px/1.5 var(--serif);letter-spacing:.04em}
+.hero-venue{display:flex;flex-direction:column;gap:2px;margin-top:8px;font:400 18px/1.45 var(--serif);overflow-wrap:anywhere}
+.hero-venue small{font:500 12px/1.8 var(--serif);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-ink)}
+.invitation{padding:72px 26px 64px;text-align:center}
+.invitation-copy{max-width:520px;margin:auto}
+.invitation-copy h2{margin-bottom:6px}
+.garland-small{width:min(70%,300px);margin:0 auto 14px}
+.invitation .host{margin:16px 0}
+.formal-names{font:500 25px/1.35 var(--serif);margin-bottom:12px;overflow-wrap:anywhere}
+.formal-names .amp{font:italic 400 30px/1.2 var(--serif);color:var(--gold-ink)}
+.invitation-copy .body-text{max-width:340px;margin:auto}
+.date-block{display:flex;flex-direction:column;align-items:center;gap:2px;margin:26px auto 6px;color:var(--fuchsia-ink)}
+.date-block>span{font:500 13px/1.8 var(--serif);letter-spacing:.24em;text-transform:uppercase;color:var(--gold-ink)}
+.date-block b{font:400 32px/1.25 var(--display);letter-spacing:.02em}
+.venue-name{font-size:23px;margin-top:16px;overflow-wrap:anywhere}
+.invitation-copy .btn{margin:24px 0 12px}
+.countdown{max-width:360px;margin:30px auto 0}
+.cd-row{display:flex;gap:14px;justify-content:center}
+.cd-row>div{flex:1;text-align:center}
+.cd-num{display:block;font:400 30px/1.4 var(--display);color:var(--fuchsia-ink);font-variant-numeric:tabular-nums}
+.cd-row small{font:500 11px/1.7 var(--serif);text-transform:uppercase;letter-spacing:.14em;color:var(--gold-ink)}
+.countdown.is-done .cd-row{display:none}
+.cd-done{font-size:19px}
+.calendar{margin:26px auto 0;text-align:center}
+.calendar>.eyebrow{font-size:12px;margin-bottom:10px}
+.teaser{display:grid;grid-template-columns:min(36vw,190px) 1fr;align-items:center;gap:22px;max-width:640px;margin:auto;padding:64px 24px}
+.teaser-text{min-width:0}
+.teaser-text h2{margin:6px 0 4px}
+.day{text-align:center;padding:64px 24px}
+.day h2{margin:10px 0 4px}
+.day-peek{list-style:none;padding:0;margin:14px auto 28px;max-width:420px;display:grid;gap:8px;font-size:19px;overflow-wrap:anywhere}
+.day-peek li:nth-child(n+5){display:none}
+.day-peek .time{font:500 15px/1 var(--serif);letter-spacing:.1em;color:var(--gold-ink);margin-right:8px}
+.signature{text-align:center;padding:56px 20px 30px}
+.sig-diyas{margin:0 auto 16px}
+.sig-names{font:400 34px/1.25 var(--display);margin:6px 0 10px;color:var(--saffron-light);overflow-wrap:anywhere}
+
+/* ---------------------------------------------------------------- story */
+.mehndi-ground{position:fixed;inset:0;opacity:.14;pointer-events:none;z-index:-1}
+.page-heading{text-align:center;padding:84px 24px 40px;max-width:720px;margin:auto}
+.page-heading>.eyebrow{margin-bottom:10px}
+.page-heading h1{margin-bottom:16px}
+.page-heading .intro{max-width:460px;margin:auto}
+.page-heading .venue-name{margin-top:4px}
+.story-page{max-width:1000px;margin:auto}
+.moment{padding:0 24px;margin:0 0 60px;display:flex;flex-direction:column;align-items:flex-start}
+.moment-photo{width:min(62vw,340px)}
+.m-2{align-items:flex-end;text-align:right}
+.m-2 .moment-photo{width:min(54vw,300px)}
+.moment figcaption{padding-top:16px;max-width:min(74vw,420px);font-size:22px;line-height:1.45;overflow-wrap:anywhere}
+.moment figcaption .num{display:block;font:500 13px/1.6 var(--serif);letter-spacing:.24em;color:var(--gold-light);margin-bottom:2px}
+.moment figcaption [data-empty]{display:none}
+
+/* ---------------------------------------------------------------- details */
+.details-page{max-width:1100px;margin:auto}
+.details-page .venue-name{color:var(--cream)}
+.programme{padding:52px 26px 48px}
+.programme h2{text-align:center}
+.programme .garland-small{margin-top:10px}
+.schedule{list-style:none;margin:22px auto 0;padding:0;max-width:560px}
+.schedule li{display:grid;grid-template-columns:72px 1fr;gap:14px;padding:14px 0;border-top:1px solid var(--line-ink)}
+.schedule li:first-child{border-top:0}
+.schedule time{font:500 16px/1.7 var(--serif);color:var(--gold-ink);letter-spacing:.06em}
+.schedule h3{overflow-wrap:anywhere}
+.schedule p{font-size:17px;color:var(--ink-soft);margin-top:2px;overflow-wrap:anywhere}
+.ceremony{font-size:18px;color:var(--ink-soft);margin:22px auto 0;max-width:560px;text-align:center}
+.programme .calendar{margin-top:24px}
+.location{padding:56px 24px 10px;max-width:700px;margin:auto;text-align:center}
+.location h2{margin-bottom:22px}
+.venue-photo{aspect-ratio:16/9;margin:0 auto 16px}
+.venue-line{font-size:20px;overflow-wrap:anywhere}
+.map-section{margin-top:18px}
+.map-section .btn{white-space:normal}
+.detail-notes{display:grid;gap:26px;margin:40px auto 0;padding:0 24px;max-width:760px}
+.detail-note{border-top:1px solid var(--line);padding-top:24px}
+.detail-note h2,.faq h2{font-size:32px;margin-bottom:10px}
+.detail-note .body-text{margin-bottom:12px;overflow-wrap:anywhere}
+.faq{margin:44px auto 0;padding:0 24px;max-width:760px}
+.faq details{border-bottom:1px solid var(--line);padding:10px 0}
+.faq summary{cursor:pointer;min-height:44px;font-size:20px;padding:8px 30px 8px 0;list-style:none;position:relative;overflow-wrap:anywhere}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";content:"+" / "";position:absolute;right:4px;top:8px;color:var(--saffron-light);font:400 22px/1 var(--serif)}
+.faq details[open] summary::after{content:"×";content:"×" / ""}
+.faq details .body-text{padding-block:10px;white-space:pre-line}
+
+/* ---------------------------------------------------------------- rsvp */
+.rsvp-page{max-width:640px;margin:auto;padding:0 20px}
+.rsvp-page .page-heading{padding-bottom:30px}
+.rsvp-page .page-heading>.eyebrow:last-of-type{margin-top:12px}
+.reply-cta{margin-top:20px}
+.reply-card{padding:30px 22px;filter:drop-shadow(0 14px 22px #0008)}
+.form-title{text-align:center;margin-bottom:6px}
+.reply-form{font:400 17px/1.7 var(--serif)}
+.field{display:block;margin-top:18px}
+.kicker{display:block;margin-bottom:8px;font:500 14px/1.7 var(--serif);letter-spacing:.06em;color:var(--gold-ink);overflow-wrap:anywhere}
+.opt{color:var(--ink-soft);font-size:13px}
+.field input,.field textarea,.question textarea{display:block;width:100%;border:1px solid #3a0f2459;background:#ffffffd9;color:var(--ink);min-height:48px;padding:12px;border-radius:4px;font:400 18px/1.5 var(--serif)}
+.field textarea,.question textarea{resize:vertical}
+.choice{border:0;padding:0;margin:22px 0 0;min-width:0}
+.choice legend{padding:0;width:100%}
+.choice label{display:flex;align-items:center;gap:10px;min-height:46px;color:var(--ink);overflow-wrap:anywhere}
+input[type=radio]{accent-color:var(--fuchsia-ink);width:18px;height:18px;flex:none}
+.questions{margin-bottom:12px}
+.field-error{color:#a3201a;font:500 15px/1.6 var(--serif);margin-top:5px;overflow-wrap:anywhere}
+.field-error:empty{display:none}
+[aria-invalid=true]{border-color:#a3201a!important}
+.send{margin-top:26px}
+.send .btn{width:100%}
+.reply-panel{padding:18px 0;font:400 17px/1.8 var(--serif)}
+.panel-title{font:400 34px/1.25 var(--display);color:var(--fuchsia-ink);margin-bottom:6px}
+.reply-panel[data-rsvp-state=error]{color:#a3201a}
+.reply-panel[data-rsvp-state=preview]{color:var(--gold-ink);border-top:1px solid var(--line-ink);margin-top:18px}
+.note{color:var(--ink-soft)}
+html[data-rsvp-replied] .rsvp-page .page-heading .body-text{display:none}
+.thank-you-copy{text-align:center}
+.thank-you-copy h2{margin-bottom:20px}
+
+/* ---------------------------------------------------------------- view transitions + scenes (docs/11 §8, §11) */
+@view-transition{navigation:auto}
+::view-transition-group(invite-card){animation-duration:.85s;animation-timing-function:cubic-bezier(.4,0,.2,1)}
+::view-transition-new(site-nav):only-child{animation:none}
+::view-transition-old(site-nav):only-child{animation:none;opacity:0}
+/* text slides in from the side and settles, the way the sleeve slid off the envelope (this design's step) */
+.js [data-step]{opacity:0;transform:translateX(16px);transition:opacity .8s cubic-bezier(.25,.6,.3,1),transform 1s cubic-bezier(.25,.6,.3,1)}
+.js [data-step].in{opacity:1;transform:none}
+.js .flow[data-step]{opacity:1;transform:none;transition:--flow 1.5s cubic-bezier(.45,.1,.35,1)}
+.js .henna[data-step]{opacity:1;transform:none;transition:--flow 2.2s steps(11,end)}
+.js .diyas[data-step]{opacity:1;transform:none}
+.diyas.in .flame{animation:flame-on 600ms calc(var(--d0,0ms) + var(--n,0) * var(--diya-step,260ms)) ease-out both,flicker 1.7s calc(var(--d0,0ms) + 700ms + var(--n,0) * 90ms) ease-in-out infinite}
+.from-envelope .hero-card [data-step]{opacity:1;transform:none;transition:none}
+.from-envelope .hero-card .flow{-webkit-mask:none;mask:none}
+.arrive-fade body{animation:fade-in .5s ease-out both}
+@keyframes fade-in{from{opacity:0}}
+.accent-layer{position:fixed;inset:0;pointer-events:none;z-index:30;overflow:hidden}
+
+@media(min-width:760px){
+.hero-card{width:400px;padding:32px}
+.invitation{padding:96px 40px 84px}
+.teaser{padding:90px 40px;gap:40px}
+.moment{padding:0 60px;margin-bottom:84px}
+.m-1,.m-3{padding-left:12%}
+.m-2{padding-right:12%}
+.detail-notes{grid-template-columns:repeat(2,1fr);gap:36px}
+.programme{padding:72px 40px}
+.page-heading{padding-top:110px}
+.site-nav a{min-width:110px}
+}
+@media(max-width:430px){
+.site-nav a{min-width:0;padding-inline:7px;letter-spacing:.07em;font-size:12px;overflow-wrap:anywhere;text-align:center;line-height:1.2}
+}
+@media(max-width:359px){
+.hero{padding-inline:12px}
+.hero-card{padding:18px 16px 20px}
+.rsvp-page{padding-inline:12px}
+.reply-card{padding:24px 16px}
+.moment,.detail-notes,.faq,.location{padding-inline:16px}
+.programme{padding-inline:16px}
+.schedule li{grid-template-columns:60px 1fr;gap:10px}
+.cd-row{gap:8px}
+.teaser{gap:16px;padding-inline:16px}
+.site-nav a{min-width:0;padding-inline:6px;letter-spacing:.04em;font-size:12px}
+}
+@media(max-height:700px) and (max-width:759px){
+.opening{padding-top:40px}
+.opening .names{font-size:clamp(36px,10.5vw,48px)}
+.stage{margin-top:26px}
+.hero{padding-top:20px;padding-bottom:16px}
+.hero-card{padding:16px 18px 18px}
+.hero-photo{width:min(30vw,130px);margin-bottom:10px}
+.hero .names{font-size:clamp(34px,10vw,44px);margin:2px 0 4px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
+*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition:none!important}
+.js [data-step]{opacity:1!important;transform:none!important}
+.js .flow,.js .henna,.js .flow-x{-webkit-mask:none!important;mask:none!important}
+.js .sheen,.js .tap-hint,.js .tassel{animation:none!important}
+.diyas .flame{opacity:1!important;animation:none!important}
+::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation-duration:1ms!important}
+}
+#reply{scroll-margin-top:64px}
+html{scroll-padding-bottom:calc(var(--nav-h) + 12px)}

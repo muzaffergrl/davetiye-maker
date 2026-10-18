@@ -1,0 +1,230 @@
+{
+ "sources": {
+  "silk": "collections/14_Ivory_Lace_Pearl/assets/gpt/parts/bg_tile.png",
+  "velvet": "collections/06_Art_Deco_Noir/assets/gpt/parts/bg_tile.png",
+  "paper": "collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png",
+  "gold": "collections/17_Emerald_Gold_Estate/assets/gpt/parts/closure.png (plain metal field (0.42, 0.32, 0.58, 0.48))"
+ },
+ "silk": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "silk-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 102140
+   }
+  ]
+ },
+ "velvet": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "velvet-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 13612
+   }
+  ]
+ },
+ "ground": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "ground-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 1186
+   }
+  ]
+ },
+ "paper": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "paper-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 14000
+   },
+   {
+    "file": "paper-1024.webp",
+    "w": 1024,
+    "h": 1024,
+    "bytes": 54774
+   }
+  ]
+ },
+ "gold": {
+  "src_size": [
+   640,
+   640
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "gold-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 6138
+   }
+  ]
+ },
+ "ph_arch": {
+  "src_size": [
+   640,
+   800
+  ],
+  "ratio": 0.8,
+  "files": [
+   {
+    "file": "ph_arch-640.webp",
+    "w": 640,
+    "h": 800,
+    "bytes": 1870
+   }
+  ]
+ },
+ "ph_wide": {
+  "src_size": [
+   640,
+   360
+  ],
+  "ratio": 1.77778,
+  "files": [
+   {
+    "file": "ph_wide-640.webp",
+    "w": 640,
+    "h": 360,
+    "bytes": 924
+   }
+  ]
+ },
+ "placeholders": {
+  "portrait": "ph_arch-640.webp",
+  "venue": "ph_wide-640.webp"
+ },
+ "photo_slots": {
+  "hero_portrait": {
+   "aspect": "4/5"
+  },
+  "story_1": {
+   "aspect": "4/5"
+  },
+  "story_2": {
+   "aspect": "4/5"
+  },
+  "story_3": {
+   "aspect": "4/5"
+  },
+  "venue": {
+   "aspect": "16/9"
+  }
+ },
+ "stage": {
+  "aspect": 0.8,
+  "flap_pct": [
+   0,
+   0,
+   100,
+   42
+  ],
+  "pocket_pct": [
+   0,
+   38,
+   100,
+   62
+  ],
+  "sleeve_pct": [
+   -4,
+   30,
+   108,
+   36
+  ],
+  "card_pct": [
+   8,
+   6,
+   84,
+   92
+  ],
+  "_note": "% of the closed envelope (left, top, width, height); the GPT pieces are stretched to these boxes"
+ },
+ "og": {
+  "file": "og-1200x630.jpg",
+  "source": "montage: closed envelope (silk + gold sleeve) on the velvet ground",
+  "bytes": 82788
+ },
+ "favicon": {
+  "src_box": [
+   33,
+   39,
+   356,
+   434
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.04,
+  "file": "favicon.png",
+  "bytes": 36346
+ },
+ "parts": {
+  "used": [],
+  "waiting_for_gpt": [
+   "sleeve",
+   "petal_1",
+   "petal_2",
+   "petal_3",
+   "jharokha",
+   "henna",
+   "diya",
+   "flame",
+   "garland",
+   "mehndi_pattern",
+   "card_small",
+   "tassel",
+   "envelope_front",
+   "flap",
+   "web_hero",
+   "silk",
+   "velvet",
+   "paper"
+  ]
+ },
+ "_note": "G182 interim build: silk, velvet, paper and gold cut and toned from other designs' plain GPT pictures; the design's own PAKET 5 parts are taken as they arrive (GPT_PROMPTS.md, manifest parts). Nothing drawn.",
+ "parts_css_rules": 0,
+ "checks": {
+  "green": {}
+ },
+ "theme_check": {
+  "particles": ".accent-layer",
+  "first_screen": {
+   "landscape": false,
+   "names_min_px": 28
+  },
+  "backdrop": {
+   "edge_max": 2.2,
+   "dark_max": 0.05,
+   "dark_below": 0,
+   "light_above": 140
+  }
+ },
+ "bytes_total": 427290
+}

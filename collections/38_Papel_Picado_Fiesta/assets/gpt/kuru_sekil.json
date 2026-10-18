@@ -1,0 +1,23 @@
+{
+ "_not": "G187 kuru deneme (tools/gpt_kuru_deneme.py --sekil): parçaların prompt'taki yeri, tuval yüzdesiyle. Deneme görseli ürün değildir.",
+ "kraft_paper.png": {"ton": [183, 138, 91], "gren": 0.4},
+ "limewash_wall.png": {"ton": [245, 233, 216], "gren": 0.2},
+ "cream_paper.png": {"ton": [251, 244, 232], "gren": 0.2},
+ "terracotta.png": {"ton": [176, 80, 47], "gren": 0.3},
+ "envelope_pocket.png": {"kutu": [0, 0, 100, 100], "ton": [183, 138, 91]},
+ "envelope_flap.png": {"kutu": [0, 0, 100, 100], "ton": [170, 126, 82]},
+ "flap_liner.png": {"kutu": [0, 0, 100, 100], "ton": [240, 222, 200]},
+ "flag_1.png": {"kutu": [0, 0, 100, 100], "ton": [214, 58, 122]},
+ "flag_2.png": {"kutu": [0, 0, 100, 100], "ton": [242, 163, 27]},
+ "flag_3.png": {"kutu": [0, 0, 100, 100], "ton": [28, 150, 164]},
+ "flag_4.png": {"kutu": [0, 0, 100, 100], "ton": [118, 166, 58]},
+ "flag_5.png": {"kutu": [0, 0, 100, 100], "ton": [122, 79, 160]},
+ "flag_6.png": {"kutu": [0, 0, 100, 100], "ton": [232, 86, 55]},
+ "bulb.png": {"kutu": [22, 0, 78, 92], "ton": [255, 206, 120]},
+ "frame_1.png": {"kutu": [0, 0, 100, 100], "pencere": [15, 15.83, 85, 88.75], "ton": [214, 58, 122]},
+ "frame_2.png": {"kutu": [0, 0, 100, 100], "pencere": [15, 15.83, 85, 88.75], "ton": [28, 150, 164]},
+ "frame_3.png": {"kutu": [0, 0, 100, 100], "pencere": [15, 15.83, 85, 88.75], "ton": [242, 163, 27]},
+ "frame_wide.png": {"kutu": [0, 0, 100, 100], "pencere": [7.5, 15, 92.5, 91.5], "ton": [232, 86, 55]},
+ "bougainvillea.png": {"kutu": [0, 0, 82, 78], "ton": [200, 40, 120]},
+ "embroidery_band.png": {"ton": [245, 236, 220], "gren": 0.3}
+}

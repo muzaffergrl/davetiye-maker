@@ -465,6 +465,48 @@ EK_TEMALAR = [
          dekor="Saten astar, pirinç kurma anahtarı, tül, gül yaprakları", teknik="fotogerçekçi + pastel",
          font=("Ballet", "Gilda Display"), palet_adi="rose-quartz-gold",
          hareket="Kurma anahtarı döner (müzik kutusu ezgisi dokunuştan sonra), kapak menteşesi, balerinin yavaş piruet kare dizisi, aynada parıltılı foto geçişi, az sayıda süzülen gül yaprağı (azaltılmış harekette yok), oval ayna sayfa geçişi."),
+    # 3. dalga (33–38, docs/24; K23 sıkı: ilk sayfa kapalı zarf): aynı kurallar; GPT parçalarından önce kuruldu.
+    dict(no=33, klasor="33_Marigold_Mehndi", ad="Marigold & Mehndi",
+         zarf="Fuşya ipek zarf, altın lazer kesim paisley kılıfın içinde; püskül sallanır, kılıf yana kayar, düz ipek kapak açılır, kart kadife-fuşya astardan yükselir; kadife çiçeği yaprakları süzülür.",
+         foto="Jharokha (Rajasthan pencere kemeri) çerçeveler; fotoğraf alttan yukarı kına gibi akarak belirir, kemerin çevresindeki kına deseni çizgi çizgi akar.",
+         dekor="Kadife çiçeği çelenkleri, kına desenleri, pirinç diya kandilleri, ipek püsküller", teknik="zengin minyatür + fotogerçekçi ipek",
+         font=("Rozha One", "Yrsa"), palet_adi="saffron-fuchsia-gold",
+         hareket="Püskül sarkacı, altın kılıfın yana kayması, düz ipek kapağın kadife iç yüze devretmesi, kadife çiçeği yapraklarının süzülmesi, diya alevlerinin sırayla yanması, kına çizgisinin kemer çevresinde akması (maske), metnin kılıf gibi yandan kayarak yerleşmesi."),
+    # 3. dalga (33–38, docs/24; K23 sıkı: ilk sayfa kapalı zarf): aynı kurallar; GPT parçalarından önce kuruldu.
+    dict(no=34, klasor="34_Red_Lacquer_Double_Happiness", ad="Red Lacquer & Double Happiness",
+         zarf="Dikey kırmızı kâğıt zarf, cepte altın varak 囍, ip-düğme kapama; ip düğmeden dönerek çözülür ve düşer, kapak katından kalkar, kart iki kâğıt kesim şakayık penceresine sarılı yükselir, pencereler kat kat iki yana açılır.",
+         foto="Ay kapısı (moon gate) yuvarlak çerçeveler; iki kırmızı kâğıt kapı kanadı yana kayarak fotoğrafı açar; mekân fotoğrafı kafes kapılarla.",
+         dekor="Şakayık, kâğıt kesim (jianzhi) desenleri, kırmızı lake, altın bulut motifleri, püsküllü düğüm", teknik="kâğıt kesim + lake + altın varak",
+         font=("Luxurious Script", "Prata"), palet_adi="lacquer-red-gold-cream",
+         hareket="İpin düğmeden dönerek çözülmesi, kapağın katından kalkması, kâğıt kesim pencere katlarının kanat kanat açılması, altın bulutların süzülmesi, iki hızda kayan kâğıt kesim katmanlar (paralaks), ay kapısı kanatlarıyla foto, metnin üst kenarından katlanarak açılması, sallanan püsküllü düğüm"),
+    # 3. dalga (33–38, docs/24, K23 sıkı: ilk sayfa kapalı zarf; fark zarfın türü, kapanması ve koreografisinde).
+    dict(no=35, klasor="35_Highland_Tartan_Thistle", ad="Highland Tartan & Thistle",
+         zarf="Ekoseli yün zarf, düz (V olmayan) kapak, dikey deri kayış + pirinç toka; tokanın çerçevesi devrilip dili bırakır, kayış tokadan yukarı kayıp çıkar, yün kapak üst katından 3B kalkar, funda dalı ve kart cepten yükselir; arkadaki tepelerden sis iki yana çekilir.",
+         foto="Antika pirinç madalyon (locket) oval çerçeveler; sahnesine gelince madalyonun kapağı menteşesinde açılır, fotoğraf görünür; mekân fotoğrafı soldan sisin kalkmasıyla belirir.",
+         dekor="Ekose yün, devedikeni, funda, deri kayış, pirinç toka ve madalyon, dağ sisi", teknik="yağlı boya manzara + fotogerçekçi doku",
+         font=("Rouge Script", "Sorts Mill Goudy"), palet_adi="heather-moss-tartan",
+         hareket="Toka/kayış mekaniği (çerçeve devrilir, kayış tokadan kayar), düz yün kapağın 3B kalkışı, iki sis katmanının zıt yönlere kayması (açılışta çekilir, iç sayfalarda kaydırmayla süzülür), madalyon kapaklarının menteşede açılması, metnin sisten netleşerek gelmesi"),
+    # docs/24 3. dalga (33–38; K23 sıkı: ilk sayfa kapalı zarf)
+    dict(no=36, klasor="36_Victorian_Glasshouse", ad="Victorian Glasshouse",
+         zarf="Kraft tohum paketi zarfı, ortadan jüt sicimle bağlı, düğümde bakır bitki etiketi (monogram); etiket sallanıp düşer, sicim düğümden ikiye ayrılır (üst yarı yukarı, alt yarı aşağı), düz kapak menteşesinden yukarı ve arkaya katlanır, kart paketten yükselir; serada cam buğulanır, buğu silinerek kart ve eğrelti otları görünür.",
+         foto="Cam altında herbaryum numuneleri: 4:5 fotoğraf cam vitrinde, camdaki buğu yandan silinerek açılır, cam üstünden ışık bandı geçer, bakır numara etiketi ipinde sallanır, altta herbaryum etiketinde yazı belirir; sol–sağ–sol.",
+         dekor="Dökme demir kemerler, eğrelti otu, orkide, bakır etiketler, cam buğusu", teknik="botanik gravür + fotogerçekçi cam",
+         font=("Monsieur La Doulaise", "Old Standard TT"), palet_adi="fern-copper-glass",
+         hareket="Etiket sallanması ve düşüşü, sicimin düğümden iki yana çözülmesi, kapağın arkaya katlanması, buğulanan camın yumuşak kenarlı maskeyle silinmesi, demir kemerlerin paralaksı (kaydırmada katman katman), numunelerde buğu silme + ışık bandı + sallanan bakır etiketler, metin adımları buğudan netleşir."),
+    # 3. dalga (33–38, docs/24; K23 sıkı: ilk sayfa kapalı zarf, her birinin türü/kapanışı/açılışı ayrı); GPT'den önce kuruldu.
+    dict(no=37, klasor="37_Art_Nouveau_Lily", ad="Art Nouveau Lily",
+         zarf="Krem zarf, üç taç yaprağı kapak (sol, sağ, orta) uçları vitray zambak madalyonun altında buluşur; ışık camdan süzülür, madalyon kalkar, yan yapraklar dışa, orta yaprak yukarı açılır (çiçek açar gibi), kart cepten yükselir.",
+         foto="Vitray pencere kemerleri: fotoğraf alacakaranlıkta cam gibi soluk bekler, ışık bandı geçince renkleri canlanır; kaydırınca ışık camda dolaşır.",
+         dekor="Zambak, kıvrımlı (whiplash) altın çizgiler, vitray, mozaik altın hâle", teknik="Mucha tarzı poster + vitray",
+         font=("Ephesis", "Federant"), palet_adi="sage-gold-cream-lilac",
+         hareket="Vitraydan süzülen ışık bandı ve madalyonun parlayıp kalkması, taç yaprağı kapakların menteşelerinde çiçek açar gibi açılması (yan yapraklar dışa kıvrılır, astar 90°'de devralır), altın kıvrım çizgilerinin akarak çizilmesi (maske), ışık geçince renkleri canlanan kemer fotoğraflar, metnin camdan geçen renk gibi bulanıklıktan netleşmesi, RSVP'de süzülen zambak yaprakları"),
+    # 3. dalga (33–38, docs/24, K23 sıkı: ilk sayfa kapalı zarf; zarfın türü/kapanması/koreografisi farklı)
+    dict(no=38, klasor="38_Papel_Picado_Fiesta", ad="Papel Picado Fiesta",
+         zarf="Dikey kraft zarf, düz (V olmayan) kapak, mühür yok; kapağı renkli kâğıt kesim (papel picado) bayraklardan bir kemer bant tutar. Bant gevşer, altı bayrak tek tek uçup isimlerin üstünde gökyüzüne bir süs dizisi olarak dizilir ve rüzgârda dalgalanır, düz kapak üst kenarında 3B kalkıp işlemeli astarını gösterir, ampul dizisi sırayla yanar, kart cepten yükselir.",
+         foto="Renkli kâğıt kesim çerçeveler üst kenarından asılı: sahnesine gelince düşüp sarkaç gibi sallanarak durur, sonra esintide hafifçe salınır; hızlı kaydırınca rüzgâr artar.",
+         dekor="Papel picado bayrakları, bugenvil, terrakota, ampul dizileri, işlemeli kumaş", teknik="canlı kâğıt kesim + fotogerçekçi",
+         font=("Oleo Script", "Alegreya"), palet_adi="fiesta-multicolor-terracotta",
+         hareket="Kemer bandın çözülmesi (bayraklar ayrılır), bayrakların zarftan göğe uçup süs dizisine dizilmesi ve CSS dalgasıyla ayrı fazlarda dalgalanması, düz kapağın üst menteşede 3B kalkışı, ampullerin sırayla yanması, asılı çerçevelerin sarkaç gibi düşüp sallanması ve kaydırma hızıyla artan rüzgâr, metnin bayrak gibi üst kenarından açılması, RSVP'de süzülerek düşen bayraklar."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

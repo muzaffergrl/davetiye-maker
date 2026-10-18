@@ -1,0 +1,122 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Anaya",
+      "full_name": "Anaya Mira Desai"
+    },
+    {
+      "display_name": "Kabir",
+      "full_name": "Kabir Arun Sethi"
+    }
+  ],
+  "name_display": "Anaya & Kabir",
+  "initials": "A&K",
+  "host_line": "Together with their families",
+  "date": "2027-11-20",
+  "ceremony_time": "18:00",
+  "timezone": "Asia/Kolkata",
+  "venue": {
+    "name": "Gulmohar Haveli Gardens",
+    "city": "Jaipur",
+    "region": "Rajasthan",
+    "country": "India",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Welcome drinks",
+      "time": "17:30",
+      "location": "The marigold courtyard"
+    },
+    {
+      "label": "Ceremony",
+      "time": "18:00",
+      "location": "Under the haveli arches"
+    },
+    {
+      "label": "Dinner & dancing",
+      "time": "19:30",
+      "location": "The lantern lawn"
+    },
+    {
+      "label": "Fireworks",
+      "time": "22:30",
+      "location": "The rooftop terrace"
+    }
+  ],
+  "dress_code": "Formal attire",
+  "rsvp": {
+    "deadline": "2027-10-01",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Vegan",
+          "Chicken"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "A monsoon afternoon in a bookshop, a kite festival on the rooftops and a question among the marigolds led us to",
+    "items": [
+      {
+        "caption": "A monsoon afternoon"
+      },
+      {
+        "caption": "Kites over the rooftops"
+      },
+      {
+        "caption": "Among the marigolds"
+      }
+    ]
+  },
+  "audio": {
+    "music": "evening-strings",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony."
+    },
+    {
+      "q": "Can you accommodate dietary requirements?",
+      "a": "Please tell us about your requirements in your reply."
+    }
+  ]
+}

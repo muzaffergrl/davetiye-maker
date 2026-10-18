@@ -1,0 +1,122 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Isla",
+      "full_name": "Isla Morven Lennox"
+    },
+    {
+      "display_name": "Callum",
+      "full_name": "Callum Rhys Abernethy"
+    }
+  ],
+  "name_display": "Isla & Callum",
+  "initials": "I&C",
+  "host_line": "Together with their families",
+  "date": "2027-09-25",
+  "ceremony_time": "14:00",
+  "timezone": "Europe/London",
+  "venue": {
+    "name": "Glenarden House",
+    "city": "Pitlochry",
+    "region": "Perthshire",
+    "country": "United Kingdom",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "14:00",
+      "location": "The walled garden"
+    },
+    {
+      "label": "Welcome drinks",
+      "time": "15:00",
+      "location": "The heather lawn"
+    },
+    {
+      "label": "Dinner & dancing",
+      "time": "18:00",
+      "location": "The great hall"
+    },
+    {
+      "label": "Late-night snacks",
+      "time": "23:00",
+      "location": "By the fire"
+    }
+  ],
+  "dress_code": "Formal attire",
+  "rsvp": {
+    "deadline": "2027-08-14",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Fish",
+          "Beef"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "A wet day on a hill path, a long walk by the loch and a question among the heather led us to",
+    "items": [
+      {
+        "caption": "A wet day on the hill"
+      },
+      {
+        "caption": "A walk by the loch"
+      },
+      {
+        "caption": "Among the heather"
+      }
+    ]
+  },
+  "audio": {
+    "music": "evening-strings",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony."
+    },
+    {
+      "q": "Can you accommodate dietary requirements?",
+      "a": "Please tell us about your requirements in your reply."
+    }
+  ]
+}

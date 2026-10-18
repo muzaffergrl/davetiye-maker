@@ -8,6 +8,7 @@ import type { ContentRecord } from '../content/types.ts';
 /** theme id -> centre of its demo city (WGS 84). */
 export const DEMO_CITY_PINS: Readonly<Record<string, { lat: number; lng: number }>> = {
   'art-deco-black-tie': { lat: 41.8781, lng: -87.6298 }, // Chicago
+  'art-nouveau-lily': { lat: 48.6921, lng: 6.1844 }, // Nancy, France (the villa is fictional)
   'azulejo-mosaic': { lat: 38.8029, lng: -9.3817 }, // Sintra, Portugal
   'blush-garden-rose': { lat: 32.0809, lng: -81.0912 }, // Savannah
   'boho-pampas-terracotta': { lat: 34.1347, lng: -116.3131 }, // Joshua Tree
@@ -23,19 +24,24 @@ export const DEMO_CITY_PINS: Readonly<Record<string, { lat: number; lng: number 
   'kintsugi-washi': { lat: 45.7054, lng: -121.5215 }, // Hood River, Oregon
   'lavender-provence': { lat: 43.9116, lng: 5.2003 }, // Gordes
   'maison-patisserie': { lat: 32.0809, lng: -81.0912 }, // Savannah, GA
+  'marigold-mehndi': { lat: 26.9124, lng: 75.7873 }, // Jaipur, Rajasthan (the haveli is fictional)
   'mediterranean-lemon': { lat: 40.6263, lng: 14.3758 }, // Sorrento
   'music-box-ballerina': { lat: 43.0831, lng: -73.7846 }, // Saratoga Springs, NY (the pavilion is fictional)
   'midnight-garden': { lat: 29.9511, lng: -90.0715 }, // New Orleans
   'nocturne-lake-estate': { lat: 45.9857, lng: 9.2617 }, // Bellagio (Lake Como)
   'orient-express-voyage': { lat: 45.4408, lng: 12.3155 }, // Venice
+  'papel-picado-fiesta': { lat: 29.4241, lng: -98.4936 }, // San Antonio, TX (the courtyard is fictional)
   'grand-theatre-premiere': { lat: 37.5407, lng: -77.436 }, // Richmond, VA (the theatre is fictional)
+  'highland-tartan-thistle': { lat: 56.7036, lng: -3.73 }, // Pitlochry, Perthshire (the house is fictional)
   'olive-ivory': { lat: 38.2975, lng: -122.2869 }, // Napa
+  'red-lacquer-double-happiness': { lat: 49.2827, lng: -123.1207 }, // Vancouver, BC (the garden house is fictional)
   'riad-lantern-nights': { lat: 31.6295, lng: -7.9811 }, // Marrakech (medina)
   'sky-lantern-festival': { lat: 34.4208, lng: -119.6982 }, // Santa Barbara, CA
   'sunflower-rustic-barn': { lat: 35.9251, lng: -86.8689 }, // Franklin, TN
   'tropical-destination': { lat: 20.6873, lng: -156.4428 }, // Wailea
   'tuscan-vineyard': { lat: 43.0927, lng: 11.7808 }, // Montepulciano
   'velvet-jewel-box': { lat: 40.7128, lng: -74.006 }, // New York
+  'victorian-glasshouse': { lat: 39.9612, lng: -82.9988 }, // Columbus, OH (the glasshouse is fictional)
   'vintage-airmail-love-letter': { lat: 42.2529, lng: -73.791 }, // Hudson, NY
   'wildflower-meadow-vellum': { lat: 40.0379, lng: -76.3055 }, // Lancaster, PA
   'winter-evergreen': { lat: 39.1911, lng: -106.8175 }, // Aspen

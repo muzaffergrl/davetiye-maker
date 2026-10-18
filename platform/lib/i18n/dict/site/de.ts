@@ -297,6 +297,23 @@ const dict: Dict = {
   'Turn the key': 'Schlüssel drehen',
   'Wind the music box again': 'Spieluhr erneut aufziehen',
   'Reflections': 'Spiegelbilder',
+  // G182 Marigold & Mehndi
+  'Let the celebrations begin': 'Lasst die Feier beginnen',
+  'Open the envelope': 'Den Umschlag öffnen',
+  'Together with their families': 'Gemeinsam mit ihren Familien',
+  'invite you to celebrate': 'laden Sie zum Feiern ein',
+  // G183 Red Lacquer & Double Happiness
+  "Double happiness": "Doppeltes Glück",
+  // G184 Highland Tartan & Thistle
+  'Gathered in the hills': 'Versammelt in den Hügeln',
+  'Invite you to celebrate': 'laden Sie zum Feiern ein',
+  // G185 Victorian Glasshouse (36)
+  "Grown with love": "Mit Liebe gewachsen",
+  "Open the seed packet": "Die Samentüte öffnen",
+  // G186 Art Nouveau Lily
+  "Love in full bloom": "Liebe in voller Blüte",
+  // G187 Papel Picado Fiesta
+  "A fiesta of love": "Ein Fest der Liebe",
 };
 
 export default dict;

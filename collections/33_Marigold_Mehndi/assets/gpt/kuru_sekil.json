@@ -1,0 +1,20 @@
+{
+ "_not": "G182 kuru deneme (tools/gpt_kuru_deneme.py --sekil): parçaların prompt'taki yeri, tuval yüzdesiyle. Deneme görseli ürün değildir.",
+ "silk.png": {"ton": [179, 22, 94], "gren": 0.5},
+ "velvet.png": {"ton": [92, 10, 54], "gren": 0.3},
+ "paper.png": {"ton": [250, 235, 208], "gren": 0.3},
+ "sleeve.png": {"kutu": [0, 0, 100, 100], "ton": [201, 162, 74]},
+ "petal_1.png": {"kutu": [22, 22, 78, 78], "ton": [242, 161, 59]},
+ "petal_2.png": {"kutu": [30, 20, 70, 80], "ton": [236, 140, 40]},
+ "petal_3.png": {"kutu": [32, 32, 68, 68], "ton": [226, 118, 30]},
+ "jharokha.png": {"kutu": [0, 0, 100, 100], "pencere": [18, 24, 82, 85.5], "ton": [214, 170, 110]},
+ "henna.png": {"kutu": [2, 2, 98, 98], "ton": [122, 59, 30]},
+ "diya.png": {"kutu": [5, 10, 95, 95], "ton": [190, 150, 70]},
+ "flame.png": {"kutu": [30, 12, 70, 100], "ton": [250, 200, 90]},
+ "garland.png": {"kutu": [0, 0, 100, 96], "ton": [240, 150, 40]},
+ "mehndi_pattern.png": {"kutu": [0, 0, 100, 100], "ton": [247, 194, 122]},
+ "card_small.png": {"kutu": [0, 0, 100, 100], "pencere": [20, 8, 80, 62.7], "ton": [250, 235, 208]},
+ "tassel.png": {"kutu": [10, 0, 90, 100], "ton": [179, 22, 94]},
+ "envelope_front.png": {"kutu": [0, 0, 100, 100], "ton": [184, 26, 98]},
+ "flap.png": {"kutu": [0, 0, 100, 100], "ton": [160, 18, 84]}
+}

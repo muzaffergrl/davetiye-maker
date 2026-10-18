@@ -264,6 +264,66 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-18',
     },
+    // New design 33 (G182, docs/24 wave 3): platform theme built before its GPT parts (interim layers); not on sale, no price yet.
+    {
+      id: 'marigold-mehndi',
+      name: 'Marigold & Mehndi',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-18',
+    },
+    // New design 34 (G183, docs/24 3rd wave): platform theme built before its GPT parts (interim layers); not on sale, no price yet.
+    {
+      id: 'red-lacquer-double-happiness',
+      name: 'Red Lacquer & Double Happiness',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-18',
+    },
+    // New design 35 (G184, docs/24 wave 3): platform theme built before its GPT parts (interim layers); not on sale, no price yet.
+    {
+      id: 'highland-tartan-thistle',
+      name: 'Highland Tartan & Thistle',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-18',
+    },
+    // New design 36 (G185, docs/24 wave 3): platform theme built before its GPT parts (interim layers); not on sale, no price yet.
+    {
+      id: 'victorian-glasshouse',
+      name: 'Victorian Glasshouse',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-18',
+    },
+    // New design 37 (G186, docs/24 3rd wave): platform theme built before its GPT parts (interim papers); not on sale, no price yet.
+    {
+      id: 'art-nouveau-lily',
+      name: 'Art Nouveau Lily',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-18',
+    },
+    // New design 38 (G187, docs/24 wave 3): platform theme built before its GPT parts (interim layers); not on sale, no price yet.
+    {
+      id: 'papel-picado-fiesta',
+      name: 'Papel Picado Fiesta',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-18',
+    },
     {
       id: 'blush-garden-rose',
       name: 'Blush Garden Rose',

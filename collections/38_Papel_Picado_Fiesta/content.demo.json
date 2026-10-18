@@ -1,0 +1,122 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Valeria",
+      "full_name": "Valeria Isabel Ortega"
+    },
+    {
+      "display_name": "Diego",
+      "full_name": "Diego Andrés Navarro"
+    }
+  ],
+  "name_display": "Valeria & Diego",
+  "initials": "V&D",
+  "host_line": "Together with their families",
+  "date": "2027-04-24",
+  "ceremony_time": "17:30",
+  "timezone": "America/Chicago",
+  "venue": {
+    "name": "Casa Bugambilia Courtyard",
+    "city": "San Antonio",
+    "region": "Texas",
+    "country": "United States",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Welcome drinks",
+      "time": "17:00",
+      "location": "The terracotta patio"
+    },
+    {
+      "label": "Ceremony",
+      "time": "17:30",
+      "location": "Beneath the bougainvillea"
+    },
+    {
+      "label": "Dinner & dancing",
+      "time": "19:00",
+      "location": "Under the string lights"
+    },
+    {
+      "label": "Late-night snacks",
+      "time": "23:00",
+      "location": "The courtyard"
+    }
+  ],
+  "dress_code": "Cocktail attire",
+  "rsvp": {
+    "deadline": "2027-03-20",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Fish",
+          "Chicken"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "A dance at a summer market, a sunset on the river and a question under the string lights led us to",
+    "items": [
+      {
+        "caption": "Our first dance"
+      },
+      {
+        "caption": "Sunset on the river"
+      },
+      {
+        "caption": "Under the lights"
+      }
+    ]
+  },
+  "audio": {
+    "music": "garden-waltz",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony."
+    },
+    {
+      "q": "Can you accommodate dietary requirements?",
+      "a": "Please tell us about your requirements in your reply."
+    }
+  ]
+}
