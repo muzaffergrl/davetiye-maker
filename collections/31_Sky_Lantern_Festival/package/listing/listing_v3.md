@@ -13,13 +13,13 @@ design goes live).
 | Item | Status on 2026-10-17 |
 |---|---|
 | Design status | **coming**: not on `/start` in production, not on the sales site. The opening and every page work in a local production build, but the sky, page ground, lantern, distant lanterns and card are **interim** pieces cut from other designs' GPT images (the hands, star dust and paper mats appear only with this design's own parts) (`build_images.py`); this design's own parts are ordered in `assets/gpt/GPT_PROMPTS.md`. Do not publish before they are in and the design is `live`. |
-| Start link `https://davetiye-platform-five.vercel.app/start?theme=sky-lantern-festival` | **Not live** (the design is `coming`; production does not have this theme yet). |
-| Live demo `https://davetiye-platform-five.vercel.app/start/demo/sky-lantern-festival` (in the description under TRY THE LIVE DEMO) | **Not live** (same reason). Locally it renders (G170 tests). |
+| Start link `https://xn--bkestudo-zkb.com/start?theme=sky-lantern-festival` | **Not live** (the design is `coming`; production does not have this theme yet). |
+| Live demo `https://xn--bkestudo-zkb.com/start/demo/sky-lantern-festival` (in the description under TRY THE LIVE DEMO) | **Not live** (same reason). Locally it renders (G170 tests). |
 | Sample photos | **None yet** (PAKET 2 for the fictional couple Sophie & Daniel is ordered). Screens would show neutral placeholders. |
 | Questions & answers, RSVP questions, music, map and directions, Excel / Google Sheets | Platform features, the same for every design; see the 01–21 listings for their live-site status. **Not tried with this design on the live site.** |
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** All phone checks are Chromium mobile emulation (theme README). |
 | Edit link by email | **Not built.** The buyer copies the link or uses "Email it to myself" (their own mail app). |
-| Web address | `davetiye-platform-five.vercel.app` is temporary. |
+| Web address | `xn--bkestudo-zkb.com` (bkestudıo.com: bought and connected by the user, served by Vercel). G189 (2026-10-18) moved the start link, demo, START HERE guide and QR codes here from the earlier temporary Vercel address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
 | Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com**. |
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, quantity | **Price not decided for this design** ([PRICE]; designs 01–21 sell at 1,460 TL). Quantity: 999, Etsy's maximum (the shop's rule for every design). |
@@ -49,7 +49,7 @@ A watercolor sky from deep violet to a warm amber horizon, rice-paper lanterns a
 
 TRY THE LIVE DEMO
 See the lantern rise on your own phone before you buy (sample names):
-https://davetiye-platform-five.vercel.app/start/demo/sky-lantern-festival
+https://xn--bkestudo-zkb.com/start/demo/sky-lantern-festival
 Copy the link into your phone's browser. [VERIFY: demo live and showing this design's final parts]
 
 WHAT YOU GET
@@ -212,7 +212,7 @@ No. It is a digital product.
 
 ## 8. Etsy's automatic messages (shop-wide, the same for every design)
 
-Already entered in Shop Manager (docs/20 §7.1); they link the design chooser `https://davetiye-platform-five.vercel.app/start` and need
+Already entered in Shop Manager (docs/20 §7.1); they link the design chooser `https://xn--bkestudo-zkb.com/start` and need
 no change for this design (see the 01–21 listings §8 for the text).
 
 ## 9. After the sale

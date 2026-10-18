@@ -17,7 +17,7 @@ if (!theme) throw new Error(`no theme ${id}`);
 const demo = path.join(themesDir(), id, 'content.demo.json');
 const content = JSON.parse(readFileSync(existsSync(demo) ? demo : path.join(themesDir(), 'olive-ivory', 'content.demo.json'), 'utf8'));
 const slug = 'avery-and-jordan';
-const origin = 'https://davetiye-platform-five.vercel.app';
+const origin = 'https://xn--bkestudo-zkb.com';
 const siteUrl = `${origin}/${slug}`;
 try {
   if (process.argv.includes('--site')) {

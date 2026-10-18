@@ -456,7 +456,7 @@ No. It is a digital product. Your editor makes a printable invitation in your de
 Etsy'de iki alan var (docs/15 §4.2, Shop Manager → ayarlar; API yok → `claude-tarayici` girer): **Message to Buyers** (makbuz +
 sipariş onay e-postası) ve **Message to Buyers for Digital Items** (indirme sayfası; **bütün dijital ilanlara aynı metin**).
 Bu yüzden tasarıma özel link konamaz: temasız `/start` adresi alıcıya aldığı tasarımı seçtirir (G080 "Choose your design").
-`{START_BASE}` = `https://davetiye-platform-five.vercel.app/start`, `{MY_PAGE}` = `https://davetiye-platform-five.vercel.app/my` (G148: sipariş no + e-postayla her cihazdan devam, G146) (alan adı kesinleşince değişir, docs/05 §C).
+`{START_BASE}` = `https://xn--bkestudo-zkb.com/start`, `{MY_PAGE}` = `https://xn--bkestudo-zkb.com/my` (G148: sipariş no + e-postayla her cihazdan devam, G146) (G189, 2026-10-18: marka alan adı bkestudıo.com, IDNA biçimi; docs/05 §C).
 
 **Message to Buyers for Digital Items** (indirme sayfası):
 
@@ -975,7 +975,7 @@ denetim. `--designs 06-20` seçim, `--check` yalnız denetim, `--base-url` / `GU
 | 19 Midnight Garden | `19_Midnight_Garden` | `…/start?theme=midnight-garden` | envelope | Playfair Display SC, Cormorant SC, Cormorant Garamond → Kiril dahil |
 | 20 Coastal Seaside | `20_Coastal_Seaside` | `…/start?theme=coastal-seaside` | envelope | Allison, Lora → Kiril kısmen/yok |
 
-Taban `https://davetiye-platform-five.vercel.app` (geçici Vercel adresi; alan adı kararıyla `--base-url` ile yeniden üretilir — QR'lar
+Taban `https://xn--bkestudo-zkb.com` (bkestudıo.com; G189 2026-10-18'de geçici Vercel adresinden taşındı; başka bir taban için `--base-url` ile yeniden üretilir — QR'lar
 basılı kartlara gireceği için satıştan önce, docs/05 §C). QR koyu rengi tasarımın `palette.json`'undaki en koyu renk (06, 17, 19'da
 `ink` açık renk olduğu için), beyaz zeminde kontrast ≥ 7:1.
 
@@ -1137,9 +1137,9 @@ metni burada değiştir, komutu yeniden koş. Yer tutucular (araç doldurur; dol
 | Yer tutucu | Değer | Kaynak |
 |---|---|---|
 | `{DESIGN_NAME}` | Tasarımın adı ("Olive & Ivory") | `platform/themes/<id>/theme.json` `name` (= `/start`'taki "Design: …") |
-| `{START_URL}` | `https://davetiye-platform-five.vercel.app/start?theme=<id>` | `--base-url` / `GUIDE_BASE_URL`; rota `platform/app/start/page.tsx` |
-| `{PRIVACY_URL}` | `https://davetiye-platform-five.vercel.app/privacy` | aynı taban; rota `platform/app/(marketing)/privacy/page.tsx` |
-| `{MY_URL}` | `https://davetiye-platform-five.vercel.app/my` | G148: aynı taban; rota `platform/app/my/page.tsx` (satış sitesinin "Create your website" düğmesi; sipariş no + e-posta → editör, G146/K46) |
+| `{START_URL}` | `https://xn--bkestudo-zkb.com/start?theme=<id>` | `--base-url` / `GUIDE_BASE_URL`; rota `platform/app/start/page.tsx` |
+| `{PRIVACY_URL}` | `https://xn--bkestudo-zkb.com/privacy` | aynı taban; rota `platform/app/(marketing)/privacy/page.tsx` |
+| `{MY_URL}` | `https://xn--bkestudo-zkb.com/my` | G148: aynı taban; rota `platform/app/my/page.tsx` (satış sitesinin "Create your website" düğmesi; sipariş no + e-posta → editör, G146/K46) |
 | `{OPENING}` | Misafirin ilk dokunduğu nesne: `envelope`; 06 ve 14 `gatefold`, 09 `pouch`, 12 `wallet`, 13 `book`, 18 `sleeve` | `platform/lib/marketing/designs.ts` `opening` ("Your guests tap the …") |
 | `{OPENING_TAB}` | Aynı kelime büyük harfle: panelin ilk önizleme sekmesi (`Envelope`, `Gatefold`, `Pouch`, `Wallet`, `Book`, `Sleeve`) | G121: `platform/lib/panel/model.ts` `openingTabLabel` (aynı `designs.ts` cümlesinden) |
 | `{LANGUAGE_FONTS}` | Tasarım fontlarının dil kapsamı (3 cümleden biri, aşağıda) | `designs.ts` `fonts` + aracın `FONT_SUBSETS` tablosu (Google Fonts CSS, 2026-10-16) |

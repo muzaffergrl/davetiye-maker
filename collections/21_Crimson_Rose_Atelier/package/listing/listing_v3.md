@@ -11,8 +11,8 @@ index.html, home.html, story.html) and `platform/lib/marketing/designs.ts` (sale
 | Item | Status on 2026-10-17 |
 |---|---|
 | Sale status | **On sale** (K47, user, 2026-10-17): `platform/lib/marketing/config.ts` lists it as `live`, price 1460 (G142 `76fe0dc`, coordinator `ce62d11`). Same flow, guide and listing text as 01–20 (G148). |
-| Start link `https://davetiye-platform-five.vercel.app/start?theme=crimson-rose-atelier` | **Not live**: the design is in the repository (G133, branch `codex/crimson-rose-atelier`) and has not been deployed; the user asked for a local demo only. Opened only in a local production build (2026-10-17, G137 capture: /start shows "Design: Crimson Rose Atelier"). Not opened on a phone. |
-| Live demo `https://davetiye-platform-five.vercel.app/start/demo/crimson-rose-atelier` (in the description under TRY THE LIVE DEMO, and named in image 8) | **Not live**, for the same reason. In the local production build the demo route opens this design's envelope with the sample couple Olivia & James (G133 test, G137 capture). |
+| Start link `https://xn--bkestudo-zkb.com/start?theme=crimson-rose-atelier` | **Not live**: the design is in the repository (G133, branch `codex/crimson-rose-atelier`) and has not been deployed; the user asked for a local demo only. Opened only in a local production build (2026-10-17, G137 capture: /start shows "Design: Crimson Rose Atelier"). Not opened on a phone. |
+| Live demo `https://xn--bkestudo-zkb.com/start/demo/crimson-rose-atelier` (in the description under TRY THE LIVE DEMO, and named in image 8) | **Not live**, for the same reason. In the local production build the demo route opens this design's envelope with the sample couple Olivia & James (G133 test, G137 capture). |
 | Current platform release (simpler editor K29, Headings & labels, thank-you page, guest password, RSVP v2) | Live on production since G079 (2026-10-15) for 01–20. This design needs the next deploy; its editor features were tried only in the local production build of this task (setup, Edit, Guests, Share screens of the capture). |
 | Order check (`CLAIM_ORDER_VERIFICATION`) | Decided on (K34, 2026-10-15), but the records disagree on whether it is on in production (docs/10 G092, docs/18 §4); not read in G154 either (no access to the live settings). Since G154 (2026-10-17, K48) the description claims no order check: it says what happens if the editor shows "We are confirming your Etsy order" (Publish opens once the order is confirmed, usually within 24 hours), which is true in every mode. Read the mode before publishing (§11). |
 | Questions & answers, RSVP questions | Platform features, the same for every design; tested in a local production build (Chromium, phone size; G133 and this capture). **Not tried on the live site.** |
@@ -20,12 +20,12 @@ index.html, home.html, story.html) and `platform/lib/marketing/designs.ts` (sale
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** All phone checks so far are Chromium mobile emulation (theme README). |
 | Description claims (G154, 2026-10-17) | Every sentence of §2 describes a feature that exists in the platform and passed G090's local production-build checks (guest site 21/21; buyer flow 6/6 with RSVP, Excel and CSV, map card, sound button, Downloads and a Spanish website). No VERIFY note is left in §2; the live-site and real-device tests that are still open are in §11 (and in `etsy_upload.json` `open_checks`). The demo line "(sample names and photos)" depends on G090 P1-02 (sample photos in the demos). |
 | Edit link by email | **Off.** Sending is built (G147) but stays off until the owner sets up SMTP; the listing and the START HERE guide promise no email. Since G146 (K46) the buyer opens the editor on any device with the Etsy order number + email (`/my`, "Create your website"); the private edit link is a shortcut. Listing and guide say so since G148 (2026-10-17). |
-| Web address | `davetiye-platform-five.vercel.app` is temporary: choose the final domain before the first sale (or keep a permanent redirect from this one). |
+| Web address | `xn--bkestudo-zkb.com` (bkestudıo.com: bought and connected by the user, served by Vercel). G189 (2026-10-18) moved the start link, demo, START HERE guide and QR codes here from the earlier temporary Vercel address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
 | Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com**. |
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, quantity | 1,460 TL, the same as 01–20 (K47, 2026-10-17; `config.ts` price 1460); no stock limit (999, Etsy's maximum). Renewal and the Etsy listing URL are still open. Hosting extension (on request via Etsy before the "Online until" date, no price promised): K48, 2026-10-17. |
 | Design fonts and other languages | Checked on 2026-10-17 from the Google Fonts CSS of the fonts this theme loads: Cormorant Garamond and Manrope (both latin-ext + Cyrillic). The language line in GOOD TO KNOW and in the START HERE guide is written from this. |
-| START HERE guide | `package/customer/START_HERE.md` + `.pdf` rebuilt in G148 (2026-10-17, `python3 tools/build_customer_guides.py`, from docs/19 Ek A; G146 access with the Etsy order number + email): 9 pages, about 56 KB. Its links are the start link (in the text and on the QR), the `/my` page ("Continue on another device") and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://davetiye-platform-five.vercel.app/start?theme=crimson-rose-atelier` (jsQR on every rendered page). The start link answers only after this design is deployed. G154 (2026-10-17) rebuilt it from Ek A again (K48 order-check, extension and deletion texts, a Languages section, Share → Downloads, the start address in plain text under the QR): 10 pages, about 59 KB; `--check` with jsQR passes. |
+| START HERE guide | `package/customer/START_HERE.md` + `.pdf` rebuilt in G148 (2026-10-17, `python3 tools/build_customer_guides.py`, from docs/19 Ek A; G146 access with the Etsy order number + email): 9 pages, about 56 KB. Its links are the start link (in the text and on the QR), the `/my` page ("Continue on another device") and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://xn--bkestudo-zkb.com/start?theme=crimson-rose-atelier` (jsQR on every rendered page). The start link answers only after this design is deployed. G154 (2026-10-17) rebuilt it from Ek A again (K48 order-check, extension and deletion texts, a Languages section, Share → Downloads, the start address in plain text under the QR): 10 pages, about 59 KB; `--check` with jsQR passes. |
 | Listing image 9 | `09_devices.png` built on 2026-10-17 (G148, K47): "Start on your phone, continue on any device", real screens of a local production build with G146 (`/my`, Share → "Use on another device"). G146 is live only after the next deploy: publish image 9 with it. |
 | Listing images and video | **Produced** on 2026-10-17 from local production builds of the repository: images 3, 5, 6 and 7 and `video.mp4` (12 s, §6) in G137; images 1, 2, 4 and 8 in G137 (second pass) on this design's GPT mockup scenes (G821, `assets/gpt/mockups/`). All 8 in `images_editorial/` (§5). Nothing uploaded to Etsy. |
 
@@ -51,7 +51,7 @@ Deep crimson roses, warm gold and ivory paper. Your guests tap a burgundy envelo
 
 TRY THE LIVE DEMO
 See the envelope open on your own phone before you buy (sample names and photos):
-https://davetiye-platform-five.vercel.app/start/demo/crimson-rose-atelier
+https://xn--bkestudo-zkb.com/start/demo/crimson-rose-atelier
 Copy the link into your phone's browser.
 
 WHAT YOU GET
@@ -230,7 +230,7 @@ No. It is a digital product. Your editor makes a printable invitation in your de
 ## 8. Etsy's automatic messages (shop-wide, the same for every design)
 
 Etsy's "Message to Buyers for Digital Items" applies to every digital listing, so it cannot carry this design's own start link: it links
-the design chooser `https://davetiye-platform-five.vercel.app/start` (docs/19 §4.4). The START HERE PDF carries this design's own link. Both texts are already entered in
+the design chooser `https://xn--bkestudo-zkb.com/start` (docs/19 §4.4). The START HERE PDF carries this design's own link. Both texts are already entered in
 Shop Manager (docs/20 §7.1) and need no change for this design.
 
 Message to Buyers for Digital Items:
@@ -238,9 +238,9 @@ Message to Buyers for Digital Items:
 ```text
 Thank you for your order! Your download is your START HERE guide (PDF). Open it and tap the start link inside.
 
-Can't open the PDF? Start here instead and choose the design you bought: https://davetiye-platform-five.vercel.app/start
+Can't open the PDF? Start here instead and choose the design you bought: https://xn--bkestudo-zkb.com/start
 
-You will enter your Etsy order number, your email and your first names. To continue later on any phone or computer, open https://davetiye-platform-five.vercel.app/my and enter the same order number and email. No account or password.
+You will enter your Etsy order number, your email and your first names. To continue later on any phone or computer, open https://xn--bkestudo-zkb.com/my and enter the same order number and email. No account or password.
 
 Questions? Message us here on Etsy with your order number.
 ```
@@ -248,7 +248,7 @@ Questions? Message us here on Etsy with your order number.
 Message to Buyers (receipt):
 
 ```text
-Thank you! Start your wedding website from the START HERE PDF in your download, or at https://davetiye-platform-five.vercel.app/start (choose the design you bought). To continue later on any device, open https://davetiye-platform-five.vercel.app/my with the same order number and email. Questions? Message us on Etsy.
+Thank you! Start your wedding website from the START HERE PDF in your download, or at https://xn--bkestudo-zkb.com/start (choose the design you bought). To continue later on any device, open https://xn--bkestudo-zkb.com/my with the same order number and email. Questions? Message us on Etsy.
 ```
 
 ## 9. After the sale

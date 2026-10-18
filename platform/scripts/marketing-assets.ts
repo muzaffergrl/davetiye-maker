@@ -235,7 +235,7 @@ async function panelAssets(sharp: any): Promise<AssetManifest['panel']> {
   if (!existsSync(path.join(ROOT, '.next', 'BUILD_ID'))) throw new Error('panel screens need a production build: run `npm run build` first');
   const { loadChromium, startNext, waitForServer } = await import('./lib/browser.ts');
   const { loadThemeEnv, demoSlug } = await import('./lib/theme-env.ts');
-  const publicUrl = arg('public-url', 'https://davetiye-platform-five.vercel.app').replace(/\/+$/, '');
+  const publicUrl = arg('public-url', 'https://xn--bkestudo-zkb.com').replace(/\/+$/, '');
   const env = loadThemeEnv({ theme: PANEL_THEME });
   const demo = structuredClone(env.demo);
   demo.rsvp = { ...demo.rsvp, questions: [{ id: 'meal', label: 'Meal choice', type: 'choice', options: ['Chicken', 'Fish', 'Vegetarian'] }] };

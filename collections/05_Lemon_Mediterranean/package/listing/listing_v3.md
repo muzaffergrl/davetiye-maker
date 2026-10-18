@@ -8,8 +8,8 @@ the platform does today. Product language: English (US spelling). This design ha
 
 | Item | Status on 2026-10-16 |
 |---|---|
-| Start link `https://davetiye-platform-five.vercel.app/start?theme=mediterranean-lemon` | **Live**: answered `200` on 2026-10-16 and the page names the design ("Design: Mediterranean Lemon", with the "Create my website" form). Checked through the Vercel connector on production `dpl_HKT1NRKp895wEVEUbGKdzJCqU4RW` (G122); a direct `curl` from this environment is refused by its proxy. Not opened on a phone. |
-| Live demo `https://davetiye-platform-five.vercel.app/start/demo/mediterranean-lemon` (in the description under TRY THE LIVE DEMO, and named in image 8) | **Live**: answered `200` on 2026-10-16; the page is this design's opening (`data-theme="mediterranean-lemon"`, sample couple Isabella & Marco). Same check, not opened on a phone. |
+| Start link `https://xn--bkestudo-zkb.com/start?theme=mediterranean-lemon` | **Moved to the brand domain** (G189, 2026-10-18); not yet opened there from a phone. On the earlier Vercel address it answered `200` on 2026-10-16 and the page names the design ("Design: Mediterranean Lemon", with the "Create my website" form). Checked through the Vercel connector on production `dpl_HKT1NRKp895wEVEUbGKdzJCqU4RW` (G122); a direct `curl` from this environment is refused by its proxy. Not opened on a phone. |
+| Live demo `https://xn--bkestudo-zkb.com/start/demo/mediterranean-lemon` (in the description under TRY THE LIVE DEMO, and named in image 8) | **Moved to the brand domain** (G189, 2026-10-18); not yet opened there from a phone. On the earlier Vercel address it answered `200` on 2026-10-16; the page is this design's opening (`data-theme="mediterranean-lemon"`, sample couple Isabella & Marco). Same check, not opened on a phone. |
 | Current platform release live (simpler editor K29, Headings & labels, thank-you page, guest password, RSVP v2) | **Live** since G079 (2026-10-15, docs/10 §2). Production on 2026-10-16 is `b952bc8` (`dpl_HKT1NRKp895wEVEUbGKdzJCqU4RW`). It does **not** yet have the G100 and G121 editor changes (one-job first setup step, link-first "Your website is live" screen with the QR under "More ways to share", Guests list and Results; the preview tab named after the design's opening, Settings on Home) that the START HERE guide describes since G122: publish only after a release with G100 and G121 is live and the guide re-checked against it. The editor features were not re-tried on the live site in this task. |
 | Order check (`CLAIM_ORDER_VERIFICATION`) | Decided on (K34, 2026-10-15), but the records disagree on whether it is on in production (docs/10 G092, docs/18 §4); not read in G154 either (no access to the live settings). Since G154 (2026-10-17, K48) the description claims no order check: it says what happens if the editor shows "We are confirming your Etsy order" (Publish opens once the order is confirmed, usually within 24 hours), which is true in every mode. Read the mode before publishing (§11). |
 | Questions & answers, RSVP questions | Tested in a local production build (Chromium, phone size). **Not tried on the live site.** |
@@ -17,13 +17,13 @@ the platform does today. Product language: English (US spelling). This design ha
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** All phone checks so far are Chromium mobile emulation. |
 | Description claims (G154, 2026-10-17) | Every sentence of §2 describes a feature that exists in the platform and passed G090's local production-build checks (guest site 21/21; buyer flow 6/6 with RSVP, Excel and CSV, map card, sound button, Downloads and a Spanish website). No VERIFY note is left in §2; the live-site and real-device tests that are still open are in §11 (and in `etsy_upload.json` `open_checks`). The demo line "(sample names and photos)" depends on G090 P1-02 (sample photos in the demos). |
 | Edit link by email | **Off.** Sending is built (G147) but stays off until the owner sets up SMTP; the listing and the START HERE guide promise no email. Since G146 (K46) the buyer opens the editor on any device with the Etsy order number + email (`/my`, "Create your website"); the private edit link is a shortcut. Listing and guide say so since G148 (2026-10-17). |
-| Web address | `davetiye-platform-five.vercel.app` is temporary: choose the final domain before the first sale (or keep a permanent redirect from this one). |
+| Web address | `xn--bkestudo-zkb.com` (bkestudıo.com: bought and connected by the user, served by Vercel). G189 (2026-10-18) moved the start link, demo, START HERE guide and QR codes here from the earlier temporary Vercel address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
 | Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com**. |
 | Response time, refund policy | Decided on 2026-10-15 (K37, K36; docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. The description says both (GOOD TO KNOW, QUESTIONS?); the START HERE guide gives the 24 hours. |
 | Price, quantity | Decided on 2026-10-16: 1,460 TL; no stock limit (999, Etsy's maximum). Renewal is still open (§4). Hosting extension (on request via Etsy before the "Online until" date, no price promised): K48, 2026-10-17. |
 | Etsy shop | Open as **STUDIOBKE** (docs/20 §7). The listing text does not link the shop. |
 | Design fonts and other languages | Checked on 2026-10-16 (G122) from the Google Fonts CSS of the fonts this theme loads: Allura (latin-ext, no Cyrillic; its fallback is a system script font) and Playfair Display (latin-ext and Cyrillic). The language line in GOOD TO KNOW and in the START HERE guide is written from this. |
-| START HERE guide | `package/customer/START_HERE.md` + `.pdf` rebuilt in G148 (2026-10-17, `python3 tools/build_customer_guides.py`, from docs/19 Ek A; G146 access with the Etsy order number + email): 9 pages, about 56 KB. Its links are the start link (in the text and on the QR), the `/my` page ("Continue on another device") and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://davetiye-platform-five.vercel.app/start?theme=mediterranean-lemon` (jsQR on every rendered page; module by module against a fresh encoding). It describes the editor in the repository, which is newer than production (see above). G154 (2026-10-17) rebuilt it from Ek A again (K48 order-check, extension and deletion texts, a Languages section, Share → Downloads, the start address in plain text under the QR): 10 pages, about 59 KB; `--check` with jsQR passes. |
+| START HERE guide | `package/customer/START_HERE.md` + `.pdf` rebuilt in G148 (2026-10-17, `python3 tools/build_customer_guides.py`, from docs/19 Ek A; G146 access with the Etsy order number + email): 9 pages, about 56 KB. Its links are the start link (in the text and on the QR), the `/my` page ("Continue on another device") and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://xn--bkestudo-zkb.com/start?theme=mediterranean-lemon` (jsQR on every rendered page; module by module against a fresh encoding). It describes the editor in the repository, which is newer than production (see above). G154 (2026-10-17) rebuilt it from Ek A again (K48 order-check, extension and deletion texts, a Languages section, Share → Downloads, the start address in plain text under the QR): 10 pages, about 59 KB; `--check` with jsQR passes. |
 | Listing image 9 | `09_devices.png` built on 2026-10-17 (G148, K47): "Start on your phone, continue on any device", real screens of a local production build with G146 (`/my`, Share → "Use on another device"). G146 is live only after the next deploy: publish image 9 with it. |
 
 VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence. `python3 tools/listing_kit.py check --theme mediterranean-lemon --prepublish` fails while any VERIFY or placeholder is left.
@@ -48,7 +48,7 @@ A white envelope with a scalloped cobalt-blue edge and a blue-and-white tile lin
 
 TRY THE LIVE DEMO
 See the envelope open on your own phone before you buy (sample names and photos):
-https://davetiye-platform-five.vercel.app/start/demo/mediterranean-lemon
+https://xn--bkestudo-zkb.com/start/demo/mediterranean-lemon
 Copy the link into your phone's browser.
 
 WHAT YOU GET
@@ -227,16 +227,16 @@ No. It is a digital product. Your editor makes a printable invitation in your de
 ## 8. Etsy's automatic messages (shop-wide, the same for every design)
 
 Etsy's "Message to Buyers for Digital Items" applies to every digital listing, so it cannot carry this design's own start link: it links
-the design chooser `https://davetiye-platform-five.vercel.app/start` (docs/19 §4.4). The START HERE PDF carries this design's own link.
+the design chooser `https://xn--bkestudo-zkb.com/start` (docs/19 §4.4). The START HERE PDF carries this design's own link.
 
 Message to Buyers for Digital Items:
 
 ```text
 Thank you for your order! Your download is your START HERE guide (PDF). Open it and tap the start link inside.
 
-Can't open the PDF? Start here instead and choose the design you bought: https://davetiye-platform-five.vercel.app/start
+Can't open the PDF? Start here instead and choose the design you bought: https://xn--bkestudo-zkb.com/start
 
-You will enter your Etsy order number, your email and your first names. To continue later on any phone or computer, open https://davetiye-platform-five.vercel.app/my and enter the same order number and email. No account or password.
+You will enter your Etsy order number, your email and your first names. To continue later on any phone or computer, open https://xn--bkestudo-zkb.com/my and enter the same order number and email. No account or password.
 
 Questions? Message us here on Etsy with your order number.
 ```
@@ -244,7 +244,7 @@ Questions? Message us here on Etsy with your order number.
 Message to Buyers (receipt):
 
 ```text
-Thank you! Start your wedding website from the START HERE PDF in your download, or at https://davetiye-platform-five.vercel.app/start (choose the design you bought). To continue later on any device, open https://davetiye-platform-five.vercel.app/my with the same order number and email. Questions? Message us on Etsy.
+Thank you! Start your wedding website from the START HERE PDF in your download, or at https://xn--bkestudo-zkb.com/start (choose the design you bought). To continue later on any device, open https://xn--bkestudo-zkb.com/my with the same order number and email. Questions? Message us on Etsy.
 ```
 
 ## 9. After the sale

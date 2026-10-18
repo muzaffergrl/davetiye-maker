@@ -56,7 +56,8 @@ python3 tools/tests/test_listing_kit.py                  # araç testleri
   foto yok; temiz konum yoksa ekran menünün üst kenarından kısa kesilir (resim yanıltmaz, yalnız kısalır).
 - Metinler (`START_HERE.md`, `listing.md`) elle yazılır; araç yalnız dosya üretir. `listing.md` içindeki
   `<!-- listing-kit:media -->` satırının yerine PDF'te görsel küçükleri ve video bilgisi gelir.
-- Başlat linki tabanı `LISTING_BASE_URL` (varsayılan `https://davetiye-platform-five.vercel.app`). **Alan adı ilk satıştan önce
+- Başlat linki tabanı `LISTING_BASE_URL` / `GUIDE_BASE_URL` (varsayılan `https://xn--bkestudo-zkb.com`, G189 2026-10-18: kullanıcının aldığı
+  bkestudıo.com; START HERE, QR'lar ve ilan metinleri bununla yeniden üretildi). Önceki not: **alan adı ilk satıştan önce
   kesinleşmeli** (ya da bu adresten kalıcı yönlendirme taahhüt edilmeli; K26: alan adı şimdilik alınmıyor, yani ilk satışlar bu
   adresle olursa ileride alan adına geçerken bu adresten kalıcı yönlendirme şart): satılmış START HERE PDF'leri ve özellikle alıcıların
   kendi davetiyelerine bastırdığı QR'lar (kılavuz adım 6) `davetiye-platform-five.vercel.app/<adres>`'e bağlı; satıştan sonra alan
@@ -80,8 +81,8 @@ python3 tools/tests/test_listing_kit.py                  # araç testleri
 - [ ] `images/` ≥ 7, `video.mp4`, `listing_<tema>.pdf`; `listing_kit.py check` sorunsuz
 - [ ] Alıcı yolculuğu gerçek bir iPhone (Safari) ve Android (Chrome) telefonda denendi
 - [ ] Etsy kuralları ilan düzenleyicisinde yeniden kontrol edildi (aşağıda §F)
-- [ ] **Son alan adı ilk satıştan önce seçildi** (ya da `davetiye-platform-five.vercel.app`'ten kalıcı yönlendirme taahhüt edildi);
-  START HERE PDF'leri, QR'lar ve görseller onunla yeniden üretildi (§C)
+- [x] **Son alan adı ilk satıştan önce seçildi** (bkestudıo.com, G189 2026-10-18); START HERE PDF'leri ve QR'lar onunla yeniden
+  üretildi (§C). Açık: başlatma linki bu adreste telefondan 200 dönüyor mu (canlı doğrulama), eski Vercel adresinden 308 yönlendirme
 - [ ] **Ticari barındırma planı kararlaştırıldı** (Vercel Hobby ticari değil, docs/10 §3)
 - [ ] **Etsy politika uygunluğu** kontrol edildi: barındırılan bir siteye erişimi, süreli barındırmayla ([HOSTING PERIOD]) ve PDF
   içindeki linkle satmak (docs/13 §1)
