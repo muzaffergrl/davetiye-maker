@@ -25,7 +25,7 @@ Mevcut 22 özgün image_gen görseli yeniden kullanıldı; yeni dekor çizilmedi
 ## Yerel doğrulama
 
 - 22 mevcut beş sayfa/boş fotoğraf/teşekkür modu testi ve 13 mevcut iç tasarım regresyon testi başarılı.
-- 16 yeni açılış testi: özgün mekanizmalar, Blush kartının çıkarılması, düzenlenebilir isim/tarih/foto, boş fotoğraf ve teşekkür modu, 88 dosyanın korunması ve kâğıt üzerinde en az 4.5:1 metin kontrastı. Başarılı.
+- 17 yeni açılış testi: özgün mekanizmalar, Blush kartının çıkarılması, düzenlenebilir isim/tarih/foto, boş fotoğraf ve teşekkür modu, 88 dosyanın korunması ve kâğıt üzerinde en az 4.5:1 metin kontrastı. Başarılı.
 - 320×740, 390×844, 1280×900 ve 844×390 boyutlarında 44 gerçek açılış/ana sayfaya geçiş kontrolü: taşma, ekran dışında kart, kırık görsel veya JS hatası yok. Sky Lantern'ın alt süs güvenli alanı ayrıca düzeltilip dört boyutta tekrar doğrulandı.
 - 11 azaltılmış hareket ve 11 Skip kontrolü başarılı. Uzun isimler, tekrar oynatma, geri dönüş/Enter, açılış sırasında Skip, çift tıklama ve hareket tercihini açılış sırasında değiştirme ayrıca tarayıcıda kontrol edilir; çalışma sonuçları work/unique-openings/extra-results.json içindedir.
 - 11 açılış videosu gerçek Chrome screencast kareleri ve gerçek zaman damgalarıyla H.264 MP4 olarak yeniden üretildi; süre ve dosya boyutları katalog manifestinde güncellendi. İç sayfa ekran görüntüleri korunuyor.
@@ -34,3 +34,6 @@ Testler Windows Chrome emülasyonudur; gerçek iPhone/Android cihazı, gerçek s
 
 
 İlk CI/derleme kontrolünde bulunan katalog opening-object başlangıç cümlesi ve eski/yeni oturum anahtarı sözleşmesi düzeltildi. İki regresyon testi eklendi: katalog/editleme paneli openingObject uyumu ve eski oturumun yeni kapakla bir kez kapalı başlaması, yeni oturumun açılmış kalması ve replay davranışı. Yeni işaret eski invite:opened anahtarına ek olarak tutulur; geriye uyumluluk korunur.
+
+Canlı tema JS yanıtının public, max-age=3600 önbellek süresi nedeniyle kapak yeni opening-site.js adıyla paylaşılan davranışı yükler. Böylece önceki site.js önbelleği Blush denetleyicisini çalıştıramaz; diğer dört sayfanın kodu ve davranışı değişmez. Dosya ayrımı için regresyon testi eklendi. Video süreleri ayrıca gerçek, kodlanmış MP4 süreleriyle eşitlendi.
+
