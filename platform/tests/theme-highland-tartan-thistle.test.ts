@@ -148,7 +148,7 @@ test('session keys per site, view transition, scenes, placeholders, countdown, K
   for (const p of ['home', 'story'] as const) assert.ok(cheerio.load(html[p])('.locket[data-step="photo"] > .photo-slot.locket-face + .locket-rim + .lid').length > 0, p);
   assert.equal(cheerio.load(html.story)('.locket[data-step="photo"] > .lid').length, 3);
   assert.equal(cheerio.load(html.details)('.photo-slot.mist-reveal[data-slot="venue"]').length, 1);
-  assert.match(css, /\.js \.locket\.in>\.lid\{transform:rotateY\(-178deg\)/);
+  assert.match(css, /\.js \.locket\.in>\.lid\{transform:rotateY\(-90deg\)/);
   assert.match(css, /prefers-reduced-motion:reduce[\s\S]*\.js \.locket>\.lid\{display:none!important\}/);
   assert.match(css, /prefers-reduced-motion:reduce[\s\S]*\.js \.mist-reveal\{-webkit-mask:none!important;mask:none!important\}/);
   assert.match(js, /setProperty\('--mist'/);
