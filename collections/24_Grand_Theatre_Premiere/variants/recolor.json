@@ -1,0 +1,167 @@
+{
+  "theme": "grand-theatre-premiere",
+  "note": "G177 recolour manifest (tools/recolor_parts.py, docs/25). Every image part of this theme is INTERIM (stand-ins toned from other designs' GPT pixels) until its PAKET 5 GPT part arrives, so the palettes are built CSS-only (build --css-only). Family anchors are the theme's CSS colours; before the image build re-measure each anchor as the median colour of the real GPT parts and review the contact sheets (docs/25 §2.3–2.4).",
+  "image_build": "css-only (interim parts; re-run after GPT)",
+  "swatch": [
+    "#0E3D40",
+    "#C9A45C",
+    "#F3EBD8"
+  ],
+  "families": {
+    "velvet": {
+      "anchor": "#16595B",
+      "sigma": 25,
+      "cmin": 0.016,
+      "cfull": 0.03,
+      "note": "peacock velvet, the pit"
+    },
+    "gold": {
+      "anchor": "#C9A45C",
+      "sigma": 12,
+      "cmin": 0.05,
+      "cfull": 0.07,
+      "note": "antique gold"
+    }
+  },
+  "groups": {
+    "art": [
+      "velvet",
+      "gold"
+    ]
+  },
+  "parts": {
+    "card_paper": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "card_plain": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "curtain_gl": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "curtain_gr": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "curtain_l": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "curtain_r": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "favicon": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "paper": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "ph_land": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "ph_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "room": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "stub_paper": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "th_arch": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "th_back": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "velvet": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    }
+  },
+  "print": {},
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "velvet",
+      "gold"
+    ],
+    "roles": {},
+    "keep": [
+      "--ivory",
+      "--ink",
+      "--ink-soft",
+      "--c-8e2414"
+    ],
+    "contrast": [
+      [
+        "--ivory",
+        "--velvet",
+        4.5
+      ],
+      [
+        "--ivory",
+        "--peacock",
+        4.5
+      ],
+      [
+        "--ivory",
+        "--pit",
+        4.5
+      ],
+      [
+        "--gold",
+        "--pit",
+        4.5
+      ],
+      [
+        "--gold",
+        "--velvet",
+        3
+      ],
+      [
+        "--gold-light",
+        "--velvet",
+        4.5
+      ],
+      [
+        "--gold-ink",
+        "--ivory",
+        4.5
+      ]
+    ]
+  }
+}

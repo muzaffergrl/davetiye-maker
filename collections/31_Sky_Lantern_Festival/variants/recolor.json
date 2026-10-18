@@ -1,0 +1,161 @@
+{
+  "theme": "sky-lantern-festival",
+  "note": "G177 recolour manifest (tools/recolor_parts.py, docs/25). Every image part of this theme is INTERIM (stand-ins toned from other designs' GPT pixels) until its PAKET 5 GPT part arrives, so the palettes are built CSS-only (build --css-only). Family anchors are the theme's CSS colours; before the image build re-measure each anchor as the median colour of the real GPT parts and review the contact sheets (docs/25 §2.3–2.4).",
+  "image_build": "css-only (interim parts; re-run after GPT)",
+  "swatch": [
+    "#2B1F45",
+    "#F2A65A",
+    "#E7B4A6"
+  ],
+  "families": {
+    "dusk": {
+      "anchor": "#2B1F45",
+      "sigma": 26,
+      "note": "dusk violet sky, violet ink"
+    },
+    "amber": {
+      "anchor": "#F2A65A",
+      "sigma": 14,
+      "cmin": 0.09,
+      "cfull": 0.11,
+      "note": "lantern amber and glow (kept warm)"
+    },
+    "rose": {
+      "anchor": "#E7B4A6",
+      "sigma": 12,
+      "cmin": 0.05,
+      "cfull": 0.065,
+      "note": "dusky rose"
+    }
+  },
+  "groups": {
+    "art": [
+      "dusk",
+      "amber",
+      "rose"
+    ]
+  },
+  "parts": {
+    "bg_wall": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "card_paper": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "favicon": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "lantern_dark": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "lantern_far": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "lantern_lit": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "ph_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "ph_story": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "ph_wide": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "sky": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "sky_band": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    }
+  },
+  "print": {},
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "dusk",
+      "amber",
+      "rose"
+    ],
+    "roles": {},
+    "keep": [
+      "--ivory",
+      "--c-ffc2b8"
+    ],
+    "contrast": [
+      [
+        "--ivory",
+        "--night",
+        4.5
+      ],
+      [
+        "--ivory",
+        "--deep",
+        4.5
+      ],
+      [
+        "--ivory",
+        "--violet",
+        4.5
+      ],
+      [
+        "--muted",
+        "--night",
+        4.5
+      ],
+      [
+        "--muted",
+        "--violet",
+        3
+      ],
+      [
+        "--amber",
+        "--deep",
+        3
+      ],
+      [
+        "--glow",
+        "--night",
+        4.5
+      ],
+      [
+        "--ink",
+        "--ivory",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--ivory",
+        5.8
+      ]
+    ]
+  }
+}

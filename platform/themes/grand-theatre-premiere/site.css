@@ -10,7 +10,8 @@
 /* stage:end */
 :root{--pit:#061416;--velvet:#0e3d40;--peacock:#16595b;--gold:#c9a45c;--gold-light:#e3c78b;--gold-ink:#6e5119;
 --ivory:#f3ebd8;--ink:#1e2626;--ink-soft:#4a4238;--line:#c9a45c55;--line-ink:#6e511966;
---display:'Abril Fatface',Georgia,serif;--serif:'Playfair Display',Georgia,serif;color-scheme:dark;--nav-h:62px}
+--display:'Abril Fatface',Georgia,serif;--serif:'Playfair Display',Georgia,serif;color-scheme:dark;--nav-h:62px;
+}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}
 body{margin:0;background:var(--pit) url(img/velvet-640.webp) 0 0/480px;color:var(--ivory);font:400 18px/1.65 var(--serif);padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom))}
@@ -33,7 +34,7 @@ button:disabled{opacity:.5;cursor:default}
 .small{font:400 14px/1.7 var(--serif);font-style:italic}
 .btn{display:inline-flex;justify-content:center;align-items:center;gap:12px;min-height:48px;padding:12px 26px;border:1px solid var(--gold);background:var(--gold);color:#1a1405;font:600 12px/1.4 var(--serif);letter-spacing:.18em;text-transform:uppercase;border-radius:100px;text-align:center}
 .btn:hover{background:var(--gold-light)}
-.btn-ghost{background:#06141699;color:var(--ivory);border-color:#c9a45c99}
+.btn-ghost{background:rgb(var(--c-061416)/.6);color:var(--ivory);border-color:#c9a45c99}
 .btn-ghost:hover{background:#c9a45c26}
 .btn-sm{min-height:44px;padding:10px 18px}
 .textlink{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;font:italic 400 16px/1.5 var(--serif);border:0;background:transparent;color:var(--gold-light);padding:8px 2px;text-decoration:underline;text-decoration-color:#c9a45c88;text-underline-offset:6px}
@@ -47,7 +48,7 @@ button:disabled{opacity:.5;cursor:default}
 .names.long-names>span{white-space:normal;overflow-wrap:anywhere}
 
 /* photo slots: placeholders are the toned velvet; "Your photo here" only in a preview */
-.photo-slot{position:relative;display:block;overflow:hidden;background:#0b2b2d}
+.photo-slot{position:relative;display:block;overflow:hidden;background:rgb(var(--c-0b2b2d))}
 .photo-slot>img{width:100%;height:100%;object-fit:cover;object-position:50% 38%}
 .ph-mark{display:none;position:absolute;inset:0;align-items:center;justify-content:center;pointer-events:none;font:italic 400 12px/1.4 var(--serif);color:var(--ivory);text-align:center}
 html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{display:flex}
@@ -61,7 +62,7 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .programme-sheet :focus-visible{outline-color:var(--gold-ink)}
 
 /* bottom nav */
-.site-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#061416f2;border-top:1px solid var(--line);padding:6px 8px max(6px,env(safe-area-inset-bottom));view-transition-name:site-nav}
+.site-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgb(var(--c-061416)/.949);border-top:1px solid var(--line);padding:6px 8px max(6px,env(safe-area-inset-bottom));view-transition-name:site-nav}
 .site-nav ul{list-style:none;padding:0;margin:0 auto;max-width:520px;display:flex;justify-content:center}
 .site-nav li{flex:1 1 0;min-width:0}
 .site-nav a{display:flex;align-items:center;justify-content:center;min-height:48px;padding:8px 4px;font:600 11px/1.2 var(--serif);letter-spacing:.12em;text-transform:uppercase;color:#d9cfb8;text-align:center;overflow-wrap:anywhere}
@@ -71,7 +72,7 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .page-opening{padding-bottom:0;background:var(--pit) url(img/room-640.webp) 50% 50%/cover fixed}
 /* house lights: the hall around the stage dims when the curtain goes up (soft light, docs/11 §5.7) */
 .page-opening::before{content:'';position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 60% at 50% 62%,#0000 30%,#000c 100%);opacity:.35;z-index:0}
-.skip{position:fixed;top:calc(6px + env(safe-area-inset-top));right:10px;z-index:20;padding-inline:14px;background:#061416b3;border-radius:100px;text-decoration:none}
+.skip{position:fixed;top:calc(6px + env(safe-area-inset-top));right:10px;z-index:20;padding-inline:14px;background:rgb(var(--c-061416)/.702);border-radius:100px;text-decoration:none}
 .opening{position:relative;min-height:100svh;max-width:760px;margin:auto;padding:50px 20px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:clip}
 .opening-heading{position:relative;z-index:3;max-width:100%}
 .opening-heading>.eyebrow:first-child{margin-bottom:12px}
@@ -161,7 +162,7 @@ to{z-index:8;transform:translateY(-8%) scale(1.14);filter:brightness(1) drop-sha
 .stage-hero{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;text-align:center;padding:58px 20px calc(var(--nav-h) + 22px);isolation:isolate;overflow:clip;background:var(--pit)}
 .stage-set{position:absolute;inset:0;z-index:-2}
 .stage-set>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
-.stage-hero::after{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 60% 46% at 50% 52%,#fff1d02e,#fff1d000 70%),linear-gradient(#06141680,#06141600 30%,#06141600 70%,#061416b3)}
+.stage-hero::after{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 60% 46% at 50% 52%,#fff1d02e,#fff1d000 70%),linear-gradient(rgb(var(--c-061416)/.502),rgb(var(--c-061416)/0) 30%,rgb(var(--c-061416)/0) 70%,rgb(var(--c-061416)/.702))}
 /* home's programme card: the GPT card_plain keeps its own proportion (--hero-ar: min-height = width / ratio, not
    aspect-ratio, so long names still make it taller) and is never cropped (fill); the stand-in paper is cut to the text
    (--hero-ar auto → both calc() are invalid → no max-width / min-height) */

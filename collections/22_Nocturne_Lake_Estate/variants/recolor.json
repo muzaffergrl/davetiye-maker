@@ -1,0 +1,158 @@
+{
+  "theme": "nocturne-lake-estate",
+  "note": "G177 recolour manifest (tools/recolor_parts.py, docs/25). Every image part of this theme is INTERIM (stand-ins toned from other designs' GPT pixels) until its PAKET 5 GPT part arrives, so the palettes are built CSS-only (build --css-only). Family anchors are the theme's CSS colours; before the image build re-measure each anchor as the median colour of the real GPT parts and review the contact sheets (docs/25 §2.3–2.4).",
+  "image_build": "css-only (interim parts; re-run after GPT)",
+  "swatch": [
+    "#11120F",
+    "#E0C7A4",
+    "#C7A978"
+  ],
+  "families": {
+    "night": {
+      "anchor": "#181912",
+      "sigma": 180,
+      "cmin": 0.0,
+      "cfull": 0.004,
+      "lmax": 0.42,
+      "note": "near-black paper and night grounds (no hue: every hue, dark only)"
+    },
+    "gold": {
+      "anchor": "#C7A978",
+      "sigma": 14,
+      "cmin": 0.045,
+      "cfull": 0.06,
+      "note": "champagne gold (ivory paper below cmin stays)"
+    }
+  },
+  "groups": {
+    "art": [
+      "night",
+      "gold"
+    ]
+  },
+  "parts": {
+    "card_paper": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "couple": {
+      "recolor": "keep",
+      "why": "photo: never recoloured"
+    },
+    "env_back": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "env_flap": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "env_inner": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "env_pocket": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "env_seal": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "favicon": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "lake_hero": {
+      "recolor": "keep",
+      "why": "photo: never recoloured"
+    },
+    "lake_view": {
+      "recolor": "keep",
+      "why": "photo: never recoloured"
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "ph_land": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "ph_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "ph_wide": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "terrace": {
+      "recolor": "keep",
+      "why": "photo: never recoloured"
+    }
+  },
+  "print": {},
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "night",
+      "gold"
+    ],
+    "roles": {
+      "night": "deep"
+    },
+    "keep": [
+      "--paper",
+      "--c-f0b7aa"
+    ],
+    "contrast": [
+      [
+        "--paper",
+        "--black",
+        4.5
+      ],
+      [
+        "--paper",
+        "--night",
+        4.5
+      ],
+      [
+        "--muted",
+        "--black",
+        4.5
+      ],
+      [
+        "--muted",
+        "--night",
+        4.5
+      ],
+      [
+        "--gold",
+        "--black",
+        4.5
+      ],
+      [
+        "--gold-ink",
+        "--black",
+        4.5
+      ],
+      [
+        "--gold-ink",
+        "--night",
+        4.5
+      ]
+    ]
+  }
+}

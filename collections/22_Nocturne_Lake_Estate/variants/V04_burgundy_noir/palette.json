@@ -1,0 +1,24 @@
+{
+  "id": "V04_burgundy_noir",
+  "slug": "burgundy-noir",
+  "name": "Burgundy Noir & Gold",
+  "ink": "#F1E4CC",
+  "deep": "#2A0F15",
+  "primary": "#2A0F15",
+  "mist_top": "#AF9DA0",
+  "mist_bottom": "#907F82",
+  "gold": "#C7A978",
+  "gold_light": "#E0C7A4",
+  "ivory": "#F1E4CC",
+  "leaf": "#C6BDA9",
+  "swatch": [
+    "#2A0F15",
+    "#E0C7A4",
+    "#F1E4CC"
+  ],
+  "status": "coming",
+  "families": {
+    "night": "deep",
+    "gold": null
+  }
+}

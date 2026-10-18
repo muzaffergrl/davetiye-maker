@@ -225,5 +225,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Riad Lantern Nights)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=riad-lantern-nights"
+      },
+      {
+        "name": "Midnight Indigo & Saffron",
+        "variant": "midnight-indigo",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=riad-lantern-nights&variant=midnight-indigo"
+      },
+      {
+        "name": "Emerald Garden & Brass",
+        "variant": "emerald-garden",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=riad-lantern-nights&variant=emerald-garden"
+      },
+      {
+        "name": "Rose Clay & Brass",
+        "variant": "rose-clay",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=riad-lantern-nights&variant=rose-clay"
+      },
+      {
+        "name": "Aubergine & Saffron",
+        "variant": "aubergine",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=riad-lantern-nights&variant=aubergine"
+      },
+      {
+        "name": "Olive Grove & Brass",
+        "variant": "olive-grove",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=riad-lantern-nights&variant=olive-grove"
+      }
+    ],
+    "offered": [
+      "Original (Riad Lantern Nights)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

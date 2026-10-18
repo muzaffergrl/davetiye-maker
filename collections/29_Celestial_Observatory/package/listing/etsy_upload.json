@@ -208,5 +208,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Celestial Observatory)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=celestial-observatory"
+      },
+      {
+        "name": "Twilight Plum & Gold",
+        "variant": "twilight-plum",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=celestial-observatory&variant=twilight-plum"
+      },
+      {
+        "name": "Night Teal & Gold",
+        "variant": "night-teal",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=celestial-observatory&variant=night-teal"
+      },
+      {
+        "name": "Burgundy Night & Gold",
+        "variant": "burgundy-night",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=celestial-observatory&variant=burgundy-night"
+      },
+      {
+        "name": "Midnight & Silver",
+        "variant": "midnight-silver",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=celestial-observatory&variant=midnight-silver"
+      },
+      {
+        "name": "Forest Night & Brass",
+        "variant": "forest-night",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=celestial-observatory&variant=forest-night"
+      }
+    ],
+    "offered": [
+      "Original (Celestial Observatory)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

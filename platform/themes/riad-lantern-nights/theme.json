@@ -682,5 +682,62 @@
       "label": "Line above the city",
       "panel": "day"
     }
-  }
+  },
+  "swatch": [
+    "#0F2F31",
+    "#E3A54A",
+    "#F6EAD2"
+  ],
+  "variants": [
+    {
+      "id": "midnight-indigo",
+      "name": "Midnight Indigo & Saffron",
+      "swatch": [
+        "#1F2C55",
+        "#C9A35B",
+        "#F6EAD2"
+      ],
+      "status": "coming"
+    },
+    {
+      "id": "emerald-garden",
+      "name": "Emerald Garden & Brass",
+      "swatch": [
+        "#1A4A36",
+        "#C9A35B",
+        "#F6EAD2"
+      ],
+      "status": "coming"
+    },
+    {
+      "id": "rose-clay",
+      "name": "Rose Clay & Brass",
+      "swatch": [
+        "#5A2B2B",
+        "#C9A35B",
+        "#F6EAD2"
+      ],
+      "status": "coming"
+    },
+    {
+      "id": "aubergine",
+      "name": "Aubergine & Saffron",
+      "swatch": [
+        "#40243F",
+        "#C9A35B",
+        "#F6EAD2"
+      ],
+      "status": "coming"
+    },
+    {
+      "id": "olive-grove",
+      "name": "Olive Grove & Brass",
+      "swatch": [
+        "#373C22",
+        "#C9A35B",
+        "#F6EAD2"
+      ],
+      "status": "coming"
+    }
+  ]
 }

@@ -1,0 +1,24 @@
+{
+  "id": "V02_manganese_violet",
+  "slug": "manganese-violet",
+  "name": "Manganese Violet & Terracotta",
+  "ink": "#16264F",
+  "deep": "#372468",
+  "primary": "#4B3A80",
+  "mist_top": "#DFDAFF",
+  "mist_bottom": "#BFBADE",
+  "gold": "#AE583A",
+  "gold_light": "#E4A688",
+  "ivory": "#FAF8F2",
+  "leaf": "#AE583A",
+  "swatch": [
+    "#4B3A80",
+    "#AE583A",
+    "#FAF8F2"
+  ],
+  "status": "coming",
+  "families": {
+    "cobalt": "primary",
+    "terra": null
+  }
+}

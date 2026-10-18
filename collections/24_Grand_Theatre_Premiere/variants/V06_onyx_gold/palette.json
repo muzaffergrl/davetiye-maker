@@ -1,0 +1,24 @@
+{
+  "id": "V06_onyx_gold",
+  "slug": "onyx-gold",
+  "name": "Black Tie Onyx & Gold",
+  "ink": "#1E2626",
+  "deep": "#202426",
+  "primary": "#34383A",
+  "mist_top": "#C8CACB",
+  "mist_bottom": "#A8AAAB",
+  "gold": "#C9A45C",
+  "gold_light": "#E3C78B",
+  "ivory": "#F3EBD8",
+  "leaf": "#6E5119",
+  "swatch": [
+    "#34383A",
+    "#C9A45C",
+    "#F3EBD8"
+  ],
+  "status": "coming",
+  "families": {
+    "velvet": "primary",
+    "gold": null
+  }
+}

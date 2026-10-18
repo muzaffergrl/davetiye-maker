@@ -1,0 +1,25 @@
+{
+  "id": "V04_ruby_velvet",
+  "slug": "ruby-velvet",
+  "name": "Ruby Velvet & Gold",
+  "ink": "#3A1532",
+  "deep": "#420015",
+  "primary": "#5A1628",
+  "mist_top": "#DFB9BE",
+  "mist_bottom": "#BF9A9F",
+  "gold": "#E8D3B0",
+  "gold_light": "#ECD8B8",
+  "ivory": "#F8EDE0",
+  "leaf": "#C99A86",
+  "swatch": [
+    "#5A1628",
+    "#E8D3B0",
+    "#F8EDE0"
+  ],
+  "status": "coming",
+  "families": {
+    "velvet": "primary",
+    "rose": null,
+    "champagne": null
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "V03_royal_sapphire",
+  "slug": "royal-sapphire",
+  "name": "Royal Sapphire & Gold",
+  "ink": "#1E2626",
+  "deep": "#0F2E62",
+  "primary": "#24447A",
+  "mist_top": "#CBDDFA",
+  "mist_bottom": "#ABBCD9",
+  "gold": "#C9A45C",
+  "gold_light": "#E3C78B",
+  "ivory": "#F3EBD8",
+  "leaf": "#6E5119",
+  "swatch": [
+    "#24447A",
+    "#C9A45C",
+    "#F3EBD8"
+  ],
+  "status": "coming",
+  "families": {
+    "velvet": "primary",
+    "gold": null
+  }
+}

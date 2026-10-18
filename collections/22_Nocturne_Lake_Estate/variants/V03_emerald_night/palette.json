@@ -1,0 +1,24 @@
+{
+  "id": "V03_emerald_night",
+  "slug": "emerald-night",
+  "name": "Emerald Night & Gold",
+  "ink": "#F1E4CC",
+  "deep": "#10241B",
+  "primary": "#10241B",
+  "mist_top": "#A3AEA8",
+  "mist_bottom": "#858F8A",
+  "gold": "#C7A978",
+  "gold_light": "#E0C7A4",
+  "ivory": "#F1E4CC",
+  "leaf": "#C6BDA9",
+  "swatch": [
+    "#10241B",
+    "#E0C7A4",
+    "#F1E4CC"
+  ],
+  "status": "coming",
+  "families": {
+    "night": "deep",
+    "gold": null
+  }
+}

@@ -285,5 +285,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Nocturne Lake Estate)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=nocturne-lake-estate"
+      },
+      {
+        "name": "Midnight Navy & Champagne",
+        "variant": "midnight-navy",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=nocturne-lake-estate&variant=midnight-navy"
+      },
+      {
+        "name": "Emerald Night & Gold",
+        "variant": "emerald-night",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=nocturne-lake-estate&variant=emerald-night"
+      },
+      {
+        "name": "Burgundy Noir & Gold",
+        "variant": "burgundy-noir",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=nocturne-lake-estate&variant=burgundy-noir"
+      },
+      {
+        "name": "Moonlit Silver",
+        "variant": "moonlit-silver",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=nocturne-lake-estate&variant=moonlit-silver"
+      },
+      {
+        "name": "Plum Night & Rose Gold",
+        "variant": "plum-rose-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=nocturne-lake-estate&variant=plum-rose-gold"
+      }
+    ],
+    "offered": [
+      "Original (Nocturne Lake Estate)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

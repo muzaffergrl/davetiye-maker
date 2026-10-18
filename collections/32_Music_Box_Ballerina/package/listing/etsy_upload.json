@@ -290,5 +290,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Music Box Ballerina)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=music-box-ballerina"
+      },
+      {
+        "name": "Lilac & Gold",
+        "variant": "lilac-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=music-box-ballerina&variant=lilac-gold"
+      },
+      {
+        "name": "Powder Blue & Gold",
+        "variant": "powder-blue",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=music-box-ballerina&variant=powder-blue"
+      },
+      {
+        "name": "Sage Mint & Gold",
+        "variant": "sage-mint",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=music-box-ballerina&variant=sage-mint"
+      },
+      {
+        "name": "Champagne & Gold",
+        "variant": "champagne",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=music-box-ballerina&variant=champagne"
+      },
+      {
+        "name": "Peach Coral & Gold",
+        "variant": "peach-coral",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=music-box-ballerina&variant=peach-coral"
+      }
+    ],
+    "offered": [
+      "Original (Music Box Ballerina)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

@@ -225,5 +225,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Sky Lantern Festival)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=sky-lantern-festival"
+      },
+      {
+        "name": "Midnight Blue & Amber",
+        "variant": "midnight-blue",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=sky-lantern-festival&variant=midnight-blue"
+      },
+      {
+        "name": "Twilight Rose & Gold",
+        "variant": "twilight-rose",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=sky-lantern-festival&variant=twilight-rose"
+      },
+      {
+        "name": "Deep Teal Dusk & Amber",
+        "variant": "deep-teal",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=sky-lantern-festival&variant=deep-teal"
+      },
+      {
+        "name": "Evergreen Night & Amber",
+        "variant": "evergreen-night",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=sky-lantern-festival&variant=evergreen-night"
+      },
+      {
+        "name": "Moonlit Slate & Gold",
+        "variant": "moonlit-slate",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=sky-lantern-festival&variant=moonlit-slate"
+      }
+    ],
+    "offered": [
+      "Original (Sky Lantern Festival)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

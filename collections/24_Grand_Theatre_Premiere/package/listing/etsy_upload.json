@@ -196,5 +196,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Grand Theatre Premiere)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=grand-theatre-premiere"
+      },
+      {
+        "name": "Crimson Velvet & Gold",
+        "variant": "crimson-velvet",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=grand-theatre-premiere&variant=crimson-velvet"
+      },
+      {
+        "name": "Royal Sapphire & Gold",
+        "variant": "royal-sapphire",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=grand-theatre-premiere&variant=royal-sapphire"
+      },
+      {
+        "name": "Emerald Velvet & Gold",
+        "variant": "emerald-velvet",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=grand-theatre-premiere&variant=emerald-velvet"
+      },
+      {
+        "name": "Plum Velvet & Gold",
+        "variant": "plum-velvet",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=grand-theatre-premiere&variant=plum-velvet"
+      },
+      {
+        "name": "Black Tie Onyx & Gold",
+        "variant": "onyx-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=grand-theatre-premiere&variant=onyx-gold"
+      }
+    ],
+    "offered": [
+      "Original (Grand Theatre Premiere)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

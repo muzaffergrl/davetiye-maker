@@ -222,5 +222,59 @@
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Orient Express Voyage)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=orient-express-voyage"
+      },
+      {
+        "name": "Midnight Blue & Brass",
+        "variant": "midnight-blue",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=orient-express-voyage&variant=midnight-blue"
+      },
+      {
+        "name": "Burgundy Carriage & Brass",
+        "variant": "burgundy-carriage",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=orient-express-voyage&variant=burgundy-carriage"
+      },
+      {
+        "name": "Mahogany & Brass",
+        "variant": "mahogany",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=orient-express-voyage&variant=mahogany"
+      },
+      {
+        "name": "Pullman Teal & Brass",
+        "variant": "pullman-teal",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=orient-express-voyage&variant=pullman-teal"
+      },
+      {
+        "name": "Ebony & Gold",
+        "variant": "ebony-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=orient-express-voyage&variant=ebony-gold"
+      }
+    ],
+    "offered": [
+      "Original (Orient Express Voyage)"
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }
