@@ -6,70 +6,17 @@
 // the sample (docs/16 §5.4). Screen readers hear "sample text" with the label.
 
 import { ArrowDown, ArrowUp, Trash2 } from 'lucide-react';
-import { createContext, useContext, useEffect, useId, useState, type ReactNode } from 'react';
+import { useEffect, useId, useState, type ReactNode } from 'react';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import type { ValidationIssue } from '../../lib/content/validate.ts';
-import { formatDateLong, formatTime, isValidTimeZone } from '../../lib/content/format.ts';
-import { fieldId, type PanelPhotoSlot, type ThemeFieldUse } from '../../lib/panel/model.ts';
-import type { RightsView } from '../../lib/panel/rights.ts';
+import { formatDateLong, formatTime } from '../../lib/content/format.ts';
+import { fieldId } from '../../lib/panel/model.ts';
 import { cx, OverflowMenu, useSnackbar } from './ui.tsx';
-import type { Change } from './usePanel.ts';
 import styles from './panel.module.css';
 import { msg, t, tn } from '../../lib/i18n/client.ts';
+import { usePanelContext } from './context.tsx';
 
-export interface PanelContextValue {
-  content: ContentRecord;
-  edit: (change: Change) => void;
-  /** Issues whose path is exactly `path`. */
-  issuesAt: (path: string) => ValidationIssue[];
-  /** Saving stopped (conflict / invalid link) or the site is archived: inputs are read only. */
-  locked: boolean;
-  /** True while the value at `path` is still the design's sample text (lib/panel/model.ts sampleNotes). */
-  isSample: (path: string) => boolean;
-  /** Short-lived panel preview token, for the buyer's own photo views (/media/… needs it until published). */
-  previewToken: string;
-  /** Fields the theme shows (others are hidden in the panel). */
-  fields: ThemeFieldUse;
-  rights: RightsView;
-  online: boolean;
-  /** Opens the "Change names or date" sheet (after the first publish). */
-  openIdentity: (focus: 'names' | 'date') => void;
-  photoSlots: PanelPhotoSlot[];
-  uploadPhoto: (slot: PanelPhotoSlot, blob: Blob) => Promise<{ ok: boolean; message?: string }>;
-  removePhoto: (slot: PanelPhotoSlot) => void;
-  /** G126: upload the couple's own story music (content.audio is set when it is stored). */
-  uploadMusic?: (file: File, onProgress?: (share: number) => void) => Promise<{ ok: boolean; message?: string }>;
-  /** G126: the design's id (its default music track, lib/audio/catalog.ts). */
-  themeId?: string;
-  /** G121: the last jump to a field (Home → Settings): a folded part holding that field opens for it (a new object each jump). */
-  jump?: { path: string } | null;
-  /** G121: what guests tap first in this design ("envelope", "book" …; PanelTheme.opening), for the panel's sentences. */
-  opening?: string | null;
-  /** G127: reads a short map share link on the server (lib/panel/map-link.ts); absent = the address is used. */
-  resolveMapLink?: (url: string) => Promise<{ ok: boolean; body: { lat?: number | null; lng?: number | null; message?: string } }>;
-}
-
-export const PanelContext = createContext<PanelContextValue | null>(null);
-
-/** This phone's time zone (read after mount, so the server and the first browser render match). Null when unknown. */
-export function useDeviceZone(): string | null {
-  const [zone, setZone] = useState<string | null>(null);
-  useEffect(() => {
-    try {
-      const z = Intl.DateTimeFormat().resolvedOptions().timeZone || null;
-      setZone(z && isValidTimeZone(z) ? z : null);
-    } catch {
-      /* unknown */
-    }
-  }, []);
-  return zone;
-}
-
-export function usePanelContext(): PanelContextValue {
-  const ctx = useContext(PanelContext);
-  if (!ctx) throw new Error('PanelContext missing');
-  return ctx;
-}
+export { PanelContext, useDeviceZone, usePanelContext, type PanelContextValue } from './context.tsx';
 
 export function IssueList({ issues, id }: { issues: ValidationIssue[]; id?: string }) {
   if (!issues.length) return null;

@@ -23,7 +23,6 @@ import {
   BookOpen,
   CalendarDays,
   ChevronRight,
-  CircleCheckBig,
   Eye,
   House,
   Image as ImageIcon,
@@ -41,7 +40,7 @@ import { rememberEditor, takeOpenedExisting } from '../../lib/panel/remember.ts'
 import { msg, setUiLocale, t, tn } from '../../lib/i18n/client.ts';
 import type { Lang } from '../../lib/i18n/langs.ts';
 import type { Dict } from '../../lib/i18n/translate.ts';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import type { ValidationIssue } from '../../lib/content/validate.ts';
 import { formatDate, formatDateLong, formatTime } from '../../lib/content/format.ts';
@@ -66,25 +65,18 @@ import {
 import { classifyIdentityChange, identityOf, sameIdentity, type Identity } from '../../lib/panel/rights.ts';
 import { copyPanelPage, type PanelCopyEntry } from '../../lib/theme/copy.ts';
 import { BrandLogo } from './Brand.tsx';
-import { CopyFields } from './CopyFields.tsx';
 import { PANEL_FONTS } from './fonts.ts';
-import { IdentitySheet } from './IdentitySheet.tsx';
-import { PanelContext, SampleLine, useDeviceZone, type PanelContextValue } from './fields.tsx';
-import { BLOCK_TITLES, changedCopyPages, changedPages, changedSections, COPY_TITLE, PAGE_IDS, PAGE_SECTIONS, PAGE_TITLES, pageOf, parseEditTarget, previewPageFor, readiness, SETUP_STEP_COUNT, setupStepOf, type PageId } from './pages.ts';
-import { PhotoSlots } from './PhotosSection.tsx';
-import { SectionJumps } from './SectionJumps.tsx';
+import { PanelContext, useDeviceZone, type PanelContextValue } from './context.tsx';
+import { changedCopyPages, changedPages, changedSections, COPY_TITLE, PAGE_IDS, PAGE_SECTIONS, PAGE_TITLES, pageOf, parseEditTarget, previewPageFor, readiness, SETUP_STEP_COUNT, setupStepOf, type PageId } from './pages.ts';
 import { PreviewPane } from './PreviewPane.tsx';
-import { AfterPublish, afterPublishSteps, LiveShare } from './Published.tsx';
-import { DetailsBlocksFields, MealFields, TravelFields } from './ExtrasFields.tsx';
-import { DateFields, DetailsFields, FaqFields, NamesFields, RsvpFields, ScheduleFields, StoryFields, VenueFields } from './sections.tsx';
-import { ThankYouFields } from './ThankYou.tsx';
-import { LanguagesFields } from './Languages.tsx';
-import { PaletteFields } from './Palette.tsx';
-import { firstOpenStep, readSetup, RulesBox, SampleDateGate, Setup, writeSetup } from './Setup.tsx';
+import { RulesBox, SampleDateGate } from './publish-gate.tsx';
+import { firstOpenStep, readSetup, writeSetup } from './setup-state.ts';
 import { Sheet } from './Sheet.tsx';
 import { Badge, Banner, Button, cx, IconButton, SaveIndicator, SnackbarProvider, useSnackbar } from './ui.tsx';
 import { usePanel } from './usePanel.ts';
-import { EditListView, GuestPrintView, GuestsView, HelpSheet, HomeView, nextSteps, ShareView, UrlText, useReplies } from './views.tsx';
+import { EditListView, EditorPage, GuestPrintView, GuestsView, HelpSheet, HomeView, IdentitySheet, LiveSheetBody, loadView, markHydrated, prefetchViews, Setup, ShareView, type ChunkView } from './lazy.tsx';
+import { nextSteps } from './next-steps.ts';
+import { useReplies } from './replies.ts';
 import styles from './panel.module.css';
 import { setPanelTitle } from './title.ts';
 
@@ -129,6 +121,27 @@ function hashOf(r: Route): string {
     default:
       return `#${r.view}`;
   }
+}
+
+/** The chunk a route's view lives in (lazy.tsx). */
+function chunkOf(r: Route): ChunkView {
+  switch (r.view) {
+    case 'section':
+      return 'section';
+    case 'results':
+    case 'print':
+      return 'guests';
+    default:
+      return r.view;
+  }
+}
+
+// G181: a deep link the server did not render (#share … when `?view=` was ignored, BootShell) starts the download of its
+// view's chunk while this module is evaluated, before hydration, not after it. When the server rendered it, the chunk is
+// already preloaded and this joins that download.
+if (typeof window !== 'undefined') {
+  const deep = parseHash(window.location.hash);
+  if (deep) void loadView(chunkOf(deep));
 }
 
 function useMedia(query: string): boolean {
@@ -197,6 +210,8 @@ export default function Panel({
   shopUntil?: string | null;
   /** G146: opened with a device key (order number + email on /my or /start), not the private edit link. */
   deviceSession?: boolean;
+  /** G181: the hash of a deep link, from `?view=` (the skeleton script's one reload): the server renders that view. */
+  initialView?: string | null;
 }) {
   // G144: the interface language (chosen on the server: cookie, else Accept-Language) before any text renders
   setUiLocale(lang, dict);
@@ -213,6 +228,7 @@ function PanelApp({
   published = null,
   shopUntil = null,
   deviceSession = false,
+  initialView = null,
 }: {
   initial: PanelState;
   editKey: string;
@@ -220,6 +236,7 @@ function PanelApp({
   /** G145: opened with the shop's own time-limited link (admin), not the buyer's; until when it works. */
   shopUntil?: string | null;
   deviceSession?: boolean;
+  initialView?: string | null;
 }) {
   const panel = usePanel(initial, editKey);
   const { content, meta, saveState, validation, locked, online } = panel;
@@ -233,7 +250,13 @@ function PanelApp({
   const deviceZone = useDeviceZone();
 
   // ---------------------------------------------------------------- routing
-  const defaultRoute = (): Route => (neverPublished ? { view: 'setup', step: firstOpenStep(content, theme) } : { view: 'home' });
+  const defaultRoute = (): Route => {
+    // G181: a deep link's view, when the skeleton script asked the server for it (?view=); a setup step only before the
+    // first publish (as in the browser below)
+    const asked = initialView ? parseHash(`#${initialView}`) : null;
+    if (asked && !(asked.view === 'setup' && !neverPublished)) return asked;
+    return neverPublished ? { view: 'setup', step: firstOpenStep(content, theme) } : { view: 'home' };
+  };
   const [route, setRoute] = useState<Route>(() => defaultRoute());
   const [ready, setReady] = useState(false);
   const navCount = useRef(0);
@@ -241,6 +264,7 @@ function PanelApp({
   publishedRef.current = !neverPublished;
 
   useEffect(() => {
+    markHydrated();
     const fromHash = parseHash(window.location.hash);
     let start: Route;
     if (fromHash && !(fromHash.view === 'setup' && !neverPublished)) start = fromHash;
@@ -248,9 +272,22 @@ function PanelApp({
       const saved = readSetup(initial.slug).step;
       start = { view: 'setup', step: saved && saved >= 1 && saved <= 6 ? setupStepOf(saved) : firstOpenStep(content, theme) };
     } else start = { view: 'home' };
-    window.history.replaceState(window.history.state, '', `${window.location.pathname}${window.location.search}${hashOf(start)}`);
-    setRoute(start);
-    setReady(true);
+    // G181: `?view=` (the skeleton script's request to the server) has done its job: the address keeps only k and the hash
+    let search = window.location.search;
+    if (/[?&]view=/.test(search)) {
+      const query = new URLSearchParams(search);
+      query.delete('view');
+      search = query.toString() ? `?${query}` : '';
+    }
+    window.history.replaceState(window.history.state, '', `${window.location.pathname}${search}${hashOf(start)}`);
+    // G181: the view shows once its chunk is here (a deep link's skeleton stays up meanwhile, BootShell), so it appears
+    // in one step instead of as an empty "loading" frame.
+    let alive = true;
+    void loadView(chunkOf(start)).then(() => {
+      if (!alive) return;
+      setRoute(start);
+      setReady(true);
+    });
     const onHash = () => {
       const r = parseHash(window.location.hash);
       if (!r) return;
@@ -267,9 +304,17 @@ function PanelApp({
       setRoute(r);
     };
     window.addEventListener('hashchange', onHash);
-    return () => window.removeEventListener('hashchange', onHash);
+    return () => {
+      alive = false;
+      window.removeEventListener('hashchange', onHash);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  // G181: the skeleton of a deep link goes before the real view's first paint; then the other views load while idle.
+  useLayoutEffect(() => {
+    if (ready) for (const el of document.querySelectorAll('[data-boot]')) el.removeAttribute('data-boot');
+  }, [ready]);
+  useEffect(() => (ready ? prefetchViews() : undefined), [ready]);
 
   const go = useCallback((r: Route | string, replace = false) => {
     const hash = typeof r === 'string' ? r : hashOf(r);
@@ -299,8 +344,16 @@ function PanelApp({
     // An address that names a section inside a page (#edit/venue): that part of the page, under the bars.
     if (route.view === 'section' && route.focus) {
       const id = `section-${route.focus}-body`;
-      const timer = window.setTimeout(() => document.getElementById(id)?.scrollIntoView({ block: 'start' }), 40);
-      return () => window.clearTimeout(timer);
+      let timer = 0;
+      let alive = true;
+      // the editor page's chunk is normally here already (prefetched); else wait for it
+      void loadView('section').then(() => {
+        if (alive) timer = window.setTimeout(() => document.getElementById(id)?.scrollIntoView({ block: 'start' }), 40);
+      });
+      return () => {
+        alive = false;
+        window.clearTimeout(timer);
+      };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [route, ready]);
@@ -497,8 +550,9 @@ function PanelApp({
       jump: fieldJump,
       opening: theme.opening ?? null,
       resolveMapLink: panel.api.mapLink,
+      settled: ready,
     }),
-    [content, panel.edit, shownIssues, locked, samples, meta.previewToken, theme.fields, theme.photos, rights, online, panel.uploadPhoto, panel.removePhoto, panel.uploadMusic, theme.id, fieldJump, theme.opening, panel.api],
+    [content, panel.edit, shownIssues, locked, samples, meta.previewToken, theme.fields, theme.photos, rights, online, panel.uploadPhoto, panel.removePhoto, panel.uploadMusic, theme.id, fieldJump, theme.opening, panel.api, ready],
   );
 
   /** A jump to one of the design's texts (G068): opens "Headings & labels" on its page. */
@@ -522,11 +576,13 @@ function PanelApp({
         const page = pageOf(section);
         go({ view: 'section', page, focus: PAGE_SECTIONS[page][0] === section ? null : section });
       }
-      window.setTimeout(() => {
-        const el = document.getElementById(fieldId(path)) ?? document.querySelector<HTMLElement>(`[data-locked-identity] [data-change-identity]`);
-        el?.scrollIntoView({ block: 'center', behavior: 'smooth' });
-        (el as HTMLElement | null)?.focus({ preventScroll: true });
-      }, 120);
+      void loadView('section').then(() =>
+        window.setTimeout(() => {
+          const el = document.getElementById(fieldId(path)) ?? document.querySelector<HTMLElement>(`[data-locked-identity] [data-change-identity]`);
+          el?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+          (el as HTMLElement | null)?.focus({ preventScroll: true });
+        }, 120),
+      );
     },
     [go, theme.copy],
   );
@@ -797,16 +853,7 @@ function PanelApp({
       ) : null}
       {dialog?.kind === 'live' ? (
         <Sheet title={dialog.justPublished ? t('Your website is live') : t('Share your website')} onClose={() => setDialog(null)} testId="live">
-          {/* G100 (docs/18 §1): the link and Share first; the QR code under "More ways to share"; then optional steps. */}
-          {dialog.justPublished ? (
-            <p className={styles.liveLead}>
-              <CircleCheckBig size={22} strokeWidth={1.75} aria-hidden="true" /> {t('Guests can open your website at:')}
-            </p>
-          ) : (
-            <p>{t('Guests can open your website at:')}</p>
-          )}
-          <LiveShare url={url} fileBase={initial.slug} level={3} />
-          {dialog.justPublished ? <AfterPublish steps={afterPublishSteps(content, theme, notes.sample)} onGo={goTo} level={3} /> : null}
+          <LiveSheetBody justPublished={dialog.justPublished} url={url} fileBase={initial.slug} content={content} theme={theme} sample={notes.sample} onGo={goTo} />
         </Sheet>
       ) : null}
       {dialog?.kind === 'offline' ? (
@@ -859,11 +906,23 @@ function PanelApp({
     </>
   );
 
+  // G181: until the first view is decided on this phone (`ready`), the server's HTML also carries a skeleton of every view a
+  // deep link can open, and a tiny script for the address the server cannot see (the hash). Never rendered after that.
+  const boot = ready ? null : (
+    <BootShell
+      names={names}
+      sub={[formatDateLong(content.date, content.locale), theme.name].filter(Boolean).join(' · ')}
+      current={hashOf(route).slice(1)}
+      setupKey={neverPublished && !initialView ? `setup:${initial.slug}` : null}
+    />
+  );
+
   // ---------------------------------------------------------------- setup wizard
   if (route.view === 'setup') {
     return (
       <PanelContext.Provider value={ctx}>
-        <div className={cx(styles.app, PANEL_FONTS)} data-panel data-status={meta.status} data-panel-root>
+        <div className={cx(styles.app, PANEL_FONTS)} data-panel data-status={meta.status} data-panel-root suppressHydrationWarning>
+          {boot}
           {banners}
           <Setup
             step={route.step}
@@ -924,46 +983,9 @@ function PanelApp({
       </Button>
     );
 
-  const sectionBody = (id: SectionId) => {
-    switch (id) {
-      case 'names':
-        return <NamesFields />;
-      case 'date':
-        return <DateFields theme={theme} />;
-      case 'venue':
-        return <VenueFields />;
-      case 'schedule':
-        return <ScheduleFields />;
-      case 'story':
-        return <StoryFields />;
-      case 'details':
-        return <DetailsFields optionalBlocks={theme.optionalBlocks} />;
-      case 'blocks':
-        return <DetailsBlocksFields />;
-      case 'travel':
-        return <TravelFields showSwitch={theme.optionalBlocks.includes('travel_stay')} />;
-      case 'menu':
-        return <MealFields />;
-      case 'faq':
-        return <FaqFields />;
-      case 'rsvp':
-        return <RsvpFields onOpenGuests={() => go({ view: 'guests' })} copy={theme.copy} />;
-      case 'photos':
-        return <PhotoSlots intro />;
-      case 'thankyou':
-        return (
-          <ThankYouFields
-            slot={theme.thankYou?.photo ?? null}
-            defaultOpen={openFocus === 'thankyou'}
-            onPreview={() => openPreview('home', true)}
-          />
-        );
-    }
-  };
-
   /**
    * G068: the website page of the design text being edited (the preview opens there; a text shown only after the wedding
-   * opens the thank-you version). Wide screens follow at once; on a phone "Preview this page" opens it.
+   * opens the thank-you version). Wide screens follow at once; on a phone the page's preview button opens it.
    */
   const followCopy = (e: PanelCopyEntry) => {
     const usable = (p: string) => theme.pages.includes(p) && pageShown(theme.pageRules[p], content, { thankYou: e.after });
@@ -1011,7 +1033,9 @@ function PanelApp({
         data-view={sectionPage ? `edit/${sectionPage}` : route.view}
         data-panel-root
         onBlur={onFieldLeft}
+        suppressHydrationWarning
       >
+        {boot}
         <a href="#main" className={styles.skipLink}>
           {t('Skip to content')}
         </a>
@@ -1174,63 +1198,24 @@ function PanelApp({
               />
             ) : null}
             {sectionPage ? (
-              <div className={styles.sectionPage} data-page={sectionPage}>
-                {/* G100 (docs/18 §2): one line for the page's sample text instead of a tag on every field. */}
-                <SampleLine
-                  count={pageSample(sectionPage).length}
-                  scope={`[data-page="${sectionPage}"]`}
-                  onMissing={() => {
-                    const first = pageSample(sectionPage)[0];
-                    if (first) goTo(first.path);
-                  }}
-                />
-                <SectionJumps sections={pageSections(sectionPage)} titles={BLOCK_TITLES} />
-                {pageSections(sectionPage).map((id) => {
-                  const title = pageSections(sectionPage).length > 1 ? BLOCK_TITLES[id] : undefined;
-                  return (
-                    <section key={id} id={`section-${id}-body`} className={styles.sectionBlock} data-section={id} aria-labelledby={title ? `block-${id}` : undefined}>
-                      {title ? (
-                        <h2 id={`block-${id}`} className={styles.blockTitle}>
-                          {t(title)}
-                        </h2>
-                      ) : null}
-                      {sectionBody(id)}
-                    </section>
-                  );
-                })}
-                {/* G153: the design's colour palette (Us) */}
-                {sectionPage === 'us' && theme.variants?.length ? (
-                  <section id="section-palette-body" className={styles.sectionBlock} data-section="palette">
-                    <PaletteFields
-                      variants={theme.variants}
-                      swatch={theme.swatch ?? null}
-                      current={panel.meta.variant ?? null}
-                      onPick={panel.setVariant}
-                      locked={panel.locked}
-                      online={panel.online}
-                    />
-                  </section>
-                ) : null}
-                {/* G144: the website's languages and the couple's translations (Us) */}
-                {sectionPage === 'us' ? (
-                  <section id="section-languages-body" className={styles.sectionBlock} data-section="languages">
-                    <LanguagesFields copyLabel={(key) => theme.copy.find((e) => e.key === key)?.label ?? null} />
-                  </section>
-                ) : null}
-                {/* G068: the design's texts of this page, folded at its end (K29: no seventh "Wording" page) */}
-                {theme.copy.some((e) => e.panel === sectionPage) ? (
-                  <section id="section-copy-body" className={styles.sectionBlock} data-section="copy">
-                    <CopyFields page={sectionPage} entries={theme.copy} openRequest={copyJump} onFocusKey={followCopy} />
-                  </section>
-                ) : null}
-                {!wide ? (
-                  <div className={styles.sectionFoot}>
-                    <Button block icon={Eye} onClick={() => pagePreview(sectionPage)}>
-                      {t('Preview this page')}
-                    </Button>
-                  </div>
-                ) : null}
-              </div>
+              <EditorPage
+                page={sectionPage}
+                sections={pageSections(sectionPage)}
+                sampleCount={pageSample(sectionPage).length}
+                onSampleMissing={() => {
+                  const first = pageSample(sectionPage)[0];
+                  if (first) goTo(first.path);
+                }}
+                theme={theme}
+                panel={panel}
+                focus={openFocus}
+                wide={wide}
+                copyJump={copyJump}
+                onCopyFocus={followCopy}
+                onOpenGuests={() => go({ view: 'guests' })}
+                onPreviewThanks={() => openPreview('home', true)}
+                onPreviewPage={() => pagePreview(sectionPage)}
+              />
             ) : null}
             {route.view === 'guests' || route.view === 'results' ? (
               <GuestsView
@@ -1332,5 +1317,99 @@ function NoteGroup({ title, notes, onJump }: { title: string; notes: PublishNote
       <h3 className={styles.subTitle}>{title}</h3>
       <IssueJumps notes={notes} onJump={onJump} tone="warning" />
     </>
+  );
+}
+
+/** The views a deep link can open: [view (skeleton), tab (bottom bar)] for every address parseHash knows, besides setup. */
+function bootTargets(): Record<string, [string, string]> {
+  const out: Record<string, [string, string]> = {};
+  const hashes = ['home', 'edit', 'guests', 'guests/results', 'guests/print', 'share', ...PAGE_IDS.map((p) => `edit/${p}`), ...SECTION_IDS.map((id) => `edit/${id}`)];
+  for (const h of hashes) {
+    const r = parseHash(`#${h}`);
+    if (!r || r.view === 'setup') continue;
+    out[h] = r.view === 'section' ? [r.page, 'edit'] : [r.view, r.view === 'results' || r.view === 'print' ? 'guests' : r.view];
+  }
+  return out;
+}
+
+/**
+ * G181: deep links (#share, #edit/photos …; also a setup closed on this phone, which opens Home). The server cannot see the
+ * hash, so it renders the default view (setup or Home). The script at the end of this skeleton runs while the HTML is
+ * parsed: when the address names another view, it shows that view's skeleton (the editor's bars and the view's heading;
+ * `data-boot` on the root, panel.module.css hides the rest) and asks the server once more with `?view=<hash>`
+ * (location.replace: no extra history entry), so the view itself comes server-rendered, its chunk preloaded, instead of
+ * after hydration. With `view` already in the address (or when the server ignored it) it keeps the skeleton until the
+ * panel shows the view in the browser. Once the panel knows its first view (Panel.tsx `ready`) the skeleton is gone and
+ * `data-boot` removed. /edit has no script-src policy (next.config.ts SECRET_PAGE_HEADERS), like Next's own inline scripts.
+ */
+function BootShell({ names, sub, current, setupKey }: { names: string; sub: string; current: string; setupKey: string | null }) {
+  const targets = bootTargets();
+  const views = [...new Set(Object.values(targets).map(([v]) => v))];
+  const title = (v: string) =>
+    (PAGE_IDS as readonly string[]).includes(v)
+      ? t(PAGE_TITLES[v as PageId])
+      : v === 'edit'
+        ? t('Edit your website')
+        : v === 'print'
+          ? t('Guest list')
+          : v === 'share'
+            ? t('Share')
+            : t('Guests');
+  const json = (v: unknown) => JSON.stringify(v).replace(/</g, '\\u003c');
+  const script =
+    `(function(){try{var m=${json(targets)},c=${json(current)},d=${json(setupKey)},h=location.hash.slice(1),q=location.search;` +
+    // a setup closed on this phone opens Home (as Panel.tsx decides after hydration)
+    `if(!h&&d&&JSON.parse(localStorage.getItem(d)||'{}').dismissed)h='home';` +
+    // nothing to do when the server already rendered that view (or the same page under another address)
+    `var k=m[h];if(!k||h===c||(m[c]&&m[c][0]===k[0]))return;` +
+    `var b=document.currentScript.parentElement,v=b.querySelector('[data-boot-view="'+k[0]+'"]'),n=b.querySelector('[data-boot-nav="'+k[1]+'"]');` +
+    `if(!v)return;v.hidden=false;if(n)n.setAttribute('aria-current','page');b.parentElement.setAttribute('data-boot',k[0]);` +
+    `if(!/[?&]view=/.test(q))location.replace(location.pathname+q+(q?'&':'?')+'view='+encodeURIComponent(h)+location.hash)}catch(e){}})()`;
+  return (
+    <div className={styles.bootShell} aria-hidden="true" data-boot-shell="">
+      <div className={styles.appBar}>
+        <div className={styles.appBarInner}>
+          <BrandLogo compact className={styles.appBarBrand} />
+          <p className={styles.appBarNames}>{names}</p>
+        </div>
+      </div>
+      <div className={styles.shell}>
+        <div className={styles.nav}>
+          <ul className={styles.navList}>
+            {ROOT_VIEWS.map((v) => {
+              const Icon = v.icon;
+              return (
+                <li key={v.view}>
+                  <span className={styles.navItem} data-boot-nav={v.view} suppressHydrationWarning>
+                    <span className={styles.navIcon}>
+                      <Icon size={24} strokeWidth={1.75} aria-hidden="true" />
+                    </span>
+                    <span className={styles.navLabel}>{t(v.label)}</span>
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div className={styles.main}>
+          {views.map((v) => {
+            const Icon = (PAGE_IDS as readonly string[]).includes(v) ? PAGE_ICONS[v as PageId] : null;
+            return (
+              <div key={v} className={styles.pageHead} data-boot-view={v} hidden suppressHydrationWarning>
+                {Icon ? (
+                  <span className={styles.pageIcon} aria-hidden="true">
+                    <Icon size={22} strokeWidth={1.75} />
+                  </span>
+                ) : null}
+                <p className={v === 'home' ? styles.homeTitle : styles.pageTitle}>{v === 'home' ? names : title(v)}</p>
+                {v === 'home' && sub ? <p className={styles.pageSub}>{sub}</p> : null}
+              </div>
+            );
+          })}
+          <div className={styles.viewLoading} />
+        </div>
+      </div>
+      <script dangerouslySetInnerHTML={{ __html: script }} />
+    </div>
   );
 }
