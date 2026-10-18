@@ -1,0 +1,24 @@
+{
+  "id": "V03_night_teal",
+  "slug": "night-teal",
+  "name": "Night Teal & Gold",
+  "ink": "#141A33",
+  "deep": "#001A21",
+  "primary": "#0F2D35",
+  "mist_top": "#ABBABE",
+  "mist_bottom": "#8D9B9F",
+  "gold": "#C8A24E",
+  "gold_light": "#E2C27A",
+  "ivory": "#EEEBE3",
+  "leaf": "#9B7A3C",
+  "swatch": [
+    "#0F2D35",
+    "#C8A24E",
+    "#EEEBE3"
+  ],
+  "status": "coming",
+  "families": {
+    "midnight": "primary",
+    "gold": null
+  }
+}

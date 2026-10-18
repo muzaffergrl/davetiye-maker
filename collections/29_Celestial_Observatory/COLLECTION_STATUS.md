@@ -16,3 +16,13 @@ durumu `coming` (`platform/lib/marketing/config.ts`); fiyat `[PRICE]`, onay ente
 
 **Denenmedi:** gerçek telefon, Vercel yayını, gerçek alıcı fotoğrafları, GPT parçalarıyla görünüm.
 Son kontrol: 2026-10-17 (G168).
+
+**Renk paletleri (G177, 2026-10-18):** 5 palet, hepsi `coming` (satışta, panelde, `/start`'ta görünmez; tasarım da `coming`):
+`twilight-plum` Twilight Plum & Gold; `night-teal` Night Teal & Gold; `burgundy-night` Burgundy Night & Gold; `midnight-silver` Midnight & Silver; `forest-night` Forest Night & Brass. Kaynak `variants/recolor.json` + `variants/V0x_*/palette.json`; **yalnız CSS** ile kuruldu
+(`variants.css` + `theme.json variants`) çünkü temanın bütün görsel parçaları geçici. Görsel zeminler (GPT parçaları) şimdilik
+her palette asıl renkte. **GPT parçaları gelince görsel boyama yeniden çalıştırılmalı:** `recolor.json` aile çapalarını gerçek
+parçalarda ölçülen renge güncelle, sonra
+`python3 tools/recolor_parts.py build --design 29 && python3 tools/recolor_parts.py check --design 29` ve
+`cd platform && npm run build && NODE_PATH=/opt/node22/lib/node_modules node scripts/variant-check.cjs --theme celestial-observatory`;
+contact sheet'lere bak (`variants/GPT_PROMPTS.md`).
+

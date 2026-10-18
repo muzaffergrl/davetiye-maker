@@ -1,0 +1,24 @@
+{
+  "id": "V02_midnight_navy",
+  "slug": "midnight-navy",
+  "name": "Midnight Navy & Champagne",
+  "ink": "#F1E4CC",
+  "deep": "#141B2E",
+  "primary": "#141B2E",
+  "mist_top": "#A1A6B2",
+  "mist_bottom": "#838893",
+  "gold": "#C7A978",
+  "gold_light": "#E0C7A4",
+  "ivory": "#F1E4CC",
+  "leaf": "#C6BDA9",
+  "swatch": [
+    "#141B2E",
+    "#E0C7A4",
+    "#F1E4CC"
+  ],
+  "status": "coming",
+  "families": {
+    "night": "deep",
+    "gold": null
+  }
+}

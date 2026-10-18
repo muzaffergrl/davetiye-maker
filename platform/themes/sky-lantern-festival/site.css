@@ -4,7 +4,8 @@
    form fields, buttons, the bottom nav. Nothing here draws a shape, a frame or an ornament. */
 :root{--night:#2b1f45;--deep:#1b1430;--violet:#4a3466;--ivory:#f7eedd;--amber:#f2a65a;--glow:#ffd08a;--rose:#e7b4a6;
 --muted:#ddd2e4;--line:#f2a65a4d;--ink:#3b2a4a;--ink-soft:#6f5a6e;
---display:'Bellefair',Georgia,serif;--script:'Corinthia','Snell Roundhand',cursive;color-scheme:dark;--nav-h:62px}
+--display:'Bellefair',Georgia,serif;--script:'Corinthia','Snell Roundhand',cursive;color-scheme:dark;--nav-h:62px;
+}
 @property --r{syntax:'<percentage>';inherits:false;initial-value:0%}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}
@@ -26,9 +27,9 @@ button:disabled{opacity:.5;cursor:default}
 .eyebrow{font:400 12px/1.8 var(--display);letter-spacing:.22em;text-transform:uppercase;color:var(--rose)}
 .body-text{font-size:18px;line-height:1.75;color:var(--muted)}
 .small{font:400 15px/1.7 var(--display);color:var(--muted)}
-.btn{display:inline-flex;justify-content:center;align-items:center;gap:12px;min-height:48px;padding:12px 28px;border:1px solid #f7c27e;background:var(--amber);color:#2a1830;font:400 14px/1.4 var(--display);letter-spacing:.16em;text-transform:uppercase;border-radius:100px;text-align:center}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:12px;min-height:48px;padding:12px 28px;border:1px solid #f7c27e;background:var(--amber);color:rgb(var(--c-2a1830));font:400 14px/1.4 var(--display);letter-spacing:.16em;text-transform:uppercase;border-radius:100px;text-align:center}
 .btn:hover{background:#f6b46c}
-.btn-ghost{background:#1b1430a6;color:var(--ivory);border-color:#f2a65a80}
+.btn-ghost{background:rgb(var(--c-1b1430)/.651);color:var(--ivory);border-color:#f2a65a80}
 .btn-ghost:hover{background:#f2a65a26}
 .btn-sm{min-height:44px;padding:9px 18px;font-size:13px}
 .textlink{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;font:400 14px/1.5 var(--display);border:0;background:transparent;color:var(--glow);letter-spacing:.1em;text-transform:uppercase;padding:8px 2px;text-decoration:underline;text-decoration-color:#f2a65a80;text-underline-offset:6px}
@@ -42,7 +43,7 @@ button:disabled{opacity:.5;cursor:default}
 .names.long-names>span{white-space:normal;overflow-wrap:anywhere}
 
 /* photo slots: placeholders are the dusk sky, blurred; "Your photo here" only in a preview */
-.photo-slot{position:relative;display:block;overflow:hidden;background:#2a1f40}
+.photo-slot{position:relative;display:block;overflow:hidden;background:rgb(var(--c-2a1f40))}
 .photo-slot>img{width:100%;height:100%;object-fit:cover;object-position:50% 38%}
 .ph-mark{display:none;position:absolute;inset:0;align-items:center;justify-content:center;pointer-events:none;font:400 12px/1.4 var(--display);color:#f7eedd;text-align:center;letter-spacing:.06em}
 html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{display:flex}
@@ -63,20 +64,20 @@ mix-blend-mode:screen;background:radial-gradient(circle,#ffd08a80 0%,#f7a24a47 1
 .lit-photo>.mat,.venue-photo>.frame{position:absolute;inset:0;z-index:2}
 
 /* bottom nav */
-.site-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#1b1430f2;border-top:1px solid var(--line);padding:6px 8px max(6px,env(safe-area-inset-bottom));view-transition-name:site-nav}
+.site-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgb(var(--c-1b1430)/.949);border-top:1px solid var(--line);padding:6px 8px max(6px,env(safe-area-inset-bottom));view-transition-name:site-nav}
 .site-nav ul{list-style:none;padding:0;display:flex;justify-content:center;gap:4px}
 .site-nav a{display:flex;align-items:center;justify-content:center;min-height:48px;min-width:68px;padding:8px 12px;font:400 13px/1 var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .site-nav a[aria-current]{color:var(--glow);text-decoration:underline;text-underline-offset:8px;text-decoration-color:#f2a65a99}
 
 /* ---------------------------------------------------------------- the lantern in the hands (index) */
 .page-opening{padding-bottom:0}
-.skip{position:fixed;top:calc(6px + env(safe-area-inset-top));right:10px;z-index:20;padding-inline:14px;background:#1b1430b3;border-radius:100px;text-decoration:none}
+.skip{position:fixed;top:calc(6px + env(safe-area-inset-top));right:10px;z-index:20;padding-inline:14px;background:rgb(var(--c-1b1430)/.702);border-radius:100px;text-decoration:none}
 /* the dusk: parallax layers behind the page (sky, star dust, distant lanterns) */
 .dusk{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
 .dusk-sky{position:absolute;left:0;top:-12%;width:100%;height:116%;max-width:none;object-fit:cover;object-position:50% 100%}
 /* night falls at the bottom of the screen: a fade of light (no line, no shape) so the amber horizon glows behind the
    lantern and the hint and buttons under it sit on calm dusk violet */
-.dusk::after{content:'';position:absolute;inset:0;background:linear-gradient(#1b143000 50%,#2b1f45c7 74%,#1b1430f2 92%)}
+.dusk::after{content:'';position:absolute;inset:0;background:linear-gradient(rgb(var(--c-1b1430)/0) 50%,rgb(var(--c-2b1f45)/.78) 74%,rgb(var(--c-1b1430)/.949) 92%)}
 .dusk>.stars{position:absolute;left:0;right:0;top:-18%;height:124%;background-size:cover;background-position:50% 50%}
 .far{position:absolute;bottom:-10%;width:26px;opacity:0;filter:drop-shadow(0 0 8px #ffb45ecc) drop-shadow(0 0 22px #ff9a3c66)}
 .far-1{left:14%}
@@ -85,7 +86,7 @@ mix-blend-mode:screen;background:radial-gradient(circle,#ffd08a80 0%,#f7a24a47 1
 .opening{position:relative;z-index:1;min-height:100svh;max-width:760px;margin:auto;padding:46px 20px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:clip}
 .opening-heading{position:relative;z-index:3;max-width:100%}
 .opening-heading>.eyebrow:first-child{margin-bottom:8px;color:var(--glow)}
-.opening .names{font-size:clamp(54px,15vw,84px);text-shadow:0 2px 18px #1b143099}
+.opening .names{font-size:clamp(54px,15vw,84px);text-shadow:0 2px 18px rgb(var(--c-1b1430)/.6)}
 .opening-date{margin-top:6px;color:var(--ivory)}
 /* stage = the scene canvas 2:3 (manifest stage: hands + lantern on one canvas) */
 .stage{--obj:min(70vw,calc(44svh * .6667),320px);position:relative;width:var(--obj);aspect-ratio:2/3;margin:12px auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent}
@@ -100,12 +101,12 @@ mix-blend-mode:screen;background:radial-gradient(circle,#ffd08a80 0%,#f7a24a47 1
 .card-copy{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:8% 9%;color:var(--ink);text-align:center}
 .card-photo{width:58%;aspect-ratio:4/5;flex:none;margin-bottom:6px}
 .card-photo .ph-mark{font-size:8px}
-.card-photo .ty-decor,.hero-photo .ty-decor{display:grid;place-items:center;height:100%;background:#2f2348}
+.card-photo .ty-decor,.hero-photo .ty-decor{display:grid;place-items:center;height:100%;background:rgb(var(--c-2f2348))}
 .card-photo .ty-decor img{width:30%;filter:drop-shadow(0 0 6px #ffb45ecc)}
 .card-copy .eyebrow{font-size:8px;letter-spacing:.16em;color:var(--ink-soft)}
 .card-names{font:400 clamp(20px,6vw,30px)/1.05 var(--script);color:var(--ink);overflow-wrap:anywhere}
 .opening-actions{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:18px;min-height:60px;position:relative;z-index:7}
-.tap-hint{color:var(--ivory);text-shadow:0 1px 12px #2b1f45,0 0 4px #2b1f45}
+.tap-hint{color:var(--ivory);text-shadow:0 1px 12px rgb(var(--c-2b1f45)),0 0 4px rgb(var(--c-2b1f45))}
 .enter,.replay{display:none}
 .is-opened .enter{display:inline-flex}
 .is-opened .replay{display:inline-flex}
@@ -179,7 +180,7 @@ to{translate:12px -40vh}}
 .hero-sky{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 100%;z-index:-3}
 .dusk-hero>.stars{position:absolute;inset:0;z-index:-2;background-size:cover}
 /* the hero melts into the evening wall below (a fade of light, no line) */
-.dusk-hero::after{content:'';position:absolute;left:0;right:0;bottom:0;height:18%;z-index:-1;background:linear-gradient(#1b143000,var(--deep))}
+.dusk-hero::after{content:'';position:absolute;left:0;right:0;bottom:0;height:18%;z-index:-1;background:linear-gradient(rgb(var(--c-1b1430)/0),var(--deep))}
 .dusk-hero>.halo{top:40%;z-index:-1}
 .hero-card{position:relative;z-index:1;width:min(84vw,400px);view-transition-name:invite-card;filter:drop-shadow(0 16px 26px #0009)}
 .hero-copy{position:relative;padding:9% 9% 10%;color:var(--ink)}
@@ -214,7 +215,7 @@ to{translate:12px -40vh}}
 .countdown.is-done .cd-row{display:none}
 .calendar{margin:24px auto 0;text-align:center}
 .calendar>.eyebrow{margin-bottom:10px}
-.lit-teaser{padding:56px 22px 60px;text-align:center;background:linear-gradient(#1b143000,#1b1430b3 30%,#1b1430b3 70%,#1b143000)}
+.lit-teaser{padding:56px 22px 60px;text-align:center;background:linear-gradient(rgb(var(--c-1b1430)/0),rgb(var(--c-1b1430)/.702) 30%,rgb(var(--c-1b1430)/.702) 70%,rgb(var(--c-1b1430)/0))}
 .teaser-text h2{margin:8px 0 30px}
 .teaser-photos{display:flex;justify-content:center;align-items:flex-end;gap:12px;margin:0 auto 18px}
 .lit{position:relative;display:block}
@@ -222,7 +223,7 @@ to{translate:12px -40vh}}
 .teaser-photos .lit:nth-child(2){margin-bottom:30px}
 .dusk-band{position:relative;isolation:isolate;text-align:center;padding:88px 24px;overflow:clip}
 .band-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
-.dusk-band::after{content:'';position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 50% 100%,#f2a65a33,transparent 60%),linear-gradient(#1b1430d1,#2b1f45b8)}
+.dusk-band::after{content:'';position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 50% 100%,#f2a65a33,transparent 60%),linear-gradient(rgb(var(--c-1b1430)/.82),rgb(var(--c-2b1f45)/.722))}
 .dusk-band h2{font-size:clamp(32px,9.6vw,52px);margin:12px 0 22px;overflow-wrap:anywhere;text-shadow:0 2px 16px #000}
 .day-peek{list-style:none;padding:0;margin:0 auto 30px;max-width:420px;display:grid;gap:6px;font-size:18px}
 .day-peek li:nth-child(n+5){display:none}
@@ -267,7 +268,7 @@ to{translate:12px -40vh}}
 .gallery-item figcaption .num{display:block;font:400 11px/1.6 var(--display);letter-spacing:.24em;color:var(--glow);margin-bottom:4px}
 .gallery-item figcaption [data-empty]{display:none}
 .lightbox{border:0;padding:52px 18px 18px;background:var(--deep);color:var(--ivory);width:min(900px,94vw);max-height:94svh;overflow:auto}
-.lightbox::backdrop{background:#0e0a19e8}
+.lightbox::backdrop{background:rgb(var(--c-0e0a19)/.91)}
 .lightbox>img{width:100%;max-height:64svh;object-fit:contain}
 .lightbox-caption{text-align:center;font-size:18px;margin-top:12px}
 .lightbox-close{position:absolute;top:4px;right:8px;background:none;color:var(--glow);border:0;width:44px;height:44px;font-size:30px}
@@ -314,13 +315,13 @@ to{translate:12px -40vh}}
 .rsvp-page .page-heading{position:relative;padding-bottom:30px}
 .rsvp-page .page-heading>.eyebrow:last-of-type{margin-top:14px}
 .reply-cta{margin-top:22px}
-.reply-card{position:relative;padding:30px 22px;background:#1b1430d9;border-radius:14px}
+.reply-card{position:relative;padding:30px 22px;background:rgb(var(--c-1b1430)/.851);border-radius:14px}
 .form-title{font-size:26px;text-align:center;margin-bottom:20px}
 .reply-form{font:400 16px/1.7 var(--display)}
 .field{display:block;margin-top:18px}
 .kicker{display:block;margin-bottom:8px;font:400 14px/1.6 var(--display);letter-spacing:.06em;color:var(--rose);overflow-wrap:anywhere}
 .opt{color:var(--muted);font-size:12px}
-.field input,.field textarea,.question textarea{display:block;width:100%;border:1px solid #f2a65a80;background:#120d2299;color:var(--ivory);min-height:48px;padding:12px;border-radius:8px;font:400 16px/1.5 var(--display)}
+.field input,.field textarea,.question textarea{display:block;width:100%;border:1px solid #f2a65a80;background:rgb(var(--c-120d22)/.6);color:var(--ivory);min-height:48px;padding:12px;border-radius:8px;font:400 16px/1.5 var(--display)}
 .field textarea,.question textarea{resize:vertical}
 .choice{border:0;padding:0;margin:22px 0 0;min-width:0}
 .choice legend{padding:0;width:100%}

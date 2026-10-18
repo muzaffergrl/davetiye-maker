@@ -1,0 +1,24 @@
+{
+  "id": "V06_slate_blue",
+  "slug": "slate-blue",
+  "name": "Slate Blue & Terracotta",
+  "ink": "#16264F",
+  "deep": "#2A405C",
+  "primary": "#3F5673",
+  "mist_top": "#E2EFFF",
+  "mist_bottom": "#C2CEDD",
+  "gold": "#AE583A",
+  "gold_light": "#E4A688",
+  "ivory": "#FAF8F2",
+  "leaf": "#AE583A",
+  "swatch": [
+    "#3F5673",
+    "#AE583A",
+    "#FAF8F2"
+  ],
+  "status": "coming",
+  "families": {
+    "cobalt": "primary",
+    "terra": null
+  }
+}

@@ -308,6 +308,16 @@ CHANNEL_DEF_RE = re.compile(r"(--c-[0-9a-f]{6}):\s*(\d+ \d+ \d+);")
 CHANNEL_USE_RE = re.compile(r"rgb\(var\((--c-[0-9a-f]{6})\)(?:\s*/\s*([\d.]+))?\)")
 
 
+def token_root(css):
+    """The :root block that takes the channel tokens: the first one defining a colour token (G177: 24's first :root is the
+    stage geometry its build_images.py rewrites), else the first :root."""
+    blocks = list(ROOT_BLOCK_RE.finditer(css))
+    for m in blocks:
+        if any(parse_color(v) is not None for _, v in TOKEN_DEF_RE.findall(m.group(0))):
+            return m
+    return blocks[0] if blocks else None
+
+
 def inline_unused_channels(css, used):
     """Kanal token'larından hiçbir paletin değiştirmediklerini yeniden sabit renge çevirir (site.css bütçesi, docs/11 §6).
     used: variants.css'te değişen token adları."""
@@ -374,7 +384,7 @@ def tokenize_css(css, inject=True):
     out.append(css[last:])
     new = "".join(out)
     if tokens and inject:
-        m = ROOT_BLOCK_RE.search(new)
+        m = token_root(new)
         if not m:
             raise RecolorError("CSS'te :root bloğu yok")
         existing = set(re.findall(r"(--c-[0-9a-f]{6})\s*:", m.group(0)))
@@ -389,15 +399,14 @@ def tokenize_css(css, inject=True):
 
 
 def root_tokens(css):
-    """İlk :root bloğundaki renk token'ları: {ad: (değer yazımı, rgb, alfa)}."""
-    m = ROOT_BLOCK_RE.search(COMMENT_RE.sub("", css))
+    """:root bloklarındaki renk token'ları: {ad: (değer yazımı, rgb, alfa)}. G177: bir tema geometri ve renkleri ayrı :root
+    bloklarında tutabilir (24); her blok okunur, ilk tanım geçerli."""
     out = {}
-    if not m:
-        return out
-    for name, value in TOKEN_DEF_RE.findall(m.group(0)):
-        p = parse_color(value)
-        if p is not None:
-            out[name] = (value.strip(), p[0], p[1])
+    for m in ROOT_BLOCK_RE.finditer(COMMENT_RE.sub("", css)):
+        for name, value in TOKEN_DEF_RE.findall(m.group(0)):
+            p = parse_color(value)
+            if p is not None and name not in out:
+                out[name] = (value.strip(), p[0], p[1])
     return out
 
 
@@ -510,7 +519,7 @@ def cmd_tokenize(theme, files=("site.css", "thank-you.css"), quiet=False):
     total.update(toks)
     missing = {k: v for k, v in total.items() if k not in toks and f"{k}:" not in new}
     if missing:
-        m = ROOT_BLOCK_RE.search(new)
+        m = token_root(new)
         add = "".join(f"  {k}: {v};\n" for k, v in sorted(missing.items()))
         new = new[:m.end() - 1].rstrip() + "\n" + add + "}" + new[m.end():]
     if new != main_css.read_text():
@@ -705,7 +714,7 @@ def restore_channels(theme, main="site.css"):
     missing = {k: v for k, v in defaults.items() if f"{k}:" not in css and f"var({k})" in css}
     if not missing:
         return
-    m = ROOT_BLOCK_RE.search(css)
+    m = token_root(css)
     add = "".join(f"{k}:{v};" for k, v in sorted(missing.items()))
     css = css[:m.end() - 1].rstrip() + f"\n  {CHANNEL_NOTE}\n  {add}\n}}" + css[m.end():]
     p.write_text(css)
@@ -724,8 +733,11 @@ def write_theme_json(spec, design, pals):
     path = THEMES / spec["theme"] / "theme.json"
     data = json.loads(path.read_text())
     old = {v.get("id"): v for v in data.get("variants", [])}
-    base_pal = json.loads((design / "palette.json").read_text())
-    data["swatch"] = spec.get("swatch") or [base_pal["ivory"], base_pal["primary"], base_pal["gold"]]
+    if spec.get("swatch"):  # G177: 22–32 have no collection palette.json; recolor.json carries the original swatch
+        data["swatch"] = spec["swatch"]
+    else:
+        base_pal = json.loads((design / "palette.json").read_text())
+        data["swatch"] = [base_pal["ivory"], base_pal["primary"], base_pal["gold"]]
     out = []
     for pal in sorted(pals, key=lambda p: p["id"]):
         prev = old.get(pal["slug"], {})

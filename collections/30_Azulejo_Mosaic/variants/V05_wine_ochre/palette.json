@@ -1,0 +1,24 @@
+{
+  "id": "V05_wine_ochre",
+  "slug": "wine-ochre",
+  "name": "Wine Glaze & Ochre",
+  "ink": "#16264F",
+  "deep": "#550B22",
+  "primary": "#6E2436",
+  "mist_top": "#F4CBD0",
+  "mist_bottom": "#D3ABB0",
+  "gold": "#B5832E",
+  "gold_light": "#E4A688",
+  "ivory": "#FAF8F2",
+  "leaf": "#AE583A",
+  "swatch": [
+    "#6E2436",
+    "#B5832E",
+    "#FAF8F2"
+  ],
+  "status": "coming",
+  "families": {
+    "cobalt": "primary",
+    "terra": "#B5832E"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "V06_peach_coral",
+  "slug": "peach-coral",
+  "name": "Peach Coral & Gold",
+  "ink": "#4A2F35",
+  "deep": "#B16A57",
+  "primary": "#CB826E",
+  "mist_top": "#D7B4AA",
+  "mist_bottom": "#C3A198",
+  "gold": "#C9A45C",
+  "gold_light": "#F7E4E2",
+  "ivory": "#FFF8F4",
+  "leaf": "#EECDD0",
+  "swatch": [
+    "#FFF8F4",
+    "#CB826E",
+    "#C9A45C"
+  ],
+  "status": "coming",
+  "families": {
+    "rose": "primary",
+    "gold": null
+  }
+}

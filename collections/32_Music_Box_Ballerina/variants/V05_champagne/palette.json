@@ -1,0 +1,24 @@
+{
+  "id": "V05_champagne",
+  "slug": "champagne",
+  "name": "Champagne & Gold",
+  "ink": "#4A2F35",
+  "deep": "#9A8264",
+  "primary": "#B39A7C",
+  "mist_top": "#CEC2B5",
+  "mist_bottom": "#BBAFA2",
+  "gold": "#C9A45C",
+  "gold_light": "#F7E4E2",
+  "ivory": "#FFF8F4",
+  "leaf": "#EECDD0",
+  "swatch": [
+    "#FFF8F4",
+    "#B39A7C",
+    "#C9A45C"
+  ],
+  "status": "coming",
+  "families": {
+    "rose": "primary",
+    "gold": null
+  }
+}

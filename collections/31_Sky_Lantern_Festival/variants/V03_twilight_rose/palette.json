@@ -1,0 +1,25 @@
+{
+  "id": "V03_twilight_rose",
+  "slug": "twilight-rose",
+  "name": "Twilight Rose & Gold",
+  "ink": "#3B2A4A",
+  "deep": "#340E23",
+  "primary": "#4A2237",
+  "mist_top": "#D3BBC6",
+  "mist_bottom": "#B39CA6",
+  "gold": "#F2A65A",
+  "gold_light": "#FFD08A",
+  "ivory": "#F7EEDD",
+  "leaf": "#E7B4A6",
+  "swatch": [
+    "#4A2237",
+    "#F2A65A",
+    "#F7EEDD"
+  ],
+  "status": "coming",
+  "families": {
+    "dusk": "primary",
+    "amber": null,
+    "rose": null
+  }
+}

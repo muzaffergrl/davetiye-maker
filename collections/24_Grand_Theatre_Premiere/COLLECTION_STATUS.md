@@ -14,3 +14,13 @@ Tasarım özeti: `DESIGN_BRIEF.md`. Görev: `gorevler/G162-grand-theatre.md`.
 | Etsy ilan metni | taslak `package/listing/listing_v3.md` (yayımlanmadı, K41); görsel, video, START HERE yok |
 
 **Denenmedi:** gerçek telefon, Vercel yayını, gerçek alıcı fotoğrafları, Safari'de sayfa çevirme geçişi.
+
+**Renk paletleri (G177, 2026-10-18):** 5 palet, hepsi `coming` (satışta, panelde, `/start`'ta görünmez; tasarım da `coming`):
+`crimson-velvet` Crimson Velvet & Gold; `royal-sapphire` Royal Sapphire & Gold; `emerald-velvet` Emerald Velvet & Gold; `plum-velvet` Plum Velvet & Gold; `onyx-gold` Black Tie Onyx & Gold. Kaynak `variants/recolor.json` + `variants/V0x_*/palette.json`; **yalnız CSS** ile kuruldu
+(`variants.css` + `theme.json variants`) çünkü temanın bütün görsel parçaları geçici. Görsel zeminler (GPT parçaları) şimdilik
+her palette asıl renkte. **GPT parçaları gelince görsel boyama yeniden çalıştırılmalı:** `recolor.json` aile çapalarını gerçek
+parçalarda ölçülen renge güncelle, sonra
+`python3 tools/recolor_parts.py build --design 24 && python3 tools/recolor_parts.py check --design 24` ve
+`cd platform && npm run build && NODE_PATH=/opt/node22/lib/node_modules node scripts/variant-check.cjs --theme grand-theatre-premiere`;
+contact sheet'lere bak (`variants/GPT_PROMPTS.md`).
+

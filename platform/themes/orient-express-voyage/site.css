@@ -4,7 +4,8 @@
    map that draws itself as you scroll (docs/24). */
 :root{--green:#1e3a2c;--green-deep:#11241b;--green-soft:#2e5240;--brass:#b8914b;--brass-light:#d8bd84;--brass-ink:#7a5c24;
 --ivory:#f3ebd9;--paper:#ece1c8;--ink:#1c2a21;--muted:#4b5749;--route:#8c2f39;--line:#7a5c2440;--line-light:#d8bd8445;
---display:'Limelight',Georgia,serif;--serif:'Cormorant Garamond',Georgia,serif;color-scheme:light;--nav-h:62px}
+--display:'Limelight',Georgia,serif;--serif:'Cormorant Garamond',Georgia,serif;color-scheme:light;--nav-h:62px;
+}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}
 body{margin:0;background:var(--ivory) url(img/paper-640.webp) repeat;background-size:640px;color:var(--ink);font:400 19px/1.6 var(--serif);padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom))}
@@ -27,8 +28,8 @@ button:disabled{opacity:.5;cursor:default}
 .small{font:500 15px/1.6 var(--serif);color:var(--muted)}
 .btn{display:inline-flex;justify-content:center;align-items:center;gap:12px;min-height:48px;padding:12px 26px;border:1px solid var(--green);background:var(--green);color:var(--ivory);font:600 13px/1.4 var(--serif);letter-spacing:.2em;text-transform:uppercase;border-radius:2px;text-align:center}
 .btn:hover{background:var(--green-soft)}
-.btn-ghost{background:#f3ebd9cc;color:var(--green);border-color:#1e3a2c80}
-.btn-ghost:hover{background:#1e3a2c14}
+.btn-ghost{background:#f3ebd9cc;color:var(--green);border-color:rgb(var(--c-1e3a2c)/.502)}
+.btn-ghost:hover{background:rgb(var(--c-1e3a2c)/.078)}
 .btn-sm{min-height:44px;padding:9px 18px}
 .textlink{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;font:600 14px/1.5 var(--serif);border:0;background:transparent;color:var(--green);letter-spacing:.06em;padding:8px 2px;text-decoration:underline;text-decoration-color:#7a5c2480;text-underline-offset:6px}
 .center{text-align:center;margin:44px 0 10px}
@@ -47,7 +48,7 @@ button:disabled{opacity:.5;cursor:default}
 html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{display:flex}
 
 /* bottom nav */
-.site-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#11241bf2;border-top:1px solid var(--line-light);padding:6px 8px max(6px,env(safe-area-inset-bottom));view-transition-name:site-nav}
+.site-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgb(var(--c-11241b)/.949);border-top:1px solid var(--line-light);padding:6px 8px max(6px,env(safe-area-inset-bottom));view-transition-name:site-nav}
 .site-nav ul{list-style:none;padding:0;margin:0 auto;max-width:560px;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:2px}
 .site-nav a{display:flex;align-items:center;justify-content:center;min-height:48px;padding:6px 4px;font:600 12px/1.15 var(--serif);letter-spacing:.1em;text-transform:uppercase;color:#e6dcc6;text-align:center;overflow-wrap:anywhere}
 .site-nav a[aria-current]{color:var(--brass-light);text-decoration:underline;text-underline-offset:8px;text-decoration-color:#d8bd8499}
@@ -58,7 +59,7 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .page-opening .eyebrow{color:var(--brass-light)}
 .page-opening .names{color:var(--ivory);text-shadow:0 2px 18px #0009}
 .page-opening .names .amp{color:var(--brass-light)}
-.skip{position:fixed;top:calc(6px + env(safe-area-inset-top));right:10px;z-index:20;padding-inline:14px;background:#11241bb3;border-radius:100px;text-decoration:none;color:var(--ivory)}
+.skip{position:fixed;top:calc(6px + env(safe-area-inset-top));right:10px;z-index:20;padding-inline:14px;background:rgb(var(--c-11241b)/.702);border-radius:100px;text-decoration:none;color:var(--ivory)}
 .opening{position:relative;min-height:100svh;max-width:760px;margin:auto;padding:52px 20px 26px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:clip}
 .opening-heading{position:relative;z-index:3;max-width:100%}
 .opening-heading>.eyebrow:first-child{margin-bottom:16px}
@@ -130,7 +131,7 @@ to{z-index:7;transform:translate(-64%,-46%) scale(1.14) rotate(-2deg);filter:dro
 /* ---------------------------------------------------------------- home */
 .poster-hero{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;text-align:center;padding:64px 24px calc(var(--nav-h) + 22px);isolation:isolate;overflow:clip}
 .poster-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;z-index:-2}
-.poster-hero::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(#f3ebd9a6,#f3ebd926 42%,#f3ebd900 60%,#11241b4d)}
+.poster-hero::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(#f3ebd9a6,#f3ebd926 42%,#f3ebd900 60%,rgb(var(--c-11241b)/.302))}
 .hero-ticket{max-width:560px;width:100%;view-transition-name:invite-card}
 .hero-ticket .host{max-width:280px;margin:0 auto 22px}
 .hero-ticket .names{text-shadow:0 1px 14px #f3ebd9}
@@ -175,7 +176,7 @@ to{z-index:7;transform:translate(-64%,-46%) scale(1.14) rotate(-2deg);filter:dro
 .journey{padding:72px 20px 64px;text-align:center;max-width:760px;margin:auto}
 .journey h2{font-size:clamp(32px,9vw,52px);margin:10px 0 26px;color:var(--green);overflow-wrap:anywhere}
 /* the map + its route line (an interface path over the GPT map: stroke drawn by the scroll, docs/24) */
-.route-map{position:relative;aspect-ratio:3/2;width:100%;margin:0 auto;box-shadow:0 14px 26px #11241b38;background:var(--paper)}
+.route-map{position:relative;aspect-ratio:3/2;width:100%;margin:0 auto;box-shadow:0 14px 26px rgb(var(--c-11241b)/.22);background:var(--paper)}
 .route-map>img{width:100%;height:100%;object-fit:cover}
 .route{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
 .route-line{fill:none;stroke:var(--route);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--route,0))}
@@ -209,7 +210,7 @@ to{z-index:7;transform:translate(-64%,-46%) scale(1.14) rotate(-2deg);filter:dro
 .page-story .page-heading h1{color:var(--ivory)}
 .page-story .body-text{color:#e6dcc6}
 .page-story .sig-names{color:var(--ivory)}
-.page-story .btn-ghost{background:#11241bcc;color:var(--ivory);border-color:#d8bd8480}
+.page-story .btn-ghost{background:rgb(var(--c-11241b)/.8);color:var(--ivory);border-color:#d8bd8480}
 .page-heading{text-align:center;padding:88px 24px 42px;max-width:720px;margin:auto}
 .page-heading>.eyebrow{margin-bottom:14px}
 .page-heading h1{margin-bottom:16px;overflow-wrap:anywhere;color:var(--green)}
@@ -258,7 +259,7 @@ to{z-index:7;transform:translate(-64%,-46%) scale(1.14) rotate(-2deg);filter:dro
 .rsvp-page .page-heading{padding-bottom:30px}
 .rsvp-page .page-heading>.eyebrow:last-of-type{margin-top:12px}
 .reply-cta{margin-top:20px}
-.pass{position:relative;max-width:600px;margin:0 auto;filter:drop-shadow(0 14px 22px #11241b40)}
+.pass{position:relative;max-width:600px;margin:0 auto;filter:drop-shadow(0 14px 22px rgb(var(--c-11241b)/.251))}
 .pass-top,.pass-stub{width:100%}
 .pass-body{background:url(img/pass_mid-640.webp) repeat-y;background-size:100% auto;padding:6px 28px 22px;margin-top:-1px;margin-bottom:-1px}
 .form-title{font-size:28px;text-align:center;margin:2px 0 18px;color:var(--green)}
@@ -267,7 +268,7 @@ to{z-index:7;transform:translate(-64%,-46%) scale(1.14) rotate(-2deg);filter:dro
 .field{display:block;margin-top:16px}
 .kicker{display:block;margin-bottom:6px;font:600 13px/1.6 var(--serif);letter-spacing:.1em;text-transform:uppercase;color:var(--brass-ink);overflow-wrap:anywhere}
 .opt{color:var(--muted);text-transform:none;letter-spacing:0;font-weight:500}
-.field input,.field textarea,.question textarea{display:block;width:100%;border:1px solid #1e3a2c66;background:#fffdf7cc;color:var(--ink);min-height:48px;padding:11px 12px;border-radius:2px;font:500 18px/1.4 var(--serif)}
+.field input,.field textarea,.question textarea{display:block;width:100%;border:1px solid rgb(var(--c-1e3a2c)/.4);background:#fffdf7cc;color:var(--ink);min-height:48px;padding:11px 12px;border-radius:2px;font:500 18px/1.4 var(--serif)}
 .field textarea,.question textarea{resize:vertical}
 .choice{border:0;padding:0;margin:20px 0 0;min-width:0}
 .choice legend{padding:0;width:100%}

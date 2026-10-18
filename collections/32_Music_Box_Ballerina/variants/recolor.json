@@ -1,0 +1,180 @@
+{
+  "theme": "music-box-ballerina",
+  "note": "G177 recolour manifest (tools/recolor_parts.py, docs/25). Every image part of this theme is INTERIM (stand-ins toned from other designs' GPT pixels) until its PAKET 5 GPT part arrives, so the palettes are built CSS-only (build --css-only). Family anchors are the theme's CSS colours; before the image build re-measure each anchor as the median colour of the real GPT parts and review the contact sheets (docs/25 §2.3–2.4).",
+  "image_build": "css-only (interim parts; re-run after GPT)",
+  "swatch": [
+    "#EECDD0",
+    "#B76E79",
+    "#C9A45C"
+  ],
+  "families": {
+    "rose": {
+      "anchor": "#B76E79",
+      "sigma": 20,
+      "cmin": 0.015,
+      "cfull": 0.03,
+      "note": "rose-quartz lacquer, blush satin, rose ink"
+    },
+    "gold": {
+      "anchor": "#C9A45C",
+      "sigma": 12,
+      "cmin": 0.05,
+      "cfull": 0.07,
+      "note": "soft gold, brass key"
+    }
+  },
+  "groups": {
+    "art": [
+      "rose",
+      "gold"
+    ]
+  },
+  "parts": {
+    "bg_page": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "bg_satin": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "box_body": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "card_paper": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "dancer": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "dancer_sprite": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "favicon": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "interior": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "key": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "lid_closed": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "lid_open": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "petal_1": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "petal_2": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "petal_3": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "ph_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "ph_wide": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    }
+  },
+  "print": {},
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "rose",
+      "gold"
+    ],
+    "roles": {},
+    "keep": [
+      "--cream",
+      "--c-a3303f"
+    ],
+    "contrast": [
+      [
+        "--ink",
+        "--blush",
+        9.0
+      ],
+      [
+        "--ink",
+        "--quartz",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--blush",
+        6.2
+      ],
+      [
+        "--ink-soft",
+        "--cream",
+        4.5
+      ],
+      [
+        "--rose-ink",
+        "--blush",
+        5.6
+      ],
+      [
+        "--rose-ink",
+        "--cream",
+        4.5
+      ],
+      [
+        "--gold-ink",
+        "--cream",
+        4.5
+      ],
+      [
+        "--rose-ink",
+        "--cream",
+        4.5
+      ],
+      [
+        "--rose",
+        "--cream",
+        4.6
+      ]
+    ]
+  }
+}

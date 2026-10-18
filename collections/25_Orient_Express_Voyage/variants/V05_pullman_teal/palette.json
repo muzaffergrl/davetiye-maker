@@ -1,0 +1,25 @@
+{
+  "id": "V05_pullman_teal",
+  "slug": "pullman-teal",
+  "name": "Pullman Teal & Brass",
+  "ink": "#1C2A21",
+  "deep": "#052A30",
+  "primary": "#1C3F45",
+  "mist_top": "#BFD0D3",
+  "mist_bottom": "#9FB0B3",
+  "gold": "#B8914B",
+  "gold_light": "#D8BD84",
+  "ivory": "#F3EBD9",
+  "leaf": "#8C2F39",
+  "swatch": [
+    "#1C3F45",
+    "#B8914B",
+    "#F3EBD9"
+  ],
+  "status": "coming",
+  "families": {
+    "green": "primary",
+    "brass": null,
+    "route": null
+  }
+}

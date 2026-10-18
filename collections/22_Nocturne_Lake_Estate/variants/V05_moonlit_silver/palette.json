@@ -1,0 +1,24 @@
+{
+  "id": "V05_moonlit_silver",
+  "slug": "moonlit-silver",
+  "name": "Moonlit Silver",
+  "ink": "#F1E4CC",
+  "deep": "#171A20",
+  "primary": "#171A20",
+  "mist_top": "#A2A4A7",
+  "mist_bottom": "#848589",
+  "gold": "#C3C6CC",
+  "gold_light": "#E0C7A4",
+  "ivory": "#F1E4CC",
+  "leaf": "#C6BDA9",
+  "swatch": [
+    "#171A20",
+    "#C3C6CC",
+    "#F1E4CC"
+  ],
+  "status": "coming",
+  "families": {
+    "night": "deep",
+    "gold": "#C3C6CC"
+  }
+}
