@@ -34,3 +34,11 @@ Bu dosya yerel sonuçları kaydeder; Vercel derlemesi ve canlı alan adı kontro
 - Music Box Ballerina — music-box-ballerina
 
 230 superseded, unreferenced compiled image assets are removed from these eleven theme folders. Original per-model favicons and the Nocturne demo photographs are retained. The prior interim image-build scripts are historical; the generated release parts and geometry are authoritative.
+
+## Canlı doğrulama
+
+- Vercel üretim sürümü `e430c6ce3305ca39f2514dafa947dce30712414d`, dağıtım `dpl_8dZQqSBHL5bgrfo7uPfDQPMDsfFm`: READY; `xn--bkestudo-zkb.com` alan adı bu sürüme bağlandı.
+- Alan adı üzerinde 55 demo sayfası + 11 ürün sayfası: 66/66 HTTP 200; 266 başvurulan görsel/stil/script kaynağı ve 66 ek katalog görseli/video isteği hatasız.
+- Gerçek Chrome ile canlı sitede 77 sayfa/görünüm: 55 mobil + 22 bilgisayar. Gerçek web fontları yüklendi; yatay taşma, kırık resim ve JavaScript hatası yok. 22 klavye açılışı ve 1 gerçek süreli açılış geçti.
+- Canlı RSVP formuna gerçek davetli cevabı gönderilmedi; kayıt/yanıt/tekrar koruması 11 yerel entegrasyon testiyle doğrulandı. Gerçek telefon ve Etsy satın alma testi yapılmadı.
+- İlk yayın denemesindeki ikon manifesti, palet kanal varsayılanları ve CSS boyut bütçesi sorunları giderildi. Tarihsel taslak beklentileri yeni tam ekran kayıtları ve Blush katman yapısıyla eşitlendi. Paylaşılan kurgusal demo fotoğrafları açıkça tanımlı bir izin listesiyle doğrulanır; başka yol veya eksik dosya reddedilir.

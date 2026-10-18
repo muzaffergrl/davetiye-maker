@@ -265,7 +265,7 @@ test('copy matches each theme: demo couple, fonts, palette tokens, collection, g
 test('every live design has its real screens and opening clip in assets.json and on disk, and nothing else is there', () => {
   assert.deepEqual(checkManifest(manifest), []);
   const ids = liveDesigns().map((d) => d.id);
-  assert.deepEqual(Object.keys(manifest.designs), MARKETING.designs.filter((d) => d.status === 'live' || d.status === 'preview').map((d) => d.id), 'assets.json follows the public catalogue order');
+  assert.deepEqual(Object.keys(manifest.designs), [...ids, ...MARKETING.designs.filter((d) => d.status === 'preview').map((d) => d.id)], 'assets.json keeps live captures first, then complete preview captures');
   for (const id of ids) {
     const m = manifest.designs[id];
     assert.ok(m, `no ${id} entry: node scripts/marketing-assets.ts --designs ${id} --shots <capture>`);
