@@ -1,0 +1,849 @@
+{
+ "base": "next start (production build)",
+ "theme": "marigold-mehndi",
+ "errors": [],
+ "warnings": [
+  "setup: no PAKET 2 photos in collections/33_Marigold_Mehndi/assets/gpt/photos: using the 03 sample photos"
+ ],
+ "passed": [
+  "thank-you mode (G075): every page has its thank-you markers (docs/11 §3.6)",
+  "editable texts (G068): 83 copy keys = theme.json \"copy\", no unmarked visible text",
+  "fonts: Google Fonts link with 2 families (Rozha One, Yrsa), display=swap",
+  "seed: 5 sample photos uploaded to the demo site (collections/03_Blush_Garden_Rose/assets/gpt/photos (03 sample photos (fallback)))",
+  "index@360: no overflow, 6 fields = content record, 8 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@360: no overflow, 27 fields = content record, 26 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "story@360: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@360: no overflow, 23 fields = content record, 14 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@360: no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@390: no overflow, 6 fields = content record, 8 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@390: no overflow, 27 fields = content record, 26 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "story@390: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@390: no overflow, 23 fields = content record, 14 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@390: no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@430: no overflow, 6 fields = content record, 8 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@430: no overflow, 27 fields = content record, 26 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "story@430: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@430: no overflow, 23 fields = content record, 14 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@430: no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@768: no overflow, 6 fields = content record, 8 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@768: no overflow, 27 fields = content record, 26 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "story@768: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@768: no overflow, 23 fields = content record, 14 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@768: no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@1280: no overflow, 6 fields = content record, 8 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@1280: no overflow, 27 fields = content record, 26 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "story@1280: no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@1280: no overflow, 23 fields = content record, 14 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@1280: no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "photo slots: every theme.json slot (hero_portrait, story_1, story_2, story_3, venue) is on a page",
+  "index@390 (no photos): no overflow, 6 fields = content record, 8 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "home@390 (no photos): no overflow, 27 fields = content record, 26 design texts, title ok, images loaded, no painted card, 2 photo slots placeholder",
+  "story@390 (no photos): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@390 (no photos): no overflow, 23 fields = content record, 14 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "rsvp@390 (no photos): no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "home@390 (draft preview, no photos): no overflow, 27 fields = content record, 26 design texts, title ok, images loaded, no painted card, 2 photo slots preview-placeholder",
+  "envelope closed @360×640: 5 texts (eyebrow, invite-line, names, opening-date, eyebrow) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @360×640: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @375×553: 5 texts (eyebrow, invite-line, names, opening-date, eyebrow) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @375×553: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @390×690: 5 texts (eyebrow, invite-line, names, opening-date, eyebrow) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @390×690: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @390×844: 5 texts (eyebrow, invite-line, names, opening-date, eyebrow) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @390×844: \"Replay the opening\" on the plain painted ground",
+  "home @360×640: home-hero (11 pieces, no CTA in the hero, names 36 px) ends at 457, above the nav (top 579)",
+  "home@360×640: no overflow, 27 fields = content record, 26 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "home @375×553: home-hero (11 pieces, no CTA in the hero, names 37.5 px) ends at 418, above the nav (top 492)",
+  "home@375×553: no overflow, 27 fields = content record, 26 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "home @360×640 (design range): names 30 px (≥ 28); nothing partly under the nav (top 579): the first screen ends at 501",
+  "home@360×640 (design range): no overflow, 31 fields = content record, 26 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "home @375×553 (design range): names 30 px (≥ 28); nothing partly under the nav (top 492): the first screen ends at 443",
+  "home@375×553 (design range): no overflow, 31 fields = content record, 26 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "home @360×640 (stress record): names 30 px (≥ 28); the first screen ends at 566, above the nav (top 579)",
+  "home@360×640 (stress record): no overflow, 39 fields = content record, 26 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "home @375×553 (stress record): names 30 px (≥ 28); the first screen scrolls (allowed for the §12 record)",
+  "home@375×553 (stress record): no overflow, 39 fields = content record, 26 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "touch targets ≥ 44 px: envelope Skip 58×44, home \"Replay the envelope\" 180×44, rsvp \"Replay the envelope\" 180×44",
+  "envelope → /anaya-and-kabir/home in 3804 ms, card transition flag set",
+  "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
+  "home first scene (home-hero): sequential entrance finished (6 steps)",
+  "countdown target from the platform: 2027-11-20 18:00 Asia/Kolkata = 2027-11-20 12:30 UTC",
+  "home → story through the nav (/<slug>/story)",
+  "back to the envelope: opened state with \"Enter\" + \"Replay the opening\" (no forced replay)",
+  "replay restarts the opening",
+  "details without map / hotel / registry links: no dead buttons for guests",
+  "RSVP empty name: message in the theme slot, linked with aria-describedby, focus on the field, nothing sent",
+  "RSVP: card button → form, a reply (yes, 2 guests) is stored for this site and the thank-you panel shows",
+  "RSVP: after a reply the closing section does not repeat or contradict the thank-you",
+  "RSVP: \"Send another reply\" reopens the form",
+  "theme demo RSVP page (/start/demo/…/rsvp): no 404, no console error",
+  "external requests: Google Fonts only",
+  "nav in the envelope → home view transition 390×844: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
+  "nav in the envelope → home view transition 360×640: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
+  "nav leaving the envelope page 390×844: the old nav is not drawn over the envelope page at 0 / 120 ms (it leaves at once)",
+  "nav leaving the envelope page 360×640: the old nav is not drawn over the envelope page at 0 / 120 ms (it leaves at once)",
+  "Skip → home",
+  "per-site session keys: another site on the same origin starts with a closed envelope",
+  "countdown after the start (2027-11-20T13:30:00.000Z) → \"today: Today is the day — we're celebrating!\"",
+  "countdown after the start (2027-11-25T12:30:00.000Z) → \"after: Thank you for celebrating with us.\"",
+  "prefers-reduced-motion: straight to home without animation (120 ms), everything visible",
+  "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
+  "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
+  "index@390 (changed content): no overflow, 6 fields = content record, 8 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@390 (changed content): no overflow, 27 fields = content record, 26 design texts, title ok, images loaded, no painted card, 2 photo slots user",
+  "story@390 (changed content): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@390 (changed content): no overflow, 22 fields = content record, 14 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@390 (changed content): no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "content change (names, date, venue, 4 schedule rows) → every page shows the new record after reload",
+  "index@360 (stress record): no overflow, 6 fields = content record, 8 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "home@360 (stress record): no overflow, 39 fields = content record, 26 design texts, title ok, images loaded, no painted card, 2 photo slots placeholder",
+  "story@360 (stress record): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@360 (stress record): no overflow, 41 fields = content record, 14 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "rsvp@360 (stress record): no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@390 (stress record): no overflow, 6 fields = content record, 8 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "home@390 (stress record): no overflow, 39 fields = content record, 26 design texts, title ok, images loaded, no painted card, 2 photo slots placeholder",
+  "story@390 (stress record): no overflow, 6 fields = content record, 7 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@390 (stress record): no overflow, 41 fields = content record, 14 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "rsvp@390 (stress record): no overflow, 8 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@360 (stress record, thank-you mode): no overflow, 6 fields = content record, 6 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "home@360 (stress record, thank-you mode): no overflow, 33 fields = content record, 11 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "details@360 (stress record, thank-you mode): no overflow, 36 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "rsvp@360 (stress record, thank-you mode): no overflow, 4 fields = content record, 6 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@390 (stress record, thank-you mode): no overflow, 6 fields = content record, 6 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "home@390 (stress record, thank-you mode): no overflow, 33 fields = content record, 11 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "details@390 (stress record, thank-you mode): no overflow, 36 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "rsvp@390 (stress record, thank-you mode): no overflow, 4 fields = content record, 6 design texts, title ok, images loaded, no painted card, no photo slot",
+  "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code; G068: 83 design texts at their max): every page at 360/390 (and in thank-you mode) without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
+  "index first view (390×844, DPR 3, placeholders): 292 KB",
+  "home first view (390×844, DPR 3, placeholders): 145 KB",
+  "index first view (390×844, DPR 3, seeded sample photos): 382 KB",
+  "home first view (390×844, DPR 3, seeded sample photos): 337 KB",
+  "recording: ../../../../tmp/claude-0/-home-user-davetiye-maker/58344658-83de-5adf-b2ea-7366d4a76d78/scratchpad/tc/opening_390x844.mp4 (1920 KB, lead-in 0.46 s cut, first frame mean 99,28,53) — tap → opening → home → story → details"
+ ],
+ "info": {
+  "setup": {
+   "collection": "collections/33_Marigold_Mehndi",
+   "demo_record": "platform/themes/marigold-mehndi/content.demo.json",
+   "photos": "collections/03_Blush_Garden_Rose/assets/gpt/photos (03 sample photos (fallback))",
+   "w1_comps": [],
+   "compare": "none",
+   "checks_table": "img/manifest.json theme_check",
+   "cards": "auto (no free_zone in img/manifest.json)",
+   "fonts": [
+    "Rozha One",
+    "Yrsa 400/500/italic 400"
+   ]
+  },
+  "thank_you": "complete",
+  "copy": {
+   "keys": 83,
+   "unmarked": 0,
+   "problems": 0
+  },
+  "seed_photos": [
+   "hero_portrait → media.hero_portrait (193 KB, 1024×1280, variants 640)",
+   "story_1 → media.memory_photos.0 (211 KB, 1024×1280, variants 640)",
+   "story_2 → media.memory_photos.1 (227 KB, 1024×1280, variants 640)",
+   "story_3 → media.memory_photos.2 (192 KB, 1024×1280, variants 640)",
+   "venue → media.venue_image (375 KB, 1536×864, variants 640/1280)"
+  ],
+  "envelope_backdrop": [
+   {
+    "at": "360x640",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "eyebrow",
+      "edge": 0.39,
+      "dark": 0
+     },
+     {
+      "box": "invite-line",
+      "edge": 0.48,
+      "dark": 0
+     },
+     {
+      "box": "names",
+      "edge": 0.39,
+      "dark": 0
+     },
+     {
+      "box": "opening-date eyebrow",
+      "edge": 0.43,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow tap-hint",
+      "edge": 0.56,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "360x640",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "textlink replay",
+      "edge": 0.19,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "375x553",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "eyebrow",
+      "edge": 0.43,
+      "dark": 0
+     },
+     {
+      "box": "invite-line",
+      "edge": 0.49,
+      "dark": 0
+     },
+     {
+      "box": "names",
+      "edge": 0.39,
+      "dark": 0
+     },
+     {
+      "box": "opening-date eyebrow",
+      "edge": 0.48,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow tap-hint",
+      "edge": 0.64,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "375x553",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "textlink replay",
+      "edge": 0.03,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "390x690",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "eyebrow",
+      "edge": 0.45,
+      "dark": 0
+     },
+     {
+      "box": "invite-line",
+      "edge": 0.48,
+      "dark": 0
+     },
+     {
+      "box": "names",
+      "edge": 0.37,
+      "dark": 0
+     },
+     {
+      "box": "opening-date eyebrow",
+      "edge": 0.44,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow tap-hint",
+      "edge": 0.54,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "390x690",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "textlink replay",
+      "edge": 0.31,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "390x844",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "eyebrow",
+      "edge": 0.42,
+      "dark": 0
+     },
+     {
+      "box": "invite-line",
+      "edge": 0.4,
+      "dark": 0
+     },
+     {
+      "box": "names",
+      "edge": 0.39,
+      "dark": 0
+     },
+     {
+      "box": "opening-date eyebrow",
+      "edge": 0.42,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow tap-hint",
+      "edge": 0.24,
+      "dark": 0
+     }
+    ]
+   },
+   {
+    "at": "390x844",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "textlink replay",
+      "edge": 0.66,
+      "dark": 0
+     }
+    ]
+   }
+  ],
+  "home_first_screen_landscape": "not required (img/manifest.json theme_check.first_screen.landscape unset): measured only",
+  "home_first_screen": [
+   {
+    "at": "360x640",
+    "record": "demo",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 579,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 11,
+    "lowest": 457,
+    "above": 457,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 36
+   },
+   {
+    "at": "375x553",
+    "record": "demo",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 492,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 11,
+    "lowest": 418,
+    "above": 418,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 37.5
+   },
+   {
+    "at": "844x390",
+    "record": "demo",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 329,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 11,
+    "lowest": 550,
+    "above": 326,
+    "below": 390,
+    "cta": null,
+    "bad": [
+     "div.hero-card.paper bottom 550",
+     "p.eyebrow.in \"Our wedding\" bottom 365",
+     "span \"Anaya\" bottom 435",
+     "span.amp \"&\" bottom 422",
+     "span \"Kabir\" bottom 435",
+     "p.hero-date.in \"Saturday, November 20, 2\" bottom 460",
+     "span \"Saturday\" bottom 455",
+     "span.nowrap \"November 20, 2027\" bottom 455",
+     "span \"Gulmohar Haveli Gardens\" bottom 494",
+     "small \"Jaipur, Rajasthan\" bottom 518"
+    ],
+    "partly": [
+     "div.hero-card.paper 44–550",
+     "p.eyebrow.in \"Our wedding\" 342–365",
+     "span \"Anaya\" 361–435",
+     "span \"Kabir\" 361–435"
+    ],
+    "names": 52
+   },
+   {
+    "at": "667x375",
+    "record": "demo",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 314,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 11,
+    "lowest": 389,
+    "above": 314,
+    "below": null,
+    "cta": null,
+    "bad": [
+     "div.hero-card.paper bottom 389",
+     "span \"Gulmohar Haveli Gardens\" bottom 348",
+     "small \"Jaipur, Rajasthan\" bottom 371"
+    ],
+    "partly": [
+     "div.hero-card.paper 20–389",
+     "span \"Gulmohar Haveli Gardens\" 322–348",
+     "small \"Jaipur, Rajasthan\" 350–371"
+    ],
+    "names": 44
+   },
+   {
+    "at": "360x640",
+    "record": "range",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 579,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 11,
+    "lowest": 501,
+    "above": 501,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 30
+   },
+   {
+    "at": "375x553",
+    "record": "range",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 492,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 11,
+    "lowest": 443,
+    "above": 443,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 30
+   },
+   {
+    "at": "844x390",
+    "record": "range",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 329,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 11,
+    "lowest": 585,
+    "above": 326,
+    "below": 397,
+    "cta": null,
+    "bad": [
+     "div.hero-card.paper bottom 585",
+     "p.eyebrow.in \"Our wedding\" bottom 365",
+     "span \"Alexandrina Rose\" bottom 407",
+     "span.amp \"&\" bottom 399",
+     "span \"Maximilian James\" bottom 440",
+     "p.hero-date.in \"Wednesday, 29 September \" bottom 469",
+     "span \"Wednesday\" bottom 464",
+     "span.nowrap \"29 September 2027\" bottom 464",
+     "span \"The Orangery and Walled \" bottom 529",
+     "small \"Jaipur, Rajasthan\" bottom 553"
+    ],
+    "partly": [
+     "div.hero-card.paper 44–585",
+     "p.eyebrow.in \"Our wedding\" 342–365",
+     "span \"Alexandrina Rose\" 364–407",
+     "span.amp \"&\" 380–399"
+    ],
+    "names": 30
+   },
+   {
+    "at": "667x375",
+    "record": "range",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 314,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 11,
+    "lowest": 433,
+    "above": 305,
+    "below": 394,
+    "cta": null,
+    "bad": [
+     "div.hero-card.paper bottom 433",
+     "p.hero-date.in \"Wednesday, 29 September \" bottom 331",
+     "span \"Wednesday\" bottom 326",
+     "span.nowrap \"29 September 2027\" bottom 326",
+     "span \"The Orangery and Walled \" bottom 392",
+     "small \"Jaipur, Rajasthan\" bottom 415"
+    ],
+    "partly": [
+     "div.hero-card.paper 20–433",
+     "p.hero-date.in \"Wednesday, 29 September \" 304–331",
+     "span \"Wednesday\" 308–326",
+     "span.nowrap \"29 September 2027\" 308–326",
+     "span \"The Orangery and Walled \" 339–392"
+    ],
+    "names": 30
+   },
+   {
+    "at": "360x640",
+    "record": "stress",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 579,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 11,
+    "lowest": 566,
+    "above": 566,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 30
+   },
+   {
+    "at": "375x553",
+    "record": "stress",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 492,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 11,
+    "lowest": 538,
+    "above": 410,
+    "below": null,
+    "cta": null,
+    "bad": [
+     "div.hero-card.paper bottom 538",
+     "span \"The Grand Rosewater Cons\" bottom 497",
+     "small \"Jaipur, Rajasthan\" bottom 520"
+    ],
+    "partly": [
+     "div.hero-card.paper 20–538",
+     "span \"The Grand Rosewater Cons\" 418–497",
+     "small \"Jaipur, Rajasthan\" 499–520"
+    ],
+    "names": 30
+   },
+   {
+    "at": "844x390",
+    "record": "stress",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 329,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 11,
+    "lowest": 652,
+    "above": 326,
+    "below": 431,
+    "cta": null,
+    "bad": [
+     "div.hero-card.paper bottom 652",
+     "p.eyebrow.in \"Our wedding\" bottom 365",
+     "span \"Charlotte-Elizabeth Anne\" bottom 440",
+     "span.amp \"&\" bottom 466",
+     "span \"Maximilian Alexander Fit\" bottom 508",
+     "p.hero-date.in \"Saturday, November 20, 2\" bottom 536",
+     "span \"Saturday\" bottom 531",
+     "span.nowrap \"November 20, 2027\" bottom 531",
+     "span \"The Grand Rosewater Cons\" bottom 596",
+     "small \"Jaipur, Rajasthan\" bottom 620"
+    ],
+    "partly": [
+     "div.hero-card.paper 44–652",
+     "p.eyebrow.in \"Our wedding\" 342–365",
+     "span \"Charlotte-Elizabeth Anne\" 364–440"
+    ],
+    "names": 30
+   },
+   {
+    "at": "667x375",
+    "record": "stress",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 314,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 11,
+    "lowest": 534,
+    "above": 231,
+    "below": 405,
+    "cta": null,
+    "bad": [
+     "div.hero-card.paper bottom 534",
+     "span \"Charlotte-Elizabeth Anne\" bottom 338",
+     "span.amp \"&\" bottom 330",
+     "span \"Maximilian Alexander Fit\" bottom 406",
+     "p.hero-date.in \"Saturday, November 20, 2\" bottom 432",
+     "span \"Saturday\" bottom 427",
+     "span.nowrap \"November 20, 2027\" bottom 427",
+     "span \"The Grand Rosewater Cons\" bottom 492",
+     "small \"Jaipur, Rajasthan\" bottom 516"
+    ],
+    "partly": [
+     "div.hero-card.paper 20–534",
+     "span \"Charlotte-Elizabeth Anne\" 228–338",
+     "span.amp \"&\" 311–330",
+     "span \"Maximilian Alexander Fit\" 295–406"
+    ],
+    "names": 30
+   }
+  ],
+  "envelope_to_home_ms": 3804,
+  "home_card_first_frame": {
+   "opacity": 1,
+   "from": true
+  },
+  "nav_vt_390x844": {
+   "nav_animations": [],
+   "opaque_label_row": true,
+   "settled_vs_alone": "0.00 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.00 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
+  },
+  "nav_vt_360x640": {
+   "nav_animations": [],
+   "opaque_label_row": true,
+   "settled_vs_alone": "0.00 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.00 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
+  },
+  "nav_back_vt_390x844": {
+   "nav_animations": [],
+   "frames": [
+    {
+     "t": 0,
+     "nav_drawn": "0.00 %"
+    },
+    {
+     "t": 120,
+     "nav_drawn": "0.00 %"
+    }
+   ]
+  },
+  "nav_back_vt_360x640": {
+   "nav_animations": [],
+   "frames": [
+    {
+     "t": 0,
+     "nav_drawn": "0.00 %"
+    },
+    {
+     "t": 120,
+     "nav_drawn": "0.00 %"
+    }
+   ]
+  },
+  "stress_record": {
+   "slug": "stress-site",
+   "pages": [
+    "index",
+    "home",
+    "story",
+    "details",
+    "rsvp"
+   ],
+   "widths": [
+    360,
+    390
+   ],
+   "copy_keys_at_max": 83,
+   "thank_you": true
+  },
+  "first_view_index_kb_placeholders": 292,
+  "first_view_index_files": [
+   [
+    "/themes/marigold-mehndi/img/silk-640.webp",
+    102140
+   ],
+   [
+    "https://fonts.gstatic.com/s/yrsa/v25/wlp-gwnQFlxs1Qzf-Q.woff2",
+    45740
+   ],
+   [
+    "https://fonts.gstatic.com/s/yrsa/v25/wlptgwnQFlxs1QnF94zlCfv0bz1WCzsWzLdneg.woff2",
+    27220
+   ],
+   [
+    "https://fonts.gstatic.com/s/rozhaone/v17/AlZy_zVFtYP12Zncg2kRcn35.woff2",
+    18176
+   ],
+   [
+    "/themes/marigold-mehndi/img/paper-640.webp",
+    14000
+   ],
+   [
+    "/themes/marigold-mehndi/img/velvet-640.webp",
+    13612
+   ],
+   [
+    "/audio/fx/chime.mp3",
+    10924
+   ],
+   [
+    "/audio/fx/slide.mp3",
+    8259
+   ]
+  ],
+  "first_view_home_kb_placeholders": 145,
+  "first_view_home_files": [
+   [
+    "https://fonts.gstatic.com/s/yrsa/v25/wlp-gwnQFlxs1Qzf-Q.woff2",
+    45740
+   ],
+   [
+    "https://fonts.gstatic.com/s/yrsa/v25/wlptgwnQFlxs1QnF94zlCfv0bz1WCzsWzLdneg.woff2",
+    27220
+   ],
+   [
+    "https://fonts.gstatic.com/s/rozhaone/v17/AlZy_zVFtYP12Zncg2kRcn35.woff2",
+    18176
+   ],
+   [
+    "/themes/marigold-mehndi/img/paper-640.webp",
+    14000
+   ],
+   [
+    "/no-photos/home",
+    12399
+   ],
+   [
+    "/themes/marigold-mehndi/site.css",
+    7706
+   ],
+   [
+    "/themes/marigold-mehndi/site.js",
+    5969
+   ],
+   [
+    "/audio/audio.js",
+    4416
+   ]
+  ],
+  "first_view_index_kb_photos": 382,
+  "first_view_index_files_photos": [
+   [
+    "/themes/marigold-mehndi/img/silk-640.webp",
+    102140
+   ],
+   [
+    "/media/fe7818f7-9197-44dc-bd12-fdb94cf2f274/eae73c36c856512ee88ec8702ae7050c-640w.jpg",
+    93978
+   ],
+   [
+    "https://fonts.gstatic.com/s/yrsa/v25/wlp-gwnQFlxs1Qzf-Q.woff2",
+    45740
+   ],
+   [
+    "https://fonts.gstatic.com/s/yrsa/v25/wlptgwnQFlxs1QnF94zlCfv0bz1WCzsWzLdneg.woff2",
+    27220
+   ],
+   [
+    "https://fonts.gstatic.com/s/rozhaone/v17/AlZy_zVFtYP12Zncg2kRcn35.woff2",
+    18176
+   ],
+   [
+    "/themes/marigold-mehndi/img/paper-640.webp",
+    14000
+   ],
+   [
+    "/themes/marigold-mehndi/img/velvet-640.webp",
+    13612
+   ],
+   [
+    "/audio/fx/chime.mp3",
+    10924
+   ]
+  ],
+  "first_view_home_kb_photos": 337,
+  "first_view_home_files_photos": [
+   [
+    "/media/fe7818f7-9197-44dc-bd12-fdb94cf2f274/a3dd3922819852417961a12748f85e79-640w.jpg",
+    103538
+   ],
+   [
+    "/media/fe7818f7-9197-44dc-bd12-fdb94cf2f274/eae73c36c856512ee88ec8702ae7050c-640w.jpg",
+    93978
+   ],
+   [
+    "https://fonts.gstatic.com/s/yrsa/v25/wlp-gwnQFlxs1Qzf-Q.woff2",
+    45740
+   ],
+   [
+    "https://fonts.gstatic.com/s/yrsa/v25/wlptgwnQFlxs1QnF94zlCfv0bz1WCzsWzLdneg.woff2",
+    27220
+   ],
+   [
+    "https://fonts.gstatic.com/s/rozhaone/v17/AlZy_zVFtYP12Zncg2kRcn35.woff2",
+    18176
+   ],
+   [
+    "/themes/marigold-mehndi/img/paper-640.webp",
+    14000
+   ],
+   [
+    "/anaya-and-kabir/home",
+    12809
+   ],
+   [
+    "/themes/marigold-mehndi/site.css",
+    7706
+   ]
+  ],
+  "video_kb": 1920,
+  "video_first_frame": {
+   "lead_in_s": 0.46,
+   "mean_rgb": [
+    99,
+    28,
+    53
+   ],
+   "stdev": 58
+  },
+  "compare": {
+   "source": "none",
+   "pages": []
+  }
+ }
+}

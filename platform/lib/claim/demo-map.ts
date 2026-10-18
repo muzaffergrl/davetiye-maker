@@ -23,6 +23,7 @@ export const DEMO_CITY_PINS: Readonly<Record<string, { lat: number; lng: number 
   'kintsugi-washi': { lat: 45.7054, lng: -121.5215 }, // Hood River, Oregon
   'lavender-provence': { lat: 43.9116, lng: 5.2003 }, // Gordes
   'maison-patisserie': { lat: 32.0809, lng: -81.0912 }, // Savannah, GA
+  'marigold-mehndi': { lat: 26.9124, lng: 75.7873 }, // Jaipur, Rajasthan (the haveli is fictional)
   'mediterranean-lemon': { lat: 40.6263, lng: 14.3758 }, // Sorrento
   'music-box-ballerina': { lat: 43.0831, lng: -73.7846 }, // Saratoga Springs, NY (the pavilion is fictional)
   'midnight-garden': { lat: 29.9511, lng: -90.0715 }, // New Orleans

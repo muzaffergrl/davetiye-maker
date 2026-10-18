@@ -297,6 +297,11 @@ const dict: Dict = {
   'Turn the key': 'Gira la llave',
   'Wind the music box again': 'Vuelve a dar cuerda a la caja de música',
   'Reflections': 'Reflejos',
+  // G182 Marigold & Mehndi
+  'Let the celebrations begin': 'Que empiece la celebración',
+  'Open the envelope': 'Abrir el sobre',
+  'Together with their families': 'Junto a sus familias',
+  'invite you to celebrate': 'les invitan a celebrar',
 };
 
 export default dict;

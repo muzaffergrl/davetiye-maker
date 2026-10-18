@@ -62,6 +62,8 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   'riad-lantern-nights': { music: 'evening-strings', opening: [[0, 'tap'], [300, 'whoosh'], [1900, 'slide'], [3100, 'chime']] },
   // Celestial Observatory: dome latch (head) · shutter halves part (shutters) · constellation chime · card rises (rise) · forward
   'celestial-observatory': { music: 'evening-strings', opening: [[0, 'clasp'], [450, 'whoosh'], [1700, 'chime'], [3000, 'slide'], [3600, 'chime']] },
+  // Marigold & Mehndi: the silk tassel swings (tassel) · the paisley sleeve slides off (sleeve) · the flap turns up (flap) · card rises (rise) · forward
+  'marigold-mehndi': { music: 'evening-strings', opening: [[0, 'ribbon'], [300, 'slide'], [1250, 'paper'], [2500, 'slide'], [3150, 'chime']] },
   // Sky Lantern Festival: a touch kindles the lantern (kindle) · the hands let go (hands) · it lifts off (rise) · the card glows in (card) · forward
   'sky-lantern-festival': { music: 'first-light', opening: [[0, 'tap'], [700, 'paper'], [900, 'whoosh'], [2000, 'slide'], [3200, 'chime']] },
   // Grand Theatre Premiere: the curtain draws a breath (tug) · the left panel parts (partL) · the card is lit (rise) · forward
