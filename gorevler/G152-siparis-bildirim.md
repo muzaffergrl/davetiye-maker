@@ -2,7 +2,7 @@
 id: G152
 baslik: G146/G147/G150 devamları — çok ürünlü Etsy siparişi, çifte RSVP e-postası, admin cihazlar, sunucuda <html lang>
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G152
 oncelik: 1
 bagimli: [G146, G147, G150]
@@ -111,3 +111,6 @@ Koordinatör: session_01HP9ZrJ8mhZnigbvsvUQ4pR. `lib/print/*`, `themes/*`, `coll
 - `/my`'de "bu siparişle ikinci siteyi başlat" kısa yolu yok: ikinci tasarımın Etsy PDF'indeki `/start?theme=` linki (ya da
   seçicideki tasarım) kullanılır.
 - RSVP e-postası gerçek SMTP ile gönderilmedi (sahte taşıyıcı); canlıda SMTP açılınca bir deneme yanıtıyla bakılmalı.
+
+## Günlük
+- 2026-10-17 entegratör onayladı

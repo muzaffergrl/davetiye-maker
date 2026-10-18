@@ -5,7 +5,7 @@
   "product_language": "en",
   "delivery_platform": "own website platform + edit panel (K24); Canva delivery dropped",
   "sales_channel": "Etsy",
-  "last_updated": "2026-10-16",
+  "last_updated": "2026-10-17",
   "status_levels": [
     "concept",
     "editable_draft",
@@ -16,12 +16,11 @@
     "sale_ready"
   ],
   "undecided": [
-    "pricing (TRY amount + update cadence, K38; target USD 29.40)",
     "etsy_listing_upload (K41: after manual tests)",
     "subscription_budget",
     "revision_scope",
     "real_domain",
-    "email_provider (edit link / RSVP notifications)",
+    "email_provider: SMTP code ready (G147); account / app password not set",
     "privacy_policy_controller_identity (docs/20 §7.2)",
     "order_check_time / extension / deletion policies",
     "next_product_after_collection_01",
@@ -690,13 +689,218 @@
         ],
         "uploaded_to_etsy": false
       }
+    },
+    {
+      "id": "21_Crimson_Rose_Atelier",
+      "working_name": "Crimson Rose Atelier",
+      "is_brand_decision": false,
+      "status": "functional_pilot",
+      "phase1_design_no": 21,
+      "content_record": "collections/21_Crimson_Rose_Atelier/content.demo.json",
+      "design_brief": "collections/21_Crimson_Rose_Atelier/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "theme": "crimson-rose-atelier",
+      "sales_site": "live",
+      "listing_package": {
+        "status": "prepared",
+        "uploaded_to_etsy": false,
+        "notes": "G137/G148"
+      }
+    },
+    {
+      "id": "22_Nocturne_Lake_Estate",
+      "working_name": "Nocturne Lake Estate",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 22,
+      "content_record": "collections/22_Nocturne_Lake_Estate/content.demo.json",
+      "design_brief": "collections/22_Nocturne_Lake_Estate/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "theme": "nocturne-lake-estate",
+      "sales_site": "coming",
+      "listing_package": {
+        "status": "in_progress",
+        "uploaded_to_etsy": false,
+        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+      }
+    },
+    {
+      "id": "23_Velvet_Jewel_Box",
+      "working_name": "Velvet Jewel Box",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 23,
+      "content_record": "collections/23_Velvet_Jewel_Box/content.demo.json",
+      "design_brief": "collections/23_Velvet_Jewel_Box/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "theme": "velvet-jewel-box",
+      "sales_site": "coming",
+      "listing_package": {
+        "status": "in_progress",
+        "uploaded_to_etsy": false,
+        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+      }
+    },
+    {
+      "id": "24_Grand_Theatre_Premiere",
+      "working_name": "Grand Theatre Premiere",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 24,
+      "content_record": "collections/24_Grand_Theatre_Premiere/content.demo.json",
+      "design_brief": "collections/24_Grand_Theatre_Premiere/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "theme": "grand-theatre-premiere",
+      "sales_site": "coming",
+      "listing_package": {
+        "status": "in_progress",
+        "uploaded_to_etsy": false,
+        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+      }
+    },
+    {
+      "id": "25_Orient_Express_Voyage",
+      "working_name": "Orient Express Voyage",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 25,
+      "content_record": "collections/25_Orient_Express_Voyage/content.demo.json",
+      "design_brief": "collections/25_Orient_Express_Voyage/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "theme": "orient-express-voyage",
+      "sales_site": "coming",
+      "listing_package": {
+        "status": "in_progress",
+        "uploaded_to_etsy": false,
+        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+      }
+    },
+    {
+      "id": "26_Kintsugi_Washi",
+      "working_name": "Kintsugi Washi",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 26,
+      "content_record": "collections/26_Kintsugi_Washi/content.demo.json",
+      "design_brief": "collections/26_Kintsugi_Washi/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "theme": "kintsugi-washi",
+      "sales_site": "coming",
+      "listing_package": {
+        "status": "in_progress",
+        "uploaded_to_etsy": false,
+        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+      }
+    },
+    {
+      "id": "27_Riad_Lantern_Nights",
+      "working_name": "Riad Lantern Nights",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 27,
+      "content_record": "collections/27_Riad_Lantern_Nights/content.demo.json",
+      "design_brief": "collections/27_Riad_Lantern_Nights/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "theme": "riad-lantern-nights",
+      "sales_site": "coming",
+      "listing_package": {
+        "status": "in_progress",
+        "uploaded_to_etsy": false,
+        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+      }
+    },
+    {
+      "id": "28_Maison_Patisserie",
+      "working_name": "Maison Patisserie",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 28,
+      "content_record": "collections/28_Maison_Patisserie/content.demo.json",
+      "design_brief": "collections/28_Maison_Patisserie/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "theme": "maison-patisserie",
+      "sales_site": "coming",
+      "listing_package": {
+        "status": "in_progress",
+        "uploaded_to_etsy": false,
+        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+      }
+    },
+    {
+      "id": "29_Celestial_Observatory",
+      "working_name": "Celestial Observatory",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 29,
+      "content_record": "collections/29_Celestial_Observatory/content.demo.json",
+      "design_brief": "collections/29_Celestial_Observatory/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "theme": "celestial-observatory",
+      "sales_site": "coming",
+      "listing_package": {
+        "status": "in_progress",
+        "uploaded_to_etsy": false,
+        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+      }
+    },
+    {
+      "id": "30_Azulejo_Mosaic",
+      "working_name": "Azulejo Mosaic",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 30,
+      "content_record": "collections/30_Azulejo_Mosaic/content.demo.json",
+      "design_brief": "collections/30_Azulejo_Mosaic/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "theme": "azulejo-mosaic",
+      "sales_site": "coming",
+      "listing_package": {
+        "status": "in_progress",
+        "uploaded_to_etsy": false,
+        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+      }
+    },
+    {
+      "id": "31_Sky_Lantern_Festival",
+      "working_name": "Sky Lantern Festival",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 31,
+      "content_record": "collections/31_Sky_Lantern_Festival/content.demo.json",
+      "design_brief": "collections/31_Sky_Lantern_Festival/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "theme": "sky-lantern-festival",
+      "sales_site": "coming",
+      "listing_package": {
+        "status": "in_progress",
+        "uploaded_to_etsy": false,
+        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+      }
+    },
+    {
+      "id": "32_Music_Box_Ballerina",
+      "working_name": "Music Box Ballerina",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 32,
+      "content_record": "collections/32_Music_Box_Ballerina/content.demo.json",
+      "design_brief": "collections/32_Music_Box_Ballerina/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "theme": "music-box-ballerina",
+      "sales_site": "coming",
+      "listing_package": {
+        "status": "in_progress",
+        "uploaded_to_etsy": false,
+        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+      }
     }
   ],
   "task_board": "gorevler/ (tools/gorev.py, PANO.md, roller/)",
   "plan": {
     "phase1": "20 farklı tasarım (docs/09_TASARIM_KATALOGU.md)",
-    "phase2": "her tasarıma orijinale ek 5 renk paleti → 20 + 100 = 120 ürün (K16 geçerli; kapı: G090). Eski GP1–GP4, G040, G041, G070–G074 Canva dönemine göre yazıldı, blokajda; kullanıcının yeni iş listesiyle yeniden tanımlanacak",
-    "doc": "docs/06_FABRIKA_PLANI.md"
+    "phase2": "5 palettes per design: 01–21 built by recolor (G153, G156–G158; status coming), 22–32 in G177; Etsy: one listing per design + palette variation (docs/25 §5). Old GP2–GP4 / G070–G074 Canva-era tasks cancelled 2026-10-17",
+    "doc": "docs/06_FABRIKA_PLANI.md",
+    "phase3_new_designs": "22–32 (docs/24): themes built before GPT parts, status coming; GPT list docs/26"
   },
   "test_designs_not_for_sale": [
     {
@@ -731,8 +935,8 @@
       "region": "iad1",
       "production_url": "https://davetiye-platform-five.vercel.app",
       "git_integration": false,
-      "deployed_commit": "b952bc8 (2026-10-16; platform tree 35ba50964db2; PR #7: 20 designs on sales site, admin v2, panel K29) — dpl_HKT1NRKp895wEVEUbGKdzJCqU4RW",
-      "undeployed_branch": "claude/zealous-fermi-hy1o40: G099 showcase, G100 panel simplification, admin Özet to-dos first, G101-A/B 15–20 QA fixes, Etsy shop setup + listing package 01–05 (v4 images, tools/etsy_upload.py) — not on main, not deployed"
+      "deployed_commit": "477589f (2026-10-17; platform tree 387fcfbd77ae; G139 PDF downloads, G144 languages, G145 panel audit) — dpl_BdTLgKpin8Pfse8cEzzDdapYxaS3; last deploy recorded in docs/10 §2c. Later deploy commands were handed to the user's local session (e62dc79, then main 84e108e); none is confirmed run until docs/10 §2c gets its line",
+      "undeployed_branch": "main 84e108e (PR #24): K46 access from any device (G146), Etsy auto-check + SMTP (G147, off until env), G148–G159, 21 Crimson live, 22–32 coming, palettes 01–21 (coming); claude/zealous-fermi-hy1o40 adds G172 security fixes"
     },
     "data": {
       "adapter": "blob",
@@ -860,14 +1064,95 @@
         "status": "functional_pilot",
         "sales_site": "live",
         "deployed": true
+      },
+      "crimson-rose-atelier": {
+        "design": "21",
+        "status": "functional_pilot",
+        "sales_site": "live",
+        "deployed": "main 84e108e (not confirmed live)"
+      },
+      "nocturne-lake-estate": {
+        "design": "22",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "deployed": false,
+        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+      },
+      "velvet-jewel-box": {
+        "design": "23",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "deployed": false,
+        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+      },
+      "grand-theatre-premiere": {
+        "design": "24",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "deployed": false,
+        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+      },
+      "orient-express-voyage": {
+        "design": "25",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "deployed": false,
+        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+      },
+      "kintsugi-washi": {
+        "design": "26",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "deployed": false,
+        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+      },
+      "riad-lantern-nights": {
+        "design": "27",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "deployed": false,
+        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+      },
+      "maison-patisserie": {
+        "design": "28",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "deployed": false,
+        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+      },
+      "celestial-observatory": {
+        "design": "29",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "deployed": false,
+        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+      },
+      "azulejo-mosaic": {
+        "design": "30",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "deployed": false,
+        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+      },
+      "sky-lantern-festival": {
+        "design": "31",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "deployed": false,
+        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+      },
+      "music-box-ballerina": {
+        "design": "32",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "deployed": false,
+        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
       }
     },
     "tests": {
-      "platform_npm_test": "1189/1189 on production tree b952bc8 (2026-10-16, docs/10); branch sessions G101-A 1208/1208, G101-B 1210/1210; merged integrator branch not run",
-      "admin_browser": "g087-browser 65/65",
-      "marketing_browser": "783/783 (G097)",
-      "themes_15_20": "theme-check --stress 128/0/0, g051-browser 44/44, final-smoke 45/45 each (G101, branch)",
-      "live": "2026-10-16 live-check 60/60 (LIVE_THEMES 15–20 included), blob-smoke 12/12; 20 design pages + /start forms 200 (docs/10)"
+      "platform_npm_test": "1636/1638 (2 build-dependent skipped, 0 fail) on claude/zealous-fermi-hy1o40 after G172 (2026-10-17); build + trace-check green, largest function 143.3 MB",
+      "tools_pytest": "71/71 (tools/tests, 2026-10-17)",
+      "live": "2026-10-17 477589f: live-check 130/130 with 20 sale themes, blob-smoke green (docs/10 §2c)"
     },
     "not_tested": [
       "real iPhone/Android",
@@ -875,15 +1160,14 @@
       "cost/load"
     ],
     "presale_blockers": [
-      "price (TRY amount, K38)",
-      "Etsy listings upload + listing URLs (K41: after tests); [ETSY SHOP URL] placeholder on site",
-      "CLAIM_ORDER_VERIFICATION=manual live value to re-verify (K34; recorded on 2026-10-15, reported off on 2026-10-16)",
-      "email provider (edit link / RSVP notifications)",
-      "privacy notice (needs data controller name/contact, docs/20 §7.2)",
-      "hosting extension / deletion policies",
+      "deploy main (84e108e or newer) and record it in docs/10 §2c (user-run deploy command)",
+      "Etsy listings upload + listing URLs (K41: after tests; listings prepared, not published)",
+      "order verification: etsy mode ready in code (G147) — needs an Etsy developer app (ETSY_API_KEY, ETSY_SHARED_SECRET) or stays manual",
+      "email: SMTP ready in code (G147) — needs SMTP_* / MAIL_FROM / ADMIN_NOTIFY_EMAIL env (e.g. a Gmail app password)",
       "real-device manual test (docs/20_ELLE_TEST_PLANI.md)",
       "12+ char ADMIN_PASSWORD before launch",
-      "merged integrator branch: full npm test/build + deploy"
+      "hosting/domain decision (Vercel Hobby is non-commercial)",
+      "GPT images for 22–32 and retouch parts (docs/26: 270 awaited)"
     ],
     "static_preview_artifact": "https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (design 03 static, private)",
     "admin": {
@@ -893,7 +1177,7 @@
       "password": "ADMIN_PASSWORD env (temporary short, K33; never in repo)",
       "order_verification": "manual (K34) — added to Vercel and tested live on 2026-10-15 (G092 Sonuç, G096); reported not active on 2026-10-16, not re-read: verify before launch"
     },
-    "last_live_check": "2026-10-16 (claude-local-1; docs/10 'Yayın (2026-10-16)' notu)"
+    "last_live_check": "2026-10-17 (477589f; docs/10 §2c)"
   },
   "brand": {
     "name": "BKE Studio",

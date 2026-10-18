@@ -383,7 +383,7 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
 
   return withOrderLock(orderNumber, async () => {
     const verifier = ctx.verifier ?? getOrderVerifier();
-    const check = await verifier.check({ orderNumber, email, theme: theme.id });
+    const check = await verifier.check({ orderNumber, email, theme: theme.id, cached: true });
     if (check.result === 'rejected') return claimError(403, 'order_not_verified');
     if (check.result === 'unavailable') return claimError(503, 'verification_unavailable', {}, { 'Retry-After': '60' });
     const units = orderUnits(check);

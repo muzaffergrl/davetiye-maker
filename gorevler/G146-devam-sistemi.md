@@ -2,7 +2,7 @@
 id: G146
 baslik: "Create your website" + her cihazdan Etsy sipariş no + e-postayla devam (K46)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G146
 oncelik: 1
 bagimli: [G095, G135, G144, G145]
@@ -81,3 +81,6 @@ Ayrıntılı tasarım: `docs/10_SITE_PLATFORMU.md` §3a.
 - Doğrulama kapalıyken sipariş no + e-postayı bilen girer (K46'nın bedeli). Ele geçirilmiş siparişte dükkân önce e-postayı düzeltmeli, sonra
   reissue (docs/10 §3a destek notu). Admin'de cihaz sayısı kartı yok (G147'nin admin kartlarıyla çakışmamak için).
 - Aynı cihazdan tekrar tekrar giriş yeni anahtar üretir (10 sınırı + en eskisi düşer); "On this device" listesi tekrar girişi gereksiz kılar.
+
+## Günlük
+- 2026-10-17 entegratör onayladı

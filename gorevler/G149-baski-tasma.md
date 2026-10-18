@@ -2,7 +2,7 @@
 id: G149
 baslik: Basılı davetiye — metin dekorun üstüne binmesin (22 tasarım, 5×7 + A5, ön + arka)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G149
 oncelik: 1
 bagimli: [G139]
@@ -146,3 +146,6 @@ düşer; kutu/bant yeniden ölçülmeli. Yazı tipi dosyaları ve parçalar test
 `.next` silindiği için "built output" testleri — sıra gereği, build'den önce; g139 6/6, g149 2/2) · `npm run build` + trace-check geçti
 (17 rota, 23 tema). Ek: 264 yüzlük piksel denetimi (scratch) 264/264 temiz; 22 tasarımın 5×7 örnek + uzun EN + uzun DE (ön + arka)
 basımlarına gözle bakıldı; 21 Crimson ve 04 Vintage yakın plan.
+
+## Günlük
+- 2026-10-17 entegratör onayladı

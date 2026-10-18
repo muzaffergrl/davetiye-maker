@@ -353,7 +353,9 @@ export function adminDesigns(list: readonly AdminSiteSummary[], catalogue: Reado
 export function ordersCsv(list: readonly AdminSiteSummary[], origin: string): string {
   const cell = (v: unknown) => {
     let t = v === null || v === undefined ? '' : String(v);
-    if (/^[=+\-@\t\r]/.test(t)) t = `'${t}`;
+    // G172: the rule of lib/rsvp/couple.ts csvCell — also after leading spaces / line breaks (" =HYPERLINK(…)" in a
+    // buyer's venue name)
+    if (/^[=+\-@\t\r]/.test(t) || /^[=+\-@\t\r]/.test(t.replace(/^[ \n]+/, ''))) t = `'${t}`;
     return /[",\n\r;]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t;
   };
   const STATE: Record<AdminSiteState, string> = { draft: 'Taslak', published: 'Yayında', archived: 'Arşiv' };

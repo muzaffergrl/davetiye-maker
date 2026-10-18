@@ -513,7 +513,7 @@ test('order verifier: rejected / unavailable stop the claim; verified passes wit
   const rejected = await postClaim(form({ orderNumber: `#${order}`, email: 'Avery@EXAMPLE.test' }));
   assert.equal(rejected.status, 403);
   assert.equal(rejected.body.code, 'order_not_verified');
-  assert.deepEqual(seen[0], { orderNumber: order, email: 'Avery@example.test', theme: 'sample-design' });
+  assert.deepEqual(seen[0], { orderNumber: order, email: 'Avery@example.test', theme: 'sample-design', cached: true });
   setOrderVerifier(verifier('unavailable'));
   const down = await postClaim(form({ orderNumber: order }));
   assert.equal(down.status, 503);
