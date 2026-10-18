@@ -225,46 +225,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=olive-ivory"
+        "start_link": "/start?theme=olive-ivory",
+        "image": "collections/01_Olive_Ivory/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": true
       },
       {
         "name": "Dusty Blue & Ivory",
         "variant": "dusty-blue",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=olive-ivory&variant=dusty-blue"
+        "start_link": "/start?theme=olive-ivory&variant=dusty-blue",
+        "image": "collections/01_Olive_Ivory/package/listing/images_editorial/palette_dusty-blue.jpg",
+        "image_exists": true
       },
       {
         "name": "Sage & Gold",
         "variant": "sage-gold",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=olive-ivory&variant=sage-gold"
+        "start_link": "/start?theme=olive-ivory&variant=sage-gold",
+        "image": "collections/01_Olive_Ivory/package/listing/images_editorial/palette_sage-gold.jpg",
+        "image_exists": true
       },
       {
         "name": "Navy & Gold",
         "variant": "navy-gold",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=olive-ivory&variant=navy-gold"
+        "start_link": "/start?theme=olive-ivory&variant=navy-gold",
+        "image": "collections/01_Olive_Ivory/package/listing/images_editorial/palette_navy-gold.jpg",
+        "image_exists": true
       },
       {
         "name": "Burgundy & Sage",
         "variant": "burgundy-sage",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=olive-ivory&variant=burgundy-sage"
+        "start_link": "/start?theme=olive-ivory&variant=burgundy-sage",
+        "image": "collections/01_Olive_Ivory/package/listing/images_editorial/palette_burgundy-sage.jpg",
+        "image_exists": true
       },
       {
         "name": "Blush & Sage",
         "variant": "blush-sage",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=olive-ivory&variant=blush-sage"
+        "start_link": "/start?theme=olive-ivory&variant=blush-sage",
+        "image": "collections/01_Olive_Ivory/package/listing/images_editorial/palette_blush-sage.jpg",
+        "image_exists": true
       }
     ],
     "offered": [
       "Original (Olive & Ivory)"
+    ],
+    "images": [
+      {
+        "file": "collections/01_Olive_Ivory/package/listing/images_editorial/10_palettes.jpg",
+        "exists": true,
+        "option": null,
+        "upload": false,
+        "alt": "Olive & Ivory in 6 color palettes: the opening page of each, side by side",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/01_Olive_Ivory/package/listing/images_editorial/palette_original.jpg",
+        "exists": true,
+        "option": "Original (Olive & Ivory)",
+        "upload": false,
+        "alt": "Olive & Ivory in the Original (Olive & Ivory) palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/01_Olive_Ivory/package/listing/images_editorial/palette_dusty-blue.jpg",
+        "exists": true,
+        "option": "Dusty Blue & Ivory",
+        "upload": false,
+        "alt": "Olive & Ivory in the Dusty Blue & Ivory palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/01_Olive_Ivory/package/listing/images_editorial/palette_sage-gold.jpg",
+        "exists": true,
+        "option": "Sage & Gold",
+        "upload": false,
+        "alt": "Olive & Ivory in the Sage & Gold palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/01_Olive_Ivory/package/listing/images_editorial/palette_navy-gold.jpg",
+        "exists": true,
+        "option": "Navy & Gold",
+        "upload": false,
+        "alt": "Olive & Ivory in the Navy & Gold palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/01_Olive_Ivory/package/listing/images_editorial/palette_burgundy-sage.jpg",
+        "exists": true,
+        "option": "Burgundy & Sage",
+        "upload": false,
+        "alt": "Olive & Ivory in the Burgundy & Sage palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/01_Olive_Ivory/package/listing/images_editorial/palette_blush-sage.jpg",
+        "exists": true,
+        "option": "Blush & Sage",
+        "upload": false,
+        "alt": "Olive & Ivory in the Blush & Sage palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

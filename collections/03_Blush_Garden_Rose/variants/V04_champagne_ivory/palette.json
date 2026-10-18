@@ -18,12 +18,13 @@
   ],
   "status": "coming",
   "families": {
-    "rose": "primary",
-    "petal": "primary",
+    "rose": "#E3C3A8",
+    "petal": "#E3C3A8",
     "envelope": "#EFE3D0",
-    "blush_paper": "mist_bottom",
+    "blush_paper": "#F0E2D4",
     "leaf": null,
     "gold": null,
     "cream": null
-  }
+  },
+  "note": "G178: champagne targets with a warm hue (OKLCH ~65°) instead of primary/mist_bottom (~80°): the roses' highlights and the blush paper went past yellow into green"
 }

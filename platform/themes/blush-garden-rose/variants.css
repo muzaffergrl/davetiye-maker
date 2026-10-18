@@ -15,19 +15,19 @@
 
 /* V04_champagne_ivory · Champagne & Ivory */
 html[data-variant="champagne-ivory"] {
-  --c-3f2a2e: 68 53 43;
-  --c-5e4146: 98 80 63;
-  --c-8b505a: 112 82 53;
-  --c-9b2c3a: 112 66 0;
-  --c-9b5d66: 125 94 64;
+  --c-3f2a2e: 68 53 46;
+  --c-5e4146: 99 80 68;
+  --c-8b505a: 113 81 58;
+  --c-9b2c3a: 114 65 0;
+  --c-9b5d66: 126 94 69;
   --c-c8a46e: 199 168 116;
-  --c-eed7d6: 246 235 223;
-  --deep: #6F5033;
-  --ink: #44352B;
-  --ink-soft: #62503F;
-  --mist-bottom: #F4E3D1;
-  --page: #FAEDDF;
-  --primary: #D2B496;
+  --c-eed7d6: 247 235 225;
+  --deep: #6F5038;
+  --ink: #44352E;
+  --ink-soft: #635044;
+  --mist-bottom: #F5E3D5;
+  --page: #FBEDE1;
+  --primary: #D3B49B;
 }
 
 /* V06_dusty_blue_blush · Dusty Blue & Blush */

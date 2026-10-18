@@ -171,7 +171,12 @@
       "--ink",
       "--ink-soft",
       "--gold",
-      "--gold-ink"
+      "--gold-ink",
+      "--c-eccba8",
+      "--c-eedac4",
+      "--c-f6e2cc",
+      "--c-f8e6d0",
+      "--c-ffeed6"
     ],
     "contrast": [
       [
@@ -199,6 +204,7 @@
         "--page",
         4.5
       ]
-    ]
+    ],
+    "keep_note": "G178: the sand channel tokens (nav band, photo slot, text halos) stay with the unpainted sand ground, like --page/--sand; recoloured they made a grey/pink band over the sand"
   }
 }
