@@ -1,4 +1,4 @@
-"""tools/etsy_upload.py tests (G123: designs 06–20 added to the Etsy upload data).
+"""tools/etsy_upload.py tests (G123: designs 06–20 added to the Etsy upload data; G175: 22–32, "coming").
 
   python3 tools/tests/test_etsy_upload.py
 
@@ -23,13 +23,21 @@ import listing_kit as lk  # noqa: E402
 REPO = TOOLS.parent
 NOT_ENVELOPE = {"art-deco-black-tie": "gatefold", "lavender-provence": "pouch", "tropical-destination": "wallet",
                 "enchanted-forest-storybook": "book", "ivory-lace-pearls": "gatefold",
-                "wildflower-meadow-vellum": "sleeve"}
-COMING: set[str] = set()  # G142: design 21 opened for sale (config.ts "live"); add a design here while it is "coming"
+                "wildflower-meadow-vellum": "sleeve",
+                # G175: designs 22–32 (22 opens from an envelope)
+                "velvet-jewel-box": "box", "grand-theatre-premiere": "curtain", "orient-express-voyage": "wallet",
+                "kintsugi-washi": "origami", "riad-lantern-nights": "door", "maison-patisserie": "box",
+                "celestial-observatory": "dome", "azulejo-mosaic": "wall", "sky-lantern-festival": "lantern",
+                "music-box-ballerina": "box"}
+# G142: design 21 opened for sale (config.ts "live"); G175: 22–32 are "coming" (K41) — remove a design here when it opens
+COMING: set[str] = {"nocturne-lake-estate", "velvet-jewel-box", "grand-theatre-premiere", "orient-express-voyage",
+                    "kintsugi-washi", "riad-lantern-nights", "maison-patisserie", "celestial-observatory",
+                    "azulejo-mosaic", "sky-lantern-festival", "music-box-ballerina"}
 
 
 def test_design_table():
     nos = [no for no, _, _ in eu.DESIGNS]
-    assert nos == [f"{i:02d}" for i in range(1, 22)], nos
+    assert nos == [f"{i:02d}" for i in range(1, 33)], nos
     copy = (REPO / "platform" / "lib" / "marketing" / "designs.ts").read_text(encoding="utf-8")
     config = (REPO / "platform" / "lib" / "marketing" / "config.ts").read_text(encoding="utf-8")
     live = set(re.findall(r"id: '([a-z0-9-]+)',\s*\n\s*name: '[^']+',\s*\n\s*status: 'live'", config))
@@ -78,8 +86,8 @@ def test_select():
     assert [d[0] for d in eu.select("06-20")] == [f"{i:02d}" for i in range(6, 21)]
     assert [d[0] for d in eu.select("12,7")] == ["07", "12"]
     assert [d[0] for d in eu.select("01,06-08")] == ["01", "06", "07", "08"]
-    assert len(eu.select("all")) == 21
-    for bad in ("22", "6-x", "00", "01-25"):
+    assert len(eu.select("all")) == 32
+    for bad in ("33", "6-x", "00", "01-35"):
         try:
             eu.select(bad)
         except SystemExit:
@@ -105,11 +113,25 @@ def test_real_listings():
         assert "[QUANTITY]" not in md and "| Quantity | 999" in md, no  # decided 2026-10-16: no stock limit
         assert "[VERIFY" not in data["description"] and data["open_checks"], no
         assert f"/start/demo/{theme}" in data["description"], no
-        assert [i["file"].rsplit("/", 1)[1] for i in data["images"]] == [f"{n}.png" for n in lk.UPLOAD_IMAGES], no
+        names = [i["file"].rsplit("/", 1)[1] for i in data["images"]]
+        if theme in COMING:  # G175: the planned set (8 rows written before image 9, or all 9 without alt texts)
+            assert names == [f"{n}.png" for n in lk.UPLOAD_IMAGES][:len(names)] and len(names) >= 8, no
+            assert not any(i["exists"] for i in data["images"]) and any(
+                b.startswith("listing images missing") for b in data["blockers"]), no
+        else:
+            assert names == [f"{n}.png" for n in lk.UPLOAD_IMAGES], no
         assert data["ready_to_publish"] is False and data["price_try"] == eu.PRICE_TRY == 1460, no
-        assert data["quantity"] == 999 and "| Price | **1,460 TL**" in md, no
+        assert data["quantity"] == 999, no
+        if theme in COMING:  # G175 (K41): not for sale, price confirmed with the sale; both are blockers
+            assert data["sales_status"] == "coming" and "[PRICE]" in md and "| Price | **1,460 TL**" not in md, no
+            assert any(b.startswith("sales status 'coming'") for b in data["blockers"]), no
+            assert any(b.startswith("price not decided") for b in data["blockers"]), no
+            assert data["price_note"].startswith("Proposed:"), no
+        else:
+            assert data["sales_status"] == "live" and "| Price | **1,460 TL**" in md, no
+            assert not any(b.startswith(("sales status", "price not decided")) for b in data["blockers"]), no
         if theme in NOT_ENVELOPE:
-            text = " ".join([f["title"], *f["tags"], data["description"], *(i["alt"] for i in data["images"])])
+            text = " ".join([f["title"], *f["tags"], data["description"], *(i["alt"] or "" for i in data["images"])])
             assert "envelope" not in text.lower(), no
             assert NOT_ENVELOPE[theme] in data["description"], no
         missing_guide = not (REPO / "collections" / folder / "package" / "customer" / "START_HERE.pdf").exists()
@@ -148,7 +170,7 @@ def test_services():
 
 def test_check_exit():
     assert eu.main(["--check"]) == 0
-    # --strict counts the files Etsy needs of every listing that "all" builds: the 21 designs and (G130) the services
+    # --strict counts the files Etsy needs of every listing that "all" builds: the 32 designs and (G130) the services
     files = ("listing images", "listing video", "digital file")
     missing = {no: any(b.startswith(files) for b in eu.build(no, folder, theme)[0]["blockers"])
                for no, folder, theme in eu.DESIGNS}
@@ -160,6 +182,8 @@ def test_check_exit():
     assert eu.main(["--check", "--strict", "--designs", "01-20"]) == (1 if first20 else 0)
     assert eu.main(["--check", "--strict", "--designs", "21"]) == (1 if missing["21"] else 0)
     assert eu.main(["--check", "--strict", "--designs", "services"]) == (1 if services_missing else 0)
+    assert eu.main(["--check", "--designs", "22-32"]) == 0  # G175: rules green although the GPT files are missing
+    assert eu.main(["--check", "--strict", "--designs", "22-32"]) == 1
 
 
 def main():

@@ -1,0 +1,24 @@
+{
+  "id": "V06_lacquer_red",
+  "slug": "lacquer-red",
+  "name": "Lacquer Red & Gold",
+  "ink": "#1D2340",
+  "deep": "#440C15",
+  "primary": "#5C2228",
+  "mist_top": "#E3C1C2",
+  "mist_bottom": "#C2A2A2",
+  "gold": "#C9A55A",
+  "gold_light": "#E3C987",
+  "ivory": "#F3ECDC",
+  "leaf": "#7A5C22",
+  "swatch": [
+    "#5C2228",
+    "#C9A55A",
+    "#F3ECDC"
+  ],
+  "status": "coming",
+  "families": {
+    "indigo": "primary",
+    "gold": null
+  }
+}

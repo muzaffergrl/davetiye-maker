@@ -1,0 +1,169 @@
+{
+  "theme": "riad-lantern-nights",
+  "note": "G177 recolour manifest (tools/recolor_parts.py, docs/25). Every image part of this theme is INTERIM (stand-ins toned from other designs' GPT pixels) until its PAKET 5 GPT part arrives, so the palettes are built CSS-only (build --css-only). Family anchors are the theme's CSS colours; before the image build re-measure each anchor as the median colour of the real GPT parts and review the contact sheets (docs/25 §2.3–2.4).",
+  "image_build": "css-only (interim parts; re-run after GPT)",
+  "swatch": [
+    "#0F2F31",
+    "#E3A54A",
+    "#F6EAD2"
+  ],
+  "families": {
+    "teal": {
+      "anchor": "#174A4B",
+      "sigma": 26,
+      "cmin": 0.018,
+      "cfull": 0.03,
+      "note": "night-teal tadelakt walls"
+    },
+    "lantern": {
+      "anchor": "#E3A54A",
+      "sigma": 14,
+      "cmin": 0.1,
+      "cfull": 0.12,
+      "note": "saffron lantern light (kept warm)"
+    },
+    "cedar": {
+      "anchor": "#3A2114",
+      "sigma": 14,
+      "lmax": 0.5,
+      "note": "carved cedar"
+    }
+  },
+  "groups": {
+    "art": [
+      "teal",
+      "lantern",
+      "cedar"
+    ]
+  },
+  "parts": {
+    "bg_wall": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "card_paper": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "court": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "court_band": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "door_l": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "door_r": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "favicon": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "ph_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "ph_wide": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "ph_window": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "tile_1": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "tile_2": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "tile_3": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "tile_4": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    }
+  },
+  "print": {},
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "teal",
+      "lantern",
+      "cedar"
+    ],
+    "roles": {},
+    "keep": [
+      "--ivory",
+      "--brass",
+      "--brass-ink",
+      "--line"
+    ],
+    "contrast": [
+      [
+        "--ivory",
+        "--night",
+        4.5
+      ],
+      [
+        "--ivory",
+        "--deep",
+        4.5
+      ],
+      [
+        "--ivory",
+        "--teal",
+        4.5
+      ],
+      [
+        "--muted",
+        "--night",
+        4.5
+      ],
+      [
+        "--muted",
+        "--teal",
+        4.5
+      ],
+      [
+        "--brass-ink",
+        "--night",
+        4.5
+      ],
+      [
+        "--saffron",
+        "--deep",
+        3
+      ]
+    ]
+  }
+}

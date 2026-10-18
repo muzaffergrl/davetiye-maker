@@ -23,17 +23,17 @@ in `platform/lib/marketing/designs.ts` yet (only live designs need it); write it
 | Response time, refund policy | docs/20 §6: 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, quantity | **Open** — `[PRICE]`. Quantity 999 like the other designs. |
 | Design fonts and other languages | From the Google Fonts CSS this theme loads (2026-10-17, by family listing; not re-read from the live CSS in this task): Allura (latin, latin-ext), Shippori Mincho (latin, latin-ext, Japanese). No Cyrillic. [VERIFY: subsets in the live Google Fonts CSS] |
-| START HERE guide | **Not produced** (`package/customer/`). |
+| START HERE guide | **Built** (G175, 2026-10-17): `package/customer/START_HERE.md` + `.pdf` with the start QR (`python3 tools/build_customer_guides.py --designs 26`, from docs/19 Ek A; QR only from `tools/make_qr.py`; `--check` passes). Its start link answers only after this design is deployed; rebuild it if Ek A or the domain changes. |
 | Listing images and video | **Not produced** — they wait for the GPT parts (no image of the interim look is to be sold). |
 
 VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence.
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 113 characters.
+Etsy limit: 140 characters. This title: 115 characters.
 
 ```text
-Kintsugi Washi Wedding Website with RSVP, Folded Paper Opening Digital Invitation, Online Editor, Indigo and Gold
+Kintsugi & Washi Wedding Website with RSVP, Folded Paper Opening Digital Invitation, Online Editor, Indigo and Gold
 ```
 
 ## 2. Description
@@ -44,12 +44,12 @@ Paste from the line below. Section titles in capitals and "•" bullets read wel
 
 A wedding website that opens like a folded paper invitation, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
 
-Deep indigo washi paper folded around an ivory rice-paper card, a paper band round its middle and fine gold veins in the spirit of kintsugi. Your guests tap it: the band slides off and the folds open one by one, top, bottom, left and right, until the card with your photo lifts out. Then your invitation follows: Home, Our Story, Details and RSVP, where your photos appear like ink spreading on paper.
+Deep indigo washi paper folded like origami around an ivory rice-paper card, a paper band round its middle and fine gold veins in the spirit of kintsugi. Your guests tap it: the band slides off and the folds open one by one, top, bottom, left and right, until the card with your photo lifts out. Then your invitation follows: Home, Our Story, Details and RSVP, where your photos appear like ink spreading on paper.
 
 TRY THE LIVE DEMO
 See the folds open on your own phone before you buy (sample names):
-[DEMO LINK: https://davetiye-platform-five.vercel.app/start/demo/kintsugi-washi — after deployment]
-Copy the link into your phone's browser.
+https://davetiye-platform-five.vercel.app/start/demo/kintsugi-washi
+Copy the link into your phone's browser. [VERIFY: demo live after deploy]
 
 WHAT YOU GET
 • Your wedding website in the Kintsugi & Washi design: folded paper opening, Home, Our Story, Details and RSVP pages

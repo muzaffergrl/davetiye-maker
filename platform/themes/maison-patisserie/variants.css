@@ -1,0 +1,86 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 28
+   (kaynak: collections/28_Maison_Patisserie/variants/<V0x_slug>/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-405b3b: 64 91 59;
+  --c-4f5d3a: 79 93 58;
+  --c-4f6d49: 79 109 73;
+  --c-7a3d44: 122 61 68;
+  --c-9b4f5a: 155 79 90;
+  --c-a9c49c: 169 196 156;
+  --c-e8b4b8: 232 180 184;
+}
+
+/* V03_blush_pistachio · Blush & Pistachio */
+html[data-variant="blush-pistachio"] {
+  --c-405b3b: 114 73 74;
+  --c-4f5d3a: 113 79 84;
+  --c-4f6d49: 135 88 89;
+  --c-7a3d44: 52 85 34;
+  --c-9b4f5a: 72 110 45;
+  --c-a9c49c: 227 174 180;
+  --c-e8b4b8: 169 196 156;
+  --pistachio: #E3AEB4;
+  --pistachio-deep: #875859;
+  --pistachio-pale: #F2EAE3;
+  --rose: #A9C49C;
+  --rose-deep: #486E2D;
+  --rose-pale: #F2E3E0;
+}
+
+/* V02_lavender_macaron · Lavender & Rose */
+html[data-variant="lavender-macaron"] {
+  --c-405b3b: 81 67 95;
+  --c-4f5d3a: 78 76 99;
+  --c-4f6d49: 98 83 115;
+  --c-a9c49c: 182 168 206;
+  --pistachio: #B6A8CE;
+  --pistachio-deep: #625373;
+  --pistachio-pale: #E2E5E5;
+}
+
+/* V05_lemon_raspberry · Lemon & Raspberry */
+html[data-variant="lemon-raspberry"] {
+  --c-405b3b: 112 104 38;
+  --c-4f5d3a: 122 103 48;
+  --c-4f6d49: 131 121 48;
+  --c-7a3d44: 108 33 54;
+  --c-9b4f5a: 142 49 77;
+  --c-a9c49c: 227 210 140;
+  --c-e8b4b8: 217 154 166;
+  --pistachio: #E3D28C;
+  --pistachio-deep: #7A7127;
+  --pistachio-pale: #F8F8DF;
+  --rose: #D99AA6;
+  --rose-deep: #8E314D;
+}
+
+/* V04_mint_mocha · Mint & Mocha */
+html[data-variant="mint-mocha"] {
+  --c-405b3b: 59 98 87;
+  --c-4f5d3a: 72 101 83;
+  --c-4f6d49: 73 116 104;
+  --c-7a3d44: 93 51 21;
+  --c-9b4f5a: 124 70 35;
+  --c-a9c49c: 163 205 190;
+  --c-e8b4b8: 201 164 142;
+  --pistachio: #A3CDBE;
+  --pistachio-deep: #497468;
+  --pistachio-pale: #E4F3E5;
+  --rose: #C9A48E;
+  --rose-deep: #7C4623;
+  --rose-pale: #F3DFDD;
+}
+
+/* V06_powder_blue · Powder Blue & Rose */
+html[data-variant="powder-blue"] {
+  --c-405b3b: 69 86 106;
+  --c-4f5d3a: 71 92 103;
+  --c-4f6d49: 85 103 126;
+  --c-a9c49c: 169 191 216;
+  --pistachio: #A9BFD8;
+  --pistachio-deep: #55677E;
+  --pistachio-pale: #E3EEEA;
+}

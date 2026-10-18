@@ -6,7 +6,8 @@
    centre in a widening oval, not a fade or zoom); scene steps turn in a little, like the dancer. */
 :root{--blush:#f7e4e2;--blush-deep:#f0d3d1;--quartz:#eecdd0;--rose:#b76e79;--rose-ink:#8a4a55;--ink:#4a2f35;--ink-soft:#6d5056;
 --cream:#fff8f4;--gold:#c9a45c;--gold-ink:#86622a;--line:#b76e7940;--line-soft:#b76e7926;
---display:'Gilda Display','Didot','Bodoni 72',Georgia,serif;--script:'Ballet','Snell Roundhand',cursive;color-scheme:light;--nav-h:62px}
+--display:'Gilda Display','Didot','Bodoni 72',Georgia,serif;--script:'Ballet','Snell Roundhand',cursive;color-scheme:light;--nav-h:62px;
+}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip;scroll-padding:16px 0 calc(var(--nav-h) + 16px)}
 body{margin:0;background:var(--blush);color:var(--ink);font:400 17px/1.7 var(--display);padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom))}
@@ -29,12 +30,12 @@ button:disabled{opacity:.5;cursor:default}
 .small{font:400 13px/1.8 var(--display);color:var(--ink-soft)}
 .btn{display:inline-flex;justify-content:center;align-items:center;gap:12px;min-height:48px;padding:13px 28px;border:1px solid var(--rose);background:var(--rose);color:#fff;font:400 11.5px/1.5 var(--display);letter-spacing:.2em;text-transform:uppercase;border-radius:100px;text-align:center}
 .btn:hover{background:var(--rose-ink)}
-.btn-ghost{background:#fff8f4cc;color:var(--rose-ink);border-color:#b76e7999}
+.btn-ghost{background:#fff8f4cc;color:var(--rose-ink);border-color:rgb(var(--c-b76e79)/.6)}
 .btn-ghost:hover{background:#fff8f4}
-.btn-line{background:transparent;color:var(--rose-ink);border-color:#8a4a5580}
-.btn-line:hover{background:#b76e7914}
+.btn-line{background:transparent;color:var(--rose-ink);border-color:rgb(var(--c-8a4a55)/.502)}
+.btn-line:hover{background:rgb(var(--c-b76e79)/.078)}
 .btn-sm{min-height:44px;padding:10px 18px}
-.textlink{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;font:400 12.5px/1.6 var(--display);border:0;background:transparent;color:var(--rose-ink);letter-spacing:.08em;padding:8px 2px;text-decoration:underline;text-decoration-color:#8a4a5570;text-underline-offset:6px}
+.textlink{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;font:400 12.5px/1.6 var(--display);border:0;background:transparent;color:var(--rose-ink);letter-spacing:.08em;padding:8px 2px;text-decoration:underline;text-decoration-color:rgb(var(--c-8a4a55)/.439);text-underline-offset:6px}
 .center{text-align:center;margin:44px 0 10px}
 .button-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 .no-js .nojs-only{display:block}
@@ -63,7 +64,7 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .site-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fff8f4f2;border-top:1px solid var(--line);padding:6px 8px max(6px,env(safe-area-inset-bottom));view-transition-name:site-nav}
 .site-nav ul{list-style:none;padding:0;display:flex;justify-content:center;gap:4px}
 .site-nav a{display:flex;align-items:center;justify-content:center;min-height:48px;min-width:68px;padding:8px 12px;font:400 11px/1 var(--display);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
-.site-nav a[aria-current]{color:var(--rose-ink);text-decoration:underline;text-underline-offset:8px;text-decoration-color:#b76e7999}
+.site-nav a[aria-current]{color:var(--rose-ink);text-decoration:underline;text-underline-offset:8px;text-decoration-color:rgb(var(--c-b76e79)/.6)}
 
 /* ---------------------------------------------------------------- the music box page */
 .page-opening{padding-bottom:0}
@@ -87,8 +88,8 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .interior{z-index:2}
 .dancer{z-index:3;opacity:0;background:url(img/dancer_sprite-1120.webp) 0 0/800% 100% no-repeat;transform:translateY(46%)}
 .box>.card{z-index:4;view-transition-name:none}
-.box-body{z-index:5;filter:drop-shadow(0 16px 18px #8a4a5540)}
-.lid-closed{z-index:6;backface-visibility:hidden;filter:drop-shadow(0 3px 4px #8a4a5533)}
+.box-body{z-index:5;filter:drop-shadow(0 16px 18px rgb(var(--c-8a4a55)/.251))}
+.lid-closed{z-index:6;backface-visibility:hidden;filter:drop-shadow(0 3px 4px rgb(var(--c-8a4a55)/.2))}
 .key{z-index:7;filter:drop-shadow(0 2px 3px #6b4a2a55)}
 /* the card: GPT card_small (interim: 01's ivory card, toned) between the well and the front of the box */
 .card-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -118,7 +119,7 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .is-opened .opening-heading,.is-opened .lid-closed{opacity:0}
 .is-opened .lid-up{opacity:1;transform:none}
 .is-opened .dancer{opacity:1;transform:none;animation:pirouette 2400ms steps(8) infinite}
-.is-opened .box>.card{z-index:9;view-transition-name:invite-card;filter:drop-shadow(0 16px 20px #8a4a5559)}
+.is-opened .box>.card{z-index:9;view-transition-name:invite-card;filter:drop-shadow(0 16px 20px rgb(var(--c-8a4a55)/.349))}
 @keyframes away{to{opacity:0;transform:translateY(-24px)}}
 @keyframes key-turn{0%{transform:perspective(600px) rotateX(0)}100%{transform:perspective(600px) rotateX(720deg)}}
 @keyframes tug{50%{transform:scale(.988) translateY(.5%)}}
@@ -158,7 +159,7 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .hero-more{padding-top:26px}
 .invitation{max-width:none;padding:84px 28px;display:grid;gap:40px;align-items:center;justify-items:center}
 .portrait-column{width:100%;max-width:360px}
-.portrait{aspect-ratio:4/5;width:100%;filter:drop-shadow(0 14px 20px #8a4a5533)}
+.portrait{aspect-ratio:4/5;width:100%;filter:drop-shadow(0 14px 20px rgb(var(--c-8a4a55)/.2))}
 .invitation-copy{text-align:center;max-width:460px}
 .invitation-copy h2{margin-bottom:24px;color:var(--rose-ink)}
 .formal-names{font:400 32px/1.45 var(--script);color:var(--rose-ink);margin-bottom:12px;overflow-wrap:anywhere}
@@ -245,7 +246,7 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .ceremony{font-size:17px;color:var(--ink-soft);margin-top:4px}
 .programme .calendar{text-align:left;margin-top:24px}
 .programme .button-row{justify-content:flex-start}
-.venue-photo{aspect-ratio:16/9;margin-bottom:16px;border-radius:4px;filter:drop-shadow(0 12px 18px #8a4a5533)}
+.venue-photo{aspect-ratio:16/9;margin-bottom:16px;border-radius:4px;filter:drop-shadow(0 12px 18px rgb(var(--c-8a4a55)/.2))}
 .venue-line{font-size:18px;overflow-wrap:anywhere}
 .map-section{margin-top:20px}
 .map-section .btn{white-space:normal}
@@ -272,7 +273,7 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .field{display:block;margin-top:18px}
 .kicker{display:block;margin-bottom:8px;font:400 11.5px/1.7 var(--display);letter-spacing:.08em;color:var(--rose-ink);overflow-wrap:anywhere}
 .opt{color:var(--ink-soft);font-size:10.5px}
-.field input,.field textarea,.question textarea{display:block;width:100%;border:1px solid #b76e7966;background:#fff8f4e6;color:var(--ink);min-height:48px;padding:12px;border-radius:3px;font:400 16px/1.5 var(--display)}
+.field input,.field textarea,.question textarea{display:block;width:100%;border:1px solid rgb(var(--c-b76e79)/.4);background:#fff8f4e6;color:var(--ink);min-height:48px;padding:12px;border-radius:3px;font:400 16px/1.5 var(--display)}
 .field textarea,.question textarea{resize:vertical}
 .choice{border:0;padding:0;margin:22px 0 0;min-width:0}
 .choice legend{padding:0;width:100%}
@@ -295,7 +296,7 @@ html[data-rsvp-replied] .rsvp-page .page-heading .body-text{display:none}
 .thank-you-copy h2{margin-bottom:22px}
 /* petals (MOTION.petals; GPT petal_1..3): the opening and a sent reply */
 .accent-layer{position:fixed;inset:0;z-index:60;pointer-events:none;overflow:hidden}
-.accent-layer img{position:absolute;top:0;left:0;filter:drop-shadow(0 2px 2px #8a4a5533)}
+.accent-layer img{position:absolute;top:0;left:0;filter:drop-shadow(0 2px 2px rgb(var(--c-8a4a55)/.2))}
 
 /* ---------------------------------------------------------------- page change: the mirror (docs/11 §11) */
 @view-transition{navigation:auto}

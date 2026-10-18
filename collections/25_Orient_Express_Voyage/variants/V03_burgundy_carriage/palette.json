@@ -1,0 +1,25 @@
+{
+  "id": "V03_burgundy_carriage",
+  "slug": "burgundy-carriage",
+  "name": "Burgundy Carriage & Brass",
+  "ink": "#1C2A21",
+  "deep": "#350813",
+  "primary": "#4C1D26",
+  "mist_top": "#D3B7BA",
+  "mist_bottom": "#B3989B",
+  "gold": "#B8914B",
+  "gold_light": "#D8BD84",
+  "ivory": "#F3EBD9",
+  "leaf": "#8C2F39",
+  "swatch": [
+    "#4C1D26",
+    "#B8914B",
+    "#F3EBD9"
+  ],
+  "status": "coming",
+  "families": {
+    "green": "primary",
+    "brass": null,
+    "route": null
+  }
+}

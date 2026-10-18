@@ -1,0 +1,24 @@
+{
+  "id": "V06_plum_rose_gold",
+  "slug": "plum-rose-gold",
+  "name": "Plum Night & Rose Gold",
+  "ink": "#F1E4CC",
+  "deep": "#22132A",
+  "primary": "#22132A",
+  "mist_top": "#A9A1AE",
+  "mist_bottom": "#8A828F",
+  "gold": "#D1A090",
+  "gold_light": "#E0C7A4",
+  "ivory": "#F1E4CC",
+  "leaf": "#C6BDA9",
+  "swatch": [
+    "#22132A",
+    "#D1A090",
+    "#F1E4CC"
+  ],
+  "status": "coming",
+  "families": {
+    "night": "deep",
+    "gold": "#D1A090"
+  }
+}

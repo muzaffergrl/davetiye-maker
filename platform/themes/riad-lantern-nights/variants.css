@@ -1,0 +1,60 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 27
+   (kaynak: collections/27_Riad_Lantern_Nights/variants/<V0x_slug>/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-06191a: 6 25 26;
+  --c-0a2324: 10 35 36;
+  --c-173e3f: 23 62 63;
+}
+
+/* V05_aubergine · Aubergine & Saffron */
+html[data-variant="aubergine"] {
+  --c-06191a: 13 11 18;
+  --c-0a2324: 23 9 22;
+  --c-173e3f: 51 29 50;
+  --deep: #170916;
+  --night: #241222;
+  --teal: #40243F;
+}
+
+/* V03_emerald_garden · Emerald Garden & Brass */
+html[data-variant="emerald-garden"] {
+  --c-06191a: 6 25 21;
+  --c-0a2324: 10 34 25;
+  --c-173e3f: 24 62 46;
+  --deep: #0A2219;
+  --night: #0E2F23;
+  --teal: #1A4A36;
+}
+
+/* V02_midnight_indigo · Midnight Indigo & Saffron */
+html[data-variant="midnight-indigo"] {
+  --c-06191a: 4 13 23;
+  --c-0a2324: 8 13 33;
+  --c-173e3f: 25 35 68;
+  --deep: #080D21;
+  --night: #101631;
+  --teal: #1F2C55;
+}
+
+/* V06_olive_grove · Olive Grove & Brass */
+html[data-variant="olive-grove"] {
+  --c-06191a: 11 20 14;
+  --c-0a2324: 22 25 12;
+  --c-173e3f: 45 49 29;
+  --deep: #16190C;
+  --night: #1F2414;
+  --teal: #373C22;
+}
+
+/* V04_rose_clay · Rose Clay & Brass */
+html[data-variant="rose-clay"] {
+  --c-06191a: 23 17 16;
+  --c-0a2324: 41 17 16;
+  --c-173e3f: 74 36 36;
+  --deep: #291110;
+  --night: #381A18;
+  --teal: #5A2B2B;
+}

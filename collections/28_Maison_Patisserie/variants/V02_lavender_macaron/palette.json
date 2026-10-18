@@ -1,0 +1,25 @@
+{
+  "id": "V02_lavender_macaron",
+  "slug": "lavender-macaron",
+  "name": "Lavender & Rose",
+  "ink": "#3E3A32",
+  "deep": "#9D8FB4",
+  "primary": "#B6A8CE",
+  "mist_top": "#D9D3E4",
+  "mist_bottom": "#C5BFD1",
+  "gold": "#B8995A",
+  "gold_light": "#F2E4BD",
+  "ivory": "#FBF5EC",
+  "leaf": "#E8B4B8",
+  "swatch": [
+    "#FBF5EC",
+    "#B6A8CE",
+    "#E8B4B8"
+  ],
+  "status": "coming",
+  "families": {
+    "pistachio": "primary",
+    "rose": null,
+    "gold": null
+  }
+}

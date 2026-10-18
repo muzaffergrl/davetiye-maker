@@ -41,6 +41,8 @@ export interface OrderCheckInput {
   email: string;
   /** Theme the buyer is starting from. */
   theme: string;
+  /** G174: /start may answer from a short-lived cache of this order's last Etsy receipt read; re-checks never do. */
+  cached?: boolean;
 }
 
 export interface OrderVerifier {

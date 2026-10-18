@@ -1,0 +1,25 @@
+{
+  "id": "V03_blush_pistachio",
+  "slug": "blush-pistachio",
+  "name": "Blush & Pistachio",
+  "ink": "#3E3A32",
+  "deep": "#C9959B",
+  "primary": "#E3AEB4",
+  "mist_top": "#F7DEE0",
+  "mist_bottom": "#E3CACD",
+  "gold": "#A9C49C",
+  "gold_light": "#F2E4BD",
+  "ivory": "#FBF5EC",
+  "leaf": "#E8B4B8",
+  "swatch": [
+    "#FBF5EC",
+    "#E3AEB4",
+    "#A9C49C"
+  ],
+  "status": "coming",
+  "families": {
+    "pistachio": "primary",
+    "rose": "#A9C49C",
+    "gold": null
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "V03_copper_green",
+  "slug": "copper-green",
+  "name": "Copper Green & Ochre",
+  "ink": "#16264F",
+  "deep": "#10533D",
+  "primary": "#2C6A52",
+  "mist_top": "#E3FFF2",
+  "mist_bottom": "#C3DED1",
+  "gold": "#B5832E",
+  "gold_light": "#E4A688",
+  "ivory": "#FAF8F2",
+  "leaf": "#AE583A",
+  "swatch": [
+    "#2C6A52",
+    "#B5832E",
+    "#FAF8F2"
+  ],
+  "status": "coming",
+  "families": {
+    "cobalt": "primary",
+    "terra": "#B5832E"
+  }
+}

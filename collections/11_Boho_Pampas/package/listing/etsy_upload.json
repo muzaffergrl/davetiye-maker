@@ -37,6 +37,7 @@
   "price_note": "Approved by the user on 2026-10-16 (K42, docs/23 §1). Shop currency TRY (K38): Etsy gets the TL amount; USD is approximate, at 49.53 TRY per USD, BloombergHT, 2026-10-16 09:30 (USD/TRY 49.5247 buy / 49.5300 sell).",
   "quantity": 999,
   "renewal": null,
+  "sales_status": "live",
   "shop_section": "Summer & Destination",
   "digital_files": [
     {

@@ -80,6 +80,15 @@ Yeni hat, her tasarım için:
 Website, PDF ve paylaşım görselleri de aynı GPT parçalarını kullanır. Claude yeni görsel/şekil tasarlamaz.
 Pilot: tasarım 03 — G030 (GPT) → G032 (araç) → G031 (montaj) → kullanıcıya comp↔Canva karşılaştırması → G033 (20 tasarıma yayılım).
 
+**GPT görselleri gelince (G176):** kullanıcı görselleri (çoğu rastgele indirme adıyla) verince Claude her birine bakar,
+`{"<gelen dosya>": "<GPT_PROMPTS.md'deki hedef yol>"}` haritasını yazar ve tek komut koşar:
+`python3 tools/gpt_yerlestir.py --eslestir harita.json` (kuru: hedef bir prompt'ta isteniyor mu, oran/şeffaflık/`#00FF00`
+penceresi tutuyor mu, farklı bir dosya eziliyor mu — tek red = hiçbir şey yazılmaz) → aynısı `--uygula` (kopyala; etkilenen
+her tasarımda `build_images.py` → `build-print-assets.ts` → palet → img/ referans + manifest denetimi → `etsy_upload.py`;
+`--theme-check` ve `--ilan` üretim build'iyle; sonda `gpt_bekleyen.py --yaz`). Yerleştirmeden: `--koleksiyon NN|all`.
+Tasarım × adım tablosu ve "live için kalanlar" (eksik parça, başarısız/koşulmamış denetim, göz kontrolü) basılır; live'a
+alma, yayın ve Etsy her zaman koordinatörün ayrı kararıdır.
+
 ## 3b. Video pilotu — İPTAL (2026-10-09, K19)
 GPT ajan oturumunda video üretim aracı yok; Higgsfield kullanılmayacak. Animasyon Canva-yerel (GANN,
 claude-tarayici). GV02A/B/C kapatıldı.

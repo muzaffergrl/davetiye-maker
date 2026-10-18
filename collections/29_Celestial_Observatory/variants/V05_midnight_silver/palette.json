@@ -1,0 +1,24 @@
+{
+  "id": "V05_midnight_silver",
+  "slug": "midnight-silver",
+  "name": "Midnight & Silver",
+  "ink": "#141A33",
+  "deep": "#090D1C",
+  "primary": "#1A1F30",
+  "mist_top": "#A8ABB6",
+  "mist_bottom": "#898D96",
+  "gold": "#C9CFDC",
+  "gold_light": "#E2C27A",
+  "ivory": "#EEEBE3",
+  "leaf": "#9B7A3C",
+  "swatch": [
+    "#1A1F30",
+    "#C9CFDC",
+    "#EEEBE3"
+  ],
+  "status": "coming",
+  "families": {
+    "midnight": "primary",
+    "gold": "#C9CFDC"
+  }
+}

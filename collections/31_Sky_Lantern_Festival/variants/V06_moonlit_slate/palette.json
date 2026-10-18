@@ -1,0 +1,25 @@
+{
+  "id": "V06_moonlit_slate",
+  "slug": "moonlit-slate",
+  "name": "Moonlit Slate & Gold",
+  "ink": "#3B2A4A",
+  "deep": "#1A1E25",
+  "primary": "#2D3139",
+  "mist_top": "#BFC2C6",
+  "mist_bottom": "#A0A2A7",
+  "gold": "#F2A65A",
+  "gold_light": "#FFD08A",
+  "ivory": "#F7EEDD",
+  "leaf": "#E7B4A6",
+  "swatch": [
+    "#2D3139",
+    "#F2A65A",
+    "#F7EEDD"
+  ],
+  "status": "coming",
+  "families": {
+    "dusk": "primary",
+    "amber": null,
+    "rose": null
+  }
+}

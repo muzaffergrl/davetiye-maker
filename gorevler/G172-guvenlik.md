@@ -84,3 +84,4 @@ birleştirme, PR yok. Kritik / yüksek bulgu yok; 3 düşük–orta bulgu düzel
 
 ## Günlük
 - 2026-10-17 entegratör onayladı
+- 2026-10-17 entegratör onayladı

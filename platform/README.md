@@ -23,6 +23,10 @@ npm test               # node:test — motor, içerik, anahtar/slug, adaptör (l
 npm run typecheck      # tsc --noEmit
 npm run build          # prebuild: scripts/theme-assets.cjs (tema CSS/JS/görselleri → public/themes, G159) + next build (Turbopack)
                        # + postbuild: scripts/trace-check.cjs (Vercel paketleri: şablonlar var mı, tema varlığı yok mu, bütçe)
+                       #   + scripts/js-budget.cjs (G173: her sayfa rotasının ilk yük JS'i, gzip, grup bütçesiyle — /edit ≤ 270, /start ≤ 160, satış ≤ 155 KB)
+NODE_PATH=/opt/node22/lib/node_modules node tests/g173-browser.ts [--out <f.json>] [--only <yol>]
+                       # build sonrası (G173): 390 px, CPU 4×, yavaş 4G — satış, /start, 8 demo, panel görünümleri: LCP/CLS/TBT/INP, aktarım,
+                       # axe (serious/critical), dokunma hedefi, odak sırası, reduced motion; her demonun zarf odak halkası → previews/g173/
 npm run screenshot     # build sonrası: next start + Playwright 390 px kontroller (_sample) ve previews/*.png
 NODE_PATH=/opt/node22/lib/node_modules node scripts/theme-check.cjs --theme <id> [--stress] [--out <klasör>] [--compare w1|g035|none] [--no-video]
                        # build sonrası (G052): her tema — 5 genişlik, kısa telefonlar, akış, içerik, kart metni (uzayan kart piksel

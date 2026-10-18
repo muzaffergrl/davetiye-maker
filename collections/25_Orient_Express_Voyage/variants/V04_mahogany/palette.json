@@ -1,0 +1,25 @@
+{
+  "id": "V04_mahogany",
+  "slug": "mahogany",
+  "name": "Mahogany & Brass",
+  "ink": "#1C2A21",
+  "deep": "#34160C",
+  "primary": "#4A2A1F",
+  "mist_top": "#D3C0BA",
+  "mist_bottom": "#B3A19B",
+  "gold": "#B8914B",
+  "gold_light": "#D8BD84",
+  "ivory": "#F3EBD9",
+  "leaf": "#8C2F39",
+  "swatch": [
+    "#4A2A1F",
+    "#B8914B",
+    "#F3EBD9"
+  ],
+  "status": "coming",
+  "families": {
+    "green": "primary",
+    "brass": null,
+    "route": null
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "V05_lemon_raspberry",
+  "slug": "lemon-raspberry",
+  "name": "Lemon & Raspberry",
+  "ink": "#3E3A32",
+  "deep": "#C9B873",
+  "primary": "#E3D28C",
+  "mist_top": "#FFFADB",
+  "mist_bottom": "#EDE6C7",
+  "gold": "#D99AA6",
+  "gold_light": "#F2E4BD",
+  "ivory": "#FBF5EC",
+  "leaf": "#E8B4B8",
+  "swatch": [
+    "#FBF5EC",
+    "#E3D28C",
+    "#D99AA6"
+  ],
+  "status": "coming",
+  "families": {
+    "pistachio": "primary",
+    "rose": "#D99AA6",
+    "gold": null
+  }
+}

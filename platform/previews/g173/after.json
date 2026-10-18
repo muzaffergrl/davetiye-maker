@@ -1,0 +1,1330 @@
+{
+  "date": "2026-10-18T00:18:56.612Z",
+  "results": {
+    "/": {
+      "lcp": 1296,
+      "lcpElement": "IMG http://127.0.0.1:3473/marketing/designs/blush-garden-rose/envelope-480.webp",
+      "cls": 0,
+      "fcp": 1112,
+      "tbt": 375,
+      "inp": 104,
+      "inpEvent": "click",
+      "navigated": false,
+      "interaction": "header menu",
+      "transferKB": 398,
+      "jsKB": 147,
+      "cssKB": 14,
+      "fontKB": 67,
+      "imageKB": 135,
+      "largestImage": {
+        "url": "/marketing/designs/blush-garden-rose/envelope-480.webp",
+        "kb": 44
+      },
+      "afterInteractionKB": 0,
+      "axe": [],
+      "axeMinor": [],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"Skip to content\"",
+        "a \"\"",
+        "a \"Create your website\"",
+        "summary \"Menu\"",
+        "a \"Tap to open the live dem\"",
+        "button \"Blush Garden Rose\"",
+        "button \"Olive & Ivory\"",
+        "button \"Mediterranean Lemon\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/designs": {
+      "lcp": 972,
+      "lcpElement": "P.marketing-module__fIvb4W__lead",
+      "cls": 0,
+      "fcp": 972,
+      "tbt": 239,
+      "inp": 88,
+      "inpEvent": "click",
+      "navigated": false,
+      "interaction": "header menu",
+      "transferKB": 442,
+      "jsKB": 146,
+      "cssKB": 14,
+      "fontKB": 67,
+      "imageKB": 187,
+      "largestImage": {
+        "url": "/marketing/designs/vintage-airmail-love-letter/envelope-320.webp",
+        "kb": 29
+      },
+      "afterInteractionKB": 0,
+      "axe": [],
+      "axeMinor": [],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"Skip to content\"",
+        "a \"\"",
+        "a \"Create your website\"",
+        "summary \"Menu\"",
+        "input \"\"",
+        "button \"Watch it open: Blush Gar\"",
+        "a \"Blush Garden Rose\"",
+        "a \"Live demo\n: Blush Garden\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/designs/olive-ivory": {
+      "lcp": 1536,
+      "lcpElement": "IMG http://127.0.0.1:3473/marketing/designs/olive-ivory/envelope-480.webp",
+      "cls": 0,
+      "fcp": 1108,
+      "tbt": 276,
+      "inp": 88,
+      "inpEvent": "click",
+      "navigated": false,
+      "interaction": "header menu",
+      "transferKB": 457,
+      "jsKB": 146,
+      "cssKB": 14,
+      "fontKB": 67,
+      "imageKB": 200,
+      "largestImage": {
+        "url": "/marketing/designs/olive-ivory/envelope-480.webp",
+        "kb": 45
+      },
+      "afterInteractionKB": 0,
+      "axe": [],
+      "axeMinor": [],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"Skip to content\"",
+        "a \"\"",
+        "a \"Create your website\"",
+        "summary \"Menu\"",
+        "a \"Home\"",
+        "a \"Designs\"",
+        "a \"Tap to open the live dem\"",
+        "a \"Already bought it? Start\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/designs/coastal-seaside": {
+      "lcp": 1304,
+      "lcpElement": "IMG http://127.0.0.1:3473/marketing/designs/coastal-seaside/envelope-480.webp",
+      "cls": 0,
+      "fcp": 1136,
+      "tbt": 309,
+      "inp": 104,
+      "inpEvent": "click",
+      "navigated": false,
+      "interaction": "header menu",
+      "transferKB": 412,
+      "jsKB": 146,
+      "cssKB": 14,
+      "fontKB": 67,
+      "imageKB": 154,
+      "largestImage": {
+        "url": "/marketing/designs/coastal-seaside/envelope-480.webp",
+        "kb": 41
+      },
+      "afterInteractionKB": 0,
+      "axe": [],
+      "axeMinor": [],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"Skip to content\"",
+        "a \"\"",
+        "a \"Create your website\"",
+        "summary \"Menu\"",
+        "a \"Home\"",
+        "a \"Designs\"",
+        "a \"Tap to open the live dem\"",
+        "a \"Already bought it? Start\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/my": {
+      "lcp": 884,
+      "lcpElement": "P.my-module__WSMd_W__lead",
+      "cls": 0,
+      "fcp": 884,
+      "tbt": 181,
+      "inp": 72,
+      "inpEvent": "click",
+      "navigated": false,
+      "interaction": "first button",
+      "transferKB": 230,
+      "jsKB": 147,
+      "cssKB": 21,
+      "fontKB": 51,
+      "imageKB": 5,
+      "largestImage": {
+        "url": "/brand/bke-logo-horizontal-anchor.svg",
+        "kb": 3
+      },
+      "afterInteractionKB": 0,
+      "axe": [],
+      "axeMinor": [],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"Home\"",
+        "a \"Open our Etsy shop\"",
+        "input \"\"",
+        "input \"\"",
+        "button \"Continue\"",
+        "summary \"Have your private edit l\"",
+        "a \"Home\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/pricing": {
+      "lcp": 836,
+      "lcpElement": "P.marketing-module__fIvb4W__lead",
+      "cls": 0,
+      "fcp": 836,
+      "tbt": 200,
+      "inp": 56,
+      "inpEvent": "click",
+      "navigated": false,
+      "interaction": "header menu",
+      "transferKB": 384,
+      "jsKB": 144,
+      "cssKB": 14,
+      "fontKB": 67,
+      "imageKB": 139,
+      "largestImage": {
+        "url": "/marketing/designs/vintage-airmail-love-letter/envelope-320.webp",
+        "kb": 29
+      },
+      "afterInteractionKB": 0,
+      "axe": [],
+      "axeMinor": [],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"Skip to content\"",
+        "a \"\"",
+        "a \"Create your website\"",
+        "summary \"Menu\"",
+        "a \"Blush Garden Rose\"",
+        "a \"Try the demo\"",
+        "a \"Olive & Ivory\"",
+        "a \"Try the demo\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/faq": {
+      "lcp": 784,
+      "lcpElement": "P.marketing-module__fIvb4W__lead",
+      "cls": 0,
+      "fcp": 784,
+      "tbt": 172,
+      "inp": 64,
+      "inpEvent": "click",
+      "navigated": false,
+      "interaction": "header menu",
+      "transferKB": 251,
+      "jsKB": 144,
+      "cssKB": 14,
+      "fontKB": 67,
+      "imageKB": 3,
+      "largestImage": {
+        "url": "/brand/bke-logo-horizontal-anchor.svg",
+        "kb": 3
+      },
+      "afterInteractionKB": 0,
+      "axe": [],
+      "axeMinor": [],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"Skip to content\"",
+        "a \"\"",
+        "a \"Create your website\"",
+        "summary \"Menu\"",
+        "a \"Buying\"",
+        "a \"Editing your website\"",
+        "a \"Guests and RSVP\"",
+        "a \"Sharing\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/tr": {
+      "lcp": 1408,
+      "lcpElement": "IMG http://127.0.0.1:3473/marketing/designs/blush-garden-rose/envelope-480.webp",
+      "cls": 0,
+      "fcp": 1192,
+      "tbt": 513,
+      "inp": 120,
+      "inpEvent": "pointerdown",
+      "navigated": false,
+      "interaction": "header menu",
+      "transferKB": 462,
+      "jsKB": 147,
+      "cssKB": 14,
+      "fontKB": 128,
+      "imageKB": 135,
+      "largestImage": {
+        "url": "/marketing/designs/blush-garden-rose/envelope-480.webp",
+        "kb": 44
+      },
+      "afterInteractionKB": 0,
+      "axe": [],
+      "axeMinor": [],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"İçeriğe geç\"",
+        "a \"\"",
+        "a \"Davetiye siteni oluştur\"",
+        "summary \"Menü\"",
+        "a \"Blush Garden Rose canlı \"",
+        "button \"Blush Garden Rose\"",
+        "button \"Olive & Ivory\"",
+        "button \"Mediterranean Lemon\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/de/designs": {
+      "lcp": 968,
+      "lcpElement": "P.marketing-module__fIvb4W__lead",
+      "cls": 0,
+      "fcp": 968,
+      "tbt": 246,
+      "inp": 72,
+      "inpEvent": "click",
+      "navigated": false,
+      "interaction": "header menu",
+      "transferKB": 394,
+      "jsKB": 146,
+      "cssKB": 14,
+      "fontKB": 67,
+      "imageKB": 139,
+      "largestImage": {
+        "url": "/marketing/designs/vintage-airmail-love-letter/envelope-320.webp",
+        "kb": 29
+      },
+      "afterInteractionKB": 0,
+      "axe": [],
+      "axeMinor": [],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"Zum Inhalt springen\"",
+        "a \"\"",
+        "a \"Website erstellen\"",
+        "summary \"Menü\"",
+        "input \"\"",
+        "button \"Öffnung ansehen: Blush G\"",
+        "a \"Blush Garden Rose\"",
+        "a \"Live-Demo\n: Blush Garden\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/start?theme=olive-ivory": {
+      "lcp": 836,
+      "lcpElement": "H1.start-module__sCVzTa__title",
+      "cls": 0,
+      "fcp": 836,
+      "tbt": 322,
+      "inp": 88,
+      "inpEvent": "pointerdown",
+      "navigated": false,
+      "interaction": "first button",
+      "transferKB": 1350,
+      "jsKB": 167,
+      "cssKB": 34,
+      "fontKB": 179,
+      "imageKB": 906,
+      "largestImage": {
+        "url": "/themes/olive-ivory/img/decor_tl-960.webp",
+        "kb": 167
+      },
+      "afterInteractionKB": 0,
+      "axe": [],
+      "axeMinor": [],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "iframe \"\"",
+        "iframe \"\"",
+        "iframe \"\"",
+        "a \"Open the full demo\"",
+        "input \"\"",
+        "input \"\"",
+        "input \"\"",
+        "input \"\""
+      ],
+      "focusWithoutRing": 3,
+      "reducedMotionAnimations": []
+    },
+    "/start/demo/olive-ivory": {
+      "lcp": 3496,
+      "lcpElement": "IMG.env-closed http://127.0.0.1:3473/themes/olive-ivory/img/env_closed-880.webp",
+      "cls": 0.0023,
+      "fcp": 712,
+      "tbt": 0,
+      "inp": 0,
+      "inpEvent": "",
+      "navigated": true,
+      "interaction": "envelope",
+      "transferKB": 994,
+      "jsKB": 17,
+      "cssKB": 15,
+      "fontKB": 112,
+      "imageKB": 791,
+      "largestImage": {
+        "url": "/themes/olive-ivory/img/decor_tl-960.webp",
+        "kb": 167
+      },
+      "afterInteractionKB": 71,
+      "axe": [],
+      "axeMinor": [
+        "region×1"
+      ],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"SKIP\"",
+        "div \"Open the invitation\"",
+        "button \"Turn sound off\"",
+        "a \"SKIP\"",
+        "div \"Open the invitation\"",
+        "button \"Turn sound off\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/start/demo/blush-garden-rose": {
+      "lcp": 5104,
+      "lcpElement": "IMG.env-closed http://127.0.0.1:3473/themes/blush-garden-rose/img/envelope_closed-880.webp",
+      "cls": 0.0019,
+      "fcp": 788,
+      "tbt": 0,
+      "inp": 0,
+      "inpEvent": "",
+      "navigated": true,
+      "interaction": "envelope",
+      "transferKB": 1060,
+      "jsKB": 17,
+      "cssKB": 16,
+      "fontKB": 126,
+      "imageKB": 840,
+      "largestImage": {
+        "url": "/themes/blush-garden-rose/img/env_body-880.webp",
+        "kb": 161
+      },
+      "afterInteractionKB": 177,
+      "axe": [],
+      "axeMinor": [
+        "region×1"
+      ],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"SKIP\"",
+        "div \"Open the invitation\"",
+        "button \"Turn sound off\"",
+        "a \"SKIP\"",
+        "div \"Open the invitation\"",
+        "button \"Turn sound off\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/start/demo/mediterranean-lemon": {
+      "lcp": 1468,
+      "lcpElement": "IMG.env-closed http://127.0.0.1:3473/themes/mediterranean-lemon/img/env_closed-880.webp",
+      "cls": 0.0013,
+      "fcp": 740,
+      "tbt": 0,
+      "inp": 0,
+      "inpEvent": "",
+      "navigated": true,
+      "interaction": "envelope",
+      "transferKB": 745,
+      "jsKB": 18,
+      "cssKB": 15,
+      "fontKB": 87,
+      "imageKB": 564,
+      "largestImage": {
+        "url": "/themes/mediterranean-lemon/img/decor_br-720.webp",
+        "kb": 118
+      },
+      "afterInteractionKB": 153,
+      "axe": [],
+      "axeMinor": [
+        "region×1"
+      ],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"SKIP\"",
+        "div \"Open the invitation\"",
+        "button \"Turn sound off\"",
+        "a \"SKIP\"",
+        "div \"Open the invitation\"",
+        "button \"Turn sound off\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/start/demo/coastal-seaside": {
+      "lcp": 2868,
+      "lcpElement": "IMG.env-closed http://127.0.0.1:3473/themes/coastal-seaside/img/env_closed-873.webp",
+      "cls": 0.1578,
+      "fcp": 772,
+      "tbt": 0,
+      "inp": 0,
+      "inpEvent": "",
+      "navigated": true,
+      "interaction": "envelope",
+      "transferKB": 875,
+      "jsKB": 18,
+      "cssKB": 16,
+      "fontKB": 98,
+      "imageKB": 678,
+      "largestImage": {
+        "url": "/themes/coastal-seaside/img/card_small-640.webp",
+        "kb": 110
+      },
+      "afterInteractionKB": 93,
+      "axe": [],
+      "axeMinor": [
+        "region×1"
+      ],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"SKIP\"",
+        "div \"Open the invitation\"",
+        "button \"Turn sound off\"",
+        "a \"SKIP\"",
+        "div \"Open the invitation\"",
+        "button \"Turn sound off\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/start/demo/art-deco-black-tie": {
+      "lcp": 2268,
+      "lcpElement": "IMG.door-r http://127.0.0.1:3473/themes/art-deco-black-tie/img/door_r-328.webp",
+      "cls": 0.0067,
+      "fcp": 792,
+      "tbt": 15,
+      "inp": 0,
+      "inpEvent": "",
+      "navigated": true,
+      "interaction": "envelope",
+      "transferKB": 738,
+      "jsKB": 17,
+      "cssKB": 15,
+      "fontKB": 39,
+      "imageKB": 606,
+      "largestImage": {
+        "url": "/themes/art-deco-black-tie/img/rays-1024.webp",
+        "kb": 157
+      },
+      "afterInteractionKB": 160,
+      "axe": [],
+      "axeMinor": [
+        "region×1"
+      ],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"SKIP\"",
+        "div \"Open the invitation\"",
+        "button \"Turn sound off\"",
+        "a \"SKIP\"",
+        "div \"Open the invitation\"",
+        "button \"Turn sound off\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/start/demo/crimson-rose-atelier": {
+      "lcp": 1832,
+      "lcpElement": "IMG http://127.0.0.1:3473/themes/crimson-rose-atelier/img/envelope-closed.webp",
+      "cls": 0.0012,
+      "fcp": 620,
+      "tbt": 0,
+      "inp": 0,
+      "inpEvent": "",
+      "navigated": true,
+      "interaction": "envelope",
+      "transferKB": 776,
+      "jsKB": 9,
+      "cssKB": 11,
+      "fontKB": 102,
+      "imageKB": 616,
+      "largestImage": {
+        "url": "/themes/crimson-rose-atelier/img/seal.webp",
+        "kb": 189
+      },
+      "afterInteractionKB": 137,
+      "axe": [],
+      "axeMinor": [
+        "region×1"
+      ],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"Skip\n→\"",
+        "div \"Open the invitation\"",
+        "button \"Turn sound off\"",
+        "a \"Skip\n→\"",
+        "div \"Open the invitation\"",
+        "button \"Turn sound off\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/start/demo/nocturne-lake-estate": {
+      "lcp": 1436,
+      "lcpElement": "IMG.env-pocket http://127.0.0.1:3473/themes/nocturne-lake-estate/img/env_pocket-880.webp",
+      "cls": 0.0007,
+      "fcp": 600,
+      "tbt": 0,
+      "inp": 0,
+      "inpEvent": "",
+      "navigated": true,
+      "interaction": "envelope",
+      "transferKB": 378,
+      "jsKB": 9,
+      "cssKB": 8,
+      "fontKB": 77,
+      "imageKB": 245,
+      "largestImage": {
+        "url": "/themes/nocturne-lake-estate/img/couple-960.webp",
+        "kb": 114
+      },
+      "afterInteractionKB": 364,
+      "axe": [],
+      "axeMinor": [
+        "region×1"
+      ],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"Skip\"",
+        "div \"Open the invitation\"",
+        "button \"Turn sound off\"",
+        "a \"Skip\"",
+        "div \"Open the invitation\"",
+        "button \"Turn sound off\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/start/demo/music-box-ballerina": {
+      "lcp": 960,
+      "lcpElement": "IMG.box-body http://127.0.0.1:3473/themes/music-box-ballerina/img/box_body-880.webp",
+      "cls": 0.0054,
+      "fcp": 684,
+      "tbt": 0,
+      "inp": 0,
+      "inpEvent": "",
+      "navigated": true,
+      "interaction": "envelope",
+      "transferKB": 255,
+      "jsKB": 11,
+      "cssKB": 9,
+      "fontKB": 55,
+      "imageKB": 140,
+      "largestImage": {
+        "url": "/themes/music-box-ballerina/img/lid_open-880.webp",
+        "kb": 49
+      },
+      "afterInteractionKB": 187,
+      "axe": [],
+      "axeMinor": [
+        "region×1"
+      ],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"Skip\"",
+        "div \"Open the invitation\"",
+        "button \"Turn sound off\"",
+        "a \"Skip\"",
+        "div \"Open the invitation\"",
+        "button \"Turn sound off\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/edit/<slug>#setup/1": {
+      "lcp": 1056,
+      "lcpElement": "P.panel-module__y_j7xG__setupHelp",
+      "cls": 0,
+      "fcp": 928,
+      "tbt": 536,
+      "inp": 64,
+      "inpEvent": "click",
+      "navigated": false,
+      "interaction": "first button",
+      "transferKB": 1298,
+      "jsKB": 277,
+      "cssKB": 35,
+      "fontKB": 163,
+      "imageKB": 753,
+      "largestImage": {
+        "url": "/themes/olive-ivory/img/decor_tl-960.webp",
+        "kb": 167
+      },
+      "afterInteractionKB": 28,
+      "axe": [],
+      "axeMinor": [],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "input \"\"",
+        "input \"\"",
+        "button \"Go to the first one\"",
+        "input \"\"",
+        "input \"\"",
+        "input \"\"",
+        "input \"\"",
+        "input \"\""
+      ],
+      "focusWithoutRing": 1,
+      "reducedMotionAnimations": []
+    },
+    "/edit/<slug>#home": {
+      "lcp": 1056,
+      "lcpElement": "P.panel-module__y_j7xG__setupHelp",
+      "cls": 0,
+      "fcp": 908,
+      "tbt": 433,
+      "inp": 48,
+      "inpEvent": "click",
+      "navigated": true,
+      "interaction": "first button",
+      "transferKB": 367,
+      "jsKB": 259,
+      "cssKB": 20,
+      "fontKB": 67,
+      "imageKB": 10,
+      "largestImage": {
+        "url": "/brand/bke-logo-horizontal-anchor.svg",
+        "kb": 3
+      },
+      "afterInteractionKB": 58,
+      "axe": [],
+      "axeMinor": [],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"Skip to content\"",
+        "button \"Preview\"",
+        "button \"Publish\"",
+        "a \"Home\"",
+        "a \"Edit\"",
+        "a \"Guests\"",
+        "a \"Share\"",
+        "button \"Continue setup · Step 1 \""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/edit/<slug>#edit": {
+      "lcp": 1060,
+      "lcpElement": "P.panel-module__y_j7xG__setupHelp",
+      "cls": 0,
+      "fcp": 860,
+      "tbt": 375,
+      "inp": 0,
+      "inpEvent": "",
+      "navigated": false,
+      "interaction": "none",
+      "transferKB": 351,
+      "jsKB": 259,
+      "cssKB": 20,
+      "fontKB": 51,
+      "imageKB": 10,
+      "largestImage": {
+        "url": "/brand/bke-logo-horizontal-anchor.svg",
+        "kb": 3
+      },
+      "afterInteractionKB": 0,
+      "axe": [],
+      "axeMinor": [],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"Skip to content\"",
+        "button \"Preview\"",
+        "button \"Publish\"",
+        "a \"Home\"",
+        "a \"Edit\"",
+        "a \"Guests\"",
+        "a \"Share\"",
+        "a \"Us\nAvery & Jordan\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/edit/<slug>#edit/photos": {
+      "lcp": 2824,
+      "lcpElement": "P.panel-module__y_j7xG__hint",
+      "cls": 0,
+      "fcp": 892,
+      "tbt": 433,
+      "inp": 104,
+      "inpEvent": "click",
+      "navigated": false,
+      "interaction": "first button",
+      "transferKB": 351,
+      "jsKB": 259,
+      "cssKB": 20,
+      "fontKB": 51,
+      "imageKB": 10,
+      "largestImage": {
+        "url": "/brand/bke-logo-horizontal-anchor.svg",
+        "kb": 3
+      },
+      "afterInteractionKB": 65,
+      "axe": [],
+      "axeMinor": [],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"Skip to content\"",
+        "button \"Back to Edit\"",
+        "button \"Preview\"",
+        "button \"Publish\"",
+        "a \"Home\"",
+        "a \"Edit\"",
+        "a \"Guests\"",
+        "a \"Share\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/edit/<slug>#guests": {
+      "lcp": 1032,
+      "lcpElement": "P.panel-module__y_j7xG__setupHelp",
+      "cls": 0,
+      "fcp": 864,
+      "tbt": 338,
+      "inp": 56,
+      "inpEvent": "click",
+      "navigated": false,
+      "interaction": "first button",
+      "transferKB": 351,
+      "jsKB": 259,
+      "cssKB": 20,
+      "fontKB": 51,
+      "imageKB": 10,
+      "largestImage": {
+        "url": "/brand/bke-logo-horizontal-anchor.svg",
+        "kb": 3
+      },
+      "afterInteractionKB": 0,
+      "axe": [],
+      "axeMinor": [],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"Skip to content\"",
+        "button \"Preview\"",
+        "button \"Publish\"",
+        "a \"Home\"",
+        "a \"Edit\"",
+        "a \"Guests\"",
+        "a \"Share\"",
+        "button \"Publish\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    },
+    "/edit/<slug>#share": {
+      "lcp": 2760,
+      "lcpElement": "P.panel-module__y_j7xG__cardText",
+      "cls": 0,
+      "fcp": 860,
+      "tbt": 368,
+      "inp": 56,
+      "inpEvent": "click",
+      "navigated": false,
+      "interaction": "first button",
+      "transferKB": 352,
+      "jsKB": 259,
+      "cssKB": 20,
+      "fontKB": 51,
+      "imageKB": 10,
+      "largestImage": {
+        "url": "/brand/bke-logo-horizontal-anchor.svg",
+        "kb": 3
+      },
+      "afterInteractionKB": 0,
+      "axe": [],
+      "axeMinor": [],
+      "smallTargets": [],
+      "overflowX": 0,
+      "focusStops": [
+        "a \"Skip to content\"",
+        "button \"Preview\"",
+        "button \"Publish\"",
+        "a \"Home\"",
+        "a \"Edit\"",
+        "a \"Guests\"",
+        "a \"Share\"",
+        "button \"Copy link\""
+      ],
+      "focusWithoutRing": 0,
+      "reducedMotionAnimations": []
+    }
+  },
+  "checks": [
+    {
+      "name": "all 32 demos: the focused envelope shows a focus ring",
+      "ok": true
+    },
+    {
+      "name": "/: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 1296
+    },
+    {
+      "name": "/: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/designs: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 972
+    },
+    {
+      "name": "/designs: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/designs: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/designs: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/designs/olive-ivory: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 1536
+    },
+    {
+      "name": "/designs/olive-ivory: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/designs/olive-ivory: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/designs/olive-ivory: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/designs/coastal-seaside: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 1304
+    },
+    {
+      "name": "/designs/coastal-seaside: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/designs/coastal-seaside: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/designs/coastal-seaside: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/my: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 884
+    },
+    {
+      "name": "/my: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/my: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/my: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/pricing: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 836
+    },
+    {
+      "name": "/pricing: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/pricing: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/pricing: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/faq: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 784
+    },
+    {
+      "name": "/faq: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/faq: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/faq: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/tr: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 1408
+    },
+    {
+      "name": "/tr: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/tr: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/tr: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/de/designs: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 968
+    },
+    {
+      "name": "/de/designs: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/de/designs: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/de/designs: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/start?theme=olive-ivory: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 836
+    },
+    {
+      "name": "/start?theme=olive-ivory: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/start?theme=olive-ivory: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/start?theme=olive-ivory: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/start/demo/olive-ivory: LCP ≤ 2.5 s",
+      "ok": false,
+      "detail": 3496
+    },
+    {
+      "name": "/start/demo/olive-ivory: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0.0023
+    },
+    {
+      "name": "/start/demo/olive-ivory: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/start/demo/olive-ivory: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/start/demo/blush-garden-rose: LCP ≤ 2.5 s",
+      "ok": false,
+      "detail": 5104
+    },
+    {
+      "name": "/start/demo/blush-garden-rose: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0.0019
+    },
+    {
+      "name": "/start/demo/blush-garden-rose: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/start/demo/blush-garden-rose: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/start/demo/mediterranean-lemon: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 1468
+    },
+    {
+      "name": "/start/demo/mediterranean-lemon: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0.0013
+    },
+    {
+      "name": "/start/demo/mediterranean-lemon: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/start/demo/mediterranean-lemon: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/start/demo/coastal-seaside: LCP ≤ 2.5 s",
+      "ok": false,
+      "detail": 2868
+    },
+    {
+      "name": "/start/demo/coastal-seaside: CLS ≤ 0.1",
+      "ok": false,
+      "detail": 0.1578
+    },
+    {
+      "name": "/start/demo/coastal-seaside: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/start/demo/coastal-seaside: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/start/demo/art-deco-black-tie: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 2268
+    },
+    {
+      "name": "/start/demo/art-deco-black-tie: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0.0067
+    },
+    {
+      "name": "/start/demo/art-deco-black-tie: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/start/demo/art-deco-black-tie: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/start/demo/crimson-rose-atelier: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 1832
+    },
+    {
+      "name": "/start/demo/crimson-rose-atelier: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0.0012
+    },
+    {
+      "name": "/start/demo/crimson-rose-atelier: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/start/demo/crimson-rose-atelier: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/start/demo/nocturne-lake-estate: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 1436
+    },
+    {
+      "name": "/start/demo/nocturne-lake-estate: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0.0007
+    },
+    {
+      "name": "/start/demo/nocturne-lake-estate: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/start/demo/nocturne-lake-estate: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/start/demo/music-box-ballerina: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 960
+    },
+    {
+      "name": "/start/demo/music-box-ballerina: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0.0054
+    },
+    {
+      "name": "/start/demo/music-box-ballerina: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/start/demo/music-box-ballerina: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/edit/<slug>#setup/1: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 1056
+    },
+    {
+      "name": "/edit/<slug>#setup/1: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/edit/<slug>#setup/1: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/edit/<slug>#setup/1: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/edit/<slug>#home: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 1056
+    },
+    {
+      "name": "/edit/<slug>#home: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/edit/<slug>#home: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/edit/<slug>#home: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/edit/<slug>#edit: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 1060
+    },
+    {
+      "name": "/edit/<slug>#edit: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/edit/<slug>#edit: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/edit/<slug>#edit: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/edit/<slug>#edit/photos: LCP ≤ 2.5 s",
+      "ok": false,
+      "detail": 2824
+    },
+    {
+      "name": "/edit/<slug>#edit/photos: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/edit/<slug>#edit/photos: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/edit/<slug>#edit/photos: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/edit/<slug>#guests: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 1032
+    },
+    {
+      "name": "/edit/<slug>#guests: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/edit/<slug>#guests: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/edit/<slug>#guests: no horizontal overflow at 390",
+      "ok": true
+    },
+    {
+      "name": "/edit/<slug>#share: LCP ≤ 2.5 s",
+      "ok": false,
+      "detail": 2760
+    },
+    {
+      "name": "/edit/<slug>#share: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/edit/<slug>#share: axe serious/critical = 0",
+      "ok": true
+    },
+    {
+      "name": "/edit/<slug>#share: no horizontal overflow at 390",
+      "ok": true
+    }
+  ]
+}

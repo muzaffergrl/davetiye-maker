@@ -1,0 +1,24 @@
+{
+  "id": "V02_crimson_velvet",
+  "slug": "crimson-velvet",
+  "name": "Crimson Velvet & Gold",
+  "ink": "#1E2626",
+  "deep": "#600012",
+  "primary": "#7A1E26",
+  "mist_top": "#FECCCA",
+  "mist_bottom": "#DCACAB",
+  "gold": "#C9A45C",
+  "gold_light": "#E3C78B",
+  "ivory": "#F3EBD8",
+  "leaf": "#6E5119",
+  "swatch": [
+    "#7A1E26",
+    "#C9A45C",
+    "#F3EBD8"
+  ],
+  "status": "coming",
+  "families": {
+    "velvet": "primary",
+    "gold": null
+  }
+}
