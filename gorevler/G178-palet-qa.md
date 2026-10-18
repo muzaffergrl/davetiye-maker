@@ -5,7 +5,7 @@ rol: claude-qa
 durum: inceleme
 alan: claude-G178
 oncelik: 2
-bagimli: [G153, G156, G157, G158]
+bagimli: [G153, G156, G157, G158, G177]
 yazar: [gorevler/G178-palet-qa.md, platform/previews/g178/, platform/scripts/seed.ts, tools/listing_editorial.py, tools/listing_editorial/capture_opening.ts, tools/listing_editorial/templates/10_palettes.html, tools/listing_editorial/templates/11_palette.html, tools/listing_kit.py, tools/etsy_upload.py, tools/tests/test_etsy_upload.py, tools/tests/test_listing_editorial.py, collections/*/package/listing/images_editorial/, collections/*/package/listing/etsy_upload.json, collections/01_Olive_Ivory/variants/, collections/03_Blush_Garden_Rose/variants/V04_champagne_ivory/, collections/11_Boho_Pampas/variants/recolor.json, collections/16_Sunflower_Rustic/variants/recolor.json, platform/themes/olive-ivory/variants.css, platform/themes/blush-garden-rose/, platform/themes/boho-pampas-terracotta/, platform/themes/sunflower-rustic-barn/variants.css, platform/public/print/blush-garden-rose/variants/champagne-ivory/, docs/21_ILAN_GORSELLERI.md, docs/25_PALET_VARYANTLARI.md]
 ---
 
@@ -173,7 +173,15 @@ nokta (red değil): 14 Champagne & Gold orijinale çok yakın — istenirse baş
 - Küçük önizlemeler: `platform/previews/g178/<NN>_<tema>.jpg` (6 paletin açılışı yan yana, her biri ≤ 230 KB).
 
 ### Testler (komut + sonuç)
-SONUC_TESTLER
+Birleşik dalda (\`origin/claude/zealous-fermi-hy1o40\` → \`70dedbcc\`, G177'nin 22–32 paletleri dahil):
+- \`python3 -m pytest tools/tests -q\` → **111 passed** (yeni: \`test_palette_images_g178\`, \`test_palettes_g178\`; şablon testine palet
+  şablonlarının yer tutucuları eklendi).
+- \`cd platform && npm ci && rm -rf .next && npx tsc --noEmit && I18N_STRICT=1 npm test && npm run build\` → tsc 0; **1647 geçti, 0 kırmızı**
+  (2 atlandı); build + trace-check + js-budget 0.
+- \`variant-check\`: 21 tema, 105 palet, 0 hata (düzeltmeden sonra 01, 03, 11, 16 yeniden: geçti). \`recolor_parts.py check\` 01/03/11/16 temiz.
+- \`python3 tools/etsy_upload.py --check --strict --designs 01-21\` → 0. Tümü (\`all\`) 1 döner: 22–32'nin ilan görselleri/videosu henüz
+  yok (taban dalda da aynı, G177 kapsamı); 22–32 \`etsy_upload.json\` yalnız yeni \`image\` alanlarıyla yeniden yazıldı (test güncelliği için).
+- \`git status\`: ekran görüntüsü dökümü yok (variant-check ve çekimler scratchpad'de).
 
 ### Denenmedi
 Gerçek iPhone/Android; Vercel yayını; Etsy ilan düzenleyicisinde dijital ilan varyasyonu ve seçeneğe fotoğraf bağlama (K41).

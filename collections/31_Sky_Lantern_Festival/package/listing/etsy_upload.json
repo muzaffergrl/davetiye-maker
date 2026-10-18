@@ -237,46 +237,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=sky-lantern-festival"
+        "start_link": "/start?theme=sky-lantern-festival",
+        "image": "collections/31_Sky_Lantern_Festival/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": false
       },
       {
         "name": "Midnight Blue & Amber",
         "variant": "midnight-blue",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=sky-lantern-festival&variant=midnight-blue"
+        "start_link": "/start?theme=sky-lantern-festival&variant=midnight-blue",
+        "image": "collections/31_Sky_Lantern_Festival/package/listing/images_editorial/palette_midnight-blue.jpg",
+        "image_exists": false
       },
       {
         "name": "Twilight Rose & Gold",
         "variant": "twilight-rose",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=sky-lantern-festival&variant=twilight-rose"
+        "start_link": "/start?theme=sky-lantern-festival&variant=twilight-rose",
+        "image": "collections/31_Sky_Lantern_Festival/package/listing/images_editorial/palette_twilight-rose.jpg",
+        "image_exists": false
       },
       {
         "name": "Deep Teal Dusk & Amber",
         "variant": "deep-teal",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=sky-lantern-festival&variant=deep-teal"
+        "start_link": "/start?theme=sky-lantern-festival&variant=deep-teal",
+        "image": "collections/31_Sky_Lantern_Festival/package/listing/images_editorial/palette_deep-teal.jpg",
+        "image_exists": false
       },
       {
         "name": "Evergreen Night & Amber",
         "variant": "evergreen-night",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=sky-lantern-festival&variant=evergreen-night"
+        "start_link": "/start?theme=sky-lantern-festival&variant=evergreen-night",
+        "image": "collections/31_Sky_Lantern_Festival/package/listing/images_editorial/palette_evergreen-night.jpg",
+        "image_exists": false
       },
       {
         "name": "Moonlit Slate & Gold",
         "variant": "moonlit-slate",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=sky-lantern-festival&variant=moonlit-slate"
+        "start_link": "/start?theme=sky-lantern-festival&variant=moonlit-slate",
+        "image": "collections/31_Sky_Lantern_Festival/package/listing/images_editorial/palette_moonlit-slate.jpg",
+        "image_exists": false
       }
     ],
     "offered": [
       "Original (Sky Lantern Festival)"
+    ],
+    "images": [
+      {
+        "file": "collections/31_Sky_Lantern_Festival/package/listing/images_editorial/10_palettes.jpg",
+        "exists": false,
+        "option": null,
+        "upload": false,
+        "alt": "Sky Lantern Festival in 6 color palettes: the opening page of each, side by side",
+        "status": "missing"
+      },
+      {
+        "file": "collections/31_Sky_Lantern_Festival/package/listing/images_editorial/palette_original.jpg",
+        "exists": false,
+        "option": "Original (Sky Lantern Festival)",
+        "upload": false,
+        "alt": "Sky Lantern Festival in its original palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/31_Sky_Lantern_Festival/package/listing/images_editorial/palette_midnight-blue.jpg",
+        "exists": false,
+        "option": "Midnight Blue & Amber",
+        "upload": false,
+        "alt": "Sky Lantern Festival in the Midnight Blue & Amber palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/31_Sky_Lantern_Festival/package/listing/images_editorial/palette_twilight-rose.jpg",
+        "exists": false,
+        "option": "Twilight Rose & Gold",
+        "upload": false,
+        "alt": "Sky Lantern Festival in the Twilight Rose & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/31_Sky_Lantern_Festival/package/listing/images_editorial/palette_deep-teal.jpg",
+        "exists": false,
+        "option": "Deep Teal Dusk & Amber",
+        "upload": false,
+        "alt": "Sky Lantern Festival in the Deep Teal Dusk & Amber palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/31_Sky_Lantern_Festival/package/listing/images_editorial/palette_evergreen-night.jpg",
+        "exists": false,
+        "option": "Evergreen Night & Amber",
+        "upload": false,
+        "alt": "Sky Lantern Festival in the Evergreen Night & Amber palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/31_Sky_Lantern_Festival/package/listing/images_editorial/palette_moonlit-slate.jpg",
+        "exists": false,
+        "option": "Moonlit Slate & Gold",
+        "upload": false,
+        "alt": "Sky Lantern Festival in the Moonlit Slate & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

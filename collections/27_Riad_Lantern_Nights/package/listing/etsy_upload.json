@@ -237,46 +237,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=riad-lantern-nights"
+        "start_link": "/start?theme=riad-lantern-nights",
+        "image": "collections/27_Riad_Lantern_Nights/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": false
       },
       {
         "name": "Midnight Indigo & Saffron",
         "variant": "midnight-indigo",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=riad-lantern-nights&variant=midnight-indigo"
+        "start_link": "/start?theme=riad-lantern-nights&variant=midnight-indigo",
+        "image": "collections/27_Riad_Lantern_Nights/package/listing/images_editorial/palette_midnight-indigo.jpg",
+        "image_exists": false
       },
       {
         "name": "Emerald Garden & Brass",
         "variant": "emerald-garden",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=riad-lantern-nights&variant=emerald-garden"
+        "start_link": "/start?theme=riad-lantern-nights&variant=emerald-garden",
+        "image": "collections/27_Riad_Lantern_Nights/package/listing/images_editorial/palette_emerald-garden.jpg",
+        "image_exists": false
       },
       {
         "name": "Rose Clay & Brass",
         "variant": "rose-clay",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=riad-lantern-nights&variant=rose-clay"
+        "start_link": "/start?theme=riad-lantern-nights&variant=rose-clay",
+        "image": "collections/27_Riad_Lantern_Nights/package/listing/images_editorial/palette_rose-clay.jpg",
+        "image_exists": false
       },
       {
         "name": "Aubergine & Saffron",
         "variant": "aubergine",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=riad-lantern-nights&variant=aubergine"
+        "start_link": "/start?theme=riad-lantern-nights&variant=aubergine",
+        "image": "collections/27_Riad_Lantern_Nights/package/listing/images_editorial/palette_aubergine.jpg",
+        "image_exists": false
       },
       {
         "name": "Olive Grove & Brass",
         "variant": "olive-grove",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=riad-lantern-nights&variant=olive-grove"
+        "start_link": "/start?theme=riad-lantern-nights&variant=olive-grove",
+        "image": "collections/27_Riad_Lantern_Nights/package/listing/images_editorial/palette_olive-grove.jpg",
+        "image_exists": false
       }
     ],
     "offered": [
       "Original (Riad Lantern Nights)"
+    ],
+    "images": [
+      {
+        "file": "collections/27_Riad_Lantern_Nights/package/listing/images_editorial/10_palettes.jpg",
+        "exists": false,
+        "option": null,
+        "upload": false,
+        "alt": "Riad Lantern Nights in 6 color palettes: the opening page of each, side by side",
+        "status": "missing"
+      },
+      {
+        "file": "collections/27_Riad_Lantern_Nights/package/listing/images_editorial/palette_original.jpg",
+        "exists": false,
+        "option": "Original (Riad Lantern Nights)",
+        "upload": false,
+        "alt": "Riad Lantern Nights in its original palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/27_Riad_Lantern_Nights/package/listing/images_editorial/palette_midnight-indigo.jpg",
+        "exists": false,
+        "option": "Midnight Indigo & Saffron",
+        "upload": false,
+        "alt": "Riad Lantern Nights in the Midnight Indigo & Saffron palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/27_Riad_Lantern_Nights/package/listing/images_editorial/palette_emerald-garden.jpg",
+        "exists": false,
+        "option": "Emerald Garden & Brass",
+        "upload": false,
+        "alt": "Riad Lantern Nights in the Emerald Garden & Brass palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/27_Riad_Lantern_Nights/package/listing/images_editorial/palette_rose-clay.jpg",
+        "exists": false,
+        "option": "Rose Clay & Brass",
+        "upload": false,
+        "alt": "Riad Lantern Nights in the Rose Clay & Brass palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/27_Riad_Lantern_Nights/package/listing/images_editorial/palette_aubergine.jpg",
+        "exists": false,
+        "option": "Aubergine & Saffron",
+        "upload": false,
+        "alt": "Riad Lantern Nights in the Aubergine & Saffron palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/27_Riad_Lantern_Nights/package/listing/images_editorial/palette_olive-grove.jpg",
+        "exists": false,
+        "option": "Olive Grove & Brass",
+        "upload": false,
+        "alt": "Riad Lantern Nights in the Olive Grove & Brass palette: the opening page closed and opening",
+        "status": "missing"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

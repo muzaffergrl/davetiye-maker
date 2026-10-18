@@ -52,6 +52,7 @@ def editorial_values(t: lk.Theme) -> dict:
          "col_left": "120", "col_top": "250", "col_w": "800", "screens": "", "steps": ""}
     v.update({f"s{i}_cx": "500" for i in (1, 2, 3)})
     v["s2_w"] = "560"
+    v.update({"count_words": "six", "kicker": "Color palette", "palette_name": "Navy & Gold"})  # G178 palette images
     return v
 
 
