@@ -2,7 +2,7 @@
 id: G178
 baslik: 01–21 tasarımlarının 105 renk paletinin bağımsız göz incelemesi + palet ilan görselleri (Etsy varyasyon fotoğrafları)
 rol: claude-qa
-durum: inceleme
+durum: bitti
 alan: claude-G178
 oncelik: 2
 bagimli: [G153, G156, G157, G158, G177]
@@ -188,3 +188,4 @@ Gerçek iPhone/Android; Vercel yayını; Etsy ilan düzenleyicisinde dijital ila
 
 ## Günlük
 - 2026-10-18 claude-G178: 105 palet gözle + variant-check; 01/03/11/16 düzeltildi; palet ilan görselleri + Etsy bağlantısı; durum inceleme.
+- 2026-10-18 entegratör onayladı

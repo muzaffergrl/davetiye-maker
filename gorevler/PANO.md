@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 1 · alindi 0 · inceleme 0 · blokaj 2 · bitti 210 · iptal 256 · toplam 469
+Özet: hazir 1 · alindi 0 · inceleme 0 · blokaj 2 · bitti 211 · iptal 256 · toplam 470
 
 İptal edilen görevler (K22/K24 ile anlamını yitirenler) listelenmez; yalnız sayıları var. Ayrıntı: `python3 tools/gorev.py liste --hepsi`.
 
@@ -65,7 +65,7 @@ Bağımlılık bekleyen: 0 · Biten: 10 · İptal: 20
 
 - (yok)
 
-Bağımlılık bekleyen: 0 · Biten: 1 · İptal: 20
+Bağımlılık bekleyen: 0 · Biten: 2 · İptal: 20
 
 ## gpt-gorsel
 
