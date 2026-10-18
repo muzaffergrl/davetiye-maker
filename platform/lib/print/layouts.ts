@@ -71,6 +71,17 @@ const sealAt = (edge: 'top' | 'bottom') => ({ src: 'seal', style: `${edge}:4%;le
 const tileRow = (edge: 'top' | 'bottom') =>
   ['tile1', 'tile2', 'tile3', 'tile2', 'tile1'].map((src, i) => ({ src, style: `${edge}:5%;left:${25 + i * 10.5}%;width:9%` }));
 
+/** 38 (G187): a garland of the theme's flags across the top, sagging toward the middle (each flag hangs square to it). */
+const flagGarland = (n: number, top: number, width: number) =>
+  Array.from({ length: n }, (_, i) => {
+    const t = (i + 0.5) / n;
+    const step = Math.min(14, 84 / n);
+    return {
+      src: `flag${(i % 6) + 1}`,
+      style: `top:${(top + 4 * t * (1 - t) * 2.4).toFixed(2)}%;left:${(50 + (i - (n - 1) / 2) * step - width * 0.4).toFixed(2)}%;width:${(width * 0.8).toFixed(2)}%;transform:rotate(${((t - 0.5) * -8).toFixed(1)}deg)`,
+    };
+  });
+
 /** 30 (G169): a row of the theme's azulejo tiles along one edge — corner, border and field tiles as on the website's wall. */
 const azulejoRow = (edge: 'top' | 'bottom') =>
   ['tile3', 'tile2', 'tile1', 'tile4', 'tile1', 'tile2', 'tile3'].map((src, i) => ({
@@ -471,6 +482,30 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     composed: {
       front: { bg: cover('paper'), images: [{ src: 'petal', style: 'top:6%;left:50%;width:14%;transform:translateX(-50%) rotate(-18deg)' }] },
       back: { bg: cover('paper'), images: [{ src: 'petal', style: 'bottom:5%;left:50%;width:10%;transform:translateX(-50%) rotate(12deg)' }] },
+    },
+  },
+  // 38 (G187): composed until its print grounds arrive (GPT_PROMPTS.md PAKET 6) — the website's cream paper with a
+  // garland of the theme's six flags along the top (front: full width, sagging; back: a short garland), images from the
+  // theme build (interim tissue rectangles until the GPT flags, see themes/papel-picado-fiesta/build_images.py; no shape
+  // drawn). On arrival: sources -> print/invitation_front_5x7.png + print/invitation_back_5x7.png, composed ->
+  // cover('front') / cover('back') with no images, boxes re-measured on the art (G149) — steps in GPT_PROMPTS.md PAKET 6.
+  'papel-picado-fiesta': {
+    collection: '38_Papel_Picado_Fiesta',
+    sources: {
+      paper: 'platform/themes/papel-picado-fiesta/img/paper-1024.webp',
+      flag1: 'platform/themes/papel-picado-fiesta/img/flag_1-200.webp',
+      flag2: 'platform/themes/papel-picado-fiesta/img/flag_2-200.webp',
+      flag3: 'platform/themes/papel-picado-fiesta/img/flag_3-200.webp',
+      flag4: 'platform/themes/papel-picado-fiesta/img/flag_4-200.webp',
+      flag5: 'platform/themes/papel-picado-fiesta/img/flag_5-200.webp',
+      flag6: 'platform/themes/papel-picado-fiesta/img/flag_6-200.webp',
+    },
+    fonts: gf('family=Alegreya:ital,wght@0,400;0,500;1,400&family=Oleo+Script'),
+    script: "'Oleo Script', cursive", serif: "'Alegreya', Georgia, serif",
+    ink: '#3B2418', accent: '#8A3A1F', front: [22, 13, 12, 13], back: [15, 12, 10, 12],
+    composed: {
+      front: { bg: cover('paper'), images: flagGarland(6, 3, 12) },
+      back: { bg: cover('paper'), images: flagGarland(4, 2.5, 8) },
     },
   },
 };

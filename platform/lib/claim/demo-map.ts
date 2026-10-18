@@ -28,6 +28,7 @@ export const DEMO_CITY_PINS: Readonly<Record<string, { lat: number; lng: number 
   'midnight-garden': { lat: 29.9511, lng: -90.0715 }, // New Orleans
   'nocturne-lake-estate': { lat: 45.9857, lng: 9.2617 }, // Bellagio (Lake Como)
   'orient-express-voyage': { lat: 45.4408, lng: 12.3155 }, // Venice
+  'papel-picado-fiesta': { lat: 29.4241, lng: -98.4936 }, // San Antonio, TX (the courtyard is fictional)
   'grand-theatre-premiere': { lat: 37.5407, lng: -77.436 }, // Richmond, VA (the theatre is fictional)
   'olive-ivory': { lat: 38.2975, lng: -122.2869 }, // Napa
   'riad-lantern-nights': { lat: 31.6295, lng: -7.9811 }, // Marrakech (medina)

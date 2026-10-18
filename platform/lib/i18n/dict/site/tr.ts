@@ -297,6 +297,10 @@ const dict: Dict = {
   'Turn the key': 'Anahtarı çevirin',
   'Wind the music box again': 'Müzik kutusunu yeniden kurun',
   'Reflections': 'Yansımalar',
+  // G187 Papel Picado Fiesta
+  "A fiesta of love": "Aşkın fiestası",
+  "Open the envelope": "Zarfı aç",
+  "Together with their families": "Aileleriyle birlikte",
 };
 
 export default dict;
