@@ -173,15 +173,15 @@ nokta (red değil): 14 Champagne & Gold orijinale çok yakın — istenirse baş
 - Küçük önizlemeler: `platform/previews/g178/<NN>_<tema>.jpg` (6 paletin açılışı yan yana, her biri ≤ 230 KB).
 
 ### Testler (komut + sonuç)
-Birleşik dalda (\`origin/claude/zealous-fermi-hy1o40\` → \`70dedbcc\`, G177'nin 22–32 paletleri dahil):
-- \`python3 -m pytest tools/tests -q\` → **111 passed** (yeni: \`test_palette_images_g178\`, \`test_palettes_g178\`; şablon testine palet
+Birleşik dalda (`origin/claude/zealous-fermi-hy1o40` → `70dedbcc`, G177'nin 22–32 paletleri dahil):
+- `python3 -m pytest tools/tests -q` → **111 passed** (yeni: `test_palette_images_g178`, `test_palettes_g178`; şablon testine palet
   şablonlarının yer tutucuları eklendi).
-- \`cd platform && npm ci && rm -rf .next && npx tsc --noEmit && I18N_STRICT=1 npm test && npm run build\` → tsc 0; **1647 geçti, 0 kırmızı**
+- `cd platform && npm ci && rm -rf .next && npx tsc --noEmit && I18N_STRICT=1 npm test && npm run build` → tsc 0; **1647 geçti, 0 kırmızı**
   (2 atlandı); build + trace-check + js-budget 0.
-- \`variant-check\`: 21 tema, 105 palet, 0 hata (düzeltmeden sonra 01, 03, 11, 16 yeniden: geçti). \`recolor_parts.py check\` 01/03/11/16 temiz.
-- \`python3 tools/etsy_upload.py --check --strict --designs 01-21\` → 0. Tümü (\`all\`) 1 döner: 22–32'nin ilan görselleri/videosu henüz
-  yok (taban dalda da aynı, G177 kapsamı); 22–32 \`etsy_upload.json\` yalnız yeni \`image\` alanlarıyla yeniden yazıldı (test güncelliği için).
-- \`git status\`: ekran görüntüsü dökümü yok (variant-check ve çekimler scratchpad'de).
+- `variant-check`: 21 tema, 105 palet, 0 hata (düzeltmeden sonra 01, 03, 11, 16 yeniden: geçti). `recolor_parts.py check` 01/03/11/16 temiz.
+- `python3 tools/etsy_upload.py --check --strict --designs 01-21` → 0. Tümü (`all`) 1 döner: 22–32'nin ilan görselleri/videosu henüz
+  yok (taban dalda da aynı, G177 kapsamı); 22–32 `etsy_upload.json` yalnız yeni `image` alanlarıyla yeniden yazıldı (test güncelliği için).
+- `git status`: ekran görüntüsü dökümü yok (variant-check ve çekimler scratchpad'de).
 
 ### Denenmedi
 Gerçek iPhone/Android; Vercel yayını; Etsy ilan düzenleyicisinde dijital ilan varyasyonu ve seçeneğe fotoğraf bağlama (K41).
