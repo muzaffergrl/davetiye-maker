@@ -1,0 +1,122 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Odette",
+      "full_name": "Odette Claire Varenne"
+    },
+    {
+      "display_name": "Felix",
+      "full_name": "Felix Arthur Holm"
+    }
+  ],
+  "name_display": "Odette & Felix",
+  "initials": "O&F",
+  "host_line": "Together with their families",
+  "date": "2027-06-19",
+  "ceremony_time": "16:00",
+  "timezone": "Europe/Paris",
+  "venue": {
+    "name": "Villa Mirelle Gardens",
+    "city": "Nancy",
+    "region": "Grand Est",
+    "country": "France",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Welcome drinks",
+      "time": "15:30",
+      "location": "The lily terrace"
+    },
+    {
+      "label": "Ceremony",
+      "time": "16:00",
+      "location": "The rose garden"
+    },
+    {
+      "label": "Dinner & dancing",
+      "time": "18:30",
+      "location": "The garden salon"
+    },
+    {
+      "label": "Late-night snacks",
+      "time": "23:00",
+      "location": "By the fountain"
+    }
+  ],
+  "dress_code": "Garden formal",
+  "rsvp": {
+    "deadline": "2027-05-15",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Fish",
+          "Chicken"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "A rainy afternoon in a museum, a summer of letters and a question among the lilies led us to",
+    "items": [
+      {
+        "caption": "A rainy afternoon in a museum"
+      },
+      {
+        "caption": "A summer of letters"
+      },
+      {
+        "caption": "Among the lilies"
+      }
+    ]
+  },
+  "audio": {
+    "music": "garden-waltz",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony."
+    },
+    {
+      "q": "Can you accommodate dietary requirements?",
+      "a": "Please tell us about your requirements in your reply."
+    }
+  ]
+}

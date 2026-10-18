@@ -93,7 +93,7 @@ test('schema: travel, meal and details_blocks validate; blanks and over-limit li
 });
 
 test('every theme: empty content leaves no trace; full content shows the three blocks in the theme', async () => {
-  assert.equal(THEMES.length, 32); // + 22 Nocturne Lake Estate (G142), 23 Velvet Jewel Box (G161), 25 Orient Express Voyage (G163), 26 Kintsugi & Washi (G164), 28 Maison Pâtisserie (G166), 27 Riad Lantern Nights (G165), 24 Grand Theatre Premiere (G162), 29 Celestial Observatory (G168), 30 Azulejo Mosaic (G169), 32 Music Box Ballerina (G171), 31 Sky Lantern Festival (G170)
+  assert.equal(THEMES.length, 33); // + 22 Nocturne Lake Estate (G142), 23 Velvet Jewel Box (G161), 25 Orient Express Voyage (G163), 26 Kintsugi & Washi (G164), 28 Maison Pâtisserie (G166), 27 Riad Lantern Nights (G165), 24 Grand Theatre Premiere (G162), 29 Celestial Observatory (G168), 30 Azulejo Mosaic (G169), 32 Music Box Ballerina (G171), 31 Sky Lantern Festival (G170), 37 Art Nouveau Lily (G186)
   for (const theme of THEMES) {
     const empty = await details(theme, demoContent());
     assert.equal(empty.$('[data-travel], [data-menu], [data-blocks], .pex-block').length, 0, theme);

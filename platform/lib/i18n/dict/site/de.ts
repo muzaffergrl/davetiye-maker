@@ -297,6 +297,9 @@ const dict: Dict = {
   'Turn the key': 'Schlüssel drehen',
   'Wind the music box again': 'Spieluhr erneut aufziehen',
   'Reflections': 'Spiegelbilder',
+  // G186 Art Nouveau Lily
+  "Invite you to celebrate": "Laden Sie zum Feiern ein",
+  "Love in full bloom": "Liebe in voller Blüte",
 };
 
 export default dict;

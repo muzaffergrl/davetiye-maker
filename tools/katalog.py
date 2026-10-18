@@ -465,6 +465,13 @@ EK_TEMALAR = [
          dekor="Saten astar, pirinç kurma anahtarı, tül, gül yaprakları", teknik="fotogerçekçi + pastel",
          font=("Ballet", "Gilda Display"), palet_adi="rose-quartz-gold",
          hareket="Kurma anahtarı döner (müzik kutusu ezgisi dokunuştan sonra), kapak menteşesi, balerinin yavaş piruet kare dizisi, aynada parıltılı foto geçişi, az sayıda süzülen gül yaprağı (azaltılmış harekette yok), oval ayna sayfa geçişi."),
+    # 3. dalga (33–38, docs/24; K23 sıkı: ilk sayfa kapalı zarf, her birinin türü/kapanışı/açılışı ayrı); GPT'den önce kuruldu.
+    dict(no=37, klasor="37_Art_Nouveau_Lily", ad="Art Nouveau Lily",
+         zarf="Krem zarf, üç taç yaprağı kapak (sol, sağ, orta) uçları vitray zambak madalyonun altında buluşur; ışık camdan süzülür, madalyon kalkar, yan yapraklar dışa, orta yaprak yukarı açılır (çiçek açar gibi), kart cepten yükselir.",
+         foto="Vitray pencere kemerleri: fotoğraf alacakaranlıkta cam gibi soluk bekler, ışık bandı geçince renkleri canlanır; kaydırınca ışık camda dolaşır.",
+         dekor="Zambak, kıvrımlı (whiplash) altın çizgiler, vitray, mozaik altın hâle", teknik="Mucha tarzı poster + vitray",
+         font=("Ephesis", "Federant"), palet_adi="sage-gold-cream-lilac",
+         hareket="Vitraydan süzülen ışık bandı ve madalyonun parlayıp kalkması, taç yaprağı kapakların menteşelerinde çiçek açar gibi açılması (yan yapraklar dışa kıvrılır, astar 90°'de devralır), altın kıvrım çizgilerinin akarak çizilmesi (maske), ışık geçince renkleri canlanan kemer fotoğraflar, metnin camdan geçen renk gibi bulanıklıktan netleşmesi, RSVP'de süzülen zambak yaprakları"),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

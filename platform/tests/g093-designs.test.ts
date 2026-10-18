@@ -121,7 +121,7 @@ test('06, 07 and 08 are live after the first five, named as their themes, with d
     assert.equal(d.etsyListingUrl, '[ETSY LISTING URL]');
     assert.equal(d.compareAtPrice, null);
   }
-  assert.deepEqual(MARKETING.designs.filter((x) => x.status !== 'live').map((x) => x.id), ['nocturne-lake-estate', 'velvet-jewel-box', 'grand-theatre-premiere', 'orient-express-voyage', 'kintsugi-washi', 'riad-lantern-nights', 'maison-patisserie', 'celestial-observatory', 'azulejo-mosaic', 'sky-lantern-festival', 'music-box-ballerina']);
+  assert.deepEqual(MARKETING.designs.filter((x) => x.status !== 'live').map((x) => x.id), ['nocturne-lake-estate', 'velvet-jewel-box', 'grand-theatre-premiere', 'orient-express-voyage', 'kintsugi-washi', 'riad-lantern-nights', 'maison-patisserie', 'celestial-observatory', 'azulejo-mosaic', 'sky-lantern-festival', 'music-box-ballerina', 'art-nouveau-lily']);
 });
 
 test('design page titles ≤ 60 characters (also with a 12-character brand); the earlier titles did not change', () => {
