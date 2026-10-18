@@ -42,3 +42,7 @@ Bu dosya yerel sonuçları kaydeder; Vercel derlemesi ve canlı alan adı kontro
 - Gerçek Chrome ile canlı sitede 77 sayfa/görünüm: 55 mobil + 22 bilgisayar. Gerçek web fontları yüklendi; yatay taşma, kırık resim ve JavaScript hatası yok. 22 klavye açılışı ve 1 gerçek süreli açılış geçti.
 - Canlı RSVP formuna gerçek davetli cevabı gönderilmedi; kayıt/yanıt/tekrar koruması 11 yerel entegrasyon testiyle doğrulandı. Gerçek telefon ve Etsy satın alma testi yapılmadı.
 - İlk yayın denemesindeki ikon manifesti, palet kanal varsayılanları ve CSS boyut bütçesi sorunları giderildi. Tarihsel taslak beklentileri yeni tam ekran kayıtları ve Blush katman yapısıyla eşitlendi. Paylaşılan kurgusal demo fotoğrafları açıkça tanımlı bir izin listesiyle doğrulanır; başka yol veya eksik dosya reddedilir.
+
+## Son katalog çekimleri
+
+Katalogdaki 77 ekran ve 11 açılış videosu Google Fonts gerçekten yüklenerek yeniden çekildi (ilk yedek-font çekimlerinin yerine). Ek 55 sayfa ve 22 davetiye/form ekranı kontrolünde taşma, kırık görsel veya JavaScript hatası yoktu. Ürün açıklamaları 148–156 karaktere tamamlandı. Kaynak sürüm `a58d9ec53c69b6eb2ce5140c1cf5e584b3aadb0b` için GitHub Platform checks #39144975321 tamamen başarılı: testler, üretim derlemesi, TypeScript ve oluşturulan pazarlama sayfaları. Son medya güncellemesi yalnız bu ekran/video dosyalarını ve asset manifestini değiştirir.
