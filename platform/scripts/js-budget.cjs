@@ -18,7 +18,7 @@ const ROOT = path.resolve(__dirname, '..');
 
 /** [route prefix (app path of the page, without route groups), KB gzip]; the first match wins. */
 const BUDGETS = [
-  ['/edit/', 270], // the buyer's editor: one client app with every view (G173: 256 KB; splitting it is an open item)
+  ['/edit/', 205], // the buyer's editor: the shell + runtime; each view is its own chunk (G173: 256 KB in one; G181 split: 188 KB)
   ['/admin', 175], // G173: 139–161 KB
   ['/start', 160], // claim form + palette picker (G173: 146 KB)
   ['/', 155], // sales site in every language, /my, /signin (G173: 132–144 KB)

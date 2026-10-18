@@ -703,6 +703,27 @@ def video_problems(f: dict) -> list[str]:
     return p
 
 
+def palettes(t: Theme) -> list[dict]:
+    """G178: the design's colour palettes for the listing (docs/25 §5): the original first, then theme.json "variants" in
+    order, each {id (None = original), name, status, gpt: [parts still waiting for GPT]}. A palette's parts wait for GPT
+    when its palette.json "recolor" or recolor.json "parts" set them to "gpt" (docs/25 §2 step 4); such a palette gets no
+    listing image (tools/listing_editorial.py --palettes) and no image on its Etsy variation option."""
+    tj = json.loads((REPO / "platform" / "themes" / t.id / "theme.json").read_text(encoding="utf-8"))
+    vdir = t.collection / "variants"
+    manifest = json.loads((vdir / "recolor.json").read_text(encoding="utf-8")) if (vdir / "recolor.json").exists() else {}
+    base_gpt = {k for k, v in (manifest.get("parts") or {}).items() if isinstance(v, dict) and v.get("recolor") == "gpt"}
+    by_slug = {}
+    for pj in sorted(vdir.glob("V0*/palette.json")):
+        d = json.loads(pj.read_text(encoding="utf-8"))
+        by_slug[d.get("slug")] = d
+    out = [{"id": None, "name": t.name, "status": "live", "gpt": []}]
+    for v in tj.get("variants") or []:
+        over = (by_slug.get(v["id"]) or {}).get("recolor") or {}
+        gpt = sorted((base_gpt - {k for k, r in over.items() if r != "gpt"}) | {k for k, r in over.items() if r == "gpt"})
+        out.append({"id": v["id"], "name": v["name"], "status": v.get("status"), "gpt": gpt})
+    return out
+
+
 def shots_dir(t: Theme, root: Path | None = None) -> Path:
     """The theme's captured screens: package/shots/ (G059), or <root>/<folder>/ when the capture was written outside the
     repository (G124: tools/listing_editorial.py --capture keeps the 30-odd MB of screens per design out of the repo)."""

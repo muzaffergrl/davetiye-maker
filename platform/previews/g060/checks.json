@@ -25,7 +25,7 @@
       "ok": true
     },
     {
-      "name": "setup 1: rights rule shown before publishing",
+      "name": "setup 1: rights rule shown before publishing (one line + \"Learn more\")",
       "ok": true
     },
     {
@@ -50,9 +50,9 @@
       "ok": true
     },
     {
-      "name": "setup 1 (K29): the date is on the same step, no banners above it, the rule shown once",
+      "name": "setup 1 (K29, G100): the date is on the same step, no banners above it, the rule shown once, one sample line and no tags",
       "ok": true,
-      "detail": "Step 1 of 3:\nYour names and date\n\nAs your guests know you, and the day itself. Everything else can wait until later.\n\nFirst name\n\nAs your guests know you, e.g. Clara.\n\nPartner’s first name\nFull names "
+      "detail": "Step 1 of 3:\nYour names and date\n\nAs your guests know you, and the day itself. Everything else can wait until later.\n\nFirst name\n\nAs your guests know you, e.g. Clara.\n\nPartner’s first name\n\n2 fields s"
     },
     {
       "name": "setup 1 (K29): no venue in the setup (later, under Edit → Day & place)",
@@ -87,7 +87,7 @@
       "ok": true
     },
     {
-      "name": "setup 2 (K29): one photo asked for (the portrait); the 4 others folded under \"More photos\", optional",
+      "name": "setup 2 (K29, G121): one photo asked for (the portrait); the 4 others under Edit → Photos, no \"More photos\" in the setup",
       "ok": true
     },
     {
@@ -116,7 +116,7 @@
     {
       "name": "setup 3: summary shows names, the invitation-card names, date and address",
       "ok": true,
-      "detail": "Elena & Marco\n\nOn the invitation card: Elena Rossi & Marco Bianchi\n\nSaturday, 18 September 2027\n\nThe Rosewater Conservatory, Savannah\n\n127.0.0.1:3395/elena-and-marco"
+      "detail": "Elena & Marco\n\nOn the invitation card: Elena Rossi & Marco Bianchi\n\nSaturday, 18 September 2027\n\nThe Rosewater Conservatory, Savannah\n\n127.0.0.1:3341/elena-and-marco"
     },
     {
       "name": "setup 3: no sample-date gate once the real date is set",
@@ -131,9 +131,13 @@
       "ok": true
     },
     {
+      "name": "publish (G100): the QR code is folded under \"More ways to share\"",
+      "ok": true
+    },
+    {
       "name": "publish: QR made from the public URL and decodes to it",
-      "ok": true,
-      "detail": "http://127.0.0.1:3395/elena-and-marco / http://127.0.0.1:3395/elena-and-marco"
+      "ok": false,
+      "detail": "http://127.0.0.1:3341/elena-and-marco / null"
     },
     {
       "name": "publish: the address is a link, with an \"Open website\" button",
@@ -142,7 +146,7 @@
     {
       "name": "publish: \"Copy link\" -> button says \"Copied\", status \"Link copied\" (announced), clipboard holds the URL",
       "ok": true,
-      "detail": "http://127.0.0.1:3395/elena-and-marco"
+      "detail": "http://127.0.0.1:3341/elena-and-marco"
     },
     {
       "name": "publish: no snackbar over \"Go to my editor\" (there is no bottom navigation here)",
@@ -159,7 +163,7 @@
     {
       "name": "home (K29): \"Your website is N% ready\" with at most 3 next steps, sample text among them",
       "ok": true,
-      "detail": "Your website is 52% ready Next steps: Venue: replace the sample venue name and city Details: replace the sample host line and dress code Our Story: replace the sample story intro and 3 captions"
+      "detail": "Your website is 55% ready Next steps: Venue: replace the sample Venue name and City Details: replace the sample Host line and Dress code Our Story: replace the sample Story intro and 3 captions"
     },
     {
       "name": "home (K29): a progress bar with its value",
@@ -168,7 +172,7 @@
     {
       "name": "editor: Live status, no \"up to date\" claim while sample text is left",
       "ok": true,
-      "detail": "Live Your website is live. 127.0.0.1:3395/elena-and-marco Copy Share"
+      "detail": "Live Share Your website is live. 127.0.0.1:3341/elena-and-marco Copy"
     },
     {
       "name": "home (K29): the name & date changes are not on Home (only next to those fields)",
@@ -268,7 +272,11 @@
       "ok": true
     },
     {
-      "name": "publish changes: the Live badge replaces the Publish button",
+      "name": "publish changes: no Publish left; Home's status card says Live (not repeated in the bar)",
+      "ok": true
+    },
+    {
+      "name": "publish changes: the Live badge replaces the Publish button (bar, outside Home)",
       "ok": true
     },
     {
@@ -319,7 +327,7 @@
     {
       "name": "setup 1 at 360 × 640: the first name field starts well above the bar (no banners)",
       "ok": true,
-      "detail": "{\"bar\":515,\"first\":285.015625,\"firstBottom\":337.015625}"
+      "detail": "{\"bar\":511,\"first\":285.015625,\"firstBottom\":337.015625}"
     },
     {
       "name": "resume: reload returns to the step on this phone (2)",
@@ -380,7 +388,7 @@
     },
     {
       "name": "switches: Details has the dress code / travel / registry switches next to their fields",
-      "ok": true
+      "ok": false
     },
     {
       "name": "a11y (axe-core 4.13.0): section: details has no serious/critical violations",
@@ -446,7 +454,7 @@
     {
       "name": "guests: numbers (11 guests coming, 2 not coming, 8 replies)",
       "ok": true,
-      "detail": "Guests 11 Guests coming 2 Not coming 8 Replies Replies close in 170 days. Last day: Saturday, April 3, 2027 (New York time). 8 new replies since you last look"
+      "detail": "Guests Guest list Results 11 Guests coming 2 Not coming 8 Replies Replies Search replies by name All Coming Not coming New 8 8 replies Sort Newest first Oldes"
     },
     {
       "name": "guests: search shown from 8 replies",
@@ -481,9 +489,9 @@
       "ok": true
     },
     {
-      "name": "share (K29): link + QR on top; guest password and edit link folded",
-      "ok": true,
-      "detail": "password:false,edit-link:false"
+      "name": "share (K29, G121): link on top; QR code, guest password and edit link folded",
+      "ok": false,
+      "detail": "qr:false,password:false,edit-link:false,devices:false"
     },
     {
       "name": "share: link + edit-link warning and tip; no \"Sign in by email\" card for a feature that does not exist",
@@ -594,11 +602,11 @@
       "ok": true
     },
     {
-      "name": "401: full-screen \"This edit link no longer works\" + shop text",
+      "name": "401: full-screen \"This edit link no longer works\" + order number way back + shop text",
       "ok": true
     },
     {
-      "name": "bad link page: \"Lost your edit link?\" with the honest sign-in text",
+      "name": "bad link page: \"Continue with your order number\" + \"Paste your edit link\"",
       "ok": true
     },
     {
@@ -606,12 +614,13 @@
       "ok": true
     },
     {
-      "name": "/signin: no form, honest text",
+      "name": "/signin: no form, the way in is /my",
       "ok": true
     },
     {
       "name": "touch targets: every visible control is at least 44 × 44 px",
-      "ok": true
+      "ok": false,
+      "detail": "#share: input \"\" 20×20 ; #share: input \"\" 20×20 ; #share: input \"\" 20×20"
     },
     {
       "name": "reduced motion: transitions shortened to ~0",
@@ -630,7 +639,7 @@
     {
       "name": "1280 (K29): two columns — editing with the tabs above it, the sticky live preview on the right",
       "ok": true,
-      "detail": "{\"nav\":{\"x\":20,\"y\":117,\"width\":720,\"height\":68},\"main\":{\"x\":20,\"y\":185,\"width\":720,\"height\":1230.359375},\"pv\":{\"x\":817,\"y\":275.5,\"width\":390,\"height\":542.5}}"
+      "detail": "{\"nav\":{\"x\":20,\"y\":117,\"width\":720,\"height\":68},\"main\":{\"x\":20,\"y\":185,\"width\":720,\"height\":1473.171875},\"pv\":{\"x\":817,\"y\":275.5,\"width\":390,\"height\":542.5}}"
     },
     {
       "name": "1280: no phone Preview button",

@@ -222,46 +222,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=emerald-gold-estate"
+        "start_link": "/start?theme=emerald-gold-estate",
+        "image": "collections/17_Emerald_Gold_Estate/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": true
       },
       {
         "name": "Sapphire & Gold",
         "variant": "sapphire-gold",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=emerald-gold-estate&variant=sapphire-gold"
+        "start_link": "/start?theme=emerald-gold-estate&variant=sapphire-gold",
+        "image": "collections/17_Emerald_Gold_Estate/package/listing/images_editorial/palette_sapphire-gold.jpg",
+        "image_exists": true
       },
       {
         "name": "Burgundy & Gold",
         "variant": "burgundy-gold",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=emerald-gold-estate&variant=burgundy-gold"
+        "start_link": "/start?theme=emerald-gold-estate&variant=burgundy-gold",
+        "image": "collections/17_Emerald_Gold_Estate/package/listing/images_editorial/palette_burgundy-gold.jpg",
+        "image_exists": true
       },
       {
         "name": "Onyx & Gold",
         "variant": "onyx-gold",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=emerald-gold-estate&variant=onyx-gold"
+        "start_link": "/start?theme=emerald-gold-estate&variant=onyx-gold",
+        "image": "collections/17_Emerald_Gold_Estate/package/listing/images_editorial/palette_onyx-gold.jpg",
+        "image_exists": true
       },
       {
         "name": "Plum & Gold",
         "variant": "plum-gold",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=emerald-gold-estate&variant=plum-gold"
+        "start_link": "/start?theme=emerald-gold-estate&variant=plum-gold",
+        "image": "collections/17_Emerald_Gold_Estate/package/listing/images_editorial/palette_plum-gold.jpg",
+        "image_exists": true
       },
       {
         "name": "Deep Teal & Gold",
         "variant": "teal-gold",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=emerald-gold-estate&variant=teal-gold"
+        "start_link": "/start?theme=emerald-gold-estate&variant=teal-gold",
+        "image": "collections/17_Emerald_Gold_Estate/package/listing/images_editorial/palette_teal-gold.jpg",
+        "image_exists": true
       }
     ],
     "offered": [
       "Original (Emerald & Gold Estate)"
+    ],
+    "images": [
+      {
+        "file": "collections/17_Emerald_Gold_Estate/package/listing/images_editorial/10_palettes.jpg",
+        "exists": true,
+        "option": null,
+        "upload": false,
+        "alt": "Emerald & Gold Estate in 6 color palettes: the opening page of each, side by side",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/17_Emerald_Gold_Estate/package/listing/images_editorial/palette_original.jpg",
+        "exists": true,
+        "option": "Original (Emerald & Gold Estate)",
+        "upload": false,
+        "alt": "Emerald & Gold Estate in its original palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/17_Emerald_Gold_Estate/package/listing/images_editorial/palette_sapphire-gold.jpg",
+        "exists": true,
+        "option": "Sapphire & Gold",
+        "upload": false,
+        "alt": "Emerald & Gold Estate in the Sapphire & Gold palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/17_Emerald_Gold_Estate/package/listing/images_editorial/palette_burgundy-gold.jpg",
+        "exists": true,
+        "option": "Burgundy & Gold",
+        "upload": false,
+        "alt": "Emerald & Gold Estate in the Burgundy & Gold palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/17_Emerald_Gold_Estate/package/listing/images_editorial/palette_onyx-gold.jpg",
+        "exists": true,
+        "option": "Onyx & Gold",
+        "upload": false,
+        "alt": "Emerald & Gold Estate in the Onyx & Gold palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/17_Emerald_Gold_Estate/package/listing/images_editorial/palette_plum-gold.jpg",
+        "exists": true,
+        "option": "Plum & Gold",
+        "upload": false,
+        "alt": "Emerald & Gold Estate in the Plum & Gold palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/17_Emerald_Gold_Estate/package/listing/images_editorial/palette_teal-gold.jpg",
+        "exists": true,
+        "option": "Deep Teal & Gold",
+        "upload": false,
+        "alt": "Emerald & Gold Estate in the Deep Teal & Gold palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

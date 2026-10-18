@@ -221,46 +221,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=enchanted-forest-storybook"
+        "start_link": "/start?theme=enchanted-forest-storybook",
+        "image": "collections/13_Enchanted_Forest/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": true
       },
       {
         "name": "Burgundy Storybook",
         "variant": "burgundy-storybook",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=enchanted-forest-storybook&variant=burgundy-storybook"
+        "start_link": "/start?theme=enchanted-forest-storybook&variant=burgundy-storybook",
+        "image": "collections/13_Enchanted_Forest/package/listing/images_editorial/palette_burgundy-storybook.jpg",
+        "image_exists": true
       },
       {
         "name": "Midnight Navy & Brass",
         "variant": "midnight-navy",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=enchanted-forest-storybook&variant=midnight-navy"
+        "start_link": "/start?theme=enchanted-forest-storybook&variant=midnight-navy",
+        "image": "collections/13_Enchanted_Forest/package/listing/images_editorial/palette_midnight-navy.jpg",
+        "image_exists": true
       },
       {
         "name": "Plum Twilight",
         "variant": "plum-twilight",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=enchanted-forest-storybook&variant=plum-twilight"
+        "start_link": "/start?theme=enchanted-forest-storybook&variant=plum-twilight",
+        "image": "collections/13_Enchanted_Forest/package/listing/images_editorial/palette_plum-twilight.jpg",
+        "image_exists": true
       },
       {
         "name": "Autumn Russet",
         "variant": "autumn-russet",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=enchanted-forest-storybook&variant=autumn-russet"
+        "start_link": "/start?theme=enchanted-forest-storybook&variant=autumn-russet",
+        "image": "collections/13_Enchanted_Forest/package/listing/images_editorial/palette_autumn-russet.jpg",
+        "image_exists": true
       },
       {
         "name": "Deep Teal & Brass",
         "variant": "deep-teal",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=enchanted-forest-storybook&variant=deep-teal"
+        "start_link": "/start?theme=enchanted-forest-storybook&variant=deep-teal",
+        "image": "collections/13_Enchanted_Forest/package/listing/images_editorial/palette_deep-teal.jpg",
+        "image_exists": true
       }
     ],
     "offered": [
       "Original (Enchanted Forest Storybook)"
+    ],
+    "images": [
+      {
+        "file": "collections/13_Enchanted_Forest/package/listing/images_editorial/10_palettes.jpg",
+        "exists": true,
+        "option": null,
+        "upload": false,
+        "alt": "Enchanted Forest Storybook in 6 color palettes: the opening page of each, side by side",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/13_Enchanted_Forest/package/listing/images_editorial/palette_original.jpg",
+        "exists": true,
+        "option": "Original (Enchanted Forest Storybook)",
+        "upload": false,
+        "alt": "Enchanted Forest Storybook in its original palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/13_Enchanted_Forest/package/listing/images_editorial/palette_burgundy-storybook.jpg",
+        "exists": true,
+        "option": "Burgundy Storybook",
+        "upload": false,
+        "alt": "Enchanted Forest Storybook in the Burgundy Storybook palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/13_Enchanted_Forest/package/listing/images_editorial/palette_midnight-navy.jpg",
+        "exists": true,
+        "option": "Midnight Navy & Brass",
+        "upload": false,
+        "alt": "Enchanted Forest Storybook in the Midnight Navy & Brass palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/13_Enchanted_Forest/package/listing/images_editorial/palette_plum-twilight.jpg",
+        "exists": true,
+        "option": "Plum Twilight",
+        "upload": false,
+        "alt": "Enchanted Forest Storybook in the Plum Twilight palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/13_Enchanted_Forest/package/listing/images_editorial/palette_autumn-russet.jpg",
+        "exists": true,
+        "option": "Autumn Russet",
+        "upload": false,
+        "alt": "Enchanted Forest Storybook in the Autumn Russet palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/13_Enchanted_Forest/package/listing/images_editorial/palette_deep-teal.jpg",
+        "exists": true,
+        "option": "Deep Teal & Brass",
+        "upload": false,
+        "alt": "Enchanted Forest Storybook in the Deep Teal & Brass palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

@@ -1,4 +1,4 @@
-"""Editorial Etsy listing images (v4): 9 × 2000 px (image 9: G148), layout + typography only (K21). Designs 01–21 (G124; 21: G137).
+"""Editorial Etsy listing images (v4): 9 × 2000 px (image 9: G148) + colour palettes (G178), layout + typography only (K21). Designs 01–21 (G124; 21: G137).
 
   python3 tools/listing_editorial.py --theme olive-ivory [--only 01_cover 03_pages]
   python3 tools/listing_editorial.py --theme 06-11 13-15 18 19 --capture --video     (numbers, ranges, ids or 'all')
@@ -14,6 +14,12 @@ platform, captured from a local production build (`cd platform && npm run build`
   --shots-root  where the screens are (default $BKE_LISTING_SHOTS or <temp>/bke-listing-shots): about 30 MB per design,
               kept out of the repository; package/shots/ of 01–05 is the older G059 capture (before G100/G121's editor).
   --video     also builds package/listing/video.mp4 from the capture's opening.webm (tools/listing_kit.py video).
+  --palettes  G178 (docs/25 §5): the colour-palette images instead of the nine: 10_palettes.jpg (every palette's closed
+              opening side by side) and palette_<id>.jpg per palette (palette_original.jpg for the original; the
+              opening closed and opening, in that palette), from capture_opening.ts --variants (`--capture palettes`
+              captures them into <shots>/palettes/). A palette that still waits for GPT parts (palette.json "recolor" or
+              recolor.json parts set to "gpt") gets no image. tools/etsy_upload.py attaches palette_<id>.jpg to its
+              variation option.
 Nothing is drawn here.
 
 Design rules (docs/21_ILAN_GORSELLERI.md): no boxes, badges, pills or icons; Cormorant Garamond light + Montserrat small
@@ -27,6 +33,7 @@ Writes collections/<NN>/package/listing/images_editorial/<name>.png.
 from __future__ import annotations
 
 import argparse
+import html
 import json
 import os
 import re
@@ -57,6 +64,8 @@ CAPTURE_DEVICES = HERE / "capture_devices.ts"  # G148: image 9's two screens (m0
 DEVICES = ["m01_my_form", "m02_devices"]
 OPENING_STILLS = HERE / "opening_stills.json"
 IMAGES = lk.UPLOAD_IMAGES  # the Etsy upload order
+PALETTE_OVERVIEW = "10_palettes"  # G178: palette images (--palettes), see palette_image_name()
+PALETTE_JPEG_Q = 90
 FONTS = {"Cormorant Garamond": "ital,wght@0,300;0,400;0,500;1,300;1,400;1,500", "Montserrat": "wght@400;500"}
 # the opening in three phones: the closed opening page (g01_envelope, whatever the object), then two DPR 3 stills from
 # capture_opening.ts chosen by eye per design (each opening has its own timing): open_mid.jpg (the object opening) and
@@ -95,7 +104,7 @@ def place(scene: Image.Image, k: float, x0: float, y0: float, screens: list[Imag
 
 
 def paper_screens(items: list[tuple[str, str, str]], shots: Path, w: int, gap: int, top: int, stagger: int = 0,
-                  label_gap: int = 46) -> str:
+                  label_gap: int = 46, label_pad: int = 40) -> str:
     """Bare screens on paper, centred in a row: items = (shot name, numeral or '', label). Heights follow the shots."""
     n = len(items)
     left = (2000 - (n * w + (n - 1) * gap)) // 2
@@ -108,7 +117,7 @@ def paper_screens(items: list[tuple[str, str, str]], shots: Path, w: int, gap: i
         uri = (shots / f"{name}.jpg").resolve().as_uri()
         html.append(f'<div class="screen" style="left:{x}px;top:{y}px;width:{w}px;height:{h}px"><img src="{uri}"></div>')
         num_html = f'<span class="num">{num}</span>' if num else ""
-        html.append(f'<div class="label" style="left:{x - 40}px;width:{w + 80}px;top:{y + h + label_gap}px">{num_html}'
+        html.append(f'<div class="label" style="left:{x - label_pad}px;width:{w + 2 * label_pad}px;top:{y + h + label_gap}px">{num_html}'
                     f'<div class="kicker">{label}</div></div>')
     return "\n".join(html)
 
@@ -148,6 +157,77 @@ def node_env() -> dict:
     env.setdefault("NODE_PATH", "/opt/node22/lib/node_modules")
     env.setdefault("PLAYWRIGHT_BROWSERS_PATH", "/opt/pw-browsers")
     return env
+
+
+def palette_image_name(variant: str | None) -> str:
+    """G178: the listing image of one palette (tools/etsy_upload.py attaches it to the variation option)."""
+    return f"palette_{variant or 'original'}"
+
+
+def capture_palettes(t: lk.Theme, shots: Path) -> None:
+    """G178: the closed opening (0 ms) and the object opening (opening_stills.json open_mid) in every palette that has
+    its images (no part waiting for GPT), DPR 3, into <shots>/palettes/<palette>_o01.jpg / _o02.jpg."""
+    ready = [p for p in lk.palettes(t) if not p["gpt"]]
+    out = shots / "palettes"
+    out.mkdir(parents=True, exist_ok=True)
+    ids = ",".join(p["id"] or "original" for p in ready)
+    times = opening_still_times(t)
+    for attempt in range(1, 4):
+        r = subprocess.run(["node", str(CAPTURE_OPENING), "--theme", t.id, "--out", str(out), "--variants", ids,
+                            "--at", f"0,{times['open_mid']}"], cwd=REPO, env=node_env())
+        if r.returncode == 0:
+            return
+        print(f"capture_opening (palettes) attempt {attempt} failed for {t.id} (exit {r.returncode})", file=sys.stderr)
+    raise RuntimeError(f"capture_opening (palettes) failed for {t.id}")
+
+
+WORDS = {2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight"}
+
+
+def build_palettes(t: lk.Theme, shots: Path) -> list[Path]:
+    """G178: 10_palettes.png + palette_<id>.png (docs/25 §5) on the design's paper, real screens only (K21)."""
+    ready = [p for p in lk.palettes(t) if not p["gpt"]]
+    if len(ready) < 2:
+        return []
+    pal = shots / "palettes"
+    missing = [f"{p['id'] or 'original'}_o0{i}" for p in ready for i in (1, 2)
+               if not (pal / f"{p['id'] or 'original'}_o0{i}.jpg").exists()]
+    if missing:
+        raise RuntimeError(f"missing palette screens in {pal}: {missing} (run with --palettes --capture palettes)")
+    out_dir = t.package / "listing" / "images_editorial"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    dark = lk.is_dark(t)
+    base = {"theme_name": t.name, "scene.brand": (BRAND_MARK_DARK if dark else BRAND_MARK).resolve().as_uri()}
+    css = root_css(t)
+    n = len(ready)
+    w = min(400, (1940 - (n - 1) * 26) // n)
+    gap = min(80, (1940 - n * w) // max(1, n - 1))
+    jobs = [(PALETTE_OVERVIEW, "10_palettes", dict(base, count_words=WORDS.get(n, str(n)), screens=paper_screens(
+        [(f"palettes/{p['id'] or 'original'}_o01", "", "Original" if p["id"] is None else html.escape(p["name"])) for p in ready],
+        shots, w=w, gap=gap, top=800, label_gap=40, label_pad=gap // 2 - 4)))]
+    for p in ready:
+        key = p["id"] or "original"
+        jobs.append((palette_image_name(p["id"]), "11_palette", dict(
+            base, kicker="The original palette" if p["id"] is None else "Color palette", palette_name=p["name"],
+            screens=paper_screens([(f"palettes/{key}_o01", "", "Tap to open"),
+                                   (f"palettes/{key}_o02", "", f"The {t.opening_words['short']} opens")],
+                                  shots, w=520, gap=150, top=540))))
+    pages = []
+    for name, tpl, v in jobs:
+        body = lk.fill((TPL / f"{tpl}.html").read_text(encoding="utf-8"), v, raw=frozenset({"screens"}))
+        page = ("<!doctype html><html><head><meta charset='utf-8'><link rel='stylesheet' href='editorial.css'>"
+                f"<style>{css}</style></head><body>{body}</body></html>")
+        pages.append((page, out_dir / f"{name}.png"))
+    with tempfile.TemporaryDirectory(prefix="listing_palettes_") as tmp:
+        render(pages, Path(tmp))
+    # JPEG q90 (≈ 0.7 MB instead of ≈ 3.6 MB PNG: up to seven more images per design in the repository; Etsy takes JPG)
+    outs = []
+    for _, png in pages:
+        jpg = png.with_suffix(".jpg")
+        Image.open(png).convert("RGB").save(jpg, quality=PALETTE_JPEG_Q, optimize=True, progressive=True)
+        png.unlink()
+        outs.append(jpg)
+    return outs
 
 
 def capture_devices(t: lk.Theme, shots: Path) -> None:
@@ -367,15 +447,23 @@ def main() -> None:
     ap.add_argument("--only", nargs="*", choices=IMAGES)
     ap.add_argument("--shots-root", type=Path, default=DEFAULT_SHOTS_ROOT,
                     help="captured screens: <root>/<NN_folder>/ (default: %(default)s)")
-    ap.add_argument("--capture", nargs="?", const="all", choices=["all", "stills", "devices"],
+    ap.add_argument("--capture", nargs="?", const="all", choices=["all", "stills", "devices", "palettes"],
                     help="capture first (local production build): all screens + the opening stills, only the stills, "
-                         "or only image 9's screens (devices)")
+                         "only image 9's screens (devices), or the colour palettes' openings (palettes)")
+    ap.add_argument("--palettes", action="store_true",
+                    help="G178: build the colour-palette images (10_palettes, palette_<id>) instead of the nine")
     ap.add_argument("--video", action="store_true", help="also build package/listing/video.mp4 (listing_kit video)")
     ap.add_argument("--base-url", default=lk.BASE_URL, help="public base URL shown in the captured screens")
     a = ap.parse_args()
     for t in select(a.theme):
         shots = lk.shots_dir(t, a.shots_root)
         print(f"== {t.no} {t.id} ({t.opening}) — screens: {shots}")
+        if a.palettes:
+            if a.capture:
+                capture_palettes(t, shots)
+            for o in build_palettes(t, shots):
+                print(f"  {o.relative_to(REPO)}")
+            continue
         if a.capture:
             shots.mkdir(parents=True, exist_ok=True)
             capture(t, shots, a.base_url, a.capture)

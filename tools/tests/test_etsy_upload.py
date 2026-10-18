@@ -44,7 +44,8 @@ def test_design_table():
     every = {t for _, _, t in eu.DESIGNS}
     assert live == every - COMING, sorted(live ^ (every - COMING))
     for theme in COMING:  # same TS style as the other entries since G142
-        assert re.search(rf"id: '{re.escape(theme)}',\s*\n\s*name: '[^']+',\s*\n\s*status: 'coming'", config), theme
+        # off sale: 'coming', or 'preview' (in the site catalogue, no checkout; main f1228e88)
+        assert re.search(rf"id: '{re.escape(theme)}',\s*\n\s*name: '[^']+',\s*\n\s*status: '(coming|preview)'", config), theme
     for no, folder, theme in eu.DESIGNS:
         assert folder.startswith(no + "_") and (REPO / "collections" / folder).is_dir(), folder
         assert (REPO / "platform" / "themes" / theme / "theme.json").exists(), theme
@@ -123,8 +124,8 @@ def test_real_listings():
         assert data["ready_to_publish"] is False and data["price_try"] == eu.PRICE_TRY == 1460, no
         assert data["quantity"] == 999, no
         if theme in COMING:  # G175 (K41): not for sale, price confirmed with the sale; both are blockers
-            assert data["sales_status"] == "coming" and "[PRICE]" in md and "| Price | **1,460 TL**" not in md, no
-            assert any(b.startswith("sales status 'coming'") for b in data["blockers"]), no
+            assert data["sales_status"] in ("coming", "preview") and "[PRICE]" in md and "| Price | **1,460 TL**" not in md, no
+            assert any(b.startswith(f"sales status '{data['sales_status']}'") for b in data["blockers"]), no
             assert any(b.startswith("price not decided") for b in data["blockers"]), no
             assert data["price_note"].startswith("Proposed:"), no
         else:
@@ -204,11 +205,34 @@ def test_palette_variations_g153():
     v, problems = m.palette_variations("crimson-rose-atelier")
     assert problems == []
     assert v["property"] == "Color palette" and v["price_varies"] is False
-    assert v["options"][0] == {"name": "Original (Crimson Rose Atelier)", "variant": None, "status": "live", "offered": True,
-                               "start_link": "/start?theme=crimson-rose-atelier"}
+    first = {k: v["options"][0][k] for k in ("name", "variant", "status", "offered", "start_link")}
+    assert first == {"name": "Original (Crimson Rose Atelier)", "variant": None, "status": "live", "offered": True,
+                     "start_link": "/start?theme=crimson-rose-atelier"}
     assert len(v["options"]) == 6
     assert v["offered"] == [o["name"] for o in v["options"] if o["status"] == "live"]
     assert all(o["start_link"].endswith(f"&variant={o['variant']}") for o in v["options"][1:])
     assert m.palette_variations("_sample") == (None, [])  # no palettes (internal sample theme)
     data, _ = m.build("21", "21_Crimson_Rose_Atelier", "crimson-rose-atelier")
     assert data["variations"]["options"] == v["options"]
+
+
+def test_palette_images_g178():
+    """G178: each option points at its listing image (palette_<id>.jpg); a palette waiting for GPT parts has none; the
+    palette photos go on the listing only when offered, within Etsy's 20 photos."""
+    import etsy_upload as m
+    v, _ = m.palette_variations("olive-ivory")
+    assert [o["image"].rsplit("/", 1)[1] for o in v["options"]] == \
+        ["palette_original.jpg"] + [f"palette_{o['variant']}.jpg" for o in v["options"][1:]]
+    assert v["images"][0]["file"].endswith("/10_palettes.jpg") and v["images"][0]["option"] is None
+    assert len(v["images"]) == 1 + len(v["options"])
+    for img in v["images"]:  # an image goes up only when its option (or, for the overview, every option shown) is offered
+        if img["option"] is None:
+            assert img["upload"] == all(o["offered"] for o in v["options"])
+        else:
+            o = next(o for o in v["options"] if o["name"] == img["option"])
+            assert img["upload"] == (o["offered"] and len(v["offered"]) > 1)
+    sun, _ = m.palette_variations("sunflower-rustic-barn")
+    waiting = [o for o in sun["options"] if o["image"] is None]
+    assert {o["variant"] for o in waiting} == {"navy-sunflower", "burgundy-sunflower", "dusty-blue-sunflower"}
+    assert all("waits for GPT" in o["image_note"] for o in waiting)
+    assert 9 + len(sun["options"]) + 1 <= m.ETSY_MAX_IMAGES

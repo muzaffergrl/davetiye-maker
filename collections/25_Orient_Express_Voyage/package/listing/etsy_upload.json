@@ -36,7 +36,7 @@
   "price_note": "Proposed: the design price of 01–21, not confirmed for this design (config.ts '[PRICE]'). Approved by the user on 2026-10-16 (K42, docs/23 §1). Shop currency TRY (K38): Etsy gets the TL amount; USD is approximate, at 49.53 TRY per USD, BloombergHT, 2026-10-16 09:30 (USD/TRY 49.5247 buy / 49.5300 sell).",
   "quantity": 999,
   "renewal": null,
-  "sales_status": "coming",
+  "sales_status": "preview",
   "shop_section": "[SHOP SECTION]",
   "digital_files": [
     {
@@ -217,7 +217,7 @@
   "blockers": [
     "listing images missing: collections/25_Orient_Express_Voyage/package/listing/images_editorial/01_cover.png, collections/25_Orient_Express_Voyage/package/listing/images_editorial/02_opening.png, collections/25_Orient_Express_Voyage/package/listing/images_editorial/03_pages.png, collections/25_Orient_Express_Voyage/package/listing/images_editorial/04_edit.png, collections/25_Orient_Express_Voyage/package/listing/images_editorial/05_rsvp.png, collections/25_Orient_Express_Voyage/package/listing/images_editorial/06_details.png, collections/25_Orient_Express_Voyage/package/listing/images_editorial/07_how.png, collections/25_Orient_Express_Voyage/package/listing/images_editorial/08_included.png",
     "listing video missing",
-    "sales status 'coming' in platform/lib/marketing/config.ts (K41: not for sale)",
+    "sales status 'preview' in platform/lib/marketing/config.ts (K41: not for sale)",
     "price not decided for this design (config.ts price '[PRICE]'; 1460 TL is the 01–21 design price, docs/23 §1)",
     "renewal not decided"
   ],
@@ -234,46 +234,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=orient-express-voyage"
+        "start_link": "/start?theme=orient-express-voyage",
+        "image": "collections/25_Orient_Express_Voyage/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": false
       },
       {
         "name": "Midnight Blue & Brass",
         "variant": "midnight-blue",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=orient-express-voyage&variant=midnight-blue"
+        "start_link": "/start?theme=orient-express-voyage&variant=midnight-blue",
+        "image": "collections/25_Orient_Express_Voyage/package/listing/images_editorial/palette_midnight-blue.jpg",
+        "image_exists": false
       },
       {
         "name": "Burgundy Carriage & Brass",
         "variant": "burgundy-carriage",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=orient-express-voyage&variant=burgundy-carriage"
+        "start_link": "/start?theme=orient-express-voyage&variant=burgundy-carriage",
+        "image": "collections/25_Orient_Express_Voyage/package/listing/images_editorial/palette_burgundy-carriage.jpg",
+        "image_exists": false
       },
       {
         "name": "Mahogany & Brass",
         "variant": "mahogany",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=orient-express-voyage&variant=mahogany"
+        "start_link": "/start?theme=orient-express-voyage&variant=mahogany",
+        "image": "collections/25_Orient_Express_Voyage/package/listing/images_editorial/palette_mahogany.jpg",
+        "image_exists": false
       },
       {
         "name": "Pullman Teal & Brass",
         "variant": "pullman-teal",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=orient-express-voyage&variant=pullman-teal"
+        "start_link": "/start?theme=orient-express-voyage&variant=pullman-teal",
+        "image": "collections/25_Orient_Express_Voyage/package/listing/images_editorial/palette_pullman-teal.jpg",
+        "image_exists": false
       },
       {
         "name": "Ebony & Gold",
         "variant": "ebony-gold",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=orient-express-voyage&variant=ebony-gold"
+        "start_link": "/start?theme=orient-express-voyage&variant=ebony-gold",
+        "image": "collections/25_Orient_Express_Voyage/package/listing/images_editorial/palette_ebony-gold.jpg",
+        "image_exists": false
       }
     ],
     "offered": [
       "Original (Orient Express Voyage)"
+    ],
+    "images": [
+      {
+        "file": "collections/25_Orient_Express_Voyage/package/listing/images_editorial/10_palettes.jpg",
+        "exists": false,
+        "option": null,
+        "upload": false,
+        "alt": "Orient Express Voyage in 6 color palettes: the opening page of each, side by side",
+        "status": "missing"
+      },
+      {
+        "file": "collections/25_Orient_Express_Voyage/package/listing/images_editorial/palette_original.jpg",
+        "exists": false,
+        "option": "Original (Orient Express Voyage)",
+        "upload": false,
+        "alt": "Orient Express Voyage in its original palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/25_Orient_Express_Voyage/package/listing/images_editorial/palette_midnight-blue.jpg",
+        "exists": false,
+        "option": "Midnight Blue & Brass",
+        "upload": false,
+        "alt": "Orient Express Voyage in the Midnight Blue & Brass palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/25_Orient_Express_Voyage/package/listing/images_editorial/palette_burgundy-carriage.jpg",
+        "exists": false,
+        "option": "Burgundy Carriage & Brass",
+        "upload": false,
+        "alt": "Orient Express Voyage in the Burgundy Carriage & Brass palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/25_Orient_Express_Voyage/package/listing/images_editorial/palette_mahogany.jpg",
+        "exists": false,
+        "option": "Mahogany & Brass",
+        "upload": false,
+        "alt": "Orient Express Voyage in the Mahogany & Brass palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/25_Orient_Express_Voyage/package/listing/images_editorial/palette_pullman-teal.jpg",
+        "exists": false,
+        "option": "Pullman Teal & Brass",
+        "upload": false,
+        "alt": "Orient Express Voyage in the Pullman Teal & Brass palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/25_Orient_Express_Voyage/package/listing/images_editorial/palette_ebony-gold.jpg",
+        "exists": false,
+        "option": "Ebony & Gold",
+        "upload": false,
+        "alt": "Orient Express Voyage in the Ebony & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

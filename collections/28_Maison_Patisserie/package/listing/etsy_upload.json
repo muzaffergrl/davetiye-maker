@@ -37,7 +37,7 @@
   "price_note": "Proposed: the design price of 01–21, not confirmed for this design (config.ts '[PRICE]'). Approved by the user on 2026-10-16 (K42, docs/23 §1). Shop currency TRY (K38): Etsy gets the TL amount; USD is approximate, at 49.53 TRY per USD, BloombergHT, 2026-10-16 09:30 (USD/TRY 49.5247 buy / 49.5300 sell).",
   "quantity": 999,
   "renewal": null,
-  "sales_status": "coming",
+  "sales_status": "preview",
   "shop_section": "[SHOP SECTION]",
   "digital_files": [
     {
@@ -265,7 +265,7 @@
   "blockers": [
     "listing images missing: collections/28_Maison_Patisserie/package/listing/images_editorial/01_cover.png, collections/28_Maison_Patisserie/package/listing/images_editorial/02_opening.png, collections/28_Maison_Patisserie/package/listing/images_editorial/03_pages.png, collections/28_Maison_Patisserie/package/listing/images_editorial/04_edit.png, collections/28_Maison_Patisserie/package/listing/images_editorial/05_rsvp.png, collections/28_Maison_Patisserie/package/listing/images_editorial/06_details.png, collections/28_Maison_Patisserie/package/listing/images_editorial/07_how.png, collections/28_Maison_Patisserie/package/listing/images_editorial/08_included.png, collections/28_Maison_Patisserie/package/listing/images_editorial/09_devices.png",
     "listing video missing",
-    "sales status 'coming' in platform/lib/marketing/config.ts (K41: not for sale)",
+    "sales status 'preview' in platform/lib/marketing/config.ts (K41: not for sale)",
     "price not decided for this design (config.ts price '[PRICE]'; 1460 TL is the 01–21 design price, docs/23 §1)",
     "renewal not decided"
   ],
@@ -282,46 +282,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=maison-patisserie"
+        "start_link": "/start?theme=maison-patisserie",
+        "image": "collections/28_Maison_Patisserie/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": false
       },
       {
         "name": "Lavender & Rose",
         "variant": "lavender-macaron",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=maison-patisserie&variant=lavender-macaron"
+        "start_link": "/start?theme=maison-patisserie&variant=lavender-macaron",
+        "image": "collections/28_Maison_Patisserie/package/listing/images_editorial/palette_lavender-macaron.jpg",
+        "image_exists": false
       },
       {
         "name": "Blush & Pistachio",
         "variant": "blush-pistachio",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=maison-patisserie&variant=blush-pistachio"
+        "start_link": "/start?theme=maison-patisserie&variant=blush-pistachio",
+        "image": "collections/28_Maison_Patisserie/package/listing/images_editorial/palette_blush-pistachio.jpg",
+        "image_exists": false
       },
       {
         "name": "Mint & Mocha",
         "variant": "mint-mocha",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=maison-patisserie&variant=mint-mocha"
+        "start_link": "/start?theme=maison-patisserie&variant=mint-mocha",
+        "image": "collections/28_Maison_Patisserie/package/listing/images_editorial/palette_mint-mocha.jpg",
+        "image_exists": false
       },
       {
         "name": "Lemon & Raspberry",
         "variant": "lemon-raspberry",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=maison-patisserie&variant=lemon-raspberry"
+        "start_link": "/start?theme=maison-patisserie&variant=lemon-raspberry",
+        "image": "collections/28_Maison_Patisserie/package/listing/images_editorial/palette_lemon-raspberry.jpg",
+        "image_exists": false
       },
       {
         "name": "Powder Blue & Rose",
         "variant": "powder-blue",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=maison-patisserie&variant=powder-blue"
+        "start_link": "/start?theme=maison-patisserie&variant=powder-blue",
+        "image": "collections/28_Maison_Patisserie/package/listing/images_editorial/palette_powder-blue.jpg",
+        "image_exists": false
       }
     ],
     "offered": [
       "Original (Maison Pâtisserie)"
+    ],
+    "images": [
+      {
+        "file": "collections/28_Maison_Patisserie/package/listing/images_editorial/10_palettes.jpg",
+        "exists": false,
+        "option": null,
+        "upload": false,
+        "alt": "Maison Pâtisserie in 6 color palettes: the opening page of each, side by side",
+        "status": "missing"
+      },
+      {
+        "file": "collections/28_Maison_Patisserie/package/listing/images_editorial/palette_original.jpg",
+        "exists": false,
+        "option": "Original (Maison Pâtisserie)",
+        "upload": false,
+        "alt": "Maison Pâtisserie in its original palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/28_Maison_Patisserie/package/listing/images_editorial/palette_lavender-macaron.jpg",
+        "exists": false,
+        "option": "Lavender & Rose",
+        "upload": false,
+        "alt": "Maison Pâtisserie in the Lavender & Rose palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/28_Maison_Patisserie/package/listing/images_editorial/palette_blush-pistachio.jpg",
+        "exists": false,
+        "option": "Blush & Pistachio",
+        "upload": false,
+        "alt": "Maison Pâtisserie in the Blush & Pistachio palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/28_Maison_Patisserie/package/listing/images_editorial/palette_mint-mocha.jpg",
+        "exists": false,
+        "option": "Mint & Mocha",
+        "upload": false,
+        "alt": "Maison Pâtisserie in the Mint & Mocha palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/28_Maison_Patisserie/package/listing/images_editorial/palette_lemon-raspberry.jpg",
+        "exists": false,
+        "option": "Lemon & Raspberry",
+        "upload": false,
+        "alt": "Maison Pâtisserie in the Lemon & Raspberry palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/28_Maison_Patisserie/package/listing/images_editorial/palette_powder-blue.jpg",
+        "exists": false,
+        "option": "Powder Blue & Rose",
+        "upload": false,
+        "alt": "Maison Pâtisserie in the Powder Blue & Rose palette: the opening page closed and opening",
+        "status": "missing"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

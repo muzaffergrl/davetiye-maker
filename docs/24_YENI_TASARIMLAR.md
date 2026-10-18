@@ -49,3 +49,26 @@ geçmeli; baskı ara zemini G149 serbest alan testini geçmeli; statik tema dosy
 
 Not: font sütunundaki "yerine" ifadeleri ilk akla geleni eler; oturum tasarıma en uygun Google Fonts çiftini seçer ve
 22+6 tasarımdan farklı olmasına dikkat eder.
+
+## 3. dalga — 33–38 (2026-10-18)
+
+Kurallar aynı (yukarıda; 2. dalga ekleri dahil). Ek, **K23 sıkı:** kullanıcı 2026-10-18'de 22–32'nin hepsine katalogda
+kapalı **zarf** kapağı koydu (main f1228e88: `components/marketing/InvitationCover.tsx`, "TAP TO OPEN"). Bu dalgada ilk
+sayfa her tasarımda **kapalı bir zarf**; farklılık zarfın **türü, malzemesi, kapanma düzeni ve açılış koreografisinde**
+(kılıf, kemer, tokalı kayış, ip-düğme, ipek kese, kâğıt kesim bant…) ve iç sayfaların bileşenlerinde. Zarf açılınca kart
+yükselir → asıl içerik yeni sayfada (home). İlk sayfanın düzeni katalog kapağıyla uyumlu: üstte "Together with their
+families" + isimler, ortada zarf, altta tarih · yer ve "Tap to open", köşede Skip. Hiçbiri 01–32'nin zarfına (V kapak +
+mum mühür, bkz. 01–21) **birebir benzememeli**.
+
+| # | id | Ad | Kapalı zarf / açılış | Foto sunumu | Dekor ailesi | Teknik | Font hedefi | Ana palet | Hareket imzası |
+|---|---|---|---|---|---|---|---|---|---|
+| 33 | marigold-mehndi | Marigold & Mehndi | Fuşya ipek zarf, altın lazer kesim paisley kılıfın içinde; kılıf yana kayar, püskül sallanır, kapak açılır, kart kadife-fuşya astardan yükselir; kadife çiçeği yaprakları süzülür | Jharokha (Rajasthan pencere kemeri) çerçeveler; fotoğrafın çevresinde kına deseni çizgi çizgi "çizilerek" belirir (GPT kına çizimi + maske) | Kadife çiçeği çelenkleri, kına desenleri, pirinç diya kandilleri, ipek püsküller | zengin minyatür + fotogerçekçi ipek | Yatra One? yerine Rozha One + Cormorant Infant | saffron-fuchsia-gold | Kılıf kayması, püskül sarkacı, kına çizgisinin akması, diya alevlerinin sırayla yanması |
+| 34 | red-lacquer-double-happiness | Red Lacquer & Double Happiness | Kırmızı kâğıt zarf, altın varak 囍 ve ip-düğme kapama; ip düğmeden çözülerek döner, kapak kalkar, kâğıt kesim (jianzhi) şakayık pencere katlarından açılır | Ay kapısı (moon gate) yuvarlak çerçeveler; kâğıt kesim katmanların paralaksı | Şakayık, kâğıt kesim desenleri, kırmızı lake, altın bulut motifleri, püsküllü düğüm | kâğıt kesim + lake + altın varak | Noto Serif Display + Ma Shan Zheng (yalnız 囍 için, metin İngilizce) | lacquer-red-gold-cream | İpin düğmeden dönerek çözülmesi, kâğıt kesim katların açılması, altın bulutların süzülmesi |
+| 35 | highland-tartan-thistle | Highland Tartan & Thistle | Ekoseli yün zarf, deri kayış + pirinç toka; toka açılır, kayış kayar, kapak açılır, funda dalı ve kart çıkar; tepelerden sis çekilir | Antika pirinç madalyon (locket) çerçeveler; kapakları açılır | Ekose, devedikeni, funda, deri, pirinç, dağ sisi | yağlı boya manzara + fotogerçekçi doku | Cinzel? yerine IM Fell English + Pinyon Script | heather-moss-tartan | Toka/kayış mekaniği, sis katmanlarının kayması, madalyon kapaklarının açılması |
+| 36 | victorian-glasshouse | Victorian Glasshouse | Kraft tohum paketi zarfı, bakır bitki etiketi ve sicim; sicim çözülür, kapak açılır, kart çıkar; serada camdaki buğu silinerek eğrelti otları ve kart görünür | Herbaryum etiketli cam altı numuneler (cam yansıması + etiket) | Dökme demir kemerler, eğrelti otu, orkide, bakır etiketler, cam buğusu | botanik gravür + fotogerçekçi cam | Cormorant SC? yerine Bodoni Moda + Monsieur La Doulaise | fern-copper-glass | Buğunun silinmesi (maske), demir kemerlerin paralaksı, etiketlerin sallanması |
+| 37 | art-nouveau-lily | Art Nouveau Lily | Krem zarf, kapağı altın kıvrımlı (whiplash) art nouveau çerçeve ve vitray zambak; vitraydan ışık süpürür, kapak çiçek açar gibi açılır | Vitray pencere kemerleri; ışık geçtikçe renkler canlanır | Zambak, tavus tüyü değil (24'ten ayrı), kıvrımlı altın çizgiler, vitray, mozaik altın | Mucha tarzı poster + vitray | oturum seçer: Art Nouveau başlık yazısı + zarif el yazısı (06 Art Deco'nun Poiret/Cinzel'inden ayrı) | sage-gold-cream-lilac | Işığın vitraydan süpürmesi, çizgilerin akarak çizilmesi, çiçek açılır gibi kapak |
+| 38 | papel-picado-fiesta | Papel Picado Fiesta | Kraft zarf, renkli kâğıt kesim (papel picado) kemer bant; bant çözülür ve bayraklar gökyüzüne dizilir, kapak açılır, kart yükselir, ampul dizisi yanar | Renkli kâğıt kesim çerçeveler; rüzgârda hafifçe sallanır (30'un çinisinden ve 13'ün polaroidinden ayrı) | Papel picado bayrakları, bugenvil, terrakota, ampul dizileri, işlemeli kumaş | canlı kâğıt kesim + fotogerçekçi | oturum seçer: el boyaması tabela başlık + sıcak serif gövde | fiesta-multicolor-terracotta | Bayrakların rüzgârda dalgalanması (CSS dalga), ampullerin sırayla yanması, kemer bandın çözülmesi |
+
+Kültürel temalar (33, 34, 38): semboller yaygın ve saygılı kullanılır; dini simge yok; metin İngilizce. 34'te 囍 (çifte
+mutluluk) GPT görselinde altın varak olarak yer alır; yazı katmanı değildir.
+Görevler: G182–G187 (oturum başına bir tasarım; dal `claude/g18N-<id>`).

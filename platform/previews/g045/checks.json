@@ -76,7 +76,7 @@
     {
       "name": "result: edit link shown",
       "ok": true,
-      "detail": "http://127.0.0.1:3399/edit/avery-and-jordan?k=…"
+      "detail": "http://127.0.0.1:3314/edit/avery-and-jordan?k=…"
     },
     {
       "name": "result: \"Save this link\" warning",
@@ -142,7 +142,7 @@
     },
     {
       "name": "second claim with the same order: friendly message",
-      "ok": true
+      "ok": false
     },
     {
       "name": "second claim: no link or first address leaked",
@@ -153,69 +153,14 @@
       "ok": true
     },
     {
-      "name": "taken address: automatic one moves to -2",
-      "ok": true,
-      "detail": "Available. \"avery-and-jordan\" is taken, so we added a number."
+      "name": "run",
+      "ok": false,
+      "detail": "locator.scrollIntoViewIfNeeded: Error: strict mode violation: locator('[role=\"status\"]') resolved to 2 elements:\n    1) <span role=\"status\" aria-live=\"polite\" class=\"panel-module__y_j7xG__visuallyHidden\">All changes saved</span> aka getByText('All changes saved')\n    2) <div role=\"status\" aria-live=\"polite\" class=\"panel-module__y_j7xG__snackHost archivo_7e3aff9e-module__Ig9pka__variable montserrat_9d575d6d-module__xUHt_q__variable dm_sans_ff4c0f9a-module__NXcdwq__variable\">…</div> aka getByRole('status').filter({ hasText: 'This order already has a' })\n\nCall log:\n\u001b[2m  - waiting for locator('[role=\"status\"]')\u001b[22m\n\n    at /home/user/davetiye-maker/platform/tests/claim-browser.ts:246:41"
     },
     {
-      "name": "typed taken address: \"already taken\" + suggestion button",
-      "ok": true
-    },
-    {
-      "name": "suggestion button fills the address",
-      "ok": true
-    },
-    {
-      "name": "second order: created at avery-and-jordan-2",
-      "ok": true
-    },
-    {
-      "name": "no console or page errors",
-      "ok": true
-    },
-    {
-      "name": "no horizontal overflow at the end",
-      "ok": true
-    },
-    {
-      "name": "lost answer: the server created the site (201)",
-      "ok": true,
-      "detail": "201"
-    },
-    {
-      "name": "lost answer: the form retried by itself and shows the edit link",
-      "ok": true,
-      "detail": "http://127.0.0.1:3399/edit/rowan-and-sage?k=…"
-    },
-    {
-      "name": "lost answer: still one site for the order",
-      "ok": true
-    },
-    {
-      "name": "lost answer: the shown link opens the editor",
-      "ok": true
-    },
-    {
-      "name": "lost answer: no page errors",
-      "ok": true
-    },
-    {
-      "name": "desktop: preview left of the form",
-      "ok": true,
-      "detail": "{\"fBox\":{\"x\":179.203125,\"y\":99,\"width\":327.5999755859375,\"height\":638.3999633789062},\"formBox\":{\"x\":568,\"y\":229.328125,\"width\":540,\"height\":902.390625}}"
-    },
-    {
-      "name": "blush-garden-rose: start page with live demo",
-      "ok": true
-    },
-    {
-      "name": "blush-garden-rose: editor opens for the claimed site (setup step 1, names filled)",
-      "ok": true
-    },
-    {
-      "name": "video: MP4 written",
-      "ok": true,
-      "detail": "previews/g045/start_flow_390.mp4"
+      "name": "video: recorded",
+      "ok": false,
+      "detail": "no video file"
     }
   ]
 }

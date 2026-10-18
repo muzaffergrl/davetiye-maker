@@ -260,7 +260,7 @@ class Tasarim:
     no: str
     klasor: str
     tema: str | None
-    durum: str  # config.ts: live / coming / ?
+    durum: str  # config.ts: live / preview / coming / ?
 
 
 def tasarimlar() -> dict[str, Tasarim]:

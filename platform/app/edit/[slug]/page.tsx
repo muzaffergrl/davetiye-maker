@@ -2,6 +2,8 @@
 // The key is checked against the stored hash (lib/rsvp/couple.ts editorAccess: the edit key, the shop's key or a
 // device key, G146). A wrong key, a preview key, a missing key and an unknown slug all render the same generic 404
 // (not-found.tsx).
+// G181: `view` = the hash of a deep link (`?view=share#share`): the panel's skeleton script asks for it once, so the server
+// renders that view instead of the default one (components/panel/Panel.tsx BootShell); the panel then drops it from the URL.
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
@@ -30,7 +32,7 @@ type Props = {
 
 export default async function EditPage({ params, searchParams }: Props) {
   const { slug } = await params;
-  const { k } = await searchParams;
+  const { k, view } = await searchParams;
   const key = typeof k === 'string' ? k : null;
   const opened = key ? await editorAccess(getDataAdapter(), slug, key) : null;
   if (!opened || !key) notFound();
@@ -52,6 +54,8 @@ export default async function EditPage({ params, searchParams }: Props) {
         dict={dict}
         shopUntil={shopUntil}
         deviceSession={access.kind === 'device'}
+        // G181: the view a deep link names (#share …), sent once by the page's own script; the panel checks it
+        initialView={typeof view === 'string' ? view : null}
       />
     </>
   );
