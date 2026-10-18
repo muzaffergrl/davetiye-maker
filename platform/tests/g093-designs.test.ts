@@ -6,7 +6,7 @@
 // Layout of eight cards (3 + 3 + 2 centered on wide screens) and the chip strip: tests/marketing-browser.ts (G093 section).
 import { afterEach, before, beforeEach, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { POST as claimRoute } from '../app/api/start/route.ts';
 import { setClaimRateLimiter } from '../lib/claim/limits.ts';
@@ -23,7 +23,7 @@ import { offeredThemes } from '../lib/themes/offered.ts';
 import { checkManifest, type AssetManifest } from '../scripts/marketing-assets.ts';
 import assets from '../lib/marketing/assets.json' with { type: 'json' };
 import { PLATFORM_ROOT, REPO_ROOT, tmpDir } from './helpers.ts';
-import { readyConfig, validateJsonLd } from './marketing-helpers.ts';
+import { designFolders, readyConfig, validateJsonLd } from './marketing-helpers.ts';
 
 const FIVE = ['blush-garden-rose', 'olive-ivory', 'mediterranean-lemon', 'dusty-blue-champagne', 'vintage-airmail-love-letter'];
 const PROD = { VERCEL_ENV: 'production' } as const;
@@ -198,7 +198,9 @@ test('real screens and opening clips of 06, 07, 08 are in assets.json and on dis
     assert.ok(m.opening!.bytes > 50_000 && m.opening!.bytes <= 1_500_000, `${n.id} ${m.opening!.bytes}`);
   }
   // one folder per live design, nothing else
-  assert.deepEqual(readdirSync(path.join(PLATFORM_ROOT, 'public/marketing/designs')).sort(), liveDesigns().map((d) => d.id).sort());
+  const folders = designFolders(liveDesigns().map((d) => d.id));
+  assert.deepEqual(folders.onDisk, folders.expected, 'one folder per live design, plus the envelope cover of each preview design');
+  assert.deepEqual(folders.strayPreviewFiles, [], 'a preview design folder holds only envelope.webp');
 });
 
 test('JSON-LD: Product (no Offer while the price is a placeholder) + VideoObject for 06/07/08; ItemList of /designs has 8', () => {

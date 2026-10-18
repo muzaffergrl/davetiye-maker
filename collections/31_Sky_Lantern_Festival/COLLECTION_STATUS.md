@@ -16,3 +16,29 @@ kontrolünden sonra `live` kararı entegratörde. Tasarım özeti: `DESIGN_BRIEF
 
 **Denenmedi:** gerçek iPhone/Android, Vercel yayını, gerçek alıcı fotoğrafları, yavaş ağ, GPT parçalarıyla görünüm. Son kontrol:
 2026-10-17 (G170).
+
+## G175 — paket (GPT'siz kısım, 2026-10-17)
+
+- START HERE: `package/customer/START_HERE.{md,pdf}` + `img/start_qr.{png,svg}` (yalnız `tools/make_qr.py`),
+  açılış nesnesi `lantern` / panel sekmesi `Lantern`; `python3 tools/build_customer_guides.py --check --designs 31` yeşil.
+  Başlat linki `/start?theme=sky-lantern-festival` yayından sonra çalışır (denenmedi).
+- Etsy verisi: `package/listing/etsy_upload.json` — `ready_to_publish: false`; blocker: görseller, video, `coming` (K41),
+  fiyat `[PRICE]`, yenileme. `python3 tools/etsy_upload.py --check --designs 31` yeşil. Etsy'ye hiçbir şey gönderilmedi.
+- GPT ilan sahneleri (PAKET 3, #00FF00 ekranlar): `assets/gpt/GPT_PROMPTS.md` → `assets/gpt/mockups/` (bekliyor).
+
+**GPT sonrası:** PAKET 5/2 parçaları tema `build_images.py` ile → PAKET 3 sahneleri `assets/gpt/mockups/`'a →
+`tools/listing_kit.py` `THEMES`'e `Theme(id="sky-lantern-festival", no="31", …)` (köşe süsleri GPT dekordan) +
+`tools/listing_editorial/opening_stills.json`'a açılış anları → `cd platform && npm run build` →
+`python3 tools/listing_editorial.py --theme sky-lantern-festival --capture --video` (9 ilan görseli + `video.mp4`) → `listing_v3.md` §5
+alt metinleri gerçek dosyalara göre → `python3 tools/listing_kit.py pdf --theme sky-lantern-festival` (ilan PDF'i) →
+`python3 tools/etsy_upload.py --designs 31` + `--check --strict --designs 31`.
+
+**Renk paletleri (G177, 2026-10-18):** 5 palet, hepsi `coming` (satışta, panelde, `/start`'ta görünmez; tasarım da `coming`):
+`midnight-blue` Midnight Blue & Amber; `twilight-rose` Twilight Rose & Gold; `deep-teal` Deep Teal Dusk & Amber; `evergreen-night` Evergreen Night & Amber; `moonlit-slate` Moonlit Slate & Gold. Kaynak `variants/recolor.json` + `variants/V0x_*/palette.json`; **yalnız CSS** ile kuruldu
+(`variants.css` + `theme.json variants`) çünkü temanın bütün görsel parçaları geçici. Görsel zeminler (GPT parçaları) şimdilik
+her palette asıl renkte. **GPT parçaları gelince görsel boyama yeniden çalıştırılmalı:** `recolor.json` aile çapalarını gerçek
+parçalarda ölçülen renge güncelle, sonra
+`python3 tools/recolor_parts.py build --design 31 && python3 tools/recolor_parts.py check --design 31` ve
+`cd platform && npm run build && NODE_PATH=/opt/node22/lib/node_modules node scripts/variant-check.cjs --theme sky-lantern-festival`;
+contact sheet'lere bak (`variants/GPT_PROMPTS.md`).
+

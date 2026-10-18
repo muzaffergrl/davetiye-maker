@@ -186,6 +186,31 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     llmsLine: 'a vintage rail journey: a leather ticket wallet opens to a first-class ticket; a route line draws across an antique map; carriage-window photos.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
+  // G175 (coming): written against the theme as built (G164); the paper pieces are interim until the GPT parts arrive.
+  'kintsugi-washi': {
+    id: 'kintsugi-washi',
+    collection: '26_Kintsugi_Washi',
+    demoCouple: 'Naomi & Kai',
+    style: msg('Indigo washi paper folded like origami around a rice-paper card, fine gold veins and photos that appear like spreading ink'),
+    metaDescription: msg('A wedding website wrapped in folded indigo washi paper: the folds open one by one to your invitation card. Personalize it in your online editor.'),
+    intro: msg('Deep indigo washi, ivory rice paper and gold leaf, with the calm of sumi ink. Your invitation waits inside folded paper, and every photo appears like ink spreading on paper.'),
+    opening: msg('Your guests tap the origami. The paper band slides off and the indigo folds open one by one, top, bottom, left and right, until the rice-paper card with your photo lifts out and comes forward to become your home page.'),
+    pages: {
+      home: msg('Your portrait, names, date and venue on a rice-paper card on indigo, then the invitation on a rice-paper band, a countdown and calendar links.'),
+      story: msg('Three moments, left, right and left again; each photo appears like ink spreading on paper as guests scroll to it.'),
+      details: msg('The order of the day on rice paper, a venue photo that appears like ink, an optional map and directions, travel, menu, registry and questions and answers.'),
+      rsvp: msg('A rice-paper reply card with your reply-by date and the shared configurable reply form.'),
+    },
+    palette: [
+      { name: msg('Indigo'), hex: '#242E58' },
+      { name: msg('Night'), hex: '#161C36' },
+      { name: msg('Rice paper'), hex: '#F3ECDC' },
+      { name: msg('Gold'), hex: '#C9A55A' },
+    ],
+    fonts: ['Shippori Mincho', 'Allura'],
+    llmsLine: 'indigo washi paper folded like origami around a rice-paper card; the folds open one by one; fine gold veins and photos that appear like spreading ink.',
+    relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
+  },
   // G165 (coming): written against the theme as built; the doors and tiles are interim pieces until the GPT parts arrive.
   'riad-lantern-nights': {
     id: 'riad-lantern-nights',
@@ -1003,7 +1028,7 @@ function previewDesignCopy(d: DesignCommerce): DesignCopy | undefined {
     collection: '',
     demoCouple: 'Sample couple',
     style: preview.style,
-    metaDescription: msg(d.name + ' wedding website concept preview. Explore its invitation, story, event details and RSVP pages; final artwork and Etsy availability are pending.'),
+    metaDescription: msg(d.name + ' wedding website preview. Explore its invitation, story, event details and RSVP pages; final artwork and Etsy availability are pending.'),
     intro: msg(preview.style + '. This catalogue preview uses interim artwork while the final design assets and Etsy availability are pending.'),
     opening: preview.opening,
     pages: {
@@ -1043,7 +1068,9 @@ export function catalogDesigns(cfg: MarketingConfig = MARKETING): Design[] {
   return cfg.designs
     .filter((d) => d.status !== 'coming')
     .map((d) => {
-      const copy = DESIGN_COPY[d.id] ?? (d.status === 'preview' ? previewDesignCopy(d) : undefined);
+      // a 'preview' design keeps its envelope-cover catalogue copy (main f1228e88) until it goes live; its full copy
+      // (DESIGN_COPY, G175) still names the panel's opening tab (lib/panel/state.ts)
+      const copy = (d.status === 'preview' ? previewDesignCopy(d) : undefined) ?? DESIGN_COPY[d.id];
       if (!copy) throw new Error('lib/marketing/designs.ts has no copy for catalog design "' + d.id + '"');
       return { ...d, copy };
     });

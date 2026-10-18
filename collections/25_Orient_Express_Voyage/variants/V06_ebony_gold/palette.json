@@ -1,0 +1,25 @@
+{
+  "id": "V06_ebony_gold",
+  "slug": "ebony-gold",
+  "name": "Ebony & Gold",
+  "ink": "#1C2A21",
+  "deep": "#14120D",
+  "primary": "#27241F",
+  "mist_top": "#B3B1AE",
+  "mist_bottom": "#949290",
+  "gold": "#B8914B",
+  "gold_light": "#D8BD84",
+  "ivory": "#F3EBD9",
+  "leaf": "#8C2F39",
+  "swatch": [
+    "#27241F",
+    "#B8914B",
+    "#F3EBD9"
+  ],
+  "status": "coming",
+  "families": {
+    "green": "primary",
+    "brass": null,
+    "route": null
+  }
+}

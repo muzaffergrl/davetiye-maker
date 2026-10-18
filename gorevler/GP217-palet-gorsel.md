@@ -2,7 +2,7 @@
 id: GP217
 baslik: Aşama 2 · Tasarım 17 — 5 palet görselleri
 rol: gpt-gorsel
-durum: blokaj
+durum: iptal
 alan:
 oncelik: 6
 bagimli: [GP117]
@@ -26,3 +26,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
+- 2026-10-17 iptal: G153/G156–G158: palet görselleri recolor ile üretildi; kalan GPT istekleri collections/*/variants/GPT_PROMPTS.md + docs/26

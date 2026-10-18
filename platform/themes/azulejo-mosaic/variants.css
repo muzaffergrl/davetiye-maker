@@ -1,0 +1,110 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 30
+   (kaynak: collections/30_Azulejo_Mosaic/variants/<V0x_slug>/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-050f2a: 5 15 42;
+  --c-081638: 8 22 56;
+  --c-0a1a3d: 10 26 61;
+  --c-102554: 16 37 84;
+  --c-173a80: 23 58 128;
+  --c-1f4a9e: 31 74 158;
+  --c-8c4128: 140 65 40;
+  --c-e4a688: 228 166 136;
+}
+
+/* V03_copper_green · Copper Green & Ochre */
+html[data-variant="copper-green"] {
+  --c-050f2a: 12 32 25;
+  --c-081638: 16 41 32;
+  --c-0a1a3d: 20 45 35;
+  --c-102554: 25 60 47;
+  --c-173a80: 35 87 67;
+  --c-1f4a9e: 44 106 82;
+  --c-8c4128: 150 105 28;
+  --c-e4a688: 235 201 147;
+  --cobalt: #2C6A52;
+  --cobalt-ink: #235743;
+  --ink: #1D3B31;
+  --ink-soft: #546863;
+  --line: rgba(35, 87, 67, 0.2);
+  --mist: #DBE5EA;
+  --night: #193C2F;
+  --terra: #B5832E;
+  --terra-deep: #835800;
+  --terra-light: #EBC993;
+}
+
+/* V02_manganese_violet · Manganese Violet & Terracotta */
+html[data-variant="manganese-violet"] {
+  --c-050f2a: 13 7 28;
+  --c-081638: 21 13 40;
+  --c-0a1a3d: 24 16 45;
+  --c-102554: 36 26 64;
+  --c-173a80: 58 44 102;
+  --c-1f4a9e: 75 58 128;
+  --cobalt: #4B3A80;
+  --cobalt-ink: #3A2C66;
+  --ink: #251B3D;
+  --ink-soft: #524B64;
+  --line: rgba(58, 44, 102, 0.2);
+  --mist: #D3D5E4;
+  --night: #241A40;
+}
+
+/* V06_slate_blue · Slate Blue & Terracotta */
+html[data-variant="slate-blue"] {
+  --c-050f2a: 14 21 31;
+  --c-081638: 20 29 41;
+  --c-0a1a3d: 24 33 45;
+  --c-102554: 33 45 62;
+  --c-173a80: 50 69 93;
+  --c-1f4a9e: 63 86 115;
+  --cobalt: #3F5673;
+  --cobalt-ink: #32455D;
+  --ink: #232D3C;
+  --ink-soft: #555C68;
+  --line: rgba(50, 69, 93, 0.2);
+  --mist: #D8DEE9;
+  --night: #212D3E;
+}
+
+/* V04_teal_glaze · Teal Glaze & Terracotta */
+html[data-variant="teal-glaze"] {
+  --c-050f2a: 8 28 33;
+  --c-081638: 11 37 43;
+  --c-0a1a3d: 14 41 47;
+  --c-102554: 18 55 62;
+  --c-173a80: 23 81 91;
+  --c-1f4a9e: 30 100 112;
+  --cobalt: #1E6470;
+  --cobalt-ink: #17515B;
+  --ink: #19363E;
+  --ink-soft: #51646B;
+  --line: rgba(23, 81, 91, 0.2);
+  --mist: #D9E3EC;
+  --night: #12373E;
+}
+
+/* V05_wine_ochre · Wine Glaze & Ochre */
+html[data-variant="wine-ochre"] {
+  --c-050f2a: 19 1 4;
+  --c-081638: 30 3 8;
+  --c-0a1a3d: 34 5 11;
+  --c-102554: 52 12 21;
+  --c-173a80: 86 24 40;
+  --c-1f4a9e: 110 36 54;
+  --c-8c4128: 150 105 28;
+  --c-e4a688: 235 201 147;
+  --cobalt: #6E2436;
+  --cobalt-ink: #561828;
+  --ink: #320F16;
+  --ink-soft: #5B4244;
+  --line: rgba(86, 24, 40, 0.2);
+  --mist: #D5CFD7;
+  --night: #340C15;
+  --terra: #B5832E;
+  --terra-deep: #835800;
+  --terra-light: #EBC993;
+}

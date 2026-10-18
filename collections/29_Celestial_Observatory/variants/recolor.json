@@ -1,0 +1,140 @@
+{
+  "theme": "celestial-observatory",
+  "note": "G177 recolour manifest (tools/recolor_parts.py, docs/25). Every image part of this theme is INTERIM (stand-ins toned from other designs' GPT pixels) until its PAKET 5 GPT part arrives, so the palettes are built CSS-only (build --css-only). Family anchors are the theme's CSS colours; before the image build re-measure each anchor as the median colour of the real GPT parts and review the contact sheets (docs/25 §2.3–2.4).",
+  "image_build": "css-only (interim parts; re-run after GPT)",
+  "swatch": [
+    "#11193A",
+    "#C9CFDC",
+    "#C8A24E"
+  ],
+  "families": {
+    "midnight": {
+      "anchor": "#11193A",
+      "sigma": 25,
+      "lmax": 0.55,
+      "note": "midnight sky and night ink (silver above lmax stays)"
+    },
+    "gold": {
+      "anchor": "#C8A24E",
+      "sigma": 12,
+      "cmin": 0.05,
+      "cfull": 0.07,
+      "note": "gold leaf and brass"
+    }
+  },
+  "groups": {
+    "art": [
+      "midnight",
+      "gold"
+    ]
+  },
+  "parts": {
+    "brass": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "favicon": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "night": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "paper": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "ph_round": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "ph_wide": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "sky": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    }
+  },
+  "print": {},
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "midnight",
+      "gold"
+    ],
+    "roles": {},
+    "keep": [
+      "--paper",
+      "--paper-2",
+      "--c-9b2c20"
+    ],
+    "contrast": [
+      [
+        "--paper",
+        "--midnight",
+        4.5
+      ],
+      [
+        "--paper",
+        "--night",
+        4.5
+      ],
+      [
+        "--silver",
+        "--midnight",
+        4.5
+      ],
+      [
+        "--silver",
+        "--night",
+        4.5
+      ],
+      [
+        "--mist",
+        "--midnight",
+        4.5
+      ],
+      [
+        "--gold",
+        "--midnight",
+        4.5
+      ],
+      [
+        "--gold-light",
+        "--midnight",
+        4.5
+      ],
+      [
+        "--ink",
+        "--paper",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--paper",
+        4.5
+      ],
+      [
+        "--gold-ink",
+        "--paper",
+        5.0
+      ]
+    ]
+  }
+}

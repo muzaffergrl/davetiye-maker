@@ -1,0 +1,213 @@
+{
+  "theme": "maison-patisserie",
+  "note": "G177 recolour manifest (tools/recolor_parts.py, docs/25). Every image part of this theme is INTERIM (stand-ins toned from other designs' GPT pixels) until its PAKET 5 GPT part arrives, so the palettes are built CSS-only (build --css-only). Family anchors are the theme's CSS colours; before the image build re-measure each anchor as the median colour of the real GPT parts and review the contact sheets (docs/25 §2.3–2.4).",
+  "image_build": "css-only (interim parts; re-run after GPT)",
+  "swatch": [
+    "#FBF5EC",
+    "#A9C49C",
+    "#E8B4B8"
+  ],
+  "families": {
+    "pistachio": {
+      "anchor": "#A9C49C",
+      "sigma": 18,
+      "cmin": 0.02,
+      "cfull": 0.035,
+      "note": "pistachio box and greens"
+    },
+    "rose": {
+      "anchor": "#E8B4B8",
+      "sigma": 14,
+      "cmin": 0.02,
+      "cfull": 0.035,
+      "note": "rose satin ribbon"
+    },
+    "gold": {
+      "anchor": "#B8995A",
+      "sigma": 12,
+      "cmin": 0.045,
+      "cfull": 0.06,
+      "note": "gold rims (vanilla below stays)"
+    }
+  },
+  "groups": {
+    "art": [
+      "pistachio",
+      "rose",
+      "gold"
+    ]
+  },
+  "parts": {
+    "accent_1": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "bg_page": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "bg_tile": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "bow": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "bow_knot": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "bow_l": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "bow_r": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "box_base": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "card_paper": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "favicon": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "lid": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "ph_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "ph_wide": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "ribbon_e": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "ribbon_n": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "ribbon_s": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "ribbon_w": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "shelf": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "tissue_left": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "tissue_right": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    }
+  },
+  "print": {},
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "pistachio",
+      "rose",
+      "gold"
+    ],
+    "roles": {},
+    "keep": [
+      "--cream",
+      "--paper",
+      "--ink",
+      "--ink-soft",
+      "--vanilla",
+      "--c-a3333f"
+    ],
+    "contrast": [
+      [
+        "--ink",
+        "--cream",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--cream",
+        4.5
+      ],
+      [
+        "--pistachio-deep",
+        "--cream",
+        4.5
+      ],
+      [
+        "--pistachio-deep",
+        "--pistachio-pale",
+        4.5
+      ],
+      [
+        "--rose-deep",
+        "--cream",
+        4.5
+      ],
+      [
+        "--rose-deep",
+        "--rose-pale",
+        4.5
+      ],
+      [
+        "--gold-ink",
+        "--cream",
+        4.5
+      ],
+      [
+        "--paper",
+        "--pistachio-deep",
+        4.5
+      ],
+      [
+        "--paper",
+        "--rose-deep",
+        4.5
+      ]
+    ]
+  }
+}

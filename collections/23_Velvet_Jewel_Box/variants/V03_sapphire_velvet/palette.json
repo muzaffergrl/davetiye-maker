@@ -1,0 +1,25 @@
+{
+  "id": "V03_sapphire_velvet",
+  "slug": "sapphire-velvet",
+  "name": "Sapphire Velvet & Gold",
+  "ink": "#3A1532",
+  "deep": "#121C45",
+  "primary": "#24315C",
+  "mist_top": "#BCC5DE",
+  "mist_bottom": "#9DA6BD",
+  "gold": "#E8D3B0",
+  "gold_light": "#ECD8B8",
+  "ivory": "#F8EDE0",
+  "leaf": "#C99A86",
+  "swatch": [
+    "#24315C",
+    "#E8D3B0",
+    "#F8EDE0"
+  ],
+  "status": "coming",
+  "families": {
+    "velvet": "primary",
+    "rose": null,
+    "champagne": null
+  }
+}

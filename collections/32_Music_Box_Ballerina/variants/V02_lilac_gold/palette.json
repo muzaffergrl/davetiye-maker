@@ -1,0 +1,24 @@
+{
+  "id": "V02_lilac_gold",
+  "slug": "lilac-gold",
+  "name": "Lilac & Gold",
+  "ink": "#4A2F35",
+  "deep": "#846E9D",
+  "primary": "#9C86B6",
+  "mist_top": "#BBB1C8",
+  "mist_bottom": "#A89FB5",
+  "gold": "#C9A45C",
+  "gold_light": "#F7E4E2",
+  "ivory": "#FFF8F4",
+  "leaf": "#EECDD0",
+  "swatch": [
+    "#FFF8F4",
+    "#9C86B6",
+    "#C9A45C"
+  ],
+  "status": "coming",
+  "families": {
+    "rose": "primary",
+    "gold": null
+  }
+}

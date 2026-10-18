@@ -2,7 +2,7 @@
 id: G159
 baslik: Paletler büyürken Vercel işlev paketini küçük tut — tema CSS/JS/görselleri statik dosya (public/themes)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G159
 oncelik: 2
 bagimli: [G055, G153]
@@ -91,3 +91,4 @@ Vercel'in yayın boyutu uyarısı.
 
 ## Günlük
 - 2026-10-17 claude-G159: alındı → kopya adımı, rewrite/başlıklar, trace-check bütçeleri, testler, belgeler; durum inceleme.
+- 2026-10-17 entegratör onayladı

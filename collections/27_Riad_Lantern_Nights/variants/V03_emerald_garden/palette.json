@@ -1,0 +1,25 @@
+{
+  "id": "V03_emerald_garden",
+  "slug": "emerald-garden",
+  "name": "Emerald Garden & Brass",
+  "ink": "#3A2114",
+  "deep": "#003522",
+  "primary": "#1A4A36",
+  "mist_top": "#C4DACF",
+  "mist_bottom": "#A5BAAF",
+  "gold": "#C9A35B",
+  "gold_light": "#E2C48C",
+  "ivory": "#F6EAD2",
+  "leaf": "#E3A54A",
+  "swatch": [
+    "#1A4A36",
+    "#C9A35B",
+    "#F6EAD2"
+  ],
+  "status": "coming",
+  "families": {
+    "teal": "primary",
+    "lantern": null,
+    "cedar": null
+  }
+}

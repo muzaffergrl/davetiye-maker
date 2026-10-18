@@ -1,0 +1,24 @@
+{
+  "id": "V04_burgundy_night",
+  "slug": "burgundy-night",
+  "name": "Burgundy Night & Gold",
+  "ink": "#141A33",
+  "deep": "#21030D",
+  "primary": "#36141F",
+  "mist_top": "#BCA7AC",
+  "mist_bottom": "#9C888D",
+  "gold": "#C8A24E",
+  "gold_light": "#E2C27A",
+  "ivory": "#EEEBE3",
+  "leaf": "#9B7A3C",
+  "swatch": [
+    "#36141F",
+    "#C8A24E",
+    "#EEEBE3"
+  ],
+  "status": "coming",
+  "families": {
+    "midnight": "primary",
+    "gold": null
+  }
+}

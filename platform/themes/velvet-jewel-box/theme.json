@@ -664,5 +664,62 @@
       "label": "Line above the city",
       "panel": "day"
     }
-  }
+  },
+  "swatch": [
+    "#2A1328",
+    "#E8D3B0",
+    "#C99A86"
+  ],
+  "variants": [
+    {
+      "id": "emerald-velvet",
+      "name": "Emerald Velvet & Champagne",
+      "swatch": [
+        "#1F4636",
+        "#E8D3B0",
+        "#F8EDE0"
+      ],
+      "status": "coming"
+    },
+    {
+      "id": "sapphire-velvet",
+      "name": "Sapphire Velvet & Gold",
+      "swatch": [
+        "#24315C",
+        "#E8D3B0",
+        "#F8EDE0"
+      ],
+      "status": "coming"
+    },
+    {
+      "id": "ruby-velvet",
+      "name": "Ruby Velvet & Gold",
+      "swatch": [
+        "#5A1628",
+        "#E8D3B0",
+        "#F8EDE0"
+      ],
+      "status": "coming"
+    },
+    {
+      "id": "mauve-velvet",
+      "name": "Mauve Velvet & Rose Gold",
+      "swatch": [
+        "#553442",
+        "#E8D3B0",
+        "#F8EDE0"
+      ],
+      "status": "coming"
+    },
+    {
+      "id": "onyx-velvet",
+      "name": "Onyx Velvet & Champagne",
+      "swatch": [
+        "#2E2A2D",
+        "#E8D3B0",
+        "#F8EDE0"
+      ],
+      "status": "coming"
+    }
+  ]
 }

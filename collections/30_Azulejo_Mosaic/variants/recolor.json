@@ -1,0 +1,165 @@
+{
+  "theme": "azulejo-mosaic",
+  "note": "G177 recolour manifest (tools/recolor_parts.py, docs/25). Every image part of this theme is INTERIM (stand-ins toned from other designs' GPT pixels) until its PAKET 5 GPT part arrives, so the palettes are built CSS-only (build --css-only). Family anchors are the theme's CSS colours; before the image build re-measure each anchor as the median colour of the real GPT parts and review the contact sheets (docs/25 §2.3–2.4).",
+  "image_build": "css-only (interim parts; re-run after GPT)",
+  "swatch": [
+    "#1F4A9E",
+    "#FAF8F2",
+    "#AE583A"
+  ],
+  "families": {
+    "cobalt": {
+      "anchor": "#1F4A9E",
+      "sigma": 22,
+      "note": "cobalt glaze, night wall, blue ink"
+    },
+    "terra": {
+      "anchor": "#AE583A",
+      "sigma": 14,
+      "cmin": 0.05,
+      "cfull": 0.07,
+      "note": "terracotta"
+    }
+  },
+  "groups": {
+    "art": [
+      "cobalt",
+      "terra"
+    ]
+  },
+  "parts": {
+    "card": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "favicon": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "frieze": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "lime": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "ph_land": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "ph_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "ph_wide": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "tile_1": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "tile_2": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "tile_3": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "tile_4": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "tile_back": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "wall": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    }
+  },
+  "print": {},
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "cobalt",
+      "terra"
+    ],
+    "roles": {},
+    "keep": [
+      "--glaze",
+      "--lime",
+      "--lime-2",
+      "--line-light",
+      "--c-9b2c20"
+    ],
+    "contrast": [
+      [
+        "--glaze",
+        "--cobalt",
+        4.5
+      ],
+      [
+        "--glaze",
+        "--night",
+        4.5
+      ],
+      [
+        "--glaze",
+        "--cobalt-ink",
+        4.5
+      ],
+      [
+        "--ink",
+        "--lime",
+        4.5
+      ],
+      [
+        "--ink",
+        "--glaze",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--lime",
+        4.5
+      ],
+      [
+        "--cobalt-ink",
+        "--lime",
+        4.5
+      ],
+      [
+        "--terra-deep",
+        "--lime",
+        5.2
+      ],
+      [
+        "--mist",
+        "--night",
+        4.5
+      ]
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "V05_mauve_velvet",
+  "slug": "mauve-velvet",
+  "name": "Mauve Velvet & Rose Gold",
+  "ink": "#3A1532",
+  "deep": "#3F202D",
+  "primary": "#553442",
+  "mist_top": "#E1CED5",
+  "mist_bottom": "#C1AEB5",
+  "gold": "#E8D3B0",
+  "gold_light": "#ECD8B8",
+  "ivory": "#F8EDE0",
+  "leaf": "#C99A86",
+  "swatch": [
+    "#553442",
+    "#E8D3B0",
+    "#F8EDE0"
+  ],
+  "status": "coming",
+  "families": {
+    "velvet": "primary",
+    "rose": null,
+    "champagne": null
+  }
+}

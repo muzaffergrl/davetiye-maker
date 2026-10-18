@@ -664,5 +664,62 @@
       "label": "Line above the city",
       "panel": "day"
     }
-  }
+  },
+  "swatch": [
+    "#EECDD0",
+    "#B76E79",
+    "#C9A45C"
+  ],
+  "variants": [
+    {
+      "id": "lilac-gold",
+      "name": "Lilac & Gold",
+      "swatch": [
+        "#FFF8F4",
+        "#9C86B6",
+        "#C9A45C"
+      ],
+      "status": "coming"
+    },
+    {
+      "id": "powder-blue",
+      "name": "Powder Blue & Gold",
+      "swatch": [
+        "#FFF8F4",
+        "#7E9BB8",
+        "#C9A45C"
+      ],
+      "status": "coming"
+    },
+    {
+      "id": "sage-mint",
+      "name": "Sage Mint & Gold",
+      "swatch": [
+        "#FFF8F4",
+        "#7FA594",
+        "#C9A45C"
+      ],
+      "status": "coming"
+    },
+    {
+      "id": "champagne",
+      "name": "Champagne & Gold",
+      "swatch": [
+        "#FFF8F4",
+        "#B39A7C",
+        "#C9A45C"
+      ],
+      "status": "coming"
+    },
+    {
+      "id": "peach-coral",
+      "name": "Peach Coral & Gold",
+      "swatch": [
+        "#FFF8F4",
+        "#CB826E",
+        "#C9A45C"
+      ],
+      "status": "coming"
+    }
+  ]
 }

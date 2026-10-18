@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""START HERE guides for designs 01–21 (G122; 21: G137; G148): Markdown + PDF + the real start QR, from ONE source text.
+"""START HERE guides for designs 01–32 (G122; 21: G137; G148; 22–32: G175): Markdown + PDF + the real start QR, from ONE source text.
 
-  python3 tools/build_customer_guides.py                   # all 20 designs: build, then check
+  python3 tools/build_customer_guides.py                   # all 32 designs: build, then check
   python3 tools/build_customer_guides.py --designs 06-20   # only these ("06-20", "07,12", "01,06-08", "all")
   python3 tools/build_customer_guides.py --check           # build nothing; check what is on disk (exit 1 on a problem)
   python3 tools/build_customer_guides.py --base-url https://…   # another host for the start link (or GUIDE_BASE_URL)
@@ -13,8 +13,9 @@ change Ek A and run this again. Placeholders filled per design ({…} left over 
   {PRIVACY_URL}    <base>/privacy               (route: platform/app/(marketing)/privacy/page.tsx)
   {MY_URL}         <base>/my                    (G146/G148: the Etsy order number + email open the editor on any
                                                  device; route platform/app/my/page.tsx, "Create your website")
-  {OPENING}        what guests tap first: envelope, gatefold, pouch, wallet, book or sleeve
-                   (platform/lib/marketing/designs.ts, "Your guests tap the <thing>.")
+  {OPENING}        what guests tap first: envelope, gatefold, pouch, wallet, book, sleeve, box, curtain, origami, door,
+                   dome, wall or lantern (platform/lib/marketing/designs.ts, "Your guests tap the <thing>."; G175: 26
+                   Kintsugi & Washi's folded paper is "origami")
   {OPENING_TAB}    the same word capitalised: the panel's first preview tab (G121, lib/panel/model.ts openingTabLabel)
   {LANGUAGE_FONTS} one of LANGUAGE_LINES, from the design's fonts (designs.ts `fonts`) and FONT_SUBSETS below
 
@@ -22,6 +23,7 @@ Writes per design, in collections/<NN_*>/package/customer/:
   START_HERE.md            Ek A, filled in
   img/start_qr.png + .svg  QR of the start link, made ONLY by tools/make_qr.py (segno, error correction Q, 4-module
                            quiet zone, scale 20); dark modules = the darkest colour of the design's palette.json
+                           (G175: 22–32 have none yet — the palette of its designs.ts entry instead)
   img/start_qr_page.png    the same pixels centred on a white strip 4× as wide (what START_HERE.md shows; md_to_pdf and
                            tools/listing_kit.py scale pictures to the text width)
   START_HERE.pdf           US Letter, reportlab, standard PDF fonts (no font file is embedded or shipped); the QR is
@@ -77,27 +79,39 @@ PLACEHOLDER = re.compile(r"\{[A-Z_]+\}")
 FONT_SUBSETS: dict[str, set[str]] = {
     "Alex Brush": {"latin", "latin-ext"},
     "Allison": {"latin", "latin-ext"},
+    "Abril Fatface": {"latin", "latin-ext"},  # G175 (designs 22–32): fonts.googleapis.com/css2 on 2026-10-17
     "Allura": {"latin", "latin-ext"},
+    "Arizonia": {"latin", "latin-ext"},
+    "Ballet": {"latin", "latin-ext"},
+    "Bellefair": {"latin", "latin-ext"},  # + hebrew
     "Bodoni Moda": {"latin", "latin-ext"},
     "Cinzel": {"latin", "latin-ext"},
     "Cinzel Decorative": {"latin", "latin-ext"},
     "Cormorant Garamond": {"latin", "latin-ext", "cyrillic"},
     "Cormorant Infant": {"latin", "latin-ext", "cyrillic"},
     "Cormorant SC": {"latin", "latin-ext", "cyrillic"},
+    "Cormorant Upright": {"latin", "latin-ext"},
+    "Corinthia": {"latin", "latin-ext"},
     "Dancing Script": {"latin", "latin-ext"},
     "EB Garamond": {"latin", "latin-ext", "cyrillic"},
+    "Forum": {"latin", "latin-ext", "cyrillic"},
+    "Gilda Display": {"latin", "latin-ext"},
     "Great Vibes": {"latin", "latin-ext", "cyrillic"},
     "Homemade Apple": {"latin"},
     "IM Fell English": {"latin"},
+    "Imperial Script": {"latin", "latin-ext"},
     "Italiana": {"latin"},
     "Italianno": {"latin", "latin-ext"},
     "Josefin Sans": {"latin", "latin-ext"},
     "Josefin Slab": {"latin"},
+    "Jost": {"latin", "latin-ext", "cyrillic"},
     "Kaushan Script": {"latin", "latin-ext"},
     "Libre Baskerville": {"latin", "latin-ext"},
+    "Limelight": {"latin", "latin-ext"},
     "Lora": {"latin", "latin-ext", "cyrillic"},
     "Manrope": {"latin", "latin-ext", "cyrillic"},  # G137 (design 21), fonts.googleapis.com/css2 on 2026-10-17
     "Marcellus": {"latin", "latin-ext"},
+    "Marcellus SC": {"latin", "latin-ext"},
     "Merriweather": {"latin", "latin-ext", "cyrillic"},
     "Mrs Saint Delafield": {"latin", "latin-ext"},
     "Noto Serif Display": {"latin", "latin-ext", "cyrillic"},
@@ -109,6 +123,7 @@ FONT_SUBSETS: dict[str, set[str]] = {
     "Raleway": {"latin", "latin-ext", "cyrillic"},
     "Sacramento": {"latin", "latin-ext"},
     "Satisfy": {"latin"},
+    "Shippori Mincho": {"latin", "latin-ext"},  # + Japanese
     "Special Elite": {"latin", "latin-ext"},
     "Spectral": {"latin", "latin-ext", "cyrillic"},
     "Tangerine": {"latin"},
@@ -217,11 +232,23 @@ def _luminance(hex_colour: str) -> float:
     return 0.2126 * lin[0] + 0.7152 * lin[1] + 0.0722 * lin[2]
 
 
-def qr_dark(folder: str) -> str:
+def palette_colours(folder: str, theme: str | None = None) -> list[str]:
+    """#rrggbb colours of the collection's palette.json; G175: designs 22–32 have none yet, so the palette of the
+    design's sales copy (platform/lib/marketing/designs.ts `palette`, the colours /designs shows) is used instead."""
+    pal_file = REPO / "collections" / folder / "palette.json"
+    if pal_file.exists():
+        pal = json.loads(pal_file.read_text(encoding="utf-8"))
+        return [v for v in pal.values() if isinstance(v, str) and re.fullmatch(r"#[0-9A-Fa-f]{6}", v)]
+    if theme is None:
+        return []
+    m = re.search(r"\bpalette:\s*\[(.*?)\]", design_block(theme), re.S)
+    return re.findall(r"#[0-9A-Fa-f]{6}", m.group(1)) if m else []
+
+
+def qr_dark(folder: str, theme: str | None = None) -> str:
     """The darkest colour of the design's palette (ink is light on the dark designs 06, 17, 19), as long as it keeps
     a contrast of at least 7:1 on white; else near-black."""
-    pal = json.loads((REPO / "collections" / folder / "palette.json").read_text(encoding="utf-8"))
-    colours = [v for v in pal.values() if isinstance(v, str) and re.fullmatch(r"#[0-9A-Fa-f]{6}", v)]
+    colours = palette_colours(folder, theme)
     best = min(colours, key=_luminance) if colours else "#2B2B2B"
     return best.upper() if 1.05 / (_luminance(best) + 0.05) >= 7 else "#2B2B2B"
 
@@ -387,7 +414,7 @@ def build(no: str, folder: str, theme: str, base: str = BASE_URL, tmpl: str | No
     out = customer_dir(folder)
     out.mkdir(parents=True, exist_ok=True)
     (out / "START_HERE.md").write_text(md, encoding="utf-8")
-    png, svg, page = make_start_qr(vals["START_URL"], out / "img", qr_dark(folder))
+    png, svg, page = make_start_qr(vals["START_URL"], out / "img", qr_dark(folder, theme))
     pdf = build_pdf(md, out / "START_HERE.pdf", png, vals["START_URL"], vals["DESIGN_NAME"])
     return [out / "START_HERE.md", png, svg, page, pdf]
 

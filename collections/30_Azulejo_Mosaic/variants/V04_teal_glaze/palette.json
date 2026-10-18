@@ -1,0 +1,24 @@
+{
+  "id": "V04_teal_glaze",
+  "slug": "teal-glaze",
+  "name": "Teal Glaze & Terracotta",
+  "ink": "#16264F",
+  "deep": "#004D59",
+  "primary": "#1E6470",
+  "mist_top": "#DDFAFF",
+  "mist_bottom": "#BCD9DF",
+  "gold": "#AE583A",
+  "gold_light": "#E4A688",
+  "ivory": "#FAF8F2",
+  "leaf": "#AE583A",
+  "swatch": [
+    "#1E6470",
+    "#AE583A",
+    "#FAF8F2"
+  ],
+  "status": "coming",
+  "families": {
+    "cobalt": "primary",
+    "terra": null
+  }
+}

@@ -642,5 +642,62 @@
       "label": "Line above the city",
       "panel": "day"
     }
-  }
+  },
+  "swatch": [
+    "#1F4A9E",
+    "#FAF8F2",
+    "#AE583A"
+  ],
+  "variants": [
+    {
+      "id": "manganese-violet",
+      "name": "Manganese Violet & Terracotta",
+      "swatch": [
+        "#4B3A80",
+        "#AE583A",
+        "#FAF8F2"
+      ],
+      "status": "coming"
+    },
+    {
+      "id": "copper-green",
+      "name": "Copper Green & Ochre",
+      "swatch": [
+        "#2C6A52",
+        "#B5832E",
+        "#FAF8F2"
+      ],
+      "status": "coming"
+    },
+    {
+      "id": "teal-glaze",
+      "name": "Teal Glaze & Terracotta",
+      "swatch": [
+        "#1E6470",
+        "#AE583A",
+        "#FAF8F2"
+      ],
+      "status": "coming"
+    },
+    {
+      "id": "wine-ochre",
+      "name": "Wine Glaze & Ochre",
+      "swatch": [
+        "#6E2436",
+        "#B5832E",
+        "#FAF8F2"
+      ],
+      "status": "coming"
+    },
+    {
+      "id": "slate-blue",
+      "name": "Slate Blue & Terracotta",
+      "swatch": [
+        "#3F5673",
+        "#AE583A",
+        "#FAF8F2"
+      ],
+      "status": "coming"
+    }
+  ]
 }

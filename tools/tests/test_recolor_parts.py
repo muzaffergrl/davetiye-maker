@@ -223,3 +223,33 @@ def test_variants_css_header_comment_closes_once(theme):
     head, _, rest = css.partition("*/")
     assert head.startswith("/*") and "/*" not in head[2:]
     assert rest.lstrip().startswith(":root {"), rest[:80]
+
+
+def test_root_tokens_reads_every_root_block():
+    """G177: 24 keeps its stage geometry in one :root and its colours in a second one; both are read, first definition wins."""
+    css = ":root{--stage-ar:880/1344;--rule:1px dashed #6e5119b3}\n.a{color:red}\n:root{--velvet:#0e3d40;--gold:#c9a45c}\n:root{--gold:#000000}"
+    toks = rp.root_tokens(css)
+    assert set(toks) == {"--velvet", "--gold"}
+    assert rp.rgb_hex(toks["--gold"][1]) == "#C9A45C"
+
+
+G177 = {"22": "nocturne-lake-estate", "23": "velvet-jewel-box", "24": "grand-theatre-premiere", "25": "orient-express-voyage",
+        "26": "kintsugi-washi", "27": "riad-lantern-nights", "28": "maison-patisserie", "29": "celestial-observatory",
+        "30": "azulejo-mosaic", "31": "sky-lantern-festival", "32": "music-box-ballerina"}
+
+
+@pytest.mark.parametrize("no,theme", sorted(G177.items()))
+def test_g177_designs_are_complete(no, theme):
+    """G177: 22–32 got their palettes CSS-only (every part is interim until GPT); the five stay coming."""
+    test_pilot_designs_are_complete(no, theme)
+    test_variants_css_header_comment_closes_once(theme)
+
+
+def test_channels_go_to_the_colour_root_not_the_stage_block():
+    """G177: 24's first :root is the stage geometry block build_images.py rewrites; the channel tokens go to the colour :root."""
+    css = (":root{--stage-ar:880/1344;--rule:1px dashed #6e5119b3}\n:root{--velvet:#0e3d40}\n"
+           ".nav{background:#061416f2}")
+    new, toks = rp.tokenize_css(css)
+    stage, colours = list(rp.ROOT_BLOCK_RE.finditer(new))[:2]
+    assert "--c-" not in stage.group(0) and "--c-061416:6 20 22;" in colours.group(0)
+    assert "rgb(var(--c-061416)/.949)" in new

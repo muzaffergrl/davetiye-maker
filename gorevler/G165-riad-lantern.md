@@ -2,7 +2,7 @@
 id: G165
 baslik: Yeni tasarım 27 Riad Lantern Nights — platform teması (GPT parçalarından önce), koleksiyon, prompt'lar, basılı davetiye, ilan taslağı
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G165
 oncelik: 2
 bagimli: [G142]
@@ -86,3 +86,4 @@ START HERE.
   eklemeli çözüldü (config/designs/ses/baskı/katalog listeleri, coming testleri, g138 THEMES.length = 25, theme-check aynı düzeltme,
   `ek_ayirt` onların sürümü). Sonrası: tsc ✓, `I18N_STRICT=1 npm test` 1449/1451 (0 hata, 2 atlanan; g149 baskı free-area 25 tasarım ✓),
   build ✓ (trace-check 26 tema), theme-check `--stress` 112/0/1, `katalog.py kontrol` ✓ (3 ek tasarım)
+- 2026-10-17 entegratör onayladı

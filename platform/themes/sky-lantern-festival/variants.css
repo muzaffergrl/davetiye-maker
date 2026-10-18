@@ -1,0 +1,98 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 31
+   (kaynak: collections/31_Sky_Lantern_Festival/variants/<V0x_slug>/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-0e0a19: 14 10 25;
+  --c-120d22: 18 13 34;
+  --c-1b1430: 27 20 48;
+  --c-2a1830: 42 24 48;
+  --c-2a1f40: 42 31 64;
+  --c-2b1f45: 43 31 69;
+  --c-2f2348: 47 35 72;
+}
+
+/* V04_deep_teal · Deep Teal Dusk & Amber */
+html[data-variant="deep-teal"] {
+  --c-0e0a19: 14 24 30;
+  --c-120d22: 13 32 37;
+  --c-1b1430: 16 42 48;
+  --c-2a1830: 35 41 56;
+  --c-2a1f40: 27 56 64;
+  --c-2b1f45: 23 58 67;
+  --c-2f2348: 29 62 71;
+  --deep: #102A30;
+  --ink: #2D424F;
+  --ink-soft: #5D5868;
+  --muted: #DDDFEB;
+  --night: #173A43;
+  --violet: #2C5465;
+}
+
+/* V05_evergreen_night · Evergreen Night & Amber */
+html[data-variant="evergreen-night"] {
+  --c-0e0a19: 12 19 17;
+  --c-120d22: 14 25 19;
+  --c-1b1430: 19 35 27;
+  --c-2a1830: 30 38 42;
+  --c-2a1f40: 29 49 40;
+  --c-2b1f45: 28 51 40;
+  --c-2f2348: 32 55 44;
+  --deep: #13231B;
+  --ink: #2A3C39;
+  --ink-soft: #5B5862;
+  --muted: #D9DBE1;
+  --night: #1C3328;
+  --violet: #2F4E44;
+}
+
+/* V02_midnight_blue · Midnight Blue & Amber */
+html[data-variant="midnight-blue"] {
+  --c-0e0a19: 11 15 29;
+  --c-120d22: 11 20 38;
+  --c-1b1430: 16 29 53;
+  --c-2a1830: 37 30 55;
+  --c-2a1f40: 30 41 70;
+  --c-2b1f45: 28 42 75;
+  --c-2f2348: 33 46 78;
+  --deep: #101D35;
+  --ink: #313352;
+  --ink-soft: #63566B;
+  --night: #1C2A4B;
+  --violet: #37416F;
+}
+
+/* V06_moonlit_slate · Moonlit Slate & Gold */
+html[data-variant="moonlit-slate"] {
+  --c-0e0a19: 19 20 25;
+  --c-120d22: 23 26 30;
+  --c-1b1430: 31 35 41;
+  --c-2a1830: 41 36 47;
+  --c-2a1f40: 44 48 55;
+  --c-2b1f45: 45 49 57;
+  --c-2f2348: 49 53 61;
+  --deep: #1F2329;
+  --ink: #3B3A44;
+  --ink-soft: #635764;
+  --muted: #E0DBE6;
+  --night: #2D3139;
+  --violet: #474A56;
+}
+
+/* V03_twilight_rose · Twilight Rose & Gold */
+html[data-variant="twilight-rose"] {
+  --c-0e0a19: 29 15 25;
+  --c-120d22: 40 18 31;
+  --c-1b1430: 53 24 41;
+  --c-2a1830: 57 29 40;
+  --c-2a1f40: 70 35 52;
+  --c-2b1f45: 74 34 55;
+  --c-2f2348: 78 38 58;
+  --deep: #351829;
+  --ink: #532F3D;
+  --ink-soft: #6D545E;
+  --muted: #EAD8E3;
+  --night: #4A2237;
+  --violet: #6D374E;
+}

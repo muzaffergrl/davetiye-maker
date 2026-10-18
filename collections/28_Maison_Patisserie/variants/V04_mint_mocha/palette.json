@@ -1,0 +1,25 @@
+{
+  "id": "V04_mint_mocha",
+  "slug": "mint-mocha",
+  "name": "Mint & Mocha",
+  "ink": "#3E3A32",
+  "deep": "#8AB3A5",
+  "primary": "#A3CDBE",
+  "mist_top": "#DBEEE7",
+  "mist_bottom": "#C8DAD3",
+  "gold": "#C9A48E",
+  "gold_light": "#F2E4BD",
+  "ivory": "#FBF5EC",
+  "leaf": "#E8B4B8",
+  "swatch": [
+    "#FBF5EC",
+    "#A3CDBE",
+    "#C9A48E"
+  ],
+  "status": "coming",
+  "families": {
+    "pistachio": "primary",
+    "rose": "#C9A48E",
+    "gold": null
+  }
+}

@@ -2,7 +2,7 @@
 id: GP405
 baslik: Aşama 2 · Tasarım 05 — 5 palet ilan kitleri
 rol: claude-kod
-durum: blokaj
+durum: iptal
 alan:
 oncelik: 6
 bagimli: [GP305, G028]
@@ -27,3 +27,4 @@ _(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / ed
 
 ## Günlük
 - 2026-10-13 blokaj: K22 (kullanıcı, 2026-10-13): videodan çıkıldı, ürün yalnız mobil öncelikli website. Yeni website standardı pilotla (G035) belirlenince yeniden tanımlanacak
+- 2026-10-17 iptal: docs/25 §5: tasarım başına tek ilan + palet varyasyonu; palet başına ilan görseli G178'de

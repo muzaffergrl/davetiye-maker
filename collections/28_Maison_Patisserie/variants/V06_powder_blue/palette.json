@@ -1,0 +1,25 @@
+{
+  "id": "V06_powder_blue",
+  "slug": "powder-blue",
+  "name": "Powder Blue & Rose",
+  "ink": "#3E3A32",
+  "deep": "#90A6BE",
+  "primary": "#A9BFD8",
+  "mist_top": "#DAE5F0",
+  "mist_bottom": "#C7D1DC",
+  "gold": "#B8995A",
+  "gold_light": "#F2E4BD",
+  "ivory": "#FBF5EC",
+  "leaf": "#E8B4B8",
+  "swatch": [
+    "#FBF5EC",
+    "#A9BFD8",
+    "#E8B4B8"
+  ],
+  "status": "coming",
+  "families": {
+    "pistachio": "primary",
+    "rose": null,
+    "gold": null
+  }
+}

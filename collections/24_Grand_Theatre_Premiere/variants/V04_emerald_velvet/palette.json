@@ -1,0 +1,24 @@
+{
+  "id": "V04_emerald_velvet",
+  "slug": "emerald-velvet",
+  "name": "Emerald Velvet & Gold",
+  "ink": "#1E2626",
+  "deep": "#004427",
+  "primary": "#1C5A3C",
+  "mist_top": "#D1ECDB",
+  "mist_bottom": "#B1CBBB",
+  "gold": "#C9A45C",
+  "gold_light": "#E3C78B",
+  "ivory": "#F3EBD8",
+  "leaf": "#6E5119",
+  "swatch": [
+    "#1C5A3C",
+    "#C9A45C",
+    "#F3EBD8"
+  ],
+  "status": "coming",
+  "families": {
+    "velvet": "primary",
+    "gold": null
+  }
+}
