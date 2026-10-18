@@ -2,7 +2,7 @@
 id: G173
 baslik: Mobil boyutta performans ve erişilebilirlik turu (satış sitesi, /start, demolar, panel) — gerçek sorunları düzelt, gerilemeyi önleyen hızlı denetim ekle
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G173
 oncelik: 2
 bagimli: [G141, G159]
@@ -135,3 +135,4 @@ GPT'den görsel gerekmedi; yeni dekor çizilmedi (K21).
 
 ## Günlük
 - 2026-10-18 claude-G173: ölçüldü, düzeltildi, merge + testler yeşil → inceleme
+- 2026-10-18 entegratör onayladı
