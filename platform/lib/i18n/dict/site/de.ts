@@ -297,6 +297,9 @@ const dict: Dict = {
   'Turn the key': 'Schlüssel drehen',
   'Wind the music box again': 'Spieluhr erneut aufziehen',
   'Reflections': 'Spiegelbilder',
+  // G185 Victorian Glasshouse (36)
+  "Grown with love": "Mit Liebe gewachsen",
+  "Open the seed packet": "Die Samentüte öffnen",
 };
 
 export default dict;

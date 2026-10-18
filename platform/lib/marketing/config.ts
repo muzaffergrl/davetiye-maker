@@ -264,6 +264,16 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-18',
     },
+    // New design 36 (G185, docs/24 wave 3): platform theme built before its GPT parts (interim layers); not on sale, no price yet.
+    {
+      id: 'victorian-glasshouse',
+      name: 'Victorian Glasshouse',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-18',
+    },
     {
       id: 'blush-garden-rose',
       name: 'Blush Garden Rose',

@@ -36,6 +36,7 @@ export const DEMO_CITY_PINS: Readonly<Record<string, { lat: number; lng: number 
   'tropical-destination': { lat: 20.6873, lng: -156.4428 }, // Wailea
   'tuscan-vineyard': { lat: 43.0927, lng: 11.7808 }, // Montepulciano
   'velvet-jewel-box': { lat: 40.7128, lng: -74.006 }, // New York
+  'victorian-glasshouse': { lat: 39.9612, lng: -82.9988 }, // Columbus, OH (the glasshouse is fictional)
   'vintage-airmail-love-letter': { lat: 42.2529, lng: -73.791 }, // Hudson, NY
   'wildflower-meadow-vellum': { lat: 40.0379, lng: -76.3055 }, // Lancaster, PA
   'winter-evergreen': { lat: 39.1911, lng: -106.8175 }, // Aspen

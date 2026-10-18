@@ -473,6 +473,37 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
       back: { bg: cover('paper'), images: [{ src: 'petal', style: 'bottom:5%;left:50%;width:10%;transform:translateX(-50%) rotate(12deg)' }] },
     },
   },
+  // 36 (G185, before its GPT parts): both sides on the theme's herbarium paper (img/paper-1024, toned by the theme
+  // build from 16's plain GPT paper) — front: a band of the deep fern ground at the top with the copper label plate in
+  // it (img/copper-320, a crop of 17's plain metal) and a thin kraft band at the bottom (img/kraft-640); back: a narrow
+  // fern band at the top. Crops and toning of GPT pixels; no shape drawn. When PAKET 6 arrives (GPT_PROMPTS.md:
+  // print/invitation_front_5x7.png + print/invitation_back_5x7.png, 1575×2175, one ground per side for 5×7 and A5):
+  // sources → { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' }, composed → { front:
+  // { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }, then build-print-assets +
+  // tests/g149-print-layout.test.ts (re-measure the boxes).
+  'victorian-glasshouse': {
+    collection: '36_Victorian_Glasshouse',
+    sources: {
+      paper: 'platform/themes/victorian-glasshouse/img/paper-1024.webp',
+      fern: 'platform/themes/victorian-glasshouse/img/fern-640.webp',
+      copper: 'platform/themes/victorian-glasshouse/img/copper-320.webp',
+      kraft: 'platform/themes/victorian-glasshouse/img/kraft-640.webp',
+    },
+    fonts: gf('family=Monsieur+La+Doulaise&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400'),
+    script: "'Monsieur La Doulaise', cursive", serif: "'Old Standard TT', Georgia, serif",
+    ink: '#1E2B24', accent: '#8A4A22', front: [20, 12, 14, 12], back: [13, 12, 8, 12],
+    composed: {
+      front: {
+        bg: 'url(paper.webp) 0 0 / 2.4in repeat',
+        images: [
+          { src: 'fern', style: 'top:0;left:0;width:100%;height:12%;object-fit:cover' },
+          { src: 'copper', style: 'top:3%;left:50%;width:9%;height:7%;object-fit:cover;transform:translateX(-50%)' },
+          { src: 'kraft', style: 'bottom:0;left:0;width:100%;height:6%;object-fit:cover' },
+        ],
+      },
+      back: { bg: 'url(paper.webp) 0 0 / 2.4in repeat', images: [{ src: 'fern', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover' }] },
+    },
+  },
 };
 
 export function printLayout(themeId: string): PrintLayout | null {
