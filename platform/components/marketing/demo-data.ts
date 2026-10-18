@@ -1,27 +1,28 @@
 // Serializable props for the client demo components (Demo.tsx), built on the server from config + assets.
 // G144: in the page language (`m`); the design links keep its prefix.
 import { MARKETING, type MarketingConfig } from '../../lib/marketing/config.ts';
-import { demoPath, liveDesigns, openingObject } from '../../lib/marketing/designs.ts';
+import { demoPath, designOgImage, liveDesigns, openingObject, type Design } from '../../lib/marketing/designs.ts';
 import { enMarket, thingIn, type Market, type T } from '../../lib/marketing/i18n.ts';
 import { designPalettes } from '../../lib/marketing/palettes.ts';
 import { realEtsyUrl } from '../../lib/marketing/placeholders.ts';
 import type { DemoCopy, DemoDesign } from './Demo.tsx';
 import { designScreen, largest, srcSet } from './media.ts';
 
-export function demoDesigns(cfg: MarketingConfig = MARKETING, m: Market = enMarket): DemoDesign[] {
+export function demoDesigns(cfg: MarketingConfig = MARKETING, m: Market = enMarket, sourceDesigns: readonly Design[] = liveDesigns(cfg)): DemoDesign[] {
   const { t } = m;
-  return liveDesigns(cfg).map((d) => {
+  return sourceDesigns.map((d) => {
     const poster = designScreen(d.id, 'envelope');
-    if (!poster) throw new Error(`no envelope screen for ${d.id} (run node scripts/marketing-assets.ts)`);
+    const posterUrl = poster ? largest(poster) : designOgImage(d.id);
+    const posterSrcSet = poster ? srcSet(poster) : `${posterUrl} 1200w`;
     return {
       id: d.id,
       name: d.name,
       style: t(d.copy.style),
       poster: {
-        src: largest(poster),
-        srcSet: srcSet(poster),
-        width: poster.width,
-        height: poster.height,
+        src: posterUrl,
+        srcSet: posterSrcSet,
+        width: poster?.width ?? 1200,
+        height: poster?.height ?? 630,
         alt: t("{name}: the sealed {thing} your guests see first, with the demo couple's names, {couple}", {
           name: d.name,
           thing: thingIn(t, openingObject(d.copy)),
