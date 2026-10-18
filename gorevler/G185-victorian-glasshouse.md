@@ -2,7 +2,7 @@
 id: G185
 baslik: 36 Victorian Glasshouse — yeni tasarım (3. dalga), platform teması (GPT parçalarından önce), coming kaydı
 rol: claude-kod
-durum: alindi
+durum: hazir
 alan: claude-G185
 oncelik: 2
 bagimli: [G168, G175]

@@ -2,7 +2,7 @@
 id: G183
 baslik: 34 Red Lacquer & Double Happiness — yeni tasarım (3. dalga), platform teması (GPT parçalarından önce), coming kaydı
 rol: claude-kod
-durum: alindi
+durum: hazir
 alan: claude-G183
 oncelik: 2
 bagimli: [G168, G175]

@@ -2,7 +2,7 @@
 id: G186
 baslik: 37 Art Nouveau Lily — yeni tasarım (3. dalga), platform teması (GPT parçalarından önce), coming kaydı
 rol: claude-kod
-durum: alindi
+durum: hazir
 alan: claude-G186
 oncelik: 2
 bagimli: [G168, G175]
