@@ -937,7 +937,7 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
  * These themes are present in the platform, but their final artwork and sale approval are still pending.
  * Keep their catalogue copy explicit about that status; do not invent prices, palettes, or buyer-ready claims.
  */
-const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening' | 'home'>> = {
+const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> & { home: string }> = {
   'nocturne-lake-estate': {
     style: msg('A Lake Como invitation in charcoal, champagne gold and candlelight'),
     opening: msg('Your guests tap the envelope. The gold seal lifts, the dark envelope opens and an invitation card rises from its pocket. This preview uses interim artwork while the final design assets are being prepared.'),
