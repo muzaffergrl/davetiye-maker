@@ -7,7 +7,7 @@
 // Layout of fourteen cards and the home chips ("+N more" on wide screens): tests/marketing-browser.ts (G094 section).
 import { afterEach, before, beforeEach, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { POST as claimRoute } from '../app/api/start/route.ts';
 import { setClaimRateLimiter } from '../lib/claim/limits.ts';
@@ -24,7 +24,7 @@ import { offeredThemes } from '../lib/themes/offered.ts';
 import { checkManifest, type AssetManifest } from '../scripts/marketing-assets.ts';
 import assets from '../lib/marketing/assets.json' with { type: 'json' };
 import { PLATFORM_ROOT, REPO_ROOT, tmpDir } from './helpers.ts';
-import { readyConfig, validateJsonLd } from './marketing-helpers.ts';
+import { designFolders, readyConfig, validateJsonLd } from './marketing-helpers.ts';
 
 const EIGHT = [
   'blush-garden-rose',
@@ -188,7 +188,7 @@ test('09–14 are live after the first eight, named as their themes, with design
     assert.equal(d.etsyListingUrl, '[ETSY LISTING URL]');
     assert.equal(d.compareAtPrice, null);
   }
-  assert.deepEqual(MARKETING.designs.filter((x) => x.status !== 'live').map((x) => x.id), ['nocturne-lake-estate', 'velvet-jewel-box', 'grand-theatre-premiere', 'orient-express-voyage', 'kintsugi-washi', 'riad-lantern-nights', 'maison-patisserie', 'celestial-observatory', 'azulejo-mosaic', 'sky-lantern-festival', 'music-box-ballerina']);
+  assert.deepEqual(MARKETING.designs.filter((x) => x.status !== 'live').map((x) => x.id), ['nocturne-lake-estate', 'velvet-jewel-box', 'grand-theatre-premiere', 'orient-express-voyage', 'kintsugi-washi', 'riad-lantern-nights', 'maison-patisserie', 'celestial-observatory', 'azulejo-mosaic', 'sky-lantern-festival', 'music-box-ballerina', 'marigold-mehndi', 'red-lacquer-double-happiness', 'highland-tartan-thistle', 'victorian-glasshouse', 'art-nouveau-lily', 'papel-picado-fiesta']);
 });
 
 test('design page titles ≤ 60 characters (also with a 12-character brand); the earlier titles did not change', () => {
@@ -269,7 +269,9 @@ test('real screens and opening clips of 09–14 are in assets.json and on disk; 
     assert.ok(m.opening!.bytes > 50_000 && m.opening!.bytes <= 1_500_000, `${n.id} ${m.opening!.bytes}`);
   }
   // one folder per live design, nothing else
-  assert.deepEqual(readdirSync(path.join(PLATFORM_ROOT, 'public/marketing/designs')).sort(), liveDesigns().map((d) => d.id).sort());
+  const folders = designFolders(liveDesigns().map((d) => d.id));
+  assert.deepEqual(folders.onDisk, folders.expected, 'one folder per live design, plus the envelope cover of each preview design');
+  assert.deepEqual(folders.strayPreviewFiles, [], 'a preview design folder holds only envelope.webp');
 });
 
 test('JSON-LD: Product (no Offer while the price is a placeholder) + VideoObject for 09–14; ItemList of /designs has every live design', () => {

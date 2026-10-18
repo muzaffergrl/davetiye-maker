@@ -227,46 +227,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=mediterranean-lemon"
+        "start_link": "/start?theme=mediterranean-lemon",
+        "image": "collections/05_Lemon_Mediterranean/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": true
       },
       {
         "name": "Terracotta & Lemon",
         "variant": "terracotta-lemon",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=mediterranean-lemon&variant=terracotta-lemon"
+        "start_link": "/start?theme=mediterranean-lemon&variant=terracotta-lemon",
+        "image": "collections/05_Lemon_Mediterranean/package/listing/images_editorial/palette_terracotta-lemon.jpg",
+        "image_exists": true
       },
       {
         "name": "Sage & Lemon",
         "variant": "sage-lemon",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=mediterranean-lemon&variant=sage-lemon"
+        "start_link": "/start?theme=mediterranean-lemon&variant=sage-lemon",
+        "image": "collections/05_Lemon_Mediterranean/package/listing/images_editorial/palette_sage-lemon.jpg",
+        "image_exists": true
       },
       {
         "name": "Lavender & Lemon",
         "variant": "lavender-lemon",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=mediterranean-lemon&variant=lavender-lemon"
+        "start_link": "/start?theme=mediterranean-lemon&variant=lavender-lemon",
+        "image": "collections/05_Lemon_Mediterranean/package/listing/images_editorial/palette_lavender-lemon.jpg",
+        "image_exists": true
       },
       {
         "name": "Capri Turquoise & Lemon",
         "variant": "capri-turquoise",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=mediterranean-lemon&variant=capri-turquoise"
+        "start_link": "/start?theme=mediterranean-lemon&variant=capri-turquoise",
+        "image": "collections/05_Lemon_Mediterranean/package/listing/images_editorial/palette_capri-turquoise.jpg",
+        "image_exists": true
       },
       {
         "name": "Dusty Blue & Lemon",
         "variant": "dusty-blue-lemon",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=mediterranean-lemon&variant=dusty-blue-lemon"
+        "start_link": "/start?theme=mediterranean-lemon&variant=dusty-blue-lemon",
+        "image": "collections/05_Lemon_Mediterranean/package/listing/images_editorial/palette_dusty-blue-lemon.jpg",
+        "image_exists": true
       }
     ],
     "offered": [
       "Original (Mediterranean Lemon)"
+    ],
+    "images": [
+      {
+        "file": "collections/05_Lemon_Mediterranean/package/listing/images_editorial/10_palettes.jpg",
+        "exists": true,
+        "option": null,
+        "upload": false,
+        "alt": "Mediterranean Lemon in 6 color palettes: the opening page of each, side by side",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/05_Lemon_Mediterranean/package/listing/images_editorial/palette_original.jpg",
+        "exists": true,
+        "option": "Original (Mediterranean Lemon)",
+        "upload": false,
+        "alt": "Mediterranean Lemon in its original palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/05_Lemon_Mediterranean/package/listing/images_editorial/palette_terracotta-lemon.jpg",
+        "exists": true,
+        "option": "Terracotta & Lemon",
+        "upload": false,
+        "alt": "Mediterranean Lemon in the Terracotta & Lemon palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/05_Lemon_Mediterranean/package/listing/images_editorial/palette_sage-lemon.jpg",
+        "exists": true,
+        "option": "Sage & Lemon",
+        "upload": false,
+        "alt": "Mediterranean Lemon in the Sage & Lemon palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/05_Lemon_Mediterranean/package/listing/images_editorial/palette_lavender-lemon.jpg",
+        "exists": true,
+        "option": "Lavender & Lemon",
+        "upload": false,
+        "alt": "Mediterranean Lemon in the Lavender & Lemon palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/05_Lemon_Mediterranean/package/listing/images_editorial/palette_capri-turquoise.jpg",
+        "exists": true,
+        "option": "Capri Turquoise & Lemon",
+        "upload": false,
+        "alt": "Mediterranean Lemon in the Capri Turquoise & Lemon palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/05_Lemon_Mediterranean/package/listing/images_editorial/palette_dusty-blue-lemon.jpg",
+        "exists": true,
+        "option": "Dusty Blue & Lemon",
+        "upload": false,
+        "alt": "Mediterranean Lemon in the Dusty Blue & Lemon palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

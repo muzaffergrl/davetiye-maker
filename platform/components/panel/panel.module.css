@@ -4770,3 +4770,23 @@
   font-weight: 700;
   letter-spacing: 0.06em;
 }
+
+/* G181: the skeleton a deep link paints before hydration (Panel.tsx BootShell). Its script marks the root with data-boot;
+   then only the skeleton shows (the server's default view stays hidden) until the panel shows the real view. */
+.bootShell {
+  display: none;
+}
+.app[data-boot] > .bootShell {
+  display: contents;
+}
+.app[data-boot] > :not(.bootShell) {
+  display: none !important;
+}
+.bootShell [hidden] {
+  display: none !important;
+}
+
+/* A view whose chunk is still on its way (lazy.tsx), and the skeleton's body: holds the space, no spinner. */
+.viewLoading {
+  min-height: 50vh;
+}

@@ -360,6 +360,161 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     llmsLine: 'a rose-quartz music box: turn the brass key, the lid opens, a ballerina turns and the photos appear in its oval mirror.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
+  // G182 (coming): written against the theme as built (README); the paisley sleeve, tassel, marigolds, henna, arches and
+  // diyas arrive with the GPT parts.
+  'marigold-mehndi': {
+    id: 'marigold-mehndi',
+    collection: '33_Marigold_Mehndi',
+    demoCouple: 'Anaya & Kabir',
+    style: msg('A fuchsia silk envelope in a gold paisley sleeve with a silk tassel, marigold garlands, henna and carved arch photo frames'),
+    metaDescription: msg('A fuchsia silk envelope slips out of its gold paisley sleeve and opens into your wedding website, with marigolds, henna and carved arch frames. Personalize it in your online editor.'),
+    intro: msg('Saffron, fuchsia and gold, like a festive silk invitation. Your invitation waits in a silk envelope held by a laser-cut gold sleeve, and every photo sits in a carved arch window traced with henna.'),
+    opening: msg('Your guests tap the envelope. Its silk tassel swings, the gold paisley sleeve slides away, the flap opens onto a velvet lining and marigold petals drift down while small lamps light one by one. The card with your portrait rises out of the envelope and comes forward to become your home page.'),
+    pages: {
+      home: msg('Your portrait in a carved arch and your names on a saffron card under a marigold garland, then the invitation, a countdown and calendar links, with a row of lamps that light one by one.'),
+      story: msg('Three photos in carved arch windows; as guests scroll to each one, it appears from the bottom up and henna flows in around its arch, line by line.'),
+      details: msg('The order of the day on saffron paper, a venue photo revealed like a henna line drawn across, an optional map, dress code, travel and questions and answers.'),
+      rsvp: msg('A saffron reply card on fuchsia velvet with your names and reply-by date; marigold petals fall when a reply is sent.'),
+    },
+    palette: [
+      { name: msg('Fuchsia'), hex: '#B3165E' },
+      { name: msg('Saffron'), hex: '#F2A13B' },
+      { name: msg('Gold'), hex: '#C9A24A' },
+      { name: msg('Velvet plum'), hex: '#3E0726' },
+      { name: msg('Saffron ivory'), hex: '#FAEBD0' },
+    ],
+    fonts: ['Rozha One', 'Yrsa'],
+    llmsLine: 'a fuchsia silk envelope in a gold laser-cut paisley sleeve: the tassel swings, the sleeve slides off and the card rises from a velvet lining; carved arch photo frames traced with henna; saffron, fuchsia and gold.',
+    relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
+  },
+  // G183 (coming): written against the theme as built (README); the cord, the paper-cut windows, the moon gates and the
+  // gold clouds arrive with the GPT parts.
+  'red-lacquer-double-happiness': {
+    id: 'red-lacquer-double-happiness',
+    collection: '34_Red_Lacquer_Double_Happiness',
+    demoCouple: 'Mei & Julian',
+    style: msg('A red paper envelope with a gold-leaf double happiness, a cord-and-button closure, paper-cut peonies and round moon gate photo frames'),
+    metaDescription: msg('A red paper envelope tied with a cord opens through paper-cut peony windows into your wedding website. Personalize it in your online editor.'),
+    intro: msg('Lacquer red, warm cream and gold leaf, with paper-cut peonies and the double happiness character in gold. Your invitation waits in a red envelope tied with a cord, and every photo sits in a round moon gate.'),
+    opening: msg('Your guests tap the envelope. The red cord unwinds as its button turns and slips away, the flap lifts, and the card comes up wrapped in two paper-cut peony windows that open one after the other while gold clouds drift past. The card comes forward to become your home page.'),
+    pages: {
+      home: msg('Your round portrait and names on a cream card on the lacquer red, then the invitation under a paper-cut border, a countdown, calendar links and a knot with its tassel.'),
+      story: msg('Three round photos in moon gates; the two red paper doors of each gate slide apart as guests scroll to it, while paper-cut layers drift at two speeds behind the page.'),
+      details: msg('The order of the day on cream paper, a venue photo uncovered by two sliding lattice doors, an optional map, dress code, travel and questions and answers.'),
+      rsvp: msg('A cream reply card on the lacquer red with your names and reply-by date, then the reply form; a few gold clouds rise when a reply is sent.'),
+    },
+    palette: [
+      { name: msg('Lacquer red'), hex: '#4A0A0E' },
+      { name: msg('Cinnabar'), hex: '#A81E24' },
+      { name: msg('Gold'), hex: '#C9A14A' },
+      { name: msg('Cream'), hex: '#F5ECD8' },
+    ],
+    fonts: ['Luxurious Script', 'Prata'],
+    llmsLine: 'a red paper envelope with a gold-leaf double happiness and a cord-and-button closure, opening through paper-cut peony windows; round moon gate photo frames; lacquer red, cream and gold.',
+    relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
+  },
+  // G184 (coming): written against the theme as built; the wool, leather, brass and mist are interim pieces until the GPT parts arrive.
+  'highland-tartan-thistle': {
+    id: 'highland-tartan-thistle',
+    collection: '35_Highland_Tartan_Thistle',
+    demoCouple: 'Isla & Callum',
+    style: msg('A wool envelope strapped with leather and a brass buckle, heather and thistle, Highland mist and antique locket photo frames'),
+    metaDescription: msg('A wool envelope with a leather strap and brass buckle opens over misty hills into your wedding website. Personalize it in your online editor.'),
+    intro: msg('Heather, moss green and cream, warm leather and antique brass, like a walk through the Highlands. Your invitation waits in a wool envelope held shut by a buckled strap, and every photo sits in a brass locket.'),
+    opening: msg('Your guests tap the envelope. The brass buckle opens, the leather strap slides away and the wool flap swings up, while the mist over the hills behind it draws off. The card with your portrait rises out of the envelope and comes forward to become your home page.'),
+    pages: {
+      home: msg('Your portrait in a brass locket and your names on a cream card over the misty hills, then the invitation, a countdown and calendar links.'),
+      story: msg('Three photos in antique brass lockets whose lids swing open on their hinges as guests scroll to them, with mist drifting behind the page.'),
+      details: msg('The order of the day on cream paper, a venue photo that comes out of the mist, an optional map, dress code, travel and questions and answers.'),
+      rsvp: msg('A cream reply card over the moss-green page with your names and reply-by date, then the reply form.'),
+    },
+    palette: [
+      { name: msg('Heather'), hex: '#7B5A84' },
+      { name: msg('Moss'), hex: '#5E6B3E' },
+      { name: msg('Cream'), hex: '#F1EADB' },
+      { name: msg('Leather'), hex: '#6B4428' },
+      { name: msg('Brass'), hex: '#A88437' },
+    ],
+    fonts: ['Rouge Script', 'Sorts Mill Goudy'],
+    llmsLine: 'a tartan wool envelope held shut by a leather strap and brass buckle; the buckle opens, the strap slides away and the flap swings up as Highland mist draws off; photos in brass lockets; heather, moss and cream.',
+    relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
+  },
+  // G185 (coming): written against the theme as built (README); the ferns, iron arches, glass cases and leaflets arrive with the GPT parts.
+  'victorian-glasshouse': {
+    id: 'victorian-glasshouse',
+    collection: '36_Victorian_Glasshouse',
+    demoCouple: 'Flora & Edmund',
+    style: msg('A Victorian glasshouse at dusk: a kraft seed packet tied with twine and a copper plant label, misted glass and photos as specimens under glass'),
+    metaDescription: msg('A kraft seed packet opens into your wedding website in a Victorian glasshouse, and the mist on the glass is wiped away. Personalize it in your online editor.'),
+    intro: msg('Deep fern green, misted glass, herbarium paper and copper, like an old botanical glasshouse. Your invitation waits in a kraft seed packet, and every photo is a specimen under glass with its own copper label.'),
+    opening: msg('Your guests tap the envelope. The copper plant label swings and drops from the twine, the twine comes apart at the knot and the flap of the kraft seed packet folds back. Warm air mists the glass as the card with your portrait rises; the mist is wiped away across the screen and the card comes forward to become your home page.'),
+    pages: {
+      home: msg('Your portrait under glass on a herbarium card, then the invitation, a countdown and calendar links, and a copper label with your monogram that swings as guests scroll.'),
+      story: msg('Three photos as specimens under glass: as guests scroll to each one, the mist on its glass is wiped away, its copper label swings and the caption appears on a herbarium label.'),
+      details: msg('The order of the day on herbarium paper, a venue photo behind misted glass that clears, an optional map, dress code, travel and questions and answers.'),
+      rsvp: msg('A herbarium-paper reply card with your names and reply-by date, then the reply form; the copper label swings again when a reply is sent.'),
+    },
+    palette: [
+      { name: msg('Deep fern'), hex: '#1C3328' },
+      { name: msg('Misted glass'), hex: '#E2EAE3' },
+      { name: msg('Herbarium paper'), hex: '#F3EDDF' },
+      { name: msg('Copper'), hex: '#B26A3C' },
+      { name: msg('Kraft'), hex: '#AC8054' },
+    ],
+    fonts: ['Monsieur La Doulaise', 'Old Standard TT'],
+    llmsLine: 'a kraft seed-packet envelope tied with twine and a copper plant label opens in a Victorian glasshouse; the mist on the glass is wiped away; photos as specimens under glass.',
+    relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
+  },
+  // G186 (coming): written against the theme as built (README); the petal art, stained glass, halo and lilies arrive with the GPT parts.
+  'art-nouveau-lily': {
+    id: 'art-nouveau-lily',
+    collection: '37_Art_Nouveau_Lily',
+    demoCouple: 'Odette & Felix',
+    style: msg('A cream envelope with petal flaps and a stained-glass lily, sage and lilac, gold whiplash lines and arched stained-glass photo windows'),
+    metaDescription: msg('A cream Art Nouveau envelope opens like a lily into your wedding website, with stained-glass photo windows. Personalize it in your online editor.'),
+    intro: msg('Sage, cream, lilac and gold, like an Art Nouveau poster. Your invitation waits in a cream envelope closed by three petal flaps under a stained-glass lily, and every photo sits in an arched stained-glass window.'),
+    opening: msg('Your guests tap the envelope. A band of light passes through the stained-glass lily, the medallion lifts away, the two side petals open outward and the centre petal opens upward, like a lily in bloom. The card with your portrait rises from the envelope and comes forward to become your home page.'),
+    pages: {
+      home: msg('Your arched portrait and names on a cream card, like a poster, then the invitation under a gold line that draws itself, a countdown and calendar links.'),
+      story: msg('Three photos in arched windows that wait gray like glass at dusk; as guests scroll to each, a band of light passes through it and its colors come alive.'),
+      details: msg('The order of the day on cream paper, the venue photo lit by a passing band of light, an optional map, dress code, travel and questions and answers.'),
+      rsvp: msg('A cream reply card with your names and reply-by date, then the reply form; a few lily petals drift down when a reply is sent.'),
+    },
+    palette: [
+      { name: msg('Sage'), hex: '#55634E' },
+      { name: msg('Cream'), hex: '#F4ECDB' },
+      { name: msg('Lilac'), hex: '#C8B6D6' },
+      { name: msg('Gold'), hex: '#B8964E' },
+    ],
+    fonts: ['Federant', 'Ephesis', 'Linden Hill'],
+    llmsLine: 'a cream Art Nouveau envelope closed by three petal flaps under a stained-glass lily opens like a flower; photos in arched stained-glass windows that light up; sage, lilac and gold.',
+    relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
+  },
+  // G187 (coming): written against the theme as built; the flags, frames and envelope are interim pieces until the GPT parts arrive.
+  'papel-picado-fiesta': {
+    id: 'papel-picado-fiesta',
+    collection: '38_Papel_Picado_Fiesta',
+    demoCouple: 'Valeria & Diego',
+    style: msg('A kraft envelope tied with a band of cut-paper flags, terracotta, bougainvillea colours and photos in swaying paper frames'),
+    metaDescription: msg('A papel picado wedding website: a band of cut-paper flags flies up into a waving garland and the kraft envelope opens to your invitation. Personalize it in your online editor.'),
+    intro: msg('Fuchsia, marigold, turquoise and terracotta on a sunny limewash wall, like a courtyard dressed for a fiesta. Your invitation waits in a kraft envelope, and every photo hangs in a cut-paper frame that sways in the breeze.'),
+    opening: msg('Your guests tap the envelope. The band of cut-paper flags works loose and its flags fly up one by one into a garland that waves above your names, the kraft flap swings open, and the card with your portrait rises out of the envelope and comes forward to become your home page.'),
+    pages: {
+      home: msg('Your portrait in a cut-paper frame on a cream card under the garland, then the invitation, a countdown and calendar links, and the day on a terracotta band.'),
+      story: msg('Three photos in cut-paper frames that drop in and swing to rest as guests scroll, and sway a little more when they scroll faster.'),
+      details: msg('The order of the day on kraft paper, each moment with a small flag that swings in, a venue photo in a wide frame, an optional map, dress code, travel, the menu and questions and answers.'),
+      rsvp: msg('A cream reply card under a small garland of flags; when a reply is sent, a few flags flutter down.'),
+    },
+    palette: [
+      { name: msg('Fuchsia'), hex: '#D63A7A' },
+      { name: msg('Marigold'), hex: '#F2A31B' },
+      { name: msg('Turquoise'), hex: '#1C8F9C' },
+      { name: msg('Terracotta'), hex: '#B0502F' },
+    ],
+    fonts: ['Oleo Script', 'Alegreya'],
+    llmsLine: 'a kraft envelope tied with a band of papel picado flags that fly up into a waving garland; photos hang in cut-paper frames that sway in the breeze; fuchsia, marigold, turquoise and terracotta.',
+    relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
+  },
   'blush-garden-rose': {
     id: 'blush-garden-rose',
     collection: '03_Blush_Garden_Rose',
@@ -957,6 +1112,93 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
   },
 };
 
+
+/**
+ * These themes are present in the platform, but their final artwork and sale approval are still pending.
+ * Keep their catalogue copy explicit about that status; do not invent prices, palettes, or buyer-ready claims.
+ */
+const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> & { home: string }> = {
+  'nocturne-lake-estate': {
+    style: msg("Charcoal envelope, champagne-gold botanical seal and a candlelit Lake Como wedding."),
+    opening: msg("Your guests tap the envelope. The champagne-gold seal lifts away, the charcoal V flap opens, and the invitation card rises from its pocket into the wedding website."),
+    home: msg("Charcoal paper, champagne gold and candlelight by the water. A quiet, refined invitation opens onto the lake, the story and the evening ahead."),
+  },
+  'velvet-jewel-box': {
+    style: msg("Aubergine envelope, pearl-set satin detail and a rose-gold keepsake seal."),
+    opening: msg("Your guests tap the envelope. The rose-gold seal releases its satin detail, the aubergine V flap opens, and the invitation card glides out to reveal the wedding website."),
+    home: msg("Aubergine velvet, champagne satin and a touch of rose gold. The invitation opens into a polished celebration with a keepsake feel."),
+  },
+  'grand-theatre-premiere': {
+    style: msg("Peacock-blue envelope, antique-gold seal and an ivory playbill-inspired schedule."),
+    opening: msg("Your guests tap the envelope. An antique-gold seal catches the light, the peacock-blue V flap opens, and an ivory invitation card rises from its pocket."),
+    home: msg("Peacock blue, antique gold and warm ivory set the scene. The invitation opens like opening night, then leads into your story and the evening programme."),
+  },
+  'orient-express-voyage': {
+    style: msg("Bottle-green envelope, brass route seal and details inspired by a first-class rail journey."),
+    opening: msg("Your guests tap the envelope. The brass route seal lifts, the bottle-green V flap opens, and a first-class invitation card slides from its pocket."),
+    home: msg("Bottle green, brass and warm ivory meet the romance of a vintage rail journey. The envelope opens onto your invitation, route details and celebration."),
+  },
+  'kintsugi-washi': {
+    style: msg("Ivory washi envelope, fine kintsugi-gold lines and quiet botanical details."),
+    opening: msg("Your guests tap the envelope. Fine kintsugi-gold lines catch the light as the ivory washi V flap opens and the invitation card rises from its pocket."),
+    home: msg("Washi paper, sumi ink and delicate gold seams bring a quiet, handcrafted feeling to your invitation, story and garden celebration."),
+  },
+  'riad-lantern-nights': {
+    style: msg("Deep teal envelope, brass seal and saffron lantern accents inspired by a Marrakech riad."),
+    opening: msg("Your guests tap the envelope. A brass seal lifts beneath a warm lantern glow, the teal V flap opens, and an ivory invitation card rises from the pocket."),
+    home: msg("Teal, warm cedar and saffron light bring the feeling of a lantern-lit riad. Open the invitation to find the courtyard, your story and the celebration details."),
+  },
+  'maison-patisserie': {
+    style: msg("Pistachio envelope, rose-satin detail and cream-and-gold pâtisserie-inspired flourishes."),
+    opening: msg("Your guests tap the envelope. A rose-satin detail slips aside, the pistachio V flap opens, and a cream invitation card glides from the pocket."),
+    home: msg("Pistachio, rose and cream evoke the window of a French pâtisserie. The invitation opens onto your celebration, story and carefully arranged details."),
+  },
+  'celestial-observatory': {
+    style: msg("Midnight-blue envelope, star-map seal and antique-brass celestial details."),
+    opening: msg("Your guests tap the envelope. A small star-map seal lifts, the midnight V flap opens, and an ivory invitation card with celestial details rises from the pocket."),
+    home: msg("Midnight blue, chart-paper ivory and antique brass set a stargazing mood. Open the invitation to find your story beneath the night sky."),
+  },
+  'azulejo-mosaic': {
+    style: msg("Cobalt-and-ivory envelope, terracotta accent and Portuguese azulejo-inspired details."),
+    opening: msg("Your guests tap the envelope. A cobalt tile seal catches the light, the patterned V flap opens, and the invitation card rises from its pocket."),
+    home: msg("Cobalt, whitewash and terracotta recall painted tiles in the sun. Open the invitation to reveal your story and celebration, tile by tile."),
+  },
+  'sky-lantern-festival': {
+    style: msg("Dusky-plum envelope, glowing amber seal and lantern-lit details at twilight."),
+    opening: msg("Your guests tap the envelope. An amber lantern seal glows, the dusk-toned V flap opens, and the invitation card rises into view."),
+    home: msg("Plum, dusky rose and lantern amber bring the last light of day into your invitation, story and celebration pages."),
+  },
+  'music-box-ballerina': {
+    style: msg("Blush envelope, satin bow and a rose-gold ballerina keepsake seal."),
+    opening: msg("Your guests tap the envelope. A rose-gold ballerina seal turns, the blush V flap opens and the invitation card rises from the pocket."),
+    home: msg("Rose quartz, blush satin and soft gold give this invitation the feeling of a treasured keepsake. Open it to reveal your story and wedding details."),
+  },
+};
+
+function previewDesignCopy(d: DesignCommerce): DesignCopy | undefined {
+  const preview = PREVIEW_DESIGN_COPY[d.id];
+  if (!preview) return undefined;
+  return {
+    id: d.id,
+    collection: '',
+    demoCouple: 'Sample couple',
+    style: preview.style,
+    metaDescription: msg(d.name + ' wedding website preview. Explore its invitation, story, event details and RSVP pages; final artwork and Etsy availability are pending.'),
+    intro: msg(preview.style + '. This catalogue preview uses interim artwork while the final design assets and Etsy availability are pending.'),
+    opening: preview.opening,
+    pages: {
+      home: preview.home,
+      story: msg('A three-photo story gallery with captions and controls to move between moments.'),
+      details: msg('A wedding schedule with venue information, calendar links and celebration details.'),
+      rsvp: msg('An RSVP page with the shared guest reply form.'),
+    },
+    palette: [],
+    fonts: [],
+    llmsLine: d.name + ': ' + preview.style + '. Preview only; final artwork and Etsy availability are pending.',
+    relatedGuides: ['what-to-put-on-your-wedding-website', 'when-to-send-your-wedding-website'],
+  };
+}
+
 export interface Design extends DesignCommerce {
   copy: DesignCopy;
 }
@@ -974,6 +1216,23 @@ export function liveDesigns(cfg: MarketingConfig = MARKETING): Design[] {
 
 export function liveDesign(id: string, cfg: MarketingConfig = MARKETING): Design | null {
   return liveDesigns(cfg).find((d) => d.id === id) ?? null;
+}
+
+/** Live and preview designs shown in the catalogue; hidden 'coming' designs are excluded. */
+export function catalogDesigns(cfg: MarketingConfig = MARKETING): Design[] {
+  return cfg.designs
+    .filter((d) => d.status !== 'coming')
+    .map((d) => {
+      // a 'preview' design keeps its envelope-cover catalogue copy (main f1228e88) until it goes live; its full copy
+      // (DESIGN_COPY, G175) still names the panel's opening tab (lib/panel/state.ts)
+      const copy = (d.status === 'preview' ? previewDesignCopy(d) : undefined) ?? DESIGN_COPY[d.id];
+      if (!copy) throw new Error('lib/marketing/designs.ts has no copy for catalog design "' + d.id + '"');
+      return { ...d, copy };
+    });
+}
+
+export function catalogDesign(id: string, cfg: MarketingConfig = MARKETING): Design | null {
+  return catalogDesigns(cfg).find((d) => d.id === id) ?? null;
 }
 
 /**
@@ -1048,6 +1307,12 @@ export const DESIGN_STYLES: Record<string, readonly StyleId[]> = {
   'azulejo-mosaic': ['classic', 'destination'],
   'sky-lantern-festival': ['classic'],
   'music-box-ballerina': ['classic', 'storybook'],
+  'marigold-mehndi': ['classic', 'floral'],
+  'red-lacquer-double-happiness': ['classic'],
+  'highland-tartan-thistle': ['classic', 'destination'],
+  'victorian-glasshouse': ['classic', 'floral'],
+  'art-nouveau-lily': ['classic', 'floral'],
+  'papel-picado-fiesta': ['destination', 'rustic'],
   'blush-garden-rose': ['floral'],
   'olive-ivory': ['classic'],
   'mediterranean-lemon': ['destination'],

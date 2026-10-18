@@ -1,0 +1,98 @@
+<!doctype html>
+<!-- Victorian Glasshouse · page 1 — the closed seed packet (/<slug>). Inside a glasshouse at dusk: the host line and
+     "invite you to celebrate their wedding", the names in Monsieur La Doulaise, then a kraft seed packet, its flap
+     folded down, tied with jute twine down the middle and a copper plant label at the knot (the couple's monogram is
+     stamped on the label — data-field="initials", never baked in); below it the date and the city and "Tap to open".
+     Opening (docs/24 row 36, site.js MOTION.envelope): the label swings on its knot and drops away, the twine comes
+     apart at the knot (the upper half slides up, the lower half down), the flap turns up and over on its fold, the
+     warm glasshouse air mists the glass, the card rises out of the packet, the mist is wiped away across the glass
+     (a soft-edged mask) and ferns show round the card, the iron arches drift (parallax), and the card comes forward
+     and flies to home (view transition invite-card). Packet body, flap (two faces), twine halves, label, card, mist,
+     ferns and arches are separate layers; kraft, copper and twine are GPT pixels cut and toned by build_images.py
+     (interim until the PAKET 5 parts, GPT_PROMPTS.md). Personal text: none — [data-field] / [data-text] /
+     [data-photo] are filled on the server. Thank-you mode (G075): the same opening; the card carries the thank-you
+     title and the date, its window the thank-you photo or — without one — herbarium paper. Design texts: data-copy
+     (G068, theme.json "copy"). -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1c3328">
+<title data-text="{name_display} · {copy.envelope_kicker}">Victorian Glasshouse</title>
+<meta name="description" data-if="!thank_you_on" data-attr-content="{copy.envelope_kicker} · {name_display} · {date|date-long} · {venue.city_region}" content="A wedding invitation">
+<meta name="description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {name_display} · {date|date-long}" content="Thank you">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{name_display} · {date}" content="Wedding invitation">
+<meta property="og:description" data-if="!thank_you_on" data-attr-content="{copy.envelope_kicker} · {date|date-long} · {venue.city_region}" content="You are invited">
+<meta property="og:description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {date|date-long}" content="Thank you">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="parts.css">
+<link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
+<script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
+(function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'';if(sessionStorage.getItem('invite:opened'+k)&&!/[?&]replay=1(&|$)/.test(location.search))r.classList.add('is-opened');}catch(e){}})(document.documentElement);
+</script>
+<!-- prefetch the home page: the rule points at the "Enter" link, whose href the platform has already set to /<slug>/home -->
+<script type="speculationrules">{"prefetch":[{"source":"document","where":{"selector_matches":"a[data-enter]"},"eagerness":"immediate"}]}</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-opening" data-pending="This link will be added soon.">
+<a class="textlink skip" href="home.html" data-skip><span data-copy="envelope_skip">Skip</span></a>
+<main class="opening">
+  <!-- the cast-iron arches of the glasshouse (GPT ironwork, W3.9; empty until it exists): they drift in the opening -->
+  <span class="arches" aria-hidden="true"></span>
+  <div class="opening-heading">
+    <p class="eyebrow" data-if="host_line !thank_you_on" data-field="host_line"></p>
+    <p class="eyebrow kicker-line" data-if="!thank_you_on" data-copy="envelope_kicker">invite you to celebrate their wedding</p>
+    <p class="eyebrow" data-if="thank_you_on" data-copy="ty_kicker">With love and thanks</p>
+    <h1 class="names" data-fit><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></h1>
+  </div>
+  <div class="stage" role="button" tabindex="0" aria-label="Open the seed packet" data-copy-attr="aria-label:envelope_open">
+    <div class="packet">
+      <!-- the back wall's inside (shows above the front when the flap is up) -->
+      <span class="pk-back"></span>
+      <!-- the card inside the packet (interim: herbarium paper toned from a GPT texture; card_small with a #00FF00 window
+           replaces it, GPT_PROMPTS.md W3.15) -->
+      <div class="card-slot">
+        <div class="card" aria-hidden="true">
+          <div class="card-photo photo-slot" data-slot="hero_portrait">
+            <img data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_tall-640.webp" sizes="min(32vw, 150px)" alt="">
+            <span class="ph-mark" data-if="!thank_you_on"><span>Your photo here</span></span>
+            <img class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_tall-640.webp" sizes="min(32vw, 150px)" alt="">
+            <span class="ty-decor" data-if="thank_you_on !thank_you.photo"><img src="img/paper-640.webp" alt=""></span>
+          </div>
+          <p class="eyebrow card-line" data-if="!thank_you_on" data-copy="card_line">Our wedding</p>
+          <p class="card-names" data-if="!thank_you_on" data-field="name_display"></p>
+          <p class="card-names ty-title" data-if="thank_you_on" data-field="thank_you_title"></p>
+          <p class="eyebrow card-date" data-field="date"></p>
+        </div>
+      </div>
+      <!-- the front wall, then the flap folded over it (outer face; its inner face shows once it has turned up) -->
+      <span class="pk-body"></span>
+      <span class="pk-flap"><span class="pk-flap-out"></span><span class="pk-flap-in"></span></span>
+      <!-- the twine down the middle, cut at the knot: the upper half slides up, the lower half down -->
+      <span class="twine tw-top"><span></span></span>
+      <span class="twine tw-bottom"><span></span></span>
+      <!-- the copper plant label hanging from the knot, the monogram stamped on it (read from the platform's monogram) -->
+      <span class="tag" aria-hidden="true"><span class="tag-cord"></span><span class="tag-plate"><span class="tag-mono" data-field="initials"></span></span></span>
+      <!-- light from the glass roof passing over the kraft (light only, docs/11 §5.7) -->
+      <span class="sheen"></span>
+    </div>
+  </div>
+  <p class="opening-date eyebrow"><span data-field="date"></span><span aria-hidden="true"> · </span><span data-field="venue.city"></span></p>
+  <div class="opening-actions">
+    <p class="eyebrow tap-hint" aria-hidden="true"><span data-copy="envelope_hint_tap">Tap to open</span></p>
+    <a class="btn enter" href="home.html" data-enter><span data-copy="envelope_enter">Enter</span></a>
+    <button class="textlink replay" type="button"><span data-copy="envelope_replay">Replay the opening</span></button>
+  </div>
+  <!-- fern fronds and an orchid round the card (GPT ferns, W3.10): seen when the mist is wiped away -->
+  <span class="ferns" aria-hidden="true"></span>
+  <!-- the glass: warm air mists it while the card rises, then it is wiped clear (a soft-edged mask sweeping across) -->
+  <span class="mist" aria-hidden="true"></span>
+  <!-- without JavaScript (no <noscript>: its content is raw text, the platform could not rewrite the link) -->
+  <p class="nojs-only"><a class="btn" href="home.html"><span data-copy="envelope_open">Open the seed packet</span></a></p>
+</main>
+</body>
+</html>

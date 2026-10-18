@@ -1,6 +1,9 @@
 // Shared fixtures for the marketing tests (G061).
+import { readdirSync } from 'node:fs';
+import path from 'node:path';
 import { MARKETING, type MarketingConfig } from '../lib/marketing/config.ts';
 import { hasPlaceholder } from '../lib/marketing/placeholders.ts';
+import { PLATFORM_ROOT } from './helpers.ts';
 
 /** A config with every decision filled in (fictional values; never used outside tests). */
 export function readyConfig(over: Partial<MarketingConfig> = {}): MarketingConfig {
@@ -18,6 +21,18 @@ export function readyConfig(over: Partial<MarketingConfig> = {}): MarketingConfi
     designs: base.designs.map((d) => ({ ...d, price: '29.40', etsyListingUrl: `https://www.etsy.com/listing/1234567890/${d.id}?ref=share` })),
     ...over,
   };
+}
+
+/**
+ * public/marketing/designs/ holds one folder per live design plus, for each catalogue-only 'preview' design, a folder
+ * with nothing but its envelope cover (main f1228e88). Returns the folder names on disk and the expected ones (sorted),
+ * and the preview folders that hold anything besides envelope.webp.
+ */
+export function designFolders(liveIds: string[]): { onDisk: string[]; expected: string[]; strayPreviewFiles: string[] } {
+  const dir = path.join(PLATFORM_ROOT, 'public/marketing/designs');
+  const previewIds = MARKETING.designs.filter((d) => d.status === 'preview').map((d) => d.id);
+  const strayPreviewFiles = previewIds.flatMap((id) => readdirSync(path.join(dir, id)).filter((f) => f !== 'envelope.webp').map((f) => `${id}/${f}`));
+  return { onDisk: readdirSync(dir).sort(), expected: [...liveIds, ...previewIds].sort(), strayPreviewFiles };
 }
 
 /** Required properties per type (Google's documented required fields + what docs/14 §8 promises). */

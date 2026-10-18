@@ -1,0 +1,22 @@
+{
+ "_not": "G184 kuru deneme (tools/gpt_kuru_deneme.py --sekil): parçaların prompt'taki yeri, tuval yüzdesiyle. Deneme görseli ürün değildir.",
+ "tartan_wool.png": {"ton": [94, 72, 100], "gren": 0.4},
+ "cream_paper.png": {"ton": [241, 234, 219], "gren": 0.3},
+ "moss_ground.png": {"ton": [32, 41, 29], "gren": 0.3},
+ "hills.png": {"ton": [70, 84, 58], "gren": 0.4},
+ "mist.png": {"kutu": [2, 15, 98, 85], "ton": [223, 227, 220]},
+ "envelope_back.png": {"kutu": [0, 0, 100, 100], "ton": [70, 81, 44]},
+ "envelope_front.png": {"kutu": [0, 34, 100, 100], "ton": [94, 72, 100]},
+ "flap.png": {"kutu": [0, 0, 100, 56], "ton": [86, 66, 92]},
+ "strap.png": {"kutu": [1, 0, 99, 100], "ton": [107, 68, 40]},
+ "buckle.png": {"kutu": [1, 1, 99, 99], "ton": [168, 132, 55]},
+ "heather_sprig.png": {"kutu": [25, 5, 75, 95], "ton": [123, 90, 132]},
+ "heather_divider.png": {"kutu": [8, 20, 92, 80], "ton": [123, 90, 132]},
+ "heather_floret_1.png": {"kutu": [24, 24, 76, 76], "ton": [123, 90, 132]},
+ "heather_floret_2.png": {"kutu": [26, 26, 74, 74], "ton": [196, 169, 204]},
+ "heather_floret_3.png": {"kutu": [28, 28, 72, 72], "ton": [241, 234, 219]},
+ "locket_rim.png": {"kutu": [0, 0, 100, 100], "pencere": [12, 16, 88, 92], "ton": [168, 132, 55]},
+ "locket_lid.png": {"kutu": [0, 0, 100, 100], "ton": [168, 132, 55]},
+ "thistle.png": {"kutu": [12, 6, 88, 94], "ton": [123, 90, 132]},
+ "card_small.png": {"kutu": [0, 0, 100, 100], "pencere": [27, 8, 73, 57], "ton": [241, 234, 219]}
+}

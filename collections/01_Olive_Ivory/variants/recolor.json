@@ -8,6 +8,13 @@
       "cmin": 0.03,
       "cfull": 0.05
     },
+    "olive_css": {
+      "anchor": "#5E6B45",
+      "sigma": 24,
+      "cmin": 0.02,
+      "cfull": 0.04,
+      "note": "G178: the site's olive text/button tokens (OKLCH hue ~124°, the art's envelope anchor is ~103°): with the envelope family the burgundy and blush palettes' names and RSVP button came out brown"
+    },
     "leaf": {
       "anchor": "#767A51",
       "sigma": 24,
@@ -181,11 +188,11 @@
       "thank-you.css"
     ],
     "families": [
-      "envelope",
+      "olive_css",
       "gold"
     ],
     "roles": {
-      "envelope": "deep"
+      "olive_css": "deep"
     },
     "keep": [
       "--gold",

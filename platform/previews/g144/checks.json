@@ -294,7 +294,7 @@
   {
     "name": "crimson-rose-atelier/tr: page links keep ?lang=tr",
     "ok": true,
-    "detail": "/diller-crimson-rose-atelier/home?lang=tr /diller-crimson-rose-atelier/story?lang=tr /diller-crimson-rose-atelier/details?lang=tr /diller-crimson-rose-atelier/rsvp?lang=tr"
+    "detail": "/diller-crimson-rose-atelier?replay=1&lang=tr /diller-crimson-rose-atelier/home?lang=tr /diller-crimson-rose-atelier/story?lang=tr /diller-crimson-rose-atelier/details?lang=tr"
   },
   {
     "name": "crimson-rose-atelier/tr: RSVP error message is translated",
@@ -357,7 +357,7 @@
   {
     "name": "crimson-rose-atelier/de: page links keep ?lang=de",
     "ok": true,
-    "detail": "/diller-crimson-rose-atelier/home?lang=de /diller-crimson-rose-atelier/story?lang=de /diller-crimson-rose-atelier/details?lang=de /diller-crimson-rose-atelier/rsvp?lang=de"
+    "detail": "/diller-crimson-rose-atelier?replay=1&lang=de /diller-crimson-rose-atelier/home?lang=de /diller-crimson-rose-atelier/story?lang=de /diller-crimson-rose-atelier/details?lang=de"
   },
   {
     "name": "crimson-rose-atelier/de: RSVP error message is translated",

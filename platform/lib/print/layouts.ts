@@ -5,7 +5,7 @@
 // bottom, left; bands = where decoration reaches into it, G149) and the colours / fonts of the design's own website
 // (themes/<id>/site.css). The part files are copied at full size by scripts/build-print-assets.ts into
 // public/print/<id>/ (card.webp, back.webp, paper.webp).
-// Designs without card parts yet (21, 22, 24, 25, 26, 29) are "composed": the trimmed sheet is the card, set from the design's existing
+// Designs without card parts yet (21, 22, 24, 25, 26, 29, 33, 34, 35) are "composed": the trimmed sheet is the card, set from the design's existing
 // GPT images (no shape drawn, K21) until the parts asked for in the collection's GPT_PROMPTS.md (G139) arrive.
 
 export type Box = readonly [top: number, right: number, bottom: number, left: number];
@@ -70,6 +70,17 @@ const sealAt = (edge: 'top' | 'bottom') => ({ src: 'seal', style: `${edge}:4%;le
 
 const tileRow = (edge: 'top' | 'bottom') =>
   ['tile1', 'tile2', 'tile3', 'tile2', 'tile1'].map((src, i) => ({ src, style: `${edge}:5%;left:${25 + i * 10.5}%;width:9%` }));
+
+/** 38 (G187): a garland of the theme's flags across the top, sagging toward the middle (each flag hangs square to it). */
+const flagGarland = (n: number, top: number, width: number) =>
+  Array.from({ length: n }, (_, i) => {
+    const t = (i + 0.5) / n;
+    const step = Math.min(14, 84 / n);
+    return {
+      src: `flag${(i % 6) + 1}`,
+      style: `top:${(top + 4 * t * (1 - t) * 2.4).toFixed(2)}%;left:${(50 + (i - (n - 1) / 2) * step - width * 0.4).toFixed(2)}%;width:${(width * 0.8).toFixed(2)}%;transform:rotate(${((t - 0.5) * -8).toFixed(1)}deg)`,
+    };
+  });
 
 /** 30 (G169): a row of the theme's azulejo tiles along one edge — corner, border and field tiles as on the website's wall. */
 const azulejoRow = (edge: 'top' | 'bottom') =>
@@ -471,6 +482,153 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     composed: {
       front: { bg: cover('paper'), images: [{ src: 'petal', style: 'top:6%;left:50%;width:14%;transform:translateX(-50%) rotate(-18deg)' }] },
       back: { bg: cover('paper'), images: [{ src: 'petal', style: 'bottom:5%;left:50%;width:10%;transform:translateX(-50%) rotate(12deg)' }] },
+    },
+  },
+  // 33 (G182, interim until PAKET 6 print/invitation_front_5x7.png + print/invitation_back_5x7.png, 1575×2175, one sheet
+  // per side for 5×7 and A5 — GPT_PROMPTS.md): saffron-ivory paper with a band of the envelope's fuchsia silk at its top
+  // and bottom edge — both toned textures cut by the theme build (img/paper, img/silk; no shape drawn). The prompts keep
+  // the front / back boxes below empty on the art; on arrival: sources → { front, back } of those two files, composed →
+  // { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }, re-measure the boxes on the
+  // art (G149), then build-print-assets.
+  'marigold-mehndi': {
+    collection: '33_Marigold_Mehndi',
+    sources: { paper: 'platform/themes/marigold-mehndi/img/paper-1024.webp', silk: 'platform/themes/marigold-mehndi/img/silk-640.webp' },
+    fonts: gf('family=Rozha+One&family=Yrsa:ital,wght@0,400;0,500;1,400'),
+    script: "'Rozha One', Georgia, serif", serif: "'Yrsa', Georgia, serif",
+    ink: '#3A0F24', accent: '#8E1048', front: [21, 13, 19, 13], back: [17, 12, 10, 12],
+    composed: {
+      front: {
+        bg: 'url(paper.webp) 0 0 / 2.4in repeat',
+        images: [
+          { src: 'silk', style: 'top:0;left:0;width:100%;height:13%;object-fit:cover' },
+          { src: 'silk', style: 'bottom:0;left:0;width:100%;height:11%;object-fit:cover;object-position:50% 80%' },
+        ],
+      },
+      back: { bg: 'url(paper.webp) 0 0 / 2.4in repeat', images: [{ src: 'silk', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover' }] },
+    },
+  },
+  // 34 (G183, interim until PAKET 6 print/invitation_front_5x7.png + print/invitation_back_5x7.png, 1575×2175, one sheet
+  // per side for 5×7 and A5 — GPT_PROMPTS.md): warm cream paper with a band of the cinnabar envelope paper at its top and
+  // bottom edge — both toned textures cut by the theme build (img/cream, img/red; no shape drawn). The prompts keep the
+  // front / back boxes below empty on the art; on arrival: sources → { front, back } of those two files, composed →
+  // { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }, re-measure the boxes on the
+  // art (G149), then build-print-assets.
+  'red-lacquer-double-happiness': {
+    collection: '34_Red_Lacquer_Double_Happiness',
+    sources: { paper: 'platform/themes/red-lacquer-double-happiness/img/cream-1024.webp', red: 'platform/themes/red-lacquer-double-happiness/img/red-1024.webp' },
+    fonts: gf('family=Luxurious+Script&family=Prata'),
+    script: "'Luxurious Script', cursive", serif: "'Prata', Georgia, serif",
+    ink: '#3A0D0E', accent: '#8C1A1F', front: [17, 13, 15, 13], back: [12, 12, 10, 12],
+    composed: {
+      front: {
+        bg: 'url(paper.webp) 0 0 / 2.4in repeat',
+        images: [
+          { src: 'red', style: 'top:0;left:0;width:100%;height:11%;object-fit:cover' },
+          { src: 'red', style: 'bottom:0;left:0;width:100%;height:9%;object-fit:cover;object-position:50% 80%' },
+        ],
+      },
+      back: { bg: 'url(paper.webp) 0 0 / 2.4in repeat', images: [{ src: 'red', style: 'top:0;left:0;width:100%;height:6%;object-fit:cover' }] },
+    },
+  },
+  // 35 (G184, interim until PAKET 6 print/invitation_front_5x7.png + print/invitation_back_5x7.png, 1575×2175, one sheet
+  // per side for 5×7 and A5 — GPT_PROMPTS.md): cream paper with a band of the heather wool at its top and bottom edge —
+  // both toned textures cut by the theme build (img/paper, img/wool; no shape drawn, no tartan line drawn). The prompts
+  // keep the front / back boxes below empty on the art; on arrival: sources → { front, back } of those two files,
+  // composed → { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }, re-measure the
+  // boxes on the art (G149), then build-print-assets.
+  'highland-tartan-thistle': {
+    collection: '35_Highland_Tartan_Thistle',
+    sources: { paper: 'platform/themes/highland-tartan-thistle/img/paper-1024.webp', wool: 'platform/themes/highland-tartan-thistle/img/wool-640.webp' },
+    fonts: gf('family=Rouge+Script&family=Sorts+Mill+Goudy:ital@0;1'),
+    script: "'Rouge Script', cursive", serif: "'Sorts Mill Goudy', Georgia, serif",
+    ink: '#2A2620', accent: '#46512C', front: [21, 13, 19, 13], back: [17, 12, 10, 12],
+    composed: {
+      front: {
+        bg: 'url(paper.webp) 0 0 / 2.4in repeat',
+        images: [
+          { src: 'wool', style: 'top:0;left:0;width:100%;height:12%;object-fit:cover' },
+          { src: 'wool', style: 'bottom:0;left:0;width:100%;height:10%;object-fit:cover;object-position:50% 80%' },
+        ],
+      },
+      back: { bg: 'url(paper.webp) 0 0 / 2.4in repeat', images: [{ src: 'wool', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover' }] },
+    },
+  },
+  // 36 (G185, before its GPT parts): both sides on the theme's herbarium paper (img/paper-1024, toned by the theme
+  // build from 16's plain GPT paper) — front: a band of the deep fern ground at the top with the copper label plate in
+  // it (img/copper-320, a crop of 17's plain metal) and a thin kraft band at the bottom (img/kraft-640); back: a narrow
+  // fern band at the top. Crops and toning of GPT pixels; no shape drawn. When PAKET 6 arrives (GPT_PROMPTS.md:
+  // print/invitation_front_5x7.png + print/invitation_back_5x7.png, 1575×2175, one ground per side for 5×7 and A5):
+  // sources → { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' }, composed → { front:
+  // { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }, then build-print-assets +
+  // tests/g149-print-layout.test.ts (re-measure the boxes).
+  'victorian-glasshouse': {
+    collection: '36_Victorian_Glasshouse',
+    sources: {
+      paper: 'platform/themes/victorian-glasshouse/img/paper-1024.webp',
+      fern: 'platform/themes/victorian-glasshouse/img/fern-640.webp',
+      copper: 'platform/themes/victorian-glasshouse/img/copper-320.webp',
+      kraft: 'platform/themes/victorian-glasshouse/img/kraft-640.webp',
+    },
+    fonts: gf('family=Monsieur+La+Doulaise&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400'),
+    script: "'Monsieur La Doulaise', cursive", serif: "'Old Standard TT', Georgia, serif",
+    ink: '#1E2B24', accent: '#8A4A22', front: [20, 12, 14, 12], back: [13, 12, 8, 12],
+    composed: {
+      front: {
+        bg: 'url(paper.webp) 0 0 / 2.4in repeat',
+        images: [
+          { src: 'fern', style: 'top:0;left:0;width:100%;height:12%;object-fit:cover' },
+          { src: 'copper', style: 'top:3%;left:50%;width:9%;height:7%;object-fit:cover;transform:translateX(-50%)' },
+          { src: 'kraft', style: 'bottom:0;left:0;width:100%;height:6%;object-fit:cover' },
+        ],
+      },
+      back: { bg: 'url(paper.webp) 0 0 / 2.4in repeat', images: [{ src: 'fern', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover' }] },
+    },
+  },
+  // 37 (G186, interim until PAKET 6 print/invitation_front_5x7.png + print/invitation_back_5x7.png, 1575×2175, one sheet
+  // per side for 5×7 and A5 — GPT_PROMPTS.md): cream paper with a band of the sage ground at its top and bottom edge —
+  // both toned textures from the theme build (img/paper, img/sage; no shape drawn). The prompts keep the front / back
+  // boxes below empty on the art; on arrival: sources → { front, back } of those two files, composed → { front: { bg:
+  // cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }, re-measure the boxes on the art (G149), then
+  // build-print-assets.
+  'art-nouveau-lily': {
+    collection: '37_Art_Nouveau_Lily',
+    sources: { paper: 'platform/themes/art-nouveau-lily/img/paper-1024.webp', sage: 'platform/themes/art-nouveau-lily/img/sage-1024.webp' },
+    fonts: gf('family=Ephesis&family=Federant&family=Linden+Hill'),
+    script: "'Ephesis', cursive", serif: "'Linden Hill', Georgia, serif",
+    ink: '#2E3228', accent: '#7A5D22', front: [21, 13, 19, 13], back: [17, 12, 10, 12],
+    composed: {
+      front: {
+        bg: 'url(paper.webp) 0 0 / 2.4in repeat',
+        images: [
+          { src: 'sage', style: 'top:0;left:0;width:100%;height:13%;object-fit:cover' },
+          { src: 'sage', style: 'bottom:0;left:0;width:100%;height:11%;object-fit:cover;object-position:50% 80%' },
+        ],
+      },
+      back: { bg: 'url(paper.webp) 0 0 / 2.4in repeat', images: [{ src: 'sage', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover' }] },
+    },
+  },
+  // 38 (G187): composed until its print grounds arrive (GPT_PROMPTS.md PAKET 6) — the website's cream paper with a
+  // garland of the theme's six flags along the top (front: full width, sagging; back: a short garland), images from the
+  // theme build (interim tissue rectangles until the GPT flags, see themes/papel-picado-fiesta/build_images.py; no shape
+  // drawn). On arrival: sources -> print/invitation_front_5x7.png + print/invitation_back_5x7.png, composed ->
+  // cover('front') / cover('back') with no images, boxes re-measured on the art (G149) — steps in GPT_PROMPTS.md PAKET 6.
+  'papel-picado-fiesta': {
+    collection: '38_Papel_Picado_Fiesta',
+    sources: {
+      paper: 'platform/themes/papel-picado-fiesta/img/paper-1024.webp',
+      flag1: 'platform/themes/papel-picado-fiesta/img/flag_1-200.webp',
+      flag2: 'platform/themes/papel-picado-fiesta/img/flag_2-200.webp',
+      flag3: 'platform/themes/papel-picado-fiesta/img/flag_3-200.webp',
+      flag4: 'platform/themes/papel-picado-fiesta/img/flag_4-200.webp',
+      flag5: 'platform/themes/papel-picado-fiesta/img/flag_5-200.webp',
+      flag6: 'platform/themes/papel-picado-fiesta/img/flag_6-200.webp',
+    },
+    fonts: gf('family=Alegreya:ital,wght@0,400;0,500;1,400&family=Oleo+Script'),
+    script: "'Oleo Script', cursive", serif: "'Alegreya', Georgia, serif",
+    ink: '#3B2418', accent: '#8A3A1F', front: [22, 13, 12, 13], back: [15, 12, 10, 12],
+    composed: {
+      front: { bg: cover('paper'), images: flagGarland(6, 3, 12) },
+      back: { bg: cover('paper'), images: flagGarland(4, 2.5, 8) },
     },
   },
 };

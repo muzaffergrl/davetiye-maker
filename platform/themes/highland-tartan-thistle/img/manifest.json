@@ -1,0 +1,255 @@
+{
+ "sources": {
+  "tartan_wool": "collections/09_Lavender_Provence/assets/gpt/parts/bg_tile.png",
+  "moss_ground": "collections/17_Emerald_Gold_Estate/assets/gpt/parts/bg_tile.png",
+  "cream_paper": "collections/01_Olive_Ivory/assets/gpt/parts/bg_tile.png",
+  "leather": "collections/07_Burgundy_Velvet/assets/gpt/parts/bg_tile.png (toned saddle brown)",
+  "brass": "collections/17_Emerald_Gold_Estate/assets/gpt/parts/closure.png (plain metal field (0.42, 0.32, 0.58, 0.48))",
+  "mist": "collections/08_Winter_Evergreen/assets/gpt/parts/bg_tile.png (blurred; its own blotches as alpha)"
+ },
+ "wool": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "wool-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 49512
+   }
+  ]
+ },
+ "ground": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "ground-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 3752
+   }
+  ]
+ },
+ "paper": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "paper-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 8344
+   },
+   {
+    "file": "paper-1024.webp",
+    "w": 1024,
+    "h": 1024,
+    "bytes": 67946
+   }
+  ]
+ },
+ "leather": {
+  "src_size": [
+   480,
+   480
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "leather-480.webp",
+    "w": 480,
+    "h": 480,
+    "bytes": 11244
+   }
+  ]
+ },
+ "brass": {
+  "src_size": [
+   640,
+   640
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "brass-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 5226
+   }
+  ]
+ },
+ "mist": {
+  "src_size": [
+   1024,
+   512
+  ],
+  "ratio": 2.0,
+  "files": [
+   {
+    "file": "mist-1024.webp",
+    "w": 1024,
+    "h": 512,
+    "bytes": 58302
+   }
+  ]
+ },
+ "ph_oval": {
+  "src_size": [
+   640,
+   800
+  ],
+  "ratio": 0.8,
+  "files": [
+   {
+    "file": "ph_oval-640.webp",
+    "w": 640,
+    "h": 800,
+    "bytes": 1534
+   }
+  ]
+ },
+ "ph_wide": {
+  "src_size": [
+   640,
+   360
+  ],
+  "ratio": 1.77778,
+  "files": [
+   {
+    "file": "ph_wide-640.webp",
+    "w": 640,
+    "h": 360,
+    "bytes": 764
+   }
+  ]
+ },
+ "placeholders": {
+  "oval": "ph_oval-640.webp",
+  "venue": "ph_wide-640.webp"
+ },
+ "photo_slots": {
+  "hero_portrait": {
+   "aspect": "4/5"
+  },
+  "story_1": {
+   "aspect": "4/5"
+  },
+  "story_2": {
+   "aspect": "4/5"
+  },
+  "story_3": {
+   "aspect": "4/5"
+  },
+  "venue": {
+   "aspect": "16/9"
+  }
+ },
+ "stage": {
+  "aspect": 0.9,
+  "front_pct": [
+   0,
+   34,
+   100,
+   66
+  ],
+  "flap_pct": [
+   0,
+   0,
+   100,
+   56
+  ],
+  "strap_pct": [
+   42,
+   -5,
+   16,
+   86
+  ],
+  "buckle_pct": [
+   36.9,
+   47.5,
+   26.2,
+   14.6
+  ],
+  "card_pct": [
+   9,
+   7,
+   82,
+   86
+  ],
+  "_note": "% of the closed envelope (left, top, width, height); the GPT envelope layers share one canvas of this ratio"
+ },
+ "og": {
+  "file": "og-1200x630.jpg",
+  "source": "montage: closed envelope (wool, leather, brass) on the moss ground",
+  "bytes": 86848
+ },
+ "favicon": {
+  "src_box": [
+   28,
+   20,
+   392,
+   446
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.04,
+  "file": "favicon.png",
+  "bytes": 24027
+ },
+ "parts": {
+  "used": [],
+  "waiting_for_gpt": [
+   "tartan_wool",
+   "cream_paper",
+   "moss_ground",
+   "hills",
+   "mist",
+   "envelope_back",
+   "envelope_front",
+   "flap",
+   "strap",
+   "buckle",
+   "heather_sprig",
+   "heather_divider",
+   "heather_floret_1",
+   "heather_floret_2",
+   "heather_floret_3",
+   "locket_rim",
+   "locket_lid",
+   "thistle",
+   "card_small",
+   "web_hero"
+  ]
+ },
+ "_note": "G184 interim build: wool, ground, paper, leather, brass and mist cut, toned and blurred from other designs' plain GPT pictures; the design's own PAKET 5 parts are taken as they arrive (GPT_PROMPTS.md, manifest parts). Nothing drawn.",
+ "parts_css_rules": 0,
+ "checks": {
+  "green": {}
+ },
+ "theme_check": {
+  "particles": ".accent-layer",
+  "first_screen": {
+   "landscape": false,
+   "names_min_px": 32
+  },
+  "backdrop": {
+   "edge_max": 2.2,
+   "dark_max": 0.05,
+   "dark_below": 0,
+   "light_above": 140
+  }
+ },
+ "bytes_total": 448645
+}

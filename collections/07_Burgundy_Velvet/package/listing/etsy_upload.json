@@ -222,46 +222,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=burgundy-velvet-autumn"
+        "start_link": "/start?theme=burgundy-velvet-autumn",
+        "image": "collections/07_Burgundy_Velvet/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": true
       },
       {
         "name": "Emerald Velvet & Burgundy",
         "variant": "emerald-velvet",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=burgundy-velvet-autumn&variant=emerald-velvet"
+        "start_link": "/start?theme=burgundy-velvet-autumn&variant=emerald-velvet",
+        "image": "collections/07_Burgundy_Velvet/package/listing/images_editorial/palette_emerald-velvet.jpg",
+        "image_exists": true
       },
       {
         "name": "Plum Velvet",
         "variant": "plum-velvet",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=burgundy-velvet-autumn&variant=plum-velvet"
+        "start_link": "/start?theme=burgundy-velvet-autumn&variant=plum-velvet",
+        "image": "collections/07_Burgundy_Velvet/package/listing/images_editorial/palette_plum-velvet.jpg",
+        "image_exists": true
       },
       {
         "name": "Navy Velvet & Burgundy",
         "variant": "navy-velvet",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=burgundy-velvet-autumn&variant=navy-velvet"
+        "start_link": "/start?theme=burgundy-velvet-autumn&variant=navy-velvet",
+        "image": "collections/07_Burgundy_Velvet/package/listing/images_editorial/palette_navy-velvet.jpg",
+        "image_exists": true
       },
       {
         "name": "Rust & Copper Velvet",
         "variant": "rust-velvet",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=burgundy-velvet-autumn&variant=rust-velvet"
+        "start_link": "/start?theme=burgundy-velvet-autumn&variant=rust-velvet",
+        "image": "collections/07_Burgundy_Velvet/package/listing/images_editorial/palette_rust-velvet.jpg",
+        "image_exists": true
       },
       {
         "name": "Dusty Rose Velvet",
         "variant": "dusty-rose-velvet",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=burgundy-velvet-autumn&variant=dusty-rose-velvet"
+        "start_link": "/start?theme=burgundy-velvet-autumn&variant=dusty-rose-velvet",
+        "image": "collections/07_Burgundy_Velvet/package/listing/images_editorial/palette_dusty-rose-velvet.jpg",
+        "image_exists": true
       }
     ],
     "offered": [
       "Original (Burgundy Velvet Autumn)"
+    ],
+    "images": [
+      {
+        "file": "collections/07_Burgundy_Velvet/package/listing/images_editorial/10_palettes.jpg",
+        "exists": true,
+        "option": null,
+        "upload": false,
+        "alt": "Burgundy Velvet Autumn in 6 color palettes: the opening page of each, side by side",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/07_Burgundy_Velvet/package/listing/images_editorial/palette_original.jpg",
+        "exists": true,
+        "option": "Original (Burgundy Velvet Autumn)",
+        "upload": false,
+        "alt": "Burgundy Velvet Autumn in its original palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/07_Burgundy_Velvet/package/listing/images_editorial/palette_emerald-velvet.jpg",
+        "exists": true,
+        "option": "Emerald Velvet & Burgundy",
+        "upload": false,
+        "alt": "Burgundy Velvet Autumn in the Emerald Velvet & Burgundy palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/07_Burgundy_Velvet/package/listing/images_editorial/palette_plum-velvet.jpg",
+        "exists": true,
+        "option": "Plum Velvet",
+        "upload": false,
+        "alt": "Burgundy Velvet Autumn in the Plum Velvet palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/07_Burgundy_Velvet/package/listing/images_editorial/palette_navy-velvet.jpg",
+        "exists": true,
+        "option": "Navy Velvet & Burgundy",
+        "upload": false,
+        "alt": "Burgundy Velvet Autumn in the Navy Velvet & Burgundy palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/07_Burgundy_Velvet/package/listing/images_editorial/palette_rust-velvet.jpg",
+        "exists": true,
+        "option": "Rust & Copper Velvet",
+        "upload": false,
+        "alt": "Burgundy Velvet Autumn in the Rust & Copper Velvet palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/07_Burgundy_Velvet/package/listing/images_editorial/palette_dusty-rose-velvet.jpg",
+        "exists": true,
+        "option": "Dusty Rose Velvet",
+        "upload": false,
+        "alt": "Burgundy Velvet Autumn in the Dusty Rose Velvet palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

@@ -31,7 +31,8 @@ test('Kintsugi & Washi is a platform theme, kept off sale until approval', async
   const theme = await claimableTheme(id);
   assert.ok(theme);
   assert.equal(theme.name, 'Kintsugi & Washi');
-  assert.equal(MARKETING.designs.find((d) => d.id === id)?.status, 'coming');
+  // off sale until approval: 'coming' (hidden) or 'preview' (in the catalogue, no checkout, no /start; main f1228e88)
+  assert.ok(['coming', 'preview'].includes(MARKETING.designs.find((d) => d.id === id)?.status ?? ''));
   assert.equal(themeOpenForClaims(id, { env: { VERCEL_ENV: 'production' } }), false);
   assert.ok(DEMO_CITY_PINS[id], 'demo map pin');
   assert.equal(PRINT_LAYOUTS[id]?.collection, '26_Kintsugi_Washi');

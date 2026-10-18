@@ -5,7 +5,7 @@
   "product_language": "en",
   "delivery_platform": "own website platform + edit panel (K24); Canva delivery dropped",
   "sales_channel": "Etsy",
-  "last_updated": "2026-10-17",
+  "last_updated": "2026-10-18",
   "status_levels": [
     "concept",
     "editable_draft",
@@ -19,7 +19,6 @@
     "etsy_listing_upload (K41: after manual tests)",
     "subscription_budget",
     "revision_scope",
-    "real_domain",
     "email_provider: SMTP code ready (G147); account / app password not set",
     "privacy_policy_controller_identity (docs/20 §7.2)",
     "order_check_time / extension / deletion policies",
@@ -139,7 +138,8 @@
         "uploaded_to_etsy": false,
         "note": "K41: Etsy'ye testlerden sonra yüklenir; v4 görseller ve etsy_upload entegratör dalında, main'de değil"
       },
-      "deliverables_note": "Canva/video dönemi alanları (K22/K24 ile askıda); güncel paket: listing_package + platform.themes"
+      "deliverables_note": "Canva/video dönemi alanları (K22/K24 ile askıda); güncel paket: listing_package + platform.themes",
+      "sales_site": "live"
     },
     {
       "id": "02_Dusty_Blue",
@@ -240,7 +240,8 @@
         "uploaded_to_etsy": false,
         "note": "K41: Etsy'ye testlerden sonra yüklenir; v4 görseller ve etsy_upload entegratör dalında, main'de değil"
       },
-      "deliverables_note": "Canva/video dönemi alanları (K22/K24 ile askıda); güncel paket: listing_package + platform.themes"
+      "deliverables_note": "Canva/video dönemi alanları (K22/K24 ile askıda); güncel paket: listing_package + platform.themes",
+      "sales_site": "live"
     },
     {
       "id": "03_Blush_Garden_Rose",
@@ -265,7 +266,8 @@
         "start_here": "collections/03_Blush_Garden_Rose/package/customer/START_HERE.md + START_HERE.pdf (G091)",
         "uploaded_to_etsy": false,
         "note": "K41: Etsy'ye testlerden sonra yüklenir; v4 görseller ve etsy_upload entegratör dalında, main'de değil"
-      }
+      },
+      "sales_site": "live"
     },
     {
       "id": "04_Vintage_Airmail",
@@ -289,7 +291,8 @@
         "start_here": "collections/04_Vintage_Airmail/package/customer/START_HERE.md + START_HERE.pdf (G091)",
         "uploaded_to_etsy": false,
         "note": "K41: Etsy'ye testlerden sonra yüklenir; v4 görseller ve etsy_upload entegratör dalında, main'de değil"
-      }
+      },
+      "sales_site": "live"
     },
     {
       "id": "05_Lemon_Mediterranean",
@@ -313,7 +316,8 @@
         "start_here": "collections/05_Lemon_Mediterranean/package/customer/START_HERE.md + START_HERE.pdf (G091)",
         "uploaded_to_etsy": false,
         "note": "K41: Etsy'ye testlerden sonra yüklenir; v4 görseller ve etsy_upload entegratör dalında, main'de değil"
-      }
+      },
+      "sales_site": "live"
     },
     {
       "id": "06_Art_Deco_Noir",
@@ -338,7 +342,8 @@
           "G124 (listing images)"
         ],
         "uploaded_to_etsy": false
-      }
+      },
+      "sales_site": "live"
     },
     {
       "id": "07_Burgundy_Velvet",
@@ -363,7 +368,8 @@
           "G124 (listing images)"
         ],
         "uploaded_to_etsy": false
-      }
+      },
+      "sales_site": "live"
     },
     {
       "id": "08_Winter_Evergreen",
@@ -388,7 +394,8 @@
           "G124 (listing images)"
         ],
         "uploaded_to_etsy": false
-      }
+      },
+      "sales_site": "live"
     },
     {
       "id": "09_Lavender_Provence",
@@ -413,7 +420,8 @@
           "G124 (listing images)"
         ],
         "uploaded_to_etsy": false
-      }
+      },
+      "sales_site": "live"
     },
     {
       "id": "10_Tuscan_Vineyard",
@@ -438,7 +446,8 @@
           "G124 (listing images)"
         ],
         "uploaded_to_etsy": false
-      }
+      },
+      "sales_site": "live"
     },
     {
       "id": "11_Boho_Pampas",
@@ -463,7 +472,8 @@
           "G124 (listing images)"
         ],
         "uploaded_to_etsy": false
-      }
+      },
+      "sales_site": "live"
     },
     {
       "id": "12_Tropical_Destination",
@@ -488,7 +498,8 @@
           "G124 (listing images)"
         ],
         "uploaded_to_etsy": false
-      }
+      },
+      "sales_site": "live"
     },
     {
       "id": "13_Enchanted_Forest",
@@ -513,7 +524,8 @@
           "G124 (listing images)"
         ],
         "uploaded_to_etsy": false
-      }
+      },
+      "sales_site": "live"
     },
     {
       "id": "14_Ivory_Lace_Pearl",
@@ -538,7 +550,8 @@
           "G124 (listing images)"
         ],
         "uploaded_to_etsy": false
-      }
+      },
+      "sales_site": "live"
     },
     {
       "id": "15_Cherry_Blossom",
@@ -563,7 +576,8 @@
           "G124 (listing images)"
         ],
         "uploaded_to_etsy": false
-      }
+      },
+      "sales_site": "live"
     },
     {
       "id": "16_Sunflower_Rustic",
@@ -588,7 +602,8 @@
           "G124 (listing images)"
         ],
         "uploaded_to_etsy": false
-      }
+      },
+      "sales_site": "live"
     },
     {
       "id": "17_Emerald_Gold_Estate",
@@ -613,7 +628,8 @@
           "G124 (listing images)"
         ],
         "uploaded_to_etsy": false
-      }
+      },
+      "sales_site": "live"
     },
     {
       "id": "18_Wildflower_Vellum",
@@ -638,7 +654,8 @@
           "G124 (listing images)"
         ],
         "uploaded_to_etsy": false
-      }
+      },
+      "sales_site": "live"
     },
     {
       "id": "19_Midnight_Garden",
@@ -663,7 +680,8 @@
           "G124 (listing images)"
         ],
         "uploaded_to_etsy": false
-      }
+      },
+      "sales_site": "live"
     },
     {
       "id": "20_Coastal_Seaside",
@@ -688,7 +706,8 @@
           "G124 (listing images)"
         ],
         "uploaded_to_etsy": false
-      }
+      },
+      "sales_site": "live"
     },
     {
       "id": "21_Crimson_Rose_Atelier",
@@ -717,7 +736,7 @@
       "design_brief": "collections/22_Nocturne_Lake_Estate/DESIGN_BRIEF.md",
       "canva_designs": [],
       "theme": "nocturne-lake-estate",
-      "sales_site": "coming",
+      "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
         "uploaded_to_etsy": false,
@@ -734,7 +753,7 @@
       "design_brief": "collections/23_Velvet_Jewel_Box/DESIGN_BRIEF.md",
       "canva_designs": [],
       "theme": "velvet-jewel-box",
-      "sales_site": "coming",
+      "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
         "uploaded_to_etsy": false,
@@ -751,7 +770,7 @@
       "design_brief": "collections/24_Grand_Theatre_Premiere/DESIGN_BRIEF.md",
       "canva_designs": [],
       "theme": "grand-theatre-premiere",
-      "sales_site": "coming",
+      "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
         "uploaded_to_etsy": false,
@@ -768,7 +787,7 @@
       "design_brief": "collections/25_Orient_Express_Voyage/DESIGN_BRIEF.md",
       "canva_designs": [],
       "theme": "orient-express-voyage",
-      "sales_site": "coming",
+      "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
         "uploaded_to_etsy": false,
@@ -785,7 +804,7 @@
       "design_brief": "collections/26_Kintsugi_Washi/DESIGN_BRIEF.md",
       "canva_designs": [],
       "theme": "kintsugi-washi",
-      "sales_site": "coming",
+      "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
         "uploaded_to_etsy": false,
@@ -802,7 +821,7 @@
       "design_brief": "collections/27_Riad_Lantern_Nights/DESIGN_BRIEF.md",
       "canva_designs": [],
       "theme": "riad-lantern-nights",
-      "sales_site": "coming",
+      "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
         "uploaded_to_etsy": false,
@@ -819,7 +838,7 @@
       "design_brief": "collections/28_Maison_Patisserie/DESIGN_BRIEF.md",
       "canva_designs": [],
       "theme": "maison-patisserie",
-      "sales_site": "coming",
+      "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
         "uploaded_to_etsy": false,
@@ -836,7 +855,7 @@
       "design_brief": "collections/29_Celestial_Observatory/DESIGN_BRIEF.md",
       "canva_designs": [],
       "theme": "celestial-observatory",
-      "sales_site": "coming",
+      "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
         "uploaded_to_etsy": false,
@@ -853,7 +872,7 @@
       "design_brief": "collections/30_Azulejo_Mosaic/DESIGN_BRIEF.md",
       "canva_designs": [],
       "theme": "azulejo-mosaic",
-      "sales_site": "coming",
+      "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
         "uploaded_to_etsy": false,
@@ -870,7 +889,7 @@
       "design_brief": "collections/31_Sky_Lantern_Festival/DESIGN_BRIEF.md",
       "canva_designs": [],
       "theme": "sky-lantern-festival",
-      "sales_site": "coming",
+      "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
         "uploaded_to_etsy": false,
@@ -887,11 +906,113 @@
       "design_brief": "collections/32_Music_Box_Ballerina/DESIGN_BRIEF.md",
       "canva_designs": [],
       "theme": "music-box-ballerina",
-      "sales_site": "coming",
+      "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
         "uploaded_to_etsy": false,
         "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+      }
+    },
+    {
+      "id": "33_Marigold_Mehndi",
+      "working_name": "Marigold & Mehndi",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 33,
+      "content_record": "collections/33_Marigold_Mehndi/content.demo.json",
+      "design_brief": "collections/33_Marigold_Mehndi/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "theme": "marigold-mehndi",
+      "sales_site": "coming",
+      "listing_package": {
+        "status": "draft",
+        "uploaded_to_etsy": false,
+        "notes": "3rd wave (docs/24, K23 envelope first page); listing_v3.md draft; START HERE + etsy_upload + listing images/video after GPT parts"
+      }
+    },
+    {
+      "id": "34_Red_Lacquer_Double_Happiness",
+      "working_name": "Red Lacquer & Double Happiness",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 34,
+      "content_record": "collections/34_Red_Lacquer_Double_Happiness/content.demo.json",
+      "design_brief": "collections/34_Red_Lacquer_Double_Happiness/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "theme": "red-lacquer-double-happiness",
+      "sales_site": "coming",
+      "listing_package": {
+        "status": "draft",
+        "uploaded_to_etsy": false,
+        "notes": "3rd wave (docs/24, K23 envelope first page); listing_v3.md draft; START HERE + etsy_upload + listing images/video after GPT parts"
+      }
+    },
+    {
+      "id": "35_Highland_Tartan_Thistle",
+      "working_name": "Highland Tartan & Thistle",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 35,
+      "content_record": "collections/35_Highland_Tartan_Thistle/content.demo.json",
+      "design_brief": "collections/35_Highland_Tartan_Thistle/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "theme": "highland-tartan-thistle",
+      "sales_site": "coming",
+      "listing_package": {
+        "status": "draft",
+        "uploaded_to_etsy": false,
+        "notes": "3rd wave (docs/24, K23 envelope first page); listing_v3.md draft; START HERE + etsy_upload + listing images/video after GPT parts"
+      }
+    },
+    {
+      "id": "36_Victorian_Glasshouse",
+      "working_name": "Victorian Glasshouse",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 36,
+      "content_record": "collections/36_Victorian_Glasshouse/content.demo.json",
+      "design_brief": "collections/36_Victorian_Glasshouse/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "theme": "victorian-glasshouse",
+      "sales_site": "coming",
+      "listing_package": {
+        "status": "draft",
+        "uploaded_to_etsy": false,
+        "notes": "3rd wave (docs/24, K23 envelope first page); listing_v3.md draft; START HERE + etsy_upload + listing images/video after GPT parts"
+      }
+    },
+    {
+      "id": "37_Art_Nouveau_Lily",
+      "working_name": "Art Nouveau Lily",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 37,
+      "content_record": "collections/37_Art_Nouveau_Lily/content.demo.json",
+      "design_brief": "collections/37_Art_Nouveau_Lily/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "theme": "art-nouveau-lily",
+      "sales_site": "coming",
+      "listing_package": {
+        "status": "draft",
+        "uploaded_to_etsy": false,
+        "notes": "3rd wave (docs/24, K23 envelope first page); listing_v3.md draft; START HERE + etsy_upload + listing images/video after GPT parts"
+      }
+    },
+    {
+      "id": "38_Papel_Picado_Fiesta",
+      "working_name": "Papel Picado Fiesta",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 38,
+      "content_record": "collections/38_Papel_Picado_Fiesta/content.demo.json",
+      "design_brief": "collections/38_Papel_Picado_Fiesta/DESIGN_BRIEF.md",
+      "canva_designs": [],
+      "theme": "papel-picado-fiesta",
+      "sales_site": "coming",
+      "listing_package": {
+        "status": "draft",
+        "uploaded_to_etsy": false,
+        "notes": "3rd wave (docs/24, K23 envelope first page); listing_v3.md draft; START HERE + etsy_upload + listing images/video after GPT parts"
       }
     }
   ],
@@ -936,7 +1057,8 @@
       "production_url": "https://davetiye-platform-five.vercel.app",
       "git_integration": false,
       "deployed_commit": "477589f (2026-10-17; platform tree 387fcfbd77ae; G139 PDF downloads, G144 languages, G145 panel audit) — dpl_BdTLgKpin8Pfse8cEzzDdapYxaS3; last deploy recorded in docs/10 §2c. Later deploy commands were handed to the user's local session (e62dc79, then main 84e108e); none is confirmed run until docs/10 §2c gets its line",
-      "undeployed_branch": "main 84e108e (PR #24): K46 access from any device (G146), Etsy auto-check + SMTP (G147, off until env), G148–G159, 21 Crimson live, 22–32 coming, palettes 01–21 (coming); claude/zealous-fermi-hy1o40 adds G172 security fixes"
+      "undeployed_branch": "main 84e108e (PR #24): K46 access from any device (G146), Etsy auto-check + SMTP (G147, off until env), G148–G159, 21 Crimson live, 22–32 coming, palettes 01–21 (coming); claude/zealous-fermi-hy1o40 adds G172 security fixes",
+      "domain": "bkestudıo.com (IDNA xn--bkestudo-zkb.com) — bought and connected by the user, served by Vercel (main d0d2e7dc, 2026-10-18)"
     },
     "data": {
       "adapter": "blob",
@@ -1074,75 +1196,117 @@
       "nocturne-lake-estate": {
         "design": "22",
         "status": "editable_draft",
-        "sales_site": "coming",
+        "sales_site": "preview",
         "deployed": false,
         "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
       },
       "velvet-jewel-box": {
         "design": "23",
         "status": "editable_draft",
-        "sales_site": "coming",
+        "sales_site": "preview",
         "deployed": false,
         "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
       },
       "grand-theatre-premiere": {
         "design": "24",
         "status": "editable_draft",
-        "sales_site": "coming",
+        "sales_site": "preview",
         "deployed": false,
         "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
       },
       "orient-express-voyage": {
         "design": "25",
         "status": "editable_draft",
-        "sales_site": "coming",
+        "sales_site": "preview",
         "deployed": false,
         "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
       },
       "kintsugi-washi": {
         "design": "26",
         "status": "editable_draft",
-        "sales_site": "coming",
+        "sales_site": "preview",
         "deployed": false,
         "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
       },
       "riad-lantern-nights": {
         "design": "27",
         "status": "editable_draft",
-        "sales_site": "coming",
+        "sales_site": "preview",
         "deployed": false,
         "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
       },
       "maison-patisserie": {
         "design": "28",
         "status": "editable_draft",
-        "sales_site": "coming",
+        "sales_site": "preview",
         "deployed": false,
         "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
       },
       "celestial-observatory": {
         "design": "29",
         "status": "editable_draft",
-        "sales_site": "coming",
+        "sales_site": "preview",
         "deployed": false,
         "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
       },
       "azulejo-mosaic": {
         "design": "30",
         "status": "editable_draft",
-        "sales_site": "coming",
+        "sales_site": "preview",
         "deployed": false,
         "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
       },
       "sky-lantern-festival": {
         "design": "31",
         "status": "editable_draft",
-        "sales_site": "coming",
+        "sales_site": "preview",
         "deployed": false,
         "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
       },
       "music-box-ballerina": {
         "design": "32",
+        "status": "editable_draft",
+        "sales_site": "preview",
+        "deployed": false,
+        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+      },
+      "marigold-mehndi": {
+        "design": "33",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "deployed": false,
+        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+      },
+      "red-lacquer-double-happiness": {
+        "design": "34",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "deployed": false,
+        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+      },
+      "highland-tartan-thistle": {
+        "design": "35",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "deployed": false,
+        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+      },
+      "victorian-glasshouse": {
+        "design": "36",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "deployed": false,
+        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+      },
+      "art-nouveau-lily": {
+        "design": "37",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "deployed": false,
+        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+      },
+      "papel-picado-fiesta": {
+        "design": "38",
         "status": "editable_draft",
         "sales_site": "coming",
         "deployed": false,
@@ -1166,8 +1330,8 @@
       "email: SMTP ready in code (G147) — needs SMTP_* / MAIL_FROM / ADMIN_NOTIFY_EMAIL env (e.g. a Gmail app password)",
       "real-device manual test (docs/20_ELLE_TEST_PLANI.md)",
       "12+ char ADMIN_PASSWORD before launch",
-      "hosting/domain decision (Vercel Hobby is non-commercial)",
-      "GPT images for 22–32 and retouch parts (docs/26: 270 awaited)"
+      "GPT images for 22–32 and retouch parts (docs/26: 270 awaited)",
+      "hosting plan: Vercel Hobby is non-commercial (decision open)"
     ],
     "static_preview_artifact": "https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (design 03 static, private)",
     "admin": {

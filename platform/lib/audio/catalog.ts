@@ -50,7 +50,12 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   'velvet-jewel-box': { music: 'music-box', opening: [[0, 'ribbon'], [650, 'clasp'], [1900, 'slide'], [3100, 'chime']] },
   // Maison Pâtisserie: bow unties (closure) · lid lifts (lid) · tissue parts (tissue) · card lifts (rise) · forward
   // Music Box Ballerina: key winds (closure, tug) · lid swings up (lid) · the comb's first notes as she turns (turn) · card rises (rise) · forward
+  // Red Lacquer & Double Happiness: the cord unwinds (untie) · the flap lifts (flap) · the card comes up (rise) · the red
+  // window (outer) · the gold window (inner) · forward
+  'red-lacquer-double-happiness': { music: 'first-light', opening: [[0, 'ribbon'], [900, 'paper'], [1500, 'slide'], [2150, 'paper'], [2550, 'paper'], [3150, 'chime']] },
   'music-box-ballerina': { music: 'music-box', opening: [[0, 'clasp'], [450, 'clasp'], [900, 'page'], [2300, 'chime'], [2900, 'slide'], [3900, 'chime']] },
+  // Papel Picado Fiesta: the band works loose (band) · the flags fly up (flags) · the flap swings open (flap) · the lights come on (lights) · card rises (rise) · forward
+  'papel-picado-fiesta': { music: 'garden-waltz', opening: [[250, 'ribbon'], [700, 'whoosh'], [1500, 'paper'], [1900, 'chime'], [2500, 'slide'], [3100, 'chime']] },
   'maison-patisserie': { music: 'garden-waltz', opening: [[180, 'ribbon'], [1100, 'paper'], [1850, 'paper'], [2500, 'slide'], [3200, 'chime']] },
   // Orient Express Voyage: strap buckle (closure) · cover swings open (open) · ticket slides out (rise) · forward
   'orient-express-voyage': { music: 'evening-strings', opening: [[0, 'clasp'], [600, 'page'], [1500, 'slide'], [2600, 'chime']] },
@@ -62,8 +67,16 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   'riad-lantern-nights': { music: 'evening-strings', opening: [[0, 'tap'], [300, 'whoosh'], [1900, 'slide'], [3100, 'chime']] },
   // Celestial Observatory: dome latch (head) · shutter halves part (shutters) · constellation chime · card rises (rise) · forward
   'celestial-observatory': { music: 'evening-strings', opening: [[0, 'clasp'], [450, 'whoosh'], [1700, 'chime'], [3000, 'slide'], [3600, 'chime']] },
+  // Marigold & Mehndi: the silk tassel swings (tassel) · the paisley sleeve slides off (sleeve) · the flap turns up (flap) · card rises (rise) · forward
+  'marigold-mehndi': { music: 'evening-strings', opening: [[0, 'ribbon'], [300, 'slide'], [1250, 'paper'], [2500, 'slide'], [3150, 'chime']] },
+  // Highland Tartan & Thistle: buckle tips open (buckle) · strap slides out (strap) · flap swings up (flap) · card rises (rise) · forward
+  'highland-tartan-thistle': { music: 'evening-strings', opening: [[150, 'clasp'], [600, 'ribbon'], [1300, 'paper'], [2500, 'slide'], [3150, 'chime']] },
+  // Art Nouveau Lily: a touch (head) · light through the stained glass (glow) · side petals (sides) · centre petal (centre) · card rises (rise) · forward
+  'art-nouveau-lily': { music: 'garden-waltz', opening: [[0, 'tap'], [300, 'chime'], [1100, 'paper'], [1500, 'paper'], [2400, 'slide'], [3050, 'chime']] },
   // Sky Lantern Festival: a touch kindles the lantern (kindle) · the hands let go (hands) · it lifts off (rise) · the card glows in (card) · forward
   'sky-lantern-festival': { music: 'first-light', opening: [[0, 'tap'], [700, 'paper'], [900, 'whoosh'], [2000, 'slide'], [3200, 'chime']] },
+  // Victorian Glasshouse: the copper label swings (tag) · the twine comes apart (twine) · the flap folds back (flap) · the card rises (rise) · the mist is wiped (wipe) · forward
+  'victorian-glasshouse': { music: 'garden-waltz', opening: [[0, 'tap'], [300, 'ribbon'], [900, 'paper'], [1700, 'slide'], [2600, 'whoosh'], [3600, 'chime']] },
   // Grand Theatre Premiere: the curtain draws a breath (tug) · the left panel parts (partL) · the card is lit (rise) · forward
   'grand-theatre-premiere': { music: 'evening-strings', opening: [[0, 'tap'], [400, 'whoosh'], [2000, 'slide'], [2900, 'chime']] },
   // 01 bow · lift · rise · forward

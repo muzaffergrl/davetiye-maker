@@ -18,6 +18,7 @@
   --ease: cubic-bezier(.22, .61, .36, 1);
   --ease-soft: cubic-bezier(.33, 0, .2, 1);
   --nav-h: 56px;
+  
 }
 
 @view-transition { navigation: auto; }
@@ -36,7 +37,7 @@ body::before {
   content: ""; position: absolute; left: 0; right: 0; top: 0; height: min(100%, max(100svh, 640px)); z-index: 0; pointer-events: none;
   background:
     radial-gradient(70% 42% at 88% 4%, #fffbec9e, #fffbec00 70%),
-    radial-gradient(55% 34% at 6% 62%, #fff9e657, #fff9e600 72%);
+    radial-gradient(55% 34% at 6% 62%, rgb(var(--c-fff9e6)/.341), rgb(var(--c-fff9e6)/0) 72%);
 }
 img { max-width: 100%; }
 p, h1, h2, h3, figure { margin: 0; }
@@ -84,7 +85,7 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .site-nav {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; view-transition-name: site-nav;
   padding: 18px 8px env(safe-area-inset-bottom);
-  background: linear-gradient(#ede4d000, #ede4d066 8px, #ede4d0cc 14px, #ede4d0f7 19px, #ede4d0 24px);
+  background: linear-gradient(rgb(var(--c-ede4d0)/0), rgb(var(--c-ede4d0)/.4) 8px, rgb(var(--c-ede4d0)/.8) 14px, rgb(var(--c-ede4d0)/.969) 19px, rgb(var(--c-ede4d0)) 24px);
   text-shadow: 0 0 10px #f6f0e0f2, 0 0 3px #f6f0e0e6;
   pointer-events: none; /* G064 qa: taps pass the soft top, the row keeps them */
 }
@@ -124,7 +125,7 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .js [data-a="fan"] { transform: translate3d(var(--fx, 0), var(--fy, 34px), 0) rotate(var(--fr, 0deg)) scale(.95); --dur: 1500ms; }
 
 /* -- photo slots (docs/11 §5.6, §9) */
-.photo-slot { position: absolute; overflow: hidden; background: #e7dfc9; }
+.photo-slot { position: absolute; overflow: hidden; background: rgb(var(--c-e7dfc9)); }
 .photo-slot > img[data-photo] { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; display: block; }
 .mask-card { -webkit-mask: url("img/mask_card.png") center / 100% 100% no-repeat; mask: url("img/mask_card.png") center / 100% 100% no-repeat; }
 .mask-portrait { -webkit-mask: url("img/mask_portrait.png") center / 100% 100% no-repeat; mask: url("img/mask_portrait.png") center / 100% 100% no-repeat; }
@@ -575,7 +576,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line { display: none; }
 .toast {
   position: fixed; left: 50%; bottom: calc(var(--nav-h) + 18px + env(safe-area-inset-bottom)); z-index: 60; translate: -50% 12px;
-  max-width: min(92vw, 420px); padding: 12px 18px; border-radius: 12px; background: #2f3a2bf0; color: var(--ivory);
+  max-width: min(92vw, 420px); padding: 12px 18px; border-radius: 12px; background: rgb(var(--c-2f3a2b)/.941); color: var(--ivory);
   font-size: 16px; opacity: 0; pointer-events: none; transition: opacity .3s, translate .3s;
 }
 .toast.show { opacity: 1; translate: -50% 0; }

@@ -34,7 +34,7 @@ body {
 body::before {
   content: ""; position: absolute; left: 0; right: 0; top: 0; height: min(100%, max(100svh, 640px)); z-index: 0; pointer-events: none;
   background: radial-gradient(80% 50% at 12% 0%, #fff4e29e, #fff4e200 70%),
-              radial-gradient(60% 40% at 92% 70%, rgb(var(--c-ffeed6)/.28), rgb(var(--c-ffeed6)/0) 72%);
+              radial-gradient(60% 40% at 92% 70%, #ffeed647, #ffeed600 72%);
 }
 img { max-width: 100%; }
 p, h1, h2, h3, figure { margin: 0; }
@@ -80,8 +80,8 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .site-nav {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; view-transition-name: site-nav;
   padding: 16px 8px env(safe-area-inset-bottom); pointer-events: none;
-  background: linear-gradient(rgb(var(--c-eccba8)/0), rgb(var(--c-eccba8)/.4) 7px, rgb(var(--c-eccba8)/.8) 13px, rgb(var(--c-eccba8)/.969) 18px, rgb(var(--c-eccba8)) 22px);
-  text-shadow: 0 0 10px rgb(var(--c-f6e2cc)/.95), 0 0 3px rgb(var(--c-f6e2cc)/.9);
+  background: linear-gradient(#eccba800, #eccba866 7px, #eccba8cc 13px, #eccba8f7 18px, #eccba8 22px);
+  text-shadow: 0 0 10px #f6e2ccf2, 0 0 3px #f6e2cce6;
 }
 .site-nav::before { content: ""; position: absolute; inset: 16px 0 0; z-index: -1; pointer-events: auto; }
 .site-nav ul { pointer-events: auto; display: flex; justify-content: center; align-items: center; width: fit-content; max-width: 100%;
@@ -123,7 +123,7 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .js [data-a="drift-br"] { transform: translate3d(24px, 24px, 0) rotate(4deg); --dur: 2200ms; }
 
 /* -- photo slots (docs/11 §5.6, §9) */
-.photo-slot { position: absolute; overflow: hidden; background: rgb(var(--c-eedac4)); }
+.photo-slot { position: absolute; overflow: hidden; background: #eedac4; }
 .photo-slot > img[data-photo] { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; display: block; }
 .mask-card { -webkit-mask: url("img/mask_card.png") center / 100% 100% no-repeat; mask: url("img/mask_card.png") center / 100% 100% no-repeat; }
 .mask-portrait { -webkit-mask: url("img/mask_portrait.png") center / 100% 100% no-repeat; mask: url("img/mask_portrait.png") center / 100% 100% no-repeat; }
@@ -199,7 +199,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .env-head .kicker { width: fit-content; margin-inline: auto; font-size: 13.5px; letter-spacing: .3em; }
 .names {
   margin-top: 2px; font-size: calc(clamp(46px, 15vw, 84px) * var(--names-scale, 1)); line-height: 1.1;
-  text-wrap: balance; overflow-wrap: break-word; text-shadow: 0 0 16px rgb(var(--c-f8e6d0)/.9);
+  text-wrap: balance; overflow-wrap: break-word; text-shadow: 0 0 16px #f8e6d0e6;
 }
 /* stage (manifest stage.box, ratio .58031): the part above the closed pocket (.35129 of the stage width) is where the flap
    folds up and the card rises; it tucks under the names */

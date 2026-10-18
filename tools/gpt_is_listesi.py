@@ -35,7 +35,7 @@ UZANTILAR = (".png", ".jpg", ".jpeg", ".webp")
 ATLA_KLASOR = {"assets", "gpt", "parts", "variants"}
 
 GRUPLAR = {
-    "a": "A · Tasarım 22–32 (yeni tasarımlar)",
+    "a": "A · Tasarım 22–38 (yeni tasarımlar)",
     "b": "B · Tasarım 01–21 rötuş / baskı parçaları",
     "c": "C · Palet varyantı görselleri",
     "d": "D · Diğer (marka)",
@@ -51,7 +51,7 @@ AYNI = re.compile(r"^\s*(?:the\s+)?same\s+(?:prompt\s+)?as\s+(above|the previous
 AYNI_METIN = re.compile(r"same (?:prompt )?as above|yukarıdakiyle aynı|aynı prompt", re.I)
 ETIKET = re.compile(r"^([A-Za-z0-9_]{1,40}):\s+\S")
 TAM_YOL = re.compile(r"((?:collections|brand)/[^\s`'\"()]+\.(?:png|jpg|jpeg|webp))")
-AD = re.compile(r"(?<![\w/.-])([A-Za-z0-9_][A-Za-z0-9_-]*\.(?:png|jpg|jpeg|webp))\b")
+AD = re.compile(r"(?<![\w/.–-])([A-Za-z0-9_][A-Za-z0-9_-]*\.(?:png|jpg|jpeg|webp))\b")
 # prompt'ta şeffaflık için açık bir yedek yol yazıyorsa (bugün hiçbir dosyada yok) maddede gösterilir
 OLCU_METIN = re.compile(r"(\d{3,5})\s*[×x]\s*(\d{3,5})\s*px")
 YEDEK = re.compile(r"[^.\n]*(?:fallback|if (?:a )?transparen\w* (?:background )?is not|yedek zemin)[^.\n]*\.?", re.I)
@@ -438,7 +438,7 @@ def _referanslar(m: dict, istenen: dict, no_by_hedef: dict) -> list[dict]:
 
 # ---------------------------------------------------------------- çıktılar
 
-NEDEN = ("22–32 tasarımları ancak kendi website parçaları (PAKET 5) gelince geçici yer tutuculardan çıkıp live olabilir; "
+NEDEN = ("22–38 tasarımları ancak kendi website parçaları (PAKET 5) gelince geçici yer tutuculardan çıkıp live olabilir; "
          "örnek fotoğraflar (PAKET 2) theme-check ve demo için, ilan sahneleri (PAKET 3) ve baskı zeminleri (PAKET 6) satış "
          "paketi için gerekir. 01–21'in website parçaları tam; bu gruptaki 2× baskı parçaları yalnız basılı davetiyeyi "
          "~230 ppi'den 300 ppi'ye çıkarır (bugünkü parçalarla da çalışıyor). Palet varyantları en sonda: o paletler "

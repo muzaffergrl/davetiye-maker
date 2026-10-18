@@ -11,7 +11,7 @@ import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import * as cheerio from 'cheerio';
 import { MARKETING } from '../lib/marketing/config.ts';
-import { liveDesigns } from '../lib/marketing/designs.ts';
+import { catalogDesigns, liveDesigns } from '../lib/marketing/designs.ts';
 import { loadGuides } from '../lib/marketing/guides.ts';
 import { href as langHref, LANGS, PREFIXED_LANGS } from '../lib/marketing/i18n.ts';
 import { corePages } from '../lib/marketing/site.ts';
@@ -45,7 +45,7 @@ const skip = !existsSync(BUILD_ID) || !existsSync(path.join(APP, 'index.html'))
 /** path -> built HTML file. G144: the other languages are built under i18n/<lang>/ (next.config.ts rewrites /<lang>/…). */
 function pages(): Map<string, string> {
   const m = new Map<string, string>();
-  const en = [...corePages().map((p) => p.path), ...liveDesigns().map((d) => `/designs/${d.id}`), ...loadGuides().map((g) => g.path)];
+  const en = [...corePages().map((p) => p.path), ...catalogDesigns().map((d) => `/designs/${d.id}`), ...loadGuides().map((g) => g.path)];
   for (const p of en) m.set(p, path.join(APP, p === '/' ? 'index.html' : `${p.slice(1)}.html`));
   for (const l of PREFIXED_LANGS) for (const p of en) m.set(langHref(l, p), path.join(APP, 'i18n', `${langHref(l, p).slice(1)}.html`));
   return m;
@@ -55,13 +55,15 @@ function pages(): Map<string, string> {
 const langOfPath = (p: string) => PREFIXED_LANGS.find((l) => p === `/${l}` || p.startsWith(`/${l}/`)) ?? 'en';
 
 const live = new Set(liveDesigns().map((d) => d.id));
+/** Live and 'preview' designs (main f1228e88): both have a catalogue page and a demo; only live ones open /start. */
+const catalogued = new Set(catalogDesigns().map((d) => d.id));
 
 /** Internal link targets that are not marketing pages but must exist. */
 function otherTargetOk(href: string): boolean {
   const u = new URL(href, 'http://x');
   if (u.pathname === '/start') return !u.searchParams.has('theme') || live.has(u.searchParams.get('theme')!);
   const demo = /^\/start\/demo\/([a-z0-9-]+)$/.exec(u.pathname);
-  if (demo) return live.has(demo[1]);
+  if (demo) return catalogued.has(demo[1]);
   if (u.pathname.startsWith('/themes/')) return existsSync(path.join(PLATFORM_ROOT, decodeURIComponent(u.pathname)));
   // G066: the brand kit (logos, icons, manifest) is served from public/brand/.
   if (u.pathname.startsWith('/marketing/') || u.pathname.startsWith('/brand/')) {
@@ -132,7 +134,12 @@ test('built marketing pages: head, headings, JSON-LD, links, images, orphans', {
     for (const pr of validateJsonLd(ld)) say(pr);
     for (const t of ['Organization', 'WebSite']) if (!types.has(t)) say(`no ${t}`);
     if (base !== '/' && !types.has('BreadcrumbList')) say('no BreadcrumbList');
-    if (base.startsWith('/designs/') && !(types.has('Product') && types.has('VideoObject'))) say('design page needs Product + VideoObject');
+    if (base.startsWith('/designs/')) {
+      // a 'preview' design is not for sale yet and has no opening clip: no Product, no VideoObject (main f1228e88)
+      if (live.has(base.slice('/designs/'.length))) {
+        if (!(types.has('Product') && types.has('VideoObject'))) say('design page needs Product + VideoObject');
+      } else if (types.has('Product')) say('preview design page offers a Product');
+    }
     if (base.startsWith('/guides/') && !types.has('Article')) say('guide needs Article');
     if (types.has('AggregateRating') || types.has('Review')) say('ratings/reviews in JSON-LD');
     const visible = $('main').text().replace(/\s+/g, ' ').toLowerCase();

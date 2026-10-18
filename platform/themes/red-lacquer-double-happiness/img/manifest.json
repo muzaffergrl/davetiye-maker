@@ -1,0 +1,244 @@
+{
+ "sources": {
+  "red_paper": "collections/04_Vintage_Airmail/assets/gpt/parts/bg_tile.png",
+  "lacquer": "collections/07_Burgundy_Velvet/assets/gpt/parts/bg_tile.png",
+  "cream_paper": "collections/01_Olive_Ivory/assets/gpt/parts/bg_tile.png",
+  "gold_leaf": "collections/17_Emerald_Gold_Estate/assets/gpt/parts/closure.png (plain metal field (0.42, 0.32, 0.58, 0.48))"
+ },
+ "lacquer": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "lacquer-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 3626
+   }
+  ]
+ },
+ "red": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "red-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 15608
+   },
+   {
+    "file": "red-1024.webp",
+    "w": 1024,
+    "h": 1024,
+    "bytes": 57422
+   }
+  ]
+ },
+ "cream": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "cream-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 4790
+   },
+   {
+    "file": "cream-1024.webp",
+    "w": 1024,
+    "h": 1024,
+    "bytes": 39200
+   }
+  ]
+ },
+ "gold": {
+  "src_size": [
+   480,
+   480
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "gold-480.webp",
+    "w": 480,
+    "h": 480,
+    "bytes": 4964
+   }
+  ]
+ },
+ "ph_round": {
+  "src_size": [
+   640,
+   640
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "ph_round-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 1384
+   }
+  ]
+ },
+ "ph_wide": {
+  "src_size": [
+   640,
+   360
+  ],
+  "ratio": 1.77778,
+  "files": [
+   {
+    "file": "ph_wide-640.webp",
+    "w": 640,
+    "h": 360,
+    "bytes": 848
+   }
+  ]
+ },
+ "placeholders": {
+  "round": "ph_round-640.webp",
+  "venue": "ph_wide-640.webp"
+ },
+ "photo_slots": {
+  "hero_portrait": {
+   "aspect": "1/1"
+  },
+  "story_1": {
+   "aspect": "1/1"
+  },
+  "story_2": {
+   "aspect": "1/1"
+  },
+  "story_3": {
+   "aspect": "1/1"
+  },
+  "venue": {
+   "aspect": "16/9"
+  }
+ },
+ "stage": {
+  "aspect": 0.66,
+  "pocket_top_pct": 30,
+  "flap_pct": [
+   0,
+   0,
+   100,
+   52
+  ],
+  "card_pct": [
+   6,
+   8,
+   88,
+   84
+  ],
+  "buttons_centre_pct": [
+   [
+    50,
+    47
+   ],
+   [
+    50,
+    62
+   ]
+  ],
+  "button_w_pct": 14,
+  "string_pct": [
+   36,
+   41,
+   28,
+   27
+  ],
+  "xi_pct": [
+   33,
+   70,
+   34,
+   22.5
+  ],
+  "gate_window_pct": [
+   0,
+   0,
+   100,
+   100
+  ],
+  "_note": "% of the closed envelope (left, top, width, height); GPT_PROMPTS.md asks for these"
+ },
+ "og": {
+  "file": "og-1200x630.jpg",
+  "source": "montage: closed envelope (red paper + gold) on the lacquer ground",
+  "bytes": 78513
+ },
+ "favicon": {
+  "src_box": [
+   28,
+   34,
+   296,
+   432
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.04,
+  "file": "favicon.png",
+  "bytes": 22587
+ },
+ "parts": {
+  "used": [],
+  "waiting_for_gpt": [
+   "envelope_back",
+   "envelope_pocket",
+   "envelope_flap",
+   "flap_inside",
+   "button",
+   "string",
+   "xi_gold",
+   "veil_outer",
+   "veil_inner",
+   "card_small",
+   "cloud_1",
+   "cloud_2",
+   "cloud_3",
+   "moon_gate",
+   "peony_band",
+   "jianzhi_far",
+   "jianzhi_near",
+   "tassel",
+   "web_hero",
+   "lacquer",
+   "red_paper",
+   "cream_paper",
+   "gold_leaf"
+  ]
+ },
+ "_note": "G183 interim build: red paper, lacquer, cream paper and gold leaf cut and toned from other designs' plain GPT pictures; the design's own PAKET 5 parts are taken as they arrive (GPT_PROMPTS.md, manifest parts). Nothing drawn.",
+ "parts_css_rules": 0,
+ "checks": {
+  "green": {}
+ },
+ "theme_check": {
+  "particles": ".accent-layer",
+  "first_screen": {
+   "landscape": false,
+   "names_min_px": 32
+  },
+  "backdrop": {
+   "edge_max": 2.2,
+   "dark_max": 0.05,
+   "dark_below": 0,
+   "light_above": 140
+  }
+ },
+ "bytes_total": 353967
+}

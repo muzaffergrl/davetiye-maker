@@ -222,46 +222,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=coastal-seaside"
+        "start_link": "/start?theme=coastal-seaside",
+        "image": "collections/20_Coastal_Seaside/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": true
       },
       {
         "name": "Nautical Navy & Sand",
         "variant": "navy-sand",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=coastal-seaside&variant=navy-sand"
+        "start_link": "/start?theme=coastal-seaside&variant=navy-sand",
+        "image": "collections/20_Coastal_Seaside/package/listing/images_editorial/palette_navy-sand.jpg",
+        "image_exists": true
       },
       {
         "name": "Seafoam & Sage",
         "variant": "seafoam-sage",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=coastal-seaside&variant=seafoam-sage"
+        "start_link": "/start?theme=coastal-seaside&variant=seafoam-sage",
+        "image": "collections/20_Coastal_Seaside/package/listing/images_editorial/palette_seafoam-sage.jpg",
+        "image_exists": true
       },
       {
         "name": "Deep Teal & Coral",
         "variant": "teal-coral",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=coastal-seaside&variant=teal-coral"
+        "start_link": "/start?theme=coastal-seaside&variant=teal-coral",
+        "image": "collections/20_Coastal_Seaside/package/listing/images_editorial/palette_teal-coral.jpg",
+        "image_exists": true
       },
       {
         "name": "Dusty Blue & Blush",
         "variant": "dusty-blue-blush",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=coastal-seaside&variant=dusty-blue-blush"
+        "start_link": "/start?theme=coastal-seaside&variant=dusty-blue-blush",
+        "image": "collections/20_Coastal_Seaside/package/listing/images_editorial/palette_dusty-blue-blush.jpg",
+        "image_exists": true
       },
       {
         "name": "Slate & Pearl",
         "variant": "slate-pearl",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=coastal-seaside&variant=slate-pearl"
+        "start_link": "/start?theme=coastal-seaside&variant=slate-pearl",
+        "image": "collections/20_Coastal_Seaside/package/listing/images_editorial/palette_slate-pearl.jpg",
+        "image_exists": true
       }
     ],
     "offered": [
       "Original (Coastal Seaside)"
+    ],
+    "images": [
+      {
+        "file": "collections/20_Coastal_Seaside/package/listing/images_editorial/10_palettes.jpg",
+        "exists": true,
+        "option": null,
+        "upload": false,
+        "alt": "Coastal Seaside in 6 color palettes: the opening page of each, side by side",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/20_Coastal_Seaside/package/listing/images_editorial/palette_original.jpg",
+        "exists": true,
+        "option": "Original (Coastal Seaside)",
+        "upload": false,
+        "alt": "Coastal Seaside in its original palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/20_Coastal_Seaside/package/listing/images_editorial/palette_navy-sand.jpg",
+        "exists": true,
+        "option": "Nautical Navy & Sand",
+        "upload": false,
+        "alt": "Coastal Seaside in the Nautical Navy & Sand palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/20_Coastal_Seaside/package/listing/images_editorial/palette_seafoam-sage.jpg",
+        "exists": true,
+        "option": "Seafoam & Sage",
+        "upload": false,
+        "alt": "Coastal Seaside in the Seafoam & Sage palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/20_Coastal_Seaside/package/listing/images_editorial/palette_teal-coral.jpg",
+        "exists": true,
+        "option": "Deep Teal & Coral",
+        "upload": false,
+        "alt": "Coastal Seaside in the Deep Teal & Coral palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/20_Coastal_Seaside/package/listing/images_editorial/palette_dusty-blue-blush.jpg",
+        "exists": true,
+        "option": "Dusty Blue & Blush",
+        "upload": false,
+        "alt": "Coastal Seaside in the Dusty Blue & Blush palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/20_Coastal_Seaside/package/listing/images_editorial/palette_slate-pearl.jpg",
+        "exists": true,
+        "option": "Slate & Pearl",
+        "upload": false,
+        "alt": "Coastal Seaside in the Slate & Pearl palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

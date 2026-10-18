@@ -20,6 +20,7 @@ import type { PanelCopyEntry } from '../../lib/theme/copy.ts';
 import { Button, cx, Disclosure, EmptyState, RightsMeter, Segmented } from './ui.tsx';
 import styles from './panel.module.css';
 import { t, tn, uiLang } from '../../lib/i18n/client.ts';
+import { zoneCity } from './zone.ts';
 
 const nullIfEmpty = (v: string): string | null => (v.trim() ? v : null);
 
@@ -323,10 +324,10 @@ function zoneOption(zone: string) {
   return { value: zone, label, group };
 }
 
-export const zoneCity = (zone: string | undefined) => (zone ? (zone.split('/').pop() ?? zone).replace(/_/g, ' ') : '');
+export { zoneCity };
 
 export function DateFields({ theme, setup = false }: { theme: PanelTheme; setup?: boolean }) {
-  const { content, edit, locked, rights, isSample, issuesAt, jump } = usePanelContext();
+  const { content, edit, locked, rights, isSample, issuesAt, jump, settled = true } = usePanelContext();
   const zones = useTimeZones(content.timezone);
   const deviceZone = useDeviceZone();
   const [zoneOpen, setZoneOpen] = useState(false);
@@ -357,7 +358,13 @@ export function DateFields({ theme, setup = false }: { theme: PanelTheme; setup?
   const time = content.ceremony_time || '16:00';
   // One sentence for translators; the city sits where {city} is.
   const [zoneBefore, zoneAfter = ''] = t('We’ll use {city} time, from your phone.').split('{city}');
-  const moreNeedsAttention = isSample('timezone') || issuesAt('timezone').length > 0 || issuesAt('locale').length > 0;
+  const needsAttention = isSample('timezone') || issuesAt('timezone').length > 0 || issuesAt('locale').length > 0;
+  // G181: a deep link can come server-rendered (?view=), before this phone's time zone is read: "More options" then starts
+  // folded and opens once the panel has settled, if the zone really still is the sample (as when the page opens in the browser).
+  const [mountedEarly] = useState(!settled);
+  const lateOpen = useRef<'open' | 'no' | null>(null);
+  if (mountedEarly && settled && lateOpen.current === null) lateOpen.current = needsAttention ? 'open' : 'no';
+  const moreNeedsAttention = settled && !mountedEarly && needsAttention;
   const zoneSelect = (
     <>
       <SelectField
@@ -429,7 +436,7 @@ export function DateFields({ theme, setup = false }: { theme: PanelTheme; setup?
           title={t('More options')}
           status={`${zoneCity(content.timezone) || t('Time zone')} · ${locale === 'en-US' ? t('Month first') : t('Day first')}`}
           defaultOpen={moreNeedsAttention}
-          openRequest={jump && (jump.path === 'timezone' || jump.path === 'locale') ? jump : null}
+          openRequest={jump && (jump.path === 'timezone' || jump.path === 'locale') ? jump : lateOpen.current === 'open' ? lateOpen.current : null}
         >
           {zoneSelect}
           <Segmented<DateStyle>

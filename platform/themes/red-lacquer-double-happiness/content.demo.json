@@ -1,0 +1,122 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Mei",
+      "full_name": "Mei Lin Zhou"
+    },
+    {
+      "display_name": "Julian",
+      "full_name": "Julian Thomas Reyes"
+    }
+  ],
+  "name_display": "Mei & Julian",
+  "initials": "M&J",
+  "host_line": "Together with their families",
+  "date": "2027-09-25",
+  "ceremony_time": "16:00",
+  "timezone": "America/Vancouver",
+  "venue": {
+    "name": "The Peony Court Garden House",
+    "city": "Vancouver",
+    "region": "British Columbia",
+    "country": "Canada",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:00",
+      "location": "The moon gate garden"
+    },
+    {
+      "label": "Cocktail hour",
+      "time": "17:00",
+      "location": "The peony courtyard"
+    },
+    {
+      "label": "Wedding dinner",
+      "time": "18:30",
+      "location": "The lacquer hall"
+    },
+    {
+      "label": "Late-night snacks",
+      "time": "22:30",
+      "location": "The garden pavilion"
+    }
+  ],
+  "dress_code": "Formal attire",
+  "rsvp": {
+    "deadline": "2027-08-14",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Fish",
+          "Chicken"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "A rainy lantern festival, a walk through the moon gate and a question among the peonies led us to",
+    "items": [
+      {
+        "caption": "The lantern festival"
+      },
+      {
+        "caption": "Through the moon gate"
+      },
+      {
+        "caption": "Among the peonies"
+      }
+    ]
+  },
+  "audio": {
+    "music": "first-light",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony."
+    },
+    {
+      "q": "Can you accommodate dietary requirements?",
+      "a": "Please tell us about your requirements in your reply."
+    }
+  ]
+}

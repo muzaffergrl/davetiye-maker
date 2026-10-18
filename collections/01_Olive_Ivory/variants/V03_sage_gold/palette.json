@@ -19,6 +19,7 @@
   "status": "coming",
   "families": {
     "envelope": "primary",
+    "olive_css": "primary",
     "leaf": "leaf",
     "gold": null,
     "seal_gold": null,

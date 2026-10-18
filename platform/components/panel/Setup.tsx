@@ -4,9 +4,9 @@
 // Back never loses anything (it is all autosaved), steps 1–2 can be skipped, and the step to resume is worked out
 // from the content (another phone finds it too).
 
-import { ArrowLeft, CalendarDays, CircleCheckBig, Hourglass, Sparkles, TriangleAlert } from 'lucide-react';
+import { ArrowLeft, CircleCheckBig, Hourglass, Sparkles } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { formatDate, formatDateLong } from '../../lib/content/format.ts';
+import { formatDateLong } from '../../lib/content/format.ts';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import type { ValidationIssue } from '../../lib/content/validate.ts';
 import {
@@ -20,7 +20,6 @@ import {
   type PanelState,
   type PanelTheme,
 } from '../../lib/panel/model.ts';
-import { ARCHIVE_AFTER_MONTHS, ARCHIVE_TEXT, changesRuleText, FREE_CHANGES_TEXT, IDENTITY_CHANGE_LIMIT, UNDO_TEXT, type RightsView } from '../../lib/panel/rights.ts';
 import { BrandLogo } from './Brand.tsx';
 import { SampleLine, useDeviceZone, usePanelContext } from './fields.tsx';
 import { heroSlot, SETUP_STEP_COUNT } from './pages.ts';
@@ -30,8 +29,10 @@ import { AfterPublish, afterPublishSteps, LiveShare } from './Published.tsx';
 import { DateFields, NamesFields, RIGHTS_HINT_BEFORE, RightsNote, SetupFullNames } from './sections.tsx';
 import { Banner, Button, cx, SaveIndicator } from './ui.tsx';
 import type { PanelController } from './usePanel.ts';
-import { UrlText } from './views.tsx';
+import { UrlText } from './UrlText.tsx';
 import styles from './panel.module.css';
+import { writeSetup } from './setup-state.ts';
+import { RulesBox, SampleDateGate } from './publish-gate.tsx';
 import { Confetti } from '../fx/Confetti.tsx';
 import { msg, t, tn } from '../../lib/i18n/client.ts';
 import { setPanelTitle } from './title.ts';
@@ -49,61 +50,6 @@ export const SETUP_STEPS = [
 ] as const;
 
 
-
-/** Steps (1-2) whose content is filled in and no longer the design's sample text. */
-export function doneSteps(content: ContentRecord, theme: Pick<PanelTheme, 'photos' | 'optionalBlocks' | 'sample'>, deviceZone: string | null = null): Set<number> {
-  const done = new Set<number>();
-  const samples = new Set(prePublishNotes(content, theme, { deviceZone }).sample.map((n) => n.path));
-  const names = (content.partners ?? []).length > 0 && content.partners.every((p) => (p.display_name ?? '').trim());
-  const date = Boolean(content.date && content.ceremony_time) && !samples.has('date') && !samples.has('ceremony_time');
-  if (names && date) done.add(1);
-  if (!theme.photos.length || theme.photos.some((s) => photoAt(content, s.source))) done.add(2);
-  return done;
-}
-
-/** The first step not done yet (3 = publish, when 1–2 are done). */
-export function firstOpenStep(content: ContentRecord, theme: Pick<PanelTheme, 'photos' | 'optionalBlocks' | 'sample'>, deviceZone: string | null = null): number {
-  const done = doneSteps(content, theme, deviceZone);
-  for (let s = 1; s < SETUP_STEP_COUNT; s++) if (!done.has(s)) return s;
-  return SETUP_STEP_COUNT;
-}
-
-const setupKey = (slug: string) => `setup:${slug}`;
-export function readSetup(slug: string): { step?: number; dismissed?: boolean } {
-  try {
-    return JSON.parse(window.localStorage.getItem(setupKey(slug)) ?? '{}') as { step?: number; dismissed?: boolean };
-  } catch {
-    return {};
-  }
-}
-export function writeSetup(slug: string, value: { step?: number; dismissed?: boolean }) {
-  try {
-    window.localStorage.setItem(setupKey(slug), JSON.stringify({ ...readSetup(slug), ...value }));
-  } catch {
-    /* private mode: the step comes from the content next time */
-  }
-}
-
-/** The rules shown before EVERY first publish (wizard step 6 and the editor's first Publish), docs/16 §11.7. */
-export function RulesBox({ rights, locale, total = IDENTITY_CHANGE_LIMIT }: { rights: RightsView; locale: string; total?: number }) {
-  const until = rights.onlineUntil ? formatDate(rights.onlineUntil, locale) : null;
-  return (
-    <div className={styles.rules} data-rules>
-      <h3 className={styles.rulesTitle}>{t('Good to know before you publish')}</h3>
-      <ul>
-        <li>{changesRuleText(total)}</li>
-        <li>{t(FREE_CHANGES_TEXT)}</li>
-        <li>{t(UNDO_TEXT)}</li>
-        <li>{t('Everything else — time, venue, schedule, story, photos, details and replies — you can change as often as you like.')}</li>
-        <li>
-          {t('Your website stays online until')}{' '}
-          <strong>{until ?? t('{months} months after your wedding', { months: ARCHIVE_AFTER_MONTHS })}</strong>
-          {until ? t(', {months} months after your wedding', { months: ARCHIVE_AFTER_MONTHS }) : ''}. {t(ARCHIVE_TEXT)}
-        </li>
-      </ul>
-    </div>
-  );
-}
 
 export function Setup({
   step,
@@ -406,45 +352,6 @@ export function OrderPendingNote() {
 }
 
 /**
- * The first publish while the wedding date is still the design's sample (G060-fix): a blocking note with a way to the
- * date field and an explicit "this is our date" for the couple whose date really is the same.
- */
-export function SampleDateGate({
-  content,
-  sample,
-  confirmed,
-  onConfirm,
-  onFix,
-}: {
-  content: ContentRecord;
-  sample: ContentRecord | null;
-  confirmed: boolean;
-  onConfirm: (v: boolean) => void;
-  onFix: () => void;
-}) {
-  if (!sampleDateLeft(content, sample)) return null;
-  const when = formatDateLong(content.date, content.locale) ?? content.date;
-  return (
-    <div className={styles.dateGate} role="group" aria-labelledby="date-gate-title" data-sample-date-gate>
-      <p id="date-gate-title" className={styles.dateGateTitle}>
-        <TriangleAlert size={20} strokeWidth={1.75} aria-hidden="true" />
-        {t('Your wedding date is still the design’s sample')}
-      </p>
-      <p>
-        {t('Guests would see')} <strong>{when}</strong>. {t('Set your real date before you publish.')}
-      </p>
-      <Button variant="secondary" icon={CalendarDays} onClick={onFix} data-fix-date>
-        {t('Set our date')}
-      </Button>
-      <label className={styles.checkRow}>
-        <input type="checkbox" checked={confirmed} onChange={(e) => onConfirm(e.target.checked)} data-confirm-sample-date />
-        <span>{t('{date} really is our wedding date', { date: when })}</span>
-      </label>
-    </div>
-  );
-}
-
-/**
  * The opening page of the real theme (envelope, book …), scaled down (step 1 only).
  * G173: `src` is set only after hydration. The server renders the default route (setup) for every panel address, so with
  * the src in the HTML every view (#home, #share …) downloaded the theme's first view (~870 KB on a phone) while the panel
@@ -478,4 +385,5 @@ function PreviewMini({ slug, previewToken, version: raw, title }: { slug: string
   );
 }
 
-export { RIGHTS_HINT_BEFORE, pageShown };
+export { RIGHTS_HINT_BEFORE, pageShown, RulesBox, SampleDateGate };
+export { doneSteps, firstOpenStep, readSetup, writeSetup } from './setup-state.ts';

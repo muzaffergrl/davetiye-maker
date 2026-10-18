@@ -32,7 +32,8 @@ test('Maison Pâtisserie is a catalogued platform theme, kept off sale until app
   const theme = await claimableTheme(id);
   assert.ok(theme);
   assert.equal(theme.name, 'Maison Pâtisserie');
-  assert.equal(MARKETING.designs.find((d) => d.id === id)?.status, 'coming');
+  // off sale until approval: 'coming' (hidden) or 'preview' (in the catalogue, no checkout, no /start; main f1228e88)
+  assert.ok(['coming', 'preview'].includes(MARKETING.designs.find((d) => d.id === id)?.status ?? ''));
   assert.equal(MARKETING.designs.find((d) => d.id === id)?.price, '[PRICE]');
   assert.equal(themeOpenForClaims(id, { env: { VERCEL_ENV: 'production' } }), false);
   assert.equal(openingObject(DESIGN_COPY[id]), 'box');
