@@ -2,7 +2,7 @@
 id: G188
 baslik: G180 tema standardını 33–38'e uygula (font yedek yüzleri / CLS, ertelenen açılış parçaları / LCP, düğme kontrastı)
 rol: claude-kod
-durum: hazir
+durum: iptal
 alan: claude-G188
 oncelik: 2
 bagimli: [G180, G182, G183, G184, G185, G186, G187]
@@ -32,3 +32,4 @@ _(görevi yapan ajan doldurur)_
 
 ## Günlük
 - 2026-10-18 koordinatör: görev açıldı (G180 33–38'e dokunmadı).
+- 2026-10-18 koordinatör: iptal — aynı iş G180 eki olarak yapıldı (`claude/g180-tema-perf` 3a0c638d/2801d2a4; rapor `gorevler/G180-tema-perf.md`). G188 oturumu durduruldu.
