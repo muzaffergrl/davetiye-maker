@@ -163,9 +163,9 @@ button { font: inherit; color: inherit; }
   margin-top: calc(18px - var(--w) * .49);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  outline: none;
 }
-.stage:focus-visible .env-closed { filter: drop-shadow(0 0 0 2px var(--deep)); }
+/* G173: visible ring */
+.stage:focus-visible { outline-offset: -4px; }
 .env { position: absolute; inset: 0; }
 .env > * , .card-slot > .card { position: absolute; }
 .env-flap  { left: 0; top: 0; width: 100%; height: 35.582%; transform-origin: 50% 100%;

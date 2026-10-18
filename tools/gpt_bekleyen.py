@@ -7,7 +7,12 @@ Kullanım:
 
 Yol: prompt dosyasındaki ters tırnaklı, içinde `/` olan `….png|jpg|jpeg|webp` yolu (düz metindeki tek dosya adları ve `<x>`
 gibi kalıplar sayılmaz). `collections/` ya da `brand/` ile başlıyorsa repo kökünden, değilse prompt dosyasının klasöründen
-çözülür. Bölüm = yolun üstündeki en yakın `##` başlığı.
+çözülür. Bir Kaydet satırındaki yalın adlar (`tile_1.png`, `tile_2.png` … ya da `a.png` ve `b.png`) satırın ilk yolunun
+klasöründen çözülür. `platform/`, `public/`, `img/`, `scripts/`, `tools/`, `docs/` ile başlayan yollar build çıktısı ya da
+kaynak örneğidir, GPT hedefi sayılmaz.
+Bölüm = yolun üstündeki en yakın `##` başlığı.
+
+`--yaz` aynı turda docs/27_GPT_IS_LISTESI.md + .html'yi de yazar (tools/gpt_is_listesi.py, G179).
 """
 import re
 import sys
@@ -25,6 +30,24 @@ def prompt_dosyalari():
         yield from sorted(KOK.glob(d))
 
 
+HEDEF_DEGIL = ("platform/", "public/", "img/", "scripts/", "tools/", "docs/")
+YALIN = re.compile(r"`([^`\s/<>{}*]+\.(?:png|jpg|jpeg|webp))`")
+
+
+def satir_yollari(dosya: Path, satir: str) -> list[Path]:
+    """Bir satırın istediği görsel yolları (mutlak, sıralı). Kaydet satırında yalın adlar ilk yolun klasöründen."""
+    out = []
+    for y in YOL.findall(satir):
+        if "/" not in y or any(c in y for c in "<>{}*") or y.startswith(HEDEF_DEGIL):
+            continue
+        out.append(KOK / y if y.startswith(("collections/", "brand/")) else dosya.parent / y)
+    if out and "aydet" in satir:
+        bas = satir.find(YOL.search(satir).group(0))
+        kalan = satir[bas:].split("·", 1)[0]
+        out += [out[0].parent / ad for ad in YALIN.findall(kalan)]
+    return out
+
+
 def tara(dosya: Path):
     """(bölüm, yol, var mı) üçlüleri; aynı yol bir dosyada bir kez sayılır."""
     bolum, gorulen = "(başlıksız)", set()
@@ -32,10 +55,7 @@ def tara(dosya: Path):
         if satir.startswith("## "):
             bolum = satir[3:].strip()
             continue
-        for y in YOL.findall(satir):
-            if "/" not in y or any(c in y for c in "<>{}*"):
-                continue
-            tam = KOK / y if y.startswith(("collections/", "brand/")) else dosya.parent / y
+        for tam in satir_yollari(dosya, satir):
             anahtar = tam.resolve()
             if anahtar in gorulen:
                 continue
@@ -76,12 +96,20 @@ def main():
         "bu liste kendiliğinden kısalır. Sonrasında ilgili temanın `build_images.py` / `build-print-assets.ts` komutu çalıştırılır",
         "(prompt dosyasında yazar).",
         "",
+        "## ChatGPT'de elle üretim (G179)",
+        "",
+        "Eksik görsellerin sıralı, kendi başına yapıştırılabilir prompt listesi: `docs/27_GPT_IS_LISTESI.html` (tarayıcıda;",
+        "kopyalama düğmeleri, bitti işareti, süzgeç) ve `docs/27_GPT_IS_LISTESI.md`. İkisi bu komutla birlikte yeniden yazılır.",
+        "Her görsel listedeki **indirme adıyla** kaydedilirse `python3 tools/gpt_yerlestir.py --klasor <klasör>` hepsini",
+        "adından hedefe eşler (harita gerekmez; bilinmeyen adlar listelenir, tahmin edilmez).",
+        "",
         "## GPT görselleri gelince (G176)",
         "",
-        "Gelen dosyalar (rastgele indirme adlarıyla) tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:",
+        "Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:",
         "",
-        "1. Claude görsellere bakar, `{\"<gelen dosya>\": \"<aşağıdaki listeden hedef yol>\"}` haritasını yazar (JSON).",
-        "2. `python3 tools/gpt_yerlestir.py --eslestir harita.json` — KURU: her hedefin bir prompt'ta istendiğini, oran /",
+        "1. İndirme adıyla geldiyse `--klasor <klasör>`; rastgele adlarla geldiyse Claude görsellere bakar,",
+        "   `{\"<gelen dosya>\": \"<aşağıdaki listeden hedef yol>\"}` haritasını yazar (JSON) ve `--eslestir harita.json` verir.",
+        "2. `python3 tools/gpt_yerlestir.py --klasor <klasör>` (ya da `--eslestir harita.json`) — KURU: her hedefin bir prompt'ta istendiğini, oran /",
         "   şeffaflık / `#00FF00` pencere şartlarını ve var olan farklı dosyanın ezilmediğini denetler; tek red = hiçbir dosya yazılmaz.",
         "3. Aynı komut `--uygula` ile: kopyalar, sonra her etkilenen tasarımda sırayla `build_images.py` → `build-print-assets.ts`",
         "   → palet (`recolor_parts.py build/check`) → img/ referans + manifest denetimi → (`--theme-check`, `--ilan`: üretim",
@@ -109,6 +137,8 @@ def main():
         satirlar.append("")
     CIKTI.write_text("\n".join(satirlar).rstrip() + "\n", encoding="utf-8")
     print(f"{CIKTI.relative_to(KOK)} yazıldı · toplam eksik: {toplam_eksik}")
+    import gpt_is_listesi  # G179: iş listesi aynı turda (tembel içe aktarma: o da bu modülü kullanır)
+    gpt_is_listesi.main(["--yaz"])
 
 
 if __name__ == "__main__":

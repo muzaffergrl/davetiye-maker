@@ -11,7 +11,7 @@
     "dev": "next dev",
     "prebuild": "node scripts/theme-assets.cjs",
     "build": "next build",
-    "postbuild": "node scripts/trace-check.cjs",
+    "postbuild": "node scripts/trace-check.cjs && node scripts/js-budget.cjs",
     "prestart": "node scripts/theme-assets.cjs",
     "start": "next start",
     "test": "node --test --test-reporter=spec \"tests/*.test.ts\"",
