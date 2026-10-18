@@ -348,3 +348,6 @@ html[data-rsvp-replied] .rsvp-page .page-heading .body-text{display:none}
 ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation-duration:1ms!important}
 }
 #reply{scroll-margin-top:64px}
+
+/* Keep focused content above the fixed navigation, including the device safe area. */
+html{scroll-padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom) + 16px)}

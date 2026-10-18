@@ -358,3 +358,6 @@ html[data-rsvp-replied] .rsvp-page .page-heading .body-text{display:none}
 html[data-rsvp-replied] .stamp{opacity:.9;transform:rotate(-12deg)}
 ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation-duration:1ms!important}
 }
+
+/* Keep focused content above the fixed navigation, including the device safe area. */
+html{scroll-padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom) + 16px)}

@@ -366,3 +366,6 @@ html[data-rsvp-replied] .rsvp-page .page-heading .body-text{display:none}
 }
 #reply{scroll-margin-top:64px}
 html{scroll-padding-bottom:calc(var(--nav-h) + 12px)}
+
+/* Keep focused content above the fixed navigation, including the device safe area. */
+html{scroll-padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom) + 16px)}
