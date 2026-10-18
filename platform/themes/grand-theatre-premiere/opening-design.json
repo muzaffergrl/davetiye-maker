@@ -1,0 +1,18 @@
+{
+  "id": "grand-theatre-premiere",
+  "kind": "theatre-curtains",
+  "index": 2,
+  "duration": 5200,
+  "frameRatio": 1.7768331562167907,
+  "copyTop": "50%",
+  "portraitWidth": "86%",
+  "font": "Italianno",
+  "artwork": [
+    "img/ph_interior-480.webp",
+    "img/interior-frame-480.webp",
+    "img/interior-photo-mask.png"
+  ],
+  "closedArtwork": "img/envelope_closed-880.webp",
+  "keyboard": true,
+  "reducedMotion": true
+}

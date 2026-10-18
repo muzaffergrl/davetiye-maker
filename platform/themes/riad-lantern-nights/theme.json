@@ -1,7 +1,7 @@
 {
   "id": "riad-lantern-nights",
   "name": "Riad Lantern Nights",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "pages": {
     "index": "index.html",
     "home": "home.html",

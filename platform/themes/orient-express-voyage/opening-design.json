@@ -1,0 +1,18 @@
+{
+  "id": "orient-express-voyage",
+  "kind": "carriage-sleeve",
+  "index": 3,
+  "duration": 5200,
+  "frameRatio": 1.5,
+  "copyTop": "50%",
+  "portraitWidth": "86%",
+  "font": "Allura",
+  "artwork": [
+    "img/ph_interior-480.webp",
+    "img/interior-frame-480.webp",
+    "img/interior-photo-mask.png"
+  ],
+  "closedArtwork": "img/envelope_closed-880.webp",
+  "keyboard": true,
+  "reducedMotion": true
+}

@@ -1120,57 +1120,57 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
 const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> & { home: string }> = {
   'nocturne-lake-estate': {
     style: msg("Charcoal envelope, champagne-gold botanical seal and a candlelit Lake Como wedding."),
-    opening: msg("Your guests tap the envelope. The champagne-gold seal lifts away, the charcoal V flap opens, and the invitation card rises from its pocket into the wedding website."),
+    opening: msg("Tap to lift the charcoal letter flap. A lakeside portrait invitation sweeps out across its champagne-gold stationery before the wedding home page opens."),
     home: msg("Charcoal paper, champagne gold and candlelight by the water. A quiet, refined invitation opens onto the lake, the story and the evening ahead."),
   },
   'velvet-jewel-box': {
     style: msg("Aubergine envelope, pearl-set satin detail and a rose-gold keepsake seal."),
-    opening: msg("Your guests tap the envelope. The rose-gold seal releases its satin detail, the aubergine V flap opens, and the invitation card glides out to reveal the wedding website."),
+    opening: msg("Tap to hinge open the jewel-case lid. A pearl-set oval portrait unfolds above aubergine-and-rose-gold stationery, then leads into the wedding home page."),
     home: msg("Aubergine velvet, champagne satin and a touch of rose gold. The invitation opens into a polished celebration with a keepsake feel."),
   },
   'grand-theatre-premiere': {
     style: msg("Peacock-blue envelope, antique-gold seal and an ivory playbill-inspired schedule."),
-    opening: msg("Your guests tap the envelope. An antique-gold seal catches the light, the peacock-blue V flap opens, and an ivory invitation card rises from its pocket."),
+    opening: msg("Tap to draw the two cover panels apart like theatre curtains. A gilded playbill portrait takes centre stage before the wedding home page opens."),
     home: msg("Peacock blue, antique gold and warm ivory set the scene. The invitation opens like opening night, then leads into your story and the evening programme."),
   },
   'orient-express-voyage': {
     style: msg("Bottle-green envelope, brass route seal and details inspired by a first-class rail journey."),
-    opening: msg("Your guests tap the envelope. The brass route seal lifts, the bottle-green V flap opens, and a first-class invitation card slides from its pocket."),
+    opening: msg("Tap to slide the green sleeve to the right. The brass-window invitation travels out to the left, settles like a first-class ticket and opens the wedding home page."),
     home: msg("Bottle green, brass and warm ivory meet the romance of a vintage rail journey. The envelope opens onto your invitation, route details and celebration."),
   },
   'kintsugi-washi': {
     style: msg("Indigo washi envelope, fine kintsugi-gold lines and quiet botanical details."),
-    opening: msg("Your guests tap the envelope. Fine kintsugi-gold lines catch the light as the ivory washi V flap opens and the invitation card rises from its pocket."),
+    opening: msg("Tap to peel the two washi folds diagonally apart. The kintsugi portrait card turns gently into place, then opens the wedding home page."),
     home: msg("Washi paper, sumi ink and delicate gold seams bring a quiet, handcrafted feeling to your invitation, story and garden celebration."),
   },
   'riad-lantern-nights': {
     style: msg("Deep teal envelope, brass seal and saffron lantern accents inspired by a Marrakech riad."),
-    opening: msg("Your guests tap the envelope. A brass seal lifts beneath a warm lantern glow, the teal V flap opens, and an ivory invitation card rises from the pocket."),
+    opening: msg("Tap to swing the two riad doors open in sequence. A lantern-framed arch portrait emerges over teal-and-gold stationery before the wedding home page opens."),
     home: msg("Teal, warm cedar and saffron light bring the feeling of a lantern-lit riad. Open the invitation to find the courtyard, your story and the celebration details."),
   },
   'maison-patisserie': {
     style: msg("Pistachio envelope, rose-satin detail and cream-and-gold pâtisserie-inspired flourishes."),
-    opening: msg("Your guests tap the envelope. A rose-satin detail slips aside, the pistachio V flap opens, and a cream invitation card glides from the pocket."),
+    opening: msg("Tap to unwrap the pistachio parcel. A scalloped porcelain portrait tilts gently into place above rose-satin stationery, then opens the wedding home page."),
     home: msg("Pistachio, rose and cream evoke the window of a French pâtisserie. The invitation opens onto your celebration, story and carefully arranged details."),
   },
   'celestial-observatory': {
     style: msg("Midnight-blue envelope, star-map seal and antique-brass celestial details."),
-    opening: msg("Your guests tap the envelope. A small star-map seal lifts, the midnight V flap opens, and an ivory invitation card with celestial details rises from the pocket."),
+    opening: msg("Tap to rotate the two cover shutters in opposite orbits. An astrolabe portrait turns into view above celestial stationery before the wedding home page opens."),
     home: msg("Midnight blue, chart-paper ivory and antique brass set a stargazing mood. Open the invitation to find your story beneath the night sky."),
   },
   'azulejo-mosaic': {
     style: msg("Cobalt-and-ivory envelope, terracotta accent and Portuguese azulejo-inspired details."),
-    opening: msg("Your guests tap the envelope. A cobalt tile seal catches the light, the patterned V flap opens, and the invitation card rises from its pocket."),
+    opening: msg("Tap to fold the two mosaic-cover leaves away one after the other. A cobalt-tile portrait card turns into place, then opens the wedding home page."),
     home: msg("Cobalt, whitewash and terracotta recall painted tiles in the sun. Open the invitation to reveal your story and celebration, tile by tile."),
   },
   'sky-lantern-festival': {
     style: msg("Dusky-plum envelope, an amber lantern charm and lantern-lit details at twilight."),
-    opening: msg("Your guests tap the envelope. An amber lantern seal glows, the dusk-toned V flap opens, and the invitation card rises into view."),
+    opening: msg("Tap to let the lantern jacket rise into the sky. The portrait invitation floats up underneath, sways into place and opens the wedding home page."),
     home: msg("Plum, dusky rose and lantern amber bring the last light of day into your invitation, story and celebration pages."),
   },
   'music-box-ballerina': {
     style: msg("Blush envelope, a champagne satin band and a gold-edged floral cameo."),
-    opening: msg("Your guests tap the envelope. A rose-gold ballerina seal turns, the blush V flap opens and the invitation card rises from the pocket."),
+    opening: msg("Tap to tilt back the music-box lid. A floral cameo invitation pirouettes into place above blush stationery before the wedding home page opens."),
     home: msg("Rose quartz, blush satin and soft gold give this invitation the feeling of a treasured keepsake. Open it to reveal your story and wedding details."),
   },
 };
@@ -1181,7 +1181,7 @@ for (const [id, preview] of Object.entries(PREVIEW_DESIGN_COPY)) {
   if (!full) continue;
   full.style = preview.style.replace(/[.!?]+$/, '');
   full.intro = preview.home;
-  full.opening = msg('Your guests tap the envelope. The flap lifts, a separate invitation card with your photo rises from its pocket, and your wedding home page opens.');
+  full.opening = preview.opening;
   full.pages = {home: msg('Your portrait in an ornate arch card, names, date, venue, invitation, countdown and links to the other pages.'),story: msg('Three framed photographs with editable captions and your story.'),details: msg('An ornate programme card, venue photograph, optional map, schedule, calendar links, travel, registry and questions.'),rsvp: msg('A cream reply card, reply-by date and the configurable RSVP form.')};
   full.fonts = ['Cormorant Garamond', 'Great Vibes', 'Lora'];
   full.llmsLine = full.style + '. A layered envelope opening, ornate photo cards, story, details and RSVP.';

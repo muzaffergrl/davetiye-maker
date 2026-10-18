@@ -10,7 +10,7 @@ import {renderTemplate} from '../lib/theme/engine.ts';
 import covers from './fixtures/unique-interior-covers.json' with {type:'json'};
 const root=path.resolve(import.meta.dirname,'..'),ids=[...new Set(Object.keys(covers).map(p=>p.split('/')[0]))];
 const read=(id:string,p:string)=>readFileSync(path.join(root,'themes',id,p),'utf8');
-test('interior redesign leaves every original cover asset, envelope script, cover stylesheet and demo record byte-identical',()=>{
+test('interior redesign retains original closed-envelope artwork, base stylesheet and demo records; opening code may evolve',()=>{
  for(const [p,expected]of Object.entries(covers)){const actual=crypto.createHash('sha256').update(readFileSync(path.join(root,'themes',p))).digest('hex');assert.equal(actual,expected,p);}
 });
 test('eleven distinct interior layouts and animation profiles, no interior code on the covers',()=>{

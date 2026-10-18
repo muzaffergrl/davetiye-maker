@@ -1,0 +1,31 @@
+/* Existing generated artwork, technically composed into each model's opening card. */
+.page-envelope .env-head,.page-envelope .env-hint,.page-envelope .env-after{text-shadow:none}
+.page-envelope .env-head .names{font-family:var(--op-font);color:var(--op-ink)}
+.page-envelope .env-head>.kicker,.page-envelope .env-hint{color:var(--op-ink)}
+.page-envelope .env{perspective:1200px;isolation:isolate}
+.page-envelope .env-page .opening-card{left:18%;top:76%;width:64%;aspect-ratio:.73;container-type:inline-size;view-transition-name:none;transform-origin:50% 70%;filter:drop-shadow(0 10px 13px #0004)}
+.opening-card>.opening-paper{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;z-index:0}
+.opening-card>.opening-portrait{position:absolute;left:calc((100% - var(--op-portrait))/2);top:9%;width:var(--op-portrait);aspect-ratio:var(--op-frame);z-index:1}
+.opening-card .opening-portrait>.opening-photo{position:absolute;left:var(--op-photo-left);top:var(--op-photo-top);width:var(--op-photo-width);height:var(--op-photo-height);background:var(--op-paper);mask:url('img/interior-photo-mask.png') center/100% 100% no-repeat;-webkit-mask:url('img/interior-photo-mask.png') center/100% 100% no-repeat}
+.opening-card .opening-photo>img{object-fit:cover;object-position:50% 20%}
+.opening-card .opening-frame{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.opening-card>.card-copy{top:var(--op-copy);left:11%;right:11%;z-index:2;color:var(--op-ink);text-align:center;display:grid;gap:3cqw}
+.opening-card .opening-card-names{font-family:var(--op-font);font-size:calc(9.3cqw * var(--fit,1));line-height:1.12;overflow-wrap:anywhere;text-wrap:balance;margin:0}
+.opening-card .card-copy .script{font-size:7.1cqw;line-height:1.25;margin:0;color:var(--op-ink)}
+.opening-card .card-copy .kicker{font-family:Georgia,serif;font-size:max(9px,4.5cqw);line-height:1.3;letter-spacing:.02em;margin:0;color:var(--op-ink)}
+.opening-card .ph-mark{font-family:Georgia,serif;font-size:8cqw;color:var(--op-ink);background:none}
+.page-envelope .opening-leaf{position:absolute;display:none;pointer-events:none;left:0;top:22.4072%;width:100%;height:77.5928%;z-index:4;backface-visibility:hidden}
+.page-envelope .opening-leaf-left{clip-path:inset(0 50% 0 0);transform-origin:0 50%}
+.page-envelope .opening-leaf-right{clip-path:inset(0 0 0 50%);transform-origin:100% 50%}
+.page-envelope [data-opening-state=playing] .stage{cursor:default}
+.page-envelope [data-opening-state=playing] .stage:focus-visible{outline:none}
+.page-envelope .env-after .btn{background:var(--op-ink);color:var(--op-paper)}
+.is-opened .page-envelope .env-page .opening-card{transform:translateY(-76%) scale(1.04)}
+.is-opened .page-envelope .opening-leaf{display:none}
+.page-envelope .opening-card:focus-visible{outline:2px solid var(--op-accent)}
+@media(prefers-reduced-motion:reduce){.page-envelope *{scroll-behavior:auto!important}.page-envelope .env-hint span{animation:none!important}}
+@media(max-height:620px) and (min-aspect-ratio:1/1){.page-envelope .env-page .opening-card{width:56%;left:22%}}
+@media print{.page-envelope .env-after{display:flex}.page-envelope .opening-card{opacity:1!important}}
+
+:root{--op-ink:#173c75;--op-paper:#f5f3e9;--op-accent:#b56d4e;--op-font:"Italianno";--op-copy:58%;--op-portrait:67%;--op-frame:1254/1254;--op-photo-left:19.85645933014354%;--op-photo-top:20.015948963317385%;--op-photo-width:60.28708133971292%;--op-photo-height:58.77192982456141%}
+

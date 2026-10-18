@@ -385,7 +385,7 @@ const DEV_CONTENT = {
   /* ------------------------------------------------------------------ envelope (index page) */
   function initEnvelope() {
     const page = document.querySelector('.env-page');
-    if (!page) return;
+    if (!page || page.hasAttribute('data-opening')) return;
     const q = (s) => page.querySelector(s);
     const stage = q('.stage');
     const el = {

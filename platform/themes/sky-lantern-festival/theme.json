@@ -1,7 +1,7 @@
 {
   "id": "sky-lantern-festival",
   "name": "Sky Lantern Festival",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "pages": {
     "index": "index.html",
     "home": "home.html",

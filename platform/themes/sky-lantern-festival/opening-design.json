@@ -1,0 +1,18 @@
+{
+  "id": "sky-lantern-festival",
+  "kind": "lantern-ascent",
+  "index": 9,
+  "duration": 5200,
+  "frameRatio": 0.6666666666666666,
+  "copyTop": "53%",
+  "portraitWidth": "35%",
+  "font": "Allura",
+  "artwork": [
+    "img/ph_interior-480.webp",
+    "img/interior-frame-480.webp",
+    "img/interior-photo-mask.png"
+  ],
+  "closedArtwork": "img/envelope_closed-880.webp",
+  "keyboard": true,
+  "reducedMotion": true
+}
