@@ -225,46 +225,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=blush-garden-rose"
+        "start_link": "/start?theme=blush-garden-rose",
+        "image": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": true
       },
       {
         "name": "Peach & Cream",
         "variant": "peach-cream",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=blush-garden-rose&variant=peach-cream"
+        "start_link": "/start?theme=blush-garden-rose&variant=peach-cream",
+        "image": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/palette_peach-cream.jpg",
+        "image_exists": true
       },
       {
         "name": "Lilac & Gold",
         "variant": "lilac-gold",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=blush-garden-rose&variant=lilac-gold"
+        "start_link": "/start?theme=blush-garden-rose&variant=lilac-gold",
+        "image": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/palette_lilac-gold.jpg",
+        "image_exists": true
       },
       {
         "name": "Champagne & Ivory",
         "variant": "champagne-ivory",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=blush-garden-rose&variant=champagne-ivory"
+        "start_link": "/start?theme=blush-garden-rose&variant=champagne-ivory",
+        "image": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/palette_champagne-ivory.jpg",
+        "image_exists": true
       },
       {
         "name": "Dusty Mauve",
         "variant": "dusty-mauve",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=blush-garden-rose&variant=dusty-mauve"
+        "start_link": "/start?theme=blush-garden-rose&variant=dusty-mauve",
+        "image": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/palette_dusty-mauve.jpg",
+        "image_exists": true
       },
       {
         "name": "Dusty Blue & Blush",
         "variant": "dusty-blue-blush",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=blush-garden-rose&variant=dusty-blue-blush"
+        "start_link": "/start?theme=blush-garden-rose&variant=dusty-blue-blush",
+        "image": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/palette_dusty-blue-blush.jpg",
+        "image_exists": true
       }
     ],
     "offered": [
       "Original (Blush Garden Rose)"
+    ],
+    "images": [
+      {
+        "file": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/10_palettes.jpg",
+        "exists": true,
+        "option": null,
+        "upload": false,
+        "alt": "Blush Garden Rose in 6 color palettes: the opening page of each, side by side",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/palette_original.jpg",
+        "exists": true,
+        "option": "Original (Blush Garden Rose)",
+        "upload": false,
+        "alt": "Blush Garden Rose in its original palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/palette_peach-cream.jpg",
+        "exists": true,
+        "option": "Peach & Cream",
+        "upload": false,
+        "alt": "Blush Garden Rose in the Peach & Cream palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/palette_lilac-gold.jpg",
+        "exists": true,
+        "option": "Lilac & Gold",
+        "upload": false,
+        "alt": "Blush Garden Rose in the Lilac & Gold palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/palette_champagne-ivory.jpg",
+        "exists": true,
+        "option": "Champagne & Ivory",
+        "upload": false,
+        "alt": "Blush Garden Rose in the Champagne & Ivory palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/palette_dusty-mauve.jpg",
+        "exists": true,
+        "option": "Dusty Mauve",
+        "upload": false,
+        "alt": "Blush Garden Rose in the Dusty Mauve palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/palette_dusty-blue-blush.jpg",
+        "exists": true,
+        "option": "Dusty Blue & Blush",
+        "upload": false,
+        "alt": "Blush Garden Rose in the Dusty Blue & Blush palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

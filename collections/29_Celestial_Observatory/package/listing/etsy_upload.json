@@ -37,7 +37,7 @@
   "price_note": "Proposed: the design price of 01–21, not confirmed for this design (config.ts '[PRICE]'). Approved by the user on 2026-10-16 (K42, docs/23 §1). Shop currency TRY (K38): Etsy gets the TL amount; USD is approximate, at 49.53 TRY per USD, BloombergHT, 2026-10-16 09:30 (USD/TRY 49.5247 buy / 49.5300 sell).",
   "quantity": 999,
   "renewal": null,
-  "sales_status": "coming",
+  "sales_status": "preview",
   "shop_section": "[SHOP SECTION]",
   "digital_files": [
     {
@@ -203,10 +203,134 @@
   "blockers": [
     "listing images missing: collections/29_Celestial_Observatory/package/listing/images_editorial/01_cover.png, collections/29_Celestial_Observatory/package/listing/images_editorial/02_opening.png, collections/29_Celestial_Observatory/package/listing/images_editorial/03_pages.png, collections/29_Celestial_Observatory/package/listing/images_editorial/04_edit.png, collections/29_Celestial_Observatory/package/listing/images_editorial/05_rsvp.png, collections/29_Celestial_Observatory/package/listing/images_editorial/06_details.png, collections/29_Celestial_Observatory/package/listing/images_editorial/07_how.png, collections/29_Celestial_Observatory/package/listing/images_editorial/08_included.png",
     "listing video missing",
-    "sales status 'coming' in platform/lib/marketing/config.ts (K41: not for sale)",
+    "sales status 'preview' in platform/lib/marketing/config.ts (K41: not for sale)",
     "price not decided for this design (config.ts price '[PRICE]'; 1460 TL is the 01–21 design price, docs/23 §1)",
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Celestial Observatory)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=celestial-observatory",
+        "image": "collections/29_Celestial_Observatory/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Twilight Plum & Gold",
+        "variant": "twilight-plum",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=celestial-observatory&variant=twilight-plum",
+        "image": "collections/29_Celestial_Observatory/package/listing/images_editorial/palette_twilight-plum.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Night Teal & Gold",
+        "variant": "night-teal",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=celestial-observatory&variant=night-teal",
+        "image": "collections/29_Celestial_Observatory/package/listing/images_editorial/palette_night-teal.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Burgundy Night & Gold",
+        "variant": "burgundy-night",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=celestial-observatory&variant=burgundy-night",
+        "image": "collections/29_Celestial_Observatory/package/listing/images_editorial/palette_burgundy-night.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Midnight & Silver",
+        "variant": "midnight-silver",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=celestial-observatory&variant=midnight-silver",
+        "image": "collections/29_Celestial_Observatory/package/listing/images_editorial/palette_midnight-silver.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Forest Night & Brass",
+        "variant": "forest-night",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=celestial-observatory&variant=forest-night",
+        "image": "collections/29_Celestial_Observatory/package/listing/images_editorial/palette_forest-night.jpg",
+        "image_exists": false
+      }
+    ],
+    "offered": [
+      "Original (Celestial Observatory)"
+    ],
+    "images": [
+      {
+        "file": "collections/29_Celestial_Observatory/package/listing/images_editorial/10_palettes.jpg",
+        "exists": false,
+        "option": null,
+        "upload": false,
+        "alt": "Celestial Observatory in 6 color palettes: the opening page of each, side by side",
+        "status": "missing"
+      },
+      {
+        "file": "collections/29_Celestial_Observatory/package/listing/images_editorial/palette_original.jpg",
+        "exists": false,
+        "option": "Original (Celestial Observatory)",
+        "upload": false,
+        "alt": "Celestial Observatory in its original palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/29_Celestial_Observatory/package/listing/images_editorial/palette_twilight-plum.jpg",
+        "exists": false,
+        "option": "Twilight Plum & Gold",
+        "upload": false,
+        "alt": "Celestial Observatory in the Twilight Plum & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/29_Celestial_Observatory/package/listing/images_editorial/palette_night-teal.jpg",
+        "exists": false,
+        "option": "Night Teal & Gold",
+        "upload": false,
+        "alt": "Celestial Observatory in the Night Teal & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/29_Celestial_Observatory/package/listing/images_editorial/palette_burgundy-night.jpg",
+        "exists": false,
+        "option": "Burgundy Night & Gold",
+        "upload": false,
+        "alt": "Celestial Observatory in the Burgundy Night & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/29_Celestial_Observatory/package/listing/images_editorial/palette_midnight-silver.jpg",
+        "exists": false,
+        "option": "Midnight & Silver",
+        "upload": false,
+        "alt": "Celestial Observatory in the Midnight & Silver palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/29_Celestial_Observatory/package/listing/images_editorial/palette_forest-night.jpg",
+        "exists": false,
+        "option": "Forest Night & Brass",
+        "upload": false,
+        "alt": "Celestial Observatory in the Forest Night & Brass palette: the opening page closed and opening",
+        "status": "missing"
+      }
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

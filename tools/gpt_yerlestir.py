@@ -4,6 +4,7 @@ etkilenen her tasarımın build/denetim adımlarını sırayla koşar ve tasarı
 
   python3 tools/gpt_yerlestir.py --eslestir harita.json                       # kuru: denetle, ne yapılacağını yaz
   python3 tools/gpt_yerlestir.py --eslestir harita.json --uygula              # kopyala + etkilenen tasarımların adımları
+  python3 tools/gpt_yerlestir.py --klasor indirilenler/ [--uygula]           # indirme adıyla kaydedilmiş dosyalar (G179)
   python3 tools/gpt_yerlestir.py --koleksiyon 23 [--uygula]                   # yerleştirmeden yalnız adımlar (23 | 23_Velvet_Jewel_Box
                                                                               #  | velvet-jewel-box | 23,24 | all)
   … [--uzerine-yaz] [--theme-check] [--ilan]
@@ -18,6 +19,11 @@ Kaydet satırları tools/gpt_kuru_deneme.py beklenenler ile). İstenenden küç�
 Var olan FARKLI bir dosyanın üstüne `--uzerine-yaz` olmadan yazılmaz (aynı bayt = zaten yerinde). Tek bir girdi bile
 reddedilirse HİÇBİR dosya kopyalanmaz. Uzantı farklıysa (ör. .webp → .png) PIL ile dönüştürülür; .jpg hedefe alfalı görsel
 reddedilir.
+
+Klasör (`--klasor`, G179): klasördeki her dosyanın adı (büyük/küçük harf ve .png/.jpg/.jpeg/.webp uzantısı önemsiz)
+docs/27_GPT_IS_LISTESI'ndeki bir **indirme adıysa** (tools/gpt_is_listesi.indirme_adi — tek kaynak) hedefine eşlenir ve
+yukarıdaki denetim/kopya/adım zinciri aynen uygulanır. Adı tanınmayan dosya listelenir, tahmin edilmez, dokunulmaz.
+`--eslestir` ile birlikte verilebilir (ChatGPT adıyla kalmış dosyalar haritadan).
 
 Adımlar (tasarım başına bu sırada; bir adım HATA verirse o tasarımın kalanı DURDU, diğer tasarımlar sürer):
   1 build_images   platform/themes/<id>/build_images.py               website parçaları (PAKET 5 / eski paketler) tamsa
@@ -60,7 +66,7 @@ import kit_check as kc  # noqa: E402
 KOK = TOOLS.parent
 NODE_PATH = "/opt/node22/lib/node_modules"
 ADIMLAR = ["build_images", "baski", "palet", "cikti", "theme_check", "ilan", "etsy"]
-GRUPLAR = ("web", "baski", "foto", "varyant")
+GRUPLAR = ("web", "baski", "foto", "mockup", "varyant")
 DURUM_ADI = {"ATLANDI": "atlandı", "KAPALI": "koşulmadı", "DURDU": "durdu", "HATA": "hata", "ÇALIŞIR": "kuru (koşulmadı)"}
 BASKI_BOLUM = re.compile(r"PAKET\s*6|G139", re.I)
 
@@ -79,6 +85,8 @@ def _grup(yol: str, bolum: str, prompt: Path) -> str:
         return "varyant"
     if "/photos/" in yol:
         return "foto"
+    if "/mockups/" in yol:  # ilan sahneleri (PAKET 3) website build'ini beklemez
+        return "mockup"
     if "/print/" in yol or BASKI_BOLUM.search(bolum):
         return "baski"
     return "web"
@@ -133,6 +141,22 @@ def istenenler() -> dict[str, dict]:
 
 
 # ---------------------------------------------------------------- eşleştirme
+
+def klasor_haritasi(klasor: Path, istenen: dict[str, dict]) -> tuple[dict[str, str], list[Path]]:
+    """İndirme adıyla kaydedilmiş dosyalar → {mutlak gelen yol: hedef}; adı tanınmayanlar ayrı (tahmin yok)."""
+    import gpt_is_listesi as il  # indirme adının tek kaynağı (tembel: o modül de bunu içe aktarır)
+    adlar = {il.indirme_koku(il.indirme_adi(h)): h for h in istenen}
+    harita, bilinmeyen = {}, []
+    for f in sorted(klasor.iterdir()):
+        if not f.is_file() or f.name.startswith("."):
+            continue
+        h = adlar.get(il.indirme_koku(f.name)) if f.suffix.lower() in il.UZANTILAR else None
+        if h is None:
+            bilinmeyen.append(f)
+        else:
+            harita[str(f.resolve())] = h
+    return harita, bilinmeyen
+
 
 def _ozet(p: Path) -> str:
     return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -236,7 +260,7 @@ class Tasarim:
     no: str
     klasor: str
     tema: str | None
-    durum: str  # config.ts: live / coming / ?
+    durum: str  # config.ts: live / preview / coming / ?
 
 
 def tasarimlar() -> dict[str, Tasarim]:
@@ -337,7 +361,7 @@ def adimlari_kos(t: Tasarim, eksik: dict[str, list[str]], uygula: bool, theme_ch
                   ["node", "scripts/theme-check.cjs", "--theme", tema, "--stress"]], KOK / "platform",
          lambda: None if theme_check else "KAPALI",
          lambda: None if next_var else "platform/.next yok (önce `cd platform && npm run build`)"),
-        ("ilan", ("web", "foto"), ["build_images", "cikti"],
+        ("ilan", ("web", "foto", "mockup"), ["build_images", "cikti"],
          lambda: [[sys.executable, str(TOOLS / "listing_editorial.py"), "--theme", tema, "--capture", "--video"]], KOK,
          lambda: "KAPALI" if not ilan else (None if no in LISTING_BILINEN() else f"listing_kit {no}'i bilmiyor"),
          lambda: None if next_var else "platform/.next yok (önce `cd platform && npm run build`)"),
@@ -415,14 +439,17 @@ def _tablo(satirlar: list[list[str]]) -> str:
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--eslestir", type=Path, help='harita JSON: {"<gelen dosya>": "<hedef yol>"}')
+    ap.add_argument("--klasor", type=Path, help="indirme adıyla kaydedilmiş görsellerin klasörü (docs/27)")
     ap.add_argument("--koleksiyon", help="NN | NN_Ad | tema id | virgüllü liste | all (yerleştirmeden de çalışır)")
     ap.add_argument("--uygula", action="store_true", help="dosyaları yaz ve adımları koş (vars. kuru)")
     ap.add_argument("--uzerine-yaz", action="store_true", help="hedefteki farklı dosyanın üstüne yaz")
     ap.add_argument("--theme-check", action="store_true", help="theme-check --stress (üretim build'i ister)")
     ap.add_argument("--ilan", action="store_true", help="listing_editorial --capture --video (üretim build'i ister)")
     a = ap.parse_args(argv)
-    if not a.eslestir and not a.koleksiyon:
-        ap.error("--eslestir ya da --koleksiyon gerekli")
+    if not a.eslestir and not a.koleksiyon and not a.klasor:
+        ap.error("--eslestir, --klasor ya da --koleksiyon gerekli")
+    if a.klasor and not a.klasor.is_dir():
+        ap.error(f"klasör yok: {a.klasor}")
 
     istenen = istenenler()
     hepsi = tasarimlar()
@@ -430,11 +457,24 @@ def main(argv: list[str] | None = None) -> int:
     yerlesecek: set[str] = set()
     etkilenen: list[str] = []
 
-    if a.eslestir:
-        harita = json.loads(a.eslestir.read_text(encoding="utf-8"))
-        if not isinstance(harita, dict) or not all(isinstance(v, str) for v in harita.values()):
-            raise SystemExit("harita bir JSON nesnesi olmalı: {\"<gelen>\": \"<hedef yol>\"}")
-        planlar = eslestir(harita, a.eslestir.resolve().parent, a.uzerine_yaz, istenen)
+    if a.eslestir or a.klasor:
+        harita: dict[str, str] = {}
+        if a.klasor:
+            kh, bilinmeyen = klasor_haritasi(a.klasor, istenen)
+            print(f"Klasör {a.klasor}: {len(kh)} dosya indirme adından eşlendi · {len(bilinmeyen)} bilinmeyen")
+            for f in bilinmeyen:
+                print(f"  BİLİNMEYEN      {f.name} — indirme adı değil (docs/27); dokunulmadı")
+            harita.update(kh)
+        if a.eslestir:
+            eh = json.loads(a.eslestir.read_text(encoding="utf-8"))
+            if not isinstance(eh, dict) or not all(isinstance(v, str) for v in eh.values()):
+                raise SystemExit("harita bir JSON nesnesi olmalı: {\"<gelen>\": \"<hedef yol>\"}")
+            klasor = a.eslestir.resolve().parent
+            harita.update({str(Path(g) if Path(g).is_absolute() else klasor / g): h for g, h in eh.items()})
+        if not harita:
+            print("Eşlenecek dosya yok.")
+            return 1 if not a.koleksiyon else 0
+        planlar = eslestir(harita, Path.cwd(), a.uzerine_yaz, istenen)
         red = [p for p in planlar if p.durum == "RED"]
         print(f"Eşleştirme: {len(planlar)} dosya · {len(red)} red")
         for p in planlar:

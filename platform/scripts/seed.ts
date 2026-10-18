@@ -1,4 +1,4 @@
-// npm run seed [-- --theme <id>] [--slug <slug>] [--content <path>] [--photos <dir>|--no-photos] [--photo-max <px>] [--draft]
+// npm run seed [-- --theme <id>] [--slug <slug>] [--content <path>] [--photos <dir>|--no-photos] [--photo-max <px>] [--draft] [--variant <palette>]
 //
 // Creates (or re-creates) a demo site from a collection's content.demo.json and publishes it, in the storage
 // DATA_ADAPTER selects: local (default; PLATFORM_DATA_DIR, default platform/.data) or blob (Vercel Blob;
@@ -29,6 +29,7 @@ import { PHOTO_MAX_EDGE, preparePhoto } from '../lib/panel/photos.ts';
 import { withDemoMap } from '../lib/claim/demo-map.ts';
 import { createSiteWithKeys, publishSite } from '../lib/sites.ts';
 import { loadTheme } from '../lib/theme/theme.ts';
+import { resolveVariant } from '../lib/theme/variants.ts';
 import { demoSlug, loadThemeEnv } from './lib/theme-env.ts';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -44,6 +45,8 @@ export interface SeedOptions {
   photosDir?: string | null;
   /** Long edge the sample files are shrunk to before the panel's processing (default 2400; 0 = original file, no variants). */
   photoMax?: number;
+  /** G178: a colour palette of the theme (theme.json variants id, coming ones too: local review and listing captures). */
+  variant?: string | null;
 }
 
 export interface SeedInfo {
@@ -147,6 +150,11 @@ export async function seedSite(adapter: DataAdapter, opts: SeedOptions): Promise
     }
     if (uploaded.length) await adapter.updateContent(site.id, withPhotos as unknown as ContentRecord);
   }
+  if (opts.variant) {
+    const variant = resolveVariant(theme.manifest.variants, opts.variant, { includeComing: true });
+    if (!variant) throw new Error(`theme "${opts.theme}" has no colour palette "${opts.variant}"`);
+    await adapter.patchSite(site.id, { variant });
+  }
   if (!opts.draft) await publishSite(adapter, site.id);
 
   const base = opts.baseUrl.replace(/\/+$/, '');
@@ -197,6 +205,7 @@ async function main(): Promise<void> {
       'no-photos': { type: 'boolean', default: false },
       'photo-max': { type: 'string', default: String(PHOTO_MAX_EDGE) },
       draft: { type: 'boolean', default: false },
+      variant: { type: 'string' },
     },
   });
 
@@ -219,6 +228,7 @@ async function main(): Promise<void> {
     baseUrl: process.env.SEED_BASE_URL || 'http://localhost:3000',
     photosDir,
     photoMax: photoMaxArg(values['photo-max']!),
+    variant: values.variant ?? null,
   });
 
   const dataDir = localDataDir();

@@ -957,6 +957,93 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
   },
 };
 
+
+/**
+ * These themes are present in the platform, but their final artwork and sale approval are still pending.
+ * Keep their catalogue copy explicit about that status; do not invent prices, palettes, or buyer-ready claims.
+ */
+const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> & { home: string }> = {
+  'nocturne-lake-estate': {
+    style: msg("Charcoal envelope, champagne-gold botanical seal and a candlelit Lake Como wedding."),
+    opening: msg("Your guests tap the envelope. The champagne-gold seal lifts away, the charcoal V flap opens, and the invitation card rises from its pocket into the wedding website."),
+    home: msg("Charcoal paper, champagne gold and candlelight by the water. A quiet, refined invitation opens onto the lake, the story and the evening ahead."),
+  },
+  'velvet-jewel-box': {
+    style: msg("Aubergine envelope, pearl-set satin detail and a rose-gold keepsake seal."),
+    opening: msg("Your guests tap the envelope. The rose-gold seal releases its satin detail, the aubergine V flap opens, and the invitation card glides out to reveal the wedding website."),
+    home: msg("Aubergine velvet, champagne satin and a touch of rose gold. The invitation opens into a polished celebration with a keepsake feel."),
+  },
+  'grand-theatre-premiere': {
+    style: msg("Peacock-blue envelope, antique-gold seal and an ivory playbill-inspired schedule."),
+    opening: msg("Your guests tap the envelope. An antique-gold seal catches the light, the peacock-blue V flap opens, and an ivory invitation card rises from its pocket."),
+    home: msg("Peacock blue, antique gold and warm ivory set the scene. The invitation opens like opening night, then leads into your story and the evening programme."),
+  },
+  'orient-express-voyage': {
+    style: msg("Bottle-green envelope, brass route seal and details inspired by a first-class rail journey."),
+    opening: msg("Your guests tap the envelope. The brass route seal lifts, the bottle-green V flap opens, and a first-class invitation card slides from its pocket."),
+    home: msg("Bottle green, brass and warm ivory meet the romance of a vintage rail journey. The envelope opens onto your invitation, route details and celebration."),
+  },
+  'kintsugi-washi': {
+    style: msg("Ivory washi envelope, fine kintsugi-gold lines and quiet botanical details."),
+    opening: msg("Your guests tap the envelope. Fine kintsugi-gold lines catch the light as the ivory washi V flap opens and the invitation card rises from its pocket."),
+    home: msg("Washi paper, sumi ink and delicate gold seams bring a quiet, handcrafted feeling to your invitation, story and garden celebration."),
+  },
+  'riad-lantern-nights': {
+    style: msg("Deep teal envelope, brass seal and saffron lantern accents inspired by a Marrakech riad."),
+    opening: msg("Your guests tap the envelope. A brass seal lifts beneath a warm lantern glow, the teal V flap opens, and an ivory invitation card rises from the pocket."),
+    home: msg("Teal, warm cedar and saffron light bring the feeling of a lantern-lit riad. Open the invitation to find the courtyard, your story and the celebration details."),
+  },
+  'maison-patisserie': {
+    style: msg("Pistachio envelope, rose-satin detail and cream-and-gold pâtisserie-inspired flourishes."),
+    opening: msg("Your guests tap the envelope. A rose-satin detail slips aside, the pistachio V flap opens, and a cream invitation card glides from the pocket."),
+    home: msg("Pistachio, rose and cream evoke the window of a French pâtisserie. The invitation opens onto your celebration, story and carefully arranged details."),
+  },
+  'celestial-observatory': {
+    style: msg("Midnight-blue envelope, star-map seal and antique-brass celestial details."),
+    opening: msg("Your guests tap the envelope. A small star-map seal lifts, the midnight V flap opens, and an ivory invitation card with celestial details rises from the pocket."),
+    home: msg("Midnight blue, chart-paper ivory and antique brass set a stargazing mood. Open the invitation to find your story beneath the night sky."),
+  },
+  'azulejo-mosaic': {
+    style: msg("Cobalt-and-ivory envelope, terracotta accent and Portuguese azulejo-inspired details."),
+    opening: msg("Your guests tap the envelope. A cobalt tile seal catches the light, the patterned V flap opens, and the invitation card rises from its pocket."),
+    home: msg("Cobalt, whitewash and terracotta recall painted tiles in the sun. Open the invitation to reveal your story and celebration, tile by tile."),
+  },
+  'sky-lantern-festival': {
+    style: msg("Dusky-plum envelope, glowing amber seal and lantern-lit details at twilight."),
+    opening: msg("Your guests tap the envelope. An amber lantern seal glows, the dusk-toned V flap opens, and the invitation card rises into view."),
+    home: msg("Plum, dusky rose and lantern amber bring the last light of day into your invitation, story and celebration pages."),
+  },
+  'music-box-ballerina': {
+    style: msg("Blush envelope, satin bow and a rose-gold ballerina keepsake seal."),
+    opening: msg("Your guests tap the envelope. A rose-gold ballerina seal turns, the blush V flap opens and the invitation card rises from the pocket."),
+    home: msg("Rose quartz, blush satin and soft gold give this invitation the feeling of a treasured keepsake. Open it to reveal your story and wedding details."),
+  },
+};
+
+function previewDesignCopy(d: DesignCommerce): DesignCopy | undefined {
+  const preview = PREVIEW_DESIGN_COPY[d.id];
+  if (!preview) return undefined;
+  return {
+    id: d.id,
+    collection: '',
+    demoCouple: 'Sample couple',
+    style: preview.style,
+    metaDescription: msg(d.name + ' wedding website preview. Explore its invitation, story, event details and RSVP pages; final artwork and Etsy availability are pending.'),
+    intro: msg(preview.style + '. This catalogue preview uses interim artwork while the final design assets and Etsy availability are pending.'),
+    opening: preview.opening,
+    pages: {
+      home: preview.home,
+      story: msg('A three-photo story gallery with captions and controls to move between moments.'),
+      details: msg('A wedding schedule with venue information, calendar links and celebration details.'),
+      rsvp: msg('An RSVP page with the shared guest reply form.'),
+    },
+    palette: [],
+    fonts: [],
+    llmsLine: d.name + ': ' + preview.style + '. Preview only; final artwork and Etsy availability are pending.',
+    relatedGuides: ['what-to-put-on-your-wedding-website', 'when-to-send-your-wedding-website'],
+  };
+}
+
 export interface Design extends DesignCommerce {
   copy: DesignCopy;
 }
@@ -974,6 +1061,23 @@ export function liveDesigns(cfg: MarketingConfig = MARKETING): Design[] {
 
 export function liveDesign(id: string, cfg: MarketingConfig = MARKETING): Design | null {
   return liveDesigns(cfg).find((d) => d.id === id) ?? null;
+}
+
+/** Live and preview designs shown in the catalogue; hidden 'coming' designs are excluded. */
+export function catalogDesigns(cfg: MarketingConfig = MARKETING): Design[] {
+  return cfg.designs
+    .filter((d) => d.status !== 'coming')
+    .map((d) => {
+      // a 'preview' design keeps its envelope-cover catalogue copy (main f1228e88) until it goes live; its full copy
+      // (DESIGN_COPY, G175) still names the panel's opening tab (lib/panel/state.ts)
+      const copy = (d.status === 'preview' ? previewDesignCopy(d) : undefined) ?? DESIGN_COPY[d.id];
+      if (!copy) throw new Error('lib/marketing/designs.ts has no copy for catalog design "' + d.id + '"');
+      return { ...d, copy };
+    });
+}
+
+export function catalogDesign(id: string, cfg: MarketingConfig = MARKETING): Design | null {
+  return catalogDesigns(cfg).find((d) => d.id === id) ?? null;
 }
 
 /**

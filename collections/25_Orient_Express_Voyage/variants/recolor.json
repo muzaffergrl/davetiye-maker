@@ -1,0 +1,223 @@
+{
+  "theme": "orient-express-voyage",
+  "note": "G177 recolour manifest (tools/recolor_parts.py, docs/25). Every image part of this theme is INTERIM (stand-ins toned from other designs' GPT pixels) until its PAKET 5 GPT part arrives, so the palettes are built CSS-only (build --css-only). Family anchors are the theme's CSS colours; before the image build re-measure each anchor as the median colour of the real GPT parts and review the contact sheets (docs/25 §2.3–2.4).",
+  "image_build": "css-only (interim parts; re-run after GPT)",
+  "swatch": [
+    "#1E3A2C",
+    "#B8914B",
+    "#F3EBD9"
+  ],
+  "families": {
+    "green": {
+      "anchor": "#1E3A2C",
+      "sigma": 28,
+      "cmin": 0.018,
+      "cfull": 0.03,
+      "note": "bottle-green leather and carriage panels"
+    },
+    "brass": {
+      "anchor": "#B8914B",
+      "sigma": 12,
+      "cmin": 0.05,
+      "cfull": 0.07,
+      "note": "brass"
+    },
+    "route": {
+      "anchor": "#8C2F39",
+      "sigma": 14,
+      "cmin": 0.06,
+      "cfull": 0.09,
+      "note": "route red on the map"
+    }
+  },
+  "groups": {
+    "art": [
+      "green",
+      "brass",
+      "route"
+    ]
+  },
+  "parts": {
+    "clock": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "favicon": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "map": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "paper": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "pass_mid": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "pass_stub": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "pass_top": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "ph_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "ph_wide": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "ph_window": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "poster": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "stamp": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "station_bg": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "strap_l": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "strap_r": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "tag": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "ticket": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "wall": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "wallet_cover": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "wallet_cover_in": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "wallet_inside": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "wallet_pocket": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "window_frame": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    }
+  },
+  "print": {},
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "green",
+      "brass",
+      "route"
+    ],
+    "roles": {},
+    "keep": [
+      "--ivory",
+      "--paper"
+    ],
+    "contrast": [
+      [
+        "--ivory",
+        "--green",
+        4.5
+      ],
+      [
+        "--ivory",
+        "--green-deep",
+        4.5
+      ],
+      [
+        "--ivory",
+        "--green-soft",
+        4.5
+      ],
+      [
+        "--brass-light",
+        "--green",
+        4.5
+      ],
+      [
+        "--ink",
+        "--ivory",
+        4.5
+      ],
+      [
+        "--ink",
+        "--paper",
+        4.5
+      ],
+      [
+        "--muted",
+        "--paper",
+        4.5
+      ],
+      [
+        "--brass-ink",
+        "--paper",
+        4.5
+      ],
+      [
+        "--route",
+        "--paper",
+        4.5
+      ]
+    ]
+  }
+}

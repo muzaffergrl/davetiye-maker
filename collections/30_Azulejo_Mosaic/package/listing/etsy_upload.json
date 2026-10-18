@@ -37,7 +37,7 @@
   "price_note": "Proposed: the design price of 01–21, not confirmed for this design (config.ts '[PRICE]'). Approved by the user on 2026-10-16 (K42, docs/23 §1). Shop currency TRY (K38): Etsy gets the TL amount; USD is approximate, at 49.53 TRY per USD, BloombergHT, 2026-10-16 09:30 (USD/TRY 49.5247 buy / 49.5300 sell).",
   "quantity": 999,
   "renewal": null,
-  "sales_status": "coming",
+  "sales_status": "preview",
   "shop_section": "[SHOP SECTION]",
   "digital_files": [
     {
@@ -285,10 +285,134 @@
   "blockers": [
     "listing images missing: collections/30_Azulejo_Mosaic/package/listing/images_editorial/01_cover.png, collections/30_Azulejo_Mosaic/package/listing/images_editorial/02_opening.png, collections/30_Azulejo_Mosaic/package/listing/images_editorial/03_pages.png, collections/30_Azulejo_Mosaic/package/listing/images_editorial/04_edit.png, collections/30_Azulejo_Mosaic/package/listing/images_editorial/05_rsvp.png, collections/30_Azulejo_Mosaic/package/listing/images_editorial/06_details.png, collections/30_Azulejo_Mosaic/package/listing/images_editorial/07_how.png, collections/30_Azulejo_Mosaic/package/listing/images_editorial/08_included.png, collections/30_Azulejo_Mosaic/package/listing/images_editorial/09_devices.png",
     "listing video missing",
-    "sales status 'coming' in platform/lib/marketing/config.ts (K41: not for sale)",
+    "sales status 'preview' in platform/lib/marketing/config.ts (K41: not for sale)",
     "price not decided for this design (config.ts price '[PRICE]'; 1460 TL is the 01–21 design price, docs/23 §1)",
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Azulejo Mosaic)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=azulejo-mosaic",
+        "image": "collections/30_Azulejo_Mosaic/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Manganese Violet & Terracotta",
+        "variant": "manganese-violet",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=azulejo-mosaic&variant=manganese-violet",
+        "image": "collections/30_Azulejo_Mosaic/package/listing/images_editorial/palette_manganese-violet.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Copper Green & Ochre",
+        "variant": "copper-green",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=azulejo-mosaic&variant=copper-green",
+        "image": "collections/30_Azulejo_Mosaic/package/listing/images_editorial/palette_copper-green.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Teal Glaze & Terracotta",
+        "variant": "teal-glaze",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=azulejo-mosaic&variant=teal-glaze",
+        "image": "collections/30_Azulejo_Mosaic/package/listing/images_editorial/palette_teal-glaze.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Wine Glaze & Ochre",
+        "variant": "wine-ochre",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=azulejo-mosaic&variant=wine-ochre",
+        "image": "collections/30_Azulejo_Mosaic/package/listing/images_editorial/palette_wine-ochre.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Slate Blue & Terracotta",
+        "variant": "slate-blue",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=azulejo-mosaic&variant=slate-blue",
+        "image": "collections/30_Azulejo_Mosaic/package/listing/images_editorial/palette_slate-blue.jpg",
+        "image_exists": false
+      }
+    ],
+    "offered": [
+      "Original (Azulejo Mosaic)"
+    ],
+    "images": [
+      {
+        "file": "collections/30_Azulejo_Mosaic/package/listing/images_editorial/10_palettes.jpg",
+        "exists": false,
+        "option": null,
+        "upload": false,
+        "alt": "Azulejo Mosaic in 6 color palettes: the opening page of each, side by side",
+        "status": "missing"
+      },
+      {
+        "file": "collections/30_Azulejo_Mosaic/package/listing/images_editorial/palette_original.jpg",
+        "exists": false,
+        "option": "Original (Azulejo Mosaic)",
+        "upload": false,
+        "alt": "Azulejo Mosaic in its original palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/30_Azulejo_Mosaic/package/listing/images_editorial/palette_manganese-violet.jpg",
+        "exists": false,
+        "option": "Manganese Violet & Terracotta",
+        "upload": false,
+        "alt": "Azulejo Mosaic in the Manganese Violet & Terracotta palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/30_Azulejo_Mosaic/package/listing/images_editorial/palette_copper-green.jpg",
+        "exists": false,
+        "option": "Copper Green & Ochre",
+        "upload": false,
+        "alt": "Azulejo Mosaic in the Copper Green & Ochre palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/30_Azulejo_Mosaic/package/listing/images_editorial/palette_teal-glaze.jpg",
+        "exists": false,
+        "option": "Teal Glaze & Terracotta",
+        "upload": false,
+        "alt": "Azulejo Mosaic in the Teal Glaze & Terracotta palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/30_Azulejo_Mosaic/package/listing/images_editorial/palette_wine-ochre.jpg",
+        "exists": false,
+        "option": "Wine Glaze & Ochre",
+        "upload": false,
+        "alt": "Azulejo Mosaic in the Wine Glaze & Ochre palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/30_Azulejo_Mosaic/package/listing/images_editorial/palette_slate-blue.jpg",
+        "exists": false,
+        "option": "Slate Blue & Terracotta",
+        "upload": false,
+        "alt": "Azulejo Mosaic in the Slate Blue & Terracotta palette: the opening page closed and opening",
+        "status": "missing"
+      }
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

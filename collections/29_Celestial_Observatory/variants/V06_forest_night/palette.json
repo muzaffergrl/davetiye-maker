@@ -1,0 +1,24 @@
+{
+  "id": "V06_forest_night",
+  "slug": "forest-night",
+  "name": "Forest Night & Brass",
+  "ink": "#141A33",
+  "deep": "#02160D",
+  "primary": "#13291F",
+  "mist_top": "#A8B4AE",
+  "mist_bottom": "#8A958F",
+  "gold": "#C8A24E",
+  "gold_light": "#E2C27A",
+  "ivory": "#EEEBE3",
+  "leaf": "#9B7A3C",
+  "swatch": [
+    "#13291F",
+    "#C8A24E",
+    "#EEEBE3"
+  ],
+  "status": "coming",
+  "families": {
+    "midnight": "primary",
+    "gold": null
+  }
+}

@@ -183,7 +183,7 @@ Gerçek bir kişiye/ünlüye benzerse yeniden üretilir. Story fotoğrafları si
 #### 2.1 Ana portre
 **Kaydet:** `collections/29_Celestial_Observatory/assets/gpt/photos/hero_portrait.jpg` · Kare 1280×1280 (1:1)
 ```
-Square 1:1 wedding portrait of the fictional couple Celeste and Rowan (as described above; not resembling any real person) at blue hour on a high desert ridge: she in a simple silver-ivory satin gown, he in a midnight-blue suit, standing close and smiling at each other, waist-up, faces in the middle of the frame, the first stars appearing in a deep blue sky behind them and a small white observatory dome softly out of focus far away. Photorealistic, calm midnight, silver and gold palette, subtle grain. No text, no frame.
+Square 1:1 wedding portrait of the fictional couple Celeste and Rowan, in their early thirties (Celeste: long loose auburn waves, fair skin with light freckles, a slim gold ring; Rowan: short dark-blond hair, a light stubble, olive skin; they must not resemble any real person or celebrity) at blue hour on a high desert ridge: she in a simple silver-ivory satin gown, he in a midnight-blue suit, standing close and smiling at each other, waist-up, faces in the middle of the frame, the first stars appearing in a deep blue sky behind them and a small white observatory dome softly out of focus far away. Photorealistic, calm midnight, silver and gold palette, subtle grain. No text, no frame.
 ```
 
 #### 2.2 Story 1 — "A shared telescope"

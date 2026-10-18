@@ -1,0 +1,24 @@
+{
+  "id": "V03_moss_green",
+  "slug": "moss-green",
+  "name": "Moss Green & Gold",
+  "ink": "#1D2340",
+  "deep": "#192D1C",
+  "primary": "#2D4230",
+  "mist_top": "#C8D3C9",
+  "mist_bottom": "#A8B3A9",
+  "gold": "#C9A55A",
+  "gold_light": "#E3C987",
+  "ivory": "#F3ECDC",
+  "leaf": "#7A5C22",
+  "swatch": [
+    "#2D4230",
+    "#C9A55A",
+    "#F3ECDC"
+  ],
+  "status": "coming",
+  "families": {
+    "indigo": "primary",
+    "gold": null
+  }
+}

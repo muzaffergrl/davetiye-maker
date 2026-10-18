@@ -1,10 +1,10 @@
-// /designs/<id> — one design (docs/14 §6.3; G066 comp u1_design_detail_390). Static for every live design; anything
+// /designs/<id> — one design (docs/14 §6.3; G066 comp u1_design_detail_390). Static for live and preview designs; anything
 // else is a 404. G144: one body for every language; the design's own copy (lib/marketing/designs.ts) is translated
 // through the dictionary like every other text.
 import { Play } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { MARKETING } from '../../../lib/marketing/config.ts';
-import { demoPath, designOgImage, liveDesign, liveDesigns, openingObject, startPath } from '../../../lib/marketing/designs.ts';
+import { catalogDesign, catalogDesigns, demoPath, designOgImage, openingObject, startPath } from '../../../lib/marketing/designs.ts';
 import { editable, FIXED, included, LIMITS, NOT_INCLUDED, SITE_PAGES, sitePageNames } from '../../../lib/marketing/facts.ts';
 import { loadGuideIn } from '../../../lib/marketing/guides.ts';
 import { thingIn, type Market, type T } from '../../../lib/marketing/i18n.ts';
@@ -35,13 +35,13 @@ import {
 } from '../ui.tsx';
 
 export function designStaticParams() {
-  return liveDesigns().map((d) => ({ design: d.id }));
+  return catalogDesigns().map((d) => ({ design: d.id }));
 }
 
 export function designMetadata(id: string, m: Market) {
   const page = designPage(id, MARKETING, m.t);
   if (!page) return {};
-  const d = liveDesign(id)!;
+  const d = catalogDesign(id)!;
   const { t } = m;
   return pageMetadata(page, {
     lang: m.lang,
@@ -100,13 +100,14 @@ function designFaq(name: string, thing: string, t: T, palettes: number) {
 
 export function DesignPage({ id, m }: { id: string; m: Market }) {
   const { t } = m;
-  const d = liveDesign(id);
+  const d = catalogDesign(id);
   const page = designPage(id, MARKETING, t);
   if (!d || !page) notFound();
-  const demo = demoDesigns(MARKETING, m).filter((x) => x.id === d.id);
+  const demo = demoDesigns(MARKETING, m, [d]);
   const video = openingVideo(d.id);
+  const hasScreens = SITE_PAGES.some((p) => designScreen(d.id, p.key));
   const price = realPrice(d.price);
-  const others = liveDesigns().filter((x) => x.id !== d.id);
+  const others = catalogDesigns().filter((x) => x.id !== d.id);
   const related = d.copy.relatedGuides.map((g) => loadGuideIn(g, m.lang)).filter((g) => !!g);
   // G099: what guests tap first here (envelope, gatefold, pouch, wallet, book or sleeve), from the design's own opening
   const thing = thingIn(t, openingObject(d.copy));
@@ -137,13 +138,16 @@ export function DesignPage({ id, m }: { id: string; m: Market }) {
             action={<EtsyButton design={d} placement="design-hero" className={s.btnLarge} withPrice={etsyPrice} m={m} />}
             className={`${s.heroStickyActions} ${s.heroDesign}`}
             footnote={
-              <p className={s.small}>
-                <a href={startPath(d.id)} data-track="start_click" data-track-design={d.id}>
-                  {t('Already bought it? Start your website')}
-                </a>
-              </p>
+              d.status === 'live' ? (
+                <p className={s.small}>
+                  <a href={startPath(d.id)} data-track="start_click" data-track-design={d.id}>
+                    {t('Already bought it? Start your website')}
+                  </a>
+                </p>
+              ) : null
             }
           >
+            {d.status === 'preview' ? <Eyebrow>{t('Coming soon on Etsy')}</Eyebrow> : null}
             <h1 className={s.h1}>{page.h1}</h1>
             <p className={s.lead}>{t(d.copy.style)}.</p>
           </HeroDemo>
@@ -156,7 +160,7 @@ export function DesignPage({ id, m }: { id: string; m: Market }) {
             {t('What your guests see after the {thing} opens', { thing })}
           </h2>
           <p className={s.lead}>{t(d.copy.intro)}</p>
-          <ul className={s.thumbRow} data-fx-deal>
+          {hasScreens ? <ul className={s.thumbRow} data-fx-deal>
             {SITE_PAGES.map((p) => {
               const file = designScreen(d.id, p.key);
               return (
@@ -173,7 +177,7 @@ export function DesignPage({ id, m }: { id: string; m: Market }) {
                 </li>
               );
             })}
-          </ul>
+          </ul> : null}
           <dl className={s.pageNotes}>
             {SITE_PAGES.map((p) => (
               <div key={p.key}>
@@ -186,15 +190,17 @@ export function DesignPage({ id, m }: { id: string; m: Market }) {
       </Section>
 
       {/* G141 (K45 item 7): every real screen of the design, then the panel that edits it */}
-      <Section labelledBy="screens" band>
-        <Container>
-          <h2 id="screens" className={s.h2}>
-            {t(DESIGN_GALLERY_COPY.title, { thing })}
-          </h2>
-          <DesignScreens design={d} m={m} />
-          <TextLink href={m.href('/#edit')}>{t(DESIGN_GALLERY_COPY.tourLink)}</TextLink>
-        </Container>
-      </Section>
+      {hasScreens ? (
+        <Section labelledBy="screens" band>
+          <Container>
+            <h2 id="screens" className={s.h2}>
+              {t(DESIGN_GALLERY_COPY.title, { thing })}
+            </h2>
+            <DesignScreens design={d} m={m} />
+            <TextLink href={m.href('/#edit')}>{t(DESIGN_GALLERY_COPY.tourLink)}</TextLink>
+          </Container>
+        </Section>
+      ) : null}
 
       <Section labelledBy="change">
         <Container>
@@ -210,16 +216,20 @@ export function DesignPage({ id, m }: { id: string; m: Market }) {
               <CheckList items={FIXED.map((f) => t(f))} tone="no" />
               <h3 className={s.h3}>{t('Details')}</h3>
               <dl className={s.specs}>
-                <div>
-                  <dt>{t('Colors')}</dt>
-                  <dd>
-                    <Swatches palette={d.copy.palette} m={m} />
-                  </dd>
-                </div>
-                <div>
-                  <dt>{t('Fonts')}</dt>
-                  <dd>{d.copy.fonts.join(', ')}</dd>
-                </div>
+                {d.copy.palette.length > 0 ? (
+                  <div>
+                    <dt>{t('Colors')}</dt>
+                    <dd>
+                      <Swatches palette={d.copy.palette} m={m} />
+                    </dd>
+                  </div>
+                ) : null}
+                {d.copy.fonts.length > 0 ? (
+                  <div>
+                    <dt>{t('Fonts')}</dt>
+                    <dd>{d.copy.fonts.join(', ')}</dd>
+                  </div>
+                ) : null}
                 <div>
                   <dt>{t('Pages')}</dt>
                   <dd>
@@ -258,7 +268,17 @@ export function DesignPage({ id, m }: { id: string; m: Market }) {
                     label={t('Screen recording: the {name} {thing} opens', { name: d.name, thing })}
                   />
                 </div>
-              ) : null}
+              ) : (
+                <img
+                  src={designOgImage(d.id)}
+                  alt={t('{name} wedding website artwork: {style}', { name: d.name, style: t(d.copy.style).toLowerCase() })}
+                  width={1200}
+                  height={630}
+                  loading="lazy"
+                  decoding="async"
+                  className={s.previewArtwork}
+                />
+              )}
             </div>
             <div className={s.splitText}>
               <Eyebrow>{t('The opening')}</Eyebrow>
@@ -266,12 +286,14 @@ export function DesignPage({ id, m }: { id: string; m: Market }) {
                 {t('How {name} opens', { name: d.name })}
               </h2>
               <p className={s.lead}>{t(d.copy.opening)}</p>
-              <p className={s.muted}>
-                {t(
-                  'This is a real screen recording of the design with demo content ({couple} are fictional). Guests can skip the animation, and on a phone set to reduce motion a tap goes straight to the home page.',
-                  { couple: d.copy.demoCouple },
-                )}
-              </p>
+              {video ? (
+                <p className={s.muted}>
+                  {t(
+                    'This is a real screen recording of the design with demo content ({couple} are fictional). Guests can skip the animation, and on a phone set to reduce motion a tap goes straight to the home page.',
+                    { couple: d.copy.demoCouple },
+                  )}
+                </p>
+              ) : null}
             </div>
           </div>
         </Container>
@@ -290,7 +312,7 @@ export function DesignPage({ id, m }: { id: string; m: Market }) {
             </div>
           </div>
           <div className={s.ctaRow}>
-            <EtsyButton design={d} placement="design-included" withPrice={price ? displayPrice(price) : null} m={m} />
+            {d.status === 'live' ? <EtsyButton design={d} placement="design-included" withPrice={price ? displayPrice(price) : null} m={m} /> : <span className={`${s.btn} ${s.btnDisabled}`} aria-disabled="true">{t('Coming soon on Etsy')}</span>}
             <TextLink href={m.href('/pricing')}>{t('Pricing details')}</TextLink>
           </div>
         </Container>
@@ -332,7 +354,7 @@ export function DesignPage({ id, m }: { id: string; m: Market }) {
 
       {/* phones: the same order — Etsy (primary) first, the live demo second */}
       <div className={s.stickyBar}>
-        <EtsyButton design={d} placement="design-sticky" m={m} />
+        {d.status === 'live' ? <EtsyButton design={d} placement="design-sticky" m={m} /> : <span className={`${s.btn} ${s.btnDisabled}`} aria-disabled="true">{t('Coming soon on Etsy')}</span>}
         <a className={`${s.btn} ${s.btnSecondary}`} href={demoPath(d.id)} data-demo={d.id} data-demo-placement="design-sticky">
           <Play aria-hidden size={16} strokeWidth={2} />
           {t('Live demo')}
@@ -340,20 +362,35 @@ export function DesignPage({ id, m }: { id: string; m: Market }) {
       </div>
 
       <JsonLd
-        data={graph(
-          webPage(page, MARKETING, { mainEntity: { '@id': `${product(d, MARKETING, m)['@id']}` } }, m),
-          product(d, MARKETING, m),
-          videoObject(d, MARKETING, m),
-          breadcrumbs(
-            [
-              { name: t('Home'), path: '/' },
-              { name: t('Designs'), path: '/designs' },
-              { name: d.name, path: page.path },
-            ],
-            MARKETING,
-            m,
-          ),
-        )}
+        data={
+          d.status === 'live'
+            ? graph(
+                webPage(page, MARKETING, { mainEntity: { '@id': `${product(d, MARKETING, m)['@id']}` } }, m),
+                product(d, MARKETING, m),
+                videoObject(d, MARKETING, m),
+                breadcrumbs(
+                  [
+                    { name: t('Home'), path: '/' },
+                    { name: t('Designs'), path: '/designs' },
+                    { name: d.name, path: page.path },
+                  ],
+                  MARKETING,
+                  m,
+                ),
+              )
+            : graph(
+                webPage(page, MARKETING, {}, m),
+                breadcrumbs(
+                  [
+                    { name: t('Home'), path: '/' },
+                    { name: t('Designs'), path: '/designs' },
+                    { name: d.name, path: page.path },
+                  ],
+                  MARKETING,
+                  m,
+                ),
+              )
+        }
       />
     </>
   );

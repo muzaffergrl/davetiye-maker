@@ -6,7 +6,7 @@
 // Layout of five cards / the chip strip's fade: tests/marketing-browser.ts (G085 section).
 import { afterEach, before, beforeEach, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { POST as claimRoute } from '../app/api/start/route.ts';
 import { setClaimRateLimiter } from '../lib/claim/limits.ts';
@@ -23,7 +23,7 @@ import { offeredThemes } from '../lib/themes/offered.ts';
 import { checkManifest, type AssetManifest } from '../scripts/marketing-assets.ts';
 import assets from '../lib/marketing/assets.json' with { type: 'json' };
 import { PLATFORM_ROOT, REPO_ROOT, tmpDir } from './helpers.ts';
-import { readyConfig, validateJsonLd } from './marketing-helpers.ts';
+import { designFolders, readyConfig, validateJsonLd } from './marketing-helpers.ts';
 
 const ID = 'vintage-airmail-love-letter';
 const NAME = 'Vintage Airmail Love Letter';
@@ -144,7 +144,9 @@ test('real screens and opening clip of 04 are in assets.json and on disk; the fo
   assert.ok(m.opening!.bytes > 50_000 && m.opening!.bytes <= 1_500_000, String(m.opening!.bytes));
   assert.deepEqual(Object.keys(manifest.designs).slice(0, 5), FIVE);
   // only 04's folder is new: one folder per live design, nothing else
-  assert.deepEqual(readdirSync(path.join(PLATFORM_ROOT, 'public/marketing/designs')).sort(), [...liveDesigns().map((d) => d.id)].sort());
+  const folders = designFolders(liveDesigns().map((d) => d.id));
+  assert.deepEqual(folders.onDisk, folders.expected, 'one folder per live design, plus the envelope cover of each preview design');
+  assert.deepEqual(folders.strayPreviewFiles, [], 'a preview design folder holds only envelope.webp');
 });
 
 test('JSON-LD: Product (no Offer while the price is a placeholder) + VideoObject for 04; ItemList of /designs has 5', () => {

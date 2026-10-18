@@ -14,6 +14,7 @@ import s from './marketing.module.css';
 import { designScreen, openingVideo, panelScreen } from './media.ts';
 import { compareData, openingKinds } from './showcase-data.ts';
 import { Screen } from './ui.tsx';
+import { EnvelopeCover, hasEnvelopeCover } from './InvitationCover.tsx';
 
 /** `id` keeps the radio names and the compare host of two galleries apart (unique per page). */
 export function DesignGallery({
@@ -112,7 +113,12 @@ export function DesignScreens({ design, m = enMarket }: { design: Design; m?: Ma
   return (
     <>
       <ul className={s.screenStrip} data-scroll-x aria-label={t(G.designLabel, { name: design.name })} tabIndex={0}>
-        {screens.map((x) => (
+        {hasEnvelopeCover(design.id) && screens.length === 0 ? (
+          <li key="envelope-cover">
+            <EnvelopeCover design={design} />
+            <p className={s.stripLabel}>{t(G.screens[0].label)}</p>
+          </li>
+        ) : screens.map((x) => (
           <li key={x.key}>
             <Screen file={x.f} alt={t('{name}: {screen} (demo content)', { name: design.name, screen: t(x.label) })} sizes="(min-width: 1024px) 200px, 40vw" />
             <p className={s.stripLabel}>{t(x.label)}</p>

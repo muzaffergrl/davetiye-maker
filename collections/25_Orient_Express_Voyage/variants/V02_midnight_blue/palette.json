@@ -1,0 +1,25 @@
+{
+  "id": "V02_midnight_blue",
+  "slug": "midnight-blue",
+  "name": "Midnight Blue & Brass",
+  "ink": "#1C2A21",
+  "deep": "#0C1936",
+  "primary": "#1E2D4C",
+  "mist_top": "#B5BED0",
+  "mist_bottom": "#969FB0",
+  "gold": "#B8914B",
+  "gold_light": "#D8BD84",
+  "ivory": "#F3EBD9",
+  "leaf": "#8C2F39",
+  "swatch": [
+    "#1E2D4C",
+    "#B8914B",
+    "#F3EBD9"
+  ],
+  "status": "coming",
+  "families": {
+    "green": "primary",
+    "brass": null,
+    "route": null
+  }
+}

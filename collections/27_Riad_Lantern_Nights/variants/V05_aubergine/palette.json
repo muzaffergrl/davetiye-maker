@@ -1,0 +1,25 @@
+{
+  "id": "V05_aubergine",
+  "slug": "aubergine",
+  "name": "Aubergine & Saffron",
+  "ink": "#3A2114",
+  "deep": "#2B102A",
+  "primary": "#40243F",
+  "mist_top": "#CABAC9",
+  "mist_bottom": "#AB9BA9",
+  "gold": "#C9A35B",
+  "gold_light": "#E2C48C",
+  "ivory": "#F6EAD2",
+  "leaf": "#E3A54A",
+  "swatch": [
+    "#40243F",
+    "#C9A35B",
+    "#F6EAD2"
+  ],
+  "status": "coming",
+  "families": {
+    "teal": "primary",
+    "lantern": null,
+    "cedar": null
+  }
+}

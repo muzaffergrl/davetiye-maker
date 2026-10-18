@@ -1,0 +1,88 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 22
+   (kaynak: collections/22_Nocturne_Lake_Estate/variants/<V0x_slug>/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-14150f: 20 21 15;
+  --c-181911: 24 25 17;
+  --c-1c1d15: 28 29 21;
+  --c-1d1f19: 29 31 25;
+  --c-2c2a21: 44 42 33;
+  --c-b7a17c: 183 161 124;
+  --c-c7a978: 199 169 120;
+  --c-d4b688: 212 182 136;
+  --c-d9c2a0: 217 194 160;
+  --c-e0c7a4: 224 199 164;
+}
+
+/* V04_burgundy_noir · Burgundy Noir & Gold */
+html[data-variant="burgundy-noir"] {
+  --black: #1B0E0F;
+  --c-14150f: 36 13 17;
+  --c-181911: 44 13 21;
+  --c-1c1d15: 48 17 25;
+  --c-1d1f19: 47 23 24;
+  --c-2c2a21: 63 31 46;
+  --night: #2A0F15;
+}
+
+/* V03_emerald_night · Emerald Night & Gold */
+html[data-variant="emerald-night"] {
+  --black: #121B17;
+  --c-14150f: 14 31 24;
+  --c-181911: 13 36 26;
+  --c-1c1d15: 18 41 30;
+  --c-1d1f19: 23 42 36;
+  --c-2c2a21: 37 55 38;
+  --night: #10241B;
+}
+
+/* V02_midnight_navy · Midnight Navy & Champagne */
+html[data-variant="midnight-navy"] {
+  --black: #13141D;
+  --c-14150f: 17 23 40;
+  --c-181911: 19 27 48;
+  --c-1c1d15: 23 31 52;
+  --c-1d1f19: 29 32 50;
+  --c-2c2a21: 27 47 68;
+  --night: #141B2E;
+}
+
+/* V05_moonlit_silver · Moonlit Silver */
+html[data-variant="moonlit-silver"] {
+  --black: #121316;
+  --c-14150f: 20 22 27;
+  --c-181911: 22 26 33;
+  --c-1c1d15: 26 30 37;
+  --c-1d1f19: 30 32 37;
+  --c-2c2a21: 38 45 51;
+  --c-b7a17c: 185 183 178;
+  --c-c7a978: 195 198 204;
+  --c-d4b688: 208 211 217;
+  --c-d9c2a0: 219 208 193;
+  --c-e0c7a4: 225 217 207;
+  --gold: #C3C6CC;
+  --gold-ink: #D9DBE0;
+  --line: rgba(195, 198, 204, 0.251);
+  --night: #171A20;
+}
+
+/* V06_plum_rose_gold · Plum Night & Rose Gold */
+html[data-variant="plum-rose-gold"] {
+  --black: #18101A;
+  --c-14150f: 29 16 36;
+  --c-181911: 35 18 44;
+  --c-1c1d15: 39 22 48;
+  --c-1d1f19: 41 25 44;
+  --c-2c2a21: 47 38 69;
+  --c-b7a17c: 189 155 138;
+  --c-c7a978: 209 160 144;
+  --c-d4b688: 221 174 159;
+  --c-d9c2a0: 220 191 168;
+  --c-e0c7a4: 228 195 175;
+  --gold: #D1A090;
+  --gold-ink: #E2B7A7;
+  --line: rgba(209, 160, 144, 0.251);
+  --night: #22132A;
+}

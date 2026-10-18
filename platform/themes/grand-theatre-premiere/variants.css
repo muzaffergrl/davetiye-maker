@@ -1,0 +1,50 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 24
+   (kaynak: collections/24_Grand_Theatre_Premiere/variants/<V0x_slug>/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-061416: 6 20 22;
+  --c-0b2b2d: 11 43 45;
+}
+
+/* V02_crimson_velvet · Crimson Velvet & Gold */
+html[data-variant="crimson-velvet"] {
+  --c-061416: 14 15 15;
+  --c-0b2b2d: 56 11 12;
+  --peacock: #7A1E26;
+  --pit: #0E0F0F;
+  --velvet: #521213;
+}
+
+/* V04_emerald_velvet · Emerald Velvet & Gold */
+html[data-variant="emerald-velvet"] {
+  --c-0b2b2d: 11 43 29;
+  --peacock: #1C5A3C;
+  --velvet: #0E3E2A;
+}
+
+/* V06_onyx_gold · Black Tie Onyx & Gold */
+html[data-variant="onyx-gold"] {
+  --c-061416: 5 14 15;
+  --c-0b2b2d: 16 18 19;
+  --peacock: #34383A;
+  --pit: #050E0F;
+  --velvet: #1E2122;
+}
+
+/* V05_plum_velvet · Plum Velvet & Gold */
+html[data-variant="plum-velvet"] {
+  --c-061416: 9 14 18;
+  --c-0b2b2d: 35 12 36;
+  --peacock: #55285A;
+  --pit: #090E12;
+  --velvet: #371638;
+}
+
+/* V03_royal_sapphire · Royal Sapphire & Gold */
+html[data-variant="royal-sapphire"] {
+  --c-0b2b2d: 15 29 56;
+  --peacock: #24447A;
+  --velvet: #192C53;
+}

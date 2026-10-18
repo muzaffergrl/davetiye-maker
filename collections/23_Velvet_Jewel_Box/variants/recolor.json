@@ -1,0 +1,171 @@
+{
+  "theme": "velvet-jewel-box",
+  "note": "G177 recolour manifest (tools/recolor_parts.py, docs/25). Every image part of this theme is INTERIM (stand-ins toned from other designs' GPT pixels) until its PAKET 5 GPT part arrives, so the palettes are built CSS-only (build --css-only). Family anchors are the theme's CSS colours; before the image build re-measure each anchor as the median colour of the real GPT parts and review the contact sheets (docs/25 §2.3–2.4).",
+  "image_build": "css-only (interim parts; re-run after GPT)",
+  "swatch": [
+    "#2A1328",
+    "#E8D3B0",
+    "#C99A86"
+  ],
+  "families": {
+    "velvet": {
+      "anchor": "#4A2142",
+      "sigma": 30,
+      "note": "aubergine velvet, plum ink"
+    },
+    "rose": {
+      "anchor": "#C99A86",
+      "sigma": 12,
+      "cmin": 0.045,
+      "cfull": 0.06,
+      "note": "rose gold"
+    },
+    "champagne": {
+      "anchor": "#E8D3B0",
+      "sigma": 12,
+      "cmin": 0.04,
+      "cfull": 0.055,
+      "note": "champagne satin"
+    }
+  },
+  "groups": {
+    "art": [
+      "velvet",
+      "rose",
+      "champagne"
+    ]
+  },
+  "parts": {
+    "bg_satin": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "bg_velvet": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "box_base": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "box_inner": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "box_lid": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "box_well": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "card_paper": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "closure": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "favicon": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "ph_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "ph_story": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "ph_wide": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    }
+  },
+  "print": {},
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "velvet",
+      "rose",
+      "champagne"
+    ],
+    "roles": {},
+    "keep": [
+      "--ivory",
+      "--c-f5b8b0"
+    ],
+    "contrast": [
+      [
+        "--ivory",
+        "--velvet",
+        4.5
+      ],
+      [
+        "--ivory",
+        "--night",
+        4.5
+      ],
+      [
+        "--champagne",
+        "--velvet",
+        4.5
+      ],
+      [
+        "--muted",
+        "--night",
+        4.5
+      ],
+      [
+        "--muted",
+        "--velvet",
+        4.5
+      ],
+      [
+        "--gold-ink",
+        "--velvet",
+        4.5
+      ],
+      [
+        "--ink",
+        "--ivory",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--ivory",
+        7.0
+      ],
+      [
+        "--rose-ink",
+        "--ivory",
+        7.0
+      ],
+      [
+        "--ivory",
+        "--plum",
+        4.5
+      ]
+    ]
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "theme": "kintsugi-washi",
+  "note": "G177 recolour manifest (tools/recolor_parts.py, docs/25). Every image part of this theme is INTERIM (stand-ins toned from other designs' GPT pixels) until its PAKET 5 GPT part arrives, so the palettes are built CSS-only (build --css-only). Family anchors are the theme's CSS colours; before the image build re-measure each anchor as the median colour of the real GPT parts and review the contact sheets (docs/25 §2.3–2.4).",
+  "image_build": "css-only (interim parts; re-run after GPT)",
+  "swatch": [
+    "#242E58",
+    "#C9A55A",
+    "#F3ECDC"
+  ],
+  "families": {
+    "indigo": {
+      "anchor": "#242E58",
+      "sigma": 25,
+      "note": "indigo washi, sumi-indigo ink"
+    },
+    "gold": {
+      "anchor": "#C9A55A",
+      "sigma": 12,
+      "cmin": 0.05,
+      "cfull": 0.07,
+      "note": "gold leaf"
+    }
+  },
+  "groups": {
+    "art": [
+      "indigo",
+      "gold"
+    ]
+  },
+  "parts": {
+    "favicon": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "ph_land": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "ph_portrait": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "ph_wide": {
+      "recolor": "keep",
+      "why": "photo placeholder: plain paper (re-check after GPT)"
+    },
+    "rice": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "washi_indigo": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "washi_inner": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    },
+    "washi_night": {
+      "recolor": "auto",
+      "group": "art",
+      "interim": true
+    }
+  },
+  "print": {},
+  "css": {
+    "files": [
+      "site.css",
+      "thank-you.css"
+    ],
+    "families": [
+      "indigo",
+      "gold"
+    ],
+    "roles": {},
+    "keep": [
+      "--rice",
+      "--rice-2",
+      "--c-9b2c20"
+    ],
+    "contrast": [
+      [
+        "--rice",
+        "--indigo",
+        4.5
+      ],
+      [
+        "--rice",
+        "--night",
+        4.5
+      ],
+      [
+        "--rice",
+        "--indigo-2",
+        4.5
+      ],
+      [
+        "--gold-light",
+        "--indigo",
+        4.5
+      ],
+      [
+        "--mist",
+        "--indigo",
+        4.5
+      ],
+      [
+        "--ink",
+        "--rice",
+        4.5
+      ],
+      [
+        "--ink",
+        "--rice-2",
+        4.5
+      ],
+      [
+        "--ink-soft",
+        "--rice",
+        4.5
+      ],
+      [
+        "--gold-ink",
+        "--rice",
+        4.5
+      ]
+    ]
+  }
+}

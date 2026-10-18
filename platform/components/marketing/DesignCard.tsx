@@ -5,12 +5,13 @@
 // button ("Try the live demo"), and gallery cards carry a "Compare" tick (Compare.tsx).
 import { Play } from 'lucide-react';
 import type { Design } from '../../lib/marketing/designs.ts';
-import { demoPath } from '../../lib/marketing/designs.ts';
+import { demoPath, designOgImage } from '../../lib/marketing/designs.ts';
 import { enMarket, type Market } from '../../lib/marketing/i18n.ts';
 import { realPrice } from '../../lib/marketing/placeholders.ts';
 import { SHOWCASE_COPY } from '../../lib/marketing/showcase.ts';
 import { displayPrice } from '../../lib/marketing/site.ts';
 import { CardOpening } from './CardOpening.tsx';
+import { EnvelopeCover, hasEnvelopeCover } from './InvitationCover.tsx';
 import { designScreen, openingVideo } from './media.ts';
 import s from './marketing.module.css';
 import { Screen } from './ui.tsx';
@@ -40,18 +41,20 @@ export function DesignCard({
   const v = openingVideo(design.id);
   const video = v ? { file: v.file, poster: v.poster, width: v.width, height: v.height } : null;
   const H = headingLevel === 2 ? 'h2' : 'h3';
+  const hasCover = hasEnvelopeCover(design.id);
   const price = realPrice(design.price);
   const sizes = '(min-width: 1024px) 220px, (min-width: 600px) 30vw, 34vw';
   return (
-    <article className={s.designCard} data-fx-spot data-styles={styles?.length ? styles.join(' ') : undefined}>
+    <article className={hasCover ? s.designCard + ' ' + s.envelopeDesignCard : s.designCard} data-fx-spot data-status={design.status} data-styles={styles?.length ? styles.join(' ') : undefined}>
       <CardOpening href={page} name={design.name} video={video} copy={{ play: t(SHOWCASE_COPY.play), stop: t(SHOWCASE_COPY.stop) }}>
-        {env ? <Screen file={env} alt="" sizes={sizes} className={s.cardScreen} /> : null}
+        {hasCover ? <EnvelopeCover design={design} /> : env ? <Screen file={env} alt="" sizes={sizes} className={s.cardScreen} /> : design.status === 'preview' ? <img src={designOgImage(design.id)} alt="" width={1200} height={630} loading="lazy" decoding="async" className={s.cardArtwork} /> : null}
         {home && !video ? <Screen file={home} alt="" sizes={sizes} className={`${s.cardScreen} ${s.cardScreenHover}`} /> : null}
       </CardOpening>
       <H className={s.designCardTitle}>
         <a href={page}>{design.name}</a>
       </H>
       {/* The style line shows on wider cards only (container query); phones get the comp's name-and-demo card. */}
+      {design.status === 'preview' ? <p className={s.designCardStatus}>{t('Coming soon on Etsy')}</p> : null}
       <p className={s.designCardStyle}>{t(design.copy.style)}.</p>
       {price ? <p className={s.designCardPrice}>{t('{price} on Etsy', { price: displayPrice(price) })}</p> : null}
       <div className={s.cardFoot}>

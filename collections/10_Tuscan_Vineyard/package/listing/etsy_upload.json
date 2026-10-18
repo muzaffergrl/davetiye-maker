@@ -221,46 +221,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=tuscan-vineyard"
+        "start_link": "/start?theme=tuscan-vineyard",
+        "image": "collections/10_Tuscan_Vineyard/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": true
       },
       {
         "name": "Plum & Gold",
         "variant": "plum-gold",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=tuscan-vineyard&variant=plum-gold"
+        "start_link": "/start?theme=tuscan-vineyard&variant=plum-gold",
+        "image": "collections/10_Tuscan_Vineyard/package/listing/images_editorial/palette_plum-gold.jpg",
+        "image_exists": true
       },
       {
         "name": "Rosé & Blush",
         "variant": "rose-blush",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=tuscan-vineyard&variant=rose-blush"
+        "start_link": "/start?theme=tuscan-vineyard&variant=rose-blush",
+        "image": "collections/10_Tuscan_Vineyard/package/listing/images_editorial/palette_rose-blush.jpg",
+        "image_exists": true
       },
       {
         "name": "Olive & Burgundy",
         "variant": "olive-burgundy",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=tuscan-vineyard&variant=olive-burgundy"
+        "start_link": "/start?theme=tuscan-vineyard&variant=olive-burgundy",
+        "image": "collections/10_Tuscan_Vineyard/package/listing/images_editorial/palette_olive-burgundy.jpg",
+        "image_exists": true
       },
       {
         "name": "Navy & Burgundy",
         "variant": "navy-burgundy",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=tuscan-vineyard&variant=navy-burgundy"
+        "start_link": "/start?theme=tuscan-vineyard&variant=navy-burgundy",
+        "image": "collections/10_Tuscan_Vineyard/package/listing/images_editorial/palette_navy-burgundy.jpg",
+        "image_exists": true
       },
       {
         "name": "Terracotta & Merlot",
         "variant": "terracotta-merlot",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=tuscan-vineyard&variant=terracotta-merlot"
+        "start_link": "/start?theme=tuscan-vineyard&variant=terracotta-merlot",
+        "image": "collections/10_Tuscan_Vineyard/package/listing/images_editorial/palette_terracotta-merlot.jpg",
+        "image_exists": true
       }
     ],
     "offered": [
       "Original (Tuscan Vineyard)"
+    ],
+    "images": [
+      {
+        "file": "collections/10_Tuscan_Vineyard/package/listing/images_editorial/10_palettes.jpg",
+        "exists": true,
+        "option": null,
+        "upload": false,
+        "alt": "Tuscan Vineyard in 6 color palettes: the opening page of each, side by side",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/10_Tuscan_Vineyard/package/listing/images_editorial/palette_original.jpg",
+        "exists": true,
+        "option": "Original (Tuscan Vineyard)",
+        "upload": false,
+        "alt": "Tuscan Vineyard in its original palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/10_Tuscan_Vineyard/package/listing/images_editorial/palette_plum-gold.jpg",
+        "exists": true,
+        "option": "Plum & Gold",
+        "upload": false,
+        "alt": "Tuscan Vineyard in the Plum & Gold palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/10_Tuscan_Vineyard/package/listing/images_editorial/palette_rose-blush.jpg",
+        "exists": true,
+        "option": "Rosé & Blush",
+        "upload": false,
+        "alt": "Tuscan Vineyard in the Rosé & Blush palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/10_Tuscan_Vineyard/package/listing/images_editorial/palette_olive-burgundy.jpg",
+        "exists": true,
+        "option": "Olive & Burgundy",
+        "upload": false,
+        "alt": "Tuscan Vineyard in the Olive & Burgundy palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/10_Tuscan_Vineyard/package/listing/images_editorial/palette_navy-burgundy.jpg",
+        "exists": true,
+        "option": "Navy & Burgundy",
+        "upload": false,
+        "alt": "Tuscan Vineyard in the Navy & Burgundy palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/10_Tuscan_Vineyard/package/listing/images_editorial/palette_terracotta-merlot.jpg",
+        "exists": true,
+        "option": "Terracotta & Merlot",
+        "upload": false,
+        "alt": "Tuscan Vineyard in the Terracotta & Merlot palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

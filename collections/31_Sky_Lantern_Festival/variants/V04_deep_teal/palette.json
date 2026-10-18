@@ -1,0 +1,25 @@
+{
+  "id": "V04_deep_teal",
+  "slug": "deep-teal",
+  "name": "Deep Teal Dusk & Amber",
+  "ink": "#3B2A4A",
+  "deep": "#01262E",
+  "primary": "#173A43",
+  "mist_top": "#B9CACF",
+  "mist_bottom": "#9AAAAF",
+  "gold": "#F2A65A",
+  "gold_light": "#FFD08A",
+  "ivory": "#F7EEDD",
+  "leaf": "#E7B4A6",
+  "swatch": [
+    "#173A43",
+    "#F2A65A",
+    "#F7EEDD"
+  ],
+  "status": "coming",
+  "families": {
+    "dusk": "primary",
+    "amber": null,
+    "rose": null
+  }
+}

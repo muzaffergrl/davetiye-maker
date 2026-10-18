@@ -1,0 +1,64 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 25
+   (kaynak: collections/25_Orient_Express_Voyage/variants/<V0x_slug>/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-11241b: 17 36 27;
+  --c-1e3a2c: 30 58 44;
+}
+
+/* V03_burgundy_carriage · Burgundy Carriage & Brass */
+html[data-variant="burgundy-carriage"] {
+  --c-11241b: 47 16 21;
+  --c-1e3a2c: 76 29 38;
+  --green: #4C1D26;
+  --green-deep: #2F1015;
+  --green-soft: #6B2E39;
+  --ink: #2C2020;
+  --muted: #5A4C4E;
+}
+
+/* V06_ebony_gold · Ebony & Gold */
+html[data-variant="ebony-gold"] {
+  --c-11241b: 19 18 14;
+  --c-1e3a2c: 39 36 31;
+  --green: #27241F;
+  --green-deep: #13120E;
+  --green-soft: #3D3932;
+  --ink: #1B1F1A;
+  --muted: #484B43;
+}
+
+/* V04_mahogany · Mahogany & Brass */
+html[data-variant="mahogany"] {
+  --c-11241b: 47 26 18;
+  --c-1e3a2c: 74 42 31;
+  --green: #4A2A1F;
+  --green-deep: #2F1A12;
+  --green-soft: #673D2F;
+  --ink: #2C251E;
+  --muted: #5B514B;
+}
+
+/* V02_midnight_blue · Midnight Blue & Brass */
+html[data-variant="midnight-blue"] {
+  --c-11241b: 17 26 47;
+  --c-1e3a2c: 30 45 76;
+  --green: #1E2D4C;
+  --green-deep: #111A2F;
+  --green-soft: #2F426B;
+  --ink: #18252C;
+  --muted: #425358;
+}
+
+/* V05_pullman_teal · Pullman Teal & Brass */
+html[data-variant="pullman-teal"] {
+  --c-11241b: 18 41 45;
+  --c-1e3a2c: 28 63 69;
+  --green: #1C3F45;
+  --green-deep: #12292D;
+  --green-soft: #2A575F;
+  --ink: #1C2D2B;
+  --muted: #4A5B55;
+}

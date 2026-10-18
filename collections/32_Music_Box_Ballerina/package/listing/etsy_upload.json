@@ -37,7 +37,7 @@
   "price_note": "Proposed: the design price of 01–21, not confirmed for this design (config.ts '[PRICE]'). Approved by the user on 2026-10-16 (K42, docs/23 §1). Shop currency TRY (K38): Etsy gets the TL amount; USD is approximate, at 49.53 TRY per USD, BloombergHT, 2026-10-16 09:30 (USD/TRY 49.5247 buy / 49.5300 sell).",
   "quantity": 999,
   "renewal": null,
-  "sales_status": "coming",
+  "sales_status": "preview",
   "shop_section": "[SHOP SECTION]",
   "digital_files": [
     {
@@ -285,10 +285,134 @@
   "blockers": [
     "listing images missing: collections/32_Music_Box_Ballerina/package/listing/images_editorial/01_cover.png, collections/32_Music_Box_Ballerina/package/listing/images_editorial/02_opening.png, collections/32_Music_Box_Ballerina/package/listing/images_editorial/03_pages.png, collections/32_Music_Box_Ballerina/package/listing/images_editorial/04_edit.png, collections/32_Music_Box_Ballerina/package/listing/images_editorial/05_rsvp.png, collections/32_Music_Box_Ballerina/package/listing/images_editorial/06_details.png, collections/32_Music_Box_Ballerina/package/listing/images_editorial/07_how.png, collections/32_Music_Box_Ballerina/package/listing/images_editorial/08_included.png, collections/32_Music_Box_Ballerina/package/listing/images_editorial/09_devices.png",
     "listing video missing",
-    "sales status 'coming' in platform/lib/marketing/config.ts (K41: not for sale)",
+    "sales status 'preview' in platform/lib/marketing/config.ts (K41: not for sale)",
     "price not decided for this design (config.ts price '[PRICE]'; 1460 TL is the 01–21 design price, docs/23 §1)",
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Music Box Ballerina)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=music-box-ballerina",
+        "image": "collections/32_Music_Box_Ballerina/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Lilac & Gold",
+        "variant": "lilac-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=music-box-ballerina&variant=lilac-gold",
+        "image": "collections/32_Music_Box_Ballerina/package/listing/images_editorial/palette_lilac-gold.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Powder Blue & Gold",
+        "variant": "powder-blue",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=music-box-ballerina&variant=powder-blue",
+        "image": "collections/32_Music_Box_Ballerina/package/listing/images_editorial/palette_powder-blue.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Sage Mint & Gold",
+        "variant": "sage-mint",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=music-box-ballerina&variant=sage-mint",
+        "image": "collections/32_Music_Box_Ballerina/package/listing/images_editorial/palette_sage-mint.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Champagne & Gold",
+        "variant": "champagne",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=music-box-ballerina&variant=champagne",
+        "image": "collections/32_Music_Box_Ballerina/package/listing/images_editorial/palette_champagne.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Peach Coral & Gold",
+        "variant": "peach-coral",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=music-box-ballerina&variant=peach-coral",
+        "image": "collections/32_Music_Box_Ballerina/package/listing/images_editorial/palette_peach-coral.jpg",
+        "image_exists": false
+      }
+    ],
+    "offered": [
+      "Original (Music Box Ballerina)"
+    ],
+    "images": [
+      {
+        "file": "collections/32_Music_Box_Ballerina/package/listing/images_editorial/10_palettes.jpg",
+        "exists": false,
+        "option": null,
+        "upload": false,
+        "alt": "Music Box Ballerina in 6 color palettes: the opening page of each, side by side",
+        "status": "missing"
+      },
+      {
+        "file": "collections/32_Music_Box_Ballerina/package/listing/images_editorial/palette_original.jpg",
+        "exists": false,
+        "option": "Original (Music Box Ballerina)",
+        "upload": false,
+        "alt": "Music Box Ballerina in its original palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/32_Music_Box_Ballerina/package/listing/images_editorial/palette_lilac-gold.jpg",
+        "exists": false,
+        "option": "Lilac & Gold",
+        "upload": false,
+        "alt": "Music Box Ballerina in the Lilac & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/32_Music_Box_Ballerina/package/listing/images_editorial/palette_powder-blue.jpg",
+        "exists": false,
+        "option": "Powder Blue & Gold",
+        "upload": false,
+        "alt": "Music Box Ballerina in the Powder Blue & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/32_Music_Box_Ballerina/package/listing/images_editorial/palette_sage-mint.jpg",
+        "exists": false,
+        "option": "Sage Mint & Gold",
+        "upload": false,
+        "alt": "Music Box Ballerina in the Sage Mint & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/32_Music_Box_Ballerina/package/listing/images_editorial/palette_champagne.jpg",
+        "exists": false,
+        "option": "Champagne & Gold",
+        "upload": false,
+        "alt": "Music Box Ballerina in the Champagne & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/32_Music_Box_Ballerina/package/listing/images_editorial/palette_peach-coral.jpg",
+        "exists": false,
+        "option": "Peach Coral & Gold",
+        "upload": false,
+        "alt": "Music Box Ballerina in the Peach Coral & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      }
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

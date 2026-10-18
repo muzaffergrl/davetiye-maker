@@ -35,7 +35,7 @@
   "price_note": "Proposed: the design price of 01–21, not confirmed for this design (config.ts '[PRICE]'). Approved by the user on 2026-10-16 (K42, docs/23 §1). Shop currency TRY (K38): Etsy gets the TL amount; USD is approximate, at 49.53 TRY per USD, BloombergHT, 2026-10-16 09:30 (USD/TRY 49.5247 buy / 49.5300 sell).",
   "quantity": 999,
   "renewal": null,
-  "sales_status": "coming",
+  "sales_status": "preview",
   "shop_section": "",
   "digital_files": [
     {
@@ -191,10 +191,134 @@
   "blockers": [
     "listing images missing: collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/01_cover.png, collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/02_opening.png, collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/03_pages.png, collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/04_edit.png, collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/05_rsvp.png, collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/06_details.png, collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/07_how.png, collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/08_included.png",
     "listing video missing",
-    "sales status 'coming' in platform/lib/marketing/config.ts (K41: not for sale)",
+    "sales status 'preview' in platform/lib/marketing/config.ts (K41: not for sale)",
     "price not decided for this design (config.ts price '[PRICE]'; 1460 TL is the 01–21 design price, docs/23 §1)",
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Grand Theatre Premiere)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=grand-theatre-premiere",
+        "image": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Crimson Velvet & Gold",
+        "variant": "crimson-velvet",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=grand-theatre-premiere&variant=crimson-velvet",
+        "image": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_crimson-velvet.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Royal Sapphire & Gold",
+        "variant": "royal-sapphire",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=grand-theatre-premiere&variant=royal-sapphire",
+        "image": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_royal-sapphire.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Emerald Velvet & Gold",
+        "variant": "emerald-velvet",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=grand-theatre-premiere&variant=emerald-velvet",
+        "image": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_emerald-velvet.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Plum Velvet & Gold",
+        "variant": "plum-velvet",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=grand-theatre-premiere&variant=plum-velvet",
+        "image": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_plum-velvet.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Black Tie Onyx & Gold",
+        "variant": "onyx-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=grand-theatre-premiere&variant=onyx-gold",
+        "image": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_onyx-gold.jpg",
+        "image_exists": false
+      }
+    ],
+    "offered": [
+      "Original (Grand Theatre Premiere)"
+    ],
+    "images": [
+      {
+        "file": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/10_palettes.jpg",
+        "exists": false,
+        "option": null,
+        "upload": false,
+        "alt": "Grand Theatre Premiere in 6 color palettes: the opening page of each, side by side",
+        "status": "missing"
+      },
+      {
+        "file": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_original.jpg",
+        "exists": false,
+        "option": "Original (Grand Theatre Premiere)",
+        "upload": false,
+        "alt": "Grand Theatre Premiere in its original palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_crimson-velvet.jpg",
+        "exists": false,
+        "option": "Crimson Velvet & Gold",
+        "upload": false,
+        "alt": "Grand Theatre Premiere in the Crimson Velvet & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_royal-sapphire.jpg",
+        "exists": false,
+        "option": "Royal Sapphire & Gold",
+        "upload": false,
+        "alt": "Grand Theatre Premiere in the Royal Sapphire & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_emerald-velvet.jpg",
+        "exists": false,
+        "option": "Emerald Velvet & Gold",
+        "upload": false,
+        "alt": "Grand Theatre Premiere in the Emerald Velvet & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_plum-velvet.jpg",
+        "exists": false,
+        "option": "Plum Velvet & Gold",
+        "upload": false,
+        "alt": "Grand Theatre Premiere in the Plum Velvet & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/24_Grand_Theatre_Premiere/package/listing/images_editorial/palette_onyx-gold.jpg",
+        "exists": false,
+        "option": "Black Tie Onyx & Gold",
+        "upload": false,
+        "alt": "Grand Theatre Premiere in the Black Tie Onyx & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      }
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }

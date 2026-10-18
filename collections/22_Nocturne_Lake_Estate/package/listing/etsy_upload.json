@@ -37,7 +37,7 @@
   "price_note": "Proposed: the design price of 01–21, not confirmed for this design (config.ts '[PRICE]'). Approved by the user on 2026-10-16 (K42, docs/23 §1). Shop currency TRY (K38): Etsy gets the TL amount; USD is approximate, at 49.53 TRY per USD, BloombergHT, 2026-10-16 09:30 (USD/TRY 49.5247 buy / 49.5300 sell).",
   "quantity": 999,
   "renewal": null,
-  "sales_status": "coming",
+  "sales_status": "preview",
   "shop_section": "[SHOP SECTION]",
   "digital_files": [
     {
@@ -280,10 +280,134 @@
   "blockers": [
     "listing images missing: collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/01_cover.png, collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/02_opening.png, collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/03_pages.png, collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/04_edit.png, collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/05_rsvp.png, collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/06_details.png, collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/07_how.png, collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/08_included.png, collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/09_devices.png",
     "listing video missing",
-    "sales status 'coming' in platform/lib/marketing/config.ts (K41: not for sale)",
+    "sales status 'preview' in platform/lib/marketing/config.ts (K41: not for sale)",
     "price not decided for this design (config.ts price '[PRICE]'; 1460 TL is the 01–21 design price, docs/23 §1)",
     "renewal not decided"
   ],
   "ready_to_publish": false,
-  "rule_problems": []
+  "rule_problems": [],
+  "variations": {
+    "structure": "one listing, variation 'Color palette' (same price)",
+    "doc": "docs/25_PALET_VARYANTLARI.md §5",
+    "property": "Color palette",
+    "price_varies": false,
+    "options": [
+      {
+        "name": "Original (Nocturne Lake Estate)",
+        "variant": null,
+        "status": "live",
+        "offered": true,
+        "start_link": "/start?theme=nocturne-lake-estate",
+        "image": "collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Midnight Navy & Champagne",
+        "variant": "midnight-navy",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=nocturne-lake-estate&variant=midnight-navy",
+        "image": "collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/palette_midnight-navy.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Emerald Night & Gold",
+        "variant": "emerald-night",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=nocturne-lake-estate&variant=emerald-night",
+        "image": "collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/palette_emerald-night.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Burgundy Noir & Gold",
+        "variant": "burgundy-noir",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=nocturne-lake-estate&variant=burgundy-noir",
+        "image": "collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/palette_burgundy-noir.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Moonlit Silver",
+        "variant": "moonlit-silver",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=nocturne-lake-estate&variant=moonlit-silver",
+        "image": "collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/palette_moonlit-silver.jpg",
+        "image_exists": false
+      },
+      {
+        "name": "Plum Night & Rose Gold",
+        "variant": "plum-rose-gold",
+        "status": "coming",
+        "offered": false,
+        "start_link": "/start?theme=nocturne-lake-estate&variant=plum-rose-gold",
+        "image": "collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/palette_plum-rose-gold.jpg",
+        "image_exists": false
+      }
+    ],
+    "offered": [
+      "Original (Nocturne Lake Estate)"
+    ],
+    "images": [
+      {
+        "file": "collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/10_palettes.jpg",
+        "exists": false,
+        "option": null,
+        "upload": false,
+        "alt": "Nocturne Lake Estate in 6 color palettes: the opening page of each, side by side",
+        "status": "missing"
+      },
+      {
+        "file": "collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/palette_original.jpg",
+        "exists": false,
+        "option": "Original (Nocturne Lake Estate)",
+        "upload": false,
+        "alt": "Nocturne Lake Estate in its original palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/palette_midnight-navy.jpg",
+        "exists": false,
+        "option": "Midnight Navy & Champagne",
+        "upload": false,
+        "alt": "Nocturne Lake Estate in the Midnight Navy & Champagne palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/palette_emerald-night.jpg",
+        "exists": false,
+        "option": "Emerald Night & Gold",
+        "upload": false,
+        "alt": "Nocturne Lake Estate in the Emerald Night & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/palette_burgundy-noir.jpg",
+        "exists": false,
+        "option": "Burgundy Noir & Gold",
+        "upload": false,
+        "alt": "Nocturne Lake Estate in the Burgundy Noir & Gold palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/palette_moonlit-silver.jpg",
+        "exists": false,
+        "option": "Moonlit Silver",
+        "upload": false,
+        "alt": "Nocturne Lake Estate in the Moonlit Silver palette: the opening page closed and opening",
+        "status": "missing"
+      },
+      {
+        "file": "collections/22_Nocturne_Lake_Estate/package/listing/images_editorial/palette_plum-rose-gold.jpg",
+        "exists": false,
+        "option": "Plum Night & Rose Gold",
+        "upload": false,
+        "alt": "Nocturne Lake Estate in the Plum Night & Rose Gold palette: the opening page closed and opening",
+        "status": "missing"
+      }
+    ],
+    "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
+  }
 }
