@@ -3368,3 +3368,12 @@
 .paletteName {
   white-space: nowrap;
 }
+
+
+/* New envelope previews use the same narrow portrait size as existing product screens. */
+.designCard[data-status='preview'].envelopeDesignCard .cardMediaWrap {
+  width: min(76%, 220px);
+}
+.designCard[data-status='preview'].envelopeDesignCard .designCardMedia {
+  width: 100%;
+}
