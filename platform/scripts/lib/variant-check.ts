@@ -9,7 +9,9 @@
 //     its own also passes). A palette's failure that the original has as well (same text, ratio not lower by more than
 //     0.25) is a warning ("as in the original"), every other failure is an error;
 //   texts that are not painted (under the closed envelope, clipped: the screenshots with and without text agree in their
-//   box) and fixed / sticky layers (the nav, the music button: a full-page screenshot moves them) are not measured;
+//   box) and fixed / sticky layers (the nav, the music button: a full-page screenshot moves them) are not measured, and
+//   are hidden for the measurement so that the texts they would cover in the full-page screenshot are measured on their
+//   real ground (G180);
 //   - a screenshot per palette and page: <out>/variants/<palette>_<page>_390.png (review material).
 
 import { mkdirSync, writeFileSync } from 'node:fs';
@@ -177,8 +179,17 @@ async function measurePage(
     return out;
   }, SCRIPT_FONT.source);
   await probeStyle.evaluate((n: Element) => n.remove());
-  // the review screenshot (as guests see it), then the ground without any text
-  const seenShot = await page.screenshot({ path: shot, fullPage: true });
+  // the review screenshot (as guests see it); then, for the measurement, fixed / sticky layers hidden: a full-page
+  // screenshot paints the bottom nav over the middle of a long page (G177: "Number of guests" measured on the nav strip),
+  // while a guest scrolls that text above the nav (G180: nothing stays under it at a page's end)
+  await page.screenshot({ path: shot, fullPage: true });
+  await page.evaluate(() => {
+    for (const el of document.querySelectorAll<HTMLElement>('body *')) {
+      const pos = getComputedStyle(el).position;
+      if (pos === 'fixed' || pos === 'sticky') el.style.setProperty('visibility', 'hidden', 'important');
+    }
+  });
+  const seenShot = await page.screenshot({ fullPage: true });
   await page.addStyleTag({
     content: '*, *::before, *::after { color: transparent !important; text-shadow: none !important; -webkit-text-fill-color: transparent !important; text-decoration-color: transparent !important; caret-color: transparent !important }',
   });
