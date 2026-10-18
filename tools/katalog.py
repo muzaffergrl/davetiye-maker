@@ -465,6 +465,13 @@ EK_TEMALAR = [
          dekor="Saten astar, pirinç kurma anahtarı, tül, gül yaprakları", teknik="fotogerçekçi + pastel",
          font=("Ballet", "Gilda Display"), palet_adi="rose-quartz-gold",
          hareket="Kurma anahtarı döner (müzik kutusu ezgisi dokunuştan sonra), kapak menteşesi, balerinin yavaş piruet kare dizisi, aynada parıltılı foto geçişi, az sayıda süzülen gül yaprağı (azaltılmış harekette yok), oval ayna sayfa geçişi."),
+    # 3. dalga (33–38, docs/24; K23 sıkı: ilk sayfa kapalı zarf): aynı kurallar; GPT parçalarından önce kuruldu.
+    dict(no=33, klasor="33_Marigold_Mehndi", ad="Marigold & Mehndi",
+         zarf="Fuşya ipek zarf, altın lazer kesim paisley kılıfın içinde; püskül sallanır, kılıf yana kayar, düz ipek kapak açılır, kart kadife-fuşya astardan yükselir; kadife çiçeği yaprakları süzülür.",
+         foto="Jharokha (Rajasthan pencere kemeri) çerçeveler; fotoğraf alttan yukarı kına gibi akarak belirir, kemerin çevresindeki kına deseni çizgi çizgi akar.",
+         dekor="Kadife çiçeği çelenkleri, kına desenleri, pirinç diya kandilleri, ipek püsküller", teknik="zengin minyatür + fotogerçekçi ipek",
+         font=("Rozha One", "Yrsa"), palet_adi="saffron-fuchsia-gold",
+         hareket="Püskül sarkacı, altın kılıfın yana kayması, düz ipek kapağın kadife iç yüze devretmesi, kadife çiçeği yapraklarının süzülmesi, diya alevlerinin sırayla yanması, kına çizgisinin kemer çevresinde akması (maske), metnin kılıf gibi yandan kayarak yerleşmesi."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

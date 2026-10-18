@@ -360,6 +360,33 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     llmsLine: 'a rose-quartz music box: turn the brass key, the lid opens, a ballerina turns and the photos appear in its oval mirror.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
+  // G182 (coming): written against the theme as built (README); the paisley sleeve, tassel, marigolds, henna, arches and
+  // diyas arrive with the GPT parts.
+  'marigold-mehndi': {
+    id: 'marigold-mehndi',
+    collection: '33_Marigold_Mehndi',
+    demoCouple: 'Anaya & Kabir',
+    style: msg('A fuchsia silk envelope in a gold paisley sleeve with a silk tassel, marigold garlands, henna and carved arch photo frames'),
+    metaDescription: msg('A fuchsia silk envelope slips out of its gold paisley sleeve and opens into your wedding website, with marigolds, henna and carved arch frames. Personalize it in your online editor.'),
+    intro: msg('Saffron, fuchsia and gold, like a festive silk invitation. Your invitation waits in a silk envelope held by a laser-cut gold sleeve, and every photo sits in a carved arch window traced with henna.'),
+    opening: msg('Your guests tap the envelope. Its silk tassel swings, the gold paisley sleeve slides away, the flap opens onto a velvet lining and marigold petals drift down while small lamps light one by one. The card with your portrait rises out of the envelope and comes forward to become your home page.'),
+    pages: {
+      home: msg('Your portrait in a carved arch and your names on a saffron card under a marigold garland, then the invitation, a countdown and calendar links, with a row of lamps that light one by one.'),
+      story: msg('Three photos in carved arch windows; as guests scroll to each one, it appears from the bottom up and henna flows in around its arch, line by line.'),
+      details: msg('The order of the day on saffron paper, a venue photo revealed like a henna line drawn across, an optional map, dress code, travel and questions and answers.'),
+      rsvp: msg('A saffron reply card on fuchsia velvet with your names and reply-by date; marigold petals fall when a reply is sent.'),
+    },
+    palette: [
+      { name: msg('Fuchsia'), hex: '#B3165E' },
+      { name: msg('Saffron'), hex: '#F2A13B' },
+      { name: msg('Gold'), hex: '#C9A24A' },
+      { name: msg('Velvet plum'), hex: '#3E0726' },
+      { name: msg('Saffron ivory'), hex: '#FAEBD0' },
+    ],
+    fonts: ['Rozha One', 'Yrsa'],
+    llmsLine: 'a fuchsia silk envelope in a gold laser-cut paisley sleeve: the tassel swings, the sleeve slides off and the card rises from a velvet lining; carved arch photo frames traced with henna; saffron, fuchsia and gold.',
+    relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
+  },
   'blush-garden-rose': {
     id: 'blush-garden-rose',
     collection: '03_Blush_Garden_Rose',
@@ -1152,6 +1179,7 @@ export const DESIGN_STYLES: Record<string, readonly StyleId[]> = {
   'azulejo-mosaic': ['classic', 'destination'],
   'sky-lantern-festival': ['classic'],
   'music-box-ballerina': ['classic', 'storybook'],
+  'marigold-mehndi': ['classic', 'floral'],
   'blush-garden-rose': ['floral'],
   'olive-ivory': ['classic'],
   'mediterranean-lemon': ['destination'],
