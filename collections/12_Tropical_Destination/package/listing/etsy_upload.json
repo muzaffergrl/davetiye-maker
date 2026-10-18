@@ -220,46 +220,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=tropical-destination"
+        "start_link": "/start?theme=tropical-destination",
+        "image": "collections/12_Tropical_Destination/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": true
       },
       {
         "name": "Coral Sunset",
         "variant": "coral-sunset",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=tropical-destination&variant=coral-sunset"
+        "start_link": "/start?theme=tropical-destination&variant=coral-sunset",
+        "image": "collections/12_Tropical_Destination/package/listing/images_editorial/palette_coral-sunset.jpg",
+        "image_exists": true
       },
       {
         "name": "Fuchsia Orchid",
         "variant": "fuchsia-orchid",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=tropical-destination&variant=fuchsia-orchid"
+        "start_link": "/start?theme=tropical-destination&variant=fuchsia-orchid",
+        "image": "collections/12_Tropical_Destination/package/listing/images_editorial/palette_fuchsia-orchid.jpg",
+        "image_exists": true
       },
       {
         "name": "Ocean Blue & Red Hibiscus",
         "variant": "ocean-blue",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=tropical-destination&variant=ocean-blue"
+        "start_link": "/start?theme=tropical-destination&variant=ocean-blue",
+        "image": "collections/12_Tropical_Destination/package/listing/images_editorial/palette_ocean-blue.jpg",
+        "image_exists": true
       },
       {
         "name": "Golden Hibiscus & Sand",
         "variant": "golden-sand",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=tropical-destination&variant=golden-sand"
+        "start_link": "/start?theme=tropical-destination&variant=golden-sand",
+        "image": "collections/12_Tropical_Destination/package/listing/images_editorial/palette_golden-sand.jpg",
+        "image_exists": true
       },
       {
         "name": "Blush Paradise",
         "variant": "blush-paradise",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=tropical-destination&variant=blush-paradise"
+        "start_link": "/start?theme=tropical-destination&variant=blush-paradise",
+        "image": "collections/12_Tropical_Destination/package/listing/images_editorial/palette_blush-paradise.jpg",
+        "image_exists": true
       }
     ],
     "offered": [
       "Original (Tropical Destination)"
+    ],
+    "images": [
+      {
+        "file": "collections/12_Tropical_Destination/package/listing/images_editorial/10_palettes.jpg",
+        "exists": true,
+        "option": null,
+        "upload": false,
+        "alt": "Tropical Destination in 6 color palettes: the opening page of each, side by side",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/12_Tropical_Destination/package/listing/images_editorial/palette_original.jpg",
+        "exists": true,
+        "option": "Original (Tropical Destination)",
+        "upload": false,
+        "alt": "Tropical Destination in its original palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/12_Tropical_Destination/package/listing/images_editorial/palette_coral-sunset.jpg",
+        "exists": true,
+        "option": "Coral Sunset",
+        "upload": false,
+        "alt": "Tropical Destination in the Coral Sunset palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/12_Tropical_Destination/package/listing/images_editorial/palette_fuchsia-orchid.jpg",
+        "exists": true,
+        "option": "Fuchsia Orchid",
+        "upload": false,
+        "alt": "Tropical Destination in the Fuchsia Orchid palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/12_Tropical_Destination/package/listing/images_editorial/palette_ocean-blue.jpg",
+        "exists": true,
+        "option": "Ocean Blue & Red Hibiscus",
+        "upload": false,
+        "alt": "Tropical Destination in the Ocean Blue & Red Hibiscus palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/12_Tropical_Destination/package/listing/images_editorial/palette_golden-sand.jpg",
+        "exists": true,
+        "option": "Golden Hibiscus & Sand",
+        "upload": false,
+        "alt": "Tropical Destination in the Golden Hibiscus & Sand palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/12_Tropical_Destination/package/listing/images_editorial/palette_blush-paradise.jpg",
+        "exists": true,
+        "option": "Blush Paradise",
+        "upload": false,
+        "alt": "Tropical Destination in the Blush Paradise palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

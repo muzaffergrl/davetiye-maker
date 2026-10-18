@@ -219,46 +219,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=ivory-lace-pearls"
+        "start_link": "/start?theme=ivory-lace-pearls",
+        "image": "collections/14_Ivory_Lace_Pearl/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": true
       },
       {
         "name": "Blush & Pearl",
         "variant": "blush-pearl",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=ivory-lace-pearls&variant=blush-pearl"
+        "start_link": "/start?theme=ivory-lace-pearls&variant=blush-pearl",
+        "image": "collections/14_Ivory_Lace_Pearl/package/listing/images_editorial/palette_blush-pearl.jpg",
+        "image_exists": true
       },
       {
         "name": "Champagne & Gold",
         "variant": "champagne-gold",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=ivory-lace-pearls&variant=champagne-gold"
+        "start_link": "/start?theme=ivory-lace-pearls&variant=champagne-gold",
+        "image": "collections/14_Ivory_Lace_Pearl/package/listing/images_editorial/palette_champagne-gold.jpg",
+        "image_exists": true
       },
       {
         "name": "Dusty Blue & Ivory Lace",
         "variant": "dusty-blue",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=ivory-lace-pearls&variant=dusty-blue"
+        "start_link": "/start?theme=ivory-lace-pearls&variant=dusty-blue",
+        "image": "collections/14_Ivory_Lace_Pearl/package/listing/images_editorial/palette_dusty-blue.jpg",
+        "image_exists": true
       },
       {
         "name": "Sage & Pearl",
         "variant": "sage-pearl",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=ivory-lace-pearls&variant=sage-pearl"
+        "start_link": "/start?theme=ivory-lace-pearls&variant=sage-pearl",
+        "image": "collections/14_Ivory_Lace_Pearl/package/listing/images_editorial/palette_sage-pearl.jpg",
+        "image_exists": true
       },
       {
         "name": "Dusty Mauve & Lace",
         "variant": "dusty-mauve",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=ivory-lace-pearls&variant=dusty-mauve"
+        "start_link": "/start?theme=ivory-lace-pearls&variant=dusty-mauve",
+        "image": "collections/14_Ivory_Lace_Pearl/package/listing/images_editorial/palette_dusty-mauve.jpg",
+        "image_exists": true
       }
     ],
     "offered": [
       "Original (Ivory Lace & Pearls)"
+    ],
+    "images": [
+      {
+        "file": "collections/14_Ivory_Lace_Pearl/package/listing/images_editorial/10_palettes.jpg",
+        "exists": true,
+        "option": null,
+        "upload": false,
+        "alt": "Ivory Lace & Pearls in 6 color palettes: the opening page of each, side by side",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/14_Ivory_Lace_Pearl/package/listing/images_editorial/palette_original.jpg",
+        "exists": true,
+        "option": "Original (Ivory Lace & Pearls)",
+        "upload": false,
+        "alt": "Ivory Lace & Pearls in its original palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/14_Ivory_Lace_Pearl/package/listing/images_editorial/palette_blush-pearl.jpg",
+        "exists": true,
+        "option": "Blush & Pearl",
+        "upload": false,
+        "alt": "Ivory Lace & Pearls in the Blush & Pearl palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/14_Ivory_Lace_Pearl/package/listing/images_editorial/palette_champagne-gold.jpg",
+        "exists": true,
+        "option": "Champagne & Gold",
+        "upload": false,
+        "alt": "Ivory Lace & Pearls in the Champagne & Gold palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/14_Ivory_Lace_Pearl/package/listing/images_editorial/palette_dusty-blue.jpg",
+        "exists": true,
+        "option": "Dusty Blue & Ivory Lace",
+        "upload": false,
+        "alt": "Ivory Lace & Pearls in the Dusty Blue & Ivory Lace palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/14_Ivory_Lace_Pearl/package/listing/images_editorial/palette_sage-pearl.jpg",
+        "exists": true,
+        "option": "Sage & Pearl",
+        "upload": false,
+        "alt": "Ivory Lace & Pearls in the Sage & Pearl palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/14_Ivory_Lace_Pearl/package/listing/images_editorial/palette_dusty-mauve.jpg",
+        "exists": true,
+        "option": "Dusty Mauve & Lace",
+        "upload": false,
+        "alt": "Ivory Lace & Pearls in the Dusty Mauve & Lace palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

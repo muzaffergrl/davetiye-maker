@@ -220,46 +220,92 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=sunflower-rustic-barn"
+        "start_link": "/start?theme=sunflower-rustic-barn",
+        "image": "collections/16_Sunflower_Rustic/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": true
       },
       {
         "name": "Navy & Sunflower",
         "variant": "navy-sunflower",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=sunflower-rustic-barn&variant=navy-sunflower"
+        "start_link": "/start?theme=sunflower-rustic-barn&variant=navy-sunflower",
+        "image": null,
+        "image_note": "waits for GPT parts: card_ribbon, closure, favicon, info_card, invitation_card, og-1200x630, print:back, print:card"
       },
       {
         "name": "Burgundy & Sunflower",
         "variant": "burgundy-sunflower",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=sunflower-rustic-barn&variant=burgundy-sunflower"
+        "start_link": "/start?theme=sunflower-rustic-barn&variant=burgundy-sunflower",
+        "image": null,
+        "image_note": "waits for GPT parts: card_ribbon, closure, favicon, info_card, invitation_card, og-1200x630, print:back, print:card"
       },
       {
         "name": "Dusty Blue & Sunflower",
         "variant": "dusty-blue-sunflower",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=sunflower-rustic-barn&variant=dusty-blue-sunflower"
+        "start_link": "/start?theme=sunflower-rustic-barn&variant=dusty-blue-sunflower",
+        "image": null,
+        "image_note": "waits for GPT parts: card_ribbon, closure, favicon, info_card, invitation_card, og-1200x630, print:back, print:card"
       },
       {
         "name": "Lemon & Sage",
         "variant": "lemon-sage",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=sunflower-rustic-barn&variant=lemon-sage"
+        "start_link": "/start?theme=sunflower-rustic-barn&variant=lemon-sage",
+        "image": "collections/16_Sunflower_Rustic/package/listing/images_editorial/palette_lemon-sage.jpg",
+        "image_exists": true
       },
       {
         "name": "Autumn Rust & Bronze",
         "variant": "rust-bronze",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=sunflower-rustic-barn&variant=rust-bronze"
+        "start_link": "/start?theme=sunflower-rustic-barn&variant=rust-bronze",
+        "image": "collections/16_Sunflower_Rustic/package/listing/images_editorial/palette_rust-bronze.jpg",
+        "image_exists": true
       }
     ],
     "offered": [
       "Original (Sunflower Rustic Barn)"
+    ],
+    "images": [
+      {
+        "file": "collections/16_Sunflower_Rustic/package/listing/images_editorial/10_palettes.jpg",
+        "exists": true,
+        "option": null,
+        "upload": false,
+        "alt": "Sunflower Rustic Barn in 3 color palettes: the opening page of each, side by side",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/16_Sunflower_Rustic/package/listing/images_editorial/palette_original.jpg",
+        "exists": true,
+        "option": "Original (Sunflower Rustic Barn)",
+        "upload": false,
+        "alt": "Sunflower Rustic Barn in its original palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/16_Sunflower_Rustic/package/listing/images_editorial/palette_lemon-sage.jpg",
+        "exists": true,
+        "option": "Lemon & Sage",
+        "upload": false,
+        "alt": "Sunflower Rustic Barn in the Lemon & Sage palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/16_Sunflower_Rustic/package/listing/images_editorial/palette_rust-bronze.jpg",
+        "exists": true,
+        "option": "Autumn Rust & Bronze",
+        "upload": false,
+        "alt": "Sunflower Rustic Barn in the Autumn Rust & Bronze palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

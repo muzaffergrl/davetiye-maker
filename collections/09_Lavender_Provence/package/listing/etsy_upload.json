@@ -221,46 +221,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=lavender-provence"
+        "start_link": "/start?theme=lavender-provence",
+        "image": "collections/09_Lavender_Provence/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": true
       },
       {
         "name": "Sage & Lavender",
         "variant": "sage-lavender",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=lavender-provence&variant=sage-lavender"
+        "start_link": "/start?theme=lavender-provence&variant=sage-lavender",
+        "image": "collections/09_Lavender_Provence/package/listing/images_editorial/palette_sage-lavender.jpg",
+        "image_exists": true
       },
       {
         "name": "Dusty Blue & Lavender",
         "variant": "dusty-blue",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=lavender-provence&variant=dusty-blue"
+        "start_link": "/start?theme=lavender-provence&variant=dusty-blue",
+        "image": "collections/09_Lavender_Provence/package/listing/images_editorial/palette_dusty-blue.jpg",
+        "image_exists": true
       },
       {
         "name": "Mauve Lavender & Blush",
         "variant": "mauve-lavender",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=lavender-provence&variant=mauve-lavender"
+        "start_link": "/start?theme=lavender-provence&variant=mauve-lavender",
+        "image": "collections/09_Lavender_Provence/package/listing/images_editorial/palette_mauve-lavender.jpg",
+        "image_exists": true
       },
       {
         "name": "Hidcote Violet & Plum",
         "variant": "hidcote-plum",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=lavender-provence&variant=hidcote-plum"
+        "start_link": "/start?theme=lavender-provence&variant=hidcote-plum",
+        "image": "collections/09_Lavender_Provence/package/listing/images_editorial/palette_hidcote-plum.jpg",
+        "image_exists": true
       },
       {
         "name": "French Cream & Lavender",
         "variant": "french-cream",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=lavender-provence&variant=french-cream"
+        "start_link": "/start?theme=lavender-provence&variant=french-cream",
+        "image": "collections/09_Lavender_Provence/package/listing/images_editorial/palette_french-cream.jpg",
+        "image_exists": true
       }
     ],
     "offered": [
       "Original (Lavender Provence)"
+    ],
+    "images": [
+      {
+        "file": "collections/09_Lavender_Provence/package/listing/images_editorial/10_palettes.jpg",
+        "exists": true,
+        "option": null,
+        "upload": false,
+        "alt": "Lavender Provence in 6 color palettes: the opening page of each, side by side",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/09_Lavender_Provence/package/listing/images_editorial/palette_original.jpg",
+        "exists": true,
+        "option": "Original (Lavender Provence)",
+        "upload": false,
+        "alt": "Lavender Provence in its original palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/09_Lavender_Provence/package/listing/images_editorial/palette_sage-lavender.jpg",
+        "exists": true,
+        "option": "Sage & Lavender",
+        "upload": false,
+        "alt": "Lavender Provence in the Sage & Lavender palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/09_Lavender_Provence/package/listing/images_editorial/palette_dusty-blue.jpg",
+        "exists": true,
+        "option": "Dusty Blue & Lavender",
+        "upload": false,
+        "alt": "Lavender Provence in the Dusty Blue & Lavender palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/09_Lavender_Provence/package/listing/images_editorial/palette_mauve-lavender.jpg",
+        "exists": true,
+        "option": "Mauve Lavender & Blush",
+        "upload": false,
+        "alt": "Lavender Provence in the Mauve Lavender & Blush palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/09_Lavender_Provence/package/listing/images_editorial/palette_hidcote-plum.jpg",
+        "exists": true,
+        "option": "Hidcote Violet & Plum",
+        "upload": false,
+        "alt": "Lavender Provence in the Hidcote Violet & Plum palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/09_Lavender_Provence/package/listing/images_editorial/palette_french-cream.jpg",
+        "exists": true,
+        "option": "French Cream & Lavender",
+        "upload": false,
+        "alt": "Lavender Provence in the French Cream & Lavender palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

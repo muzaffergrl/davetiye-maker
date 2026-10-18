@@ -220,46 +220,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=midnight-garden"
+        "start_link": "/start?theme=midnight-garden",
+        "image": "collections/19_Midnight_Garden/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": true
       },
       {
         "name": "Blush & Black",
         "variant": "blush-noir",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=midnight-garden&variant=blush-noir"
+        "start_link": "/start?theme=midnight-garden&variant=blush-noir",
+        "image": "collections/19_Midnight_Garden/package/listing/images_editorial/palette_blush-noir.jpg",
+        "image_exists": true
       },
       {
         "name": "Ivory Rose & Black",
         "variant": "ivory-noir",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=midnight-garden&variant=ivory-noir"
+        "start_link": "/start?theme=midnight-garden&variant=ivory-noir",
+        "image": "collections/19_Midnight_Garden/package/listing/images_editorial/palette_ivory-noir.jpg",
+        "image_exists": true
       },
       {
         "name": "Plum & Black",
         "variant": "plum-noir",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=midnight-garden&variant=plum-noir"
+        "start_link": "/start?theme=midnight-garden&variant=plum-noir",
+        "image": "collections/19_Midnight_Garden/package/listing/images_editorial/palette_plum-noir.jpg",
+        "image_exists": true
       },
       {
         "name": "Amber & Black",
         "variant": "amber-noir",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=midnight-garden&variant=amber-noir"
+        "start_link": "/start?theme=midnight-garden&variant=amber-noir",
+        "image": "collections/19_Midnight_Garden/package/listing/images_editorial/palette_amber-noir.jpg",
+        "image_exists": true
       },
       {
         "name": "Champagne & Black",
         "variant": "champagne-noir",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=midnight-garden&variant=champagne-noir"
+        "start_link": "/start?theme=midnight-garden&variant=champagne-noir",
+        "image": "collections/19_Midnight_Garden/package/listing/images_editorial/palette_champagne-noir.jpg",
+        "image_exists": true
       }
     ],
     "offered": [
       "Original (Midnight Garden)"
+    ],
+    "images": [
+      {
+        "file": "collections/19_Midnight_Garden/package/listing/images_editorial/10_palettes.jpg",
+        "exists": true,
+        "option": null,
+        "upload": false,
+        "alt": "Midnight Garden in 6 color palettes: the opening page of each, side by side",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/19_Midnight_Garden/package/listing/images_editorial/palette_original.jpg",
+        "exists": true,
+        "option": "Original (Midnight Garden)",
+        "upload": false,
+        "alt": "Midnight Garden in its original palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/19_Midnight_Garden/package/listing/images_editorial/palette_blush-noir.jpg",
+        "exists": true,
+        "option": "Blush & Black",
+        "upload": false,
+        "alt": "Midnight Garden in the Blush & Black palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/19_Midnight_Garden/package/listing/images_editorial/palette_ivory-noir.jpg",
+        "exists": true,
+        "option": "Ivory Rose & Black",
+        "upload": false,
+        "alt": "Midnight Garden in the Ivory Rose & Black palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/19_Midnight_Garden/package/listing/images_editorial/palette_plum-noir.jpg",
+        "exists": true,
+        "option": "Plum & Black",
+        "upload": false,
+        "alt": "Midnight Garden in the Plum & Black palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/19_Midnight_Garden/package/listing/images_editorial/palette_amber-noir.jpg",
+        "exists": true,
+        "option": "Amber & Black",
+        "upload": false,
+        "alt": "Midnight Garden in the Amber & Black palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/19_Midnight_Garden/package/listing/images_editorial/palette_champagne-noir.jpg",
+        "exists": true,
+        "option": "Champagne & Black",
+        "upload": false,
+        "alt": "Midnight Garden in the Champagne & Black palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

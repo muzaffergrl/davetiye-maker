@@ -104,7 +104,7 @@ def place(scene: Image.Image, k: float, x0: float, y0: float, screens: list[Imag
 
 
 def paper_screens(items: list[tuple[str, str, str]], shots: Path, w: int, gap: int, top: int, stagger: int = 0,
-                  label_gap: int = 46) -> str:
+                  label_gap: int = 46, label_pad: int = 40) -> str:
     """Bare screens on paper, centred in a row: items = (shot name, numeral or '', label). Heights follow the shots."""
     n = len(items)
     left = (2000 - (n * w + (n - 1) * gap)) // 2
@@ -117,7 +117,7 @@ def paper_screens(items: list[tuple[str, str, str]], shots: Path, w: int, gap: i
         uri = (shots / f"{name}.jpg").resolve().as_uri()
         html.append(f'<div class="screen" style="left:{x}px;top:{y}px;width:{w}px;height:{h}px"><img src="{uri}"></div>')
         num_html = f'<span class="num">{num}</span>' if num else ""
-        html.append(f'<div class="label" style="left:{x - 40}px;width:{w + 80}px;top:{y + h + label_gap}px">{num_html}'
+        html.append(f'<div class="label" style="left:{x - label_pad}px;width:{w + 2 * label_pad}px;top:{y + h + label_gap}px">{num_html}'
                     f'<div class="kicker">{label}</div></div>')
     return "\n".join(html)
 
@@ -204,7 +204,7 @@ def build_palettes(t: lk.Theme, shots: Path) -> list[Path]:
     gap = min(80, (1940 - n * w) // max(1, n - 1))
     jobs = [(PALETTE_OVERVIEW, "10_palettes", dict(base, count_words=WORDS.get(n, str(n)), screens=paper_screens(
         [(f"palettes/{p['id'] or 'original'}_o01", "", "Original" if p["id"] is None else html.escape(p["name"])) for p in ready],
-        shots, w=w, gap=gap, top=800, label_gap=40)))]
+        shots, w=w, gap=gap, top=800, label_gap=40, label_pad=gap // 2 - 4)))]
     for p in ready:
         key = p["id"] or "original"
         jobs.append((palette_image_name(p["id"]), "11_palette", dict(

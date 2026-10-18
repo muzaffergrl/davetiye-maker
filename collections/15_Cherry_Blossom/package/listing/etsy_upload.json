@@ -219,46 +219,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=cherry-blossom-spring"
+        "start_link": "/start?theme=cherry-blossom-spring",
+        "image": "collections/15_Cherry_Blossom/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": true
       },
       {
         "name": "Ivory Blossom & Gold",
         "variant": "ivory-blossom",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=cherry-blossom-spring&variant=ivory-blossom"
+        "start_link": "/start?theme=cherry-blossom-spring&variant=ivory-blossom",
+        "image": "collections/15_Cherry_Blossom/package/listing/images_editorial/palette_ivory-blossom.jpg",
+        "image_exists": true
       },
       {
         "name": "Sage & Blush",
         "variant": "sage-blush",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=cherry-blossom-spring&variant=sage-blush"
+        "start_link": "/start?theme=cherry-blossom-spring&variant=sage-blush",
+        "image": "collections/15_Cherry_Blossom/package/listing/images_editorial/palette_sage-blush.jpg",
+        "image_exists": true
       },
       {
         "name": "Dusty Blue & Blush",
         "variant": "dusty-blue-blush",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=cherry-blossom-spring&variant=dusty-blue-blush"
+        "start_link": "/start?theme=cherry-blossom-spring&variant=dusty-blue-blush",
+        "image": "collections/15_Cherry_Blossom/package/listing/images_editorial/palette_dusty-blue-blush.jpg",
+        "image_exists": true
       },
       {
         "name": "Deep Rose & Mauve",
         "variant": "deep-rose",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=cherry-blossom-spring&variant=deep-rose"
+        "start_link": "/start?theme=cherry-blossom-spring&variant=deep-rose",
+        "image": "collections/15_Cherry_Blossom/package/listing/images_editorial/palette_deep-rose.jpg",
+        "image_exists": true
       },
       {
         "name": "Peach Blossom & Cream",
         "variant": "peach-blossom",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=cherry-blossom-spring&variant=peach-blossom"
+        "start_link": "/start?theme=cherry-blossom-spring&variant=peach-blossom",
+        "image": "collections/15_Cherry_Blossom/package/listing/images_editorial/palette_peach-blossom.jpg",
+        "image_exists": true
       }
     ],
     "offered": [
       "Original (Cherry Blossom Spring)"
+    ],
+    "images": [
+      {
+        "file": "collections/15_Cherry_Blossom/package/listing/images_editorial/10_palettes.jpg",
+        "exists": true,
+        "option": null,
+        "upload": false,
+        "alt": "Cherry Blossom Spring in 6 color palettes: the opening page of each, side by side",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/15_Cherry_Blossom/package/listing/images_editorial/palette_original.jpg",
+        "exists": true,
+        "option": "Original (Cherry Blossom Spring)",
+        "upload": false,
+        "alt": "Cherry Blossom Spring in its original palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/15_Cherry_Blossom/package/listing/images_editorial/palette_ivory-blossom.jpg",
+        "exists": true,
+        "option": "Ivory Blossom & Gold",
+        "upload": false,
+        "alt": "Cherry Blossom Spring in the Ivory Blossom & Gold palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/15_Cherry_Blossom/package/listing/images_editorial/palette_sage-blush.jpg",
+        "exists": true,
+        "option": "Sage & Blush",
+        "upload": false,
+        "alt": "Cherry Blossom Spring in the Sage & Blush palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/15_Cherry_Blossom/package/listing/images_editorial/palette_dusty-blue-blush.jpg",
+        "exists": true,
+        "option": "Dusty Blue & Blush",
+        "upload": false,
+        "alt": "Cherry Blossom Spring in the Dusty Blue & Blush palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/15_Cherry_Blossom/package/listing/images_editorial/palette_deep-rose.jpg",
+        "exists": true,
+        "option": "Deep Rose & Mauve",
+        "upload": false,
+        "alt": "Cherry Blossom Spring in the Deep Rose & Mauve palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/15_Cherry_Blossom/package/listing/images_editorial/palette_peach-blossom.jpg",
+        "exists": true,
+        "option": "Peach Blossom & Cream",
+        "upload": false,
+        "alt": "Cherry Blossom Spring in the Peach Blossom & Cream palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

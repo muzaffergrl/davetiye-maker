@@ -221,46 +221,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=winter-evergreen"
+        "start_link": "/start?theme=winter-evergreen",
+        "image": "collections/08_Winter_Evergreen/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": true
       },
       {
         "name": "Midnight Navy & Holly",
         "variant": "midnight-navy",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=winter-evergreen&variant=midnight-navy"
+        "start_link": "/start?theme=winter-evergreen&variant=midnight-navy",
+        "image": "collections/08_Winter_Evergreen/package/listing/images_editorial/palette_midnight-navy.jpg",
+        "image_exists": true
       },
       {
         "name": "Burgundy Wine & Pine",
         "variant": "burgundy-wine",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=winter-evergreen&variant=burgundy-wine"
+        "start_link": "/start?theme=winter-evergreen&variant=burgundy-wine",
+        "image": "collections/08_Winter_Evergreen/package/listing/images_editorial/palette_burgundy-wine.jpg",
+        "image_exists": true
       },
       {
         "name": "Ivory & Pine",
         "variant": "ivory-pine",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=winter-evergreen&variant=ivory-pine"
+        "start_link": "/start?theme=winter-evergreen&variant=ivory-pine",
+        "image": "collections/08_Winter_Evergreen/package/listing/images_editorial/palette_ivory-pine.jpg",
+        "image_exists": true
       },
       {
         "name": "Frost Blue & Pine",
         "variant": "frost-blue",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=winter-evergreen&variant=frost-blue"
+        "start_link": "/start?theme=winter-evergreen&variant=frost-blue",
+        "image": "collections/08_Winter_Evergreen/package/listing/images_editorial/palette_frost-blue.jpg",
+        "image_exists": true
       },
       {
         "name": "Sage & Holly",
         "variant": "sage-holly",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=winter-evergreen&variant=sage-holly"
+        "start_link": "/start?theme=winter-evergreen&variant=sage-holly",
+        "image": "collections/08_Winter_Evergreen/package/listing/images_editorial/palette_sage-holly.jpg",
+        "image_exists": true
       }
     ],
     "offered": [
       "Original (Winter Evergreen)"
+    ],
+    "images": [
+      {
+        "file": "collections/08_Winter_Evergreen/package/listing/images_editorial/10_palettes.jpg",
+        "exists": true,
+        "option": null,
+        "upload": false,
+        "alt": "Winter Evergreen in 6 color palettes: the opening page of each, side by side",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/08_Winter_Evergreen/package/listing/images_editorial/palette_original.jpg",
+        "exists": true,
+        "option": "Original (Winter Evergreen)",
+        "upload": false,
+        "alt": "Winter Evergreen in its original palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/08_Winter_Evergreen/package/listing/images_editorial/palette_midnight-navy.jpg",
+        "exists": true,
+        "option": "Midnight Navy & Holly",
+        "upload": false,
+        "alt": "Winter Evergreen in the Midnight Navy & Holly palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/08_Winter_Evergreen/package/listing/images_editorial/palette_burgundy-wine.jpg",
+        "exists": true,
+        "option": "Burgundy Wine & Pine",
+        "upload": false,
+        "alt": "Winter Evergreen in the Burgundy Wine & Pine palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/08_Winter_Evergreen/package/listing/images_editorial/palette_ivory-pine.jpg",
+        "exists": true,
+        "option": "Ivory & Pine",
+        "upload": false,
+        "alt": "Winter Evergreen in the Ivory & Pine palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/08_Winter_Evergreen/package/listing/images_editorial/palette_frost-blue.jpg",
+        "exists": true,
+        "option": "Frost Blue & Pine",
+        "upload": false,
+        "alt": "Winter Evergreen in the Frost Blue & Pine palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/08_Winter_Evergreen/package/listing/images_editorial/palette_sage-holly.jpg",
+        "exists": true,
+        "option": "Sage & Holly",
+        "upload": false,
+        "alt": "Winter Evergreen in the Sage & Holly palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

@@ -226,46 +226,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=vintage-airmail-love-letter"
+        "start_link": "/start?theme=vintage-airmail-love-letter",
+        "image": "collections/04_Vintage_Airmail/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": true
       },
       {
         "name": "Dusty Rose & Navy",
         "variant": "dusty-rose",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=vintage-airmail-love-letter&variant=dusty-rose"
+        "start_link": "/start?theme=vintage-airmail-love-letter&variant=dusty-rose",
+        "image": "collections/04_Vintage_Airmail/package/listing/images_editorial/palette_dusty-rose.jpg",
+        "image_exists": true
       },
       {
         "name": "Sage & Navy",
         "variant": "sage-navy",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=vintage-airmail-love-letter&variant=sage-navy"
+        "start_link": "/start?theme=vintage-airmail-love-letter&variant=sage-navy",
+        "image": "collections/04_Vintage_Airmail/package/listing/images_editorial/palette_sage-navy.jpg",
+        "image_exists": true
       },
       {
         "name": "Terracotta & Navy",
         "variant": "terracotta",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=vintage-airmail-love-letter&variant=terracotta"
+        "start_link": "/start?theme=vintage-airmail-love-letter&variant=terracotta",
+        "image": "collections/04_Vintage_Airmail/package/listing/images_editorial/palette_terracotta.jpg",
+        "image_exists": true
       },
       {
         "name": "Dusty Blue Airmail",
         "variant": "dusty-blue",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=vintage-airmail-love-letter&variant=dusty-blue"
+        "start_link": "/start?theme=vintage-airmail-love-letter&variant=dusty-blue",
+        "image": "collections/04_Vintage_Airmail/package/listing/images_editorial/palette_dusty-blue.jpg",
+        "image_exists": true
       },
       {
         "name": "Lavender & Navy",
         "variant": "lavender",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=vintage-airmail-love-letter&variant=lavender"
+        "start_link": "/start?theme=vintage-airmail-love-letter&variant=lavender",
+        "image": "collections/04_Vintage_Airmail/package/listing/images_editorial/palette_lavender.jpg",
+        "image_exists": true
       }
     ],
     "offered": [
       "Original (Vintage Airmail Love Letter)"
+    ],
+    "images": [
+      {
+        "file": "collections/04_Vintage_Airmail/package/listing/images_editorial/10_palettes.jpg",
+        "exists": true,
+        "option": null,
+        "upload": false,
+        "alt": "Vintage Airmail Love Letter in 6 color palettes: the opening page of each, side by side",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/04_Vintage_Airmail/package/listing/images_editorial/palette_original.jpg",
+        "exists": true,
+        "option": "Original (Vintage Airmail Love Letter)",
+        "upload": false,
+        "alt": "Vintage Airmail Love Letter in its original palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/04_Vintage_Airmail/package/listing/images_editorial/palette_dusty-rose.jpg",
+        "exists": true,
+        "option": "Dusty Rose & Navy",
+        "upload": false,
+        "alt": "Vintage Airmail Love Letter in the Dusty Rose & Navy palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/04_Vintage_Airmail/package/listing/images_editorial/palette_sage-navy.jpg",
+        "exists": true,
+        "option": "Sage & Navy",
+        "upload": false,
+        "alt": "Vintage Airmail Love Letter in the Sage & Navy palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/04_Vintage_Airmail/package/listing/images_editorial/palette_terracotta.jpg",
+        "exists": true,
+        "option": "Terracotta & Navy",
+        "upload": false,
+        "alt": "Vintage Airmail Love Letter in the Terracotta & Navy palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/04_Vintage_Airmail/package/listing/images_editorial/palette_dusty-blue.jpg",
+        "exists": true,
+        "option": "Dusty Blue Airmail",
+        "upload": false,
+        "alt": "Vintage Airmail Love Letter in the Dusty Blue Airmail palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/04_Vintage_Airmail/package/listing/images_editorial/palette_lavender.jpg",
+        "exists": true,
+        "option": "Lavender & Navy",
+        "upload": false,
+        "alt": "Vintage Airmail Love Letter in the Lavender & Navy palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

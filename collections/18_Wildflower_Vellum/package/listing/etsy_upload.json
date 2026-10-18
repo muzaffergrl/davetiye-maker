@@ -227,46 +227,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=wildflower-meadow-vellum"
+        "start_link": "/start?theme=wildflower-meadow-vellum",
+        "image": "collections/18_Wildflower_Vellum/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": true
       },
       {
         "name": "Blush Meadow",
         "variant": "blush-meadow",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=wildflower-meadow-vellum&variant=blush-meadow"
+        "start_link": "/start?theme=wildflower-meadow-vellum&variant=blush-meadow",
+        "image": "collections/18_Wildflower_Vellum/package/listing/images_editorial/palette_blush-meadow.jpg",
+        "image_exists": true
       },
       {
         "name": "Golden Poppy & Blue",
         "variant": "golden-poppy",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=wildflower-meadow-vellum&variant=golden-poppy"
+        "start_link": "/start?theme=wildflower-meadow-vellum&variant=golden-poppy",
+        "image": "collections/18_Wildflower_Vellum/package/listing/images_editorial/palette_golden-poppy.jpg",
+        "image_exists": true
       },
       {
         "name": "Lilac & Mauve Meadow",
         "variant": "lilac-meadow",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=wildflower-meadow-vellum&variant=lilac-meadow"
+        "start_link": "/start?theme=wildflower-meadow-vellum&variant=lilac-meadow",
+        "image": "collections/18_Wildflower_Vellum/package/listing/images_editorial/palette_lilac-meadow.jpg",
+        "image_exists": true
       },
       {
         "name": "Peach & Sage Meadow",
         "variant": "peach-sage",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=wildflower-meadow-vellum&variant=peach-sage"
+        "start_link": "/start?theme=wildflower-meadow-vellum&variant=peach-sage",
+        "image": "collections/18_Wildflower_Vellum/package/listing/images_editorial/palette_peach-sage.jpg",
+        "image_exists": true
       },
       {
         "name": "Wine & Navy Meadow",
         "variant": "wine-navy",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=wildflower-meadow-vellum&variant=wine-navy"
+        "start_link": "/start?theme=wildflower-meadow-vellum&variant=wine-navy",
+        "image": "collections/18_Wildflower_Vellum/package/listing/images_editorial/palette_wine-navy.jpg",
+        "image_exists": true
       }
     ],
     "offered": [
       "Original (Wildflower Meadow Vellum)"
+    ],
+    "images": [
+      {
+        "file": "collections/18_Wildflower_Vellum/package/listing/images_editorial/10_palettes.jpg",
+        "exists": true,
+        "option": null,
+        "upload": false,
+        "alt": "Wildflower Meadow Vellum in 6 color palettes: the opening page of each, side by side",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/18_Wildflower_Vellum/package/listing/images_editorial/palette_original.jpg",
+        "exists": true,
+        "option": "Original (Wildflower Meadow Vellum)",
+        "upload": false,
+        "alt": "Wildflower Meadow Vellum in its original palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/18_Wildflower_Vellum/package/listing/images_editorial/palette_blush-meadow.jpg",
+        "exists": true,
+        "option": "Blush Meadow",
+        "upload": false,
+        "alt": "Wildflower Meadow Vellum in the Blush Meadow palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/18_Wildflower_Vellum/package/listing/images_editorial/palette_golden-poppy.jpg",
+        "exists": true,
+        "option": "Golden Poppy & Blue",
+        "upload": false,
+        "alt": "Wildflower Meadow Vellum in the Golden Poppy & Blue palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/18_Wildflower_Vellum/package/listing/images_editorial/palette_lilac-meadow.jpg",
+        "exists": true,
+        "option": "Lilac & Mauve Meadow",
+        "upload": false,
+        "alt": "Wildflower Meadow Vellum in the Lilac & Mauve Meadow palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/18_Wildflower_Vellum/package/listing/images_editorial/palette_peach-sage.jpg",
+        "exists": true,
+        "option": "Peach & Sage Meadow",
+        "upload": false,
+        "alt": "Wildflower Meadow Vellum in the Peach & Sage Meadow palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/18_Wildflower_Vellum/package/listing/images_editorial/palette_wine-navy.jpg",
+        "exists": true,
+        "option": "Wine & Navy Meadow",
+        "upload": false,
+        "alt": "Wildflower Meadow Vellum in the Wine & Navy Meadow palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

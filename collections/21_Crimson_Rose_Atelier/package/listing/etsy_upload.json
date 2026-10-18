@@ -224,46 +224,116 @@
         "variant": null,
         "status": "live",
         "offered": true,
-        "start_link": "/start?theme=crimson-rose-atelier"
+        "start_link": "/start?theme=crimson-rose-atelier",
+        "image": "collections/21_Crimson_Rose_Atelier/package/listing/images_editorial/palette_original.jpg",
+        "image_exists": true
       },
       {
         "name": "Midnight Navy & Wine",
         "variant": "midnight-navy",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=crimson-rose-atelier&variant=midnight-navy"
+        "start_link": "/start?theme=crimson-rose-atelier&variant=midnight-navy",
+        "image": "collections/21_Crimson_Rose_Atelier/package/listing/images_editorial/palette_midnight-navy.jpg",
+        "image_exists": true
       },
       {
         "name": "Plum & Gold",
         "variant": "plum-gold",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=crimson-rose-atelier&variant=plum-gold"
+        "start_link": "/start?theme=crimson-rose-atelier&variant=plum-gold",
+        "image": "collections/21_Crimson_Rose_Atelier/package/listing/images_editorial/palette_plum-gold.jpg",
+        "image_exists": true
       },
       {
         "name": "Dusty Rose & Mauve",
         "variant": "dusty-rose",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=crimson-rose-atelier&variant=dusty-rose"
+        "start_link": "/start?theme=crimson-rose-atelier&variant=dusty-rose",
+        "image": "collections/21_Crimson_Rose_Atelier/package/listing/images_editorial/palette_dusty-rose.jpg",
+        "image_exists": true
       },
       {
         "name": "Emerald & Ruby",
         "variant": "emerald-ruby",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=crimson-rose-atelier&variant=emerald-ruby"
+        "start_link": "/start?theme=crimson-rose-atelier&variant=emerald-ruby",
+        "image": "collections/21_Crimson_Rose_Atelier/package/listing/images_editorial/palette_emerald-ruby.jpg",
+        "image_exists": true
       },
       {
         "name": "Terracotta & Rust",
         "variant": "terracotta-rust",
         "status": "coming",
         "offered": false,
-        "start_link": "/start?theme=crimson-rose-atelier&variant=terracotta-rust"
+        "start_link": "/start?theme=crimson-rose-atelier&variant=terracotta-rust",
+        "image": "collections/21_Crimson_Rose_Atelier/package/listing/images_editorial/palette_terracotta-rust.jpg",
+        "image_exists": true
       }
     ],
     "offered": [
       "Original (Crimson Rose Atelier)"
+    ],
+    "images": [
+      {
+        "file": "collections/21_Crimson_Rose_Atelier/package/listing/images_editorial/10_palettes.jpg",
+        "exists": true,
+        "option": null,
+        "upload": false,
+        "alt": "Crimson Rose Atelier in 6 color palettes: the opening page of each, side by side",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/21_Crimson_Rose_Atelier/package/listing/images_editorial/palette_original.jpg",
+        "exists": true,
+        "option": "Original (Crimson Rose Atelier)",
+        "upload": false,
+        "alt": "Crimson Rose Atelier in its original palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/21_Crimson_Rose_Atelier/package/listing/images_editorial/palette_midnight-navy.jpg",
+        "exists": true,
+        "option": "Midnight Navy & Wine",
+        "upload": false,
+        "alt": "Crimson Rose Atelier in the Midnight Navy & Wine palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/21_Crimson_Rose_Atelier/package/listing/images_editorial/palette_plum-gold.jpg",
+        "exists": true,
+        "option": "Plum & Gold",
+        "upload": false,
+        "alt": "Crimson Rose Atelier in the Plum & Gold palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/21_Crimson_Rose_Atelier/package/listing/images_editorial/palette_dusty-rose.jpg",
+        "exists": true,
+        "option": "Dusty Rose & Mauve",
+        "upload": false,
+        "alt": "Crimson Rose Atelier in the Dusty Rose & Mauve palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/21_Crimson_Rose_Atelier/package/listing/images_editorial/palette_emerald-ruby.jpg",
+        "exists": true,
+        "option": "Emerald & Ruby",
+        "upload": false,
+        "alt": "Crimson Rose Atelier in the Emerald & Ruby palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      },
+      {
+        "file": "collections/21_Crimson_Rose_Atelier/package/listing/images_editorial/palette_terracotta-rust.jpg",
+        "exists": true,
+        "option": "Terracotta & Rust",
+        "upload": false,
+        "alt": "Crimson Rose Atelier in the Terracotta & Rust palette: the opening page closed and opening",
+        "status": "G178: tools/listing_editorial.py --palettes (real DPR 3 screens of the opening in each palette, local production build; docs/25 §5)"
+      }
     ],
     "fallback": "No variation: the listing names the palettes in the description and shows them on one image; the buyer picks the palette on /start (the START HERE link) and can switch it in the editor."
   }

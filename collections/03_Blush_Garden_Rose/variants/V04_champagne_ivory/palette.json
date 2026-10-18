@@ -18,13 +18,13 @@
   ],
   "status": "coming",
   "families": {
-    "rose": "#E3C3A8",
-    "petal": "#E3C3A8",
+    "rose": "#E6C6B8",
+    "petal": "#E6C6B8",
     "envelope": "#EFE3D0",
     "blush_paper": "#F0E2D4",
     "leaf": null,
     "gold": null,
     "cream": null
   },
-  "note": "G178: champagne targets with a warm hue (OKLCH ~65°) instead of primary/mist_bottom (~80°): the roses' highlights and the blush paper went past yellow into green"
+  "note": "G178: champagne targets with a warm hue (rose/petal #E6C6B8, OKLCH 45°; paper #F0E2D4, 68°) instead of primary/mist_bottom (~80°): the roses' highlights and the blush paper went past yellow into olive green"
 }
