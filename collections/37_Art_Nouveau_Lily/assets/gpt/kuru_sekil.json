@@ -1,0 +1,18 @@
+{
+ "_not": "G186 kuru deneme (tools/gpt_kuru_deneme.py --sekil): parçaların prompt'taki yeri, tuval yüzdesiyle. Deneme görseli ürün değildir.",
+ "cream_paper.png": {"ton": [244, 236, 219], "gren": 0.3},
+ "sage_paper.png": {"ton": [85, 99, 78], "gren": 0.4},
+ "lilac_lining.png": {"ton": [200, 182, 214], "gren": 0.4},
+ "env_back.png": {"kutu": [0, 0, 100, 100], "ton": [222, 210, 220]},
+ "env_pocket.png": {"kutu": [0, 56, 100, 100], "ton": [236, 228, 210]},
+ "petal_left.png": {"kutu": [0, 0, 48, 86], "ton": [232, 222, 204]},
+ "petal_right.png": {"kutu": [52, 0, 100, 86], "ton": [228, 218, 200]},
+ "petal_centre.png": {"kutu": [0, 0, 100, 60], "ton": [240, 232, 214]},
+ "lily_medallion.png": {"kutu": [4, 4, 96, 96], "ton": [190, 176, 150]},
+ "card_small.png": {"kutu": [0, 0, 100, 100], "pencere": [25, 9, 75, 59], "ton": [244, 236, 219]},
+ "arch_window.png": {"kutu": [0, 0, 100, 100], "pencere": [15, 13, 85, 88], "ton": [176, 160, 120]},
+ "halo.png": {"kutu": [2, 2, 98, 98], "ton": [196, 166, 96]},
+ "lily_spray.png": {"kutu": [12, 2, 88, 100], "ton": [226, 224, 210]},
+ "whiplash.png": {"kutu": [2, 30, 98, 70], "ton": [184, 150, 78]},
+ "petal_drift.png": {"kutu": [24, 20, 76, 80], "ton": [238, 230, 236]}
+}

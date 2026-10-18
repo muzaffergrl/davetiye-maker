@@ -8,6 +8,7 @@ import type { ContentRecord } from '../content/types.ts';
 /** theme id -> centre of its demo city (WGS 84). */
 export const DEMO_CITY_PINS: Readonly<Record<string, { lat: number; lng: number }>> = {
   'art-deco-black-tie': { lat: 41.8781, lng: -87.6298 }, // Chicago
+  'art-nouveau-lily': { lat: 48.6921, lng: 6.1844 }, // Nancy, France (the villa is fictional)
   'azulejo-mosaic': { lat: 38.8029, lng: -9.3817 }, // Sintra, Portugal
   'blush-garden-rose': { lat: 32.0809, lng: -81.0912 }, // Savannah
   'boho-pampas-terracotta': { lat: 34.1347, lng: -116.3131 }, // Joshua Tree

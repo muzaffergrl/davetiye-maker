@@ -1,0 +1,381 @@
+/* Art Nouveau Lily (37) — sage ground, cream paper, lilac lining, gold. Visuals are GPT pixels only (img/,
+   build_images.py; the design's own parts through parts.css); CSS adds light and interface (docs/11 §5.7): the band of
+   light that sweeps the envelope and passes through the stained glass, the glow behind the glass, the light moving
+   through each stained-glass window, text halos, hairline rules, form fields, buttons, the bottom nav, and two reveals
+   — the colour that comes alive in a window behind the passing light (a filter) and the moving mask that draws the gold
+   whiplash lines (GPT W2.12). The interim envelope is cream paper cut by clip-path (petal flaps, pocket) — cut, not
+   drawn; no frame, ornament, flower or line is drawn here. */
+@property --band{syntax:'<percentage>';inherits:true;initial-value:135%}
+@property --flow{syntax:'<percentage>';inherits:false;initial-value:100%}
+:root{--sage:#55634e;--sage-deep:#3c4737;--sage-mid:#6d7c63;--sage-light:#b4c0a6;--cream:#f4ecdb;--cream-2:#e6dcc4;--ink:#2e3228;
+--ink-soft:#585d4e;--gold:#b8964e;--gold-light:#dfc68f;--gold-ink:#7a5d22;--lilac:#c8b6d6;--lilac-deep:#7d6a92;--lilac-ink:#5c4970;
+--line:#dfc68f4d;--line-ink:#2e322833;--display:'Federant','Georgia',serif;--script:'Ephesis','Snell Roundhand',cursive;
+--serif:'Linden Hill','Georgia',serif;--nav-h:62px;color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:var(--sage) url(img/sage-640.webp) 0 0/560px repeat;color:var(--cream);font:400 19px/1.65 var(--serif);padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom))}
+button,input,textarea,select{font:inherit}
+button,a,input,select,textarea,summary{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+h1,h2,h3,p,figure,ul,ol{margin:0}
+h1,h2,h3{font-weight:400;line-height:1.15}
+h1{font:400 clamp(54px,15vw,80px)/1.05 var(--script);color:var(--gold-light);overflow-wrap:anywhere}
+h2{font:400 clamp(26px,7.4vw,36px)/1.2 var(--display);letter-spacing:.04em;color:var(--gold-light);overflow-wrap:anywhere}
+h3{font:400 20px/1.4 var(--serif);letter-spacing:.02em}
+button{cursor:pointer}
+button:disabled{opacity:.5;cursor:default}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--gold-light);outline-offset:5px}
+.nowrap{white-space:nowrap}
+.eyebrow{font:400 12px/1.9 var(--display);text-transform:uppercase;letter-spacing:.24em;color:var(--cream-2);overflow-wrap:anywhere}
+.body-text{font-size:19px;line-height:1.7;color:var(--cream-2)}
+.small{font:400 15px/1.8 var(--serif);color:var(--cream-2)}
+/* cream paper (GPT texture) under the cards and bands */
+.paper,.paper-band{background:var(--cream) url(img/paper-640.webp) 0 0/480px repeat;color:var(--ink);color-scheme:light}
+.paper h2,.paper-band h2,.paper h1{color:var(--lilac-ink)}
+.paper .eyebrow,.paper-band .eyebrow{color:var(--gold-ink)}
+.paper .body-text,.paper-band .body-text,.paper .small,.paper-band .small{color:var(--ink-soft)}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:12px;min-height:48px;padding:12px 28px;border:1px solid var(--gold-light);background:var(--gold-light);color:var(--ink);font:400 13px/1.5 var(--display);letter-spacing:.18em;text-transform:uppercase;border-radius:100px;text-align:center;overflow-wrap:anywhere}
+.btn:hover{background:#e9d4a4}
+.btn-ghost{background:#3c473780;color:var(--cream);border-color:#f4ecdb80}
+.btn-ghost:hover{background:#f4ecdb1f}
+.paper .btn,.paper-band .btn{background:var(--lilac-ink);border-color:var(--lilac-ink);color:var(--cream)}
+.paper .btn:hover,.paper-band .btn:hover{background:#4b3a5d}
+.paper .btn-ghost,.paper-band .btn-ghost{background:#ffffff80;color:var(--ink);border-color:#2e322866}
+.btn-sm{min-height:44px;padding:9px 18px}
+.textlink{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;font:400 13px/1.6 var(--display);border:0;background:transparent;color:var(--gold-light);letter-spacing:.12em;padding:8px 2px;text-decoration:underline;text-decoration-color:#dfc68f70;text-underline-offset:6px}
+.paper .textlink,.paper-band .textlink{color:var(--gold-ink);text-decoration-color:#7a5d2270}
+.center{text-align:center;margin:44px 0 10px}
+.button-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.no-js .nojs-only{display:block}
+.js .nojs-only{display:none}
+.names{font:400 clamp(54px,15vw,80px)/1.05 var(--script);color:var(--gold-light);overflow-wrap:anywhere;text-wrap:balance;text-shadow:0 0 18px #3c4737}
+.names .amp{font:400 .34em/1 var(--display);letter-spacing:.1em;color:var(--cream-2);vertical-align:.38em}
+.paper .names{color:var(--lilac-ink);text-shadow:none}
+.paper .names .amp{color:var(--gold-ink)}
+
+/* photo slots: placeholders are softened cream paper; "Your photo here" only in a preview */
+.photo-slot{position:relative;display:block;overflow:hidden;background:var(--cream-2)}
+.photo-slot>img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.ph-mark{display:none;position:absolute;inset:0;align-items:center;justify-content:center;pointer-events:none;font:400 12px/1.4 var(--display);color:var(--ink-soft);text-align:center;letter-spacing:.08em}
+html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{display:flex}
+/* stained-glass arch: the photo is a 5:7 window; the GPT arch frame (W2.9, parts.css) sits over it and its #00FF00
+   window becomes the photo's mask. Until it exists the photo stays a plain window (no frame is drawn). */
+.arch{position:relative;display:block;aspect-ratio:5/7;--p:.5}
+.arch>.photo-slot{position:absolute;inset:0}
+.arch>.frame{display:none;position:absolute;inset:0;pointer-events:none}
+/* light through the glass: a soft band that keeps moving through the window as the page scrolls (--p, site.js) */
+.vitrail::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(118deg,#0000 32%,#fff3d433 47%,#0000 62%) calc(var(--p,.5) * 100%) 0/260% 100% no-repeat;mix-blend-mode:screen}
+/* the window waits grey like glass at dusk; a band of light passes through it and its colours come alive behind it */
+.js .vitrail::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(118deg,#0000 36%,#fff6dcb8 48%,#ffeec44d 54%,#0000 64%) var(--band) 0/300% 100% no-repeat;mix-blend-mode:screen}
+/* GPT ornaments that wait for their parts (parts.css shows them) */
+.halo,.lily,.whip,.medallion{display:none}
+.whip{width:min(72%,300px);aspect-ratio:16/3;margin:10px auto 0}
+
+/* bottom nav */
+.site-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#3c4737f2;border-top:1px solid var(--line);padding:6px 8px max(6px,env(safe-area-inset-bottom));view-transition-name:site-nav}
+.site-nav ul{list-style:none;padding:0;display:flex;justify-content:center;gap:4px}
+.site-nav li{min-width:0}
+.site-nav a{display:flex;align-items:center;justify-content:center;min-height:48px;min-width:68px;padding:8px 12px;text-align:center;overflow-wrap:anywhere;font:400 12px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--cream-2)}
+.site-nav a[aria-current]{color:var(--gold-light);text-decoration:underline;text-underline-offset:8px;text-decoration-color:#dfc68f99}
+
+/* ---------------------------------------------------------------- the envelope */
+.page-opening{padding-bottom:0;background:radial-gradient(ellipse at 50% 46%,#8a9a7a66 0,#55634e00 64%) fixed,var(--sage) url(img/sage-640.webp) 0 0/560px repeat}
+.skip{position:fixed;top:calc(6px + env(safe-area-inset-top));right:10px;z-index:20;padding-inline:14px;background:#3c4737b3;border-radius:100px;text-decoration:none}
+.opening{position:relative;min-height:100svh;max-width:760px;margin:auto;padding:48px 20px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:clip}
+.opening-heading{position:relative;z-index:9;max-width:100%}
+.opening-heading .host{margin-bottom:2px}
+.opening-heading .kicker{font-size:11px;margin-bottom:6px;color:var(--gold-light)}
+.opening .names{font-size:clamp(54px,15.5vw,76px)}
+.opening-date{font-size:11px}
+/* the closed envelope: 0.758 wide per high (manifest stage); the card, pocket and petal flaps in % of it */
+.stage{--obj:min(64vw,calc(43svh * .758),300px);position:relative;width:var(--obj);margin:26px auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent;z-index:5}
+.opening:has(.names.long-names) .stage{--obj:min(56vw,calc(36svh * .758),300px)}
+.envelope{position:relative;width:100%;aspect-ratio:.758;perspective:1300px;--tex:calc(var(--obj) * 1.5)}
+.envelope>*{position:absolute}
+.stage::before{content:"";position:absolute;inset:6% 1% -4%;z-index:0;background:radial-gradient(closest-side,#1e261acc,#0000);pointer-events:none} /* contact shade on the ground (light only) */
+.env-back{inset:0;z-index:1;background:var(--cream) url(img/paper-640.webp) 0 0/var(--tex) repeat}
+.env-lining{left:5%;right:5%;top:3%;height:60%;position:absolute;background:linear-gradient(#2e32283d,#0000 34%),var(--lilac) url(img/lining-640.webp) 0 0/var(--tex) repeat}
+.card{left:11%;top:8%;width:78%;height:82%;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8% 9% 7%;text-align:center;view-transition-name:none;container-type:inline-size}
+.card,.envelope .card{background:var(--cream) url(img/paper-640.webp) 0 0/var(--tex) repeat;color:var(--ink)}
+.card-photo{width:50%;aspect-ratio:5/7;flex:none}
+.card.tight .card-photo{width:34%}
+.card-photo .ph-mark{font-size:8px}
+.card-photo .ty-decor,.card-photo .ty-decor img{display:block;width:100%;height:100%;object-fit:cover}
+.card-line{margin-top:7%;font-size:7.5px;letter-spacing:.2em;color:var(--gold-ink)}
+.card-names{font:400 clamp(20px,17cqw,44px)/1.05 var(--script);color:var(--lilac-ink);overflow-wrap:anywhere;text-wrap:balance;margin-top:1%}
+.card-date{font-size:7.5px;margin-top:3%;color:var(--gold-ink)}
+/* the pocket: the lower front, its top edge rising softly to a point (a cut of the cream paper) */
+.env-pocket{inset:0;z-index:3;background:linear-gradient(180deg,#0000 54%,#2e32281a 60%,#0000 70%),var(--cream) url(img/paper-640.webp) 0 0/var(--tex) repeat;filter:brightness(.97);clip-path:polygon(0 61%,24% 59%,42% 56.5%,50% 55%,58% 56.5%,76% 59%,100% 61%,100% 100%,0 100%)}
+/* the petal flaps: each a 3D wrapper turning on its hinge; front = cream petal, back = lilac lining (the back's cut is
+   the mirror of the front's, so the lining lies under the front once the petal has turned) */
+.petal{inset:0;transform-style:preserve-3d;pointer-events:none}
+.petal-l{z-index:4;transform-origin:0 50%}
+.petal-r{z-index:5;transform-origin:100% 50%}
+.petal-c{z-index:6;transform-origin:50% 0}
+.face{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.front{background:linear-gradient(125deg,#ffffff1f,#0000 40%,#2e322814),var(--cream) url(img/paper-640.webp) 0 0/var(--tex) repeat}
+.back{background:linear-gradient(#2e322829,#0000 50%),var(--lilac) url(img/lining-640.webp) 0 0/var(--tex) repeat}
+.petal-l .front{filter:brightness(.92);clip-path:polygon(0 0,24% 0,34% 14%,42% 30%,48% 45%,50% 57%,38% 65%,22% 75%,8% 83%,0 87%)}
+.petal-l .back{transform:rotateY(180deg);clip-path:polygon(100% 0,76% 0,66% 14%,58% 30%,52% 45%,50% 57%,62% 65%,78% 75%,92% 83%,100% 87%)}
+.petal-r .front{filter:brightness(.87);clip-path:polygon(100% 0,76% 0,66% 14%,58% 30%,52% 45%,50% 57%,62% 65%,78% 75%,92% 83%,100% 87%)}
+.petal-r .back{transform:rotateY(180deg);clip-path:polygon(0 0,24% 0,34% 14%,42% 30%,48% 45%,50% 57%,38% 65%,22% 75%,8% 83%,0 87%)}
+.petal-c .front{clip-path:polygon(0 0,100% 0,97% 12%,88% 27%,74% 42%,58% 54%,50% 61%,42% 54%,26% 42%,12% 27%,3% 12%)}
+.petal-c .back{transform:rotateX(180deg);clip-path:polygon(0 100%,100% 100%,97% 88%,88% 73%,74% 58%,58% 46%,50% 39%,42% 46%,26% 58%,12% 73%,3% 88%)}
+/* the medallion (GPT W2.7) where the three points meet; the light behind the glass */
+.medallion{left:32%;top:43.4%;width:36%;aspect-ratio:1;z-index:7;filter:drop-shadow(0 3px 5px #2e322873)}
+.glass-light{left:14%;top:28%;width:72%;height:58%;z-index:8;pointer-events:none;background:radial-gradient(closest-side,#fff4d0d9,#ffe9b366 45%,#0000);mix-blend-mode:screen;opacity:0;transform:scale(.6)}
+.sheen{inset:0;z-index:9;pointer-events:none;background:linear-gradient(115deg,#0000 38%,#fff7e45c 50%,#0000 62%) 120% 0/300% 100% no-repeat;mix-blend-mode:screen;opacity:0}
+.js .sheen{animation:sheen-idle 8s 1.4s ease-in-out infinite}
+@keyframes sheen-idle{0%{opacity:0;background-position:120% 0}
+4%{opacity:1}
+22%{opacity:1;background-position:-20% 0}
+26%,100%{opacity:0;background-position:-20% 0}}
+.opening-actions{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:24px;min-height:60px;position:relative;z-index:9}
+.tap-hint{font-size:11px;color:var(--gold-light)}
+.js .tap-hint{animation:breathe 3.2s ease-in-out infinite}
+@keyframes breathe{50%{opacity:.55}}
+.enter,.replay{display:none}
+.is-opened .enter{display:inline-flex}
+.is-opened .replay{display:inline-flex}
+.is-opened .tap-hint,.is-opening .tap-hint{display:none}
+.is-opened .skip{display:none}
+.is-opening .stage{pointer-events:none}
+.is-opening .opening-heading{animation:away 450ms ease-in forwards}
+.is-opening .opening-date{animation:away-down 450ms ease-in forwards}
+.is-opening .sheen{animation:sheen-pass 900ms 100ms ease-in-out both}
+.is-opening .glass-light{animation:glow 700ms 300ms ease-out both,glow-out 600ms 1000ms ease-in forwards}
+.is-opening .medallion{animation:lift-away 500ms 800ms cubic-bezier(.4,0,.6,1) forwards}
+.is-opening .petal-l{animation:open-l 900ms 1100ms cubic-bezier(.42,.05,.25,1) forwards}
+.is-opening .petal-r{animation:open-r 900ms 1100ms cubic-bezier(.42,.05,.25,1) forwards}
+.is-opening .petal-c{animation:open-c 900ms 1500ms cubic-bezier(.42,.05,.25,1) forwards}
+.is-opening .envelope>.card{animation:card-rise 650ms 2400ms cubic-bezier(.3,0,.2,1) forwards,card-forward 400ms 3050ms cubic-bezier(.45,0,.2,1) forwards}
+.is-opened .opening-heading,.is-opened .sheen,.is-opened .glass-light{opacity:0;animation:none}
+.is-opened .medallion{opacity:0}
+.is-opened .petal-l{z-index:0;transform:rotateY(-122deg)}
+.is-opened .petal-r{z-index:0;transform:rotateY(122deg)}
+.is-opened .petal-c{z-index:0;transform:rotateX(128deg)}
+.is-opened .envelope>.card{z-index:10;transform:translateY(-42%) scale(1.08);view-transition-name:invite-card;filter:drop-shadow(0 18px 24px #1e261acc)}
+.is-opened .opening-actions{margin-top:20px}
+@keyframes away{to{opacity:0;transform:translateY(-18px)}}
+@keyframes away-down{to{opacity:0;transform:translateY(12px)}}
+@keyframes sheen-pass{0%{opacity:0;background-position:120% 0}
+20%{opacity:1}
+100%{opacity:0;background-position:-20% 0}}
+@keyframes glow{from{opacity:0;transform:scale(.6)}
+to{opacity:1;transform:scale(1)}}
+@keyframes glow-out{to{opacity:0;transform:scale(1.15)}}
+@keyframes lift-away{to{opacity:0;transform:translateY(-28%) scale(1.14)}}
+/* the side petals turn outward past the edge and curl back (lining at 90°), the centre petal turns up on its hinge;
+   each then drops behind the card (z-index) before it rises */
+@keyframes open-l{55%{transform:rotateY(-96deg)}
+to{z-index:0;transform:rotateY(-122deg)}}
+@keyframes open-r{55%{transform:rotateY(96deg)}
+to{z-index:0;transform:rotateY(122deg)}}
+@keyframes open-c{55%{transform:rotateX(100deg)}
+to{z-index:0;transform:rotateX(128deg)}}
+@keyframes card-rise{from{z-index:2;transform:none;filter:drop-shadow(0 0 0 #0000)}
+to{z-index:2;transform:translateY(-46%);filter:drop-shadow(0 10px 14px #1e261a80)}}
+@keyframes card-forward{from{z-index:10;transform:translateY(-46%);filter:drop-shadow(0 10px 14px #1e261a80)}
+to{z-index:10;transform:translateY(-42%) scale(1.08);filter:drop-shadow(0 18px 24px #1e261acc)}}
+
+/* ---------------------------------------------------------------- home */
+.hero{position:relative;min-height:calc(100svh - var(--nav-h));display:flex;align-items:center;justify-content:center;padding:36px 20px 26px;background:radial-gradient(ellipse at 50% 40%,#8a9a7a59 0,#55634e00 70%);overflow:clip}
+.hero>.halo{position:absolute;left:50%;top:44%;width:min(124vw,640px);aspect-ratio:1;translate:-50% -50%;pointer-events:none}
+.hero>.lily{position:absolute;bottom:0;width:min(34vw,230px);aspect-ratio:9/14;pointer-events:none}
+.hero>.lily-l{left:-4vw}
+.hero>.lily-r{right:-4vw;transform:scaleX(-1)}
+.hero-card{position:relative;width:min(84vw,360px);padding:24px 22px 26px;text-align:center;view-transition-name:invite-card;filter:drop-shadow(0 18px 26px #1e261ab3)}
+.hero-photo{width:min(44vw,200px);margin:0 auto 16px}
+.hero .names{font-size:clamp(50px,14vw,68px);margin:4px 0 6px}
+.hero-date{font:400 18px/1.5 var(--serif);letter-spacing:.04em}
+.hero-venue{display:flex;flex-direction:column;gap:2px;margin-top:8px;font:400 18px/1.45 var(--serif);overflow-wrap:anywhere}
+.hero-venue small{font:400 11px/1.8 var(--display);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-ink)}
+.invitation{padding:72px 26px 64px;text-align:center}
+.invitation-copy{max-width:520px;margin:auto}
+.invitation-copy h2{margin-bottom:4px}
+.invitation-copy .whip{margin-bottom:14px}
+.invitation .host{margin:16px 0}
+.formal-names{font:400 25px/1.35 var(--serif);margin-bottom:12px;overflow-wrap:anywhere}
+.formal-names .amp{font:400 44px/1 var(--script);color:var(--gold-ink)}
+.invitation-copy .body-text{max-width:340px;margin:auto}
+.date-block{display:flex;flex-direction:column;align-items:center;gap:2px;margin:26px auto 6px;color:var(--lilac-ink)}
+.date-block>span{font:400 12px/1.8 var(--display);letter-spacing:.24em;text-transform:uppercase;color:var(--gold-ink)}
+.date-block b{font:400 30px/1.25 var(--display);letter-spacing:.06em}
+.venue-name{font-size:23px;margin-top:16px;overflow-wrap:anywhere}
+.invitation-copy .btn{margin:24px 0 12px}
+.countdown{max-width:360px;margin:30px auto 0}
+.cd-row{display:flex;gap:14px;justify-content:center}
+.cd-row>div{flex:1;text-align:center}
+.cd-num{display:block;font:400 30px/1.4 var(--display);color:var(--lilac-ink);font-variant-numeric:tabular-nums}
+.cd-row small{font:400 10px/1.7 var(--display);text-transform:uppercase;letter-spacing:.12em;color:var(--gold-ink)}
+.countdown.is-done .cd-row{display:none}
+.cd-done{font-size:18px}
+.calendar{margin:26px auto 0;text-align:center}
+.calendar>.eyebrow{font-size:11px;margin-bottom:10px}
+.teaser{display:grid;grid-template-columns:min(38vw,200px) 1fr;align-items:center;gap:22px;max-width:640px;margin:auto;padding:64px 24px}
+.teaser-text{min-width:0}
+.teaser-text h2{margin:6px 0 8px}
+.day{text-align:center;padding:64px 24px}
+.day h2{margin:10px 0 4px}
+.day .whip{margin-bottom:14px}
+.day-peek{list-style:none;padding:0;margin:14px auto 28px;max-width:420px;display:grid;gap:8px;font-size:19px;overflow-wrap:anywhere}
+.day-peek li:nth-child(n+5){display:none}
+.day-peek .time{font:400 14px/1 var(--display);letter-spacing:.1em;color:var(--gold-ink);margin-right:8px}
+.signature{text-align:center;padding:56px 20px 30px}
+.signature .lily-sig{width:min(30vw,130px);aspect-ratio:9/14;margin:0 auto 10px}
+.sig-names{font:400 46px/1.2 var(--script);margin:6px 0 10px;color:var(--gold-light);overflow-wrap:anywhere}
+
+/* ---------------------------------------------------------------- story */
+.page-heading{text-align:center;padding:84px 24px 40px;max-width:720px;margin:auto}
+.page-heading>.eyebrow{margin-bottom:10px}
+.page-heading h1{margin-bottom:10px}
+.page-heading .whip{margin-bottom:16px}
+.page-heading .intro{max-width:460px;margin:auto}
+.page-heading .venue-name{margin-top:4px}
+.story-page{max-width:1000px;margin:auto;counter-reset:moment}
+.moment{padding:0 24px;margin:0 0 60px;display:flex;flex-direction:column;align-items:flex-start;counter-increment:moment}
+.moment-photo{width:min(62vw,340px)}
+.m-2{align-items:flex-end;text-align:right}
+.m-2 .moment-photo{width:min(56vw,310px)}
+.moment figcaption{padding-top:16px;max-width:min(74vw,420px);font-size:22px;line-height:1.45;overflow-wrap:anywhere}
+.moment figcaption .num{display:block;font:400 13px/1.6 var(--display);letter-spacing:.24em;color:var(--gold-light);margin-bottom:2px}
+.moment figcaption .num::before{content:counter(moment,upper-roman)}
+.moment figcaption [data-empty]{display:none}
+
+/* ---------------------------------------------------------------- details */
+.details-page{max-width:1100px;margin:auto}
+.details-page .venue-name{color:var(--cream)}
+.programme{padding:52px 26px 48px}
+.programme h2{text-align:center}
+.programme .whip{margin-bottom:22px}
+.programme h2+.schedule{margin-top:22px}
+.schedule{list-style:none;margin:0 auto;padding:0;max-width:560px}
+.schedule li{display:grid;grid-template-columns:72px 1fr;gap:14px;padding:14px 0;border-top:1px solid var(--line-ink)}
+.schedule li:first-child{border-top:0}
+.schedule time{font:400 15px/1.75 var(--display);color:var(--gold-ink);letter-spacing:.06em}
+.schedule h3{overflow-wrap:anywhere}
+.schedule p{font-size:17px;color:var(--ink-soft);margin-top:2px;overflow-wrap:anywhere}
+.ceremony{font-size:18px;color:var(--ink-soft);margin:22px auto 0;max-width:560px;text-align:center}
+.programme .calendar{margin-top:24px}
+.location{padding:56px 24px 10px;max-width:700px;margin:auto;text-align:center}
+.location h2{margin-bottom:22px}
+.venue-photo{aspect-ratio:16/9;margin:0 auto 16px;--p:.5}
+.venue-line{font-size:20px;overflow-wrap:anywhere}
+.map-section{margin-top:18px}
+.map-section .btn{white-space:normal}
+.detail-notes{display:grid;gap:26px;margin:40px auto 0;padding:0 24px;max-width:760px}
+.detail-note{border-top:1px solid var(--line);padding-top:24px}
+.detail-note h2,.faq h2{font-size:28px;margin-bottom:10px}
+.detail-note .body-text{margin-bottom:12px;overflow-wrap:anywhere}
+.faq{margin:44px auto 0;padding:0 24px;max-width:760px}
+.faq details{border-bottom:1px solid var(--line);padding:10px 0}
+.faq summary{cursor:pointer;min-height:44px;font-size:20px;padding:8px 30px 8px 0;list-style:none;position:relative;overflow-wrap:anywhere}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";content:"+" / "";position:absolute;right:4px;top:8px;color:var(--gold-light);font:400 22px/1 var(--display)}
+.faq details[open] summary::after{content:"×";content:"×" / ""}
+.faq details .body-text{padding-block:10px;white-space:pre-line}
+
+/* ---------------------------------------------------------------- rsvp */
+.rsvp-page{max-width:640px;margin:auto;padding:0 20px}
+.rsvp-page .page-heading{padding-bottom:30px}
+.rsvp-page .page-heading>.eyebrow:last-of-type{margin-top:12px}
+.reply-cta{margin-top:20px}
+.reply-card{padding:30px 22px;filter:drop-shadow(0 14px 22px #1e261a99)}
+.form-title{text-align:center;margin-bottom:4px}
+.reply-box>.whip{margin-bottom:12px}
+.reply-form{font:400 17px/1.7 var(--serif)}
+.field{display:block;margin-top:18px}
+.kicker{display:block;margin-bottom:8px;font:400 13px/1.7 var(--display);letter-spacing:.06em;color:var(--gold-ink);overflow-wrap:anywhere}
+.opt{color:var(--ink-soft);font-size:12px}
+.field input,.field textarea,.question textarea{display:block;width:100%;border:1px solid #2e322859;background:#ffffffd9;color:var(--ink);min-height:48px;padding:12px;border-radius:4px;font:400 18px/1.5 var(--serif)}
+.field textarea,.question textarea{resize:vertical}
+.choice{border:0;padding:0;margin:22px 0 0;min-width:0}
+.choice legend{padding:0;width:100%}
+.choice label{display:flex;align-items:center;gap:10px;min-height:46px;color:var(--ink);overflow-wrap:anywhere}
+input[type=radio]{accent-color:var(--lilac-ink);width:18px;height:18px;flex:none}
+.questions{margin-bottom:12px}
+.field-error{color:#9b2c20;font:400 15px/1.6 var(--serif);margin-top:5px;overflow-wrap:anywhere}
+.field-error:empty{display:none}
+[aria-invalid=true]{border-color:#9b2c20!important}
+.send{margin-top:26px}
+.send .btn{width:100%}
+.reply-panel{padding:18px 0;font:400 17px/1.8 var(--serif)}
+.panel-title{font:400 48px/1.15 var(--script);color:var(--lilac-ink);margin-bottom:6px}
+.reply-panel[data-rsvp-state=error]{color:#9b2c20}
+.reply-panel[data-rsvp-state=preview]{color:var(--gold-ink);border-top:1px solid var(--line-ink);margin-top:18px}
+.note{color:var(--ink-soft)}
+html[data-rsvp-replied] .rsvp-page .page-heading .body-text{display:none}
+.thank-you-copy{text-align:center}
+.thank-you-copy h2{margin-bottom:20px}
+
+/* ---------------------------------------------------------------- view transitions + scenes (docs/11 §8, §11) */
+@view-transition{navigation:auto}
+::view-transition-group(invite-card){animation-duration:.85s;animation-timing-function:cubic-bezier(.4,0,.2,1)}
+::view-transition-new(site-nav):only-child{animation:none}
+::view-transition-old(site-nav):only-child{animation:none;opacity:0}
+/* text comes through like colour through glass: from a soft blur it clears and settles (this design's step) */
+.js [data-step]{opacity:0;filter:blur(5px);transform:translateY(10px) scale(.985);transition:opacity 1s cubic-bezier(.3,.6,.3,1),filter 1.3s cubic-bezier(.3,.6,.3,1),transform 1.2s cubic-bezier(.3,.6,.3,1)}
+.js [data-step].in{opacity:1;filter:none;transform:none}
+.js .vitrail[data-step]{opacity:1;transform:none;filter:grayscale(.92) brightness(.8) contrast(.94);transition:filter 1.8s cubic-bezier(.45,.1,.3,1),--band 1.7s cubic-bezier(.45,.1,.3,1)}
+.js .vitrail[data-step].in{filter:none;--band:-40%}
+/* the gold whiplash line draws itself: a soft-edged mask flows along it, left to right */
+.js .whip[data-step]{filter:none;transform:none;-webkit-mask:linear-gradient(90deg,#000 40%,#0000 60%) var(--flow) 0/250% 100% no-repeat;mask:linear-gradient(90deg,#000 40%,#0000 60%) var(--flow) 0/250% 100% no-repeat;transition:opacity .4s,--flow 2s cubic-bezier(.5,.1,.3,1)}
+.js .whip[data-step].in{--flow:0%}
+.from-envelope .hero-card [data-step]{opacity:1;transform:none;transition:none;filter:none}
+.from-envelope .hero-card .vitrail{--band:-40%}
+.arrive-fade body{animation:fade-in .5s ease-out both}
+@keyframes fade-in{from{opacity:0}}
+.accent-layer{position:fixed;inset:0;pointer-events:none;z-index:30;overflow:hidden}
+
+@media(min-width:760px){
+.hero-card{width:400px;padding:32px}
+.hero>.lily-l{left:calc(50% - 400px)}
+.hero>.lily-r{right:calc(50% - 400px)}
+.invitation{padding:96px 40px 84px}
+.teaser{padding:90px 40px;gap:40px}
+.moment{padding:0 60px;margin-bottom:84px}
+.m-1,.m-3{padding-left:12%}
+.m-2{padding-right:12%}
+.detail-notes{grid-template-columns:repeat(2,1fr);gap:36px}
+.programme{padding:72px 40px}
+.page-heading{padding-top:110px}
+.site-nav a{min-width:110px}
+}
+@media(max-width:400px){
+.site-nav a{min-width:56px;padding-inline:7px;letter-spacing:.08em;font-size:11px}
+}
+@media(max-width:359px){
+.hero{padding-inline:12px}
+.hero-card{padding:18px 16px 20px}
+.rsvp-page{padding-inline:12px}
+.reply-card{padding:24px 16px}
+.moment,.detail-notes,.faq,.location{padding-inline:16px}
+.programme{padding-inline:16px}
+.schedule li{grid-template-columns:60px 1fr;gap:10px}
+.cd-row{gap:8px}
+.teaser{gap:16px;padding-inline:16px}
+.site-nav a{min-width:60px;padding-inline:8px;letter-spacing:.06em}
+}
+@media(max-height:700px) and (max-width:759px){
+.opening{padding-top:40px}
+.opening .names{font-size:clamp(48px,13vw,60px)}
+.stage{margin-top:20px}
+.hero{padding-top:20px;padding-bottom:16px}
+.hero-card{padding:16px 18px 18px}
+.hero-photo{width:min(28vw,124px);margin-bottom:10px}
+.hero .names{font-size:clamp(46px,12.5vw,56px);margin:2px 0 4px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
+*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition:none!important}
+.js [data-step]{opacity:1!important;transform:none!important;filter:none!important}
+.js .vitrail::before{display:none}
+.js .whip[data-step]{-webkit-mask:none!important;mask:none!important}
+.js .sheen,.js .tap-hint{animation:none!important}
+.vitrail::after{background-position:50% 0!important}
+::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation-duration:1ms!important}
+}
+#reply{scroll-margin-top:64px}
+html{scroll-padding-bottom:calc(var(--nav-h) + 12px)}

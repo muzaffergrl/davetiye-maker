@@ -1,0 +1,369 @@
+{
+ "sources": {
+  "cream_paper": "collections/01_Olive_Ivory/assets/gpt/parts/bg_tile.png",
+  "sage_paper": "collections/13_Enchanted_Forest/assets/gpt/parts/bg_tile.png",
+  "lilac_lining": "collections/15_Cherry_Blossom/assets/gpt/parts/bg_tile.png"
+ },
+ "paper": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "paper-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 8596
+   },
+   {
+    "file": "paper-1024.webp",
+    "w": 1024,
+    "h": 1024,
+    "bytes": 65982
+   }
+  ]
+ },
+ "sage": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "sage-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 7394
+   },
+   {
+    "file": "sage-1024.webp",
+    "w": 1024,
+    "h": 1024,
+    "bytes": 23684
+   }
+  ]
+ },
+ "lining": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "lining-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 16406
+   }
+  ]
+ },
+ "ph_arch": {
+  "src_size": [
+   640,
+   896
+  ],
+  "ratio": 0.71429,
+  "files": [
+   {
+    "file": "ph_arch-640.webp",
+    "w": 640,
+    "h": 896,
+    "bytes": 1588
+   }
+  ]
+ },
+ "ph_wide": {
+  "src_size": [
+   640,
+   360
+  ],
+  "ratio": 1.77778,
+  "files": [
+   {
+    "file": "ph_wide-640.webp",
+    "w": 640,
+    "h": 360,
+    "bytes": 702
+   }
+  ]
+ },
+ "placeholders": {
+  "portrait": "ph_arch-640.webp",
+  "venue": "ph_wide-640.webp"
+ },
+ "photo_slots": {
+  "hero_portrait": {
+   "aspect": "5/7"
+  },
+  "story_1": {
+   "aspect": "5/7"
+  },
+  "story_2": {
+   "aspect": "5/7"
+  },
+  "story_3": {
+   "aspect": "5/7"
+  },
+  "venue": {
+   "aspect": "16/9"
+  }
+ },
+ "stage": {
+  "aspect": 0.758,
+  "canvas_px": [
+   1000,
+   1320
+  ],
+  "card_pct": [
+   11,
+   8,
+   78,
+   82
+  ],
+  "hinges": {
+   "petal_l": "left edge (0% 50%), rotateY 0 → -122deg",
+   "petal_r": "right edge (100% 50%), rotateY 0 → 122deg",
+   "petal_c": "top edge (50% 0), rotateX 0 → 128deg"
+  },
+  "medallion_pct": [
+   32,
+   43.4,
+   36
+  ],
+  "pocket_cut_pct": [
+   [
+    0,
+    61
+   ],
+   [
+    24,
+    59
+   ],
+   [
+    42,
+    56.5
+   ],
+   [
+    50,
+    55
+   ],
+   [
+    58,
+    56.5
+   ],
+   [
+    76,
+    59
+   ],
+   [
+    100,
+    61
+   ],
+   [
+    100,
+    100
+   ],
+   [
+    0,
+    100
+   ]
+  ],
+  "petal_cuts_pct": {
+   "l": [
+    [
+     0,
+     0
+    ],
+    [
+     24,
+     0
+    ],
+    [
+     34,
+     14
+    ],
+    [
+     42,
+     30
+    ],
+    [
+     48,
+     45
+    ],
+    [
+     50,
+     57
+    ],
+    [
+     38,
+     65
+    ],
+    [
+     22,
+     75
+    ],
+    [
+     8,
+     83
+    ],
+    [
+     0,
+     87
+    ]
+   ],
+   "r": [
+    [
+     100,
+     0
+    ],
+    [
+     76,
+     0
+    ],
+    [
+     66,
+     14
+    ],
+    [
+     58,
+     30
+    ],
+    [
+     52,
+     45
+    ],
+    [
+     50,
+     57
+    ],
+    [
+     62,
+     65
+    ],
+    [
+     78,
+     75
+    ],
+    [
+     92,
+     83
+    ],
+    [
+     100,
+     87
+    ]
+   ],
+   "c": [
+    [
+     0,
+     0
+    ],
+    [
+     100,
+     0
+    ],
+    [
+     97,
+     12
+    ],
+    [
+     88,
+     27
+    ],
+    [
+     74,
+     42
+    ],
+    [
+     58,
+     54
+    ],
+    [
+     50,
+     61
+    ],
+    [
+     42,
+     54
+    ],
+    [
+     26,
+     42
+    ],
+    [
+     12,
+     27
+    ],
+    [
+     3,
+     12
+    ]
+   ]
+  },
+  "_note": "% of the closed envelope (left, top, width, height); GPT W2.4–W2.6 are drawn on this canvas, stacked 1:1"
+ },
+ "og": {
+  "file": "og-1200x630.jpg",
+  "source": "montage: closed envelope (cream paper cuts) on the sage ground",
+  "bytes": 70991
+ },
+ "favicon": {
+  "src_box": [
+   28,
+   34,
+   335,
+   432
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.04,
+  "file": "favicon.png",
+  "bytes": 21978
+ },
+ "parts": {
+  "used": [],
+  "waiting_for_gpt": [
+   "env_back",
+   "env_pocket",
+   "petal_left",
+   "petal_right",
+   "petal_centre",
+   "lily_medallion",
+   "card_small",
+   "arch_window",
+   "halo",
+   "lily_spray",
+   "whiplash",
+   "petal_drift",
+   "web_hero",
+   "cream_paper",
+   "sage_paper",
+   "lilac_lining"
+  ]
+ },
+ "_note": "G186 interim build: cream, sage and lilac papers toned from other designs' plain GPT pictures; the design's own PAKET 5 parts are taken as they arrive (GPT_PROMPTS.md, manifest parts). Nothing drawn.",
+ "parts_css_rules": 0,
+ "checks": {
+  "green": {}
+ },
+ "theme_check": {
+  "particles": ".accent-layer",
+  "first_screen": {
+   "landscape": false,
+   "names_min_px": 34
+  },
+  "backdrop": {
+   "edge_max": 2.2,
+   "dark_max": 0.05,
+   "dark_below": 0,
+   "light_above": 140
+  }
+ },
+ "bytes_total": 353271
+}

@@ -313,6 +313,9 @@ const dict: Dict = {
   // G185 Victorian Glasshouse (36)
   "Grown with love": "Cultivé avec amour",
   "Open the seed packet": "Ouvrir le sachet de graines",
+  // G186 Art Nouveau Lily
+  "Invite you to celebrate": "Vous invitent à célébrer",
+  "Love in full bloom": "Un amour en pleine floraison",
 };
 
 export default dict;

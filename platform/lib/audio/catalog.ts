@@ -69,6 +69,8 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   'marigold-mehndi': { music: 'evening-strings', opening: [[0, 'ribbon'], [300, 'slide'], [1250, 'paper'], [2500, 'slide'], [3150, 'chime']] },
   // Highland Tartan & Thistle: buckle tips open (buckle) · strap slides out (strap) · flap swings up (flap) · card rises (rise) · forward
   'highland-tartan-thistle': { music: 'evening-strings', opening: [[150, 'clasp'], [600, 'ribbon'], [1300, 'paper'], [2500, 'slide'], [3150, 'chime']] },
+  // Art Nouveau Lily: a touch (head) · light through the stained glass (glow) · side petals (sides) · centre petal (centre) · card rises (rise) · forward
+  'art-nouveau-lily': { music: 'garden-waltz', opening: [[0, 'tap'], [300, 'chime'], [1100, 'paper'], [1500, 'paper'], [2400, 'slide'], [3050, 'chime']] },
   // Sky Lantern Festival: a touch kindles the lantern (kindle) · the hands let go (hands) · it lifts off (rise) · the card glows in (card) · forward
   'sky-lantern-festival': { music: 'first-light', opening: [[0, 'tap'], [700, 'paper'], [900, 'whoosh'], [2000, 'slide'], [3200, 'chime']] },
   // Victorian Glasshouse: the copper label swings (tag) · the twine comes apart (twine) · the flap folds back (flap) · the card rises (rise) · the mist is wiped (wipe) · forward

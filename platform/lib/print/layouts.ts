@@ -573,6 +573,29 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
       back: { bg: 'url(paper.webp) 0 0 / 2.4in repeat', images: [{ src: 'fern', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover' }] },
     },
   },
+  // 37 (G186, interim until PAKET 6 print/invitation_front_5x7.png + print/invitation_back_5x7.png, 1575×2175, one sheet
+  // per side for 5×7 and A5 — GPT_PROMPTS.md): cream paper with a band of the sage ground at its top and bottom edge —
+  // both toned textures from the theme build (img/paper, img/sage; no shape drawn). The prompts keep the front / back
+  // boxes below empty on the art; on arrival: sources → { front, back } of those two files, composed → { front: { bg:
+  // cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }, re-measure the boxes on the art (G149), then
+  // build-print-assets.
+  'art-nouveau-lily': {
+    collection: '37_Art_Nouveau_Lily',
+    sources: { paper: 'platform/themes/art-nouveau-lily/img/paper-1024.webp', sage: 'platform/themes/art-nouveau-lily/img/sage-1024.webp' },
+    fonts: gf('family=Ephesis&family=Federant&family=Linden+Hill'),
+    script: "'Ephesis', cursive", serif: "'Linden Hill', Georgia, serif",
+    ink: '#2E3228', accent: '#7A5D22', front: [21, 13, 19, 13], back: [17, 12, 10, 12],
+    composed: {
+      front: {
+        bg: 'url(paper.webp) 0 0 / 2.4in repeat',
+        images: [
+          { src: 'sage', style: 'top:0;left:0;width:100%;height:13%;object-fit:cover' },
+          { src: 'sage', style: 'bottom:0;left:0;width:100%;height:11%;object-fit:cover;object-position:50% 80%' },
+        ],
+      },
+      back: { bg: 'url(paper.webp) 0 0 / 2.4in repeat', images: [{ src: 'sage', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover' }] },
+    },
+  },
 };
 
 export function printLayout(themeId: string): PrintLayout | null {
