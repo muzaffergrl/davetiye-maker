@@ -36,8 +36,8 @@
 </script>
 <style>.js:not(.parts-on) img[data-defer]{display:none!important}</style>
 <script>/* deferred opening parts (G180, docs/11 §6): the images that only show after the tap ([data-defer], lazy) wait until the
-   closed object's own high-priority image(s) in .stage have loaded, then all load at once — before the tap, so the opening never waits */
-(function(d,r){var on=function(){r.classList.add('parts-on')};if(r.classList.contains('is-opened'))return on();addEventListener('pointerdown',on,true);addEventListener('keydown',on,true);addEventListener('load',on);d.addEventListener('DOMContentLoaded',function(){var h=d.querySelectorAll('.stage img[fetchpriority=high]');h=h.length?h:d.querySelectorAll('img[fetchpriority=high]');var n=h.length,one=function(){--n||on()};if(!n)on();h.forEach(function(i){i.complete?one():(i.addEventListener('load',one),i.addEventListener('error',one))})})})(document,document.documentElement);
+   closed object's own high-priority image(s) in .stage have loaded and painted, then all load at once — before the tap, so the opening never waits */
+(function(d,r){var on=function(){r.classList.add('parts-on')};if(r.classList.contains('is-opened'))return on();addEventListener('pointerdown',on,true);addEventListener('keydown',on,true);addEventListener('load',on);d.addEventListener('DOMContentLoaded',function(){var h=d.querySelectorAll('.stage img[fetchpriority=high]');h=h.length?h:d.querySelectorAll('img[fetchpriority=high]');var n=h.length,one=function(){--n||requestAnimationFrame(function(){setTimeout(on)})};if(!n)on();h.forEach(function(i){i.complete?one():(i.addEventListener('load',one),i.addEventListener('error',one))})})})(document,document.documentElement);
 </script>
 <!-- prefetch the home page: the rule points at the "Enter" link, whose href the platform has already set to /<slug>/home -->
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"selector_matches":"a[data-enter]"},"eagerness":"immediate"}]}</script>

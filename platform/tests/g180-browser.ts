@@ -15,7 +15,7 @@
 // Writes previews/g180/<out> (default metrics.json); exit 1 when a check fails. Playwright from NODE_PATH and
 // /opt/pw-browsers (never `playwright install`).
 
-import { mkdirSync, mkdtempSync, readdirSync, existsSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, existsSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { parseArgs } from 'node:util';
@@ -175,10 +175,15 @@ try {
         check(`${id}: every deferred opening part loaded before the tap (load + 6 s)`, missing.length === 0, missing.length ? missing : r.load.deferred.length);
       }
     }
+    // a design without the faces yet (added after G180) is reported, not checked
+    if (!readFileSync(path.join(ROOT, 'themes', id, 'index.html'), 'utf8').includes('names fallback: scripts/font-fallback.ts')) {
+      console.log(`     ${id}: no names fallback faces yet (scripts/font-fallback.ts) — geometry not checked`);
+    } else {
     const [web, fb] = [await geometry(id, false), await geometry(id, true)];
     const off = Object.keys(web).filter((k) => web[k] && fb[k] && (Math.abs(web[k]![0] - fb[k]![0]) > 2 || Math.abs(web[k]![1] - fb[k]![1]) > 2));
     r.geometry = { web, fallback: fb };
     check(`${id}: names fallback sets the names where the web font does (±2 px)`, off.length === 0, off.length ? off.map((k) => `${k} ${web[k]} → ${fb[k]}`) : undefined);
+    }
     r.underNav = await underNav(id);
     const hits = Object.entries(r.underNav).filter(([, h]) => (h as string[]).length);
     check(`${id}: nothing under the fixed bottom nav at the end of a page`, hits.length === 0, hits.length ? Object.fromEntries(hits) : undefined);

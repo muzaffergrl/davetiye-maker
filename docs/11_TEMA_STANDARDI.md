@@ -460,8 +460,9 @@ bant genişliğini paylaşır (G173: LCP 3–5 s). Kural:
   görünmediği ölçülerek seçilir: kapalı sahnenin ekran görüntüsünde parça gizlenince değişen piksel yoksa ertelenir (kart
   vellum, kapı aralığı ya da cep kenarından görünüyorsa ertelenmez — 06, 11, 14, 18'de kart erken kalır).
 - `index.html` `<head>`'inde erken durum betiğinden hemen sonra bütün temalarda **aynı** serbest bırakma parçası:
-  `.js:not(.parts-on) img[data-defer]{display:none!important}` + betik; `.stage img[fetchpriority=high]` yüklenince (ya da
-  `load`, ilk `pointerdown`/`keydown`, açılmış durumda hemen) `html.parts-on` eklenir ve ertelenen parçalar dokunuştan
+  `.js:not(.parts-on) img[data-defer]{display:none!important}` + betik; `.stage img[fetchpriority=high]` yüklenip bir kare
+  boyandıktan sonra (rAF + setTimeout: parçaların yerleşim/decode işi LCP karesine binmesin; ya da `load`, ilk
+  `pointerdown`/`keydown`, açılmış durumda hemen) `html.parts-on` eklenir ve ertelenen parçalar dokunuştan
   **önce** birlikte yüklenir. Parçalar mutlak konumlu olduğu için `display:none` yerleşimi değiştirmez; `site.js` parçaların
   ölçüsünü dokunuşta okur. Kaynak ve test: `platform/tests/g180-theme-perf.test.ts` (işaretler), `tests/g180-browser.ts`
   (hiçbir ertelenen parça kapalı nesne yüklenmeden istenmez; hepsi dokunuştan önce yüklenir).

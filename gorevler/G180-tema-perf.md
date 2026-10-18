@@ -53,8 +53,8 @@ Gerçek telefon ve canlı ağ denenmedi. Ham veri: `previews/g180/before*.json`,
   (kapalı sahne ekran görüntüsünde parça gizlenince piksel değişmiyorsa) ve `data-defer loading="lazy" fetchpriority="low"
   decoding="async"` aldı (21 tema, 1–9 görsel). Kart vellumdan/kapı aralığından/cep kenarından görünen 06, 11, 14, 18'de kart erken
   kaldı. `index.html`'e bütün temalarda aynı küçük parça: `.js:not(.parts-on) img[data-defer]{display:none!important}` + betik;
-  `.stage img[fetchpriority=high]` yüklenince (ya da `load`, ilk `pointerdown`/`keydown`, açılmış durumda hemen) `parts-on`
-  eklenir, parçalar dokunuştan önce birlikte yüklenir. Şelalede (tuscan) parçalar artık kapalı zarf bittikten sonra başlıyor
+  `.stage img[fetchpriority=high]` yüklenip bir kare boyandıktan sonra (rAF + setTimeout; ya da `load`, ilk
+  `pointerdown`/`keydown`, açılmış durumda hemen) `parts-on` eklenir, parçalar dokunuştan önce birlikte yüklenir. Şelalede (tuscan) parçalar artık kapalı zarf bittikten sonra başlıyor
   (önce 210 ms'de, sonra 3,97 s'de). İlk görünümde High öncelikli görsel KB'ı: olive 743 → 557, blush 787 → 442, tuscan 896 →
   584, sunflower 804 → 462, enchanted 584 → 306.
 - **Açılış aynı:** önce/sonra dokunuş kareleri (100–2600 ms) olive, coastal (dalga), art-deco (kapılar), enchanted (kitap):
