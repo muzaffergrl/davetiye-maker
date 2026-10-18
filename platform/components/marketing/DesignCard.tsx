@@ -41,7 +41,7 @@ export function DesignCard({
   const v = openingVideo(design.id);
   const video = v ? { file: v.file, poster: v.poster, width: v.width, height: v.height } : null;
   const H = headingLevel === 2 ? 'h2' : 'h3';
-  const hasCover = hasEnvelopeCover(design.id);
+  const hasCover = !env && hasEnvelopeCover(design.id);
   const price = realPrice(design.price);
   const sizes = '(min-width: 1024px) 220px, (min-width: 600px) 30vw, 34vw';
   return (

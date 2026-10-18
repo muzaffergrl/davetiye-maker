@@ -1,7 +1,7 @@
 {
   "id": "velvet-jewel-box",
   "name": "Velvet Jewel Box",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "pages": {
     "index": "index.html",
     "home": "home.html",
@@ -11,41 +11,41 @@
   },
   "photos": {
     "hero_portrait": {
-      "label": "Portrait on the card and beside the invitation",
+      "label": "Portrait on the invitation card",
       "source": "media.hero_portrait",
-      "aspect": "4/5"
+      "aspect": "567/595"
     },
     "story_1": {
-      "label": "Story photo 1 (display case)",
+      "label": "Our Story photo 1",
       "source": "media.memory_photos.0",
-      "aspect": "4/5"
+      "aspect": "626/868"
     },
     "story_2": {
-      "label": "Story photo 2 (display case)",
+      "label": "Our Story photo 2",
       "source": "media.memory_photos.1",
-      "aspect": "4/5"
+      "aspect": "626/868"
     },
     "story_3": {
-      "label": "Story photo 3 (display case)",
+      "label": "Our Story photo 3",
       "source": "media.memory_photos.2",
-      "aspect": "4/5"
+      "aspect": "626/868"
     },
     "venue": {
       "label": "Venue photo",
       "source": "media.venue_image",
-      "aspect": "16/9"
+      "aspect": "1172/681"
     }
   },
   "copy": {
     "envelope_kicker": {
       "default": "You are invited",
-      "max": 40,
+      "max": 28,
       "pages": [
         "index"
       ]
     },
     "card_line": {
-      "default": "Our wedding",
+      "default": "We're getting married",
       "max": 32,
       "pages": [
         "index",
@@ -53,15 +53,8 @@
       ]
     },
     "invite_request": {
-      "default": "request the pleasure of your company at their wedding",
+      "default": "request the pleasure of your company at the celebration of their marriage",
       "max": 110,
-      "pages": [
-        "home"
-      ]
-    },
-    "invite_at": {
-      "default": "at",
-      "max": 12,
       "pages": [
         "home"
       ]
@@ -70,7 +63,8 @@
       "default": "With love,",
       "max": 24,
       "pages": [
-        "home"
+        "home",
+        "rsvp"
       ]
     },
     "foot_kicker": {
@@ -80,8 +74,29 @@
         "home"
       ]
     },
+    "share_invited": {
+      "default": "You're invited",
+      "max": 40,
+      "pages": [
+        "index"
+      ]
+    },
+    "invite_cue": {
+      "default": "Our invitation",
+      "max": 30,
+      "pages": [
+        "home"
+      ]
+    },
     "envelope_hint_tap": {
       "default": "Tap to open",
+      "max": 24,
+      "pages": [
+        "index"
+      ]
+    },
+    "envelope_hint_click": {
+      "default": "Click to open",
       "max": 24,
       "pages": [
         "index"
@@ -102,7 +117,7 @@
       ]
     },
     "home_replay": {
-      "default": "Open the box again",
+      "default": "Replay the envelope",
       "max": 30,
       "pages": [
         "home"
@@ -123,7 +138,7 @@
       ]
     },
     "day_title": {
-      "default": "The celebration",
+      "default": "The Day",
       "max": 24,
       "pages": [
         "home",
@@ -132,15 +147,29 @@
       ]
     },
     "schedule_title": {
-      "default": "Order of the day",
+      "default": "Order of the Day",
+      "max": 30,
+      "pages": [
+        "details"
+      ]
+    },
+    "venue_title": {
+      "default": "The Venue",
       "max": 30,
       "pages": [
         "details"
       ]
     },
     "ceremony_line": {
-      "default": "The ceremony begins at",
+      "default": "Ceremony at",
       "max": 40,
+      "pages": [
+        "details"
+      ]
+    },
+    "ceremony_in": {
+      "default": "in",
+      "max": 12,
       "pages": [
         "details"
       ]
@@ -150,6 +179,13 @@
       "max": 24,
       "pages": [
         "details"
+      ]
+    },
+    "home_day_cue": {
+      "default": "Schedule & venue",
+      "max": 24,
+      "pages": [
+        "home"
       ]
     },
     "calendar_title": {
@@ -220,9 +256,23 @@
     },
     "ty_kicker": {
       "default": "With love and thanks",
-      "max": 40,
+      "max": 28,
       "pages": [
         "index"
+      ]
+    },
+    "ty_more": {
+      "default": "Look back with us",
+      "max": 30,
+      "pages": [
+        "home"
+      ]
+    },
+    "ty_cue": {
+      "default": "A note from us",
+      "max": 30,
+      "pages": [
+        "home"
       ]
     },
     "ceremony_after": {
@@ -230,6 +280,13 @@
       "max": 40,
       "pages": [
         "details"
+      ]
+    },
+    "closing_line_after": {
+      "default": "It meant the world to have you with us.",
+      "max": 60,
+      "pages": [
+        "rsvp"
       ]
     },
     "home_link": {
@@ -249,11 +306,25 @@
       ]
     },
     "story_kicker": {
-      "default": "Treasured moments",
+      "default": "Moments we hold dear",
       "max": 40,
       "pages": [
         "home",
         "story"
+      ]
+    },
+    "home_story_cue": {
+      "default": "Read our story",
+      "max": 24,
+      "pages": [
+        "home"
+      ]
+    },
+    "home_more": {
+      "default": "More about the day",
+      "max": 30,
+      "pages": [
+        "home"
       ]
     },
     "dress_label": {
@@ -355,7 +426,7 @@
       ]
     },
     "registry_note": {
-      "default": "Your presence is the greatest gift. For those who wish to honour us with a gift, our registry is linked below.",
+      "default": "Your presence is the greatest gift. For those who wish to honor us with a gift, our registry is linked below.",
       "max": 200,
       "pages": [
         "details"
@@ -405,7 +476,7 @@
     },
     "nav_home": {
       "default": "Home",
-      "max": 6,
+      "max": 8,
       "pages": [
         "home",
         "story",
@@ -415,7 +486,7 @@
     },
     "nav_story": {
       "default": "Story",
-      "max": 6,
+      "max": 8,
       "pages": [
         "home",
         "story",
@@ -425,7 +496,7 @@
     },
     "nav_details": {
       "default": "Details",
-      "max": 7,
+      "max": 8,
       "pages": [
         "home",
         "story",
@@ -435,7 +506,7 @@
     },
     "nav_rsvp": {
       "default": "RSVP",
-      "max": 5,
+      "max": 8,
       "pages": [
         "home",
         "story",
@@ -454,9 +525,10 @@
       ]
     },
     "rsvp_title": {
-      "default": "Kindly respond",
+      "default": "Will You Join Us?",
       "max": 30,
       "pages": [
+        "home",
         "rsvp"
       ]
     },
@@ -468,6 +540,13 @@
         "rsvp"
       ]
     },
+    "teaser_rsvp_by": {
+      "default": "Reply by",
+      "max": 20,
+      "pages": [
+        "home"
+      ]
+    },
     "rsvp_button": {
       "default": "RSVP",
       "max": 16,
@@ -477,9 +556,16 @@
         "rsvp"
       ]
     },
-    "rsvp_wait": {
-      "default": "We can't wait to celebrate with you",
-      "max": 50,
+    "home_rsvp_cue": {
+      "default": "Reply now",
+      "max": 20,
+      "pages": [
+        "home"
+      ]
+    },
+    "form_kicker": {
+      "default": "Kindly reply",
+      "max": 30,
       "pages": [
         "rsvp"
       ]
@@ -520,14 +606,14 @@
       ]
     },
     "form_yes": {
-      "default": "Yes, we'll be there!",
+      "default": "Joyfully accepts",
       "max": 30,
       "pages": [
         "rsvp"
       ]
     },
     "form_no": {
-      "default": "Sadly, we can't make it",
+      "default": "Regretfully declines",
       "max": 30,
       "pages": [
         "rsvp"
@@ -576,7 +662,7 @@
       ]
     },
     "rsvp_thanks_yes": {
-      "default": "Your reply is with us. We look forward to the day together.",
+      "default": "We can't wait to celebrate with you.",
       "max": 120,
       "pages": [
         "rsvp"
@@ -603,66 +689,26 @@
         "rsvp"
       ]
     },
-    "rsvp_replay": {
-      "default": "Open the box again",
+    "closing_title": {
+      "default": "Thank you",
       "max": 30,
       "pages": [
         "rsvp"
       ]
     },
-    "album_next": {
-      "default": "Next photograph",
+    "closing_line": {
+      "default": "We can't wait to celebrate with you.",
+      "max": 60,
+      "pages": [
+        "rsvp"
+      ]
+    },
+    "rsvp_replay": {
+      "default": "Replay the envelope",
       "max": 30,
       "pages": [
-        "story"
-      ],
-      "label": "Next photo button (screen readers)",
-      "panel": "story"
-    },
-    "album_open": {
-      "default": "View our photographs",
-      "max": 30,
-      "pages": [
-        "home"
-      ],
-      "label": "Gallery link on the home page",
-      "panel": "story"
-    },
-    "album_previous": {
-      "default": "Previous photograph",
-      "max": 30,
-      "pages": [
-        "story"
-      ],
-      "label": "Previous photo button (screen readers)",
-      "panel": "story"
-    },
-    "home_explore": {
-      "default": "A celebration to remember",
-      "max": 50,
-      "pages": [
-        "home"
-      ],
-      "label": "Button under the names",
-      "panel": "us"
-    },
-    "home_intro": {
-      "default": "A day for love, a lifetime of memories.",
-      "max": 100,
-      "pages": [
-        "home"
-      ],
-      "label": "Invitation heading",
-      "panel": "us"
-    },
-    "home_location": {
-      "default": "Join us in",
-      "max": 25,
-      "pages": [
-        "home"
-      ],
-      "label": "Line above the city",
-      "panel": "day"
+        "rsvp"
+      ]
     }
   },
   "swatch": [

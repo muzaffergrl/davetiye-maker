@@ -1,7 +1,7 @@
 {
   "id": "orient-express-voyage",
   "name": "Orient Express Voyage",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "pages": {
     "index": "index.html",
     "home": "home.html",
@@ -11,41 +11,41 @@
   },
   "photos": {
     "hero_portrait": {
-      "label": "Portrait on the ticket and beside the invitation",
+      "label": "Portrait on the invitation card",
       "source": "media.hero_portrait",
-      "aspect": "4/5"
+      "aspect": "567/595"
     },
     "story_1": {
-      "label": "Carriage window photo 1",
+      "label": "Our Story photo 1",
       "source": "media.memory_photos.0",
-      "aspect": "3/4"
+      "aspect": "626/868"
     },
     "story_2": {
-      "label": "Carriage window photo 2",
+      "label": "Our Story photo 2",
       "source": "media.memory_photos.1",
-      "aspect": "3/4"
+      "aspect": "626/868"
     },
     "story_3": {
-      "label": "Carriage window photo 3",
+      "label": "Our Story photo 3",
       "source": "media.memory_photos.2",
-      "aspect": "3/4"
+      "aspect": "626/868"
     },
     "venue": {
       "label": "Venue photo",
       "source": "media.venue_image",
-      "aspect": "3/2"
+      "aspect": "1172/681"
     }
   },
   "copy": {
     "envelope_kicker": {
-      "default": "All aboard",
-      "max": 40,
+      "default": "You are invited",
+      "max": 28,
       "pages": [
         "index"
       ]
     },
     "card_line": {
-      "default": "First class to forever",
+      "default": "We're getting married",
       "max": 32,
       "pages": [
         "index",
@@ -53,15 +53,8 @@
       ]
     },
     "invite_request": {
-      "default": "invite you aboard to celebrate their wedding",
+      "default": "request the pleasure of your company at the celebration of their marriage",
       "max": 110,
-      "pages": [
-        "home"
-      ]
-    },
-    "invite_at": {
-      "default": "departing at",
-      "max": 12,
       "pages": [
         "home"
       ]
@@ -70,25 +63,47 @@
       "default": "With love,",
       "max": 24,
       "pages": [
-        "home"
+        "home",
+        "rsvp"
       ]
     },
     "foot_kicker": {
-      "default": "Bon voyage, with love",
+      "default": "With love",
+      "max": 30,
+      "pages": [
+        "home"
+      ]
+    },
+    "share_invited": {
+      "default": "You're invited",
+      "max": 40,
+      "pages": [
+        "index"
+      ]
+    },
+    "invite_cue": {
+      "default": "Our invitation",
       "max": 30,
       "pages": [
         "home"
       ]
     },
     "envelope_hint_tap": {
-      "default": "Tap to unbuckle",
+      "default": "Tap to open",
+      "max": 24,
+      "pages": [
+        "index"
+      ]
+    },
+    "envelope_hint_click": {
+      "default": "Click to open",
       "max": 24,
       "pages": [
         "index"
       ]
     },
     "envelope_enter": {
-      "default": "Board",
+      "default": "Enter",
       "max": 20,
       "pages": [
         "index"
@@ -102,7 +117,7 @@
       ]
     },
     "home_replay": {
-      "default": "Open the ticket wallet again",
+      "default": "Replay the envelope",
       "max": 30,
       "pages": [
         "home"
@@ -123,30 +138,38 @@
       ]
     },
     "day_title": {
-      "default": "The itinerary",
+      "default": "The Day",
       "max": 24,
       "pages": [
+        "home",
         "story",
         "details"
       ]
     },
     "schedule_title": {
-      "default": "Stations of the day",
+      "default": "Order of the Day",
       "max": 30,
       "pages": [
         "details"
       ]
     },
     "venue_title": {
-      "default": "The terminus",
+      "default": "The Venue",
       "max": 30,
       "pages": [
         "details"
       ]
     },
     "ceremony_line": {
-      "default": "The ceremony begins at",
+      "default": "Ceremony at",
       "max": 40,
+      "pages": [
+        "details"
+      ]
+    },
+    "ceremony_in": {
+      "default": "in",
+      "max": 12,
       "pages": [
         "details"
       ]
@@ -159,7 +182,7 @@
       ]
     },
     "home_day_cue": {
-      "default": "See the full itinerary",
+      "default": "Schedule & venue",
       "max": 24,
       "pages": [
         "home"
@@ -233,9 +256,23 @@
     },
     "ty_kicker": {
       "default": "With love and thanks",
-      "max": 40,
+      "max": 28,
       "pages": [
         "index"
+      ]
+    },
+    "ty_more": {
+      "default": "Look back with us",
+      "max": 30,
+      "pages": [
+        "home"
+      ]
+    },
+    "ty_cue": {
+      "default": "A note from us",
+      "max": 30,
+      "pages": [
+        "home"
       ]
     },
     "ceremony_after": {
@@ -243,6 +280,13 @@
       "max": 40,
       "pages": [
         "details"
+      ]
+    },
+    "closing_line_after": {
+      "default": "It meant the world to have you with us.",
+      "max": 60,
+      "pages": [
+        "rsvp"
       ]
     },
     "home_link": {
@@ -254,7 +298,7 @@
       ]
     },
     "story_title": {
-      "default": "Our story",
+      "default": "Our Story",
       "max": 24,
       "pages": [
         "home",
@@ -262,7 +306,7 @@
       ]
     },
     "story_kicker": {
-      "default": "Through the window",
+      "default": "Moments we hold dear",
       "max": 40,
       "pages": [
         "home",
@@ -270,8 +314,15 @@
       ]
     },
     "home_story_cue": {
-      "default": "Look out of the window",
+      "default": "Read our story",
       "max": 24,
+      "pages": [
+        "home"
+      ]
+    },
+    "home_more": {
+      "default": "More about the day",
+      "max": 30,
       "pages": [
         "home"
       ]
@@ -375,7 +426,7 @@
       ]
     },
     "registry_note": {
-      "default": "Your presence is the greatest gift. For those who wish to honour us with a gift, our registry is linked below.",
+      "default": "Your presence is the greatest gift. For those who wish to honor us with a gift, our registry is linked below.",
       "max": 200,
       "pages": [
         "details"
@@ -444,8 +495,8 @@
       ]
     },
     "nav_details": {
-      "default": "Itinerary",
-      "max": 9,
+      "default": "Details",
+      "max": 8,
       "pages": [
         "home",
         "story",
@@ -465,7 +516,7 @@
     },
     "nav_day": {
       "default": "The Day",
-      "max": 8,
+      "max": 10,
       "pages": [
         "home",
         "story",
@@ -474,9 +525,10 @@
       ]
     },
     "rsvp_title": {
-      "default": "Your boarding pass",
+      "default": "Will You Join Us?",
       "max": 30,
       "pages": [
+        "home",
         "rsvp"
       ]
     },
@@ -504,15 +556,15 @@
         "rsvp"
       ]
     },
-    "rsvp_wait": {
-      "default": "Reserve your seat for the journey",
-      "max": 50,
+    "home_rsvp_cue": {
+      "default": "Reply now",
+      "max": 20,
       "pages": [
-        "rsvp"
+        "home"
       ]
     },
     "form_kicker": {
-      "default": "Passenger",
+      "default": "Kindly reply",
       "max": 30,
       "pages": [
         "rsvp"
@@ -554,14 +606,14 @@
       ]
     },
     "form_yes": {
-      "default": "Yes, we'll be there!",
+      "default": "Joyfully accepts",
       "max": 30,
       "pages": [
         "rsvp"
       ]
     },
     "form_no": {
-      "default": "Sadly, we can't make it",
+      "default": "Regretfully declines",
       "max": 30,
       "pages": [
         "rsvp"
@@ -610,7 +662,7 @@
       ]
     },
     "rsvp_thanks_yes": {
-      "default": "Your seat is reserved. We look forward to the journey together.",
+      "default": "We can't wait to celebrate with you.",
       "max": 120,
       "pages": [
         "rsvp"
@@ -637,57 +689,26 @@
         "rsvp"
       ]
     },
-    "rsvp_replay": {
-      "default": "Replay the ticket wallet",
+    "closing_title": {
+      "default": "Thank you",
       "max": 30,
       "pages": [
         "rsvp"
       ]
     },
-    "cd_title": {
-      "default": "Departure in",
-      "max": 30,
-      "pages": [
-        "home"
-      ],
-      "label": "Line above the countdown",
-      "panel": "day"
-    },
-    "home_explore": {
-      "default": "Your journey begins",
-      "max": 40,
-      "pages": [
-        "home"
-      ],
-      "label": "Button under the names",
-      "panel": "us"
-    },
-    "home_intro": {
-      "default": "Two hearts, one journey",
+    "closing_line": {
+      "default": "We can't wait to celebrate with you.",
       "max": 60,
       "pages": [
-        "home"
-      ],
-      "label": "Invitation heading",
-      "panel": "us"
+        "rsvp"
+      ]
     },
-    "home_location": {
-      "default": "The journey to",
-      "max": 25,
-      "pages": [
-        "home"
-      ],
-      "label": "Line above the city",
-      "panel": "day"
-    },
-    "invite_kicker": {
-      "default": "Your invitation",
+    "rsvp_replay": {
+      "default": "Replay the envelope",
       "max": 30,
       "pages": [
-        "home"
-      ],
-      "label": "Line above the invitation heading",
-      "panel": "us"
+        "rsvp"
+      ]
     }
   },
   "swatch": [

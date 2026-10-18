@@ -1,0 +1,28 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync,mkdtempSync} from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {LocalAdapter} from '../lib/data/local/index.ts';
+import {createSiteWithKeys,publishSite} from '../lib/sites.ts';
+import {submitRsvp} from '../lib/rsvp/guest.ts';
+import {MemoryRateLimiter} from '../lib/rsvp/rate-limit.ts';
+const root=path.resolve(import.meta.dirname,'..');
+process.env.PLATFORM_THEMES_DIR=path.join(root,'themes');
+const ids=['nocturne-lake-estate','velvet-jewel-box','grand-theatre-premiere','orient-express-voyage','kintsugi-washi','riad-lantern-nights','maison-patisserie','celestial-observatory','azulejo-mosaic','sky-lantern-festival','music-box-ballerina'];
+for(const id of ids)test(id+': published reply storage, validation and duplicate protection',async()=>{
+ const adapter=new LocalAdapter(mkdtempSync(path.join(process.env.BKE_TEST_TMP_DIR||os.tmpdir(),'bke-eleven-rsvp-')));
+ const content=JSON.parse(readFileSync(path.join(root,'themes',id,'content.demo.json'),'utf8'));
+ const made=await createSiteWithKeys(adapter,{slug:'qa-'+id,theme:id,content});
+ await publishSite(adapter,made.site.id,{now:new Date('2026-10-18T00:00:00Z')});
+ const ctx={adapter,limiter:new MemoryRateLimiter(),now:new Date('2026-10-18T00:00:00Z'),ip:'192.0.2.9'};
+ const yes={name:'Example Guest',attending:'yes',guests:2,email:'guest@example.com',message:'Looking forward to it.',website:''};
+ assert.equal((await submitRsvp(ctx,'qa-'+id,yes)).status,200);
+ assert.equal((await submitRsvp(ctx,'qa-'+id,yes)).status,200);
+ assert.equal((await adapter.listRsvps(made.site.id)).length,1,'duplicate is not stored twice');
+ assert.equal((await submitRsvp(ctx,'qa-'+id,{name:'',attending:'yes',guests:1})).status,400);
+ assert.equal((await submitRsvp(ctx,'qa-'+id,{name:'Another Guest',attending:'no'})).status,200);
+ const replies=await adapter.listRsvps(made.site.id);
+ assert.equal(replies.length,2);assert.equal(replies.find(r=>r.name==='Example Guest')?.guests,2);
+ assert.equal(replies.find(r=>r.name==='Another Guest')?.attending,false);
+});

@@ -1,7 +1,7 @@
 {
   "id": "grand-theatre-premiere",
   "name": "Grand Theatre Premiere",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "pages": {
     "index": "index.html",
     "home": "home.html",
@@ -11,41 +11,41 @@
   },
   "photos": {
     "hero_portrait": {
-      "label": "Portrait on the programme card and beside the invitation",
+      "label": "Portrait on the invitation card",
       "source": "media.hero_portrait",
-      "aspect": "4/5"
+      "aspect": "567/595"
     },
     "story_1": {
-      "label": "Story photo 1 (Scene I)",
+      "label": "Our Story photo 1",
       "source": "media.memory_photos.0",
-      "aspect": "4/5"
+      "aspect": "626/868"
     },
     "story_2": {
-      "label": "Story photo 2 (Scene II)",
+      "label": "Our Story photo 2",
       "source": "media.memory_photos.1",
-      "aspect": "4/5"
+      "aspect": "626/868"
     },
     "story_3": {
-      "label": "Story photo 3 (Scene III)",
+      "label": "Our Story photo 3",
       "source": "media.memory_photos.2",
-      "aspect": "4/5"
+      "aspect": "626/868"
     },
     "venue": {
       "label": "Venue photo",
       "source": "media.venue_image",
-      "aspect": "3/2"
+      "aspect": "1172/681"
     }
   },
   "copy": {
     "envelope_kicker": {
-      "default": "You are invited to a premiere",
-      "max": 40,
+      "default": "You are invited",
+      "max": 28,
       "pages": [
         "index"
       ]
     },
     "card_line": {
-      "default": "Our wedding",
+      "default": "We're getting married",
       "max": 32,
       "pages": [
         "index",
@@ -53,15 +53,8 @@
       ]
     },
     "invite_request": {
-      "default": "invite you to celebrate their wedding",
+      "default": "request the pleasure of your company at the celebration of their marriage",
       "max": 110,
-      "pages": [
-        "home"
-      ]
-    },
-    "invite_at": {
-      "default": "Curtain up at",
-      "max": 13,
       "pages": [
         "home"
       ]
@@ -70,7 +63,8 @@
       "default": "With love,",
       "max": 24,
       "pages": [
-        "home"
+        "home",
+        "rsvp"
       ]
     },
     "foot_kicker": {
@@ -80,15 +74,29 @@
         "home"
       ]
     },
+    "share_invited": {
+      "default": "You're invited",
+      "max": 40,
+      "pages": [
+        "index"
+      ]
+    },
     "invite_cue": {
-      "default": "Tonight's programme",
+      "default": "Our invitation",
       "max": 30,
       "pages": [
         "home"
       ]
     },
     "envelope_hint_tap": {
-      "default": "Tap to raise the curtain",
+      "default": "Tap to open",
+      "max": 24,
+      "pages": [
+        "index"
+      ]
+    },
+    "envelope_hint_click": {
+      "default": "Click to open",
       "max": 24,
       "pages": [
         "index"
@@ -102,14 +110,14 @@
       ]
     },
     "envelope_replay": {
-      "default": "Replay the curtain",
+      "default": "Replay the opening",
       "max": 30,
       "pages": [
         "index"
       ]
     },
     "home_replay": {
-      "default": "Raise the curtain again",
+      "default": "Replay the envelope",
       "max": 30,
       "pages": [
         "home"
@@ -130,18 +138,18 @@
       ]
     },
     "day_title": {
-      "default": "The Programme",
+      "default": "The Day",
       "max": 24,
       "pages": [
+        "home",
         "story",
         "details"
       ]
     },
     "schedule_title": {
-      "default": "Tonight's Programme",
+      "default": "Order of the Day",
       "max": 30,
       "pages": [
-        "home",
         "details"
       ]
     },
@@ -153,8 +161,15 @@
       ]
     },
     "ceremony_line": {
-      "default": "The curtain rises on the ceremony at",
+      "default": "Ceremony at",
       "max": 40,
+      "pages": [
+        "details"
+      ]
+    },
+    "ceremony_in": {
+      "default": "in",
+      "max": 12,
       "pages": [
         "details"
       ]
@@ -167,7 +182,7 @@
       ]
     },
     "home_day_cue": {
-      "default": "The full programme",
+      "default": "Schedule & venue",
       "max": 24,
       "pages": [
         "home"
@@ -241,16 +256,37 @@
     },
     "ty_kicker": {
       "default": "With love and thanks",
-      "max": 40,
+      "max": 28,
       "pages": [
         "index"
       ]
     },
+    "ty_more": {
+      "default": "Look back with us",
+      "max": 30,
+      "pages": [
+        "home"
+      ]
+    },
+    "ty_cue": {
+      "default": "A note from us",
+      "max": 30,
+      "pages": [
+        "home"
+      ]
+    },
     "ceremony_after": {
-      "default": "The curtain rose on the ceremony at",
+      "default": "The ceremony began at",
       "max": 40,
       "pages": [
         "details"
+      ]
+    },
+    "closing_line_after": {
+      "default": "It meant the world to have you with us.",
+      "max": 60,
+      "pages": [
+        "rsvp"
       ]
     },
     "home_link": {
@@ -270,7 +306,7 @@
       ]
     },
     "story_kicker": {
-      "default": "Intermission",
+      "default": "Moments we hold dear",
       "max": 40,
       "pages": [
         "home",
@@ -278,8 +314,15 @@
       ]
     },
     "home_story_cue": {
-      "default": "Meet the players",
+      "default": "Read our story",
       "max": 24,
+      "pages": [
+        "home"
+      ]
+    },
+    "home_more": {
+      "default": "More about the day",
+      "max": 30,
       "pages": [
         "home"
       ]
@@ -383,7 +426,7 @@
       ]
     },
     "registry_note": {
-      "default": "Your presence is the greatest gift. For those who wish to honour us with a gift, our registry is linked below.",
+      "default": "Your presence is the greatest gift. For those who wish to honor us with a gift, our registry is linked below.",
       "max": 200,
       "pages": [
         "details"
@@ -473,7 +516,7 @@
     },
     "nav_day": {
       "default": "The Day",
-      "max": 8,
+      "max": 10,
       "pages": [
         "home",
         "story",
@@ -482,9 +525,10 @@
       ]
     },
     "rsvp_title": {
-      "default": "Reserve your seat",
+      "default": "Will You Join Us?",
       "max": 30,
       "pages": [
+        "home",
         "rsvp"
       ]
     },
@@ -496,6 +540,13 @@
         "rsvp"
       ]
     },
+    "teaser_rsvp_by": {
+      "default": "Reply by",
+      "max": 20,
+      "pages": [
+        "home"
+      ]
+    },
     "rsvp_button": {
       "default": "RSVP",
       "max": 16,
@@ -505,9 +556,16 @@
         "rsvp"
       ]
     },
-    "rsvp_wait": {
-      "default": "We can't wait to celebrate with you",
-      "max": 50,
+    "home_rsvp_cue": {
+      "default": "Reply now",
+      "max": 20,
+      "pages": [
+        "home"
+      ]
+    },
+    "form_kicker": {
+      "default": "Kindly reply",
+      "max": 30,
       "pages": [
         "rsvp"
       ]
@@ -548,14 +606,14 @@
       ]
     },
     "form_yes": {
-      "default": "Yes, we'll be there!",
+      "default": "Joyfully accepts",
       "max": 30,
       "pages": [
         "rsvp"
       ]
     },
     "form_no": {
-      "default": "Sadly, we can't make it",
+      "default": "Regretfully declines",
       "max": 30,
       "pages": [
         "rsvp"
@@ -604,7 +662,7 @@
       ]
     },
     "rsvp_thanks_yes": {
-      "default": "Your seat is saved. We look forward to the evening together.",
+      "default": "We can't wait to celebrate with you.",
       "max": 120,
       "pages": [
         "rsvp"
@@ -631,67 +689,26 @@
         "rsvp"
       ]
     },
-    "rsvp_replay": {
-      "default": "Replay the curtain",
+    "closing_title": {
+      "default": "Thank you",
       "max": 30,
       "pages": [
         "rsvp"
       ]
     },
-    "act_label": {
-      "default": "Act",
-      "max": 10,
-      "pages": [
-        "home",
-        "details"
-      ],
-      "label": "Before each programme number (Act I, Act II …)",
-      "panel": "day"
-    },
-    "countdown_title": {
-      "default": "Curtain up in",
-      "max": 30,
-      "pages": [
-        "home"
-      ],
-      "label": "Above the countdown",
-      "panel": "day"
-    },
-    "home_intro": {
-      "default": "A love story in two acts",
+    "closing_line": {
+      "default": "We can't wait to celebrate with you.",
       "max": 60,
       "pages": [
-        "home"
-      ],
-      "label": "Invitation heading",
-      "panel": "us"
+        "rsvp"
+      ]
     },
-    "home_location": {
-      "default": "At the theatre",
+    "rsvp_replay": {
+      "default": "Replay the envelope",
       "max": 30,
       "pages": [
-        "home"
-      ],
-      "label": "Line above the programme on the home page",
-      "panel": "day"
-    },
-    "scene_label": {
-      "default": "Scene",
-      "max": 10,
-      "pages": [
-        "story"
-      ],
-      "label": "Before each story number (Scene I, II, III)",
-      "panel": "story"
-    },
-    "stub_admit": {
-      "default": "Admit one",
-      "max": 20,
-      "pages": [
         "rsvp"
-      ],
-      "label": "On the ticket stub",
-      "panel": "rsvp"
+      ]
     }
   },
   "swatch": [

@@ -1175,28 +1175,23 @@ const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> 
   },
 };
 
+// The eleven rebuilt designs now share the complete Blush page structure.
+for (const [id, preview] of Object.entries(PREVIEW_DESIGN_COPY)) {
+  const full = DESIGN_COPY[id];
+  if (!full) continue;
+  full.style = preview.style;
+  full.intro = preview.home;
+  full.opening = msg('Your guests tap the envelope. The flap lifts, a separate invitation card with your photo rises from its pocket, and your wedding home page opens.');
+  full.pages = {home: msg('Your portrait in an ornate arch card, names, date, venue, invitation, countdown and links to the other pages.'),story: msg('Three framed photographs with editable captions and your story.'),details: msg('An ornate programme card, venue photograph, optional map, schedule, calendar links, travel, registry and questions.'),rsvp: msg('A cream reply card, reply-by date and the configurable RSVP form.')};
+  full.fonts = ['Cormorant Garamond', 'Great Vibes', 'Lora'];
+  full.llmsLine = preview.style + '. A layered envelope opening, ornate photo cards, story, details and RSVP.';
+  full.palette = [{name: msg('Ivory paper'), hex: '#F5EEE2'}, {name: msg('Gold'), hex: '#B99459'}, ...full.palette.slice(0, 2)];
+}
+
 function previewDesignCopy(d: DesignCommerce): DesignCopy | undefined {
-  const preview = PREVIEW_DESIGN_COPY[d.id];
-  if (!preview) return undefined;
-  return {
-    id: d.id,
-    collection: '',
-    demoCouple: 'Sample couple',
-    style: preview.style,
-    metaDescription: msg(d.name + ' wedding website preview. Explore its invitation, story, event details and RSVP pages; final artwork and Etsy availability are pending.'),
-    intro: msg(preview.style + '. This catalogue preview uses interim artwork while the final design assets and Etsy availability are pending.'),
-    opening: preview.opening,
-    pages: {
-      home: preview.home,
-      story: msg('A three-photo story gallery with captions and controls to move between moments.'),
-      details: msg('A wedding schedule with venue information, calendar links and celebration details.'),
-      rsvp: msg('An RSVP page with the shared guest reply form.'),
-    },
-    palette: [],
-    fonts: [],
-    llmsLine: d.name + ': ' + preview.style + '. Preview only; final artwork and Etsy availability are pending.',
-    relatedGuides: ['what-to-put-on-your-wedding-website', 'when-to-send-your-wedding-website'],
-  };
+  const full = DESIGN_COPY[d.id];
+  if (!PREVIEW_DESIGN_COPY[d.id] || !full) return undefined;
+  return {...full, metaDescription: msg(d.name + ' wedding website. Explore the envelope opening, invitation, photo story, details and RSVP.'), intro: msg(full.intro + '. Explore the complete demo; Etsy availability is pending.')};
 }
 
 export interface Design extends DesignCommerce {
@@ -1250,7 +1245,7 @@ export function featuredDesigns(cfg: MarketingConfig = MARKETING): Design[] {
  * (config order), then the rest (config order).
  */
 export function showcaseDesigns(cfg: MarketingConfig = MARKETING): Design[] {
-  const live = liveDesigns(cfg);
+  const live = catalogDesigns(cfg);
   return [...live.filter((d) => d.featured), ...live.filter((d) => !d.featured)];
 }
 

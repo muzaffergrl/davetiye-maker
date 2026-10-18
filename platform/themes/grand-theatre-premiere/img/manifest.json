@@ -1,439 +1,2175 @@
 {
- "_note": "G162 build on stand-in pieces toned/cropped from two GPT textures already in the repository (06 velvet tile, 21 paper) until the PAKET 5 parts of GPT_PROMPTS.md arrive.",
- "th_back": {
-  "src_size": [
-   880,
-   1344
-  ],
-  "ratio": 0.65476,
-  "files": [
-   {
-    "file": "th_back-440.webp",
-    "w": 440,
-    "h": 672,
-    "bytes": 1368
-   },
-   {
-    "file": "th_back-880.webp",
-    "w": 880,
-    "h": 1344,
-    "bytes": 4176
-   }
-  ]
- },
- "curtain_l": {
-  "src_size": [
-   880,
-   1344
-  ],
-  "ratio": 0.65476,
-  "files": [
-   {
-    "file": "curtain_l-440.webp",
-    "w": 440,
-    "h": 672,
-    "bytes": 18002
-   },
-   {
-    "file": "curtain_l-880.webp",
-    "w": 880,
-    "h": 1344,
-    "bytes": 130894
-   }
-  ]
- },
- "curtain_r": {
-  "src_size": [
-   880,
-   1344
-  ],
-  "ratio": 0.65476,
-  "files": [
-   {
-    "file": "curtain_r-440.webp",
-    "w": 440,
-    "h": 672,
-    "bytes": 18208
-   },
-   {
-    "file": "curtain_r-880.webp",
-    "w": 880,
-    "h": 1344,
-    "bytes": 126398
-   }
-  ]
- },
- "curtain_gl": {
-  "src_size": [
-   880,
-   1344
-  ],
-  "ratio": 0.65476,
-  "files": [
-   {
-    "file": "curtain_gl-440.webp",
-    "w": 440,
-    "h": 672,
-    "bytes": 2838
-   },
-   {
-    "file": "curtain_gl-880.webp",
-    "w": 880,
-    "h": 1344,
-    "bytes": 24514
-   }
-  ]
- },
- "curtain_gr": {
-  "src_size": [
-   880,
-   1344
-  ],
-  "ratio": 0.65476,
-  "files": [
-   {
-    "file": "curtain_gr-440.webp",
-    "w": 440,
-    "h": 672,
-    "bytes": 3028
-   },
-   {
-    "file": "curtain_gr-880.webp",
-    "w": 880,
-    "h": 1344,
-    "bytes": 22932
-   }
-  ]
- },
- "th_arch": {
-  "src_size": [
-   880,
-   1344
-  ],
-  "ratio": 0.65476,
-  "files": [
-   {
-    "file": "th_arch-440.webp",
-    "w": 440,
-    "h": 672,
-    "bytes": 1452
-   },
-   {
-    "file": "th_arch-880.webp",
-    "w": 880,
-    "h": 1344,
-    "bytes": 8166
-   }
-  ]
- },
- "card_paper": {
-  "src_size": [
-   1024,
-   1536
-  ],
-  "ratio": 0.66667,
-  "files": [
-   {
-    "file": "card_paper-320.webp",
-    "w": 320,
-    "h": 480,
-    "bytes": 1370
-   },
-   {
-    "file": "card_paper-640.webp",
-    "w": 640,
-    "h": 960,
-    "bytes": 15244
-   }
-  ]
- },
- "card_plain": {
-  "src_size": [
-   1024,
-   1536
-  ],
-  "ratio": 0.66667,
-  "files": [
-   {
-    "file": "card_plain-320.webp",
-    "w": 320,
-    "h": 480,
-    "bytes": 1370
-   },
-   {
-    "file": "card_plain-640.webp",
-    "w": 640,
-    "h": 960,
-    "bytes": 15244
-   }
-  ]
- },
- "velvet": {
-  "src_size": [
-   1280,
-   1280
-  ],
-  "ratio": 1.0,
-  "files": [
-   {
-    "file": "velvet-640.webp",
-    "w": 640,
-    "h": 640,
-    "bytes": 18914
-   }
-  ]
- },
- "room": {
-  "src_size": [
-   683,
-   1024
-  ],
-  "ratio": 0.66699,
-  "files": [
-   {
-    "file": "room-640.webp",
-    "w": 640,
-    "h": 960,
-    "bytes": 4072
-   }
-  ]
- },
- "paper": {
-  "src_size": [
-   1024,
-   1536
-  ],
-  "ratio": 0.66667,
-  "files": [
-   {
-    "file": "paper-640.webp",
-    "w": 640,
-    "h": 960,
-    "bytes": 9702
-   },
-   {
-    "file": "paper-1024.webp",
-    "w": 1024,
-    "h": 1536,
-    "bytes": 46408
-   }
-  ]
- },
- "stub_paper": {
-  "src_size": [
-   1024,
-   341
-  ],
-  "ratio": 3.00293,
-  "files": [
-   {
-    "file": "stub_paper-480.webp",
-    "w": 480,
-    "h": 160,
-    "bytes": 948
-   },
-   {
-    "file": "stub_paper-960.webp",
-    "w": 960,
-    "h": 320,
-    "bytes": 9486
-   }
-  ]
- },
- "ph_portrait": {
-  "src_size": [
-   640,
-   800
-  ],
-  "ratio": 0.8,
-  "files": [
-   {
-    "file": "ph_portrait-640.webp",
-    "w": 640,
-    "h": 800,
-    "bytes": 1792
-   }
-  ]
- },
- "ph_land": {
-  "src_size": [
-   640,
-   427
-  ],
-  "ratio": 1.49883,
-  "files": [
-   {
-    "file": "ph_land-640.webp",
-    "w": 640,
-    "h": 427,
-    "bytes": 1022
-   }
-  ]
- },
- "placeholders": {
-  "hero_portrait": "ph_portrait-640.webp",
-  "venue": "ph_land-640.webp"
- },
- "photo_slots": {
-  "portrait": {
-   "aspect": "4/5"
+  "_note": "Blush Garden Rose photo windows and card free zones, with model-specific generated scene/envelope assets. Actual envelope layer positions are in envelope-geometry.json and site.css. Original model favicons are retained.",
+  "env_flap": {
+    "src_size": [
+      880,
+      285
+    ],
+    "ratio": 3.087719298245614,
+    "files": [
+      {
+        "file": "env_flap-440.webp",
+        "w": 440,
+        "h": 142,
+        "bytes": 9290
+      },
+      {
+        "file": "env_flap-880.webp",
+        "w": 880,
+        "h": 285,
+        "bytes": 39702
+      }
+    ]
   },
-  "land": {
-   "aspect": "3/2"
+  "env_body": {
+    "src_size": [
+      880,
+      571
+    ],
+    "ratio": 1.541155866900175,
+    "files": [
+      {
+        "file": "env_body-440.webp",
+        "w": 440,
+        "h": 286,
+        "bytes": 21670
+      },
+      {
+        "file": "env_body-880.webp",
+        "w": 880,
+        "h": 571,
+        "bytes": 107426
+      }
+    ]
+  },
+  "pocket": {
+    "src_size": [
+      880,
+      571
+    ],
+    "ratio": 1.541155866900175,
+    "files": [
+      {
+        "file": "pocket-440.webp",
+        "w": 440,
+        "h": 286,
+        "bytes": 16194
+      },
+      {
+        "file": "pocket-880.webp",
+        "w": 880,
+        "h": 571,
+        "bytes": 71930
+      }
+    ]
+  },
+  "envelope_open": {
+    "src_size": [
+      966,
+      1349
+    ],
+    "body": [
+      24,
+      477,
+      941,
+      1305
+    ],
+    "flap_rows": [
+      0,
+      480
+    ],
+    "body_rows": [
+      475,
+      1349
+    ],
+    "tip": [
+      478.9,
+      1012.3
+    ]
+  },
+  "envelope_closed": {
+    "src_size": [
+      880,
+      571
+    ],
+    "ratio": 1.541155866900175,
+    "files": [
+      {
+        "file": "envelope_closed-440.webp",
+        "w": 440,
+        "h": 286,
+        "bytes": 21188
+      },
+      {
+        "file": "envelope_closed-880.webp",
+        "w": 880,
+        "h": 571,
+        "bytes": 127150
+      }
+    ]
+  },
+  "env_cflap": {
+    "src_size": [
+      880,
+      325
+    ],
+    "ratio": 2.707692307692308,
+    "files": [
+      {
+        "file": "env_cflap-440.webp",
+        "w": 440,
+        "h": 162,
+        "bytes": 11204
+      },
+      {
+        "file": "env_cflap-880.webp",
+        "w": 880,
+        "h": 325,
+        "bytes": 48202
+      }
+    ]
+  },
+  "ribbon_bow": {
+    "src_size": [
+      1445,
+      880
+    ],
+    "ratio": 1.64205,
+    "files": [
+      {
+        "file": "ribbon_bow-480.webp",
+        "w": 480,
+        "h": 292,
+        "bytes": 32572
+      },
+      {
+        "file": "ribbon_bow-960.webp",
+        "w": 960,
+        "h": 585,
+        "bytes": 123658
+      }
+    ]
+  },
+  "card_small": {
+    "src_size": [
+      804,
+      1254
+    ],
+    "ratio": 0.64115,
+    "files": [
+      {
+        "file": "card_small-320.webp",
+        "w": 320,
+        "h": 499,
+        "bytes": 15826,
+        "window_visible_px": 0
+      },
+      {
+        "file": "card_small-640.webp",
+        "w": 640,
+        "h": 998,
+        "bytes": 45210,
+        "window_visible_px": 0
+      }
+    ],
+    "window": [
+      120,
+      122,
+      563,
+      591
+    ],
+    "leke_px": 0,
+    "free_zone": [
+      [
+        0,
+        null,
+        null
+      ],
+      [
+        1,
+        46.64,
+        53.36
+      ],
+      [
+        2,
+        37.44,
+        62.81
+      ],
+      [
+        3,
+        32.96,
+        67.29
+      ],
+      [
+        4,
+        29.35,
+        71.02
+      ],
+      [
+        5,
+        26.49,
+        73.88
+      ],
+      [
+        6,
+        23.76,
+        76.49
+      ],
+      [
+        7,
+        21.77,
+        78.73
+      ],
+      [
+        8,
+        null,
+        null
+      ],
+      [
+        9,
+        null,
+        null
+      ],
+      [
+        10,
+        null,
+        null
+      ],
+      [
+        11,
+        null,
+        null
+      ],
+      [
+        12,
+        null,
+        null
+      ],
+      [
+        13,
+        null,
+        null
+      ],
+      [
+        14,
+        null,
+        null
+      ],
+      [
+        15,
+        null,
+        null
+      ],
+      [
+        16,
+        null,
+        null
+      ],
+      [
+        17,
+        null,
+        null
+      ],
+      [
+        18,
+        null,
+        null
+      ],
+      [
+        19,
+        null,
+        null
+      ],
+      [
+        20,
+        null,
+        null
+      ],
+      [
+        21,
+        null,
+        null
+      ],
+      [
+        22,
+        null,
+        null
+      ],
+      [
+        23,
+        null,
+        null
+      ],
+      [
+        24,
+        null,
+        null
+      ],
+      [
+        25,
+        null,
+        null
+      ],
+      [
+        26,
+        null,
+        null
+      ],
+      [
+        27,
+        null,
+        null
+      ],
+      [
+        28,
+        null,
+        null
+      ],
+      [
+        29,
+        null,
+        null
+      ],
+      [
+        30,
+        null,
+        null
+      ],
+      [
+        31,
+        null,
+        null
+      ],
+      [
+        32,
+        null,
+        null
+      ],
+      [
+        33,
+        null,
+        null
+      ],
+      [
+        34,
+        null,
+        null
+      ],
+      [
+        35,
+        null,
+        null
+      ],
+      [
+        36,
+        null,
+        null
+      ],
+      [
+        37,
+        null,
+        null
+      ],
+      [
+        38,
+        null,
+        null
+      ],
+      [
+        39,
+        null,
+        null
+      ],
+      [
+        40,
+        null,
+        null
+      ],
+      [
+        41,
+        null,
+        null
+      ],
+      [
+        42,
+        null,
+        null
+      ],
+      [
+        43,
+        null,
+        null
+      ],
+      [
+        44,
+        null,
+        null
+      ],
+      [
+        45,
+        null,
+        null
+      ],
+      [
+        46,
+        null,
+        null
+      ],
+      [
+        47,
+        null,
+        null
+      ],
+      [
+        48,
+        null,
+        null
+      ],
+      [
+        49,
+        null,
+        null
+      ],
+      [
+        50,
+        null,
+        null
+      ],
+      [
+        51,
+        null,
+        null
+      ],
+      [
+        52,
+        null,
+        null
+      ],
+      [
+        53,
+        null,
+        null
+      ],
+      [
+        54,
+        null,
+        null
+      ],
+      [
+        55,
+        null,
+        null
+      ],
+      [
+        56,
+        null,
+        null
+      ],
+      [
+        57,
+        null,
+        null
+      ],
+      [
+        58,
+        null,
+        null
+      ],
+      [
+        59,
+        1.87,
+        98.38
+      ],
+      [
+        60,
+        1.87,
+        98.38
+      ],
+      [
+        61,
+        1.87,
+        98.38
+      ],
+      [
+        62,
+        1.87,
+        98.38
+      ],
+      [
+        63,
+        1.87,
+        98.38
+      ],
+      [
+        64,
+        1.87,
+        98.38
+      ],
+      [
+        65,
+        1.87,
+        98.38
+      ],
+      [
+        66,
+        1.87,
+        98.38
+      ],
+      [
+        67,
+        1.87,
+        98.38
+      ],
+      [
+        68,
+        1.87,
+        98.38
+      ],
+      [
+        69,
+        1.87,
+        98.38
+      ],
+      [
+        70,
+        1.87,
+        98.38
+      ],
+      [
+        71,
+        1.87,
+        98.38
+      ],
+      [
+        72,
+        1.87,
+        98.38
+      ],
+      [
+        73,
+        1.87,
+        98.38
+      ],
+      [
+        74,
+        1.87,
+        98.38
+      ],
+      [
+        75,
+        1.87,
+        98.38
+      ],
+      [
+        76,
+        1.87,
+        98.38
+      ],
+      [
+        77,
+        1.87,
+        98.38
+      ],
+      [
+        78,
+        1.87,
+        98.38
+      ],
+      [
+        79,
+        1.87,
+        98.38
+      ],
+      [
+        80,
+        1.87,
+        98.38
+      ],
+      [
+        81,
+        1.87,
+        98.38
+      ],
+      [
+        82,
+        1.87,
+        98.38
+      ],
+      [
+        83,
+        1.87,
+        98.38
+      ],
+      [
+        84,
+        1.87,
+        98.38
+      ],
+      [
+        85,
+        1.87,
+        98.38
+      ],
+      [
+        86,
+        1.87,
+        98.26
+      ],
+      [
+        87,
+        1.87,
+        98.26
+      ],
+      [
+        88,
+        1.87,
+        98.38
+      ],
+      [
+        89,
+        1.87,
+        98.38
+      ],
+      [
+        90,
+        1.87,
+        98.38
+      ],
+      [
+        91,
+        1.87,
+        98.38
+      ],
+      [
+        92,
+        1.87,
+        98.38
+      ],
+      [
+        93,
+        1.87,
+        98.38
+      ],
+      [
+        94,
+        1.87,
+        98.38
+      ],
+      [
+        95,
+        1.99,
+        98.26
+      ],
+      [
+        96,
+        1.99,
+        98.26
+      ],
+      [
+        97,
+        1.87,
+        98.26
+      ],
+      [
+        98,
+        null,
+        null
+      ],
+      [
+        99,
+        null,
+        null
+      ]
+    ]
+  },
+  "arch_frame": {
+    "src_size": [
+      971,
+      1255
+    ],
+    "ratio": 0.77371,
+    "files": [
+      {
+        "file": "arch_frame-320.webp",
+        "w": 320,
+        "h": 414,
+        "bytes": 40152,
+        "window_visible_px": 0
+      },
+      {
+        "file": "arch_frame-640.webp",
+        "w": 640,
+        "h": 827,
+        "bytes": 123226,
+        "window_visible_px": 0
+      }
+    ],
+    "window": [
+      168,
+      208,
+      622,
+      864
+    ],
+    "leke_px": 282765
+  },
+  "frame_landscape": {
+    "src_size": [
+      1476,
+      960
+    ],
+    "ratio": 1.5375,
+    "files": [
+      {
+        "file": "frame_landscape-480.webp",
+        "w": 480,
+        "h": 312,
+        "bytes": 41068,
+        "window_visible_px": 0
+      },
+      {
+        "file": "frame_landscape-960.webp",
+        "w": 960,
+        "h": 624,
+        "bytes": 120958,
+        "window_visible_px": 0
+      }
+    ],
+    "window": [
+      155,
+      162,
+      1168,
+      677
+    ],
+    "leke_px": 275480
+  },
+  "photo_slots": {
+    "card": {
+      "box_pct": [
+        14.677,
+        9.569,
+        70.522,
+        47.448
+      ],
+      "aspect": 0.9529,
+      "box_px": [
+        567,
+        595
+      ],
+      "mask": "mask_card.png"
+    },
+    "arch": {
+      "box_pct": [
+        17.096,
+        16.414,
+        64.47,
+        69.163
+      ],
+      "aspect": 0.7212,
+      "box_px": [
+        626,
+        868
+      ],
+      "mask": "mask_arch.png"
+    },
+    "landscape": {
+      "box_pct": [
+        10.366,
+        16.667,
+        79.404,
+        70.938
+      ],
+      "aspect": 1.721,
+      "box_px": [
+        1172,
+        681
+      ],
+      "mask": "mask_landscape.png"
+    }
+  },
+  "invitation_card": {
+    "src_size": [
+      909,
+      1445
+    ],
+    "ratio": 0.62907,
+    "files": [
+      {
+        "file": "invitation_card-480.webp",
+        "w": 480,
+        "h": 763,
+        "bytes": 74700
+      },
+      {
+        "file": "invitation_card-909.webp",
+        "w": 909,
+        "h": 1445,
+        "bytes": 186600
+      }
+    ],
+    "free_zone": [
+      [
+        0,
+        null,
+        null
+      ],
+      [
+        1,
+        null,
+        null
+      ],
+      [
+        2,
+        null,
+        null
+      ],
+      [
+        3,
+        null,
+        null
+      ],
+      [
+        4,
+        null,
+        null
+      ],
+      [
+        5,
+        null,
+        null
+      ],
+      [
+        6,
+        null,
+        null
+      ],
+      [
+        7,
+        null,
+        null
+      ],
+      [
+        8,
+        null,
+        null
+      ],
+      [
+        9,
+        null,
+        null
+      ],
+      [
+        10,
+        null,
+        null
+      ],
+      [
+        11,
+        null,
+        null
+      ],
+      [
+        12,
+        null,
+        null
+      ],
+      [
+        13,
+        null,
+        null
+      ],
+      [
+        14,
+        null,
+        null
+      ],
+      [
+        15,
+        null,
+        null
+      ],
+      [
+        16,
+        null,
+        null
+      ],
+      [
+        17,
+        null,
+        null
+      ],
+      [
+        18,
+        null,
+        null
+      ],
+      [
+        19,
+        null,
+        null
+      ],
+      [
+        20,
+        null,
+        null
+      ],
+      [
+        21,
+        null,
+        null
+      ],
+      [
+        22,
+        null,
+        null
+      ],
+      [
+        23,
+        null,
+        null
+      ],
+      [
+        24,
+        null,
+        null
+      ],
+      [
+        25,
+        null,
+        null
+      ],
+      [
+        26,
+        null,
+        null
+      ],
+      [
+        27,
+        null,
+        null
+      ],
+      [
+        28,
+        null,
+        null
+      ],
+      [
+        29,
+        43.45,
+        52.59
+      ],
+      [
+        30,
+        41.69,
+        61.61
+      ],
+      [
+        31,
+        31.68,
+        67.66
+      ],
+      [
+        32,
+        31.35,
+        69.2
+      ],
+      [
+        33,
+        22.44,
+        73.49
+      ],
+      [
+        34,
+        19.14,
+        75.91
+      ],
+      [
+        35,
+        16.28,
+        80.53
+      ],
+      [
+        36,
+        14.85,
+        81.85
+      ],
+      [
+        37,
+        14.63,
+        82.07
+      ],
+      [
+        38,
+        14.3,
+        83.06
+      ],
+      [
+        39,
+        12.87,
+        86.25
+      ],
+      [
+        40,
+        7.15,
+        87.35
+      ],
+      [
+        41,
+        7.15,
+        90.54
+      ],
+      [
+        42,
+        7.15,
+        90.54
+      ],
+      [
+        43,
+        7.15,
+        90.54
+      ],
+      [
+        44,
+        7.15,
+        90.54
+      ],
+      [
+        45,
+        7.15,
+        90.54
+      ],
+      [
+        46,
+        7.15,
+        90.54
+      ],
+      [
+        47,
+        7.15,
+        90.54
+      ],
+      [
+        48,
+        7.15,
+        90.54
+      ],
+      [
+        49,
+        7.15,
+        90.54
+      ],
+      [
+        50,
+        7.15,
+        90.54
+      ],
+      [
+        51,
+        7.15,
+        90.54
+      ],
+      [
+        52,
+        7.15,
+        90.54
+      ],
+      [
+        53,
+        7.15,
+        90.54
+      ],
+      [
+        54,
+        7.15,
+        90.54
+      ],
+      [
+        55,
+        7.15,
+        90.54
+      ],
+      [
+        56,
+        7.15,
+        90.54
+      ],
+      [
+        57,
+        7.15,
+        90.54
+      ],
+      [
+        58,
+        7.15,
+        90.54
+      ],
+      [
+        59,
+        7.15,
+        90.54
+      ],
+      [
+        60,
+        7.15,
+        90.54
+      ],
+      [
+        61,
+        7.15,
+        90.54
+      ],
+      [
+        62,
+        7.15,
+        90.54
+      ],
+      [
+        63,
+        7.15,
+        90.54
+      ],
+      [
+        64,
+        7.15,
+        90.54
+      ],
+      [
+        65,
+        7.15,
+        90.54
+      ],
+      [
+        66,
+        7.15,
+        90.54
+      ],
+      [
+        67,
+        7.15,
+        90.54
+      ],
+      [
+        68,
+        7.15,
+        90.54
+      ],
+      [
+        69,
+        12.32,
+        85.81
+      ],
+      [
+        70,
+        13.64,
+        85.81
+      ],
+      [
+        71,
+        13.64,
+        84.27
+      ],
+      [
+        72,
+        13.42,
+        84.16
+      ],
+      [
+        73,
+        13.97,
+        82.51
+      ],
+      [
+        74,
+        12.32,
+        82.07
+      ],
+      [
+        75,
+        15.51,
+        82.07
+      ],
+      [
+        76,
+        21.01,
+        82.29
+      ],
+      [
+        77,
+        21.34,
+        78.33
+      ],
+      [
+        78,
+        21.78,
+        77.12
+      ],
+      [
+        79,
+        25.3,
+        77.23
+      ],
+      [
+        80,
+        25.3,
+        74.48
+      ],
+      [
+        81,
+        25.52,
+        74.92
+      ],
+      [
+        82,
+        27.17,
+        70.63
+      ],
+      [
+        83,
+        27.17,
+        70.63
+      ],
+      [
+        84,
+        27.72,
+        70.3
+      ],
+      [
+        85,
+        30.36,
+        70.3
+      ],
+      [
+        86,
+        30.03,
+        69.42
+      ],
+      [
+        87,
+        28.93,
+        64.47
+      ],
+      [
+        88,
+        35.64,
+        63.59
+      ],
+      [
+        89,
+        36.74,
+        62.71
+      ],
+      [
+        90,
+        42.24,
+        58.64
+      ],
+      [
+        91,
+        42.24,
+        56.88
+      ],
+      [
+        92,
+        41.25,
+        56.88
+      ],
+      [
+        93,
+        43.56,
+        55.34
+      ],
+      [
+        94,
+        44.88,
+        55.78
+      ],
+      [
+        95,
+        44.88,
+        55.78
+      ],
+      [
+        96,
+        36.74,
+        55.89
+      ],
+      [
+        97,
+        null,
+        null
+      ],
+      [
+        98,
+        null,
+        null
+      ],
+      [
+        99,
+        null,
+        null
+      ]
+    ]
+  },
+  "info_card": {
+    "src_size": [
+      912,
+      1411
+    ],
+    "ratio": 0.64635,
+    "files": [
+      {
+        "file": "info_card-480.webp",
+        "w": 480,
+        "h": 743,
+        "bytes": 73834
+      },
+      {
+        "file": "info_card-912.webp",
+        "w": 912,
+        "h": 1411,
+        "bytes": 160590
+      }
+    ],
+    "free_zone": [
+      [
+        0,
+        null,
+        null
+      ],
+      [
+        1,
+        null,
+        null
+      ],
+      [
+        2,
+        null,
+        null
+      ],
+      [
+        3,
+        null,
+        null
+      ],
+      [
+        4,
+        null,
+        null
+      ],
+      [
+        5,
+        null,
+        null
+      ],
+      [
+        6,
+        null,
+        null
+      ],
+      [
+        7,
+        null,
+        null
+      ],
+      [
+        8,
+        49.12,
+        49.23
+      ],
+      [
+        9,
+        null,
+        null
+      ],
+      [
+        10,
+        null,
+        null
+      ],
+      [
+        11,
+        null,
+        null
+      ],
+      [
+        12,
+        null,
+        null
+      ],
+      [
+        13,
+        null,
+        null
+      ],
+      [
+        14,
+        null,
+        null
+      ],
+      [
+        15,
+        null,
+        null
+      ],
+      [
+        16,
+        null,
+        null
+      ],
+      [
+        17,
+        null,
+        null
+      ],
+      [
+        18,
+        null,
+        null
+      ],
+      [
+        19,
+        null,
+        null
+      ],
+      [
+        20,
+        null,
+        null
+      ],
+      [
+        21,
+        null,
+        null
+      ],
+      [
+        22,
+        null,
+        null
+      ],
+      [
+        23,
+        null,
+        null
+      ],
+      [
+        24,
+        null,
+        null
+      ],
+      [
+        25,
+        null,
+        null
+      ],
+      [
+        26,
+        35.42,
+        69.19
+      ],
+      [
+        27,
+        35.31,
+        78.84
+      ],
+      [
+        28,
+        28.62,
+        83.11
+      ],
+      [
+        29,
+        17.76,
+        83
+      ],
+      [
+        30,
+        17.43,
+        83.44
+      ],
+      [
+        31,
+        14.04,
+        84.76
+      ],
+      [
+        32,
+        14.04,
+        84.76
+      ],
+      [
+        33,
+        11.4,
+        86.73
+      ],
+      [
+        34,
+        11.95,
+        87.17
+      ],
+      [
+        35,
+        13.27,
+        88.49
+      ],
+      [
+        36,
+        12.72,
+        86.29
+      ],
+      [
+        37,
+        12.61,
+        85.09
+      ],
+      [
+        38,
+        12.61,
+        84.87
+      ],
+      [
+        39,
+        12.83,
+        84.98
+      ],
+      [
+        40,
+        12.83,
+        92.21
+      ],
+      [
+        41,
+        6.14,
+        92.21
+      ],
+      [
+        42,
+        6.25,
+        92.21
+      ],
+      [
+        43,
+        6.25,
+        92.21
+      ],
+      [
+        44,
+        6.14,
+        92.21
+      ],
+      [
+        45,
+        6.14,
+        92.21
+      ],
+      [
+        46,
+        6.14,
+        92.21
+      ],
+      [
+        47,
+        6.14,
+        92.21
+      ],
+      [
+        48,
+        6.14,
+        92.21
+      ],
+      [
+        49,
+        6.14,
+        92.21
+      ],
+      [
+        50,
+        6.14,
+        92.21
+      ],
+      [
+        51,
+        6.14,
+        92.21
+      ],
+      [
+        52,
+        6.14,
+        92.21
+      ],
+      [
+        53,
+        6.14,
+        92.21
+      ],
+      [
+        54,
+        6.14,
+        92.21
+      ],
+      [
+        55,
+        6.14,
+        92.21
+      ],
+      [
+        56,
+        6.14,
+        92.21
+      ],
+      [
+        57,
+        6.25,
+        92.21
+      ],
+      [
+        58,
+        6.14,
+        92.21
+      ],
+      [
+        59,
+        6.14,
+        92.21
+      ],
+      [
+        60,
+        6.14,
+        92.21
+      ],
+      [
+        61,
+        6.14,
+        92.21
+      ],
+      [
+        62,
+        6.14,
+        92.21
+      ],
+      [
+        63,
+        6.14,
+        92.21
+      ],
+      [
+        64,
+        6.14,
+        92.21
+      ],
+      [
+        65,
+        6.14,
+        92.21
+      ],
+      [
+        66,
+        6.14,
+        92.21
+      ],
+      [
+        67,
+        6.25,
+        92.21
+      ],
+      [
+        68,
+        6.25,
+        87.06
+      ],
+      [
+        69,
+        10.42,
+        86.84
+      ],
+      [
+        70,
+        10.2,
+        85.96
+      ],
+      [
+        71,
+        8.88,
+        85.2
+      ],
+      [
+        72,
+        13.49,
+        85.2
+      ],
+      [
+        73,
+        13.27,
+        82.57
+      ],
+      [
+        74,
+        12.94,
+        82.35
+      ],
+      [
+        75,
+        14.69,
+        82.35
+      ],
+      [
+        76,
+        14.91,
+        81.03
+      ],
+      [
+        77,
+        18.42,
+        77.41
+      ],
+      [
+        78,
+        21.71,
+        75.55
+      ],
+      [
+        79,
+        21.6,
+        75.66
+      ],
+      [
+        80,
+        22.04,
+        75.77
+      ],
+      [
+        81,
+        22.04,
+        75.77
+      ],
+      [
+        82,
+        23.57,
+        75.11
+      ],
+      [
+        83,
+        26.75,
+        71.93
+      ],
+      [
+        84,
+        31.03,
+        67.43
+      ],
+      [
+        85,
+        31.03,
+        66.89
+      ],
+      [
+        86,
+        30.59,
+        67
+      ],
+      [
+        87,
+        30.26,
+        66.67
+      ],
+      [
+        88,
+        36.07,
+        65.79
+      ],
+      [
+        89,
+        38.05,
+        61.18
+      ],
+      [
+        90,
+        40.68,
+        58.55
+      ],
+      [
+        91,
+        41.67,
+        56.58
+      ],
+      [
+        92,
+        41.67,
+        56.25
+      ],
+      [
+        93,
+        45.72,
+        56.36
+      ],
+      [
+        94,
+        45.72,
+        55.81
+      ],
+      [
+        95,
+        43.75,
+        55.15
+      ],
+      [
+        96,
+        42.98,
+        55.15
+      ],
+      [
+        97,
+        null,
+        null
+      ],
+      [
+        98,
+        null,
+        null
+      ],
+      [
+        99,
+        null,
+        null
+      ]
+    ]
+  },
+  "florals_tl": {
+    "src_size": [
+      960,
+      1104
+    ],
+    "ratio": 0.8695652173913043,
+    "files": [
+      {
+        "file": "florals_tl-480.webp",
+        "w": 480,
+        "h": 552,
+        "bytes": 56038
+      },
+      {
+        "file": "florals_tl-960.webp",
+        "w": 960,
+        "h": 1104,
+        "bytes": 135066
+      }
+    ]
+  },
+  "florals_br": {
+    "src_size": [
+      960,
+      1104
+    ],
+    "ratio": 0.8695652173913043,
+    "files": [
+      {
+        "file": "florals_br-480.webp",
+        "w": 480,
+        "h": 552,
+        "bytes": 51148
+      },
+      {
+        "file": "florals_br-960.webp",
+        "w": 960,
+        "h": 1104,
+        "bytes": 125034
+      }
+    ]
+  },
+  "divider": {
+    "src_size": [
+      569,
+      272
+    ],
+    "ratio": 2.09191,
+    "files": [
+      {
+        "file": "divider-300.webp",
+        "w": 300,
+        "h": 143,
+        "bytes": 18838
+      }
+    ]
+  },
+  "petal1": {
+    "src_size": [
+      200,
+      164
+    ],
+    "ratio": 1.21951,
+    "files": [
+      {
+        "file": "petal1-200.webp",
+        "w": 200,
+        "h": 164,
+        "bytes": 8548
+      }
+    ]
+  },
+  "petal2": {
+    "src_size": [
+      200,
+      162
+    ],
+    "ratio": 1.23457,
+    "files": [
+      {
+        "file": "petal2-200.webp",
+        "w": 200,
+        "h": 162,
+        "bytes": 7562
+      }
+    ]
+  },
+  "petal3": {
+    "src_size": [
+      200,
+      135
+    ],
+    "ratio": 1.48148,
+    "files": [
+      {
+        "file": "petal3-200.webp",
+        "w": 200,
+        "h": 135,
+        "bytes": 6522
+      }
+    ]
+  },
+  "petal4": {
+    "src_size": [
+      200,
+      156
+    ],
+    "ratio": 1.28205,
+    "files": [
+      {
+        "file": "petal4-200.webp",
+        "w": 200,
+        "h": 156,
+        "bytes": 8310
+      }
+    ]
+  },
+  "petal5": {
+    "src_size": [
+      200,
+      167
+    ],
+    "ratio": 1.1976,
+    "files": [
+      {
+        "file": "petal5-200.webp",
+        "w": 200,
+        "h": 167,
+        "bytes": 8498
+      }
+    ]
+  },
+  "petal6": {
+    "src_size": [
+      200,
+      169
+    ],
+    "ratio": 1.18343,
+    "files": [
+      {
+        "file": "petal6-200.webp",
+        "w": 200,
+        "h": 169,
+        "bytes": 8594
+      }
+    ]
+  },
+  "bg_scene": {
+    "src_size": [
+      1024,
+      1536
+    ],
+    "ratio": 0.6666666666666666,
+    "files": [
+      {
+        "file": "bg_scene-1024.webp",
+        "w": 1024,
+        "h": 1536,
+        "bytes": 217764
+      },
+      {
+        "file": "bg_scene-640.webp",
+        "w": 640,
+        "h": 960,
+        "bytes": 101004
+      }
+    ]
+  },
+  "mist": {
+    "src_size": [
+      640,
+      960
+    ],
+    "ratio": 0.6666666666666666,
+    "files": [
+      {
+        "file": "mist-640.webp",
+        "w": 640,
+        "h": 960,
+        "bytes": 1842
+      }
+    ]
+  },
+  "mist_tile": {
+    "src_size": [
+      640,
+      960
+    ],
+    "ratio": 0.6666666666666666,
+    "files": [
+      {
+        "file": "mist_tile-640.webp",
+        "w": 640,
+        "h": 960,
+        "bytes": 1842
+      }
+    ]
+  },
+  "ph_hero_portrait": {
+    "src_size": [
+      640,
+      672
+    ],
+    "ratio": 0.95238,
+    "files": [
+      {
+        "file": "ph_hero_portrait-320.webp",
+        "w": 320,
+        "h": 336,
+        "bytes": 3714
+      },
+      {
+        "file": "ph_hero_portrait-640.webp",
+        "w": 640,
+        "h": 672,
+        "bytes": 7754
+      }
+    ],
+    "aspect": 0.9529
+  },
+  "ph_story_1": {
+    "src_size": [
+      600,
+      832
+    ],
+    "ratio": 0.72115,
+    "files": [
+      {
+        "file": "ph_story_1-300.webp",
+        "w": 300,
+        "h": 416,
+        "bytes": 3900
+      },
+      {
+        "file": "ph_story_1-600.webp",
+        "w": 600,
+        "h": 832,
+        "bytes": 8402
+      }
+    ],
+    "aspect": 0.7212
+  },
+  "ph_story_2": {
+    "src_size": [
+      600,
+      832
+    ],
+    "ratio": 0.72115,
+    "files": [
+      {
+        "file": "ph_story_2-300.webp",
+        "w": 300,
+        "h": 416,
+        "bytes": 4660
+      },
+      {
+        "file": "ph_story_2-600.webp",
+        "w": 600,
+        "h": 832,
+        "bytes": 9944
+      }
+    ],
+    "aspect": 0.7212
+  },
+  "ph_story_3": {
+    "src_size": [
+      600,
+      832
+    ],
+    "ratio": 0.72115,
+    "files": [
+      {
+        "file": "ph_story_3-300.webp",
+        "w": 300,
+        "h": 416,
+        "bytes": 1968
+      },
+      {
+        "file": "ph_story_3-600.webp",
+        "w": 600,
+        "h": 832,
+        "bytes": 4596
+      }
+    ],
+    "aspect": 0.7212
+  },
+  "ph_venue": {
+    "src_size": [
+      960,
+      558
+    ],
+    "ratio": 1.72043,
+    "files": [
+      {
+        "file": "ph_venue-480.webp",
+        "w": 480,
+        "h": 279,
+        "bytes": 2662
+      },
+      {
+        "file": "ph_venue-960.webp",
+        "w": 960,
+        "h": 558,
+        "bytes": 5744
+      }
+    ],
+    "aspect": 1.721
+  },
+  "og": {
+    "src_size": [
+      1536,
+      1024
+    ],
+    "crop": [
+      0,
+      218,
+      1536,
+      806
+    ],
+    "align": "alt",
+    "size": [
+      1200,
+      630
+    ],
+    "file": "og-1200x630.jpg",
+    "bytes": 132378
+  },
+  "theme_check": {
+    "first_screen": {
+      "landscape": true,
+      "names_min_px": 36
+    }
+  },
+  "opening_geometry": {
+    "width": 880,
+    "height": 854,
+    "hinge": 283,
+    "body_height": 571,
+    "closed_flap_height": 325
   }
- },
- "og": {
-  "source": "assembled stand-in: velvet + paper",
-  "file": "og-1200x630.jpg",
-  "bytes": 132298
- },
- "favicon": {
-  "src_box": [
-   0,
-   0,
-   360,
-   360
-  ],
-  "size": [
-   180,
-   180
-  ],
-  "pad": 0.04,
-  "file": "favicon.png",
-  "bytes": 41597
- },
- "stage": {
-  "canvas": [
-   1024,
-   1536
-  ],
-  "box": [
-   72,
-   96,
-   880,
-   1344
-  ],
-  "objAspect": 0.6548,
-  "method": "stand-in",
-  "opening_pct": [
-   0,
-   0,
-   100,
-   100
-  ],
-  "curtain_l": {
-   "box_pct": [
-    0,
-    0,
-    51.477,
-    100
-   ],
-   "origin": "0% 50%"
-  },
-  "curtain_r": {
-   "box_pct": [
-    48.523,
-    0,
-    51.477,
-    100
-   ],
-   "origin": "100% 50%"
-  },
-  "gather": 0.34,
-  "valance_pct": 8.482,
-  "card": {
-   "box_pct": [
-    25.0,
-    40.923,
-    50.0,
-    49.107
-   ],
-   "window_pct": [
-    17,
-    8,
-    66,
-    55
-   ],
-   "window": "stand-in (the photo on plain paper)"
-  },
-  "css": {
-   "--stage-ar": "880/1344",
-   "--cl-o": "0%",
-   "--cr-o": "100%",
-   "--gather": "0.34",
-   "--swl-o": "6% 0",
-   "--swr-o": "94% 0",
-   "--spot-l": "5%",
-   "--spot-t": "24%",
-   "--card-l": "25%",
-   "--card-t": "40.923%",
-   "--card-w": "50%",
-   "--card-h": "49.107%",
-   "--win-l": "17%",
-   "--win-t": "8%",
-   "--win-w": "66%",
-   "--win-h": "55%",
-   "--photo-z": "2",
-   "--hero-ar": "auto",
-   "--hero-fit": "cover",
-   "--hero-pad": "30px 22px 28px",
-   "--hero-pad-short": "22px 18px 20px",
-   "--stub-ar": "auto",
-   "--stub-fit": "cover",
-   "--stub-rule": "1px dashed #6e5119b3"
-  }
- },
- "sources": {
-  "th_back": "stand-in",
-  "curtain_l": "stand-in",
-  "curtain_r": "stand-in",
-  "curtain_gl": "stand-in",
-  "curtain_gr": "stand-in",
-  "th_arch": "stand-in",
-  "card_paper": "stand-in",
-  "card_plain": "stand-in",
-  "velvet": "stand-in",
-  "room": "stand-in",
-  "paper": "stand-in",
-  "stub_paper": "stand-in",
-  "ph_portrait": "stand-in",
-  "ph_land": "stand-in",
-  "og": "stand-in",
-  "favicon": "stand-in"
- },
- "waiting_for_gpt": [
-  "card_paper",
-  "card_plain",
-  "curtain_gl",
-  "curtain_gr",
-  "curtain_l",
-  "curtain_r",
-  "favicon",
-  "og",
-  "paper",
-  "ph_land",
-  "ph_portrait",
-  "room",
-  "stub_paper",
-  "th_arch",
-  "th_back",
-  "velvet"
- ],
- "checks": {
-  "green": {}
- },
- "theme_check": {
-  "particles": ".accent-layer",
-  "first_screen": {
-   "landscape": false,
-   "names_min_px": 32
-  },
-  "backdrop": {
-   "edge_max": 2.2,
-   "dark_max": 0.05,
-   "dark_below": 0,
-   "light_above": 110
-  }
- },
- "bytes_total": 806159
 }
