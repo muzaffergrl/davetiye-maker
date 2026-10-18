@@ -67,6 +67,11 @@ const results: Record<string, any> = {};
 const OBSERVE = () => {
   const w = window as any;
   Object.assign(w, { __lcp: 0, __lcpEl: '', __cls: 0, __long: [] as number[][], __fcp: 0, __inp: 0, __inpName: '' });
+  // G181: a panel deep link asks the server once more for its view (location.replace): the times count from the FIRST
+  // navigation of this tab, not from the second document's own start.
+  let t0 = Number(sessionStorage.getItem('__g173_t0'));
+  if (!t0) sessionStorage.setItem('__g173_t0', String((t0 = performance.timeOrigin)));
+  w.__offset = performance.timeOrigin - t0;
   new PerformanceObserver((l) => {
     for (const e of l.getEntries() as any[]) {
       w.__lcp = e.startTime;
@@ -86,6 +91,20 @@ const OBSERVE = () => {
   new PerformanceObserver((l) => {
     for (const e of l.getEntries() as any[]) if (e.interactionId && e.duration > w.__inp) [w.__inp, w.__inpName] = [e.duration, e.name];
   }).observe({ type: 'event', buffered: true, durationThreshold: 16 } as any);
+  // G181: on a panel address, when the view it names is first on screen — its skeleton (data-boot) or the view itself —
+  // and when the real view is (checked every frame from the first one).
+  const want = location.pathname.startsWith('/edit/') ? location.hash.slice(1) : '';
+  if (want) {
+    const watch = () => {
+      const root = document.querySelector('[data-panel-root]');
+      // the real view: the panel root shows it, without a skeleton over it
+      const real = !root?.getAttribute('data-boot') && (want.startsWith('setup') ? !!document.querySelector('[data-setup]') : root?.getAttribute('data-view') === want);
+      if (real && !w.__realViewAt) w.__realViewAt = performance.now();
+      if ((real || root?.getAttribute('data-boot')) && !w.__viewAt) w.__viewAt = performance.now();
+      if (!w.__realViewAt) requestAnimationFrame(watch);
+    };
+    requestAnimationFrame(watch);
+  }
 };
 
 async function interact(page: any, kind: Interact): Promise<string> {
@@ -129,7 +148,10 @@ async function perf(url: string, kind: Interact, label: string) {
     const w = window as any;
     const end = loadAt + 3000;
     const tbt = (w.__long as number[][]).filter(([s]) => s >= w.__fcp && s <= end).reduce((a, [, d]) => a + Math.max(0, d - 50), 0);
-    return { lcp: Math.round(w.__lcp), lcpElement: w.__lcpEl, cls: Number(w.__cls.toFixed(4)), fcp: Math.round(w.__fcp), tbt: Math.round(tbt) };
+    const o = w.__offset;
+    const view = w.__viewAt ? { viewMs: Math.round(o + w.__viewAt), realViewMs: Math.round(o + (w.__realViewAt ?? 0)) } : {};
+    const docs = o > 0 ? { documents: 2 } : {};
+    return { lcp: Math.round(o + w.__lcp), lcpElement: w.__lcpEl, cls: Number(w.__cls.toFixed(4)), fcp: Math.round(o + w.__fcp), tbt: Math.round(tbt), ...view, ...docs };
   }, loadAt);
   const url0 = page.url();
   const did = await interact(page, kind);
@@ -284,7 +306,7 @@ try {
     const p = await perf(r.url, r.interact, r.path);
     const a = args['no-a11y'] ? {} : await a11y(r.url);
     results[r.path] = { ...p, ...a };
-    console.log(`${r.path}: LCP ${p.lcp} ms (${p.lcpElement}) CLS ${p.cls} TBT ${p.tbt} INP~${p.inp} (${p.interaction}) ${p.transferKB} KB (JS ${p.jsKB}, img ${p.imageKB}, font ${p.fontKB})`);
+    console.log(`${r.path}: LCP ${p.lcp} ms (${p.lcpElement})${p.viewMs ? ` view ${p.viewMs}/${p.realViewMs} ms` : ''} CLS ${p.cls} TBT ${p.tbt} INP~${p.inp} (${p.interaction}) ${p.transferKB} KB (JS ${p.jsKB}, img ${p.imageKB}, font ${p.fontKB})`);
     check(`${r.path}: LCP ≤ 2.5 s`, p.lcp > 0 && p.lcp <= 2500, p.lcp);
     check(`${r.path}: CLS ≤ 0.1`, p.cls <= 0.1, p.cls);
     if (!args['no-a11y']) {

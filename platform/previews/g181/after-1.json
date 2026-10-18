@@ -1,0 +1,210 @@
+{
+  "date": "2026-10-18T01:21:46.655Z",
+  "results": {
+    "/edit/<slug>#setup/1": {
+      "lcp": 1368,
+      "lcpElement": "P.panel-module__y_j7xG__setupHelp",
+      "cls": 0,
+      "fcp": 1104,
+      "tbt": 699,
+      "viewMs": 1066,
+      "realViewMs": 1066,
+      "inp": 64,
+      "inpEvent": "click",
+      "navigated": false,
+      "interaction": "first button",
+      "transferKB": 1304,
+      "jsKB": 280,
+      "cssKB": 37,
+      "fontKB": 163,
+      "imageKB": 753,
+      "largestImage": {
+        "url": "/themes/olive-ivory/img/decor_tl-960.webp",
+        "kb": 167
+      },
+      "afterInteractionKB": 79
+    },
+    "/edit/<slug>#home": {
+      "lcp": 1856,
+      "lcpElement": "SPAN.panel-module__y_j7xG__checkText",
+      "cls": 0,
+      "fcp": 1700,
+      "tbt": 388,
+      "viewMs": 1607,
+      "realViewMs": 1607,
+      "documents": 2,
+      "inp": 72,
+      "inpEvent": "click",
+      "navigated": true,
+      "interaction": "first button",
+      "transferKB": 497,
+      "jsKB": 337,
+      "cssKB": 44,
+      "fontKB": 81,
+      "imageKB": 10,
+      "largestImage": {
+        "url": "/brand/bke-logo-horizontal-anchor.svg",
+        "kb": 3
+      },
+      "afterInteractionKB": 57
+    },
+    "/edit/<slug>#edit": {
+      "lcp": 1879,
+      "lcpElement": "H1.panel-module__y_j7xG__pageTitle",
+      "cls": 0,
+      "fcp": 1735,
+      "tbt": 522,
+      "viewMs": 1648,
+      "realViewMs": 1648,
+      "documents": 2,
+      "inp": 0,
+      "inpEvent": "",
+      "navigated": false,
+      "interaction": "none",
+      "transferKB": 477,
+      "jsKB": 333,
+      "cssKB": 44,
+      "fontKB": 65,
+      "imageKB": 10,
+      "largestImage": {
+        "url": "/brand/bke-logo-horizontal-anchor.svg",
+        "kb": 3
+      },
+      "afterInteractionKB": 0
+    },
+    "/edit/<slug>#edit/photos": {
+      "lcp": 1828,
+      "lcpElement": "P.panel-module__y_j7xG__hint",
+      "cls": 0,
+      "fcp": 1708,
+      "tbt": 503,
+      "viewMs": 1609,
+      "realViewMs": 1609,
+      "documents": 2,
+      "inp": 192,
+      "inpEvent": "click",
+      "navigated": false,
+      "interaction": "first button",
+      "transferKB": 481,
+      "jsKB": 337,
+      "cssKB": 44,
+      "fontKB": 65,
+      "imageKB": 10,
+      "largestImage": {
+        "url": "/brand/bke-logo-horizontal-anchor.svg",
+        "kb": 3
+      },
+      "afterInteractionKB": 67
+    },
+    "/edit/<slug>#guests": {
+      "lcp": 1837,
+      "lcpElement": "P.panel-module__y_j7xG__emptyText",
+      "cls": 0,
+      "fcp": 1689,
+      "tbt": 622,
+      "viewMs": 1617,
+      "realViewMs": 1617,
+      "documents": 2,
+      "inp": 64,
+      "inpEvent": "click",
+      "navigated": false,
+      "interaction": "first button",
+      "transferKB": 476,
+      "jsKB": 333,
+      "cssKB": 44,
+      "fontKB": 65,
+      "imageKB": 10,
+      "largestImage": {
+        "url": "/brand/bke-logo-horizontal-anchor.svg",
+        "kb": 3
+      },
+      "afterInteractionKB": 0
+    },
+    "/edit/<slug>#share": {
+      "lcp": 1857,
+      "lcpElement": "P.panel-module__y_j7xG__cardText",
+      "cls": 0,
+      "fcp": 1721,
+      "tbt": 533,
+      "viewMs": 1596,
+      "realViewMs": 1596,
+      "documents": 2,
+      "inp": 72,
+      "inpEvent": "click",
+      "navigated": false,
+      "interaction": "first button",
+      "transferKB": 479,
+      "jsKB": 333,
+      "cssKB": 44,
+      "fontKB": 65,
+      "imageKB": 10,
+      "largestImage": {
+        "url": "/brand/bke-logo-horizontal-anchor.svg",
+        "kb": 3
+      },
+      "afterInteractionKB": 0
+    }
+  },
+  "checks": [
+    {
+      "name": "/edit/<slug>#setup/1: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 1368
+    },
+    {
+      "name": "/edit/<slug>#setup/1: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/edit/<slug>#home: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 1856
+    },
+    {
+      "name": "/edit/<slug>#home: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/edit/<slug>#edit: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 1879
+    },
+    {
+      "name": "/edit/<slug>#edit: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/edit/<slug>#edit/photos: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 1828
+    },
+    {
+      "name": "/edit/<slug>#edit/photos: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/edit/<slug>#guests: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 1837
+    },
+    {
+      "name": "/edit/<slug>#guests: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    },
+    {
+      "name": "/edit/<slug>#share: LCP ≤ 2.5 s",
+      "ok": true,
+      "detail": 1857
+    },
+    {
+      "name": "/edit/<slug>#share: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0
+    }
+  ]
+}
