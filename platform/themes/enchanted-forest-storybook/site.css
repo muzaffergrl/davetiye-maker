@@ -12,7 +12,7 @@
   --moss-ink: #3D4A2F;
   --gold: #B7975A;
   --hair: rgba(110, 82, 32, .42);
-  --script: "Tangerine", "Snell Roundhand", cursive;
+  --script: "Tangerine",fb1,fb2,"Snell Roundhand", cursive;
   --serif: "IM Fell English", "Iowan Old Style", Georgia, serif;
   --ease: cubic-bezier(.22, .61, .36, 1);
   --ease-soft: cubic-bezier(.33, 0, .2, 1);

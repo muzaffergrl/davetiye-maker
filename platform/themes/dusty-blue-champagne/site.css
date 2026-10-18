@@ -3,7 +3,7 @@
 :root {
   --page: #CCDCEC; --ivory: #FBF7EF; --ink: #2B3A4E; --ink-soft: #3A4A60; --blue-ink: #44597A; --blue: #4E6782;
   --gold: #B8996A; --gold-light: #D9C49E; --gold-ink: #765627; --gold-card: #85642F; --seal-ink: #EEF2F6;
-  --script: "Pinyon Script", "Snell Roundhand", cursive; --serif: "Cormorant Garamond", Garamond, Georgia, serif;
+  --script: "Pinyon Script",fb1,fb2,"Snell Roundhand", cursive; --serif: "Cormorant Garamond", Garamond, Georgia, serif;
   --ease: cubic-bezier(.22, .61, .36, 1); --ease-soft: cubic-bezier(.33, 0, .2, 1);
   --settle: cubic-bezier(.17, 1.16, .38, 1); --nav-h: 54px;
 }
@@ -482,7 +482,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 
 /* == page 5 — RSVP (W1.5) */
 .rsvp-top { --rt: clamp(110px, 32vw, 170px); padding: var(--rt) 0 0; }
-/* --cw card width, --sg signature + gaps + seal (site.js fitCard); the seal hangs .23 below */
+/* --cw card width, --sg signature + gaps + seal (site.js fitCard); seal hangs .23 below */
 .rsvp-top .wrap { --cw: min(100% - 48px, 420px); --sg: 1; z-index: 1; width: var(--cw); padding-bottom: calc(var(--cw) * .23 * var(--sg)); }
 .rsvp-text { padding: calc(var(--top-h) + 2cqw) 9% calc(var(--bot-h) + 31cqw * var(--sg)); }
 .rsvp-text .card-title { font-size: calc(11.6cqw * var(--fit, 1)); white-space: nowrap; }

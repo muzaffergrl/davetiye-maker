@@ -11,7 +11,7 @@
   --rose: #7C5563; /* 5.0:1 */
   --rose-ink: #6F4A58; /* 6.0:1 */
   --hair: rgba(124, 85, 99, .38);
-  --script: "Petit Formal Script", "Snell Roundhand", cursive;
+  --script: "Petit Formal Script",fb1,fb2,"Snell Roundhand", cursive;
   --serif: "Noto Serif Display", "Didot", Georgia, serif;
   --ease: cubic-bezier(.22, .61, .36, 1);
   --ease-soft: cubic-bezier(.33, 0, .2, 1);

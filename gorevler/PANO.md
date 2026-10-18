@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 1 · alindi 0 · inceleme 0 · blokaj 2 · bitti 218 · iptal 256 · toplam 477
+Özet: hazir 2 · alindi 0 · inceleme 0 · blokaj 2 · bitti 219 · iptal 256 · toplam 479
 
 İptal edilen görevler (K22/K24 ile anlamını yitirenler) listelenmez; yalnız sayıları var. Ayrıntı: `python3 tools/gorev.py liste --hepsi`.
 
@@ -33,15 +33,15 @@ Bağımlılık bekleyen: 0 · Biten: 8 · İptal: 42
 
 ## claude-kod
 
-**Alınabilir (0)**
+**Alınabilir (1)**
 
-- (yok)
+- `G188` p2 — G180 tema standardını 33–38'e uygula (font yedek yüzleri / CLS, ertelenen açılış parçaları / LCP, düğme kontrastı) → `gorevler/G188-tema-standardi-33-38.md`
 
 **Üzerinde çalışılan / incelemede / blokaj (0)**
 
 - (yok)
 
-Bağımlılık bekleyen: 0 · Biten: 126 · İptal: 82
+Bağımlılık bekleyen: 0 · Biten: 127 · İptal: 82
 
 ## claude-metin
 

@@ -19,7 +19,7 @@ html[data-variant="champagne"] {
   --line: rgba(179, 154, 124, 0.251);
   --line-soft: rgba(179, 154, 124, 0.149);
   --quartz: #F9EFE2;
-  --rose: #856D51;
+  --rose: #856D50;
   --rose-ink: #6F593F;
 }
 
@@ -34,7 +34,7 @@ html[data-variant="lilac-gold"] {
   --line: rgba(156, 134, 182, 0.251);
   --line-soft: rgba(156, 134, 182, 0.149);
   --quartz: #E7DEF2;
-  --rose: #7E6897;
+  --rose: #7D6897;
   --rose-ink: #65527C;
 }
 
@@ -49,7 +49,7 @@ html[data-variant="peach-coral"] {
   --line: rgba(203, 130, 110, 0.251);
   --line-soft: rgba(203, 130, 110, 0.149);
   --quartz: #FFE1D7;
-  --rose: #A45E4B;
+  --rose: #A35E4C;
   --rose-ink: #8A4C3B;
 }
 
@@ -64,7 +64,7 @@ html[data-variant="powder-blue"] {
   --line: rgba(126, 155, 184, 0.251);
   --line-soft: rgba(126, 155, 184, 0.149);
   --quartz: #DFEBF7;
-  --rose: #58748F;
+  --rose: #57748F;
   --rose-ink: #465F78;
 }
 
@@ -79,6 +79,6 @@ html[data-variant="sage-mint"] {
   --line: rgba(127, 165, 148, 0.251);
   --line-soft: rgba(127, 165, 148, 0.149);
   --quartz: #E1F1EA;
-  --rose: #537868;
+  --rose: #537767;
   --rose-ink: #446557;
 }

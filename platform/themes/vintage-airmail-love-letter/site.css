@@ -15,7 +15,7 @@
 --gold: #A88A5A;
 --cream: #F6ECDA;
 --seal-ink: #5A1714;
---script: "Homemade Apple", "Segoe Script", "Bradley Hand", cursive;
+--script: "Homemade Apple",fb1,fb2,"Segoe Script", "Bradley Hand", cursive;
 --type: "Special Elite", "American Typewriter", "Courier New", Courier, monospace;
 --ease: cubic-bezier(.22, .61, .36, 1);
 --ease-soft: cubic-bezier(.33, 0, .2, 1);
@@ -205,7 +205,7 @@ padding: max(calc(52px + env(safe-area-inset-top)), calc(var(--w) * .6759 - 96px
 .env-head { position: relative; z-index: 3; width: min(100%, 560px); pointer-events: none; }
 .env-head .kicker { width: fit-content; margin-inline: auto; font-size: 13px; letter-spacing: .3em; color: var(--ink); }
 .names {
-margin-top: 2px; font-size: calc(clamp(36px, 9.4vw, 62px) * var(--names-scale, 1)); line-height: 1.5;
+margin-top: 2px; font-size: calc(clamp(36px, 9.4vw, 62px) * var(--names-scale, .97)); line-height: 1.5; /* .97: font-fallback.ts */
 text-wrap: balance; overflow-wrap: break-word; text-shadow: 0 0 16px #f2eadbe6;
 }
 .stage {

@@ -962,7 +962,8 @@ test('14 routes: a published site on this theme serves 200 pages with CSP hashes
   const index = await getIndex(req('/maren-and-theo-lp'), { params: Promise.resolve({ slug: 'maren-and-theo-lp' }) });
   assert.equal(index.status, 200);
   const scriptSrc = index.headers.get('content-security-policy')!.split('; ').find((d) => d.startsWith('script-src'))!;
-  assert.equal(scriptSrc.match(/'sha256-/g)?.length, 2, 'inline state script + speculation rules');
+  // index: the early state script, the deferred opening parts (G180) and the speculation rules
+  assert.equal(scriptSrc.match(/'sha256-/g)?.length, 3, 'inline state script + deferred parts + speculation rules');
   const $index = cheerio.load(await index.text());
   assert.match($index('meta[property="og:image"]').attr('content') ?? '', /^https?:\/\/[^/]+\/themes\/lavender-provence\/img\/og-1200x630\.jpg$/, 'absolute og:image');
   assert.equal($index('meta[property="og:image:alt"]').attr('content'), 'Amélie & Louis wedding invitation');

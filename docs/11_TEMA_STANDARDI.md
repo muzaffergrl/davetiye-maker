@@ -451,6 +451,25 @@ göreceğiyle aynı yoldan gelir (`--photo-max 0` = eski tek dosya hâli). 03 (`
 index 1294 → **1099 KB**, home 1261 → **895 KB** (tek dosya → türevli; G055'in panel API'siyle ölçtüğü 1093 / 890 KB ile
 uyumlu). Gerçek telefon/ağ ölçümü değildir; "daha hızlı" iddiası buna dayanılarak yazılmaz (docs/13 §7).
 
+**Ertelenen açılış parçaları (G180, zorunlu — zarf/kapı/kitap/kese/kılıf sayfası).** İlk ekranda yalnız kapalı nesne ve sahne
+görselleri gerekir; açılışta görünen parçalar (açık kapak, gövde/astar, cep, kart + foto, dalga, iç kapılar, sayfalar, açık
+şerit) kapalı hâlde görünmez ama ekranda oldukları için Chrome hepsini High önceliğe yükseltir ve yavaş 4G'de kapalı nesneyle
+bant genişliğini paylaşır (G173: LCP 3–5 s). Kural:
+- Kapalı nesnenin kendi görseli (`.stage` içinde) `fetchpriority="high"`; kapalı hâlde görünmeyen her parça
+  `<img data-defer loading="lazy" fetchpriority="low" decoding="async">` (önyükleme tarayıcısı lazy görseli atlar). Hangi parçanın
+  görünmediği ölçülerek seçilir: kapalı sahnenin ekran görüntüsünde parça gizlenince değişen piksel yoksa ertelenir (kart
+  vellum, kapı aralığı ya da cep kenarından görünüyorsa ertelenmez — 06, 11, 14, 18'de kart erken kalır).
+- `index.html` `<head>`'inde erken durum betiğinden hemen sonra bütün temalarda **aynı** serbest bırakma parçası:
+  `.js:not(.parts-on) img[data-defer]{display:none!important}` + betik; `.stage img[fetchpriority=high]` yüklenip bir kare
+  boyandıktan sonra (rAF + setTimeout: parçaların yerleşim/decode işi LCP karesine binmesin; ya da `load`, ilk
+  `pointerdown`/`keydown`, açılmış durumda hemen) `html.parts-on` eklenir ve ertelenen görseller `loading=eager` olur (kartın
+  ya da kesenin kırptığı lazy bir parça yoksa ancak animasyon onu açınca yüklenirdi — 17 süs, 09 foto) ve ertelenen parçalar dokunuştan
+  **önce** birlikte yüklenir. Parçalar mutlak konumlu olduğu için `display:none` yerleşimi değiştirmez; `site.js` parçaların
+  ölçüsünü dokunuşta okur. Kaynak ve test: `platform/tests/g180-theme-perf.test.ts` (işaretler), `tests/g180-browser.ts`
+  (hiçbir ertelenen parça kapalı nesne yüklenmeden istenmez; hepsi dokunuştan önce yüklenir).
+- Sınır: misafir parçalar yüklenmeden dokunursa (yavaş 4G'de kapalı nesne göründükten sonraki ~1–2 s) parçalar animasyon
+  sırasında gelir — G180 öncesinde de böyleydi (o zaman kapalı nesnenin kendisi de geç geliyordu).
+
 ---
 
 ## 7. Zarf açılışı — tipe göre
@@ -758,6 +777,17 @@ const ENVELOPE_GEOMETRY = { out: 'translateY(…%)', front: 'translateY(…%) sc
 
 - Fontlar katalogdaki çift (Google Fonts; repoya font dosyası yok). Script fontun `&`'ı yerine `.amp` (italik serif;
   `data-format="amp"` ya da elle `<span class="amp">`).
+- **İsimlerin yedek fontu (G180, zorunlu).** İsim başlığının Google Fonts yüzü `display=swap` ile geç gelince tarayıcı yığındaki
+  sonraki aileyle (Georgia, Snell Roundhand…) çizer; el yazısından çok geniş olduğu için isimler 2 satıra sarar ve font gelince
+  1 satıra iner (G173: CLS 0,08–0,16). Her temada `scripts/font-fallback.ts` iki `local()` yüz ölçer ve yazar: `fb1` (Times New
+  Roman / Liberation Serif / Tinos) ve `fb2` (Noto Serif / Droid Serif, Android), `size-adjust` isim derlemesinin genişliğine,
+  `ascent-/descent-/line-gap-override` web yüzünün ölçülerine eşit. Yüzler her sayfanın `<head>`'inde `site.css`'ten hemen önce
+  satır içi `<style>` (01–21'in `site.css`'inde 45 KB bütçesinde yer yok); `site.css` yığını web ailesinden hemen sonra onları
+  adlandırır: `--script: "Allison",fb1,fb2,"Snell Roundhand", cursive`. Font yüklenince görünüm değişmez. Yeni tema ya da font
+  değişikliğinden sonra `node scripts/font-fallback.ts --theme <id>` (çalışan `next start` üzerinde), denetim `--check`.
+  İsmi JS ile **tam tek satıra** ölçekleyen tema (04 `fitNames`: `one = genişlik / metin`) yedeği web yüzünden dar bulursa web yüzü
+  gelince bir kare sarar: o temada yedek biraz geniş (`WIDER`, 04: +%1,5) ve site.js'ten önceki CSS ölçeği 1'in altında (.97).
+
 - Alfabe: isimler aksanlı olabilir (09 demo "Amélie"). Seçilen ailelerin Google Fonts CSS yanıtında `latin-ext` bloğu yoksa
   (yalnız `latin`) aksanlı isim başka fontla karışır → başlık için `latin-ext` destekli eş seçilir ya da Sonuç'a sınır olarak yazılır.
 - Taşma: alıcının girebildiği her değerde düzen bozulmaz. Şema sınırları (G055; panel ve `/start` aynı sınırda durur):

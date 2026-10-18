@@ -4,7 +4,7 @@
    takes the gradient's place when W2.5 arrives). No frame, ornament or line is drawn. */
 :root{--indigo:#242e58;--indigo-2:#3c4874;--night:#161c36;--deep:#10152a;--rice:#f3ecdc;--rice-2:#e6dcc8;--ink:#1d2340;
 --ink-soft:#4a4f66;--gold:#c9a55a;--gold-light:#e3c987;--gold-ink:#7a5c22;--mist:#cfd2e2;--line:#e3c98745;--line-ink:#1d234030;
---serif:'Shippori Mincho','Times New Roman',serif;--script:'Allura','Snell Roundhand',cursive;--nav-h:62px;color-scheme:dark;
+--serif:'Shippori Mincho','Times New Roman',serif;--script:'Allura',fb1,fb2,'Snell Roundhand',cursive;--nav-h:62px;color-scheme:dark;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}

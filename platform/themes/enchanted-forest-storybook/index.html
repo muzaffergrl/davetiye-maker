@@ -26,10 +26,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&amp;family=Tangerine:wght@700&amp;display=swap">
+<style>/* names fallback: scripts/font-fallback.ts */
+@font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:73.2%;ascent-override:102.4%;descent-override:34.1%;line-gap-override:0%}
+@font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:59.4%;ascent-override:126.4%;descent-override:42.1%;line-gap-override:0%}</style>
 <link rel="stylesheet" href="site.css">
 <link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
 <script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
 (function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'';if(sessionStorage.getItem('invite:opened'+k)&&!/[?&]replay=1(&|$)/.test(location.search))r.classList.add('is-opened');}catch(e){}})(document.documentElement);
+</script>
+<style>.js:not(.parts-on) img[data-defer]{display:none!important}</style>
+<script>/* deferred opening parts (G180, docs/11 §6): the images that only show after the tap ([data-defer], lazy) wait until the
+   closed object's own high-priority image(s) in .stage have loaded and painted, then all load at once (eager: a lazy part clipped by its card would
+   wait for the animation) — before the tap, so the opening never waits */
+(function(d,r){var on=function(){r.classList.add('parts-on');[].forEach.call(d.querySelectorAll('img[data-defer]'),function(i){i.loading='eager'})};if(r.classList.contains('is-opened')){on();return d.addEventListener('DOMContentLoaded',on)}addEventListener('pointerdown',on,true);addEventListener('keydown',on,true);addEventListener('load',on);d.addEventListener('DOMContentLoaded',function(){var h=d.querySelectorAll('.stage img[fetchpriority=high]');h=h.length?h:d.querySelectorAll('img[fetchpriority=high]');var n=h.length,one=function(){--n||requestAnimationFrame(function(){setTimeout(on)})};if(!n)on();h.forEach(function(i){i.complete?one():(i.addEventListener('load',one),i.addEventListener('error',one))})})})(document,document.documentElement);
 </script>
 <!-- prefetch the home page: the rule points at the "Enter" link, whose href the platform has already set to /<slug>/home -->
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"selector_matches":"a[data-enter]"},"eagerness":"immediate"}]}</script>
@@ -64,18 +73,18 @@
        first page, the page that turns (front + its mirrored back), the closed cover, the brass clasp -->
   <div class="stage" role="button" tabindex="0" aria-label="Open the invitation" data-copy-attr="aria-label:envelope_open">
     <div class="env">
-      <img class="book-cover-in" src="img/book_cover_in-360.webp" srcset="img/book_cover_in-360.webp 360w, img/book_cover_in-640.webp 640w" sizes="min(84vw, 37svh, 440px)" alt="">
-      <img class="book-page" src="img/book_page-360.webp" srcset="img/book_page-360.webp 360w, img/book_page-700.webp 700w" sizes="min(84vw, 37svh, 440px)" alt="">
+      <img data-defer loading="lazy" fetchpriority="low" decoding="async" class="book-cover-in" src="img/book_cover_in-360.webp" srcset="img/book_cover_in-360.webp 360w, img/book_cover_in-640.webp 640w" sizes="min(84vw, 37svh, 440px)" alt="">
+      <img data-defer loading="lazy" fetchpriority="low" decoding="async" class="book-page" src="img/book_page-360.webp" srcset="img/book_page-360.webp 360w, img/book_page-700.webp 700w" sizes="min(84vw, 37svh, 440px)" alt="">
       <div class="card-slot">
         <div class="card" aria-hidden="true">
           <div class="photo-slot mask-card" data-slot="hero_portrait">
-            <img data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_hero_portrait-320.webp" srcset="img/ph_hero_portrait-320.webp 320w, img/ph_hero_portrait-640.webp 640w" sizes="min(36vw, 160px)" alt="">
-            <span class="ph-mark" data-if="!thank_you_on" aria-hidden="true"><img src="img/accent_1-200.webp" alt=""><span>Your photo here</span></span>
+            <img data-defer loading="lazy" fetchpriority="low" decoding="async" data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_hero_portrait-320.webp" srcset="img/ph_hero_portrait-320.webp 320w, img/ph_hero_portrait-640.webp 640w" sizes="min(36vw, 160px)" alt="">
+            <span class="ph-mark" data-if="!thank_you_on" aria-hidden="true"><img data-defer loading="lazy" fetchpriority="low" decoding="async" src="img/accent_1-200.webp" alt=""><span>Your photo here</span></span>
             <!-- thank-you mode: the couple's thank-you photo in the same window, else the misty forest and the brass clasp -->
-            <img class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_hero_portrait-320.webp" sizes="min(36vw, 160px)" alt="">
-            <span class="ty-decor" data-if="thank_you_on !thank_you.photo" aria-hidden="true"><img src="img/closure-240.webp" srcset="img/closure-240.webp 240w, img/closure-480.webp 480w" sizes="min(26vw, 120px)" alt=""></span>
+            <img data-defer loading="lazy" fetchpriority="low" decoding="async" class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_hero_portrait-320.webp" sizes="min(36vw, 160px)" alt="">
+            <span class="ty-decor" data-if="thank_you_on !thank_you.photo" aria-hidden="true"><img data-defer loading="lazy" fetchpriority="low" decoding="async" src="img/closure-240.webp" srcset="img/closure-240.webp 240w, img/closure-480.webp 480w" sizes="min(26vw, 120px)" alt=""></span>
           </div>
-          <img class="card-img" src="img/card_small-320.webp" srcset="img/card_small-320.webp 320w, img/card_small-640.webp 640w" sizes="min(52vw, 230px)" alt="">
+          <img data-defer loading="lazy" fetchpriority="low" decoding="async" class="card-img" src="img/card_small-320.webp" srcset="img/card_small-320.webp 320w, img/card_small-640.webp 640w" sizes="min(52vw, 230px)" alt="">
           <div class="card-copy">
             <p class="script" data-if="!thank_you_on" data-copy="card_line">We're getting married</p>
             <p class="ty-title" data-if="thank_you_on" data-field="thank_you_title"></p>
@@ -84,8 +93,8 @@
         </div>
       </div>
       <div class="book-turn">
-        <img class="book-leaf" src="img/book_leaf-320.webp" srcset="img/book_leaf-320.webp 320w, img/book_leaf-622.webp 622w" sizes="min(75vw, 33svh, 390px)" alt="">
-        <div class="book-leaf-back"><img src="img/book_leaf-320.webp" srcset="img/book_leaf-320.webp 320w, img/book_leaf-622.webp 622w" sizes="min(75vw, 33svh, 390px)" alt=""></div>
+        <img data-defer loading="lazy" fetchpriority="low" decoding="async" class="book-leaf" src="img/book_leaf-320.webp" srcset="img/book_leaf-320.webp 320w, img/book_leaf-622.webp 622w" sizes="min(75vw, 33svh, 390px)" alt="">
+        <div class="book-leaf-back"><img data-defer loading="lazy" fetchpriority="low" decoding="async" src="img/book_leaf-320.webp" srcset="img/book_leaf-320.webp 320w, img/book_leaf-622.webp 622w" sizes="min(75vw, 33svh, 390px)" alt=""></div>
       </div>
       <img class="book-cover" src="img/book_cover-360.webp" srcset="img/book_cover-360.webp 360w, img/book_cover-640.webp 640w" sizes="min(84vw, 37svh, 440px)" alt="" fetchpriority="high">
       <!-- the brass clasp: its own layer over the cover's right edge — it unhooks and swings away before the cover opens -->

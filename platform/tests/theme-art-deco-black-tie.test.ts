@@ -498,7 +498,7 @@ test('17 schedule of 1, 6 and 10 rows, long names, en-GB and the docs/11 §12 st
     assert.equal(href, 'https://fonts.googleapis.com/css2?family=Italiana&family=Josefin+Sans:wght@400;600&display=swap', page);
   }
   // Italiana lacks latin-ext: its fallback is Josefin Sans (loaded, latin-ext), never a system serif for a missing letter
-  assert.match(cssText(), /--deco: "Italiana", "Josefin Sans"/);
+  assert.match(cssText(), /--deco: "Italiana",fb1,fb2,"Josefin Sans"/); // fb1, fb2: names fallback faces (G180)
 });
 
 test('design range (docs/11 §12 level 1) renders every field', () => {
@@ -1026,7 +1026,8 @@ test('14 routes: a published site on this theme serves 200 pages with CSP hashes
   const index = await getIndex(req('/maren-and-theo-ad'), { params: Promise.resolve({ slug: 'maren-and-theo-ad' }) });
   assert.equal(index.status, 200);
   const scriptSrc = index.headers.get('content-security-policy')!.split('; ').find((d) => d.startsWith('script-src'))!;
-  assert.equal(scriptSrc.match(/'sha256-/g)?.length, 2, 'inline state script + speculation rules');
+  // index: the early state script, the deferred opening parts (G180) and the speculation rules
+  assert.equal(scriptSrc.match(/'sha256-/g)?.length, 3, 'inline state script + deferred parts + speculation rules');
   const $index = cheerio.load(await index.text());
   assert.match($index('meta[property="og:image"]').attr('content') ?? '', /^https?:\/\/[^/]+\/themes\/art-deco-black-tie\/img\/og-1200x630\.jpg$/, 'absolute og:image');
   assert.equal($index('meta[property="og:image:alt"]').attr('content'), 'Vivian & Charles wedding invitation');

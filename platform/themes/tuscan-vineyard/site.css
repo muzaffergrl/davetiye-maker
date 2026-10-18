@@ -12,7 +12,7 @@
   --gold: #A9874F;             /* palette gold */
   --gold-light: #D2B98A;       /* palette gold_light */
   --gold-ink: #6E5228;         /* small gold text: 6.0:1 */
-  --script: "Italianno", "Snell Roundhand", cursive;
+  --script: "Italianno",fb1,fb2,"Snell Roundhand", cursive;
   --serif: "Marcellus", "Trajan Pro", Georgia, serif;
   --halo: 0 0 12px rgba(253, 234, 208, .95), 0 0 3px rgba(253, 234, 208, .9);
   --ease: cubic-bezier(.22, .61, .36, 1);

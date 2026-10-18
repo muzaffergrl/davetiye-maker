@@ -1,0 +1,327 @@
+{
+ "art-deco-black-tie": {
+  "lcp": 2252,
+  "lcpEl": "IMG.door-l door_l-326.webp",
+  "kb": 740,
+  "highImgKB": 421,
+  "cls": 0.0055,
+  "shifts": [
+   [
+    2395,
+    0.005,
+    "HEADER.env-head,DIV.env,P.env-hint"
+   ]
+  ]
+ },
+ "azulejo-mosaic": {
+  "lcp": 772,
+  "lcpEl": "DIV.card card-640.webp",
+  "kb": 223,
+  "highImgKB": 57,
+  "cls": 0.0021,
+  "shifts": []
+ },
+ "blush-garden-rose": {
+  "lcp": 3668,
+  "lcpEl": "IMG.env-closed envelope_closed-880.webp",
+  "kb": 1054,
+  "highImgKB": 442,
+  "cls": 0.002,
+  "shifts": []
+ },
+ "boho-pampas-terracotta": {
+  "lcp": 3400,
+  "lcpEl": "IMG.env-closed env_closed-648.webp",
+  "kb": 815,
+  "highImgKB": 487,
+  "cls": 0.0008,
+  "shifts": []
+ },
+ "burgundy-velvet-autumn": {
+  "lcp": 2148,
+  "lcpEl": "IMG.env-closed env_closed-880.webp",
+  "kb": 853,
+  "highImgKB": 324,
+  "cls": 0.0056,
+  "shifts": [
+   [
+    2282,
+    0.0048,
+    "HEADER.env-head,DIV.closure,DIV.env-hint"
+   ]
+  ]
+ },
+ "celestial-observatory": {
+  "lcp": 808,
+  "lcpEl": "SPAN.dome brass-640.webp",
+  "kb": 159,
+  "highImgKB": 30,
+  "cls": 0.0025,
+  "shifts": []
+ },
+ "cherry-blossom-spring": {
+  "lcp": 2248,
+  "lcpEl": "IMG.env-closed env_closed-880.webp",
+  "kb": 695,
+  "highImgKB": 253,
+  "cls": 0.0185,
+  "shifts": [
+   [
+    1308,
+    0.012,
+    "HEADER.env-head,DIV.env,DIV.env-hint"
+   ],
+   [
+    2066,
+    0.0055,
+    "HEADER.env-head,DIV.env,DIV.env-hint"
+   ]
+  ]
+ },
+ "coastal-seaside": {
+  "lcp": 2472,
+  "lcpEl": "IMG.env-closed env_closed-873.webp",
+  "kb": 870,
+  "highImgKB": 277,
+  "cls": 0.008,
+  "shifts": [
+   [
+    2101,
+    0.005,
+    "HEADER.env-head,DIV.env,DIV.card-copy,DIV.env-hint,P."
+   ],
+   [
+    2363,
+    0.0029,
+    "#text."
+   ]
+  ]
+ },
+ "crimson-rose-atelier": {
+  "lcp": 1764,
+  "lcpEl": "IMG. envelope-closed.webp",
+  "kb": 777,
+  "highImgKB": 447,
+  "cls": 0.0011,
+  "shifts": []
+ },
+ "dusty-blue-champagne": {
+  "lcp": 1612,
+  "lcpEl": "IMG.env-closed env_closed-857.webp",
+  "kb": 883,
+  "highImgKB": 493,
+  "cls": 0.0008,
+  "shifts": []
+ },
+ "emerald-gold-estate": {
+  "lcp": 2900,
+  "lcpEl": "IMG.env-closed env_closed-869.webp",
+  "kb": 824,
+  "highImgKB": 343,
+  "cls": 0.0014,
+  "shifts": []
+ },
+ "enchanted-forest-storybook": {
+  "lcp": 3224,
+  "lcpEl": "IMG.book-cover book_cover-640.webp",
+  "kb": 924,
+  "highImgKB": 306,
+  "cls": 0.0059,
+  "shifts": [
+   [
+    1447,
+    0.0047,
+    "IMG.corner"
+   ]
+  ]
+ },
+ "grand-theatre-premiere": {
+  "lcp": 1384,
+  "lcpEl": "IMG.th-arch th_arch-880.webp",
+  "kb": 456,
+  "highImgKB": 314,
+  "cls": 0.0017,
+  "shifts": []
+ },
+ "ivory-lace-pearls": {
+  "lcp": 2836,
+  "lcpEl": "IMG.door-r door_r-358.webp",
+  "kb": 873,
+  "highImgKB": 337,
+  "cls": 0.0112,
+  "shifts": [
+   [
+    2451,
+    0.0096,
+    "DIV.env,IMG.door-l,IMG.door-r,P.env-hint"
+   ]
+  ]
+ },
+ "kintsugi-washi": {
+  "lcp": 1392,
+  "lcpEl": "DIV.card rice-640.webp",
+  "kb": 250,
+  "highImgKB": 44,
+  "cls": 0.0007,
+  "shifts": []
+ },
+ "lavender-provence": {
+  "lcp": 3192,
+  "lcpEl": "IMG.pouch-closed pouch_closed-662.webp",
+  "kb": 847,
+  "highImgKB": 462,
+  "cls": 0.0006,
+  "shifts": []
+ },
+ "maison-patisserie": {
+  "lcp": 1780,
+  "lcpEl": "IMG.box-base box_base-880.webp",
+  "kb": 353,
+  "highImgKB": 254,
+  "cls": 0.0025,
+  "shifts": [
+   [
+    1759,
+    0.0025,
+    "DIV.opening-heading,P.card-names"
+   ]
+  ]
+ },
+ "mediterranean-lemon": {
+  "lcp": 1144,
+  "lcpEl": "IMG.env-closed env_closed-880.webp",
+  "kb": 747,
+  "highImgKB": 315,
+  "cls": 0.0008,
+  "shifts": []
+ },
+ "midnight-garden": {
+  "lcp": 1620,
+  "lcpEl": "IMG.env-closed env_closed-880.webp",
+  "kb": 700,
+  "highImgKB": 216,
+  "cls": 0.0062,
+  "shifts": [
+   [
+    1390,
+    0.0044,
+    "HEADER.env-head,DIV.env,::before."
+   ]
+  ]
+ },
+ "music-box-ballerina": {
+  "lcp": 948,
+  "lcpEl": "IMG.box-body box_body-880.webp",
+  "kb": 256,
+  "highImgKB": 138,
+  "cls": 0.0019,
+  "shifts": []
+ },
+ "nocturne-lake-estate": {
+  "lcp": 1360,
+  "lcpEl": "IMG.env-pocket env_pocket-880.webp",
+  "kb": 380,
+  "highImgKB": 245,
+  "cls": 0.0001,
+  "shifts": []
+ },
+ "olive-ivory": {
+  "lcp": 3296,
+  "lcpEl": "IMG.env-closed env_closed-880.webp",
+  "kb": 996,
+  "highImgKB": 557,
+  "cls": 0.0018,
+  "shifts": []
+ },
+ "orient-express-voyage": {
+  "lcp": 944,
+  "lcpEl": "IMG.w-cover-in wallet_cover_in-640.webp",
+  "kb": 166,
+  "highImgKB": 11,
+  "cls": 0.0002,
+  "shifts": []
+ },
+ "riad-lantern-nights": {
+  "lcp": 1824,
+  "lcpEl": "IMG.door door-l door_l-477.webp",
+  "kb": 327,
+  "highImgKB": 203,
+  "cls": 0.0022,
+  "shifts": []
+ },
+ "sky-lantern-festival": {
+  "lcp": 884,
+  "lcpEl": "IMG.lantern-dark lantern_dark-800.webp",
+  "kb": 276,
+  "highImgKB": 152,
+  "cls": 0.0018,
+  "shifts": []
+ },
+ "sunflower-rustic-barn": {
+  "lcp": 4104,
+  "lcpEl": "IMG.env-closed env_closed-880.webp",
+  "kb": 1146,
+  "highImgKB": 462,
+  "cls": 0.006,
+  "shifts": [
+   [
+    1326,
+    0.0022,
+    "HEADER.env-head,DIV.closure-clip,DIV.env-hint"
+   ],
+   [
+    1870,
+    0.0031,
+    "HEADER.env-head,DIV.closure-clip,DIV.env-hint"
+   ]
+  ]
+ },
+ "tropical-destination": {
+  "lcp": 2248,
+  "lcpEl": "IMG.env-closed env_closed-567.webp",
+  "kb": 802,
+  "highImgKB": 413,
+  "cls": 0,
+  "shifts": []
+ },
+ "tuscan-vineyard": {
+  "lcp": 3844,
+  "lcpEl": "IMG.env-closed env_closed-880.webp",
+  "kb": 1102,
+  "highImgKB": 584,
+  "cls": 0.0007,
+  "shifts": []
+ },
+ "velvet-jewel-box": {
+  "lcp": 696,
+  "lcpEl": "IMG.box-base box_base-716.webp",
+  "kb": 397,
+  "highImgKB": 219,
+  "cls": 0.0016,
+  "shifts": []
+ },
+ "vintage-airmail-love-letter": {
+  "lcp": 3208,
+  "lcpEl": "IMG.env-open env_open-880.webp",
+  "kb": 887,
+  "highImgKB": 591,
+  "cls": 0.0009,
+  "shifts": []
+ },
+ "wildflower-meadow-vellum": {
+  "lcp": 992,
+  "lcpEl": "IMG.sleeve-body sleeve_body-720.webp",
+  "kb": 569,
+  "highImgKB": 306,
+  "cls": 0.0013,
+  "shifts": []
+ },
+ "winter-evergreen": {
+  "lcp": 3176,
+  "lcpEl": "IMG.env-closed env_closed-880.webp",
+  "kb": 881,
+  "highImgKB": 408,
+  "cls": 0.0025,
+  "shifts": []
+ }
+}

@@ -10,7 +10,7 @@
 /* stage:end */
 :root{--pit:#061416;--velvet:#0e3d40;--peacock:#16595b;--gold:#c9a45c;--gold-light:#e3c78b;--gold-ink:#6e5119;
 --ivory:#f3ebd8;--ink:#1e2626;--ink-soft:#4a4238;--line:#c9a45c55;--line-ink:#6e511966;
---display:'Abril Fatface',Georgia,serif;--serif:'Playfair Display',Georgia,serif;color-scheme:dark;--nav-h:62px;
+--display:'Abril Fatface',fb1,fb2,Georgia,serif;--serif:'Playfair Display',Georgia,serif;color-scheme:dark;--nav-h:62px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}
