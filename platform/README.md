@@ -23,7 +23,10 @@ npm test               # node:test — motor, içerik, anahtar/slug, adaptör (l
 npm run typecheck      # tsc --noEmit
 npm run build          # prebuild: scripts/theme-assets.cjs (tema CSS/JS/görselleri → public/themes, G159) + next build (Turbopack)
                        # + postbuild: scripts/trace-check.cjs (Vercel paketleri: şablonlar var mı, tema varlığı yok mu, bütçe)
-                       #   + scripts/js-budget.cjs (G173: her sayfa rotasının ilk yük JS'i, gzip, grup bütçesiyle — /edit ≤ 270, /start ≤ 160, satış ≤ 155 KB)
+                       #   + scripts/js-budget.cjs (G173: her sayfa rotasının ilk yük JS'i, gzip, grup bütçesiyle — /edit ≤ 205 (G181), /start ≤ 160, satış ≤ 155 KB)
+NODE_PATH=/opt/node22/lib/node_modules node tests/g181-browser.ts
+                       # build sonrası (G181): panel görünüm başına bölündü (components/panel/lazy.tsx) — derin linkler (#share, #edit/photos …)
+                       # doğru görünümü açar, JS'siz ilk boyama (?view= ile sunucu çizimi / iskelet), boşta ön-yükleme, anlık geçiş
 NODE_PATH=/opt/node22/lib/node_modules node tests/g173-browser.ts [--out <f.json>] [--only <yol>]
                        # build sonrası (G173): 390 px, CPU 4×, yavaş 4G — satış, /start, 8 demo, panel görünümleri: LCP/CLS/TBT/INP, aktarım,
                        # axe (serious/critical), dokunma hedefi, odak sırası, reduced motion; her demonun zarf odak halkası → previews/g173/
@@ -624,6 +627,14 @@ G066'dan beri BKE Studio görünümü (aşağıda "Panel v2 …" → "Görünüm
 > ve Publish, yayımlanmamış değişiklik şeridi. Bu bölümdeki kurallar (link/anahtar, uzunluk sınırları, temaya göre alanlar, örnek
 > metin işareti, otomatik kayıt ve 409, doğrulama, taslak kuralları, önizleme anahtarı, yayın, QR, fotoğraf hattı) aynen sürüyor;
 > yalnız düğme/yerleşim anlatımı (bölüm adları, "Before you publish" listesi, "Publish changes" düğmesi) eski.
+
+> **Yükleme (G181):** panel görünüm başına ayrı chunk'tır (`components/panel/lazy.tsx`, `next/dynamic`): ilk yük = kabuk
+> (`Panel.tsx`: yönlendirme, otomatik kayıt, çubuklar, önizleme, sheet çerçevesi) + açılan görünüm; diğer görünümler ve sheet'ler
+> tarayıcı boştayken (`requestIdleCallback`) iner, geçiş anlık kalır. Sunucu hash'i görmez: derin linkte (`#share`, `#edit/photos`,
+> kurulumu bu telefonda kapatılmış taslakta adressiz açılış = Home) sayfadaki küçük betik (`BootShell`) görünümün iskeletini
+> gösterir ve sayfayı bir kez `?view=<hash>` ile ister (`location.replace`); sunucu o görünümü çizer, panel `view`'i adresten siler.
+> `/edit`'te script-src politikası yok (`next.config.ts`). Denetimler: `tests/g181-panel-split.test.ts` (ilk yükte görünüm kodu yok),
+> `tests/g181-browser.ts` (derin linkler, JS'siz ilk boyama, boşta ön-yükleme).
 
 - **Link:** anahtar hash ile doğrulanır (`authorizeEditor`). Yanlış/eksik anahtar, önizleme anahtarı, başka sitenin anahtarı ve
   bilinmeyen slug → **aynı** genel 404 sayfası ("This edit link is not valid"); slug'ın varlığı sızmaz. Sayfa `noindex`,

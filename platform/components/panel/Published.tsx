@@ -2,16 +2,17 @@
 // The "Your website is live" screen (G100, docs/18 §1 P1; Givingli / Luma): first the link and Share · Copy · Open; the QR
 // code and its PNG / SVG downloads fold under "More ways to share"; then two or three optional next steps, each opening a
 // part of the editor that really exists (Photos, the first sample field, Guests, the guest password under Share).
-// Used by the setup's last step (Setup.tsx) and by the first publish from the editor (Panel.tsx, the "live" sheet).
+// Used by the setup's last step (Setup.tsx) and by the first publish from the editor (Panel.tsx, the "live" sheet:
+// LiveSheetBody, loaded when the sheet opens — G181).
 // Copy feedback stays on the screen ("Copied" + a status line): a snackbar would sit over the next buttons here.
 
-import { Check, ChevronRight, Copy, ExternalLink, Share2 } from 'lucide-react';
+import { Check, ChevronRight, CircleCheckBig, Copy, ExternalLink, Share2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import { photoAt, type PanelTheme, type PublishNote } from '../../lib/panel/model.ts';
 import { QrCode } from './QrCode.tsx';
 import { Button, cx, Disclosure } from './ui.tsx';
-import { UrlText } from './views.tsx';
+import { UrlText } from './UrlText.tsx';
 import styles from './panel.module.css';
 import { t, tn } from '../../lib/i18n/client.ts';
 
@@ -121,5 +122,39 @@ export function AfterPublish({ steps, onGo, level = 2 }: { steps: AfterStep[]; o
         ))}
       </ul>
     </section>
+  );
+}
+
+/** The editor's "Your website is live" / "Share your website" sheet (G100). G181: Panel.tsx loads it when the sheet opens. */
+export function LiveSheetBody({
+  justPublished,
+  url,
+  fileBase,
+  content,
+  theme,
+  sample,
+  onGo,
+}: {
+  justPublished: boolean;
+  url: string;
+  fileBase: string;
+  content: ContentRecord;
+  theme: Pick<PanelTheme, 'photos'>;
+  sample: PublishNote[];
+  onGo: (path: string) => void;
+}) {
+  return (
+    <>
+      {/* G100 (docs/18 §1): the link and Share first; the QR code under "More ways to share"; then optional steps. */}
+      {justPublished ? (
+        <p className={styles.liveLead}>
+          <CircleCheckBig size={22} strokeWidth={1.75} aria-hidden="true" /> {t('Guests can open your website at:')}
+        </p>
+      ) : (
+        <p>{t('Guests can open your website at:')}</p>
+      )}
+      <LiveShare url={url} fileBase={fileBase} level={3} />
+      {justPublished ? <AfterPublish steps={afterPublishSteps(content, theme, sample)} onGo={onGo} level={3} /> : null}
+    </>
   );
 }

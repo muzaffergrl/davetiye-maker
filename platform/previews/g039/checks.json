@@ -72,7 +72,7 @@
     {
       "name": "focus: a field reached with Tab is not under the fixed bar",
       "ok": true,
-      "detail": "{\"id\":\"f-partners-0-full_name\",\"bottom\":567,\"barTop\":775}"
+      "detail": "{\"id\":\"f-partners-0-full_name\",\"bottom\":547,\"barTop\":775}"
     },
     {
       "name": "autosave: \"All changes saved\"",
@@ -130,12 +130,12 @@
     {
       "name": "photo: uploaded and stored in the draft",
       "ok": true,
-      "detail": "/media/493d1b47-6e6b-4071-a683-6cfc8891a3bb/f77d777f760d641bae5ce974c1bec286-890w.jpg"
+      "detail": "/media/5938ad7f-35c7-426e-a10e-b8ff410b6032/286126b7577686bac0b76baf9a2fbc06-890w.jpg"
     },
     {
       "name": "photo: the thumbnail is the small variant, with the preview key",
       "ok": true,
-      "detail": "/media/493d1b47-6e6b-4071-a683-6cfc8891a3bb/f77d777f760d641bae5ce974c1bec286-640w.jpg?preview=1792087200.nsCGqYYnNF7hXKZGNony4c9cJ7UsE3gjCYOVqdoW2N4"
+      "detail": "/media/5938ad7f-35c7-426e-a10e-b8ff410b6032/286126b7577686bac0b76baf9a2fbc06-640w.jpg?preview=1792328400.tELZXDIUUkEq4YQVkAfANFQrYxEqumauDcNfkYP9fHY"
     },
     {
       "name": "photo: not public before publishing",
@@ -176,8 +176,8 @@
     },
     {
       "name": "preview: 390 px wide",
-      "ok": true,
-      "detail": "390"
+      "ok": false,
+      "detail": "384.15000915527344"
     },
     {
       "name": "preview: shows the new names",
@@ -198,7 +198,7 @@
     {
       "name": "preview: Back closes it and stays in the editor",
       "ok": true,
-      "detail": "http://127.0.0.1:3395/edit/clara-and-julian?k=KPkKoHczq9TgEqfQ6sDtmd9UiTQTicf3h6DnIKCj9lY#home"
+      "detail": "http://127.0.0.1:3313/edit/clara-and-julian?k=14tFqS8pEvq-xJZET_kTRdYI_KmBX-WeSn0dO_WDTjw#home"
     },
     {
       "name": "preview: focus back on the Preview button",
@@ -218,6 +218,10 @@
       "ok": true
     },
     {
+      "name": "publish: the QR code is folded under \"More ways to share\"",
+      "ok": true
+    },
+    {
       "name": "QR: generated from the public URL",
       "ok": true
     },
@@ -230,7 +234,11 @@
       "ok": true
     },
     {
-      "name": "bar: a calm \"Live\" badge instead of Publish when up to date",
+      "name": "home: no Publish when up to date; the status card says Live, the bar does not repeat it",
+      "ok": true
+    },
+    {
+      "name": "bar: a calm \"Live\" badge instead of Publish when up to date (outside Home)",
       "ok": true
     },
     {
@@ -244,12 +252,12 @@
     {
       "name": "public page: uploaded photo loads (public once published)",
       "ok": true,
-      "detail": "{\"src\":\"/media/493d1b47-6e6b-4071-a683-6cfc8891a3bb/f77d777f760d641bae5ce974c1bec286-890w.jpg\",\"w\":390,\"srcset\":\"/media/493d1b47-6e6b-4071-a683-6cfc8891a3bb/f77d777f760d641bae5ce974c1bec286-640w.jpg 640w, /media/493d1b47-6e6b-4071-a683-6cfc8891a3bb/f77d777f760d641bae5ce974c1bec286-890w.jpg 890w\",\"current\":\"http://127.0.0.1:3395/media/493d1b47-6e6b-4071-a683-6cfc8891a3bb/f77d777f760d641bae5ce974c1bec286-890w.jpg\"}"
+      "detail": "{\"src\":\"/media/5938ad7f-35c7-426e-a10e-b8ff410b6032/286126b7577686bac0b76baf9a2fbc06-890w.jpg\",\"w\":390,\"srcset\":\"/media/5938ad7f-35c7-426e-a10e-b8ff410b6032/286126b7577686bac0b76baf9a2fbc06-640w.jpg 640w, /media/5938ad7f-35c7-426e-a10e-b8ff410b6032/286126b7577686bac0b76baf9a2fbc06-890w.jpg 890w\",\"current\":\"http://127.0.0.1:3313/media/5938ad7f-35c7-426e-a10e-b8ff410b6032/286126b7577686bac0b76baf9a2fbc06-890w.jpg\"}"
     },
     {
       "name": "public page: srcset with the 640 px variant (G055), the browser loads one of the files",
       "ok": true,
-      "detail": "http://127.0.0.1:3395/media/493d1b47-6e6b-4071-a683-6cfc8891a3bb/f77d777f760d641bae5ce974c1bec286-890w.jpg"
+      "detail": "http://127.0.0.1:3313/media/5938ad7f-35c7-426e-a10e-b8ff410b6032/286126b7577686bac0b76baf9a2fbc06-890w.jpg"
     },
     {
       "name": "public page: no horizontal overflow",
@@ -263,7 +271,7 @@
     {
       "name": "Guests: reply and counts listed",
       "ok": true,
-      "detail": "2 Guests coming 0 Not coming 1 Replies Replies close in 170 days. Last day: Saturday, April 3, 2027 (New York time). 1 new reply since you last looked on this d"
+      "detail": "Guest list Results 2 Guests coming 0 Not coming 1 Replies Replies Search replies by name All Coming Not coming New 1 1 reply Sort Newest first Oldest first Name"
     },
     {
       "name": "Guests: a reply can be removed",
@@ -276,8 +284,8 @@
     },
     {
       "name": "review (K29): lists the changed page (Details) and offers \"Publish changes\"",
-      "ok": true,
-      "detail": "Unpublished changes Your guests still see the version you published last. Changes are saved as you type; they go live when you publish. Changed since then: Details Publish changes Keep editing"
+      "ok": false,
+      "detail": "Unpublished changes Your guests still see the version you published last. Changes are saved as you type; they go live when you publish. Changed since then (tap the eye to preview a page): Details Deta"
     },
     {
       "name": "public page: unpublished edit not visible",
