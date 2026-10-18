@@ -177,3 +177,4 @@ GPT'den görsel gerekmedi; yeni dekor çizilmedi (K21).
 ## Günlük
 - 2026-10-18 claude-G180: ölçüldü (32 demo, önce/sonra), düzeltildi, testler → inceleme
 - 2026-10-18 entegratör onayladı
+- 2026-10-18 claude-G180: koordinatör mesajıyla 33–38'e de uygulandı ("33–38" bölümü; G188 kapsamıyla aynı iş) — dalda, inceleme bekliyor
