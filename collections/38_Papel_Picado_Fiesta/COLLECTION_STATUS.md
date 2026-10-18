@@ -8,7 +8,7 @@ bayraklar ve foto paspartuları bu tissue kâğıtlardan düz dikdörtgen kırp�
 | Parça | Durum |
 |---|---|
 | Website teması | `platform/themes/papel-picado-fiesta/` — 5 sayfa, açılış (kraft zarf + kemer bant: bayraklar göğe uçup süs dizisi olur ve dalgalanır, düz kapak 3B açılır, ampuller, kart), asılı kâğıt kesim çerçeveler (düşüp sallanma, kaydırma rüzgârı), teşekkür modu, G138/G127/G126/G128/G144 |
-| GPT PAKET 5 (kraft, kireç duvar, krem kâğıt, terrakota, zarf cebi, kapak, kapak astarı, 6 bayrak, ampul, 3 çerçeve, geniş çerçeve, begonvil, işlemeli bant, web_hero) | bekliyor — `assets/gpt/GPT_PROMPTS.md` (22 dosya); bırak-çalıştır provası GEÇTİ 21/23 (yalnız PAKET 6 elle) |
+| GPT PAKET 5 (kraft, kireç duvar, krem kâğıt, terrakota, zarf cebi, kapak, kapak astarı, 6 bayrak, ampul, 3 çerçeve, geniş çerçeve, begonvil, işlemeli bant, web_hero) | bekliyor — `assets/gpt/GPT_PROMPTS.md` (21 dosya); bırak-çalıştır provası GEÇTİ 21/23 (yalnız PAKET 6 elle) |
 | GPT PAKET 2 örnek fotoğraflar (kurgu Valeria & Diego) | bekliyor (5 dosya) |
 | GPT PAKET 6 basılı davetiye ön/arka | bekliyor (2 dosya); şimdilik geçici düzen (`lib/print/layouts.ts`, krem kâğıt + bayrak süs dizisi) |
 | Demo | `/start/demo/papel-picado-fiesta` (demo harita pini San Antonio, TX) |
