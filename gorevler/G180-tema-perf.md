@@ -2,11 +2,11 @@
 id: G180
 baslik: G173/G177'nin açık bıraktığı tema bulguları — isim fontu CLS'si, açılış LCP'si, alt menü, 32 düğme kontrastı (tema standardı olarak)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G180
 oncelik: 2
 bagimli: [G173, G177]
-yazar: [platform/scripts/font-fallback.ts, platform/scripts/lib/variant-check.ts, platform/themes/*/site.css, platform/themes/*/{index,home,story,details,rsvp}.html, platform/themes/vintage-airmail-love-letter/site.css, platform/themes/music-box-ballerina/variants.css, platform/tests/g180-theme-perf.test.ts, platform/tests/g180-browser.ts, platform/tests/theme-*.test.ts, platform/previews/g180/, platform/previews/g173/g180_after.json, docs/11_TEMA_STANDARDI.md, gorevler/G180-tema-perf.md]
+yazar: [platform/scripts/font-fallback.ts, platform/scripts/lib/variant-check.ts, platform/themes/*/site.css, platform/themes/*/{index, home, story, details, rsvp}.html, platform/themes/vintage-airmail-love-letter/site.css, platform/themes/music-box-ballerina/variants.css, platform/tests/g180-theme-perf.test.ts, platform/tests/g180-browser.ts, platform/tests/theme-*.test.ts, platform/previews/g180/, platform/previews/g173/g180_after.json, docs/11_TEMA_STANDARDI.md, gorevler/G180-tema-perf.md]
 ---
 
 ## Amaç
@@ -160,3 +160,4 @@ GPT'den görsel gerekmedi; yeni dekor çizilmedi (K21).
 
 ## Günlük
 - 2026-10-18 claude-G180: ölçüldü (32 demo, önce/sonra), düzeltildi, testler → inceleme
+- 2026-10-18 entegratör onayladı
