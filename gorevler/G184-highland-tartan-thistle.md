@@ -2,7 +2,7 @@
 id: G184
 baslik: 35 Highland Tartan & Thistle — yeni tasarım (3. dalga), platform teması (GPT parçalarından önce), coming kaydı
 rol: claude-kod
-durum: alindi
+durum: inceleme
 alan: claude-G184
 oncelik: 2
 bagimli: [G168, G175]
@@ -17,7 +17,7 @@ Satış durumu `coming`. Koordinatör: session_01HP9ZrJ8mhZnigbvsvUQ4pR. Dal `cl
 
 ## Talimat (koordinatör)
 
-GÖREV: G184 — 35 Highland Tartan & Thistle (`platform/themes/highland-tartan-thistle/`, `collections/35_Highland_Tartan_Thistle/`). Görev dosyası: `gorevler/G184-highland-tartan-thistle.md` (başlarken `durum: alindi`, bitince `durum: inceleme` + "Sonuç" bölümünü doldur).
+GÖREV: G184 — 35 Highland Tartan & Thistle (`platform/themes/highland-tartan-thistle/`, `collections/35_Highland_Tartan_Thistle/`). Görev dosyası: `gorevler/G184-highland-tartan-thistle.md` (başlarken `durum: inceleme`, bitince `durum: inceleme` + "Sonuç" bölümünü doldur).
 
 DAL: `claude/zealous-fermi-hy1o40`'tan (0b65f4ce) `claude/g184-highland-tartan-thistle` aç; yalnız oraya push et. PR açma, main'e dokunma, yayın yok, Etsy'ye bir şey gönderme.
 
@@ -38,8 +38,71 @@ TASARIM ÖZETİ (docs/24 satırı esas): Kapalı zarf/açılış: Ekoseli yün z
 
 BİTİŞ: dal push edildi; görev dosyasında Sonuç (yapılanlar, geçici görsel listesi, GPT bekleyen parça sayısı, kontrol komutları + sonuçları, denenmeyenler); `durum: inceleme`. Son mesajında 5 satırlık özet ver.
 
-## Sonuç
-_(görevi yapan ajan doldurur: ne yapıldı, hangi dosyalar, ne test edildi / edilmedi, blokaj, önerilen yeni görevler)_
+## Sonuç (2026-10-18, claude-G184)
+
+### Yapılanlar
+- **Tema** `platform/themes/highland-tartan-thistle/` (README, `build_images.py`, `img/manifest.json`, 5 şablon, `site.css`,
+  `site.js`, `parts.css` (üretilir), `thank-you.css`, `theme.json` 82 copy anahtarı, `content.demo.json`).
+- **K23 sıkı ilk sayfa:** katalog kapağı düzeni — üstte "Together with their families" (host_line) + "Invite you to
+  celebrate" + isimler, ortada kapalı zarf, altta tarih · şehir + "Tap to open", köşede Skip. Zarf 01–21'in V kapak + mum
+  mührü değil: **düz kapaklı yün zarf, dikey deri kayış, pirinç toka**.
+- **Açılış (3,65 s):** başlık/alt satır çekilir (0–450) → **tokanın çerçevesi alt çubuğunda devrilir** (150–600) → **kayış
+  tokadan yukarı kayıp çıkar**, toka onunla (600–1300) → **yün kapak üst katından 3B kalkar**, 90°'den sonra koyu astarı
+  görünür (1300–2100) → funda dalı yükselir (2000–2700, GPT; yoksa yok) → kart cepten yükselir (2500–3150) → öne gelir
+  (3150–3550) → home 3650 ms (VT `invite-card`). Tüm açılış boyunca iki sis katmanı tepelerden **zıt yönlere çekilir**
+  (0–3500). Arka, cep, kapak (iki yüz), kayış, toka, dal, kart, iki sis ayrı katman. Ses: toka 150, kayış 600, kapak 1300,
+  kart 2500, çan 3150 (`lib/audio/catalog.ts`, Evening Strings).
+- **Foto sunumu:** bütün oval fotoğraflar (home kartı, tanıtım, Story'nin üç anı) **pirinç madalyonda**; sahnesi gelince
+  **kapak sol menteşesinde açılır** (GPT kapak gelene kadar pirinç oval kırpım). Mekân fotoğrafı **sisten** (soldan açılan
+  yumuşak maske, `@property --clear`). Story/details arkasında iki sis katmanı kaydırmayla zıt yönlere süzülür (`--mist`).
+  Metin adımları "sisten netleşir" (bulanıktan keskine, soldan hafif).
+- **Sayfalar:** home (kart, davet bandı "Gathered in the hills", geri sayım, takvim, hikâye tanıtımı, günün 4 satırı, imza
+  devedikeni), details (program, G127 harita, G138 blokları, travel, menü, registry, SSS), rsvp (G128 form, G069, G051;
+  gönderince GPT funda çiçekçikleri düşer — yoksa yok), teşekkür modu (G075). Nav altta, `scroll-padding-bottom`. Üç yeni site
+  metni 4 dilde (`lib/i18n/dict/site/*`): "Gathered in the hills", "Invite you to celebrate", "Open the envelope".
+- **Font:** Rouge Script + Sorts Mill Goudy (01–32'de yok). docs/24 önerisi IM Fell English (13) + Pinyon Script (02/07/23)
+  kullanıldığı için seçilmedi.
+- **Demo:** Isla & Callum (Isla Morven Lennox, Callum Rhys Abernethy; I&C), Glenarden House (kurgu), Pitlochry, Perthshire,
+  United Kingdom, September 25, 2027, 2:00 PM; URL/medya `null`; demo pini Pitlochry (başka temada yok). Program/kıyafet
+  G150 sözlüğünden (Ceremony, Welcome drinks, Dinner & dancing, Late-night snacks, Formal attire). Dini simge, klan arması yok.
+- **Koleksiyon** `collections/35_Highland_Tartan_Thistle/`: `DESIGN_BRIEF.md`, `COLLECTION_STATUS.md` (`editable_draft`),
+  `content.demo.json`, `assets/gpt/GPT_PROMPTS.md` (PAKET 5 W2.1–W2.18 tam yol/ölçü/şeffaflık; #00FF00 pencereler: madalyon
+  çerçevesi + kart; zarf katmanları aynı tuvalde; PAKET 2 kurgu çift 5 foto (4:5 + 16:9); PAKET 6 ön/arka 1575×2175),
+  `assets/gpt/kuru_sekil.json`, `package/listing/listing_v3.md` (taslak; başlık 127 karakter, 13 etiket ≤ 20, `[PRICE]`).
+- **Basılı davetiye (G139):** `lib/print/layouts.ts` `composed` — krem kâğıt + üst/alt yün şeridi; `public/print/highland-tartan-thistle/`.
+- **Kayıtlar (eklemeli):** `config.ts` `coming` + `[PRICE]`; `designs.ts` DESIGN_COPY (açılış "Your guests tap the envelope. …",
+  openingObject = envelope → OPENING_THINGS/panel sözlüğü değişmedi) + DESIGN_STYLES (`classic`, `destination`); market
+  sözlükleri 4 dil; `demo-map.ts`; `katalog.py` EK_TEMALAR no=35 (6 eksen + hareket); g085/093/094/097 coming listesi, g138 tema
+  sayısı 33, g175 `designs.length` 33 + COMING_OPENINGS `envelope`.
+
+### Geçici görsel (K21) — GPT bekleyen: 20 PAKET 5 parçası + 5 PAKET 2 foto + 2 PAKET 6 sayfa
+Yün = 09'un düz keteni funda moruna (ekose **yok**, desen çizilmedi); zemin = 17'nin yeşil kadifesi koyu yosuna; kâğıt = 01
+kreme; deri = 07'nin kadifesi kahveye; pirinç = 17 mührünün düz metal yüzeyi (toka dikdörtgeni, madalyon kapağı oval kırpım);
+sis = 08'in kâğıdı ağır bulanık, kendi lekeleri alfa. Tepeler, funda, devedikeni, madalyon çerçevesi, çiçekçikler **yok**
+(`display:none`, `parts.css` gösterir). Görünüm sade; satış öncesi GPT parçaları + göz kontrolü şart.
+
+### Kontroller (Linux, Node 22; taban birleşmesinden sonra)
+- `npm ci`, `rm -rf .next`, `npx tsc --noEmit` ✓; `I18N_STRICT=1 npm test` **1662/1665 geçti, 0 hata, 3 atlandı** (önceden
+  atlananlar); `npm run build` ✓ (trace-check 34 tema).
+- `theme-check --theme highland-tartan-thistle --stress --compare none`: **112 geçti, 0 hata**, 1 uyarı (PAKET 2 yok → 03
+  fotoğrafları). İlk görünüm DPR 3: index 267 KB, home 177 KB (yer tutucu); fotoğraflı 358 / 369 KB. Reduced motion → home 106 ms.
+  (İlk koşuda açılmış madalyon kapakları ekran kenarını aşıyordu → kapak −90°'de gizlenir, `perspective-origin` menteşede.)
+- `tests/theme-highland-tartan-thistle.test.ts` 12/12; `tests/g149-print-layout.test.ts` ✓; `node scripts/i18n-missing.ts` 0
+  eksik; `copy-manifest --check` ✓; `katalog.py kontrol` ✓ (11 ek kayıt); `python3 -m pytest tools/tests -q` **111 geçti**.
+- `gpt_kuru_deneme.py --tema highland-tartan-thistle --sekil …`: **GEÇTİ 20/22** (okunmayan yalnız PAKET 6, bilerek elle).
+  Provada `parts.css`'te madalyon penceresi kuralında `inset:auto` sırası hatası bulundu ve düzeltildi.
+- 390 px görüntülere ve açılış karelerine baktım (`previews/g184/`, her biri ≤ 250 KB): toka devrilmesi, kayışın kayması,
+  kapağın 3B kalkışı (astar), kartın cepten yükselip öne gelmesi, sisin çekilmesi; 360 px stress (40 karakter isimler) taşmıyor.
+  İlk bakışta tokanın görünmediği görüldü (konumlanmamış iç öğe) → düzeltildi.
+
+### Denenmedi / açık
+- Gerçek iPhone Safari (3B kapak `backface-visibility`, `@property`) ve Android Chrome, Vercel yayını, gerçek alıcı
+  fotoğrafları, yavaş ağ, GPT parçalarıyla görünüm, sesin duyulması, g051-browser ve final-smoke.
+- **`tools/etsy_upload.py` kaydı yapılmadı:** satır eklenince kapsam dışı `tools/tests/test_build_customer_guides.py`
+  (01–32 sayar, LANGUAGE tablosu) kırılıyor; geri alındı. Öneri: 33–38 birleşince entegratör `etsy_upload.py` +
+  `build_customer_guides` testlerini birlikte açsın (listing_v3.md hazır, `--designs 35` kuralları yeşil verdi).
+- Renk paletleri (G177 benzeri) ve START HERE rehberi yok.
 
 ## Günlük
 - 2026-10-18 koordinatör: görev açıldı, bulut oturumuna verildi.
+- 2026-10-18 claude-G184: alındı; bitti, incelemeye gönderildi.
