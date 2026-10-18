@@ -2,7 +2,7 @@
 id: G181
 baslik: Panel (alıcının düzenleyicisi) JS'ini görünüm başına böl; derin linklerin (#share, #edit/photos …) ilk boyamasını hızlandır
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-G181
 oncelik: 2
 bagimli: [G173]
@@ -136,3 +136,4 @@ Diğer ölçümler:
 ## Günlük
 - 2026-10-18 claude-G181: bölme + derin link (iskelet → `?view=` ile sunucu çizimi), bütçe 205, testler → inceleme
 - 2026-10-18 claude-G181: `origin/claude/zealous-fermi-hy1o40` merge edildi; tam zincir, g181 (79/79), g100 ve g145 yeniden yeşil
+- 2026-10-18 entegratör onayladı

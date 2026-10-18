@@ -6,7 +6,7 @@
 // tests/g181-browser.ts.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import { PLATFORM_ROOT } from './helpers.ts';
@@ -74,8 +74,22 @@ test('the deep-link skeleton covers every address the panel opens (Panel.tsx Boo
 
 const BUILD = path.join(PLATFORM_ROOT, '.next');
 const built = existsSync(path.join(BUILD, 'BUILD_ID')) && existsSync(path.join(BUILD, 'build-manifest.json'));
+/** The newest panel source (components/panel, recursively): a build older than it would test yesterday's split. */
+function newestPanelSource(dir = PANEL): number {
+  let newest = 0;
+  for (const e of readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, e.name);
+    newest = Math.max(newest, e.isDirectory() ? newestPanelSource(p) : statSync(p).mtimeMs);
+  }
+  return newest;
+}
+const buildSkip = !built
+  ? 'no build (npm run build)'
+  : statSync(path.join(BUILD, 'BUILD_ID')).mtimeMs < newestPanelSource()
+    ? 'the build is older than components/panel (npm run build)'
+    : false;
 
-test('build: the first-load JS of /edit/[slug] holds no view’s code', { skip: built ? false : 'no build (npm run build)' }, () => {
+test('build: the first-load JS of /edit/[slug] holds no view’s code', { skip: buildSkip }, () => {
   const edit = jsBudget.routeJs(BUILD).find((r) => r.route === '/edit/[slug]');
   assert.ok(edit, 'the build has /edit/[slug]');
   const first = edit!.files.map((f) => readFileSync(path.join(BUILD, f), 'utf8')).join('\n');
