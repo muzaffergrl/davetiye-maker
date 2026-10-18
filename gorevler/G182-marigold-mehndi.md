@@ -80,7 +80,7 @@ ipek dikdörtgenleri + düz altın bant (kılıf). Püskül, yapraklar, kemer, k
 (`display:none`; `parts.css` gelince gösterir) — görünüm şu an sade, satış öncesi GPT parçaları + göz kontrolü şart.
 
 ### Kontroller (Linux, Node 22)
-- `npm ci`, `rm -rf .next`, `npx tsc --noEmit` ✓; `I18N_STRICT=1 npm test` **1662/1662 geçti**; `npm run build` ✓
+- `npm ci`, `rm -rf .next`, `npx tsc --noEmit` ✓; `I18N_STRICT=1 npm test` **1662/1662 geçti**; taban birleşmesinden (`origin/claude/zealous-fermi-hy1o40` f2051280, çakışmasız) sonra yeniden: `tsc` ✓, **1663 geçti, 0 hata, 3 atlandı (tabandaki atlananlar)**, `npm run build` ✓
   (trace-check 34 tema, js-budget ✓). İlk koşuda tek hata: demo SSS yanıtı ("30 minutes") G150 sözlüğünde yoktu →
   sözlükteki "20 minutes" cümlesi.
 - `theme-check --theme marigold-mehndi --stress --compare none`: **112 geçti, 0 hata**, 1 uyarı (PAKET 2 yok → 03
