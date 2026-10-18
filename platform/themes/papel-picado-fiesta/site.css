@@ -8,7 +8,7 @@
 :root{--wall:#f5e9d8;--paper:#fbf4e8;--cream:#fff8ec;--kraft:#b78a5b;--kraft-deep:#7a5332;--terra:#b0502f;--terra-deep:#8a3a1f;
 --ink:#3b2418;--ink-soft:#6b5141;--pink:#c2306e;--pink-bright:#d63a7a;--marigold:#f2a31b;--turq:#1c8f9c;--turq-deep:#146c76;
 --lime:#6e9f3a;--violet:#7a4fa0;--coral:#e85637;--line:#8a3a1f33;--line-light:#fff8ec55;
---sign:'Oleo Script','Brush Script MT',cursive;--serif:'Alegreya','Georgia',serif;--nav-h:62px;--wind:0;color-scheme:light;
+--sign:'Oleo Script',fb1,fb2,'Brush Script MT',cursive;--serif:'Alegreya','Georgia',serif;--nav-h:62px;--wind:0;color-scheme:light;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}

@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-18T06:56:50.525Z",
+  "results": {
+    "red-lacquer-double-happiness": {
+      "load": {
+        "lcp": 1024,
+        "lcpElement": "env-back red-640.webp",
+        "cls": 0.0035,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/red-lacquer-double-happiness/img/ph_round-640.webp"
+        ],
+        "deferred": [],
+        "kb": 209,
+        "early": [],
+        "sinceLoad": 6028
+      },
+      "lateFont": {
+        "lcp": 1024,
+        "lcpElement": "env-back red-640.webp",
+        "cls": 0.0035,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/red-lacquer-double-happiness/img/ph_round-640.webp"
+        ],
+        "deferred": [],
+        "kb": 209,
+        "early": [],
+        "sinceLoad": 9027
+      },
+      "geometry": {
+        "web": {
+          ".names": [
+            169,
+            66
+          ],
+          ".kicker": null,
+          ".stage": [
+            259,
+            366
+          ]
+        },
+        "fallback": {
+          ".names": [
+            169,
+            66
+          ],
+          ".kicker": null,
+          ".stage": [
+            259,
+            366
+          ]
+        }
+      },
+      "underNav": {
+        "home": [],
+        "story": [],
+        "details": [],
+        "rsvp": [],
+        "rsvp+accept": []
+      }
+    }
+  },
+  "checks": [
+    {
+      "name": "red-lacquer-double-happiness: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0.0035
+    },
+    {
+      "name": "red-lacquer-double-happiness: CLS ≤ 0.1 with the fonts 3 s late",
+      "ok": true,
+      "detail": 0.0035
+    },
+    {
+      "name": "red-lacquer-double-happiness: names fallback sets the names where the web font does (±2 px)",
+      "ok": true
+    },
+    {
+      "name": "red-lacquer-double-happiness: nothing under the fixed bottom nav at the end of a page",
+      "ok": true
+    }
+  ]
+}

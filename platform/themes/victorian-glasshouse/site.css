@@ -7,8 +7,8 @@
 @property --wipe{syntax:'<percentage>';inherits:false;initial-value:-30%}
 :root{--fern:#1c3328;--fern-2:#2f523e;--fern-deep:#12241b;--glass:#e2eae3;--paper:#f3eddf;--paper-2:#dfe3d6;--ink:#1e2b24;
 --ink-soft:#4a5a50;--copper:#b26a3c;--copper-light:#d99a68;--copper-ink:#8a4a22;--verdigris:#6f9e8e;--kraft:#ac8054;
---mist:#eef3ef;--line:#d99a6852;--line-ink:#1e2b2433;--serif:'Old Standard TT','Times New Roman',serif;
---script:'Monsieur La Doulaise','Snell Roundhand',cursive;--nav-h:62px;--sy:0;color-scheme:light;
+--mist:#eef3ef;--line:#d99a6852;--line-ink:#1e2b2433;--serif:'Old Standard TT',fk1,fk2,'Times New Roman',serif;
+--script:'Monsieur La Doulaise',fb1,fb2,'Snell Roundhand',cursive;--nav-h:62px;--sy:0;color-scheme:light;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}

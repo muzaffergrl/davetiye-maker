@@ -12,6 +12,7 @@
 //    the stage's high-priority image has loaded, and all of them have loaded by 3 s after the load event (before a tap).
 // 4. Fixed bottom nav: on every inner page (and the RSVP page with "accept" chosen) scrolled to the very end, no text or
 //    control of the page lies under the fixed nav.
+// 5. Buttons with a solid fill (.btn, button, [role=button]) on every page: text ≥ 4.5:1 on the fill (3:1 large).
 // Writes previews/g180/<out> (default metrics.json); exit 1 when a check fails. Playwright from NODE_PATH and
 // /opt/pw-browsers (never `playwright install`).
 
@@ -164,6 +165,37 @@ async function underNav(id: string) {
   return out;
 }
 
+/** Solid-filled buttons whose text is below 4.5:1 (3:1 large) on their own fill, every page. */
+async function lowButtons(id: string) {
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
+  const page = await ctx.newPage();
+  const lows = new Set<string>();
+  for (const pg of ['', '/home', '/story', '/details', '/rsvp']) {
+    const res = await page.goto(`${BASE}/start/demo/${id}${pg}?preview=demo`, { waitUntil: 'load' }).catch(() => null);
+    if (!res || res.status() >= 400) continue;
+    await page.evaluate(() => document.documentElement.classList.add('is-opened'));
+    const found: string[] = await page.evaluate(() => {
+      const rgb = (s: string) => s.match(/[\d.]+/g)?.map(Number) ?? null;
+      const lum = (c: number[]) => { const f = (v: number) => ((v /= 255) <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4); return 0.2126 * f(c[0]) + 0.7152 * f(c[1]) + 0.0722 * f(c[2]); };
+      const out: string[] = [];
+      for (const e of document.querySelectorAll('.btn, button, [role=button]:not(.stage), input[type=submit]')) {
+        const cs = getComputedStyle(e);
+        const bg = rgb(cs.backgroundColor);
+        const text = (e.textContent || '').trim();
+        if (!text || !e.getClientRects().length || cs.visibility === 'hidden' || !bg || (bg.length > 3 && bg[3] < 0.9) || cs.backgroundImage !== 'none') continue;
+        const [a, b] = [lum(rgb(cs.color)!), lum(bg)];
+        const ratio = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+        const large = parseFloat(cs.fontSize) >= 24 || (parseFloat(cs.fontSize) >= 18.66 && Number(cs.fontWeight) >= 700);
+        if (ratio < (large ? 3 : 4.5)) out.push(`"${text.slice(0, 20)}" ${cs.color} on ${cs.backgroundColor} ${ratio.toFixed(2)}:1`);
+      }
+      return out;
+    });
+    found.forEach((x) => lows.add(x));
+  }
+  await ctx.close();
+  return [...lows];
+}
+
 try {
   await waitForServer(BASE, 60_000, server);
   for (const id of ids) {
@@ -188,6 +220,8 @@ try {
     r.underNav = await underNav(id);
     const hits = Object.entries(r.underNav).filter(([, h]) => (h as string[]).length);
     check(`${id}: nothing under the fixed bottom nav at the end of a page`, hits.length === 0, hits.length ? Object.fromEntries(hits) : undefined);
+    r.lowButtons = await lowButtons(id);
+    check(`${id}: button text ≥ 4.5:1 on its fill (3:1 large)`, r.lowButtons.length === 0, r.lowButtons.length ? r.lowButtons : undefined);
   }
 } finally {
   writeFileSync(path.join(OUT, args.out!), JSON.stringify({ date: new Date().toISOString(), results, checks }, null, 2) + '\n');
