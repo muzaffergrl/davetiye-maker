@@ -2,11 +2,11 @@
 
 `python3 tools/gpt_is_listesi.py --yaz` (ya da `tools/gpt_bekleyen.py --yaz`) ile üretilir; elle düzenlenmez. Kaynak: bütün `GPT_PROMPTS.md` dosyaları. Her madde kendi başına yapıştırılabilir tam İngilizce prompt'tur. Tıklanabilir, kopyalama düğmeli ve işaretlenebilir sürüm: [`27_GPT_IS_LISTESI.html`](27_GPT_IS_LISTESI.html) (tarayıcıda aç).
 
-**Toplam: 493 görsel** · A · Tasarım 22–32 (yeni tasarımlar): 435 · B · Tasarım 01–21 rötuş / baskı parçaları: 42 · C · Palet varyantı görselleri: 16
+**Toplam: 493 görsel** · A · Tasarım 22–38 (yeni tasarımlar): 435 · B · Tasarım 01–21 rötuş / baskı parçaları: 42 · C · Palet varyantı görselleri: 16
 
 ## Neden bu sıra
 
-22–32 tasarımları ancak kendi website parçaları (PAKET 5) gelince geçici yer tutuculardan çıkıp live olabilir; örnek fotoğraflar (PAKET 2) theme-check ve demo için, ilan sahneleri (PAKET 3) ve baskı zeminleri (PAKET 6) satış paketi için gerekir. 01–21'in website parçaları tam; bu gruptaki 2× baskı parçaları yalnız basılı davetiyeyi ~230 ppi'den 300 ppi'ye çıkarır (bugünkü parçalarla da çalışıyor). Palet varyantları en sonda: o paletler `coming` ve GPT gelene dek asıl renkli parçayla görünüyor; fildişi gül paleti yalnız istenirse.
+22–38 tasarımları ancak kendi website parçaları (PAKET 5) gelince geçici yer tutuculardan çıkıp live olabilir; örnek fotoğraflar (PAKET 2) theme-check ve demo için, ilan sahneleri (PAKET 3) ve baskı zeminleri (PAKET 6) satış paketi için gerekir. 01–21'in website parçaları tam; bu gruptaki 2× baskı parçaları yalnız basılı davetiyeyi ~230 ppi'den 300 ppi'ye çıkarır (bugünkü parçalarla da çalışıyor). Palet varyantları en sonda: o paletler `coming` ve GPT gelene dek asıl renkli parçayla görünüyor; fildişi gül paleti yalnız istenirse.
 
 ## ChatGPT'de çalışma
 
@@ -64,7 +64,7 @@
 | C | 16_Sunflower_Rustic | 15 |
 | C | 21_Crimson_Rose_Atelier | 1 |
 
-## A · Tasarım 22–32 (yeni tasarımlar)
+## A · Tasarım 22–38 (yeni tasarımlar)
 
 ### 22_Nocturne_Lake_Estate
 
@@ -5913,7 +5913,7 @@ Kontrol: yatayda dikişsiz; tek sıra çiçek; krem zemin; yazı yok.
 - Hedef: `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/web_hero.png`
 - Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
 - Şart: 1536×1024 px (3:2) · opak · PNG
-- Ek görsel: envelope_pocket.png (listede #412), 6.png (bulunamadı), limewash_wall.png (listede #409), bougainvillea.png (listede #426), cream_paper.png (listede #410), bulb.png (listede #421)
+- Ek görsel: envelope_pocket.png (listede #412), limewash_wall.png (listede #409), bougainvillea.png (listede #426), cream_paper.png (listede #410), bulb.png (listede #421)
 
 ```
 Wide horizontal still life, photorealistic, warm late afternoon sun from the top-left: the portrait kraft envelope of envelope_pocket.png with its straight flap closed and a belly band of six papel picado flags (as flag_1–6.png) wrapped across it, lying slightly below the centre on a sunlit limewash courtyard table (as limewash_wall.png), a sprig of fuchsia bougainvillea (as bougainvillea.png) at the left, a cream card (as cream_paper.png, blank) and a small terracotta dish at the right; above, out of focus, a garland of papel picado flags and a string of glowing bulbs (as bulb.png) across a warm wall. The top 20% of the image is calm and soft. This image is cropped to 1200×630 for link previews: keep the whole envelope visible with at least 5% empty margin below it. No people, no text, letters, numbers or symbols, no logos.
@@ -5985,7 +5985,7 @@ Landscape 16:9: a sunlit Spanish-colonial-style courtyard prepared for a wedding
 - Hedef: `collections/38_Papel_Picado_Fiesta/assets/gpt/print/invitation_front_5x7.png`
 - Bölüm: PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5) (baskı parçası (PAKET 6 / G139))
 - Şart: 1575×2175 px (21:29) · opak · PNG
-- Ek görsel: cream_paper.png (listede #410), 6.png (bulunamadı), bougainvillea.png (listede #426), embroidery_band.png (listede #427)
+- Ek görsel: cream_paper.png (listede #410), bougainvillea.png (listede #426), embroidery_band.png (listede #427)
 
 ```
 The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the warm cream card stock of cream_paper.png. Across the top, a garland of six small papel picado flags (as flag_1–6.png, fuchsia, marigold, turquoise, lime, violet, coral) hanging from a natural twine that sags gently from the top corners, the flags' lowest points staying above 17% of the height; a small sprig of fuchsia bougainvillea (as bougainvillea.png) tucked at the top-left corner. Along the bottom edge a slim band of the embroidered folk-flower ribbon of embroidery_band.png, about 5% of the height, staying below 92%. The rectangle from 19% to 91% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm paper (the names, date and venue are set there): no flag, no petal, no line, no shadow, no stain in it. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
@@ -5999,7 +5999,6 @@ Kontrol: tam taşma; %19–%91 × %10–%90 tamamen boş; yazı yok; süs dizisi
 - Hedef: `collections/38_Papel_Picado_Fiesta/assets/gpt/print/invitation_back_5x7.png`
 - Bölüm: PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5) (baskı parçası (PAKET 6 / G139))
 - Şart: 1575×2175 px (21:29) · opak · PNG
-- Ek görsel: 6.png (bulunamadı)
 
 ```
 The back of the same printed wedding invitation, full bleed, portrait 5.25:7.25, perfectly flat: the same cream card stock, only a short garland of four small papel picado flags (as flag_1–6.png) hanging from a twine across the top centre, their lowest points staying above 11% of the height. Everything below 13% of the height, and everything between 9% and 91% of the width, is COMPLETELY EMPTY paper (a schedule and a QR code are set there): no flag, no line, no shadow, no stain. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1575×2175 px.
