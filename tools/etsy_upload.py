@@ -181,9 +181,10 @@ def images(md: str, listing: Path, status: str = IMAGES_STATUS) -> tuple[list[di
 
 
 def commerce(theme: str, config: str | None = None) -> dict[str, str]:
-    """G175: the design's sales status and price in platform/lib/marketing/config.ts ({"status": "live"|"coming", "price": …})."""
+    """G175: the design's sales status and price in platform/lib/marketing/config.ts ({"status": "live"|"preview"|"coming",
+    "price": …}). "preview" (main f1228e88) is in the site catalogue but, like "coming", not for sale (K41)."""
     config = CONFIG.read_text(encoding="utf-8") if config is None else config
-    m = re.search(rf"id: '{re.escape(theme)}',\s*\n\s*name: '[^']+',\s*\n\s*status: '(live|coming)',\s*\n(?:\s*featured: \w+,\s*\n)?\s*price: '([^']*)'",
+    m = re.search(rf"id: '{re.escape(theme)}',\s*\n\s*name: '[^']+',\s*\n\s*status: '(live|preview|coming)',\s*\n(?:\s*featured: \w+,\s*\n)?\s*price: '([^']*)'",
                   config)
     if not m:
         raise SystemExit(f"{CONFIG.relative_to(REPO)}: no status/price for '{theme}'")
@@ -270,8 +271,8 @@ def build(no: str, folder: str, theme: str) -> tuple[dict, list[str]]:
         blockers.append("listing video missing")
     if not pdf.exists():
         blockers.append(f"digital file missing: {pdf.relative_to(REPO).as_posix()} (the START HERE guide Etsy delivers)")
-    if sale["status"] == "coming":  # G175 (K41): not for sale; the price is confirmed with the sale
-        blockers.append("sales status 'coming' in platform/lib/marketing/config.ts (K41: not for sale)")
+    if sale["status"] != "live":  # G175 (K41): 'coming' or 'preview' is not for sale; the price is confirmed with the sale
+        blockers.append(f"sales status '{sale['status']}' in platform/lib/marketing/config.ts (K41: not for sale)")
     if sale["price"] != str(PRICE_TRY):
         blockers.append(f"price not decided for this design (config.ts price '{sale['price']}'; "
                         f"{PRICE_TRY} TL is the 01–21 design price, docs/23 §1)")

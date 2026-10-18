@@ -44,7 +44,8 @@ def test_design_table():
     every = {t for _, _, t in eu.DESIGNS}
     assert live == every - COMING, sorted(live ^ (every - COMING))
     for theme in COMING:  # same TS style as the other entries since G142
-        assert re.search(rf"id: '{re.escape(theme)}',\s*\n\s*name: '[^']+',\s*\n\s*status: 'coming'", config), theme
+        # off sale: 'coming', or 'preview' (in the site catalogue, no checkout; main f1228e88)
+        assert re.search(rf"id: '{re.escape(theme)}',\s*\n\s*name: '[^']+',\s*\n\s*status: '(coming|preview)'", config), theme
     for no, folder, theme in eu.DESIGNS:
         assert folder.startswith(no + "_") and (REPO / "collections" / folder).is_dir(), folder
         assert (REPO / "platform" / "themes" / theme / "theme.json").exists(), theme
@@ -123,8 +124,8 @@ def test_real_listings():
         assert data["ready_to_publish"] is False and data["price_try"] == eu.PRICE_TRY == 1460, no
         assert data["quantity"] == 999, no
         if theme in COMING:  # G175 (K41): not for sale, price confirmed with the sale; both are blockers
-            assert data["sales_status"] == "coming" and "[PRICE]" in md and "| Price | **1,460 TL**" not in md, no
-            assert any(b.startswith("sales status 'coming'") for b in data["blockers"]), no
+            assert data["sales_status"] in ("coming", "preview") and "[PRICE]" in md and "| Price | **1,460 TL**" not in md, no
+            assert any(b.startswith(f"sales status '{data['sales_status']}'") for b in data["blockers"]), no
             assert any(b.startswith("price not decided") for b in data["blockers"]), no
             assert data["price_note"].startswith("Proposed:"), no
         else:
