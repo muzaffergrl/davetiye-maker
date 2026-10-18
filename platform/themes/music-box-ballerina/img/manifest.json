@@ -2171,5 +2171,8 @@
     "hinge": 165,
     "body_height": 555,
     "closed_flap_height": 316
+  },
+  "favicon": {
+    "file": "favicon.png"
   }
 }

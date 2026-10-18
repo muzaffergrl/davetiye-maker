@@ -6,20 +6,20 @@ import path from 'node:path';
 import test from 'node:test';
 import assets from '../lib/marketing/assets.json' with { type: 'json' };
 import { MARKETING } from '../lib/marketing/config.ts';
-import { liveDesigns, PANEL_SOURCES, showcaseDesigns } from '../lib/marketing/designs.ts';
+import { catalogDesigns, liveDesigns, PANEL_SOURCES, showcaseDesigns } from '../lib/marketing/designs.ts';
 import { DESIGN_GALLERY_COPY, EDIT_TOUR } from '../lib/marketing/showcase.ts';
 import { openingKinds } from '../components/marketing/showcase-data.ts';
 import { PLATFORM_ROOT } from './helpers.ts';
 
 const read = (rel: string) => readFileSync(path.join(PLATFORM_ROOT, rel), 'utf8');
 
-test('home showcase: every live design once, featured first, never a coming one', () => {
-  const live = liveDesigns();
+test('home showcase: every live and preview design once, featured first, never a coming one', () => {
+  const live = catalogDesigns();
   const show = showcaseDesigns();
   assert.deepEqual([...show.map((d) => d.id)].sort(), live.map((d) => d.id).sort());
   const firstPlain = show.findIndex((d) => !d.featured);
   assert.ok(show.slice(0, firstPlain).every((d) => d.featured) && show.slice(firstPlain).every((d) => !d.featured));
-  assert.ok(!show.some((d) => d.status !== 'live'));
+  assert.ok(show.every((d) => d.status === 'live' || d.status === 'preview'));
   const coming = MARKETING.designs.filter((d) => d.status === 'coming').map((d) => d.id);
   assert.ok(!show.some((d) => coming.includes(d.id)));
 });

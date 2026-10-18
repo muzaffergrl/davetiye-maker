@@ -1,8 +1,7 @@
-/* Blush Garden Rose — platform theme (design 03), styles of all pages; from the G035 demo. Visuals: GPT parts only
-   (img/, build_images.py); code does layout, type, motion — no drawn decor. Fonts: Google Fonts link (no files). */
+
 @view-transition { navigation: auto; }
 :root {
-  /* palette.json */
+
   --ink: #3F2A2E;
   --deep: #8B4F58;
   --primary: #E3A9AE;
@@ -12,7 +11,7 @@
   --gold-light: #E5CFA4;
   --ivory: #FFF9F6;
   --leaf: #9DAE93;
-  /* derived for legible text on blush */
+
   --ink-soft: #5E4146;
   --gold-ink: #A27C47;
   --page: #F2D8D7;
@@ -25,7 +24,7 @@
   --safe-b: env(safe-area-inset-bottom, 0px);
 }
 *, *::before, *::after { box-sizing: border-box; }
-/* overflow-x clip on the root: animated parts (bow sliding off, petals) must never widen the mobile layout viewport */
+
 html { -webkit-text-size-adjust: 100%; background: var(--page); overflow-x: clip; }
 body {
   margin: 0;
@@ -47,7 +46,7 @@ button { font: inherit; color: inherit; }
 .js .nojs-only { display: none; }
 .nojs-only { margin-top: 20px; }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-/* ---------------------------------------------------------------- type */
+
 .kicker {
   font-family: var(--display);
   font-weight: 600;
@@ -58,31 +57,31 @@ button { font: inherit; color: inherit; }
   color: var(--ink-soft);
 }
 .script { font-family: var(--script); font-weight: 400; color: var(--deep); line-height: 1.12; }
-/* the script's own "&" is too ornate at small sizes: always a non-script italic serif */
+
 .amp { font-family: var(--display); font-style: italic; font-weight: 500; color: var(--gold-ink); }
 .serif { font-family: var(--display); }
 .it { font-style: italic; }
 .nowrap { white-space: nowrap; }
-/* ---------------------------------------------------------------- backdrops */
+
 .scene-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
 .scene-bg > picture, .scene-bg > picture img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
 .florals { position: absolute; z-index: 1; pointer-events: none; user-select: none; height: auto; }
 .florals-tl { top: -3%; left: -4%; width: min(46vw, 68vh, 560px); }
 .florals-br { bottom: -3%; right: -4%; width: min(46vw, 68vh, 560px); }
-/* short phones (Safari bars, 360×640, panel preview): zoom in from the middle, the corner peonies off the text */
+
 @media (min-aspect-ratio: 1/2) and (max-aspect-ratio: 9/16) {
   .scene-bg > picture img { transform: scale(1.15); transform-origin: 50% 45%; }
 }
 @media (min-aspect-ratio: 9/16) and (max-aspect-ratio: 3/4) {
   .scene-bg > picture img { transform: scale(1.35); transform-origin: 50% 45%; }
 }
-/* phones: the painted backdrop already carries its corner florals */
+
 .land-only { display: none; }
 @media (min-aspect-ratio: 3/4) {
   .land-only { display: block; }
   .port-only { display: none; }
 }
-/* ---------------------------------------------------------------- buttons, links */
+
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: .5em;
   min-height: 46px; padding: 0 28px;
@@ -105,14 +104,11 @@ button { font: inherit; color: inherit; }
   color: var(--deep); text-decoration: none; border-bottom: 1px solid rgb(155 93 102/.4); padding-bottom: 2px;
 }
 :focus-visible { outline: 2px solid var(--deep); outline-offset: 3px; }
-/* small text links keep their look but get a 44 px touch area */
+
 .textlink.replay, .closing .textlink { position: relative; }
 .textlink.replay::after, .closing .textlink::after { content: ""; position: absolute; inset: 0 -8px; }
 .closing .textlink{display:inline-block;padding-top:23px;margin:-23px 0 -3px}
 
-/* ==========================================================================
-   Motion presets: data-step (order, site.js MOTION) + data-a (how it enters); without JS all visible
-   ========================================================================== */
 .js [data-step] {
   opacity: 0;
   transition: opacity var(--dur, 1000ms) var(--ease-out), transform var(--dur, 1000ms) var(--ease-out),
@@ -126,19 +122,16 @@ button { font: inherit; color: inherit; }
 .js [data-a="drift-br"] { transform: translate3d(16%, 12%, 0) rotate(6deg); --dur: 1800ms; }
 .js [data-a="drift-l"] { transform: translate3d(-40px, 0, 0); }
 .js [data-a="drift-r"] { transform: translate3d(40px, 0, 0); }
-/* "write": the script line is unveiled left → right like a pen stroke */
+
 .js [data-a="write"] { opacity: 1; clip-path: inset(-30% 100% -30% 0); --dur: 1500ms; }
-/* "unfurl": small dividers open from the centre */
+
 .js [data-a="unfurl"] { opacity: 1; clip-path: inset(0 50% 0 50%); --dur: 1100ms; }
 .js [data-step].in { opacity: 1; transform: none; }
 .js [data-a="write"].in, .js [data-a="unfurl"].in { clip-path: inset(-30% -8% -30% -8%); }
 .js [data-step].done { will-change: auto; }
 
-/* ==========================================================================
-   Page 1 — envelope landing (index.html)
-   ========================================================================== */
 .env-page {
-  /* envelope width (open envelope canvas 966×1349), less the long names' extra height (--names-x, site.js fitText) */
+
   --w: calc(min(84vw, 44svh, 460px) - var(--names-x, 0px));
   position: relative; z-index: 2;
   min-height: 100vh; min-height: 100svh;
@@ -148,9 +141,9 @@ button { font: inherit; color: inherit; }
   overflow: clip;
 }
 .env-head { position: relative; z-index: 1; }
-/* the kicker's box is its text (wrapped long names widen the head to the column; the line stays centred) */
+
 .env-head > .kicker { width: fit-content; margin-inline: auto; }
-/* legibility over the painted backdrop: a soft blush glow behind text (no shape) */
+
 .env-head, .env-hint, .env-after, .hero-inner > :not(.hero-card) { text-shadow: 0 0 14px #fbedecf2, 0 0 4px #fbedeccc; }
 .env-head .names { font-size: calc(clamp(46px, 14vw, 78px) * var(--fit, 1)); margin-top: 4px; text-wrap: balance; overflow-wrap: anywhere; }
 .env-head .names .amp { font-size: .62em; padding: 0 .06em; }
@@ -159,12 +152,12 @@ button { font: inherit; color: inherit; }
   position: relative; z-index: 2;
   width: var(--w);
   aspect-ratio: 966 / 1349;
-  /* the top 35% of the canvas is room for the open flap/card: tuck it under the names */
+
   margin-top: calc(18px - var(--w) * .49);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
-/* G173: visible ring */
+
 .stage:focus-visible { outline-offset: -4px; }
 .env { position: absolute; inset: 0; }
 .env > * , .card-slot > .card { position: absolute; }
@@ -174,8 +167,8 @@ button { font: inherit; color: inherit; }
 .card-slot { left: 0; top: 0; width: 100%; height: 100%; clip-path: inset(-80% -25% 3.3% -25%); }
 .env-pocket{ left: 0; top: 35.211%; width: 100%; height: 64.789%; opacity: 0; }
 .env-closed{ left: .341%; top: 34.788%; width: 98.944%; height: 64.503%; }
-/* the closed flap (manifest env_cflap.cut) lies on env-closed and lifts on its hinge; then env-flap takes over */
-.env-cflap { left: .341%; top: 34.788%; width: 98.944%; height: 34.698%;   /* 64.503% × 53.793% */
+
+.env-cflap { left: .341%; top: 34.788%; width: 98.944%; height: 34.698%;
              transform-origin: 50% 2.015%; backface-visibility: hidden; }
 .env-ribbon{ left: 1.884%; top: 47.07%; width: 96.37%; height: 42.03%; transform-origin: 50% 35%; }
 .env-page .card { left: 22.5%; top: 76%; width: 55%; }
@@ -191,7 +184,7 @@ button { font: inherit; color: inherit; }
 @media (hover: hover) and (pointer: fine) { .env-hint .tap { display: none; } .env-hint .click { display: inline; } }
 @media (min-aspect-ratio: 3/4) { .env-page { --w: calc(min(84vw, 50svh, 540px) - var(--names-x, 0px)); } .env-head { max-width: max(40vw, 420px); } }
 .env-after { position: relative; z-index: 3; margin-top: 18px; display: none; flex-direction: column; align-items: center; gap: 14px; }
-/* "Replay" sits low (painted florals on many phones): a soft wash behind it, a 44 px tap target */
+
 .env-after .replay { background: #fff9f6c7; border: 0; border-radius: 999px; padding: 12px 18px; min-height: 44px; cursor: pointer; }
 .skip {
   position: fixed; z-index: 20; top: max(14px, env(safe-area-inset-top)); right: 16px;
@@ -202,7 +195,6 @@ button { font: inherit; color: inherit; }
 }
 .skip span { border-bottom: 1px solid rgb(94 65 70/.35); padding-bottom: 2px; }
 
-/* opened state (back-navigation / replay offer): open envelope, card out, no hint */
 .is-opened .env-page .env-closed, .is-opened .env-page .env-cflap, .is-opened .env-page .env-ribbon { opacity: 0; }
 .is-opened .env-page .env-flap { opacity: 1; transform: none; }
 .is-opened .env-page .env-body, .is-opened .env-page .env-pocket { opacity: 1; }
@@ -213,33 +205,26 @@ button { font: inherit; color: inherit; }
 .is-opened .env-after { display: flex; }
 .is-opened .skip { display: none; }
 
-/* petals (index opening, home arrival, closing) */
 .petal-layer { position: fixed; inset: 0; z-index: 30; pointer-events: none; overflow: hidden; }
 .petal-layer img { position: absolute; top: 0; left: 0; will-change: transform, opacity; }
 
-/* ==========================================================================
-   The little arch card (index card ↔ home hero card share it; morphs between pages)
-   ========================================================================== */
 .card { aspect-ratio: 804 / 1254; container-type: inline-size; view-transition-name: invite-card; }
-/* the envelope's card is named only when it may morph (opened, or go() in site.js): else it floats unclipped on replay */
+
 .env-page .card { view-transition-name: none; }
 .card > img { position: absolute; inset: 0; width: 100%; height: 100%; }
-.card .photo-slot { left: 14.677%; top: 9.569%; width: 70.522%; height: 47.448%; }   /* manifest photo_slots.card */
+.card .photo-slot { left: 14.677%; top: 9.569%; width: 70.522%; height: 47.448%; }
 .card-copy { position: absolute; left: 8%; right: 8%; top: 60.5%; text-align: center; }
 .card-copy .script { font-size: 11.6cqw; line-height: 1.1; }
 .card-copy .kicker { font-size: max(12px, 4.9cqw); letter-spacing: .04em; line-height: 1.2; margin-top: 2.5cqw; color: var(--ink-soft); }
 .card-copy .kicker + .kicker { margin-top: 1.2cqw; font-size: max(12px, 4.2cqw); }
 @container (max-width:160px){.card-copy .kicker+.kicker{display:none}}
 
-/* ==========================================================================
-   Photo slot (data-slot = photo key; img[data-photo] is the swappable photo; .ph-mark = GPT petal + label)
-   ========================================================================== */
 .photo-slot { position: absolute; overflow: hidden; background: rgb(238 215 214); container-type: inline-size; }
 .photo-slot > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .mask-card { -webkit-mask: url("img/mask_card.png") center / 100% 100% no-repeat; mask: url("img/mask_card.png") center / 100% 100% no-repeat; }
 .mask-arch { -webkit-mask: url("img/mask_arch.png") center / 100% 100% no-repeat; mask: url("img/mask_arch.png") center / 100% 100% no-repeat; }
 .mask-landscape { -webkit-mask: url("img/mask_landscape.png") center / 100% 100% no-repeat; mask: url("img/mask_landscape.png") center / 100% 100% no-repeat; }
-/* a buyer's photo is cropped by object-fit; keep faces (upper part of portraits) in the window */
+
 [data-slot="hero_portrait"] > img[data-photo] { object-position: 50% 38%; }
 .mask-arch > img[data-photo] { object-position: 50% 40%; }
 .ph-mark {
@@ -254,18 +239,13 @@ button { font: inherit; color: inherit; }
   text-shadow: 0 0 8px #fbedecf2;
 }
 @container (max-width: 96px) { .ph-mark span { display: none; } }
-/* "Your photo here" only while the slot shows the theme placeholder, and only in the couple's preview
-   (panel, ?preview=, theme demo): guests of a published site see the soft placeholder image without the label */
+
 html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark { display: flex; }
 
-/* venue: the GPT landscape gold frame (frame_landscape, G047); photo window = manifest photo_slots.landscape */
 .venue-photo { position: relative; width: min(100%, 460px); aspect-ratio: 1476 / 960; margin: 14px auto 18px; }
 .venue-photo > .vframe { position: absolute; inset: 0; width: 100%; height: 100%; }
 .venue-photo .photo-slot { left: 10.366%; top: 16.667%; width: 79.404%; height: 70.938%; }
 
-/* ==========================================================================
-   Inner pages
-   ========================================================================== */
 .site-main { position: relative; padding-bottom: calc(var(--nav-h) + var(--safe-b) + 24px); }
 .wrap { width: min(100% - 32px, 1080px); margin-inline: auto; }
 .section { position: relative; padding: 72px 0; text-align: center; }
@@ -274,7 +254,6 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .divider { width: 112px; margin: 10px auto 0; }
 .lede { max-width: 30em; margin: 14px auto 0; font-size: 16.5px; color: var(--ink-soft); font-style: italic; }
 
-/* ---------------------------------------------------------------- home hero */
 .hero {
   --cw: min(54vw, 28svh, 250px);
   position: relative; isolation: isolate;
@@ -286,7 +265,7 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .hero .scene-bg { bottom: -14%; -webkit-mask-image: linear-gradient(#000 74%, transparent); mask-image: linear-gradient(#000 74%, transparent); }
 .hero-inner { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
 .hero-card { position: relative; width: var(--cw); filter: drop-shadow(0 18px 22px rgb(63 42 46/.18)); }
-.hero .names { font-size: calc(clamp(50px, 15vw, 92px) * var(--fit, 1)); margin-top: max(6px, 1.4svh); }   /* --fit: site.js foldHero */
+.hero .names { font-size: calc(clamp(50px, 15vw, 92px) * var(--fit, 1)); margin-top: max(6px, 1.4svh); }
 .hero .names .amp { font-size: .6em; padding: 0 .08em; }
 .hero-date { margin-top: 4px; }
 .hero-place { margin-top: 2px; font-family: var(--display); font-style: italic; font-weight: 500; font-size: 18px; color: var(--ink-soft); }
@@ -305,12 +284,11 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .from-envelope .hero-card[data-step] { opacity: 1; transform: none; transition: none; }
 @media (max-height: 700px) { .hero .cue { display: none; } }
 
-/* ---------------------------------------------------------------- invitation card (comp scene 4) */
 .invite-sec { padding-top: 24px; }
 .invite { position: relative; width: min(100%, 520px); margin-inline: auto; aspect-ratio: 909 / 1445; container-type: inline-size;
           filter: drop-shadow(0 26px 30px rgb(63 42 46/.16)); }
 .invite > img { position: absolute; inset: 0; width: 100%; height: 100%; }
-/* text column centred on the card face (paper centre 48.7%); free-zone map in README */
+
 .invite-text { position: absolute; left: 12.7%; width: 72%; top: 35.2%; display: flex; flex-direction: column; align-items: center; color: var(--ink); }
 .invite-text .kicker { font-size: max(12px, 2.7cqw); letter-spacing: .16em; }
 .invite-text .nm { font-size: 10.6cqw; line-height: 1.04; }
@@ -325,10 +303,7 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .dateblock .day { display: block; font-family: var(--display); font-weight: 500; font-size: 8.8cqw; line-height: 1.02; color: var(--deep); }
 .invite-text .venue { margin-top: 2.4cqw; font-family: var(--body); font-style: italic; font-size: max(12px, 3.2cqw); color: var(--ink); }
 .invite-text .city { margin-top: .3cqw; font-size: max(12px, 2.5cqw); letter-spacing: .16em; }
-/* Long names/host line/venue: the card grows (docs/11 §9 3-slice, as .info below; nothing drawn). <img> = rows 0–42 %,
-   ::before = plain band 42–66 % stretched (free_zone 41–68), ::after = 66–100 %. Image height 158.966cqw. Text from row
-   35.2 %; column ≤ 88 % (inside the arch florals), venue + city ≤ 64 % (between the bottom florals); last line ≤ row 81.5 %
-   (29.409cqw above the bottom); never shorter than the image, so the demo card keeps its size. README: "Uzayan kartlar". */
+
 .invite { aspect-ratio: auto; }
 .invite > img { bottom: auto; height: auto; aspect-ratio: 909 / 1445; clip-path: inset(0 0 58% 0); }
 .invite::before, .invite::after {
@@ -337,7 +312,7 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
   background-image: image-set(url("img/invitation_card-480.webp") 1x, url("img/invitation_card-909.webp") 2x);
   background-repeat: no-repeat;
 }
-/* band: background 416.667 % tall at 55.263 % (same numbers as .info below) */
+
 .invite::before { top: calc(66.766cqw - 1px); bottom: calc(54.048cqw - 1px); background-size: 100% 416.667%; background-position: 0 55.263%; }
 .invite::after { bottom: 0; height: 54.048cqw; background-size: 100% auto; background-position: 0 100%; }
 .invite > .invite-text { position: relative; z-index: 1; top: auto; left: auto; margin-left: 12.7%;
@@ -347,7 +322,6 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .reply { margin-top: 30px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
 .reply p { font-family: var(--display); font-style: italic; font-size: 19px; color: var(--ink-soft); }
 
-/* ---------------------------------------------------------------- teasers (home) — "chapters" */
 .teasers-sec { position: relative; overflow: clip; }
 .teasers-sec .florals-br { width: min(54vw, 340px); right: -22vw; top: -40px; bottom: auto; z-index: 0; opacity: .95; }
 .teasers { position: relative; z-index: 1; display: grid; gap: 0; margin-top: 18px; text-align: left; }
@@ -361,19 +335,16 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .teaser h3 { font-size: 38px; line-height: 1.05; }
 .teaser .kicker { display: block; font-size: 12px; letter-spacing: .2em; margin-top: 4px; }
 .teaser .sched { display: block; margin-top: 4px; font-family: var(--display); font-style: italic; font-size: 16.5px; line-height: 1.35; color: var(--ink-soft); }
-/* one item per line; a long label wraps under itself (hanging indent) */
+
 .teaser .sched-line { display: block; padding-left: .9em; text-indent: -.9em; }
-.teaser .sched-line:nth-child(n+5) { display: none; }   /* teaser: first four items; all of them on the Details page */
+.teaser .sched-line:nth-child(n+5) { display: none; }
 .teaser .more { display: inline-block; margin-top: 10px; font-size: 12px; }
 
-/* ---------------------------------------------------------------- page heads (story/details/rsvp) */
 .page-head { position: relative; isolation: isolate; padding: max(132px, 17svh) 16px 24px; text-align: center; overflow: clip; }
 .page-head .florals-tl { width: min(56vw, 330px); top: -56px; left: -62px; position: absolute; z-index: -1; }
 .page-head .florals-br { width: min(40vw, 260px); bottom: -40px; right: -36px; top: auto; position: absolute; z-index: -1; }
 .page-head h1 { font-size: clamp(54px, 16vw, 92px); }
 
-/* ---------------------------------------------------------------- story frames (comp scene 3) */
-/* phones: frames zig-zag left/right, the script caption sits in the free side */
 .frames { position: relative; display: grid; padding: 0 0 8px; }
 .frame-fig { position: relative; width: min(58vw, 300px); }
 .frame-fig:nth-child(odd) { justify-self: start; }
@@ -381,7 +352,7 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .frame-fig + .frame-fig { margin-top: -6%; }
 .frame { position: relative; aspect-ratio: 971 / 1255; }
 .frame > img { position: absolute; inset: 0; width: 100%; height: 100%; }
-.frame .photo-slot { left: 17.096%; top: 16.414%; width: 64.47%; height: 69.163%; }   /* manifest photo_slots.arch */
+.frame .photo-slot { left: 17.096%; top: 16.414%; width: 64.47%; height: 69.163%; }
 .frame-fig figcaption {
   position: absolute; top: 36%; width: 56%;
   font-family: var(--script); color: var(--deep); font-size: clamp(30px, 8.6vw, 38px); line-height: 1.05; text-align: center;
@@ -392,7 +363,6 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .next-sec .florals-br { width: min(52vw, 320px); right: -16vw; bottom: -30px; z-index: -1; }
 .next-sec .btn { position: relative; z-index: 1; }
 
-/* ---------------------------------------------------------------- info card (Order of the Day, RSVP — comp 5/6) */
 .info { position: relative; width: min(100%, 520px); margin-inline: auto; aspect-ratio: 912 / 1411; container-type: inline-size;
         filter: drop-shadow(0 26px 30px rgb(63 42 46/.16)); }
 .info > img { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -407,11 +377,11 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .sched-row .what { padding-left: 4.2cqw; }
 .sched-row .label { display: block; font-family: var(--display); font-weight: 600; font-size: max(12px, 3.9cqw); letter-spacing: .2em; text-transform: uppercase; color: var(--ink); line-height: 1.25; }
 .sched-row .loc { display: block; font-family: var(--body); font-style: italic; font-size: max(12px, 3.5cqw); color: var(--ink-soft); }
-.sched-row + .sched-row::before {   /* tiny painted rose-bud sprig between rows (GPT divider part) */
+.sched-row + .sched-row::before {
   content: ""; grid-column: 1 / -1; justify-self: center; width: 11cqw; aspect-ratio: 569 / 272;
   background: url("img/divider-300.webp") center / contain no-repeat; margin: .2cqw 0 .6cqw;
 }
-/* longer schedules: from 4 rows the sprigs between rows go, from 5 rows the rows tighten */
+
 .sched-list:has(> .sched-row:nth-child(4)) .sched-row + .sched-row::before { display: none; }
 .sched-list:has(> .sched-row:nth-child(4)) .sched-row + .sched-row { margin-top: 1.6cqw; }
 .sched-list:has(> .sched-row:nth-child(4)) { margin-top: 2cqw; }
@@ -421,9 +391,7 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .sched-list:has(> .sched-row:nth-child(5)) .sched-row .loc { font-size: max(12px, 3cqw); line-height: 1.25; }
 .info-text:has(.sched-row:nth-child(5)) .title { font-size: 9cqw; }
 .info-text:has(.sched-row:nth-child(5)) .dress { margin-top: 1.8cqw; }
-/* G055/G056 — Order of the Day and RSVP cards ("tall") grow by the docs/11 §9 3-slice cut, nothing drawn: <img> rows
-   0–42 % (clipped), ::before = plain band 42–66 % (free_zone 41–67) stretched, ::after = rows 66–100 %. Text in the flow,
-   never shorter than the image (a short card is the image at its own size). Image height 154.71cqw (1411 / 912). */
+
 .info.tall { aspect-ratio: auto; }
 .info.tall > img { bottom: auto; height: auto; aspect-ratio: 912 / 1411; clip-path: inset(0 0 58% 0); }
 .info.tall::before,
@@ -433,13 +401,13 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
   background-image: image-set(url("img/info_card-480.webp") 1x, url("img/info_card-912.webp") 2x);
   background-repeat: no-repeat;
 }
-/* band 42–66 %: 24 % of the image -> background 416.667 % tall, at 42 / (1 - 0.24) = 55.263 % (1 px overlaps) */
+
 .info.tall::before { top: calc(64.98cqw - 1px); bottom: calc(52.6cqw - 1px); background-size: 100% 416.667%; background-position: 0 55.263%; }
 .info.tall::after { bottom: 0; height: 52.6cqw; background-size: 100% auto; background-position: 0 100%; }
-/* text: image row 28.9 % (44.71cqw) to 72 % at most (43.32cqw above the bottom florals); ≥ the image's height */
+
 .info.tall > .info-text { position: relative; z-index: 1; top: auto; left: auto; margin-left: 11.2%;
   padding: 44.71cqw 0 43.32cqw; min-height: 66.68cqw; box-sizing: content-box; }
-/* RSVP: text from 34 % of the image (52.6cqw) to row 72 % at most */
+
 .info.tall > .rsvp-text { padding-top: 52.6cqw; min-height: 58.79cqw; }
 .dress { margin-top: 3cqw; font-family: var(--display); font-weight: 600; font-size: max(12px, 2.8cqw); letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); }
 .dress em { font-family: var(--body); font-weight: 400; letter-spacing: .02em; text-transform: none; font-size: max(12px, 3.4cqw); color: var(--ink); }
@@ -447,17 +415,15 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .rsvp-sec { padding-top: 36px; overflow: clip; }
 .rsvp-sec > .florals-tl { position: absolute; top: -12px; left: -44px; width: min(50vw, 300px); z-index: 0; }
 .rsvp-sec .wrap { position: relative; z-index: 1; }
-.rsvp-text { top: 34%; }   /* G035: 31% with the extra preview note; centred on the paper without it */
+.rsvp-text { top: 34%; }
 .rsvp-text .kicker { margin-top: 3.2cqw; font-size: max(12px, 3cqw); }
 .rsvp-text .deadline { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 6.4cqw; color: var(--ink); line-height: 1.15; }
 .rsvp-text .btn { margin-top: 3.4cqw; }
 .rsvp-text .love { margin-top: 3.4cqw; font-size: max(12px, 2.8cqw); }
 .rsvp-text .title { font-size: 8.6cqw; }
-/* long names wrap (balanced) and shrink to 2.5 lines at most (site.js fitText); the card grows (3-slice above) */
+
 .rsvp-text .sign { font-size: calc(8.4cqw * var(--fit, 1)); max-width: 100%; text-wrap: balance; overflow-wrap: anywhere; }
 
-/* reply form — platform RSVP contract (G042): form.js toggles [hidden], [data-rsvp-status], aria-invalid.
-   UI elements only (fields, choice pills, button, 1 px gold rule); no drawn decor. */
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 .reply-sec { padding-top: 8px; overflow: clip; scroll-margin-top: 12px; }
 .reply-box { width: min(100%, 520px); margin-inline: auto; padding: 26px clamp(16px, 5vw, 30px) 30px; border-radius: 22px;
@@ -484,7 +450,7 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
   background: rgba(255, 255, 255, .55); box-shadow: inset 0 0 0 1px rgb(155 93 102/.35); transition: box-shadow .2s, background-color .2s; }
 .reply-form .choice label:has(input:checked) { background: #fff9f6fa; box-shadow: inset 0 0 0 2px var(--deep); }
 .reply-form .choice input { width: 20px; height: 20px; margin: 0; accent-color: var(--deep); flex: none; }
-/* the couple's own questions (G051): same pills as "Will you attend?"; longer choices wrap inside the pill */
+
 .reply-form .questions { display: grid; gap: 16px; }
 .reply-form .q-options { display: grid; gap: 10px; }
 .reply-form .question label { padding-block: 8px; line-height: 1.3; overflow-wrap: anywhere; }
@@ -501,7 +467,6 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .reply-panel .textlink { background: none; border: 0; border-bottom: 1px solid rgb(155 93 102/.4); cursor: pointer; margin-top: 6px; }
 .reply-box .nojs-only { text-align: center; }
 
-/* ---------------------------------------------------------------- detail blocks */
 .blocks { display: grid; gap: 0; margin-top: 40px; }
 .block { text-align: center; padding: 26px 0; }
 .block + .block::before { content: ""; display: block; width: 96px; aspect-ratio: 569 / 272; margin: 0 auto 26px; background: url("img/divider-300.webp") center / contain no-repeat; }
@@ -511,15 +476,11 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .block .note { font-style: italic; color: var(--ink-soft); max-width: 26em; margin-inline: auto; }
 .block .btn { margin-top: 18px; }
 
-/* ---------------------------------------------------------------- add to calendar (G051; home + details)
-   Two small ghost pills; the platform writes the links (data-calendar). UI only, no drawn decor. */
 .btn-sm { min-height: 44px; padding: 0 18px; font-size: 12.5px; letter-spacing: .22em; }
 .cal { margin-top: 26px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
 .cal .kicker { font-size: 12px; }
 .cal-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 
-/* ---------------------------------------------------------------- questions & answers (G051; details)
-   Native <details>: opens without JS. 1 px gold rules and a "+" glyph that turns to "×" — type, not decor. */
 .faq-sec.wrap { width: min(100% - 32px, 640px); padding: 30px 0 8px; text-align: center; }
 .faq-sec h2 { font-size: clamp(40px, 11vw, 56px); }
 .faq-sec .divider { margin-top: 8px; }
@@ -532,8 +493,7 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 }
 .faq-item summary::-webkit-details-marker { display: none; }
 .faq-item summary::after {
-  /* empty alt text: the glyph is not part of the question's accessible name ("Is there parking?", not "… plus");
-     the first declaration is the fallback for browsers without alt text in `content` */
+
   content: "+"; content: "+" / ""; flex: none; width: 24px; text-align: center;
   font-family: var(--display); font-weight: 500; font-size: 28px; line-height: 1; color: var(--gold-ink);
   transition: transform .3s var(--ease-out);
@@ -542,22 +502,18 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .faq-q { min-width: 0; overflow-wrap: anywhere; }
 .faq-a { padding: 0 2px 18px; font-style: italic; color: var(--ink-soft); white-space: pre-line; overflow-wrap: anywhere; }
 
-/* ---------------------------------------------------------------- closing (rsvp page) */
 .closing { padding: 40px 0 24px; }
 .closing .bow { width: min(70vw, 340px); margin: 0 auto; }
 .closing .title { font-size: clamp(54px, 15vw, 84px); margin-top: 4px; }
 .closing .line { font-family: var(--display); font-style: italic; font-size: 20px; color: var(--ink-soft); margin-top: 4px; }
 .closing .kicker { margin-top: 18px; overflow-wrap: anywhere; }
-/* after a reply the form's own thank-you answers the guest ("We'll miss you" / "We can't wait…"): the closing
-   below must not repeat it or, for a guest who declined, contradict it (site.js sets data-rsvp-replied) */
+
 html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line { display: none; }
 
-/* ---------------------------------------------------------------- footer */
 .foot { text-align: center; padding: 40px 16px 8px; }
 .foot .script { font-size: 34px; }
 .foot .replay { margin-top: -6px; padding-top: 22px; display: inline-block; }
 
-/* ---------------------------------------------------------------- nav (bottom bar on phones, top on wide) */
 .site-nav {
   position: fixed; z-index: 40; left: 0; right: 0; bottom: 0;
   height: calc(var(--nav-h) + var(--safe-b)); padding-bottom: var(--safe-b);
@@ -589,7 +545,6 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
-/* ---------------------------------------------------------------- wider screens */
 @media (min-width: 768px) {
   .section { padding: 96px 0; }
   .teasers { grid-template-columns: repeat(3, 1fr); gap: 28px; text-align: center; }
@@ -615,8 +570,6 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
   .toast { bottom: 24px; }
 }
 
-/* ---------------------------------------------------------------- short landscape phones (G058, README "Yatay telefon")
-   home: the card beside the names, by the height; envelope: names + envelope by the height, opened: Enter / Replay beside */
 @media (min-aspect-ratio: 1/1) and (max-height: 620px) and (max-width: 959px) {
   :root { --nav-h: 48px; --sx: max(16px, env(safe-area-inset-left), env(safe-area-inset-right)); }
   .hero { --cw: clamp(150px, (100svh - var(--nav-h) - var(--safe-b) - 24px) * .62, 250px); padding: 12px var(--sx) calc(var(--nav-h) + var(--safe-b) + 12px); }
@@ -628,13 +581,11 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
   .countdown { grid-area: 5 / 2; margin-top: clamp(8px, 3svh, 18px); }
   .cue { grid-area: 6 / 2; }
   .cd-num { font-size: clamp(26px, 8.5svh, 40px); }
-  /* corner florals by the height (smaller beside the opened envelope's Replay); home keeps the one behind the card (the
-     lower one would reach the countdown) */
+
   .florals { width: min(34vw, 54svh); }
   .is-opened .florals { width: min(28vw, 46svh); }
   .hero .florals-br { display: none; }
-  /* closed: pad + head + .9065w (stage after its tuck) + hint ≤ 100svh, the card risen out (.153w above the stage) on screen, names
-     between the florals; opened: the stage (1.3965w) in the height, the head out of the flow but measurable (fitText) */
+
   .env-page { --nm: clamp(36px, min(14vw, 14svh), 78px); padding: 12px var(--sx);
               --w: calc(min(84vw, (100svh - 116px - var(--nm) * 1.12) * 1.1, 45.6svh + var(--nm) * .51 - 6px, 460px) - var(--names-x, 0px)); }
   .env-head { max-width: min(max(40vw, 420px), 108vw - 2 * min(34vw, 54svh) - 24px); }
@@ -644,21 +595,18 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
   .is-opened .stage, .is-opened .env-after { margin-top: 0; }
 }
 
-/* ---------------------------------------------------------------- page arrival fade (browsers without cross-document view transitions) */
 .arrive-fade body { animation: arrive .7s var(--ease-soft) both; }
 @keyframes arrive { from { opacity: 0; } }
 
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .6s; }
 ::view-transition-group(invite-card) { animation-duration: .95s; animation-timing-function: cubic-bezier(.45, 0, .2, 1); }
 
-/* ---------------------------------------------------------------- reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .js [data-step] { opacity: 1 !important; transform: none !important; clip-path: none !important; transition: none !important; }
   .env-hint, .cue span[aria-hidden] { animation: none; }
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: .01ms !important; }
 }
 
-/* Blush framework, this model's generated scene and measured envelope layers. */
 :root{--ink:#302d2a;--ink-soft:#514a42;--deep:#24476c;--primary:#e8dcc9;--mist-top:#faf5eb;--mist-bottom:#eee4d4;--ivory:#fffaf2;--page:#f5eee2;--gold:#b99459;--gold-ink:#806133}
 body{background-image:url("img/mist_tile-640.webp")}
 .florals{mix-blend-mode:multiply}.scene-bg picture img{object-position:center;transform:none!important}

@@ -31,7 +31,7 @@ for (const t of THEMES) {
     assert.equal(stage.attr('role'), 'button');
     assert.equal(stage.attr('tabindex'), '0');
     // the seal, the flap, the pocket and the card are their own layers (AGENTS şart 4, docs/11 §7.3)
-    const pieces = t === 'crimson-rose-atelier' ? ['.env-seal', '.env-flap', '.env-pocket', '.env-card', '.env-back'] : ['.env-seal', '.env-flap', '.env-inner', '.env-pocket', '.env-back', '.env .card'];
+    const pieces = t === 'crimson-rose-atelier' ? ['.env-seal', '.env-flap', '.env-pocket', '.env-card', '.env-back'] : ['.env-closed', '.env-cflap', '.env-flap', '.env-body', '.env-pocket', '.env .card'];
     for (const sel of pieces) assert.equal(stage.find(sel).length, 1, sel);
     assert.equal($('.replay').length, 1);
     assert.equal($('.replay[hidden]').length, 0, '.replay is shown by the opened state, not by removing [hidden]');
@@ -43,8 +43,8 @@ for (const t of THEMES) {
     assert.equal(stage.find('[data-slot="hero_portrait"] img[data-photo="hero_portrait"]').length, 1);
     assert.equal(stage.find('[data-field="thank_you_title"]').length, 1);
     // opened: the hint is display:none (an animation cannot keep it visible), Enter + Replay show
-    assert.match(css, /\.is-opened \.tap-hint[^{]*\{display:none\}/);
-    assert.match(css, /\.is-opened \.replay\{display:inline-flex/);
+    assert.match(css, t === 'crimson-rose-atelier' ? /\.is-opened \.tap-hint[^{]*\{display:none\}/ : /\.is-opened \.env-hint\s*\{\s*display:\s*none;?\s*\}/);
+    assert.match(css, t === 'crimson-rose-atelier' ? /\.is-opened \.replay\{display:inline-flex/ : /\.is-opened \.env-after/);
   });
 
   test(`${t}: session keys per site, same in site.js and the <head> scripts`, () => {
@@ -55,9 +55,9 @@ for (const t of THEMES) {
   });
 
   test(`${t}: view transition — one invite-card per page, home card visible on arrival`, () => {
-    assert.match(css, /@view-transition\{navigation:auto\}/);
+    assert.match(css, /@view-transition\s*\{\s*navigation:\s*auto;?\s*\}/);
     assert.match(js, /viewTransitionName = 'invite-card'/);
-    assert.match(css, /\.from-envelope [^{]*\{opacity:1;transform:none;transition:none\}/);
+    assert.match(css, /\.from-envelope [^{]*\{\s*opacity:\s*1;\s*transform:\s*none;\s*transition:\s*none;?\s*\}/);
   });
 
   test(`${t}: scenes, replay links, countdown target, photo placeholders`, () => {

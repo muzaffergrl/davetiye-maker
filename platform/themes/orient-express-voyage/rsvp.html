@@ -89,7 +89,7 @@
                inputs "answer:<id>". Choice = pills like "Will you attend?", text = a short answer. -->
           <div class="questions" data-rsvp-if-attending data-if="rsvp.questions">
             <fieldset class="choice question" data-repeat="rsvp.questions" data-attr-data-rsvp-question=".id">
-              <legend class="kicker" data-field=".label"></legend>
+              <legend class="kicker"><span data-field=".label"></span></legend>
               <div class="q-options" data-if=".options">
                 <label data-repeat=".options"><input type="radio" data-attr-value="."> <span data-field="."></span></label>
               </div>

@@ -1,3 +1,4 @@
+import assets from '../lib/marketing/assets.json' with { type: 'json' };
 // Shared fixtures for the marketing tests (G061).
 import { readdirSync } from 'node:fs';
 import path from 'node:path';
@@ -31,7 +32,15 @@ export function readyConfig(over: Partial<MarketingConfig> = {}): MarketingConfi
 export function designFolders(liveIds: string[]): { onDisk: string[]; expected: string[]; strayPreviewFiles: string[] } {
   const dir = path.join(PLATFORM_ROOT, 'public/marketing/designs');
   const previewIds = MARKETING.designs.filter((d) => d.status === 'preview').map((d) => d.id);
-  const strayPreviewFiles = previewIds.flatMap((id) => readdirSync(path.join(dir, id)).filter((f) => f !== 'envelope.webp').map((f) => `${id}/${f}`));
+  const strayPreviewFiles = previewIds.flatMap((id) => {
+    const capture = (assets.designs as Record<string, { screens: Record<string, { files: Record<string, string> }>; opening?: { file: string; poster: string } }>)[id];
+    const allowed = new Set(['envelope.webp']);
+    if (capture) {
+      for (const screen of Object.values(capture.screens)) for (const f of Object.values(screen.files)) allowed.add(path.basename(f));
+      if (capture.opening) { allowed.add(path.basename(capture.opening.file)); allowed.add(path.basename(capture.opening.poster)); }
+    }
+    return readdirSync(path.join(dir, id)).filter((f) => !allowed.has(f)).map((f) => `${id}/${f}`);
+  });
   return { onDisk: readdirSync(dir).sort(), expected: [...liveIds, ...previewIds].sort(), strayPreviewFiles };
 }
 

@@ -1139,7 +1139,7 @@ const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> 
     home: msg("Bottle green, brass and warm ivory meet the romance of a vintage rail journey. The envelope opens onto your invitation, route details and celebration."),
   },
   'kintsugi-washi': {
-    style: msg("Ivory washi envelope, fine kintsugi-gold lines and quiet botanical details."),
+    style: msg("Indigo washi envelope, fine kintsugi-gold lines and quiet botanical details."),
     opening: msg("Your guests tap the envelope. Fine kintsugi-gold lines catch the light as the ivory washi V flap opens and the invitation card rises from its pocket."),
     home: msg("Washi paper, sumi ink and delicate gold seams bring a quiet, handcrafted feeling to your invitation, story and garden celebration."),
   },
@@ -1164,12 +1164,12 @@ const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> 
     home: msg("Cobalt, whitewash and terracotta recall painted tiles in the sun. Open the invitation to reveal your story and celebration, tile by tile."),
   },
   'sky-lantern-festival': {
-    style: msg("Dusky-plum envelope, glowing amber seal and lantern-lit details at twilight."),
+    style: msg("Dusky-plum envelope, an amber lantern charm and lantern-lit details at twilight."),
     opening: msg("Your guests tap the envelope. An amber lantern seal glows, the dusk-toned V flap opens, and the invitation card rises into view."),
     home: msg("Plum, dusky rose and lantern amber bring the last light of day into your invitation, story and celebration pages."),
   },
   'music-box-ballerina': {
-    style: msg("Blush envelope, satin bow and a rose-gold ballerina keepsake seal."),
+    style: msg("Blush envelope, a champagne satin band and a gold-edged floral cameo."),
     opening: msg("Your guests tap the envelope. A rose-gold ballerina seal turns, the blush V flap opens and the invitation card rises from the pocket."),
     home: msg("Rose quartz, blush satin and soft gold give this invitation the feeling of a treasured keepsake. Open it to reveal your story and wedding details."),
   },
