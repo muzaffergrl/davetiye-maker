@@ -13,6 +13,7 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}
 body{margin:0;background:var(--wall) url(img/wall-640.webp) 0 0/640px repeat;color:var(--ink);font:400 18px/1.7 var(--serif);padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom))}
+main{overflow-x:clip}   /* the swaying frames and waving flags never widen the page (mobile layout viewport) */
 button,input,textarea,select{font:inherit}
 button,a,input,select,textarea,summary{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 a{color:inherit;text-decoration:none}
@@ -318,16 +319,16 @@ html[data-rsvp-replied] .rsvp-page .page-heading .body-text{display:none}
 .js [data-step]{opacity:0;clip-path:inset(-30% -10% 100% -10%);transform:translateY(-8px) rotate(-1.2deg);transform-origin:50% 0;transition:opacity .5s ease-out,clip-path .9s cubic-bezier(.3,.7,.3,1),transform 1.1s cubic-bezier(.25,1.6,.45,1)}
 .js [data-step].in{opacity:1;clip-path:inset(-30% -10% -30% -10%);transform:none}
 /* photos hang in their frames: they drop in and swing to rest, then sway in the breeze (and lean with the wind) */
-.js .hang[data-step]{clip-path:none;transform:translateY(-26px) rotate(-11deg);transform-origin:50% -8%;transition:none}
+.js .hang[data-step]{clip-path:none;transform:translateY(-26px) rotate(-8deg);transform-origin:50% -8%;transition:none}
 .js .hang[data-step].in{animation:swing-in 1.5s var(--d,0ms) cubic-bezier(.3,.6,.4,1) both,breeze 6s calc(var(--d,0ms) + 1.5s) ease-in-out infinite}
 .js li[data-step] .row-flag{transform:rotate(-34deg)}
 .js li[data-step].in .row-flag{animation:swing-in 1.3s calc(var(--d,0ms) + 120ms) cubic-bezier(.3,.6,.4,1) both,breeze 4.5s calc(var(--d,0ms) + 1.4s) ease-in-out infinite}
 .js .lights[data-step],.js .bloom[data-step]{clip-path:none;transform:none}
-@keyframes swing-in{0%{opacity:0;transform:translateY(-26px) rotate(-11deg)}
+@keyframes swing-in{0%{opacity:0;transform:translateY(-26px) rotate(-8deg)}
 22%{opacity:1}
-40%{transform:translateY(0) rotate(7deg)}
-60%{transform:rotate(-3.5deg)}
-80%{transform:rotate(1.5deg)}
+40%{transform:translateY(0) rotate(4.5deg)}
+60%{transform:rotate(-2.2deg)}
+80%{transform:rotate(1deg)}
 100%{opacity:1;transform:rotate(0)}}
 @keyframes breeze{0%,100%{transform:rotate(0)}
 30%{transform:rotate(1.4deg)}
