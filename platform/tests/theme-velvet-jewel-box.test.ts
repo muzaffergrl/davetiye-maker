@@ -27,7 +27,8 @@ test('Velvet Jewel Box is a catalogued platform theme, kept off sale until appro
   const theme = await claimableTheme(id);
   assert.ok(theme);
   assert.equal(theme.name, 'Velvet Jewel Box');
-  assert.equal(MARKETING.designs.find((d) => d.id === id)?.status, 'coming');
+  // off sale until approval: 'coming' (hidden) or 'preview' (in the catalogue, no checkout, no /start; main f1228e88)
+  assert.ok(['coming', 'preview'].includes(MARKETING.designs.find((d) => d.id === id)?.status ?? ''));
   assert.equal(themeOpenForClaims(id, { env: { VERCEL_ENV: 'production' } }), false);
   assert.equal(openingObject(DESIGN_COPY[id]), 'box');
   assert.equal(DESIGN_COPY[id].collection, '23_Velvet_Jewel_Box');

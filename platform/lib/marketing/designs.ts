@@ -1028,7 +1028,7 @@ function previewDesignCopy(d: DesignCommerce): DesignCopy | undefined {
     collection: '',
     demoCouple: 'Sample couple',
     style: preview.style,
-    metaDescription: msg(d.name + ' wedding website concept preview. Explore its invitation, story, event details and RSVP pages; final artwork and Etsy availability are pending.'),
+    metaDescription: msg(d.name + ' wedding website preview. Explore its invitation, story, event details and RSVP pages; final artwork and Etsy availability are pending.'),
     intro: msg(preview.style + '. This catalogue preview uses interim artwork while the final design assets and Etsy availability are pending.'),
     opening: preview.opening,
     pages: {
@@ -1068,7 +1068,9 @@ export function catalogDesigns(cfg: MarketingConfig = MARKETING): Design[] {
   return cfg.designs
     .filter((d) => d.status !== 'coming')
     .map((d) => {
-      const copy = DESIGN_COPY[d.id] ?? (d.status === 'preview' ? previewDesignCopy(d) : undefined);
+      // a 'preview' design keeps its envelope-cover catalogue copy (main f1228e88) until it goes live; its full copy
+      // (DESIGN_COPY, G175) still names the panel's opening tab (lib/panel/state.ts)
+      const copy = (d.status === 'preview' ? previewDesignCopy(d) : undefined) ?? DESIGN_COPY[d.id];
       if (!copy) throw new Error('lib/marketing/designs.ts has no copy for catalog design "' + d.id + '"');
       return { ...d, copy };
     });
