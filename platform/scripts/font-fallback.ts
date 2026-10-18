@@ -7,6 +7,7 @@
 //
 //   fb1  local Times New Roman / Liberation Serif / Tinos (iOS, macOS, Windows, Linux; metric twins)
 //   fb2  local Noto Serif / Droid Serif (Android; measured on Noto Serif from Google Fonts)
+//   (fk1 / fk2: the same pair for the kicker's face, only where KICKER lists the theme)
 //
 // The faces go into each page's <head> as a small inline <style> (before site.css; 01–21 have no room left under the
 // 45 KB site.css budget), and site.css names them right after the web family: "Allison",fb1,fb2,"Snell Roundhand"….
@@ -43,6 +44,9 @@ const FACES = [
 // than the web face fits at scale 1 and the web face wraps for a frame when it lands (04: 0.15). Here the fallback is
 // made a little wider, and the CSS default scale of the envelope names (before site.js) is below 1 to match
 const WIDER: Record<string, number> = { 'vintage-airmail-love-letter': 1.015 };
+// themes whose kicker above the names is set in a web face that wraps differently on the fallback serif (36: Old
+// Standard TT, 2 lines; Times, 1 line): they get fk1 / fk2 for that family too
+const KICKER = ['victorian-glasshouse'];
 const browser = await loadChromium().launch();
 let failed = 0;
 
@@ -53,63 +57,82 @@ for (const id of ids) {
   // one retry: a cold demo route can stall on the first request after a restart
   await page.goto(`${args.base}/start/demo/${id}`, { waitUntil: 'domcontentloaded', timeout: 60_000 }).catch(() => page.goto(`${args.base}/start/demo/${id}`, { waitUntil: 'domcontentloaded', timeout: 60_000 }));
   await page.evaluate(() => document.fonts.ready);
-  const h = await page.evaluate(() => {
-    const el = document.querySelector('h1.names, .names') as HTMLElement | null;
-    if (!el) return null;
-    const cs = getComputedStyle(el);
-    const link = (document.querySelector('link[href*="fonts.googleapis.com/css2"]') as HTMLLinkElement | null)?.href ?? '';
-    return { family: cs.fontFamily.split(',')[0].trim().replace(/^["']|["']$/g, ''), weight: cs.fontWeight, style: cs.fontStyle, upper: cs.textTransform === 'uppercase', link };
-  });
-  if (!h || !h.link) {
-    console.log(`${id}: no names heading / Google Fonts link — skipped`);
-    await ctx.close();
-    continue;
-  }
-  const corpus = h.upper ? CORPUS.toUpperCase() : CORPUS;
-  const noto = 'https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=block';
-  await page.setContent(`<!doctype html><link rel="stylesheet" href="${h.link.replace(/display=swap/, 'display=block')}"><link rel="stylesheet" href="${noto}">
+  // the names heading (fb1 / fb2) and, where KICKER lists the theme, the kicker line in its own face (fk1 / fk2)
+  const targets = [{ sel: 'h1.names, .names', names: ['fb1', 'fb2'] }, ...(KICKER.includes(id) ? [{ sel: 'kicker', names: ['fk1', 'fk2'] }] : [])];
+  const found: Array<{ family: string; weight: string; style: string; names: string[]; faces: Array<{ css: string; size: number }> }> = [];
+  let link = '';
+  const demoUrl = page.url();
+  for (const t of targets) {
+    // setContent below keeps the URL: back to the demo for the next target
+    if (t !== targets[0]) {
+      await page.goto(demoUrl, { waitUntil: 'domcontentloaded', timeout: 60_000 });
+      await page.evaluate(() => document.fonts.ready);
+    }
+    const h = await page.evaluate((sel: string) => {
+      // 'kicker': the line right above the names heading (.kicker, .eyebrow … — its class differs per theme)
+      const el = (sel === 'kicker' ? document.querySelector('h1.names, .names')?.previousElementSibling : document.querySelector(sel)) as HTMLElement | null;
+      if (!el) return null;
+      const cs = getComputedStyle(el);
+      const link = (document.querySelector('link[href*="fonts.googleapis.com/css2"]') as HTMLLinkElement | null)?.href ?? '';
+      return { family: cs.fontFamily.split(',')[0].trim().replace(/^["']|["']$/g, ''), weight: cs.fontWeight, style: cs.fontStyle, upper: cs.textTransform === 'uppercase', link, text: el.textContent?.trim() ?? '' };
+    }, t.sel);
+    if (!h || !h.link) break;
+    link = h.link;
+    // the kicker: its own (design) text first, then the names corpus
+    const words = t.names[0] === 'fk1' ? `${h.text} ${CORPUS}` : CORPUS;
+    const corpus = h.upper ? words.toUpperCase() : words;
+    const noto = 'https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=block';
+    await page.setContent(`<!doctype html><link rel="stylesheet" href="${h.link.replace(/display=swap/, 'display=block')}"><link rel="stylesheet" href="${noto}">
     <style>@font-face{font-family:probe-fb;src:local("${FACES[0].probe.local}")}</style>`, { waitUntil: 'domcontentloaded' });
-  const m = await page.evaluate(
-    async ({ h, corpus }: { h: { family: string; weight: string; style: string }; corpus: string }) => {
-      const font = (fam: string) => `${h.style} ${h.weight} 100px ${fam}`;
-      // the Google Fonts stylesheets first (setContent returns at DOMContentLoaded), else load() finds no face
-      await Promise.all([...document.querySelectorAll('link')].map((l) => (l.sheet ? 0 : new Promise((r) => ((l.onload = r), (l.onerror = r))))));
-      await document.fonts.load(font(`"${h.family}"`), corpus);
-      await document.fonts.load(font('"Noto Serif"'), corpus);
-      await document.fonts.load(font('probe-fb'), corpus);
-      const measure = (fam: string) => {
-        // width from a DOM span (synthetic bold / italic exactly as the page draws them), metrics from canvas
-        const s = document.createElement('span');
-        Object.assign(s.style, { font: font(fam), lineHeight: 'normal', whiteSpace: 'nowrap', position: 'absolute' });
-        s.textContent = corpus;
-        document.body.append(s);
-        const width = s.getBoundingClientRect().width;
-        const normal = s.getBoundingClientRect().height;
-        s.remove();
-        const c = document.createElement('canvas').getContext('2d')!;
-        c.font = font(fam);
-        const t = c.measureText(corpus);
-        return { width, asc: t.fontBoundingBoxAscent, desc: t.fontBoundingBoxDescent, gap: Math.max(0, normal - t.fontBoundingBoxAscent - t.fontBoundingBoxDescent) };
-      };
-      return { web: measure(`"${h.family}"`), fb: measure('probe-fb'), fb2: measure('"Noto Serif"'), loaded: [...document.fonts].some((f) => f.family.replace(/["']/g, '') === h.family && f.status === 'loaded') };
-    },
-    { h, corpus },
-  );
-  if (!m.loaded) {
-    console.log(`${id}: ${h.family} did not load — skipped`);
-    failed++;
+    const m = await page.evaluate(
+      async ({ h, corpus }: { h: { family: string; weight: string; style: string }; corpus: string }) => {
+        const font = (fam: string) => `${h.style} ${h.weight} 100px ${fam}`;
+        // the Google Fonts stylesheets first (setContent returns at DOMContentLoaded), else load() finds no face
+        await Promise.all([...document.querySelectorAll('link')].map((l) => (l.sheet ? 0 : new Promise((r) => ((l.onload = r), (l.onerror = r))))));
+        await document.fonts.load(font(`"${h.family}"`), corpus);
+        await document.fonts.load(font('"Noto Serif"'), corpus);
+        await document.fonts.load(font('probe-fb'), corpus);
+        const measure = (fam: string) => {
+          // width from a DOM span (synthetic bold / italic exactly as the page draws them), metrics from canvas
+          const s = document.createElement('span');
+          Object.assign(s.style, { font: font(fam), lineHeight: 'normal', whiteSpace: 'nowrap', position: 'absolute' });
+          s.textContent = corpus;
+          document.body.append(s);
+          const width = s.getBoundingClientRect().width;
+          const normal = s.getBoundingClientRect().height;
+          s.remove();
+          const c = document.createElement('canvas').getContext('2d')!;
+          c.font = font(fam);
+          const t = c.measureText(corpus);
+          return { width, asc: t.fontBoundingBoxAscent, desc: t.fontBoundingBoxDescent, gap: Math.max(0, normal - t.fontBoundingBoxAscent - t.fontBoundingBoxDescent) };
+        };
+        return { web: measure(`"${h.family}"`), fb: measure('probe-fb'), fb2: measure('"Noto Serif"'), loaded: [...document.fonts].some((f) => f.family.replace(/["']/g, '') === h.family && f.status === 'loaded') };
+      },
+      { h, corpus },
+    );
+    if (!m.loaded) {
+      console.log(`${id}: ${h.family} did not load — skipped`);
+      failed++;
+      found.length = 0;
+      break;
+    }
+    const pct = (v: number) => `${(Math.round(v * 10) / 10).toFixed(1).replace(/\.0$/, '')}%`;
+    const faces = FACES.map((f, i) => {
+      const fb = i === 0 ? m.fb : m.fb2;
+      const size = (m.web.width / fb.width) * (t.names[0] === 'fb1' ? (WIDER[id] ?? 1) : 1);
+      // overrides are fractions of the used (already size-adjusted) em, like next/font's: web metric / size-adjust
+      const desc = { size: size * 100, asc: m.web.asc / size, desc: m.web.desc / size, gap: m.web.gap / size };
+      const css = `@font-face{font-family:${t.names[i]};src:${f.src};${h.style === 'italic' ? 'font-style:italic;' : ''}size-adjust:${pct(desc.size)};ascent-override:${pct(desc.asc)};descent-override:${pct(desc.desc)};line-gap-override:${pct(desc.gap)}}`;
+      return { css, size: desc.size };
+    });
+    found.push({ family: h.family, weight: h.weight, style: h.style, names: t.names, faces });
+  }
+  if (!found.length || !link) {
+    if (!link) console.log(`${id}: no names heading / Google Fonts link — skipped`);
     await ctx.close();
     continue;
   }
-  const pct = (v: number) => `${(Math.round(v * 10) / 10).toFixed(1).replace(/\.0$/, '')}%`;
-  const faces = FACES.map((f, i) => {
-    const fb = i === 0 ? m.fb : m.fb2;
-    const size = (m.web.width / fb.width) * (WIDER[id] ?? 1);
-    // overrides are fractions of the used (already size-adjusted) em, like next/font's: web metric / size-adjust
-    const desc = { size: size * 100, asc: m.web.asc / size, desc: m.web.desc / size, gap: m.web.gap / size };
-    const css = `@font-face{font-family:${f.name};src:${f.src};${h.style === 'italic' ? 'font-style:italic;' : ''}size-adjust:${pct(desc.size)};ascent-override:${pct(desc.asc)};descent-override:${pct(desc.desc)};line-gap-override:${pct(desc.gap)}}`;
-    return { css, ...desc };
-  });
+  const faces = found.flatMap((f) => f.faces);
 
   const block = `${MARK}\n${faces.map((f) => f.css).join('\n')}</style>\n`;
   const blockRe = new RegExp(`${MARK.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&')}\\n(?:@font-face\\{[^\\n]*\\n?)*</style>\\n`);
@@ -138,21 +161,24 @@ for (const id of ids) {
     }
     if (!args.check && html !== before) writeFileSync(htmlPath, html);
   }
-  // the stack: right after the web family wherever site.css names it in a font list
+  // the stacks: right after each web family wherever site.css names it in a font list
   let css = readFileSync(cssPath, 'utf8');
   const before = css;
-  const fam = h.family.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  css = css.replace(new RegExp(`(["'])${fam}\\1(?!,fb1,fb2)\\s*,\\s*`, 'g'), (_s, q) => `${q}${h.family}${q},fb1,fb2,`);
+  for (const f of found) {
+    const fam = f.family.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const ours = f.names.join(',');
+    css = css.replace(new RegExp(`(["'])${fam}\\1(?!,${ours})\\s*,\\s*`, 'g'), (_s, q) => `${q}${f.family}${q},${ours},`);
+    if (!new RegExp(`["']${fam}["'],${ours}`).test(css)) {
+      console.log(`FAIL ${id}: ${f.family} is not named in a font list of site.css`);
+      failed++;
+    }
+  }
   const size = Buffer.byteLength(css);
   console.log(
-    `${id.padEnd(28)} ${h.family.padEnd(20)} ${h.weight}${h.style === 'italic' ? 'i' : ''} fb1 ${faces[0].size.toFixed(1)}% fb2 ${faces[1].size.toFixed(1)}%  site.css ${size} B${size > 45 * 1024 ? ' OVER 45 KB' : ''}`,
+    `${id.padEnd(28)} ${found.map((f) => `${f.family} ${f.weight}${f.style === 'italic' ? 'i' : ''} ${f.names[0]} ${f.faces[0].size.toFixed(1)}% ${f.names[1]} ${f.faces[1].size.toFixed(1)}%`).join(' · ')}  site.css ${size} B${size > 45 * 1024 ? ' OVER 45 KB' : ''}`,
   );
-  if (!new RegExp(`["']${fam}["'],fb1,fb2`).test(css)) {
-    console.log(`FAIL ${id}: ${h.family} is not named in a font list of site.css`);
-    failed++;
-  }
   if (args.check && css !== before) {
-    console.log(`FAIL ${id}: site.css does not name fb1, fb2 after ${h.family}`);
+    console.log(`FAIL ${id}: site.css does not name the fallback faces after the web families`);
     failed++;
   }
   if (!args.check && css !== before) writeFileSync(cssPath, css);

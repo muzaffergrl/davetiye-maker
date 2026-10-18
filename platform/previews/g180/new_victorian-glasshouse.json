@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-18T06:57:22.557Z",
+  "results": {
+    "victorian-glasshouse": {
+      "load": {
+        "lcp": 1092,
+        "lcpElement": "pk-body kraft-640.webp",
+        "cls": 0.0013,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/victorian-glasshouse/img/ph_tall-640.webp"
+        ],
+        "deferred": [],
+        "kb": 195,
+        "early": [],
+        "sinceLoad": 6040
+      },
+      "lateFont": {
+        "lcp": 1040,
+        "lcpElement": "pk-body kraft-640.webp",
+        "cls": 0.0013,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/victorian-glasshouse/img/ph_tall-640.webp"
+        ],
+        "deferred": [],
+        "kb": 195,
+        "early": [],
+        "sinceLoad": 9024
+      },
+      "geometry": {
+        "web": {
+          ".names": [
+            201,
+            68
+          ],
+          ".kicker": null,
+          ".stage": [
+            287,
+            344
+          ]
+        },
+        "fallback": {
+          ".names": [
+            201,
+            68
+          ],
+          ".kicker": null,
+          ".stage": [
+            287,
+            344
+          ]
+        }
+      },
+      "underNav": {
+        "home": [],
+        "story": [],
+        "details": [],
+        "rsvp": [],
+        "rsvp+accept": []
+      }
+    }
+  },
+  "checks": [
+    {
+      "name": "victorian-glasshouse: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0.0013
+    },
+    {
+      "name": "victorian-glasshouse: CLS ≤ 0.1 with the fonts 3 s late",
+      "ok": true,
+      "detail": 0.0013
+    },
+    {
+      "name": "victorian-glasshouse: names fallback sets the names where the web font does (±2 px)",
+      "ok": true
+    },
+    {
+      "name": "victorian-glasshouse: nothing under the fixed bottom nav at the end of a page",
+      "ok": true
+    }
+  ]
+}

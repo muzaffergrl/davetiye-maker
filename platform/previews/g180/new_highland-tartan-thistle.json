@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-18T06:55:13.386Z",
+  "results": {
+    "highland-tartan-thistle": {
+      "load": {
+        "lcp": 1856,
+        "lcpElement": "mist m-far mist-1024.webp",
+        "cls": 0.0022,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/highland-tartan-thistle/img/ph_oval-640.webp"
+        ],
+        "deferred": [],
+        "kb": 268,
+        "early": [],
+        "sinceLoad": 6030
+      },
+      "lateFont": {
+        "lcp": 1616,
+        "lcpElement": "mist m-far mist-1024.webp",
+        "cls": 0.0021,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/highland-tartan-thistle/img/ph_oval-640.webp"
+        ],
+        "deferred": [],
+        "kb": 268,
+        "early": [],
+        "sinceLoad": 9028
+      },
+      "geometry": {
+        "web": {
+          ".names": [
+            214,
+            63
+          ],
+          ".kicker": null,
+          ".stage": [
+            303,
+            303
+          ]
+        },
+        "fallback": {
+          ".names": [
+            214,
+            63
+          ],
+          ".kicker": null,
+          ".stage": [
+            303,
+            303
+          ]
+        }
+      },
+      "underNav": {
+        "home": [],
+        "story": [],
+        "details": [],
+        "rsvp": [],
+        "rsvp+accept": []
+      }
+    }
+  },
+  "checks": [
+    {
+      "name": "highland-tartan-thistle: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0.0022
+    },
+    {
+      "name": "highland-tartan-thistle: CLS ≤ 0.1 with the fonts 3 s late",
+      "ok": true,
+      "detail": 0.0021
+    },
+    {
+      "name": "highland-tartan-thistle: names fallback sets the names where the web font does (±2 px)",
+      "ok": true
+    },
+    {
+      "name": "highland-tartan-thistle: nothing under the fixed bottom nav at the end of a page",
+      "ok": true
+    }
+  ]
+}

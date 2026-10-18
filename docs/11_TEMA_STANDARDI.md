@@ -467,6 +467,8 @@ bant genişliğini paylaşır (G173: LCP 3–5 s). Kural:
   **önce** birlikte yüklenir. Parçalar mutlak konumlu olduğu için `display:none` yerleşimi değiştirmez; `site.js` parçaların
   ölçüsünü dokunuşta okur. Kaynak ve test: `platform/tests/g180-theme-perf.test.ts` (işaretler), `tests/g180-browser.ts`
   (hiçbir ertelenen parça kapalı nesne yüklenmeden istenmez; hepsi dokunuştan önce yüklenir).
+- Açılışı yalnız CSS zeminleriyle çizilen tasarımda (33–38'in geçici parçaları) ertelenecek `<img>` yoktur; PAKET 5 parçaları
+  `<img>` olarak gelince kural uygulanır (yeniden `classify` + `data-defer`).
 - Sınır: misafir parçalar yüklenmeden dokunursa (yavaş 4G'de kapalı nesne göründükten sonraki ~1–2 s) parçalar animasyon
   sırasında gelir — G180 öncesinde de böyleydi (o zaman kapalı nesnenin kendisi de geç geliyordu).
 
@@ -787,6 +789,9 @@ const ENVELOPE_GEOMETRY = { out: 'translateY(…%)', front: 'translateY(…%) sc
   değişikliğinden sonra `node scripts/font-fallback.ts --theme <id>` (çalışan `next start` üzerinde), denetim `--check`.
   İsmi JS ile **tam tek satıra** ölçekleyen tema (04 `fitNames`: `one = genişlik / metin`) yedeği web yüzünden dar bulursa web yüzü
   gelince bir kare sarar: o temada yedek biraz geniş (`WIDER`, 04: +%1,5) ve site.js'ten önceki CSS ölçeği 1'in altında (.97).
+  İsmin hemen üstündeki satır (kicker / eyebrow) başka bir web yüzündeyse ve yedekte farklı sararsa aynı araç o aile için `fk1`/`fk2`
+  yazar (`KICKER` listesi; 36 Old Standard TT: web 2 satır, Times 1 satır). Denetim: `tests/g180-browser.ts` (fontlar engelliyken
+  isim, kicker ve sahne ±2 px).
 
 - Alfabe: isimler aksanlı olabilir (09 demo "Amélie"). Seçilen ailelerin Google Fonts CSS yanıtında `latin-ext` bloğu yoksa
   (yalnız `latin`) aksanlı isim başka fontla karışır → başlık için `latin-ext` destekli eş seçilir ya da Sonuç'a sınır olarak yazılır.

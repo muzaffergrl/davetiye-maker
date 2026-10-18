@@ -125,6 +125,22 @@ dokunuştan önce yükleniyor); azalan, kapalı nesneyle yarışan yüksek önce
 `python3 tools/recolor_parts.py build --design 32 --css-only` → paletlerin `--rose`'u 1 birim kaydı (kontrast kuralı zaten
 sabitliyordu); `check --design 32`: temiz.
 
+### 33–38 (koordinatör talebi, merge sonrası)
+Taban daldan gelen 6 yeni tasarıma (33 marigold-mehndi, 34 red-lacquer-double-happiness, 35 highland-tartan-thistle,
+36 victorian-glasshouse, 37 art-nouveau-lily, 38 papel-picado-fiesta; hepsi `coming`) aynı standart uygulandı:
+- **Yedek font:** `font-fallback.ts` 6 temaya `fb1`/`fb2` yazdı. 36'da isim değil, üstündeki "eyebrow kicker-line" (Old
+  Standard TT) yedek fontta 1, web fontta 2 satır oluyordu: kafa 144 → 121 px, sahne 12 px kayıyordu. Araç bu yüzden
+  isteğe bağlı kicker yüzleri (`fk1`/`fk2`, `KICKER` listesi) yazabiliyor; 36'da artık fontlar engelliyken geometri aynı.
+  CLS (G173 yöntemi, eski/yeni yan yana): 33 0,004 → 0,002, 34 0,007 → 0,004, 35 0,005 → 0,002, 36 0,041 → 0,035, 37 0,008 →
+  0,001, 38 0,002 → 0,001; fontlar 3 s geçken de aynı.
+- **LCP:** 0,85–2,0 s (ilk görünüm 166–292 KB). Açılış parçaları geçici olduğu için CSS zemini (`url(img/…)`), sahnede tek `<img>`
+  kart fotoğrafı; ertelenecek `<img>` parça yok. Kural PAKET 5 parçaları `<img>` olarak gelince uygulanır (docs/11 §6'ya not).
+- **Alt menü:** 6 tema × 5 sayfa, sayfa sonunda menünün altında içerik yok.
+- **Düğme kontrastı:** 38 temanın bütün sayfalarındaki dolu zeminli düğmeler (.btn, button, [role=button]) ölçüldü: 4,5:1 altı
+  yok. Ölçüm 32'nin eski `--rose`'unu enjekte edince 3,80:1'i yakalıyor. Bu denetim `tests/g180-browser.ts`'e eklendi (5. madde).
+- `theme-check --stress`: 6/6 hatasız (33–37 112/112, 38 110/110). Uyarılar: W1 comp ve PAKET 2 fotoğrafı henüz yok; 38'de geri
+  dönüşte view transition yok.
+
 ### Testler
 - `npm ci && rm -rf .next && npx tsc --noEmit && I18N_STRICT=1 npm test && npm run build`: merge sonrası **yeşil** — 1728 test,
   1725 geçti, 3 atlandı (build'siz), 0 hata; trace-check ve js-budget geçti (`/edit/[slug]` 188,2/205 KB).
@@ -133,8 +149,8 @@ sabitliyordu); `check --design 32`: temiz.
   ertelenen parçalar". Yeni `tests/g180-theme-perf.test.ts` (3 test): her sayfada aynı yedek-yüz bloğu `site.css`'ten önce,
   `site.css` yığınında fb1/fb2, ertelenen parçalar lazy + low, kapalı nesne high, serbest bırakma parçası bütün temalarda
   aynı, `site.css` ≤ 45 KB. Taban dalından gelen 33–38 (art-nouveau-lily, highland-tartan-thistle, marigold-mehndi,
-  papel-picado-fiesta, red-lacquer-double-happiness, victorian-glasshouse) başka oturumlarda yapılıyor; dosyalarına
-  dokunulmadı, test onları "henüz yedek yüz yok" tanısıyla listeliyor — standart (docs/11 §6, §12) onlar için de zorunlu.
+  papel-picado-fiesta, red-lacquer-double-happiness, victorian-glasshouse) ilk turda dışarıda kaldı;
+  koordinatörün isteğiyle sonra onlara da uygulandı (yukarıda "33–38"); test listesi artık 38 tema.
 - `node scripts/font-fallback.ts --check` (32 tema, taze ölçüm): fark yok.
 - `tests/g180-browser.ts` (yeni, build sonrası elle): **170/170** — 32 demo CLS ≤ 0,1 olduğu gibi ve fontlar 3 s geç; yedek
   fontla isim/kicker/sahne ±2 px; 21 temada hiçbir ertelenen parça kapalı nesne yüklenmeden istenmiyor ve hepsi dokunuştan önce
@@ -161,3 +177,4 @@ GPT'den görsel gerekmedi; yeni dekor çizilmedi (K21).
 ## Günlük
 - 2026-10-18 claude-G180: ölçüldü (32 demo, önce/sonra), düzeltildi, testler → inceleme
 - 2026-10-18 entegratör onayladı
+- 2026-10-18 claude-G180: koordinatör mesajıyla 33–38'e de uygulandı ("33–38" bölümü; G188 kapsamıyla aynı iş) — dalda, inceleme bekliyor
