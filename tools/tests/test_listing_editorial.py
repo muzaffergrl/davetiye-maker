@@ -154,3 +154,22 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def test_palettes_g178():
+    """G178: the palette images list the original first, then theme.json's palettes; GPT-waiting palettes get no image;
+    every palette image that exists is a 2000 px square JPEG with its own file name."""
+    for t in lk.THEMES.values():
+        pal = lk.palettes(t)
+        tj = json.loads((REPO / "platform" / "themes" / t.id / "theme.json").read_text(encoding="utf-8"))
+        assert [p["id"] for p in pal] == [None] + [v["id"] for v in tj.get("variants") or []]
+        assert pal[0]["gpt"] == []
+        d = t.package / "listing" / "images_editorial"
+        for p in pal:
+            f = d / f"{le.palette_image_name(p['id'])}.jpg"
+            if p["gpt"]:
+                assert not f.exists(), f"{f} exists but the palette waits for GPT parts {p['gpt']}"
+            elif f.exists():
+                im = Image.open(f)
+                assert im.format == "JPEG" and im.size == (2000, 2000), f
+    assert le.palette_image_name(None) == "palette_original"
