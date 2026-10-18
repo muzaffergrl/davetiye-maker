@@ -7,7 +7,7 @@ const OPENING_PROFILE={"id":"grand-theatre-premiere","kind":"theatre-curtains","
  const card=q('.opening-card'),slot=q('.card-slot'),closed=q('.env-closed'),flap=q('.env-flap'),cflap=q('.env-cflap'),body=q('.env-body'),pocket=q('.env-pocket'),left=q('.opening-leaf-left'),right=q('.opening-leaf-right');
  let data={};try{data=JSON.parse(document.getElementById('site-data')?.textContent||'{}')}catch{}
  const home=data.pages?.home||q('[data-enter]')?.href||'home.html',key=data.slug?':'+data.slug:'',media=matchMedia('(prefers-reduced-motion: reduce)');
- const save=()=>{try{sessionStorage.setItem('invite:opening-v2:opened'+key,'1');sessionStorage.removeItem('invite:arrive'+key)}catch{}};
+ const save=()=>{try{sessionStorage.setItem('invite:opened'+key,'1');sessionStorage.setItem('invite:opening-v2:opened'+key,'1');sessionStorage.removeItem('invite:arrive'+key)}catch{}};
  let state=root.classList.contains('is-opened')?'opened':'closed',generation=0,animations=[],timers=[];
  const later=(fn,ms)=>{const token=generation;timers.push(setTimeout(()=>{if(token===generation)fn()},ms))};
  function animate(node,keyframes,delay,duration,easing='cubic-bezier(.22,.7,.25,1)',fill='both'){if(!node)return;const a=node.animate(keyframes,{delay,duration,easing,fill});animations.push(a);return a;}

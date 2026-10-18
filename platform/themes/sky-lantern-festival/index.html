@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="site.css">
 <link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
 <script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
-(function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'';if(sessionStorage.getItem('invite:opening-v2:opened'+k)&&!/[?&]replay=1(&|$)/.test(location.search))r.classList.add('is-opened');}catch(e){}})(document.documentElement);
+(function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'';if(sessionStorage.getItem('invite:opened'+k)&&sessionStorage.getItem('invite:opening-v2:opened'+k)&&!/[?&]replay=1(&|$)/.test(location.search))r.classList.add('is-opened');}catch(e){}})(document.documentElement);
 </script>
 <style>.js:not(.parts-on) img[data-defer]{display:none!important}</style>
 <script>/* deferred opening parts (G180, docs/11 §6): the images that only show after the tap ([data-defer], lazy) wait until the
