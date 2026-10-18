@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 1 · alindi 0 · inceleme 0 · blokaj 2 · bitti 211 · iptal 256 · toplam 470
+Özet: hazir 1 · alindi 6 · inceleme 0 · blokaj 2 · bitti 211 · iptal 256 · toplam 476
 
 İptal edilen görevler (K22/K24 ile anlamını yitirenler) listelenmez; yalnız sayıları var. Ayrıntı: `python3 tools/gorev.py liste --hepsi`.
 
@@ -37,9 +37,14 @@ Bağımlılık bekleyen: 0 · Biten: 8 · İptal: 42
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (0)**
+**Üzerinde çalışılan / incelemede / blokaj (6)**
 
-- (yok)
+- `G182` alindi · claude-G182 — 33 Marigold & Mehndi — yeni tasarım (3. dalga), platform teması (GPT parçalarından önce), coming kaydı
+- `G183` alindi · claude-G183 — 34 Red Lacquer & Double Happiness — yeni tasarım (3. dalga), platform teması (GPT parçalarından önce), coming kaydı
+- `G184` alindi · claude-G184 — 35 Highland Tartan & Thistle — yeni tasarım (3. dalga), platform teması (GPT parçalarından önce), coming kaydı
+- `G185` alindi · claude-G185 — 36 Victorian Glasshouse — yeni tasarım (3. dalga), platform teması (GPT parçalarından önce), coming kaydı
+- `G186` alindi · claude-G186 — 37 Art Nouveau Lily — yeni tasarım (3. dalga), platform teması (GPT parçalarından önce), coming kaydı
+- `G187` alindi · claude-G187 — 38 Papel Picado Fiesta — yeni tasarım (3. dalga), platform teması (GPT parçalarından önce), coming kaydı
 
 Bağımlılık bekleyen: 0 · Biten: 119 · İptal: 82
 
