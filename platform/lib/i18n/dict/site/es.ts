@@ -297,6 +297,10 @@ const dict: Dict = {
   'Turn the key': 'Gira la llave',
   'Wind the music box again': 'Vuelve a dar cuerda a la caja de música',
   'Reflections': 'Reflejos',
+  // G184 Highland Tartan & Thistle
+  'Gathered in the hills': 'Reunidos en las colinas',
+  'Invite you to celebrate': 'te invitan a celebrar',
+  'Open the envelope': 'Abrir el sobre',
 };
 
 export default dict;

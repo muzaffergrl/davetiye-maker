@@ -2,7 +2,7 @@
 id: G184
 baslik: 35 Highland Tartan & Thistle — yeni tasarım (3. dalga), platform teması (GPT parçalarından önce), coming kaydı
 rol: claude-kod
-durum: hazir
+durum: alindi
 alan: claude-G184
 oncelik: 2
 bagimli: [G168, G175]

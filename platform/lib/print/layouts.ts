@@ -5,7 +5,7 @@
 // bottom, left; bands = where decoration reaches into it, G149) and the colours / fonts of the design's own website
 // (themes/<id>/site.css). The part files are copied at full size by scripts/build-print-assets.ts into
 // public/print/<id>/ (card.webp, back.webp, paper.webp).
-// Designs without card parts yet (21, 22, 24, 25, 26, 29) are "composed": the trimmed sheet is the card, set from the design's existing
+// Designs without card parts yet (21, 22, 24, 25, 26, 29, 35) are "composed": the trimmed sheet is the card, set from the design's existing
 // GPT images (no shape drawn, K21) until the parts asked for in the collection's GPT_PROMPTS.md (G139) arrive.
 
 export type Box = readonly [top: number, right: number, bottom: number, left: number];
@@ -471,6 +471,29 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     composed: {
       front: { bg: cover('paper'), images: [{ src: 'petal', style: 'top:6%;left:50%;width:14%;transform:translateX(-50%) rotate(-18deg)' }] },
       back: { bg: cover('paper'), images: [{ src: 'petal', style: 'bottom:5%;left:50%;width:10%;transform:translateX(-50%) rotate(12deg)' }] },
+    },
+  },
+  // 35 (G184, interim until PAKET 6 print/invitation_front_5x7.png + print/invitation_back_5x7.png, 1575×2175, one sheet
+  // per side for 5×7 and A5 — GPT_PROMPTS.md): cream paper with a band of the heather wool at its top and bottom edge —
+  // both toned textures cut by the theme build (img/paper, img/wool; no shape drawn, no tartan line drawn). The prompts
+  // keep the front / back boxes below empty on the art; on arrival: sources → { front, back } of those two files,
+  // composed → { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }, re-measure the
+  // boxes on the art (G149), then build-print-assets.
+  'highland-tartan-thistle': {
+    collection: '35_Highland_Tartan_Thistle',
+    sources: { paper: 'platform/themes/highland-tartan-thistle/img/paper-1024.webp', wool: 'platform/themes/highland-tartan-thistle/img/wool-640.webp' },
+    fonts: gf('family=Rouge+Script&family=Sorts+Mill+Goudy:ital@0;1'),
+    script: "'Rouge Script', cursive", serif: "'Sorts Mill Goudy', Georgia, serif",
+    ink: '#2A2620', accent: '#46512C', front: [21, 13, 19, 13], back: [17, 12, 10, 12],
+    composed: {
+      front: {
+        bg: 'url(paper.webp) 0 0 / 2.4in repeat',
+        images: [
+          { src: 'wool', style: 'top:0;left:0;width:100%;height:12%;object-fit:cover' },
+          { src: 'wool', style: 'bottom:0;left:0;width:100%;height:10%;object-fit:cover;object-position:50% 80%' },
+        ],
+      },
+      back: { bg: 'url(paper.webp) 0 0 / 2.4in repeat', images: [{ src: 'wool', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover' }] },
     },
   },
 };

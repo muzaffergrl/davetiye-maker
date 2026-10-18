@@ -1,4 +1,4 @@
-// G175: every design of lib/marketing/config.ts — live and coming (22–32) — has its own opening sentence in
+// G175: every design of lib/marketing/config.ts — live and coming (22–32, 35) — has its own opening sentence in
 // lib/marketing/designs.ts, so the panel's first preview tab is named after it (openingTabLabel, G121) and never falls
 // back to "Opening"; the START HERE guides (tools/build_customer_guides.py) print the same word. 26 Kintsugi & Washi had
 // no sales copy (G164) and showed "Opening"; its object is the origami. Every opening word is translated on the sales
@@ -23,10 +23,11 @@ const COMING_OPENINGS: Record<string, string> = {
   'azulejo-mosaic': 'wall',
   'sky-lantern-festival': 'lantern',
   'music-box-ballerina': 'box',
+  'highland-tartan-thistle': 'envelope',
 };
 
 test('G175: every configured design has an opening object, and the panel tab is named after it', () => {
-  assert.equal(MARKETING.designs.length, 32);
+  assert.equal(MARKETING.designs.length, 33);
   for (const d of MARKETING.designs) {
     const copy = DESIGN_COPY[d.id];
     assert.ok(copy, `${d.id}: no sales copy in lib/marketing/designs.ts`);
