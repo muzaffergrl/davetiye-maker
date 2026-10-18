@@ -500,6 +500,13 @@ EK_TEMALAR = [
          dekor="Zambak, kıvrımlı (whiplash) altın çizgiler, vitray, mozaik altın hâle", teknik="Mucha tarzı poster + vitray",
          font=("Ephesis", "Federant"), palet_adi="sage-gold-cream-lilac",
          hareket="Vitraydan süzülen ışık bandı ve madalyonun parlayıp kalkması, taç yaprağı kapakların menteşelerinde çiçek açar gibi açılması (yan yapraklar dışa kıvrılır, astar 90°'de devralır), altın kıvrım çizgilerinin akarak çizilmesi (maske), ışık geçince renkleri canlanan kemer fotoğraflar, metnin camdan geçen renk gibi bulanıklıktan netleşmesi, RSVP'de süzülen zambak yaprakları"),
+    # 3. dalga (33–38, docs/24, K23 sıkı: ilk sayfa kapalı zarf; zarfın türü/kapanması/koreografisi farklı)
+    dict(no=38, klasor="38_Papel_Picado_Fiesta", ad="Papel Picado Fiesta",
+         zarf="Dikey kraft zarf, düz (V olmayan) kapak, mühür yok; kapağı renkli kâğıt kesim (papel picado) bayraklardan bir kemer bant tutar. Bant gevşer, altı bayrak tek tek uçup isimlerin üstünde gökyüzüne bir süs dizisi olarak dizilir ve rüzgârda dalgalanır, düz kapak üst kenarında 3B kalkıp işlemeli astarını gösterir, ampul dizisi sırayla yanar, kart cepten yükselir.",
+         foto="Renkli kâğıt kesim çerçeveler üst kenarından asılı: sahnesine gelince düşüp sarkaç gibi sallanarak durur, sonra esintide hafifçe salınır; hızlı kaydırınca rüzgâr artar.",
+         dekor="Papel picado bayrakları, bugenvil, terrakota, ampul dizileri, işlemeli kumaş", teknik="canlı kâğıt kesim + fotogerçekçi",
+         font=("Oleo Script", "Alegreya"), palet_adi="fiesta-multicolor-terracotta",
+         hareket="Kemer bandın çözülmesi (bayraklar ayrılır), bayrakların zarftan göğe uçup süs dizisine dizilmesi ve CSS dalgasıyla ayrı fazlarda dalgalanması, düz kapağın üst menteşede 3B kalkışı, ampullerin sırayla yanması, asılı çerçevelerin sarkaç gibi düşüp sallanması ve kaydırma hızıyla artan rüzgâr, metnin bayrak gibi üst kenarından açılması, RSVP'de süzülerek düşen bayraklar."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

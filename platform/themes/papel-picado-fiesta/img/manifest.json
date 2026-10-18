@@ -1,0 +1,410 @@
+{
+ "sources": {
+  "kraft_paper": "collections/04_Vintage_Airmail/assets/gpt/parts/bg_tile.png",
+  "limewash_wall": "collections/11_Boho_Pampas/assets/gpt/parts/bg_tile.png",
+  "cream_paper": "collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png",
+  "terracotta": "collections/11_Boho_Pampas/assets/gpt/parts/bg_tile.png"
+ },
+ "kraft": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "kraft-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 34170
+   },
+   {
+    "file": "kraft-1024.webp",
+    "w": 1024,
+    "h": 1024,
+    "bytes": 103370
+   }
+  ]
+ },
+ "wall": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "wall-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 2962
+   },
+   {
+    "file": "wall-1024.webp",
+    "w": 1024,
+    "h": 1024,
+    "bytes": 10538
+   }
+  ]
+ },
+ "paper": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "paper-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 5470
+   },
+   {
+    "file": "paper-1024.webp",
+    "w": 1024,
+    "h": 1024,
+    "bytes": 24278
+   }
+  ]
+ },
+ "terra": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "terra-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 31294
+   }
+  ]
+ },
+ "flag_1": {
+  "src_size": [
+   200,
+   250
+  ],
+  "ratio": 0.8,
+  "files": [
+   {
+    "file": "flag_1-200.webp",
+    "w": 200,
+    "h": 250,
+    "bytes": 7084
+   }
+  ]
+ },
+ "tissue_1": {
+  "src_size": [
+   480,
+   480
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "tissue_1-480.webp",
+    "w": 480,
+    "h": 480,
+    "bytes": 29176
+   }
+  ]
+ },
+ "flag_2": {
+  "src_size": [
+   200,
+   250
+  ],
+  "ratio": 0.8,
+  "files": [
+   {
+    "file": "flag_2-200.webp",
+    "w": 200,
+    "h": 250,
+    "bytes": 7306
+   }
+  ]
+ },
+ "tissue_2": {
+  "src_size": [
+   480,
+   480
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "tissue_2-480.webp",
+    "w": 480,
+    "h": 480,
+    "bytes": 28352
+   }
+  ]
+ },
+ "flag_3": {
+  "src_size": [
+   200,
+   250
+  ],
+  "ratio": 0.8,
+  "files": [
+   {
+    "file": "flag_3-200.webp",
+    "w": 200,
+    "h": 250,
+    "bytes": 7160
+   }
+  ]
+ },
+ "tissue_3": {
+  "src_size": [
+   480,
+   480
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "tissue_3-480.webp",
+    "w": 480,
+    "h": 480,
+    "bytes": 29012
+   }
+  ]
+ },
+ "flag_4": {
+  "src_size": [
+   200,
+   250
+  ],
+  "ratio": 0.8,
+  "files": [
+   {
+    "file": "flag_4-200.webp",
+    "w": 200,
+    "h": 250,
+    "bytes": 7206
+   }
+  ]
+ },
+ "tissue_4": {
+  "src_size": [
+   480,
+   480
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "tissue_4-480.webp",
+    "w": 480,
+    "h": 480,
+    "bytes": 29116
+   }
+  ]
+ },
+ "flag_5": {
+  "src_size": [
+   200,
+   250
+  ],
+  "ratio": 0.8,
+  "files": [
+   {
+    "file": "flag_5-200.webp",
+    "w": 200,
+    "h": 250,
+    "bytes": 7220
+   }
+  ]
+ },
+ "tissue_5": {
+  "src_size": [
+   480,
+   480
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "tissue_5-480.webp",
+    "w": 480,
+    "h": 480,
+    "bytes": 28886
+   }
+  ]
+ },
+ "flag_6": {
+  "src_size": [
+   200,
+   250
+  ],
+  "ratio": 0.8,
+  "files": [
+   {
+    "file": "flag_6-200.webp",
+    "w": 200,
+    "h": 250,
+    "bytes": 7202
+   }
+  ]
+ },
+ "tissue_6": {
+  "src_size": [
+   480,
+   480
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "tissue_6-480.webp",
+    "w": 480,
+    "h": 480,
+    "bytes": 29064
+   }
+  ]
+ },
+ "flags": {
+  "flag_1": "interim: collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png toned (214, 58, 122), plain rectangle",
+  "flag_2": "interim: collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png toned (242, 163, 27), plain rectangle",
+  "flag_3": "interim: collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png toned (28, 150, 164), plain rectangle",
+  "flag_4": "interim: collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png toned (118, 166, 58), plain rectangle",
+  "flag_5": "interim: collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png toned (122, 79, 160), plain rectangle",
+  "flag_6": "interim: collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png toned (232, 86, 55), plain rectangle"
+ },
+ "ph_portrait": {
+  "src_size": [
+   640,
+   800
+  ],
+  "ratio": 0.8,
+  "files": [
+   {
+    "file": "ph_portrait-640.webp",
+    "w": 640,
+    "h": 800,
+    "bytes": 1190
+   }
+  ]
+ },
+ "ph_wide": {
+  "src_size": [
+   640,
+   360
+  ],
+  "ratio": 1.77778,
+  "files": [
+   {
+    "file": "ph_wide-640.webp",
+    "w": 640,
+    "h": 360,
+    "bytes": 600
+   }
+  ]
+ },
+ "placeholders": {
+  "portrait": "ph_portrait-640.webp",
+  "venue": "ph_wide-640.webp"
+ },
+ "photo_slots": {
+  "hero_portrait": {
+   "aspect": "4/5"
+  },
+  "story_1": {
+   "aspect": "4/5"
+  },
+  "story_2": {
+   "aspect": "4/5"
+  },
+  "story_3": {
+   "aspect": "4/5"
+  },
+  "venue": {
+   "aspect": "16/9"
+  }
+ },
+ "stage": {
+  "aspect": 0.74,
+  "flap_pct": [
+   0,
+   0,
+   100,
+   30
+  ],
+  "band_pct": [
+   0,
+   22,
+   100,
+   15.4
+  ],
+  "card_pct": [
+   7,
+   5,
+   86,
+   90
+  ],
+  "flag_ratio": 0.8,
+  "_note": "% of the closed envelope (left, top, width, height); six flags across the band"
+ },
+ "og": {
+  "file": "og-1200x630.jpg",
+  "source": "montage: closed envelope (kraft + tissue band) on the wall",
+  "bytes": 69603
+ },
+ "favicon": {
+  "src_box": [
+   31,
+   35,
+   322,
+   426
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.04,
+  "file": "favicon.png",
+  "bytes": 24128
+ },
+ "parts": {
+  "used": [],
+  "waiting_for_gpt": [
+   "envelope_pocket",
+   "envelope_flap",
+   "flap_liner",
+   "bulb",
+   "frame_1",
+   "frame_2",
+   "frame_3",
+   "frame_wide",
+   "bougainvillea",
+   "embroidery_band",
+   "web_hero",
+   "flag_1",
+   "flag_2",
+   "flag_3",
+   "flag_4",
+   "flag_5",
+   "flag_6",
+   "kraft_paper",
+   "limewash_wall",
+   "cream_paper",
+   "terracotta"
+  ]
+ },
+ "_note": "G187 interim build: kraft, wall, paper, terracotta and the tissue flags cut and toned from other designs' plain GPT papers; the design's own PAKET 5 parts are taken as they arrive (GPT_PROMPTS.md, manifest parts). Nothing drawn.",
+ "parts_css_rules": 0,
+ "checks": {
+  "green": {
+   "flag_4-200.webp": 93,
+   "tissue_4-480.webp": 2614
+  }
+ },
+ "theme_check": {
+  "particles": ".accent-layer",
+  "first_screen": {
+   "landscape": false,
+   "names_min_px": 32
+  }
+ },
+ "bytes_total": 658529
+}

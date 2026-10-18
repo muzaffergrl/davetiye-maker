@@ -316,6 +316,10 @@ const dict: Dict = {
   // G186 Art Nouveau Lily
   "Invite you to celebrate": "Sizi kutlamaya davet ediyor",
   "Love in full bloom": "Çiçek açan aşk",
+  // G187 Papel Picado Fiesta
+  "A fiesta of love": "Aşkın fiestası",
+  "Open the envelope": "Zarfı aç",
+  "Together with their families": "Aileleriyle birlikte",
 };
 
 export default dict;

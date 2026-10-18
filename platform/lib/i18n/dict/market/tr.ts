@@ -1063,6 +1063,18 @@ const dict: Dict = {
   "The order of the day on cream paper, the venue photo lit by a passing band of light, an optional map, dress code, travel and questions and answers.": "Krem kâğıtta günün programı, geçen bir ışık bandıyla aydınlanan mekân fotoğrafı, isteğe bağlı harita, kıyafet, ulaşım ve sorular-cevaplar.",
   "A cream reply card with your names and reply-by date, then the reply form; a few lily petals drift down when a reply is sent.": "İsimleriniz ve son yanıt tarihiyle krem bir yanıt kartı, ardından yanıt formu; yanıt gönderilince birkaç zambak yaprağı süzülür.",
   "Lilac": "Leylak",
+  // G187 Papel Picado Fiesta (38, coming)
+  "A kraft envelope tied with a band of cut-paper flags, terracotta, bougainvillea colours and photos in swaying paper frames": "Kâğıt kesim bayraklardan bir kuşakla bağlanmış kraft zarf, terrakota, begonvil renkleri ve sallanan kâğıt çerçevelerde fotoğraflar",
+  "A papel picado wedding website: a band of cut-paper flags flies up into a waving garland and the kraft envelope opens to your invitation. Personalize it in your online editor.": "Papel picado düğün sitesi: kâğıt kesim bayraklardan kuşak uçarak dalgalanan bir süs dizisine dönüşür ve kraft zarf davetinize açılır. Çevrim içi düzenleyicinizde kişiselleştirin.",
+  "Fuchsia, marigold, turquoise and terracotta on a sunny limewash wall, like a courtyard dressed for a fiesta. Your invitation waits in a kraft envelope, and every photo hangs in a cut-paper frame that sways in the breeze.": "Güneşli kireç badanalı bir duvarda fuşya, kadife çiçeği sarısı, turkuaz ve terrakota; fiesta için süslenmiş bir avlu gibi. Davetiniz kraft bir zarfta bekler ve her fotoğraf esintide sallanan bir kâğıt kesim çerçevede asılıdır.",
+  "Your guests tap the envelope. The band of cut-paper flags works loose and its flags fly up one by one into a garland that waves above your names, the kraft flap swings open, and the card with your portrait rises out of the envelope and comes forward to become your home page.": "Misafirleriniz zarfa dokunur. Kâğıt kesim bayraklardan kuşak gevşer, bayraklar tek tek uçup isimlerinizin üstünde dalgalanan bir süs dizisine dizilir, kraft kapak açılır ve portrenizin olduğu kart zarftan yükselip öne gelerek ana sayfanız olur.",
+  "Your portrait in a cut-paper frame on a cream card under the garland, then the invitation, a countdown and calendar links, and the day on a terracotta band.": "Süs dizisinin altında krem bir kartta kâğıt kesim çerçevede portreniz, ardından davet, geri sayım ve takvim bağlantıları, terrakota bir bantta da düğün günü.",
+  "Three photos in cut-paper frames that drop in and swing to rest as guests scroll, and sway a little more when they scroll faster.": "Kaydırdıkça düşüp sallanarak duran, daha hızlı kaydırıldığında biraz daha çok sallanan kâğıt kesim çerçevelerde üç fotoğraf.",
+  "The order of the day on kraft paper, each moment with a small flag that swings in, a venue photo in a wide frame, an optional map, dress code, travel, the menu and questions and answers.": "Kraft kâğıtta günün programı, her an sallanarak gelen küçük bir bayrakla, geniş bir çerçevede mekân fotoğrafı, isteğe bağlı harita, kıyafet kuralı, ulaşım, menü ve sorular ile cevaplar.",
+  "A cream reply card under a small garland of flags; when a reply is sent, a few flags flutter down.": "Küçük bir bayrak dizisinin altında krem bir yanıt kartı; yanıt gönderildiğinde birkaç bayrak süzülerek düşer.",
+  "Fuchsia": "Fuşya",
+  "Marigold": "Kadife çiçeği",
+  "Turquoise": "Turkuaz",
 };
 
 export default dict;
