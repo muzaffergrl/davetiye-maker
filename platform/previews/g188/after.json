@@ -1,0 +1,503 @@
+{
+  "date": "2026-10-18T07:06:25.794Z",
+  "results": {
+    "art-nouveau-lily": {
+      "load": {
+        "lcp": 1008,
+        "lcpElement": "env-back paper-640.webp",
+        "cls": 0.0006,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/art-nouveau-lily/img/ph_arch-640.webp"
+        ],
+        "deferred": [],
+        "kb": 166,
+        "early": [],
+        "sinceLoad": 6028
+      },
+      "lateFont": {
+        "lcp": 828,
+        "lcpElement": "env-back paper-640.webp",
+        "cls": 0.0006,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/art-nouveau-lily/img/ph_arch-640.webp"
+        ],
+        "deferred": [],
+        "kb": 166,
+        "early": [],
+        "sinceLoad": 9022
+      },
+      "geometry": {
+        "web": {
+          ".names": [
+            207,
+            63
+          ],
+          ".kicker": [
+            183,
+            19
+          ],
+          ".stage": [
+            297,
+            329
+          ]
+        },
+        "fallback": {
+          ".names": [
+            207,
+            63
+          ],
+          ".kicker": [
+            183,
+            19
+          ],
+          ".stage": [
+            297,
+            329
+          ]
+        }
+      },
+      "underNav": {
+        "home": [],
+        "story": [],
+        "details": [],
+        "rsvp": [],
+        "rsvp+accept": []
+      }
+    },
+    "highland-tartan-thistle": {
+      "load": {
+        "lcp": 1864,
+        "lcpElement": "mist m-far mist-1024.webp",
+        "cls": 0.0022,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/highland-tartan-thistle/img/ph_oval-640.webp"
+        ],
+        "deferred": [],
+        "kb": 268,
+        "early": [],
+        "sinceLoad": 6024
+      },
+      "lateFont": {
+        "lcp": 1608,
+        "lcpElement": "mist m-far mist-1024.webp",
+        "cls": 0.0021,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/highland-tartan-thistle/img/ph_oval-640.webp"
+        ],
+        "deferred": [],
+        "kb": 268,
+        "early": [],
+        "sinceLoad": 9022
+      },
+      "geometry": {
+        "web": {
+          ".names": [
+            214,
+            63
+          ],
+          ".kicker": null,
+          ".stage": [
+            303,
+            303
+          ]
+        },
+        "fallback": {
+          ".names": [
+            214,
+            63
+          ],
+          ".kicker": null,
+          ".stage": [
+            303,
+            303
+          ]
+        }
+      },
+      "underNav": {
+        "home": [],
+        "story": [],
+        "details": [],
+        "rsvp": [],
+        "rsvp+accept": []
+      }
+    },
+    "marigold-mehndi": {
+      "load": {
+        "lcp": 1992,
+        "lcpElement": "env-back silk-640.webp",
+        "cls": 0.002,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/marigold-mehndi/img/ph_arch-640.webp"
+        ],
+        "deferred": [],
+        "kb": 292,
+        "early": [],
+        "sinceLoad": 6020
+      },
+      "lateFont": {
+        "lcp": 1560,
+        "lcpElement": "env-back silk-640.webp",
+        "cls": 0.0021,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/marigold-mehndi/img/ph_arch-640.webp"
+        ],
+        "deferred": [],
+        "kb": 292,
+        "early": [],
+        "sinceLoad": 9026
+      },
+      "geometry": {
+        "web": {
+          ".names": [
+            201,
+            52
+          ],
+          ".kicker": null,
+          ".stage": [
+            288,
+            331
+          ]
+        },
+        "fallback": {
+          ".names": [
+            201,
+            52
+          ],
+          ".kicker": null,
+          ".stage": [
+            288,
+            331
+          ]
+        }
+      },
+      "underNav": {
+        "home": [],
+        "story": [],
+        "details": [],
+        "rsvp": [],
+        "rsvp+accept": []
+      }
+    },
+    "papel-picado-fiesta": {
+      "load": {
+        "lcp": 1708,
+        "lcpElement": "pocket kraft-640.webp",
+        "cls": 0.0014,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/papel-picado-fiesta/img/ph_portrait-640.webp"
+        ],
+        "deferred": [],
+        "kb": 274,
+        "early": [],
+        "sinceLoad": 6025
+      },
+      "lateFont": {
+        "lcp": 1412,
+        "lcpElement": "pocket kraft-640.webp",
+        "cls": 0.0014,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/papel-picado-fiesta/img/ph_portrait-640.webp"
+        ],
+        "deferred": [],
+        "kb": 274,
+        "early": [],
+        "sinceLoad": 9028
+      },
+      "geometry": {
+        "web": {
+          ".names": [
+            220,
+            59
+          ],
+          ".kicker": null,
+          ".stage": [
+            380,
+            306
+          ]
+        },
+        "fallback": {
+          ".names": [
+            220,
+            59
+          ],
+          ".kicker": null,
+          ".stage": [
+            380,
+            306
+          ]
+        }
+      },
+      "underNav": {
+        "home": [],
+        "story": [],
+        "details": [],
+        "rsvp": [],
+        "rsvp+accept": []
+      }
+    },
+    "red-lacquer-double-happiness": {
+      "load": {
+        "lcp": 1044,
+        "lcpElement": "env-back red-640.webp",
+        "cls": 0.0035,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/red-lacquer-double-happiness/img/ph_round-640.webp"
+        ],
+        "deferred": [],
+        "kb": 209,
+        "early": [],
+        "sinceLoad": 6038
+      },
+      "lateFont": {
+        "lcp": 992,
+        "lcpElement": "env-back red-640.webp",
+        "cls": 0.0035,
+        "shifts": [],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/red-lacquer-double-happiness/img/ph_round-640.webp"
+        ],
+        "deferred": [],
+        "kb": 209,
+        "early": [],
+        "sinceLoad": 9023
+      },
+      "geometry": {
+        "web": {
+          ".names": [
+            169,
+            66
+          ],
+          ".kicker": null,
+          ".stage": [
+            259,
+            366
+          ]
+        },
+        "fallback": {
+          ".names": [
+            169,
+            66
+          ],
+          ".kicker": null,
+          ".stage": [
+            259,
+            366
+          ]
+        }
+      },
+      "underNav": {
+        "home": [],
+        "story": [],
+        "details": [],
+        "rsvp": [],
+        "rsvp+accept": []
+      }
+    },
+    "victorian-glasshouse": {
+      "load": {
+        "lcp": 1136,
+        "lcpElement": "pk-body kraft-640.webp",
+        "cls": 0.0345,
+        "shifts": [
+          [
+            1465,
+            0.0333,
+            "DIV.opening-heading,DIV.card-slot,::before.,DIV.opening-actions,P.opening-date"
+          ]
+        ],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/victorian-glasshouse/img/ph_tall-640.webp"
+        ],
+        "deferred": [],
+        "kb": 195,
+        "early": [],
+        "sinceLoad": 6025
+      },
+      "lateFont": {
+        "lcp": 972,
+        "lcpElement": "pk-body kraft-640.webp",
+        "cls": 0.0338,
+        "shifts": [
+          [
+            4148,
+            0.0325,
+            "DIV.opening-heading,DIV.card-slot,::before.,DIV.opening-actions,P.opening-date"
+          ]
+        ],
+        "high": [],
+        "shared": [
+          "http://127.0.0.1:3480/themes/victorian-glasshouse/img/ph_tall-640.webp"
+        ],
+        "deferred": [],
+        "kb": 195,
+        "early": [],
+        "sinceLoad": 9031
+      },
+      "geometry": {
+        "web": {
+          ".names": [
+            201,
+            68
+          ],
+          ".kicker": null,
+          ".stage": [
+            287,
+            344
+          ]
+        },
+        "fallback": {
+          ".names": [
+            189,
+            68
+          ],
+          ".kicker": null,
+          ".stage": [
+            275,
+            344
+          ]
+        }
+      },
+      "underNav": {
+        "home": [],
+        "story": [],
+        "details": [],
+        "rsvp": [],
+        "rsvp+accept": []
+      }
+    }
+  },
+  "checks": [
+    {
+      "name": "art-nouveau-lily: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0.0006
+    },
+    {
+      "name": "art-nouveau-lily: CLS ≤ 0.1 with the fonts 3 s late",
+      "ok": true,
+      "detail": 0.0006
+    },
+    {
+      "name": "art-nouveau-lily: names fallback sets the names where the web font does (±2 px)",
+      "ok": true
+    },
+    {
+      "name": "art-nouveau-lily: nothing under the fixed bottom nav at the end of a page",
+      "ok": true
+    },
+    {
+      "name": "highland-tartan-thistle: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0.0022
+    },
+    {
+      "name": "highland-tartan-thistle: CLS ≤ 0.1 with the fonts 3 s late",
+      "ok": true,
+      "detail": 0.0021
+    },
+    {
+      "name": "highland-tartan-thistle: names fallback sets the names where the web font does (±2 px)",
+      "ok": true
+    },
+    {
+      "name": "highland-tartan-thistle: nothing under the fixed bottom nav at the end of a page",
+      "ok": true
+    },
+    {
+      "name": "marigold-mehndi: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0.002
+    },
+    {
+      "name": "marigold-mehndi: CLS ≤ 0.1 with the fonts 3 s late",
+      "ok": true,
+      "detail": 0.0021
+    },
+    {
+      "name": "marigold-mehndi: names fallback sets the names where the web font does (±2 px)",
+      "ok": true
+    },
+    {
+      "name": "marigold-mehndi: nothing under the fixed bottom nav at the end of a page",
+      "ok": true
+    },
+    {
+      "name": "papel-picado-fiesta: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0.0014
+    },
+    {
+      "name": "papel-picado-fiesta: CLS ≤ 0.1 with the fonts 3 s late",
+      "ok": true,
+      "detail": 0.0014
+    },
+    {
+      "name": "papel-picado-fiesta: names fallback sets the names where the web font does (±2 px)",
+      "ok": true
+    },
+    {
+      "name": "papel-picado-fiesta: nothing under the fixed bottom nav at the end of a page",
+      "ok": true
+    },
+    {
+      "name": "red-lacquer-double-happiness: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0.0035
+    },
+    {
+      "name": "red-lacquer-double-happiness: CLS ≤ 0.1 with the fonts 3 s late",
+      "ok": true,
+      "detail": 0.0035
+    },
+    {
+      "name": "red-lacquer-double-happiness: names fallback sets the names where the web font does (±2 px)",
+      "ok": true
+    },
+    {
+      "name": "red-lacquer-double-happiness: nothing under the fixed bottom nav at the end of a page",
+      "ok": true
+    },
+    {
+      "name": "victorian-glasshouse: CLS ≤ 0.1",
+      "ok": true,
+      "detail": 0.0345
+    },
+    {
+      "name": "victorian-glasshouse: CLS ≤ 0.1 with the fonts 3 s late",
+      "ok": true,
+      "detail": 0.0338
+    },
+    {
+      "name": "victorian-glasshouse: names fallback sets the names where the web font does (±2 px)",
+      "ok": false,
+      "detail": [
+        ".names 201,68 → 189,68",
+        ".stage 287,344 → 275,344"
+      ]
+    },
+    {
+      "name": "victorian-glasshouse: nothing under the fixed bottom nav at the end of a page",
+      "ok": true
+    }
+  ]
+}

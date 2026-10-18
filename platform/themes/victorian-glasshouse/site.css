@@ -8,7 +8,7 @@
 :root{--fern:#1c3328;--fern-2:#2f523e;--fern-deep:#12241b;--glass:#e2eae3;--paper:#f3eddf;--paper-2:#dfe3d6;--ink:#1e2b24;
 --ink-soft:#4a5a50;--copper:#b26a3c;--copper-light:#d99a68;--copper-ink:#8a4a22;--verdigris:#6f9e8e;--kraft:#ac8054;
 --mist:#eef3ef;--line:#d99a6852;--line-ink:#1e2b2433;--serif:'Old Standard TT','Times New Roman',serif;
---script:'Monsieur La Doulaise','Snell Roundhand',cursive;--nav-h:62px;--sy:0;color-scheme:light;
+--script:'Monsieur La Doulaise',fb1,fb2,'Snell Roundhand',cursive;--nav-h:62px;--sy:0;color-scheme:light;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}
@@ -103,6 +103,8 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .opening>.ferns{position:absolute;left:50%;bottom:0;width:min(150vw,900px);aspect-ratio:3/2;translate:-50% 0;pointer-events:none;z-index:6;opacity:.35}
 .opening-heading{position:relative;z-index:9;max-width:100%}
 .opening-heading>.eyebrow{margin-bottom:2px;letter-spacing:.17em;text-wrap:balance}
+/* G188: two balanced lines in Old Standard TT and in its Times fallback alike (no reflow when the font lands) */
+.kicker-line{max-width:300px;margin-inline:auto}
 .opening .names{font-size:clamp(50px,14.5vw,72px);margin-top:6px}
 .opening-date{position:relative;z-index:9;font-size:11px;margin-top:20px}
 /* the flap folds up and back over its hinge (the free edge goes away from the viewer, like a seed packet's tucked

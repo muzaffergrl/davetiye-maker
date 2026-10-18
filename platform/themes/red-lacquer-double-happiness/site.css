@@ -7,7 +7,7 @@
    (background-clip), until GPT's gold-leaf xi_gold arrives. No frame, ornament, cloud or line is drawn here. */
 :root{--lacquer:#4a0a0e;--lacquer-deep:#2c0507;--cinnabar:#a81e24;--red-ink:#8c1a1f;--cream:#f5ecd8;--cream-2:#e9dcc0;
 --ink:#3a0d0e;--ink-soft:#6b3d34;--gold:#c9a14a;--gold-light:#e6c983;--gold-ink:#8a5f1c;--blush:#f1d9c4;
---line:#e6c98340;--line-ink:#3a0d0e2e;--serif:'Prata','Didot','Times New Roman',serif;--script:'Luxurious Script','Snell Roundhand',cursive;
+--line:#e6c98340;--line-ink:#3a0d0e2e;--serif:'Prata','Didot','Times New Roman',serif;--script:'Luxurious Script',fb1,fb2,'Snell Roundhand',cursive;
 --nav-h:62px;color-scheme:dark;
 }
 *{box-sizing:border-box}

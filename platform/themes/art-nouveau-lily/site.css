@@ -9,7 +9,7 @@
 @property --flow{syntax:'<percentage>';inherits:false;initial-value:100%}
 :root{--sage:#55634e;--sage-deep:#3c4737;--sage-mid:#6d7c63;--sage-light:#b4c0a6;--cream:#f4ecdb;--cream-2:#e6dcc4;--ink:#2e3228;
 --ink-soft:#585d4e;--gold:#b8964e;--gold-light:#dfc68f;--gold-ink:#7a5d22;--lilac:#c8b6d6;--lilac-deep:#7d6a92;--lilac-ink:#5c4970;
---line:#dfc68f4d;--line-ink:#2e322833;--display:'Federant','Georgia',serif;--script:'Ephesis','Snell Roundhand',cursive;
+--line:#dfc68f4d;--line-ink:#2e322833;--display:'Federant','Georgia',serif;--script:'Ephesis',fb1,fb2,'Snell Roundhand',cursive;
 --serif:'Linden Hill','Georgia',serif;--nav-h:62px;color-scheme:dark;
 }
 *{box-sizing:border-box}

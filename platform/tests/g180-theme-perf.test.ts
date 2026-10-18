@@ -15,19 +15,15 @@ import { ROOT } from '../scripts/lib/theme-env.ts';
 
 const THEMES = path.join(ROOT, 'themes');
 const ids = readdirSync(THEMES).filter((d) => !d.startsWith('_') && existsSync(path.join(THEMES, d, 'site.css')));
-// the 32 designs G180 measured and fixed (01–32); a design added later runs scripts/font-fallback.ts and marks its
-// deferred parts when it is built (docs/11 §6, §12) — until then it is listed as a diagnostic, not failed
-const G180 = ['olive-ivory', 'dusty-blue-champagne', 'blush-garden-rose', 'vintage-airmail-love-letter', 'mediterranean-lemon', 'art-deco-black-tie', 'burgundy-velvet-autumn', 'winter-evergreen', 'lavender-provence', 'tuscan-vineyard', 'boho-pampas-terracotta', 'tropical-destination', 'enchanted-forest-storybook', 'ivory-lace-pearls', 'cherry-blossom-spring', 'sunflower-rustic-barn', 'emerald-gold-estate', 'wildflower-meadow-vellum', 'midnight-garden', 'coastal-seaside', 'crimson-rose-atelier', 'nocturne-lake-estate', 'velvet-jewel-box', 'grand-theatre-premiere', 'orient-express-voyage', 'kintsugi-washi', 'riad-lantern-nights', 'maison-patisserie', 'celestial-observatory', 'azulejo-mosaic', 'sky-lantern-festival', 'music-box-ballerina'];
 const read = (id: string, f: string) => readFileSync(path.join(THEMES, id, f), 'utf8');
 const pages = (id: string) => readdirSync(path.join(THEMES, id)).filter((f) => f.endsWith('.html'));
 const FACES = /<style>\/\* names fallback: scripts\/font-fallback\.ts \*\/\n@font-face\{font-family:fb1;[^\n]*\}\n@font-face\{font-family:fb2;[^\n]*\}<\/style>\n<link rel="stylesheet" href="site\.css">/;
 const RELEASE = /<style>\.js:not\(\.parts-on\) img\[data-defer\]\{display:none!important\}<\/style>\n<script>\/\* deferred opening parts \(G180[\s\S]*?<\/script>\n/;
 
-test('names fallback faces: the same inline block before site.css on every page, fb1, fb2 in the site.css stack', (t) => {
-  for (const id of G180) assert.ok(ids.includes(id), `${id}: theme folder`);
-  const later = ids.filter((id) => !G180.includes(id) && !pages(id).some((f) => FACES.test(read(id, f))));
-  if (later.length) t.diagnostic(`without names fallback faces yet (run scripts/font-fallback.ts): ${later.join(', ')}`);
-  for (const id of ids.filter((x) => !later.includes(x))) {
+// every theme, 01–32 since G180 and 33–38 since G188; a new design runs scripts/font-fallback.ts when it is built
+test('names fallback faces: the same inline block before site.css on every page, fb1, fb2 in the site.css stack', () => {
+  assert.ok(ids.length >= 38, `themes: ${ids.length}`);
+  for (const id of ids) {
     const blocks = pages(id).map((f) => read(id, f).match(FACES)?.[0]);
     blocks.forEach((b, i) => assert.ok(b, `${id}/${pages(id)[i]}: names fallback <style> right before site.css`));
     assert.equal(new Set(blocks).size, 1, `${id}: one measurement on every page`);
