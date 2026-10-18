@@ -486,6 +486,13 @@ EK_TEMALAR = [
          dekor="Ekose yün, devedikeni, funda, deri kayış, pirinç toka ve madalyon, dağ sisi", teknik="yağlı boya manzara + fotogerçekçi doku",
          font=("Rouge Script", "Sorts Mill Goudy"), palet_adi="heather-moss-tartan",
          hareket="Toka/kayış mekaniği (çerçeve devrilir, kayış tokadan kayar), düz yün kapağın 3B kalkışı, iki sis katmanının zıt yönlere kayması (açılışta çekilir, iç sayfalarda kaydırmayla süzülür), madalyon kapaklarının menteşede açılması, metnin sisten netleşerek gelmesi"),
+    # docs/24 3. dalga (33–38; K23 sıkı: ilk sayfa kapalı zarf)
+    dict(no=36, klasor="36_Victorian_Glasshouse", ad="Victorian Glasshouse",
+         zarf="Kraft tohum paketi zarfı, ortadan jüt sicimle bağlı, düğümde bakır bitki etiketi (monogram); etiket sallanıp düşer, sicim düğümden ikiye ayrılır (üst yarı yukarı, alt yarı aşağı), düz kapak menteşesinden yukarı ve arkaya katlanır, kart paketten yükselir; serada cam buğulanır, buğu silinerek kart ve eğrelti otları görünür.",
+         foto="Cam altında herbaryum numuneleri: 4:5 fotoğraf cam vitrinde, camdaki buğu yandan silinerek açılır, cam üstünden ışık bandı geçer, bakır numara etiketi ipinde sallanır, altta herbaryum etiketinde yazı belirir; sol–sağ–sol.",
+         dekor="Dökme demir kemerler, eğrelti otu, orkide, bakır etiketler, cam buğusu", teknik="botanik gravür + fotogerçekçi cam",
+         font=("Monsieur La Doulaise", "Old Standard TT"), palet_adi="fern-copper-glass",
+         hareket="Etiket sallanması ve düşüşü, sicimin düğümden iki yana çözülmesi, kapağın arkaya katlanması, buğulanan camın yumuşak kenarlı maskeyle silinmesi, demir kemerlerin paralaksı (kaydırmada katman katman), numunelerde buğu silme + ışık bandı + sallanan bakır etiketler, metin adımları buğudan netleşir."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

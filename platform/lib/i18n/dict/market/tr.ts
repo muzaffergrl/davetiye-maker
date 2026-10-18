@@ -1040,6 +1040,19 @@ const dict: Dict = {
   "A cream reply card over the moss-green page with your names and reply-by date, then the reply form.": "Yosun yeşili sayfada isimleriniz ve son yanıt tarihiyle krem bir yanıt kartı, ardından yanıt formu.",
   "Heather": "Funda",
   "Leather": "Deri",
+  // G185 Victorian Glasshouse (36, coming)
+  "A Victorian glasshouse at dusk: a kraft seed packet tied with twine and a copper plant label, misted glass and photos as specimens under glass": "Alacakaranlıkta bir Viktorya serası: sicimle bağlı, bakır bitki etiketli kraft tohum paketi, buğulu cam ve cam altında numune gibi duran fotoğraflar",
+  "A herbarium-paper reply card with your names and reply-by date, then the reply form; the copper label swings again when a reply is sent.": "Adlarınızın ve son yanıt tarihinin yer aldığı herbaryum kâğıdından bir yanıt kartı, ardından yanıt formu; bir yanıt gönderildiğinde bakır etiket yeniden sallanır.",
+  "A kraft seed packet opens into your wedding website in a Victorian glasshouse, and the mist on the glass is wiped away. Personalize it in your online editor.": "Kraft bir tohum paketi, düğün sitenizi bir Viktorya serasında açar ve camdaki buğu silinir. Çevrimiçi düzenleyicinizde kişiselleştirin.",
+  "Deep fern": "Koyu eğrelti",
+  "Deep fern green, misted glass, herbarium paper and copper, like an old botanical glasshouse. Your invitation waits in a kraft seed packet, and every photo is a specimen under glass with its own copper label.": "Koyu eğrelti yeşili, buğulu cam, herbaryum kâğıdı ve bakır; eski bir botanik serası gibi. Davetiyeniz kraft bir tohum paketinde bekler, her fotoğraf da kendi bakır etiketiyle cam altında bir numunedir.",
+  "Herbarium paper": "Herbaryum kâğıdı",
+  "Kraft": "Kraft",
+  "Misted glass": "Buğulu cam",
+  "The order of the day on herbarium paper, a venue photo behind misted glass that clears, an optional map, dress code, travel and questions and answers.": "Herbaryum kâğıdında günün programı, buğusu açılan bir camın ardında mekân fotoğrafı, isteğe bağlı harita, kıyafet kuralı, ulaşım ve sorular-cevaplar.",
+  "Three photos as specimens under glass: as guests scroll to each one, the mist on its glass is wiped away, its copper label swings and the caption appears on a herbarium label.": "Cam altında numune gibi üç fotoğraf: misafirleriniz her birine geldiğinde camındaki buğu silinir, bakır etiketi sallanır ve fotoğraf yazısı bir herbaryum etiketinde belirir.",
+  "Your guests tap the envelope. The copper plant label swings and drops from the twine, the twine comes apart at the knot and the flap of the kraft seed packet folds back. Warm air mists the glass as the card with your portrait rises; the mist is wiped away across the screen and the card comes forward to become your home page.": "Misafirleriniz zarfa dokunur. Bakır bitki etiketi sallanır ve sicimden düşer, sicim düğümden çözülür ve kraft tohum paketinin kapağı geriye katlanır. Portrenizin olduğu kart yükselirken sıcak hava camı buğulandırır; buğu ekranın bir ucundan öbür ucuna silinir ve kart öne gelerek ana sayfanız olur.",
+  "Your portrait under glass on a herbarium card, then the invitation, a countdown and calendar links, and a copper label with your monogram that swings as guests scroll.": "Herbaryum kartında cam altında portreniz, ardından davet, geri sayım ve takvim bağlantıları, sayfa kaydırıldıkça sallanan, monogramınızın olduğu bakır bir etiket.",
 };
 
 export default dict;

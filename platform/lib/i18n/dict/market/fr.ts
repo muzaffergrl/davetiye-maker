@@ -1040,6 +1040,19 @@ const dict: Dict = {
   "A cream reply card over the moss-green page with your names and reply-by date, then the reply form.": "Une carte réponse crème sur la page vert mousse avec vos prénoms et la date limite de réponse, puis le formulaire de réponse.",
   "Heather": "Bruyère",
   "Leather": "Cuir",
+  // G185 Victorian Glasshouse (36, coming)
+  "A Victorian glasshouse at dusk: a kraft seed packet tied with twine and a copper plant label, misted glass and photos as specimens under glass": "Une serre victorienne au crépuscule : un sachet de graines en papier kraft noué de ficelle avec une étiquette de jardin en cuivre, du verre embué et des photos comme des spécimens sous verre",
+  "A herbarium-paper reply card with your names and reply-by date, then the reply form; the copper label swings again when a reply is sent.": "Une carte de réponse en papier d'herbier avec vos prénoms et la date limite de réponse, puis le formulaire ; l'étiquette en cuivre se balance de nouveau quand une réponse est envoyée.",
+  "A kraft seed packet opens into your wedding website in a Victorian glasshouse, and the mist on the glass is wiped away. Personalize it in your online editor.": "Un sachet de graines en kraft ouvre votre site de mariage dans une serre victorienne, et la buée du verre s'efface. Personnalisez-le dans votre éditeur.",
+  "Deep fern": "Fougère profonde",
+  "Deep fern green, misted glass, herbarium paper and copper, like an old botanical glasshouse. Your invitation waits in a kraft seed packet, and every photo is a specimen under glass with its own copper label.": "Vert fougère profond, verre embué, papier d'herbier et cuivre, comme dans une ancienne serre botanique. Votre invitation attend dans un sachet de graines en papier kraft, et chaque photo est un spécimen sous verre avec sa propre étiquette en cuivre.",
+  "Herbarium paper": "Papier d'herbier",
+  "Kraft": "Kraft",
+  "Misted glass": "Verre embué",
+  "The order of the day on herbarium paper, a venue photo behind misted glass that clears, an optional map, dress code, travel and questions and answers.": "Le programme de la journée sur papier d'herbier, une photo du lieu derrière un verre embué qui s'éclaircit, une carte facultative, le code vestimentaire, le voyage et les questions-réponses.",
+  "Three photos as specimens under glass: as guests scroll to each one, the mist on its glass is wiped away, its copper label swings and the caption appears on a herbarium label.": "Trois photos comme des spécimens sous verre : lorsque vos invités arrivent à chacune, la buée de son verre s'efface, son étiquette en cuivre se balance et la légende apparaît sur une étiquette d'herbier.",
+  "Your guests tap the envelope. The copper plant label swings and drops from the twine, the twine comes apart at the knot and the flap of the kraft seed packet folds back. Warm air mists the glass as the card with your portrait rises; the mist is wiped away across the screen and the card comes forward to become your home page.": "Vos invités touchent l'enveloppe. L'étiquette de jardin en cuivre se balance et tombe de la ficelle, la ficelle se dénoue au nœud et le rabat du sachet de graines en papier kraft se replie vers l'arrière. L'air chaud embue le verre tandis que monte la carte avec votre portrait ; la buée s'efface d'un côté à l'autre de l'écran et la carte s'avance pour devenir votre page d'accueil.",
+  "Your portrait under glass on a herbarium card, then the invitation, a countdown and calendar links, and a copper label with your monogram that swings as guests scroll.": "Votre portrait sous verre sur une carte en papier d'herbier, puis l'invitation, un compte à rebours et des liens d'agenda, et une étiquette en cuivre à votre monogramme qui se balance au défilement.",
 };
 
 export default dict;

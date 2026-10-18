@@ -310,6 +310,9 @@ const dict: Dict = {
   'Gathered in the hills': 'Tepelerde bir araya',
   'Invite you to celebrate': 'sizi kutlamaya davet ediyor',
   'Open the envelope': 'Zarfı açın',
+  // G185 Victorian Glasshouse (36)
+  "Grown with love": "Sevgiyle büyüdü",
+  "Open the seed packet": "Tohum paketini aç",
 };
 
 export default dict;
