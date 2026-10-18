@@ -38,22 +38,22 @@ function fakeBuild(pageKB: number): string {
 test('route names drop route groups; budgets per group, the sales site is the fallback', () => {
   assert.equal(jsBudget.routeOf('/(marketing)/(en)/designs/[design]/page'), '/designs/[design]');
   assert.equal(jsBudget.routeOf('/(marketing)/(en)/page'), '/');
-  assert.equal(jsBudget.budgetFor('/edit/[slug]'), 270);
+  assert.equal(jsBudget.budgetFor('/edit/[slug]'), 205);
   assert.equal(jsBudget.budgetFor('/start'), 160);
   assert.equal(jsBudget.budgetFor('/i18n/[lang]/faq'), 155);
-  assert.ok(jsBudget.BUDGETS.every(([, kb]) => kb <= 270), 'no budget above the measured editor + margin');
+  assert.ok(jsBudget.BUDGETS.every(([, kb]) => kb <= 205), 'no budget above the measured editor + margin');
 });
 
 test('sums runtime + entry chunks (gzip), leaves the noModule polyfill out, flags a route over budget', () => {
-  const ok = jsBudget.checkBudgets(fakeBuild(200));
+  const ok = jsBudget.checkBudgets(fakeBuild(150));
   assert.deepEqual(ok.problems, []);
   const edit = ok.rows.find((r) => r.route === '/edit/[slug]')!;
   assert.ok(!edit.files.includes('static/chunks/polyfill.js'), 'polyfill excluded');
-  assert.ok(edit.kb > 195 && edit.kb < 215, `random bytes do not compress: ${edit.kb}`);
+  assert.ok(edit.kb > 145 && edit.kb < 165, `random bytes do not compress: ${edit.kb}`);
   assert.ok(ok.rows.find((r) => r.route === '/faq')!.kb < 5);
   const big = jsBudget.checkBudgets(fakeBuild(300));
   assert.equal(big.problems.length, 1);
-  assert.match(big.problems[0], /^\/edit\/\[slug\]: \d+(\.\d)? KB gzip first-load JS > budget 270 KB$/);
+  assert.match(big.problems[0], /^\/edit\/\[slug\]: \d+(\.\d)? KB gzip first-load JS > budget 205 KB$/);
 });
 
 test('npm run build runs the budget after trace-check', () => {

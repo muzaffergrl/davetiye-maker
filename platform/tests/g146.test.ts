@@ -536,6 +536,8 @@ test('i18n: every G146 text is translated in tr / es / de / fr (strict, whatever
       'components/my/MyWebsite.tsx',
       'components/panel/DevicesCard.tsx',
       'components/panel/views.tsx',
+      // G181: the Share view's own module (it was in views.tsx)
+      'components/panel/ShareView.tsx',
       'components/panel/Panel.tsx',
       'lib/claim/continue.ts',
       'lib/claim/claim.ts',

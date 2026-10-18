@@ -1,12 +1,12 @@
 {
-  "when": "2026-10-16T09:07:35.349Z",
-  "passed": 52,
-  "failed": 0,
+  "when": "2026-10-18T01:32:15.211Z",
+  "passed": 51,
+  "failed": 1,
   "checks": [
     {
       "name": "setup 1 (390 × 844): both first names and the wedding date on the first screen, above the bar",
       "ok": true,
-      "detail": "{\"bar\":719,\"date\":640}"
+      "detail": "{\"bar\":715,\"date\":640}"
     },
     {
       "name": "setup 1: one job — the two first names and the date; no \"How your names appear\"",
@@ -58,7 +58,7 @@
     {
       "name": "setup 1 at 360 × 640: the date is reached with less than one screen of scrolling",
       "ok": true,
-      "detail": "{\"bar\":515,\"date\":637.015625}"
+      "detail": "{\"bar\":511,\"date\":637.015625}"
     },
     {
       "name": "setup 1: no horizontal scroll at 360 px",
@@ -136,7 +136,7 @@
     },
     {
       "name": "Day & place: sub-headings Date & time · Venue · Schedule · After the wedding; More options folded",
-      "ok": true,
+      "ok": false,
       "detail": "Date & time | More options\nNew York · Month first | Venue | Schedule | After the wedding\nAutomatic | Headings & labels on this page"
     },
     {
