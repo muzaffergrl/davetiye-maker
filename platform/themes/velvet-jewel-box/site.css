@@ -6,7 +6,7 @@
    not a fade or zoom). */
 :root{--night:#1c0b1a;--velvet:#2a1328;--plum:#4a2142;--ink:#3a1532;--ink-soft:#6e3d52;--champagne:#e8d3b0;--gold-ink:#ecd2a7;
 --rose:#c99a86;--rose-ink:#7a4639;--ivory:#f8ede0;--muted:#dcc8c6;--line:#e8d3b040;--line-dark:#4a214240;
---display:'Bodoni Moda',Didot,'Bodoni 72',Georgia,serif;--script:'Pinyon Script','Snell Roundhand',cursive;color-scheme:dark;--nav-h:62px;
+--display:'Bodoni Moda',Didot,'Bodoni 72',Georgia,serif;--script:'Pinyon Script',fb1,fb2,'Snell Roundhand',cursive;color-scheme:dark;--nav-h:62px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}

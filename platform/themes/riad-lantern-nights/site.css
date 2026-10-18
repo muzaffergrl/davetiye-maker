@@ -4,7 +4,7 @@
    hairline rules, form fields, buttons, the bottom nav. Nothing here draws a shape, a frame or an ornament. */
 :root{--night:#0f2f31;--deep:#0a2324;--teal:#174a4b;--ivory:#f6ead2;--saffron:#e3a54a;--brass:#c9a35b;--brass-ink:#e2c48c;
 --muted:#c9d5cd;--line:#c9a35b4d;--cedar:#3a2114;--cedar-soft:#6a4a32;--glow:#f6bb62;
---display:'Cinzel',Georgia,serif;--caps:'Marcellus SC',Georgia,serif;--serif:'Marcellus',Georgia,serif;color-scheme:dark;--nav-h:62px;
+--display:'Cinzel',fb1,fb2,Georgia,serif;--caps:'Marcellus SC',Georgia,serif;--serif:'Marcellus',Georgia,serif;color-scheme:dark;--nav-h:62px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}

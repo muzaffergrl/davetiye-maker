@@ -11,7 +11,7 @@
   --teal-ink: #19615B; /* ≥ 6:1 on the lagoon */
   --gold: #C4963F;
   --hair: rgba(196, 150, 63, .6);
-  --script: "Dancing Script", "Segoe Script", cursive;
+  --script: "Dancing Script",fb1,fb2,"Segoe Script", cursive;
   --sans: "Raleway", "Helvetica Neue", Arial, sans-serif;
   --ease: cubic-bezier(.22, .61, .36, 1);
   --ease-soft: cubic-bezier(.33, 0, .2, 1);

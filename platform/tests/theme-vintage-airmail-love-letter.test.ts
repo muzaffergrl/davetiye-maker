@@ -515,12 +515,13 @@ test('17 schedule of 1, 6 and 10 rows, long names, en-GB, the design-range and �
   assert.equal(render('home', rangeRecord(demo())).$('.hero-date').text().replace(/\s+/g, ' ').trim(), 'Wednesday · 29 September 2027');
   // the long-name fit is in site.js (fitNames → --names-scale), the CSS uses the variable on both pages
   assert.match(JS, /--names-scale/);
-  assert.equal((CSS_NC.match(/var\(--names-scale, 1\)/g) ?? []).length, 3, 'envelope names (portrait + landscape) and hero names');
+  // .97: the envelope names before site.js fits them (G180, scripts/font-fallback.ts)
+  assert.equal((CSS_NC.match(/var\(--names-scale, (?:1|\.97)\)/g) ?? []).length, 3, 'envelope names (portrait + landscape) and hero names');
   // Homemade Apple (fountain pen) + Special Elite (typewriter), display=swap, exactly two families. Homemade Apple ships
   // only the `latin` subset (U+0000–00FF: "Élodie", "Zoë" are in it; latin-ext names fall back) — README / Sonuç limit
   const href = render('index').$('link[rel="stylesheet"][href^="https://fonts.googleapis.com"]').attr('href')!;
   assert.equal(href, 'https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Special+Elite&display=swap');
-  assert.match(CSS, /--script: "Homemade Apple", "Segoe Script", "Bradley Hand", cursive;/);
+  assert.match(CSS, /--script: "Homemade Apple",fb1,fb2,"Segoe Script", "Bradley Hand", cursive;/); // fb1, fb2: names fallback faces (G180)
   assert.match(CSS, /--type: "Special Elite", "American Typewriter", "Courier New", Courier, monospace;/);
 });
 
@@ -974,7 +975,7 @@ test('srcset on every multi-size part; images below the first screen are lazy', 
     assert.equal(home(sel).attr('loading'), 'lazy', `home ${sel}`);
   }
   const index = render('index').$;
-  assert.equal(index('img[loading="lazy"]').length, 0, 'the envelope page is all first view');
+  assert.equal(index('img[loading="lazy"]:not([data-defer])').length, 0, 'the envelope page is all first view (lazy: only the deferred opening parts, G180)');
   assert.equal(index('.env-open').attr('fetchpriority'), 'high');
 });
 
@@ -1031,7 +1032,8 @@ test('14 routes: a published site on this theme serves 200 pages with CSP hashes
   const index = await getIndex(req('/maren-and-theo-va'), { params: Promise.resolve({ slug: 'maren-and-theo-va' }) });
   assert.equal(index.status, 200);
   const scriptSrc = index.headers.get('content-security-policy')!.split('; ').find((d) => d.startsWith('script-src'))!;
-  assert.equal(scriptSrc.match(/'sha256-/g)?.length, 2, 'inline state script + speculation rules');
+  // index: the early state script, the deferred opening parts (G180) and the speculation rules
+  assert.equal(scriptSrc.match(/'sha256-/g)?.length, 3, 'inline state script + deferred parts + speculation rules');
   const $index = cheerio.load(await index.text());
   assert.match($index('meta[property="og:image"]').attr('content') ?? '', new RegExp(`^https?://[^/]+/themes/${ID}/img/og-1200x630\\.jpg$`), 'absolute og:image');
   assert.equal($index('meta[property="og:image:alt"]').attr('content'), 'Margot & Henry wedding invitation');

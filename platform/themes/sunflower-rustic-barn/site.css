@@ -13,7 +13,7 @@
   --gold: #B88B3E;
   --leaf: #6E7D3A;
   --hair: rgba(122, 90, 46, .42);
-  --script: "Kaushan Script", "Brush Script MT", cursive;
+  --script: "Kaushan Script",fb1,fb2,"Brush Script MT", cursive;
   --serif: "Merriweather", Georgia, serif;
   --ease: cubic-bezier(.22, .61, .36, 1);
   --ease-soft: cubic-bezier(.33, 0, .2, 1);

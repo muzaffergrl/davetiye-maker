@@ -10,7 +10,7 @@
   --taupe-dark: #67543F; /* italic lines 5.9:1 */
   --gold-ink: #8C7350; /* the & in the names: 3.7:1 (large) */
   --hair: rgba(140, 123, 102, .42);
-  --script: "Mrs Saint Delafield", "Bodoni Moda", serif;
+  --script: "Mrs Saint Delafield",fb1,fb2,"Bodoni Moda", serif;
   --serif: "Bodoni Moda", "Bodoni 72", "Didot", serif;
   --ease: cubic-bezier(.22, .61, .36, 1);
   --ease-soft: cubic-bezier(.33, 0, .2, 1);

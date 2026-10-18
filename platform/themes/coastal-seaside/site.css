@@ -11,7 +11,7 @@
   --deep-ink: #24506E;
   --sand: #8A6A35;
   --hair: rgba(46, 94, 126, .38);
-  --script: "Allison", "Snell Roundhand", cursive;
+  --script: "Allison",fb1,fb2,"Snell Roundhand", cursive;
   --serif: "Lora", Georgia, serif;
   --ease: cubic-bezier(.22, .61, .36, 1);
   --ease-soft: cubic-bezier(.33, 0, .2, 1);

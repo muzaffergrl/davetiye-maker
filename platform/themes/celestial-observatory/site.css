@@ -7,7 +7,7 @@
 @property --sweep{syntax:'<angle>';inherits:false;initial-value:0deg}
 :root{--midnight:#11193a;--night:#0a0f24;--deep:#060a1a;--paper:#eeebe3;--paper-2:#d9dbe1;--ink:#141a33;--ink-soft:#4a5068;
 --silver:#c9cfdc;--silver-light:#e6e9f1;--gold:#c8a24e;--gold-light:#e2c27a;--gold-ink:#7a5a1e;--brass:#9b7a3c;--mist:#c3c9d8;
---line:#e2c27a40;--line-ink:#141a3330;--serif:'Forum','Times New Roman',serif;--script:'Imperial Script','Snell Roundhand',cursive;
+--line:#e2c27a40;--line-ink:#141a3330;--serif:'Forum','Times New Roman',serif;--script:'Imperial Script',fb1,fb2,'Snell Roundhand',cursive;
 --nav-h:62px;--turn:0;color-scheme:dark;
 }
 *{box-sizing:border-box}

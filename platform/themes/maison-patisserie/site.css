@@ -3,7 +3,7 @@
    halos, shadows under the parts, hairline rules, pill buttons and chips, form fields, the bottom nav. */
 :root{--cream:#fbf5ec;--paper:#fffbf5;--ink:#3e3a32;--ink-soft:#5c5548;--pistachio:#a9c49c;--pistachio-deep:#4f6d49;--pistachio-pale:#e3eedb;
 --rose:#e8b4b8;--rose-deep:#9b4f5a;--rose-pale:#f8e3e3;--vanilla:#f2e4bd;--gold:#b8995a;--gold-ink:#7a5f2c;--line:#7a5f2c38;
---display:'Italiana',Georgia,serif;--script:'Parisienne','Snell Roundhand',cursive;--nav-h:62px;color-scheme:light;
+--display:'Italiana',Georgia,serif;--script:'Parisienne',fb1,fb2,'Snell Roundhand',cursive;--nav-h:62px;color-scheme:light;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip;scroll-padding:16px 0 calc(var(--nav-h) + env(safe-area-inset-bottom) + 16px)}  /* G167: a focused link never hides behind the bottom nav (WCAG 2.4.11) */

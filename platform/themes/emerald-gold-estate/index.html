@@ -26,10 +26,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&amp;family=Cormorant+Infant:ital,wght@0,400..600;1,400..600&amp;display=swap">
+<style>/* names fallback: scripts/font-fallback.ts */
+@font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:135.8%;ascent-override:72.2%;descent-override:27.3%;line-gap-override:0%}
+@font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:116.7%;ascent-override:84%;descent-override:31.7%;line-gap-override:0%}</style>
 <link rel="stylesheet" href="site.css">
 <link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
 <script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
 (function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'';if(sessionStorage.getItem('invite:opened'+k)&&!/[?&]replay=1(&|$)/.test(location.search))r.classList.add('is-opened');}catch(e){}})(document.documentElement);
+</script>
+<style>.js:not(.parts-on) img[data-defer]{display:none!important}</style>
+<script>/* deferred opening parts (G180, docs/11 §6): the images that only show after the tap ([data-defer], lazy) wait until the
+   closed object's own high-priority image(s) in .stage have loaded, then all load at once — before the tap, so the opening never waits */
+(function(d,r){var on=function(){r.classList.add('parts-on')};if(r.classList.contains('is-opened'))return on();addEventListener('pointerdown',on,true);addEventListener('keydown',on,true);addEventListener('load',on);d.addEventListener('DOMContentLoaded',function(){var h=d.querySelectorAll('.stage img[fetchpriority=high]');h=h.length?h:d.querySelectorAll('img[fetchpriority=high]');var n=h.length,one=function(){--n||on()};if(!n)on();h.forEach(function(i){i.complete?one():(i.addEventListener('load',one),i.addEventListener('error',one))})})})(document,document.documentElement);
 </script>
 <!-- prefetch the home page: the rule points at the "Enter" link, whose href the platform has already set to /<slug>/home -->
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"selector_matches":"a[data-enter]"},"eagerness":"immediate"}]}</script>
@@ -61,27 +69,27 @@
 
   <div class="stage" role="button" tabindex="0" aria-label="Open the invitation" data-copy-attr="aria-label:envelope_open">
     <div class="env">
-      <img class="env-flap" src="img/env_flap-440.webp" srcset="img/env_flap-440.webp 440w, img/env_flap-869.webp 869w" sizes="min(81vw, 432px)" alt="">
-      <img class="env-body" src="img/env_body-440.webp" srcset="img/env_body-440.webp 440w, img/env_body-869.webp 869w" sizes="min(81vw, 432px)" alt="">
+      <img data-defer loading="lazy" fetchpriority="low" decoding="async" class="env-flap" src="img/env_flap-440.webp" srcset="img/env_flap-440.webp 440w, img/env_flap-869.webp 869w" sizes="min(81vw, 432px)" alt="">
+      <img data-defer loading="lazy" fetchpriority="low" decoding="async" class="env-body" src="img/env_body-440.webp" srcset="img/env_body-440.webp 440w, img/env_body-869.webp 869w" sizes="min(81vw, 432px)" alt="">
       <div class="card-slot">
         <div class="card" aria-hidden="true">
           <div class="photo-slot mask-card" data-slot="hero_portrait">
-            <img data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_hero_portrait-320.webp" srcset="img/ph_hero_portrait-320.webp 320w, img/ph_hero_portrait-640.webp 640w" sizes="min(31vw, 164px)" alt="">
-            <span class="ph-mark" data-if="!thank_you_on" aria-hidden="true"><img src="img/accent_1-89.webp" alt=""><span>Your photo here</span></span>
+            <img data-defer loading="lazy" fetchpriority="low" decoding="async" data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_hero_portrait-320.webp" srcset="img/ph_hero_portrait-320.webp 320w, img/ph_hero_portrait-640.webp 640w" sizes="min(31vw, 164px)" alt="">
+            <span class="ph-mark" data-if="!thank_you_on" aria-hidden="true"><img data-defer loading="lazy" fetchpriority="low" decoding="async" src="img/accent_1-89.webp" alt=""><span>Your photo here</span></span>
             <!-- thank-you mode: the couple's thank-you photo in the same window, else the velvet and the gold seal (decoration) -->
-            <img class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_hero_portrait-320.webp" sizes="min(31vw, 164px)" alt="">
-            <span class="ty-decor" data-if="thank_you_on !thank_you.photo" aria-hidden="true"><img src="img/closure-240.webp" srcset="img/closure-240.webp 240w, img/closure-480.webp 480w" sizes="min(17vw, 90px)" alt=""></span>
+            <img data-defer loading="lazy" fetchpriority="low" decoding="async" class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_hero_portrait-320.webp" sizes="min(31vw, 164px)" alt="">
+            <span class="ty-decor" data-if="thank_you_on !thank_you.photo" aria-hidden="true"><img data-defer loading="lazy" fetchpriority="low" decoding="async" src="img/closure-240.webp" srcset="img/closure-240.webp 240w, img/closure-480.webp 480w" sizes="min(17vw, 90px)" alt=""></span>
           </div>
-          <img class="card-img" src="img/card_small-320.webp" srcset="img/card_small-320.webp 320w, img/card_small-640.webp 640w" sizes="min(43vw, 228px)" alt="">
+          <img data-defer loading="lazy" fetchpriority="low" decoding="async" class="card-img" src="img/card_small-320.webp" srcset="img/card_small-320.webp 320w, img/card_small-640.webp 640w" sizes="min(43vw, 228px)" alt="">
           <div class="card-copy">
             <p class="card-line" data-if="!thank_you_on" data-copy="card_line">We're getting married</p>
             <p class="ty-title" data-if="thank_you_on" data-field="thank_you_title"></p>
             <p class="kicker"><span class="nowrap" data-field="date"></span><span class="sep" aria-hidden="true" data-if="!thank_you_on"> · </span><span class="cc-city" data-if="!thank_you_on" data-field="venue.city"></span></p>
-            <span class="orn card-orn" aria-hidden="true"><img src="img/divider-300.webp" alt=""></span>
+            <span class="orn card-orn" aria-hidden="true"><img data-defer loading="lazy" fetchpriority="low" decoding="async" src="img/divider-300.webp" alt=""></span>
           </div>
         </div>
       </div>
-      <img class="env-pocket" src="img/env_pocket-440.webp" srcset="img/env_pocket-440.webp 440w, img/env_pocket-869.webp 869w" sizes="min(81vw, 432px)" alt="">
+      <img data-defer loading="lazy" fetchpriority="low" decoding="async" class="env-pocket" src="img/env_pocket-440.webp" srcset="img/env_pocket-440.webp 440w, img/env_pocket-869.webp 869w" sizes="min(81vw, 432px)" alt="">
       <img class="env-closed" src="img/env_closed-440.webp" srcset="img/env_closed-440.webp 440w, img/env_closed-869.webp 869w" sizes="min(81vw, 432px)" alt="" fetchpriority="high">
       <img class="env-cflap" src="img/env_cflap-440.webp" srcset="img/env_cflap-440.webp 440w, img/env_cflap-869.webp 869w" sizes="min(81vw, 432px)" alt="">
       <!-- the gold seal on the flap's lowest point: its own layer — it glints and lifts away before the flap opens; the

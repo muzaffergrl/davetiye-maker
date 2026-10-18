@@ -13,7 +13,7 @@
   --gold-light: #D7C79F;       /* palette gold_light */
   --gold-ink: #6E5A31;         /* small gold text: 5.2:1 */
   --seal-ink: #735E2E;         /* seal monogram: a deboss, aria-hidden */
-  --script: "Great Vibes", "Snell Roundhand", cursive;
+  --script: "Great Vibes",fb1,fb2,"Snell Roundhand", cursive;
   --serif: "EB Garamond", "Cormorant Garamond", Garamond, Georgia, serif;
   --ease: cubic-bezier(.22, .61, .36, 1);
   --ease-soft: cubic-bezier(.33, 0, .2, 1);

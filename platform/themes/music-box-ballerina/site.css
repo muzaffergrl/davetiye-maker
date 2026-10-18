@@ -4,9 +4,9 @@
    the wind-up key turning, the lid on its back hinge, the ballerina's slow pirouette (GPT turn frames as a sprite), the
    mirror's glint between photos, a few drifting petals and the oval "mirror" page change (the new page opens from the
    centre in a widening oval, not a fade or zoom); scene steps turn in a little, like the dancer. */
-:root{--blush:#f7e4e2;--blush-deep:#f0d3d1;--quartz:#eecdd0;--rose:#b76e79;--rose-ink:#8a4a55;--ink:#4a2f35;--ink-soft:#6d5056;
+:root{--blush:#f7e4e2;--blush-deep:#f0d3d1;--quartz:#eecdd0;--rose:#a35c68;--rose-ink:#8a4a55;--ink:#4a2f35;--ink-soft:#6d5056;
 --cream:#fff8f4;--gold:#c9a45c;--gold-ink:#86622a;--line:#b76e7940;--line-soft:#b76e7926;
---display:'Gilda Display','Didot','Bodoni 72',Georgia,serif;--script:'Ballet','Snell Roundhand',cursive;color-scheme:light;--nav-h:62px;
+--display:'Gilda Display','Didot','Bodoni 72',Georgia,serif;--script:'Ballet',fb1,fb2,'Snell Roundhand',cursive;color-scheme:light;--nav-h:62px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip;scroll-padding:16px 0 calc(var(--nav-h) + 16px)}

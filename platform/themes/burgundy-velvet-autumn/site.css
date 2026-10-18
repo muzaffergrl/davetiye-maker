@@ -11,7 +11,7 @@
   --wine-ink: #74212F;
   --gold: #B88A4A;
   --hair: rgba(110, 48, 30, .42);
-  --script: "Pinyon Script", "Snell Roundhand", cursive;
+  --script: "Pinyon Script",fb1,fb2,"Snell Roundhand", cursive;
   --caps: "Cinzel", "Trajan Pro", Georgia, serif;
   --serif: "Cormorant Garamond", "Cormorant", Garamond, Georgia, serif;
   --ease: cubic-bezier(.22, .61, .36, 1);

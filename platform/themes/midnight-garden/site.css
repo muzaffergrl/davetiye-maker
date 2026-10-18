@@ -12,7 +12,7 @@
   --plum: #4A2335;
   --seal-ink: #4E4943;
   --hair: rgba(201, 164, 106, .5);
-  --disp: "Playfair Display SC", "Didot", Georgia, serif;
+  --disp: "Playfair Display SC",fb1,fb2,"Didot", Georgia, serif;
   --sc: "Cormorant SC", "Cormorant Garamond", Georgia, serif;
   --serif: "Cormorant Garamond", "Garamond", Georgia, serif;
   --ease: cubic-bezier(.22, .61, .36, 1);

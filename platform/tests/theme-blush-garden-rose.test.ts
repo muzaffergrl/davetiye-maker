@@ -667,7 +667,8 @@ test('routes: a published site on this theme serves 200 pages with CSP hashes an
   const index = await getIndex(req('/maren-and-theo'), { params: Promise.resolve({ slug: 'maren-and-theo' }) });
   assert.equal(index.status, 200);
   const scriptSrc = index.headers.get('content-security-policy')!.split('; ').find((d) => d.startsWith('script-src'))!;
-  assert.equal(scriptSrc.match(/'sha256-/g)?.length, 2, 'inline state script + speculation rules');
+  // index: the early state script, the deferred opening parts (G180) and the speculation rules
+  assert.equal(scriptSrc.match(/'sha256-/g)?.length, 3, 'inline state script + deferred parts + speculation rules');
   for (const page of ['home', 'story', 'details', 'rsvp']) {
     const res = await getPage(req(`/maren-and-theo/${page}`), { params: Promise.resolve({ slug: 'maren-and-theo', page }) });
     assert.equal(res.status, 200, page);

@@ -12,7 +12,7 @@
   --emerald: #0B3528;
   --hair: rgba(200,164,90,.55);
   --hair-ink: rgba(116,86,31,.5);
-  --display: "Cinzel Decorative", "Cinzel", "Trajan Pro", Georgia, serif;
+  --display: "Cinzel Decorative",fb1,fb2,"Cinzel", "Trajan Pro", Georgia, serif;
   --serif: "Cormorant Infant", "Cormorant Garamond", Garamond, Georgia, serif;
   --ease: cubic-bezier(.22, .61, .36, 1);
   --ease-soft: cubic-bezier(.33, 0, .2, 1);

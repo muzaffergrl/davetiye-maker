@@ -12,7 +12,7 @@
   --blue: #4466A6; /* cornflower: white on it 5.9:1 */
   --poppy: #B8452C;
   --hair: rgba(74, 77, 42, .38);
-  --script: "Satisfy", "Snell Roundhand", cursive;
+  --script: "Satisfy",fb1,fb2,"Snell Roundhand", cursive;
   --serif: "Spectral", "Iowan Old Style", Georgia, serif;
   --ease: cubic-bezier(.22, .61, .36, 1);
   --ease-soft: cubic-bezier(.33, 0, .2, 1);
