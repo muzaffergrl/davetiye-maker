@@ -24,17 +24,17 @@ design goes live).
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, quantity | **Price not decided for this design** ([PRICE]; designs 01–21 sell at 1,460 TL). Quantity: 999, Etsy's maximum (the shop's rule for every design). |
 | Design fonts and other languages | Bellefair and Corinthia (Google Fonts). [VERIFY: latin-ext / Cyrillic coverage read from the Google Fonts CSS of these two families before the language line in GOOD TO KNOW is final] |
-| START HERE guide | **Not produced** for this design (`python3 tools/build_customer_guides.py` once it is live). |
+| START HERE guide | **Built** (G175, 2026-10-17): `package/customer/START_HERE.md` + `.pdf` with the start QR (`python3 tools/build_customer_guides.py --designs 31`, from docs/19 Ek A; QR only from `tools/make_qr.py`; `--check` passes). Its start link answers only after this design is deployed; rebuild it if Ek A or the domain changes. |
 | Listing images and video | **Not produced.** They must show real screens of this design with its own GPT parts (K21, docs/21), so they wait for PAKET 5 and PAKET 2. |
 
 VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence.
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 104 characters.
+Etsy limit: 140 characters. This title: 113 characters.
 
 ```text
-Sky Lantern Wedding Website with RSVP, Paper Lantern Opening Digital Invitation, Online Editor, Dusk Sky
+Sky Lantern Festival Wedding Website with RSVP, Paper Lantern Opening Digital Invitation, Online Editor, Dusk Sky
 ```
 
 ## 2. Description

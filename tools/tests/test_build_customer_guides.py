@@ -1,4 +1,4 @@
-"""tools/build_customer_guides.py tests (G122: START HERE for designs 01–20 from docs/19 Ek A).
+"""tools/build_customer_guides.py tests (G122: START HERE for designs 01–20 from docs/19 Ek A; G175: 22–32).
 
   python3 tools/tests/test_build_customer_guides.py
 
@@ -20,12 +20,20 @@ import etsy_upload as eu  # noqa: E402
 
 NOT_ENVELOPE = {"art-deco-black-tie": "gatefold", "lavender-provence": "pouch", "tropical-destination": "wallet",
                 "enchanted-forest-storybook": "book", "ivory-lace-pearls": "gatefold",
-                "wildflower-meadow-vellum": "sleeve"}
+                "wildflower-meadow-vellum": "sleeve",
+                # G175: designs 22–32 (22 opens from an envelope)
+                "velvet-jewel-box": "box", "grand-theatre-premiere": "curtain", "orient-express-voyage": "wallet",
+                "kintsugi-washi": "origami", "riad-lantern-nights": "door", "maison-patisserie": "box",
+                "celestial-observatory": "dome", "azulejo-mosaic": "wall", "sky-lantern-festival": "lantern",
+                "music-box-ballerina": "box"}
 # G123's listing language lines (2026-10-16): latin-only font → "latin", all Cyrillic → "cyrillic", else "latin-ext".
 LANGUAGE = {"01": "cyrillic", "02": "latin-ext", "03": "cyrillic", "04": "latin", "05": "latin-ext", "06": "latin",
             "07": "latin-ext", "08": "latin-ext", "09": "latin-ext", "10": "latin-ext", "11": "latin", "12": "latin-ext",
             "13": "latin", "14": "latin-ext", "15": "latin-ext", "16": "latin-ext", "17": "latin-ext", "18": "latin",
-            "19": "cyrillic", "20": "latin-ext", "21": "cyrillic"}
+            "19": "cyrillic", "20": "latin-ext", "21": "cyrillic",
+            # G175: Google Fonts subsets read on 2026-10-17 (28: Italiana is latin only)
+            "22": "latin-ext", "23": "latin-ext", "24": "latin-ext", "25": "latin-ext", "26": "latin-ext",
+            "27": "latin-ext", "28": "latin", "29": "latin-ext", "30": "latin-ext", "31": "latin-ext", "32": "latin-ext"}
 
 
 def expect_exit(fn, *args):
@@ -56,7 +64,7 @@ def test_template():
 
 
 def test_values():
-    assert [no for no, _, _ in eu.DESIGNS] == [f"{i:02d}" for i in range(1, 22)]
+    assert [no for no, _, _ in eu.DESIGNS] == [f"{i:02d}" for i in range(1, 33)]
     for no, folder, theme in eu.DESIGNS:
         v = b.values(theme)
         assert v["START_URL"] == f"https://davetiye-platform-five.vercel.app/start?theme={theme}", v
@@ -66,7 +74,7 @@ def test_values():
         assert v["OPENING_TAB"] == v["OPENING"].capitalize(), (no, v["OPENING_TAB"])
         assert b.language_class(b.design_fonts(theme)) == LANGUAGE[no], (no, b.design_fonts(theme))
         assert v["LANGUAGE_FONTS"] == b.LANGUAGE_LINES[LANGUAGE[no]]
-        dark = b.qr_dark(folder)
+        dark = b.qr_dark(folder, theme)  # G175: 22–32 read the palette of designs.ts (no palette.json yet)
         assert 1.05 / (b._luminance(dark) + 0.05) >= 7, (no, dark)
     assert b.values("olive-ivory", "https://example.org/")["START_URL"] == "https://example.org/start?theme=olive-ivory"
     expect_exit(b.language_class, ["Great Vibes", "A Font Nobody Checked"])
@@ -97,6 +105,11 @@ def test_labels():
     # G121: the preview tab is computed (openingTabLabel), so "Book" passes for the book design only through that rule
     book = b.fill(b.template(), b.values("enchanted-forest-storybook"))
     assert "**Book** is the opening page" in book and b.label_problems(book, "enchanted-forest-storybook") == []
+    # G175: the new opening objects of 22–32 the same way (26's folded paper is the "Origami" tab in the panel)
+    for theme, tab in (("kintsugi-washi", "Origami"), ("grand-theatre-premiere", "Curtain"), ("azulejo-mosaic", "Wall")):
+        md = b.fill(b.template(), b.values(theme))
+        assert f"**{tab}** is the opening page" in md and b.label_problems(md, theme) == [], theme
+        assert "envelope" not in md.lower(), theme
 
 
 def test_pdf(tmp: Path):
@@ -123,7 +136,7 @@ def test_pdf(tmp: Path):
 
 
 def test_committed():
-    raster = {"01", "06"}  # the jsQR reading takes a few seconds per design: one envelope and one gatefold design
+    raster = {"01", "06", "26"}  # the jsQR reading takes a few seconds per design: envelope, gatefold, origami (G175)
     for no, folder, theme in eu.DESIGNS:
         if not (b.customer_dir(folder) / "START_HERE.pdf").exists():
             raise AssertionError(f"{no}: no guide — python3 tools/build_customer_guides.py --designs {no}")

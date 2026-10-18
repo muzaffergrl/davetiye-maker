@@ -1362,6 +1362,16 @@ const dict: Dict = {
   "Dome": "Cúpula",
   "dome": "cúpula",
   'lantern': 'farolillo',
+  // G175 Kintsugi & Washi (26): the origami
+  "Above your names on the origami": "Sobre tus nombres en el origami",
+  "Button after the origami opens": "Botón tras abrirse el origami",
+  "Open the origami again (RSVP page)": "Abrir el origami de nuevo (página de RSVP)",
+  "Open the origami again (home page)": "Abrir el origami de nuevo (página de inicio)",
+  "Open the origami again (origami page)": "Abrir el origami de nuevo (página del origami)",
+  "Under the origami, on computers": "Bajo el origami, en ordenadores",
+  "Under the origami, on phones": "Bajo el origami, en móviles",
+  "Origami": "Origami",
+  "origami": "origami",
 };
 
 export default dict;

@@ -957,6 +957,18 @@ const dict: Dict = {
   'The order of the day on blush satin beside the venue photo, an optional map, dress code, travel and the menu.': 'El programa del día sobre satén rubor junto a la foto del lugar, un mapa opcional, código de vestimenta, viaje y el menú.',
   'A reply card on blush satin; a few rose petals drift down and the ballerina turns once when a reply is sent.': 'Una tarjeta de respuesta sobre satén rubor; al enviar una respuesta caen unos pétalos de rosa y la bailarina gira una vez.',
   'Rose quartz': 'Cuarzo rosa',
+  // G175 Kintsugi & Washi (26, coming) + the curtain of 24
+  "Indigo washi paper folded like origami around a rice-paper card, fine gold veins and photos that appear like spreading ink": "Papel washi índigo plegado como un origami alrededor de una tarjeta de papel de arroz, finas vetas doradas y fotos que aparecen como tinta que se extiende",
+  "A wedding website wrapped in folded indigo washi paper: the folds open one by one to your invitation card. Personalize it in your online editor.": "Una web de boda envuelta en papel washi índigo plegado: los pliegues se abren uno a uno hasta tu tarjeta de invitación. Personalízala en tu editor en línea.",
+  "Deep indigo washi, ivory rice paper and gold leaf, with the calm of sumi ink. Your invitation waits inside folded paper, and every photo appears like ink spreading on paper.": "Washi índigo profundo, papel de arroz marfil y pan de oro, con la calma de la tinta sumi. Tu invitación espera dentro del papel plegado y cada foto aparece como tinta que se extiende sobre el papel.",
+  "Your guests tap the origami. The paper band slides off and the indigo folds open one by one, top, bottom, left and right, until the rice-paper card with your photo lifts out and comes forward to become your home page.": "Tus invitados tocan el origami. La faja de papel se desliza y los pliegues índigo se abren uno a uno, arriba, abajo, izquierda y derecha, hasta que la tarjeta de papel de arroz con tu foto se eleva y avanza para convertirse en tu página de inicio.",
+  "Your portrait, names, date and venue on a rice-paper card on indigo, then the invitation on a rice-paper band, a countdown and calendar links.": "Tu retrato, nombres, fecha y lugar en una tarjeta de papel de arroz sobre índigo; después la invitación en una banda de papel de arroz, una cuenta atrás y enlaces de calendario.",
+  "Three moments, left, right and left again; each photo appears like ink spreading on paper as guests scroll to it.": "Tres momentos, a la izquierda, a la derecha y otra vez a la izquierda; cada foto aparece como tinta que se extiende sobre el papel cuando los invitados llegan a ella.",
+  "The order of the day on rice paper, a venue photo that appears like ink, an optional map and directions, travel, menu, registry and questions and answers.": "El programa del día en papel de arroz, una foto del lugar que aparece como tinta, un mapa e indicaciones opcionales, viaje, menú, lista de regalos y preguntas y respuestas.",
+  "A rice-paper reply card with your reply-by date and the shared configurable reply form.": "Una tarjeta de respuesta de papel de arroz con tu fecha límite de respuesta y el formulario de respuesta compartido y configurable.",
+  "Indigo": "Índigo",
+  "curtain": "telón",
+  "origami": "origami",
 };
 
 export default dict;

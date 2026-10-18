@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-"""Upload-ready Etsy listing data for designs 01–21 and the K42 services, built from each listing_v3.md (2026-10-15; 06–20: G123; services: G130).
+"""Upload-ready Etsy listing data for designs 01–32 and the K42 services, built from each listing_v3.md (2026-10-15; 06–20: G123; services: G130; 22–32: G175).
 
   python3 tools/etsy_upload.py                      # writes collections/<NN_*>/package/listing/etsy_upload.json, prints a summary
   python3 tools/etsy_upload.py --designs 06-20      # only these designs ("06-20", "07,12", "all")
   python3 tools/etsy_upload.py --check              # writes nothing; exit 1 if a title/tag/text rule fails
   python3 tools/etsy_upload.py --check --strict     # … or if a file Etsy needs (guide PDF, images, video) is missing
   python3 tools/etsy_upload.py --designs services   # only the two service listings (collections/_services/, K42)
+
+Designs 22–32 (G175) are "coming" in platform/lib/marketing/config.ts (K41: not for sale): their data is built and
+checked the same way, and "sales status coming" plus "price not decided for this design" (config.ts price "[PRICE]")
+are blockers, so they never read as ready. Their listing images and video need GPT mockup scenes first (blockers too).
 
 Services (G130, K42): "We set it up for you", custom design and the extra design revision are their own listings in collections/_services/<id>/.
 They have no theme and no demo; their TRY prices were approved on 2026-10-16 (docs/23 §1), and any undecided
@@ -17,16 +21,20 @@ The JSON is what a browser session pastes into Etsy's listing editor (docs/20 §
   G154 (G090 P0-03): §2 holds no VERIFY note any more (it claims only features that exist and passed G090's local
   checks); the live-site and real-device tests are the unchecked boxes of "Before you publish this listing" (§11),
   and each of them is an open check too ("where": "before publishing").
-- Price: 1,460 TL, approved by the user on 2026-10-16 (shop currency TRY, K38; about USD 29.48, docs/23 §1);
+- Price: 1,460 TL, approved by the user on 2026-10-16 (shop currency TRY, K38; about USD 29.48, docs/23 §1) and confirmed
+  per design with its sale (21: K47); a coming design (config.ts price "[PRICE]") carries the same figure as the
+  proposal and a blocker until it is confirmed;
   quantity 999, Etsy's maximum (user: no stock limit). Renewal stays null: the user's decision (each renewal costs a fee).
 - Images: the rows of §5 with the file's real state, from package/listing/images_editorial/ (the editorial set of
   2026-10-16, tools/listing_editorial.py, docs/21).
 - Rules (`rule_problems`, `--check` fails): Etsy's title and tag rules (tools/listing_kit.py), the design's name in the
   title, its own demo link in the description and no other design's, and — for the designs that do not open from an
-  envelope (the gatefold, pouch, wallet, book and sleeve of platform/lib/marketing/designs.ts, `openingObject`) — no
+  envelope (gatefold, pouch, wallet, book, sleeve, box, curtain, origami, door, dome, wall, lantern of
+  platform/lib/marketing/designs.ts, `openingObject`) — no
   "envelope" in the title, tags, description or alt texts.
 - Missing files (the START HERE PDF that Etsy delivers, the listing images, the video) are `blockers`: they keep
   `ready_to_publish` false and fail `--check` only with `--strict` (designs 06–20 have none of them yet, G123).
+- G175: an undecided [PLACEHOLDER] left in a design's description (as in the services) is an open check.
 """
 from __future__ import annotations
 
@@ -34,6 +42,7 @@ import argparse
 import json
 import re
 import sys
+import unicodedata
 from pathlib import Path
 
 TOOLS = Path(__file__).resolve().parent
@@ -64,6 +73,18 @@ DESIGNS = [
     ("19", "19_Midnight_Garden", "midnight-garden"),
     ("20", "20_Coastal_Seaside", "coastal-seaside"),
     ("21", "21_Crimson_Rose_Atelier", "crimson-rose-atelier"),  # G137; on sale since 2026-10-17 (config.ts "live", G142)
+    # G175: designs 22–32, "coming" in config.ts (K41); built and checked, never ready while coming
+    ("22", "22_Nocturne_Lake_Estate", "nocturne-lake-estate"),
+    ("23", "23_Velvet_Jewel_Box", "velvet-jewel-box"),
+    ("24", "24_Grand_Theatre_Premiere", "grand-theatre-premiere"),
+    ("25", "25_Orient_Express_Voyage", "orient-express-voyage"),
+    ("26", "26_Kintsugi_Washi", "kintsugi-washi"),
+    ("27", "27_Riad_Lantern_Nights", "riad-lantern-nights"),
+    ("28", "28_Maison_Patisserie", "maison-patisserie"),
+    ("29", "29_Celestial_Observatory", "celestial-observatory"),
+    ("30", "30_Azulejo_Mosaic", "azulejo-mosaic"),
+    ("31", "31_Sky_Lantern_Festival", "sky-lantern-festival"),
+    ("32", "32_Music_Box_Ballerina", "music-box-ballerina"),
 ]
 PRICE_TRY = 1460
 QUANTITY = 999  # Etsy's maximum; the user wants no stock limit (2026-10-16)
@@ -83,6 +104,7 @@ IMAGE9_STATUS = ("current: image 9 of 2026-10-17 (G148; tools/listing_editorial.
 SERVICE_IMAGES_STATUS = ("current: service set of 2026-10-17 (tools/listing_services.py, G136; GM06 trust scenes, real "
                          "screens of the editor and of our ready designs' openings, no price, QR or web address)")
 DESIGN_COPY = REPO / "platform" / "lib" / "marketing" / "designs.ts"
+CONFIG = REPO / "platform" / "lib" / "marketing" / "config.ts"
 DEMO_LINK = re.compile(r"/start/demo/([a-z0-9-]+)")
 
 
@@ -154,6 +176,26 @@ def images(md: str, listing: Path, status: str = IMAGES_STATUS) -> tuple[list[di
     return rows, checks
 
 
+def commerce(theme: str, config: str | None = None) -> dict[str, str]:
+    """G175: the design's sales status and price in platform/lib/marketing/config.ts ({"status": "live"|"coming", "price": …})."""
+    config = CONFIG.read_text(encoding="utf-8") if config is None else config
+    m = re.search(rf"id: '{re.escape(theme)}',\s*\n\s*name: '[^']+',\s*\n\s*status: '(live|coming)',\s*\n(?:\s*featured: \w+,\s*\n)?\s*price: '([^']*)'",
+                  config)
+    if not m:
+        raise SystemExit(f"{CONFIG.relative_to(REPO)}: no status/price for '{theme}'")
+    return {"status": m.group(1), "price": m.group(2)}
+
+
+def planned_images(listing: Path) -> list[dict]:
+    """G175: the editorial upload set (listing_kit.UPLOAD_IMAGES) for a listing whose §5 has no image table yet."""
+    out = []
+    for n, name in enumerate(lk.UPLOAD_IMAGES, 1):
+        path = listing / lk.UPLOAD_DIR / f"{name}.png"
+        out.append({"n": n, "file": str(path.relative_to(REPO)).replace("\\", "/"), "alt": None, "exists": path.exists(),
+                    "status": "missing (planned; alt text not written yet)" if not path.exists() else "present, no alt text"})
+    return out
+
+
 def theme_name(theme: str) -> str:
     """The design's name as the platform shows it ("Design: <name>" on /start): platform/themes/<id>/theme.json."""
     return json.loads((REPO / "platform" / "themes" / theme / "theme.json").read_text(encoding="utf-8"))["name"]
@@ -172,11 +214,16 @@ def opening_object(theme: str, copy: str | None = None) -> str:
     return m.group(1)
 
 
+def fold(text: str) -> str:
+    """Without accents (G175: Etsy buyers search "patisserie"; the title may drop the design name's accent)."""
+    return "".join(c for c in unicodedata.normalize("NFKD", text) if not unicodedata.combining(c))
+
+
 def text_problems(theme: str, name: str, obj: str, title: str | None, tags: list[str], desc: str,
                   alts: list[str]) -> list[str]:
     """Rules beyond Etsy's own: the right design in the title and demo link, and no envelope where there is none."""
     p = []
-    if title and name not in title:
+    if title and fold(name) not in fold(title):  # G175: "Maison Patisserie" names "Maison Pâtisserie"
         p.append(f"title does not name the design '{name}'")
     demos = set(DEMO_LINK.findall(desc))
     if theme not in demos:
@@ -185,7 +232,7 @@ def text_problems(theme: str, name: str, obj: str, title: str | None, tags: list
         p.append(f"description links another design's demo: {', '.join(sorted(demos - {theme}))}")
     if obj != "envelope":
         for where, text in [("title", title or ""), ("tags", " ".join(tags)), ("description", desc)] + \
-                [(f"image {i} alt text", a) for i, a in enumerate(alts, 1)]:
+                [(f"image {i} alt text", a or "") for i, a in enumerate(alts, 1)]:
             if re.search(r"envelope", text, re.I):
                 p.append(f"{where} says 'envelope' but this design opens from a {obj}")
     return p
@@ -199,7 +246,14 @@ def build(no: str, folder: str, theme: str) -> tuple[dict, list[str]]:
     desc, checks = description(md)
     attrs, more = attributes(md)
     imgs, img_checks = images(md, listing)
+    if not imgs:  # G175: a coming design's §5 plans the set without alt texts (written against the finished files)
+        imgs = planned_images(listing)
+        checks.append({"where": "images", "check": "write the alt texts of listing_v3 §5 against the produced images",
+                       "text": ""})
     checks += more + img_checks + before_publishing(md)
+    for ph in sorted(set(PLACEHOLDER.findall(desc))):  # G175 (as in the services)
+        checks.append({"where": "description", "check": f"decide {ph}", "text": ""})
+    sale = commerce(theme)
     pdf = coll / "package" / "customer" / "START_HERE.pdf"
     video = listing / "video.mp4"
     mockups = sorted(p.name for p in (coll / "assets" / "gpt" / "mockups").glob("*.png"))
@@ -212,6 +266,11 @@ def build(no: str, folder: str, theme: str) -> tuple[dict, list[str]]:
         blockers.append("listing video missing")
     if not pdf.exists():
         blockers.append(f"digital file missing: {pdf.relative_to(REPO).as_posix()} (the START HERE guide Etsy delivers)")
+    if sale["status"] == "coming":  # G175 (K41): not for sale; the price is confirmed with the sale
+        blockers.append("sales status 'coming' in platform/lib/marketing/config.ts (K41: not for sale)")
+    if sale["price"] != str(PRICE_TRY):
+        blockers.append(f"price not decided for this design (config.ts price '{sale['price']}'; "
+                        f"{PRICE_TRY} TL is the 01–21 design price, docs/23 §1)")
     variations, palette_problems = palette_variations(theme)
     problems += [f"variations: {p}" for p in palette_problems]
     if variations and len(variations["offered"]) > 1:
@@ -229,9 +288,11 @@ def build(no: str, folder: str, theme: str) -> tuple[dict, list[str]]:
                                                                    "Renewal", "Digital file"}},
         "price_try": PRICE_TRY,
         "price_usd_approx": round(PRICE_TRY / USD_TRY, 2),
-        "price_note": price_note(),
+        "price_note": price_note() if sale["price"] == str(PRICE_TRY) else
+        f"Proposed: the design price of 01–21, not confirmed for this design (config.ts '{sale['price']}'). " + price_note(),
         "quantity": QUANTITY,
         "renewal": None,
+        "sales_status": sale["status"],
         "shop_section": re.sub(r"\s*\(.*\)$", "", attrs.get("Shop section", "")),
         "digital_files": [{"file": f"collections/{folder}/package/customer/START_HERE.pdf",
                            "bytes": pdf.stat().st_size if pdf.exists() else None}],

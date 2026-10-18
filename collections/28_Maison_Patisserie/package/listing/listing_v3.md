@@ -25,7 +25,7 @@ theme.json, index.html, home.html, story.html, details.html, rsvp.html) and `pla
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, quantity | `config.ts`: `[PRICE]` — not decided for this design (01–21: 1,460 TL, K42/K47). No stock limit (999). |
 | Design fonts and other languages | Checked on 2026-10-17 from the Google Fonts CSS of the fonts this theme loads: **Parisienne** (the names) has latin + latin-ext; **Italiana** (headings and text) has latin only. The language line in GOOD TO KNOW is written from this. |
-| START HERE guide | **Not built** for this design (`python3 tools/build_customer_guides.py --designs 28` needs the design in its table first). |
+| START HERE guide | **Built** (G175, 2026-10-17): `package/customer/START_HERE.md` + `.pdf` with the start QR (`python3 tools/build_customer_guides.py --designs 28`, from docs/19 Ek A; QR only from `tools/make_qr.py`; `--check` passes). Its start link answers only after this design is deployed; rebuild it if Ek A or the domain changes. |
 | Listing images and video | **Not made** (they need the real artwork). |
 
 VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence.

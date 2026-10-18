@@ -18,7 +18,7 @@ today. Product language: English (US spelling). This design has no earlier listi
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** All checks so far are Chromium mobile emulation. |
 | Shop name, support email, response time, refund policy | As 01–21: BKE Studio, bkestudio@gmail.com (K33), 24 hours, no returns with a promise to fix (docs/20 §6). |
 | Price, quantity | `config.ts`: `[PRICE]` — decided with the sale approval. Quantity 999 like the other designs. |
-| START HERE guide | **Not built** (`python3 tools/build_customer_guides.py --designs 25` after the sale decision). |
+| START HERE guide | **Built** (G175, 2026-10-17): `package/customer/START_HERE.md` + `.pdf` with the start QR (`python3 tools/build_customer_guides.py --designs 25`, from docs/19 Ek A; QR only from `tools/make_qr.py`; `--check` passes). Its start link answers only after this design is deployed; rebuild it if Ek A or the domain changes. |
 | Listing images and video | **Not produced** (they need the GPT parts and sample photos). |
 
 VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence.
