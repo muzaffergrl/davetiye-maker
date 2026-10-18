@@ -30,6 +30,7 @@ export const DEMO_CITY_PINS: Readonly<Record<string, { lat: number; lng: number 
   'nocturne-lake-estate': { lat: 45.9857, lng: 9.2617 }, // Bellagio (Lake Como)
   'orient-express-voyage': { lat: 45.4408, lng: 12.3155 }, // Venice
   'grand-theatre-premiere': { lat: 37.5407, lng: -77.436 }, // Richmond, VA (the theatre is fictional)
+  'highland-tartan-thistle': { lat: 56.7036, lng: -3.73 }, // Pitlochry, Perthshire (the house is fictional)
   'olive-ivory': { lat: 38.2975, lng: -122.2869 }, // Napa
   'red-lacquer-double-happiness': { lat: 49.2827, lng: -123.1207 }, // Vancouver, BC (the garden house is fictional)
   'riad-lantern-nights': { lat: 31.6295, lng: -7.9811 }, // Marrakech (medina)

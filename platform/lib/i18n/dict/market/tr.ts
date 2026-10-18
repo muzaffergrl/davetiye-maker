@@ -1029,6 +1029,17 @@ const dict: Dict = {
   "A cream reply card on the lacquer red with your names and reply-by date, then the reply form; a few gold clouds rise when a reply is sent.": "Lake kırmızısı üzerinde isimleriniz ve son yanıt tarihiyle krem bir yanıt kartı, ardından yanıt formu; yanıt gönderilince birkaç altın bulut yükselir.",
   "Lacquer red": "Lake kırmızısı",
   "Cinnabar": "Zincifre",
+  // G184 Highland Tartan & Thistle
+  "A wool envelope strapped with leather and a brass buckle, heather and thistle, Highland mist and antique locket photo frames": "Deri kayış ve pirinç tokayla bağlanmış yün bir zarf, funda ve devedikeni, İskoç Yaylası sisi ve antika madalyon foto çerçeveleri",
+  "A wool envelope with a leather strap and brass buckle opens over misty hills into your wedding website. Personalize it in your online editor.": "Deri kayışlı, pirinç tokalı yün bir zarf sisli tepelerin üzerinde açılır ve düğün sitenize dönüşür. Çevrim içi düzenleyicinizde kişiselleştirin.",
+  "Heather, moss green and cream, warm leather and antique brass, like a walk through the Highlands. Your invitation waits in a wool envelope held shut by a buckled strap, and every photo sits in a brass locket.": "Funda moru, yosun yeşili ve krem, sıcak deri ve antika pirinç; İskoç Yaylası'nda bir yürüyüş gibi. Davetiyeniz tokalı bir kayışla kapalı tutulan yün bir zarfın içinde bekler, her fotoğraf pirinç bir madalyonda durur.",
+  "Your guests tap the envelope. The brass buckle opens, the leather strap slides away and the wool flap swings up, while the mist over the hills behind it draws off. The card with your portrait rises out of the envelope and comes forward to become your home page.": "Misafirleriniz zarfa dokunur. Pirinç toka açılır, deri kayış kayarak çıkar ve yün kapak yukarı kalkar; bu sırada arkadaki tepelerin üzerindeki sis çekilir. Portrenizin olduğu kart zarftan yükselir ve öne gelerek ana sayfanız olur.",
+  "Your portrait in a brass locket and your names on a cream card over the misty hills, then the invitation, a countdown and calendar links.": "Sisli tepelerin üzerinde krem bir kartta pirinç madalyonda portreniz ve isimleriniz; ardından davet, geri sayım ve takvim bağlantıları.",
+  "Three photos in antique brass lockets whose lids swing open on their hinges as guests scroll to them, with mist drifting behind the page.": "Antika pirinç madalyonlarda üç fotoğraf; misafirler kaydırdıkça madalyonların kapakları menteşelerinde açılır, sayfanın arkasında sis süzülür.",
+  "The order of the day on cream paper, a venue photo that comes out of the mist, an optional map, dress code, travel and questions and answers.": "Krem kâğıtta günün akışı, sisin içinden beliren mekân fotoğrafı, isteğe bağlı harita, kıyafet kuralı, ulaşım ile sorular ve cevaplar.",
+  "A cream reply card over the moss-green page with your names and reply-by date, then the reply form.": "Yosun yeşili sayfada isimleriniz ve son yanıt tarihiyle krem bir yanıt kartı, ardından yanıt formu.",
+  "Heather": "Funda",
+  "Leather": "Deri",
 };
 
 export default dict;

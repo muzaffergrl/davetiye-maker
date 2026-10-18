@@ -479,6 +479,13 @@ EK_TEMALAR = [
          dekor="Şakayık, kâğıt kesim (jianzhi) desenleri, kırmızı lake, altın bulut motifleri, püsküllü düğüm", teknik="kâğıt kesim + lake + altın varak",
          font=("Luxurious Script", "Prata"), palet_adi="lacquer-red-gold-cream",
          hareket="İpin düğmeden dönerek çözülmesi, kapağın katından kalkması, kâğıt kesim pencere katlarının kanat kanat açılması, altın bulutların süzülmesi, iki hızda kayan kâğıt kesim katmanlar (paralaks), ay kapısı kanatlarıyla foto, metnin üst kenarından katlanarak açılması, sallanan püsküllü düğüm"),
+    # 3. dalga (33–38, docs/24, K23 sıkı: ilk sayfa kapalı zarf; fark zarfın türü, kapanması ve koreografisinde).
+    dict(no=35, klasor="35_Highland_Tartan_Thistle", ad="Highland Tartan & Thistle",
+         zarf="Ekoseli yün zarf, düz (V olmayan) kapak, dikey deri kayış + pirinç toka; tokanın çerçevesi devrilip dili bırakır, kayış tokadan yukarı kayıp çıkar, yün kapak üst katından 3B kalkar, funda dalı ve kart cepten yükselir; arkadaki tepelerden sis iki yana çekilir.",
+         foto="Antika pirinç madalyon (locket) oval çerçeveler; sahnesine gelince madalyonun kapağı menteşesinde açılır, fotoğraf görünür; mekân fotoğrafı soldan sisin kalkmasıyla belirir.",
+         dekor="Ekose yün, devedikeni, funda, deri kayış, pirinç toka ve madalyon, dağ sisi", teknik="yağlı boya manzara + fotogerçekçi doku",
+         font=("Rouge Script", "Sorts Mill Goudy"), palet_adi="heather-moss-tartan",
+         hareket="Toka/kayış mekaniği (çerçeve devrilir, kayış tokadan kayar), düz yün kapağın 3B kalkışı, iki sis katmanının zıt yönlere kayması (açılışta çekilir, iç sayfalarda kaydırmayla süzülür), madalyon kapaklarının menteşede açılması, metnin sisten netleşerek gelmesi"),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

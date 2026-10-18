@@ -1029,6 +1029,17 @@ const dict: Dict = {
   "A cream reply card on the lacquer red with your names and reply-by date, then the reply form; a few gold clouds rise when a reply is sent.": "Una tarjeta de respuesta crema sobre el rojo laca con sus nombres y la fecha límite de respuesta, y después el formulario; al enviar una respuesta se elevan unas nubes doradas.",
   "Lacquer red": "Rojo laca",
   "Cinnabar": "Cinabrio",
+  // G184 Highland Tartan & Thistle
+  "A wool envelope strapped with leather and a brass buckle, heather and thistle, Highland mist and antique locket photo frames": "Un sobre de lana con correa de cuero y hebilla de latón, brezo y cardo, niebla de las Highlands y marcos de medallón antiguo para las fotos",
+  "A wool envelope with a leather strap and brass buckle opens over misty hills into your wedding website. Personalize it in your online editor.": "Un sobre de lana con correa de cuero y hebilla de latón se abre sobre colinas brumosas y da paso a la web de tu boda. Personalízalo en tu editor en línea.",
+  "Heather, moss green and cream, warm leather and antique brass, like a walk through the Highlands. Your invitation waits in a wool envelope held shut by a buckled strap, and every photo sits in a brass locket.": "Brezo, verde musgo y crema, cuero cálido y latón antiguo, como un paseo por las Highlands. Tu invitación espera en un sobre de lana cerrado con una correa con hebilla, y cada foto descansa en un medallón de latón.",
+  "Your guests tap the envelope. The brass buckle opens, the leather strap slides away and the wool flap swings up, while the mist over the hills behind it draws off. The card with your portrait rises out of the envelope and comes forward to become your home page.": "Tus invitados tocan el sobre. La hebilla de latón se abre, la correa de cuero se desliza y la solapa de lana se levanta, mientras la niebla sobre las colinas del fondo se retira. La tarjeta con tu retrato sale del sobre y avanza para convertirse en tu página de inicio.",
+  "Your portrait in a brass locket and your names on a cream card over the misty hills, then the invitation, a countdown and calendar links.": "Tu retrato en un medallón de latón y vuestros nombres en una tarjeta crema sobre las colinas brumosas; después, la invitación, una cuenta atrás y enlaces al calendario.",
+  "Three photos in antique brass lockets whose lids swing open on their hinges as guests scroll to them, with mist drifting behind the page.": "Tres fotos en medallones antiguos de latón cuyas tapas se abren sobre sus bisagras cuando los invitados llegan a ellas, con niebla que se desliza detrás de la página.",
+  "The order of the day on cream paper, a venue photo that comes out of the mist, an optional map, dress code, travel and questions and answers.": "El programa del día en papel crema, una foto del lugar que surge de la niebla, un mapa opcional, código de vestimenta, viaje y preguntas y respuestas.",
+  "A cream reply card over the moss-green page with your names and reply-by date, then the reply form.": "Una tarjeta de respuesta crema sobre la página verde musgo con vuestros nombres y la fecha límite, y después el formulario de respuesta.",
+  "Heather": "Brezo",
+  "Leather": "Cuero",
 };
 
 export default dict;

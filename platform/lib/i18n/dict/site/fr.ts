@@ -306,6 +306,10 @@ const dict: Dict = {
   "Double happiness": "Double bonheur",
   "Open the envelope": "Ouvrir l'enveloppe",
   "Together with their families": "Entourés de leurs familles",
+  // G184 Highland Tartan & Thistle
+  'Gathered in the hills': 'Réunis dans les collines',
+  'Invite you to celebrate': 'vous invitent à célébrer',
+  'Open the envelope': "Ouvrir l'enveloppe",
 };
 
 export default dict;
