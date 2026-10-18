@@ -304,22 +304,16 @@ const dict: Dict = {
   'invite you to celebrate': 'laden Sie zum Feiern ein',
   // G183 Red Lacquer & Double Happiness
   "Double happiness": "Doppeltes Glück",
-  "Open the envelope": "Den Umschlag öffnen",
-  "Together with their families": "Gemeinsam mit ihren Familien",
   // G184 Highland Tartan & Thistle
   'Gathered in the hills': 'Versammelt in den Hügeln',
   'Invite you to celebrate': 'laden Sie zum Feiern ein',
-  'Open the envelope': 'Umschlag öffnen',
   // G185 Victorian Glasshouse (36)
   "Grown with love": "Mit Liebe gewachsen",
   "Open the seed packet": "Die Samentüte öffnen",
   // G186 Art Nouveau Lily
-  "Invite you to celebrate": "Laden Sie zum Feiern ein",
   "Love in full bloom": "Liebe in voller Blüte",
   // G187 Papel Picado Fiesta
   "A fiesta of love": "Ein Fest der Liebe",
-  "Open the envelope": "Den Umschlag öffnen",
-  "Together with their families": "Gemeinsam mit ihren Familien",
 };
 
 export default dict;

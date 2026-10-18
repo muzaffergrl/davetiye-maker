@@ -25,7 +25,7 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
    build'i ister) → `etsy_upload.py`; en sonda bu dosyayı yeniden yazar. Tasarım × adım tablosu ve live engelleri basılır.
    Yerleştirmeden yalnız adımlar: `--koleksiyon NN|all`. Hiçbir tasarımı live yapmaz, yayınlamaz, Etsy'ye göndermez.
 
-**Toplam eksik: 334**
+**Toplam eksik: 493**
 
 | Prompt dosyası | Bölüm | Var | Eksik |
 |---|---|---|---|
@@ -94,6 +94,24 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
 | `collections/32_Music_Box_Ballerina/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin) | 0 | 5 |
 | `collections/32_Music_Box_Ballerina/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK) | 0 | 2 |
 | `collections/32_Music_Box_Ballerina/assets/gpt/GPT_PROMPTS.md` | PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) | 0 | 5 |
+| `collections/33_Marigold_Mehndi/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 18 |
+| `collections/33_Marigold_Mehndi/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Anaya & Kabir; gerçek kişiye benzemesin) | 0 | 5 |
+| `collections/33_Marigold_Mehndi/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5) | 0 | 2 |
+| `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 23 |
+| `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Mei & Julian; gerçek kişiye benzemesin) | 0 | 5 |
+| `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5) | 0 | 2 |
+| `collections/35_Highland_Tartan_Thistle/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 20 |
+| `collections/35_Highland_Tartan_Thistle/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Isla & Callum; gerçek kişiye benzemesin) | 0 | 5 |
+| `collections/35_Highland_Tartan_Thistle/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5) | 0 | 2 |
+| `collections/36_Victorian_Glasshouse/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 19 |
+| `collections/36_Victorian_Glasshouse/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Flora & Edmund; gerçek kişiye benzemesin) | 0 | 5 |
+| `collections/36_Victorian_Glasshouse/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5) | 0 | 2 |
+| `collections/37_Art_Nouveau_Lily/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 16 |
+| `collections/37_Art_Nouveau_Lily/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Odette & Felix; gerçek kişiye benzemesin) | 0 | 5 |
+| `collections/37_Art_Nouveau_Lily/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5) | 0 | 2 |
+| `collections/38_Papel_Picado_Fiesta/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 21 |
+| `collections/38_Papel_Picado_Fiesta/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Valeria & Diego; gerçek kişiye benzemesin) | 0 | 5 |
+| `collections/38_Papel_Picado_Fiesta/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5) | 0 | 2 |
 | `collections/16_Sunflower_Rustic/variants/GPT_PROMPTS.md` | V02_navy_sunflower · Navy & Sunflower (`navy-sunflower`) | 0 | 5 |
 | `collections/16_Sunflower_Rustic/variants/GPT_PROMPTS.md` | V03_burgundy_sunflower · Burgundy & Sunflower (`burgundy-sunflower`) | 0 | 5 |
 | `collections/16_Sunflower_Rustic/variants/GPT_PROMPTS.md` | V04_dusty_blue_sunflower · Dusty Blue & Sunflower (`dusty-blue-sunflower`) | 0 | 5 |
@@ -514,6 +532,183 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
 - `collections/32_Music_Box_Ballerina/assets/gpt/mockups/laptop_phone.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/32_Music_Box_Ballerina/assets/gpt/mockups/flatlay_phone.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/32_Music_Box_Ballerina/assets/gpt/mockups/hand_phone_edit.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
+
+### `collections/33_Marigold_Mehndi/assets/gpt/GPT_PROMPTS.md`
+
+- `collections/33_Marigold_Mehndi/assets/gpt/parts/silk.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/33_Marigold_Mehndi/assets/gpt/parts/sleeve.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/33_Marigold_Mehndi/assets/gpt/parts/petal_1.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/33_Marigold_Mehndi/assets/gpt/parts/petal_2.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/33_Marigold_Mehndi/assets/gpt/parts/petal_3.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/33_Marigold_Mehndi/assets/gpt/parts/jharokha.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/33_Marigold_Mehndi/assets/gpt/parts/henna.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/33_Marigold_Mehndi/assets/gpt/parts/diya.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/33_Marigold_Mehndi/assets/gpt/parts/flame.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/33_Marigold_Mehndi/assets/gpt/parts/garland.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/33_Marigold_Mehndi/assets/gpt/parts/mehndi_pattern.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/33_Marigold_Mehndi/assets/gpt/parts/card_small.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/33_Marigold_Mehndi/assets/gpt/parts/tassel.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/33_Marigold_Mehndi/assets/gpt/parts/envelope_front.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/33_Marigold_Mehndi/assets/gpt/parts/flap.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/33_Marigold_Mehndi/assets/gpt/parts/velvet.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/33_Marigold_Mehndi/assets/gpt/parts/paper.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/33_Marigold_Mehndi/assets/gpt/parts/web_hero.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/33_Marigold_Mehndi/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Anaya & Kabir; gerçek kişiye benzemesin)
+- `collections/33_Marigold_Mehndi/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Anaya & Kabir; gerçek kişiye benzemesin)
+- `collections/33_Marigold_Mehndi/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Anaya & Kabir; gerçek kişiye benzemesin)
+- `collections/33_Marigold_Mehndi/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Anaya & Kabir; gerçek kişiye benzemesin)
+- `collections/33_Marigold_Mehndi/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Anaya & Kabir; gerçek kişiye benzemesin)
+- `collections/33_Marigold_Mehndi/assets/gpt/print/invitation_front_5x7.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
+- `collections/33_Marigold_Mehndi/assets/gpt/print/invitation_back_5x7.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
+
+### `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/GPT_PROMPTS.md`
+
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/lacquer.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/red_paper.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/cream_paper.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/gold_leaf.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/envelope_back.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/envelope_pocket.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/envelope_flap.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/flap_inside.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/button.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/string.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/xi_gold.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/veil_outer.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/veil_inner.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/card_small.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/cloud_1.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/cloud_2.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/cloud_3.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/moon_gate.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/peony_band.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/jianzhi_far.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/jianzhi_near.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/tassel.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/web_hero.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Mei & Julian; gerçek kişiye benzemesin)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Mei & Julian; gerçek kişiye benzemesin)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Mei & Julian; gerçek kişiye benzemesin)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Mei & Julian; gerçek kişiye benzemesin)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Mei & Julian; gerçek kişiye benzemesin)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/print/invitation_front_5x7.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
+- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/print/invitation_back_5x7.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
+
+### `collections/35_Highland_Tartan_Thistle/assets/gpt/GPT_PROMPTS.md`
+
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/tartan_wool.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/cream_paper.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/moss_ground.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/hills.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/mist.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/envelope_back.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/envelope_front.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/flap.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/strap.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/buckle.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/heather_sprig.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/heather_divider.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/heather_floret_1.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/heather_floret_2.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/heather_floret_3.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/locket_rim.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/locket_lid.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/thistle.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/card_small.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/web_hero.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Isla & Callum; gerçek kişiye benzemesin)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Isla & Callum; gerçek kişiye benzemesin)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Isla & Callum; gerçek kişiye benzemesin)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Isla & Callum; gerçek kişiye benzemesin)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Isla & Callum; gerçek kişiye benzemesin)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/print/invitation_front_5x7.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
+- `collections/35_Highland_Tartan_Thistle/assets/gpt/print/invitation_back_5x7.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
+
+### `collections/36_Victorian_Glasshouse/assets/gpt/GPT_PROMPTS.md`
+
+- `collections/36_Victorian_Glasshouse/assets/gpt/parts/fern_ground.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/36_Victorian_Glasshouse/assets/gpt/parts/glass_ground.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/36_Victorian_Glasshouse/assets/gpt/parts/herbarium_paper.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/36_Victorian_Glasshouse/assets/gpt/parts/packet_body.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/36_Victorian_Glasshouse/assets/gpt/parts/packet_flap.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/36_Victorian_Glasshouse/assets/gpt/parts/packet_flap_in.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/36_Victorian_Glasshouse/assets/gpt/parts/copper_tag.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/36_Victorian_Glasshouse/assets/gpt/parts/twine.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/36_Victorian_Glasshouse/assets/gpt/parts/glass_mist.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/36_Victorian_Glasshouse/assets/gpt/parts/ironwork.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/36_Victorian_Glasshouse/assets/gpt/parts/ferns.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/36_Victorian_Glasshouse/assets/gpt/parts/orchid_sprig.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/36_Victorian_Glasshouse/assets/gpt/parts/specimen_frame.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/36_Victorian_Glasshouse/assets/gpt/parts/herbarium_label.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/36_Victorian_Glasshouse/assets/gpt/parts/leaf_1.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/36_Victorian_Glasshouse/assets/gpt/parts/leaf_2.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/36_Victorian_Glasshouse/assets/gpt/parts/leaf_3.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/36_Victorian_Glasshouse/assets/gpt/parts/card_small.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/36_Victorian_Glasshouse/assets/gpt/parts/web_hero.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/36_Victorian_Glasshouse/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Flora & Edmund; gerçek kişiye benzemesin)
+- `collections/36_Victorian_Glasshouse/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Flora & Edmund; gerçek kişiye benzemesin)
+- `collections/36_Victorian_Glasshouse/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Flora & Edmund; gerçek kişiye benzemesin)
+- `collections/36_Victorian_Glasshouse/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Flora & Edmund; gerçek kişiye benzemesin)
+- `collections/36_Victorian_Glasshouse/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Flora & Edmund; gerçek kişiye benzemesin)
+- `collections/36_Victorian_Glasshouse/assets/gpt/print/invitation_front_5x7.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
+- `collections/36_Victorian_Glasshouse/assets/gpt/print/invitation_back_5x7.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
+
+### `collections/37_Art_Nouveau_Lily/assets/gpt/GPT_PROMPTS.md`
+
+- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/cream_paper.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/sage_paper.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/lilac_lining.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/env_back.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/env_pocket.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/petal_left.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/petal_right.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/petal_centre.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/lily_medallion.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/card_small.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/arch_window.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/halo.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/lily_spray.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/whiplash.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/petal_drift.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/web_hero.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Odette & Felix; gerçek kişiye benzemesin)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Odette & Felix; gerçek kişiye benzemesin)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Odette & Felix; gerçek kişiye benzemesin)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Odette & Felix; gerçek kişiye benzemesin)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Odette & Felix; gerçek kişiye benzemesin)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/print/invitation_front_5x7.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
+- `collections/37_Art_Nouveau_Lily/assets/gpt/print/invitation_back_5x7.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
+
+### `collections/38_Papel_Picado_Fiesta/assets/gpt/GPT_PROMPTS.md`
+
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/kraft_paper.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/limewash_wall.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/cream_paper.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/terracotta.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/envelope_pocket.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/envelope_flap.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/flap_liner.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/flag_1.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/flag_2.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/flag_3.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/flag_4.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/flag_5.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/flag_6.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/bulb.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/frame_1.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/frame_2.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/frame_3.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/frame_wide.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/bougainvillea.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/embroidery_band.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/web_hero.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Valeria & Diego; gerçek kişiye benzemesin)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Valeria & Diego; gerçek kişiye benzemesin)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Valeria & Diego; gerçek kişiye benzemesin)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Valeria & Diego; gerçek kişiye benzemesin)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Valeria & Diego; gerçek kişiye benzemesin)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/print/invitation_front_5x7.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
+- `collections/38_Papel_Picado_Fiesta/assets/gpt/print/invitation_back_5x7.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
 
 ### `collections/16_Sunflower_Rustic/variants/GPT_PROMPTS.md`
 

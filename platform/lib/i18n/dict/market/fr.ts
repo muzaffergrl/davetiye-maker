@@ -1072,7 +1072,6 @@ const dict: Dict = {
   "Three photos in cut-paper frames that drop in and swing to rest as guests scroll, and sway a little more when they scroll faster.": "Trois photos dans des cadres de papier découpé qui tombent et se balancent avant de s'immobiliser au défilement, et oscillent un peu plus quand on fait défiler plus vite.",
   "The order of the day on kraft paper, each moment with a small flag that swings in, a venue photo in a wide frame, an optional map, dress code, travel, the menu and questions and answers.": "Le déroulé de la journée sur papier kraft, chaque moment avec un petit fanion qui entre en se balançant, une photo du lieu dans un cadre large, une carte facultative, le code vestimentaire, le voyage, le menu et les questions-réponses.",
   "A cream reply card under a small garland of flags; when a reply is sent, a few flags flutter down.": "Une carte-réponse crème sous une petite guirlande de fanions ; quand une réponse est envoyée, quelques fanions tombent en voletant.",
-  "Fuchsia": "Fuchsia",
   "Marigold": "Souci",
   "Turquoise": "Turquoise",
 };

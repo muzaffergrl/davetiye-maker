@@ -1072,7 +1072,6 @@ const dict: Dict = {
   "Three photos in cut-paper frames that drop in and swing to rest as guests scroll, and sway a little more when they scroll faster.": "Kaydırdıkça düşüp sallanarak duran, daha hızlı kaydırıldığında biraz daha çok sallanan kâğıt kesim çerçevelerde üç fotoğraf.",
   "The order of the day on kraft paper, each moment with a small flag that swings in, a venue photo in a wide frame, an optional map, dress code, travel, the menu and questions and answers.": "Kraft kâğıtta günün programı, her an sallanarak gelen küçük bir bayrakla, geniş bir çerçevede mekân fotoğrafı, isteğe bağlı harita, kıyafet kuralı, ulaşım, menü ve sorular ile cevaplar.",
   "A cream reply card under a small garland of flags; when a reply is sent, a few flags flutter down.": "Küçük bir bayrak dizisinin altında krem bir yanıt kartı; yanıt gönderildiğinde birkaç bayrak süzülerek düşer.",
-  "Fuchsia": "Fuşya",
   "Marigold": "Kadife çiçeği",
   "Turquoise": "Turkuaz",
 };
