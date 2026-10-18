@@ -58,11 +58,7 @@ export interface MarketingConfig {
     /** Absolute path under public/ of a square logo (≥ 112 px) for JSON-LD, or null. Site header/footer logos: lib/marketing/brand.ts. */
     logo: string | null;
   };
-  /**
-   * The brand domain, without protocol. Still an open decision (K48), so it stays a placeholder and blocks `launched`.
-   * Copy never shows it while it is undecided: address examples ("<host>/<your-names>") use the host the site really
-   * runs on (siteHost() in lib/marketing/site.ts, from MARKETING_SITE_URL / PLATFORM_PUBLIC_URL), G154.
-   */
+  /** The registered brand domain in IDNA form, without protocol. */
   domain: string;
   /** Absolute origin of the marketing site (canonical URLs, sitemap, JSON-LD). See siteOrigin() in lib/marketing/site.ts. */
   siteUrl: string;
@@ -107,8 +103,7 @@ export interface MarketingConfig {
 
 export const MARKETING: MarketingConfig = {
   launched: false,
-  // K26/K27 (2026-10-14): working name BKE Studio, identity GM01 direction C (brand/). The Etsy shop name, domain and
-  // support email are still open, so they stay placeholders below; nothing is indexed while `launched` is false.
+  // K26/K27 (2026-10-14): working name BKE Studio, identity GM01 direction C (brand/).
   brand: {
     name: 'BKE Studio',
     // G144: msg() marks texts the sales site translates where it shows them (lib/marketing/i18n.ts)
@@ -117,10 +112,9 @@ export const MARKETING: MarketingConfig = {
     ),
     logo: '/brand/icon-512.png',
   },
-  domain: '[DOMAIN]',
-  // MARKETING_SITE_URL (the brand domain, once decided) wins; then PLATFORM_PUBLIC_URL (set on Vercel); else the
-  // placeholder — siteOrigin() falls back to http://localhost:3000 for building URLs while it is a placeholder.
-  siteUrl: process.env.MARKETING_SITE_URL || process.env.PLATFORM_PUBLIC_URL || 'https://[DOMAIN]',
+  domain: 'xn--bkestudo-zkb.com',
+  // Vercel is serving the purchased domain; keep it as the production fallback when no public URL env var is set.
+  siteUrl: process.env.MARKETING_SITE_URL || process.env.PLATFORM_PUBLIC_URL || 'https://xn--bkestudo-zkb.com',
   // K33 (2026-10-15): shop name BKE Studio, support address bkestudio@gmail.com ("for now"). Response time 24 hours (user,
   // 2026-10-15). K48 (2026-10-17): the Etsy shop link is the shop STUDIOBKE (K35: Etsy's real shop name; copy says BKE Studio).
   support: { email: 'bkestudio@gmail.com', responseTime: msg('24 hours') },
@@ -152,7 +146,7 @@ export const MARKETING: MarketingConfig = {
   analytics: { provider: 'none' },
   social: { pinterest: null, instagram: null, tiktok: null },
   aiTrainingBots: 'allow',
-  copyUpdated: '2026-10-17',
+  copyUpdated: '2026-10-18',
   // editRights + archive: G060 (panel v2) implements them; flip to true when it is merged and live-checked.
   verified: { editRights: false, archive: false, realDevices: false, privacyText: false, orderCheck: false },
   // K42: prices approved by the user on 2026-10-16 (TRY, docs/23 §1). The listings are not on Etsy yet (K41).
