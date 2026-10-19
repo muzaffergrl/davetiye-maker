@@ -116,6 +116,15 @@ const config: NextConfig = {
   // pages are app/(marketing)/i18n/[lang]/…: a dynamic [lang] folder at the root would clash with the couple sites at
   // /[slug] (slugs are 3+ characters, so two-letter prefixes are free; lib/slug.ts reserves them and "i18n" anyway).
   // beforeFiles: before the filesystem routes, so /tr never reaches app/[slug].
+  // Keep legacy IDN links (including editor keys and deep paths) on the primary ASCII domain.
+  async redirects() {
+    return ['xn--bkestudo-zkb.com', 'www.xn--bkestudo-zkb.com'].map((host) => ({
+      source: '/:path*',
+      has: [{ type: 'host' as const, value: host.replaceAll('.', '[.]') }],
+      destination: 'https://bkestudio.com/:path*',
+      permanent: true,
+    }));
+  },
   async rewrites() {
     return {
       beforeFiles: [

@@ -112,9 +112,9 @@ export const MARKETING: MarketingConfig = {
     ),
     logo: '/brand/icon-512.png',
   },
-  domain: 'xn--bkestudo-zkb.com',
+  domain: 'bkestudio.com',
   // Vercel is serving the purchased domain; keep it as the production fallback when no public URL env var is set.
-  siteUrl: process.env.MARKETING_SITE_URL || process.env.PLATFORM_PUBLIC_URL || 'https://xn--bkestudo-zkb.com',
+  siteUrl: process.env.MARKETING_SITE_URL || process.env.PLATFORM_PUBLIC_URL || 'https://bkestudio.com',
   // K33 (2026-10-15): shop name BKE Studio, support address bkestudio@gmail.com ("for now"). Response time 24 hours (user,
   // 2026-10-15). K48 (2026-10-17): the Etsy shop link is the shop STUDIOBKE (K35: Etsy's real shop name; copy says BKE Studio).
   support: { email: 'bkestudio@gmail.com', responseTime: msg('24 hours') },
