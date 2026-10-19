@@ -34,7 +34,8 @@ Fresh JS/CSS, cover and video filenames isolate browsers from the previous cache
 
 ## Verification before release
 
-- 30 focused Node tests passed, including personal text/photo/thank-you rendering and protected interior hashes.
+- 32 focused Node tests passed, including personal text/photo/thank-you rendering and protected interior hashes.
+- 22 rebuilt-theme five-page/media contracts passed. Production manifest parsing validates the custom Close envelope key and its panel label.
 - 88 protected interior/RSVP/base files and other products' marketing copy remain unchanged.
 - 44 real browser openings at 320, 390, 1280 and 844 landscape widths passed, plus eleven reduced-motion and eleven skip flows.
 - 33 interruptions at 600, 1700 and 3400ms closed to the exact resting state with no remaining script animations.
@@ -43,3 +44,7 @@ Fresh JS/CSS, cover and video filenames isolate browsers from the previous cache
 - Additional Nocturne/Kintsugi seal checks and production checks are recorded in the authoring release report after final deployment.
 
 Browser verification uses desktop Chromium with responsive viewports. Physical phone hardware, Etsy purchase and live RSVP POST are outside this cover-only change.
+
+## Integration corrections
+
+Rear image pixels and alpha are pre-reflected before the CSS back-face transform, so a folded reverse stays on its physical hinge footprint. A raster-alpha regression test checks every moving face. Hidden opening parts retain the common G180 lazy/low-priority release contract; an early tap waits for decoded parts before starting, with skip/reduced-motion fallbacks. The new copy key has its required label and panel metadata. Forty-four superseded preview cover/clip files are retired; their earlier versions remain in Git history. The shared rebuilt-theme tests now verify the actual declared parts of each construction rather than assuming every object has a V-flap pocket or an arbitrary raster-file count.

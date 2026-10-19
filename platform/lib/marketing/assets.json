@@ -1836,8 +1836,8 @@
         "poster": "/marketing/designs/nocturne-lake-estate/envelope-v3-640.webp",
         "width": 390,
         "height": 844,
-        "seconds": 9,
-        "bytes": 447616
+        "seconds": 9.4,
+        "bytes": 443730
       }
     },
     "velvet-jewel-box": {
@@ -1911,8 +1911,8 @@
         "poster": "/marketing/designs/velvet-jewel-box/envelope-v3-640.webp",
         "width": 390,
         "height": 844,
-        "seconds": 9.6,
-        "bytes": 537343
+        "seconds": 9.12,
+        "bytes": 513504
       }
     },
     "grand-theatre-premiere": {
@@ -1986,8 +1986,8 @@
         "poster": "/marketing/designs/grand-theatre-premiere/envelope-v3-640.webp",
         "width": 390,
         "height": 844,
-        "seconds": 9.48,
-        "bytes": 459964
+        "seconds": 8.6,
+        "bytes": 463642
       }
     },
     "orient-express-voyage": {
@@ -2061,8 +2061,8 @@
         "poster": "/marketing/designs/orient-express-voyage/envelope-v3-640.webp",
         "width": 390,
         "height": 844,
-        "seconds": 9.32,
-        "bytes": 458015
+        "seconds": 8.64,
+        "bytes": 439330
       }
     },
     "kintsugi-washi": {
@@ -2136,8 +2136,8 @@
         "poster": "/marketing/designs/kintsugi-washi/envelope-v3-640.webp",
         "width": 390,
         "height": 844,
-        "seconds": 9.52,
-        "bytes": 569147
+        "seconds": 8.68,
+        "bytes": 536829
       }
     },
     "riad-lantern-nights": {
@@ -2211,8 +2211,8 @@
         "poster": "/marketing/designs/riad-lantern-nights/envelope-v3-640.webp",
         "width": 390,
         "height": 844,
-        "seconds": 8.72,
-        "bytes": 552481
+        "seconds": 8.96,
+        "bytes": 576317
       }
     },
     "maison-patisserie": {
@@ -2286,8 +2286,8 @@
         "poster": "/marketing/designs/maison-patisserie/envelope-v3-640.webp",
         "width": 390,
         "height": 844,
-        "seconds": 8.72,
-        "bytes": 433622
+        "seconds": 9.16,
+        "bytes": 428398
       }
     },
     "celestial-observatory": {
@@ -2361,8 +2361,8 @@
         "poster": "/marketing/designs/celestial-observatory/envelope-v3-640.webp",
         "width": 390,
         "height": 844,
-        "seconds": 8.72,
-        "bytes": 580805
+        "seconds": 8.56,
+        "bytes": 602619
       }
     },
     "azulejo-mosaic": {
@@ -2436,8 +2436,8 @@
         "poster": "/marketing/designs/azulejo-mosaic/envelope-v3-640.webp",
         "width": 390,
         "height": 844,
-        "seconds": 9.28,
-        "bytes": 499049
+        "seconds": 9.32,
+        "bytes": 528821
       }
     },
     "sky-lantern-festival": {
@@ -2511,8 +2511,8 @@
         "poster": "/marketing/designs/sky-lantern-festival/envelope-v3-640.webp",
         "width": 390,
         "height": 844,
-        "seconds": 9.2,
-        "bytes": 453962
+        "seconds": 8.6,
+        "bytes": 437451
       }
     },
     "music-box-ballerina": {
@@ -2586,8 +2586,8 @@
         "poster": "/marketing/designs/music-box-ballerina/envelope-v3-640.webp",
         "width": 390,
         "height": 844,
-        "seconds": 9,
-        "bytes": 461937
+        "seconds": 9.36,
+        "bytes": 475931
       }
     }
   },

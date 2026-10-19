@@ -715,7 +715,9 @@
       "max": 30,
       "pages": [
         "index"
-      ]
+      ],
+      "label": "Close envelope button",
+      "panel": "us"
     }
   },
   "swatch": [

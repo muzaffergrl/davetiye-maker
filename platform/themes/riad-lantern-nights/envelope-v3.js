@@ -10,7 +10,7 @@ const ENVELOPE_PROFILE={"id":"riad-lantern-nights","index":5,"kind":"horseshoe-r
  let state=root.classList.contains('is-opened')?'opened':'closed',animations=[],clock=null,token=0,timer=null;
  const initial='translateY(-50%) scale(.50)',final='translateY(-50%) scale(1)';
  function status(next){state=next;page.dataset.openingState=next;stage.setAttribute('aria-disabled','false');stage.setAttribute('aria-label',next==='playing'?'Close the invitation':next==='opened'?'Enter the invitation':'Open the invitation');cancel.hidden=next!=='playing';}
- function clear(){token++;clearTimeout(timer);timer=null;for(const a of animations)a.cancel();animations=[];clock=null;slot.style.zIndex='';delete page.dataset.openingPhase;}
+ function clear(){token++;clearTimeout(timer);timer=null;for(const a of animations)a.cancel();animations=[];clock=null;slot.style.zIndex='';stage.removeAttribute('aria-busy');delete page.dataset.openingPhase;}
  function reset(){clear();root.classList.remove('is-opened');status('closed');remember(false);}
  function go(){if(state==='leaving')return;status('leaving');clear();remember(true);location.assign(home);}
  function A(node,kf,delay,duration,easing='cubic-bezier(.42,0,.18,1)'){if(!node)return;const a=node.animate(kf,{delay,duration,easing,fill:'both'});animations.push(a);return a;}
@@ -45,11 +45,16 @@ const ENVELOPE_PROFILE={"id":"riad-lantern-nights","index":5,"kind":"horseshoe-r
   timer=setTimeout(()=>{if(id!==token||state!=='playing')return;slot.style.zIndex='6';page.dataset.openingPhase='settled';},settle);
   clock.onfinish=()=>{if(id===token&&state==='playing')go();};
  }
- function play(){if(state==='opened'){go();return}if(state!=='closed')return;
+ async function play(){if(state==='opened'){go();return}if(state!=='closed')return;
   if(media.matches||!Element.prototype.animate){go();return}
+  const mine=++token;status('loading');stage.setAttribute('aria-busy','true');root.classList.add('parts-on');
+  const parts=[...stage.querySelectorAll('img')];for(const img of parts)img.loading='eager';
+  await Promise.all(parts.map(img=>img.decode().catch(()=>{})));
+  stage.removeAttribute('aria-busy');if(token!==mine||state!=='loading')return;
+  if(media.matches||parts.some(img=>!img.naturalWidth)){go();return}
   clear();root.classList.remove('is-opened');status('playing');build();
  }
- async function close(replay=false){if(state==='closed'){if(replay)play();return}if(state==='closing'||state==='leaving')return;
+ async function close(replay=false){if(state==='closed'){if(replay)play();return}if(state==='loading'){reset();stage.removeAttribute('aria-busy');return}if(state==='closing'||state==='leaving')return;
   const wasOpened=state==='opened';
   if(media.matches||!Element.prototype.animate){reset();if(replay)play();return}
   if(wasOpened){clear();build();for(const a of animations){a.pause();a.currentTime=P.duration-200;}root.classList.remove('is-opened');}
@@ -62,7 +67,7 @@ const ENVELOPE_PROFILE={"id":"riad-lantern-nights","index":5,"kind":"horseshoe-r
  }
  stage.addEventListener('click',()=>state==='playing'?void close():play());
  stage.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();stage.click()}});
- addEventListener('keydown',e=>{if(e.key==='Escape'&&(state==='playing'||state==='opened')){e.preventDefault();void close();}});
+ addEventListener('keydown',e=>{if(e.key==='Escape'&&['playing','opened','loading'].includes(state)){e.preventDefault();void close();}});
  cancel.addEventListener('click',()=>void close());q('.v3-close')?.addEventListener('click',()=>void close());
  q('.replay')?.addEventListener('click',()=>void close(true));
  document.querySelectorAll('[data-skip],[data-enter]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();go()}));

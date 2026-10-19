@@ -29,7 +29,17 @@ export function registerRebuiltThemeTests(id: string){
     if(v?.startsWith('/themes/'+item.id+'/'))refs.add(v.slice(('/themes/'+item.id+'/').length));
     if(v?.startsWith('/demo/'))assert.ok(existsSync(path.join(root,'public',v)),v);
    }});
-   if(page==='index'){assert.ok($('.stage').length);assert.ok($('.env-pocket').length);assert.ok($('.card [data-photo="hero_portrait"]').length);assert.ok($('[data-enter]').length);assert.ok($('[data-skip]').length);}
+   if(page==='index'){
+    assert.ok($('.stage').length);
+    if($('.v3-closed').length){
+     const opening=JSON.parse(readFileSync(path.join(dir,'opening-design.json'),'utf8'));
+     assert.equal($('.v3-lining').length,1,'physical lining');
+     assert.equal($('.v3-piece').length,opening.parts.length,'independent physical folds');
+     for(const part of opening.parts){const face=$('[data-piece="'+part+'"]');assert.equal(face.length,1);assert.equal(face.find('.v3-front').length,1);assert.equal(face.find('.v3-back').length,1);}
+     assert.equal($('.v3-pocket').length,opening.pocket?1:0,'a pocket is present only for a pocket construction');
+    }else assert.ok($('.env-pocket').length);
+    assert.ok($('.card [data-photo="hero_portrait"]').length);assert.ok($('[data-enter]').length);assert.ok($('[data-skip]').length);
+   }
    if(page==='story')assert.equal($('[data-photo]').length,3);
    if(page==='rsvp')assert.ok($('[data-rsvp-form]').length,'shared RSVP form');
    for(const photo of $('[data-photo]').toArray())assert.match($(photo).attr('src')||'',/^\/(demo|themes)\//,page+': real sample photo');
@@ -37,7 +47,14 @@ export function registerRebuiltThemeTests(id: string){
   const css=readFileSync(path.join(dir,'site.css'),'utf8');
   for(const m of css.matchAll(/url\(["']?([^"')]+)["']?\)/g))if(m[1].startsWith('img/'))refs.add(m[1]);
   for(const ref of refs)assert.ok(existsSync(path.join(dir,ref)),item.id+': '+ref);
-  assert.ok(refs.size>30);assert.ok(css.includes('prefers-reduced-motion'));
+  if(existsSync(path.join(dir,'opening-design.json'))){
+   const opening=JSON.parse(readFileSync(path.join(dir,'opening-design.json'),'utf8'));
+   if(opening.version===3){
+    const physical=['img/v3-closed-440.webp','img/v3-closed-880.webp','img/v3-lining.webp',...opening.parts.flatMap((p:string)=>['img/v3-'+p+'.webp','img/v3-'+p+'-back.webp'])];
+    for(const part of physical)assert.ok(refs.has(part),item.id+': rendered physical part '+part);
+   }else assert.ok(refs.size>30);
+  }else assert.ok(refs.size>30);
+  assert.ok(css.includes('prefers-reduced-motion'));
  });
  test(item.id+': hidden story, empty buyer photos and thank-you mode remain valid',()=>{
   for(const page of pages){
