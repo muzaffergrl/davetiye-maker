@@ -1,18 +1,27 @@
 {
   "id": "kintsugi-washi",
-  "kind": "washi-unwrapping",
   "index": 4,
-  "duration": 5200,
-  "frameRatio": 1,
-  "copyTop": "58%",
-  "portraitWidth": "67%",
-  "font": "Shippori Mincho",
-  "artwork": [
-    "img/ph_interior-480.webp",
-    "img/interior-frame-480.webp",
-    "img/interior-photo-mask.png"
+  "kind": "four-fold-washi",
+  "duration": 6100,
+  "parts": [
+    "bottom",
+    "left",
+    "right",
+    "lid"
   ],
-  "closedArtwork": "img/envelope_closed-880.webp",
+  "ratio": 1.02354,
+  "pocket": false,
+  "version": 3,
+  "source": "img/v3-closed-880.webp",
+  "closedArtwork": "img/v3-closed-880.webp",
+  "artwork": [
+    "img/v3-bottom.webp",
+    "img/v3-left.webp",
+    "img/v3-right.webp",
+    "img/v3-lid.webp"
+  ],
+  "physicalBacks": true,
+  "reversible": true,
   "keyboard": true,
   "reducedMotion": true
 }

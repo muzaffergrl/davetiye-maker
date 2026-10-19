@@ -31,7 +31,7 @@ for (const t of THEMES) {
     assert.equal(stage.attr('role'), 'button');
     assert.equal(stage.attr('tabindex'), '0');
     // the seal, the flap, the pocket and the card are their own layers (AGENTS şart 4, docs/11 §7.3)
-    const pieces = t === 'crimson-rose-atelier' ? ['.env-seal', '.env-flap', '.env-pocket', '.env-card', '.env-back'] : ['.env-closed', '.env-cflap', '.env-flap', '.env-body', '.env-pocket', '.env .card'];
+    const pieces = t === 'crimson-rose-atelier' ? ['.env-seal', '.env-flap', '.env-pocket', '.env-card', '.env-back'] : ['.v3-closed', '.v3-lid', '.v3-front', '.v3-lining', '.v3-pocket', '.env .card'];
     for (const sel of pieces) assert.equal(stage.find(sel).length, 1, sel);
     assert.equal($('.replay').length, 1);
     assert.equal($('.replay[hidden]').length, 0, '.replay is shown by the opened state, not by removing [hidden]');
@@ -98,3 +98,4 @@ for (const t of THEMES) {
     assert.ok(existsSync(path.join(ROOT, 'themes', t, 'README.md')));
   });
 }
+

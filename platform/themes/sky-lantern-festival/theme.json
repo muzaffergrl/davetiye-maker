@@ -1,7 +1,7 @@
 {
   "id": "sky-lantern-festival",
   "name": "Sky Lantern Festival",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "pages": {
     "index": "index.html",
     "home": "home.html",
@@ -708,6 +708,13 @@
       "max": 30,
       "pages": [
         "rsvp"
+      ]
+    },
+    "envelope_close": {
+      "default": "Close envelope",
+      "max": 30,
+      "pages": [
+        "index"
       ]
     }
   },

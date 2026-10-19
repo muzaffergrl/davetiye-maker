@@ -1,18 +1,23 @@
 {
   "id": "celestial-observatory",
-  "kind": "celestial-orbit",
   "index": 7,
-  "duration": 5200,
-  "frameRatio": 1,
-  "copyTop": "58%",
-  "portraitWidth": "67%",
-  "font": "Pinyon Script",
-  "artwork": [
-    "img/ph_interior-480.webp",
-    "img/interior-frame-480.webp",
-    "img/interior-photo-mask.png"
+  "kind": "crescent-observatory",
+  "duration": 6100,
+  "parts": [
+    "left",
+    "right"
   ],
-  "closedArtwork": "img/envelope_closed-880.webp",
+  "ratio": 1.03734,
+  "pocket": false,
+  "version": 3,
+  "source": "img/v3-closed-880.webp",
+  "closedArtwork": "img/v3-closed-880.webp",
+  "artwork": [
+    "img/v3-left.webp",
+    "img/v3-right.webp"
+  ],
+  "physicalBacks": true,
+  "reversible": true,
   "keyboard": true,
   "reducedMotion": true
 }

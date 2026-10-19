@@ -1,18 +1,21 @@
 {
   "id": "nocturne-lake-estate",
-  "kind": "terrace-letter",
   "index": 0,
-  "duration": 5200,
-  "frameRatio": 1.5,
-  "copyTop": "50%",
-  "portraitWidth": "86%",
-  "font": "Italiana",
-  "artwork": [
-    "img/ph_interior-480.webp",
-    "img/interior-frame-480.webp",
-    "img/interior-photo-mask.png"
+  "kind": "crescent-letter",
+  "duration": 6100,
+  "parts": [
+    "lid"
   ],
-  "closedArtwork": "img/envelope_closed-880.webp",
+  "ratio": 2.1692,
+  "pocket": true,
+  "version": 3,
+  "source": "img/v3-closed-880.webp",
+  "closedArtwork": "img/v3-closed-880.webp",
+  "artwork": [
+    "img/v3-lid.webp"
+  ],
+  "physicalBacks": true,
+  "reversible": true,
   "keyboard": true,
   "reducedMotion": true
 }

@@ -1,18 +1,25 @@
 {
   "id": "azulejo-mosaic",
-  "kind": "azulejo-gates",
   "index": 8,
-  "duration": 5200,
-  "frameRatio": 1,
-  "copyTop": "58%",
-  "portraitWidth": "67%",
-  "font": "Italianno",
-  "artwork": [
-    "img/ph_interior-480.webp",
-    "img/interior-frame-480.webp",
-    "img/interior-photo-mask.png"
+  "kind": "trifold-azulejo",
+  "duration": 6100,
+  "parts": [
+    "left",
+    "middle",
+    "right"
   ],
-  "closedArtwork": "img/envelope_closed-880.webp",
+  "ratio": 1.91205,
+  "pocket": false,
+  "version": 3,
+  "source": "img/v3-closed-880.webp",
+  "closedArtwork": "img/v3-closed-880.webp",
+  "artwork": [
+    "img/v3-left.webp",
+    "img/v3-middle.webp",
+    "img/v3-right.webp"
+  ],
+  "physicalBacks": true,
+  "reversible": true,
   "keyboard": true,
   "reducedMotion": true
 }

@@ -1,18 +1,21 @@
 {
   "id": "orient-express-voyage",
-  "kind": "carriage-sleeve",
   "index": 3,
-  "duration": 5200,
-  "frameRatio": 1.5,
-  "copyTop": "50%",
-  "portraitWidth": "86%",
-  "font": "Allura",
-  "artwork": [
-    "img/ph_interior-480.webp",
-    "img/interior-frame-480.webp",
-    "img/interior-photo-mask.png"
+  "kind": "railway-ticket-sleeve",
+  "duration": 6100,
+  "parts": [
+    "sleeve"
   ],
-  "closedArtwork": "img/envelope_closed-880.webp",
+  "ratio": 2.7027,
+  "pocket": false,
+  "version": 3,
+  "source": "img/v3-closed-880.webp",
+  "closedArtwork": "img/v3-closed-880.webp",
+  "artwork": [
+    "img/v3-sleeve.webp"
+  ],
+  "physicalBacks": true,
+  "reversible": true,
   "keyboard": true,
   "reducedMotion": true
 }

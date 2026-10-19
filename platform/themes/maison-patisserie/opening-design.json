@@ -1,18 +1,21 @@
 {
   "id": "maison-patisserie",
-  "kind": "patisserie-ribbon",
   "index": 6,
-  "duration": 5200,
-  "frameRatio": 0.6666666666666666,
-  "copyTop": "61%",
-  "portraitWidth": "46%",
-  "font": "Parisienne",
-  "artwork": [
-    "img/ph_interior-480.webp",
-    "img/interior-frame-480.webp",
-    "img/interior-photo-mask.png"
+  "kind": "scalloped-parcel",
+  "duration": 6100,
+  "parts": [
+    "lid"
   ],
-  "closedArtwork": "img/envelope_closed-880.webp",
+  "ratio": 1.5949,
+  "pocket": true,
+  "version": 3,
+  "source": "img/v3-closed-880.webp",
+  "closedArtwork": "img/v3-closed-880.webp",
+  "artwork": [
+    "img/v3-lid.webp"
+  ],
+  "physicalBacks": true,
+  "reversible": true,
   "keyboard": true,
   "reducedMotion": true
 }

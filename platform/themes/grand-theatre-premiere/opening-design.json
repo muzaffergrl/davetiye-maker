@@ -1,18 +1,23 @@
 {
   "id": "grand-theatre-premiere",
-  "kind": "theatre-curtains",
   "index": 2,
-  "duration": 5200,
-  "frameRatio": 1.7768331562167907,
-  "copyTop": "50%",
-  "portraitWidth": "86%",
-  "font": "Italianno",
-  "artwork": [
-    "img/ph_interior-480.webp",
-    "img/interior-frame-480.webp",
-    "img/interior-photo-mask.png"
+  "kind": "velvet-theatre-gates",
+  "duration": 6100,
+  "parts": [
+    "left",
+    "right"
   ],
-  "closedArtwork": "img/envelope_closed-880.webp",
+  "ratio": 2.00401,
+  "pocket": false,
+  "version": 3,
+  "source": "img/v3-closed-880.webp",
+  "closedArtwork": "img/v3-closed-880.webp",
+  "artwork": [
+    "img/v3-left.webp",
+    "img/v3-right.webp"
+  ],
+  "physicalBacks": true,
+  "reversible": true,
   "keyboard": true,
   "reducedMotion": true
 }
