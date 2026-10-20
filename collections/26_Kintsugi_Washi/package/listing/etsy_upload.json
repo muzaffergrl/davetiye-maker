@@ -103,7 +103,13 @@
       "status": "missing"
     }
   ],
-  "gpt_mockup_scenes": [],
+  "gpt_mockup_scenes": [
+    "collections/26_Kintsugi_Washi/assets/gpt/mockups/cover_hand.png",
+    "collections/26_Kintsugi_Washi/assets/gpt/mockups/flatlay_phone.png",
+    "collections/26_Kintsugi_Washi/assets/gpt/mockups/hand_phone_edit.png",
+    "collections/26_Kintsugi_Washi/assets/gpt/mockups/laptop_phone.png",
+    "collections/26_Kintsugi_Washi/assets/gpt/mockups/three_phones.png"
+  ],
   "video": {
     "file": "collections/26_Kintsugi_Washi/package/listing/video.mp4",
     "exists": false

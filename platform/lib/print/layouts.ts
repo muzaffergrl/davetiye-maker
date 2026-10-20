@@ -5,7 +5,7 @@
 // bottom, left; bands = where decoration reaches into it, G149) and the colours / fonts of the design's own website
 // (themes/<id>/site.css). The part files are copied at full size by scripts/build-print-assets.ts into
 // public/print/<id>/ (card.webp, back.webp, paper.webp).
-// Designs without card parts yet (21, 22, 24, 25, 26, 29, 33, 34, 35) are "composed": the trimmed sheet is the card, set from the design's existing
+// Designs without card parts (21–38) are "composed": the trimmed sheet is the card, set from the design's existing
 // GPT images (no shape drawn, K21) until the parts asked for in the collection's GPT_PROMPTS.md (G139) arrive.
 
 export type Box = readonly [top: number, right: number, bottom: number, left: number];
@@ -68,9 +68,6 @@ const gf = (q: string) => `https://fonts.googleapis.com/css2?${q}&display=swap`;
 const cover = (name: string, at = 'center') => `url(${name}.webp) ${at} / cover no-repeat`;
 const sealAt = (edge: 'top' | 'bottom') => ({ src: 'seal', style: `${edge}:4%;left:50%;width:17%;transform:translateX(-50%)` });
 
-const tileRow = (edge: 'top' | 'bottom') =>
-  ['tile1', 'tile2', 'tile3', 'tile2', 'tile1'].map((src, i) => ({ src, style: `${edge}:5%;left:${25 + i * 10.5}%;width:9%` }));
-
 /** 38 (G187): a garland of the theme's flags across the top, sagging toward the middle (each flag hangs square to it). */
 const flagGarland = (n: number, top: number, width: number) =>
   Array.from({ length: n }, (_, i) => {
@@ -81,13 +78,6 @@ const flagGarland = (n: number, top: number, width: number) =>
       style: `top:${(top + 4 * t * (1 - t) * 2.4).toFixed(2)}%;left:${(50 + (i - (n - 1) / 2) * step - width * 0.4).toFixed(2)}%;width:${(width * 0.8).toFixed(2)}%;transform:rotate(${((t - 0.5) * -8).toFixed(1)}deg)`,
     };
   });
-
-/** 30 (G169): a row of the theme's azulejo tiles along one edge — corner, border and field tiles as on the website's wall. */
-const azulejoRow = (edge: 'top' | 'bottom') =>
-  ['tile3', 'tile2', 'tile1', 'tile4', 'tile1', 'tile2', 'tile3'].map((src, i) => ({
-    src,
-    style: `${edge}:4%;left:${11.5 + i * 11}%;width:11%;transform:rotate(${(edge === 'top' ? 0 : 180) + (i === 6 ? 90 : 0)}deg)`,
-  }));
 
 export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
   'olive-ivory': {
@@ -250,239 +240,128 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
       back: { bg: cover('paper'), images: [sealAt('top')] },
     },
   },
-  // 22: front = the website's first screen (the Lake Como dusk, text on its sky); back = the website's night black
-  // (--black) with the gold wax seal cut from the envelope by the theme build (img/env_seal).
+  // 22 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
+  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
+  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
   'nocturne-lake-estate': {
     collection: '22_Nocturne_Lake_Estate',
-    sources: { scene: 'hero.png', seal: { path: 'platform/themes/nocturne-lake-estate/img/env_seal-269.webp', goldOnly: true } },
+    sources: { front: 'print/invitation_front.png', back: 'print/invitation_back.png' },
     fonts: gf('family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500'),
     script: "'Cinzel', Georgia, serif", serif: "'Cormorant Garamond', Georgia, serif", caps: "'Jost', Arial, sans-serif",
-    namesInCaps: true, frontShadow: '0 0.02in 0.12in #000c',
-    ink: '#F1E4CC', accent: '#D8BF93', front: [5, 18, 58, 18], back: [20, 12, 8, 12],
-    bands: { front: [[32.5, 35, 62], [34.5, 37, 55], [36.5, 40, 49], [40, 41, 43], [41, 42, 36]] },
-    composed: {
-      front: { bg: cover('scene', '50% 0%'), images: [] },
-      back: { bg: '#11120F', images: [sealAt('top')] },
-    },
+    namesInCaps: true,
+    ink: '#1C1D15', accent: '#8A6A3C', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 23: interim until the PAKET 6 grounds arrive (GPT_PROMPTS.md): both sides on the website's aubergine velvet ground
-  // (img/bg_velvet, toned from a GPT texture by the theme build) with the satin bow (img/closure) — at the top of the
-  // front above the text, and at the bottom of the back under the schedule and QR. Text in champagne, away from the bow.
-  // PAKET 6 arrived (print/invitation_front.png + invitation_back.png, one pair for 5×7 and A5): sources → { front:
-  // 'print/invitation_front.png', back: 'print/invitation_back.png' }, composed.front/back → { bg: cover('front'|'back'),
-  // images: [] }, run build-print-assets, then re-measure front/back (+ bands) on the art with tests/g149-print-layout.test.ts.
-  // The prompts keep the boxes below empty (front 25–90 % × 11–89 %, back 10–80 % × 11–89 %).
+  // 23 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
+  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
+  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
   'velvet-jewel-box': {
     collection: '23_Velvet_Jewel_Box',
-    sources: { velvet: 'platform/themes/velvet-jewel-box/img/bg_velvet-1024.webp', bow: 'platform/themes/velvet-jewel-box/img/closure-236.webp' },
+    sources: { front: 'print/invitation_front.png', back: 'print/invitation_back.png' },
     fonts: gf('family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Pinyon+Script'),
     script: "'Pinyon Script', cursive", serif: "'Bodoni Moda', Georgia, serif",
-    ink: '#F8EDE0', accent: '#E8D3B0', front: [27, 13, 14, 13], back: [12, 12, 22, 12],
-    composed: {
-      front: { bg: cover('velvet'), images: [{ src: 'bow', style: 'top:7%;left:50%;width:24%;transform:translateX(-50%)' }] },
-      back: { bg: cover('velvet'), images: [{ src: 'bow', style: 'bottom:5%;left:50%;width:18%;transform:translateX(-50%)' }] },
-    },
+    ink: '#3A1A36', accent: '#8A5A3A', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 24 (G162, interim until the PAKET 6 grounds in GPT_PROMPTS.md arrive): the ivory programme paper with a band of the
-  // peacock velvet across the top (and the foot of the front), both cut by the theme build from GPT textures; the text
-  // sits on the plain paper between the bands.
-  // When print/invitation_{front,back}_5x7.png arrive (G167; GPT_PROMPTS.md PAKET 6 keeps its ornament outside these
-  // boxes): sources → { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' }, composed →
-  // { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } } (full-bleed grounds), then
-  // build-print-assets, re-measure front/back on the art (G149, tests/g149-print-layout.test.ts) and drop paper/velvet.webp.
+  // 24 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
+  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
+  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked. Grand Theatre's A5 pair (print/invitation_*_a5.png) is for print shops; the panel uses the 5×7 pair for both sizes.
   'grand-theatre-premiere': {
     collection: '24_Grand_Theatre_Premiere',
-    sources: { paper: 'platform/themes/grand-theatre-premiere/img/paper-1024.webp', velvet: 'platform/themes/grand-theatre-premiere/img/velvet-640.webp' },
+    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
     fonts: gf('family=Abril+Fatface&family=Playfair+Display:ital,wght@0,400;0,600;1,400'),
     script: "'Abril Fatface', Georgia, serif", serif: "'Playfair Display', Georgia, serif",
-    ink: '#1E2626', accent: '#6E5119', front: [19, 12, 15, 12], back: [17, 12, 8, 12],
-    composed: {
-      front: {
-        bg: cover('paper'),
-        images: [
-          { src: 'velvet', style: 'top:-4%;left:-4%;width:108%;height:15%;object-fit:cover' },
-          { src: 'velvet', style: 'bottom:-4%;left:-4%;width:108%;height:12%;object-fit:cover;transform:scaleY(-1)' },
-        ],
-      },
-      back: { bg: cover('paper'), images: [{ src: 'velvet', style: 'top:-4%;left:-4%;width:108%;height:13%;object-fit:cover' }] },
-    },
+    ink: '#1E2626', accent: '#6E5119', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 25 (G163): composed until the PAKET 6 print grounds arrive. Interim: both sides on the website's ivory (the interim
-  // poster tones were not empty enough for the G149 free-area check); the back carries the boarding stamp the theme build
-  // cut. Nothing switches by itself (G167): build-print-assets.ts only copies the `sources` below, and the text boxes
-  // are measured on real art (G149). When collections/25_Orient_Express_Voyage/assets/gpt/print/invitation_front_5x7.png
-  // and invitation_back_5x7.png exist (GPT_PROMPTS.md P6.1–P6.2; they keep the free areas these boxes need):
-  //   sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
-  //   front: [44, 12, 8, 12], back: [20, 12, 10, 12],
-  //   composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
-  // then `node scripts/build-print-assets.ts --theme orient-express-voyage` (platform/), delete the stale stamp.webp from
-  // public/print/orient-express-voyage/, and re-measure box + bands on the rendered art (tests/g149-print-layout.test.ts).
-  // One ground per side serves both sizes: on A5 `cover` trims ~1 % off the sides.
+  // 25 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
+  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
+  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
   'orient-express-voyage': {
     collection: '25_Orient_Express_Voyage',
-    sources: { stamp: 'platform/themes/orient-express-voyage/img/stamp-480.webp' },
+    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
     fonts: gf('family=Limelight&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400'),
     script: "'Limelight', Georgia, serif", serif: "'Cormorant Garamond', Georgia, serif",
-    ink: '#1E3A2C', accent: '#7A5C24', front: [12, 12, 12, 12], back: [20, 12, 8, 12],
-    composed: {
-      front: { bg: '#F3EBD9', images: [] },
-      back: { bg: '#F3EBD9', images: [{ ...sealAt('top'), src: 'stamp' }] },
-    },
+    ink: '#1E3A2C', accent: '#7A5C24', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 26 (G164, interim until PAKET 6 print/invitation_front_5x7.png + print/invitation_back_5x7.png, 1575×2175, one
-  // sheet per side for 5×7 and A5 — GPT_PROMPTS.md): rice paper with the indigo washi of the opened folds at its top
-  // and bottom edge — both toned papers cut by the theme build (img/rice, img/washi_indigo; no shape drawn). The
-  // prompts keep the front / back boxes below empty on the art; on arrival (G167): sources → { front, back } of those
-  // two files, composed → { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
-  // re-measure the boxes on the art (G149), then build-print-assets.
+  // 26 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
+  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
+  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
   'kintsugi-washi': {
     collection: '26_Kintsugi_Washi',
-    sources: { rice: 'platform/themes/kintsugi-washi/img/rice-1024.webp', washi: 'platform/themes/kintsugi-washi/img/washi_indigo-1024.webp' },
+    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
     fonts: gf('family=Allura&family=Shippori+Mincho:wght@400;600'),
     script: "'Allura', cursive", serif: "'Shippori Mincho', Georgia, serif",
-    ink: '#1D2340', accent: '#7A5C22', front: [21, 13, 19, 13], back: [17, 12, 10, 12],
-    composed: {
-      front: {
-        bg: 'url(rice.webp) 0 0 / 2.4in repeat',
-        images: [
-          { src: 'washi', style: 'top:0;left:0;width:100%;height:12%;object-fit:cover' },
-          { src: 'washi', style: 'bottom:0;left:0;width:100%;height:11%;object-fit:cover;object-position:50% 80%' },
-        ],
-      },
-      back: { bg: 'url(rice.webp) 0 0 / 2.4in repeat', images: [{ src: 'washi', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover' }] },
-    },
+    ink: '#1D2340', accent: '#7A5C22', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 27 (G165, before its GPT parts): both sides on ivory lime plaster (the same GPT plaster the theme's card is toned
-  // from: 05's seamless bg_tile at full size, reached from this collection's assets/gpt/ by ../../../) with a row of the
-  // zellige tiles the theme build cut (img/tile_N) — front: a row along the top and one along the bottom, back: a row on
-  // top. Text in cedar on the plaster. Tiles at 152 px (the theme build's 2× files). When PAKET 6 arrives (GPT_PROMPTS.md:
-  // print/print_front.png + print/print_back.png, 1819×2551, one ground per side for 5×7 and A5): sources → { front:
-  // 'print/print_front.png', back: 'print/print_back.png' }, composed → { front: { bg: cover('front'), images: [] }, back:
-  // { bg: cover('back'), images: [] } }, then build-print-assets + tests/g149-print-layout.test.ts (re-measure the boxes).
+  // 27 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
+  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
+  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
   'riad-lantern-nights': {
     collection: '27_Riad_Lantern_Nights',
-    sources: {
-      paper: '../../../05_Lemon_Mediterranean/assets/gpt/parts/bg_tile.png',
-      tile1: 'platform/themes/riad-lantern-nights/img/tile_1-152.webp',
-      tile2: 'platform/themes/riad-lantern-nights/img/tile_2-152.webp',
-      tile3: 'platform/themes/riad-lantern-nights/img/tile_3-152.webp',
-    },
+    sources: { front: 'print/print_front.png', back: 'print/print_back.png' },
     fonts: gf('family=Cinzel:wght@400;500&family=Marcellus&family=Marcellus+SC'),
     script: "'Cinzel', Georgia, serif", serif: "'Marcellus', Georgia, serif", caps: "'Marcellus SC', Georgia, serif",
     namesInCaps: true,
-    ink: '#3A2114', accent: '#8F5418', front: [17, 12, 17, 12], back: [16, 12, 10, 12],
-    composed: {
-      front: { bg: cover('paper'), images: [...tileRow('top'), ...tileRow('bottom')] },
-      back: { bg: cover('paper'), images: tileRow('top') },
-    },
+    ink: '#3A2114', accent: '#8F5418', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 28 (G166): composed until its print grounds arrive (GPT_PROMPTS.md PAKET 6) — front = the website's cream paper with the
-  // rose satin bow at the top; back = the same paper with the bow small at the top. Both images come from the theme
-  // build (interim crops of repository GPT pictures, see themes/maison-patisserie/build_images.py).
-  // G167: the PAKET 6 prompts keep these text boxes empty (front bottom 16 % leaves the macaron garland its strip); on
-  // arrival: sources -> print/invitation_front.png + print/invitation_back.png, composed -> cover('front') / cover('back')
-  // with no images, boxes re-measured on the art (G149) — steps in GPT_PROMPTS.md PAKET 6 "Gelince".
+  // 28 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
+  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
+  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
   'maison-patisserie': {
     collection: '28_Maison_Patisserie',
-    sources: { paper: 'platform/themes/maison-patisserie/img/bg_page-1024.webp', bow: 'platform/themes/maison-patisserie/img/bow-480.webp' },
+    sources: { front: 'print/invitation_front.png', back: 'print/invitation_back.png' },
     fonts: gf('family=Italiana&family=Parisienne'),
     script: "'Parisienne', cursive", serif: "'Italiana', Georgia, serif",
-    ink: '#3E3A32', accent: '#9B4F5A', front: [27, 13, 16, 13], back: [21, 12, 10, 12],
-    composed: {
-      front: { bg: cover('paper'), images: [{ src: 'bow', style: 'top:5%;left:50%;width:42%;transform:translateX(-50%)' }] },
-      back: { bg: cover('paper'), images: [{ src: 'bow', style: 'top:4%;left:50%;width:24%;transform:translateX(-50%)' }] },
-    },
+    ink: '#3E3A32', accent: '#9B4F5A', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 29 (G168, interim until PAKET 6 print/invitation_front_5x7.png + print/invitation_back_5x7.png, 1575×2175, one sheet
-  // per side for 5×7 and A5 — GPT_PROMPTS.md): silver-ivory chart paper with a band of the midnight sky at its top and
-  // bottom edge — both toned textures cut by the theme build (img/paper, img/sky; no shape drawn). The prompts keep the
-  // front / back boxes below empty on the art; on arrival: sources → { front, back } of those two files, composed →
-  // { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }, re-measure the boxes on the
-  // art (G149), then build-print-assets.
+  // 29 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
+  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
+  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
   'celestial-observatory': {
     collection: '29_Celestial_Observatory',
-    sources: { paper: 'platform/themes/celestial-observatory/img/paper-1024.webp', sky: 'platform/themes/celestial-observatory/img/sky-1024.webp' },
+    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
     fonts: gf('family=Forum&family=Imperial+Script'),
     script: "'Imperial Script', cursive", serif: "'Forum', Georgia, serif",
-    ink: '#141A33', accent: '#7A5A1E', front: [21, 13, 19, 13], back: [17, 12, 10, 12],
-    composed: {
-      front: {
-        bg: 'url(paper.webp) 0 0 / 2.4in repeat',
-        images: [
-          { src: 'sky', style: 'top:0;left:0;width:100%;height:13%;object-fit:cover' },
-          { src: 'sky', style: 'bottom:0;left:0;width:100%;height:11%;object-fit:cover;object-position:50% 80%' },
-        ],
-      },
-      back: { bg: 'url(paper.webp) 0 0 / 2.4in repeat', images: [{ src: 'sky', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover' }] },
-    },
+    ink: '#141A33', accent: '#7A5A1E', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 30 (G169): composed until its print grounds arrive (GPT_PROMPTS.md PAKET 6: print/invitation_front.png +
-  // print/invitation_back.png, 1819×2551, one ground per side for 5×7 and A5 at 300 ppi) — card paper (18's plain GPT
-  // cotton paper at full size) with a row of the azulejo tiles the theme build cut (img/tile_N-256): front one along the
-  // top and one along the bottom, back one on top. On arrival: sources -> { front: 'print/invitation_front.png', back:
-  // 'print/invitation_back.png' }, composed -> { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'),
-  // images: [] } }, re-measure the boxes on the art (G149), then build-print-assets — steps in GPT_PROMPTS.md PAKET 6.
+  // 30 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
+  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
+  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
   'azulejo-mosaic': {
     collection: '30_Azulejo_Mosaic',
-    sources: {
-      paper: '../../../18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png',
-      tile1: 'platform/themes/azulejo-mosaic/img/tile_1-256.webp',
-      tile2: 'platform/themes/azulejo-mosaic/img/tile_2-256.webp',
-      tile3: 'platform/themes/azulejo-mosaic/img/tile_3-256.webp',
-      tile4: 'platform/themes/azulejo-mosaic/img/tile_4-256.webp',
-    },
+    sources: { front: 'print/invitation_front.png', back: 'print/invitation_back.png' },
     fonts: gf('family=Arizonia&family=Cormorant+Upright:wght@400;500;600'),
     script: "'Arizonia', cursive", serif: "'Cormorant Upright', Georgia, serif",
-    ink: '#173A80', accent: '#8C4128', front: [17, 12, 17, 12], back: [16, 12, 10, 12],
-    composed: {
-      front: { bg: cover('paper'), images: [...azulejoRow('top'), ...azulejoRow('bottom')] },
-      back: { bg: cover('paper'), images: azulejoRow('top') },
-    },
+    ink: '#173A80', accent: '#8C4128', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 31 (G170, before its GPT parts): both sides on plain cotton paper (18's seamless bg_tile at full size, reached from this
-  // collection's assets/gpt/ by ../../../) with a band of the theme's dusk sky (img/sky_band, cut and toned by the theme
-  // build from GPT pixels; no shape drawn) — front: a band at the top with one lit lantern in it and a thin amber band at
-  // the bottom, back: a narrow band at the top. When PAKET 6 arrives (GPT_PROMPTS.md: print/print_front.png +
-  // print/print_back.png, 1819×2551, one ground per side for 5×7 and A5): sources → { front: 'print/print_front.png',
-  // back: 'print/print_back.png' }, composed → { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'),
-  // images: [] } }, then build-print-assets + tests/g149-print-layout.test.ts (re-measure the boxes).
+  // 31 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
+  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
+  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
   'sky-lantern-festival': {
     collection: '31_Sky_Lantern_Festival',
-    sources: {
-      paper: '../../../18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png',
-      sky: 'platform/themes/sky-lantern-festival/img/sky_band-1024.webp',
-      lantern: 'platform/themes/sky-lantern-festival/img/lantern_far-144.webp',
-    },
+    sources: { front: 'print/print_front.png', back: 'print/print_back.png' },
     fonts: gf('family=Bellefair&family=Corinthia'),
     script: "'Corinthia', cursive", serif: "'Bellefair', Georgia, serif",
-    ink: '#3B2A4A', accent: '#9A5A26', front: [18, 12, 13, 12], back: [12, 12, 8, 12],
-    composed: {
-      front: {
-        bg: cover('paper'),
-        images: [
-          { src: 'sky', style: 'top:0;left:0;width:100%;height:13%;object-fit:cover;object-position:50% 30%' },
-          { src: 'lantern', style: 'top:3%;left:50%;width:5%;transform:translateX(-50%)' },
-          { src: 'sky', style: 'bottom:0;left:0;width:100%;height:7%;object-fit:cover;object-position:50% 100%' },
-        ],
-      },
-      back: { bg: cover('paper'), images: [{ src: 'sky', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover;object-position:50% 30%' }] },
-    },
+    ink: '#3B2A4A', accent: '#9A5A26', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 32 (G171): composed until its print grounds arrive (GPT_PROMPTS.md PAKET 6) — front = the website's blush paper with
-  // a rose petal at the top; back = the same paper with the petal small at the foot. Both images come from the theme
-  // build (interim crops of repository GPT pictures, see themes/music-box-ballerina/build_images.py). On arrival:
-  // sources -> print/invitation_front.png + print/invitation_back.png, composed -> cover('front') / cover('back') with
-  // no images, boxes re-measured on the art (G149) — steps in GPT_PROMPTS.md PAKET 6 "Gelince".
+  // 32 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
+  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
+  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
   'music-box-ballerina': {
     collection: '32_Music_Box_Ballerina',
-    sources: { paper: 'platform/themes/music-box-ballerina/img/bg_page-1024.webp', petal: 'platform/themes/music-box-ballerina/img/petal_1-480.webp' },
+    sources: { front: 'print/invitation_front.png', back: 'print/invitation_back.png' },
     fonts: gf('family=Ballet:opsz@16..72&family=Gilda+Display'),
     script: "'Ballet', cursive", serif: "'Gilda Display', Georgia, serif",
-    ink: '#4A2F35', accent: '#8A4A55', front: [24, 13, 14, 13], back: [12, 12, 20, 12],
-    composed: {
-      front: { bg: cover('paper'), images: [{ src: 'petal', style: 'top:6%;left:50%;width:14%;transform:translateX(-50%) rotate(-18deg)' }] },
-      back: { bg: cover('paper'), images: [{ src: 'petal', style: 'bottom:5%;left:50%;width:10%;transform:translateX(-50%) rotate(12deg)' }] },
-    },
+    ink: '#4A2F35', accent: '#8A4A55', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
   // 33 (G182, interim until PAKET 6 print/invitation_front_5x7.png + print/invitation_back_5x7.png, 1575×2175, one sheet
   // per side for 5×7 and A5 — GPT_PROMPTS.md): saffron-ivory paper with a band of the envelope's fuchsia silk at its top

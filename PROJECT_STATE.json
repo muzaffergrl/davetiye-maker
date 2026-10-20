@@ -1200,77 +1200,77 @@
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "rebuilt 2026-10-18/19 with imagegen art (v3 cover, bg_scene, new interiors); PAKET 5 no longer wanted. Waits for GPT PAKET 3 listing scenes + PAKET 6 print grounds (docs/27); print layouts.ts sources point at files the rebuild removed; palettes must be redone from the new art; build_images.py retired"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "velvet-jewel-box": {
         "design": "23",
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "rebuilt 2026-10-18/19 with imagegen art (v3 cover, bg_scene, new interiors); PAKET 5 no longer wanted. Waits for GPT PAKET 3 listing scenes + PAKET 6 print grounds (docs/27); print layouts.ts sources point at files the rebuild removed; palettes must be redone from the new art; build_images.py retired"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "grand-theatre-premiere": {
         "design": "24",
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "rebuilt 2026-10-18/19 with imagegen art (v3 cover, bg_scene, new interiors); PAKET 5 no longer wanted. Waits for GPT PAKET 3 listing scenes + PAKET 6 print grounds (docs/27); print layouts.ts sources point at files the rebuild removed; palettes must be redone from the new art; build_images.py retired"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "orient-express-voyage": {
         "design": "25",
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "rebuilt 2026-10-18/19 with imagegen art (v3 cover, bg_scene, new interiors); PAKET 5 no longer wanted. Waits for GPT PAKET 3 listing scenes + PAKET 6 print grounds (docs/27); print layouts.ts sources point at files the rebuild removed; palettes must be redone from the new art; build_images.py retired"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "kintsugi-washi": {
         "design": "26",
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "rebuilt 2026-10-18/19 with imagegen art (v3 cover, bg_scene, new interiors); PAKET 5 no longer wanted. Waits for GPT PAKET 3 listing scenes + PAKET 6 print grounds (docs/27); print layouts.ts sources point at files the rebuild removed; palettes must be redone from the new art; build_images.py retired"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "riad-lantern-nights": {
         "design": "27",
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "rebuilt 2026-10-18/19 with imagegen art (v3 cover, bg_scene, new interiors); PAKET 5 no longer wanted. Waits for GPT PAKET 3 listing scenes + PAKET 6 print grounds (docs/27); print layouts.ts sources point at files the rebuild removed; palettes must be redone from the new art; build_images.py retired"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "maison-patisserie": {
         "design": "28",
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "rebuilt 2026-10-18/19 with imagegen art (v3 cover, bg_scene, new interiors); PAKET 5 no longer wanted. Waits for GPT PAKET 3 listing scenes + PAKET 6 print grounds (docs/27); print layouts.ts sources point at files the rebuild removed; palettes must be redone from the new art; build_images.py retired"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "celestial-observatory": {
         "design": "29",
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "rebuilt 2026-10-18/19 with imagegen art (v3 cover, bg_scene, new interiors); PAKET 5 no longer wanted. Waits for GPT PAKET 3 listing scenes + PAKET 6 print grounds (docs/27); print layouts.ts sources point at files the rebuild removed; palettes must be redone from the new art; build_images.py retired"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "azulejo-mosaic": {
         "design": "30",
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "rebuilt 2026-10-18/19 with imagegen art (v3 cover, bg_scene, new interiors); PAKET 5 no longer wanted. Waits for GPT PAKET 3 listing scenes + PAKET 6 print grounds (docs/27); print layouts.ts sources point at files the rebuild removed; palettes must be redone from the new art; build_images.py retired"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "sky-lantern-festival": {
         "design": "31",
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "rebuilt 2026-10-18/19 with imagegen art (v3 cover, bg_scene, new interiors); PAKET 5 no longer wanted. Waits for GPT PAKET 3 listing scenes + PAKET 6 print grounds (docs/27); print layouts.ts sources point at files the rebuild removed; palettes must be redone from the new art; build_images.py retired"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "music-box-ballerina": {
         "design": "32",
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "rebuilt 2026-10-18/19 with imagegen art (v3 cover, bg_scene, new interiors); PAKET 5 no longer wanted. Waits for GPT PAKET 3 listing scenes + PAKET 6 print grounds (docs/27); print layouts.ts sources point at files the rebuild removed; palettes must be redone from the new art; build_images.py retired"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "marigold-mehndi": {
         "design": "33",
@@ -1365,6 +1365,6 @@
       "privacy_policy": "not published; English text ready in docs/28_ETSY_GIZLILIK_METNI.md (needs legal name + postal address)"
     }
   },
-  "gpt_queue": "docs/27_GPT_IS_LISTESI.html — 351 images (2026-10-20; was 493 before 22–32 PAKET 5 was retired)",
+  "gpt_queue": "2026-10-20: 351 GPT images imported (codex/generated-visuals-2026-10-20, merged); Claude check: 317 pass, 34 rejected (all 33–38 + one palette) and moved to docs/qa/2026-10-20-generated-visuals/reddedilen/ — docs/27 lists those 34. Report: docs/qa/2026-10-20-generated-visuals/CLAUDE_KONTROL.md",
   "launch_checklist": "docs/29_LANSMAN_LISTESI.md"
 }

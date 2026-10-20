@@ -110,7 +110,13 @@
       "status": "missing (planned; alt text not written yet)"
     }
   ],
-  "gpt_mockup_scenes": [],
+  "gpt_mockup_scenes": [
+    "collections/22_Nocturne_Lake_Estate/assets/gpt/mockups/cover_hand.png",
+    "collections/22_Nocturne_Lake_Estate/assets/gpt/mockups/flatlay_phone.png",
+    "collections/22_Nocturne_Lake_Estate/assets/gpt/mockups/hand_phone_edit.png",
+    "collections/22_Nocturne_Lake_Estate/assets/gpt/mockups/laptop_phone.png",
+    "collections/22_Nocturne_Lake_Estate/assets/gpt/mockups/three_phones.png"
+  ],
   "video": {
     "file": "collections/22_Nocturne_Lake_Estate/package/listing/video.mp4",
     "exists": false

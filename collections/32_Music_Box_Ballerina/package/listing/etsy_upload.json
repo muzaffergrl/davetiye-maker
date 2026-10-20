@@ -110,7 +110,13 @@
       "status": "missing (planned; alt text not written yet)"
     }
   ],
-  "gpt_mockup_scenes": [],
+  "gpt_mockup_scenes": [
+    "collections/32_Music_Box_Ballerina/assets/gpt/mockups/cover_hand.png",
+    "collections/32_Music_Box_Ballerina/assets/gpt/mockups/flatlay_phone.png",
+    "collections/32_Music_Box_Ballerina/assets/gpt/mockups/hand_phone_edit.png",
+    "collections/32_Music_Box_Ballerina/assets/gpt/mockups/laptop_phone.png",
+    "collections/32_Music_Box_Ballerina/assets/gpt/mockups/three_phones.png"
+  ],
   "video": {
     "file": "collections/32_Music_Box_Ballerina/package/listing/video.mp4",
     "exists": false

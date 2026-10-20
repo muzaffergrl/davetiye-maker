@@ -101,7 +101,13 @@
       "status": "missing"
     }
   ],
-  "gpt_mockup_scenes": [],
+  "gpt_mockup_scenes": [
+    "collections/24_Grand_Theatre_Premiere/assets/gpt/mockups/cover_hand.png",
+    "collections/24_Grand_Theatre_Premiere/assets/gpt/mockups/flatlay_phone.png",
+    "collections/24_Grand_Theatre_Premiere/assets/gpt/mockups/hand_phone_edit.png",
+    "collections/24_Grand_Theatre_Premiere/assets/gpt/mockups/laptop_phone.png",
+    "collections/24_Grand_Theatre_Premiere/assets/gpt/mockups/three_phones.png"
+  ],
   "video": {
     "file": "collections/24_Grand_Theatre_Premiere/package/listing/video.mp4",
     "exists": false

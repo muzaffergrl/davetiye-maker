@@ -116,6 +116,7 @@ test('npm run seed -- --theme <id>: the theme\'s own demo record and PAKET 2 pho
   assert.equal(olive.content.name_display, JSON.parse(readFileSync(path.join(PLATFORM_ROOT, 'themes/olive-ivory/content.demo.json'), 'utf8')).name_display);
   const blush = defaultSources('blush-garden-rose');
   assert.equal(blush.photosDir, path.join(REPO_ROOT, 'collections/03_Blush_Garden_Rose/assets/gpt/photos'));
+  // 26 got its own PAKET 2 photos on 2026-10-20 (G190): its own folder, never the 03 photos
   const kintsugi = defaultSources('kintsugi-washi');
-  assert.equal(kintsugi.photosDir, null, 'no PAKET 2 photos yet: placeholders, not the 03 photos');
+  assert.equal(kintsugi.photosDir, path.join(REPO_ROOT, 'collections/26_Kintsugi_Washi/assets/gpt/photos'));
 });

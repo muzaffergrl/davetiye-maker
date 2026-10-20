@@ -17,11 +17,11 @@ görevler: `gorevler/PANO.md` · platform: `docs/10_SITE_PLATFORMU.md` · **lans
 
 ## 3. 22–38 ve paletler (lansmanı beklemez)
 - 22–32: 18–19 Ekim'de imagegen sanatıyla yeniden kuruldu (yeni kapak/zarf, fildişi + çiçek zemin, iç sayfalar). Eski PAKET 5
-  website parçaları artık istenmiyor; `build_images.py` emekli (img/'yi silerdi). Bekleyen: GPT ilan sahneleri (PAKET 3) ve
-  baskı zeminleri (PAKET 6). Baskı düzeninin (`layouts.ts`) geçici kaynakları yeniden kurulumda silindi; panel eski baskı çıktısını
-  veriyor. Paletleri yeni sanattan yeniden yapılmalı (`test_recolor_parts` g177 11 hata bundan).
-- 33–38: PAKET 5 dahil bütün GPT parçaları bekleniyor.
-- GPT kuyruğu: `docs/27_GPT_IS_LISTESI.html` — 351 görsel.
+  website parçaları artık istenmiyor; `build_images.py` emekli (img/'yi silerdi). GPT ilan sahneleri ve baskı zeminleri geldi; baskı bağlandı (20 Ekim), ilan görselleri
+  henüz çekilmedi. Paletleri yeni sanattan yeniden yapılmalı (`test_recolor_parts` g177 11 hata bundan).
+- 33–38: parçaların çoğu geldi; 33 parça reddedildi (website parçaları), düzelince tema build edilir.
+- GPT: 351 görsel geldi (20 Ekim); kontrol 317 geçti, 34 ret (33–38 + 1 palet) → `docs/27` yalnız bu 34'ü listeliyor.
+  22–32 baskı zeminleri bağlandı. Rapor: `docs/qa/2026-10-20-generated-visuals/CLAUDE_KONTROL.md`.
 
 ## 4. Lansmanı bekleten (ayrıntı docs/29)
 Yayın + canlı kontrol, Vercel ortam değişkenleri (`CLAIM_ORDER_VERIFICATION=manual`, ≥ 12 karakter `ADMIN_PASSWORD`), gerçek

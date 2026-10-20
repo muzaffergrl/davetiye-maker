@@ -110,7 +110,13 @@
       "status": "missing (planned; alt text not written yet)"
     }
   ],
-  "gpt_mockup_scenes": [],
+  "gpt_mockup_scenes": [
+    "collections/28_Maison_Patisserie/assets/gpt/mockups/cover_hand.png",
+    "collections/28_Maison_Patisserie/assets/gpt/mockups/flatlay_phone.png",
+    "collections/28_Maison_Patisserie/assets/gpt/mockups/hand_phone_edit.png",
+    "collections/28_Maison_Patisserie/assets/gpt/mockups/laptop_phone.png",
+    "collections/28_Maison_Patisserie/assets/gpt/mockups/three_phones.png"
+  ],
   "video": {
     "file": "collections/28_Maison_Patisserie/package/listing/video.mp4",
     "exists": false

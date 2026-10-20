@@ -102,7 +102,13 @@
       "status": "missing"
     }
   ],
-  "gpt_mockup_scenes": [],
+  "gpt_mockup_scenes": [
+    "collections/25_Orient_Express_Voyage/assets/gpt/mockups/cover_hand.png",
+    "collections/25_Orient_Express_Voyage/assets/gpt/mockups/flatlay_phone.png",
+    "collections/25_Orient_Express_Voyage/assets/gpt/mockups/hand_phone_edit.png",
+    "collections/25_Orient_Express_Voyage/assets/gpt/mockups/laptop_phone.png",
+    "collections/25_Orient_Express_Voyage/assets/gpt/mockups/three_phones.png"
+  ],
   "video": {
     "file": "collections/25_Orient_Express_Voyage/package/listing/video.mp4",
     "exists": false

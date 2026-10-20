@@ -110,7 +110,13 @@
       "status": "missing (planned; alt text not written yet)"
     }
   ],
-  "gpt_mockup_scenes": [],
+  "gpt_mockup_scenes": [
+    "collections/27_Riad_Lantern_Nights/assets/gpt/mockups/cover_hand.png",
+    "collections/27_Riad_Lantern_Nights/assets/gpt/mockups/flatlay_phone.png",
+    "collections/27_Riad_Lantern_Nights/assets/gpt/mockups/hand_phone_edit.png",
+    "collections/27_Riad_Lantern_Nights/assets/gpt/mockups/laptop_phone.png",
+    "collections/27_Riad_Lantern_Nights/assets/gpt/mockups/three_phones.png"
+  ],
   "video": {
     "file": "collections/27_Riad_Lantern_Nights/package/listing/video.mp4",
     "exists": false

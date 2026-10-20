@@ -214,30 +214,3 @@ Kontrol: tek yeşil ekran; sol üçte bir boş; süsler kenarlarda; yazı/logo y
 A cozy lifestyle close-up: two hands hold a smartphone in portrait orientation at a comfortable reading angle, the screen facing the camera; one thumb rests at the very edge of the phone frame, never on the screen. The person sits on a charcoal velvet sofa with a champagne silk cushion and a crystal champagne coupe; a small arrangement of tall ivory taper candles in brass holders, a sealed black envelope with a champagne gold wax seal, a few white garden roses, a thin champagne silk ribbon and two crystal champagne coupes is softly blurred in the background. Warm, relaxed, happy planning mood; the person's face is not visible. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: black, charcoal, champagne and antique gold. Every phone is a generic modern smartphone with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
 ```
 Kontrol: tek yeşil ekran; başparmak ekranın dışında; yüz görünmüyor; yazı/logo yok.
-
-
----
-
-## PAKET 6 — Kullanıcının 27_GPT_IS_LISTESI.html ekindeki baskı zeminleri (2026-10-20)
-
-Bu iki zemin kullanıcı ekinde istenir; mevcut G139 kartları ayrı dosyalardır. Üretim ve kalan QA kayıtları: `docs/qa/2026-10-20-generated-visuals/manifest.json`.
-
-### P6.1 Ön yüz
-
-**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/print/invitation_front.png` · 1819×2551 px · opak PNG · 300 ppi hedef
-
-```
-A full-bleed printable wedding invitation ground for the "Nocturne Lake Estate" design, front side, portrait, seen perfectly flat and straight on, 1819 × 2551 px at 300 ppi (it is trimmed later). Match the attached website background (bg_scene-1024.webp) exactly in style: the same warm ivory, softly textured stationery paper running edge to edge and the same midnight charcoal, champagne gold, ivory garden roses and lake Como cypress foliage, softly reflected moonlight across a distant Italian lake, in the same photorealistic stationery-photography finish with soft light from the top-left. Place the decoration ONLY in two places: an abundant arrangement gathered at the top-left corner and trailing along the top edge, staying entirely within the top 16% of the height, and a smaller matching arrangement gathered at the bottom-right corner, staying entirely within the bottom 14% of the height. A very fine antique-gold foil hairline frame inset about 6% from every edge. Keep every ornament at least 4% inside the image edges. The whole rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm ivory paper (the names, date and venue are printed there in dark ink): no petal, leaf, line, shadow or stain in it. No envelope, no card, no frame object, no people. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1819 × 2551 px.
-```
-
-Kontrol: istenen oran; gerçek opak zemin; yazı alanı boş; metin, monogram, logo ve filigran yok. Hedefin altındaki çözünürlük QA kaydında uyarıdır.
-
-### P6.2 Arka yüz
-
-**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/print/invitation_back.png` · 1819×2551 px · opak PNG · 300 ppi hedef
-
-```
-The back side of the same "Nocturne Lake Estate" invitation (give invitation_front.png as the reference image): portrait, full bleed, perfectly flat, 1819 × 2551 px at 300 ppi, the same warm ivory stationery paper edge to edge and the same very fine antique-gold foil hairline frame inset about 6% from every edge. Decoration ONLY a slim spray of the same flowers and foliage centred along the top edge, staying entirely within the top 11% of the height and at least 4% inside the image edges. Everything from 13% to 92% of the height and from 10% to 90% of the width is COMPLETELY EMPTY paper for the schedule, the details and a QR code: no petal, line, shadow or stain. Same style, colors and light. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1819 × 2551 px.
-```
-
-Kontrol: istenen oran; gerçek opak zemin; yazı alanı boş; metin, monogram, logo ve filigran yok. Hedefin altındaki çözünürlük QA kaydında uyarıdır.
