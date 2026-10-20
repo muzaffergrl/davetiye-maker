@@ -12,8 +12,8 @@ today. Product language: English (US spelling). This design has no earlier listi
 |---|---|
 | Sale status | **Coming: the design is not open for sale** (tasarım satışa açılmadı, coming). `platform/lib/marketing/config.ts` lists it as `coming` with price `[PRICE]`. This listing waits for the sale decision. |
 | GPT artwork | **Not made yet.** The theme runs on interim flat palette tones (wallet, ticket, poster, map, tag, clock, stamp, boarding pass); every part is ordered in `assets/gpt/GPT_PROMPTS.md` (PAKET 5, 2, 6). No listing image or video can be made before they arrive. |
-| Start link `https://xn--bkestudo-zkb.com/start?theme=orient-express-voyage` | **Not live**: the design is on branch `claude/g163-orient-express`, not deployed. Opened only in a local production build (2026-10-17, G163). |
-| Live demo `https://xn--bkestudo-zkb.com/start/demo/orient-express-voyage` | **Not live**, for the same reason. Locally the demo opens the ticket wallet with the fictional couple Amelia & Rafael. |
+| Start link `https://bkestudio.com/start?theme=orient-express-voyage` | **Not live**: the design is on branch `claude/g163-orient-express`, not deployed. Opened only in a local production build (2026-10-17, G163). |
+| Live demo `https://bkestudio.com/start/demo/orient-express-voyage` | **Not live**, for the same reason. Locally the demo opens the ticket wallet with the fictional couple Amelia & Rafael. |
 | Sample photos | **None yet** (PAKET 2 ordered). The demo shows placeholders. |
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** All checks so far are Chromium mobile emulation. |
 | Shop name, support email, response time, refund policy | As 01–21: BKE Studio, bkestudio@gmail.com (K33), 24 hours, no returns with a promise to fix (docs/20 §6). |
@@ -43,7 +43,7 @@ Bottle green, brass and ivory, in the style of an old travel poster. Your guests
 
 TRY THE LIVE DEMO
 See the ticket wallet open on your own phone before you buy (sample names):
-https://xn--bkestudo-zkb.com/start/demo/orient-express-voyage
+https://bkestudio.com/start/demo/orient-express-voyage
 Copy the link into your phone's browser. [VERIFY: demo live after deploy]
 
 WHAT YOU GET
@@ -214,7 +214,7 @@ No. It is a digital product.
 ## 8. Etsy's automatic messages (shop-wide, the same for every design)
 
 Etsy's "Message to Buyers for Digital Items" applies to every digital listing, so it cannot carry this design's own start link: it links
-the design chooser `https://xn--bkestudo-zkb.com/start` (docs/19 §4.4). The START HERE PDF carries this design's own link. Both texts are already entered in
+the design chooser `https://bkestudio.com/start` (docs/19 §4.4). The START HERE PDF carries this design's own link. Both texts are already entered in
 Shop Manager (docs/20 §7.1) and need no change for this design.
 
 Message to Buyers for Digital Items:
@@ -222,7 +222,7 @@ Message to Buyers for Digital Items:
 ```text
 Thank you for your order! Your download is your START HERE guide (PDF). Open it and tap the start link inside.
 
-Can't open the PDF? Start here instead and choose the design you bought: https://xn--bkestudo-zkb.com/start
+Can't open the PDF? Start here instead and choose the design you bought: https://bkestudio.com/start
 
 You will enter your Etsy order number, your email and your first names. Then SAVE YOUR EDIT LINK when it appears: it opens your editor, and we cannot email it to you yet.
 
@@ -232,7 +232,7 @@ Questions? Message us here on Etsy with your order number.
 Message to Buyers (receipt):
 
 ```text
-Thank you! Start your wedding website from the START HERE PDF in your download, or at https://xn--bkestudo-zkb.com/start (choose the design you bought). Please save your private edit link when it appears. Questions? Message us on Etsy.
+Thank you! Start your wedding website from the START HERE PDF in your download, or at https://bkestudio.com/start (choose the design you bought). Please save your private edit link when it appears. Questions? Message us on Etsy.
 ```
 
 ## 9. After the sale

@@ -36,7 +36,7 @@ function arg(name: string, def: string | null = null): string | null {
 }
 const THEME = arg('theme');
 const OUT = arg('out');
-const PUBLIC_URL = 'https://xn--bkestudo-zkb.com';
+const PUBLIC_URL = 'https://bkestudio.com';
 const HOST = new URL(PUBLIC_URL).host;
 if (!THEME || !OUT) {
   console.error('usage: capture_devices.ts --theme <id> --out <dir>');

@@ -12,15 +12,15 @@ theme.json, index.html, home.html, story.html, details.html, rsvp.html) and `pla
 |---|---|
 | Sale status | **Coming: the design is not open for sale** (tasarım satışa açılmadı, coming). `platform/lib/marketing/config.ts` lists it as `coming` with price `[PRICE]`; its GPT artwork does not exist yet (G166: the theme runs on interim layers). This listing waits for the artwork, an eye check and the sale decision. |
 | Artwork | **Interim.** Every picture of the theme is a placeholder cut and toned from other designs' GPT images (box, lid, tissue, card, shelf, bow, sugar pearl); the real parts are ordered in `assets/gpt/GPT_PROMPTS.md` (PAKET 5, 2, 6). No image or video of this listing may be made before they arrive. |
-| Start link `https://xn--bkestudo-zkb.com/start?theme=maison-patisserie` | **Not live**: the design is in the repository (G166, branch `claude/g166-maison-patisserie`) and has not been deployed. Opened only in a local production build (theme-check, 2026-10-17). Not opened on a phone. |
-| Live demo `https://xn--bkestudo-zkb.com/start/demo/maison-patisserie` (in the description under TRY THE LIVE DEMO) | **Not live**, for the same reason. In the local production build the demo opens this design's box with the sample couple Camille & Oliver and neutral photo placeholders (no PAKET 2 photos yet). The demo has no map pin yet (`lib/claim/demo-map.ts`). |
+| Start link `https://bkestudio.com/start?theme=maison-patisserie` | **Not live**: the design is in the repository (G166, branch `claude/g166-maison-patisserie`) and has not been deployed. Opened only in a local production build (theme-check, 2026-10-17). Not opened on a phone. |
+| Live demo `https://bkestudio.com/start/demo/maison-patisserie` (in the description under TRY THE LIVE DEMO) | **Not live**, for the same reason. In the local production build the demo opens this design's box with the sample couple Camille & Oliver and neutral photo placeholders (no PAKET 2 photos yet). The demo has no map pin yet (`lib/claim/demo-map.ts`). |
 | Current platform release (simpler editor K29, Headings & labels, thank-you page, guest password, RSVP v2) | Live on production since G079 (2026-10-15) for 01–20. This design needs the next deploy; its editor features were not tried in this task. |
 | Manual order check (`CLAIM_ORDER_VERIFICATION=manual`) | As in the 01–21 listings: the records disagree (docs/10, docs/18 §4); not read in this task. The sentence keeps [VERIFY: manual order check on in production]. |
 | Questions & answers, RSVP questions, menu, travel | Platform features, the same for every design; rendered in this theme by the repository tests and theme-check (Chromium, phone size). **Not tried on the live site.** |
 | Music, map and directions, reply form with Excel and Google Sheets (G126–G128) | In the repository; **not on production yet** and not tried on the live site. This design's default track is Garden Waltz (`platform/lib/audio/catalog.ts`, G166). The 4 tracks were made in code and nobody has listened to them yet (G126). The Google Sheets connection has not been tried with a real Google account (G128). |
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** Phone checks are Chromium mobile emulation (theme README). |
 | Edit link by email | **Not built.** The buyer copies the link or uses "Email it to myself" (their own mail app). |
-| Web address | `xn--bkestudo-zkb.com` (bkestudıo.com: bought and connected by the user, served by Vercel). G189 (2026-10-18) moved the start link, demo, START HERE guide and QR codes here from the earlier temporary Vercel address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
+| Web address | `bkestudio.com` (primary since 2026-10-19; the earlier `xn--bkestudo-zkb.com` (bkestudıo.com) links redirect here with a permanent 308). G190 (2026-10-20) moved the start link, demo, START HERE guide and QR codes to this address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
 | Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com**. |
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, quantity | `config.ts`: `[PRICE]` — not decided for this design (01–21: 1,460 TL, K42/K47). No stock limit (999). |
@@ -50,7 +50,7 @@ Pistachio green, rose and cream with a touch of gold, like the window of a Paris
 
 TRY THE LIVE DEMO
 See the box open on your own phone before you buy (sample names):
-https://xn--bkestudo-zkb.com/start/demo/maison-patisserie
+https://bkestudio.com/start/demo/maison-patisserie
 Copy the link into your phone's browser.
 
 WHAT YOU GET
@@ -214,7 +214,7 @@ No. It is a digital product.
 ## 8. Etsy's automatic messages (shop-wide, the same for every design)
 
 Etsy's "Message to Buyers for Digital Items" applies to every digital listing, so it cannot carry this design's own start link: it links
-the design chooser `https://xn--bkestudo-zkb.com/start` (docs/19 §4.4). The START HERE PDF carries this design's own link. Both texts are already entered in
+the design chooser `https://bkestudio.com/start` (docs/19 §4.4). The START HERE PDF carries this design's own link. Both texts are already entered in
 Shop Manager (docs/20 §7.1) and need no change for this design.
 
 Message to Buyers for Digital Items:
@@ -222,7 +222,7 @@ Message to Buyers for Digital Items:
 ```text
 Thank you for your order! Your download is your START HERE guide (PDF). Open it and tap the start link inside.
 
-Can't open the PDF? Start here instead and choose the design you bought: https://xn--bkestudo-zkb.com/start
+Can't open the PDF? Start here instead and choose the design you bought: https://bkestudio.com/start
 
 You will enter your Etsy order number, your email and your first names. Then SAVE YOUR EDIT LINK when it appears: it opens your editor, and we cannot email it to you yet.
 
@@ -232,7 +232,7 @@ Questions? Message us here on Etsy with your order number.
 Message to Buyers (receipt):
 
 ```text
-Thank you! Start your wedding website from the START HERE PDF in your download, or at https://xn--bkestudo-zkb.com/start (choose the design you bought). Please save your private edit link when it appears. Questions? Message us on Etsy.
+Thank you! Start your wedding website from the START HERE PDF in your download, or at https://bkestudio.com/start (choose the design you bought). Please save your private edit link when it appears. Questions? Message us on Etsy.
 ```
 
 ## 9. After the sale

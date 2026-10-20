@@ -21,7 +21,7 @@ uçlar `platform/app/api/edit/[slug]/google`, `platform/app/api/google/callback`
      Google yine de marka doğrulaması isterse ekrandaki adımları izleyin (alan adı / gizlilik politikası linki gerekebilir).
 4. **APIs & Services → Credentials → Create credentials → OAuth client ID**:
    - **Application type: Web application**, ad: `BKE Studio platform`.
-   - **Authorized redirect URIs → Add URI:** `https://xn--bkestudo-zkb.com/api/google/callback`
+   - **Authorized redirect URIs → Add URI:** `https://bkestudio.com/api/google/callback`
      (G189: marka alan adı; eski Vercel adresi kayıtlıysa yenisini de ekleyin; adres `PLATFORM_PUBLIC_URL` + `/api/google/callback` ile **birebir** aynı olmalı).
    - **Create** → çıkan **Client ID** ve **Client secret**'i kopyalayın.
 5. Vercel → proje → **Settings → Environment Variables** (Production):
@@ -29,7 +29,7 @@ uçlar `platform/app/api/edit/[slug]/google`, `platform/app/api/google/callback`
    - `GOOGLE_CLIENT_SECRET` = Client secret
    - `GOOGLE_TOKEN_KEY` = 32 rastgele bayt, ör. terminalde `openssl rand -base64 32` çıktısı. **Değiştirmeyin**: değişirse
      bütün bağlantılar düşer, çiftler yeniden bağlanmak zorunda kalır.
-   - `PLATFORM_PUBLIC_URL` = `https://xn--bkestudo-zkb.com` olmalı (geri dönüş adresi bundan kurulur).
+   - `PLATFORM_PUBLIC_URL` = `https://bkestudio.com` olmalı (geri dönüş adresi bundan kurulur).
 6. Yeniden yayınlayın (deploy). Panelde Guests'te "Connect Google Sheets" düğmesi görünür.
 
 ## Güvenlik ve veri

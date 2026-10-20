@@ -15,8 +15,8 @@ the description below keeps to that copy.
 | Sale status | **Coming: the design is not open for sale** (tasarım satışa açılmadı, coming). `platform/lib/marketing/config.ts` lists it as `coming` with price `[PRICE]`. This listing waits for the artwork, an eye check and the sale decision. |
 | Design artwork | **Interim.** The design's own GPT parts (four azulejo tiles: corner, border and two field tiles; terracotta tile back, cobalt wall, whitewash plaster, card paper, tile frieze, terracotta pots, share image, sample photos, print grounds) are ordered in `assets/gpt/GPT_PROMPTS.md` and do not exist yet. Today the tiles are cut from design 05's painted border. No listing image or video may be made before the parts are in and the theme has been looked at again. |
 | Sale-site copy | Written (`designs.ts` `azulejo-mosaic`, G169) against the theme as built; it describes the interim tiles' behavior, not the final artwork. |
-| Start link `https://xn--bkestudo-zkb.com/start?theme=azulejo-mosaic` | **Not live**: the design is in the repository and has not been deployed; `/start?theme=azulejo-mosaic` is refused in production until it is `live`. Not opened on a phone. |
-| Live demo `https://xn--bkestudo-zkb.com/start/demo/azulejo-mosaic` (in the description under TRY THE LIVE DEMO) | **Not deployed.** Sample couple Inês & Mateo, Quinta da Andorinha Azul, Sintra, June 5, 2027 (fictional). Not opened on the live site or a phone. |
+| Start link `https://bkestudio.com/start?theme=azulejo-mosaic` | **Not live**: the design is in the repository and has not been deployed; `/start?theme=azulejo-mosaic` is refused in production until it is `live`. Not opened on a phone. |
+| Live demo `https://bkestudio.com/start/demo/azulejo-mosaic` (in the description under TRY THE LIVE DEMO) | **Not deployed.** Sample couple Inês & Mateo, Quinta da Andorinha Azul, Sintra, June 5, 2027 (fictional). Not opened on the live site or a phone. |
 | Platform features (editor, RSVP questions, Excel / Google Sheets, music, map, guest password, thank-you page, languages) | The same for every design; see the 01–21 listings for their live status. Not tried for this theme on the live site. |
 | Music and opening sounds | Default track Garden Waltz. Opening sounds: a soft tap when the panel is pressed, a whoosh as the tile wave starts, a slide as the card lifts, a chime. The 4 tracks were made in code and nobody has listened to them yet (G126). |
 | Printable invitation | **Interim layout**: card paper with a row of the theme's tiles at the top and bottom. The design's own print grounds (PAKET 6) are pending. |
@@ -24,7 +24,7 @@ the description below keeps to that copy.
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** |
 | Reduced motion | Not checked for this theme in this task (the FAQ line on reduced motion is kept out until it is). |
 | Edit link by email | **Not built.** The buyer copies the link or uses "Email it to myself" (their own mail app). |
-| Web address | `xn--bkestudo-zkb.com` (bkestudıo.com: bought and connected by the user, served by Vercel). G189 (2026-10-18) moved the start link, demo, START HERE guide and QR codes here from the earlier temporary Vercel address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
+| Web address | `bkestudio.com` (primary since 2026-10-19; the earlier `xn--bkestudo-zkb.com` (bkestudıo.com) links redirect here with a permanent 308). G190 (2026-10-20) moved the start link, demo, START HERE guide and QR codes to this address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
 | Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com**. |
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, quantity | `config.ts`: `[PRICE]` — not decided for this design (01–21: 1,460 TL, K42/K47). No stock limit (999). |
@@ -55,7 +55,7 @@ Cobalt and white painted azulejo tiles, warm terracotta and sunlit whitewash. Yo
 
 TRY THE LIVE DEMO
 See the tiles turn on your own phone before you buy (sample names):
-https://xn--bkestudo-zkb.com/start/demo/azulejo-mosaic
+https://bkestudio.com/start/demo/azulejo-mosaic
 Copy the link into your phone's browser. [VERIFY: demo live after deploy]
 
 WHAT YOU GET
@@ -225,7 +225,7 @@ No. It is a digital product. You can download a printable invitation and print i
 ## 8. Etsy's automatic messages (shop-wide, the same for every design)
 
 Etsy's "Message to Buyers for Digital Items" applies to every digital listing, so it cannot carry this design's own start link: it links
-the design chooser `https://xn--bkestudo-zkb.com/start` (docs/19 §4.4). The START HERE PDF carries this design's own link. Both
+the design chooser `https://bkestudio.com/start` (docs/19 §4.4). The START HERE PDF carries this design's own link. Both
 texts are already entered in Shop Manager (docs/20 §7.1; full text in `collections/28_Maison_Patisserie/package/listing/listing_v3.md` §8)
 and need no change for this design.
 

@@ -14,12 +14,12 @@ parts are in.
 |---|---|
 | Design artwork | **Interim.** The design's own GPT parts (lacquer, red paper, cream paper, gold leaf, envelope back, pocket and flap, paper buttons, red cord, gold-leaf 囍, the two paper-cut windows, card, gold clouds, moon gate, paper-cut border and layers, knot with tassel, share image) and sample photos are ordered in `assets/gpt/GPT_PROMPTS.md` and do not exist yet. The theme runs on toned plain textures and plain crops (the envelope is plain red paper, the windows plain red and gold halves, the 囍 a character of a typeface filled with gold leaf); there is no cord, cloud, moon gate frame or paper-cut pattern yet. No listing image or video may be made before the parts are in and the theme has been looked at again. |
 | Sale status | `coming` in `platform/lib/marketing/config.ts`: not on the sales site, and `/start?theme=red-lacquer-double-happiness` is refused in production until it is `live`. |
-| Start link `https://xn--bkestudo-zkb.com/start?theme=red-lacquer-double-happiness` | **Not live** (design in review). Not deployed in this task. |
-| Live demo `https://xn--bkestudo-zkb.com/start/demo/red-lacquer-double-happiness` | Works in a local production build (2026-10-18, G183). **Not deployed**; not opened on the live site or a phone. |
+| Start link `https://bkestudio.com/start?theme=red-lacquer-double-happiness` | **Not live** (design in review). Not deployed in this task. |
+| Live demo `https://bkestudio.com/start/demo/red-lacquer-double-happiness` | Works in a local production build (2026-10-18, G183). **Not deployed**; not opened on the live site or a phone. |
 | Platform features (editor, RSVP questions, Excel / Google Sheets, music, map, guest password, thank-you page, languages) | The same for every design; see the 01–20 listings for their live status. Tried for this theme only in the local build's automated checks (theme-check, G183). |
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** |
 | Edit link by email | **Not built.** The buyer copies the link or uses "Email it to myself". |
-| Web address | `xn--bkestudo-zkb.com` (bkestudıo.com: bought and connected by the user, served by Vercel). G189 (2026-10-18) moved the start link, demo, START HERE guide and QR codes here from the earlier temporary Vercel address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
+| Web address | `bkestudio.com` (primary since 2026-10-19; the earlier `xn--bkestudo-zkb.com` (bkestudıo.com) links redirect here with a permanent 308). G190 (2026-10-20) moved the start link, demo, START HERE guide and QR codes to this address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
 | Shop name, support email | K33: **BKE Studio**, **bkestudio@gmail.com**. |
 | Response time, refund policy | docs/20 §6: 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, quantity | **Open** — `[PRICE]`. Quantity 999 like the other designs. |
@@ -49,7 +49,7 @@ Lacquer red, warm cream and gold leaf, with paper-cut peonies and the double hap
 
 TRY THE LIVE DEMO
 See the envelope open on your own phone before you buy (sample names):
-https://xn--bkestudo-zkb.com/start/demo/red-lacquer-double-happiness
+https://bkestudio.com/start/demo/red-lacquer-double-happiness
 Copy the link into your phone's browser. [VERIFY: demo live after deploy]
 
 WHAT YOU GET

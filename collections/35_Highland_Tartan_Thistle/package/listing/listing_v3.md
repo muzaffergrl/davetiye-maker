@@ -14,12 +14,12 @@ parts are in.
 |---|---|
 | Design artwork | **Interim.** The design's own GPT parts (tartan wool, cream paper, moss ground, oil-painted hills, mist, the envelope's back, pocket and flap, leather strap, brass buckle, heather sprig and florets, locket rim and lid, thistle, card, share image) and sample photos are ordered in `assets/gpt/GPT_PROMPTS.md` and do not exist yet. The theme runs on toned plain textures (no tartan yet), a plain brass crop and a blurred mist. No listing image or video may be made before the parts are in and the theme has been looked at again. |
 | Sale status | `coming` in `platform/lib/marketing/config.ts`: not on the sales site, and `/start?theme=highland-tartan-thistle` is refused in production until it is `live`. |
-| Start link `https://xn--bkestudo-zkb.com/start?theme=highland-tartan-thistle` | **Not live** (design in review). Not deployed in this task. |
-| Live demo `https://xn--bkestudo-zkb.com/start/demo/highland-tartan-thistle` | Works in a local production build (2026-10-18, G184). **Not deployed**; not opened on the live site or a phone. |
+| Start link `https://bkestudio.com/start?theme=highland-tartan-thistle` | **Not live** (design in review). Not deployed in this task. |
+| Live demo `https://bkestudio.com/start/demo/highland-tartan-thistle` | Works in a local production build (2026-10-18, G184). **Not deployed**; not opened on the live site or a phone. |
 | Platform features (editor, RSVP questions, Excel / Google Sheets, music, map, guest password, thank-you page, languages) | The same for every design; see the 01–20 listings for their live status. Tried for this theme only in the local build's automated checks (theme-check, G184). |
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** |
 | Edit link by email | **Not built.** The buyer copies the link or uses "Email it to myself". |
-| Web address | `xn--bkestudo-zkb.com` (bkestudıo.com: bought and connected by the user, served by Vercel). G189 (2026-10-18) moved the start link, demo, START HERE guide and QR codes here from the earlier temporary Vercel address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
+| Web address | `bkestudio.com` (primary since 2026-10-19; the earlier `xn--bkestudo-zkb.com` (bkestudıo.com) links redirect here with a permanent 308). G190 (2026-10-20) moved the start link, demo, START HERE guide and QR codes to this address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
 | Shop name, support email | K33: **BKE Studio**, **bkestudio@gmail.com**. |
 | Response time, refund policy | docs/20 §6: 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, quantity | **Open** — `[PRICE]`. Quantity 999 like the other designs. |
@@ -49,7 +49,7 @@ Heather, moss green and cream, warm leather and antique brass. Your guests tap t
 
 TRY THE LIVE DEMO
 See the envelope open on your own phone before you buy (sample names):
-https://xn--bkestudo-zkb.com/start/demo/highland-tartan-thistle
+https://bkestudio.com/start/demo/highland-tartan-thistle
 Copy the link into your phone's browser. [VERIFY: demo live after deploy]
 
 WHAT YOU GET
