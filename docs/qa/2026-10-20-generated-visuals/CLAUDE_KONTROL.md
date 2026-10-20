@@ -32,3 +32,20 @@ sayfaları) yeniden denetledi.
 - 22–32 örnek fotoğraflar (isteğe bağlı; demolar ortak örnek fotoğrafları kullanıyor; `build_images.py` emekli → elle).
 - 33–38 website parçaları: 34 ret düzelince `gpt_yerlestir.py --koleksiyon 33-38 --uygula`.
 - 16 paletleri (15 görsel geçti): `recolor_parts.py build --design 16` + göz kontrolü.
+
+## Teknik düzeltme (kullanıcı onayı, 2026-10-20) — çizim yok
+Kullanıcı: "onay, teknik işlemleri sen yap". 19 ret yalnız teknik işlemle düzeltildi ve yerleştirildi
+(`gpt_yerlestir.py --klasor … --uygula`: 19/19 geçti). Ham GPT çıktıları `reddedilen/` klasöründe aynı adla duruyor.
+- **Oran (9):** 33 garland, tassel · 34 peony_band · 35 heather_divider, strap · 36 herbarium_label, orchid_sprig, twine ·
+  37 whiplash. Saydam kenarlardan kırpıldı, saydam pay eklenerek istenen orana getirildi; piksel ölçeklenmedi (tema
+  build'leri parçaları zaten `trim` ediyor).
+- **Pencere (9):** 33/35/36/37 card_small · 36 specimen_frame · 37 arch_window · 38 frame_1, frame_2, frame_wide.
+  ChatGPT'nin saydam deliğe çevirdiği foto penceresi (çerçevenin içindeki kapalı saydam bölge) #00FF00 ile dolduruldu;
+  kıyıdaki yarı saydam pikseller yeşilin üstüne bindirildi (hale yok, gözle bakıldı).
+- **Bant (1):** 38 embroidery_band — 1536×1024 tuvalden bant satırları (iki dikiş çizgisi dahil, 1536×130) kesildi,
+  2400×160 oranına kendi başından devam ettirilerek tamamlandı (sitede zaten yatay tekrar).
+
+Kalan (ChatGPT'ye, prompt'lara "RETRY NOTE" eklendi): 13 kenarı kesik parça (33 flap, mehndi_pattern, sleeve · 34
+envelope_pocket, veil_inner, veil_outer · 35 envelope_front, flap · 36 ferns · 37 petal_centre, petal_right · 38
+bougainvillea, envelope_pocket) + 36 copper_tag (penceresi hiç yok). 21 V07 gül dalı aslında uygun (şartname yanlıştı:
+referans gibi saydam) ama "Ivory Rose" paleti istenmediği için `beklemede/`.

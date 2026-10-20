@@ -25,16 +25,16 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
    build'i ister) → `etsy_upload.py`; en sonda bu dosyayı yeniden yazar. Tasarım × adım tablosu ve live engelleri basılır.
    Yerleştirmeden yalnız adımlar: `--koleksiyon NN|all`. Hiçbir tasarımı live yapmaz, yayınlamaz, Etsy'ye göndermez.
 
-**Toplam eksik: 34**
+**Toplam eksik: 15**
 
 | Prompt dosyası | Bölüm | Var | Eksik |
 |---|---|---|---|
-| `collections/33_Marigold_Mehndi/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 12 | 6 |
-| `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 19 | 4 |
-| `collections/35_Highland_Tartan_Thistle/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 15 | 5 |
-| `collections/36_Victorian_Glasshouse/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 12 | 7 |
-| `collections/37_Art_Nouveau_Lily/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 11 | 5 |
-| `collections/38_Papel_Picado_Fiesta/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 15 | 6 |
+| `collections/33_Marigold_Mehndi/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 15 | 3 |
+| `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 20 | 3 |
+| `collections/35_Highland_Tartan_Thistle/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 18 | 2 |
+| `collections/36_Victorian_Glasshouse/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 17 | 2 |
+| `collections/37_Art_Nouveau_Lily/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 14 | 2 |
+| `collections/38_Papel_Picado_Fiesta/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 19 | 2 |
 | `collections/21_Crimson_Rose_Atelier/variants/GPT_PROMPTS.md` | İstem — fildişi güller (yalnız istenirse) | 0 | 1 |
 
 ## Eksik dosyalar
@@ -42,10 +42,7 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
 ### `collections/33_Marigold_Mehndi/assets/gpt/GPT_PROMPTS.md`
 
 - `collections/33_Marigold_Mehndi/assets/gpt/parts/sleeve.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/33_Marigold_Mehndi/assets/gpt/parts/garland.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/33_Marigold_Mehndi/assets/gpt/parts/mehndi_pattern.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/33_Marigold_Mehndi/assets/gpt/parts/card_small.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/33_Marigold_Mehndi/assets/gpt/parts/tassel.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/33_Marigold_Mehndi/assets/gpt/parts/flap.png` — PAKET 5 — Website katmanları (YAZI YOK)
 
 ### `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/GPT_PROMPTS.md`
@@ -53,42 +50,26 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
 - `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/envelope_pocket.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/veil_outer.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/veil_inner.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/peony_band.png` — PAKET 5 — Website katmanları (YAZI YOK)
 
 ### `collections/35_Highland_Tartan_Thistle/assets/gpt/GPT_PROMPTS.md`
 
 - `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/envelope_front.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/flap.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/strap.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/heather_divider.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/card_small.png` — PAKET 5 — Website katmanları (YAZI YOK)
 
 ### `collections/36_Victorian_Glasshouse/assets/gpt/GPT_PROMPTS.md`
 
 - `collections/36_Victorian_Glasshouse/assets/gpt/parts/copper_tag.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/36_Victorian_Glasshouse/assets/gpt/parts/twine.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/36_Victorian_Glasshouse/assets/gpt/parts/ferns.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/36_Victorian_Glasshouse/assets/gpt/parts/orchid_sprig.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/36_Victorian_Glasshouse/assets/gpt/parts/specimen_frame.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/36_Victorian_Glasshouse/assets/gpt/parts/herbarium_label.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/36_Victorian_Glasshouse/assets/gpt/parts/card_small.png` — PAKET 5 — Website katmanları (YAZI YOK)
 
 ### `collections/37_Art_Nouveau_Lily/assets/gpt/GPT_PROMPTS.md`
 
 - `collections/37_Art_Nouveau_Lily/assets/gpt/parts/petal_right.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/37_Art_Nouveau_Lily/assets/gpt/parts/petal_centre.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/card_small.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/arch_window.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/whiplash.png` — PAKET 5 — Website katmanları (YAZI YOK)
 
 ### `collections/38_Papel_Picado_Fiesta/assets/gpt/GPT_PROMPTS.md`
 
 - `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/envelope_pocket.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/frame_1.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/frame_2.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/frame_wide.png` — PAKET 5 — Website katmanları (YAZI YOK)
 - `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/bougainvillea.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/embroidery_band.png` — PAKET 5 — Website katmanları (YAZI YOK)
 
 ### `collections/21_Crimson_Rose_Atelier/variants/GPT_PROMPTS.md`
 
