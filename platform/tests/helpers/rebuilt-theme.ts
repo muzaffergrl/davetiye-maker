@@ -26,7 +26,7 @@ export function registerRebuiltThemeTests(id: string){
    assert.ok($('title').text().includes(demo.partners[0].display_name),page);
    assert.equal($('[data-repeat]').length,0,page);
    $('[src], [srcset]').each((_,el)=>{for(const v of [$(el).attr('src'),...($(el).attr('srcset')||'').split(',').map(v=>v.trim().split(/\s+/)[0])]){
-    if(v?.startsWith('/themes/'+item.id+'/'))refs.add(v.slice(('/themes/'+item.id+'/').length));
+    if(v?.startsWith('/themes/'+item.id+'/'))refs.add(v.slice(('/themes/'+item.id+'/').length).split('?')[0]);
     if(v?.startsWith('/demo/'))assert.ok(existsSync(path.join(root,'public',v)),v);
    }});
    if(page==='index'){
@@ -50,7 +50,7 @@ export function registerRebuiltThemeTests(id: string){
   if(existsSync(path.join(dir,'opening-design.json'))){
    const opening=JSON.parse(readFileSync(path.join(dir,'opening-design.json'),'utf8'));
    if(opening.version===3){
-    const physical=['img/v3-closed-440.webp','img/v3-closed-880.webp','img/v3-lining.webp',...opening.parts.flatMap((p:string)=>['img/v3-'+p+'.webp','img/v3-'+p+'-back.webp'])];
+    const physical=['img/v3-closed-440.webp','img/v3-closed-880.webp',opening.liningArtwork??'img/v3-lining.webp',...opening.parts.flatMap((p:string)=>['img/v3-'+p+'.webp',opening.reverseArtwork?.[p]??'img/v3-'+p+'-back.webp'])];
     for(const part of physical)assert.ok(refs.has(part),item.id+': rendered physical part '+part);
    }else assert.ok(refs.size>30);
   }else assert.ok(refs.size>30);

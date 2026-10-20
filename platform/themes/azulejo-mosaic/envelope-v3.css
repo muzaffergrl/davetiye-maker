@@ -66,3 +66,17 @@
 .page-envelope .env-page[data-opening-state=closing] .env-hint{display:block}
 @media(max-height:620px) and (min-aspect-ratio:1/1){.page-envelope .env-page,.is-opened .page-envelope .env-page{--w:min(32vw,57svh,320px);padding:12px;flex-direction:row;gap:30px}.page-envelope .env-head{max-width:42vw}.page-envelope .env-head .names{font-size:clamp(28px,7svh,52px)}.page-envelope .env-page .stage{margin-top:0}.is-opened .page-envelope .env-after{right:12px;left:auto;bottom:12px;width:48vw}.page-envelope .v3-cancel{left:28%;bottom:12px}}
 @media(prefers-reduced-motion:reduce){.v3-piece{will-change:auto}}
+
+/* v4: leave room for complete unfolding surfaces; keep shadows out of animated 3D layers. */
+@view-transition { navigation: none; }
+.page-envelope .env-page{overflow:visible}
+.v4-object{position:absolute;inset:0;z-index:2;transform-style:preserve-3d;pointer-events:none;transform-origin:50% 50%}
+.page-envelope .env .card-slot{z-index:1}
+.v3-housing,.v3-closed{filter:none}
+.v3-piece{will-change:auto}
+[data-opening-state=playing] .v3-piece,[data-opening-state=closing] .v3-piece{will-change:transform}
+.page-envelope .env-page .opening-card{filter:none}
+.is-opened .page-envelope .env .card-slot{z-index:6}
+.is-opened .v4-object{visibility:hidden}
+html{background:var(--op-paper)}
+@media(max-height:620px) and (min-aspect-ratio:1/1){.page-envelope .env-page .stage{width:min(28vw,46svh,270px)}}

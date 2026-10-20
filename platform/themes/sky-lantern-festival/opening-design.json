@@ -2,7 +2,7 @@
   "id": "sky-lantern-festival",
   "index": 9,
   "kind": "silk-lantern-pouch",
-  "duration": 6100,
+  "duration": 6000,
   "parts": [
     "lid"
   ],
@@ -17,5 +17,15 @@
   "physicalBacks": true,
   "reversible": true,
   "keyboard": true,
-  "reducedMotion": true
+  "reducedMotion": true,
+  "revision": 4,
+  "cardClearsHousing": true,
+  "fullSurfaceViewport": true,
+  "revealAt": 1600,
+  "liftAt": 2500,
+  "fadeAt": 2850,
+  "liningArtwork": "img/v4-lining.webp",
+  "reverseArtwork": {
+    "lid": "img/v4-lid-back.webp"
+  }
 }

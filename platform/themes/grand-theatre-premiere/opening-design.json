@@ -2,7 +2,7 @@
   "id": "grand-theatre-premiere",
   "index": 2,
   "kind": "velvet-theatre-gates",
-  "duration": 6100,
+  "duration": 6000,
   "parts": [
     "left",
     "right"
@@ -19,5 +19,16 @@
   "physicalBacks": true,
   "reversible": true,
   "keyboard": true,
-  "reducedMotion": true
+  "reducedMotion": true,
+  "revision": 4,
+  "cardClearsHousing": true,
+  "fullSurfaceViewport": true,
+  "revealAt": 2300,
+  "liftAt": 3100,
+  "fadeAt": 3500,
+  "liningArtwork": "img/v4-lining.webp",
+  "reverseArtwork": {
+    "left": "img/v4-left-back.webp",
+    "right": "img/v4-right-back.webp"
+  }
 }

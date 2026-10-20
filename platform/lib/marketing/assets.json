@@ -1771,9 +1771,9 @@
           "width": 640,
           "height": 1385,
           "files": {
-            "320": "/marketing/designs/nocturne-lake-estate/envelope-v3-320.webp",
-            "480": "/marketing/designs/nocturne-lake-estate/envelope-v3-480.webp",
-            "640": "/marketing/designs/nocturne-lake-estate/envelope-v3-640.webp"
+            "320": "/marketing/designs/nocturne-lake-estate/envelope-v4-320.webp",
+            "480": "/marketing/designs/nocturne-lake-estate/envelope-v4-480.webp",
+            "640": "/marketing/designs/nocturne-lake-estate/envelope-v4-640.webp"
           }
         },
         "home": {
@@ -1832,12 +1832,12 @@
         }
       },
       "opening": {
-        "file": "/marketing/designs/nocturne-lake-estate/opening-v3.mp4",
-        "poster": "/marketing/designs/nocturne-lake-estate/envelope-v3-640.webp",
+        "file": "/marketing/designs/nocturne-lake-estate/opening-v4.mp4",
+        "poster": "/marketing/designs/nocturne-lake-estate/envelope-v4-640.webp",
         "width": 390,
         "height": 844,
-        "seconds": 9.4,
-        "bytes": 443730
+        "seconds": 8.83,
+        "bytes": 481560
       }
     },
     "velvet-jewel-box": {
@@ -1846,9 +1846,9 @@
           "width": 640,
           "height": 1385,
           "files": {
-            "320": "/marketing/designs/velvet-jewel-box/envelope-v3-320.webp",
-            "480": "/marketing/designs/velvet-jewel-box/envelope-v3-480.webp",
-            "640": "/marketing/designs/velvet-jewel-box/envelope-v3-640.webp"
+            "320": "/marketing/designs/velvet-jewel-box/envelope-v4-320.webp",
+            "480": "/marketing/designs/velvet-jewel-box/envelope-v4-480.webp",
+            "640": "/marketing/designs/velvet-jewel-box/envelope-v4-640.webp"
           }
         },
         "home": {
@@ -1907,12 +1907,12 @@
         }
       },
       "opening": {
-        "file": "/marketing/designs/velvet-jewel-box/opening-v3.mp4",
-        "poster": "/marketing/designs/velvet-jewel-box/envelope-v3-640.webp",
+        "file": "/marketing/designs/velvet-jewel-box/opening-v4.mp4",
+        "poster": "/marketing/designs/velvet-jewel-box/envelope-v4-640.webp",
         "width": 390,
         "height": 844,
-        "seconds": 9.12,
-        "bytes": 513504
+        "seconds": 8.23,
+        "bytes": 486493
       }
     },
     "grand-theatre-premiere": {
@@ -1921,9 +1921,9 @@
           "width": 640,
           "height": 1385,
           "files": {
-            "320": "/marketing/designs/grand-theatre-premiere/envelope-v3-320.webp",
-            "480": "/marketing/designs/grand-theatre-premiere/envelope-v3-480.webp",
-            "640": "/marketing/designs/grand-theatre-premiere/envelope-v3-640.webp"
+            "320": "/marketing/designs/grand-theatre-premiere/envelope-v4-320.webp",
+            "480": "/marketing/designs/grand-theatre-premiere/envelope-v4-480.webp",
+            "640": "/marketing/designs/grand-theatre-premiere/envelope-v4-640.webp"
           }
         },
         "home": {
@@ -1982,12 +1982,12 @@
         }
       },
       "opening": {
-        "file": "/marketing/designs/grand-theatre-premiere/opening-v3.mp4",
-        "poster": "/marketing/designs/grand-theatre-premiere/envelope-v3-640.webp",
+        "file": "/marketing/designs/grand-theatre-premiere/opening-v4.mp4",
+        "poster": "/marketing/designs/grand-theatre-premiere/envelope-v4-640.webp",
         "width": 390,
         "height": 844,
-        "seconds": 8.6,
-        "bytes": 463642
+        "seconds": 8.37,
+        "bytes": 444377
       }
     },
     "orient-express-voyage": {
@@ -1996,9 +1996,9 @@
           "width": 640,
           "height": 1385,
           "files": {
-            "320": "/marketing/designs/orient-express-voyage/envelope-v3-320.webp",
-            "480": "/marketing/designs/orient-express-voyage/envelope-v3-480.webp",
-            "640": "/marketing/designs/orient-express-voyage/envelope-v3-640.webp"
+            "320": "/marketing/designs/orient-express-voyage/envelope-v4-320.webp",
+            "480": "/marketing/designs/orient-express-voyage/envelope-v4-480.webp",
+            "640": "/marketing/designs/orient-express-voyage/envelope-v4-640.webp"
           }
         },
         "home": {
@@ -2057,12 +2057,12 @@
         }
       },
       "opening": {
-        "file": "/marketing/designs/orient-express-voyage/opening-v3.mp4",
-        "poster": "/marketing/designs/orient-express-voyage/envelope-v3-640.webp",
+        "file": "/marketing/designs/orient-express-voyage/opening-v4.mp4",
+        "poster": "/marketing/designs/orient-express-voyage/envelope-v4-640.webp",
         "width": 390,
         "height": 844,
-        "seconds": 8.64,
-        "bytes": 439330
+        "seconds": 8.37,
+        "bytes": 439253
       }
     },
     "kintsugi-washi": {
@@ -2221,9 +2221,9 @@
           "width": 640,
           "height": 1385,
           "files": {
-            "320": "/marketing/designs/maison-patisserie/envelope-v3-320.webp",
-            "480": "/marketing/designs/maison-patisserie/envelope-v3-480.webp",
-            "640": "/marketing/designs/maison-patisserie/envelope-v3-640.webp"
+            "320": "/marketing/designs/maison-patisserie/envelope-v4-320.webp",
+            "480": "/marketing/designs/maison-patisserie/envelope-v4-480.webp",
+            "640": "/marketing/designs/maison-patisserie/envelope-v4-640.webp"
           }
         },
         "home": {
@@ -2282,12 +2282,12 @@
         }
       },
       "opening": {
-        "file": "/marketing/designs/maison-patisserie/opening-v3.mp4",
-        "poster": "/marketing/designs/maison-patisserie/envelope-v3-640.webp",
+        "file": "/marketing/designs/maison-patisserie/opening-v4.mp4",
+        "poster": "/marketing/designs/maison-patisserie/envelope-v4-640.webp",
         "width": 390,
         "height": 844,
-        "seconds": 9.16,
-        "bytes": 428398
+        "seconds": 8.37,
+        "bytes": 397877
       }
     },
     "celestial-observatory": {
@@ -2296,9 +2296,9 @@
           "width": 640,
           "height": 1385,
           "files": {
-            "320": "/marketing/designs/celestial-observatory/envelope-v3-320.webp",
-            "480": "/marketing/designs/celestial-observatory/envelope-v3-480.webp",
-            "640": "/marketing/designs/celestial-observatory/envelope-v3-640.webp"
+            "320": "/marketing/designs/celestial-observatory/envelope-v4-320.webp",
+            "480": "/marketing/designs/celestial-observatory/envelope-v4-480.webp",
+            "640": "/marketing/designs/celestial-observatory/envelope-v4-640.webp"
           }
         },
         "home": {
@@ -2357,12 +2357,12 @@
         }
       },
       "opening": {
-        "file": "/marketing/designs/celestial-observatory/opening-v3.mp4",
-        "poster": "/marketing/designs/celestial-observatory/envelope-v3-640.webp",
+        "file": "/marketing/designs/celestial-observatory/opening-v4.mp4",
+        "poster": "/marketing/designs/celestial-observatory/envelope-v4-640.webp",
         "width": 390,
         "height": 844,
-        "seconds": 8.56,
-        "bytes": 602619
+        "seconds": 9.2,
+        "bytes": 699427
       }
     },
     "azulejo-mosaic": {
@@ -2371,9 +2371,9 @@
           "width": 640,
           "height": 1385,
           "files": {
-            "320": "/marketing/designs/azulejo-mosaic/envelope-v3-320.webp",
-            "480": "/marketing/designs/azulejo-mosaic/envelope-v3-480.webp",
-            "640": "/marketing/designs/azulejo-mosaic/envelope-v3-640.webp"
+            "320": "/marketing/designs/azulejo-mosaic/envelope-v4-320.webp",
+            "480": "/marketing/designs/azulejo-mosaic/envelope-v4-480.webp",
+            "640": "/marketing/designs/azulejo-mosaic/envelope-v4-640.webp"
           }
         },
         "home": {
@@ -2432,12 +2432,12 @@
         }
       },
       "opening": {
-        "file": "/marketing/designs/azulejo-mosaic/opening-v3.mp4",
-        "poster": "/marketing/designs/azulejo-mosaic/envelope-v3-640.webp",
+        "file": "/marketing/designs/azulejo-mosaic/opening-v4.mp4",
+        "poster": "/marketing/designs/azulejo-mosaic/envelope-v4-640.webp",
         "width": 390,
         "height": 844,
-        "seconds": 9.32,
-        "bytes": 528821
+        "seconds": 8.4,
+        "bytes": 524486
       }
     },
     "sky-lantern-festival": {
@@ -2446,9 +2446,9 @@
           "width": 640,
           "height": 1385,
           "files": {
-            "320": "/marketing/designs/sky-lantern-festival/envelope-v3-320.webp",
-            "480": "/marketing/designs/sky-lantern-festival/envelope-v3-480.webp",
-            "640": "/marketing/designs/sky-lantern-festival/envelope-v3-640.webp"
+            "320": "/marketing/designs/sky-lantern-festival/envelope-v4-320.webp",
+            "480": "/marketing/designs/sky-lantern-festival/envelope-v4-480.webp",
+            "640": "/marketing/designs/sky-lantern-festival/envelope-v4-640.webp"
           }
         },
         "home": {
@@ -2507,12 +2507,12 @@
         }
       },
       "opening": {
-        "file": "/marketing/designs/sky-lantern-festival/opening-v3.mp4",
-        "poster": "/marketing/designs/sky-lantern-festival/envelope-v3-640.webp",
+        "file": "/marketing/designs/sky-lantern-festival/opening-v4.mp4",
+        "poster": "/marketing/designs/sky-lantern-festival/envelope-v4-640.webp",
         "width": 390,
         "height": 844,
-        "seconds": 8.6,
-        "bytes": 437451
+        "seconds": 8.8,
+        "bytes": 502025
       }
     },
     "music-box-ballerina": {
@@ -2521,9 +2521,9 @@
           "width": 640,
           "height": 1385,
           "files": {
-            "320": "/marketing/designs/music-box-ballerina/envelope-v3-320.webp",
-            "480": "/marketing/designs/music-box-ballerina/envelope-v3-480.webp",
-            "640": "/marketing/designs/music-box-ballerina/envelope-v3-640.webp"
+            "320": "/marketing/designs/music-box-ballerina/envelope-v4-320.webp",
+            "480": "/marketing/designs/music-box-ballerina/envelope-v4-480.webp",
+            "640": "/marketing/designs/music-box-ballerina/envelope-v4-640.webp"
           }
         },
         "home": {
@@ -2582,12 +2582,12 @@
         }
       },
       "opening": {
-        "file": "/marketing/designs/music-box-ballerina/opening-v3.mp4",
-        "poster": "/marketing/designs/music-box-ballerina/envelope-v3-640.webp",
+        "file": "/marketing/designs/music-box-ballerina/opening-v4.mp4",
+        "poster": "/marketing/designs/music-box-ballerina/envelope-v4-640.webp",
         "width": 390,
         "height": 844,
-        "seconds": 9.36,
-        "bytes": 475931
+        "seconds": 8.4,
+        "bytes": 423256
       }
     }
   },

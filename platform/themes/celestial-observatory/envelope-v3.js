@@ -1,4 +1,4 @@
-const ENVELOPE_PROFILE={"id":"celestial-observatory","index":7,"kind":"crescent-observatory","duration":6100,"parts":["left","right"],"ratio":1.03734,"pocket":false};
+const ENVELOPE_PROFILE={"id":"celestial-observatory","index":7,"kind":"crescent-observatory","duration":6000,"parts":["left","right"],"ratio":1.03734,"pocket":false,"revealAt":2300,"liftAt":3100,"fadeAt":3500};
 (() => {
  'use strict';
  const page=document.querySelector('main[data-opening]');if(!page)return;
@@ -8,7 +8,7 @@ const ENVELOPE_PROFILE={"id":"celestial-observatory","index":7,"kind":"crescent-
  const keys=['invite:opened','invite:envelope-v3:opened'];
  function remember(open){try{for(const k of keys)open?sessionStorage.setItem(k+suffix,'1'):sessionStorage.removeItem(k+suffix);sessionStorage.removeItem('invite:arrive'+suffix)}catch{}}
  let state=root.classList.contains('is-opened')?'opened':'closed',animations=[],clock=null,token=0,timer=null;
- const initial='translateY(-50%) scale(.50)',final='translateY(-50%) scale(1)';
+ let initial='translateY(-50%) scale(.30)';const final='translateY(-50%) scale(1)';
  function status(next){state=next;page.dataset.openingState=next;stage.setAttribute('aria-disabled','false');stage.setAttribute('aria-label',next==='playing'?'Close the invitation':next==='opened'?'Enter the invitation':'Open the invitation');cancel.hidden=next!=='playing';}
  function clear(){token++;clearTimeout(timer);timer=null;for(const a of animations)a.cancel();animations=[];clock=null;slot.style.zIndex='';stage.removeAttribute('aria-busy');delete page.dataset.openingPhase;}
  function reset(){clear();root.classList.remove('is-opened');status('closed');remember(false);}
@@ -16,6 +16,14 @@ const ENVELOPE_PROFILE={"id":"celestial-observatory","index":7,"kind":"crescent-
  function A(node,kf,delay,duration,easing='cubic-bezier(.42,0,.18,1)'){if(!node)return;const a=node.animate(kf,{delay,duration,easing,fill:'both'});animations.push(a);return a;}
  function hinge(name,to,delay,duration){return A(q('[data-piece="'+name+'"]'),[{transform:'none'},{transform:to}],delay,duration);}
  function build(){
+  const object=q('.v4-object'),lining=q('.v3-housing');
+  const fit=Math.min(.48,lining.offsetHeight/card.offsetHeight*.66,lining.offsetWidth/card.offsetWidth*.66);
+  initial='translateY(-50%) scale('+fit+')';
+  const compact=P.index===1?.46:[2,7,8].includes(P.index)?.58:P.index===3?.72:.78;
+  const shift=P.index===1?'translateX(16%) ':'';
+  A(object,[{transform:'scale(1)'},{transform:shift+'scale('+compact+')'}],0,650);
+  // Discrete compositor animation is reversible; unlike a setTimeout it tracks seeking and closing.
+  A(slot,[{zIndex:1},{zIndex:6}],0,P.liftAt,'steps(1,end)');
   A(q('.v3-closed'),[{opacity:1},{opacity:0}],0,100,'linear');
   A(q('.v3-fastening'),[{transform:'none',opacity:1},{transform:'translate(18%,-12%) rotate(14deg)',opacity:0}],60,580);
   A(q('.env-head'),[{opacity:1,transform:'translateY(0)'},{opacity:0,transform:'translateY(-12px)'}],120,500);
@@ -35,14 +43,14 @@ const ENVELOPE_PROFILE={"id":"celestial-observatory","index":7,"kind":"crescent-
    case 9:hinge('lid','rotateX(155deg)',350,1000);reveal=1050;break;
    case 10:hinge('lid','rotateX(152deg)',280,1900);reveal=1550;break;
   }
-  const gate=[1,2,4,5,7,8,10].includes(P.index);
-  const mid=P.index===3?'translate(44%,-30%) scale(.57)':gate?'translateY(-50%) scale(.58)':'translateY(-85%) scale(.57)';
-  A(card,[{transform:initial,opacity:0},{transform:initial,opacity:1,offset:.08},{transform:mid,opacity:1,offset:.63},{transform:final,opacity:1}],reveal,settle-reveal);
-  // The card stays behind the pocket until clear of its lip, then comes to the foreground.
-  for(const n of page.querySelectorAll('.v3-housing,.v3-piece>img'))A(n,[{opacity:1},{opacity:0}],settle-900,850,'ease-in-out');
+  reveal=P.revealAt;settle=4700;
+  const exit=P.index===3?'translate(48%,-50%) scale(.56)':P.index===9?'translateY(-130%) scale(.58)':'translateY(-110%) scale(.58)';
+  // First clear the physical opening, then bring the entire card forward. Never show half a card through a lid.
+  A(card,[{transform:initial,opacity:0},{transform:initial,opacity:1,offset:.08},{transform:exit,opacity:1,offset:.58},{transform:exit,opacity:1,offset:.72},{transform:final,opacity:1}],reveal,settle-reveal);
+  for(const n of page.querySelectorAll('.v3-housing,.v3-piece>img'))A(n,[{opacity:1},{opacity:0}],P.fadeAt,850,'ease-in-out');
   clock=A(stage,[{opacity:1},{opacity:1}],0,P.duration,'linear');
   const id=token;
-  timer=setTimeout(()=>{if(id!==token||state!=='playing')return;slot.style.zIndex='6';page.dataset.openingPhase='settled';},settle);
+  timer=setTimeout(()=>{if(id!==token||state!=='playing')return;page.dataset.openingPhase='settled';},settle);
   clock.onfinish=()=>{if(id===token&&state==='playing')go();};
  }
  async function play(){if(state==='opened'){go();return}if(state!=='closed')return;
