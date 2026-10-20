@@ -67,7 +67,7 @@ import etsy_upload as eu  # noqa: E402  (design table, --designs parsing, theme 
 
 SOURCE = REPO / "docs" / "19_ALICI_YOLCULUGU.md"
 START_MARK, END_MARK = "<!-- g091:start-here:start -->", "<!-- g091:start-here:end -->"
-BASE_URL = os.environ.get("GUIDE_BASE_URL", "https://xn--bkestudo-zkb.com")
+BASE_URL = os.environ.get("GUIDE_BASE_URL", "https://bkestudio.com")
 DESIGN_COPY = REPO / "platform" / "lib" / "marketing" / "designs.ts"
 MAKE_QR = TOOLS / "make_qr.py"
 QR_SCALE = 20  # make_qr.py default; listing_kit.qr_matches compares at this scale

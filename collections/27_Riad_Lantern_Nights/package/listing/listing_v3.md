@@ -13,13 +13,13 @@ design goes live).
 | Item | Status on 2026-10-17 |
 |---|---|
 | Design status | **coming**: not on `/start` in production, not on the sales site. The opening and every page work in a local production build, but the doors, courtyard, card, wall and tiles are **interim** pieces cut from other designs' GPT images (`build_images.py`); this design's own parts are ordered in `assets/gpt/GPT_PROMPTS.md`. Do not publish before they are in and the design is `live`. |
-| Start link `https://xn--bkestudo-zkb.com/start?theme=riad-lantern-nights` | **Not live** (the design is `coming`; production does not have this theme yet). |
-| Live demo `https://xn--bkestudo-zkb.com/start/demo/riad-lantern-nights` (in the description under TRY THE LIVE DEMO) | **Not live** (same reason). Locally it renders (G165 tests). |
+| Start link `https://bkestudio.com/start?theme=riad-lantern-nights` | **Not live** (the design is `coming`; production does not have this theme yet). |
+| Live demo `https://bkestudio.com/start/demo/riad-lantern-nights` (in the description under TRY THE LIVE DEMO) | **Not live** (same reason). Locally it renders (G165 tests). |
 | Sample photos | **None yet** (PAKET 2 for the fictional couple Leila & Adrian is ordered). Screens would show neutral placeholders. |
 | Questions & answers, RSVP questions, music, map and directions, Excel / Google Sheets | Platform features, the same for every design; see the 01–21 listings for their live-site status. **Not tried with this design on the live site.** |
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** All phone checks are Chromium mobile emulation (theme README). |
 | Edit link by email | **Not built.** The buyer copies the link or uses "Email it to myself" (their own mail app). |
-| Web address | `xn--bkestudo-zkb.com` (bkestudıo.com: bought and connected by the user, served by Vercel). G189 (2026-10-18) moved the start link, demo, START HERE guide and QR codes here from the earlier temporary Vercel address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
+| Web address | `bkestudio.com` (primary since 2026-10-19; the earlier `xn--bkestudo-zkb.com` (bkestudıo.com) links redirect here with a permanent 308). G190 (2026-10-20) moved the start link, demo, START HERE guide and QR codes to this address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
 | Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com**. |
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, quantity | **Price not decided for this design** ([PRICE]; designs 01–21 sell at 1,460 TL). Quantity: 999, Etsy's maximum (the shop's rule for every design). |
@@ -49,7 +49,7 @@ Carved cedar double doors in a night-teal courtyard wall, a brass lantern's warm
 
 TRY THE LIVE DEMO
 See the doors open on your own phone before you buy (sample names):
-https://xn--bkestudo-zkb.com/start/demo/riad-lantern-nights
+https://bkestudio.com/start/demo/riad-lantern-nights
 Copy the link into your phone's browser. [VERIFY: demo live and showing this design's final parts]
 
 WHAT YOU GET
@@ -212,7 +212,7 @@ No. It is a digital product.
 
 ## 8. Etsy's automatic messages (shop-wide, the same for every design)
 
-Already entered in Shop Manager (docs/20 §7.1); they link the design chooser `https://xn--bkestudo-zkb.com/start` and need
+Already entered in Shop Manager (docs/20 §7.1); they link the design chooser `https://bkestudio.com/start` and need
 no change for this design (see the 01–21 listings §8 for the text).
 
 ## 9. After the sale

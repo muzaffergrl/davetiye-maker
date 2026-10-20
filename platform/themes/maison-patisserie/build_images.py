@@ -146,7 +146,16 @@ def knot_split(bow: Image.Image):
     return parts, (int(k0), int(k1))
 
 
+# Emekli (2026-10-20): tema 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (docs/qa/2026-10-18-*.md,
+# docs/qa/2026-10-19-*.md); img/ artık bu betiğin çıktısı değil. Bu betik img/'yi silip eski geçici kesimi kurar ve
+# yeni kapak / iç sayfa görsellerini yok eder, bu yüzden çalışmaz. tools/gpt_yerlestir.py bu adımı atlar.
+EMEKLI = "tema 2026-10-18/19 yeniden kurulumuyla değişti; img/ elle yönetiliyor (silmemek için çalışmaz)"
+
+
 def main() -> int:
+    if EMEKLI:
+        print(f"build_images.py çalıştırılmadı: {EMEKLI}", file=sys.stderr)
+        return 2
     manifest: dict = {"_note": "G166 build. INTERIM layers (no Maison Pâtisserie GPT part exists yet): rectangular crops "
                       "of repository GPT paper/satin toned to the palette, the ivory bow toned rose and cut at its knot "
                       "(see build_images.py). PAKET 5 parts in collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md "

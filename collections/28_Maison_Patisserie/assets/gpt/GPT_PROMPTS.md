@@ -1,12 +1,6 @@
 # GPT görsel istekleri — Tasarım 28 · Maison Pâtisserie
 
-> **Instructions for GPT:** Generate the parts below in order and in ONE chat: PAKET 5 (website layers) first, then
-> PAKET 2 (sample photos of the fictional couple), then PAKET 6 (printable invitation backgrounds). Skip W2.14–W2.15
-> (marked "BU TURDA ÜRETME"). Use each English
-> prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under
-> "Kaydet". **No text, letters, numbers, logos, monograms, price tags or watermarks in any image.** Give W2.1
-> `box_base.png` as the style and position reference of every later stage part, and W2.10 `bg_page.png` as the palette
-> reference of everything else.
+> **Instructions for GPT:** This design ("Maison Pâtisserie") was redesigned on 2026-10-18/19: its website is warm ivory stationery paper with abundant photorealistic flowers in the corners, opened from a themed cover object. The old website parts (PAKET 5) are NO LONGER needed — do not generate them. Generate PAKET 3 (the Etsy listing scenes) and PAKET 6 (the printed invitation grounds) in ONE chat; PAKET 2 (sample photos) is optional and comes last. Before the first image, attach these two images from the repository as the style reference of every image: `platform/themes/maison-patisserie/img/bg_scene-1024.webp` (the website background: paper, flowers, colors, light) and `platform/themes/maison-patisserie/img/v3-closed-880.webp` (the design's closed cover object). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". No text, letters, numbers, logos, monograms or watermarks in any image.
 
 Bu dosya Maison Pâtisserie'nin **bütün görsellerinin** tek kaynağıdır (G166, docs/24 #28). Tasarım `tools/katalog.py`'de
 `EK_TEMALAR` dalga kaydıyla duruyor (6 eksen + hareket imzası); PAKET üreteçlerine girmediği için dosya elle yazıldı.
@@ -31,7 +25,9 @@ düğümden kesiliyor (çizim yok). Aşağıdaki parçalar `assets/gpt/parts/` i
 
 ---
 
-## PAKET 5 — Website katmanları (YAZI YOK)
+## PAKET 5 — Website katmanları (YAZI YOK) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+
+> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
 
 Tek görselde tek nesne, düşen gölge yok (site ekler), ışık sol üstten, şeffaflar **gerçek alfa**. **Sahne parçaları
 W2.1–W2.8 aynı 1024 × 1024 tuvalde, kutunun TAM ÜSTTEN görünüşüyle ve aynı konumda** çizilir: kutu/kapak tuvalin
@@ -171,7 +167,7 @@ Prova: `python3 tools/gpt_kuru_deneme.py --tema maison-patisserie --sekil collec
 
 ---
 
-## PAKET 2 — Örnek fotoğraflar (kurgu çift Camille & Oliver; gerçek kişiye benzemesin)
+## PAKET 2 — Örnek fotoğraflar (kurgu çift Camille & Oliver; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
 
 Ortak: photorealistic fine-art wedding photography, soft natural light, pastel pistachio / rose / cream palette, gentle
 film grain. Kurgu bir çift, otuzlu yaşların başında; ünlü ya da gerçek bir kişiye benzemesin. Yazı, logo, tabela yok.
@@ -217,48 +213,37 @@ Gelince: `content.demo.json` (koleksiyon + tema kopyası) `media` alanlarına te
 
 ---
 
-## PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK)
+## PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 
-Bugün basılı davetiye geçici düzende (`platform/lib/print/layouts.ts` `'maison-patisserie'` → `composed`: sitenin krem
-kâğıdı `bg_page` + saten fiyonk `bow`). Yazı kutuları (kesim çizgisinin yüzdesi; üst, sağ, alt, sol): **ön `[27, 13, 16, 13]`,
-arka `[21, 12, 10, 12]`**. Aşağıdaki iki zemin bu kutuları boş bırakacak biçimde istenir (G167). Baskı düzeni 5×7 ve A5
-için **aynı** zemini `cover` ile kullanır (tek zemin çifti; A5'te ~%1,5 kenar kırpılır), bu yüzden ayrı A5 zemini istenmez.
-
-Ölçü **taşma payı dahil** 5.25 × 7.25 in @ 300 ppi = **1575 × 2175 px** (kesim çizgisi her kenardan 38 px içeride).
-Üretici bu ölçüyü veremezse aynı yönde en büyük dikey ölçüyü versin (ör. 1024 × 1536) ve çıktısında yazsın; Claude
-büyütme yapmaz, gerçek ppi'yi `layouts.ts` notuna yazar. 2:3 gelirse `cover` sol ve sağdan ~%4 kırpar: bu yüzden **hiçbir
-öğe sol/sağ kenara görüntü genişliğinin %10'undan, üst/alt kenara yüksekliğin %5'inden yakın olmasın.**
+> **Neden yeniden yazıldı (2026-10-20):** website 18–19 Ekim'de fildişi kâğıt + köşe çiçekleri görünümüne geçti; eski baskı prompt'ları eski görünümü (ve artık olmayan PAKET 5 parçalarını) istiyordu. `platform/lib/print/layouts.ts` `'maison-patisserie'` bloğunun geçici kaynakları yeniden kurulumda `img/`'den silindi: panel şu an `public/print/maison-patisserie/`'deki eski çıktıyı (eski görünüm) basıyor ve `build-print-assets` bu tema için yeniden koşamaz. Bu zeminler gelince:
+> Platform her yüz için **tek** zemin kullanır ve onu taşma payıyla `cover` olarak yayar (5×7 ve A5 aynı zeminden).
+> 1. `layouts.ts` `'maison-patisserie'` bloğunda `sources` → bu zeminler (`print/invitation_front.png` + `print/invitation_back.png`), `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }`.
+> 2. Zemin artık **açık fildişi**: `ink` / `accent` koyu tonlara (temanın site metin rengi) alınır; açık mürekkep kalmaz.
+> 3. Metin kutuları (`front` / `back`) gerçek görselde ölçülür (G149; süsten ~%2 açıklık), `node --test tests/g149-print-layout.test.ts`.
+> 4. `cd platform && node scripts/build-print-assets.ts --theme maison-patisserie`; `public/print/maison-patisserie/`'deki artık kaynak olmayan eski dosyalar silinir; 5×7 ve A5 örnek PDF'ine göz atılır.
+> Ek görsel (her iki yüz için sohbetin başında): `platform/themes/maison-patisserie/img/bg_scene-1024.webp`.
 
 #### P6.1 Ön yüz
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/print/invitation_front.png` · **1575 × 2175 px** (5.25 × 7.25 in @ 300 ppi) · opak
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/print/invitation_front.png` · 1575×2175 px (300 ppi), opak
 
 ```
-A full-bleed printable wedding invitation background, front side, portrait, in pastel watercolour: warm cream cotton paper (#FBF5EC) with fine grain everywhere. At the top centre a photorealistic rose-pink satin bow (#E8B4B8) resting on a short horizontal length of satin ribbon; the bow and ribbon stay between 6% and 24% of the image height and within the middle 50% of the width. At the bottom a slim, soft pastel watercolour garland of pistachio macarons, tiny sugar pearls and a wisp of ivory tulle, lying horizontally between 87% and 95% of the image height and within the middle 80% of the width. A very thin gold foil hairline frame inset 7% from every edge. The whole area from 12% to 88% of the width and from 25% to 86% of the height is completely EMPTY, calm cream paper (no flowers, crumbs, pearls, shading or frame lines in it) because dark text is printed there. Nothing closer than 10% of the width to the left or right edge and 5% of the height to the top or bottom edge except the plain paper. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575 x 2175 px.
+A full-bleed printable wedding invitation ground for the "Maison Pâtisserie" design, front side, portrait, seen perfectly flat and straight on, 1575 × 2175 px at 300 ppi (it is trimmed later). Match the attached website background (bg_scene-1024.webp) exactly in style: the same warm ivory, softly textured stationery paper running edge to edge and the same pistachio sage, cream and soft blush, garden roses, pearl ribbon and delicate French patisserie rococo ornament, in the same photorealistic stationery-photography finish with soft light from the top-left. Place the decoration ONLY in two places: an abundant arrangement gathered at the top-left corner and trailing along the top edge, staying entirely within the top 16% of the height, and a smaller matching arrangement gathered at the bottom-right corner, staying entirely within the bottom 14% of the height. A very fine antique-gold foil hairline frame inset about 6% from every edge. Keep every ornament at least 4% inside the image edges. The whole rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm ivory paper (the names, date and venue are printed there in dark ink): no petal, leaf, line, shadow or stain in it. No envelope, no card, no frame object, no people. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575 × 2175 px.
 ```
-Kontrol: tam taşma; x %12–88 × y %25–86 tamamen boş; fiyonk y %6–24; çelenk y %87–95; kenarlarda yalnız kâğıt; yazı yok.
+Kontrol: tam taşma fildişi kâğıt (site zeminiyle aynı); çiçekler yalnız üst %16 (sol üst) ve alt %14 (sağ alt); %18–84 yükseklik × %10–90 genişlik tamamen boş; ince altın çerçeve; yazı yok; 1575×2175.
 
 #### P6.2 Arka yüz
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/print/invitation_back.png` · **1575 × 2175 px** · opak
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/print/invitation_back.png` · 1575×2175 px (300 ppi), opak
 
 ```
-The back side of the same printable invitation (give invitation_front.png as the reference): full-bleed cream cotton paper (#FBF5EC) with the same fine grain and the same thin gold foil hairline frame inset 7% from every edge; only a small rose-pink satin bow at the top centre with three tiny sugar pearls beneath it, all between 6% and 19% of the image height and within the middle 30% of the width. Everything from 21% of the height down to the frame, between 12% and 88% of the width, is completely EMPTY paper for the schedule and a QR code. No text, letters, numbers, logos or watermarks. Print quality, 1575 x 2175 px.
+The back side of the same "Maison Pâtisserie" invitation (give invitation_front.png as the reference image): portrait, full bleed, perfectly flat, 1575 × 2175 px at 300 ppi, the same warm ivory stationery paper edge to edge and the same very fine antique-gold foil hairline frame inset about 6% from every edge. Decoration ONLY a slim spray of the same flowers and foliage centred along the top edge, staying entirely within the top 11% of the height and at least 4% inside the image edges. Everything from 13% to 92% of the height and from 10% to 90% of the width is COMPLETELY EMPTY paper for the schedule, the details and a QR code: no petal, line, shadow or stain. Same style, colors and light. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1575 × 2175 px.
 ```
-Kontrol: ön yüzle aynı kâğıt ve çerçeve; fiyonk + inciler y %6–19; geri kalanı boş; yazı yok.
-
-**Gelince (Claude, `platform/lib/print/layouts.ts` — yalnız `'maison-patisserie'` bloğu):**
-1. `sources` → `{ front: 'print/invitation_front.png', back: 'print/invitation_back.png' }` (koleksiyon `assets/gpt/` göreli).
-2. `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }` (fiyonk artık zeminde;
-   `bow` görseli kalkar). `composed` adı kalır: sayfanın tamamı zemindir, kart parçası yoktur (tasarım 25 ile aynı yol).
-3. `front`/`back` kutularını yeni zemin üzerinde ölç (G149: her süsten ~%2 açıklık; zemin yüzdesini kesim yüzdesine çevir:
-   `kesim% = (görüntü_px − 38) / 1499` yatay, `/ 2099` dikey). Prompt'a uyduysa kutular aynı kalır
-   (ön `[27, 13, 16, 13]`, arka `[21, 12, 10, 12]`); süs içeri taşıyorsa `bands` ekle ya da kutuyu daralt.
-4. `cd platform && node scripts/build-print-assets.ts --theme maison-patisserie` (çıktı `public/print/maison-patisserie/front.webp`,
-   `back.webp`; eski `paper.webp`/`bow.webp` dosyalarını sil), `node --test tests/g149-print-layout.test.ts tests/theme-maison-patisserie.test.ts`,
-   5×7 ve A5 örnek PDF'ine göz at; gerçek ppi'yi blok yorumuna yaz.
+Kontrol: ön yüzle aynı kâğıt ve çerçeve; çiçek yalnız üst %11'de ince dal; %13–92 × %10–90 boş; yazı yok; 1575×2175.
 
 ---
 
-## Komutlar (Claude, parçalar gelince)
+## Komutlar (Claude, parçalar gelince) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+
+> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
 
 ```bash
 # repo kökünden

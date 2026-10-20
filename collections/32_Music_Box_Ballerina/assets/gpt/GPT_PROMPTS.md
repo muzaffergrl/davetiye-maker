@@ -1,11 +1,6 @@
 # GPT görsel istekleri — Tasarım 32 · Music Box Ballerina
 
-> **Instructions for GPT:** Generate the parts below in order and in ONE chat: PAKET 5 (website layers) first, then
-> PAKET 2 (sample photos of the fictional couple), then PAKET 6 (printable invitation backgrounds). Use each English
-> prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under
-> "Kaydet". **No text, letters, numbers, logos, monograms, price tags or watermarks in any image.** Give W2.3
-> `box_body.png` as the style and position reference of every later stage part, W2.6 `dancer.png` as the reference of
-> both turn strips, and W2.11 `bg_page.png` as the palette reference of everything else.
+> **Instructions for GPT:** This design ("Music Box Ballerina") was redesigned on 2026-10-18/19: its website is warm ivory stationery paper with abundant photorealistic flowers in the corners, opened from a themed cover object. The old website parts (PAKET 5) are NO LONGER needed — do not generate them. Generate PAKET 3 (the Etsy listing scenes) and PAKET 6 (the printed invitation grounds) in ONE chat; PAKET 2 (sample photos) is optional and comes last. Before the first image, attach these two images from the repository as the style reference of every image: `platform/themes/music-box-ballerina/img/bg_scene-1024.webp` (the website background: paper, flowers, colors, light) and `platform/themes/music-box-ballerina/img/v3-closed-880.webp` (the design's closed cover object). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". No text, letters, numbers, logos, monograms or watermarks in any image.
 
 Bu dosya Music Box Ballerina'nın **bütün görsellerinin** tek kaynağıdır (G171, docs/24 #32, 2. dalga). Tasarım
 `tools/katalog.py`'de `EK_TEMALAR` dalga kaydıyla duruyor (6 eksen + hareket imzası); PAKET üreteçlerine girmediği için
@@ -33,7 +28,9 @@ Aşağıdaki parçalar `assets/gpt/parts/` içine geldikçe betik **katman katma
 
 ---
 
-## PAKET 5 — Website katmanları (YAZI YOK)
+## PAKET 5 — Website katmanları (YAZI YOK) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+
+> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
 
 Tek görselde tek nesne, düşen gölge yok (site ekler), ışık sol üstten, şeffaflar **gerçek alfa**. **Sahne parçaları
 W2.1–W2.5 aynı 1024 × 1536 dikey tuvalde, kutunun TAM ÖNDEN (göz hizasının biraz üstünden, üst yüzü ince bir şerit
@@ -163,7 +160,7 @@ uyarı yazar. Prova: `python3 tools/gpt_kuru_deneme.py --tema music-box-ballerin
 
 ---
 
-## PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin)
+## PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
 
 Ortak: photorealistic fine-art wedding photography, soft natural light, pastel rose-quartz / blush / cream palette with a
 touch of soft gold, gentle film grain. Kurgu bir çift, otuzlu yaşların başında; ünlü ya da gerçek bir kişiye benzemesin.
@@ -210,49 +207,37 @@ koleksiyondan kendisi bulur (`scripts/lib/theme-env.ts`).
 
 ---
 
-## PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK)
+## PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 
-Bugün basılı davetiye geçici düzende (`platform/lib/print/layouts.ts` `'music-box-ballerina'` → `composed`: sitenin
-pudra kâğıdı `bg_page` + gül yaprağı `petal`). Yazı kutuları (kesim çizgisinin yüzdesi; üst, sağ, alt, sol): **ön
-`[24, 13, 14, 13]`, arka `[12, 12, 20, 12]`**. Aşağıdaki iki zemin bu kutuları boş bırakacak biçimde istenir. Baskı düzeni
-5×7 ve A5 için **aynı** zemini `cover` ile kullanır (A5'te ~%1,5 kenar kırpılır), bu yüzden ayrı A5 zemini istenmez.
-
-Ölçü **taşma payı dahil** 5.25 × 7.25 in @ 300 ppi = **1575 × 2175 px** (kesim çizgisi her kenardan 38 px içeride).
-Üretici bu ölçüyü veremezse aynı yönde en büyük dikey ölçüyü versin (ör. 1024 × 1536) ve çıktısında yazsın; Claude
-büyütme yapmaz, gerçek ppi'yi `layouts.ts` notuna yazar. A5 (148 × 210 mm, taşmalı 154 × 216 mm @ 300 ppi = 1819 × 2551 px)
-aynı zeminden `cover` ile basılır. **Hiçbir öğe sol/sağ kenara görüntü genişliğinin %10'undan, üst/alt kenara yüksekliğin
-%5'inden yakın olmasın.**
+> **Neden yeniden yazıldı (2026-10-20):** website 18–19 Ekim'de fildişi kâğıt + köşe çiçekleri görünümüne geçti; eski baskı prompt'ları eski görünümü (ve artık olmayan PAKET 5 parçalarını) istiyordu. `platform/lib/print/layouts.ts` `'music-box-ballerina'` bloğunun geçici kaynakları yeniden kurulumda `img/`'den silindi: panel şu an `public/print/music-box-ballerina/`'deki eski çıktıyı (eski görünüm) basıyor ve `build-print-assets` bu tema için yeniden koşamaz. Bu zeminler gelince:
+> Platform her yüz için **tek** zemin kullanır ve onu taşma payıyla `cover` olarak yayar (5×7 ve A5 aynı zeminden).
+> 1. `layouts.ts` `'music-box-ballerina'` bloğunda `sources` → bu zeminler (`print/invitation_front.png` + `print/invitation_back.png`), `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }`.
+> 2. Zemin artık **açık fildişi**: `ink` / `accent` koyu tonlara (temanın site metin rengi) alınır; açık mürekkep kalmaz.
+> 3. Metin kutuları (`front` / `back`) gerçek görselde ölçülür (G149; süsten ~%2 açıklık), `node --test tests/g149-print-layout.test.ts`.
+> 4. `cd platform && node scripts/build-print-assets.ts --theme music-box-ballerina`; `public/print/music-box-ballerina/`'deki artık kaynak olmayan eski dosyalar silinir; 5×7 ve A5 örnek PDF'ine göz atılır.
+> Ek görsel (her iki yüz için sohbetin başında): `platform/themes/music-box-ballerina/img/bg_scene-1024.webp`.
 
 #### P6.1 Ön yüz
-**Kaydet:** `collections/32_Music_Box_Ballerina/assets/gpt/print/invitation_front.png` · **1575 × 2175 px** (5.25 × 7.25 in @ 300 ppi) · opak
+**Kaydet:** `collections/32_Music_Box_Ballerina/assets/gpt/print/invitation_front.png` · 1575×2175 px (300 ppi), opak
 
 ```
-A full-bleed printable wedding invitation background, front side, portrait, soft and pastel: warm blush cotton paper (#F7E4E2) with fine grain everywhere. At the top centre a small photorealistic porcelain music box ballerina figurine (as dancer.png, not a real person) standing on a tiny soft-gold pedestal with two or three blush rose petals at her feet; all of it between 6% and 21% of the image height and within the middle 30% of the width. At the bottom a slim horizontal spray of pale pink rose petals and a wisp of tulle between 88% and 95% of the image height, within the middle 70% of the width. A very thin soft-gold hairline frame inset 7% from every edge. The whole area from 12% to 88% of the width and from 23% to 87% of the height is completely EMPTY, calm blush paper (no petals, shading or frame lines in it) because dark text is printed there. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575 x 2175 px.
+A full-bleed printable wedding invitation ground for the "Music Box Ballerina" design, front side, portrait, seen perfectly flat and straight on, 1575 × 2175 px at 300 ppi (it is trimmed later). Match the attached website background (bg_scene-1024.webp) exactly in style: the same warm ivory, softly textured stationery paper running edge to edge and the same powder blush pink, ivory and champagne gold, delicate garden roses, silk ribbon, restrained antique music box filigree, in the same photorealistic stationery-photography finish with soft light from the top-left. Place the decoration ONLY in two places: an abundant arrangement gathered at the top-left corner and trailing along the top edge, staying entirely within the top 16% of the height, and a smaller matching arrangement gathered at the bottom-right corner, staying entirely within the bottom 14% of the height. A very fine antique-gold foil hairline frame inset about 6% from every edge. Keep every ornament at least 4% inside the image edges. The whole rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm ivory paper (the names, date and venue are printed there in dark ink): no petal, leaf, line, shadow or stain in it. No envelope, no card, no frame object, no people. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575 × 2175 px.
 ```
-Kontrol: tam taşma; x %12–88 × y %23–87 tamamen boş; balerin y %6–21; yapraklar y %88–95; yazı yok.
+Kontrol: tam taşma fildişi kâğıt (site zeminiyle aynı); çiçekler yalnız üst %16 (sol üst) ve alt %14 (sağ alt); %18–84 yükseklik × %10–90 genişlik tamamen boş; ince altın çerçeve; yazı yok; 1575×2175.
 
 #### P6.2 Arka yüz
-**Kaydet:** `collections/32_Music_Box_Ballerina/assets/gpt/print/invitation_back.png` · **1575 × 2175 px** · opak
+**Kaydet:** `collections/32_Music_Box_Ballerina/assets/gpt/print/invitation_back.png` · 1575×2175 px (300 ppi), opak
 
 ```
-The back side of the same printable invitation (give invitation_front.png as the reference): full-bleed blush cotton paper (#F7E4E2) with the same fine grain and the same thin soft-gold hairline frame inset 7% from every edge; only a small brass music box wind-up key lying on its side with two blush rose petals at the bottom centre, all between 83% and 93% of the image height and within the middle 30% of the width. Everything from 11% to 81% of the height, between 12% and 88% of the width, is completely EMPTY paper for the schedule and a QR code. No text, letters, numbers, logos or watermarks. Print quality, 1575 x 2175 px.
+The back side of the same "Music Box Ballerina" invitation (give invitation_front.png as the reference image): portrait, full bleed, perfectly flat, 1575 × 2175 px at 300 ppi, the same warm ivory stationery paper edge to edge and the same very fine antique-gold foil hairline frame inset about 6% from every edge. Decoration ONLY a slim spray of the same flowers and foliage centred along the top edge, staying entirely within the top 11% of the height and at least 4% inside the image edges. Everything from 13% to 92% of the height and from 10% to 90% of the width is COMPLETELY EMPTY paper for the schedule, the details and a QR code: no petal, line, shadow or stain. Same style, colors and light. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1575 × 2175 px.
 ```
-Kontrol: ön yüzle aynı kâğıt ve çerçeve; anahtar + yapraklar y %83–93; geri kalanı boş; yazı yok.
-
-**Gelince (Claude, `platform/lib/print/layouts.ts` — yalnız `'music-box-ballerina'` bloğu):**
-1. `sources` → `{ front: 'print/invitation_front.png', back: 'print/invitation_back.png' }` (koleksiyon `assets/gpt/` göreli).
-2. `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }` (yaprak görseli
-   kalkar; süs artık zeminde).
-3. `front`/`back` kutularını yeni zemin üzerinde ölç (G149: her süsten ~%2 açıklık; zemin yüzdesini kesim yüzdesine çevir:
-   `kesim% = (görüntü_px − 38) / 1499` yatay, `/ 2099` dikey). Prompt'a uyduysa kutular aynı kalır; süs içeri taşıyorsa
-   `bands` ekle ya da kutuyu daralt.
-4. `cd platform && node scripts/build-print-assets.ts --theme music-box-ballerina` (çıktı `public/print/music-box-ballerina/
-   front.webp`, `back.webp`; eski `paper.webp`/`petal.webp` dosyalarını sil), `node --test tests/g149-print-layout.test.ts
-   tests/theme-music-box-ballerina.test.ts`, 5×7 ve A5 örnek PDF'ine göz at; gerçek ppi'yi blok yorumuna yaz.
+Kontrol: ön yüzle aynı kâğıt ve çerçeve; çiçek yalnız üst %11'de ince dal; %13–92 × %10–90 boş; yazı yok; 1575×2175.
 
 ---
 
-## Komutlar (Claude, parçalar gelince)
+## Komutlar (Claude, parçalar gelince) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+
+> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
 
 ```bash
 # repo kökünden

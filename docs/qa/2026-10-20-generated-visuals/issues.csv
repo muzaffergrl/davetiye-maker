@@ -1,0 +1,33 @@
+﻿id,path,technical_status,technical_details,visual_issues
+81,collections/33_Marigold_Mehndi/assets/gpt/parts/sleeve.png,passed,Özel katman geometrisi; oran ve gerçek alfa kontrolü geçti,approximate_open_area_below_brief_target
+85,collections/33_Marigold_Mehndi/assets/gpt/parts/jharokha.png,failed,1100×1430 şeffaf · pencere %7.7; yeşil pencerenin ortasında şeffaf delik var,Required opaque green portrait window has a transparent centre after repeated imagegen-only repair attempts.
+89,collections/33_Marigold_Mehndi/assets/gpt/parts/garland.png,failed,"oran 1920×819, beklenen 1800×420 oranı",aspect_ratio_mismatch_after_retry
+91,collections/33_Marigold_Mehndi/assets/gpt/parts/card_small.png,failed,#00FF00 foto penceresi yok ya da çok küçük (en büyük yeşil bölge %0.00),green_window_alpha_erased_and_gradient
+92,collections/33_Marigold_Mehndi/assets/gpt/parts/tassel.png,failed,"oran 793×1983, beklenen 300×1000 oranı",aspect_ratio_mismatch_after_retry
+117,collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/veil_inner.png,passed,Özel katman geometrisi; oran ve gerçek alfa kontrolü geçti,approximate_open_area_below_brief_target
+118,collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/card_small.png,failed,1043×1508 şeffaf · pencere %4.4; yeşil pencerenin ortasında şeffaf delik var,green_window_alpha_erased_and_gradient
+122,collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/moon_gate.png,failed,1254×1254 şeffaf · pencere %1.3; yeşil pencerenin ortasında şeffaf delik var,green_window_alpha_erased_and_gradient
+123,collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/peony_band.png,failed,"oran 2172×724, beklenen 1600×300 oranı",aspect_ratio_mismatch_after_retry
+143,collections/35_Highland_Tartan_Thistle/assets/gpt/parts/strap.png,failed,"oran 1113×1413, beklenen 240×1300 oranı",aspect_ratio_mismatch_after_imagegen_retry
+146,collections/35_Highland_Tartan_Thistle/assets/gpt/parts/heather_divider.png,failed,"oran 1983×793, beklenen 1600×260 oranı",aspect_ratio_mismatch_after_imagegen_retry
+150,collections/35_Highland_Tartan_Thistle/assets/gpt/parts/locket_rim.png,failed,1122×1402 şeffaf · pencere %18.9; yeşil pencerenin ortasında şeffaf delik var,green_window_partly_transparent_after_retry; green_window_partly_transparent_after_imagegen_retry
+153,collections/35_Highland_Tartan_Thistle/assets/gpt/parts/card_small.png,failed,#00FF00 foto penceresi yok ya da çok küçük (en büyük yeşil bölge %0.00),green_window_erased_to_alpha
+169,collections/36_Victorian_Glasshouse/assets/gpt/parts/twine.png,failed,"oran 793×1983, beklenen 160×1200 oranı",aspect_ratio_mismatch_after_imagegen_retry
+171,collections/36_Victorian_Glasshouse/assets/gpt/parts/ironwork.png,passed,1536×1024 şeffaf,Side column tips extend into lower45percent clear area; visible alpha>=128 covers0.51percent of that area.
+172,collections/36_Victorian_Glasshouse/assets/gpt/parts/ferns.png,passed,Özel katman geometrisi; oran ve gerçek alfa kontrolü geçti,A few fern tips intrude into the designated clear central upper region; visible alpha>=128 covers0.41percent of that region.
+173,collections/36_Victorian_Glasshouse/assets/gpt/parts/orchid_sprig.png,failed,"oran 2073×758, beklenen 1400×300 oranı",aspect_ratio_mismatch_after_imagegen_retry
+174,collections/36_Victorian_Glasshouse/assets/gpt/parts/specimen_frame.png,failed,#00FF00 foto penceresi yok ya da çok küçük (en büyük yeşil bölge %0.00),green_window_erased_to_alpha
+175,collections/36_Victorian_Glasshouse/assets/gpt/parts/herbarium_label.png,failed,"oran 2172×724, beklenen 1200×360 oranı",aspect_ratio_mismatch
+179,collections/36_Victorian_Glasshouse/assets/gpt/parts/card_small.png,failed,#00FF00 foto penceresi yok ya da çok küçük (en büyük yeşil bölge %0.16); yeşil pencerenin ortasında şeffaf delik var,green_window_partly_erased_to_alpha
+193,collections/37_Art_Nouveau_Lily/assets/gpt/parts/petal_left.png,passed,1091×1442 şeffaf,Stacktip positions remain approximate after onecorrection; alignmentreviewrequired; Measured residual tip position error: 0.050545786291752125
+194,collections/37_Art_Nouveau_Lily/assets/gpt/parts/petal_right.png,passed,Özel katman geometrisi; oran ve gerçek alfa kontrolü geçti,Stacktip positions remain approximate after onecorrection; alignmentreviewrequired; Measured residual tip position error: 0.08657239601888046
+195,collections/37_Art_Nouveau_Lily/assets/gpt/parts/petal_centre.png,passed,Özel katman geometrisi; oran ve gerçek alfa kontrolü geçti,Stacktip positions remain approximate after onecorrection; alignmentreviewrequired; Measured residual tip position error: 0.059312651262157776
+197,collections/37_Art_Nouveau_Lily/assets/gpt/parts/card_small.png,failed,#00FF00 foto penceresi yok ya da çok küçük (en büyük yeşil bölge %0.00),Greenwindow removedtoalpha by imagegentool aftercorrection
+198,collections/37_Art_Nouveau_Lily/assets/gpt/parts/arch_window.png,failed,#00FF00 foto penceresi yok ya da çok küçük (en büyük yeşil bölge %0.00),Greenwindow removedtoalpha by imagegentool aftercorrection
+201,collections/37_Art_Nouveau_Lily/assets/gpt/parts/whiplash.png,failed,"oran 2048×768, beklenen 1600×300 oranı",aspect ratio differs >2%
+225,collections/38_Papel_Picado_Fiesta/assets/gpt/parts/frame_1.png,failed,#00FF00 foto penceresi yok ya da çok küçük (en büyük yeşil bölge %0.00),Opaque greenwindow erased/erodedtoalpha
+226,collections/38_Papel_Picado_Fiesta/assets/gpt/parts/frame_2.png,failed,#00FF00 foto penceresi yok ya da çok küçük (en büyük yeşil bölge %0.00),Opaque greenwindow erased/erodedtoalpha
+227,collections/38_Papel_Picado_Fiesta/assets/gpt/parts/frame_3.png,failed,1145×1374 şeffaf · pencere %1.4; yeşil pencerenin ortasında şeffaf delik var,Opaque greenwindow erased/erodedtoalpha
+228,collections/38_Papel_Picado_Fiesta/assets/gpt/parts/frame_wide.png,failed,#00FF00 foto penceresi yok ya da çok küçük (en büyük yeşil bölge %0.00),Opaque greenwindow erased/erodedtoalpha
+230,collections/38_Papel_Picado_Fiesta/assets/gpt/parts/embroidery_band.png,failed,"oran 1536×1024, beklenen 2400×160 oranı",intermediate 3:2 canvas; must isolate single central embroidery band after user authorizes technical image edits; 1536×1024 intermediate singlecentreband needsauthorizedtechnicalisolation to2400×160
+342,collections/16_Sunflower_Rustic/variants/V03_burgundy_sunflower/gpt/closure_r2_v3.png,passed,1024×1536 şeffaf,Ribbon band shifted by up to 33px from source after imagegen correction; exact alignment requires review.

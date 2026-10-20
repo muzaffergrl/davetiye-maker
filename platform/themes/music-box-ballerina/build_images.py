@@ -218,7 +218,16 @@ def stage_css(stage: dict) -> str:
     ])
 
 
+# Emekli (2026-10-20): tema 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (docs/qa/2026-10-18-*.md,
+# docs/qa/2026-10-19-*.md); img/ artık bu betiğin çıktısı değil. Bu betik img/'yi silip eski geçici kesimi kurar ve
+# yeni kapak / iç sayfa görsellerini yok eder, bu yüzden çalışmaz. tools/gpt_yerlestir.py bu adımı atlar.
+EMEKLI = "tema 2026-10-18/19 yeniden kurulumuyla değişti; img/ elle yönetiliyor (silmemek için çalışmaz)"
+
+
 def main() -> int:
+    if EMEKLI:
+        print(f"build_images.py çalıştırılmadı: {EMEKLI}", file=sys.stderr)
+        return 2
     manifest: dict = {"_note": "G171 build. INTERIM layers (no Music Box Ballerina GPT part exists yet): rectangular "
                       "crops of repository GPT paper/satin toned to the palette, 14's oval frame as the mirror, 17's gold "
                       "disc as the key stand-in, a toned satin slot turned in 2D for the ballerina (see build_images.py). "

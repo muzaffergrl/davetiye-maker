@@ -1,11 +1,6 @@
 # GPT görsel istekleri — Tasarım 26 · Kintsugi & Washi
 
-> **Instructions for GPT:** Generate PAKET 5 (website layers) first, in order and in ONE chat, then PAKET 2 (sample
-> photos), then PAKET 6 (printable invitation). Use each English prompt exactly as written, follow its checklist, and
-> save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, calligraphy,
-> kanji, kana, seals with characters (hanko), logos, monograms or watermarks in any image.** Give W2.1 `washi_indigo.png`
-> and W2.3 `rice_paper.png` as the style reference of every later part: the same indigo washi, the same rice paper, the
-> same warm gold leaf.
+> **Instructions for GPT:** This design ("Kintsugi & Washi") was redesigned on 2026-10-18/19: its website is warm ivory stationery paper with abundant photorealistic flowers in the corners, opened from a themed cover object. The old website parts (PAKET 5) are NO LONGER needed — do not generate them. Generate PAKET 3 (the Etsy listing scenes) and PAKET 6 (the printed invitation grounds) in ONE chat; PAKET 2 (sample photos) is optional and comes last. Before the first image, attach these two images from the repository as the style reference of every image: `platform/themes/kintsugi-washi/img/bg_scene-1024.webp` (the website background: paper, flowers, colors, light) and `platform/themes/kintsugi-washi/img/v3-closed-880.webp` (the design's closed cover object). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". No text, letters, numbers, logos, monograms or watermarks in any image.
 
 Bu dosya tasarım 26'nın **bütün görsel parçalarının** tek kaynağıdır (G164). Tasarım `tools/katalog.py` `EK_TEMALAR`'da
 eksenleriyle kayıtlı ama PAKET üreteçlerine girmediği için dosya elle yazıldı. Şu an tema (`platform/themes/kintsugi-washi/`)
@@ -32,7 +27,9 @@ for GPT".
 - Işık: yumuşak, sol üstten; bütün parçalarda aynı. Şeffaf parçalarda gerçek alfa (beyaz ya da dama deseni değil).
 - Gerçek bir kişiye, markaya veya başka bir satıcının tasarımına benzemesin.
 
-## Kapalı paket geometrisi (W2.4, W2.8, W2.9 buna göre)
+## Kapalı paket geometrisi (W2.4, W2.8, W2.9 buna göre) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+
+> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
 Kapalı paket **0,70 en / 1 boy** (dikey). Katlar paketin yüzdesiyle: üst kat 0–%40, alt kat %62–%100 (tam genişlik); orta
 bantta (%40–%62) sol kat %0–%50, sağ kat %50–%100; pirinç kâğıdı kuşak %45–%56 (paketten her yana %3 taşar). Altın
 damarlar bu kat çizgilerinin **üstünden geçer**; Claude damar katmanını kat sınırlarından keser, her parça kendi katıyla
@@ -40,7 +37,9 @@ döner.
 
 ---
 
-## PAKET 5 — Website katmanları (YAZI YOK)
+## PAKET 5 — Website katmanları (YAZI YOK) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+
+> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
 
 #### W2.1 Çivit washi (dış yüz + sayfa zemini)
 **Kaydet:** `collections/26_Kintsugi_Washi/assets/gpt/parts/washi_indigo.png` · 1536×1536 · opak, dikişsiz
@@ -143,7 +142,7 @@ Kullanım: `og-1200x630.jpg` (`tema_build.og_kirp`, alta hizalı: üstten ~%21 k
 
 ---
 
-## PAKET 2 — Örnek fotoğraflar (kurgu çift Naomi & Kai; gerçek kişiye benzemesin)
+## PAKET 2 — Örnek fotoğraflar (kurgu çift Naomi & Kai; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
 
 Ortak: photorealistic fine-art wedding photography, soft natural light, a calm indigo, ivory and warm gold palette,
 subtle film grain; ONE fictional couple in their early thirties, the same two people in every photo (they must not
@@ -186,42 +185,31 @@ Landscape 16:9: an elegant open garden pavilion of warm cedar wood beside a stil
 
 ---
 
-## PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
+## PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 
-> Panelden indirilen basılı davetiye (`platform/lib/print/layouts.ts`, blok `'kintsugi-washi'`). Şu an geçici
-> (`composed`): pirinç kâğıdı + üstte ve altta çivit washi şeridi (temanın tonladığı kâğıtlar, ~195 ppi).
-> **Dosya adı ve ölçü (G167):** dalganın öteki tasarımlarıyla aynı — `print/invitation_front_5x7.png`,
-> `print/invitation_back_5x7.png`, **1575×2175 px** = 5×7 in + 1/8 in taşma, 300 ppi. Ayrı A5 dosyası istenmez:
-> `layouts.ts` her yüz için tek zemin taşır (`cover`); A5 + 3 mm taşma (154×216 mm, oran 0,713) aynı sayfadan yanlardan
-> ~%0,8 kırpılarak basılır (~260 ppi). Bu yüzden önemli hiçbir şey yan kenarların %8'ine girmez.
-> **Yazı alanı:** metin kutuları `layouts.ts`'teki ölçülerdir (ön `[21, 13, 19, 13]` = yükseklikte %21–%81, genişlikte
-> %13–%87; arka `[17, 12, 10, 12]` = %17–%90 × %12–%88, yüzde: üst, sağ, alt, sol). Prompt'lar bu alanı ~%3 payla boş
-> ister; alan aynı kalırsa kutular değişmeden kullanılır.
->
-> **Gelince (elle, tek blok; otomatik değil — G149: kutular gerçek görselde ölçülür):**
-> 1. `layouts.ts` `'kintsugi-washi'` bloğunda `sources` → `{ front: 'print/invitation_front_5x7.png', back:
->    'print/invitation_back_5x7.png' }`; `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg:
->    cover('back'), images: [] } }`.
-> 2. Kutuları görselde ölç (süslemenin ~%2 dışında kalsın); taşma varsa `front`/`back` ya da `bands` düzelt
->    (`tests/g149-print-layout.test.ts`).
-> 3. `cd platform && node scripts/build-print-assets.ts --theme kintsugi-washi` (artık kullanılmayan `rice.webp`/`washi.webp` dosyalarını
->    `public/print/kintsugi-washi/`'den sil) ve `node scripts/print-sample.ts --theme kintsugi-washi --invite 5x7
->    --bleed` + `--invite a5 --bleed` ile iki boyutu göz kontrolü.
+> **Neden yeniden yazıldı (2026-10-20):** website 18–19 Ekim'de fildişi kâğıt + köşe çiçekleri görünümüne geçti; eski baskı prompt'ları eski görünümü (ve artık olmayan PAKET 5 parçalarını) istiyordu. `platform/lib/print/layouts.ts` `'kintsugi-washi'` bloğunun geçici kaynakları yeniden kurulumda `img/`'den silindi: panel şu an `public/print/kintsugi-washi/`'deki eski çıktıyı (eski görünüm) basıyor ve `build-print-assets` bu tema için yeniden koşamaz. Bu zeminler gelince:
+> Platform her yüz için **tek** zemin kullanır ve onu taşma payıyla `cover` olarak yayar (5×7 ve A5 aynı zeminden).
+> 1. `layouts.ts` `'kintsugi-washi'` bloğunda `sources` → bu zeminler (`print/invitation_front_5x7.png` + `print/invitation_back_5x7.png`), `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }`.
+> 2. Zemin artık **açık fildişi**: `ink` / `accent` koyu tonlara (temanın site metin rengi) alınır; açık mürekkep kalmaz.
+> 3. Metin kutuları (`front` / `back`) gerçek görselde ölçülür (G149; süsten ~%2 açıklık), `node --test tests/g149-print-layout.test.ts`.
+> 4. `cd platform && node scripts/build-print-assets.ts --theme kintsugi-washi`; `public/print/kintsugi-washi/`'deki artık kaynak olmayan eski dosyalar silinir; 5×7 ve A5 örnek PDF'ine göz atılır.
+> Ek görsel (her iki yüz için sohbetin başında): `platform/themes/kintsugi-washi/img/bg_scene-1024.webp`.
 
-#### P1 — Ön yüz
-**Kaydet:** `collections/26_Kintsugi_Washi/assets/gpt/print/invitation_front_5x7.png` · 1575×2175 · opak
-```
-The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the ivory rice paper of rice_paper.png. Along the top edge a band of the indigo washi of washi_indigo.png about 12% of the height, its lower edge softly torn like hand-torn washi (the torn edge stays above 15% of the height); along the bottom edge a matching indigo band about 11% of the height, its upper edge softly torn (staying below 86%); one slender gold kintsugi vein (as kintsugi_veins.png) runs inside the top band and down the left margin only, within 8% of the left edge, fading out by the middle of the height; a few tiny gold-leaf flecks only near the bands. The rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm rice paper (the names, date and venue are set there): no vein, no fleck, no shadow, no stain in it. No text, letters, numbers, calligraphy, monograms, seals, logos or watermarks. Print quality, sharp at 1575×2175 px.
-```
-Kontrol: tam taşma (kenara kadar kâğıt); %18–%84 × %10–%90 tamamen boş; yazı yok; çivit bantlar yırtık kenarlı; damar yalnız
-bantta ve sol kenarın %8'inde.
+#### P6.1 Ön yüz
+**Kaydet:** `collections/26_Kintsugi_Washi/assets/gpt/print/invitation_front_5x7.png` · 1575×2175 px (300 ppi), opak
 
-#### P2 — Arka yüz
-**Kaydet:** `collections/26_Kintsugi_Washi/assets/gpt/print/invitation_back_5x7.png` · 1575×2175 · opak
 ```
-The back of the same printed wedding invitation, full bleed, portrait 5.25:7.25, perfectly flat: the same ivory rice paper, only a narrow indigo washi band along the top edge (about 7% of the height, its lower edge softly torn, staying above 10% of the height) and a few tiny gold-leaf flecks within that top 12%. Everything below 14% of the height, and everything between 9% and 91% of the width, is COMPLETELY EMPTY rice paper (a schedule and a QR code are set there): no fleck, no vein, no shadow, no stain. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1575×2175 px.
+A full-bleed printable wedding invitation ground for the "Kintsugi & Washi" design, front side, portrait, seen perfectly flat and straight on, 1575 × 2175 px at 300 ppi (it is trimmed later). Match the attached website background (bg_scene-1024.webp) exactly in style: the same warm ivory, softly textured stationery paper running edge to edge and the same warm ivory washi paper, indigo botanical branches, champagne gold fine kintsugi veins, white magnolia and cherry blossoms, in the same photorealistic stationery-photography finish with soft light from the top-left. Place the decoration ONLY in two places: an abundant arrangement gathered at the top-left corner and trailing along the top edge, staying entirely within the top 16% of the height, and a smaller matching arrangement gathered at the bottom-right corner, staying entirely within the bottom 14% of the height. A very fine antique-gold foil hairline frame inset about 6% from every edge. Keep every ornament at least 4% inside the image edges. The whole rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm ivory paper (the names, date and venue are printed there in dark ink): no petal, leaf, line, shadow or stain in it. No envelope, no card, no frame object, no people. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575 × 2175 px.
 ```
-Kontrol: ön yüzle aynı kâğıt; yalnız üstte dar çivit bant (yırtık kenar %10'un üstünde); %14'ün altı boş; yazı yok.
+Kontrol: tam taşma fildişi kâğıt (site zeminiyle aynı); çiçekler yalnız üst %16 (sol üst) ve alt %14 (sağ alt); %18–84 yükseklik × %10–90 genişlik tamamen boş; ince altın çerçeve; yazı yok; 1575×2175.
+
+#### P6.2 Arka yüz
+**Kaydet:** `collections/26_Kintsugi_Washi/assets/gpt/print/invitation_back_5x7.png` · 1575×2175 px (300 ppi), opak
+
+```
+The back side of the same "Kintsugi & Washi" invitation (give invitation_front_5x7.png as the reference image): portrait, full bleed, perfectly flat, 1575 × 2175 px at 300 ppi, the same warm ivory stationery paper edge to edge and the same very fine antique-gold foil hairline frame inset about 6% from every edge. Decoration ONLY a slim spray of the same flowers and foliage centred along the top edge, staying entirely within the top 11% of the height and at least 4% inside the image edges. Everything from 13% to 92% of the height and from 10% to 90% of the width is COMPLETELY EMPTY paper for the schedule, the details and a QR code: no petal, line, shadow or stain. Same style, colors and light. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1575 × 2175 px.
+```
+Kontrol: ön yüzle aynı kâğıt ve çerçeve; çiçek yalnız üst %11'de ince dal; %13–92 × %10–90 boş; yazı yok; 1575×2175.
 
 ---
 

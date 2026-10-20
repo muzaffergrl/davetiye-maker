@@ -1,11 +1,6 @@
 # GPT görsel istekleri — Tasarım 22 · Nocturne Lake Estate
 
-> **Instructions for GPT:** Generate the PAKET 5 W2 parts below first, in order and in ONE chat, then PAKET 2 (sample
-> photos). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name
-> and folder shown under "Kaydet". No text, letters, numbers, logos, monograms or watermarks in any image. Give
-> `collections/22_Nocturne_Lake_Estate/assets/gpt/envelope.png` (the draft envelope) and `hero.png` as the style
-> reference of every part: the same black textured paper, the same champagne-gold wax seal with the olive-twig relief,
-> the same Lake Como dusk.
+> **Instructions for GPT:** This design ("Nocturne Lake Estate") was redesigned on 2026-10-18/19: its website is warm ivory stationery paper with abundant photorealistic flowers in the corners, opened from a themed cover object. The old website parts (PAKET 5) are NO LONGER needed — do not generate them. Generate PAKET 3 (the Etsy listing scenes) and PAKET 6 (the printed invitation grounds) in ONE chat; PAKET 2 (sample photos) is optional and comes last. Before the first image, attach these two images from the repository as the style reference of every image: `platform/themes/nocturne-lake-estate/img/bg_scene-1024.webp` (the website background: paper, flowers, colors, light) and `platform/themes/nocturne-lake-estate/img/v3-closed-880.webp` (the design's closed cover object). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". No text, letters, numbers, logos, monograms or watermarks in any image.
 
 Bu dosya Nocturne'ün **eksik website parçalarının** tek kaynağıdır (G142). Tasarım `tools/katalog.py`'de kayıtlı değil;
 bu yüzden dosya elle yazıldı (katalog kaydı açılırsa oradan yeniden üretilir). Taslağın üç PNG'si (`envelope.png`,
@@ -26,7 +21,9 @@ geçer (docs/11 §5.1, §7.3 kapak tipi).
 
 ---
 
-## PAKET 5 — W2 parçaları (website katmanları; YAZI YOK)
+## PAKET 5 — W2 parçaları (website katmanları; YAZI YOK) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+
+> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
 
 Tek görselde tek nesne, düşen gölge yok, ışık sol üstten, şeffaflar gerçek alfa. Kapalı zarf, açık zarf ve mühür
 **aynı tuvalde, aynı konumda** çizilir (birbirinin üstüne konunca gövde çakışmalı).
@@ -97,7 +94,7 @@ Kontrol: zarf + mühür altta tam görünür; üst %20 yalnız gökyüzü; yazı
 
 ---
 
-## PAKET 2 — Örnek fotoğraflar (kurgu çift Eleanor & Luca; gerçek kişiye benzemesin)
+## PAKET 2 — Örnek fotoğraflar (kurgu çift Eleanor & Luca; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
 
 #### 2.1 Ana portre
 **Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/photos/hero_portrait.jpg` · Dikey (1024×1280, 4:5)
@@ -136,38 +133,31 @@ Landscape 16:9: an elegant lakeside villa with a stone balustrade terrace and cy
 
 ---
 
-## G139 — Basılı davetiye parçaları (yeni; şu an göl manzarası + mühürle geçici düzen)
+## PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 
-> Görev `G139`. Panelden indirilen 5×7 in / A5 basılı davetiye bu tasarımın kendi kart parçalarını ister. Şu an
-> `hero.png` (ön yüz: göl manzarası, yazı gökyüzünde) ve temanın zarftan kestiği mühür (`env_seal`, arka yüz: gece siyahı
-> `#11120F`) ile geçici düzen kuruldu (`platform/lib/print/layouts.ts`, `composed`). İki parça gelince layouts.ts'te
-> `composed` yerine `card`/`back` kaynakları (kâğıt: W2.5 `parts/bg_page.png`, `paper: { mode: 'cover' }`) yazılır ve `node scripts/build-print-assets.ts --theme nocturne-lake-estate`
-> çalıştırılır. W2.2 `closure.png` gelirse geçici düzendeki mühür de ona geçer.
+> **Neden yeniden yazıldı (2026-10-20):** website 18–19 Ekim'de fildişi kâğıt + köşe çiçekleri görünümüne geçti; eski baskı prompt'ları eski görünümü (ve artık olmayan PAKET 5 parçalarını) istiyordu. `platform/lib/print/layouts.ts` `'nocturne-lake-estate'` bloğunun geçici kaynakları yeniden kurulumda `img/`'den silindi: panel şu an `public/print/nocturne-lake-estate/`'deki eski çıktıyı (eski görünüm) basıyor ve `build-print-assets` bu tema için yeniden koşamaz. Bu zeminler gelince:
+> Platform her yüz için **tek** zemin kullanır ve onu taşma payıyla `cover` olarak yayar (5×7 ve A5 aynı zeminden).
+> 1. `layouts.ts` `'nocturne-lake-estate'` bloğunda `sources` → bu zeminler (`print/invitation_front.png` + `print/invitation_back.png`), `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }`.
+> 2. Zemin artık **açık fildişi**: `ink` / `accent` koyu tonlara (temanın site metin rengi) alınır; açık mürekkep kalmaz.
+> 3. Metin kutuları (`front` / `back`) gerçek görselde ölçülür (G149; süsten ~%2 açıklık), `node --test tests/g149-print-layout.test.ts`.
+> 4. `cd platform && node scripts/build-print-assets.ts --theme nocturne-lake-estate`; `public/print/nocturne-lake-estate/`'deki artık kaynak olmayan eski dosyalar silinir; 5×7 ve A5 örnek PDF'ine göz atılır.
+> Ek görsel (her iki yüz için sohbetin başında): `platform/themes/nocturne-lake-estate/img/bg_scene-1024.webp`.
 
-### P1 — invitation_card (ön yüz)
-Kaydet: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/invitation_card.png` — **2048 × 3072 px, PNG, şeffaf arka plan**
-```
-A flat printed wedding invitation card, front side, seen straight on, portrait 2:3, on a fully transparent background.
-Thick premium black textured cotton paper with a fine visible grain, the same nearly black charcoal paper as the
-Nocturne Lake Estate envelope (envelope.png), with a crisp straight edge and a soft natural contact shade on the card
-itself. A thin champagne-gold foil hairline frame inset from the edge. A slender olive twig in brushed champagne gold
-leaf (the same olive motif as the wax seal's relief) at the top centre and a smaller mirrored twig at the bottom
-centre. Soft light from the top-left. The whole centre (about 70% of the width, 60% of the height) is EMPTY black
-paper for light ivory text. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp details
-at 2048 × 3072 px.
-```
-Kontrol: siyah dokulu kâğıt (zarfla aynı); altın çerçeve ince; orta %70 × %60 boş; yazı yok; gerçek alfa.
+#### P6.1 Ön yüz
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/print/invitation_front.png` · 1819×2551 px (300 ppi), opak
 
-### P2 — info_card (arka yüz)
-Kaydet: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/info_card.png` — **2048 × 3072 px, PNG, şeffaf arka plan**
 ```
-The back side of the same black Nocturne Lake Estate wedding invitation card: portrait 2:3 on a fully transparent
-background, the same black textured cotton paper, crisp edge, soft contact shade and thin champagne-gold foil hairline
-frame. Only one small brushed champagne-gold olive twig centred at the top edge. Everything below the twig is EMPTY
-black paper for a schedule and a QR code. No text, letters, numbers, logos or watermarks. Print quality,
-2048 × 3072 px.
+A full-bleed printable wedding invitation ground for the "Nocturne Lake Estate" design, front side, portrait, seen perfectly flat and straight on, 1819 × 2551 px at 300 ppi (it is trimmed later). Match the attached website background (bg_scene-1024.webp) exactly in style: the same warm ivory, softly textured stationery paper running edge to edge and the same midnight charcoal, champagne gold, ivory garden roses and lake Como cypress foliage, softly reflected moonlight across a distant Italian lake, in the same photorealistic stationery-photography finish with soft light from the top-left. Place the decoration ONLY in two places: an abundant arrangement gathered at the top-left corner and trailing along the top edge, staying entirely within the top 16% of the height, and a smaller matching arrangement gathered at the bottom-right corner, staying entirely within the bottom 14% of the height. A very fine antique-gold foil hairline frame inset about 6% from every edge. Keep every ornament at least 4% inside the image edges. The whole rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm ivory paper (the names, date and venue are printed there in dark ink): no petal, leaf, line, shadow or stain in it. No envelope, no card, no frame object, no people. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1819 × 2551 px.
 ```
-Kontrol: ön yüzle aynı kâğıt ve çerçeve; yalnız üstte küçük dal; geri kalanı boş; yazı yok; gerçek alfa.
+Kontrol: tam taşma fildişi kâğıt (site zeminiyle aynı); çiçekler yalnız üst %16 (sol üst) ve alt %14 (sağ alt); %18–84 yükseklik × %10–90 genişlik tamamen boş; ince altın çerçeve; yazı yok; 1819×2551.
+
+#### P6.2 Arka yüz
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/print/invitation_back.png` · 1819×2551 px (300 ppi), opak
+
+```
+The back side of the same "Nocturne Lake Estate" invitation (give invitation_front.png as the reference image): portrait, full bleed, perfectly flat, 1819 × 2551 px at 300 ppi, the same warm ivory stationery paper edge to edge and the same very fine antique-gold foil hairline frame inset about 6% from every edge. Decoration ONLY a slim spray of the same flowers and foliage centred along the top edge, staying entirely within the top 11% of the height and at least 4% inside the image edges. Everything from 13% to 92% of the height and from 10% to 90% of the width is COMPLETELY EMPTY paper for the schedule, the details and a QR code: no petal, line, shadow or stain. Same style, colors and light. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1819 × 2551 px.
+```
+Kontrol: ön yüzle aynı kâğıt ve çerçeve; çiçek yalnız üst %11'de ince dal; %13–92 × %10–90 boş; yazı yok; 1819×2551.
 
 ---
 

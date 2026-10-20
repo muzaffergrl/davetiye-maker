@@ -1,11 +1,6 @@
 # GPT görsel istekleri — Tasarım 25 · Orient Express Voyage
 
-> **Instructions for GPT:** Generate PAKET 5 (website parts) first, in order and in ONE chat, so every part shares the
-> same lithograph style, palette and light; then PAKET 2 (sample photos), then PAKET 6 (printable invitation). Use each
-> English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown
-> under "Kaydet". **No text, letters, numbers, logos, monograms, brand names or watermarks in any image** — not on the
-> ticket, the tag, the clock, the map, the stamp or the poster. Generate W2.1 (the closed wallet) first and give it as
-> the reference image of every wallet part (W2.2–W2.5) and of the ticket (W2.7).
+> **Instructions for GPT:** This design ("Orient Express Voyage") was redesigned on 2026-10-18/19: its website is warm ivory stationery paper with abundant photorealistic flowers in the corners, opened from a themed cover object. The old website parts (PAKET 5) are NO LONGER needed — do not generate them. Generate PAKET 3 (the Etsy listing scenes) and PAKET 6 (the printed invitation grounds) in ONE chat; PAKET 2 (sample photos) is optional and comes last. Before the first image, attach these two images from the repository as the style reference of every image: `platform/themes/orient-express-voyage/img/bg_scene-1024.webp` (the website background: paper, flowers, colors, light) and `platform/themes/orient-express-voyage/img/v3-closed-880.webp` (the design's closed cover object). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". No text, letters, numbers, logos, monograms or watermarks in any image.
 
 Tasarım 25 (G163, `docs/24_YENI_TASARIMLAR.md`) GPT parçaları **gelmeden** kuruldu (22 Nocturne gibi). Platform teması
 `platform/themes/orient-express-voyage/` şu an her parça için **geçici düz palet tonları** kullanıyor (çizim yok, K21).
@@ -43,7 +38,9 @@ deneme görseliyle doldurup build'i koşar. `kuru_sekil.json` parçaların promp
 
 ---
 
-## PAKET 5 — Website katmanları (W2; şeffaflar gerçek alfa, düşen gölge yok)
+## PAKET 5 — Website katmanları (W2; şeffaflar gerçek alfa, düşen gölge yok) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+
+> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
 
 Cüzdan parçaları (W2.1–W2.6) **aynı 1024×1536 tuvalde, aynı konumda** çizilir: cüzdan yatayda ortalı, genişliği tuvalin
 ~%62'si, yüksekliği ~%62'si (dik, 2:3), üst kenarı tuvalin ~%19'unda. Build her parçayı kendi alfa kutusundan kapalı
@@ -182,7 +179,7 @@ Kontrol: yalnız mürekkep; harf/rakam yok; kağıt yok; alfa.
 
 ---
 
-## PAKET 2 — Örnek fotoğraflar (kurgu çift Amelia & Rafael; gerçek kişiye benzemesin)
+## PAKET 2 — Örnek fotoğraflar (kurgu çift Amelia & Rafael; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
 
 Beş fotoğrafta **aynı kurgu çift**: her prompt aynı tanımı tekrarlar (GPT 2.1'i referans alır). Ünlü, model ya da
 tanınmış birine benzerlik yok; yüzler sıradan ve doğal. Hepsi opak JPG.
@@ -224,45 +221,37 @@ Landscape 3:2: a fictional grand historic station hall turned wedding venue at d
 
 ---
 
-## PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi, yazı yok)
+## PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 
-> Şu an basılı davetiye `platform/lib/print/layouts.ts` → `orient-express-voyage` **composed** düzeninde: iki yüz de
-> fildişi (`#F3EBD9`), arka yüzde temanın damgası. **Zeminler gelince kendiliğinden geçmez** (build-print-assets yalnız
-> layouts.ts'teki `sources`'u kopyalar; metin kutuları gerçek görsel üstünde ölçülür, G149). Ölçü: 5×7 in + 0,125 in
-> taşma = **1575 × 2175 px**, 300 ppi. Platform her yüz için **tek zemin** kullanır; A5 sayfasında aynı zemin `cover` ile
-> yanlardan ~%1 kırpılır (A5 için ayrı zemin istenmez). Boş alanlar layouts.ts kutularıyla eşleşir (kutular kesim
-> çizgisine göre %; görsel taşma dahil, aradaki fark ~%1,7 ve ~%2 boşluk bırakıldı):
-> ön `front: [44, 12, 8, 12]` ↔ görselde %42–94 boş · arka `back: [20, 12, 10, 12]` ↔ görselde %18–90 boş; yanlarda
-> pirinç çerçeve kesimden 0,3 in içeride (kutu kenarı 0,6 in).
+> **Neden yeniden yazıldı (2026-10-20):** website 18–19 Ekim'de fildişi kâğıt + köşe çiçekleri görünümüne geçti; eski baskı prompt'ları eski görünümü (ve artık olmayan PAKET 5 parçalarını) istiyordu. `platform/lib/print/layouts.ts` `'orient-express-voyage'` bloğunun geçici kaynakları yeniden kurulumda `img/`'den silindi: panel şu an `public/print/orient-express-voyage/`'deki eski çıktıyı (eski görünüm) basıyor ve `build-print-assets` bu tema için yeniden koşamaz. Bu zeminler gelince:
+> Platform her yüz için **tek** zemin kullanır ve onu taşma payıyla `cover` olarak yayar (5×7 ve A5 aynı zeminden).
+> 1. `layouts.ts` `'orient-express-voyage'` bloğunda `sources` → bu zeminler (`print/invitation_front_5x7.png` + `print/invitation_back_5x7.png`), `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }`.
+> 2. Zemin artık **açık fildişi**: `ink` / `accent` koyu tonlara (temanın site metin rengi) alınır; açık mürekkep kalmaz.
+> 3. Metin kutuları (`front` / `back`) gerçek görselde ölçülür (G149; süsten ~%2 açıklık), `node --test tests/g149-print-layout.test.ts`.
+> 4. `cd platform && node scripts/build-print-assets.ts --theme orient-express-voyage`; `public/print/orient-express-voyage/`'deki artık kaynak olmayan eski dosyalar silinir; 5×7 ve A5 örnek PDF'ine göz atılır.
+> Ek görsel (her iki yüz için sohbetin başında): `platform/themes/orient-express-voyage/img/bg_scene-1024.webp`.
 
-#### PAKET 6 gelince (Claude)
-1. `platform/lib/print/layouts.ts` `'orient-express-voyage'` bloğunda: `sources: { front: 'print/invitation_front_5x7.png',
-   back: 'print/invitation_back_5x7.png' }`, `front: [44, 12, 8, 12]`, `back: [20, 12, 10, 12]`, `composed: { front: { bg:
-   cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }` (blok yorumunda da yazılı).
-2. `cd platform && node scripts/build-print-assets.ts --theme orient-express-voyage`; eski `public/print/orient-express-voyage/
-   stamp.webp` silinir (artık kaynak değil).
-3. Kutu + bantlar görsel üstünde yeniden ölçülür (`tests/g149-print-layout.test.ts`, uzun içerik; tren/etiket kutuya
-   girerse `bands`), panelden 5×7 ve A5 PDF indirilip göz kontrolü.
-
-#### P6.1 Ön yüz 5×7
-**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/print/invitation_front_5x7.png` · 1575×2175 · opak
+#### P6.1 Ön yüz
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/print/invitation_front_5x7.png` · 1575×2175 px (300 ppi), opak
 
 ```
-Print-ready front of a wedding invitation, portrait 5×7 inches with bleed (1575 × 2175 px, 300 ppi), in the same 1930s travel-poster lithograph style as poster_hero.png: the bottle-green and brass sleeper train crossing the stone viaduct at golden hour fills the UPPER 40% of the image and fades softly into the paper; from 42% to 94% of the height the card is calm, plain, pale golden-ivory poster paper (#F3EBD9) with soft litho grain and NOTHING else on it (dark green text goes there: names, date, venue). A slim brass art deco border line 0.3 inch inside the trim edge (about 0.43 inch from the image edge) on all four sides — the only thing inside the empty area. No text, letters, numbers, logos. Sharp print detail.
+A full-bleed printable wedding invitation ground for the "Orient Express Voyage" design, front side, portrait, seen perfectly flat and straight on, 1575 × 2175 px at 300 ppi (it is trimmed later). Match the attached website background (bg_scene-1024.webp) exactly in style: the same warm ivory, softly textured stationery paper running edge to edge and the same deep forest green, warm parchment, champagne gold, ivory roses, delicate antique train travel map details and brass ornament, in the same photorealistic stationery-photography finish with soft light from the top-left. Place the decoration ONLY in two places: an abundant arrangement gathered at the top-left corner and trailing along the top edge, staying entirely within the top 16% of the height, and a smaller matching arrangement gathered at the bottom-right corner, staying entirely within the bottom 14% of the height. A very fine antique-gold foil hairline frame inset about 6% from every edge. Keep every ornament at least 4% inside the image edges. The whole rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm ivory paper (the names, date and venue are printed there in dark ink): no petal, leaf, line, shadow or stain in it. No envelope, no card, no frame object, no people. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575 × 2175 px.
 ```
-Kontrol: resim üst %40'ta; %42–94 boş ve sakin (yalnız ince çerçeve çizgisi); çerçeve kesimden 0,3 in içeride; yazı yok.
+Kontrol: tam taşma fildişi kâğıt (site zeminiyle aynı); çiçekler yalnız üst %16 (sol üst) ve alt %14 (sağ alt); %18–84 yükseklik × %10–90 genişlik tamamen boş; ince altın çerçeve; yazı yok; 1575×2175.
 
-#### P6.2 Arka yüz 5×7
-**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/print/invitation_back_5x7.png` · 1575×2175 · opak
+#### P6.2 Arka yüz
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/print/invitation_back_5x7.png` · 1575×2175 px (300 ppi), opak
 
 ```
-Print-ready back of the same invitation, portrait 5×7 inches with bleed (1575 × 2175 px, 300 ppi): the antique map from map.png faintly printed (about 15% strength, very low contrast) over plain ivory lithograph paper (#F3EBD9), a small brass luggage-tag illustration (empty face) hanging at the top centre within the top 16% of the height, and the same slim brass border line 0.3 inch inside the trim edge. Everything from 18% to 90% of the height stays calm and readable for a schedule and a QR code; nothing below 90% except the border. No readable place names, no text, letters or numbers.
+The back side of the same "Orient Express Voyage" invitation (give invitation_front_5x7.png as the reference image): portrait, full bleed, perfectly flat, 1575 × 2175 px at 300 ppi, the same warm ivory stationery paper edge to edge and the same very fine antique-gold foil hairline frame inset about 6% from every edge. Decoration ONLY a slim spray of the same flowers and foliage centred along the top edge, staying entirely within the top 11% of the height and at least 4% inside the image edges. Everything from 13% to 92% of the height and from 10% to 90% of the width is COMPLETELY EMPTY paper for the schedule, the details and a QR code: no petal, line, shadow or stain. Same style, colors and light. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1575 × 2175 px.
 ```
-Kontrol: etiket üst %16'da; harita çok soluk; %18–90 okunur; yazı yok.
+Kontrol: ön yüzle aynı kâğıt ve çerçeve; çiçek yalnız üst %11'de ince dal; %13–92 × %10–90 boş; yazı yok; 1575×2175.
 
 ---
 
-## Kontrol (Claude, parçalar gelince)
+## Kontrol (Claude, parçalar gelince) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+
+> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
 1. `python3 platform/themes/orient-express-voyage/build_images.py` → `manifest.json` `"interim": []`, `checks.green` temiz
    (#00FF00 kalmadı), tema klasörü ≤ 3 MB.
 2. `site.css` `/* stage:begin … stage:end */` bloğu build tarafından yazıldı mı bak (`git diff site.css`): kayış, bilet,

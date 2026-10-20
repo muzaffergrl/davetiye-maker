@@ -3,7 +3,7 @@
 //
 //   cd platform && npm ci && npm run build          (once)
 //   NODE_PATH=/opt/node22/lib/node_modules node tools/listing_templates/capture.ts --theme <id> --out <dir> \
-//        [--public-url https://xn--bkestudo-zkb.com] [--port 3331]
+//        [--public-url https://bkestudio.com] [--port 3331]
 //
 // What it does (local production build `next start`, local adapter, temp data folder; nothing is deployed, nothing is
 // sent to the live site):
@@ -41,7 +41,7 @@ function arg(name: string, def: string | null = null): string | null {
 }
 const THEME = arg('theme');
 const OUT = arg('out');
-const PUBLIC_URL = (arg('public-url', 'https://xn--bkestudo-zkb.com') as string).replace(/\/+$/, '');
+const PUBLIC_URL = (arg('public-url', 'https://bkestudio.com') as string).replace(/\/+$/, '');
 /** A free local port (other agents' servers often hold the usual ones). */
 async function freePort(): Promise<number> {
   const net = await import('node:net');

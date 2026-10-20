@@ -10,8 +10,8 @@ and `platform/lib/marketing/designs.ts` (sales-site copy written against the G41
 
 | Item | Status on 2026-10-16 |
 |---|---|
-| Start link `https://xn--bkestudo-zkb.com/start?theme=ivory-lace-pearls` | **Moved to the brand domain** (G189, 2026-10-18); not yet opened there from a phone. On the earlier Vercel address it answered `200` on 2026-10-16 and the page names the design ("Design: Ivory Lace & Pearls"). Checked through the Vercel connector on production `dpl_HKT1NRKp895wEVEUbGKdzJCqU4RW` (docs/10); a direct `curl` from this environment is refused by its proxy. Not opened on a phone. |
-| Live demo `https://xn--bkestudo-zkb.com/start/demo/ivory-lace-pearls` (in the description under TRY THE LIVE DEMO, and named in image 8) | **Moved to the brand domain** (G189, 2026-10-18); not yet opened there from a phone. On the earlier Vercel address it answered `200` on 2026-10-16; the page is this design's opening (`data-theme="ivory-lace-pearls"`, sample couple Charlotte & William). Same check, not opened on a phone. |
+| Start link `https://bkestudio.com/start?theme=ivory-lace-pearls` | **Moved to the brand domain** (G189, 2026-10-18); not yet opened there from a phone. On the earlier Vercel address it answered `200` on 2026-10-16 and the page names the design ("Design: Ivory Lace & Pearls"). Checked through the Vercel connector on production `dpl_HKT1NRKp895wEVEUbGKdzJCqU4RW` (docs/10); a direct `curl` from this environment is refused by its proxy. Not opened on a phone. |
+| Live demo `https://bkestudio.com/start/demo/ivory-lace-pearls` (in the description under TRY THE LIVE DEMO, and named in image 8) | **Moved to the brand domain** (G189, 2026-10-18); not yet opened there from a phone. On the earlier Vercel address it answered `200` on 2026-10-16; the page is this design's opening (`data-theme="ivory-lace-pearls"`, sample couple Charlotte & William). Same check, not opened on a phone. |
 | Current platform release live (simpler editor K29, Headings & labels, thank-you page, guest password, RSVP v2) | **Live** since G079 (2026-10-15). This design is open on `/start` and on the sales site since G094 (`platform/lib/marketing/config.ts`); the current production release `b952bc8` (2026-10-16, docs/10 §2) serves it. The editor features were not re-tried on the live site in this task. |
 | Order check (`CLAIM_ORDER_VERIFICATION`) | Decided on (K34, 2026-10-15), but the records disagree on whether it is on in production (docs/10 G092, docs/18 §4); not read in G154 either (no access to the live settings). Since G154 (2026-10-17, K48) the description claims no order check: it says what happens if the editor shows "We are confirming your Etsy order" (Publish opens once the order is confirmed, usually within 24 hours), which is true in every mode. Read the mode before publishing (§11). |
 | Questions & answers, RSVP questions | Platform features, the same for every design; tested in a local production build (Chromium, phone size). **Not tried on the live site.** |
@@ -19,12 +19,12 @@ and `platform/lib/marketing/designs.ts` (sales-site copy written against the G41
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** All phone checks so far are Chromium mobile emulation (theme README, "Bilinen sınırlar"). |
 | Description claims (G154, 2026-10-17) | Every sentence of §2 describes a feature that exists in the platform and passed G090's local production-build checks (guest site 21/21; buyer flow 6/6 with RSVP, Excel and CSV, map card, sound button, Downloads and a Spanish website). No VERIFY note is left in §2; the live-site and real-device tests that are still open are in §11 (and in `etsy_upload.json` `open_checks`). The demo line "(sample names and photos)" depends on G090 P1-02 (sample photos in the demos). |
 | Edit link by email | **Off.** Sending is built (G147) but stays off until the owner sets up SMTP; the listing and the START HERE guide promise no email. Since G146 (K46) the buyer opens the editor on any device with the Etsy order number + email (`/my`, "Create your website"); the private edit link is a shortcut. Listing and guide say so since G148 (2026-10-17). |
-| Web address | `xn--bkestudo-zkb.com` (bkestudıo.com: bought and connected by the user, served by Vercel). G189 (2026-10-18) moved the start link, demo, START HERE guide and QR codes here from the earlier temporary Vercel address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
+| Web address | `bkestudio.com` (primary since 2026-10-19; the earlier `xn--bkestudo-zkb.com` (bkestudıo.com) links redirect here with a permanent 308). G190 (2026-10-20) moved the start link, demo, START HERE guide and QR codes to this address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
 | Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com**. |
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, quantity | Decided on 2026-10-16: 1,460 TL; no stock limit (999, Etsy's maximum). Renewal is still open. Hosting extension (on request via Etsy before the "Online until" date, no price promised) and the Etsy shop URL (`https://www.etsy.com/shop/STUDIOBKE`): K48, 2026-10-17. |
 | Design fonts and other languages | Checked on 2026-10-16 from the Google Fonts CSS of the fonts this theme loads: Mrs Saint Delafield and Bodoni Moda (latin-ext, no Cyrillic). The language line in GOOD TO KNOW is written from this. |
-| START HERE guide | `package/customer/START_HERE.md` + `.pdf` rebuilt in G148 (2026-10-17, `python3 tools/build_customer_guides.py`, from docs/19 Ek A; G146 access with the Etsy order number + email): 9 pages, about 57 KB. Its links are the start link (in the text and on the QR), the `/my` page ("Continue on another device") and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://xn--bkestudo-zkb.com/start?theme=ivory-lace-pearls` (jsQR on every rendered page). It describes the editor in the repository, which is newer than production until the next deploy. G154 (2026-10-17) rebuilt it from Ek A again (K48 order-check, extension and deletion texts, a Languages section, Share → Downloads, the start address in plain text under the QR): 10 pages, about 59 KB; `--check` with jsQR passes. |
+| START HERE guide | `package/customer/START_HERE.md` + `.pdf` rebuilt in G148 (2026-10-17, `python3 tools/build_customer_guides.py`, from docs/19 Ek A; G146 access with the Etsy order number + email): 9 pages, about 57 KB. Its links are the start link (in the text and on the QR), the `/my` page ("Continue on another device") and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://bkestudio.com/start?theme=ivory-lace-pearls` (jsQR on every rendered page). It describes the editor in the repository, which is newer than production until the next deploy. G154 (2026-10-17) rebuilt it from Ek A again (K48 order-check, extension and deletion texts, a Languages section, Share → Downloads, the start address in plain text under the QR): 10 pages, about 59 KB; `--check` with jsQR passes. |
 | Listing image 9 | `09_devices.png` built on 2026-10-17 (G148, K47): "Start on your phone, continue on any device", real screens of a local production build with G146 (`/my`, Share → "Use on another device"). G146 is live only after the next deploy: publish image 9 with it. |
 | Listing images and video | **Produced** on 2026-10-16 (G124): 8 images in `images_editorial/` (§5) and `video.mp4` (13.4 s, §6), from a local production build of the repository, so the editor in images 4, 5 and 7 is newer than production until the next deploy. Nothing uploaded to Etsy. |
 
@@ -50,7 +50,7 @@ A two-door ivory gatefold covered in lace and fastened with a pearl brooch, on p
 
 TRY THE LIVE DEMO
 See the gatefold open on your own phone before you buy (sample names and photos):
-https://xn--bkestudo-zkb.com/start/demo/ivory-lace-pearls
+https://bkestudio.com/start/demo/ivory-lace-pearls
 Copy the link into your phone's browser.
 
 WHAT YOU GET
@@ -229,7 +229,7 @@ No. It is a digital product. Your editor makes a printable invitation in your de
 ## 8. Etsy's automatic messages (shop-wide, the same for every design)
 
 Etsy's "Message to Buyers for Digital Items" applies to every digital listing, so it cannot carry this design's own start link: it links
-the design chooser `https://xn--bkestudo-zkb.com/start` (docs/19 §4.4). The START HERE PDF carries this design's own link. Both texts are already entered in
+the design chooser `https://bkestudio.com/start` (docs/19 §4.4). The START HERE PDF carries this design's own link. Both texts are already entered in
 Shop Manager (docs/20 §7.1) and need no change for this design.
 
 Message to Buyers for Digital Items:
@@ -237,9 +237,9 @@ Message to Buyers for Digital Items:
 ```text
 Thank you for your order! Your download is your START HERE guide (PDF). Open it and tap the start link inside.
 
-Can't open the PDF? Start here instead and choose the design you bought: https://xn--bkestudo-zkb.com/start
+Can't open the PDF? Start here instead and choose the design you bought: https://bkestudio.com/start
 
-You will enter your Etsy order number, your email and your first names. To continue later on any phone or computer, open https://xn--bkestudo-zkb.com/my and enter the same order number and email. No account or password.
+You will enter your Etsy order number, your email and your first names. To continue later on any phone or computer, open https://bkestudio.com/my and enter the same order number and email. No account or password.
 
 Questions? Message us here on Etsy with your order number.
 ```
@@ -247,7 +247,7 @@ Questions? Message us here on Etsy with your order number.
 Message to Buyers (receipt):
 
 ```text
-Thank you! Start your wedding website from the START HERE PDF in your download, or at https://xn--bkestudo-zkb.com/start (choose the design you bought). To continue later on any device, open https://xn--bkestudo-zkb.com/my with the same order number and email. Questions? Message us on Etsy.
+Thank you! Start your wedding website from the START HERE PDF in your download, or at https://bkestudio.com/start (choose the design you bought). To continue later on any device, open https://bkestudio.com/my with the same order number and email. Questions? Message us on Etsy.
 ```
 
 ## 9. After the sale

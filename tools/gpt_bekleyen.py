@@ -48,12 +48,17 @@ def satir_yollari(dosya: Path, satir: str) -> list[Path]:
     return out
 
 
+GECERSIZ = "GEÇERSİZ"  # başlığında bu kelime olan `## ` bölümü artık istenmiyor: sayılmaz, listeye girmez, yerleşmez
+
+
 def tara(dosya: Path):
-    """(bölüm, yol, var mı) üçlüleri; aynı yol bir dosyada bir kez sayılır."""
+    """(bölüm, yol, var mı) üçlüleri; aynı yol bir dosyada bir kez sayılır. GEÇERSİZ bölümler atlanır."""
     bolum, gorulen = "(başlıksız)", set()
     for satir in dosya.read_text(encoding="utf-8").splitlines():
         if satir.startswith("## "):
             bolum = satir[3:].strip()
+            continue
+        if GECERSIZ in bolum:
             continue
         for tam in satir_yollari(dosya, satir):
             anahtar = tam.resolve()

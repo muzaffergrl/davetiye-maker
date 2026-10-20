@@ -33,7 +33,7 @@ const OUT = arg('out');
 const AT = (arg('at', '0,700,1600,2600') as string).split(',').map(Number);
 const VARIANTS_ARG = arg('variants');
 const VARIANTS: Array<string | null> = VARIANTS_ARG ? VARIANTS_ARG.split(',').map((v) => (v === 'original' ? null : v)) : [null];
-const PUBLIC_URL = 'https://xn--bkestudo-zkb.com';
+const PUBLIC_URL = 'https://bkestudio.com';
 if (!THEME || !OUT) {
   console.error('usage: capture_opening.ts --theme <id> --out <dir> [--at ms,ms,…]');
   process.exit(2);

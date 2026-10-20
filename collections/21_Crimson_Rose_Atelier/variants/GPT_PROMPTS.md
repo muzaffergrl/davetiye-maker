@@ -11,7 +11,10 @@ fotoğrafını koyar).
 
 ## İstem — fildişi güller (yalnız istenirse)
 
-Kaydedilecek dosya (tam yol): `collections/21_Crimson_Rose_Atelier/variants/V07_ivory_rose/gpt/rose-branch.png`
+> 2026-10-20: üretildi ve uygun (referans gibi şeffaf); palet istenmediği için yerleştirilmedi —
+> `docs/qa/2026-10-20-generated-visuals/beklemede/`. Palet istenirse oradan alınır.
+
+Kaydedilecek dosya (tam yol): `collections/21_Crimson_Rose_Atelier/variants/V07_ivory_rose/gpt/rose-branch.png` — şeffaf arka plan (referans gibi)
 (yeni palet klasörü + `palette.json` ile; sonra `recolor.json` → `"rose-branch": {"recolor": "gpt"}` ve dosya
 `platform/themes/crimson-rose-atelier/img/variants/ivory-rose/rose-branch.webp` olarak `build_images.py`'nin aynı kesimiyle
 konur).

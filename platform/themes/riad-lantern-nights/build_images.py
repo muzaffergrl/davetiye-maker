@@ -259,7 +259,16 @@ def write_css_block(block: str) -> None:
     CSS.write_text(css, encoding="utf-8")
 
 
+# Emekli (2026-10-20): tema 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (docs/qa/2026-10-18-*.md,
+# docs/qa/2026-10-19-*.md); img/ artık bu betiğin çıktısı değil. Bu betik img/'yi silip eski geçici kesimi kurar ve
+# yeni kapak / iç sayfa görsellerini yok eder, bu yüzden çalışmaz. tools/gpt_yerlestir.py bu adımı atlar.
+EMEKLI = "tema 2026-10-18/19 yeniden kurulumuyla değişti; img/ elle yönetiliyor (silmemek için çalışmaz)"
+
+
 def main() -> int:
+    if EMEKLI:
+        print(f"build_images.py çalıştırılmadı: {EMEKLI}", file=sys.stderr)
+        return 2
     notes: list[str] = []
     manifest: dict = {}
     for old in list(OUT.glob("*.webp")) + list(OUT.glob("*.jpg")) + list(OUT.glob("*.png")):

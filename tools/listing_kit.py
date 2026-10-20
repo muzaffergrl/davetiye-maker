@@ -52,7 +52,7 @@ TEMPLATES = TOOLS / "listing_templates" / "platform"
 CAPTURE = TOOLS / "listing_templates" / "capture.ts"
 sys.path.insert(0, str(TOOLS))
 
-BASE_URL = os.environ.get("LISTING_BASE_URL", "https://xn--bkestudo-zkb.com")
+BASE_URL = os.environ.get("LISTING_BASE_URL", "https://bkestudio.com")
 PLACEHOLDER_HOSTS = {"example.com", "example.org", "averyandjordan.com", "www.averyandjordan.com", "localhost", "127.0.0.1"}
 
 

@@ -56,7 +56,7 @@ python3 tools/tests/test_listing_kit.py                  # araç testleri
   foto yok; temiz konum yoksa ekran menünün üst kenarından kısa kesilir (resim yanıltmaz, yalnız kısalır).
 - Metinler (`START_HERE.md`, `listing.md`) elle yazılır; araç yalnız dosya üretir. `listing.md` içindeki
   `<!-- listing-kit:media -->` satırının yerine PDF'te görsel küçükleri ve video bilgisi gelir.
-- Başlat linki tabanı `LISTING_BASE_URL` / `GUIDE_BASE_URL` (varsayılan `https://xn--bkestudo-zkb.com`, G189 2026-10-18: kullanıcının aldığı
+- Başlat linki tabanı `LISTING_BASE_URL` / `GUIDE_BASE_URL` (varsayılan `https://bkestudio.com`, G189 2026-10-18: kullanıcının aldığı
   bkestudıo.com; START HERE, QR'lar ve ilan metinleri bununla yeniden üretildi). Önceki not: **alan adı ilk satıştan önce
   kesinleşmeli** (ya da bu adresten kalıcı yönlendirme taahhüt edilmeli; K26: alan adı şimdilik alınmıyor, yani ilk satışlar bu
   adresle olursa ileride alan adına geçerken bu adresten kalıcı yönlendirme şart): satılmış START HERE PDF'leri ve özellikle alıcıların

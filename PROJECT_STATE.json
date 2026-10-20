@@ -5,7 +5,7 @@
   "product_language": "en",
   "delivery_platform": "own website platform + edit panel (K24); Canva delivery dropped",
   "sales_channel": "Etsy",
-  "last_updated": "2026-10-18",
+  "last_updated": "2026-10-20",
   "status_levels": [
     "concept",
     "editable_draft",
@@ -20,10 +20,11 @@
     "subscription_budget",
     "revision_scope",
     "email_provider: SMTP code ready (G147); account / app password not set",
-    "privacy_policy_controller_identity (docs/20 §7.2)",
     "order_check_time / extension / deletion policies",
     "next_product_after_collection_01",
-    "launch_date"
+    "launch_date",
+    "privacy_policy_controller_identity: legal name + postal address for docs/28_ETSY_GIZLILIK_METNI.md (text ready)",
+    "etsy_listing_renewal: automatic (proposed) or manual — the one open item in every etsy_upload.json"
   ],
   "collections": [
     {
@@ -1058,7 +1059,8 @@
       "git_integration": false,
       "deployed_commit": "477589f (2026-10-17; platform tree 387fcfbd77ae; G139 PDF downloads, G144 languages, G145 panel audit) — dpl_BdTLgKpin8Pfse8cEzzDdapYxaS3; last deploy recorded in docs/10 §2c. Later deploy commands were handed to the user's local session (e62dc79, then main 84e108e); none is confirmed run until docs/10 §2c gets its line",
       "undeployed_branch": "main 84e108e (PR #24): K46 access from any device (G146), Etsy auto-check + SMTP (G147, off until env), G148–G159, 21 Crimson live, 22–32 coming, palettes 01–21 (coming); claude/zealous-fermi-hy1o40 adds G172 security fixes",
-      "domain": "bkestudıo.com (IDNA xn--bkestudo-zkb.com) — bought and connected by the user, served by Vercel (main d0d2e7dc, 2026-10-18); G189 (2026-10-18): START HERE 01–32, QR, listing_v3 01–38, etsy_upload.json, listing PDFs and the Etsy shop messages (docs/20 §1.4–1.5) now use https://xn--bkestudo-zkb.com — not yet checked live from a phone"
+      "domain": "bkestudio.com (primary, 0dedaed2 2026-10-19); xn--bkestudo-zkb.com → 308 → bkestudio.com. G190 (2026-10-20): START HERE 01–32 + QR, service guides, etsy_upload.json, listing PDFs 01–21, listing_v3 01–38, docs/05/19/20/22 use https://bkestudio.com.",
+      "live_project_note": "2026-10-20: the cloud session's Vercel connector (team daimonflora-gmailcoms-projects) sees davetiye-platform with its last production deploy on 2026-10-17 (477589f) and no custom domain; bkestudio.com is served by a Vercel project this connector cannot see (the user's local session). Which commit is live there is not recorded in docs/10 §2c."
     },
     "data": {
       "adapter": "blob",
@@ -1198,77 +1200,77 @@
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "velvet-jewel-box": {
         "design": "23",
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "grand-theatre-premiere": {
         "design": "24",
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "orient-express-voyage": {
         "design": "25",
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "kintsugi-washi": {
         "design": "26",
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "riad-lantern-nights": {
         "design": "27",
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "maison-patisserie": {
         "design": "28",
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "celestial-observatory": {
         "design": "29",
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "azulejo-mosaic": {
         "design": "30",
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "sky-lantern-festival": {
         "design": "31",
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "music-box-ballerina": {
         "design": "32",
         "status": "editable_draft",
         "sales_site": "preview",
         "deployed": false,
-        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+        "waits_for": "rebuilt 2026-10-18/19; print grounds wired 2026-10-20 (G149 green); listing scenes in repo, listing images not captured yet; palettes must be redone from the new art; build_images.py retired"
       },
       "marigold-mehndi": {
         "design": "33",
@@ -1314,8 +1316,8 @@
       }
     },
     "tests": {
-      "platform_npm_test": "1636/1638 (2 build-dependent skipped, 0 fail) on claude/zealous-fermi-hy1o40 after G172 (2026-10-17); build + trace-check green, largest function 143.3 MB",
-      "tools_pytest": "71/71 (tools/tests, 2026-10-17)",
+      "platform_npm_test": "1654/1657 (3 skipped, 0 fail) on claude/focused-tesla-37o26v, 2026-10-20; typecheck green; build not run in the cloud session",
+      "tools_pytest": "2026-10-20: 11 fail = test_recolor_parts g177 22–32 (palette parts missing from manifests since the 2026-10-18/19 rebuild; pre-existing, not from G190); the rest green",
       "live": "2026-10-17 477589f: live-check 130/130 with 20 sale themes, blob-smoke green (docs/10 §2c)"
     },
     "not_tested": [
@@ -1324,14 +1326,14 @@
       "cost/load"
     ],
     "presale_blockers": [
-      "deploy main (84e108e or newer) and record it in docs/10 §2c (user-run deploy command)",
-      "Etsy listings upload + listing URLs (K41: after tests; listings prepared, not published)",
-      "order verification: etsy mode ready in code (G147) — needs an Etsy developer app (ETSY_API_KEY, ETSY_SHARED_SECRET) or stays manual",
-      "email: SMTP ready in code (G147) — needs SMTP_* / MAIL_FROM / ADMIN_NOTIFY_EMAIL env (e.g. a Gmail app password)",
-      "real-device manual test (docs/20_ELLE_TEST_PLANI.md)",
-      "12+ char ADMIN_PASSWORD before launch",
-      "GPT images for 22–32 and retouch parts (docs/26: 270 awaited)",
-      "hosting plan: Vercel Hobby is non-commercial (decision open)"
+      "deploy the current branch to the project that serves bkestudio.com and record it in docs/10 §2c (user; docs/29 B1)",
+      "Vercel env: CLAIM_ORDER_VERIFICATION=manual, ADMIN_PASSWORD ≥ 12 chars, PLATFORM_PUBLIC_URL / MARKETING_SITE_URL = https://bkestudio.com (user; docs/29 B2)",
+      "email: SMTP_* / MAIL_FROM / ADMIN_NOTIFY_EMAIL (optional; /my works without it)",
+      "real-device manual test (docs/20_ELLE_TEST_PLANI.md; docs/29 B4)",
+      "privacy: legal name + postal address into docs/28 → Etsy Policy settings (docs/29 B5)",
+      "Etsy listing renewal decision, then upload the 21 listings (K41; docs/29 B6–B7)",
+      "listing URLs → tools/ilan_baglantilari.py --yaz, verified.* → true, launched: true (docs/29 C)",
+      "hosting plan: Vercel Hobby is non-commercial — confirm the serving project's team is on Pro"
     ],
     "static_preview_artifact": "https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (design 03 static, private)",
     "admin": {
@@ -1348,8 +1350,8 @@
     "decision": "K26 + K27 (2026-10-14)",
     "identity": "GM01 direction C \"The Reveal\" (approved for now)",
     "assets": "brand/assets/gpt/final/",
-    "domain": null,
-    "domain_note": "not purchased (K26); bkestudio.com available on 2026-10-14",
+    "domain": "bkestudio.com",
+    "domain_note": "primary since 0dedaed2 (2026-10-19); the earlier IDN xn--bkestudo-zkb.com (bkestudıo.com) answers 308 → bkestudio.com (checked from the cloud session 2026-10-20). Vercel DNS for bkestudio.com reads configured (get_domain_config), but the page itself could not be opened from the cloud session (network policy).",
     "support_email": "bkestudio@gmail.com (K33); response time 24 hours (K37)",
     "etsy_shop_name": "STUDIOBKE (K35; Etsy's real shop name, brand in copy stays BKE Studio)",
     "etsy_shop": {
@@ -1360,7 +1362,9 @@
       "offsite_ads": "off (K39)",
       "refunds": "none; 'we will fix it' promise (K36)",
       "listings": "0 active / 0 draft — packages 01–05 prepared, not uploaded (K41)",
-      "privacy_policy": "not published (needs data controller identity)"
+      "privacy_policy": "not published; English text ready in docs/28_ETSY_GIZLILIK_METNI.md (needs legal name + postal address)"
     }
-  }
+  },
+  "gpt_queue": "2026-10-20: 351 GPT images imported (codex/generated-visuals-2026-10-20, merged); Claude check: 317 pass, 34 rejected (all 33–38 + one palette) and moved to docs/qa/2026-10-20-generated-visuals/reddedilen/ — docs/27 lists those 34. Report: docs/qa/2026-10-20-generated-visuals/CLAUDE_KONTROL.md",
+  "launch_checklist": "docs/29_LANSMAN_LISTESI.md"
 }
