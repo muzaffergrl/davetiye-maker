@@ -1,11 +1,6 @@
 # GPT görsel istekleri — Tasarım 27 · Riad Lantern Nights
 
-> **Instructions for GPT:** Generate PAKET 5 (website layers) first, in order and in ONE chat, then PAKET 2 (sample
-> photos of the fictional couple), then PAKET 6 (printable invitation grounds). Use each English prompt exactly as
-> written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". No text,
-> letters, numbers, logos, monograms, signatures or watermarks in any image. Make W2.1 `doors_closed.png` first and give
-> it as the style reference of every later part: the same carved cedar, the same brass, the same teal / saffron palette,
-> the same light.
+> **Instructions for GPT:** This design ("Riad Lantern Nights") was redesigned on 2026-10-18/19: its website is warm ivory stationery paper with abundant photorealistic flowers in the corners, opened from a themed cover object. The old website parts (PAKET 5) are NO LONGER needed — do not generate them. Generate PAKET 3 (the Etsy listing scenes) and PAKET 6 (the printed invitation grounds) in ONE chat; PAKET 2 (sample photos) is optional and comes last. Before the first image, attach these two images from the repository as the style reference of every image: `platform/themes/riad-lantern-nights/img/bg_scene-1024.webp` (the website background: paper, flowers, colors, light) and `platform/themes/riad-lantern-nights/img/v3-closed-880.webp` (the design's closed cover object). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". No text, letters, numbers, logos, monograms or watermarks in any image.
 
 Bu dosya tasarım 27'nin **bütün görsel parçalarının** tek kaynağıdır (G165). Tasarım `tools/katalog.py` `EK_TEMALAR`'da
 (eksenler + hareket imzası) kayıtlı, üreteçlere girmediği için dosya elle yazıldı. Tema (`platform/themes/riad-lantern-nights/`)
@@ -35,7 +30,9 @@ kontrolünden geçer (bkz. en alttaki "Parçalar gelince").
 
 ---
 
-## PAKET 5 — website katmanları (YAZI YOK)
+## PAKET 5 — website katmanları (YAZI YOK) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+
+> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
 
 Tek görselde tek nesne, düşen gölge yok, ışık sol üstten, şeffaflar gerçek alfa (beyaz ya da dama tahtası değil).
 **W2.1 kapılar, W2.2 kapı çerçevesi ve W2.3 avlu aynı 1024×1536 tuvalde, aynı konumda** çizilir: üst üste konunca kapı
@@ -172,7 +169,7 @@ Kontrol: kapı alt-ortada tam görünüyor; üst %20 sakin; yazı yok. (`tema_bu
 
 ---
 
-## PAKET 2 — örnek fotoğraflar (kurgu çift: Leila & Adrian)
+## PAKET 2 — örnek fotoğraflar (kurgu çift: Leila & Adrian) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
 
 Demo içeriği (`content.demo.json`): **Leila & Adrian**, *The Saffron Courtyard Riad*, Marrakech, October 9, 2027. Kurgu
 kişiler: **gerçek bir kişiye (ünlü dahil) benzemesin**; yüzler doğal, yaşları 28–34; tek bir kurgu çift beş fotoğrafta da aynı
@@ -219,42 +216,37 @@ Kontrol (PAKET 2): beş fotoğrafta aynı kurgu çift; gerçek kişiye benzemiyo
 
 ---
 
-## PAKET 6 — basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK)
+## PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 
-Yazı (isimler, tarih, mekân, program) website'in metin katmanı gibi baskı sayfasına sonradan konur (`lib/print/layouts.ts`).
-Platform her yüz için **tek** zemin kullanır ve onu kesim payı (bleed) dahil sayfaya `cover` ile yayar: aynı görsel hem 5×7 in
-(+1/8 in bleed = 5.25 × 7.25 in) hem A5 (+3 mm = 154 × 216 mm) basar. Bu yüzden zemin **A5 + bleed ölçüsünde, 300 ppi**:
-1819×2551 px (5×7'de üst ve alttan ~%0,8 kırpılır, ~260 ppi). Ayrı A5 / 5×7 zemini istenmez (platform kullanamaz).
-Metin kutusu (`layouts.ts`, kesim kenarına göre %: üst, sağ, alt, sol) ön `[17, 12, 17, 12]`, arka `[16, 12, 10, 12]`;
-zemin görselinin yüzdesiyle bu, ön yüzde **yükseklik %16–84, genişlik %11–89**, arka yüzde **yükseklik %15–91, genişlik
-%11–89** düz kâğıt demektir (iki ölçüde de kutuyu kapsar). Dekor yalnız bunun dışında ve kenardan en az %5 içeride (kâğıt
-dokusu kenara kadar uzanır).
+> **Neden yeniden yazıldı (2026-10-20):** website 18–19 Ekim'de fildişi kâğıt + köşe çiçekleri görünümüne geçti; eski baskı prompt'ları eski görünümü (ve artık olmayan PAKET 5 parçalarını) istiyordu. `platform/lib/print/layouts.ts` `'riad-lantern-nights'` bloğunun geçici kaynakları yeniden kurulumda `img/`'den silindi: panel şu an `public/print/riad-lantern-nights/`'deki eski çıktıyı (eski görünüm) basıyor ve `build-print-assets` bu tema için yeniden koşamaz. Bu zeminler gelince:
+> Platform her yüz için **tek** zemin kullanır ve onu taşma payıyla `cover` olarak yayar (5×7 ve A5 aynı zeminden).
+> 1. `layouts.ts` `'riad-lantern-nights'` bloğunda `sources` → bu zeminler (`print/print_front.png` + `print/print_back.png`), `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }`.
+> 2. Zemin artık **açık fildişi**: `ink` / `accent` koyu tonlara (temanın site metin rengi) alınır; açık mürekkep kalmaz.
+> 3. Metin kutuları (`front` / `back`) gerçek görselde ölçülür (G149; süsten ~%2 açıklık), `node --test tests/g149-print-layout.test.ts`.
+> 4. `cd platform && node scripts/build-print-assets.ts --theme riad-lantern-nights`; `public/print/riad-lantern-nights/`'deki artık kaynak olmayan eski dosyalar silinir; 5×7 ve A5 örnek PDF'ine göz atılır.
+> Ek görsel (her iki yüz için sohbetin başında): `platform/themes/riad-lantern-nights/img/bg_scene-1024.webp`.
 
-#### 6.1 Ön yüz
-**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/print/print_front.png` · 1819×2551 · opak
-
-```
-A printable wedding invitation ground, front side, portrait, flat and seen straight on, 1819 × 2551 px at 300 ppi (A5 with bleed; it is trimmed later), no text: warm ivory lime-plaster paper (#F6EAD2) with a fine hand-made texture running edge to edge. Decoration ONLY in the top 15% and the bottom 15% of the image: at the top a narrow band of teal, saffron and ivory zellige tiles with a small carved ivory-stucco horseshoe arch motif framing a lit pierced brass lantern at its centre and a few magenta bougainvillea bracts at the top-right; at the bottom a matching narrow zellige band. Keep every ornament at least 5% inside the image edges. The whole central area — from 16% to 84% of the height and from 11% to 89% of the width — is plain, calm, even ivory paper with no ornament, no frame line and no shading, for the names, date and venue. Gouache with realistic texture, soft warm light from the top-left. No text, no letters, no numbers, no calligraphy, no monogram.
-```
-
-#### 6.2 Arka yüz
-**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/print/print_back.png` · 1819×2551 · opak
+#### P6.1 Ön yüz
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/print/print_front.png` · 1819×2551 px (300 ppi), opak
 
 ```
-The matching back of the same invitation (give print_front.png as the reference image), portrait, 1819 × 2551 px at 300 ppi, no text: the same ivory lime-plaster paper edge to edge, decorated ONLY in the top 14% of the image — a single narrow band of the same zellige tiles and a small brass eight-point star centred just under it, at least 5% inside the image edges. Everything else — from 15% to 91% of the height and from 11% to 89% of the width, and the bottom of the sheet — is plain, even ivory paper for the schedule, the details and a QR code. Same style and light. No text, no letters, no numbers, no calligraphy.
+A full-bleed printable wedding invitation ground for the "Riad Lantern Nights" design, front side, portrait, seen perfectly flat and straight on, 1819 × 2551 px at 300 ppi (it is trimmed later). Match the attached website background (bg_scene-1024.webp) exactly in style: the same warm ivory, softly textured stationery paper running edge to edge and the same warm sand, terracotta and muted teal, ivory roses, ornate Moroccan bronze lanterns and subtle zellige corner geometry, in the same photorealistic stationery-photography finish with soft light from the top-left. Place the decoration ONLY in two places: an abundant arrangement gathered at the top-left corner and trailing along the top edge, staying entirely within the top 16% of the height, and a smaller matching arrangement gathered at the bottom-right corner, staying entirely within the bottom 14% of the height. A very fine antique-gold foil hairline frame inset about 6% from every edge. Keep every ornament at least 4% inside the image edges. The whole rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm ivory paper (the names, date and venue are printed there in dark ink): no petal, leaf, line, shadow or stain in it. No envelope, no card, no frame object, no people. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1819 × 2551 px.
 ```
+Kontrol: tam taşma fildişi kâğıt (site zeminiyle aynı); çiçekler yalnız üst %16 (sol üst) ve alt %14 (sağ alt); %18–84 yükseklik × %10–90 genişlik tamamen boş; ince altın çerçeve; yazı yok; 1819×2551.
 
-Kontrol (PAKET 6): 1819×2551; orta alan (ön %16–84 × %11–89, arka %15–91 × %11–89) tamamen düz kâğıt; yazı yok; ön ve arka
-aynı kâğıt. **Gelince (Claude, otomatik değil — G149 ölçümü gerekir):** `lib/print/layouts.ts` `'riad-lantern-nights'`
-bloğunda `sources` → `{ front: 'print/print_front.png', back: 'print/print_back.png' }`, `composed` → `front: { bg:
-cover('front'), images: [] }`, `back: { bg: cover('back'), images: [] }` (karo satırları kalkar; kutular aynı kalabilir);
-sonra `node scripts/build-print-assets.ts --theme riad-lantern-nights` ve `node --test tests/g149-print-layout.test.ts`
-(kutu dekora değiyorsa `front`/`back` kutusu ya da `bands` ölçülüp daraltılır). O zamana kadar `build-print-assets` bu iki
-dosya için "PAKET 6 grounds not used … yet" uyarısı verir.
+#### P6.2 Arka yüz
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/print/print_back.png` · 1819×2551 px (300 ppi), opak
+
+```
+The back side of the same "Riad Lantern Nights" invitation (give print_front.png as the reference image): portrait, full bleed, perfectly flat, 1819 × 2551 px at 300 ppi, the same warm ivory stationery paper edge to edge and the same very fine antique-gold foil hairline frame inset about 6% from every edge. Decoration ONLY a slim spray of the same flowers and foliage centred along the top edge, staying entirely within the top 11% of the height and at least 4% inside the image edges. Everything from 13% to 92% of the height and from 10% to 90% of the width is COMPLETELY EMPTY paper for the schedule, the details and a QR code: no petal, line, shadow or stain. Same style, colors and light. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1819 × 2551 px.
+```
+Kontrol: ön yüzle aynı kâğıt ve çerçeve; çiçek yalnız üst %11'de ince dal; %13–92 × %10–90 boş; yazı yok; 1819×2551.
 
 ---
 
-## Parçalar gelince (Claude)
+## Parçalar gelince (Claude) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+
+> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
 
 ```bash
 python3 tools/kit_check.py collections/27_Riad_Lantern_Nights                     # ölçü / alfa / #00FF00 pencere denetimi

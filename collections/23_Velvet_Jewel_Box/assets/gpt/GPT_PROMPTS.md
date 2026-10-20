@@ -1,10 +1,6 @@
 # GPT görsel istekleri — Tasarım 23 · Velvet Jewel Box
 
-> **Instructions for GPT:** Generate PAKET 5 (W2 website parts) first, in order and in ONE chat, then PAKET 2 (sample
-> photos), then PAKET 6 (printable invitation grounds). Use each English prompt exactly as written, follow its
-> checklist, and save each file with the exact file name and folder shown under "Kaydet". No text, letters, numbers,
-> logos, monograms or watermarks in any image. Make W2.1 first and give it as the reference image of every later part:
-> the same aubergine velvet, the same champagne satin, the same rose-gold metal, the same light.
+> **Instructions for GPT:** This design ("Velvet Jewel Box") was redesigned on 2026-10-18/19: its website is warm ivory stationery paper with abundant photorealistic flowers in the corners, opened from a themed cover object. The old website parts (PAKET 5) are NO LONGER needed — do not generate them. Generate PAKET 3 (the Etsy listing scenes) and PAKET 6 (the printed invitation grounds) in ONE chat; PAKET 2 (sample photos) is optional and comes last. Before the first image, attach these two images from the repository as the style reference of every image: `platform/themes/velvet-jewel-box/img/bg_scene-1024.webp` (the website background: paper, flowers, colors, light) and `platform/themes/velvet-jewel-box/img/v3-closed-880.webp` (the design's closed cover object). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". No text, letters, numbers, logos, monograms or watermarks in any image.
 
 Bu dosya Velvet Jewel Box'ın **bütün görsel parçalarının** tek kaynağıdır (G161). Tasarım `tools/katalog.py`
 `EK_TEMALAR`'da; bu dosya elle yazıldı. Tema şu an **geçici** parçalarla çalışıyor: `platform/themes/velvet-jewel-box/
@@ -23,7 +19,9 @@ onlara geçer (kutu açılışı: kapak menteşesinde 90°'ye döner, saten iç 
 - Işık: yumuşak, sol üstten; bütün parçalarda aynı. Parçalarda düşen gölge yok (gölgeyi site ekler).
 - Klasik, romantik, zengin; gerçek bir markaya (mücevher markaları dahil), kişiye ya da başka bir satıcının tasarımına benzemesin.
 
-## Parçalar gelince (Claude)
+## Parçalar gelince (Claude) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+
+> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
 ```bash
 python3 platform/themes/velvet-jewel-box/build_images.py      # parts/ → img/ (+ manifest.json stage ölçüleri)
 # site.css'teki /* stage:begin … stage:end */ bloğunu (parça yerleri, sahne oranı, kapak/kart yolu, kart penceresi)
@@ -40,7 +38,9 @@ collections/23_Velvet_Jewel_Box/assets/gpt/kuru_sekil.json` (deneme görselleriy
 
 ---
 
-## PAKET 5 — W2 parçaları (website katmanları; YAZI YOK)
+## PAKET 5 — W2 parçaları (website katmanları; YAZI YOK) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+
+> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
 
 Yedi parça (W2.1–W2.7). Tek görselde tek nesne, düşen gölge yok, ışık sol üstten, şeffaflar gerçek alfa. **W2.1 kapalı kutu, W2.2 fiyonk ve
 W2.3 açık kutu aynı 1024×1536 tuvalde, aynı konumda** çizilir (üst üste konunca kutunun gövdesi çakışmalı). Site kutuyu
@@ -109,7 +109,7 @@ Kontrol: kutu + fiyonk altta tam görünür; üst %20 yalnız kadife; yazı yok.
 
 ---
 
-## PAKET 2 — Örnek fotoğraflar (kurgu çift Isabelle & Julian; gerçek kişiye benzemesin)
+## PAKET 2 — Örnek fotoğraflar (kurgu çift Isabelle & Julian; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
 
 Bütün fotoğraflar **aynı kurgu çift** (her prompt aynı tarifi taşır: Isabelle uzun koyu kahve saç, alçak topuz, buğday
 ten; Julian kısa koyu sarı saç, kısa düzgün sakal, açık ten), gerçek ya da ünlü birine benzemeyen; aynı renk düzeni
@@ -154,37 +154,31 @@ Photorealistic landscape 16:9: a grand fictional New York townhouse ballroom pre
 
 ---
 
-## PAKET 6 — Basılı davetiye zeminleri (G139; ön + arka, 5×7 ve A5 için tek çift, 300 ppi)
+## PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 
-> **Şu an:** panelden indirilen basılı davetiye geçici **composed** düzende: kadife sayfa zemini (`img/bg_velvet`) +
-> saten fiyonk (`img/closure`), `platform/lib/print/layouts.ts` `'velvet-jewel-box'`. Metin kutuları (kırpım çizgisinin
-> yüzdesi; üst, sağ, alt, sol): **ön `[27, 13, 14, 13]`**, **arka `[12, 12, 22, 12]`**. Aşağıdaki zeminler bu kutuları boş
-> bırakacak şekilde istendi. Tek çift iki boya da yeter: A5 (154×216 mm, taşma dahil) ve 5×7 (5,25×7,25 in, taşma dahil)
-> oranları %1,5 içinde aynı; zemin sayfayı `cover` ile doldurur (5×7'de üstten/alttan ~%0,8 kırpılır).
->
-> **PAKET 6 gelince (Claude) — `layouts.ts` `'velvet-jewel-box'` bloğunda:**
-> 1. `sources` → `{ front: 'print/invitation_front.png', back: 'print/invitation_back.png' }` (fiyonk ve kadife kaynakları çıkar),
-> 2. `composed.front` → `{ bg: cover('front'), images: [] }`, `composed.back` → `{ bg: cover('back'), images: [] }`,
-> 3. `node scripts/build-print-assets.ts --theme velvet-jewel-box`, sonra `node --test tests/g149-print-layout.test.ts`:
->    G149 metin kutularını gerçek sanatta ölçer — fiyonk/çerçeve kutuya giriyorsa `front`/`back` kutusu (ve gerekirse
->    `bands`) GPT'nin çizdiğine göre yeniden ölçülür; kutu sanattan sonra gelir, tersi değil.
-> 4. Tema testi (`tests/theme-velvet-jewel-box.test.ts`) yalnız kaynakların var olduğunu denetler; değişiklik gerekmez.
+> **Neden yeniden yazıldı (2026-10-20):** website 18–19 Ekim'de fildişi kâğıt + köşe çiçekleri görünümüne geçti; eski baskı prompt'ları eski görünümü (ve artık olmayan PAKET 5 parçalarını) istiyordu. `platform/lib/print/layouts.ts` `'velvet-jewel-box'` bloğunun geçici kaynakları yeniden kurulumda `img/`'den silindi: panel şu an `public/print/velvet-jewel-box/`'deki eski çıktıyı (eski görünüm) basıyor ve `build-print-assets` bu tema için yeniden koşamaz. Bu zeminler gelince:
+> Platform her yüz için **tek** zemin kullanır ve onu taşma payıyla `cover` olarak yayar (5×7 ve A5 aynı zeminden).
+> 1. `layouts.ts` `'velvet-jewel-box'` bloğunda `sources` → bu zeminler (`print/invitation_front.png` + `print/invitation_back.png`), `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }`.
+> 2. Zemin artık **açık fildişi**: `ink` / `accent` koyu tonlara (temanın site metin rengi) alınır; açık mürekkep kalmaz.
+> 3. Metin kutuları (`front` / `back`) gerçek görselde ölçülür (G149; süsten ~%2 açıklık), `node --test tests/g149-print-layout.test.ts`.
+> 4. `cd platform && node scripts/build-print-assets.ts --theme velvet-jewel-box`; `public/print/velvet-jewel-box/`'deki artık kaynak olmayan eski dosyalar silinir; 5×7 ve A5 örnek PDF'ine göz atılır.
+> Ek görsel (her iki yüz için sohbetin başında): `platform/themes/velvet-jewel-box/img/bg_scene-1024.webp`.
 
 #### P6.1 Ön yüz
 **Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/print/invitation_front.png` · 1819×2551 px (300 ppi), opak
 
 ```
-A flat printed wedding invitation ground, front side, seen straight on, portrait, edge to edge (it is trimmed later; keep everything important at least 4% inside every edge): rich aubergine velvet-look paper (#2A1328 to #1C0B1A) with a subtle velvet texture, a thin rose-gold foil hairline frame inset about 5% from every edge, and at the top centre a champagne satin ribbon bow with a single ivory pearl at its knot (the same bow as closure.png), lying entirely between 5% and 22% of the image height. The whole area from 25% to 90% of the height and from 11% to 89% of the width is EMPTY, even velvet paper (no ornament, no sparkle, no fold, no light spot) for light champagne text. Soft light from the top-left. Print quality, sharp details at 1819 × 2551 px. No text, letters, numbers, monograms, logos or watermarks.
+A full-bleed printable wedding invitation ground for the "Velvet Jewel Box" design, front side, portrait, seen perfectly flat and straight on, 1819 × 2551 px at 300 ppi (it is trimmed later). Match the attached website background (bg_scene-1024.webp) exactly in style: the same warm ivory, softly textured stationery paper running edge to edge and the same deep plum velvet, antique gold, ivory and dusty mauve roses, elegant gemstone-inspired filigree and softly draped silk, in the same photorealistic stationery-photography finish with soft light from the top-left. Place the decoration ONLY in two places: an abundant arrangement gathered at the top-left corner and trailing along the top edge, staying entirely within the top 16% of the height, and a smaller matching arrangement gathered at the bottom-right corner, staying entirely within the bottom 14% of the height. A very fine antique-gold foil hairline frame inset about 6% from every edge. Keep every ornament at least 4% inside the image edges. The whole rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm ivory paper (the names, date and venue are printed there in dark ink): no petal, leaf, line, shadow or stain in it. No envelope, no card, no frame object, no people. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1819 × 2551 px.
 ```
-Kontrol: fiyonk + inci üst %5–22 içinde; %25–90 yükseklik × %11–89 genişlik tamamen boş ve düz; çerçeve ince, kenardan ~%5; yazı yok; 1819×2551.
+Kontrol: tam taşma fildişi kâğıt (site zeminiyle aynı); çiçekler yalnız üst %16 (sol üst) ve alt %14 (sağ alt); %18–84 yükseklik × %10–90 genişlik tamamen boş; ince altın çerçeve; yazı yok; 1819×2551.
 
 #### P6.2 Arka yüz
 **Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/print/invitation_back.png` · 1819×2551 px (300 ppi), opak
 
 ```
-The back side of the same invitation (give invitation_front.png as the reference image): the same aubergine velvet-look paper and the same thin rose-gold foil hairline frame inset about 5% from every edge, edge to edge, portrait. Only one small champagne satin bow with a pearl at the bottom centre, lying entirely between 82% and 95% of the image height. The whole area from 10% to 80% of the height and from 11% to 89% of the width is EMPTY, even velvet paper for a schedule and a QR code. Soft light from the top-left. Print quality, 1819 × 2551 px. No text, letters, numbers, logos or watermarks.
+The back side of the same "Velvet Jewel Box" invitation (give invitation_front.png as the reference image): portrait, full bleed, perfectly flat, 1819 × 2551 px at 300 ppi, the same warm ivory stationery paper edge to edge and the same very fine antique-gold foil hairline frame inset about 6% from every edge. Decoration ONLY a slim spray of the same flowers and foliage centred along the top edge, staying entirely within the top 11% of the height and at least 4% inside the image edges. Everything from 13% to 92% of the height and from 10% to 90% of the width is COMPLETELY EMPTY paper for the schedule, the details and a QR code: no petal, line, shadow or stain. Same style, colors and light. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1819 × 2551 px.
 ```
-Kontrol: yalnız altta küçük fiyonk (%82–95); %10–80 yükseklik × %11–89 genişlik boş; ön yüzle aynı kâğıt ve çerçeve; yazı yok.
+Kontrol: ön yüzle aynı kâğıt ve çerçeve; çiçek yalnız üst %11'de ince dal; %13–92 × %10–90 boş; yazı yok; 1819×2551.
 
 ---
 

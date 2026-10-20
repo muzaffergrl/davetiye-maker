@@ -1,11 +1,6 @@
 # GPT görsel istekleri — Tasarım 31 · Sky Lantern Festival
 
-> **Instructions for GPT:** Generate PAKET 5 (website layers) first, in order and in ONE chat, then PAKET 2 (sample
-> photos of the fictional couple), then PAKET 6 (printable invitation grounds). Use each English prompt exactly as
-> written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". No text,
-> letters, numbers, logos, monograms, signatures or watermarks in any image. Make W2.2 `lantern_dark.png` first and give
-> it as the style reference of every later part: the same rice paper, the same soft watercolor, the same dusk palette,
-> the same warm light.
+> **Instructions for GPT:** This design ("Sky Lantern Festival") was redesigned on 2026-10-18/19: its website is warm ivory stationery paper with abundant photorealistic flowers in the corners, opened from a themed cover object. The old website parts (PAKET 5) are NO LONGER needed — do not generate them. Generate PAKET 3 (the Etsy listing scenes) and PAKET 6 (the printed invitation grounds) in ONE chat; PAKET 2 (sample photos) is optional and comes last. Before the first image, attach these two images from the repository as the style reference of every image: `platform/themes/sky-lantern-festival/img/bg_scene-1024.webp` (the website background: paper, flowers, colors, light) and `platform/themes/sky-lantern-festival/img/v3-closed-880.webp` (the design's closed cover object). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". No text, letters, numbers, logos, monograms or watermarks in any image.
 
 Bu dosya tasarım 31'in **bütün görsel parçalarının** tek kaynağıdır (G170). Tasarım `tools/katalog.py` `EK_TEMALAR`'da
 (eksenler + hareket imzası) kayıtlı, üreteçlere girmediği için dosya elle yazıldı. Tema (`platform/themes/sky-lantern-festival/`)
@@ -37,7 +32,9 @@ kontrolünden geçer (bkz. en alttaki "Parçalar gelince").
 
 ---
 
-## PAKET 5 — website katmanları (YAZI YOK)
+## PAKET 5 — website katmanları (YAZI YOK) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+
+> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
 
 Tek görselde tek nesne, düşen gölge yok, şeffaflar gerçek alfa (beyaz ya da dama tahtası değil).
 **W2.1 avuçlar, W2.2 sönük fener ve W2.3 yanan fener aynı 1024×1536 tuvalde, aynı konumda** çizilir: üst üste konunca fener
@@ -155,7 +152,7 @@ Kontrol: fener ve avuçlar alt-ortada tam görünüyor; üst %20 sakin; yazı yo
 
 ---
 
-## PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel)
+## PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
 
 Demo içeriği (`content.demo.json`): **Sophie & Daniel**, *The Meadowlark Terrace* (kurgu), Santa Barbara, California,
 September 18, 2027. Kurgu kişiler: **gerçek bir kişiye (ünlü dahil) benzemesin**; yüzler doğal, yaşları 28–34; tek bir kurgu
@@ -204,42 +201,37 @@ Kontrol (PAKET 2): beş fotoğrafta aynı kurgu çift; gerçek kişiye benzemiyo
 
 ---
 
-## PAKET 6 — basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK)
+## PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 
-Yazı (isimler, tarih, mekân, program) website'in metin katmanı gibi baskı sayfasına sonradan konur (`lib/print/layouts.ts`).
-Platform her yüz için **tek** zemin kullanır ve onu kesim payı (bleed) dahil sayfaya `cover` ile yayar: aynı görsel hem 5×7 in
-(+1/8 in bleed = 5.25 × 7.25 in) hem A5 (+3 mm = 154 × 216 mm) basar. Bu yüzden zemin **A5 + bleed ölçüsünde, 300 ppi**:
-1819×2551 px (5×7'de üst ve alttan ~%0,8 kırpılır, ~260 ppi). Ayrı A5 / 5×7 zemini istenmez (platform kullanamaz).
-Metin kutusu (`layouts.ts`, kesim kenarına göre %: üst, sağ, alt, sol) ön `[18, 12, 13, 12]`, arka `[12, 12, 8, 12]`;
-zemin görselinin yüzdesiyle bu, ön yüzde **yükseklik %17–88, genişlik %11–89**, arka yüzde **yükseklik %11–93, genişlik
-%11–89** düz kâğıt demektir (iki ölçüde de kutuyu kapsar). Dekor yalnız bunun dışında ve kenardan en az %5 içeride (kâğıt
-dokusu ve gök yıkaması kenara kadar uzanabilir).
+> **Neden yeniden yazıldı (2026-10-20):** website 18–19 Ekim'de fildişi kâğıt + köşe çiçekleri görünümüne geçti; eski baskı prompt'ları eski görünümü (ve artık olmayan PAKET 5 parçalarını) istiyordu. `platform/lib/print/layouts.ts` `'sky-lantern-festival'` bloğunun geçici kaynakları yeniden kurulumda `img/`'den silindi: panel şu an `public/print/sky-lantern-festival/`'deki eski çıktıyı (eski görünüm) basıyor ve `build-print-assets` bu tema için yeniden koşamaz. Bu zeminler gelince:
+> Platform her yüz için **tek** zemin kullanır ve onu taşma payıyla `cover` olarak yayar (5×7 ve A5 aynı zeminden).
+> 1. `layouts.ts` `'sky-lantern-festival'` bloğunda `sources` → bu zeminler (`print/print_front.png` + `print/print_back.png`), `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }`.
+> 2. Zemin artık **açık fildişi**: `ink` / `accent` koyu tonlara (temanın site metin rengi) alınır; açık mürekkep kalmaz.
+> 3. Metin kutuları (`front` / `back`) gerçek görselde ölçülür (G149; süsten ~%2 açıklık), `node --test tests/g149-print-layout.test.ts`.
+> 4. `cd platform && node scripts/build-print-assets.ts --theme sky-lantern-festival`; `public/print/sky-lantern-festival/`'deki artık kaynak olmayan eski dosyalar silinir; 5×7 ve A5 örnek PDF'ine göz atılır.
+> Ek görsel (her iki yüz için sohbetin başında): `platform/themes/sky-lantern-festival/img/bg_scene-1024.webp`.
 
-#### 6.1 Ön yüz
-**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/print/print_front.png` · 1819×2551 · opak
-
-```
-A printable wedding invitation ground, front side, portrait, flat and seen straight on, 1819 × 2551 px at 300 ppi (A5 with bleed; it is trimmed later), no text: warm ivory rice paper (#F7EEDD) with soft visible fibres running edge to edge. Decoration ONLY in the top 16% and the bottom 11% of the image: at the top a soft watercolor band of dusk sky (deep violet fading to dusky rose) with three small glowing paper lanterns rising in it, the middle one slightly larger, and a little gold star dust; at the bottom a narrow wash of amber horizon light with a faint line of violet hills. Keep the lanterns and every ornament at least 5% inside the image edges (the washes may reach the edges). The whole central area — from 17% to 88% of the height and from 11% to 89% of the width — is plain, calm, even ivory paper with no ornament, no frame line and no shading, for the names, date and venue. Soft watercolor with glowing light. No text, no letters, no numbers, no monogram.
-```
-
-#### 6.2 Arka yüz
-**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/print/print_back.png` · 1819×2551 · opak
+#### P6.1 Ön yüz
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/print/print_front.png` · 1819×2551 px (300 ppi), opak
 
 ```
-The matching back of the same invitation (give print_front.png as the reference image), portrait, 1819 × 2551 px at 300 ppi, no text: the same ivory rice paper edge to edge, decorated ONLY in the top 10% of the image — a single narrow watercolor band of the same dusk sky with one small glowing lantern at its centre. Everything else — from 11% to 93% of the height and from 11% to 89% of the width, and the bottom of the sheet — is plain, even ivory paper for the schedule, the details and a QR code. Same style and light. No text, no letters, no numbers.
+A full-bleed printable wedding invitation ground for the "Sky Lantern Festival" design, front side, portrait, seen perfectly flat and straight on, 1819 × 2551 px at 300 ppi (it is trimmed later). Match the attached website background (bg_scene-1024.webp) exactly in style: the same warm ivory, softly textured stationery paper running edge to edge and the same warm dusk indigo, champagne and soft coral, distant warm sky lanterns, ivory roses and soft eucalyptus foliage, in the same photorealistic stationery-photography finish with soft light from the top-left. Place the decoration ONLY in two places: an abundant arrangement gathered at the top-left corner and trailing along the top edge, staying entirely within the top 16% of the height, and a smaller matching arrangement gathered at the bottom-right corner, staying entirely within the bottom 14% of the height. A very fine antique-gold foil hairline frame inset about 6% from every edge. Keep every ornament at least 4% inside the image edges. The whole rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm ivory paper (the names, date and venue are printed there in dark ink): no petal, leaf, line, shadow or stain in it. No envelope, no card, no frame object, no people. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1819 × 2551 px.
 ```
+Kontrol: tam taşma fildişi kâğıt (site zeminiyle aynı); çiçekler yalnız üst %16 (sol üst) ve alt %14 (sağ alt); %18–84 yükseklik × %10–90 genişlik tamamen boş; ince altın çerçeve; yazı yok; 1819×2551.
 
-Kontrol (PAKET 6): 1819×2551; orta alan (ön %17–88 × %11–89, arka %11–93 × %11–89) tamamen düz kâğıt; yazı yok; ön ve arka
-aynı kâğıt. **Gelince (Claude, otomatik değil — G149 ölçümü gerekir):** `lib/print/layouts.ts` `'sky-lantern-festival'`
-bloğunda `sources` → `{ front: 'print/print_front.png', back: 'print/print_back.png' }`, `composed` → `front: { bg:
-cover('front'), images: [] }`, `back: { bg: cover('back'), images: [] }` (gök bantları ve fener kalkar; kutular aynı
-kalabilir); sonra `node scripts/build-print-assets.ts --theme sky-lantern-festival` ve `node --test
-tests/g149-print-layout.test.ts` (kutu dekora değiyorsa `front`/`back` kutusu ya da `bands` ölçülüp daraltılır). O zamana
-kadar `build-print-assets` bu iki dosya için "PAKET 6 grounds not used … yet" uyarısı verir.
+#### P6.2 Arka yüz
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/print/print_back.png` · 1819×2551 px (300 ppi), opak
+
+```
+The back side of the same "Sky Lantern Festival" invitation (give print_front.png as the reference image): portrait, full bleed, perfectly flat, 1819 × 2551 px at 300 ppi, the same warm ivory stationery paper edge to edge and the same very fine antique-gold foil hairline frame inset about 6% from every edge. Decoration ONLY a slim spray of the same flowers and foliage centred along the top edge, staying entirely within the top 11% of the height and at least 4% inside the image edges. Everything from 13% to 92% of the height and from 10% to 90% of the width is COMPLETELY EMPTY paper for the schedule, the details and a QR code: no petal, line, shadow or stain. Same style, colors and light. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1819 × 2551 px.
+```
+Kontrol: ön yüzle aynı kâğıt ve çerçeve; çiçek yalnız üst %11'de ince dal; %13–92 × %10–90 boş; yazı yok; 1819×2551.
 
 ---
 
-## Parçalar gelince (Claude)
+## Parçalar gelince (Claude) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+
+> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
 
 ```bash
 python3 tools/kit_check.py collections/31_Sky_Lantern_Festival                    # ölçü / alfa / #00FF00 pencere denetimi

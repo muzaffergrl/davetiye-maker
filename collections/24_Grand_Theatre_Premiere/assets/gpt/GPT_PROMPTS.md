@@ -1,10 +1,6 @@
 # GPT görsel istekleri — Tasarım 24 · Grand Theatre Premiere
 
-> **Instructions for GPT:** Generate PAKET 5 (website layers) first, in order and in ONE chat, then PAKET 2 (sample
-> photos), then PAKET 6 (printable invitation grounds). Use each English prompt exactly as written, follow its
-> checklist, and save each file with the exact file name and folder shown under "Kaydet". No text, letters, numbers,
-> logos, monograms, signatures or watermarks in any image. W2.1 `proscenium.png` is the style reference of every later
-> part: give it as the reference image each time (same antique gold, same peacock velvet, same light).
+> **Instructions for GPT:** This design ("Grand Theatre Premiere") was redesigned on 2026-10-18/19: its website is warm ivory stationery paper with abundant photorealistic flowers in the corners, opened from a themed cover object. The old website parts (PAKET 5) are NO LONGER needed — do not generate them. Generate PAKET 3 (the Etsy listing scenes) and PAKET 6 (the printed invitation grounds) in ONE chat; PAKET 2 (sample photos) is optional and comes last. Before the first image, attach these two images from the repository as the style reference of every image: `platform/themes/grand-theatre-premiere/img/bg_scene-1024.webp` (the website background: paper, flowers, colors, light) and `platform/themes/grand-theatre-premiere/img/v3-closed-880.webp` (the design's closed cover object). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". No text, letters, numbers, logos, monograms or watermarks in any image.
 
 Bu dosya 24 Grand Theatre Premiere'in **bütün görsel parçalarının** tek kaynağıdır (G162, `docs/24_YENI_TASARIMLAR.md`).
 Tasarım `tools/katalog.py`'de `EK_TEMALAR` satırıyla kayıtlı (D'ye girmedi), bu yüzden dosya elle yazıldı. Tema
@@ -31,7 +27,9 @@ kesimi"); ölçüler (sahne kutusu, perde menteşeleri, toplanma oranı, kart ku
 
 ---
 
-## PAKET 5 — website katmanları (YAZI YOK)
+## PAKET 5 — website katmanları (YAZI YOK) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+
+> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
 
 Sahne katmanları (W2.1–W2.6) **aynı tuvalde, aynı konumda**: 1024×1536; üst üste konunca kemer açıklığı, perde kanatları
 ve sahnenin içi birbirine oturur. Program kartları (W2.7, W2.7b) tek başına çizilir; Claude kartı sahne tabanına koyar
@@ -161,7 +159,7 @@ Kontrol: sahne + iki toplanmış perde tam görünür; üst %20 yalnız kemer/sa
 
 ---
 
-## PAKET 2 — Örnek fotoğraflar (kurgu çift Charlotte & Theodore; gerçek kişiye benzemesin)
+## PAKET 2 — Örnek fotoğraflar (kurgu çift Charlotte & Theodore; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
 
 Fotogerçekçi, sinematik, sıcak sahne ışığı; tavus mavisi, antik altın ve fildişi palet; hafif film greni. Yüzler
 gerçek ünlülere ya da tanınmış kişilere benzemez; marka, tabela, yazı yok. Hepsi 4:5 dikey (mekân 3:2 yatay).
@@ -205,56 +203,52 @@ Landscape 3:2: the interior of an imaginary grand theatre seen from the back of 
 
 ---
 
-## PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi, taşma paylı, YAZI YOK)
+## PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 
-Şu an `platform/lib/print/layouts.ts` → `grand-theatre-premiere` **composed** düzenle çalışıyor (fildişi kâğıt + üstte ve
-ön yüzde altta kadife bandı; ikisi de temanın GPT dokularından). Metin kutuları (kesim çizgisinin yüzdesi, üst · sağ · alt ·
-sol): ön `front: [19, 12, 15, 12]`, arka `back: [17, 12, 8, 12]`. Aşağıdaki prompt'lar bu kutuların **dışına** süs koyar
-(yüzdeler taşmalı görselin yüzdesi; 5×7'de taşma payı yatayda %2,4, dikeyde %1,7 → ön boş alan kesimde ≈ %18–86 yükseklik,
-%10–90 genişlik; kutular onun içinde kalır). Zeminler gelince **otomatik geçmez** (G149: kutular gerçek resmin üzerinde
-ölçülür); Claude şunu yapar:
-1. `python3 tools/kit_check.py collections/24_Grand_Theatre_Premiere --paket 6` (ölçü 1575×2175 / 1819×2551, yazı yok).
-2. `layouts.ts` bloğunda `sources` → `{ front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' }`;
-   `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }` (zemin taşma paylı
-   tam sayfa; A5 aynı kaynağı `cover` ile ~%1,5 kırparak kullanır — A5 zeminleri baskıcıya ayrıca verilir).
-3. `cd platform && node scripts/build-print-assets.ts --theme grand-theatre-premiere`; `front`/`back` kutularını gerçek
-   resmin süs sınırlarından ~%2 açıklıkla yeniden ölç (gerekirse `bands`), `node --test tests/g149-print-layout.test.ts`
-   ve `tests/theme-grand-theatre-premiere.test.ts` (baskı kaynakları var mı) yeşil; 5×7 ve A5 PDF'ine göz at.
-4. Eski `public/print/grand-theatre-premiere/{paper,velvet}.webp` dosyalarını sil (artık kaynak değil).
+> **Neden yeniden yazıldı (2026-10-20):** website 18–19 Ekim'de fildişi kâğıt + köşe çiçekleri görünümüne geçti; eski baskı prompt'ları eski görünümü (ve artık olmayan PAKET 5 parçalarını) istiyordu. `platform/lib/print/layouts.ts` `'grand-theatre-premiere'` bloğunun geçici kaynakları yeniden kurulumda `img/`'den silindi: panel şu an `public/print/grand-theatre-premiere/`'deki eski çıktıyı (eski görünüm) basıyor ve `build-print-assets` bu tema için yeniden koşamaz. Bu zeminler gelince:
+> 1. `layouts.ts` `'grand-theatre-premiere'` bloğunda `sources` → bu zeminler (`print/invitation_front_5x7.png` + `print/invitation_back_5x7.png`), `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }`.
+> 2. Zemin artık **açık fildişi**: `ink` / `accent` koyu tonlara (temanın site metin rengi) alınır; açık mürekkep kalmaz.
+> 3. Metin kutuları (`front` / `back`) gerçek görselde ölçülür (G149; süsten ~%2 açıklık), `node --test tests/g149-print-layout.test.ts`.
+> 4. `cd platform && node scripts/build-print-assets.ts --theme grand-theatre-premiere`; `public/print/grand-theatre-premiere/`'deki artık kaynak olmayan eski dosyalar silinir; 5×7 ve A5 örnek PDF'ine göz atılır.
+> Ek görsel (her iki yüz için sohbetin başında): `platform/themes/grand-theatre-premiere/img/bg_scene-1024.webp`.
 
-#### P1 — Ön yüz 5×7 (taşma paylı)
-**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/print/invitation_front_5x7.png` · **1575×2175 px** (5.25×7.25 in @ 300 ppi) · Opak
+#### P6.1 Ön yüz 5×7
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/print/invitation_front_5x7.png` · 1575×2175 px (300 ppi), opak
 
 ```
-The front of a printed wedding invitation, flat, portrait, full bleed, in the Grand Theatre Premiere style: aged ivory theatre-programme paper (#F3EBD8) with fine cotton grain; across the top 15% a painted peacock-teal velvet valance in three soft swags with an antique-gold bullion fringe and two small tassels; across the bottom 11% the gilded edge of a stage floor with a soft warm footlight glow; a very fine antique-gold printed rule frame inset about 6% from the edges. The whole centre (from about 19% to 85% of the height and 12% to 88% of the width) is EMPTY plain ivory paper for dark ink text. Oil-painted theatre poster style. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+A full-bleed printable wedding invitation ground for the "Grand Theatre Premiere" design, front side, portrait, seen perfectly flat and straight on, 1575 × 2175 px at 300 ppi (it is trimmed later). Match the attached website background (bg_scene-1024.webp) exactly in style: the same warm ivory, softly textured stationery paper running edge to edge and the same burgundy velvet, antique gold and ivory roses, theatrical gilded rococo flourishes at the corners, in the same photorealistic stationery-photography finish with soft light from the top-left. Place the decoration ONLY in two places: an abundant arrangement gathered at the top-left corner and trailing along the top edge, staying entirely within the top 16% of the height, and a smaller matching arrangement gathered at the bottom-right corner, staying entirely within the bottom 14% of the height. A very fine antique-gold foil hairline frame inset about 6% from every edge. Keep every ornament at least 4% inside the image edges. The whole rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm ivory paper (the names, date and venue are printed there in dark ink): no petal, leaf, line, shadow or stain in it. No envelope, no card, no frame object, no people. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575 × 2175 px.
 ```
-Kontrol: orta boş; süs yalnız üst %15 ve alt %11 + ince çerçeve; yazı yok; 1575×2175.
+Kontrol: tam taşma fildişi kâğıt (site zeminiyle aynı); çiçekler yalnız üst %16 (sol üst) ve alt %14 (sağ alt); %18–84 yükseklik × %10–90 genişlik tamamen boş; ince altın çerçeve; yazı yok; 1575×2175.
 
-#### P2 — Arka yüz 5×7
-**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/print/invitation_back_5x7.png` · **1575×2175 px** · Opak
-
-```
-The back of the same printed invitation, flat, portrait, full bleed: the same aged ivory programme paper and fine gold rule frame; across the top 13% a narrower painted peacock velvet valance with gold fringe; nothing at the bottom. Everything below the valance is EMPTY plain ivory paper for a schedule and a QR code. Same style. No text, letters, numbers, logos or watermarks. Print quality, 1575×2175 px.
-```
-Kontrol: yalnız üstte saçak; geri kalanı boş; yazı yok.
-
-#### P3 — Ön yüz A5 (taşma paylı)
-**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/print/invitation_front_a5.png` · **1819×2551 px** (154×216 mm @ 300 ppi) · Opak
+#### P6.2 Arka yüz 5×7
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/print/invitation_back_5x7.png` · 1575×2175 px (300 ppi), opak
 
 ```
-The same front as invitation_front_5x7.png (give it as the reference), recomposed for the A5 proportion: the velvet valance across the top 15%, the gilded stage edge and footlight glow across the bottom 11%, the fine gold rule frame inset about 6%, the whole centre EMPTY plain ivory paper. Same style and colours. No text, letters, numbers, logos or watermarks. Print quality, 1819×2551 px.
+The back side of the same "Grand Theatre Premiere" invitation (give invitation_front_5x7.png as the reference image): portrait, full bleed, perfectly flat, 1575 × 2175 px at 300 ppi, the same warm ivory stationery paper edge to edge and the same very fine antique-gold foil hairline frame inset about 6% from every edge. Decoration ONLY a slim spray of the same flowers and foliage centred along the top edge, staying entirely within the top 11% of the height and at least 4% inside the image edges. Everything from 13% to 92% of the height and from 10% to 90% of the width is COMPLETELY EMPTY paper for the schedule, the details and a QR code: no petal, line, shadow or stain. Same style, colors and light. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1575 × 2175 px.
 ```
+Kontrol: ön yüzle aynı kâğıt ve çerçeve; çiçek yalnız üst %11'de ince dal; %13–92 × %10–90 boş; yazı yok; 1575×2175.
 
-#### P4 — Arka yüz A5
-**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/print/invitation_back_a5.png` · **1819×2551 px** · Opak
+#### P6.3 Ön yüz A5
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/print/invitation_front_a5.png` · 1819×2551 px (300 ppi), opak
 
 ```
-The same back as invitation_back_5x7.png, recomposed for the A5 proportion: velvet valance across the top 13%, fine gold rule frame, everything below EMPTY plain ivory paper. Same style. No text, letters, numbers, logos or watermarks. Print quality, 1819×2551 px.
+A full-bleed printable wedding invitation ground for the "Grand Theatre Premiere" design, front side, portrait, seen perfectly flat and straight on, 1819 × 2551 px at 300 ppi (it is trimmed later). Match the attached website background (bg_scene-1024.webp) exactly in style: the same warm ivory, softly textured stationery paper running edge to edge and the same burgundy velvet, antique gold and ivory roses, theatrical gilded rococo flourishes at the corners, in the same photorealistic stationery-photography finish with soft light from the top-left. Place the decoration ONLY in two places: an abundant arrangement gathered at the top-left corner and trailing along the top edge, staying entirely within the top 16% of the height, and a smaller matching arrangement gathered at the bottom-right corner, staying entirely within the bottom 14% of the height. A very fine antique-gold foil hairline frame inset about 6% from every edge. Keep every ornament at least 4% inside the image edges. The whole rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm ivory paper (the names, date and venue are printed there in dark ink): no petal, leaf, line, shadow or stain in it. No envelope, no card, no frame object, no people. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1819 × 2551 px.
 ```
+Kontrol: tam taşma fildişi kâğıt (site zeminiyle aynı); çiçekler yalnız üst %16 (sol üst) ve alt %14 (sağ alt); %18–84 yükseklik × %10–90 genişlik tamamen boş; ince altın çerçeve; yazı yok; 1819×2551.
+
+#### P6.4 Arka yüz A5
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/print/invitation_back_a5.png` · 1819×2551 px (300 ppi), opak
+
+```
+The back side of the same "Grand Theatre Premiere" invitation (give invitation_front_a5.png as the reference image): portrait, full bleed, perfectly flat, 1819 × 2551 px at 300 ppi, the same warm ivory stationery paper edge to edge and the same very fine antique-gold foil hairline frame inset about 6% from every edge. Decoration ONLY a slim spray of the same flowers and foliage centred along the top edge, staying entirely within the top 11% of the height and at least 4% inside the image edges. Everything from 13% to 92% of the height and from 10% to 90% of the width is COMPLETELY EMPTY paper for the schedule, the details and a QR code: no petal, line, shadow or stain. Same style, colors and light. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1819 × 2551 px.
+```
+Kontrol: ön yüzle aynı kâğıt ve çerçeve; çiçek yalnız üst %11'de ince dal; %13–92 × %10–90 boş; yazı yok; 1819×2551.
 
 ---
 
-## Claude'un kesimi (parçalar gelince — `build_images.py` kendisi yapar)
+## Claude'un kesimi (parçalar gelince — `build_images.py` kendisi yapar) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+
+> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
 - Komut: `python3 platform/themes/grand-theatre-premiere/build_images.py` (sonra `cd platform && node scripts/theme-assets.cjs`
   ve `PORT=… node scripts/theme-check.cjs --theme grand-theatre-premiere --stress --compare none`). Çıktıdaki
   "waiting for GPT" listesi hâlâ geçici olan parçaları sayar; `img/manifest.json` → `sources` her parçanın kaynağını yazar.

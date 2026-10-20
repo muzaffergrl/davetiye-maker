@@ -25,7 +25,7 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
    build'i ister) → `etsy_upload.py`; en sonda bu dosyayı yeniden yazar. Tasarım × adım tablosu ve live engelleri basılır.
    Yerleştirmeden yalnız adımlar: `--koleksiyon NN|all`. Hiçbir tasarımı live yapmaz, yayınlamaz, Etsy'ye göndermez.
 
-**Toplam eksik: 493**
+**Toplam eksik: 351**
 
 | Prompt dosyası | Bölüm | Var | Eksik |
 |---|---|---|---|
@@ -50,49 +50,38 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
 | `collections/19_Midnight_Garden/assets/gpt/GPT_PROMPTS.md` | G139 — Basılı davetiye için yüksek çözünürlüklü parçalar | 0 | 2 |
 | `collections/20_Coastal_Seaside/assets/gpt/GPT_PROMPTS.md` | G139 — Basılı davetiye için yüksek çözünürlüklü parçalar | 0 | 2 |
 | `collections/21_Crimson_Rose_Atelier/assets/gpt/GPT_PROMPTS.md` | G139 — Basılı davetiye parçaları (yeni; şu an kağıt + gül dalı + mühürle geçici düzen) | 0 | 2 |
-| `collections/22_Nocturne_Lake_Estate/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — W2 parçaları (website katmanları; YAZI YOK) | 0 | 8 |
-| `collections/22_Nocturne_Lake_Estate/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Eleanor & Luca; gerçek kişiye benzemesin) | 0 | 5 |
-| `collections/22_Nocturne_Lake_Estate/assets/gpt/GPT_PROMPTS.md` | G139 — Basılı davetiye parçaları (yeni; şu an göl manzarası + mühürle geçici düzen) | 0 | 2 |
+| `collections/22_Nocturne_Lake_Estate/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Eleanor & Luca; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor) | 0 | 5 |
+| `collections/22_Nocturne_Lake_Estate/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre) | 0 | 2 |
 | `collections/22_Nocturne_Lake_Estate/assets/gpt/GPT_PROMPTS.md` | PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) | 0 | 5 |
-| `collections/23_Velvet_Jewel_Box/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — W2 parçaları (website katmanları; YAZI YOK) | 0 | 7 |
-| `collections/23_Velvet_Jewel_Box/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Isabelle & Julian; gerçek kişiye benzemesin) | 0 | 5 |
-| `collections/23_Velvet_Jewel_Box/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; ön + arka, 5×7 ve A5 için tek çift, 300 ppi) | 0 | 2 |
+| `collections/23_Velvet_Jewel_Box/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Isabelle & Julian; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor) | 0 | 5 |
+| `collections/23_Velvet_Jewel_Box/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre) | 0 | 2 |
 | `collections/23_Velvet_Jewel_Box/assets/gpt/GPT_PROMPTS.md` | PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) | 0 | 5 |
-| `collections/24_Grand_Theatre_Premiere/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — website katmanları (YAZI YOK) | 0 | 14 |
-| `collections/24_Grand_Theatre_Premiere/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Charlotte & Theodore; gerçek kişiye benzemesin) | 0 | 5 |
-| `collections/24_Grand_Theatre_Premiere/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi, taşma paylı, YAZI YOK) | 0 | 4 |
+| `collections/24_Grand_Theatre_Premiere/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Charlotte & Theodore; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor) | 0 | 5 |
+| `collections/24_Grand_Theatre_Premiere/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre) | 0 | 4 |
 | `collections/24_Grand_Theatre_Premiere/assets/gpt/GPT_PROMPTS.md` | PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) | 0 | 5 |
-| `collections/25_Orient_Express_Voyage/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (W2; şeffaflar gerçek alfa, düşen gölge yok) | 0 | 16 |
-| `collections/25_Orient_Express_Voyage/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Amelia & Rafael; gerçek kişiye benzemesin) | 0 | 5 |
-| `collections/25_Orient_Express_Voyage/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi, yazı yok) | 0 | 2 |
+| `collections/25_Orient_Express_Voyage/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Amelia & Rafael; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor) | 0 | 5 |
+| `collections/25_Orient_Express_Voyage/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre) | 0 | 2 |
 | `collections/25_Orient_Express_Voyage/assets/gpt/GPT_PROMPTS.md` | PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) | 0 | 5 |
-| `collections/26_Kintsugi_Washi/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 12 |
-| `collections/26_Kintsugi_Washi/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Naomi & Kai; gerçek kişiye benzemesin) | 0 | 5 |
-| `collections/26_Kintsugi_Washi/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5) | 0 | 2 |
+| `collections/26_Kintsugi_Washi/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Naomi & Kai; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor) | 0 | 5 |
+| `collections/26_Kintsugi_Washi/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre) | 0 | 2 |
 | `collections/26_Kintsugi_Washi/assets/gpt/GPT_PROMPTS.md` | PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) | 0 | 5 |
-| `collections/27_Riad_Lantern_Nights/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — website katmanları (YAZI YOK) | 0 | 18 |
-| `collections/27_Riad_Lantern_Nights/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — örnek fotoğraflar (kurgu çift: Leila & Adrian) | 0 | 5 |
-| `collections/27_Riad_Lantern_Nights/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK) | 0 | 2 |
+| `collections/27_Riad_Lantern_Nights/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — örnek fotoğraflar (kurgu çift: Leila & Adrian) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor) | 0 | 5 |
+| `collections/27_Riad_Lantern_Nights/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre) | 0 | 2 |
 | `collections/27_Riad_Lantern_Nights/assets/gpt/GPT_PROMPTS.md` | PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) | 0 | 5 |
-| `collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 14 |
-| `collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Camille & Oliver; gerçek kişiye benzemesin) | 0 | 5 |
-| `collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK) | 0 | 2 |
+| `collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Camille & Oliver; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor) | 0 | 5 |
+| `collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre) | 0 | 2 |
 | `collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md` | PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) | 0 | 5 |
-| `collections/29_Celestial_Observatory/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 14 |
-| `collections/29_Celestial_Observatory/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin) | 0 | 5 |
-| `collections/29_Celestial_Observatory/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5) | 0 | 2 |
+| `collections/29_Celestial_Observatory/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor) | 0 | 5 |
+| `collections/29_Celestial_Observatory/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre) | 0 | 2 |
 | `collections/29_Celestial_Observatory/assets/gpt/GPT_PROMPTS.md` | PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) | 0 | 5 |
-| `collections/30_Azulejo_Mosaic/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 12 |
-| `collections/30_Azulejo_Mosaic/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin) | 0 | 5 |
-| `collections/30_Azulejo_Mosaic/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5, 300 ppi) | 0 | 2 |
+| `collections/30_Azulejo_Mosaic/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor) | 0 | 5 |
+| `collections/30_Azulejo_Mosaic/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre) | 0 | 2 |
 | `collections/30_Azulejo_Mosaic/assets/gpt/GPT_PROMPTS.md` | PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) | 0 | 5 |
-| `collections/31_Sky_Lantern_Festival/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — website katmanları (YAZI YOK) | 0 | 12 |
-| `collections/31_Sky_Lantern_Festival/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel) | 0 | 5 |
-| `collections/31_Sky_Lantern_Festival/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK) | 0 | 2 |
+| `collections/31_Sky_Lantern_Festival/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor) | 0 | 5 |
+| `collections/31_Sky_Lantern_Festival/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre) | 0 | 2 |
 | `collections/31_Sky_Lantern_Festival/assets/gpt/GPT_PROMPTS.md` | PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) | 0 | 5 |
-| `collections/32_Music_Box_Ballerina/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 15 |
-| `collections/32_Music_Box_Ballerina/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin) | 0 | 5 |
-| `collections/32_Music_Box_Ballerina/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK) | 0 | 2 |
+| `collections/32_Music_Box_Ballerina/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor) | 0 | 5 |
+| `collections/32_Music_Box_Ballerina/assets/gpt/GPT_PROMPTS.md` | PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre) | 0 | 2 |
 | `collections/32_Music_Box_Ballerina/assets/gpt/GPT_PROMPTS.md` | PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) | 0 | 5 |
 | `collections/33_Marigold_Mehndi/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 0 | 18 |
 | `collections/33_Marigold_Mehndi/assets/gpt/GPT_PROMPTS.md` | PAKET 2 — Örnek fotoğraflar (kurgu çift Anaya & Kabir; gerçek kişiye benzemesin) | 0 | 5 |
@@ -226,21 +215,13 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
 
 ### `collections/22_Nocturne_Lake_Estate/assets/gpt/GPT_PROMPTS.md`
 
-- `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/envelope_closed.png` — PAKET 5 — W2 parçaları (website katmanları; YAZI YOK)
-- `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/closure.png` — PAKET 5 — W2 parçaları (website katmanları; YAZI YOK)
-- `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/envelope_open.png` — PAKET 5 — W2 parçaları (website katmanları; YAZI YOK)
-- `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/card_small.png` — PAKET 5 — W2 parçaları (website katmanları; YAZI YOK)
-- `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/bg_page.png` — PAKET 5 — W2 parçaları (website katmanları; YAZI YOK)
-- `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/accent_1.png` — PAKET 5 — W2 parçaları (website katmanları; YAZI YOK)
-- `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/divider.png` — PAKET 5 — W2 parçaları (website katmanları; YAZI YOK)
-- `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/web_hero.png` — PAKET 5 — W2 parçaları (website katmanları; YAZI YOK)
-- `collections/22_Nocturne_Lake_Estate/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Eleanor & Luca; gerçek kişiye benzemesin)
-- `collections/22_Nocturne_Lake_Estate/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Eleanor & Luca; gerçek kişiye benzemesin)
-- `collections/22_Nocturne_Lake_Estate/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Eleanor & Luca; gerçek kişiye benzemesin)
-- `collections/22_Nocturne_Lake_Estate/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Eleanor & Luca; gerçek kişiye benzemesin)
-- `collections/22_Nocturne_Lake_Estate/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Eleanor & Luca; gerçek kişiye benzemesin)
-- `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/invitation_card.png` — G139 — Basılı davetiye parçaları (yeni; şu an göl manzarası + mühürle geçici düzen)
-- `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/info_card.png` — G139 — Basılı davetiye parçaları (yeni; şu an göl manzarası + mühürle geçici düzen)
+- `collections/22_Nocturne_Lake_Estate/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Eleanor & Luca; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/22_Nocturne_Lake_Estate/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Eleanor & Luca; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/22_Nocturne_Lake_Estate/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Eleanor & Luca; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/22_Nocturne_Lake_Estate/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Eleanor & Luca; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/22_Nocturne_Lake_Estate/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Eleanor & Luca; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/22_Nocturne_Lake_Estate/assets/gpt/print/invitation_front.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
+- `collections/22_Nocturne_Lake_Estate/assets/gpt/print/invitation_back.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 - `collections/22_Nocturne_Lake_Estate/assets/gpt/mockups/cover_hand.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/22_Nocturne_Lake_Estate/assets/gpt/mockups/three_phones.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/22_Nocturne_Lake_Estate/assets/gpt/mockups/laptop_phone.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
@@ -249,20 +230,13 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
 
 ### `collections/23_Velvet_Jewel_Box/assets/gpt/GPT_PROMPTS.md`
 
-- `collections/23_Velvet_Jewel_Box/assets/gpt/parts/box_closed.png` — PAKET 5 — W2 parçaları (website katmanları; YAZI YOK)
-- `collections/23_Velvet_Jewel_Box/assets/gpt/parts/closure.png` — PAKET 5 — W2 parçaları (website katmanları; YAZI YOK)
-- `collections/23_Velvet_Jewel_Box/assets/gpt/parts/box_open.png` — PAKET 5 — W2 parçaları (website katmanları; YAZI YOK)
-- `collections/23_Velvet_Jewel_Box/assets/gpt/parts/card_small.png` — PAKET 5 — W2 parçaları (website katmanları; YAZI YOK)
-- `collections/23_Velvet_Jewel_Box/assets/gpt/parts/bg_page.png` — PAKET 5 — W2 parçaları (website katmanları; YAZI YOK)
-- `collections/23_Velvet_Jewel_Box/assets/gpt/parts/satin_bg.png` — PAKET 5 — W2 parçaları (website katmanları; YAZI YOK)
-- `collections/23_Velvet_Jewel_Box/assets/gpt/parts/web_hero.png` — PAKET 5 — W2 parçaları (website katmanları; YAZI YOK)
-- `collections/23_Velvet_Jewel_Box/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Isabelle & Julian; gerçek kişiye benzemesin)
-- `collections/23_Velvet_Jewel_Box/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Isabelle & Julian; gerçek kişiye benzemesin)
-- `collections/23_Velvet_Jewel_Box/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Isabelle & Julian; gerçek kişiye benzemesin)
-- `collections/23_Velvet_Jewel_Box/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Isabelle & Julian; gerçek kişiye benzemesin)
-- `collections/23_Velvet_Jewel_Box/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Isabelle & Julian; gerçek kişiye benzemesin)
-- `collections/23_Velvet_Jewel_Box/assets/gpt/print/invitation_front.png` — PAKET 6 — Basılı davetiye zeminleri (G139; ön + arka, 5×7 ve A5 için tek çift, 300 ppi)
-- `collections/23_Velvet_Jewel_Box/assets/gpt/print/invitation_back.png` — PAKET 6 — Basılı davetiye zeminleri (G139; ön + arka, 5×7 ve A5 için tek çift, 300 ppi)
+- `collections/23_Velvet_Jewel_Box/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Isabelle & Julian; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/23_Velvet_Jewel_Box/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Isabelle & Julian; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/23_Velvet_Jewel_Box/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Isabelle & Julian; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/23_Velvet_Jewel_Box/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Isabelle & Julian; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/23_Velvet_Jewel_Box/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Isabelle & Julian; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/23_Velvet_Jewel_Box/assets/gpt/print/invitation_front.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
+- `collections/23_Velvet_Jewel_Box/assets/gpt/print/invitation_back.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 - `collections/23_Velvet_Jewel_Box/assets/gpt/mockups/cover_hand.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/23_Velvet_Jewel_Box/assets/gpt/mockups/three_phones.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/23_Velvet_Jewel_Box/assets/gpt/mockups/laptop_phone.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
@@ -271,29 +245,15 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
 
 ### `collections/24_Grand_Theatre_Premiere/assets/gpt/GPT_PROMPTS.md`
 
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/proscenium.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/curtain_left.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/curtain_right.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/curtain_left_open.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/curtain_right_open.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/stage_back.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/card_small.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/card_plain.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/velvet_tile.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/playbill_tile.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/ticket_stub.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/bg_page.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/tassel.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/web_hero.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Charlotte & Theodore; gerçek kişiye benzemesin)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Charlotte & Theodore; gerçek kişiye benzemesin)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Charlotte & Theodore; gerçek kişiye benzemesin)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Charlotte & Theodore; gerçek kişiye benzemesin)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Charlotte & Theodore; gerçek kişiye benzemesin)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/print/invitation_front_5x7.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi, taşma paylı, YAZI YOK)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/print/invitation_back_5x7.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi, taşma paylı, YAZI YOK)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/print/invitation_front_a5.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi, taşma paylı, YAZI YOK)
-- `collections/24_Grand_Theatre_Premiere/assets/gpt/print/invitation_back_a5.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi, taşma paylı, YAZI YOK)
+- `collections/24_Grand_Theatre_Premiere/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Charlotte & Theodore; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/24_Grand_Theatre_Premiere/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Charlotte & Theodore; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/24_Grand_Theatre_Premiere/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Charlotte & Theodore; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/24_Grand_Theatre_Premiere/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Charlotte & Theodore; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/24_Grand_Theatre_Premiere/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Charlotte & Theodore; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/24_Grand_Theatre_Premiere/assets/gpt/print/invitation_front_5x7.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
+- `collections/24_Grand_Theatre_Premiere/assets/gpt/print/invitation_back_5x7.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
+- `collections/24_Grand_Theatre_Premiere/assets/gpt/print/invitation_front_a5.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
+- `collections/24_Grand_Theatre_Premiere/assets/gpt/print/invitation_back_a5.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 - `collections/24_Grand_Theatre_Premiere/assets/gpt/mockups/cover_hand.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/24_Grand_Theatre_Premiere/assets/gpt/mockups/three_phones.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/24_Grand_Theatre_Premiere/assets/gpt/mockups/laptop_phone.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
@@ -302,29 +262,13 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
 
 ### `collections/25_Orient_Express_Voyage/assets/gpt/GPT_PROMPTS.md`
 
-- `collections/25_Orient_Express_Voyage/assets/gpt/parts/wallet_closed.png` — PAKET 5 — Website katmanları (W2; şeffaflar gerçek alfa, düşen gölge yok)
-- `collections/25_Orient_Express_Voyage/assets/gpt/parts/wallet_strap.png` — PAKET 5 — Website katmanları (W2; şeffaflar gerçek alfa, düşen gölge yok)
-- `collections/25_Orient_Express_Voyage/assets/gpt/parts/wallet_inside_cover.png` — PAKET 5 — Website katmanları (W2; şeffaflar gerçek alfa, düşen gölge yok)
-- `collections/25_Orient_Express_Voyage/assets/gpt/parts/wallet_inside.png` — PAKET 5 — Website katmanları (W2; şeffaflar gerçek alfa, düşen gölge yok)
-- `collections/25_Orient_Express_Voyage/assets/gpt/parts/wallet_pocket.png` — PAKET 5 — Website katmanları (W2; şeffaflar gerçek alfa, düşen gölge yok)
-- `collections/25_Orient_Express_Voyage/assets/gpt/parts/bg_station.png` — PAKET 5 — Website katmanları (W2; şeffaflar gerçek alfa, düşen gölge yok)
-- `collections/25_Orient_Express_Voyage/assets/gpt/parts/ticket.png` — PAKET 5 — Website katmanları (W2; şeffaflar gerçek alfa, düşen gölge yok)
-- `collections/25_Orient_Express_Voyage/assets/gpt/parts/poster_hero.png` — PAKET 5 — Website katmanları (W2; şeffaflar gerçek alfa, düşen gölge yok)
-- `collections/25_Orient_Express_Voyage/assets/gpt/parts/map.png` — PAKET 5 — Website katmanları (W2; şeffaflar gerçek alfa, düşen gölge yok)
-- `collections/25_Orient_Express_Voyage/assets/gpt/parts/luggage_tag.png` — PAKET 5 — Website katmanları (W2; şeffaflar gerçek alfa, düşen gölge yok)
-- `collections/25_Orient_Express_Voyage/assets/gpt/parts/station_clock.png` — PAKET 5 — Website katmanları (W2; şeffaflar gerçek alfa, düşen gölge yok)
-- `collections/25_Orient_Express_Voyage/assets/gpt/parts/carriage_window.png` — PAKET 5 — Website katmanları (W2; şeffaflar gerçek alfa, düşen gölge yok)
-- `collections/25_Orient_Express_Voyage/assets/gpt/parts/carriage_wall.png` — PAKET 5 — Website katmanları (W2; şeffaflar gerçek alfa, düşen gölge yok)
-- `collections/25_Orient_Express_Voyage/assets/gpt/parts/bg_paper.png` — PAKET 5 — Website katmanları (W2; şeffaflar gerçek alfa, düşen gölge yok)
-- `collections/25_Orient_Express_Voyage/assets/gpt/parts/boarding_pass.png` — PAKET 5 — Website katmanları (W2; şeffaflar gerçek alfa, düşen gölge yok)
-- `collections/25_Orient_Express_Voyage/assets/gpt/parts/stamp.png` — PAKET 5 — Website katmanları (W2; şeffaflar gerçek alfa, düşen gölge yok)
-- `collections/25_Orient_Express_Voyage/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Amelia & Rafael; gerçek kişiye benzemesin)
-- `collections/25_Orient_Express_Voyage/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Amelia & Rafael; gerçek kişiye benzemesin)
-- `collections/25_Orient_Express_Voyage/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Amelia & Rafael; gerçek kişiye benzemesin)
-- `collections/25_Orient_Express_Voyage/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Amelia & Rafael; gerçek kişiye benzemesin)
-- `collections/25_Orient_Express_Voyage/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Amelia & Rafael; gerçek kişiye benzemesin)
-- `collections/25_Orient_Express_Voyage/assets/gpt/print/invitation_front_5x7.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi, yazı yok)
-- `collections/25_Orient_Express_Voyage/assets/gpt/print/invitation_back_5x7.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi, yazı yok)
+- `collections/25_Orient_Express_Voyage/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Amelia & Rafael; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/25_Orient_Express_Voyage/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Amelia & Rafael; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/25_Orient_Express_Voyage/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Amelia & Rafael; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/25_Orient_Express_Voyage/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Amelia & Rafael; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/25_Orient_Express_Voyage/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Amelia & Rafael; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/25_Orient_Express_Voyage/assets/gpt/print/invitation_front_5x7.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
+- `collections/25_Orient_Express_Voyage/assets/gpt/print/invitation_back_5x7.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 - `collections/25_Orient_Express_Voyage/assets/gpt/mockups/cover_hand.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/25_Orient_Express_Voyage/assets/gpt/mockups/three_phones.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/25_Orient_Express_Voyage/assets/gpt/mockups/laptop_phone.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
@@ -333,25 +277,13 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
 
 ### `collections/26_Kintsugi_Washi/assets/gpt/GPT_PROMPTS.md`
 
-- `collections/26_Kintsugi_Washi/assets/gpt/parts/washi_indigo.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/26_Kintsugi_Washi/assets/gpt/parts/washi_inner.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/26_Kintsugi_Washi/assets/gpt/parts/rice_paper.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/26_Kintsugi_Washi/assets/gpt/parts/kintsugi_veins.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/26_Kintsugi_Washi/assets/gpt/parts/ink_bleed.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/26_Kintsugi_Washi/assets/gpt/parts/sumi_stroke.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/26_Kintsugi_Washi/assets/gpt/parts/gold_flake_1.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/26_Kintsugi_Washi/assets/gpt/parts/gold_flake_2.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/26_Kintsugi_Washi/assets/gpt/parts/gold_flake_3.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/26_Kintsugi_Washi/assets/gpt/parts/obi_band.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/26_Kintsugi_Washi/assets/gpt/parts/card_small.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/26_Kintsugi_Washi/assets/gpt/parts/web_hero.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/26_Kintsugi_Washi/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Naomi & Kai; gerçek kişiye benzemesin)
-- `collections/26_Kintsugi_Washi/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Naomi & Kai; gerçek kişiye benzemesin)
-- `collections/26_Kintsugi_Washi/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Naomi & Kai; gerçek kişiye benzemesin)
-- `collections/26_Kintsugi_Washi/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Naomi & Kai; gerçek kişiye benzemesin)
-- `collections/26_Kintsugi_Washi/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Naomi & Kai; gerçek kişiye benzemesin)
-- `collections/26_Kintsugi_Washi/assets/gpt/print/invitation_front_5x7.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
-- `collections/26_Kintsugi_Washi/assets/gpt/print/invitation_back_5x7.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
+- `collections/26_Kintsugi_Washi/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Naomi & Kai; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/26_Kintsugi_Washi/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Naomi & Kai; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/26_Kintsugi_Washi/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Naomi & Kai; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/26_Kintsugi_Washi/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Naomi & Kai; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/26_Kintsugi_Washi/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Naomi & Kai; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/26_Kintsugi_Washi/assets/gpt/print/invitation_front_5x7.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
+- `collections/26_Kintsugi_Washi/assets/gpt/print/invitation_back_5x7.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 - `collections/26_Kintsugi_Washi/assets/gpt/mockups/cover_hand.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/26_Kintsugi_Washi/assets/gpt/mockups/three_phones.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/26_Kintsugi_Washi/assets/gpt/mockups/laptop_phone.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
@@ -360,31 +292,13 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
 
 ### `collections/27_Riad_Lantern_Nights/assets/gpt/GPT_PROMPTS.md`
 
-- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/doors_closed.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/doorway.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/courtyard.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/card_small.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/lantern.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/bg_page.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/bg_tile.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/tile_1.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/tile_2.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/tile_3.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/tile_4.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/frame_arch.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/frame_landscape.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/bougainvillea_tl.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/bougainvillea_br.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/divider.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/accent_1.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/parts/web_hero.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Leila & Adrian)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/photos/story_1.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Leila & Adrian)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/photos/story_2.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Leila & Adrian)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/photos/story_3.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Leila & Adrian)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/photos/venue.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Leila & Adrian)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/print/print_front.png` — PAKET 6 — basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK)
-- `collections/27_Riad_Lantern_Nights/assets/gpt/print/print_back.png` — PAKET 6 — basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK)
+- `collections/27_Riad_Lantern_Nights/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Leila & Adrian) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/27_Riad_Lantern_Nights/assets/gpt/photos/story_1.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Leila & Adrian) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/27_Riad_Lantern_Nights/assets/gpt/photos/story_2.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Leila & Adrian) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/27_Riad_Lantern_Nights/assets/gpt/photos/story_3.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Leila & Adrian) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/27_Riad_Lantern_Nights/assets/gpt/photos/venue.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Leila & Adrian) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/27_Riad_Lantern_Nights/assets/gpt/print/print_front.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
+- `collections/27_Riad_Lantern_Nights/assets/gpt/print/print_back.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 - `collections/27_Riad_Lantern_Nights/assets/gpt/mockups/cover_hand.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/27_Riad_Lantern_Nights/assets/gpt/mockups/three_phones.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/27_Riad_Lantern_Nights/assets/gpt/mockups/laptop_phone.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
@@ -393,27 +307,13 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
 
 ### `collections/28_Maison_Patisserie/assets/gpt/GPT_PROMPTS.md`
 
-- `collections/28_Maison_Patisserie/assets/gpt/parts/box_base.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/28_Maison_Patisserie/assets/gpt/parts/tissue_left.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/28_Maison_Patisserie/assets/gpt/parts/tissue_right.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/28_Maison_Patisserie/assets/gpt/parts/lid.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/28_Maison_Patisserie/assets/gpt/parts/ribbon_cross.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/28_Maison_Patisserie/assets/gpt/parts/bow_left.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/28_Maison_Patisserie/assets/gpt/parts/bow_right.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/28_Maison_Patisserie/assets/gpt/parts/bow_knot.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/28_Maison_Patisserie/assets/gpt/parts/card_small.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/28_Maison_Patisserie/assets/gpt/parts/bg_page.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/28_Maison_Patisserie/assets/gpt/parts/bg_tile.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/28_Maison_Patisserie/assets/gpt/parts/shelf.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/28_Maison_Patisserie/assets/gpt/parts/accent_1.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/28_Maison_Patisserie/assets/gpt/parts/web_hero.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/28_Maison_Patisserie/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Camille & Oliver; gerçek kişiye benzemesin)
-- `collections/28_Maison_Patisserie/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Camille & Oliver; gerçek kişiye benzemesin)
-- `collections/28_Maison_Patisserie/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Camille & Oliver; gerçek kişiye benzemesin)
-- `collections/28_Maison_Patisserie/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Camille & Oliver; gerçek kişiye benzemesin)
-- `collections/28_Maison_Patisserie/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Camille & Oliver; gerçek kişiye benzemesin)
-- `collections/28_Maison_Patisserie/assets/gpt/print/invitation_front.png` — PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK)
-- `collections/28_Maison_Patisserie/assets/gpt/print/invitation_back.png` — PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK)
+- `collections/28_Maison_Patisserie/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Camille & Oliver; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/28_Maison_Patisserie/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Camille & Oliver; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/28_Maison_Patisserie/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Camille & Oliver; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/28_Maison_Patisserie/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Camille & Oliver; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/28_Maison_Patisserie/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Camille & Oliver; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/28_Maison_Patisserie/assets/gpt/print/invitation_front.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
+- `collections/28_Maison_Patisserie/assets/gpt/print/invitation_back.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 - `collections/28_Maison_Patisserie/assets/gpt/mockups/cover_hand.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/28_Maison_Patisserie/assets/gpt/mockups/three_phones.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/28_Maison_Patisserie/assets/gpt/mockups/laptop_phone.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
@@ -422,27 +322,13 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
 
 ### `collections/29_Celestial_Observatory/assets/gpt/GPT_PROMPTS.md`
 
-- `collections/29_Celestial_Observatory/assets/gpt/parts/night_sky.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/29_Celestial_Observatory/assets/gpt/parts/chart_paper.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/29_Celestial_Observatory/assets/gpt/parts/dome.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/29_Celestial_Observatory/assets/gpt/parts/shutter.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/29_Celestial_Observatory/assets/gpt/parts/star_1.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/29_Celestial_Observatory/assets/gpt/parts/star_2.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/29_Celestial_Observatory/assets/gpt/parts/star_3.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/29_Celestial_Observatory/assets/gpt/parts/star_chart.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/29_Celestial_Observatory/assets/gpt/parts/planisphere_ring.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/29_Celestial_Observatory/assets/gpt/parts/astrolabe.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/29_Celestial_Observatory/assets/gpt/parts/moon_phases.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/29_Celestial_Observatory/assets/gpt/parts/orbits.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/29_Celestial_Observatory/assets/gpt/parts/card_small.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/29_Celestial_Observatory/assets/gpt/parts/web_hero.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/29_Celestial_Observatory/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin)
-- `collections/29_Celestial_Observatory/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin)
-- `collections/29_Celestial_Observatory/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin)
-- `collections/29_Celestial_Observatory/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin)
-- `collections/29_Celestial_Observatory/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin)
-- `collections/29_Celestial_Observatory/assets/gpt/print/invitation_front_5x7.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
-- `collections/29_Celestial_Observatory/assets/gpt/print/invitation_back_5x7.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
+- `collections/29_Celestial_Observatory/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/29_Celestial_Observatory/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/29_Celestial_Observatory/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/29_Celestial_Observatory/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/29_Celestial_Observatory/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/29_Celestial_Observatory/assets/gpt/print/invitation_front_5x7.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
+- `collections/29_Celestial_Observatory/assets/gpt/print/invitation_back_5x7.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 - `collections/29_Celestial_Observatory/assets/gpt/mockups/cover_hand.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/29_Celestial_Observatory/assets/gpt/mockups/three_phones.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/29_Celestial_Observatory/assets/gpt/mockups/laptop_phone.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
@@ -451,25 +337,13 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
 
 ### `collections/30_Azulejo_Mosaic/assets/gpt/GPT_PROMPTS.md`
 
-- `collections/30_Azulejo_Mosaic/assets/gpt/parts/azulejo_1.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/30_Azulejo_Mosaic/assets/gpt/parts/azulejo_2.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/30_Azulejo_Mosaic/assets/gpt/parts/azulejo_3.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/30_Azulejo_Mosaic/assets/gpt/parts/azulejo_4.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/30_Azulejo_Mosaic/assets/gpt/parts/tile_back.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/30_Azulejo_Mosaic/assets/gpt/parts/cobalt_wall.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/30_Azulejo_Mosaic/assets/gpt/parts/lime_wash.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/30_Azulejo_Mosaic/assets/gpt/parts/card_paper.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/30_Azulejo_Mosaic/assets/gpt/parts/frieze.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/30_Azulejo_Mosaic/assets/gpt/parts/pot_left.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/30_Azulejo_Mosaic/assets/gpt/parts/pot_right.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/30_Azulejo_Mosaic/assets/gpt/parts/web_hero.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/30_Azulejo_Mosaic/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin)
-- `collections/30_Azulejo_Mosaic/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin)
-- `collections/30_Azulejo_Mosaic/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin)
-- `collections/30_Azulejo_Mosaic/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin)
-- `collections/30_Azulejo_Mosaic/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin)
-- `collections/30_Azulejo_Mosaic/assets/gpt/print/invitation_front.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5, 300 ppi)
-- `collections/30_Azulejo_Mosaic/assets/gpt/print/invitation_back.png` — PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5, 300 ppi)
+- `collections/30_Azulejo_Mosaic/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/30_Azulejo_Mosaic/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/30_Azulejo_Mosaic/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/30_Azulejo_Mosaic/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/30_Azulejo_Mosaic/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Inês & Mateo; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/30_Azulejo_Mosaic/assets/gpt/print/invitation_front.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
+- `collections/30_Azulejo_Mosaic/assets/gpt/print/invitation_back.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 - `collections/30_Azulejo_Mosaic/assets/gpt/mockups/cover_hand.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/30_Azulejo_Mosaic/assets/gpt/mockups/three_phones.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/30_Azulejo_Mosaic/assets/gpt/mockups/laptop_phone.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
@@ -478,25 +352,13 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
 
 ### `collections/31_Sky_Lantern_Festival/assets/gpt/GPT_PROMPTS.md`
 
-- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/hands.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/lantern_dark.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/lantern_lit.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/sky_dusk.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/star_dust.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/lantern_far.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/card_small.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/bg_tile.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/frame_paper.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/frame_landscape.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/divider.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/31_Sky_Lantern_Festival/assets/gpt/parts/web_hero.png` — PAKET 5 — website katmanları (YAZI YOK)
-- `collections/31_Sky_Lantern_Festival/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel)
-- `collections/31_Sky_Lantern_Festival/assets/gpt/photos/story_1.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel)
-- `collections/31_Sky_Lantern_Festival/assets/gpt/photos/story_2.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel)
-- `collections/31_Sky_Lantern_Festival/assets/gpt/photos/story_3.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel)
-- `collections/31_Sky_Lantern_Festival/assets/gpt/photos/venue.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel)
-- `collections/31_Sky_Lantern_Festival/assets/gpt/print/print_front.png` — PAKET 6 — basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK)
-- `collections/31_Sky_Lantern_Festival/assets/gpt/print/print_back.png` — PAKET 6 — basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/photos/story_1.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/photos/story_2.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/photos/story_3.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/photos/venue.jpg` — PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/print/print_front.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
+- `collections/31_Sky_Lantern_Festival/assets/gpt/print/print_back.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 - `collections/31_Sky_Lantern_Festival/assets/gpt/mockups/cover_hand.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/31_Sky_Lantern_Festival/assets/gpt/mockups/three_phones.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/31_Sky_Lantern_Festival/assets/gpt/mockups/laptop_phone.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
@@ -505,28 +367,13 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
 
 ### `collections/32_Music_Box_Ballerina/assets/gpt/GPT_PROMPTS.md`
 
-- `collections/32_Music_Box_Ballerina/assets/gpt/parts/lid_open.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/32_Music_Box_Ballerina/assets/gpt/parts/interior.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/32_Music_Box_Ballerina/assets/gpt/parts/box_body.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/32_Music_Box_Ballerina/assets/gpt/parts/lid_closed.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/32_Music_Box_Ballerina/assets/gpt/parts/key.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/32_Music_Box_Ballerina/assets/gpt/parts/dancer.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/32_Music_Box_Ballerina/assets/gpt/parts/dancer_turn_a.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/32_Music_Box_Ballerina/assets/gpt/parts/dancer_turn_b.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/32_Music_Box_Ballerina/assets/gpt/parts/card_small.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/32_Music_Box_Ballerina/assets/gpt/parts/petal_1.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/32_Music_Box_Ballerina/assets/gpt/parts/petal_2.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/32_Music_Box_Ballerina/assets/gpt/parts/petal_3.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/32_Music_Box_Ballerina/assets/gpt/parts/bg_page.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/32_Music_Box_Ballerina/assets/gpt/parts/satin_bg.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/32_Music_Box_Ballerina/assets/gpt/parts/web_hero.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/32_Music_Box_Ballerina/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin)
-- `collections/32_Music_Box_Ballerina/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin)
-- `collections/32_Music_Box_Ballerina/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin)
-- `collections/32_Music_Box_Ballerina/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin)
-- `collections/32_Music_Box_Ballerina/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin)
-- `collections/32_Music_Box_Ballerina/assets/gpt/print/invitation_front.png` — PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK)
-- `collections/32_Music_Box_Ballerina/assets/gpt/print/invitation_back.png` — PAKET 6 — Basılı davetiye zeminleri (G139; ön/arka; 300 ppi; YAZI YOK)
+- `collections/32_Music_Box_Ballerina/assets/gpt/photos/hero_portrait.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/32_Music_Box_Ballerina/assets/gpt/photos/story_1.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/32_Music_Box_Ballerina/assets/gpt/photos/story_2.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/32_Music_Box_Ballerina/assets/gpt/photos/story_3.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/32_Music_Box_Ballerina/assets/gpt/photos/venue.jpg` — PAKET 2 — Örnek fotoğraflar (kurgu çift Juliette & Arthur; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+- `collections/32_Music_Box_Ballerina/assets/gpt/print/invitation_front.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
+- `collections/32_Music_Box_Ballerina/assets/gpt/print/invitation_back.png` — PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 - `collections/32_Music_Box_Ballerina/assets/gpt/mockups/cover_hand.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/32_Music_Box_Ballerina/assets/gpt/mockups/three_phones.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
 - `collections/32_Music_Box_Ballerina/assets/gpt/mockups/laptop_phone.png` — PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)

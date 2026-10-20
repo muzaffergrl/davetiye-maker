@@ -325,6 +325,12 @@ def cikti_denetle(t: Tasarim) -> tuple[bool, str]:
     return (not sorun), ("; ".join(sorun) if sorun else f"{len(var)} dosya, kırık referans yok")
 
 
+def build_images_emekli(tema: str) -> bool:
+    """Temanın build_images.py'si `EMEKLI = "…"` taşıyorsa (img/ artık onun çıktısı değil; koşarsa img/'yi siler)."""
+    f = KOK / f"platform/themes/{tema}/build_images.py"
+    return f.exists() and re.search(r'^EMEKLI = "', f.read_text(encoding="utf-8"), re.M) is not None
+
+
 @dataclass
 class Sonuc:
     durum: str  # TAMAM / HATA / ATLANDI / DURDU / KAPALI / ÇALIŞIR (kuru)
@@ -338,6 +344,7 @@ def adimlari_kos(t: Tasarim, eksik: dict[str, list[str]], uygula: bool, theme_ch
     durdu = False
     tamam: set[str] = set()
     next_var = (KOK / "platform/.next/BUILD_ID").exists()
+    emekli = build_images_emekli(tema)
     env_node = {"NODE_PATH": NODE_PATH} if Path(NODE_PATH).exists() else {}
 
     def eksik_not(*gruplar):
@@ -346,14 +353,15 @@ def adimlari_kos(t: Tasarim, eksik: dict[str, list[str]], uygula: bool, theme_ch
 
     tanimlar = [
         ("build_images", ("web",), [], lambda: [[sys.executable, str(KOK / f"platform/themes/{tema}/build_images.py")]], KOK,
-         None, None),
+         lambda: "EMEKLI" if emekli else None, None),
         ("baski", ("web", "baski"), ["build_images"],
          lambda: [["node", "scripts/build-print-assets.ts", "--theme", tema]], KOK / "platform", None,
          lambda: None if (KOK / "platform/node_modules").exists() else "platform/node_modules yok (`cd platform && npm ci`)"),
         ("palet", ("web",), ["build_images"],
          lambda: [[sys.executable, str(TOOLS / "recolor_parts.py"), "build", "--design", no],
                   [sys.executable, str(TOOLS / "recolor_parts.py"), "check", "--design", no]], KOK,
-         lambda: None if (KOK / "collections" / t.klasor / "variants/recolor.json").exists() else "palet yok (recolor.json)",
+         lambda: ("tema yeniden kuruldu (build_images.py emekli); paletler yeni sanattan yeniden yapılmalı" if emekli else
+                  None if (KOK / "collections" / t.klasor / "variants/recolor.json").exists() else "palet yok (recolor.json)"),
          None),
         ("cikti", ("web",), ["build_images"], None, None, None, None),
         ("theme_check", ("web", "foto"), ["build_images", "cikti"],
@@ -374,6 +382,10 @@ def adimlari_kos(t: Tasarim, eksik: dict[str, list[str]], uygula: bool, theme_ch
             sonuc[ad] = Sonuc("DURDU", "önceki adım HATA")
             continue
         k = kosul() if kosul else None
+        if k == "EMEKLI":  # img/'yi silen eski betik koşmaz; sonraki adımlar onu beklemesin
+            sonuc[ad] = Sonuc("ATLANDI", "build_images.py emekli (tema 2026-10-18/19'da yeniden kuruldu; img/ elle)")
+            tamam.add(ad)
+            continue
         if k == "KAPALI":
             sonuc[ad] = Sonuc("KAPALI", f"--{ad.replace('_', '-')} verilmedi")
             continue

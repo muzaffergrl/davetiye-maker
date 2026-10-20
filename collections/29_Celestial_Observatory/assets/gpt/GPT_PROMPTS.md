@@ -1,12 +1,6 @@
 # GPT görsel istekleri — Tasarım 29 · Celestial Observatory
 
-> **Instructions for GPT:** Generate PAKET 5 (website layers) first, in order and in ONE chat, then PAKET 2 (sample
-> photos), then PAKET 6 (printable invitation). Use each English prompt exactly as written, follow its checklist, and
-> save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, zodiac glyphs,
-> constellation names, degree numerals, Roman numerals, logos, monograms or watermarks in any image** (engraved tick
-> marks without numbers are fine). Give W2.1 `night_sky.png`, W2.2 `chart_paper.png` and W2.3 `dome.png` as the style
-> reference of every later part: the same midnight sky, the same silver-ivory paper, the same warm antique brass and
-> gold leaf, the same fine engraving.
+> **Instructions for GPT:** This design ("Celestial Observatory") was redesigned on 2026-10-18/19: its website is warm ivory stationery paper with abundant photorealistic flowers in the corners, opened from a themed cover object. The old website parts (PAKET 5) are NO LONGER needed — do not generate them. Generate PAKET 3 (the Etsy listing scenes) and PAKET 6 (the printed invitation grounds) in ONE chat; PAKET 2 (sample photos) is optional and comes last. Before the first image, attach these two images from the repository as the style reference of every image: `platform/themes/celestial-observatory/img/bg_scene-1024.webp` (the website background: paper, flowers, colors, light) and `platform/themes/celestial-observatory/img/v3-closed-880.webp` (the design's closed cover object). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". No text, letters, numbers, logos, monograms or watermarks in any image.
 
 Bu dosya tasarım 29'un **bütün görsel parçalarının** tek kaynağıdır (G168). Tasarım `tools/katalog.py` `EK_TEMALAR`'da
 eksenleriyle kayıtlı ama PAKET üreteçlerine girmediği için dosya elle yazıldı. Şu an tema
@@ -37,14 +31,18 @@ ay evreleri ve yörüngeler **yok** (çizilmiş yedek yok, K21). Parçalar gelin
 - Gerçek bir gözlemevine, markaya, saat/alet üreticisine veya başka bir satıcının tasarımına benzemesin. 19 Midnight
   Garden'dan (siyah zemin, gül, mum) ve 22 Nocturne'den (göl, köşk) ayrı: burada çiçek, mum ve göl yok.
 
-## Kapalı gözlemevi geometrisi (W2.3, W2.4, W2.11 buna göre)
+## Kapalı gözlemevi geometrisi (W2.3, W2.4, W2.11 buna göre) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+
+> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
 Sahne **0,82 en / 1 boy** (dikey). Yarık (slit) sahnenin yüzdesiyle: sol %39, üst %4, genişlik %22, yükseklik %62 (dikey,
 ortada). Claude yarığı GPT kubbesinde `#00FF00` pencereden **ölçer**; kapak (W2.4) bu kutuya gerilir ve ortasından iki
 yarıya kesilir, kart (W2.11) yarıktan yükselir.
 
 ---
 
-## PAKET 5 — Website katmanları (YAZI YOK)
+## PAKET 5 — Website katmanları (YAZI YOK) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+
+> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
 
 #### W2.1 Gece göğü (yarığın içi + sayfa zemini)
 **Kaydet:** `collections/29_Celestial_Observatory/assets/gpt/parts/night_sky.png` · 1536×1536 · opak, dikişsiz
@@ -169,7 +167,7 @@ Kullanım: `og-1200x630.jpg` (`tema_build.og_kirp`, alta hizalı: üstten ~%21 k
 
 ---
 
-## PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin)
+## PAKET 2 — Örnek fotoğraflar (kurgu çift Celeste & Rowan; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
 
 Ortak: photorealistic fine-art wedding photography, a calm midnight-blue, silver and warm gold palette, subtle film
 grain; ONE fictional couple in their early thirties, the same two people in every photo (they must not resemble any
@@ -212,41 +210,31 @@ Landscape 16:9: an elegant garden on a pine-covered ridge at dusk with a small w
 
 ---
 
-## PAKET 6 — Basılı davetiye (G139; 5×7 in ve A5)
+## PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
 
-> Panelden indirilen basılı davetiye (`platform/lib/print/layouts.ts`, blok `'celestial-observatory'`). Şu an geçici
-> (`composed`): harita kâğıdı + üstte ve altta gece göğü şeridi (temanın tonladığı dokular, ~195 ppi).
-> **Dosya adı ve ölçü:** dalganın öteki tasarımlarıyla aynı — `print/invitation_front_5x7.png`,
-> `print/invitation_back_5x7.png`, **1575×2175 px** = 5×7 in + 1/8 in taşma, 300 ppi. Ayrı A5 dosyası istenmez:
-> `layouts.ts` her yüz için tek zemin taşır (`cover`); A5 + 3 mm taşma (154×216 mm, oran 0,713) aynı sayfadan yanlardan
-> ~%0,8 kırpılarak basılır (~260 ppi). Bu yüzden önemli hiçbir şey yan kenarların %8'ine girmez.
-> **Yazı alanı:** metin kutuları `layouts.ts`'teki ölçülerdir (ön `[21, 13, 19, 13]` = yükseklikte %21–%81, genişlikte
-> %13–%87; arka `[17, 12, 10, 12]` = %17–%90 × %12–%88, yüzde: üst, sağ, alt, sol). Prompt'lar bu alanı ~%3 payla boş
-> ister; alan aynı kalırsa kutular değişmeden kullanılır.
->
-> **Gelince (elle, tek blok; otomatik değil — G149: kutular gerçek görselde ölçülür):**
-> 1. `layouts.ts` `'celestial-observatory'` bloğunda `sources` → `{ front: 'print/invitation_front_5x7.png', back:
->    'print/invitation_back_5x7.png' }`; `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg:
->    cover('back'), images: [] } }`.
-> 2. Kutuları görselde ölç (süslemenin ~%2 dışında kalsın); taşma varsa `front`/`back` ya da `bands` düzelt
->    (`tests/g149-print-layout.test.ts`).
-> 3. `cd platform && node scripts/build-print-assets.ts --theme celestial-observatory` (artık kullanılmayan
->    `paper.webp`/`sky.webp` dosyalarını `public/print/celestial-observatory/`'den sil) ve `node scripts/print-sample.ts
->    --theme celestial-observatory --invite 5x7 --bleed` + `--invite a5 --bleed` ile iki boyutu göz kontrolü.
+> **Neden yeniden yazıldı (2026-10-20):** website 18–19 Ekim'de fildişi kâğıt + köşe çiçekleri görünümüne geçti; eski baskı prompt'ları eski görünümü (ve artık olmayan PAKET 5 parçalarını) istiyordu. `platform/lib/print/layouts.ts` `'celestial-observatory'` bloğunun geçici kaynakları yeniden kurulumda `img/`'den silindi: panel şu an `public/print/celestial-observatory/`'deki eski çıktıyı (eski görünüm) basıyor ve `build-print-assets` bu tema için yeniden koşamaz. Bu zeminler gelince:
+> Platform her yüz için **tek** zemin kullanır ve onu taşma payıyla `cover` olarak yayar (5×7 ve A5 aynı zeminden).
+> 1. `layouts.ts` `'celestial-observatory'` bloğunda `sources` → bu zeminler (`print/invitation_front_5x7.png` + `print/invitation_back_5x7.png`), `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }`.
+> 2. Zemin artık **açık fildişi**: `ink` / `accent` koyu tonlara (temanın site metin rengi) alınır; açık mürekkep kalmaz.
+> 3. Metin kutuları (`front` / `back`) gerçek görselde ölçülür (G149; süsten ~%2 açıklık), `node --test tests/g149-print-layout.test.ts`.
+> 4. `cd platform && node scripts/build-print-assets.ts --theme celestial-observatory`; `public/print/celestial-observatory/`'deki artık kaynak olmayan eski dosyalar silinir; 5×7 ve A5 örnek PDF'ine göz atılır.
+> Ek görsel (her iki yüz için sohbetin başında): `platform/themes/celestial-observatory/img/bg_scene-1024.webp`.
 
-#### P1 — Ön yüz
-**Kaydet:** `collections/29_Celestial_Observatory/assets/gpt/print/invitation_front_5x7.png` · 1575×2175 · opak
-```
-The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the silver-ivory paper of chart_paper.png. Along the top edge a band of the midnight sky of night_sky.png about 13% of the height, with fine pin-point stars and, inside the band, a delicate engraved arc of the star chart (as star_chart.png) and a small row of seven moon phases (as moon_phases.png) centred in it; its lower edge is a slim gold-leaf rule (staying above 15% of the height). Along the bottom edge a matching midnight band about 10% of the height with a slim gold-leaf rule on its upper edge (staying below 87%). The rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm paper (the names, date and venue are set there): no star, no line, no shadow, no stain in it. No text, letters, numbers, zodiac glyphs, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
-```
-Kontrol: tam taşma; %18–%84 × %10–%90 tamamen boş; yazı yok; gök bantları yalnız üstte ve altta.
+#### P6.1 Ön yüz
+**Kaydet:** `collections/29_Celestial_Observatory/assets/gpt/print/invitation_front_5x7.png` · 1575×2175 px (300 ppi), opak
 
-#### P2 — Arka yüz
-**Kaydet:** `collections/29_Celestial_Observatory/assets/gpt/print/invitation_back_5x7.png` · 1575×2175 · opak
 ```
-The back of the same printed wedding invitation, full bleed, portrait 5.25:7.25, perfectly flat: the same silver-ivory paper, only a narrow midnight sky band along the top edge (about 7% of the height, with fine pin-point stars and a slim gold-leaf rule on its lower edge, staying above 10% of the height). Everything below 14% of the height, and everything between 9% and 91% of the width, is COMPLETELY EMPTY paper (a schedule and a QR code are set there): no star, no line, no shadow, no stain. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1575×2175 px.
+A full-bleed printable wedding invitation ground for the "Celestial Observatory" design, front side, portrait, seen perfectly flat and straight on, 1575 × 2175 px at 300 ppi (it is trimmed later). Match the attached website background (bg_scene-1024.webp) exactly in style: the same warm ivory, softly textured stationery paper running edge to edge and the same midnight navy, champagne gold and warm ivory, tiny restrained constellations, roses, antique celestial engravings, in the same photorealistic stationery-photography finish with soft light from the top-left. Place the decoration ONLY in two places: an abundant arrangement gathered at the top-left corner and trailing along the top edge, staying entirely within the top 16% of the height, and a smaller matching arrangement gathered at the bottom-right corner, staying entirely within the bottom 14% of the height. A very fine antique-gold foil hairline frame inset about 6% from every edge. Keep every ornament at least 4% inside the image edges. The whole rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm ivory paper (the names, date and venue are printed there in dark ink): no petal, leaf, line, shadow or stain in it. No envelope, no card, no frame object, no people. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575 × 2175 px.
 ```
-Kontrol: ön yüzle aynı kâğıt; yalnız üstte dar gök bandı (%10'un üstünde); %14'ün altı boş; yazı yok.
+Kontrol: tam taşma fildişi kâğıt (site zeminiyle aynı); çiçekler yalnız üst %16 (sol üst) ve alt %14 (sağ alt); %18–84 yükseklik × %10–90 genişlik tamamen boş; ince altın çerçeve; yazı yok; 1575×2175.
+
+#### P6.2 Arka yüz
+**Kaydet:** `collections/29_Celestial_Observatory/assets/gpt/print/invitation_back_5x7.png` · 1575×2175 px (300 ppi), opak
+
+```
+The back side of the same "Celestial Observatory" invitation (give invitation_front_5x7.png as the reference image): portrait, full bleed, perfectly flat, 1575 × 2175 px at 300 ppi, the same warm ivory stationery paper edge to edge and the same very fine antique-gold foil hairline frame inset about 6% from every edge. Decoration ONLY a slim spray of the same flowers and foliage centred along the top edge, staying entirely within the top 11% of the height and at least 4% inside the image edges. Everything from 13% to 92% of the height and from 10% to 90% of the width is COMPLETELY EMPTY paper for the schedule, the details and a QR code: no petal, line, shadow or stain. Same style, colors and light. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1575 × 2175 px.
+```
+Kontrol: ön yüzle aynı kâğıt ve çerçeve; çiçek yalnız üst %11'de ince dal; %13–92 × %10–90 boş; yazı yok; 1575×2175.
 
 ---
 

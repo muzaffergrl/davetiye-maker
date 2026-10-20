@@ -171,7 +171,16 @@ def sync_css(manifest: dict) -> None:
 
 
 # ---------------------------------------------------------------------------------------------------- build
+# Emekli (2026-10-20): tema 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (docs/qa/2026-10-18-*.md,
+# docs/qa/2026-10-19-*.md); img/ artık bu betiğin çıktısı değil. Bu betik img/'yi silip eski geçici kesimi kurar ve
+# yeni kapak / iç sayfa görsellerini yok eder, bu yüzden çalışmaz. tools/gpt_yerlestir.py bu adımı atlar.
+EMEKLI = "tema 2026-10-18/19 yeniden kurulumuyla değişti; img/ elle yönetiliyor (silmemek için çalışmaz)"
+
+
 def main() -> int:
+    if EMEKLI:
+        print(f"build_images.py çalıştırılmadı: {EMEKLI}", file=sys.stderr)
+        return 2
     manifest: dict = {"_note": "G163 build. Pieces listed under 'interim' are flat palette tones with a soft light "
                       "fall-off (no drawn shape) until their GPT part (GPT_PROMPTS.md PAKET 5 W2) arrives."}
     interim: list[str] = []

@@ -438,15 +438,19 @@ def _referanslar(m: dict, istenen: dict, no_by_hedef: dict) -> list[dict]:
 
 # ---------------------------------------------------------------- çıktılar
 
-NEDEN = ("22–38 tasarımları ancak kendi website parçaları (PAKET 5) gelince geçici yer tutuculardan çıkıp live olabilir; "
-         "örnek fotoğraflar (PAKET 2) theme-check ve demo için, ilan sahneleri (PAKET 3) ve baskı zeminleri (PAKET 6) satış "
-         "paketi için gerekir. 01–21'in website parçaları tam; bu gruptaki 2× baskı parçaları yalnız basılı davetiyeyi "
-         "~230 ppi'den 300 ppi'ye çıkarır (bugünkü parçalarla da çalışıyor). Palet varyantları en sonda: o paletler "
-         "`coming` ve GPT gelene dek asıl renkli parçayla görünüyor; fildişi gül paleti yalnız istenirse.")
+NEDEN = ("22–32 tasarımları 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu: website parçaları (PAKET 5) artık "
+         "istenmiyor; bu tasarımlardan yalnız ilan sahneleri (PAKET 3) ve yeni görünüme uyan baskı zeminleri (PAKET 6) "
+         "isteniyor, örnek fotoğrafları (PAKET 2) isteğe bağlı ve grubun sonunda. 33–38 ancak kendi website parçaları "
+         "(PAKET 5) gelince geçici yer tutuculardan çıkıp live olabilir; örnek fotoğraflar (PAKET 2) theme-check ve demo "
+         "için, ilan sahneleri (PAKET 3) ve baskı zeminleri (PAKET 6) satış paketi için gerekir. 01–21'in website parçaları "
+         "tam; bu gruptaki 2× baskı parçaları yalnız basılı davetiyeyi ~230 ppi'den 300 ppi'ye çıkarır (bugünkü "
+         "parçalarla da çalışıyor). Palet varyantları en sonda: o paletler `coming` ve GPT gelene dek asıl renkli parçayla "
+         "görünüyor; fildişi gül paleti yalnız istenirse.")
 
 NOTLAR_CHATGPT = [
     "Her tasarım için **yeni bir sohbet** aç ve o tasarımın maddelerini aynı sohbette sırayla üret (stil, ışık, malzeme "
-    "tutarlı kalsın). Tasarım başlığındaki İngilizce GPT notu varsa önce onu gönder.",
+    "tutarlı kalsın). Tasarım başlığındaki İngilizce GPT notu varsa önce onu gönder; notta adı geçen repo görsellerini "
+    "(ör. 22–32'de `bg_scene-1024.webp` ve `v3-closed-880.webp`) o ilk mesaja ekle.",
     "**Her mesajda tek görsel:** \"Prompt'u kopyala\" → ChatGPT'ye yapıştır → gönder. Prompt'u kısaltma, Türkçeye çevirme.",
     "Ölçü / oran ve şeffaf zemin prompt'un içinde yazar; ChatGPT farklı verirse aynı sohbette \"same image, exactly "
     "W×H px (oran), true transparent background PNG\" diye bir kez iste. Oran ±%2 tutmalı; çözünürlük küçükse yalnız uyarı.",
