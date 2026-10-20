@@ -12,7 +12,7 @@ Satışa açılan: **01–21** (21 tasarım, 1.460 TL). 22–38 ve paletler sonr
 - [x] İlan linkleri aracı: `tools/ilan_baglantilari.py` — Etsy linkleri gelince `config.ts` + `lib/etsy/listings.json` tek komut.
 - [x] GPT iş listesi güncel (351 görsel; 22–32'nin geçersiz parçaları çıktı) — `docs/27_GPT_IS_LISTESI.html`.
 
-## B. Senin yapman gereken (bu ortamdan erişilemiyor)
+## B. Senin yapman gereken (bu ortamdan erişilemiyor) — hepsi tek talimatta: `docs/30_YEREL_LANSMAN_TALIMATI.md`
 Sıra önemli; her adım bir öncekine dayanır.
 
 1. **Yayın.** Son main + bu dalı (`claude/focused-tesla-37o26v`) birleştirip bkestudio.com'u sunan Vercel projesine yayınla
