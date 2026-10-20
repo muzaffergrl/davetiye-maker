@@ -20,7 +20,7 @@ görevler: `gorevler/PANO.md` · platform: `docs/10_SITE_PLATFORMU.md` · **lans
   website parçaları artık istenmiyor; `build_images.py` emekli (img/'yi silerdi). GPT ilan sahneleri ve baskı zeminleri geldi; baskı bağlandı (20 Ekim), ilan görselleri
   henüz çekilmedi. Paletleri yeni sanattan yeniden yapılmalı (`test_recolor_parts` g177 11 hata bundan).
 - 33–38: parçaların çoğu geldi; 19 ret teknik işlemle düzeltildi (20 Ekim), 14 parça ChatGPT'de yeniden üretilecek (docs/27), sonra tema build.
-- GPT: 351 görsel geldi (20 Ekim); kontrol 317 geçti, 34 ret; 19u teknik düzeltildi, `docs/27` kalan 15i listeliyor (14 + isteğe bağlı palet).
+- GPT: 351 görsel geldi (20 Ekim); kontrol 317 geçti, 34 ret; 19'u teknik düzeltildi, `docs/27` kalan 15'i listeliyor (14 + isteğe bağlı palet).
   22–32 baskı zeminleri bağlandı. Rapor: `docs/qa/2026-10-20-generated-visuals/CLAUDE_KONTROL.md`.
 
 ## 4. Lansmanı bekleten (ayrıntı docs/29)
