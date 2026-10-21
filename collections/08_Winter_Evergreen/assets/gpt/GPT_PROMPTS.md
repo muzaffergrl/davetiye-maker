@@ -385,3 +385,115 @@ Recreate the attached info_card.png of this collection exactly — same card sha
 its position, same empty area — at 2048 × 3072 px for print. Fully transparent background around the card. Crisp,
 print-quality detail; no new elements. No text, letters, numbers, logos or watermarks.
 ```
+
+---
+
+## PAKET 7 — Etsy ilan sahneleri 2 (10–20. görseller) + promo video (2026-10-21)
+
+> Kullanıcı (2026-10-21): Etsy'nin sınırı kadar görsel (20 fotoğraf + 2 video). İlanda 9 görsel + 1 video var → **11 sahne +
+> 1 video sahnesi**. Amaç: ürün ön planda, detayları gösteren, alıcının içini rahatlatan, satın almaya teşvik eden kareler.
+> GPT yalnız **sahneyi** üretir; ekranlar (ve 7.7'de kartın ön yüzü) **düz #00FF00**. Claude gerçek site ekranlarını ve
+> gerçek basılı davetiye render'ını yeşile yerleştirir, başlıkları dizer. Böylece ilan ürünü olduğu gibi gösterir (Etsy kuralı).
+> PAKET 3 ile **aynı set** (aynı masa, süs, ışık). Hepsini **tek sohbette** üret. Üreten: `python3 tools/paket7_ilan.py --no 08`.
+
+**Instructions for GPT (send before the first image):**
+```
+You are the photographer and set stylist for the Etsy listing photos of a digital wedding website design called "Winter Evergreen". Every image in this chat is a real-looking styled product photo built around phones, a tablet, a laptop or a printed card whose screens (and the card's front face) are flat pure green (#00FF00); we will place the real website screens and the real printed invitation into the green areas afterwards. Keep one consistent set across all images: a white wool blanket with a light dusting of snow, pine branches, red winter berries, small pine cones and a red velvet ribbon, the same light and the same color world (deep forest green, snowy white, winter-berry red and soft antique gold). The product (the device screens) is always the hero: sharp, prominent, never small in the frame. Aim for best-selling, magazine-quality Etsy listing photos that make a couple feel calm and confident: rich, airy, luxurious, never cluttered, never cheap stock-photo looking.
+```
+
+### 7.1 Yakın çekim: açılış nesnesinin detayı (kâğıt, mühür, doku) — ürünün kalitesi
+**Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/mockups/p7_01_closeup.png` · 1024×1024 · 1 yeşil alan
+
+```
+A close, intimate product shot: one smartphone stands slightly tilted back on a white wool blanket with a light dusting of snow, filling about 60% of the image height, shot from a low three-quarter angle so the phone feels tangible and premium. It is framed softly in the foreground and background by pine branches, red winter berries, small pine cones and a red velvet ribbon, which come close to the phone frame but never touch the screen. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: deep forest green, snowy white, winter-berry red and soft antique gold. Every phone, tablet and laptop is a generic modern device with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, hand, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
+```
+Kontrol: tam 1 yeşil alan; her yeşil alanın dört köşesi görünüyor; parmak/süs yeşilin üstünde değil; yazı/logo yok.
+
+### 7.2 Dokununca açılır: misafirin parmağı ekrana yaklaşıyor (parmak ekranın DIŞINDA)
+**Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/mockups/p7_02_hand_tap.png` · 1024×1024 · 1 yeşil alan
+
+```
+A woman's elegant hand holds a smartphone upright in the center of the frame, screen facing the camera; the index finger of her other hand hovers just below the bottom edge of the phone, about to tap, clearly outside the screen area. Behind, softly out of focus: a white wool blanket with a light dusting of snow, pine branches, red winter berries, small pine cones and a red velvet ribbon. A sense of anticipation, like opening a real letter. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: deep forest green, snowy white, winter-berry red and soft antique gold. Every phone, tablet and laptop is a generic modern device with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, hand, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
+```
+Kontrol: tam 1 yeşil alan; her yeşil alanın dört köşesi görünüyor; parmak/süs yeşilin üstünde değil; yazı/logo yok.
+
+### 7.3 Misafir evde daveti açıyor: sıcak, gerçek hayat — misafir hiçbir şey indirmez
+**Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/mockups/p7_03_guest_home.png` · 1024×1024 · 1 yeşil alan
+
+```
+A cozy at-home moment: a guest sits by a bright window in a soft armchair, holding a smartphone in portrait orientation at a comfortable reading angle, screen facing the camera, thumbs only on the phone frame. On a side table beside them, softly blurred: a cup of tea and pine branches, red winter berries. Warm, delighted mood; the person's face is not visible. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: deep forest green, snowy white, winter-berry red and soft antique gold. Every phone, tablet and laptop is a generic modern device with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, hand, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
+```
+Kontrol: tam 1 yeşil alan; her yeşil alanın dört köşesi görünüyor; parmak/süs yeşilin üstünde değil; yazı/logo yok.
+
+### 7.4 Her cihazda: telefon + tablet aynı site
+**Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/mockups/p7_04_phone_tablet.png` · 1536×1024 · 2 yeşil alan
+
+```
+A tablet stands upright on a small stand slightly left of center on a white wool blanket with a light dusting of snow, and a smartphone stands upright to its right, both screens facing the camera, clear space between them. Around them at the edges: pine branches, red winter berries, small pine cones and a red velvet ribbon. Calm, generous space above the devices. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: deep forest green, snowy white, winter-berry red and soft antique gold. Every phone, tablet and laptop is a generic modern device with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, hand, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
+```
+Kontrol: tam 2 yeşil alan; her yeşil alanın dört köşesi görünüyor; parmak/süs yeşilin üstünde değil; yazı/logo yok.
+
+### 7.5 Bilgisayarda düzenleyici: rahat, büyük ekran
+**Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/mockups/p7_05_laptop.png` · 1536×1024 · 1 yeşil alan
+
+```
+An open modern laptop seen from a gentle three-quarter angle on a white wool blanket with a light dusting of snow, its screen facing the camera and filling about half of the image width. A ceramic coffee cup and a closed linen-covered wedding planner notebook beside it, with pine branches, red winter berries, small pine cones and a red velvet ribbon arranged loosely at the edges. Bright, organised, stress-free planning mood. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: deep forest green, snowy white, winter-berry red and soft antique gold. Every phone, tablet and laptop is a generic modern device with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, hand, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
+```
+Kontrol: tam 1 yeşil alan; her yeşil alanın dört köşesi görünüyor; parmak/süs yeşilin üstünde değil; yazı/logo yok.
+
+### 7.6 Çift birlikte planlıyor: laptop + telefon (yüz yok)
+**Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/mockups/p7_06_couple_planning.png` · 1536×1024 · 2 yeşil alan
+
+```
+Two people sit side by side at a table set with a white wool blanket with a light dusting of snow: only their forearms and hands are visible, one with a delicate engagement ring. An open laptop in front of them and a smartphone held by one of them, both screens facing the camera. On the table: pine branches, red winter berries, small pine cones and a red velvet ribbon. Warm, happy, together; no faces visible. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: deep forest green, snowy white, winter-berry red and soft antique gold. Every phone, tablet and laptop is a generic modern device with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, hand, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
+```
+Kontrol: tam 2 yeşil alan; her yeşil alanın dört köşesi görünüyor; parmak/süs yeşilin üstünde değil; yazı/logo yok.
+
+### 7.7 Basılı davetiye de dahil: kart ön yüzü + telefon (kartın ön yüzü de yeşil)
+**Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/mockups/p7_07_print_card.png` · 1536×1024 · 2 yeşil alan
+
+```
+Flat-lay from directly above on a white wool blanket with a light dusting of snow: a single portrait 5×7 inch invitation card with a thick cotton-paper edge lies left of center, its entire front face a perfectly flat, uniform, opaque pure green (#00FF00) with crisp straight edges; a smartphone lies to its right, rotated about 6 degrees. Around them at the edges: pine branches, red winter berries, small pine cones and a red velvet ribbon. The card's four corners and the phone screen's four corners are fully visible. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: deep forest green, snowy white, winter-berry red and soft antique gold. Every phone, tablet and laptop is a generic modern device with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, hand, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
+```
+Kontrol: tam 2 yeşil alan; her yeşil alanın dört köşesi görünüyor; parmak/süs yeşilin üstünde değil; yazı/logo yok.
+
+### 7.8 Dört sayfa / dört dil: yelpaze dizilmiş 4 telefon
+**Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/mockups/p7_08_four_phones.png` · 1536×1024 · 4 yeşil alan
+
+```
+Four identical smartphones stand upright in a gentle arc on a white wool blanket with a light dusting of snow, seen from the front at eye level, evenly spaced with clear gaps so they never overlap, all screens facing the camera. Around their bases and at the edges of the frame: pine branches, red winter berries, small pine cones and a red velvet ribbon. Elegant, orderly, catalogue-like. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: deep forest green, snowy white, winter-berry red and soft antique gold. Every phone, tablet and laptop is a generic modern device with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, hand, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
+```
+Kontrol: tam 4 yeşil alan; her yeşil alanın dört köşesi görünüyor; parmak/süs yeşilin üstünde değil; yazı/logo yok.
+
+### 7.9 Düğün günü: misafir masasında telefon (Details/harita)
+**Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/mockups/p7_09_venue_table.png` · 1024×1024 · 1 yeşil alan
+
+```
+At a beautifully set wedding reception table, a smartphone stands upright on a small clear stand next to a folded napkin, crystal glasses and candles, screen facing the camera. Table décor echoes pine branches, red winter berries; the venue and other tables glow softly out of focus behind. Golden-hour light, festive and elegant; no people's faces. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: deep forest green, snowy white, winter-berry red and soft antique gold. Every phone, tablet and laptop is a generic modern device with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, hand, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
+```
+Kontrol: tam 1 yeşil alan; her yeşil alanın dört köşesi görünüyor; parmak/süs yeşilin üstünde değil; yazı/logo yok.
+
+### 7.10 Düğünden sonra: buket yanında telefon (teşekkür sayfası, yanıtlar)
+**Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/mockups/p7_10_bouquet.png` · 1024×1024 · 1 yeşil alan
+
+```
+A bridal bouquet in the color world of this design lies on a white wool blanket with a light dusting of snow, and a smartphone rests beside it at a slight angle, screen facing up toward the camera from a high three-quarter view. A loosened silk ribbon and a few petals around, never on the screen. Soft, nostalgic after-the-wedding mood. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: deep forest green, snowy white, winter-berry red and soft antique gold. Every phone, tablet and laptop is a generic modern device with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, hand, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
+```
+Kontrol: tam 1 yeşil alan; her yeşil alanın dört köşesi görünüyor; parmak/süs yeşilin üstünde değil; yazı/logo yok.
+
+### 7.11 Paylaşmak kolay: bir kişi telefonu diğerine gösteriyor
+**Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/mockups/p7_11_share.png` · 1024×1024 · 1 yeşil alan
+
+```
+Close-up of two people's hands at a white wool blanket with a light dusting of snow: one holds a smartphone toward the other, screen facing the camera, while the other person's hand rests on the table nearby. In the soft background: pine branches, red winter berries, small pine cones and a red velvet ribbon. Joyful sharing moment; no faces visible. Photorealistic high-end wedding stationery product photography, natural soft daylight from the top-left, shallow depth of field, editorial and luxurious, color world: deep forest green, snowy white, winter-berry red and soft antique gold. Every phone, tablet and laptop is a generic modern device with thin even bezels and rounded corners, no logo, no brand marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): no reflections, no glare, no gradient, no icons, no status bar, no notch content. All four corners of every screen are fully visible: no finger, hand, prop, petal or ribbon covers any part of a screen. No text, letters, numbers, logos or watermarks anywhere in the image.
+```
+Kontrol: tam 1 yeşil alan; her yeşil alanın dört köşesi görünüyor; parmak/süs yeşilin üstünde değil; yazı/logo yok.
+
+### 7.V Promo video sahnesi (2. video)
+**Kaydet:** `collections/08_Winter_Evergreen/assets/gpt/video/promo_greenscreen.mp4` · 1080×1080 · 10–15 sn · sessiz olabilir
+
+```
+A 12-second locked-off (tripod, no camera movement) 1:1 square video, 1080×1080. A smartphone stands perfectly still, upright on a small invisible stand in the center of the frame, filling about 65% of the frame height, on a white wool blanket with a light dusting of snow, pine branches, red winter berries, small pine cones and a red velvet ribbon. The phone screen is a perfectly flat, uniform, opaque pure green (#00FF00) for the whole clip and never moves, so it can be replaced in editing. Only the surroundings move, gently and slowly: soft daylight shifts across the table, a sheer curtain shadow drifts, one or two petals or leaves fall slowly in the background and land at the edges, never in front of the screen. Nothing ever crosses or covers the phone or its screen; no hands. Photorealistic, luxurious, calm, high-end wedding stationery commercial look, color world: deep forest green, snowy white, winter-berry red and soft antique gold. No text, logos or watermarks.
+```
+Kontrol: kamera kıpırdamıyor; telefon ve yeşil ekran tüm klipte sabit ve tam görünür; ekranın önünden hiçbir şey geçmiyor; el yok; yazı/logo yok.
+Claude bu klibe gerçek açılış kaydını (zarf → kart → sayfalar) yerleştirir; videoda gösterilen her şey gerçek siteden gelir.

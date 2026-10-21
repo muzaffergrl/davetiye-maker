@@ -343,6 +343,12 @@ dükkân durumu, fiyat, ödeme, diğer alanlar (Message to Buyers 248/464, Headl
   büyük file girdisi doğrudan çalışıyor.
 - Mobil kırpım yeniden ölçülmedi. Banner oranı ve yazı logosunun yeri §7.5'teki sürümle aynı (4:1, sağda "BKE Studio").
 
+### 7.8 Message to Buyers adresi bkestudio.com'a (2026-10-21, yerel oturum, Claude in Chrome; docs/30 4b)
+Okunan (yedek): iki alan da eski adresi taşıyordu — `shop[sale_message]`: "Thank you! Start your wedding website from the START HERE
+PDF in your download, or at https://davetiye-platform-five.vercel.app/start (choose the design you bought). Please save your private
+edit link when it appears. Questions? Message us on Etsy." · `shop[digital_sale_message]`: §1.5 metninin aynısı, yalnız adres
+`https://davetiye-platform-five.vercel.app/start`. Girilen: §1.4 ve §1.5 (bkestudio.com).
+
 ## 8. İlan paketi (01–05) — yüklemeye hazır, Etsy'ye eklenmedi (2026-10-15)
 
 Kullanıcı kararı (2026-10-15): ilanlar **yüklenecek biçimde hazırlanır ama Etsy'ye eklenmez** (taslak da açılmaz). Önce testler yapılacak.
