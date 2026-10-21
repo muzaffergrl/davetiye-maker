@@ -349,6 +349,22 @@ PDF in your download, or at https://davetiye-platform-five.vercel.app/start (cho
 edit link when it appears. Questions? Message us on Etsy." · `shop[digital_sale_message]`: §1.5 metninin aynısı, yalnız adres
 `https://davetiye-platform-five.vercel.app/start`. Girilen: §1.4 ve §1.5 (bkestudio.com).
 
+### 7.9 21 ilan TASLAK olarak oluşturuldu (2026-10-21, yerel oturum, Claude in Chrome; docs/30 4c)
+Shop Manager → Listings: **Draft 21, Active 0** (yayın yok, ilan ücreti kesilmedi; Etsy Plus 15 ücretsiz kredi duruyor). Her
+taslak `etsy_upload.json`'dan: başlık, açıklama (tam metin), 13 etiket, kategori **Invitations** (Paper & Party › … ›
+Invitations), tür **Digital**, dijital dosya `package/customer/START_HERE.pdf`, 9 görsel `images_editorial/01…09` json sırasıyla
+(01 kapak = Featured), video `package/listing/video.mp4` (Etsy filtresi "With video 21"), fiyat **1.460 TL**, adet 999, Occasion
+**Wedding**, Who made it **I did**, What is it **A finished product**, bölüm json'daki gibi (Floral & Garden / Classic & Vintage /
+Summer & Destination), yenileme **Automatic**. Her taslak kaydetmeden önce form değerleri JS ile okunarak doğrulandı.
+- **Seçim (kullanıcıya bildirildi):** "How is this digital content created?" → **With an AI generator** (dekor ve örnek
+  fotoğraflar GPT ile üretildi; açıklamadaki AI cümlesiyle tutarlı). Kullanıcı değiştirmek isterse taslakta değiştirilir.
+- Girilmeyen: görsel alt metinleri (json'da var; Etsy'de görsel başına ayrı düzenleme), renk/stil özellikleri (bu kategoride alan
+  yok), varyasyon (dijitalde kapalı; paletler zaten "coming").
+- Etsy düzenleyicisinde iki farklı arayüz görüldü (tek "Add" girişli yeni düzen ve "Add photos/Add videos"lı eski düzen); 02'de
+  bir görsel "trouble uploading" ile düştü, yeniden yüklendi; sayılar her ilanda doğrulandı.
+- Ekranlar: `docs/20_etsy_taslaklar_20261021/`. Sonraki: PAKET 7 sahneleri (docs/31) + promo video eklenecek; yayın kullanıcının
+  "yayınla" onayına bağlı (yayın başına 0,20 USD; 15 kredi).
+
 ## 8. İlan paketi (01–05) — yüklemeye hazır, Etsy'ye eklenmedi (2026-10-15)
 
 Kullanıcı kararı (2026-10-15): ilanlar **yüklenecek biçimde hazırlanır ama Etsy'ye eklenmez** (taslak da açılmaz). Önce testler yapılacak.
