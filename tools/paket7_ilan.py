@@ -29,48 +29,48 @@ LOOK = ("Photorealistic high-end wedding stationery product photography, natural
 
 # (dosya, boyut, yeşil alan sayısı, ne anlatır — Claude oraya ne koyar, prompt gövdesi)
 SAHNELER = [
-    ("p7_01_closeup", "1024×1024", 1, "Yakın çekim: açılış nesnesinin detayı (kâğıt, mühür, doku) — ürünün kalitesi",
+    ("p7_01_closeup", "kare 1:1 (ör. 1254×1254)", 1, "Yakın çekim: açılış nesnesinin detayı (kâğıt, mühür, doku) — ürünün kalitesi",
      "A close, intimate product shot: one smartphone stands slightly tilted back on {set_short}, filling about 60% of the image "
      "height, shot from a low three-quarter angle so the phone feels tangible and premium. It is framed softly in the foreground and "
      "background by {props}, which come close to the phone frame but never touch the screen."),
-    ("p7_02_hand_tap", "1024×1024", 1, "Dokununca açılır: misafirin parmağı ekrana yaklaşıyor (parmak ekranın DIŞINDA)",
+    ("p7_02_hand_tap", "kare 1:1 (ör. 1254×1254)", 1, "Dokununca açılır: misafirin parmağı ekrana yaklaşıyor (parmak ekranın DIŞINDA)",
      "A woman's elegant hand holds a smartphone upright in the center of the frame, screen facing the camera; the index finger of "
      "her other hand hovers just below the bottom edge of the phone, about to tap, clearly outside the screen area. Behind, softly "
      "out of focus: {set}. A sense of anticipation, like opening a real letter."),
-    ("p7_03_guest_home", "1024×1024", 1, "Misafir evde daveti açıyor: sıcak, gerçek hayat — misafir hiçbir şey indirmez",
+    ("p7_03_guest_home", "kare 1:1 (ör. 1254×1254)", 1, "Misafir evde daveti açıyor: sıcak, gerçek hayat — misafir hiçbir şey indirmez",
      "A cozy at-home moment: a guest sits by a bright window in a soft armchair, holding a smartphone in portrait orientation at a "
      "comfortable reading angle, screen facing the camera, thumbs only on the phone frame. On a side table beside them, softly "
      "blurred: a cup of tea and {props_short}. Warm, delighted mood; the person's face is not visible."),
-    ("p7_04_phone_tablet", "1536×1024", 2, "Her cihazda: telefon + tablet aynı site",
+    ("p7_04_phone_tablet", "yatay 3:2 (ör. 1536×1024)", 2, "Her cihazda: telefon + tablet aynı site",
      "A tablet stands upright on a small stand slightly left of center on {set_short}, and a smartphone stands upright to its "
      "right, both screens facing the camera, clear space between them. Around them at the edges: {props}. Calm, generous space "
      "above the devices."),
-    ("p7_05_laptop", "1536×1024", 1, "Bilgisayarda düzenleyici: rahat, büyük ekran",
+    ("p7_05_laptop", "yatay 3:2 (ör. 1536×1024)", 1, "Bilgisayarda düzenleyici: rahat, büyük ekran",
      "An open modern laptop seen from a gentle three-quarter angle on {set_short}, its screen facing the camera and filling about "
      "half of the image width. A ceramic coffee cup and a closed linen-covered wedding planner notebook beside it, with {props} "
      "arranged loosely at the edges. Bright, organised, stress-free planning mood."),
-    ("p7_06_couple_planning", "1536×1024", 2, "Çift birlikte planlıyor: laptop + telefon (yüz yok)",
+    ("p7_06_couple_planning", "yatay 3:2 (ör. 1536×1024)", 2, "Çift birlikte planlıyor: laptop + telefon (yüz yok)",
      "Two people sit side by side at a table set with {set_short}: only their forearms and hands are visible, one with a delicate "
      "engagement ring. An open laptop in front of them and a smartphone held by one of them, both screens facing the camera. "
      "On the table: {props}. Warm, happy, together; no faces visible."),
-    ("p7_07_print_card", "1536×1024", 2, "Basılı davetiye de dahil: kart ön yüzü + telefon (kartın ön yüzü de yeşil)",
+    ("p7_07_print_card", "yatay 3:2 (ör. 1536×1024)", 2, "Basılı davetiye de dahil: kart ön yüzü + telefon (kartın ön yüzü de yeşil)",
      "Flat-lay from directly above on {set_short}: a single portrait 5×7 inch invitation card with a thick cotton-paper edge lies "
      "left of center, its entire front face a perfectly flat, uniform, opaque pure green (#00FF00) with crisp straight edges; a "
      "smartphone lies to its right, rotated about 6 degrees. Around them at the edges: {props}. The card's four corners and the "
      "phone screen's four corners are fully visible."),
-    ("p7_08_four_phones", "1536×1024", 4, "Dört sayfa / dört dil: yelpaze dizilmiş 4 telefon",
+    ("p7_08_four_phones", "yatay 3:2 (ör. 1536×1024)", 4, "Dört sayfa / dört dil: yelpaze dizilmiş 4 telefon",
      "Four identical smartphones stand upright in a gentle arc on {set_short}, seen from the front at eye level, evenly spaced with "
      "clear gaps so they never overlap, all screens facing the camera. Around their bases and at the edges of the frame: {props}. "
      "Elegant, orderly, catalogue-like."),
-    ("p7_09_venue_table", "1024×1024", 1, "Düğün günü: misafir masasında telefon (Details/harita)",
+    ("p7_09_venue_table", "kare 1:1 (ör. 1254×1254)", 1, "Düğün günü: misafir masasında telefon (Details/harita)",
      "At a beautifully set wedding reception table, a smartphone stands upright on a small clear stand next to a folded napkin, "
      "crystal glasses and candles, screen facing the camera. Table décor echoes {props_short}; the venue and other tables glow "
      "softly out of focus behind. Golden-hour light, festive and elegant; no people's faces."),
-    ("p7_10_bouquet", "1024×1024", 1, "Düğünden sonra: buket yanında telefon (teşekkür sayfası, yanıtlar)",
+    ("p7_10_bouquet", "kare 1:1 (ör. 1254×1254)", 1, "Düğünden sonra: buket yanında telefon (teşekkür sayfası, yanıtlar)",
      "A bridal bouquet in the color world of this design lies on {set_short}, and a smartphone rests beside it at a slight angle, "
      "screen facing up toward the camera from a high three-quarter view. A loosened silk ribbon and a few petals around, never on "
      "the screen. Soft, nostalgic after-the-wedding mood."),
-    ("p7_11_share", "1024×1024", 1, "Paylaşmak kolay: bir kişi telefonu diğerine gösteriyor",
+    ("p7_11_share", "kare 1:1 (ör. 1254×1254)", 1, "Paylaşmak kolay: bir kişi telefonu diğerine gösteriyor",
      "Close-up of two people's hands at {set_short}: one holds a smartphone toward the other, screen facing the camera, while the "
      "other person's hand rests on the table nearby. In the soft background: {props}. Joyful sharing moment; no faces visible."),
 ]
@@ -89,8 +89,8 @@ def bolum(d: dict) -> str:
     look = LOOK.format(**d)
     parca = [f"""{BASLIK} — Etsy ilan sahneleri 2 (10–20. görseller) + promo video (2026-10-21)
 
-> Kullanıcı (2026-10-21): Etsy'nin sınırı kadar görsel (20 fotoğraf + 2 video). İlanda 9 görsel + 1 video var → **11 sahne +
-> 1 video sahnesi**. Amaç: ürün ön planda, detayları gösteren, alıcının içini rahatlatan, satın almaya teşvik eden kareler.
+> Kullanıcı (2026-10-21): Etsy'nin sınırı kadar görsel (20 fotoğraf + 2 video). İlanda 9 görsel + 1 video var → **11 sahne** (promo videoyu
+> Claude gerçek kayıttan yapar). Amaç: ürün ön planda, detayları gösteren, alıcının içini rahatlatan, satın almaya teşvik eden kareler.
 > GPT yalnız **sahneyi** üretir; ekranlar (ve 7.7'de kartın ön yüzü) **düz #00FF00**. Claude gerçek site ekranlarını ve
 > gerçek basılı davetiye render'ını yeşile yerleştirir, başlıkları dizer. Böylece ilan ürünü olduğu gibi gösterir (Etsy kuralı).
 > PAKET 3 ile **aynı set** (aynı masa, süs, ışık). Hepsini **tek sohbette** üret. Üreten: `python3 tools/paket7_ilan.py --no {d['no']}`.
@@ -109,16 +109,11 @@ You are the photographer and set stylist for the Etsy listing photos of a digita
 ```
 {p} {look} {SCREEN}
 ```
-Kontrol: tam {n} yeşil alan; her yeşil alanın dört köşesi görünüyor; parmak/süs yeşilin üstünde değil; yazı/logo yok.
+Kontrol (gözle; piksel ölçme yok): {n} adet düz, parlak, tek tonda yeşil alan (tam #00FF00 şart değil, (3, 252, 45) gibi bir yeşil yeterli; birleştirme aracı toleransla okur); oran doğru, ölçü serbest; her yeşil alanın dört köşesi görünüyor; parmak/süs yeşilin üstünde değil; yazı/logo yok. En fazla 2 deneme; hâlâ kusurluysa en iyisini kaydet, notunu düş ve **sonraki sahneye geç**.
 """)
-    parca.append(f"""### 7.V Promo video sahnesi (2. video)
-**Kaydet:** `{d['dir']}/assets/gpt/video/promo_greenscreen.mp4` · 1080×1080 · 10–15 sn · sessiz olabilir
-
-```
-{VIDEO.format(**d)}
-```
-Kontrol: kamera kıpırdamıyor; telefon ve yeşil ekran tüm klipte sabit ve tam görünür; ekranın önünden hiçbir şey geçmiyor; el yok; yazı/logo yok.
-Claude bu klibe gerçek açılış kaydını (zarf → kart → sayfalar) yerleştirir; videoda gösterilen her şey gerçek siteden gelir.
+    parca.append("""### 7.V Promo video (2. video) — GPT'ye verilmez
+Claude gerçek site kaydından üretir (`package/listing/video_promo.mp4`, 1080×1080, H.264, sessiz, 12–15 sn): açılış → sayfalar →
+düzenleyici → RSVP. Videoda gösterilen her şey gerçek siteden gelir; yapay zekâ videosu kullanılmaz.
 """)
     return "\n".join(parca)
 
