@@ -1,0 +1,122 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Josie",
+      "full_name": "Josie Lynn Calloway"
+    },
+    {
+      "display_name": "Beau",
+      "full_name": "Beau Everett Haines"
+    }
+  ],
+  "name_display": "Josie & Beau",
+  "initials": "J&B",
+  "host_line": "Together with their families",
+  "date": "2027-09-11",
+  "ceremony_time": "17:30",
+  "timezone": "America/Denver",
+  "venue": {
+    "name": "Silver Sage Ranch",
+    "city": "Jackson",
+    "region": "Wyoming",
+    "country": "United States",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "17:30",
+      "location": "The meadow arch"
+    },
+    {
+      "label": "Cocktails",
+      "time": "18:15",
+      "location": "The corral porch"
+    },
+    {
+      "label": "Barbecue supper",
+      "time": "19:00",
+      "location": "The big barn"
+    },
+    {
+      "label": "Dancing under the stars",
+      "time": "20:30",
+      "location": "The barn floor"
+    }
+  ],
+  "dress_code": "Ranch formal — boots welcome",
+  "rsvp": {
+    "deadline": "2027-08-07",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your supper choice",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Smoked brisket",
+          "Cedar-plank trout",
+          "Vegetarian"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "A ride at sunset, a dance in the barn and a yes by the fence led us to",
+    "items": [
+      {
+        "caption": "Horseback at sunset"
+      },
+      {
+        "caption": "Dancing in the barn"
+      },
+      {
+        "caption": "Yes, by the fence"
+      }
+    ]
+  },
+  "audio": {
+    "music": "first-light",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony; the meadow arch is a short walk from the parking area."
+    },
+    {
+      "q": "Is the ceremony outdoors?",
+      "a": "Yes, on the meadow. Boots or block heels are a good idea, and the evenings turn cool, so bring a layer."
+    }
+  ]
+}

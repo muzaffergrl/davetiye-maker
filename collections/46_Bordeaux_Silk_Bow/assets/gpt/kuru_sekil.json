@@ -1,0 +1,22 @@
+{
+ "_not": "Tasarım 46 kuru deneme (tools/gpt_kuru_deneme.py --sekil): parçaların prompt'taki yeri, tuval yüzdesiyle. Tema henüz yok (concept); tema kurulunca kullanılır. Deneme görseli ürün değildir.",
+ "ivory_linen.png": {"ton": [247, 241, 230], "gren": 0.3},
+ "ivory_moire.png": {"ton": [244, 237, 224], "gren": 0.2},
+ "env_back.png": {"kutu": [7, 6, 93, 94], "ton": [122, 30, 44]},
+ "env_front.png": {"kutu": [7, 39, 93, 94], "ton": [234, 223, 204]},
+ "flap.png": {"kutu": [7, 6, 93, 43], "ton": [228, 216, 196]},
+ "flap_in.png": {"kutu": [7, 7, 93, 93], "ton": [122, 30, 44]},
+ "bow.png": {"kutu": [20, 31, 80, 84], "ton": [122, 30, 44]},
+ "knot.png": {"kutu": [45, 37, 55, 49], "ton": [122, 30, 44]},
+ "ribbon_tile.png": {"kutu": [41.67, 0, 58.33, 100], "ton": [122, 30, 44]},
+ "ribbon_curl.png": {"kutu": [20.83, 0, 79.17, 100], "ton": [122, 30, 44]},
+ "card_small.png": {"kutu": [7, 6, 93, 94], "ton": [247, 241, 230]},
+ "keepsake_print.png": {"kutu": [6, 6, 94, 94], "pencere": [12.00, 9.60, 88.00, 85.60], "ton": [247, 241, 230]},
+ "bundle_ribbon.png": {"kutu": [6, 6, 94, 94], "ton": [122, 30, 44]},
+ "keepsake_wide.png": {"kutu": [6, 6, 94, 94], "pencere": [7.50, 11.50, 92.50, 88.00], "ton": [247, 241, 230]},
+ "tulips.png": {"kutu": [7, 6, 78, 80], "ton": [247, 241, 230]},
+ "bow_small.png": {"kutu": [12, 12, 88, 88], "ton": [122, 30, 44]},
+ "accent_1.png": {"kutu": [20, 20, 80, 80], "ton": [247, 241, 230]},
+ "accent_2.png": {"kutu": [20, 20, 80, 80], "ton": [122, 30, 44]},
+ "web_hero.png": {"ton": [234, 223, 204]}
+}

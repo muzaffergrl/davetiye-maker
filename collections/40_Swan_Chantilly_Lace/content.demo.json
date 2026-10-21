@@ -1,0 +1,122 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Beatrice",
+      "full_name": "Beatrice Eleanor Whitcombe"
+    },
+    {
+      "display_name": "Alistair",
+      "full_name": "Alistair James Harrow"
+    }
+  ],
+  "name_display": "Beatrice & Alistair",
+  "initials": "B&A",
+  "host_line": "Together with their families",
+  "date": "2027-06-05",
+  "ceremony_time": "16:00",
+  "timezone": "America/New_York",
+  "venue": {
+    "name": "Swanmere House",
+    "city": "Greenwich",
+    "region": "Connecticut",
+    "country": "United States",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:00",
+      "location": "The lakeside lawn"
+    },
+    {
+      "label": "Champagne",
+      "time": "17:00",
+      "location": "The stone terrace"
+    },
+    {
+      "label": "Dinner",
+      "time": "18:30",
+      "location": "The orangery"
+    },
+    {
+      "label": "Dancing",
+      "time": "20:30",
+      "location": "The ballroom"
+    }
+  ],
+  "dress_code": "Black tie",
+  "rsvp": {
+    "deadline": "2027-05-01",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Fish",
+          "Chicken"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "A summer on the lake, a walk at dusk and a quiet promise led us to",
+    "items": [
+      {
+        "caption": "A summer on the lake"
+      },
+      {
+        "caption": "Swans at dusk"
+      },
+      {
+        "caption": "Forever, in lace"
+      }
+    ]
+  },
+  "audio": {
+    "music": "evening-strings",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "Will the ceremony be outdoors?",
+      "a": "Yes, on the lakeside lawn. Please choose shoes that are comfortable on grass; dinner and dancing are indoors."
+    },
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony."
+    }
+  ]
+}

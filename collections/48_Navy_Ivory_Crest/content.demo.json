@@ -1,0 +1,122 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Caroline",
+      "full_name": "Caroline Hope Ashby"
+    },
+    {
+      "display_name": "Frederick",
+      "full_name": "Frederick Miles Langdon"
+    }
+  ],
+  "name_display": "Caroline & Frederick",
+  "initials": "C&F",
+  "host_line": "Together with their families",
+  "date": "2027-09-04",
+  "ceremony_time": "16:30",
+  "timezone": "America/New_York",
+  "venue": {
+    "name": "Langford Manor",
+    "city": "Annapolis",
+    "region": "Maryland",
+    "country": "United States",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:30",
+      "location": "The south lawn"
+    },
+    {
+      "label": "Cocktails",
+      "time": "17:15",
+      "location": "The harbor terrace"
+    },
+    {
+      "label": "Dinner",
+      "time": "18:30",
+      "location": "The great hall"
+    },
+    {
+      "label": "Dancing",
+      "time": "20:30",
+      "location": "The ballroom"
+    }
+  ],
+  "dress_code": "Black tie optional",
+  "rsvp": {
+    "deadline": "2027-07-31",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your dinner choice",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Crab cakes",
+          "Beef tenderloin",
+          "Vegetarian"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "A sailing season, summers at the estate and a ring by the water led us to",
+    "items": [
+      {
+        "caption": "Sailing season"
+      },
+      {
+        "caption": "Summers at the estate"
+      },
+      {
+        "caption": "A ring by the water"
+      }
+    ]
+  },
+  "audio": {
+    "music": "evening-strings",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony; guests are seated on the south lawn."
+    },
+    {
+      "q": "What if the weather turns?",
+      "a": "The ceremony moves into the great hall, and everything else stays as planned."
+    }
+  ]
+}

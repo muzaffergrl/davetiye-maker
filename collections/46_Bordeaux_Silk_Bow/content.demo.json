@@ -1,0 +1,122 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Cecilia",
+      "full_name": "Cecilia Anne Beaumont"
+    },
+    {
+      "display_name": "Nathaniel",
+      "full_name": "Nathaniel Grey Ellison"
+    }
+  ],
+  "name_display": "Cecilia & Nathaniel",
+  "initials": "C&N",
+  "host_line": "Together with their families",
+  "date": "2027-12-04",
+  "ceremony_time": "17:00",
+  "timezone": "America/New_York",
+  "venue": {
+    "name": "The Linden Square Club",
+    "city": "Philadelphia",
+    "region": "Pennsylvania",
+    "country": "United States",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "17:00",
+      "location": "The library"
+    },
+    {
+      "label": "Champagne",
+      "time": "17:45",
+      "location": "The winter garden"
+    },
+    {
+      "label": "Dinner",
+      "time": "19:00",
+      "location": "The grand salon"
+    },
+    {
+      "label": "Dancing",
+      "time": "21:00",
+      "location": "The ballroom"
+    }
+  ],
+  "dress_code": "Black tie",
+  "rsvp": {
+    "deadline": "2027-10-30",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Fish",
+          "Beef"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "Snow in the city, a box of letters and one ribbon-tied ring led us to",
+    "items": [
+      {
+        "caption": "Snow in the city"
+      },
+      {
+        "caption": "Letters and ribbons"
+      },
+      {
+        "caption": "A ribbon on the ring"
+      }
+    ]
+  },
+  "audio": {
+    "music": "evening-strings",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony, which begins in the library."
+    },
+    {
+      "q": "Will there be a coat check?",
+      "a": "Yes, a coat check will be open in the entrance hall for the whole evening."
+    }
+  ]
+}

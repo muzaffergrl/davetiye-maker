@@ -1,0 +1,22 @@
+{
+ "_not": "Tasarım 47 kuru deneme (tools/gpt_kuru_deneme.py --sekil, tema kurulunca): parçaların prompt'taki yeri, tuval yüzdesiyle. Zarf katmanları aynı kutuda (x 7–93, y 6–94). Deneme görseli ürün değildir.",
+ "black_paper.png": {"ton": [18, 18, 18], "gren": 0.3},
+ "fiber_paper.png": {"ton": [244, 242, 238], "gren": 0.2},
+ "env_back.png": {"kutu": [7, 6, 93, 94], "ton": [42, 42, 42]},
+ "env_front.png": {"kutu": [7, 37.68, 93, 94], "ton": [18, 18, 18]},
+ "flap.png": {"kutu": [7, 6, 93, 41.2], "ton": [24, 24, 24]},
+ "flap_in.png": {"kutu": [7, 8.75, 93, 91.25], "ton": [42, 42, 42]},
+ "film_curl.png": {"kutu": [44, 37, 88, 75], "ton": [42, 42, 42]},
+ "film_tile.png": {"kutu": [6, 6, 94, 94], "pencere": [10, 20.91, 90, 79.09], "ton": [42, 42, 42]},
+ "tray.png": {"kutu": [7, 8, 93, 92], "ton": [24, 24, 24]},
+ "card_small.png": {"kutu": [7, 6, 93, 94], "ton": [244, 242, 238]},
+ "fiber_print.png": {"kutu": [6, 6, 94, 94], "pencere": [12, 10.4, 88, 86.4], "ton": [244, 242, 238]},
+ "fiber_wide.png": {"kutu": [6, 6, 94, 94], "pencere": [7.5, 13.33, 92.5, 86.19], "ton": [244, 242, 238]},
+ "loupe.png": {"kutu": [12, 12, 88, 88], "ton": [30, 30, 30]},
+ "anemones.png": {"kutu": [6, 6, 80, 76], "ton": [236, 234, 230]},
+ "canister.png": {"kutu": [18, 8, 82, 92], "ton": [169, 169, 166]},
+ "divider.png": {"kutu": [7, 18, 93, 82], "ton": [42, 42, 42]},
+ "accent_1.png": {"kutu": [22, 22, 78, 78], "ton": [244, 242, 238]},
+ "accent_2.png": {"kutu": [22, 22, 78, 78], "ton": [42, 42, 42]},
+ "web_hero.png": {"ton": [42, 42, 42]}
+}

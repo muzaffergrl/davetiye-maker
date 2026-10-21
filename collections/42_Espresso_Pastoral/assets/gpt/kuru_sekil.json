@@ -1,0 +1,23 @@
+{
+ "_not": "Tasarım 42 kuru deneme (tema espresso-pastoral kurulunca: tools/gpt_kuru_deneme.py --tema espresso-pastoral --sekil): parçaların prompt'taki yeri, tuval yüzdesiyle. Deneme görseli ürün değildir.",
+ "espresso_paper.png": {"ton": [59, 42, 33], "gren": 0.3},
+ "cream_parchment.png": {"ton": [241, 230, 210], "gren": 0.3},
+ "sky.png": {"ton": [180, 132, 121], "gren": 0.4},
+ "hills.png": {"kutu": [3, 32, 97, 97], "ton": [183, 155, 126]},
+ "meadow.png": {"kutu": [3, 26, 97, 97], "ton": [110, 81, 64]},
+ "grasses.png": {"kutu": [3, 12, 97, 97], "ton": [217, 180, 122]},
+ "env_back.png": {"kutu": [7, 6, 93, 94], "ton": [35, 24, 17]},
+ "env_front.png": {"kutu": [7, 39.44, 93, 94], "ton": [59, 42, 33]},
+ "flap.png": {"kutu": [7, 6, 93, 51.76], "ton": [59, 42, 33]},
+ "flap_in.png": {"kutu": [7, 6, 93, 94], "ton": [180, 132, 121]},
+ "lace_band.png": {"kutu": [7, 41.2, 93, 50], "ton": [241, 230, 210]},
+ "posy.png": {"kutu": [22, 10, 78, 90], "ton": [241, 230, 210]},
+ "card_small.png": {"kutu": [6, 6, 94, 94], "ton": [241, 230, 210]},
+ "cabinet_frame.png": {"kutu": [6, 6, 94, 94], "pencere": [15, 10.77, 85, 78.08], "ton": [59, 42, 33]},
+ "cabinet_wide.png": {"kutu": [6, 6, 94, 94], "pencere": [10, 11.82, 90, 77.27], "ton": [59, 42, 33]},
+ "candle.png": {"kutu": [25, 7, 75, 93], "ton": [217, 180, 122]},
+ "dried_roses.png": {"kutu": [7, 7, 78, 74], "ton": [180, 132, 121]},
+ "accent_1.png": {"kutu": [20, 22, 80, 78], "ton": [180, 132, 121]},
+ "accent_2.png": {"kutu": [30, 15, 70, 85], "ton": [217, 180, 122]},
+ "accent_3.png": {"kutu": [22, 20, 78, 80], "ton": [241, 230, 210]}
+}

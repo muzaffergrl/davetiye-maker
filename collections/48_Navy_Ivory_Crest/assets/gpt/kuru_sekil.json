@@ -1,0 +1,22 @@
+{
+ "_not": "Tasarım 48 kuru deneme (tools/gpt_kuru_deneme.py --sekil; tema kurulunca): parçaların prompt'taki yeri, tuval yüzdesiyle. Deneme görseli ürün değildir.",
+ "navy_linen.png": {"ton": [28, 42, 72], "gren": 0.3},
+ "ivory_cotton.png": {"ton": [245, 240, 227], "gren": 0.2},
+ "env_back.png": {"kutu": [9.5, 10, 90.5, 90], "ton": [245, 240, 227]},
+ "env_front.png": {"kutu": [9.5, 34, 90.5, 90], "ton": [28, 42, 72]},
+ "flap.png": {"kutu": [9.5, 10, 90.5, 54.8], "ton": [28, 42, 72]},
+ "flap_in.png": {"kutu": [9.5, 18, 90.5, 82], "ton": [245, 240, 227]},
+ "seal.png": {"kutu": [10, 10, 90, 90], "ton": [232, 224, 204]},
+ "ribbon_tab.png": {"kutu": [47.2, 50, 52.8, 70], "ton": [28, 42, 72]},
+ "crest.png": {"kutu": [10, 10, 90, 90], "ton": [184, 150, 79]},
+ "card_small.png": {"kutu": [8, 7, 92, 93], "ton": [245, 240, 227]},
+ "cartouche_frame.png": {"kutu": [6, 6, 94, 94], "pencere": [14.0, 14.0, 86.0, 86.0], "ton": [245, 240, 227]},
+ "cartouche_wide.png": {"kutu": [6, 6, 94, 94], "pencere": [10.0, 14.0, 90.0, 86.0], "ton": [245, 240, 227]},
+ "magnolia.png": {"kutu": [6, 6, 80, 74], "ton": [245, 240, 227]},
+ "laurel_divider.png": {"kutu": [10, 20, 90, 80], "ton": [184, 150, 79]},
+ "bow.png": {"kutu": [10, 12, 90, 88], "ton": [28, 42, 72]},
+ "accent_1.png": {"kutu": [22, 22, 78, 78], "ton": [245, 240, 227]},
+ "accent_2.png": {"kutu": [22, 22, 78, 78], "ton": [111, 122, 90]},
+ "accent_3.png": {"kutu": [22, 22, 78, 78], "ton": [184, 150, 79]},
+ "web_hero.png": {"ton": [28, 42, 72], "gren": 0.3}
+}

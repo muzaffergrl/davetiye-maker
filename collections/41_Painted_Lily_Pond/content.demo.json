@@ -1,0 +1,122 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Rosalie",
+      "full_name": "Rosalie Marguerite Dale"
+    },
+    {
+      "display_name": "Benjamin",
+      "full_name": "Benjamin Hale Porter"
+    }
+  ],
+  "name_display": "Rosalie & Benjamin",
+  "initials": "R&B",
+  "host_line": "Together with their families",
+  "date": "2027-05-22",
+  "ceremony_time": "11:00",
+  "timezone": "America/Los_Angeles",
+  "venue": {
+    "name": "The Larkspur Water Garden",
+    "city": "Sonoma",
+    "region": "California",
+    "country": "United States",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "11:00",
+      "location": "Beneath the wisteria arch"
+    },
+    {
+      "label": "Garden brunch",
+      "time": "12:00",
+      "location": "The lily pond lawn"
+    },
+    {
+      "label": "Toasts & cake",
+      "time": "14:00",
+      "location": "The painter's terrace"
+    },
+    {
+      "label": "Lawn games & dancing",
+      "time": "15:00",
+      "location": "The willow meadow"
+    }
+  ],
+  "dress_code": "Garden formal",
+  "rsvp": {
+    "deadline": "2027-04-17",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Fish",
+          "Chicken"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "A rowboat on the pond, an afternoon at the easel and a question beneath the wisteria led us to",
+    "items": [
+      {
+        "caption": "A rowboat on the pond"
+      },
+      {
+        "caption": "Painting in the garden"
+      },
+      {
+        "caption": "Beneath the wisteria"
+      }
+    ]
+  },
+  "audio": {
+    "music": "garden-waltz",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony."
+    },
+    {
+      "q": "What shoes should we wear?",
+      "a": "The ceremony and brunch are on the garden lawn, so flats or block heels are most comfortable."
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Adeline",
+      "full_name": "Adeline Rose Fairfax"
+    },
+    {
+      "display_name": "Victor",
+      "full_name": "Victor Laurent Mercer"
+    }
+  ],
+  "name_display": "Adeline & Victor",
+  "initials": "A&V",
+  "host_line": "Together with their families",
+  "date": "2027-06-12",
+  "ceremony_time": "17:00",
+  "timezone": "America/New_York",
+  "venue": {
+    "name": "Merriwell Garden Pavilion",
+    "city": "Charlottesville",
+    "region": "Virginia",
+    "country": "United States",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "17:00",
+      "location": "The garden pavilion"
+    },
+    {
+      "label": "Garden tea & cocktails",
+      "time": "17:45",
+      "location": "The rose parterre"
+    },
+    {
+      "label": "Dinner",
+      "time": "19:00",
+      "location": "The long gallery"
+    },
+    {
+      "label": "Dancing",
+      "time": "21:00",
+      "location": "Under the chandeliers"
+    }
+  ],
+  "dress_code": "Formal",
+  "rsvp": {
+    "deadline": "2027-05-08",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Fish",
+          "Chicken"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "Tea in the garden, an old swing and a promise under the trees led us to",
+    "items": [
+      {
+        "caption": "Tea in the garden"
+      },
+      {
+        "caption": "The old swing"
+      },
+      {
+        "caption": "A ring and a promise"
+      }
+    ]
+  },
+  "audio": {
+    "music": "garden-waltz",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony."
+    },
+    {
+      "q": "Can you accommodate dietary requirements?",
+      "a": "Please tell us about your requirements in your reply."
+    }
+  ]
+}

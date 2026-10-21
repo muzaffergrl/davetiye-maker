@@ -1,0 +1,23 @@
+{
+ "_not": "Tasarım 43 kuru deneme (tools/gpt_kuru_deneme.py --sekil): parçaların prompt'taki yeri, tuval yüzdesiyle. Deneme görseli ürün değildir.",
+ "cream_paper.png": {"ton": [251, 246, 234], "gren": 0.2},
+ "chartreuse_paper.png": {"ton": [199, 207, 60], "gren": 0.3},
+ "env_back.png": {"kutu": [7, 9, 93, 91], "ton": [241, 169, 192]},
+ "env_front.png": {"kutu": [7, 38.52, 93, 91], "ton": [199, 207, 60]},
+ "flap.png": {"kutu": [7, 9, 93, 54.92], "ton": [199, 207, 60]},
+ "flap_in.png": {"kutu": [7, 28.43, 93, 94], "ton": [241, 169, 192]},
+ "stem.png": {"kutu": [12, 20, 88, 80], "ton": [241, 169, 192]},
+ "bloom_1.png": {"kutu": [10, 10, 90, 90], "ton": [241, 169, 192]},
+ "bloom_2.png": {"kutu": [10, 10, 90, 90], "ton": [107, 23, 48]},
+ "bloom_3.png": {"kutu": [10, 10, 90, 90], "ton": [241, 169, 192]},
+ "bloom_4.png": {"kutu": [10, 10, 90, 90], "ton": [200, 67, 111]},
+ "card_small.png": {"kutu": [7, 6, 93, 94], "ton": [251, 246, 234]},
+ "instant_frame.png": {"kutu": [6.82, 7.17, 93.18, 92.83], "pencere": [13.07, 12.26, 86.93, 73.58], "ton": [251, 246, 234]},
+ "instant_wide.png": {"kutu": [6.4, 6.48, 93.6, 93.52], "pencere": [10, 11.57, 90, 74.07], "ton": [251, 246, 234]},
+ "florist_pick.png": {"kutu": [20, 6, 80, 94], "ton": [143, 151, 38]},
+ "bouquet.png": {"kutu": [8, 10, 92, 90], "ton": [241, 169, 192]},
+ "divider.png": {"kutu": [10, 22, 90, 78], "ton": [200, 67, 111]},
+ "accent_1.png": {"kutu": [22, 22, 78, 78], "ton": [241, 169, 192]},
+ "accent_2.png": {"kutu": [22, 22, 78, 78], "ton": [199, 207, 60]},
+ "accent_3.png": {"kutu": [22, 22, 78, 78], "ton": [107, 23, 48]}
+}

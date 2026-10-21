@@ -1,0 +1,122 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Eloise",
+      "full_name": "Eloise Margaret Linden"
+    },
+    {
+      "display_name": "Samuel",
+      "full_name": "Samuel Thomas Reed"
+    }
+  ],
+  "name_display": "Eloise & Samuel",
+  "initials": "E&S",
+  "host_line": "Together with their families",
+  "date": "2027-10-30",
+  "ceremony_time": "16:30",
+  "timezone": "America/New_York",
+  "venue": {
+    "name": "Hollowbrook Farmhouse",
+    "city": "Woodstock",
+    "region": "Vermont",
+    "country": "United States",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "16:30",
+      "location": "The old oak"
+    },
+    {
+      "label": "Cider & canapés",
+      "time": "17:15",
+      "location": "The stone barn"
+    },
+    {
+      "label": "Candlelit supper",
+      "time": "18:30",
+      "location": "The long table"
+    },
+    {
+      "label": "Dancing",
+      "time": "20:30",
+      "location": "The hayloft"
+    }
+  ],
+  "dress_code": "Autumn formal",
+  "rsvp": {
+    "deadline": "2027-09-25",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Fish",
+          "Chicken"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "An autumn walk, a supper by candlelight and a ring in the meadow led us to",
+    "items": [
+      {
+        "caption": "An autumn walk"
+      },
+      {
+        "caption": "Supper by candlelight"
+      },
+      {
+        "caption": "A ring in the meadow"
+      }
+    ]
+  },
+  "audio": {
+    "music": "first-light",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony."
+    },
+    {
+      "q": "Will the evening be cold?",
+      "a": "Late October evenings can be cool, so please bring a warm layer for the barn and the long table."
+    }
+  ]
+}

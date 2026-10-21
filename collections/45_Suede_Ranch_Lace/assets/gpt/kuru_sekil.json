@@ -1,0 +1,23 @@
+{
+ "_not": "Tasarım 45 kuru deneme (tools/gpt_kuru_deneme.py --sekil; tema kurulunca): parçaların prompt'taki yeri, tuval yüzdesiyle. Deneme görseli ürün değildir.",
+ "suede.png": {"ton": [169, 124, 84], "gren": 0.4},
+ "cream_paper.png": {"ton": [243, 235, 221], "gren": 0.2},
+ "ranch_landscape.png": {"ton": [226, 161, 126], "gren": 0.3},
+ "env_back.png": {"kutu": [7, 6, 93, 94], "ton": [243, 235, 221]},
+ "env_front.png": {"kutu": [7, 39.44, 93, 94], "ton": [169, 124, 84]},
+ "flap.png": {"kutu": [7, 6, 93, 53.52], "ton": [169, 124, 84]},
+ "flap_in.png": {"kutu": [13, 6, 87, 94], "ton": [243, 235, 221]},
+ "cord.png": {"kutu": [7, 48.24, 93, 64.08], "ton": [113, 70, 41]},
+ "concho.png": {"kutu": [10, 10, 90, 90], "ton": [181, 179, 173]},
+ "card_small.png": {"kutu": [8, 7, 92, 93], "ton": [243, 235, 221]},
+ "leather_frame.png": {"kutu": [6, 6, 94, 94], "pencere": [12.0, 12.0, 88.0, 88.0], "ton": [113, 70, 41]},
+ "gate.png": {"kutu": [10, 10, 90, 90], "ton": [181, 179, 173]},
+ "leather_wide.png": {"kutu": [6, 6, 94, 94], "pencere": [7.5, 11.8, 92.5, 88.3], "ton": [113, 70, 41]},
+ "wildflowers.png": {"kutu": [6, 6, 80, 74], "ton": [153, 164, 135]},
+ "lace_divider.png": {"kutu": [8, 15, 92, 85], "ton": [243, 235, 221]},
+ "hat.png": {"kutu": [10, 12, 90, 88], "ton": [243, 235, 221]},
+ "accent_1.png": {"kutu": [22, 22, 78, 78], "ton": [153, 164, 135]},
+ "accent_2.png": {"kutu": [22, 22, 78, 78], "ton": [106, 127, 153]},
+ "accent_3.png": {"kutu": [22, 22, 78, 78], "ton": [243, 235, 221]},
+ "web_hero.png": {"ton": [169, 124, 84], "gren": 0.3}
+}

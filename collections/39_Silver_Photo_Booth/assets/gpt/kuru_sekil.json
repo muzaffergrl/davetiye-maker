@@ -1,0 +1,22 @@
+{
+ "_not": "Tasarım 39 kuru deneme (tools/gpt_kuru_deneme.py --sekil, tema kurulunca): parçaların prompt'taki yeri, tuval yüzdesiyle. Zarf katmanları aynı kutuda (x 7–93, y 6–94). Deneme görseli ürün değildir.",
+ "page_ground.png": {"ton": [213, 214, 216], "gren": 0.2},
+ "ivory_paper.png": {"ton": [245, 240, 230], "gren": 0.2},
+ "env_back.png": {"kutu": [7, 6, 93, 94], "ton": [26, 26, 28]},
+ "env_front.png": {"kutu": [7, 41.2, 93, 94], "ton": [213, 214, 216]},
+ "flap.png": {"kutu": [7, 6, 93, 57.04], "ton": [205, 207, 210]},
+ "flap_in.png": {"kutu": [15.4, 6, 84.6, 94], "ton": [26, 26, 28]},
+ "strip_band.png": {"kutu": [39.68, 9.52, 60.32, 90.48], "ton": [245, 240, 230]},
+ "strip_tile.png": {"kutu": [6, 6, 94, 94], "pencere": [12, 12.22, 88, 83.33], "ton": [245, 240, 230]},
+ "booth_slot.png": {"kutu": [7, 22, 93, 78], "ton": [158, 163, 168]},
+ "booth_frame.png": {"kutu": [6, 6, 94, 94], "pencere": [12, 12, 88, 88], "ton": [158, 163, 168]},
+ "print_wide.png": {"kutu": [6, 6, 94, 94], "pencere": [7.5, 11, 92.5, 87.5], "ton": [245, 240, 230]},
+ "card_small.png": {"kutu": [7, 6, 93, 94], "ton": [245, 240, 230]},
+ "corner_spray.png": {"kutu": [6, 6, 80, 76], "ton": [240, 236, 228]},
+ "divider.png": {"kutu": [8, 25, 92, 75], "ton": [185, 188, 192]},
+ "flashbulb.png": {"kutu": [25, 8, 75, 92], "ton": [228, 230, 233]},
+ "accent_1.png": {"kutu": [22, 22, 78, 78], "ton": [185, 188, 192]},
+ "accent_2.png": {"kutu": [22, 22, 78, 78], "ton": [245, 240, 230]},
+ "accent_3.png": {"kutu": [22, 22, 78, 78], "ton": [245, 240, 230]},
+ "web_hero.png": {"ton": [213, 214, 216]}
+}
