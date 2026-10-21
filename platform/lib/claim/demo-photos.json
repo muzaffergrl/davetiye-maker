@@ -8,6 +8,13 @@
       "story_3": "/demo/art-deco-black-tie/story_3-804w.webp",
       "venue": "/demo/art-deco-black-tie/venue-1280w.webp"
     },
+    "azulejo-mosaic": {
+      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
+      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
+      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
+      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
+      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
+    },
     "blush-garden-rose": {
       "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
       "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
@@ -28,6 +35,13 @@
       "story_2": "/demo/burgundy-velvet-autumn/story_2-1024w.webp",
       "story_3": "/demo/burgundy-velvet-autumn/story_3-1024w.webp",
       "venue": "/demo/burgundy-velvet-autumn/venue-1280w.webp"
+    },
+    "celestial-observatory": {
+      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
+      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
+      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
+      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
+      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
     },
     "cherry-blossom-spring": {
       "hero_portrait": "/demo/cherry-blossom-spring/hero_portrait-1024w.webp",
@@ -64,6 +78,13 @@
       "story_3": "/demo/enchanted-forest-storybook/story_3-1024w.webp",
       "venue": "/demo/enchanted-forest-storybook/venue-1280w.webp"
     },
+    "grand-theatre-premiere": {
+      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
+      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
+      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
+      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
+      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
+    },
     "ivory-lace-pearls": {
       "hero_portrait": "/demo/ivory-lace-pearls/hero_portrait-1024w.webp",
       "story_1": "/demo/ivory-lace-pearls/story_1-1024w.webp",
@@ -71,12 +92,26 @@
       "story_3": "/demo/ivory-lace-pearls/story_3-1024w.webp",
       "venue": "/demo/ivory-lace-pearls/venue-1280w.webp"
     },
+    "kintsugi-washi": {
+      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
+      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
+      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
+      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
+      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
+    },
     "lavender-provence": {
       "hero_portrait": "/demo/lavender-provence/hero_portrait-1024w.webp",
       "story_1": "/demo/lavender-provence/story_1-1024w.webp",
       "story_2": "/demo/lavender-provence/story_2-1024w.webp",
       "story_3": "/demo/lavender-provence/story_3-1024w.webp",
       "venue": "/demo/lavender-provence/venue-1280w.webp"
+    },
+    "maison-patisserie": {
+      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
+      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
+      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
+      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
+      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
     },
     "mediterranean-lemon": {
       "hero_portrait": "/demo/mediterranean-lemon/hero_portrait-1024w.webp",
@@ -92,12 +127,54 @@
       "story_3": "/demo/midnight-garden/story_3-1024w.webp",
       "venue": "/demo/midnight-garden/venue-1280w.webp"
     },
+    "music-box-ballerina": {
+      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
+      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
+      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
+      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
+      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
+    },
+    "nocturne-lake-estate": {
+      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
+      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
+      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
+      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
+      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
+    },
     "olive-ivory": {
       "hero_portrait": "/demo/olive-ivory/hero_portrait-1024w.webp",
       "story_1": "/demo/olive-ivory/story_1-1024w.webp",
       "story_2": "/demo/olive-ivory/story_2-1024w.webp",
       "story_3": "/demo/olive-ivory/story_3-1024w.webp",
       "venue": "/demo/olive-ivory/venue-1280w.webp"
+    },
+    "orient-express-voyage": {
+      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
+      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
+      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
+      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
+      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
+    },
+    "riad-lantern-nights": {
+      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
+      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
+      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
+      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
+      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
+    },
+    "silver-photo-booth": {
+      "hero_portrait": "/demo/silver-photo-booth/hero_portrait-1085w.webp",
+      "story_1": "/demo/silver-photo-booth/story_1-1085w.webp",
+      "story_2": "/demo/silver-photo-booth/story_2-1085w.webp",
+      "story_3": "/demo/silver-photo-booth/story_3-1085w.webp",
+      "venue": "/demo/silver-photo-booth/venue-1280w.webp"
+    },
+    "sky-lantern-festival": {
+      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
+      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
+      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
+      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
+      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
     },
     "sunflower-rustic-barn": {
       "hero_portrait": "/demo/sunflower-rustic-barn/hero_portrait-1024w.webp",
@@ -120,6 +197,13 @@
       "story_3": "/demo/tuscan-vineyard/story_3-1024w.webp",
       "venue": "/demo/tuscan-vineyard/venue-1280w.webp"
     },
+    "velvet-jewel-box": {
+      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
+      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
+      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
+      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
+      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
+    },
     "vintage-airmail-love-letter": {
       "hero_portrait": "/demo/vintage-airmail-love-letter/hero_portrait-1024w.webp",
       "story_1": "/demo/vintage-airmail-love-letter/story_1-1024w.webp",
@@ -140,83 +224,6 @@
       "story_2": "/demo/winter-evergreen/story_2-1024w.webp",
       "story_3": "/demo/winter-evergreen/story_3-1024w.webp",
       "venue": "/demo/winter-evergreen/venue-1280w.webp"
-    },
-    "nocturne-lake-estate": {
-      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
-      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
-      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
-      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
-      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
-    },
-    "velvet-jewel-box": {
-      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
-      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
-      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
-      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
-      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
-    },
-    "grand-theatre-premiere": {
-      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
-      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
-      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
-      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
-      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
-    },
-    "orient-express-voyage": {
-      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
-      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
-      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
-      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
-      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
-    },
-    "kintsugi-washi": {
-      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
-      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
-      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
-      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
-      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
-    },
-    "riad-lantern-nights": {
-      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
-      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
-      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
-      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
-      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
-    },
-    "maison-patisserie": {
-      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
-      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
-      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
-      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
-      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
-    },
-    "celestial-observatory": {
-      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
-      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
-      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
-      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
-      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
-    },
-    "azulejo-mosaic": {
-      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
-      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
-      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
-      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
-      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
-    },
-    "sky-lantern-festival": {
-      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
-      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
-      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
-      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
-      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
-    },
-    "music-box-ballerina": {
-      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
-      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
-      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
-      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
-      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
     }
   }
 }

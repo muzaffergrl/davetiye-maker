@@ -1,0 +1,522 @@
+{
+ "satin": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "satin-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 8008
+   },
+   {
+    "file": "satin-1024.webp",
+    "w": 1024,
+    "h": 1024,
+    "bytes": 71210
+   }
+  ]
+ },
+ "paper": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "paper-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 11332
+   },
+   {
+    "file": "paper-1024.webp",
+    "w": 1024,
+    "h": 1024,
+    "bytes": 47954
+   }
+  ]
+ },
+ "back": {
+  "src_size": [
+   846,
+   1233
+  ],
+  "ratio": 0.68613,
+  "files": [
+   {
+    "file": "back-720.webp",
+    "w": 720,
+    "h": 1049,
+    "bytes": 113784
+   }
+  ]
+ },
+ "front": {
+  "src_size": [
+   905,
+   745
+  ],
+  "ratio": 1.21477,
+  "files": [
+   {
+    "file": "front-720.webp",
+    "w": 720,
+    "h": 593,
+    "bytes": 36916
+   }
+  ]
+ },
+ "flap": {
+  "src_size": [
+   853,
+   727
+  ],
+  "ratio": 1.17331,
+  "files": [
+   {
+    "file": "flap-720.webp",
+    "w": 720,
+    "h": 614,
+    "bytes": 28996
+   }
+  ]
+ },
+ "band": {
+  "src_size": [
+   258,
+   1149
+  ],
+  "ratio": 0.22454,
+  "files": [
+   {
+    "file": "band-258.webp",
+    "w": 258,
+    "h": 1149,
+    "bytes": 11256
+   }
+  ]
+ },
+ "envpaper": {
+  "src_size": [
+   362,
+   224
+  ],
+  "ratio": 1.61607,
+  "files": [
+   {
+    "file": "envpaper-320.webp",
+    "w": 320,
+    "h": 198,
+    "bytes": 3066
+   }
+  ]
+ },
+ "flap_in": {
+  "src_size": [
+   1193,
+   864
+  ],
+  "ratio": 1.38079,
+  "files": [
+   {
+    "file": "flap_in-720.webp",
+    "w": 720,
+    "h": 521,
+    "bytes": 77874
+   }
+  ]
+ },
+ "card": {
+  "src_size": [
+   938,
+   1330
+  ],
+  "ratio": 0.70526,
+  "files": [
+   {
+    "file": "card-720.webp",
+    "w": 720,
+    "h": 1021,
+    "bytes": 67040
+   }
+  ]
+ },
+ "stage": {
+  "aspect": 0.6861,
+  "back": [
+   0,
+   0,
+   100,
+   100
+  ],
+  "front": [
+   0,
+   37.63,
+   100,
+   62.37
+  ],
+  "flap": [
+   0,
+   0,
+   100,
+   58.64
+  ],
+  "band": [
+   34.75,
+   3.73,
+   30.5,
+   93.19
+  ],
+  "_note": "% of the closed envelope (left, top, width, height): the back's alpha box is the envelope; pocket and flap span its width, the band is centred (GPT drift between the same-canvas layers absorbed here); under = the envelope paper behind the closed flap down to just below the pocket's top edge",
+  "under": [
+   0,
+   0,
+   100,
+   43.63
+  ],
+  "band_frames": [
+   [
+    7.36,
+    6.96,
+    85.27,
+    26.89
+   ],
+   [
+    7.36,
+    36.55,
+    85.27,
+    26.89
+   ],
+   [
+    7.36,
+    66.14,
+    85.27,
+    26.89
+   ]
+  ],
+  "card_ratio": 0.7053
+ },
+ "tile": {
+  "src_size": [
+   977,
+   919
+  ],
+  "ratio": 1.06311,
+  "files": [
+   {
+    "file": "tile-480.webp",
+    "w": 480,
+    "h": 452,
+    "bytes": 4436
+   }
+  ],
+  "window_pct": [
+   6.65,
+   6.96,
+   86.8,
+   75.08
+  ],
+  "window_px": [
+   848,
+   690
+  ]
+ },
+ "booth": {
+  "src_size": [
+   945,
+   1215
+  ],
+  "ratio": 0.77778,
+  "files": [
+   {
+    "file": "booth-720.webp",
+    "w": 720,
+    "h": 926,
+    "bytes": 31738
+   }
+  ],
+  "window_pct": [
+   9.84,
+   9.47,
+   80.42,
+   80.82
+  ],
+  "window_px": [
+   760,
+   982
+  ]
+ },
+ "print_wide": {
+  "src_size": [
+   1286,
+   723
+  ],
+  "ratio": 1.7787,
+  "files": [
+   {
+    "file": "print_wide-1100.webp",
+    "w": 1100,
+    "h": 618,
+    "bytes": 39718
+   }
+  ],
+  "window_pct": [
+   5.13,
+   8.99,
+   89.66,
+   81.47
+  ],
+  "window_px": [
+   1153,
+   589
+  ]
+ },
+ "slot": {
+  "src_size": [
+   1891,
+   376
+  ],
+  "ratio": 5.02926,
+  "files": [
+   {
+    "file": "slot-900.webp",
+    "w": 900,
+    "h": 179,
+    "bytes": 16120
+   }
+  ]
+ },
+ "spray": {
+  "src_size": [
+   1074,
+   1032
+  ],
+  "ratio": 1.0407,
+  "files": [
+   {
+    "file": "spray-720.webp",
+    "w": 720,
+    "h": 692,
+    "bytes": 90730
+   }
+  ]
+ },
+ "divider": {
+  "src_size": [
+   1686,
+   96
+  ],
+  "ratio": 17.5625,
+  "files": [
+   {
+    "file": "divider-1200.webp",
+    "w": 1200,
+    "h": 68,
+    "bytes": 24886
+   }
+  ]
+ },
+ "bulb": {
+  "src_size": [
+   668,
+   1377
+  ],
+  "ratio": 0.48511,
+  "files": [
+   {
+    "file": "bulb-200.webp",
+    "w": 200,
+    "h": 412,
+    "bytes": 35662
+   }
+  ]
+ },
+ "accent_1": {
+  "src_size": [
+   657,
+   613
+  ],
+  "ratio": 1.07178,
+  "files": [
+   {
+    "file": "accent_1-160.webp",
+    "w": 160,
+    "h": 149,
+    "bytes": 6750
+   }
+  ]
+ },
+ "accent_2": {
+  "src_size": [
+   873,
+   822
+  ],
+  "ratio": 1.06204,
+  "files": [
+   {
+    "file": "accent_2-160.webp",
+    "w": 160,
+    "h": 151,
+    "bytes": 7010
+   }
+  ]
+ },
+ "accent_3": {
+  "src_size": [
+   771,
+   768
+  ],
+  "ratio": 1.00391,
+  "files": [
+   {
+    "file": "accent_3-160.webp",
+    "w": 160,
+    "h": 159,
+    "bytes": 5718
+   }
+  ]
+ },
+ "ph_portrait": {
+  "src_size": [
+   640,
+   827
+  ],
+  "ratio": 0.77388,
+  "files": [
+   {
+    "file": "ph_portrait-640.webp",
+    "w": 640,
+    "h": 827,
+    "bytes": 1666
+   }
+  ]
+ },
+ "ph_tile": {
+  "src_size": [
+   640,
+   521
+  ],
+  "ratio": 1.22841,
+  "files": [
+   {
+    "file": "ph_tile-640.webp",
+    "w": 640,
+    "h": 521,
+    "bytes": 1118
+   }
+  ]
+ },
+ "ph_wide": {
+  "src_size": [
+   640,
+   327
+  ],
+  "ratio": 1.95719,
+  "files": [
+   {
+    "file": "ph_wide-640.webp",
+    "w": 640,
+    "h": 327,
+    "bytes": 778
+   }
+  ]
+ },
+ "placeholders": {
+  "portrait": "ph_portrait-640.webp",
+  "tile": "ph_tile-640.webp",
+  "wide": "ph_wide-640.webp"
+ },
+ "photo_slots": {
+  "hero_portrait": {
+   "aspect": "760/982"
+  },
+  "story_1": {
+   "aspect": "760/982"
+  },
+  "story_2": {
+   "aspect": "760/982"
+  },
+  "story_3": {
+   "aspect": "760/982"
+  },
+  "venue": {
+   "aspect": "1153/589"
+  }
+ },
+ "og": {
+  "src_size": [
+   1731,
+   909
+  ],
+  "crop": [
+   0,
+   0,
+   1731,
+   909
+  ],
+  "align": "alt",
+  "size": [
+   1200,
+   630
+  ],
+  "file": "og-1200x630.jpg",
+  "source": "parts/web_hero.png",
+  "bytes": 115242
+ },
+ "favicon": {
+  "src_box": [
+   0,
+   0,
+   274,
+   400
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.04,
+  "file": "favicon.png",
+  "bytes": 24571
+ },
+ "parts": {
+  "used": [
+   "accent_1",
+   "accent_2",
+   "accent_3",
+   "booth_frame",
+   "booth_slot",
+   "card_small",
+   "corner_spray",
+   "divider",
+   "env_back",
+   "env_front",
+   "flap",
+   "flap_in",
+   "flashbulb",
+   "ivory_paper",
+   "page_ground",
+   "print_wide",
+   "strip_band",
+   "strip_tile",
+   "web_hero"
+  ],
+  "waiting_for_gpt": []
+ },
+ "_note": "G439 build from the design's own PAKET 5 parts (all present). Nothing drawn.",
+ "checks": {
+  "green": {}
+ },
+ "theme_check": {
+  "particles": ".accent-layer",
+  "first_screen": {
+   "landscape": false,
+   "names_min_px": 32
+  }
+ },
+ "bytes_total": 1007010
+}

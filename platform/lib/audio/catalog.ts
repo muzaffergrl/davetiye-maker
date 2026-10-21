@@ -56,6 +56,8 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   'music-box-ballerina': { music: 'music-box', opening: [[200, 'ribbon'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
   // Papel Picado Fiesta: the band works loose (band) · the flags fly up (flags) · the flap swings open (flap) · the lights come on (lights) · card rises (rise) · forward
   'papel-picado-fiesta': { music: 'garden-waltz', opening: [[250, 'ribbon'], [700, 'whoosh'], [1500, 'paper'], [1900, 'chime'], [2500, 'slide'], [3100, 'chime']] },
+  // Silver Photo Booth: the flashbulb fires (tap) · the strip slides off (whoosh) · the flap swings open (paper) · card rises (slide) · the second flash (chime)
+  'silver-photo-booth': { music: 'evening-strings', opening: [[0, 'tap'], [180, 'whoosh'], [1150, 'paper'], [1700, 'slide'], [2200, 'chime']] },
   'maison-patisserie': { music: 'garden-waltz', opening: [[200, 'ribbon'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
   // Orient Express Voyage: strap buckle (closure) · cover swings open (open) · ticket slides out (rise) · forward
   'orient-express-voyage': { music: 'evening-strings', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },

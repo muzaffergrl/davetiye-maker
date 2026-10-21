@@ -324,6 +324,16 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-18',
     },
+    // New design 39 (G439, docs/33 fourth wave, pilot): platform theme built from its own GPT parts; not on sale, no price yet.
+    {
+      id: 'silver-photo-booth',
+      name: 'Silver Photo Booth',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-21',
+    },
     {
       id: 'blush-garden-rose',
       name: 'Blush Garden Rose',

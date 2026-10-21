@@ -507,6 +507,13 @@ EK_TEMALAR = [
          dekor="Papel picado bayrakları, bugenvil, terrakota, ampul dizileri, işlemeli kumaş", teknik="canlı kâğıt kesim + fotogerçekçi",
          font=("Oleo Script", "Alegreya"), palet_adi="fiesta-multicolor-terracotta",
          hareket="Kemer bandın çözülmesi (bayraklar ayrılır), bayrakların zarftan göğe uçup süs dizisine dizilmesi ve CSS dalgasıyla ayrı fazlarda dalgalanması, düz kapağın üst menteşede 3B kalkışı, ampullerin sırayla yanması, asılı çerçevelerin sarkaç gibi düşüp sallanması ve kaydırma hızıyla artan rüzgâr, metnin bayrak gibi üst kenarından açılması, RSVP'de süzülerek düşen bayraklar."),
+    # docs/33 dördüncü dalga (39–48): pilot 39 (G439) teması kuruldu; 40–48 temaları kurulunca buraya eklenir.
+    dict(no=39, klasor="39_Silver_Photo_Booth", ad="Silver Photo Booth",
+         zarf="Dikey inci-gümüş metalik kâğıt zarf, derin U (yuvarlak) kapak, mühür yok; zarfı dikey saran 3 kareli siyah-beyaz fotoğraf kabini şeridi kapanış (çiftin fotoğrafları kapalıyken görünür). Flaş ampulü patlar, şerit zarftan yukarı kayıp yanına eğik yerleşir, U kapak üst kenarında 3B kalkıp siyah yıldız tozlu astarını gösterir, kart yükselir, ikinci flaşla öne gelir.",
+         foto="Krom kabin penceresi çerçeveler: pencerede beyaz flaş, fotoğraf beyazdan tam kontrasta banyo olur; home sayfasında krom baskı yuvasından üç kareli şerit kare kare basılarak çıkar.",
+         dekor="Krom/gümüş kabin detayları, siyah-beyaz foto şeritleri, fildişi ranunculus ve dusty miller, saten kurdele, gümüş yıldız payetleri, eski tip flaş ampulü", teknik="fotogerçekçi ürün çekimi + siyah-beyaz film",
+         font=("Yesteryear", "Libre Caslon Text"), palet_adi="silver-ivory-noir",
+         hareket="Flaş patlaması, foto şeridinin zarftan sıyrılıp yanına eğik yerleşmesi, U kapağın 3B kalkışı, ikinci flaş, fotoğrafların flaşla beyazdan banyo olması, şeridin krom yuvadan kare kare basılması, metnin pozlama gibi bulanıktan netleşmesi, yanıtta dört flaş ve yıldız-yaprak-kurdele yağmuru."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

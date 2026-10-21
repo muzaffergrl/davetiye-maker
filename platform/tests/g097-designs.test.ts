@@ -210,7 +210,7 @@ test('15–20 are live, named as their themes, with design pages and placeholder
   }
   // 14 before them, in the order G094 left
   assert.ok(ids.indexOf('ivory-lace-pearls') < ids.indexOf('cherry-blossom-spring'));
-  assert.deepEqual(MARKETING.designs.filter((x) => x.status !== 'live').map((x) => x.id), ['nocturne-lake-estate', 'velvet-jewel-box', 'grand-theatre-premiere', 'orient-express-voyage', 'kintsugi-washi', 'riad-lantern-nights', 'maison-patisserie', 'celestial-observatory', 'azulejo-mosaic', 'sky-lantern-festival', 'music-box-ballerina', 'marigold-mehndi', 'red-lacquer-double-happiness', 'highland-tartan-thistle', 'victorian-glasshouse', 'art-nouveau-lily', 'papel-picado-fiesta']);
+  assert.deepEqual(MARKETING.designs.filter((x) => x.status !== 'live').map((x) => x.id), ['nocturne-lake-estate', 'velvet-jewel-box', 'grand-theatre-premiere', 'orient-express-voyage', 'kintsugi-washi', 'riad-lantern-nights', 'maison-patisserie', 'celestial-observatory', 'azulejo-mosaic', 'sky-lantern-festival', 'music-box-ballerina', 'marigold-mehndi', 'red-lacquer-double-happiness', 'highland-tartan-thistle', 'victorian-glasshouse', 'art-nouveau-lily', 'papel-picado-fiesta', 'silver-photo-booth']);
 });
 
 test('design page titles ≤ 60 characters (also with a 12-character brand)', () => {

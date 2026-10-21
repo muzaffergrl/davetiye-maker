@@ -510,6 +510,18 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
       back: { bg: cover('paper'), images: flagGarland(4, 2.5, 8) },
     },
   },
+  // 39 (G439, 2026-10-21): the design's own PAKET 6 grounds (ivory card stock; front: a strand of silver star sequins
+  // with ivory ranunculus across the top and a hairline with a star at the foot; back: a short strand at the top), one per
+  // side, `cover` for 5×7 and A5 (ChatGPT's 1068×1473, ~200 ppi). Ornament measured on the art: front 5–15 % and
+  // 91–93 % of the height, back 6–11 %; the boxes sit inside the empty area (G149).
+  'silver-photo-booth': {
+    collection: '39_Silver_Photo_Booth',
+    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
+    fonts: gf('family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Yesteryear'),
+    script: "'Yesteryear', cursive", serif: "'Libre Caslon Text', Georgia, serif",
+    ink: '#1E1E1E', accent: '#45474B', front: [22, 13, 12, 13], back: [15, 12, 10, 12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
+  },
 };
 
 export function printLayout(themeId: string): PrintLayout | null {

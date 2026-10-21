@@ -314,6 +314,8 @@ const dict: Dict = {
   "Love in full bloom": "Çiçek açan aşk",
   // G187 Papel Picado Fiesta
   "A fiesta of love": "Aşkın fiestası",
+  // G439 Silver Photo Booth
+  "Picture us together": "Bizi birlikte hayal edin",
 };
 
 export default dict;

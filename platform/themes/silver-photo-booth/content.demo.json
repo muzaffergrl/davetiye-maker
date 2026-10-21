@@ -1,0 +1,122 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Josephine",
+      "full_name": "Josephine Claire Hartley"
+    },
+    {
+      "display_name": "Miles",
+      "full_name": "Miles Everett Grant"
+    }
+  ],
+  "name_display": "Josephine & Miles",
+  "initials": "J&M",
+  "host_line": "Together with their families",
+  "date": "2027-05-08",
+  "ceremony_time": "18:00",
+  "timezone": "America/Chicago",
+  "venue": {
+    "name": "The Lindell Ballroom",
+    "city": "Saint Louis",
+    "region": "Missouri",
+    "country": "United States",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Cocktails & photo booth",
+      "time": "17:30",
+      "location": "The mirrored foyer"
+    },
+    {
+      "label": "Ceremony",
+      "time": "18:00",
+      "location": "The grand ballroom"
+    },
+    {
+      "label": "Dinner & dancing",
+      "time": "19:00",
+      "location": "Beneath the chandeliers"
+    },
+    {
+      "label": "Late-night photo booth",
+      "time": "22:30",
+      "location": "The photo booth corner"
+    }
+  ],
+  "dress_code": "Black tie optional",
+  "rsvp": {
+    "deadline": "2027-04-03",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Fish",
+          "Beef"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "A photo booth at a friend's wedding, a night of dancing and one very small box led us to",
+    "items": [
+      {
+        "caption": "The first photo booth"
+      },
+      {
+        "caption": "Dancing at the ballroom"
+      },
+      {
+        "caption": "The question"
+      }
+    ]
+  },
+  "audio": {
+    "music": "evening-strings",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Cocktails and the photo booth open at 5:30 PM; please be seated by 5:50 PM for the 6:00 PM ceremony."
+    },
+    {
+      "q": "Is the photo booth open to guests?",
+      "a": "Yes! It is open from cocktail hour until late. Take as many strips as you like, and leave one for our guest book."
+    }
+  ]
+}
