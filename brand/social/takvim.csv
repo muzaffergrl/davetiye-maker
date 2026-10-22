@@ -1,0 +1,48 @@
+gun,tarih,hafta_gunu,platform,format,kod,konu,tasarim,gorsel_kaynagi,link
+1,2026-11-02,Pzt,IG,carousel (sabitle),K01,Meet BKE Studio,03 01 19,SM2.1 + gerçek açılış kareleri + sayfa ekranları + SM3.1 (panel) + SM2.3,bkestudio.com
+1,2026-11-02,Pzt,IG+TT,reel,R01,Davetiye misafirin telefonunda açılıyor,03 Blush Garden Rose,dikey açılış kaydı (G191),bkestudio.com/designs/blush-garden-rose
+1,2026-11-02,Pzt,IG,carousel (sabitle),K02,How it works in 3 steps,—,SM2.2 + gerçek /start + panel + Share ekranları,bkestudio.com
+1,2026-11-02,Pzt,IG,story,S01,Merhaba + demo linki,—,SM2.4 + R01 karesi,bkestudio.com
+2,2026-11-03,Sal,TT,reel,R02,Misafir ne yapmaz: uygulama yok hesap yok,02 Dusty Blue,dikey kayıt: açılış → RSVP gönder (G191),bkestudio.com/designs/dusty-blue-champagne
+2,2026-11-03,Sal,IG,story,S02,Anket: kâğıt mı dijital mi,—,SM2.4,—
+3,2026-11-04,Çar,IG+TT,reel,R03,Midnight Garden açılışı,19 Midnight Garden,dikey açılış kaydı,bkestudio.com/designs/midnight-garden
+4,2026-11-05,Per,IG,carousel,K03,What to put on your wedding website (checklist),—,SM2.1 + SM2.2 + gerçek sayfa ekranları,bkestudio.com
+4,2026-11-05,Per,IG,story,S03,K03'ü paylaş + soru kutusu,—,SM2.5,—
+5,2026-11-06,Cum,IG+TT,reel,R04,Yılbaşı düğünleri için gatefold,06 Art Deco Black-Tie,dikey açılış kaydı,bkestudio.com/designs/art-deco-black-tie
+6,2026-11-07,Cmt,IG,tek görsel,T01,Edit it together from the sofa,—,brand/trust/t3_couple_editing + gerçek panel ekranı,bkestudio.com
+6,2026-11-07,Cmt,IG,story,S04,Soru: düğün renginiz,—,SM2.4,—
+7,2026-11-08,Paz,TT,reel,R05,15 saniyede 3 farklı açılış,01 09 13,3 dikey açılış kaydı kurgusu,bkestudio.com
+8,2026-11-09,Pzt,IG+TT,reel,R06,Misafiriniz ne görür: baştan sona,02 Dusty Blue,dikey kayıt: açılış → Home → Details → RSVP,bkestudio.com/designs/dusty-blue-champagne
+8,2026-11-09,Pzt,IG,story,S05,R06 paylaş + demo linki,—,R06 karesi,bkestudio.com
+9,2026-11-10,Sal,IG,carousel,K04,RSVP: misafirin yaptığı / sizin gördüğünüz,—,SM2.2 + gerçek RSVP formu + Guests listesi + Excel,bkestudio.com
+10,2026-11-11,Çar,IG+TT,reel,R07,Kış düğünü: Winter Evergreen,08 Winter Evergreen,dikey açılış kaydı,bkestudio.com/designs/winter-evergreen
+10,2026-11-11,Çar,IG,story,S06,Bu mu o mu: 08 vs 19,08 19,SM2.5 + iki kapak karesi,—
+11,2026-11-12,Per,IG,tek görsel,T02,No app no account: misafir RSVP,—,brand/trust/t2_guest_rsvp + gerçek RSVP ekranı,bkestudio.com
+12,2026-11-13,Cum,IG+TT,reel,R08,Destination: seyahat cüzdanı,12 Tropical Destination,dikey açılış kaydı,bkestudio.com/designs/tropical-destination
+13,2026-11-14,Cmt,IG,carousel,K05,Wedding website welcome message ideas,—,SM2.1 + SM2.2,bkestudio.com
+13,2026-11-14,Cmt,IG,story,S07,K05 paylaş + anket,—,SM2.4,—
+14,2026-11-15,Paz,TT,reel,R09,Takvime ekle + harita + yol tarifi,05 Mediterranean Lemon,dikey kayıt: Details → takvim → harita,bkestudio.com/designs/mediterranean-lemon
+15,2026-11-16,Pzt,IG+TT,reel,R10,Telefonda 3 adımda kurulum,03 Blush Garden Rose,dikey kayıt: /start → sihirbaz 3 adım → Publish,bkestudio.com
+15,2026-11-16,Pzt,IG,story,S08,R10 paylaş + soru kutusu,—,SM2.5,—
+16,2026-11-17,Sal,IG,carousel,K06,Everything you can change,—,SM2.2 + gerçek panel Edit bölümleri,bkestudio.com
+17,2026-11-18,Çar,IG+TT,reel,R11,Sonbahar: Burgundy Velvet,07 Burgundy Velvet Autumn,dikey açılış kaydı,bkestudio.com/designs/burgundy-velvet-autumn
+18,2026-11-19,Per,IG,tek görsel,T03,One website five languages,—,SM3.7 + gerçek dil düğmesi ekranı,bkestudio.com
+18,2026-11-19,Per,IG,story,S09,Anket: kaç dil lazım,—,SM2.4,—
+19,2026-11-20,Cum,IG+TT,reel,R12,Ivory Lace & Pearls gatefold,14 Ivory Lace & Pearls,dikey açılış kaydı,bkestudio.com/designs/ivory-lace-pearls
+20,2026-11-21,Cmt,IG,carousel,K07,When to send what: wedding website timeline,—,SM2.1 + SM2.2 + SM3.10,bkestudio.com
+20,2026-11-21,Cmt,IG,story,S10,K07 paylaş,—,SM2.5,—
+21,2026-11-22,Paz,TT,reel,R13,Hikâye sayfasında müzik + tek dokunuşla sessiz,10 Tuscan Vineyard,dikey kayıt: Our Story + ses düğmesi (sesli),bkestudio.com/designs/tuscan-vineyard
+22,2026-11-23,Pzt,IG+TT,reel,R14,Emerald & Gold açılışı,17 Emerald & Gold Estate,dikey açılış kaydı,bkestudio.com/designs/emerald-gold-estate
+22,2026-11-23,Pzt,IG,story,S11,Hafta duyurusu: just engaged rehberi geliyor,—,SM2.4,—
+23,2026-11-24,Sal,IG,carousel,K08,Just engaged? Your first 7 to-dos,—,SM3.3 + SM2.2,bkestudio.com
+24,2026-11-25,Çar,IG+TT,reel,R15,Crimson Rose Atelier açılışı,21 Crimson Rose Atelier,dikey açılış kaydı,bkestudio.com/designs/crimson-rose-atelier
+25,2026-11-26,Per,IG,tek görsel,T04,Thanksgiving: düğün sonrası teşekkür sayfası,—,SM3.9 + gerçek teşekkür modu ekranı,bkestudio.com
+25,2026-11-26,Per,IG,story,S12,Teşekkür notu (satış yok),—,SM2.5,—
+26,2026-11-27,Cum,IG+TT,reel,R16,Black Friday: A kampanya varsa / B 21 tasarım hızlı geçiş,01–21,21 açılış karesi kurgusu,bkestudio.com
+26,2026-11-27,Cum,IG,story,S13,A: kampanya bitiş tarihi / B: favorini seç,—,SM2.5,bkestudio.com
+27,2026-11-28,Cmt,IG,carousel,K09,Which design fits your wedding,01 03 05 06 08 11 12 20,SM2.1 + gerçek kapak kareleri,bkestudio.com
+28,2026-11-29,Paz,TT,reel,R17,Bir zarf nasıl website olur: katmanlar,01 Olive & Ivory,GPT parça katmanları (collections/01/assets/gpt/parts) + açılış kaydı,bkestudio.com/designs/olive-ivory
+29,2026-11-30,Pzt,IG+TT,reel,R18,Olive is having a moment,01 Olive & Ivory,dikey açılış kaydı,bkestudio.com/designs/olive-ivory
+29,2026-11-30,Pzt,IG,story,S14,A: Cyber Monday son gün / B: ay özeti,—,SM2.5,bkestudio.com
+30,2026-12-01,Sal,IG,carousel,K10,Meet all 21 designs,01–21,SM2.3 + 21 gerçek kapak karesi,bkestudio.com
+30,2026-12-01,Sal,IG,story,S15,Aralık = nişan sezonu: K08'i yeniden paylaş,—,SM3.10,bkestudio.com

@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 1 · alindi 0 · inceleme 0 · blokaj 2 · bitti 221 · iptal 257 · toplam 481
+Özet: hazir 4 · alindi 0 · inceleme 0 · blokaj 2 · bitti 221 · iptal 257 · toplam 484
 
 İptal edilen görevler (K22/K24 ile anlamını yitirenler) listelenmez; yalnız sayıları var. Ayrıntı: `python3 tools/gorev.py liste --hepsi`.
 
@@ -29,7 +29,7 @@ Bağımlılık bekleyen: 0 · Biten: 24 · İptal: 64
 
 - (yok)
 
-Bağımlılık bekleyen: 0 · Biten: 8 · İptal: 42
+Bağımlılık bekleyen: 1 · Biten: 8 · İptal: 42
 
 ## claude-kod
 
@@ -41,7 +41,7 @@ Bağımlılık bekleyen: 0 · Biten: 8 · İptal: 42
 
 - (yok)
 
-Bağımlılık bekleyen: 0 · Biten: 127 · İptal: 83
+Bağımlılık bekleyen: 1 · Biten: 127 · İptal: 83
 
 ## claude-metin
 
@@ -69,8 +69,9 @@ Bağımlılık bekleyen: 0 · Biten: 2 · İptal: 20
 
 ## gpt-gorsel
 
-**Alınabilir (1)**
+**Alınabilir (2)**
 
+- `GM10` p2 — Sosyal medya görselleri — 21 GPT görseli (öne çıkan kapakları, zeminler, yeşil ekranlı yaşam sahneleri) → `gorevler/GM10-sosyal-medya-gorsel.md`
 - `GP216` p6 — Aşama 2 · Tasarım 16 — 5 palet görselleri → `gorevler/GP216-palet-gorsel.md`
 
 **Üzerinde çalışılan / incelemede / blokaj (1)**

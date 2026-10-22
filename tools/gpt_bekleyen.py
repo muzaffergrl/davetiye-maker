@@ -25,7 +25,8 @@ CIKTI = KOK / "docs/26_GPT_BEKLEYEN.md"
 
 
 def prompt_dosyalari():
-    desenler = ["collections/*/assets/gpt/GPT_PROMPTS.md", "collections/*/variants/GPT_PROMPTS.md", "brand/GPT_PROMPTS.md"]
+    desenler = ["collections/*/assets/gpt/GPT_PROMPTS.md", "collections/*/variants/GPT_PROMPTS.md", "brand/GPT_PROMPTS.md",
+                "brand/social/GPT_PROMPTS.md"]
     for d in desenler:
         yield from sorted(KOK.glob(d))
 
