@@ -43,9 +43,9 @@ Sınırlar: ziyaretçi (IP) başına 5 dakikada 12, günde 60 mesaj; mesaj ≤ 8
 
 ## Dikkat
 - **Ücretsiz katmanda Google, gönderilen mesajları ürünlerini geliştirmek için kullanabilir ve insanlar okuyabilir.**
-  Bu yüzden pencere kişisel bilgi yazılmamasını söyler ve panel kişisel içerik göndermez. Yayından önce
-  **gizlilik sayfasına** (`/privacy`) bir cümle eklenmeli (sohbet mesajları Google Gemini'ye gider; kayıt tutmuyoruz).
-  Bu belge yazılırken gizlilik metnine dokunulmadı.
+  Bu yüzden pencere kişisel bilgi yazılmamasını söyler ve panel kişisel içerik göndermez. **Gizlilik sayfası**
+  (`/privacy`, "Cookies and third parties") bunu söylüyor (2026-10-22, 5 dil): ne gider, Google'ın kullanabileceği,
+  konuşmaların bizde saklanmadığı.
 - Ücretsiz katman kotası küçük ve Google tarafından değişebiliyor; gerçek sınır AI Studio'daki kota sayfasında.
 - Denenmedi: gerçek Gemini yanıtı (anahtar yok), gerçek telefon. Denendi: birim testleri, `next build` (JS bütçeleri
   içinde), 360/390/1280 px'te satış sitesi ve panel ekranları (hazır değil + demo modu), konsol hatası yok.

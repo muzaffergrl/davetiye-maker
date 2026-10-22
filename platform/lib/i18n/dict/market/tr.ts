@@ -1168,6 +1168,7 @@ const dict: Dict = {
   "Something went wrong. Please try again.": "Bir şeyler ters gitti. Lütfen yeniden deneyin.",
   "You’re offline. Connect to the internet and try again.": "Çevrimdışısınız. İnternete bağlanıp yeniden deneyin.",
   "Try again": "Yeniden dene",
+  "The live help chat on this website and in the editor is an AI assistant run by Google Gemini: the messages you type, the address of the page you are on and, in the editor, a few facts about your website (its design, whether it is published and how many name and date changes are left; never names, guests or replies) are sent to Google to write the answer. On the free Gemini service Google may use these messages to improve its products, and people at Google may read them, so please do not type personal details. We do not keep the conversations; your browser keeps them only until you close the tab.": "Bu web sitesindeki ve düzenleyicideki canlı destek sohbeti, Google Gemini ile çalışan bir yapay zekâ asistanıdır: yazdığınız mesajlar, bulunduğunuz sayfanın adresi ve düzenleyicide sitenizle ilgili birkaç bilgi (tasarımı, yayında olup olmadığı ve kaç isim ve tarih değişikliği hakkınızın kaldığı; isimler, davetliler ya da yanıtlar asla değil) yanıtı yazması için Google'a gönderilir. Ücretsiz Gemini hizmetinde Google bu mesajları ürünlerini geliştirmek için kullanabilir ve Google'daki kişiler bunları okuyabilir; bu yüzden lütfen kişisel bilgilerinizi yazmayın. Sohbetleri saklamıyoruz; tarayıcınız onları yalnızca sekmeyi kapatana kadar tutar.",
 };
 
 export default dict;

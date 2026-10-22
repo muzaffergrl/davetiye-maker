@@ -1168,6 +1168,7 @@ const dict: Dict = {
   "Something went wrong. Please try again.": "Algo salió mal. Vuelve a intentarlo.",
   "You’re offline. Connect to the internet and try again.": "No tienes conexión. Conéctate a internet y vuelve a intentarlo.",
   "Try again": "Reintentar",
+  "The live help chat on this website and in the editor is an AI assistant run by Google Gemini: the messages you type, the address of the page you are on and, in the editor, a few facts about your website (its design, whether it is published and how many name and date changes are left; never names, guests or replies) are sent to Google to write the answer. On the free Gemini service Google may use these messages to improve its products, and people at Google may read them, so please do not type personal details. We do not keep the conversations; your browser keeps them only until you close the tab.": "El chat de ayuda en vivo de esta web y del editor es un asistente de IA que funciona con Google Gemini: los mensajes que escribes, la dirección de la página en la que estás y, en el editor, algunos datos de tu web (su diseño, si está publicada y cuántos cambios de nombres y fecha te quedan; nunca nombres, invitados ni respuestas) se envían a Google para redactar la respuesta. En el servicio gratuito de Gemini, Google puede usar estos mensajes para mejorar sus productos y personas de Google pueden leerlos, así que no escribas datos personales. No guardamos las conversaciones; tu navegador solo las conserva hasta que cierras la pestaña.",
 };
 
 export default dict;
