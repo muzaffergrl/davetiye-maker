@@ -242,6 +242,12 @@ export const WEDDING_GLOSSARY: readonly Row[] = [
   ["Lawn games & dancing", "Çim oyunları ve dans", "Juegos en el césped y baile", "Rasenspiele & Tanz", "Jeux de pelouse et danse"],
   ["What shoes should we wear?", "Hangi ayakkabıları giymeliyiz?", "¿Qué zapatos debemos llevar?", "Welche Schuhe sollen wir tragen?", "Quelles chaussures porter ?"],
   ["The ceremony and brunch are on the garden lawn, so flats or block heels are most comfortable.", "Tören ve kahvaltı bahçe çimeninde; bu yüzden düz ya da kalın topuklu ayakkabılar en rahatıdır.", "La ceremonia y el brunch son en el césped del jardín, así que los zapatos planos o de tacón ancho son los más cómodos.", "Trauung und Brunch finden auf dem Gartenrasen statt, flache Schuhe oder Blockabsätze sind daher am bequemsten.", "La cérémonie et le brunch ont lieu sur la pelouse du jardin : les chaussures plates ou à talons larges sont les plus confortables."],
+  // G442 Espresso Pastoral (42): demo programme and questions
+  ["Cider & canapés", "Elma şarabı ve kanepeler", "Sidra y canapés", "Cidre & Kanapees", "Cidre et canapés"],
+  ["Candlelit supper", "Mum ışığında akşam yemeği", "Cena a la luz de las velas", "Abendessen bei Kerzenlicht", "Dîner aux chandelles"],
+  ["Autumn formal", "Sonbahar şıklığı", "Formal de otoño", "Festlich herbstlich", "Tenue habillée d'automne"],
+  ["Will the evening be cold?", "Akşam soğuk olacak mı?", "¿Hará frío por la noche?", "Wird der Abend kalt?", "La soirée sera-t-elle froide ?"],
+  ["Late October evenings can be cool, so please bring a warm layer for the barn and the long table.", "Ekim sonu akşamları serin olabilir; lütfen ambar ve uzun masa için sıcak tutan bir şey getirin.", "Las noches de finales de octubre pueden ser frescas, así que traigan una prenda de abrigo para el granero y la mesa larga.", "Ende Oktober können die Abende kühl sein, bitte bringen Sie für die Scheune und die lange Tafel etwas Warmes mit.", "Les soirées de fin octobre peuvent être fraîches : prévoyez une couche chaude pour la grange et la longue table."],
 ];
 
 /** "and" between two terms, per language (Spanish "y" becomes "e" before an i- sound). */

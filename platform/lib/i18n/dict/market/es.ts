@@ -1147,6 +1147,18 @@ const dict: Dict = {
   "Pond blue": "Azul estanque",
   "Lily pink": "Rosa nenúfar",
   "Canvas cream": "Crema lienzo",
+  // G442 Espresso Pastoral (42, coming)
+  "An espresso laid-paper envelope wrapped in cream lace with a dried-flower posy, an oil-painted twilight landscape and photos in antique cabinet cards": "Un sobre de papel verjurado color espresso envuelto en encaje crema con un ramillete de flores secas, un paisaje crepuscular pintado al óleo y fotos en antiguas tarjetas de gabinete",
+  "A candlelit espresso and cream wedding website: the posy falls, the lace slips away and guests walk into a painted twilight landscape. Personalize it in your online editor.": "Una web de boda en espresso y crema a la luz de las velas: el ramillete cae, el encaje se desliza y los invitados entran en un paisaje crepuscular pintado. Personalízala en tu editor en línea.",
+  "Espresso laid paper, cream cotton lace, dried roses and wheat by candlelight, like an autumn evening at an old stone farmhouse. Your invitation waits in a lace-wrapped envelope, and every photo sits in an antique cabinet card and turns from sepia to warm colour.": "Papel verjurado color espresso, encaje de algodón crema, rosas secas y trigo a la luz de las velas, como una tarde de otoño en una vieja granja de piedra. Tu invitación espera en un sobre envuelto en encaje, y cada foto está en una antigua tarjeta de gabinete y pasa del sepia al color cálido.",
+  "Your guests tap the envelope. The dried-flower posy tips and falls, the lace band slips away, the flap opens onto a small painted landscape, and guests walk into it as sky, hills and meadow open around them, before the card with your portrait rises from the meadow to become your home page.": "Tus invitados tocan el sobre. El ramillete de flores secas se inclina y cae, la cinta de encaje se desliza, la solapa se abre sobre un pequeño paisaje pintado y los invitados entran en él mientras el cielo, las colinas y el prado se abren a su alrededor, antes de que la tarjeta con tu retrato surja del prado para convertirse en tu página de inicio.",
+  "The painted landscape along the top, your portrait in a cabinet card on a parchment card with dried roses, the invitation, a countdown and calendar links, your story and the day by candlelight.": "El paisaje pintado en lo alto, tu retrato en una tarjeta de gabinete sobre una tarjeta de pergamino con rosas secas, la invitación, una cuenta atrás y enlaces de calendario, vuestra historia y el día a la luz de las velas.",
+  "Three photos in antique cabinet cards that turn from sepia to warm colour as guests scroll.": "Tres fotos en antiguas tarjetas de gabinete que pasan del sepia al color cálido mientras los invitados se desplazan.",
+  "The order of the day on parchment beside a brass candlestick, each moment with an ear of wheat, the venue in a wide cabinet card, an optional map, dress code, travel, the menu and questions and answers.": "El programa del día en pergamino junto a un candelabro de latón, cada momento con una espiga de trigo, el lugar en una tarjeta de gabinete ancha, un mapa opcional, código de vestimenta, viaje, el menú y preguntas y respuestas.",
+  "A parchment reply card under dried roses; when a reply is sent, rose petals, wheat and gypsophila drift down.": "Una tarjeta de respuesta de pergamino bajo rosas secas; cuando se envía una respuesta, caen pétalos de rosa, trigo y gypsophila.",
+  "Espresso": "Espresso",
+  "Candle gold": "Oro de vela",
+  "Dusty rose": "Rosa empolvado",
 };
 
 export default dict;

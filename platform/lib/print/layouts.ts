@@ -593,6 +593,18 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     ink: '#3F5A73', accent: '#9C86BE', front: [24,  13,  13,  13], back: [18,  12,  10,  12],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
+  // 42 (G442, 2026-10-22): the design's own PAKET 6 grounds (cream parchment; front: a small oval of the painted landscape
+  // with dried flowers at the top, a sprig of dried flowers at the foot; back: a small sprig at the top), one per side,
+  // `cover` for 5×7 and A5. Ornament measured on the art: front 3–19 % and 92–96 % of the height, back 2–11 %; the boxes
+  // sit inside the empty area (G149).
+  'espresso-pastoral': {
+    collection: '42_Espresso_Pastoral',
+    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
+    fonts: gf('family=Cardo:ital,wght@0,400;0,700;1,400&family=Mea+Culpa'),
+    script: "'Mea Culpa', cursive", serif: "'Cardo', Georgia, serif",
+    ink: '#3B2A21', accent: '#6E5140', front: [24,  13,  12,  13], back: [16,  12,  10,  12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
+  },
 };
 
 export function printLayout(themeId: string): PrintLayout | null {

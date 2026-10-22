@@ -1147,6 +1147,18 @@ const dict: Dict = {
   "Pond blue": "Gölet mavisi",
   "Lily pink": "Nilüfer pembesi",
   "Canvas cream": "Tuval kremi",
+  // G442 Espresso Pastoral (42, coming)
+  "An espresso laid-paper envelope wrapped in cream lace with a dried-flower posy, an oil-painted twilight landscape and photos in antique cabinet cards": "Krem dantel ve kuru çiçek demetiyle sarılı espresso çizgili kâğıt zarf, yağlı boya bir alacakaranlık manzarası ve antika kabine kartlarda fotoğraflar",
+  "A candlelit espresso and cream wedding website: the posy falls, the lace slips away and guests walk into a painted twilight landscape. Personalize it in your online editor.": "Mum ışığında espresso ve krem düğün sitesi: demet düşer, dantel kayıp gider ve misafirler boyalı bir alacakaranlık manzarasının içine yürür. Çevrim içi düzenleyicinizde kişiselleştirin.",
+  "Espresso laid paper, cream cotton lace, dried roses and wheat by candlelight, like an autumn evening at an old stone farmhouse. Your invitation waits in a lace-wrapped envelope, and every photo sits in an antique cabinet card and turns from sepia to warm colour.": "Espresso çizgili kâğıt, krem pamuk dantel, mum ışığında kuru güller ve buğday; eski bir taş çiftlik evinde sonbahar akşamı gibi. Davetiniz dantelle sarılı bir zarfta bekler ve her fotoğraf antika bir kabine kartta sepyadan sıcak renge döner.",
+  "Your guests tap the envelope. The dried-flower posy tips and falls, the lace band slips away, the flap opens onto a small painted landscape, and guests walk into it as sky, hills and meadow open around them, before the card with your portrait rises from the meadow to become your home page.": "Misafirleriniz zarfa dokunur. Kuru çiçek demeti devrilip düşer, dantel bant kayıp gider, kapak küçük boyalı bir manzaraya açılır ve gök, tepeler ve çayır çevrelerinde açılırken misafirler o manzaranın içine yürür; ardından portrenizin olduğu kart çayırdan yükselip ana sayfanız olur.",
+  "The painted landscape along the top, your portrait in a cabinet card on a parchment card with dried roses, the invitation, a countdown and calendar links, your story and the day by candlelight.": "Üstte boyalı manzara, kuru güllü parşömen bir kartta kabine kart içinde portreniz, davet, geri sayım ve takvim bağlantıları, hikâyeniz ve mum ışığında düğün günü.",
+  "Three photos in antique cabinet cards that turn from sepia to warm colour as guests scroll.": "Misafirler kaydırdıkça sepyadan sıcak renge dönen antika kabine kartlarda üç fotoğraf.",
+  "The order of the day on parchment beside a brass candlestick, each moment with an ear of wheat, the venue in a wide cabinet card, an optional map, dress code, travel, the menu and questions and answers.": "Pirinç bir şamdanın yanında parşömende günün programı, her anın başında bir buğday başağı, geniş bir kabine kartta mekân, isteğe bağlı harita, kıyafet kuralı, ulaşım, menü ve sorular-cevaplar.",
+  "A parchment reply card under dried roses; when a reply is sent, rose petals, wheat and gypsophila drift down.": "Kuru güllerin altında parşömen bir yanıt kartı; yanıt gönderilince gül yaprakları, buğday ve cipsofil süzülür.",
+  "Espresso": "Espresso",
+  "Candle gold": "Mum altını",
+  "Dusty rose": "Gül kurusu",
 };
 
 export default dict;

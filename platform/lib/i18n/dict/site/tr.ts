@@ -328,6 +328,8 @@ const dict: Dict = {
   "Together, always": "Daima birlikte",
   // G441 Painted Lily Pond (41, coming)
   "Painted with love": "Sevgiyle boyandı",
+  // G442 Espresso Pastoral (42, coming)
+  "By candlelight": "Mum ışığında",
 };
 
 export default dict;

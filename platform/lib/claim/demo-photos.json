@@ -92,6 +92,13 @@
       "story_3": "/demo/enchanted-forest-storybook/story_3-1024w.webp",
       "venue": "/demo/enchanted-forest-storybook/venue-1280w.webp"
     },
+    "espresso-pastoral": {
+      "hero_portrait": "/demo/espresso-pastoral/hero_portrait-1122w.webp",
+      "story_1": "/demo/espresso-pastoral/story_1-1122w.webp",
+      "story_2": "/demo/espresso-pastoral/story_2-1122w.webp",
+      "story_3": "/demo/espresso-pastoral/story_3-1122w.webp",
+      "venue": "/demo/espresso-pastoral/venue-1280w.webp"
+    },
     "grand-theatre-premiere": {
       "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
       "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",

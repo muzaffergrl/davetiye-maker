@@ -70,6 +70,8 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   'navy-ivory-crest': { music: 'evening-strings', opening: [[0, 'whoosh'], [700, 'seal'], [1300, 'paper'], [1700, 'slide'], [2900, 'chime']] },
   // Painted Lily Pond: the seal lifts (seal) · the flap opens (paper) · the brushstrokes sweep (whoosh) · card rises from the water (slide) · forward (chime)
   'painted-lily-pond': { music: 'garden-waltz', opening: [[0, 'seal'], [500, 'paper'], [1100, 'whoosh'], [2000, 'slide'], [2800, 'chime']] },
+  // Espresso Pastoral: the posy falls (ribbon) · the lace band slips off (whoosh) · the flap opens (paper) · card rises from the meadow (slide) · forward (chime)
+  'espresso-pastoral': { music: 'first-light', opening: [[0, 'ribbon'], [400, 'whoosh'], [1000, 'paper'], [2400, 'slide'], [3200, 'chime']] },
   'maison-patisserie': { music: 'garden-waltz', opening: [[200, 'ribbon'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
   // Orient Express Voyage: strap buckle (closure) · cover swings open (open) · ticket slides out (rise) · forward
   'orient-express-voyage': { music: 'evening-strings', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },

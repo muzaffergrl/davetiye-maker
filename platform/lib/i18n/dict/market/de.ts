@@ -1147,6 +1147,18 @@ const dict: Dict = {
   "Pond blue": "Teichblau",
   "Lily pink": "Seerosenrosa",
   "Canvas cream": "Leinwandcreme",
+  // G442 Espresso Pastoral (42, coming)
+  "An espresso laid-paper envelope wrapped in cream lace with a dried-flower posy, an oil-painted twilight landscape and photos in antique cabinet cards": "Ein Umschlag aus espressofarbenem Büttenpapier mit cremefarbener Spitze und einem Trockenblumensträußchen, eine in Öl gemalte Dämmerungslandschaft und Fotos in antiken Kabinettkarten",
+  "A candlelit espresso and cream wedding website: the posy falls, the lace slips away and guests walk into a painted twilight landscape. Personalize it in your online editor.": "Eine Hochzeitswebsite in Espresso und Creme bei Kerzenlicht: Das Sträußchen fällt, die Spitze gleitet ab und die Gäste gehen in eine gemalte Dämmerungslandschaft hinein. Personalisieren Sie sie in Ihrem Online-Editor.",
+  "Espresso laid paper, cream cotton lace, dried roses and wheat by candlelight, like an autumn evening at an old stone farmhouse. Your invitation waits in a lace-wrapped envelope, and every photo sits in an antique cabinet card and turns from sepia to warm colour.": "Espressofarbenes Büttenpapier, cremefarbene Baumwollspitze, getrocknete Rosen und Weizen bei Kerzenlicht, wie ein Herbstabend in einem alten Bauernhaus aus Stein. Ihre Einladung wartet in einem mit Spitze umwickelten Umschlag, und jedes Foto steckt in einer antiken Kabinettkarte und wird von Sepia zu warmer Farbe.",
+  "Your guests tap the envelope. The dried-flower posy tips and falls, the lace band slips away, the flap opens onto a small painted landscape, and guests walk into it as sky, hills and meadow open around them, before the card with your portrait rises from the meadow to become your home page.": "Ihre Gäste tippen auf den Umschlag. Das Trockenblumensträußchen kippt und fällt, das Spitzenband gleitet ab, die Klappe öffnet sich auf eine kleine gemalte Landschaft, und die Gäste gehen hinein, während sich Himmel, Hügel und Wiese um sie öffnen, bevor die Karte mit Ihrem Porträt aus der Wiese aufsteigt und Ihre Startseite wird.",
+  "The painted landscape along the top, your portrait in a cabinet card on a parchment card with dried roses, the invitation, a countdown and calendar links, your story and the day by candlelight.": "Die gemalte Landschaft oben, Ihr Porträt in einer Kabinettkarte auf einer Pergamentkarte mit getrockneten Rosen, die Einladung, ein Countdown und Kalenderlinks, Ihre Geschichte und der Tag bei Kerzenlicht.",
+  "Three photos in antique cabinet cards that turn from sepia to warm colour as guests scroll.": "Drei Fotos in antiken Kabinettkarten, die beim Scrollen von Sepia zu warmer Farbe werden.",
+  "The order of the day on parchment beside a brass candlestick, each moment with an ear of wheat, the venue in a wide cabinet card, an optional map, dress code, travel, the menu and questions and answers.": "Der Tagesablauf auf Pergament neben einem Messingleuchter, jeder Moment mit einer Weizenähre, der Ort in einer breiten Kabinettkarte, eine optionale Karte, Dresscode, Anreise, das Menü sowie Fragen und Antworten.",
+  "A parchment reply card under dried roses; when a reply is sent, rose petals, wheat and gypsophila drift down.": "Eine Pergament-Antwortkarte unter getrockneten Rosen; wenn eine Antwort gesendet wird, schweben Rosenblätter, Weizen und Schleierkraut herab.",
+  "Espresso": "Espresso",
+  "Candle gold": "Kerzengold",
+  "Dusty rose": "Altrosa",
 };
 
 export default dict;

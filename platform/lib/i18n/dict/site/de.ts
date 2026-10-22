@@ -328,6 +328,8 @@ const dict: Dict = {
   "Together, always": "Für immer zusammen",
   // G441 Painted Lily Pond (41, coming)
   "Painted with love": "Mit Liebe gemalt",
+  // G442 Espresso Pastoral (42, coming)
+  "By candlelight": "Bei Kerzenlicht",
 };
 
 export default dict;

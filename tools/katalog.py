@@ -550,6 +550,12 @@ EK_TEMALAR = [
          dekor="Nilüfer yaprakları ve pembe nilüferler, mor salkım, söğüt, uzakta küçük kavisli bahçe köprüsü, yusufçuk, geniş boya darbeleri, keten tuval dokusu, leylak mum mühür", teknik="empresyonist yağlı boya (kalın impasto, görünür fırça, kırık renk) + gerçek keten tuval dokusu",
          font=("Comforter Brush", "Arapey"), palet_adi="lilypond-lilac-sage",
          hareket="Leylak mührün kalkması, kapağın 3B açılışı, dört fırça darbesinin sırayla ekranı boyayıp bahçe tablosunu açması, sudan yükselen kart ve su üstünde genişleyen ışık, tablodan fotoğrafa netleşen fotoğraflar, süzülen nilüfer yaprakları ve havada duran yusufçuk, program satırlarında sallanan mor salkım dalı, yanıtta tek fırça darbesi."),
+    dict(no=42, klasor="42_Espresso_Pastoral", ad="Espresso Pastoral",
+         zarf="Dikey espresso çizgili (laid) kâğıt zarf, yırtık kenarlı V kapak (kendi GPT parçası), mühür yok; zarfı yatay saran krem pamuk dantel bant ve ortasına sıkıştırılmış kuru çiçek demeti. Demet öne devrilip düşer (yapraklar saçılır), dantel bant aşağı kayıp çıkar, V kapak 3B açılıp yağlı boya kır manzarası astarını gösterir, misafir o manzaranın içine dalar (gök, tepeler + meşe, çayır, otlar; dört hızda paralaks), zarf söner, kart çayırdan yükselir.",
+         foto="Kakao kartondan altın yaldızlı eğimli kenarlı antika kabine kart paspartuları: fotoğraf sepya girer, yerine oturdukça sıcak renge döner. Mekân geniş kabine kart.",
+         dekor="Pirinç şamdan ve titreyen mum ışığı, kurutulmuş güller, buğday, cipsofil, krem pamuk dantel, yağlı boya alacakaranlık kır manzarası (yuvarlak tepeler, tek meşe, çayır, buğday)", teknik="sıcak tonlu yağlı boya manzara + fotogerçekçi kâğıt, dantel, kuru çiçek, pirinç",
+         font=("Mea Culpa", "Cardo"), palet_adi="espresso-cream-candle",
+         hareket="Kuru çiçek demetinin devrilip düşmesi ve yaprak saçılması, dantel bandın aşağı kayması, V kapağın 3B açılışı, astardaki manzaranın içine dört katmanlı paralaks dalış, çayırdan yükselen kart, sepyadan renge dönen fotoğraflar, titreyen mum ışığı, program satırlarında eğilen buğday başağı, yanıtta gül yaprağı yağmuru."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

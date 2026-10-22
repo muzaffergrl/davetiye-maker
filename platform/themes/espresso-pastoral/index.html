@@ -1,0 +1,93 @@
+<!doctype html>
+<!-- Espresso Pastoral · page 1 — the closed envelope (/<slug>). On espresso laid paper "Together with their families" and
+     the names in the flowing script; below them a portrait espresso laid-paper envelope with a V flap with deckled edges
+     (its own GPT part, no seal), wrapped round by a cream cotton lace band with a small dried-flower posy tucked into it;
+     under it the date · the city and "Tap to open".
+     Opening (docs/33 row 42, site.js MOTION.envelope): on tap the posy tips forward and falls, shaking off a few petals,
+     the lace band slides down and off, the V flap swings up on its top edge and shows the small oil painting of a
+     twilight landscape on its lining, and the guest dives into that painting: sky, hills with the oak, the meadow and the
+     grasses open round them at four speeds (parallax) while the envelope fades, and the card rises from the meadow,
+     comes forward and flies to home (view transition invite-card → the home hero card). Back, card, pocket, flap
+     (outside + lining), the band, the posy, the petals and each landscape layer are separate layers, all GPT pixels cut
+     by build_images.py. Personal text: none — [data-field] / [data-text] / [data-photo] are filled on the server.
+     Thank-you mode (G075): the same opening; the card carries the thank-you title and the date, its cabinet card the
+     thank-you photo or — without one — dried roses. Design texts: data-copy (G068, theme.json "copy"). -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#3b2a21">
+<title data-text="{name_display} · {copy.envelope_kicker}">Espresso Pastoral</title>
+<meta name="description" data-if="!thank_you_on" data-attr-content="{copy.envelope_kicker} · {name_display} · {date|date-long} · {venue.city_region}" content="A wedding invitation">
+<meta name="description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {name_display} · {date|date-long}" content="Thank you">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{name_display} · {date}" content="Wedding invitation">
+<meta property="og:description" data-if="!thank_you_on" data-attr-content="{copy.envelope_kicker} · {date|date-long} · {venue.city_region}" content="You are invited">
+<meta property="og:description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {date|date-long}" content="Thank you">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Mea+Culpa&display=swap">
+<style>/* names fallback: scripts/font-fallback.ts */
+@font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:94.2%;ascent-override:106.2%;descent-override:40.3%;line-gap-override:0%}
+@font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:81%;ascent-override:123.5%;descent-override:46.9%;line-gap-override:0%}</style>
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
+<script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
+(function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'';if(sessionStorage.getItem('invite:opened'+k)&&!/[?&]replay=1(&|$)/.test(location.search))r.classList.add('is-opened');}catch(e){}})(document.documentElement);
+</script>
+<!-- prefetch the home page: the rule points at the "Enter" link, whose href the platform has already set to /<slug>/home -->
+<script type="speculationrules">{"prefetch":[{"source":"document","where":{"selector_matches":"a[data-enter]"},"eagerness":"immediate"}]}</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-opening" data-pending="This link will be added soon.">
+<a class="textlink skip" href="home.html" data-skip><span data-copy="envelope_skip">Skip</span></a>
+<main class="opening">
+  <!-- the landscape on the flap's lining, which the guest dives into: four layers at four speeds (GPT W3–W6) -->
+  <div class="vista" aria-hidden="true"><span class="sky"></span><span class="hills"></span><span class="meadow"></span><span class="grasses"></span></div>
+  <div class="opening-heading">
+    <p class="eyebrow" data-if="!thank_you_on" data-copy="envelope_kicker">Together with their families</p>
+    <p class="eyebrow" data-if="thank_you_on" data-copy="ty_kicker">With love and thanks</p>
+    <h1 class="names" data-fit><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></h1>
+  </div>
+  <div class="stage" role="button" tabindex="0" aria-label="Open the envelope" data-copy-attr="aria-label:envelope_open">
+    <div class="envelope">
+      <!-- the back, then the cream card in the pocket -->
+      <span class="back"></span>
+      <div class="card" aria-hidden="true">
+        <div class="card-photo frame cabinet">
+          <div class="photo-slot" data-slot="hero_portrait">
+            <img data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_portrait-640.webp" sizes="min(26vw, 120px)" alt="">
+            <span class="ph-mark" data-if="!thank_you_on"><span>Your photo here</span></span>
+            <img class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_portrait-640.webp" sizes="min(26vw, 120px)" alt="">
+            <span class="ty-decor" data-if="thank_you_on !thank_you.photo"><img src="img/roses-720.webp" alt=""></span>
+          </div>
+          <span class="cut"></span>
+        </div>
+        <p class="eyebrow card-line" data-if="!thank_you_on" data-copy="card_line">Our wedding</p>
+        <p class="card-names" data-if="!thank_you_on" data-field="name_display"></p>
+        <p class="card-names ty-title" data-if="thank_you_on" data-field="thank_you_title"></p>
+        <p class="eyebrow card-date" data-field="date"></p>
+      </div>
+      <!-- the pocket; the V flap with deckled edges (outside / its painted lining) hinged on the top edge; the cream lace
+           band round the envelope and the dried-flower posy tucked into it -->
+      <span class="front"></span>
+      <span class="flap"><span class="flap-out"></span><span class="flap-in"></span></span>
+      <span class="lace"></span>
+      <span class="posy"></span>
+    </div>
+    <!-- petals shaken from the posy as it falls (GPT W18) -->
+    <span class="petal pt-1" aria-hidden="true"></span>
+    <span class="petal pt-2" aria-hidden="true"></span>
+    <span class="petal pt-3" aria-hidden="true"></span>
+  </div>
+  <div class="opening-actions">
+    <p class="opening-date eyebrow"><span data-field="date"></span><span aria-hidden="true"> · </span><span data-field="venue.city"></span></p>
+    <p class="eyebrow tap-hint" aria-hidden="true"><span data-copy="envelope_hint_tap">Tap to open</span></p>
+    <a class="btn enter" href="home.html" data-enter><span data-copy="envelope_enter">Enter</span></a>
+    <button class="textlink replay" type="button"><span data-copy="envelope_replay">Replay the opening</span></button>
+  </div>
+  <!-- without JavaScript (no <noscript>: its content is raw text, the platform could not rewrite the link) -->
+  <p class="nojs-only"><a class="btn" href="home.html"><span data-copy="envelope_open">Open the envelope</span></a></p>
+</main>
+</body>
+</html>
