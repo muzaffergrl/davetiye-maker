@@ -1279,9 +1279,9 @@ const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> 
     home: msg("Pistachio, rose and cream evoke the window of a French pâtisserie. The invitation opens onto your celebration, story and carefully arranged details."),
   },
   'celestial-observatory': {
-    style: msg("Midnight-blue envelope, star-map seal and antique-brass celestial details."),
-    opening: msg("Your guests tap the envelope. Two curved celestial shutters open from their side hinges, revealing the astrolabe portrait invitation before the wedding home page opens."),
-    home: msg("Midnight blue, chart-paper ivory and antique brass set a stargazing mood. Open the invitation to find your story beneath the night sky."),
+    style: msg("Midnight-blue envelope with a gold-foil dome flap, closed by an antique brass astrolabe."),
+    opening: msg("Your guests tap the envelope. The astrolabe's star pointer turns and its tips glint, the astrolabe floats away, the dome flap opens like an observatory dome over a star-atlas lining and the chart-paper card with your portrait rises out of the pocket while gold stars light up, before the wedding home page opens."),
+    home: msg("Midnight paper, silver-ivory chart paper, gold leaf and antique brass. Your portrait sits in a gilded celestial medallion and your story in brass planisphere rings that turn as guests scroll."),
   },
   'azulejo-mosaic': {
     style: msg("Cobalt-and-ivory envelope, terracotta accent and Portuguese azulejo-inspired details."),
@@ -1392,19 +1392,6 @@ const UNIQUE_INTERIORS: Record<string,{fonts:string[];home:string;story:string;d
     "details": "A Parisian menu-style programme and porcelain-framed venue photograph.",
     "rsvp": "A cream patisserie reply menu with pink ribbon and pistachio details."
   },
-  "celestial-observatory": {
-    "fonts": [
-      "Cormorant Garamond",
-      "Great Vibes",
-      "Lora",
-      "Pinyon Script",
-      "Cinzel"
-    ],
-    "home": "A midnight observatory with a circular brass astrolabe portrait and an ivory star-chart invitation.",
-    "story": "Circular astrolabe portraits trace an asymmetric constellation across the page, each appearing in its own orbit.",
-    "details": "An observatory programme with measured celestial chart typography and circular venue framing.",
-    "rsvp": "A midnight-and-brass star-chart reply suite."
-  },
   "azulejo-mosaic": {
     "fonts": [
       "Cormorant Garamond",
@@ -1467,6 +1454,22 @@ const REBUILT: Record<string, Pick<DesignCopy, 'fonts' | 'pages' | 'palette' | '
       { name: msg('Rose gold'), hex: '#C99A86' },
     ],
     llmsLine: 'an aubergine velvet envelope in a champagne satin band with a rose gold ring threaded on it, an oval pearl cameo portrait and a turning photo display.',
+  },
+  'celestial-observatory': {
+    fonts: ['Imperial Script', 'Forum'],
+    pages: {
+      home: msg('Your portrait in a gilded celestial medallion on a chart-paper card under a small brass astrolabe, the invitation on the night between gold moon phases with a countdown and calendar links, and a brass telescope to sign off.'),
+      story: msg('Three round photos in brass planisphere rings, left, right, left: each photo is uncovered by a dial sweep and each ring turns as guests scroll.'),
+      details: msg('The order of the day on chart paper, each line lit by a gold star, the venue in a wide brass-framed star chart swept in like a telescope beam, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('A chart-paper reply card on the midnight sky with your reply-by date and the configurable RSVP form; gold star dust rises when a reply is sent.'),
+    },
+    palette: [
+      { name: msg('Midnight'), hex: '#11193A' },
+      { name: msg('Ivory'), hex: '#EEEBE3' },
+      { name: msg('Gold'), hex: '#C8A24E' },
+      { name: msg('Brass'), hex: '#9B7A3C' },
+    ],
+    llmsLine: 'a midnight-blue envelope with a gold-foil dome flap closed by a turning brass astrolabe, a gilded celestial medallion portrait and round planisphere photo rings.',
   },
 };
 for (const [id, r] of Object.entries(REBUILT)) Object.assign(DESIGN_COPY[id], r);

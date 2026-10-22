@@ -82,6 +82,7 @@ isimler ve tarih HTML. Baş harflerin takımyıldızı (isteğe bağlı) site ta
   August 14, 2027, 7:00 PM, America/Phoenix; URL ve medya null) — değişmedi.
 - GPT istekleri: `assets/gpt/GPT_PROMPTS.md` (PAKET 5R website katmanları W1–W18 = 20 dosya, PAKET 2 örnek fotoğraflar
   **var**, PAKET 6R basılı davetiye ön/arka); prova şekli `assets/gpt/kuru_sekil.json`. GPT görevi **G229** (G222–G232).
-- Tema: `platform/themes/celestial-observatory/` — mevcut Codex sürümü (envelope-v3) **yeniden kurulacak** (görev **G429**,
-  G422–G432; 39 pilotunun yapısı, `docs/34`). Durum: **coming**.
+- Tema: `platform/themes/celestial-observatory/` **yeniden kuruldu** (G429, 2026-10-22; G423 pilotunun yapısı, `docs/34`,
+  dersler `docs/35` §6a) — GPT parçaları G229 (PAKET 5R 20 dosya, PAKET 6R 2 dosya). Durum: **editable_draft**, katalogda
+  `preview` ("Coming soon"); satış yok. Katalog kapak görüntüsü/klibi henüz eski (yeniden yakalama bekliyor).
 - Etsy ilanı ve PAKET 3/7 ilan sahneleri: tema yeniden kurulunca yeniden yazılır.
