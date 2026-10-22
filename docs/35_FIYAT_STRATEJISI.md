@@ -177,7 +177,43 @@ Onay gelince: `config.ts` fiyatları, 21 tasarım + 3 hizmet `etsy_upload.json`,
 
 ---
 
+## 8b. Revizyon (aynı gün, kullanıcı sorusu: "TL mi USD mi?" · "herkes sürekli %50 indirimde, binlerce satışları var")
+
+**Para birimi → USD önerisi (K38'i yeniden açar, karar kullanıcıda).**
+- TRY ilanda alıcı fiyatı Etsy'nin çevirdiği küsuratla görür ($24.02); `$23.99` / `$29.99` gibi temiz fiyat seçilemez.
+- TL fiyat ayda ≈ %1,5 erir (§6); her ay 24 ilanın fiyatını değiştirmek gerekir ve her değişiklik indirim hesabını bozar.
+- USD ilanın bedeli %2,5 döviz çevirme ücreti (ödeme hesabı TL): $29.99'da ≈ $0,75. Aylık elle güncellemeden ucuz.
+- İlan henüz yok (K41); değiştirmenin en temiz anı şimdi. Yol: Shop Manager → Finances → Payment settings → Currency
+  (Etsy help 360000336747; 14 gün içinde geri dönülebiliyor). Bulut oturumu etsy.com'a erişemiyor; tarayıcı ajanı yapar.
+
+**İndirim → "kalıcı indirim yok" yumuşatıldı.**
+- Kurallar kesin: Etsy Seller Handbook (Oca 2026) kalıcı indirimden kaçının, üstü çizili fiyattan makul miktarda satılmış
+  olsun diyor; Seller Policy "sales, discounts and price comparisons must reflect real, accurate pricing" diyor. AB'de Omnibus
+  (indirim, son 30 günün en düşük fiyatından hesaplanır), UK'de DMCC.
+- Belirsiz olan uygulama: Etsy'nin bunu cezalandırdığına dair kaynak bulunamadı; büyük dükkânlar yıllardır sürekli indirimde.
+- Düz fiyatın daha çok sattığına dair veri **yok**; muhtemelen daha az satar (üstü çizili fiyat algılanan değeri yükseltir;
+  Omnibus çalışmasında son 30 günün fiyatını göstermek satın alma niyetini düşürdü). Önceki öneri satış etkisini değil kural
+  riskini önceliklendirmişti.
+- Yeni öneri, **indirim ritmi**: normal fiyat gerçekten uygulanır, Etsy satış aracıyla ≤ 30 gün %40 indirim, sonra ≈ 7–10 gün
+  normal fiyat, tekrar. Ocak–Şubat zirvesinde de ritim sürer. Üstü çizili fiyatın faydasının çoğunu alır, "kalıcı indirim"
+  tanımının dışında kalır. AB'nin 30 gün kuralını tam karşılamaz (küçük risk, alıcıların çoğu ABD).
+
+| Aşama | Normal (USD) | İndirimde (−%40) | İndirimde net | Normalde net |
+|---|---|---|---|---|
+| Lansman (ilk ≈ 10 yorum) | — (düz, üstü çizili yok) | **$23.99** | $18.49 | — |
+| Yorumlu | **$49.99** | **$29.99** | $23.26 | $39.17 |
+| Kurulum hizmeti | $19.99 düz | — | — | $15.31 |
+| Özel tasarım | $89.99 düz | — | — | $70.97 |
+
+Net: §3.1 modeli + %2,5 döviz çevirme. Lansmanda üstü çizili fiyat yok, çünkü normal fiyattan henüz satış yapılmadı.
+
+---
+
 ## 9. Kaynaklar
+
+- Etsy Seller Handbook, truthful advertising: https://www.etsy.com/seller-handbook/article/1450964704111 · Seller Policy:
+  https://www.etsy.com/legal/sellers/ · para birimi: https://help.etsy.com/hc/en-us/articles/360000336747-How-to-List-Items-in-Your-Preferred-Currency
+- Omnibus: https://trustyourwebsite.com/eu/en/guides/price-display-omnibus · https://link.springer.com/article/10.1007/s10603-025-09607-z
 
 - docs/13 §4 (81 Etsy website ilanı, 2026-10-13) · docs/15 §3 (ücretler, maliyet, risk 7) · docs/23 §1 (onaylı fiyatlar).
 - Etsy arama özetleri (Ekim 2026; sayfalar doğrudan açılamadı): https://www.etsy.com/market/rsvp_wedding_website ·
