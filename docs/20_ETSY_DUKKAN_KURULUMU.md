@@ -365,6 +365,29 @@ Summer & Destination), yenileme **Automatic**. Her taslak kaydetmeden önce form
 - Ekranlar: `docs/20_etsy_taslaklar_20261021/`. Sonraki: PAKET 7 sahneleri (docs/31) + promo video eklenecek; yayın kullanıcının
   "yayınla" onayına bağlı (yayın başına 0,20 USD; 15 kredi).
 
+### 7.10 İlan görselleri v4: dikey 4:5 şablon, 19 görsel + hover videosu (2026-10-21, yerel oturum)
+Kullanıcı: "kapak görselleri satın almaya teşvik etmiyor, videolar donuyor; tutmuş ürünlere bak". Etsy "wedding website
+template" ilk sayfası incelendi (Claude in Chrome): arama ızgarası görselleri **dikey 4:5 (510×638)** gösteriyor, hover
+videosu da aynı kartta `object-fit: cover`. En çok satanlar (BrideToBeDesignCo 2,4 bin yorum, STUDIOGWYN, HouseofIvyDesigns…):
+kapakta büyük başlık + iki büyük düz telefon + yuvarlak özellik rozetleri; hover videosu sitenin kendisi, tam kadraj, 9–15 sn;
+sonraki görseller tek mesajlı büyük başlıklar. Rakip çizimi/fotoğrafı alınmadı (AGENTS şart 6); yalnız düzen ve sıralama.
+- Şablon 01'de kullanıcıyla oturtuldu ("RSVP okunmuyor" → el yazısı yalnız süs kelimelerinde), sonra 21 tasarıma uygulandı.
+  Araçlar: `tools/listing_v4/` (README). Çıktı: `collections/NN_*/package/listing/images_v4/` + `video_v4_4x5.mp4`.
+- Sıra: 1 kapak · 2 açılış 3 adım (nesne ilan başlığından: envelope / gatefold / linen pouch / travel wallet / storybook /
+  lace gatefold / vellum sleeve) · 3 RSVP · 4 telefondan düzenleme (No Canva) · 5 sayfalar · 6 neler dahil · 7 canlı demo + QR ·
+  8 nasıl çalışır · 9–19 PAKET 7 GPT sahnelerinde gerçek ekranlar (tablet, laptop editörü, basılı davetiye PDF render'ı dahil).
+- Video: canlı demodan yavaş çekim (50–70×), 1080×1350, 60 fps, ~10,5 sn; başa dönüşte ilk kareye erir.
+- Etsy: 21 taslakta eski 9 görsel + eski video silindi, yeni 19 görsel + yeni video yüklendi, her biri "Save draft" ile
+  kaydedildi ("successfully updated"; videolar 2026-10-22'de tamamlandı). Örnek doğrulama (01, 06, 21): birincil görsel +
+  18 görsel + "Primary video". Yayın yok (Draft 21, Active 0). 06'nın 2. görseli "gatefold", 12'ninki "travel wallet"
+  (ilan başlığıyla aynı nesne) olarak düzeltilip yeniden yüklendi.
+- Not: 14–21 taslaklarının başlıkları bu turda başka biri tarafından değiştirilmiş görünüyor ("…Digital Invitation with an
+  Envelope Opening…" biçimi); bu oturum başlıklara dokunmadı, `etsy_upload.json` güncellenmedi. Renk paletleri platformda "coming" (alıcı seçemez):
+  palet görseli sete konmadı; taslaklarda varyasyon zaten yoktu.
+- Kaza: bir Etsy düzenleme turunda `START_HERE.pdf` (52 KB, kendi dijital dosyamız) İndirilenler'e indi; başka etkisi yok.
+- PAKET 8 (`tools/paket8_ilan.py`, şimdilik yalnız 01): 2–8. görsellerin telefon katmanı için GPT sahne promptları; sahneler
+  gelirse çizim telefonların yerine geçer, yazılar aynı kalır.
+
 ## 8. İlan paketi (01–05) — yüklemeye hazır, Etsy'ye eklenmedi (2026-10-15)
 
 Kullanıcı kararı (2026-10-15): ilanlar **yüklenecek biçimde hazırlanır ama Etsy'ye eklenmez** (taslak da açılmaz). Önce testler yapılacak.
