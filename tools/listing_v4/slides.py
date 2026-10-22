@@ -88,7 +88,7 @@ def slides(c):
     nm = c["name"].replace("&", "&amp;")
     S = {}
     # 2 — the opening, 3 steps
-    S["02_reveal"] = (title(f"{nm} · The opening", "Opens like" + ("" if c.get("opens", "envelope").endswith("s") else " a"), w="real", r=c.get("opens", "envelope")) +
+    S["02_reveal"] = (title(f"{nm} · The opening", "Opens like" + ("" if c.get("opens", "envelope").endswith("s") or c.get("opens") == "origami" else " a"), w="real", r=c.get("opens", "envelope")) +
         phone(x["closed"], 120, 820, 560, -3) + phone(x["opening"], 720, 790, 560, 0) + phone(x["open"], 1320, 820, 560, 3) +
         '<div class="veilb"></div>' +
         '<div class="lab" style="left:100px;width:600px;top:2080px"><b>1</b>Guests tap</div>'
