@@ -45,5 +45,10 @@ doğrudan isteğiyle bu oturum açtı (entegratör numarayı değiştirebilir).
 ## Günlük
 - 2026-10-22 alindi + inceleme: claude-session_015RTF9kCAoVGh7PDNq8XYeP (kullanıcı talebi)
 - 2026-10-22 main'e birleşti; Vercel ortam değişkenleri blokajda (bağlayıcı bkestudio ekibini görmüyor)
+- 2026-10-22 **canlıda doğrulandı** (kullanıcının ekran görüntüleri): production yayını `00027653` (G191'i içeriyor) + Redeploy;
+  Vercel Logs `GET /api/cron/orders` 200 (14:51:52); admin Bağlantılar "Sipariş kontrolü: Önce güven (trust)" + "Etsy bağlı değil" uyarısı.
+  SMTP canlıda ayarlı değil → dükkân e-postaları gitmiyor; uyarı metni buna göre düzeltildi.
+- 2026-10-22 not: Vercel bkestudio (Pro) ekibi, ekip üyesi olmayan commit yazarlarının yayınlarını "Blocked" yapıyor
+  (ör. `cetin@maora.studio`, büyük ihtimalle `noreply@anthropic.com`); main'e giden commit'ler ekip üyesi yazarla atılmalı.
 - 2026-10-22 not: kullanıcının bilgisayarındaki tarayıcıda bkestudio Vercel hesabı açık; bulut oturumu oraya ulaşamaz, yerel
   oturum (`claude-tarayici`) Vercel ayarlarını tarayıcıdan yapabilir. Kullanıcı elle yapmayı sordu; adımlar sohbette verildi.

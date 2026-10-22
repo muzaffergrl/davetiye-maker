@@ -146,8 +146,12 @@ export default function AdminConnections(props: { mail: MailStatus; etsy: EtsySt
               Etsy bağlı değil — siparişler kendiliğinden doğrulanmıyor
             </p>
             <p style={{ margin: 0 }}>
-              Yeni siteler yine hemen yayınlanabilir. Doğrulama sizde: yeni sitede e-posta gelir; uymayan siparişte sitenin sayfasında &quot;Yayından
-              kaldır ve beklet&quot;. 48 saatte doğrulanmayan sipariş &quot;Yapılacak&quot;a düşer. Etsy bağlanınca kontrol saatte bir kendiliğinden yapılır.
+              Yeni siteler yine hemen yayınlanabilir. Doğrulama sizde:{' '}
+              {mail.enabled
+                ? 'her yeni sitede size e-posta gelir'
+                : 'e-posta gönderimi ayarlı olmadığı için bildirim gitmez; yeni siteler Siparişler listesinde "Önce güven" etiketiyle görünür'}
+              ; uymayan siparişte sitenin sayfasında &quot;Yayından kaldır ve beklet&quot;. 48 saatte doğrulanmayan sipariş &quot;Yapılacak&quot;a düşer.
+              Etsy bağlanınca kontrol saatte bir kendiliğinden yapılır.
             </p>
           </div>
         ) : null}
