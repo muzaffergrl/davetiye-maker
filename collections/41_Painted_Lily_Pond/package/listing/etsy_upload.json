@@ -183,7 +183,7 @@
   "gpt_mockup_scenes": [],
   "video": {
     "file": "collections/41_Painted_Lily_Pond/package/listing/video_v4_4x5.mp4",
-    "exists": false
+    "exists": true
   },
   "open_checks": [
     {
@@ -304,7 +304,6 @@
   ],
   "blockers": [
     "listing images missing: collections/41_Painted_Lily_Pond/package/listing/images_v4/09_closeup.jpg, collections/41_Painted_Lily_Pond/package/listing/images_v4/10_tap.jpg, collections/41_Painted_Lily_Pond/package/listing/images_v4/11_home.jpg, collections/41_Painted_Lily_Pond/package/listing/images_v4/12_devices.jpg, collections/41_Painted_Lily_Pond/package/listing/images_v4/13_laptop.jpg, collections/41_Painted_Lily_Pond/package/listing/images_v4/14_together.jpg, collections/41_Painted_Lily_Pond/package/listing/images_v4/15_print.jpg, collections/41_Painted_Lily_Pond/package/listing/images_v4/16_need.jpg, collections/41_Painted_Lily_Pond/package/listing/images_v4/17_day.jpg, collections/41_Painted_Lily_Pond/package/listing/images_v4/18_replies.jpg, collections/41_Painted_Lily_Pond/package/listing/images_v4/19_share.jpg",
-    "listing video missing",
     "sales status 'coming' in platform/lib/marketing/config.ts (K41: not for sale)",
     "price not decided for this design (config.ts price '[PRICE]'; 1190 TL is the 01–21 design price, docs/23 §1)",
     "renewal not decided"

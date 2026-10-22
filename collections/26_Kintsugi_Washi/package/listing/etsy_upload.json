@@ -50,57 +50,57 @@
       "n": 1,
       "file": "collections/26_Kintsugi_Washi/package/listing/images_v4/01_cover.jpg",
       "alt": "Kintsugi & Washi wedding website with online RSVP: two phones show the folded ivory washi origami with indigo bands and gold seams and the opened card with a portrait and sample names, with round badges No Canva needed, RSVP guest list included and Edit on your phone",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 2,
       "file": "collections/26_Kintsugi_Washi/package/listing/images_v4/02_reveal.jpg",
       "alt": "It opens like a real origami: three phones show the folded washi closed, its four folds opening, and the card with a portrait rising out; sound and animation included",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 3,
       "file": "collections/26_Kintsugi_Washi/package/listing/images_v4/03_rsvp.jpg",
       "alt": "Collect RSVPs with ease: the guest's reply form on one phone and the couple's reply list in the editor on another, with badges for the Excel guest list download and your own questions",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 4,
       "file": "collections/26_Kintsugi_Washi/package/listing/images_v4/04_edit.jpg",
       "alt": "Edit everything on your phone, with no Canva, no app and no account: three phones show picking a page, changing a text and publishing; every change saves by itself",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 5,
       "file": "collections/26_Kintsugi_Washi/package/listing/images_v4/05_pages.jpg",
       "alt": "Kintsugi & Washi, four pages and the origami: Home, Our Story, Details and RSVP on four phones; countdown, schedule, map, questions and answers, add-to-calendar, music, dress code, travel and registry",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 6,
       "file": "collections/26_Kintsugi_Washi/package/listing/images_v4/06_included.jpg",
       "alt": "What is included: the origami opening with Home, Our Story, Details and RSVP pages, online RSVP with your own questions, guest list with one-tap Excel download, countdown and add-to-calendar, your 5 photos, music and venue map, QR code and printable invitation, an easy editor on phone or computer, online until 12 months after your wedding",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 7,
       "file": "collections/26_Kintsugi_Washi/package/listing/images_v4/07_demo.jpg",
       "alt": "Try it before you buy: the folded washi origami on a phone next to a QR code of the live demo, or tap the demo link in the description; sample names and photos, yours replace them",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 8,
       "file": "collections/26_Kintsugi_Washi/package/listing/images_v4/08_how.jpg",
       "alt": "How it works in four panels: buy and open the START HERE guide from your Etsy purchases, start with your Etsy order number and first names, personalize names, date, photos, story and RSVP questions, then publish and share one link by text, WhatsApp, email or QR code",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 9,
@@ -309,7 +309,7 @@
     }
   ],
   "blockers": [
-    "listing images missing: collections/26_Kintsugi_Washi/package/listing/images_v4/01_cover.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/02_reveal.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/03_rsvp.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/04_edit.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/05_pages.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/06_included.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/07_demo.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/08_how.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/09_closeup.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/10_tap.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/11_home.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/12_devices.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/13_laptop.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/14_together.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/15_print.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/16_need.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/17_day.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/18_replies.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/19_share.jpg",
+    "listing images missing: collections/26_Kintsugi_Washi/package/listing/images_v4/09_closeup.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/10_tap.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/11_home.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/12_devices.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/13_laptop.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/14_together.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/15_print.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/16_need.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/17_day.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/18_replies.jpg, collections/26_Kintsugi_Washi/package/listing/images_v4/19_share.jpg",
     "listing video missing",
     "sales status 'preview' in platform/lib/marketing/config.ts (K41: not for sale)",
     "price not decided for this design (config.ts price '[PRICE]'; 1190 TL is the 01–21 design price, docs/23 §1)",
