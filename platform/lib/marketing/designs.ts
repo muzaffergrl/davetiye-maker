@@ -1264,9 +1264,9 @@ const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> 
     home: msg("Bottle green, brass and warm ivory meet the romance of a vintage rail journey. The envelope opens onto your invitation, route details and celebration."),
   },
   'kintsugi-washi': {
-    style: msg("Indigo washi envelope, fine kintsugi-gold lines and quiet botanical details."),
-    opening: msg("Your guests tap the envelope. Four washi folds unfold in sequence around the kintsugi portrait invitation before the wedding home page opens."),
-    home: msg("Washi paper, sumi ink and delicate gold seams bring a quiet, handcrafted feeling to your invitation, story and garden celebration."),
+    style: msg("A square pinwheel packet of indigo washi crossed by gold kintsugi seams, tied with a gold-and-ivory cord round a mended porcelain button."),
+    opening: msg("Your guests tap the envelope. The porcelain button turns and lifts away, the cord unwinds, the four indigo flaps unfold one by one onto their gold-flecked insides and the rice-paper card with your portrait rises toward them before the wedding home page opens."),
+    home: msg("Rice-ivory washi, indigo paper and gold kintsugi seams. Your photos appear through a spreading ink bloom in torn washi mats, and a mended tea bowl signs off."),
   },
   'riad-lantern-nights': {
     style: msg("Deep teal envelope, brass seal and saffron lantern accents inspired by a Marrakech riad."),
@@ -1353,18 +1353,6 @@ const UNIQUE_INTERIORS: Record<string,{fonts:string[];home:string;story:string;d
     "story": "A horizontal carriage-window photo journey with captions under each panoramic view.",
     "details": "A rail-journey itinerary with paired time and destination columns.",
     "rsvp": "A green-and-brass travel-ticket reply suite."
-  },
-  "kintsugi-washi": {
-    "fonts": [
-      "Cormorant Garamond",
-      "Great Vibes",
-      "Lora",
-      "Shippori Mincho"
-    ],
-    "home": "An indigo-and-ivory washi composition with square kintsugi photo mounts and torn-paper stationery.",
-    "story": "Asymmetric washi photo mounts paired with captions, alternating gently from side to side.",
-    "details": "A quiet folded-paper programme with gold-repaired margins and a square venue mount.",
-    "rsvp": "A handmade washi reply letter with indigo type and fine kintsugi details."
   },
   "riad-lantern-nights": {
     "fonts": [
@@ -1467,6 +1455,22 @@ const REBUILT: Record<string, Pick<DesignCopy, 'fonts' | 'pages' | 'palette' | '
       { name: msg('Rose gold'), hex: '#C99A86' },
     ],
     llmsLine: 'an aubergine velvet envelope in a champagne satin band with a rose gold ring threaded on it, an oval pearl cameo portrait and a turning photo display.',
+  },
+  'kintsugi-washi': {
+    fonts: ['Allura', 'Shippori Mincho'],
+    pages: {
+      home: msg('Your portrait in a torn indigo washi mat on a deckled rice-paper card, the invitation on rice paper between gold kintsugi seams with a countdown and calendar links, and a mended tea bowl to sign off.'),
+      story: msg('Three moments, left, right and left, in torn rice-paper mats; each photo appears through a spreading ink bloom and light runs along the gold seam.'),
+      details: msg('The order of the day on a rice-paper card under a gold seam, the venue in wide torn indigo washi, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('A rice-paper reply card with a plum sprig, your reply-by date and the configurable RSVP form; gold leaf and petals drift down when a reply is sent.'),
+    },
+    palette: [
+      { name: msg('Indigo'), hex: '#242E58' },
+      { name: msg('Night'), hex: '#161C36' },
+      { name: msg('Rice paper'), hex: '#F3ECDC' },
+      { name: msg('Gold'), hex: '#C9A55A' },
+    ],
+    llmsLine: 'a square pinwheel packet of indigo washi with gold kintsugi seams, tied with a cord round a mended porcelain button, its four flaps unfolding one by one; photos appear through an ink bloom.',
   },
 };
 for (const [id, r] of Object.entries(REBUILT)) Object.assign(DESIGN_COPY[id], r);
