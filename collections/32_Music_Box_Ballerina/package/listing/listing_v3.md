@@ -1,47 +1,45 @@
 # Etsy listing v3: Music Box Ballerina Wedding Website (design 32)
 
-Internal listing kit for the seller (G171, 2026-10-17). **Draft — not published on Etsy (K41).** Theme `music-box-ballerina`. Written from the common
-skeleton in `docs/19_ALICI_YOLCULUGU.md` §4 (buyer journey, K32), with the same structure and wording as the 01–21 listings and the design 28
-listing (`collections/28_Maison_Patisserie/package/listing/listing_v3.md`): every sentence answers a buyer question from docs/19 §3 and promises
-only what the platform does today. Product language: English (US spelling). This design has no earlier listing: this is its first listing text.
-Design facts come from `platform/themes/music-box-ballerina/` (theme.json, index.html, home.html, story.html, details.html, rsvp.html; the theme
-README was empty when this text was written) and `platform/lib/marketing/designs.ts` (sales-site copy, G171). This design opens from a music box:
-the title, the description, the tags and the alt texts never name any other opening object (`tools/etsy_upload.py --check`).
+Internal listing kit for the seller (rewritten 2026-10-22 on the G154 standard of `collections/21_Crimson_Rose_Atelier/package/listing/listing_v3.md`).
+**Draft: not published on Etsy (K41), and the design is not for sale.** Theme `music-box-ballerina`. Same structure and wording as the 01–21
+listings (`docs/19_ALICI_YOLCULUGU.md` §4): every sentence answers a buyer question and promises only what the platform does today. Product
+language: English (US spelling). Design facts re-read on 2026-10-22 from `platform/themes/music-box-ballerina/` (README, theme.json,
+opening-design.json, content.demo.json, index.html, story.html, details.html and the pictures in `img/`), `platform/lib/marketing/designs.ts`,
+`platform/lib/audio/catalog.ts`, `platform/lib/print/layouts.ts`, `platform/lib/claim/demo-map.ts`, `platform/lib/claim/demo-photos.json` and
+the live demo page. This replaces the 2026-10-17 draft, which described the earlier opening (a turning brass key and a ballerina rising
+from the box); that opening is no longer in the theme.
 
 ## 0. Status before publishing
 
-| Item | Status on 2026-10-17 |
+| Item | Status on 2026-10-22 |
 |---|---|
-| Sale status | **Coming: the design is not open for sale** (tasarım satışa açılmadı, coming). `platform/lib/marketing/config.ts` lists it as `coming` with price `[PRICE]`; its GPT artwork does not exist yet (G171: the theme runs on interim layers). This listing waits for the artwork, an eye check and the sale decision. |
-| Artwork | **Interim.** Every picture of the theme is a placeholder cut and toned from other designs' GPT images (`themes/music-box-ballerina/build_images.py`); the porcelain ballerina is a plain placeholder slot. The real parts are ordered in `collections/32_Music_Box_Ballerina/assets/gpt/GPT_PROMPTS.md`. No image or video of this listing may be made before they arrive. The description describes the finished design (box, key, mirror, ballerina) [VERIFY: GPT parts built in; the ballerina rises and turns as described]. |
-| Start link `https://bkestudio.com/start?theme=music-box-ballerina` | **Not live**: the design is in the repository (G171, branch `claude/g171-music-box`) and has not been deployed. Opened only in a local production build. Not opened on a phone. |
-| Live demo `https://bkestudio.com/start/demo/music-box-ballerina` (in the description under TRY THE LIVE DEMO) | **Not live**, for the same reason. In the local production build the demo opens this design's music box with the sample couple Juliette & Arthur (fictional venue The Rosewell Pavilion, Saratoga Springs, NY; May 22, 2027). A demo map pin is set (Saratoga Springs, `lib/claim/demo-map.ts`). [VERIFY: demo answers `200` with `data-theme="music-box-ballerina"` after deploy] |
-| Current platform release (simpler editor K29, Headings & labels, thank-you page, guest password, RSVP v2) | Live on production since G079 (2026-10-15) for 01–20. This design needs the next deploy; its editor features were not tried in this task. |
-| Manual order check (`CLAIM_ORDER_VERIFICATION=manual`) | As in the 01–21 listings: the records disagree (docs/10, docs/18 §4); not read in this task. The sentence keeps [VERIFY: manual order check on in production]. |
-| Questions & answers, RSVP questions, menu, travel, registry | Platform features, the same for every design; rendered in this theme only in the local build. **Not tried on the live site.** |
-| Our Story music box mirror | Design-specific: three photos appear one at a time in the oval mirror (swipe or arrows; the ballerina turns a quarter with each photo; a plain list with reduced motion). **Not tried** on the live site or on any phone. [VERIFY: on a real phone, and with reduced motion on] |
-| Music, map and directions, reply form with Excel and Google Sheets (G126–G128) | In the repository; **not on production yet** and not tried on the live site. This design's default track is "Music Box", a music box lullaby made in code (`platform/lib/audio/catalog.ts`); it plays on the Our Story page and guests can pause it. Opening sound effects play only after the guest's tap; a sound button mutes them. The 4 tracks were made in code and **nobody has listened to them on a real phone yet** (G126). The Google Sheets connection has not been tried with a real Google account (G128). |
-| Printable invitation | Composed interim layout (`platform/lib/print/layouts.ts`): the website's blush paper with a rose petal, 5 × 7 in and A5, front and back. The design's own print artwork waits for GPT (PAKET 6). Not tried on the live site. |
-| Real phones (iPhone Safari, Android Chrome) | **Not tested.** No phone check of any kind has been done for this design. |
-| Edit link by email | **Not built.** The buyer copies the link or uses "Email it to myself" (their own mail app). |
-| Web address | `bkestudio.com` (primary since 2026-10-19; the earlier `xn--bkestudo-zkb.com` (bkestudıo.com) links redirect here with a permanent 308). G190 (2026-10-20) moved the start link, demo, START HERE guide and QR codes to this address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
-| Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com**. |
+| Sale status | **Not for sale.** `platform/lib/marketing/config.ts` lists it as `preview` (shown in the site catalogue, no checkout), price `[PRICE]`. This listing stays an unpublished draft. |
+| Design build | Rebuilt 2026-10-18/19 (theme README: interior redesigned at the user's request; PROJECT_STATE: print grounds wired 2026-10-20, palettes must be redone from the new art). The first page is a closed **oval music box** (`opening-design.json` kind `oval-music-case`, one moving part: the lid on its top hinge; the card clears the box before it comes forward). `designs.ts` holds two texts: the full entry still describes a turning brass key, a ballerina that rises and turns and drifting petals, which the theme's opening does not do; the catalogue text (`PREVIEW_DESIGN_COPY`: "The oval music-case lid lifts on its top hinge…") matches the theme. This listing follows the theme. `tools/etsy_upload.py` reads the object "box", so the no-envelope rule applies to this listing. |
+| Start link `https://bkestudio.com/start?theme=music-box-ballerina` | **404 on the live site** (coordinator's curl, 2026-10-22): `/start` opens only live designs. |
+| Live demo `https://bkestudio.com/start/demo/music-box-ballerina` (in the description under TRY THE LIVE DEMO) | **200 on the live site** (coordinator's curl, 2026-10-22). Fetched again in this task (2026-10-22): the page loads the box parts (`v3-closed`, `v3-lid`, `v4-lining`, `v4-lid-back`), the sample names Juliette & Arthur, May 22, 2027, and a sample portrait (`/demo/blush-garden-rose/…`: design 03's fictional photos, shared by this design in `demo-photos.json`). Not opened on a phone. |
+| Questions & answers, RSVP questions, music, map and directions, reply form with Excel and Google Sheets, languages, Downloads, guest password, thank-you page | Platform features, the same for every design (theme README: "Editable fields, calendar, map, optional blocks, shared RSVP and thank-you mode retain the platform contract"); tried in local production builds for 01–21 (G090, G133). **Not tried with this design on the live site.** This design's default track is Music Box (`catalog.ts`); the demo pin is Saratoga Springs, New York (`demo-map.ts`; the pavilion is fictional). Nobody has listened to the 4 music tracks on a real phone. The Google Sheets connection has not been tried with a real Google account, so the description only says that a Google Sheet can be connected. |
+| Real phones (iPhone Safari, Android Chrome) | **Not tested.** |
+| Description claims | Every sentence of §2 describes a feature of the platform (the same claims as the 21 listing, G154) or this design's look as the theme builds it today. No VERIFY note is left in §2; the open live-site and real-device tests are in §11. |
+| Order check (`CLAIM_ORDER_VERIFICATION`) | Mode in production not read in this task. G191 (2026-10-22, in review on a branch, not live) adds a `trust` mode (publish first, check the order afterwards). The description says only what happens if the editor shows "We are confirming your Etsy order"; re-read that sentence if `trust` goes live (§11). |
+| Edit link by email | Off as recorded in the 21 listing (2026-10-17: sending built in G147, waits for SMTP); not re-read in this task. The listing and the START HERE guide promise no email: the buyer opens the editor on any device with the Etsy order number + email (`/my`). |
+| Web address | `bkestudio.com` (primary since 2026-10-19; links of the earlier `xn--bkestudo-zkb.com` redirect here with a permanent 308). |
+| Shop name, support email | **BKE Studio**, **bkestudio01@gmail.com** (the address `bkestudio@gmail.com` in older listing files is wrong). The description gives no email: buyers message the shop on Etsy. |
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
-| Price, quantity | `config.ts`: `[PRICE]` — not decided for this design (01–21: 1,460 TL, K42/K47). No stock limit (999). |
-| Design fonts and other languages | **Not checked.** The theme loads **Ballet** (names, script) and **Gilda Display** (headings and text) from Google Fonts. On 2026-10-17 the Google Fonts CSS answered without subset labels (single `.ttf` files), so the subsets could not be read. The language line in GOOD TO KNOW is kept conservative. [VERIFY: Ballet and Gilda Display subsets from the Google Fonts CSS (woff2 response)] |
-| START HERE guide | **Built** (G175, 2026-10-17): `package/customer/START_HERE.md` + `.pdf` with the start QR (`python3 tools/build_customer_guides.py --designs 32`, from docs/19 Ek A; QR only from `tools/make_qr.py`; `--check` passes). Its start link answers only after this design is deployed; rebuild it if Ek A or the domain changes. |
-| Listing images and video | **Not made** (they need the real artwork). |
-| Etsy rules (digital items, AI disclosure, title, tags, images, video) | **Not re-checked on Etsy's official pages in this task** (2026-10-17). Re-check them from the links in `00_ANA_DEVIR.md` §34 before publishing and write the date here. |
+| Price, quantity | **Blocker:** 1,460 TL is the approved shop price for a template design (docs/23 §1, user, 2026-10-16) and is used here as the proposal; it is not confirmed for this design (`config.ts` price `[PRICE]`). Quantity 999 (Etsy's maximum, no stock limit). |
+| Design fonts and other languages | Read on 2026-10-22 from the Google Fonts subset lists (via the gwfh.mranftl.com mirror of the Google Fonts API; the css2 response this task received showed no subset comments). Website: Great Vibes, Cormorant Infant and Lora (all latin-ext + Cyrillic). Printable invitation (`layouts.ts`): Ballet (latin, latin-ext, vietnamese) and Gilda Display (latin, latin-ext): **no Cyrillic**. So the language line says: accented Latin letters in the design's fonts, Cyrillic and other alphabets in a plain standard font in some or all places (the printable invitation). |
+| Etsy rules | `etsy.com/legal/creativity` and the help page "How to Manage Your Digital Listings" answered 403 to this task's fetch (2026-10-22). A web search on 2026-10-22 returned Etsy's House Rules excerpt: items generated with AI tools from the seller's own prompts belong to "Designed by a seller", and the listing description must disclose the use of AI. The AI sentence in GOOD TO KNOW is written for that; re-check in the listing editor (§11). Canva is not part of this product (K24) and was not checked. |
+| START HERE guide | `package/customer/START_HERE.md` + `.pdf` with the start QR, built 2026-10-20 (G190, `tools/build_customer_guides.py`, docs/19 Ek A). Its start link and QR answer only once the design is live (404 today). It says guests "tap the box" and names the editor's preview tab "Box", which matches the music box. |
+| Printable invitation | `layouts.ts` entry of 2026-10-20 (G190): the PAKET 6 grounds of the redesign (ivory paper, the website's flowers in two corners, a gold hairline frame), 5 × 7 in and A5. Not printed yet. |
+| Listing images and video | **Not built yet.** Planned: the v4 set (docs/20 §7.10, `tools/listing_v4/README.md`): cover + 7 info images + 11 lifestyle images = 19 JPGs in `package/listing/images_v4/`, and a 4:5 hover video `package/listing/video_v4_4x5.mp4` (§5, §6). The 11 lifestyle images wait for this design's PAKET 7 GPT scenes (`assets/gpt/mockups/p7_*.png`, none yet). Nothing uploaded to Etsy. |
 
-VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence. This design also stays unpublished
-until its sales status leaves `coming` (K41).
+VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence. `python3 tools/etsy_upload.py --check` checks the title, tags and text rules of this file; the files it lists as blockers (images, video) and every open VERIFY keep `ready_to_publish` false.
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 117 characters.
+Etsy limit: 140 characters. This title: 112 characters.
 
 ```text
-Music Box Ballerina Wedding Website with RSVP, Music Box Opening Digital Invitation, Online Editor, Rose Quartz Blush
+Music Box Ballerina Wedding Website with RSVP, Music Box Opening Digital Invitation, Online Editor, Blush Ballet
 ```
 
 ## 2. Description
@@ -52,27 +50,27 @@ Paste from the line below. Section titles in capitals and "•" bullets read wel
 
 A wedding website that opens like a keepsake music box, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
 
-Rose quartz, blush satin, rose gold and soft gold. Your guests tap a rose-quartz music box with a brass wind-up key: the key turns, the lid swings up on its hinge, the oval mirror inside shows your portrait, and a little porcelain ballerina rises and turns slowly while a few rose petals drift down. Then a card with your names and date comes forward and opens into your pages: Home with your invitation beside your portrait, Our Story with your photos in the music box mirror, Details on blush satin, and RSVP.
+Rose quartz, blush satin and soft gold, with blush roses, satin ribbon and a little gold music box on ivory paper. Your guests tap an oval ivory-and-blush music box trimmed with pearls, gold scrolls and roses, a pair of satin ballet slippers on its cameo lid: the lid lifts on its rose-gold hinge and a card with your portrait in an oval cameo frame, tied with a blush satin bow under a tiny ballerina cameo, rises out of the box and comes forward. Then your invitation follows: Home with your oval cameo portrait on champagne satin, Our Story as a keepsake album of oval cameo photos, Details and RSVP.
 
 TRY THE LIVE DEMO
-See the music box open on your own phone before you buy (sample names):
+See the music box open on your own phone before you buy (sample names and photos):
 https://bkestudio.com/start/demo/music-box-ballerina
-Copy the link into your phone's browser. [VERIFY: demo live after deploy]
+Copy the link into your phone's browser.
 
 WHAT YOU GET
-• Your wedding website in the Music Box Ballerina design: music box opening, Home, Our Story, Details and RSVP pages
-• A private online editor, designed for phone screens and also working on a computer, with a preview of every page [VERIFY: real iPhone Safari and Android Chrome]
-• Online RSVP: replies, head counts and up to 10 questions of your own (choices, yes/no, short or long answer, number); you choose which fields are required. When a guest sends a reply, a few petals drift down and the ballerina turns once [VERIFY: try on the live site]
-• Download every reply as an Excel file (or CSV) in one tap, or connect a Google Sheet that updates with every new reply [VERIFY: Google Sheets connection tested live]
-• A countdown and add-to-calendar buttons for guests (Apple / Outlook and Google Calendar)
-• Our Story: your three photos appear one at a time in the oval mirror; guests swipe or tap the arrows, and the ballerina turns with each photo [VERIFY: on a real phone]
-• 5 photo spots with cropping, the order of the day, dress code, a menu, travel & stay and registry buttons, and up to 12 questions & answers [VERIFY: try on the live site]
-• A map of your venue on the Details page (Google Maps loads only when a guest taps it) and directions with Google Maps, Apple Maps or Waze [VERIFY: try on the live site]
-• A soft music box melody on your Our Story page (one of 4 tracks made for your website, or your own MP3 or M4A file) and gentle sound effects after a guest taps the box. Turn either off if you like; guests can pause the music and mute the sound with one tap [VERIFY: tracks listened to on a real phone and approved; try on the live site]
-• A printable invitation in the same colors (5 × 7 in or A5, with an optional back side and QR code) to download from your editor [VERIFY: the design's own print artwork made; try on the live site]
+• Your wedding website in the Music Box Ballerina design: the music box opening, Home, Our Story, Details and RSVP pages
+• A private online editor, designed for phone screens and also working on a computer, with a preview of every page
+• Online RSVP: replies, head counts and up to 10 questions of your own (choices, yes/no, short or long answer, number); you choose which fields are required
+• Download every reply as an Excel file (or CSV) in one tap, or connect your own Google Sheet
+• Add-to-calendar buttons for guests (Apple / Outlook and Google Calendar)
+• 5 photo spots with cropping, a countdown, dress code, travel & stay and registry buttons, and up to 12 questions & answers
+• A map of your venue on the Details page (Google Maps loads only when a guest taps it) and directions with Google Maps, Apple Maps or Waze; add a separate reception place if you need one
+• Background music on your Our Story page (one of 4 tracks made for your website, or your own MP3 or M4A file) and sound effects as the invitation opens. Turn either off if you like; guests can mute the sound with one tap
+• Your website in English, Spanish, French, German or Turkish, or in several with a language button for guests: the design's headings, buttons, reply form and dates come translated, and your own texts can be translated automatically as a draft that you check and approve
 • A QR code of your website (PNG or SVG) for printed cards and signs
+• Downloads: your whole website as a PDF, and a printable invitation in your design (5 × 7 in or A5, with an optional back side, bleed and crop marks for a print shop)
 • An optional guest password, and a thank-you page for after the wedding
-• A START HERE guide (PDF) with your start link and every step explained [VERIFY: guide built for this design]
+• A START HERE guide (PDF) with your start link and every step explained
 • Your website stays online until 12 months after your wedding date
 
 HOW IT WORKS IN 3 STEPS
@@ -83,33 +81,33 @@ HOW IT WORKS IN 3 STEPS
 WHAT YOU CAN CHANGE
 • Your names and how they appear
 • Date, ceremony time and time zone; month-first or day-first date style
-• Venue, address, map and directions, and the order of the day (up to 10 rows)
+• Venue, address, map and directions, a separate reception place, and the order of the day (up to 10 rows)
 • Your story: an intro line, three captions and its music (one of 4 tracks, your own file or none)
 • 5 photos: a portrait, 3 story photos and the venue, each cropped to its frame
-• Your menu, questions & answers (up to 12), dress code, travel & stay and registry links
+• Questions & answers (up to 12), dress code, travel & stay and registry links
 • RSVP deadline and your reply form: required or optional fields and up to 10 questions of your own
-• The design's headings, labels and buttons, in your own words (for example "Turn the key" or "Wind the music box again")
+• The design's headings, labels and buttons, in your own words (for example "You are invited" or "We're getting married")
 • Which optional sections show
 What stays as designed: the artwork, colors, fonts, page layout and the music box animation.
 
 WHAT YOUR GUESTS SEE
-Your link opens a closed music box. One tap winds the key and opens it into your pages. Guests slide through your photos in the music box mirror, reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging apps show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
+Your link opens a closed music box. One tap opens it into your pages. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging services show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
 
 WHAT YOU NEED
 • A phone or computer with a web browser
-• Your Etsy order number (in your Etsy order confirmation)
+• Your Etsy order number (on Etsy under You → Purchases and reviews, or in your Etsy confirmation email)
 • Your wedding details; photos are optional
 No Canva account, no app, no design skills.
 
 GOOD TO KNOW
 • Digital product: nothing is printed or shipped. Nothing to fill in at checkout.
 • One website per order. You choose your web address when you start (for example …/juliette-and-arthur); it cannot be changed later. A custom domain (yournames.com) is not included.
-• Save your private edit link when it appears: it opens your editor, and we cannot email it to you yet.
-• We confirm each order in our shop before a website can go live. You can set everything up in the meantime. [VERIFY: manual order check on in production]
+• Your Etsy order number is your key: with it and your email, your editor opens right away, and again on any phone or computer to continue where you left off. No account or password.
+• If your editor says it is confirming your Etsy order, you can set everything up in the meantime; Publish opens once the order is confirmed, usually within 24 hours.
 • After you publish, names and date can be changed 3 times in total; typo fixes and moving the date by up to 7 days are always free. Everything else can be changed as often as you like.
-• The website's built-in messages (reply form errors, calendar text) are in English. You can write your own texts and headings in any language; the design's fonts are made for English and the Latin alphabet, and letters they do not have show in a plain standard font. [VERIFY: Ballet and Gilda Display subsets]
+• Automatic translation is a machine-made first draft: read each text before you approve it. Your own texts can also be in any other language; accented Latin letters use the design's fonts, while Cyrillic and other alphabets show in a plain standard font in some or all places.
 • Colors and fonts do not change. Music plays only on your Our Story page, and some phones wait for a guest's tap before it starts. Upload only music you have the right to use.
-• The painted design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. [VERIFY: Etsy AI disclosure wording and the "Designed by" setting] Sample names, dates, places and photos are fictional.
+• The painted design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. Sample names, dates, places and photos are fictional.
 • No returns, exchanges or cancellations: this is a digital product with instant access. If something on your website does not work as described, message us on Etsy and we will fix it.
 
 QUESTIONS?
@@ -125,17 +123,19 @@ Etsy: 13 tags, each up to 20 characters (checked). Keyword choices are hypothese
 wedding website
 rsvp website
 digital invitation
-music box wedding
 online rsvp
 wedding rsvp
 wedding invitation
+music box wedding
 ballerina wedding
-blush pink wedding
-rose quartz wedding
-rose gold wedding
+ballet wedding
+blush wedding
+pink wedding
+keepsake invitation
 romantic wedding
-storybook wedding
 ```
+
+Character counts: 15 · 12 · 18 · 11 · 12 · 18 · 17 · 17 · 14 · 13 · 12 · 19 · 16 (all ≤ 20).
 
 ## 4. Category and attributes
 
@@ -145,31 +145,49 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 |---|---|
 | Category | Paper & Party Supplies › Paper › Invitations & Announcements › Invitations (or the closest digital wedding category Etsy offers) |
 | Type | Digital files |
-| Who made it | I did [VERIFY: the "Designed by" option for designs made with AI image tools] |
+| Who made it | I did [VERIFY: Etsy's House Rules (web search excerpt, 2026-10-22) put designs made with AI tools from the seller's own prompts under "Designed by a seller"; pick the matching option in the listing editor] |
 | What is it | A finished product |
 | When was it made | Made to order (choose what Etsy offers for digital items) |
 | Occasion | Wedding |
-| Primary color | Pink |
-| Secondary color | Gold |
-| Style / theme | Classic, Romantic (if offered) |
+| Primary color | Pink (rose quartz, blush) |
+| Secondary color | Rose gold |
+| Style / theme | Romantic, Vintage (if offered) |
 | Personalization | Off (nothing to fill in at checkout; the buyer fills in the website) |
-| Digital file | `START_HERE.pdf` from `package/customer/` — **not built yet** |
-| Price | `[PRICE]` — not decided for this design (`config.ts`: `coming`) |
-| Quantity | 999, Etsy's maximum [VERIFY: whether Etsy lowers a digital listing's quantity on each sale] |
-| Shop section | [SHOP SECTION] (the user's choice, docs/20 §3) |
+| Digital file | `START_HERE.pdf` from `package/customer/` (built 2026-10-20, G190; Etsy: up to 5 files, 20 MB each, as recorded in the 21 listing) |
+| Price | **1,460 TL proposed** (the approved shop price for a template design, user, 2026-10-16, docs/23 §1; about USD 29.48 at 49.53 TRY per USD). Shop currency TRY (K38). **Not confirmed for this design** (`config.ts` `[PRICE]`): blocker until the user confirms it |
+| Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) [VERIFY: whether Etsy lowers a digital listing's quantity on each sale] |
+| Shop section | Suggestion: `Classic & Vintage` (an existing section, docs/20 §3; the user's choice) |
 | Renewal | [AUTO RENEW: yes/no] |
 
 ## 5. Images and alt text
 
-**Not made.** The 8 editorial images (`python3 tools/listing_editorial.py --theme music-box-ballerina`, rules in `docs/21_ILAN_GORSELLERI.md`)
-wait for the real artwork (GPT_PROMPTS.md) and this design's GPT mockup scenes. Planned set, the same order as 01–21:
-1 cover (the closed music box on a phone), 2 opening (box closed · lid up with the ballerina turning · card forward), 3 pages, 4 edit,
-5 RSVP (reply card + guest list), 6 details (order of the day on blush satin, venue), 7 how it works, 8 what is included. No image may carry
-a QR code or a web address (docs/15 §4.1). Alt texts are written against the files once they exist.
+The v4 set (docs/20 §7.10, `tools/listing_v4/README.md`, the template approved on design 01 on 2026-10-21): 19 JPGs, 4:5 (2000 × 2500), in `package/listing/images_v4/`, in Etsy upload order. **Not built yet** for this design. Images 01, 02, 07, 09, 10 and 15 use opening stills from the live demo (`shots.mjs`); 03–06, 08 and the other phone screens are real screens of a local production build (`tools/listing_templates/capture.ts`, sample content); 12–15 add tablet, laptop and printed-invitation renders (`serve.ts` + `devices.mjs`); 09–19 place the screens into this design's PAKET 7 GPT scenes, which do not exist yet. The rows below follow the order and headlines of design 01's files (`collections/01_Olive_Ivory/package/listing/images_v4/`, `slides.py`, `lifestyle.py` LIFE). Alt texts are planned: rewrite each against its finished file. Image 07 carries a QR code of the live demo and images 04 and 19 a web address of ours: see §11.
+
+| # | File | Alt text |
+|---|---|---|
+| 1 | `01_cover.jpg` | Music Box Ballerina wedding website with RSVP: two phones show the closed oval music box with ballet slippers on its lid, and the card with a sample portrait in an oval cameo frame and the names Juliette & Arthur; badges: No Canva needed, RSVP guest list included, Edit on your phone |
+| 2 | `02_reveal.jpg` | Opens like a real music box: three phones show guests tapping the closed box, its lid lifting on the hinge, and the card with your photo rising out of it; sound and animation included |
+| 3 | `03_rsvp.jpg` | Collect RSVPs with ease: a guest's reply form in this design and the couple's guest list in the editor with reply counts and a Download Excel button; badges: your own questions, Excel guest list download |
+| 4 | `04_edit.jpg` | Edit everything on your phone, no Canva, no app, no account: the editor's list of pages, the Headings & labels screen and the "Your website is live" screen; every change saves by itself |
+| 5 | `05_pages.jpg` | Every page included: four phones show Home with the oval cameo portrait, Our Story, Details with the order of the day, and RSVP; countdown, schedule, map, Q&A, add-to-calendar, music, dress code, travel and registry |
+| 6 | `06_included.jpg` | What's included: the invitation on a phone beside a checklist: the music box opening and four pages, online RSVP with your own questions, guest list and one-tap Excel download, countdown and add-to-calendar, 5 photos, music and venue map, QR code and printable invitation, editor on phone or computer, online until 12 months after your wedding |
+| 7 | `07_demo.jpg` | Try it before you buy: the closed music box on a phone next to a QR code of the live demo; sample names and photos, yours replace them |
+| 8 | `08_how.jpg` | How it works: open the START HERE guide from your Etsy purchases, start with your Etsy order number and first names, personalize, then publish and share one link by text, WhatsApp, email or QR; the setup step "Add your photo" on a phone |
+| 9 | `09_closeup.jpg` | Designed to be opened: a close-up of a phone in a styled scene, showing the opened card with a sample photo and the names |
+| 10 | `10_tap.jpg` | One tap and it opens: a hand about to tap a phone that shows the closed music box; sound and animation included |
+| 11 | `11_home.jpg` | Guests open it anywhere, with no app and no account: a guest at home holds a phone with the Home page |
+| 12 | `12_devices.jpg` | Beautiful on every screen: the website on a tablet and on a phone |
+| 13 | `13_laptop.jpg` | Edit on your laptop too: the private editor with its page preview on a laptop |
+| 14 | `14_together.jpg` | Plan it together: the guest list on a phone and on a laptop; your editor opens on any device |
+| 15 | `15_print.jpg` | Print it or send it: the printable invitation in this design (5 × 7 in or A5 PDF) beside a phone with the closed music box |
+| 16 | `16_need.jpg` | Everything your guests need: four phones show the invitation, the venue and map, questions and answers, and a sent RSVP |
+| 17 | `17_day.jpg` | On the wedding day: the order of the day on a phone at a reception table, with add-to-calendar buttons |
+| 18 | `18_replies.jpg` | Every reply in one place: the list of replies on a phone beside a bouquet; download it as Excel in one tap |
+| 19 | `19_share.jpg` | Share it with one link by text, WhatsApp, email or QR: one person shows the Share screen to another; your own address with your names |
 
 ## 6. Video
 
-**Not made.** `package/listing/video.mp4` (12 s square loop of the music box opening, `--video`) waits for the real artwork.
+`package/listing/video_v4_4x5.mp4`: **not built yet.** Planned (`tools/listing_v4/stageE.sh`, docs/20 §7.10): the music box opening recorded from the live demo in slow motion (page time 50× slower, `rec.mjs`) and played back at 60 fps by `full45.py`: 1080 × 1350 (4:5, the shape of Etsy's search grid), H.264, silent, about 10 seconds; its last 0.4 s dissolve into the first frame, so Etsy's loop has no jump. Sample names and photos. [VERIFY: Etsy video rules in the listing editor]
 
 ## 7. FAQ (end of the description, or the shop FAQ)
 
@@ -180,10 +198,10 @@ No. You edit your website in your web browser, on your phone or computer. Your g
 Download the START HERE PDF from your Etsy purchases, open the start link and enter your Etsy order number. You can also use the start link in our Etsy message.
 
 **Do I need an account or a password?**
-No. You get a private edit link that opens your editor. Save it right away; we cannot email it to you yet.
+No. Your Etsy order number and the email you start with open your editor on any phone or computer. You also get a private edit link as a shortcut.
 
 **What if I lose my edit link?**
-If your editor is still open, copy it again under Share. Otherwise message us on Etsy with your order number: we send you a new link and the old one stops working.
+No problem: on any phone or computer, open the "Create your website" page of our website (the address is in your START HERE guide) and enter your Etsy order number and the email you started with. Your editor opens where you left off.
 
 **Can I change things after I publish?**
 Yes, as often as you like. Names and date can be changed 3 times in total after publishing; typo fixes and moving the date by up to 7 days are free.
@@ -192,19 +210,16 @@ Yes, as often as you like. Names and date can be changed 3 times in total after 
 Yes. Every page of the editor has "Headings & labels". The artwork, colors and fonts stay as designed.
 
 **Can it be in another language?**
-You can write your own texts and headings in any language. Built-in messages such as reply form errors stay in English, and letters the design's fonts do not have show in a plain standard font.
+Yes. Your website can be in English, Spanish, French, German or Turkish, or in several of them: the design's built-in texts come translated, and your own texts can be translated automatically (check each translation before you approve it). You can write your own texts in any other language too.
 
 **How do my guests reply?**
-On your RSVP page, with no app or account. You choose which fields are required and can add up to 10 questions of your own. You see every reply in your editor and can download them all as an Excel file (or CSV) in one tap, or connect a Google Sheet that updates with every new reply. [VERIFY: Google Sheets connection tested live]
+On your RSVP page, with no app or account. You choose which fields are required and can add up to 10 questions of your own. You see every reply in your editor and can download them all as an Excel file (or CSV) in one tap, or connect your own Google Sheet.
 
 **How many guests can I invite?**
 As many as you like. One reply can include up to 10 people.
 
 **Is there music?**
-Yes, if you like: a soft music box melody on your Our Story page, from 4 tracks made for your website or your own MP3 or M4A file, and gentle sound effects after a guest taps the box. You can turn music or sound effects off, and guests can pause the music or mute the sound with one tap. [VERIFY: tracks listened to on a real phone]
-
-**What if a guest prefers less motion?**
-If a guest's phone is set to reduce motion, Our Story shows your photos as a simple list. [VERIFY: with reduced motion on, on a real phone]
+Yes, if you like: music on your Our Story page, from 4 tracks made for your website or your own MP3 or M4A file, and sound effects as the invitation opens. You can turn music or sound effects off, and guests can mute the sound with one tap.
 
 **Can guests find the venue?**
 Yes. Your Details page can show a map of the venue (Google Maps loads only when a guest taps it) and directions with Google Maps, Apple Maps or Waze. If the reception is somewhere else, add it as a second place.
@@ -213,13 +228,13 @@ Yes. Your Details page can show a map of the venue (Google Maps loads only when 
 Yes, optional: one shared password that you send to your guests with the link.
 
 **How long does my website stay online?**
-Until 12 months after your wedding date. After the wedding it can turn into a thank-you page.
+Until 12 months after your wedding date. After the wedding it can turn into a thank-you page. Need it longer? Message us on Etsy before your "Online until" date and we can extend it.
 
 **Can I use my own domain?**
 Not at the moment. Your address is your names on our web address.
 
 **Is anything printed or shipped?**
-No. It is a digital product.
+No. It is a digital product. Your editor makes a printable invitation in your design (5 × 7 in or A5) that you can print at home or at a print shop.
 
 ## 8. Etsy's automatic messages (shop-wide, the same for every design)
 
@@ -234,7 +249,7 @@ Thank you for your order! Your download is your START HERE guide (PDF). Open it 
 
 Can't open the PDF? Start here instead and choose the design you bought: https://bkestudio.com/start
 
-You will enter your Etsy order number, your email and your first names. Then SAVE YOUR EDIT LINK when it appears: it opens your editor, and we cannot email it to you yet.
+You will enter your Etsy order number, your email and your first names. To continue later on any phone or computer, open https://bkestudio.com/my and enter the same order number and email. No account or password.
 
 Questions? Message us here on Etsy with your order number.
 ```
@@ -242,7 +257,7 @@ Questions? Message us here on Etsy with your order number.
 Message to Buyers (receipt):
 
 ```text
-Thank you! Start your wedding website from the START HERE PDF in your download, or at https://bkestudio.com/start (choose the design you bought). Please save your private edit link when it appears. Questions? Message us on Etsy.
+Thank you! Start your wedding website from the START HERE PDF in your download, or at https://bkestudio.com/start (choose the design you bought). To continue later on any device, open https://bkestudio.com/my with the same order number and email. Questions? Message us on Etsy.
 ```
 
 ## 9. After the sale
@@ -253,30 +268,38 @@ link; one review request per order, the same text for everyone, never with an in
 
 ## 10. What differs from the 01–21 listings
 
-- A new design (G171, docs/24 wave 2), not on the live site, not open for sale (`coming`) and still on interim artwork (the ballerina is a
-  placeholder slot): no images, no video and no START HERE guide yet.
-- The guests' first view is "a closed music box" with a brass key; Our Story shows the photos one at a time in the music box mirror, with
-  the ballerina turning; the RSVP page answers a sent reply with petals and one turn of the ballerina.
-- The music line names this design's default track ("a soft music box melody") and says guests can pause it.
-- "What you can change" gives "Turn the key" / "Wind the music box again", this design's own labels, as examples.
-- Language line kept conservative: the font subsets of Ballet and Gilda Display could not be read on 2026-10-17 (§0).
-- A reduced-motion FAQ, because Our Story is a one-photo-at-a-time mirror.
+- Not for sale (`preview`); the price is a proposal; the start link answers 404 until the design is live.
+- The closed object is an oval music box, not an envelope: "opens like a keepsake music box", "the music box opening", "a closed music box". The word envelope appears nowhere in the title, tags, description or alt texts (`etsy_upload.py` rule for designs that do not open from one). No ballerina animation is promised: the ballerina is a small cameo on the portrait frame, and the slippers are on the lid.
+- The opening of the 2026-10-17 draft (key, rising ballerina, petals) is gone from the theme; this text describes the 2026-10-18/19 rebuild.
+- "What you can change" has no monogram line (this design shows none) and gives "You are invited" and "We're getting married", two of this design's headings, as examples.
+- Language line: the website fonts have Cyrillic, the printable invitation's fonts do not (§0).
+- Images and video: the 4:5 v4 set (19 images + hover video) instead of the editorial 9 + square video of 01–21.
 
 ## 11. Before you publish this listing
 
-- [ ] GPT artwork made (GPT_PROMPTS.md, including the ballerina and PAKET 6 print grounds) and built into the theme; eye check
-- [ ] The user approves this design's sale and price (`config.ts`: `coming` → `live`)
-- [ ] Design deployed; start link and demo of this design answer on the live site (`200`, design named)
-- [ ] Start link and demo opened on a real phone; Our Story tried with reduced motion on
-- [ ] START HERE guide written for this design (with the start QR)
-- [ ] Questions & answers, RSVP questions, the menu and the printable invitation tried on the live site
-- [ ] Music (the "Music Box" track listened to on a real phone), map and directions, the reply form and Excel download (G126–G128) live and tried on the live site
-- [ ] Ballet and Gilda Display subsets read from the Google Fonts CSS; language line rewritten if needed
-- [ ] Manual order check confirmed on in production, or the order sentence removed
+- [ ] The user approves this design's sale and price (`config.ts` from `preview` to `live`; 1,460 TL proposed)
+- [ ] Design deployed as `live`; start link answers on the live site (`200`, design named): 404 on 2026-10-22
+- [x] Live demo of this design answers on the live site (`200`, coordinator's curl, 2026-10-22)
+- [ ] Start link and demo opened on a real phone; the QR in START_HERE.pdf scanned with a phone camera
+- [x] START HERE guide written for this design (`package/customer/START_HERE.md` + `.pdf` with the start QR; G190, 2026-10-20)
+- [ ] `designs.ts`: the full entry of this design still describes the key, the rising ballerina and the petals; bring it in line with the theme (coordinator) so the sales site and this listing say the same
+- [ ] Questions & answers and RSVP questions tried on the live site with this design
+- [ ] Music, map and directions, the reply form and Excel download tried on the live site with this design; the 4 tracks listened to on a real phone and approved; Google Sheets connected with a real Google account
+- [x] Order sentence true in every order-check mode in production today (G154, K48: only if the editor says it is confirming the order; "usually within 24 hours")
+- [ ] Order check mode read in production (`CLAIM_ORDER_VERIFICATION`: off, manual, etsy); if G191's `trust` mode goes live, the order sentence re-read
 - [ ] Buyer journey tried on a real iPhone (Safari) and Android phone (Chrome)
-- [ ] Final domain chosen before the first sale
-- [ ] Price decided and filled in; quantity 999
-- [ ] Listing images and video made; alt texts read against the files
+- [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf and its QR rebuilt
+- [x] Hosting extension decided (K48, 2026-10-17: on request via Etsy before the "Online until" date, no price promised)
+- [ ] Renewal decided
+- [ ] Languages and Share → Downloads tried on the live site with this design
+- [ ] Printable invitation of this design: one printed copy checked
+- [ ] v4 images 01–08 built; `tools/listing_v4/build_set.py` given an OPENS entry for this design ("music box"), and `slides.py` no longer writes "envelope" into images 05 ("4 pages + the envelope") and 06 ("Envelope opening + …"); every image read for the word envelope (the editor's label "Above your names on the envelope" in image 04 too)
+- [ ] PAKET 7 scenes made (`assets/gpt/mockups/p7_01…p7_11`); images 09–19 built; all 19 alt texts rewritten against the files
+- [ ] Video built (`video_v4_4x5.mp4`) and watched
+- [ ] QR code of the live demo in image 07 and our web address in images 04 and 19: the user decides against docs/15 ("Etsy dışına yönlendirme": no QR in the listing, Off-Platform policy)
+- [ ] `tools/etsy_upload.py` reads `images_editorial/` and `video.mp4`; pointed at `images_v4/` and `video_v4_4x5.mp4` (coordinator)
 - [ ] Shop section chosen (§4)
-- [ ] Etsy rules re-checked on the official pages (`00_ANA_DEVIR.md` §34) and in the listing editor (title, tags, images, video, AI disclosure, "Designed by"); date written in §0
-- [ ] No VERIFY is left in this file; the word for any other opening object does not appear in the title, description, tags or alt texts
+- [ ] Etsy rules re-checked in the listing editor (title, tags, images, video, AI disclosure, "Designed by")
+- [ ] `python3 tools/etsy_upload.py --check` passes and no VERIFY is left in this file
+
+<!-- listing-kit:media -->

@@ -26,18 +26,23 @@ NOT_ENVELOPE = {"art-deco-black-tie": "gatefold", "lavender-provence": "pouch", 
                 "wildflower-meadow-vellum": "sleeve",
                 # G175: designs 22–32 (22 opens from an envelope)
                 "velvet-jewel-box": "box", "grand-theatre-premiere": "curtain", "orient-express-voyage": "wallet",
-                "kintsugi-washi": "origami", "riad-lantern-nights": "door", "maison-patisserie": "box",
+                "kintsugi-washi": "origami", "riad-lantern-nights": "door", "maison-patisserie": "parcel",
                 "celestial-observatory": "dome", "azulejo-mosaic": "wall", "sky-lantern-festival": "lantern",
                 "music-box-ballerina": "box"}
-# G142: design 21 opened for sale (config.ts "live"); G175: 22–32 are "coming" (K41) — remove a design here when it opens
+# G142: design 21 opened for sale (config.ts "live"); G175: 22–32 are "coming" (K41), 33–48 too (2026-10-22) — remove a
+# design here when it opens
 COMING: set[str] = {"nocturne-lake-estate", "velvet-jewel-box", "grand-theatre-premiere", "orient-express-voyage",
                     "kintsugi-washi", "riad-lantern-nights", "maison-patisserie", "celestial-observatory",
-                    "azulejo-mosaic", "sky-lantern-festival", "music-box-ballerina"}
+                    "azulejo-mosaic", "sky-lantern-festival", "music-box-ballerina",
+                    "marigold-mehndi", "red-lacquer-double-happiness", "highland-tartan-thistle", "victorian-glasshouse",
+                    "art-nouveau-lily", "papel-picado-fiesta", "silver-photo-booth", "swan-chantilly-lace",
+                    "painted-lily-pond", "espresso-pastoral", "chartreuse-garden-party", "blue-toile-pavilion",
+                    "suede-ranch-lace", "bordeaux-silk-bow", "monochrome-darkroom", "navy-ivory-crest"}
 
 
 def test_design_table():
     nos = [no for no, _, _ in eu.DESIGNS]
-    assert nos == [f"{i:02d}" for i in range(1, 33)], nos
+    assert nos == [f"{i:02d}" for i in range(1, 49)], nos
     copy = (REPO / "platform" / "lib" / "marketing" / "designs.ts").read_text(encoding="utf-8")
     config = (REPO / "platform" / "lib" / "marketing" / "config.ts").read_text(encoding="utf-8")
     live = set(re.findall(r"id: '([a-z0-9-]+)',\s*\n\s*name: '[^']+',\s*\n\s*status: 'live'", config))
@@ -87,8 +92,8 @@ def test_select():
     assert [d[0] for d in eu.select("06-20")] == [f"{i:02d}" for i in range(6, 21)]
     assert [d[0] for d in eu.select("12,7")] == ["07", "12"]
     assert [d[0] for d in eu.select("01,06-08")] == ["01", "06", "07", "08"]
-    assert len(eu.select("all")) == 32
-    for bad in ("33", "6-x", "00", "01-35"):
+    assert len(eu.select("all")) == 48
+    for bad in ("49", "6-x", "00", "01-50"):
         try:
             eu.select(bad)
         except SystemExit:
@@ -115,7 +120,12 @@ def test_real_listings():
         assert "[VERIFY" not in data["description"] and data["open_checks"], no
         assert f"/start/demo/{theme}" in data["description"], no
         names = [i["file"].rsplit("/", 1)[1] for i in data["images"]]
-        if theme in COMING:  # G175: the planned set (8 rows written before image 9, or all 9 without alt texts)
+        if names and names[0].endswith(".jpg"):  # 2026-10-22: the v4 set (docs/20 §7.10), 19 JPGs + the 4:5 video
+            assert names == [f"{n}.jpg" for n in eu.V4_IMAGES], no
+            assert data["video"]["file"].endswith("/" + eu.V4_VIDEO), no
+            assert all(i["exists"] for i in data["images"]) or any(
+                b.startswith("listing images missing") for b in data["blockers"]), no
+        elif theme in COMING:  # G175: the planned set (8 rows written before image 9, or all 9 without alt texts)
             assert names == [f"{n}.png" for n in lk.UPLOAD_IMAGES][:len(names)] and len(names) >= 8, no
             assert not any(i["exists"] for i in data["images"]) and any(
                 b.startswith("listing images missing") for b in data["blockers"]), no
@@ -171,7 +181,7 @@ def test_services():
 
 def test_check_exit():
     assert eu.main(["--check"]) == 0
-    # --strict counts the files Etsy needs of every listing that "all" builds: the 32 designs and (G130) the services
+    # --strict counts the files Etsy needs of every listing that "all" builds: the 48 designs and (G130) the services
     files = ("listing images", "listing video", "digital file")
     missing = {no: any(b.startswith(files) for b in eu.build(no, folder, theme)[0]["blockers"])
                for no, folder, theme in eu.DESIGNS}
@@ -183,8 +193,8 @@ def test_check_exit():
     assert eu.main(["--check", "--strict", "--designs", "01-20"]) == (1 if first20 else 0)
     assert eu.main(["--check", "--strict", "--designs", "21"]) == (1 if missing["21"] else 0)
     assert eu.main(["--check", "--strict", "--designs", "services"]) == (1 if services_missing else 0)
-    assert eu.main(["--check", "--designs", "22-32"]) == 0  # G175: rules green although the GPT files are missing
-    assert eu.main(["--check", "--strict", "--designs", "22-32"]) == 1
+    assert eu.main(["--check", "--designs", "22-48"]) == 0  # G175: rules green although the GPT files are missing
+    assert eu.main(["--check", "--strict", "--designs", "22-48"]) == 1
 
 
 def main():

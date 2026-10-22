@@ -1,43 +1,50 @@
 # Etsy listing v3: Velvet Jewel Box Wedding Website (design 23)
 
-Internal listing kit for the seller (2026-10-17). **Not published on Etsy and not for sale:** sales status `coming` in `platform/lib/marketing/config.ts` (K41: not published). Theme `velvet-jewel-box`. Written from the common skeleton in
-`docs/19_ALICI_YOLCULUGU.md` §4 (buyer journey, K32), with the same structure as the design 14 listing (`collections/14_Ivory_Lace_Pearl/package/listing/listing_v3.md`): every sentence answers a buyer
-question from docs/19 §3 and promises only what the shared platform does today. Product language: English (US spelling). This design has no
-earlier `listing.md`: this is its first listing text. Design facts come from the theme brief for `platform/themes/velvet-jewel-box/` (being built in parallel; README, theme.json and index.html were not read for this text) and the sales-site copy in `platform/lib/marketing/designs.ts` ("Your guests tap the box."). The title, the description, the tags and the alt texts never name any other opening object: this design opens from a jewelry box (`openingObject` = "box"), and `tools/etsy_upload.py --check` fails if the word "envelope" comes back there.
+Internal listing kit for the seller (2026-10-22). **Unpublished draft: the design is not for sale** (`config.ts` `preview`). Theme `velvet-jewel-box`.
+Written from the 21 listing (`collections/21_Crimson_Rose_Atelier/package/listing/listing_v3.md`, G154 standard) and the common skeleton in
+`docs/19_ALICI_YOLCULUGU.md` §4 (buyer journey, K32): every sentence answers a buyer question from docs/19 §3 and promises only what the platform
+does today. Product language: English (US spelling). This text replaces the version of 2026-10-17, which described the interim theme before its
+rebuild with the GPT parts (2026-10-18/19). Design facts come from `platform/themes/velvet-jewel-box/` (README, theme.json, content.demo.json,
+index.html, home.html, story.html, details.html, opening-design.json, interior-design.json, the shared opening script and the opening artwork in
+`img/`), `platform/lib/marketing/designs.ts` ("Your guests tap the box."), `platform/lib/audio/catalog.ts`, `platform/lib/print/layouts.ts`,
+`platform/lib/claim/demo-map.ts` and `platform/lib/claim/demo-photos.json`. This design does not open from an envelope: its own object is a jewel box.
 
 ## 0. Status before publishing
 
-| Item | Status on 2026-10-17 |
+| Item | Status on 2026-10-22 |
 |---|---|
-| Sales status | **Not for sale.** `coming` in `platform/lib/marketing/config.ts` (K41: not published). No Etsy listing, no Etsy URL. |
-| Start link `https://bkestudio.com/start?theme=velvet-jewel-box` | **Not live.** The design is not deployed and not open on `/start` in production. Not checked on the live site, not opened on a phone. [VERIFY: answers `200` and names "Design: Velvet Jewel Box" after deploy] |
-| Live demo `https://bkestudio.com/start/demo/velvet-jewel-box` (in the description under TRY THE LIVE DEMO, and named in planned image 8) | **Not live.** The demo route exists only after the theme is deployed. [VERIFY: answers `200` with `data-theme="velvet-jewel-box"` and the sample couple Isabelle & Julian after deploy] |
-| Theme files (`platform/themes/velvet-jewel-box/`) | Being built in parallel. This text follows the theme brief (opening, pages, palette, fonts, default music); it was not read against the finished theme. [VERIFY: description, §5 alt texts and §10 re-read against the theme README, theme.json and index.html] |
-| Current platform release (simpler editor K29, Headings & labels, thank-you page, guest password, RSVP v2) | Live for the designs that are open (since G079, 2026-10-15). Shared by every theme, so this design gets the same editor once deployed. Not tried with this theme. |
-| Manual order check (`CLAIM_ORDER_VERIFICATION=manual`) | Decided on (K34, 2026-10-15); the records disagree on whether it is on in production (see the design 14 listing §0). Not read in this task. The listing keeps the order sentence with [VERIFY: manual order check on in production]. |
-| Questions & answers, RSVP questions | Platform features, the same for every design; tested in a local production build (Chromium, phone size). **Not tried on the live site, not tried with this theme.** |
-| Music, map and directions, reply form with Excel and Google Sheets (G126–G128) | Shared platform features, described as in the design 14 listing, with the same VERIFY notes. This design's default track is "Music Box" (one of the 4 tracks). The 4 tracks were made in code and nobody has listened to them yet (G126). The Google Sheets connection has not been tried with a real Google account (G128). |
-| Our Story 3D carousel | Design-specific (rotating photo carousel; swipe, drag, arrow buttons, keyboard; a simple slider with reduced motion). **Not tried** on the live site or on any phone. [VERIFY: carousel on a real phone, and with reduced motion on] |
-| Real phones (iPhone Safari, Android Chrome) | **Not tested.** No phone check of any kind has been done for this design. |
-| Edit link by email | **Not built.** The buyer copies the link or uses "Email it to myself" (their own mail app). The listing says so. |
-| Web address | `bkestudio.com` (primary since 2026-10-19; the earlier `xn--bkestudo-zkb.com` (bkestudıo.com) links redirect here with a permanent 308). G190 (2026-10-20) moved the start link, demo, START HERE guide and QR codes to this address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
-| Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com** (shop-wide). |
+| Sale status | **Not for sale.** `platform/lib/marketing/config.ts` lists it as `preview` (shown in the catalogue, no checkout), price `[PRICE]`. The listing stays an unpublished draft. No Etsy draft exists for this design (docs/20 §7.9: drafts for 01–21 only). |
+| Start link `https://bkestudio.com/start?theme=velvet-jewel-box` | **Answers 404** on the live site (2026-10-22): /start opens only designs that are `live`. It should answer once the design goes live (§11). Not opened on a phone. |
+| Live demo `https://bkestudio.com/start/demo/velvet-jewel-box` (in the description under TRY THE LIVE DEMO) | **Answers 200** on the live site (curl, 2026-10-22). It shows this design with the fictional sample couple Isabelle & Julian (Halvern House, New York, USA; November 13, 2027, 5:00 p.m.), a demo map pin in New York (`lib/claim/demo-map.ts`) and the shared fictional sample photos (`demo-photos.json`: the Blush Garden Rose set; `content.demo.json` sets no photos). Not opened on a real phone. |
+| Opening (theme rebuilt with its GPT parts on 2026-10-18/19) | `index.html` + the shared opening script (`opening-design.json`: kind `octagonal-jewel-book`, one piece `lid`, no pocket): an octagonal plum velvet jewel box with gold hinges on the left, rose-gold filigree, pearls, velvet roses and an oval cartouche (`img/v3-closed-880.webp`). At the tap the lid swings open on its left hinges to an ivory lining (`img/v4-lining.webp`), and a card with the portrait in an oval pearl locket frame (`interior-frame`: plum velvet, pearls, a velvet rose, a champagne satin bow), the names, "We're getting married" and the date rises out and comes forward; then the home page opens. Sound effects at the tap (`catalog.ts`: ribbon, paper, slide, chime; its comment still names the satin bow of the earlier opening). With reduced motion on, the opening is skipped and the home page opens. |
+| Pages | README and `interior-design.json` (layout `jewel`): Home "an aubergine velvet jewellery suite with an oval pearl portrait and a silk-lined invitation"; Story "three oval pearl-set locket portraits, alternating with handwritten captions"; Details "pearl-edged keepsake panels and an intimate evening programme"; RSVP "a velvet-and-rose-gold reply card". Reduced motion and printing show all content without animation (README). |
+| Name of the opening | `designs.ts` `DESIGN_COPY`: "Your guests tap the box." (the word `tools/etsy_upload.py` checks; this listing says "jewel box"). The catalogue's preview copy (`PREVIEW_DESIGN_COPY`) starts with the default object word and, when the module loads, replaces `DESIGN_COPY`'s opening (designs.ts lines 1429–1434), so the editor's preview tab (`lib/panel/state.ts`, `openingObject`) probably shows that default word, while START HERE says **Box** (read from the code, not run). The guest-facing defaults in `theme.json` still name the default object too (`home_replay`, `rsvp_replay`, `envelope_close`); buyers can rename them under Headings & labels (§11). |
+| Current platform release | The theme is on production (its demo answers 200). The editor flow (setup, Edit, Guests, Share) was not tried with this design: the start link answers 404 until the design goes live. The shop-wide features in §2 are those of the 21 listing (G154). |
+| Order check (`CLAIM_ORDER_VERIFICATION`) | As in the 21 listing: decided on (K34), but the mode in production was not read (no access to the live settings). The description claims no order check: it says what happens if the editor shows "We are confirming your Etsy order" (Publish opens once the order is confirmed, usually within 24 hours), which is true in every mode (G154, K48). |
+| Questions & answers, RSVP questions | Platform features, the same for every design. **Not tried on the live site** with this design. |
+| Music, map and directions, reply form with Excel and Google Sheets (G126–G128) | Platform features. This design's default track is **Music Box** (`catalog.ts`; also `content.demo.json` `audio.music`). The 4 tracks were made in code and **nobody has listened to them on a real phone**. The Google Sheets connection has **not been tried with a real Google account**, so the description only says that a Google Sheet can be connected. None of these was tried on the live site with this design. |
+| Printable invitation | `platform/lib/print/layouts.ts` (G190, 2026-10-20): composed from this design's PAKET 6 print grounds (`assets/gpt/print/invitation_front.png`, `invitation_back.png`), front and back, 5 × 7 in and A5; fonts Bodoni Moda and Pinyon Script (print only); text boxes checked in the repository (G149 rule). No copy printed. |
+| Real phones (iPhone Safari, Android Chrome) | **Not tested.** |
+| Description claims | §2 is the shop-wide 21 text (features that exist in the platform and passed G090's local production-build checks, G154) with this design's own opening, look, pages and fonts as its theme files show them. No VERIFY note is left in §2; the live-site and real-device tests that are still open are in §11. |
+| Edit link by email | **Off** (G147, as recorded in the 21 listing; not re-read on 2026-10-22). The buyer opens the editor on any device with the Etsy order number + email (`/my`, "Create your website"); the private edit link is a shortcut. The listing promises no email. |
+| Web address | `bkestudio.com` (primary since 2026-10-19; the earlier `xn--bkestudo-zkb.com` (bkestudıo.com) links redirect here with a permanent 308). G190 (2026-10-20) moved the start link, demo, START HERE guide and QR codes to this address. |
+| Shop name, support email | **BKE Studio**, **bkestudio01@gmail.com** (the address "bkestudio@gmail.com" in older files is wrong). The description gives no email: "Message us here on Etsy. We reply within 24 hours." |
 | Response time, refund policy | Shop-wide, decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
-| Price, quantity | **Price open: [PRICE].** Not decided for this design. Quantity: 999 if the shop-wide rule of 2026-10-16 (no stock limit) applies. Hosting extension, renewal and the Etsy shop URL are still open. |
-| Design fonts and other languages | From the theme brief: Bodoni Moda and Pinyon Script (Google Fonts; latin-ext, no Cyrillic). Not re-checked from the Google Fonts CSS in this task. [VERIFY: fonts the theme really loads, and their subsets] The language line in GOOD TO KNOW is written from this. |
-| Sample photos and artwork | **Not made yet.** Sample photos of the fictional couple (Isabelle & Julian, fictional venue "Halvern House", New York) and the velvet box artwork come from GPT (K21). |
-| START HERE guide | **Built** (G175, 2026-10-17): `package/customer/START_HERE.md` + `.pdf` with the start QR (`python3 tools/build_customer_guides.py --designs 23`, from docs/19 Ek A; QR only from `tools/make_qr.py`; `--check` passes). Its start link answers only after this design is deployed; rebuild it if Ek A or the domain changes. |
-| Listing images and video | **Not produced yet.** No images, no video, no mockups (`assets/gpt/mockups/` empty). §5 and §6 list the planned set. Nothing uploaded to Etsy. |
-| Etsy rules (digital items, AI disclosure, title, tags, images, video) | **Not re-checked on Etsy's official pages in this task** (2026-10-17). Re-check them from the links in `00_ANA_DEVIR.md` §34 before publishing and write the date here. |
+| Price, quantity | **Proposal: 1,460 TL**, the approved shop price for a template design (docs/23 §1, 2026-10-16). **Blocker** until the user confirms it for this design (`config.ts` price `[PRICE]`). Quantity 999 (no stock limit). Renewal and the Etsy listing URL are still open. Hosting extension (on request via Etsy before the "Online until" date, no price promised): K48, shop-wide. |
+| Design fonts and other languages | The theme loads Pinyon Script, Cormorant Infant and Lora from Google Fonts (the `family=` of all five pages; no font files). Subsets read on 2026-10-22 from Google Fonts' family metadata through the google-webfonts-helper API (`gwfh.mranftl.com/api/fonts/<id>`; a plain css2 request returned no subset comments): Pinyon Script latin-ext, **no Cyrillic** (the `--script` font of the inner pages, `interior.css`, and the names font of the opening page, `--op-font`), Cormorant Infant (`--display`) and Lora (`--body`) latin-ext + Cyrillic. The language line in GOOD TO KNOW is the "latin-ext" sentence of `tools/build_customer_guides.py` `LANGUAGE_LINES`, the same as in the START HERE guide (whose builder reads the older font list of `designs.ts`, Bodoni Moda and Pinyon Script, with the same result). |
+| START HERE guide | `package/customer/START_HERE.md` + `.pdf` built on 2026-10-20 (G190), unchanged since. Its start link and QR point to the start link above (404 until the design goes live); it also links `/my` and the privacy notice. It says guests "tap the box" and names the preview tab **Box**. QR not scanned with a phone. |
+| Artwork and sample photos | GPT parts built into the theme in the rebuild of 2026-10-18/19 (README: "New frame and stationery artwork came from built-in image_gen"). The demo photos are fictional GPT images shared with other designs. |
+| Listing images and video | **Not built yet** (§5, §6): the v4 set (cover + 7 information images + 11 lifestyle images = 19 JPGs in `package/listing/images_v4/`, and the 4:5 hover video `package/listing/video_v4_4x5.mp4`; `tools/listing_v4/README.md`, docs/20 §7.10). The 11 lifestyle images wait for this design's PAKET 7 GPT scenes; its `assets/gpt/GPT_PROMPTS.md` has no PAKET 7 section yet. Nothing uploaded to Etsy. |
+| Etsy rules (digital items, AI disclosure, title, tags, images, video) | Etsy's official pages answered **403** to a direct fetch on 2026-10-22 (`etsy.com/legal/creativity/`, help article 115015628347). Web-search excerpts of `etsy.com/legal/creativity` (2026-10-22): sellers must say in the listing description when an item was made with AI, and such items are labeled "Designed by". The Etsy listing editor of the 01–21 drafts asks "How is this digital content created?" (docs/20 §7.9, 2026-10-21). Not read from Etsy's own pages: re-check in the listing editor (§11). |
 
-VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence. `python3 tools/etsy_upload.py --check` checks the title, tags and text rules of this file; the files it lists as blockers (guide, images, video) and every open VERIFY keep `ready_to_publish` false. This design also stays unpublished until its sales status leaves `coming` (K41).
+VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence. `python3 tools/etsy_upload.py --check` checks the title, tags and text rules of this file; the files it lists as blockers (images, video), the sales status `preview`, the unconfirmed price and every open box of §11 keep `ready_to_publish` false.
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 118 characters.
+Etsy limit: 140 characters. This title: 115 characters.
 
 ```text
-Velvet Jewel Box Wedding Website with RSVP, Ring Box Opening Digital Invitation, Online Editor, Plum Champagne Elegant
+Velvet Jewel Box Wedding Website with RSVP, Jewel Box Opening Digital Invitation, Online Editor, Plum and Rose Gold
 ```
 
 ## 2. Description
@@ -46,27 +53,27 @@ Paste from the line below. Section titles in capitals and "•" bullets read wel
 
 ---
 
-A wedding website that opens like a velvet jewelry box, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
+A wedding website that opens like a real jewel box, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
 
-A closed aubergine velvet ring box tied with a champagne satin ribbon. Your guests tap the jewelry box: the ribbon slides away, the lid lifts on its hinge to a champagne satin lining, and your invitation card rises out of the box and opens into your pages: Home, Our Story, Details and RSVP.
+Aubergine velvet, rose gold and pearls, like a keepsake from a jewelry case. Your guests tap an octagonal plum velvet jewel box with rose-gold filigree, pearls and velvet roses: its lid swings open on gold hinges to an ivory lining, and a card with your portrait in an oval pearl locket frame rises out. Then your invitation follows: Home with your names and an oval locket portrait, Our Story as three locket portraits with captions, Details with the order of the evening, and RSVP.
 
 TRY THE LIVE DEMO
-See the jewelry box open on your own phone before you buy (sample names and photos):
+See the jewel box open on your own phone before you buy (sample names and photos):
 https://bkestudio.com/start/demo/velvet-jewel-box
-Copy the link into your phone's browser. [VERIFY: demo live after deploy]
+Copy the link into your phone's browser.
 
 WHAT YOU GET
-• Your wedding website in the Velvet Jewel Box design: jewelry box opening, Home, Our Story, Details and RSVP pages
-• Your names in a flowing script with a champagne-gold foil shimmer on aubergine velvet, a countdown and add-to-calendar buttons on your Home page
-• Our Story as a turning photo carousel, like a jewelry display case: three photos with captions that guests swipe, drag or move with the arrow buttons [VERIFY: carousel on a real phone]
-• A private online editor, designed for phone screens and also working on a computer, with a preview of every page [VERIFY: real iPhone Safari and Android Chrome]
-• Online RSVP: replies, head counts and up to 10 questions of your own (choices, yes/no, short or long answer, number); you choose which fields are required [VERIFY: try on the live site]
-• Download every reply as an Excel file (or CSV) in one tap, or connect a Google Sheet that updates with every new reply [VERIFY: Google Sheets connection tested live]
+• Your wedding website in the Velvet Jewel Box design: jewel box opening, Home, Our Story, Details and RSVP pages
+• A private online editor, designed for phone screens and also working on a computer, with a preview of every page
+• Online RSVP: replies, head counts and up to 10 questions of your own (choices, yes/no, short or long answer, number); you choose which fields are required
+• Download every reply as an Excel file (or CSV) in one tap, or connect your own Google Sheet
 • Add-to-calendar buttons for guests (Apple / Outlook and Google Calendar)
-• 5 photo spots with cropping, a countdown, dress code, travel & stay and registry buttons, and up to 12 questions & answers [VERIFY: try on the live site]
-• A map of your venue on the Details page (Google Maps loads only when a guest taps it) and directions with Google Maps, Apple Maps or Waze; add a separate reception place if you need one [VERIFY: try on the live site]
-• Soft background music on your Our Story page (this design starts with "Music Box", one of 4 tracks made for your website, or use your own MP3 or M4A file) and gentle sound effects as the invitation opens. Turn either off if you like; guests can mute the sound with one tap [VERIFY: tracks listened to and approved; try on the live site]
+• 5 photo spots with cropping, a countdown, dress code, travel & stay and registry buttons, and up to 12 questions & answers
+• A map of your venue on the Details page (Google Maps loads only when a guest taps it) and directions with Google Maps, Apple Maps or Waze; add a separate reception place if you need one
+• Background music on your Our Story page (one of 4 tracks made for your website, or your own MP3 or M4A file) and sound effects as the invitation opens. Turn either off if you like; guests can mute the sound with one tap
+• Your website in English, Spanish, French, German or Turkish, or in several with a language button for guests: the design's headings, buttons, reply form and dates come translated, and your own texts can be translated automatically as a draft that you check and approve
 • A QR code of your website (PNG or SVG) for printed cards and signs
+• Downloads: your whole website as a PDF, and a printable invitation in your design (5 × 7 in or A5, with an optional back side, bleed and crop marks for a print shop)
 • An optional guest password, and a thank-you page for after the wedding
 • A START HERE guide (PDF) with your start link and every step explained
 • Your website stays online until 12 months after your wedding date
@@ -77,36 +84,35 @@ HOW IT WORKS IN 3 STEPS
 3. Publish & share: tap Publish, then send your link by text, WhatsApp or email, or print the QR code. Guest replies appear in your editor.
 
 WHAT YOU CAN CHANGE
-• Your names, how they appear, and a monogram where the design shows one
+• Your names and how they appear
 • Date, ceremony time and time zone; month-first or day-first date style
 • Venue, address, map and directions, a separate reception place, and the order of the day (up to 10 rows)
 • Your story: an intro line, three captions and its music (one of 4 tracks, your own file or none)
 • 5 photos: a portrait, 3 story photos and the venue, each cropped to its frame
 • Questions & answers (up to 12), dress code, travel & stay and registry links
 • RSVP deadline and your reply form: required or optional fields and up to 10 questions of your own
-• The design's headings, labels and buttons, in your own words (for example "You are invited" or "Will You Join Us?")
+• The design's headings, labels and buttons, in your own words (for example "You are invited" or "Moments we hold dear")
 • Which optional sections show
-What stays as designed: the artwork, colors, fonts, page layout, the jewelry box opening animation and the satin page transitions.
+What stays as designed: the artwork, colors, fonts, page layout and the jewel box animation.
 
 WHAT YOUR GUESTS SEE
-Your link opens a closed velvet jewelry box. One tap opens it into your pages, and each page change glides in like satin drawn across the screen. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging apps show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
+Your link opens a closed velvet jewel box. One tap opens it into your pages. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging apps show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
 
 WHAT YOU NEED
 • A phone or computer with a web browser
-• Your Etsy order number (in your Etsy order confirmation)
+• Your Etsy order number (on Etsy under You → Purchases and reviews, or in your Etsy confirmation email)
 • Your wedding details; photos are optional
 No Canva account, no app, no design skills.
 
 GOOD TO KNOW
 • Digital product: nothing is printed or shipped. Nothing to fill in at checkout.
 • One website per order. You choose your web address when you start (for example …/isabelle-and-julian); it cannot be changed later. A custom domain (yournames.com) is not included.
-• Save your private edit link when it appears: it opens your editor, and we cannot email it to you yet.
-• We confirm each order in our shop before a website can go live. You can set everything up in the meantime. [VERIFY: manual order check on in production]
+• Your Etsy order number is your key: with it and your email, your editor opens right away, and again on any phone or computer to continue where you left off. No account or password.
+• If your editor says it is confirming your Etsy order, you can set everything up in the meantime; Publish opens once the order is confirmed, usually within 24 hours.
 • After you publish, names and date can be changed 3 times in total; typo fixes and moving the date by up to 7 days are always free. Everything else can be changed as often as you like.
-• The website's built-in messages (reply form errors, calendar text) are in English. You can write your own texts and headings in any language; accented Latin letters use the design's fonts, while Cyrillic and other alphabets show in a plain standard font in some or all places.
+• Automatic translation is a machine-made first draft: read each text before you approve it. Your own texts can also be in any other language; accented Latin letters use the design's fonts, while Cyrillic and other alphabets show in a plain standard font in some or all places.
 • Colors and fonts do not change. Music plays only on your Our Story page, and some phones wait for a guest's tap before it starts. Upload only music you have the right to use.
-• If a guest's phone is set to reduce motion, the box opens with gentler movement and Our Story becomes a simple photo slider. [VERIFY: reduced-motion behavior of the opening in the finished theme]
-• The painted design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. [VERIFY: Etsy AI disclosure wording and the "Designed by" setting] Sample names, dates, places and photos are fictional.
+• The painted design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. Sample names, dates, places and photos are fictional.
 • No returns, exchanges or cancellations: this is a digital product with instant access. If something on your website does not work as described, message us on Etsy and we will fix it.
 
 QUESTIONS?
@@ -116,25 +122,25 @@ Message us here on Etsy. We reply within 24 hours.
 
 ## 3. Tags
 
-Etsy: 13 tags, each up to 20 characters (counted below). Keyword choices are hypotheses (no search-volume data). No other company's brand name. The common opening-object tag of the 01–05 listings is replaced by "jewel box invitation" and "ring box invitation": this design opens from a box.
+Etsy: 13 tags, each up to 20 characters (counted below). Keyword choices are hypotheses (no search-volume data). No other company's brand name.
 
 ```text
 wedding website
 rsvp website
 digital invitation
-animated invitation
+jewel box invitation
 online rsvp
 wedding rsvp
 wedding invitation
 velvet wedding
 plum wedding
+rose gold wedding
+pearl wedding
 aubergine wedding
-jewel box invitation
-ring box invitation
-champagne wedding
+elegant wedding
 ```
 
-Character counts: 15, 12, 18, 19, 11, 12, 18, 14, 12, 17, 20, 19, 17.
+Character counts: 15, 12, 18, 20, 11, 12, 18, 14, 12, 17, 13, 17, 15.
 
 ## 4. Category and attributes
 
@@ -144,44 +150,49 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 |---|---|
 | Category | Paper & Party Supplies › Paper › Invitations & Announcements › Invitations (or the closest digital wedding category Etsy offers) |
 | Type | Digital files |
-| Who made it | I did [VERIFY: the "Designed by" option for designs made with AI image tools] |
+| Who made it | I did; "How is this digital content created?": With an AI generator, as chosen in the 01–21 drafts (docs/20 §7.9) [VERIFY: the "Designed by" option for designs made with AI image tools] |
 | What is it | A finished product |
 | When was it made | Made to order (choose what Etsy offers for digital items) |
 | Occasion | Wedding |
 | Primary color | Purple |
-| Secondary color | Gold (or Beige, if Gold reads too yellow next to the champagne #E8D3B0) |
-| Style / theme | Classic, Romantic (if offered) |
+| Secondary color | Rose gold (or Pink, if Rose gold is not offered) |
+| Style / theme | Classic, Elegant (if offered) |
 | Personalization | Off (nothing to fill in at checkout; the buyer fills in the website) |
-| Digital file | `START_HERE.pdf` from `package/customer/`: **not produced yet** for this design (Etsy: up to 5 files, 20 MB each) |
-| Price | **[PRICE]**: not decided (sales status `coming`, K41). Shop currency TRY (K38) |
-| Quantity | 999, Etsy's maximum, if the shop-wide no-stock-limit rule (2026-10-16) applies [VERIFY: whether Etsy lowers a digital listing's quantity on each sale] |
-| Shop section | Not chosen: the section for designs after 05 (an existing one, docs/20 §3, or a new one) is the user's choice |
-| Renewal | [AUTO RENEW: yes/no] |
-
-Palette for reference (theme brief): aubergine #2A1328, plum #4A2142, champagne #E8D3B0, rose gold #C99A86, ivory #FBF3E8.
+| Digital file | `START_HERE.pdf` from `package/customer/` (G190, 2026-10-20; Etsy: up to 5 files, 20 MB each) |
+| Price | **1,460 TL (proposal)**: the shop price the user approved on 2026-10-16 for a template design (about USD 29.48 at 49.53 TRY per USD, docs/23 §1). Shop currency TRY (K38). **Not confirmed for this design** (`config.ts` price `[PRICE]`, status `preview`): a blocker until the user confirms it |
+| Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) [VERIFY: whether Etsy lowers a digital listing's quantity on each sale] |
+| Shop section | [SHOP SECTION]: the user's choice (docs/20 §3). Suggestion: `Classic & Vintage` (designs.ts style: classic) |
+| Renewal | [AUTO RENEW: yes/no] (the 01–21 drafts were saved with Automatic, docs/20 §7.9; the decision is the user's) |
 
 ## 5. Images and alt text
 
-**Not produced yet.** No listing image exists for this design. The table below is the planned editorial set: the same 8 images as design 14 (`python3 tools/listing_editorial.py --theme velvet-jewel-box` once the theme is built, rules in `docs/21_ILAN_GORSELLERI.md`). Every phone must show a real screen of this design (sample couple Isabelle & Julian, GPT sample photos); images 1, 2, 4 and 8 need this design's GPT mockup scenes (`assets/gpt/mockups/`, not made yet), image 7 the shop-wide linen scene (`brand/trust/t1_three_steps.png`). No image may carry a QR code or a web address (Etsy Off-Platform policy, docs/15 §4.1). Images 2, 3 and 8 name this design's opening object (the jewelry box); no image names any other one (`tools/tests/test_listing_editorial.py`). The alt texts are **drafts**: they describe the planned images and must be read against the real files before publishing. [VERIFY: alt texts read against the produced images]
+**Not built yet** (2026-10-22). Planned: the v4 set of the 01–21 listings (`tools/listing_v4/README.md`, docs/20 §7.10), 19 JPGs in `package/listing/images_v4/`, in Etsy's upload order as in `collections/01_Olive_Ivory/package/listing/images_v4/`. Image 1 (`cover_v4.html`) and images 2–8 (`slides.py`) use only real screens: the live demo's opening stills (`shots.mjs`) and guest pages and editor screens from a local production build (`tools/listing_templates/capture.ts`); images 9–19 (`lifestyle.py`, LIFE list) put real screens into this design's PAKET 7 GPT scenes (`assets/gpt/mockups/p7_NN_*.png`). The PAKET 7 prompts are not written yet for this design (`assets/gpt/GPT_PROMPTS.md` has no PAKET 7 section on 2026-10-22), so images 9–19 wait for GPT. Before building, add this design to `tools/listing_v4/themes.json` (rows 01–21 only) and `picks.json` (the "opening" and "open" frames, chosen by eye); give it the object "jewel box" in `OPENS` of `build_set.py` (without an entry image 2 falls back to the default object word), and replace the default object word that `slides.py` writes into image 5's kicker and image 6's first item with "jewel box". Image 7 carries a QR code of the live demo and image 19 the line "bkestudio.com/your-names", as in the user-approved v4 sets of 01–21; docs/15 §1 says the listing carries no QR code (Etsy Off-Platform policy): decide before publishing (§11). The alt texts below are written from the template and this theme's files; read each one against the built image and correct it.
 
 | # | File | Alt text |
 |---|---|---|
-| 1 | `01_cover.png` | Velvet Jewel Box wedding website with online RSVP on a phone held in a hand, among champagne satin and plum velvet: the opening page with a closed aubergine velvet jewelry box tied with a champagne satin ribbon and the names Isabelle & Julian |
-| 2 | `02_opening.png` | It opens like a real jewelry box: three phones show the velvet box closed, its ribbon sliding away and its lid lifting to a champagne satin lining, and the invitation card rising out of the box |
-| 3 | `03_pages.png` | Every page guests need, on five phone screens: home with your names in champagne-gold script on velvet and a countdown, the our story photo carousel, the invitation card, the order of the day and the RSVP page |
-| 4 | `04_edit.png` | Make every word yours: the online editor on a phone held in two hands, next to a list of what you change (names, date and venue; photos and story; schedule and questions and answers; every heading and label). The artwork, colors and fonts stay as designed |
-| 5 | `05_rsvp.png` | Every reply in one place: the guest's RSVP reply card on velvet with a meal choice, and the couple's guest list in the editor with each reply and a Download Excel button |
-| 6 | `06_details.png` | Everything guests ask: the order of the day with add-to-calendar buttons, the venue with a photo, and questions and answers |
-| 7 | `07_how.png` | Three simple steps: start with your Etsy order number, personalize your names, date and a photo, then publish and share one link or print the QR code |
-| 8 | `08_included.png` | What is included: the velvet jewelry box opening and four pages, your own online editor, online RSVP and guest list, QR code and START HERE guide; online until 12 months after your wedding, live demo link in the description |
-
-Suggested extra images (answer the most common questions before purchase; layout and type only, K21; real screens):
-- 9 `09_what_you_change.png`: two columns "You change" (names, date, venue, schedule, story, 5 photos, Q&A, RSVP questions, headings and labels) / "Stays as designed" (artwork, colors, fonts, layout, jewelry box opening animation).
-- 10 `10_good_to_know.png`: "No Canva · no app · no account", "Online until 12 months after your wedding", "Save your private edit link", "Names and date: 3 changes after publishing, small fixes free", "Optional guest password", "Thank-you page after the wedding".
+| 1 | `01_cover.jpg` | Velvet Jewel Box wedding website with online RSVP: two phones show the closed plum velvet jewel box and the opened card with a portrait and sample names, with round badges No Canva needed, RSVP guest list included and Edit on your phone |
+| 2 | `02_reveal.jpg` | It opens like a real jewel box: three phones show the velvet jewel box closed, its lid swinging open on gold hinges, and the card with a portrait rising out; sound and animation included |
+| 3 | `03_rsvp.jpg` | Collect RSVPs with ease: the guest's reply form on one phone and the couple's reply list in the editor on another, with badges for the Excel guest list download and your own questions |
+| 4 | `04_edit.jpg` | Edit everything on your phone, with no Canva, no app and no account: three phones show picking a page, changing a text and publishing; every change saves by itself |
+| 5 | `05_pages.jpg` | Velvet Jewel Box, four pages and the jewel box: Home, Our Story, Details and RSVP on four phones; countdown, schedule, map, questions and answers, add-to-calendar, music, dress code, travel and registry |
+| 6 | `06_included.jpg` | What is included: the jewel box opening with Home, Our Story, Details and RSVP pages, online RSVP with your own questions, guest list with one-tap Excel download, countdown and add-to-calendar, your 5 photos, music and venue map, QR code and printable invitation, an easy editor on phone or computer, online until 12 months after your wedding |
+| 7 | `07_demo.jpg` | Try it before you buy: the closed jewel box on a phone next to a QR code of the live demo, or tap the demo link in the description; sample names and photos, yours replace them |
+| 8 | `08_how.jpg` | How it works in four panels: buy and open the START HERE guide from your Etsy purchases, start with your Etsy order number and first names, personalize names, date, photos, story and RSVP questions, then publish and share one link by text, WhatsApp, email or QR code |
+| 9 | `09_closeup.jpg` | Designed to be opened: a close-up scene with a phone showing the opened card with a portrait in its oval pearl locket frame and the sample names |
+| 10 | `10_tap.jpg` | For your guests, one tap and it opens: a hand taps the closed velvet jewel box on a phone screen; sound and animation included |
+| 11 | `11_home.jpg` | No app, no account: guests open the home page anywhere, with just one link on any phone |
+| 12 | `12_devices.jpg` | Beautiful on every screen: the home page on a tablet and the invitation on a phone |
+| 13 | `13_laptop.jpg` | Your private editor on a laptop too, with a preview of every change |
+| 14 | `14_together.jpg` | Plan it together and open your editor on any device: the guest list on a phone and on a laptop |
+| 15 | `15_print.jpg` | Print it or send it: the printable invitation in this design (5 × 7 in or A5 PDF) next to the closed jewel box on a phone |
+| 16 | `16_need.jpg` | Everything your guests need, on four phones: the invitation, the venue and map, questions and answers, and a sent RSVP |
+| 17 | `17_day.jpg` | On the wedding day: the order of the day on a phone, with add-to-calendar buttons |
+| 18 | `18_replies.jpg` | Guest list included, every reply in one place: the reply list in the editor; download it as Excel in one tap |
+| 19 | `19_share.jpg` | Share it with one link by text, WhatsApp, email or QR code: the editor's Share screen on a phone and your own web address with your names |
 
 ## 6. Video
 
-**Not produced yet.** Planned: `package/listing/video.mp4` (`python3 tools/listing_editorial.py --theme velvet-jewel-box --video` once the theme is built): the jewelry box opening, recorded from the real website (sample names): the closed velvet box with its ribbon, the ribbon sliding away, the lid lifting on its hinge, the light sweep across the champagne satin and the invitation card rising out of the box into the home page. Silent, square (1080 × 1080, H.264), 5–15 seconds; it should start on the closed box and end by dissolving back into it, so Etsy's loop has no black flash (compare first and last frame once made). Etsy's video rules come from web-search excerpts of Etsy's help pages (2026-10-14: 5–15 s, up to 100 MB, at least 500 px, no sound). [VERIFY: Etsy video rules in the listing editor]
+**Not built yet.** Planned: `package/listing/video_v4_4x5.mp4`, the hover video of the v4 set (`tools/listing_v4/stageE.sh`: `rec.mjs` records the live demo `https://bkestudio.com/start/demo/velvet-jewel-box` in slow motion, page time 50× slower, 432 × 540 at 2.5× = 1080 × 1350; `full45.py` turns the frames into a 60 fps vertical video, about 10.5 seconds as for 01–21, whose last 0.4 seconds dissolve into the first frame so Etsy's loop has no jump). It starts on the closed velvet jewel box and shows the lid swinging open and the card rising into the home page (sample names and photos). It is made from still frames, so it has no sound track. The demo already answers 200 (2026-10-22), so the recording does not wait for the sale. [VERIFY: Etsy video rules in the listing editor]
 
 ## 7. FAQ (end of the description, or the shop FAQ)
 
@@ -192,10 +203,10 @@ No. You edit your website in your web browser, on your phone or computer. Your g
 Download the START HERE PDF from your Etsy purchases, open the start link and enter your Etsy order number. You can also use the start link in our Etsy message.
 
 **Do I need an account or a password?**
-No. You get a private edit link that opens your editor. Save it right away; we cannot email it to you yet.
+No. Your Etsy order number and the email you start with open your editor on any phone or computer. You also get a private edit link as a shortcut.
 
 **What if I lose my edit link?**
-If your editor is still open, copy it again under Share. Otherwise message us on Etsy with your order number: we send you a new link and the old one stops working.
+No problem: on any phone or computer, open the "Create your website" page of our website (the address is in your START HERE guide) and enter your Etsy order number and the email you started with. Your editor opens where you left off.
 
 **Can I change things after I publish?**
 Yes, as often as you like. Names and date can be changed 3 times in total after publishing; typo fixes and moving the date by up to 7 days are free.
@@ -204,19 +215,16 @@ Yes, as often as you like. Names and date can be changed 3 times in total after 
 Yes. Every page of the editor has "Headings & labels". The artwork, colors and fonts stay as designed.
 
 **Can it be in another language?**
-You can write your own texts and headings in any language. Built-in messages such as reply form errors stay in English.
+Yes. Your website can be in English, Spanish, French, German or Turkish, or in several of them: the design's built-in texts come translated, and your own texts can be translated automatically (check each translation before you approve it). You can write your own texts in any other language too.
 
 **How do my guests reply?**
-On your RSVP page, with no app or account. You choose which fields are required and can add up to 10 questions of your own. You see every reply in your editor and can download them all as an Excel file (or CSV) in one tap, or connect a Google Sheet that updates with every new reply. [VERIFY: Google Sheets connection tested live]
+On your RSVP page, with no app or account. You choose which fields are required and can add up to 10 questions of your own. You see every reply in your editor and can download them all as an Excel file (or CSV) in one tap, or connect your own Google Sheet.
 
 **How many guests can I invite?**
 As many as you like. One reply can include up to 10 people.
 
-**How do guests look through our story photos?**
-They swipe or drag the photo carousel, or tap the arrow buttons; on a computer the arrow keys work too. If their phone is set to reduce motion, it shows as a simple photo slider. [VERIFY: carousel on a real phone]
-
 **Is there music?**
-Yes, if you like: soft music on your Our Story page, from 4 tracks made for your website (this design starts with "Music Box") or your own MP3 or M4A file, and gentle sound effects as the invitation opens. You can turn music or sound effects off, and guests can mute the sound with one tap.
+Yes, if you like: music on your Our Story page, from 4 tracks made for your website or your own MP3 or M4A file, and sound effects as the invitation opens. You can turn music or sound effects off, and guests can mute the sound with one tap.
 
 **Can guests find the venue?**
 Yes. Your Details page can show a map of the venue (Google Maps loads only when a guest taps it) and directions with Google Maps, Apple Maps or Waze. If the reception is somewhere else, add it as a second place.
@@ -225,19 +233,20 @@ Yes. Your Details page can show a map of the venue (Google Maps loads only when 
 Yes, optional: one shared password that you send to your guests with the link.
 
 **How long does my website stay online?**
-Until 12 months after your wedding date. After the wedding it can turn into a thank-you page.
+Until 12 months after your wedding date. After the wedding it can turn into a thank-you page. Need it longer? Message us on Etsy before your "Online until" date and we can extend it.
 
 **Can I use my own domain?**
 Not at the moment. Your address is your names on our web address.
 
 **Is anything printed or shipped?**
-No. It is a digital product.
+No. It is a digital product. Your editor makes a printable invitation in your design (5 × 7 in or A5) that you can print at home or at a print shop.
 
 ## 8. Etsy's automatic messages (shop-wide, the same for every design)
 
 Etsy's "Message to Buyers for Digital Items" applies to every digital listing, so it cannot carry this design's own start link: it links
 the design chooser `https://bkestudio.com/start` (docs/19 §4.4). The START HERE PDF carries this design's own link. Both texts are already entered in
-Shop Manager (docs/20 §7.1) and need no change for this design. Until this design is deployed and open on `/start`, a buyer could not find it in the chooser: one more reason it stays unpublished.
+Shop Manager (docs/20 §7.1, §7.8) and need no change for this design. Until this design is live, /start does not open it (its start link answered
+404 on 2026-10-22), so a buyer could not find it in the chooser: one more reason the listing stays unpublished.
 
 Message to Buyers for Digital Items:
 
@@ -246,7 +255,7 @@ Thank you for your order! Your download is your START HERE guide (PDF). Open it 
 
 Can't open the PDF? Start here instead and choose the design you bought: https://bkestudio.com/start
 
-You will enter your Etsy order number, your email and your first names. Then SAVE YOUR EDIT LINK when it appears: it opens your editor, and we cannot email it to you yet.
+You will enter your Etsy order number, your email and your first names. To continue later on any phone or computer, open https://bkestudio.com/my and enter the same order number and email. No account or password.
 
 Questions? Message us here on Etsy with your order number.
 ```
@@ -254,7 +263,7 @@ Questions? Message us here on Etsy with your order number.
 Message to Buyers (receipt):
 
 ```text
-Thank you! Start your wedding website from the START HERE PDF in your download, or at https://bkestudio.com/start (choose the design you bought). Please save your private edit link when it appears. Questions? Message us on Etsy.
+Thank you! Start your wedding website from the START HERE PDF in your download, or at https://bkestudio.com/start (choose the design you bought). To continue later on any device, open https://bkestudio.com/my with the same order number and email. Questions? Message us on Etsy.
 ```
 
 ## 9. After the sale
@@ -263,32 +272,40 @@ Messages for each situation are in `docs/19_ALICI_YOLCULUGU.md` §4.5 (the admin
 Rules: the edit link is sent only with `new_edit_link`, inside this order's Etsy conversation; no message asks the buyer for their edit
 link; one review request per order, the same text for everyone, never with an incentive.
 
-## 10. What differs from the 01–05 listings (and from design 14)
+## 10. What differs from the 01–21 listings
 
-- Opening object: this design opens from a velvet jewelry box ("box" in `openingObject`). The first line, the guests' first view, the opening bullet, what stays as designed, the tags and the alt texts of images 1, 2, 3 and 8 say so.
-- Design-specific lines added to the description and FAQ: the champagne-gold foil script on the Home page, the Our Story 3D carousel (with its reduced-motion slider) and the satin page transitions; each carries a VERIFY until tried on a real phone.
-- Default music named ("Music Box"); the rest of the music text is the shared platform text.
-- Language line from the theme brief's fonts (Bodoni Moda, Pinyon Script), not yet re-read from the theme (§0).
-- Status table dated 2026-10-17: design not deployed and not for sale (K41), start link and demo not live, price open, no guide, images, video, mockups or sample photos yet.
+- Rewritten on 2026-10-22 for the rebuilt theme (GPT parts, 2026-10-18/19). The 2026-10-17 text described the interim opening (a ring box with a satin bow, a lid on a top hinge, a turning photo display on Our Story); now an octagonal velvet jewel box whose lid swings open on side hinges, a card with an oval pearl locket portrait, and three locket portraits on Our Story (layout `jewel`).
+- Not for sale (`preview`): the demo answers on the live site, the start link does not (404); the price is a proposal.
+- Its own opening object: the title, tags, description and alt texts say "jewel box" and never the default object word (`tools/etsy_upload.py` rule). The guests' first view is "a closed velvet jewel box". The theme's default guest labels and the editor's preview tab still need a look (§0, §11).
+- Default track Music Box (21: Evening Strings); the second heading example is the design's story kicker, "Moments we hold dear".
+- Language line: the guide builder's "latin-ext" sentence, as in START HERE; it matches this theme's real fonts (§0: Pinyon Script, the script and opening-names font, has no Cyrillic).
+- Images: the 19-image v4 set and the 4:5 hover video are planned (§5, §6) instead of the 9 editorial images and square video of the 21 kit.
 
 ## 11. Before you publish this listing
 
-- [ ] Sales status leaves `coming` (K41 lifted by the user) and the design is open on `/start` in production
-- [ ] Start link and demo of this design answer on the live site (`200`, design named)
+- [ ] The user approves this design's sale (`config.ts` `preview` → `live`) and its price
+- [ ] Start link answers 200 after the design goes live (`https://bkestudio.com/start?theme=velvet-jewel-box`, "Design: Velvet Jewel Box"; 404 on 2026-10-22)
+- [x] Live demo answers 200 on the live site (`https://bkestudio.com/start/demo/velvet-jewel-box`, curl, 2026-10-22)
 - [ ] Start link and demo opened on a real phone; the QR in START_HERE.pdf scanned with a phone camera
-- [ ] Theme finished; description, alt texts and §10 re-read against `platform/themes/velvet-jewel-box/`
-- [ ] Sample photos and artwork made (GPT) and placed in the theme
-- [ ] START HERE guide written for this design (`package/customer/START_HERE.md` + `.pdf` with the start QR)
+- [x] START HERE guide written for this design (`package/customer/START_HERE.md` + `.pdf` with the start QR; G190, 2026-10-20)
+- [ ] Guest-facing default labels (`theme.json` `home_replay`, `rsvp_replay`, `envelope_close`) renamed for the jewel box or accepted, and the editor's preview tab read on the live site (START HERE says "Box"; §0)
 - [ ] Questions & answers and RSVP questions tried on the live site with this design
-- [ ] Our Story carousel tried on a real phone, and with reduced motion on
-- [ ] Music, map and directions, the reply form and Excel download live and tried on the live site; the 4 tracks (including "Music Box") listened to and approved; Google Sheets connected with a real Google account
-- [ ] Manual order check confirmed on in production (`CLAIM_ORDER_VERIFICATION=manual`), or the order sentence removed
+- [ ] Music, map and directions, the reply form and Excel download tried on the live site with this design; the 4 tracks (this design starts with Music Box) listened to on a real phone and approved; Google Sheets connected with a real Google account
+- [x] Order sentence true in every order-check mode (G154, K48: only if the editor says it is confirming the order; "usually within 24 hours")
+- [ ] Order check mode read in production (`CLAIM_ORDER_VERIFICATION`: off, manual or etsy)
+- [ ] G146 live (order number + email open the editor on any device: `/my`, "Create your website"); START HERE re-checked against it
 - [ ] Buyer journey tried on a real iPhone (Safari) and Android phone (Chrome)
-- [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf and its QR rebuilt
-- [ ] Price ([PRICE]) and quantity decided and filled in
-- [ ] Hosting extension and renewal decided
-- [ ] Images (editorial set, with the opening object in images 2, 3 and 8) and video produced; alt texts read against them
+- [x] Web address `bkestudio.com` in the start link, demo, START HERE guide and QR (G190, 2026-10-20)
+- [ ] Price (1,460 TL proposal) confirmed for this design and filled in (`config.ts` and §4); quantity 999
+- [x] Hosting extension decided (K48, 2026-10-17: on request via Etsy before the "Online until" date, no price promised)
+- [ ] Renewal decided
+- [ ] Languages (G144) and Share → Downloads (G139) tried on the live site with this design
+- [ ] Printable invitation: one printed copy checked (5 × 7 in and A5)
+- [ ] PAKET 7 prompts written for this design and its 11 GPT scenes made (`assets/gpt/mockups/p7_NN_*.png`)
+- [ ] `tools/listing_v4` set up for this design (`themes.json` row, `picks.json` opening frames, `OPENS` "jewel box", the default object word of images 5 and 6 replaced) and the v4 set built: 19 JPGs in `images_v4/` and `video_v4_4x5.mp4`; all 19 alt texts read against the files
+- [ ] Image 7 (QR code of the demo) and image 19 (web address) decided against docs/15 §1 and Etsy's Off-Platform policy
 - [ ] Shop section chosen (§4)
+- [ ] Etsy draft created for this design (title, description, tags, category, digital file, images, video)
 - [ ] Etsy rules re-checked on the official pages (`00_ANA_DEVIR.md` §34) and in the listing editor (title, tags, images, video, AI disclosure, "Designed by"), with the date written in §0
 - [ ] `python3 tools/etsy_upload.py --check` passes and no VERIFY is left in this file
 

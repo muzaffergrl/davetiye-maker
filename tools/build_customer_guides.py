@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""START HERE guides for designs 01–32 (G122; 21: G137; G148; 22–32: G175): Markdown + PDF + the real start QR, from ONE source text.
+"""START HERE guides for designs 01–48 (G122; 21: G137; G148; 22–32: G175; 33–48: 2026-10-22): Markdown + PDF + the real start QR, from ONE source text.
 
-  python3 tools/build_customer_guides.py                   # all 32 designs: build, then check
+  python3 tools/build_customer_guides.py                   # all 48 designs: build, then check
   python3 tools/build_customer_guides.py --designs 06-20   # only these ("06-20", "07,12", "01,06-08", "all")
   python3 tools/build_customer_guides.py --check           # build nothing; check what is on disk (exit 1 on a problem)
   python3 tools/build_customer_guides.py --base-url https://…   # another host for the start link (or GUIDE_BASE_URL)
@@ -43,7 +43,7 @@ Checks (always after a build, or alone with --check):
     node) to the start URL; the PDF holds exactly one QR
   - the PDF's links are the start URL (at least once), the /my page (at least once, G148) and the privacy notice,
     nothing else
-Needs: reportlab, segno, Pillow, numpy, pypdf, pdftoppm (poppler) and node + jsqr for the raster check (looked up in
+Needs: reportlab, segno, Pillow, numpy, pypdf, pdftoppm (poppler; or PyMuPDF) and node + jsqr for the raster check (looked up in
 platform/node_modules, then in the main checkout of a git worktree, or JSQR_DIR); without node/jsqr the raster check is
 reported as skipped, never as passed.
 """
@@ -77,27 +77,42 @@ PLACEHOLDER = re.compile(r"\{[A-Z_]+\}")
 # check as G123's listing language lines). "cyrillic" = has Cyrillic, "latin-ext" = Central/Eastern European accents,
 # "latin" = Basic Latin + Western European accents only. A new font must be added here (the build stops otherwise).
 FONT_SUBSETS: dict[str, set[str]] = {
+    "Abril Fatface": {"latin", "latin-ext"},  # G175 (designs 22–32): fonts.googleapis.com/css2 on 2026-10-17
+    "Alegreya": {"cyrillic", "latin", "latin-ext"},  # designs 33–48: fonts.googleapis.com/css2 on 2026-10-22
     "Alex Brush": {"latin", "latin-ext"},
     "Allison": {"latin", "latin-ext"},
-    "Abril Fatface": {"latin", "latin-ext"},  # G175 (designs 22–32): fonts.googleapis.com/css2 on 2026-10-17
     "Allura": {"latin", "latin-ext"},
+    "Amiri": {"latin", "latin-ext"},  # + arabic; 27 (fonts synced with the rebuilt theme, 2026-10-22)
+    "Arapey": {"latin"},
     "Arizonia": {"latin", "latin-ext"},
     "Ballet": {"latin", "latin-ext"},
     "Bellefair": {"latin", "latin-ext"},  # + hebrew
     "Bodoni Moda": {"latin", "latin-ext"},
+    "Bonheur Royale": {"latin", "latin-ext"},
+    "Brygada 1918": {"cyrillic", "latin", "latin-ext"},
+    "Carattere": {"latin", "latin-ext"},
+    "Cardo": {"latin", "latin-ext"},
     "Cinzel": {"latin", "latin-ext"},
     "Cinzel Decorative": {"latin", "latin-ext"},
+    "Comforter Brush": {"cyrillic", "latin", "latin-ext"},
+    "Corinthia": {"latin", "latin-ext"},
     "Cormorant Garamond": {"latin", "latin-ext", "cyrillic"},
     "Cormorant Infant": {"latin", "latin-ext", "cyrillic"},
     "Cormorant SC": {"latin", "latin-ext", "cyrillic"},
     "Cormorant Upright": {"latin", "latin-ext"},
-    "Corinthia": {"latin", "latin-ext"},
+    "Crimson Pro": {"latin", "latin-ext"},
     "Dancing Script": {"latin", "latin-ext"},
     "EB Garamond": {"latin", "latin-ext", "cyrillic"},
+    "Ephesis": {"latin", "latin-ext"},
+    "Federant": {"latin"},
     "Forum": {"latin", "latin-ext", "cyrillic"},
+    "Fraunces": {"latin", "latin-ext"},
     "Gilda Display": {"latin", "latin-ext"},
+    "Goudy Bookletter 1911": {"latin"},
     "Great Vibes": {"latin", "latin-ext", "cyrillic"},
+    "Herr Von Muellerhoff": {"latin", "latin-ext"},
     "Homemade Apple": {"latin"},
+    "Hurricane": {"latin", "latin-ext"},
     "IM Fell English": {"latin"},
     "Imperial Script": {"latin", "latin-ext"},
     "Italiana": {"latin"},
@@ -107,26 +122,46 @@ FONT_SUBSETS: dict[str, set[str]] = {
     "Jost": {"latin", "latin-ext", "cyrillic"},
     "Kaushan Script": {"latin", "latin-ext"},
     "Libre Baskerville": {"latin", "latin-ext"},
+    "Libre Caslon Text": {"latin", "latin-ext"},
     "Limelight": {"latin", "latin-ext"},
+    "Linden Hill": {"latin", "latin-ext"},
     "Lora": {"latin", "latin-ext", "cyrillic"},
+    "Lustria": {"latin"},
+    "Luxurious Script": {"latin", "latin-ext"},
     "Manrope": {"latin", "latin-ext", "cyrillic"},  # G137 (design 21), fonts.googleapis.com/css2 on 2026-10-17
     "Marcellus": {"latin", "latin-ext"},
     "Marcellus SC": {"latin", "latin-ext"},
+    "Mea Culpa": {"latin", "latin-ext"},
     "Merriweather": {"latin", "latin-ext", "cyrillic"},
+    "Monsieur La Doulaise": {"latin", "latin-ext"},
+    "MonteCarlo": {"latin", "latin-ext"},
+    "Mr De Haviland": {"latin", "latin-ext"},
     "Mrs Saint Delafield": {"latin", "latin-ext"},
+    "Newsreader": {"latin", "latin-ext"},
     "Noto Serif Display": {"latin", "latin-ext", "cyrillic"},
+    "Old Standard TT": {"cyrillic", "latin", "latin-ext"},
+    "Oleo Script": {"latin", "latin-ext"},
     "Parisienne": {"latin", "latin-ext"},
     "Petit Formal Script": {"latin", "latin-ext"},
     "Pinyon Script": {"latin", "latin-ext"},
     "Playfair Display": {"latin", "latin-ext", "cyrillic"},
     "Playfair Display SC": {"latin", "latin-ext", "cyrillic"},
+    "Prata": {"cyrillic", "latin"},
     "Raleway": {"latin", "latin-ext", "cyrillic"},
+    "Rochester": {"latin"},
+    "Rosarivo": {"latin", "latin-ext"},
+    "Rouge Script": {"latin"},
+    "Rozha One": {"latin", "latin-ext"},
+    "Rye": {"latin", "latin-ext"},
     "Sacramento": {"latin", "latin-ext"},
     "Satisfy": {"latin"},
     "Shippori Mincho": {"latin", "latin-ext"},  # + Japanese
+    "Sorts Mill Goudy": {"latin", "latin-ext"},
     "Special Elite": {"latin", "latin-ext"},
     "Spectral": {"latin", "latin-ext", "cyrillic"},
     "Tangerine": {"latin"},
+    "Yesteryear": {"latin", "latin-ext"},
+    "Yrsa": {"latin", "latin-ext"},
 }
 # The guide's language sentence for each class (the listings say the same, G123; Polish/Czech/Turkish named instead of
 # "ł, ő, ş", which the PDF's standard Helvetica cannot print).
@@ -170,6 +205,16 @@ def design_fonts(theme: str, copy: str | None = None) -> list[str]:
     return re.findall(r"['\"]([^'\"]+)['\"]", m.group(1))
 
 
+# Fonts of a design's printable invitation (platform/lib/print/layouts.ts) that have fewer alphabets than its website
+# fonts: the language line counts them too (2026-10-22: 32's website fonts have Cyrillic, its print fonts do not).
+PRINT_FONTS: dict[str, list[str]] = {"music-box-ballerina": ["Ballet", "Gilda Display"]}
+
+
+def design_language(theme: str, copy: str | None = None) -> str:
+    """language_class of the design's website fonts plus its PRINT_FONTS."""
+    return language_class(design_fonts(theme, copy) + PRINT_FONTS.get(theme, []))
+
+
 def language_class(fonts: list[str]) -> str:
     """'cyrillic' when every font has Cyrillic, 'latin' when one font has Basic/Western Latin only, else 'latin-ext'."""
     unknown = [f for f in fonts if f not in FONT_SUBSETS]
@@ -202,7 +247,7 @@ def values(theme: str, base: str = BASE_URL) -> dict[str, str]:
         "MY_URL": my_url(base),
         "OPENING": eu.opening_object(theme),
         "OPENING_TAB": opening_tab(eu.opening_object(theme)),
-        "LANGUAGE_FONTS": LANGUAGE_LINES[language_class(design_fonts(theme))],
+        "LANGUAGE_FONTS": LANGUAGE_LINES[design_language(theme)],
     }
 
 
@@ -557,7 +602,14 @@ def raster_qr(images: list[Path]) -> list[str | None] | None:
 
 def pdf_pages_png(pdf: Path, out_dir: Path, dpi: int = 150) -> list[Path]:
     if not shutil.which("pdftoppm"):
-        raise RuntimeError("pdftoppm (poppler) not found")
+        try:  # no poppler (Windows): the same pages with PyMuPDF, named like pdftoppm's output
+            import fitz
+        except ImportError:
+            raise RuntimeError("pdftoppm (poppler) not found, and no PyMuPDF") from None
+        with fitz.open(pdf) as doc:
+            for i, page in enumerate(doc, 1):
+                page.get_pixmap(dpi=dpi).save(out_dir / f"page-{i}.png")
+        return sorted(out_dir.glob("page-*.png"), key=lambda p: int(re.search(r"-(\d+)\.png$", p.name).group(1)))
     subprocess.run(["pdftoppm", "-r", str(dpi), "-png", str(pdf), str(out_dir / "page")], check=True)
     return sorted(out_dir.glob("page-*.png"), key=lambda p: int(re.search(r"-(\d+)\.png$", p.name).group(1)))
 

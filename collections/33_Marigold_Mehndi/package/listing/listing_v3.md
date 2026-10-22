@@ -1,40 +1,45 @@
 # Etsy listing v3: Marigold & Mehndi Wedding Website (design 33)
 
-Internal listing kit for the seller (G182, 2026-10-18). **Draft — not published on Etsy (K41), and the design is not on sale
-yet** (`platform/lib/marketing/config.ts`: `coming`). Theme `marigold-mehndi`. Written from the common skeleton in
-`docs/19_ALICI_YOLCULUGU.md` §4 (buyer journey, K32), with the same structure as the 01–20 listings: every sentence answers
-a buyer question from docs/19 §3 and promises only what the platform does today. Product language: English (US spelling).
-Design facts come from `platform/themes/marigold-mehndi/` (README, theme.json, index.html). The sales-site copy in
-`platform/lib/marketing/designs.ts` (G182, with translations) is written against the theme as built; re-read it when the GPT
-parts are in.
+Internal listing kit for the seller (rewritten 2026-10-22 on the G154 standard of `collections/21_Crimson_Rose_Atelier/package/listing/listing_v3.md`).
+**Draft: not published on Etsy (K41), and the design is not for sale.** Theme `marigold-mehndi`. Same structure and wording as the 01–21
+listings (`docs/19_ALICI_YOLCULUGU.md` §4): every sentence answers a buyer question and promises only what the platform does today. Product
+language: English (US spelling). Design facts re-read on 2026-10-22 from `platform/themes/marigold-mehndi/` (README, theme.json,
+content.demo.json, index.html, home.html, `img/manifest.json`, `parts.css`), `collections/33_Marigold_Mehndi/assets/gpt/`,
+`platform/lib/marketing/designs.ts`, `platform/lib/audio/catalog.ts`, `platform/lib/print/layouts.ts`, `platform/lib/claim/demo-map.ts`,
+`platform/lib/claim/demo-photos.json` and the live demo page. The look is described from the theme README, respectfully and without any
+religious or cultural claim the theme does not make.
 
 ## 0. Status before publishing
 
-| Item | Status on 2026-10-18 |
+| Item | Status on 2026-10-22 |
 |---|---|
-| Design artwork | **Interim.** The design's own GPT parts (fuchsia silk, velvet, saffron paper, gold laser-cut paisley sleeve, silk tassel, envelope pocket and flap, marigold petals, jharokha arch, henna, brass diya and flame, marigold garland, mehndi pattern, card, share image) and sample photos are ordered in `assets/gpt/GPT_PROMPTS.md` and do not exist yet. The theme runs on toned plain textures and a plain gold band; there is no tassel, no petals, no arches, no henna and no lamps yet. No listing image or video may be made before the parts are in and the theme has been looked at again. |
-| Sale status | `coming` in `platform/lib/marketing/config.ts`: not on the sales site, and `/start?theme=marigold-mehndi` is refused in production until it is `live`. |
-| Start link `https://bkestudio.com/start?theme=marigold-mehndi` | **Not live** (design in review). Not deployed in this task. |
-| Live demo `https://bkestudio.com/start/demo/marigold-mehndi` | Works in a local production build (2026-10-18, G182). **Not deployed**; not opened on the live site or a phone. |
-| Platform features (editor, RSVP questions, Excel / Google Sheets, music, map, guest password, thank-you page, languages) | The same for every design; see the 01–20 listings for their live status. Tried for this theme only in the local build's automated checks (theme-check, G182). |
+| Sale status | **Not for sale.** `platform/lib/marketing/config.ts` lists it as `coming` (hidden from the site), price `[PRICE]`. This listing stays an unpublished draft. |
+| Design build | **Interim build** in the repository and on the live demo: `img/manifest.json` `parts.used` is empty and `parts.css` says "none yet". The silk, velvet and saffron paper are toned textures of other designs' plain GPT pictures, the sleeve is a plain gold band, and the tassel, petals, arches, henna, diyas, flames and garland stay hidden until their parts are placed (README "Interim build"). This design's own GPT parts have arrived in `assets/gpt/parts/` (silk, velvet, paper, tassel, petal_1–3, jharokha, henna, diya, flame, garland, card_small, envelope_front, web_hero), with the PAKET 2 photos and the PAKET 6 print sheets, but they are **not placed** yet (`build_images.py` / `tools/gpt_yerlestir.py` not run with them; PROJECT_STATE: "GPT parts, then gpt_yerlestir + eye review"). Still missing: `sleeve` (W2.2, the laser-cut paisley sleeve), `flap` (W2.13) and `mehndi_pattern` (W2.9). §2 describes the design with the parts that exist and nothing more (it names no paisley sleeve and no mehndi pattern); its look sentences become true only once those parts are placed and deployed (§11). |
+| Start link `https://bkestudio.com/start?theme=marigold-mehndi` | **404 on the live site** (coordinator's curl, 2026-10-22): `/start` opens only live designs. |
+| Live demo `https://bkestudio.com/start/demo/marigold-mehndi` (in the description under TRY THE LIVE DEMO) | **200 on the live site** (coordinator's curl, 2026-10-22). Fetched again in this task (2026-10-22): the interim build, with the sample names Anaya & Kabir, November 20, 2027 · Jaipur, and only the placeholder portrait (`ph_arch-640`, "Your photo here"): `demo-photos.json` has no entry for this design, so the demo has no sample photos yet. Not opened on a phone. |
+| Questions & answers, RSVP questions, music, map and directions, reply form with Excel and Google Sheets, languages, Downloads, guest password, thank-you page | Platform features, the same for every design (README "Shared platform layers"); tried in local production builds for 01–21 (G090, G133). **Not tried with this design on the live site.** This design's default track is Evening Strings (`catalog.ts`); the demo pin is Jaipur, Rajasthan (`demo-map.ts`; the haveli is fictional). Nobody has listened to the 4 music tracks on a real phone. The Google Sheets connection has not been tried with a real Google account, so the description only says that a Google Sheet can be connected. |
 | Real phones (iPhone Safari, Android Chrome) | **Not tested.** |
-| Edit link by email | **Not built.** The buyer copies the link or uses "Email it to myself". |
-| Web address | `bkestudio.com` (primary since 2026-10-19; the earlier `xn--bkestudo-zkb.com` (bkestudıo.com) links redirect here with a permanent 308). G190 (2026-10-20) moved the start link, demo, START HERE guide and QR codes to this address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
-| Shop name, support email | K33: **BKE Studio**, **bkestudio@gmail.com**. |
-| Response time, refund policy | docs/20 §6: 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
-| Price, quantity | **Open** — `[PRICE]`. Quantity 999 like the other designs. |
-| Design fonts and other languages | From the Google Fonts family listing (2026-10-18; not re-read from the live CSS in this task): Rozha One (latin, latin-ext, devanagari), Yrsa (latin, latin-ext, vietnamese). [VERIFY: subsets in the live Google Fonts CSS] |
-| START HERE guide | **Not built** for this design yet (`python3 tools/build_customer_guides.py --designs 33` after the design is registered there, as G175 did for 22–32; QR only from `tools/make_qr.py`). |
-| Listing images and video | **Not produced** — they wait for the GPT parts (no image of the interim look is to be sold). |
+| Description claims | Every sentence of §2 describes a feature of the platform (the same claims as the 21 listing, G154) or this design's look with its own GPT parts (see Design build). No VERIFY note is left in §2; the open placement, live-site and real-device checks are in §11. |
+| Order check (`CLAIM_ORDER_VERIFICATION`) | Mode in production not read in this task. G191 (2026-10-22, in review on a branch, not live) adds a `trust` mode (publish first, check the order afterwards). The description says only what happens if the editor shows "We are confirming your Etsy order"; re-read that sentence if `trust` goes live (§11). |
+| Edit link by email | Off as recorded in the 21 listing (2026-10-17: sending built in G147, waits for SMTP); not re-read in this task. The listing and the START HERE guide promise no email: the buyer opens the editor on any device with the Etsy order number + email (`/my`). |
+| Web address | `bkestudio.com` (primary since 2026-10-19; links of the earlier `xn--bkestudo-zkb.com` redirect here with a permanent 308). |
+| Shop name, support email | **BKE Studio**, **bkestudio01@gmail.com** (the address `bkestudio@gmail.com` in older listing files is wrong). The description gives no email: buyers message the shop on Etsy. |
+| Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
+| Price, quantity | **Blocker:** 1,460 TL is the approved shop price for a template design (docs/23 §1, user, 2026-10-16) and is used here as the proposal; it is not confirmed for this design (`config.ts` price `[PRICE]`). Quantity 999 (Etsy's maximum, no stock limit). |
+| Design fonts and other languages | Read on 2026-10-22 from the Google Fonts subset lists (via the gwfh.mranftl.com mirror of the Google Fonts API; the css2 response this task received showed no subset comments). Rozha One (devanagari, latin, latin-ext) and Yrsa (latin, latin-ext, vietnamese), on the website and on the printable invitation: **no Cyrillic**. So the language line says: accented Latin letters in the design's fonts, Cyrillic and other alphabets in a plain standard font in some or all places. |
+| Etsy rules | `etsy.com/legal/creativity` and the help page "How to Manage Your Digital Listings" answered 403 to this task's fetch (2026-10-22). A web search on 2026-10-22 returned Etsy's House Rules excerpt: items generated with AI tools from the seller's own prompts belong to "Designed by a seller", and the listing description must disclose the use of AI. The AI sentence in GOOD TO KNOW is written for that; re-check in the listing editor (§11). Canva is not part of this product (K24) and was not checked. |
+| START HERE guide | `package/customer/START_HERE.md` + `.pdf`, **built and checked 2026-10-22** (coordinator, `tools/build_customer_guides.py`, the same source text as 31–32, docs/19 Ek A): 10 pages; its links are the start link, the `/my` page and the privacy notice; the QR decodes to the start link (jsQR). The start link answers only once the design is live (404 today). |
+| Printable invitation | `layouts.ts` still uses the **interim** layout (saffron-ivory paper with bands of the fuchsia silk, both toned textures). The design's PAKET 6 sheets are in `assets/gpt/print/invitation_front_5x7.png` and `invitation_back_5x7.png` but not wired (steps in `GPT_PROMPTS.md` PAKET 6). Not printed yet. |
+| Listing images and video | **Not built yet.** Planned: the v4 set (docs/20 §7.10, `tools/listing_v4/README.md`): cover + 7 info images + 11 lifestyle images = 19 JPGs in `package/listing/images_v4/`, and a 4:5 hover video `package/listing/video_v4_4x5.mp4` (§5, §6). Images 01, 02, 07, 09, 10, 15 and the video are taken from the live demo, which shows the interim build: build them only after the GPT parts are placed and deployed. The 11 lifestyle images wait for this design's PAKET 7 GPT scenes (`assets/gpt/mockups/p7_*.png`, none yet). Nothing uploaded to Etsy. |
 
-VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence.
+VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence. `python3 tools/etsy_upload.py --check` checks the title, tags and text rules of this file; the files it lists as blockers (images, video) and every open VERIFY keep `ready_to_publish` false.
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 125 characters.
+Etsy limit: 140 characters. This title: 112 characters.
 
 ```text
-Marigold & Mehndi Wedding Website with RSVP, Silk Envelope Digital Invitation, Henna Arch Photos, Online Editor, Fuchsia Gold
+Marigold & Mehndi Wedding Website with RSVP, Envelope Opening Digital Invitation, Online Editor, Fuchsia Saffron
 ```
 
 ## 2. Description
@@ -43,25 +48,27 @@ Paste from the line below. Section titles in capitals and "•" bullets read wel
 
 ---
 
-A wedding website that opens like a fuchsia silk envelope in a gold paisley sleeve, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
+A wedding website that opens like a real envelope, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
 
-Saffron, fuchsia and gold, marigold garlands, henna and carved arches. Your guests tap the envelope: its silk tassel swings, the gold paisley sleeve slides away, the flap opens onto a velvet lining, marigold petals drift down while small brass lamps light one by one, and a card with your photo rises out of the envelope. Then your invitation follows: Home, Our Story, Details and RSVP, where your photos sit in carved arch windows and henna flows in around them, line by line. [VERIFY: with the design's GPT parts in]
+Fuchsia, saffron and gold, with marigold garlands, henna lines and carved arch windows. Your guests tap a fuchsia silk envelope held shut by a gold sleeve with a silk tassel: the tassel swings, the sleeve slides away, the flap turns up onto its velvet lining, marigold petals drift down while a row of small diya lamps light one by one, and the card with your portrait in a carved arch rises out of the envelope and comes forward. Then your invitation follows: Home on saffron paper under a marigold garland, Our Story with three photos in carved arch windows, each uncovered from the bottom up as henna flows in around its arch, Details and RSVP.
 
 TRY THE LIVE DEMO
 See the envelope open on your own phone before you buy (sample names):
 https://bkestudio.com/start/demo/marigold-mehndi
-Copy the link into your phone's browser. [VERIFY: demo live after deploy]
+Copy the link into your phone's browser.
 
 WHAT YOU GET
 • Your wedding website in the Marigold & Mehndi design: envelope opening, Home, Our Story, Details and RSVP pages
-• A private online editor, designed for phone screens and also working on a computer, with a preview of every page [VERIFY: real iPhone Safari and Android Chrome]
+• A private online editor, designed for phone screens and also working on a computer, with a preview of every page
 • Online RSVP: replies, head counts and up to 10 questions of your own (choices, yes/no, short or long answer, number); you choose which fields are required
-• Download every reply as an Excel file (or CSV) in one tap, or connect a Google Sheet that updates with every new reply [VERIFY: Google Sheets connection tested live]
+• Download every reply as an Excel file (or CSV) in one tap, or connect your own Google Sheet
 • Add-to-calendar buttons for guests (Apple / Outlook and Google Calendar)
-• 5 photo spots with cropping, a countdown, dress code, travel & stay, a menu, up to 10 "good to know" notes, registry and up to 12 questions & answers
-• A map of your venue on the Details page (Google Maps loads only when a guest taps it) and directions with Google Maps, Apple Maps or Waze
-• Soft background music on your Our Story page (one of 4 tracks made for your website, or your own MP3 or M4A file) and soft sounds as the envelope opens. Turn either off if you like; guests can mute the sound with one tap [VERIFY: tracks listened to and approved]
-• A QR code of your website (PNG or SVG) and a printable invitation (5×7 in or A5) to download [VERIFY: printable invitation with the design's own print artwork]
+• 5 photo spots with cropping, a countdown, dress code, travel & stay and registry buttons, and up to 12 questions & answers
+• A map of your venue on the Details page (Google Maps loads only when a guest taps it) and directions with Google Maps, Apple Maps or Waze; add a separate reception place if you need one
+• Background music on your Our Story page (one of 4 tracks made for your website, or your own MP3 or M4A file) and sound effects as the invitation opens. Turn either off if you like; guests can mute the sound with one tap
+• Your website in English, Spanish, French, German or Turkish, or in several with a language button for guests: the design's headings, buttons, reply form and dates come translated, and your own texts can be translated automatically as a draft that you check and approve
+• A QR code of your website (PNG or SVG) for printed cards and signs
+• Downloads: your whole website as a PDF, and a printable invitation in your design (5 × 7 in or A5, with an optional back side, bleed and crop marks for a print shop)
 • An optional guest password, and a thank-you page for after the wedding
 • A START HERE guide (PDF) with your start link and every step explained
 • Your website stays online until 12 months after your wedding date
@@ -74,32 +81,33 @@ HOW IT WORKS IN 3 STEPS
 WHAT YOU CAN CHANGE
 • Your names and how they appear
 • Date, ceremony time and time zone; month-first or day-first date style
-• Venue, address, map and directions, and the order of the day (up to 10 rows)
+• Venue, address, map and directions, a separate reception place, and the order of the day (up to 10 rows)
 • Your story: an intro line, three captions and its music (one of 4 tracks, your own file or none)
 • 5 photos: a portrait, 3 story photos and the venue, each cropped to its frame
-• Questions & answers, dress code, travel & stay, menu, good-to-know notes and registry links
+• Questions & answers (up to 12), dress code, travel & stay and registry links
 • RSVP deadline and your reply form: required or optional fields and up to 10 questions of your own
-• The design's headings, labels and buttons, in your own words (for example "You are invited" or "Kindly reply")
+• The design's headings, labels and buttons, in your own words (for example "Let the celebrations begin" or "Moments we hold dear")
 • Which optional sections show
-What stays as designed: the artwork, colors, fonts, page layout and the opening animation.
+What stays as designed: the artwork, colors, fonts, page layout and the envelope animation.
 
 WHAT YOUR GUESTS SEE
-Your link opens the closed envelope. One tap opens it and leads into your pages. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging apps show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
+Your link opens a closed silk envelope. One tap opens it into your pages. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging services show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
 
 WHAT YOU NEED
 • A phone or computer with a web browser
-• Your Etsy order number (in your Etsy order confirmation)
+• Your Etsy order number (on Etsy under You → Purchases and reviews, or in your Etsy confirmation email)
 • Your wedding details; photos are optional
 No Canva account, no app, no design skills.
 
 GOOD TO KNOW
 • Digital product: nothing is printed or shipped. Nothing to fill in at checkout.
 • One website per order. You choose your web address when you start (for example …/anaya-and-kabir); it cannot be changed later. A custom domain (yournames.com) is not included.
-• Save your private edit link when it appears: it opens your editor, and we cannot email it to you yet.
+• Your Etsy order number is your key: with it and your email, your editor opens right away, and again on any phone or computer to continue where you left off. No account or password.
+• If your editor says it is confirming your Etsy order, you can set everything up in the meantime; Publish opens once the order is confirmed, usually within 24 hours.
 • After you publish, names and date can be changed 3 times in total; typo fixes and moving the date by up to 7 days are always free. Everything else can be changed as often as you like.
-• Your website can also show in Spanish, German, French or Turkish; texts you write yourself are translated only when you approve them [VERIFY: languages live on production]. Accented Latin letters use the design's fonts; Cyrillic and other alphabets show in a plain standard font.
+• Automatic translation is a machine-made first draft: read each text before you approve it. Your own texts can also be in any other language; accented Latin letters use the design's fonts, while Cyrillic and other alphabets show in a plain standard font in some or all places.
 • Colors and fonts do not change. Music plays only on your Our Story page, and some phones wait for a guest's tap before it starts. Upload only music you have the right to use.
-• The design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. [VERIFY: Etsy AI disclosure wording and the "Designed by" setting] Sample names, dates, places and photos are fictional.
+• The painted design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. Sample names, dates, places and photos are fictional.
 • No returns, exchanges or cancellations: this is a digital product with instant access. If something on your website does not work as described, message us on Etsy and we will fix it.
 
 QUESTIONS?
@@ -109,23 +117,25 @@ Message us here on Etsy. We reply within 24 hours.
 
 ## 3. Tags
 
-Etsy: 13 tags, each up to 20 characters (checked). Keyword choices are hypotheses (no search-volume data). No other company's brand name.
+Etsy: 13 tags, each up to 20 characters (checked). Keyword choices are hypotheses (no search-volume data). No other company's brand name. No tag says who the design is for (no cultural or religious claim).
 
 ```text
 wedding website
 rsvp website
 digital invitation
+envelope invitation
 online rsvp
 wedding rsvp
-indian wedding
-mehndi invitation
+wedding invitation
 marigold wedding
 henna wedding
-fuchsia and gold
-sangeet invite
-desi wedding
-silk envelope
+mehndi wedding
+fuchsia wedding
+saffron wedding
+pink and gold
 ```
+
+Character counts: 15 · 12 · 18 · 19 · 11 · 12 · 18 · 16 · 13 · 14 · 15 · 15 · 13 (all ≤ 20).
 
 ## 4. Category and attributes
 
@@ -135,39 +145,49 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 |---|---|
 | Category | Paper & Party Supplies › Paper › Invitations & Announcements › Invitations (or the closest digital wedding category Etsy offers) |
 | Type | Digital files |
-| Who made it | I did [VERIFY: the "Designed by" option for designs made with AI image tools] |
+| Who made it | I did [VERIFY: Etsy's House Rules (web search excerpt, 2026-10-22) put designs made with AI tools from the seller's own prompts under "Designed by a seller"; pick the matching option in the listing editor] |
 | What is it | A finished product |
 | When was it made | Made to order (choose what Etsy offers for digital items) |
 | Occasion | Wedding |
-| Primary color | Pink |
-| Secondary color | Gold |
+| Primary color | Pink (fuchsia) |
+| Secondary color | Orange (saffron) |
 | Style / theme | Classic, Romantic (if offered) |
 | Personalization | Off (nothing to fill in at checkout; the buyer fills in the website) |
-| Digital file | `START_HERE.pdf` from `package/customer/`: **not produced yet** |
-| Price | **[PRICE]** (not decided) |
-| Quantity | 999, Etsy's maximum |
-| Shop section | [SHOP SECTION] (user's choice) |
+| Digital file | `START_HERE.pdf` from `package/customer/` (built and checked 2026-10-22; Etsy: up to 5 files, 20 MB each, as recorded in the 21 listing) |
+| Price | **1,460 TL proposed** (the approved shop price for a template design, user, 2026-10-16, docs/23 §1; about USD 29.48 at 49.53 TRY per USD). Shop currency TRY (K38). **Not confirmed for this design** (`config.ts` `[PRICE]`): blocker until the user confirms it |
+| Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) [VERIFY: whether Etsy lowers a digital listing's quantity on each sale] |
+| Shop section | Suggestion: `Floral & Garden` (an existing section, docs/20 §3; the user's choice) |
 | Renewal | [AUTO RENEW: yes/no] |
 
 ## 5. Images and alt text
 
-**Not produced.** They are made after the GPT parts are in the theme (same pipeline as 01–20: `python3 tools/listing_editorial.py --theme marigold-mehndi`, rules in `docs/21_ILAN_GORSELLERI.md`; real screens of the theme, no QR code or web address in an image). Planned set and alt-text drafts (rewrite against the real files):
+The v4 set (docs/20 §7.10, `tools/listing_v4/README.md`, the template approved on design 01 on 2026-10-21): 19 JPGs, 4:5 (2000 × 2500), in `package/listing/images_v4/`, in Etsy upload order. **Not built yet** for this design, and the opening stills must wait for the placed GPT parts (§0). Images 01, 02, 07, 09, 10 and 15 use opening stills from the live demo (`shots.mjs`); 03–06, 08 and the other phone screens are real screens of a local production build (`tools/listing_templates/capture.ts`, sample content); 12–15 add tablet, laptop and printed-invitation renders (`serve.ts` + `devices.mjs`); 09–19 place the screens into this design's PAKET 7 GPT scenes, which do not exist yet. The rows below follow the order and headlines of design 01's files (`collections/01_Olive_Ivory/package/listing/images_v4/`, `slides.py`, `lifestyle.py` LIFE). Alt texts are planned: rewrite each against its finished file. Image 07 carries a QR code of the live demo and images 04 and 19 a web address of ours: see §11.
 
-| # | File | Alt text (draft) |
+| # | File | Alt text |
 |---|---|---|
-| 1 | `01_cover.png` | Marigold & Mehndi wedding website with online RSVP on a phone: the fuchsia silk envelope in its gold paisley sleeve and the names Anaya & Kabir |
-| 2 | `02_opening.png` | The envelope opens: phones show the closed envelope, the sleeve sliding away, the flap open on the velvet lining with marigold petals, and the card rising out |
-| 3 | `03_pages.png` | Every page guests need, on five phone screens: home with a countdown, our story with carved arch photo frames, the invitation, the order of the day and the RSVP page |
-| 4 | `04_edit.png` | Make every word yours: the online editor on a phone, next to a list of what you change. The artwork, colors and fonts stay as designed |
-| 5 | `05_rsvp.png` | Every reply in one place: the guest's RSVP form and the couple's guest list with a Download Excel button |
-| 6 | `06_details.png` | Everything guests ask: the order of the day with add-to-calendar buttons, the venue, the map and questions and answers |
-| 7 | `07_how.png` | Three simple steps: start with your Etsy order number, personalize, then publish and share one link |
-| 8 | `08_included.png` | What is included: the envelope opening and four pages, your own online editor, online RSVP, QR code and START HERE guide |
+| 1 | `01_cover.jpg` | Marigold & Mehndi wedding website with RSVP: two phones show the closed fuchsia silk envelope in its gold sleeve with a silk tassel, and the card with a sample portrait in a carved arch and the names Anaya & Kabir; badges: No Canva needed, RSVP guest list included, Edit on your phone |
+| 2 | `02_reveal.jpg` | Opens like a real envelope: three phones show guests tapping the envelope, the sleeve sliding away and the flap opening onto velvet, and the card with your photo rising out; sound and animation included |
+| 3 | `03_rsvp.jpg` | Collect RSVPs with ease: a guest's reply form in this design and the couple's guest list in the editor with reply counts and a Download Excel button; badges: your own questions, Excel guest list download |
+| 4 | `04_edit.jpg` | Edit everything on your phone, no Canva, no app, no account: the editor's list of pages, the Headings & labels screen and the "Your website is live" screen; every change saves by itself |
+| 5 | `05_pages.jpg` | Every page included: four phones show Home with the portrait in a carved arch under a marigold garland, Our Story, Details with the order of the day, and RSVP; countdown, schedule, map, Q&A, add-to-calendar, music, dress code, travel and registry |
+| 6 | `06_included.jpg` | What's included: the invitation on a phone beside a checklist: the envelope opening and four pages, online RSVP with your own questions, guest list and one-tap Excel download, countdown and add-to-calendar, 5 photos, music and venue map, QR code and printable invitation, editor on phone or computer, online until 12 months after your wedding |
+| 7 | `07_demo.jpg` | Try it before you buy: the closed silk envelope on a phone next to a QR code of the live demo; sample names and photos, yours replace them |
+| 8 | `08_how.jpg` | How it works: open the START HERE guide from your Etsy purchases, start with your Etsy order number and first names, personalize, then publish and share one link by text, WhatsApp, email or QR; the setup step "Add your photo" on a phone |
+| 9 | `09_closeup.jpg` | Designed to be opened: a close-up of a phone in a styled scene, showing the opened card with a sample photo and the names |
+| 10 | `10_tap.jpg` | One tap and it opens: a hand about to tap a phone that shows the closed silk envelope; sound and animation included |
+| 11 | `11_home.jpg` | Guests open it anywhere, with no app and no account: a guest at home holds a phone with the Home page |
+| 12 | `12_devices.jpg` | Beautiful on every screen: the website on a tablet and on a phone |
+| 13 | `13_laptop.jpg` | Edit on your laptop too: the private editor with its page preview on a laptop |
+| 14 | `14_together.jpg` | Plan it together: the guest list on a phone and on a laptop; your editor opens on any device |
+| 15 | `15_print.jpg` | Print it or send it: the printable invitation in this design (5 × 7 in or A5 PDF) beside a phone with the closed silk envelope |
+| 16 | `16_need.jpg` | Everything your guests need: four phones show the invitation, the venue and map, questions and answers, and a sent RSVP |
+| 17 | `17_day.jpg` | On the wedding day: the order of the day on a phone at a reception table, with add-to-calendar buttons |
+| 18 | `18_replies.jpg` | Every reply in one place: the list of replies on a phone beside a bouquet; download it as Excel in one tap |
+| 19 | `19_share.jpg` | Share it with one link by text, WhatsApp, email or QR: one person shows the Share screen to another; your own address with your names |
 
 ## 6. Video
 
-**Not produced** (after the GPT parts): the envelope opening recorded from the real website (sample names), silent, square,
-5–15 s, the last frames dissolving back into the closed envelope so Etsy's loop has no black flash. [VERIFY: Etsy video rules in the listing editor]
+`package/listing/video_v4_4x5.mp4`: **not built yet**; record it only after the GPT parts are placed and deployed (the live demo shows the interim build today). Planned (`tools/listing_v4/stageE.sh`, docs/20 §7.10): the envelope opening recorded from the live demo in slow motion (page time 50× slower, `rec.mjs`) and played back at 60 fps by `full45.py`: 1080 × 1350 (4:5, the shape of Etsy's search grid), H.264, silent, about 10 seconds; its last 0.4 s dissolve into the first frame, so Etsy's loop has no jump. Sample names. [VERIFY: Etsy video rules in the listing editor]
 
 ## 7. FAQ (end of the description, or the shop FAQ)
 
@@ -175,13 +195,13 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 No. You edit your website in your web browser, on your phone or computer. Your guests only need the link.
 
 **How do I start after buying?**
-Download the START HERE PDF from your Etsy purchases, open the start link and enter your Etsy order number.
+Download the START HERE PDF from your Etsy purchases, open the start link and enter your Etsy order number. You can also use the start link in our Etsy message.
 
 **Do I need an account or a password?**
-No. You get a private edit link that opens your editor. Save it right away; we cannot email it to you yet.
+No. Your Etsy order number and the email you start with open your editor on any phone or computer. You also get a private edit link as a shortcut.
 
 **What if I lose my edit link?**
-If your editor is still open, copy it again under Share. Otherwise message us on Etsy with your order number: we send you a new link and the old one stops working.
+No problem: on any phone or computer, open the "Create your website" page of our website (the address is in your START HERE guide) and enter your Etsy order number and the email you started with. Your editor opens where you left off.
 
 **Can I change things after I publish?**
 Yes, as often as you like. Names and date can be changed 3 times in total after publishing; typo fixes and moving the date by up to 7 days are free.
@@ -189,47 +209,100 @@ Yes, as often as you like. Names and date can be changed 3 times in total after 
 **Can I change the headings and wording?**
 Yes. Every page of the editor has "Headings & labels". The artwork, colors and fonts stay as designed.
 
+**Can it be in another language?**
+Yes. Your website can be in English, Spanish, French, German or Turkish, or in several of them: the design's built-in texts come translated, and your own texts can be translated automatically (check each translation before you approve it). You can write your own texts in any other language too.
+
 **How do my guests reply?**
-On your RSVP page, with no app or account. You choose which fields are required and can add up to 10 questions of your own, and download every reply as an Excel file (or CSV).
+On your RSVP page, with no app or account. You choose which fields are required and can add up to 10 questions of your own. You see every reply in your editor and can download them all as an Excel file (or CSV) in one tap, or connect your own Google Sheet.
 
 **How many guests can I invite?**
 As many as you like. One reply can include up to 10 people.
 
-**Is the opening very long?**
-Under four seconds, and guests can tap "Skip" at any time. On phones set to reduce motion it goes straight to your home page.
+**Is there music?**
+Yes, if you like: music on your Our Story page, from 4 tracks made for your website or your own MP3 or M4A file, and sound effects as the invitation opens. You can turn music or sound effects off, and guests can mute the sound with one tap.
 
 **Can guests find the venue?**
-Yes. Your Details page can show a map of the venue and directions with Google Maps, Apple Maps or Waze.
+Yes. Your Details page can show a map of the venue (Google Maps loads only when a guest taps it) and directions with Google Maps, Apple Maps or Waze. If the reception is somewhere else, add it as a second place.
+
+**Can I add a password?**
+Yes, optional: one shared password that you send to your guests with the link.
 
 **How long does my website stay online?**
-Until 12 months after your wedding date. After the wedding it can turn into a thank-you page.
+Until 12 months after your wedding date. After the wedding it can turn into a thank-you page. Need it longer? Message us on Etsy before your "Online until" date and we can extend it.
+
+**Can I use my own domain?**
+Not at the moment. Your address is your names on our web address.
 
 **Is anything printed or shipped?**
-No. It is a digital product. You can download a printable invitation and print it yourself.
+No. It is a digital product. Your editor makes a printable invitation in your design (5 × 7 in or A5) that you can print at home or at a print shop.
 
-## 8. Etsy's automatic messages
+## 8. Etsy's automatic messages (shop-wide, the same for every design)
 
-Shop-wide, the same for every design (see `collections/15_Cherry_Blossom/package/listing/listing_v3.md` §8 and docs/20 §7.1); no change for this design.
+Etsy's "Message to Buyers for Digital Items" applies to every digital listing, so it cannot carry this design's own start link: it links
+the design chooser `https://bkestudio.com/start` (docs/19 §4.4). The START HERE PDF carries this design's own link. Both texts are already entered in
+Shop Manager (docs/20 §7.1) and need no change for this design.
+
+Message to Buyers for Digital Items:
+
+```text
+Thank you for your order! Your download is your START HERE guide (PDF). Open it and tap the start link inside.
+
+Can't open the PDF? Start here instead and choose the design you bought: https://bkestudio.com/start
+
+You will enter your Etsy order number, your email and your first names. To continue later on any phone or computer, open https://bkestudio.com/my and enter the same order number and email. No account or password.
+
+Questions? Message us here on Etsy with your order number.
+```
+
+Message to Buyers (receipt):
+
+```text
+Thank you! Start your wedding website from the START HERE PDF in your download, or at https://bkestudio.com/start (choose the design you bought). To continue later on any device, open https://bkestudio.com/my with the same order number and email. Questions? Message us on Etsy.
+```
 
 ## 9. After the sale
 
-Messages for each situation: `docs/19_ALICI_YOLCULUGU.md` §4.5 (the same for every design).
+Messages for each situation are in `docs/19_ALICI_YOLCULUGU.md` §4.5 (the admin panel reads them): `welcome_start`, `start_link_reminder`, `publish_blocked_pending`, `order_confirmed`, `how_to_publish`, `new_edit_link`, `order_already_used`, `wrong_design_started`, `extra_change_granted`, `date_moved`, `photo_upload_help`, `guest_access_help`, `general_help`, `archive_notice`, `after_wedding_tip`, `review_request`, `refund_or_problem`, `delete_data`.
+Rules: the edit link is sent only with `new_edit_link`, inside this order's Etsy conversation; no message asks the buyer for their edit
+link; one review request per order, the same text for everyone, never with an incentive.
 
-## 10. What differs from the 01–20 listings
+## 10. What differs from the 01–21 listings
 
-- The closed object is an envelope, but not the V flap + wax seal of 01–21: a silk envelope with a straight flap, held by a gold sleeve with a tassel ("the sleeve slides away", "the flap opens onto a velvet lining").
-- Cultural design: marigolds, henna, brass lamps and carved arches only; no religious symbol in the artwork or the text. Tags avoid religious words.
-- The languages line follows G144 (five languages) instead of "built-in messages are in English" [VERIFY].
-- The printable invitation (G139) is named, with a VERIFY until the design's own print sheets (PAKET 6) are in.
+- Not for sale (`coming`); the price is a proposal; the start link answers 404 until the design is live.
+- The theme is still the interim build: §2 describes the look with this design's own GPT parts, which have arrived but are not placed (§0). It names only parts that exist; the paisley sleeve and the mehndi pattern (not delivered) are left out.
+- The envelope is not the V flap and wax seal of 01–21: a portrait silk envelope with a straight flap, held shut by a gold sleeve with a tassel.
+- The look is described from the theme README (marigolds, henna, diya lamps, carved arch windows) without religious or cultural claims; no tag says who the design is for.
+- No sample photos in the demo yet: the demo line says "sample names".
+- "What you can change" has no monogram line (this design shows none) and gives "Let the celebrations begin", this design's invitation heading, as an example.
+- Language line from this theme's real fonts (§0): no Cyrillic.
+- Images and video: the 4:5 v4 set (19 images + hover video) instead of the editorial 9 + square video of 01–21.
 
 ## 11. Before you publish this listing
 
-- [ ] GPT parts (PAKET 5, PAKET 2, PAKET 6) in the theme, the theme looked at again, `config.ts` status `live` (integrator)
-- [ ] Sales-site copy in `platform/lib/marketing/designs.ts` re-read against the theme with its GPT parts (+ translations)
-- [ ] Start link and demo answer on the live site and on a real phone
-- [ ] START HERE guide written for this design (`package/customer/`)
-- [ ] Price decided and filled in
-- [ ] Images and video produced; alt texts read against them
+- [ ] The user approves this design's sale and price (`config.ts` from `coming` to `live`; 1,460 TL proposed)
+- [ ] This design's own GPT parts placed in the theme (`build_images.py` → `parts.css`, `tools/gpt_yerlestir.py`), eye-checked and deployed; the missing parts (`sleeve`, `flap`, `mehndi_pattern`) delivered or accepted as missing; every look sentence of §2 read against the live demo (interim build on 2026-10-22)
+- [ ] Sample photos (PAKET 2, `assets/gpt/photos/`) built into the live demo (`scripts/build-demo-photos.ts`; `demo-photos.json` has no entry yet); then the demo line may say "sample names and photos"
+- [ ] Design deployed as `live`; start link answers on the live site (`200`, design named): 404 on 2026-10-22
+- [x] Live demo of this design answers on the live site (`200`, coordinator's curl, 2026-10-22)
+- [ ] Start link and demo opened on a real phone; the QR in START_HERE.pdf scanned with a phone camera
+- [x] START HERE guide built and checked for this design (2026-10-22, `tools/build_customer_guides.py`: 10 pages; links: start link, `/my`, privacy notice; the QR decodes to the start link with jsQR)
+- [ ] Questions & answers and RSVP questions tried on the live site with this design
+- [ ] Music, map and directions, the reply form and Excel download tried on the live site with this design; the 4 tracks listened to on a real phone and approved; Google Sheets connected with a real Google account
+- [x] Order sentence true in every order-check mode in production today (G154, K48: only if the editor says it is confirming the order; "usually within 24 hours")
+- [ ] Order check mode read in production (`CLAIM_ORDER_VERIFICATION`: off, manual, etsy); if G191's `trust` mode goes live, the order sentence re-read
+- [ ] Buyer journey tried on a real iPhone (Safari) and Android phone (Chrome)
+- [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf and its QR rebuilt
+- [x] Hosting extension decided (K48, 2026-10-17: on request via Etsy before the "Online until" date, no price promised)
+- [ ] Renewal decided
+- [ ] Languages and Share → Downloads tried on the live site with this design
+- [ ] Printable invitation: PAKET 6 sheets (`assets/gpt/print/`) wired in `layouts.ts` (GPT_PROMPTS.md PAKET 6) and one printed copy checked
+- [ ] v4 images 01–08 built after the GPT parts are live; alt texts read against the files
+- [ ] PAKET 7 scenes made (`assets/gpt/mockups/p7_01…p7_11`); images 09–19 built; all 19 alt texts rewritten against the files
+- [ ] Video built (`video_v4_4x5.mp4`) from the live demo with the placed parts, and watched
+- [ ] QR code of the live demo in image 07 and our web address in images 04 and 19: the user decides against docs/15 ("Etsy dışına yönlendirme": no QR in the listing, Off-Platform policy)
+- [ ] `tools/etsy_upload.py` reads `images_editorial/` and `video.mp4`; pointed at `images_v4/` and `video_v4_4x5.mp4` (coordinator)
 - [ ] Shop section chosen (§4)
 - [ ] Etsy rules re-checked in the listing editor (title, tags, images, video, AI disclosure, "Designed by")
 - [ ] `python3 tools/etsy_upload.py --check` passes and no VERIFY is left in this file
+
+<!-- listing-kit:media -->
