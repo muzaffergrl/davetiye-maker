@@ -240,16 +240,17 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
       back: { bg: cover('paper'), images: [sealAt('top')] },
     },
   },
-  // 22 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
+  // 22 (G422, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): ivory laid card, a gold crescent over olive
+  // branches at the top (down to ~15 %), a gold hairline (~77 %) over the oil-painted night lake along the bottom on the
+  // front; a short olive-and-crescent at the top of the back (~10.5 %) and a slim lake strip below ~93 %. `cover` for 5×7
+  // and A5 (ChatGPT's 1067×1474). Charcoal ink; boxes ~2 % clear of it all.
   'nocturne-lake-estate': {
     collection: '22_Nocturne_Lake_Estate',
-    sources: { front: 'print/invitation_front.png', back: 'print/invitation_back.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500'),
     script: "'Cinzel', Georgia, serif", serif: "'Cormorant Garamond', Georgia, serif", caps: "'Jost', Arial, sans-serif",
     namesInCaps: true,
-    ink: '#1C1D15', accent: '#8A6A3C', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#1C1D15', accent: '#8A6A3C', front: [17, 10, 25.5, 10], back: [12.5, 9, 9.5, 9],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
   // 23 (G423, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): ivory card, seed-pearl swags and a champagne

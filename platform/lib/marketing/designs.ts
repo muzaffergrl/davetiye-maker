@@ -1244,9 +1244,9 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
  */
 const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> & { home: string }> = {
   'nocturne-lake-estate': {
-    style: msg("Charcoal envelope, champagne-gold botanical seal and a candlelit Lake Como wedding."),
-    opening: msg("Your guests tap the envelope. A curved charcoal letter flap lifts on its hinge. The portrait rises from behind the illustrated lakeside pocket and settles before the wedding home page opens."),
-    home: msg("Charcoal paper, champagne gold and candlelight by the water. A quiet, refined invitation opens onto the lake, the story and the evening ahead."),
+    style: msg("Charcoal laid-paper envelope with a deep diamond flap, a vellum lake-panorama band and a hammered gold crescent brooch."),
+    opening: msg("Your guests tap the envelope. The gold crescent catches the moonlight and rises to stay above it as the moon, the vellum band slides away, the diamond flap opens onto a painted night sky over the lake and the ivory card with your portrait rises from the pocket before the wedding home page opens."),
+    home: msg("Charcoal laid paper, champagne gold and an oil-painted lake at night. Your portrait sits in an arched villa window and your story photos behind shutters that open as guests scroll."),
   },
   'velvet-jewel-box': {
     style: msg("Aubergine velvet envelope in a champagne satin band, a rose-gold solitaire threaded on the ribbon."),
@@ -1315,18 +1315,6 @@ for (const [id, preview] of Object.entries(PREVIEW_DESIGN_COPY)) {
 
 // Interior art/layout/motion differ for these eleven previews; envelope copy and other products are unchanged.
 const UNIQUE_INTERIORS: Record<string,{fonts:string[];home:string;story:string;details:string;rsvp:string}> = {
-  "nocturne-lake-estate": {
-    "fonts": [
-      "Cormorant Garamond",
-      "Great Vibes",
-      "Lora",
-      "Italiana"
-    ],
-    "home": "An Italian lakeside terrace: panoramic portrait, refined names and candlelit ivory invitation.",
-    "story": "Panoramic villa frames: a full-width opening photograph and two intimate moments beneath it.",
-    "details": "A villa dinner programme with generous time columns and a panoramic venue photograph.",
-    "rsvp": "A charcoal-and-champagne reply suite with Italian botanical stationery."
-  },
   "grand-theatre-premiere": {
     "fonts": [
       "Cormorant Garamond",
@@ -1452,6 +1440,23 @@ for(const [id,p]of Object.entries(UNIQUE_INTERIORS)){
 // Rebuilt from the design's own layered GPT parts (docs/35, 2026-10-22; pilot G423): its own fonts, pages and palette
 // replace the shared rebuilt-eleven copy above.
 const REBUILT: Record<string, Pick<DesignCopy, 'fonts' | 'pages' | 'palette' | 'llmsLine'>> = {
+  'nocturne-lake-estate': {
+    fonts: ['Cinzel', 'Cormorant Garamond', 'Jost'],
+    pages: {
+      home: msg('An oil-painted lake at night with the gold crescent as the moon, your portrait in an arched villa window on an ivory card, the invitation on ivory laid paper with a countdown and calendar links, and a candle lantern to sign off.'),
+      story: msg('Three photos in villa windows, left and right, each behind two charcoal shutters that open outward as guests scroll while the photo warms out of the candlelight.'),
+      details: msg('The order of the evening on an ivory card, the venue in a wide frame over a stone balustrade with two lanterns, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('An ivory reply card with your reply-by date and the configurable RSVP form; gold leaf and rose petals drift down and the lantern glows brighter when a reply is sent.'),
+    },
+    palette: [
+      { name: msg('Night'), hex: '#11120F' },
+      { name: msg('Charcoal'), hex: '#1C1D15' },
+      { name: msg('Champagne'), hex: '#E0C7A4' },
+      { name: msg('Gold'), hex: '#C7A978' },
+      { name: msg('Ivory'), hex: '#F1E4CC' },
+    ],
+    llmsLine: 'a charcoal laid-paper envelope with a diamond flap, a vellum lake-panorama band and a gold crescent brooch that rises as the moon, an arched villa window portrait and story photos behind opening shutters.',
+  },
   'velvet-jewel-box': {
     fonts: ['Pinyon Script', 'Bodoni Moda'],
     pages: {

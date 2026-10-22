@@ -72,13 +72,9 @@
     "accommodation": null
   },
   "media": {
-    "hero_portrait": "/themes/nocturne-lake-estate/img/couple-960.webp",
-    "memory_photos": [
-      "/themes/nocturne-lake-estate/img/couple-960.webp",
-      "/themes/nocturne-lake-estate/img/lake_view-1024.webp",
-      "/themes/nocturne-lake-estate/img/terrace-1024.webp"
-    ],
-    "venue_image": "/themes/nocturne-lake-estate/img/lake_view-1024.webp",
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
     "couple_clip": null
   },
   "optional_blocks": {
