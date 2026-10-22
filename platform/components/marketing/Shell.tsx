@@ -160,7 +160,8 @@ export function Footer({ guides, m = enMarket }: { guides: Guide[]; m?: Market }
           <div>
             <h2 className={s.footerTitle}>{t('Guides')}</h2>
             <ul>
-              {guides.slice(0, 4).map((g) => (
+              {/* G191: every guide, so none depends on /guides alone for its site-wide links */}
+              {guides.map((g) => (
                 <li key={g.slug}>
                   <a href={m.href(g.path)}>{g.title.replace(/\s*\(.*\)$/, '').replace(/:.*$/, '')}</a>
                 </li>

@@ -7,7 +7,7 @@ import { GET as getRobots } from '../app/(marketing)/robots.txt/route.ts';
 import { GET as getSitemap } from '../app/(marketing)/sitemap.xml/route.ts';
 import { MARKETING } from '../lib/marketing/config.ts';
 import { llmsFullTxt, llmsTxt, robotsTxt, SEARCH_BOTS, sitemapEntries, sitemapXml, TRAINING_BOTS } from '../lib/marketing/crawl.ts';
-import { liveDesigns } from '../lib/marketing/designs.ts';
+import { catalogDesigns } from '../lib/marketing/designs.ts';
 import { faqItems } from '../lib/marketing/faq.ts';
 import { LANGS, PREFIXED_LANGS } from '../lib/marketing/i18n.ts';
 import { loadGuides } from '../lib/marketing/guides.ts';
@@ -100,13 +100,13 @@ test('robots: decisions in config — training bots can be closed; sitemap line 
   assert.match(launched, /^Sitemap: https:\/\/example\.com\/sitemap\.xml$/m);
 });
 
-test('sitemap: empty until launch; then every page, live design and guide with a real lastmod', () => {
+test('sitemap: empty until launch; then every page, catalogue design (live + preview) and guide with a real lastmod', () => {
   const guides = loadGuides();
   assert.doesNotMatch(sitemapXml(guides, MARKETING), /<url>/);
   const cfg = withComing(readyConfig());
   const xml = sitemapXml(guides, cfg);
   const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-  const expected = [...corePages(cfg).map((p) => p.path), ...liveDesigns(cfg).map((d) => `/designs/${d.id}`), ...guides.map((g) => g.path)];
+  const expected = [...corePages(cfg).map((p) => p.path), ...catalogDesigns(cfg).map((d) => `/designs/${d.id}`), ...guides.map((g) => g.path)];
   // G144: every page in five languages (English at the root, the others under /tr, /es, /de, /fr)
   assert.equal(locs.length, expected.length * LANGS.length);
   for (const p of expected) {
@@ -123,6 +123,9 @@ test('sitemap: empty until launch; then every page, live design and guide with a
   for (const m of xml.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)) assert.match(m[1], /^\d{4}-\d{2}-\d{2}$/);
   assert.doesNotMatch(xml, /changefreq|priority/);
   assert.ok(!locs.some((l) => /\/start|\/edit|\/api|unreleased-fixture/.test(l)), 'no private, demo or unreleased URLs');
+  // G191: a preview design ("Coming soon on Etsy") has an indexable page linked from /designs, so it is listed too
+  const preview = cfg.designs.find((d) => d.status === 'preview');
+  if (preview) assert.ok(locs.includes(`https://example.com/designs/${preview.id}`), `preview design ${preview.id}`);
 });
 
 test('llms.txt: llmstxt.org shape; every link is a sitemap URL; llms-full.txt carries designs, FAQ and every guide', () => {

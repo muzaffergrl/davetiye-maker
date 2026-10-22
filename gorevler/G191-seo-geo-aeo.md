@@ -28,8 +28,21 @@ denetle; bulguları önceliklendir, kod içinde düzeltilebilenleri düzelt.
 - Rapor + düzeltmeler + `npm test` / typecheck / build yeşil.
 - `launched: false` korunur (indeksleme kararı kullanıcıda).
 
-## Sonuç
-(doldurulacak)
+## Sonuç (2026-10-22, bulut oturumu)
+- Rapor: `docs/35_SEO_GEO_AEO.md`. claude-seo `23a2a81` (skill 2.4.2) ile yerel production build, 242 sayfa (5 dil).
+  Puan, yayına hazır hâli için **86/100**; bugün `launched: false` olduğu için indekslenebilirlik bilerek 0.
+  Kritik ya da yüksek öncelikli kod bulgusu yok. `agentic_check` bütün P0/P1 kontrollerden geçti.
+- Düzeltilenler: `components/marketing/Shell.tsx` footer artık bütün rehberleri listeliyor (önceden 2 rehber 8–9 iç link
+  alıyordu, ötekiler 47). `lib/marketing/crawl.ts` sitemap katalogdaki `preview` tasarımları da içeriyor; llms.txt yine
+  yalnız `live`. Test: `tests/marketing-crawl.test.ts`. Kayıt: docs/14 §15.
+- Ham veri: `platform/previews/g191/` (`crawl.json`, `agentic-check.json`, `crawl_audit.py`).
+- Testler: TEST_SONUCU
+- Yapılmadı: canlı site denetimi (bulut ağı bkestudio.com'a ulaşamıyor), anahtar kelime/SERP verisi, GSC/Bing/CrUX.
+
+## Önerilen görevler (entegratöre)
+- Lansman günü: GSC + Bing Webmaster doğrulama ve sitemap; canlıda `agentic_check.py --ua-matrix`; IndexNow anahtar route'u
+  ve gönderim (docs/35 #2–#5).
+- Sosyal profiller açılınca `config.ts` `social` (sameAs) (docs/35 #6).
 
 ## Günlük
 - 2026-10-22 alindi: claude-session-nice-faraday
