@@ -1172,6 +1172,18 @@ const dict: Dict = {
   "Powder blue": "Pudra mavisi",
   "Porcelain": "Porselen",
   "Gilt": "Yaldız",
+  // G445 Suede Ranch Lace (45, coming)
+  "A tan suede envelope with a lace strip and fringe, a leather cord and a silver concho, and photos in tooled leather frames behind ranch gates": "Dantel şeritli ve saçaklı ten rengi süet zarf, deri kordon ve gümüş konço, çiftlik kapılarının ardında işlenmiş deri çerçevelerde fotoğraflar",
+  "A suede, lace and leather ranch wedding website: the concho turns, the cord slips away and golden-hour light sweeps in as your invitation rises. Personalize it in your online editor.": "Süet, dantel ve deri çiftlik düğün sitesi: konço döner, kordon kayıp gider ve davetiniz yükselirken altın saat ışığı ekranı yalar. Çevrim içi düzenleyicinizde kişiselleştirin.",
+  "Tan suede, cream lace, tooled leather and a silver concho, with wildflowers and sage at golden hour, like a ranch at the foot of the mountains. Your invitation waits in a fringed suede envelope tied with a leather cord, and every photo sits in a tooled leather frame behind a ranch gate that swings open.": "Ten rengi süet, krem dantel, işlenmiş deri ve gümüş bir konço; altın saatte kır çiçekleri ve adaçayıyla dağ eteğinde bir çiftlik gibi. Davetiniz deri kordonla bağlı saçaklı süet bir zarfta bekler ve her fotoğraf, açılan bir çiftlik kapısının ardında işlenmiş deri bir çerçevededir.",
+  "Your guests tap the envelope. The silver concho turns, the leather cord comes undone and slips away, the fringed flap swings open, golden-hour light sweeps the screen, and the card with your portrait rises out of the envelope to become your home page.": "Misafirleriniz zarfa dokunur. Gümüş konço döner, deri kordon çözülüp kayar, saçaklı kapak açılır, altın saat ışığı ekranı yalar ve portrenizin olduğu kart zarftan yükselip ana sayfanız olur.",
+  "Your portrait in a tooled leather frame behind a ranch gate on a cream card with wildflowers, the invitation between lace strips, a countdown and calendar links, your story and the day over a golden-hour ranch landscape.": "Kır çiçekli krem bir kartta çiftlik kapısının ardında işlenmiş deri çerçevede portreniz, dantel şeritler arasında davet, geri sayım ve takvim bağlantıları, hikâyeniz ve altın saat çiftlik manzarası üstünde düğün günü.",
+  "Three photos in tooled leather frames, each behind a weathered ranch gate that swings open as guests scroll.": "Misafirler kaydırdıkça önlerindeki yıpranmış çiftlik kapısı açılan, işlenmiş deri çerçevelerde üç fotoğraf.",
+  "The order of the day on a cream card, each moment with a sprig of sage, the venue behind a two-leaf ranch gate, an optional map, dress code, travel, the menu and questions and answers.": "Krem bir kartta günün programı, her anın başında bir adaçayı dalı, iki kanatlı bir çiftlik kapısının ardında mekân, isteğe bağlı harita, kıyafet kuralı, ulaşım, menü ve sorular-cevaplar.",
+  "A cream reply card under a lace strip; when a reply is sent, a warm breeze crosses the page and wildflowers drift down.": "Dantel şerit altında krem bir yanıt kartı; yanıt gönderilince sayfadan sıcak bir esinti geçer ve kır çiçekleri süzülür.",
+  "Suede": "Süet",
+  "Cream lace": "Krem dantel",
+  "Sunset peach": "Gün batımı şeftalisi",
 };
 
 export default dict;

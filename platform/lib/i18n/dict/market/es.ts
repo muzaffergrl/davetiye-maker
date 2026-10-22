@@ -1172,6 +1172,18 @@ const dict: Dict = {
   "Powder blue": "Azul empolvado",
   "Porcelain": "Porcelana",
   "Gilt": "Dorado",
+  // G445 Suede Ranch Lace (45, coming)
+  "A tan suede envelope with a lace strip and fringe, a leather cord and a silver concho, and photos in tooled leather frames behind ranch gates": "Un sobre de ante color tostado con cinta de encaje y flecos, un cordón de cuero y un concho de plata, y fotos en marcos de cuero repujado tras portones de rancho",
+  "A suede, lace and leather ranch wedding website: the concho turns, the cord slips away and golden-hour light sweeps in as your invitation rises. Personalize it in your online editor.": "Una web de boda campera de ante, encaje y cuero: el concho gira, el cordón se desliza y la luz dorada del atardecer entra mientras tu invitación sube. Personalízala en tu editor en línea.",
+  "Tan suede, cream lace, tooled leather and a silver concho, with wildflowers and sage at golden hour, like a ranch at the foot of the mountains. Your invitation waits in a fringed suede envelope tied with a leather cord, and every photo sits in a tooled leather frame behind a ranch gate that swings open.": "Ante tostado, encaje crema, cuero repujado y un concho de plata, con flores silvestres y salvia a la hora dorada, como un rancho al pie de las montañas. Tu invitación espera en un sobre de ante con flecos atado con un cordón de cuero, y cada foto está en un marco de cuero repujado tras un portón de rancho que se abre.",
+  "Your guests tap the envelope. The silver concho turns, the leather cord comes undone and slips away, the fringed flap swings open, golden-hour light sweeps the screen, and the card with your portrait rises out of the envelope to become your home page.": "Tus invitados tocan el sobre. El concho de plata gira, el cordón de cuero se desata y se desliza, la solapa con flecos se abre, la luz dorada recorre la pantalla y la tarjeta con tu retrato sale del sobre para convertirse en tu página de inicio.",
+  "Your portrait in a tooled leather frame behind a ranch gate on a cream card with wildflowers, the invitation between lace strips, a countdown and calendar links, your story and the day over a golden-hour ranch landscape.": "Tu retrato en un marco de cuero repujado tras un portón de rancho sobre una tarjeta crema con flores silvestres, la invitación entre cintas de encaje, una cuenta atrás y enlaces de calendario, vuestra historia y el día sobre un paisaje de rancho a la hora dorada.",
+  "Three photos in tooled leather frames, each behind a weathered ranch gate that swings open as guests scroll.": "Tres fotos en marcos de cuero repujado, cada una tras un portón de rancho envejecido que se abre mientras los invitados se desplazan.",
+  "The order of the day on a cream card, each moment with a sprig of sage, the venue behind a two-leaf ranch gate, an optional map, dress code, travel, the menu and questions and answers.": "El programa del día en una tarjeta crema, cada momento con una ramita de salvia, el lugar tras un portón de rancho de dos hojas, un mapa opcional, código de vestimenta, viaje, el menú y preguntas y respuestas.",
+  "A cream reply card under a lace strip; when a reply is sent, a warm breeze crosses the page and wildflowers drift down.": "Una tarjeta de respuesta crema bajo una cinta de encaje; cuando se envía una respuesta, una brisa cálida cruza la página y caen flores silvestres.",
+  "Suede": "Ante",
+  "Cream lace": "Encaje crema",
+  "Sunset peach": "Melocotón atardecer",
 };
 
 export default dict;

@@ -617,6 +617,18 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     ink: '#2E4A72', accent: '#4A6A96', front: [24,  13,  12,  13], back: [14,  12,  10,  12],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
+  // 45 (G445, 2026-10-22): the design's own PAKET 6 grounds (cream paper; front: a spray of wildflowers round a small
+  // concho at the top, sage and bluebonnets at the foot; back: a small sprig at the top), one per side, `cover` for 5×7
+  // and A5. Ornament measured on the art: front 6–16 % and 91–96 % of the height, back 4–11 %; the boxes sit inside the
+  // empty area (G149).
+  'suede-ranch-lace': {
+    collection: '45_Suede_Ranch_Lace',
+    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
+    fonts: gf('family=Lustria&family=Rochester&family=Rye'),
+    script: "'Rochester', cursive", serif: "'Lustria', Georgia, serif",
+    ink: '#714629', accent: '#5F6B4E', front: [21,  13,  12,  13], back: [16,  12,  10,  12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
+  },
 };
 
 export function printLayout(themeId: string): PrintLayout | null {

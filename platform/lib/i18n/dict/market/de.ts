@@ -1172,6 +1172,18 @@ const dict: Dict = {
   "Powder blue": "Puderblau",
   "Porcelain": "Porzellan",
   "Gilt": "Vergoldung",
+  // G445 Suede Ranch Lace (45, coming)
+  "A tan suede envelope with a lace strip and fringe, a leather cord and a silver concho, and photos in tooled leather frames behind ranch gates": "Ein hellbrauner Wildlederumschlag mit Spitzenband und Fransen, einer Lederschnur und einer silbernen Concho, dazu Fotos in punzierten Lederrahmen hinter Ranchtoren",
+  "A suede, lace and leather ranch wedding website: the concho turns, the cord slips away and golden-hour light sweeps in as your invitation rises. Personalize it in your online editor.": "Eine Ranch-Hochzeitswebsite aus Wildleder, Spitze und Leder: Die Concho dreht sich, die Schnur gleitet ab und goldenes Abendlicht streicht herein, während Ihre Einladung aufsteigt. Personalisieren Sie sie in Ihrem Online-Editor.",
+  "Tan suede, cream lace, tooled leather and a silver concho, with wildflowers and sage at golden hour, like a ranch at the foot of the mountains. Your invitation waits in a fringed suede envelope tied with a leather cord, and every photo sits in a tooled leather frame behind a ranch gate that swings open.": "Hellbraunes Wildleder, cremefarbene Spitze, punziertes Leder und eine silberne Concho, dazu Wildblumen und Salbei im goldenen Abendlicht, wie eine Ranch am Fuß der Berge. Ihre Einladung wartet in einem Wildlederumschlag mit Fransen, mit einer Lederschnur gebunden, und jedes Foto steckt in einem punzierten Lederrahmen hinter einem Ranchtor, das aufschwingt.",
+  "Your guests tap the envelope. The silver concho turns, the leather cord comes undone and slips away, the fringed flap swings open, golden-hour light sweeps the screen, and the card with your portrait rises out of the envelope to become your home page.": "Ihre Gäste tippen auf den Umschlag. Die silberne Concho dreht sich, die Lederschnur löst sich und gleitet ab, die Fransenklappe schwingt auf, goldenes Abendlicht streicht über den Bildschirm, und die Karte mit Ihrem Porträt steigt aus dem Umschlag und wird Ihre Startseite.",
+  "Your portrait in a tooled leather frame behind a ranch gate on a cream card with wildflowers, the invitation between lace strips, a countdown and calendar links, your story and the day over a golden-hour ranch landscape.": "Ihr Porträt in einem punzierten Lederrahmen hinter einem Ranchtor auf einer Cremekarte mit Wildblumen, die Einladung zwischen Spitzenbändern, ein Countdown und Kalenderlinks, Ihre Geschichte und der Tag über einer Ranchlandschaft im Abendlicht.",
+  "Three photos in tooled leather frames, each behind a weathered ranch gate that swings open as guests scroll.": "Drei Fotos in punzierten Lederrahmen, jedes hinter einem verwitterten Ranchtor, das beim Scrollen aufschwingt.",
+  "The order of the day on a cream card, each moment with a sprig of sage, the venue behind a two-leaf ranch gate, an optional map, dress code, travel, the menu and questions and answers.": "Der Tagesablauf auf einer Cremekarte, jeder Moment mit einem Salbeizweig, der Ort hinter einem zweiflügeligen Ranchtor, eine optionale Karte, Dresscode, Anreise, das Menü sowie Fragen und Antworten.",
+  "A cream reply card under a lace strip; when a reply is sent, a warm breeze crosses the page and wildflowers drift down.": "Eine cremefarbene Antwortkarte unter einem Spitzenband; wenn eine Antwort gesendet wird, weht eine warme Brise über die Seite und Wildblumen schweben herab.",
+  "Suede": "Wildleder",
+  "Cream lace": "Cremespitze",
+  "Sunset peach": "Sonnenuntergangspfirsich",
 };
 
 export default dict;

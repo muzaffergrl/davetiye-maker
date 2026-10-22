@@ -1,0 +1,6 @@
+/* Suede Ranch Lace — thank-you mode (G075, docs/11 §3.6): loaded only after the wedding (data-if="thank_you_on").
+   The same envelope and pages; the card and the invitation carry the couple's thank-you. No new artwork. */
+.ty-title{font:400 clamp(18px,13cqw,34px)/1.1 var(--script)}
+.thank-you-copy .body-text{white-space:pre-line;margin:0 auto 18px;max-width:420px}
+.thank-you-copy .love{font:400 38px/1.15 var(--script);margin-top:10px;color:var(--ink)}
+.reply-card.thank-you-copy .btn{margin-top:6px}

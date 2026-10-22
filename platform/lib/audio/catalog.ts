@@ -74,6 +74,8 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   'espresso-pastoral': { music: 'first-light', opening: [[0, 'ribbon'], [400, 'whoosh'], [1000, 'paper'], [2400, 'slide'], [3200, 'chime']] },
   // Blue Toile Pavilion: the brooch comes off (seal) · the flap opens (paper) · the doves take wing (whoosh) · card rises (slide) · forward (chime)
   'blue-toile-pavilion': { music: 'garden-waltz', opening: [[0, 'seal'], [500, 'paper'], [900, 'whoosh'], [1500, 'slide'], [2150, 'chime']] },
+  // Suede Ranch Lace: the concho turns (seal) · the cord slips away (ribbon) · the flap opens (paper) · card rises (slide) · forward (chime)
+  'suede-ranch-lace': { music: 'garden-waltz', opening: [[0, 'seal'], [400, 'ribbon'], [900, 'paper'], [1700, 'slide'], [2350, 'chime']] },
   'maison-patisserie': { music: 'garden-waltz', opening: [[200, 'ribbon'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
   // Orient Express Voyage: strap buckle (closure) · cover swings open (open) · ticket slides out (rise) · forward
   'orient-express-voyage': { music: 'evening-strings', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },

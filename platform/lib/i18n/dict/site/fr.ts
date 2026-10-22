@@ -332,6 +332,8 @@ const dict: Dict = {
   "By candlelight": "À la lueur des bougies",
   // G444 Blue Toile Pavilion (44, coming)
   "In the garden pavilion": "Au pavillon du jardin",
+  // G445 Suede Ranch Lace (45, coming)
+  "Under the open sky": "Sous le ciel ouvert",
 };
 
 export default dict;

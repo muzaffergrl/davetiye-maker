@@ -250,6 +250,14 @@ export const WEDDING_GLOSSARY: readonly Row[] = [
   ["Late October evenings can be cool, so please bring a warm layer for the barn and the long table.", "Ekim sonu akşamları serin olabilir; lütfen ambar ve uzun masa için sıcak tutan bir şey getirin.", "Las noches de finales de octubre pueden ser frescas, así que traigan una prenda de abrigo para el granero y la mesa larga.", "Ende Oktober können die Abende kühl sein, bitte bringen Sie für die Scheune und die lange Tafel etwas Warmes mit.", "Les soirées de fin octobre peuvent être fraîches : prévoyez une couche chaude pour la grange et la longue table."],
   // G444 Blue Toile Pavilion (44): demo programme and questions
   ["Garden tea & cocktails", "Bahçede çay ve kokteyl", "Té y cócteles en el jardín", "Gartentee & Cocktails", "Thé et cocktails au jardin"],
+  // G445 Suede Ranch Lace (45): demo programme and questions
+  ["Barbecue supper", "Mangal akşam yemeği", "Cena de barbacoa", "Barbecue-Abendessen", "Dîner barbecue"],
+  ["Dancing under the stars", "Yıldızların altında dans", "Baile bajo las estrellas", "Tanz unter den Sternen", "Danse sous les étoiles"],
+  ["Ranch formal — boots welcome", "Çiftlik şıklığı — çizme serbest", "Formal campero: botas bienvenidas", "Ranch-festlich — Stiefel willkommen", "Tenue ranch habillée — bottes bienvenues"],
+  ["Your supper choice", "Akşam yemeği tercihiniz", "Tu elección para la cena", "Ihre Wahl zum Abendessen", "Votre choix pour le dîner"],
+  ["Please arrive 20 minutes before the ceremony; the meadow arch is a short walk from the parking area.", "Lütfen törenden 20 dakika önce gelin; çayırdaki kemer otoparktan kısa bir yürüyüş mesafesinde.", "Por favor, lleguen 20 minutos antes de la ceremonia; el arco del prado está a un breve paseo del aparcamiento.", "Bitte kommen Sie 20 Minuten vor der Trauung; der Bogen auf der Wiese ist ein kurzer Spaziergang vom Parkplatz entfernt.", "Merci d'arriver 20 minutes avant la cérémonie ; l'arche du pré est à quelques pas du parking."],
+  ["Is the ceremony outdoors?", "Tören açık havada mı?", "¿La ceremonia es al aire libre?", "Findet die Trauung im Freien statt?", "La cérémonie a-t-elle lieu en plein air ?"],
+  ["Yes, on the meadow. Boots or block heels are a good idea, and the evenings turn cool, so bring a layer.", "Evet, çayırda. Çizme ya da kalın topuklu ayakkabı iyi bir fikir; akşamlar serinler, yanınıza bir kat daha alın.", "Sí, en el prado. Las botas o los tacones anchos son buena idea, y las noches refrescan, así que traigan una prenda de abrigo.", "Ja, auf der Wiese. Stiefel oder Blockabsätze sind eine gute Idee, und abends wird es kühl, bringen Sie also etwas zum Überziehen mit.", "Oui, sur le pré. Bottes ou talons larges sont une bonne idée, et les soirées fraîchissent : prévoyez une couche de plus."],
 ];
 
 /** "and" between two terms, per language (Spanish "y" becomes "e" before an i- sound). */

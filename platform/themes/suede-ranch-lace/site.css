@@ -1,0 +1,358 @@
+/* Suede Ranch Lace (45) — tan suede, cream lace and paper, a leather cord with a silver concho, tooled leather frames,
+   weathered ranch gates, wildflowers and sage, a golden-hour ranch landscape; ink and saddle brown, a touch of sunset.
+   Visuals are GPT pixels only (img/, build_images.py); CSS adds light and interface (docs/11 §5.7): the golden light that
+   sweeps the screen, text halos, hairline rules, form fields, buttons, the bottom nav, and motion — the concho turning
+   half round, the cord coming undone and sliding away, the fringed flap swinging up and settling, the card rising, the
+   gates in front of the photos swinging open on their hinges, a warm breeze on a reply. Nothing is drawn here. */
+:root{--suede:#a97c54;--saddle:#714629;--lace:#f3ebdd;--sage:#99a487;--sage-deep:#5f6b4e;--sunset:#e2a17e;--dusk:#6a7f99;
+--silver:#b5b3ad;--ink:#2e221a;--ink-soft:#5a4636;--line:#2e221a26;--display:'Rye','Georgia',serif;
+--script:'Rochester',fb1,fb2,'Snell Roundhand',cursive;--serif:'Lustria','Georgia',serif;--nav-h:62px;color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:var(--suede) url(img/suede-640.webp) 0 0/560px repeat;color:var(--ink);font:400 18px/1.7 var(--serif);padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom))}
+main{overflow-x:clip}
+button,input,textarea,select{font:inherit}
+button,a,input,select,textarea,summary{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+h1,h2,h3,p,figure,ul,ol{margin:0}
+h1,h2,h3{font-weight:400;line-height:1.15}
+h1{font:400 clamp(36px,10.5vw,52px)/1.15 var(--display);color:var(--ink);letter-spacing:.02em;overflow-wrap:anywhere}
+h2{font:400 clamp(28px,8vw,40px)/1.2 var(--display);color:var(--ink);letter-spacing:.02em;overflow-wrap:anywhere}
+h3{font:400 18px/1.45 var(--serif);letter-spacing:.02em}
+button{cursor:pointer}
+button:disabled{opacity:.5;cursor:default}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--saddle);outline-offset:5px}
+.nowrap{white-space:nowrap}
+.eyebrow{font:400 12px/1.9 var(--serif);text-transform:uppercase;letter-spacing:.26em;color:var(--ink);overflow-wrap:anywhere}
+/* on the suede the small lines and headings are ink; on the cream paper they turn saddle brown */
+.paper h1,.paper h2,.paper-band h1,.paper-band h2,.paper .eyebrow,.paper-band .eyebrow,.paper .textlink,.paper-band .textlink{color:var(--saddle)}
+.body-text{font-size:18px;line-height:1.75;color:var(--ink)}
+.paper .body-text,.paper-band .body-text{color:var(--ink-soft)}
+.small{font:400 15px/1.8 var(--serif);color:var(--ink-soft)}
+/* cream paper (GPT texture) under the cards and bands */
+.paper,.paper-band{background:var(--lace) url(img/paper-640.webp) 0 0/480px repeat;color:var(--ink)}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:12px;min-height:48px;padding:12px 30px;border:1px solid var(--saddle);background:var(--saddle);color:var(--lace);font:400 13px/1.5 var(--serif);letter-spacing:.2em;text-transform:uppercase;border-radius:4px;text-align:center;overflow-wrap:anywhere}
+.btn:hover{background:#5d3920;border-color:#5d3920}
+.btn-ghost{background:rgb(243 235 221/.78);color:var(--ink);border-color:rgb(113 70 41/.5)}
+.btn-ghost:hover{background:var(--lace)}
+.btn-light{background:var(--lace);border-color:var(--lace);color:var(--saddle)}
+.btn-light:hover{background:#fff;border-color:#fff}
+.btn-sm{min-height:44px;padding:9px 18px}
+.textlink{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;font:400 15px/1.6 var(--serif);border:0;background:transparent;color:var(--ink);letter-spacing:.08em;padding:8px 2px;text-decoration:underline;text-decoration-color:rgb(113 70 41/.5);text-underline-offset:6px}
+.center{text-align:center;margin:44px 0 10px}
+.button-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.no-js .nojs-only{display:block}
+.js .nojs-only{display:none}
+.names{font:400 clamp(58px,17vw,86px)/1.05 var(--script);color:var(--ink);overflow-wrap:anywhere;text-wrap:balance;text-shadow:0 1px 0 rgb(255 255 255/.35),0 0 18px rgb(243 235 221/.55)}
+.names .amp{font:italic 400 .32em/1 var(--serif);letter-spacing:.06em;color:var(--saddle);vertical-align:.5em}
+
+/* photo slots: placeholders are softened cream paper; "Your photo here" only in a preview */
+.photo-slot{position:relative;display:block;overflow:hidden;background:#e9dcc6}
+.photo-slot>img{width:100%;height:100%;object-fit:cover;object-position:50% 34%}
+.ph-mark{display:none;position:absolute;inset:0;align-items:center;justify-content:center;pointer-events:none;font:400 13px/1.4 var(--serif);color:var(--ink-soft);text-align:center;letter-spacing:.08em}
+html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{display:flex}
+/* the tooled leather frames: the GPT frame (.cut) over the photo, which sits in its measured window (manifest
+   window_pct); in front of the photo a weathered ranch gate (GPT W13) that swings open on its hinge — the wide frame has
+   two leaves, the same gate and its mirror */
+.frame{position:relative;display:block}
+.frame>.cut{position:absolute;inset:0;pointer-events:none;background:0 0/100% 100% no-repeat}
+.frame>.photo-slot,.frame>.gates{position:absolute}
+.leather{aspect-ratio:1053/1334;filter:drop-shadow(0 10px 12px rgb(46 34 26/.35))}
+.leather>.cut{background-image:url(img/frame-720.webp)}
+.leather>.photo-slot,.leather>.gates{left:16.4%;top:14.12%;width:67.1%;height:70.87%}
+.leather-wide{aspect-ratio:1498/853;filter:drop-shadow(0 10px 12px rgb(46 34 26/.35))}
+.leather-wide>.cut{background-image:url(img/frame_wide-1100.webp)}
+.leather-wide>.photo-slot,.leather-wide>.gates{left:10.11%;top:18.96%;width:79.77%;height:61.49%}
+.frame>.gates{display:flex;perspective:900px;pointer-events:none;z-index:1}
+.gates>.gate{flex:1;background:url(img/gate-480.webp) 0 0/100% 100% no-repeat;transform-origin:0 50%;backface-visibility:hidden;filter:drop-shadow(2px 0 3px rgb(46 34 26/.35))}
+.gates>.gate.g-r{transform-origin:100% 50%;scale:-1 1}
+/* without JavaScript the gates stay out of the way (the photo is the point) */
+.no-js .frame>.gates{display:none}
+.wildflowers{display:block;aspect-ratio:1180/987;background:url(img/wildflowers-720.webp) 0 0/100% 100% no-repeat;pointer-events:none}
+.lace{display:block;width:min(92%,480px);aspect-ratio:1857/267;margin:0 auto;background:url(img/lace-1200.webp) center/100% 100% no-repeat}
+.hat{display:block;width:min(44%,190px);aspect-ratio:1214/795;margin:0 auto;background:url(img/hat-480.webp) center/100% 100% no-repeat}
+
+/* bottom nav */
+.site-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgb(84 52 31/.96);border-top:1px solid var(--silver);padding:6px 8px max(6px,env(safe-area-inset-bottom));view-transition-name:site-nav}
+.site-nav ul{list-style:none;padding:0;display:flex;justify-content:center;gap:4px}
+.site-nav a{display:flex;align-items:center;justify-content:center;min-height:48px;min-width:68px;padding:8px 12px;font:400 12px/1 var(--serif);letter-spacing:.16em;text-transform:uppercase;color:#f3ebdd}
+.site-nav a[aria-current]{color:#fff;text-decoration:underline;text-underline-offset:8px;text-decoration-color:var(--sunset)}
+
+/* ---------------------------------------------------------------- the envelope */
+.page-opening{padding-bottom:0;background:radial-gradient(ellipse at 50% 58%,rgb(255 236 200/.25) 0,rgb(255 236 200/0) 60%) fixed,var(--suede) url(img/suede-640.webp) 0 0/560px repeat}
+.skip{position:fixed;top:calc(6px + env(safe-area-inset-top));right:10px;z-index:20;padding-inline:14px;background:rgb(243 235 221/.85);border-radius:100px;text-decoration:none}
+.opening{position:relative;min-height:100svh;max-width:760px;margin:auto;padding:clamp(66px,9svh,104px) 20px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:clip}
+.opening-heading{position:relative;z-index:2;max-width:100%}
+.opening-heading>.eyebrow:first-child{margin-bottom:2px}
+.opening .names{font-size:clamp(58px,17vw,84px)}
+/* the closed portrait envelope: .7471 wide per high (manifest stage); layers in % of it. The gap above it is the open
+   flap's height (55.78 % of the envelope); the size follows the screen height (≈ 330 px + 2.09 × the width) */
+.stage{--obj:min(60vw,calc((100svh - 330px) / 2.09),260px);position:relative;width:var(--obj);margin:calc(var(--obj) / .7471 * .5578 + 8px) auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent;z-index:5}
+.opening:has(.names.long-names) .stage{--obj:min(56vw,calc((100svh - 360px) / 2.09),260px)}
+.envelope{position:relative;width:100%;aspect-ratio:.7471}
+.envelope>*{position:absolute}
+.back{inset:0;z-index:0;background:url(img/back-720.webp) 0 0/100% 100% no-repeat;filter:drop-shadow(0 14px 18px rgb(46 34 26/.4))}
+/* the card in the pocket (stage.card): 84 % of the envelope's width */
+.card{left:8%;top:9.8%;width:84%;height:87.2%;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14% 12% 13%;text-align:center;view-transition-name:none;container-type:inline-size;background:url(img/card-720.webp) 0 0/100% 100% no-repeat;color:var(--ink)}
+.card-photo{width:56%;flex:none}
+.card.tight .card-photo{width:40%}
+.card-photo .ph-mark{font-size:8px}
+.card-photo .ty-decor,.card-photo .ty-decor img{display:block;width:100%;height:100%;object-fit:cover}
+.card-photo>.gates{display:none}
+.card-line{margin-top:6%;font-size:7px;letter-spacing:.24em}
+.card-names{font:400 clamp(22px,19cqw,46px)/1 var(--script);color:var(--ink);overflow-wrap:anywhere;text-wrap:balance;margin-top:1%}
+.card-date{font-size:7px;margin-top:3%}
+.front{left:0;top:39.9%;width:100%;height:60.1%;z-index:3;background:url(img/front-720.webp) 0 0/100% 100% no-repeat}   /* stage.front */
+.flap{left:0;top:0;width:100%;height:55.78%;z-index:4;transform-origin:50% 0;transform-style:preserve-3d}   /* stage.flap */
+.flap-out,.flap-in{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:0 0/100% 100% no-repeat}
+.flap-out{background-image:url(img/flap-720.webp);filter:drop-shadow(0 3px 3px rgb(46 34 26/.3))}
+.flap-in{transform:rotateX(180deg);background-image:url(img/flap_in-720.webp)}
+/* the leather cord twice round the envelope (GPT W8) and the silver concho on its knot (W9) */
+.cord{left:-1.48%;top:44.07%;width:102.96%;height:28.74%;z-index:5;background:url(img/cord-720.webp) 0 0/100% 100% no-repeat;filter:drop-shadow(0 2px 2px rgb(46 34 26/.35));transform-origin:45.89% 20%}   /* stage.cord */
+.concho{left:36.89%;top:43.14%;width:18%;height:13.36%;z-index:6;background:url(img/concho-240.webp) center/100% 100% no-repeat;filter:drop-shadow(0 4px 4px rgb(46 34 26/.4))}   /* stage.concho */
+/* the golden-hour light that sweeps the screen as the flap opens (CSS light) */
+.opening>.sun{position:fixed;inset:0;z-index:9;pointer-events:none;opacity:0;mix-blend-mode:screen;background:linear-gradient(100deg,rgb(255 200 140/0) 30%,rgb(255 214 160/.5) 50%,rgb(255 200 140/0) 70%) 120% 0/250% 100% no-repeat}
+.opening-actions{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:22px;min-height:60px;position:relative;z-index:6}
+.opening-date{font-size:12px}
+.tap-hint{font-size:11px}
+.js .tap-hint{animation:breathe 3.2s ease-in-out infinite}
+@keyframes breathe{50%{opacity:.5}}
+.enter,.replay{display:none}
+.is-opened .enter{display:inline-flex}
+.is-opened .replay{display:inline-flex}
+.is-opened .tap-hint,.is-opening .tap-hint{display:none}
+.is-opened .skip{display:none}
+.is-opening .stage{pointer-events:none}
+.is-opening .opening-date{animation:dim 400ms ease-in forwards}
+.is-opening .concho{animation:concho-turn 600ms 0ms cubic-bezier(.4,0,.3,1) forwards,concho-off 500ms 500ms ease-in forwards}
+.is-opening .cord{animation:cord-off 700ms 400ms cubic-bezier(.5,0,.6,1) forwards}
+.is-opening .flap{animation:flap-open 800ms 900ms cubic-bezier(.5,0,.3,1) forwards}
+.is-opening .opening>.sun{animation:sun 1000ms 1300ms ease-in-out forwards}
+.is-opening .envelope>.card{animation:card-rise 650ms 1700ms cubic-bezier(.3,0,.2,1) forwards,card-forward 400ms 2350ms cubic-bezier(.45,0,.2,1) forwards}
+.is-opened .opening-date{opacity:.5}
+.is-opened .concho,.is-opened .cord{opacity:0;visibility:hidden}
+.is-opened .flap{transform:perspective(900px) rotateX(180deg);z-index:0}
+.is-opened .envelope>.card{z-index:8;transform:translateY(-10%) scale(1.06);view-transition-name:invite-card;filter:drop-shadow(0 18px 22px rgb(46 34 26/.45))}
+.is-opened .opening-actions{margin-top:26px}
+@keyframes dim{to{opacity:.5}}
+/* the concho turns half round; the cord comes undone and slides away to the side */
+@keyframes concho-turn{to{transform:rotate(180deg)}}
+@keyframes concho-off{to{transform:rotate(180deg) translate(-90%,10%) scale(.85);opacity:0}}
+@keyframes cord-off{0%{transform:none}30%{transform:scaleY(1.15) translateX(4%)}100%{transform:translateX(78%) scaleY(1.3) rotate(6deg);opacity:0}}
+/* the fringed flap swings up and settles, its fringe swaying */
+@keyframes flap-open{from{transform:perspective(900px) rotateX(0);z-index:4}
+78%{transform:perspective(900px) rotateX(188deg)}90%{transform:perspective(900px) rotateX(176deg)}
+to{transform:perspective(900px) rotateX(180deg);z-index:0}}
+@keyframes sun{0%{opacity:1;background-position:120% 0}100%{opacity:1;background-position:-20% 0}}
+@keyframes card-rise{from{transform:translateY(0) scale(1)}to{transform:translateY(-44%) scale(.94);filter:drop-shadow(0 10px 14px rgb(46 34 26/.35))}}
+@keyframes card-forward{from{z-index:8;transform:translateY(-44%) scale(.94);filter:drop-shadow(0 10px 14px rgb(46 34 26/.35))}
+to{z-index:8;transform:translateY(-10%) scale(1.06);filter:drop-shadow(0 18px 22px rgb(46 34 26/.45))}}
+
+/* ---------------------------------------------------------------- home */
+.hero{position:relative;min-height:calc(100svh - var(--nav-h));display:flex;align-items:center;justify-content:center;padding:44px 20px 26px;overflow:clip}
+.hero-card{position:relative;width:min(84vw,370px);padding:30px 22px 28px;text-align:center;view-transition-name:invite-card;filter:drop-shadow(0 16px 22px rgb(46 34 26/.4))}
+.hero-card>.wildflowers{position:absolute;right:-16%;top:-9%;width:46%;z-index:2}
+.hero-photo{width:min(50vw,220px);margin:0 auto 14px}
+.hero .names{font-size:clamp(56px,15vw,76px);margin:4px 0 2px}
+.hero-date{font:400 18px/1.5 var(--serif);letter-spacing:.04em}
+.hero-venue{display:flex;flex-direction:column;gap:2px;margin-top:8px;font:400 18px/1.45 var(--serif);overflow-wrap:anywhere}
+.hero-venue small{font:400 11px/1.8 var(--serif);letter-spacing:.24em;text-transform:uppercase;color:var(--saddle)}
+.invitation{padding:44px 0 50px;text-align:center}
+.invitation>.lace:first-child{margin-bottom:24px}
+.invitation>.lace:last-child{margin-top:34px}
+.invitation-copy,.invitation>.countdown,.invitation>.calendar{padding-inline:28px}
+.invitation-copy{max-width:540px;margin:auto}
+.invitation-copy h2{margin-bottom:10px}
+.invitation .host{margin:14px 0}
+.formal-names{font:400 24px/1.4 var(--serif);margin-bottom:12px;overflow-wrap:anywhere}
+.formal-names .amp{font:400 48px/1 var(--script);color:var(--saddle)}
+.invitation-copy .body-text{max-width:340px;margin:auto}
+.date-block{display:flex;flex-direction:column;align-items:center;gap:2px;margin:26px auto 6px;color:var(--saddle)}
+.date-block>span{font:400 12px/1.8 var(--serif);letter-spacing:.26em;text-transform:uppercase}
+.date-block b{font:400 30px/1.25 var(--display);letter-spacing:.03em;color:var(--saddle)}
+.venue-name{font-size:22px;margin-top:16px;overflow-wrap:anywhere}
+.invitation-copy .btn{margin:24px 0 12px}
+.countdown{max-width:380px;margin:30px auto 0}
+.cd-row{display:flex;gap:14px;justify-content:center}
+.cd-row>div{flex:1;text-align:center}
+.cd-num{display:block;font:400 32px/1.3 var(--display);color:var(--saddle);font-variant-numeric:tabular-nums}
+.cd-row small{font:400 10px/1.7 var(--serif);text-transform:uppercase;letter-spacing:.14em;color:var(--ink-soft)}
+.countdown.is-done .cd-row{display:none}
+.cd-done{font-size:18px}
+.calendar{margin:26px auto 0;text-align:center}
+.calendar>.eyebrow{font-size:11px;margin-bottom:10px}
+.teaser-photo{display:block}
+.teaser{display:grid;grid-template-columns:min(40vw,190px) 1fr;align-items:center;gap:22px;max-width:640px;margin:auto;padding:64px 24px}
+.teaser-text{min-width:0}
+.teaser-text h2{margin:4px 0 6px}
+/* the day at golden hour: the ranch landscape (GPT W3) under a warm dusk so the text reads */
+.ranch-band{background:linear-gradient(rgb(46 34 26/.5),rgb(46 34 26/.62)),var(--saddle) url(img/ranch-720.webp) center 60%/cover;color:var(--lace)}
+.ranch-band h2{color:var(--lace);text-shadow:0 1px 10px rgb(0 0 0/.45)}
+.ranch-band .eyebrow{color:#f6dcc4}
+.day{text-align:center;padding:72px 24px}
+.day h2{margin:8px 0 6px}
+.day-peek{list-style:none;padding:0;margin:14px auto 28px;max-width:420px;display:grid;gap:8px;font-size:18px;overflow-wrap:anywhere;text-shadow:0 1px 6px rgb(0 0 0/.4)}
+.day-peek li:nth-child(n+5){display:none}
+.day-peek .time{font:400 15px/1 var(--serif);letter-spacing:.12em;color:var(--sunset);margin-right:8px}
+.signature{position:relative;text-align:center;padding:48px 20px 30px}
+.signature>.hat{margin-bottom:6px}
+.sig-names{font:400 60px/1.05 var(--script);margin:6px 0 10px;color:var(--ink);overflow-wrap:anywhere}
+
+/* ---------------------------------------------------------------- story */
+.page-heading{text-align:center;padding:56px 24px 40px;max-width:720px;margin:auto}
+.page-heading>.eyebrow{margin-bottom:8px}
+.page-heading h1{margin-bottom:14px}
+.page-heading .intro{max-width:460px;margin:auto}
+.page-heading .venue-name{margin-top:4px}
+.page-heading>.lace{margin-bottom:16px;width:min(80%,380px)}
+.story-page{max-width:1000px;margin:auto}
+.moment{padding:0 24px;margin:0 0 60px;display:flex;flex-direction:column;align-items:flex-start}
+.moment-photo{width:min(62vw,300px)}
+.m-2{align-items:flex-end;text-align:right}
+.m-2 .moment-photo{width:min(58vw,280px)}
+.moment figcaption{padding-top:14px;max-width:min(74vw,420px);font-size:20px;line-height:1.45;overflow-wrap:anywhere}
+.moment figcaption .num{display:block;font:400 30px/1.1 var(--display);color:var(--ink);margin-bottom:4px}
+.moment figcaption [data-empty]{display:none}
+
+/* ---------------------------------------------------------------- details */
+.details-page{max-width:1100px;margin:auto}
+.programme{padding:48px 24px 44px;margin:0 14px;box-shadow:0 14px 22px -14px rgb(46 34 26/.5)}
+.programme h2{text-align:center}
+.programme h2+.schedule{margin-top:22px}
+.schedule{list-style:none;margin:0 auto;padding:0;max-width:560px}
+.schedule li{position:relative;display:grid;grid-template-columns:22px 80px 1fr;gap:10px;padding:14px 0;border-top:1px solid var(--line)}
+.schedule li:first-child{border-top:0}
+.row-sage{width:20px;aspect-ratio:750/937;margin-top:3px;background:url(img/accent_1-160.webp) center/contain no-repeat;transform-origin:50% 100%}
+.schedule time{font:400 16px/1.7 var(--serif);color:var(--saddle);letter-spacing:.06em}
+.schedule h3{overflow-wrap:anywhere}
+.schedule p{font-size:16px;color:var(--ink-soft);margin-top:2px;overflow-wrap:anywhere}
+.ceremony{font-size:17px;color:var(--ink-soft);margin:22px auto 0;max-width:560px;text-align:center}
+.programme .calendar{margin-top:24px}
+.location{padding:56px 24px 10px;max-width:700px;margin:auto;text-align:center}
+.location h2{margin-bottom:22px}
+.venue-photo{margin:0 auto 18px}
+.venue-line{font-size:19px;overflow-wrap:anywhere}
+.map-section{margin-top:18px}
+.map-section .btn{white-space:normal}
+.detail-notes{display:grid;gap:26px;margin:40px auto 0;padding:0 24px;max-width:760px}
+.detail-note{border-top:1px solid var(--line);padding-top:24px}
+.detail-note h2,.faq h2{font-size:32px;margin-bottom:10px}
+.detail-note .body-text{margin-bottom:12px;overflow-wrap:anywhere}
+.faq{margin:44px auto 0;padding:0 24px;max-width:760px}
+.faq details{border-bottom:1px solid var(--line);padding:10px 0}
+.faq summary{cursor:pointer;min-height:44px;font-size:19px;padding:8px 30px 8px 0;list-style:none;position:relative;overflow-wrap:anywhere}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";content:"+" / "";position:absolute;right:4px;top:8px;color:var(--saddle);font:400 22px/1 var(--serif)}
+.faq details[open] summary::after{content:"×";content:"×" / ""}
+.faq details .body-text{padding-block:10px;white-space:pre-line}
+
+/* ---------------------------------------------------------------- rsvp */
+.rsvp-page{max-width:640px;margin:auto;padding:0 20px}
+.rsvp-page .page-heading{padding-bottom:30px}
+.rsvp-page .page-heading>.eyebrow:last-of-type{margin-top:12px}
+.reply-cta{margin-top:20px}
+.reply-card{position:relative;padding:30px 22px 30px;filter:drop-shadow(0 14px 22px rgb(46 34 26/.35))}
+.reply-box>.lace{margin:0 auto 14px}
+.form-title{text-align:center;margin-bottom:6px}
+.reply-form{font:400 17px/1.7 var(--serif)}
+.field{display:block;margin-top:18px}
+.kicker{display:block;margin-bottom:8px;font:400 14px/1.7 var(--serif);letter-spacing:.06em;color:var(--saddle);overflow-wrap:anywhere}
+.opt{color:var(--ink-soft);font-size:13px}
+.field input,.field textarea,.question textarea{display:block;width:100%;border:1px solid rgb(46 34 26/.32);background:#fffaf2;color:var(--ink);min-height:48px;padding:12px;border-radius:4px;font:400 17px/1.5 var(--serif)}
+.field textarea,.question textarea{resize:vertical}
+.choice{border:0;padding:0;margin:22px 0 0;min-width:0}
+.choice legend{padding:0;width:100%}
+.choice label{display:flex;align-items:center;gap:10px;min-height:46px;color:var(--ink);overflow-wrap:anywhere}
+input[type=radio]{accent-color:var(--saddle);width:18px;height:18px;flex:none}
+.questions{margin-bottom:12px}
+.field-error{color:#a3211a;font:400 15px/1.6 var(--serif);margin-top:5px;overflow-wrap:anywhere}
+.field-error:empty{display:none}
+[aria-invalid=true]{border-color:#a3211a!important}
+.send{margin-top:26px}
+.send .btn{width:100%}
+.reply-panel{padding:18px 0;font:400 17px/1.8 var(--serif)}
+.panel-title{font:400 34px/1.2 var(--display);color:var(--saddle);margin-bottom:8px}
+.reply-panel[data-rsvp-state=error]{color:#a3211a}
+.reply-panel[data-rsvp-state=preview]{color:var(--ink-soft);border-top:1px solid var(--line);margin-top:18px}
+.note{color:var(--ink-soft)}
+html[data-rsvp-replied] .rsvp-page .page-heading .body-text{display:none}
+/* the reply is in: a warm, dusty breeze crosses the page (CSS light) while the wildflowers drift down */
+.breeze{position:fixed;inset:0;z-index:29;pointer-events:none;opacity:0;background:linear-gradient(100deg,rgb(226 161 126/0) 25%,rgb(240 200 160/.35) 50%,rgb(226 161 126/0) 75%) 130% 0/260% 100% no-repeat}
+html[data-rsvp-replied] .breeze{animation:breeze 2.2s ease-in-out both}
+@keyframes breeze{0%{opacity:1;background-position:130% 0}100%{opacity:0;background-position:-30% 0}}
+.thank-you-copy{text-align:center}
+.thank-you-copy h2{margin-bottom:20px}
+
+/* ---------------------------------------------------------------- view transitions + scenes (docs/11 §8, §11) */
+@view-transition{navigation:auto}
+::view-transition-group(invite-card){animation-duration:.85s;animation-timing-function:cubic-bezier(.4,0,.2,1)}
+::view-transition-new(site-nav):only-child{animation:none}
+::view-transition-old(site-nav):only-child{animation:none;opacity:0}
+/* text comes up warmly, like the low sun on the meadow (this design's step) */
+.js [data-step]{opacity:0;transform:translateY(10px);transition:opacity 1s ease-out,transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.js [data-step].in{opacity:1;transform:none}
+/* the gate in front of each photo swings open on its hinge as the scene enters */
+.js .gated[data-step]{transform:none}
+.js .gated[data-step]>.gates>.gate{transform:none}
+.js .gated[data-step].in>.gates>.gate{animation:gate-open 1.5s calc(var(--d,0ms) + 300ms) cubic-bezier(.45,0,.25,1) forwards}
+.js .gated[data-step].in>.gates>.g-r{animation-name:gate-open-r}
+@keyframes gate-open{0%{transform:none}15%{transform:rotateY(-6deg)}100%{transform:rotateY(-105deg);opacity:0}}
+@keyframes gate-open-r{0%{transform:none}15%{transform:rotateY(6deg)}100%{transform:rotateY(105deg);opacity:0}}
+.js li[data-step] .row-sage{transform:rotate(-20deg) scale(.6);opacity:0}
+.js li[data-step].in .row-sage{animation:sage 1.1s calc(var(--d,0ms) + 120ms) cubic-bezier(.3,1.4,.5,1) forwards}
+@keyframes sage{to{transform:none;opacity:1}}
+.from-envelope .hero-card [data-step]{opacity:1;clip-path:none;transform:none;transition:none;animation:none}
+.arrive-fade body{animation:fade-in .5s ease-out both}
+@keyframes fade-in{from{opacity:0}}
+.accent-layer{position:fixed;inset:0;pointer-events:none;z-index:30;overflow:hidden}
+
+@media(min-width:760px){
+.hero-card{width:410px;padding:36px 34px 34px}
+.invitation-copy,.invitation>.countdown,.invitation>.calendar{padding-inline:40px}
+.teaser{padding:90px 40px;gap:40px}
+.moment{padding:0 60px;margin-bottom:84px}
+.m-1,.m-3{padding-left:12%}
+.m-2{padding-right:12%}
+.detail-notes{grid-template-columns:repeat(2,1fr);gap:36px}
+.programme{padding:72px 40px;margin:0 auto;max-width:760px}
+.page-heading{padding-top:84px}
+.site-nav a{min-width:110px}
+}
+@media(max-width:359px){
+.hero{padding-inline:12px}
+.hero-card{padding:24px 16px 22px}
+.rsvp-page{padding-inline:12px}
+.reply-card{padding:24px 16px}
+.moment,.detail-notes,.faq,.location{padding-inline:16px}
+.programme{padding-inline:14px;margin-inline:8px}
+.schedule li{grid-template-columns:16px 72px 1fr;gap:8px}
+.row-sage{width:16px}
+.cd-row{gap:8px}
+.teaser{gap:16px;padding-inline:16px}
+.site-nav a{min-width:60px;padding-inline:8px;letter-spacing:.06em}
+}
+@media(max-height:700px) and (max-width:759px){
+.opening{padding-top:56px}
+.opening .names{font-size:clamp(50px,15vw,68px)}
+.stage{--obj:min(54vw,calc((100svh - 270px) / 2.09),260px);margin-top:calc(var(--obj) / .7471 * .5578 + 4px)}
+.opening:has(.names.long-names) .stage{--obj:min(50vw,calc((100svh - 300px) / 2.09),260px)}
+.opening-actions{margin-top:14px}
+.hero{padding-top:30px;padding-bottom:14px}
+.hero-card{padding:22px 18px 18px}
+.hero-photo{width:min(30vw,130px);margin-bottom:10px}
+.hero .names{font-size:clamp(50px,13vw,62px);margin:2px 0}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
+*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition:none!important}
+.js [data-step]{opacity:1!important;clip-path:none!important;transform:none!important}
+.js .gated[data-step]>.gates{display:none}
+.js li[data-step] .row-sage{transform:none!important;opacity:1!important;animation:none!important}
+.js .tap-hint{animation:none!important}
+.breeze{display:none}
+::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation-duration:1ms!important}
+}
+#reply{scroll-margin-top:64px}
+html{scroll-padding-bottom:calc(var(--nav-h) + 12px)}

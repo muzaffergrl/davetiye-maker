@@ -4,7 +4,7 @@
 import { after, before, test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdtempSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import jsQR from 'jsqr';
@@ -90,11 +90,7 @@ test('request parsing, file names and sheet geometry', () => {
 test('every platform design has a printable invitation whose parts are on disk', async () => {
   const designs = (await listThemes()).map((t) => t.id).filter((id) => id !== '_sample');
   // the design catalog: one numbered collection per design (collections/NN_Name); a new design needs a print layout
-  // collections planned before their theme (fourth wave, docs/33: concept, GPT parts in, theme G440–G448 not built yet)
-  // are listed here and leave the list as each theme lands; nothing else may lack a theme
-  const PLANNED = ['45_Suede_Ranch_Lace'];
-  const catalog = readdirSync(path.join(REPO_ROOT, 'collections')).filter((d) => /^\d{2}_/.test(d) && !PLANNED.includes(d));
-  for (const d of PLANNED) assert.ok(existsSync(path.join(REPO_ROOT, 'collections', d)), `planned collection ${d} is on disk (else drop it from the list)`);
+  const catalog = readdirSync(path.join(REPO_ROOT, 'collections')).filter((d) => /^\d{2}_/.test(d));
   assert.equal(designs.length, catalog.length, `themes ${designs.length} ≠ collections ${catalog.length}`);
   assert.deepEqual(Object.keys(PRINT_LAYOUTS).sort(), [...designs].sort());
   for (const id of designs) {
