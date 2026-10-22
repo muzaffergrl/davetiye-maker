@@ -43,7 +43,7 @@ Bir soru eklemeden önce, cevabı kimin ve ne zamana kadar kullanacağını soru
 Bu tabloyla ilgili iki not:
 
 - **Menü seçimi yanıtın içinde sorulur.** [Emily Post Institute](https://emilypost.com/advice/how-to-word-a-wedding-response-card), misafirler ana yemeklerini seçecekse bunun yanıt kartında (ya da internetteki yanıtta) sorulmasını önerir; böylece catering tek ve eksiksiz bir liste alır. Misafirler internetten yanıt veriyorsa basılı yanıt kartına yalnız adres ve tarih yeter; bkz. [düğün websitesi davetiyeye nasıl eklenir](/guides/wedding-website-on-invitation).
-- **Tarihler için sözleşmelerinize bakın.** "Ne zaman gerekir" sütunu catering firmanıza, mekânınıza ve ulaşım firmanıza bağlıdır. [Düğün websitesi ne zaman paylaşılır, LCV tarihi ne olmalı](/guides/when-to-send-your-wedding-website) rehberimiz bu tarihlerden geriye doğru nasıl hesap yapacağınızı gösteriyor.
+- **Tarihler için sözleşmelerinize bakın.** "Ne zaman gerekir" sütunu catering firmanıza, mekânınıza ve ulaşım firmanıza bağlıdır. [LCV son tarihini seçmek](/guides/wedding-rsvp-deadline) rehberimiz bu tarihlerden geriye doğru nasıl hesap yapacağınızı gösteriyor.
 
 ## Atlanacak sorular ve nedenleri
 
@@ -95,7 +95,7 @@ Cevapları toplamak işin yarısıdır. Diğer yarısı onları doğru kişilere
 1. **Yanıtlarınızı** son tarihinizin ertesi günü tablo olarak **indirin**.
 2. **Menüleri ve beslenme ihtiyaçlarını sayın** ve catering firmanıza istedikleri biçimde gönderin.
 3. **Ulaşım ve etkinlik sayılarını** ihtiyacı olan kişilere gönderin.
-4. **Yanıt vermeyen misafirlere** kısa, kişisel bir mesajla ulaşın. Son birkaç kişi için telefon iyi çalışır.
+4. **Yanıt vermeyen misafirlere** kısa, kişisel bir mesajla ulaşın. Son birkaç kişi için telefon iyi çalışır; gönderebileceğiniz mesajlar için [misafirler LCV vermediyse ne yapılır](/guides/guests-did-not-rsvp) rehberine bakın.
 5. **Menü seçimlerini yer kartlarında** küçük bir işaretle belirtin; böylece garsonlar kimin ne sipariş ettiğini bilir. Misafirler akşam olduğunda kendi seçimlerini çoğu zaman unutur.
 
 Geç yanıtlar olur. [Emily Post Institute](https://emilypost.com/advice/the-continuing-importance-of-the-rsvp) dahil görgü rehberleri zamanında yanıt vermenin misafirin görevi olduğu konusunda nettir, ama pratikte nazik bir hatırlatma her düğünün parçasıdır.

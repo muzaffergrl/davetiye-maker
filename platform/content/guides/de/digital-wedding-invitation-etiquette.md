@@ -90,7 +90,7 @@ Eine Woche vor Ihrer Antwortfrist prüfen Sie Ihre Liste und schicken allen, die
 
 *„Hallo Tom, nur eine kurze Erinnerung: Wir geben bald die Gästezahl an den Caterer weiter. Könntest du bis Freitag antworten? Hier ist noch einmal der Link: (Link). Danke dir!“*
 
-Nach der Frist rufen Sie die letzten Gäste an. Gerade ältere Verwandte haben den Link vielleicht geöffnet, aber den Antwort-Button nicht gefunden; ein kurzer Anruf löst das. Den vollständigen Zeitplan finden Sie in unserem Ratgeber dazu, [wann Sie Ihre Website teilen und die RSVP-Frist setzen](/guides/when-to-send-your-wedding-website).
+Nach der Frist rufen Sie die letzten Gäste an. Gerade ältere Verwandte haben den Link vielleicht geöffnet, aber den Antwort-Button nicht gefunden; ein kurzer Anruf löst das. Den vollständigen Zeitplan finden Sie in unserem Ratgeber dazu, [wann Sie Hochzeitswebsite und Einladungen verschicken](/guides/when-to-send-your-wedding-website).
 
 ## Eine digitale Einladung, die sich trotzdem wie eine Einladung anfühlt
 

@@ -33,12 +33,11 @@ Kullanıcı (2026-10-22): "dalga 3 ile devam et, N5 ve N6'yı yaz" (docs/36).
 - Kaynaklar: Emily Post `invitation-timing`, `what-to-do-when-guests-dont-rsvp` (arama sonuçlarından doğrulandı).
 - Kontrol: build temiz; N5, N6 ve G3 200, tek H1, Article + BreadcrumbList; /guides 12 rehber listeliyor; 390 px'te yatay
   taşma yok. Görüntüler `platform/previews/g197/`.
-- Testler: TEST_SONUCU
-- Çeviri yapılmadı: N5/N6 diğer dillerde İngilizce görünür; G3'ün yeni başlığı/bölümleri ve değişen linkler çevirilere
-  henüz işlenmedi (çeviri adımında senkronlanır).
+- Testler: `npm test` 1691/1691 (0 hata, 0 atlanan), build temiz.
+- Çeviri ve G3/link senkronu: G198.
 
 ## Önerilen görevler (entegratöre)
-- N5 + N6 çevirisi; G3 çevirilerinin yeni yapıya göre güncellenmesi; G1/G2/G5/N2 çevirilerinde değişen linkler.
+- ~~N5 + N6 çevirisi, G3 çeviri senkronu, değişen linkler~~ → G198 (yapıldı).
 - Dalga 4: N7 (ücretsiz/ücretli), N8 (Our Story) (docs/36).
 
 ## Günlük

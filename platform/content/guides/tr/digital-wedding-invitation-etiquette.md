@@ -90,7 +90,7 @@ Yanıt son tarihinizden bir hafta önce listenizi kontrol edin ve eksik olan her
 
 *"Merhaba Tom, catering için sayıları kesinleştiriyoruz, küçük bir hatırlatma. Cumaya kadar yanıt verebilir misin? Link tekrar burada: (link). Teşekkürler!"*
 
-Son tarihten sonra kalan birkaç misafiri arayın. Özellikle yaşlı akrabalar linki açıp yanıt düğmesini bulamamış olabilir; kısa bir telefon bunu çözer. Tam zaman çizelgesi için [websitenizi ne zaman paylaşacağınız ve LCV son tarihini nasıl belirleyeceğiniz](/guides/when-to-send-your-wedding-website) hakkındaki rehberimize bakın.
+Son tarihten sonra kalan birkaç misafiri arayın. Özellikle yaşlı akrabalar linki açıp yanıt düğmesini bulamamış olabilir; kısa bir telefon bunu çözer. Tam zaman çizelgesi için [düğün websitesi ve davetiyelerin ne zaman gönderileceği](/guides/when-to-send-your-wedding-website) hakkındaki rehberimize bakın.
 
 ## Hâlâ davetiye gibi hissettiren bir dijital davetiye
 

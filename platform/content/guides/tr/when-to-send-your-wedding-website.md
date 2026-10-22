@@ -1,12 +1,12 @@
 ---
-title: Düğün Websitesi Ne Zaman Paylaşılır, LCV Tarihi Ne Olmalı?
-description: "Tarihi ayırın" kartları, website, davetiyeler, hatırlatmalar ve LCV son tarihi için düğün gününüzden geriye doğru zaman çizelgesi; doğru tarihi seçme yolu.
+title: Düğün Websitesi ve Davetiyeler Ne Zaman Gönderilir?
+description: Düğün tarihinizden geriye doğru "tarihi ayırın" kartları, website, davetiyeler ve hatırlatmalar için zaman çizelgesi; destination ve kısa süreli düğünler.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 3
 keyword: düğün websitesi ne zaman gönderilir
-quickAnswer: Düğün websitenizi tarih ve mekân kesinleşir kesinleşmez "Tarihi ayırın" (save the date) kartlarınızla, sonra da düğünden altı ila sekiz hafta önce davetiyelerle birlikte tekrar paylaşın. LCV son tarihini düğünden iki ila üç hafta önceye ya da catering firmanızın kesin sayıları istediği tarihten birkaç gün önceye koyun.
+quickAnswer: Düğün websitenizi tarih ve mekân kesinleşir kesinleşmez "Tarihi ayırın" (save the date) kartlarınızla, sonra da düğünden altı ila sekiz hafta önce davetiyelerle birlikte tekrar paylaşın. Arada websiteyi geliştirmeye devam edin ve LCV son tarihini catering kesin sayıları istemeden önce, düğünden yaklaşık iki ila üç hafta önceye koyun.
 ---
 
 Website, düğün kırtasiyenizin erkenden paylaşıp geliştirmeye devam edebileceğiniz tek parçasıdır. Misafirler tarihi aylar öncesinden not edebilir, siz programı, oteli ve yanıt formunu ekledikçe de geri dönebilirler. Zamanlama sorusu aslında iki sorudur: **linki ne zaman paylaşmalı** ve **yanıtlar ne zamana kadar gelmeli**.
@@ -59,28 +59,22 @@ Misafirlerin çoğu uçakla gelmek, izin almak ya da pasaport yenilemek zorunday
 - Misafirler hâlâ makul fiyatlarla uçak bileti alabilsin diye davetiyeleri yerel bir düğüne göre daha erken gönderin.
 - Oteller ya da catering firmaları sayıları günden çok önce istiyorsa LCV son tarihini de öne çekin.
 
-## LCV son tarihini seçmek
+## LCV son tarihi ve hatırlatmalar
 
-Doğru son tarih, size hâlâ harekete geçecek zaman bırakan en geç tarihtir. Sözleşmelerinizdeki son tarihlerden başlayın:
+Zaman çizelgesinin ikinci yarısını son yanıt tarihi belirler. Onu düğünden yaklaşık iki ila üç hafta önceye ve catering firmanızın ya da mekânınızın kesin sayıları istediği en erken tarihten en az bir hafta önceye koyun; [LCV son tarihini seçmek](/guides/wedding-rsvp-deadline) rehberimiz bunu sözleşmelerinizden bir örnekle nasıl hesaplayacağınızı gösteriyor. Tarihi her kartta ve websitede tam yazın.
 
-1. Catering firmanızın kesin sayılara (ve gerekiyorsa yemek tercihlerine) ihtiyaç duyduğu tarihi bulun.
-2. Oturma planı, kiralamalar ya da ulaşım için mekânın varsa son tarihini bulun.
-3. Bu tarihlerin en erkenini alın ve yaklaşık bir hafta geriye gidin. LCV son tarihiniz budur.
-4. Bunu düğünden iki ila üç hafta önce genel kuralıyla karşılaştırın. Çok daha erkense misafirlerin bir hatırlatmaya ihtiyacı olabilir.
+Bu tarihten yaklaşık bir hafta önce yanıt vermemiş herkese kısa, kişisel bir hatırlatma gönderin; tarihten sonra da son birkaç kişiyi arayın. [Misafirler LCV vermediyse ne yapılır](/guides/guests-did-not-rsvp) rehberimizde bir takip planı ve kopyalayabileceğiniz mesajlar var.
 
-Birkaç pratik nokta:
+## Düğüne üç aydan az kaldıysa
 
-- **Hafta içi bir gün seçin.** Pazar günü biten bir son tarih size hafta sonunun yanıtlarını verir; pazartesi ise aynı gün eksiklerin peşine düşmeniz için zaman tanır.
-- **Websitede ve davetiyede yazıyla yazın:** "Lütfen 15 Mayıs 2027'ye kadar yanıt veriniz".
-- **Son tarihten sonra formu kapatın;** böylece geç yanıtlar doğrudan size gelir ve catering firmasına haber vermeniz gerektiğini bilirsiniz. Bizimki de dahil bazı platformlar formu yanıt son tarihinizden sonra otomatik olarak kapatır.
+Kısa bir nişanlılık, iptal edilen bir mekân ya da ailevi bir neden zaman çizelgesini sıkıştırabilir. Sıra aynı kalır; aralar kısalır:
 
-## Hatırlatmalar: ne zaman ne gönderilmeli
-
-Son tarihten yaklaşık bir hafta önce yanıt listenize bakın ve yanıt vermemiş herkese kısa, sıcak bir mesaj gönderin. Kişisel ve kolayca yanıtlanabilir tutun:
-
-*"Merhaba Sam, catering için sayıları kesinleştiriyoruz. Gelip gelemeyeceğini cumaya kadar bize bildirebilir misin? Link burada: (linkiniz). Teşekkürler!"*
-
-Son tarihten sonra kalan birkaç misafiri kendiniz arayın ya da onlara yazın. İki dakikalık bir telefon genellikle üçüncü bir hatırlatmadan daha etkilidir.
+- **"Tarihi ayırın" kartını atlayın.** Tarih ve mekân kesinleşir kesinleşmez davetiyenin kendisini gönderin.
+- **Kısa da olsa önce websiteyi yayınlayın.** Başlamak için isimler, tarih, mekân ve yanıt formu yeter; programı ve otelleri birkaç gün içinde ekleyin.
+- **Dijital bir davetiye düşünün.** Baskı ve posta süresini ortadan kaldırır; görgü rehberleri dijital davetiyeleri kısa sürede planlanan düğünlere uygun bulur. [Dijital düğün davetiyesi görgü kuralları](/guides/digital-wedding-invitation-etiquette) rehberimiz kimlerin hâlâ kâğıda ihtiyaç duyabileceğini anlatıyor.
+- **Misafirlere en az dört hafta verin.** Mümkünse davetiyeleri en az altı hafta önce gönderin; daha az zaman varsa en önemli kişileri davetiyeler ulaşmadan arayın.
+- **Otel ve ulaşım bilgilerini hemen paylaşın.** Misafirler geç rezervasyon yaptığında mekâna yakın odalar hızla dolar.
+- **Catering firmanıza en geç kesin sayı tarihini sorun** ve son yanıt tarihinizi ona göre belirleyin.
 
 ## Tarihiniz ya da mekânınız değişirse
 

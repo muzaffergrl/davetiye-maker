@@ -1,12 +1,12 @@
 ---
-title: Cuándo compartir la web de tu boda y fijar el plazo del RSVP
-description: Calendario hacia atrás desde tu boda para el "reserva la fecha", la web, las invitaciones, los recordatorios y el plazo del RSVP, y cómo elegir la fecha.
+title: Cuándo enviar la web de boda y las invitaciones
+description: Un calendario hacia atrás desde la fecha de tu boda para save the dates, la web, las invitaciones y los recordatorios, más bodas de destino y con poco tiempo.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 3
 keyword: cuándo enviar la web de boda
-quickAnswer: Comparte la web con el aviso de "reserva la fecha" (save the date), en cuanto tengas fecha y lugar, y otra vez con las invitaciones, entre seis y ocho semanas antes. Fija la fecha límite de confirmación dos o tres semanas antes de la boda, o unos días antes de que el catering necesite el número definitivo.
+quickAnswer: Comparte tu web de boda con los save the date, en cuanto tengas fecha y lugar, y otra vez con las invitaciones, entre seis y ocho semanas antes de la boda. Entre medias, sigue completando la web, y fija la fecha límite de confirmación unas dos o tres semanas antes del día, antes de que el catering necesite el número definitivo.
 ---
 
 La web es la única parte de la papelería de tu boda que puedes compartir pronto y seguir mejorando. Los invitados pueden reservar la fecha con meses de antelación y volver después a por el programa, el hotel y el formulario de respuesta cuando los añadas. En realidad, las preguntas sobre el momento son dos: **cuándo compartir el enlace** y **cuándo deben estar todas las respuestas**.
@@ -59,28 +59,22 @@ Si la mayoría de los invitados tiene que coger un avión, pedir días libres o 
 - Envía las invitaciones antes que para una boda local, para que los invitados aún puedan reservar vuelos a precios razonables.
 - Adelanta también la fecha límite de confirmación, si los hoteles o el catering necesitan las cifras mucho antes del día.
 
-## Cómo elegir la fecha límite de confirmación
+## La fecha límite de confirmación y los recordatorios
 
-La fecha límite adecuada es la más tardía que todavía te deja tiempo para actuar. Parte de los plazos de tus contratos:
+La fecha límite de respuesta marca la segunda mitad del calendario. Fíjala unas dos o tres semanas antes de la boda y al menos una semana antes de la fecha más temprana en que el catering o el lugar necesitan el número definitivo; nuestra guía para [elegir la fecha límite de confirmación](/guides/wedding-rsvp-deadline) explica cómo calcularla desde tus contratos, con un ejemplo. Escríbela completa en cada tarjeta y en la web.
 
-1. Busca la fecha en que el catering necesita el número definitivo (y la elección de menú, si la necesita).
-2. Busca cualquier plazo del lugar para el plano de mesas, los alquileres o el transporte.
-3. Toma la más temprana de esas fechas y retrocede más o menos una semana. Esa es tu fecha límite de confirmación.
-4. Compárala con la regla general de dos o tres semanas antes de la boda. Si es mucho antes, puede que los invitados necesiten un recordatorio.
+Una semana antes de esa fecha, envía un recordatorio breve y personal a quienes no hayan respondido, y llama a los últimos después. Nuestra guía sobre [qué hacer si los invitados no confirman](/guides/guests-did-not-rsvp) tiene un plan de seguimiento y mensajes para copiar.
 
-Algunos puntos prácticos:
+## Si quedan menos de tres meses para la boda
 
-- **Elige un día laborable.** Un plazo en domingo te da las respuestas del fin de semana; uno en lunes te da tiempo para perseguir las que falten ese mismo día.
-- **Escríbela con el mes en letra** en la web y en la invitación: "Se ruega confirmación antes del 15 de mayo de 2027".
-- **Cierra el formulario después del plazo** para que las respuestas tardías te lleguen directamente y sepas que tienes que avisar al catering. Algunas plataformas, como la nuestra, cierran el formulario automáticamente después de tu fecha límite.
+Un compromiso corto, la cancelación del lugar o un motivo familiar pueden comprimir el calendario. El orden es el mismo; los plazos se acortan:
 
-## Recordatorios: qué enviar y cuándo
-
-Más o menos una semana antes del plazo, mira tu lista de respuestas y envía un mensaje breve y cálido a quien no haya contestado. Que sea personal y fácil de responder:
-
-*"Hola, Sam, estamos cerrando el número de invitados con el catering. ¿Podrías decirnos antes del viernes si puedes venir? Aquí tienes el enlace: (tu enlace). ¡Gracias!"*
-
-Pasado el plazo, llama o escribe tú a los últimos invitados. Una llamada de dos minutos suele funcionar mejor que un tercer recordatorio.
+- **Sáltate el save the date.** Envía directamente la invitación en cuanto tengas confirmados la fecha y el lugar.
+- **Publica primero la web, aunque sea breve.** Nombres, fecha, lugar y formulario de respuesta bastan para empezar; añade el programa y los hoteles en pocos días.
+- **Valora una invitación digital.** Elimina los tiempos de imprenta y de correo, y las guías de etiqueta consideran las invitaciones digitales adecuadas para bodas organizadas con poco tiempo. Nuestra guía de [etiqueta de las invitaciones de boda digitales](/guides/digital-wedding-invitation-etiquette) explica quién puede necesitar papel.
+- **Da a los invitados al menos cuatro semanas.** Si puedes, envía las invitaciones al menos seis semanas antes; con menos tiempo, llama a las personas más importantes antes de que lleguen.
+- **Comparte hoteles y viaje de inmediato.** Las habitaciones cerca del lugar se agotan rápido cuando los invitados reservan tarde.
+- **Pregunta al catering cuál es su fecha más tardía para el número definitivo** y fija tu fecha límite a partir de ella.
 
 ## Si cambia la fecha o el lugar
 

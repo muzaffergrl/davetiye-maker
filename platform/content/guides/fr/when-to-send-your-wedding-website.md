@@ -1,12 +1,12 @@
 ---
-title: Quand partager son site de mariage et fixer la date du RSVP
-description: Un rétroplanning depuis la date du mariage pour les save the date, le site, les faire-part, les relances et la date limite du RSVP, et comment bien la choisir.
+title: Quand envoyer son site de mariage et ses faire-part
+description: Un calendrier à rebours depuis votre date de mariage pour les save the date, le site, les faire-part et les rappels, plus les mariages rapides.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 3
 keyword: quand envoyer le site de mariage
-quickAnswer: Partagez votre site de mariage avec vos save the date, dès que la date et le lieu sont fixés, puis à nouveau avec les faire-part, six à huit semaines avant le mariage. Fixez la date limite du RSVP deux à trois semaines avant le jour J, ou quelques jours avant la date où votre traiteur a besoin du nombre définitif.
+quickAnswer: Partagez votre site de mariage avec les save the date, dès que la date et le lieu sont fixés, puis à nouveau avec les faire-part, six à huit semaines avant le mariage. Entre les deux, continuez à enrichir le site, et fixez la date limite du RSVP environ deux à trois semaines avant le jour J, avant que le traiteur ne veuille le nombre définitif.
 ---
 
 Le site est le seul élément de votre papeterie de mariage que vous pouvez partager tôt et continuer à améliorer. Les invités peuvent réserver la date des mois à l'avance, puis revenir pour le programme, l'hôtel et le formulaire de réponse quand vous les ajoutez. La question du calendrier se résume en fait à deux questions : **quand partager le lien**, et **quand les réponses doivent être reçues**.
@@ -59,28 +59,22 @@ Si la plupart des invités doivent prendre l'avion, poser des congés ou renouve
 - Envoyez les faire-part plus tôt que pour un mariage local, pour que les invités puissent encore réserver leurs vols à des prix raisonnables.
 - Avancez aussi la date limite du RSVP, si les hôtels ou les traiteurs ont besoin des chiffres bien avant le jour J.
 
-## Choisir la date limite du RSVP
+## La date limite du RSVP et les rappels
 
-La bonne date limite est la plus tardive qui vous laisse encore le temps d'agir. Partez des échéances de vos contrats :
+La date limite de réponse structure la seconde moitié du calendrier. Fixez-la environ deux à trois semaines avant le mariage, et au moins une semaine avant la date la plus proche à laquelle le traiteur ou le lieu veut le nombre définitif ; notre guide pour [choisir la date limite du RSVP](/guides/wedding-rsvp-deadline) montre comment la calculer depuis vos contrats, avec un exemple. Écrivez-la en entier sur chaque carte et sur le site.
 
-1. Trouvez la date à laquelle votre traiteur a besoin du nombre définitif (et des choix de menu, s'il en a besoin).
-2. Repérez toute échéance du lieu pour le plan de table, les locations ou le transport.
-3. Prenez la plus proche de ces dates et reculez d'environ une semaine. C'est votre date limite de RSVP.
-4. Comparez-la à la règle générale de deux à trois semaines avant le mariage. Si elle tombe beaucoup plus tôt, les invités auront peut-être besoin d'un rappel.
+Environ une semaine avant cette date, envoyez un court rappel personnel à tous ceux qui n'ont pas répondu, puis appelez les derniers après. Notre guide sur [que faire quand les invités ne répondent pas](/guides/guests-did-not-rsvp) propose un plan de relance et des messages à copier.
 
-Quelques conseils pratiques :
+## Si le mariage a lieu dans moins de trois mois
 
-- **Choisissez un jour de semaine.** Une date limite un dimanche vous donne les réponses du week-end ; un lundi vous laisse le temps de relancer le jour même.
-- **Écrivez-la en toutes lettres** sur le site et le faire-part : « Merci de bien vouloir répondre avant le 15 mai 2027 ».
-- **Fermez le formulaire après la date limite** pour que les réponses tardives vous parviennent directement et que vous pensiez à prévenir le traiteur. Certaines plateformes, dont la nôtre, ferment automatiquement le formulaire après votre date limite de réponse.
+Des fiançailles courtes, un lieu annulé ou une raison familiale peuvent resserrer le calendrier. L'ordre reste le même ; les écarts raccourcissent :
 
-## Les relances : quoi envoyer et quand
-
-Environ une semaine avant la date limite, consultez votre liste de réponses et envoyez un court message chaleureux à ceux qui n'ont pas répondu. Restez personnel et facilitez-leur la tâche :
-
-*« Coucou Sam, nous finalisons le nombre d'invités pour le traiteur. Pourrais-tu nous dire d'ici vendredi si tu peux venir ? Voici le lien : (ton lien). Merci ! »*
-
-Après la date limite, appelez ou écrivez vous-même aux derniers invités. Un appel de deux minutes vaut généralement mieux qu'une troisième relance.
+- **Passez le save the date.** Envoyez directement le faire-part dès que la date et le lieu sont confirmés.
+- **Publiez d'abord le site, même succinct.** Les prénoms, la date, le lieu et le formulaire de réponse suffisent pour commencer ; ajoutez le programme et les hôtels dans les jours qui suivent.
+- **Pensez au faire-part numérique.** Il supprime les délais d'impression et de poste, et les guides de savoir-vivre le jugent bien adapté aux mariages organisés rapidement. Notre guide sur les [usages du faire-part de mariage numérique](/guides/digital-wedding-invitation-etiquette) indique qui peut encore avoir besoin de papier.
+- **Laissez aux invités au moins quatre semaines.** Si possible, envoyez les faire-part au moins six semaines avant ; avec moins de temps, appelez les personnes les plus importantes avant que les faire-part n'arrivent.
+- **Partagez tout de suite hôtels et trajet.** Les chambres proches du lieu partent vite quand les invités réservent tard.
+- **Demandez au traiteur sa date la plus tardive pour le nombre définitif**, et fixez votre date limite à partir de celle-ci.
 
 ## Si la date ou le lieu change
 

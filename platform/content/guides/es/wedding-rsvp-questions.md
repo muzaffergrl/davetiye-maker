@@ -43,7 +43,7 @@ Antes de añadir una pregunta, piensa quién usará la respuesta y para cuándo.
 Dos notas sobre esta tabla:
 
 - **La elección de menú va en la respuesta.** El [Emily Post Institute](https://emilypost.com/advice/how-to-word-a-wedding-response-card) sugiere que, cuando los invitados eligen su plato principal, se pregunte en la tarjeta de respuesta (o en la respuesta en línea), para que el catering reciba una lista completa. Si los invitados responden en línea, a la tarjeta de respuesta impresa le bastan la dirección y la fecha; mira [cómo poner la web de boda en la invitación](/guides/wedding-website-on-invitation).
-- **Mira las fechas en tus contratos.** La columna «cuándo la necesita» depende del catering, el lugar y la empresa de transporte. Nuestra guía sobre [cuándo compartir tu web de boda y fijar la fecha límite de respuesta](/guides/when-to-send-your-wedding-website) explica cómo calcular hacia atrás desde esas fechas.
+- **Mira las fechas en tus contratos.** La columna «cuándo la necesita» depende del catering, el lugar y la empresa de transporte. Nuestra guía para [elegir la fecha límite de confirmación](/guides/wedding-rsvp-deadline) explica cómo calcular hacia atrás desde esas fechas.
 
 ## Preguntas que conviene evitar, y por qué
 
@@ -95,7 +95,7 @@ Recoger las respuestas es la mitad del trabajo. La otra mitad es hacerlas llegar
 1. **Descarga tus respuestas** como hoja de cálculo el día después de la fecha límite.
 2. **Cuenta los menús y las necesidades alimentarias** y envíalos al catering en el formato que te pida.
 3. **Envía las cifras de transporte y de eventos** a quien las necesite.
-4. **Contacta con los invitados que no han respondido** con un mensaje breve y personal. Para los últimos, una llamada funciona bien.
+4. **Contacta con los invitados que no han respondido** con un mensaje breve y personal. Para los últimos, una llamada funciona bien; mira [qué hacer si los invitados no confirman](/guides/guests-did-not-rsvp) para mensajes que puedes enviar.
 5. **Marca la elección de menú en las tarjetas de mesa** con un pequeño símbolo, para que los camareros sepan quién pidió qué. Los invitados suelen olvidar su propia elección para la noche.
 
 Las respuestas tardías ocurren. Las guías de etiqueta, entre ellas el [Emily Post Institute](https://emilypost.com/advice/the-continuing-importance-of-the-rsvp), dejan claro que responder a tiempo es deber del invitado, pero en la práctica un recordatorio amable forma parte de toda boda.

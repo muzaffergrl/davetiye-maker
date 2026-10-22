@@ -43,7 +43,7 @@ Bevor Sie eine Frage hinzufügen, fragen Sie sich, wer die Antwort nutzt und bis
 Zwei Hinweise zu dieser Tabelle:
 
 - **Die Menüwahl gehört in die Antwort.** Das [Emily Post Institute](https://emilypost.com/advice/how-to-word-a-wedding-response-card) empfiehlt, die Wahl des Hauptgerichts auf der Antwortkarte (oder in der Online-Antwort) abzufragen, damit der Caterer eine vollständige Liste bekommt. Antworten Gäste online, braucht die gedruckte Antwortkarte nur Adresse und Datum; siehe [Hochzeitswebsite auf die Einladung bringen](/guides/wedding-website-on-invitation).
-- **Prüfen Sie die Termine in Ihren Verträgen.** Die Spalte „Wann sie gebraucht wird“ hängt von Caterer, Location und Transportunternehmen ab. Unser Ratgeber dazu, [wann Sie Ihre Hochzeitswebsite teilen und die RSVP-Frist setzen](/guides/when-to-send-your-wedding-website), zeigt, wie Sie von diesen Terminen aus rückwärts rechnen.
+- **Prüfen Sie die Termine in Ihren Verträgen.** Die Spalte „Wann sie gebraucht wird“ hängt von Caterer, Location und Transportunternehmen ab. Unser Ratgeber zur [Wahl der RSVP-Frist](/guides/wedding-rsvp-deadline), zeigt, wie Sie von diesen Terminen aus rückwärts rechnen.
 
 ## Fragen, die Sie weglassen sollten, und warum
 
@@ -95,7 +95,7 @@ Antworten zu sammeln ist die halbe Arbeit. Die andere Hälfte ist, sie an die ri
 1. **Laden Sie Ihre Antworten** am Tag nach der Frist als Tabelle **herunter**.
 2. **Zählen Sie Menüs und Ernährungswünsche** und schicken Sie sie Ihrem Caterer in dem Format, das er möchte.
 3. **Schicken Sie Transport- und Veranstaltungszahlen** an alle, die sie brauchen.
-4. **Kontaktieren Sie Gäste, die nicht geantwortet haben,** mit einer kurzen persönlichen Nachricht. Für die letzten paar funktioniert ein Anruf gut.
+4. **Kontaktieren Sie Gäste, die nicht geantwortet haben,** mit einer kurzen persönlichen Nachricht. Für die letzten paar funktioniert ein Anruf gut; Nachrichten zum Verschicken finden Sie unter [was tun, wenn Gäste nicht antworten](/guides/guests-did-not-rsvp).
 5. **Markieren Sie die Menüwahl auf den Tischkarten** mit einem kleinen Symbol, damit der Service weiß, wer was bestellt hat. Gäste vergessen ihre eigene Wahl bis zum Abend oft.
 
 Späte Antworten kommen vor. Etikette-Ratgeber, darunter das [Emily Post Institute](https://emilypost.com/advice/the-continuing-importance-of-the-rsvp), sind sich einig, dass rechtzeitiges Antworten die Pflicht des Gastes ist, doch in der Praxis gehört eine freundliche Erinnerung zu jeder Hochzeit.

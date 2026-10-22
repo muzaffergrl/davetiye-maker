@@ -43,7 +43,7 @@ Avant d'ajouter une question, demandez-vous qui utilisera la réponse et pour qu
 Deux remarques sur ce tableau :
 
 - **Le choix du menu se demande dans la réponse.** L'[Emily Post Institute](https://emilypost.com/advice/how-to-word-a-wedding-response-card) conseille, quand les invités choisissent leur plat, de le demander sur la carte-réponse (ou dans la réponse en ligne), afin que le traiteur reçoive une liste complète. Si les invités répondent en ligne, le carton-réponse imprimé n'a besoin que de l'adresse et de la date ; voyez [comment indiquer son site de mariage sur le faire-part](/guides/wedding-website-on-invitation).
-- **Vérifiez les dates dans vos contrats.** La colonne « pour quand » dépend de votre traiteur, de votre lieu et de votre société de transport. Notre guide sur [quand partager votre site de mariage et fixer la date limite du RSVP](/guides/when-to-send-your-wedding-website) montre comment compter à rebours à partir de ces dates.
+- **Vérifiez les dates dans vos contrats.** La colonne « pour quand » dépend de votre traiteur, de votre lieu et de votre société de transport. Notre guide pour [choisir la date limite du RSVP](/guides/wedding-rsvp-deadline) montre comment compter à rebours à partir de ces dates.
 
 ## Les questions à éviter, et pourquoi
 
@@ -95,7 +95,7 @@ Recueillir les réponses, c'est la moitié du travail. L'autre moitié consiste 
 1. **Téléchargez vos réponses** sous forme de tableau le lendemain de la date limite.
 2. **Comptez les menus et les régimes alimentaires** et envoyez-les à votre traiteur dans le format qu'il demande.
 3. **Envoyez les chiffres de transport et d'événements** à ceux qui en ont besoin.
-4. **Contactez les invités qui n'ont pas répondu** avec un court message personnel. Pour les derniers, un appel fonctionne bien.
+4. **Contactez les invités qui n'ont pas répondu** avec un court message personnel. Pour les derniers, un appel fonctionne bien ; voyez [que faire quand les invités ne répondent pas](/guides/guests-did-not-rsvp) pour des messages à envoyer.
 5. **Indiquez le choix du menu sur les marque-places** avec un petit symbole, pour que le service sache qui a commandé quoi. Les invités oublient souvent leur propre choix le soir venu.
 
 Les réponses tardives arrivent. Les guides de savoir-vivre, dont l'[Emily Post Institute](https://emilypost.com/advice/the-continuing-importance-of-the-rsvp), sont clairs : répondre à temps est le devoir de l'invité, mais en pratique un rappel aimable fait partie de chaque mariage.

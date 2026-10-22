@@ -90,7 +90,7 @@ Une semaine avant la date limite de réponse, vérifiez votre liste et envoyez u
 
 *« Coucou Tom, petit rappel amical : nous finalisons le nombre d'invités pour le traiteur. Pourrais-tu répondre d'ici vendredi ? Voici à nouveau le lien : (lien). Merci ! »*
 
-Après la date limite, appelez les derniers invités. Les proches plus âgés, en particulier, ont peut-être ouvert le lien sans trouver le bouton de réponse ; un rapide coup de fil règle la question. Consultez notre guide sur [quand partager votre site et fixer la date limite du RSVP](/guides/when-to-send-your-wedding-website) pour le calendrier complet.
+Après la date limite, appelez les derniers invités. Les proches plus âgés, en particulier, ont peut-être ouvert le lien sans trouver le bouton de réponse ; un rapide coup de fil règle la question. Consultez notre guide sur [quand envoyer votre site de mariage et vos faire-part](/guides/when-to-send-your-wedding-website) pour le calendrier complet.
 
 ## Un faire-part numérique qui reste une vraie invitation
 

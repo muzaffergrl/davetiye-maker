@@ -20,7 +20,7 @@ Rassemblez tout cela dans une seule note sur votre téléphone avant d'ouvrir un
 - [ ] Le nom du lieu, son adresse complète et un lien de carte copié depuis Google Maps ou Apple Maps
 - [ ] Le déroulé de la journée : cérémonie, vin d'honneur, dîner, soirée dansante, avec les horaires
 - [ ] Trois à cinq photos qui vous plaisent à tous les deux, dont un portrait qui se recadre bien
-- [ ] Votre date limite de RSVP (voir [quand la fixer](/guides/when-to-send-your-wedding-website))
+- [ ] Votre date limite de RSVP (voir [quand la fixer](/guides/wedding-rsvp-deadline))
 - [ ] Les liens que vous voulez partager : liste de mariage, chambres réservées à l'hôtel, transport
 - [ ] Les réponses aux questions que les invités posent toujours : dress code, stationnement, enfants, accompagnants
 
@@ -90,7 +90,7 @@ Décidez de ce que vous devez savoir avant que le traiteur et le lieu ne vous de
 - Régimes alimentaires ou allergies, en réponse courte
 - En option, une demande de chanson ou un petit mot pour les mariés
 
-Limitez les questions personnalisées à deux ou trois ; chaque question supplémentaire réduit les chances que les invités terminent le formulaire. Fixez la date limite de réponse environ deux à trois semaines avant le mariage, ou quelques jours avant la date à laquelle votre traiteur veut le nombre définitif. Notre [guide du calendrier](/guides/when-to-send-your-wedding-website) explique comment remonter le temps à partir de cette date, et le guide des [questions RSVP pour un mariage](/guides/wedding-rsvp-questions) propose une formulation pour chaque question.
+Limitez les questions personnalisées à deux ou trois ; chaque question supplémentaire réduit les chances que les invités terminent le formulaire. Fixez la date limite de réponse environ deux à trois semaines avant le mariage, ou quelques jours avant la date à laquelle votre traiteur veut le nombre définitif. Notre guide pour [choisir la date limite du RSVP](/guides/wedding-rsvp-deadline) explique comment remonter le temps à partir de cette date, et le guide des [questions RSVP pour un mariage](/guides/wedding-rsvp-questions) propose une formulation pour chaque question.
 
 **Temps :** 10 minutes.
 

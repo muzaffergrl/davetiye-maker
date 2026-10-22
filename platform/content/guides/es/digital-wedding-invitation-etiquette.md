@@ -90,7 +90,7 @@ Una semana antes de tu fecha límite de confirmación, revisa la lista y envía 
 
 *"Hola, Tom, solo un recordatorio cariñoso: estamos cerrando el número de invitados con el catering. ¿Podrías confirmarnos antes del viernes? Aquí tienes otra vez el enlace: (enlace). ¡Gracias!"*
 
-Pasada la fecha límite, llama a los últimos invitados. Sobre todo los familiares mayores pueden haber abierto el enlace sin encontrar el botón de respuesta; una llamada rápida lo resuelve. Consulta nuestra guía sobre [cuándo compartir tu web y fijar la fecha límite de confirmación](/guides/when-to-send-your-wedding-website) para ver el calendario completo.
+Pasada la fecha límite, llama a los últimos invitados. Sobre todo los familiares mayores pueden haber abierto el enlace sin encontrar el botón de respuesta; una llamada rápida lo resuelve. Consulta nuestra guía sobre [cuándo enviar tu web de boda y las invitaciones](/guides/when-to-send-your-wedding-website) para ver el calendario completo.
 
 ## Una invitación digital que sigue pareciendo una invitación
 

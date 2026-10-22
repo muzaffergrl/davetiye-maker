@@ -20,7 +20,7 @@ Sammeln Sie diese Angaben in einer Notiz auf Ihrem Handy, bevor Sie einen Websit
 - [ ] Name der Location, die vollständige Adresse und ein Kartenlink aus Google Maps oder Apple Maps
 - [ ] Der Ablauf des Tages: Trauung, Sektempfang, Abendessen, Tanz, jeweils mit Uhrzeit
 - [ ] Drei bis fünf Fotos, die Ihnen beiden gefallen, darunter ein Porträt, das sich gut zuschneiden lässt
-- [ ] Ihre RSVP-Frist (siehe [wann Sie sie setzen](/guides/when-to-send-your-wedding-website))
+- [ ] Ihre RSVP-Frist (siehe [wann Sie sie setzen](/guides/wedding-rsvp-deadline))
 - [ ] Links, die Sie teilen möchten: Wunschliste, Hotelkontingent, Anreise
 - [ ] Antworten auf die Fragen, die Gäste immer stellen: Dresscode, Parken, Kinder, Begleitung
 
@@ -90,7 +90,7 @@ Bei den meisten Baukästen können Sie jedes Foto für seinen Rahmen zuschneiden
 - Ernährungswünsche oder Allergien, als kurze Antwort
 - Optional ein Musikwunsch oder eine Nachricht an das Paar
 
-Beschränken Sie sich auf zwei oder drei eigene Fragen; jede zusätzliche Frage senkt die Chance, dass Gäste das Formular abschließen. Setzen Sie die Antwortfrist etwa zwei bis drei Wochen vor der Hochzeit oder ein paar Tage vor dem Termin, an dem Ihr Caterer die endgültige Zahl braucht. Unser [Ratgeber zum Timing](/guides/when-to-send-your-wedding-website) erklärt, wie Sie von diesem Termin aus rückwärts planen, und der Ratgeber zu [RSVP-Fragen für die Hochzeit](/guides/wedding-rsvp-questions) hat Formulierungen für jede Frage.
+Beschränken Sie sich auf zwei oder drei eigene Fragen; jede zusätzliche Frage senkt die Chance, dass Gäste das Formular abschließen. Setzen Sie die Antwortfrist etwa zwei bis drei Wochen vor der Hochzeit oder ein paar Tage vor dem Termin, an dem Ihr Caterer die endgültige Zahl braucht. Unser Ratgeber zur [Wahl der RSVP-Frist](/guides/wedding-rsvp-deadline) erklärt, wie Sie von diesem Termin aus rückwärts planen, und der Ratgeber zu [RSVP-Fragen für die Hochzeit](/guides/wedding-rsvp-questions) hat Formulierungen für jede Frage.
 
 **Zeit:** 10 Minuten.
 

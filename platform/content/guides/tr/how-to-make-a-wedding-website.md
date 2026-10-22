@@ -20,7 +20,7 @@ Herhangi bir website oluşturucuyu açmadan önce bunları telefonunuzda tek bir
 - [ ] Mekânın adı, tam adresi ve Google Maps ya da Apple Maps'ten kopyalanmış bir harita linki
 - [ ] Günün akışı, saatleriyle birlikte: tören, kokteyl, yemek, dans
 - [ ] İkinizin de sevdiği üç ila beş fotoğraf; bunlardan biri iyi kırpılabilen dikey bir portre olsun
-- [ ] LCV son tarihiniz (bkz. [ne zaman belirlemeli](/guides/when-to-send-your-wedding-website))
+- [ ] LCV son tarihiniz (bkz. [ne zaman belirlemeli](/guides/wedding-rsvp-deadline))
 - [ ] Paylaşmak istediğiniz linkler: hediye listesi, otel oda bloğu, ulaşım
 - [ ] Misafirlerin her zaman sorduğu soruların yanıtları: kıyafet kuralı, otopark, çocuklar, artı bir kişi
 
@@ -90,7 +90,7 @@ Catering firmanız ve mekânınız kişi sayısı istemeden önce neyi bilmeniz 
 - Kısa bir yanıt olarak beslenme ihtiyaçları ya da alerjiler
 - İsteğe bağlı olarak bir şarkı isteği ya da çifte bir not
 
-Özel soruları iki üç taneyle sınırlayın; her ek soru misafirlerin formu tamamlama ihtimalini düşürür. Yanıt son tarihini düğünden yaklaşık iki ila üç hafta önceye ya da catering firmanızın kesin sayı tarihinden birkaç gün önceye koyun. [Zamanlama rehberimiz](/guides/when-to-send-your-wedding-website) bu tarihten geriye doğru nasıl hesap yapacağınızı anlatıyor; [düğün LCV soruları](/guides/wedding-rsvp-questions) rehberi de her soru için örnek metin veriyor.
+Özel soruları iki üç taneyle sınırlayın; her ek soru misafirlerin formu tamamlama ihtimalini düşürür. Yanıt son tarihini düğünden yaklaşık iki ila üç hafta önceye ya da catering firmanızın kesin sayı tarihinden birkaç gün önceye koyun. [LCV son tarihini seçmek](/guides/wedding-rsvp-deadline) rehberimiz bu tarihten geriye doğru nasıl hesap yapacağınızı anlatıyor; [düğün LCV soruları](/guides/wedding-rsvp-questions) rehberi de her soru için örnek metin veriyor.
 
 **Süre:** 10 dakika.
 
