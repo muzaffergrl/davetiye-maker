@@ -191,11 +191,11 @@
       "venue": "/demo/silver-photo-booth/venue-1280w.webp"
     },
     "sky-lantern-festival": {
-      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
-      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
-      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
-      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
-      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
+      "hero_portrait": "/demo/sky-lantern-festival/hero_portrait-926w.webp",
+      "story_1": "/demo/sky-lantern-festival/story_1-1086w.webp",
+      "story_2": "/demo/sky-lantern-festival/story_2-1086w.webp",
+      "story_3": "/demo/sky-lantern-festival/story_3-1086w.webp",
+      "venue": "/demo/sky-lantern-festival/venue-1280w.webp"
     },
     "sunflower-rustic-barn": {
       "hero_portrait": "/demo/sunflower-rustic-barn/hero_portrait-1024w.webp",

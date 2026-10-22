@@ -83,8 +83,8 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   'highland-tartan-thistle': { music: 'evening-strings', opening: [[150, 'clasp'], [600, 'ribbon'], [1300, 'paper'], [2500, 'slide'], [3150, 'chime']] },
   // Art Nouveau Lily: a touch (head) · light through the stained glass (glow) · side petals (sides) · centre petal (centre) · card rises (rise) · forward
   'art-nouveau-lily': { music: 'garden-waltz', opening: [[0, 'tap'], [300, 'chime'], [1100, 'paper'], [1500, 'paper'], [2400, 'slide'], [3050, 'chime']] },
-  // Sky Lantern Festival: a touch kindles the lantern (kindle) · the hands let go (hands) · it lifts off (rise) · the card glows in (card) · forward
-  'sky-lantern-festival': { music: 'first-light', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
+  // Sky Lantern Festival (G431): the lantern lights (light) · the silk bow slips (thread) · it lifts away (lift) · the flap opens (flap) · the card rises (rise)
+  'sky-lantern-festival': { music: 'first-light', opening: [[0, 'chime'], [600, 'ribbon'], [800, 'whoosh'], [1700, 'paper'], [2300, 'slide']] },
   // Victorian Glasshouse: the copper label swings (tag) · the twine comes apart (twine) · the flap folds back (flap) · the card rises (rise) · the mist is wiped (wipe) · forward
   'victorian-glasshouse': { music: 'garden-waltz', opening: [[0, 'tap'], [300, 'ribbon'], [900, 'paper'], [1700, 'slide'], [2600, 'whoosh'], [3600, 'chime']] },
   // Grand Theatre Premiere: the curtain draws a breath (tug) · the left panel parts (partL) · the card is lit (rise) · forward

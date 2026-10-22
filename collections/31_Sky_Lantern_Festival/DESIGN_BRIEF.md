@@ -85,7 +85,8 @@ dizisi. Yazı, rakam, karakter, monogram, logo, QR hiçbir görselde yok; isimle
   18, 2027, 6:30 PM, America/Los_Angeles; URL ve medya null) — değişmedi.
 - GPT istekleri: `assets/gpt/GPT_PROMPTS.md` (PAKET 5R website katmanları W1–W19 = 21 dosya, PAKET 2 beş örnek fotoğraf
   **var**, PAKET 6R basılı davetiye ön/arka); prova şekli `assets/gpt/kuru_sekil.json`.
-- Tema: `platform/themes/sky-lantern-festival/` şu an Codex `envelope-v3` sürümü; G431'de 39 pilotunun yapısıyla baştan
-  kurulacak (`docs/35` §6, `docs/34`).
+- Tema: `platform/themes/sky-lantern-festival/` **yeniden kuruldu** (G431, 2026-10-22; 39 pilot yapısı, `docs/34`, pilot
+  dersleri `docs/35` §6a) — GPT parçaları G231 (PAKET 5R 21 dosya, PAKET 6R 2 dosya). Durum: **editable_draft**, katalogda
+  `preview` ("Coming soon"); satış yok. Katalog kapak görüntüsü/klibi henüz eski (yeniden yakalama bekliyor).
 - Etsy ilanı ve PAKET 3/7 ilan sahneleri: tema kurulunca yeniden (`tools/paket7_ilan.py`); `package/listing/listing_v3.md`
   yayımlanmadı (K41).

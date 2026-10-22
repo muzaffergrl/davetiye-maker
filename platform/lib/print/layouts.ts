@@ -341,15 +341,16 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     ink: '#173A80', accent: '#8C4128', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 31 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
+  // 31 (G431, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): rice paper with a dip-dyed dusk band and three
+  // small lit lanterns across the top (down to ~17 %), a fine gold line with a tiny lantern near the bottom (~92 %) on the
+  // front; a short string of miniature lanterns at the top of the back (~9.5 %). `cover` for 5×7 and A5 (ChatGPT's
+  // 1068×1473). Boxes ~2 % clear of it all.
   'sky-lantern-festival': {
     collection: '31_Sky_Lantern_Festival',
-    sources: { front: 'print/print_front.png', back: 'print/print_back.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Bellefair&family=Corinthia'),
     script: "'Corinthia', cursive", serif: "'Bellefair', Georgia, serif",
-    ink: '#3B2A4A', accent: '#9A5A26', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#3B2A4A', accent: '#8C4C48', front: [19, 12, 10, 12], back: [12, 11, 9, 11],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
   // 32 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
