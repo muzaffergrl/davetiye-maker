@@ -20,3 +20,13 @@ test('N7 and N8 exist, state product limits from config, and link their cluster'
   assert.match(n8.markdown, /\]\(\/guides\/wedding-website-wording\)/);
   for (const g of [n7, n8]) assert.doesNotMatch(g.markdown, /\{\{/, `${g.slug}: no token left unfilled`);
 });
+
+test('no guide title or description in any language shows a frontmatter escape (G200: a \\" leaked into a title)', async () => {
+  const { loadGuidesIn, LANGS } = { ...(await import('../lib/marketing/guides.ts')), ...(await import('../lib/marketing/i18n.ts')) };
+  for (const lang of LANGS) {
+    for (const g of loadGuidesIn(lang)) {
+      assert.doesNotMatch(g.title, /\\/, `${lang} ${g.slug} title`);
+      assert.doesNotMatch(g.description, /\\/, `${lang} ${g.slug} description`);
+    }
+  }
+});

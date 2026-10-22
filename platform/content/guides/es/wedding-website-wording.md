@@ -30,7 +30,7 @@ La bienvenida va en la página de inicio. Saluda, di que os alegra y señala lo 
 
 ## Introducción de vuestra historia y pies de foto
 
-La introducción ocupa una o dos frases. Los pies de foto, unas pocas palabras: un lugar, un momento, una fecha.
+La introducción ocupa una o dos frases. Los pies de foto, unas pocas palabras: un lugar, un momento, una fecha. Para estructuras más largas y ejemplos, mira los [ejemplos de «Nuestra historia»](/guides/wedding-website-our-story-examples).
 
 | Tono | Introducción de la historia |
 |---|---|

@@ -32,7 +32,7 @@ Die Begrüßung steht auf der Startseite. Sagen Sie Hallo, sagen Sie, dass Sie s
 
 ## Einleitung zu Ihrer Geschichte und Bildunterschriften
 
-Die Einleitung besteht aus ein oder zwei Sätzen. Bildunterschriften sind ein paar Worte: ein Ort, ein Moment, ein Datum.
+Die Einleitung besteht aus ein oder zwei Sätzen. Bildunterschriften sind ein paar Worte: ein Ort, ein Moment, ein Datum. Längere Aufbauten und Beispiele finden Sie unter [Beispiele für „Unsere Geschichte“](/guides/wedding-website-our-story-examples).
 
 | Tonlage | Einleitung der Geschichte |
 |---|---|

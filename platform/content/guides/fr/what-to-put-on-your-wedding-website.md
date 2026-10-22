@@ -32,7 +32,7 @@ Ce sont les informations que les invités cherchent en premier. S'il en manque u
 
 Ajoutez-les s'ils s'appliquent à votre mariage. Chacun vous épargne une poignée de messages.
 
-- **Votre histoire.** Une courte introduction et quelques photos légendées. Restez léger ; les invités apprécient, mais ils viennent pour les informations pratiques.
+- **Votre histoire.** Une courte introduction et quelques photos légendées. Restez léger ; les invités apprécient, mais ils viennent pour les informations pratiques. Voyez les [exemples de « Notre histoire »](/guides/wedding-website-our-story-examples) pour des structures et des formulations.
 - **Voyage et hébergement.** Les hôtels à proximité, les chambres réservées et leur date limite de réservation, l'aéroport le plus proche, le stationnement et les horaires de navette.
 - **Dress code.** Un ou deux mots et une phrase d'explication, par exemple « Chic champêtre : costumes ou robes ; la cérémonie a lieu sur l'herbe. »
 - **Lien vers la liste de mariage.** Un seul lien, dans sa propre section, pas répété sur chaque page. Les guides d'étiquette comme celui de l'[Emily Post Institute](https://emilypost.com/advice/wedding-website-tips) déconseillent de mettre la liste de mariage au premier plan.

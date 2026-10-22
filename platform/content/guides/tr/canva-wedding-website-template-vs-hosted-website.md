@@ -114,4 +114,4 @@ Kurulduktan sonra iyi çalışabilir: bir form bağlarsınız (Canva'nın kendis
 
 ### Hangisi daha ucuz?
 
-Fiyatlar satıcıya göre değişir. Kendi alan adınız gibi özellikler için gerekecek ücretli planlar dahil toplam maliyeti ve websitenin ne kadar süre yayında kalacağını karşılaştırın. Sonra kurmaya harcayacağınız zamanı kazanacağınız zamanla tartın.
+Fiyatlar satıcıya göre değişir. Kendi alan adınız gibi özellikler için gerekecek ücretli planlar dahil toplam maliyeti ve websitenin ne kadar süre yayında kalacağını karşılaştırın. Sonra kurmaya harcayacağınız zamanı kazanacağınız zamanla tartın. [Ücretsiz mi, ücretli mi düğün websitesi](/guides/free-vs-paid-wedding-websites) rehberimiz gözden kaçması kolay maliyetleri listeliyor.

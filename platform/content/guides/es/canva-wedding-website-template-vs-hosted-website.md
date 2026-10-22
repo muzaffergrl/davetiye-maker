@@ -114,4 +114,4 @@ En la mayoría de las plataformas alojadas puedes cambiar el contenido pero no l
 
 ### ¿Cuál es más barata?
 
-Los precios varían según el vendedor. Compara el coste total, incluido cualquier plan de pago que necesites para funciones como tu propio dominio, y cuánto tiempo sigue en línea la web. Después compara el tiempo que dedicarás a construirla con el tiempo que te ahorras.
+Los precios varían según el vendedor. Compara el coste total, incluido cualquier plan de pago que necesites para funciones como tu propio dominio, y cuánto tiempo sigue en línea la web. Después compara el tiempo que dedicarás a construirla con el tiempo que te ahorras. Nuestra guía [web de boda gratis o de pago](/guides/free-vs-paid-wedding-websites) enumera los costes que se pasan por alto.

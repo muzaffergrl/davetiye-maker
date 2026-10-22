@@ -32,7 +32,7 @@ Son los datos que los invitados buscan primero. Si falta alguno, alguien te escr
 
 Añádelos si encajan con tu boda. Cada uno te ahorra unos cuantos mensajes.
 
-- **Vuestra historia.** Una introducción breve y unas cuantas fotos con pies de foto. Que sea ligera; a los invitados les gusta, pero vienen por los detalles.
+- **Vuestra historia.** Una introducción breve y unas cuantas fotos con pies de foto. Que sea ligera; a los invitados les gusta, pero vienen por los detalles. Mira los [ejemplos de «Nuestra historia»](/guides/wedding-website-our-story-examples) para estructuras y textos.
 - **Viaje y alojamiento.** Hoteles cercanos, el bloque de habitaciones si lo hay y su plazo de reserva, el aeropuerto más cercano, el aparcamiento y los horarios del autobús lanzadera.
 - **Código de vestimenta.** Una o dos palabras y una frase de explicación, por ejemplo: "Formal de jardín: trajes o vestidos; la ceremonia es sobre césped."
 - **Enlace a la lista de bodas.** Un solo enlace en su propia sección, sin repetirlo en cada página. Guías de etiqueta como la del [Emily Post Institute](https://emilypost.com/advice/wedding-website-tips) desaconsejan poner la lista en primer plano.

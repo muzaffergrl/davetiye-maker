@@ -35,7 +35,7 @@ Doğru seçim görünüşten çok nerede düzenleyeceğinize ve yanıtların siz
 | Düzenleme cihazı | Planlamanın çoğu telefonda, başka işlerin arasında yapılır | Her şeyi bilgisayar olmadan telefonumdan değiştirebilir miyim? |
 | LCV | Mesajlara, e-postalara ve formlara dağılmış yanıtları saymak zordur | Yanıtlar indirebileceğim tek bir listede toplanıyor mu? |
 | Link önizlemesi | Misafirler dokunup dokunmamaya önizlemeye bakarak karar verir | Paylaşılan link isimlerimizi ve tarihimizi gösteriyor mu? |
-| Maliyet | Bazı araçlar ücretsizdir ama yükseltme satar; bazıları tek seferlik ücret alır | Toplamda ne ödüyorum ve ne kadar süre için? |
+| Maliyet | Bazı araçlar ücretsizdir ama yükseltme satar; bazıları tek seferlik ücret alır | Toplamda ne ödüyorum ve ne kadar süre için? ([ücretsiz mi, ücretli mi](/guides/free-vs-paid-wedding-websites)) |
 | Ne kadar süre yayında kalır | Misafirler düğünden sonra da fotoğraf ve bilgi arar | Site ne zamana kadar yayında kalacak? |
 | Hesaplar | Bazı oluşturucular sizden, bazıları misafirlerden de hesap ister | Misafirlerimin yanıt vermek için kayıt olması gerekiyor mu? |
 

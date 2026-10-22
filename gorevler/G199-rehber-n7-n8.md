@@ -28,11 +28,11 @@ Kullanıcı (2026-10-22): "dalga 4 ile devam et, N7 ve N8'i yaz" (docs/36).
 - İç linkler (İngilizce): G6 ve G1 → N7; G4 ve G2 → N8. N7 → G6, N3, G2; N8 → G4, G2.
 - Kontrol: build temiz; N7 ve N8 200, tek H1, Article + BreadcrumbList; jetonlar sayfada gerçek değerle ("12 months",
   "200 characters"); /guides 14 rehber listeliyor; 390 px'te yatay taşma yok. Görüntüler `platform/previews/g199/`.
-- Testler: TEST_SONUCU
-- Çeviri yapılmadı: N7/N8 diğer dillerde İngilizce görünür; bu dalganın iç link cümleleri çevirilerde yok.
+- Testler: `npm test` 1693/1693 (0 hata, 0 atlanan; g199 testi dahil), build temiz.
+- Çeviri: G200.
 
 ## Önerilen görevler (entegratöre)
-- N7 + N8 çevirisi ve çevirilerde bu dalganın iç link cümleleri.
+- ~~N7 + N8 çevirisi~~ → G200 (yapıldı).
 - Dalga 5: N9 (SSS örnekleri), N10 (destination checklist) (docs/36).
 
 ## Günlük

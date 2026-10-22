@@ -35,7 +35,7 @@ Le bon choix dépend moins de l'apparence que de l'endroit où vous ferez vos mo
 | Appareil de modification | L'essentiel de l'organisation se fait sur téléphone, entre deux choses | Puis-je tout modifier depuis mon téléphone, sans ordinateur portable ? |
 | RSVP | Des réponses dispersées entre SMS, e-mails et formulaires sont difficiles à compter | Les réponses arrivent-elles dans une seule liste que je peux télécharger ? |
 | Aperçu du lien | Les invités décident de toucher le lien d'après l'aperçu | Le lien partagé affiche-t-il nos prénoms et la date ? |
-| Coût | Certains outils sont gratuits mais vendent des options ; d'autres se paient une fois | Combien vais-je payer au total, et pour combien de temps ? |
+| Coût | Certains outils sont gratuits mais vendent des options ; d'autres se paient une fois | Combien vais-je payer au total, et pour combien de temps ? ([gratuit ou payant](/guides/free-vs-paid-wedding-websites)) |
 | Durée de mise en ligne | Les invités cherchent les photos et les détails après le jour J | Jusqu'à quand le site restera-t-il en ligne ? |
 | Comptes | Certains outils exigent un compte pour vous, d'autres aussi pour les invités | Mes invités doivent-ils s'inscrire pour répondre ? |
 

@@ -30,7 +30,7 @@ Karşılama ana sayfada yer alır. Merhaba deyin, sevindiğinizi söyleyin ve mi
 
 ## Hikâyemiz girişi ve fotoğraf açıklamaları
 
-Giriş bir iki cümledir. Açıklamalar birkaç kelimedir: bir yer, bir an, bir tarih.
+Giriş bir iki cümledir. Açıklamalar birkaç kelimedir: bir yer, bir an, bir tarih. Daha uzun hikâye yapıları ve örnekler için [Hikâyemiz örneklerine](/guides/wedding-website-our-story-examples) bakın.
 
 | Ton | Hikâye girişi |
 |---|---|

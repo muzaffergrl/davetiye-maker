@@ -35,7 +35,7 @@ La elección correcta depende menos del aspecto que de dónde vas a editar y de 
 | Dispositivo para editar | Casi toda la organización se hace desde el móvil, entre otras tareas | ¿Puedo cambiarlo todo desde el móvil, sin portátil? |
 | Confirmación de asistencia | Las respuestas repartidas entre mensajes, correos y formularios son difíciles de contar | ¿Llegan las respuestas a una sola lista que pueda descargar? |
 | Vista previa del enlace | Los invitados deciden si tocar el enlace según la vista previa | ¿El enlace compartido muestra nuestros nombres y la fecha? |
-| Coste | Algunas herramientas son gratuitas pero venden mejoras; otras cobran una sola vez | ¿Cuánto pago en total, y por cuánto tiempo? |
+| Coste | Algunas herramientas son gratuitas pero venden mejoras; otras cobran una sola vez | ¿Cuánto pago en total, y por cuánto tiempo? ([gratis o de pago](/guides/free-vs-paid-wedding-websites)) |
 | Cuánto tiempo sigue en línea | Los invitados buscan fotos y detalles después del día | ¿Hasta cuándo seguirá activa la web? |
 | Cuentas | Algunos creadores piden una cuenta para ti y otros también para los invitados | ¿Tienen mis invitados que registrarse para responder? |
 

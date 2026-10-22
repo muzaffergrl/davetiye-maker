@@ -35,7 +35,7 @@ Die richtige Wahl hängt weniger vom Aussehen ab als davon, wo Sie bearbeiten un
 | Gerät zum Bearbeiten | Die meiste Planung passiert am Handy, zwischen anderen Aufgaben | Kann ich alles am Handy ändern, ohne Laptop? |
 | RSVP | Antworten verstreut über Nachrichten, E-Mails und Formulare sind schwer zu zählen | Kommen die Antworten in einer Liste an, die ich herunterladen kann? |
 | Linkvorschau | Gäste entscheiden anhand der Vorschau, ob sie tippen | Zeigt der geteilte Link unsere Namen und das Datum? |
-| Kosten | Manche Tools sind kostenlos, verkaufen aber Upgrades; andere kosten einmalig | Was zahle ich insgesamt, und für wie lange? |
+| Kosten | Manche Tools sind kostenlos, verkaufen aber Upgrades; andere kosten einmalig | Was zahle ich insgesamt, und für wie lange? ([kostenlos oder bezahlt](/guides/free-vs-paid-wedding-websites)) |
 | Wie lange sie online bleibt | Gäste suchen auch nach dem Tag nach Fotos und Details | Bis wann bleibt die Seite online? |
 | Konten | Manche Baukästen brauchen ein Konto für Sie, manche auch für Gäste | Müssen sich meine Gäste registrieren, um zu antworten? |
 

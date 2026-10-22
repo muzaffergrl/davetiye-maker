@@ -32,7 +32,7 @@ Nach diesen Angaben suchen Gäste zuerst. Fehlt eine davon, wird Ihnen jemand ei
 
 Ergänzen Sie diese, wenn sie auf Ihre Hochzeit zutreffen. Jedes Extra erspart Ihnen eine Handvoll Nachrichten.
 
-- **Ihre Geschichte.** Eine kurze Einleitung und ein paar Fotos mit Bildunterschriften. Halten Sie es leicht; Gäste lesen es gern, aber sie kommen wegen der Details.
+- **Ihre Geschichte.** Eine kurze Einleitung und ein paar Fotos mit Bildunterschriften. Halten Sie es leicht; Gäste lesen es gern, aber sie kommen wegen der Details. Aufbauten und Formulierungen finden Sie unter [Beispiele für „Unsere Geschichte“](/guides/wedding-website-our-story-examples).
 - **Anreise und Unterkunft.** Hotels in der Nähe, ein eventuelles Zimmerkontingent mit Buchungsfrist, der nächste Flughafen, Parken und Shuttle-Zeiten.
 - **Dresscode.** Ein oder zwei Worte und ein erklärender Satz, etwa „Garden Formal: Anzüge oder Kleider; die Trauung findet auf Rasen statt.“
 - **Link zur Wunschliste.** Ein Link in einem eigenen Abschnitt, nicht auf jeder Seite wiederholt. Etikette-Ratgeber wie das [Emily Post Institute](https://emilypost.com/advice/wedding-website-tips) raten davon ab, die Wunschliste in den Vordergrund zu stellen.

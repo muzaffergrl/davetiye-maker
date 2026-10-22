@@ -114,4 +114,4 @@ Sur la plupart des plateformes hébergées, vous pouvez changer le contenu mais 
 
 ### Quelle option est la moins chère ?
 
-Les prix varient selon les vendeurs. Comparez le coût total, y compris tout abonnement payant nécessaire pour des fonctionnalités comme votre propre nom de domaine, ainsi que la durée de mise en ligne du site. Mettez ensuite en balance le temps passé à construire et le temps gagné.
+Les prix varient selon les vendeurs. Comparez le coût total, y compris tout abonnement payant nécessaire pour des fonctionnalités comme votre propre nom de domaine, ainsi que la durée de mise en ligne du site. Mettez ensuite en balance le temps passé à construire et le temps gagné. Notre guide [site de mariage gratuit ou payant](/guides/free-vs-paid-wedding-websites) liste les coûts faciles à oublier.

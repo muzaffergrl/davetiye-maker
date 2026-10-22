@@ -114,4 +114,4 @@ Auf den meisten gehosteten Plattformen können Sie den Inhalt ändern, nicht abe
 
 ### Was ist günstiger?
 
-Die Preise unterscheiden sich je nach Anbieter. Vergleichen Sie die Gesamtkosten, einschließlich eines eventuell nötigen kostenpflichtigen Tarifs für Funktionen wie eine eigene Domain, und wie lange die Website online bleibt. Wägen Sie dann die Zeit, die Sie ins Bauen stecken, gegen die Zeit ab, die Sie sparen.
+Die Preise unterscheiden sich je nach Anbieter. Vergleichen Sie die Gesamtkosten, einschließlich eines eventuell nötigen kostenpflichtigen Tarifs für Funktionen wie eine eigene Domain, und wie lange die Website online bleibt. Wägen Sie dann die Zeit, die Sie ins Bauen stecken, gegen die Zeit ab, die Sie sparen. Unser Ratgeber [kostenlose oder bezahlte Hochzeitswebsite](/guides/free-vs-paid-wedding-websites) listet die Kosten, die leicht übersehen werden.

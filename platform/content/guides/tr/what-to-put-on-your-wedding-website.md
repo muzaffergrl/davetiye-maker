@@ -32,7 +32,7 @@ Misafirlerin ilk aradığı bilgiler bunlardır. Herhangi biri eksikse biri size
 
 Düğününüz için geçerliyse bunları ekleyin. Her biri sizi bir avuç mesajdan kurtarır.
 
-- **Hikâyeniz.** Kısa bir giriş ve açıklamalı birkaç fotoğraf. Hafif tutun; misafirler keyifle okur ama asıl ayrıntılar için gelirler.
+- **Hikâyeniz.** Kısa bir giriş ve açıklamalı birkaç fotoğraf. Hafif tutun; misafirler keyifle okur ama asıl ayrıntılar için gelirler. Yapılar ve metinler için [Hikâyemiz örneklerine](/guides/wedding-website-our-story-examples) bakın.
 - **Ulaşım ve konaklama.** Yakındaki oteller, varsa oda bloğu ve rezervasyon son tarihi, en yakın havalimanı, otopark ve servis saatleri.
 - **Kıyafet kuralı.** Bir iki kelime ve bir açıklama cümlesi, örneğin "Bahçe resmî: takım elbise ya da elbise; tören çimlerin üzerinde."
 - **Hediye listesi linki.** Her sayfada tekrarlanmayan, kendi bölümünde tek bir link. [Emily Post Institute](https://emilypost.com/advice/wedding-website-tips) gibi görgü rehberleri hediye listesini en öne koymamayı tavsiye ediyor.

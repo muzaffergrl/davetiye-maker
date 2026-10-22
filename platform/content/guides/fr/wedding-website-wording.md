@@ -30,7 +30,7 @@ Le mot d'accueil se trouve sur la page d'accueil. Dites bonjour, dites que vous 
 
 ## Introduction de votre histoire et légendes des photos
 
-L'introduction tient en une ou deux phrases. Les légendes font quelques mots : un lieu, un moment, une date.
+L'introduction tient en une ou deux phrases. Les légendes font quelques mots : un lieu, un moment, une date. Pour des structures plus longues et des exemples, voyez les [exemples de « Notre histoire »](/guides/wedding-website-our-story-examples).
 
 | Ton | Introduction de l'histoire |
 |---|---|
