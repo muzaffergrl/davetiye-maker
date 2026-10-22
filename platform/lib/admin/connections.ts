@@ -6,6 +6,8 @@
 //                                                                  sets the state cookie (HttpOnly, SameSite=Lax, 10 min, Path=/api/etsy)
 //                                               "etsy-disconnect" -> forgets the shop's tokens
 //                                               "etsy-recheck"  -> re-checks every pending order with Etsy (RecheckSummary)
+//                                                                  and runs trust mode's check of provisional orders
+//                                                                  (lib/claim/trust.ts; `trust`: TrustSweepSummary)
 //        Signed-in shop only; writes same-origin only (lib/admin/api.ts adminGuard).
 //   GET  /api/etsy/callback?code&state          Etsy's redirect (registered as the app's callback URL): checks the state
 //                                               (cookie = parameter = stored hash, 10 min, used once), stores the sealed
@@ -15,6 +17,7 @@
 //                                               the owner taps (a same-site navigation, so the session is there again).
 
 import { getDataAdapter } from '../data/index.ts';
+import { sweepProvisionalOrders } from '../claim/trust.ts';
 import { recheckPendingOrders } from '../etsy/recheck.ts';
 import { disconnectEtsy, ETSY_STATE_COOKIE, ETSY_STATE_TTL_MS, etsyStatus, finishEtsyConnect, startEtsyConnect, type EtsyCallbackResult } from '../etsy/shop.ts';
 import { EtsyError } from '../etsy/client.ts';
@@ -95,7 +98,8 @@ export async function connectionsAction(req: Request): Promise<Response> {
       if (!summary.ok) {
         return fail(409, summary.problem ?? 'not_connected', summary.problem === 'not_configured' ? 'Etsy uygulama ayarları eksik.' : 'Etsy mağazası bağlı değil: önce "Etsy mağazasını bağla".');
       }
-      return json(200, { ok: true, summary, etsy: await etsyStatus(adapter) });
+      const trust = await sweepProvisionalOrders(adapter, { origin });
+      return json(200, { ok: true, summary, trust, etsy: await etsyStatus(adapter) });
     }
     return fail(400, 'unknown_action', 'Bilinmeyen işlem.');
   } catch (e) {

@@ -3,7 +3,7 @@
 // order) → the customer's facts and the shop note → ready Etsy messages beside them → support actions that can be undone →
 // what is on the site, guest replies → high-impact actions apart (take offline, delete) → history. Every action calls /api/admin/sites/<id>/<action> (lib/admin/api.ts), which
 // runs the same lib/sites.ts functions the old terminal scripts used.
-import { ArrowLeft, Check, Copy, Download, ExternalLink, Eye, Hourglass, Pencil, Send } from 'lucide-react';
+import { ArrowLeft, Check, Copy, Download, ExternalLink, Eye, Hourglass, PauseCircle, Pencil, Send } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
@@ -71,6 +71,9 @@ export default function AdminSite(props: {
   const [confirming, setConfirming] = useState<string | null>(null);
 
   const [note, setNote] = useState('Etsy\'de kontrol edildi: ödendi, iade/iptal yok, tasarım doğru');
+  const [holdNote, setHoldNote] = useState('Etsy\'de bulunamadı / uymadı');
+  // Trust mode: the order is not verified, the site can already be published (confirm or hold it here).
+  const trustCheck = s.order === 'provisional';
   const [grantAdd, setGrantAdd] = useState('1');
   const [grantReason, setGrantReason] = useState('');
   const [archiveDay, setArchiveDay] = useState('');
@@ -210,12 +213,18 @@ export default function AdminSite(props: {
         </a>
       </div>
 
-      {s.needsAction ? (
-        <section className={styles.callout} aria-labelledby="todo-title" data-todo="confirm">
-          <h2 id="todo-title" className={styles.calloutTitle}>
-            <Hourglass size={18} aria-hidden /> Yapılacak: siparişi onayla
+      {s.needsAction || trustCheck ? (
+        <section className={s.needsAction ? styles.callout : styles.card} aria-labelledby="todo-title" data-todo={trustCheck ? 'trust' : 'confirm'}>
+          <h2 id="todo-title" className={s.needsAction ? styles.calloutTitle : styles.h2}>
+            <Hourglass size={18} aria-hidden />{' '}
+            {!trustCheck ? 'Yapılacak: siparişi onayla' : s.orderReview ? 'Yapılacak: sipariş 48 saatte doğrulanamadı' : 'Önce güven: sipariş henüz doğrulanmadı'}
           </h2>
-          <p style={{ margin: '0 0 8px' }}>Alıcı siteyi düzenleyebiliyor ama siz onaylayana kadar yayınlayamaz.</p>
+          <p style={{ margin: '0 0 8px' }}>
+            {trustCheck
+              ? 'Site şimdiden yayınlanabilir. Etsy bağlıysa sipariş kendiliğinden kontrol edilir; değilse aşağıdaki adımlarla siz bakın.'
+              : 'Alıcı siteyi düzenleyebiliyor ama siz onaylayana kadar yayınlayamaz.'}
+            {!trustCheck && s.orderNote ? ` Not: ${s.orderNote}` : ''}
+          </p>
           <ol className={styles.steps}>
             <li>
               Etsy&apos;de siparişi bulun: <strong>#{s.orderRef ?? '—'}</strong>{' '}
@@ -233,7 +242,11 @@ export default function AdminSite(props: {
                 </>
               ) : null}
             </li>
-            <li>Uyuyorsa onaylayın; sonra aşağıdan &quot;Sipariş onaylandı&quot; mesajını kopyalayıp Etsy&apos;den gönderin.</li>
+            {trustCheck ? (
+              <li>Uyuyorsa onaylayın. Uymuyorsa &quot;Yayından kaldır ve beklet&quot;: site yayından kalkar, alıcı siz onaylayana kadar yayınlayamaz.</li>
+            ) : (
+              <li>Uyuyorsa onaylayın; sonra aşağıdan &quot;Sipariş onaylandı&quot; mesajını kopyalayıp Etsy&apos;den gönderin.</li>
+            )}
           </ol>
           <label className={styles.label} htmlFor="confirm-note">
             Not (siteyle saklanır)
@@ -245,19 +258,40 @@ export default function AdminSite(props: {
               className={styles.btn}
               disabled={busy !== null}
               onClick={async () => {
-                if (await run('confirm', { note }, 'Sipariş onaylandı. Alıcı artık yayınlayabilir.')) setTemplateId('order_confirmed');
+                if (await run('confirm', { note }, trustCheck ? 'Sipariş onaylandı.' : 'Sipariş onaylandı. Alıcı artık yayınlayabilir.') && !trustCheck) setTemplateId('order_confirmed');
               }}
               data-action="confirm"
             >
               <Check size={18} aria-hidden /> Siparişi onayla
             </button>
+            {trustCheck ? (
+              <button
+                type="button"
+                className={styles.btnGhost}
+                disabled={busy !== null}
+                onClick={() => run('hold', { note: holdNote }, 'Site yayından kaldırıldı; sipariş beklemede.')}
+                data-action="hold"
+              >
+                <PauseCircle size={18} aria-hidden /> Yayından kaldır ve beklet
+              </button>
+            ) : null}
           </div>
-          <StatusLine status={status.confirm ?? null} />
-          <p className={styles.hint}>Sipariş uymuyorsa onaylamayın; alıcıya Etsy&apos;den yazın. Gerekirse siteyi en alttan silebilirsiniz.</p>
+          <StatusLine status={status.confirm ?? status.hold ?? null} />
+          {trustCheck ? (
+            <>
+              <label className={styles.label} htmlFor="hold-note">
+                Bekletme nedeni (&quot;Yayından kaldır ve beklet&quot; ile siteyle saklanır)
+              </label>
+              <input id="hold-note" className={styles.input} value={holdNote} onChange={(e) => setHoldNote(e.target.value)} maxLength={300} />
+              <p className={styles.hint}>Bekletilen site yayından kalkar; sipariş sonradan doğru çıkarsa &quot;Siparişi onayla&quot; ve &quot;Alıcı adına yayınla&quot;.</p>
+            </>
+          ) : (
+            <p className={styles.hint}>Sipariş uymuyorsa onaylamayın; alıcıya Etsy&apos;den yazın. Gerekirse siteyi en alttan silebilirsiniz.</p>
+          )}
         </section>
-      ) : status.confirm ? (
+      ) : status.confirm || status.hold ? (
         <div className={styles.card}>
-          <StatusLine status={status.confirm} />
+          <StatusLine status={status.confirm ?? status.hold ?? null} />
         </div>
       ) : null}
 
@@ -268,7 +302,13 @@ export default function AdminSite(props: {
         <dl className={styles.facts}>
           <Fact label="Sipariş">{s.orderRef ? <>#{s.orderRef} <CopyButton value={s.orderRef} /></> : '—'}</Fact>
           <Fact label="Sipariş kontrolü">
-            {s.order === 'pending' ? 'Onay bekliyor' : s.order === 'verified' ? `Onaylandı · ${stamp(s.orderCheckedAt)}` : 'Gerekmedi'}
+            {s.order === 'pending'
+              ? `Onay bekliyor${s.orderNote ? ` · ${s.orderNote}` : ''}`
+              : s.order === 'provisional'
+                ? 'Doğrulanmadı (önce güven) — yayınlanabilir'
+                : s.order === 'verified'
+                  ? `Onaylandı · ${stamp(s.orderCheckedAt)}`
+                  : 'Gerekmedi'}
           </Fact>
           <Fact label="E-posta">
             {s.ownerEmail ? <>{s.ownerEmail} <CopyButton value={s.ownerEmail} /></> : '—'}
@@ -611,7 +651,7 @@ export default function AdminSite(props: {
           </p>
           {s.state === 'published' && !s.unpublishedChanges ? (
             <p className={styles.hint}>Site yayında; yayınlanmamış değişiklik yok.</p>
-          ) : s.needsAction ? (
+          ) : s.order === 'pending' ? (
             <p className={styles.hint}>Önce siparişi onaylayın.</p>
           ) : confirming === 'publish' ? (
             <div className={styles.row}>

@@ -81,6 +81,23 @@ export function orderPending(site: Pick<SiteRecord, 'orderCheck'>): boolean {
   return site.orderCheck?.status === 'pending';
 }
 
+/** Trust mode (lib/claim/trust.ts): claimed and publishable, but the order is not verified yet. */
+export function orderProvisional(site: Pick<SiteRecord, 'orderCheck'>): boolean {
+  return site.orderCheck?.status === 'provisional';
+}
+
+/**
+ * Trust mode: how long a provisional site may stay unverified before the shop is told (and an unpaid Etsy order is held).
+ * The shop notices and admin texts say "48 saat".
+ */
+export const TRUST_WINDOW_MS = 48 * 60 * 60_000;
+
+/** True when the provisional site's trust window has run out. */
+export function trustExpired(site: Pick<SiteRecord, 'orderCheck'>, now: number = Date.now(), windowMs: number = TRUST_WINDOW_MS): boolean {
+  const c = site.orderCheck;
+  return c?.status === 'provisional' && now - Date.parse(c.at) >= windowMs;
+}
+
 export interface CreateSiteInput {
   slug: string;
   theme: string;
@@ -319,6 +336,34 @@ export async function confirmOrder(adapter: DataAdapter, siteId: string, reason:
       if (!(e instanceof StaleSiteError) || attempt >= 5) throw e;
     }
   }
+}
+
+/**
+ * Trust mode (lib/claim/trust.ts): the order did not check out — Etsy says it is not ours / cancelled / refunded / still
+ * unpaid after the trust window, or the shop holds it in the admin. The site goes back to "pending" (editable, not
+ * publishable, no shared preview) and, when live, offline. "Siparişi onayla" (confirmOrder) releases it; the buyer then
+ * publishes again. Idempotent: a site already pending is only taken offline.
+ */
+export async function holdOrder(
+  adapter: DataAdapter,
+  siteId: string,
+  hold: { by: 'etsy' | 'support'; note: string },
+  now: Date = new Date(),
+): Promise<SiteRecord> {
+  let site: SiteRecord | null = null;
+  for (let attempt = 1; ; attempt++) {
+    site = await adapter.getSiteById(siteId);
+    if (!site) throw new NotFoundError(siteId);
+    if (site.orderCheck?.status === 'pending') break;
+    const orderCheck = { status: 'pending' as const, at: now.toISOString(), by: hold.by, note: hold.note.trim().slice(0, 300) || 'Order held' };
+    try {
+      site = await adapter.patchSite(siteId, { orderCheck }, { expectedUpdatedAt: site.updatedAt });
+      break;
+    } catch (e) {
+      if (!(e instanceof StaleSiteError) || attempt >= 5) throw e;
+    }
+  }
+  return site.status === 'published' ? adapter.unpublish(siteId) : site;
 }
 
 /** Support tool: sets (YYYY-MM-DD, archived from 00:00 that day) or clears (null) the archive date override, logged with a reason. */

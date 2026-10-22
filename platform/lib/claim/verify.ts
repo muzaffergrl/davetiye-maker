@@ -14,9 +14,15 @@
 //                   Etsy app settings are missing or the shop is not connected it answers "pending" — exactly manual
 //                   mode, never a 500 — and a later re-check (admin button; the buyer's panel; Publish) verifies the
 //                   site by itself once Etsy can be asked (lib/etsy/recheck.ts).
+//   trust           TrustOrderVerifier ("trust first, verify later", lib/claim/trust.ts): Etsy is asked as in "etsy"
+//                   mode when it can be; a definite answer stays (verified / rejected), anything else — Etsy not
+//                   connected, payment still processing, Etsy not answering — is "provisional": the site is made and
+//                   can be PUBLISHED at once. A later check (hourly cron, admin button) verifies it, or holds it
+//                   (offline + pending) when Etsy says the order is not ours / cancelled / refunded; unverified after
+//                   the trust window (48 h) the shop is told once. The buyer never waits for the shop.
 //
 // The sales site's launch gate (lib/marketing/placeholders.ts) refuses `launched: true` until
-// MARKETING.verified.orderCheck is true: switch it on only once "manual" or "etsy" is live.
+// MARKETING.verified.orderCheck is true: switch it on only once "manual", "trust" or "etsy" is live.
 // Register a verifier in code with setOrderVerifier() (tests do this) or by the env switch above.
 
 import { EtsyOrderVerifier } from '../etsy/verify.ts';
@@ -28,8 +34,13 @@ export type OrderCheck =
   | { result: 'not_checked' }
   /** `units` (G152, Etsy only): how many websites the order pays for (designs × quantity); absent = 1. */
   | { result: 'verified'; units?: number }
-  /** Accepted for now; the shop confirms the order by hand before the site can be published (manual mode). */
-  | { result: 'pending'; units?: number }
+  /**
+   * Accepted for now; the shop confirms the order by hand before the site can be published (manual mode). `unpaid`
+   * (Etsy): the receipt is ours but not paid yet — otherwise Etsy could not be asked.
+   */
+  | { result: 'pending'; units?: number; unpaid?: boolean }
+  /** Trust mode: accepted and publishable now; checked again later (lib/claim/trust.ts). */
+  | { result: 'provisional'; units?: number }
   | { result: 'rejected'; reason: OrderCheckReason }
   /** The outside service could not answer; nothing is created, the buyer may retry. */
   | { result: 'unavailable' };
@@ -58,7 +69,7 @@ export const MAX_ORDER_SITES = 10;
  * otherwise 1 (off / manual / Etsy not connected yet: one site per order, as before).
  */
 export function orderUnits(check: OrderCheck): number {
-  const n = check.result === 'verified' || check.result === 'pending' ? check.units : undefined;
+  const n = check.result === 'verified' || check.result === 'pending' || check.result === 'provisional' ? check.units : undefined;
   return typeof n === 'number' && Number.isInteger(n) && n > 1 ? Math.min(n, MAX_ORDER_SITES) : 1;
 }
 
@@ -78,6 +89,24 @@ export class ManualOrderVerifier implements OrderVerifier {
   }
 }
 
+/**
+ * Trust mode: Etsy's definite answers stand (verified / rejected); anything open — not connected, not paid yet, Etsy not
+ * answering — lets the buyer in at once as "provisional" instead of making them wait or retry.
+ */
+export class TrustOrderVerifier implements OrderVerifier {
+  readonly kind = 'trust';
+  readonly #inner: OrderVerifier;
+  constructor(opts: { inner?: OrderVerifier } = {}) {
+    this.#inner = opts.inner ?? new EtsyOrderVerifier();
+  }
+
+  async check(input: OrderCheckInput): Promise<OrderCheck> {
+    const r = await this.#inner.check(input);
+    if (r.result === 'verified' || r.result === 'rejected' || r.result === 'provisional') return r;
+    return r.result === 'pending' && r.units ? { result: 'provisional', units: r.units } : { result: 'provisional' };
+  }
+}
+
 export class VerifierConfigError extends Error {
   constructor(message: string) {
     super(message);
@@ -94,7 +123,8 @@ export function getOrderVerifier(): OrderVerifier {
   if (mode === '' || mode === 'off') return new FormatOnlyVerifier();
   if (mode === 'manual') return new ManualOrderVerifier();
   if (mode === 'etsy') return new EtsyOrderVerifier();
-  throw new VerifierConfigError(`Unknown CLAIM_ORDER_VERIFICATION "${mode}" (use "off", "manual" or "etsy").`);
+  if (mode === 'trust') return new TrustOrderVerifier();
+  throw new VerifierConfigError(`Unknown CLAIM_ORDER_VERIFICATION "${mode}" (use "off", "manual", "trust" or "etsy").`);
 }
 
 /** Replaces the verifier (fakes in tests). null restores the env choice. */

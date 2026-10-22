@@ -127,7 +127,7 @@ test('designUnits: quantities of design lines; service listings never count; at 
   const listings = new Map([['555', 'sample-design'], ['777', 'second-design']]);
   assert.deepEqual(evaluateReceipt(receipt({ transactions: [{ listing_id: 555 }, { listing_id: 777 }] }) as never, input, { listings, services }), { result: 'verified', units: 2 });
   assert.deepEqual(evaluateReceipt(receipt({ transactions: [{ listing_id: 555, quantity: 2 }, { listing_id: 900 }] }) as never, input, { listings, services }), { result: 'verified', units: 2 });
-  assert.deepEqual(evaluateReceipt(receipt({ is_paid: false, status: 'open', transactions: [{ listing_id: 1, quantity: 3 }] }) as never, input, { listings, services }), { result: 'pending', units: 3 });
+  assert.deepEqual(evaluateReceipt(receipt({ is_paid: false, status: 'open', transactions: [{ listing_id: 1, quantity: 3 }] }) as never, input, { listings, services }), { result: 'pending', units: 3, unpaid: true });
   assert.deepEqual(evaluateReceipt(receipt({ transactions: [{ listing_id: 777, quantity: 2 }] }) as never, input, { listings, services }), { result: 'rejected', reason: 'theme_mismatch' });
 
   assert.equal(orderUnits({ result: 'not_checked' }), 1, 'off: one site per order');

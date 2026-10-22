@@ -196,7 +196,7 @@ test('etsy cache: /start tries answer from the cache (10 min paid, 2 min other);
 
   // unpaid: also 2 minutes (a buyer who pays now is not held up long)
   fake.receipts.set('9100000003', { status: 200, body: paidReceipt('9100000003', { is_paid: false, status: 'open' }) });
-  assert.deepEqual(await check('9100000003'), { result: 'pending', units: 1 });
+  assert.deepEqual(await check('9100000003'), { result: 'pending', units: 1, unpaid: true });
   fake.receipts.set('9100000003', { status: 200, body: paidReceipt('9100000003') });
   clock += ORDER_CACHE_TTL.otherMs + 1000;
   assert.deepEqual(await check('9100000003'), { result: 'verified', units: 1 });

@@ -211,15 +211,70 @@ export function rsvpReplyEmail(n: RsvpReplyNotice): MailContent {
 }
 
 export interface PendingOrderNotice {
+  /**
+   * What happened (default "pending"): "pending" — a new site waits for the shop's check (manual mode, or Etsy could not
+   * confirm it yet); trust mode (lib/claim/trust.ts): "provisional" — a new site can be published before its order is
+   * verified; "held" — the order did not check out, the site was taken offline (`reason`); "review" — still not verified
+   * when the trust window ran out.
+   */
+  kind?: 'pending' | 'provisional' | 'held' | 'review';
   orderNumber: string;
   themeName: string;
   /** Absolute link to the site's admin page (no secret in it). */
   adminUrl: string;
+  /** "held": why, in Turkish (lib/claim/trust.ts HOLD_REASON_TEXT). */
+  reason?: string;
+}
+
+/** Trust mode notices (kind provisional / held / review): subject, title and the shop's next step (Turkish). */
+function trustNotice(n: PendingOrderNotice): { subject: string; title: string; lines: string[] } | null {
+  if (n.kind === 'provisional') {
+    return {
+      subject: `New website started — order not verified yet (#${n.orderNumber})`,
+      title: 'Yeni site başlatıldı — önce güven, sonra doğrula',
+      lines: [
+        'Alıcı siteyi hemen yayınlayabilir; sipariş henüz doğrulanmadı.',
+        'Etsy bağlıysa sipariş saatte bir kendiliğinden kontrol edilir: uyuyorsa onaylanır, mağazamızda yoksa / iptal ya da iade edildiyse site yayından kalkar ve beklemeye alınır.',
+        'Etsy bağlı değilse doğrulama sizde: Etsy\'de bakın; uymuyorsa yönetimde "Yayından kaldır ve beklet". Bir şey yapmazsanız site yayında kalır; 48 saat sonra bir kez hatırlatılır.',
+      ],
+    };
+  }
+  if (n.kind === 'held') {
+    return {
+      subject: `Website taken offline — order did not check out (#${n.orderNumber})`,
+      title: 'Site yayından kaldırıldı — sipariş doğrulanamadı',
+      lines: [
+        `Neden: ${n.reason ?? 'sipariş doğrulanamadı'}.`,
+        'Site beklemede: alıcı düzenleyebilir ama yayınlayamaz. Sipariş aslında doğruysa yönetimde "Siparişi onayla"; alıcı sonra yeniden yayınlar (ya da "Alıcı adına yayınla").',
+      ],
+    };
+  }
+  if (n.kind === 'review') {
+    return {
+      subject: `Order still not verified after 48 hours (#${n.orderNumber})`,
+      title: 'Sipariş 48 saatte doğrulanamadı',
+      lines: [
+        'Site yayınlanabilir durumda ama sipariş hâlâ doğrulanmadı (Etsy bağlı değil ya da Etsy cevap vermedi).',
+        'Etsy\'de bakın: uyuyorsa yönetimde "Siparişi onayla"; uymuyorsa "Yayından kaldır ve beklet". Bu hatırlatma bir kez gelir.',
+      ],
+    };
+  }
+  return null;
 }
 
 /** To the shop: a site was started and its order waits for a check (manual mode, or Etsy could not confirm it yet). */
 export function pendingOrderEmail(n: PendingOrderNotice): MailContent {
   const adminUrl = safeUrl(n.adminUrl);
+  const trust = trustNotice(n);
+  if (trust) {
+    const text = [trust.title, '', `Etsy sipariş no: #${n.orderNumber}`, `Tasarım: ${n.themeName}`, '', ...trust.lines, '', adminUrl, '', `— ${BRAND()}`].join('\n');
+    const html = page('tr', trust.title, [
+      { p: `Etsy sipariş no: <strong>#${esc(n.orderNumber)}</strong><br>Tasarım: ${esc(n.themeName)}` },
+      ...trust.lines.map((l) => ({ p: esc(l) })),
+      { button: { label: 'Yönetimde aç', href: adminUrl } },
+    ]);
+    return { subject: trust.subject.replace(/[\r\n]+/g, ' '), text, html };
+  }
   const subject = `New website started — order needs a check (#${n.orderNumber})`;
   const title = 'Yeni site başlatıldı — sipariş kontrol bekliyor';
   const text = [

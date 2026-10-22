@@ -56,7 +56,9 @@ export interface SiteRecord {
   /**
    * Order check of a site claimed on /start (G060-fix, lib/claim/verify.ts). Absent or null: no check is required
    * (verification off; sites made elsewhere). "pending": claimed while CLAIM_ORDER_VERIFICATION=manual — the site
-   * cannot be published until the shop confirms the Etsy order (scripts/verify-order.ts). "verified": confirmed.
+   * cannot be published until the shop confirms the Etsy order (scripts/verify-order.ts) — or held after a failed
+   * check (trust mode). "provisional": claimed in trust mode ("trust first, verify later", lib/claim/trust.ts) — it can
+   * be published at once; a later check verifies it or holds it. "verified": confirmed.
    */
   orderCheck?: OrderCheckRecord | null;
   /**
@@ -120,11 +122,13 @@ export interface GuestAccessRecord {
 }
 
 export interface OrderCheckRecord {
-  status: 'pending' | 'verified';
+  status: 'pending' | 'provisional' | 'verified';
   /** When the status was set. */
   at: string;
   by: 'claim' | 'etsy' | 'support';
   note?: string;
+  /** Trust mode: when the shop was told that the trust window ran out without a verified order (sent once). */
+  reviewAt?: string;
 }
 
 /** One name of the couple as the edit-rights rule sees it (docs/16 §11.2). */
