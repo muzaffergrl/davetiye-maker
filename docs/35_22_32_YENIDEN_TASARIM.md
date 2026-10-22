@@ -57,7 +57,7 @@ hikâye tanıtımı → gün özeti → imza; story'de tasarıma özgü foto sun
 ## 4. Yeni konseptler
 
 Paletler ve fontlar mevcut brief'lerdeki gibi kalır (her koleksiyonun `DESIGN_BRIEF.md`, 2026-10-22 sürümü). Zarf
-türleri 01–48'in hiçbirine birebir benzemez (01–21 V kapak + mum mühür; 39 U kapak + foto şeridi; 40 kare yay kapak +
+türleri 01–48'in hiçbirine birebir benzemez (01–21 V kapak + mum mühür; 04 airmail; 39 U kapak + foto şeridi; 40 kare yay kapak +
 dantel; 41 boyalı deckle; 42 V + dantel bant; 43 dalgalı yatay; 44 ogee + kamea; 45 saçaklı + kordon/konço; 46 fiyonk
 delikleri; 47 tuck + negatif halkası; 48 cüzdan + kartuş; 33 kılıf; 34 ip-düğme; 35 kayış + toka; 36 sicimli tohum paketi;
 37 vitray kapak; 38 papel picado bant).
