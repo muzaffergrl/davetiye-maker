@@ -221,7 +221,7 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 **Can I change colors or fonts?** No. You change the content and the wording; the design stays as made.
 
-**Can it be in my language?** Yes, in English, Spanish, French, German or Turkish, or in several of them (see Languages above). Your own texts can be in any language; the design's built-in texts come in one of these five. Accented Latin letters use the design's fonts; Cyrillic and other alphabets show in a plain standard font in some or all places. Preview every page.
+**Can it be in my language?** Yes, in English, Spanish, French, German or Turkish, or in several of them (see Languages above). Your own texts can be in any language; the design's built-in texts come in one of these five. Western European accents (such as é, ñ and ü) use the design's fonts; some other accented letters (for example in Polish, Czech or Turkish) and other alphabets show in a simpler fallback font. Preview every page.
 
 **How many guests can I invite?** As many as you like. One reply can include up to 10 people.
 

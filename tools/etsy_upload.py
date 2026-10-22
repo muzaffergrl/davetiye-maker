@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Upload-ready Etsy listing data for designs 01–32 and the K42 services, built from each listing_v3.md (2026-10-15; 06–20: G123; services: G130; 22–32: G175).
+"""Upload-ready Etsy listing data for designs 01–48 and the K42 services, built from each listing_v3.md (2026-10-15; 06–20: G123; services: G130; 22–32: G175).
 
   python3 tools/etsy_upload.py                      # writes collections/<NN_*>/package/listing/etsy_upload.json, prints a summary
   python3 tools/etsy_upload.py --designs 06-20      # only these designs ("06-20", "07,12", "all")
@@ -25,7 +25,8 @@ The JSON is what a browser session pastes into Etsy's listing editor (docs/20 §
   per design with its sale (21: K47); a coming design (config.ts price "[PRICE]") carries the same figure as the
   proposal and a blocker until it is confirmed;
   quantity 999, Etsy's maximum (user: no stock limit). Renewal stays null: the user's decision (each renewal costs a fee).
-- Images: the rows of §5 with the file's real state, from package/listing/images_editorial/ (the editorial set of
+- Images: the rows of §5 with the file's real state, from package/listing/images_v4/ when §5 lists the v4 JPGs (docs/20
+  §7.10; then the video is video_v4_4x5.mp4), else from package/listing/images_editorial/ (the editorial set of
   2026-10-16, tools/listing_editorial.py, docs/21).
 - Rules (`rule_problems`, `--check` fails): Etsy's title and tag rules (tools/listing_kit.py), the design's name in the
   title, its own demo link in the description and no other design's, and — for the designs that do not open from an
@@ -89,6 +90,23 @@ DESIGNS = [
     ("30", "30_Azulejo_Mosaic", "azulejo-mosaic"),
     ("31", "31_Sky_Lantern_Festival", "sky-lantern-festival"),
     ("32", "32_Music_Box_Ballerina", "music-box-ballerina"),
+    # designs 33–48 (third and fourth wave), "coming" in config.ts (K41); built and checked the same way (2026-10-22)
+    ("33", "33_Marigold_Mehndi", "marigold-mehndi"),
+    ("34", "34_Red_Lacquer_Double_Happiness", "red-lacquer-double-happiness"),
+    ("35", "35_Highland_Tartan_Thistle", "highland-tartan-thistle"),
+    ("36", "36_Victorian_Glasshouse", "victorian-glasshouse"),
+    ("37", "37_Art_Nouveau_Lily", "art-nouveau-lily"),
+    ("38", "38_Papel_Picado_Fiesta", "papel-picado-fiesta"),
+    ("39", "39_Silver_Photo_Booth", "silver-photo-booth"),
+    ("40", "40_Swan_Chantilly_Lace", "swan-chantilly-lace"),
+    ("41", "41_Painted_Lily_Pond", "painted-lily-pond"),
+    ("42", "42_Espresso_Pastoral", "espresso-pastoral"),
+    ("43", "43_Chartreuse_Garden_Party", "chartreuse-garden-party"),
+    ("44", "44_Blue_Toile_Pavilion", "blue-toile-pavilion"),
+    ("45", "45_Suede_Ranch_Lace", "suede-ranch-lace"),
+    ("46", "46_Bordeaux_Silk_Bow", "bordeaux-silk-bow"),
+    ("47", "47_Monochrome_Darkroom", "monochrome-darkroom"),
+    ("48", "48_Navy_Ivory_Crest", "navy-ivory-crest"),
 ]
 PRICE_TRY = 1460
 QUANTITY = 999  # Etsy's maximum; the user wants no stock limit (2026-10-16)
@@ -107,6 +125,14 @@ IMAGE9_STATUS = ("current: image 9 of 2026-10-17 (G148; tools/listing_editorial.
                  "and Share → Use on another device from a local build with G146; no web address or QR)")
 SERVICE_IMAGES_STATUS = ("current: service set of 2026-10-17 (tools/listing_services.py, G136; GM06 trust scenes, real "
                          "screens of the editor and of our ready designs' openings, no price, QR or web address)")
+# v4 set (docs/20 §7.10, tools/listing_v4): 19 JPGs in Etsy order + the 4:5 hover video; a §5 that lists .jpg files is a v4 set
+V4_DIR = "images_v4"
+V4_IMAGES = ["01_cover", "02_reveal", "03_rsvp", "04_edit", "05_pages", "06_included", "07_demo", "08_how", "09_closeup",
+             "10_tap", "11_home", "12_devices", "13_laptop", "14_together", "15_print", "16_need", "17_day", "18_replies",
+             "19_share"]
+V4_VIDEO = "video_v4_4x5.mp4"
+V4_STATUS = ("current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production "
+             "build; images 09–19 on the design's GPT PAKET 7 scenes)")
 DESIGN_COPY = REPO / "platform" / "lib" / "marketing" / "designs.ts"
 CONFIG = REPO / "platform" / "lib" / "marketing" / "config.ts"
 DEMO_LINK = re.compile(r"/start/demo/([a-z0-9-]+)")
@@ -166,7 +192,8 @@ def images(md: str, listing: Path, status: str = IMAGES_STATUS) -> tuple[list[di
         if len(row) < 3 or not row[0].isdigit():
             continue
         name = row[1].strip("`")
-        path = listing / lk.UPLOAD_DIR / name
+        v4 = name.endswith(".jpg")
+        path = listing / (V4_DIR if v4 else lk.UPLOAD_DIR) / name
         for note in VERIFY.findall(row[2]):
             checks.append({"where": f"image {row[0]}", "check": note.strip(), "text": ""})
         rows.append({
@@ -174,7 +201,7 @@ def images(md: str, listing: Path, status: str = IMAGES_STATUS) -> tuple[list[di
             "file": str(path.relative_to(REPO)).replace("\\", "/"),
             "alt": VERIFY.sub("", row[2]).strip(),
             "exists": path.exists(),
-            "status": (IMAGE9_STATUS if name == "09_devices.png" and status == IMAGES_STATUS else status)
+            "status": (V4_STATUS if v4 else IMAGE9_STATUS if name == "09_devices.png" and status == IMAGES_STATUS else status)
             if path.exists() else "missing",
         })
     return rows, checks
@@ -260,7 +287,8 @@ def build(no: str, folder: str, theme: str) -> tuple[dict, list[str]]:
         checks.append({"where": "description", "check": f"decide {ph}", "text": ""})
     sale = commerce(theme)
     pdf = coll / "package" / "customer" / "START_HERE.pdf"
-    video = listing / "video.mp4"
+    v4 = any(f"/{V4_DIR}/" in i["file"] for i in imgs)
+    video = listing / (V4_VIDEO if v4 else "video.mp4")
     mockups = sorted(p.name for p in (coll / "assets" / "gpt" / "mockups").glob("*.png"))
     problems = [f"title: {p}" for p in title_problems(f["title"])] + [f"tags: {p}" for p in tag_problems(f["tags"])]
     problems += [f"text: {p}" for p in text_problems(theme, theme_name(theme), opening_object(theme), f["title"],
@@ -311,7 +339,7 @@ def build(no: str, folder: str, theme: str) -> tuple[dict, list[str]]:
                            "bytes": pdf.stat().st_size if pdf.exists() else None}],
         "images": imgs,
         "gpt_mockup_scenes": [f"collections/{folder}/assets/gpt/mockups/{m}" for m in mockups],
-        "video": {"file": f"collections/{folder}/package/listing/video.mp4", "exists": video.exists()},
+        "video": {"file": f"collections/{folder}/package/listing/{video.name}", "exists": video.exists()},
         "open_checks": checks,
         "blockers": blockers + ["renewal not decided"],
         "ready_to_publish": False,

@@ -18,6 +18,43 @@ ROOT = Path(__file__).resolve().parent.parent
 TALIMAT = re.compile(r'design called "(?P<name>[^"]+)".*?Keep one consistent set across all images: (?P<set>.+?), the same '
                      r'light and the same color world \((?P<palette>[^)]+)\)', re.S)
 BASLIK = "## PAKET 7"
+# PAKET 3'ü olmayan tasarımlar (33–48, 2026-10-22): set ve renk dünyası buradan; her biri kendi DESIGN_BRIEF / "Stil ve renk"
+# bölümünden. Biçim PAKET 3 ile aynı: "zemin, süs, süs ve süs" (ilk parça zemin).
+EK_SETLER = {
+    "33": ("a fuchsia silk cloth over a carved dark wood low table, fresh marigold garlands, a saffron silk tassel, a small brass "
+           "bowl of marigold petals and a fold of plum velvet with fine gold embroidery", "fuchsia silk, plum velvet, saffron, saffron ivory paper and warm gold"),
+    "34": ("a glossy red lacquer tray on a cream silk cloth, pink and deep red tree peonies, a red silk knot with a tassel, a cream "
+           "porcelain teacup with a gold rim and a sprig of plum blossom", "lacquer red, cinnabar, cream and gold in soft warm lamplight"),
+    "35": ("a soft woven wool tartan throw in moss green and heather purple over a weathered oak table, purple thistles and heather, "
+           "a saddle-leather strap with an antique brass buckle and a cream linen napkin", "heather purple, moss green, cream, antique brass and saddle brown with a thin deep red line"),
+    "36": ("a white-painted wooden potting bench under the misted glass roof of a Victorian glasshouse, lush fern fronds, a white "
+           "orchid in a copper pot with a little verdigris and a roll of kraft paper tied with jute", "deep fern green, misted glass, herbarium cream, kraft and copper"),
+    "37": ("a cream linen cloth over a curved walnut table in the soft glow of a stained-glass window, tall white lilies in a slender "
+           "glass vase, a sage silk ribbon and a few lilac sweet peas", "sage green, cream, lilac and soft gold"),
+    "38": ("a limewashed courtyard table with a cream linen runner in warm late-afternoon sun, strings of colorful cut tissue paper "
+           "banners with flower patterns, terracotta pots of bright dahlias and marigolds and a few warm glass string-light bulbs",
+           "fuchsia, marigold, turquoise, lime, violet and coral tissue paper on kraft, limewash and terracotta"),
+    "39": ("a pearl-grey silk satin cloth, a polished chrome vintage flash bulb, a short strip of black-and-white photo prints, "
+           "ivory ranunculus and silvery dusty miller", "ivory, pearl grey, polished chrome and silver, graphite and soft black, no other colour"),
+    "40": ("an ivory heavy cotton cloth, ivory Chantilly lace, a black silk satin ribbon, white lily of the valley and a single white "
+           "swan feather", "ivory, warm white, soft pewter and antique gold with fine black accents"),
+    "41": ("a cream primed linen canvas surface, sprays of lilac wisteria, pale pink water lilies floating in a shallow glass dish "
+           "and a wooden paintbrush", "soft pond blue, lilac and wisteria, lily pink, water sage and canvas cream in luminous morning light"),
+    "42": ("a dark espresso-brown wooden table, dried roses and golden wheat, a cream vintage cotton lace runner and a lit brass "
+           "candlestick", "espresso brown, mocha, latte, cream parchment, candle gold and dusty rose in warm candlelight"),
+    "43": ("a cream cotton tablecloth, a jug of peonies, ranunculus and sweet peas, frothy chartreuse lady's mantle and a "
+           "burgundy cosmos stem", "chartreuse, peony pink, raspberry, burgundy, leaf green and cream in bright spring garden-party daylight"),
+    "44": ("a powder-blue linen tablecloth, blue-and-white toile porcelain plates, a blue-and-white ginger jar of white hydrangeas "
+           "and a pale blue silk bow", "porcelain white, toile blue, powder blue and cream in soft cool daylight"),
+    "45": ("a sun-bleached wooden ranch table, a soft tan suede throw, cream cotton lace, wildflowers in sage and sunset peach and "
+           "a tooled leather belt with a silver concho", "suede tan, saddle brown, cream lace, sage green, sunset peach and silver in low golden-hour sun"),
+    "46": ("an ivory moiré silk cloth, a double-faced claret silk satin ribbon, white tulips and a small stack of ivory "
+           "linen-covered books", "ivory, linen, oyster and deep claret red with a touch of soft gold"),
+    "47": ("a matte black darkroom bench, a strip of developed 35 mm film negatives, a photographer's loupe, white anemones with "
+           "black centres and warm white fibre photo paper", "black and white only: noir, charcoal, graphite, silver grey and warm paper white, no red"),
+    "48": ("a navy linen tablecloth, white magnolia blossoms and bay laurel sprigs, a navy grosgrain ribbon and an ivory wax seal",
+           "navy, deep navy, ivory, parchment and polished gold in fresh morning seaside light"),
+}
 
 SCREEN = ("Every phone, tablet and laptop is a generic modern device with thin even bezels and rounded corners, no logo, no brand "
           "marks, no camera bump visible from the front. Every screen is a perfectly flat, uniform, opaque pure green (#00FF00): "
@@ -93,7 +130,7 @@ def bolum(d: dict) -> str:
 > Claude gerçek kayıttan yapar). Amaç: ürün ön planda, detayları gösteren, alıcının içini rahatlatan, satın almaya teşvik eden kareler.
 > GPT yalnız **sahneyi** üretir; ekranlar (ve 7.7'de kartın ön yüzü) **düz #00FF00**. Claude gerçek site ekranlarını ve
 > gerçek basılı davetiye render'ını yeşile yerleştirir, başlıkları dizer. Böylece ilan ürünü olduğu gibi gösterir (Etsy kuralı).
-> PAKET 3 ile **aynı set** (aynı masa, süs, ışık). Hepsini **tek sohbette** üret. Üreten: `python3 tools/paket7_ilan.py --no {d['no']}`.
+> {d['set_kaynak']} Hepsini **tek sohbette** üret. Üreten: `python3 tools/paket7_ilan.py --no {d['no']}`.
 
 **Instructions for GPT (send before the first image):**
 ```
@@ -124,13 +161,21 @@ def isle(no: str, dry: bool):
         sys.exit(f"{no}: koleksiyon yok")
     pr = kol / "assets/gpt/GPT_PROMPTS.md"
     t = pr.read_text(encoding="utf-8")
-    i3 = t.index("## PAKET 3")
-    m = TALIMAT.search(t, i3)
-    if not m:
-        sys.exit(f"{no}: PAKET 3 talimat bloğu okunamadı")
-    s = " ".join(m.group("set").split())
+    if no in EK_SETLER:
+        s, palette = EK_SETLER[no]
+        bas = (kol / "DESIGN_BRIEF.md").read_text(encoding="utf-8").splitlines()[0]   # "# Tasarım 33 — Marigold & Mehndi · …"
+        m = re.search(r"— (.+?) ·", bas)
+        name = m.group(1) if m else " ".join(w.capitalize() if w.islower() else w for w in kol.name.split("_")[1:])
+        kaynak = "Set bu tasarımın kendi dünyası (PAKET 3 yok; `EK_SETLER`): bütün sahnelerde aynı masa, süs, ışık."
+    else:
+        i3 = t.index("## PAKET 3")
+        m = TALIMAT.search(t, i3)
+        if not m:
+            sys.exit(f"{no}: PAKET 3 talimat bloğu okunamadı")
+        s, palette, name = " ".join(m.group("set").split()), m.group("palette").strip(), m.group("name")
+        kaynak = "PAKET 3 ile **aynı set** (aynı masa, süs, ışık)."
     parts = [x.strip() for x in s.split(",")]
-    d = dict(no=no, name=m.group("name"), dir=kol.relative_to(ROOT).as_posix(), set=s, palette=m.group("palette").strip(),
+    d = dict(no=no, name=name, dir=kol.relative_to(ROOT).as_posix(), set=s, palette=palette, set_kaynak=kaynak,
              set_short=parts[0], props=", ".join(parts[1:]) or s, props_short=", ".join(parts[1:3]) or s)
     yeni_bolum = bolum(d)
     if BASLIK in t:

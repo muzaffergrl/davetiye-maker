@@ -23,7 +23,7 @@ NOT_ENVELOPE = {"art-deco-black-tie": "gatefold", "lavender-provence": "pouch", 
                 "wildflower-meadow-vellum": "sleeve",
                 # G175: designs 22–32 (22 opens from an envelope)
                 "velvet-jewel-box": "box", "grand-theatre-premiere": "curtain", "orient-express-voyage": "wallet",
-                "kintsugi-washi": "origami", "riad-lantern-nights": "door", "maison-patisserie": "box",
+                "kintsugi-washi": "origami", "riad-lantern-nights": "door", "maison-patisserie": "parcel",
                 "celestial-observatory": "dome", "azulejo-mosaic": "wall", "sky-lantern-festival": "lantern",
                 "music-box-ballerina": "box"}
 # G123's listing language lines (2026-10-16): latin-only font → "latin", all Cyrillic → "cyrillic", else "latin-ext".
@@ -31,9 +31,16 @@ LANGUAGE = {"01": "cyrillic", "02": "latin-ext", "03": "cyrillic", "04": "latin"
             "07": "latin-ext", "08": "latin-ext", "09": "latin-ext", "10": "latin-ext", "11": "latin", "12": "latin-ext",
             "13": "latin", "14": "latin-ext", "15": "latin-ext", "16": "latin-ext", "17": "latin-ext", "18": "latin",
             "19": "cyrillic", "20": "latin-ext", "21": "cyrillic",
-            # G175: Google Fonts subsets read on 2026-10-17 (28: Italiana is latin only)
-            "22": "latin-ext", "23": "latin-ext", "24": "latin-ext", "25": "latin-ext", "26": "latin-ext",
-            "27": "latin-ext", "28": "latin", "29": "latin-ext", "30": "latin-ext", "31": "latin-ext", "32": "latin-ext"}
+            # G175: Google Fonts subsets read on 2026-10-17; 2026-10-22: designs.ts fonts synced with the rebuilt 22–32
+            # themes (22: Italiana is latin only; 28 no longer loads it; 32: the website fonts have Cyrillic, its printable
+            # invitation's fonts do not, PRINT_FONTS)
+            "22": "latin", "23": "latin-ext", "24": "latin-ext", "25": "latin-ext", "26": "latin-ext",
+            "27": "latin-ext", "28": "latin-ext", "29": "latin-ext", "30": "latin-ext", "31": "latin-ext", "32": "latin-ext",
+            # designs 33–48: fonts.googleapis.com/css2 read on 2026-10-22 (34 Prata, 35 Rouge Script, 37 Federant, 41 Arapey,
+            # 45 Rochester and Lustria, 48 Goudy Bookletter 1911 are latin only)
+            "33": "latin-ext", "34": "latin", "35": "latin", "36": "latin-ext", "37": "latin", "38": "latin-ext",
+            "39": "latin-ext", "40": "latin-ext", "41": "latin", "42": "latin-ext", "43": "latin-ext", "44": "latin-ext",
+            "45": "latin", "46": "latin-ext", "47": "latin-ext", "48": "latin"}
 
 
 def expect_exit(fn, *args):
@@ -64,7 +71,7 @@ def test_template():
 
 
 def test_values():
-    assert [no for no, _, _ in eu.DESIGNS] == [f"{i:02d}" for i in range(1, 33)]
+    assert [no for no, _, _ in eu.DESIGNS] == [f"{i:02d}" for i in range(1, 49)]
     for no, folder, theme in eu.DESIGNS:
         v = b.values(theme)
         assert v["START_URL"] == f"https://bkestudio.com/start?theme={theme}", v
@@ -72,7 +79,7 @@ def test_values():
         assert v["MY_URL"] == "https://bkestudio.com/my"
         assert v["OPENING"] == NOT_ENVELOPE.get(theme, "envelope"), (no, v["OPENING"])
         assert v["OPENING_TAB"] == v["OPENING"].capitalize(), (no, v["OPENING_TAB"])
-        assert b.language_class(b.design_fonts(theme)) == LANGUAGE[no], (no, b.design_fonts(theme))
+        assert b.design_language(theme) == LANGUAGE[no], (no, b.design_fonts(theme))
         assert v["LANGUAGE_FONTS"] == b.LANGUAGE_LINES[LANGUAGE[no]]
         dark = b.qr_dark(folder, theme)  # G175: 22–32 read the palette of designs.ts (no palette.json yet)
         assert 1.05 / (b._luminance(dark) + 0.05) >= 7, (no, dark)
