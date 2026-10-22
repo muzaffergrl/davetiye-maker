@@ -25,7 +25,9 @@ Kullanıcı (2026-10-22): "N7 ve N8'i 4 dile çevir".
   olmamasını denetleyen test eklendi (hatayla çıkış 1, düzeltmeyle 0 olduğu denendi).
 - Build: N7, N8 × 4 dil, 8 sayfa 200, tek H1, `html lang` ve Article `inLanguage` doğru, İngilizce uyarısı yok, jetonlar
   gerçek değerle (12 ay, 200 karakter, bkestudio.com/clara-and-julian).
-- Testler: `npm test` 1694/1694 (0 hata, 0 atlanan; g199 kaçış testi dahil), build temiz.
+- Testler: `npm test` 1694 test, 1692 geçti, 0 hata, 2 atlandı. Atlanan ikisi `tests/marketing-build.test.ts`: TR başlık
+  düzeltmesi build'den sonra yapıldığı için build eski kaldı ve testler kendini atladı. Yeniden build sonrası o dosya ayrıca
+  koşuldu: 2/2 geçti (built sayfalarda başlık, JSON-LD, link, görsel, sahipsiz sayfa denetimi).
 - Ana dili konuşan biri tarafından okunmadı.
 
 ## Günlük
