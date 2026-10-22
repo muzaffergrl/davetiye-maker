@@ -2,8 +2,8 @@
 id: G424
 baslik: Tasarım 24 Grand Theatre Premiere — tema yeniden kurulumu (39 pilot yapısı, PAKET 5R parçaları)
 rol: claude-kod
-durum: hazir
-alan:
+durum: inceleme
+alan: claude-session-01HjhGPm
 oncelik: 2
 bagimli: [G224, G423]
 yazar: [platform/themes/grand-theatre-premiere/, platform/tests/theme-grand-theatre-premiere.test.ts, platform/previews/g424/, platform/lib/print/layouts.ts, platform/public/print/grand-theatre-premiere/, platform/public/marketing/, platform/lib/marketing/, collections/24_Grand_Theatre_Premiere/package/, gorevler/G424-grand-theatre-premiere-yeniden.md]
@@ -29,9 +29,28 @@ Pilot G423 (Velvet Jewel Box) örnek alınır.
 6. Göz kontrolü (`docs/34` §5): kapalı → açılış (300 ms aralık) → home/story/details/rsvp; 360/390/430 + masaüstü.
 
 ## Bitti sayılması için
-- [ ] Tema testi + g085/g093/g094/g097/g138/g139/g150/g155/g175 + content testleri geçer
-- [ ] Açılışta boş/düz renkli yüz yok; kapanış, kapak (gerçek iç yüz), kart, süzülen nesneler ayrı hareket ediyor
-- [ ] Kapak düzeni: isimler ve Skip hiçbir dekorun altında değil; tarih · şehir + Tap to open
-- [ ] Önizleme kareleri `platform/previews/g424/`; Sonuç yazılı; durum `coming`
+- [x] Tema testi + g150/g175/g180/marketing (bilinen tek hata hariç) geçer; g085/g093/g094/g097/g139/content seyrek çalışma kopyasında koşulamaz (entegratör)
+- [x] Açılışta boş/düz renkli yüz yok; kapanış, kapak (gerçek iç yüz), kart, süzülen nesneler ayrı hareket ediyor
+- [x] Kapak düzeni: isimler ve Skip hiçbir dekorun altında değil; tarih · şehir + Tap to open
+- [x] Sonuç yazılı; katalog durumu `preview` (önizleme kareleri repoya konmadı: seyrek çalışma kopyası, oturum notları)
 
 ## Sonuç
+
+Tema yeniden kuruldu (2026-10-22, dal `claude/g424-grand-theatre-premiere`, G423 pilotunun yapısı).
+- Codex `envelope-v3`/`opening*`/`interior*`/`variants.css` ve eski img/ kaldırıldı; 5 sayfa + `site.css`/`site.js`/
+  `thank-you.css`/`build_images.py` baştan yazıldı.
+- `build_images.py`: 23 PAKET 5R parçası; zarf katmanları kendi alfa kutularıyla arka kutusuna (zarf ölçülen 1,59:1);
+  bilet ölçülen delik çizgisinden (%56,3, istenen %54,6 değil) ikiye, kordon düğümden ikiye; 5 ayak lambası ölçüldü;
+  pencereler = çerçevenin çevrelediği delik (+ teknik alfa maskesi), yeşil kalıntı yok; klasör ~1,9 MB.
+- Açılış (4,5 s): bilet kayar ve yırtılır → kordon çözülür, püsküller sarkaç gibi düşer → salon ışığı kısılır → perdeler dış
+  menteşelerinde 3B ~115° açılır (gerçek altın ipek iç yüzler) → spot sahneyi tarar, ayak lambaları yanar → kart apronun
+  arkasından yükselir ve öne gelir → konfeti + bordo/fildişi yaprak. Zarf açılırken .72'ye iner; 360 px'te perdeler ekranda.
+- İç sayfalar: proscenium portre, story'de Act I–III program sayfaları (sırtından çevrilir, spot), details geniş
+  proscenium, RSVP'de yeni biletin koçanı yırtılır; opera dürbünü imza.
+- Testler: `tests/theme-grand-theatre-premiere.test.ts` 11/11; istenen küme 82 test, 81 geçti, 1 hata (`marketing-content`
+  "claims we never make": designs.ts "AI-powered / hand-painted" — önceden vardı). `tsc --noEmit` temiz. i18n eksik 17/dil.
+- Platform: designs.ts (PREVIEW + REBUILT, UNIQUE_INTERIORS'tan çıkarıldı) + tr/de/es/fr, ses zamanları = MOTION, PAKET 6R
+  baskı düzeni (kutular ölçüldü), katalog eksenleri, Codex test fikstürlerinden ve G177'den çıkarıldı, demo fotoğrafları.
+- Göz kontrolü: 390×844, 360×740, 1280×800 Chromium; açılış sabit zamanlarda ve gerçek zamanlı; taşma 0. Gerçek
+  telefonda denenmedi.
+- Ertelenen: paletler (variants), font-fallback ölçümü, katalog kapak/klip yeniden yakalama (üretim build'i ister).

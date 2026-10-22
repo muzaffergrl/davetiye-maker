@@ -79,7 +79,10 @@ ve fildişi gül. Yazı, rakam, monogram, logo, QR hiçbir görselde yok; isimle
   Virginia; 16 Ekim 2027; URL'ler null) — değişmedi.
 - GPT istekleri: `assets/gpt/GPT_PROMPTS.md` (PAKET 5R website katmanları W1–W21 = 23 dosya, PAKET 2 örnek fotoğraflar
   **var**, PAKET 6R basılı davetiye ön/arka); prova şekli `assets/gpt/kuru_sekil.json`. GPT görevi **G224** (G222–G232).
-- Tema: `platform/themes/grand-theatre-premiere/` **yeniden kurulacak** (G424; G422–G432, 39 pilotunun yapısı,
-  `docs/34`). Mevcut Codex açılışı yeni parçalar gelene kadar yerinde durur. Durum: `coming`.
-- Basılı davetiye: `platform/lib/print/layouts.ts` (`'grand-theatre-premiere'` bloğu; PAKET 6R gelince kaynak yolları ve
-  kutular güncellenir). İlan taslağı: `package/listing/listing_v3.md` (yayınlanmadı, K41; görseller tema kurulunca yenilenir).
+- Tema: `platform/themes/grand-theatre-premiere/` **yeniden kuruldu** (G424, 2026-10-22; G423 pilotunun yapısı, `docs/34`,
+  dersler `docs/35` §6a) — GPT parçaları G224 (PAKET 5R 23 dosya, PAKET 6R 2 dosya). Durum: **editable_draft**, katalogda
+  `preview` ("Coming soon"); satış yok. Katalog kapak görüntüsü/klibi henüz eski (yeniden yakalama bekliyor). Ölçülen
+  sapmalar: zarf 1,59:1 (istenen ≈1,45), bilet yırtma çizgisi tuvalin %56,3'ünde (istenen %54,6) — tema ölçüleni kullanır.
+- Basılı davetiye: `platform/lib/print/layouts.ts` (`'grand-theatre-premiere'` bloğu; PAKET 6R `_r_5x7` zeminleri, kutular
+  görselde ölçüldü, G424). İlan taslağı: `package/listing/listing_v3.md` (yayınlanmadı, K41; görseller tema kurulunca yenilenir).
+- Ertelenen: paletler (variants) yeni sanattan yeniden üretilecek; font-fallback ölçümü yeniden koşulmadı.

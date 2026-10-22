@@ -1254,9 +1254,9 @@ const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> 
     home: msg("Champagne moiré, aubergine velvet, seed pearls and rose gold. Your portrait sits in an oval pearl cameo and the invitation opens on a band of velvet like a jewellery case."),
   },
   'grand-theatre-premiere': {
-    style: msg("Peacock-blue envelope, antique-gold seal and an ivory playbill-inspired schedule."),
-    opening: msg("Your guests tap the envelope. Two burgundy velvet gatefold doors swing apart, revealing the gilded playbill invitation before the wedding home page opens."),
-    home: msg("Peacock blue, antique gold and warm ivory set the scene. The invitation opens like opening night, then leads into your story and the evening programme."),
+    style: msg("Peacock linen envelope with burgundy velvet curtains, a gold tasselled cord and a blank theatre ticket."),
+    opening: msg("Your guests tap the envelope. The ticket slides out and tears at its perforation, the gold cord unties, the velvet curtains swing open onto gold silk, a spotlight sweeps the painted stage and the programme card with your portrait rises from behind the footlights before the wedding home page opens."),
+    home: msg("Ivory programme paper, peacock velvet, burgundy curtains and antique gold. Your portrait stands in a gilded proscenium and the invitation opens on a band of velvet like opening night."),
   },
   'orient-express-voyage': {
     style: msg("Bottle-green envelope, brass route seal and details inspired by a first-class rail journey."),
@@ -1315,19 +1315,6 @@ for (const [id, preview] of Object.entries(PREVIEW_DESIGN_COPY)) {
 
 // Interior art/layout/motion differ for these eleven previews; envelope copy and other products are unchanged.
 const UNIQUE_INTERIORS: Record<string,{fonts:string[];home:string;story:string;details:string;rsvp:string}> = {
-  "grand-theatre-premiere": {
-    "fonts": [
-      "Cormorant Garamond",
-      "Great Vibes",
-      "Lora",
-      "Italianno",
-      "Bodoni Moda"
-    ],
-    "home": "A peacock-teal theatre premiere with a ticket-shaped portrait and an ivory playbill invitation.",
-    "story": "Landscape theatre-ticket photographs presented as three acts, with bold playbill captions.",
-    "details": "A playbill programme arranged in paired acts with a stage-like venue feature.",
-    "rsvp": "A premiere reply suite, framed by burgundy curtain details and antique brass."
-  },
   "orient-express-voyage": {
     "fonts": [
       "Cormorant Garamond",
@@ -1472,6 +1459,22 @@ const REBUILT: Record<string, Pick<DesignCopy, 'fonts' | 'pages' | 'palette' | '
       { name: msg('Rose gold'), hex: '#C99A86' },
     ],
     llmsLine: 'an aubergine velvet envelope in a champagne satin band with a rose gold ring threaded on it, an oval pearl cameo portrait and a turning photo display.',
+  },
+  'grand-theatre-premiere': {
+    fonts: ['Abril Fatface', 'Playfair Display'],
+    pages: {
+      home: msg('Your portrait in a gilded proscenium on an ivory programme card, the invitation on a band of peacock velvet with a countdown and calendar links, and antique opera glasses to sign off.'),
+      story: msg('Three photos on the pages of a theatre programme, Act I, II and III. Each page turns in as a spotlight finds it.'),
+      details: msg('The order of the day on an ivory programme board, the venue in a wide gilded proscenium, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('An ivory reply card on peacock velvet with your reply-by date and the configurable RSVP form; a ticket tears and gold confetti drifts down when a reply is sent.'),
+    },
+    palette: [
+      { name: msg('Ivory'), hex: '#F3EBD8' },
+      { name: msg('Peacock'), hex: '#16595B' },
+      { name: msg('Burgundy'), hex: '#5E1622' },
+      { name: msg('Antique gold'), hex: '#C9A45C' },
+    ],
+    llmsLine: 'a peacock linen envelope whose burgundy velvet stage curtains are tied by a gold tasselled cord over a blank ticket, a gilded proscenium portrait and programme pages for the story.',
   },
 };
 for (const [id, r] of Object.entries(REBUILT)) Object.assign(DESIGN_COPY[id], r);

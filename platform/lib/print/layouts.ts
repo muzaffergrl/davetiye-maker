@@ -264,15 +264,16 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     ink: '#3A1834', accent: '#9A6650', front: [20.5, 12, 11, 12], back: [13.5, 11, 9, 11],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 24 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked. Grand Theatre's A5 pair (print/invitation_*_a5.png) is for print shops; the panel uses the 5×7 pair for both sizes.
+  // 24 (G424, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): ivory card, a gold-fringed burgundy velvet
+  // valance with a blank gilded cartouche across the top (down to ~12.3 %), a gilded double rule with a tassel near the
+  // bottom (from ~90.7 %) on the front; a short gilded acanthus with a tassel at the top of the back (~11.7 %). `cover`
+  // for 5×7 and A5 (ChatGPT's 1070×1470). Boxes ~2 % clear of it all (measured on the images).
   'grand-theatre-premiere': {
     collection: '24_Grand_Theatre_Premiere',
-    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Abril+Fatface&family=Playfair+Display:ital,wght@0,400;0,600;1,400'),
     script: "'Abril Fatface', Georgia, serif", serif: "'Playfair Display', Georgia, serif",
-    ink: '#1E2626', accent: '#6E5119', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#1E2626', accent: '#5E1622', front: [14.5, 12, 11.5, 12], back: [14, 11, 9, 11],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
   // 25 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's

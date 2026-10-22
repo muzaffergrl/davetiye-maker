@@ -1,7 +1,7 @@
 {
   "id": "grand-theatre-premiere",
   "name": "Grand Theatre Premiere",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "pages": {
     "index": "index.html",
     "home": "home.html",
@@ -10,771 +10,99 @@
     "rsvp": "rsvp.html"
   },
   "photos": {
-    "hero_portrait": {
-      "label": "Portrait on the invitation card",
-      "source": "media.hero_portrait",
-      "aspect": "567/595"
-    },
-    "story_1": {
-      "label": "Our Story photo 1",
-      "source": "media.memory_photos.0",
-      "aspect": "1206/490"
-    },
-    "story_2": {
-      "label": "Our Story photo 2",
-      "source": "media.memory_photos.1",
-      "aspect": "1206/490"
-    },
-    "story_3": {
-      "label": "Our Story photo 3",
-      "source": "media.memory_photos.2",
-      "aspect": "1206/490"
-    },
-    "venue": {
-      "label": "Venue photo",
-      "source": "media.venue_image",
-      "aspect": "1206/490"
-    }
+    "hero_portrait": { "label": "Portrait in the gilded proscenium (the card from the envelope and the home card)", "source": "media.hero_portrait", "aspect": "621/813" },
+    "story_1": { "label": "Our Story photo 1 (Act I, a programme page)", "source": "media.memory_photos.0", "aspect": "683/843" },
+    "story_2": { "label": "Our Story photo 2 (Act II, a programme page)", "source": "media.memory_photos.1", "aspect": "683/843" },
+    "story_3": { "label": "Our Story photo 3 (Act III, a programme page)", "source": "media.memory_photos.2", "aspect": "683/843" },
+    "venue": { "label": "Venue photo (wide gilded proscenium)", "source": "media.venue_image", "aspect": "1043/596" }
   },
   "copy": {
-    "envelope_kicker": {
-      "default": "You are invited",
-      "max": 28,
-      "pages": [
-        "index"
-      ]
-    },
-    "card_line": {
-      "default": "We're getting married",
-      "max": 32,
-      "pages": [
-        "index",
-        "home"
-      ]
-    },
-    "invite_request": {
-      "default": "request the pleasure of your company at the celebration of their marriage",
-      "max": 110,
-      "pages": [
-        "home"
-      ]
-    },
-    "love_line": {
-      "default": "With love,",
-      "max": 24,
-      "pages": [
-        "home",
-        "rsvp"
-      ]
-    },
-    "foot_kicker": {
-      "default": "With love",
-      "max": 30,
-      "pages": [
-        "home"
-      ]
-    },
-    "share_invited": {
-      "default": "You're invited",
-      "max": 40,
-      "pages": [
-        "index"
-      ]
-    },
-    "invite_cue": {
-      "default": "Our invitation",
-      "max": 30,
-      "pages": [
-        "home"
-      ]
-    },
-    "envelope_hint_tap": {
-      "default": "Tap to open",
-      "max": 24,
-      "pages": [
-        "index"
-      ]
-    },
-    "envelope_hint_click": {
-      "default": "Click to open",
-      "max": 24,
-      "pages": [
-        "index"
-      ]
-    },
-    "envelope_enter": {
-      "default": "Enter",
-      "max": 20,
-      "pages": [
-        "index"
-      ]
-    },
-    "envelope_replay": {
-      "default": "Replay the opening",
-      "max": 30,
-      "pages": [
-        "index"
-      ]
-    },
-    "home_replay": {
-      "default": "Replay the envelope",
-      "max": 30,
-      "pages": [
-        "home"
-      ]
-    },
-    "envelope_skip": {
-      "default": "Skip",
-      "max": 12,
-      "pages": [
-        "index"
-      ]
-    },
-    "envelope_open": {
-      "default": "Open the invitation",
-      "max": 30,
-      "pages": [
-        "index"
-      ]
-    },
-    "day_title": {
-      "default": "The Day",
-      "max": 24,
-      "pages": [
-        "home",
-        "story",
-        "details"
-      ]
-    },
-    "schedule_title": {
-      "default": "Order of the Day",
-      "max": 30,
-      "pages": [
-        "details"
-      ]
-    },
-    "venue_title": {
-      "default": "The Venue",
-      "max": 30,
-      "pages": [
-        "details"
-      ]
-    },
-    "ceremony_line": {
-      "default": "Ceremony at",
-      "max": 40,
-      "pages": [
-        "details"
-      ]
-    },
-    "ceremony_in": {
-      "default": "in",
-      "max": 12,
-      "pages": [
-        "details"
-      ]
-    },
-    "view_map": {
-      "default": "View map",
-      "max": 24,
-      "pages": [
-        "details"
-      ]
-    },
-    "home_day_cue": {
-      "default": "Schedule & venue",
-      "max": 24,
-      "pages": [
-        "home"
-      ]
-    },
-    "calendar_title": {
-      "default": "Add to your calendar",
-      "max": 30,
-      "pages": [
-        "home",
-        "details"
-      ]
-    },
-    "calendar_ics": {
-      "default": "Apple / Outlook",
-      "max": 20,
-      "pages": [
-        "home",
-        "details"
-      ]
-    },
-    "calendar_google": {
-      "default": "Google",
-      "max": 20,
-      "pages": [
-        "home",
-        "details"
-      ]
-    },
-    "cd_days": {
-      "default": "Days",
-      "max": 8,
-      "pages": [
-        "home"
-      ]
-    },
-    "cd_hours": {
-      "default": "Hours",
-      "max": 8,
-      "pages": [
-        "home"
-      ]
-    },
-    "cd_minutes": {
-      "default": "Minutes",
-      "max": 8,
-      "pages": [
-        "home"
-      ]
-    },
-    "cd_seconds": {
-      "default": "Seconds",
-      "max": 8,
-      "pages": [
-        "home"
-      ]
-    },
-    "cd_today": {
-      "default": "Today is the day — we're celebrating!",
-      "max": 60,
-      "pages": [
-        "home"
-      ]
-    },
-    "cd_after": {
-      "default": "Thank you for celebrating with us.",
-      "max": 60,
-      "pages": [
-        "home"
-      ]
-    },
-    "ty_kicker": {
-      "default": "With love and thanks",
-      "max": 28,
-      "pages": [
-        "index"
-      ]
-    },
-    "ty_more": {
-      "default": "Look back with us",
-      "max": 30,
-      "pages": [
-        "home"
-      ]
-    },
-    "ty_cue": {
-      "default": "A note from us",
-      "max": 30,
-      "pages": [
-        "home"
-      ]
-    },
-    "ceremony_after": {
-      "default": "The ceremony began at",
-      "max": 40,
-      "pages": [
-        "details"
-      ]
-    },
-    "closing_line_after": {
-      "default": "It meant the world to have you with us.",
-      "max": 60,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "home_link": {
-      "default": "Home",
-      "max": 20,
-      "pages": [
-        "story",
-        "rsvp"
-      ]
-    },
-    "story_title": {
-      "default": "Our Story",
-      "max": 24,
-      "pages": [
-        "home",
-        "story"
-      ]
-    },
-    "story_kicker": {
-      "default": "Moments we hold dear",
-      "max": 40,
-      "pages": [
-        "home",
-        "story"
-      ]
-    },
-    "home_story_cue": {
-      "default": "Read our story",
-      "max": 24,
-      "pages": [
-        "home"
-      ]
-    },
-    "home_more": {
-      "default": "More about the day",
-      "max": 30,
-      "pages": [
-        "home"
-      ]
-    },
-    "dress_label": {
-      "default": "Dress code",
-      "max": 24,
-      "pages": [
-        "details"
-      ]
-    },
-    "travel_title": {
-      "default": "Travel & Stay",
-      "max": 30,
-      "pages": [
-        "details"
-      ]
-    },
-    "travel_note": {
-      "default": "Where to stay and how to get here: see the link below.",
-      "max": 160,
-      "pages": [
-        "details"
-      ]
-    },
-    "travel_button": {
-      "default": "Where to stay",
-      "max": 24,
-      "pages": [
-        "details"
-      ]
-    },
-    "travel_getting_here": {
-      "default": "Getting here",
-      "max": 30,
-      "pages": [
-        "details"
-      ]
-    },
-    "travel_airport": {
-      "default": "Airport & station",
-      "max": 30,
-      "pages": [
-        "details"
-      ]
-    },
-    "travel_parking": {
-      "default": "Parking",
-      "max": 24,
-      "pages": [
-        "details"
-      ]
-    },
-    "travel_shuttle": {
-      "default": "Shuttle",
-      "max": 24,
-      "pages": [
-        "details"
-      ]
-    },
-    "travel_taxi": {
-      "default": "Taxi & rideshare",
-      "max": 30,
-      "pages": [
-        "details"
-      ]
-    },
-    "travel_stays": {
-      "default": "Where to stay",
-      "max": 30,
-      "pages": [
-        "details"
-      ]
-    },
-    "travel_code": {
-      "default": "Booking code",
-      "max": 24,
-      "pages": [
-        "details"
-      ]
-    },
-    "travel_more": {
-      "default": "More info",
-      "max": 20,
-      "pages": [
-        "details"
-      ]
-    },
-    "travel_book": {
-      "default": "Book a room",
-      "max": 20,
-      "pages": [
-        "details"
-      ]
-    },
-    "registry_title": {
-      "default": "Registry",
-      "max": 30,
-      "pages": [
-        "details"
-      ]
-    },
-    "registry_note": {
-      "default": "Your presence is the greatest gift. For those who wish to honor us with a gift, our registry is linked below.",
-      "max": 200,
-      "pages": [
-        "details"
-      ]
-    },
-    "registry_button": {
-      "default": "View registry",
-      "max": 24,
-      "pages": [
-        "details"
-      ]
-    },
-    "faq_title": {
-      "default": "Questions & Answers",
-      "max": 30,
-      "pages": [
-        "details"
-      ]
-    },
-    "menu_title": {
-      "default": "The Menu",
-      "max": 30,
-      "pages": [
-        "details"
-      ]
-    },
-    "menu_diet": {
-      "default": "Dietary needs",
-      "max": 30,
-      "pages": [
-        "details"
-      ]
-    },
-    "menu_served": {
-      "default": "A meal will be served.",
-      "max": 60,
-      "pages": [
-        "details"
-      ]
-    },
-    "blocks_more": {
-      "default": "Learn more",
-      "max": 20,
-      "pages": [
-        "details"
-      ]
-    },
-    "nav_home": {
-      "default": "Home",
-      "max": 8,
-      "pages": [
-        "home",
-        "story",
-        "details",
-        "rsvp"
-      ]
-    },
-    "nav_story": {
-      "default": "Story",
-      "max": 8,
-      "pages": [
-        "home",
-        "story",
-        "details",
-        "rsvp"
-      ]
-    },
-    "nav_details": {
-      "default": "Details",
-      "max": 8,
-      "pages": [
-        "home",
-        "story",
-        "details",
-        "rsvp"
-      ]
-    },
-    "nav_rsvp": {
-      "default": "RSVP",
-      "max": 8,
-      "pages": [
-        "home",
-        "story",
-        "details",
-        "rsvp"
-      ]
-    },
-    "nav_day": {
-      "default": "The Day",
-      "max": 10,
-      "pages": [
-        "home",
-        "story",
-        "details",
-        "rsvp"
-      ]
-    },
-    "rsvp_title": {
-      "default": "Will You Join Us?",
-      "max": 30,
-      "pages": [
-        "home",
-        "rsvp"
-      ]
-    },
-    "rsvp_by": {
-      "default": "Kindly reply by",
-      "max": 30,
-      "pages": [
-        "home",
-        "rsvp"
-      ]
-    },
-    "teaser_rsvp_by": {
-      "default": "Reply by",
-      "max": 20,
-      "pages": [
-        "home"
-      ]
-    },
-    "rsvp_button": {
-      "default": "RSVP",
-      "max": 16,
-      "pages": [
-        "home",
-        "details",
-        "rsvp"
-      ]
-    },
-    "home_rsvp_cue": {
-      "default": "Reply now",
-      "max": 20,
-      "pages": [
-        "home"
-      ]
-    },
-    "form_kicker": {
-      "default": "Kindly reply",
-      "max": 30,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "form_title": {
-      "default": "Your reply",
-      "max": 30,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "form_name": {
-      "default": "Your name",
-      "max": 30,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "form_email": {
-      "default": "Email",
-      "max": 30,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "form_optional": {
-      "default": "(optional)",
-      "max": 20,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "form_attend": {
-      "default": "Will you attend?",
-      "max": 40,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "form_yes": {
-      "default": "Joyfully accepts",
-      "max": 30,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "form_no": {
-      "default": "Regretfully declines",
-      "max": 30,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "form_guests": {
-      "default": "Number of guests",
-      "max": 30,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "form_including": {
-      "default": "(including you)",
-      "max": 24,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "form_party": {
-      "default": "Name of guest",
-      "max": 24,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "form_note": {
-      "default": "A note for the couple",
-      "max": 40,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "form_send": {
-      "default": "Send reply",
-      "max": 20,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "rsvp_thanks": {
-      "default": "Thank you!",
-      "max": 30,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "rsvp_thanks_yes": {
-      "default": "We can't wait to celebrate with you.",
-      "max": 120,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "rsvp_thanks_no": {
-      "default": "We'll miss you — thank you for letting us know.",
-      "max": 120,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "rsvp_again": {
-      "default": "Send another reply",
-      "max": 30,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "rsvp_closed_title": {
-      "default": "Replies are closed",
-      "max": 30,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "closing_title": {
-      "default": "Thank you",
-      "max": 30,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "closing_line": {
-      "default": "We can't wait to celebrate with you.",
-      "max": 60,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "rsvp_replay": {
-      "default": "Replay the envelope",
-      "max": 30,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "envelope_close": {
-      "default": "Close envelope",
-      "max": 30,
-      "pages": [
-        "index"
-      ],
-      "label": "Close envelope button",
-      "panel": "us"
-    }
+    "envelope_kicker": { "default": "Together with their families", "max": 28, "pages": ["index"] },
+    "card_line": { "default": "Our wedding", "max": 32, "pages": ["index", "home"] },
+    "invite_request": { "default": "request the pleasure of your company at their wedding", "max": 110, "pages": ["home"] },
+    "invite_at": { "default": "at", "max": 12, "pages": ["home"] },
+    "love_line": { "default": "With love,", "max": 24, "pages": ["home"] },
+    "foot_kicker": { "default": "With love", "max": 30, "pages": ["home"] },
+    "envelope_hint_tap": { "default": "Tap to open", "max": 24, "pages": ["index"] },
+    "envelope_enter": { "default": "Enter", "max": 20, "pages": ["index"] },
+    "envelope_replay": { "default": "Replay the opening", "max": 30, "pages": ["index"] },
+    "home_replay": { "default": "Open it again", "max": 30, "pages": ["home"] },
+    "envelope_skip": { "default": "Skip", "max": 12, "pages": ["index"] },
+    "envelope_open": { "default": "Open the envelope", "max": 30, "pages": ["index"] },
+    "day_title": { "default": "The Day", "max": 24, "pages": ["home", "story", "details"] },
+    "schedule_title": { "default": "Order of the Day", "max": 30, "pages": ["details"] },
+    "venue_title": { "default": "The Venue", "max": 30, "pages": ["details"] },
+    "ceremony_line": { "default": "The ceremony begins at", "max": 40, "pages": ["details"] },
+    "view_map": { "default": "View map", "max": 24, "pages": ["details"] },
+    "calendar_title": { "default": "Add to your calendar", "max": 30, "pages": ["home", "details"] },
+    "calendar_ics": { "default": "Apple / Outlook", "max": 20, "pages": ["home", "details"] },
+    "calendar_google": { "default": "Google", "max": 20, "pages": ["home", "details"] },
+    "cd_days": { "default": "Days", "max": 8, "pages": ["home"] },
+    "cd_hours": { "default": "Hours", "max": 8, "pages": ["home"] },
+    "cd_minutes": { "default": "Minutes", "max": 8, "pages": ["home"] },
+    "cd_seconds": { "default": "Seconds", "max": 8, "pages": ["home"] },
+    "cd_today": { "default": "Today is the day — we're celebrating!", "max": 60, "pages": ["home"] },
+    "cd_after": { "default": "Thank you for celebrating with us.", "max": 60, "pages": ["home"] },
+    "ty_kicker": { "default": "With love and thanks", "max": 28, "pages": ["index"] },
+    "ceremony_after": { "default": "The ceremony began at", "max": 40, "pages": ["details"] },
+    "home_link": { "default": "Home", "max": 20, "pages": ["story", "rsvp"] },
+    "story_title": { "default": "Our Story", "max": 24, "pages": ["home", "story"] },
+    "story_kicker": { "default": "Moments we hold dear", "max": 40, "pages": ["home", "story"] },
+    "home_story_cue": { "default": "Read our story", "max": 24, "pages": ["home"] },
+    "dress_label": { "default": "Dress code", "max": 24, "pages": ["details"] },
+    "travel_title": { "default": "Travel & Stay", "max": 30, "pages": ["details"] },
+    "travel_note": { "default": "Where to stay and how to get here: see the link below.", "max": 160, "pages": ["details"] },
+    "travel_button": { "default": "Where to stay", "max": 24, "pages": ["details"] },
+    "travel_getting_here": { "default": "Getting here", "max": 30, "pages": ["details"] },
+    "travel_airport": { "default": "Airport & station", "max": 30, "pages": ["details"] },
+    "travel_parking": { "default": "Parking", "max": 24, "pages": ["details"] },
+    "travel_shuttle": { "default": "Shuttle", "max": 24, "pages": ["details"] },
+    "travel_taxi": { "default": "Taxi & rideshare", "max": 30, "pages": ["details"] },
+    "travel_stays": { "default": "Where to stay", "max": 30, "pages": ["details"] },
+    "travel_code": { "default": "Booking code", "max": 24, "pages": ["details"] },
+    "travel_more": { "default": "More info", "max": 20, "pages": ["details"] },
+    "travel_book": { "default": "Book a room", "max": 20, "pages": ["details"] },
+    "registry_title": { "default": "Registry", "max": 30, "pages": ["details"] },
+    "registry_note": { "default": "Your presence is the greatest gift. For those who wish to honor us with a gift, our registry is linked below.", "max": 200, "pages": ["details"] },
+    "registry_button": { "default": "View registry", "max": 24, "pages": ["details"] },
+    "faq_title": { "default": "Questions & Answers", "max": 30, "pages": ["details"] },
+    "menu_title": { "default": "The Menu", "max": 30, "pages": ["details"] },
+    "menu_diet": { "default": "Dietary needs", "max": 30, "pages": ["details"] },
+    "menu_served": { "default": "A meal will be served.", "max": 60, "pages": ["details"] },
+    "blocks_more": { "default": "Learn more", "max": 20, "pages": ["details"] },
+    "nav_home": { "default": "Home", "max": 8, "pages": ["home", "story", "details", "rsvp"] },
+    "nav_story": { "default": "Story", "max": 8, "pages": ["home", "story", "details", "rsvp"] },
+    "nav_details": { "default": "Details", "max": 8, "pages": ["home", "story", "details", "rsvp"] },
+    "nav_rsvp": { "default": "RSVP", "max": 8, "pages": ["home", "story", "details", "rsvp"] },
+    "nav_day": { "default": "The Day", "max": 10, "pages": ["home", "story", "details", "rsvp"] },
+    "rsvp_title": { "default": "Kindly reply", "max": 30, "pages": ["rsvp"] },
+    "rsvp_by": { "default": "Kindly reply by", "max": 30, "pages": ["home", "rsvp"] },
+    "rsvp_button": { "default": "RSVP", "max": 16, "pages": ["home", "details", "rsvp"] },
+    "rsvp_wait": { "default": "We can't wait to celebrate with you", "max": 50, "pages": ["rsvp"] },
+    "form_title": { "default": "Your reply", "max": 30, "pages": ["rsvp"] },
+    "form_name": { "default": "Your name", "max": 30, "pages": ["rsvp"] },
+    "form_email": { "default": "Email", "max": 30, "pages": ["rsvp"] },
+    "form_optional": { "default": "(optional)", "max": 20, "pages": ["rsvp"] },
+    "form_attend": { "default": "Will you attend?", "max": 40, "pages": ["rsvp"] },
+    "form_yes": { "default": "Joyfully accepts", "max": 30, "pages": ["rsvp"] },
+    "form_no": { "default": "Regretfully declines", "max": 30, "pages": ["rsvp"] },
+    "form_guests": { "default": "Number of guests", "max": 30, "pages": ["rsvp"] },
+    "form_including": { "default": "(including you)", "max": 24, "pages": ["rsvp"] },
+    "form_party": { "default": "Name of guest", "max": 24, "pages": ["rsvp"] },
+    "form_note": { "default": "A note for the couple", "max": 40, "pages": ["rsvp"] },
+    "form_send": { "default": "Send reply", "max": 20, "pages": ["rsvp"] },
+    "rsvp_thanks": { "default": "Thank you!", "max": 30, "pages": ["rsvp"] },
+    "rsvp_thanks_yes": { "default": "Your seat is saved. We look forward to celebrating together.", "max": 120, "pages": ["rsvp"] },
+    "rsvp_thanks_no": { "default": "We'll miss you — thank you for letting us know.", "max": 120, "pages": ["rsvp"] },
+    "rsvp_again": { "default": "Send another reply", "max": 30, "pages": ["rsvp"] },
+    "rsvp_closed_title": { "default": "Replies are closed", "max": 30, "pages": ["rsvp"] },
+    "rsvp_replay": { "default": "Open the invitation again", "max": 30, "pages": ["rsvp"] },
+    "act_1": { "default": "Act I", "max": 16, "pages": ["story"], "label": "Label above story photo 1", "panel": "story" },
+    "act_2": { "default": "Act II", "max": 16, "pages": ["story"], "label": "Label above story photo 2", "panel": "story" },
+    "act_3": { "default": "Act III", "max": 16, "pages": ["story"], "label": "Label above story photo 3", "panel": "story" },
+    "album_label": { "default": "Photographs", "max": 17, "pages": ["story"], "label": "Name of the photo section (screen readers)", "panel": "story" },
+    "home_intro": { "default": "The curtain rises on forever", "max": 36, "pages": ["home"], "label": "Invitation heading", "panel": "us" },
+    "home_location": { "default": "Join us in", "max": 15, "pages": ["home"], "label": "Line above the city", "panel": "day" }
   },
-  "swatch": [
-    "#0E3D40",
-    "#C9A45C",
-    "#F3EBD8"
-  ],
-  "variants": [
-    {
-      "id": "crimson-velvet",
-      "name": "Crimson Velvet & Gold",
-      "swatch": [
-        "#7A1E26",
-        "#C9A45C",
-        "#F3EBD8"
-      ],
-      "status": "coming"
-    },
-    {
-      "id": "royal-sapphire",
-      "name": "Royal Sapphire & Gold",
-      "swatch": [
-        "#24447A",
-        "#C9A45C",
-        "#F3EBD8"
-      ],
-      "status": "coming"
-    },
-    {
-      "id": "emerald-velvet",
-      "name": "Emerald Velvet & Gold",
-      "swatch": [
-        "#1C5A3C",
-        "#C9A45C",
-        "#F3EBD8"
-      ],
-      "status": "coming"
-    },
-    {
-      "id": "plum-velvet",
-      "name": "Plum Velvet & Gold",
-      "swatch": [
-        "#55285A",
-        "#C9A45C",
-        "#F3EBD8"
-      ],
-      "status": "coming"
-    },
-    {
-      "id": "onyx-gold",
-      "name": "Black Tie Onyx & Gold",
-      "swatch": [
-        "#34383A",
-        "#C9A45C",
-        "#F3EBD8"
-      ],
-      "status": "coming"
-    }
-  ]
+  "swatch": ["#F3EBD8","#0E3D40","#5E1622"]
 }
