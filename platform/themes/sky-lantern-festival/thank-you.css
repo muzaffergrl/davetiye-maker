@@ -1,17 +1,7 @@
-/* Sky Lantern Festival (design 03) — thank-you mode (G075). Linked only after the wedding (<link … data-if="thank_you_on">),
-   so the invitation pages keep their site.css budget (docs/11 §6, §3.6). GPT parts only; tokens from site.css. */
-
-/* the card's arch: the couple's thank-you photo, else the blush mist and the ribbon bow (decoration, not a placeholder) */
-[data-slot="hero_portrait"] > img.ty-photo { object-position: 50% 38%; }
-.photo-slot > .ty-decor { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding-top: 12%;
-                          background: rgb(var(--c-f4e2e0)) url("img/mist_tile-640.webp") 50% 30% / 260% auto; }
-.photo-slot > .ty-decor > img { width: 86%; height: auto; display: block; rotate: -4deg; filter: drop-shadow(0 6px 8px rgb(var(--c-3f2a2e)/.2)); }
-/* card copy: the thank-you title (≤ 60 characters) wraps in the calligraphy, the date under it */
-.card-copy .ty-title { font-size: 8.8cqw; line-height: 1.06; text-wrap: balance; overflow-wrap: break-word; }
-/* the thank-you card (invitation card paper, 3-slice): title, message, signature */
-.ty-text .ty-head { font-size: 9.6cqw; line-height: 1.1; text-wrap: balance; }
-.ty-text .ty-message { margin-top: 3.4cqw; font-size: max(15px, 3.9cqw); line-height: 1.5; white-space: pre-line; text-wrap: pretty; }
-.ty-text .ty-love { margin-top: 4cqw; }
-.ty-text .nm { margin-top: 1cqw; font-size: 9.6cqw; text-wrap: balance; }
-.ty-text .city { margin-top: 2cqw; }
-.rsvp-text .ty-kicker { max-width: 92%; text-wrap: balance; }
+/* Sky Lantern Festival — thank-you mode (G075, docs/11 §3.6): loaded only after the wedding (data-if="thank_you_on").
+   The same envelope and pages; the card and the invitation carry the couple's thank-you. No new artwork. */
+.ty-title{font:400 clamp(18px,13cqw,34px)/1.1 var(--script)}
+.thank-you-copy .body-text{white-space:pre-line;margin:0 auto 18px;max-width:420px}
+.thank-you-copy .love{font:400 46px/1.1 var(--script);margin-top:10px;color:var(--glow)}
+.reply-card.thank-you-copy .btn{margin-top:6px}
+.reply-card.thank-you-copy .love{color:var(--ink)}

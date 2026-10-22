@@ -1289,9 +1289,9 @@ const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> 
     home: msg("Sunlit whitewash, cobalt tiles and warm terracotta. Your portrait sits in a tiled limestone niche and every photo is uncovered tile by tile."),
   },
   'sky-lantern-festival': {
-    style: msg("Dusky-plum envelope, an amber lantern charm and lantern-lit details at twilight."),
-    opening: msg("Your guests tap the envelope. The scalloped mouth of a coral silk pouch opens. Its portrait invitation rises above the pocket before the wedding home page opens."),
-    home: msg("Plum, dusky rose and lantern amber bring the last light of day into your invitation, story and celebration pages."),
+    style: msg("Dip-dyed dusk washi envelope with a lantern-belly flap and a paper sky lantern tied to a gold stud with amber silk."),
+    opening: msg("Your guests tap the envelope. The paper lantern lights up from inside, the silk thread slips free and the lantern rises out of sight while distant lanterns drift up behind it, the lantern-belly flap opens onto warm amber washi and the rice-paper card with your portrait rises out of the pocket before the wedding home page opens."),
+    home: msg("Dusk violet, dusky rose and lantern amber on hand-dyed washi. Your portrait waits in a paper-lantern window on a rice-paper card, and every photo opens in a circle of warm lantern light."),
   },
   'music-box-ballerina': {
     style: msg("Blush envelope, a champagne satin band and a gold-edged floral cameo."),
@@ -1315,18 +1315,6 @@ for (const [id, preview] of Object.entries(PREVIEW_DESIGN_COPY)) {
 
 // Interior art/layout/motion differ for these eleven previews; envelope copy and other products are unchanged.
 const UNIQUE_INTERIORS: Record<string,{fonts:string[];home:string;story:string;details:string;rsvp:string}> = {
-  "sky-lantern-festival": {
-    "fonts": [
-      "Cormorant Garamond",
-      "Great Vibes",
-      "Lora",
-      "Allura"
-    ],
-    "home": "A twilight lantern suite with a floating paper-window portrait and warm amber invitation.",
-    "story": "Tall lantern-window photographs float along a staggered twilight trail with alternating captions.",
-    "details": "A lantern-paper evening programme with softly spaced time markers.",
-    "rsvp": "A warm lantern-paper reply letter against dusky plum."
-  },
   "music-box-ballerina": {
     "fonts": [
       "Cormorant Garamond",
@@ -1494,6 +1482,22 @@ const REBUILT: Record<string, Pick<DesignCopy, 'fonts' | 'pages' | 'palette' | '
       { name: msg('Terracotta'), hex: '#AE583A' },
     ],
     llmsLine: 'a glaze-white envelope with a stepped flap of painted cobalt azulejo tiles, tied with jute twine and closed by a loose swallow tile; photos uncovered tile by tile; cobalt, whitewash and terracotta.',
+  },
+  'sky-lantern-festival': {
+    fonts: ['Corinthia', 'Bellefair'],
+    pages: {
+      home: msg('Your portrait in a paper-lantern window on a rice-paper card under the lantern that rose from the envelope, the invitation between strings of tiny lanterns with a countdown and calendar links, and a lit lantern to sign off.'),
+      story: msg('Three photos on hanging rice-paper panels, left, right and left, each opening in a circle of warm light as guests scroll while distant lanterns drift up.'),
+      details: msg('The order of the day on rice paper, each line with a little lantern that lights in turn, the venue on a wide bamboo panel, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('A rice-paper reply card with your reply-by date and the configurable RSVP form; when a reply is sent, a lantern rises with gold leaf, petals and wish seeds.'),
+    },
+    palette: [
+      { name: msg('Dusk violet'), hex: '#2B1F45' },
+      { name: msg('Dusky rose'), hex: '#E7B4A6' },
+      { name: msg('Lantern amber'), hex: '#F2A65A' },
+      { name: msg('Rice paper'), hex: '#F7EEDD' },
+    ],
+    llmsLine: 'a dip-dyed dusk washi envelope with a lantern-belly flap and a paper sky lantern that lights and rises away; photos open in warm lantern light on rice-paper panels.',
   },
 };
 for (const [id, r] of Object.entries(REBUILT)) Object.assign(DESIGN_COPY[id], r);
