@@ -56,9 +56,9 @@ const TITLES_TR: Record<string, [string, string]> = {
   setup_service_details: ['Kurulum hizmeti: bilgilerinizi gönderin', '"Biz kuralım" siparişi gelir gelmez (K42), 24 saat içinde. Gereken her şeyi bir kerede isteyin; teslim 3 gün.'],
   setup_service_done_same_link: ['Kurulum bitti: aynı link', '"Dükkân olarak düzenle" ile bilgileri girdikten sonra (alıcının linki hiç değişmedi). Dükkân linkini kapatın; turu sitenin notuna yazın.'],
   setup_service_done: ['Kurulum bitti: düzenleme linki', 'Alıcının bilgilerini girdikten sonra, "Yeni sipariş" ya da "Yeni düzenleme linki"nden hemen sonra. Turu sitenin notuna yazın.'],
-  custom_design_brief: ['Özel tasarım: fikrinizi anlatın', 'Özel tasarım siparişi gelir gelmez, tasarıma başlamadan (K42). İlk sürüm 3 gün, 2 revizyon, sonrası tur başı 500 TL.'],
+  custom_design_brief: ['Özel tasarım: fikrinizi anlatın', 'Özel tasarım siparişi gelir gelmez, tasarıma başlamadan (K42). İlk sürüm 3 gün, 2 revizyon, sonrası tur başı 690 TL.'],
   custom_design_ready: ['Özel tasarım hazır: başlatın', 'Özel tema /start\'ta açıldığında; alıcı sitesini başlatabilir.'],
-  custom_design_extra_round: ['Özel tasarım: ek revizyon turu', '3. (ve sonraki) revizyon isteğinde ya da "Extra design revision" ilanı satın alındıktan sonra. Tur başı 500 TL; sitenin notuna yazın.'],
+  custom_design_extra_round: ['Özel tasarım: ek revizyon turu', '3. (ve sonraki) revizyon isteğinde ya da "Extra design revision" ilanı satın alındıktan sonra. Tur başı 690 TL; sitenin notuna yazın.'],
   refund_or_problem: ['İade isteği / memnun olmayan alıcı', 'Alıcı iade istiyor ya da ürünün işine yaramadığını söylüyor.'],
   delete_data: ['Sitemi ve verilerimi silin', 'Alıcı sitenin ya da misafir verilerinin silinmesini istiyor.'],
 };
@@ -79,7 +79,7 @@ const NOTES_TR: Record<string, string> = {
   setup_service_done_same_link: 'Alıcının linki aynen çalışıyor; bu mesaj link içermez. Göndermeden önce "Dükkân linkini kapat"a basın.',
   setup_service_done:
     'Yalnız "Yeni sipariş" ya da "Yeni düzenleme linki"nden hemen sonra gönderin (taze link). Turu sitenin notuna yazın (tarih + kurulum sipariş numarası).',
-  custom_design_brief: 'Karar (2026-10-16): 2 revizyon turu, sonrası tur başı 500 TL; ilk sürüm 3 gün; tasarım yalnız bu alıcıya özel.',
+  custom_design_brief: 'Karar (2026-10-16): 2 revizyon turu, sonrası tur başı 690 TL; ilk sürüm 3 gün; tasarım yalnız bu alıcıya özel.',
   custom_design_ready: 'Göndermeden önce özel tasarımın /start\'ta açılabildiğini kontrol edin.',
   custom_design_extra_round:
     '3. turdan önce Etsy siparişinde "Extra design revision" ilanı var mı bakın; turu sitenin notuna yazın (revizyon n).',

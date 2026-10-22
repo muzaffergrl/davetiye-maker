@@ -15,25 +15,28 @@ Dosyalar:
 - Admin mesajları: `setup_service_details`, `setup_service_done`, `custom_design_brief`, `custom_design_ready`, `custom_design_extra_round`
   (`platform/lib/admin/message-templates.json`; docs/19 §4.5'teki kopya aynı).
 
-## 1. Fiyatlar (kullanıcı onayı, 2026-10-16)
+## 1. Fiyatlar (K49, kullanıcı onayı 2026-10-22; önceki 2026-10-16)
 
-Kur: **1 USD = 49,53 TL** (BloombergHT, 2026-10-16 09:30; alış 49,5247 / satış 49,5300; Türkgün 09:50'de 49,5270). Dükkân para
-birimi TRY (K38), Etsy'ye TL girilir. Çıkış noktası şablonun taslak fiyatı USD 29.40'tı (docs/20 §8).
+Kur: **1 USD = 49,55 TL** (CNBC-e serbest piyasa, 2026-10-19 16:05; alış 49,5474 / satış 49,5577). Dükkân para birimi TRY
+(K38), Etsy'ye TL girilir. Gerekçe ve hesap: `docs/35_FIYAT_STRATEJISI.md` §3.2, §8b.
 
-| Ürün | Hesap | Fiyat (TL) | ≈ USD | Durum |
+| Ürün | Fiyat (TL) | ≈ USD | Önceki (2026-10-16) | Durum |
 |---|---|---|---|---|
-| Tasarım (şablon) | 29.40 × 49,53 = 1.456,18 → yuvarlandı | **1.460 TL** | 29.48 | onaylı (2026-10-16) |
-| "We set it up for you" (kurulum, bir tur) | K42: ~500 TL | **500 TL** | 10.09 | onaylı (2026-10-16) |
-| Özel tasarım (şablon dahil) | 1.460 + 1.500 | **2.960 TL** | 59.76 | onaylı (2026-10-16) |
-| Tasarım + kurulum (iki ayrı satın alma) | 1.460 + 500 | 1.960 TL | 39.57 | bilgi |
-| Ek tasarım revizyonu (2 turdan sonra, tur başı) | kullanıcı | **500 TL** | 10.09 | onaylı (2026-10-16); ayrı ilan (§4.7) |
+| Tasarım (şablon), lansman — düz, üstü çizili yok | **1.190 TL** | 24.02 | 1.460 TL | onaylı (K49) |
+| Tasarım, lansman sonrası (≈ 10 yorum): normal / ≤ 30 gün %40 indirim | 2.490 / 1.494 TL | 50.25 / 30.15 | — | onaylı plan (K49); zamanı gelince uygulanır |
+| "We set it up for you" (kurulum, bir tur) | **990 TL** | 19.98 | 500 TL | onaylı (K49) |
+| Özel tasarım (şablon dahil) | **4.490 TL** | 90.62 | 2.960 TL | onaylı (K49) |
+| Tasarım + kurulum (iki ayrı satın alma) | 2.180 TL | 44.00 | 1.960 TL | bilgi |
+| Ek tasarım revizyonu (2 turdan sonra, tur başı) | **690 TL** | 13.93 | 500 TL | onaylı (K49); ayrı ilan (§4.7) |
+
+Hizmetlerde indirim yapılmaz (docs/35 §8b).
 
 Adet: bütün ilanlarda **999** (Etsy'nin üst sınırı; kullanıcı: stok sınırı yok). Otomatik yenileme hâlâ açık.
 
 Notlar:
 - Yabancı alıcı fiyatı kendi para biriminde küsuratlı görür (Etsy çevirir). Kur değişince TL fiyat elle güncellenir; güncelleme
-  sıklığı K38'de hâlâ açık.
-- `config.ts` `currency: 'TRY'`; 20 tasarım `price: '1460'`, hizmetler `'500'` ve `'2960'`. Satış sitesi "1,460 TRY" gösterir
+  sıklığı K49: ayda bir, yalnız indirim arasında (docs/35 §6).
+- `config.ts` `currency: 'TRY'`; 21 tasarım `price: '1190'`, hizmetler `'990'` ve `'4490'` (K49). Satış sitesi "1,190 TRY" gösterir
   (Etsy dükkânının fiyatı; Etsy her alıcıya kendi para biriminde de gösterir). Gerçek Etsy linki girilen bir hizmetin fiyatı yer
   tutucuysa lansman build'i durur (`launchProblems`).
 

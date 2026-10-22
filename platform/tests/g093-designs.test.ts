@@ -117,7 +117,7 @@ test('06, 07 and 08 are live after the first five, named as their themes, with d
     assert.equal(page.path, `/designs/${n.id}`);
     assert.equal(page.h1, `${n.name} wedding website`);
     // K42 (2026-10-16): the user-approved price, the same for every design; no Etsy link invented yet
-    assert.equal(d.price, '1460');
+    assert.equal(d.price, '1190');
     assert.equal(d.etsyListingUrl, '[ETSY LISTING URL]');
     assert.equal(d.compareAtPrice, null);
   }

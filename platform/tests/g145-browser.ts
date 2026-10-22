@@ -241,7 +241,7 @@ try {
     await shot(page, '05_admin_overview_390');
     await page.goto(`${BASE}/admin/designs`);
     const t = await page.locator('main').innerText();
-    check('Tasarımlar: price in the shop currency (no "$")', /Fiyat: 1,460 TRY/.test(t) && !/Fiyat: \$/.test(t));
+    check('Tasarımlar: price in the shop currency (no "$")', /Fiyat: 1,190 TRY/.test(t) && !/Fiyat: \$/.test(t));
     await page.goto(`${BASE}/admin/orders`);
     await page.locator('[data-site="mia-and-theo"]').click();
     await page.waitForSelector('[data-shop-edit]');

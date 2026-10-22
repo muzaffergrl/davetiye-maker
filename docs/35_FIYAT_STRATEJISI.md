@@ -1,8 +1,8 @@
 # 35 — Fiyat stratejisi (2026-10-22)
 
-**Durum: öneri, karar değil.** Bugünkü onaylı fiyatlar (K42, docs/23 §1) değişmedi: tasarım **1.460 TL**, kurulum **500 TL**,
-özel tasarım **2.960 TL**, ek revizyon **500 TL**. `platform/lib/marketing/config.ts` ve `etsy_upload.json` dosyalarına
-dokunulmadı. Bu belge docs/15 §3'ün (14 Ekim) güncel pazar ve kur verisiyle yeniden ele alınmış halidir.
+**Durum: karar (K49, 2026-10-22).** Kullanıcı §8b'deki TRY tablosunu onayladı: tasarım lansman **1.190 TL**, kurulum **990 TL**,
+özel tasarım **4.490 TL**, ek revizyon **690 TL**; dükkân TRY kalır. `config.ts`, `etsy_upload.json`'lar ve docs/23 §1 güncellendi.
+§0–§7'deki ilk tablo (1.490 / 1.790 basamakları) §8b ile değişti; geçerli olan §8b. Bu belge docs/15 §3'ün (14 Ekim) güncel pazar ve kur verisiyle yeniden ele alınmış halidir.
 
 **Kaynak sınırı.** etsy.com bu ortamdan açılamıyor (DNS hatası). Etsy fiyatları arama motoru özetlerinden ve docs/13'teki
 81 ilanlık ölçümden geliyor. Etsy ücretleri ikincil kaynaklardan; yayından önce Shop Manager → Finances ekranında doğrulanmalı.

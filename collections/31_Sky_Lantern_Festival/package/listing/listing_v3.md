@@ -25,7 +25,7 @@ opening (a paper lantern in cupped hands rising into the sky); that opening is n
 | Web address | `bkestudio.com` (primary since 2026-10-19; links of the earlier `xn--bkestudo-zkb.com` redirect here with a permanent 308). |
 | Shop name, support email | **BKE Studio**, **bkestudio01@gmail.com** (the address `bkestudio@gmail.com` in older listing files is wrong). The description gives no email: buyers message the shop on Etsy. |
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
-| Price, quantity | **Blocker:** 1,460 TL is the approved shop price for a template design (docs/23 §1, user, 2026-10-16) and is used here as the proposal; it is not confirmed for this design (`config.ts` price `[PRICE]`). Quantity 999 (Etsy's maximum, no stock limit). |
+| Price, quantity | **Blocker:** 1,190 TL is the approved shop price for a template design (docs/23 §1, user, 2026-10-16) and is used here as the proposal; it is not confirmed for this design (`config.ts` price `[PRICE]`). Quantity 999 (Etsy's maximum, no stock limit). |
 | Design fonts and other languages | Read on 2026-10-22 from the Google Fonts subset lists (via the gwfh.mranftl.com mirror of the Google Fonts API; the css2 response this task received showed no subset comments). Website: Allura (latin, latin-ext, vietnamese: **no Cyrillic**), Cormorant Garamond and Lora (latin-ext + Cyrillic). Printable invitation (`layouts.ts`): Bellefair (hebrew, latin, latin-ext) and Corinthia (latin, latin-ext, vietnamese). So the language line says: accented Latin letters in the design's fonts, Cyrillic and other alphabets in a plain standard font in some or all places. |
 | Etsy rules | `etsy.com/legal/creativity` and the help page "How to Manage Your Digital Listings" answered 403 to this task's fetch (2026-10-22). A web search on 2026-10-22 returned Etsy's House Rules excerpt: items generated with AI tools from the seller's own prompts belong to "Designed by a seller", and the listing description must disclose the use of AI. The AI sentence in GOOD TO KNOW is written for that; re-check in the listing editor (§11). Canva is not part of this product (K24) and was not checked. |
 | START HERE guide | `package/customer/START_HERE.md` + `.pdf` with the start QR, built 2026-10-20 (G190, `tools/build_customer_guides.py`, docs/19 Ek A). Its start link and QR answer only once the design is live (404 today). Its first section says guests "tap the lantern", from the full `designs.ts` entry; the website shows a silk pouch (§11). |
@@ -154,7 +154,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Style / theme | Romantic, Whimsical (if offered) |
 | Personalization | Off (nothing to fill in at checkout; the buyer fills in the website) |
 | Digital file | `START_HERE.pdf` from `package/customer/` (built 2026-10-20, G190; Etsy: up to 5 files, 20 MB each, as recorded in the 21 listing) |
-| Price | **1,460 TL proposed** (the approved shop price for a template design, user, 2026-10-16, docs/23 §1; about USD 29.48 at 49.53 TRY per USD). Shop currency TRY (K38). **Not confirmed for this design** (`config.ts` `[PRICE]`): blocker until the user confirms it |
+| Price | **1,190 TL proposed** (the approved shop price for a template design, user, 2026-10-16, docs/23 §1; about USD 24.02 at 49.55 TRY per USD). Shop currency TRY (K38). **Not confirmed for this design** (`config.ts` `[PRICE]`): blocker until the user confirms it |
 | Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) [VERIFY: whether Etsy lowers a digital listing's quantity on each sale] |
 | Shop section | Suggestion: `Floral & Garden` or `Classic & Vintage` (existing sections, docs/20 §3; the user's choice) |
 | Renewal | [AUTO RENEW: yes/no] |
@@ -277,7 +277,7 @@ link; one review request per order, the same text for everyone, never with an in
 
 ## 11. Before you publish this listing
 
-- [ ] The user approves this design's sale and price (`config.ts` from `preview` to `live`; 1,460 TL proposed)
+- [ ] The user approves this design's sale and price (`config.ts` from `preview` to `live`; 1,190 TL proposed)
 - [ ] Design deployed as `live`; start link answers on the live site (`200`, design named): 404 on 2026-10-22
 - [x] Live demo of this design answers on the live site (`200`, coordinator's curl, 2026-10-22)
 - [ ] Start link and demo opened on a real phone; the QR in START_HERE.pdf scanned with a phone camera

@@ -1,7 +1,7 @@
 # Etsy listing v3: Custom wedding website design (K42)
 
 Internal listing kit for the seller (G130, 2026-10-16). Not published on Etsy (K41). A new design made for one couple on our platform;
-the price is a design's price plus about 1500 TL for the custom work (K42). Flow after the sale: `docs/23_EK_HIZMETLER.md` §4. Product
+the price includes the design (K42; 4,490 TL since K49, 2026-10-22). Flow after the sale: `docs/23_EK_HIZMETLER.md` §4. Product
 language: English (US spelling).
 
 ## 0. Status before publishing
@@ -9,8 +9,8 @@ language: English (US spelling).
 | Item | Status on 2026-10-16 |
 |---|---|
 | Decision | K42 (user, 2026-10-16): custom design = the template price + about 1500 TL. Sold as its own Etsy listing |
-| Price | **2,960 TL** = design 1,460 TL + 1,500 TL, approved by the user on 2026-10-16 (about USD 59.76 at 49.53 TRY per USD, BloombergHT 2026-10-16 09:30). docs/23 §1 |
-| Revisions | **2 rounds** included; each further round **500 TL** (user, 2026-10-16) |
+| Price | **4,490 TL**, design included (K49, user, 2026-10-22; docs/35 §8b; was 2,960 TL from 2026-10-16). About USD 90.62 at 49.55 TRY per USD (CNBC-e 2026-10-19). docs/23 §1 |
+| Revisions | **2 rounds** included; each further round **690 TL** (user, 2026-10-16; price K49, 2026-10-22) |
 | Turnaround | **3 days** for the first version after we have the answers (user, 2026-10-16) |
 | Exclusivity | **Exclusive** (user, 2026-10-16): the design is never sold to anyone else |
 | How a custom design is made | The same pipeline as our 20 designs: GPT artwork (K21) → a platform theme → open on /start for this buyer only. Making a theme takes real work (G406–G420 took one task each); the turnaround must allow for it. Not tried for a single buyer yet (docs/23 §4) |
@@ -51,7 +51,7 @@ HOW IT WORKS
 WHAT IS NOT INCLUDED
 • Entering your details for you (add our setup service if you would like us to do it)
 • Printing or shipping anything, and a custom domain (yournames.com)
-• Changes beyond the 2 included rounds: each further round is 500 TL, through our Extra design revision listing
+• Changes beyond the 2 included rounds: each further round is 690 TL, through our Extra design revision listing
 
 GOOD TO KNOW
 • The artwork is created with the help of AI image tools from our own descriptions, then selected, refined and built into your website by us. [VERIFY: Etsy AI disclosure wording and the "Designed by" setting]
@@ -99,7 +99,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Occasion | Wedding |
 | Personalization | Off (we ask in an Etsy message after the order) |
 | Digital file | `CUSTOM_DESIGN.pdf` (`package/customer/`, G136) |
-| Price | **2,960 TL** = design 1,460 TL + 1,500 TL (about USD 59.76; K42, approved 2026-10-16; docs/23 §1) |
+| Price | **4,490 TL**, design included (about USD 90.62; K49, user, 2026-10-22; docs/35 §8b; docs/23 §1) |
 | Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) |
 | Shop section | Services (proposal, docs/20 §3) |
 | Renewal | [AUTO RENEW: yes/no] |
@@ -128,7 +128,7 @@ None. Optional later: openings of several ready designs, one after the other.
 No. The price includes your custom design.
 
 **How many changes can I ask for?**
-2 rounds of changes to the design are included. Each further round is 500 TL.
+2 rounds of changes to the design are included. Each further round is 690 TL.
 
 **How long does it take?**
 The first version within 3 days of receiving your answers.
@@ -147,9 +147,9 @@ within 24 hours (docs/23 §4).
 
 ## 10. Before you publish this listing
 
-- [x] Price approved: 2,960 TL (2026-10-16)
-- [x] Revisions (2, then 500 TL a round), turnaround (3 days) and exclusivity decided (2026-10-16), here and in the admin messages
-- [x] Extra rounds: own listing `collections/_services/extra-revision/` (500 TL, 2026-10-16); publish both together
+- [x] Price approved: 4,490 TL (K49, 2026-10-22)
+- [x] Revisions (2, then 690 TL a round since K49), turnaround (3 days) and exclusivity decided (2026-10-16), here and in the admin messages
+- [x] Extra rounds: own listing `collections/_services/extra-revision/` (690 TL, K49 2026-10-22); publish both together
 - [ ] A custom theme made once end to end for one buyer (only that order can start it on /start), docs/23 §4
 - [ ] Etsy's policy on custom design listings read; category and digital-file setup checked in the listing editor
 - [x] `CUSTOM_DESIGN.pdf` made; images made (§5) (G136, 2026-10-17)

@@ -131,15 +131,15 @@ def test_real_listings():
                 b.startswith("listing images missing") for b in data["blockers"]), no
         else:
             assert names == [f"{n}.png" for n in lk.UPLOAD_IMAGES], no
-        assert data["ready_to_publish"] is False and data["price_try"] == eu.PRICE_TRY == 1460, no
+        assert data["ready_to_publish"] is False and data["price_try"] == eu.PRICE_TRY == 1190, no
         assert data["quantity"] == 999, no
         if theme in COMING:  # G175 (K41): not for sale, price confirmed with the sale; both are blockers
-            assert data["sales_status"] in ("coming", "preview") and "[PRICE]" in md and "| Price | **1,460 TL**" not in md, no
+            assert data["sales_status"] in ("coming", "preview") and "[PRICE]" in md and "| Price | **1,190 TL**" not in md, no
             assert any(b.startswith(f"sales status '{data['sales_status']}'") for b in data["blockers"]), no
             assert any(b.startswith("price not decided") for b in data["blockers"]), no
             assert data["price_note"].startswith("Proposed:"), no
         else:
-            assert data["sales_status"] == "live" and "| Price | **1,460 TL**" in md, no
+            assert data["sales_status"] == "live" and "| Price | **1,190 TL**" in md, no
             assert not any(b.startswith(("sales status", "price not decided")) for b in data["blockers"]), no
         if theme in NOT_ENVELOPE:
             text = " ".join([f["title"], *f["tags"], data["description"], *(i["alt"] or "" for i in data["images"])])
@@ -172,8 +172,8 @@ def test_services():
         assert data["ready_to_publish"] is False and "renewal not decided" in data["blockers"], sid
         committed = json.loads((listing / "etsy_upload.json").read_text(encoding="utf-8"))
         assert committed == data, (sid, "etsy_upload.json is out of date: python3 tools/etsy_upload.py --designs services")
-    custom = eu.build_service("custom-design", 2960)[0]["description"]
-    assert "2 rounds of changes" in custom and "500 TL" in custom and "includes the design" in custom
+    custom = eu.build_service("custom-design", 4490)[0]["description"]
+    assert "2 rounds of changes" in custom and "690 TL" in custom and "includes the design" in custom
     assert "never sell it" in custom  # exclusive (2026-10-16)
     extra = eu.build_service("extra-revision", 500)[0]["description"]
     assert "only for couples who already ordered a custom design" in extra and "One purchase = one round" in extra

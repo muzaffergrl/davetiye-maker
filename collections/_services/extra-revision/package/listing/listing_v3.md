@@ -1,15 +1,15 @@
 # Etsy listing v3: Extra design revision (K42)
 
 Internal listing kit for the seller (G130, 2026-10-16). Not published on Etsy (K41). An add-on for custom design orders only: one more
-round of changes to the buyer's custom design, after the 2 rounds the custom design includes. Price 500 TL (user, 2026-10-16). Flow:
+round of changes to the buyer's custom design, after the 2 rounds the custom design includes. Price 690 TL (K49, user, 2026-10-22). Flow:
 `docs/23_EK_HIZMETLER.md` §4.7. Product language: English (US spelling).
 
 ## 0. Status before publishing
 
 | Item | Status on 2026-10-16 |
 |---|---|
-| Decision | User, 2026-10-16: custom design includes 2 rounds of changes; each further round **500 TL**, sold as its own listing |
-| Price | **500 TL** (about USD 10.09 at 49.53 TRY per USD, BloombergHT 2026-10-16 09:30). docs/23 §1 |
+| Decision | User, 2026-10-16: custom design includes 2 rounds of changes; each further round **690 TL** (K49, 2026-10-22; was 500 TL), sold as its own listing |
+| Price | **690 TL** (K49, user, 2026-10-22; docs/35 §8b). About USD 13.93 at 49.55 TRY per USD (CNBC-e 2026-10-19). docs/23 §1 |
 | Turnaround | **3 days** after the buyer tells us the changes (same as the other services) |
 | Who can buy it | Only buyers with a custom design order. Etsy cannot limit who buys; the description says so plainly, and the shop asks before anyone else's order (docs/23 §4.7) |
 | Etsy rule on services | Not checked. [VERIFY] in §4 |
@@ -88,7 +88,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Occasion | Wedding |
 | Personalization | Off (the buyer sends the changes in an Etsy message) |
 | Digital file | `EXTRA_REVISION.pdf` (`package/customer/`, G136) |
-| Price | **500 TL** (about USD 10.09; user, 2026-10-16; docs/23 §1) |
+| Price | **690 TL** (about USD 13.93; K49, user, 2026-10-22; docs/35 §8b; docs/23 §1) |
 | Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) |
 | Shop section | Services (proposal, docs/20 §3) |
 | Renewal | [AUTO RENEW: yes/no] |
@@ -129,7 +129,7 @@ As for the other services: the shop-wide digital-items message talks about the S
 
 ## 10. Before you publish this listing
 
-- [x] Price decided: 500 TL (2026-10-16)
+- [x] Price decided: 690 TL (K49, 2026-10-22)
 - [x] Turnaround decided: 3 days (2026-10-16)
 - [x] Quantity decided: 999 (no stock limit)
 - [ ] Renewal decided

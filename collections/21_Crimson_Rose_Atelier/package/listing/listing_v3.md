@@ -10,7 +10,7 @@ index.html, home.html, story.html) and `platform/lib/marketing/designs.ts` (sale
 
 | Item | Status on 2026-10-17 |
 |---|---|
-| Sale status | **On sale** (K47, user, 2026-10-17): `platform/lib/marketing/config.ts` lists it as `live`, price 1460 (G142 `76fe0dc`, coordinator `ce62d11`). Same flow, guide and listing text as 01–20 (G148). |
+| Sale status | **On sale** (K47, user, 2026-10-17): `platform/lib/marketing/config.ts` lists it as `live`, price 1190 (G142 `76fe0dc`, coordinator `ce62d11`). Same flow, guide and listing text as 01–20 (G148). |
 | Start link `https://bkestudio.com/start?theme=crimson-rose-atelier` | **Not live**: the design is in the repository (G133, branch `codex/crimson-rose-atelier`) and has not been deployed; the user asked for a local demo only. Opened only in a local production build (2026-10-17, G137 capture: /start shows "Design: Crimson Rose Atelier"). Not opened on a phone. |
 | Live demo `https://bkestudio.com/start/demo/crimson-rose-atelier` (in the description under TRY THE LIVE DEMO, and named in image 8) | **Not live**, for the same reason. In the local production build the demo route opens this design's envelope with the sample couple Olivia & James (G133 test, G137 capture). |
 | Current platform release (simpler editor K29, Headings & labels, thank-you page, guest password, RSVP v2) | Live on production since G079 (2026-10-15) for 01–20. This design needs the next deploy; its editor features were tried only in the local production build of this task (setup, Edit, Guests, Share screens of the capture). |
@@ -23,7 +23,7 @@ index.html, home.html, story.html) and `platform/lib/marketing/designs.ts` (sale
 | Web address | `bkestudio.com` (primary since 2026-10-19; the earlier `xn--bkestudo-zkb.com` (bkestudıo.com) links redirect here with a permanent 308). G190 (2026-10-20) moved the start link, demo, START HERE guide and QR codes to this address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
 | Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com**. |
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
-| Price, quantity | 1,460 TL, the same as 01–20 (K47, 2026-10-17; `config.ts` price 1460); no stock limit (999, Etsy's maximum). Renewal and the Etsy listing URL are still open. Hosting extension (on request via Etsy before the "Online until" date, no price promised): K48, 2026-10-17. |
+| Price, quantity | 1,190 TL, the same as 01–20 (K47, 2026-10-17; `config.ts` price 1190); no stock limit (999, Etsy's maximum). Renewal and the Etsy listing URL are still open. Hosting extension (on request via Etsy before the "Online until" date, no price promised): K48, 2026-10-17. |
 | Design fonts and other languages | Checked on 2026-10-17 from the Google Fonts CSS of the fonts this theme loads: Cormorant Garamond and Manrope (both latin-ext + Cyrillic). The language line in GOOD TO KNOW and in the START HERE guide is written from this. |
 | START HERE guide | `package/customer/START_HERE.md` + `.pdf` rebuilt in G148 (2026-10-17, `python3 tools/build_customer_guides.py`, from docs/19 Ek A; G146 access with the Etsy order number + email): 9 pages, about 56 KB. Its links are the start link (in the text and on the QR), the `/my` page ("Continue on another device") and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://bkestudio.com/start?theme=crimson-rose-atelier` (jsQR on every rendered page). The start link answers only after this design is deployed. G154 (2026-10-17) rebuilt it from Ek A again (K48 order-check, extension and deletion texts, a Languages section, Share → Downloads, the start address in plain text under the QR): 10 pages, about 59 KB; `--check` with jsQR passes. |
 | Listing image 9 | `09_devices.png` built on 2026-10-17 (G148, K47): "Start on your phone, continue on any device", real screens of a local production build with G146 (`/my`, Share → "Use on another device"). G146 is live only after the next deploy: publish image 9 with it. |
@@ -149,7 +149,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Style / theme | Classic, Romantic (if offered) |
 | Personalization | Off (nothing to fill in at checkout; the buyer fills in the website) |
 | Digital file | `START_HERE.pdf` from `package/customer/` (G137, 2026-10-17; Etsy: up to 5 files, 20 MB each) |
-| Price | **1,460 TL** (the shop price approved by the user on 2026-10-16 for designs 01–20; about USD 29.48 at 49.53 TRY per USD, docs/23 §1). Shop currency TRY (K38). Approved for this design with its sale on 2026-10-17 (K47) |
+| Price | **1,190 TL** (the shop price approved by the user on 2026-10-22 (K49, launch price; docs/35 §8b) for designs 01–20; about USD 24.02 at 49.55 TRY per USD, docs/23 §1). Shop currency TRY (K38). Approved for this design with its sale on 2026-10-17 (K47) |
 | Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) [VERIFY: whether Etsy lowers a digital listing's quantity on each sale] |
 | Shop section | Floral & Garden (an existing section, docs/20 §3, which lists 01–05 only; the section for designs 06–21, or a new one, is the user's choice) |
 | Renewal | [AUTO RENEW: yes/no] |
@@ -259,14 +259,14 @@ link; one review request per order, the same text for everyone, never with an in
 
 ## 10. What differs from the 01–20 listings
 
-- A new design (G133), opened for sale on 2026-10-17 (K47, `live`, 1,460 TL); its start link and demo answer on the live site only after the next deploy (not checked in G148). The editor screens were seen in a local production build.
+- A new design (G133), opened for sale on 2026-10-17 (K47, `live`, 1,190 TL); its start link and demo answer on the live site only after the next deploy (not checked in G148). The editor screens were seen in a local production build.
 - The guests' first view is "a sealed envelope" (as 01–05: this envelope carries a gold wax seal); Our Story is a landscape photo album the guests swipe through, so the description names it "Our Story as a photo album".
 - "What you can change" has no monogram line (this design shows none) and gives "A little book of us", this design's story heading, as the second example of your own wording.
 - Language line from this theme's real fonts (§0): both have Cyrillic.
 
 ## 11. Before you publish this listing
 
-- [x] The user approves this design's sale and price (K47, 2026-10-17: `config.ts` `live`, 1460)
+- [x] The user approves this design's sale and price (K47, 2026-10-17: `config.ts` `live`, 1190)
 - [ ] Design deployed; start link and demo of this design answer on the live site (`200`, design named)
 - [ ] Start link and demo opened on a real phone; the QR in START_HERE.pdf scanned with a phone camera
 - [x] START HERE guide written for this design (`package/customer/START_HERE.md` + `.pdf` with the start QR; G137, 2026-10-17)
@@ -277,7 +277,7 @@ link; one review request per order, the same text for everyone, never with an in
 - [ ] G146 live (order number + email open the editor on any device: `/my`, "Create your website"); START HERE (G148) re-checked against it
 - [ ] Buyer journey tried on a real iPhone (Safari) and Android phone (Chrome)
 - [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf and its QR rebuilt
-- [x] Price (1,460 TL) confirmed for this design (K47) and filled in; quantity 999
+- [x] Price (1,190 TL) confirmed for this design (K47) and filled in; quantity 999
 - [x] Hosting extension decided (K48, 2026-10-17: on request via Etsy before the "Online until" date, no price promised)
 - [ ] Renewal decided
 - [ ] Languages (G144) and Share → Downloads (G139) tried on the live site

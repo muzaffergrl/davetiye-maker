@@ -28,9 +28,9 @@
     "Occasion": "Wedding",
     "Personalization": "Off (we ask for the details in an Etsy message after the order; Etsy's box is too short for photos and a schedule)"
   },
-  "price_try": 500,
-  "price_usd_approx": 10.09,
-  "price_note": "Approved by the user on 2026-10-16 (K42, docs/23 §1). Shop currency TRY (K38): Etsy gets the TL amount; USD is approximate, at 49.53 TRY per USD, BloombergHT, 2026-10-16 09:30 (USD/TRY 49.5247 buy / 49.5300 sell).",
+  "price_try": 990,
+  "price_usd_approx": 19.98,
+  "price_note": "Approved by the user on 2026-10-22 (K49 launch price, docs/35 §8b). Shop currency TRY (K38): Etsy gets the TL amount; USD is approximate, at 49.55 TRY per USD, CNBC-e free market, 2026-10-19 16:05 (USD/TRY 49.5474 buy / 49.5577 sell).",
   "quantity": 999,
   "renewal": null,
   "shop_section": "Services",

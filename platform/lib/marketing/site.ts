@@ -228,11 +228,11 @@ export function formatDay(day: string, lang: Lang = 'en'): string {
   return dt.toLocaleDateString(LANG_TAGS[lang], { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 }
 
-/** Display price: "$29.40" or "1,460 TRY". Placeholder stays visible as is. */
+/** Display price: "$29.40" or "1,190 TRY". Placeholder stays visible as is. */
 export function displayPrice(price: string, cfg: MarketingConfig = MARKETING): string {
   if (hasPlaceholder(price)) return price;
   if (cfg.currency === 'USD') return `$${price}`;
-  // TRY (K38): "1,460 TRY" — the amount the Etsy shop is priced in; Etsy shows each buyer their own currency too.
+  // TRY (K38): "1,190 TRY" — the amount the Etsy shop is priced in; Etsy shows each buyer their own currency too.
   const [whole, cents] = price.split('.');
   return `${Number(whole).toLocaleString('en-US')}${cents ? `.${cents}` : ''} ${cfg.currency}`;
 }

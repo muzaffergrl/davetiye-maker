@@ -134,7 +134,7 @@ def content() -> dict[str, dict]:
                 ("ol", ["We send you the first version <b>within 3 days of receiving your answers</b>, in the Etsy "
                         "conversation.",
                         "You tell us what to change. 2 rounds of changes are included: please send all the changes "
-                        "for one round together in one message. Each further round is 500 TL, through our Extra design "
+                        "for one round together in one message. Each further round is 690 TL, through our Extra design "
                         "revision listing.",
                         "When you are happy, we send you your start link: enter your Etsy order number, your e-mail "
                         "and your first names and choose your web address. Later, the same order number and e-mail "

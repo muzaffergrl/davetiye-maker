@@ -350,11 +350,11 @@
     "body": [
       "Hi, thank you for your custom design order ({order})! We are excited to make a wedding website just for you.",
       "To start, please reply here with:\n• Your wedding date and the feel you want (for example classic, romantic, garden, coastal)\n• Two or three colors you love, and anything you do not want\n• Pictures that inspire you (a share link to photos or a Pinterest board is fine)\n• What guests should open first, if you have an idea (an envelope, a card, a book …)",
-      "Your custom design includes everything our designs include: the editor, RSVP and every page. It includes 2 rounds of changes to the design (each further round is 500 TL), and the first version is ready within 3 days of receiving your answers. The design is made only for you: we never sell it to anyone else.",
+      "Your custom design includes everything our designs include: the editor, RSVP and every page. It includes 2 rounds of changes to the design (each further round is 690 TL), and the first version is ready within 3 days of receiving your answers. The design is made only for you: we never sell it to anyone else.",
       "Your own names, photos and texts go in through the editor as usual (or with our setup service).",
       "{shop}"
     ],
-    "note": "docs/23 §4. Decided 2026-10-16: 2 revision rounds, then 500 TL a round; first version in 3 days; exclusive."
+    "note": "docs/23 §4. Decided 2026-10-16: 2 revision rounds, then 690 TL a round; first version in 3 days; exclusive."
   },
   {
     "id": "custom_design_ready",
@@ -369,7 +369,7 @@
       "Hi, your custom design is ready!",
       "Start your website here: {start_url}",
       "Enter your Etsy order number ({order}), your email and your first names, and choose your web address. Then save your private edit link when it appears: it opens your editor.",
-      "If anything in the design should change, reply here; that counts as one of your 2 revision rounds (each further round is 500 TL).",
+      "If anything in the design should change, reply here; that counts as one of your 2 revision rounds (each further round is 690 TL).",
       "{shop}"
     ],
     "note": "The custom theme must be claimable on /start before this is sent (docs/23 §4)."
@@ -383,7 +383,7 @@
     ],
     "body": [
       "Hi, thank you! We are happy to make more changes to your custom design.",
-      "Your custom design included 2 rounds of changes, and both are used. Each further round is 500 TL, through the Extra design revision listing in our shop. If you have already bought it, thank you: please send us all the changes for this round together in one message.",
+      "Your custom design included 2 rounds of changes, and both are used. Each further round is 690 TL, through the Extra design revision listing in our shop. If you have already bought it, thank you: please send us all the changes for this round together in one message.",
       "We send you the updated design within 3 days of receiving your changes. Your names, dates, photos and texts you can still change yourself in your editor at any time, free.",
       "{shop}"
     ],

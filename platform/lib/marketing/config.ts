@@ -24,7 +24,7 @@ export interface DesignCommerce {
    * light and dark designs; the home page shows every featured live design, in config order, whatever their number.
    */
   featured?: boolean;
-  /** The sale price buyers see on Etsy right now, e.g. "1460" (number as text in `currency`, no currency sign). */
+  /** The sale price buyers see on Etsy right now, e.g. "1190" (number as text in `currency`, no currency sign). */
   price: string;
   /** Etsy's crossed-out list price while a sale runs, or null. */
   compareAtPrice: string | null;
@@ -64,7 +64,7 @@ export interface MarketingConfig {
   siteUrl: string;
   support: { email: string; responseTime: string };
   etsy: { shopUrl: string; shopName: string };
-  /** K38: the Etsy shop sells in TRY; prices here are the TRY amounts Etsy shows (approved 2026-10-16, docs/23 §1). */
+  /** K38: the Etsy shop sells in TRY; prices here are the TRY amounts Etsy shows (K49, 2026-10-22; docs/23 §1, docs/35 §8b). */
   currency: 'USD' | 'TRY';
   /** K25: online until 12 months after the wedding date (implementation: G060, docs/16 §11.9). */
   hosting: { monthsAfterWedding: number };
@@ -149,10 +149,10 @@ export const MARKETING: MarketingConfig = {
   copyUpdated: '2026-10-18',
   // editRights + archive: G060 (panel v2) implements them; flip to true when it is merged and live-checked.
   verified: { editRights: false, archive: false, realDevices: false, privacyText: false, orderCheck: false },
-  // K42: prices approved by the user on 2026-10-16 (TRY, docs/23 §1). The listings are not on Etsy yet (K41).
+  // K42 services; prices K49 (user, 2026-10-22, TRY; docs/23 §1, docs/35 §8b). The listings are not on Etsy yet (K41).
   services: [
-    { id: 'setup-service', name: 'We set it up for you', price: '500', etsyListingUrl: '[ETSY LISTING URL]' },
-    { id: 'custom-design', name: 'Custom design', price: '2960', etsyListingUrl: '[ETSY LISTING URL]' },
+    { id: 'setup-service', name: 'We set it up for you', price: '990', etsyListingUrl: '[ETSY LISTING URL]' },
+    { id: 'custom-design', name: 'Custom design', price: '4490', etsyListingUrl: '[ETSY LISTING URL]' },
   ],
   designs: [
     // New product (G142): platform theme ready for review; sale approval and price remain pending.
@@ -429,7 +429,7 @@ export const MARKETING: MarketingConfig = {
       name: 'Blush Garden Rose',
       status: 'live',
       featured: true,
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-14',
@@ -439,7 +439,7 @@ export const MARKETING: MarketingConfig = {
       name: 'Olive & Ivory',
       status: 'live',
       featured: true,
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-14',
@@ -450,7 +450,7 @@ export const MARKETING: MarketingConfig = {
       name: 'Mediterranean Lemon',
       status: 'live',
       featured: true,
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-14',
@@ -460,7 +460,7 @@ export const MARKETING: MarketingConfig = {
       id: 'dusty-blue-champagne',
       name: 'Dusty Blue & Champagne',
       status: 'live',
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-14',
@@ -470,7 +470,7 @@ export const MARKETING: MarketingConfig = {
       id: 'vintage-airmail-love-letter',
       name: 'Vintage Airmail Love Letter',
       status: 'live',
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
@@ -481,7 +481,7 @@ export const MARKETING: MarketingConfig = {
       name: 'Art Deco Black-Tie',
       status: 'live',
       featured: true,
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
@@ -491,7 +491,7 @@ export const MARKETING: MarketingConfig = {
       id: 'burgundy-velvet-autumn',
       name: 'Burgundy Velvet Autumn',
       status: 'live',
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
@@ -501,7 +501,7 @@ export const MARKETING: MarketingConfig = {
       id: 'winter-evergreen',
       name: 'Winter Evergreen',
       status: 'live',
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
@@ -511,7 +511,7 @@ export const MARKETING: MarketingConfig = {
       id: 'lavender-provence',
       name: 'Lavender Provence',
       status: 'live',
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
@@ -521,7 +521,7 @@ export const MARKETING: MarketingConfig = {
       id: 'tuscan-vineyard',
       name: 'Tuscan Vineyard',
       status: 'live',
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
@@ -531,7 +531,7 @@ export const MARKETING: MarketingConfig = {
       id: 'boho-pampas-terracotta',
       name: 'Boho Pampas Terracotta',
       status: 'live',
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
@@ -541,7 +541,7 @@ export const MARKETING: MarketingConfig = {
       id: 'tropical-destination',
       name: 'Tropical Destination',
       status: 'live',
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
@@ -552,7 +552,7 @@ export const MARKETING: MarketingConfig = {
       name: 'Enchanted Forest Storybook',
       status: 'live',
       featured: true,
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
@@ -562,7 +562,7 @@ export const MARKETING: MarketingConfig = {
       id: 'ivory-lace-pearls',
       name: 'Ivory Lace & Pearls',
       status: 'live',
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
@@ -575,7 +575,7 @@ export const MARKETING: MarketingConfig = {
       name: 'Cherry Blossom Spring',
       status: 'live',
       featured: true,
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
@@ -585,7 +585,7 @@ export const MARKETING: MarketingConfig = {
       id: 'sunflower-rustic-barn',
       name: 'Sunflower Rustic Barn',
       status: 'live',
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
@@ -595,7 +595,7 @@ export const MARKETING: MarketingConfig = {
       id: 'emerald-gold-estate',
       name: 'Emerald & Gold Estate',
       status: 'live',
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
@@ -605,7 +605,7 @@ export const MARKETING: MarketingConfig = {
       id: 'wildflower-meadow-vellum',
       name: 'Wildflower Meadow Vellum',
       status: 'live',
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
@@ -616,7 +616,7 @@ export const MARKETING: MarketingConfig = {
       name: 'Midnight Garden',
       status: 'live',
       featured: true,
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
@@ -627,7 +627,7 @@ export const MARKETING: MarketingConfig = {
       name: 'Coastal Seaside',
       status: 'live',
       featured: true,
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
@@ -637,7 +637,7 @@ export const MARKETING: MarketingConfig = {
       id: 'crimson-rose-atelier',
       name: 'Crimson Rose Atelier',
       status: 'live',
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-17',

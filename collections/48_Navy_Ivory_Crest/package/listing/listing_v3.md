@@ -29,7 +29,7 @@ The crest is not the arms of any real family, institution or city (DESIGN_BRIEF)
 | Web address | `bkestudio.com` (primary since 2026-10-19; the earlier `xn--bkestudo-zkb.com` (bkestudıo.com) links redirect here with a permanent 308). |
 | Shop name, support email | **BKE Studio**; support email **bkestudio01@gmail.com** (the older address without "01" found in some files is wrong). The description gives no email: "Message us here on Etsy. We reply within 24 hours." |
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
-| Price, quantity | Proposal **1,460 TL**, the shop price the user approved for a template design (docs/23 §1, 2026-10-16). **Blocker** until the user confirms it for this design (`config.ts` still has `[PRICE]`). Quantity 999 (no stock limit). Renewal and the Etsy listing URL are open. |
+| Price, quantity | Proposal **1,190 TL**, the shop price the user approved for a template design (docs/23 §1, 2026-10-16). **Blocker** until the user confirms it for this design (`config.ts` still has `[PRICE]`). Quantity 999 (no stock limit). Renewal and the Etsy listing URL are open. |
 | Design fonts and other languages | Mr De Haviland (names, headings, the initials): latin + latin-ext. Goudy Bookletter 1911 (body, small capitals): **latin only**. Source: the `FONT_SUBSETS` table of `tools/build_customer_guides.py` (Google Fonts subsets read 2026-10-22; the START HERE guide uses the same table and `LANGUAGE_LINES`), cross-checked with the Google Fonts API list (google-webfonts-helper mirror) and the google/fonts `METADATA.pb` (both latin only for Goudy Bookletter 1911). The language line in GOOD TO KNOW is the guide's "latin" line, word for word; letters such as Turkish ş and ğ in the body text, also in the Turkish version of the built-in texts, fall back to a standard font. |
 | START HERE guide | `package/customer/START_HERE.md` + `.pdf` built and checked on 2026-10-22 (`tools/build_customer_guides.py`, docs/19 Ek A): 10 pages; links = the start link, `/my` and the privacy notice; the QR decodes to the start link (jsQR). The start link answers only once the design is live (404 on 2026-10-22). The QR has not been scanned with a phone camera. |
 | Listing images and video | v4 set (`tools/listing_v4/README.md`, docs/20 §7.10). **Images 01–08 built** on 2026-10-22 in `package/listing/images_v4/` (2000 × 2500 JPG; alt texts in §5 written from the files). Image 2's third label says "Your photo" over a card that shows the crest and initials (no photo in this design's opening): a §11 box. **Images 09–19 not built yet**: they wait for this design's GPT scenes (PAKET 7, `assets/gpt/mockups/`, none yet). **Video `package/listing/video_v4_4x5.mp4` not built yet.** Nothing uploaded to Etsy. |
@@ -157,7 +157,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Style / theme | Classic (if offered) |
 | Personalization | Off (nothing to fill in at checkout; the buyer fills in the website) |
 | Digital file | `START_HERE.pdf` from `package/customer/` (built 2026-10-22; Etsy: up to 5 files, 20 MB each) |
-| Price | Proposed: **1,460 TL** (the shop price the user approved on 2026-10-16 for a template design; about USD 29.48 at 49.53 TRY per USD, docs/23 §1). Shop currency TRY (K38). **Not confirmed for this design yet** (blocker, §11) |
+| Price | Proposed: **1,190 TL** (the launch price the user approved on 2026-10-22 for a template design (K49); about USD 24.02 at 49.55 TRY per USD, docs/23 §1). Shop currency TRY (K38). **Not confirmed for this design yet** (blocker, §11) |
 | Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) [VERIFY: whether Etsy lowers a digital listing's quantity on each sale] |
 | Shop section | [SHOP SECTION] (the user's choice; docs/20 §3 lists the existing sections) |
 | Renewal | [AUTO RENEW: yes/no] |
@@ -299,7 +299,7 @@ link; one review request per order, the same text for everyone, never with an in
 - [ ] Buyer journey tried on a real iPhone (Safari) and Android phone (Chrome), including the gold sweep, the engraved crest with the initials and the emboss-to-color photos
 - [ ] Initials changed in the editor on the live site and seen in the crest (opening, Home, RSVP)
 - [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf and its QR rebuilt
-- [ ] Price (1,460 TL proposal) confirmed by the user for this design and filled in; quantity 999
+- [ ] Price (1,190 TL proposal) confirmed by the user for this design and filled in; quantity 999
 - [x] Hosting extension decided (K48, 2026-10-17: on request via Etsy before the "Online until" date, no price promised)
 - [ ] Renewal decided
 - [ ] Languages (G144) and Share → Downloads (G139) tried on the live site; the Turkish version looked at for letters in the fallback font

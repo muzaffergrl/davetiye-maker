@@ -22,7 +22,7 @@ and `platform/lib/marketing/designs.ts` (sales-site copy written against the G41
 | Web address | `bkestudio.com` (primary since 2026-10-19; the earlier `xn--bkestudo-zkb.com` (bkestudıo.com) links redirect here with a permanent 308). G190 (2026-10-20) moved the start link, demo, START HERE guide and QR codes to this address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
 | Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com**. |
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
-| Price, quantity | Decided on 2026-10-16: 1,460 TL; no stock limit (999, Etsy's maximum). Renewal is still open. Hosting extension (on request via Etsy before the "Online until" date, no price promised) and the Etsy shop URL (`https://www.etsy.com/shop/STUDIOBKE`): K48, 2026-10-17. |
+| Price, quantity | Decided on 2026-10-22 (K49, launch price; docs/35 §8b): 1,190 TL; no stock limit (999, Etsy's maximum). Renewal is still open. Hosting extension (on request via Etsy before the "Online until" date, no price promised) and the Etsy shop URL (`https://www.etsy.com/shop/STUDIOBKE`): K48, 2026-10-17. |
 | Design fonts and other languages | Checked on 2026-10-16 from the Google Fonts CSS of the fonts this theme loads: Petit Formal Script (latin-ext, no Cyrillic), Noto Serif Display (latin-ext + Cyrillic). The language line in GOOD TO KNOW is written from this. |
 | START HERE guide | `package/customer/START_HERE.md` + `.pdf` rebuilt in G148 (2026-10-17, `python3 tools/build_customer_guides.py`, from docs/19 Ek A; G146 access with the Etsy order number + email): 9 pages, about 63 KB. Its links are the start link (in the text and on the QR), the `/my` page ("Continue on another device") and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://bkestudio.com/start?theme=cherry-blossom-spring` (jsQR on every rendered page). It describes the editor in the repository, which is newer than production until the next deploy. G154 (2026-10-17) rebuilt it from Ek A again (K48 order-check, extension and deletion texts, a Languages section, Share → Downloads, the start address in plain text under the QR): 10 pages, about 59 KB; `--check` with jsQR passes. |
 | Listing image 9 | `09_devices.png` built on 2026-10-17 (G148, K47): "Start on your phone, continue on any device", real screens of a local production build with G146 (`/my`, Share → "Use on another device"). G146 is live only after the next deploy: publish image 9 with it. |
@@ -148,7 +148,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Style / theme | Classic, Romantic (if offered) |
 | Personalization | Off (nothing to fill in at checkout; the buyer fills in the website) |
 | Digital file | `START_HERE.pdf` from `package/customer/`: **not produced yet** for this design (Etsy: up to 5 files, 20 MB each) |
-| Price | **1,460 TL** (approved by the user on 2026-10-16; about USD 29.48 at 49.53 TRY per USD, docs/23 §1). Shop currency TRY (K38) |
+| Price | **1,190 TL** (approved by the user on 2026-10-22 (K49, launch price; docs/35 §8b); about USD 24.02 at 49.55 TRY per USD, docs/23 §1). Shop currency TRY (K38) |
 | Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) [VERIFY: whether Etsy lowers a digital listing's quantity on each sale] |
 | Shop section | Floral & Garden (an existing section, docs/20 §3, which lists 01–05 only; the section for designs 06–20, or a new one, is the user's choice) |
 | Renewal | [AUTO RENEW: yes/no] |
@@ -274,7 +274,7 @@ link; one review request per order, the same text for everyone, never with an in
 - [ ] G146 live (order number + email open the editor on any device: `/my`, "Create your website"); START HERE (G148) re-checked against it
 - [ ] Buyer journey tried on a real iPhone (Safari) and Android phone (Chrome)
 - [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf and its QR rebuilt
-- [x] Price (1,460 TL) and quantity (999) decided and filled in (2026-10-16)
+- [x] Price (1,190 TL, K49 2026-10-22) and quantity (999) decided and filled in
 - [x] Hosting extension decided (K48, 2026-10-17: on request via Etsy before the "Online until" date, no price promised)
 - [ ] Renewal decided
 - [ ] Languages (G144) and Share → Downloads (G139) tried on the live site

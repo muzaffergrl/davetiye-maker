@@ -32,9 +32,9 @@
     "Style / theme": "Western, Rustic (if offered)",
     "Personalization": "Off (nothing to fill in at checkout; the buyer fills in the website)"
   },
-  "price_try": 1460,
-  "price_usd_approx": 29.48,
-  "price_note": "Proposed: the design price of 01–21, not confirmed for this design (config.ts '[PRICE]'). Approved by the user on 2026-10-16 (K42, docs/23 §1). Shop currency TRY (K38): Etsy gets the TL amount; USD is approximate, at 49.53 TRY per USD, BloombergHT, 2026-10-16 09:30 (USD/TRY 49.5247 buy / 49.5300 sell).",
+  "price_try": 1190,
+  "price_usd_approx": 24.02,
+  "price_note": "Proposed: the design price of 01–21, not confirmed for this design (config.ts '[PRICE]'). Approved by the user on 2026-10-22 (K49 launch price, docs/35 §8b). Shop currency TRY (K38): Etsy gets the TL amount; USD is approximate, at 49.55 TRY per USD, CNBC-e free market, 2026-10-19 16:05 (USD/TRY 49.5474 buy / 49.5577 sell).",
   "quantity": 999,
   "renewal": null,
   "sales_status": "coming",
@@ -258,7 +258,7 @@
     },
     {
       "where": "before publishing",
-      "check": "Price (1,460 TL proposal) confirmed by the user for this design and filled in; quantity 999",
+      "check": "Price (1,190 TL proposal) confirmed by the user for this design and filled in; quantity 999",
       "text": ""
     },
     {
@@ -311,7 +311,7 @@
     "listing images missing: collections/45_Suede_Ranch_Lace/package/listing/images_v4/09_closeup.jpg, collections/45_Suede_Ranch_Lace/package/listing/images_v4/10_tap.jpg, collections/45_Suede_Ranch_Lace/package/listing/images_v4/11_home.jpg, collections/45_Suede_Ranch_Lace/package/listing/images_v4/12_devices.jpg, collections/45_Suede_Ranch_Lace/package/listing/images_v4/13_laptop.jpg, collections/45_Suede_Ranch_Lace/package/listing/images_v4/14_together.jpg, collections/45_Suede_Ranch_Lace/package/listing/images_v4/15_print.jpg, collections/45_Suede_Ranch_Lace/package/listing/images_v4/16_need.jpg, collections/45_Suede_Ranch_Lace/package/listing/images_v4/17_day.jpg, collections/45_Suede_Ranch_Lace/package/listing/images_v4/18_replies.jpg, collections/45_Suede_Ranch_Lace/package/listing/images_v4/19_share.jpg",
     "listing video missing",
     "sales status 'coming' in platform/lib/marketing/config.ts (K41: not for sale)",
-    "price not decided for this design (config.ts price '[PRICE]'; 1460 TL is the 01–21 design price, docs/23 §1)",
+    "price not decided for this design (config.ts price '[PRICE]'; 1190 TL is the 01–21 design price, docs/23 §1)",
     "renewal not decided"
   ],
   "ready_to_publish": false,

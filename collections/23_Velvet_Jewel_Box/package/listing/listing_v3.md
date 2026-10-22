@@ -30,7 +30,7 @@ index.html, home.html, story.html, details.html, opening-design.json, interior-d
 | Web address | `bkestudio.com` (primary since 2026-10-19; the earlier `xn--bkestudo-zkb.com` (bkestudıo.com) links redirect here with a permanent 308). G190 (2026-10-20) moved the start link, demo, START HERE guide and QR codes to this address. |
 | Shop name, support email | **BKE Studio**, **bkestudio01@gmail.com** (the address "bkestudio@gmail.com" in older files is wrong). The description gives no email: "Message us here on Etsy. We reply within 24 hours." |
 | Response time, refund policy | Shop-wide, decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
-| Price, quantity | **Proposal: 1,460 TL**, the approved shop price for a template design (docs/23 §1, 2026-10-16). **Blocker** until the user confirms it for this design (`config.ts` price `[PRICE]`). Quantity 999 (no stock limit). Renewal and the Etsy listing URL are still open. Hosting extension (on request via Etsy before the "Online until" date, no price promised): K48, shop-wide. |
+| Price, quantity | **Proposal: 1,190 TL**, the approved launch price for a template design (K49, docs/35 §8b, 2026-10-22). **Blocker** until the user confirms it for this design (`config.ts` price `[PRICE]`). Quantity 999 (no stock limit). Renewal and the Etsy listing URL are still open. Hosting extension (on request via Etsy before the "Online until" date, no price promised): K48, shop-wide. |
 | Design fonts and other languages | The theme loads Pinyon Script, Cormorant Infant and Lora from Google Fonts (the `family=` of all five pages; no font files). Subsets read on 2026-10-22 from Google Fonts' family metadata through the google-webfonts-helper API (`gwfh.mranftl.com/api/fonts/<id>`; a plain css2 request returned no subset comments): Pinyon Script latin-ext, **no Cyrillic** (the `--script` font of the inner pages, `interior.css`, and the names font of the opening page, `--op-font`), Cormorant Infant (`--display`) and Lora (`--body`) latin-ext + Cyrillic. The language line in GOOD TO KNOW is the "latin-ext" sentence of `tools/build_customer_guides.py` `LANGUAGE_LINES`, the same as in the START HERE guide (whose builder reads the older font list of `designs.ts`, Bodoni Moda and Pinyon Script, with the same result). |
 | START HERE guide | `package/customer/START_HERE.md` + `.pdf` built on 2026-10-20 (G190), unchanged since. Its start link and QR point to the start link above (404 until the design goes live); it also links `/my` and the privacy notice. It says guests "tap the box" and names the preview tab **Box**. QR not scanned with a phone. |
 | Artwork and sample photos | GPT parts built into the theme in the rebuild of 2026-10-18/19 (README: "New frame and stationery artwork came from built-in image_gen"). The demo photos are fictional GPT images shared with other designs. |
@@ -159,7 +159,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Style / theme | Classic, Elegant (if offered) |
 | Personalization | Off (nothing to fill in at checkout; the buyer fills in the website) |
 | Digital file | `START_HERE.pdf` from `package/customer/` (G190, 2026-10-20; Etsy: up to 5 files, 20 MB each) |
-| Price | **1,460 TL (proposal)**: the shop price the user approved on 2026-10-16 for a template design (about USD 29.48 at 49.53 TRY per USD, docs/23 §1). Shop currency TRY (K38). **Not confirmed for this design** (`config.ts` price `[PRICE]`, status `preview`): a blocker until the user confirms it |
+| Price | **1,190 TL (proposal)**: the launch price the user approved on 2026-10-22 for a template design (K49) (about USD 24.02 at 49.55 TRY per USD, docs/23 §1). Shop currency TRY (K38). **Not confirmed for this design** (`config.ts` price `[PRICE]`, status `preview`): a blocker until the user confirms it |
 | Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) [VERIFY: whether Etsy lowers a digital listing's quantity on each sale] |
 | Shop section | [SHOP SECTION]: the user's choice (docs/20 §3). Suggestion: `Classic & Vintage` (designs.ts style: classic) |
 | Renewal | [AUTO RENEW: yes/no] (the 01–21 drafts were saved with Automatic, docs/20 §7.9; the decision is the user's) |
@@ -296,7 +296,7 @@ link; one review request per order, the same text for everyone, never with an in
 - [ ] G146 live (order number + email open the editor on any device: `/my`, "Create your website"); START HERE re-checked against it
 - [ ] Buyer journey tried on a real iPhone (Safari) and Android phone (Chrome)
 - [x] Web address `bkestudio.com` in the start link, demo, START HERE guide and QR (G190, 2026-10-20)
-- [ ] Price (1,460 TL proposal) confirmed for this design and filled in (`config.ts` and §4); quantity 999
+- [ ] Price (1,190 TL proposal) confirmed for this design and filled in (`config.ts` and §4); quantity 999
 - [x] Hosting extension decided (K48, 2026-10-17: on request via Etsy before the "Online until" date, no price promised)
 - [ ] Renewal decided
 - [ ] Languages (G144) and Share → Downloads (G139) tried on the live site with this design

@@ -12,7 +12,7 @@ checked the same way, and "sales status coming" plus "price not decided for this
 are blockers, so they never read as ready. Their listing images and video need GPT mockup scenes first (blockers too).
 
 Services (G130, K42): "We set it up for you", custom design and the extra design revision are their own listings in collections/_services/<id>/.
-They have no theme and no demo; their TRY prices were approved on 2026-10-16 (docs/23 §1), and any undecided
+They have no theme and no demo; their TRY prices are K49 (2026-10-22: 990 / 4,490 / 690 TL; docs/23 §1), and any undecided
 [PLACEHOLDER] left in a description becomes an open check. "all" builds the designs and the services.
 
 The JSON is what a browser session pastes into Etsy's listing editor (docs/20 §8). Nothing is sent to Etsy here.
@@ -21,7 +21,7 @@ The JSON is what a browser session pastes into Etsy's listing editor (docs/20 §
   G154 (G090 P0-03): §2 holds no VERIFY note any more (it claims only features that exist and passed G090's local
   checks); the live-site and real-device tests are the unchecked boxes of "Before you publish this listing" (§11),
   and each of them is an open check too ("where": "before publishing").
-- Price: 1,460 TL, approved by the user on 2026-10-16 (shop currency TRY, K38; about USD 29.48, docs/23 §1) and confirmed
+- Price: 1,190 TL, the launch price approved by the user on 2026-10-22 (K49; shop currency TRY, K38; about USD 24.02, docs/35 §8b) and confirmed
   per design with its sale (21: K47); a coming design (config.ts price "[PRICE]") carries the same figure as the
   proposal and a blocker until it is confirmed;
   quantity 999, Etsy's maximum (user: no stock limit). Renewal stays null: the user's decision (each renewal costs a fee).
@@ -108,12 +108,12 @@ DESIGNS = [
     ("47", "47_Monochrome_Darkroom", "monochrome-darkroom"),
     ("48", "48_Navy_Ivory_Crest", "navy-ivory-crest"),
 ]
-PRICE_TRY = 1460
+PRICE_TRY = 1190
 QUANTITY = 999  # Etsy's maximum; the user wants no stock limit (2026-10-16)
-# K42 services (G130): (id, TRY price approved 2026-10-16). Rate: 49.53 TRY per USD, BloombergHT 2026-10-16 09:30 (docs/23 §1).
-SERVICES = [("setup-service", 500), ("custom-design", 2960), ("extra-revision", 500)]
-USD_TRY = 49.53
-USD_TRY_SOURCE = "BloombergHT, 2026-10-16 09:30 (USD/TRY 49.5247 buy / 49.5300 sell)"
+# K42 services (G130): (id, TRY price, K49 2026-10-22). Rate: 49.55 TRY per USD, CNBC-e 2026-10-19 16:05 (docs/23 §1, docs/35).
+SERVICES = [("setup-service", 990), ("custom-design", 4490), ("extra-revision", 690)]
+USD_TRY = 49.55
+USD_TRY_SOURCE = "CNBC-e free market, 2026-10-19 16:05 (USD/TRY 49.5474 buy / 49.5577 sell)"
 SERVICE_DIGITAL_FILE = {"setup-service": "SETUP_SERVICE.pdf", "custom-design": "CUSTOM_DESIGN.pdf",
                         "extra-revision": "EXTRA_REVISION.pdf"}
 PLACEHOLDER = re.compile(r"\[(?!VERIFY)[A-Z][A-Z /:-]*\]")
@@ -435,7 +435,7 @@ def palette_variations(theme: str) -> tuple[dict | None, list[str]]:
 
 
 def price_note() -> str:
-    return (f"Approved by the user on 2026-10-16 (K42, docs/23 §1). Shop currency TRY (K38): Etsy gets the TL amount; USD "
+    return (f"Approved by the user on 2026-10-22 (K49 launch price, docs/35 §8b). Shop currency TRY (K38): Etsy gets the TL amount; USD "
             f"is approximate, at {USD_TRY} TRY per USD, {USD_TRY_SOURCE}.")
 
 

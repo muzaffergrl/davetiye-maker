@@ -20,7 +20,7 @@ the platform does today. Product language: English (US spelling). This design ha
 | Web address | `bkestudio.com` (primary since 2026-10-19; the earlier `xn--bkestudo-zkb.com` (bkestudıo.com) links redirect here with a permanent 308). G190 (2026-10-20) moved the start link, demo, START HERE guide and QR codes to this address. [VERIFY: the start link answers 200 on a phone on this address before the first sale] |
 | Shop name, support email | K33 (2026-10-15): **BKE Studio**, **bkestudio@gmail.com**. |
 | Response time, refund policy | Decided on 2026-10-15 (K37, K36; docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. The description says both (GOOD TO KNOW, QUESTIONS?); the START HERE guide gives the 24 hours. |
-| Price, quantity | Decided on 2026-10-16: 1,460 TL; no stock limit (999, Etsy's maximum). Renewal is still open (§4). Hosting extension (on request via Etsy before the "Online until" date, no price promised): K48, 2026-10-17. |
+| Price, quantity | Decided on 2026-10-22 (K49, launch price; docs/35 §8b): 1,190 TL; no stock limit (999, Etsy's maximum). Renewal is still open (§4). Hosting extension (on request via Etsy before the "Online until" date, no price promised): K48, 2026-10-17. |
 | Etsy shop | Open as **STUDIOBKE** (docs/20 §7). The listing text does not link the shop. |
 | Design fonts and other languages | Checked on 2026-10-16 (G122) from the Google Fonts CSS of the fonts this theme loads: Homemade Apple (latin only: no ł, ő, ş; its fallback is a system script font) and Special Elite (latin-ext, no Cyrillic). The language line in GOOD TO KNOW and in the START HERE guide is written from this. |
 | START HERE guide | `package/customer/START_HERE.md` + `.pdf` rebuilt in G148 (2026-10-17, `python3 tools/build_customer_guides.py`, from docs/19 Ek A; G146 access with the Etsy order number + email): 9 pages, about 63 KB. Its links are the start link (in the text and on the QR), the `/my` page ("Continue on another device") and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://bkestudio.com/start?theme=vintage-airmail-love-letter` (jsQR on every rendered page; module by module against a fresh encoding). It describes the editor in the repository, which is newer than production (see above). G154 (2026-10-17) rebuilt it from Ek A again (K48 order-check, extension and deletion texts, a Languages section, Share → Downloads, the start address in plain text under the QR): 10 pages, about 59 KB; `--check` with jsQR passes. |
@@ -146,7 +146,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Style / theme | Classic, Romantic (if offered) |
 | Personalization | Off (nothing to fill in at checkout; the buyer fills in the website) |
 | Digital file | `START_HERE.pdf` from `package/customer/` (Etsy: up to 5 files, 20 MB each; this one is about 56 KB) |
-| Price | **1,460 TL** (approved by the user on 2026-10-16; about USD 29.48 at 49.53 TRY per USD, docs/23 §1). Shop currency TRY (K38) |
+| Price | **1,190 TL** (approved by the user on 2026-10-22 (K49, launch price; docs/35 §8b); about USD 24.02 at 49.55 TRY per USD, docs/23 §1). Shop currency TRY (K38) |
 | Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) [VERIFY: whether Etsy lowers a digital listing's quantity on each sale] |
 | Shop section | Classic & Vintage (created in the shop on 2026-10-15, docs/20 §7) |
 | Renewal | [AUTO RENEW: yes/no] |
@@ -274,7 +274,7 @@ link; one review request per order, the same text for everyone, never with an in
 - [ ] Buyer journey tried on a real iPhone (Safari) and Android phone (Chrome)
 - [ ] Final domain chosen before the first sale (or a permanent redirect committed); START_HERE.pdf and its QR rebuilt
 - [x] Response time and refund policy decided (K37, K36) and in the description; the guide gives the 24 hours
-- [x] Price (1,460 TL) and quantity (999) decided and filled in (2026-10-16)
+- [x] Price (1,190 TL, K49 2026-10-22) and quantity (999) decided and filled in
 - [x] Hosting extension decided (K48, 2026-10-17: on request via Etsy before the "Online until" date, no price promised)
 - [ ] Renewal decided
 - [ ] Languages (G144) and Share → Downloads (G139) tried on the live site

@@ -9,7 +9,7 @@ sale: `docs/23_EK_HIZMETLER.md`. Product language: English (US spelling).
 | Item | Status on 2026-10-16 |
 |---|---|
 | Decision | K42 (user, 2026-10-16): about +500 TL, one-time; another round of changes is a new purchase. Sold as its own Etsy listing |
-| Price | **500 TL**, approved by the user on 2026-10-16 (about USD 10.09 at 49.53 TRY per USD, BloombergHT 2026-10-16 09:30). docs/23 §1 |
+| Price | **990 TL** (K49, user, 2026-10-22; docs/35 §8b; was 500 TL from 2026-10-16). About USD 19.98 at 49.55 TRY per USD (CNBC-e 2026-10-19). docs/23 §1 |
 | Turnaround | **3 days** after we have everything (user, 2026-10-16) |
 | Etsy rule on services | **Not checked.** Etsy's prohibited items policy limits pure services; a service that results in a digital item (here: the buyer's set-up website) is the usual exception. [VERIFY] in §4: read Etsy's current policy before publishing |
 | Digital file | `package/customer/SETUP_SERVICE.pdf` (G136, 2026-10-17; `tools/build_service_guides.py`): what was bought, the list of what to send us (word for word from the admin message `setup_service_details`), 3 days, one round, no returns + we fix it, support |
@@ -100,7 +100,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Occasion | Wedding |
 | Personalization | Off (we ask for the details in an Etsy message after the order; Etsy's box is too short for photos and a schedule) |
 | Digital file | `SETUP_SERVICE.pdf` (`package/customer/`, G136) |
-| Price | **500 TL** (about USD 10.09; K42, approved 2026-10-16; docs/23 §1) |
+| Price | **990 TL** (about USD 19.98; K49, user, 2026-10-22; docs/35 §8b; docs/23 §1) |
 | Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) |
 | Shop section | Services (proposal, docs/20 §3) |
 | Renewal | [AUTO RENEW: yes/no] |
@@ -149,7 +149,7 @@ gets that text too. Proposal: no change; the shop sends `setup_service_details` 
 
 ## 10. Before you publish this listing
 
-- [x] Price approved: 500 TL (2026-10-16)
+- [x] Price approved: 990 TL (K49, 2026-10-22)
 - [x] Turnaround decided: 3 days (2026-10-16), here and in the admin messages
 - [ ] Etsy's policy on service listings read; category and digital-file setup checked in the listing editor
 - [x] `SETUP_SERVICE.pdf` made (G136, 2026-10-17)
