@@ -94,7 +94,7 @@ After the deadline, call the last few guests. Older relatives in particular may 
 
 ## A digital invitation that still feels like an invitation
 
-Part of what people love about paper is the moment of opening it. Our wedding websites try to keep that moment: guests open your link and see a sealed envelope (or, in some designs, a keepsake such as a storybook) with your names, tap it, and it opens into your website with the details and the reply form. You can try it in the [Blush Garden Rose demo](/designs/blush-garden-rose) on your phone, or read [how it works](/how-it-works).
+Part of what people love about paper is the moment of opening it. Our wedding websites try to keep that moment: guests open your link and see a sealed envelope (or, in some designs, a keepsake such as a storybook) with your names, tap it, and it opens into your website with the details and the reply form. You can try it in the [Blush Garden Rose demo](/designs/blush-garden-rose) on your phone, or read [how it works](/how-it-works). Our guide to [animated envelope invitations](/guides/animated-envelope-wedding-invitations) explains the two kinds you will find and what to check before choosing.
 
 ## FAQ
 

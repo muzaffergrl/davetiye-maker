@@ -77,7 +77,7 @@ Four short pages are easier to read on a phone than one very long page or ten ti
 1. **Home.** Names, date, venue, a one-line welcome, and a clear button to reply. Add to calendar fits well here.
 2. **Our Story.** A few photos with short captions and one or two sentences about you.
 3. **Details.** The schedule, venue with map, dress code, travel and stay, registry, and questions and answers.
-4. **RSVP.** The reply form, your reply-by date and any questions you need answered (meal choice, dietary needs).
+4. **RSVP.** The reply form, your reply-by date and any questions you need answered (meal choice, dietary needs; see [which RSVP questions to ask](/guides/wedding-rsvp-questions)).
 
 This is the structure our designs use, after an envelope or keepsake that opens into the home page. You can see it in any [live demo](/designs), and the [features page](/features) lists what each page can hold.
 
