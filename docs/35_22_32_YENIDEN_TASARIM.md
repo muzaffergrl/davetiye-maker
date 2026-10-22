@@ -159,6 +159,14 @@ Tuzaklar ve çözümleri:
 - **Katalog kartı:** `lib/marketing/assets.json` eski kapak/klibi gösterir; yeni yakalama (`tools/listing_templates/capture.ts`
   → `collections/<NN>/package/shots`) + `node scripts/marketing-assets.ts --designs <id>` gerekir (üretim build'i ister).
 
+### 6b. Paralel kurulum araçları (2026-10-22)
+
+Küçük makinede 10 ayrı `next dev` çalışmaz (15 GB / 4 çekirdek). Her oturum:
+- `node scripts/theme-preview.ts --port 31NN` — Next'siz önizleme: `/start/demo/<tema>[/<sayfa>]` gerçek demo işleyicisiyle
+  (`lib/claim/demo-page.ts`), diğer yollar statik (`themes/…`, `public/…`). Üretim için değil.
+- `node scripts/theme-frames.cjs --theme <tema> --port 31NN --out <klasör>` — açılış sabit zamanlarda (her animasyon
+  durdurulup `currentTime` ile), iç sayfalar bütün `[data-step]` açık + tam sayfa, taşma ölçümü, tek `-sheet.png`.
+
 ## 7. Bu turda yapılanlar (2026-10-22)
 
 - Teşhis (yukarıda) — ekran kareleri yerel; `docs/qa/` altına konmadı.
