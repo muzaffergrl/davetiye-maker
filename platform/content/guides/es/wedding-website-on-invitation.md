@@ -81,7 +81,7 @@ Los códigos QR fallan en papel por unas pocas razones previsibles. Revisa cada 
 - [ ] Escanea la prueba impresa con dos móviles distintos, con luz interior normal
 - [ ] Asegúrate de que la dirección que abre seguirá siendo la misma hasta después de la boda
 
-El último punto importa más de lo que parece. Un código impreso en doscientas tarjetas no se puede cambiar. Si quizá muevas tu web más adelante, usa una dirección que controles durante todo el tiempo que la necesiten los invitados, no un enlace temporal. Nuestra guía sobre el [código QR para confirmar asistencia](/guides/qr-code-wedding-rsvp) trata los códigos estáticos y con redirección, los tamaños para carteles y los logotipos en el código.
+El último punto importa más de lo que parece. Un código impreso en doscientas tarjetas no se puede cambiar. Si quizá muevas tu web más adelante, usa una dirección que controles durante todo el tiempo que la necesiten los invitados, no un enlace temporal. Nuestra guía sobre el [código QR para confirmar asistencia](/guides/qr-code-wedding-rsvp) trata los códigos estáticos y con redirección, los tamaños para carteles y los logotipos en el código. Para el papel, el sangrado y los sobres, mira [cómo imprimir invitaciones de boda en casa o en una imprenta](/guides/print-wedding-invitations-at-home).
 
 ## Invitaciones digitales: el enlace es la invitación
 

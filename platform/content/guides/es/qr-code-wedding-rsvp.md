@@ -87,7 +87,7 @@ Si tu web tiene contraseña para invitados, imprímela también junto al código
 4. Comprueba que abre la página correcta y que el formulario funciona al enviar una respuesta de prueba.
 5. Borra la respuesta de prueba antes de invitar a nadie, si tu plataforma lo permite.
 
-Para las preguntas del propio formulario, mira [qué preguntas incluir en la confirmación](/guides/wedding-rsvp-questions).
+Para las preguntas del propio formulario, mira [qué preguntas incluir en la confirmación](/guides/wedding-rsvp-questions). Para el papel, el sangrado y los sobres, mira [cómo imprimir invitaciones de boda en casa o en una imprenta](/guides/print-wedding-invitations-at-home).
 
 ## Códigos QR en nuestras webs de boda
 

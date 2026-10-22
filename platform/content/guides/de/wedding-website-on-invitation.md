@@ -81,7 +81,7 @@ QR-Codes scheitern auf Papier an einer Handvoll vorhersehbarer Gründe. Prüfen 
 - [ ] Scannen Sie den gedruckten Probeabzug bei normalem Raumlicht mit zwei verschiedenen Handys
 - [ ] Stellen Sie sicher, dass die Adresse, die er öffnet, bis nach der Hochzeit gleich bleibt
 
-Der letzte Punkt ist wichtiger, als er aussieht. Ein Code, der auf zweihundert Karten gedruckt ist, lässt sich nicht mehr ändern. Ziehen Sie mit Ihrer Website vielleicht später um, nutzen Sie eine Adresse, die Sie so lange kontrollieren, wie Gäste sie brauchen, keinen vorübergehenden Link. Unser Ratgeber zum [QR-Code für die Hochzeits-RSVP](/guides/qr-code-wedding-rsvp) behandelt statische und weiterleitende Codes, Größen für Schilder und Logos im Code.
+Der letzte Punkt ist wichtiger, als er aussieht. Ein Code, der auf zweihundert Karten gedruckt ist, lässt sich nicht mehr ändern. Ziehen Sie mit Ihrer Website vielleicht später um, nutzen Sie eine Adresse, die Sie so lange kontrollieren, wie Gäste sie brauchen, keinen vorübergehenden Link. Unser Ratgeber zum [QR-Code für die Hochzeits-RSVP](/guides/qr-code-wedding-rsvp) behandelt statische und weiterleitende Codes, Größen für Schilder und Logos im Code. Für Papier, Beschnitt und Umschläge lesen Sie, wie Sie [Hochzeitseinladungen zu Hause oder in der Druckerei drucken](/guides/print-wedding-invitations-at-home).
 
 ## Digitale Einladungen: Der Link ist die Einladung
 

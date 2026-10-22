@@ -22,6 +22,9 @@ const MATRIX: Record<string, string[]> = {
   // docs/36 §7 (G208/G209)
   'bilingual-wedding-website': ['wedding-website-vs-invitation', 'destination-wedding-website-checklist', '/features'],
   'wedding-website-after-the-wedding': ['wedding-website-privacy', 'when-to-send-your-wedding-website', '/features'],
+  // docs/36 §7 (G210/G211)
+  'print-wedding-invitations-at-home': ['wedding-website-on-invitation', 'qr-code-wedding-rsvp', '/features'],
+  'wedding-weekend-itinerary': ['destination-wedding-website-checklist', 'wedding-website-wording', 'wedding-website-faq-examples', '/features'],
 };
 const links = (md: string) => [...md.matchAll(/\]\(([^)\s]+)\)/g)].map((m) => m[1]);
 const hits = (ls: string[], target: string) =>

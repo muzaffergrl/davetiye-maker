@@ -61,7 +61,7 @@ Kurze Bezeichnungen lesen sich am Handy am besten. Setzen Sie den Ort in ein eig
 | 20:30 Uhr | Eröffnungstanz und Party | The Grand Hall |
 | 23:00 Uhr | Verabschiedung | Haupteingang |
 
-Wenn Gäste vor der Trauung ankommen, ergänzen Sie fünfzehn bis dreißig Minuten vorher „Ankunft der Gäste“ oder „Einlass“, damit niemand genau pünktlich erscheint und den Anfang verpasst.
+Wenn Gäste vor der Trauung ankommen, ergänzen Sie fünfzehn bis dreißig Minuten vorher „Ankunft der Gäste“ oder „Einlass“, damit niemand genau pünktlich erscheint und den Anfang verpasst. Für Feiern an anderen Tagen lesen Sie unseren Ratgeber zum [Programm fürs Hochzeitswochenende](/guides/wedding-weekend-itinerary).
 
 ## Texte zum Dresscode
 

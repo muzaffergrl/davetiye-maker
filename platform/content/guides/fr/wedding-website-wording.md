@@ -59,7 +59,7 @@ Les intitulés courts se lisent mieux sur téléphone. Mettez le lieu dans son p
 | 20 h 30 | Ouverture du bal et soirée dansante | The Grand Hall |
 | 23 h 00 | Au revoir | Entrée principale |
 
-Si les invités arrivent avant la cérémonie, ajoutez « Arrivée des invités » ou « Ouverture des portes » quinze à trente minutes plus tôt, pour que personne n'arrive pile à l'heure et ne manque le début.
+Si les invités arrivent avant la cérémonie, ajoutez « Arrivée des invités » ou « Ouverture des portes » quinze à trente minutes plus tôt, pour que personne n'arrive pile à l'heure et ne manque le début. Pour les moments des autres jours, consultez notre guide sur le [programme du week-end de mariage](/guides/wedding-weekend-itinerary).
 
 ## Formuler le dress code
 

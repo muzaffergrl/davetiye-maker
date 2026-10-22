@@ -94,7 +94,7 @@ Las bodas de destino suelen durar dos o tres días. Organízalos para que los in
 - **Sábado 12 de junio de 2027:** ceremonia a las 16:00 y después banquete (todos los invitados)
 - **Domingo 13 de junio de 2027:** brunch de despedida, 11:00 (todos los invitados)
 
-Escribe la zona horaria una vez, al principio del programa: *«Todas las horas son hora local de Lisboa (WEST, UTC+1).»* Los invitados que añadan los eventos al calendario desde otro país verán las horas correctas.
+Escribe la zona horaria una vez, al principio del programa: *«Todas las horas son hora local de Lisboa (WEST, UTC+1).»* Los invitados que añadan los eventos al calendario desde otro país verán las horas correctas. Nuestra guía sobre el [programa del fin de semana de boda](/guides/wedding-weekend-itinerary) explica qué contar a los invitados de cada acto, y cuándo.
 
 ## Responde con sinceridad a la pregunta del coste
 

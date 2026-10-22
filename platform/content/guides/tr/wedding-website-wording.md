@@ -59,7 +59,7 @@ Kısa etiketler telefonda en iyi okunur. Websitenizde ayrı bir alan varsa yeri 
 | 20:30 | İlk dans ve eğlence | The Grand Hall |
 | 23:00 | Uğurlama | Ana giriş |
 
-Misafirler törenden önce geliyorsa on beş ila otuz dakika önceye "Misafirlerin gelişi" ya da "Kapılar açılıyor" ekleyin; böylece kimse tam saatinde gelip başlangıcı kaçırmaz.
+Misafirler törenden önce geliyorsa on beş ila otuz dakika önceye "Misafirlerin gelişi" ya da "Kapılar açılıyor" ekleyin; böylece kimse tam saatinde gelip başlangıcı kaçırmaz. Başka günlerdeki etkinlikler için [düğün hafta sonu programı](/guides/wedding-weekend-itinerary) rehberimize bakın.
 
 ## Kıyafet kuralı metinleri
 

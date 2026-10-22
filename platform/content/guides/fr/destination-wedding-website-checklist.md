@@ -94,7 +94,7 @@ Les mariages à destination s'étendent souvent sur deux ou trois jours. Présen
 - **Samedi 12 juin 2027 :** cérémonie à 16 h, suivie de la réception (tous les invités)
 - **Dimanche 13 juin 2027 :** brunch d'au revoir, 11 h (tous les invités)
 
-Indiquez le fuseau horaire une fois, en haut du programme : *« Toutes les heures sont à l'heure locale de Lisbonne (WEST, UTC+1). »* Les invités qui ajoutent les événements à leur agenda depuis un autre pays verront les bonnes heures.
+Indiquez le fuseau horaire une fois, en haut du programme : *« Toutes les heures sont à l'heure locale de Lisbonne (WEST, UTC+1). »* Les invités qui ajoutent les événements à leur agenda depuis un autre pays verront les bonnes heures. Notre guide sur le [programme du week-end de mariage](/guides/wedding-weekend-itinerary) explique quoi dire aux invités pour chaque moment, et quand.
 
 ## Répondre honnêtement à la question du coût
 

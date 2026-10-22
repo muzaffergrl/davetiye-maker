@@ -87,7 +87,7 @@ Hat Ihre Website ein Gäste-Passwort, drucken Sie es ebenfalls neben den Code, s
 4. Prüfen Sie, ob die richtige Seite öffnet und das Antwortformular funktioniert, wenn Sie eine Testantwort senden.
 5. Löschen Sie die Testantwort, bevor Sie Gäste einladen, sofern Ihre Plattform das zulässt.
 
-Für die Fragen im Antwortformular selbst lesen Sie, [welche RSVP-Fragen sinnvoll sind](/guides/wedding-rsvp-questions).
+Für die Fragen im Antwortformular selbst lesen Sie, [welche RSVP-Fragen sinnvoll sind](/guides/wedding-rsvp-questions). Für Papier, Beschnitt und Umschläge lesen Sie, wie Sie [Hochzeitseinladungen zu Hause oder in der Druckerei drucken](/guides/print-wedding-invitations-at-home).
 
 ## QR-Codes bei unseren Hochzeitswebsites
 

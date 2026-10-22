@@ -87,7 +87,7 @@ Websitenizde misafir şifresi varsa onu da kodun yanına basın; yoksa okutan mi
 4. Doğru sayfayı açtığını ve deneme yanıtı gönderdiğinizde yanıt formunun çalıştığını kontrol edin.
 5. Platformunuz izin veriyorsa misafirleri davet etmeden önce deneme yanıtını silin.
 
-Yanıt formundaki sorular için [hangi LCV sorularının sorulacağına](/guides/wedding-rsvp-questions) bakın.
+Yanıt formundaki sorular için [hangi LCV sorularının sorulacağına](/guides/wedding-rsvp-questions) bakın. Kâğıt, taşma payı ve zarflar için [düğün davetiyesi evde ya da matbaada nasıl basılır](/guides/print-wedding-invitations-at-home) rehberimize bakın.
 
 ## Düğün websitelerimizde QR kodlar
 

@@ -94,7 +94,7 @@ Destination düğünler çoğu zaman iki üç güne yayılır. Misafirler uçuş
 - **12 Haziran 2027 Cumartesi:** tören 16.00'da, ardından yemek (bütün misafirler)
 - **13 Haziran 2027 Pazar:** veda brunch'ı, 11.00 (bütün misafirler)
 
-Saat dilimini programın en üstüne bir kez yazın: *"Bütün saatler Lizbon yerel saatidir (WEST, UTC+1)."* Başka bir ülkeden takvimlerine etkinlik ekleyen misafirler doğru saatleri görür.
+Saat dilimini programın en üstüne bir kez yazın: *"Bütün saatler Lizbon yerel saatidir (WEST, UTC+1)."* Başka bir ülkeden takvimlerine etkinlik ekleyen misafirler doğru saatleri görür. [Düğün hafta sonu programı](/guides/wedding-weekend-itinerary) rehberimiz her etkinlik için misafirlere neyin ne zaman söyleneceğini anlatıyor.
 
 ## Maliyet sorusuna dürüstçe yanıt verin
 

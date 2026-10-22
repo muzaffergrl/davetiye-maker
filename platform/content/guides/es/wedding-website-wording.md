@@ -59,7 +59,7 @@ En el móvil se leen mejor los nombres cortos. Pon el lugar en su propio campo s
 | 20:30 | Primer baile y fiesta | The Grand Hall |
 | 23:00 | Despedida | Entrada principal |
 
-Si los invitados llegan antes de la ceremonia, añade "Llegada de invitados" o "Apertura de puertas" entre quince y treinta minutos antes, para que nadie llegue justo a la hora y se pierda el comienzo.
+Si los invitados llegan antes de la ceremonia, añade "Llegada de invitados" o "Apertura de puertas" entre quince y treinta minutos antes, para que nadie llegue justo a la hora y se pierda el comienzo. Para los actos de otros días, mira nuestra guía sobre el [programa del fin de semana de boda](/guides/wedding-weekend-itinerary).
 
 ## Cómo escribir el código de vestimenta
 

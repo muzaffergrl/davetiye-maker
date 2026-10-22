@@ -94,7 +94,7 @@ Destination-Hochzeiten dauern oft zwei oder drei Tage. Stellen Sie sie so dar, d
 - **Samstag, 12. Juni 2027:** Trauung um 16:00 Uhr, anschließend Feier (alle Gäste)
 - **Sonntag, 13. Juni 2027:** Abschiedsbrunch, 11:00 Uhr (alle Gäste)
 
-Schreiben Sie die Zeitzone einmal oben über den Ablauf: *„Alle Zeiten sind Ortszeit Lissabon (WEST, UTC+1).“* Gäste, die Termine aus einem anderen Land in ihren Kalender übernehmen, sehen dann die richtigen Zeiten.
+Schreiben Sie die Zeitzone einmal oben über den Ablauf: *„Alle Zeiten sind Ortszeit Lissabon (WEST, UTC+1).“* Gäste, die Termine aus einem anderen Land in ihren Kalender übernehmen, sehen dann die richtigen Zeiten. Unser Ratgeber zum [Programm fürs Hochzeitswochenende](/guides/wedding-weekend-itinerary) zeigt, was Sie Gästen zu jeder Feier wann sagen.
 
 ## Die Kostenfrage ehrlich beantworten
 

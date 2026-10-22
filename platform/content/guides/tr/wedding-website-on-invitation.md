@@ -81,7 +81,7 @@ QR kodlar kâğıt üzerinde birkaç tahmin edilebilir nedenle başarısız olur
 - [ ] Basılı provayı normal iç mekân ışığında iki farklı telefonla okutun
 - [ ] Açtığı adresin düğünden sonrasına kadar aynı kalacağından emin olun
 
-Son madde göründüğünden daha önemlidir. İki yüz karta basılmış bir kod değiştirilemez. Websitenizi ileride taşıyabilecekseniz, geçici bir link değil, misafirlerin ihtiyaç duyduğu süre boyunca sizin kontrolünüzde olan bir adres kullanın. [Düğün LCV'si için QR kod](/guides/qr-code-wedding-rsvp) rehberimiz statik ve yönlendirmeli kodları, tabelalar için boyutları ve koddaki logoları ele alıyor.
+Son madde göründüğünden daha önemlidir. İki yüz karta basılmış bir kod değiştirilemez. Websitenizi ileride taşıyabilecekseniz, geçici bir link değil, misafirlerin ihtiyaç duyduğu süre boyunca sizin kontrolünüzde olan bir adres kullanın. [Düğün LCV'si için QR kod](/guides/qr-code-wedding-rsvp) rehberimiz statik ve yönlendirmeli kodları, tabelalar için boyutları ve koddaki logoları ele alıyor. Kâğıt, taşma payı ve zarflar için [düğün davetiyesi evde ya da matbaada nasıl basılır](/guides/print-wedding-invitations-at-home) rehberimize bakın.
 
 ## Dijital davetiyeler: davetiye linkin kendisidir
 

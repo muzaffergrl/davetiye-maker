@@ -81,7 +81,7 @@ Sur papier, les QR codes échouent pour quelques raisons prévisibles. Vérifiez
 - [ ] Scannez l'épreuve imprimée avec deux téléphones différents, sous un éclairage intérieur normal
 - [ ] Vérifiez que l'adresse qu'il ouvre restera la même jusqu'après le mariage
 
-Le dernier point compte plus qu'il n'y paraît. Un code imprimé sur deux cents cartes ne peut plus être modifié. Si vous risquez de déplacer votre site plus tard, utilisez une adresse que vous contrôlez aussi longtemps que les invités en ont besoin, pas un lien temporaire. Notre guide sur le [QR code pour le RSVP du mariage](/guides/qr-code-wedding-rsvp) traite des codes statiques et à redirection, des tailles pour les panneaux et des logos dans le code.
+Le dernier point compte plus qu'il n'y paraît. Un code imprimé sur deux cents cartes ne peut plus être modifié. Si vous risquez de déplacer votre site plus tard, utilisez une adresse que vous contrôlez aussi longtemps que les invités en ont besoin, pas un lien temporaire. Notre guide sur le [QR code pour le RSVP du mariage](/guides/qr-code-wedding-rsvp) traite des codes statiques et à redirection, des tailles pour les panneaux et des logos dans le code. Pour le papier, les fonds perdus et les enveloppes, voyez comment [imprimer ses faire-part de mariage chez soi ou chez l'imprimeur](/guides/print-wedding-invitations-at-home).
 
 ## Faire-part numériques : le lien est le faire-part
 

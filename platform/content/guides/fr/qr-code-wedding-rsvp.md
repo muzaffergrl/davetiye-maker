@@ -87,7 +87,7 @@ Si votre site a un mot de passe invités, imprimez-le aussi à côté du code, s
 4. Vérifiez qu'il ouvre la bonne page et que le formulaire fonctionne en envoyant une réponse test.
 5. Supprimez la réponse test avant d'inviter qui que ce soit, si votre plateforme le permet.
 
-Pour les questions du formulaire lui-même, voyez [quelles questions RSVP poser](/guides/wedding-rsvp-questions).
+Pour les questions du formulaire lui-même, voyez [quelles questions RSVP poser](/guides/wedding-rsvp-questions). Pour le papier, les fonds perdus et les enveloppes, voyez comment [imprimer ses faire-part de mariage chez soi ou chez l'imprimeur](/guides/print-wedding-invitations-at-home).
 
 ## Les QR codes de nos sites de mariage
 
