@@ -32,7 +32,10 @@ doğrudan isteğiyle bu oturum açtı (entegratör numarayı değiştirebilir).
   `unpaid: true` eklendi. Tam paket sonucu aşağıda.
 
 ### Yapılmadı / açık
-- Canlıda açılmadı: `CRON_SECRET` ve `CLAIM_ORDER_VERIFICATION=trust` Vercel'e girilmedi (kullanıcı kararı bekleniyor).
+- **2026-10-22:** kod main'e birleşti (`e36a7a31`, Git bağlı → production yayını). **Blokaj:** bu oturumun Vercel bağlayıcısı yalnız eski
+  `daimonflora` ekibini görüyor; bkestudio.com'un `bkestudio` ekibi / `davetiye-maker` projesi görünmüyor, bu ortamdan bkestudio.com'a ağ
+  erişimi de yok (vekil 403). Bu yüzden `CRON_SECRET` + `CLAIM_ORDER_VERIFICATION=trust` girilmedi, yayının Ready olduğu doğrulanmadı.
+  Mod `manual` kaldıkça canlı davranış değişmedi; saatlik cron CRON_SECRET olmadan 503 döner (zararsız).
 - Gerçek Etsy ile denenmedi (Etsy uygulaması yok). Etsy bağlanana kadar "sonra doğrula" otomatik değil: dükkân e-postayla haber alır.
 - SMTP canlıda açık değilse dükkân e-postaları gitmez; o durumda admin "Yapılacak" listesi tek uyarı yeri.
 - Bekletilen alıcıya e-posta gitmez; panelde "We are still confirming your Etsy order" görür. Dükkân Etsy'den yazar.
@@ -41,3 +44,4 @@ doğrudan isteğiyle bu oturum açtı (entegratör numarayı değiştirebilir).
 
 ## Günlük
 - 2026-10-22 alindi + inceleme: claude-session_015RTF9kCAoVGh7PDNq8XYeP (kullanıcı talebi)
+- 2026-10-22 main'e birleşti; Vercel ortam değişkenleri blokajda (bağlayıcı bkestudio ekibini görmüyor)
