@@ -53,7 +53,7 @@ Your website link travels further than you think: guests forward it, screenshots
 - **Guest names or reply lists.** Replies should only be visible to you.
 - **Exact times you will be away from home**, such as a honeymoon departure date next to your address.
 
-If your platform offers it, check whether your website is shown to search engines and choose what suits you. For most couples, a website that only guests with the link can find is the calmer choice.
+If your platform offers it, check whether your website is shown to search engines and choose what suits you. For most couples, a website that only guests with the link can find is the calmer choice. Our guide to [wedding website privacy](/guides/wedding-website-privacy) explains link previews and when a guest password is worth adding.
 
 ## Practical notes guests are grateful for
 

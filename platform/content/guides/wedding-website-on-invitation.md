@@ -57,7 +57,7 @@ Pick the tone of your invitation and keep it. Write the reply-by date in full, w
 
 *"Details and RSVP: (your address)"*
 
-If your website has a guest password, print it on the details card, not on the invitation: *"Password: (your password)"*. Anyone holding the card can open the site, which is usually exactly who you want.
+If your website has a guest password, print it on the details card, not on the invitation: *"Password: (your password)"*. Anyone holding the card can open the site, which is usually exactly who you want. Our guide to [wedding website privacy](/guides/wedding-website-privacy) explains when a password is worth adding.
 
 ## A link, a QR code or both?
 
@@ -81,7 +81,7 @@ QR codes fail on paper for a handful of predictable reasons. Check each one befo
 - [ ] Scan the printed proof with two different phones, in normal indoor light
 - [ ] Make sure the address it opens will stay the same until after the wedding
 
-The last point matters more than it looks. A code printed on two hundred cards cannot be changed. If you might move your website later, use an address you control for as long as guests need it, not a temporary link.
+The last point matters more than it looks. A code printed on two hundred cards cannot be changed. If you might move your website later, use an address you control for as long as guests need it, not a temporary link. Our guide to [QR codes for wedding RSVPs](/guides/qr-code-wedding-rsvp) covers static and redirect codes, sizes for signs and logos in the code.
 
 ## Digital invitations: the link is the invitation
 

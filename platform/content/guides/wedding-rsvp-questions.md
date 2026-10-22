@@ -42,7 +42,7 @@ Before you add a question, ask who will use the answer and by when. If nobody wi
 
 Two notes on this table:
 
-- **Meal choices belong on the reply.** The [Emily Post Institute](https://emilypost.com/advice/how-to-word-a-wedding-response-card) suggests that when guests choose their main course, the response card (or the online reply) is the place to ask, so the caterer gets one complete list. If guests reply online, the printed reply card only needs the address and the date; see [how to put your wedding website on the invitation](/guides/wedding-website-on-invitation).
+- **Meal choices belong on the reply.** The [Emily Post Institute](https://emilypost.com/advice/how-to-word-a-wedding-response-card) suggests that when guests choose their main course, the response card (or the online reply) is the place to ask, so the caterer gets one complete list. If guests reply online, the printed reply card only needs the address and the date; see [how to put your wedding website on the invitation](/guides/wedding-website-on-invitation), and for a code guests can scan, [QR codes for wedding RSVPs](/guides/qr-code-wedding-rsvp).
 - **Check your contracts for the dates.** The "when they need it" column depends on your caterer, venue and transport company. Our guide to [choosing the RSVP deadline](/guides/wedding-rsvp-deadline) shows how to work backwards from those dates.
 
 ## Questions to skip, and why
