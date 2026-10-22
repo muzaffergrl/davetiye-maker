@@ -1,100 +1,252 @@
-# GPT görsel istekleri — Tasarım 22 · Nocturne Lake Estate
+# GPT görsel istekleri — Tasarım 22 · Nocturne Lake Estate (yeniden tasarım, 2026-10-22)
 
-> **Instructions for GPT:** This design ("Nocturne Lake Estate") was redesigned on 2026-10-18/19: its website is warm ivory stationery paper with abundant photorealistic flowers in the corners, opened from a themed cover object. The old website parts (PAKET 5) are NO LONGER needed — do not generate them. Generate PAKET 3 (the Etsy listing scenes) and PAKET 6 (the printed invitation grounds) in ONE chat; PAKET 2 (sample photos) is optional and comes last. Before the first image, attach these two images from the repository as the style reference of every image: `platform/themes/nocturne-lake-estate/img/bg_scene-1024.webp` (the website background: paper, flowers, colors, light) and `platform/themes/nocturne-lake-estate/img/v3-closed-880.webp` (the design's closed cover object). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". No text, letters, numbers, logos, monograms or watermarks in any image.
+> **Instructions for GPT:** This design is being REDESIGNED from scratch. Generate PAKET 5R (website layers) first, in
+> order and in ONE chat, then PAKET 6R (printable invitation). PAKET 2 (sample photos) ALREADY EXISTS — do not regenerate
+> it. Sections marked GEÇERSİZ are not wanted. Use each English prompt exactly as written, follow its checklist, and save
+> each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, names, dates,
+> initials, monograms, crests, logos, QR codes or watermarks in any image** (also not on the brooch, the vellum band, the
+> card or the frames). No real place, villa, lake, brand, artist or other seller's design may be recognisable — the lake,
+> mountains and villa are invented. Give W1 `night_laid.png`, W2 `ivory_laid.png` and W3 `env_back.png` as the style
+> reference of every later part: the same charcoal-black laid paper, the same warm ivory laid card, the same champagne
+> gold foil, the same oil-painted night lake, and the same light — soft cool MOONLIGHT from the top-left with a faint warm
+> CANDLE glow from the lower right. Parts drawn on the same envelope canvas (W3, W4, W5, W7) keep the envelope in exactly
+> the same box.
 
-Bu dosya Nocturne'ün **eksik website parçalarının** tek kaynağıdır (G142). Tasarım `tools/katalog.py`'de kayıtlı değil;
-bu yüzden dosya elle yazıldı (katalog kaydı açılırsa oradan yeniden üretilir). Taslağın üç PNG'si (`envelope.png`,
-`hero.png`, `couple.png`; prompt'ları `PROMPTS.md`) şu an temada **geçici** olarak kullanılıyor: zarf tek kapalı görsel
-olduğu için `platform/themes/nocturne-lake-estate/build_images.py` kapak, cep, mühür, iç kapak (aynalanmış kapak) ve kart
-kâğıdını o tek görselden kesiyor. K23 / AGENTS şart 4 için asıl parçalar aşağıdakiler; gelince `build_images.py` bunlara
-geçer (docs/11 §5.1, §7.3 kapak tipi).
+Bu dosya tasarım 22'nin **bütün görsel parçalarının** tek kaynağıdır (`docs/35_22_32_YENIDEN_TASARIM.md`, satır 22;
+görev G222). Önceki PAKET 5/6 bölümleri ve Codex taslak görselleri (`envelope.png`, `hero.png`, `couple.png`) bu sürümde
+kullanılmaz (git geçmişinde). Tema yeniden kurulunca (G422, `docs/34` 39 pilot yapısı) her parçanın nasıl kullanılacağı
+aşağıdaki "Kullanım" satırlarındadır; gelmeyen parçanın yerine çizilmiş yedek konmaz (K21). Kişisel alanlar (isimler,
+tarih, baş harfler, mekân) HTML'dir, hiçbir görsele pişirilmez. QR'ı GPT çizmez (`tools/make_qr.py`).
 
 ## Nereye?
 - Repo `muzaffergrl/davetiye-maker`; klasör `collections/22_Nocturne_Lake_Estate/assets/gpt/` altındaki `parts/`
-  (Paket 5 W2) ve `photos/` (Paket 2). Repoya yazamıyorsan dur ve bunu çıktında açıkça söyle; kullanıcıya yükleme işi verme.
+  (PAKET 5R) ve `print/` (PAKET 6R). `photos/` (PAKET 2) zaten dolu. Repoya yazamıyorsan dur ve bunu çıktında açıkça söyle;
+  kullanıcıya yükleme işi verme.
+- Sonra (Claude, G422): `python3 tools/kit_check.py collections/22_Nocturne_Lake_Estate --paket 5` (oran, gerçek alfa,
+  kenar payı, foto penceresi) + göz kontrolü. Tema kurulunca `python3 platform/themes/nocturne-lake-estate/build_images.py`
+  ve `python3 tools/gpt_kuru_deneme.py --tema nocturne-lake-estate --sekil
+  collections/22_Nocturne_Lake_Estate/assets/gpt/kuru_sekil.json` (prova). PAKET 6R için aşağıdaki "Gelince" adımı.
 
 ## Stil ve renk
-- Teknik: **photorealistic luxury stationery** (gerçek kâğıt, gerçek mum), siyah-beyaz değil: sıcak şampanya altını
-- Renkler: night `#11120F` · charcoal `#1C1D15` · champagne `#E0C7A4` · gold `#C7A978` · ivory `#F1E4CC`
-- Işık: yumuşak, sol üstten; bütün parçalarda aynı
-- Gerçek bir kişiye, markaya veya başka bir satıcının tasarımına benzemesin.
+- Teknik: **photorealistic luxury stationery product photography + oil-painted nocturne** — real charcoal-black laid
+  paper with fine chain lines, real deckled champagne-gold foil, real frosted vellum with silver engraving, real hammered
+  gold, real lacquered wood and wrought iron; the lake scenes are rich, quiet oil paintings with soft brushwork. A villa
+  terrace by a mountain lake near midnight: black-tie, candlelit, deep and romantic. Not gothic, not Halloween, not neon,
+  not a night-club look, not flat vector, not clip-art.
+- Renkler (yalnız bunlar): night `#11120F` · charcoal `#1C1D15` · champagne `#E0C7A4` · gold `#C7A978` · ivory `#F1E4CC`;
+  vellum gravürü için silver `#BFC3C6`. Yağlı boya sahnelerde gece mavisi-kömür gök ve su (`#11120F`–`#2A2E33` arası),
+  sıcak pencere/mum ışıkları şampanya-altın. Çiçekler yalnız beyaz-fildişi bahçe gülü ve gümüşi zeytin yaprağı.
+- Işık: **ay ışığı sol üstten** (yumuşak, serin) + **çok hafif ılık mum ışığı sağ alttan**; bütün parçalarda aynı.
+  Şeffaf parçalarda gerçek alfa (beyaz ya da dama deseni değil), nesne her kenarda en az %6 içeride, nesnenin dışında
+  düşen gölge ya da hâle yok (gölgeyi site ekler).
+- Foto penceresi (`#00FF00`) yalnız W10 `window_frame`, W11 `story_frame` ve W13 `terrace_frame`'de; diğer parçalarda
+  yeşil alan yok.
+- **19 Midnight Garden'dan ayrı:** çiçek bahçesi yok; **29'dan ayrı:** yıldız haritası/usturlap yok; **42'den ayrı:**
+  dantel bant ve kuru çiçek yok; **01–21'den ayrı:** mum mühür yok, kapak V değil.
+
+## Zarf geometrisi (W3, W4, W5, W7 aynı tuvalde; W6 ve W8 ayrı tuvalde)
+Tuval **1080×1500** (dikey). Zarf kutusu **x %7–93, y %7–93** (zarf 929×1290 px ≈ 0,72:1). Dört katman **aynı tuvalde,
+aynı kutuda** çizilir: W3 arka (astar), W4 ön cep, W5 kapak, W7 vellum bant; Claude her birini kendi alfa kutusuna kırpar
+ve W3'ün kutusuna göre yerleştirir. Tuval yüzdeleri:
+- **ön cep (W4):** tam genişlik, üst kenarı yan kanatların oluşturduğu sığ bir V: yan kenarlarda **y %20**'den başlar,
+  ortada **y %53**'e iner; zarfın alt kenarına (**y %93**) kadar → kutu x %7–93, y %20–93.
+- **elmas kapak (W5):** menteşe zarfın üst kenarında (**y %7**); iki yanı **dik** iner, **y %19**'a kadar; sonra iki
+  hafif **içbükey** kenar (düz çizgiden en çok tuval yüksekliğinin %3'ü kadar içe doğru) ortada **(%50, %68)**'de keskin
+  sivri uçta birleşir. Kenar boyunca ~%1,2 genişliğinde şampanya altın deckle folyo şerit → kutu x %7–93, y %7–68. Kapak
+  her yerde cebin V kenarının **altına** iner (kapalıyken astar görünmez).
+- **vellum bant (W7):** yatay, **y %57–75**; zarfın iki yan kenarından ~%1 taşar ve arkaya kıvrılır → kutu x %6–94,
+  y %57–75. Kapağın sivri ucu (%68) bandın altında kalır.
+- **hilal broş (W8, ayrı 600×600 tuval):** zarf üstünde merkezi **(%50, %66)**, genişliği tuval eninin **%22**'si
+  (zarf eninin ~%26'sı); bandın ortasına iğneli.
+- **kapağın iç yüzü (W6, ayrı 1080×1100 tuval):** W5'in dikey aynası: düz katlama kenarı **altta y %93**, x %7–93;
+  dik yanlar **y %78**'e çıkar, içbükey kenarlar **y %10**'da tepe noktasında birleşir → kutu x %7–93, y %10–93.
+- Kat sırası (alttan üste): W3 arka → kart (W9) → W4 cep → W5 kapak → W7 vellum bant → W8 broş.
+
+Açılış: hilal broşta ay ışığı parlar → broş bandın üstünden kalkar, yavaşça yukarı süzülüp ekranın üstünde "ay" olarak
+durur (home'da da) → vellum bant aşağı kayarak zarftan çıkar ve söner → elmas kapak menteşesinde 3B açılır: iç yüzü (W6)
+yağlı boya **gece göğü ve dağ silueti**, zarfın astarı (W3) **göl, villa ışıkları ve ay yolu** — kapak açıkken ikisi tek bir
+tablo gibi birleşir (dağların ayağı kapağın katlama kenarında, gölün kıyısı astarın üst kenarında) → fildişi kart (W9)
+cebin arkasından yükselir, cep dudağını geçince öne gelir → astardaki ay yolunda ışık kıpırdar (CSS maske) → altın pul,
+mum kıvılcımı ve beyaz gül yaprağı (W18) süzülür → home.
 
 ---
 
-## PAKET 5 — W2 parçaları (website katmanları; YAZI YOK) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+## PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım)
 
-> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
-
-Tek görselde tek nesne, düşen gölge yok, ışık sol üstten, şeffaflar gerçek alfa. Kapalı zarf, açık zarf ve mühür
-**aynı tuvalde, aynı konumda** çizilir (birbirinin üstüne konunca gövde çakışmalı).
-
-#### W2.1 Kapalı zarf — mühür OLMADAN
-**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/envelope_closed.png` · 1024×1536 · **Şeffaf zemin**
+#### W1 Gece laid kâğıdı (sayfa zemini, kapak sayfası)
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/night_laid.png` · 1536×1536 · opak, dikişsiz
 
 ```
-The same premium black textured paper envelope as envelope.png, alone and closed, WITHOUT the gold wax seal: nearly black charcoal paper with a fine visible grain and delicate warm highlights on its edges, about 8:5 wider than tall, with a pointed triangular V flap folded down over the front; the tip of the flap is fully visible (nothing covers it). Place it exactly where it will sit in envelope_open.png: horizontally centered, its bottom edge at about 88% of the image height and its width about 84% of the image width; the empty upper part of the image is left for the opening and for the card to rise into. The edges where this piece will be cut must read clearly: the free edge of the flap is a crisp line with a slight contact shade on the object itself (not a cast shadow). Only this one object. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters, numbers or monogram. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+A seamless, tileable, perfectly flat top-down texture of heavy charcoal-black laid paper (#1C1D15, the deepest tones toward #11120F): fine parallel laid lines running horizontally with faint chain lines crossing them vertically every few centimetres, a soft felted tooth, and a very sparse scatter of tiny champagne-gold foil flecks (#C7A978) — only a few flecks per square, irregular, flat and small, catching the light softly. Evenly lit by soft cool moonlight from the top-left; very low contrast, calm and deep, so champagne and ivory text reads on it everywhere. No fold, no crease, no stain, no vignette, no pattern other than the laid lines, no shadow, no deckle edge. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: mühür yok, kapağın ucu açıkta; tek nesne; kesilmemiş; gölge yok; gerçek alfa; kapağın serbest kenarı net çizgi.
+Kontrol: kömür-siyah, çok sakin; laid çizgileri ince; altın pullar seyrek ve küçük; dikişsiz (2×2 ek yeri yok); açık renk yazı her yerde okunur.
+Kullanım: tema kurulunca bütün sayfaların zemini ve açılış (kapalı zarf) sayfası; paletlerde tonu `variants.css` ile kaydırılır.
 
-#### W2.2 Kapanış elemanı — altın mühür (tek başına)
-**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/closure.png` · 1024×1024 · **Şeffaf zemin**
-
-```
-Only the round champagne-gold wax seal with a small abstract olive-twig relief (no letters) from envelope.png, alone, exactly as it sits on the tip of the black envelope's flap, drawn large so it fills about 70% of the square (Claude scales it to the envelope), with the same perspective, material and light and with no envelope behind it. The center of the relief is the same olive twig — no initials, no monogram. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
-```
-Kontrol: yalnız mühür; harf yok; zarftakiyle aynı görünüm; kareyi ~%70 dolduruyor; gölge yok; alfa.
-
-#### W2.3 Açık zarf — boş
-**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/envelope_open.png` · 1024×1536 · **Şeffaf zemin**
+#### W2 Fildişi laid kart (kartlar, bantlar, form)
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/ivory_laid.png` · 1536×1536 · opak, dikişsiz
 
 ```
-The SAME black envelope as envelope_closed.png — same size, same position on the canvas, same angle, same material and light (give envelope_closed.png as the reference image) — now open: the V flap folded fully upward above the envelope, its inner side and the inside of the back lined with a deep charcoal paper with a very fine champagne-gold pinstripe, seamless; the front pocket empty. The top edge of the front pocket is a crisp, clearly visible V edge against the liner. No card, nothing inside, no wax seal. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+A seamless, tileable, perfectly flat top-down texture of thick warm ivory laid card stock (#F1E4CC, the gentlest variation toward #E8D9BC): very fine horizontal laid lines and faint vertical chain lines, a soft felted cotton tooth, matte, calm enough for charcoal text to read on it everywhere. Evenly lit by soft cool moonlight from the top-left with the faintest warm tint; no fold, no crease, no stain, no gold flecks, no printing, no pattern, no shadow, no vignette, no deckle edge. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: envelope_closed ile aynı ölçü, konum ve açı (üst üste konunca sol, sağ, alt kenar çakışıyor); içi boş; gölge yok; alfa.
+Kontrol: sakin sıcak fildişi; laid çizgileri çok ince; dikişsiz; leke/baskı yok; koyu yazı okunur.
+Kullanım: tema kurulunca home kartı, davet bandı, details program kartı, RSVP formu ve zarftan yükselen kartın dokusu.
 
-#### W2.4 Zarftan çıkan küçük kart (boş)
-**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
-
-```
-The small invitation card that comes out of the black envelope, alone: a thick charcoal card (slightly lighter than the envelope) with a thin champagne-gold foil border inset from its edge, landscape, about 2:1 wider than tall, sized to slip into the envelope (about 64% of the envelope's width). On its left third a portrait photo window with softly rounded corners, about 4:5 tall, filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank charcoal paper (no text). Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow outside the object's outline. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
-```
-Kontrol: pencere düz #00FF00; kartın geri kalanı boş (yazı alanı sağ üçte ikide düz kâğıt); zarfa sığacak genişlikte; alfa.
-
-#### W2.5 Sayfa arka planı (zarf sayfası, telefon)
-**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/bg_page.png` · 1024×1536
+#### W3 Zarfın arkası — göl astarı
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/env_back.png` · 1080×1500 · **Şeffaf zemin**
 
 ```
-A vertical phone-screen background for the envelope page: deep night-black textured paper with very soft warm candlelight falling from below the center, a faint distant Lake Como dusk reflection blurred far in the bottom quarter, cypress silhouettes barely visible at the far left and right edges. The whole central area stays calm, dark and empty (no envelope, no card, no text) so light ivory text reads on it. Same light and palette as hero.png.
+The back panel of an open portrait envelope made of the charcoal-black laid paper of night_laid.png, seen perfectly straight from the front, on a fully transparent background. The envelope occupies exactly x 7–93% and y 7–93% of the 1080×1500 canvas (a 0.72:1 rectangle with crisp, very slightly softened corners). We see its inside: it is lined with an oil-painted nocturne of an invented mountain lake near midnight, covering the panel almost completely with a slim margin (about 2% of the canvas) of charcoal laid paper along the top and both sides. The painting: the calm dark lake fills the panel; across its top edge runs the far shore — a low line of dark hills with a small invented villa whose few windows glow warm champagne-gold, a row of slender cypresses and a stone terrace with tiny candle lights reflected as soft gold streaks in the water; down the vertical centre of the lake runs a shimmering path of pale moonlight in broken, soft horizontal brushstrokes; the rest of the water is deep charcoal-blue (#11120F to #2A2E33) with gentle ripples. Rich, quiet, soft brushwork, like a fine small oil painting printed on the liner paper; a very gentle shade toward the bottom where the front pocket will sit. No sky (the sky is on the flap), no moon disc, no flap, no front pocket, no band, no brooch, no card. Soft cool moonlight from the top-left. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
 ```
-Kontrol: orta sakin ve koyu; dekor yalnız kenarlarda; yazı yok; hero.png ile aynı ışık.
+Kontrol: panel x %7–93 · y %7–93; iç yüz yağlı boya göl (karşı kıyı + villa ışıkları + ortadan inen ay yolu); kenarlarda ince kömür laid pay; gök/ay diski yok; gerçek alfa.
+Kullanım: tema kurulunca `.env-back` — kapak açılınca kartın arkasında görünen göl; ay yolunun üstünde CSS maske süpürmesiyle ışık kıpırtısı.
 
-#### W2.6 Süzülen accent 1 — altın zeytin yaprağı
-**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/accent_1.png` · 1024×1024 · **Şeffaf zemin**
-
-```
-A single small olive leaf in brushed champagne gold leaf (the same olive motif as the wax seal's relief), alone, slightly curved, drawn large so it fills about 60% of the square. Front view, centered, not cropped, generous empty margin. Soft light from the top-left. No cast shadow, no glow outside its outline. No text. True transparent background PNG.
-```
-Kontrol: tek yaprak; altın; gölge yok; alfa (açılışta kartın çevresinden süzülen 2 yaprak — `MOTION.accents.open`).
-
-#### W2.7 Küçük ayırıcı — altın zeytin dalı
-**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/divider.png` · 1536×1024 · **Şeffaf zemin**
+#### W4 Zarfın ön cebi
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/env_front.png` · 1080×1500 · **Şeffaf zemin**
 
 ```
-A thin horizontal divider: one slender olive twig in brushed champagne gold leaf lying flat, about 70% of the image width, very fine and delicate, centered. Soft light from the top-left. No cast shadow, no glow. No text. True transparent background PNG.
+Only the front pocket of the same portrait charcoal-black laid paper envelope as env_back.png, on the same 1080×1500 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 7–93% and y 7–93% of the canvas; the pocket spans the full envelope width (x 7–93%) and reaches down to the envelope's bottom edge at 93% of the canvas height. Its top edge is the shallow V formed by the two side flaps: it starts at 20% of the canvas height at both side edges and runs in two straight, crisply cut lines down to a soft point at the horizontal centre at 53% of the canvas height; the faint thickness of heavy paper visible along the cut, the gentle fold lines of the side flaps and the bottom flap barely visible on the charcoal laid paper of night_laid.png with its sparse tiny gold flecks. Everything above the pocket's edge is completely transparent. No flap, no band, no brooch, no card, no foil on the pocket. Soft cool moonlight from the top-left. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
 ```
-Kontrol: ince, yatay; altın; gölge yok; alfa (başlık altları).
+Kontrol: cep tam genişlik; üst kenar yanlarda %20, ortada %53'e inen sığ V; üstü tamamen şeffaf; folyo yok; gerçek alfa.
+Kullanım: tema kurulunca `.env-front` — kart bunun arkasından yükselir; kapak açıkken V kenarı astarın gölünü çerçeveler.
 
-#### W2.8 Website hero + paylaşım görseli (og:image kaynağı)
-**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/web_hero.png` · 1536×1024
+#### W5 Elmas kapak (kapalı, dış yüz)
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/flap.png` · 1080×1500 · **Şeffaf zemin**
 
 ```
-Wide horizontal version of the same design: the Lake Como terrace at blue-black dusk from hero.png (tiny lights across the water, mountain silhouettes, a stone balustrade with ivory taper candles), and the closed black envelope with its champagne-gold wax seal resting on the balustrade slightly below the center. The center-top area is calm night sky. This image is also cropped to 1200×630 for link previews: keep the envelope with its seal completely visible with at least 5% empty margin below it, and keep the top 20% to sky only. Photorealistic, same light and palette as hero.png. No text, no letters.
+Only the closed flap of the same portrait charcoal-black laid paper envelope, on the same 1080×1500 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 7–93% and y 7–93% of the canvas; the flap spans its full width (x 7–93%), hinged along a softly rounded fold at the envelope's top edge (7% of the canvas height). Its shape is a deep, elegant elongated diamond: its two sides drop straight down along the envelope's side edges to 19% of the canvas height, then two long edges, each very gently concave (curving inward by no more than 3% of the canvas height), run down and meet in ONE sharp point at the horizontal centre at 68% of the canvas height. All along the two long edges and the point runs a narrow border of real champagne-gold foil (#C7A978 with soft bright highlights toward #E0C7A4), about 1.2% of the canvas wide, with a delicate deckled, torn-paper outer edge. The flap is the charcoal laid paper of night_laid.png with its laid lines and sparse tiny gold flecks, a whisper of contact shade on the flap itself just along its edges. Everything outside the flap is completely transparent. No band, no brooch, no seal, no card. Soft cool moonlight from the top-left, a faint warm reflection on the foil from the lower right. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
 ```
-Kontrol: zarf + mühür altta tam görünür; üst %20 yalnız gökyüzü; yazı yok.
+Kontrol: kapak tam genişlik; yanlar %19'a dik, sonra hafif içbükey iki kenar (%50, %68)'de keskin uçta; kenarda ince deckle altın folyo; mühür/broş yok; gerçek alfa.
+Kullanım: tema kurulunca kapalı kapak; açılışta üst katlama çizgisinde 3B kalkar, arka yüzü W6.
+
+#### W6 Kapağın iç yüzü — gece göğü (açıkken dik)
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/flap_in.png` · 1080×1100 · **Şeffaf zemin**
+
+```
+The inside of the same elongated-diamond envelope flap, alone, seen straight on as it stands upright when the envelope is open, on a fully transparent background: the outline of flap.png mirrored vertically. Its straight fold edge is at the BOTTOM, along 93% of the image height, spanning x 7–93% of the width (exactly as wide as the envelope); its two straight sides rise to 78% of the image height, and its two very gently concave long edges rise and meet in one sharp point at the horizontal centre at 10% of the image height. The inside is lined with the upper half of the same oil-painted nocturne as env_back.png: a deep night sky (#11120F to #2A2E33) with a few faint stars and soft drifting clouds lit silver at their edges by a hidden moon glowing softly behind the clouds near the top (no moon disc visible), and along the bottom of the flap, sitting right on the fold edge, the dark layered silhouettes of invented mountains whose lowest slopes meet the fold line — so that, with the envelope open, the mountains continue straight into the lake painted inside the envelope. A slim margin of charcoal laid paper and the same narrow deckled champagne-gold foil border follow the two long edges and the point. Rich, quiet oil brushwork. No villa, no lake, no moon disc, no seal. Soft cool moonlight from the top-left. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: katlama kenarı altta (%93), dik yanlar %78'e, uç ortada %10'da; iç yüz yağlı boya gece göğü + altta dağ silueti (katlama kenarına oturur); ay diski yok; kenarda altın folyo; gerçek alfa.
+Kullanım: tema kurulunca kapak açıldığında zarfın üstünde dik duran iç yüz (3B dönüşün arka yüzü); dağlar astarın gölüne devam eder.
+
+#### W7 Vellum bel bandı — gümüş gravür göl panoraması
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/vellum_band.png` · 1080×1500 · **Şeffaf zemin**
+
+```
+On the same 1080×1500 canvas as env_back.png and flap.png, in exactly the same place (the envelope box is x 7–93% and y 7–93% of the canvas, but the envelope itself is NOT drawn here), only a horizontal belly band of frosted translucent vellum that wraps around the closed envelope, on a fully transparent background: the band runs straight across from x 6% to x 94% of the canvas and from y 57% to y 75%; at both ends it turns over the envelope's side edges in a soft rounded fold, as if continuing behind it. The vellum is milky and semi-transparent (real partial alpha, about 40–50% opaque, so whatever lies beneath shows through softly), with a faint frosted texture and a crisp clean cut along its top and bottom edges. Across the whole band runs a delicate continuous engraving in fine metallic silver lines (#BFC3C6) and fine hatching: an invented lakeshore panorama — layered mountains, a small villa with a balustrade terrace in the centre, slender cypresses, a few boats, and gentle ripple lines on the water; the centre of the band, where a brooch will be pinned, stays a little calmer. Soft cool moonlight from the top-left giving the silver lines a faint glint. Everything outside the band is fully transparent: no envelope, no flap, no brooch, no pin. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: tek yatay bant (x %6–94 / y %57–75), iki uç arkaya kıvrık; vellum yarı saydam (gerçek kısmi alfa); gümüş gravür panorama, ortası sakin; zarf/broş çizilmemiş. Vellum opak gelirse kabul, saydamlığı site verir (CSS opaklık) — not et.
+Kullanım: tema kurulunca aynı zarf tuvalinde tam tuval katman; açılışta broş kalktıktan sonra aşağı kayarak zarftan çıkar ve söner.
+
+#### W8 Dövme altın hilal broş
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/moon_brooch.png` · 600×600 · **Şeffaf zemin**
+
+```
+A single brooch in the shape of a slender crescent moon, seen perfectly straight from the front, on a fully transparent background, centred and filling about 78% of the canvas: hand-hammered champagne gold (#C7A978, bright soft highlights toward #E0C7A4, deeper tones toward a warm antique gold) with a fine faceted hammer texture over its whole surface, a slim raised polished rim along both curves, the crescent opening toward the upper right, and three tiny round champagne-gold beads set along its inner curve like small stars. The polished rim catches the cool moonlight from the top-left with crisp highlights and a faint warm reflection from the lower right. No face on the moon, no pin visible from the front, no gemstones of other colours, no chain, no ribbon. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: tek hilal broş, dövme doku, ince parlak kenar, iç kavste üç küçük boncuk; yüz/yazı/taş yok; gerçek alfa.
+Kullanım: tema kurulunca zarfta (%50, %66), genişliği tuval eninin %22'si; açılışta parlayıp kalkar, ekranın üstüne süzülür ve home'un üstünde "ay" olarak kalır; imzada küçük.
+
+#### W9 Zarftaki kart (boş)
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/card_small.png` · 1000×1400 · **Şeffaf zemin**
+
+```
+A flat portrait invitation card, alone, seen straight on, on a fully transparent background: the thick warm ivory laid card of ivory_laid.png (#F1E4CC) spanning x 7–93% and y 6–94% of the canvas, with a softly deckled edge on all four sides gilded with a fine champagne-gold edge (#C7A978), and a hair-fine champagne-gold rule inset about 6% from the card's edge. At the top centre, inside the rule, a small engraved vignette in fine gold line only (no fill): a slender crescent moon above a few gentle ripple lines, about 18% of the card's width. Below it the whole card is EMPTY paper (the website sets the names, date and venue there in HTML). Soft cool moonlight from the top-left, a hair-fine contact shade on the card's own edge only. No flowers, no photo, no other ornament. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: boş fildişi laid kart, deckle + altın kenar, ince altın iç çizgi; üst ortada küçük hilal + dalga gravürü; altı boş; gerçek alfa.
+Kullanım: tema kurulunca alfa kutusuna kırpılır → zarftan yükselen kart ve home kartının zemini (isimler, tarih, mekân HTML).
+
+#### W10 Kemerli villa penceresi (home portresi)
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/window_frame.png` · 1000×1300 · **Şeffaf zemin**
+
+```
+An arched villa window frame in gilded wrought iron, alone, seen perfectly straight on, on a fully transparent background: a slender frame of black wrought iron (#11120F) finished with soft champagne-gold leaf (#C7A978) on its raised mouldings, with a round-arched top, fine scrolling ironwork in the spandrels around the arch, a small leaf finial at the top centre, and below the window a small curved wrought-iron balcony railing with gilded balusters. The whole object spans about x 6–94% and y 5–95% of the canvas. In the middle a portrait photo window whose outline is a rectangle with a full semicircular arched top: its bounding box is exactly 720 px wide and 900 px tall, its top-left corner at x 140 px, y 180 px (the semicircle has a radius of 360 px and forms the top of the window, the sides below it are straight); the window is filled with flat pure green #00FF00 (no texture, no shading, clean edges, nothing over it — no glazing bars, no glass, no reflection). The balcony railing sits entirely below the window (between y 1110 px and y 1230 px). Soft cool moonlight from the top-left with crisp gold highlights, a faint warm reflection from the lower right. No flowers, no curtains. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: pencere düz `#00FF00`, kemerli üst, kutusu 720×900 (4:5), sol üst (140, 180); ferforje + altın varak; balkon pencerenin altında; pencerenin üstünde kayıt/cam yok; gerçek alfa.
+Kullanım: tema kurulunca yeşil pencere ölçülür (kemer maskesi yeşilin kendisinden) ve şeffaf yapılır → home kartındaki ana portre; imzada küçük.
+
+#### W11 Ferforje dikdörtgen pencere (story çerçevesi)
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/story_frame.png` · 1000×1250 · **Şeffaf zemin**
+
+```
+A rectangular villa window frame, alone, seen perfectly straight on, on a fully transparent background: a deep moulded frame of black lacquered wood and wrought iron (#11120F) with soft champagne-gold leaf (#C7A978) on its inner bead and outer moulding, a small carved stone-coloured sill along the bottom, and two small gilded shutter hinges on each side of the frame's outer edge (left and right, for shutters that open outward). The frame's outer edge spans about x 6–94% and y 6–94% of the canvas. In the middle a portrait photo window exactly 760 px wide and 950 px tall (4:5), its top-left corner at x 120 px, y 150 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, nothing over it — no glazing bars, no glass, no reflection). Soft cool moonlight from the top-left with crisp gold highlights, a faint warm reflection from the lower right. No shutters drawn (they are separate), no curtains, no flowers. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: pencere düz `#00FF00`, 760×950 (4:5), sol üst (120, 150); siyah lake + altın varak, iki yanda menteşe; panjur/cam yok; gerçek alfa.
+Kullanım: tema kurulunca pencere ölçülür ve şeffaf yapılır → story'deki üç an (sol–sağ–sol) ve home'daki hikâye tanıtımı; önünde W12 panjurlar.
+
+#### W12 Kömür lake panjurlar — iki ayrı dosya (story çerçevesinin önünde, kapalı)
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/shutter_left.png` ve `shutter_right.png` · her biri 1000×1250 · **Şeffaf zemin**
+
+```
+On the same 1000×1250 canvas as story_frame.png, in exactly the same place (the frame itself is NOT drawn here), ONE closed window shutter, alone, seen perfectly straight on, on a fully transparent background: a tall wooden louvered shutter lacquered in deep charcoal (#1C1D15) with a soft satin sheen, narrow horizontal louvres in a raised outer frame, a fine champagne-gold edge line (#C7A978) and two small gilded hinge knuckles on its outer edge. Make TWO files, identical in style and light: shutter_left.png — the left shutter, covering exactly x 12–50% and y 12–88% of the canvas, its hinges on its LEFT edge; shutter_right.png — the right shutter, covering exactly x 50–88% and y 12–88% of the canvas, its hinges on its RIGHT edge. Side by side they close the window completely and meet in a straight vertical seam at x 50%. Soft cool moonlight from the top-left, a faint warm reflection from the lower right. No frame, no window, no handle, no flowers. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: iki dosya; sol panjur x %12–50, sağ x %50–88, ikisi y %12–88; menteşeler dış kenarda; yan yana pencereyi tam kapatır (orta dikiş x %50); çerçeve çizilmemiş; gerçek alfa.
+Kullanım: tema kurulunca story çerçevesinin önünde; kaydırmayla dış menteşelerinde 3B açılır (rotateY), arkadan foto mum sıcaklığından netleşir.
+
+#### W13 Korkuluklu teras çerçevesi (mekân fotoğrafı)
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/terrace_frame.png` · 1600×1000 · **Şeffaf zemin**
+
+```
+A wide landscape frame like the view from a villa terrace, alone, seen straight on, on a fully transparent background: a slim moulded frame of black wrought iron with soft champagne-gold leaf (#C7A978) on its inner bead, and across the whole bottom of the object a low carved pale stone balustrade (warm grey stone, softly worn, a row of rounded balusters under a flat handrail) with a small brass candle lantern standing at each end of the handrail, unlit. The object spans about x 6–94% and y 6–94% of the canvas. Above the balustrade a landscape photo window exactly 1360 px wide and 765 px tall (16:9), its top-left corner at x 120 px, y 90 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, nothing over it); the balustrade sits entirely below the window (between y 870 px and y 940 px) and the lanterns never overlap the window. Soft cool moonlight from the top-left with crisp gold highlights, a faint warm reflection from the lower right. No flowers, no plants. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: pencere düz `#00FF00`, 1360×765 (16:9), sol üst (120, 90); altta taş korkuluk + iki sönük fener, pencereye binmiyor; gerçek alfa.
+Kullanım: tema kurulunca pencere ölçülür ve şeffaf yapılır → details'te mekân fotoğrafı; fenerlerin üstüne CSS ile çok hafif ılık titreme.
+
+#### W14 Yağlı boya gece gölü bandı (home üst bandı)
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/nocturne_band.png` · 1920×900 · opak
+
+```
+A wide, quiet oil painting of an invented mountain lake near midnight, in the same style, palette and light as the lining of env_back.png and the sky of flap_in.png: the top 40% is a calm, deep night sky (#11120F to #2A2E33) with a few faint stars and soft clouds edged in silver by a hidden moon, with NO moon disc and nothing busy (a gold crescent will be placed there by the website); across the middle the dark layered silhouettes of mountains and, on the far shore slightly right of centre, a small invented villa with a stone terrace, slender cypresses and a few warm champagne-gold windows and candle lights; the lower part is the calm lake with long soft golden reflections and a broken path of pale moonlight down the centre. Rich, soft brushwork, deep and serene, like a fine small oil painting. The bottom 15% is calm dark water that can fade into the page. No people, no boats in the foreground, no text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: üst %40 sakin gök, ay diski yok; ortada dağlar + küçük villa ışıkları; altta göl ve ay yolu; alt %15 sakin koyu su; yazı yok.
+Kullanım: tema kurulunca home'un en üst bandı (altı sayfa zeminine söner, üstünde broş "ay"); details ve rsvp başlıklarında dar kırpım.
+
+#### W15 Köşe süsü (beyaz bahçe gülü + zeytin dalı)
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/corner_spray.png` · 1200×1000 · **Şeffaf zemin**
+
+```
+A restrained, romantic corner spray growing out from near the top-left corner toward the centre, alone, on a fully transparent background, photorealistic: two white-ivory garden roses (#F1E4CC, soft layered petals with a faint champagne blush in their hearts), one half-open bud, a few slender sprigs of silvery-green olive leaves, and two or three tiny champagne-gold leaves; the stems are hidden among the leaves. It reaches toward the top and left sides of the image but stays 6% inside them, and the bottom-right half of the canvas is completely empty. Soft cool moonlight from the top-left, a faint warm glow on the petals from the lower right. No other flowers or colours, no ribbon, no vase, no glitter. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: küçük, sade küme sol üstten; sağ alt yarı boş; yalnız beyaz gül + zeytin + birkaç altın yaprak; gerçek alfa.
+Kullanım: tema kurulunca home kartının üst köşeleri (sağda aynalanır), RSVP formunun köşesi; kapak sayfasında **kullanılmaz** (metnin altına girmez).
+
+#### W16 Zeytin dalı ayırıcı (altın)
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/divider.png` · 1600×200 · **Şeffaf zemin**
+
+```
+A slim horizontal divider, alone, on a fully transparent background: two delicate champagne-gold olive branches (#C7A978, fine engraved gilded metal, small slender leaves) growing from the centre outward to the left and to the right along the vertical centre line, tapering to fine tips at about 8% and 92% of the canvas width, and at the very centre a tiny gilded crescent moon about 4% of the canvas width. Symmetrical, elegant, fine. Soft cool moonlight from the top-left with small crisp highlights. No ribbon, no beads, no other colour. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: yatay simetrik iki altın zeytin dalı + ortada küçük hilal; uçlar %8–92; gerçek alfa.
+Kullanım: tema kurulunca başlıkların altında bölüm ayırıcı (home davet bandı ve gün özeti, details programı, RSVP formu).
+
+#### W17 Cam fener içinde mum (imza)
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/candle_lantern.png` · 500×800 · **Şeffaf zemin**
+
+```
+A single small hurricane lantern, standing upright, alone, seen from the front, on a fully transparent background: a slender clear glass chimney on a round antique-brass base with a fine champagne-gold rim, a small brass ring handle on top, and inside it one short ivory pillar candle (#F1E4CC) with a small calm lit flame. The glass is truly see-through (real alpha in the clear glass), shown only by crisp edge highlights and a faint reflection of the flame; the warm light of the flame stays INSIDE the glass (a soft gold warmth on the inner glass and the candle top), nothing outside the lantern. The lantern spans about x 22–78% and y 8–92% of the canvas. Soft cool moonlight from the top-left on the brass and glass. No table, no flowers, no smoke. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: tek fener, cam saydam, içinde yanan küçük mum; ışık camın içinde kalıyor; gerçek alfa.
+Kullanım: tema kurulunca home imzası ve RSVP kapanışı; alevin üstünde CSS ile hafif titreme (ölçek/opaklık); RSVP gönderilince alev büyür.
+
+#### W18 Süzülen küçük nesneler — üç ayrı dosya
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/accent_1.png`, `accent_2.png`, `accent_3.png` · her biri 512×512 · **Şeffaf zemin**
+
+```
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft cool moonlight from the top-left with a faint warm glow from the lower right. No other object. No cast shadow or drop shadow outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. (Make three files, the same light and scale: 1 = one small irregular flake of champagne-gold leaf (#C7A978), thin, slightly crumpled, catching the light; 2 = one single loose white-ivory garden rose petal (#F1E4CC), softly cupped, a faint champagne blush at its base; 3 = one tiny warm spark of candlelight — a small soft round point of champagne-gold light (#E0C7A4 at its bright centre) fading smoothly to fully transparent at its edge, like a firefly or a reflected candle glint, the light itself being the object.)
+```
+Kontrol: her dosyada tek nesne; üç dosya farklı (altın varak pulu, gül yaprağı, ışık kıvılcımı); kıvılcım kenarda tam şeffafa söner; gerçek alfa.
+Kullanım: tema kurulunca açılışın sonunda ve RSVP gönderilince süzülen küçük nesneler (her biri ayrı katman, kendi fazında); kıvılcım kapak sayfasında da çok seyrek.
+
+#### W19 Website hero + paylaşım görseli (og:image kaynağı)
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/web_hero.png` · 1536×1024 · opak
+
+```
+Wide horizontal still life, photorealistic luxury stationery product photography by moonlight and candlelight: the closed portrait charcoal-black laid paper envelope of flap.png with its deep elongated-diamond flap edged in deckled champagne-gold foil, wrapped by the frosted vellum belly band of vellum_band.png with its fine silver lake-panorama engraving and the hammered gold crescent-moon brooch of moon_brooch.png pinned at its centre, lying slightly below the centre on the charcoal laid paper of night_laid.png; at the left a small spray of white-ivory garden roses and silvery olive sprigs (as corner_spray.png); at the right the small hurricane lantern of candle_lantern.png with its lit candle and a narrow champagne silk ribbon lying loosely; a few tiny gold-leaf flakes scattered; behind, softly out of focus, the dark paper and a faint warm candle glow. Only black, charcoal, champagne, gold and ivory tones. The top 20% of the image is calm and dark (only out-of-focus paper). This image is cropped to 1200×630 for link previews: keep the whole envelope, band and brooch visible with at least 5% empty margin below it. No people. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: zarf + bant + broş bütün, altında ≥%5 boşluk; üst %20 sakin; yazı yok.
+Kullanım: tema kurulunca `og-1200x630.jpg` (alta hizalı kırpım: üstten ~%21) ve katalog kapağı posteri.
 
 ---
 
-## PAKET 2 — Örnek fotoğraflar (kurgu çift Eleanor & Luca; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+## PAKET 2 — Örnek fotoğraflar (kurgu çift Eleanor & Luca; gerçek kişiye benzemesin) — var, yeniden üretme
 
 #### 2.1 Ana portre
 **Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/photos/hero_portrait.jpg` · Dikey (1024×1280, 4:5)
@@ -133,35 +285,44 @@ Landscape 16:9: an elegant lakeside villa with a stone balustrade terrace and cy
 
 ---
 
-## PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
+## PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm)
 
-> **Neden yeniden yazıldı (2026-10-20):** website 18–19 Ekim'de fildişi kâğıt + köşe çiçekleri görünümüne geçti; eski baskı prompt'ları eski görünümü (ve artık olmayan PAKET 5 parçalarını) istiyordu. `platform/lib/print/layouts.ts` `'nocturne-lake-estate'` bloğunun geçici kaynakları yeniden kurulumda `img/`'den silindi: panel şu an `public/print/nocturne-lake-estate/`'deki eski çıktıyı (eski görünüm) basıyor ve `build-print-assets` bu tema için yeniden koşamaz. Bu zeminler gelince:
-> Platform her yüz için **tek** zemin kullanır ve onu taşma payıyla `cover` olarak yayar (5×7 ve A5 aynı zeminden).
-> 1. `layouts.ts` `'nocturne-lake-estate'` bloğunda `sources` → bu zeminler (`print/invitation_front.png` + `print/invitation_back.png`), `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }`.
-> 2. Zemin artık **açık fildişi**: `ink` / `accent` koyu tonlara (temanın site metin rengi) alınır; açık mürekkep kalmaz.
-> 3. Metin kutuları (`front` / `back`) gerçek görselde ölçülür (G149; süsten ~%2 açıklık), `node --test tests/g149-print-layout.test.ts`.
-> 4. `cd platform && node scripts/build-print-assets.ts --theme nocturne-lake-estate`; `public/print/nocturne-lake-estate/`'deki artık kaynak olmayan eski dosyalar silinir; 5×7 ve A5 örnek PDF'ine göz atılır.
-> Ek görsel (her iki yüz için sohbetin başında): `platform/themes/nocturne-lake-estate/img/bg_scene-1024.webp`.
+> Panelden indirilen basılı davetiye (`platform/lib/print/layouts.ts`, `'nocturne-lake-estate'` bloğu). Eski zeminler
+> (`print/invitation_front.png`, `print/invitation_back.png`) eski görünümündü; yeni görünüm için **yeni dosya adları**.
+> **Dosya adı ve ölçü:** `print/invitation_front_r_5x7.png`, `print/invitation_back_r_5x7.png`, **1575×2175 px** = 5×7 in +
+> 1/8 in taşma, 300 ppi. Ayrı A5 dosyası istenmez: A5 + 3 mm taşma (154×216 mm, oran 0,713) aynı sayfadan yanlardan ~%0,8
+> kırpılarak basılır (~260 ppi). Bu yüzden önemli hiçbir şey yan kenarların %8'ine girmez.
+> **Kâğıt açık fildişi** (ev yazıcısında mürekkep dostu; metin koyu kömür basılır), koyu gece dili yalnız alt bantta.
+> **Yazı alanı:** ön yüzde yükseklikte %19–%78 × genişlikte %10–%90 **tamamen boş** (isimler, tarih, mekân); arka yüzde
+> yükseklikte %13–%93, genişlikte %9–%91 boş (program + QR; QR'ı GPT çizmez, `tools/make_qr.py` gerçek URL'den üretir).
+> Süsleme yalnız üst ve alt bantlarda.
+>
+> **Gelince (elle, tek blok; otomatik değil — G149: kutular gerçek görselde ölçülür):**
+> 1. Tema kurulunca (G422) `layouts.ts` `'nocturne-lake-estate'` bloğu: `sources` → `{ front:
+>    'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' }`; `composed` → `{ front: { bg:
+>    cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }`; `ink` / `accent` koyu kömür + altın.
+> 2. Kutuları görselde ölç (süslemenin ~%2 dışında kalsın; `tests/g149-print-layout.test.ts`).
+> 3. `cd platform && node scripts/build-print-assets.ts --theme nocturne-lake-estate` (eski kaynaklardan kalan
+>    `public/print/nocturne-lake-estate/` dosyaları silinir) ve `node scripts/print-sample.ts --theme nocturne-lake-estate
+>    --invite 5x7 --bleed` + `--invite a5 --bleed` ile iki boyutu göz kontrolü.
 
-#### P6.1 Ön yüz
-**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/print/invitation_front.png` · 1819×2551 px (300 ppi), opak
-
+#### P1 — Ön yüz
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/print/invitation_front_r_5x7.png` · 1575×2175 · opak
 ```
-A full-bleed printable wedding invitation ground for the "Nocturne Lake Estate" design, front side, portrait, seen perfectly flat and straight on, 1819 × 2551 px at 300 ppi (it is trimmed later). Match the attached website background (bg_scene-1024.webp) exactly in style: the same warm ivory, softly textured stationery paper running edge to edge and the same midnight charcoal, champagne gold, ivory garden roses and lake Como cypress foliage, softly reflected moonlight across a distant Italian lake, in the same photorealistic stationery-photography finish with soft light from the top-left. Place the decoration ONLY in two places: an abundant arrangement gathered at the top-left corner and trailing along the top edge, staying entirely within the top 16% of the height, and a smaller matching arrangement gathered at the bottom-right corner, staying entirely within the bottom 14% of the height. A very fine antique-gold foil hairline frame inset about 6% from every edge. Keep every ornament at least 4% inside the image edges. The whole rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm ivory paper (the names, date and venue are printed there in dark ink): no petal, leaf, line, shadow or stain in it. No envelope, no card, no frame object, no people. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1819 × 2551 px.
+The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the thick warm ivory laid card of ivory_laid.png (#F1E4CC). At the top centre, between 8% and 15% of the height, a small hammered champagne-gold crescent moon (as moon_brooch.png, printed flat as a fine gold illustration) above a short pair of fine gold olive branches (as divider.png), about 30% of the width. Along the bottom, from 82% of the height down to the bottom edge, a full-width band of the oil-painted night lake of nocturne_band.png — dark mountains, a tiny villa with warm gold windows, cypresses and a path of moonlight on the water — whose top edge is a soft, slightly irregular painted edge fading into the ivory paper (no hard line), with a hair-fine champagne-gold rule just above it at 81% of the height between 12% and 88% of the width. The rectangle from 19% to 78% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm paper (the names, date and venue are set there in dark ink): no petal, no line, no shadow, no stain in it. No ornament within 8% of the left and right edges except the painted band, which simply runs off the edges. Soft cool light from the top-left. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
 ```
-Kontrol: tam taşma fildişi kâğıt (site zeminiyle aynı); çiçekler yalnız üst %16 (sol üst) ve alt %14 (sağ alt); %18–84 yükseklik × %10–90 genişlik tamamen boş; ince altın çerçeve; yazı yok; 1819×2551.
+Kontrol: tam taşma; %19–%78 × %10–%90 tamamen boş; üstte küçük altın hilal + zeytin (%15'in üstünde); altta %82'den itibaren yağlı boya göl bandı, yumuşak geçiş; yazı yok.
 
-#### P6.2 Arka yüz
-**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/print/invitation_back.png` · 1819×2551 px (300 ppi), opak
-
+#### P2 — Arka yüz
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/print/invitation_back_r_5x7.png` · 1575×2175 · opak
 ```
-The back side of the same "Nocturne Lake Estate" invitation (give invitation_front.png as the reference image): portrait, full bleed, perfectly flat, 1819 × 2551 px at 300 ppi, the same warm ivory stationery paper edge to edge and the same very fine antique-gold foil hairline frame inset about 6% from every edge. Decoration ONLY a slim spray of the same flowers and foliage centred along the top edge, staying entirely within the top 11% of the height and at least 4% inside the image edges. Everything from 13% to 92% of the height and from 10% to 90% of the width is COMPLETELY EMPTY paper for the schedule, the details and a QR code: no petal, line, shadow or stain. Same style, colors and light. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1819 × 2551 px.
+The back of the same printed wedding invitation, full bleed, portrait 5.25:7.25, perfectly flat: the same thick warm ivory laid card, only a short pair of fine champagne-gold olive branches with a tiny gold crescent at their centre across the top centre (between 32% and 68% of the width), staying above 11% of the height, and a very slim strip of the same oil-painted night lake along the very bottom edge (below 95% of the height, fading softly upward into the paper). The whole area between 13% and 93% of the height, from 9% to 91% of the width, is COMPLETELY EMPTY paper (a schedule and a QR code are set there): no line, no shadow, no stain. No ornament within 8% of the left and right edges except the bottom strip. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
 ```
-Kontrol: ön yüzle aynı kâğıt ve çerçeve; çiçek yalnız üst %11'de ince dal; %13–92 × %10–90 boş; yazı yok; 1819×2551.
+Kontrol: ön yüzle aynı kâğıt; üst ortada kısa altın zeytin + hilal (%11'in üstünde), en altta ince göl şeridi (%95'in altı); %13–%93 boş; yazı/QR yok.
 
 ---
 
-## PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
+## PAKET 3 — Etsy ilan sahneleri (görev G175) — GEÇERSİZ (2026-10-22: yeniden tasarım; tema kurulunca yeniden yazılacak)
 
 > Yeni (2026-10-14): kullanıcı ilan görsellerinin çok daha etkileyici ve profesyonel olmasını istedi. Bu sahneler ilan
 > görsellerinin zeminidir. Ekranlar **düz #00FF00**; Claude gerçek site ekranlarını perspektifle oraya yerleştirir
