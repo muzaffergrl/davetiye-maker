@@ -557,6 +557,18 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     ink: '#7A1E2C', accent: '#5A4446', front: [19,  13,  14,  13], back: [15,  12,  10,  12],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
+  // 47 (G447, 2026-10-22): the design's own PAKET 6 grounds (white fibre paper; front: a strip of negative with two anemones
+  // across the top, a row of sprocket holes at the foot; back: a short strip of negative at the top), one per side,
+  // `cover` for 5×7 and A5. Ornament measured on the art: front 5–18 % and 93–94 % of the height, back 4–13 %; the boxes
+  // sit inside the empty area (G149).
+  'monochrome-darkroom': {
+    collection: '47_Monochrome_Darkroom',
+    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
+    fonts: gf('family=Herr+Von+Muellerhoff&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400'),
+    script: "'Herr Von Muellerhoff', cursive", serif: "'Newsreader', Georgia, serif",
+    ink: '#161616', accent: '#5A5A5A', front: [23,  13,  10,  13], back: [17,  12,  10,  12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
+  },
 };
 
 export function printLayout(themeId: string): PrintLayout | null {

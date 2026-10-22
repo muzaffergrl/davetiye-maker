@@ -141,6 +141,13 @@
       "story_3": "/demo/midnight-garden/story_3-1024w.webp",
       "venue": "/demo/midnight-garden/venue-1280w.webp"
     },
+    "monochrome-darkroom": {
+      "hero_portrait": "/demo/monochrome-darkroom/hero_portrait-1050w.webp",
+      "story_1": "/demo/monochrome-darkroom/story_1-1050w.webp",
+      "story_2": "/demo/monochrome-darkroom/story_2-1050w.webp",
+      "story_3": "/demo/monochrome-darkroom/story_3-1050w.webp",
+      "venue": "/demo/monochrome-darkroom/venue-1280w.webp"
+    },
     "music-box-ballerina": {
       "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
       "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",

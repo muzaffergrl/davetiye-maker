@@ -1,0 +1,122 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Simone",
+      "full_name": "Simone Adele Lacroix"
+    },
+    {
+      "display_name": "Elliot",
+      "full_name": "Elliot James Whitford"
+    }
+  ],
+  "name_display": "Simone & Elliot",
+  "initials": "S&E",
+  "host_line": "Together with their families",
+  "date": "2027-07-24",
+  "ceremony_time": "18:00",
+  "timezone": "America/Chicago",
+  "venue": {
+    "name": "The Atwater Gallery",
+    "city": "Minneapolis",
+    "region": "Minnesota",
+    "country": "United States",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "18:00",
+      "location": "The north gallery"
+    },
+    {
+      "label": "Cocktails",
+      "time": "18:45",
+      "location": "The print room"
+    },
+    {
+      "label": "Dinner",
+      "time": "19:30",
+      "location": "The long hall"
+    },
+    {
+      "label": "Dancing",
+      "time": "21:00",
+      "location": "The loft"
+    }
+  ],
+  "dress_code": "Black and white formal",
+  "rsvp": {
+    "deadline": "2027-06-19",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Fish",
+          "Chicken"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "A first roll of film, many rainy afternoons and one ring led us to",
+    "items": [
+      {
+        "caption": "Our first roll of film"
+      },
+      {
+        "caption": "Rainy afternoons"
+      },
+      {
+        "caption": "Developing forever"
+      }
+    ]
+  },
+  "audio": {
+    "music": "first-light",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony."
+    },
+    {
+      "q": "May we take photos during the ceremony?",
+      "a": "We would love an unplugged ceremony, so please keep cameras and phones away until cocktails. After that, shoot as many frames as you like."
+    }
+  ]
+}

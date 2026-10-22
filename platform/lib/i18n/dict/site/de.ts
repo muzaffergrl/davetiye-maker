@@ -322,6 +322,8 @@ const dict: Dict = {
   "Let love bloom": "Lass die Liebe erblühen",
   // G446 Bordeaux Silk Bow (46, coming)
   "Tied with love": "Mit Liebe gebunden",
+  // G447 Monochrome Darkroom (47, coming)
+  "Love in black and white": "Liebe in Schwarz-Weiß",
 };
 
 export default dict;

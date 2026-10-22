@@ -33,10 +33,11 @@ const COMING_OPENINGS: Record<string, string> = {
   'swan-chantilly-lace': 'envelope',
   'chartreuse-garden-party': 'envelope',
   'bordeaux-silk-bow': 'envelope',
+  'monochrome-darkroom': 'envelope',
 };
 
 test('G175: every configured design has an opening object, and the panel tab is named after it', () => {
-  assert.equal(MARKETING.designs.length, 42);
+  assert.equal(MARKETING.designs.length, 43);
   for (const d of MARKETING.designs) {
     const copy = DESIGN_COPY[d.id];
     assert.ok(copy, `${d.id}: no sales copy in lib/marketing/designs.ts`);

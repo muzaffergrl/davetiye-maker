@@ -532,6 +532,12 @@ EK_TEMALAR = [
          dekor="Bordo saten fiyonklar (büyük/küçük), sayfa kenarından akan kurdele (düz + S kıvrımı), beyaz laleler, fildişi keten ve hare ipek, yumuşak altın kıl çizgi", teknik="fotogerçekçi saten / keten stüdyo natürmortu",
          font=("Carattere", "Brygada 1918"), palet_adi="claret-ivory-silk",
          hareket="Fiyonkun ilmek ilmek çözülmesi, düz kurdelenin kapak deliğinden yukarı çekilmesi, kurdelenin ekran ve sayfa kenarından aşağı akması (bölüm bölüm kaydırmayla), düz kapağın 3B açılışı, anı destesinin kurdelesinin gevşeyip baskıların yelpaze gibi açılması, program satırlarında kendiliğinden bağlanan küçük fiyonk, yanıtta yeniden bağlanan fiyonk ve lale yaprağı yağmuru."),
+    dict(no=47, klasor="47_Monochrome_Darkroom", ad="Monochrome Darkroom",
+         zarf="Dikey mat siyah ışık geçirmez fotoğraf kâğıdı zarfı, içe sokulan (tuck) düz kapak, mühür yok; kapağın cebe girdiği yerden kıvrılarak çıkan gevşek bir 35 mm negatif film halkası. Halka, çiftin fotoğraflarının negatifinden bir şerit olarak ekran boyunca akar, tuck kapak cepten çıkıp 3B açılır, ekran kırmızı güvenlik ışığına döner, kart bir banyo tepsisinde boş beyazdan belirir, ışık normale döner.",
+         foto="Beyaz kenarlı parlak lifli (fiber) siyah-beyaz baskılar: sahnesine gelince negatiften pozitife döner; story'de 35 mm kontak şeridi ve parmağı izleyen cam lup (mercekte büyütülmüş kare).",
+         dekor="35 mm negatif şeritler, yazısız film kutusu, cam lup, banyo tepsisi, siyah göbekli beyaz anemonlar, ince siyah saten kurdele, siyah fotoğraf kâğıdı, sıcak beyaz lifli kâğıt", teknik="siyah-beyaz analog film fotoğrafçılığı (gümüş jelatin) + fotogerçekçi nesneler",
+         font=("Herr Von Muellerhoff", "Newsreader"), palet_adi="noir-silver-safelight",
+         hareket="Film halkasının açılıp negatif şerit olarak ekran boyunca akması, tuck kapağın cepten çıkıp 3B açılması, kırmızı güvenlik ışığında banyo tepsisinde beliren kart, home üstünde yavaşça akan negatif şeridi, negatiften pozitife dönen baskılar, parmağı izleyen lup, yanıtta kare kare kapanıp açılan deklanşör perdesi."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

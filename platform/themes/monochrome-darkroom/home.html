@@ -1,0 +1,159 @@
+<!doctype html>
+<!-- Monochrome Darkroom · page 2 — home (/<slug>/home). On matte black photographic paper: along the top the strip
+     of negatives from the opening rolls on slowly (GPT W8 frames, the couple's photos inverted); the card from the
+     envelope (view transition invite-card) on warm white fibre paper with white anemones at two corners: the portrait as
+     a glossy fibre print, the names in the fine script, the date and the venue. The invitation on fibre paper under a
+     short strip of negative (full names, the date in three lines, venue, reply), countdown and calendar; the story teaser
+     — a print that comes in as a negative and turns positive; the day under the red of the safelight; the signature by
+     the film canister. Personal text: none — filled on the server. Thank-you mode (G075): the invitation becomes the
+     thank-you card; countdown, reply call and calendar go. Design texts: data-copy (G068). -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#121212">
+<title data-text="{name_display} · {copy.card_line}">Monochrome Darkroom</title>
+<meta name="description" data-if="!thank_you_on" data-attr-content="{copy.card_line} · {name_display} · {date|date-long} · {venue.city_region}" content="A wedding invitation">
+<meta name="description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {name_display} · {date|date-long}" content="Thank you">
+<meta property="og:type" content="website">
+<meta property="og:title" data-attr-content="{name_display} · {date}" content="Wedding invitation">
+<meta property="og:description" data-if="!thank_you_on" data-attr-content="{copy.card_line} · {date|date-long} · {venue.city_region}" content="Our wedding">
+<meta property="og:description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {date|date-long}" content="Thank you">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+<style>/* names fallback: scripts/font-fallback.ts */
+@font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:94.2%;ascent-override:106.2%;descent-override:40.3%;line-gap-override:0%}
+@font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:81%;ascent-override:123.5%;descent-override:46.9%;line-gap-override:0%}</style>
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
+<script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
+(function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'',s=sessionStorage;if(s.getItem('invite:arrive'+k)){s.removeItem('invite:arrive'+k);r.classList.add('from-envelope');if(!('onpageswap' in window&&document.startViewTransition))r.classList.add('arrive-fade');}}catch(e){}})(document.documentElement);
+</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-home" data-pending="This link will be added soon.">
+<main>
+<div class="film-run" aria-hidden="true">
+  <div class="roll">
+    <span class="frame film neg"><span class="photo-slot" data-slot="hero_portrait"><img data-photo="hero_portrait" src="img/ph_frame-640.webp" alt="" sizes="132px" loading="lazy"></span><span class="cut" aria-hidden="true"></span></span>
+    <span class="frame film neg"><span class="photo-slot" data-slot="story_1"><img data-photo="story_1" src="img/ph_frame-640.webp" alt="" sizes="132px" loading="lazy"></span><span class="cut" aria-hidden="true"></span></span>
+    <span class="frame film neg"><span class="photo-slot" data-slot="story_2"><img data-photo="story_2" src="img/ph_frame-640.webp" alt="" sizes="132px" loading="lazy"></span><span class="cut" aria-hidden="true"></span></span>
+    <span class="frame film neg"><span class="photo-slot" data-slot="story_3"><img data-photo="story_3" src="img/ph_frame-640.webp" alt="" sizes="132px" loading="lazy"></span><span class="cut" aria-hidden="true"></span></span>
+    <span class="frame film neg"><span class="photo-slot" data-slot="hero_portrait"><img data-photo="hero_portrait" src="img/ph_frame-640.webp" alt="" sizes="132px" loading="lazy"></span><span class="cut" aria-hidden="true"></span></span>
+    <span class="frame film neg"><span class="photo-slot" data-slot="story_1"><img data-photo="story_1" src="img/ph_frame-640.webp" alt="" sizes="132px" loading="lazy"></span><span class="cut" aria-hidden="true"></span></span>
+    <span class="frame film neg"><span class="photo-slot" data-slot="story_2"><img data-photo="story_2" src="img/ph_frame-640.webp" alt="" sizes="132px" loading="lazy"></span><span class="cut" aria-hidden="true"></span></span>
+    <span class="frame film neg"><span class="photo-slot" data-slot="story_3"><img data-photo="story_3" src="img/ph_frame-640.webp" alt="" sizes="132px" loading="lazy"></span><span class="cut" aria-hidden="true"></span></span>
+  </div>
+</div>
+
+<section class="hero" data-scene="home-hero">
+  <div class="hero-card paper">
+    <span class="anemones an-1" aria-hidden="true"></span>
+    <span class="anemones an-2" aria-hidden="true"></span>
+    <div class="frame print hero-photo" data-if="!thank_you_on" data-step="photo">
+      <div class="photo-slot" data-slot="hero_portrait">
+        <img data-photo="hero_portrait" src="img/ph_portrait-640.webp" alt="" data-attr-alt="Photo of {name_display}" sizes="min(48vw, 220px)" fetchpriority="high">
+        <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+      </div>
+      <span class="cut" aria-hidden="true"></span>
+    </div>
+    <div class="frame print hero-photo" data-if="thank_you_on thank_you.photo" data-step="photo">
+      <div class="photo-slot">
+        <img data-field="thank_you.photo" src="img/ph_portrait-640.webp" alt="" data-attr-alt="Photo of {name_display}" sizes="min(48vw, 220px)">
+      </div>
+      <span class="cut" aria-hidden="true"></span>
+    </div>
+    <p class="eyebrow" data-if="!thank_you_on" data-copy="card_line" data-step="line">Our wedding</p>
+    <p class="eyebrow" data-if="thank_you_on" data-field="thank_you_title" data-step="line"></p>
+    <h1 class="names" data-fit data-step="names"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></h1>
+    <p class="hero-date" data-step="date"><span data-field="date" data-format="weekday"></span>, <span class="nowrap" data-field="date"></span></p>
+    <p class="hero-venue" data-step="venue"><span data-field="venue.name"></span><small data-field="venue.city_region"></small></p>
+  </div>
+</section>
+
+<section class="invitation paper-band" id="invitation" data-scene="home-invite">
+  <span class="divider" aria-hidden="true"></span>
+  <div class="invitation-copy" data-if="!thank_you_on">
+    <h2 data-copy="home_intro" data-step="title">Love in black and white</h2>
+    <p class="eyebrow host" data-if="host_line" data-field="host_line" data-step="host"></p>
+    <div class="formal-names" data-step="names">
+      <p data-if="partners.0.full_name" data-field="partners.0.full_name"></p>
+      <p data-if="!partners.0.full_name" data-field="partners.0.display_name"></p>
+      <p class="amp" aria-hidden="true">&amp;</p>
+      <p data-if="partners.1.full_name" data-field="partners.1.full_name"></p>
+      <p data-if="!partners.1.full_name" data-field="partners.1.display_name"></p>
+    </div>
+    <p class="body-text" data-copy="invite_request" data-step="names" data-i="1">request the pleasure of your company at their wedding</p>
+    <div class="date-block" data-step="date">
+      <span data-field="date" data-format="weekday"></span>
+      <b><span data-field="date" data-format="month"></span> <span data-field="date" data-format="day"></span></b>
+      <span data-field="date" data-format="year"></span>
+    </div>
+    <p class="venue-name" data-field="venue.name" data-step="venue"></p>
+    <p class="eyebrow" data-if="ceremony_time" data-step="venue" data-i="1"><span data-copy="invite_at">at</span> <span data-field="ceremony_time"></span></p>
+    <p class="eyebrow" data-field="venue.city_region" data-step="venue" data-i="2"></p>
+    <p data-if="!rsvp.method" data-step="reply"><a class="btn" href="rsvp.html"><span data-copy="rsvp_button">RSVP</span></a></p>
+    <p class="small" data-if="rsvp.deadline !rsvp.method" data-step="reply" data-i="1"><span data-copy="rsvp_by">Kindly reply by</span> <span data-field="rsvp.deadline"></span></p>
+  </div>
+  <div class="invitation-copy thank-you-copy" data-if="thank_you_on">
+    <h2 data-field="thank_you_title" data-step="title"></h2>
+    <p class="body-text" data-if="thank_you.message" data-field="thank_you.message" data-step="names"></p>
+    <p class="love" data-copy="love_line" data-step="date">With love,</p>
+    <p class="venue-name" data-field="name_display" data-step="date" data-i="1"></p>
+    <p class="eyebrow" data-field="date" data-step="venue"></p>
+  </div>
+  <div class="countdown" data-optional="countdown" data-if="countdown_target_utc !thank_you_on" data-countdown role="timer" aria-label="Countdown to the ceremony" data-step="count">
+    <div class="cd-row">
+      <div><span class="cd-num" data-unit="days">–</span><small data-copy="cd_days">Days</small></div>
+      <div><span class="cd-num" data-unit="hours">–</span><small data-copy="cd_hours">Hours</small></div>
+      <div><span class="cd-num" data-unit="minutes">–</span><small data-copy="cd_minutes">Minutes</small></div>
+      <div><span class="cd-num" data-unit="seconds">–</span><small data-copy="cd_seconds">Seconds</small></div>
+    </div>
+    <p class="cd-done" data-when="today" hidden><span data-copy="cd_today">Today is the day — we're celebrating!</span></p>
+    <p class="cd-done" data-when="after" hidden><span data-copy="cd_after">Thank you for celebrating with us.</span></p>
+  </div>
+  <div class="calendar" data-if="!thank_you_on" data-step="calendar">
+    <p data-copy="calendar_title" class="eyebrow">Add to your calendar</p>
+    <div class="button-row">
+      <a class="btn btn-ghost btn-sm" href="#" data-calendar="ics"><span data-copy="calendar_ics">Apple / Outlook</span></a>
+      <a class="btn btn-ghost btn-sm" href="#" data-calendar="google" target="_blank" rel="noopener"><span data-copy="calendar_google">Google</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="teaser" data-optional="our_story" data-scene="home-teasers">
+  <a class="teaser-photo frame print develop" href="story.html" data-step="photo"><span class="photo-slot" data-slot="story_1"><img data-photo="story_1" src="img/ph_portrait-640.webp" alt="" data-attr-alt="{story.items.0.caption}" sizes="min(40vw, 190px)" loading="lazy"><span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span></span><span class="cut" aria-hidden="true"></span></a>
+  <div class="teaser-text">
+    <p class="eyebrow" data-copy="story_kicker" data-step="head">Moments we hold dear</p>
+    <h2 data-copy="story_title" data-step="head" data-i="1">Our Story</h2>
+    <p data-step="link"><a class="textlink" href="story.html"><span data-copy="home_story_cue">Read our story</span> <span aria-hidden="true">→</span></a></p>
+  </div>
+</section>
+
+<section class="day safelight-band" data-if="!thank_you_hides_details" data-scene="home-day">
+  <p class="eyebrow" data-copy="home_location" data-step="head">Join us in</p>
+  <h2 data-field="venue.city" data-step="head" data-i="1"></h2>
+  <ul class="day-peek" data-step="list">
+    <li data-repeat="schedule"><span class="time" data-field=".time"></span> <span data-field=".label"></span></li>
+  </ul>
+  <p data-step="link"><a class="btn btn-light" href="details.html"><span data-copy="day_title">The Day</span> <span aria-hidden="true">→</span></a></p>
+</section>
+
+<footer class="signature" data-scene="home-foot">
+  <span class="canister" aria-hidden="true" data-step="canister"></span>
+  <p class="eyebrow" data-copy="foot_kicker" data-step="names">With love</p>
+  <p class="sig-names" data-field="name_display" data-step="names" data-i="1"></p>
+  <p data-step="links"><a class="textlink" href="index.html?replay=1"><span data-copy="home_replay">Open the invitation again</span></a></p>
+</footer>
+</main>
+<nav class="site-nav" aria-label="Wedding pages">
+  <ul>
+    <li><a href="home.html" aria-current="page"><span data-copy="nav_home">Home</span></a></li>
+    <li data-optional="our_story"><a href="story.html"><span data-copy="nav_story">Story</span></a></li>
+    <li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on" data-copy="nav_details">Details</span><span data-if="thank_you_on" data-copy="nav_day">The Day</span></a></li>
+    <li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>
