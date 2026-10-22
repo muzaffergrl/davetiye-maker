@@ -71,7 +71,7 @@ Anahtarlar ekrana ve `.data/seed-keys.json`'a yazılır (`.data/` git'e girmez).
 `npm run screenshot` geçici bir veri klasörü kullanır; global Playwright (`/opt/node22/lib/node_modules`) ve
 `/opt/pw-browsers` tarayıcılarıyla çalışır, `playwright install` çalıştırmaz.
 
-Ortam değişkenleri: `ADMIN_PASSWORD` (G087: dükkân paneli `/admin`; en az 12 karakter, yoksa panel kapalı; repoya/log'a yazılmaz), `DATA_ADAPTER` (`local` varsayılan; `blob` = Vercel Blob, aşağıda; `supabase` = G043, yok),
+Ortam değişkenleri: `GEMINI_API_KEY` (canlı destek asistanı, `docs/35_CANLI_DESTEK.md`; yoksa sohbet penceresi "hazır değil" ekranını gösterir; isteğe bağlı `GEMINI_MODEL`, `SUPPORT_DAILY_LIMIT`, `SUPPORT_CHAT=off|demo`), `ADMIN_PASSWORD` (G087: dükkân paneli `/admin`; en az 12 karakter, yoksa panel kapalı; repoya/log'a yazılmaz), `DATA_ADAPTER` (`local` varsayılan; `blob` = Vercel Blob, aşağıda; `supabase` = G043, yok),
 `BLOB_READ_WRITE_TOKEN` (yalnız `blob`: **private** Blob deposunun anahtarı; Vercel depo projeye bağlanınca kendisi ekler; repoya
 ve log'a yazılmaz), `PLATFORM_DATA_DIR` (varsayılan `platform/.data`; `blob`'da yalnız seed'in `seed-keys.json`'u),
 `PLATFORM_THEMES_DIR` (varsayılan `platform/themes`), `PLATFORM_PUBLIC_URL` (sitelerin herkese açık kökü, ör. `https://<ad>.vercel.app`;

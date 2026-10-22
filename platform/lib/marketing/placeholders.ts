@@ -90,7 +90,7 @@ export function launchProblems(cfg: MarketingConfig, env: Record<string, string 
   if (!cfg.verified.archive) out.push('verified.archive is false: "online until 12 months after the wedding" is not live yet (G060)');
   if (!cfg.verified.privacyText) out.push('verified.privacyText is false: the privacy notice is still a draft');
   if (!cfg.verified.orderCheck) {
-    out.push('verified.orderCheck is false: /start accepts any order number (set CLAIM_ORDER_VERIFICATION=manual or build the Etsy check, G060-fix)');
+    out.push('verified.orderCheck is false: /start accepts any order number (set CLAIM_ORDER_VERIFICATION=manual, trust or etsy, G060-fix)');
   }
   // K42 services are optional: only one with a real Etsy listing must carry a real price.
   for (const sv of cfg.services ?? []) {

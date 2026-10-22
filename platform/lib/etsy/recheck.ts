@@ -2,9 +2,11 @@
 // yet, payment still processing, manual mode) waits with orderCheck "pending". Once Etsy confirms the receipt, the site
 // is marked verified by "etsy" — no shop action needed:
 //   - admin "Bekleyen siparişleri Etsy'de kontrol et" (every pending site, any verification mode, while Etsy is connected);
-//   - automatically in "etsy" mode while the buyer's panel is open (its state poll, at most every RECHECK_POLL_MS per site)
-//     and when the buyer presses Publish (at most every RECHECK_PUBLISH_MS per site).
+//   - automatically in "etsy" and "trust" mode while the buyer's panel is open (its state poll, at most every
+//     RECHECK_POLL_MS per site) and when the buyer presses Publish (at most every RECHECK_PUBLISH_MS per site).
 // A rejected re-check changes nothing (the site stays pending for the shop to look at); only "verified" writes.
+// A site the SHOP held in the admin (trust mode, orderCheck.by "support") is never released by a re-check: only the
+// shop's "Siparişi onayla" does that. Provisional sites (trust mode) are checked by lib/claim/trust.ts.
 
 import { getClaimRateLimiter } from '../claim/limits.ts';
 import type { OrderCheck, OrderVerifier } from '../claim/verify.ts';
@@ -45,7 +47,7 @@ export async function markVerifiedByEtsy(adapter: DataAdapter, siteId: string, n
 /** Asks Etsy about one pending site; marks it verified when Etsy confirms. */
 export async function recheckSite(adapter: DataAdapter, site: SiteRecord, opts: { verifier?: OrderVerifier; now?: Date } = {}): Promise<RecheckResult> {
   const base = { siteId: site.id, slug: site.slug, orderRef: site.orderRef };
-  if (!orderPending(site) || !site.orderRef) return { ...base, result: 'skipped' };
+  if (!orderPending(site) || !site.orderRef || site.orderCheck?.by === 'support') return { ...base, result: 'skipped' };
   const verifier = opts.verifier ?? new EtsyOrderVerifier({ adapter });
   const check = await verifier.check({ orderNumber: site.orderRef, email: site.ownerEmail ?? '', theme: site.theme });
   if (check.result === 'verified') {
@@ -76,7 +78,7 @@ export async function recheckPendingOrders(adapter: DataAdapter, opts: { verifie
     if (etsySetup().state !== 'ready') return { ok: false, problem: 'not_configured', ...empty };
     if (!(await connectedShop(adapter))) return { ok: false, problem: 'not_connected', ...empty };
   }
-  const pending = (await adapter.listSites()).filter((s) => orderPending(s) && s.orderRef).reverse();
+  const pending = (await adapter.listSites()).filter((s) => orderPending(s) && s.orderRef && s.orderCheck?.by !== 'support').reverse();
   const summary: RecheckSummary = { ok: true, ...empty, remaining: Math.max(0, pending.length - RECHECK_BATCH) };
   for (const site of pending.slice(0, RECHECK_BATCH)) {
     const r = await recheckSite(adapter, site, opts);
@@ -95,7 +97,9 @@ export async function recheckPendingOrders(adapter: DataAdapter, opts: { verifie
  * counter across server instances) and returns the site as it is now. Never throws: any problem leaves the site as it was.
  */
 export async function autoRecheck(adapter: DataAdapter, site: SiteRecord, windowMs: number = RECHECK_POLL_MS): Promise<SiteRecord> {
-  if (!orderPending(site) || !site.orderRef || verificationMode() !== 'etsy' || etsySetup().state !== 'ready') return site;
+  if (!orderPending(site) || !site.orderRef || site.orderCheck?.by === 'support') return site;
+  const mode = verificationMode();
+  if ((mode !== 'etsy' && mode !== 'trust') || etsySetup().state !== 'ready') return site;
   try {
     if (!(await connectedShop(adapter))) return site;
     const hit = await getClaimRateLimiter().hit(`etsy-recheck:${windowMs}:${site.id}`, { limit: 1, windowMs });

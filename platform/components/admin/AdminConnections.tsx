@@ -6,6 +6,7 @@ import { Mail, RefreshCw, Store, Unplug } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import type { TrustSweepSummary } from '../../lib/claim/trust.ts';
 import type { RecheckSummary } from '../../lib/etsy/recheck.ts';
 import type { EtsyStatus } from '../../lib/etsy/shop.ts';
 import type { MailStatus } from '../../lib/mail/index.ts';
@@ -18,7 +19,8 @@ const MODE_TEXT: Record<EtsyStatus['mode'], string> = {
   off: 'Kapalı — yalnız sipariş numarası biçimi kontrol ediliyor (CLAIM_ORDER_VERIFICATION tanımsız).',
   manual: 'Elle onay (manual) — yeni siteler siz onaylayana kadar yayınlanamaz.',
   etsy: 'Etsy (otomatik) — sipariş Etsy\'den okunur; ödenmişse site hemen yayınlanabilir.',
-  invalid: 'CLAIM_ORDER_VERIFICATION değeri tanınmıyor ("off", "manual" ya da "etsy" olmalı).',
+  trust: 'Önce güven (trust) — yeni siteler hemen yayınlanabilir; sipariş sonra kontrol edilir (Etsy bağlıysa saatte bir, kendiliğinden).',
+  invalid: 'CLAIM_ORDER_VERIFICATION değeri tanınmıyor ("off", "manual", "trust" ya da "etsy" olmalı).',
 };
 
 const REASON_TEXT: Record<string, string> = {
@@ -50,6 +52,7 @@ export default function AdminConnections(props: { mail: MailStatus; etsy: EtsySt
   const [busy, setBusy] = useState<string | null>(null);
   const [status, setStatus] = useState<Record<string, Status>>({});
   const [summary, setSummary] = useState<RecheckSummary | null>(null);
+  const [trust, setTrust] = useState<TrustSweepSummary | null>(null);
   const [confirmDisconnect, setConfirmDisconnect] = useState(false);
 
   async function act(action: string): Promise<Record<string, any> | null> {
@@ -137,6 +140,18 @@ export default function AdminConnections(props: { mail: MailStatus; etsy: EtsySt
         </div>
         <p className={styles.hint}>Sipariş kontrolü: {MODE_TEXT[etsy.mode]}</p>
 
+        {etsy.mode === 'trust' && (!etsy.connected || etsy.reconnect) ? (
+          <div className={styles.callout} role="note" style={{ marginTop: 10 }} data-trust-manual="">
+            <p className={styles.calloutTitle} style={{ marginBottom: 4 }}>
+              Etsy bağlı değil — siparişler kendiliğinden doğrulanmıyor
+            </p>
+            <p style={{ margin: 0 }}>
+              Yeni siteler yine hemen yayınlanabilir. Doğrulama sizde: yeni sitede e-posta gelir; uymayan siparişte sitenin sayfasında &quot;Yayından
+              kaldır ve beklet&quot;. 48 saatte doğrulanmayan sipariş &quot;Yapılacak&quot;a düşer. Etsy bağlanınca kontrol saatte bir kendiliğinden yapılır.
+            </p>
+          </div>
+        ) : null}
+
         {etsy.fallbackToManual ? (
           <div className={styles.callout} role="note" style={{ marginTop: 10 }} data-etsy-fallback="">
             <p className={styles.calloutTitle} style={{ marginBottom: 4 }}>
@@ -191,10 +206,12 @@ export default function AdminConnections(props: { mail: MailStatus; etsy: EtsySt
                 disabled={busy !== null}
                 onClick={async () => {
                   setSummary(null);
+                  setTrust(null);
                   const data = await act('etsy-recheck');
                   if (data?.summary) {
                     setSummary(data.summary);
-                    if (data.summary.verified) router.refresh();
+                    setTrust(data.trust ?? null);
+                    if (data.summary.verified || data.trust?.verified || data.trust?.held || data.trust?.review) router.refresh();
                   }
                 }}
                 data-action="etsy-recheck"
@@ -259,6 +276,15 @@ export default function AdminConnections(props: { mail: MailStatus; etsy: EtsySt
                   ))}
               </ul>
             ) : null}
+          </div>
+        ) : null}
+        {trust && trust.checked ? (
+          <div className={`${styles.status} ${styles.statusOk}`} role="status" data-trust-summary="">
+            <p style={{ margin: 0 }}>
+              Önce güven: {trust.checked} doğrulanmamış sipariş kontrol edildi: {trust.verified} onaylandı, {trust.held} yayından kaldırılıp beklemeye
+              alındı, {trust.review} için 48 saat doldu, {trust.waiting} bekliyor.
+              {trust.remaining ? ` ${trust.remaining} sipariş daha var: yeniden basın.` : ''}
+            </p>
           </div>
         ) : null}
       </div>

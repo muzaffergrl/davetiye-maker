@@ -4,8 +4,8 @@
 // Rules (evaluateReceipt):
 //   receipt not found in our shop (404 / 400 / 403, or another seller) -> rejected not_found
 //   status "canceled" or "fully refunded"                              -> rejected not_paid
-//   not paid yet (is_paid false: "open", "payment processing")         -> pending (the site is made; a later re-check
-//                                                                         verifies it once Etsy reports it paid)
+//   not paid yet (is_paid false: "open", "payment processing")         -> pending, unpaid (the site is made; a later
+//                                                                         re-check verifies it once Etsy reports it paid)
 //   Etsy gives a non-empty buyer_email and it differs (case-insensitive) -> rejected email_mismatch
 //     (buyer_email is often null: Etsy grants it case by case; then the email is not compared)
 //   a purchased listing is mapped in listings.json to another design   -> rejected theme_mismatch (unmapped: no theme check)
@@ -124,7 +124,7 @@ export function decideFacts(facts: ReceiptFacts, input: OrderCheckInput): OrderC
   if (facts.closed) return { result: 'rejected', reason: 'not_paid' };
   if (facts.buyer && facts.buyer !== emailHash(input.email)) return { result: 'rejected', reason: 'email_mismatch' };
   if (facts.themes.length && !facts.themes.includes(input.theme)) return { result: 'rejected', reason: 'theme_mismatch' };
-  if (!facts.paid) return { result: 'pending', units: facts.units };
+  if (!facts.paid) return { result: 'pending', units: facts.units, unpaid: true };
   return { result: 'verified', units: facts.units };
 }
 

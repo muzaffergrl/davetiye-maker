@@ -166,7 +166,7 @@ düzenler. Bu belge platformun tek kaynağıdır.
   **kullanıcı onayı** ister. Ticari kullanımda ücretli plan gerekebilir (Vercel Hobby ticari değil;
   Supabase ücretsiz projeler hareketsizlikte duraklar) — satışa çıkmadan karar.
 - **Alan adı / marka:** marka seçilmedi; ilk sürüm `*.vercel.app`.
-- **Etsy sipariş doğrulama:** üç mod (`CLAIM_ORDER_VERIFICATION`): tanımsız/`off` = yalnız biçim kontrolü; `manual` (G060-fix,
+- **Etsy sipariş doğrulama:** dört mod (`CLAIM_ORDER_VERIFICATION`): tanımsız/`off` = yalnız biçim kontrolü; `manual` (G060-fix,
   şu an canlıda) = taslak hemen açılır, sipariş dükkân tarafından onaylanana kadar (admin "Siparişi onayla" ya da
   `node scripts/verify-order.ts --order <no> --reason "…"`) yayın ve paylaşılan önizleme kapalı; **`etsy` (G147, kod hazır, açılması
   sahibin kurulumunu bekliyor)** = sipariş numarası Etsy'den bizim mağazanın makbuzu olarak okunur. Satış sitesinin yayın kapısı
@@ -176,6 +176,24 @@ düzenler. Bu belge platformun tek kaynağıdır.
     e-postasını veriyorsa (çoğu zaman vermez, Etsy'nin ayrıca onayı gerekir) ve farklıysa → reddedilir; ilan → tasarım eşlemesi
     `platform/lib/etsy/listings.json` (ilanlar yayınlanınca `listing_id → tema id` doldurulur; eşlenmemiş ilan tasarım yüzünden
     reddedilmez); Etsy cevap vermez / yoğun (429) → alıcıya "birkaç dakika sonra tekrar deneyin".
+  - **`trust` — önce güven, sonra doğrula (G191, kod hazır, açılması sahibin kararını bekliyor):** alıcı hiç beklemez. `/start`'ta
+    Etsy sorulabiliyorsa (`etsy` modundaki kurallar) kesin cevap geçerli: ödenmiş → onaylı; bizim mağazada yok / iptal / iade /
+    başka e-posta / başka tasarım → reddedilir. Geri kalan her durumda (Etsy bağlı değil, ödeme işleniyor, Etsy cevap vermiyor) site
+    **"provisional"** açılır: **hemen yayınlanabilir**, paylaşılan önizleme açık; dükkâna "Yeni site başlatıldı — önce güven" e-postası
+    gider (SMTP açıksa). Sonra `lib/claim/trust.ts` kontrol eder — saatte bir Vercel Cron (`GET /api/cron/orders`, `vercel.json`,
+    `CRON_SECRET` gerekir, yalnız `trust` modunda çalışır) ve admin → Bağlantılar → "Bekleyen siparişleri Etsy'de kontrol et":
+    - Etsy bağlıysa: onaylanırsa → `verified`; Etsy kesin "uymuyor" derse ya da sipariş 48 saat sonra hâlâ ödenmemişse → site
+      **yayından kalkar ve beklemeye alınır** (`pending`, alıcı panelde "We are still confirming your Etsy order" görür, Publish kapalı)
+      + dükkâna "Site yayından kaldırıldı" e-postası (neden yazılı).
+    - 48 saat dolup hâlâ doğrulanmadıysa (Etsy bağlı değil / cevap yok): site **yayında kalır** (cevapsız durumda alıcı aleyhine
+      karar verilmez); dükkâna **bir kez** "48 saatte doğrulanamadı" e-postası, admin'de "Yapılacak"a düşer.
+    - Admin site sayfası: "Siparişi onayla" ya da **"Yayından kaldır ve beklet"** (nedeniyle). Dükkânın beklettiği siteyi Etsy'nin
+      tekrar kontrolü serbest bırakmaz; yalnız "Siparişi onayla" bırakır, sonra alıcı (ya da "Alıcı adına yayınla") yeniden yayınlar.
+    - Açmak için (bir kez): Vercel → Environment Variables (Production, Sensitive) `CRON_SECRET` = en az 16 karakter rastgele değer;
+      `CLAIM_ORDER_VERIFICATION=trust`; yeniden yayın. Etsy bağlantısı (aşağıdaki kurulum) olmadan da çalışır; o zaman "sonra
+      doğrula" adımı otomatik değildir: dükkân e-postayla haber alır, uymayanı admin'den bekletir. Etsy bağlanınca kendiliğinden olur.
+    - **Gerçek Etsy ile denenmedi** (Etsy uygulaması henüz yok); testler sahte Etsy ve sahte e-postayla
+      (`platform/tests/trust-orders.test.ts`).
   - **Çok ürünlü sipariş (G152):** `etsy` modunda bir sipariş **N site** açabilir; N = makbuzdaki tasarım birimleri (tasarım
     satırlarının adetleri toplamı; eşlenmemiş satır da tasarım sayılır; `listings.json` → `services` altındaki kurulum / özel tasarım /
     ek revizyon ilanları **hiç sayılmaz**; en az 1, en çok 10). `/start`'ta boş birim varsa yeni site açılır; hepsi doluysa eski davranış

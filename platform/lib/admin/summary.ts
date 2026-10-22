@@ -3,7 +3,7 @@
 
 import { siteContentUpdatedAt, type SiteRecord } from '../data/types.ts';
 import { MARKETING } from '../marketing/config.ts';
-import { orderPending } from '../sites.ts';
+import { orderPending, orderProvisional, trustExpired } from '../sites.ts';
 import { rightsView, siteArchiveDates } from '../panel/rights.ts';
 import { messageTemplate } from './messages.ts';
 import type { AdminHistoryEntry, AdminSiteState, AdminSiteSummary } from './view.ts';
@@ -41,6 +41,8 @@ export const SHOP_CREATED_NOTE = 'Dükkân panelinden eklendi';
 export function summarizeSite(site: SiteRecord, replies: number, now: Date = new Date()): AdminSiteSummary {
   const rights = rightsView(site, now);
   const pending = orderPending(site);
+  const provisional = orderProvisional(site);
+  const review = provisional && trustExpired(site, now.getTime());
   const state: AdminSiteState = rights.archived ? 'archived' : site.status === 'published' ? 'published' : 'draft';
   const date = (site.content as unknown as { date?: unknown })?.date;
   return {
@@ -52,7 +54,7 @@ export function summarizeSite(site: SiteRecord, replies: number, now: Date = new
     orderRef: site.orderRef,
     ownerEmail: site.ownerEmail,
     state,
-    order: pending ? 'pending' : site.orderCheck?.status === 'verified' ? 'verified' : 'not_required',
+    order: pending ? 'pending' : provisional ? 'provisional' : site.orderCheck?.status === 'verified' ? 'verified' : 'not_required',
     orderNote: site.orderCheck?.note ?? null,
     orderCheckedAt: site.orderCheck && site.orderCheck.status === 'verified' ? site.orderCheck.at : null,
     createdAt: site.createdAt,
@@ -68,7 +70,8 @@ export function summarizeSite(site: SiteRecord, replies: number, now: Date = new
     guestPassword: Boolean(site.guestAccess?.enabled),
     unpublishedChanges:
       site.status === 'published' && site.publishedContent !== null && JSON.stringify(site.content) !== JSON.stringify(site.publishedContent),
-    needsAction: pending && !rights.archived,
+    needsAction: (pending || review) && !rights.archived,
+    orderReview: review,
     note: site.adminNote?.text || null,
     noteAt: site.adminNote?.at ?? null,
     place: placeOf(site),
@@ -84,6 +87,13 @@ export function siteHistory(site: SiteRecord): AdminHistoryEntry[] {
   ];
   if (site.orderCheck?.status === 'verified' && !shop) {
     out.push({ at: site.orderCheck.at, text: `Sipariş onaylandı${site.orderCheck.note ? `: ${site.orderCheck.note}` : ''}`, by: site.orderCheck.by === 'support' ? 'support' : 'system' });
+  }
+  // Trust mode: a hold (Etsy's answer or the shop) and the one 48-hour reminder.
+  if (site.orderCheck?.status === 'pending' && site.orderCheck.by !== 'claim') {
+    out.push({ at: site.orderCheck.at, text: `Sipariş beklemeye alındı, site yayından kalktı${site.orderCheck.note ? `: ${site.orderCheck.note}` : ''}`, by: site.orderCheck.by === 'support' ? 'support' : 'system' });
+  }
+  if (site.orderCheck?.status === 'provisional' && site.orderCheck.reviewAt) {
+    out.push({ at: site.orderCheck.reviewAt, text: 'Sipariş 48 saatte doğrulanamadı; dükkâna hatırlatıldı', by: 'system' });
   }
   const KIND: Record<string, string> = {
     first_publish: 'İlk kez yayınlandı',

@@ -10,7 +10,7 @@ import { ipBucket } from '../rsvp/rate-limit.ts';
 import { panelPreviewToken } from '../keys.ts';
 import { normalizeEmail } from '../claim/fields.ts';
 import { rsvpCsvForSite, rsvpSummary, type RsvpCounts, type RsvpEntry } from '../rsvp/couple.ts';
-import { confirmOrder, endShopEditKey, grantIdentityChanges, issueShopEditKey, publishSite, reissueKeys, setArchiveOverride, unpublishSite } from '../sites.ts';
+import { confirmOrder, endShopEditKey, grantIdentityChanges, holdOrder, issueShopEditKey, publishSite, reissueKeys, setArchiveOverride, unpublishSite } from '../sites.ts';
 import { listDevices, signOutOtherDevices } from '../device-keys.ts';
 import { adminCreateSite } from './create.ts';
 import { messageTemplate, withMessageLog } from './messages.ts';
@@ -245,7 +245,7 @@ export async function listRoute(req: Request): Promise<Response> {
 
 // --- actions --------------------------------------------------------------------------------------------------
 
-export const ADMIN_ACTIONS = ['confirm', 'reissue', 'shop-edit', 'shop-edit-end', 'devices-signout', 'grant', 'archive', 'unpublish', 'publish', 'note', 'email', 'message-log', 'rsvp-delete', 'delete'] as const;
+export const ADMIN_ACTIONS = ['confirm', 'hold', 'reissue', 'shop-edit', 'shop-edit-end', 'devices-signout', 'grant', 'archive', 'unpublish', 'publish', 'note', 'email', 'message-log', 'rsvp-delete', 'delete'] as const;
 export type AdminAction = (typeof ADMIN_ACTIONS)[number];
 
 /** Turkish words for the errors lib/sites.ts throws (the admin speaks Turkish). */
@@ -286,6 +286,12 @@ export async function siteAction(req: Request, id: string, action: string): Prom
       case 'confirm': {
         const note = text(body.note) || 'Checked in Etsy';
         updated = await confirmOrder(adapter, site.id, note);
+        break;
+      }
+      case 'hold': {
+        // Trust mode: the shop found the order does not check out — offline + pending until "Siparişi onayla".
+        if (site.orderCheck?.status !== 'provisional') return fail(409, 'not_provisional', 'Bu sitenin siparişi "önce güven" ile açılmadı ya da zaten karara bağlandı.');
+        updated = await holdOrder(adapter, site.id, { by: 'support', note: text(body.note) || 'Dükkân beklemeye aldı' });
         break;
       }
       case 'reissue': {

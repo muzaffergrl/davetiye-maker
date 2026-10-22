@@ -3021,6 +3021,20 @@
   font-weight: 600;
 }
 
+/* The AI support chat's entry at the top of Help (components/panel/SupportSheet.tsx). */
+.help .helpChat {
+  display: grid;
+  gap: var(--s-2);
+  justify-items: start;
+  padding: var(--s-3);
+  margin-bottom: var(--s-3);
+  border-radius: var(--r-control);
+  background: var(--c-surface-sunken);
+}
+.help .helpChat p {
+  margin: 0;
+}
+
 /* The website address in a paper field (comp u2_share_390). */
 .urlField {
   margin: 0;

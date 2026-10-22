@@ -47,3 +47,29 @@ When all finish, report one line per design: NN, images saved (x/11), which ones
   (home, story, details, rsvp; ya da dört dil) · 7.9 details + harita · 7.10 teşekkür modu · 7.11 Share ekranı.
 - **Promo video (2. video):** gerçek site kaydından, `package/listing/video_promo.mp4` (1080×1080, H.264, sessiz, 12–15 sn):
   açılış → sayfalar → düzenleyici → RSVP. Yapay zekâ videosu kullanılmaz.
+
+## Yeni 10 tasarım: 39–48 (2026-10-22)
+
+Bu tasarımlarda PAKET 3 yok; sahne dünyası `tools/paket7_ilan.py` → `EK_SETLER` (her tasarımın "Stil ve renk" bölümünden).
+Prompt'lar yine her tasarımın `GPT_PROMPTS.md` → **PAKET 7** bölümünde (7.1–7.11), 10 × 11 = **110 görsel**. Kapak, 7 bilgi
+görseli ve hover videosu GPT'siz hazır (`package/listing/images_v4/`, `video_v4_4x5.mp4`); bu sahneler gelince ilan görselleri
+09–19 eklenir.
+
+```
+Task: BKE Studio Etsy listing scenes, PAKET 7, designs 39–48 (repo muzaffergrl/davetiye-maker, branch main).
+First run: git pull --rebase origin main (the prompt files were updated).
+Work in parallel: one sub-agent per design (10 sub-agents: 39 … 48). Each sub-agent works only inside its own folder
+collections/<NN>_*/assets/gpt/ and does this:
+1. Open collections/<NN>_*/assets/gpt/GPT_PROMPTS.md and find "## PAKET 7".
+2. In ONE image chat: send the "Instructions for GPT" block first, then generate ALL of 7.1 to 7.11 in order, each English
+   prompt exactly as written. Square scenes in the model's square size, landscape scenes in its 3:2 size; the exact pixel
+   size does not matter.
+3. Check each image BY EYE (do not measure pixels): the right number of flat, bright, even green screen areas (a green like
+   RGB 3,252,45 is fine; it does not need to be exactly #00FF00), all four corners of each green area visible, nothing
+   covering a green area, no text/letters/numbers/logos, no brand marks. If it fails, regenerate at most 2 times, then save
+   the best attempt anyway and note the problem. Never stop early: always continue to the next scene until 7.11 is done.
+4. Save each image with the exact file name on its "Kaydet" line (assets/gpt/mockups/p7_NN_*.png). Do not make a video.
+5. Commit only that design's new PNG files: "PAKET 7 <NN>: ilan sahneleri" and push (git pull --rebase origin main first).
+   Do not edit GPT_PROMPTS.md or any other file.
+When all finish, report one line per design: NN, images saved (x/11), which ones are imperfect and why. Do not invent results.
+```

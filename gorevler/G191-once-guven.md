@@ -1,0 +1,43 @@
+---
+id: G191
+baslik: Sipariş kontrolü "önce güven, sonra doğrula" (CLAIM_ORDER_VERIFICATION=trust) + saatlik kontrol
+rol: claude-kod
+durum: inceleme
+alan: claude-session_015RTF9kCAoVGh7PDNq8XYeP
+oncelik: 1
+bagimli: [G147, G152]
+yazar: [platform/lib/claim/trust.ts, platform/lib/claim/verify.ts, platform/lib/claim/claim.ts, platform/lib/sites.ts, platform/lib/data/types.ts, platform/lib/etsy/config.ts, platform/lib/etsy/verify.ts, platform/lib/etsy/recheck.ts, platform/lib/mail/templates.ts, platform/lib/admin/api.ts, platform/lib/admin/connections.ts, platform/lib/admin/summary.ts, platform/lib/admin/view.ts, platform/lib/marketing/placeholders.ts, platform/components/admin/AdminSite.tsx, platform/components/admin/AdminConnections.tsx, platform/components/admin/badges.tsx, platform/app/api/cron/orders/, platform/vercel.json, platform/scripts/verify-order.ts, platform/tests/trust-orders.test.ts, platform/tests/g147-etsy-mail.test.ts, platform/tests/g152.test.ts, platform/tests/g174-security.test.ts, docs/10_SITE_PLATFORMU.md, gorevler/G191-once-guven.md]
+---
+
+## Amaç
+Kullanıcı talebi (2026-10-22): satış sonrası sipariş kontrolünde insan onayı adımı kalksın. Seçilen yol: "önce güven, sonra
+doğrula" — alıcı siteyi hemen yayınlar, sipariş arka planda kontrol edilir; uymayan site yayından kalkar. Görevi kullanıcının
+doğrudan isteğiyle bu oturum açtı (entegratör numarayı değiştirebilir).
+
+## Sonuç
+**2026-10-22 · durum: inceleme.** Dal `claude/gallant-fermi-3qub8h`. Yayın yok, canlı ortam değişkeni değişmedi.
+
+- Yeni mod `CLAIM_ORDER_VERIFICATION=trust` (`lib/claim/verify.ts TrustOrderVerifier`): Etsy'nin kesin cevabı geçerli
+  (onaylı / ret); diğer her durum `provisional` — site hemen yayınlanabilir, paylaşılan önizleme açık. `OrderCheckRecord.status`
+  += `provisional`, `reviewAt`. Etsy "ödenmemiş" cevabı artık `unpaid: true` taşır (`decideFacts`).
+- `lib/claim/trust.ts sweepProvisionalOrders`: Etsy onaylarsa `verified`; ret ya da 48 saatte ödenmemiş → `holdOrder`
+  (`lib/sites.ts`: `pending` + yayından kaldır) + dükkân e-postası "held"; 48 saat dolup cevap yoksa site yayında kalır, dükkâna
+  bir kez "review" e-postası, admin "Yapılacak".
+- Çalıştıran: saatlik Vercel Cron `GET /api/cron/orders` (`vercel.json`, dakika 17; `CRON_SECRET` ≥ 16 karakter şart, yoksa 503;
+  yalnız `trust` modunda; yanıtta yalnız sayılar) + admin "Bekleyen siparişleri Etsy'de kontrol et".
+- Admin: site sayfasında "Önce güven: sipariş henüz doğrulanmadı" kartı → "Siparişi onayla" / **"Yayından kaldır ve beklet"**
+  (`hold` eylemi, nedeniyle); rozet, liste/CSV etiketi, geçmiş satırları; Bağlantılar kartında mod metni + Etsy bağlı değilken uyarı.
+  Dükkânın beklettiği site (`by: support`) Etsy tekrar kontrolüyle (panel / admin düğmesi) serbest kalmaz.
+- Testler: `tests/trust-orders.test.ts` (7 test; sahte Etsy ve sahte e-posta). Mevcut 3 testte Etsy "pending" beklentisine
+  `unpaid: true` eklendi. Tam paket sonucu aşağıda.
+
+### Yapılmadı / açık
+- Canlıda açılmadı: `CRON_SECRET` ve `CLAIM_ORDER_VERIFICATION=trust` Vercel'e girilmedi (kullanıcı kararı bekleniyor).
+- Gerçek Etsy ile denenmedi (Etsy uygulaması yok). Etsy bağlanana kadar "sonra doğrula" otomatik değil: dükkân e-postayla haber alır.
+- SMTP canlıda açık değilse dükkân e-postaları gitmez; o durumda admin "Yapılacak" listesi tek uyarı yeri.
+- Bekletilen alıcıya e-posta gitmez; panelde "We are still confirming your Etsy order" görür. Dükkân Etsy'den yazar.
+- Önerilen görev: Gmail'e gelen "You made a sale" e-postalarını (DKIM kontrollü) okuyan doğrulayıcı — Etsy onayı gelene kadar
+  "sonra doğrula"yı otomatik yapar.
+
+## Günlük
+- 2026-10-22 alindi + inceleme: claude-session_015RTF9kCAoVGh7PDNq8XYeP (kullanıcı talebi)

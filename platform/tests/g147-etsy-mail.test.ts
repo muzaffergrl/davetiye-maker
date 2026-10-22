@@ -258,8 +258,8 @@ test('evaluateReceipt: paid / cancelled / refunded / unpaid / email / listing â†
   assert.deepEqual(r({ status: 'partially refunded' }), { result: 'verified', units: 1 }, 'a partial refund still counts as paid');
   assert.deepEqual(r({ status: 'canceled', is_paid: false }), { result: 'rejected', reason: 'not_paid' });
   assert.deepEqual(r({ status: 'fully refunded' }), { result: 'rejected', reason: 'not_paid' });
-  assert.deepEqual(r({ status: 'payment processing', is_paid: false }), { result: 'pending', units: 1 }, 'not paid yet: wait, re-check later');
-  assert.deepEqual(r({ status: 'open', is_paid: false }), { result: 'pending', units: 1 });
+  assert.deepEqual(r({ status: 'payment processing', is_paid: false }), { result: 'pending', units: 1, unpaid: true }, 'not paid yet: wait, re-check later');
+  assert.deepEqual(r({ status: 'open', is_paid: false }), { result: 'pending', units: 1, unpaid: true });
   // buyer_email: compared only when Etsy gives one
   assert.deepEqual(r({ buyer_email: null }), { result: 'verified', units: 1 });
   assert.deepEqual(r({ buyer_email: '' }), { result: 'verified', units: 1 });

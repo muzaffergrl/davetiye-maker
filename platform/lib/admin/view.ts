@@ -4,7 +4,7 @@
 import { normalizeOrderNumber } from '../claim/fields.ts';
 
 export type AdminSiteState = 'draft' | 'published' | 'archived';
-export type AdminOrderState = 'pending' | 'verified' | 'not_required';
+export type AdminOrderState = 'pending' | 'provisional' | 'verified' | 'not_required';
 
 export interface AdminSiteSummary {
   id: string;
@@ -35,8 +35,10 @@ export interface AdminSiteSummary {
   guestPassword: boolean;
   /** The draft differs from what guests see (published sites only). */
   unpublishedChanges: boolean;
-  /** Something the shop has to do: an order to confirm. */
+  /** Something the shop has to do: an order to confirm (pending), or a trust-mode order still unverified (orderReview). */
   needsAction: boolean;
+  /** Trust mode: provisional (publishable) and the trust window ran out without a verified order — the shop should look. */
+  orderReview?: boolean;
   /** The shop's private note (never shown to the buyer). */
   note: string | null;
   noteAt: string | null;
@@ -227,7 +229,13 @@ export function adminDashboard(list: readonly AdminSiteSummary[], now: Date = ne
 
   const todos: AdminTodo[] = [];
   for (const s of list) {
-    if (s.needsAction) todos.push({ kind: 'confirm', site: s, text: `Sipariş #${s.orderRef ?? '—'} onay bekliyor` });
+    if (s.needsAction) {
+      todos.push({
+        kind: 'confirm',
+        site: s,
+        text: s.order === 'provisional' ? `Sipariş #${s.orderRef ?? '—'} 48 saatte doğrulanamadı — Etsy'de bakın (site yayınlanabilir)` : `Sipariş #${s.orderRef ?? '—'} onay bekliyor`,
+      });
+    }
   }
   // G145: a shop edit link left open (setup service): close it when the work is done.
   for (const s of list) {
@@ -359,7 +367,7 @@ export function ordersCsv(list: readonly AdminSiteSummary[], origin: string): st
     return /[",\n\r;]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t;
   };
   const STATE: Record<AdminSiteState, string> = { draft: 'Taslak', published: 'Yayında', archived: 'Arşiv' };
-  const ORDER: Record<AdminOrderState, string> = { pending: 'Onay bekliyor', verified: 'Onaylandı', not_required: 'Gerekmedi' };
+  const ORDER: Record<AdminOrderState, string> = { pending: 'Onay bekliyor', provisional: 'Doğrulanmadı (önce güven)', verified: 'Onaylandı', not_required: 'Gerekmedi' };
   const head = ['Sipariş no', 'Oluşturma', 'E-posta', 'İsimler', 'Tasarım', 'Durum', 'Sipariş kontrolü', 'Düğün tarihi', 'Mekân', 'Adres', 'RSVP yanıtı', 'İlk yayın', 'Yayında kalır', 'Not'];
   const rows = list.map((s) => [
     s.orderRef ?? '',
@@ -384,8 +392,8 @@ export function ordersCsv(list: readonly AdminSiteSummary[], origin: string): st
  * The template the message box opens with (G121, docs/19 §6 A2/A5): an order waiting for confirmation → "Publish is
  * waiting"; a live site closing within 30 days → "closing soon"; otherwise "how to publish".
  */
-export function defaultTemplateId(s: Pick<AdminSiteSummary, 'needsAction' | 'state' | 'onlineUntil'>, now: number = Date.now()): string {
-  if (s.needsAction) return 'publish_blocked_pending';
+export function defaultTemplateId(s: Pick<AdminSiteSummary, 'needsAction' | 'state' | 'onlineUntil'> & { order?: AdminOrderState }, now: number = Date.now()): string {
+  if (s.needsAction && s.order !== 'provisional') return 'publish_blocked_pending';
   if (s.state === 'published' && s.onlineUntil) {
     const left = (Date.parse(`${s.onlineUntil}T00:00:00Z`) - now) / DAY_MS;
     if (left >= -1 && left <= CLOSING_WITHIN_DAYS) return 'archive_notice';

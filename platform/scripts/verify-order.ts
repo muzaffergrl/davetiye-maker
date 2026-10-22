@@ -20,7 +20,13 @@ import { findSite } from './grant-identity-change.ts';
 
 export function describeOrder(site: SiteRecord): string {
   const check = site.orderCheck;
-  const state = !check ? 'no check required (claimed while checks were off)' : check.status === 'pending' ? 'PENDING: cannot be published yet' : `confirmed ${check.at} by ${check.by}${check.note ? ` (${check.note})` : ''}`;
+  const state = !check
+    ? 'no check required (claimed while checks were off)'
+    : check.status === 'pending'
+      ? `PENDING: cannot be published yet${check.note ? ` (${check.note})` : ''}`
+      : check.status === 'provisional'
+        ? 'PROVISIONAL (trust mode): can be published, order not verified yet'
+        : `confirmed ${check.at} by ${check.by}${check.note ? ` (${check.note})` : ''}`;
   return [`${site.slug}: ${site.status}`, `  order ${site.orderRef ?? '—'} (theme ${site.theme}): ${state}`].join('\n');
 }
 

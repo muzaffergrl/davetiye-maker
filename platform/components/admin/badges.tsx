@@ -10,7 +10,11 @@ export function StateBadges({ summary: s }: { summary: AdminSiteSummary }) {
           Demo
         </span>
       ) : null}
-      {s.needsAction ? <span className={styles.badgeWarn}>Sipariş onayı bekliyor</span> : null}
+      {s.needsAction ? (
+        <span className={styles.badgeWarn}>{s.order === 'provisional' ? 'Sipariş doğrulanmadı (48 saat)' : 'Sipariş onayı bekliyor'}</span>
+      ) : s.order === 'provisional' ? (
+        <span className={styles.badgeMuted}>Önce güven</span>
+      ) : null}
       {s.state === 'published' ? (
         <span className={styles.badgeOk}>Yayında</span>
       ) : s.state === 'archived' ? (
