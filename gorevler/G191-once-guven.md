@@ -46,4 +46,4 @@ doğrudan isteğiyle bu oturum açtı (entegratör numarayı değiştirebilir).
 - 2026-10-22 alindi + inceleme: claude-session_015RTF9kCAoVGh7PDNq8XYeP (kullanıcı talebi)
 - 2026-10-22 main'e birleşti; Vercel ortam değişkenleri blokajda (bağlayıcı bkestudio ekibini görmüyor)
 - 2026-10-22 not: kullanıcının bilgisayarındaki tarayıcıda bkestudio Vercel hesabı açık; bulut oturumu oraya ulaşamaz, yerel
-  oturum (`claude-tarayici`) Vercel ayarlarını tarayıcıdan yapabilir. Kullanıcı bu kez ayarları elle girmeyi seçti.
+  oturum (`claude-tarayici`) Vercel ayarlarını tarayıcıdan yapabilir. Kullanıcı elle yapmayı sordu; adımlar sohbette verildi.
