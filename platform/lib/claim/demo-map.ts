@@ -40,6 +40,7 @@ export const DEMO_CITY_PINS: Readonly<Record<string, { lat: number; lng: number 
   'painted-lily-pond': { lat: 38.2919, lng: -122.458 }, // Sonoma, CA (the water garden is fictional)
   'espresso-pastoral': { lat: 43.6242, lng: -72.5185 }, // Woodstock, VT (the farmhouse is fictional)
   'blue-toile-pavilion': { lat: 38.0293, lng: -78.4767 }, // Charlottesville, VA (the pavilion is fictional)
+  'suede-ranch-lace': { lat: 43.4799, lng: -110.7624 }, // Jackson, WY (the ranch is fictional)
   'grand-theatre-premiere': { lat: 37.5407, lng: -77.436 }, // Richmond, VA (the theatre is fictional)
   'highland-tartan-thistle': { lat: 56.7036, lng: -3.73 }, // Pitlochry, Perthshire (the house is fictional)
   'olive-ivory': { lat: 38.2975, lng: -122.2869 }, // Napa

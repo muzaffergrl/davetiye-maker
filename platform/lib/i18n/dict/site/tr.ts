@@ -332,6 +332,8 @@ const dict: Dict = {
   "By candlelight": "Mum ışığında",
   // G444 Blue Toile Pavilion (44, coming)
   "In the garden pavilion": "Bahçe köşkünde",
+  // G445 Suede Ranch Lace (45, coming)
+  "Under the open sky": "Açık göğün altında",
 };
 
 export default dict;

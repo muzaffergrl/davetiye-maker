@@ -1172,6 +1172,18 @@ const dict: Dict = {
   "Powder blue": "Bleu poudré",
   "Porcelain": "Porcelaine",
   "Gilt": "Dorure",
+  // G445 Suede Ranch Lace (45, coming)
+  "A tan suede envelope with a lace strip and fringe, a leather cord and a silver concho, and photos in tooled leather frames behind ranch gates": "Une enveloppe en daim fauve avec une bande de dentelle et des franges, un cordon de cuir et un concho en argent, et des photos dans des cadres en cuir repoussé derrière des barrières de ranch",
+  "A suede, lace and leather ranch wedding website: the concho turns, the cord slips away and golden-hour light sweeps in as your invitation rises. Personalize it in your online editor.": "Un site de mariage ranch en daim, dentelle et cuir : le concho tourne, le cordon glisse et la lumière dorée de l'heure magique entre tandis que votre invitation s'élève. Personnalisez-le dans votre éditeur en ligne.",
+  "Tan suede, cream lace, tooled leather and a silver concho, with wildflowers and sage at golden hour, like a ranch at the foot of the mountains. Your invitation waits in a fringed suede envelope tied with a leather cord, and every photo sits in a tooled leather frame behind a ranch gate that swings open.": "Daim fauve, dentelle crème, cuir repoussé et un concho en argent, avec des fleurs sauvages et de la sauge à l'heure dorée, comme un ranch au pied des montagnes. Votre invitation attend dans une enveloppe en daim à franges nouée d'un cordon de cuir, et chaque photo est dans un cadre en cuir repoussé derrière une barrière de ranch qui s'ouvre.",
+  "Your guests tap the envelope. The silver concho turns, the leather cord comes undone and slips away, the fringed flap swings open, golden-hour light sweeps the screen, and the card with your portrait rises out of the envelope to become your home page.": "Vos invités touchent l'enveloppe. Le concho en argent tourne, le cordon de cuir se dénoue et glisse, le rabat à franges s'ouvre, la lumière dorée balaie l'écran, et la carte avec votre portrait sort de l'enveloppe pour devenir votre page d'accueil.",
+  "Your portrait in a tooled leather frame behind a ranch gate on a cream card with wildflowers, the invitation between lace strips, a countdown and calendar links, your story and the day over a golden-hour ranch landscape.": "Votre portrait dans un cadre en cuir repoussé derrière une barrière de ranch sur une carte crème aux fleurs sauvages, l'invitation entre des bandes de dentelle, un compte à rebours et des liens de calendrier, votre histoire et le jour sur un paysage de ranch à l'heure dorée.",
+  "Three photos in tooled leather frames, each behind a weathered ranch gate that swings open as guests scroll.": "Trois photos dans des cadres en cuir repoussé, chacune derrière une vieille barrière de ranch qui s'ouvre pendant que les invités font défiler la page.",
+  "The order of the day on a cream card, each moment with a sprig of sage, the venue behind a two-leaf ranch gate, an optional map, dress code, travel, the menu and questions and answers.": "Le programme de la journée sur une carte crème, chaque moment avec un brin de sauge, le lieu derrière une barrière de ranch à deux battants, une carte facultative, le code vestimentaire, le voyage, le menu et les questions-réponses.",
+  "A cream reply card under a lace strip; when a reply is sent, a warm breeze crosses the page and wildflowers drift down.": "Une carte de réponse crème sous une bande de dentelle ; quand une réponse est envoyée, une brise chaude traverse la page et des fleurs sauvages descendent doucement.",
+  "Suede": "Daim",
+  "Cream lace": "Dentelle crème",
+  "Sunset peach": "Pêche du couchant",
 };
 
 export default dict;

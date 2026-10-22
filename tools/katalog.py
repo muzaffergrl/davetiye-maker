@@ -562,6 +562,12 @@ EK_TEMALAR = [
          dekor="Özgün toile deseni (bahçe köşkü, salıncaklı ağaç, dallarda kuşlar, güvercin çifti, küçük köprü), porselen tabaklar ve servis tabağı, zencefil kavanozunda ortanca ve hezaren, toz mavisi ipek fiyonk, gravür güvercinler, gravür girland", teknik="bakır gravür çizgisi (toile, tek renk) + fotogerçekçi porselen/kumaş/keten/ipek",
          font=("MonteCarlo", "Rosarivo"), palet_adi="toile-blue-porcelain",
          hareket="Broşun iğnesinden çıkıp süzülmesi, ogee kapağın 3B açılışı, üç gravür güvercinin kumaştan havalanıp uçması, porselen tabakların askıda sallanıp oturması ve sır parıltısı, program satırlarında gravür güvercin, yanıtta çelenge konan iki güvercin."),
+    dict(no=45, klasor="45_Suede_Ranch_Lace", ad="Suede Ranch Lace",
+         zarf="Dikey ten rengi süet zarf, yanları deri şeritle whipstitch dikişli; düz kapak, alt kenarında krem dantel şerit ve süet saçak; kapanış: zarfı iki tur yatay saran deri kordon, ortadaki düğümün üstünde çiçek oymalı gümüş konço. Konço yarım tur döner, kordon çözülüp yana kayarak çıkar, saçaklı kapak 3B açılıp çizgili astarını gösterir ve salınarak oturur, altın saat ışığı ekranı yalar, krem kart yükselir.",
+         foto="Çiçek oymalı, kenar dikişli işlenmiş deri çerçeveler; her birinin önünde yıpranmış ahşap bir çiftlik kapısı: sahnesine gelince kapı sol menteşesinde 3B açılır. Mekân geniş deri çerçevede iki kanatlı kapının ardında.",
+         dekor="Süet, krem dantel, gümüş konço, işlenmiş deri, kır çiçekleri (Indian paintbrush, bluebonnet, krem yabani gül), adaçayı, krem keçe şapka, altın saat çiftlik manzarası", teknik="sıcak yağlı boya manzara + fotogerçekçi süet / deri / dantel / gümüş",
+         font=("Rochester", "Rye"), palet_adi="suede-sage-sunset",
+         hareket="Konçonun yarım tur dönmesi, kordonun çözülüp yana kayması, saçaklı kapağın 3B açılıp salınarak oturması, altın saat ışığı süpürmesi, fotoğrafların önündeki çiftlik kapısının menteşesinde açılması (mekânda iki kanat), program satırlarında eğilen adaçayı dalı, yanıtta tozlu sıcak esinti ve kır çiçeği yağmuru."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):
