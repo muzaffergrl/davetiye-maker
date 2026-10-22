@@ -1264,9 +1264,9 @@ const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> 
     home: msg("Antique map paper, bottle-green leather, brass and ivory ticket card. Your portrait sits in a mahogany carriage window and the route of your day is drawn across an old map."),
   },
   'kintsugi-washi': {
-    style: msg("Indigo washi envelope, fine kintsugi-gold lines and quiet botanical details."),
-    opening: msg("Your guests tap the envelope. Four washi folds unfold in sequence around the kintsugi portrait invitation before the wedding home page opens."),
-    home: msg("Washi paper, sumi ink and delicate gold seams bring a quiet, handcrafted feeling to your invitation, story and garden celebration."),
+    style: msg("A square pinwheel packet of indigo washi crossed by gold kintsugi seams, tied with a gold-and-ivory cord round a mended porcelain button."),
+    opening: msg("Your guests tap the envelope. The porcelain button turns and lifts away, the cord unwinds, the four indigo flaps unfold one by one onto their gold-flecked insides and the rice-paper card with your portrait rises toward them before the wedding home page opens."),
+    home: msg("Rice-ivory washi, indigo paper and gold kintsugi seams. Your photos appear through a spreading ink bloom in torn washi mats, and a mended tea bowl signs off."),
   },
   'riad-lantern-nights': {
     style: msg("Deep teal envelope, brass seal and saffron lantern accents inspired by a Marrakech riad."),
@@ -1315,18 +1315,6 @@ for (const [id, preview] of Object.entries(PREVIEW_DESIGN_COPY)) {
 
 // Interior art/layout/motion differ for these eleven previews; envelope copy and other products are unchanged.
 const UNIQUE_INTERIORS: Record<string,{fonts:string[];home:string;story:string;details:string;rsvp:string}> = {
-  "kintsugi-washi": {
-    "fonts": [
-      "Cormorant Garamond",
-      "Great Vibes",
-      "Lora",
-      "Shippori Mincho"
-    ],
-    "home": "An indigo-and-ivory washi composition with square kintsugi photo mounts and torn-paper stationery.",
-    "story": "Asymmetric washi photo mounts paired with captions, alternating gently from side to side.",
-    "details": "A quiet folded-paper programme with gold-repaired margins and a square venue mount.",
-    "rsvp": "A handmade washi reply letter with indigo type and fine kintsugi details."
-  },
   "riad-lantern-nights": {
     "fonts": [
       "Cormorant Garamond",
@@ -1477,6 +1465,22 @@ const REBUILT: Record<string, Pick<DesignCopy, 'fonts' | 'pages' | 'palette' | '
       { name: msg('Claret'), hex: '#8C2F39' },
     ],
     llmsLine: 'a long bottle-green leather ticket sleeve with a brass turn-lock and a luggage tag, a first-class ticket that slides out of it, carriage-window portraits and a route drawn across an old map.',
+  },
+  'kintsugi-washi': {
+    fonts: ['Allura', 'Shippori Mincho'],
+    pages: {
+      home: msg('Your portrait in a torn indigo washi mat on a deckled rice-paper card, the invitation on rice paper between gold kintsugi seams with a countdown and calendar links, and a mended tea bowl to sign off.'),
+      story: msg('Three moments, left, right and left, in torn rice-paper mats; each photo appears through a spreading ink bloom and light runs along the gold seam.'),
+      details: msg('The order of the day on a rice-paper card under a gold seam, the venue in wide torn indigo washi, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('A rice-paper reply card with a plum sprig, your reply-by date and the configurable RSVP form; gold leaf and petals drift down when a reply is sent.'),
+    },
+    palette: [
+      { name: msg('Indigo'), hex: '#242E58' },
+      { name: msg('Night'), hex: '#161C36' },
+      { name: msg('Rice paper'), hex: '#F3ECDC' },
+      { name: msg('Gold'), hex: '#C9A55A' },
+    ],
+    llmsLine: 'a square pinwheel packet of indigo washi with gold kintsugi seams, tied with a cord round a mended porcelain button, its four flaps unfolding one by one; photos appear through an ink bloom.',
   },
 };
 for (const [id, r] of Object.entries(REBUILT)) Object.assign(DESIGN_COPY[id], r);

@@ -84,6 +84,8 @@ hiçbir görselde yok; isimler ve tarih HTML.
   dancing; Garden formal; RSVP September 1, 2027; URL ve medya null) — değişmedi.
 - GPT istekleri: `assets/gpt/GPT_PROMPTS.md` (PAKET 5R website katmanları W1–W24 = 26 dosya; PAKET 2 örnek fotoğraflar
   **var**; PAKET 6R basılı davetiye ön/arka, yeni dosya adları); prova şekli `assets/gpt/kuru_sekil.json`.
-- Tema: `platform/themes/kintsugi-washi/` **yeniden kurulacak** (G422–G432, 39 pilot yapısı; docs/35 §6). GPT parçaları:
-  G222–G232. Mevcut tema (envelope-v3) o zamana kadar değişmeden duruyor. Durum: **coming**.
+- Tema: `platform/themes/kintsugi-washi/` **yeniden kuruldu** (G426, 2026-10-22; 39 pilot yapısı, `docs/34`, pilot G423
+  dersleri `docs/35` §6a) — GPT parçaları G226 (PAKET 5R 26 dosya, PAKET 6R 2 dosya). Durum: **editable_draft**, katalogda
+  `preview` ("Coming soon"); satış yok. Katalog kapak görüntüsü/klibi henüz eski (yeniden yakalama bekliyor); paletler
+  (`variants`) eski sanatla kaldırıldı, yeni sanattan yeniden üretilecek.
 - Etsy taslağı: `package/listing/listing_v3.md` ve PAKET 3 ilan sahneleri eski görünüme göre; tema kurulunca yeniden.

@@ -288,15 +288,16 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     ink: '#14261C', accent: '#7C5B25', front: [17, 10, 10, 10], back: [14, 10, 8, 10],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 26 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
+  // 26 (G426, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): rice-paper card, a torn strip of indigo washi
+  // with a gold kintsugi seam and a white plum sprig across the top (down to ~19.3 %), one gold seam near the bottom
+  // (~91 %) on the front; one short gold seam with a plum blossom at the top of the back (~12.8 %). `cover` for 5×7 and
+  // A5 (ChatGPT's 1068×1472). Dark indigo ink; boxes ~2 % clear of it all.
   'kintsugi-washi': {
     collection: '26_Kintsugi_Washi',
-    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Allura&family=Shippori+Mincho:wght@400;600'),
     script: "'Allura', cursive", serif: "'Shippori Mincho', Georgia, serif",
-    ink: '#1D2340', accent: '#7A5C22', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#1D2340', accent: '#7A5C22', front: [21.5, 12, 11, 12], back: [15, 11, 9, 11],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
   // 27 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's

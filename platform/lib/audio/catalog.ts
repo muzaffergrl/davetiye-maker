@@ -71,7 +71,7 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   // the ticket slides out (slide) · it comes forward (chime) — = site.js MOTION.envelope
   'orient-express-voyage': { music: 'evening-strings', opening: [[0, 'tap'], [450, 'clasp'], [1000, 'paper'], [1750, 'slide'], [3050, 'chime']] },
   // Kintsugi & Washi: band slides off (closure) · top · bottom · left · right fold (one paper sound each) · card lifts (rise) · forward
-  'kintsugi-washi': { music: 'first-light', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
+  'kintsugi-washi': { music: 'first-light', opening: [[0, 'clasp'], [200, 'ribbon'], [950, 'paper'], [1610, 'paper'], [2250, 'slide'], [2950, 'chime']] },
   // Azulejo Mosaic: the panel gives under the tap (press) · the tile wave (wave) · the card lifts (rise) · forward
   'azulejo-mosaic': { music: 'garden-waltz', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
   // Riad Lantern Nights: a knock on the doors (tug) · the leaves swing in (doors) · the card comes out (rise) · forward
