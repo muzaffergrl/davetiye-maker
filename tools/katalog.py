@@ -405,11 +405,11 @@ EK_TEMALAR = [
     # docs/24 dalgası (23–28): eksenler + hareket imzası yazılı; `kontrol` bunları D'ye ve birbirine karşı ayırt eder
     # (ek_ayirt). Üreteçlere (yaz, paket5, gorev5, ozet) girmez: koleksiyon dosyaları elle yazıldı.
     dict(no=23, klasor="23_Velvet_Jewel_Box", ad="Velvet Jewel Box",
-         zarf="Patlıcan moru kadife yüzük kutusu; saten fiyonk kayar, kapak menteşeden 3B açılır, saten astar ve kart yükselir.",
-         foto="3B silindir karusel (mücevher vitrini gibi döner; sürükle, kaydır, ok tuşları).",
-         dekor="Saten kurdele, inci, yüzük, şampanya saten kıvrımlar", teknik="fotogerçekçi ürün çekimi",
+         zarf="Kare patlıcan moru kadife zarf, üç loblu kapak; şampanya saten bant ve banda geçirilmiş rose gold tek taş yüzük. Yüzük kayıp süzülür, bant düğümden ayrılır, kapak saten astara 3B açılır, kart yükselir (docs/35, 2026-10-22).",
+         foto="Oval rose gold-inci kamea + kadife yüzük tepsisinin oval yuvaları 3B silindir vitrinde (sürükle, kaydır, ok tuşları); foto ışık süpürmesiyle belirir.",
+         dekor="Saten kurdele, tohum inci, rose gold yüzük ve yüzük kutusu, şampanya ipek hare", teknik="fotogerçekçi ürün çekimi",
          font=("Pinyon Script", "Bodoni Moda"), palet_adi="aubergine-champagne",
-         hareket="Menteşe 3B açılış, saten ışık süpürmesi, varak parıltılı başlık, silindir karusel, saten perde sayfa geçişi"),
+         hareket="Pırlanta parıltısı, yüzüğün banttan süzülmesi, bandın düğümden çekilmesi, loblu kapağın 3B açılışı, saten ışık süpürmesi, silindir vitrin, yüzüğün kutuya oturması"),
     dict(no=24, klasor="24_Grand_Theatre_Premiere", ad="Grand Theatre Premiere",
          zarf="Tavus mavisi kadife sahne perdesi, antik altın proscenium kemer; iki kanat ağır kıvrımlarla, kademeli aralanır, spot ışığı sahneyi tarar.",
          foto="Sahne çerçevesinde 'perde arası' kartları (Scene I–III); spot ışığı dokunulanı aydınlatır.",

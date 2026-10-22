@@ -47,7 +47,7 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   // Nocturne Lake Estate: gold seal lifts off (closure) · flap turns up (lift) · card rises (rise) · forward
   'nocturne-lake-estate': { music: 'evening-strings', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
   // Velvet Jewel Box: satin bow slides off (closure) · lid on its hinge (lid) · card rises (rise) · forward
-  'velvet-jewel-box': { music: 'music-box', opening: [[200, 'ribbon'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
+  'velvet-jewel-box': { music: 'music-box', opening: [[0, 'chime'], [180, 'whoosh'], [700, 'ribbon'], [1250, 'paper'], [1850, 'slide']] },
   // Maison Pâtisserie: bow unties (closure) · lid lifts (lid) · tissue parts (tissue) · card lifts (rise) · forward
   // Music Box Ballerina: key winds (closure, tug) · lid swings up (lid) · the comb's first notes as she turns (turn) · card rises (rise) · forward
   // Red Lacquer & Double Happiness: the cord unwinds (untie) · the flap lifts (flap) · the card comes up (rise) · the red

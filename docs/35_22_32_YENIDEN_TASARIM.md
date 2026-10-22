@@ -129,6 +129,36 @@ Her tema için:
 4. Göz kontrolü: kapalı → açılış (her 300 ms) → home → story → details → rsvp, 360/390/430 + masaüstü; `docs/34` §5.
 5. Bitince: tema `coming` kalır; `live` kararı kullanıcının.
 
+### 6a. Pilot G423 (23 Velvet Jewel Box, 2026-10-22) — kalan 10 tema için
+
+Kurulan: `platform/themes/velvet-jewel-box/` 40 Swan'ın dosya yapısıyla (5 sayfa + `site.css`/`site.js`/`thank-you.css`/
+`build_images.py`); test `tests/theme-velvet-jewel-box.test.ts` (40'ın testinden uyarlandı, 11 test). Kare kareler
+390/360/1280 px'te kontrol edildi.
+
+Tuzaklar ve çözümleri:
+- **Foto penceresi:** GPT pencereleri "yeşil halka + ortası zaten şeffaf" verdi; oval çerçevede 39'un dikdörtgen
+  `keyed_window`'u köşelerdeki çerçeveyi silerdi. Çözüm (velvet `build_images.py`): pencere = yeşil halka + çevrelediği her
+  şey (PIL flood fill; **scipy yok**, kullanıcı makinesinde kurulu değil). `Image.fromarray(...)` salt okunur: flood fill
+  öncesi `.copy()` şart. Oval pencerede CSS'te `.photo-slot{border-radius:50%}` (kırpma, çizim değil).
+- **Dar parçalar:** `tb.webp` kaynaktan büyütmez; 144 px'lik bant `ribbon-640` değil `ribbon-144.webp` adıyla çıkar →
+  CSS'teki adı build çıktısıyla aynı tut (test her `img/…` adının var olduğunu denetler).
+- **Kapanışın bölünmesi:** bant tek GPT görseli; build düğümü ölçer (orta üçte birin en geniş satırları), CSS iki `span`'e
+  `background-size: 100%/k` ile böler; yarılar `transform-origin` üst/alt + `scaleY` ile zarfın kenarına geri sarılır
+  (havada süzülen bant tuhaf durdu).
+- **Varak parıltısı (`.foil`):** `background-clip:text` gradyanı `no-repeat` + pozisyon dışına kayınca ilk harfler
+  kayboldu; 300 % genişlik ve 100 % → 0 % pozisyon her an metni örter.
+- **Kadife bant içindeki açık kart:** `.velvet-band h2` kuralı karttaki başlığı da açık renk yaptı → `.velvet-band .paper h2`
+  ile geri al.
+- **Platform kayıtları:** `lib/marketing/designs.ts` üç katmanlı (DESIGN_COPY → PREVIEW_DESIGN_COPY döngüsü → UNIQUE_INTERIORS
+  döngüsü); yeniden kurulan tema için PREVIEW girdisi güncellenir, UNIQUE_INTERIORS girdisi silinir, `REBUILT` tablosuna
+  font/sayfa/palet eklenir; yeni İngilizce cümlelerin tr/de/es/fr çevirisi `dict/market/*` (i18n eksik sayısı artmamalı).
+  `lib/audio/catalog.ts` açılış sesleri = MOTION zamanları; `lib/print/layouts.ts` PAKET 6R kaynakları + ölçülen kutular;
+  `tools/katalog.py` EK_TEMALAR eksenleri. Codex testlerinden temayı çıkar: `tests/fixtures/unique-opening-protected.json`,
+  `unique-interior-covers.json`, `tests/physical-lining.test.ts` id listesi, `tools/tests/test_recolor_parts.py` G177.
+- **Paletler (`variants`)** eski sanatla birlikte kaldırıldı; yeni sanattan sonra yeniden üretilecek.
+- **Katalog kartı:** `lib/marketing/assets.json` eski kapak/klibi gösterir; yeni yakalama (`tools/listing_templates/capture.ts`
+  → `collections/<NN>/package/shots`) + `node scripts/marketing-assets.ts --designs <id>` gerekir (üretim build'i ister).
+
 ## 7. Bu turda yapılanlar (2026-10-22)
 
 - Teşhis (yukarıda) — ekran kareleri yerel; `docs/qa/` altına konmadı.

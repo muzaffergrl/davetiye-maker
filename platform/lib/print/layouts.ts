@@ -252,15 +252,15 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     ink: '#1C1D15', accent: '#8A6A3C', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 23 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
+  // 23 (G423, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): ivory card, seed-pearl swags and a champagne
+  // satin bow across the top (down to ~18.5 %), a rose gold double rule near the bottom (~91 %) on the front; one short
+  // pearl swag at the top of the back (~11 %). `cover` for 5×7 and A5 (ChatGPT's 1068×1473). Boxes ~2 % clear of it all.
   'velvet-jewel-box': {
     collection: '23_Velvet_Jewel_Box',
-    sources: { front: 'print/invitation_front.png', back: 'print/invitation_back.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Pinyon+Script'),
     script: "'Pinyon Script', cursive", serif: "'Bodoni Moda', Georgia, serif",
-    ink: '#3A1A36', accent: '#8A5A3A', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#3A1834', accent: '#9A6650', front: [20.5, 12, 11, 12], back: [13.5, 11, 9, 11],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
   // 24 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's

@@ -1,62 +1,50 @@
-<!DOCTYPE html><!-- Velvet Jewel Box · page 5 — RSVP (/<slug>/rsvp, comp scene 6) + reply form + closing with the bow.
-     The form follows the platform RSVP contract (G042, platform/README.md "RSVP"): /rsvp/form.js sends the reply to
-     /api/rsvp/<slug> and shows exactly one [data-rsvp-state] panel; in a preview nothing is sent.
-     Personal text: none — filled on the server.
-     Thank-you mode (G075): the page stays for old links, honestly closed — the card says "Replies are closed" with the
-     thank-you title and a way home; no form (the platform also refuses replies: 403 closed, reason thank_you). --><html lang="en" class="no-js"><head>
+<!doctype html>
+<!-- Velvet Jewel Box · page 5 — RSVP (/<slug>/rsvp). Redesign of 2026-10-22 (docs/35, G423). On champagne moiré the names,
+     "Kindly reply" and the deadline; the shared G042 form (G051 questions, G069 guest names) on an ivory card with a
+     champagne ribbon-and-pearl spray at its corner, laid on a band of aubergine velvet; a reply is answered with pearls,
+     petals and tiny diamonds drifting down (GPT accents). The signature: the open ring box, the names, the way back to the
+     envelope. Personal text: none — filled on the server. Design texts: data-copy (G068). -->
+<html lang="en" class="no-js">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#e8d3b0">
 <title data-text="{copy.nav_rsvp} · {name_display}">RSVP</title>
 <meta name="description" data-attr-content="{copy.nav_rsvp} · {name_display} · {date|date-long}" content="RSVP">
 <meta property="og:type" content="website">
 <meta property="og:title" data-attr-content="{copy.nav_rsvp} · {name_display}" content="RSVP">
 <meta property="og:description" data-attr-content="{name_display} · {date|date-long}" content="">
-<meta name="theme-color" content="#F5EEE2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pinyon+Script&amp;family=Cormorant+Infant&amp;family=Lora&amp;display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Pinyon+Script&display=swap">
 <style>/* names fallback: scripts/font-fallback.ts */
 @font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:85.4%;ascent-override:99.5%;descent-override:46.8%;line-gap-override:0%}
 @font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:73.4%;ascent-override:115.7%;descent-override:54.5%;line-gap-override:0%}</style>
-<link rel="stylesheet" href="site.css"><link rel="stylesheet" href="interior.css">
+<link rel="stylesheet" href="site.css">
 <link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
 <script>document.documentElement.classList.replace('no-js','js');</script>
-<script src="site.js" defer=""></script>
-<script src="/rsvp/form.js" defer=""></script>
-<script>(function(r){if(!matchMedia("(prefers-reduced-motion: reduce)").matches){r.classList.add("u-loading");setTimeout(function(){r.classList.remove("u-loading")},2200)}})(document.documentElement);</script><script src="interior-motion.js" defer=""></script></head>
-<!-- replies collected another way (rsvp.method "none"): the whole page is off (404), like the links to it -->
-<body data-if="!rsvp.method" data-pending="This link will be added soon." data-interior="velvet-jewel-box" data-interior-layout="jewel">
-
-<main class="site-main">
-  <section class="section rsvp-sec" data-scene="rsvp-card" aria-label="RSVP">
-    
-    <div class="wrap">
-      <div class="u-sheet u-reply-card" data-u-part="card">
-        
-        <div class="u-panel-content">
-          <h1 class="script title" data-if="!thank_you_on" data-copy="rsvp_title" data-u-part="title">Will You Join Us?</h1>
-          <h1 class="script title" data-if="thank_you_on" data-copy="rsvp_closed_title" data-u-part="title">Replies are closed</h1>
-          <p class="kicker" data-if="rsvp.deadline !thank_you_on" data-copy="rsvp_by" data-u-part="kicker">Kindly reply by</p>
-          <p class="deadline" data-if="rsvp.deadline !thank_you_on" data-field="rsvp.deadline" data-u-part="deadline"></p>
-          <p class="kicker ty-kicker" data-if="thank_you_on" data-field="thank_you_title" data-u-part="kicker"></p>
-          <p data-if="!thank_you_on" data-u-part="button"><a class="btn" href="#reply" data-copy="rsvp_button">RSVP</a></p>
-          <p data-if="thank_you_on" data-u-part="button"><a class="btn" href="home.html" data-copy="home_link">Home</a></p>
-          <p class="kicker love" data-copy="love_line" data-u-part="love">With love,</p>
-          <p class="script sign" data-fit="2.5" data-fit-min=".5" data-u-part="sign"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- REPLY FORM — platform contract (G042). Field names, data-rsvp-* hooks and method="post" are required; no action. -->
-  <section class="section reply-sec" id="reply" data-scene="rsvp-form" aria-label="Reply" data-if="!thank_you_on">
-    <div class="wrap">
-      <div class="u-sheet u-reply-form" data-rsvp="" data-u-part="form">
-        <p class="kicker" data-copy="form_kicker">Kindly reply</p>
-        <h2 class="script" data-copy="form_title">Your reply</h2>
-        <form class="reply-form" data-rsvp-form="" method="post">
+<script src="site.js" defer></script>
+<script src="/rsvp/form.js" defer></script>
+</head>
+<body class="page-rsvp" data-if="!rsvp.method" data-pending="This link will be added soon.">
+<main class="rsvp-page">
+  <header class="page-heading" data-scene="rsvp-card">
+    <p class="eyebrow" data-field="name_display" data-step="names"></p>
+    <h1 data-if="!thank_you_on" data-copy="rsvp_title" data-step="title">Kindly reply</h1>
+    <h1 data-if="thank_you_on" data-copy="rsvp_closed_title" data-step="title">Replies are closed</h1>
+    <p class="body-text" data-if="!thank_you_on" data-copy="rsvp_wait" data-step="wait">We can't wait to celebrate with you</p>
+    <p class="eyebrow" data-if="rsvp.deadline !thank_you_on" data-step="wait" data-i="1"><span data-copy="rsvp_by">Kindly reply by</span> <span data-field="rsvp.deadline"></span></p>
+    <p class="reply-cta" data-if="!thank_you_on" data-step="cta"><a class="btn" href="#reply"><span data-copy="rsvp_button">RSVP</span> <span aria-hidden="true">↓</span></a></p>
+  </header>
+  <div class="velvet-band reply-band" data-if="!thank_you_on">
+  <section class="reply-card paper" id="reply">
+      <span class="spray sp-r" aria-hidden="true"></span>
+      <div class="reply-box" data-rsvp>
+        <h2 class="form-title" data-copy="form_title">Your reply</h2>
+        <span class="divider" aria-hidden="true"></span>
+        <form class="reply-form" data-rsvp-form method="post">
           <label class="field"><span class="kicker" data-copy="form_name">Your name</span>
-            <input type="text" name="name" required="" maxlength="120" autocomplete="name">
+            <input type="text" name="name" required maxlength="120" autocomplete="name">
           </label>
           <p class="field-error" data-rsvp-error-for="name"></p>
           <label class="field"><span class="kicker"><span data-copy="form_email">Email</span> <span class="opt" data-copy="form_optional">(optional)</span></span>
@@ -65,26 +53,26 @@
           <p class="field-error" data-rsvp-error-for="email"></p>
           <fieldset class="choice">
             <legend class="kicker" data-copy="form_attend">Will you attend?</legend>
-            <label><input type="radio" name="attending" value="yes" required=""> <span data-copy="form_yes">Joyfully accepts</span></label>
-            <label><input type="radio" name="attending" value="no"> <span data-copy="form_no">Regretfully declines</span></label>
+            <label><input type="radio" name="attending" value="yes" required> <span data-copy="form_yes">Yes, we'll be there!</span></label>
+            <label><input type="radio" name="attending" value="no"> <span data-copy="form_no">Sadly, we can't make it</span></label>
           </fieldset>
           <p class="field-error" data-rsvp-error-for="attending"></p>
-          <label class="field" data-rsvp-if-attending=""><span class="kicker"><span data-copy="form_guests">Number of guests</span> <span class="opt" data-copy="form_including">(including you)</span></span>
+          <label class="field" data-rsvp-if-attending><span class="kicker"><span data-copy="form_guests">Number of guests</span> <span class="opt" data-copy="form_including">(including you)</span></span>
             <input type="number" name="guests" min="1" value="1" inputmode="numeric">
           </label>
           <p class="field-error" data-rsvp-error-for="guests"></p>
           <!-- names of the other guests (G069, optional): /rsvp/form.js puts one copy of this row before the template per
                other guest when "Number of guests" is 2 or more (inputs named "party:<n>"); none for a "no", and the
-               template never shows by itself. The form's own field styles: no new decoration. -->
-          <template data-rsvp-party="">
-            <label class="field"><span class="kicker"><span data-copy="form_party">Name of guest</span> <span data-rsvp-party-number="">2</span> <span class="opt" data-copy="form_optional">(optional)</span></span>
+               template never shows by itself. The form's own field styles (G084): no new decoration. -->
+          <template data-rsvp-party>
+            <label class="field"><span class="kicker"><span data-copy="form_party">Name of guest</span> <span data-rsvp-party-number>2</span> <span class="opt" data-copy="form_optional">(optional)</span></span>
               <input type="text" maxlength="120" autocomplete="off">
             </label>
             <p class="field-error" data-rsvp-error-for="party"></p>
           </template>
           <!-- the couple's own questions (content rsvp.questions, G051): asked of guests who accept; form.js names the
-               inputs "answer:<id>". Choice = pills like "Will you attend?", text = a short answer. -->
-          <div class="questions" data-rsvp-if-attending="" data-if="rsvp.questions">
+               inputs "answer:<id>". Choice = the same pills as "Will you attend?", text = a short answer. -->
+          <div class="questions" data-rsvp-if-attending data-if="rsvp.questions">
             <fieldset class="choice question" data-repeat="rsvp.questions" data-attr-data-rsvp-question=".id">
               <legend class="kicker"><span data-field=".label"></span></legend>
               <div class="q-options" data-if=".options">
@@ -100,46 +88,45 @@
           <p class="field-error" data-rsvp-error-for="message"></p>
           <p class="send"><button class="btn" type="submit" data-copy="form_send">Send reply</button></p>
           <!-- a system sentence (shown only without JavaScript): fixed, docs/11 §3.7 -->
-          <p class="nojs-only note" data-copy-fixed="">Please turn on JavaScript to send your reply.</p>
+          <p class="nojs-only note" data-copy-fixed>Please turn on JavaScript to send your reply.</p>
         </form>
-        <div class="reply-panel" data-rsvp-state="success" hidden="">
-          <p class="script" data-copy="rsvp_thanks">Thank you!</p>
-          <p class="note" data-rsvp-reply="yes" data-copy="rsvp_thanks_yes">We can't wait to celebrate with you.</p>
+        <div class="reply-panel" data-rsvp-state="success" hidden>
+          <p class="panel-title" data-copy="rsvp_thanks">Thank you!</p>
+          <p class="note" data-rsvp-reply="yes" data-copy="rsvp_thanks_yes">Your reply is with us. We look forward to celebrating together.</p>
           <p class="note" data-rsvp-reply="no" data-copy="rsvp_thanks_no">We'll miss you — thank you for letting us know.</p>
-          <p><button class="textlink" type="button" data-rsvp-again="" data-copy="rsvp_again">Send another reply</button></p>
+          <p><button class="textlink" type="button" data-rsvp-again data-copy="rsvp_again">Send another reply</button></p>
         </div>
-        <div class="reply-panel" data-rsvp-state="closed" hidden="">
-          <p class="script" data-copy="rsvp_closed_title">Replies are closed</p>
-          <p class="note" data-rsvp-message="">Please contact the couple directly.</p>
+        <div class="reply-panel" data-rsvp-state="closed" hidden>
+          <p class="panel-title" data-copy="rsvp_closed_title">Replies are closed</p>
+          <p class="note" data-rsvp-message>Please contact the couple directly.</p>
         </div>
-        <div class="reply-panel" data-rsvp-state="error" hidden="">
-          <p class="note" data-rsvp-message="">We could not send your reply. Please try again.</p>
+        <div class="reply-panel" data-rsvp-state="error" hidden>
+          <p class="note" data-rsvp-message>We could not send your reply. Please try again.</p>
         </div>
-        <div class="reply-panel" data-rsvp-state="preview" hidden="">
-          <p class="note" data-rsvp-message="">This is a preview, so replies are not sent.</p>
+        <div class="reply-panel" data-rsvp-state="preview" hidden>
+          <p class="note" data-rsvp-message>This is a preview, so replies are not sent.</p>
         </div>
       </div>
-    </div>
+    </section>
+  </div>
+  <section class="reply-card paper thank-you-copy" data-if="thank_you_on">
+    <h2 data-field="thank_you_title"></h2>
+    <p><a href="home.html" class="btn"><span data-copy="home_link">Home</span></a></p>
   </section>
-
-  <section class="section closing u-sheet" data-scene="rsvp-closing" data-petals="closing" aria-label="Thank you">
-    
-    <h2 class="script title" data-copy="closing_title" data-u-part="title">Thank you</h2>
-    <p class="line" data-if="!thank_you_on" data-copy="closing_line" data-u-part="line">We can't wait to celebrate with you.</p>
-    <p class="line" data-if="thank_you_on" data-copy="closing_line_after" data-u-part="line">It meant the world to have you with us.</p>
-    <p class="kicker" data-u-part="meta"><span data-field="name_display"></span> · <span data-field="date"></span></p>
-    <p class="kicker" style="margin-top:22px" data-u-part="meta"><a class="textlink" href="index.html?replay=1" data-copy="rsvp_replay">Replay the envelope</a></p>
-  </section>
+  <footer class="signature" data-scene="rsvp-closing">
+    <span class="ringbox" aria-hidden="true" data-step="names"><span class="ringbox-ring"></span></span>
+    <p class="sig-names" data-field="name_display" data-step="names"></p>
+    <p class="eyebrow" data-field="date" data-step="names" data-i="1"></p>
+    <p data-step="links"><a class="textlink" href="index.html?replay=1"><span data-copy="rsvp_replay">Open the invitation again</span></a></p>
+  </footer>
 </main>
-
 <nav class="site-nav" aria-label="Wedding pages">
   <ul>
     <li><a href="home.html"><span data-copy="nav_home">Home</span></a></li>
     <li data-optional="our_story"><a href="story.html"><span data-copy="nav_story">Story</span></a></li>
     <li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on" data-copy="nav_details">Details</span><span data-if="thank_you_on" data-copy="nav_day">The Day</span></a></li>
-    <li data-if="!thank_you_on"><a class="nav-rsvp" href="rsvp.html" aria-current="page"><span data-copy="nav_rsvp">RSVP</span></a></li>
+    <li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html" aria-current="page"><span data-copy="nav_rsvp">RSVP</span></a></li>
   </ul>
 </nav>
-
-
-</body></html>
+</body>
+</html>

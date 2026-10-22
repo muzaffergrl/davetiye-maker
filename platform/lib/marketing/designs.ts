@@ -1249,9 +1249,9 @@ const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> 
     home: msg("Charcoal paper, champagne gold and candlelight by the water. A quiet, refined invitation opens onto the lake, the story and the evening ahead."),
   },
   'velvet-jewel-box': {
-    style: msg("Aubergine envelope, pearl-set satin detail and a rose-gold keepsake seal."),
-    opening: msg("Your guests tap the envelope. An octagonal velvet case opens along its left spine, revealing an oval portrait on pearl-and-plum stationery before the wedding home page opens."),
-    home: msg("Aubergine velvet, champagne satin and a touch of rose gold. The invitation opens into a polished celebration with a keepsake feel."),
+    style: msg("Aubergine velvet envelope in a champagne satin band, a rose-gold solitaire threaded on the ribbon."),
+    opening: msg("Your guests tap the envelope. The diamond catches the light, the ring slides off the satin band and floats away, the band parts, the lobed velvet flap opens onto champagne satin and the pearl-edged card with your portrait rises out of the pocket before the wedding home page opens."),
+    home: msg("Champagne moiré, aubergine velvet, seed pearls and rose gold. Your portrait sits in an oval pearl cameo and the invitation opens on a band of velvet like a jewellery case."),
   },
   'grand-theatre-premiere': {
     style: msg("Peacock-blue envelope, antique-gold seal and an ivory playbill-inspired schedule."),
@@ -1326,19 +1326,6 @@ const UNIQUE_INTERIORS: Record<string,{fonts:string[];home:string;story:string;d
     "story": "Panoramic villa frames: a full-width opening photograph and two intimate moments beneath it.",
     "details": "A villa dinner programme with generous time columns and a panoramic venue photograph.",
     "rsvp": "A charcoal-and-champagne reply suite with Italian botanical stationery."
-  },
-  "velvet-jewel-box": {
-    "fonts": [
-      "Cormorant Garamond",
-      "Great Vibes",
-      "Lora",
-      "Pinyon Script",
-      "Cormorant Infant"
-    ],
-    "home": "An aubergine velvet jewellery suite with an oval pearl portrait and a silk-lined invitation.",
-    "story": "Three oval pearl-set locket portraits, alternating with handwritten captions like keepsakes in a jewellery case.",
-    "details": "Pearl-edged keepsake panels and an intimate evening programme.",
-    "rsvp": "A velvet-and-rose-gold reply card and silk-lined response form."
   },
   "grand-theatre-premiere": {
     "fonts": [
@@ -1461,6 +1448,28 @@ for(const [id,p]of Object.entries(UNIQUE_INTERIORS)){
  full.intro=msg(p.home);
  full.pages={home:msg(p.home),story:msg(p.story),details:msg(p.details),rsvp:msg(p.rsvp)};
 }
+
+// Rebuilt from the design's own layered GPT parts (docs/35, 2026-10-22; pilot G423): its own fonts, pages and palette
+// replace the shared rebuilt-eleven copy above.
+const REBUILT: Record<string, Pick<DesignCopy, 'fonts' | 'pages' | 'palette' | 'llmsLine'>> = {
+  'velvet-jewel-box': {
+    fonts: ['Pinyon Script', 'Bodoni Moda'],
+    pages: {
+      home: msg('Your portrait in an oval rose gold and pearl cameo on an ivory card, the invitation on a band of aubergine velvet with a countdown and calendar links, and an open ring box to sign off.'),
+      story: msg('Three photos in the oval settings of a velvet ring tray on a turning display. Guests swipe or drag it, or use the arrows or the keyboard.'),
+      details: msg('The order of the day on an ivory card under a strand of pearls, the venue in a wide pearl-edged frame, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('An ivory reply card on aubergine velvet with your reply-by date and the configurable RSVP form; pearls and petals drift down when a reply is sent.'),
+    },
+    palette: [
+      { name: msg('Champagne'), hex: '#E8D3B0' },
+      { name: msg('Aubergine'), hex: '#2A1328' },
+      { name: msg('Plum'), hex: '#4A2142' },
+      { name: msg('Rose gold'), hex: '#C99A86' },
+    ],
+    llmsLine: 'an aubergine velvet envelope in a champagne satin band with a rose gold ring threaded on it, an oval pearl cameo portrait and a turning photo display.',
+  },
+};
+for (const [id, r] of Object.entries(REBUILT)) Object.assign(DESIGN_COPY[id], r);
 
 function previewDesignCopy(d: DesignCommerce): DesignCopy | undefined {
   const full = DESIGN_COPY[d.id];

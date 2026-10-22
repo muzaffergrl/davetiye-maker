@@ -78,6 +78,7 @@ rakam, monogram, logo, QR hiçbir görselde yok; isimler, tarih ve baş harfler 
   5:00 PM, America/New_York; black tie optional; URL ve medya null) — değişmedi.
 - GPT istekleri: `assets/gpt/GPT_PROMPTS.md` (PAKET 5R website katmanları W1–W18 = 20 dosya, PAKET 2 örnek fotoğraflar
   **var**, PAKET 6R basılı davetiye ön/arka; PAKET 3 GEÇERSİZ); prova şekli `assets/gpt/kuru_sekil.json`.
-- Tema: `platform/themes/velvet-jewel-box/` **yeniden kurulacak** (G422–G432; 39 pilot yapısı, `docs/34`); GPT parçaları
-  G222–G232. Durum: **concept** (yeniden tasarım), satış durumu `coming`.
+- Tema: `platform/themes/velvet-jewel-box/` **yeniden kuruldu** (G423 pilotu, 2026-10-22; 39 pilot yapısı, `docs/34`,
+  dersler `docs/35` §6a) — GPT parçaları G223 (PAKET 5R 20 dosya, PAKET 6R 2 dosya). Durum: **editable_draft**, katalogda
+  `preview` ("Coming soon"); satış yok. Katalog kapak görüntüsü/klibi henüz eski (yeniden yakalama bekliyor).
 - Etsy taslağı: `package/listing/listing_v3.md` (yayınlanmadı, K41; tema kurulunca yeni görünüme göre güncellenir).
