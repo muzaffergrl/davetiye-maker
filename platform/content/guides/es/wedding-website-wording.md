@@ -99,7 +99,7 @@ Aquí lo práctico gana a lo poético. Da nombres, distancias y plazos.
 
 ## Textos para la confirmación (RSVP)
 
-La línea de confirmación debe incluir la fecha límite escrita completa. La opción de rechazar debe ser tan amable como la de aceptar.
+La línea de confirmación debe incluir la fecha límite escrita completa. La opción de rechazar debe ser tan amable como la de aceptar. Para las líneas que llevan a los invitados de una tarjeta impresa a tu web, mira [cómo poner la web de boda en la invitación](/guides/wedding-website-on-invitation).
 
 | Tono | Línea de respuesta | Aceptar | Rechazar |
 |---|---|---|---|

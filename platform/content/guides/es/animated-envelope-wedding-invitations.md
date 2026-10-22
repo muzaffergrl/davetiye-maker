@@ -51,7 +51,7 @@ Si buscas invitaciones con sobre animado, verás dos productos bastante distinto
 Dos preguntas suelen decidirlo:
 
 - **¿Quieres que el servicio envíe las invitaciones por ti?** Si es así y te importa saber quién las abre, una tarjeta por correo está pensada justo para eso.
-- **¿Necesitas también una web de boda?** Si es así, un sobre que se abre en la web te da un solo enlace para todo, en lugar de una tarjeta y una segunda página. Nuestra guía sobre [qué poner en tu web de boda](/guides/what-to-put-on-your-wedding-website) muestra lo que suele necesitar esa web.
+- **¿Necesitas también una web de boda?** Si es así, un sobre que se abre en la web te da un solo enlace para todo, en lugar de una tarjeta y una segunda página. Nuestra guía sobre [qué poner en tu web de boda](/guides/what-to-put-on-your-wedding-website) muestra lo que suele necesitar esa web, y [invitación digital o web de boda](/guides/wedding-website-vs-invitation) compara las opciones con más detalle.
 
 ## Qué revisar antes de elegir
 

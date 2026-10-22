@@ -46,7 +46,7 @@ Todos los que reciban el "reserva la fecha" deben recibir después una invitaci�
 Tradicionalmente, las invitaciones se envían entre seis y ocho semanas antes de la boda. Tanto si tu invitación es impresa como digital, debe remitir a los invitados a la web para los detalles y la respuesta. Dos formas habituales:
 
 - **Un enlace en el mensaje** con el que envías una invitación digital. Comprueba que la vista previa del enlace muestra vuestros nombres y la fecha.
-- **Un código QR o un enlace corto** en una tarjeta de detalles dentro de una invitación en papel. Escanea la prueba impresa con dos móviles antes de imprimirlo todo.
+- **Un código QR o un enlace corto** en una tarjeta de detalles dentro de una invitación en papel. Escanea la prueba impresa con dos móviles antes de imprimirlo todo. Nuestra guía sobre [cómo poner la web en la invitación](/guides/wedding-website-on-invitation) tiene textos para cada tarjeta.
 
 Las guías de etiqueta no coinciden sobre si poner la dirección de la web en la tarjeta principal de la invitación; una tarjeta de detalles aparte es el término medio seguro. La información de la lista de bodas nunca va en la propia invitación.
 

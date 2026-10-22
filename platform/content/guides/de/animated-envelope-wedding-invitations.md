@@ -51,7 +51,7 @@ Suchen Sie nach animierten Umschlag-Einladungen, finden Sie unter demselben Name
 Zwei Fragen entscheiden meist:
 
 - **Soll der Anbieter die Einladungen für Sie verschicken?** Wenn ja und Ihnen die Öffnungsverfolgung wichtig ist, ist eine E-Mail-Karte genau dafür gebaut.
-- **Brauchen Sie auch eine Hochzeitswebsite?** Wenn ja, gibt Ihnen ein Umschlag, der sich zur Website öffnet, einen einzigen Link für alles statt einer Karte plus einer zweiten Seite. Unser Ratgeber dazu, [was auf Ihre Hochzeitswebsite gehört](/guides/what-to-put-on-your-wedding-website), zeigt, was diese Seite meist braucht.
+- **Brauchen Sie auch eine Hochzeitswebsite?** Wenn ja, gibt Ihnen ein Umschlag, der sich zur Website öffnet, einen einzigen Link für alles statt einer Karte plus einer zweiten Seite. Unser Ratgeber dazu, [was auf Ihre Hochzeitswebsite gehört](/guides/what-to-put-on-your-wedding-website), zeigt, was diese Seite meist braucht, und [digitale Einladung oder Hochzeitswebsite](/guides/wedding-website-vs-invitation) vergleicht die Varianten genauer.
 
 ## Was Sie vor der Wahl prüfen sollten
 

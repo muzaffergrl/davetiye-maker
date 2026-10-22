@@ -51,7 +51,7 @@ Animasyonlu zarf davetiyesi diye arama yaptığınızda aynı ad altında birbir
 Karar çoğu zaman iki soruyla verilir:
 
 - **Davetiyeleri hizmetin sizin yerinize göndermesini istiyor musunuz?** Cevabınız evetse ve açılma takibi sizin için önemliyse, e-postayla giden kart tam bunun için tasarlanmıştır.
-- **Bir düğün websitesine de ihtiyacınız var mı?** Cevabınız evetse, websiteye açılan bir zarf size bir kart artı ikinci bir site yerine her şey için tek bir link verir. [Düğün websitesine ne konur](/guides/what-to-put-on-your-wedding-website) rehberimiz, o sitenin genellikle neye ihtiyaç duyduğunu gösteriyor.
+- **Bir düğün websitesine de ihtiyacınız var mı?** Cevabınız evetse, websiteye açılan bir zarf size bir kart artı ikinci bir site yerine her şey için tek bir link verir. [Düğün websitesine ne konur](/guides/what-to-put-on-your-wedding-website) rehberimiz, o sitenin genellikle neye ihtiyaç duyduğunu gösteriyor; [dijital davetiye mi, düğün websitesi mi](/guides/wedding-website-vs-invitation) rehberi de düzenleri daha ayrıntılı karşılaştırıyor.
 
 ## Seçmeden önce neye bakmalı?
 

@@ -99,7 +99,7 @@ Burada pratiklik şiirsellikten önce gelir. İsimler, mesafeler ve son tarihler
 
 ## LCV metinleri
 
-LCV satırında son tarih açıkça yazılı olmalı. Katılamama seçeneği de katılma seçeneği kadar nazik olmalı.
+LCV satırında son tarih açıkça yazılı olmalı. Katılamama seçeneği de katılma seçeneği kadar nazik olmalı. Misafirleri basılı bir karttan websitenize yönlendiren satırlar için [düğün websitesi davetiyeye nasıl eklenir](/guides/wedding-website-on-invitation) rehberine bakın.
 
 | Ton | Yanıt satırı | Katılıyorum | Katılamıyorum |
 |---|---|---|---|

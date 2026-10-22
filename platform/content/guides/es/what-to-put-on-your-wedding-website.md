@@ -9,7 +9,7 @@ keyword: qué poner en la web de boda
 quickAnswer: Toda web de boda necesita vuestros nombres, la fecha, la hora de la ceremonia con su zona horaria, el lugar con enlace al mapa, el programa, y cómo y hasta cuándo confirmar. Extras útiles: vuestra historia, viaje y hotel, código de vestimenta, lista de bodas y preguntas frecuentes. Deja fuera tu dirección y los planes privados.
 ---
 
-La web de una boda tiene una sola misión: responder a las preguntas de tus invitados antes de que tengan que hacértelas. Las buenas son breves, exactas y fáciles de leer en el móvil. Esta lista lo ordena todo en tres grupos, para que empieces por lo importante y pares cuando tengas suficiente.
+La web de una boda tiene una sola misión: responder a las preguntas de tus invitados antes de que tengan que hacértelas. Las buenas son breves, exactas y fáciles de leer en el móvil. Esta lista lo ordena todo en tres grupos, para que empieces por lo importante y pares cuando tengas suficiente. ¿No tienes claro si necesitas una web? Mira [invitación digital o web de boda](/guides/wedding-website-vs-invitation).
 
 ## Los imprescindibles
 

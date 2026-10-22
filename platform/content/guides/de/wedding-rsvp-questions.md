@@ -42,7 +42,7 @@ Bevor Sie eine Frage hinzufügen, fragen Sie sich, wer die Antwort nutzt und bis
 
 Zwei Hinweise zu dieser Tabelle:
 
-- **Die Menüwahl gehört in die Antwort.** Das [Emily Post Institute](https://emilypost.com/advice/how-to-word-a-wedding-response-card) empfiehlt, die Wahl des Hauptgerichts auf der Antwortkarte (oder in der Online-Antwort) abzufragen, damit der Caterer eine vollständige Liste bekommt.
+- **Die Menüwahl gehört in die Antwort.** Das [Emily Post Institute](https://emilypost.com/advice/how-to-word-a-wedding-response-card) empfiehlt, die Wahl des Hauptgerichts auf der Antwortkarte (oder in der Online-Antwort) abzufragen, damit der Caterer eine vollständige Liste bekommt. Antworten Gäste online, braucht die gedruckte Antwortkarte nur Adresse und Datum; siehe [Hochzeitswebsite auf die Einladung bringen](/guides/wedding-website-on-invitation).
 - **Prüfen Sie die Termine in Ihren Verträgen.** Die Spalte „Wann sie gebraucht wird“ hängt von Caterer, Location und Transportunternehmen ab. Unser Ratgeber dazu, [wann Sie Ihre Hochzeitswebsite teilen und die RSVP-Frist setzen](/guides/when-to-send-your-wedding-website), zeigt, wie Sie von diesen Terminen aus rückwärts rechnen.
 
 ## Fragen, die Sie weglassen sollten, und warum

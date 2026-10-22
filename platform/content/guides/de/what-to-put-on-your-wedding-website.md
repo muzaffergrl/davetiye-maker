@@ -9,7 +9,7 @@ keyword: was gehört auf die Hochzeitswebsite
 quickAnswer: Jede Hochzeitswebsite braucht Ihre Namen, das Datum, die Uhrzeit der Trauung mit Zeitzone, die Location mit Kartenlink, den Ablauf sowie wie und bis wann geantwortet wird. Hilfreiche Extras sind Ihre Geschichte, Anreise und Hotels, der Dresscode, ein Link zur Wunschliste und Antworten auf häufige Fragen. Lassen Sie Ihre Wohnadresse und private Pläne weg.
 ---
 
-Eine Hochzeitswebsite hat eine Aufgabe: die Fragen Ihrer Gäste zu beantworten, bevor sie Sie fragen müssen. Gute Websites sind kurz, genau und am Handy leicht zu lesen. Diese Checkliste ordnet alles in drei Gruppen, damit Sie mit dem Wichtigen beginnen und aufhören können, sobald es genug ist.
+Eine Hochzeitswebsite hat eine Aufgabe: die Fragen Ihrer Gäste zu beantworten, bevor sie Sie fragen müssen. Gute Websites sind kurz, genau und am Handy leicht zu lesen. Diese Checkliste ordnet alles in drei Gruppen, damit Sie mit dem Wichtigen beginnen und aufhören können, sobald es genug ist. Nicht sicher, ob Sie überhaupt eine Website brauchen? Lesen Sie [digitale Einladung oder Hochzeitswebsite](/guides/wedding-website-vs-invitation).
 
 ## Die Pflichtangaben
 

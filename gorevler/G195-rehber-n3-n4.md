@@ -27,12 +27,13 @@ Kullanıcı (2026-10-22): "dalga 2 ile devam et, N3 ve N4'ü yaz" (docs/36).
 - Kod: `lib/marketing/guides.ts` yeni jeton `{{domain}}` (= `siteHost()`, çift adreslerindeki alan adı), N4 örneği
   "bkestudio.com/clara-and-julian" olarak görünüyor. Test: `tests/g195.test.ts`.
 - İç linkler (İngilizce): G3 ve G4 → N4; G2 ve N1 → N3; N2 → N4; N3 ↔ N4, N3 → N1.
-- Kontrol: KONTROL_SONUCU
+- Kontrol (G196 build'i ile): iki sayfa 200, tek H1, Article + BreadcrumbList, hreflang; 390 px'te yatay taşma yok (tablolar
+  kendi kutusunda kayıyor). Görüntüler `platform/previews/g195/`.
 - Testler: TEST_SONUCU
-- Çeviri yapılmadı: N3/N4 TR/DE/ES/FR sayfaları şimdilik İngilizce metni gösteriyor; çevirilerde yeni iç link cümleleri de yok.
+- Çeviri: G196.
 
 ## Önerilen görevler (entegratöre)
-- N3 + N4 çevirisi ve çevirilerde bu dalganın iç link cümleleri.
+- ~~N3 + N4 çevirisi~~ → G196 (yapıldı).
 - Dalga 3: N5 (RSVP son tarihi), N6 (cevap vermeyen misafir), G3 başlık güncellemesi (docs/36).
 
 ## Günlük

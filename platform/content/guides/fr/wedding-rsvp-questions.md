@@ -42,7 +42,7 @@ Avant d'ajouter une question, demandez-vous qui utilisera la réponse et pour qu
 
 Deux remarques sur ce tableau :
 
-- **Le choix du menu se demande dans la réponse.** L'[Emily Post Institute](https://emilypost.com/advice/how-to-word-a-wedding-response-card) conseille, quand les invités choisissent leur plat, de le demander sur la carte-réponse (ou dans la réponse en ligne), afin que le traiteur reçoive une liste complète.
+- **Le choix du menu se demande dans la réponse.** L'[Emily Post Institute](https://emilypost.com/advice/how-to-word-a-wedding-response-card) conseille, quand les invités choisissent leur plat, de le demander sur la carte-réponse (ou dans la réponse en ligne), afin que le traiteur reçoive une liste complète. Si les invités répondent en ligne, le carton-réponse imprimé n'a besoin que de l'adresse et de la date ; voyez [comment indiquer son site de mariage sur le faire-part](/guides/wedding-website-on-invitation).
 - **Vérifiez les dates dans vos contrats.** La colonne « pour quand » dépend de votre traiteur, de votre lieu et de votre société de transport. Notre guide sur [quand partager votre site de mariage et fixer la date limite du RSVP](/guides/when-to-send-your-wedding-website) montre comment compter à rebours à partir de ces dates.
 
 ## Les questions à éviter, et pourquoi

@@ -99,7 +99,7 @@ Ici, le pratique l'emporte sur le poétique. Donnez des noms, des distances et d
 
 ## Formuler le RSVP
 
-La ligne RSVP doit indiquer la date limite, écrite en toutes lettres. L'option de refus doit être aussi aimable que l'option d'acceptation.
+La ligne RSVP doit indiquer la date limite, écrite en toutes lettres. L'option de refus doit être aussi aimable que l'option d'acceptation. Pour les lignes qui mènent les invités d'une carte imprimée à votre site, voyez [comment indiquer son site de mariage sur le faire-part](/guides/wedding-website-on-invitation).
 
 | Ton | Ligne de réponse | Accepter | Décliner |
 |---|---|---|---|

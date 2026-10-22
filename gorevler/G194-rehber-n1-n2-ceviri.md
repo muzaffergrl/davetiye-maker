@@ -23,7 +23,7 @@ Kullanıcı (2026-10-22): "N1 ve N2'yi 4 dile çevir".
 - Mevcut çevirilerde (G1, G2, G5, G6 × 4 dil) İngilizcedeki G193 iç link cümlelerinin karşılıkları eklendi (16 cümle).
 - Canlı build: 8 sayfa 200, `html lang` doğru, "This guide is available in English" uyarısı yok, Article `inLanguage` doğru,
   hreflang 5 dil + x-default.
-- Testler: TEST_SONUCU
+- Testler: `npm test` 1689/1689 (0 hata, 0 atlanan), build temiz.
 - Ana dili konuşan biri tarafından okunmadı (çeviriyi Claude yaptı; mevcut 24 çeviri de aynı yolla yapılmıştı).
 
 ## Günlük

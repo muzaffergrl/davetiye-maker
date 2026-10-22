@@ -46,7 +46,7 @@ Toute personne qui reçoit un save the date doit ensuite recevoir un faire-part.
 Traditionnellement, les faire-part partent six à huit semaines avant le mariage. Qu'il soit imprimé ou numérique, votre faire-part doit renvoyer les invités vers le site pour les détails et la réponse. Deux façons courantes :
 
 - **Un lien dans le message** que vous envoyez avec un faire-part numérique. Vérifiez que l'aperçu du lien affiche vos prénoms et la date.
-- **Un QR code ou un lien court** sur une carte d'informations glissée dans un faire-part papier. Scannez l'épreuve imprimée avec deux téléphones avant de tout imprimer.
+- **Un QR code ou un lien court** sur une carte d'informations glissée dans un faire-part papier. Scannez l'épreuve imprimée avec deux téléphones avant de tout imprimer. Notre guide pour [indiquer votre site sur le faire-part](/guides/wedding-website-on-invitation) propose des formulations pour chaque carte.
 
 Les guides d'étiquette divergent sur l'opportunité de mettre l'adresse du site sur le faire-part principal ; une carte d'informations séparée est le compromis sûr. Les informations sur la liste de mariage ne figurent jamais sur le faire-part lui-même.
 

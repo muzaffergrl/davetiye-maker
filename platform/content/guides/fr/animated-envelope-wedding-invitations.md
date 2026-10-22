@@ -51,7 +51,7 @@ Si vous cherchez des faire-part à enveloppe animée, vous verrez deux produits 
 Deux questions suffisent souvent à décider :
 
 - **Voulez-vous que le service envoie les invitations à votre place ?** Si oui, et si le suivi des ouvertures compte pour vous, une carte par e-mail est faite pour cela.
-- **Avez-vous aussi besoin d'un site de mariage ?** Si oui, une enveloppe qui s'ouvre sur le site vous donne un seul lien pour tout, au lieu d'une carte plus un second site. Notre guide sur [ce qu'il faut mettre sur votre site de mariage](/guides/what-to-put-on-your-wedding-website) montre ce dont ce site a généralement besoin.
+- **Avez-vous aussi besoin d'un site de mariage ?** Si oui, une enveloppe qui s'ouvre sur le site vous donne un seul lien pour tout, au lieu d'une carte plus un second site. Notre guide sur [ce qu'il faut mettre sur votre site de mariage](/guides/what-to-put-on-your-wedding-website) montre ce dont ce site a généralement besoin, et [faire-part numérique ou site de mariage](/guides/wedding-website-vs-invitation) compare les formules plus en détail.
 
 ## Ce qu'il faut vérifier avant de choisir
 

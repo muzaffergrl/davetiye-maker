@@ -46,7 +46,7 @@ Alle, die ein Save-the-Date erhalten, sollten später auch eine Einladung bekomm
 Einladungen werden traditionell sechs bis acht Wochen vor der Hochzeit verschickt. Ob Ihre Einladung gedruckt oder digital ist: Sie sollte die Gäste für die Details und die Antwort auf die Website verweisen. Zwei verbreitete Wege:
 
 - **Ein Link in der Nachricht**, die Sie mit einer digitalen Einladung schicken. Prüfen Sie, ob die Linkvorschau Ihre Namen und das Datum zeigt.
-- **Ein QR-Code oder ein kurzer Link** auf einer Infokarte in einer Papiereinladung. Scannen Sie das gedruckte Probeexemplar mit zwei Handys, bevor Sie alles drucken.
+- **Ein QR-Code oder ein kurzer Link** auf einer Infokarte in einer Papiereinladung. Scannen Sie das gedruckte Probeexemplar mit zwei Handys, bevor Sie alles drucken. Unser Ratgeber, wie Sie [die Website auf die Einladung bringen](/guides/wedding-website-on-invitation), hat Formulierungen für jede Karte.
 
 Etikette-Ratgeber sind sich uneinig, ob die Website-Adresse auf die eigentliche Einladungskarte gehört; eine separate Infokarte ist der sichere Mittelweg. Angaben zur Wunschliste gehören nie auf die Einladung selbst.
 

@@ -101,7 +101,7 @@ Hier gilt: praktisch schlägt poetisch. Nennen Sie Namen, Entfernungen und Frist
 
 ## Texte für die RSVP
 
-Die RSVP-Zeile sollte die Frist enthalten, ausgeschrieben. Die Absage-Option sollte genauso freundlich sein wie die Zusage.
+Die RSVP-Zeile sollte die Frist enthalten, ausgeschrieben. Die Absage-Option sollte genauso freundlich sein wie die Zusage. Für die Zeilen, die Gäste von einer gedruckten Karte auf Ihre Website führen, siehe [Hochzeitswebsite auf die Einladung bringen](/guides/wedding-website-on-invitation).
 
 | Tonlage | Antwortzeile | Zusage | Absage |
 |---|---|---|---|

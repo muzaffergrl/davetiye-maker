@@ -9,7 +9,7 @@ keyword: que mettre sur un site de mariage
 quickAnswer: Tout site de mariage doit indiquer vos prénoms, la date, l'heure de la cérémonie avec son fuseau horaire, le lieu avec un lien de carte, le programme, et comment répondre et avant quelle date. Extras utiles : votre histoire, voyage et hôtels, dress code, liste de mariage et questions fréquentes. Omettez votre adresse et vos projets privés.
 ---
 
-Un site de mariage n'a qu'une mission : répondre aux questions de vos invités avant qu'ils n'aient à vous les poser. Les bons sites sont courts, exacts et faciles à lire sur téléphone. Cette liste classe tout en trois groupes, pour que vous commenciez par ce qui compte et vous arrêtiez quand vous en avez assez.
+Un site de mariage n'a qu'une mission : répondre aux questions de vos invités avant qu'ils n'aient à vous les poser. Les bons sites sont courts, exacts et faciles à lire sur téléphone. Cette liste classe tout en trois groupes, pour que vous commenciez par ce qui compte et vous arrêtiez quand vous en avez assez. Vous ne savez pas si un site vous est utile ? Voyez [faire-part numérique ou site de mariage](/guides/wedding-website-vs-invitation).
 
 ## L'indispensable
 

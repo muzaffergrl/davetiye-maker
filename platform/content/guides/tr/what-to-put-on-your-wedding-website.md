@@ -9,7 +9,7 @@ keyword: düğün websitesine neler konmalı
 quickAnswer: Her düğün websitesinde isimleriniz, tarih, saat dilimiyle birlikte tören saati, harita linkiyle mekân, program ve nasıl ve ne zamana kadar LCV verileceği bulunmalı. İşe yarayan ekstralar hikâyeniz, ulaşım ve otel bilgileri, kıyafet kuralı, hediye listesi linki ve sık sorulan soruların yanıtlarıdır. Ev adresinizi ve özel planlarınızı koymayın.
 ---
 
-Bir düğün websitesinin tek bir görevi vardır: misafirlerinizin sorularını, size sormak zorunda kalmadan yanıtlamak. İyi olanlar kısa, doğru ve telefonda kolay okunur. Bu kontrol listesi her şeyi üç gruba ayırıyor; böylece önemli olanla başlayıp yeterli olduğunda durabilirsiniz.
+Bir düğün websitesinin tek bir görevi vardır: misafirlerinizin sorularını, size sormak zorunda kalmadan yanıtlamak. İyi olanlar kısa, doğru ve telefonda kolay okunur. Bu kontrol listesi her şeyi üç gruba ayırıyor; böylece önemli olanla başlayıp yeterli olduğunda durabilirsiniz. Bir websiteye ihtiyacınız olduğundan emin değil misiniz? [Dijital davetiye mi, düğün websitesi mi](/guides/wedding-website-vs-invitation) rehberine bakın.
 
 ## Olmazsa olmazlar
 

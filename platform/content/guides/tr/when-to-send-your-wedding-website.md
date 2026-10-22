@@ -46,7 +46,7 @@ Bu aşamada websitede yazması gerekenler:
 Davetiyeler geleneksel olarak düğünden altı ila sekiz hafta önce gönderilir. Davetiyeniz ister basılı ister dijital olsun, ayrıntılar ve yanıt için misafirleri websiteye yönlendirmeli. Yaygın iki yol:
 
 - Dijital davetiyeyle birlikte gönderdiğiniz **mesajda bir link**. Link önizlemesinin isimlerinizi ve tarihinizi gösterdiğini kontrol edin.
-- Kâğıt davetiyedeki bir detay kartında **QR kod ya da kısa link**. Her şeyi bastırmadan önce basılı provayı iki telefonla tarayın.
+- Kâğıt davetiyedeki bir detay kartında **QR kod ya da kısa link**. Her şeyi bastırmadan önce basılı provayı iki telefonla tarayın. [Websiteyi davetiyeye eklemek](/guides/wedding-website-on-invitation) rehberimizde her kart için metinler var.
 
 Görgü rehberleri website adresinin ana davetiye kartına konması konusunda farklı düşünür; ayrı bir detay kartı güvenli bir orta yoldur. Hediye listesi bilgisi asla davetiyenin kendisine konmaz.
 
