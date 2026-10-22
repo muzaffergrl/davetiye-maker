@@ -177,6 +177,39 @@ bu tablodaki ölçümler ve 2027-01-22 civarı 18 rehberin gözden geçirmesi.
 | Küme C | Rehberden `/designs` ya da demoya tıklama oranı < %1 (`Tracker.tsx` olayları) |
 | GEO | Aylık AI kontrolünde (docs/14 §11.3) RSVP ve zarf sorgularında BKE Studio hiç alıntılanmıyor |
 
+## 7. Yeni konu adayları (G207, 2026-10-22)
+
+Kullanıcı: "yeni konular öner". Aynı yöntem: adaylar **ürünün gerçek özelliklerinden** (facts.ts) çıkarıldı, 16 sorgu
+arandı (ABD sonuçları), mevcut 18 rehberle çakışma kontrol edildi. Arama hacmi verisi yine yok; sıra tahmindir ve GSC
+gelince yeniden yapılır.
+
+### Önerilenler (öncelik sırasıyla)
+
+| # | Rehber (çalışma başlığı) | Hedef sorgu (+ ikincil) | İlk sayfada kim var | Ürün bağı (facts.ts) | Öneri |
+|---|---|---|---|---|---|
+| **N13** | Bilingual Wedding Website: How to Welcome Guests in Two Languages | bilingual wedding website · multilingual wedding website (· invitation for guests who speak different languages: 0 ortak, ayrı H2) | WedSites blog, Joy (kendi aracını öne çıkaran liste), Riley & Grey yardım sayfası, planlama blogları (Aisle Planner, Say I Do, weddingsonline) | 5 dilde site, hazır metinler çevrili, kendi metinlerin otomatik çeviri taslağı | **Dalga 7.** En güçlü ürün farkı; rehberin 4 çevirisi de doğal olarak hedef kitleye gider |
+| **N14** | What to Do With Your Wedding Website After the Wedding | what to do with wedding website after the wedding · how long to keep wedding website up (1–2 ortak → aynı rehber) | Inside Weddings, Loverly, WedSites yardım, Riley & Grey, Wikipedia | Teşekkür sayfası (otomatik ya da kapalı), düğünden {{months}} ay sonrasına kadar açık, yanıtları indirme, yayından kaldırma | **Dalga 7.** Rakiplerin "süre dolunca kapanır" sorusuna dürüst yanıt; N11 ile bağlantılı |
+| **N15** | How to Print Wedding Invitations at Home (or at a Local Print Shop) | print wedding invitations at home | Love Inc., Paperlust, Avery, şablon spam sayfaları | Basılabilir davetiye PDF'i (5 × 7 in / A5, taşma payı ve kesim işaretleri), QR kartı; biz basmıyoruz | Dalga 8. Kâğıt, ölçek %100, test baskısı, zarf ve posta; N4/N12'ye link |
+| **N16** | Wedding Weekend Itinerary: What to Tell Guests and When | wedding weekend itinerary for guests · wedding schedule for guests | Rock My Wedding, Paperlust, Inside Weddings, Wedded Wonderland, mekân blogları, spam şablonlar | Gün akışı (en fazla {{scheduleRows}} satır), saat dilimi, takvime ekleme (Apple/Outlook, Google) | Dalga 8. N10 (destination) ile çakışmaması için çok günlük programın yazımına odaklanır; G4'teki program metnine link |
+| N17 | Change the Date: How to Tell Guests Your Wedding Has Moved | change the date wedding wording · postponed wedding announcement | Paperless Post, Zola, WeddingWire (+ forumlar), Junebug, Brite, Greenvelope | Tarih değişikliği hakkı sınırlı (yayından sonra {n} değişiklik; birkaç güne kadar kaydırma serbest) | Dalga 9, isteğe bağlı. Ürün iddiası dikkat ister: sınır açıkça yazılır. G3'ün "tarih değişirse" bölümü buraya link verir |
+| N18 | Music on Your Wedding Website: What Works on Phones | wedding website music · song on wedding website | İnce: WedSites yardım, eski WeddingWire forumları, spam sayfa | Our Story'de 4 parçadan biri ya da kendi dosyan, ses efektleri, kapatılabilir | Dalga 9, isteğe bağlı. Sonuçlar zayıf ama hacim muhtemelen düşük; otomatik çalma engeli ve erişilebilirlik açısı |
+
+### Önerilmeyenler
+
+| Sorgu | Neden |
+|---|---|
+| wedding website welcome message examples | The Knot, Joy, WeddingWire dolu; G4 karşılama metinlerini zaten veriyor (plan §1: "Welcome message G4'te kalır") |
+| wedding website mistakes to avoid | WeddingWire, Inside Weddings, A Practical Wedding; içerik G2 + N11 + N9 ile büyük ölçüde örtüşüyor |
+| wedding website url ideas | Joy, Riley & Grey, GoDaddy; sonuçların ana önerisi kendi alan adı, ürünümüzde yok (adres {{domain}}/isimler). Kısa bir bölüm olarak G1'e eklenebilir |
+| wedding thank you message examples | Sonuçlar teşekkür kartı yazımı, website değil; N14'te tek bölüm olarak yeterli |
+| elopement / small wedding website | Az ve dağınık sonuç, ürüne özel açı zayıf; N3 kısmen karşılıyor |
+| add to calendar wedding invitation | Araç satıcıları; N16'da tek bölüm olarak yeter |
+
+### İç linkler (yazılırsa)
+
+N13 → G1, N3, N10, `/features` (diller) · N14 → G1, N11, G3, `/features` (teşekkür sayfası) · N15 → G1, N4, N12,
+`/features` (basılabilir davetiye) · N16 → G1, N10, G4, N9 · N17 → G1, G3, G5 · N18 → G1, G4, `/designs`.
+
 ## Kaynaklar (arama sonuçları, 2026-10-22)
 
 - [Greenvelope — animated envelope invitations](https://card.greenvelope.com/resources/animated-envelope-invitations),
