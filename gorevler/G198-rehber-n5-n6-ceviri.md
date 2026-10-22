@@ -22,7 +22,7 @@ Kullanıcı (2026-10-22): "N5 ve N6'yı 4 dile çevir".
 - Doğrulama: **12 rehberin 48 çevirisinin hepsinde** link kümesi, H2 sayısı ve SSS sayısı İngilizceyle aynı; kırık link ve
   jeton yok; başlık ≤ 60, açıklama ≤ 160 (4 açıklama kısaltıldı); çevirinin `updated` tarihi İngilizceden eski değil.
 - Build: N5, N6, G3 × 4 dil, 12 sayfa 200, tek H1, `html lang` ve Article `inLanguage` doğru, İngilizce uyarısı yok.
-- Testler: TEST_SONUCU
+- Testler: `npm test` 1691/1691 (0 hata, 0 atlanan), build temiz.
 - Ana dili konuşan biri tarafından okunmadı.
 
 ## Günlük
