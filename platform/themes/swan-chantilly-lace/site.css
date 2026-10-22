@@ -1,0 +1,365 @@
+/* Swan Chantilly Lace (40) — oyster silk-linen, ivory cotton card stock, ivory Chantilly lace, black silk and an ivory
+   swan seal; ink black and pewter, a touch of soft gold. Visuals are GPT pixels only (img/, build_images.py); CSS adds
+   light and interface (docs/11 §5.7): text halos, hairline rules, form fields, buttons, the bottom nav, and motion — the
+   seal lifting, the ribbon tails slipping away, the lace lifting off the envelope like a bridal veil, the round flap
+   swinging up on its top edge, the card rising, the lace veils lifting off the prints. Nothing is drawn here. */
+:root{--ivory:#f4eee2;--lace:#fbf8f2;--oyster:#dcd3c3;--pewter:#8f8a82;--gold:#b9a274;--silk:#0f0e0d;--ink:#1b1a18;
+--ink-soft:#4e4a44;--line:#1b1a1826;--script:'Bonheur Royale',fb1,fb2,'Snell Roundhand',cursive;--serif:'Crimson Pro','Georgia',serif;
+--nav-h:62px;color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:var(--oyster) url(img/silk-640.webp) 0 0/640px repeat;color:var(--ink);font:400 19px/1.7 var(--serif);padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom))}
+main{overflow-x:clip}
+button,input,textarea,select{font:inherit}
+button,a,input,select,textarea,summary{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+h1,h2,h3,p,figure,ul,ol{margin:0}
+h1,h2,h3{font-weight:400;line-height:1.15}
+h1{font:400 clamp(50px,15vw,76px)/1.1 var(--script);color:var(--ink);overflow-wrap:anywhere}
+h2{font:400 clamp(40px,11vw,56px)/1.15 var(--script);color:var(--ink);overflow-wrap:anywhere}
+h3{font:500 19px/1.45 var(--serif);letter-spacing:.02em}
+button{cursor:pointer}
+button:disabled{opacity:.5;cursor:default}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--ink);outline-offset:5px}
+.nowrap{white-space:nowrap}
+.eyebrow{font:500 12px/1.9 var(--serif);text-transform:uppercase;letter-spacing:.28em;color:var(--pewter);overflow-wrap:anywhere}
+.body-text{font-size:19px;line-height:1.75;color:var(--ink-soft)}
+.small{font:400 16px/1.8 var(--serif);color:var(--ink-soft)}
+/* ivory cotton card stock (GPT texture) under the cards and bands */
+.paper,.paper-band{background:var(--ivory) url(img/paper-640.webp) 0 0/480px repeat;color:var(--ink)}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:12px;min-height:48px;padding:12px 30px;border:1px solid var(--silk);background:var(--silk);color:var(--lace);font:500 13px/1.5 var(--serif);letter-spacing:.22em;text-transform:uppercase;border-radius:0;text-align:center;overflow-wrap:anywhere}
+.btn:hover{background:#2a2826;border-color:#2a2826}
+.btn-ghost{background:rgb(251 248 242/.72);color:var(--ink);border-color:rgb(27 26 24/.4)}
+.btn-ghost:hover{background:var(--lace)}
+.btn-light{background:var(--lace);border-color:var(--lace);color:var(--ink)}
+.btn-light:hover{background:#fff;border-color:#fff}
+.btn-sm{min-height:44px;padding:9px 18px}
+.textlink{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;font:500 15px/1.6 var(--serif);border:0;background:transparent;color:var(--ink);letter-spacing:.1em;padding:8px 2px;text-decoration:underline;text-decoration-color:rgb(27 26 24/.35);text-underline-offset:6px}
+.center{text-align:center;margin:44px 0 10px}
+.button-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.no-js .nojs-only{display:block}
+.js .nojs-only{display:none}
+.names{font:400 clamp(54px,16vw,82px)/1.08 var(--script);color:var(--ink);overflow-wrap:anywhere;text-wrap:balance;text-shadow:0 1px 0 #fff9,0 0 18px rgb(244 238 226/.95)}
+.names .amp{font:italic 400 .42em/1 var(--serif);letter-spacing:.06em;color:var(--pewter);vertical-align:.3em}
+
+/* photo slots: placeholders are softened oyster silk; "Your photo here" only in a preview */
+.photo-slot{position:relative;display:block;overflow:hidden;background:#e4ded2}
+.photo-slot>img{width:100%;height:100%;object-fit:cover;object-position:50% 34%}
+.ph-mark{display:none;position:absolute;inset:0;align-items:center;justify-content:center;pointer-events:none;font:400 13px/1.4 var(--serif);color:var(--ink-soft);text-align:center;letter-spacing:.08em}
+html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{display:flex}
+/* the prints: the GPT deckled print (.cut) over the photo, which sits in its measured window (manifest window_pct);
+   each print wears its own lace veil (.veil, GPT W12/W14) that lifts as the scene enters */
+.frame{position:relative;display:block}
+.frame>.cut,.frame>.veil{position:absolute;pointer-events:none;background:0 0/100% 100% no-repeat}
+.frame>.cut{inset:0}
+.frame>.photo-slot{position:absolute}
+.print{aspect-ratio:950/1242;filter:drop-shadow(0 10px 12px rgb(27 26 24/.22))}
+.print>.cut{background-image:url(img/print-720.webp)}
+.print>.photo-slot{left:5.08%;top:3.93%;width:89.32%;height:85.94%}
+.print>.veil{left:-5.79%;top:2.58%;width:111.16%;height:95.33%;background-image:url(img/veil-720.webp)}   /* manifest veil_place.print */
+.print-wide{aspect-ratio:1343/821;filter:drop-shadow(0 10px 12px rgb(27 26 24/.2))}
+.print-wide>.cut{background-image:url(img/print_wide-1100.webp)}
+.print-wide>.photo-slot{left:4.12%;top:9.12%;width:91.62%;height:79.32%}
+.print-wide>.veil{left:-5.58%;top:5.6%;width:111.09%;height:92.33%;background-image:url(img/veil_wide-1100.webp)}   /* veil_place.print_wide */
+.print .photo-slot>img,.print-wide .photo-slot>img{filter:grayscale(1) contrast(1.04)}
+.lily{display:block;aspect-ratio:950/954;background:url(img/lily-720.webp) 0 0/100% 100% no-repeat;pointer-events:none}
+.swans{display:block;width:min(56%,260px);aspect-ratio:1549/571;margin:0 auto;background:url(img/swans-720.webp) center/100% 100% no-repeat}
+.laceband{display:block;height:30px;width:100%;background:url(img/laceband-1200.webp) 0 50%/auto 100% repeat-x}
+.bow{display:block;width:min(30%,120px);aspect-ratio:1222/809;background:url(img/bow-360.webp) center/100% 100% no-repeat}
+
+/* bottom nav */
+.site-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgb(15 14 13/.95);border-top:1px solid var(--gold);padding:6px 8px max(6px,env(safe-area-inset-bottom));view-transition-name:site-nav}
+.site-nav ul{list-style:none;padding:0;display:flex;justify-content:center;gap:4px}
+.site-nav a{display:flex;align-items:center;justify-content:center;min-height:48px;min-width:68px;padding:8px 12px;font:500 13px/1 var(--serif);letter-spacing:.16em;text-transform:uppercase;color:#ece6da}
+.site-nav a[aria-current]{color:#fff;text-decoration:underline;text-underline-offset:8px;text-decoration-color:rgb(185 162 116/.8)}
+
+/* ---------------------------------------------------------------- the envelope */
+.page-opening{padding-bottom:0;background:radial-gradient(ellipse at 50% 58%,rgb(255 255 255/.5) 0,rgb(255 255 255/0) 60%) fixed,var(--oyster) url(img/silk-640.webp) 0 0/640px repeat}
+.skip{position:fixed;top:calc(6px + env(safe-area-inset-top));right:10px;z-index:20;padding-inline:14px;background:rgb(251 248 242/.86);border-radius:100px;text-decoration:none}
+.opening{position:relative;min-height:100svh;max-width:760px;margin:auto;padding:clamp(70px,10svh,110px) 20px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:clip}
+.opening-heading{position:relative;z-index:2;max-width:100%}
+.opening-heading>.eyebrow:first-child{margin-bottom:6px}
+.opening .names{font-size:clamp(54px,16vw,78px)}
+/* the closed square envelope: 1.0585 wide per high (manifest stage); layers in % of it. The gap above it is the open
+   flap's height (56.87 % of the envelope): the flap stands up there without covering the names; the size follows the
+   screen height (heading, gap, envelope and actions ≈ 300 px + 1.48 × the width) */
+.stage{--obj:min(66vw,calc((100svh - 300px) / 1.5),280px);position:relative;width:var(--obj);margin:calc(var(--obj) / 1.0585 * .5687 + 8px) auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent;z-index:5}
+.opening:has(.names.long-names) .stage{--obj:min(60vw,calc((100svh - 330px) / 1.5),280px)}
+.envelope{position:relative;width:100%;aspect-ratio:1.0585}
+.envelope>*{position:absolute}
+.back{inset:0;z-index:0;background:url(img/back-720.webp) 0 0/100% 100% no-repeat;filter:drop-shadow(0 14px 18px rgb(27 26 24/.28))}
+.card{left:19.7%;top:6%;width:60.6%;height:88%;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10% 9% 9%;text-align:center;view-transition-name:none;container-type:inline-size;background:url(img/card-720.webp) 0 0/100% 100% no-repeat;color:var(--ink)}
+.card-photo{width:62%;flex:none}
+.card.tight .card-photo{width:44%}
+.card-photo .ph-mark{font-size:8px}
+.card-photo .ty-decor,.card-photo .ty-decor img{display:block;width:100%;height:100%;object-fit:cover}
+.card-photo>.veil{display:none}
+.card-line{margin-top:7%;font-size:7px;letter-spacing:.24em}
+.card-names{font:400 clamp(18px,15cqw,38px)/1.08 var(--script);color:var(--ink);overflow-wrap:anywhere;text-wrap:balance;margin-top:1%}
+.card-date{font-size:7px;margin-top:3%}
+.front{left:0;top:35.43%;width:100%;height:64.57%;z-index:3;background:url(img/front-720.webp) 0 0/100% 100% no-repeat}   /* stage.front */
+.flap{left:0;top:0;width:100%;height:56.87%;z-index:4;transform-origin:50% 0;transform-style:preserve-3d}   /* stage.flap */
+.flap-out,.flap-in{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:0 0/100% 100% no-repeat}
+.flap-out{background-image:url(img/flap-720.webp);filter:drop-shadow(0 3px 3px rgb(27 26 24/.22))}
+.flap-in{transform:rotateX(180deg);background-image:url(img/flap_in-720.webp)}
+/* the Chantilly lace over the closed flap (GPT W7): it lifts away like a veil */
+.lace{left:0;top:.98%;width:100%;height:67.39%;z-index:5;background:url(img/lace-720.webp) 0 0/100% 100% no-repeat;transform-origin:50% 0}   /* stage.lace */
+/* the two black silk ribbon tails under the seal (GPT W8): the left and the right half slip away on their own */
+.tails{left:6.35%;top:53.41%;width:87.1%;height:52.33%;z-index:6;display:flex}   /* stage.tails */
+.tail{flex:1;background:url(img/tails-640.webp) 0 0/200% 100% no-repeat}
+.tail.t-r{background-position:100% 0}
+.seal{left:39%;top:42.44%;width:22%;height:23.27%;z-index:7;background:url(img/seal-240.webp) center/100% 100% no-repeat;filter:drop-shadow(0 4px 4px rgb(27 26 24/.3))}   /* stage.seal */
+/* the swans over the closed envelope (GPT W15), in the room the open flap will take: they fade as the lace lifts */
+.stage>.swans-top{position:absolute;left:50%;bottom:calc(100% + 10px);width:72%;aspect-ratio:1549/571;translate:-50% 0;z-index:6;background:url(img/swans-720.webp) center/100% 100% no-repeat}
+/* the swan feather that floats down while the card rises (GPT W19) */
+.opening>.feather{position:absolute;left:58%;top:12%;width:46px;z-index:7;opacity:0;pointer-events:none}
+.opening-actions{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:22px;min-height:60px;position:relative;z-index:6}
+.opening-date{font-size:12px}
+.tap-hint{font-size:11px}
+.js .tap-hint{animation:breathe 3.2s ease-in-out infinite}
+@keyframes breathe{50%{opacity:.5}}
+.enter,.replay{display:none}
+.is-opened .enter{display:inline-flex}
+.is-opened .replay{display:inline-flex}
+.is-opened .tap-hint,.is-opening .tap-hint{display:none}
+.is-opened .skip{display:none}
+.is-opening .stage{pointer-events:none}
+.is-opening .opening-date{animation:dim 400ms ease-in forwards}
+.is-opening .stage>.swans-top{animation:swans-off 700ms 600ms ease-in forwards}
+.is-opening .seal{animation:seal-off 600ms 0ms cubic-bezier(.4,0,.2,1) forwards}
+.is-opening .tail.t-l{animation:tail-l 700ms 250ms cubic-bezier(.5,0,.6,1) forwards}
+.is-opening .tail.t-r{animation:tail-r 700ms 250ms cubic-bezier(.5,0,.6,1) forwards}
+.is-opening .lace{animation:veil-up 1100ms 700ms cubic-bezier(.35,0,.25,1) forwards}
+.is-opening .flap{animation:flap-open 700ms 1500ms cubic-bezier(.5,0,.3,1) forwards}
+.is-opening .envelope>.card{animation:card-rise 650ms 2100ms cubic-bezier(.3,0,.2,1) forwards,card-forward 400ms 2750ms cubic-bezier(.45,0,.2,1) forwards}
+.is-opening .opening>.feather{animation:feather-fall 2400ms 1900ms ease-in-out forwards}
+.is-opened .opening-date{opacity:.5}
+.is-opened .seal,.is-opened .tails,.is-opened .lace,.is-opened .stage>.swans-top{opacity:0;visibility:hidden}
+.is-opened .flap{transform:perspective(900px) rotateX(180deg);z-index:0}
+.is-opened .envelope>.card{z-index:8;transform:translateY(-8%) scale(1.08);view-transition-name:invite-card;filter:drop-shadow(0 18px 22px rgb(27 26 24/.4))}
+.is-opened .opening-actions{margin-top:26px}
+@keyframes dim{to{opacity:.5}}
+@keyframes seal-off{0%{transform:none}30%{transform:rotate(-8deg) translateY(-6%)}100%{transform:translate(28%,-70%) rotate(-18deg) scale(.88);opacity:0}}
+@keyframes swans-off{to{opacity:0;translate:-50% -24%}}
+@keyframes tail-l{to{transform:translate(-26%,22%) rotate(-14deg);opacity:0}}
+@keyframes tail-r{to{transform:translate(26%,22%) rotate(14deg);opacity:0}}
+/* the lace lifts like a veil: up from its top edge, tipping back, drifting and gone */
+@keyframes veil-up{0%{transform:none;opacity:1}40%{transform:perspective(700px) translateY(-26%) rotateX(24deg) scale(1.03) rotate(-1.5deg);opacity:1}
+100%{transform:perspective(700px) translateY(-82%) rotateX(42deg) scale(1.08) rotate(2deg);opacity:0}}
+@keyframes flap-open{from{transform:perspective(900px) rotateX(0);z-index:4}
+to{transform:perspective(900px) rotateX(180deg);z-index:0}}
+@keyframes card-rise{from{transform:translateY(0) scale(1);filter:drop-shadow(0 0 0 #0000)}
+to{transform:translateY(-44%) scale(.94);filter:drop-shadow(0 10px 14px rgb(27 26 24/.28))}}
+@keyframes card-forward{from{z-index:8;transform:translateY(-44%) scale(.94);filter:drop-shadow(0 10px 14px rgb(27 26 24/.28))}
+to{z-index:8;transform:translateY(-8%) scale(1.08);filter:drop-shadow(0 18px 22px rgb(27 26 24/.4))}}
+@keyframes feather-fall{0%{opacity:0;transform:translate(0,0) rotate(-20deg)}15%{opacity:1}
+40%{transform:translate(-60px,22vh) rotate(18deg)}70%{transform:translate(20px,44vh) rotate(-10deg);opacity:1}
+100%{transform:translate(-30px,62vh) rotate(12deg);opacity:0}}
+
+/* ---------------------------------------------------------------- home */
+.hero{position:relative;min-height:calc(100svh - var(--nav-h));display:flex;align-items:center;justify-content:center;padding:44px 20px 26px;overflow:clip}
+.hero-card{position:relative;width:min(86vw,370px);padding:34px 22px 28px;text-align:center;view-transition-name:invite-card;filter:drop-shadow(0 16px 22px rgb(27 26 24/.24))}
+.hero-card>.bow{position:absolute;left:50%;top:-5%;translate:-50% 0;z-index:3}
+.lily.ly-l{position:absolute;left:-15%;top:-9%;width:44%;z-index:2}
+.lily.ly-r{position:absolute;right:-15%;top:-9%;width:44%;z-index:2;transform:scaleX(-1)}
+.hero-photo{width:min(50vw,220px);margin:0 auto 16px}
+.hero .names{font-size:clamp(50px,14vw,68px);margin:4px 0 6px}
+.hero-date{font:400 19px/1.5 var(--serif);letter-spacing:.04em}
+.hero-venue{display:flex;flex-direction:column;gap:2px;margin-top:8px;font:400 19px/1.45 var(--serif);overflow-wrap:anywhere}
+.hero-venue small{font:500 11px/1.8 var(--serif);letter-spacing:.24em;text-transform:uppercase;color:var(--pewter)}
+.invitation{padding:56px 0;text-align:center}
+.invitation>.laceband:first-child{margin:-56px 0 34px}
+.invitation>.laceband:last-child{margin:44px 0 -56px}
+.invitation .swans{margin-bottom:14px}
+.invitation-copy,.invitation>.countdown,.invitation>.calendar{padding-inline:26px}
+.invitation-copy{max-width:540px;margin:auto}
+.invitation-copy h2{margin-bottom:10px}
+.invitation .host{margin:14px 0}
+.formal-names{font:400 25px/1.4 var(--serif);margin-bottom:12px;overflow-wrap:anywhere}
+.formal-names .amp{font:400 40px/1.1 var(--script);color:var(--pewter)}
+.invitation-copy .body-text{max-width:340px;margin:auto}
+.date-block{display:flex;flex-direction:column;align-items:center;gap:2px;margin:26px auto 6px;color:var(--pewter)}
+.date-block>span{font:500 12px/1.8 var(--serif);letter-spacing:.28em;text-transform:uppercase}
+.date-block b{font:400 34px/1.25 var(--serif);letter-spacing:.04em;color:var(--ink)}
+.venue-name{font-size:23px;margin-top:16px;overflow-wrap:anywhere}
+.invitation-copy .btn{margin:24px 0 12px}
+.countdown{max-width:380px;margin:30px auto 0}
+.cd-row{display:flex;gap:14px;justify-content:center}
+.cd-row>div{flex:1;text-align:center}
+.cd-num{display:block;font:400 36px/1.3 var(--serif);color:var(--ink);font-variant-numeric:tabular-nums}
+.cd-row small{font:500 10px/1.7 var(--serif);text-transform:uppercase;letter-spacing:.14em;color:var(--pewter)}
+.countdown.is-done .cd-row{display:none}
+.cd-done{font-size:19px}
+.calendar{margin:26px auto 0;text-align:center}
+.calendar>.eyebrow{font-size:11px;margin-bottom:10px}
+.teaser-photo{display:block}
+.teaser{display:grid;grid-template-columns:min(40vw,200px) 1fr;align-items:center;gap:22px;max-width:640px;margin:auto;padding:64px 24px}
+.teaser-text{min-width:0}
+.teaser-text h2{margin:6px 0 4px}
+/* the black silk band: the envelope's own black silk lining (a GPT crop) */
+.silk-band{background:var(--silk) url(img/back-720.webp) center/cover;color:var(--lace)}
+.silk-band h2{color:var(--lace);text-shadow:0 1px 10px rgb(0 0 0/.6)}
+.silk-band .eyebrow{color:#d9d1c2}
+.day{text-align:center;padding:64px 24px}
+.day h2{margin:10px 0 4px}
+.day-peek{list-style:none;padding:0;margin:14px auto 28px;max-width:420px;display:grid;gap:8px;font-size:19px;overflow-wrap:anywhere}
+.day-peek li:nth-child(n+5){display:none}
+.day-peek .time{font:500 15px/1 var(--serif);letter-spacing:.12em;color:#d4c6a4;margin-right:8px}
+.signature{position:relative;text-align:center;padding:56px 20px 30px}
+.signature>.swans{width:min(46%,200px);margin-bottom:10px}
+.sig-names{font:400 46px/1.15 var(--script);margin:6px 0 10px;color:var(--ink);overflow-wrap:anywhere}
+
+/* ---------------------------------------------------------------- story */
+.page-heading{text-align:center;padding:60px 24px 40px;max-width:720px;margin:auto}
+.page-heading>.eyebrow{margin-bottom:10px}
+.page-heading h1{margin-bottom:16px}
+.page-heading .intro{max-width:460px;margin:auto}
+.page-heading .venue-name{margin-top:4px}
+.page-heading>.swans{margin-bottom:16px;width:min(48%,220px)}
+.story-page{max-width:1000px;margin:auto}
+.moment{padding:0 24px;margin:0 0 64px;display:flex;flex-direction:column;align-items:flex-start}
+.moment-photo{width:min(64vw,330px)}
+.m-2{align-items:flex-end;text-align:right}
+.m-2 .moment-photo{width:min(58vw,300px)}
+.moment figcaption{padding-top:16px;max-width:min(74vw,420px);font-size:22px;line-height:1.45;overflow-wrap:anywhere}
+.moment figcaption .num{display:block;font:400 30px/1.15 var(--script);color:var(--pewter);margin-bottom:2px}
+.moment figcaption [data-empty]{display:none}
+
+/* ---------------------------------------------------------------- details */
+.details-page{max-width:1100px;margin:auto}
+.programme{padding:48px 24px 44px;margin:0 14px;box-shadow:0 14px 22px -14px rgb(27 26 24/.4)}
+.programme h2{text-align:center}
+.programme h2+.schedule{margin-top:22px}
+.schedule{list-style:none;margin:0 auto;padding:0;max-width:560px}
+.schedule li{position:relative;display:grid;grid-template-columns:24px 66px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--line)}
+.schedule li:first-child{border-top:0}
+.row-bell{width:20px;aspect-ratio:.82;margin-top:3px;background:url(img/bell-160.webp) center/contain no-repeat;transform-origin:50% 0}
+.schedule time{font:500 16px/1.7 var(--serif);color:var(--ink);letter-spacing:.06em}
+.schedule h3{overflow-wrap:anywhere}
+.schedule p{font-size:17px;color:var(--ink-soft);margin-top:2px;overflow-wrap:anywhere}
+.ceremony{font-size:18px;color:var(--ink-soft);margin:22px auto 0;max-width:560px;text-align:center}
+.programme .calendar{margin-top:24px}
+.location{padding:56px 24px 10px;max-width:700px;margin:auto;text-align:center}
+.location h2{margin-bottom:22px}
+.venue-photo{margin:0 auto 18px}
+.venue-line{font-size:20px;overflow-wrap:anywhere}
+.map-section{margin-top:18px}
+.map-section .btn{white-space:normal}
+.detail-notes{display:grid;gap:26px;margin:40px auto 0;padding:0 24px;max-width:760px}
+.detail-note{border-top:1px solid var(--line);padding-top:24px}
+.detail-note h2,.faq h2{font-size:42px;margin-bottom:10px}
+.detail-note .body-text{margin-bottom:12px;overflow-wrap:anywhere}
+.faq{margin:44px auto 0;padding:0 24px;max-width:760px}
+.faq details{border-bottom:1px solid var(--line);padding:10px 0}
+.faq summary{cursor:pointer;min-height:44px;font-size:20px;padding:8px 30px 8px 0;list-style:none;position:relative;overflow-wrap:anywhere}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";content:"+" / "";position:absolute;right:4px;top:8px;color:var(--pewter);font:400 22px/1 var(--serif)}
+.faq details[open] summary::after{content:"×";content:"×" / ""}
+.faq details .body-text{padding-block:10px;white-space:pre-line}
+
+/* ---------------------------------------------------------------- rsvp */
+.rsvp-page{max-width:640px;margin:auto;padding:0 20px}
+.rsvp-page .page-heading{padding-bottom:30px}
+.rsvp-page .page-heading>.eyebrow:last-of-type{margin-top:12px}
+.reply-cta{margin-top:20px}
+.reply-card{padding:30px 22px;filter:drop-shadow(0 14px 22px rgb(27 26 24/.22))}
+.reply-card .laceband{margin:-30px -22px 18px;width:auto}
+.form-title{text-align:center;margin-bottom:6px}
+.reply-form{font:400 17px/1.7 var(--serif)}
+.field{display:block;margin-top:18px}
+.kicker{display:block;margin-bottom:8px;font:500 14px/1.7 var(--serif);letter-spacing:.06em;color:var(--pewter);overflow-wrap:anywhere}
+.opt{color:var(--ink-soft);font-size:13px}
+.field input,.field textarea,.question textarea{display:block;width:100%;border:1px solid rgb(27 26 24/.3);background:#fffdf8;color:var(--ink);min-height:48px;padding:12px;border-radius:0;font:400 18px/1.5 var(--serif)}
+.field textarea,.question textarea{resize:vertical}
+.choice{border:0;padding:0;margin:22px 0 0;min-width:0}
+.choice legend{padding:0;width:100%}
+.choice label{display:flex;align-items:center;gap:10px;min-height:46px;color:var(--ink);overflow-wrap:anywhere}
+input[type=radio]{accent-color:var(--silk);width:18px;height:18px;flex:none}
+.questions{margin-bottom:12px}
+.field-error{color:#a3211a;font:500 15px/1.6 var(--serif);margin-top:5px;overflow-wrap:anywhere}
+.field-error:empty{display:none}
+[aria-invalid=true]{border-color:#a3211a!important}
+.send{margin-top:26px}
+.send .btn{width:100%}
+.reply-panel{padding:18px 0;font:400 17px/1.8 var(--serif)}
+.panel-title{font:400 46px/1.15 var(--script);color:var(--ink);margin-bottom:6px}
+.reply-panel[data-rsvp-state=error]{color:#a3211a}
+.reply-panel[data-rsvp-state=preview]{color:var(--pewter);border-top:1px solid var(--line);margin-top:18px}
+.note{color:var(--ink-soft)}
+html[data-rsvp-replied] .rsvp-page .page-heading .body-text{display:none}
+.thank-you-copy{text-align:center}
+.thank-you-copy h2{margin-bottom:20px}
+
+/* ---------------------------------------------------------------- view transitions + scenes (docs/11 §8, §11) */
+@view-transition{navigation:auto}
+::view-transition-group(invite-card){animation-duration:.85s;animation-timing-function:cubic-bezier(.4,0,.2,1)}
+::view-transition-new(site-nav):only-child{animation:none}
+::view-transition-old(site-nav):only-child{animation:none;opacity:0}
+/* text comes up slowly, as if a fine veil were drawn back from it (this design's step) */
+.js [data-step]{opacity:0;transform:translateY(12px);transition:opacity .9s ease-out,transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.js [data-step].in{opacity:1;transform:none}
+/* the prints: each one's lace veil lifts off it — up from the top edge, tipping back, drifting away */
+.js .veiled[data-step]{transform:none}
+.js .veiled[data-step].in>.veil{animation:lift 1.7s calc(var(--d,0ms) + 450ms) cubic-bezier(.35,0,.25,1) forwards}
+@keyframes lift{0%{transform:none;opacity:1}45%{transform:perspective(700px) translateY(-14%) rotateX(20deg) rotate(-1.5deg);opacity:.95}
+100%{transform:perspective(700px) translateY(-46%) rotateX(38deg) rotate(2deg) scale(1.04);opacity:0}}
+.js li[data-step] .row-bell{transform:rotate(-30deg)}
+.js li[data-step].in .row-bell{animation:ring 1.3s calc(var(--d,0ms) + 120ms) cubic-bezier(.3,.6,.4,1) forwards}
+@keyframes ring{0%{transform:rotate(-30deg)}40%{transform:rotate(14deg)}65%{transform:rotate(-6deg)}85%{transform:rotate(2deg)}100%{transform:rotate(0)}}
+.from-envelope .hero-card [data-step]{opacity:1;clip-path:none;transform:none;transition:none;animation:none}
+.from-envelope .hero-card .veil{display:none}
+.arrive-fade body{animation:fade-in .5s ease-out both}
+@keyframes fade-in{from{opacity:0}}
+.accent-layer{position:fixed;inset:0;pointer-events:none;z-index:30;overflow:hidden}
+
+@media(min-width:760px){
+.hero-card{width:410px;padding:40px 34px 34px}
+.invitation-copy,.invitation>.countdown,.invitation>.calendar{padding-inline:40px}
+.teaser{padding:90px 40px;gap:40px}
+.moment{padding:0 60px;margin-bottom:88px}
+.m-1,.m-3{padding-left:12%}
+.m-2{padding-right:12%}
+.detail-notes{grid-template-columns:repeat(2,1fr);gap:36px}
+.programme{padding:72px 40px;margin:0 auto;max-width:760px}
+.page-heading{padding-top:84px}
+.site-nav a{min-width:110px}
+}
+@media(max-width:359px){
+.hero{padding-inline:12px}
+.hero-card{padding:26px 16px 22px}
+.rsvp-page{padding-inline:12px}
+.reply-card{padding:24px 16px}
+.reply-card .laceband{margin:-24px -16px 16px}
+.moment,.detail-notes,.faq,.location{padding-inline:16px}
+.programme{padding-inline:14px;margin-inline:8px}
+.schedule li{grid-template-columns:18px 58px 1fr;gap:8px}
+.row-bell{width:16px}
+.cd-row{gap:8px}
+.teaser{gap:16px;padding-inline:16px}
+.site-nav a{min-width:60px;padding-inline:8px;letter-spacing:.06em}
+}
+@media(max-height:700px) and (max-width:759px){
+.opening{padding-top:58px}
+.opening .names{font-size:clamp(46px,13.5vw,62px)}
+.stage{--obj:min(60vw,calc((100svh - 250px) / 1.5),280px);margin-top:calc(var(--obj) / 1.0585 * .5687 + 4px)}
+.opening:has(.names.long-names) .stage{--obj:min(56vw,calc((100svh - 280px) / 1.5),280px)}
+.opening-actions{margin-top:14px}
+.hero{padding-top:30px;padding-bottom:14px}
+.hero-card{padding:24px 18px 18px}
+.hero-photo{width:min(32vw,140px);margin-bottom:10px}
+.hero .names{font-size:clamp(46px,12.5vw,58px);margin:2px 0 4px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
+*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition:none!important}
+.js [data-step]{opacity:1!important;clip-path:none!important;transform:none!important}
+.js .veiled[data-step]>.veil{animation:none!important;display:none}
+.js li[data-step] .row-bell{transform:none!important;animation:none!important}
+.js .tap-hint{animation:none!important}
+.opening>.feather{display:none}
+::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation-duration:1ms!important}
+}
+#reply{scroll-margin-top:64px}
+html{scroll-padding-bottom:calc(var(--nav-h) + 12px)}

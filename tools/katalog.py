@@ -514,6 +514,12 @@ EK_TEMALAR = [
          dekor="Krom/gümüş kabin detayları, siyah-beyaz foto şeritleri, fildişi ranunculus ve dusty miller, saten kurdele, gümüş yıldız payetleri, eski tip flaş ampulü", teknik="fotogerçekçi ürün çekimi + siyah-beyaz film",
          font=("Yesteryear", "Libre Caslon Text"), palet_adi="silver-ivory-noir",
          hareket="Flaş patlaması, foto şeridinin zarftan sıyrılıp yanına eğik yerleşmesi, U kapağın 3B kalkışı, ikinci flaş, fotoğrafların flaşla beyazdan banyo olması, şeridin krom yuvadan kare kare basılması, metnin pozlama gibi bulanıktan netleşmesi, yanıtta dört flaş ve yıldız-yaprak-kurdele yağmuru."),
+    dict(no=40, klasor="40_Swan_Chantilly_Lace", ad="Swan Chantilly Lace",
+         zarf="Kare fildişi pamuk zarf, yay (yuvarlak uçlu) kapak, kapağın üstünde ayrı Chantilly dantel örtü, kuğu kabartmalı fildişi mum mühür ve altında çapraz iki siyah ipek kurdele kuyruğu. Mühür kalkar, kuyruklar sola-sağa kayıp düşer, dantel gelin duvağı gibi yükselip süzülür, yay kapak 3B açılıp siyah ipek astarını gösterir, kuğu tüyü süzülür, kart yükselir.",
+         foto="Siyah-beyaz tırtıklı kenarlı eski baskılar, her birinin üstünde kendi dantel duvağı: sahnesine gelince duvak üst kenarından kalkıp geriye devrilerek süzülür.",
+         dekor="Chantilly dantel, kuğu çifti (kalem gravür), siyah ipek fiyonk, inci çiçeği (lily of the valley), beyaz kuğu tüyü", teknik="fotogerçekçi dantel/ipek/pamuk + kalem-mürekkep gravür",
+         font=("Bonheur Royale", "Crimson Pro"), palet_adi="ivory-noir-swan",
+         hareket="Kuğu mührün kalkması, kurdele kuyruklarının mühür altından iki yana kayması, dantelin duvak gibi kalkıp süzülmesi, yay kapağın 3B açılışı, süzülen kuğu tüyü, baskıların dantel duvağının kalkması, program satırlarında sallanan inci çiçeği çanları, yanıtta tüy ve çan yağmuru."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

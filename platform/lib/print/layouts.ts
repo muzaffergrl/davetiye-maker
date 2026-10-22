@@ -522,6 +522,18 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     ink: '#1E1E1E', accent: '#45474B', front: [22, 13, 12, 13], back: [15, 12, 10, 12],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
+  // 40 (G440, 2026-10-22): the design's own PAKET 6 grounds (ivory cotton; front: Chantilly lace across the top with a pair
+  // of swans, a lace edge at the foot; back: a short lace border at the top), one per side, `cover` for 5×7 and A5
+  // (ChatGPT's 1068×1473, ~200 ppi). Ornament measured on the art: front 0–17 % and 92–97 % of the height, back 0–12 %;
+  // the boxes sit inside the empty area (G149).
+  'swan-chantilly-lace': {
+    collection: '40_Swan_Chantilly_Lace',
+    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
+    fonts: gf('family=Bonheur+Royale&family=Crimson+Pro:ital,wght@0,400;0,500;1,400'),
+    script: "'Bonheur Royale', cursive", serif: "'Crimson Pro', Georgia, serif",
+    ink: '#1B1A18', accent: '#8F8A82', front: [22,  13,  12,  13], back: [15,  12,  10,  12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
+  },
 };
 
 export function printLayout(themeId: string): PrintLayout | null {

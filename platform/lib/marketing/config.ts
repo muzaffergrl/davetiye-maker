@@ -334,6 +334,16 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-21',
     },
+    // New design 40 (G440, docs/33 fourth wave): platform theme built from its own GPT parts; not on sale, no price yet.
+    {
+      id: 'swan-chantilly-lace',
+      name: 'Swan Chantilly Lace',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-22',
+    },
     {
       id: 'blush-garden-rose',
       name: 'Blush Garden Rose',

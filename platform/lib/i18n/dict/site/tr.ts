@@ -316,6 +316,8 @@ const dict: Dict = {
   "A fiesta of love": "Aşkın fiestası",
   // G439 Silver Photo Booth
   "Picture us together": "Bizi birlikte hayal edin",
+  // G440 Swan Chantilly Lace (40, coming)
+  "A promise in lace": "Dantelde bir söz",
 };
 
 export default dict;
