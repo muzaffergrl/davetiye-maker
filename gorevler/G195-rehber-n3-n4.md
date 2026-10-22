@@ -29,7 +29,7 @@ Kullanıcı (2026-10-22): "dalga 2 ile devam et, N3 ve N4'ü yaz" (docs/36).
 - İç linkler (İngilizce): G3 ve G4 → N4; G2 ve N1 → N3; N2 → N4; N3 ↔ N4, N3 → N1.
 - Kontrol (G196 build'i ile): iki sayfa 200, tek H1, Article + BreadcrumbList, hreflang; 390 px'te yatay taşma yok (tablolar
   kendi kutusunda kayıyor). Görüntüler `platform/previews/g195/`.
-- Testler: TEST_SONUCU
+- Testler: `npm test` 1691/1691 (0 hata, 0 atlanan; g195 testi dahil), build temiz.
 - Çeviri: G196.
 
 ## Önerilen görevler (entegratöre)

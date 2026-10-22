@@ -90,7 +90,7 @@ A week before your reply-by date, check your list and send a gentle note to anyo
 
 *"Hi Tom, just a friendly reminder that we're finalizing numbers for the caterer. Could you reply by Friday? Here's the link again: (link). Thank you!"*
 
-After the deadline, call the last few guests. Older relatives in particular may have opened the link and not found the reply button; a quick call solves it. See our guide on [when to share your website and set the RSVP deadline](/guides/when-to-send-your-wedding-website) for the full timeline.
+After the deadline, call the last few guests. Older relatives in particular may have opened the link and not found the reply button; a quick call solves it. See our guide on [when to send your wedding website and invitations](/guides/when-to-send-your-wedding-website) for the full timeline.
 
 ## A digital invitation that still feels like an invitation
 

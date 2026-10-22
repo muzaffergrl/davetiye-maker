@@ -22,7 +22,7 @@ Kullanıcı (2026-10-22): "N3 ve N4'ü 4 dile çevir".
   yok; N3/N4 çevirilerinde H2 sayısı ve 4 SSS aynı. Başlık ≤ 60, açıklama ≤ 160 (TR/DE N3 başlığı ve 5 açıklama kısaltıldı).
 - Build: N3/N4 × 5 dil, 10 sayfa 200, tek H1, `html lang` ve Article `inLanguage` doğru, İngilizce uyarısı yok,
   N4'te "bkestudio.com/clara-and-julian".
-- Testler: TEST_SONUCU
+- Testler: `npm test` 1691/1691 (0 hata, 0 atlanan; g195 testi dahil), build temiz.
 - Ana dili konuşan biri tarafından okunmadı.
 
 ## Günlük

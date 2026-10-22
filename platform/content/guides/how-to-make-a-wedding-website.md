@@ -20,7 +20,7 @@ Collect these in one note on your phone before you open any website builder. It 
 - [ ] The venue name, full address and a map link copied from Google Maps or Apple Maps
 - [ ] The order of the day: ceremony, cocktail hour, dinner, dancing, with times
 - [ ] Three to five photos you both like, including one portrait that crops well
-- [ ] Your RSVP deadline (see [when to set it](/guides/when-to-send-your-wedding-website))
+- [ ] Your RSVP deadline (see [when to set it](/guides/wedding-rsvp-deadline))
 - [ ] Links you want to share: registry, hotel block, transport
 - [ ] Answers to the questions guests always ask: dress code, parking, children, plus-ones
 
@@ -90,7 +90,7 @@ Decide what you need to know before your caterer and venue ask for numbers, and 
 - Dietary needs or allergies, as a short answer
 - Optionally, a song request or a note to the couple
 
-Keep custom questions to two or three; every extra question lowers the chance that guests finish the form. Set the reply-by date about two to three weeks before the wedding, or a few days before your caterer's final-count date. Our [timing guide](/guides/when-to-send-your-wedding-website) explains how to work backwards from that date, and the guide to [wedding RSVP questions](/guides/wedding-rsvp-questions) has wording for each question.
+Keep custom questions to two or three; every extra question lowers the chance that guests finish the form. Set the reply-by date about two to three weeks before the wedding, or a few days before your caterer's final-count date. Our guide to [choosing the RSVP deadline](/guides/wedding-rsvp-deadline) explains how to work backwards from that date, and the guide to [wedding RSVP questions](/guides/wedding-rsvp-questions) has wording for each question.
 
 **Time:** 10 minutes.
 

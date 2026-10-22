@@ -74,7 +74,7 @@ G1 de her kümenin ilk rehberine link verir.
 |---|---|---|---|
 | 1 | Kasım 2026 (lansmanla) | N1 zarf, N2 RSVP soruları — **yazıldı (G193) ve TR/DE/ES/FR'ye çevrildi (G194), 2026-10-22** | — |
 | 2 | Aralık 2026 | N3 davetiye mi site mi, N4 davetiyeye site linki — **yazıldı (G195) ve TR/DE/ES/FR'ye çevrildi (G196), 2026-10-22** | G5 mesaj örnekleri |
-| 3 | Ocak 2027 | N5 RSVP tarihi, N6 cevap vermeyen misafir | G3 başlık + RSVP bölümü; 6 eski rehberin 3 aylık gözden geçirmesi |
+| 3 | Ocak 2027 | N5 RSVP tarihi, N6 cevap vermeyen misafir — **İngilizcesi yazıldı (G197, 2026-10-22)**, çeviri bekliyor | G3 başlık + RSVP bölümü (**G197'de yapıldı**); 6 eski rehberin 3 aylık gözden geçirmesi |
 | 4 | Şubat 2027 | N7 ücretsiz/ücretli, N8 Our Story | — |
 | 5 | Mart 2027 | N9 SSS örnekleri, N10 destination | — |
 | 6 | Nisan 2027 | N11 gizlilik, N12 QR | G2 gizlilik bölümü; ikinci 3 aylık gözden geçirme |
