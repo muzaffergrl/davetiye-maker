@@ -1,173 +1,270 @@
-# GPT görsel istekleri — Tasarım 28 · Maison Pâtisserie
+# GPT görsel istekleri — Tasarım 28 · Maison Pâtisserie (2026-10-22 yeniden tasarım)
 
-> **Instructions for GPT:** This design ("Maison Pâtisserie") was redesigned on 2026-10-18/19: its website is warm ivory stationery paper with abundant photorealistic flowers in the corners, opened from a themed cover object. The old website parts (PAKET 5) are NO LONGER needed — do not generate them. Generate PAKET 3 (the Etsy listing scenes) and PAKET 6 (the printed invitation grounds) in ONE chat; PAKET 2 (sample photos) is optional and comes last. Before the first image, attach these two images from the repository as the style reference of every image: `platform/themes/maison-patisserie/img/bg_scene-1024.webp` (the website background: paper, flowers, colors, light) and `platform/themes/maison-patisserie/img/v3-closed-880.webp` (the design's closed cover object). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". No text, letters, numbers, logos, monograms or watermarks in any image.
+> **Instructions for GPT:** This design ("Maison Pâtisserie") is being REDESIGNED from scratch. Generate PAKET 5R
+> (website layers) first, in order and in ONE chat, then PAKET 6R (printable invitation). PAKET 2 (sample photos)
+> already exists — do NOT regenerate it. Sections marked GEÇERSİZ are not wanted. Use each English prompt exactly as
+> written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text,
+> letters, numbers, names, dates, initials, monograms, crests, logos, brand marks, shop names, price tags, QR codes or
+> watermarks in any image** (also not on the sleeve band, the plates, the macarons, the awning or the shop window). This
+> is an elegant Parisian pâtisserie in soft morning light — refined, romantic, photorealistic; never cartoon, never a
+> children's-party or cupcake-shop look, no sprinkles, no candy colours beyond pistachio, rose, cream and a little gold.
+> The doily lace is printed/pierced PAPER lace, never fabric lace. Give W1 `page_ground.png`, W2 `cream_paper.png` and
+> W3 `env_back.png` as the style reference of every later part: the same cream pastry paper, the same cream cotton
+> stationery, the same pistachio and rose papers, the same rose satin, the same soft morning window light from the
+> top-left. Parts drawn on the same envelope canvas (W3, W4, W5, W7, W8, W9) keep the envelope in exactly the same box.
 
-Bu dosya Maison Pâtisserie'nin **bütün görsellerinin** tek kaynağıdır (G166, docs/24 #28). Tasarım `tools/katalog.py`'de
-`EK_TEMALAR` dalga kaydıyla duruyor (6 eksen + hareket imzası); PAKET üreteçlerine girmediği için dosya elle yazıldı.
-Tema bugün **geçici** parçalarla çalışıyor: `platform/themes/maison-patisserie/build_images.py` kutu, kapak, ipek kâğıt,
-kart ve rafı depodaki başka GPT kâğıt/saten görsellerinden kırpıp tonluyor, fiyonk 14'ün fildişi fiyonkundan tonlanıp
-düğümden kesiliyor (çizim yok). Aşağıdaki parçalar `assets/gpt/parts/` içine geldikçe betik **katman katman** onlara geçer.
+Bu dosya tasarım 28'in **bütün görsel parçalarının** tek kaynağıdır (`docs/35_22_32_YENIDEN_TASARIM.md`, 22–32 yeniden
+tasarımı; görev G228). 18–20 Ekim'deki Codex kapağı (`img/v3-*`, `img/v4-*`) ve iç sayfaları bu parçalarla **tamamen**
+değişir; eski PAKET 5 / PAKET 6 bölümleri kaldırıldı (git geçmişinde). Tema (`platform/themes/maison-patisserie/`) parçalar
+gelince 39 pilotunun yapısıyla yeniden kurulur (G428, `docs/34`); gelmeyen parçanın yerine çizilmiş yedek konmaz (K21).
+Kişisel alanlar (isimler, tarih, baş harfler, mekân) HTML'dir, hiçbir görsele pişirilmez. QR'ı GPT çizmez
+(`tools/make_qr.py`).
 
 ## Nereye?
-- Repo `muzaffergrl/davetiye-maker`; klasör `collections/28_Maison_Patisserie/assets/gpt/` altındaki `parts/` (PAKET 5),
-  `photos/` (PAKET 2) ve `print/` (PAKET 6). Repoya yazamıyorsan dur ve bunu çıktında açıkça söyle; kullanıcıya yükleme
-  işi verme.
+- Repo `muzaffergrl/davetiye-maker`; klasör `collections/28_Maison_Patisserie/assets/gpt/` altındaki `parts/` (PAKET 5R)
+  ve `print/` (PAKET 6R). `photos/` (PAKET 2) zaten dolu — dokunma. Repoya yazamıyorsan dur ve bunu çıktında açıkça söyle;
+  kullanıcıya yükleme işi verme.
+- Sonra (Claude): `python3 tools/kit_check.py collections/28_Maison_Patisserie --paket 5` (oran, gerçek alfa, kenar payı,
+  foto penceresi) + göz kontrolü. Tema yeniden kurulunca `python3 platform/themes/maison-patisserie/build_images.py`
+  (alfa kutusuna kırpma + arka katmanın kutusuna yerleştirme, `keyed_window`) ve `python3 tools/gpt_kuru_deneme.py --tema
+  maison-patisserie --sekil collections/28_Maison_Patisserie/assets/gpt/kuru_sekil.json` (prova). PAKET 6R için aşağıdaki
+  "Gelince" adımı.
 
 ## Stil ve renk
-- Teknik: **pastel watercolour + photorealistic pastry** — zemin ve dokular yumuşak pastel suluboya; kutu, kurdele,
-  makaron, tabak ve şeker inci fotogerçekçi (gerçek karton, gerçek saten, gerçek porselen).
-- Palet: pistachio `#A9C49C` · deep pistachio `#4F6D49` · rose `#E8B4B8` · deep rose `#9B4F5A` · cream `#FBF5EC` ·
-  gold `#B8995A`. Altın yalnız ince kenar/çizgi; hiçbir yerde baskın değil.
-- Işık: yumuşak, sol üstten; bütün parçalarda aynı.
-- Klasik, romantik, zengin; ultra-minimal değil. 03 Blush Garden Rose'a (şakayık, kemer çerçeve, pembe zarf) benzemesin:
-  burada çiçek yok, nesne bir pasta kutusu, renk fıstık yeşili ağırlıklı.
-- Gerçek bir kişiye, markaya, gerçek bir pastaneye (logo, tabela, desen) veya başka bir satıcının tasarımına benzemesin.
+- Teknik: **photorealistic product photography** — real cream cotton stationery and pastry paper, real pistachio-green
+  and rose-pink papers with a fine felt tooth, real pierced paper doily lace, real rose satin ribbon with a soft sheen,
+  real French macarons with smooth domed shells and ruffled feet, real sugared rose buds glittering with fine sugar, real
+  gold-rimmed white porcelain, real piped white royal icing. A Parisian pâtisserie at nine in the morning: airy, sweet,
+  elegant, classic, romantic and rich (AGENTS şart 5). Not cartoon, not flat vector, not watercolour clip-art, not a
+  cupcake-shop or kids' party print.
+- Renkler (yalnız bunlar): pistachio `#A9C49C` · deep pistachio `#4F6D49` · rose `#E8B4B8` · deep rose `#9B4F5A` · cream
+  `#FBF5EC` · cream shade `#F1E8D8` · gold `#B8995A` · ink `#3E3A32` (yalnız gölge/derinlik). Altın seyrek ve ince (kenar,
+  çizgi, şeker inci); büyük altın yüzey yok.
+- Işık: yumuşak **sabah pencere ışığı sol üstten**, bütün parçalarda aynı. Şeffaf parçalarda gerçek alfa (beyaz ya da
+  dama deseni değil), her kenarda en az %6 boşluk, nesnenin dışında gölge/hâle yok (gölgeyi site ekler).
+- Dantel: **kâğıt doily** — krem ya da fildişi kâğıda iğneyle delinmiş çok ince dantel deseni (küçük çiçek rozetleri,
+  ince yapraklar, kenarda delikli tarak); deliklerden altı görünür (gerçek alfa). Kumaş dantel, tül, inci yok (40'tan ayrı).
+- Foto penceresi (`#00FF00`) yalnız W12 `cameo_frame`, W13 `plate_frame` ve W15 `vitrine_wide`'da; diğer parçalarda yeşil
+  yok.
+- Gerçek bir pastaneye, markaya, kutu tasarımına, otele, sanatçıya ya da başka bir satıcının tasarımına benzemesin;
+  tentede, vitrinde, bantta yazı/logo/ad yok. **46'dan ayrı:** kurdele zarfın deliklerinden geçmez, kâğıt kılıf bandın
+  üstündedir. **43'ten ayrı:** dalgalı kapak ve çiçek sapı yok. **03'ten ayrı:** V kapak ve mum mühür yok.
+
+## Zarf geometrisi (W3–W5, W7–W10 ve W20 buna göre)
+Tuval **1560×1200** (yatay). Zarf kutusu **x %7–93, y %7–93** (zarf ≈1,3:1). Altı katman **aynı tuvalde, aynı kutuda**
+çizilir: W3 arka, W4 ön cep, W5 kapak, W7 kılıf bant, W8 bağlı fiyonk, W9 çözülmüş kurdele; Claude her birini kendi alfa
+kutusuna kırpar ve W3'ün kutusuna göre yerleştirir. Tuval yüzdeleri:
+- **ön cep (W4):** tam zarf genişliği (x %7–93), üst kenarı yanlarda **%40**, ortada **%45**'e inen sığ bir yay; zarfın
+  alt kenarına (%93) kadar;
+- **dantel tarak kapak (W5):** üst katlama çizgisi %7, tam genişlik; serbest kenarı **11 küçük yuvarlak tarak** dizisi —
+  dizi geniş, sığ bir yay çizer: yan kenarlara **%44**'te değer, ortada en alt tarak **%60**'ta; kenar boyunca ~%4 derinlikte
+  delikli doily bordür. Kapak cebin üst kenarını her yerde örter;
+- **kılıf bant (W7):** zarfı yatay saran gül pembesi kâğıt bant, **x %6–94** (iki uçta zarfın yan kenarından arkaya
+  kıvrılan yumuşak dönüş görünür), **y %52–72**; üst ve alt kenarı ince altın tarak. Kapağın ucu (%60) bandın altında kalır;
+- **kurdele + bağlı fiyonk (W8):** bandın orta çizgisinde boydan boya gül saten kurdele (**y %60,5–63,5**, x %6–94);
+  ortada fiyonk — iki ilmek **x %39–61, y %53–69**, düğüm merkezi **(%50, %62)**, iki kısa V kesik kuyruk yaklaşık
+  **(%45, %82)** ve **(%55, %82)**'ye iner;
+- **çözülmüş kurdele (W9):** aynı kurdele, ortada düğüm ve ilmek yok; iki serbest uç düğüm yerinden yumuşakça sarkar:
+  sol uç **(%44, %80)**'e, sağ uç **(%57, %77)**'ye kıvrılır;
+- **şekerlenmiş gül goncası (W10, ayrı 600×600 tuval):** sitede düğümün üstüne, merkezi **(%50, %61)**, çapı tuval eninin
+  **%7,5**'i;
+- açık kapağın iç yüzü (W6) ayrı tuvalde (**1560×860**): W5'in çizgisi dikey aynalanmış — katlama kenarı **altta %87**'de,
+  x %7–93; yanlar **%35**'e çıkar, tarak dizisi ortada **%13**'e yükselir.
+- Kat sırası (alttan üste): W3 arka → kart (W11) → W4 cep → W5 kapak → W7 kılıf bant → W8 fiyonk (ya da W9) → W10 gonca.
+
+Açılış: gonca hafifçe eğilip sola yuvarlanarak düşer → fiyonk çözülür (W8 → W9 geçişi, ilmekler küçülür) → kılıf bant
+çözülmüş kurdelesiyle birlikte **sağa kayarak** zarftan çıkar (hafif eğimle, ekrandan dışarı) → dantel tarak kapak üst
+katlama çizgisinde **3B** açılır, 90°'yi geçince iç yüzü (W6, gül pembesi doily astar) görünür → krem kart (W11) cebin
+arkasından yükselir, dudağı geçince öne gelir ve büyür → makaronlar, şeker inciler ve gül yaprakları (W19) hafifçe zıplayarak
+düşer → home.
 
 ---
 
-## PAKET 5 — Website katmanları (YAZI YOK) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+## PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım)
 
-> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
-
-Tek görselde tek nesne, düşen gölge yok (site ekler), ışık sol üstten, şeffaflar **gerçek alfa**. **Sahne parçaları
-W2.1–W2.8 aynı 1024 × 1024 tuvalde, kutunun TAM ÜSTTEN görünüşüyle ve aynı konumda** çizilir: kutu/kapak tuvalin
-x 32–992, y 32–992 px karesini kaplar (yaklaşık %3 kenar boşluğu). Birbirinin üstüne konunca kenarlar çakışmalı. Tema
-bu katmanları kırpmadan %100 üst üste dizer (`platform/themes/maison-patisserie/index.html`).
-
-Sıra (alttan üste): `box_base` · (kart, HTML) · `tissue_left` · `tissue_right` · `lid` · `ribbon_cross` (Claude dört
-kola keser) · `bow_left` · `bow_right` · `bow_knot`.
-
-#### W2.1 Açık kutu — içi boş (üstten)
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/box_base.png` · 1024×1024 · **Şeffaf zemin**
+#### W1 Krem pastane kâğıdı (sayfa zemini)
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/page_ground.png` · 1536×1536 · opak, dikişsiz
 
 ```
-A square luxury pâtisserie gift box WITHOUT its lid, seen exactly from directly above (top-down, no perspective), empty: four low walls of matte pistachio-green card (#A9C49C) with a thin gold foil line along the top edge of each wall, the inside lined with smooth cream paper (#FBF5EC) with a very faint watercolour texture. The box fills the square from about 3% to 97% of the image on every side (outer edge of the walls at x 32–992 px and y 32–992 px of a 1024 px canvas), perfectly centered and square. Nothing inside the box. The inner edge where the walls meet the cream floor is a crisp, clearly visible line with a soft contact shade on the object itself. Only this one object. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow outside the box. No glow, halo or haze outside its outline. No text, letters, numbers, logo or monogram. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+A seamless, tileable, perfectly flat top-down texture of fine cream pastry-shop wrapping paper (#FBF5EC): a soft matte paper with a gentle felt tooth and a few faint fibres, printed with very fine, evenly spaced vertical pinstripes in pale pistachio (#A9C49C at very low strength, the stripes hair-fine and about 3% of the width apart, so faint they read as a whisper of texture), the gentlest warm variation toward #F1E8D8. Evenly lit by soft morning window light from the top-left: no fold, no crease, no stain, no shadow, no vignette, no other pattern, no objects. Calm enough for dark ink and deep-rose text to read on it everywhere. The left/right and top/bottom edges must tile without a visible seam (the stripes continue exactly across the seams). No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: tam üstten; kare; x/y 32–992 px; içi boş; duvar üstünde ince altın çizgi; gölge yok; gerçek alfa.
+Kontrol: krem, çok soluk ince fıstık çizgiler; dikişsiz (2×2 yan yana ek yeri yok, çizgiler kesintisiz); leke/kat yok; koyu yazı her yerde okunur.
+Kullanım: tema kurulunca bütün sayfaların zemini ve açılış sayfası (kapalı zarfın arkası).
 
-#### W2.2 İpek kâğıt — sol yaprak
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/tissue_left.png` · 1024×1024 · **Şeffaf zemin**
-
-```
-Only the LEFT sheet of soft ivory-white tissue paper that lies folded inside the box of box_base.png (give it as the reference; same canvas, same top-down view, same position): a gently crinkled, slightly translucent sheet with delicate natural creases and a faint rose-pink deckled edge, covering the left half of the inside of the box from the left wall (x about 54 px) to just past the middle (x about 548 px), from the top wall (y about 54 px) to the bottom wall (y about 970 px). Its right edge, which will slide away, is a soft folded edge that reads clearly. Only the tissue — no box, no card, nothing else. Top-down, no perspective. Soft light from the top-left. No cast shadow outside the sheet. No text. True transparent background PNG (real alpha channel), the paper itself about 92% opaque.
-```
-Kontrol: yalnız sol yaprak; kutunun içine oturuyor; ortayı az geçiyor; gölge yok; gerçek alfa.
-
-#### W2.3 İpek kâğıt — sağ yaprak
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/tissue_right.png` · 1024×1024 · **Şeffaf zemin**
+#### W2 Krem pamuk kırtasiye (kartlar, bantlar, form)
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/cream_paper.png` · 1536×1536 · opak, dikişsiz
 
 ```
-The RIGHT sheet of the same tissue paper as tissue_left.png (give it as the reference; same canvas and view): it covers the right half of the inside of the box from just before the middle (x about 476 px, overlapping the left sheet a little) to the right wall (x about 970 px), y about 54 to 970 px, with its own natural creases (not a mirror copy) and the same faint rose-pink deckled edge. Only the tissue. Top-down, no perspective. Soft light from the top-left. No cast shadow. No text. True transparent background PNG (real alpha), the paper about 92% opaque.
+A seamless, tileable, flat top-down texture of thick cream cotton stationery card (#FBF5EC): a soft felted tooth, a few faint long cotton fibres, a whisper of warm variation toward #F1E8D8, matte, no pattern at all. Evenly lit by soft morning window light from the top-left: no deckle edge, no fold, no crease, no stain, no printing, no shadow, no vignette. Calm enough for dark ink text everywhere. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: yalnız sağ yaprak; sol yaprakla ortada biraz örtüşüyor; ayna kopya değil; gerçek alfa.
+Kontrol: sakin krem, desensiz; dikişsiz; leke/baskı yok; koyu yazı okunur.
+Kullanım: tema kurulunca home kartı, davet bandı, details program kartı, RSVP formu.
 
-#### W2.4 Kapak — kurdelesiz (üstten)
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/lid.png` · 1024×1024 · **Şeffaf zemin**
-
-```
-The closed LID of the same pâtisserie box (give box_base.png as the reference; same canvas, same top-down view, same position), WITHOUT any ribbon or bow: a square lid of matte pistachio-green card (#A9C49C) with a very subtle pastel watercolour mottling, a fine embossed border and a thin gold foil line inset about 4% from its edge; the lid covers the box exactly, its outer edge at x 32–992 px and y 32–992 px. The centre of the lid is plain (the ribbon and the bow are separate parts). Only the lid. Top-down, no perspective. Soft light from the top-left. No cast shadow and no drop shadow outside the lid. No glow outside its outline. No text, letters, numbers, logo or monogram. True transparent background PNG (real alpha channel).
-```
-Kontrol: kurdele/fiyonk yok; kutuyla aynı kare (32–992 px); ince altın çizgi; gölge yok; gerçek alfa.
-
-#### W2.5 Saten kurdele — çapraz (fiyonksuz)
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/ribbon_cross.png` · 1024×1024 · **Şeffaf zemin**
+#### W3 Zarfın arkası (doily astar görünür)
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/env_back.png` · 1560×1200 · **Şeffaf zemin**
 
 ```
-Only the rose-pink double-faced satin ribbon (#E8B4B8 with a soft natural sheen) that crosses the lid of lid.png (give it as the reference; same canvas, same top-down view): one band running vertically through the centre from the top edge of the lid to the bottom edge (x about 460–564 px, y 32–992 px) and one band running horizontally through the centre from the left edge to the right edge (y about 460–564 px, x 32–992 px), lying flat on the lid; where the two bands cross in the centre the ribbon is flat and neat (the bow is a separate part). Each band is about 104 px wide with crisp edges. Only the ribbon — no lid, no bow. Top-down, no perspective. Soft light from the top-left. No cast shadow. No text. True transparent background PNG (real alpha channel).
+The back panel of an open landscape envelope, seen perfectly straight on, on a fully transparent background. The envelope occupies exactly x 7–93% and y 7–93% of the canvas (about 1.3 wide : 1 tall) — the same box is used later by env_front.png, flap.png, sleeve_band.png, bow.png and bow_untied.png, so keep it exactly there. We look at its inside: the panel is lined with soft rose-pink paper (#E8B4B8) printed in fine ivory with an elegant paper-doily lace pattern — small round rosettes of tiny petals, delicate leaf sprays and fine pierced-dot scrolls, evenly repeated, symmetrical about the vertical centre, quiet and low in contrast; along the top edge and both sides a slim rim of the envelope's own cream cotton paper (#FBF5EC, a fine felt tooth) shows. The top edge is straight and open (the flap is not drawn). Soft morning window light from the top-left, a gentle shade toward the bottom where the pocket will sit. No flap, no front pocket, no band, no ribbon, no card, no seal. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: yalnız kurdele; iki bant ortadan; ~104 px genişlik; kapak kenarlarına kadar; fiyonk yok; gerçek alfa. (Claude
-merkezden dört kola keser: kuzey, güney, batı, doğu — açılışta her kol kendi yönüne kayar.)
+Kontrol: zarf x %7–93 / y %7–93 kutusunda; içi gül pembesi kâğıt + fildişi doily baskı, kenarda krem pay; kapak/cep/bant yok; gölge/hâle yok; gerçek alfa.
+Kullanım: tema kurulunca zarf kutusuna (`7, 7, 93, 93`) kırpılır → zarfın en arka katı; kapak açılınca doily astar görünür, kart onun önünden yükselir.
 
-#### W2.6 Fiyonk — sol ilmek ve sol kuyruk
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/bow_left.png` · 1024×1024 · **Şeffaf zemin**
-
-```
-The LEFT half of a generous rose-pink satin bow (#E8B4B8, the same satin as ribbon_cross.png; give it as the reference) tied in the centre of the box lid, seen from directly above on the same canvas: only the left loop and the left tail, complete — including the part that would be hidden under the knot — reaching from the centre of the canvas (x 512, y 500) to the left, about 300 px wide and 340 px tall in total, the tail falling down-left. The bow sits on the centre of the lid where the ribbons cross. Soft satin folds and sheen. Only this half of the bow. Top-down. Soft light from the top-left. No cast shadow. No text. True transparent background PNG (real alpha channel).
-```
-Kontrol: yalnız sol ilmek + kuyruk; düğümün altına giren kısım da tam; merkezden sola; gerçek alfa.
-
-#### W2.7 Fiyonk — sağ ilmek ve sağ kuyruk
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/bow_right.png` · 1024×1024 · **Şeffaf zemin**
+#### W4 Zarfın ön cebi
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/env_front.png` · 1560×1200 · **Şeffaf zemin**
 
 ```
-The RIGHT half of the same rose-pink satin bow as bow_left.png (give it as the reference; same canvas and view): only the right loop and the right tail, complete including the part under the knot, reaching from the centre of the canvas (x 512, y 500) to the right, about 300 px wide and 340 px tall, the tail falling down-right — matching the left half so together they make one natural bow (not a mirror copy). Only this half. Top-down. Soft light from the top-left. No cast shadow. No text. True transparent background PNG (real alpha channel).
+Only the front pocket of the same cream envelope as env_back.png, on the same 1560×1200 canvas and in exactly the same place, on a fully transparent background: the envelope box is again exactly x 7–93% and y 7–93% of the canvas, and the pocket spans the full envelope width (x 7–93%) from its top edge down to the envelope's bottom edge at 93%. Its top edge is one shallow, smooth arc: at 40% of the canvas height at both side edges, dipping gently to 45% at the horizontal centre, a clean crisp cut with the faint thickness of heavy paper visible along it. Thick cream cotton paper (#FBF5EC, a fine felt tooth) showing the softly folded side flaps and bottom flap of a real envelope with their gentle fold lines, softly lit by morning window light from the top-left. Everything above the pocket's edge is completely transparent. No flap, no band, no ribbon, no card, no doily on the pocket. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: yalnız sağ yarı; sol yarıyla birlikte tek fiyonk gibi; gerçek alfa.
+Kontrol: cep tam genişlik; üst kenarı yanlarda %40, ortada %45'e inen sığ yay; üstü tamamen şeffaf; W3 ile üst üste konunca kenarlar çakışıyor; gerçek alfa.
+Kullanım: tema kurulunca aynı zarf kutusuna kırpılır → ön cep (`.env-front`); kart bunun arkasından yükselir, kapak açıkken yay kenarı görünür.
 
-#### W2.8 Fiyonk düğümü
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/bow_knot.png` · 1024×1024 · **Şeffaf zemin**
-
-```
-Only the small wrapped KNOT in the centre of the same rose-pink satin bow (give bow_left.png and bow_right.png as the reference; same canvas and view): a neat satin knot about 90 px wide and 110 px tall, centred at x 512, y 500, covering the place where the two loops meet. Only the knot. Top-down. Soft light from the top-left. No cast shadow. No text. True transparent background PNG (real alpha channel).
-```
-Kontrol: yalnız düğüm; iki yarının birleştiği yeri örtüyor; gerçek alfa. **Üçü üst üste = tek fiyonk** (açılışta ilmekler
-iki yana ayrılır, düğüm düşer).
-
-#### W2.9 Kutudaki kart (boş)
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
+#### W5 Dantel tarak kapak (kapalı, dış yüz)
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/flap.png` · 1560×1200 · **Şeffaf zemin**
 
 ```
-A small, thick invitation card that waits inside the pâtisserie box, alone: soft cream cotton card (#FFFBF5) with a faint watercolour wash of pistachio at the very top edge and a very thin gold foil edge, portrait, exactly 560 by 740 in proportion (about 3:4), centred on the canvas and filling about 70% of its width. The whole face of the card is BLANK (the website places the photo and the text on it) — no window, no frame lines in the middle, no ornaments in the middle. Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Soft light from the top-left. No cast shadow. No text, letters, numbers or monogram. True transparent background PNG (real alpha channel).
+Only the closed flap of the same envelope, on the same 1560×1200 canvas and in exactly the same place, on a fully transparent background: the envelope box is again exactly x 7–93% and y 7–93% of the canvas; the flap hangs from a softly rounded fold along the envelope's top edge at 7% across the full envelope width (x 7–93%). It is made of pistachio-green paper (#A9C49C, a fine felt tooth, slightly deeper toward #4F6D49 only in the faintest fold shade). Its free lower edge is a row of ELEVEN small, even, round scallops, like the border of a paper doily, and the row as a whole follows one broad shallow curve: it meets the two side edges at 44% of the canvas height and its lowest, centre scallop reaches 60% of the canvas height. Along this scalloped edge runs a narrow pierced doily border about 4% of the canvas height deep: tiny pierced holes and fine pierced flower rosettes cut through the pistachio paper, each hole truly transparent (real alpha). The rest of the flap is plain pistachio paper with a hair-fine gold line (#B8995A) following the scallops just inside the pierced border. Soft morning window light from the top-left, a whisper of contact shade on the flap itself along its edge. Everything below the flap's edge is completely transparent. No band, no ribbon, no bow, no seal, no card. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: oran ~560:740; yüzü boş (foto ve yazı HTML); ince altın kenar; gölge yok; gerçek alfa.
+Kontrol: fıstık yeşili tam genişlik kapak; serbest kenarı 11 eşit küçük yuvarlak tarak, yanlarda %44, ortada %60 (V/sivri/dalgalı değil); delikler gerçekten şeffaf; ince altın çizgi; bant/fiyonk yok; altı şeffaf; gerçek alfa.
+Kullanım: tema kurulunca kapak kutusuna (`7, 7, 93, 60`) kırpılır → kapalı kapak; açılışta kılıf bant çıktıktan sonra üst katlama çizgisinde 3B kalkar.
 
-#### W2.10 Sayfa zemini (kutu sayfası + home, telefon)
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/bg_page.png` · 1024×1536 · opak
-
-```
-A vertical phone-screen background in pastel watercolour: warm cream paper (#FBF5EC) with soft, airy washes of pistachio green in the top-left corner and of rose pink in the bottom-right corner, a few tiny scattered sugar pearls and one or two pale macaron crumbs only at the far edges, fine cotton-paper grain everywhere. The whole central 70% of the image stays calm, light and empty (no box, no card, no text) so dark text and the box read on it. No text, letters or numbers.
-```
-Kontrol: orta %70 sakin ve açık; renk yalnız köşelerde; yazı yok.
-
-#### W2.11 Dikişsiz zemin karosu
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/bg_tile.png` · 1024×1024 · opak
+#### W6 Kapağın iç yüzü (açıkken dik)
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/flap_in.png` · 1560×860 · **Şeffaf zemin**
 
 ```
-A seamless, tileable cream paper texture (#FBF5EC) with a very faint pastel watercolour mottling of pistachio and rose, fine cotton-paper grain, very low contrast, no objects, no pattern repeats visible, no edges or vignette. It must tile perfectly in both directions. No text.
+The inside of the same scalloped envelope flap as flap.png, alone, seen straight on as it stands upright above the envelope when it is open, on a fully transparent background: exactly the same outline as flap.png but mirrored vertically — its straight fold edge runs along the BOTTOM at 87% of the image height, spanning x 7–93% of the width; its two straight sides rise to 35% of the image height, and its row of eleven small round scallops arches UP to its highest, centre scallop at 13% of the image height. The inside is lined with the same rose-pink paper printed with the fine ivory paper-doily lace pattern as env_back.png (small rosettes, leaf sprays, pierced-dot scrolls, low contrast); along the scalloped edge the same narrow pierced doily border cut through the paper (tiny holes truly transparent) and a slim rim of pistachio paper (#A9C49C) shows beyond it. Soft morning window light from the top-left. No band, no ribbon, no bow. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: dört yönde dikişsiz; çok düşük kontrast; nesne yok.
+Kontrol: katlama kenarı altta (%87), yanlar %35'e, tarak dizisi ortada %13'e çıkar; W3 ile aynı gül pembesi doily astar; kenarda delikli bordür + ince fıstık pay; düz renk değil; gerçek alfa.
+Kullanım: tema kurulunca alfa kutusuna kırpılır, kapak enine ölçeklenir → kapak 90°'yi geçince zarfın üstünde dik duran iç yüz (3B dönüşün arka yüzü; asla düz renk).
 
-#### W2.12 Vitrin rafı
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/shelf.png` · 1536×1024 · **Şeffaf zemin**
-
-```
-A single long glass shelf of a Parisian pâtisserie display case, seen straight from the front at eye level: a thick clear glass plate with a soft green-tinted edge and a thin polished gold rim along its front edge, very wide and thin — it spans about 96% of the image width and is only about 5% of the image height, centred vertically. Clean, elegant, photorealistic. Only the shelf — no pastries, no case, no brackets. Soft light from the top-left. No cast shadow below it. No text. True transparent background PNG (real alpha channel).
-```
-Kontrol: çok geniş, ince; altın ön kenar; boş; gölge yok; gerçek alfa (Story'de fotoğraflar ve Details'te menü raflarının altı).
-
-#### W2.13 Şeker inci (accent 1)
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/accent_1.png` · 1024×1024 · **Şeffaf zemin**
+#### W7 Gül pembesi kılıf bant (zarfı yatay saran)
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/sleeve_band.png` · 1560×1200 · **Şeffaf zemin**
 
 ```
-A single glossy sugar pearl (a round pâtisserie dragée) in pearly white with a faint pink lustre, alone, drawn large so it fills about 50% of the square. Photorealistic. Front view, centered, not cropped, generous empty margin. Soft light from the top-left. No cast shadow, no glow outside its outline. No text. True transparent background PNG (real alpha channel).
+On the same 1560×1200 canvas as env_back.png and flap.png, in exactly the same place (the envelope box is x 7–93% and y 7–93% of the canvas, but the envelope itself is NOT drawn here), only a horizontal paper sleeve band that wraps the closed envelope like a pâtisserie box sleeve, on a fully transparent background: a band of smooth rose-pink paper (#E8B4B8, a fine felt tooth, a soft paper sheen) running horizontally from x 6% to x 94% of the canvas and from y 52% to y 72%; at both ends it turns over in a soft rounded fold, as if it bends around the envelope's side edges and continues behind it. Its top and bottom edges are each finished with a fine, even row of tiny scallops edged in a hair-fine gold foil line (#B8995A, a soft metallic shine); between them the band is plain rose paper with a faint, slightly deeper rose (#9B4F5A at very low strength) shade along its edges only. Soft morning window light from the top-left. Everything outside the band is fully transparent: no envelope, no flap, no ribbon, no bow, no sticker, no label. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: tek inci; parlak; gölge yok; gerçek alfa (RSVP gönderiminde ~18 inci düşer — `MOTION.accents.closing`).
+Kontrol: tek yatay gül pembesi bant (x %6–94 / y %52–72); iki uç yumuşak kıvrık; üst-alt kenar ince altın tarak; kurdele/etiket/yazı yok; zarf çizilmemiş; gerçek alfa.
+Kullanım: tema kurulunca aynı zarf tuvalinde tam tuval katman; açılışta fiyonk çözüldükten sonra çözülmüş kurdeleyle (W9) birlikte sağa kayarak zarftan çıkar.
 
-#### W2.14 · W2.15 Dekor (makaronlu tabak, tül köşe süsü) — BU TURDA ÜRETME
-G167 kararı: sayfalarda bu iki süsün yeri henüz yok (geçici katmanlarla gösterilemiyor; K21 gereği çizilemiyor) ve
-`build_images.py` onları okumuyor — üretilirse kullanılmayan dosya olur. Yerleşim bir tema görevinde tasarlanınca
-prompt'lar (makaronlu altın kenar tabak 1536×1024 şeffaf; tül + şeker inci + iki makaron yatay köşe süsü 1536×1024
-şeffaf) buraya **Kaydet** satırlarıyla geri yazılır ve `build_images.py` aynı anda bağlanır. **GPT: bu ikisini atla.**
+#### W8 Gül saten kurdele + bağlı fiyonk
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/bow.png` · 1560×1200 · **Şeffaf zemin**
 
-#### W2.16 Website hero + paylaşım görseli (og:image kaynağı)
+```
+On the same 1560×1200 canvas as sleeve_band.png, in exactly the same place (the envelope box is x 7–93% and y 7–93%; the envelope and the sleeve band are NOT drawn here), only a rose satin ribbon tied in a bow, on a fully transparent background: a narrow ribbon of rose satin (#E8B4B8 with a soft luminous sheen and deeper rose #9B4F5A in its folds) runs horizontally along the centre line of the band, from x 6% to x 94% of the canvas and from y 60.5% to y 63.5%, its two ends turning over in a soft fold at the far left and right. At the horizontal centre it is tied in a full, soft, elegant bow: two plump rounded loops spanning x 39% to 61% and y 53% to 69%, a neat small knot centred at 50% of the width and 62% of the height, and two short tails falling from the knot, gently twisted once, ending in neat V-cut swallowtails at about (45%, 82%) and (55%, 82%). The satin catches soft morning window light from the top-left. Nothing on the knot (no flower, no charm, no pearl). Everything else fully transparent. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: kurdele y %60,5–63,5 boyunca x %6–94; fiyonk ilmekleri x %39–61 / y %53–69, düğüm (%50, %62); kuyruklar V kesik ~(%45, %82) ve (%55, %82); düğümde süs yok; bant/zarf çizilmemiş; gerçek alfa.
+Kullanım: tema kurulunca kılıf bandın üstünde kapalı zarfın kapanışı; açılışta goncadan sonra W9'a geçer (ilmekler küçülerek çözülür).
+
+#### W9 Çözülmüş kurdele (fiyonk açılmış)
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/bow_untied.png` · 1560×1200 · **Şeffaf zemin**
+
+```
+On the same 1560×1200 canvas as bow.png, in exactly the same place, on a fully transparent background, the same rose satin ribbon (#E8B4B8, soft sheen, deeper rose #9B4F5A in its folds) just after its bow has been untied: it still runs horizontally along the band's centre line (y 60.5–63.5%) from the far left (x 6%, the end turning over in a soft fold) to near the centre, and from near the centre to the far right (x 94%, also turning over), but there is NO bow, NO loop and NO knot: in the middle the two freed ends simply hang loose and soft, slightly crinkled where the knot was — the left end curls gently down to about 44% of the width and 80% of the height, the right end curls down to about 57% of the width and 77% of the height, each ending in the same V-cut swallowtail. The satin catches soft morning window light from the top-left. The envelope and the band are NOT drawn. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: aynı kurdele, fiyonk/ilmek/düğüm yok; ortada iki serbest uç ~(%44, %80) ve (%57, %77)'ye sarkar; kurdele çizgisi W8 ile aynı yükseklikte; gerçek alfa.
+Kullanım: tema kurulunca fiyonk çözülürken W8'in yerine geçer (çapraz geçiş), sonra kılıf bantla birlikte sağa kayar.
+
+#### W10 Şekerlenmiş gül goncası (düğümün üstünde)
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/rosebud.png` · 600×600 · **Şeffaf zemin**
+
+```
+A single sugared rose bud, alone, seen from the front and very slightly from above, on a fully transparent background, centred and filling about 70% of the canvas: a small, tightly furled garden rose bud in soft rose pink (#E8B4B8 deepening to #9B4F5A at the heart), its petals frosted with fine sparkling crystal sugar that catches the soft morning window light from the top-left, with two tiny sugared pistachio-green leaves (#A9C49C) tucked beneath it. No stem longer than the leaves, no ribbon, no pearl. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: tek şekerli gül goncası + iki küçük yaprak; şeker parıltısı gerçekçi; kurdele/sap yok; gerçek alfa.
+Kullanım: tema kurulunca fiyonk düğümünün üstüne (merkez %50, %61; çap tuval eninin %7,5'i); açılışın ilk anı: eğilip sola yuvarlanarak düşer. Home'da portrenin üstünde küçük süs, RSVP kapanışında da.
+
+#### W11 Zarftaki kart (boş)
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/card_small.png` · 1000×1400 · **Şeffaf zemin**
+
+```
+A flat portrait invitation card, alone, seen perfectly straight on, on a fully transparent background: the thick cream cotton card of cream_paper.png (#FBF5EC) spanning x 7–93% and y 6–94% of the canvas, its top edge cut in a gentle row of small round scallops like a doily edge, the other three edges straight with softly rounded corners. A fine gold foil line (#B8995A) follows the whole outline about 5% inside the edge, and at the top centre, just inside the scalloped edge, a small delicate pierced paper-doily rosette (tiny holes truly transparent) about 22% of the card's width. Below the rosette the card is completely EMPTY paper (the website sets the names, the date and the venue there in HTML). A hair-fine contact shade on the card's own edge only, soft morning window light from the top-left. No flowers, no ribbon, no photo. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: krem kart, üst kenarı küçük tarak; ince altın çizgi; üst ortada küçük delikli doily rozeti; altı tamamen boş; gerçek alfa.
+Kullanım: tema kurulunca alfa kutusuna kırpılır → zarftan yükselen kart (zarf eninin ~%58'i) ve home kartı (isimler, tarih, mekân HTML).
+
+#### W12 Krema dantelli oval çerçeve (home portresi)
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/cameo_frame.png` · 1000×1250 · **Şeffaf zemin**
+
+```
+An upright oval frame made entirely of piped white royal icing, like the finest lacework on a classic wedding cake, alone, seen straight on, on a fully transparent background: a ring of delicate piped scrolls, tiny drop-loops, beaded borders and small piped lace points in soft white icing (#FBF5EC with gentle cream shade #F1E8D8 in the relief), a few tiny gold dragées (#B8995A) set into it; at the top centre and at the bottom centre a small cluster of sugar flowers — blush garden roses (#E8B4B8), a pistachio-green hydrangea floret or two and tiny sugar leaves (#A9C49C). The frame's outer edge spans about x 6–94% and y 6–94% of the canvas. In the middle an upright OVAL photo window exactly 680 px wide and 850 px tall (4:5), its bounding box from x 160 px to 840 px and from y 215 px to 1065 px, filled with flat pure green #00FF00 (no texture, no shading, a clean smooth oval edge, nothing over it — the top sugar flowers stay above y 205 px and the bottom ones below y 1075 px). Soft morning window light from the top-left giving the piping a crisp relief. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: tek dikey oval krema dantel çerçeve; pencere düz `#00FF00` oval, kutusu ~x 160–840 / y 215–1065 (4:5); şeker çiçekler pencereye binmiyor; gerçek alfa.
+Kullanım: tema kurulunca yeşil oval ölçülür (`window_pct`) ve şeffaf yapılır → home hero portresi (foto oval maskeyle), hikâye tanıtımında küçük.
+
+#### W13 Altın kenarlı porselen pasta tabağı (story çerçevesi)
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/plate_frame.png` · 1000×1000 · **Şeffaf zemin**
+
+```
+A round fine white porcelain dessert plate, alone, seen perfectly from above, on a fully transparent background: the plate's outer edge spans x 6–94% of the canvas (centred), its rim gently scalloped and finished with a fine polished gold band (#B8995A, a crisp metallic highlight) on the very edge and a second hair-fine gold line where the rim meets the well; on the rim a delicate hand-painted garland of tiny blush rose buds (#E8B4B8) and small pistachio-green leaves (#A9C49C) all the way round, very fine and refined. In the centre a perfectly round photo window exactly 700 px in diameter, centred at (500 px, 500 px) — from x 150 to 850 px and y 150 to 850 px — filled with flat pure green #00FF00 (no texture, no shading, a clean circular edge, nothing over it). The glaze has a soft glossy sheen from the morning window light at the top-left. No food, no fork, no doily. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: yukarıdan yuvarlak porselen tabak, tarak kenar + altın şerit, kenarda ince gül-yaprak çelengi; pencere düz `#00FF00` daire, çap 700, merkez (500, 500); gerçek alfa.
+Kullanım: tema kurulunca daire ölçülür ve şeffaf yapılır → story'deki üç anın vitrin rafındaki tabakları (foto daire maskeyle; ortadaki öne çıkıp hafifçe döner) ve home hikâye tanıtımı.
+
+#### W14 Altın konsollu cam vitrin rafı
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/shelf.png` · 1600×320 · **Şeffaf zemin**
+
+```
+A single pâtisserie display-case shelf, alone, seen straight on at eye level, on a fully transparent background: a long, thick shelf of clear polished glass seen edge-on with a faint pale-green glass edge and soft reflections, its front edge capped by a slim polished gold rail (#B8995A, crisp highlights), resting on two delicate scrolled gold brackets beneath it near its two ends. The shelf spans about x 6–94% and y 20–80% of the canvas (the glass top surface a slim sliver in light perspective, the brackets below). The glass is truly see-through (real alpha in the clear parts), shown by crisp highlights and edge reflections from soft morning window light at the top-left. Nothing on the shelf. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: tek yatay cam raf, ön kenarı altın ray, altında iki kıvrık altın konsol; cam saydam; üstünde nesne yok; gerçek alfa.
+Kullanım: tema kurulunca story'deki tabakların durduğu raf (raf kayar, tabaklar üstünde) ve details'teki Meal & menu vitrini.
+
+#### W15 Fıstık yeşili pastane vitrini (mekân fotoğrafı)
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/vitrine_wide.png` · 1600×1150 · **Şeffaf zemin**
+
+```
+The front of a small, elegant Parisian pâtisserie shop window, alone, seen perfectly straight on, on a fully transparent background, photorealistic: a painted wooden shopfront in pistachio green (#A9C49C with soft deep-pistachio #4F6D49 shade in its mouldings), its outer edge spanning about x 6–94% and y 6–94% of the canvas. Across the top, a short scalloped awning valance of rose-and-cream striped canvas (#E8B4B8 and #FBF5EC) from about y 6% to 18%, below it a slim gilded moulding (#B8995A); at the two sides slim fluted pilasters with a tiny painted garland of blush roses; along the bottom a sill with a small window box of blush roses and pale greenery. In the middle a landscape photo window exactly 1280 px wide and 720 px tall (16:9), its top-left corner at x 160 px, y 250 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, square corners, nothing over it — no glass reflection, no lettering, no curtain). Soft morning window light from the top-left. The awning and the woodwork carry no text, no shop name, no number. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: pencere düz `#00FF00`, 1280×720 (16:9), sol üst (160, 250); üstte çizgili tarak tente, yanlarda pilaster, altta güllü pencere kutusu; tente/ahşapta yazı yok; gerçek alfa.
+Kullanım: tema kurulunca pencere ölçülür ve şeffaf yapılır → details'te mekân fotoğrafı (vitrin camının ardında; foto sağdan sola hafifçe kayarak girer).
+
+#### W16 Köşe demeti (gül + fıstık yaprağı + saten kurdele)
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/corner_spray.png` · 1200×1000 · **Şeffaf zemin**
+
+```
+A small, restrained corner spray growing out from near the top-left corner toward the centre, alone, on a fully transparent background, photorealistic: two blush garden roses (#E8B4B8, soft layered petals, deeper rose #9B4F5A at the heart), one rose bud, a few sprigs of small soft pistachio-green leaves (#A9C49C), a tiny sprig of white sweet-pea-like blossom, and one short curl of rose satin ribbon trailing out of it with a soft sheen; one pistachio macaron (#A9C49C shells, cream filling) resting at its edge. Light and airy, not dense. It reaches toward the top and left sides of the image but stays 6% inside them, and the bottom-right 40% of the canvas is completely empty. Soft morning window light from the top-left. No vase, no glitter, no other colours. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: sol üstten çıkan hafif küme (iki gül, gonca, yaprak, kurdele, bir makaron); sağ alt %40 boş; kenara değmiyor; gerçek alfa.
+Kullanım: tema kurulunca home kartının üst köşeleri (sağda aynalanır), RSVP kapanışında küçük; kapakta en fazla bir köşede ve metnin altında asla değil.
+
+#### W17 Krema sıkma ayırıcı (bölüm ayırıcı)
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/divider.png` · 1600×200 · **Şeffaf zemin**
+
+```
+A slim horizontal divider of piped white royal icing, alone, on a fully transparent background: a delicate line of tiny, even piped scallops and drop-loops (#FBF5EC with soft cream shade #F1E8D8 in the relief) running straight across x 8–92% of the canvas at the vertical centre, with one small gold dragée (#B8995A, a crisp highlight) at the centre flanked by two smaller ones, and tiny single dragées spaced evenly along the line, the piping tapering finer toward both ends. Soft morning window light from the top-left. Elegant and fine. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: yatay ince krema tarak çizgisi, ortada üç altın şeker inci; iki uçta boşluk; gerçek alfa.
+Kullanım: tema kurulunca başlıkların altında bölüm ayırıcı (home davet ve gün, details program, RSVP formu).
+
+#### W18 Makaronlu porselen pasta standı (imza süsü)
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/cake_stand.png` · 800×900 · **Şeffaf zemin**
+
+```
+A small footed white porcelain cake stand with a fine gold edge (#B8995A), alone, seen from the front at a low eye level, on a fully transparent background, photorealistic: on its plate a neat little pyramid of seven French macarons — pistachio (#A9C49C), rose (#E8B4B8) and cream (#FBF5EC), with smooth domed shells, fine ruffled feet and soft fillings — crowned by one sugared rose bud; two gold dragées resting at the foot of the stand. The stand spans about x 18–82% and y 8–92% of the canvas. Soft morning window light from the top-left. No cake, no candles, no doily. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: tek ayaklı porselen stand, üstünde 7 makaronlu küçük piramit + şekerli gonca; yalnız palet renkleri; gerçek alfa.
+Kullanım: tema kurulunca home imzası (isimlerin üstünde), RSVP teşekkür hâli ve 404/teşekkür modu süsü.
+
+#### W19 Süzülen küçük nesneler — üç ayrı dosya
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/accent_1.png`, `accent_2.png`, `accent_3.png` · her biri 512×512 · **Şeffaf zemin**
+
+```
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft morning window light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one French macaron seen at a three-quarter angle, pistachio shells (#A9C49C) with fine ruffled feet and a cream filling; 2 = one round gold sugar pearl dragée (#B8995A) with a soft metallic sheen and a crisp highlight; 3 = one single loose blush rose petal (#E8B4B8), softly cupped and silky, a deeper rose shade in its fold.)
+```
+Kontrol: her dosyada tek nesne; üç dosya farklı (makaron, altın şeker inci, gül yaprağı); kenara değmiyor; gerçek alfa.
+Kullanım: tema kurulunca açılışın sonunda makaronlar, şeker inciler ve yapraklar hafifçe zıplayarak düşer (her biri ayrı katman, kendi fazında); RSVP gönderilince şeker inci yağmuru.
+
+#### W20 Website hero + paylaşım görseli (og:image kaynağı)
 **Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/parts/web_hero.png` · 1536×1024 · opak
 
 ```
-Wide horizontal scene in the same style: the closed pistachio pâtisserie box with its rose satin ribbon and bow (as lid.png + ribbon_cross.png + the bow parts) resting on a pale marble pâtisserie counter, a gold-rimmed plate of pistachio, rose and vanilla macarons beside it, a puff of ivory tulle and a few sugar pearls, cream watercolour wall behind. The box and the plate sit in the lower 70% of the image, fully visible; the top 20% is calm empty cream wall. Photorealistic pastry with a pastel watercolour background. No text, letters, logos or price tags. This image is also cropped to 1200×630 for link previews.
+Wide horizontal still life, photorealistic product photography, soft morning window light from the top-left: the closed landscape cream envelope with its scalloped pistachio doily-edged flap (as flap.png), wrapped by the rose-pink sleeve band with fine gold scalloped edges (as sleeve_band.png) and tied with the rose satin bow crowned by a sugared rose bud (as bow.png and rosebud.png), lying slightly below the centre on cream pinstriped pastry paper (as page_ground.png); at the left a small footed porcelain cake stand with a pyramid of pistachio, rose and cream macarons (as cake_stand.png); at the right a gold-rimmed porcelain plate with two macarons and a silver cake fork, a few gold dragées and blush rose petals scattered; behind, softly out of focus, the pistachio-green woodwork and striped awning of a pâtisserie window. Only pistachio, rose, cream and a little gold. The top 20% of the image is calm and soft (only out-of-focus background). This image is cropped to 1200×630 for link previews: keep the whole envelope, band and bow visible with at least 5% empty margin below them. No people. No text, letters, numbers, monograms, logos, shop names or watermarks.
 ```
-Kontrol: kutu + fiyonk altta tam görünür; üst %20 boş; yazı yok.
-
-Gelince: `python3 platform/themes/maison-patisserie/build_images.py` (her parçayı kendisi bulur; `img/manifest.json`
-→ `sources` hangi katmanın GPT'den geldiğini yazar), sonra `site.css`'te `.tissue-l/.tissue-r/.bow` `transform-origin`
-değerleri `manifest.stage.layers` ile karşılaştırılır. Betik her parçayı sayfaların istediği tuvale/genişliğe ölçekler
-(sahne katmanları 1024×1024; `shelf-1200`, `bow-480`, `accent_1-200`, `bg_page-1024`); daha küçük gelen parça büyütülür ve
-uyarı yazar — o parçayı GPT'den büyük iste. `card_small` kartı 560:740'tan %4'ten fazla saparsa da uyarı yazar.
-Prova: `python3 tools/gpt_kuru_deneme.py --tema maison-patisserie --sekil collections/28_Maison_Patisserie/assets/gpt/kuru_sekil.json`
-(G167; deneme görselleriyle GEÇTİ — `kuru_sekil.json` parçaların bu dosyadaki yerleri).
+Kontrol: zarf + bant + fiyonk + gonca bütün, altında ≥%5 boşluk; üst %20 sakin; yazı/logo/tabela yok.
+Kullanım: tema kurulunca `og-1200x630.jpg` (alta hizalı kırpım: üstten ~%21) ve katalog kapağı.
 
 ---
 
-## PAKET 2 — Örnek fotoğraflar (kurgu çift Camille & Oliver; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+## PAKET 2 — Örnek fotoğraflar (kurgu çift Camille & Oliver; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor) — var, yeniden üretme
 
 Ortak: photorealistic fine-art wedding photography, soft natural light, pastel pistachio / rose / cream palette, gentle
 film grain. Kurgu bir çift, otuzlu yaşların başında; ünlü ya da gerçek bir kişiye benzemesin. Yazı, logo, tabela yok.
@@ -211,52 +308,47 @@ Gelince: `content.demo.json` (koleksiyon + tema kopyası) `media` alanlarına te
 `python3 tools/kit_check.py collections/28_Maison_Patisserie --paket 2` ile denetlenir; theme-check onları
 `--photos` yerine koleksiyondan kendisi bulur (`scripts/lib/theme-env.ts`).
 
----
-
-## PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
-
-> **Neden yeniden yazıldı (2026-10-20):** website 18–19 Ekim'de fildişi kâğıt + köşe çiçekleri görünümüne geçti; eski baskı prompt'ları eski görünümü (ve artık olmayan PAKET 5 parçalarını) istiyordu. `platform/lib/print/layouts.ts` `'maison-patisserie'` bloğunun geçici kaynakları yeniden kurulumda `img/`'den silindi: panel şu an `public/print/maison-patisserie/`'deki eski çıktıyı (eski görünüm) basıyor ve `build-print-assets` bu tema için yeniden koşamaz. Bu zeminler gelince:
-> Platform her yüz için **tek** zemin kullanır ve onu taşma payıyla `cover` olarak yayar (5×7 ve A5 aynı zeminden).
-> 1. `layouts.ts` `'maison-patisserie'` bloğunda `sources` → bu zeminler (`print/invitation_front.png` + `print/invitation_back.png`), `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }`.
-> 2. Zemin artık **açık fildişi**: `ink` / `accent` koyu tonlara (temanın site metin rengi) alınır; açık mürekkep kalmaz.
-> 3. Metin kutuları (`front` / `back`) gerçek görselde ölçülür (G149; süsten ~%2 açıklık), `node --test tests/g149-print-layout.test.ts`.
-> 4. `cd platform && node scripts/build-print-assets.ts --theme maison-patisserie`; `public/print/maison-patisserie/`'deki artık kaynak olmayan eski dosyalar silinir; 5×7 ve A5 örnek PDF'ine göz atılır.
-> Ek görsel (her iki yüz için sohbetin başında): `platform/themes/maison-patisserie/img/bg_scene-1024.webp`.
-
-#### P6.1 Ön yüz
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/print/invitation_front.png` · 1575×2175 px (300 ppi), opak
-
-```
-A full-bleed printable wedding invitation ground for the "Maison Pâtisserie" design, front side, portrait, seen perfectly flat and straight on, 1575 × 2175 px at 300 ppi (it is trimmed later). Match the attached website background (bg_scene-1024.webp) exactly in style: the same warm ivory, softly textured stationery paper running edge to edge and the same pistachio sage, cream and soft blush, garden roses, pearl ribbon and delicate French patisserie rococo ornament, in the same photorealistic stationery-photography finish with soft light from the top-left. Place the decoration ONLY in two places: an abundant arrangement gathered at the top-left corner and trailing along the top edge, staying entirely within the top 16% of the height, and a smaller matching arrangement gathered at the bottom-right corner, staying entirely within the bottom 14% of the height. A very fine antique-gold foil hairline frame inset about 6% from every edge. Keep every ornament at least 4% inside the image edges. The whole rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm ivory paper (the names, date and venue are printed there in dark ink): no petal, leaf, line, shadow or stain in it. No envelope, no card, no frame object, no people. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575 × 2175 px.
-```
-Kontrol: tam taşma fildişi kâğıt (site zeminiyle aynı); çiçekler yalnız üst %16 (sol üst) ve alt %14 (sağ alt); %18–84 yükseklik × %10–90 genişlik tamamen boş; ince altın çerçeve; yazı yok; 1575×2175.
-
-#### P6.2 Arka yüz
-**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/print/invitation_back.png` · 1575×2175 px (300 ppi), opak
-
-```
-The back side of the same "Maison Pâtisserie" invitation (give invitation_front.png as the reference image): portrait, full bleed, perfectly flat, 1575 × 2175 px at 300 ppi, the same warm ivory stationery paper edge to edge and the same very fine antique-gold foil hairline frame inset about 6% from every edge. Decoration ONLY a slim spray of the same flowers and foliage centred along the top edge, staying entirely within the top 11% of the height and at least 4% inside the image edges. Everything from 13% to 92% of the height and from 10% to 90% of the width is COMPLETELY EMPTY paper for the schedule, the details and a QR code: no petal, line, shadow or stain. Same style, colors and light. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1575 × 2175 px.
-```
-Kontrol: ön yüzle aynı kâğıt ve çerçeve; çiçek yalnız üst %11'de ince dal; %13–92 × %10–90 boş; yazı yok; 1575×2175.
 
 ---
 
-## Komutlar (Claude, parçalar gelince) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+## PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm)
 
-> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
+> Panelden indirilen basılı davetiye (`platform/lib/print/layouts.ts`, `'maison-patisserie'` bloğu). Bugünkü zeminler
+> (`print/invitation_front.png`, `print/invitation_back.png`) 18–19 Ekim'in fildişi + köşe çiçekleri görünümüne göre;
+> yeni görünümle **yeni adlarla** değişir (eskiler yeni dosyalar bağlanana kadar kullanımda kalır).
+> **Dosya adı ve ölçü:** `print/invitation_front_r_5x7.png`, `print/invitation_back_r_5x7.png`, **1575×2175 px** = 5×7 in +
+> 1/8 in taşma, 300 ppi. Ayrı A5 dosyası istenmez: A5 + 3 mm taşma (154×216 mm, oran 0,713) aynı sayfadan yanlardan ~%0,8
+> kırpılarak basılır (~260 ppi). Bu yüzden önemli hiçbir şey yan kenarların %8'ine girmez.
+> **Yazı alanı:** ön yüzde yükseklikte %19–%91 × genişlikte %10–%90 **tamamen boş** (isimler, tarih, mekân); arka yüzde
+> %13'ün altı, genişlikte %9–%91 boş (program + QR; QR'ı GPT çizmez, `tools/make_qr.py` gerçek URL'den üretir).
+> Süsleme yalnız üst ve alt bantlarda.
+>
+> **Gelince (elle, tek blok; otomatik değil — G149: kutular gerçek görselde ölçülür):**
+> 1. `layouts.ts` `'maison-patisserie'` bloğunda `sources` → `{ front: 'print/invitation_front_r_5x7.png', back:
+>    'print/invitation_back_r_5x7.png' }`; `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg:
+>    cover('back'), images: [] } }` (aynı kalır); `ink`/`accent` yeni zemine göre (`#3E3A32` / `#9B4F5A`).
+> 2. Kutuları (`front`, `back` kenar payları) görselde ölç (süslemenin ~%2 dışında kalsın; `tests/g149-print-layout.test.ts`).
+> 3. `cd platform && node scripts/build-print-assets.ts --theme maison-patisserie` ve `node scripts/print-sample.ts --theme
+>    maison-patisserie --invite 5x7 --bleed` + `--invite a5 --bleed` ile iki boyutu göz kontrolü. Eski iki dosya ancak
+>    yeniler bağlanıp test geçince silinir.
 
-```bash
-# repo kökünden
-python3 platform/themes/maison-patisserie/build_images.py          # PAKET 5 → img/ (geçici katmanların yerine GPT)
-python3 tools/kit_check.py collections/28_Maison_Patisserie --paket 2   # PAKET 2 fotoğrafları
-# platform/ içinde
-node scripts/build-print-assets.ts --theme maison-patisserie        # PAKET 6 → public/print/maison-patisserie/ (önce layouts.ts, PAKET 6 "Gelince")
-NODE_PATH=/opt/node22/lib/node_modules node scripts/theme-check.cjs --theme maison-patisserie --stress --compare none
+#### P1 — Ön yüz
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/print/invitation_front_r_5x7.png` · 1575×2175 · opak
 ```
+The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the thick cream cotton card of cream_paper.png (#FBF5EC). Across the top, between 9% and 91% of the width, a delicate garland of fine piped white royal-icing scallops and drop-loops with tiny gold dragées (as divider.png) hanging in a gentle double swag from near the top corners, and at its centre a small rose satin bow (#E8B4B8) crowned by a sugared rose bud with two tiny pistachio-green leaves (as bow.png and rosebud.png); nothing in this top band reaches lower than 17% of the height. Along the bottom, between 93% and 96% of the height and from 14% to 86% of the width, a fine row of tiny scallops in gold foil (#B8995A) with one small gold dragée at its centre. The rectangle from 19% to 91% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm paper (the names, date and venue are set there): no icing, no petal, no line, no shadow, no stain in it. No ornament within 8% of the left and right edges. Soft morning window light from the top-left. Only cream, rose, pistachio and a little gold. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+Kontrol: tam taşma; %19–%91 × %10–%90 tamamen boş; krema çelengi + fiyonk + gonca yalnız üstte (%17'nin üstünde), altın tarak çizgi yalnız altta; yan %8 boş; yazı yok.
+
+#### P2 — Arka yüz
+**Kaydet:** `collections/28_Maison_Patisserie/assets/gpt/print/invitation_back_r_5x7.png` · 1575×2175 · opak
+```
+The back of the same printed wedding invitation, full bleed, portrait 5.25:7.25, perfectly flat: the same thick cream cotton card, only a short line of fine piped white royal-icing scallops with five tiny gold dragées across the top centre (between 30% and 70% of the width) and one small sugared rose bud at its middle, its lowest point staying above 11% of the height. The whole area below 13% of the height, from 9% to 91% of the width, is COMPLETELY EMPTY paper (a schedule and a QR code are set there): no icing, no line, no shadow, no stain. No ornament within 8% of the left and right edges. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+Kontrol: ön yüzle aynı kâğıt; yalnız üst ortada kısa krema çizgisi + gonca (%11'in üstünde); %13'ün altı boş; yazı/QR yok.
 
 ---
 
-## PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
+## PAKET 3 — Etsy ilan sahneleri (görev G175) — GEÇERSİZ (2026-10-22: yeniden tasarım; tema kurulunca yeniden yazılacak)
 
 > Yeni (2026-10-14): kullanıcı ilan görsellerinin çok daha etkileyici ve profesyonel olmasını istedi. Bu sahneler ilan
 > görsellerinin zeminidir. Ekranlar **düz #00FF00**; Claude gerçek site ekranlarını perspektifle oraya yerleştirir
