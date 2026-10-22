@@ -2,7 +2,7 @@
 id: G191
 baslik: Satış sitesi SEO / GEO / AEO — claude-seo ile denetim ve düzeltme
 rol: claude-kod
-durum: alindi
+durum: inceleme
 alan: claude-session-nice-faraday
 oncelik: 1
 bagimli: [G061]
@@ -36,7 +36,7 @@ denetle; bulguları önceliklendir, kod içinde düzeltilebilenleri düzelt.
   alıyordu, ötekiler 47). `lib/marketing/crawl.ts` sitemap katalogdaki `preview` tasarımları da içeriyor; llms.txt yine
   yalnız `live`. Test: `tests/marketing-crawl.test.ts`. Kayıt: docs/14 §15.
 - Ham veri: `platform/previews/g191/` (`crawl.json`, `agentic-check.json`, `crawl_audit.py`).
-- Testler: TEST_SONUCU
+- Testler: `npm test` 1689/1689 (0 hata, 0 atlanan), `npm run typecheck` ve `npm run build` (trace-check + js-budget) temiz.
 - Yapılmadı: canlı site denetimi (bulut ağı bkestudio.com'a ulaşamıyor), anahtar kelime/SERP verisi, GSC/Bing/CrUX.
 
 ## Önerilen görevler (entegratöre)
@@ -46,3 +46,4 @@ denetle; bulguları önceliklendir, kod içinde düzeltilebilenleri düzelt.
 
 ## Günlük
 - 2026-10-22 alindi: claude-session-nice-faraday
+- 2026-10-22 inceleme: rapor + 2 düzeltme, testler yeşil
