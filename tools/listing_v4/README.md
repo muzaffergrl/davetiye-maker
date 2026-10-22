@@ -16,6 +16,10 @@ Mutlak yollar (repo kökü `C:/Users/Foto/Documents/davetiye-maker`, ffmpeg içi
 | D | `build_set.py NN` | Kapak (`cover_v4.html`) + 7 bilgi görseli (`slides.py`) + 11 yaşam tarzı görseli (`lifestyle.py`: PAKET 7 GPT sahneleri + gerçek ekranlar) → `setNN/`. `export.py NN` → `images_v4/`. |
 | E | `stageE.sh NN …` | `rec.mjs` yavaş çekim (sayfa zamanı 50× yavaş, 432×540 @2.5 = 1080×1350) + `full45.py` → 60 fps dikey video. |
 
+**39–48 (2026-10-22):** bu tasarımlarda `palette.json`/`bg_page.png` yok; renk, zemin dokusu (`assets/gpt/parts/…`) ve script
+font `newpal.json`'dan. B+C tek komut: `stageBC.sh NN …`. PAKET 7 sahneleri (`assets/gpt/mockups/p7_*.png`) yoksa `build_set.py`
+yaşam tarzı görsellerini atlar (kapak + 7 bilgi görseli); sahneler gelince aynı komut 19 görselin tamamını üretir.
+
 Kurallar: telefon ekranları her zaman gerçek ekran görüntüsü; yazılar HTML'den (GPT görsele yazı koymaz); QR `segno` ile gerçek
 demo adresinden; görsellerdeki maddeler ilan açıklamasındaki doğrulanmış özelliklerden. Renk paletleri platformda "coming"
 olduğu sürece palet görseli sete girmez.

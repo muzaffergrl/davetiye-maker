@@ -35,14 +35,19 @@ def lum(h):
 def build(nn):
     d = Path(glob.glob(str(ROOT / f"collections/{nn}_*"))[0])
     th = THEMES[nn]
-    pal = json.loads((d / "palette.json").read_text(encoding="utf8"))
+    new = json.loads((HERE / "newpal.json").read_text(encoding="utf8")).get(nn)   # designs without palette.json (39+)
+    pal = new or json.loads((d / "palette.json").read_text(encoding="utf8"))
     p = {k: pal[k] for k in ("ink", "deep", "ivory", "primary")}
-    bg = d / "assets/gpt/parts/bg_page.png"
+    bg = d / "assets/gpt/parts" / (new["bg"] if new else "bg_page.png")
     if not bg.exists():
         img = ROOT / "platform/themes" / th / "img"
         bg = (sorted(img.glob("bg_scene-*.webp")) or sorted(img.glob("bg*-*.webp")) or sorted(img.glob("*background*.webp")))[-1]
     bgj = HERE / f"bg{nn}_page.jpg"
-    Image.open(bg).convert("RGB").resize((2000, 3000), Image.LANCZOS).save(bgj, quality=93)
+    im = Image.open(bg).convert("RGB")
+    k = max(2000 / im.width, 3000 / im.height)                 # cover 2000x3000 without stretching square textures
+    im = im.resize((round(im.width * k), round(im.height * k)), Image.LANCZOS)
+    x0, y0 = (im.width - 2000) // 2, (im.height - 3000) // 2
+    im.crop((x0, y0, x0 + 2000, y0 + 3000)).save(bgj, quality=93)
     qr = HERE / f"qr{nn}.png"
     segno.make(f"https://bkestudio.com/start/demo/{th}", error="q").save(str(qr), scale=24, border=2,
                                                                          dark=p["ink"] if lum(p["ink"]) < .5 else "#111111", light="#FFFFFF")
@@ -51,7 +56,7 @@ def build(nn):
     def scr(name, fallback="g02_home_top"):
         f = cap / f"{name}.jpg"
         return str(f if f.exists() else cap / f"{fallback}.jpg")
-    cfg = {"nn": nn, "name": pal["name"], "theme": th, "pal": p, "script": script_font(th), "bg": str(bgj), "shots": str(cap),
+    cfg = {"nn": nn, "name": pal["name"], "theme": th, "pal": p, "script": new["script"] if new else script_font(th), "bg": str(bgj), "shots": str(cap),
            "qr": str(qr), "out": str(HERE / f"set{nn}"), "opens": OPENS.get(nn, "envelope"),
            "extra": {"closed": str(sh / "closed.jpg"), "opening": str(sh / f"open_{a:02d}.jpg"), "open": str(sh / f"open_{b:02d}.jpg"),
                      "typing": scr("e03_copy_labels", "e02_day_place"), "live": scr("b10_live_qr", "s01_share")},
@@ -65,7 +70,10 @@ def build(nn):
     cf = HERE / f"cfg{nn}.json"
     cf.write_text(json.dumps(cfg, indent=1), encoding="utf8")
     r1 = subprocess.run([sys.executable, "-X", "utf8", str(HERE / "slides.py"), str(cf)], cwd=HERE, capture_output=True, text=True)
-    r2 = subprocess.run([sys.executable, "-X", "utf8", str(HERE / "lifestyle.py"), str(cf)], cwd=HERE, capture_output=True, text=True)
+    if (d / "assets/gpt/mockups/p7_01_closeup.png").exists():
+        r2 = subprocess.run([sys.executable, "-X", "utf8", str(HERE / "lifestyle.py"), str(cf)], cwd=HERE, capture_output=True, text=True)
+    else:                                                       # no PAKET 7 scenes yet: cover + slides only
+        r2 = subprocess.CompletedProcess([], 0, "", "")
     cover(nn, cfg)
     out = sorted((HERE / f"set{nn}").glob("*.png"))
     print(f"{nn} {th}: {len(out)} images; slides rc={r1.returncode} life rc={r2.returncode}"
