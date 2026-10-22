@@ -18,9 +18,22 @@ ROOT = Path(__file__).resolve().parent.parent
 TALIMAT = re.compile(r'design called "(?P<name>[^"]+)".*?Keep one consistent set across all images: (?P<set>.+?), the same '
                      r'light and the same color world \((?P<palette>[^)]+)\)', re.S)
 BASLIK = "## PAKET 7"
-# PAKET 3'ü olmayan tasarımlar (39–48, 2026-10-22): set ve renk dünyası buradan; her biri kendi DESIGN_BRIEF / "Stil ve renk"
+# PAKET 3'ü olmayan tasarımlar (33–48, 2026-10-22): set ve renk dünyası buradan; her biri kendi DESIGN_BRIEF / "Stil ve renk"
 # bölümünden. Biçim PAKET 3 ile aynı: "zemin, süs, süs ve süs" (ilk parça zemin).
 EK_SETLER = {
+    "33": ("a fuchsia silk cloth over a carved dark wood low table, fresh marigold garlands, a saffron silk tassel, a small brass "
+           "bowl of marigold petals and a fold of plum velvet with fine gold embroidery", "fuchsia silk, plum velvet, saffron, saffron ivory paper and warm gold"),
+    "34": ("a glossy red lacquer tray on a cream silk cloth, pink and deep red tree peonies, a red silk knot with a tassel, a cream "
+           "porcelain teacup with a gold rim and a sprig of plum blossom", "lacquer red, cinnabar, cream and gold in soft warm lamplight"),
+    "35": ("a soft woven wool tartan throw in moss green and heather purple over a weathered oak table, purple thistles and heather, "
+           "a saddle-leather strap with an antique brass buckle and a cream linen napkin", "heather purple, moss green, cream, antique brass and saddle brown with a thin deep red line"),
+    "36": ("a white-painted wooden potting bench under the misted glass roof of a Victorian glasshouse, lush fern fronds, a white "
+           "orchid in a copper pot with a little verdigris and a roll of kraft paper tied with jute", "deep fern green, misted glass, herbarium cream, kraft and copper"),
+    "37": ("a cream linen cloth over a curved walnut table in the soft glow of a stained-glass window, tall white lilies in a slender "
+           "glass vase, a sage silk ribbon and a few lilac sweet peas", "sage green, cream, lilac and soft gold"),
+    "38": ("a limewashed courtyard table with a cream linen runner in warm late-afternoon sun, strings of colorful cut tissue paper "
+           "banners with flower patterns, terracotta pots of bright dahlias and marigolds and a few warm glass string-light bulbs",
+           "fuchsia, marigold, turquoise, lime, violet and coral tissue paper on kraft, limewash and terracotta"),
     "39": ("a pearl-grey silk satin cloth, a polished chrome vintage flash bulb, a short strip of black-and-white photo prints, "
            "ivory ranunculus and silvery dusty miller", "ivory, pearl grey, polished chrome and silver, graphite and soft black, no other colour"),
     "40": ("an ivory heavy cotton cloth, ivory Chantilly lace, a black silk satin ribbon, white lily of the valley and a single white "
@@ -150,7 +163,9 @@ def isle(no: str, dry: bool):
     t = pr.read_text(encoding="utf-8")
     if no in EK_SETLER:
         s, palette = EK_SETLER[no]
-        name = " ".join(w.capitalize() if w.islower() else w for w in kol.name.split("_")[1:])
+        bas = (kol / "DESIGN_BRIEF.md").read_text(encoding="utf-8").splitlines()[0]   # "# Tasarım 33 — Marigold & Mehndi · …"
+        m = re.search(r"— (.+?) ·", bas)
+        name = m.group(1) if m else " ".join(w.capitalize() if w.islower() else w for w in kol.name.split("_")[1:])
         kaynak = "Set bu tasarımın kendi dünyası (PAKET 3 yok; `EK_SETLER`): bütün sahnelerde aynı masa, süs, ışık."
     else:
         i3 = t.index("## PAKET 3")

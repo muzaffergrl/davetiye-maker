@@ -73,3 +73,28 @@ collections/<NN>_*/assets/gpt/ and does this:
    Do not edit GPT_PROMPTS.md or any other file.
 When all finish, report one line per design: NN, images saved (x/11), which ones are imperfect and why. Do not invent results.
 ```
+
+## 22–38 (2026-10-22)
+
+22–32'nin sahne dünyası kendi PAKET 3 talimatından, 33–38'inki `tools/paket7_ilan.py` → `EK_SETLER`'den (PAKET 3 yok; her
+tasarımın "Stil ve renk" bölümü). Prompt'lar her tasarımın `GPT_PROMPTS.md` → **PAKET 7** bölümünde (7.1–7.11),
+17 × 11 = **187 görsel**. Kapak, 7 bilgi görseli ve hover videosu GPT'siz yapılır; bu sahneler gelince ilan görselleri 09–19 eklenir.
+
+```
+Task: BKE Studio Etsy listing scenes, PAKET 7, designs 22–38 (repo muzaffergrl/davetiye-maker, branch main).
+First run: git pull --rebase origin main (the prompt files were updated).
+Work in parallel: one sub-agent per design (17 sub-agents: 22 … 38). Each sub-agent works only inside its own folder
+collections/<NN>_*/assets/gpt/ and does this:
+1. Open collections/<NN>_*/assets/gpt/GPT_PROMPTS.md and find "## PAKET 7".
+2. In ONE image chat: send the "Instructions for GPT" block first, then generate ALL of 7.1 to 7.11 in order, each English
+   prompt exactly as written. Square scenes in the model's square size, landscape scenes in its 3:2 size; the exact pixel
+   size does not matter.
+3. Check each image BY EYE (do not measure pixels): the right number of flat, bright, even green screen areas (a green like
+   RGB 3,252,45 is fine; it does not need to be exactly #00FF00), all four corners of each green area visible, nothing
+   covering a green area, no text/letters/numbers/logos, no brand marks. If it fails, regenerate at most 2 times, then save
+   the best attempt anyway and note the problem. Never stop early: always continue to the next scene until 7.11 is done.
+4. Save each image with the exact file name on its "Kaydet" line (assets/gpt/mockups/p7_NN_*.png). Do not make a video.
+5. Commit only that design's new PNG files: "PAKET 7 <NN>: ilan sahneleri" and push (git pull --rebase origin main first).
+   Do not edit GPT_PROMPTS.md or any other file.
+When all finish, report one line per design: NN, images saved (x/11), which ones are imperfect and why. Do not invent results.
+```
