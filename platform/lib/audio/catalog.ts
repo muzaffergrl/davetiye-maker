@@ -52,7 +52,7 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   // Red Lacquer & Double Happiness: the cord unwinds (untie) · the flap lifts (flap) · the card comes up (rise) · the red
   // window (outer) · the gold window (inner) · forward
   'red-lacquer-double-happiness': { music: 'first-light', opening: [[0, 'ribbon'], [900, 'paper'], [1500, 'slide'], [2150, 'paper'], [2550, 'paper'], [3150, 'chime']] },
-  'music-box-ballerina': { music: 'music-box', opening: [[200, 'ribbon'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
+  'music-box-ballerina': { music: 'music-box', opening: [[0, 'tap'], [600, 'tap'], [1150, 'clasp'], [1900, 'chime'], [3500, 'slide']] },
   // Papel Picado Fiesta: the band works loose (band) · the flags fly up (flags) · the flap swings open (flap) · the lights come on (lights) · card rises (rise) · forward
   'papel-picado-fiesta': { music: 'garden-waltz', opening: [[250, 'ribbon'], [700, 'whoosh'], [1500, 'paper'], [1900, 'chime'], [2500, 'slide'], [3100, 'chime']] },
   // Silver Photo Booth: the flashbulb fires (tap) · the strip slides off (whoosh) · the flap swings open (paper) · card rises (slide) · the second flash (chime)

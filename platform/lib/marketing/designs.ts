@@ -1294,9 +1294,9 @@ const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> 
     home: msg("Dusk violet, dusky rose and lantern amber on hand-dyed washi. Your portrait waits in a paper-lantern window on a rice-paper card, and every photo opens in a circle of warm lantern light."),
   },
   'music-box-ballerina': {
-    style: msg("Blush envelope, a champagne satin band and a gold-edged floral cameo."),
-    opening: msg("Your guests tap the envelope. The oval music-case lid lifts on its top hinge, revealing a floral cameo invitation before the wedding home page opens."),
-    home: msg("Rose quartz, blush satin and soft gold give this invitation the feeling of a treasured keepsake. Open it to reveal your story and wedding details."),
+    style: msg("Rose-quartz satin envelope with a serpentine music-box lid, a gold filigree keyhole plate and a brass winding key."),
+    opening: msg("Your guests tap the envelope. The brass key turns twice, the music-box lid swings up and your portrait appears in its oval mirror, a porcelain ballerina rises and turns two pirouettes, and the cream card rises out of the pocket and comes forward before the wedding home page opens."),
+    home: msg("Blush silk satin, rose quartz, soft-gold filigree and a porcelain ballerina. Your portrait sits in a gilded oval vanity mirror and every photo clears like a misted mirror."),
   },
 };
 
@@ -1315,18 +1315,6 @@ for (const [id, preview] of Object.entries(PREVIEW_DESIGN_COPY)) {
 
 // Interior art/layout/motion differ for these eleven previews; envelope copy and other products are unchanged.
 const UNIQUE_INTERIORS: Record<string,{fonts:string[];home:string;story:string;details:string;rsvp:string}> = {
-  "music-box-ballerina": {
-    "fonts": [
-      "Cormorant Garamond",
-      "Great Vibes",
-      "Lora",
-      "Cormorant Infant"
-    ],
-    "home": "A ballet keepsake suite with an oval cameo portrait, champagne satin and blush silk stationery.",
-    "story": "Oval cameo photographs sit like pages of a ballet keepsake album, with a larger central portrait.",
-    "details": "A music-box recital programme with paired entries and porcelain cameo venue framing.",
-    "rsvp": "A blush satin-lined reply suite with gold cameo ornament."
-  }
 };
 for(const [id,p]of Object.entries(UNIQUE_INTERIORS)){
  const full=DESIGN_COPY[id];
@@ -1498,6 +1486,22 @@ const REBUILT: Record<string, Pick<DesignCopy, 'fonts' | 'pages' | 'palette' | '
       { name: msg('Rice paper'), hex: '#F7EEDD' },
     ],
     llmsLine: 'a dip-dyed dusk washi envelope with a lantern-belly flap and a paper sky lantern that lights and rises away; photos open in warm lantern light on rice-paper panels.',
+  },
+  'music-box-ballerina': {
+    fonts: ['Ballet', 'Gilda Display'],
+    pages: {
+      home: msg('Your portrait in a gilded oval vanity mirror crowned with roses on a cream card, the invitation on a band of rose-quartz satin with a countdown and calendar links, and a porcelain ballerina who turns a pirouette to sign off.'),
+      story: msg('Three photos in pearl-beaded oval mirrors, left and right in turn; each one clears like a misted mirror as guests scroll, and the little ballerina turns between them.'),
+      details: msg('The order of the day on a cream card under a filigree rule, the venue in a wide gilded mirror, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('A cream reply card on rose-quartz satin with your reply-by date and the configurable RSVP form; when a reply is sent the key turns, the ballerina turns a pirouette and petals drift down.'),
+    },
+    palette: [
+      { name: msg('Rose quartz'), hex: '#EECDD0' },
+      { name: msg('Blush'), hex: '#F7E4E2' },
+      { name: msg('Rose gold'), hex: '#B76E79' },
+      { name: msg('Soft gold'), hex: '#C9A45C' },
+    ],
+    llmsLine: 'a rose-quartz satin envelope with a music-box lid and a brass winding key; the lid opens onto a mirror with the couple\'s portrait and a porcelain ballerina turns.',
   },
 };
 for (const [id, r] of Object.entries(REBUILT)) Object.assign(DESIGN_COPY[id], r);

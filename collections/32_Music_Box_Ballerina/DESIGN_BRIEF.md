@@ -3,7 +3,8 @@
 Kaynak: `docs/35_22_32_YENIDEN_TASARIM.md` (§3 ortak kalite standardı, §4 satır 32). İlk sürüm `docs/24_YENI_TASARIMLAR.md`
 #32 (2. dalga) + G171; 18–20 Ekim Codex kapağı ("oval saten kutu, üst menteşe") kullanıcı tarafından amatör bulundu
 (2026-10-22) ve **39–48 hattıyla baştan** kuruluyor. Tema id `music-box-ballerina`. Çalışma adı marka değildir.
-Durum: **concept** — tema yeniden kurulacak (G422–G432 dizisi, bu tasarım G432), GPT parçaları G222–G232 (bu tasarım G232).
+Durum: **editable_draft** — tema yeniden kuruldu (G432, 2026-10-22; pilot G423 yapısı), GPT parçaları G232; katalogda `preview`
+("Coming soon"), satış yok.
 
 **Akım:** romantik "ballet-core" / vintage vanity — gül kuvarsı saten, varaklı telkâri, porselen balerin figürü, tül.
 **Alınan** yalnız akım ve özellik: pudra pembe + yumuşak altın palet, müzik kutusu nostaljisi, tıkla-aç zarf (pazarda giriş
@@ -80,6 +81,7 @@ Efektler (anahtar tıkı ×2, kapak, balerin çanı, kart) yalnız misafirin dok
   May 22, 2027, 4:30 PM, America/New_York; URL ve medya null).
 - GPT istekleri: `assets/gpt/GPT_PROMPTS.md` (PAKET 5R website katmanları W1–W18 = 20 dosya, PAKET 2 örnek fotoğraflar
   **var**, PAKET 6R basılı davetiye ön/arka); prova şekli `assets/gpt/kuru_sekil.json`.
-- Tema: `platform/themes/music-box-ballerina/` — Codex `envelope-v3`/`opening`/`interior` sürümü çalışıyor; PAKET 5R gelince
-  39 pilotunun yapısıyla yeniden kurulacak (`docs/35` §6).
+- Tema: `platform/themes/music-box-ballerina/` **yeniden kuruldu** (G432, 2026-10-22; 39/G423 pilot yapısı, `docs/34`,
+  dersler `docs/35` §6a) — GPT parçaları G232 (PAKET 5R 20 dosya, PAKET 6R 2 dosya). Durum: **editable_draft**, katalogda
+  `preview` ("Coming soon"); satış yok. Katalog kapak görüntüsü/klibi henüz eski (yeniden yakalama bekliyor).
 - Etsy taslağı: `package/listing/listing_v3.md` (K41: yayımlanmadı); PAKET 3 ilan sahneleri tema kurulunca yeniden yazılır.
