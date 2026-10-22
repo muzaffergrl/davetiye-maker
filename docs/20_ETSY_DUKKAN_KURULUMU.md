@@ -399,7 +399,8 @@ açıklaması, 13 etiketi, bölümü, `START_HERE.pdf`'i, v4 görselleri (01–0
 - **Başlık biçimi (karar):** 48 ilanın hepsi `… Wedding Website with RSVP, Digital Invitation with a(n) <Nesne> Opening,
   Online Editor, <Anahtar>`. 01–21 Etsy'de bu biçime zaten geçirilmişti; 09/12/13 ve 22–48 de geçirildi, `listing_v3.md`
   §1'leri Etsy ile birebir.
-- **Fiyat (karar):** her şablon tasarım 1.460 TL (docs/23 §1). `config.ts` fiyatı tasarım satışa açıldığı anda yazılır (21'deki gibi).
+- **Fiyat:** her şablon tasarım aynı fiyatta: **1.190 TL lansman fiyatı (K49, kullanıcı onaylı; docs/23 §1, §7.12)**; 22–48
+  taslakları da toplu düzenlemeyle 1.190 TL. `config.ts` fiyatı tasarım satışa açıldığı anda yazılır (21'deki gibi).
 - **Bölümler (karar):** Classic & Vintage, Floral & Garden, Summer & Destination; tasarım başına seçim `tools/etsy_ids_22_48.json`'daki
   taslaklarda (Riad, Azulejo, Papel Picado = Summer & Destination; çiçekliler = Floral & Garden; diğerleri Classic & Vintage).
 - **Görselde QR ve adres (karar):** v4 şablonu kullanıcının 01'de onayladığı haliyle kalır: 07'de demo QR'ı (ürünün kendisinin
