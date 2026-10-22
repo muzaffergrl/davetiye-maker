@@ -388,6 +388,25 @@ sonraki görseller tek mesajlı büyük başlıklar. Rakip çizimi/fotoğrafı a
 - PAKET 8 (`tools/paket8_ilan.py`, şimdilik yalnız 01): 2–8. görsellerin telefon katmanı için GPT sahne promptları; sahneler
   gelirse çizim telefonların yerine geçer, yazılar aynı kalır.
 
+### 7.11 22–48 taslakları ve dükkân kararları (2026-10-22, yerel oturum, Claude in Chrome)
+Kullanıcı (2026-10-22): "kararların hepsini sen ver; en olması gereken kararları verebilirsin". Taslaklar 01–21 ile aynı
+alanlarla açıldı: 21'in taslağı Etsy'nin **Copy** özelliğiyle kopyalandı (kategori Invitations, Digital, AI generator, Who
+made I did, Finished product, 1.460 TL, 999, Automatic), görseller "Delete all" ile temizlendi, sonra tasarımın kendi başlığı,
+açıklaması, 13 etiketi, bölümü, `START_HERE.pdf`'i, v4 görselleri (01–08) ve hover videosu yüklendi; her alan kaydetmeden
+önce JS ile okunup doğrulandı (asıl 21 taslağına dokunulmadığı ayrıca kontrol edildi). ID'ler: `tools/etsy_ids_22_48.json`.
+- Durum: 22–32 ve 39–48 = 21 taslak (Draft 42, Active 0, 15 ücretsiz kredi duruyor). 33–38 temaları ara sürümde (GPT parçaları
+  temaya girmedi) → görselleri ve taslakları tema bitince. 09–19 yaşam tarzı görselleri PAKET 7 sahnelerini bekliyor.
+- **Başlık biçimi (karar):** 48 ilanın hepsi `… Wedding Website with RSVP, Digital Invitation with a(n) <Nesne> Opening,
+  Online Editor, <Anahtar>`. 01–21 Etsy'de bu biçime zaten geçirilmişti; 09/12/13 ve 22–48 de geçirildi, `listing_v3.md`
+  §1'leri Etsy ile birebir.
+- **Fiyat (karar):** her şablon tasarım 1.460 TL (docs/23 §1). `config.ts` fiyatı tasarım satışa açıldığı anda yazılır (21'deki gibi).
+- **Bölümler (karar):** Classic & Vintage, Floral & Garden, Summer & Destination; tasarım başına seçim `tools/etsy_ids_22_48.json`'daki
+  taslaklarda (Riad, Azulejo, Papel Picado = Summer & Destination; çiçekliler = Floral & Garden; diğerleri Classic & Vintage).
+- **Görselde QR ve adres (karar):** v4 şablonu kullanıcının 01'de onayladığı haliyle kalır: 07'de demo QR'ı (ürünün kendisinin
+  önizlemesi, Etsy dışında satın alma yok), 04'te örnek web adresi. docs/15 §4.1'in eski "QR yok" kuralının yerini alır.
+- **Yenileme:** Automatic (Etsy'nin önerisi; 01–21 ile aynı). **AI beyanı:** "With an AI generator" + açıklamadaki AI cümlesi.
+- **Yayın:** yapılmadı. Yayın ilan başına 0,20 USD ve herkese açık bir adımdır; kullanıcının açık "yayınla" onayıyla yapılır.
+
 ## 8. İlan paketi (01–05) — yüklemeye hazır, Etsy'ye eklenmedi (2026-10-15)
 
 Kullanıcı kararı (2026-10-15): ilanlar **yüklenecek biçimde hazırlanır ama Etsy'ye eklenmez** (taslak da açılmaz). Önce testler yapılacak.

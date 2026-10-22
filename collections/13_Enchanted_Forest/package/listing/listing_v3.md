@@ -32,10 +32,10 @@ VERIFY markers come out only after the test is done; if a test fails, delete or 
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 112 characters.
+Etsy limit: 140 characters. This title: 119 characters.
 
 ```text
-Enchanted Forest Storybook Wedding Website with RSVP, Book Opening Digital Invitation, Online Editor, Fairy Tale
+Enchanted Forest Storybook Wedding Website with RSVP, Digital Invitation with a Book Opening, Online Editor, Fairy Tale
 ```
 
 ## 2. Description

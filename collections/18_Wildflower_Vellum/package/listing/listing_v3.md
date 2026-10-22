@@ -32,10 +32,10 @@ VERIFY markers come out only after the test is done; if a test fails, delete or 
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 115 characters.
+Etsy limit: 140 characters. This title: 129 characters.
 
 ```text
-Wildflower Meadow Vellum Wedding Website with RSVP, Sleeve Opening Digital Invitation, Online Editor, Summer Floral
+Wildflower Meadow Vellum Wedding Website with RSVP, Digital Invitation with a Vellum Sleeve Opening, Online Editor, Summer Floral
 ```
 
 ## 2. Description

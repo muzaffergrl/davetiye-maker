@@ -32,10 +32,10 @@ VERIFY markers come out only after the test is done; if a test fails, delete or 
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 113 characters.
+Etsy limit: 140 characters. This title: 120 characters.
 
 ```text
-Lavender Provence Wedding Website with RSVP, Linen Pouch Opening Digital Invitation, Online Editor, French Floral
+Lavender Provence Wedding Website with RSVP, Digital Invitation with a Linen Pouch Opening, Online Editor, French Floral
 ```
 
 ## 2. Description

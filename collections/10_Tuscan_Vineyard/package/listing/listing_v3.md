@@ -32,10 +32,10 @@ VERIFY markers come out only after the test is done; if a test fails, delete or 
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 107 characters.
+Etsy limit: 140 characters. This title: 115 characters.
 
 ```text
-Tuscan Vineyard Wedding Website with RSVP, Envelope Opening Digital Invitation, Online Editor, Wine Country
+Tuscan Vineyard Wedding Website with RSVP, Digital Invitation with an Envelope Opening, Online Editor, Wine Country
 ```
 
 ## 2. Description

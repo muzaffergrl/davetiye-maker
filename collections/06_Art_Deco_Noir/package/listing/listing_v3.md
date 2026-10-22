@@ -32,10 +32,10 @@ VERIFY markers come out only after the test is done; if a test fails, delete or 
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 107 characters.
+Etsy limit: 140 characters. This title: 116 characters.
 
 ```text
-Art Deco Black-Tie Wedding Website with RSVP, Gatefold Opening Digital Invitation, Online Editor, Navy Gold
+Art Deco Black-Tie Wedding Website with RSVP, Digital Invitation with a Gatefold Opening, Online Editor, Navy & Gold
 ```
 
 ## 2. Description

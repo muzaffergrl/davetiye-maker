@@ -37,10 +37,10 @@ VERIFY markers come out only after the test is done; if a test fails, delete or 
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 124 characters.
+Etsy limit: 140 characters. This title: 132 characters.
 
 ```text
-Swan Chantilly Lace Wedding Website with RSVP, Envelope Opening Digital Invitation, Online Editor, Ivory Lace, Swan Wax Seal
+Swan Chantilly Lace Wedding Website with RSVP, Digital Invitation with an Envelope Opening, Online Editor, Ivory Lace, Swan Wax Seal
 ```
 
 ## 2. Description

@@ -38,10 +38,10 @@ VERIFY markers come out only after the test is done; if a test fails, delete or 
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 126 characters.
+Etsy limit: 140 characters. This title: 134 characters.
 
 ```text
-Painted Lily Pond Wedding Website with RSVP, Envelope Opening Digital Invitation, Online Editor, Painterly Water Garden, Lilac
+Painted Lily Pond Wedding Website with RSVP, Digital Invitation with an Envelope Opening, Online Editor, Painterly Water Garden, Lilac
 ```
 
 ## 2. Description
