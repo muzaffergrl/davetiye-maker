@@ -224,6 +224,10 @@ export const WEDDING_GLOSSARY: readonly Row[] = [
   ["Garden party chic", "Şık bahçe partisi", "Fiesta en el jardín chic", "Gartenparty-Schick", "Garden-party chic"],
   ["Is the celebration outdoors?", "Kutlama açık havada mı?", "¿La celebración es al aire libre?", "Findet die Feier im Freien statt?", "La fête a-t-elle lieu en plein air ?"],
   ["Yes, the ceremony and supper are in the garden. Comfortable shoes for the lawn are a good idea.", "Evet, tören ve akşam yemeği bahçede. Çimen için rahat ayakkabılar iyi bir fikir.", "Sí, la ceremonia y la cena son en el jardín. Un calzado cómodo para el césped es buena idea.", "Ja, Trauung und Abendessen finden im Garten statt. Bequeme Schuhe für den Rasen sind eine gute Idee.", "Oui, la cérémonie et le dîner ont lieu au jardin. Des chaussures confortables pour la pelouse sont une bonne idée."],
+  // G446 Bordeaux Silk Bow (46): demo programme and questions
+  ["Please arrive 20 minutes before the ceremony, which begins in the library.", "Lütfen kütüphanede başlayacak törenden 20 dakika önce gelin.", "Por favor, lleguen 20 minutos antes de la ceremonia, que comienza en la biblioteca.", "Bitte kommen Sie 20 Minuten vor der Trauung, die in der Bibliothek beginnt.", "Merci d'arriver 20 minutes avant la cérémonie, qui commence dans la bibliothèque."],
+  ["Will there be a coat check?", "Vestiyer olacak mı?", "¿Habrá guardarropa?", "Gibt es eine Garderobe?", "Y aura-t-il un vestiaire ?"],
+  ["Yes, a coat check will be open in the entrance hall for the whole evening.", "Evet, giriş holünde bütün akşam açık bir vestiyer olacak.", "Sí, habrá un guardarropa abierto en el vestíbulo durante toda la velada.", "Ja, in der Eingangshalle ist den ganzen Abend eine Garderobe geöffnet.", "Oui, un vestiaire sera ouvert dans le hall d'entrée toute la soirée."],
 ];
 
 /** "and" between two terms, per language (Spanish "y" becomes "e" before an i- sound). */

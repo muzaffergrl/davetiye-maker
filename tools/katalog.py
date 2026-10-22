@@ -526,6 +526,12 @@ EK_TEMALAR = [
          dekor="Guaj şakayık, düğün çiçeği (ranunculus), ıtır (sweet pea), bordo kozmos, aslanpençesi (lady's mantle), ayaklı kâse aranjmanı, altın tel çiçekçi çubuğu, küçük çiçek çelengi", teknik="elle boyanmış guaj (opak, kadifemsi fırça izi) + fotogerçekçi kâğıt",
          font=("Hurricane", "Fraunces"), palet_adi="chartreuse-pink-burgundy",
          hareket="Çiçek sapının yarıklardan kayıp çıkması ve çiçeğin takla atarak düşmesi, dalgalı kapağın 3B açılışı, guaj çiçek kümelerinin sırayla patlayarak büyümesi, yatık kartın doğrularak yükselmesi, anlık baskıların aranjmandan çubuklarıyla yükselip sallanması, program satırlarında dönerek açılan kozmos, yanıtta yaprak ve çiçek yağmuru."),
+    dict(no=46, klasor="46_Bordeaux_Silk_Bow", ad="Bordeaux Silk Bow",
+         zarf="Dikey fildişi keten zarf, düz kapak; kapakta ve cepte ortada birer zımba deliği, geniş bordo ipek saten kurdele deliklerden geçip önde büyük fiyonkla bağlı, uzun V kesik kuyruklar. Fiyonk ilmek ilmek çözülür (sol ilmek ve kuyruğu düğüme çekilir, sonra sağ), delikler arasında düz kurdele kalır, kapak deliğinden yukarı çekilir, kurdele ekranın kenarından aşağı akar, kapak 3B açılıp bordo ipek astarını gösterir, kart yükselir.",
+         foto="Tırtıklı fildişi kenarlı siyah-beyaz anı baskıları, bordo kurdeleyle çaprazlama bağlı deste: sahnesine gelince kurdele gevşeyip kayar, baskılar tek tek yelpaze gibi açılır. Mekân geniş renkli baskı.",
+         dekor="Bordo saten fiyonklar (büyük/küçük), sayfa kenarından akan kurdele (düz + S kıvrımı), beyaz laleler, fildişi keten ve hare ipek, yumuşak altın kıl çizgi", teknik="fotogerçekçi saten / keten stüdyo natürmortu",
+         font=("Carattere", "Brygada 1918"), palet_adi="claret-ivory-silk",
+         hareket="Fiyonkun ilmek ilmek çözülmesi, düz kurdelenin kapak deliğinden yukarı çekilmesi, kurdelenin ekran ve sayfa kenarından aşağı akması (bölüm bölüm kaydırmayla), düz kapağın 3B açılışı, anı destesinin kurdelesinin gevşeyip baskıların yelpaze gibi açılması, program satırlarında kendiliğinden bağlanan küçük fiyonk, yanıtta yeniden bağlanan fiyonk ve lale yaprağı yağmuru."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

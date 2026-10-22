@@ -320,6 +320,8 @@ const dict: Dict = {
   "A promise in lace": "Une promesse de dentelle",
   // G443 Chartreuse Garden Party (43, coming)
   "Let love bloom": "Que l'amour fleurisse",
+  // G446 Bordeaux Silk Bow (46, coming)
+  "Tied with love": "Noué avec amour",
 };
 
 export default dict;

@@ -354,6 +354,16 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-22',
     },
+    // New design 46 (G446, docs/33 fourth wave): platform theme built from its own GPT parts; not on sale, no price yet.
+    {
+      id: 'bordeaux-silk-bow',
+      name: 'Bordeaux Silk Bow',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-22',
+    },
     {
       id: 'blush-garden-rose',
       name: 'Blush Garden Rose',

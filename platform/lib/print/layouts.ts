@@ -546,6 +546,17 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     ink: '#6B1730', accent: '#4F7A3A', front: [20,  13,  12,  13], back: [15,  12,  10,  12],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
+  // 46 (G446, 2026-10-22): the design's own PAKET 6 grounds (ivory linen; front: a claret satin ribbon across the top tied in
+  // a bow, two white tulips at the foot; back: a small bow at the top), one per side, `cover` for 5×7 and A5. Ornament
+  // measured on the art: front 2–14 % and 90–97 % of the height, back 2–10 %; the boxes sit inside the empty area (G149).
+  'bordeaux-silk-bow': {
+    collection: '46_Bordeaux_Silk_Bow',
+    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
+    fonts: gf('family=Brygada+1918:ital,wght@0,400;0,500;1,400&family=Carattere'),
+    script: "'Carattere', cursive", serif: "'Brygada 1918', Georgia, serif",
+    ink: '#7A1E2C', accent: '#5A4446', front: [19,  13,  14,  13], back: [15,  12,  10,  12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
+  },
 };
 
 export function printLayout(themeId: string): PrintLayout | null {
