@@ -44,8 +44,8 @@ export interface DesignSound {
 export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   // Crimson Rose Atelier: botanical seal, flap, card, chime.
   'crimson-rose-atelier': { music: 'evening-strings', opening: [[0, 'seal'], [400, 'paper'], [1600, 'slide'], [3000, 'chime']] },
-  // Nocturne Lake Estate: gold seal lifts off (closure) · flap turns up (lift) · card rises (rise) · forward
-  'nocturne-lake-estate': { music: 'evening-strings', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
+  // Nocturne Lake Estate (G422): the crescent glints · rises as the moon · the vellum band slides off · the diamond flap · the card rises
+  'nocturne-lake-estate': { music: 'evening-strings', opening: [[0, 'chime'], [200, 'whoosh'], [800, 'slide'], [1500, 'paper'], [2500, 'slide']] },
   // Velvet Jewel Box: satin bow slides off (closure) · lid on its hinge (lid) · card rises (rise) · forward
   'velvet-jewel-box': { music: 'music-box', opening: [[0, 'chime'], [180, 'whoosh'], [700, 'ribbon'], [1250, 'paper'], [1850, 'slide']] },
   // Maison Pâtisserie: bow unties (closure) · lid lifts (lid) · tissue parts (tissue) · card lifts (rise) · forward

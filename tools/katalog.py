@@ -401,7 +401,12 @@ D = [
 # açılırsa D'ye taşınır ve buradan silinir.
 EK_TEMALAR = [
     dict(no=21, klasor="21_Crimson_Rose_Atelier", ad="Crimson Rose Atelier"),
-    dict(no=22, klasor="22_Nocturne_Lake_Estate", ad="Nocturne Lake Estate"),
+    dict(no=22, klasor="22_Nocturne_Lake_Estate", ad="Nocturne Lake Estate",
+         zarf="Dikey kömür siyahı laid kâğıt zarf, derin elmas (sivri baklava) kapak, şampanya altın deckle folyo; gümüş gravürlü vellum bel bandı ve iğneli dövme altın hilal broş. Hilal yükselip ay olarak kalır, bant kayıp söner, kapak gece göğü iç yüzüne 3B açılır, kart cepten yükselir (docs/35, 2026-10-22).",
+         foto="Varaklı ferforje kemerli villa penceresi (home) + kömür lake panjurlu dikdörtgen pencereler (story; panjurlar dışa açılır, foto mum ışığından ısınır) + taş korkuluklu teras çerçevesi (mekân).",
+         dekor="Yağlı boya gece gölü, vellum göl panoraması, altın hilal, beyaz bahçe gülü ve zeytin, cam fener içinde mum, şampanya altın pul", teknik="fotogerçekçi ürün çekimi + yağlı boya gece manzarası",
+         font=("Cinzel", "Cormorant Garamond", "Jost"), palet_adi="night-champagne",
+         hareket="Hilalin ay gibi yükselip kalması, vellum bandın kayıp sönmesi, elmas kapağın gece göğünü açması, ay yolunda ışık kıpırtısı, panjurların açılması, fener alevinin titremesi"),
     # docs/24 dalgası (23–28): eksenler + hareket imzası yazılı; `kontrol` bunları D'ye ve birbirine karşı ayırt eder
     # (ek_ayirt). Üreteçlere (yaz, paket5, gorev5, ozet) girmez: koleksiyon dosyaları elle yazıldı.
     dict(no=23, klasor="23_Velvet_Jewel_Box", ad="Velvet Jewel Box",

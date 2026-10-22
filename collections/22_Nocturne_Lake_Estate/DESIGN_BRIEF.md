@@ -74,5 +74,6 @@ monogram, logo, QR hiçbir görselde yok; isimler ve tarih HTML.
 - GPT istekleri: `assets/gpt/GPT_PROMPTS.md` (PAKET 5R website katmanları W1–W19 = 22 dosya, PAKET 2 örnek fotoğraflar
   **var**, PAKET 6R basılı davetiye ön/arka, PAKET 3 GEÇERSİZ); prova şekli `assets/gpt/kuru_sekil.json`.
 - Görevler: GPT parçaları **G222–G232** (bu tasarım G222), tema yeniden kurulumu **G422–G432** (bu tasarım G422).
-- Tema: `platform/themes/nocturne-lake-estate/` **yeniden kurulacak** (39 pilot yapısı, `docs/34`); şu anki Codex
-  sürümü o zamana kadar yerinde. Durum: **coming**.
+- Tema: `platform/themes/nocturne-lake-estate/` **yeniden kuruldu** (G422, 2026-10-22; 39 pilot yapısı, `docs/34`, pilot
+  G423 dersleri `docs/35` §6a) — GPT parçaları G222 (PAKET 5R 22 dosya, PAKET 6R 2 dosya). Durum: **editable_draft**,
+  katalogda `preview` ("Coming soon"); satış yok. Katalog kapak görüntüsü/klibi henüz eski (yeniden yakalama bekliyor).
