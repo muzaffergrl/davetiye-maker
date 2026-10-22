@@ -1,175 +1,272 @@
-# GPT görsel istekleri — Tasarım 27 · Riad Lantern Nights
+# GPT görsel istekleri — Tasarım 27 · Riad Lantern Nights (2026-10-22 yeniden tasarım)
 
-> **Instructions for GPT:** This design ("Riad Lantern Nights") was redesigned on 2026-10-18/19: its website is warm ivory stationery paper with abundant photorealistic flowers in the corners, opened from a themed cover object. The old website parts (PAKET 5) are NO LONGER needed — do not generate them. Generate PAKET 3 (the Etsy listing scenes) and PAKET 6 (the printed invitation grounds) in ONE chat; PAKET 2 (sample photos) is optional and comes last. Before the first image, attach these two images from the repository as the style reference of every image: `platform/themes/riad-lantern-nights/img/bg_scene-1024.webp` (the website background: paper, flowers, colors, light) and `platform/themes/riad-lantern-nights/img/v3-closed-880.webp` (the design's closed cover object). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". No text, letters, numbers, logos, monograms or watermarks in any image.
+> **Instructions for GPT:** This design was completely redesigned on 2026-10-22. Generate PAKET 5R (website layers)
+> first, in order and in ONE chat, then PAKET 6R (printable invitation). PAKET 2 (sample photos) ALREADY EXISTS — do not
+> regenerate it. Sections marked GEÇERSİZ are not wanted. Use each English prompt exactly as written, follow its
+> checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers,
+> names, dates, initials, monograms, logos, brand marks, QR codes or watermarks in any image** (also not on the lantern,
+> the stud, the tiles or the card). **No calligraphy, no script-like ornament, no religious symbols** (no crescent and
+> star, no hand amulet, no mosque, dome or minaret silhouettes): only craft — geometric zellige, carved cedar, carved
+> stucco, pierced brass, silk cord, courtyard flowers. Give W1 `tadelakt_ground.png`, W2 `cotton_paper.png` and W3
+> `env_back.png` as the style reference of every later part: the same warm ivory tadelakt plaster, the same ivory cotton
+> paper, the same deep teal cotton envelope paper with its saffron-and-teal zellige lining, the same soft warm evening
+> light from the top-left. Parts drawn on the same envelope canvas (W3, W4, W5, W7, W8) keep the envelope in exactly the
+> same box; W9 and W10 (the lantern unlit and lit) are the same lantern on the same canvas in exactly the same place.
 
-Bu dosya tasarım 27'nin **bütün görsel parçalarının** tek kaynağıdır (G165). Tasarım `tools/katalog.py` `EK_TEMALAR`'da
-(eksenler + hareket imzası) kayıtlı, üreteçlere girmediği için dosya elle yazıldı. Tema (`platform/themes/riad-lantern-nights/`)
-bu parçalar gelmeden kuruldu: `build_images.py` eksik her parça için repodaki başka GPT görsellerinden **geçici** bir katman
-kesiyor (10'un meşe dokusundan iki kanat, 05'in sıvasından avlu/kart/duvar tonları, 05'in çini bordüründen dört karo; çizim
-yok, K21). **G167:** betiğin GPT kolu hazır — her parça dosyası `parts/` altına konduğu anda (parça parça) kullanılır, sayfalar
-aynı dosya adlarını alır, ölçülen pencere/kapı yüzdeleri `img/manifest.json`'a ve `site.css` sonundaki üretilen
-`@gpt-layers` bloğuna yazılır (elle düzenlenmez). Yalnız GPT'yle var olan katmanlar (kapı kemeri, fener, bougainvillea,
-ayırıcı, oyma çerçeveler, sayfa zemini, RSVP yaprakları) o blok açana kadar gizlidir. Tema `live` olmadan önce göz
-kontrolünden geçer (bkz. en alttaki "Parçalar gelince").
+Bu dosya tasarım 27'nin **bütün görsel parçalarının** tek kaynağıdır (`docs/35_22_32_YENIDEN_TASARIM.md`, satır 27). 18–20
+Ekim Codex kapağı ve eski PAKET 5 / PAKET 6 bölümleri kaldırıldı (git geçmişinde). Durum: tema **yeniden kurulacak**
+(G422–G432, 39 pilotunun yapısı, `docs/34`); parçalar G222–G232 ile beklenir. Tema kurulunca her parçanın nasıl
+kullanılacağı aşağıdaki "Kullanım" satırlarındadır; gelmeyen parçanın yerine çizilmiş yedek konmaz (K21). Kişisel alanlar
+(isimler, tarih, baş harfler, mekân) HTML'dir, hiçbir görsele pişirilmez.
 
 ## Nereye?
-- Repo `muzaffergrl/davetiye-maker`; klasör `collections/27_Riad_Lantern_Nights/assets/gpt/` altındaki `parts/`
-  (PAKET 5), `photos/` (PAKET 2) ve `print/` (PAKET 6). Repoya yazamıyorsan dur ve bunu çıktında açıkça söyle; kullanıcıya
-  yükleme işi verme.
+- Repo `muzaffergrl/davetiye-maker`; klasör `collections/27_Riad_Lantern_Nights/assets/gpt/` altındaki `parts/` (PAKET 5R)
+  ve `print/` (PAKET 6R). `photos/` (PAKET 2) dolu, dokunulmaz. Repoya yazamıyorsan dur ve bunu çıktında açıkça söyle;
+  kullanıcıya yükleme işi verme.
+- Sonra (Claude): `python3 tools/kit_check.py collections/27_Riad_Lantern_Nights --paket 5` (oran, gerçek alfa, kenar payı,
+  foto penceresi) + göz kontrolü. Tema kurulunca `python3 platform/themes/riad-lantern-nights/build_images.py` (her parça
+  geldiği anda kullanılır) ve `python3 tools/gpt_kuru_deneme.py --tema riad-lantern-nights --sekil
+  collections/27_Riad_Lantern_Nights/assets/gpt/kuru_sekil.json` (prova). PAKET 6R için aşağıdaki "Gelince" adımı.
 
 ## Stil ve renk
-- Teknik: **gouache illustration with realistic material texture** — gouache painted look (soft, matte, hand-made) but
-  real-feeling cedar grain, glazed tile, hammered brass and lime plaster. Not a photo, not flat vector, not cartoon.
-- Renkler: night teal `#0F2F31` · deep `#0A2324` · teal `#174A4B` · saffron `#E3A54A` · brass `#C9A35B` · cedar `#3A2114` ·
-  ivory `#F6EAD2` · bougainvillea magenta `#B8326E` (yalnız çiçekte, az).
-- Işık: sıcak fener ışığı, **sol üstten** yumuşak; bütün parçalarda aynı. Gece sahnesi ama karanlık değil: sıcak, davetkâr.
-- Saygılı ve zarif: gerçek bir riad avlusunun zanaatı (oyma sedir, zellige, tadelakt sıva, pirinç fener). Kostüm ya da
-  turistik klişe yok (deve, fes, nazar, çöl, hançer, yazı/kaligrafi yok). 11 Boho Terracotta (kemer zarf, pampas), 06 Art Deco
-  (altın gatefold) ve 05 Lemon Mediterranean (mavi-beyaz İtalyan çinisi) gibi görünmesin.
-- Gerçek bir kişiye, mekâna, markaya veya başka bir satıcının tasarımına benzemesin.
+- Teknik: **photorealistic craft product photography** — real deep teal cotton paper with a faint blind-embossed
+  geometric pattern, real glazed zellige tesserae (hand-cut, slightly uneven glaze, fine grout lines), real hand-pierced
+  brass, real carved Atlas cedar, real carved ivory stucco, real saffron silk cord and tassel, real magenta bougainvillea
+  and white orange blossom; a riad courtyard at blue hour lit by warm lanterns: calm, warm, rich, classic and romantic.
+  Not cartoon, not flat vector, not gouache illustration, not a tourist souvenir look.
+- Renkler: night teal `#0F2F31` · deep `#0A2324` · saffron `#E3A54A` · brass `#C9A35B` · cedar `#3A2114` · ivory `#F6EAD2`;
+  yardımcı: zarf tealı `#16494B`, zellige tealı `#1E6A6A`, tadelakt fildişi `#EFE3CC`, sır beyazı `#F4EFE4`, bougainvillea
+  `#B8326A` (çok seyrek). Zellige yalnız safran, teal, fildişi ve çok az koyu teal; kobalt/mavi-beyaz yok (05 ve 30'dan ayrı).
+- Işık: **sol üstten sıcak, yumuşak akşam ışığı**; pirinçte sıcak altın parıltı, sırda yumuşak yansıma; bütün parçalarda
+  aynı. Şeffaf parçalarda gerçek alfa (beyaz ya da dama deseni değil), her kenarda en az %6 boşluk, nesnenin dışında
+  gölge/hâle yok (gölgeyi ve fener ışığının duvara vuruşunu site ekler). W10 yanık fenerde ışık **yalnız fenerin kendi
+  delikleri ve camı içinde**.
+- Foto penceresi yalnız W12 `arch_frame`, W13 `story_frame` ve W14 `venue_frame`'de istenir (prompt'ta ölçüsüyle); diğer
+  parçalarda yeşil alan yok.
+- Gerçek bir otele/riada, markaya, sanatçıya ya da başka bir satıcının tasarımına benzemesin. **33 Marigold'dan ayrı:**
+  sivri jharokha, paisley, kına, fuşya yok. **05'ten ayrı:** limon, majolika, mavi-beyaz çini yok.
+
+## Zarf geometrisi (W3–W5, W7, W8 ve W20 buna göre)
+Tuval **1080×1440** (dikey 3:4). Zarf kutusu **x %7–93, y %6–94** (zarf ≈0,73:1). Beş katman **aynı tuvalde, aynı
+kutuda** çizilir: W3 arka, W4 ön cep, W5 kapak, W7 çivi, W8 kordon; Claude her birini alfa kutusuna kırpar ve W3'ün
+kutusuna göre yerleştirir. Tuval yüzdeleri:
+- **Ön cep (W4):** tam genişlik (x %7–93), üst kenarı yanlarda **y %46**, ortada **y %50**'ye inen çok sığ bir iç bükey
+  yay; zarfın alt kenarına (%94) kadar; kesik kenar boyunca ince pirinç folyo çizgi.
+- **Ters at nalı kemer kapak (W5):** menteşe zarfın üst kenarında (**y %6**), tam genişlik; yan kenarlar dik iner
+  **y %26**'ya, orada kenar küçük bir basamakla içe kırılır (kemerin "impost"u, her yanda ~%2), sonra **at nalı eğrisi**
+  önce hafifçe dışa şişer (en geniş yeri x %9–91, y ~%36), sonra dönüp aşağı ve içe süpürülerek ortada **hafif sivri
+  bir uçta** biter: **(x %50, y %62)**. Kenar boyunca ~%2,5 genişliğinde altın folyo zellige bordür (kapağın üstünde).
+  Kapak cebin üst kenarını her yerde örter (yanlarda y %26–46 arası kapak tam genişlikte değil; o aralıkta görünen arka
+  astar değil **arka panelin teal kâğıt kenar payıdır** — W3 kenar paylarını bu yüzden x %7–15 / %85–93'te teal kâğıt
+  bırakır).
+- **Kubbe başlı pirinç çivi (W7):** merkezi **(x %50, y %56)**, çapı tuval eninin **%7**'si (kutu x %46,5–53,5,
+  y %53,4–58,6) — kapağın ucunun hemen üstünde, bordürün içinde.
+- **Kordon + püskül (W8):** safran ipek kordon çivinin etrafında bir kez dolanır (halka çivinin çevresinde, y %52–60),
+  oradan iki uç kapağın ucunun üstünden cebe sarkar: **sol uç** hafif kıvrılarak iner ve **(x %43, y %78)**'de bir pirinç
+  kapakla biten safran **püsküle** bağlanır, püskülün ucu **y %90**; **sağ uç** daha kısa iner ve **(x %58, y %71)**'de
+  küçük bir pirinç **halka** ile biter (fener W9/W10 bu halkaya asılır). Kordonun kutusu yaklaşık x %38–62, y %51–91.
+- **Fener tılsımı (W9 sönük, W10 yanık):** ayrı **600×900** tuval; ikisi aynı fener, aynı yerde (fener x %25–75,
+  asma halkası üst ortada **(x %50, y %8)**, fener gövdesinin altı y %92). Sitede asma halkası W8'in sağ halkasına
+  **(x %58, y %71)** oturur; fener yüksekliği zarf tuvalinin ~%16'sı (alt ucu ~y %87).
+- **Kapağın iç yüzü (W6, açıkken dik):** ayrı tuval **1080×940**: W5'in çizgisi dikey aynalanmış — düz katlama kenarı
+  **altta y %93**, x %7–93; yanlar **y %62**'ye çıkar, impost basamağı, at nalı eğrisi yukarıda en geniş (y ~%51), sivri
+  tepe **(x %50, y %7)**. Açıkken zarfın üstünde **dik bir kapı kemeri** gibi durur.
+- **Kat sırası (alttan üste):** W3 arka → kart (W11) → W4 cep → W5 kapak → W7 çivi → W8 kordon → W9/W10 fener.
+
+Açılış (site.js `MOTION`, toplam ≤ 5,5 s): dokununca fener sönükten yanığa geçer (W9 → W10 çapraz geçiş, 0–500 ms), içinden
+sıcak ışık zarfa ve duvara vurur (CSS), hafif salınır → kordon halkası çividen kalkar; kordon, püskül ve fener birlikte
+hafif salınarak aşağı düşüp söner (500–1300) → çivi yerinde kalır → kemer kapak üst kenarında **3B** kalkar, 90°'den sonra
+iç yüz (W6, zellige) görünür, zarfın üstünde dik bir at nalı kemer olarak durur (1300–2500) → kemer tepeli fildişi kart
+(W11) cebin arkasından yükselir, cep dudağını geçince öne gelir ve büyür (2400–3800) → bougainvillea yaprakları, portakal
+çiçekleri ve küçük pirinç yıldızlar (W19) kendi fazında süzülür (3400–4800) → home (≤ 5300).
 
 ---
 
-## PAKET 5 — website katmanları (YAZI YOK) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+## PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım)
 
-> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
-
-Tek görselde tek nesne, düşen gölge yok, ışık sol üstten, şeffaflar gerçek alfa (beyaz ya da dama tahtası değil).
-**W2.1 kapılar, W2.2 kapı çerçevesi ve W2.3 avlu aynı 1024×1536 tuvalde, aynı konumda** çizilir: üst üste konunca kapı
-kanatları çerçevenin açıklığını tam doldurur, avlu da aynı açıklığın arkasında görünür. Ortak ölçü (tuval yüzdesi):
-kapı kanatları x %13–87, y %29–94 (oran 0,76); kapı çerçevesi bunun dışında kalır: pervazlar x %3–13 ve %87–97, kemer
-y %8'den kapıların üstüne (%29), eşik y %94–97. `build_images.py` çerçeveyi kapı kutusunun çevresinden sabit paylarla keser
-(sol/sağ kapı genişliğinin %18'i, üst yüksekliğin %45'i, alt %10'u); bunun dışına taşan çerçeve kesilir (uyarı yazar).
-
-#### W2.1 Kapalı çift kapı (kanatlar)
-**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/doors_closed.png` · 1024×1536 · **Şeffaf zemin**
+#### W1 Fildişi tadelakt sıva (sayfa zemini, kapak)
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/tadelakt_ground.png` · 1536×1536 · opak, dikişsiz
 
 ```
-A pair of tall carved cedar double doors of a traditional riad, closed, alone on a transparent background, gouache illustration with realistic wood texture: warm deep cedar brown (#3A2114 to #7A4A2A) with a fine visible grain, each leaf carved with a geometric eight-point star and interlace pattern in shallow relief, a row of round hammered-brass studs along the edges, and one heavy brass ring knocker on each leaf at mid height near the center seam. The two leaves meet in a thin, clearly visible vertical dark seam exactly at the horizontal center of the image (a 4–6 px dark gap from top to bottom, so the leaves can be cut apart there). Together the two leaves form a rectangle about 0.76 as wide as it is tall: horizontally centered, 74% of the image width, its bottom edge at 94% of the image height (the rest of the canvas above is left for the arch of the doorway). Only the two door leaves — no wall, no frame, no arch, no threshold. Front view, perfectly straight and symmetrical, not cropped. Lit like every other part: soft warm lantern light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters, numbers, calligraphy or monogram. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+A seamless, tileable, perfectly flat straight-on texture of polished tadelakt lime plaster in a warm ivory (#EFE3CC, gently varying toward #F6EAD2), like the softly burnished wall of a riad courtyard: subtle cloudy trowel movement, a faint satin sheen where the plaster was polished with a stone, a few very fine hairline variations, the gentlest warm tonal drift. Evenly lit by soft warm evening light from the top-left; no cracks, no stains, no holes, no tiles, no pattern, no shadow, no vignette. Calm enough for dark teal text in any size to read on it everywhere. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: iki kanat ortada ince koyu dikişle ayrılıyor (Claude `tema_build.dikis_bul` ile keser); kanatların dışında hiçbir şey
-yok; oran ~0,76; alt kenar %94; gölge yok; gerçek alfa; yazı/kaligrafi yok.
+Kontrol: dikişsiz (2×2 ek yeri yok); sıcak fildişi, düşük kontrast; çatlak/leke/desen yok; üstüne koyu yazı okunur.
+Kullanım: tema kurulunca bütün sayfaların ve kapalı zarf sayfasının zemini (CSS tekrar).
 
-#### W2.2 Kapı çerçevesi — at nalı kemer (önde sabit durur)
-**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/doorway.png` · 1024×1536 · **Şeffaf zemin**
-
-```
-The doorway surround of the same riad door, alone, drawn on exactly the same canvas position as doors_closed.png (give it as the reference image): the doors' rectangle (from 13% to 87% of the image width, from 29% to 94% of the image height) stays an empty opening; the surround hugs it — the jambs from 3% to 13% and from 87% to 97% of the width, the arch above the doors from 8% of the height down to 29%, a low threshold from 94% to 97% — and nothing reaches beyond 3% from the image edges: a horseshoe (Moorish) arch of carved ivory stucco with fine geometric lattice carving above the doors, a carved cedar lintel, and two narrow jambs faced with small teal, saffron and ivory zellige tiles in a simple geometric pattern, standing on a low stone threshold. The opening inside the surround — exactly where the two door leaves sit — is completely EMPTY and TRANSPARENT (real alpha, nothing painted there), so the doors and the courtyard behind show through. The surround's inner edge is a crisp line with a slight contact shade on the stucco itself (not a cast shadow). Gouache illustration with realistic stucco and glazed tile texture. Front view, perfectly straight and symmetrical, not cropped, with empty margin around. Soft warm light from the top-left. No cast shadow, no glow outside its outline. No text, letters, numbers or calligraphy. True transparent background PNG.
-```
-Kontrol: açıklık tamamen şeffaf ve kapıların dış hattıyla çakışıyor; kemer üstte, çini pervazlar yanlarda; gölge yok; alfa.
-
-#### W2.3 Kapıların ardındaki avlu
-**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/courtyard.png` · 1024×1536 · opak
+#### W2 Fildişi pamuk kâğıt (kartlar, bantlar, form)
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/cotton_paper.png` · 1536×1536 · opak, dikişsiz
 
 ```
-The view through the open doorway of a riad at night, painted to fill the whole canvas in the same gouache-with-real-texture style: a lantern-lit inner courtyard with a small tiled fountain far back in the center, an orange tree in a planter, zellige floor tiles in teal, saffron and ivory going back in perspective, carved arcades on both sides, magenta bougainvillea climbing a column, and several pierced brass lanterns glowing warm saffron. The area in the middle of the image (where the doorway opening is in doors_closed.png, and where an invitation card will stand) is calm, softly lit and without strong detail. Warm, inviting, romantic; deep teal shadows and saffron light. No people, no text, no letters, no calligraphy.
+A seamless, tileable, perfectly flat top-down texture of thick handmade cotton paper in a warm ivory (#F6EAD2): a soft felted tooth, a few faint long cotton fibres, the slightest natural cloudiness, an even tone with only the gentlest variation. Evenly lit by soft warm evening light from the top-left; no fold, no crease, no deckle edge, no stain, no shadow, no vignette, no printing, no pattern. Calm enough for fine dark text to read on it everywhere. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: orta bölge sakin (kart oraya gelir); kişi yok; yazı yok; kapı açıklığının arkasında görünecek perspektif.
+Kontrol: dikişsiz; fildişi `#F6EAD2` civarı; desen/leke yok; yazı okunur.
+Kullanım: tema kurulunca home kartı, davet bandı, program kartı, RSVP formu ve zarftan yükselen kartın kâğıt dokusu.
 
-#### W2.4 Kapıdan çıkan küçük davet kartı (boş)
-**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
-
-```
-A small portrait invitation card, alone: thick warm ivory cotton paper (#F6EAD2) with a fine deckled feel and a thin hand-painted saffron-and-teal zellige border inset from its edge, about 0.7 as wide as it is tall. In its upper half, horizontally centred, a tall Moroccan horseshoe-arch photo window about 4:5 and about half as wide as the card, its top about 8% of the card's height below the card's top edge, filled with flat pure green #00FF00 (no texture, no shading, crisp arch outline). Everything inside the border below the window — at least the lower 42% of the card — is blank, even ivory paper (no text, no ornament: names and date are added there by the website). Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Soft warm light from the top-left. No cast shadow and no drop shadow. No glow outside the object's outline. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
-```
-Kontrol: pencere düz #00FF00, at nalı kemer biçimi, kartın üst yarısında ortalı; pencerenin altı bordüre kadar düz kâğıt;
-bordür ince; alfa. (Claude: pencere şeffaf yapılır, portre kartın ARKASINA, ölçülen pencereye konur — kemer biçimi GPT'nin
-kendi çizgisi; pencere altındaki düz kâğıt `free_zone` olur, theme-check kart yazısını onunla denetler.)
-
-#### W2.5 Pirinç fener
-**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/lantern.png` · 1024×1536 · **Şeffaf zemin**
+#### W3 Zarfın arkası (zellige astar görünür)
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/env_back.png` · 1080×1440 · **Şeffaf zemin**
 
 ```
-A single traditional pierced brass lantern hanging from a short brass chain at the top center, alone: hammered antique brass (#C9A35B) with star-shaped piercings and small saffron and teal glass panes, lit from inside so the panes and the piercings glow warm saffron — the glow stays INSIDE the lantern's outline. The chain starts at the very top edge of the image. Gouache with realistic metal texture. Front view, perfectly straight, not cropped. No cast shadow, no light rays, no halo outside its outline (the website adds the glow). No text. True transparent background PNG.
+The back panel of an open portrait envelope, seen perfectly straight from the front, on a fully transparent background. The envelope occupies exactly x 7–93% and y 6–94% of the canvas (a portrait rectangle, about 0.73:1) with crisp square corners. It is made of deep teal cotton paper (#16494B, shading to #0F2F31) with a faint blind-embossed geometric star pattern. We see its inside: from x 15% to x 85% and from y 9% down to the bottom it is lined with a glazed zellige tile mosaic — hand-cut tesserae forming a classic geometric pattern of eight-pointed stars and interlocking polygons in saffron (#E3A54A), zellige teal (#1E6A6A), glaze white (#F4EFE4) and a little deep teal (#0F2F31), each tessera with a slightly uneven glossy glaze catching the warm light, fine ivory grout lines; a very gentle shade toward the bottom where the front pocket will sit. Outside the lining a margin of the plain teal paper shows along the top and both sides (x 7–15% and x 85–93%). No flap, no front pocket, no stud, no cord, no lantern, no card inside. Soft warm evening light from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: tek fener; ışıma yalnız fenerin içinde; zincir üst kenardan; gölge/hâle yok; alfa. (Yeri: kapı sayfasında kemerin
-içinde kapıların üstünde asılı, home'da kartın üstünde, RSVP'de başlığın üstünde; hafifçe sallanır, titreyen hâle CSS ışığı.)
+Kontrol: zarf x %7–93 · y %6–94; iç yüz safran-teal-beyaz geometrik zellige (kobalt yok); yanlarda ve üstte düz teal kâğıt payı; kapak/cep yok; gerçek alfa.
+Kullanım: tema kurulunca `.env-back` — kapak açılınca kartın arkasında parlayan zellige iç; sahnenin referans kutusu (diğer katmanlar bunun kutusuna göre yerleşir).
 
-#### W2.6 Sayfa arka planı (kapı sayfası, telefon)
-**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/bg_page.png` · 1024×1536 · opak
-
-```
-A vertical phone-screen background: the night-teal tadelakt (polished lime plaster) wall of a riad courtyard (#0F2F31 to #174A4B) with a soft hand-made sheen, very faint magenta bougainvillea sprigs reaching in only at the two top corners, and a low band of teal, saffron and ivory zellige along the very bottom edge (bottom 8% only). The whole central area stays calm, plain teal plaster and empty (no door, no card, no text), so light ivory text reads on it. Gouache with real plaster texture, soft warm light from the top-left.
-```
-Kontrol: orta sakin; dekor yalnız üst köşeler ve en alt bant; yazı yok. (Yeri: kapı sayfasının telefon zemini; geniş ekranda
-döşenen `bg_tile` kalır.)
-
-#### W2.7 Döşenebilir duvar dokusu
-**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/bg_tile.png` · 1024×1024 · opak · **dikişsiz**
+#### W4 Zarfın ön cebi
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/env_front.png` · 1080×1440 · **Şeffaf zemin**
 
 ```
-A seamless, tileable texture of night-teal tadelakt lime plaster (#0F2F31 to #174A4B): soft trowel marks, a gentle polished sheen and tiny mineral speckles, evenly lit with no vignette, no light spot and no pattern that shows when the tile repeats. Edges must match perfectly left-right and top-bottom. No text, no objects.
+Only the front pocket of the same portrait deep teal envelope as env_back.png, on the same 1080×1440 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 7–93% and y 6–94% of the canvas; the pocket spans its full width (x 7–93%) from its top edge down to the envelope's bottom edge at 94% of the canvas height. Its top edge is one very shallow concave curve: it starts at 46% of the canvas height at both side edges and dips gently to 50% at the horizontal centre, cut clean and crisp, the thickness of heavy paper visible along the cut, with a fine line of brass foil (#C9A35B) running just below the cut edge. The deep teal cotton paper (#16494B) with the same faint blind-embossed geometric star pattern, the soft fold lines of the side flaps and bottom flap barely visible, softly lit by warm evening light from the top-left. Everything above the pocket's edge is completely transparent. No flap, no stud, no cord, no lantern, no card, no tiles. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: 2×2 yan yana konunca dikiş görünmüyor; ışık lekesi yok.
+Kontrol: cep tam genişlik; üst kenarı yanlarda %46, ortada %50'ye inen sığ yay + ince pirinç çizgi; üstü tamamen şeffaf; gerçek alfa.
+Kullanım: tema kurulunca `.env-front` — kart bunun arkasından yükselir; cep dudağını geçince öne alınır.
 
-#### W2.8 – W2.11 Zellige karoları (sırayla dizilen bordür)
-**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/tile_1.png`, `tile_2.png`, `tile_3.png`, `tile_4.png` · her biri 512×512 · opak (karo kareyi kenardan kenara doldurur)
-
-```
-tile_1: A single square hand-cut zellige tile seen straight from above, filling the whole square edge to edge: a glazed eight-point star in deep teal (#174A4B) on ivory (#F6EAD2) with tiny saffron (#E3A54A) points between the arms; slightly uneven hand-made glaze with a soft sheen, realistic ceramic texture, gouache-like softness. No grout lines around it, no shadow, no text.
-tile_2: The same tile family and size: an interlaced geometric rosette in saffron and ivory with a thin teal outline, same glaze, same light. No grout, no shadow, no text.
-tile_3: The same family: a small teal and ivory star-and-cross pattern with a brass-colored (#C9A35B) glazed center, same glaze, same light. No grout, no shadow, no text.
-tile_4: The same family: a plain deep-teal glazed tile with a slightly crackled hand-made surface (a calm tile between the patterned ones), same light. No grout, no shadow, no text.
-```
-Kontrol: dört karo aynı aileden (renk, ışık, sır); her biri kareyi tam dolduruyor; yan yana dizilince uyumlu; yazı yok.
-(Bunlar home/story/details'teki "çini çini dizilen bordür" hareketinin parçaları — her karo ayrı katman; site 76 ve 152 px
-keser, baskı 152 px'i kullanır. `tile_4` sade karo desenli karoların arasına girer: 1·4·2·4·3·4·1.)
-
-#### W2.12 Kemer pencere çerçevesi (story fotoğrafları)
-**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/frame_arch.png` · 1024×1536 · **Şeffaf zemin**
+#### W5 Ters at nalı kemer kapak (kapalı, dış yüz)
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/flap.png` · 1080×1440 · **Şeffaf zemin**
 
 ```
-A tall Moroccan window frame, alone: a horseshoe-arch opening framed by carved ivory stucco with fine geometric lattice carving and a slim carved cedar sill at the bottom, about 2:3 tall overall. The window opening is filled with flat pure green #00FF00 (no texture, no shading), its arch outline crisp. Gouache with realistic stucco and wood texture. Front view, perfectly straight, centered and not cropped, with generous empty margin. Soft warm light from the top-left. No cast shadow, no glow outside the outline. No text. True transparent background PNG.
+Only the closed flap of the same portrait deep teal envelope, on the same 1080×1440 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 7–93% and y 6–94% of the canvas; the flap hangs from a softly rounded fold along the envelope's top edge (6% of the canvas height), full width (x 7–93%). Its outline is an upside-down Moorish horseshoe arch: the two straight sides drop vertically from the fold to 26% of the canvas height, where the edge steps inward by a small notch (about 2% of the width on each side, like the impost of an arch); from there the horseshoe curve first swells slightly outward (its widest point x 9–91% at about 36% of the height), then sweeps round, down and inward in one smooth continuous curve to a gently pointed tip at the horizontal centre at 62% of the canvas height. Along the whole curved and stepped edge, on the flap, runs a narrow border (about 2.5% of the width) of fine brass-gold foil stamped with a tiny geometric zellige interlace, crisp and slightly raised. The rest of the flap is the plain deep teal cotton paper (#16494B) with the same faint blind-embossed geometric star pattern; a whisper of contact shade on the flap itself along its edge. Soft warm evening light from the top-left. Everything outside the flap is completely transparent. No stud, no cord, no tassel, no lantern, no card. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: pencere düz #00FF00, at nalı kemer; çerçeve ince (pencere çerçevenin ~%70'i); alfa. (Claude pencereyi şeffaf
-yapar ve ölçer; story ve home'daki üç pencerenin fotoğrafı çerçevenin arkasına, pencereye oturur — kemer GPT'nin çizgisi.)
+Kontrol: kapak menteşesi %6; yanlar %26'ya dik, küçük impost basamağı, at nalı eğrisi (en geniş ~%36), sivri uç (x %50, y %62); kenarda altın folyo zellige bordür; altı/yanları şeffaf; gerçek alfa.
+Kullanım: tema kurulunca kapalı kapak; açılışta üst katlama çizgisinde 3B kalkar, 90°'den sonra W6 iç yüz devralır.
 
-#### W2.13 Yatay çerçeve (mekân fotoğrafı)
-**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/frame_landscape.png` · 1536×1024 · **Şeffaf zemin**
-
-```
-A wide carved cedar frame in the same style as frame_arch.png, alone: a slim carved cedar border with small hammered-brass studs at the corners, its opening exactly 16:9 and filled with flat pure green #00FF00 (no texture, no shading). Front view, perfectly straight, centered, not cropped, generous margin. Soft warm light from the top-left. No cast shadow, no glow outside the outline. No text. True transparent background PNG.
-```
-Kontrol: pencere 16:9 düz #00FF00; çerçeve ince; alfa. (Yeri: details'te mekân fotoğrafının çerçevesi.)
-
-#### W2.14 – W2.15 Bougainvillea köşe kümeleri
-**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/bougainvillea_tl.png` ve `bougainvillea_br.png` · 1024×1024 · **Şeffaf zemin**
+#### W6 Kapağın iç yüzü (açıkken dik duran kemer)
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/flap_in.png` · 1080×940 · **Şeffaf zemin**
 
 ```
-tl: A cascading spray of magenta bougainvillea (#B8326E) with papery bracts, small ivory flowers and dark green leaves, growing in from the top-left corner of the square and trailing down and to the right, gouache with realistic petal texture; the bottom-right half of the square stays empty. No shadow, no glow, no text. True transparent background PNG.
-br: The same bougainvillea, mirrored in composition: growing in from the bottom-right corner, reaching up and to the left; the top-left half empty. No shadow, no glow, no text. True transparent background PNG.
+The inside of the same horseshoe-arch envelope flap, alone, seen straight on as it stands upright when the envelope is open, on a fully transparent background: the outline of flap.png mirrored vertically, so it now reads as an upright Moorish horseshoe arch doorway. Its straight fold edge is at the BOTTOM, along 93% of the image height, spanning x 7–93% of the width (exactly as wide as the envelope); its two straight sides rise to 62% of the image height, step inward by a small impost notch, the horseshoe curve swells slightly outward (widest at about 51% of the height) and sweeps up and inward to a gently pointed crown at the top centre, at 7% of the image height. The inside is lined with the same glazed zellige mosaic as env_back.png (saffron #E3A54A, zellige teal #1E6A6A, glaze white #F4EFE4, a little deep teal; eight-pointed stars and interlocking polygons, fine ivory grout, glossy uneven glaze catching the light), and the brass-gold foil border with its tiny interlace follows the whole arched edge on the inside too, with a slim margin of teal paper beyond it. Soft warm evening light from the top-left. No stud, no cord, no lantern. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: küme köşeden giriyor, diğer yarı boş; magenta yalnız burada; alfa. (Yeri: home'un ilk ekranında sol üst + sağ alt
-köşe, RSVP'de sol üst; kartın ve yazının arkasında.)
+Kontrol: düz katlama kenarı altta (%93, x %7–93), yanlar %62'ye, impost, sivri tepe (x %50, y %7); iç yüz zellige + altın bordür; düz renk alan yok; gerçek alfa.
+Kullanım: tema kurulunca 3B dönüşün arka yüzü — kapak açıkken zarfın üstünde dik bir at nalı kapı kemeri; home'a geçişte kemer portre çerçevesine (W12) dönüşüyormuş gibi solar.
 
-#### W2.16 Ayırıcı
-**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/divider.png` · 1536×512 · **Şeffaf zemin**
-
-```
-A slim horizontal ornament, alone: a fine pierced brass filigree line with a small eight-point star at its center, about 10 times wider than tall, centered. Realistic hammered brass, soft warm light from the top-left. No shadow, no glow, no text. True transparent background PNG.
-```
-Kontrol: ince, yatay, ortalı; alfa. (Yeri: home davetinde isimlerle tarih arasında, details başlığının altında.)
-
-#### W2.17 Süzülen accent — tek bougainvillea yaprağı (braktesi)
-**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/accent_1.png` · 1024×1024 · **Şeffaf zemin**
+#### W7 Kubbe başlı pirinç çivi
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/stud.png` · 1080×1440 · **Şeffaf zemin**
 
 ```
-A single papery magenta bougainvillea bract, alone, slightly curled, filling about 60% of the square. Gouache with realistic petal texture. Front view, centered, not cropped. No shadow, no glow, no text. True transparent background PNG.
+On the same 1080×1440 canvas as env_back.png and flap.png, in exactly the same place (the envelope box is x 7–93% and y 6–94% of the canvas, but the envelope itself is NOT drawn here), only one small domed brass stud, seen straight on, on a fully transparent background: a hand-made brass rosette fastener whose centre is exactly at x 50% and y 56% of the canvas and whose diameter is 7% of the canvas width (it spans x 46.5–53.5%, y 53.4–58.6%): a smooth polished brass dome (#C9A35B with warm highlights) in the middle, ringed by a fine eight-petal rosette of hammered brass with a beaded edge. Warm golden highlight from the soft evening light at the top-left. Everything else is fully transparent: no flap, no cord, no lantern. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: tek yaprak; alfa. (Yeri: RSVP yanıtı gönderilince fener bir kez parlar ve bu yapraktan üçü ekrandan süzülür —
-`site.js` `petals`, `.accent-layer`; hareket azaltmada yok.)
+Kontrol: tek pirinç çivi, merkez (x %50, y %56), çap tuval eninin %7'si; kubbe + sekiz yapraklı rozet; başka bir şey yok; gerçek alfa.
+Kullanım: tema kurulunca kapağın ucunda sabit kalır (kapakla birlikte 3B kalkar); kordon açılışın başında bunun etrafından kalkar.
 
-#### W2.18 Paylaşım görseli kaynağı
+#### W8 Safran ipek kordon + püskül (çiviye dolanmış)
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/cord.png` · 1080×1440 · **Şeffaf zemin**
+
+```
+On the same 1080×1440 canvas as env_back.png, flap.png and stud.png, in exactly the same place (the envelope, the flap and the stud are NOT drawn here), only a saffron silk cord, on a fully transparent background. The cord (about 0.9% of the canvas width thick, tightly twisted silk in saffron #E3A54A with a soft sheen and darker amber twists) makes one closed loop around the point where the stud sits — a ring centred at x 50% and y 56% of the canvas, its inner opening just larger than a 7%-wide stud, the loop spanning about y 52–60% — so that the stud will show through the middle of the loop. From the bottom of the loop two ends hang down: the LEFT end falls in a gentle S-curve to x 43% and y 78%, where it enters a small polished brass cap from which a full saffron silk tassel hangs, its fine silk threads ending at about y 90%; the RIGHT end falls more shortly to x 58% and y 71%, where it ends in a small round polished brass jump ring (about 1.6% of the canvas width). Warm evening light from the top-left, soft sheen along the twists. Everything else is fully transparent: no envelope, no stud, no lantern. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: halka (x %50, y %56) çevresinde, ortası boş; sol uçta püskül (pirinç kapak x %43, y %78; uç y %90); sağ uçta pirinç halka (x %58, y %71); zarf/çivi/fener çizilmemiş; gerçek alfa.
+Kullanım: tema kurulunca kapanış katmanı; açılışta fener yandıktan sonra halka çividen kalkar, kordon püskül ve fenerle birlikte hafif salınarak düşer ve söner.
+
+#### W9 Delikli pirinç fener tılsımı — sönük
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/lantern_unlit.png` · 600×900 · **Şeffaf zemin**
+
+```
+A small hand-pierced brass lantern charm, unlit, hanging straight, alone, seen from the front, on a fully transparent background: a tiny traditional riad lantern about the size of a thumb, with a round brass hanging ring at the top centre (its centre at x 50% and y 8% of the canvas), a small domed and pointed brass cap, a faceted body of four slightly bulging brass panels pierced with fine geometric star-and-dot patterns, small panes of pale amber glass behind the piercings, and a short pointed brass finial at the bottom. The lantern spans x 25–75% of the width and y 4–92% of the height. Polished and lightly aged brass (#C9A35B, warm highlights, darker recesses), soft warm evening light from the top-left. It is NOT lit: the amber glass is dim and the piercings are dark, no light, no rays, no sparkle, no glow. No chain, no cord, no hook. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: tek sönük fener (ışık/hâle yok); asma halkası üst ortada (x %50, y %8); delikli pirinç paneller + kehribar cam; gerçek alfa.
+Kullanım: tema kurulunca kapalı zarfta W8'in sağ halkasına asılı (halka (x %58, y %71)); W10 ile tam üst üste.
+
+#### W10 Delikli pirinç fener tılsımı — yanık
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/lantern_lit.png` · 600×900 · **Şeffaf zemin**
+
+```
+Exactly the same hand-pierced brass lantern charm as lantern_unlit.png, on the same 600×900 canvas, in exactly the same place, the same size and the same pose (hanging ring centred at x 50% and y 8%, the lantern spanning x 25–75% and y 4–92%), on a fully transparent background — but now it is LIT from inside by a tiny warm flame: the amber glass panes glow a warm honey-gold (#FFD08A to #E3A54A), every star-and-dot piercing shines as a bright warm point of light, and the brass around the piercings catches a warm inner glow. The light stays ONLY inside the lantern's own glass and piercings: no rays, no halo, no glow, no light spots outside the lantern's outline, the background fully transparent. The outside of the brass is still lit by the same soft evening light from the top-left. No chain, no cord, no hook. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: W9 ile aynı fener, aynı yer ve boy (üst üste konunca kaymaz); delikler ve cam sıcak yanıyor; dış hatta hâle/ışın yok; gerçek alfa.
+Kullanım: tema kurulunca açılışın ilk anı — W9'un üstünde 0→1 çapraz geçiş; duvara düşen sıcak ışığı site ekler. Home imzasında ve RSVP gönderiminde de yanık tılsım.
+
+#### W11 Kemer tepeli kart (zarftan yükselen, boş)
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/card_small.png` · 1000×1400 · **Şeffaf zemin**
+
+```
+A flat portrait invitation card, alone, seen straight on, on a fully transparent background: thick ivory handmade cotton paper as cotton_paper.png (#F6EAD2), spanning x 7–93% and y 6–94% of the canvas. Its bottom corners are square and its sides straight; its top is cut in the shape of a Moorish horseshoe arch with a gently pointed crown at the top centre (the arch begins at 30% of the card's height on both sides). Inside the edge, about 4% in, runs a fine brass-gold foil line that follows the arch and the sides, and just inside the crown of the arch sits a small cluster of three glazed zellige tesserae forming a tiny eight-pointed star (saffron, zellige teal and glaze white), about 12% of the card's width. Below it the card is completely EMPTY paper (the website sets the names, the date and the venue there in HTML). A hair-fine contact shade only on the card's own edge, soft warm evening light from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: at nalı kemer tepeli fildişi kart; içte ince altın çizgi; tepede küçük zellige yıldız; altı tamamen boş; gerçek alfa.
+Kullanım: tema kurulunca zarftan yükselen kart ve home kartı (isimler, tarih, mekân HTML olarak yıldızın altında).
+
+#### W12 Alçı at nalı kemer çerçeve (home portresi)
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/arch_frame.png` · 1000×1300 · **Şeffaf zemin**
+
+```
+A portrait photo frame in the shape of a Moorish horseshoe arch window, alone, seen straight on, on a fully transparent background: a wide frame of finely carved ivory stucco (#F4EFE4 with warm shading in the carving) — delicate geometric interlace and small rosettes, crisp hand-carved depth — edged on the outside by a slim moulding of carved Atlas cedar (#3A2114, warm oiled wood grain) and on the inside by a narrow band of glazed saffron-and-teal zellige tesserae. The frame's outer edge spans about x 6–94% and y 5–95% of the canvas, its top following the horseshoe arch with a gently pointed crown. In the middle a photo window filled with flat pure green #00FF00 (no texture, no shading, crisp edges, nothing over it), shaped as a horseshoe arch: its bounding box is exactly 720 px wide and 900 px tall (4:5), its top-left corner at x 140 px, y 250 px; the window's sides are straight from its bottom up to y 500 px, then it follows the horseshoe arch (slightly wider than the straight part, then closing to a gently pointed top at y 250 px). Soft warm evening light from the top-left. No lantern, no flowers, no glass over the window. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: yeşil pencere at nalı kemer biçimli, kutusu 720×900 (4:5), sol üst (140, 250); oyma alçı + sedir + zellige; pencereye binen yok; gerçek alfa.
+Kullanım: tema kurulunca pencere maskesi yeşil alanın kendisinden alınır (dikdörtgen değil; kemer köşelerindeki alçı silinmez) → home portresi; foto fener ışığı süpürmesiyle belirir.
+
+#### W13 Sedir at nalı kemer pencere (story çerçevesi)
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/story_frame.png` · 1000×1500 · **Şeffaf zemin**
+
+```
+A tall carved cedar window frame in the shape of a Moorish horseshoe arch, alone, seen straight on, on a fully transparent background: deep, richly carved Atlas cedar (#3A2114, warm oiled grain with honey highlights) with a geometric carved interlace and a small row of carved rosettes in the spandrels, a fine inner moulding of brass (#C9A35B) and an outer stepped moulding. The frame's outer edge spans about x 6–94% and y 5–95% of the canvas, its top following the horseshoe arch with a gently pointed crown. In the middle a photo window filled with flat pure green #00FF00 (no texture, no shading, crisp edges, nothing over it), shaped as a horseshoe arch: its bounding box is exactly 680 px wide and 1020 px tall (2:3), its top-left corner at x 160 px, y 300 px; the window's sides are straight from its bottom up to y 560 px, then it follows the horseshoe arch to a gently pointed top at y 300 px. Soft warm evening light from the top-left. No shutters, no grille, no glass over the window, no lantern, no flowers. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: yeşil pencere at nalı kemer biçimli, kutusu 680×1020 (2:3), sol üst (160, 300); oyma sedir + pirinç iç pervaz; pencereye binen yok; gerçek alfa.
+Kullanım: tema kurulunca pencere maskesi yeşil alandan → story'deki üç uzun pencere (sol–sağ–sol) ve home hikâye tanıtımı; foto karanlıkta bekler, kaydırınca yukarıdan aşağı sıcak ışık süpürmesiyle belirir.
+
+#### W14 Geniş sedir çerçeve + kemerli alçı friz (mekân)
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/venue_frame.png` · 1600×1100 · **Şeffaf zemin**
+
+```
+A wide landscape photo frame, alone, seen straight on, on a fully transparent background: a frame of carved Atlas cedar (#3A2114, warm oiled grain) with a fine inner brass moulding (#C9A35B), its outer edge spanning about x 5–95% and y 6–94% of the canvas; its top border is deeper and holds a carved ivory stucco frieze of three small horseshoe arches side by side (delicate geometric carving, crisp depth), centred above the window, and the bottom border has a narrow band of glazed saffron-and-teal zellige tesserae. In the middle a landscape photo window exactly 1280 px wide and 720 px tall (16:9), its top-left corner at x 160 px, y 260 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, nothing over it). The frieze stays entirely above the window. Soft warm evening light from the top-left. No glass, no lantern, no flowers. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: pencere düz `#00FF00` dikdörtgen 1280×720 (16:9), sol üst (160, 260); üstte üç kemerli alçı friz pencerenin üstünde kalıyor; altta zellige bant; gerçek alfa.
+Kullanım: tema kurulunca `keyed_window` (dikdörtgen tümden şeffaf + 10 px halkada yeşil taşmasını nötrle) → details'te mekân fotoğrafı.
+
+#### W15 Köşe süsü (bougainvillea + portakal çiçeği)
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/corner_spray.png` · 1200×1000 · **Şeffaf zemin**
+
+```
+A restrained, elegant corner spray growing out from near the top-left corner toward the centre, alone, on a fully transparent background, photorealistic: a few sprigs of magenta bougainvillea (#B8326A, papery bracts with tiny cream flowers in their hearts, used sparingly), small clusters of white orange blossom with waxy petals and pale yellow stamens, glossy dark green orange leaves, and one fine curl of saffron silk cord with a tiny brass bead winding through the stems. Airy and light, not dense: plenty of space between the elements. It reaches toward the top and left sides of the image but stays 6% inside them, and the bottom-right half of the canvas is completely empty. Soft warm evening light from the top-left. No lemons, no oranges (fruit), no vase, no lantern, no tiles. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: sol üstten çıkan seyrek küme, sağ alt yarı boş; bougainvillea az, portakal çiçeği; meyve yok; gerçek alfa.
+Kullanım: tema kurulunca home kartının üst köşeleri (sağda aynalanır), imza ve RSVP kapanışında küçük; kapakta en fazla bir köşede ve asla metnin altında değil.
+
+#### W16 Zellige ayırıcı (bölüm ayırıcı)
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/divider.png` · 1600×200 · **Şeffaf zemin**
+
+```
+A slim horizontal divider, alone, on a fully transparent background: a fine straight line of polished brass (#C9A35B) running across x 8–92% of the canvas at the vertical centre, and at its centre a small row of five glazed zellige tesserae forming a tiny geometric star motif (saffron, zellige teal and glaze white, the middle tessera an eight-pointed star slightly larger), with one tiny brass bead on the line on each side of it; the line tapers to fine points at both ends. Soft warm evening light from the top-left, a glossy glint on the glaze. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: yatay pirinç çizgi, ortada küçük zellige yıldız motifi, uçlar incelir; iki uçta boşluk; gerçek alfa.
+Kullanım: tema kurulunca başlıkların altında bölüm ayırıcı (home davet ve gün, details program, RSVP formu).
+
+#### W17 Asılı büyük pirinç fener (yanık)
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/hanging_lantern.png` · 700×1400 · **Şeffaf zemin**
+
+```
+A large hand-pierced brass riad lantern hanging from a short brass chain, lit from inside, alone, seen from the front, on a fully transparent background: the chain starts at the top centre at 6% of the canvas height; the lantern has a domed, pointed brass crown, a tall faceted body of six panels pierced with fine geometric star-and-dot patterns over warm amber glass, and a pointed finial with a small brass drop at the bottom at 93% of the height; the lantern body spans about x 18–82% of the width. A warm flame inside makes the amber glass glow honey-gold and every piercing shine as a bright warm point, while the brass outside is lit by the soft evening light from the top-left. The light stays ONLY inside the lantern's own glass and piercings: no rays, no halo, no light spots outside the outline. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: zincirli tek büyük fener, içten yanık; ışık yalnız cam ve deliklerde; dışta hâle yok; gerçek alfa.
+Kullanım: tema kurulunca home gün özetinin ve RSVP formunun üstünde asılı, çok hafif salınır (CSS); altına sıcak ışık hâlesini site ekler.
+
+#### W18 Zellige karosu (dikişsiz, sırayla dizilen bant)
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/zellige_tile.png` · 768×768 · opak, dikişsiz
+
+```
+A seamless, tileable, perfectly flat straight-on square of glazed zellige mosaic, the same tesserae and colours as env_back.png: one complete repeat of a classic geometric pattern centred on one eight-pointed star, surrounded by interlocking polygons, in saffron (#E3A54A), zellige teal (#1E6A6A), glaze white (#F4EFE4) and a little deep teal (#0F2F31); hand-cut tesserae with slightly uneven glossy glaze and fine ivory grout lines, evenly lit by soft warm evening light from the top-left with a gentle glossy sheen. The pattern continues seamlessly across all four edges so squares placed side by side form one continuous mosaic. No border, no crack, no shadow, no vignette. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: tek tekrar, ortada sekiz kollu yıldız; dört kenarda dikişsiz; astarla aynı renkler; kobalt yok.
+Kullanım: tema kurulunca home'daki zellige bandı — karolar kaydırınca çini çini (stagger) dizilir; RSVP kapanışında ince şerit.
+
+#### W19 Süzülen küçük nesneler — üç ayrı dosya
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/accent_1.png`, `accent_2.png`, `accent_3.png` · her biri 512×512 · **Şeffaf zemin**
+
+```
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft warm evening light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one single papery magenta bougainvillea bract (#B8326A), heart-shaped with fine veins, slightly curled; 2 = one single white orange blossom with five waxy petals and pale yellow stamens; 3 = one tiny eight-pointed star cut from polished brass (#C9A35B), slightly domed, catching a warm glint.)
+```
+Kontrol: her dosyada tek nesne; üç dosya farklı (bougainvillea yaprağı, portakal çiçeği, pirinç yıldız); kenara değmiyor; gerçek alfa.
+Kullanım: tema kurulunca açılışın sonunda ve RSVP gönderilince süzülen küçük nesneler (her biri ayrı katman, kendi fazında).
+
+#### W20 Website hero + paylaşım görseli (og:image kaynağı)
 **Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/parts/web_hero.png` · 1536×1024 · opak
 
 ```
-A wide scene for a link-preview image: the closed carved cedar double doors from doors_closed.png standing in their stucco horseshoe-arch doorway in a night-teal tadelakt wall, a lit pierced brass lantern hanging to the upper left of the arch, a soft warm saffron light on the wall around the door, and a little magenta bougainvillea at the right edge. The doorway sits in the lower-middle of the image and is fully visible; the top 20% of the image is calm wall with nothing important. Same gouache-with-real-texture style and palette. No people, no text, no letters, no calligraphy.
+Wide horizontal still life, photorealistic craft product photography, soft warm evening light from the top-left: the closed portrait deep teal envelope of flap.png with its upside-down horseshoe-arch flap and brass-gold zellige border, closed with the saffron silk cord wound once around the brass stud (as stud.png and cord.png), its saffron tassel and the small pierced brass lantern charm (lit, as lantern_lit.png) hanging over the pocket, lying slightly below the centre on warm ivory tadelakt plaster (as tadelakt_ground.png); at the left a few sprigs of magenta bougainvillea and white orange blossom (as corner_spray.png); at the right a large lit pierced brass lantern (as hanging_lantern.png) standing on the plaster and two or three loose glazed zellige tesserae; behind, softly out of focus, a carved cedar arch and warm lantern light. Only teal, saffron, brass, cedar and ivory tones, a touch of magenta. The top 20% of the image is calm and soft (only out-of-focus plaster and warm light). This image is cropped to 1200×630 for link previews: keep the whole envelope, cord and lantern charm visible with at least 5% empty margin below them. No people. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: kapı alt-ortada tam görünüyor; üst %20 sakin; yazı yok. (`tema_build.og_kirp(hiza="alt")` → `og-1200x630.jpg`.)
+Kontrol: zarf + kordon + fener tılsımı bütün, altında ≥%5 boşluk; üst %20 sakin; dini simge/yazı yok.
+Kullanım: tema kurulunca `og-1200x630.jpg` (alta hizalı kırpım) ve katalog kapağı.
 
 ---
 
-## PAKET 2 — örnek fotoğraflar (kurgu çift: Leila & Adrian) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+## PAKET 2 — örnek fotoğraflar (kurgu çift: Leila & Adrian) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor) — var, yeniden üretme
 
 Demo içeriği (`content.demo.json`): **Leila & Adrian**, *The Saffron Courtyard Riad*, Marrakech, October 9, 2027. Kurgu
 kişiler: **gerçek bir kişiye (ünlü dahil) benzemesin**; yüzler doğal, yaşları 28–34; tek bir kurgu çift beş fotoğrafta da aynı
@@ -216,62 +313,45 @@ Kontrol (PAKET 2): beş fotoğrafta aynı kurgu çift; gerçek kişiye benzemiyo
 
 ---
 
-## PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
+---
 
-> **Neden yeniden yazıldı (2026-10-20):** website 18–19 Ekim'de fildişi kâğıt + köşe çiçekleri görünümüne geçti; eski baskı prompt'ları eski görünümü (ve artık olmayan PAKET 5 parçalarını) istiyordu. `platform/lib/print/layouts.ts` `'riad-lantern-nights'` bloğunun geçici kaynakları yeniden kurulumda `img/`'den silindi: panel şu an `public/print/riad-lantern-nights/`'deki eski çıktıyı (eski görünüm) basıyor ve `build-print-assets` bu tema için yeniden koşamaz. Bu zeminler gelince:
-> Platform her yüz için **tek** zemin kullanır ve onu taşma payıyla `cover` olarak yayar (5×7 ve A5 aynı zeminden).
-> 1. `layouts.ts` `'riad-lantern-nights'` bloğunda `sources` → bu zeminler (`print/print_front.png` + `print/print_back.png`), `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }`.
-> 2. Zemin artık **açık fildişi**: `ink` / `accent` koyu tonlara (temanın site metin rengi) alınır; açık mürekkep kalmaz.
-> 3. Metin kutuları (`front` / `back`) gerçek görselde ölçülür (G149; süsten ~%2 açıklık), `node --test tests/g149-print-layout.test.ts`.
-> 4. `cd platform && node scripts/build-print-assets.ts --theme riad-lantern-nights`; `public/print/riad-lantern-nights/`'deki artık kaynak olmayan eski dosyalar silinir; 5×7 ve A5 örnek PDF'ine göz atılır.
-> Ek görsel (her iki yüz için sohbetin başında): `platform/themes/riad-lantern-nights/img/bg_scene-1024.webp`.
+## PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm)
 
-#### P6.1 Ön yüz
-**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/print/print_front.png` · 1819×2551 px (300 ppi), opak
+> Panelden indirilen basılı davetiye (`platform/lib/print/layouts.ts`, `'riad-lantern-nights'` bloğu). Bugünkü blok eski
+> zeminleri (`print/print_front.png`, `print/print_back.png`; 18–19 Ekim görünümü) kullanıyor; yeni zeminler gelince ona
+> geçilir. **Dosya adı ve ölçü:** `print/invitation_front_r_5x7.png`, `print/invitation_back_r_5x7.png`, **1575×2175 px**
+> = 5×7 in + 1/8 in taşma, 300 ppi. Ayrı A5 dosyası istenmez: A5 + 3 mm taşma (oran 0,713) aynı sayfadan yanlardan ~%0,8
+> kırpılarak basılır. Bu yüzden önemli hiçbir şey yan kenarların %8'ine girmez.
+> **Yazı alanı:** ön yüzde yükseklikte %19–%91 × genişlikte %10–%90 **tamamen boş** (isimler, tarih, mekân); arka yüzde
+> %13'ün altı, genişlikte %9–%91 boş (program + QR; QR'ı GPT çizmez, `tools/make_qr.py` gerçek URL'den üretir).
+> Süsleme yalnız üst ve alt bantlarda. Mürekkep koyu teal/sedir (açık kâğıt üstünde).
+>
+> **Gelince (elle, tek blok; otomatik değil — G149: kutular gerçek görselde ölçülür):**
+> 1. `layouts.ts` `'riad-lantern-nights'` bloğunda `sources` → `{ front: 'print/invitation_front_r_5x7.png', back:
+>    'print/invitation_back_r_5x7.png' }`; `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg:
+>    cover('back'), images: [] } }` (aynı kalır); `front`/`back` kutularını yeni görselde ölç (süslemenin ~%2 dışında
+>    kalsın; `tests/g149-print-layout.test.ts`); ink `#0F2F31`, accent `#8F5418` önerisi gözle doğrulanır.
+> 2. `cd platform && node scripts/build-print-assets.ts --theme riad-lantern-nights` ve `node scripts/print-sample.ts
+>    --theme riad-lantern-nights --invite 5x7 --bleed` + `--invite a5 --bleed` ile iki boyutu göz kontrolü.
+> 3. Eski `print_front.png` / `print_back.png` dosyaları blok geçince silinebilir (entegratör kararı).
 
+#### P1 — Ön yüz
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/print/invitation_front_r_5x7.png` · 1575×2175 · opak
 ```
-A full-bleed printable wedding invitation ground for the "Riad Lantern Nights" design, front side, portrait, seen perfectly flat and straight on, 1819 × 2551 px at 300 ppi (it is trimmed later). Match the attached website background (bg_scene-1024.webp) exactly in style: the same warm ivory, softly textured stationery paper running edge to edge and the same warm sand, terracotta and muted teal, ivory roses, ornate Moroccan bronze lanterns and subtle zellige corner geometry, in the same photorealistic stationery-photography finish with soft light from the top-left. Place the decoration ONLY in two places: an abundant arrangement gathered at the top-left corner and trailing along the top edge, staying entirely within the top 16% of the height, and a smaller matching arrangement gathered at the bottom-right corner, staying entirely within the bottom 14% of the height. A very fine antique-gold foil hairline frame inset about 6% from every edge. Keep every ornament at least 4% inside the image edges. The whole rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm ivory paper (the names, date and venue are printed there in dark ink): no petal, leaf, line, shadow or stain in it. No envelope, no card, no frame object, no people. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1819 × 2551 px.
+The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the thick ivory handmade cotton paper of cotton_paper.png (#F6EAD2). Across the top, between 9% and 91% of the width, a band in the shape of a shallow horseshoe-arch crown: a fine brass-gold foil line (#C9A35B) that rises from both sides into a gently pointed arch at the centre, with a narrow row of small glazed saffron-and-teal zellige tesserae following it, and at the crown a small cluster of tesserae forming one eight-pointed star; a few sprigs of white orange blossom and two or three magenta bougainvillea bracts tucked at the two ends of the band; nothing in this top band reaches lower than 17% of the height. Along the bottom, between 92% and 96% of the height and from 14% to 86% of the width, a slim border of the same zellige tesserae between two fine brass-gold foil lines, with one tiny eight-pointed brass star at its centre. The rectangle from 19% to 91% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm paper (the names, date and venue are set there): no tile, no petal, no line, no shadow, no stain in it. No ornament within 8% of the left and right edges. Soft warm light from the top-left. Only ivory, teal, saffron, brass and a touch of magenta. No calligraphy, no religious symbols. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
 ```
-Kontrol: tam taşma fildişi kâğıt (site zeminiyle aynı); çiçekler yalnız üst %16 (sol üst) ve alt %14 (sağ alt); %18–84 yükseklik × %10–90 genişlik tamamen boş; ince altın çerçeve; yazı yok; 1819×2551.
+Kontrol: tam taşma; %19–%91 × %10–%90 tamamen boş; kemer tepeli zellige bant yalnız üstte (%17'nin üstünde), zellige bordür yalnız altta; yan %8 boş; yazı/dini simge yok.
 
-#### P6.2 Arka yüz
-**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/print/print_back.png` · 1819×2551 px (300 ppi), opak
-
+#### P2 — Arka yüz
+**Kaydet:** `collections/27_Riad_Lantern_Nights/assets/gpt/print/invitation_back_r_5x7.png` · 1575×2175 · opak
 ```
-The back side of the same "Riad Lantern Nights" invitation (give print_front.png as the reference image): portrait, full bleed, perfectly flat, 1819 × 2551 px at 300 ppi, the same warm ivory stationery paper edge to edge and the same very fine antique-gold foil hairline frame inset about 6% from every edge. Decoration ONLY a slim spray of the same flowers and foliage centred along the top edge, staying entirely within the top 11% of the height and at least 4% inside the image edges. Everything from 13% to 92% of the height and from 10% to 90% of the width is COMPLETELY EMPTY paper for the schedule, the details and a QR code: no petal, line, shadow or stain. Same style, colors and light. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1819 × 2551 px.
+The back of the same printed wedding invitation, full bleed, portrait 5.25:7.25, perfectly flat: the same thick ivory cotton paper, only a short slim brass-gold foil line across the top centre (between 32% and 68% of the width) with a tiny eight-pointed star of glazed saffron-and-teal zellige tesserae at its middle and one white orange blossom beside it, its lowest point staying above 11% of the height. The whole area below 13% of the height, from 9% to 91% of the width, is COMPLETELY EMPTY paper (a schedule and a QR code are set there): no tile, no line, no shadow, no stain. No ornament within 8% of the left and right edges. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
 ```
-Kontrol: ön yüzle aynı kâğıt ve çerçeve; çiçek yalnız üst %11'de ince dal; %13–92 × %10–90 boş; yazı yok; 1819×2551.
+Kontrol: ön yüzle aynı kâğıt; yalnız üst ortada kısa altın çizgi + küçük zellige yıldız (%11'in üstünde); %13'ün altı boş; yazı/QR yok.
 
 ---
 
-## Parçalar gelince (Claude) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
-
-> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
-
-```bash
-python3 tools/kit_check.py collections/27_Riad_Lantern_Nights                     # ölçü / alfa / #00FF00 pencere denetimi
-python3 platform/themes/riad-lantern-nights/build_images.py                     # parts/ → img/ + manifest.json + site.css @gpt-layers
-cd platform && PORT=3405 NODE_PATH=/opt/node22/lib/node_modules node scripts/theme-check.cjs --theme riad-lantern-nights --stress --compare none
-node --test tests/theme-riad-lantern-nights.test.ts                             # CSS @gpt-layers = manifest
-```
-
-`build_images.py` (G167) her parçayı dosyası varsa kullanır, yoksa geçici parçayı keser; çıktı uyarıları (`manifest.json`
-`warnings`: dikiş bulunamadı, oran %4'ten fazla farklı, 1,5×'ten fazla büyütme, çerçeve kesildi, pencere yok) göz
-kontrolünde okunur. Kesim: `doors_closed` → `tema_build.dikis_bul` dikişinden iki kanat (`door_l`, `door_r`, 477×1254'e
-ölçeklenir), alfa kutusu = kapı açıklığı; `doorway` → açıklığın çevresinden sabit paylarla kesim, önde sabit katman;
-`courtyard` → açıklığın kutusu (`court`) + 16:9 (`court_band`); `card_small` → kart (878×1254), #00FF00 pencere şeffaf,
-pencere ve düz kâğıt ölçülür; `frame_arch` / `frame_landscape` → pencere şeffaf + ölçü (foto arkada); `tile_1..4` → 76 + 152
-px; `bg_tile` → `bg_wall`; `bg_page` → kapı sayfası telefon zemini; `lantern`, `bougainvillea_*`, `divider`, `accent_1` →
-yalnız GPT'yle görünen katmanlar; `web_hero` → `og-1200x630.jpg` (`og_kirp(hiza="alt")`); PAKET 2 → demo kaydının `media`'sı
-(tema varlığı, ayrı iş); PAKET 6 → yukarıdaki elle geçiş. Sonra göz kontrolü (gerçek iPhone/Android dahil) ve satış kararı
-(`coming` → `live`).
-
-Kuru deneme (gerçek repo değişmez): `python3 tools/gpt_kuru_deneme.py --tema riad-lantern-nights --sekil
-collections/27_Riad_Lantern_Nights/assets/gpt/kuru_sekil.json [--theme-check --stress --port 3405]`.
-
----
-
-## PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
+## PAKET 3 — Etsy ilan sahneleri — GEÇERSİZ (2026-10-22: yeniden tasarım; tema kurulunca yeniden yazılacak)
 
 > Yeni (2026-10-14): kullanıcı ilan görsellerinin çok daha etkileyici ve profesyonel olmasını istedi. Bu sahneler ilan
 > görsellerinin zeminidir. Ekranlar **düz #00FF00**; Claude gerçek site ekranlarını perspektifle oraya yerleştirir
