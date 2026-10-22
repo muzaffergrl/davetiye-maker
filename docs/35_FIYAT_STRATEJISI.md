@@ -207,6 +207,19 @@ Onay gelince: `config.ts` fiyatları, 21 tasarım + 3 hizmet `etsy_upload.json`,
 
 Net: §3.1 modeli + %2,5 döviz çevirme. Lansmanda üstü çizili fiyat yok, çünkü normal fiyattan henüz satış yapılmadı.
 
+**TRY'de kalınırsa (kullanıcı sorusu, aynı gün) — aynı ritim, kur 49,55:**
+
+| Aşama | Normal (TL) | İndirimde (−%40) | İndirimde net | Normalde net |
+|---|---|---|---|---|
+| Lansman (ilk ≈ 10 yorum) | — (düz) | **1.190 TL** (≈ $24) | 947 TL | — |
+| Yorumlu | **2.490 TL** (≈ $50) | **1.494 TL** (≈ $30) | 1.196 TL | 2.013 TL |
+| Kurulum hizmeti | 990 TL düz | — | — | 783 TL |
+| Özel tasarım | 4.490 TL düz | — | — | 3.653 TL |
+| Ek revizyon | 690 TL düz | — | — | 537 TL |
+
+TRY'de döviz çevirme ücreti yok. Kur kuralı (§6) yalnız normal fiyatlara ve yalnız **indirim aralarındaki normal fiyat
+haftasında** uygulanır; indirim sürerken fiyat değiştirilmez (üstü çizili fiyat bozulmasın).
+
 ---
 
 ## 9. Kaynaklar
