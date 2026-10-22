@@ -65,6 +65,7 @@ Bu küçük ayrıntılar düğün websitelerinde nadiren yer alır ve misafirler
 - **Yemek.** Alerjileri ya da yemek tercihlerini soracaksanız nerede soracağınızı söyleyin: "LCV'nizde bize bildirin."
 - **Eve dönüş.** Son tren saatleri, bir taksi numarası ya da servis programı gece yarısı stresini önler.
 - **Düğün günü kime ulaşılacağı.** Sorular için bir arkadaşınızın adı ve numarası; böylece misafirler tören sırasında sizi aramaz.
+- **Dil.** Bazı misafirler başka bir dili daha rahat okuyorsa [iki dilli bir düğün websitesi](/guides/bilingual-wedding-website) düşünün.
 
 ## Güncel tutmak
 

@@ -64,6 +64,8 @@ Unser Ratgeber dazu, [wann Sie Hochzeitswebsite und Einladungen verschicken](/gu
 - [ ] Eine Ansprechperson vor Ort für das Hochzeitswochenende
 - [ ] Was bei schlechtem Wetter mit Veranstaltungen im Freien passiert
 
+Kommen Ihre Gäste aus verschiedenen Ländern, kann jeder diese Details auf einer [zweisprachigen Hochzeitswebsite](/guides/bilingual-wedding-website) in seiner eigenen Sprache lesen.
+
 ## Reisepässe, Visa und Reisehinweise
 
 Einreisebestimmungen unterscheiden sich von Land zu Land und ändern sich mit der Zeit; verlinken Sie deshalb offizielle Quellen, statt sie selbst zusammenzufassen. Viele Länder verlangen einen Reisepass, der nach der Ankunft noch einige Monate gültig ist; das [US-Außenministerium](https://travel.state.gov/content/travel/en/passports/passport-help/after-getting-passport.html/new_5078.html) weist zum Beispiel darauf hin, dass viele Länder mindestens sechs Monate Gültigkeit und manche leere Seiten verlangen. Gäste aus anderen Ländern sollten die Reisehinweise ihrer eigenen Regierung prüfen.

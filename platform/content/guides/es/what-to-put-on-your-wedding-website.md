@@ -65,6 +65,7 @@ Estos pequeños detalles rara vez llegan a las webs de boda, y son justo lo que 
 - **Comida.** Si vas a preguntar por alergias o por la elección de menú, di dónde: "Cuéntanoslo en tu confirmación."
 - **Vuelta a casa.** Los horarios del último tren, un número de taxi o los horarios del autobús lanzadera evitan agobios de madrugada.
 - **A quién llamar ese día.** El nombre y el número de un amigo para dudas, para que los invitados no te llamen en plena ceremonia.
+- **Idioma.** Si algunos invitados leen mejor otro idioma, plantéate una [web de boda bilingüe](/guides/bilingual-wedding-website).
 
 ## Mantenerla al día
 

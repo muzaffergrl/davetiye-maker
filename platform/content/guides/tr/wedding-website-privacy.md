@@ -82,7 +82,7 @@ Gizlilik, sayfayı kimin değiştirebildiğiyle de ilgilidir. Düzenleme linkini
 
 ## Düğünden sonra
 
-Bir düğün websitesinin sonsuza dek açık kalması gerekmez. Site kapanmadan önce yanıtlarınızı ve saklamak istediğiniz her şeyi indirin. İsterseniz sayfayı kısa bir teşekkür mesajına çevirin; böylece geri dönen misafirler eski lojistik bilgiler yerine sıcak bir şey görür.
+Bir düğün websitesinin sonsuza dek açık kalması gerekmez. Site kapanmadan önce yanıtlarınızı ve saklamak istediğiniz her şeyi indirin. İsterseniz sayfayı kısa bir teşekkür mesajına çevirin; böylece geri dönen misafirler eski lojistik bilgiler yerine sıcak bir şey görür. [Düğünden sonra websiteyle ne yapılır](/guides/wedding-website-after-the-wedding) rehberimiz seçenekleri ve neleri saklamanız gerektiğini anlatıyor.
 
 ## Düğün websitelerimizde gizlilik nasıl işler?
 

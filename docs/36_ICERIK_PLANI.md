@@ -78,7 +78,7 @@ G1 de her kümenin ilk rehberine link verir.
 | 4 | Şubat 2027 | N7 ücretsiz/ücretli, N8 Our Story — **yazıldı (G199) ve TR/DE/ES/FR'ye çevrildi (G200), 2026-10-22** | — |
 | 5 | Mart 2027 | N9 SSS örnekleri, N10 destination — **yazıldı (G201) ve TR/DE/ES/FR'ye çevrildi (G202), 2026-10-22** | — |
 | 6 | Nisan 2027 | N11 gizlilik, N12 QR — **yazıldı (G203) ve TR/DE/ES/FR'ye çevrildi (G204), 2026-10-22** | G2 gizlilik bölümü N11'e link verir (**G203**; bölüm kısaltılmadı, G2'nin kelime payı dar); ikinci 3 aylık gözden geçirme (**sıradaki: 2027-01-22 civarı, 18 rehberin hepsi**; G205 yöntemi) |
-| 7 | Mayıs 2027 | N13 iki dilli site, N14 düğünden sonra site (§7) — **İngilizcesi yazıldı (G208), 2026-10-22** | N10, G2 → N13; G3, N11 → N14 (yalnız İngilizce; çevirilerdeki linkler çeviri göreviyle) |
+| 7 | Mayıs 2027 | N13 iki dilli site, N14 düğünden sonra site (§7) — **yazıldı (G208) ve TR/DE/ES/FR'ye çevrildi (G209), 2026-10-22** | N10, G2 → N13; G3, N11 → N14 (5 dilde) |
 
 Her rehber önce İngilizce yazılır ve gözden geçirilir; sonra 4 dile çevrilir (`content/guides/{tr,de,es,fr}/`, G144 düzeni).
 

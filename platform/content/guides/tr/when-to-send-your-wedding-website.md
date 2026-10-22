@@ -13,7 +13,7 @@ Website, düğün kırtasiyenizin erkenden paylaşıp geliştirmeye devam edebil
 
 ## Zaman çizelgesi
 
-Düğün tarihinizden geriye doğru çalışın. Aşağıdaki davetiye ve yanıt zamanlaması Emily Post Institute'un [düğün planlama takvimini](https://emilypost.com/advice/wedding-planning-series) ve [yanıt kartları](https://emilypost.com/advice/how-to-word-a-wedding-response-card) hakkındaki önerilerini izliyor; geri kalanı, websitenin bunun etrafına nasıl yerleşeceğine dair pratik tavsiyelerdir.
+Düğün tarihinizden geriye doğru çalışın. Aşağıdaki davetiye ve yanıt zamanlaması Emily Post Institute'un [düğün planlama takvimini](https://emilypost.com/advice/wedding-planning-series) ve [yanıt kartları](https://emilypost.com/advice/how-to-word-a-wedding-response-card) hakkındaki önerilerini izliyor; geri kalanı, websitenin bunun etrafına nasıl yerleşeceğine dair pratik tavsiyelerdir. Gün geçtikten sonra neyin değişeceği için [düğünden sonra websiteyle ne yapılır](/guides/wedding-website-after-the-wedding) rehberimize bakın.
 
 | Ne zaman | Ne yapmalı | Websitenin durumu |
 |---|---|---|

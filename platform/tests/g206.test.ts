@@ -1,4 +1,4 @@
-// G206: the internal link matrix of docs/36 §4, kept in every language, and G5's message examples.
+// G206: the internal link matrix of docs/36 §4 (and §7), kept in every language, and G5's message examples.
 
 import assert from 'node:assert/strict';
 import test from 'node:test';
@@ -19,6 +19,9 @@ const MATRIX: Record<string, string[]> = {
   'destination-wedding-website-checklist': ['what-to-put-on-your-wedding-website', 'when-to-send-your-wedding-website', 'wedding-website-faq-examples'],
   'wedding-website-privacy': ['what-to-put-on-your-wedding-website', 'wedding-website-on-invitation', '/features'],
   'qr-code-wedding-rsvp': ['wedding-website-on-invitation', 'wedding-rsvp-questions', '/features'],
+  // docs/36 §7 (G208/G209)
+  'bilingual-wedding-website': ['wedding-website-vs-invitation', 'destination-wedding-website-checklist', '/features'],
+  'wedding-website-after-the-wedding': ['wedding-website-privacy', 'when-to-send-your-wedding-website', '/features'],
 };
 const links = (md: string) => [...md.matchAll(/\]\(([^)\s]+)\)/g)].map((m) => m[1]);
 const hits = (ls: string[], target: string) =>

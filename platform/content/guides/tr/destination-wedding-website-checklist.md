@@ -64,6 +64,8 @@ Bir destination düğünde misafirler gelip gelemeyeceklerine maliyete ve izne b
 - [ ] Düğün hafta sonu için yerinde bir iletişim kişisi
 - [ ] Açık hava etkinlikleri için hava bozarsa ne olacağı
 
+Misafirleriniz farklı ülkelerden geliyorsa [iki dilli bir düğün websitesi](/guides/bilingual-wedding-website) her birinin bu ayrıntıları kendi dilinde okumasını sağlar.
+
 ## Pasaportlar, vizeler ve seyahat önerileri
 
 Giriş kuralları ülkeden ülkeye değişir ve zamanla güncellenir; bu yüzden kendi özetinizi yazmak yerine resmî kaynaklara link verin. Pek çok ülke, varıştan sonra birkaç ay daha geçerli bir pasaport ister; örneğin [ABD Dışişleri Bakanlığı](https://travel.state.gov/content/travel/en/passports/passport-help/after-getting-passport.html/new_5078.html), pek çok ülkenin en az altı ay geçerlilik ve bazılarının boş sayfa istediğini belirtir. Başka ülkelerden gelen misafirler kendi hükümetlerinin seyahat önerilerine bakmalıdır.

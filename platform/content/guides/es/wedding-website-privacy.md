@@ -82,7 +82,7 @@ La privacidad también va de quién puede cambiar la página. Guardad para vosot
 
 ## Después de la boda
 
-Una web de boda no tiene por qué seguir en línea para siempre. Antes de que la web se cierre, descarga las respuestas y todo lo que quieras conservar. Si os apetece, cambiad la página por un breve mensaje de agradecimiento, para que los invitados que vuelvan encuentren algo cálido en lugar de la logística antigua.
+Una web de boda no tiene por qué seguir en línea para siempre. Antes de que la web se cierre, descarga las respuestas y todo lo que quieras conservar. Si os apetece, cambiad la página por un breve mensaje de agradecimiento, para que los invitados que vuelvan encuentren algo cálido en lugar de la logística antigua. Nuestra guía sobre [qué hacer con la web de boda después de la boda](/guides/wedding-website-after-the-wedding) explica las opciones y qué conviene guardar.
 
 ## Así funciona la privacidad en nuestras webs de boda
 

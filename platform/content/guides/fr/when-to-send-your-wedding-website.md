@@ -13,7 +13,7 @@ Le site est le seul élément de votre papeterie de mariage que vous pouvez part
 
 ## Le calendrier
 
-Partez de la date de votre mariage et remontez le temps. Les délais ci-dessous pour les faire-part et les réponses suivent le [calendrier de préparation du mariage](https://emilypost.com/advice/wedding-planning-series) de l'Emily Post Institute et ses conseils sur les [cartons-réponses](https://emilypost.com/advice/how-to-word-a-wedding-response-card) ; le reste relève de conseils pratiques sur la place du site dans ce calendrier.
+Partez de la date de votre mariage et remontez le temps. Les délais ci-dessous pour les faire-part et les réponses suivent le [calendrier de préparation du mariage](https://emilypost.com/advice/wedding-planning-series) de l'Emily Post Institute et ses conseils sur les [cartons-réponses](https://emilypost.com/advice/how-to-word-a-wedding-response-card) ; le reste relève de conseils pratiques sur la place du site dans ce calendrier. Pour ce qui change une fois le jour passé, voyez [que faire de son site de mariage après le mariage](/guides/wedding-website-after-the-wedding).
 
 | Quand | Quoi faire | État du site |
 |---|---|---|

@@ -82,7 +82,7 @@ La confidentialité, c'est aussi savoir qui peut changer la page. Gardez votre l
 
 ## Après le mariage
 
-Un site de mariage n'a pas besoin de rester en ligne indéfiniment. Avant que le site ne soit fermé, téléchargez vos réponses et tout ce que vous voulez garder. Si vous le souhaitez, remplacez la page par un court message de remerciement, pour que les invités qui reviennent trouvent un mot chaleureux plutôt qu'une logistique dépassée.
+Un site de mariage n'a pas besoin de rester en ligne indéfiniment. Avant que le site ne soit fermé, téléchargez vos réponses et tout ce que vous voulez garder. Si vous le souhaitez, remplacez la page par un court message de remerciement, pour que les invités qui reviennent trouvent un mot chaleureux plutôt qu'une logistique dépassée. Notre guide sur [que faire de son site de mariage après le mariage](/guides/wedding-website-after-the-wedding) présente les options et ce qu'il faut garder.
 
 ## La confidentialité sur nos sites de mariage
 

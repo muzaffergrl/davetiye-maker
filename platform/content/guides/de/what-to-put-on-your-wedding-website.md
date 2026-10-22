@@ -65,6 +65,7 @@ Diese kleinen Details schaffen es selten auf Hochzeitswebsites, und genau danach
 - **Essen.** Wenn Sie nach Allergien oder der Menüwahl fragen, sagen Sie wo: „Sagt es uns in eurer RSVP.“
 - **Nach Hause kommen.** Zeiten der letzten Bahn, eine Taxinummer oder ein Shuttle-Fahrplan ersparen spät abends Stress.
 - **Ansprechperson am Tag.** Name und Nummer einer Freundin oder eines Freundes für Fragen, damit Gäste Sie nicht während der Trauung anrufen.
+- **Sprache.** Lesen manche Gäste eine andere Sprache leichter, denken Sie über eine [zweisprachige Hochzeitswebsite](/guides/bilingual-wedding-website) nach.
 
 ## Die Website aktuell halten
 

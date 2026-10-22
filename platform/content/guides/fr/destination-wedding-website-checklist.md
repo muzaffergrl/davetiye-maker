@@ -64,6 +64,8 @@ Notre guide sur [quand envoyer votre site de mariage et vos faire-part](/guides/
 - [ ] Une personne de contact sur place pour le week-end du mariage
 - [ ] Ce qui est prévu en cas de mauvais temps pour les événements en extérieur
 
+Si vos invités viennent de pays différents, un [site de mariage bilingue](/guides/bilingual-wedding-website) permet à chacun de lire ces détails dans sa langue.
+
 ## Passeports, visas et conseils aux voyageurs
 
 Les règles d'entrée varient selon les pays et évoluent avec le temps : renvoyez vers des sources officielles plutôt que de les résumer vous-même. Beaucoup de pays exigent un passeport encore valable quelques mois après l'arrivée ; le [Département d'État des États-Unis](https://travel.state.gov/content/travel/en/passports/passport-help/after-getting-passport.html/new_5078.html), par exemple, indique que de nombreux pays demandent au moins six mois de validité et certains des pages vierges. Les invités d'autres pays doivent consulter les conseils aux voyageurs de leur propre gouvernement.

@@ -65,6 +65,7 @@ Ces petits détails figurent rarement sur les sites de mariage, et ce sont juste
 - **Repas.** Si vous demandez les allergies ou le choix du menu, dites où : « Indiquez-le-nous dans votre RSVP. »
 - **Le retour.** Les horaires du dernier train, un numéro de taxi ou les horaires d'une navette évitent le stress en fin de soirée.
 - **Qui contacter le jour J.** Le prénom et le numéro d'un ami pour les questions, afin que les invités ne vous appellent pas pendant la cérémonie.
+- **Langue.** Si certains invités lisent plus facilement une autre langue, pensez à un [site de mariage bilingue](/guides/bilingual-wedding-website).
 
 ## Tenir le site à jour
 

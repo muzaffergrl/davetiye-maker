@@ -64,6 +64,8 @@ Nuestra guía sobre [cuándo enviar tu web de boda y las invitaciones](/guides/w
 - [ ] Una persona de contacto en el lugar para el fin de semana de la boda
 - [ ] Qué pasa con los eventos al aire libre si hace mal tiempo
 
+Si tus invitados vienen de distintos países, una [web de boda bilingüe](/guides/bilingual-wedding-website) permite que cada uno lea estos detalles en su idioma.
+
 ## Pasaportes, visados e información de viaje
 
 Las normas de entrada cambian según el país y con el tiempo, así que enlaza fuentes oficiales en lugar de escribir tu propio resumen. Muchos países exigen un pasaporte con validez de unos meses después de la llegada; el [Departamento de Estado de EE. UU.](https://travel.state.gov/content/travel/en/passports/passport-help/after-getting-passport.html/new_5078.html), por ejemplo, indica que muchos países piden al menos seis meses de validez y algunos, páginas en blanco. Los invitados de otros países deben consultar la información de viaje de su propio gobierno.

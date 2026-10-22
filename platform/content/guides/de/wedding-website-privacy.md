@@ -82,7 +82,7 @@ Zum Datenschutz gehört auch, wer die Seite ändern kann. Behalten Sie Ihren Bea
 
 ## Nach der Hochzeit
 
-Eine Hochzeitswebsite muss nicht für immer online bleiben. Laden Sie Ihre Antworten und alles, was Sie behalten möchten, herunter, bevor die Seite offline geht. Wenn Sie möchten, stellen Sie die Seite auf eine kurze Dankesnachricht um, damit Gäste, die zurückkommen, etwas Herzliches statt alter Organisationsdetails sehen.
+Eine Hochzeitswebsite muss nicht für immer online bleiben. Laden Sie Ihre Antworten und alles, was Sie behalten möchten, herunter, bevor die Seite offline geht. Wenn Sie möchten, stellen Sie die Seite auf eine kurze Dankesnachricht um, damit Gäste, die zurückkommen, etwas Herzliches statt alter Organisationsdetails sehen. Unser Ratgeber, [was nach der Hochzeit mit der Website passiert](/guides/wedding-website-after-the-wedding), zeigt die Möglichkeiten und was Sie sichern sollten.
 
 ## So funktioniert der Datenschutz bei unseren Hochzeitswebsites
 
