@@ -236,6 +236,12 @@ export const WEDDING_GLOSSARY: readonly Row[] = [
   ["Please arrive 20 minutes before the ceremony; guests are seated on the south lawn.", "Lütfen törenden 20 dakika önce gelin; misafirler güney çimenliğinde oturacak.", "Por favor, lleguen 20 minutos antes de la ceremonia; los invitados se sentarán en el césped sur.", "Bitte kommen Sie 20 Minuten vor der Trauung; die Gäste nehmen auf dem Südrasen Platz.", "Merci d'arriver 20 minutes avant la cérémonie ; les invités sont placés sur la pelouse sud."],
   ["What if the weather turns?", "Hava bozarsa ne olacak?", "¿Y si cambia el tiempo?", "Was ist, wenn das Wetter umschlägt?", "Et si le temps se gâte ?"],
   ["The ceremony moves into the great hall, and everything else stays as planned.", "Tören büyük salona taşınır, geri kalan her şey planlandığı gibi kalır.", "La ceremonia se traslada al gran salón y todo lo demás sigue según lo previsto.", "Die Trauung findet dann in der großen Halle statt, alles andere bleibt wie geplant.", "La cérémonie se tient alors dans la grande salle, et tout le reste se déroule comme prévu."],
+  // G441 Painted Lily Pond (41): demo programme and questions
+  ["Garden brunch", "Bahçe kahvaltısı", "Brunch en el jardín", "Brunch im Garten", "Brunch au jardin"],
+  ["Toasts & cake", "Kadeh kaldırma ve pasta", "Brindis y tarta", "Reden & Torte", "Toasts et gâteau"],
+  ["Lawn games & dancing", "Çim oyunları ve dans", "Juegos en el césped y baile", "Rasenspiele & Tanz", "Jeux de pelouse et danse"],
+  ["What shoes should we wear?", "Hangi ayakkabıları giymeliyiz?", "¿Qué zapatos debemos llevar?", "Welche Schuhe sollen wir tragen?", "Quelles chaussures porter ?"],
+  ["The ceremony and brunch are on the garden lawn, so flats or block heels are most comfortable.", "Tören ve kahvaltı bahçe çimeninde; bu yüzden düz ya da kalın topuklu ayakkabılar en rahatıdır.", "La ceremonia y el brunch son en el césped del jardín, así que los zapatos planos o de tacón ancho son los más cómodos.", "Trauung und Brunch finden auf dem Gartenrasen statt, flache Schuhe oder Blockabsätze sind daher am bequemsten.", "La cérémonie et le brunch ont lieu sur la pelouse du jardin : les chaussures plates ou à talons larges sont les plus confortables."],
 ];
 
 /** "and" between two terms, per language (Spanish "y" becomes "e" before an i- sound). */

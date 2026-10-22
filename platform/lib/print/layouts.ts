@@ -581,6 +581,18 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     ink: '#1C2A48', accent: '#B8964F', front: [26,  13,  13,  13], back: [14,  12,  10,  12],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
+  // 41 (G441, 2026-10-22): the design's own PAKET 6 grounds (primed linen canvas; front: a garland of painted wisteria
+  // across the top, water lilies at the foot; back: a short spray of wisteria at the top), one per side, `cover` for 5×7
+  // and A5. Ornament measured on the art: front 3–19 % and 90–97 % of the height, back 4–13 %; the boxes sit inside the
+  // empty area (G149).
+  'painted-lily-pond': {
+    collection: '41_Painted_Lily_Pond',
+    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
+    fonts: gf('family=Arapey:ital@0;1&family=Comforter+Brush'),
+    script: "'Comforter Brush', cursive", serif: "'Arapey', Georgia, serif",
+    ink: '#3F5A73', accent: '#9C86BE', front: [24,  13,  13,  13], back: [18,  12,  10,  12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
+  },
 };
 
 export function printLayout(themeId: string): PrintLayout | null {

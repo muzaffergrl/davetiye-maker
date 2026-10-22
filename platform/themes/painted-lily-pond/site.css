@@ -1,0 +1,383 @@
+/* Painted Lily Pond (41) — primed linen canvas, a plein-air water-garden painting, a canvas portfolio envelope with a
+   lilac wax seal, stretched canvas panels, wisteria and water lilies; pond blue, lilac and lily pink, ink. Visuals are
+   GPT pixels only (img/, build_images.py); CSS adds light and interface (docs/11 §5.7): text halos, hairline rules, form
+   fields, buttons, the bottom nav, the light on the water under the rising card, the photos' painted look, and motion —
+   the seal lifting, the flap swinging up on its top edge, four brushstrokes painting the garden in, the card rising from
+   the water, photos turning from painting to photograph, drifting lily pads and a dragonfly. Nothing is drawn here. */
+:root{--pond:#6f8fae;--deep-pond:#3f5a73;--lilac:#b7a3cc;--wisteria:#9c86be;--lily:#e8b9c1;--water:#86a889;--cream:#f4eedf;
+--gold:#e5c77f;--ink:#2f3a45;--ink-soft:#56616c;--line:#2f3a4524;--script:'Comforter Brush',fb1,fb2,'Brush Script MT',cursive;
+--serif:'Arapey','Georgia',serif;--nav-h:62px;color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:var(--cream) url(img/canvas-640.webp) 0 0/520px repeat;color:var(--ink);font:400 19px/1.65 var(--serif);padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom))}
+main{overflow-x:clip}
+button,input,textarea,select{font:inherit}
+button,a,input,select,textarea,summary{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+h1,h2,h3,p,figure,ul,ol{margin:0}
+h1,h2,h3{font-weight:400;line-height:1.1}
+h1{font:400 clamp(60px,18vw,92px)/1 var(--script);color:var(--deep-pond);overflow-wrap:anywhere}
+h2{font:400 clamp(50px,14vw,70px)/1.02 var(--script);color:var(--deep-pond);overflow-wrap:anywhere}
+h3{font:400 19px/1.4 var(--serif);letter-spacing:.02em}
+button{cursor:pointer}
+button:disabled{opacity:.5;cursor:default}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--wisteria);outline-offset:5px}
+.nowrap{white-space:nowrap}
+.eyebrow{font:400 12px/1.9 var(--serif);text-transform:uppercase;letter-spacing:.26em;color:var(--wisteria);overflow-wrap:anywhere}
+.body-text{font-size:19px;line-height:1.7;color:var(--ink-soft)}
+.small{font:400 16px/1.8 var(--serif);color:var(--ink-soft)}
+/* primed canvas (GPT texture) under the cards and bands */
+.paper,.paper-band{background:var(--cream) url(img/canvas-640.webp) 0 0/420px repeat;color:var(--ink)}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:12px;min-height:48px;padding:12px 30px;border:1px solid var(--deep-pond);background:var(--deep-pond);color:var(--cream);font:400 14px/1.5 var(--serif);letter-spacing:.2em;text-transform:uppercase;border-radius:100px;text-align:center;overflow-wrap:anywhere}
+.btn:hover{background:#34495e;border-color:#34495e}
+.btn-ghost{background:rgb(244 238 223/.78);color:var(--ink);border-color:rgb(63 90 115/.45)}
+.btn-ghost:hover{background:var(--cream)}
+.btn-light{background:var(--cream);border-color:var(--cream);color:var(--deep-pond)}
+.btn-light:hover{background:#fff;border-color:#fff}
+.btn-sm{min-height:44px;padding:9px 18px}
+.textlink{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;font:400 16px/1.6 var(--serif);border:0;background:transparent;color:var(--deep-pond);letter-spacing:.08em;padding:8px 2px;text-decoration:underline;text-decoration-color:rgb(156 134 190/.6);text-underline-offset:6px}
+.center{text-align:center;margin:44px 0 10px}
+.button-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.no-js .nojs-only{display:block}
+.js .nojs-only{display:none}
+.names{font:400 clamp(62px,19vw,96px)/1 var(--script);color:var(--deep-pond);overflow-wrap:anywhere;text-wrap:balance;text-shadow:0 1px 0 #fff9,0 0 14px rgb(244 238 223/.95),0 0 28px rgb(244 238 223/.8)}
+.names .amp{font:italic 400 .32em/1 var(--serif);letter-spacing:.06em;color:var(--wisteria);vertical-align:.45em}
+
+/* photo slots: placeholders are softened canvas; "Your photo here" only in a preview */
+.photo-slot{position:relative;display:block;overflow:hidden;background:#e7e1d0}
+.photo-slot>img{width:100%;height:100%;object-fit:cover;object-position:50% 34%}
+.ph-mark{display:none;position:absolute;inset:0;align-items:center;justify-content:center;pointer-events:none;font:400 13px/1.4 var(--serif);color:var(--ink-soft);text-align:center;letter-spacing:.08em}
+html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{display:flex}
+/* the stretched canvas panels: the GPT panel (.cut) over the photo, which sits in its measured window (manifest
+   window_pct); .tex lays the primed canvas over the photo while it still looks painted */
+.frame{position:relative;display:block}
+.frame>.cut,.frame>.tex{position:absolute;pointer-events:none;background:0 0/100% 100% no-repeat}
+.frame>.cut{inset:0}
+.frame>.photo-slot{position:absolute}
+.pano{aspect-ratio:974/1220;filter:drop-shadow(0 10px 12px rgb(47 58 69/.22))}
+.pano>.cut{background-image:url(img/pano-720.webp)}
+.pano>.photo-slot,.pano>.tex{left:14.59%;top:13.43%;width:70.51%;height:72.64%}
+.pano-wide{aspect-ratio:1496/817;filter:drop-shadow(0 10px 12px rgb(47 58 69/.2))}
+.pano-wide>.cut{background-image:url(img/pano_wide-1100.webp)}
+.pano-wide>.photo-slot,.pano-wide>.tex{left:5.38%;top:14.92%;width:89.1%;height:70.4%}
+.frame>.tex{background:url(img/canvas-640.webp) 0 0/160px repeat;mix-blend-mode:multiply;opacity:0}
+.wisteria{display:block;aspect-ratio:918/1242;background:url(img/wisteria-560.webp) 0 0/100% 100% no-repeat;pointer-events:none}
+.lilies{display:block;width:min(92%,480px);aspect-ratio:1642/544;margin:0 auto;background:url(img/lilies-1000.webp) center/100% 100% no-repeat}
+/* the drifting things of the pond (GPT W14): lily pads and a dragonfly, moving on their own */
+.drift{position:absolute;pointer-events:none;background:center/100% 100% no-repeat;z-index:1}
+.drift.pad{width:58px;aspect-ratio:901/770;background-image:url(img/accent_1-160.webp)}
+.drift.fly{width:70px;aspect-ratio:1198/879;background-image:url(img/accent_3-160.webp)}
+
+/* bottom nav */
+.site-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgb(63 90 115/.95);border-top:1px solid var(--lilac);padding:6px 8px max(6px,env(safe-area-inset-bottom));view-transition-name:site-nav}
+.site-nav ul{list-style:none;padding:0;display:flex;justify-content:center;gap:4px}
+.site-nav a{display:flex;align-items:center;justify-content:center;min-height:48px;min-width:68px;padding:8px 12px;font:400 13px/1 var(--serif);letter-spacing:.16em;text-transform:uppercase;color:#eef1f4}
+.site-nav a[aria-current]{color:#fff;text-decoration:underline;text-underline-offset:8px;text-decoration-color:var(--lily)}
+
+/* ---------------------------------------------------------------- the envelope */
+.page-opening{padding-bottom:0;background:radial-gradient(ellipse at 50% 58%,rgb(255 255 255/.5) 0,rgb(255 255 255/0) 60%) fixed,var(--cream) url(img/canvas-640.webp) 0 0/520px repeat}
+.skip{position:fixed;top:calc(6px + env(safe-area-inset-top));right:10px;z-index:20;padding-inline:14px;background:rgb(244 238 223/.88);border-radius:100px;text-decoration:none}
+.opening{position:relative;min-height:100svh;max-width:760px;margin:auto;padding:clamp(66px,9svh,104px) 20px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:clip}
+.opening-heading{position:relative;z-index:2;max-width:100%}
+.opening-heading>.eyebrow:first-child{margin-bottom:2px}
+.opening .names{font-size:clamp(62px,19vw,92px)}
+/* the closed portrait envelope: .7586 wide per high (manifest stage); layers in % of it. The gap above it is the open
+   flap's height (44.7 % of the envelope); the size follows the screen height (≈ 330 px + 1.91 × the width) */
+.stage{--obj:min(64vw,calc((100svh - 330px) / 1.91),280px);position:relative;width:var(--obj);margin:calc(var(--obj) / .7586 * .447 + 8px) auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent;z-index:5}
+.opening:has(.names.long-names) .stage{--obj:min(60vw,calc((100svh - 360px) / 1.91),280px)}
+.envelope{position:relative;width:100%;aspect-ratio:.7586}
+.envelope>*{position:absolute}
+.back{inset:0;z-index:0;background:url(img/back-720.webp) 0 0/100% 100% no-repeat;filter:drop-shadow(0 14px 18px rgb(47 58 69/.28))}
+/* the card in the pocket (stage.card): 84 % of the envelope's width */
+.card{left:8%;top:12.84%;width:84%;height:84.16%;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:15% 13% 15%;text-align:center;view-transition-name:none;container-type:inline-size;background:url(img/card-720.webp) 0 0/100% 100% no-repeat;color:var(--ink)}
+.card-photo{width:54%;flex:none}
+.card.tight .card-photo{width:40%}
+.card-photo .ph-mark{font-size:8px}
+.card-photo .ty-decor,.card-photo .ty-decor img{display:block;width:100%;height:100%;object-fit:cover}
+.card-photo>.tex{display:none}
+.card-line{margin-top:6%;font-size:7px;letter-spacing:.24em}
+.card-names{font:400 clamp(24px,20cqw,48px)/.95 var(--script);color:var(--deep-pond);overflow-wrap:anywhere;text-wrap:balance;margin-top:1%}
+.card-date{font-size:7px;margin-top:3%}
+.front{left:0;top:42.17%;width:100%;height:57.83%;z-index:3;background:url(img/front-720.webp) 0 0/100% 100% no-repeat}   /* stage.front */
+.flap{left:0;top:0;width:100%;height:44.7%;z-index:4;transform-origin:50% 0;transform-style:preserve-3d}   /* stage.flap */
+.flap-out,.flap-in{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:0 0/100% 100% no-repeat}
+.flap-out{background-image:url(img/flap-720.webp);filter:drop-shadow(0 3px 3px rgb(47 58 69/.22))}
+.flap-in{transform:rotateX(180deg);background-image:url(img/flap_in-720.webp)}
+.seal{left:40%;top:35.86%;width:20%;height:14.73%;z-index:6;background:url(img/seal-240.webp) center/100% 100% no-repeat;filter:drop-shadow(0 4px 4px rgb(47 58 69/.3))}   /* stage.seal */
+/* the light on the water as the card rises from it (CSS light) */
+.envelope>.ripple{left:50%;top:70%;width:120%;aspect-ratio:3;translate:-50% -50%;z-index:2;opacity:0;pointer-events:none;background:radial-gradient(closest-side,rgb(255 255 255/0) 58%,rgb(255 255 255/.55) 72%,rgb(255 255 255/0) 86%)}
+/* four brushstrokes (GPT W8) paint the garden (W2) in from behind the envelope, one after another: each stroke's own
+   colour shows for a moment (.dab), then the painting appears inside its shape (.fill, the stroke as a mask) */
+.opening>.paint{position:fixed;inset:0;z-index:1;pointer-events:none}
+.paint>*{position:absolute;inset:0}
+.paint .dab,.paint .fill{position:absolute;inset:0}
+.paint .dab{background:var(--src) -30vw var(--y)/160vw 40vh no-repeat;clip-path:inset(0 100% 0 0)}
+.paint .fill{background:url(img/garden-1080.webp) center/cover;-webkit-mask:var(--src) -30vw var(--y)/160vw 40vh no-repeat;mask:var(--src) -30vw var(--y)/160vw 40vh no-repeat;opacity:0}
+.paint>.st-1{--src:url(img/stroke_1-900.webp);--y:-6vh}
+.paint>.st-2{--src:url(img/stroke_2-900.webp);--y:20vh}
+.paint>.st-3{--src:url(img/stroke_3-900.webp);--y:46vh}
+.paint>.st-4{--src:url(img/stroke_4-900.webp);--y:72vh}
+.paint>.garden{background:url(img/garden-1080.webp) center/cover;opacity:0}
+.paint>.st-1{--i:0}
+.paint>.st-2{--i:1}
+.paint>.st-3{--i:2}
+.paint>.st-4{--i:3}
+.opening-actions{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:22px;min-height:60px;position:relative;z-index:6}
+.opening-date{font-size:13px}
+.tap-hint{font-size:11px}
+.js .tap-hint{animation:breathe 3.2s ease-in-out infinite}
+@keyframes breathe{50%{opacity:.5}}
+.enter,.replay{display:none}
+.is-opened .enter{display:inline-flex}
+.is-opened .replay{display:inline-flex}
+.is-opened .tap-hint,.is-opening .tap-hint{display:none}
+.is-opened .skip{display:none}
+.is-opening .stage{pointer-events:none}
+.is-opening .opening-date{animation:dim 400ms ease-in forwards}
+.is-opening .seal{animation:seal-off 600ms 0ms cubic-bezier(.4,0,.2,1) forwards}
+.is-opening .flap{animation:flap-open 700ms 500ms cubic-bezier(.5,0,.3,1) forwards}
+.is-opening .paint .dab{animation:stroke 600ms calc(1100ms + var(--i) * 250ms) cubic-bezier(.4,0,.3,1) forwards,dab-off 400ms calc(1100ms + var(--i) * 250ms + 700ms) ease-out forwards}
+.is-opening .paint .fill{animation:fill-in 400ms calc(1100ms + var(--i) * 250ms + 300ms) ease-out forwards}
+.is-opening .paint>.garden{animation:fill-in 500ms 2100ms ease-out forwards}
+.is-opening .envelope>.card{animation:card-rise 800ms 2000ms cubic-bezier(.3,0,.2,1) forwards,card-forward 400ms 2800ms cubic-bezier(.45,0,.2,1) forwards}
+.is-opening .envelope>.ripple{animation:ripple 1100ms 2200ms ease-out forwards}
+.is-opened .opening-date{opacity:.5}
+.is-opened .seal{opacity:0;visibility:hidden}
+.is-opened .flap{transform:perspective(900px) rotateX(180deg);z-index:0}
+.is-opened .paint>.garden{opacity:1}
+.is-opened .envelope>.card{z-index:8;transform:translateY(-10%) scale(1.06);view-transition-name:invite-card;filter:drop-shadow(0 18px 22px rgb(47 58 69/.4))}
+.is-opened .opening-actions{margin-top:26px}
+@keyframes dim{to{opacity:.5}}
+@keyframes seal-off{0%{transform:none}30%{transform:rotate(-8deg) translateY(-6%)}100%{transform:translate(28%,-70%) rotate(-18deg) scale(.88);opacity:0}}
+@keyframes flap-open{from{transform:perspective(900px) rotateX(0);z-index:4}
+to{transform:perspective(900px) rotateX(180deg);z-index:0}}
+@keyframes stroke{to{clip-path:inset(0)}}
+@keyframes dab-off{to{opacity:0}}
+@keyframes fill-in{to{opacity:1}}
+/* the card rises as if from the water, the light on the water widening under it */
+@keyframes card-rise{from{transform:translateY(6%) scale(.97);filter:drop-shadow(0 0 0 #0000)}
+to{transform:translateY(-44%) scale(.94);filter:drop-shadow(0 10px 14px rgb(47 58 69/.28))}}
+@keyframes card-forward{from{z-index:8;transform:translateY(-44%) scale(.94);filter:drop-shadow(0 10px 14px rgb(47 58 69/.28))}
+to{z-index:8;transform:translateY(-10%) scale(1.06);filter:drop-shadow(0 18px 22px rgb(47 58 69/.4))}}
+@keyframes ripple{0%{opacity:0;scale:.4}25%{opacity:1}100%{opacity:0;scale:1.25}}
+
+/* ---------------------------------------------------------------- home */
+.hero{position:relative;min-height:calc(100svh - var(--nav-h));display:flex;align-items:center;justify-content:center;padding:44px 20px 26px;overflow:clip;background:url(img/garden-1080.webp) center 70%/cover}
+.hero-card{position:relative;width:min(84vw,370px);padding:34px 22px 28px;text-align:center;view-transition-name:invite-card;filter:drop-shadow(0 16px 22px rgb(47 58 69/.3))}
+.hero-card>.wisteria{position:absolute;top:-6%;width:34%;z-index:2}
+.hero-card>.ws-l{left:-12%}
+.hero-card>.ws-r{right:-12%;transform:scaleX(-1)}
+.hero-photo{width:min(50vw,220px);margin:0 auto 14px}
+.hero .names{font-size:clamp(58px,16vw,78px);margin:4px 0 4px}
+.hero-date{font:400 19px/1.5 var(--serif);letter-spacing:.03em}
+.hero-venue{display:flex;flex-direction:column;gap:2px;margin-top:8px;font:400 19px/1.45 var(--serif);overflow-wrap:anywhere}
+.hero-venue small{font:400 11px/1.8 var(--serif);letter-spacing:.24em;text-transform:uppercase;color:var(--wisteria)}
+.invitation{padding:52px 0 40px;text-align:center}
+.invitation>.lilies:last-child{margin-top:36px}
+.invitation-copy,.invitation>.countdown,.invitation>.calendar{padding-inline:28px}
+.invitation-copy{max-width:540px;margin:auto}
+.invitation-copy h2{margin-bottom:6px}
+.invitation .host{margin:14px 0}
+.formal-names{font:400 25px/1.4 var(--serif);margin-bottom:12px;overflow-wrap:anywhere}
+.formal-names .amp{font:400 48px/1 var(--script);color:var(--wisteria)}
+.invitation-copy .body-text{max-width:340px;margin:auto}
+.date-block{display:flex;flex-direction:column;align-items:center;gap:2px;margin:26px auto 6px;color:var(--wisteria)}
+.date-block>span{font:400 12px/1.8 var(--serif);letter-spacing:.26em;text-transform:uppercase}
+.date-block b{font:400 34px/1.25 var(--serif);letter-spacing:.03em;color:var(--deep-pond)}
+.venue-name{font-size:23px;margin-top:16px;overflow-wrap:anywhere}
+.invitation-copy .btn{margin:24px 0 12px}
+.countdown{max-width:380px;margin:30px auto 0}
+.cd-row{display:flex;gap:14px;justify-content:center}
+.cd-row>div{flex:1;text-align:center}
+.cd-num{display:block;font:400 36px/1.3 var(--serif);color:var(--deep-pond);font-variant-numeric:tabular-nums}
+.cd-row small{font:400 11px/1.7 var(--serif);text-transform:uppercase;letter-spacing:.14em;color:var(--wisteria)}
+.countdown.is-done .cd-row{display:none}
+.cd-done{font-size:19px}
+.calendar{margin:26px auto 0;text-align:center}
+.calendar>.eyebrow{font-size:11px;margin-bottom:10px}
+.teaser-photo{display:block}
+.teaser{display:grid;grid-template-columns:min(40vw,200px) 1fr;align-items:center;gap:22px;max-width:640px;margin:auto;padding:64px 24px}
+.teaser-text{min-width:0}
+.teaser-text h2{margin:4px 0 2px;font-size:clamp(46px,12vw,62px)}
+/* the pond band: deep pond blue under the primed canvas */
+.pond-band{background:var(--deep-pond) url(img/canvas-640.webp) 0 0/420px repeat;background-blend-mode:multiply;color:var(--cream)}
+.pond-band h2{color:var(--cream);text-shadow:0 1px 10px rgb(0 0 0/.35)}
+.pond-band .eyebrow{color:#e3d6f0}
+.day{text-align:center;padding:64px 24px}
+.day h2{margin:6px 0 2px}
+.day-peek{list-style:none;padding:0;margin:14px auto 28px;max-width:420px;display:grid;gap:8px;font-size:19px;overflow-wrap:anywhere}
+.day-peek li:nth-child(n+5){display:none}
+.day-peek .time{font:400 15px/1 var(--serif);letter-spacing:.12em;color:var(--lily);margin-right:8px}
+.signature{position:relative;text-align:center;padding:48px 20px 30px}
+.signature>.lilies{margin-bottom:6px}
+.signature>.fly{right:12%;top:14px;animation:none}
+.sig-names{font:400 58px/1 var(--script);margin:6px 0 10px;color:var(--deep-pond);overflow-wrap:anywhere}
+
+/* ---------------------------------------------------------------- story */
+.page-heading{text-align:center;padding:56px 24px 40px;max-width:720px;margin:auto}
+.page-heading>.eyebrow{margin-bottom:8px}
+.page-heading h1{margin-bottom:14px}
+.page-heading .intro{max-width:460px;margin:auto}
+.page-heading .venue-name{margin-top:4px}
+.page-heading>.lilies{margin-bottom:14px;width:min(70%,340px)}
+.story-page{position:relative;max-width:1000px;margin:auto}
+.story-page>.pad.p-1{left:66%;top:640px}
+.story-page>.pad.p-2{left:8%;top:1180px;rotate:40deg}
+.story-page>.fly{right:6%;top:1520px}
+.moment{position:relative;z-index:2;padding:0 24px;margin:0 0 64px;display:flex;flex-direction:column;align-items:flex-start}
+.moment-photo{width:min(62vw,320px)}
+.m-2{align-items:flex-end;text-align:right}
+.m-2 .moment-photo{width:min(58vw,300px)}
+.moment figcaption{padding-top:14px;max-width:min(74vw,420px);font-size:22px;line-height:1.45;overflow-wrap:anywhere}
+.moment figcaption .num{display:block;font:400 48px/.95 var(--script);color:var(--wisteria);margin-bottom:2px}
+.moment figcaption [data-empty]{display:none}
+
+/* ---------------------------------------------------------------- details */
+.details-page{max-width:1100px;margin:auto}
+.programme{padding:48px 24px 44px;margin:0 14px;box-shadow:0 14px 22px -14px rgb(47 58 69/.4)}
+.programme h2{text-align:center}
+.programme h2+.schedule{margin-top:22px}
+.schedule{list-style:none;margin:0 auto;padding:0;max-width:560px}
+.schedule li{position:relative;display:grid;grid-template-columns:24px 80px 1fr;gap:10px;padding:14px 0;border-top:1px solid var(--line)}
+.schedule li:first-child{border-top:0}
+.row-sprig{width:18px;aspect-ratio:547/989;margin:2px auto 0;background:url(img/accent_2-160.webp) center/contain no-repeat;transform-origin:50% 0}
+.schedule time{font:400 17px/1.65 var(--serif);color:var(--deep-pond);letter-spacing:.05em}
+.schedule h3{overflow-wrap:anywhere}
+.schedule p{font-size:17px;color:var(--ink-soft);margin-top:2px;overflow-wrap:anywhere}
+.ceremony{font-size:18px;color:var(--ink-soft);margin:22px auto 0;max-width:560px;text-align:center}
+.programme .calendar{margin-top:24px}
+.location{padding:56px 24px 10px;max-width:700px;margin:auto;text-align:center}
+.location h2{margin-bottom:22px}
+.venue-photo{margin:0 auto 18px}
+.venue-line{font-size:20px;overflow-wrap:anywhere}
+.map-section{margin-top:18px}
+.map-section .btn{white-space:normal}
+.detail-notes{display:grid;gap:26px;margin:40px auto 0;padding:0 24px;max-width:760px}
+.detail-note{border-top:1px solid var(--line);padding-top:24px}
+.detail-note h2,.faq h2{font-size:52px;margin-bottom:8px}
+.detail-note .body-text{margin-bottom:12px;overflow-wrap:anywhere}
+.faq{margin:44px auto 0;padding:0 24px;max-width:760px}
+.faq details{border-bottom:1px solid var(--line);padding:10px 0}
+.faq summary{cursor:pointer;min-height:44px;font-size:20px;padding:8px 30px 8px 0;list-style:none;position:relative;overflow-wrap:anywhere}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";content:"+" / "";position:absolute;right:4px;top:8px;color:var(--wisteria);font:400 22px/1 var(--serif)}
+.faq details[open] summary::after{content:"×";content:"×" / ""}
+.faq details .body-text{padding-block:10px;white-space:pre-line}
+
+/* ---------------------------------------------------------------- rsvp */
+.rsvp-page{max-width:640px;margin:auto;padding:0 20px}
+.rsvp-page .page-heading{padding-bottom:30px}
+.rsvp-page .page-heading>.eyebrow:last-of-type{margin-top:12px}
+.reply-cta{margin-top:20px}
+.reply-card{position:relative;padding:30px 22px 26px;filter:drop-shadow(0 14px 22px rgb(47 58 69/.22))}
+.reply-card .lilies{margin:18px auto 0;width:min(86%,360px)}
+.form-title{text-align:center;margin-bottom:6px}
+.reply-form{font:400 18px/1.7 var(--serif)}
+.field{display:block;margin-top:18px}
+.kicker{display:block;margin-bottom:8px;font:400 15px/1.7 var(--serif);letter-spacing:.05em;color:var(--deep-pond);overflow-wrap:anywhere}
+.opt{color:var(--ink-soft);font-size:14px}
+.field input,.field textarea,.question textarea{display:block;width:100%;border:1px solid rgb(47 58 69/.3);background:#fffdf7;color:var(--ink);min-height:48px;padding:12px;border-radius:6px;font:400 18px/1.5 var(--serif)}
+.field textarea,.question textarea{resize:vertical}
+.choice{border:0;padding:0;margin:22px 0 0;min-width:0}
+.choice legend{padding:0;width:100%}
+.choice label{display:flex;align-items:center;gap:10px;min-height:46px;color:var(--ink);overflow-wrap:anywhere}
+input[type=radio]{accent-color:var(--deep-pond);width:18px;height:18px;flex:none}
+.questions{margin-bottom:12px}
+.field-error{color:#a3211a;font:400 16px/1.6 var(--serif);margin-top:5px;overflow-wrap:anywhere}
+.field-error:empty{display:none}
+[aria-invalid=true]{border-color:#a3211a!important}
+.send{margin-top:26px}
+.send .btn{width:100%}
+.reply-panel{padding:18px 0;font:400 18px/1.8 var(--serif)}
+.panel-title{font:400 56px/1 var(--script);color:var(--deep-pond);margin-bottom:6px}
+.reply-panel[data-rsvp-state=error]{color:#a3211a}
+.reply-panel[data-rsvp-state=preview]{color:var(--ink-soft);border-top:1px solid var(--line);margin-top:18px}
+.note{color:var(--ink-soft)}
+html[data-rsvp-replied] .rsvp-page .page-heading .body-text{display:none}
+/* the reply is in: one small brushstroke is laid under the card's top (GPT W8) */
+.reply-stroke{display:block;width:min(70%,300px);aspect-ratio:1570/477;margin:-6px auto 6px;background:url(img/stroke_1-900.webp) center/100% 100% no-repeat;clip-path:inset(0 100% 0 0);opacity:.85}
+html[data-rsvp-replied] .reply-stroke{animation:stroke .8s cubic-bezier(.4,0,.3,1) forwards}
+.thank-you-copy{text-align:center}
+.thank-you-copy h2{margin-bottom:20px}
+
+/* ---------------------------------------------------------------- view transitions + scenes (docs/11 §8, §11) */
+@view-transition{navigation:auto}
+::view-transition-group(invite-card){animation-duration:.85s;animation-timing-function:cubic-bezier(.4,0,.2,1)}
+::view-transition-new(site-nav):only-child{animation:none}
+::view-transition-old(site-nav):only-child{animation:none;opacity:0}
+/* text comes up softly, like light on water (this design's step) */
+.js [data-step]{opacity:0;transform:translateY(10px);transition:opacity 1s ease-out,transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.js [data-step].in{opacity:1;transform:none}
+/* from painting to photograph: the photo comes in soft, saturated and under the canvas grain, then sharpens */
+.js .painted[data-step]{transform:none}
+.js .painted[data-step] .photo-slot>img{filter:blur(3px) saturate(1.7) contrast(.92);transition:filter 1.9s cubic-bezier(.5,0,.3,1)}
+.js .painted[data-step]>.tex{opacity:.9;transition:opacity 1.9s cubic-bezier(.5,0,.3,1)}
+.js .painted[data-step].in .photo-slot>img{filter:none;transition-delay:calc(var(--d,0ms) + 500ms)}
+.js .painted[data-step].in>.tex{opacity:0;transition-delay:calc(var(--d,0ms) + 500ms)}
+.js li[data-step] .row-sprig{transform:rotate(-30deg) scale(.6);opacity:0}
+.js li[data-step].in .row-sprig{animation:sprig 1.1s calc(var(--d,0ms) + 120ms) cubic-bezier(.3,1.4,.5,1) forwards}
+@keyframes sprig{to{transform:none;opacity:1}}
+/* lily pads drift and turn; the dragonfly hovers */
+.js .drift.pad{animation:pad 14s ease-in-out infinite alternate}
+.js .drift.p-2{animation-duration:17s;animation-delay:-6s}
+.js .drift.fly{animation:fly 9s ease-in-out infinite}
+@keyframes pad{to{translate:-28px 14px;rotate:24deg}}
+@keyframes fly{0%,100%{transform:translate(0,0) rotate(-6deg)}25%{transform:translate(-30px,-12px) rotate(4deg)}50%{transform:translate(-56px,6px) rotate(-2deg)}75%{transform:translate(-22px,16px) rotate(6deg)}}
+.from-envelope .hero-card [data-step]{opacity:1;clip-path:none;transform:none;transition:none;animation:none}
+.from-envelope .hero-card .photo-slot>img{filter:none!important;transition:none!important}
+.from-envelope .hero-card .tex{opacity:0!important;transition:none!important}
+.arrive-fade body{animation:fade-in .5s ease-out both}
+@keyframes fade-in{from{opacity:0}}
+.accent-layer{position:fixed;inset:0;pointer-events:none;z-index:30;overflow:hidden}
+
+@media(min-width:760px){
+.hero-card{width:410px;padding:40px 34px 34px}
+.invitation-copy,.invitation>.countdown,.invitation>.calendar{padding-inline:40px}
+.teaser{padding:90px 40px;gap:40px}
+.moment{padding:0 60px;margin-bottom:88px}
+.m-1,.m-3{padding-left:12%}
+.m-2{padding-right:12%}
+.detail-notes{grid-template-columns:repeat(2,1fr);gap:36px}
+.programme{padding:72px 40px;margin:0 auto;max-width:760px}
+.page-heading{padding-top:84px}
+.site-nav a{min-width:110px}
+}
+@media(max-width:359px){
+.hero{padding-inline:12px}
+.hero-card{padding:28px 16px 22px}
+.rsvp-page{padding-inline:12px}
+.reply-card{padding:24px 16px}
+.moment,.detail-notes,.faq,.location{padding-inline:16px}
+.programme{padding-inline:14px;margin-inline:8px}
+.schedule li{grid-template-columns:18px 72px 1fr;gap:8px}
+.row-sprig{width:14px}
+.cd-row{gap:8px}
+.teaser{gap:16px;padding-inline:16px}
+.site-nav a{min-width:60px;padding-inline:8px;letter-spacing:.06em}
+}
+@media(max-height:700px) and (max-width:759px){
+.opening{padding-top:56px}
+.opening .names{font-size:clamp(52px,15vw,70px)}
+.stage{--obj:min(58vw,calc((100svh - 270px) / 1.91),280px);margin-top:calc(var(--obj) / .7586 * .447 + 4px)}
+.opening:has(.names.long-names) .stage{--obj:min(54vw,calc((100svh - 300px) / 1.91),280px)}
+.opening-actions{margin-top:14px}
+.hero{padding-top:30px;padding-bottom:14px}
+.hero-card{padding:26px 18px 18px}
+.hero-photo{width:min(30vw,130px);margin-bottom:10px}
+.hero .names{font-size:clamp(52px,14vw,64px);margin:2px 0}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
+*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition:none!important}
+.js [data-step]{opacity:1!important;clip-path:none!important;transform:none!important}
+.js .painted[data-step] .photo-slot>img{filter:none!important}
+.js .painted[data-step]>.tex{opacity:0!important}
+.js li[data-step] .row-sprig{transform:none!important;opacity:1!important;animation:none!important}
+.js .drift{animation:none!important}
+.js .tap-hint{animation:none!important}
+::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation-duration:1ms!important}
+}
+#reply{scroll-margin-top:64px}
+html{scroll-padding-bottom:calc(var(--nav-h) + 12px)}
