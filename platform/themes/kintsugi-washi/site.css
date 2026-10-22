@@ -162,7 +162,7 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .is-opening .opening-date{animation:dim 400ms ease-in forwards}
 .is-opening .porcelain{animation:porcelain-off 1100ms 0ms cubic-bezier(.45,0,.3,1) forwards}
 .is-opening .cord{animation:cord-off 800ms 200ms cubic-bezier(.5,0,.4,1) forwards}
-.is-opening .envelope{animation:settle 900ms 700ms cubic-bezier(.2,.7,.3,1) forwards}
+.is-opening .envelope{animation:settle 1300ms 850ms cubic-bezier(.45,0,.35,1) forwards}
 .is-opening .f-n{animation:open-n 650ms 950ms cubic-bezier(.45,0,.3,1) forwards}
 .is-opening .f-e{animation:open-e 650ms 1170ms cubic-bezier(.45,0,.3,1) forwards}
 .is-opening .f-s{animation:open-s 650ms 1390ms cubic-bezier(.45,0,.3,1) forwards}

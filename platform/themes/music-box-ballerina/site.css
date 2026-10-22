@@ -4,7 +4,7 @@
    the card, hairline rules, form fields, buttons, the bottom nav, a rose-quartz tint over the satin band, and motion —
    the key turning, the lid swinging up onto its mirror, the ballerina rising and turning, the card rising, the misted
    mirrors clearing. Nothing is drawn here. */
-:root{--rose-quartz:#eecdd0;--blush:#f7e4e2;--cream:#fff8f4;--rose-gold:#b76e79;--deep-rose:#8a4a55;--gold:#c9a45c;
+:root{--rose-quartz:#eecdd0;--blush:#f7e4e2;--cream:#fff8f4;--rose-gold:#b76e79;--deep-rose:#7a3a47;--gold:#c9a45c;
 --gold-ink:#94733a;--ink:#4a2f35;--ink-soft:#6c4f55;--line:#4a2f3524;
 --script:'Ballet',fb1,fb2,'Snell Roundhand',cursive;--serif:'Gilda Display','Didot','Georgia',serif;
 --nav-h:62px;color-scheme:light;
@@ -95,7 +95,7 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .opening{position:relative;min-height:100svh;max-width:760px;margin:auto;padding:clamp(64px,9svh,100px) 18px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:clip}
 .opening-heading{position:relative;z-index:2;max-width:100%}
 .opening-heading>.eyebrow:first-child{margin-bottom:2px}
-.opening .names{font-size:clamp(44px,12.5vw,64px)}
+.opening .names{font-size:clamp(48px,14vw,70px)}
 /* the closed horizontal envelope: 1.283 wide per high (manifest stage); layers in % of it. The gap above it is the open
    lid's height (the lid's inside stands 110.6 % of the closed lid = 71.77 % of the envelope): the lid stands up there
    without covering the names; the size follows the screen height (heading, gap, envelope and actions ≈ 300 px + 1.34 ×

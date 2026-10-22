@@ -104,7 +104,7 @@ html[data-rsvp-replied] .lantern>.flame{animation:flame-up 1.6s ease-out forward
 .site-nav a[aria-current]{color:var(--champagne);text-decoration:underline;text-underline-offset:8px;text-decoration-color:rgb(199 169 120/.9)}
 
 /* ---------------------------------------------------------------- the envelope */
-.page-opening{padding-bottom:0;background:radial-gradient(ellipse at 28% 18%,rgb(200 210 220/.07) 0,rgb(200 210 220/0) 55%) fixed,radial-gradient(ellipse at 50% 62%,rgb(255 230 190/.06) 0,rgb(255 230 190/0) 60%) fixed,var(--charcoal) url(img/night-640.webp) 0 0/560px repeat}
+.page-opening{padding-bottom:0;background:radial-gradient(ellipse at 28% 18%,rgb(200 210 220/.07) 0,rgb(200 210 220/0) 55%) fixed,radial-gradient(ellipse 72% 46% at 50% 60%,rgb(236 214 178/.2) 0,rgb(236 214 178/.07) 45%,rgb(236 214 178/0) 72%) fixed,var(--charcoal) url(img/night-640.webp) 0 0/560px repeat}
 .skip{position:fixed;top:calc(6px + env(safe-area-inset-top));right:10px;z-index:20;padding-inline:14px;background:rgb(17 18 15/.7);border:1px solid rgb(199 169 120/.4);border-radius:100px;text-decoration:none;color:var(--champagne)}
 .sparks{position:fixed;inset:0;pointer-events:none;z-index:1}
 .sparks>i{position:absolute;width:22px;aspect-ratio:1;background:url(img/spark-160.webp) center/100% 100% no-repeat;opacity:0}
@@ -126,7 +126,7 @@ html[data-rsvp-replied] .lantern>.flame{animation:flame-up 1.6s ease-out forward
 .opening:has(.names.long-names) .stage{--obj:min(62vw,calc((100svh - 300px) / 2.3),300px)}
 .envelope{position:relative;width:100%;aspect-ratio:0.7153}
 .envelope>*{position:absolute}
-.back{inset:0;z-index:0;background:url(img/back-720.webp) 0 0/100% 100% no-repeat;filter:drop-shadow(0 18px 22px rgb(0 0 0/.6))}
+.back{inset:0;z-index:0;background:url(img/back-720.webp) 0 0/100% 100% no-repeat;filter:drop-shadow(0 0 1px rgb(224 199 164/.55)) drop-shadow(0 0 18px rgb(236 214 178/.16)) drop-shadow(0 18px 22px rgb(0 0 0/.6))}
 /* light shimmering on the painted moon path: a brightened copy of the lining (GPT pixels) seen through moving bands */
 .shimmer{left:34%;top:3%;width:32%;height:48%;z-index:1;pointer-events:none;opacity:0;-webkit-mask:radial-gradient(ellipse 50% 50% at 50% 50%,#000 30%,transparent 100%);mask:radial-gradient(ellipse 50% 50% at 50% 50%,#000 30%,transparent 100%)}
 .shimmer>i{position:absolute;inset:0;background:url(img/back-720.webp) 50% 5.77%/312.5% 208.33% no-repeat;filter:brightness(1.9) contrast(1.25);mix-blend-mode:screen;-webkit-mask:repeating-linear-gradient(180deg,#000 0 3px,transparent 3px 9px) 0 0/100% 36px;mask:repeating-linear-gradient(180deg,#000 0 3px,transparent 3px 9px) 0 0/100% 36px}

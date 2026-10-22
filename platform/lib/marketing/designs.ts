@@ -1300,7 +1300,7 @@ const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> 
   },
 };
 
-// The eleven rebuilt designs now share the complete Blush page structure.
+// Shared preview copy for the eleven designs of docs/35; each one's own fonts, pages and palette come from REBUILT below.
 for (const [id, preview] of Object.entries(PREVIEW_DESIGN_COPY)) {
   const full = DESIGN_COPY[id];
   if (!full) continue;
@@ -1311,16 +1311,6 @@ for (const [id, preview] of Object.entries(PREVIEW_DESIGN_COPY)) {
   full.fonts = ['Cormorant Garamond', 'Great Vibes', 'Lora'];
   full.llmsLine = full.style + '. A layered envelope opening, ornate photo cards, story, details and RSVP.';
   full.palette = [{name: msg('Ivory paper'), hex: '#F5EEE2'}, {name: msg('Gold'), hex: '#B99459'}, ...full.palette.slice(0, 2)];
-}
-
-// Interior art/layout/motion differ for these eleven previews; envelope copy and other products are unchanged.
-const UNIQUE_INTERIORS: Record<string,{fonts:string[];home:string;story:string;details:string;rsvp:string}> = {
-};
-for(const [id,p]of Object.entries(UNIQUE_INTERIORS)){
- const full=DESIGN_COPY[id];
- full.fonts=[...p.fonts];
- full.intro=msg(p.home);
- full.pages={home:msg(p.home),story:msg(p.story),details:msg(p.details),rsvp:msg(p.rsvp)};
 }
 
 // Rebuilt from the design's own layered GPT parts (docs/35, 2026-10-22; pilot G423): its own fonts, pages and palette

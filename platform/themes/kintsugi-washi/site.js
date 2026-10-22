@@ -14,7 +14,7 @@ const MOTION = {
     head: [0, 400],         // "Tap to open" and the date line fade (the names stay)
     button: [0, 1100],      // the porcelain button turns half a turn, then lifts away toward the viewer and fades
     cord: [200, 800],       // the cord unwinds: it slackens, turns a little and slides off to the right
-    settle: [700, 900],     // the stage settles back to .52: the open packet is about twice as wide
+    settle: [850, 1300],    // the stage settles back to .52 while the flaps unfold: the open packet is about twice as wide
     flapN: [950, 650],      // the four flaps unfold in pinwheel order, 220 ms apart, each on its own hinge (3D),
     flapE: [1170, 650],     //   onto its real inner face
     flapS: [1390, 650],
