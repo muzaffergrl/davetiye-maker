@@ -9,7 +9,7 @@ keyword: what to put on a wedding website
 quickAnswer: Every wedding website needs your names, the date, the ceremony time with its time zone, the venue with a map link, the schedule, and how and by when to RSVP. Helpful extras are your story, travel and hotel details, the dress code, a registry link and answers to common questions. Leave off your home address and private plans.
 ---
 
-A wedding website has one job: to answer your guests' questions before they have to ask you. Good ones are short, accurate and easy to read on a phone. This checklist sorts everything into three groups, so you can start with what matters and stop when you have enough.
+A wedding website has one job: to answer your guests' questions before they have to ask you. Good ones are short, accurate and easy to read on a phone. This checklist sorts everything into three groups, so you can start with what matters and stop when you have enough. Not sure you need a website at all? See [digital invitation or wedding website](/guides/wedding-website-vs-invitation).
 
 ## The must-haves
 

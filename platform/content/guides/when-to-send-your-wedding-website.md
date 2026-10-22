@@ -46,7 +46,7 @@ Everyone who receives a save the date should later receive an invitation. If you
 Invitations traditionally go out six to eight weeks before the wedding. Whether your invitation is printed or digital, it should point guests to the website for the details and the reply. Two common ways:
 
 - **A link in the message** you send with a digital invitation. Check that the link preview shows your names and date.
-- **A QR code or short link** on a details card in a paper invitation. Scan the printed proof with two phones before printing everything.
+- **A QR code or short link** on a details card in a paper invitation. Scan the printed proof with two phones before printing everything. Our guide on [putting your website on the invitation](/guides/wedding-website-on-invitation) has wording for each card.
 
 Etiquette guides differ on putting the website address on the main invitation card; a separate details card is the safe middle ground. Registry information never goes on the invitation itself.
 

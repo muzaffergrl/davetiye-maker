@@ -51,7 +51,7 @@ Search for animated envelope invitations and you will see two quite different pr
 Two questions usually decide it:
 
 - **Do you want the service to send the invitations for you?** If yes, and open tracking matters to you, an emailed card is built for that.
-- **Do you also need a wedding website?** If yes, an envelope that opens into the website gives you one link for everything, instead of a card plus a second site. Our guide on [what to put on your wedding website](/guides/what-to-put-on-your-wedding-website) shows what that site usually needs.
+- **Do you also need a wedding website?** If yes, an envelope that opens into the website gives you one link for everything, instead of a card plus a second site. Our guide on [what to put on your wedding website](/guides/what-to-put-on-your-wedding-website) shows what that site usually needs, and [digital invitation or wedding website](/guides/wedding-website-vs-invitation) compares the set-ups in more detail.
 
 ## What to check before you choose
 

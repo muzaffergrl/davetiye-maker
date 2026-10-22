@@ -99,7 +99,7 @@ Practical beats poetic here. Give names, distances and deadlines.
 
 ## RSVP wording
 
-The RSVP line should include the deadline, written out. The decline option should be as kind as the accept option.
+The RSVP line should include the deadline, written out. The decline option should be as kind as the accept option. For the lines that point guests from a printed card to your website, see [how to put your wedding website on the invitation](/guides/wedding-website-on-invitation).
 
 | Tone | Reply line | Accept | Decline |
 |---|---|---|---|
