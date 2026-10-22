@@ -1218,6 +1218,15 @@ const dict: Dict = {
   "Suede": "Wildleder",
   "Cream lace": "Cremespitze",
   "Sunset peach": "Sonnenuntergangspfirsich",
+  // Ivory Pearl Atelier
+  "Ivory cotton paper, champagne silk and a mother-of-pearl seal with fine gold edges": "Elfenbeinfarbenes Baumwollpapier, champagnerfarbene Seide und ein Perlmuttsiegel mit feinen Goldrändern",
+  "An ivory wedding website with champagne silk, a pearl seal that turns away and an invitation that rises in an arc. Personalize it in your online editor.": "Eine elfenbeinfarbene Hochzeitswebsite mit Champagnerseide, drehendem Perlensiegel und sanft aufsteigender Einladung. Im Online-Editor personalisierbar.",
+  "Quiet ivory, champagne silk and a luminous pearl. Fine gold edges and textured cotton paper give this invitation its understated bridal elegance.": "Sanftes Elfenbein, champagnerfarbene Seide und eine leuchtende Perle. Feine Goldränder und strukturiertes Baumwollpapier verleihen dieser Einladung dezente Eleganz.",
+  "Your guests tap the envelope. The pearl seal turns and follows an arc to the side while the two halves of the silk bow drift apart. The gold-edged flap lifts, and the letter rises with a gentle tilt before coming forward into the home page.": "Ihre Gäste tippen auf den Umschlag. Das Perlensiegel dreht sich in einem Bogen zur Seite, während sich die beiden Hälften der Seidenschleife lösen. Die goldgeränderte Klappe öffnet sich, und die Karte steigt leicht geneigt auf, bevor sie zur Startseite wird.",
+  "Your portrait on an ivory card, a formal invitation, a countdown and a fan of three photographs that opens as guests scroll.": "Ihr Porträt auf einer elfenbeinfarbenen Karte, eine förmliche Einladung, ein Countdown und drei Fotos, die sich beim Scrollen wie ein Fächer öffnen.",
+  "Three photographs revealed from left to right like silk being drawn away, each followed by a soft pass of light and your own caption.": "Drei Fotos erscheinen von links nach rechts wie unter zurückgezogener Seide, jeweils mit sanftem Licht und Ihrer eigenen Bildunterschrift.",
+  "An ivory programme, your venue photograph, directions, calendar links, dress code, travel, the menu and questions and answers.": "Ein elfenbeinfarbenes Programm, Ihr Veranstaltungsfoto, Wegbeschreibung, Kalenderlinks, Kleiderordnung, Anreise, Menü sowie Fragen und Antworten.",
+  "A simple ivory reply card. After a reply, a single nacre light pass crosses the confirmation and the thank-you title settles gently into place.": "Eine schlichte elfenbeinfarbene Antwortkarte. Nach der Antwort gleitet einmal Perlmuttschimmer über die Bestätigung, und der Dankestitel setzt sich sanft an seinen Platz.",
 };
 
 export default dict;

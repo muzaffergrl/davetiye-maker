@@ -171,7 +171,9 @@ async function designAssets(
     if (unknown.length) throw new Error(`--designs: no design with copy in lib/marketing: ${unknown.join(', ')}`);
   }
   if (opts.shotsDir && only?.length !== 1) throw new Error('--shots needs exactly one design: --designs <id> --shots <dir>');
-  for (const d of MARKETING.designs) {
+  // Match the catalogue manifest contract: live captures first, followed by preview captures.
+  const ordered = [...MARKETING.designs].sort((a, b) => Number(a.status !== 'live') - Number(b.status !== 'live'));
+  for (const d of ordered) {
     const copy = DESIGN_COPY[d.id];
     if (!copy) continue; // 'coming' designs without copy yet
     if (only && !only.includes(d.id)) {

@@ -400,6 +400,7 @@ D = [
 # final-smoke koleksiyonu buradan bulur). Ayırt edicilik / WEB / STORY denetimi bunlara uygulanmaz — tam katalog kaydı
 # açılırsa D'ye taşınır ve buradan silinir.
 EK_TEMALAR = [
+    dict(no=49, klasor="49_Ivory_Pearl_Atelier", ad="Ivory Pearl Atelier"),
     dict(no=21, klasor="21_Crimson_Rose_Atelier", ad="Crimson Rose Atelier"),
     dict(no=22, klasor="22_Nocturne_Lake_Estate", ad="Nocturne Lake Estate"),
     # docs/24 dalgası (23–28): eksenler + hareket imzası yazılı; `kontrol` bunları D'ye ve birbirine karşı ayırt eder

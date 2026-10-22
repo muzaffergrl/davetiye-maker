@@ -31,6 +31,7 @@ export const DEMO_CITY_PINS: Readonly<Record<string, { lat: number; lng: number 
   'nocturne-lake-estate': { lat: 45.9857, lng: 9.2617 }, // Bellagio (Lake Como)
   'orient-express-voyage': { lat: 45.4408, lng: 12.3155 }, // Venice
   'papel-picado-fiesta': { lat: 29.4241, lng: -98.4936 }, // San Antonio, TX (the courtyard is fictional)
+  'ivory-pearl-atelier': { lat: 32.0809, lng: -81.0912 }, // Savannah, same fictional Clara & Julian sample
   'silver-photo-booth': { lat: 38.627, lng: -90.1994 }, // Saint Louis, MO (the ballroom is fictional)
   'swan-chantilly-lace': { lat: 41.0262, lng: -73.6282 }, // Greenwich, CT (the house is fictional)
   'chartreuse-garden-party': { lat: 36.1627, lng: -86.7816 }, // Nashville, TN (the garden terrace is fictional)

@@ -287,6 +287,13 @@
       "story_2": "/demo/winter-evergreen/story_2-1024w.webp",
       "story_3": "/demo/winter-evergreen/story_3-1024w.webp",
       "venue": "/demo/winter-evergreen/venue-1280w.webp"
+    },
+    "ivory-pearl-atelier": {
+      "hero_portrait": "/demo/ivory-pearl-atelier/hero_portrait-1024w.webp",
+      "story_1": "/demo/ivory-pearl-atelier/story_1-1024w.webp",
+      "story_2": "/demo/ivory-pearl-atelier/story_2-1024w.webp",
+      "story_3": "/demo/ivory-pearl-atelier/story_3-1024w.webp",
+      "venue": "/demo/ivory-pearl-atelier/venue-1280w.webp"
     }
   }
 }

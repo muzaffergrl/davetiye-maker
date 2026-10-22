@@ -642,6 +642,16 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-17',
     },
+    // 49: user requested catalogue release; the Etsy listing is prepared separately.
+    {
+      id: 'ivory-pearl-atelier',
+      name: 'Ivory Pearl Atelier',
+      status: 'live',
+      price: '1460',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-22',
+    },
   ],
 };
 

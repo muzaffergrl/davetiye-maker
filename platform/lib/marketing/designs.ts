@@ -515,6 +515,23 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     llmsLine: 'a kraft envelope tied with a band of papel picado flags that fly up into a waving garland; photos hang in cut-paper frames that sway in the breeze; fuchsia, marigold, turquoise and terracotta.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
+  'ivory-pearl-atelier': {
+    id: 'ivory-pearl-atelier', collection: '49_Ivory_Pearl_Atelier', demoCouple: 'Clara & Julian',
+    style: msg('Ivory cotton paper, champagne silk and a mother-of-pearl seal with fine gold edges'),
+    metaDescription: msg('An ivory wedding website with champagne silk, a pearl seal that turns away and an invitation that rises in an arc. Personalize it in your online editor.'),
+    intro: msg('Quiet ivory, champagne silk and a luminous pearl. Fine gold edges and textured cotton paper give this invitation its understated bridal elegance.'),
+    opening: msg('Your guests tap the envelope. The pearl seal turns and follows an arc to the side while the two halves of the silk bow drift apart. The gold-edged flap lifts, and the letter rises with a gentle tilt before coming forward into the home page.'),
+    pages: {
+      home: msg('Your portrait on an ivory card, a formal invitation, a countdown and a fan of three photographs that opens as guests scroll.'),
+      story: msg('Three photographs revealed from left to right like silk being drawn away, each followed by a soft pass of light and your own caption.'),
+      details: msg('An ivory programme, your venue photograph, directions, calendar links, dress code, travel, the menu and questions and answers.'),
+      rsvp: msg('A simple ivory reply card. After a reply, a single nacre light pass crosses the confirmation and the thank-you title settles gently into place.'),
+    },
+    palette: [{ name: msg('Ivory'), hex: '#F4EFE6' }, { name: msg('Champagne'), hex: '#D4C1A1' }, { name: msg('Antique Gold'), hex: '#B59A69' }],
+    fonts: ['Cormorant Garamond', 'Lora'],
+    llmsLine: 'ivory cotton, champagne silk, a turning pearl seal, a split silk bow, a letter rising in an arc, silk-wipe photographs and a nacre RSVP confirmation.',
+    relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
+  },
   // G439 (coming): written against the theme as built from the design's own GPT parts (fourth wave pilot).
   'silver-photo-booth': {
     id: 'silver-photo-booth',
@@ -1707,6 +1724,7 @@ export const DESIGN_STYLES: Record<string, readonly StyleId[]> = {
   'victorian-glasshouse': ['classic', 'floral'],
   'art-nouveau-lily': ['classic', 'floral'],
   'papel-picado-fiesta': ['destination', 'rustic'],
+  'ivory-pearl-atelier': ['classic'],
   'silver-photo-booth': ['classic'],
   'swan-chantilly-lace': ['classic'],
   'chartreuse-garden-party': ['floral', 'classic'],

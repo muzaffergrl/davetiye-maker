@@ -57,6 +57,7 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   // Papel Picado Fiesta: the band works loose (band) · the flags fly up (flags) · the flap swings open (flap) · the lights come on (lights) · card rises (rise) · forward
   'papel-picado-fiesta': { music: 'garden-waltz', opening: [[250, 'ribbon'], [700, 'whoosh'], [1500, 'paper'], [1900, 'chime'], [2500, 'slide'], [3100, 'chime']] },
   // Silver Photo Booth: the flashbulb fires (tap) · the strip slides off (whoosh) · the flap swings open (paper) · card rises (slide) · the second flash (chime)
+  'ivory-pearl-atelier': { music: 'first-light', opening: [[0, 'clasp'], [120, 'ribbon'], [1100, 'paper'], [1950, 'slide'], [3300, 'chime']] },
   'silver-photo-booth': { music: 'evening-strings', opening: [[0, 'tap'], [180, 'whoosh'], [1150, 'paper'], [1700, 'slide'], [2200, 'chime']] },
   // Swan Chantilly Lace: the seal lifts (seal) · the ribbon tails slip (ribbon) · the lace rises (whoosh) · the flap opens (paper) · card rises (slide) · forward (chime)
   'swan-chantilly-lace': { music: 'evening-strings', opening: [[0, 'seal'], [250, 'ribbon'], [700, 'whoosh'], [1500, 'paper'], [2100, 'slide'], [2750, 'chime']] },

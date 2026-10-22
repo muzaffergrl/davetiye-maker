@@ -1,0 +1,119 @@
+{
+  "status": "source_artwork",
+  "items": [
+    {
+      "file": "comps/W1_opening.png",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "mode": "RGB",
+      "alpha_extrema": null,
+      "nonzero_alpha_bbox": null
+    },
+    {
+      "file": "parts/accent_bow.png",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "nonzero_alpha_bbox": [
+        0,
+        22,
+        1518,
+        1008
+      ]
+    },
+    {
+      "file": "parts/closure.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "nonzero_alpha_bbox": [
+        0,
+        21,
+        1253,
+        1254
+      ]
+    },
+    {
+      "file": "parts/envelope_closed.png",
+      "dimensions": [
+        1484,
+        1060
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "nonzero_alpha_bbox": [
+        0,
+        112,
+        1459,
+        1044
+      ]
+    },
+    {
+      "file": "parts/envelope_open.png",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "nonzero_alpha_bbox": [
+        0,
+        17,
+        1440,
+        1000
+      ]
+    },
+    {
+      "file": "parts/invitation_card.png",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "nonzero_alpha_bbox": [
+        0,
+        21,
+        996,
+        1446
+      ]
+    },
+    {
+      "file": "textures/bg_page.png",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "mode": "RGB",
+      "alpha_extrema": null,
+      "nonzero_alpha_bbox": null
+    }
+  ],
+  "limitations": [
+    "Original source envelope states differ in footprint. Production build normalizes layers to the closed body; see platform/themes/ivory-pearl-atelier/img/manifest.json.",
+    "W1 demo copy is illustrative only; production personal text is editable."
+  ]
+}

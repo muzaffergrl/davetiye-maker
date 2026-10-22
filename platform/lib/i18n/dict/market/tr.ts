@@ -1218,6 +1218,15 @@ const dict: Dict = {
   "Suede": "Süet",
   "Cream lace": "Krem dantel",
   "Sunset peach": "Gün batımı şeftalisi",
+  // Ivory Pearl Atelier
+  "Ivory cotton paper, champagne silk and a mother-of-pearl seal with fine gold edges": "Fildişi pamuk kâğıdı, şampanya rengi ipek ve ince altın kenarlı sedef mühür",
+  "An ivory wedding website with champagne silk, a pearl seal that turns away and an invitation that rises in an arc. Personalize it in your online editor.": "Şampanya rengi ipek, dönerek ayrılan inci mühür ve yay çizerek yükselen kartla fildişi düğün sitesi. Kendi çevrimiçi panelinizde kişiselleştirin.",
+  "Quiet ivory, champagne silk and a luminous pearl. Fine gold edges and textured cotton paper give this invitation its understated bridal elegance.": "Sakin fildişi, şampanya rengi ipek ve ışıldayan bir inci. İnce altın kenarlar ve dokulu pamuk kâğıdı, bu davetiyeye sade bir gelin zarafeti katıyor.",
+  "Your guests tap the envelope. The pearl seal turns and follows an arc to the side while the two halves of the silk bow drift apart. The gold-edged flap lifts, and the letter rises with a gentle tilt before coming forward into the home page.": "Misafirleriniz zarfa dokunur. İnci mühür dönerek bir yay çizer ve yana süzülürken ipek fiyongun iki yanı ayrılır. Altın kenarlı kapak kalkar; kart hafifçe eğilerek yükselir ve öne gelerek ana sayfaya dönüşür.",
+  "Your portrait on an ivory card, a formal invitation, a countdown and a fan of three photographs that opens as guests scroll.": "Fildişi kartta portreniz, resmî davet metni, geri sayım ve misafirler kaydırdıkça yelpaze gibi açılan üç fotoğraf.",
+  "Three photographs revealed from left to right like silk being drawn away, each followed by a soft pass of light and your own caption.": "İpek bir örtü çekiliyormuş gibi soldan sağa beliren üç fotoğraf; her birinde yumuşak bir ışık geçişi ve kendi açıklamanız.",
+  "An ivory programme, your venue photograph, directions, calendar links, dress code, travel, the menu and questions and answers.": "Fildişi program, mekân fotoğrafınız, yol tarifi, takvim bağlantıları, kıyafet kuralı, ulaşım, menü ve sorular-cevaplar.",
+  "A simple ivory reply card. After a reply, a single nacre light pass crosses the confirmation and the thank-you title settles gently into place.": "Sade bir fildişi yanıt kartı. Yanıttan sonra onayın üzerinden tek bir sedef ışığı geçer ve teşekkür başlığı yavaşça yerine yerleşir.",
 };
 
 export default dict;

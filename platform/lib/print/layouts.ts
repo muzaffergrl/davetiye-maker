@@ -510,6 +510,13 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
       back: { bg: cover('paper'), images: flagGarland(4, 2.5, 8) },
     },
   },
+  'ivory-pearl-atelier': {
+    collection: '49_Ivory_Pearl_Atelier',
+    sources: { card: 'parts/invitation_card.png', back: 'parts/invitation_card.png', paper: 'textures/bg_page.png' },
+    fonts: gf('family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lora:ital,wght@0,400;1,400'),
+    script: "'Cormorant Garamond', Georgia, serif", serif: "'Lora', Georgia, serif",
+    ink: '#55432E', accent: '#8A683C', front: [16, 17, 16, 17], back: [16, 17, 16, 17], paper: { mode: 'cover' },
+  },
   // 39 (G439, 2026-10-21): the design's own PAKET 6 grounds (ivory card stock; front: a strand of silver star sequins
   // with ivory ranunculus across the top and a hairline with a star at the foot; back: a short strand at the top), one per
   // side, `cover` for 5×7 and A5 (ChatGPT's 1068×1473, ~200 ppi). Ornament measured on the art: front 5–15 % and

@@ -57,6 +57,7 @@ from listing_kit import listing_fields, tag_problems, title_problems  # noqa: E4
 
 REPO = TOOLS.parent
 DESIGNS = [
+    ("49", "49_Ivory_Pearl_Atelier", "ivory-pearl-atelier"),
     ("01", "01_Olive_Ivory", "olive-ivory"),
     ("02", "02_Dusty_Blue", "dusty-blue-champagne"),
     ("03", "03_Blush_Garden_Rose", "blush-garden-rose"),
