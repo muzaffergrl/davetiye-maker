@@ -326,6 +326,8 @@ const dict: Dict = {
   "Love in black and white": "Amor en blanco y negro",
   // G448 Navy Ivory Crest (48, coming)
   "Together, always": "Juntos, siempre",
+  // G441 Painted Lily Pond (41, coming)
+  "Painted with love": "Pintado con amor",
 };
 
 export default dict;

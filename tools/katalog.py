@@ -544,6 +544,12 @@ EK_TEMALAR = [
          dekor="Altın gravür defne çelengi ve boş kalkan, kör kabartma kartuş, kalkan mum mühür, lacivert grogren kurdele ve fiyonk, beyaz manolya, defne yaprağı, lacivert keten, fildişi pamuk", teknik="gravür + kör kabartma (letterpress) + fotogerçekçi keten / kâğıt / mum / çiçek",
          font=("Mr De Haviland", "Goudy Bookletter 1911"), palet_adi="navy-ivory-laurel",
          hareket="Kabartma üstünde altın ışık süpürmesi, kalkan mührün kurdele diliyle kalkıp yana dönmesi, cüzdan kapağının 3B açılışı, yatık kartın doğrularak yükselmesi, armanın aşağıdan yukarı kazınması ve baş harflerin mürekkeplenmesi, fotoğraflarda kabartmadan tona geçiş, program satırlarında açılan altın yaprak, yanıtta kartın altına basılan kalkan mühür ve manolya yaprağı yağmuru."),
+    dict(no=41, klasor="41_Painted_Lily_Pond", ad="Painted Lily Pond",
+         zarf="Dikey krem keten-tuval portföy zarf, düz kapak, alt kenarı yırtık (deckle); kapağın dış yüzü kalın fırçayla boyanmış küçük bir nilüfer havuzu tablosu, alt kenarın ortasında nilüfer kabartmalı leylak mum mühür. Mühür kalkar, kapak 3B açılıp leylak-mavi lavisi gösterir, dört geniş fırça darbesi zarfın arkasından tek tek süpürüp tam ekran bahçe tablosunu boyayarak açar, kart sudan yükselir gibi kalkar (altında su üstünde ışık halkası).",
+         foto="Kenarları empresyonist bahçe boyalı gerilmiş tuval panolar: fotoğraf önce bulanık, doygun ve tuval dokusu altında bir tablo gibi gelir, sahnesine oturunca keskin fotoğrafa döner. Mekân geniş tuval pano.",
+         dekor="Nilüfer yaprakları ve pembe nilüferler, mor salkım, söğüt, uzakta küçük kavisli bahçe köprüsü, yusufçuk, geniş boya darbeleri, keten tuval dokusu, leylak mum mühür", teknik="empresyonist yağlı boya (kalın impasto, görünür fırça, kırık renk) + gerçek keten tuval dokusu",
+         font=("Comforter Brush", "Arapey"), palet_adi="lilypond-lilac-sage",
+         hareket="Leylak mührün kalkması, kapağın 3B açılışı, dört fırça darbesinin sırayla ekranı boyayıp bahçe tablosunu açması, sudan yükselen kart ve su üstünde genişleyen ışık, tablodan fotoğrafa netleşen fotoğraflar, süzülen nilüfer yaprakları ve havada duran yusufçuk, program satırlarında sallanan mor salkım dalı, yanıtta tek fırça darbesi."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

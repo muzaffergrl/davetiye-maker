@@ -37,6 +37,7 @@ export const DEMO_CITY_PINS: Readonly<Record<string, { lat: number; lng: number 
   'bordeaux-silk-bow': { lat: 39.9526, lng: -75.1652 }, // Philadelphia, PA (the club is fictional)
   'monochrome-darkroom': { lat: 44.9778, lng: -93.265 }, // Minneapolis, MN (the gallery is fictional)
   'navy-ivory-crest': { lat: 38.9784, lng: -76.4922 }, // Annapolis, MD (the manor is fictional)
+  'painted-lily-pond': { lat: 38.2919, lng: -122.458 }, // Sonoma, CA (the water garden is fictional)
   'grand-theatre-premiere': { lat: 37.5407, lng: -77.436 }, // Richmond, VA (the theatre is fictional)
   'highland-tartan-thistle': { lat: 56.7036, lng: -3.73 }, // Pitlochry, Perthshire (the house is fictional)
   'olive-ivory': { lat: 38.2975, lng: -122.2869 }, // Napa
