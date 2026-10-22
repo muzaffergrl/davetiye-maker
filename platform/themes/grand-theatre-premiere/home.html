@@ -1,174 +1,157 @@
-<!DOCTYPE html><!-- Grand Theatre Premiere · page 2 — home (/<slug>/home): hero (the card from the envelope with the hero photo slot, names,
-     date, live countdown), invitation card (comp scene 4) + add to calendar (G051), teasers. Works when opened directly.
-     Personal text: none — [data-field] / [data-text] / [data-repeat] / [data-photo] are filled on the server.
-     Lines without a marker are design copy. Visuals: GPT parts in img/.
-     Thank-you mode (G075, data-if="thank_you_on"): the hero keeps the card (thank-you photo or the bow on mist), names,
-     date and place, without the countdown; the invitation card becomes the thank-you card (title, the couple's message,
-     "With love," and the names); no reply call, no calendar; the teasers keep Our Story and The Day. --><html lang="en" class="no-js"><head>
+<!doctype html>
+<!-- Grand Theatre Premiere · page 2 — home (/<slug>/home). Redesign of 2026-10-22 (docs/35 row 24, G424). On ivory
+     programme paper the programme card from the envelope (view transition invite-card), gilded acanthus and a burgundy
+     rose at its two upper corners: the portrait in the gilded proscenium (a spotlight passes over it once), the names in
+     Abril Fatface, the date and the venue. The invitation on a band of peacock-teal velvet between two gilded acanthus
+     dividers (full names, the date in three lines, venue, reply), countdown and calendar; the story teaser — a page of the
+     programme with its photo; the day on an ivory band; the signature — the brass opera glasses, the names, the way back
+     to the envelope. Text comes up as if the house lights found it. Personal text: none — filled on the server.
+     Thank-you mode (G075): the invitation becomes the thank-you card; countdown, reply call and calendar go.
+     Design texts: data-copy (G068). -->
+<html lang="en" class="no-js">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title data-text="{name_display} · {date}">Wedding</title>
-<meta name="description" data-if="!thank_you_on" data-attr-content="{name_display} · {date|date-long} · {venue.city_region}" content="Wedding website">
+<meta name="theme-color" content="#f3ebd8">
+<title data-text="{name_display} · {copy.card_line}">Grand Theatre Premiere</title>
+<meta name="description" data-if="!thank_you_on" data-attr-content="{copy.card_line} · {name_display} · {date|date-long} · {venue.city_region}" content="A wedding invitation">
 <meta name="description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {name_display} · {date|date-long}" content="Thank you">
 <meta property="og:type" content="website">
-<meta property="og:title" data-attr-content="{name_display} · {date}" content="Wedding">
-<meta property="og:description" data-if="!thank_you_on" data-attr-content="{date|date-long} · {venue.name} · {venue.city_region}" content="">
+<meta property="og:title" data-attr-content="{name_display} · {date}" content="Wedding invitation">
+<meta property="og:description" data-if="!thank_you_on" data-attr-content="{copy.card_line} · {date|date-long} · {venue.city_region}" content="Our wedding">
 <meta property="og:description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {date|date-long}" content="Thank you">
-<meta name="theme-color" content="#F5EEE2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italianno&amp;family=Bodoni+Moda&amp;family=Lora&amp;display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap">
 <style>/* names fallback: scripts/font-fallback.ts */
 @font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:85.4%;ascent-override:99.5%;descent-override:46.8%;line-gap-override:0%}
 @font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:73.4%;ascent-override:115.7%;descent-override:54.5%;line-gap-override:0%}</style>
-<link rel="stylesheet" href="site.css"><link rel="stylesheet" href="interior.css">
+<link rel="stylesheet" href="site.css">
 <link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
 <script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
 (function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'',s=sessionStorage;if(s.getItem('invite:arrive'+k)){s.removeItem('invite:arrive'+k);r.classList.add('from-envelope');if(!('onpageswap' in window&&document.startViewTransition))r.classList.add('arrive-fade');}}catch(e){}})(document.documentElement);
 </script>
-<script src="site.js" defer=""></script>
-<script>(function(r){if(!matchMedia("(prefers-reduced-motion: reduce)").matches){r.classList.add("u-loading");setTimeout(function(){r.classList.remove("u-loading")},2200)}})(document.documentElement);</script><script src="interior-motion.js" defer=""></script></head>
-<body data-pending="This link will be added soon." data-interior="grand-theatre-premiere" data-interior-layout="theatre">
-
-<main class="site-main">
-
-  <!-- HERO -->
-  <section class="hero" data-scene="home-hero" aria-label="Welcome">
-    
-    <div class="hero-inner">
-      <div class="card hero-card u-hero-card" data-u-part="card">
-        <div class="u-frame"><div class="photo-slot" data-slot="hero_portrait">
-          <img data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_interior-480.webp" srcset="img/ph_interior-480.webp 480w, img/ph_interior-800.webp 800w" sizes="(min-width:768px) 520px, 80vw" alt="" data-attr-alt="Photo of {name_display}">
-          <span class="ph-mark" data-if="!thank_you_on" aria-hidden="true"><span>Your photo here</span></span>
-          <img class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_hero_portrait-320.webp" sizes="(min-aspect-ratio: 1/1) and (max-height: 620px) and (max-width: 959px) min(44vh, 177px), min(38vw, 20vh, 177px)" alt="" data-attr-alt="Photo of {name_display}">
-          <span class="ty-decor" data-if="thank_you_on !thank_you.photo" aria-hidden="true"><img src="img/ph_interior-480.webp" sizes="min(34vw, 18vh, 160px)" alt=""></span>
-        </div><img class="u-art" src="img/interior-frame-480.webp" srcset="img/interior-frame-480.webp 480w, img/interior-frame-800.webp 800w" sizes="(min-width:768px) 520px, 92vw" alt="" fetchpriority="high"></div>
-        
-        
-      <div class="u-card-meta">
-          <p class="script" data-if="!thank_you_on" data-copy="card_line">We're getting married</p>
-          <p class="script ty-title" data-if="thank_you_on" data-field="thank_you_title"></p>
-          
-          
-        </div></div>
-      <h1 class="script names" data-u-part="names"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></h1>
-      <p class="kicker hero-date" data-u-part="date"><span data-field="date" data-format="weekday"></span> · <span data-field="date"></span></p>
-      <p class="hero-place" data-u-part="place"><span data-field="venue.name"></span><br><span data-field="venue.city_region"></span></p>
-      <!-- live countdown: the platform computes the UTC target (date + ceremony_time + timezone) → site.js -->
-      <div class="countdown" data-optional="countdown" data-if="countdown_target_utc !thank_you_on" data-countdown="" role="timer" aria-label="Countdown to the ceremony" data-u-part="countdown">
-        <div class="cd-grid">
-          <div class="cd-cell"><span class="cd-num" data-unit="days">–</span><span class="cd-lbl kicker" data-copy="cd_days">Days</span></div>
-          <div class="cd-cell"><span class="cd-num" data-unit="hours">–</span><span class="cd-lbl kicker" data-copy="cd_hours">Hours</span></div>
-          <div class="cd-cell"><span class="cd-num" data-unit="minutes">–</span><span class="cd-lbl kicker" data-copy="cd_minutes">Minutes</span></div>
-          <div class="cd-cell"><span class="cd-num" data-unit="seconds">–</span><span class="cd-lbl kicker" data-copy="cd_seconds">Seconds</span></div>
-        </div>
-        <p class="cd-done" data-when="today" hidden="" data-copy="cd_today">Today is the day — we're celebrating!</p>
-        <p class="cd-done" data-when="after" hidden="" data-copy="cd_after">Thank you for celebrating with us.</p>
+<script src="site.js" defer></script>
+</head>
+<body class="page-home" data-pending="This link will be added soon.">
+<main>
+<section class="hero" data-scene="home-hero">
+  <div class="hero-card paper">
+    <span class="corner co-l" aria-hidden="true"></span>
+    <span class="corner co-r" aria-hidden="true"></span>
+    <div class="frame proscenium lit hero-photo" data-if="!thank_you_on" data-step="photo">
+      <div class="photo-slot" data-slot="hero_portrait">
+        <img data-photo="hero_portrait" src="img/ph_portrait-640.webp" alt="" data-attr-alt="Photo of {name_display}" sizes="min(48vw, 220px)" fetchpriority="high">
+        <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
       </div>
-      <a class="cue" href="#invitation" data-if="!thank_you_on" data-u-part="cue"><span data-copy="invite_cue">Our invitation</span><span aria-hidden="true">↓</span></a>
-      <a class="cue" href="#thank-you" data-if="thank_you_on" data-u-part="cue"><span data-copy="ty_cue">A note from us</span><span aria-hidden="true">↓</span></a>
+      <span class="cut" aria-hidden="true"></span>
     </div>
-  </section>
-
-  <!-- INVITATION CARD (comp scene 4) -->
-  <section class="section invite-sec" id="invitation" data-scene="home-invite" aria-label="Invitation" data-if="!thank_you_on">
-    <div class="wrap">
-      <div class="u-sheet u-invitation" data-u-part="card">
-        
-        <div class="u-invite-text">
-          <p class="kicker" data-field="host_line" data-if="host_line" data-u-part="host"></p>
-          <!-- full name when given, else the first name (full_name may be null: never an empty name line) -->
-          <p class="script nm nm1" data-if="partners.0.full_name" data-field="partners.0.full_name" data-u-part="name1"></p>
-          <p class="script nm nm1" data-if="!partners.0.full_name" data-field="partners.0.display_name" data-u-part="name1"></p>
-          <p class="amp" aria-hidden="true" data-u-part="amp">&amp;</p>
-          <p class="script nm" data-if="partners.1.full_name" data-field="partners.1.full_name" data-u-part="name2"></p>
-          <p class="script nm" data-if="!partners.1.full_name" data-field="partners.1.display_name" data-u-part="name2"></p>
-          <p class="request" data-copy="invite_request" data-u-part="request">request the pleasure of your company at the celebration of their marriage</p>
-          <div class="dateblock" data-u-part="date">
-            <span class="side" data-field="date" data-format="weekday"></span>
-            <span class="mid"><span class="mon" data-field="date" data-format="month"></span><span class="day" data-field="date" data-format="day"></span><span class="yr" data-field="date" data-format="year"></span></span>
-            <span class="side" data-field="ceremony_time"></span>
-          </div>
-          <p class="venue" data-field="venue.name" data-u-part="venue"></p>
-          <p class="kicker city" data-field="venue.city_region" data-u-part="venue"></p>
-        </div>
+    <div class="frame proscenium lit hero-photo" data-if="thank_you_on thank_you.photo" data-step="photo">
+      <div class="photo-slot">
+        <img data-field="thank_you.photo" src="img/ph_portrait-640.webp" alt="" data-attr-alt="Photo of {name_display}" sizes="min(48vw, 220px)">
       </div>
-      <!-- replies collected another way (rsvp.method "none"): no reply call, no RSVP page -->
-      <div class="reply" data-if="!rsvp.method" data-u-part="cta">
-        <p data-if="rsvp.deadline"><span data-copy="rsvp_by">Kindly reply by</span> <span data-field="rsvp.deadline"></span></p>
-        <a class="btn" href="rsvp.html" data-copy="rsvp_button">RSVP</a>
-      </div>
-      <!-- add to calendar (G051): the platform writes both links (/<slug>/event.ics and a Google Calendar link) -->
-      <div class="cal" data-u-part="cal">
-        <p class="kicker" data-copy="calendar_title">Add to your calendar</p>
-        <p class="cal-links"><a class="btn btn-ghost btn-sm" href="#" data-calendar="ics" data-copy="calendar_ics">Apple / Outlook</a><a class="btn btn-ghost btn-sm" href="#" data-calendar="google" target="_blank" data-copy="calendar_google">Google</a></p>
-      </div>
+      <span class="cut" aria-hidden="true"></span>
     </div>
-  </section>
+    <p class="eyebrow" data-if="!thank_you_on" data-copy="card_line" data-step="line">Our wedding</p>
+    <p class="eyebrow" data-if="thank_you_on" data-field="thank_you_title" data-step="line"></p>
+    <h1 class="names" data-fit data-step="names"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></h1>
+    <p class="hero-date" data-step="date"><span data-field="date" data-format="weekday"></span>, <span class="nowrap" data-field="date"></span></p>
+    <p class="hero-venue" data-step="venue"><span data-field="venue.name"></span><small data-field="venue.city_region"></small></p>
+  </div>
+</section>
 
-  <!-- THANK-YOU CARD (G075, thank-you mode): the same invitation card paper (3-slice: the message lengthens it) -->
-  <section class="section invite-sec" id="thank-you" data-scene="home-invite" aria-labelledby="ty-head" data-if="thank_you_on">
-    <div class="wrap">
-      <div class="u-sheet u-invitation" data-u-part="card">
-        
-        <div class="u-invite-text">
-          <h2 class="script ty-head" id="ty-head" data-field="thank_you_title" data-u-part="name1"></h2>
-          <p class="request ty-message" data-if="thank_you.message" data-field="thank_you.message" data-u-part="request"></p>
-          <p class="kicker ty-love" data-copy="love_line" data-u-part="amp">With love,</p>
-          <p class="script nm" data-u-part="name2"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></p>
-          <p class="kicker city" data-u-part="venue"><span class="nowrap" data-field="date"></span></p>
-        </div>
-      </div>
+<section class="invitation velvet-band" id="invitation" data-scene="home-invite">
+  <span class="divider" aria-hidden="true"></span>
+  <div class="invitation-copy" data-if="!thank_you_on">
+    <h2 class="foil" data-copy="home_intro" data-step="title">The curtain rises on forever</h2>
+    <p class="eyebrow host" data-if="host_line" data-field="host_line" data-step="host"></p>
+    <div class="formal-names" data-step="names">
+      <p data-if="partners.0.full_name" data-field="partners.0.full_name"></p>
+      <p data-if="!partners.0.full_name" data-field="partners.0.display_name"></p>
+      <p class="amp" aria-hidden="true">&amp;</p>
+      <p data-if="partners.1.full_name" data-field="partners.1.full_name"></p>
+      <p data-if="!partners.1.full_name" data-field="partners.1.display_name"></p>
     </div>
-  </section>
-
-  <!-- TEASERS -->
-  <section class="section teasers-sec" data-scene="home-teasers" aria-label="More about the day">
-    
-    <div class="wrap">
-      <p class="kicker" data-if="!thank_you_on" data-copy="home_more" data-u-part="title">More about the day</p>
-      <p class="kicker" data-if="thank_you_on" data-copy="ty_more" data-u-part="title">Look back with us</p>
-      <div class="teasers">
-        <a class="teaser u-photo-teaser" data-optional="our_story" href="story.html" data-u-part="t1">
-          <span class="art u-teaser-photo"><span class="u-frame">
-            <span class="photo-slot" data-slot="story_1"><img data-photo="story_1" src="img/ph_interior-480.webp" alt="" loading="lazy" srcset="img/ph_interior-480.webp 480w, img/ph_interior-800.webp 800w" sizes="(min-width:768px) 520px, 80vw"><span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span></span>
-            
-          <img class="u-art" src="img/interior-frame-480.webp" srcset="img/interior-frame-480.webp 480w, img/interior-frame-800.webp 800w" sizes="(min-width:768px) 520px, 92vw" alt="" loading="lazy"></span></span>
-          <span class="tx"><h3 class="script" data-copy="story_title">Our Story</h3>
-          <span class="kicker" data-copy="story_kicker">Moments we hold dear</span>
-          <span class="textlink more" data-copy="home_story_cue">Read our story</span></span>
-        </a>
-        <a class="teaser" href="details.html" data-if="!thank_you_hides_details" data-u-part="t2">
-          
-          <span class="tx"><h3 class="script" data-copy="day_title">The Day</h3>
-          <span class="sched"><span class="sched-line" data-repeat="schedule"><span data-field=".label"></span> · <span data-field=".time"></span></span></span>
-          <span class="textlink more" data-copy="home_day_cue">Schedule &amp; venue</span></span>
-        </a>
-        <a class="teaser" href="rsvp.html" data-if="!rsvp.method !thank_you_on" data-u-part="t3">
-          
-          <span class="tx"><h3 class="script" data-copy="rsvp_title">Will You Join Us?</h3>
-          <span class="kicker" data-if="rsvp.deadline"><span data-copy="teaser_rsvp_by">Reply by</span> <span class="nowrap" data-field="rsvp.deadline"></span></span>
-          <span class="textlink more" data-copy="home_rsvp_cue">Reply now</span></span>
-        </a>
-      </div>
+    <p class="body-text" data-copy="invite_request" data-step="names" data-i="1">request the pleasure of your company at their wedding</p>
+    <div class="date-block" data-step="date">
+      <span data-field="date" data-format="weekday"></span>
+      <b><span data-field="date" data-format="month"></span> <span data-field="date" data-format="day"></span></b>
+      <span data-field="date" data-format="year"></span>
     </div>
-  </section>
+    <p class="venue-name" data-field="venue.name" data-step="venue"></p>
+    <p class="eyebrow" data-if="ceremony_time" data-step="venue" data-i="1"><span data-copy="invite_at">at</span> <span data-field="ceremony_time"></span></p>
+    <p class="eyebrow" data-field="venue.city_region" data-step="venue" data-i="2"></p>
+    <p data-if="!rsvp.method" data-step="reply"><a class="btn btn-light" href="rsvp.html"><span data-copy="rsvp_button">RSVP</span></a></p>
+    <p class="small" data-if="rsvp.deadline !rsvp.method" data-step="reply" data-i="1"><span data-copy="rsvp_by">Kindly reply by</span> <span data-field="rsvp.deadline"></span></p>
+  </div>
+  <div class="invitation-copy thank-you-copy" data-if="thank_you_on">
+    <h2 data-field="thank_you_title" data-step="title"></h2>
+    <p class="body-text" data-if="thank_you.message" data-field="thank_you.message" data-step="names"></p>
+    <p class="love" data-copy="love_line" data-step="date">With love,</p>
+    <p class="venue-name" data-field="name_display" data-step="date" data-i="1"></p>
+    <p class="eyebrow" data-field="date" data-step="venue"></p>
+  </div>
+  <div class="countdown" data-optional="countdown" data-if="countdown_target_utc !thank_you_on" data-countdown role="timer" aria-label="Countdown to the ceremony" data-step="count">
+    <div class="cd-row">
+      <div><span class="cd-num" data-unit="days">–</span><small data-copy="cd_days">Days</small></div>
+      <div><span class="cd-num" data-unit="hours">–</span><small data-copy="cd_hours">Hours</small></div>
+      <div><span class="cd-num" data-unit="minutes">–</span><small data-copy="cd_minutes">Minutes</small></div>
+      <div><span class="cd-num" data-unit="seconds">–</span><small data-copy="cd_seconds">Seconds</small></div>
+    </div>
+    <p class="cd-done" data-when="today" hidden><span data-copy="cd_today">Today is the day — we're celebrating!</span></p>
+    <p class="cd-done" data-when="after" hidden><span data-copy="cd_after">Thank you for celebrating with us.</span></p>
+  </div>
+  <div class="calendar" data-if="!thank_you_on" data-step="calendar">
+    <p data-copy="calendar_title" class="eyebrow">Add to your calendar</p>
+    <div class="button-row">
+      <a class="btn btn-ghost btn-sm" href="#" data-calendar="ics"><span data-copy="calendar_ics">Apple / Outlook</span></a>
+      <a class="btn btn-ghost btn-sm" href="#" data-calendar="google" target="_blank" rel="noopener"><span data-copy="calendar_google">Google</span></a>
+    </div>
+  </div>
+  <span class="divider" aria-hidden="true"></span>
+</section>
 
-  <footer class="foot" data-scene="home-foot">
-    <p class="kicker" data-copy="foot_kicker" data-u-part="sign">With love</p>
-    <p class="script" data-u-part="sign"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></p>
-    <p data-u-part="links"><a class="textlink replay" href="index.html?replay=1" data-copy="home_replay">Replay the envelope</a></p>
-  </footer>
+<section class="teaser" data-optional="our_story" data-scene="home-teasers">
+  <a class="teaser-photo" href="story.html">
+    <span class="frame programme lit" data-step="photo">
+      <span class="photo-slot" data-slot="story_1">
+        <img data-photo="story_1" src="img/ph_programme-640.webp" alt="" data-attr-alt="{story.items.0.caption}" sizes="min(40vw, 200px)" loading="lazy">
+        <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+      </span>
+      <span class="cut" aria-hidden="true"></span>
+    </span>
+  </a>
+  <div class="teaser-text">
+    <p class="eyebrow" data-copy="story_kicker" data-step="head">Moments we hold dear</p>
+    <h2 data-copy="story_title" data-step="head" data-i="1">Our Story</h2>
+    <p data-step="link"><a class="textlink" href="story.html"><span data-copy="home_story_cue">Read our story</span> <span aria-hidden="true">→</span></a></p>
+  </div>
+</section>
+
+<section class="day paper-band" data-if="!thank_you_hides_details" data-scene="home-day">
+  <p class="eyebrow" data-copy="home_location" data-step="head">Join us in</p>
+  <h2 data-field="venue.city" data-step="head" data-i="1"></h2>
+  <span class="divider" aria-hidden="true" data-step="head" data-i="2"></span>
+  <ul class="day-peek" data-step="list">
+    <li data-repeat="schedule"><span class="time" data-field=".time"></span> <span data-field=".label"></span></li>
+  </ul>
+  <p data-step="link"><a class="btn" href="details.html"><span data-copy="day_title">The Day</span> <span aria-hidden="true">→</span></a></p>
+</section>
+
+<footer class="signature velvet-band" data-scene="home-foot">
+  <span class="glasses" aria-hidden="true" data-step="glasses"></span>
+  <p class="eyebrow" data-copy="foot_kicker" data-step="names">With love</p>
+  <p class="sig-names" data-field="name_display" data-step="names" data-i="1"></p>
+  <p data-step="links"><a class="textlink" href="index.html?replay=1"><span data-copy="home_replay">Open it again</span></a></p>
+</footer>
 </main>
-
 <nav class="site-nav" aria-label="Wedding pages">
   <ul>
     <li><a href="home.html" aria-current="page"><span data-copy="nav_home">Home</span></a></li>
     <li data-optional="our_story"><a href="story.html"><span data-copy="nav_story">Story</span></a></li>
     <li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on" data-copy="nav_details">Details</span><span data-if="thank_you_on" data-copy="nav_day">The Day</span></a></li>
-    <li data-if="!rsvp.method !thank_you_on"><a class="nav-rsvp" href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
+    <li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
   </ul>
 </nav>
-
-
-</body></html>
+</body>
+</html>

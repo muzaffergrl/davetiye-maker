@@ -87,8 +87,8 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   'sky-lantern-festival': { music: 'first-light', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
   // Victorian Glasshouse: the copper label swings (tag) · the twine comes apart (twine) · the flap folds back (flap) · the card rises (rise) · the mist is wiped (wipe) · forward
   'victorian-glasshouse': { music: 'garden-waltz', opening: [[0, 'tap'], [300, 'ribbon'], [900, 'paper'], [1700, 'slide'], [2600, 'whoosh'], [3600, 'chime']] },
-  // Grand Theatre Premiere: the curtain draws a breath (tug) · the left panel parts (partL) · the card is lit (rise) · forward
-  'grand-theatre-premiere': { music: 'evening-strings', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
+  // Grand Theatre Premiere (G424): the ticket slides (ticket) · tears (tear) · the cord unties (rope) · the curtains swing (curtainL) · the card rises (rise) · forward
+  'grand-theatre-premiere': { music: 'evening-strings', opening: [[0, 'paper'], [650, 'tear'], [1100, 'ribbon'], [1600, 'whoosh'], [2900, 'slide'], [3600, 'chime']] },
   // 01 bow · lift · rise · forward
   'blush-garden-rose': { music: 'first-light', opening: [[200, 'ribbon'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
   // 02 wax seal (closure) · lift · rise · forward
