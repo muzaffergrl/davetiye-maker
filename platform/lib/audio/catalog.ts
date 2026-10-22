@@ -67,8 +67,9 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   // Monochrome Darkroom: the negative runs off (whoosh) · the tuck flap opens (paper) · the safelight clicks on (tap) · card rises (slide) · into the tray (chime)
   'monochrome-darkroom': { music: 'first-light', opening: [[0, 'whoosh'], [800, 'paper'], [1400, 'tap'], [1700, 'slide'], [2300, 'chime']] },
   'maison-patisserie': { music: 'garden-waltz', opening: [[200, 'ribbon'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
-  // Orient Express Voyage: strap buckle (closure) · cover swings open (open) · ticket slides out (rise) · forward
-  'orient-express-voyage': { music: 'evening-strings', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
+  // Orient Express Voyage (G425): the tag swings (tap) · the turn-lock clicks (clasp) · the end tab swings open (paper) ·
+  // the ticket slides out (slide) · it comes forward (chime) — = site.js MOTION.envelope
+  'orient-express-voyage': { music: 'evening-strings', opening: [[0, 'tap'], [450, 'clasp'], [1000, 'paper'], [1750, 'slide'], [3050, 'chime']] },
   // Kintsugi & Washi: band slides off (closure) · top · bottom · left · right fold (one paper sound each) · card lifts (rise) · forward
   'kintsugi-washi': { music: 'first-light', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
   // Azulejo Mosaic: the panel gives under the tap (press) · the tile wave (wave) · the card lifts (rise) · forward

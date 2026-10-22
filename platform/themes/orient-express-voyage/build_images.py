@@ -1,47 +1,52 @@
 #!/usr/bin/env python3
-"""Orient Express Voyage (25) — GPT parts → img/ (docs/11 §5.4; tools/tema_build.py). G163.
+"""Orient Express Voyage (25) — GPT sources → img/ (docs/11 §5.4, docs/34, docs/35; tools/tema_build.py). Task G425.
 
-The design was built BEFORE its GPT parts exist (docs/24, like 22 Nocturne). Every website layer is ordered in
-collections/25_Orient_Express_Voyage/assets/gpt/GPT_PROMPTS.md (PAKET 5 W2). For each piece this script uses the GPT
-part when the file is there and otherwise an INTERIM placeholder: a flat tone in the design's palette with a soft light
-fall-off (light only, docs/11 §5.7 — no shape, line, texture or ornament is drawn; K21). The placeholders keep the layer
-sizes, so the opening and the pages already move the separate pieces in their real order; `manifest.json` "interim"
-lists which pieces still wait for GPT. Run again whenever a part arrives:
+Redesign of 2026-10-22 (docs/35 row 25): every picture is the design's own PAKET 5R part
+(collections/25_Orient_Express_Voyage/assets/gpt/GPT_PROMPTS.md), cut, keyed, scaled — nothing is drawn (K21, docs/11 §5.7):
 
-  python3 platform/themes/orient-express-voyage/build_images.py
+  page_ground (W1)    ground-640/1024        warm ivory antique map paper: the page ground of every page
+  ticket_paper (W2)   ticket-640/1024        ivory ticket card stock: bands, the itinerary card, the reply form
+  env_back (W3)       back-960               the ticket sleeve's back, its route-red moiré silk lining (the envelope box)
+  env_front (W4)      front-960              the bottle-green embossed leather front panel with its thumb notch
+                      leather-640            a calm patch of the same leather (inside the gold tooling), its lamplight
+                                             gradient levelled and mirrored into a seamless tile: the dark bands
+  flap (W5)           flap-256               the end-tab flap at the right end (closed; hinged on its right edge)
+  flap_in (W6)        flap_in-256            the tab's inside (route-red silk, a brass washer) once it has swung open
+  lock_plate (W7)     plate-112              the brass turn-lock plate on the tab's tip
+  lock_key (W8)       key-160                the turn button (it turns 90° about its centre rivet)
+  luggage_tag (W9)    tag-160                the blank luggage tag on its red cord from a brass grommet (pendulum)
+  card_small (W10)    card-720               the blank first-class ticket card that slides out of the sleeve
+  portrait_frame (W11) carriage-720          the mahogany and brass carriage window (portrait; window measured)
+  story_frame (W12)   sash-720               the sliding sash window with its rolled leather blind (story; window measured)
+  venue_frame (W13)   panorama-1100          the wide observation-carriage window (venue; window measured)
+  corner_spray (W14)  spray-720              a brass rack corner with dried roses and a route-red ribbon
+  divider (W15)       rail-1000              the brass luggage-rack rail (section dividers)
+  pocket_watch (W16)  watch-480              the numeral-free brass pocket watch (beside the countdown)
+  route_map (W17)     map-1200               the letterless antique map panel (the journey, the itinerary)
+  accent_1..3 (W18)   steam/disc/bud-200     steam, a punched ticket disc, a dried rose bud (opening, reply)
+  web_hero (W19)      og-1200x630.jpg        share image (tema_build.og_kirp, bottom-aligned)
 
-The geometry it measures on the GPT parts (strap box + buckle cut on the closed wallet's own box, the ticket's box and
-portrait window, the carriage glass and frame proportion) is written into site.css between `/* stage:begin` and
-`stage:end */` (G167), so the pieces line up on the first build without copying percentages by hand. Dry run without
-GPT: `python3 tools/gpt_kuru_deneme.py --tema orient-express-voyage --sekil collections/25_Orient_Express_Voyage/assets/gpt/kuru_sekil.json`.
+The sleeve layers (W3, W4, W5, W7, W8, W9) share one canvas and GPT kept them aligned on it (checked on a composite);
+each is cut to its own alpha box and placed by that box in the envelope box (the back's alpha box) — manifest `stage`,
+the numbers site.css uses (tests/theme-orient-express-voyage.test.ts compares them). The back reaches ~6 % below the front
+panel (its leather rim shows under the front, like the back of a document case). The tag's pendulum pivot is its brass
+grommet (measured: the ring's rows at the top of the part). The card (its own canvas) lies sideways in the sleeve: its
+long side = CARD_LEN % of the sleeve width, its right end just inside the mouth; CSS sizes the card box at its final
+upright size and scales it down (card_k0) while it is in the sleeve, so it is crisp when it comes forward.
+Photo windows: GPT left the window's middle transparent inside a green rim; the window = the green pixels plus the
+transparent hole they enclose, cleared whole, the green spill round it neutralised. The windows are rounded rectangles,
+so each frame also gets a technical alpha mask of its measured window (mask_*.png, white + alpha) for CSS mask-image.
 
-Sources (collections/25_Orient_Express_Voyage/assets/gpt/parts/, all PNG):
-  bg_station.png          1024×1536 opaque   the station at night, behind the closed wallet (index)
-  wallet_closed.png       1024×1536 alpha    the leather ticket wallet, closed, WITHOUT its strap
-  wallet_strap.png        1024×1536 alpha    only the strap + brass buckle, same canvas and place as wallet_closed
-  wallet_inside_cover.png 1024×1536 alpha    the inside of the front cover (seen after it swings open to the left)
-  wallet_inside.png       1024×1536 alpha    the inside right panel (back of the ticket pocket), same place as closed
-  wallet_pocket.png       1024×1536 alpha    only the front lip of the ticket pocket, same place as wallet_inside
-  ticket.png              1024×1536 alpha    the first-class ticket, portrait window flat #00FF00
-  poster_hero.png         1024×1536 opaque   the lithograph travel poster (home hero, og image)
-  map.png                 1536×1024 opaque   the antique map without any readable name (route band)
-  luggage_tag.png         1024×1536 alpha    the luggage tag with its string (swings)
-  station_clock.png       1024×1024 alpha    the brass station clock (countdown)
-  carriage_window.png     1024×1536 alpha    the brass carriage window frame, glass flat #00FF00 (story frames)
-  carriage_wall.png       1024×1024 opaque   seamless bottle-green carriage panelling (story ground)
-  bg_paper.png            1024×1024 opaque   seamless ivory lithograph paper (page ground)
-  boarding_pass.png       1024×1536 alpha    the boarding pass the RSVP form sits on (3-slice: top · middle · stub)
-  stamp.png               1024×1024 alpha    the boarding stamp pressed on the pass after a reply (+ favicon)
+  python3 platform/themes/orient-express-voyage/build_images.py [--still out.png]
 """
 from __future__ import annotations
 
 import json
-import re
 import sys
 from pathlib import Path
 
 import numpy as np
-from PIL import Image, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter
 
 THEME = Path(__file__).resolve().parent
 ROOT = THEME.parents[2]
@@ -52,322 +57,259 @@ COL = ROOT / "collections/25_Orient_Express_Voyage"
 PARTS = COL / "assets/gpt/parts"
 OUT = THEME / "img"
 
-# palette (site.css :root)
-GREEN, GREEN_DEEP, GREEN_SOFT = (30, 58, 44), (17, 36, 27), (46, 82, 64)
-BRASS, BRASS_LIGHT = (184, 145, 75), (216, 189, 132)
-IVORY, PAPER, KRAFT, LEATHER = (243, 235, 217), (236, 225, 200), (196, 160, 112), (92, 58, 36)
-INK_STAMP = (122, 40, 48)
-
-# interim geometry (canvas 1024×1536, like the GPT parts): the wallet's box, the strap band, the pocket lip, the ticket
-WALLET = (192, 288, 832, 1248)             # x0, y0, x1, y1 — 640 × 960 (2:3)
-STRAP = (0.53, 0.63)                       # strap band, fraction of the wallet height
-BUCKLE_X = 0.62                            # where the strap is cut in two (fraction of the wallet width)
-POCKET_TOP = 0.46                          # top edge of the pocket lip (fraction of the wallet height)
-TICKET = (500, 760)                        # ticket box (px) inside the wallet
-TICKET_AT = (0.109, 0.08)                  # ticket's left / top in the wallet (fractions)
-TICKET_WINDOW = (0.27, 0.07, 0.73, 0.45)   # portrait window on the ticket (x0, y0, x1, y1 fractions): 230 × 289 px, 4:5
+PH_TONE = (236, 226, 204)        # placeholder tone (warm ivory)
+REQUIRED = ["page_ground", "ticket_paper", "env_back", "env_front", "flap", "flap_in", "lock_plate", "lock_key",
+            "luggage_tag", "card_small", "portrait_frame", "story_frame", "venue_frame", "corner_spray", "divider",
+            "pocket_watch", "route_map", "accent_1", "accent_2", "accent_3", "web_hero"]
+CARD_LEN = 44.0                  # the card's long side, lying in the sleeve, in % of the sleeve width
+CARD_END = 97.0                  # its right end (just inside the mouth), % of the sleeve width
+CARD_FINAL = 72.0                # the card's upright width when it has come forward, % of the sleeve width
 
 
-# ---------------------------------------------------------------------------------------------------- helpers
-def save(im: Image.Image, name: str, widths, q: int, manifest: dict):
-    """tb.webp with stable file names: the piece is first brought to the largest width (tb.webp never upscales, so a
-    GPT part of another size would otherwise change the names the templates use)."""
-    w = max(widths)
-    if im.size[0] != w:
-        im = im.resize((w, max(1, round(im.size[1] * w / im.size[0]))), Image.LANCZOS)
-    tb.webp(im, name, widths, q, manifest, out=OUT)
+def part(ad: str) -> Image.Image:
+    return Image.open(PARTS / f"{ad}.png").convert("RGBA")
 
 
-def part(name: str) -> Image.Image | None:
-    p = PARTS / name
-    return Image.open(p).convert("RGBA") if p.exists() else None
+def box(im: Image.Image, esik: int = 8):
+    return tb.alfa_kutusu(np.asarray(im)[..., 3], esik=esik)
 
 
-def light(w: int, h: int, top, bottom, glow=(.5, .32), strength=.10) -> np.ndarray:
-    """A flat tone with a soft vertical light fall-off and one soft highlight (light, not a shape)."""
-    t = np.linspace(0, 1, h)[:, None, None]
-    base = np.array(top, float) * (1 - t) + np.array(bottom, float) * t
-    yy, xx = np.mgrid[0:h, 0:w]
-    r = np.hypot((xx / w - glow[0]) * 1.2, yy / h - glow[1])
-    lift = np.clip(1 - r / .75, 0, 1)[..., None] ** 2 * strength * 255
-    return np.clip(base + lift, 0, 255)
+def trim(im: Image.Image, esik: int = 8) -> Image.Image:
+    k = box(im, esik)
+    return im.crop(k) if k else im
 
 
-def tone(w: int, h: int, top, bottom=None, glow=(.5, .32), strength=.10) -> Image.Image:
-    return Image.fromarray(light(w, h, top, bottom or top, glow, strength).astype(np.uint8), "RGB")
+def r2(v: float) -> float:
+    return round(float(v), 2)
 
 
-def block(w: int, h: int, top, bottom=None, alpha: np.ndarray | None = None, **kw) -> Image.Image:
-    """An interim layer: the tone on an alpha mask (default: the whole box)."""
-    rgb = light(w, h, top, bottom or top, **kw)
-    a = np.full((h, w), 255.0) if alpha is None else alpha
-    return Image.fromarray(np.dstack([rgb, a]).astype(np.uint8), "RGBA")
+def _grow(m: np.ndarray, px: int) -> np.ndarray:
+    """Dilate a boolean mask by `px` pixels (PIL MaxFilter; no scipy on the build machines)."""
+    im = Image.fromarray(m.astype(np.uint8) * 255, "L").filter(ImageFilter.MaxFilter(2 * px + 1))
+    return np.asarray(im) > 127
 
 
-def fit(im: Image.Image, size) -> Image.Image:
-    """A GPT part cropped to its alpha box and scaled to `size` (the closed wallet's box): pieces drawn in separate
-    images are put on one common box (docs/11 §7.1 alignment; the measured offset is in manifest stage.align)."""
-    k = tb.alfa_kutusu(np.asarray(im)[..., 3])
-    return im.crop(k).resize(size, Image.LANCZOS)
+def _fill_holes(m: np.ndarray) -> np.ndarray:
+    """m plus every pixel not reachable from the border without crossing m (scipy's binary_fill_holes)."""
+    h, w = m.shape
+    pad = np.zeros((h + 2, w + 2), np.uint8)
+    pad[1:-1, 1:-1] = m.astype(np.uint8) * 255
+    im = Image.fromarray(pad, "L").copy()
+    ImageDraw.floodfill(im, (0, 0), 128)
+    return (np.asarray(im)[1:-1, 1:-1] != 128)
 
 
-def green_window(im: Image.Image):
-    """#00FF00 window → transparent; returns (image, window box in fractions)."""
-    a = np.asarray(im).copy()
-    r, g, b = (a[..., i].astype(int) for i in range(3))
-    win = (g > 200) & (r < 90) & (b < 90) & (a[..., 3] > 128)
-    if win.sum() < 100:
-        return im, None
+def keyed_window(im: Image.Image):
+    """The photo window of a framed part: GPT's green is a closed rim round an already transparent (or blurred) middle,
+    so the window = the green rim with everything it encloses, grown 2 px and cleared; the green spill in a 12 px ring
+    round it is neutralised. (RGBA, window box (L, T, W, H) % of the image, window mask cropped to its box) or
+    (im, None, None)."""
+    c = np.asarray(im).copy()
+    rgb = c[..., :3].astype(np.int16)
+    green = (rgb[..., 1] > 120) & (rgb[..., 1] - np.maximum(rgb[..., 0], rgb[..., 2]) > 60) & (c[..., 3] > 40)
+    if green.sum() < 256:
+        return im, None, None
+    win = _grow(_fill_holes(_grow(green, 1)), 2)
     ys, xs = np.nonzero(win)
-    soft = np.asarray(Image.fromarray((win * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(5))) > 0
-    a[soft, 3] = 0
+    h, w = c.shape[:2]
+    x0, x1, y0, y1 = xs.min(), xs.max() + 1, ys.min(), ys.max() + 1
+    c[win, 3] = 0
+    ring = _grow(win, 12) & ~win
+    rgb = c[..., :3].astype(np.int16)
+    spill = ring & (rgb[..., 1] > np.maximum(rgb[..., 0], rgb[..., 2]) + 6)
+    c[..., 1] = np.where(spill, ((rgb[..., 0] + rgb[..., 2]) // 2).clip(0, 255), c[..., 1]).astype(np.uint8)
+    return (Image.fromarray(c, "RGBA"), (100 * x0 / w, 100 * y0 / h, 100 * (x1 - x0) / w, 100 * (y1 - y0) / h),
+            win[y0:y1, x0:x1])
+
+
+def window_mask(win: np.ndarray, name: str, width: int = 240) -> dict:
+    """A technical alpha mask of the measured window (white, alpha = the window, 1 px soft edge) for CSS mask-image —
+    never shown, it only clips the photo to the frame's own rounded window."""
     h, w = win.shape
-    return Image.fromarray(a, "RGBA"), [round(xs.min() / w, 4), round(ys.min() / h, 4), round((xs.max() + 1) / w, 4),
-                                        round((ys.max() + 1) / h, 4)]
+    a = Image.fromarray(win.astype(np.uint8) * 255, "L").filter(ImageFilter.GaussianBlur(1))
+    hh = round(h * width / w)
+    a = a.resize((width, hh), Image.LANCZOS)
+    im = Image.new("RGBA", (width, hh), (255, 255, 255, 0))
+    im.putalpha(a)
+    p = OUT / f"mask_{name}.png"
+    im.save(p, optimize=True)
+    return {"file": p.name, "size": [width, hh], "bytes": p.stat().st_size}
 
 
-def buckle_cut(strap: Image.Image) -> float:
-    """The strap is cut just left of its brass buckle: the leftmost column, right of 40 % of the strap (W2.2: the buckle
-    sits at 62–75 % of the wallet), where warm bright pixels fill a third of the strap's height — a buckle frame, not a
-    stitch line along the edges. Fallback BUCKLE_X."""
-    a = np.asarray(strap).astype(int)
-    brass = (a[..., 0] > 150) & (a[..., 0] - a[..., 2] > 50) & (a[..., 3] > 128)
-    h, w = brass.shape
-    cols = np.flatnonzero(brass.sum(0) > h / 3)
-    cols = cols[cols > w * .4]
-    if len(cols) < 6:
-        print("WARNING wallet_strap.png: no buckle found — strap cut at the interim BUCKLE_X", file=sys.stderr)
-        return BUCKLE_X
-    return max(.4, min(.85, (cols.min() - 4) / w))
+def place(inner, outer):
+    """The box `inner` (x0, y0, x1, y1 px) in % of the box `outer`: [left, top, width, height]."""
+    ox0, oy0, ox1, oy1 = outer
+    ow, oh = ox1 - ox0, oy1 - oy0
+    x0, y0, x1, y1 = inner
+    return [r2(100 * (x0 - ox0) / ow), r2(100 * (y0 - oy0) / oh), r2(100 * (x1 - x0) / ow), r2(100 * (y1 - y0) / oh)]
 
 
-CSS_BLOCK = re.compile(r"/\* stage:begin.*?stage:end \*/", re.S)
+def grommet(tag: Image.Image) -> list:
+    """The tag's pendulum pivot: the centre of the brass grommet ring at the top of the cut part (% of the part): the
+    ring rows are wider than the cord hanging under it."""
+    a = np.asarray(tag)[..., 3] > 40
+    rows = a.sum(1)
+    top = int(np.nonzero(rows)[0][0])
+    cord = float(np.median(rows[top + 60:top + 110]))
+    y = top + 4
+    while y < len(rows) and rows[y] > cord * 1.5:
+        y += 1
+    xs = np.nonzero(a[top:y].any(0))[0]
+    return [r2(100 * (xs.min() + xs.max() + 1) / 2 / tag.width), r2(100 * (top + y) / 2 / tag.height)]
 
 
-def sync_css(manifest: dict) -> None:
-    """Writes the measured geometry into site.css between `/* stage:begin` and `stage:end */` (CSS custom properties),
-    so a GPT part placed a little differently from the prompt (strap, ticket, its window, the carriage glass) lines up
-    on the first build — nobody has to copy percentages by hand. Interim values reproduce the interim layout exactly."""
-    st, win = manifest["stage"], manifest["window"]
-    n = lambda v: f"{v:g}"                          # noqa: E731
-    sx, sy, sw, sh = st["strap"]["box_pct"]
-    tx, ty, tw, th = st["ticket"]["box_pct"]
-    wx, wy, ww, wh = st["ticket"]["window_pct"]
-    gx, gy, gw, gh = win["glass_pct"]
-    block = ("/* stage:begin — written by build_images.py from img/manifest.json (stage, window); do not edit by hand */\n"
-             f".wallet{{--strap-x:{n(sx)}%;--strap-y:{n(sy)}%;--strap-w:{n(sw)}%;--strap-h:{n(sh)}%;"
-             f"--buckle:{n(st['strap']['buckle_cut'])};--tk-x:{n(tx)}%;--tk-y:{n(ty)}%;--tk-w:{n(tw)}%;--tk-h:{n(th)}%;"
-             f"--tw-x:{n(wx)}%;--tw-y:{n(wy)}%;--tw-w:{n(ww)}%;--tw-h:{n(wh)}%}}\n"
-             f".carriage-window{{--glass-x:{n(gx)}%;--glass-y:{n(gy)}%;--glass-w:{n(gw)}%;--glass-h:{n(gh)}%;"
-             f"--win-aspect:{n(win['aspect'])}}}\n/* stage:end */")
-    css = THEME / "site.css"
-    s = css.read_text(encoding="utf-8")
-    if not CSS_BLOCK.search(s):
-        raise SystemExit("site.css: the /* stage:begin … stage:end */ block is missing")
-    new = CSS_BLOCK.sub(lambda _m: block, s)
-    if new != s:
-        css.write_text(new, encoding="utf-8")
-        print("site.css: stage block updated from the manifest")
+def leather_tile(front: Image.Image) -> Image.Image:
+    """A calm patch of the front panel's leather (inside its gold tooling), the lamplight gradient levelled (divided by
+    a wide blur of itself, the mean colour kept) and mirrored 2×2 so it tiles without a seam."""
+    patch = front.convert("RGB").crop((200, 150, 1090, 550))
+    a = np.asarray(patch).astype(np.float32)
+    blur = np.asarray(patch.filter(ImageFilter.GaussianBlur(70))).astype(np.float32)
+    mean = a.reshape(-1, 3).mean(0)
+    lev = (a * (mean / np.maximum(blur, 1))).clip(0, 255).astype(np.uint8)
+    p = Image.fromarray(lev, "RGB")
+    w, h = p.size
+    tile = Image.new("RGB", (2 * w, 2 * h))
+    tile.paste(p, (0, 0))
+    tile.paste(p.transpose(Image.FLIP_LEFT_RIGHT), (w, 0))
+    tile.paste(p.transpose(Image.FLIP_TOP_BOTTOM), (0, h))
+    tile.paste(p.transpose(Image.ROTATE_180), (w, h))
+    return tile
 
 
-# ---------------------------------------------------------------------------------------------------- build
-# Emekli (2026-10-20): tema 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (docs/qa/2026-10-18-*.md,
-# docs/qa/2026-10-19-*.md); img/ artık bu betiğin çıktısı değil. Bu betik img/'yi silip eski geçici kesimi kurar ve
-# yeni kapak / iç sayfa görsellerini yok eder, bu yüzden çalışmaz. tools/gpt_yerlestir.py bu adımı atlar.
-EMEKLI = "tema 2026-10-18/19 yeniden kurulumuyla değişti; img/ elle yönetiliyor (silmemek için çalışmaz)"
+def calm_green(im: Image.Image, tint: int = 34) -> Image.Image:
+    """The bottle-green leather has a few saturated edge pixels that the chroma-key residue check (tb.yesil_gorunur)
+    takes for #00FF00: the green channel is capped at max(R, B) + `tint` there (a handful of pixels, invisible)."""
+    a = np.asarray(im.convert("RGBA")).copy()
+    rgb = a[..., :3].astype(np.int16)
+    cap = np.maximum(rgb[..., 0], rgb[..., 2]) + tint
+    a[..., 1] = np.minimum(rgb[..., 1], cap).clip(0, 255).astype(np.uint8)
+    return Image.fromarray(a, "RGBA")
+
+
+def sleeve_still(layers: dict, stage: dict, w: int) -> Image.Image:
+    """The closed sleeve as the index page shows it — a composition check."""
+    h = round(w / stage["aspect"])
+    pad = round(w * .1)
+    canvas = Image.new("RGBA", (w + 2 * pad, round(h * 1.6) + 2 * pad), (120, 120, 120, 255))
+    for key in ("back", "front", "tag", "flap", "plate", "key"):
+        L, T, W, H = stage[key]
+        im = layers[key].resize((max(1, round(w * W / 100)), max(1, round(h * H / 100))), Image.LANCZOS)
+        canvas.alpha_composite(im, (pad + round(w * L / 100), pad + round(h * T / 100)))
+    return canvas
 
 
 def main() -> int:
-    if EMEKLI:
-        print(f"build_images.py çalıştırılmadı: {EMEKLI}", file=sys.stderr)
-        return 2
-    manifest: dict = {"_note": "G163 build. Pieces listed under 'interim' are flat palette tones with a soft light "
-                      "fall-off (no drawn shape) until their GPT part (GPT_PROMPTS.md PAKET 5 W2) arrives."}
-    interim: list[str] = []
+    missing = [k for k in REQUIRED if not (PARTS / f"{k}.png").exists()]
+    if missing:
+        print("ERROR: parts missing: " + ", ".join(missing), file=sys.stderr)
+        return 1
+    manifest: dict = {}
+    OUT.mkdir(exist_ok=True)
     for old in list(OUT.glob("*.webp")) + list(OUT.glob("*.jpg")) + list(OUT.glob("*.png")):
         old.unlink()
 
-    def use(name: str):
-        im = part(name)
-        if im is None:
-            interim.append(name)
-        return im
+    ground = Image.open(PARTS / "page_ground.png").convert("RGB")
+    ticket = Image.open(PARTS / "ticket_paper.png").convert("RGB")
+    tb.webp(ground, "ground", [640, 1024], 70, manifest, out=OUT)
+    tb.webp(ticket, "ticket", [640, 1024], 72, manifest, out=OUT)
 
-    # -------------------------------------------------------------- station backdrop (index)
-    bg = use("bg_station.png")
-    bg = bg.convert("RGB") if bg else tone(1024, 1536, (24, 46, 35), (10, 22, 16), glow=(.5, .55), strength=.16)
-    save(bg, "station_bg", [640, 1024], 74, manifest)
+    # the sleeve: the back's alpha box is the envelope box; every other layer by its own box on the shared canvas
+    raw = {k: part(n) for k, n in (("back", "env_back"), ("front", "env_front"), ("flap", "flap"),
+                                   ("plate", "lock_plate"), ("key", "lock_key"), ("tag", "luggage_tag"))}
+    boxes = {k: box(v) for k, v in raw.items()}
+    bx = boxes["back"]
+    bw, bh = bx[2] - bx[0], bx[3] - bx[1]
+    stage = {"aspect": round(bw / bh, 4), "back": [0, 0, 100, 100]}
+    for k in ("front", "flap", "plate", "key", "tag"):
+        stage[k] = place(boxes[k], bx)
+    layers = {k: raw[k].crop(boxes[k]) for k in raw}
+    for k in ("back", "front", "flap"):
+        layers[k] = calm_green(layers[k])
+    stage["tag_pivot"] = grommet(layers["tag"])
+    # the lock rides on the tab: plate and turn button in % of the tab's box (they swing open with it)
+    fl, ft, fw_, fh = stage["flap"]
+    for k in ("plate", "key"):
+        L, T, W, H = stage[k]
+        stage[f"{k}_in_flap"] = [r2(100 * (L - fl) / fw_), r2(100 * (T - ft) / fh), r2(100 * W / fw_), r2(100 * H / fh)]
+    tb.webp(leather_tile(raw["front"]), "leather", [640], 70, manifest, out=OUT)
+    for k, wd, q in (("back", 960, 80), ("front", 960, 80), ("flap", 256, 84), ("plate", 112, 88), ("key", 160, 88),
+                     ("tag", 160, 86)):
+        tb.webp(layers[k], k, [wd], q, manifest, out=OUT)
+    flap_in = trim(part("flap_in"))
+    tb.webp(flap_in, "flap_in", [256], 84, manifest, out=OUT)
+    stage["flap_in_ratio"] = round(flap_in.width / flap_in.height, 4)
+    card = trim(part("card_small"))
+    tb.webp(card, "card", [720], 80, manifest, out=OUT)
+    ratio = card.width / card.height
+    stage["card_ratio"] = round(ratio, 4)
+    # the card box at its final upright size, centred where the card lies sideways in the sleeve (vertically on the
+    # front panel's middle); card_k0 = its scale in the sleeve (its long side = CARD_LEN % of the sleeve width)
+    fw = CARD_FINAL
+    fh_h = fw / ratio * stage["aspect"]                      # its height in % of the envelope height
+    cx = CARD_END - CARD_LEN / 2
+    cy = stage["front"][1] + stage["front"][3] / 2
+    stage["card"] = [r2(cx - fw / 2), r2(cy - fh_h / 2), r2(fw), r2(fh_h)]
+    stage["card_k0"] = round(CARD_LEN * ratio / fw, 4)
+    stage["_note"] = ("% of the envelope (left, top, width, height): the back's alpha box is the envelope; front, flap, "
+                      "plate, key and tag by their own alpha boxes on the shared canvas; tag_pivot = the grommet, % of "
+                      "the tag; card = its final upright box centred on its place in the sleeve, scaled by card_k0 and "
+                      "turned -90° while it lies there")
+    manifest["stage"] = stage
 
-    # -------------------------------------------------------------- the ticket wallet (docs/11 §7, own type "cuzdan")
-    W, H = WALLET[2] - WALLET[0], WALLET[3] - WALLET[1]
-    closed = use("wallet_closed.png")
-    wbox = WALLET                              # the closed wallet's box on the common canvas (the strap is placed in it)
-    if closed:
-        k = tb.alfa_kutusu(np.asarray(closed)[..., 3])
-        wbox = k
-        cover = closed.crop(k).resize((W, H), Image.LANCZOS)
-    else:
-        cover = block(W, H, (40, 76, 57), GREEN, glow=(.35, .25), strength=.12)
-    save(cover, "wallet_cover", [440, 640], 80, manifest)
+    # the frames: window measured (green rim + the transparent hole it encloses) + a mask of the rounded window
+    for src, name, width in (("portrait_frame", "carriage", 720), ("story_frame", "sash", 720),
+                             ("venue_frame", "panorama", 1100)):
+        keyed, win, wmask = keyed_window(trim(part(src)))
+        if win is None:
+            print(f"ERROR {src}.png: no #00FF00 window found", file=sys.stderr)
+            return 1
+        tb.webp(keyed, name, [width], 84, manifest, out=OUT)
+        manifest[name]["window_pct"] = [r2(v) for v in win]
+        manifest[name]["window_px"] = [round(keyed.width * win[2] / 100), round(keyed.height * win[3] / 100)]
+        manifest[name]["mask"] = window_mask(wmask, name)
 
-    cin = use("wallet_inside_cover.png")
-    cin = fit(cin, (W, H)) if cin else block(W, H, (30, 58, 44), GREEN_DEEP, glow=(.65, .3), strength=.08)
-    save(cin, "wallet_cover_in", [440, 640], 78, manifest)
+    for src, name, width, q in (("corner_spray", "spray", 720, 82), ("divider", "rail", 1000, 84),
+                                ("pocket_watch", "watch", 480, 84), ("accent_1", "steam", 200, 84),
+                                ("accent_2", "disc", 200, 86), ("accent_3", "bud", 200, 86)):
+        tb.webp(trim(part(src)), name, [width], q, manifest, out=OUT)
+    tb.webp(Image.open(PARTS / "route_map.png").convert("RGB"), "map", [1200], 70, manifest, out=OUT)
 
-    inside = use("wallet_inside.png")
-    inside = fit(inside, (W, H)) if inside else block(W, H, GREEN_DEEP, (12, 26, 19), glow=(.4, .2), strength=.06)
-    save(inside, "wallet_inside", [440, 640], 78, manifest)
-
-    pocket = use("wallet_pocket.png")
-    if pocket:
-        ref = part("wallet_inside.png")          # same canvas as the inside panel: cut with the panel's box
-        pocket = pocket.crop(tb.alfa_kutusu(np.asarray(ref)[..., 3])).resize((W, H), Image.LANCZOS) if ref else fit(pocket, (W, H))
-        a = np.asarray(pocket)[..., 3]
-        rows = np.flatnonzero(a.max(1) > 128)
-        pocket_top = round(rows.min() / H, 4) if len(rows) else POCKET_TOP
-    else:
-        al = np.zeros((H, W))
-        al[int(H * POCKET_TOP):] = 255
-        pocket = block(W, H, (36, 68, 51), GREEN, alpha=al, glow=(.4, .55), strength=.10)
-        pocket_top = POCKET_TOP
-    save(pocket, "wallet_pocket", [440, 640], 80, manifest)
-
-    strap = use("wallet_strap.png")
-    if strap:
-        # same canvas as wallet_closed: the strap's box in % of the CLOSED WALLET's own box (GPT never draws the wallet
-        # exactly where the prompt says; measuring against the fixed interim box would shift the strap off the leather)
-        k = tb.alfa_kutusu(np.asarray(strap)[..., 3])
-        bw, bh = wbox[2] - wbox[0], wbox[3] - wbox[1]
-        strap_box = [round((k[0] - wbox[0]) / bw * 100, 3), round((k[1] - wbox[1]) / bh * 100, 3),
-                     round((k[2] - k[0]) / bw * 100, 3), round((k[3] - k[1]) / bh * 100, 3)]
-        strap = strap.crop(k)
-        cut = buckle_cut(strap)
-    else:
-        sh = int(H * (STRAP[1] - STRAP[0]))
-        strap = block(W, sh, (110, 72, 46), LEATHER, glow=(.5, .2), strength=.08)
-        strap_box = [0, STRAP[0] * 100, 100, round(sh / H * 100, 3)]
-        cut = BUCKLE_X
-    sw, shh = strap.size
-    xcut = int(round(sw * cut))
-    save(strap.crop((0, 0, xcut, shh)), "strap_l", [240, 480], 80, manifest)
-    save(strap.crop((xcut, 0, sw, shh)), "strap_r", [160, 320], 80, manifest)
-
-    ticket = use("ticket.png")
-    tsize = TICKET
-    if ticket:
-        # the card keeps its own proportion (asked ~500:760): width = TICKET width, height follows (no stretching)
-        ticket = ticket.crop(tb.alfa_kutusu(np.asarray(ticket)[..., 3]))
-        tsize = (TICKET[0], round(TICKET[0] * ticket.size[1] / ticket.size[0]))
-        ticket, window = green_window(ticket.resize(tsize, Image.LANCZOS))
-        window = window or list(TICKET_WINDOW)
-    else:
-        tw, th = TICKET
-        al = np.full((th, tw), 255.0)
-        x0, y0, x1, y1 = (int(TICKET_WINDOW[0] * tw), int(TICKET_WINDOW[1] * th), int(TICKET_WINDOW[2] * tw),
-                          int(TICKET_WINDOW[3] * th))
-        al[y0:y1, x0:x1] = 0                      # the window: the portrait shows through (photo slot under the card)
-        ticket = block(tw, th, (248, 242, 228), IVORY, alpha=al, glow=(.5, .7), strength=.04)
-        window = list(TICKET_WINDOW)
-    save(ticket, "ticket", [480, 640], 82, manifest)
-
-    pct = lambda v: round(v * 100, 3)               # noqa: E731
-    manifest["stage"] = {
-        "canvas": [1024, 1536], "box": [WALLET[0], WALLET[1], W, H], "objAspect": round(W / H, 4),
-        "strap": {"box_pct": strap_box, "buckle_cut": round(cut, 4)},
-        "pocket": {"top_pct": pct(pocket_top)},
-        "ticket": {"box_pct": [pct(TICKET_AT[0]), pct(TICKET_AT[1]), pct(tsize[0] / W), pct(tsize[1] / H)],
-                   "window_pct": [pct(window[0]), pct(window[1]), pct(window[2] - window[0]), pct(window[3] - window[1])]},
-        "open": "the cover turns on its left hinge to -180° (rotateY; its inside is wallet_cover_in, backface hidden); "
-                "the spread is two wallets wide: site.js scales the stage to 94% of the screen (--open-scale)",
-    }
-
-    # -------------------------------------------------------------- pages
-    poster = use("poster_hero.png")
-    gpt_poster = poster is not None
-    poster = poster.convert("RGB") if poster else tone(1024, 1536, (233, 214, 170), (34, 66, 50), glow=(.5, .18), strength=.14)
-    save(poster, "poster", [640, 1024], 76, manifest)
-
-    mp = use("map.png")
-    mp = mp.convert("RGB") if mp else tone(1536, 1024, (236, 224, 194), (214, 196, 156), glow=(.45, .4), strength=.06)
-    save(mp, "map", [640, 1024, 1536], 76, manifest)
-
-    tag = use("luggage_tag.png")
-    if tag:
-        tag = tag.crop(tb.alfa_kutusu(np.asarray(tag)[..., 3]))
-    else:
-        tag = block(300, 560, (214, 182, 134), KRAFT, glow=(.4, .3), strength=.06)
-    save(tag, "tag", [240, 360], 80, manifest)
-
-    clock = use("station_clock.png")
-    clock = clock.crop(tb.alfa_kutusu(np.asarray(clock)[..., 3])) if clock else \
-        block(560, 560, (226, 210, 172), (200, 178, 128), glow=(.45, .35), strength=.08)
-    save(clock, "clock", [240, 480], 80, manifest)
-
-    frame = use("carriage_window.png")
-    if frame:
-        frame = frame.crop(tb.alfa_kutusu(np.asarray(frame)[..., 3]))
-        frame, glass = green_window(frame)
-    else:
-        frame = Image.new("RGBA", (600, 800), (0, 0, 0, 0))    # interim: no frame (the photo stands alone)
-        glass = [0, 0, 1, 1]
-    save(frame, "window_frame", [480, 640], 82, manifest)
-    manifest["window"] = {"glass_pct": [pct(glass[0]), pct(glass[1]), pct(glass[2] - glass[0]), pct(glass[3] - glass[1])],
-                          "aspect": round(frame.size[0] / frame.size[1], 4)}
-
-    wall = use("carriage_wall.png")
-    wall = wall.convert("RGB") if wall else tone(640, 640, GREEN, GREEN, strength=0)
-    save(wall.resize((640, 640), Image.LANCZOS), "wall", [640], 74, manifest)
-
-    paper = use("bg_paper.png")
-    paper = paper.convert("RGB") if paper else tone(640, 640, IVORY, IVORY, strength=0)
-    save(paper.resize((640, 640), Image.LANCZOS), "paper", [640], 74, manifest)
-
-    bp = use("boarding_pass.png")
-    if bp:
-        bp = bp.crop(tb.alfa_kutusu(np.asarray(bp)[..., 3]))
-    else:
-        bp = block(1000, 1500, (248, 243, 230), IVORY, glow=(.5, .1), strength=.03)
-    bw, bh = bp.size
-    top, bot = int(bh * .16), int(bh * .82)                  # 3-slice: header · plain middle · stub (docs/11 §9)
-    save(bp.crop((0, 0, bw, top)), "pass_top", [640, 960], 80, manifest)
-    save(bp.crop((0, int(bh * .45), bw, int(bh * .55))), "pass_mid", [640, 960], 80, manifest)
-    save(bp.crop((0, bot, bw, bh)), "pass_stub", [640, 960], 80, manifest)
-
-    stamp = use("stamp.png")
-    if stamp:
-        stamp = stamp.crop(tb.alfa_kutusu(np.asarray(stamp)[..., 3]))
-    else:
-        stamp = block(520, 520, INK_STAMP, (98, 30, 38), glow=(.5, .5), strength=.05)
-    save(stamp, "stamp", [240, 480], 82, manifest)
-
-    # photo placeholders: the poster's sky, softened and toned to the page (no person, no text). The GPT poster keeps its
-    # top 45 % as calm sky (W2.8) — the viaduct and the train below it stay out of the placeholders.
-    sky = (0, 0, poster.size[0], int(poster.size[1] * .44)) if gpt_poster else (0, 0, 1024, 900)
+    def aspect(name):
+        w, h = manifest[name]["window_px"]
+        return f"{w}/{h}"
     slots = {}
-    for key, shape, ratio in (("hero_portrait", "portrait", 4 / 5), ("story", "window", 3 / 4), ("venue", "wide", 3 / 2)):
-        ph = tb.yer_tutucu(poster, sky, ratio, w=640, ton=IVORY, karisim=.35, bulanik=10)
-        save(ph, f"ph_{shape}", [640], 76, manifest)
-        slots[key] = f"ph_{shape}-640.webp"
+    for shape, name in (("portrait", "carriage"), ("sash", "sash"), ("wide", "panorama")):
+        w, h = manifest[name]["window_px"]
+        ph = tb.yer_tutucu(ground, (0, 0, ground.width, ground.height), w / h, w=640, ton=PH_TONE, karisim=.4, bulanik=10)
+        tb.webp(ph, f"ph_{shape}", [640], 74, manifest, out=OUT)
+        slots[shape] = f"ph_{shape}-640.webp"
     manifest["placeholders"] = slots
+    manifest["photo_slots"] = {"hero_portrait": {"aspect": aspect("carriage")}, "story_1": {"aspect": aspect("sash")},
+                               "story_2": {"aspect": aspect("sash")}, "story_3": {"aspect": aspect("sash")},
+                               "venue": {"aspect": aspect("panorama")}}
 
-    og, og_info = tb.og_kirp(poster, hiza="orta")
-    manifest["og"] = {**og_info, "file": "og-1200x630.jpg", "bytes": tb.og_kaydet(og, OUT / "og-1200x630.jpg")}
-    icon, icon_info = tb.ikon(stamp)
+    og, og_info = tb.og_kirp(Image.open(PARTS / "web_hero.png"), hiza="alt")
+    manifest["og"] = {**og_info, "file": "og-1200x630.jpg", "source": "parts/web_hero.png",
+                      "bytes": tb.og_kaydet(og, OUT / "og-1200x630.jpg")}
+    icon, icon_info = tb.ikon(layers["tag"])
     icon.save(OUT / "favicon.png", optimize=True)
-    manifest["favicon"] = {**icon_info, "file": "favicon.png", "bytes": (OUT / "favicon.png").stat().st_size}
+    manifest["favicon"] = {**icon_info, "file": "favicon.png", "bytes": (OUT / "favicon.png").stat().st_size,
+                           "source": "the blank luggage tag"}
+    if "--still" in sys.argv:
+        sleeve_still(layers, stage, 900).save(sys.argv[sys.argv.index("--still") + 1])
 
-    sync_css(manifest)
-
-    # -------------------------------------------------------------- checks + manifest
-    manifest["interim"] = interim
+    manifest["parts"] = {"used": sorted(REQUIRED), "waiting_for_gpt": []}
+    manifest["_note"] = "G425 build from the design's own PAKET 5R parts (all present; docs/35). Nothing drawn."
     manifest["checks"] = {"green": tb.yesil_denetle(OUT)}
-    manifest["theme_check"] = {"first_screen": {"landscape": False, "names_min_px": 32},
-                               "backdrop": {"edge_max": 2.2, "dark_max": 0.05, "dark_below": 0, "light_above": 110}}
+    manifest["theme_check"] = {"particles": ".accent-layer", "first_screen": {"landscape": False, "names_min_px": 32}}
     manifest["bytes_total"] = tb.klasor_boyutu(THEME)
     tb.manifest_yaz(OUT, manifest)
-    print(json.dumps(manifest["stage"], indent=1))
-    print(f"interim (waiting for GPT): {len(interim)} — {', '.join(interim) or 'none'}")
-    print(f"orient-express-voyage: theme folder {manifest['bytes_total'] / 1e6:.2f} MB")
+    print(json.dumps({k: v for k, v in stage.items() if k != "_note"}))
+    print({n: (manifest[n]["window_pct"], manifest[n]["src_size"]) for n in ("carriage", "sash", "panorama")})
+    print(f"orient-express-voyage: theme folder {manifest['bytes_total'] / 1e6:.2f} MB, green residue: {manifest['checks']['green']}")
+    if manifest["checks"]["green"]:
+        print("ERROR: green residue in img/", file=sys.stderr)
+        return 1
     if manifest["bytes_total"] > tb.TEMA_BUTCE:
         print("ERROR: theme folder over 3 MB", file=sys.stderr)
         return 1

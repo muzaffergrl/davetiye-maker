@@ -233,8 +233,9 @@ def test_root_tokens_reads_every_root_block():
     assert rp.rgb_hex(toks["--gold"][1]) == "#C9A45C"
 
 
-# docs/35: 23 was rebuilt from its own layered GPT parts (G423); its palettes are redone from the new art later.
-G177 = {"22": "nocturne-lake-estate", "24": "grand-theatre-premiere", "25": "orient-express-voyage",
+# docs/35: 23 (G423) and 25 (G425) were rebuilt from their own layered GPT parts; their palettes are redone from the new
+# art later.
+G177 = {"22": "nocturne-lake-estate", "24": "grand-theatre-premiere",
         "26": "kintsugi-washi", "27": "riad-lantern-nights", "28": "maison-patisserie", "29": "celestial-observatory",
         "30": "azulejo-mosaic", "31": "sky-lantern-festival", "32": "music-box-ballerina"}
 
