@@ -32,7 +32,7 @@ These are the details guests look for first. If any of them is missing, someone 
 
 Add these if they apply to your wedding. Each one saves you a handful of messages.
 
-- **Your story.** A short intro and a few photos with captions. Keep it light; guests enjoy it, but they come for the details.
+- **Your story.** A short intro and a few photos with captions. Keep it light; guests enjoy it, but they come for the details. See [Our Story examples](/guides/wedding-website-our-story-examples) for structures and wording.
 - **Travel and stay.** Nearby hotels, any room block and its booking deadline, the nearest airport, parking and shuttle times.
 - **Dress code.** One or two words and a sentence of explanation, such as "Garden formal: suits or dresses; the ceremony is on grass."
 - **Registry link.** One link on its own section, not repeated on every page. Etiquette guides such as the [Emily Post Institute](https://emilypost.com/advice/wedding-website-tips) advise against putting the registry front and center.

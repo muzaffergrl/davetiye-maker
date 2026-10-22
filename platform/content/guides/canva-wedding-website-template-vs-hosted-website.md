@@ -114,4 +114,4 @@ On most hosted platforms you can change the content but not the layout, and ours
 
 ### Which is cheaper?
 
-Prices vary by seller. Compare the total cost, including any paid plan you would need for features such as your own domain, and how long the website stays online. Then weigh the time you will spend building against the time you save.
+Prices vary by seller. Compare the total cost, including any paid plan you would need for features such as your own domain, and how long the website stays online. Then weigh the time you will spend building against the time you save. Our guide to [free vs paid wedding websites](/guides/free-vs-paid-wedding-websites) lists the costs that are easy to miss.

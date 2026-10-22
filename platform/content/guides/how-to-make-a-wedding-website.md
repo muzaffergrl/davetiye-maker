@@ -35,7 +35,7 @@ The right choice depends less on looks than on where you will edit and how repli
 | Editing device | Most planning happens on a phone, between other tasks | Can I change everything from my phone, without a laptop? |
 | RSVP | Replies scattered across texts, emails and forms are hard to count | Do replies arrive in one list I can download? |
 | Link preview | Guests decide whether to tap from the preview | Does the shared link show our names and date? |
-| Cost | Some tools are free but sell upgrades; others charge once | What do I pay in total, and for how long? |
+| Cost | Some tools are free but sell upgrades; others charge once | What do I pay in total, and for how long? ([free vs paid](/guides/free-vs-paid-wedding-websites)) |
 | How long it stays online | Guests look for photos and details after the day | Until when will the site stay up? |
 | Accounts | Some builders need an account for you, some for guests too | Do my guests need to sign up to reply? |
 

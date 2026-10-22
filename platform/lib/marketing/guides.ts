@@ -6,7 +6,8 @@
 // reviewed (YYYY-MM-DD), quickAnswer (40–60 words), keyword (main search phrase), order (number), cover (optional
 // public path of the cover image, GPT MK12–MK17 once composed), coverAlt.
 // Tokens replaced from config: {{brand}}, {{domain}} (G195: the site's host, as in couple addresses), {{months}},
-// {{rsvpQuestions}}, {{scheduleRows}}, {{faqItems}}, {{photoSpots}}.
+// {{rsvpQuestions}}, {{scheduleRows}}, {{faqItems}}, {{photoSpots}}, {{storyPhotos}}, {{storyIntroChars}}, {{storyCaptionChars}}
+// (G199: the Our Story limits the panel enforces).
 // G144: a translation is content/guides/<lang>/<slug>.md (same slug, same frontmatter keys); the English file decides
 // which guides exist and their order. Without a translation the language page shows the English article (loadGuidesIn).
 
@@ -61,6 +62,9 @@ export function fillTokens(text: string, cfg: MarketingConfig = MARKETING): stri
     scheduleRows: String(LIMITS.scheduleRows),
     faqItems: String(LIMITS.faqItems),
     photoSpots: String(LIMITS.photoSpots),
+    storyPhotos: String(LIMITS.storyPhotos),
+    storyIntroChars: String(LIMITS.storyIntroChars),
+    storyCaptionChars: String(LIMITS.storyCaptionChars),
   };
   return text.replace(/\{\{(\w+)\}\}/g, (all, key: string) => {
     if (!(key in values)) throw new Error(`unknown token ${all}`);

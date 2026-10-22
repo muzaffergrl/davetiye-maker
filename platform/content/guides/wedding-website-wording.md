@@ -30,7 +30,7 @@ The welcome sits on the home page. Say hello, say you are glad, and point to wha
 
 ## Our story intro and photo captions
 
-The intro is one or two sentences. Captions are a few words: a place, a moment, a date.
+The intro is one or two sentences. Captions are a few words: a place, a moment, a date. For longer story structures and examples, see [Our Story examples](/guides/wedding-website-our-story-examples).
 
 | Tone | Story intro |
 |---|---|
