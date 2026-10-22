@@ -556,6 +556,12 @@ EK_TEMALAR = [
          dekor="Pirinç şamdan ve titreyen mum ışığı, kurutulmuş güller, buğday, cipsofil, krem pamuk dantel, yağlı boya alacakaranlık kır manzarası (yuvarlak tepeler, tek meşe, çayır, buğday)", teknik="sıcak tonlu yağlı boya manzara + fotogerçekçi kâğıt, dantel, kuru çiçek, pirinç",
          font=("Mea Culpa", "Cardo"), palet_adi="espresso-cream-candle",
          hareket="Kuru çiçek demetinin devrilip düşmesi ve yaprak saçılması, dantel bandın aşağı kayması, V kapağın 3B açılışı, astardaki manzaranın içine dört katmanlı paralaks dalış, çayırdan yükselen kart, sepyadan renge dönen fotoğraflar, titreyen mum ışığı, program satırlarında eğilen buğday başağı, yanıtta gül yaprağı yağmuru."),
+    dict(no=44, klasor="44_Blue_Toile_Pavilion", ad="Blue Toile Pavilion",
+         zarf="Dikey, özgün mavi toile kumaş kaplı zarf, toz mavisi biyeli ogee (ters soğan kubbe) kapak; cebin iki yan kanadı üst köşelere uzanır; kapanış: kapağın ucuna iğneli mavi-beyaz porselen kamea broş. Broş iğnesinden çıkıp kalkar ve yana süzülür, ogee kapak 3B açılıp toz mavisi iç yüzünü gösterir, üç gravür güvercin kumaştan havalanıp yay çizerek uçar, porselen beyazı kart yükselir.",
+         foto="Mavi-beyaz porselen tabak duvarı: fotoğraflar yuvarlak ve dalgalı kenarlı tabakların ortasındaki yuvarlak pencerelerde, tabaklar toz mavisi keten duvarda ipek fiyonklu askıyla durur; sahnesine gelince askısında sallanıp oturur, sırın üstünden ışık şeridi geçer. Mekân oval servis tabağında.",
+         dekor="Özgün toile deseni (bahçe köşkü, salıncaklı ağaç, dallarda kuşlar, güvercin çifti, küçük köprü), porselen tabaklar ve servis tabağı, zencefil kavanozunda ortanca ve hezaren, toz mavisi ipek fiyonk, gravür güvercinler, gravür girland", teknik="bakır gravür çizgisi (toile, tek renk) + fotogerçekçi porselen/kumaş/keten/ipek",
+         font=("MonteCarlo", "Rosarivo"), palet_adi="toile-blue-porcelain",
+         hareket="Broşun iğnesinden çıkıp süzülmesi, ogee kapağın 3B açılışı, üç gravür güvercinin kumaştan havalanıp uçması, porselen tabakların askıda sallanıp oturması ve sır parıltısı, program satırlarında gravür güvercin, yanıtta çelenge konan iki güvercin."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

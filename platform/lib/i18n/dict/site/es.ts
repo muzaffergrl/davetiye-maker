@@ -330,6 +330,8 @@ const dict: Dict = {
   "Painted with love": "Pintado con amor",
   // G442 Espresso Pastoral (42, coming)
   "By candlelight": "A la luz de las velas",
+  // G444 Blue Toile Pavilion (44, coming)
+  "In the garden pavilion": "En el pabellón del jardín",
 };
 
 export default dict;

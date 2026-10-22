@@ -1159,6 +1159,19 @@ const dict: Dict = {
   "Espresso": "Espresso",
   "Candle gold": "Or de bougie",
   "Dusty rose": "Vieux rose",
+  // G444 Blue Toile Pavilion (44, coming)
+  "A toile-covered envelope with an ogee flap and a porcelain cameo brooch, engraved doves and photos in blue-and-white porcelain plates": "Une enveloppe recouverte de toile de Jouy avec un rabat en accolade et une broche camée en porcelaine, des colombes gravées et des photos dans des assiettes en porcelaine bleue et blanche",
+  "A blue toile and porcelain wedding website: the brooch lifts, engraved doves fly off the fabric and your photos hang in blue-and-white plates. Personalize it in your online editor.": "Un site de mariage toile bleue et porcelaine : la broche se soulève, des colombes gravées s'envolent du tissu et vos photos sont suspendues dans des assiettes bleues et blanches. Personnalisez-le dans votre éditeur en ligne.",
+  "An original blue toile of a garden pavilion, porcelain-white paper, blue-and-white plates and a ginger jar of hydrangeas, like a morning in a French country garden. Your invitation waits in a toile envelope pinned with a porcelain brooch, and your photos hang in plates on a powder-blue linen wall.": "Une toile bleue originale représentant un pavillon de jardin, du papier blanc porcelaine, des assiettes bleues et blanches et une jarre à gingembre garnie d'hortensias, comme un matin dans un jardin de campagne français. Votre invitation attend dans une enveloppe en toile épinglée d'une broche en porcelaine, et vos photos sont suspendues dans des assiettes sur un mur de lin bleu poudré.",
+  "Your guests tap the envelope. The porcelain brooch comes off its pin, the ogee flap opens, three engraved doves lift off the toile and fly away, and the card with your portrait rises out of the envelope to become your home page.": "Vos invités touchent l'enveloppe. La broche en porcelaine quitte son épingle, le rabat en accolade s'ouvre, trois colombes gravées s'envolent de la toile, et la carte avec votre portrait sort de l'enveloppe pour devenir votre page d'accueil.",
+  "Your portrait in a blue-and-white plate on a porcelain card with a dove and a ginger jar, the invitation on powder-blue linen, a countdown and calendar links, your story and the day on the toile.": "Votre portrait dans une assiette bleue et blanche sur une carte en porcelaine avec une colombe et une jarre à gingembre, l'invitation sur lin bleu poudré, un compte à rebours et des liens de calendrier, votre histoire et le jour sur la toile.",
+  "Three photos in round and scalloped plates on a linen wall that swing on their silk bows and settle as guests scroll.": "Trois photos dans des assiettes rondes et festonnées sur un mur de lin, qui se balancent sur leurs nœuds de soie et se posent pendant que les invités font défiler la page.",
+  "The order of the day on a porcelain card, each moment with a small engraved dove, the venue on an oval platter, an optional map, dress code, travel, the menu and questions and answers.": "Le programme de la journée sur une carte en porcelaine, chaque moment avec une petite colombe gravée, le lieu sur un plat ovale, une carte facultative, le code vestimentaire, le voyage, le menu et les questions-réponses.",
+  "A porcelain reply card under an engraved garland; when a reply is sent, two doves land on it and hydrangea florets drift down.": "Une carte de réponse en porcelaine sous une guirlande gravée ; quand une réponse est envoyée, deux colombes s'y posent et des fleurs d'hortensia descendent doucement.",
+  "Toile blue": "Bleu toile",
+  "Powder blue": "Bleu poudré",
+  "Porcelain": "Porcelaine",
+  "Gilt": "Dorure",
 };
 
 export default dict;

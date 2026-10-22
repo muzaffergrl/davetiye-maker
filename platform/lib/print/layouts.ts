@@ -605,6 +605,18 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     ink: '#3B2A21', accent: '#6E5140', front: [24,  13,  12,  13], back: [16,  12,  10,  12],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
+  // 44 (G444, 2026-10-22): the design's own PAKET 6 grounds (porcelain-white paper; front: a band of the toile across the
+  // top, an engraved garland at the foot; back: a short garland at the top), one per side, `cover` for 5×7 and A5.
+  // Ornament measured on the art: front 1–19 % and 92–98 % of the height, back 3–9 %; the boxes sit inside the empty area
+  // (G149).
+  'blue-toile-pavilion': {
+    collection: '44_Blue_Toile_Pavilion',
+    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
+    fonts: gf('family=MonteCarlo&family=Rosarivo:ital@0;1'),
+    script: "'MonteCarlo', cursive", serif: "'Rosarivo', Georgia, serif",
+    ink: '#2E4A72', accent: '#4A6A96', front: [24,  13,  12,  13], back: [14,  12,  10,  12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
+  },
 };
 
 export function printLayout(themeId: string): PrintLayout | null {

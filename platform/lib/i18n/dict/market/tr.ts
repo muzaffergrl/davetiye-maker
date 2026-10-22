@@ -1159,6 +1159,19 @@ const dict: Dict = {
   "Espresso": "Espresso",
   "Candle gold": "Mum altını",
   "Dusty rose": "Gül kurusu",
+  // G444 Blue Toile Pavilion (44, coming)
+  "A toile-covered envelope with an ogee flap and a porcelain cameo brooch, engraved doves and photos in blue-and-white porcelain plates": "Ogee kapaklı ve porselen kamea broşlu toile kaplı zarf, gravür güvercinler ve mavi-beyaz porselen tabaklarda fotoğraflar",
+  "A blue toile and porcelain wedding website: the brooch lifts, engraved doves fly off the fabric and your photos hang in blue-and-white plates. Personalize it in your online editor.": "Mavi toile ve porselen düğün sitesi: broş kalkar, gravür güvercinler kumaştan havalanır ve fotoğraflarınız mavi-beyaz tabaklarda asılı durur. Çevrim içi düzenleyicinizde kişiselleştirin.",
+  "An original blue toile of a garden pavilion, porcelain-white paper, blue-and-white plates and a ginger jar of hydrangeas, like a morning in a French country garden. Your invitation waits in a toile envelope pinned with a porcelain brooch, and your photos hang in plates on a powder-blue linen wall.": "Bir bahçe köşkünü anlatan özgün mavi toile, porselen beyazı kâğıt, mavi-beyaz tabaklar ve ortancalı bir zencefil kavanozu; bir Fransız kır bahçesinde sabah gibi. Davetiniz porselen broşla iğnelenmiş toile bir zarfta bekler ve fotoğraflarınız pudra mavisi keten bir duvarda tabaklarda asılıdır.",
+  "Your guests tap the envelope. The porcelain brooch comes off its pin, the ogee flap opens, three engraved doves lift off the toile and fly away, and the card with your portrait rises out of the envelope to become your home page.": "Misafirleriniz zarfa dokunur. Porselen broş iğnesinden çıkar, ogee kapak açılır, üç gravür güvercin toile'dan havalanıp uçar ve portrenizin olduğu kart zarftan yükselip ana sayfanız olur.",
+  "Your portrait in a blue-and-white plate on a porcelain card with a dove and a ginger jar, the invitation on powder-blue linen, a countdown and calendar links, your story and the day on the toile.": "Bir güvercin ve zencefil kavanozuyla porselen bir kartta mavi-beyaz bir tabakta portreniz, pudra mavisi ketende davet, geri sayım ve takvim bağlantıları, hikâyeniz ve toile üstünde düğün günü.",
+  "Three photos in round and scalloped plates on a linen wall that swing on their silk bows and settle as guests scroll.": "Misafirler kaydırdıkça ipek fiyonklarında sallanıp yerine oturan, keten duvarda yuvarlak ve dalgalı kenarlı tabaklarda üç fotoğraf.",
+  "The order of the day on a porcelain card, each moment with a small engraved dove, the venue on an oval platter, an optional map, dress code, travel, the menu and questions and answers.": "Porselen bir kartta günün programı, her anın başında küçük bir gravür güvercin, oval bir servis tabağında mekân, isteğe bağlı harita, kıyafet kuralı, ulaşım, menü ve sorular-cevaplar.",
+  "A porcelain reply card under an engraved garland; when a reply is sent, two doves land on it and hydrangea florets drift down.": "Gravür bir çelengin altında porselen bir yanıt kartı; yanıt gönderilince iki güvercin üstüne konar ve ortanca çiçekleri süzülür.",
+  "Toile blue": "Toile mavisi",
+  "Powder blue": "Pudra mavisi",
+  "Porcelain": "Porselen",
+  "Gilt": "Yaldız",
 };
 
 export default dict;

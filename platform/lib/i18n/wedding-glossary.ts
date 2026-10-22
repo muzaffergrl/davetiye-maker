@@ -248,6 +248,8 @@ export const WEDDING_GLOSSARY: readonly Row[] = [
   ["Autumn formal", "Sonbahar şıklığı", "Formal de otoño", "Festlich herbstlich", "Tenue habillée d'automne"],
   ["Will the evening be cold?", "Akşam soğuk olacak mı?", "¿Hará frío por la noche?", "Wird der Abend kalt?", "La soirée sera-t-elle froide ?"],
   ["Late October evenings can be cool, so please bring a warm layer for the barn and the long table.", "Ekim sonu akşamları serin olabilir; lütfen ambar ve uzun masa için sıcak tutan bir şey getirin.", "Las noches de finales de octubre pueden ser frescas, así que traigan una prenda de abrigo para el granero y la mesa larga.", "Ende Oktober können die Abende kühl sein, bitte bringen Sie für die Scheune und die lange Tafel etwas Warmes mit.", "Les soirées de fin octobre peuvent être fraîches : prévoyez une couche chaude pour la grange et la longue table."],
+  // G444 Blue Toile Pavilion (44): demo programme and questions
+  ["Garden tea & cocktails", "Bahçede çay ve kokteyl", "Té y cócteles en el jardín", "Gartentee & Cocktails", "Thé et cocktails au jardin"],
 ];
 
 /** "and" between two terms, per language (Spanish "y" becomes "e" before an i- sound). */

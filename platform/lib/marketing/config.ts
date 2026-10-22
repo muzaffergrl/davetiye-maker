@@ -404,6 +404,16 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-22',
     },
+    // New design 44 (G444, docs/33 fourth wave): platform theme built from its own GPT parts; not on sale, no price yet.
+    {
+      id: 'blue-toile-pavilion',
+      name: 'Blue Toile Pavilion',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-22',
+    },
     {
       id: 'blush-garden-rose',
       name: 'Blush Garden Rose',

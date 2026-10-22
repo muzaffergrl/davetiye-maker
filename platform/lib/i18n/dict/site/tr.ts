@@ -330,6 +330,8 @@ const dict: Dict = {
   "Painted with love": "Sevgiyle boyandı",
   // G442 Espresso Pastoral (42, coming)
   "By candlelight": "Mum ışığında",
+  // G444 Blue Toile Pavilion (44, coming)
+  "In the garden pavilion": "Bahçe köşkünde",
 };
 
 export default dict;
