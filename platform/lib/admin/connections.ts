@@ -5,6 +5,8 @@
 //                                               "etsy-connect"  -> {url}: Etsy's consent page (the admin goes there);
 //                                                                  sets the state cookie (HttpOnly, SameSite=Lax, 10 min, Path=/api/etsy)
 //                                               "etsy-disconnect" -> forgets the shop's tokens
+//                                               "mailbox-test"  -> signs in to the order mailbox (G192): {etsyMails} of 30 days
+//                                               "trust-sweep"   -> trust mode's check of provisional orders now (TrustSweepSummary)
 //                                               "etsy-recheck"  -> re-checks every pending order with Etsy (RecheckSummary)
 //                                                                  and runs trust mode's check of provisional orders
 //                                                                  (lib/claim/trust.ts; `trust`: TrustSweepSummary)
@@ -22,6 +24,8 @@ import { recheckPendingOrders } from '../etsy/recheck.ts';
 import { disconnectEtsy, ETSY_STATE_COOKIE, ETSY_STATE_TTL_MS, etsyStatus, finishEtsyConnect, startEtsyConnect, type EtsyCallbackResult } from '../etsy/shop.ts';
 import { EtsyError } from '../etsy/client.ts';
 import { MailSendError, mailStatus, sendTestEmail } from '../mail/index.ts';
+import { mailboxErrorCode } from '../mailbox/imap.ts';
+import { mailboxStatus, testOrderMailbox } from '../mailbox/verify.ts';
 import { fail, json, readLimitedBytes, requestOrigin } from '../panel/http.ts';
 import { adminGuard } from './api.ts';
 
@@ -50,10 +54,19 @@ export function mailErrorText(e: unknown): string {
   return `Gönderilemedi (${code}). Ayarları kontrol edip tekrar deneyin.`;
 }
 
+/** Turkish words for a failed mailbox sign-in / search (codes only; never the server's text). */
+export function mailboxErrorText(e: unknown): string {
+  const code = (e as { code?: unknown })?.code === 'NOT_CONFIGURED' ? 'NOT_CONFIGURED' : mailboxErrorCode(e);
+  if (code === 'NOT_CONFIGURED') return 'Sipariş e-postası kutusu ayarlı değil (ORDER_MAIL_USER, ORDER_MAIL_PASS).';
+  if (code === 'EAUTH') return 'Gmail girişi reddedildi (EAUTH): hesap şifresi değil, 16 harfli uygulama şifresi gerekir; Gmail ayarlarında IMAP açık olmalı.';
+  if (code === 'NO_ALL_MAIL') return 'Gmail\'de "Tüm Postalar" klasörü IMAP\'te görünmüyor: Gmail → Ayarlar → Etiketler → "Tüm Postalar" için "IMAP\'te göster".';
+  return `Gelen kutusuna bağlanılamadı (${code}). Biraz sonra tekrar deneyin.`;
+}
+
 export async function connectionsStatus(req: Request): Promise<Response> {
   const denied = adminGuard(req);
   if (denied) return denied;
-  return json(200, { ok: true, mail: mailStatus(), etsy: await etsyStatus(getDataAdapter()) });
+  return json(200, { ok: true, mail: mailStatus(), mailbox: mailboxStatus(), etsy: await etsyStatus(getDataAdapter()) });
 }
 
 export async function connectionsAction(req: Request): Promise<Response> {
@@ -70,6 +83,17 @@ export async function connectionsAction(req: Request): Promise<Response> {
         return fail(502, 'mail_failed', mailErrorText(e));
       }
       return json(200, { ok: true, mail: mailStatus() });
+    }
+    if (action === 'mailbox-test') {
+      try {
+        const { etsyMails } = await testOrderMailbox();
+        return json(200, { ok: true, etsyMails, mailbox: mailboxStatus() });
+      } catch (e) {
+        return fail(502, 'mailbox_failed', mailboxErrorText(e));
+      }
+    }
+    if (action === 'trust-sweep') {
+      return json(200, { ok: true, trust: await sweepProvisionalOrders(adapter, { origin }) });
     }
     if (action === 'etsy-connect') {
       let started: { url: string; state: string };
@@ -179,6 +203,6 @@ export async function etsyCallback(req: Request): Promise<Response> {
 }
 
 /** For the admin page (server side). */
-export async function connectionsView(): Promise<{ mail: ReturnType<typeof mailStatus>; etsy: Awaited<ReturnType<typeof etsyStatus>> }> {
-  return { mail: mailStatus(), etsy: await etsyStatus(getDataAdapter()) };
+export async function connectionsView(): Promise<{ mail: ReturnType<typeof mailStatus>; mailbox: ReturnType<typeof mailboxStatus>; etsy: Awaited<ReturnType<typeof etsyStatus>> }> {
+  return { mail: mailStatus(), mailbox: mailboxStatus(), etsy: await etsyStatus(getDataAdapter()) };
 }

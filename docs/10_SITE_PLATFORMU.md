@@ -194,6 +194,25 @@ düzenler. Bu belge platformun tek kaynağıdır.
       doğrula" adımı otomatik değildir: dükkân e-postayla haber alır, uymayanı admin'den bekletir. Etsy bağlanınca kendiliğinden olur.
     - **Gerçek Etsy ile denenmedi** (Etsy uygulaması henüz yok); testler sahte Etsy ve sahte e-postayla
       (`platform/tests/trust-orders.test.ts`).
+    - **Gmail'deki Etsy satış e-postasıyla doğrulama (G192):** Etsy bağlanana kadar "sonra doğrula"yı otomatik yapar. Sıra: Etsy
+      (bağlıysa) → dükkânın Gmail kutusu (IMAP, `platform/lib/mailbox/`). Gmail'in kendi araması (`from:etsy.com "<no>"`, Tüm
+      Postalar; Spam/Çöp hariç) en çok 10 maili getirir; bir mail yalnız şu üçü birden tutarsa sayılır: (1) en üstteki
+      `Authentication-Results` (Gmail'in kendi sunucusu `mx.google.com` ekler) `dmarc=pass header.from=etsy.com` diyor ve From aynı alan
+      adında — sahte gönderici / sahte başlık / benzer alan adı sayılmaz; (2) numara **sipariş bağlamında** geçiyor ("Order #…",
+      "Order number: …", "Sipariş numarası: …") — satış e-postasındaki herkese açık ilan / işlem numaraları onay vermez; (3) konu satış
+      ("made a sale", "sold", "new order", "satış", "yeni sipariş") ya da iptal/iade ("cancel", "refund", "iptal", "iade"). Etsy
+      mesaj bildirimi (alıcının yazdığı numara) sayılmaz. Sonuç: satış e-postası → `verified`; iptal/iade e-postası → `/start`'ta ret,
+      sonradan gelirse site yayından kalkar + beklemeye alınır; e-posta yok → karar yok (silinmiş ya da başka kutuya gitmiş olabilir):
+      48 saat sonra yalnız hatırlatma. Kutu salt okunur açılır, hiçbir mail okundu/taşındı olmaz; adres, konu, metin log'a yazılmaz.
+      `/start`'ta tek kontrol en çok 12 sn; saatlik kontrolde tek IMAP bağlantısı.
+      - Ayar (Vercel, Production, Sensitive): `ORDER_MAIL_USER` = **Etsy bildirimlerinin geldiği** Gmail adresi, `ORDER_MAIL_PASS` = o
+        hesabın 16 harfli uygulama şifresi (Google Hesabı → Güvenlik → 2 Adımlı Doğrulama açık → Uygulama şifreleri). E-posta
+        gönderimi aynı Gmail ile ayarlıysa (`SMTP_HOST=smtp.gmail.com` + `SMTP_USER`/`SMTP_PASS`) ayrıca gerekmez: aynı şifre okur da.
+        Gmail'de IMAP açık ve "Tüm Postalar" IMAP'te görünür olmalı (varsayılan). Admin → Bağlantılar → "Sipariş e-postaları (Gmail)"
+        → **Gelen kutusunu dene** (son 30 günün Etsy e-postalarını sayar) / **Doğrulanmamış siparişleri şimdi kontrol et**.
+      - **Gerçek bir Etsy satış e-postasıyla denenmedi** (henüz satış yok). Konu/gövde kalıbı Etsy'nin bilinen biçimine ve Türkçe
+        karşılıklarına göre; tanınmayan biçim yalnız "doğrulanmadı" sonucu verir, yanlış onay vermez. İlk gerçek satışta admin'de
+        sitenin "Onaylandı" olduğuna bakılmalı. Testler: `platform/tests/order-mailbox.test.ts` (yerel sahte Gmail IMAP sunucusu dahil).
   - **Çok ürünlü sipariş (G152):** `etsy` modunda bir sipariş **N site** açabilir; N = makbuzdaki tasarım birimleri (tasarım
     satırlarının adetleri toplamı; eşlenmemiş satır da tasarım sayılır; `listings.json` → `services` altındaki kurulum / özel tasarım /
     ek revizyon ilanları **hiç sayılmaz**; en az 1, en çok 10). `/start`'ta boş birim varsa yeni site açılır; hepsi doluysa eski davranış

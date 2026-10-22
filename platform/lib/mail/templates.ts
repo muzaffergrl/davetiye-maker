@@ -234,8 +234,8 @@ function trustNotice(n: PendingOrderNotice): { subject: string; title: string; l
       title: 'Yeni site başlatıldı — önce güven, sonra doğrula',
       lines: [
         'Alıcı siteyi hemen yayınlayabilir; sipariş henüz doğrulanmadı.',
-        'Etsy bağlıysa sipariş saatte bir kendiliğinden kontrol edilir: uyuyorsa onaylanır, mağazamızda yoksa / iptal ya da iade edildiyse site yayından kalkar ve beklemeye alınır.',
-        'Etsy bağlı değilse doğrulama sizde: Etsy\'de bakın; uymuyorsa yönetimde "Yayından kaldır ve beklet". Bir şey yapmazsanız site yayında kalır; 48 saat sonra bir kez hatırlatılır.',
+        'Sipariş saatte bir kendiliğinden kontrol edilir (Etsy bağlıysa Etsy\'den, Gmail ayarlıysa Etsy\'nin satış e-postasından): uyuyorsa onaylanır; Etsy mağazamızda yoksa ya da iptal/iade edildiyse site yayından kalkar ve beklemeye alınır.',
+        'İkisi de yoksa doğrulama sizde: Etsy\'de bakın; uymuyorsa yönetimde "Yayından kaldır ve beklet". Doğrulanmazsa site yayında kalır; 48 saat sonra bir kez hatırlatılır.',
       ],
     };
   }
@@ -254,7 +254,7 @@ function trustNotice(n: PendingOrderNotice): { subject: string; title: string; l
       subject: `Order still not verified after 48 hours (#${n.orderNumber})`,
       title: 'Sipariş 48 saatte doğrulanamadı',
       lines: [
-        'Site yayınlanabilir durumda ama sipariş hâlâ doğrulanmadı (Etsy bağlı değil ya da Etsy cevap vermedi).',
+        'Site yayınlanabilir durumda ama sipariş hâlâ doğrulanmadı (Etsy bağlı değil / cevap vermedi, Gmail\'de bu siparişin Etsy satış e-postası bulunamadı).',
         'Etsy\'de bakın: uyuyorsa yönetimde "Siparişi onayla"; uymuyorsa "Yayından kaldır ve beklet". Bu hatırlatma bir kez gelir.',
       ],
     };

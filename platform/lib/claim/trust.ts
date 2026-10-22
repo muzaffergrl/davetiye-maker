@@ -3,13 +3,16 @@
 // is checked afterwards, here:
 //
 //   sweepProvisionalOrders — every provisional site with an order number, oldest first (RECHECK_BATCH per run):
-//     Etsy can be asked (app settings + shop connected; or a verifier given by a test):
+//     Etsy (app settings + shop connected) and/or the shop's mailbox (G192, lib/mailbox: Etsy's signed sale / cancellation
+//     emails over IMAP) can be asked — or a verifier given by a test:
 //       verified                                          -> orderCheck verified by "etsy" (nothing else changes)
 //       rejected (not ours / cancelled / refunded / other
 //                 email / other design)                   -> HELD: orderCheck pending + offline (lib/sites.ts holdOrder),
 //                                                            shop notice "held"
 //       still unpaid after the trust window               -> HELD (as above, reason not_paid_in_time)
-//       anything else (unpaid for now, Etsy not answering) -> stays provisional
+//       anything else (unpaid for now, no mail yet,
+//                      nobody answering)                   -> stays provisional ("no sale mail" alone never holds a site:
+//                                                            the mail may have been deleted or gone to another inbox)
 //     past the trust window and still provisional          -> the shop is told ONCE (orderCheck.reviewAt, notice "review");
 //                                                            the site stays online: without an answer from Etsy nothing
 //                                                            is decided against the buyer
@@ -29,10 +32,12 @@ import { etsySetup, verificationMode } from '../etsy/config.ts';
 import { markVerifiedByEtsy, RECHECK_BATCH } from '../etsy/recheck.ts';
 import { connectedShop } from '../etsy/shop.ts';
 import { EtsyOrderVerifier } from '../etsy/verify.ts';
+import { mailboxSetup } from '../mailbox/config.ts';
+import { MailOrderVerifier } from '../mailbox/verify.ts';
 import { getShopNotifier, type ShopNotifier } from '../mail/index.ts';
 import { fail, json, requestOrigin } from '../panel/http.ts';
 import { holdOrder, orderProvisional, TRUST_WINDOW_MS, trustExpired } from '../sites.ts';
-import type { OrderCheckReason, OrderVerifier } from './verify.ts';
+import { ChainOrderVerifier, type OrderCheckReason, type OrderVerifier } from './verify.ts';
 
 export { TRUST_WINDOW_MS, trustExpired } from '../sites.ts';
 
@@ -57,7 +62,7 @@ export interface TrustSweepResult {
 }
 
 export interface TrustSweepSummary {
-  /** Etsy could be asked in this run. */
+  /** Etsy or the order mailbox could be asked in this run. */
   etsy: boolean;
   checked: number;
   verified: number;
@@ -93,16 +98,20 @@ async function markReviewed(adapter: DataAdapter, siteId: string, now: Date): Pr
   }
 }
 
-async function etsyVerifier(adapter: DataAdapter): Promise<OrderVerifier | null> {
-  if (etsySetup().state !== 'ready') return null;
-  return (await connectedShop(adapter)) ? new EtsyOrderVerifier({ adapter }) : null;
+/** Who can answer in this run: Etsy (connected), the mailbox (set up; one IMAP connection for the run), both, or nobody. */
+async function autoVerifier(adapter: DataAdapter): Promise<ChainOrderVerifier | null> {
+  const sources: OrderVerifier[] = [];
+  if (etsySetup().state === 'ready' && (await connectedShop(adapter))) sources.push(new EtsyOrderVerifier({ adapter }));
+  if (mailboxSetup().state === 'ready') sources.push(new MailOrderVerifier({ keepOpen: true }));
+  return sources.length ? new ChainOrderVerifier(sources) : null;
 }
 
 /** One run over the provisional sites (see the top of this file). Never throws for one site: it is left for the next run. */
 export async function sweepProvisionalOrders(adapter: DataAdapter, opts: SweepOptions = {}): Promise<TrustSweepSummary> {
   const now = opts.now ?? new Date();
   const windowMs = opts.windowMs ?? TRUST_WINDOW_MS;
-  const verifier = opts.verifier === undefined ? await etsyVerifier(adapter) : opts.verifier;
+  const own = opts.verifier === undefined ? await autoVerifier(adapter) : null;
+  const verifier = opts.verifier === undefined ? own : opts.verifier;
   const notifier = opts.notifier ?? getShopNotifier();
   const origin = (opts.origin ?? process.env.PLATFORM_PUBLIC_URL ?? '').replace(/\/+$/, '');
   const all = (await adapter.listSites()).filter((s) => orderProvisional(s) && s.orderRef).reverse();
@@ -157,6 +166,7 @@ export async function sweepProvisionalOrders(adapter: DataAdapter, opts: SweepOp
     summary.checked++;
     summary[result.result]++;
   }
+  await own?.close();
   return summary;
 }
 
