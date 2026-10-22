@@ -83,6 +83,7 @@ hiçbir görselde yok; isimler ve tarih HTML.
   Azul, Sintra, Lisbon, Portugal; June 5, 2027, 5:00 PM, Europe/Lisbon; URL ve medya null) — değişmedi.
 - GPT istekleri: `assets/gpt/GPT_PROMPTS.md` (PAKET 5R website katmanları W1–W19 = 22 dosya, PAKET 2 örnek fotoğraflar
   **var**, PAKET 6R basılı davetiye ön/arka, PAKET 3 GEÇERSİZ); prova şekli `assets/gpt/kuru_sekil.json`.
-- Tema: `platform/themes/azulejo-mosaic/` **yeniden kurulacak** (G422–G432, 39 pilot yapısı, `docs/35` §6); GPT parçaları
-  G222–G232. Mevcut tema (Codex envelope-v3) parçalar gelene kadar olduğu gibi duruyor. Durum: **concept** (yeniden tasarım).
+- Tema: `platform/themes/azulejo-mosaic/` **yeniden kuruldu** (G430, 2026-10-22; G423 pilotunun yapısı, `docs/34`,
+  `docs/35` §6a) — GPT parçaları G230 (PAKET 5R 22 dosya, PAKET 6R 2 dosya). Durum: **editable_draft**, katalogda
+  `preview` ("Coming soon"); satış yok. Katalog kapak görüntüsü/klibi henüz eski (yeniden yakalama bekliyor).
 - Etsy taslağı: `package/listing/listing_v3.md` (yayınlanmadı, K41) — tema kurulunca açılış cümlesi yeni zarfa göre güncellenir.

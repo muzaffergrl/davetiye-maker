@@ -71,8 +71,8 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   'orient-express-voyage': { music: 'evening-strings', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
   // Kintsugi & Washi: band slides off (closure) · top · bottom · left · right fold (one paper sound each) · card lifts (rise) · forward
   'kintsugi-washi': { music: 'first-light', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
-  // Azulejo Mosaic: the panel gives under the tap (press) · the tile wave (wave) · the card lifts (rise) · forward
-  'azulejo-mosaic': { music: 'garden-waltz', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
+  // Azulejo Mosaic: the knot loosens (knot) · the twine slips off (twine) · the tile turns over (tile) · the flap swings up (flap) · the corner tiles turn (wave) · the card rises (rise)
+  'azulejo-mosaic': { music: 'garden-waltz', opening: [[0, 'tap'], [380, 'ribbon'], [900, 'clasp'], [1750, 'paper'], [2050, 'chime'], [2400, 'slide']] },
   // Riad Lantern Nights: a knock on the doors (tug) · the leaves swing in (doors) · the card comes out (rise) · forward
   'riad-lantern-nights': { music: 'evening-strings', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
   // Celestial Observatory: dome latch (head) · shutter halves part (shutters) · constellation chime · card rises (rise) · forward

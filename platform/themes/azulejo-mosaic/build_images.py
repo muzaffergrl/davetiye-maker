@@ -1,42 +1,51 @@
 #!/usr/bin/env python3
-"""Azulejo Mosaic (30) — GPT sources → img/ (docs/11 §5.4; tools/tema_build.py). Interim build (G169).
+"""Azulejo Mosaic (30) — GPT sources → img/ (docs/11 §5.4, docs/34, docs/35; tools/tema_build.py). Task G430.
 
-The design's own PAKET 5 parts are ordered in collections/30_Azulejo_Mosaic/assets/gpt/GPT_PROMPTS.md and do not exist
-yet. Every part is taken PART BY PART the moment its file exists in collections/30_Azulejo_Mosaic/assets/gpt/parts/;
-a missing part keeps its interim stand-in, cut, toned or scaled from GPT pixels already in the repo — nothing is drawn
-(K21, docs/11 §5.7). Both ways give the pages the same file names (fixed pixel sizes below), so no template changes
-when GPT's parts arrive:
+Redesign of 2026-10-22 (docs/35 row 30): every picture is the design's own PAKET 5R part
+(collections/30_Azulejo_Mosaic/assets/gpt/GPT_PROMPTS.md), cut, keyed, scaled — nothing is drawn (K21, docs/11 §5.7):
 
-  part (GPT_PROMPTS.md)     output (img/)                 interim stand-in
-  azulejo_1   (W2.1)        tile_1-128/256  field tile    05 frame_portrait border: the daisy tile (centre toned terracotta)
-  azulejo_2   (W2.2)        tile_2-128/256  border tile   05 border: the leaf-spray tile
-  azulejo_3   (W2.3)        tile_3-128/256  corner tile   05 border: the four-petal corner tile
-  azulejo_4   (W2.4)        tile_4-128/256  second field  05 border: the mirrored leaf spray
-  tile_back   (W2.5)        tile_back-256                 05 plaster (bg_tile) toned terracotta bisque
-  cobalt_wall (W2.6)        wall-640                      05 plaster toned deep cobalt (the opening page and the bands)
-  lime_wash   (W2.7)        lime-640                      05 plaster toned warm whitewash (the light pages)
-  card_paper  (W2.8)        card-640                      18 cotton paper (bg_tile) toned glaze white (the card)
-  frieze      (W2.9)        frieze-768                    the four tiles above set side by side (placed, not painted)
-  pot_left / pot_right (W2.10, optional)  pot_l-480, pot_r-480 + ../parts.css   none: no pot until GPT's (no stand-in)
-  web_hero    (W2.11)       og-1200x630.jpg               montage: the closed tile wall on the cobalt wall
+  whitewash_ground (W1)  wash-640/1024        sunlit lime-whitewash plaster: every page ground
+  glaze_paper (W2)       paper-640/1024       creamy glaze-white cotton paper: cards, bands, the reply form
+  env_back (W3)          back-720             the envelope's inside: terracotta lining with cobalt rosettes
+  env_front (W4)         front-720            the glaze-white front pocket with its row of border tiles (the card rises
+                         border-<w>           from behind it); its six border tiles, cut out, edge the invitation band
+  flap (W5)              flap-720             the stepped tile-grid flap, outside (closed; it swings up on its top edge)
+  flap_in (W6)           flap_in-720          the flap's inside (terracotta + cobalt lining), shown once it is open
+  twine (W7)             twine_v/l/r-<w>      the crossed jute twine, cut into three: the vertical strand with the knot
+                                              and its loose ends, the left arm, the right arm (they slide off apart)
+  tile_front (W8)        tile_front-<w>       the loose swallow tile at the flap's lowest step (the closure)
+  tile_back (W9)         tile_back-<w>        its terracotta bisque back (the 3D flip; the back of every turning tile)
+  card_small (W10)       card-720             the glaze-white card that rises from the envelope
+  niche_frame (W11)      niche-720            the limestone arch niche with tiles round the home portrait; window measured
+  story_frame (W12)      frame-720            the azulejo-bordered frame (story, story teaser); window measured
+  venue_frame (W13)      venue-1100           the wide tile-panel frame (venue); window measured
+  corner_spray (W14)     spray-720            olive, jasmine and two loose tiles (cover corner, home card, reply card)
+  divider (W15)          divider-1000         the frieze of five small tiles (section dividers)
+  terracotta_pot (W16)   pot-480              the terracotta pot with ivy and jasmine (signature)
+  mosaic_tile_a/b (W17)  tile_a/tile_b-240    the tiles of the photo mosaic and of the turning tiles on the cover
+  accent_1..3 (W18)      chip/leaf/jasmine-160  the accents that drift during the opening and after a reply
+  web_hero (W19)         og-1200x630.jpg      share image (tema_build.og_kirp, bottom-aligned)
 
-Every page links ../parts.css after site.css: it is GENERATED here and carries the rules of the optional parts that
-exist (the terracotta pots) — a page never asks for a picture the build did not make (G167).
-
-Also written: ph_portrait / ph_land / ph_wide (neutral photo placeholders: whitewash, blurred), favicon.png (one tile)
-and img/manifest.json (sources, sizes, the wall geometry, parts used / waiting for GPT).
+The envelope layers (W3, W4, W5, W7, W8, W9) share one canvas and GPT kept them in place there, except that it drew the
+flap ~8 % wider than the back (x 4–96 % against 7.7–92.5 %) and the pocket ~2 % wider. The flap's square tiles and round
+medallions are the strongest picture, so they keep their proportions: the envelope box is the flap's width × the back's
+height, and the back and the pocket (plain paper, a small rosette print, six border tiles) are laid across that width.
+Twine and tile keep their places on the canvas relative to that box. Manifest `stage` holds the numbers site.css uses
+(tests/theme-azulejo-mosaic.test.ts compares them).
+Photo windows: the story and venue frames came with a fully transparent window (no green at all), the niche with a green
+rim round a transparent middle; the window = the hole the frame encloses (with any green in it), cleared whole, the
+green spill round it neutralised. All three windows are rectangles (no mask needed).
 
   python3 platform/themes/azulejo-mosaic/build_images.py
 """
 from __future__ import annotations
 
-import colorsys
 import json
 import sys
 from pathlib import Path
 
 import numpy as np
-from PIL import Image, ImageEnhance, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter
 
 THEME = Path(__file__).resolve().parent
 ROOT = THEME.parents[2]
@@ -46,226 +55,249 @@ import tema_build as tb  # noqa: E402
 COL = ROOT / "collections/30_Azulejo_Mosaic"
 PARTS = COL / "assets/gpt/parts"
 OUT = THEME / "img"
-SRC = {
-    "plaster": ROOT / "collections/05_Lemon_Mediterranean/assets/gpt/parts/bg_tile.png",
-    "tiles": ROOT / "collections/05_Lemon_Mediterranean/assets/gpt/parts/frame_portrait.png",
-    "paper": ROOT / "collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png",
-}
-# single tiles of the 05 frame border (x0, y0, x1, y1), inside the gold grout: daisy (field), leaf spray (border),
-# four-petal corner, mirrored leaf spray (second field)
-TILE_BOXES = {1: (474, 291, 554, 359), 2: (255, 291, 337, 359), 3: (165, 291, 231, 359), 4: (362, 291, 444, 359)}
-TILE_PX = (128, 256)
 
-# palette (site.css :root)
-NIGHT = (16, 37, 84)             # --night   #102554  the opening wall, the bands
-LIME = (242, 237, 227)           # --lime    #F2EDE3  the light pages
-CARD = (250, 248, 242)           # --glaze   #FAF8F2  the card behind the tiles
-TERRA = (174, 88, 58)            # --terra   #AE583A  the unglazed back of a tile
-LIME_SHADE = (226, 219, 205)     # placeholder tone
-
-# the closed wall (site.css .wall, site.js WALL): 4 × 6 tiles, the card behind it has the same 2:3 box
-WALL = {"cols": 4, "rows": 6, "aspect": round(4 / 6, 4)}
-
-used: dict[str, str] = {}
+PH_TONE = (232, 236, 242)        # placeholder tone (glaze white with a breath of cobalt)
+REQUIRED = ["whitewash_ground", "glaze_paper", "env_back", "env_front", "flap", "flap_in", "twine", "tile_front",
+            "tile_back", "card_small", "niche_frame", "story_frame", "venue_frame", "corner_spray", "divider",
+            "terracotta_pot", "mosaic_tile_a", "mosaic_tile_b", "accent_1", "accent_2", "accent_3", "web_hero"]
+# the six border tiles along the bottom of the pocket (env_front canvas px, measured on the part: tile 1's left edge to
+# tile 6's right edge with a hair of grout; the ribbon repeats every two tiles, so the cut repeats along a band)
+BORDER_CROP = (117, 1137, 1010, 1244)
+CARD_W = 70.0                    # % of the envelope width (inside the pocket with room on both sides)
+CARD_TOP = 6.0                   # % of the envelope height
 
 
-def gpt(name: str, mode: str = "RGB"):
-    p = PARTS / f"{name}.png"
-    if p.exists():
-        used[name] = f"gpt parts/{name}.png"
-        return Image.open(p).convert(mode)
-    return None
+def part(ad: str) -> Image.Image:
+    return Image.open(PARTS / f"{ad}.png").convert("RGBA")
 
 
-def tonla(src: Image.Image, renk, sigma: float) -> Image.Image:
-    """The palette colour carrying the source's own grain: per-pixel luminance deviation × sigma levels (nothing added)."""
-    g = np.asarray(src.convert("L"), float)
-    d = (g - g.mean()) / (g.std() + 1e-6)
-    out = np.clip(np.array(renk, float)[None, None, :] + d[..., None] * sigma, 0, 255)
-    return Image.fromarray(out.astype(np.uint8), "RGB")
+def box(im: Image.Image, esik: int = 8):
+    return tb.alfa_kutusu(np.asarray(im)[..., 3], esik=esik)
 
 
-def terracotta_centre(im: Image.Image) -> Image.Image:
-    """The 05 tiles' yellow flower centres and gold grout turned terracotta (hue shift only; the cobalt stays)."""
-    a = np.asarray(im.convert("RGB")).astype(float) / 255
-    hsv = np.array([colorsys.rgb_to_hsv(*p) for p in a.reshape(-1, 3)]).reshape(a.shape)
-    warm = (hsv[..., 0] > 0.08) & (hsv[..., 0] < 0.2) & (hsv[..., 1] > 0.3)
-    hsv[..., 0] = np.where(warm, 0.045, hsv[..., 0])
-    hsv[..., 1] = np.where(warm, np.minimum(hsv[..., 1] * 0.85, 1), hsv[..., 1])
-    hsv[..., 2] = np.where(warm, hsv[..., 2] * 0.78, hsv[..., 2])
-    rgb = np.array([colorsys.hsv_to_rgb(*p) for p in hsv.reshape(-1, 3)]).reshape(a.shape)
-    return Image.fromarray((np.clip(rgb, 0, 1) * 255).astype(np.uint8), "RGB")
+def trim(im: Image.Image, esik: int = 8) -> Image.Image:
+    k = box(im, esik)
+    return im.crop(k) if k else im
 
 
-def square_crop(im: Image.Image) -> Image.Image:
-    s = min(im.size)
-    return im.crop(((im.width - s) // 2, (im.height - s) // 2, (im.width - s) // 2 + s, (im.height - s) // 2 + s))
+def r2(v: float) -> float:
+    return round(float(v), 2)
 
 
-def tiles() -> dict[int, Image.Image]:
-    border = Image.open(SRC["tiles"]).convert("RGB")
+def _grow(m: np.ndarray, px: int) -> np.ndarray:
+    """Dilate a boolean mask by `px` pixels (PIL MaxFilter; no scipy on the build machines)."""
+    im = Image.fromarray(m.astype(np.uint8) * 255, "L").filter(ImageFilter.MaxFilter(2 * px + 1))
+    return np.asarray(im) > 127
+
+
+def _fill_holes(m: np.ndarray) -> np.ndarray:
+    """m plus every pixel not reachable from the border without crossing m (scipy's binary_fill_holes)."""
+    h, w = m.shape
+    pad = np.zeros((h + 2, w + 2), np.uint8)
+    pad[1:-1, 1:-1] = m.astype(np.uint8) * 255
+    im = Image.fromarray(pad, "L").copy()
+    ImageDraw.floodfill(im, (0, 0), 128)
+    return np.asarray(im)[1:-1, 1:-1] != 128
+
+
+def _component(m: np.ndarray, seed) -> np.ndarray:
+    """The 4-connected region of m that holds `seed` (x, y)."""
+    im = Image.fromarray(m.astype(np.uint8) * 255, "L").copy()
+    ImageDraw.floodfill(im, seed, 128)
+    return np.asarray(im) == 128
+
+
+def keyed_window(im: Image.Image):
+    """The photo window of a framed part = the hole the frame encloses round its middle, with any GPT green (≈ 3, 252, 45)
+    in it (the niche: a green rim; the story and venue frames: no green, the window is simply transparent), grown 2 px and
+    cleared; the green spill in a 12 px ring round it is neutralised.
+    (RGBA, window box (L, T, W, H) % of the image) or (im, None)."""
+    c = np.asarray(im).copy()
+    rgb = c[..., :3].astype(np.int16)
+    green = (rgb[..., 1] > 120) & (rgb[..., 1] - np.maximum(rgb[..., 0], rgb[..., 2]) > 60) & (c[..., 3] > 40)
+    solid = (c[..., 3] > 40) & ~green
+    hole = _fill_holes(solid) & ~solid
+    h, w = c.shape[:2]
+    seed = (w // 2, h // 2)
+    if not hole[seed[1], seed[0]]:
+        return im, None
+    win = _grow(_component(hole, seed), 2)
+    if win.sum() < 0.05 * w * h:
+        return im, None
+    ys, xs = np.nonzero(win)
+    x0, x1, y0, y1 = xs.min(), xs.max() + 1, ys.min(), ys.max() + 1
+    c[win, 3] = 0
+    ring = _grow(win, 12) & ~win
+    rgb = c[..., :3].astype(np.int16)
+    spill = ring & (rgb[..., 1] > np.maximum(rgb[..., 0], rgb[..., 2]) + 6)
+    c[..., 1] = np.where(spill, ((rgb[..., 0] + rgb[..., 2]) // 2).clip(0, 255), c[..., 1]).astype(np.uint8)
+    return Image.fromarray(c, "RGBA"), (100 * x0 / w, 100 * y0 / h, 100 * (x1 - x0) / w, 100 * (y1 - y0) / h)
+
+
+def place(inner, outer):
+    """The box `inner` (x0, y0, x1, y1 px) in % of the box `outer`: [left, top, width, height]."""
+    ox0, oy0, ox1, oy1 = outer
+    ow, oh = ox1 - ox0, oy1 - oy0
+    x0, y0, x1, y1 = inner
+    return [r2(100 * (x0 - ox0) / ow), r2(100 * (y0 - oy0) / oh), r2(100 * (x1 - x0) / ow), r2(100 * (y1 - y0) / oh)]
+
+
+def union(a, b):
+    return (min(a[0], b[0]), min(a[1], b[1]), max(a[2], b[2]), max(a[3], b[3]))
+
+
+def split_twine(tw: Image.Image):
+    """The crossed twine → its knot (x, y px) and three layers on the same canvas: the vertical strand with the knot and
+    the two loose ends, the left arm, the right arm. The knot = the crossing of the tallest columns and the widest rows;
+    the arms are the wide rows left and right of the knot (the loose ends hang lower, so they stay with the strand)."""
+    c = np.asarray(tw)
+    a = c[..., 3] > 60
+    cols = np.nonzero(a.sum(0) > 0.5 * a.sum(0).max())[0]
+    rows = np.nonzero(a.sum(1) > 0.5 * a.sum(1).max())[0]
+    kx, ky = float(cols.mean()), float(rows.mean())
+    knot_r = 34                                  # the knot's half width (px, measured: x 541–601 round 571)
+    y = np.arange(c.shape[0])[:, None]
+    band = (y >= rows.min() - 30) & (y <= rows.max() + 16)   # the arms' ends bend up a little
+    x = np.arange(c.shape[1])[None, :]
+    left = band & (x < kx - knot_r)
+    right = band & (x > kx + knot_r)
     out = {}
-    for i, box in TILE_BOXES.items():
-        own = gpt(f"azulejo_{i}")
-        if own is not None:
-            t = square_crop(own)
-        else:
-            t = terracotta_centre(border.crop(box).resize((TILE_PX[1], TILE_PX[1]), Image.LANCZOS))
-            used[f"azulejo_{i}"] = "interim (05 frame_portrait border tile, centre toned terracotta)"
-        out[i] = t.resize((TILE_PX[1], TILE_PX[1]), Image.LANCZOS)
-        tb.webp(out[i], f"tile_{i}", list(TILE_PX), 82, manifest, out=OUT)
-    return out
+    for k, m in (("twine_l", left), ("twine_r", right), ("twine_v", ~(left | right))):
+        d = c.copy()
+        d[..., 3] = np.where(m, d[..., 3], 0)
+        out[k] = Image.fromarray(d, "RGBA")
+    return (kx, ky), out
 
 
-def ground(name: str, src: str, renk, sigma: float):
-    own = gpt(name)
-    if own is not None:
-        return own
-    used[name] = f"interim ({Path(SRC[src]).parts[-5]} {Path(SRC[src]).name} toned)"
-    im = Image.open(SRC[src]).convert("RGB")
-    return tonla(im, renk, sigma)
+def neutral_leaves(im: Image.Image) -> Image.Image:
+    """The pot's ivy has a few leaf-edge pixels as saturated as the #00FF00 key (tb.yesil_gorunur would read them as
+    residue): only those are pulled to the ivy's own muted green (G at 1.3 × max(R, B)); nothing else changes."""
+    c = np.asarray(im).copy()
+    a = c.astype(np.int16)
+    mx = np.maximum(a[..., 0], a[..., 2])
+    hot = ((a[..., 1] - mx) > 30) & (a[..., 1] * 20 >= 27 * mx) & (a[..., 3] > 25)   # with a margin for resampling
+    c[..., 1] = np.where(hot, np.minimum(a[..., 1], (mx * 1.3).astype(np.int16)).clip(0, 255), c[..., 1]).astype(np.uint8)
+    return Image.fromarray(c, "RGBA")
 
 
-def wall_montage(t: dict[int, Image.Image], px: int) -> Image.Image:
-    """The closed wall as the page lays it out (site.js tileKind): corners tile_3, border tile_2 turned to its side,
-    field tile_1 / tile_4 in a 2 × 2 turn. Placed tiles only (no grout drawn: the tiles touch)."""
-    cols, rows = WALL["cols"], WALL["rows"]
-    out = Image.new("RGB", (cols * px, rows * px))
-    for r in range(rows):
-        for c in range(cols):
-            k, turn = tile_kind(r, c)
-            out.paste(t[k].resize((px, px), Image.LANCZOS).rotate(-90 * turn), (c * px, r * px))
-    return out
-
-
-def tile_kind(r: int, c: int) -> tuple[int, int]:
-    """Same rule as site.js tileKind(): (tile number, quarter turns)."""
-    cols, rows = WALL["cols"], WALL["rows"]
-    edge_r, edge_c = r in (0, rows - 1), c in (0, cols - 1)
-    if edge_r and edge_c:
-        return 3, (0 if (r, c) == (0, 0) else 1 if r == 0 else 3 if c == 0 else 2)
-    if edge_r:
-        return 2, 0 if r == 0 else 2
-    if edge_c:
-        return 2, 3 if c == 0 else 1
-    return (1 if (r + c) % 2 else 4), (r % 2) * 2 + (c % 2)
-
-
-manifest: dict = {}
-
-
-# Emekli (2026-10-20): tema 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (docs/qa/2026-10-18-*.md,
-# docs/qa/2026-10-19-*.md); img/ artık bu betiğin çıktısı değil. Bu betik img/'yi silip eski geçici kesimi kurar ve
-# yeni kapak / iç sayfa görsellerini yok eder, bu yüzden çalışmaz. tools/gpt_yerlestir.py bu adımı atlar.
-EMEKLI = "tema 2026-10-18/19 yeniden kurulumuyla değişti; img/ elle yönetiliyor (silmemek için çalışmaz)"
+def first_file(manifest, name):
+    return manifest[name]["files"][0]["file"]
 
 
 def main() -> int:
-    if EMEKLI:
-        print(f"build_images.py çalıştırılmadı: {EMEKLI}", file=sys.stderr)
-        return 2
+    missing = [k for k in REQUIRED if not (PARTS / f"{k}.png").exists()]
+    if missing:
+        print("ERROR: parts missing: " + ", ".join(missing), file=sys.stderr)
+        return 1
+    manifest: dict = {}
     OUT.mkdir(exist_ok=True)
     for old in list(OUT.glob("*.webp")) + list(OUT.glob("*.jpg")) + list(OUT.glob("*.png")):
         old.unlink()
 
-    t = tiles()
-    back = gpt("tile_back")
-    if back is None:
-        back = tonla(Image.open(SRC["plaster"]).convert("RGB").crop((0, 0, 640, 640)), TERRA, 11)
-        used["tile_back"] = "interim (05 plaster toned terracotta)"
-    tb.webp(square_crop(back).resize((256, 256), Image.LANCZOS), "tile_back", [256], 80, manifest, out=OUT)
+    wash = Image.open(PARTS / "whitewash_ground.png").convert("RGB")
+    paper = Image.open(PARTS / "glaze_paper.png").convert("RGB")
+    tb.webp(wash, "wash", [640, 1024], 70, manifest, out=OUT)
+    tb.webp(paper, "paper", [640, 1024], 72, manifest, out=OUT)
 
-    wall = ground("cobalt_wall", "plaster", NIGHT, 7)
-    tb.webp(wall.resize((640, 640), Image.LANCZOS), "wall", [640], 74, manifest, out=OUT)
-    lime = ground("lime_wash", "plaster", LIME, 5)
-    tb.webp(lime.resize((640, 640), Image.LANCZOS), "lime", [640], 74, manifest, out=OUT)
-    card = ground("card_paper", "paper", CARD, 4)
-    tb.webp(card.resize((640, 640), Image.LANCZOS), "card", [640], 76, manifest, out=OUT)
+    # the envelope: the box is the flap's width × the back's height; back and pocket span its width
+    raw = {k: part(n) for k, n in (("back", "env_back"), ("front", "env_front"), ("flap", "flap"))}
+    boxes = {k: box(v) for k, v in raw.items()}
+    env = (boxes["flap"][0], boxes["back"][1], boxes["flap"][2], boxes["back"][3])
+    ew, eh = env[2] - env[0], env[3] - env[1]
+    front = place(boxes["front"], env)
+    flap = place(boxes["flap"], env)
+    stage = {
+        "aspect": round(ew / eh, 4),
+        "back": [0, 0, 100, 100],
+        "front": [0, front[1], 100, r2(100 - front[1])],
+        "flap": [0, 0, 100, r2(flap[1] + flap[3])],
+        "_drift": {"back_px": list(boxes["back"]), "front_px": list(boxes["front"]), "flap_px": list(boxes["flap"])},
+    }
+    layers = {k: raw[k].crop(boxes[k]) for k in raw}
+    for k in ("back", "front", "flap"):
+        tb.webp(layers[k], k, [720], 80, manifest, out=OUT)
+    flap_in = trim(part("flap_in"))
+    tb.webp(flap_in, "flap_in", [720], 80, manifest, out=OUT)
+    stage["flap_in_ratio"] = round(flap_in.width / flap_in.height, 4)
 
-    fr = gpt("frieze")
-    if fr is not None:
-        h = 192
-        fr = fr.resize((round(fr.width * h / fr.height), h), Image.LANCZOS)
-        fr = fr.crop((0, 0, 768, h)) if fr.width >= 768 else fr.resize((768, h), Image.LANCZOS)
-    else:   # four tiles side by side, the border tile between the field tiles (placed, not painted)
-        fr = Image.new("RGB", (768, 192))
-        for i, k in enumerate((1, 2, 4, 2)):
-            fr.paste(t[k].resize((192, 192), Image.LANCZOS), (i * 192, 0))
-        used["frieze"] = "interim (the four tiles above, side by side)"
-    tb.webp(fr, "frieze", [768], 80, manifest, out=OUT)
+    # the closure: the loose tile (front and back cut to one box, so the flip turns on one axis) and the twine in three
+    tf, tk = part("tile_front"), part("tile_back")
+    tbox = union(box(tf), box(tk))
+    tb.webp(tf.crop(tbox), "tile_front", [320], 86, manifest, out=OUT)
+    tb.webp(tk.crop(tbox), "tile_back", [320], 84, manifest, out=OUT)
+    stage["tile"] = place(tbox, env)
+    (kx, ky), strands = split_twine(part("twine"))
+    for k, im in strands.items():
+        b = box(im)
+        tb.webp(im.crop(b), k, [min(720, b[2] - b[0])], 86, manifest, out=OUT)
+        stage[k] = place(b, env)
+    stage["knot"] = [r2(100 * (kx - env[0]) / ew), r2(100 * (ky - env[1]) / eh)]
+    card = trim(part("card_small"))
+    tb.webp(card, "card", [720], 80, manifest, out=OUT)
+    stage["card_ratio"] = round(card.width / card.height, 4)
+    stage["card"] = [r2(50 - CARD_W / 2), CARD_TOP, CARD_W, r2(CARD_W * ew / eh / stage["card_ratio"])]
+    stage["_note"] = ("% of the closed envelope (left, top, width, height): the box is the flap's width × the back's "
+                      "height; back and pocket span its width, the flap hangs from its top edge, tile and twine keep "
+                      "their canvas places (knot = the twine's crossing, x/y %); the card is 70 % of the width")
+    manifest["stage"] = stage
 
+    # the border tiles of the pocket, cut out to edge the invitation band
+    tb.webp(part("env_front").crop(BORDER_CROP), "border", [900], 84, manifest, out=OUT)
+
+    # the frames: window measured (the hole the frame encloses, with any green in it)
+    for src, name, width in (("niche_frame", "niche", 720), ("story_frame", "frame", 720), ("venue_frame", "venue", 1100)):
+        keyed, win = keyed_window(trim(part(src)))
+        if win is None:
+            print(f"ERROR {src}.png: no photo window found", file=sys.stderr)
+            return 1
+        tb.webp(keyed, name, [width], 84, manifest, out=OUT)
+        manifest[name]["window_pct"] = [r2(v) for v in win]
+        manifest[name]["window_px"] = [round(keyed.width * win[2] / 100), round(keyed.height * win[3] / 100)]
+
+    for src, name, width, q in (("corner_spray", "spray", 720, 82), ("divider", "divider", 1000, 84),
+                                ("terracotta_pot", "pot", 480, 84), ("mosaic_tile_a", "tile_a", 240, 86),
+                                ("mosaic_tile_b", "tile_b", 240, 86), ("accent_1", "chip", 160, 86),
+                                ("accent_2", "leaf", 160, 86), ("accent_3", "jasmine", 160, 86)):
+        im = trim(part(src))
+        if src == "terracotta_pot":
+            im = neutral_leaves(im)
+        tb.webp(im, name, [width], q, manifest, out=OUT)
+
+    def aspect(name):
+        w, h = manifest[name]["window_px"]
+        return f"{w}/{h}"
     slots = {}
-    for key, shape, ratio in (("hero_portrait", "portrait", 4 / 5), ("story", "land", 5 / 4), ("venue", "wide", 16 / 9)):
-        ph = tb.yer_tutucu(lime, (0, 0, lime.width, lime.height), ratio, w=640, ton=LIME_SHADE, karisim=.55, bulanik=10)
+    for shape, name in (("niche", "niche"), ("story", "frame"), ("venue", "venue")):
+        w, h = manifest[name]["window_px"]
+        ph = tb.yer_tutucu(wash, (0, 0, wash.width, wash.height), w / h, w=640, ton=PH_TONE, karisim=.35, bulanik=10)
         tb.webp(ph, f"ph_{shape}", [640], 74, manifest, out=OUT)
-        slots[key] = f"ph_{shape}-640.webp"
+        slots[shape] = f"ph_{shape}-640.webp"
     manifest["placeholders"] = slots
-    manifest["photo_slots"] = {"hero_portrait": {"aspect": "4/5"}, "story_1": {"aspect": "4/5"},
-                               "story_2": {"aspect": "5/4"}, "story_3": {"aspect": "4/5"}, "venue": {"aspect": "16/9"}}
-    manifest["stage"] = {"wall": WALL, "tile_px": TILE_PX,
-                         "_note": "4 × 6 tiles over the card (same 2:3 box); corners tile_3, border tile_2, field "
-                                  "tile_1 / tile_4 turned in a 2 × 2 (site.js tileKind = build_images.tile_kind)"}
+    manifest["photo_slots"] = {"hero_portrait": {"aspect": aspect("niche")}, "story_1": {"aspect": aspect("frame")},
+                               "story_2": {"aspect": aspect("frame")}, "story_3": {"aspect": aspect("frame")},
+                               "venue": {"aspect": aspect("venue")}}
 
-    # optional parts (parts.css): the terracotta pots at the foot of the opening wall and the home card
-    css = []
-    for side, name in (("l", "pot_left"), ("r", "pot_right")):
-        pot = gpt(name, "RGBA")
-        if pot is None:
-            continue
-        k = tb.alfa_kutusu(np.asarray(pot)[..., 3], esik=12)
-        pot = pot.crop(k) if k else pot
-        tb.webp(pot, f"pot_{side}", [480], 82, manifest, out=OUT)
-        f = manifest[f"pot_{side}"]["files"][0]["file"]
-        css.append(f".pot-{side}{{display:block;aspect-ratio:{pot.width}/{pot.height};"
-                   f"background:url(img/{f}) 50% 100%/contain no-repeat}}")
-    head = ("/* Azulejo Mosaic — GENERATED by build_images.py (do not edit): rules for the design's optional GPT parts\n"
-            "   (W2.10 terracotta pots, GPT_PROMPTS.md) that exist in collections/30_Azulejo_Mosaic/assets/gpt/parts/.\n"
-            "   A part that is not there has no rule: its place stays empty (display:none in site.css). */\n")
-    (THEME / "parts.css").write_text(head + ("\n".join(css) + "\n" if css else "/* none yet */\n"), encoding="utf-8")
-    manifest["parts_css_rules"] = len(css)
-
-    hero = PARTS / "web_hero.png"
-    if hero.exists():
-        og, og_info = tb.og_kirp(Image.open(hero), hiza="alt")
-        manifest["og"] = {**og_info, "file": "og-1200x630.jpg", "source": "parts/web_hero.png",
-                          "bytes": tb.og_kaydet(og, OUT / "og-1200x630.jpg")}
-        used["web_hero"] = "gpt parts/web_hero.png"
-    else:   # the closed tile wall on the cobalt wall (the page's own tiles, placed; no text)
-        og = Image.new("RGB", (1200, 630))
-        w640 = wall.resize((640, 640), Image.LANCZOS)
-        for x in (0, 600):
-            og.paste(w640.crop((0, 0, 640, 630)), (x, 0))
-        m = wall_montage(t, 92)
-        shade = Image.new("RGBA", (m.width + 60, m.height + 60), (0, 0, 0, 0))
-        shade.paste((4, 10, 30, 150), (30, 38, 30 + m.width, 38 + m.height))
-        shade = shade.filter(ImageFilter.GaussianBlur(14))
-        x0, y0 = (1200 - m.width) // 2, (630 - m.height) // 2
-        og.paste(shade, (x0 - 30, y0 - 30), shade)
-        og.paste(m, (x0, y0))
-        manifest["og"] = {"file": "og-1200x630.jpg", "source": "montage: the closed tile wall (tile_1..4) on the cobalt wall",
-                          "bytes": tb.og_kaydet(og, OUT / "og-1200x630.jpg")}
-    tile_icon = Image.new("RGBA", (256, 256))
-    tile_icon.paste(ImageEnhance.Contrast(t[1]).enhance(1.05))
-    icon, icon_info = tb.ikon(tile_icon, pay=0.02)
+    og, og_info = tb.og_kirp(Image.open(PARTS / "web_hero.png"), hiza="alt")
+    manifest["og"] = {**og_info, "file": "og-1200x630.jpg", "source": "parts/web_hero.png",
+                      "bytes": tb.og_kaydet(og, OUT / "og-1200x630.jpg")}
+    icon, icon_info = tb.ikon(tf.crop(tbox))
     icon.save(OUT / "favicon.png", optimize=True)
-    manifest["favicon"] = {**icon_info, "file": "favicon.png", "bytes": (OUT / "favicon.png").stat().st_size}
+    manifest["favicon"] = {**icon_info, "file": "favicon.png", "bytes": (OUT / "favicon.png").stat().st_size,
+                           "source": "the loose swallow tile"}
 
-    waiting = sorted(k for k, v in used.items() if v.startswith("interim"))
-    optional = [k for k in ("pot_left", "pot_right", "web_hero") if k not in used]
-    manifest["sources"] = used
-    manifest["parts"] = {"used": sorted(k for k, v in used.items() if v.startswith("gpt")),
-                         "waiting_for_gpt": waiting + optional}
-    manifest["_note"] = ("G169 build from the design's own PAKET 5 parts. Nothing drawn." if not manifest["parts"]["waiting_for_gpt"]
-                         else "G169 interim build: tiles cut from 05's painted tile border, grounds toned from 05 / 18 "
-                              "plain GPT textures; the design's own PAKET 5 parts are taken as they arrive "
-                              "(GPT_PROMPTS.md, manifest parts). Nothing drawn.")
+    manifest["parts"] = {"used": sorted(REQUIRED), "waiting_for_gpt": []}
+    manifest["_note"] = "G430 build from the design's own PAKET 5R parts (all present; docs/35). Nothing drawn."
     manifest["checks"] = {"green": tb.yesil_denetle(OUT)}
-    manifest["theme_check"] = {"first_screen": {"landscape": False, "names_min_px": 32},
-                               "backdrop": {"edge_max": 2.2, "dark_max": 0.05, "dark_below": 0, "light_above": 140}}
+    manifest["theme_check"] = {"particles": ".accent-layer", "first_screen": {"landscape": False, "names_min_px": 32}}
     manifest["bytes_total"] = tb.klasor_boyutu(THEME)
     tb.manifest_yaz(OUT, manifest)
-    print(json.dumps(used, indent=1))
-    print(f"azulejo-mosaic: theme folder {manifest['bytes_total'] / 1e6:.2f} MB")
+    print(json.dumps({k: v for k, v in stage.items() if not k.startswith("_")}))
+    print({n: (manifest[n]["window_pct"], manifest[n]["src_size"]) for n in ("niche", "frame", "venue")})
+    print({n: first_file(manifest, n) for n in ("twine_v", "twine_l", "twine_r", "border", "tile_front", "tile_a")})
+    print(f"azulejo-mosaic: theme folder {manifest['bytes_total'] / 1e6:.2f} MB, green residue: {manifest['checks']['green']}")
+    if manifest["checks"]["green"]:
+        print("ERROR: green residue in img/", file=sys.stderr)
+        return 1
     if manifest["bytes_total"] > tb.TEMA_BUTCE:
         print("ERROR: theme folder over 3 MB", file=sys.stderr)
         return 1
