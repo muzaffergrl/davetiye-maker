@@ -74,8 +74,8 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   'kintsugi-washi': { music: 'first-light', opening: [[0, 'clasp'], [200, 'ribbon'], [950, 'paper'], [1610, 'paper'], [2250, 'slide'], [2950, 'chime']] },
   // Azulejo Mosaic: the panel gives under the tap (press) · the tile wave (wave) · the card lifts (rise) · forward
   'azulejo-mosaic': { music: 'garden-waltz', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
-  // Riad Lantern Nights: a knock on the doors (tug) · the leaves swing in (doors) · the card comes out (rise) · forward
-  'riad-lantern-nights': { music: 'evening-strings', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
+  // Riad Lantern Nights: the lantern lights (chime) · the cord slips off the stud (ribbon) · the arch flap rises (paper) · card rises (slide)
+  'riad-lantern-nights': { music: 'evening-strings', opening: [[0, 'chime'], [600, 'ribbon'], [1450, 'paper'], [2250, 'slide']] },
   // Celestial Observatory: dome latch (head) · shutter halves part (shutters) · constellation chime · card rises (rise) · forward
   'celestial-observatory': { music: 'evening-strings', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
   // Marigold & Mehndi: the silk tassel swings (tassel) · the paisley sleeve slides off (sleeve) · the flap turns up (flap) · card rises (rise) · forward
