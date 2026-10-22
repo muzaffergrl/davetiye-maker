@@ -83,6 +83,7 @@ isimler ve tarih HTML.
   4:00 PM, America/New_York; URL ve medya null; menü dolu) — değişmedi.
 - GPT istekleri: `assets/gpt/GPT_PROMPTS.md` (PAKET 5R website katmanları W1–W20 = 22 dosya, PAKET 2 örnek fotoğraflar
   **var**, PAKET 6R basılı davetiye ön/arka yeni adlarla); prova şekli `assets/gpt/kuru_sekil.json`.
-- Tema: `platform/themes/maison-patisserie/` şu an Codex `envelope-v3` sürümü; **yeniden kurulacak** (G422–G432, `docs/35`
-  §6), GPT parçaları G222–G232. Durum: **coming**.
+- Tema: `platform/themes/maison-patisserie/` **yeniden kuruldu** (G428, 2026-10-22; 39 pilot yapısı, `docs/34`, dersler
+  `docs/35` §6a) — GPT parçaları G228 (PAKET 5R 22 dosya, PAKET 6R 2 dosya). Durum: **editable_draft**, katalogda
+  `preview` ("Coming soon"); satış yok. Katalog kapak görüntüsü/klibi henüz eski (yeniden yakalama bekliyor).
 - Etsy taslağı: `package/listing/listing_v3.md` (K41: yayımlanmadı); PAKET 3 ilan sahneleri tema kurulunca yeniden yazılır.

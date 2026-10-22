@@ -308,15 +308,16 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     ink: '#3A2114', accent: '#8F5418', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 28 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
+  // 28 (G428, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): cream cotton card, a swag of piped icing with
+  // gold dragées and a rose satin bow with a sugared bud across the top (down to ~18 %), a gold scalloped line near the
+  // bottom (92–94 %) on the front; one short icing swag with a rose bud at the top of the back (~11.5 %). `cover` for 5×7
+  // and A5 (ChatGPT's 1069×1472). Boxes ~2 % clear of it all.
   'maison-patisserie': {
     collection: '28_Maison_Patisserie',
-    sources: { front: 'print/invitation_front.png', back: 'print/invitation_back.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Italiana&family=Parisienne'),
     script: "'Parisienne', cursive", serif: "'Italiana', Georgia, serif",
-    ink: '#3E3A32', accent: '#9B4F5A', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#3E3A32', accent: '#9B4F5A', front: [20, 10, 10, 10], back: [13.5, 10, 8, 10],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
   // 29 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
