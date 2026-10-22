@@ -1765,6 +1765,90 @@
         "bytes": 244888
       }
     },
+    "ivory-pearl-atelier": {
+      "screens": {
+        "envelope": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/ivory-pearl-atelier/envelope-320.webp",
+            "480": "/marketing/designs/ivory-pearl-atelier/envelope-480.webp",
+            "640": "/marketing/designs/ivory-pearl-atelier/envelope-640.webp"
+          }
+        },
+        "home": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/ivory-pearl-atelier/home-320.webp",
+            "480": "/marketing/designs/ivory-pearl-atelier/home-480.webp",
+            "640": "/marketing/designs/ivory-pearl-atelier/home-640.webp"
+          }
+        },
+        "invitation": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/ivory-pearl-atelier/invitation-320.webp",
+            "480": "/marketing/designs/ivory-pearl-atelier/invitation-480.webp",
+            "640": "/marketing/designs/ivory-pearl-atelier/invitation-640.webp"
+          }
+        },
+        "story": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/ivory-pearl-atelier/story-320.webp",
+            "480": "/marketing/designs/ivory-pearl-atelier/story-480.webp",
+            "640": "/marketing/designs/ivory-pearl-atelier/story-640.webp"
+          }
+        },
+        "details": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/ivory-pearl-atelier/details-320.webp",
+            "480": "/marketing/designs/ivory-pearl-atelier/details-480.webp",
+            "640": "/marketing/designs/ivory-pearl-atelier/details-640.webp"
+          }
+        },
+        "schedule": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/ivory-pearl-atelier/schedule-320.webp",
+            "480": "/marketing/designs/ivory-pearl-atelier/schedule-480.webp",
+            "640": "/marketing/designs/ivory-pearl-atelier/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/ivory-pearl-atelier/rsvp-320.webp",
+            "480": "/marketing/designs/ivory-pearl-atelier/rsvp-480.webp",
+            "640": "/marketing/designs/ivory-pearl-atelier/rsvp-640.webp"
+          }
+        },
+        "form": {
+          "width": 640,
+          "height": 1385,
+          "files": {
+            "320": "/marketing/designs/ivory-pearl-atelier/form-320.webp",
+            "480": "/marketing/designs/ivory-pearl-atelier/form-480.webp",
+            "640": "/marketing/designs/ivory-pearl-atelier/form-640.webp"
+          }
+        }
+      },
+      "opening": {
+        "file": "/marketing/designs/ivory-pearl-atelier/opening.mp4",
+        "poster": "/marketing/designs/ivory-pearl-atelier/opening-poster.webp",
+        "width": 390,
+        "height": 844,
+        "seconds": 10,
+        "bytes": 187845
+      }
+    },
     "nocturne-lake-estate": {
       "screens": {
         "envelope": {

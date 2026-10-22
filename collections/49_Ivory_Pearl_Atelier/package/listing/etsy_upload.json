@@ -1,0 +1,135 @@
+{
+  "design": "49",
+  "theme": "ivory-pearl-atelier",
+  "source": "collections/49_Ivory_Pearl_Atelier/package/listing/listing_v3.md",
+  "title": "Ivory Pearl Atelier Wedding Website Template, Animated Pearl Envelope Invitation with Online RSVP, Digital Wedding Invite",
+  "title_length": 121,
+  "description": "IVORY PEARL ATELIER\nAn understated wedding invitation in ivory cotton paper, champagne silk and fine gold edges, finished with a luminous mother-of-pearl seal.\n\nTRY THE LIVE DEMO\nhttps://bkestudio.com/start/demo/ivory-pearl-atelier\nSample names and photographs; the couple and venue are fictional.\n\nA DIFFERENT FIRST MOMENT\nYour guests tap the envelope. The pearl turns and moves in an arc to the side while the silk bow drifts apart. The flap lifts, and the invitation rises with a gentle tilt into the home page. Guests can skip the opening; reduced-motion settings are respected.\n\nWHAT IS INCLUDED\nAn animated envelope opening and four pages: Home, Our Story, Details and RSVP. Your own online editor, five photo spots, a countdown, calendar links, directions, travel and accommodation information, a menu, questions and answers, online RSVP, a private guest list and Excel or CSV downloads. Share your website by link or a QR code. Download a website PDF or a printable invitation from your editor. A START HERE PDF guides you through the setup.\n\nMAKE IT YOURS\nChange your names, wedding date, venue, photographs, story, programme, questions, headings and labels. Choose music, upload your own music or turn it off. The artwork, colours, fonts and animation are part of this design and stay as shown. No Canva account or software installation is required.\n\nHOW IT WORKS\n1. Purchase the digital product and download START_HERE.pdf from Etsy.\n2. Open the start link and enter your Etsy order number and email. Order confirmation may be required before publishing.\n3. Personalize, publish and share your website. Continue on another device with the same order number and email.\n\nGOOD TO KNOW\nThis is a digital product; nothing is shipped. Your website remains online until 12 months after your wedding. You can request an extension through the shop before that date. Names and date have the platform editing limits described in START HERE. English, Turkish, Spanish, German and French interfaces are available. Photographs in the demo are fictional examples; upload your own. Some visual artwork was created with AI tools and assembled into this original design.\n\nQUESTIONS?\nMessage STUDIOBKE on Etsy. BKE Studio replies within 24 hours. Digital orders cannot be returned, exchanged or cancelled, but please contact us if something does not work as described.",
+  "tags": [
+    "wedding website",
+    "digital invitation",
+    "pearl wedding invite",
+    "ivory wedding",
+    "online rsvp",
+    "wedding template",
+    "animated invitation",
+    "elegant wedding",
+    "champagne wedding",
+    "envelope invitation",
+    "wedding rsvp",
+    "minimal wedding",
+    "digital wedding"
+  ],
+  "category": "Paper & Party Supplies > Paper > Invitations & Announcements > Invitations",
+  "attributes": {
+    "Type": "Digital files",
+    "Who made it": "I did; AI artwork disclosed in description",
+    "What is it": "A finished product",
+    "When was it made": "Made to order",
+    "Occasion": "Wedding",
+    "Primary color": "White",
+    "Secondary color": "Beige",
+    "Style / theme": "Classic, Minimalist",
+    "Personalization": "Off; website editor after purchase"
+  },
+  "price_try": 1460,
+  "price_usd_approx": 29.48,
+  "price_note": "Approved by the user on 2026-10-16 (K42, docs/23 §1). Shop currency TRY (K38): Etsy gets the TL amount; USD is approximate, at 49.53 TRY per USD, BloombergHT, 2026-10-16 09:30 (USD/TRY 49.5247 buy / 49.5300 sell).",
+  "quantity": 999,
+  "renewal": null,
+  "sales_status": "live",
+  "shop_section": "Classic & Vintage",
+  "digital_files": [
+    {
+      "file": "collections/49_Ivory_Pearl_Atelier/package/customer/START_HERE.pdf",
+      "bytes": 52927
+    }
+  ],
+  "images": [
+    {
+      "n": 1,
+      "file": "collections/49_Ivory_Pearl_Atelier/package/listing/images_editorial/01_cover.png",
+      "alt": "Ivory Pearl Atelier on a real mobile screen: ivory envelope, gold edge, champagne bow and pearl seal",
+      "exists": true,
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
+    },
+    {
+      "n": 2,
+      "file": "collections/49_Ivory_Pearl_Atelier/package/listing/images_editorial/02_opening.png",
+      "alt": "Three actual animation frames show the closed envelope, raised flap and invitation letter",
+      "exists": true,
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
+    },
+    {
+      "n": 3,
+      "file": "collections/49_Ivory_Pearl_Atelier/package/listing/images_editorial/03_pages.png",
+      "alt": "Actual mobile pages: invitation, Our Story, Details and RSVP",
+      "exists": true,
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
+    },
+    {
+      "n": 4,
+      "file": "collections/49_Ivory_Pearl_Atelier/package/listing/images_editorial/04_edit.png",
+      "alt": "Real online editor screens show how to edit your invitation; artwork and animations stay as designed",
+      "exists": true,
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
+    },
+    {
+      "n": 5,
+      "file": "collections/49_Ivory_Pearl_Atelier/package/listing/images_editorial/05_rsvp.png",
+      "alt": "The actual reply form and a shared platform guest-list example with Excel export",
+      "exists": true,
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
+    },
+    {
+      "n": 6,
+      "file": "collections/49_Ivory_Pearl_Atelier/package/listing/images_editorial/06_details.png",
+      "alt": "The real programme and venue section of Ivory Pearl Atelier",
+      "exists": true,
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
+    },
+    {
+      "n": 7,
+      "file": "collections/49_Ivory_Pearl_Atelier/package/listing/images_editorial/07_how.png",
+      "alt": "Start, personalize, publish and share from the shared online editor",
+      "exists": true,
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
+    },
+    {
+      "n": 8,
+      "file": "collections/49_Ivory_Pearl_Atelier/package/listing/images_editorial/08_included.png",
+      "alt": "Animated opening, four pages, online editor, RSVP, QR code and START HERE guide",
+      "exists": true,
+      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
+    },
+    {
+      "n": 9,
+      "file": "collections/49_Ivory_Pearl_Atelier/package/listing/images_editorial/09_devices.png",
+      "alt": "Real start form and editable website preview show how to open your website with the same Etsy order number and email on another device",
+      "exists": true,
+      "status": "current: image 9 of 2026-10-17 (G148; tools/listing_editorial.py --capture devices, real screens of /my and Share → Use on another device from a local build with G146; no web address or QR)"
+    }
+  ],
+  "gpt_mockup_scenes": [],
+  "video": {
+    "file": "collections/49_Ivory_Pearl_Atelier/package/listing/video.mp4",
+    "exists": true
+  },
+  "open_checks": [
+    {
+      "where": "before publishing",
+      "check": "Confirm Etsy renewal choice in the listing editor (same unresolved choice as the other pending products).",
+      "text": ""
+    },
+    {
+      "where": "before publishing",
+      "check": "Assign the real Etsy listing ID and Share & Save URL after creating the listing.",
+      "text": ""
+    }
+  ],
+  "blockers": [
+    "renewal not decided"
+  ],
+  "ready_to_publish": false,
+  "rule_problems": []
+}

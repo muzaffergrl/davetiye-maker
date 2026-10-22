@@ -1218,6 +1218,15 @@ const dict: Dict = {
   "Suede": "Daim",
   "Cream lace": "Dentelle crème",
   "Sunset peach": "Pêche du couchant",
+  // Ivory Pearl Atelier
+  "Ivory cotton paper, champagne silk and a mother-of-pearl seal with fine gold edges": "Papier de coton ivoire, soie champagne et sceau de nacre aux fins contours dorés",
+  "An ivory wedding website with champagne silk, a pearl seal that turns away and an invitation that rises in an arc. Personalize it in your online editor.": "Un site de mariage ivoire avec soie champagne, sceau de perle tournant et invitation qui monte en arc. Personnalisez-le dans votre éditeur en ligne.",
+  "Quiet ivory, champagne silk and a luminous pearl. Fine gold edges and textured cotton paper give this invitation its understated bridal elegance.": "Un ivoire doux, une soie champagne et une perle lumineuse. Les fins contours dorés et le papier de coton texturé donnent à cette invitation une élégance nuptiale discrète.",
+  "Your guests tap the envelope. The pearl seal turns and follows an arc to the side while the two halves of the silk bow drift apart. The gold-edged flap lifts, and the letter rises with a gentle tilt before coming forward into the home page.": "Vos invités touchent l’enveloppe. Le sceau de perle tourne et décrit un arc sur le côté tandis que les deux moitiés du nœud de soie se séparent. Le rabat doré se lève et la carte monte en s’inclinant légèrement avant de devenir la page d’accueil.",
+  "Your portrait on an ivory card, a formal invitation, a countdown and a fan of three photographs that opens as guests scroll.": "Votre portrait sur une carte ivoire, une invitation formelle, un compte à rebours et trois photos qui s’ouvrent en éventail au défilement.",
+  "Three photographs revealed from left to right like silk being drawn away, each followed by a soft pass of light and your own caption.": "Trois photos se révèlent de gauche à droite comme sous une soie que l’on retire, chacune accompagnée d’un doux passage de lumière et de votre légende.",
+  "An ivory programme, your venue photograph, directions, calendar links, dress code, travel, the menu and questions and answers.": "Un programme ivoire, la photo du lieu, l’itinéraire, les liens calendrier, la tenue, les déplacements, le menu et les questions-réponses.",
+  "A simple ivory reply card. After a reply, a single nacre light pass crosses the confirmation and the thank-you title settles gently into place.": "Une simple carte-réponse ivoire. Après la réponse, un seul reflet nacré traverse la confirmation et le titre de remerciement se met doucement en place.",
 };
 
 export default dict;

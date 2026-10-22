@@ -1218,6 +1218,15 @@ const dict: Dict = {
   "Suede": "Ante",
   "Cream lace": "Encaje crema",
   "Sunset peach": "Melocotón atardecer",
+  // Ivory Pearl Atelier
+  "Ivory cotton paper, champagne silk and a mother-of-pearl seal with fine gold edges": "Papel de algodón marfil, seda champán y un sello de nácar con finos bordes dorados",
+  "An ivory wedding website with champagne silk, a pearl seal that turns away and an invitation that rises in an arc. Personalize it in your online editor.": "Una web de boda marfil con seda champán, un sello de perla que gira y una invitación que asciende en arco. Personalízala en tu editor en línea.",
+  "Quiet ivory, champagne silk and a luminous pearl. Fine gold edges and textured cotton paper give this invitation its understated bridal elegance.": "Marfil suave, seda champán y una perla luminosa. Los finos bordes dorados y el papel de algodón texturado dan a esta invitación una elegancia nupcial discreta.",
+  "Your guests tap the envelope. The pearl seal turns and follows an arc to the side while the two halves of the silk bow drift apart. The gold-edged flap lifts, and the letter rises with a gentle tilt before coming forward into the home page.": "Tus invitados tocan el sobre. El sello de perla gira y describe un arco hacia un lado mientras las dos mitades del lazo de seda se separan. La solapa dorada se levanta y la carta asciende con una ligera inclinación antes de convertirse en la página principal.",
+  "Your portrait on an ivory card, a formal invitation, a countdown and a fan of three photographs that opens as guests scroll.": "Tu retrato en una tarjeta marfil, la invitación formal, una cuenta atrás y tres fotografías que se abren en abanico al desplazarse.",
+  "Three photographs revealed from left to right like silk being drawn away, each followed by a soft pass of light and your own caption.": "Tres fotografías aparecen de izquierda a derecha como al retirar una seda, cada una con un suave paso de luz y tu propio pie de foto.",
+  "An ivory programme, your venue photograph, directions, calendar links, dress code, travel, the menu and questions and answers.": "Un programa marfil, la fotografía del lugar, indicaciones, enlaces al calendario, vestimenta, viaje, menú y preguntas y respuestas.",
+  "A simple ivory reply card. After a reply, a single nacre light pass crosses the confirmation and the thank-you title settles gently into place.": "Una sencilla tarjeta de respuesta marfil. Tras responder, un único brillo de nácar cruza la confirmación y el título de agradecimiento se coloca suavemente.",
 };
 
 export default dict;

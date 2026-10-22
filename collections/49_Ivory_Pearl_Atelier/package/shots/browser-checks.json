@@ -1,0 +1,65 @@
+{
+  "errors": [],
+  "failed": [],
+  "sizes": [
+    {
+      "w": 360,
+      "h": 740,
+      "overflow": false,
+      "stage": {
+        "x": 28.796875,
+        "y": 396,
+        "width": 302.390625,
+        "height": 169.875
+      }
+    },
+    {
+      "w": 390,
+      "h": 844,
+      "overflow": false,
+      "stage": {
+        "x": 31.203125,
+        "y": 448.421875,
+        "width": 327.59375,
+        "height": 184.03125
+      }
+    },
+    {
+      "w": 430,
+      "h": 932,
+      "overflow": false,
+      "stage": {
+        "x": 34.40625,
+        "y": 492.9375,
+        "width": 361.1875,
+        "height": 202.90625
+      }
+    },
+    {
+      "w": 1280,
+      "h": 800,
+      "overflow": false,
+      "stage": {
+        "x": 402.203125,
+        "y": 417.71875,
+        "width": 475.59375,
+        "height": 267.1875
+      }
+    },
+    {
+      "w": 390,
+      "h": 568,
+      "overflow": false,
+      "stage": {
+        "x": 58.921875,
+        "y": 285.09375,
+        "width": 272.15625,
+        "height": 152.890625
+      }
+    }
+  ],
+  "keyboard": true,
+  "reducedMotion": true,
+  "openingNavigation": true,
+  "demoReplyPreview": true
+}

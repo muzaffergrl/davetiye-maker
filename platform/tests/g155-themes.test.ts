@@ -32,6 +32,11 @@ function rules(block: string): Array<[string, string]> {
 for (const id of LIVE) {
   test(`${id}: stand-alone text links are a ≥ 44 px touch target (padding + equal negative margins)`, () => {
     const s = css(id);
+    if (id === 'ivory-pearl-atelier') {
+      // Inline anchors need inline-flex for min-height to create a real touch target.
+      assert.match(s, /\.textlink\{[^}]*display:inline-flex[^}]*min-height:44px/);
+      return;
+    }
     if (id === 'crimson-rose-atelier') {
       assert.match(s, /\.textlink\{[^}]*min-height:44px/);
       return;

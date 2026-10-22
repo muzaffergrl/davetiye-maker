@@ -334,6 +334,9 @@ const dict: Dict = {
   "In the garden pavilion": "Bahçe köşkünde",
   // G445 Suede Ranch Lace (45, coming)
   "Under the open sky": "Açık göğün altında",
+  // Ivory Pearl Atelier
+  "A day to remember": "Hatırlanacak bir gün",
+  "Celebrate with us in": "Bizimle kutlayın",
 };
 
 export default dict;

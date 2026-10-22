@@ -112,6 +112,13 @@ class Theme:
 
 
 THEMES: dict[str, Theme] = {
+    "ivory-pearl-atelier": Theme(
+        id="ivory-pearl-atelier", no="49", folder="49_Ivory_Pearl_Atelier", name="Ivory Pearl Atelier",
+        tagline="Ivory cotton paper, champagne silk and a luminous mother-of-pearl seal",
+        corner_tl="platform/themes/ivory-pearl-atelier/img/bow-640.webp",
+        corner_br="platform/themes/ivory-pearl-atelier/img/closure-320.webp",
+        bg="collections/49_Ivory_Pearl_Atelier/assets/gpt/textures/bg_page.png",
+    ),
     "olive-ivory": Theme(
         id="olive-ivory", no="01", folder="01_Olive_Ivory", name="Olive & Ivory",
         tagline="Olive branches, ivory roses and a lace envelope with a gold wax seal",
