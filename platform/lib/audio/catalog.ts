@@ -76,7 +76,7 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   // Riad Lantern Nights: the lantern lights (chime) · the cord slips off the stud (ribbon) · the arch flap rises (paper) · card rises (slide)
   'riad-lantern-nights': { music: 'evening-strings', opening: [[0, 'chime'], [600, 'ribbon'], [1450, 'paper'], [2250, 'slide']] },
   // Celestial Observatory: dome latch (head) · shutter halves part (shutters) · constellation chime · card rises (rise) · forward
-  'celestial-observatory': { music: 'evening-strings', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
+  'celestial-observatory': { music: 'evening-strings', opening: [[0, 'clasp'], [500, 'chime'], [1150, 'whoosh'], [1650, 'paper'], [2300, 'slide']] },
   // Marigold & Mehndi: the silk tassel swings (tassel) · the paisley sleeve slides off (sleeve) · the flap turns up (flap) · card rises (rise) · forward
   'marigold-mehndi': { music: 'evening-strings', opening: [[0, 'ribbon'], [300, 'slide'], [1250, 'paper'], [2500, 'slide'], [3150, 'chime']] },
   // Highland Tartan & Thistle: buckle tips open (buckle) · strap slides out (strap) · flap swings up (flap) · card rises (rise) · forward

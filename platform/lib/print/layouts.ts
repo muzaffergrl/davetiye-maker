@@ -325,15 +325,16 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     ink: '#3E3A32', accent: '#9B4F5A', front: [20, 10, 10, 10], back: [13.5, 10, 8, 10],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 29 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
+  // 29 (G429, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): silver-ivory chart paper, a gold constellation
+  // arch with a small brass astrolabe across the top (down to ~16 %) and seven gold moon phases near the bottom (~91 %)
+  // on the front; one short constellation with a crescent at the top of the back (~10 %). `cover` for 5×7 and A5
+  // (ChatGPT's 1069×1472). Midnight ink, gold-ink accent; boxes ~2 % clear of it all.
   'celestial-observatory': {
     collection: '29_Celestial_Observatory',
-    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Forum&family=Imperial+Script'),
     script: "'Imperial Script', cursive", serif: "'Forum', Georgia, serif",
-    ink: '#141A33', accent: '#7A5A1E', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#141A33', accent: '#7A5A1E', front: [18.5, 12, 11, 12], back: [13, 11, 9, 11],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
   // 30 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
