@@ -57,7 +57,7 @@ Elige el tono de tu invitación y mantenlo. Escribe la fecha límite completa, c
 
 *«Detalles y confirmación: (tu dirección)»*
 
-Si tu web tiene contraseña para invitados, imprímela en la tarjeta de información, no en la invitación: *«Contraseña: (tu contraseña)»*. Quien tenga la tarjeta en la mano podrá abrir la web, que suele ser justo quien quieres.
+Si tu web tiene contraseña para invitados, imprímela en la tarjeta de información, no en la invitación: *«Contraseña: (tu contraseña)»*. Quien tenga la tarjeta en la mano podrá abrir la web, que suele ser justo quien quieres. Nuestra guía sobre la [privacidad de la web de boda](/guides/wedding-website-privacy) explica cuándo merece la pena una contraseña.
 
 ## ¿Enlace, código QR o los dos?
 
@@ -81,7 +81,7 @@ Los códigos QR fallan en papel por unas pocas razones previsibles. Revisa cada 
 - [ ] Escanea la prueba impresa con dos móviles distintos, con luz interior normal
 - [ ] Asegúrate de que la dirección que abre seguirá siendo la misma hasta después de la boda
 
-El último punto importa más de lo que parece. Un código impreso en doscientas tarjetas no se puede cambiar. Si quizá muevas tu web más adelante, usa una dirección que controles durante todo el tiempo que la necesiten los invitados, no un enlace temporal.
+El último punto importa más de lo que parece. Un código impreso en doscientas tarjetas no se puede cambiar. Si quizá muevas tu web más adelante, usa una dirección que controles durante todo el tiempo que la necesiten los invitados, no un enlace temporal. Nuestra guía sobre el [código QR para confirmar asistencia](/guides/qr-code-wedding-rsvp) trata los códigos estáticos y con redirección, los tamaños para carteles y los logotipos en el código.
 
 ## Invitaciones digitales: el enlace es la invitación
 

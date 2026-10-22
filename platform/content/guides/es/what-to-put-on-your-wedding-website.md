@@ -53,7 +53,7 @@ El enlace de tu web llega más lejos de lo que crees: los invitados lo reenvían
 - **Nombres de invitados o listas de respuestas.** Las respuestas solo deben verlas vosotros.
 - **Las fechas exactas en que estaréis fuera de casa**, como el día de salida de la luna de miel junto a vuestra dirección.
 
-Si tu plataforma lo permite, comprueba si tu web se muestra a los buscadores y elige lo que te convenga. Para la mayoría de las parejas, una web que solo encuentran los invitados que tienen el enlace es la opción más tranquila.
+Si tu plataforma lo permite, comprueba si tu web se muestra a los buscadores y elige lo que te convenga. Para la mayoría de las parejas, una web que solo encuentran los invitados que tienen el enlace es la opción más tranquila. Nuestra guía sobre la [privacidad de la web de boda](/guides/wedding-website-privacy) explica las vistas previas de los enlaces y cuándo merece la pena una contraseña para invitados.
 
 ## Notas prácticas que los invitados agradecen
 

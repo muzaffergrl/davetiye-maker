@@ -42,7 +42,7 @@ Antes de añadir una pregunta, piensa quién usará la respuesta y para cuándo.
 
 Dos notas sobre esta tabla:
 
-- **La elección de menú va en la respuesta.** El [Emily Post Institute](https://emilypost.com/advice/how-to-word-a-wedding-response-card) sugiere que, cuando los invitados eligen su plato principal, se pregunte en la tarjeta de respuesta (o en la respuesta en línea), para que el catering reciba una lista completa. Si los invitados responden en línea, a la tarjeta de respuesta impresa le bastan la dirección y la fecha; mira [cómo poner la web de boda en la invitación](/guides/wedding-website-on-invitation).
+- **La elección de menú va en la respuesta.** El [Emily Post Institute](https://emilypost.com/advice/how-to-word-a-wedding-response-card) sugiere que, cuando los invitados eligen su plato principal, se pregunte en la tarjeta de respuesta (o en la respuesta en línea), para que el catering reciba una lista completa. Si los invitados responden en línea, a la tarjeta de respuesta impresa le bastan la dirección y la fecha; mira [cómo poner la web de boda en la invitación](/guides/wedding-website-on-invitation), y para un código que los invitados puedan escanear, [el código QR para confirmar asistencia](/guides/qr-code-wedding-rsvp).
 - **Mira las fechas en tus contratos.** La columna «cuándo la necesita» depende del catering, el lugar y la empresa de transporte. Nuestra guía para [elegir la fecha límite de confirmación](/guides/wedding-rsvp-deadline) explica cómo calcular hacia atrás desde esas fechas.
 
 ## Preguntas que conviene evitar, y por qué

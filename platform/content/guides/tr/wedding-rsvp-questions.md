@@ -42,7 +42,7 @@ Bir soru eklemeden önce, cevabı kimin ve ne zamana kadar kullanacağını soru
 
 Bu tabloyla ilgili iki not:
 
-- **Menü seçimi yanıtın içinde sorulur.** [Emily Post Institute](https://emilypost.com/advice/how-to-word-a-wedding-response-card), misafirler ana yemeklerini seçecekse bunun yanıt kartında (ya da internetteki yanıtta) sorulmasını önerir; böylece catering tek ve eksiksiz bir liste alır. Misafirler internetten yanıt veriyorsa basılı yanıt kartına yalnız adres ve tarih yeter; bkz. [düğün websitesi davetiyeye nasıl eklenir](/guides/wedding-website-on-invitation).
+- **Menü seçimi yanıtın içinde sorulur.** [Emily Post Institute](https://emilypost.com/advice/how-to-word-a-wedding-response-card), misafirler ana yemeklerini seçecekse bunun yanıt kartında (ya da internetteki yanıtta) sorulmasını önerir; böylece catering tek ve eksiksiz bir liste alır. Misafirler internetten yanıt veriyorsa basılı yanıt kartına yalnız adres ve tarih yeter; bkz. [düğün websitesi davetiyeye nasıl eklenir](/guides/wedding-website-on-invitation); misafirlerin okutabileceği bir kod için de [düğün LCV'si için QR kod](/guides/qr-code-wedding-rsvp).
 - **Tarihler için sözleşmelerinize bakın.** "Ne zaman gerekir" sütunu catering firmanıza, mekânınıza ve ulaşım firmanıza bağlıdır. [LCV son tarihini seçmek](/guides/wedding-rsvp-deadline) rehberimiz bu tarihlerden geriye doğru nasıl hesap yapacağınızı gösteriyor.
 
 ## Atlanacak sorular ve nedenleri

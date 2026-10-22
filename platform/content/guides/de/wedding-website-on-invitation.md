@@ -57,7 +57,7 @@ Wählen Sie den Ton Ihrer Einladung und bleiben Sie dabei. Schreiben Sie die Ant
 
 *„Details und Zusage: (Ihre Adresse)“*
 
-Hat Ihre Website ein Gäste-Passwort, drucken Sie es auf die Infokarte, nicht auf die Einladung: *„Passwort: (Ihr Passwort)“*. Wer die Karte in der Hand hält, kann die Seite öffnen, und das sind meist genau die Menschen, die Sie meinen.
+Hat Ihre Website ein Gäste-Passwort, drucken Sie es auf die Infokarte, nicht auf die Einladung: *„Passwort: (Ihr Passwort)“*. Wer die Karte in der Hand hält, kann die Seite öffnen, und das sind meist genau die Menschen, die Sie meinen. Unser Ratgeber zum [Datenschutz der Hochzeitswebsite](/guides/wedding-website-privacy) erklärt, wann sich ein Passwort lohnt.
 
 ## Link, QR-Code oder beides?
 
@@ -81,7 +81,7 @@ QR-Codes scheitern auf Papier an einer Handvoll vorhersehbarer Gründe. Prüfen 
 - [ ] Scannen Sie den gedruckten Probeabzug bei normalem Raumlicht mit zwei verschiedenen Handys
 - [ ] Stellen Sie sicher, dass die Adresse, die er öffnet, bis nach der Hochzeit gleich bleibt
 
-Der letzte Punkt ist wichtiger, als er aussieht. Ein Code, der auf zweihundert Karten gedruckt ist, lässt sich nicht mehr ändern. Ziehen Sie mit Ihrer Website vielleicht später um, nutzen Sie eine Adresse, die Sie so lange kontrollieren, wie Gäste sie brauchen, keinen vorübergehenden Link.
+Der letzte Punkt ist wichtiger, als er aussieht. Ein Code, der auf zweihundert Karten gedruckt ist, lässt sich nicht mehr ändern. Ziehen Sie mit Ihrer Website vielleicht später um, nutzen Sie eine Adresse, die Sie so lange kontrollieren, wie Gäste sie brauchen, keinen vorübergehenden Link. Unser Ratgeber zum [QR-Code für die Hochzeits-RSVP](/guides/qr-code-wedding-rsvp) behandelt statische und weiterleitende Codes, Größen für Schilder und Logos im Code.
 
 ## Digitale Einladungen: Der Link ist die Einladung
 

@@ -53,7 +53,7 @@ Website linkiniz düşündüğünüzden daha uzağa gider: misafirler onu iletir
 - **Misafir isimleri ya da yanıt listeleri.** Yanıtları yalnızca siz görebilmelisiniz.
 - **Evden uzakta olacağınız kesin zamanlar**, örneğin adresinizin yanında balayına çıkış tarihi.
 
-Platformunuz sunuyorsa websitenizin arama motorlarına gösterilip gösterilmediğini kontrol edin ve size uygun olanı seçin. Çoğu çift için yalnızca linke sahip misafirlerin bulabildiği bir website daha huzurlu bir seçimdir.
+Platformunuz sunuyorsa websitenizin arama motorlarına gösterilip gösterilmediğini kontrol edin ve size uygun olanı seçin. Çoğu çift için yalnızca linke sahip misafirlerin bulabildiği bir website daha huzurlu bir seçimdir. [Düğün websitesi gizliliği](/guides/wedding-website-privacy) rehberimiz link önizlemelerini ve misafir şifresinin ne zaman eklenmeye değdiğini anlatıyor.
 
 ## Misafirlerin minnettar kalacağı pratik notlar
 

@@ -57,7 +57,7 @@ Choisissez le ton de votre faire-part et gardez-le. Écrivez la date limite en e
 
 *« Détails et RSVP : (votre adresse) »*
 
-Si votre site a un mot de passe invités, imprimez-le sur la carte d'informations, pas sur le faire-part : *« Mot de passe : (votre mot de passe) »*. Toute personne qui a la carte en main peut ouvrir le site, et ce sont généralement les bonnes personnes.
+Si votre site a un mot de passe invités, imprimez-le sur la carte d'informations, pas sur le faire-part : *« Mot de passe : (votre mot de passe) »*. Toute personne qui a la carte en main peut ouvrir le site, et ce sont généralement les bonnes personnes. Notre guide sur la [confidentialité du site de mariage](/guides/wedding-website-privacy) explique quand un mot de passe vaut la peine.
 
 ## Un lien, un QR code ou les deux ?
 
@@ -81,7 +81,7 @@ Sur papier, les QR codes échouent pour quelques raisons prévisibles. Vérifiez
 - [ ] Scannez l'épreuve imprimée avec deux téléphones différents, sous un éclairage intérieur normal
 - [ ] Vérifiez que l'adresse qu'il ouvre restera la même jusqu'après le mariage
 
-Le dernier point compte plus qu'il n'y paraît. Un code imprimé sur deux cents cartes ne peut plus être modifié. Si vous risquez de déplacer votre site plus tard, utilisez une adresse que vous contrôlez aussi longtemps que les invités en ont besoin, pas un lien temporaire.
+Le dernier point compte plus qu'il n'y paraît. Un code imprimé sur deux cents cartes ne peut plus être modifié. Si vous risquez de déplacer votre site plus tard, utilisez une adresse que vous contrôlez aussi longtemps que les invités en ont besoin, pas un lien temporaire. Notre guide sur le [QR code pour le RSVP du mariage](/guides/qr-code-wedding-rsvp) traite des codes statiques et à redirection, des tailles pour les panneaux et des logos dans le code.
 
 ## Faire-part numériques : le lien est le faire-part
 

@@ -77,7 +77,7 @@ G1 de her kümenin ilk rehberine link verir.
 | 3 | Ocak 2027 | N5 RSVP tarihi, N6 cevap vermeyen misafir — **yazıldı (G197) ve TR/DE/ES/FR'ye çevrildi (G198), 2026-10-22** | G3 başlık + RSVP bölümü (**G197'de yapıldı**); 6 eski rehberin 3 aylık gözden geçirmesi |
 | 4 | Şubat 2027 | N7 ücretsiz/ücretli, N8 Our Story — **yazıldı (G199) ve TR/DE/ES/FR'ye çevrildi (G200), 2026-10-22** | — |
 | 5 | Mart 2027 | N9 SSS örnekleri, N10 destination — **yazıldı (G201) ve TR/DE/ES/FR'ye çevrildi (G202), 2026-10-22** | — |
-| 6 | Nisan 2027 | N11 gizlilik, N12 QR — **İngilizcesi yazıldı (G203), 2026-10-22** | G2 gizlilik bölümü N11'e link verir (**G203**; bölüm kısaltılmadı, G2'nin kelime payı dar); ikinci 3 aylık gözden geçirme |
+| 6 | Nisan 2027 | N11 gizlilik, N12 QR — **yazıldı (G203) ve TR/DE/ES/FR'ye çevrildi (G204), 2026-10-22** | G2 gizlilik bölümü N11'e link verir (**G203**; bölüm kısaltılmadı, G2'nin kelime payı dar); ikinci 3 aylık gözden geçirme |
 
 Her rehber önce İngilizce yazılır ve gözden geçirilir; sonra 4 dile çevrilir (`content/guides/{tr,de,es,fr}/`, G144 düzeni).
 

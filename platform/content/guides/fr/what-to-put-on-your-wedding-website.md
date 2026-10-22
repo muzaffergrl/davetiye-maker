@@ -53,7 +53,7 @@ Le lien de votre site circule plus loin que vous ne le pensez : les invités le 
 - **Les noms des invités ou les listes de réponses.** Les réponses ne doivent être visibles que par vous.
 - **Les moments précis où vous serez absents de chez vous**, comme la date de départ en voyage de noces à côté de votre adresse.
 
-Si votre plateforme le propose, vérifiez si votre site est visible par les moteurs de recherche et choisissez ce qui vous convient. Pour la plupart des couples, un site que seuls les invités disposant du lien peuvent trouver est le choix le plus serein.
+Si votre plateforme le propose, vérifiez si votre site est visible par les moteurs de recherche et choisissez ce qui vous convient. Pour la plupart des couples, un site que seuls les invités disposant du lien peuvent trouver est le choix le plus serein. Notre guide sur la [confidentialité du site de mariage](/guides/wedding-website-privacy) explique les aperçus de lien et quand ajouter un mot de passe invités.
 
 ## Les informations pratiques que les invités apprécient
 

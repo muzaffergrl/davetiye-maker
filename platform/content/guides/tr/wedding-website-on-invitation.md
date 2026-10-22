@@ -57,7 +57,7 @@ Davetiyenizin tonunu seçin ve ona bağlı kalın. Son yanıt tarihini ay adıyl
 
 *"Ayrıntılar ve LCV: (adresiniz)"*
 
-Websitenizde misafir şifresi varsa, onu davetiyeye değil bilgi kartına basın: *"Şifre: (şifreniz)"*. Kartı elinde tutan herkes siteyi açabilir; bu da genellikle tam olarak istediğiniz kişilerdir.
+Websitenizde misafir şifresi varsa, onu davetiyeye değil bilgi kartına basın: *"Şifre: (şifreniz)"*. Kartı elinde tutan herkes siteyi açabilir; bu da genellikle tam olarak istediğiniz kişilerdir. [Düğün websitesi gizliliği](/guides/wedding-website-privacy) rehberimiz şifrenin ne zaman eklenmeye değdiğini anlatıyor.
 
 ## Link mi, QR kod mu, ikisi birden mi?
 
@@ -81,7 +81,7 @@ QR kodlar kâğıt üzerinde birkaç tahmin edilebilir nedenle başarısız olur
 - [ ] Basılı provayı normal iç mekân ışığında iki farklı telefonla okutun
 - [ ] Açtığı adresin düğünden sonrasına kadar aynı kalacağından emin olun
 
-Son madde göründüğünden daha önemlidir. İki yüz karta basılmış bir kod değiştirilemez. Websitenizi ileride taşıyabilecekseniz, geçici bir link değil, misafirlerin ihtiyaç duyduğu süre boyunca sizin kontrolünüzde olan bir adres kullanın.
+Son madde göründüğünden daha önemlidir. İki yüz karta basılmış bir kod değiştirilemez. Websitenizi ileride taşıyabilecekseniz, geçici bir link değil, misafirlerin ihtiyaç duyduğu süre boyunca sizin kontrolünüzde olan bir adres kullanın. [Düğün LCV'si için QR kod](/guides/qr-code-wedding-rsvp) rehberimiz statik ve yönlendirmeli kodları, tabelalar için boyutları ve koddaki logoları ele alıyor.
 
 ## Dijital davetiyeler: davetiye linkin kendisidir
 

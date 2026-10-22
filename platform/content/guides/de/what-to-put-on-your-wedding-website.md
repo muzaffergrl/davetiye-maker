@@ -53,7 +53,7 @@ Der Link zu Ihrer Website kommt weiter herum, als Sie denken: Gäste leiten ihn 
 - **Namen von Gästen oder Antwortlisten.** Die Antworten sollten nur für Sie sichtbar sein.
 - **Genaue Zeiten, zu denen Sie nicht zu Hause sind**, etwa das Abreisedatum in die Flitterwochen neben Ihrer Adresse.
 
-Wenn Ihre Plattform es anbietet, prüfen Sie, ob Ihre Website Suchmaschinen angezeigt wird, und wählen Sie, was zu Ihnen passt. Für die meisten Paare ist eine Website, die nur Gäste mit dem Link finden, die entspanntere Wahl.
+Wenn Ihre Plattform es anbietet, prüfen Sie, ob Ihre Website Suchmaschinen angezeigt wird, und wählen Sie, was zu Ihnen passt. Für die meisten Paare ist eine Website, die nur Gäste mit dem Link finden, die entspanntere Wahl. Unser Ratgeber zum [Datenschutz der Hochzeitswebsite](/guides/wedding-website-privacy) erklärt Linkvorschauen und wann sich ein Gäste-Passwort lohnt.
 
 ## Praktische Hinweise, für die Gäste dankbar sind
 
