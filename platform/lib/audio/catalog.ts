@@ -48,7 +48,6 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   'nocturne-lake-estate': { music: 'evening-strings', opening: [[0, 'chime'], [200, 'whoosh'], [800, 'slide'], [1500, 'paper'], [2500, 'slide']] },
   // Velvet Jewel Box: satin bow slides off (closure) · lid on its hinge (lid) · card rises (rise) · forward
   'velvet-jewel-box': { music: 'music-box', opening: [[0, 'chime'], [180, 'whoosh'], [700, 'ribbon'], [1250, 'paper'], [1850, 'slide']] },
-  // Maison Pâtisserie: bow unties (closure) · lid lifts (lid) · tissue parts (tissue) · card lifts (rise) · forward
   // Music Box Ballerina: key winds (closure, tug) · lid swings up (lid) · the comb's first notes as she turns (turn) · card rises (rise) · forward
   // Red Lacquer & Double Happiness: the cord unwinds (untie) · the flap lifts (flap) · the card comes up (rise) · the red
   // window (outer) · the gold window (inner) · forward
@@ -66,7 +65,7 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   'bordeaux-silk-bow': { music: 'evening-strings', opening: [[0, 'ribbon'], [1000, 'whoosh'], [1500, 'paper'], [2100, 'slide'], [2750, 'chime']] },
   // Monochrome Darkroom: the negative runs off (whoosh) · the tuck flap opens (paper) · the safelight clicks on (tap) · card rises (slide) · into the tray (chime)
   'monochrome-darkroom': { music: 'first-light', opening: [[0, 'whoosh'], [800, 'paper'], [1400, 'tap'], [1700, 'slide'], [2300, 'chime']] },
-  'maison-patisserie': { music: 'garden-waltz', opening: [[200, 'ribbon'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
+  'maison-patisserie': { music: 'garden-waltz', opening: [[0, 'tap'], [700, 'ribbon'], [1200, 'whoosh'], [1950, 'paper'], [2500, 'slide']] },
   // Orient Express Voyage (G425): the tag swings (tap) · the turn-lock clicks (clasp) · the end tab swings open (paper) ·
   // the ticket slides out (slide) · it comes forward (chime) — = site.js MOTION.envelope
   'orient-express-voyage': { music: 'evening-strings', opening: [[0, 'tap'], [450, 'clasp'], [1000, 'paper'], [1750, 'slide'], [3050, 'chime']] },

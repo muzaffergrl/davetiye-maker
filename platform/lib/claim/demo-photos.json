@@ -121,11 +121,11 @@
       "venue": "/demo/lavender-provence/venue-1280w.webp"
     },
     "maison-patisserie": {
-      "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
-      "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
-      "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
-      "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
-      "venue": "/demo/blush-garden-rose/venue-1280w.webp"
+      "hero_portrait": "/demo/maison-patisserie/hero_portrait-1122w.webp",
+      "story_1": "/demo/maison-patisserie/story_1-1122w.webp",
+      "story_2": "/demo/maison-patisserie/story_2-1122w.webp",
+      "story_3": "/demo/maison-patisserie/story_3-1122w.webp",
+      "venue": "/demo/maison-patisserie/venue-1280w.webp"
     },
     "mediterranean-lemon": {
       "hero_portrait": "/demo/mediterranean-lemon/hero_portrait-1024w.webp",

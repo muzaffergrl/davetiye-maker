@@ -1274,9 +1274,9 @@ const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> 
     home: msg("Warm tadelakt plaster, deep teal, saffron and brass. Your portrait sits in a carved stucco arch, zellige tiles are set one by one and lantern light finds every photo."),
   },
   'maison-patisserie': {
-    style: msg("Pistachio envelope, rose-satin detail and cream-and-gold pâtisserie-inspired flourishes."),
-    opening: msg("Your guests tap the envelope. A scalloped pistachio parcel flap lifts to reveal the rose-satin portrait invitation, which rises from its pocket before the wedding home page opens."),
-    home: msg("Pistachio, rose and cream evoke the window of a French pâtisserie. The invitation opens onto your celebration, story and carefully arranged details."),
+    style: msg("Cream envelope with a scalloped pistachio doily flap, wrapped in a rose sleeve band with a satin bow and a sugared rose bud."),
+    opening: msg("Your guests tap the envelope. The sugared rose bud rolls off the knot, the satin bow unties and slips away, the rose sleeve band slides off to the right, the scalloped pistachio flap opens onto its rose doily lining and the cream card with your portrait rises out of the pocket as macarons and sugar pearls drop in, before the wedding home page opens."),
+    home: msg("Cream pinstriped pastry paper, pistachio, rose satin and gold-rimmed porcelain. Your portrait sits in a piped icing oval and the invitation opens under a rose satin bow like a pâtisserie box."),
   },
   'celestial-observatory': {
     style: msg("Midnight-blue envelope, star-map seal and antique-brass celestial details."),
@@ -1315,19 +1315,6 @@ for (const [id, preview] of Object.entries(PREVIEW_DESIGN_COPY)) {
 
 // Interior art/layout/motion differ for these eleven previews; envelope copy and other products are unchanged.
 const UNIQUE_INTERIORS: Record<string,{fonts:string[];home:string;story:string;details:string;rsvp:string}> = {
-  "maison-patisserie": {
-    "fonts": [
-      "Cormorant Garamond",
-      "Great Vibes",
-      "Lora",
-      "Parisienne",
-      "Playfair Display"
-    ],
-    "home": "A pistachio-and-strawberry salon with a porcelain portrait and scalloped menu invitation.",
-    "story": "Scalloped porcelain photo plates arranged as a Parisian scrapbook, with alternating caption positions.",
-    "details": "A Parisian menu-style programme and porcelain-framed venue photograph.",
-    "rsvp": "A cream patisserie reply menu with pink ribbon and pistachio details."
-  },
   "celestial-observatory": {
     "fonts": [
       "Cormorant Garamond",
@@ -1484,6 +1471,22 @@ const REBUILT: Record<string, Pick<DesignCopy, 'fonts' | 'pages' | 'palette' | '
       { name: msg('Ivory'), hex: '#F6EAD2' },
     ],
     llmsLine: 'a deep teal envelope with a horseshoe-arch flap closed by a saffron cord and a pierced brass lantern charm, zellige linings, carved stucco and cedar arch photo frames.',
+  },
+  'maison-patisserie': {
+    fonts: ['Parisienne', 'Italiana'],
+    pages: {
+      home: msg('Your portrait in a piped icing oval on a cream card, the invitation under a rose satin bow with a countdown and calendar links, and a stand of macarons to sign off.'),
+      story: msg('Three photos in gold-rimmed porcelain cake plates on a glass display-case shelf. Guests swipe or drag it, or use the arrows or the keyboard, and the plate in the middle steps forward.'),
+      details: msg('The order of the day on a cream card under a line of piped icing, the venue behind the glass of a pistachio pâtisserie window, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('A cream reply card with macaron-coloured choices, your reply-by date and the configurable RSVP form; sugar pearls and macarons drop in when a reply is sent.'),
+    },
+    palette: [
+      { name: msg('Pistachio'), hex: '#A9C49C' },
+      { name: msg('Rose'), hex: '#E8B4B8' },
+      { name: msg('Cream'), hex: '#FBF5EC' },
+      { name: msg('Gold'), hex: '#B8995A' },
+    ],
+    llmsLine: 'a cream envelope with a scalloped pistachio doily flap in a rose sleeve band with a satin bow and a sugared rose bud, an icing-oval portrait and porcelain cake plates on a sliding display-case shelf.',
   },
 };
 for (const [id, r] of Object.entries(REBUILT)) Object.assign(DESIGN_COPY[id], r);
