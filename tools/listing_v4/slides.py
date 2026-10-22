@@ -113,7 +113,7 @@ def slides(c):
         '<div class="badge" style="left:1620px;top:640px;transform:rotate(8deg)">NO<br>CANVA<small>NEEDED</small></div>'
         '<div class="c" style="top:2290px"><div class="foot">Every change saves by itself</div></div>')
     # 5 — every page
-    S["05_pages"] = (title(f"{nm} · 4 pages + the {c.get('opens', 'envelope')}", "Every page", w="beautifully", r="included") +
+    S["05_pages"] = (title((f"{nm} · " if len(c["name"]) + len(c.get("opens", "envelope")) < 35 else "") + f"4 pages + the {c.get('opens', 'envelope')}", "Every page", w="beautifully", r="included") +
         phone(s / "g02_home_top.jpg", 70, 930, 440) + phone(s / "g05_story.jpg", 545, 930, 440) +
         phone(s / "g07_details_schedule.jpg", 1020, 930, 440) + phone(s / "g09_rsvp_top.jpg", 1495, 930, 440) +
         '<div class="veilb"></div>' +
