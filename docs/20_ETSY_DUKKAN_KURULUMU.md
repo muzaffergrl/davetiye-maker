@@ -442,6 +442,7 @@ Shop Manager → Listings: **Draft 45, Active 0** (yayın yok; 15 ücretsiz kred
   tek başına ürün değil; Etsy'nin örneğine göre bu ödeme Custom Order ile alınmalı, ayrı ilan riskli. **setup-service** de
   "Add On" diye satılıyor ve yeni ürün üretmiyor (alıcının sitesine veri girişi); "modification service" sayılabilir ama gri
   alan. Yayın kararından önce bu iki ilanın yayınlanmaması ya da Custom Order'a çevrilmesi önerilir; taslaklar duruyor.
+- **Kullanıcı kararı (2026-10-22):** kurulum ve ek revizyon taslakta kalır; yayın sırasında yeniden konuşulur.
 
 ## 8. İlan paketi (01–05) — yüklemeye hazır, Etsy'ye eklenmedi (2026-10-15)
 
