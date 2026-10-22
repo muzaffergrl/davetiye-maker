@@ -1,0 +1,473 @@
+{
+ "linen": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "linen-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 103294
+   },
+   {
+    "file": "linen-1024.webp",
+    "w": 1024,
+    "h": 1024,
+    "bytes": 239212
+   }
+  ]
+ },
+ "paper": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "paper-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 3736
+   },
+   {
+    "file": "paper-1024.webp",
+    "w": 1024,
+    "h": 1024,
+    "bytes": 17786
+   }
+  ]
+ },
+ "back": {
+  "src_size": [
+   1292,
+   800
+  ],
+  "ratio": 1.615,
+  "files": [
+   {
+    "file": "back-900.webp",
+    "w": 900,
+    "h": 557,
+    "bytes": 30232
+   }
+  ]
+ },
+ "front": {
+  "src_size": [
+   1295,
+   565
+  ],
+  "ratio": 2.29204,
+  "files": [
+   {
+    "file": "front-900.webp",
+    "w": 900,
+    "h": 393,
+    "bytes": 107866
+   }
+  ]
+ },
+ "flap": {
+  "src_size": [
+   1301,
+   445
+  ],
+  "ratio": 2.9236,
+  "files": [
+   {
+    "file": "flap-900.webp",
+    "w": 900,
+    "h": 308,
+    "bytes": 103254
+   }
+  ]
+ },
+ "tab": {
+  "src_size": [
+   104,
+   247
+  ],
+  "ratio": 0.42105,
+  "files": [
+   {
+    "file": "tab-104.webp",
+    "w": 104,
+    "h": 247,
+    "bytes": 12518
+   }
+  ]
+ },
+ "seal": {
+  "src_size": [
+   1038,
+   1136
+  ],
+  "ratio": 0.91373,
+  "files": [
+   {
+    "file": "seal-240.webp",
+    "w": 240,
+    "h": 263,
+    "bytes": 13902
+   }
+  ]
+ },
+ "flap_in": {
+  "src_size": [
+   1562,
+   478
+  ],
+  "ratio": 3.26778,
+  "files": [
+   {
+    "file": "flap_in-900.webp",
+    "w": 900,
+    "h": 275,
+    "bytes": 20634
+   }
+  ]
+ },
+ "card": {
+  "src_size": [
+   894,
+   1275
+  ],
+  "ratio": 0.70118,
+  "files": [
+   {
+    "file": "card-720.webp",
+    "w": 720,
+    "h": 1027,
+    "bytes": 49458
+   }
+  ]
+ },
+ "stage": {
+  "aspect": 1.615,
+  "back": [
+   0,
+   0,
+   100,
+   100
+  ],
+  "front": [
+   0,
+   31.12,
+   100,
+   68.88
+  ],
+  "flap": [
+   0,
+   0,
+   100,
+   59.12
+  ],
+  "tab": [
+   45.98,
+   49.88,
+   8.05,
+   30.88
+  ],
+  "seal": [
+   42.5,
+   44.54,
+   15.0,
+   26.51
+  ],
+  "card": {
+   "ratio": 0.7012,
+   "width_pct": 48.3,
+   "height_pct": 111.24
+  },
+  "_note": "% of the closed envelope (left, top, width, height): the back's alpha box is the envelope; pocket and flap span its width, the tab by its box on the shared canvas, the seal centred on the flap's edge; the card (upright size in % of the envelope's width / height) lies turned a quarter in the pocket and turns upright as it rises"
+ },
+ "mat": {
+  "src_size": [
+   927,
+   1180
+  ],
+  "ratio": 0.78559,
+  "files": [
+   {
+    "file": "mat-720.webp",
+    "w": 720,
+    "h": 917,
+    "bytes": 42100
+   }
+  ],
+  "window_pct": [
+   13.81,
+   11.53,
+   72.49,
+   77.03
+  ],
+  "window_px": [
+   672,
+   909
+  ],
+  "_note": "no green from GPT: the window is the clear region round the centre (docs/34 §4)"
+ },
+ "mat_wide": {
+  "src_size": [
+   1409,
+   829
+  ],
+  "ratio": 1.69964,
+  "files": [
+   {
+    "file": "mat_wide-1100.webp",
+    "w": 1100,
+    "h": 647,
+    "bytes": 38818
+   }
+  ],
+  "window_pct": [
+   11.0,
+   15.44,
+   78.14,
+   69.0
+  ],
+  "window_px": [
+   1101,
+   572
+  ]
+ },
+ "crest": {
+  "src_size": [
+   1148,
+   1034
+  ],
+  "ratio": 1.11025,
+  "files": [
+   {
+    "file": "crest-480.webp",
+    "w": 480,
+    "h": 432,
+    "bytes": 102466
+   }
+  ],
+  "shield_pct": [
+   26.31,
+   22.63,
+   47.39,
+   59.19
+  ]
+ },
+ "magnolia": {
+  "src_size": [
+   1182,
+   999
+  ],
+  "ratio": 1.18318,
+  "files": [
+   {
+    "file": "magnolia-720.webp",
+    "w": 720,
+    "h": 609,
+    "bytes": 89644
+   }
+  ]
+ },
+ "bow": {
+  "src_size": [
+   1259,
+   773
+  ],
+  "ratio": 1.62872,
+  "files": [
+   {
+    "file": "bow-360.webp",
+    "w": 360,
+    "h": 221,
+    "bytes": 27168
+   }
+  ]
+ },
+ "laurel": {
+  "src_size": [
+   1689,
+   184
+  ],
+  "ratio": 9.17935,
+  "files": [
+   {
+    "file": "laurel-1200.webp",
+    "w": 1200,
+    "h": 131,
+    "bytes": 74164
+   }
+  ]
+ },
+ "accent_1": {
+  "src_size": [
+   792,
+   730
+  ],
+  "ratio": 1.08493,
+  "files": [
+   {
+    "file": "accent_1-160.webp",
+    "w": 160,
+    "h": 147,
+    "bytes": 4688
+   }
+  ]
+ },
+ "accent_2": {
+  "src_size": [
+   782,
+   797
+  ],
+  "ratio": 0.98118,
+  "files": [
+   {
+    "file": "accent_2-160.webp",
+    "w": 160,
+    "h": 163,
+    "bytes": 7116
+   }
+  ]
+ },
+ "accent_3": {
+  "src_size": [
+   510,
+   712
+  ],
+  "ratio": 0.71629,
+  "files": [
+   {
+    "file": "accent_3-160.webp",
+    "w": 160,
+    "h": 223,
+    "bytes": 18992
+   }
+  ]
+ },
+ "ph_portrait": {
+  "src_size": [
+   640,
+   866
+  ],
+  "ratio": 0.73903,
+  "files": [
+   {
+    "file": "ph_portrait-640.webp",
+    "w": 640,
+    "h": 866,
+    "bytes": 1394
+   }
+  ]
+ },
+ "ph_wide": {
+  "src_size": [
+   640,
+   332
+  ],
+  "ratio": 1.92771,
+  "files": [
+   {
+    "file": "ph_wide-640.webp",
+    "w": 640,
+    "h": 332,
+    "bytes": 560
+   }
+  ]
+ },
+ "placeholders": {
+  "portrait": "ph_portrait-640.webp",
+  "wide": "ph_wide-640.webp"
+ },
+ "photo_slots": {
+  "hero_portrait": {
+   "aspect": "672/909"
+  },
+  "story_1": {
+   "aspect": "672/909"
+  },
+  "story_2": {
+   "aspect": "672/909"
+  },
+  "story_3": {
+   "aspect": "672/909"
+  },
+  "venue": {
+   "aspect": "1101/572"
+  }
+ },
+ "og": {
+  "src_size": [
+   1536,
+   1024
+  ],
+  "crop": [
+   0,
+   218,
+   1536,
+   806
+  ],
+  "align": "alt",
+  "size": [
+   1200,
+   630
+  ],
+  "file": "og-1200x630.jpg",
+  "source": "parts/web_hero.png",
+  "bytes": 161379
+ },
+ "favicon": {
+  "src_box": [
+   0,
+   0,
+   1038,
+   1136
+  ],
+  "size": [
+   180,
+   180
+  ],
+  "pad": 0.04,
+  "file": "favicon.png",
+  "bytes": 42549,
+  "source": "the shield seal"
+ },
+ "parts": {
+  "used": [
+   "accent_1",
+   "accent_2",
+   "accent_3",
+   "bow",
+   "card_small",
+   "cartouche_frame",
+   "cartouche_wide",
+   "crest",
+   "env_back",
+   "env_front",
+   "flap",
+   "flap_in",
+   "ivory_cotton",
+   "laurel_divider",
+   "magnolia",
+   "navy_linen",
+   "ribbon_tab",
+   "seal",
+   "web_hero"
+  ],
+  "waiting_for_gpt": []
+ },
+ "_note": "G448 build from the design's own PAKET 5 parts (all present). Nothing drawn.",
+ "checks": {
+  "green": {}
+ },
+ "theme_check": {
+  "particles": ".accent-layer",
+  "first_screen": {
+   "landscape": false,
+   "names_min_px": 32
+  }
+ },
+ "bytes_total": 1425164
+}

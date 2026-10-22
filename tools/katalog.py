@@ -538,6 +538,12 @@ EK_TEMALAR = [
          dekor="35 mm negatif şeritler, yazısız film kutusu, cam lup, banyo tepsisi, siyah göbekli beyaz anemonlar, ince siyah saten kurdele, siyah fotoğraf kâğıdı, sıcak beyaz lifli kâğıt", teknik="siyah-beyaz analog film fotoğrafçılığı (gümüş jelatin) + fotogerçekçi nesneler",
          font=("Herr Von Muellerhoff", "Newsreader"), palet_adi="noir-silver-safelight",
          hareket="Film halkasının açılıp negatif şerit olarak ekran boyunca akması, tuck kapağın cepten çıkıp 3B açılması, kırmızı güvenlik ışığında banyo tepsisinde beliren kart, home üstünde yavaşça akan negatif şeridi, negatiften pozitife dönen baskılar, parmağı izleyen lup, yanıtta kare kare kapanıp açılan deklanşör perdesi."),
+    dict(no=48, klasor="48_Navy_Ivory_Crest", ad="Navy Ivory Crest",
+         zarf="Yatay lacivert keten cüzdan zarf, düz kapak; kapağın ortasında kör kabartma boş defne kartuşu, alt kenarının ortasında defne kenarlı fildişi kalkan mum mühür ve altında kısa V kesik lacivert grogren kurdele dili. Kabartmanın üstünden altın bir ışık süpürür, mühür kurdele diliyle kalkıp yana döner, cüzdan kapağı 3B açılıp çizgili astarını gösterir, yatık fildişi kart doğrularak yükselir; üstünde altın arma aşağıdan yukarı kazınır, kalkana çiftin baş harfleri (HTML) mürekkeplenir.",
+         foto="Köşeleri içe kesik, kör kabartma defne bordürlü fildişi paspartular: fotoğraf önce kabartma gibi beyaz belirir, sonra tonu akar. Mekân geniş paspartu.",
+         dekor="Altın gravür defne çelengi ve boş kalkan, kör kabartma kartuş, kalkan mum mühür, lacivert grogren kurdele ve fiyonk, beyaz manolya, defne yaprağı, lacivert keten, fildişi pamuk", teknik="gravür + kör kabartma (letterpress) + fotogerçekçi keten / kâğıt / mum / çiçek",
+         font=("Mr De Haviland", "Goudy Bookletter 1911"), palet_adi="navy-ivory-laurel",
+         hareket="Kabartma üstünde altın ışık süpürmesi, kalkan mührün kurdele diliyle kalkıp yana dönmesi, cüzdan kapağının 3B açılışı, yatık kartın doğrularak yükselmesi, armanın aşağıdan yukarı kazınması ve baş harflerin mürekkeplenmesi, fotoğraflarda kabartmadan tona geçiş, program satırlarında açılan altın yaprak, yanıtta kartın altına basılan kalkan mühür ve manolya yaprağı yağmuru."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

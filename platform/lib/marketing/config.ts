@@ -374,6 +374,16 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-22',
     },
+    // New design 48 (G448, docs/33 fourth wave): platform theme built from its own GPT parts; not on sale, no price yet.
+    {
+      id: 'navy-ivory-crest',
+      name: 'Navy Ivory Crest',
+      status: 'coming',
+      price: '[PRICE]',
+      compareAtPrice: null,
+      etsyListingUrl: '[ETSY LISTING URL]',
+      updated: '2026-10-22',
+    },
     {
       id: 'blush-garden-rose',
       name: 'Blush Garden Rose',

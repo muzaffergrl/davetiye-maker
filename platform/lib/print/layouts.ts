@@ -569,6 +569,18 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     ink: '#161616', accent: '#5A5A5A', front: [23,  13,  10,  13], back: [17,  12,  10,  12],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
+  // 48 (G448, 2026-10-22): the design's own PAKET 6 grounds (ivory cotton; front: the gold-engraved crest with an empty
+  // shield at the top, a gold laurel line at the foot; back: a short laurel line at the top), one per side, `cover` for
+  // 5×7 and A5. Ornament measured on the art: front 4–21 % and 89–94 % of the height, back 6–9 %; the boxes sit inside the
+  // empty area (G149).
+  'navy-ivory-crest': {
+    collection: '48_Navy_Ivory_Crest',
+    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
+    fonts: gf('family=Goudy+Bookletter+1911&family=Mr+De+Haviland'),
+    script: "'Mr De Haviland', cursive", serif: "'Goudy Bookletter 1911', Georgia, serif",
+    ink: '#1C2A48', accent: '#B8964F', front: [26,  13,  13,  13], back: [14,  12,  10,  12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
+  },
 };
 
 export function printLayout(themeId: string): PrintLayout | null {

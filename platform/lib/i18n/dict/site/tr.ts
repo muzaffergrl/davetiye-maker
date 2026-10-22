@@ -324,6 +324,8 @@ const dict: Dict = {
   "Tied with love": "Sevgiyle bağlı",
   // G447 Monochrome Darkroom (47, coming)
   "Love in black and white": "Siyah-beyaz bir aşk",
+  // G448 Navy Ivory Crest (48, coming)
+  "Together, always": "Daima birlikte",
 };
 
 export default dict;
