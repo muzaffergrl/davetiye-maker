@@ -296,16 +296,17 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     ink: '#1D2340', accent: '#7A5C22', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 27 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
+  // 27 (G427, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): ivory cotton paper, a brass-edged zellige arc
+  // with bougainvillea and orange blossom at its ends across the top (down to ~18.5 %) and a zellige band near the bottom
+  // (~89.5–93 %) on the front; one short brass line with a zellige star at the top of the back (~11.5 %). `cover` for 5×7
+  // and A5 (ChatGPT's 1068×1472). Boxes ~2 % clear of it all.
   'riad-lantern-nights': {
     collection: '27_Riad_Lantern_Nights',
-    sources: { front: 'print/print_front.png', back: 'print/print_back.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Cinzel:wght@400;500&family=Marcellus&family=Marcellus+SC'),
     script: "'Cinzel', Georgia, serif", serif: "'Marcellus', Georgia, serif", caps: "'Marcellus SC', Georgia, serif",
     namesInCaps: true,
-    ink: '#3A2114', accent: '#8F5418', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#0F2F31', accent: '#8A5A1C', front: [20.5, 11, 12.5, 11], back: [13.5, 11, 9, 11],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
   // 28 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's

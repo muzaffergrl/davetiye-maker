@@ -1269,9 +1269,9 @@ const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> 
     home: msg("Washi paper, sumi ink and delicate gold seams bring a quiet, handcrafted feeling to your invitation, story and garden celebration."),
   },
   'riad-lantern-nights': {
-    style: msg("Deep teal envelope, brass seal and saffron lantern accents inspired by a Marrakech riad."),
-    opening: msg("Your guests tap the envelope. Two horseshoe-arch riad doors open on their side hinges, revealing the lantern-framed portrait invitation before the wedding home page opens."),
-    home: msg("Teal, warm cedar and saffron light bring the feeling of a lantern-lit riad. Open the invitation to find the courtyard, your story and the celebration details."),
+    style: msg("Deep teal envelope with a horseshoe-arch flap, a saffron silk cord and a pierced brass lantern charm."),
+    opening: msg("Your guests tap the envelope. The little brass lantern lights up, the saffron cord slips off its brass stud and falls away with its tassel, the arched flap rises like a riad doorway onto glazed zellige and the arch-topped card with your portrait comes out of the pocket before the wedding home page opens."),
+    home: msg("Warm tadelakt plaster, deep teal, saffron and brass. Your portrait sits in a carved stucco arch, zellige tiles are set one by one and lantern light finds every photo."),
   },
   'maison-patisserie': {
     style: msg("Pistachio envelope, rose-satin detail and cream-and-gold pâtisserie-inspired flourishes."),
@@ -1366,19 +1366,6 @@ const UNIQUE_INTERIORS: Record<string,{fonts:string[];home:string;story:string;d
     "details": "A quiet folded-paper programme with gold-repaired margins and a square venue mount.",
     "rsvp": "A handmade washi reply letter with indigo type and fine kintsugi details."
   },
-  "riad-lantern-nights": {
-    "fonts": [
-      "Cormorant Garamond",
-      "Great Vibes",
-      "Lora",
-      "Italianno",
-      "Amiri"
-    ],
-    "home": "A Moroccan courtyard suite with an arched portrait, brass lantern details and mosaic-edged stationery.",
-    "story": "A riad arcade of horseshoe-arch portraits: one central arch followed by two smaller windows.",
-    "details": "A courtyard evening programme beneath an ivory plaster arch, with teal and saffron details.",
-    "rsvp": "An arched riad reply card and a lantern-lit response form."
-  },
   "maison-patisserie": {
     "fonts": [
       "Cormorant Garamond",
@@ -1467,6 +1454,22 @@ const REBUILT: Record<string, Pick<DesignCopy, 'fonts' | 'pages' | 'palette' | '
       { name: msg('Rose gold'), hex: '#C99A86' },
     ],
     llmsLine: 'an aubergine velvet envelope in a champagne satin band with a rose gold ring threaded on it, an oval pearl cameo portrait and a turning photo display.',
+  },
+  'riad-lantern-nights': {
+    fonts: ['Cinzel', 'Marcellus SC', 'Marcellus'],
+    pages: {
+      home: msg('Your portrait in a carved stucco horseshoe arch on an arch-topped ivory card, a band of zellige tiles set one by one, the invitation on cotton paper with a countdown and calendar links, and the day under a lit brass lantern.'),
+      story: msg('Three tall carved cedar horseshoe-arch windows, left and right; each photo waits in the dark until warm lantern light sweeps down over it.'),
+      details: msg('The order of the day on an ivory cotton-paper card, the venue in a wide cedar frame under a stucco arch frieze, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('An ivory reply card with your reply-by date and the configurable RSVP form; the brass lantern lights up and bougainvillea petals drift down when a reply is sent.'),
+    },
+    palette: [
+      { name: msg('Night teal'), hex: '#0F2F31' },
+      { name: msg('Saffron'), hex: '#E3A54A' },
+      { name: msg('Brass'), hex: '#C9A35B' },
+      { name: msg('Ivory'), hex: '#F6EAD2' },
+    ],
+    llmsLine: 'a deep teal envelope with a horseshoe-arch flap closed by a saffron cord and a pierced brass lantern charm, zellige linings, carved stucco and cedar arch photo frames.',
   },
 };
 for (const [id, r] of Object.entries(REBUILT)) Object.assign(DESIGN_COPY[id], r);

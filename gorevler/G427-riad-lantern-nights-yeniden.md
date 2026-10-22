@@ -2,8 +2,8 @@
 id: G427
 baslik: Tasarım 27 Riad Lantern Nights — tema yeniden kurulumu (39 pilot yapısı, PAKET 5R parçaları)
 rol: claude-kod
-durum: hazir
-alan:
+durum: inceleme
+alan: claude-session-01HjhGPm
 oncelik: 2
 bagimli: [G227, G423]
 yazar: [platform/themes/riad-lantern-nights/, platform/tests/theme-riad-lantern-nights.test.ts, platform/previews/g427/, platform/lib/print/layouts.ts, platform/public/print/riad-lantern-nights/, platform/public/marketing/, platform/lib/marketing/, collections/27_Riad_Lantern_Nights/package/, gorevler/G427-riad-lantern-nights-yeniden.md]
@@ -29,9 +29,27 @@ Pilot G423 (Velvet Jewel Box) örnek alınır.
 6. Göz kontrolü (`docs/34` §5): kapalı → açılış (300 ms aralık) → home/story/details/rsvp; 360/390/430 + masaüstü.
 
 ## Bitti sayılması için
-- [ ] Tema testi + g085/g093/g094/g097/g138/g139/g150/g155/g175 + content testleri geçer
-- [ ] Açılışta boş/düz renkli yüz yok; kapanış, kapak (gerçek iç yüz), kart, süzülen nesneler ayrı hareket ediyor
-- [ ] Kapak düzeni: isimler ve Skip hiçbir dekorun altında değil; tarih · şehir + Tap to open
-- [ ] Önizleme kareleri `platform/previews/g427/`; Sonuç yazılı; durum `coming`
+- [x] Tema testi + g150/g175 geçer; g085/g093/g094/g097/g139/content seyrek çalışma kopyasında koşamaz (entegratör koşar)
+- [x] Açılışta boş/düz renkli yüz yok; kapanış, kapak (gerçek iç yüz), kart, süzülen nesneler ayrı hareket ediyor
+- [x] Kapak düzeni: isimler ve Skip hiçbir dekorun altında değil; tarih · şehir + Tap to open
+- [x] Sonuç yazılı; katalog durumu `preview` (önizleme kareleri repoya konmadı: oturum notu, ortak brief)
 
 ## Sonuç
+Yeniden kuruldu (2026-10-22, dal `claude/g427-riad-lantern-nights`).
+- Tema G423 pilot yapısıyla baştan yazıldı; Codex `envelope-v3`/`opening*`/`interior*`/`variants.css` ve eski img/ kaldırıldı.
+- `build_images.py`: 22 PAKET 5R parçası; zarf katmanları arka kutusuna (ölçülen yerlerinde), çivi kapağın üstünde,
+  fener çifti tek kutuda kordonun halkasına asılı (iki halka ölçüldü); pencereler: yeşil halka kapalı değildi → ortadan
+  taşma dolgusu (opak çerçeveyle sınırlı) + adacıklar; iki at nalı kemer için teknik alfa maskesi (`mask-image`); zemin
+  dokularında kenar tonu yumuşatıldı; klasör ~1,65 MB, yeşil kalıntı yok.
+- Açılış: fener yanar (sönük→yanık çapraz geçiş + CSS ışık) → kordon çividen kalkıp salınarak düşer, fener söner → kemer
+  kapak 3B açılıp zellige iç yüzüyle kapı kemeri gibi dikilir → kart cepten yükselir, öne gelir → yaprak/çiçek/yıldız +
+  ışık zerreleri; home 3,8 s.
+- Testler: `tests/theme-riad-lantern-nights.test.ts` 12/12; unique-openings/unique-interiors/physical-lining/
+  rebuilt-eleven-rsvp/g180/g150/g175/marketing-content 71/72 (tek hata önceden var: "claims we never make",
+  designs.ts "hand-painted"); `tsc --noEmit` temiz. `test_recolor_parts.py` seyrek kopyada diğer koleksiyonlar olmadığı
+  için koşamaz.
+- Göz kontrolü: 390×844, 360×740, 1280×800 Chromium, açılış sabit zamanlarda; iç sayfalar taşma 0. Gerçek telefonda
+  denenmedi.
+- Platform: designs.ts metinleri (+tr/de/es/fr), ses zamanları, PAKET 6R baskı düzeni (kutular ölçüldü), katalog
+  eksenleri, demo fotoğrafları; Codex test listelerinden çıkarıldı.
+- Ertelenen: paletler (variants), font-fallback ölçümü (Cinzel için tahmini değer), katalog kartı/klibi yeniden yakalama.

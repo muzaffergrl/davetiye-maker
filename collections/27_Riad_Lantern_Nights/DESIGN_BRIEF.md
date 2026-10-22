@@ -83,6 +83,8 @@ Yazı, rakam, monogram, logo, QR, dini simge hiçbir görselde yok; isimler ve t
   October 9, 2027, 6:00 PM, Africa/Casablanca; URL ve medya null) — değişmedi.
 - GPT istekleri: `assets/gpt/GPT_PROMPTS.md` (PAKET 5R website katmanları W1–W20 = 22 dosya, PAKET 2 örnek fotoğraflar
   **var**, PAKET 6R basılı davetiye ön/arka); prova şekli `assets/gpt/kuru_sekil.json`.
-- Durum: tema **yeniden kurulacak** (G422–G432, `docs/34` / 39 pilot yapısı); GPT parçaları **G222–G232** ile bekleniyor.
-  Mevcut `platform/themes/riad-lantern-nights/` (Codex envelope-v3) o zamana kadar değişmeden duruyor, `coming`.
+- Tema: `platform/themes/riad-lantern-nights/` **yeniden kuruldu** (G427, 2026-10-22; G423 pilot yapısı, `docs/34`,
+  dersler `docs/35` §6a) — GPT parçaları G227 (PAKET 5R 22 dosya, PAKET 6R 2 dosya). At nalı foto pencereleri ölçülen
+  yeşil alandan türetilen teknik alfa maskesiyle (`mask-image`). Durum: **editable_draft**, katalogda `preview` ("Coming
+  soon"); satış yok. Katalog kapak görüntüsü/klibi henüz eski (yeniden yakalama bekliyor).
 - Etsy ilanı (`package/listing/listing_v3.md`, K41: yayımlanmadı) ve PAKET 3 ilan sahneleri: tema kurulunca yeniden.
