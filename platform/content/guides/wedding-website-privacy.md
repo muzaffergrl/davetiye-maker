@@ -82,7 +82,7 @@ Privacy is also about who can change the page. Keep your editing link or login t
 
 ## After the wedding
 
-A wedding website does not have to stay online for good. Before the site is taken down, download your replies and anything you want to keep. If you prefer, switch the page to a short thank-you message so guests who return see something warm rather than old logistics.
+A wedding website does not have to stay online for good. Before the site is taken down, download your replies and anything you want to keep. If you prefer, switch the page to a short thank-you message so guests who return see something warm rather than old logistics. Our guide on [what to do with your wedding website after the wedding](/guides/wedding-website-after-the-wedding) covers the options and what to save.
 
 ## How privacy works on our wedding websites
 

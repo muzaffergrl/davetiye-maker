@@ -13,7 +13,7 @@ The website is the one part of your wedding stationery you can share early and k
 
 ## The timeline
 
-Work backwards from your wedding date. The timing for invitations and replies below follows the Emily Post Institute's [wedding planning timeline](https://emilypost.com/advice/wedding-planning-series) and its advice on [response cards](https://emilypost.com/advice/how-to-word-a-wedding-response-card); the rest is practical advice for how a website fits around it.
+Work backwards from your wedding date. The timing for invitations and replies below follows the Emily Post Institute's [wedding planning timeline](https://emilypost.com/advice/wedding-planning-series) and its advice on [response cards](https://emilypost.com/advice/how-to-word-a-wedding-response-card); the rest is practical advice for how a website fits around it. For what to change once the day is over, see [what to do with your wedding website after the wedding](/guides/wedding-website-after-the-wedding).
 
 | When | What to do | Website status |
 |---|---|---|

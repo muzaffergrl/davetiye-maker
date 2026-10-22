@@ -65,6 +65,7 @@ These small details rarely make it onto wedding websites, and they are exactly w
 - **Food.** If you will ask about allergies or meal choices, say where: "Tell us in your RSVP."
 - **Getting home.** Last train times, a taxi number or a shuttle schedule save late-night stress.
 - **Who to contact on the day.** A friend's name and number for questions, so guests do not call you during the ceremony.
+- **Language.** If some guests read another language more comfortably, consider a [bilingual wedding website](/guides/bilingual-wedding-website).
 
 ## Keeping it up to date
 

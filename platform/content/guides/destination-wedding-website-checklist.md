@@ -64,6 +64,8 @@ Our guide on [when to send your wedding website and invitations](/guides/when-to
 - [ ] A contact person on the ground for the wedding weekend
 - [ ] What happens if the weather turns, for outdoor events
 
+If your guests come from different countries, a [bilingual wedding website](/guides/bilingual-wedding-website) lets each of them read these details in their own language.
+
 ## Passports, visas and travel advice
 
 Entry rules differ by country and change over time, so link to official sources instead of writing your own summary. Many countries require a passport that stays valid for some months after arrival; the [U.S. Department of State](https://travel.state.gov/content/travel/en/passports/passport-help/after-getting-passport.html/new_5078.html), for example, notes that many countries require at least six months of validity and some need blank pages. Guests from other countries should check their own government's travel advice.
