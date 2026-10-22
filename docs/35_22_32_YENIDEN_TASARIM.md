@@ -132,6 +132,7 @@ Her tema için:
 - Teşhis (yukarıda) — ekran kareleri yerel; `docs/qa/` altına konmadı.
 - 11 koleksiyonun `DESIGN_BRIEF.md` (yeni sürüm), `assets/gpt/GPT_PROMPTS.md` (PAKET 5R + PAKET 6R; PAKET 2 korunur,
   PAKET 3 GEÇERSİZ) ve `assets/gpt/kuru_sekil.json` yeniden yazıldı.
+- GPT bekleyen: 22–32 için **261 görsel** (PAKET 5R 239 parça + PAKET 6R 22 baskı zemini; tasarım başına 22–28).
 - Görev dosyaları G222–G232, G422–G432; `docs/26` / `docs/27` `tools/gpt_bekleyen.py --yaz` ile yenilendi.
 - Henüz yapılmayan: GPT görselleri (G222–G232), tema yeniden kurulumu (G422–G432). Mevcut canlı demo sayfaları bu süreçte
   değişmedi.

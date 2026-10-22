@@ -2,7 +2,7 @@
 
 `python3 tools/gpt_is_listesi.py --yaz` (ya da `tools/gpt_bekleyen.py --yaz`) ile üretilir; elle düzenlenmez. Kaynak: bütün `GPT_PROMPTS.md` dosyaları. Her madde kendi başına yapıştırılabilir tam İngilizce prompt'tur. Tıklanabilir, kopyalama düğmeli ve işaretlenebilir sürüm: [`27_GPT_IS_LISTESI.html`](27_GPT_IS_LISTESI.html) (tarayıcıda aç).
 
-**Toplam: 15 görsel** · A · Tasarım 22–38 (yeni tasarımlar): 14 · C · Palet varyantı görselleri: 1
+**Toplam: 276 görsel** · A · Tasarım 22–38 (yeni tasarımlar): 275 · C · Palet varyantı görselleri: 1
 
 ## Neden bu sıra
 
@@ -23,6 +23,17 @@
 
 | Grup | Tasarım | Görsel |
 |---|---|---|
+| A | 22_Nocturne_Lake_Estate | 24 |
+| A | 23_Velvet_Jewel_Box | 22 |
+| A | 24_Grand_Theatre_Premiere | 25 |
+| A | 25_Orient_Express_Voyage | 23 |
+| A | 26_Kintsugi_Washi | 28 |
+| A | 27_Riad_Lantern_Nights | 24 |
+| A | 28_Maison_Patisserie | 24 |
+| A | 29_Celestial_Observatory | 22 |
+| A | 30_Azulejo_Mosaic | 24 |
+| A | 31_Sky_Lantern_Festival | 23 |
+| A | 32_Music_Box_Ballerina | 22 |
 | A | 33_Marigold_Mehndi | 3 |
 | A | 34_Red_Lacquer_Double_Happiness | 3 |
 | A | 35_Highland_Tartan_Thistle | 2 |
@@ -33,6 +44,3674 @@
 
 ## A · Tasarım 22–38 (yeni tasarımlar)
 
+### 22_Nocturne_Lake_Estate
+
+Sohbetin ilk mesajı (dosyanın GPT notu):
+
+```
+This design is being REDESIGNED from scratch. Generate PAKET 5R (website layers) first, in order and in ONE chat, then PAKET 6R (printable invitation). PAKET 2 (sample photos) ALREADY EXISTS — do not regenerate it. Sections marked GEÇERSİZ are not wanted. Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, names, dates, initials, monograms, crests, logos, QR codes or watermarks in any image** (also not on the brooch, the vellum band, the card or the frames). No real place, villa, lake, brand, artist or other seller's design may be recognisable — the lake, mountains and villa are invented. Give W1 `night_laid.png`, W2 `ivory_laid.png` and W3 `env_back.png` as the style reference of every later part: the same charcoal-black laid paper, the same warm ivory laid card, the same champagne gold foil, the same oil-painted night lake, and the same light — soft cool MOONLIGHT from the top-left with a faint warm CANDLE glow from the lower right. Parts drawn on the same envelope canvas (W3, W4, W5, W7) keep the envelope in exactly the same box.
+```
+
+#### 1. W1 Gece laid kâğıdı (sayfa zemini, kapak sayfası)
+
+- İndirme adı: `22-nocturne-lake-estate__night_laid.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/night_laid.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, perfectly flat top-down texture of heavy charcoal-black laid paper (#1C1D15, the deepest tones toward #11120F): fine parallel laid lines running horizontally with faint chain lines crossing them vertically every few centimetres, a soft felted tooth, and a very sparse scatter of tiny champagne-gold foil flecks (#C7A978) — only a few flecks per square, irregular, flat and small, catching the light softly. Evenly lit by soft cool moonlight from the top-left; very low contrast, calm and deep, so champagne and ivory text reads on it everywhere. No fold, no crease, no stain, no vignette, no pattern other than the laid lines, no shadow, no deckle edge. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: kömür-siyah, çok sakin; laid çizgileri ince; altın pullar seyrek ve küçük; dikişsiz (2×2 ek yeri yok); açık renk yazı her yerde okunur.
+
+#### 2. W2 Fildişi laid kart (kartlar, bantlar, form)
+
+- İndirme adı: `22-nocturne-lake-estate__ivory_laid.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/ivory_laid.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, perfectly flat top-down texture of thick warm ivory laid card stock (#F1E4CC, the gentlest variation toward #E8D9BC): very fine horizontal laid lines and faint vertical chain lines, a soft felted cotton tooth, matte, calm enough for charcoal text to read on it everywhere. Evenly lit by soft cool moonlight from the top-left with the faintest warm tint; no fold, no crease, no stain, no gold flecks, no printing, no pattern, no shadow, no vignette, no deckle edge. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: sakin sıcak fildişi; laid çizgileri çok ince; dikişsiz; leke/baskı yok; koyu yazı okunur.
+
+#### 3. W3 Zarfın arkası — göl astarı
+
+- İndirme adı: `22-nocturne-lake-estate__env_back.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/env_back.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1080×1500 px (18:25) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: night_laid.png (listede #1)
+
+```
+The back panel of an open portrait envelope made of the charcoal-black laid paper of night_laid.png, seen perfectly straight from the front, on a fully transparent background. The envelope occupies exactly x 7–93% and y 7–93% of the 1080×1500 canvas (a 0.72:1 rectangle with crisp, very slightly softened corners). We see its inside: it is lined with an oil-painted nocturne of an invented mountain lake near midnight, covering the panel almost completely with a slim margin (about 2% of the canvas) of charcoal laid paper along the top and both sides. The painting: the calm dark lake fills the panel; across its top edge runs the far shore — a low line of dark hills with a small invented villa whose few windows glow warm champagne-gold, a row of slender cypresses and a stone terrace with tiny candle lights reflected as soft gold streaks in the water; down the vertical centre of the lake runs a shimmering path of pale moonlight in broken, soft horizontal brushstrokes; the rest of the water is deep charcoal-blue (#11120F to #2A2E33) with gentle ripples. Rich, quiet, soft brushwork, like a fine small oil painting printed on the liner paper; a very gentle shade toward the bottom where the front pocket will sit. No sky (the sky is on the flap), no moon disc, no flap, no front pocket, no band, no brooch, no card. Soft cool moonlight from the top-left. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: panel x %7–93 · y %7–93; iç yüz yağlı boya göl (karşı kıyı + villa ışıkları + ortadan inen ay yolu); kenarlarda ince kömür laid pay; gök/ay diski yok; gerçek alfa.
+
+#### 4. W4 Zarfın ön cebi
+
+- İndirme adı: `22-nocturne-lake-estate__env_front.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/env_front.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1080×1500 px (18:25) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_back.png (listede #3), night_laid.png (listede #1)
+
+```
+Only the front pocket of the same portrait charcoal-black laid paper envelope as env_back.png, on the same 1080×1500 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 7–93% and y 7–93% of the canvas; the pocket spans the full envelope width (x 7–93%) and reaches down to the envelope's bottom edge at 93% of the canvas height. Its top edge is the shallow V formed by the two side flaps: it starts at 20% of the canvas height at both side edges and runs in two straight, crisply cut lines down to a soft point at the horizontal centre at 53% of the canvas height; the faint thickness of heavy paper visible along the cut, the gentle fold lines of the side flaps and the bottom flap barely visible on the charcoal laid paper of night_laid.png with its sparse tiny gold flecks. Everything above the pocket's edge is completely transparent. No flap, no band, no brooch, no card, no foil on the pocket. Soft cool moonlight from the top-left. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: cep tam genişlik; üst kenar yanlarda %20, ortada %53'e inen sığ V; üstü tamamen şeffaf; folyo yok; gerçek alfa.
+
+#### 5. W5 Elmas kapak (kapalı, dış yüz)
+
+- İndirme adı: `22-nocturne-lake-estate__flap.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/flap.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1080×1500 px (18:25) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: night_laid.png (listede #1)
+
+```
+Only the closed flap of the same portrait charcoal-black laid paper envelope, on the same 1080×1500 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 7–93% and y 7–93% of the canvas; the flap spans its full width (x 7–93%), hinged along a softly rounded fold at the envelope's top edge (7% of the canvas height). Its shape is a deep, elegant elongated diamond: its two sides drop straight down along the envelope's side edges to 19% of the canvas height, then two long edges, each very gently concave (curving inward by no more than 3% of the canvas height), run down and meet in ONE sharp point at the horizontal centre at 68% of the canvas height. All along the two long edges and the point runs a narrow border of real champagne-gold foil (#C7A978 with soft bright highlights toward #E0C7A4), about 1.2% of the canvas wide, with a delicate deckled, torn-paper outer edge. The flap is the charcoal laid paper of night_laid.png with its laid lines and sparse tiny gold flecks, a whisper of contact shade on the flap itself just along its edges. Everything outside the flap is completely transparent. No band, no brooch, no seal, no card. Soft cool moonlight from the top-left, a faint warm reflection on the foil from the lower right. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: kapak tam genişlik; yanlar %19'a dik, sonra hafif içbükey iki kenar (%50, %68)'de keskin uçta; kenarda ince deckle altın folyo; mühür/broş yok; gerçek alfa.
+
+#### 6. W6 Kapağın iç yüzü — gece göğü (açıkken dik)
+
+- İndirme adı: `22-nocturne-lake-estate__flap_in.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/flap_in.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1080×1100 px (0.982:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: flap.png (listede #5), env_back.png (listede #3)
+
+```
+The inside of the same elongated-diamond envelope flap, alone, seen straight on as it stands upright when the envelope is open, on a fully transparent background: the outline of flap.png mirrored vertically. Its straight fold edge is at the BOTTOM, along 93% of the image height, spanning x 7–93% of the width (exactly as wide as the envelope); its two straight sides rise to 78% of the image height, and its two very gently concave long edges rise and meet in one sharp point at the horizontal centre at 10% of the image height. The inside is lined with the upper half of the same oil-painted nocturne as env_back.png: a deep night sky (#11120F to #2A2E33) with a few faint stars and soft drifting clouds lit silver at their edges by a hidden moon glowing softly behind the clouds near the top (no moon disc visible), and along the bottom of the flap, sitting right on the fold edge, the dark layered silhouettes of invented mountains whose lowest slopes meet the fold line — so that, with the envelope open, the mountains continue straight into the lake painted inside the envelope. A slim margin of charcoal laid paper and the same narrow deckled champagne-gold foil border follow the two long edges and the point. Rich, quiet oil brushwork. No villa, no lake, no moon disc, no seal. Soft cool moonlight from the top-left. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: katlama kenarı altta (%93), dik yanlar %78'e, uç ortada %10'da; iç yüz yağlı boya gece göğü + altta dağ silueti (katlama kenarına oturur); ay diski yok; kenarda altın folyo; gerçek alfa.
+
+#### 7. W7 Vellum bel bandı — gümüş gravür göl panoraması
+
+- İndirme adı: `22-nocturne-lake-estate__vellum_band.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/vellum_band.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1080×1500 px (18:25) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_back.png (listede #3), flap.png (listede #5)
+
+```
+On the same 1080×1500 canvas as env_back.png and flap.png, in exactly the same place (the envelope box is x 7–93% and y 7–93% of the canvas, but the envelope itself is NOT drawn here), only a horizontal belly band of frosted translucent vellum that wraps around the closed envelope, on a fully transparent background: the band runs straight across from x 6% to x 94% of the canvas and from y 57% to y 75%; at both ends it turns over the envelope's side edges in a soft rounded fold, as if continuing behind it. The vellum is milky and semi-transparent (real partial alpha, about 40–50% opaque, so whatever lies beneath shows through softly), with a faint frosted texture and a crisp clean cut along its top and bottom edges. Across the whole band runs a delicate continuous engraving in fine metallic silver lines (#BFC3C6) and fine hatching: an invented lakeshore panorama — layered mountains, a small villa with a balustrade terrace in the centre, slender cypresses, a few boats, and gentle ripple lines on the water; the centre of the band, where a brooch will be pinned, stays a little calmer. Soft cool moonlight from the top-left giving the silver lines a faint glint. Everything outside the band is fully transparent: no envelope, no flap, no brooch, no pin. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: tek yatay bant (x %6–94 / y %57–75), iki uç arkaya kıvrık; vellum yarı saydam (gerçek kısmi alfa); gümüş gravür panorama, ortası sakin; zarf/broş çizilmemiş. Vellum opak gelirse kabul, saydamlığı site verir (CSS opaklık) — not et.
+
+#### 8. W8 Dövme altın hilal broş
+
+- İndirme adı: `22-nocturne-lake-estate__moon_brooch.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/moon_brooch.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 600×600 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A single brooch in the shape of a slender crescent moon, seen perfectly straight from the front, on a fully transparent background, centred and filling about 78% of the canvas: hand-hammered champagne gold (#C7A978, bright soft highlights toward #E0C7A4, deeper tones toward a warm antique gold) with a fine faceted hammer texture over its whole surface, a slim raised polished rim along both curves, the crescent opening toward the upper right, and three tiny round champagne-gold beads set along its inner curve like small stars. The polished rim catches the cool moonlight from the top-left with crisp highlights and a faint warm reflection from the lower right. No face on the moon, no pin visible from the front, no gemstones of other colours, no chain, no ribbon. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: tek hilal broş, dövme doku, ince parlak kenar, iç kavste üç küçük boncuk; yüz/yazı/taş yok; gerçek alfa.
+
+#### 9. W9 Zarftaki kart (boş)
+
+- İndirme adı: `22-nocturne-lake-estate__card_small.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/card_small.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1400 px (5:7) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: ivory_laid.png (listede #2)
+
+```
+A flat portrait invitation card, alone, seen straight on, on a fully transparent background: the thick warm ivory laid card of ivory_laid.png (#F1E4CC) spanning x 7–93% and y 6–94% of the canvas, with a softly deckled edge on all four sides gilded with a fine champagne-gold edge (#C7A978), and a hair-fine champagne-gold rule inset about 6% from the card's edge. At the top centre, inside the rule, a small engraved vignette in fine gold line only (no fill): a slender crescent moon above a few gentle ripple lines, about 18% of the card's width. Below it the whole card is EMPTY paper (the website sets the names, date and venue there in HTML). Soft cool moonlight from the top-left, a hair-fine contact shade on the card's own edge only. No flowers, no photo, no other ornament. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: boş fildişi laid kart, deckle + altın kenar, ince altın iç çizgi; üst ortada küçük hilal + dalga gravürü; altı boş; gerçek alfa.
+
+#### 10. W10 Kemerli villa penceresi (home portresi)
+
+- İndirme adı: `22-nocturne-lake-estate__window_frame.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/window_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1300 px (10:13) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+An arched villa window frame in gilded wrought iron, alone, seen perfectly straight on, on a fully transparent background: a slender frame of black wrought iron (#11120F) finished with soft champagne-gold leaf (#C7A978) on its raised mouldings, with a round-arched top, fine scrolling ironwork in the spandrels around the arch, a small leaf finial at the top centre, and below the window a small curved wrought-iron balcony railing with gilded balusters. The whole object spans about x 6–94% and y 5–95% of the canvas. In the middle a portrait photo window whose outline is a rectangle with a full semicircular arched top: its bounding box is exactly 720 px wide and 900 px tall, its top-left corner at x 140 px, y 180 px (the semicircle has a radius of 360 px and forms the top of the window, the sides below it are straight); the window is filled with flat pure green #00FF00 (no texture, no shading, clean edges, nothing over it — no glazing bars, no glass, no reflection). The balcony railing sits entirely below the window (between y 1110 px and y 1230 px). Soft cool moonlight from the top-left with crisp gold highlights, a faint warm reflection from the lower right. No flowers, no curtains. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: pencere düz `#00FF00`, kemerli üst, kutusu 720×900 (4:5), sol üst (140, 180); ferforje + altın varak; balkon pencerenin altında; pencerenin üstünde kayıt/cam yok; gerçek alfa.
+
+#### 11. W11 Ferforje dikdörtgen pencere (story çerçevesi)
+
+- İndirme adı: `22-nocturne-lake-estate__story_frame.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/story_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1250 px (4:5) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A rectangular villa window frame, alone, seen perfectly straight on, on a fully transparent background: a deep moulded frame of black lacquered wood and wrought iron (#11120F) with soft champagne-gold leaf (#C7A978) on its inner bead and outer moulding, a small carved stone-coloured sill along the bottom, and two small gilded shutter hinges on each side of the frame's outer edge (left and right, for shutters that open outward). The frame's outer edge spans about x 6–94% and y 6–94% of the canvas. In the middle a portrait photo window exactly 760 px wide and 950 px tall (4:5), its top-left corner at x 120 px, y 150 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, nothing over it — no glazing bars, no glass, no reflection). Soft cool moonlight from the top-left with crisp gold highlights, a faint warm reflection from the lower right. No shutters drawn (they are separate), no curtains, no flowers. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: pencere düz `#00FF00`, 760×950 (4:5), sol üst (120, 150); siyah lake + altın varak, iki yanda menteşe; panjur/cam yok; gerçek alfa.
+
+#### 12. W12 Kömür lake panjurlar — iki ayrı dosya (story çerçevesinin önünde, kapalı)
+
+- İndirme adı: `22-nocturne-lake-estate__shutter_left.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/shutter_left.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1250 px (4:5) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: story_frame.png (listede #11)
+
+```
+This prompt describes a set of 2 separate images (shutter_left, shutter_right). Make ONLY ONE image now: shutter_left (number 1 of 2).
+
+On the same 1000×1250 canvas as story_frame.png, in exactly the same place (the frame itself is NOT drawn here), ONE closed window shutter, alone, seen perfectly straight on, on a fully transparent background: a tall wooden louvered shutter lacquered in deep charcoal (#1C1D15) with a soft satin sheen, narrow horizontal louvres in a raised outer frame, a fine champagne-gold edge line (#C7A978) and two small gilded hinge knuckles on its outer edge. Make TWO files, identical in style and light: shutter_left.png — the left shutter, covering exactly x 12–50% and y 12–88% of the canvas, its hinges on its LEFT edge; shutter_right.png — the right shutter, covering exactly x 50–88% and y 12–88% of the canvas, its hinges on its RIGHT edge. Side by side they close the window completely and meet in a straight vertical seam at x 50%. Soft cool moonlight from the top-left, a faint warm reflection from the lower right. No frame, no window, no handle, no flowers. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: iki dosya; sol panjur x %12–50, sağ x %50–88, ikisi y %12–88; menteşeler dış kenarda; yan yana pencereyi tam kapatır (orta dikiş x %50); çerçeve çizilmemiş; gerçek alfa.
+
+#### 13. W12 Kömür lake panjurlar — iki ayrı dosya (story çerçevesinin önünde, kapalı)
+
+- İndirme adı: `22-nocturne-lake-estate__shutter_right.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/shutter_right.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1250 px (4:5) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: story_frame.png (listede #11), shutter_left.png (listede #12)
+
+```
+This prompt describes a set of 2 separate images (shutter_left, shutter_right). Make ONLY ONE image now: shutter_right (number 2 of 2).
+
+On the same 1000×1250 canvas as story_frame.png, in exactly the same place (the frame itself is NOT drawn here), ONE closed window shutter, alone, seen perfectly straight on, on a fully transparent background: a tall wooden louvered shutter lacquered in deep charcoal (#1C1D15) with a soft satin sheen, narrow horizontal louvres in a raised outer frame, a fine champagne-gold edge line (#C7A978) and two small gilded hinge knuckles on its outer edge. Make TWO files, identical in style and light: shutter_left.png — the left shutter, covering exactly x 12–50% and y 12–88% of the canvas, its hinges on its LEFT edge; shutter_right.png — the right shutter, covering exactly x 50–88% and y 12–88% of the canvas, its hinges on its RIGHT edge. Side by side they close the window completely and meet in a straight vertical seam at x 50%. Soft cool moonlight from the top-left, a faint warm reflection from the lower right. No frame, no window, no handle, no flowers. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: iki dosya; sol panjur x %12–50, sağ x %50–88, ikisi y %12–88; menteşeler dış kenarda; yan yana pencereyi tam kapatır (orta dikiş x %50); çerçeve çizilmemiş; gerçek alfa.
+
+#### 14. W13 Korkuluklu teras çerçevesi (mekân fotoğrafı)
+
+- İndirme adı: `22-nocturne-lake-estate__terrace_frame.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/terrace_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1000 px (8:5) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A wide landscape frame like the view from a villa terrace, alone, seen straight on, on a fully transparent background: a slim moulded frame of black wrought iron with soft champagne-gold leaf (#C7A978) on its inner bead, and across the whole bottom of the object a low carved pale stone balustrade (warm grey stone, softly worn, a row of rounded balusters under a flat handrail) with a small brass candle lantern standing at each end of the handrail, unlit. The object spans about x 6–94% and y 6–94% of the canvas. Above the balustrade a landscape photo window exactly 1360 px wide and 765 px tall (16:9), its top-left corner at x 120 px, y 90 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, nothing over it); the balustrade sits entirely below the window (between y 870 px and y 940 px) and the lanterns never overlap the window. Soft cool moonlight from the top-left with crisp gold highlights, a faint warm reflection from the lower right. No flowers, no plants. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: pencere düz `#00FF00`, 1360×765 (16:9), sol üst (120, 90); altta taş korkuluk + iki sönük fener, pencereye binmiyor; gerçek alfa.
+
+#### 15. W14 Yağlı boya gece gölü bandı (home üst bandı)
+
+- İndirme adı: `22-nocturne-lake-estate__nocturne_band.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/nocturne_band.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1920×900 px (32:15) · opak · PNG
+- Ek görsel: env_back.png (listede #3), flap_in.png (listede #6)
+
+```
+A wide, quiet oil painting of an invented mountain lake near midnight, in the same style, palette and light as the lining of env_back.png and the sky of flap_in.png: the top 40% is a calm, deep night sky (#11120F to #2A2E33) with a few faint stars and soft clouds edged in silver by a hidden moon, with NO moon disc and nothing busy (a gold crescent will be placed there by the website); across the middle the dark layered silhouettes of mountains and, on the far shore slightly right of centre, a small invented villa with a stone terrace, slender cypresses and a few warm champagne-gold windows and candle lights; the lower part is the calm lake with long soft golden reflections and a broken path of pale moonlight down the centre. Rich, soft brushwork, deep and serene, like a fine small oil painting. The bottom 15% is calm dark water that can fade into the page. No people, no boats in the foreground, no text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: üst %40 sakin gök, ay diski yok; ortada dağlar + küçük villa ışıkları; altta göl ve ay yolu; alt %15 sakin koyu su; yazı yok.
+
+#### 16. W15 Köşe süsü (beyaz bahçe gülü + zeytin dalı)
+
+- İndirme adı: `22-nocturne-lake-estate__corner_spray.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/corner_spray.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1000 px (6:5) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A restrained, romantic corner spray growing out from near the top-left corner toward the centre, alone, on a fully transparent background, photorealistic: two white-ivory garden roses (#F1E4CC, soft layered petals with a faint champagne blush in their hearts), one half-open bud, a few slender sprigs of silvery-green olive leaves, and two or three tiny champagne-gold leaves; the stems are hidden among the leaves. It reaches toward the top and left sides of the image but stays 6% inside them, and the bottom-right half of the canvas is completely empty. Soft cool moonlight from the top-left, a faint warm glow on the petals from the lower right. No other flowers or colours, no ribbon, no vase, no glitter. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: küçük, sade küme sol üstten; sağ alt yarı boş; yalnız beyaz gül + zeytin + birkaç altın yaprak; gerçek alfa.
+
+#### 17. W16 Zeytin dalı ayırıcı (altın)
+
+- İndirme adı: `22-nocturne-lake-estate__divider.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/divider.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×200 px (8:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A slim horizontal divider, alone, on a fully transparent background: two delicate champagne-gold olive branches (#C7A978, fine engraved gilded metal, small slender leaves) growing from the centre outward to the left and to the right along the vertical centre line, tapering to fine tips at about 8% and 92% of the canvas width, and at the very centre a tiny gilded crescent moon about 4% of the canvas width. Symmetrical, elegant, fine. Soft cool moonlight from the top-left with small crisp highlights. No ribbon, no beads, no other colour. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: yatay simetrik iki altın zeytin dalı + ortada küçük hilal; uçlar %8–92; gerçek alfa.
+
+#### 18. W17 Cam fener içinde mum (imza)
+
+- İndirme adı: `22-nocturne-lake-estate__candle_lantern.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/candle_lantern.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 500×800 px (5:8) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A single small hurricane lantern, standing upright, alone, seen from the front, on a fully transparent background: a slender clear glass chimney on a round antique-brass base with a fine champagne-gold rim, a small brass ring handle on top, and inside it one short ivory pillar candle (#F1E4CC) with a small calm lit flame. The glass is truly see-through (real alpha in the clear glass), shown only by crisp edge highlights and a faint reflection of the flame; the warm light of the flame stays INSIDE the glass (a soft gold warmth on the inner glass and the candle top), nothing outside the lantern. The lantern spans about x 22–78% and y 8–92% of the canvas. Soft cool moonlight from the top-left on the brass and glass. No table, no flowers, no smoke. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: tek fener, cam saydam, içinde yanan küçük mum; ışık camın içinde kalıyor; gerçek alfa.
+
+#### 19. W18 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `22-nocturne-lake-estate__accent_1.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/accent_1.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_1 (number 1 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft cool moonlight from the top-left with a faint warm glow from the lower right. No other object. No cast shadow or drop shadow outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. (Make three files, the same light and scale: 1 = one small irregular flake of champagne-gold leaf (#C7A978), thin, slightly crumpled, catching the light; 2 = one single loose white-ivory garden rose petal (#F1E4CC), softly cupped, a faint champagne blush at its base; 3 = one tiny warm spark of candlelight — a small soft round point of champagne-gold light (#E0C7A4 at its bright centre) fading smoothly to fully transparent at its edge, like a firefly or a reflected candle glint, the light itself being the object.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (altın varak pulu, gül yaprağı, ışık kıvılcımı); kıvılcım kenarda tam şeffafa söner; gerçek alfa.
+
+#### 20. W18 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `22-nocturne-lake-estate__accent_2.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/accent_2.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_2 (number 2 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft cool moonlight from the top-left with a faint warm glow from the lower right. No other object. No cast shadow or drop shadow outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. (Make three files, the same light and scale: 1 = one small irregular flake of champagne-gold leaf (#C7A978), thin, slightly crumpled, catching the light; 2 = one single loose white-ivory garden rose petal (#F1E4CC), softly cupped, a faint champagne blush at its base; 3 = one tiny warm spark of candlelight — a small soft round point of champagne-gold light (#E0C7A4 at its bright centre) fading smoothly to fully transparent at its edge, like a firefly or a reflected candle glint, the light itself being the object.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (altın varak pulu, gül yaprağı, ışık kıvılcımı); kıvılcım kenarda tam şeffafa söner; gerçek alfa.
+
+#### 21. W18 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `22-nocturne-lake-estate__accent_3.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/accent_3.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_3 (number 3 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft cool moonlight from the top-left with a faint warm glow from the lower right. No other object. No cast shadow or drop shadow outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. (Make three files, the same light and scale: 1 = one small irregular flake of champagne-gold leaf (#C7A978), thin, slightly crumpled, catching the light; 2 = one single loose white-ivory garden rose petal (#F1E4CC), softly cupped, a faint champagne blush at its base; 3 = one tiny warm spark of candlelight — a small soft round point of champagne-gold light (#E0C7A4 at its bright centre) fading smoothly to fully transparent at its edge, like a firefly or a reflected candle glint, the light itself being the object.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (altın varak pulu, gül yaprağı, ışık kıvılcımı); kıvılcım kenarda tam şeffafa söner; gerçek alfa.
+
+#### 22. W19 Website hero + paylaşım görseli (og:image kaynağı)
+
+- İndirme adı: `22-nocturne-lake-estate__web_hero.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/web_hero.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1024 px (3:2) · opak · PNG
+- Ek görsel: flap.png (listede #5), vellum_band.png (listede #7), moon_brooch.png (listede #8), night_laid.png (listede #1), corner_spray.png (listede #16), candle_lantern.png (listede #18)
+
+```
+Wide horizontal still life, photorealistic luxury stationery product photography by moonlight and candlelight: the closed portrait charcoal-black laid paper envelope of flap.png with its deep elongated-diamond flap edged in deckled champagne-gold foil, wrapped by the frosted vellum belly band of vellum_band.png with its fine silver lake-panorama engraving and the hammered gold crescent-moon brooch of moon_brooch.png pinned at its centre, lying slightly below the centre on the charcoal laid paper of night_laid.png; at the left a small spray of white-ivory garden roses and silvery olive sprigs (as corner_spray.png); at the right the small hurricane lantern of candle_lantern.png with its lit candle and a narrow champagne silk ribbon lying loosely; a few tiny gold-leaf flakes scattered; behind, softly out of focus, the dark paper and a faint warm candle glow. Only black, charcoal, champagne, gold and ivory tones. The top 20% of the image is calm and dark (only out-of-focus paper). This image is cropped to 1200×630 for link previews: keep the whole envelope, band and brooch visible with at least 5% empty margin below it. No people. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: zarf + bant + broş bütün, altında ≥%5 boşluk; üst %20 sakin; yazı yok.
+
+#### 23. P1 — Ön yüz
+
+- İndirme adı: `22-nocturne-lake-estate__print__invitation_front_r_5x7.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/print/invitation_front_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+- Ek görsel: ivory_laid.png (listede #2), moon_brooch.png (listede #8), divider.png (listede #17), nocturne_band.png (listede #15)
+
+```
+The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the thick warm ivory laid card of ivory_laid.png (#F1E4CC). At the top centre, between 8% and 15% of the height, a small hammered champagne-gold crescent moon (as moon_brooch.png, printed flat as a fine gold illustration) above a short pair of fine gold olive branches (as divider.png), about 30% of the width. Along the bottom, from 82% of the height down to the bottom edge, a full-width band of the oil-painted night lake of nocturne_band.png — dark mountains, a tiny villa with warm gold windows, cypresses and a path of moonlight on the water — whose top edge is a soft, slightly irregular painted edge fading into the ivory paper (no hard line), with a hair-fine champagne-gold rule just above it at 81% of the height between 12% and 88% of the width. The rectangle from 19% to 78% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm paper (the names, date and venue are set there in dark ink): no petal, no line, no shadow, no stain in it. No ornament within 8% of the left and right edges except the painted band, which simply runs off the edges. Soft cool light from the top-left. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: tam taşma; %19–%78 × %10–%90 tamamen boş; üstte küçük altın hilal + zeytin (%15'in üstünde); altta %82'den itibaren yağlı boya göl bandı, yumuşak geçiş; yazı yok.
+
+#### 24. P2 — Arka yüz
+
+- İndirme adı: `22-nocturne-lake-estate__print__invitation_back_r_5x7.png`
+- Hedef: `collections/22_Nocturne_Lake_Estate/assets/gpt/print/invitation_back_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+
+```
+The back of the same printed wedding invitation, full bleed, portrait 5.25:7.25, perfectly flat: the same thick warm ivory laid card, only a short pair of fine champagne-gold olive branches with a tiny gold crescent at their centre across the top centre (between 32% and 68% of the width), staying above 11% of the height, and a very slim strip of the same oil-painted night lake along the very bottom edge (below 95% of the height, fading softly upward into the paper). The whole area between 13% and 93% of the height, from 9% to 91% of the width, is COMPLETELY EMPTY paper (a schedule and a QR code are set there): no line, no shadow, no stain. No ornament within 8% of the left and right edges except the bottom strip. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: ön yüzle aynı kâğıt; üst ortada kısa altın zeytin + hilal (%11'in üstünde), en altta ince göl şeridi (%95'in altı); %13–%93 boş; yazı/QR yok.
+
+### 23_Velvet_Jewel_Box
+
+Sohbetin ilk mesajı (dosyanın GPT notu):
+
+```
+This design is being REDESIGNED (2026-10-22). Generate PAKET 5R (website layers) first, in order and in ONE chat, then PAKET 6R (printable invitation). PAKET 2 sample photos already exist — do NOT regenerate them. Sections marked GEÇERSİZ are not wanted. Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, names, dates, initials, monograms, crests, engravings, hallmarks, logos, brand marks, QR codes or watermarks in any image** (also not inside the ring band, on the ribbon, on the ring box or on the frames). Nothing may resemble a real jewellery brand's box, colour or packaging. Give W1 `moire_ground.png`, W3 `velvet.png` and W4 `env_back.png` as the style reference of every later part: the same pale champagne silk moiré, the same deep aubergine silk velvet with its soft pile sheen, the same champagne silk satin lining with stitched seed pearls, the same polished rose gold, the same soft studio light from the top-left. Parts drawn on the same envelope canvas (W4 env_back, W5 env_front, W6 flap, W8 ribbon_band) keep the envelope in exactly the same box.
+```
+
+#### 25. W1 Şampanya ipek hare (sayfa zemini)
+
+- İndirme adı: `23-velvet-jewel-box__moire_ground.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/parts/moire_ground.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, perfectly flat top-down texture of pale champagne silk moiré (between #E8D3B0 and #F3E6D0), the luxurious watered-silk fabric of an old townhouse salon wall: soft, wide, flowing watermark ripples in the weave that shift gently between slightly lighter and slightly darker champagne, a fine horizontal rib, a faint pearly sheen. Very low contrast so dark text reads on it everywhere. Perfectly flat and evenly lit by soft studio light from the top-left: no folds, no wrinkles, no seams, no stains, no shadow, no vignette, no flowers, no pattern other than the moiré itself. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: dikişsiz (2×2 ek yeri yok); açık şampanya, düşük kontrast; hare dalgası yumuşak; kırışık/çiçek yok; üstünde koyu yazı okunur.
+
+#### 26. W2 Fildişi pamuk kâğıt (kartlar, form)
+
+- İndirme adı: `23-velvet-jewel-box__ivory_paper.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/parts/ivory_paper.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, perfectly flat top-down texture of thick mould-made cotton paper in a warm ivory (#F8EDE0), the kind used for fine engraved stationery: a gentle felt tooth, a few faint long cotton fibres, the slightest natural cloudiness, an even tone with only the gentlest variation and a very faint satin lustre. Evenly lit by soft studio light from the top-left, no fold, no crease, no deckle edge, no stain, no shadow, no vignette, no printing, no pattern. Calm enough for fine dark text to read on it everywhere. The edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: dikişsiz; sıcak fildişi `#F8EDE0` civarı; leke/kat/desen yok; üstüne koyu yazı okunur.
+
+#### 27. W3 Patlıcan ipek kadife (koyu bantlar)
+
+- İndirme adı: `23-velvet-jewel-box__velvet.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/parts/velvet.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, perfectly flat top-down texture of deep aubergine silk velvet (#2A1328, with soft plum highlights toward #4A2142 and velvety shadows toward #1C0B1A): a dense, fine, even pile with the soft directional sheen of real silk velvet, the faintest crush marks only as gentle tonal drifts, no folds. Evenly lit by soft studio light from the top-left, very low contrast so ivory and champagne text reads on it everywhere. No wrinkles, no seams, no stains, no pattern, no flowers, no vignette. The edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: dikişsiz; koyu patlıcan kadife, hav dokusu görünür ama sakin; desen/kırışık yok; üstünde fildişi yazı okunur.
+
+#### 28. W4 Zarfın arkası (iç astar görünür)
+
+- İndirme adı: `23-velvet-jewel-box__env_back.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/parts/env_back.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1200 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: velvet.png (listede #27)
+
+```
+The back panel of an open square envelope covered in deep aubergine silk velvet (as velvet.png), seen perfectly straight from the front, on a fully transparent background. The envelope occupies exactly x 7–93% and y 7–93% of the canvas (a perfect square) with very slightly softened corners. We see its inside: it is lined with smooth champagne silk satin (#E8D3B0) with a soft liquid sheen catching the light from the top-left, the satin covering the panel almost completely, edged along its top and both sides by a fine row of tiny stitched ivory seed pearls (#F8EDE0), with a slim margin of aubergine velvet showing beyond the pearls; a very gentle shade toward the bottom where the front pocket will sit. No flap, no front pocket, no ribbon, no ring, no card inside. Soft studio light from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: kare panel x %7–93 · y %7–93; iç yüz şampanya saten, üst ve yanlarda inci dikişi, dışında ince kadife pay; kapak/cep/bant yok; gerçek alfa.
+
+#### 29. W5 Zarfın ön cebi
+
+- İndirme adı: `23-velvet-jewel-box__env_front.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/parts/env_front.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1200 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_back.png (listede #28), velvet.png (listede #27)
+
+```
+Only the front pocket of the same square aubergine silk velvet envelope as env_back.png, on the same 1200×1200 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 7–93% and y 7–93% of the canvas; the pocket spans the full envelope width (x 7–93%) from its top edge down to the envelope's bottom edge at 93% of the canvas height. Its top edge is one smooth, very shallow arc: it starts at 42% of the canvas height at both side edges and dips only slightly to 45% at the horizontal centre, cut clean, with a fine rolled velvet edge and the faint thickness of a padded panel visible along it. Deep aubergine silk velvet of velvet.png with its soft directional pile sheen, the soft fold lines of the two side flaps and the bottom flap barely visible as gentle tonal seams in the velvet, lit by soft studio light from the top-left. Everything above the pocket's edge is completely transparent. No flap, no ribbon, no ring, no card, no pearls on the pocket. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: cep tam genişlik; üst kenarı yanlarda %42, ortada %45 (çok sığ yay); üstü tamamen şeffaf; aynı kadife; gerçek alfa.
+
+#### 30. W6 Üç loblu (yonca) kapak (kapalı, dış yüz)
+
+- İndirme adı: `23-velvet-jewel-box__flap.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/parts/flap.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1200 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: velvet.png (listede #27)
+
+```
+Only the closed flap of the same square aubergine silk velvet envelope, on the same 1200×1200 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 7–93% and y 7–93% of the canvas; the flap spans its full width (x 7–93%), hinged along a softly rounded fold at the envelope's top edge (7% of the canvas height). Its free lower edge is made of THREE soft, rounded, convex lobes like a trefoil, smooth and continuous (not pointed, not a V, not scalloped lace): the edge meets the left side at 44% of the canvas height, swells down into the left lobe whose lowest point is at x 24%, y 52%, rises into a soft rounded notch at x 37%, y 48%, swells down into the largest centre lobe whose broad rounded tip is at x 50%, y 60%, rises into a second soft notch at x 63%, y 48%, swells into the right lobe lowest at x 76%, y 52%, and meets the right side at 44%. The flap is padded aubergine silk velvet (as velvet.png) with a soft directional pile sheen and a fine rolled edge along the lobes, a whisper of contact shade on the flap itself just along its lobed edge, soft studio light from the top-left. Everything below the flap's edge is completely transparent. No ribbon, no ring, no pearls, no seal, no card. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: kapak tam genişlik; serbest kenar üç yuvarlak lob (yanlarda %44, yan lob dipleri %52, girintiler %48, orta lob ucu %60); kadife, süssüz; altı şeffaf; gerçek alfa.
+
+#### 31. W7 Kapağın iç yüzü (açıkken dik)
+
+- İndirme adı: `23-velvet-jewel-box__flap_in.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/parts/flap_in.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×760 px (30:19) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: flap.png (listede #30), env_back.png (listede #28)
+
+```
+The inside of the same trefoil envelope flap, alone, seen straight on as it stands upright when the envelope is open, on a fully transparent background: the outline of flap.png mirrored vertically. Its straight fold edge is at the BOTTOM, along 92% of the image height, spanning x 7–93% of the width (exactly as wide as the envelope); its two straight sides rise to 33.6% of the image height; the left lobe's highest point is at x 24%, y 20.9%, a soft rounded notch at x 37%, y 27.2%, the largest centre lobe's broad rounded top at x 50%, y 8.3%, a second notch at x 63%, y 27.2%, the right lobe's highest point at x 76%, y 20.9%. The inside is lined with the same smooth champagne silk satin (#E8D3B0) as env_back.png, with a soft liquid sheen and a few gentle satin ripples catching the light from the top-left, and a fine row of tiny stitched ivory seed pearls follows the whole lobed edge just inside it; a slim margin of aubergine velvet shows beyond the pearls along the lobed edge. Soft studio light from the top-left. No ribbon, no ring, no card. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: düz katlama kenarı altta (%92), yanlar %33,6'ya, yan lob tepeleri %20,9, orta lob tepesi %8,3; şampanya saten + lob kenarı boyunca inci dikişi + ince kadife pay; düz renk değil; gerçek alfa.
+
+#### 32. W8 Şampanya saten bant (zarfı dikey saran)
+
+- İndirme adı: `23-velvet-jewel-box__ribbon_band.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/parts/ribbon_band.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1200 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_back.png (listede #28), flap.png (listede #30)
+
+```
+On the same 1200×1200 canvas as env_back.png and flap.png, in exactly the same place (the envelope box is x 7–93% and y 7–93% of the canvas, but the envelope itself is NOT drawn here), only a single flat champagne silk satin ribbon that wraps the closed envelope vertically, on a fully transparent background: the ribbon (#E8D3B0, a rich liquid sheen with soft lighter highlights where it catches the light from the top-left) runs straight down the centre from x 46% to x 54% of the canvas, from y 6.5% to y 93.5%; at both ends it turns over in a soft rounded fold, as if it bends over the envelope's top and bottom edges and continues behind it. Just below the centre, at x 50%, y 62%, the ribbon makes one small, neat, flat knot (a simple tidy wrap, slightly wider than the ribbon, no bow, no loops, no tails). Along its length the ribbon lies flat with one or two very gentle soft ripples. Everything outside the ribbon is fully transparent: no envelope, no flap, no ring, no pearls. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: tek dikey saten bant x %46–54 / y %6,5–93,5; iki uç yumuşak kıvrık; (%50, %62)'de küçük yassı düğüm, fiyonk yok; zarf çizilmemiş; gerçek alfa.
+
+#### 33. W9 Rose gold tek taş yüzük (kapanış)
+
+- İndirme adı: `23-velvet-jewel-box__ring.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/parts/ring.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 600×600 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A single rose gold solitaire engagement ring, alone, standing upright and seen perfectly straight from the front, on a fully transparent background, centred and filling about 72% of the canvas height: a slim, highly polished round band in rose gold (#C99A86 with bright warm highlights and soft deeper reflections), and on top a single round brilliant-cut diamond held in a delicate six-claw rose gold setting, its crisp facets catching the soft studio light from the top-left with clean white and faint champagne reflections. The open centre of the band is truly transparent (real alpha). Elegant, classic, not oversized. No engraving, no hallmark, no inscription inside the band, no other stones, no box, no ribbon, no sparkle rays, no star flares. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: tek yüzük, önden dik; rose gold ince bant + altı tırnaklı tek taş; bandın içi şeffaf; kazıma/yazı/ışın yok; gerçek alfa.
+
+#### 34. W10 Zarftaki kart (boş)
+
+- İndirme adı: `23-velvet-jewel-box__card_small.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/parts/card_small.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1300 px (10:13) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: ivory_paper.png (listede #26)
+
+```
+A flat portrait invitation card, alone, seen perfectly straight on, on a fully transparent background: the thick warm ivory cotton card of ivory_paper.png (#F8EDE0) with very slightly rounded corners, spanning x 7–93% and y 6–94% of the canvas. A fine rose gold foil border line (#C99A86, crisp metallic shine) is inset about 5% from the card's edge, and just inside it a delicate continuous row of tiny ivory seed pearls set along the border on all four sides, slightly larger at the four corners. The whole card inside the pearl border is EMPTY paper (the website sets the names, date and venue there in HTML). Soft studio light from the top-left, a hair-fine contact shade on the card's own edge only. No flowers, no ring, no photo, no ornament in the middle. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: boş fildişi kart; rose gold folyo çizgi + içinde tohum incisi dizisi; içi tamamen boş; gerçek alfa.
+
+#### 35. W11 Rose gold + inci oval kamea çerçeve (home portresi)
+
+- İndirme adı: `23-velvet-jewel-box__cameo_frame.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/parts/cameo_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1250 px (4:5) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+An upright oval cameo-style portrait frame, alone, seen straight on, on a fully transparent background, like a precious antique locket frame: a polished rose gold oval bezel (#C99A86, warm highlights, soft deeper reflections) with a fine beaded inner rim, surrounded by a continuous ring of graduated ivory seed pearls (#F8EDE0, soft orient), and at the top centre a small, delicate rose gold ribbon bow with two short tails resting on the pearls. The frame's outer edge spans about x 8–92% and y 6–94% of the canvas. In the middle an upright OVAL photo window exactly 640 px wide and 820 px tall, centred at x 500 px, y 640 px (its bounding box from x 180 to 820 px and y 230 to 1050 px), filled with flat pure green #00FF00 (no texture, no shading, smooth clean oval edge, nothing over it). Soft studio light from the top-left. No glass reflection over the window, no gemstones other than the pearls, no flowers. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: düz `#00FF00` dikey oval pencere ~640×820, merkez ~(500, 640); rose gold bezel + inci halkası + üstte küçük rose gold fiyonk; pencereye binen yok; gerçek alfa.
+
+#### 36. W12 Kadife yüzük tepsisi oval yuvası (story vitrini)
+
+- İndirme adı: `23-velvet-jewel-box__tray_frame.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/parts/tray_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1250 px (4:5) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+- Ek görsel: velvet.png (listede #27)
+
+```
+A single upright panel from a jeweller's display tray, alone, seen straight on, on a fully transparent background: a softly padded, rounded-rectangle cushion of deep aubergine silk velvet (as velvet.png) with gently rounded corners and a soft tufted edge, spanning about x 7–93% and y 6–94% of the canvas; set into its centre a slim polished rose gold oval bezel (#C99A86) with a fine beaded rim, and a single row of tiny ivory seed pearls around the bezel. Inside the bezel an upright OVAL photo window exactly 600 px wide and 780 px tall, centred at x 500 px, y 625 px (its bounding box from x 200 to 800 px and y 235 to 1015 px), filled with flat pure green #00FF00 (no texture, no shading, smooth clean oval edge, nothing over it). The velvet shows its soft directional pile sheen and velvety shadows around the bezel. Soft studio light from the top-left. No ring, no jewellery, no glass, no flowers. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: düz `#00FF00` dikey oval ~600×780, merkez ~(500, 625); kadife yastık panel + rose gold bezel + inci sırası; yüzük/cam yok; gerçek alfa.
+
+#### 37. W13 İnci kenarlı geniş çerçeve (mekân fotoğrafı)
+
+- İndirme adı: `23-velvet-jewel-box__venue_frame.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/parts/venue_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1000 px (8:5) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A wide landscape picture frame, alone, seen straight on, on a fully transparent background: a slim polished rose gold frame (#C99A86, warm highlights) with softly rounded corners and a fine raised beaded inner lip, and just inside the lip a continuous row of tiny ivory seed pearls on all four sides, slightly larger pearls at the four corners. The frame's outer edge spans about x 6–94% and y 7–93% of the canvas. In the middle a landscape photo window exactly 1360 px wide and 765 px tall (16:9), its top-left corner at x 120 px, y 118 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges with only very slightly rounded corners, nothing over it). Soft studio light from the top-left. No bow, no flowers, no glass reflection. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: düz `#00FF00` ~1360×765 (16:9), sol üst ~(120, 118); ince rose gold çerçeve + iç kenarda inci sırası; gerçek alfa.
+
+#### 38. W14 Köşe süsü (inci dizileri + saten kurdele + gül goncası)
+
+- İndirme adı: `23-velvet-jewel-box__corner_spray.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/parts/corner_spray.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1000 px (6:5) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A refined corner ornament growing out from near the top-left corner toward the centre, alone, on a fully transparent background, photorealistic: two or three graceful looping strands of ivory seed pearls (#F8EDE0, soft orient) draped in soft swags, a loop of champagne silk satin ribbon (#E8D3B0) with two long softly curling tails, one half-open champagne-blush garden rose and two small closed buds with a few dark plum-green leaves tucked among the ribbon. Restrained and elegant, more jewellery than bouquet. It reaches toward the top and left sides of the image but stays 6% inside them, and the bottom-right half of the canvas is completely empty. Soft studio light from the top-left. No ring, no gemstones, no glitter, no other flowers or colours. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: sol üstten çıkan ölçülü süs (inci + saten kurdele + tek gül + iki gonca); sağ alt yarı boş; kenara değmiyor; gerçek alfa.
+
+#### 39. W15 Tohum incisi dizisi (bölüm ayırıcı)
+
+- İndirme adı: `23-velvet-jewel-box__divider.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/parts/divider.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×200 px (8:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A slim horizontal divider, alone, on a fully transparent background: one straight strand of graduated ivory seed pearls (#F8EDE0, soft orient and tiny bright highlights) running horizontally across x 8–92% of the canvas at the vertical centre, the pearls largest in the middle and gradually smaller toward both ends, with a tiny polished rose gold bar clasp (#C99A86) exactly at the centre. Fine and elegant. No tassels, no other colours, no bow. Soft studio light from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: yatay tek dizi, ortada büyük uçlarda küçük inciler, ortada küçük rose gold klips; iki uçta boşluk; gerçek alfa.
+
+#### 40. W16 Açık kadife yüzük kutusu (imza, boş)
+
+- İndirme adı: `23-velvet-jewel-box__ring_box.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/parts/ring_box.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 900×800 px (9:8) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: velvet.png (listede #27)
+
+```
+A small open ring box, alone, seen from the front and very slightly from above, on a fully transparent background, photorealistic: a softly rounded box covered in deep aubergine silk velvet (as velvet.png) with a fine rose gold rim line where the lid meets the base; the lid stands open at about 100 degrees, its inside lined with champagne silk satin with a soft sheen; in the base a plump champagne satin cushion with a single empty slit in its centre (NO ring in it). The box spans about x 20–80% and y 10–90% of the canvas. Soft studio light from the top-left, velvety shadows in the pile. No ring, no jewellery, no logo or stamp inside the lid, no ribbon. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: tek açık kutu, kadife dış + saten iç; yastıkta boş yarık (yüzük YOK); kapak içinde logo/yazı yok; gerçek alfa.
+
+#### 41. W17 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `23-velvet-jewel-box__accent_1.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/parts/accent_1.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_1 (number 1 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft studio light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one single round ivory seed pearl (#F8EDE0) with a soft pink-champagne orient and one tiny bright highlight; 2 = one single loose champagne-blush rose petal (#E8D3B0 shading to a soft blush), velvety and softly cupped, a faint deeper shade in its fold; 3 = one single small loose round brilliant-cut diamond seen from the top, crisp clean facets with white and faint champagne reflections, NO sparkle rays, NO star flare.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (inci, gül yaprağı, elmas); ışın/hâle yok; kenara değmiyor; gerçek alfa.
+
+#### 42. W17 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `23-velvet-jewel-box__accent_2.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/parts/accent_2.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_2 (number 2 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft studio light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one single round ivory seed pearl (#F8EDE0) with a soft pink-champagne orient and one tiny bright highlight; 2 = one single loose champagne-blush rose petal (#E8D3B0 shading to a soft blush), velvety and softly cupped, a faint deeper shade in its fold; 3 = one single small loose round brilliant-cut diamond seen from the top, crisp clean facets with white and faint champagne reflections, NO sparkle rays, NO star flare.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (inci, gül yaprağı, elmas); ışın/hâle yok; kenara değmiyor; gerçek alfa.
+
+#### 43. W17 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `23-velvet-jewel-box__accent_3.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/parts/accent_3.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_3 (number 3 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft studio light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one single round ivory seed pearl (#F8EDE0) with a soft pink-champagne orient and one tiny bright highlight; 2 = one single loose champagne-blush rose petal (#E8D3B0 shading to a soft blush), velvety and softly cupped, a faint deeper shade in its fold; 3 = one single small loose round brilliant-cut diamond seen from the top, crisp clean facets with white and faint champagne reflections, NO sparkle rays, NO star flare.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (inci, gül yaprağı, elmas); ışın/hâle yok; kenara değmiyor; gerçek alfa.
+
+#### 44. W18 Website hero + paylaşım görseli (og:image kaynağı)
+
+- İndirme adı: `23-velvet-jewel-box__web_hero.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/parts/web_hero.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1024 px (3:2) · opak · PNG
+- Ek görsel: flap.png (listede #30), ribbon_band.png (listede #32), ring.png (listede #33), moire_ground.png (listede #25), corner_spray.png (listede #38), ring_box.png (listede #40)
+
+```
+Wide horizontal still life, photorealistic luxury product photography, soft studio light from the top-left: the closed square aubergine silk velvet envelope of flap.png with its three-lobed trefoil flap, wrapped vertically by the champagne satin ribbon of ribbon_band.png with its small flat knot, and the rose gold solitaire ring of ring.png resting on the ribbon just above the knot, lying slightly below the centre on pale champagne silk moiré (as moire_ground.png); at the left a few looping strands of ivory seed pearls and a champagne satin ribbon tail with one half-open champagne-blush rose (as corner_spray.png); at the right, softly out of focus, the small open aubergine velvet ring box of ring_box.png (empty); a few loose pearls and one rose petal scattered. Only aubergine, plum, champagne, rose gold and ivory tones. The top 20% of the image is calm and soft (only out-of-focus moiré). This image is cropped to 1200×630 for link previews: keep the whole envelope, ribbon and ring visible with at least 5% empty margin below the envelope. No people. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: zarf + bant + yüzük bütün, altında ≥%5 boşluk; üst %20 sakin; kutu boş; yazı yok.
+
+#### 45. P1 — Ön yüz
+
+- İndirme adı: `23-velvet-jewel-box__print__invitation_front_r_5x7.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/print/invitation_front_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+- Ek görsel: ivory_paper.png (listede #26), divider.png (listede #39)
+
+```
+The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the thick warm ivory cotton card of ivory_paper.png (#F8EDE0). Across the top, between 9% and 91% of the width, two graceful swags of ivory seed pearl strands (as divider.png) hang in gentle curves from near the top corners and meet at the top centre in a small, neat champagne silk satin bow with short tails, one small half-open champagne-blush rose bud tucked into the bow; nothing in this top band reaches lower than 17% of the height. Along the bottom, between 93% and 96% of the height and from 14% to 86% of the width, a fine double rule of rose gold foil (#C99A86) with one single seed pearl at its centre. The rectangle from 19% to 91% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm paper (the names, date and venue are set there): no pearl, no petal, no line, no shadow, no stain in it. No ornament within 8% of the left and right edges. Soft studio light from the top-left. Only ivory, champagne, blush and rose gold tones. No ring, no velvet. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: tam taşma fildişi; %19–%91 × %10–%90 tamamen boş; inci salkımları + saten fiyonk + gonca yalnız üstte (%17'nin üstünde), rose gold çift çizgi + tek inci yalnız altta; yan %8 boş; yazı yok.
+
+#### 46. P2 — Arka yüz
+
+- İndirme adı: `23-velvet-jewel-box__print__invitation_back_r_5x7.png`
+- Hedef: `collections/23_Velvet_Jewel_Box/assets/gpt/print/invitation_back_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+
+```
+The back of the same printed wedding invitation, full bleed, portrait 5.25:7.25, perfectly flat: the same thick warm ivory cotton card, only one short swag of graduated ivory seed pearls across the top centre (between 32% and 68% of the width) with a tiny rose gold bar clasp at its middle, its lowest point staying above 11% of the height. The whole area below 13% of the height, from 9% to 91% of the width, is COMPLETELY EMPTY paper (a schedule and a QR code are set there): no pearl, no line, no shadow, no stain. No ornament within 8% of the left and right edges. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: ön yüzle aynı kâğıt; yalnız üst ortada kısa inci salkımı (%11'in üstünde); %13'ün altı boş; yazı/QR yok.
+
+### 24_Grand_Theatre_Premiere
+
+Sohbetin ilk mesajı (dosyanın GPT notu):
+
+```
+This design ("Grand Theatre Premiere") is being REDESIGNED from scratch. Generate PAKET 5R (website layers) first, in order and in ONE chat, then PAKET 6R (printable invitation). **PAKET 2 sample photos already exist — do not regenerate them.** Sections marked GEÇERSİZ are not wanted. Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, names, dates, initials, monograms, crests, logos, brand marks, QR codes or watermarks in any image** — the ticket stub is BLANK ivory card (no "admit one", no seat number, no serial number), the programme card is blank, no lettering on the valance, the footlights or the proscenium. It is an imaginary Belle Époque opera house: it must not resemble any real theatre, show, poster, brand, artist or another seller's design. Give W1 `page_ground.png`, W4 `env_back.png` and W6 `curtain_left.png` as the style reference of every later part: the same warm ivory programme paper, the same peacock-teal linen envelope, the same deep burgundy silk velvet with heavy soft folds and antique gold bullion fringe, the same warm stage light from the top-left with a soft golden glow on gilding. Parts drawn on the same envelope canvas (W4, W5, W6, W7, W10, W11, W12) keep the envelope in exactly the same box.
+```
+
+#### 47. W1 Fildişi program kâğıdı (sayfa zemini, kapak sayfası)
+
+- İndirme adı: `24-grand-theatre-premiere__page_ground.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/page_ground.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, perfectly flat top-down texture of fine warm ivory laid paper (#F3EBD8), the paper of a luxurious old opera programme: faint regular laid lines and wider chain lines pressed into the sheet, a gentle felt tooth, a few tiny scattered flecks of antique gold leaf (#C9A45C) — very sparse, no more than a dozen small flecks over the whole sheet — and the softest natural cloudiness. Evenly lit by warm light from the top-left, very low contrast, calm enough for dark ink text and large script names to read on it everywhere. No fold, no crease, no stain, no border, no frame, no printed pattern, no vignette, no shadow. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: dikişsiz (2×2 ek yeri yok); sıcak fildişi `#F3EBD8` civarı; laid çizgileri çok hafif; altın pul çok seyrek; bordür/desen yok.
+
+#### 48. W2 Fildişi program kartonu (kartlar, form)
+
+- İndirme adı: `24-grand-theatre-premiere__card_paper.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/card_paper.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, flat top-down texture of thick smooth ivory card stock (#F3EBD8, a touch warmer and smoother than laid paper), the heavy board of a gala programme cover: a very fine even felt surface, the faintest silky sheen, an even tone with only the gentlest variation. Evenly lit by warm light from the top-left. No laid lines, no flecks, no fold, no crease, no stain, no pattern, no border, no vignette, no shadow. Calm enough for fine dark text everywhere. Edges tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: dikişsiz; düz, sakin fildişi karton; W1'den daha pürüzsüz; desen/pul yok.
+
+#### 49. W3 Tavus mavisi kadife (koyu bantlar)
+
+- İndirme adı: `24-grand-theatre-premiere__velvet_ground.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/velvet_ground.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, flat top-down texture of deep peacock-teal silk velvet (#16595B shading to #0E3D40), seen straight on and laid perfectly flat: a dense soft pile with the rich, slightly shifting sheen of real velvet, very subtle directional pile marks, no folds and no wrinkles. Evenly lit by warm light from the top-left, low contrast so ivory and gold text reads on it everywhere. No pattern, no embroidery, no stain, no vignette, no shadow. Edges tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: dikişsiz; koyu tavus mavisi kadife, hafif tüy parıltısı; kıvrım/desen yok; üstünde fildişi yazı okunur.
+
+#### 50. W4 Zarfın arkası — sahne astarı
+
+- İndirme adı: `24-grand-theatre-premiere__env_back.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/env_back.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1200 px (4:3) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+The back panel of an open horizontal envelope, seen perfectly straight from the front, on a fully transparent background. The envelope occupies exactly x 6–94% and y 9.5–90.5% of the 1600×1200 canvas (a rectangle about 1.45:1 with very slightly softened corners). Its outer rim is a slim margin of peacock-teal linen paper (#16595B, a fine visible linen weave) about 3% of the envelope's width all around. Inside the rim, the whole panel is lined with a small, rich OIL PAINTING of the empty stage of an imaginary Belle Époque opera house seen from the stalls: a gilded proscenium arch painted in perspective near the edges, a deep warm stage floor of polished boards receding toward a softly painted backdrop of a moonlit garden with tall dark trees and a pale sky, warm amber light pooled at the centre of the stage, the darker velvet wings at both sides. Visible fine brushstrokes and craquelure-free varnish sheen. The centre of the painting is calm and simple (an invitation card will stand in front of it). No people, no performers, no props, no curtains drawn across the stage, no flap, no pocket, no card. Warm stage light from the top-left on the linen rim. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: zarf x %6–94 · y %9,5–90,5; ince tavus keten kenar; içi yağlı boya boş sahne (insan/perde yok), ortası sakin; gerçek alfa.
+
+#### 51. W5 Zarfın ön cebi — sahne önü (apron)
+
+- İndirme adı: `24-grand-theatre-premiere__env_front.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/env_front.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1200 px (4:3) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_back.png (listede #50)
+
+```
+Only the front pocket of the same horizontal peacock-teal linen envelope as env_back.png, on the same 1600×1200 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 6–94% and y 9.5–90.5% of the canvas; the pocket spans the full envelope width (x 6–94%) from its top edge down to the envelope's bottom edge at 90.5% of the canvas height. Its top edge is ONE shallow convex arc like the curved lip of a stage apron: it starts at 61% of the canvas height at both side edges and rises gently to 58% at the horizontal centre. Along that lip runs a narrow carved and water-gilded moulding (antique gold #C9A45C, a soft warm gleam), and set into the lip at even intervals are five small unlit antique brass footlight shells (half-domes opening upward). Below the moulding: plain peacock-teal linen paper (#16595B) with a fine visible weave and the soft fold lines of the side and bottom flaps barely visible. Warm stage light from the top-left. Everything above the lip is completely transparent. No curtain, no flap, no card, no light rays, no glow. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: cep tam genişlik; üst kenarı yanlarda %61, ortada %58'e yükselen sığ yay; varaklı pervaz + 5 sönük pirinç ayak lambası; üstü şeffaf; gerçek alfa.
+
+#### 52. W6 Sol kadife perde (kapalı, dış yüz)
+
+- İndirme adı: `24-grand-theatre-premiere__curtain_left.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/curtain_left.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1200 px (4:3) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+Only the LEFT closed stage-curtain flap of the same horizontal envelope, on the same 1600×1200 canvas and in exactly the same place, on a fully transparent background — the envelope, the pocket and the right curtain are NOT drawn. The envelope occupies exactly x 6–94% and y 9.5–90.5% of the canvas; this flap covers x 6–51% and y 18–90.5% of the canvas: its outer left edge is straight along x 6% (its hinge), its top edge is straight at 18%, its bottom edge is straight at 90.5%, and its inner right edge falls in soft natural vertical folds around x 49–51%. It is deep burgundy silk velvet (#5E1622, shadows #3A0C14) hanging in six or seven heavy, soft, rounded vertical folds with a rich pile sheen on each fold crest, slightly gathered toward the centre near the middle height (where a cord will tie it); along its whole bottom edge a thick antique gold bullion fringe (#C9A45C, twisted cords with a warm gleam) about 4% of the canvas height ending exactly at 90.5%. Warm stage light from the top-left. Everything outside the curtain is completely transparent. No cord, no tassel, no ticket, no pelmet. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: x %6–51 · y %18–90,5; sol kenar düz (menteşe); bordo kadife ağır dikey kıvrımlar; altta altın saçak; kordon/bilet yok; gerçek alfa.
+
+#### 53. W7 Sağ kadife perde (kapalı, dış yüz)
+
+- İndirme adı: `24-grand-theatre-premiere__curtain_right.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/curtain_right.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1200 px (4:3) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: curtain_left.png (listede #52)
+
+```
+Only the RIGHT closed stage-curtain flap of the same horizontal envelope, the mirror twin of curtain_left.png, on the same 1600×1200 canvas and in exactly the same place, on a fully transparent background — the envelope, the pocket and the left curtain are NOT drawn. The envelope occupies exactly x 6–94% and y 9.5–90.5% of the canvas; this flap covers x 49–94% and y 18–90.5% of the canvas: its outer right edge is straight along x 94% (its hinge), its top edge straight at 18%, its bottom edge straight at 90.5%, and its inner left edge falls in soft vertical folds around x 49–51%. The same deep burgundy silk velvet (#5E1622, shadows #3A0C14), the same six or seven heavy rounded vertical folds slightly gathered toward the centre near the middle height, the same thick antique gold bullion fringe along the bottom edge ending exactly at 90.5%. Warm stage light from the top-left (so the light falls the same way as on the left curtain, not mirrored). Everything outside the curtain is completely transparent. No cord, no tassel, no ticket, no pelmet. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: x %49–94 · y %18–90,5; sağ kenar düz (menteşe); W6'nın ikizi, ışık yine sol üstten; altın saçak; gerçek alfa.
+
+#### 54. W8 Sol perdenin iç yüzü (açıkken)
+
+- İndirme adı: `24-grand-theatre-premiere__curtain_left_in.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/curtain_left_in.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 800×1000 px (4:5) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: curtain_left.png (listede #52)
+
+```
+The INSIDE (back) of the left stage-curtain flap, alone, seen straight on as it appears once swung open, on a fully transparent background: the same outline as curtain_left.png mirrored left-to-right — its straight hinge edge is now on the RIGHT side of the shape. The shape spans x 6–94% and y 6–94% of the 800×1000 canvas: straight top edge, straight right edge (the hinge), straight bottom edge, and a softly folded free edge on the left. The inside is lined with antique gold silk (#C9A45C toward a deeper old gold) with a soft lustrous sheen running down the same heavy vertical folds, and a narrow band of the burgundy velvet (#5E1622) turned over along the free left edge and along the top; the same antique gold bullion fringe along the bottom edge. Warm stage light from the top-left. Not plain, not flat: real folds, real silk sheen. No cord, no tassel. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: menteşe kenarı sağda; altın ipek astar + serbest kenarda ve üstte bordo kadife şerit; kıvrımlar W6 ile uyumlu; altta saçak; düz renk değil; gerçek alfa.
+
+#### 55. W9 Sağ perdenin iç yüzü (açıkken)
+
+- İndirme adı: `24-grand-theatre-premiere__curtain_right_in.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/curtain_right_in.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 800×1000 px (4:5) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: curtain_left_in.png (listede #54)
+
+```
+The INSIDE (back) of the right stage-curtain flap, alone, the mirror twin of curtain_left_in.png, seen straight on as it appears once swung open, on a fully transparent background: its straight hinge edge is on the LEFT side of the shape. The shape spans x 6–94% and y 6–94% of the 800×1000 canvas: straight top, straight left edge (the hinge), straight bottom, a softly folded free edge on the right. The same antique gold silk lining with a lustrous sheen down heavy vertical folds, the same narrow band of burgundy velvet (#5E1622) turned over along the free right edge and along the top, the same antique gold bullion fringe along the bottom. Warm stage light from the top-left (not mirrored). No cord, no tassel. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: menteşe kenarı solda; W8'in ikizi; altın ipek astar, bordo kenar şeridi, saçak; gerçek alfa.
+
+#### 56. W10 Saçaklı perde başlığı (sabit valance)
+
+- İndirme adı: `24-grand-theatre-premiere__valance.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/valance.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1200 px (4:3) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: curtain_left.png (listede #52)
+
+```
+Only the fixed pelmet (valance) across the top of the same horizontal envelope, on the same 1600×1200 canvas and in exactly the same place, on a fully transparent background — the envelope and the curtains are NOT drawn. The envelope occupies exactly x 6–94% and y 9.5–90.5% of the canvas; the valance spans its full width (x 6–94%) with a straight top edge along 9.5%. It is the same deep burgundy silk velvet as curtain_left.png gathered into three soft, generous swags (a wide centre swag and two side swags) whose rounded lower edges dip to 21% of the canvas height, with short velvet tails (jabots) at both ends falling to about 24%; along the lower edges of the swags hangs a fine antique gold bullion fringe ending at 24%, and a slim water-gilded carved rod (antique gold #C9A45C) runs along the very top edge. Warm stage light from the top-left with soft golden highlights. Everything below the valance is completely transparent. No tassels hanging lower than 24%, no cord, no text. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: tam genişlik, üst kenar %9,5; üç kadife swag (diplerde %21), saçak ve uç kuyruklar en çok %24; üstte varaklı ince çubuk; altı şeffaf; gerçek alfa.
+
+#### 57. W11 Bilet koçanı (boş, delikli)
+
+- İndirme adı: `24-grand-theatre-premiere__ticket.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/ticket.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1200 px (4:3) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+Only a blank theatre ticket tucked across the centre of the closed curtains of the same envelope, on the same 1600×1200 canvas and in exactly the same place, on a fully transparent background — the envelope, the curtains and the cord are NOT drawn. A straight, untilted horizontal rectangle of thick ivory card (#F3EBD8) spanning exactly x 40–60% and y 50.5–61.5% of the canvas (about 2.4:1), its corners very slightly rounded, with a fine antique gold foil border line (#C9A45C) inset a little from its edge and a delicate gilded acanthus flourish in each corner of the border. A vertical line of small, evenly spaced, round punched perforation holes crosses the ticket at x 54.6% of the canvas, dividing a larger body on the left from a small stub on the right; the holes are truly see-through (real alpha). The card is otherwise completely BLANK: no "admit one", no seat or row, no serial number, no words, no numbers. A faint soft bend in the card. Warm stage light from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: düz fildişi bilet x %40–60 · y %50,5–61,5; altın kenar çizgisi; dikey delik çizgisi x %54,6'da, delikler şeffaf; hiçbir yazı/rakam yok; gerçek alfa.
+
+#### 58. W12 Altın püsküllü kordon
+
+- İndirme adı: `24-grand-theatre-premiere__rope.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/rope.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1200 px (4:3) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+Only the antique gold tie-back cord that gathers the two closed curtains at the centre of the same envelope, on the same 1600×1200 canvas and in exactly the same place, on a fully transparent background — the envelope, the curtains and the ticket are NOT drawn. A thick twisted silk rope (antique gold #C9A45C with warm highlights and deeper old-gold shadows) runs horizontally from x 41% to x 59% of the canvas at about 54% of the canvas height, slightly cinched in the middle, and is tied at the centre (50%, 54%) in one neat, plump knot; from the knot two heavy silk tassels hang straight down — one at x 47%, one at x 53% — each with a carved gilded head and a full skirt of fine gold silk threads ending at 74% of the canvas height. Warm stage light from the top-left. Everything else is completely transparent. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: kordon x %41–59, y ~%54; düğüm (%50, %54); iki püskül x %47 ve %53'te, uçları %74; perde/bilet çizilmemiş; gerçek alfa.
+
+#### 59. W13 Sahneden yükselen program kartı (boş)
+
+- İndirme adı: `24-grand-theatre-premiere__card_small.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/card_small.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1400 px (5:7) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: card_paper.png (listede #48)
+
+```
+A flat portrait invitation card, alone, seen straight on, on a fully transparent background: the thick smooth ivory card stock of card_paper.png (#F3EBD8) with softly rounded corners, spanning x 7–93% and y 6–94% of the canvas, its edge finished with a fine antique gold gilt edge. A fine antique gold foil double rule (#C9A45C) is inset about 5% from the card's edge, and at the top centre, inside the rules, a small gilded proscenium-arch cartouche with a tiny velvet swag (about 34% of the card's width), and at the bottom centre a small gilded acanthus flourish. Everything between them is EMPTY card (the website sets the names, the date and the venue there in HTML). Warm stage light from the top-left, a hair-fine contact shade on the card's own edge only. No photo, no flowers. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: boş fildişi kart; altın çift çizgi; üstte küçük proscenium kartuşu, altta akantus; orta tamamen boş; gerçek alfa.
+
+#### 60. W14 Proscenium portre çerçevesi (home)
+
+- İndirme adı: `24-grand-theatre-premiere__portrait_frame.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/portrait_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1300 px (10:13) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+- Ek görsel: curtain_left.png (listede #52)
+
+```
+A miniature gilded theatre proscenium used as a portrait frame, alone, seen straight on, on a fully transparent background: a richly carved, water-gilded wooden frame (antique gold #C9A45C with soft warm highlights and deeper old-gold recesses) whose top is a gentle arch crowned by a small carved cartouche (blank) with acanthus scrolls, two slender fluted pilasters down the sides and a carved base moulding; a short swag of the burgundy velvet of curtain_left.png with a little gold fringe hangs across the inside of the arch above the window, and two narrow gathered velvet drapes fall down the inner sides of the pilasters, tied back with tiny gold tassels. The frame spans about x 6–94% and y 6–94% of the canvas. In it a portrait photo window exactly 680 px wide and 850 px tall (4:5), its top-left corner at x 160 px, y 290 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, nothing over it — the velvet swag and drapes stay outside the window). Warm stage light from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: pencere düz `#00FF00`, 680×850 (4:5), sol üst (160, 290); kemerli varaklı çerçeve + kadife swag ve yan drapeler pencerenin dışında; kartuş boş; gerçek alfa.
+
+#### 61. W15 Program sayfası çerçevesi (story)
+
+- İndirme adı: `24-grand-theatre-premiere__story_frame.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/story_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1350 px (20:27) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+- Ek görsel: card_paper.png (listede #48)
+
+```
+A single page of a luxurious blank opera programme used as a photo frame, alone, lying flat, seen straight on, on a fully transparent background: a portrait sheet of the thick ivory card of card_paper.png (#F3EBD8) spanning about x 6–94% and y 6–94% of the canvas, with a fine antique gold gilt edge, a fine antique gold double rule inset from the edge, a small gilded acanthus flourish at the middle of the top rule, and a tiny burgundy silk tassel on a gold cord tucked at the top-right corner. In it a portrait photo window exactly 760 px wide and 950 px tall (4:5), its top-left corner at x 120 px, y 140 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, nothing over it), with a hair-fine gold rule around it; below the window the page is EMPTY paper (a caption is set there in HTML). Warm stage light from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: pencere düz `#00FF00`, 760×950 (4:5), sol üst (120, 140); altında boş kâğıt; altın çift çizgi + köşede küçük bordo püskül; yazı yok; gerçek alfa.
+
+#### 62. W16 Geniş proscenium (mekân fotoğrafı)
+
+- İndirme adı: `24-grand-theatre-premiere__venue_frame.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/venue_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1000 px (8:5) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+- Ek görsel: curtain_left.png (listede #52)
+
+```
+A wide gilded theatre proscenium used as a landscape photo frame, alone, seen straight on, on a fully transparent background: a carved water-gilded frame (antique gold #C9A45C, warm highlights, old-gold recesses) with a shallow arched top and a small blank cartouche at its centre, the same burgundy velvet of curtain_left.png gathered and tied back at both sides with gold tassel cords like open stage curtains, and a short velvet swag with gold fringe across the top inside the arch. The frame spans about x 6–94% and y 6–94% of the canvas. In it a landscape photo window exactly 1152 px wide and 768 px tall (3:2), its top-left corner at x 224 px, y 120 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, nothing over it — the gathered curtains and the swag stay outside the window). Warm stage light from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: pencere düz `#00FF00`, 1152×768 (3:2), sol üst (224, 120); yanlarda toplanmış perdeler ve üst swag pencereye binmiyor; kartuş boş; gerçek alfa.
+
+#### 63. W17 Köşe süsü (varaklı akantus + gül)
+
+- İndirme adı: `24-grand-theatre-premiere__corner_ornament.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/corner_ornament.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1000 px (6:5) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A restrained, elegant corner ornament growing out from near the top-left corner toward the centre, alone, on a fully transparent background, photorealistic: a carved water-gilded acanthus scroll (antique gold #C9A45C) curling along the top and left sides, with a single deep burgundy garden rose (#5E1622, velvety petals) and two ivory rosebuds (#F3EBD8) nestled at the corner, a few dark green leaves, and a short antique gold silk tassel hanging from the scroll. Light and airy, not dense. It reaches toward the top and left sides of the image but stays 6% inside them, and the bottom-right half of the canvas is completely empty. Warm stage light from the top-left. No vase, no glitter, no other flowers. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: sol üstten çıkan sade köşe; tek bordo gül + iki fildişi gonca + akantus + küçük püskül; sağ alt yarı boş; gerçek alfa.
+
+#### 64. W18 Varaklı akantus ayırıcı
+
+- İndirme adı: `24-grand-theatre-premiere__divider.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/divider.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×200 px (8:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A slim horizontal divider, alone, on a fully transparent background: a fine carved and water-gilded acanthus scroll moulding (antique gold #C9A45C, soft warm highlights) running symmetrically from the centre outward across x 8–92% of the canvas at the vertical centre, tapering to delicate curls at both ends, with a tiny burgundy silk tassel hanging from a small gilded boss at the exact centre. Elegant and fine. Warm stage light from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: yatay simetrik varaklı akantus, ortada küçük bordo püskül; iki uçta boşluk; gerçek alfa.
+
+#### 65. W19 Antik pirinç opera dürbünü (imza)
+
+- İndirme adı: `24-grand-theatre-premiere__opera_glasses.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/opera_glasses.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×700 px (10:7) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A pair of antique brass opera glasses, alone, lying slightly turned toward the viewer, on a fully transparent background, photorealistic: two short barrels of warm antique brass (#C9A45C toward deeper bronze) with fine engraved bands, the eyepieces wrapped in burgundy leather (#5E1622), a slim brass bridge with a small focusing wheel, the clear front lenses showing only soft reflections, and a short folded handle (lorgnette) of brass with a mother-of-pearl inlay. It spans about x 12–88% and y 15–85% of the canvas. Warm stage light from the top-left. No case, no chain, no engraving of letters. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: tek pirinç opera dürbünü, bordo deri, sedef saplı; yazı/harf yok; gerçek alfa.
+
+#### 66. W20 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `24-grand-theatre-premiere__accent_1.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/accent_1.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_1 (number 1 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, warm stage light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one small round disc of antique gold foil confetti (#C9A45C), very thin, slightly curled, catching a warm highlight; 2 = one single loose deep burgundy rose petal (#5E1622), velvety and softly cupped; 3 = one single loose ivory rose petal (#F3EBD8), tissue-thin and softly curled, a faint warm shade in its fold.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (altın konfeti, bordo yaprak, fildişi yaprak); kenara değmiyor; gerçek alfa.
+
+#### 67. W20 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `24-grand-theatre-premiere__accent_2.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/accent_2.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_2 (number 2 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, warm stage light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one small round disc of antique gold foil confetti (#C9A45C), very thin, slightly curled, catching a warm highlight; 2 = one single loose deep burgundy rose petal (#5E1622), velvety and softly cupped; 3 = one single loose ivory rose petal (#F3EBD8), tissue-thin and softly curled, a faint warm shade in its fold.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (altın konfeti, bordo yaprak, fildişi yaprak); kenara değmiyor; gerçek alfa.
+
+#### 68. W20 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `24-grand-theatre-premiere__accent_3.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/accent_3.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_3 (number 3 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, warm stage light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one small round disc of antique gold foil confetti (#C9A45C), very thin, slightly curled, catching a warm highlight; 2 = one single loose deep burgundy rose petal (#5E1622), velvety and softly cupped; 3 = one single loose ivory rose petal (#F3EBD8), tissue-thin and softly curled, a faint warm shade in its fold.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (altın konfeti, bordo yaprak, fildişi yaprak); kenara değmiyor; gerçek alfa.
+
+#### 69. W21 Website hero + paylaşım görseli (og:image kaynağı)
+
+- İndirme adı: `24-grand-theatre-premiere__web_hero.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/web_hero.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1024 px (3:2) · opak · PNG
+- Ek görsel: env_back.png (listede #50), curtain_left.png (listede #52), curtain_right.png (listede #53), valance.png (listede #56), rope.png (listede #58), ticket.png (listede #57), page_ground.png (listede #47), opera_glasses.png (listede #65)
+
+```
+Wide horizontal still life, photorealistic product photography, warm stage light from the top-left: the closed horizontal peacock-teal linen envelope of env_back.png with its two closed burgundy velvet curtain flaps (as curtain_left.png and curtain_right.png), the gold-fringed velvet valance across its top (as valance.png), the antique gold tasselled cord tied at the centre (as rope.png) and the blank ivory ticket tucked under the cord (as ticket.png), lying slightly below the centre on warm ivory laid paper (as page_ground.png); at the left a single deep burgundy rose and two ivory rosebuds with a short gold tassel; at the right the antique brass opera glasses of opera_glasses.png and a few small gold confetti discs; behind, softly out of focus, a fold of peacock-teal velvet. Only peacock teal, burgundy, antique gold and ivory tones. The top 20% of the image is calm and soft (only out-of-focus paper and velvet). This image is cropped to 1200×630 for link previews: keep the whole envelope, its tassels and the ticket visible with at least 5% empty margin below it. No people. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: zarf + perdeler + kordon + bilet bütün, altında ≥%5 boşluk; bilet boş; üst %20 sakin; yazı yok.
+
+#### 70. P1 — Ön yüz
+
+- İndirme adı: `24-grand-theatre-premiere__print__invitation_front_r_5x7.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/print/invitation_front_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+- Ek görsel: card_paper.png (listede #48), valance.png (listede #56)
+
+```
+The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the thick warm ivory card of card_paper.png (#F3EBD8). Across the top, between 9% and 91% of the width, a gold-fringed deep burgundy velvet valance with three soft swags (as valance.png) hanging from a slim gilded rod, with a small blank gilded proscenium cartouche at its centre; nothing in this top band reaches lower than 17% of the height. Along the bottom, between 92% and 96% of the height and from 14% to 86% of the width, a fine antique gold double rule with a small gilded acanthus flourish and a tiny burgundy tassel at its centre. The rectangle from 19% to 91% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm paper (the names, date and venue are set there): no fringe, no petal, no line, no shadow, no stain in it. No ornament within 8% of the left and right edges. Warm light from the top-left. Only burgundy, antique gold and ivory tones. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: tam taşma; %19–%91 × %10–%90 tamamen boş; kadife swag + kartuş yalnız üstte (%17'nin üstünde), altın çift çizgi + akantus yalnız altta; yan %8 boş; yazı yok.
+
+#### 71. P2 — Arka yüz
+
+- İndirme adı: `24-grand-theatre-premiere__print__invitation_back_r_5x7.png`
+- Hedef: `collections/24_Grand_Theatre_Premiere/assets/gpt/print/invitation_back_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+
+```
+The back of the same printed wedding invitation, full bleed, portrait 5.25:7.25, perfectly flat: the same thick warm ivory card, only a short slim gilded acanthus scroll across the top centre (between 30% and 70% of the width) with a tiny burgundy silk tassel hanging from its middle, its lowest point staying above 11% of the height. The whole area below 13% of the height, from 9% to 91% of the width, is COMPLETELY EMPTY paper (a schedule and a QR code are set there): no fringe, no line, no shadow, no stain. No ornament within 8% of the left and right edges. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: ön yüzle aynı kâğıt; yalnız üst ortada kısa akantus + püskül (%11'in üstünde); %13'ün altı boş; yazı/QR yok.
+
+### 25_Orient_Express_Voyage
+
+Sohbetin ilk mesajı (dosyanın GPT notu):
+
+```
+This design is being REDESIGNED from scratch (2026-10-22). Generate PAKET 5R (website layers) first, in order and in ONE chat, then PAKET 6R (printable invitation). PAKET 2 (sample photos) ALREADY EXISTS — do not regenerate it. Sections marked GEÇERSİZ are not wanted. Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, names, dates, initials, monograms, crests, emblems, logos, brand marks, QR codes or watermarks in any image** — the luggage tag, the ticket card, the lock, the watch dial and the map are all completely blank (no numerals, no place names, no route numbers, no railway company marks). This is an invented 1930s luxury sleeper-train world: it must not copy any real railway company, train, poster, livery, ticket or seller's design. Give W1 `page_ground.png`, W2 `ticket_paper.png` and W4 `env_front.png` as the style reference of every later part: the same warm ivory antique map paper, the same ivory ticket card, the same bottle-green embossed leather-grain paper with gold-tooled lines and polished brass, the same route-red moiré silk lining, the same warm lamplight from the top-left. Parts drawn on the same sleeve canvas (W3, W4, W5, W7, W8, W9) keep the sleeve in exactly the same box.
+```
+
+#### 72. W1 Antika harita kâğıdı (sayfa zemini)
+
+- İndirme adı: `25-orient-express-voyage__page_ground.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/page_ground.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, perfectly flat top-down texture of warm ivory antique map paper (#F3EBD9, gentle warm variation toward #E8DCC2): a fine laid-paper tooth, a few soft cotton fibres, and, printed very faintly into it, the ghost of an old hand-engraved map — barely visible fine sepia contour traces, a dotted coastline fragment and a few hair-fine dashed route lines in a faded route red (#8C2F39 at very low strength), all so pale that they read as texture, not as a map. Absolutely no lettering, no place names, no numbers, no compass rose, no legend, no grid labels. Evenly lit by warm lamplight from the top-left, no fold, no crease, no stain, no burn marks, no vignette, no shadow. Calm enough for dark green and black text to read on it everywhere. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: sıcak fildişi, çok soluk harita izi (okunur bir harita değil); yazı/rakam/pusula yok; dikişsiz (2×2 ek yeri yok); koyu yazı her yerde okunur.
+
+#### 73. W2 Fildişi bilet kartonu (kartlar, bantlar, form)
+
+- İndirme adı: `25-orient-express-voyage__ticket_paper.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/ticket_paper.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, flat top-down texture of heavy ivory ticket card stock (#F3EBD9): a smooth matte surface with a soft felted tooth, the faintest warm cream variation, a few tiny darker cotton flecks, like the thick board of an old first-class railway ticket. Evenly lit by warm lamplight from the top-left. No printing, no pattern, no guilloche, no border, no perforation, no fold, no stain, no shadow, no vignette. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: sakin fildişi karton; dikişsiz; baskı/desen yok; koyu yazı okunur.
+
+#### 74. W3 Kılıfın arkası (bordo ipek astar görünür)
+
+- İndirme adı: `25-orient-express-voyage__env_back.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/env_back.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1100 px (16:11) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+The back panel of a long horizontal leather ticket sleeve, seen perfectly straight on, on a fully transparent background. The sleeve occupies exactly x 6–86% and y 8–66% of the 1600×1100 canvas (about 2 wide : 1 tall) — the same box is used later by env_front.png, flap.png, lock_plate.png, lock_key.png and luggage_tag.png, so keep it exactly there; the rest of the canvas (right 14%, bottom 34%) stays empty and transparent. We look at the INSIDE of the back panel: it is lined with smooth route-red moiré silk (#8C2F39, a soft watered-silk shimmer catching the warm light, slightly deeper toward the bottom and right where the front panel will cover it); along the top edge, the bottom edge and the left end a slim rim (about 2% of the canvas height) of the sleeve's own bottle-green embossed leather-grain paper (#1E3A2C, a fine pebbled grain) shows, its edge finished with a hair-fine gold-tooled line. The right end is the open mouth of the sleeve: the silk simply ends at the right edge of the box, cleanly. Warm lamplight from the top-left. No front panel, no flap, no lock, no tag, no card, no ticket inside. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: kutu x %6–86 / y %8–66; iç yüz bordo hareli ipek, üst-alt-sol kenarda ince yeşil deri pay; ön yüz/kapak/kart yok; gerçek alfa.
+
+#### 75. W4 Kılıfın ön yüzü
+
+- İndirme adı: `25-orient-express-voyage__env_front.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/env_front.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1100 px (16:11) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_back.png (listede #74)
+
+```
+Only the front panel of the same long horizontal ticket sleeve as env_back.png, on the same 1600×1100 canvas and in exactly the same place, on a fully transparent background: the sleeve box is again exactly x 6–86% and y 8–66% of the canvas, and the front panel fills that whole box. It is luxurious bottle-green embossed leather-grain paper (#1E3A2C with a fine pebbled grain, the deepest folds toward #11241B, a soft satin glow where the warm light catches it), like a hand-bound first-class travel document case; a gold-tooled double frame line (#B8914B, crisply pressed into the grain, the outer line a little heavier) runs around the panel about 3% of the canvas height inside its edges, with a tiny art-deco fan flourish of gold tooling at the middle of the left end only; the two LEFT corners are capped with polished brass corner protectors (small right-angled brass caps with softly rounded tips and one tiny rivet each, bright warm highlights toward #D8BD84). At the right end, in the middle of the right edge, a clean half-moon thumb notch is cut into the panel: it spans from 29% to 45% of the canvas height and reaches in to 83% of the canvas width; the notch is fully transparent (the lining behind will show there), its cut edge neat with the faint thickness of the leather paper visible. Warm lamplight from the top-left. No flap, no lock, no tag, no card, no stitching other than the tooling, no monogram, no emblem. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: kutu x %6–86 / y %8–66 tam dolu; sağ kenarda şeffaf yarım ay oyuk (y %29–45, x %83'e kadar); yalnız sol köşelerde pirinç; altın yaldız çift çizgi; yazı/amblem yok; gerçek alfa.
+
+#### 76. W5 Dil kapak (kapalı, dış yüz)
+
+- İndirme adı: `25-orient-express-voyage__flap.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/flap.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1100 px (16:11) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_front.png (listede #75)
+
+```
+Only the closed end-tab flap of the same ticket sleeve, on the same 1600×1100 canvas and in exactly the same place, on a fully transparent background (the sleeve box is again x 6–86% and y 8–66%, but only the tab is drawn). The tab is folded over the RIGHT end of the sleeve: it is hinged along a softly rolled vertical fold at the sleeve's right edge (x 86% of the canvas), spans the full sleeve height (y 8–66%), and lies flat on the front; its free edge on the left is one soft, rounded point facing LEFT: the edge meets the top and bottom edges at x 74.5% and curves smoothly to a gently rounded tip at x 72%, y 37% (not a sharp arrow, not straight, not scalloped). Material: the same bottle-green embossed leather-grain paper (#1E3A2C), a single gold-tooled line (#B8914B) following its edge about 1.5% inside, a faint contact shade on the tab itself just inside its free edge so it reads as a separate layer, and the two RIGHT corners capped with polished brass corner protectors matching env_front.png. Everything else is fully transparent. Warm lamplight from the top-left. No lock, no plate, no rivet in the middle, no tag, no seal. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: dil x %72–86 / y %8–66; menteşe sağda, yuvarlak sivri uç solda x %72 · y %37; sağ köşelerde pirinç; kilit yok; altı/yanı şeffaf; gerçek alfa.
+
+#### 77. W6 Dil kapağın iç yüzü (açıkken)
+
+- İndirme adı: `25-orient-express-voyage__flap_in.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/flap_in.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 600×1300 px (6:13) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: flap.png (listede #76), env_back.png (listede #74)
+
+```
+The inside of the same end-tab flap as flap.png, alone, seen straight on as it lies opened flat to the right of the sleeve, on a fully transparent background: exactly the same outline and proportions as the tab of flap.png (about 0.35 wide : 1 tall) but mirrored horizontally — its straight hinge edge runs along the LEFT side at 16.5% of the canvas width, from 6% to 94% of the height, and its soft rounded point faces RIGHT, its tip at 83.5% of the width at the vertical centre (the free edge meets the top and bottom at about 71.5% of the width). The inside is lined with the same route-red moiré silk (#8C2F39) as env_back.png, with a slim rim of bottle-green leather-grain paper and a hair-fine gold-tooled line along the edge; where the lock passes through, at 64% of the width and 50% of the height, a small round polished brass backing washer with one tiny rivet. Warm lamplight from the top-left. No lock button, no tag. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: menteşe solda, uç sağda; oranı W5'teki dille aynı (≈0,35:1); bordo ipek astar + küçük pirinç pul (%64, %50); gerçek alfa.
+
+#### 78. W7 Çevirmeli kilit plakası
+
+- İndirme adı: `25-orient-express-voyage__lock_plate.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/lock_plate.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1100 px (16:11) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_front.png (listede #75), flap.png (listede #76)
+
+```
+On the same 1600×1100 canvas as env_front.png and flap.png, in exactly the same place (the sleeve and the tab themselves are NOT drawn here), only the escutcheon plate of a small luggage turn-lock riveted on the tip of the tab, on a fully transparent background: an upright polished brass plate with gently rounded oval ends, spanning x 73.5–78.5% and y 30–44% of the canvas, softly bevelled edges, a fine engraved border line, four small domed brass rivets (one near each end and one at each side), and in its exact centre, at x 76% and y 37% of the canvas, a short horizontal slot opening (dark #11241B inside) through which a turn button passes. Polished, softly aged brass (#B8914B, crisp warm highlights toward #D8BD84, warm brown lows), warm lamplight from the top-left, no green patina, no scratches. No turn button (it is a separate part), no keyhole, no lettering. Everything else fully transparent. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: tek dikey pirinç plaka x %73,5–78,5 / y %30–44, dört perçin, merkezde (%76, %37) yatay yuva; düğme yok; gerçek alfa.
+
+#### 79. W8 Kilit düğmesi (dönen parça)
+
+- İndirme adı: `25-orient-express-voyage__lock_key.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/lock_key.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1100 px (16:11) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: lock_plate.png (listede #78)
+
+```
+On the same 1600×1100 canvas as lock_plate.png, in exactly the same place (the plate, the tab and the sleeve are NOT drawn), only the turn button of the luggage turn-lock, on a fully transparent background: a horizontal polished brass turn button shaped like a slim rounded oval bar with softly flared ends, spanning x 73.2–78.8% and y 35–39% of the canvas, its long axis perfectly horizontal (the locked position), with a raised domed rivet exactly at its centre at x 76% and y 37% of the canvas (the pivot), a fine ridge along its top face and crisp warm highlights (#B8914B toward #D8BD84) from the warm lamplight at the top-left. It must be perfectly symmetrical around the centre rivet so it can rotate around it. Everything else fully transparent. No plate, no key, no chain. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: yatay simetrik pirinç düğme x %73,2–78,8 / y %35–39; merkez perçin tam (%76, %37); plaka yok; gerçek alfa.
+
+#### 80. W9 Bagaj etiketi (kuşgözü + kırmızı ip)
+
+- İndirme adı: `25-orient-express-voyage__luggage_tag.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/luggage_tag.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1100 px (16:11) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_front.png (listede #75), ticket_paper.png (listede #73)
+
+```
+On the same 1600×1100 canvas as env_front.png, in exactly the same place (the sleeve itself is NOT drawn), only a blank vintage luggage tag hanging from the sleeve, on a fully transparent background: a small round polished brass grommet set in the sleeve at x 67.5% and y 59% of the canvas (its ring about 1.6% of the canvas width across, an open dark centre); a soft twisted route-red cotton cord (#8C2F39) loops through the grommet and hangs straight down to the tag; the tag hangs vertically below the sleeve, its body spanning x 63–72% and y 70–94% of the canvas: a heavy ivory card tag (#F3EBD9, as ticket_paper.png) with its two top corners clipped at 45°, a small brass-reinforced eyelet near its top centre where the cord is knotted, a slim route-red band printed across its lower quarter and a fine gold double line around its edge — the whole tag is otherwise COMPLETELY BLANK (no writing lines, no numbers, no letters). The cord and tag hang naturally under gravity, perfectly upright. Warm lamplight from the top-left. Everything else fully transparent. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: kuşgözü (%67,5, %59); ip dikey; etiket x %63–72 / y %70–94, köşeleri kesik, tamamen boş; kılıf çizilmemiş; gerçek alfa.
+
+#### 81. W10 Birinci sınıf bilet kartı (boş)
+
+- İndirme adı: `25-orient-express-voyage__card_small.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/card_small.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1400 px (5:7) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: ticket_paper.png (listede #73)
+
+```
+A flat portrait first-class railway ticket card, alone, seen straight on, on a fully transparent background: the heavy ivory card of ticket_paper.png (#F3EBD9) spanning x 7–93% and y 6–94% of the canvas, its four corners clipped with small concave (inward-rounded) cuts like a classic ticket; a fine brass-foil double border (#B8914B, a crisp metallic shine) inset about 5% from the edge; a small brass-foil art-deco fan (sunburst) ornament at the top centre inside the border, about 20% of the card's width; at 80% of the card's height a horizontal perforated tear line (a neat row of tiny round perforation holes, truly transparent) separating a lower stub, and in the stub, left of centre, one round punched hole about 5% of the card width, truly transparent. Apart from these, the card is COMPLETELY EMPTY paper (the website sets the names, date and venue there in HTML). A hair-fine contact shade on the card's own edge only. Warm lamplight from the top-left. No photo, no flowers, no printing. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: dikey bilet, içe yuvarlak kesik köşeler, pirinç folyo çift bordür, üst ortada küçük yelpaze süsü; %80'de delikli yırtma çizgisi, koçanda zımba deliği (şeffaf); başka her yer boş; gerçek alfa.
+
+#### 82. W11 Vagon penceresi — portre (home)
+
+- İndirme adı: `25-orient-express-voyage__portrait_frame.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/portrait_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1250 px (4:5) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A luxury sleeper-carriage window frame, alone, seen straight on, on a fully transparent background: a deep French-polished mahogany surround (#4A2618 with rich warm grain and a glossy sheen) with softly rounded outer corners, lined on its inner edge by a slim polished brass bead (#B8914B, warm highlights toward #D8BD84) and with four small brass screw-heads near its corners; the frame's outer edge spans about x 6–94% and y 6–94% of the canvas. In the middle a portrait photo window exactly 760 px wide and 950 px tall (4:5), its top-left corner at x 120 px, y 150 px, filled with flat pure green #00FF00 (no texture, no shading, nothing over it, its corners rounded like a carriage window with a radius of about 40 px). The frame is a little deeper at the bottom (a narrow brass-edged sill). Warm lamplight from the top-left. No glass, no reflection, no curtain and no blind over the window, no handle. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: pencere düz `#00FF00`, ~760×950 (4:5), sol üst ~(120, 150), yuvarlak köşe; maun + pirinç çerçeve; pencerede cam/perde yok; gerçek alfa.
+
+#### 83. W12 Sürgülü vagon penceresi (story çerçevesi)
+
+- İndirme adı: `25-orient-express-voyage__story_frame.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/story_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1400 px (5:7) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A sliding sash window of a 1930s sleeper carriage, alone, seen straight on, on a fully transparent background: a French-polished mahogany frame (#4A2618, warm glossy grain) with softly rounded outer corners and a slim polished brass inner bead, spanning about x 6–94% and y 6–94% of the canvas; across the top, above the window and not covering it, a short rolled-up bottle-green leather window blind (#1E3A2C) held by two small brass clips; below the window, on the lower frame rail, a small polished brass sash latch and a short loop of brown leather pull strap. In the middle a portrait photo window exactly 720 px wide and 960 px tall (3:4), its top-left corner at x 140 px, y 220 px, filled with flat pure green #00FF00 (no texture, no shading, nothing over it, corners rounded with a radius of about 36 px). Warm lamplight from the top-left. No glass, no reflection, no raindrops, no curtain over the window. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: pencere düz `#00FF00`, ~720×960 (3:4), sol üst ~(140, 220); üstte sarılı yeşil deri perde pencereye binmiyor; altta pirinç mandal + deri kayış; gerçek alfa.
+
+#### 84. W13 Gözlem vagonu panorama penceresi (mekân)
+
+- İndirme adı: `25-orient-express-voyage__venue_frame.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/venue_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1100 px (16:11) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A wide panoramic observation-carriage window frame, alone, seen straight on, on a fully transparent background: a French-polished mahogany frame (#4A2618, warm glossy grain) with gently rounded outer corners, an inner polished brass bead (#B8914B, warm highlights toward #D8BD84), small brass screw-heads evenly spaced along it, and a slim brass-edged sill along the bottom; the frame's outer edge spans about x 6–94% and y 6–94% of the canvas. In the middle a landscape photo window exactly 1320 px wide and 880 px tall (3:2), its top-left corner at x 140 px, y 100 px, filled with flat pure green #00FF00 (no texture, no shading, nothing over it, corners rounded with a radius of about 40 px). No mullion or bar across the window. Warm lamplight from the top-left. No glass, no reflection, no curtain. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: pencere düz `#00FF00`, ~1320×880 (3:2), sol üst ~(140, 100); ortada kayıt/çubuk yok; maun + pirinç; gerçek alfa.
+
+#### 85. W14 Köşe süsü (pirinç köşe + kurutulmuş çiçek)
+
+- İndirme adı: `25-orient-express-voyage__corner_spray.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/corner_spray.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1000 px (6:5) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A restrained, elegant corner ornament growing out from near the top-left corner toward the centre, alone, on a fully transparent background, photorealistic: a slim polished brass art-deco corner bracket (two straight arms meeting at a right angle in the top-left, ending in small stepped deco tips, like the corner fitting of a carriage luggage rack; #B8914B with warm highlights) and, tucked along it, a small spray of dried ivory garden roses (two blooms and a bud, papery petals), a few sprigs of dried pale lavender and silvery eucalyptus, tied with a short route-red velvet ribbon (#8C2F39) whose tail curls downward. Calm and sparse, not a full bouquet. It reaches toward the top and left sides of the image but stays 6% inside them, and the bottom-right half of the canvas is completely empty. Warm lamplight from the top-left. No vase, no other colours, no glitter. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: sol üstte pirinç köşe + seyrek kurutulmuş çiçek ve bordo kurdele; sağ alt yarı boş; kenara değmiyor; gerçek alfa.
+
+#### 86. W15 Pirinç bagaj rafı rayı (bölüm ayırıcı)
+
+- İndirme adı: `25-orient-express-voyage__divider.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/divider.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×200 px (8:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A slim horizontal divider made of one polished brass luggage-rack rail, alone, on a fully transparent background: a thin round brass rod running horizontally across x 8–92% of the canvas at the vertical centre, held at each end by a small stepped art-deco brass bracket, and at its exact centre a tiny brass fan (sunburst) ornament; polished, softly aged brass (#B8914B, crisp warm highlights toward #D8BD84) in warm lamplight from the top-left. Fine and elegant. No ropes, no luggage, no net. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: yatay ince pirinç ray, iki uçta deco tutucu, ortada küçük yelpaze; iki uçta boşluk; gerçek alfa.
+
+#### 87. W16 Pirinç cep saati (rakamsız kadran)
+
+- İndirme adı: `25-orient-express-voyage__pocket_watch.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/pocket_watch.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 800×800 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A single open antique brass pocket watch, alone, seen perfectly straight on, on a fully transparent background, the round case filling about 62% of the canvas a little above centre: a polished brass case (#B8914B, warm highlights toward #D8BD84) with a fluted bezel, a crown and bow at the top, and a short loop of fine brass chain curling down to the lower right; the dial is plain ivory enamel (#F3EBD9) with twelve tiny brass dots instead of numerals, a small inner track of fine dots and two slender blued-steel hands, no seconds dial. Absolutely no numerals, no Roman numerals, no brand name, no writing on the dial. Warm lamplight from the top-left, a soft reflection on the dome of the crystal. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+
+Kontrol: tek cep saati; kadranda rakam/yazı yok (yalnız 12 nokta); kısa zincir; gerçek alfa.
+
+#### 88. W17 Yazısız antika harita paneli (yolculuk / itinerary)
+
+- İndirme adı: `25-orient-express-voyage__route_map.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/route_map.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1000 px (8:5) · opak · PNG
+
+```
+A wide antique hand-engraved map panel, full bleed, seen perfectly flat from above, of an INVENTED countryside (not a real country or region): warm ivory map paper (#F3EBD9) with fine sepia engraved hills shown by hachures, a winding river, a soft coastline along the bottom-right with tiny engraved waves, small forests drawn as clusters of tiny trees, a few tiny engraved villages as clusters of roofs, and a very faint hand-drawn railway line in thin sepia crossing from the left edge to the right edge in gentle curves; soft hand-coloured washes of pale bottle green on the forests and pale route red barely tinting the hills; the paper has a gentle warm tone variation and soft lamplight from the top-left. Absolutely no lettering, no place names, no numbers, no compass rose, no legend, no scale bar, no border text, no grid labels. Calm, low contrast, so a thin red route line and small labels drawn later by the website stay readable. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: uydurma kır haritası, soluk ve sakin; hiçbir yazı/rakam/pusula/ölçek yok; tam taşma.
+
+#### 89. W18 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `25-orient-express-voyage__accent_1.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/accent_1.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_1 (number 1 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, warm lamplight from the top-left. No other object. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. (Make three files, the same light and scale: 1 = one soft rounded puff of white locomotive steam, soft and billowing, its edges fading into true transparency (real partial alpha, not a hard outline), faintly warm-lit from the top-left; 2 = one tiny round punched-out disc of heavy ivory ticket card (#F3EBD9), seen slightly tilted, its cut edge showing the card's thickness, blank; 3 = one single dried ivory garden-rose bud with two dried leaves and a short sprig of pale lavender.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (buhar, zımba pulu, kurutulmuş gonca); buharın kenarı yumuşak gerçek alfa; kenara değmiyor.
+
+#### 90. W18 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `25-orient-express-voyage__accent_2.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/accent_2.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_2 (number 2 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, warm lamplight from the top-left. No other object. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. (Make three files, the same light and scale: 1 = one soft rounded puff of white locomotive steam, soft and billowing, its edges fading into true transparency (real partial alpha, not a hard outline), faintly warm-lit from the top-left; 2 = one tiny round punched-out disc of heavy ivory ticket card (#F3EBD9), seen slightly tilted, its cut edge showing the card's thickness, blank; 3 = one single dried ivory garden-rose bud with two dried leaves and a short sprig of pale lavender.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (buhar, zımba pulu, kurutulmuş gonca); buharın kenarı yumuşak gerçek alfa; kenara değmiyor.
+
+#### 91. W18 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `25-orient-express-voyage__accent_3.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/accent_3.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_3 (number 3 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, warm lamplight from the top-left. No other object. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. (Make three files, the same light and scale: 1 = one soft rounded puff of white locomotive steam, soft and billowing, its edges fading into true transparency (real partial alpha, not a hard outline), faintly warm-lit from the top-left; 2 = one tiny round punched-out disc of heavy ivory ticket card (#F3EBD9), seen slightly tilted, its cut edge showing the card's thickness, blank; 3 = one single dried ivory garden-rose bud with two dried leaves and a short sprig of pale lavender.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (buhar, zımba pulu, kurutulmuş gonca); buharın kenarı yumuşak gerçek alfa; kenara değmiyor.
+
+#### 92. W19 Website hero + paylaşım görseli (og:image kaynağı)
+
+- İndirme adı: `25-orient-express-voyage__web_hero.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/parts/web_hero.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1024 px (3:2) · opak · PNG
+- Ek görsel: env_front.png (listede #75), flap.png (listede #76), lock_plate.png (listede #78), lock_key.png (listede #79), luggage_tag.png (listede #80), page_ground.png (listede #72), corner_spray.png (listede #85), pocket_watch.png (listede #87), card_small.png (listede #81)
+
+```
+Wide horizontal still life, photorealistic luxury product photography, warm lamplight from the top-left with crisp warm highlights on brass: the closed long bottle-green leather ticket sleeve of env_front.png with its right-end tab of flap.png, the brass turn-lock of lock_plate.png and lock_key.png in its locked horizontal position, and the blank ivory luggage tag of luggage_tag.png hanging on its red cord, lying slightly below the centre on a polished mahogany carriage table partly covered by the faint ivory antique map paper of page_ground.png; at the left a small spray of dried ivory roses and lavender tied with route-red velvet ribbon (as corner_spray.png); at the right the open brass pocket watch of pocket_watch.png with its blank numeral-free dial and a blank ivory first-class ticket (as card_small.png) peeking from under the sleeve; behind, softly out of focus, the warm glow of a carriage lamp and dark green upholstery. The top 20% of the image is calm and soft (only out-of-focus warm light). This image is cropped to 1200×630 for link previews: keep the whole sleeve and tag visible with at least 5% empty margin below the tag. No people. No text, letters, numbers, monograms, logos or watermarks (the tag, ticket and watch dial are blank).
+```
+
+Kontrol: kılıf + kilit + etiket bütün, etiketin altında ≥%5 boşluk; etiket/bilet/kadran boş; üst %20 sakin; yazı yok.
+
+#### 93. P1 — Ön yüz
+
+- İndirme adı: `25-orient-express-voyage__print__invitation_front_r_5x7.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/print/invitation_front_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+- Ek görsel: ticket_paper.png (listede #73)
+
+```
+The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the heavy ivory ticket card of ticket_paper.png (#F3EBD9). Across the top, between 9% and 91% of the width, an art-deco brass-foil header (#B8914B, crisp metallic shine): a small fan (sunburst) ornament at the centre with fine double rules running out to both sides and ending in small stepped deco tips, and at each end of the rules a tiny sprig of dried ivory rose and lavender; nothing in this top band reaches lower than 17% of the height. Along the bottom, between 93% and 96% of the height and from 14% to 86% of the width, a fine brass-foil rule with a neat row of tiny perforation dots beneath it, like the tear line of a ticket. A hair-fine brass-foil double frame line runs around the sheet about 4% inside the trim (inside the 8% side margins it is the only element, and it never crosses the empty area). The rectangle from 19% to 91% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm card (the names, date and venue are set there): no ornament, no line, no petal, no shadow, no stain in it. Warm lamplight from the top-left. Only ivory, brass and a touch of route red (#8C2F39) in the rose ribbon. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: tam taşma; %19–%91 × %10–%90 tamamen boş; deco başlık yalnız üstte (%17'nin üstünde), delikli çizgi yalnız altta; çerçeve çizgisi boş alana girmiyor; yazı/QR yok.
+
+#### 94. P2 — Arka yüz
+
+- İndirme adı: `25-orient-express-voyage__print__invitation_back_r_5x7.png`
+- Hedef: `collections/25_Orient_Express_Voyage/assets/gpt/print/invitation_back_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+
+```
+The back of the same printed wedding invitation, full bleed, portrait 5.25:7.25, perfectly flat: the same heavy ivory ticket card, only a small brass-foil art-deco fan ornament with short double rules at the top centre (between 32% and 68% of the width), its lowest point staying above 11% of the height. The whole area below 13% of the height, from 9% to 91% of the width, is COMPLETELY EMPTY card (a schedule and a QR code are set there): no ornament, no line, no shadow, no stain. No ornament within 8% of the left and right edges. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: ön yüzle aynı karton; yalnız üst ortada küçük yelpaze süsü (%11'in üstünde); %13'ün altı boş; yazı/QR yok.
+
+### 26_Kintsugi_Washi
+
+Sohbetin ilk mesajı (dosyanın GPT notu):
+
+```
+This design is being REDESIGNED from scratch (2026-10-22). Generate PAKET 5R (website layers) first, in order and in ONE chat, then PAKET 6R (printable invitation). PAKET 2 sample photos already exist — do NOT regenerate them. Sections marked GEÇERSİZ are not wanted. Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, names, dates, initials, monograms, kanji, kana, calligraphy, seals with characters, logos, QR codes or watermarks in any image** (also not on the porcelain button, the cord, the card or the tea bowl). **No religious symbols** (no temple, torii, Buddha, incense, charms) and no costume clichés (no kimono, pagoda, paper lantern, folding fan, geisha, cherry blossom). This is a calm, rich, romantic stationery piece: hand-made indigo-dyed washi paper folded into a four-flap pinwheel packet, crossed by real gold kintsugi seams, closed with a gold-mended porcelain button and a twisted gold-and-ivory silk cord. Give W1 `page_ground.png`, W3 `env_back.png` and W4 `flap_n.png` as the style reference of every later part: the same handmade washi with long visible kozo fibres, the same deep indigo dye with soft uneven depth, the same undyed rice-ivory reverse flecked with gold leaf, the same real gold-lacquer kintsugi seams, the same soft north-window light from the top-left. Parts drawn on the same packet canvas (W3–W7 and W12) keep the packet in exactly the same box.
+```
+
+#### 95. W1 Pirinç kâğıdı washi (sayfa zemini, kapak)
+
+- İndirme adı: `26-kintsugi-washi__page_ground.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/page_ground.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, perfectly flat top-down texture of handmade undyed washi (kozo) paper in a warm rice ivory (#F3ECDC): long soft visible plant fibres drifting in random directions within the sheet, a gentle cloudy formation, a faint felt tooth, and only a very sparse scatter of tiny gold-leaf flecks (#C9A55A) caught in the fibres — no more than a few per tile, small and irregular. Evenly lit by soft north-window light from the top-left: no fold, no crease, no deckle edge, no stain, no shadow, no vignette, no pattern, no flowers, no indigo. Very low contrast so dark ink text reads on it everywhere. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: dikişsiz (2×2 ek yeri yok); pirinç fildişi `#F3ECDC` civarı; uzun lifler görünür; altın pullar çok seyrek ve küçük; desen/leke/çivit yok.
+
+#### 96. W2 Kart kâğıdı (kartlar, bantlar, form)
+
+- İndirme adı: `26-kintsugi-washi__card_paper.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/card_paper.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+- Ek görsel: page_ground.png (listede #95)
+
+```
+A seamless, tileable, flat texture of a smooth, thick, hand-made rice-paper card stock in a slightly lighter warm ivory than page_ground.png (around #F6F0E3): a fine even surface with only very faint short fibres pressed into it, a soft velvety tooth, the calm tone of good stationery. No gold flecks, no pattern, no fold, no crease, no stain, no shadow, no vignette. Evenly lit by soft north-window light from the top-left. Calm enough for small dark ink text to read on it everywhere. Edges tile without a visible seam. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: dikişsiz; W1'den biraz daha açık ve pürüzsüz; altın pul yok; leke/desen yok; üstüne küçük koyu yazı okunur.
+
+#### 97. W3 Paketin tabanı (iç zemin; kanatlar açılınca görünür)
+
+- İndirme adı: `26-kintsugi-washi__env_back.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/env_back.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1200 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+The flat inside floor of an opened square paper packet, seen perfectly straight from above, on a fully transparent background: a perfect square occupying exactly x 8–92% and y 8–92% of the canvas (corners at 96,96 and 1104,1104 px). It is the UNDYED reverse side of handmade indigo washi: warm rice ivory (#F3ECDC) with long soft kozo fibres, a scatter of small irregular gold-leaf flecks (#C9A55A, #E3C987) caught in the paper, the faintest bleed of indigo (#3C4874) seeping in along all four edges where the dye came through, and four crisp fold creases running exactly along the square's four edges (these are the hinges of the flaps). One very fine pale-gold kintsugi hairline wanders across one corner, faded into the paper. Perfectly flat, softly lit by north-window light from the top-left. No flaps, no cord, no button, no card, no flowers. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: tam kare x/y %8–92; boyasız pirinç fildişi iç yüz, altın pullar, kenarlarda hafif çivit sızıntısı; dört kenarda katlama çizgisi; kanat/kordon/kart yok; gerçek alfa.
+
+#### 98. W4 Kuzey kanat (kapalı, dış yüz)
+
+- İndirme adı: `26-kintsugi-washi__flap_n.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/flap_n.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1200 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+Only the NORTH flap of a square four-flap pinwheel paper packet, on a 1200×1200 canvas, on a fully transparent background, seen perfectly straight from above. The packet box is x 8–92% and y 8–92% of the canvas, but only this one flap is drawn: a triangle of handmade indigo-dyed washi paper whose three corners are exactly at (8%, 8%), (92%, 8%) and (58%, 58%) of the canvas — its straight top edge runs along the packet's top edge and is a crisp fold (the hinge), and its two free edges run down to a point that sits just past the centre, shifted to the lower right. The two free edges are straight in direction but softly deckled, feathery hand-torn washi edges with fine fibres. The paper is deep indigo (#242E58) dyed unevenly into the long kozo fibres, darker toward the fold (#161C36), lighter and slightly mottled toward the point (#3C4874). Across the flap run one or two real gold-lacquer kintsugi seams (#C9A55A with warm highlights #E3C987 and fine dark-gold edges #7A5C22): raised, slightly irregular, branching into fine hairlines, reaching the flap's free edges as if the line continues onto the neighbouring flap. Soft north-window light from the top-left, a whisper of contact shade on the flap itself along its free edges. Everything else on the canvas is fully transparent. No other flap, no base, no cord, no button. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: tek üçgen kanat; köşeler (8, 8), (92, 8), (58, 58); üst kenar keskin katlama, iki serbest kenar yumuşak yırtık; çivit washi, 1–2 altın kintsugi damarı kenara ulaşıyor; başka parça yok; gerçek alfa.
+
+#### 99. W5 Doğu kanat (kapalı, dış yüz)
+
+- İndirme adı: `26-kintsugi-washi__flap_e.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/flap_e.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1200 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: flap_n.png (listede #98)
+
+```
+Only the EAST flap of the same square four-flap pinwheel paper packet as flap_n.png, on the same 1200×1200 canvas and in exactly the same packet box (x 8–92%, y 8–92%), on a fully transparent background, seen perfectly straight from above. A triangle of the same handmade indigo-dyed washi whose three corners are exactly at (92%, 8%), (92%, 92%) and (42%, 58%) of the canvas — its straight right edge runs along the packet's right edge and is a crisp fold (the hinge), and its two free edges run to a point just past the centre, shifted to the lower left. The two free edges are softly deckled, feathery hand-torn washi edges. Deep indigo (#242E58) dyed unevenly into the fibres, darker toward the fold (#161C36), lighter toward the point (#3C4874), with one or two real gold-lacquer kintsugi seams (#C9A55A, highlights #E3C987, dark-gold edges #7A5C22), raised, irregular and branching, reaching the free edges. Same paper, dye, gold and soft north-window light from the top-left as flap_n.png; a whisper of contact shade on the flap itself along its free edges. Everything else is fully transparent. No other flap, no base, no cord, no button. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: köşeler (92, 8), (92, 92), (42, 58); sağ kenar katlama; W4 ile aynı kâğıt, boya, altın; gerçek alfa.
+
+#### 100. W6 Güney kanat (kapalı, dış yüz)
+
+- İndirme adı: `26-kintsugi-washi__flap_s.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/flap_s.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1200 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: flap_n.png (listede #98)
+
+```
+Only the SOUTH flap of the same square four-flap pinwheel paper packet as flap_n.png, on the same 1200×1200 canvas and in exactly the same packet box (x 8–92%, y 8–92%), on a fully transparent background, seen perfectly straight from above. A triangle of the same handmade indigo-dyed washi whose three corners are exactly at (92%, 92%), (8%, 92%) and (42%, 42%) of the canvas — its straight bottom edge runs along the packet's bottom edge and is a crisp fold (the hinge), and its two free edges rise to a point just past the centre, shifted to the upper left. The two free edges are softly deckled, feathery hand-torn washi edges. Deep indigo (#242E58) dyed unevenly into the fibres, darker toward the fold (#161C36), lighter toward the point (#3C4874), with one or two real gold-lacquer kintsugi seams (#C9A55A, highlights #E3C987, dark-gold edges #7A5C22), raised, irregular and branching, reaching the free edges. Same paper, dye, gold and soft north-window light from the top-left as flap_n.png; a whisper of contact shade on the flap itself along its free edges. Everything else is fully transparent. No other flap, no base, no cord, no button. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: köşeler (92, 92), (8, 92), (42, 42); alt kenar katlama; W4 ile aynı malzeme; gerçek alfa.
+
+#### 101. W7 Batı kanat (kapalı, dış yüz)
+
+- İndirme adı: `26-kintsugi-washi__flap_w.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/flap_w.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1200 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: flap_n.png (listede #98)
+
+```
+Only the WEST flap of the same square four-flap pinwheel paper packet as flap_n.png, on the same 1200×1200 canvas and in exactly the same packet box (x 8–92%, y 8–92%), on a fully transparent background, seen perfectly straight from above. A triangle of the same handmade indigo-dyed washi whose three corners are exactly at (8%, 92%), (8%, 8%) and (58%, 42%) of the canvas — its straight left edge runs along the packet's left edge and is a crisp fold (the hinge), and its two free edges run to a point just past the centre, shifted to the upper right. The two free edges are softly deckled, feathery hand-torn washi edges. Deep indigo (#242E58) dyed unevenly into the fibres, darker toward the fold (#161C36), lighter toward the point (#3C4874), with one or two real gold-lacquer kintsugi seams (#C9A55A, highlights #E3C987, dark-gold edges #7A5C22), raised, irregular and branching, reaching the free edges. Same paper, dye, gold and soft north-window light from the top-left as flap_n.png; a whisper of contact shade on the flap itself along its free edges. Everything else is fully transparent. No other flap, no base, no cord, no button. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: köşeler (8, 92), (8, 8), (58, 42); sol kenar katlama; W4 ile aynı malzeme; dört kanat üst üste konunca tabanı boşluksuz örter; gerçek alfa.
+
+#### 102. W8 Kuzey kanadın iç yüzü (açık, dışa yatmış)
+
+- İndirme adı: `26-kintsugi-washi__flap_in_n.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/flap_in_n.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×720 px (5:3) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: flap_n.png (listede #98)
+
+```
+The inside face of the north flap of flap_n.png, alone, as it looks when the flap is opened and laid flat outward above the packet, seen straight on, on a fully transparent background: the same triangle mirrored over its fold. Its straight fold edge is at the BOTTOM, along 91.7% of the image height, spanning x 8–92% of the width, and its point is at the TOP at (58%, 8.3%) of the image. Its two free edges are the same softly deckled, feathery hand-torn washi edges. This is the UNDYED reverse of the indigo washi: warm rice ivory (#F3ECDC) with long kozo fibres and a scatter of small gold-leaf flecks (#C9A55A, #E3C987), a soft cloud of indigo (#3C4874) bleeding through along the torn edges, and the gold kintsugi seam of the outside showing through as a paler, slightly sunken gold line (#C9A55A softened) in mirrored position, reaching the free edges. A crisp fold crease along the bottom edge. Soft north-window light from the top-left. Not a plain colour: real paper, fibres, flecks and seam must be visible. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: menteşe altta (y %91,7, x %8–92), tepe (58, 8,3); boyasız fildişi washi + altın pullar + kenarda çivit sızıntısı + soluk altın damar; düz renk değil; gerçek alfa.
+
+#### 103. W9 Doğu kanadın iç yüzü (açık, dışa yatmış)
+
+- İndirme adı: `26-kintsugi-washi__flap_in_e.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/flap_in_e.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 720×1200 px (3:5) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: flap_e.png (listede #99), flap_in_n.png (listede #102)
+
+```
+The inside face of the east flap of flap_e.png, alone, as it looks when the flap is opened and laid flat outward to the right of the packet, seen straight on, on a fully transparent background: the same triangle mirrored over its fold. Its straight fold edge is at the LEFT, along 8.3% of the image width, spanning y 8–92% of the height, and its point is at the RIGHT at (91.7%, 58%) of the image. The same undyed rice-ivory washi reverse as flap_in_n.png (#F3ECDC, long kozo fibres, small gold-leaf flecks, indigo #3C4874 bleeding in along the torn edges, the outside's gold kintsugi seam showing through as a paler sunken gold line in mirrored position), softly deckled free edges, a crisp fold crease along the left edge. Soft north-window light from the top-left. Not a plain colour. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: menteşe solda (x %8,3, y %8–92), tepe (91,7, 58); W8 ile aynı iç yüz malzemesi; gerçek alfa.
+
+#### 104. W10 Güney kanadın iç yüzü (açık, dışa yatmış)
+
+- İndirme adı: `26-kintsugi-washi__flap_in_s.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/flap_in_s.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×720 px (5:3) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: flap_s.png (listede #100), flap_in_n.png (listede #102)
+
+```
+The inside face of the south flap of flap_s.png, alone, as it looks when the flap is opened and laid flat outward below the packet, seen straight on, on a fully transparent background: the same triangle mirrored over its fold. Its straight fold edge is at the TOP, along 8.3% of the image height, spanning x 8–92% of the width, and its point is at the BOTTOM at (42%, 91.7%) of the image. The same undyed rice-ivory washi reverse as flap_in_n.png (#F3ECDC, long kozo fibres, small gold-leaf flecks, indigo #3C4874 bleeding in along the torn edges, the outside's gold kintsugi seam showing through as a paler sunken gold line in mirrored position), softly deckled free edges, a crisp fold crease along the top edge. Soft north-window light from the top-left. Not a plain colour. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: menteşe üstte (y %8,3, x %8–92), tepe (42, 91,7); W8 ile aynı iç yüz malzemesi; gerçek alfa.
+
+#### 105. W11 Batı kanadın iç yüzü (açık, dışa yatmış)
+
+- İndirme adı: `26-kintsugi-washi__flap_in_w.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/flap_in_w.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 720×1200 px (3:5) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: flap_w.png (listede #101), flap_in_n.png (listede #102)
+
+```
+The inside face of the west flap of flap_w.png, alone, as it looks when the flap is opened and laid flat outward to the left of the packet, seen straight on, on a fully transparent background: the same triangle mirrored over its fold. Its straight fold edge is at the RIGHT, along 91.7% of the image width, spanning y 8–92% of the height, and its point is at the LEFT at (8.3%, 42%) of the image. The same undyed rice-ivory washi reverse as flap_in_n.png (#F3ECDC, long kozo fibres, small gold-leaf flecks, indigo #3C4874 bleeding in along the torn edges, the outside's gold kintsugi seam showing through as a paler sunken gold line in mirrored position), softly deckled free edges, a crisp fold crease along the right edge. Soft north-window light from the top-left. Not a plain colour. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: menteşe sağda (x %91,7, y %8–92), tepe (8,3, 42); W8 ile aynı iç yüz malzemesi; gerçek alfa.
+
+#### 106. W12 Altın-fildişi bükme kordon bandı (kapanış)
+
+- İndirme adı: `26-kintsugi-washi__cord_band.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/cord_band.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1200 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_back.png (listede #97), flap_n.png (listede #98)
+
+```
+On the same 1200×1200 canvas as env_back.png and flap_n.png, in exactly the same place (the packet box is x 8–92% and y 8–92% of the canvas, but the packet itself is NOT drawn here), only a twisted silk cord that ties the closed packet, on a fully transparent background: one round cord about 1.6% of the canvas thick, two strands twisted together — one warm gold (#C9A55A with soft highlights #E3C987) and one ivory (#F3ECDC) — with a fine silky sheen. It runs horizontally across the packet along the centre line (y 50%) from x 8% to x 92%, and at both ends it turns away in a soft rounded bend, as if it wraps around the packet's left and right edges and continues behind. In the middle, around an EMPTY circle centred at (50%, 50%) with a diameter of 16% of the canvas (where a button will sit — leave the inside of this circle fully transparent), the cord's two ends are wound in a neat figure-eight: one loop above-left and one loop below-right of the circle, crossing each other just at the circle's edge, the loops lying flat. Soft north-window light from the top-left; a hair-fine contact shade on the cord itself only. Everything else is fully transparent: no packet, no flap, no button, no tassel, no knot bow. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: tek bükme kordon (altın + fildişi iki kat); yatay y %50, uçları x %8 ve %92'de arkaya dönüyor; ortada (50, 50) merkezli %16 çaplı daire boş ve şeffaf, çevresinde sekiz ilmek; püskül/fiyonk yok; paket çizilmemiş; gerçek alfa.
+
+#### 107. W13 Kintsugi onarımlı porselen düğme
+
+- İndirme adı: `26-kintsugi-washi__button.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/button.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 600×600 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A single round porcelain button, seen perfectly straight from the front, on a fully transparent background, centred and filling about 78% of the canvas: a gently domed disc of glazed warm-white porcelain (#F7F3EA) with a soft glassy sheen and a slightly thicker rounded rim, once broken into three pieces and mended in the kintsugi way — three fine, slightly raised real gold-lacquer seams (#C9A55A, highlights #E3C987, dark-gold edges #7A5C22) running irregularly from the rim toward a point just off the centre, where they meet. A very faint pale-indigo crackle in the glaze near the rim. No holes, no shank visible, no pattern, no flower, no character, no letter. Soft north-window light from the top-left with a clean soft highlight on the dome. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: tek yuvarlak sırlı beyaz porselen disk; üç altın kintsugi dikişi merkeze yakın birleşiyor; delik/desen/harf yok; gerçek alfa.
+
+#### 108. W14 Paketteki kart (boş)
+
+- İndirme adı: `26-kintsugi-washi__card_small.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/card_small.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1300 px (10:13) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: card_paper.png (listede #96)
+
+```
+A flat portrait invitation card, alone, seen perfectly straight on, on a fully transparent background: the card occupies x 7–93% and y 6–94% of the canvas. Thick hand-made rice-paper card of card_paper.png (around #F6F0E3) with softly deckled, feathery hand-torn edges on all four sides, the very edge of the deckle lightly gilded with gold leaf (#C9A55A) that catches the light here and there. At the top centre, inside the card, a short horizontal real gold-lacquer kintsugi seam about 26% of the card's width, slightly irregular with two fine branching hairlines, like a mended crack. Below it the whole card is completely EMPTY paper (the website sets the names, the date and the venue there in HTML). A very soft contact shade on the card itself along the deckle. Soft north-window light from the top-left. No flowers, no photo, no frame line. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: yırtık kenarlı pirinç kâğıdı kart, kenarı yer yer altın varaklı; üst ortada kısa altın dikiş; altı tamamen boş; gerçek alfa.
+
+#### 109. W15 Çivit washi portre paspartusu (home portresi, foto penceresi)
+
+- İndirme adı: `26-kintsugi-washi__frame_portrait.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/frame_portrait.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1250 px (4:5) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A portrait photo mat of handmade indigo-dyed washi paper, alone, seen straight on, on a fully transparent background: the mat spans about x 6–94% and y 6–94% of the canvas, its outer edge softly deckled and feathery, hand-torn all around, the deep indigo (#242E58) dyed unevenly into long kozo fibres and lightening to #3C4874 toward the torn edges, a thin rice-ivory (#F3ECDC) layer of an undyed sheet peeking out just beyond the torn indigo edge. One real gold-lacquer kintsugi seam (#C9A55A, highlights #E3C987) crosses the lower-right corner of the mat from its outer edge toward the window and stops just short of it, branching into fine hairlines. In the middle a vertical photo window exactly 760 px wide and 950 px tall (4:5), its top-left corner at x 120 px, y 150 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, nothing over it). Soft north-window light from the top-left. No flowers, no cord, no glass over the window. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: pencere düz `#00FF00`, ~760×950 (4:5), sol üst ~(120, 150); yırtık kenarlı çivit washi paspartu, altında ince fildişi kat; sağ alt köşede pencereye değmeyen altın dikiş; gerçek alfa.
+
+#### 110. W16 Pirinç kâğıdı story paspartusu (dikey, foto penceresi)
+
+- İndirme adı: `26-kintsugi-washi__frame_story.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/frame_story.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1250 px (4:5) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A portrait photo mat of thick undyed rice-ivory washi (#F3ECDC with long kozo fibres and a few gold-leaf flecks), alone, seen straight on, on a fully transparent background: the mat spans about x 6–94% and y 6–94% of the canvas, its outer edge softly deckled and hand-torn all around; a soft wash of indigo (#3C4874 fading to #242E58 at the very edge) has been brushed and absorbed along the torn outer border, like dye drawn into the fibres, leaving the area close to the window clean ivory. A real gold-lacquer kintsugi seam (#C9A55A, highlights #E3C987) runs along the upper-left corner from the outer edge toward the window, stopping short of it. In the middle a vertical photo window exactly 760 px wide and 950 px tall (4:5), its top-left corner at x 120 px, y 150 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, nothing over it). Soft north-window light from the top-left. No flowers, no cord. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: pencere düz `#00FF00`, ~760×950 (4:5), sol üst ~(120, 150); fildişi washi, dış kenarda çivit boya emilimi; sol üstte pencereye değmeyen altın dikiş; gerçek alfa.
+
+#### 111. W17 Pirinç kâğıdı story paspartusu (yatay, foto penceresi)
+
+- İndirme adı: `26-kintsugi-washi__frame_story_wide.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/frame_story_wide.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1250×1000 px (5:4) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+- Ek görsel: frame_story.png (listede #110)
+
+```
+A landscape photo mat, the same material and style as frame_story.png, alone, seen straight on, on a fully transparent background: thick undyed rice-ivory washi (#F3ECDC, long kozo fibres, a few gold-leaf flecks) spanning about x 6–94% and y 6–94% of the canvas, its outer edge softly deckled and hand-torn all around, a soft wash of indigo (#3C4874 to #242E58) absorbed along the torn border, a real gold-lacquer kintsugi seam (#C9A55A) running along the lower-right corner toward the window and stopping short of it. In the middle a landscape photo window exactly 950 px wide and 760 px tall (5:4), its top-left corner at x 150 px, y 120 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, nothing over it). Soft north-window light from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: pencere düz `#00FF00`, ~950×760 (5:4), sol üst ~(150, 120); W16 ile aynı malzeme; sağ altta altın dikiş; gerçek alfa.
+
+#### 112. W18 Geniş el yırtığı washi (mekân fotoğrafı, foto penceresi)
+
+- İndirme adı: `26-kintsugi-washi__frame_venue.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/frame_venue.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1000 px (8:5) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A wide landscape photo mat of handmade indigo-dyed washi, alone, lying flat, seen straight on, on a fully transparent background: the sheet spans about x 6–94% and y 6–94% of the canvas, its outer edge softly deckled and hand-torn all around, deep indigo (#242E58) dyed unevenly into the fibres and lightening toward the torn edges (#3C4874), a thin undyed rice-ivory sheet (#F3ECDC) peeking out just beyond the torn indigo edge along the bottom. Two real gold-lacquer kintsugi seams (#C9A55A, highlights #E3C987): one crossing the top-left corner, one the bottom-right corner, each from the outer edge toward the window, stopping short of it. In the middle a landscape photo window exactly 1360 px wide and 765 px tall (16:9), its top-left corner at x 120 px, y 110 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, nothing over it). Soft north-window light from the top-left. No flowers, no cord. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: pencere düz `#00FF00`, ~1360×765 (16:9), sol üst ~(120, 110); yırtık kenarlı çivit washi; iki köşede pencereye değmeyen altın dikiş; gerçek alfa.
+
+#### 113. W19 Sumi mürekkep lekesi (foto maskesi)
+
+- İndirme adı: `26-kintsugi-washi__ink_bloom.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/ink_bloom.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1200 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A single bloom of black sumi ink that has spread into absorbent washi paper, seen straight from above, on a fully transparent background — only the ink, no paper: a roughly round, organic ink stain centred in the canvas, about 76% of the canvas wide, fully opaque deep black (#0B0D18) in its body, with a natural feathered, fibrous outer edge where the ink crept along the paper fibres in fine tendrils, a few small satellite droplets just outside it, and a slightly softer, partly translucent rim. Its silhouette is irregular but compact — no long splashes, no drips. Flat, no gloss, no 3D. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: tek yuvarlağımsı mürekkep lekesi, gövdesi tam opak siyah, kenarı lifli tüylü; uzun sıçrama yok; kâğıt çizilmemiş; gerçek alfa.
+
+#### 114. W20 Beyaz erik dalı (köşe süsü, ölçülü)
+
+- İndirme adı: `26-kintsugi-washi__corner_sprig.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/corner_sprig.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1000 px (6:5) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A slender, restrained sprig of white plum blossom growing out from near the top-left corner toward the centre, alone, on a fully transparent background, photorealistic: one thin, gracefully angled dark branch (deep indigo-brown, #2A2630) with a few side twigs, five or six small five-petalled ivory-white plum blossoms (#F7F3EA) with soft golden stamens (#C9A55A), three round buds, a touch of real gold leaf on one or two buds and on the branch's tip. Airy and sparse, much empty space between the flowers. It reaches toward the top and left sides of the image but stays 6% inside them, and the bottom-right half of the canvas is completely empty. Soft north-window light from the top-left. No cherry blossom, no pink, no red, no leaves in other colours, no vase, no bird. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: ince tek dal, 5–6 beyaz erik çiçeği, altın dokunuşlu tomurcuklar; seyrek; sağ alt yarı boş; pembe/kiraz yok; gerçek alfa.
+
+#### 115. W21 Altın kintsugi dikişi (bölüm ayırıcı)
+
+- İndirme adı: `26-kintsugi-washi__divider.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/divider.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×200 px (8:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A slim horizontal divider made of a single real gold-lacquer kintsugi seam, alone, on a fully transparent background — only the gold line, no paper or ceramic: a slightly irregular, gently wandering horizontal line of raised warm gold lacquer (#C9A55A with highlights #E3C987 and fine dark-gold edges #7A5C22) running across x 10–90% of the canvas at the vertical centre, thickest in the middle (about 1.2% of the canvas width) and tapering to hair-fine at both ends, with two or three tiny branching hairlines near the middle, the soft metallic sheen of real gold catching north-window light from the top-left. Elegant and fine. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: yatay tek altın dikiş, ortada kalın, uçlara doğru incelen, birkaç ince dal; kâğıt yok; iki uçta boşluk; gerçek alfa.
+
+#### 116. W22 Kintsugi onarımlı çay kâsesi (imza süsü)
+
+- İndirme adı: `26-kintsugi-washi__mended_bowl.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/mended_bowl.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 800×640 px (5:4) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A single small hand-thrown ceramic tea bowl, alone, seen from the front at a very slight high angle, on a fully transparent background, photorealistic: a softly irregular wheel-thrown form, a deep indigo glaze (#242E58 to #3C4874) pooling darker at the foot and breaking to a soft rice-ivory (#F3ECDC) at the lip, mended in the kintsugi way with two real gold-lacquer seams (#C9A55A, highlights #E3C987) running from the lip down the side and branching. Empty, no tea, no steam. The bowl spans about x 15–85% and y 15–85% of the canvas. Soft north-window light from the top-left. No saucer, no whisk, no cloth, no table. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: tek kâse, çivit sır + fildişi ağız, iki altın kintsugi dikişi; boş; altlık/masa yok; gerçek alfa.
+
+#### 117. W23 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `26-kintsugi-washi__accent_1.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/accent_1.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_1 (number 1 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft north-window light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks. (Make three files, the same light and scale: 1 = one small irregular flake of real gold leaf (#C9A55A to #E3C987), thin, slightly crumpled with a torn edge, catching the light; 2 = one single round droplet of indigo ink (#242E58) seen from above, glossy, with a tiny feathered halo where it touched paper — only the ink, no paper; 3 = one single loose white plum-blossom petal (#F7F3EA), small, rounded, softly cupped, with a faint golden blush at its base.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (altın varak pulu, çivit mürekkep damlası, erik yaprağı); kenara değmiyor; gerçek alfa.
+
+#### 118. W23 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `26-kintsugi-washi__accent_2.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/accent_2.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_2 (number 2 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft north-window light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks. (Make three files, the same light and scale: 1 = one small irregular flake of real gold leaf (#C9A55A to #E3C987), thin, slightly crumpled with a torn edge, catching the light; 2 = one single round droplet of indigo ink (#242E58) seen from above, glossy, with a tiny feathered halo where it touched paper — only the ink, no paper; 3 = one single loose white plum-blossom petal (#F7F3EA), small, rounded, softly cupped, with a faint golden blush at its base.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (altın varak pulu, çivit mürekkep damlası, erik yaprağı); kenara değmiyor; gerçek alfa.
+
+#### 119. W23 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `26-kintsugi-washi__accent_3.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/accent_3.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_3 (number 3 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft north-window light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, kanji, kana, logos or watermarks. (Make three files, the same light and scale: 1 = one small irregular flake of real gold leaf (#C9A55A to #E3C987), thin, slightly crumpled with a torn edge, catching the light; 2 = one single round droplet of indigo ink (#242E58) seen from above, glossy, with a tiny feathered halo where it touched paper — only the ink, no paper; 3 = one single loose white plum-blossom petal (#F7F3EA), small, rounded, softly cupped, with a faint golden blush at its base.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (altın varak pulu, çivit mürekkep damlası, erik yaprağı); kenara değmiyor; gerçek alfa.
+
+#### 120. W24 Website hero + paylaşım görseli (og:image kaynağı)
+
+- İndirme adı: `26-kintsugi-washi__web_hero.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/parts/web_hero.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1024 px (3:2) · opak · PNG
+- Ek görsel: flap_n.png (listede #98), flap_e.png (listede #99), flap_s.png (listede #100), flap_w.png (listede #101), cord_band.png (listede #106), button.png (listede #107), page_ground.png (listede #95), mended_bowl.png (listede #116), corner_sprig.png (listede #114)
+
+```
+Wide horizontal still life, photorealistic stationery photography, soft north-window light from the top-left: the closed square four-flap pinwheel packet of indigo-dyed washi with gold kintsugi seams (as flap_n.png, flap_e.png, flap_s.png and flap_w.png together), tied with the twisted gold-and-ivory silk cord (as cord_band.png) and closed with the gold-mended white porcelain button (as button.png), lying slightly right of centre and turned a few degrees on a sheet of rice-ivory washi (as page_ground.png); at the left, the small indigo kintsugi tea bowl (as mended_bowl.png) and a slender sprig of white plum blossom (as corner_sprig.png); a few flakes of gold leaf scattered; behind, softly out of focus, more washi sheets with torn edges. Only indigo, rice ivory, warm white porcelain and gold. The top 20% of the image is calm and soft (only out-of-focus paper). This image is cropped to 1200×630 for link previews: keep the whole packet visible with at least 5% empty margin below it. No people, no card text. No text, letters, numbers, monograms, kanji, kana, logos or watermarks.
+```
+
+Kontrol: paket + kordon + düğme bütün, altında ≥%5 boşluk; kâse ve erik dalı solda; üst %20 sakin; yazı yok.
+
+#### 121. P1 — Ön yüz
+
+- İndirme adı: `26-kintsugi-washi__print__invitation_front_r_5x7.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/print/invitation_front_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+- Ek görsel: card_paper.png (listede #96), flap_n.png (listede #98), corner_sprig.png (listede #114), divider.png (listede #115)
+
+```
+The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the smooth hand-made rice-paper card of card_paper.png (around #F6F0E3). Across the top, a hand-torn strip of indigo-dyed washi (as flap_n.png: deep indigo #242E58 dyed unevenly into long fibres, softly feathered torn lower edge) lies along the top edge from 8% to 92% of the width, with one real gold-lacquer kintsugi seam (#C9A55A) crossing it; a slender sprig of white plum blossom with gold-touched buds (as corner_sprig.png) rests over its right end; nothing in this top band reaches lower than 17% of the height. Along the bottom, between 93% and 96% of the height and from 20% to 80% of the width, a single fine horizontal gold kintsugi seam (as divider.png), thickest in the middle and tapering to hair-fine ends. The rectangle from 19% to 91% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm paper (the names, date and venue are printed there): no fleck, no petal, no line, no shadow, no stain in it. No ornament within 8% of the left and right edges except the torn strip itself. Soft north-window light from the top-left. Only indigo, rice ivory and gold. No QR code. No text, letters, numbers, monograms, kanji, kana, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: tam taşma pirinç kâğıdı; üstte yırtık çivit washi şerit + altın dikiş + erik dalı (%17'nin üstünde); altta tek altın dikiş; %19–%91 × %10–%90 tamamen boş; yazı/QR yok.
+
+#### 122. P2 — Arka yüz
+
+- İndirme adı: `26-kintsugi-washi__print__invitation_back_r_5x7.png`
+- Hedef: `collections/26_Kintsugi_Washi/assets/gpt/print/invitation_back_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+- Ek görsel: invitation_front_r_5x7.png (listede #121), divider.png (listede #115)
+
+```
+The back of the same printed wedding invitation (give invitation_front_r_5x7.png as the reference image), full bleed, portrait 5.25:7.25, perfectly flat: the same smooth rice-paper card, only a short horizontal gold kintsugi seam (as divider.png) across the top centre, between 32% and 68% of the width, with one tiny white plum blossom resting at its middle, everything staying above 11% of the height. The whole area below 13% of the height, from 9% to 91% of the width, is COMPLETELY EMPTY paper (a schedule and a QR code are set there): no fleck, no line, no shadow, no stain. No ornament within 8% of the left and right edges. No QR code. No text, letters, numbers, monograms, kanji, kana, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: ön yüzle aynı kâğıt; yalnız üst ortada kısa altın dikiş + tek erik çiçeği (%11'in üstünde); %13'ün altı boş; yazı/QR yok.
+
+### 27_Riad_Lantern_Nights
+
+Sohbetin ilk mesajı (dosyanın GPT notu):
+
+```
+This design was completely redesigned on 2026-10-22. Generate PAKET 5R (website layers) first, in order and in ONE chat, then PAKET 6R (printable invitation). PAKET 2 (sample photos) ALREADY EXISTS — do not regenerate it. Sections marked GEÇERSİZ are not wanted. Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, names, dates, initials, monograms, logos, brand marks, QR codes or watermarks in any image** (also not on the lantern, the stud, the tiles or the card). **No calligraphy, no script-like ornament, no religious symbols** (no crescent and star, no hand amulet, no mosque, dome or minaret silhouettes): only craft — geometric zellige, carved cedar, carved stucco, pierced brass, silk cord, courtyard flowers. Give W1 `tadelakt_ground.png`, W2 `cotton_paper.png` and W3 `env_back.png` as the style reference of every later part: the same warm ivory tadelakt plaster, the same ivory cotton paper, the same deep teal cotton envelope paper with its saffron-and-teal zellige lining, the same soft warm evening light from the top-left. Parts drawn on the same envelope canvas (W3, W4, W5, W7, W8) keep the envelope in exactly the same box; W9 and W10 (the lantern unlit and lit) are the same lantern on the same canvas in exactly the same place.
+```
+
+#### 123. W1 Fildişi tadelakt sıva (sayfa zemini, kapak)
+
+- İndirme adı: `27-riad-lantern-nights__tadelakt_ground.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/tadelakt_ground.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, perfectly flat straight-on texture of polished tadelakt lime plaster in a warm ivory (#EFE3CC, gently varying toward #F6EAD2), like the softly burnished wall of a riad courtyard: subtle cloudy trowel movement, a faint satin sheen where the plaster was polished with a stone, a few very fine hairline variations, the gentlest warm tonal drift. Evenly lit by soft warm evening light from the top-left; no cracks, no stains, no holes, no tiles, no pattern, no shadow, no vignette. Calm enough for dark teal text in any size to read on it everywhere. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: dikişsiz (2×2 ek yeri yok); sıcak fildişi, düşük kontrast; çatlak/leke/desen yok; üstüne koyu yazı okunur.
+
+#### 124. W2 Fildişi pamuk kâğıt (kartlar, bantlar, form)
+
+- İndirme adı: `27-riad-lantern-nights__cotton_paper.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/cotton_paper.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, perfectly flat top-down texture of thick handmade cotton paper in a warm ivory (#F6EAD2): a soft felted tooth, a few faint long cotton fibres, the slightest natural cloudiness, an even tone with only the gentlest variation. Evenly lit by soft warm evening light from the top-left; no fold, no crease, no deckle edge, no stain, no shadow, no vignette, no printing, no pattern. Calm enough for fine dark text to read on it everywhere. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: dikişsiz; fildişi `#F6EAD2` civarı; desen/leke yok; yazı okunur.
+
+#### 125. W3 Zarfın arkası (zellige astar görünür)
+
+- İndirme adı: `27-riad-lantern-nights__env_back.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/env_back.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1080×1440 px (3:4) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+The back panel of an open portrait envelope, seen perfectly straight from the front, on a fully transparent background. The envelope occupies exactly x 7–93% and y 6–94% of the canvas (a portrait rectangle, about 0.73:1) with crisp square corners. It is made of deep teal cotton paper (#16494B, shading to #0F2F31) with a faint blind-embossed geometric star pattern. We see its inside: from x 15% to x 85% and from y 9% down to the bottom it is lined with a glazed zellige tile mosaic — hand-cut tesserae forming a classic geometric pattern of eight-pointed stars and interlocking polygons in saffron (#E3A54A), zellige teal (#1E6A6A), glaze white (#F4EFE4) and a little deep teal (#0F2F31), each tessera with a slightly uneven glossy glaze catching the warm light, fine ivory grout lines; a very gentle shade toward the bottom where the front pocket will sit. Outside the lining a margin of the plain teal paper shows along the top and both sides (x 7–15% and x 85–93%). No flap, no front pocket, no stud, no cord, no lantern, no card inside. Soft warm evening light from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: zarf x %7–93 · y %6–94; iç yüz safran-teal-beyaz geometrik zellige (kobalt yok); yanlarda ve üstte düz teal kâğıt payı; kapak/cep yok; gerçek alfa.
+
+#### 126. W4 Zarfın ön cebi
+
+- İndirme adı: `27-riad-lantern-nights__env_front.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/env_front.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1080×1440 px (3:4) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_back.png (listede #125)
+
+```
+Only the front pocket of the same portrait deep teal envelope as env_back.png, on the same 1080×1440 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 7–93% and y 6–94% of the canvas; the pocket spans its full width (x 7–93%) from its top edge down to the envelope's bottom edge at 94% of the canvas height. Its top edge is one very shallow concave curve: it starts at 46% of the canvas height at both side edges and dips gently to 50% at the horizontal centre, cut clean and crisp, the thickness of heavy paper visible along the cut, with a fine line of brass foil (#C9A35B) running just below the cut edge. The deep teal cotton paper (#16494B) with the same faint blind-embossed geometric star pattern, the soft fold lines of the side flaps and bottom flap barely visible, softly lit by warm evening light from the top-left. Everything above the pocket's edge is completely transparent. No flap, no stud, no cord, no lantern, no card, no tiles. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: cep tam genişlik; üst kenarı yanlarda %46, ortada %50'ye inen sığ yay + ince pirinç çizgi; üstü tamamen şeffaf; gerçek alfa.
+
+#### 127. W5 Ters at nalı kemer kapak (kapalı, dış yüz)
+
+- İndirme adı: `27-riad-lantern-nights__flap.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/flap.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1080×1440 px (3:4) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+Only the closed flap of the same portrait deep teal envelope, on the same 1080×1440 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 7–93% and y 6–94% of the canvas; the flap hangs from a softly rounded fold along the envelope's top edge (6% of the canvas height), full width (x 7–93%). Its outline is an upside-down Moorish horseshoe arch: the two straight sides drop vertically from the fold to 26% of the canvas height, where the edge steps inward by a small notch (about 2% of the width on each side, like the impost of an arch); from there the horseshoe curve first swells slightly outward (its widest point x 9–91% at about 36% of the height), then sweeps round, down and inward in one smooth continuous curve to a gently pointed tip at the horizontal centre at 62% of the canvas height. Along the whole curved and stepped edge, on the flap, runs a narrow border (about 2.5% of the width) of fine brass-gold foil stamped with a tiny geometric zellige interlace, crisp and slightly raised. The rest of the flap is the plain deep teal cotton paper (#16494B) with the same faint blind-embossed geometric star pattern; a whisper of contact shade on the flap itself along its edge. Soft warm evening light from the top-left. Everything outside the flap is completely transparent. No stud, no cord, no tassel, no lantern, no card. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: kapak menteşesi %6; yanlar %26'ya dik, küçük impost basamağı, at nalı eğrisi (en geniş ~%36), sivri uç (x %50, y %62); kenarda altın folyo zellige bordür; altı/yanları şeffaf; gerçek alfa.
+
+#### 128. W6 Kapağın iç yüzü (açıkken dik duran kemer)
+
+- İndirme adı: `27-riad-lantern-nights__flap_in.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/flap_in.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1080×940 px (1.149:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: flap.png (listede #127), env_back.png (listede #125)
+
+```
+The inside of the same horseshoe-arch envelope flap, alone, seen straight on as it stands upright when the envelope is open, on a fully transparent background: the outline of flap.png mirrored vertically, so it now reads as an upright Moorish horseshoe arch doorway. Its straight fold edge is at the BOTTOM, along 93% of the image height, spanning x 7–93% of the width (exactly as wide as the envelope); its two straight sides rise to 62% of the image height, step inward by a small impost notch, the horseshoe curve swells slightly outward (widest at about 51% of the height) and sweeps up and inward to a gently pointed crown at the top centre, at 7% of the image height. The inside is lined with the same glazed zellige mosaic as env_back.png (saffron #E3A54A, zellige teal #1E6A6A, glaze white #F4EFE4, a little deep teal; eight-pointed stars and interlocking polygons, fine ivory grout, glossy uneven glaze catching the light), and the brass-gold foil border with its tiny interlace follows the whole arched edge on the inside too, with a slim margin of teal paper beyond it. Soft warm evening light from the top-left. No stud, no cord, no lantern. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: düz katlama kenarı altta (%93, x %7–93), yanlar %62'ye, impost, sivri tepe (x %50, y %7); iç yüz zellige + altın bordür; düz renk alan yok; gerçek alfa.
+
+#### 129. W7 Kubbe başlı pirinç çivi
+
+- İndirme adı: `27-riad-lantern-nights__stud.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/stud.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1080×1440 px (3:4) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_back.png (listede #125), flap.png (listede #127)
+
+```
+On the same 1080×1440 canvas as env_back.png and flap.png, in exactly the same place (the envelope box is x 7–93% and y 6–94% of the canvas, but the envelope itself is NOT drawn here), only one small domed brass stud, seen straight on, on a fully transparent background: a hand-made brass rosette fastener whose centre is exactly at x 50% and y 56% of the canvas and whose diameter is 7% of the canvas width (it spans x 46.5–53.5%, y 53.4–58.6%): a smooth polished brass dome (#C9A35B with warm highlights) in the middle, ringed by a fine eight-petal rosette of hammered brass with a beaded edge. Warm golden highlight from the soft evening light at the top-left. Everything else is fully transparent: no flap, no cord, no lantern. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: tek pirinç çivi, merkez (x %50, y %56), çap tuval eninin %7'si; kubbe + sekiz yapraklı rozet; başka bir şey yok; gerçek alfa.
+
+#### 130. W8 Safran ipek kordon + püskül (çiviye dolanmış)
+
+- İndirme adı: `27-riad-lantern-nights__cord.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/cord.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1080×1440 px (3:4) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_back.png (listede #125), flap.png (listede #127), stud.png (listede #129)
+
+```
+On the same 1080×1440 canvas as env_back.png, flap.png and stud.png, in exactly the same place (the envelope, the flap and the stud are NOT drawn here), only a saffron silk cord, on a fully transparent background. The cord (about 0.9% of the canvas width thick, tightly twisted silk in saffron #E3A54A with a soft sheen and darker amber twists) makes one closed loop around the point where the stud sits — a ring centred at x 50% and y 56% of the canvas, its inner opening just larger than a 7%-wide stud, the loop spanning about y 52–60% — so that the stud will show through the middle of the loop. From the bottom of the loop two ends hang down: the LEFT end falls in a gentle S-curve to x 43% and y 78%, where it enters a small polished brass cap from which a full saffron silk tassel hangs, its fine silk threads ending at about y 90%; the RIGHT end falls more shortly to x 58% and y 71%, where it ends in a small round polished brass jump ring (about 1.6% of the canvas width). Warm evening light from the top-left, soft sheen along the twists. Everything else is fully transparent: no envelope, no stud, no lantern. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: halka (x %50, y %56) çevresinde, ortası boş; sol uçta püskül (pirinç kapak x %43, y %78; uç y %90); sağ uçta pirinç halka (x %58, y %71); zarf/çivi/fener çizilmemiş; gerçek alfa.
+
+#### 131. W9 Delikli pirinç fener tılsımı — sönük
+
+- İndirme adı: `27-riad-lantern-nights__lantern_unlit.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/lantern_unlit.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 600×900 px (2:3) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A small hand-pierced brass lantern charm, unlit, hanging straight, alone, seen from the front, on a fully transparent background: a tiny traditional riad lantern about the size of a thumb, with a round brass hanging ring at the top centre (its centre at x 50% and y 8% of the canvas), a small domed and pointed brass cap, a faceted body of four slightly bulging brass panels pierced with fine geometric star-and-dot patterns, small panes of pale amber glass behind the piercings, and a short pointed brass finial at the bottom. The lantern spans x 25–75% of the width and y 4–92% of the height. Polished and lightly aged brass (#C9A35B, warm highlights, darker recesses), soft warm evening light from the top-left. It is NOT lit: the amber glass is dim and the piercings are dark, no light, no rays, no sparkle, no glow. No chain, no cord, no hook. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: tek sönük fener (ışık/hâle yok); asma halkası üst ortada (x %50, y %8); delikli pirinç paneller + kehribar cam; gerçek alfa.
+
+#### 132. W10 Delikli pirinç fener tılsımı — yanık
+
+- İndirme adı: `27-riad-lantern-nights__lantern_lit.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/lantern_lit.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 600×900 px (2:3) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: lantern_unlit.png (listede #131)
+
+```
+Exactly the same hand-pierced brass lantern charm as lantern_unlit.png, on the same 600×900 canvas, in exactly the same place, the same size and the same pose (hanging ring centred at x 50% and y 8%, the lantern spanning x 25–75% and y 4–92%), on a fully transparent background — but now it is LIT from inside by a tiny warm flame: the amber glass panes glow a warm honey-gold (#FFD08A to #E3A54A), every star-and-dot piercing shines as a bright warm point of light, and the brass around the piercings catches a warm inner glow. The light stays ONLY inside the lantern's own glass and piercings: no rays, no halo, no glow, no light spots outside the lantern's outline, the background fully transparent. The outside of the brass is still lit by the same soft evening light from the top-left. No chain, no cord, no hook. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: W9 ile aynı fener, aynı yer ve boy (üst üste konunca kaymaz); delikler ve cam sıcak yanıyor; dış hatta hâle/ışın yok; gerçek alfa.
+
+#### 133. W11 Kemer tepeli kart (zarftan yükselen, boş)
+
+- İndirme adı: `27-riad-lantern-nights__card_small.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/card_small.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1400 px (5:7) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: cotton_paper.png (listede #124)
+
+```
+A flat portrait invitation card, alone, seen straight on, on a fully transparent background: thick ivory handmade cotton paper as cotton_paper.png (#F6EAD2), spanning x 7–93% and y 6–94% of the canvas. Its bottom corners are square and its sides straight; its top is cut in the shape of a Moorish horseshoe arch with a gently pointed crown at the top centre (the arch begins at 30% of the card's height on both sides). Inside the edge, about 4% in, runs a fine brass-gold foil line that follows the arch and the sides, and just inside the crown of the arch sits a small cluster of three glazed zellige tesserae forming a tiny eight-pointed star (saffron, zellige teal and glaze white), about 12% of the card's width. Below it the card is completely EMPTY paper (the website sets the names, the date and the venue there in HTML). A hair-fine contact shade only on the card's own edge, soft warm evening light from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: at nalı kemer tepeli fildişi kart; içte ince altın çizgi; tepede küçük zellige yıldız; altı tamamen boş; gerçek alfa.
+
+#### 134. W12 Alçı at nalı kemer çerçeve (home portresi)
+
+- İndirme adı: `27-riad-lantern-nights__arch_frame.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/arch_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1300 px (10:13) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A portrait photo frame in the shape of a Moorish horseshoe arch window, alone, seen straight on, on a fully transparent background: a wide frame of finely carved ivory stucco (#F4EFE4 with warm shading in the carving) — delicate geometric interlace and small rosettes, crisp hand-carved depth — edged on the outside by a slim moulding of carved Atlas cedar (#3A2114, warm oiled wood grain) and on the inside by a narrow band of glazed saffron-and-teal zellige tesserae. The frame's outer edge spans about x 6–94% and y 5–95% of the canvas, its top following the horseshoe arch with a gently pointed crown. In the middle a photo window filled with flat pure green #00FF00 (no texture, no shading, crisp edges, nothing over it), shaped as a horseshoe arch: its bounding box is exactly 720 px wide and 900 px tall (4:5), its top-left corner at x 140 px, y 250 px; the window's sides are straight from its bottom up to y 500 px, then it follows the horseshoe arch (slightly wider than the straight part, then closing to a gently pointed top at y 250 px). Soft warm evening light from the top-left. No lantern, no flowers, no glass over the window. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: yeşil pencere at nalı kemer biçimli, kutusu 720×900 (4:5), sol üst (140, 250); oyma alçı + sedir + zellige; pencereye binen yok; gerçek alfa.
+
+#### 135. W13 Sedir at nalı kemer pencere (story çerçevesi)
+
+- İndirme adı: `27-riad-lantern-nights__story_frame.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/story_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1500 px (2:3) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A tall carved cedar window frame in the shape of a Moorish horseshoe arch, alone, seen straight on, on a fully transparent background: deep, richly carved Atlas cedar (#3A2114, warm oiled grain with honey highlights) with a geometric carved interlace and a small row of carved rosettes in the spandrels, a fine inner moulding of brass (#C9A35B) and an outer stepped moulding. The frame's outer edge spans about x 6–94% and y 5–95% of the canvas, its top following the horseshoe arch with a gently pointed crown. In the middle a photo window filled with flat pure green #00FF00 (no texture, no shading, crisp edges, nothing over it), shaped as a horseshoe arch: its bounding box is exactly 680 px wide and 1020 px tall (2:3), its top-left corner at x 160 px, y 300 px; the window's sides are straight from its bottom up to y 560 px, then it follows the horseshoe arch to a gently pointed top at y 300 px. Soft warm evening light from the top-left. No shutters, no grille, no glass over the window, no lantern, no flowers. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: yeşil pencere at nalı kemer biçimli, kutusu 680×1020 (2:3), sol üst (160, 300); oyma sedir + pirinç iç pervaz; pencereye binen yok; gerçek alfa.
+
+#### 136. W14 Geniş sedir çerçeve + kemerli alçı friz (mekân)
+
+- İndirme adı: `27-riad-lantern-nights__venue_frame.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/venue_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1100 px (16:11) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A wide landscape photo frame, alone, seen straight on, on a fully transparent background: a frame of carved Atlas cedar (#3A2114, warm oiled grain) with a fine inner brass moulding (#C9A35B), its outer edge spanning about x 5–95% and y 6–94% of the canvas; its top border is deeper and holds a carved ivory stucco frieze of three small horseshoe arches side by side (delicate geometric carving, crisp depth), centred above the window, and the bottom border has a narrow band of glazed saffron-and-teal zellige tesserae. In the middle a landscape photo window exactly 1280 px wide and 720 px tall (16:9), its top-left corner at x 160 px, y 260 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, nothing over it). The frieze stays entirely above the window. Soft warm evening light from the top-left. No glass, no lantern, no flowers. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: pencere düz `#00FF00` dikdörtgen 1280×720 (16:9), sol üst (160, 260); üstte üç kemerli alçı friz pencerenin üstünde kalıyor; altta zellige bant; gerçek alfa.
+
+#### 137. W15 Köşe süsü (bougainvillea + portakal çiçeği)
+
+- İndirme adı: `27-riad-lantern-nights__corner_spray.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/corner_spray.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1000 px (6:5) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A restrained, elegant corner spray growing out from near the top-left corner toward the centre, alone, on a fully transparent background, photorealistic: a few sprigs of magenta bougainvillea (#B8326A, papery bracts with tiny cream flowers in their hearts, used sparingly), small clusters of white orange blossom with waxy petals and pale yellow stamens, glossy dark green orange leaves, and one fine curl of saffron silk cord with a tiny brass bead winding through the stems. Airy and light, not dense: plenty of space between the elements. It reaches toward the top and left sides of the image but stays 6% inside them, and the bottom-right half of the canvas is completely empty. Soft warm evening light from the top-left. No lemons, no oranges (fruit), no vase, no lantern, no tiles. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: sol üstten çıkan seyrek küme, sağ alt yarı boş; bougainvillea az, portakal çiçeği; meyve yok; gerçek alfa.
+
+#### 138. W16 Zellige ayırıcı (bölüm ayırıcı)
+
+- İndirme adı: `27-riad-lantern-nights__divider.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/divider.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×200 px (8:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A slim horizontal divider, alone, on a fully transparent background: a fine straight line of polished brass (#C9A35B) running across x 8–92% of the canvas at the vertical centre, and at its centre a small row of five glazed zellige tesserae forming a tiny geometric star motif (saffron, zellige teal and glaze white, the middle tessera an eight-pointed star slightly larger), with one tiny brass bead on the line on each side of it; the line tapers to fine points at both ends. Soft warm evening light from the top-left, a glossy glint on the glaze. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: yatay pirinç çizgi, ortada küçük zellige yıldız motifi, uçlar incelir; iki uçta boşluk; gerçek alfa.
+
+#### 139. W17 Asılı büyük pirinç fener (yanık)
+
+- İndirme adı: `27-riad-lantern-nights__hanging_lantern.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/hanging_lantern.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 700×1400 px (1:2) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A large hand-pierced brass riad lantern hanging from a short brass chain, lit from inside, alone, seen from the front, on a fully transparent background: the chain starts at the top centre at 6% of the canvas height; the lantern has a domed, pointed brass crown, a tall faceted body of six panels pierced with fine geometric star-and-dot patterns over warm amber glass, and a pointed finial with a small brass drop at the bottom at 93% of the height; the lantern body spans about x 18–82% of the width. A warm flame inside makes the amber glass glow honey-gold and every piercing shine as a bright warm point, while the brass outside is lit by the soft evening light from the top-left. The light stays ONLY inside the lantern's own glass and piercings: no rays, no halo, no light spots outside the outline. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: zincirli tek büyük fener, içten yanık; ışık yalnız cam ve deliklerde; dışta hâle yok; gerçek alfa.
+
+#### 140. W18 Zellige karosu (dikişsiz, sırayla dizilen bant)
+
+- İndirme adı: `27-riad-lantern-nights__zellige_tile.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/zellige_tile.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 768×768 px (1:1) · opak · PNG
+- Ek görsel: env_back.png (listede #125)
+
+```
+A seamless, tileable, perfectly flat straight-on square of glazed zellige mosaic, the same tesserae and colours as env_back.png: one complete repeat of a classic geometric pattern centred on one eight-pointed star, surrounded by interlocking polygons, in saffron (#E3A54A), zellige teal (#1E6A6A), glaze white (#F4EFE4) and a little deep teal (#0F2F31); hand-cut tesserae with slightly uneven glossy glaze and fine ivory grout lines, evenly lit by soft warm evening light from the top-left with a gentle glossy sheen. The pattern continues seamlessly across all four edges so squares placed side by side form one continuous mosaic. No border, no crack, no shadow, no vignette. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: tek tekrar, ortada sekiz kollu yıldız; dört kenarda dikişsiz; astarla aynı renkler; kobalt yok.
+
+#### 141. W19 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `27-riad-lantern-nights__accent_1.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/accent_1.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_1 (number 1 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft warm evening light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one single papery magenta bougainvillea bract (#B8326A), heart-shaped with fine veins, slightly curled; 2 = one single white orange blossom with five waxy petals and pale yellow stamens; 3 = one tiny eight-pointed star cut from polished brass (#C9A35B), slightly domed, catching a warm glint.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (bougainvillea yaprağı, portakal çiçeği, pirinç yıldız); kenara değmiyor; gerçek alfa.
+
+#### 142. W19 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `27-riad-lantern-nights__accent_2.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/accent_2.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_2 (number 2 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft warm evening light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one single papery magenta bougainvillea bract (#B8326A), heart-shaped with fine veins, slightly curled; 2 = one single white orange blossom with five waxy petals and pale yellow stamens; 3 = one tiny eight-pointed star cut from polished brass (#C9A35B), slightly domed, catching a warm glint.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (bougainvillea yaprağı, portakal çiçeği, pirinç yıldız); kenara değmiyor; gerçek alfa.
+
+#### 143. W19 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `27-riad-lantern-nights__accent_3.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/accent_3.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_3 (number 3 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft warm evening light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one single papery magenta bougainvillea bract (#B8326A), heart-shaped with fine veins, slightly curled; 2 = one single white orange blossom with five waxy petals and pale yellow stamens; 3 = one tiny eight-pointed star cut from polished brass (#C9A35B), slightly domed, catching a warm glint.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (bougainvillea yaprağı, portakal çiçeği, pirinç yıldız); kenara değmiyor; gerçek alfa.
+
+#### 144. W20 Website hero + paylaşım görseli (og:image kaynağı)
+
+- İndirme adı: `27-riad-lantern-nights__web_hero.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/parts/web_hero.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1024 px (3:2) · opak · PNG
+- Ek görsel: flap.png (listede #127), stud.png (listede #129), cord.png (listede #130), lantern_lit.png (listede #132), tadelakt_ground.png (listede #123), corner_spray.png (listede #137), hanging_lantern.png (listede #139)
+
+```
+Wide horizontal still life, photorealistic craft product photography, soft warm evening light from the top-left: the closed portrait deep teal envelope of flap.png with its upside-down horseshoe-arch flap and brass-gold zellige border, closed with the saffron silk cord wound once around the brass stud (as stud.png and cord.png), its saffron tassel and the small pierced brass lantern charm (lit, as lantern_lit.png) hanging over the pocket, lying slightly below the centre on warm ivory tadelakt plaster (as tadelakt_ground.png); at the left a few sprigs of magenta bougainvillea and white orange blossom (as corner_spray.png); at the right a large lit pierced brass lantern (as hanging_lantern.png) standing on the plaster and two or three loose glazed zellige tesserae; behind, softly out of focus, a carved cedar arch and warm lantern light. Only teal, saffron, brass, cedar and ivory tones, a touch of magenta. The top 20% of the image is calm and soft (only out-of-focus plaster and warm light). This image is cropped to 1200×630 for link previews: keep the whole envelope, cord and lantern charm visible with at least 5% empty margin below them. No people. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: zarf + kordon + fener tılsımı bütün, altında ≥%5 boşluk; üst %20 sakin; dini simge/yazı yok.
+
+#### 145. P1 — Ön yüz
+
+- İndirme adı: `27-riad-lantern-nights__print__invitation_front_r_5x7.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/print/invitation_front_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+- Ek görsel: cotton_paper.png (listede #124)
+
+```
+The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the thick ivory handmade cotton paper of cotton_paper.png (#F6EAD2). Across the top, between 9% and 91% of the width, a band in the shape of a shallow horseshoe-arch crown: a fine brass-gold foil line (#C9A35B) that rises from both sides into a gently pointed arch at the centre, with a narrow row of small glazed saffron-and-teal zellige tesserae following it, and at the crown a small cluster of tesserae forming one eight-pointed star; a few sprigs of white orange blossom and two or three magenta bougainvillea bracts tucked at the two ends of the band; nothing in this top band reaches lower than 17% of the height. Along the bottom, between 92% and 96% of the height and from 14% to 86% of the width, a slim border of the same zellige tesserae between two fine brass-gold foil lines, with one tiny eight-pointed brass star at its centre. The rectangle from 19% to 91% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm paper (the names, date and venue are set there): no tile, no petal, no line, no shadow, no stain in it. No ornament within 8% of the left and right edges. Soft warm light from the top-left. Only ivory, teal, saffron, brass and a touch of magenta. No calligraphy, no religious symbols. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: tam taşma; %19–%91 × %10–%90 tamamen boş; kemer tepeli zellige bant yalnız üstte (%17'nin üstünde), zellige bordür yalnız altta; yan %8 boş; yazı/dini simge yok.
+
+#### 146. P2 — Arka yüz
+
+- İndirme adı: `27-riad-lantern-nights__print__invitation_back_r_5x7.png`
+- Hedef: `collections/27_Riad_Lantern_Nights/assets/gpt/print/invitation_back_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+
+```
+The back of the same printed wedding invitation, full bleed, portrait 5.25:7.25, perfectly flat: the same thick ivory cotton paper, only a short slim brass-gold foil line across the top centre (between 32% and 68% of the width) with a tiny eight-pointed star of glazed saffron-and-teal zellige tesserae at its middle and one white orange blossom beside it, its lowest point staying above 11% of the height. The whole area below 13% of the height, from 9% to 91% of the width, is COMPLETELY EMPTY paper (a schedule and a QR code are set there): no tile, no line, no shadow, no stain. No ornament within 8% of the left and right edges. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: ön yüzle aynı kâğıt; yalnız üst ortada kısa altın çizgi + küçük zellige yıldız (%11'in üstünde); %13'ün altı boş; yazı/QR yok.
+
+### 28_Maison_Patisserie
+
+Sohbetin ilk mesajı (dosyanın GPT notu):
+
+```
+This design ("Maison Pâtisserie") is being REDESIGNED from scratch. Generate PAKET 5R (website layers) first, in order and in ONE chat, then PAKET 6R (printable invitation). PAKET 2 (sample photos) already exists — do NOT regenerate it. Sections marked GEÇERSİZ are not wanted. Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, names, dates, initials, monograms, crests, logos, brand marks, shop names, price tags, QR codes or watermarks in any image** (also not on the sleeve band, the plates, the macarons, the awning or the shop window). This is an elegant Parisian pâtisserie in soft morning light — refined, romantic, photorealistic; never cartoon, never a children's-party or cupcake-shop look, no sprinkles, no candy colours beyond pistachio, rose, cream and a little gold. The doily lace is printed/pierced PAPER lace, never fabric lace. Give W1 `page_ground.png`, W2 `cream_paper.png` and W3 `env_back.png` as the style reference of every later part: the same cream pastry paper, the same cream cotton stationery, the same pistachio and rose papers, the same rose satin, the same soft morning window light from the top-left. Parts drawn on the same envelope canvas (W3, W4, W5, W7, W8, W9) keep the envelope in exactly the same box.
+```
+
+#### 147. W1 Krem pastane kâğıdı (sayfa zemini)
+
+- İndirme adı: `28-maison-patisserie__page_ground.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/page_ground.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, perfectly flat top-down texture of fine cream pastry-shop wrapping paper (#FBF5EC): a soft matte paper with a gentle felt tooth and a few faint fibres, printed with very fine, evenly spaced vertical pinstripes in pale pistachio (#A9C49C at very low strength, the stripes hair-fine and about 3% of the width apart, so faint they read as a whisper of texture), the gentlest warm variation toward #F1E8D8. Evenly lit by soft morning window light from the top-left: no fold, no crease, no stain, no shadow, no vignette, no other pattern, no objects. Calm enough for dark ink and deep-rose text to read on it everywhere. The left/right and top/bottom edges must tile without a visible seam (the stripes continue exactly across the seams). No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: krem, çok soluk ince fıstık çizgiler; dikişsiz (2×2 yan yana ek yeri yok, çizgiler kesintisiz); leke/kat yok; koyu yazı her yerde okunur.
+
+#### 148. W2 Krem pamuk kırtasiye (kartlar, bantlar, form)
+
+- İndirme adı: `28-maison-patisserie__cream_paper.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/cream_paper.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, flat top-down texture of thick cream cotton stationery card (#FBF5EC): a soft felted tooth, a few faint long cotton fibres, a whisper of warm variation toward #F1E8D8, matte, no pattern at all. Evenly lit by soft morning window light from the top-left: no deckle edge, no fold, no crease, no stain, no printing, no shadow, no vignette. Calm enough for dark ink text everywhere. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: sakin krem, desensiz; dikişsiz; leke/baskı yok; koyu yazı okunur.
+
+#### 149. W3 Zarfın arkası (doily astar görünür)
+
+- İndirme adı: `28-maison-patisserie__env_back.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/env_back.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1560×1200 px (13:10) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+The back panel of an open landscape envelope, seen perfectly straight on, on a fully transparent background. The envelope occupies exactly x 7–93% and y 7–93% of the canvas (about 1.3 wide : 1 tall) — the same box is used later by env_front.png, flap.png, sleeve_band.png, bow.png and bow_untied.png, so keep it exactly there. We look at its inside: the panel is lined with soft rose-pink paper (#E8B4B8) printed in fine ivory with an elegant paper-doily lace pattern — small round rosettes of tiny petals, delicate leaf sprays and fine pierced-dot scrolls, evenly repeated, symmetrical about the vertical centre, quiet and low in contrast; along the top edge and both sides a slim rim of the envelope's own cream cotton paper (#FBF5EC, a fine felt tooth) shows. The top edge is straight and open (the flap is not drawn). Soft morning window light from the top-left, a gentle shade toward the bottom where the pocket will sit. No flap, no front pocket, no band, no ribbon, no card, no seal. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: zarf x %7–93 / y %7–93 kutusunda; içi gül pembesi kâğıt + fildişi doily baskı, kenarda krem pay; kapak/cep/bant yok; gölge/hâle yok; gerçek alfa.
+
+#### 150. W4 Zarfın ön cebi
+
+- İndirme adı: `28-maison-patisserie__env_front.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/env_front.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1560×1200 px (13:10) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_back.png (listede #149)
+
+```
+Only the front pocket of the same cream envelope as env_back.png, on the same 1560×1200 canvas and in exactly the same place, on a fully transparent background: the envelope box is again exactly x 7–93% and y 7–93% of the canvas, and the pocket spans the full envelope width (x 7–93%) from its top edge down to the envelope's bottom edge at 93%. Its top edge is one shallow, smooth arc: at 40% of the canvas height at both side edges, dipping gently to 45% at the horizontal centre, a clean crisp cut with the faint thickness of heavy paper visible along it. Thick cream cotton paper (#FBF5EC, a fine felt tooth) showing the softly folded side flaps and bottom flap of a real envelope with their gentle fold lines, softly lit by morning window light from the top-left. Everything above the pocket's edge is completely transparent. No flap, no band, no ribbon, no card, no doily on the pocket. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: cep tam genişlik; üst kenarı yanlarda %40, ortada %45'e inen sığ yay; üstü tamamen şeffaf; W3 ile üst üste konunca kenarlar çakışıyor; gerçek alfa.
+
+#### 151. W5 Dantel tarak kapak (kapalı, dış yüz)
+
+- İndirme adı: `28-maison-patisserie__flap.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/flap.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1560×1200 px (13:10) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+Only the closed flap of the same envelope, on the same 1560×1200 canvas and in exactly the same place, on a fully transparent background: the envelope box is again exactly x 7–93% and y 7–93% of the canvas; the flap hangs from a softly rounded fold along the envelope's top edge at 7% across the full envelope width (x 7–93%). It is made of pistachio-green paper (#A9C49C, a fine felt tooth, slightly deeper toward #4F6D49 only in the faintest fold shade). Its free lower edge is a row of ELEVEN small, even, round scallops, like the border of a paper doily, and the row as a whole follows one broad shallow curve: it meets the two side edges at 44% of the canvas height and its lowest, centre scallop reaches 60% of the canvas height. Along this scalloped edge runs a narrow pierced doily border about 4% of the canvas height deep: tiny pierced holes and fine pierced flower rosettes cut through the pistachio paper, each hole truly transparent (real alpha). The rest of the flap is plain pistachio paper with a hair-fine gold line (#B8995A) following the scallops just inside the pierced border. Soft morning window light from the top-left, a whisper of contact shade on the flap itself along its edge. Everything below the flap's edge is completely transparent. No band, no ribbon, no bow, no seal, no card. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: fıstık yeşili tam genişlik kapak; serbest kenarı 11 eşit küçük yuvarlak tarak, yanlarda %44, ortada %60 (V/sivri/dalgalı değil); delikler gerçekten şeffaf; ince altın çizgi; bant/fiyonk yok; altı şeffaf; gerçek alfa.
+
+#### 152. W6 Kapağın iç yüzü (açıkken dik)
+
+- İndirme adı: `28-maison-patisserie__flap_in.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/flap_in.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1560×860 px (1.814:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: flap.png (listede #151), env_back.png (listede #149)
+
+```
+The inside of the same scalloped envelope flap as flap.png, alone, seen straight on as it stands upright above the envelope when it is open, on a fully transparent background: exactly the same outline as flap.png but mirrored vertically — its straight fold edge runs along the BOTTOM at 87% of the image height, spanning x 7–93% of the width; its two straight sides rise to 35% of the image height, and its row of eleven small round scallops arches UP to its highest, centre scallop at 13% of the image height. The inside is lined with the same rose-pink paper printed with the fine ivory paper-doily lace pattern as env_back.png (small rosettes, leaf sprays, pierced-dot scrolls, low contrast); along the scalloped edge the same narrow pierced doily border cut through the paper (tiny holes truly transparent) and a slim rim of pistachio paper (#A9C49C) shows beyond it. Soft morning window light from the top-left. No band, no ribbon, no bow. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: katlama kenarı altta (%87), yanlar %35'e, tarak dizisi ortada %13'e çıkar; W3 ile aynı gül pembesi doily astar; kenarda delikli bordür + ince fıstık pay; düz renk değil; gerçek alfa.
+
+#### 153. W7 Gül pembesi kılıf bant (zarfı yatay saran)
+
+- İndirme adı: `28-maison-patisserie__sleeve_band.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/sleeve_band.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1560×1200 px (13:10) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_back.png (listede #149), flap.png (listede #151)
+
+```
+On the same 1560×1200 canvas as env_back.png and flap.png, in exactly the same place (the envelope box is x 7–93% and y 7–93% of the canvas, but the envelope itself is NOT drawn here), only a horizontal paper sleeve band that wraps the closed envelope like a pâtisserie box sleeve, on a fully transparent background: a band of smooth rose-pink paper (#E8B4B8, a fine felt tooth, a soft paper sheen) running horizontally from x 6% to x 94% of the canvas and from y 52% to y 72%; at both ends it turns over in a soft rounded fold, as if it bends around the envelope's side edges and continues behind it. Its top and bottom edges are each finished with a fine, even row of tiny scallops edged in a hair-fine gold foil line (#B8995A, a soft metallic shine); between them the band is plain rose paper with a faint, slightly deeper rose (#9B4F5A at very low strength) shade along its edges only. Soft morning window light from the top-left. Everything outside the band is fully transparent: no envelope, no flap, no ribbon, no bow, no sticker, no label. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: tek yatay gül pembesi bant (x %6–94 / y %52–72); iki uç yumuşak kıvrık; üst-alt kenar ince altın tarak; kurdele/etiket/yazı yok; zarf çizilmemiş; gerçek alfa.
+
+#### 154. W8 Gül saten kurdele + bağlı fiyonk
+
+- İndirme adı: `28-maison-patisserie__bow.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/bow.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1560×1200 px (13:10) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: sleeve_band.png (listede #153)
+
+```
+On the same 1560×1200 canvas as sleeve_band.png, in exactly the same place (the envelope box is x 7–93% and y 7–93%; the envelope and the sleeve band are NOT drawn here), only a rose satin ribbon tied in a bow, on a fully transparent background: a narrow ribbon of rose satin (#E8B4B8 with a soft luminous sheen and deeper rose #9B4F5A in its folds) runs horizontally along the centre line of the band, from x 6% to x 94% of the canvas and from y 60.5% to y 63.5%, its two ends turning over in a soft fold at the far left and right. At the horizontal centre it is tied in a full, soft, elegant bow: two plump rounded loops spanning x 39% to 61% and y 53% to 69%, a neat small knot centred at 50% of the width and 62% of the height, and two short tails falling from the knot, gently twisted once, ending in neat V-cut swallowtails at about (45%, 82%) and (55%, 82%). The satin catches soft morning window light from the top-left. Nothing on the knot (no flower, no charm, no pearl). Everything else fully transparent. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: kurdele y %60,5–63,5 boyunca x %6–94; fiyonk ilmekleri x %39–61 / y %53–69, düğüm (%50, %62); kuyruklar V kesik ~(%45, %82) ve (%55, %82); düğümde süs yok; bant/zarf çizilmemiş; gerçek alfa.
+
+#### 155. W9 Çözülmüş kurdele (fiyonk açılmış)
+
+- İndirme adı: `28-maison-patisserie__bow_untied.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/bow_untied.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1560×1200 px (13:10) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: bow.png (listede #154)
+
+```
+On the same 1560×1200 canvas as bow.png, in exactly the same place, on a fully transparent background, the same rose satin ribbon (#E8B4B8, soft sheen, deeper rose #9B4F5A in its folds) just after its bow has been untied: it still runs horizontally along the band's centre line (y 60.5–63.5%) from the far left (x 6%, the end turning over in a soft fold) to near the centre, and from near the centre to the far right (x 94%, also turning over), but there is NO bow, NO loop and NO knot: in the middle the two freed ends simply hang loose and soft, slightly crinkled where the knot was — the left end curls gently down to about 44% of the width and 80% of the height, the right end curls down to about 57% of the width and 77% of the height, each ending in the same V-cut swallowtail. The satin catches soft morning window light from the top-left. The envelope and the band are NOT drawn. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: aynı kurdele, fiyonk/ilmek/düğüm yok; ortada iki serbest uç ~(%44, %80) ve (%57, %77)'ye sarkar; kurdele çizgisi W8 ile aynı yükseklikte; gerçek alfa.
+
+#### 156. W10 Şekerlenmiş gül goncası (düğümün üstünde)
+
+- İndirme adı: `28-maison-patisserie__rosebud.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/rosebud.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 600×600 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A single sugared rose bud, alone, seen from the front and very slightly from above, on a fully transparent background, centred and filling about 70% of the canvas: a small, tightly furled garden rose bud in soft rose pink (#E8B4B8 deepening to #9B4F5A at the heart), its petals frosted with fine sparkling crystal sugar that catches the soft morning window light from the top-left, with two tiny sugared pistachio-green leaves (#A9C49C) tucked beneath it. No stem longer than the leaves, no ribbon, no pearl. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: tek şekerli gül goncası + iki küçük yaprak; şeker parıltısı gerçekçi; kurdele/sap yok; gerçek alfa.
+
+#### 157. W11 Zarftaki kart (boş)
+
+- İndirme adı: `28-maison-patisserie__card_small.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/card_small.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1400 px (5:7) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: cream_paper.png (listede #148)
+
+```
+A flat portrait invitation card, alone, seen perfectly straight on, on a fully transparent background: the thick cream cotton card of cream_paper.png (#FBF5EC) spanning x 7–93% and y 6–94% of the canvas, its top edge cut in a gentle row of small round scallops like a doily edge, the other three edges straight with softly rounded corners. A fine gold foil line (#B8995A) follows the whole outline about 5% inside the edge, and at the top centre, just inside the scalloped edge, a small delicate pierced paper-doily rosette (tiny holes truly transparent) about 22% of the card's width. Below the rosette the card is completely EMPTY paper (the website sets the names, the date and the venue there in HTML). A hair-fine contact shade on the card's own edge only, soft morning window light from the top-left. No flowers, no ribbon, no photo. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: krem kart, üst kenarı küçük tarak; ince altın çizgi; üst ortada küçük delikli doily rozeti; altı tamamen boş; gerçek alfa.
+
+#### 158. W12 Krema dantelli oval çerçeve (home portresi)
+
+- İndirme adı: `28-maison-patisserie__cameo_frame.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/cameo_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1250 px (4:5) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+An upright oval frame made entirely of piped white royal icing, like the finest lacework on a classic wedding cake, alone, seen straight on, on a fully transparent background: a ring of delicate piped scrolls, tiny drop-loops, beaded borders and small piped lace points in soft white icing (#FBF5EC with gentle cream shade #F1E8D8 in the relief), a few tiny gold dragées (#B8995A) set into it; at the top centre and at the bottom centre a small cluster of sugar flowers — blush garden roses (#E8B4B8), a pistachio-green hydrangea floret or two and tiny sugar leaves (#A9C49C). The frame's outer edge spans about x 6–94% and y 6–94% of the canvas. In the middle an upright OVAL photo window exactly 680 px wide and 850 px tall (4:5), its bounding box from x 160 px to 840 px and from y 215 px to 1065 px, filled with flat pure green #00FF00 (no texture, no shading, a clean smooth oval edge, nothing over it — the top sugar flowers stay above y 205 px and the bottom ones below y 1075 px). Soft morning window light from the top-left giving the piping a crisp relief. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: tek dikey oval krema dantel çerçeve; pencere düz `#00FF00` oval, kutusu ~x 160–840 / y 215–1065 (4:5); şeker çiçekler pencereye binmiyor; gerçek alfa.
+
+#### 159. W13 Altın kenarlı porselen pasta tabağı (story çerçevesi)
+
+- İndirme adı: `28-maison-patisserie__plate_frame.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/plate_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1000 px (1:1) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A round fine white porcelain dessert plate, alone, seen perfectly from above, on a fully transparent background: the plate's outer edge spans x 6–94% of the canvas (centred), its rim gently scalloped and finished with a fine polished gold band (#B8995A, a crisp metallic highlight) on the very edge and a second hair-fine gold line where the rim meets the well; on the rim a delicate hand-painted garland of tiny blush rose buds (#E8B4B8) and small pistachio-green leaves (#A9C49C) all the way round, very fine and refined. In the centre a perfectly round photo window exactly 700 px in diameter, centred at (500 px, 500 px) — from x 150 to 850 px and y 150 to 850 px — filled with flat pure green #00FF00 (no texture, no shading, a clean circular edge, nothing over it). The glaze has a soft glossy sheen from the morning window light at the top-left. No food, no fork, no doily. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: yukarıdan yuvarlak porselen tabak, tarak kenar + altın şerit, kenarda ince gül-yaprak çelengi; pencere düz `#00FF00` daire, çap 700, merkez (500, 500); gerçek alfa.
+
+#### 160. W14 Altın konsollu cam vitrin rafı
+
+- İndirme adı: `28-maison-patisserie__shelf.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/shelf.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×320 px (5:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A single pâtisserie display-case shelf, alone, seen straight on at eye level, on a fully transparent background: a long, thick shelf of clear polished glass seen edge-on with a faint pale-green glass edge and soft reflections, its front edge capped by a slim polished gold rail (#B8995A, crisp highlights), resting on two delicate scrolled gold brackets beneath it near its two ends. The shelf spans about x 6–94% and y 20–80% of the canvas (the glass top surface a slim sliver in light perspective, the brackets below). The glass is truly see-through (real alpha in the clear parts), shown by crisp highlights and edge reflections from soft morning window light at the top-left. Nothing on the shelf. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: tek yatay cam raf, ön kenarı altın ray, altında iki kıvrık altın konsol; cam saydam; üstünde nesne yok; gerçek alfa.
+
+#### 161. W15 Fıstık yeşili pastane vitrini (mekân fotoğrafı)
+
+- İndirme adı: `28-maison-patisserie__vitrine_wide.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/vitrine_wide.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1150 px (32:23) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+The front of a small, elegant Parisian pâtisserie shop window, alone, seen perfectly straight on, on a fully transparent background, photorealistic: a painted wooden shopfront in pistachio green (#A9C49C with soft deep-pistachio #4F6D49 shade in its mouldings), its outer edge spanning about x 6–94% and y 6–94% of the canvas. Across the top, a short scalloped awning valance of rose-and-cream striped canvas (#E8B4B8 and #FBF5EC) from about y 6% to 18%, below it a slim gilded moulding (#B8995A); at the two sides slim fluted pilasters with a tiny painted garland of blush roses; along the bottom a sill with a small window box of blush roses and pale greenery. In the middle a landscape photo window exactly 1280 px wide and 720 px tall (16:9), its top-left corner at x 160 px, y 250 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, square corners, nothing over it — no glass reflection, no lettering, no curtain). Soft morning window light from the top-left. The awning and the woodwork carry no text, no shop name, no number. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: pencere düz `#00FF00`, 1280×720 (16:9), sol üst (160, 250); üstte çizgili tarak tente, yanlarda pilaster, altta güllü pencere kutusu; tente/ahşapta yazı yok; gerçek alfa.
+
+#### 162. W16 Köşe demeti (gül + fıstık yaprağı + saten kurdele)
+
+- İndirme adı: `28-maison-patisserie__corner_spray.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/corner_spray.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1000 px (6:5) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A small, restrained corner spray growing out from near the top-left corner toward the centre, alone, on a fully transparent background, photorealistic: two blush garden roses (#E8B4B8, soft layered petals, deeper rose #9B4F5A at the heart), one rose bud, a few sprigs of small soft pistachio-green leaves (#A9C49C), a tiny sprig of white sweet-pea-like blossom, and one short curl of rose satin ribbon trailing out of it with a soft sheen; one pistachio macaron (#A9C49C shells, cream filling) resting at its edge. Light and airy, not dense. It reaches toward the top and left sides of the image but stays 6% inside them, and the bottom-right 40% of the canvas is completely empty. Soft morning window light from the top-left. No vase, no glitter, no other colours. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: sol üstten çıkan hafif küme (iki gül, gonca, yaprak, kurdele, bir makaron); sağ alt %40 boş; kenara değmiyor; gerçek alfa.
+
+#### 163. W17 Krema sıkma ayırıcı (bölüm ayırıcı)
+
+- İndirme adı: `28-maison-patisserie__divider.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/divider.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×200 px (8:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A slim horizontal divider of piped white royal icing, alone, on a fully transparent background: a delicate line of tiny, even piped scallops and drop-loops (#FBF5EC with soft cream shade #F1E8D8 in the relief) running straight across x 8–92% of the canvas at the vertical centre, with one small gold dragée (#B8995A, a crisp highlight) at the centre flanked by two smaller ones, and tiny single dragées spaced evenly along the line, the piping tapering finer toward both ends. Soft morning window light from the top-left. Elegant and fine. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: yatay ince krema tarak çizgisi, ortada üç altın şeker inci; iki uçta boşluk; gerçek alfa.
+
+#### 164. W18 Makaronlu porselen pasta standı (imza süsü)
+
+- İndirme adı: `28-maison-patisserie__cake_stand.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/cake_stand.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 800×900 px (8:9) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A small footed white porcelain cake stand with a fine gold edge (#B8995A), alone, seen from the front at a low eye level, on a fully transparent background, photorealistic: on its plate a neat little pyramid of seven French macarons — pistachio (#A9C49C), rose (#E8B4B8) and cream (#FBF5EC), with smooth domed shells, fine ruffled feet and soft fillings — crowned by one sugared rose bud; two gold dragées resting at the foot of the stand. The stand spans about x 18–82% and y 8–92% of the canvas. Soft morning window light from the top-left. No cake, no candles, no doily. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: tek ayaklı porselen stand, üstünde 7 makaronlu küçük piramit + şekerli gonca; yalnız palet renkleri; gerçek alfa.
+
+#### 165. W19 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `28-maison-patisserie__accent_1.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/accent_1.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_1 (number 1 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft morning window light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one French macaron seen at a three-quarter angle, pistachio shells (#A9C49C) with fine ruffled feet and a cream filling; 2 = one round gold sugar pearl dragée (#B8995A) with a soft metallic sheen and a crisp highlight; 3 = one single loose blush rose petal (#E8B4B8), softly cupped and silky, a deeper rose shade in its fold.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (makaron, altın şeker inci, gül yaprağı); kenara değmiyor; gerçek alfa.
+
+#### 166. W19 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `28-maison-patisserie__accent_2.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/accent_2.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_2 (number 2 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft morning window light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one French macaron seen at a three-quarter angle, pistachio shells (#A9C49C) with fine ruffled feet and a cream filling; 2 = one round gold sugar pearl dragée (#B8995A) with a soft metallic sheen and a crisp highlight; 3 = one single loose blush rose petal (#E8B4B8), softly cupped and silky, a deeper rose shade in its fold.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (makaron, altın şeker inci, gül yaprağı); kenara değmiyor; gerçek alfa.
+
+#### 167. W19 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `28-maison-patisserie__accent_3.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/accent_3.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_3 (number 3 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft morning window light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one French macaron seen at a three-quarter angle, pistachio shells (#A9C49C) with fine ruffled feet and a cream filling; 2 = one round gold sugar pearl dragée (#B8995A) with a soft metallic sheen and a crisp highlight; 3 = one single loose blush rose petal (#E8B4B8), softly cupped and silky, a deeper rose shade in its fold.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (makaron, altın şeker inci, gül yaprağı); kenara değmiyor; gerçek alfa.
+
+#### 168. W20 Website hero + paylaşım görseli (og:image kaynağı)
+
+- İndirme adı: `28-maison-patisserie__web_hero.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/parts/web_hero.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1024 px (3:2) · opak · PNG
+- Ek görsel: flap.png (listede #151), sleeve_band.png (listede #153), bow.png (listede #154), rosebud.png (listede #156), page_ground.png (listede #147), cake_stand.png (listede #164)
+
+```
+Wide horizontal still life, photorealistic product photography, soft morning window light from the top-left: the closed landscape cream envelope with its scalloped pistachio doily-edged flap (as flap.png), wrapped by the rose-pink sleeve band with fine gold scalloped edges (as sleeve_band.png) and tied with the rose satin bow crowned by a sugared rose bud (as bow.png and rosebud.png), lying slightly below the centre on cream pinstriped pastry paper (as page_ground.png); at the left a small footed porcelain cake stand with a pyramid of pistachio, rose and cream macarons (as cake_stand.png); at the right a gold-rimmed porcelain plate with two macarons and a silver cake fork, a few gold dragées and blush rose petals scattered; behind, softly out of focus, the pistachio-green woodwork and striped awning of a pâtisserie window. Only pistachio, rose, cream and a little gold. The top 20% of the image is calm and soft (only out-of-focus background). This image is cropped to 1200×630 for link previews: keep the whole envelope, band and bow visible with at least 5% empty margin below them. No people. No text, letters, numbers, monograms, logos, shop names or watermarks.
+```
+
+Kontrol: zarf + bant + fiyonk + gonca bütün, altında ≥%5 boşluk; üst %20 sakin; yazı/logo/tabela yok.
+
+#### 169. P1 — Ön yüz
+
+- İndirme adı: `28-maison-patisserie__print__invitation_front_r_5x7.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/print/invitation_front_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+- Ek görsel: cream_paper.png (listede #148), divider.png (listede #163), bow.png (listede #154), rosebud.png (listede #156)
+
+```
+The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the thick cream cotton card of cream_paper.png (#FBF5EC). Across the top, between 9% and 91% of the width, a delicate garland of fine piped white royal-icing scallops and drop-loops with tiny gold dragées (as divider.png) hanging in a gentle double swag from near the top corners, and at its centre a small rose satin bow (#E8B4B8) crowned by a sugared rose bud with two tiny pistachio-green leaves (as bow.png and rosebud.png); nothing in this top band reaches lower than 17% of the height. Along the bottom, between 93% and 96% of the height and from 14% to 86% of the width, a fine row of tiny scallops in gold foil (#B8995A) with one small gold dragée at its centre. The rectangle from 19% to 91% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm paper (the names, date and venue are set there): no icing, no petal, no line, no shadow, no stain in it. No ornament within 8% of the left and right edges. Soft morning window light from the top-left. Only cream, rose, pistachio and a little gold. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: tam taşma; %19–%91 × %10–%90 tamamen boş; krema çelengi + fiyonk + gonca yalnız üstte (%17'nin üstünde), altın tarak çizgi yalnız altta; yan %8 boş; yazı yok.
+
+#### 170. P2 — Arka yüz
+
+- İndirme adı: `28-maison-patisserie__print__invitation_back_r_5x7.png`
+- Hedef: `collections/28_Maison_Patisserie/assets/gpt/print/invitation_back_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+
+```
+The back of the same printed wedding invitation, full bleed, portrait 5.25:7.25, perfectly flat: the same thick cream cotton card, only a short line of fine piped white royal-icing scallops with five tiny gold dragées across the top centre (between 30% and 70% of the width) and one small sugared rose bud at its middle, its lowest point staying above 11% of the height. The whole area below 13% of the height, from 9% to 91% of the width, is COMPLETELY EMPTY paper (a schedule and a QR code are set there): no icing, no line, no shadow, no stain. No ornament within 8% of the left and right edges. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: ön yüzle aynı kâğıt; yalnız üst ortada kısa krema çizgisi + gonca (%11'in üstünde); %13'ün altı boş; yazı/QR yok.
+
+### 29_Celestial_Observatory
+
+Sohbetin ilk mesajı (dosyanın GPT notu):
+
+```
+This design ("Celestial Observatory") is being REDESIGNED from scratch on 2026-10-22. Generate PAKET 5R (website layers) first, in order and in ONE chat, then PAKET 6R (printable invitation). PAKET 2 (sample photos) ALREADY EXISTS — do not regenerate it. Sections marked GEÇERSİZ are not wanted. Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, names, dates, initials, monograms, logos, brand marks, QR codes or watermarks in any image** — also no zodiac signs or glyphs, no constellation names, no star-catalogue labels, and the astrolabe, the planisphere rings and the telescope carry ONLY plain engraved tick marks (no numerals, no hour letters, no degree numbers, no maker's name). This is an 18th-century observatory library: real midnight-blue cotton paper, real engraved gold leaf, real antique brass instruments, real silver-ivory chart paper — classic, romantic and rich. Not science fiction, not a planetarium poster: no coloured nebulae, no galaxies, no neon, no lens flares, no rockets, no flowers, no candles, no lake. Give W1 `night_paper.png`, W3 `env_back.png` and W7 `astro_plate.png` as the style reference of every later part: the same midnight-blue paper, the same engraved gold leaf, the same warm antique brass, the same cool soft moonlight from the top-left with one warm highlight on metal. Parts drawn on the same envelope canvas (W3, W4, W5) keep the envelope in exactly the same box; W7 and W8 share one canvas and one centre.
+```
+
+#### 171. W1 Gece mavisi pamuk kâğıt (sayfa zemini, kapak sayfası)
+
+- İndirme adı: `29-celestial-observatory__night_paper.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/parts/night_paper.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, perfectly flat top-down texture of thick midnight-blue cotton paper (#11193A, drifting very gently toward #0A0F24 in soft clouds), the kind used for luxury engraved stationery: a soft felt tooth, a few faint long fibres, and — printed very faintly in slightly lighter midnight blue (#1B2550), barely visible — a delicate engraved star chart: thin concentric coordinate arcs, a few dotted constellation lines and tiny star points, spread evenly so no area is busier than another. Here and there a few very small specks of real gold leaf (#C8A24E), sparse and tiny. Evenly lit by cool soft moonlight from the top-left, no fold, no crease, no stain, no vignette, no bright spot. Very low contrast so light ivory and gold text reads on it everywhere. The left/right and top/bottom edges must tile without a visible seam. No zodiac signs, no constellation figures. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: dikişsiz (2×2 yan yana ek yeri yok); gece mavisi `#11193A` civarı; gravür harita çok soluk, altın pullar seyrek ve küçük; üstüne açık renk yazı her yerde okunur; harf/rakam yok.
+
+#### 172. W2 Gümüş-fildişi harita kâğıdı (kartlar, bantlar, form)
+
+- İndirme adı: `29-celestial-observatory__chart_paper.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/parts/chart_paper.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, perfectly flat top-down texture of heavy silver-ivory chart paper (#EEEBE3) from an old star atlas: a fine smooth laid surface with the faintest chain lines, a soft cool-ivory tone with only the gentlest natural variation, and — printed extremely faintly in pale gold-brown ink (#7A5A1E at very low strength) — a sparse engraved grid of thin coordinate arcs and meridian lines, so faint it reads as texture. Evenly lit by cool soft moonlight from the top-left, no fold, no crease, no foxing, no stain, no vignette. Calm enough for fine dark ink text to read on it everywhere. The left/right and top/bottom edges must tile without a visible seam. No stars bigger than a dot, no constellation figures, no zodiac signs. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: dikişsiz; gümüş-fildişi `#EEEBE3`; koordinat çizgileri çok soluk; leke/kat yok; koyu yazı her yerde okunur.
+
+#### 173. W3 Zarfın arkası (iç yıldız atlası astarı)
+
+- İndirme adı: `29-celestial-observatory__env_back.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/parts/env_back.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1100×1400 px (11:14) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: night_paper.png (listede #171)
+
+```
+The back panel of an open portrait envelope made of the midnight-blue cotton paper of night_paper.png, seen perfectly straight from the front, on a fully transparent background. The envelope occupies exactly x 7–93% and y 6–94% of the canvas (a portrait rectangle with very slightly softened corners). We see its inside: it is lined with an antique star-atlas print on silver-ivory chart paper (#EEEBE3) — finely engraved in gold-brown ink (#7A5A1E): concentric coordinate arcs and meridian lines radiating from a point above the top centre, dotted constellation lines joining small engraved stars of different sizes, a few stars picked out in real raised gold leaf (#C8A24E) — covering the panel almost completely, with a slim margin of midnight-blue paper showing along the top and both sides; the lining is richest in the upper half (where it shows through the dome window) and calmer toward the bottom, with a very gentle shade toward the bottom where the front pocket will sit. No flap, no front pocket, no astrolabe, no card inside. Cool soft moonlight from the top-left. No constellation figures, no zodiac signs, no labels. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: zarf kutusu x %7–93 · y %6–94; iç yüz yıldız atlası astarı (gravür yaylar, noktalı takımyıldızlar, birkaç varak yıldız), kenarda ince gece mavisi pay; kapak/cep/usturlap yok; harf/rakam yok; gerçek alfa.
+
+#### 174. W4 Zarfın ön cebi (kubbe pencereli)
+
+- İndirme adı: `29-celestial-observatory__env_front.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/parts/env_front.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1100×1400 px (11:14) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_back.png (listede #173), night_paper.png (listede #171)
+
+```
+Only the front pocket of the same portrait midnight-blue envelope as env_back.png, on the same 1100×1400 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 7–93% and y 6–94% of the canvas; the pocket covers the whole envelope (x 7–93%, y 6–94%) EXCEPT one large concave semicircular cut-out taken from its top edge, like a dome-shaped window: the cut-out is a perfect half circle whose centre is at x 50%, y 6% of the canvas and whose radius is 39.5% of the canvas width — so along the top edge the cut runs from x 10.5% to x 89.5%, and its deepest point is at x 50%, y 37%. The two narrow crescent-shaped side flaps therefore rise up to the envelope's two top corners. The cut edge is crisp and clean with the faint thickness of heavy paper visible, finished with a hair-fine engraved gold-leaf line (#C8A24E) just inside the cut. The midnight-blue cotton paper of night_paper.png (no star-chart print on the pocket — plain paper with its soft tooth), the soft fold lines of the side flaps and the bottom flap barely visible, cool moonlight from the top-left. Everything inside the semicircular cut-out is completely transparent. No flap, no astrolabe, no card. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: cep tam zarf; üstten oyulmuş yarım daire kesik: y %6'da x %10,5–89,5, en derin (x %50, y %37); yan kanatlar iki üst köşeye çıkar; kesik içi tamamen şeffaf; ince altın çizgi; gerçek alfa.
+
+#### 175. W5 Yarım daire kubbe kapak (kapalı, dış yüz)
+
+- İndirme adı: `29-celestial-observatory__flap.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/parts/flap.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1100×1400 px (11:14) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: night_paper.png (listede #171)
+
+```
+Only the closed flap of the same portrait midnight-blue envelope, on the same 1100×1400 canvas and in exactly the same place, on a fully transparent background. The flap is a perfect HALF CIRCLE: its straight hinge edge lies along the envelope's top edge at 6% of the canvas height, from x 7% to x 93% (the full envelope width); its free edge is one smooth semicircular arc centred at x 50%, y 6%, with a radius of 43% of the canvas width, so its lowest point is at x 50%, y 40%. Not a V, not a U, not scalloped. The midnight-blue cotton paper of night_paper.png; along the arc a narrow engraved border of real gold leaf (#C8A24E): a fine double rule with tiny star points between the rules; inside it, raised gold-leaf engraving of a few dotted constellation lines and small six-pointed stars arranged like the gores of a dome — thin lines radiating from the hinge centre toward the arc — elegant and sparse, most of the flap calm paper. A whisper of contact shade on the flap itself along its arc, cool moonlight from the top-left with a warm glint on the gold. Everything below the flap's arc and in the two top corners outside the half circle is completely transparent. No astrolabe, no seal, no card. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: kapak tam yarım daire: düz kenar y %6'da x %7–93, yay en alt (x %50, y %40); altın varak çift çizgi bordür + seyrek takımyıldız gravürü; köşeler ve altı şeffaf; gerçek alfa.
+
+#### 176. W6 Kapağın iç yüzü — gözlemevi kubbesi (açıkken dik)
+
+- İndirme adı: `29-celestial-observatory__flap_in.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/parts/flap_in.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1100×600 px (11:6) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: flap.png (listede #175)
+
+```
+The inside of the same half-circle envelope flap, alone, seen straight on as it stands upright when the envelope is open, on a fully transparent background: the outline of flap.png mirrored vertically. Its straight fold edge is at the BOTTOM, along 94% of the image height, spanning x 7–93% of the width (exactly as wide as the envelope); its semicircular edge rises in one smooth arc to its highest point at x 50%, about 15% of the image height. The inside is lined with deep midnight-blue paper (#0A0F24 toward #11193A) and engraved in real gold leaf (#C8A24E, warm highlights #E2C27A) like the inside of an observatory dome seen from below: eight slender curved meridian ribs rising from the fold edge and converging toward the top of the arc, a fine gold double rule following the arc, a narrow vertical slit-shaped band of slightly lighter midnight blue up the centre, and tiny gold and silver-white star points scattered between the ribs. Rich but calm. A slim margin of midnight-blue paper beyond the gold rule. Cool moonlight from the top-left. No astrolabe, no telescope, no moon, no flowers. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: düz katlama kenarı altta (%94), yay ortada ~%15'e çıkar; gece mavisi iç, altın varak meridyen kaburgaları + yıldızlar; kubbe silueti okunuyor; harf/rakam yok; gerçek alfa.
+
+#### 177. W7 Pirinç usturlap — ana disk (mater)
+
+- İndirme adı: `29-celestial-observatory__astro_plate.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/parts/astro_plate.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 800×800 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+The main body of an antique brass astrolabe, alone, seen perfectly straight from the front, on a fully transparent background: a round brass disc (the mater) whose centre is exactly at x 50%, y 53% of the canvas and whose diameter is 70% of the canvas width (it spans x 15–85%, y 18–88%), with a raised outer rim (the limb) engraved with a ring of evenly spaced fine tick marks only — short and long ticks, absolutely no numerals, no letters; inside the rim a recessed plate of slightly darker warm brass (#9B7A3C) engraved with a delicate pattern of concentric arcs (almucantars) and curved lines, and a small domed brass pin exactly at the centre. On top of the disc, centred, an ornate pierced brass throne in a symmetrical scrolled shape (spanning about x 40–60%, y 10–19%) carrying a small round brass shackle ring at the very top (around y 7–11%). Real antique brass with a gentle patina, hand-worn bright edges, a warm highlight on the rim from soft moonlight at the top-left. NO rete or star pointer on this disc (that is a separate part). No numerals, no letters, no zodiac signs, no maker's mark, no ribbon. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: tek pirinç disk, merkezi (x %50, y %53), çapı %70; kenarda yalnız çentik çizgileri (rakam/harf yok); ortada pim; üstte oyma taht + halka; rete yok; gerçek alfa.
+
+#### 178. W8 Pirinç usturlap — dönen rete (yıldız işaretçili oyma disk)
+
+- İndirme adı: `29-celestial-observatory__astro_rete.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/parts/astro_rete.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 800×800 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: astro_plate.png (listede #177)
+
+```
+Only the rete of the same antique brass astrolabe as astro_plate.png, on the same 800×800 canvas and with EXACTLY the same centre (x 50%, y 53%), on a fully transparent background — the disc, rim and throne are NOT drawn. The rete is a lace-like pierced brass star map: an outer circular ring with a diameter of 60% of the canvas width (it fits just inside the astrolabe's raised rim), an off-centre inner ring (the ecliptic ring, touching the outer ring on one side), and between them graceful curling brass tracery — flame-shaped and leaf-shaped star pointers, about twelve of them, each ending in a fine sharp point, some tipped with a tiny bead of gold (#E2C27A) — all joined by slender scrolls; a small round boss with a hole exactly at the centre (the pin passes through it). Everything between the brass tracery is TRULY TRANSPARENT (real alpha), so the plate beneath shows through. Real antique brass (#9B7A3C, highlights #E2C27A) slightly brighter than the plate, a warm highlight from soft moonlight at the top-left. No numerals, no letters, no star names, no zodiac signs. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: yalnız rete; merkez W7 ile aynı (x %50, y %53); dış halka Ø %60; oyma işaretçiler arası gerçekten şeffaf; harf/rakam yok; gerçek alfa.
+
+#### 179. W9 Zarftan yükselen kart (boş)
+
+- İndirme adı: `29-celestial-observatory__card_small.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/parts/card_small.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1400 px (5:7) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: chart_paper.png (listede #172)
+
+```
+A flat portrait invitation card, alone, seen perfectly straight on, on a fully transparent background: the heavy silver-ivory chart paper of chart_paper.png (#EEEBE3) with crisp square corners very slightly softened, spanning x 7–93% and y 6–94% of the canvas; a fine double border of real gold leaf (#C8A24E) inset about 5% from the card's edge, with a tiny six-pointed star at each of its four corners; at the top centre, inside the border, a small engraved gold-leaf crescent moon cradling three tiny stars, about 18% of the card's width. Below it the whole card is EMPTY paper (the website sets the names, the date and the venue there in HTML). A hair-fine contact shade on the card's own edge only, cool moonlight from the top-left with a warm glint on the gold. No photo, no flowers. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: boş harita kâğıdı kart; altın varak çift bordür + köşe yıldızları; üst ortada küçük hilal + üç yıldız; altı tamamen boş; yazı yok; gerçek alfa.
+
+#### 180. W10 Gök madalyonu (home portresi, yuvarlak pencere)
+
+- İndirme adı: `29-celestial-observatory__medallion_frame.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/parts/medallion_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1200 px (1:1) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A round celestial medallion picture frame, alone, seen straight on, on a fully transparent background: a moulded ring of real gilded gold leaf (#C8A24E, highlights #E2C27A, soft shadows #7A5A1E) with a fine beaded inner edge, surrounded by a radiating sunburst of slender gold-leaf rays of alternating lengths, with a small six-pointed star at the tip of every fourth ray, the whole ornament spanning about x 6–94% and y 6–94% of the canvas, perfectly symmetrical. In the exact centre a perfectly CIRCULAR photo window with a diameter of exactly 760 px, centred at x 600 px, y 600 px (its bounding square from 220 to 980 px), filled with flat pure green #00FF00 (no texture, no shading, a clean round edge, nothing over it). Cool soft moonlight from the top-left, a warm glint on the gold. No glass, no flowers, no moon face. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: pencere düz `#00FF00` daire, Ø 760 px, merkez (600, 600); altın varak halka + ışın demeti simetrik; pencereye bir şey binmiyor; gerçek alfa.
+
+#### 181. W11 Planisfer halkası (story çerçevesi, yuvarlak pencere)
+
+- İndirme adı: `29-celestial-observatory__planisphere_frame.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/parts/planisphere_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1200 px (1:1) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A round antique brass planisphere frame, alone, seen straight on, on a fully transparent background: a wide flat ring of warm antique brass (#9B7A3C, highlights #E2C27A) whose outer edge spans x 6–94% and y 6–94% of the canvas (diameter 88%), with a fine raised bead along its outer edge and a raised inner lip around the window; on the ring's inner band a fine engraved scale of evenly spaced short tick marks and, between the outer bead and the scale, a plain smooth brass band (a separate rotating dial ring will sit there); four tiny domed rivets at top, bottom, left and right. In the exact centre a perfectly CIRCULAR photo window with a diameter of exactly 840 px, centred at x 600 px, y 600 px (its bounding square from 180 to 1020 px), filled with flat pure green #00FF00 (no texture, no shading, a clean round edge, nothing over it). Real brass with a gentle patina, cool moonlight from the top-left with one warm highlight. No numerals, no letters, no zodiac signs, no star map over the window. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: pencere düz `#00FF00` daire, Ø 840 px, merkez (600, 600); geniş pirinç halka, yalnız çentikler; dış bantta düz pirinç (W12 için); harf/rakam yok; gerçek alfa.
+
+#### 182. W12 Planisfer dönen derece halkası (W11'in üstüne)
+
+- İndirme adı: `29-celestial-observatory__planisphere_dial.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/parts/planisphere_dial.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1200 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: planisphere_frame.png (listede #181)
+
+```
+Only a thin open rotating dial ring for the same planisphere frame as planisphere_frame.png, on the same 1200×1200 canvas and with exactly the same centre (x 600 px, y 600 px), on a fully transparent background — the frame and the window are NOT drawn. The ring is a narrow band of slightly brighter polished brass (#B08A45 toward #E2C27A) with an outer diameter of 86% of the canvas width and an inner diameter of 76%: engraved around it a crisp scale of evenly spaced tick marks (every tenth tick longer), and at eight evenly spaced points a tiny six-pointed star in raised gold leaf; one small triangular brass pointer on its inner edge at the top. Everything inside the inner diameter and outside the outer diameter is TRULY TRANSPARENT (real alpha). Cool moonlight from the top-left, a warm highlight along the top-left of the ring. No numerals, no letters, no zodiac signs. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: yalnız ince halka, merkez (600, 600), dış Ø %86, iç Ø %76; çentikler + 8 küçük yıldız + üstte tek işaretçi; içi ve dışı şeffaf; harf/rakam yok; gerçek alfa.
+
+#### 183. W13 Pirinç çerçeveli gök haritası panosu (mekân, geniş pencere)
+
+- İndirme adı: `29-celestial-observatory__venue_frame.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/parts/venue_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1000 px (8:5) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A wide antique star-chart display frame, alone, seen straight on, on a fully transparent background: a slim moulded frame of warm antique brass (#9B7A3C, highlights #E2C27A) with small rounded corner bosses, around a mat of silver-ivory chart paper (#EEEBE3) engraved very finely in gold-brown ink (#7A5A1E) with a border of thin coordinate arcs and tick marks and a small engraved star at each corner of the mat; the frame's outer edge spans about x 6–94% and y 6–94% of the canvas. In the mat a landscape photo window exactly 1360 px wide and 765 px tall (16:9), its top-left corner at x 120 px, y 110 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, nothing over it). Cool moonlight from the top-left, a warm highlight on the brass. No glass, no telescope, no numerals, no letters. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: pencere düz `#00FF00`, 1360×765 (16:9), sol üst (120, 110); ince pirinç çerçeve + gravürlü harita kâğıdı paspartu; harf/rakam yok; gerçek alfa.
+
+#### 184. W14 Köşe süsü (altın takımyıldız + hilal)
+
+- İndirme adı: `29-celestial-observatory__corner_ornament.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/parts/corner_ornament.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1000 px (6:5) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A restrained corner ornament growing out from near the top-left corner toward the centre, alone, on a fully transparent background: fine engraved lines of real raised gold leaf (#C8A24E, highlights #E2C27A) — two thin concentric coordinate arcs sweeping from the top edge to the left edge, a delicate dotted constellation line linking six or seven small six-pointed gold stars of different sizes along the arcs, one slim gold crescent moon nestled between the arcs, and a sprinkle of tiny silver-white star dots (#E6E9F1). Elegant and airy, mostly empty space between the lines. It reaches toward the top and left sides but stays 6% inside them; the bottom-right half of the canvas is completely empty. Cool moonlight from the top-left. No flowers, no planets in colour, no zodiac signs, no figures. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: sol üstten çıkan ince altın yaylar + noktalı takımyıldız + hilal; sağ alt yarı boş; çiçek/burç yok; gerçek alfa.
+
+#### 185. W15 Ay evreleri dizisi (bölüm ayırıcı)
+
+- İndirme adı: `29-celestial-observatory__divider.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/parts/divider.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×200 px (8:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A slim horizontal divider of seven small moon phases in real gold leaf, alone, on a fully transparent background, evenly spaced along a straight line at the vertical centre across x 8–92% of the canvas: from left to right a thin waxing crescent, a half moon, a waxing gibbous, a full moon in the middle (slightly larger, with a fine engraved ring around it), a waning gibbous, a half moon and a thin waning crescent — each a crisp gilded disc or crescent (#C8A24E, warm highlights #E2C27A) with the dark part left empty (transparent, only a hair-fine gold outline), joined by a hair-fine dotted gold line with two tiny stars at its ends. Elegant and fine. Cool moonlight from the top-left. No faces on the moons. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: yatay 7 ay evresi, ortada dolunay; karanlık kısımlar şeffaf (ince kontur); iki uçta boşluk; yüz yok; gerçek alfa.
+
+#### 186. W16 Küçük pirinç teleskop (imza süsü)
+
+- İndirme adı: `29-celestial-observatory__telescope.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/parts/telescope.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×700 px (10:7) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A small antique brass refracting telescope on a slender folding brass tripod, alone, seen from the side, its tube angled up to the right at about 30 degrees, on a fully transparent background: a polished brass tube (#9B7A3C, highlights #E2C27A) with two fine ring collars and a narrow dark eyepiece, a gently flared objective end with a thin dark lens rim, mounted on a small brass yoke on a three-legged tripod with delicate turned legs. Real antique brass with a gentle patina, a warm highlight from soft moonlight at the top-left. The telescope spans about x 10–90% and y 12–88% of the canvas. No light beam, no stars, no engraving with letters or numbers, no maker's plate. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: tek pirinç teleskop + üç ayak, sağa yukarı ~30°; ışın/yıldız yok; yazı/plaka yok; gerçek alfa.
+
+#### 187. W17 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `29-celestial-observatory__accent_1.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/parts/accent_1.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_1 (number 1 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, cool soft moonlight from the top-left with a warm glint on gold. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one small six-pointed star cut from real gold leaf (#C8A24E), slightly raised with a crisp warm highlight on its points; 2 = one slim crescent moon cut from real gold leaf (#C8A24E, highlight #E2C27A), its inner curve softly bevelled, no face; 3 = a tiny loose cluster of five or six silver-white and pale-gold star dust specks (#E6E9F1 and #E2C27A) of different sizes, each a crisp point of light with no glow or halo around it.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (altın yıldız, hilal, yıldız tozu); hâle/ışıma yok; kenara değmiyor; gerçek alfa.
+
+#### 188. W17 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `29-celestial-observatory__accent_2.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/parts/accent_2.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_2 (number 2 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, cool soft moonlight from the top-left with a warm glint on gold. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one small six-pointed star cut from real gold leaf (#C8A24E), slightly raised with a crisp warm highlight on its points; 2 = one slim crescent moon cut from real gold leaf (#C8A24E, highlight #E2C27A), its inner curve softly bevelled, no face; 3 = a tiny loose cluster of five or six silver-white and pale-gold star dust specks (#E6E9F1 and #E2C27A) of different sizes, each a crisp point of light with no glow or halo around it.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (altın yıldız, hilal, yıldız tozu); hâle/ışıma yok; kenara değmiyor; gerçek alfa.
+
+#### 189. W17 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `29-celestial-observatory__accent_3.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/parts/accent_3.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_3 (number 3 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, cool soft moonlight from the top-left with a warm glint on gold. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one small six-pointed star cut from real gold leaf (#C8A24E), slightly raised with a crisp warm highlight on its points; 2 = one slim crescent moon cut from real gold leaf (#C8A24E, highlight #E2C27A), its inner curve softly bevelled, no face; 3 = a tiny loose cluster of five or six silver-white and pale-gold star dust specks (#E6E9F1 and #E2C27A) of different sizes, each a crisp point of light with no glow or halo around it.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (altın yıldız, hilal, yıldız tozu); hâle/ışıma yok; kenara değmiyor; gerçek alfa.
+
+#### 190. W18 Website hero + paylaşım görseli (og:image kaynağı)
+
+- İndirme adı: `29-celestial-observatory__web_hero.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/parts/web_hero.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1024 px (3:2) · opak · PNG
+- Ek görsel: flap.png (listede #175), astro_plate.png (listede #177), astro_rete.png (listede #178), night_paper.png (listede #171), telescope.png (listede #186), card_small.png (listede #179)
+
+```
+Wide horizontal still life, photorealistic luxury stationery product photography, cool soft moonlight from the top-left with warm glints on gold and brass: the closed portrait midnight-blue envelope of flap.png with its half-circle dome flap engraved in gold leaf and the antique brass astrolabe of astro_plate.png with its pierced rete (astro_rete.png) resting on the flap's tip, lying slightly below the centre on the midnight-blue cotton paper of night_paper.png; at the left the edge of an antique star-atlas sheet on silver-ivory chart paper (no lettering) and the small brass telescope of telescope.png lying on its side; at the right a silver-ivory invitation card (as card_small.png, empty) half tucked behind the envelope and a few tiny gold-leaf stars and one gold crescent scattered; behind, softly out of focus, more midnight paper. Only midnight blue, silver-ivory, gold and brass tones. The top 20% of the image is calm and soft (only out-of-focus midnight paper). This image is cropped to 1200×630 for link previews: keep the whole envelope and astrolabe visible with at least 5% empty margin below them. No people, no flowers. No text, letters, numbers, zodiac signs, monograms, logos or watermarks.
+```
+
+Kontrol: zarf + usturlap bütün, altında ≥%5 boşluk; üst %20 sakin; çiçek/insan yok; yazı/rakam yok.
+
+#### 191. P1 — Ön yüz
+
+- İndirme adı: `29-celestial-observatory__print__invitation_front_r_5x7.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/print/invitation_front_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+- Ek görsel: chart_paper.png (listede #172), astro_plate.png (listede #177), astro_rete.png (listede #178), divider.png (listede #185)
+
+```
+The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the heavy silver-ivory chart paper of chart_paper.png (#EEEBE3) with its extremely faint engraved coordinate grid. Across the top, between 9% and 91% of the width, an engraved celestial band in real gold leaf (#C8A24E) and gold-brown ink (#7A5A1E): a shallow arch of two fine concentric coordinate arcs, a dotted constellation line linking small six-pointed gold stars along it, and at its centre a small antique brass astrolabe with its pierced rete (as astro_plate.png and astro_rete.png, only tick marks); nothing in this top band reaches lower than 17% of the height. Along the bottom, between 92% and 96% of the height and from 14% to 86% of the width, a row of seven small gold-leaf moon phases with a full moon in the middle (as divider.png). The rectangle from 19% to 90% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm paper (the names, date and venue are printed there in dark ink): no star, no line, no grid stronger than the paper's faint texture, no shadow, no stain in it. No ornament within 8% of the left and right edges. Cool soft light from the top-left with a warm glint on the gold. Only silver-ivory, midnight blue, gold and brass tones. No QR code. No zodiac signs. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: tam taşma harita kâğıdı; %19–%90 × %10–%90 tamamen boş; takımyıldız yayı + küçük usturlap yalnız üstte (%17'nin üstünde), ay evreleri yalnız altta; yan %8 boş; usturlapta rakam yok; yazı yok.
+
+#### 192. P2 — Arka yüz
+
+- İndirme adı: `29-celestial-observatory__print__invitation_back_r_5x7.png`
+- Hedef: `collections/29_Celestial_Observatory/assets/gpt/print/invitation_back_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+- Ek görsel: invitation_front_r_5x7.png (listede #191)
+
+```
+The back of the same printed wedding invitation (give invitation_front_r_5x7.png as the reference image), full bleed, portrait 5.25:7.25, perfectly flat: the same heavy silver-ivory chart paper, only a short engraved gold-leaf constellation across the top centre (between 32% and 68% of the width) — five small six-pointed stars linked by a dotted line with one slim gold crescent moon at its middle — its lowest point staying above 11% of the height. The whole area below 13% of the height, from 9% to 91% of the width, is COMPLETELY EMPTY paper (a schedule and a QR code are set there): no star, no line, no shadow, no stain. No ornament within 8% of the left and right edges. No QR code. No zodiac signs. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: ön yüzle aynı kâğıt; yalnız üst ortada kısa takımyıldız + hilal (%11'in üstünde); %13'ün altı boş; yazı/QR yok.
+
+### 30_Azulejo_Mosaic
+
+Sohbetin ilk mesajı (dosyanın GPT notu):
+
+```
+This design was completely REDESIGNED on 2026-10-22. Generate PAKET 5R (website layers) first, in order and in ONE chat, then PAKET 6R (printable invitation). PAKET 2 (sample photos) already exists — do NOT regenerate it. Sections marked GEÇERSİZ are not wanted. Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, names, dates, initials, monograms, logos, brand marks, QR codes or watermarks in any image** (also not on the tiles, the loose tile, the envelope or the frames). The azulejo patterns are original designs invented for this design — they must not copy any real tile panel, building, church, museum piece, souvenir or seller's design. **No lemons, no yellow, no sardines, no roosters, no trams, no flags.** Everything stays in cobalt blue, night blue, creamy glaze white, whitewash and warm terracotta, with only tiny touches of olive green in leaves. Give W1 `whitewash_ground.png`, W3 `env_back.png` and W5 `flap.png` as the style reference of every later part: the same sunlit whitewash plaster, the same creamy white tin glaze with hand-painted cobalt brushwork, the same warm terracotta, the same soft Atlantic morning sun from the top-left with a warm, clean sheen on the glaze. Parts drawn on the same envelope canvas (W3, W4, W5, W7, W8, W9) keep the envelope in exactly the same box.
+```
+
+#### 193. W1 Badana sıva (sayfa zemini, kapak)
+
+- İndirme adı: `30-azulejo-mosaic__whitewash_ground.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/whitewash_ground.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, perfectly flat, front-on texture of a sunlit lime-whitewashed plaster wall in a warm soft white (#F2EDE3): many thin layers of limewash with a gentle hand-trowelled undulation, faint soft brush marks, a delicate chalky bloom, and here and there a very faint, washed-out trace of cobalt blue (#1F4A9E at 4–6% strength) where an old blue wash once bled through — soft, rare and cloud-like, never a pattern. Very low contrast so dark blue text reads on it everywhere. Evenly lit by soft morning sun from the top-left, no hard shadow, no cracks, no stains, no tiles, no plants, no vignette. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: dikişsiz (2×2 yan yana ek yeri yok); badana `#F2EDE3` civarı; kobalt izleri çok soluk ve seyrek; çatlak/leke/çini yok; üstüne koyu yazı okunur.
+
+#### 194. W2 Sır beyazı pamuk kâğıt (kartlar, bantlar, form)
+
+- İndirme adı: `30-azulejo-mosaic__glaze_paper.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/glaze_paper.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, perfectly flat top-down texture of thick mould-made cotton paper in a creamy glaze white (#FAF8F2) with a very slight satin coating, like fine stationery made to sit beside glazed tiles: a gentle felt tooth, a few faint long cotton fibres, the faintest soft cloudiness, an even tone. Evenly lit by soft morning sun from the top-left, no fold, no crease, no deckle edge, no stain, no shadow, no vignette, no printing, no pattern, no tile motif. Calm enough for fine dark blue ink text to read on it everywhere. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: dikişsiz; sır beyazı `#FAF8F2` civarı; desen/leke/kat yok; üstüne koyu yazı okunur.
+
+#### 195. W3 Zarfın arkası (terrakota astar görünür)
+
+- İndirme adı: `30-azulejo-mosaic__env_back.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/env_back.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1500 px (4:5) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+The back panel of an open portrait envelope, seen perfectly straight from the front, on a fully transparent background. The envelope occupies exactly x 7–93% and y 7–93% of the canvas (a portrait rectangle, about 0.8:1, with crisp square corners). We see its inside: it is lined with warm matte terracotta paper (#AE583A, shading to #8C4128 in the lower part) printed with a small, even, hand-painted repeating pattern of tiny cobalt-blue (#1F4A9E) four-petal rosettes and dots, like a miniature azulejo motif, softly worn like real hand-printing; a slim margin of creamy glaze-white paper (#FAF8F2) shows along the top and both sides of the lining. A very gentle shade toward the bottom where the front pocket will sit. No flap, no front pocket, no twine, no tile, no card inside. Soft morning sun from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: dikey panel x %7–93 · y %7–93; iç yüz terrakota astar + küçük kobalt rozet deseni, kenarlarda ince sır beyazı pay; kapak/cep/sicim/karo yok; gerçek alfa.
+
+#### 196. W4 Zarfın ön cebi
+
+- İndirme adı: `30-azulejo-mosaic__env_front.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/env_front.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1500 px (4:5) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_back.png (listede #195)
+
+```
+Only the front pocket of the same portrait envelope as env_back.png, on the same 1200×1500 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 7–93% and y 7–93% of the canvas; the pocket spans the full envelope width (x 7–93%) from a perfectly straight, crisp horizontal top edge at 40% of the canvas height down to the envelope's bottom edge at 93%. It is thick creamy glaze-white paper (#FAF8F2) with a very slight satin, glaze-like sheen, calm and mostly plain, with the faint soft fold lines of the two side flaps and the bottom flap barely visible; a single fine hand-painted cobalt-blue (#1F4A9E) brush line runs just below the top edge; along the bottom of the pocket, from x 9% to x 91%, one single row of six small hand-painted cobalt azulejo border tiles (a wavy ribbon with tiny rosettes, square tiles with fine ivory grout lines between them), each about 13% of the canvas width, sitting about 2% above the bottom edge. The faint thickness of heavy paper is visible along the cut top edge. Everything above the pocket's top edge is completely transparent. No flap, no twine, no tile clasp, no card. Soft morning sun from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: cep tam genişlik, üst kenarı düz y %40; sakin sır beyazı, üstte ince kobalt çizgi, altta tek sıra 6 bordür çinisi; üstü tamamen şeffaf; gerçek alfa.
+
+#### 197. W5 Basamaklı çini kapak (kapalı, dış yüz)
+
+- İndirme adı: `30-azulejo-mosaic__flap.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/flap.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1500 px (4:5) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+Only the closed flap of the same portrait envelope, on the same 1200×1500 canvas and in exactly the same place, on a fully transparent background. The flap hangs from a softly rounded fold along the envelope's top edge at 7% of the canvas height and spans the full width (x 7–93%). Its whole surface is a grid of square hand-painted Portuguese-style azulejo tiles: 6 columns, each column exactly 14.33% of the canvas width (column borders at x 7, 21.33, 35.67, 50, 64.33, 78.67 and 93%), each tile row 11.47% of the canvas height (row borders at y 7, 18.47, 29.93, 41.4, 52.87 and 64.33%). The flap's free lower edge is a symmetrical STAIRCASE that follows the tile grid and steps down toward the centre: columns 1 and 6 end at 41.4% (3 tiles tall), columns 2 and 5 end at 52.87% (4 tiles tall), columns 3 and 4 end at 64.33% (5 tiles tall); the vertical risers of the steps lie exactly on the column borders. Each tile is creamy white tin glaze (#FAF8F2) painted in cobalt blue (#1F4A9E, deepening to #102554 where the brush pooled) with one quarter of a large medallion, so that every four neighbouring tiles join into a full round medallion: a central four-petal rosette ringed with small stylised carnation buds, with acanthus scrolls curling into the corners; soft wet-edged brushstrokes, gentle wash variations, slightly irregular hand-made tile edges, fine ivory grout lines between the tiles, and the warm clean sheen of real glaze. A fine night-blue painted line follows the whole stepped edge. Everything below the stepped edge is completely transparent. No twine, no loose tile, no card, no lemons. Soft morning sun from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: 6 sütun kare çini; basamaklar sütun 1/6 → %41,4, 2/5 → %52,87, 3/4 → %64,33 (merdiven, V/yay değil); dört çini birleşince tam madalyon; kobalt tek renk + ince derz; altı şeffaf; gerçek alfa.
+
+#### 198. W6 Kapağın iç yüzü (açıkken dik)
+
+- İndirme adı: `30-azulejo-mosaic__flap_in.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/flap_in.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1000 px (6:5) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: flap.png (listede #197), env_back.png (listede #195)
+
+```
+The inside of the same stepped envelope flap, alone, seen straight on as it stands upright when the envelope is open, on a fully transparent background: the outline of flap.png mirrored vertically. Its straight fold edge is at the BOTTOM, along 93% of the image height, spanning x 7–93% of the width; the staircase edge now steps UP toward the centre: columns 1 and 6 (x 7–21.33% and 78.67–93%) rise to 41.4% of the image height, columns 2 and 5 (x 21.33–35.67% and 64.33–78.67%) rise to 24.2%, columns 3 and 4 (x 35.67–64.33%) rise to 7%; the vertical risers lie exactly on those column borders. The inside is lined with the same warm matte terracotta paper as env_back.png (#AE583A, deepening to #8C4128 toward the fold) printed with the same tiny hand-painted cobalt-blue four-petal rosettes and dots, and a slim margin of creamy glaze-white paper (#FAF8F2) follows the whole stepped edge with one fine cobalt brush line inside it. Soft morning sun from the top-left. No twine, no tile, no card. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: katlama kenarı altta (%93); basamaklar yukarı doğru: dış sütunlar %41,4, orta-yan %24,2, orta %7; terrakota astar + kobalt rozet, kenar boyunca sır beyazı pay; gerçek alfa.
+
+#### 199. W7 Jüt sicim (çapraz bağ)
+
+- İndirme adı: `30-azulejo-mosaic__twine.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/twine.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1500 px (4:5) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_back.png (listede #195), flap.png (listede #197)
+
+```
+On the same 1200×1500 canvas as env_back.png and flap.png, in exactly the same place (the envelope box is x 7–93% and y 7–93% of the canvas, but the envelope itself is NOT drawn here), only a length of natural jute twine tied around the closed envelope in a cross, on a fully transparent background: one vertical strand runs straight down the centre at x 50% from y 7% to y 93%, and at both ends it turns over in a tiny soft bend as if it wraps over the envelope's top and bottom edges and continues behind; one horizontal strand runs straight across at y 64.33% from x 7% to x 93%, turning over in a tiny bend at both side edges. The two strands meet at (50%, 64.33%) in a small, neat, slightly loose square knot, and two short loose ends hang from the knot down and to the right, the longest reaching about (56%, 72%), each ending in a few frayed fibres. The twine is about 1% of the canvas width thick, made of two twisted plies of natural golden-tan jute (#B58E5E with lighter #D2B48A fibres), with fine stray fibres along it. Soft morning sun from the top-left, a whisper of contact shade only on the twine itself. Everything except the twine is fully transparent: no envelope, no tile, no flap. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: dikey kol x %50 (y %7–93), yatay kol y %64,33 (x %7–93); düğüm (%50, %64,33), iki kısa saçaklı uç sağ alta; zarf/karo çizilmemiş; gerçek alfa.
+
+#### 200. W8 Gevşek azulejo karosu — ön yüz (kırlangıç)
+
+- İndirme adı: `30-azulejo-mosaic__tile_front.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/tile_front.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1500 px (4:5) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_back.png (listede #195), flap.png (listede #197)
+
+```
+On the same 1200×1500 canvas as env_back.png and flap.png, in exactly the same place (the envelope itself is NOT drawn here), only one single loose square glazed ceramic azulejo tile lying flat, seen perfectly straight on, on a fully transparent background: the tile occupies exactly x 41–59% and y 57.13–71.53% of the canvas (a perfect square, 216 px), centred at (50%, 64.33%). It is a real, slightly thick hand-made tile with softly rounded, slightly irregular edges and a thin visible terracotta body at its rim, its face a creamy white tin glaze (#FAF8F2) with the warm clean sheen of real glaze, hand-painted in cobalt blue (#1F4A9E, night blue #102554 where the brush pooled): in the centre one single swallow in flight, wings spread, seen from below, inside a round wreath of small olive leaves; in each corner a quarter rosette, and a fine double cobalt line framing the face. Soft wet-edged brushstrokes, a tiny pinhole or two in the glaze. Soft morning sun from the top-left. No twine, no envelope, no other tile. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: tek kare karo x %41–59 · y %57,13–71,53; ortada zeytin çelengi içinde tek kırlangıç, köşelerde çeyrek rozet; kenarda ince terrakota gövde; harf/rakam yok; gerçek alfa.
+
+#### 201. W9 Gevşek karo — arka yüz (terrakota bisküvi)
+
+- İndirme adı: `30-azulejo-mosaic__tile_back.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/tile_back.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1500 px (4:5) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: tile_front.png (listede #200)
+
+```
+The back of the same loose tile as tile_front.png, on the same 1200×1500 canvas and in exactly the same box (x 41–59% and y 57.13–71.53% of the canvas, a perfect square centred at (50%, 64.33%)), the envelope NOT drawn, on a fully transparent background: the unglazed back of a hand-made ceramic tile in warm terracotta biscuit (#AE583A with lighter #E4A688 dusty areas and deeper #8C4128 in the hollows), matte and slightly sandy, with a few shallow parallel ridges pressed into it and a faint ring of dried white tile mortar near one corner; the same softly rounded irregular edges and the thin rim of white glaze just visible at the edge. Soft morning sun from the top-left. No pattern, no marks, no stamp. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: W8 ile birebir aynı kutu; sırsız terrakota sırt, sığ çizgiler; damga/harf yok; gerçek alfa.
+
+#### 202. W10 Zarftaki kart (boş)
+
+- İndirme adı: `30-azulejo-mosaic__card_small.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/card_small.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1400 px (5:7) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: glaze_paper.png (listede #194)
+
+```
+A flat portrait invitation card, alone, seen straight on, on a fully transparent background: thick creamy glaze-white cotton card as glaze_paper.png (#FAF8F2) with crisp square corners, spanning x 7–93% and y 6–94% of the canvas; a fine hand-painted cobalt-blue (#1F4A9E) double border line inset about 6% from the card's edge, and in each of the four corners, inside the border, one tiny hand-painted quarter rosette in the same cobalt as the tiles. The whole card inside the border is EMPTY paper (the website sets the names, date and venue there in HTML). Soft morning sun from the top-left, a hair-fine contact shade on the card's own edge only. No flowers, no photo, no tile pattern in the centre. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: boş sır beyazı kart; ince kobalt çift bordür + dört köşede küçük çeyrek rozet; içi tamamen boş; gerçek alfa.
+
+#### 203. W11 Kireç taşı kemerli çini nişi (home portresi)
+
+- İndirme adı: `30-azulejo-mosaic__niche_frame.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/niche_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1350 px (20:27) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+- Ek görsel: flap.png (listede #197)
+
+```
+A portrait wall niche frame, alone, seen straight on, on a fully transparent background: a surround of pale warm limestone (#E9E1D2, fine natural pores, softly worn edges) with a rounded arch at the top, its outer edge spanning about x 6–94% and y 6–94% of the canvas; inside the arch, above the photo window, the curved spandrel is filled with hand-painted cobalt azulejo tiles (the same quarter-medallion tile pattern as flap.png, fine ivory grout lines), and a narrow band of cobalt border tiles runs down both sides of the window. In the middle a portrait photo window exactly 760 px wide and 950 px tall (4:5), its top-left corner at x 120 px, y 250 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, square corners, nothing over it). Below the window a slim limestone sill. Soft morning sun from the top-left. No plants, no pots, no glass over the window. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: pencere düz `#00FF00`, 760×950 (4:5), sol üst (120, 250); kemerli kireç taşı + kemer içinde çini + yanlarda bordür çinisi; pencerenin üstünde bir şey yok; gerçek alfa.
+
+#### 204. W12 Azulejo bordürlü çerçeve (story)
+
+- İndirme adı: `30-azulejo-mosaic__story_frame.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/story_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1250 px (4:5) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A portrait picture frame made entirely of hand-painted Portuguese-style azulejo border tiles, alone, seen straight on, on a fully transparent background: its outer edge spans x 6–94% and y 6–94% of the canvas (x 60–940 px, y 75–1175 px); four square corner tiles each painted with a quarter rosette, and between them straight runs of border tiles painted with a wavy ribbon and small rosettes, all cobalt blue (#1F4A9E, night blue where the brush pooled) on creamy white tin glaze (#FAF8F2), fine ivory grout lines between the tiles, slightly irregular hand-made edges and the warm sheen of real glaze; a fine terracotta (#AE583A) inner edge like a narrow clay fillet around the window. In the middle a portrait photo window exactly 700 px wide and 875 px tall (4:5), its top-left corner at x 150 px, y 170 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, square corners, nothing over it). Soft morning sun from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: pencere düz `#00FF00`, 700×875 (4:5), sol üst (150, 170); dört köşe çinisi + bordür çinileri, ince terrakota iç kenar; gerçek alfa.
+
+#### 205. W13 Geniş çini panosu çerçevesi (mekân)
+
+- İndirme adı: `30-azulejo-mosaic__venue_frame.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/venue_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1000 px (8:5) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A wide landscape tile-panel frame, alone, seen straight on, on a fully transparent background, like a framed azulejo panel set into a whitewashed courtyard wall: its outer edge spans x 6–94% and y 6–94% of the canvas; a border of hand-painted cobalt azulejo tiles (corner tiles with quarter rosettes, border tiles with a wavy ribbon and small rosettes; cobalt #1F4A9E on creamy glaze #FAF8F2, fine ivory grout lines), wider at the top where a shallow ornamental cresting of tiles rises in the centre, and an outer slim moulding of pale limestone (#E9E1D2). In the middle a landscape photo window exactly 1280 px wide and 720 px tall (16:9), its top-left corner at x 160 px, y 150 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, square corners, nothing over it). Soft morning sun from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: pencere düz `#00FF00`, 1280×720 (16:9), sol üst (160, 150); çini bordür + üst ortada alçak çini tepelik + kireç taşı dış pervaz; gerçek alfa.
+
+#### 206. W14 Köşe süsü (zeytin dalı + yasemin + gevşek çiniler)
+
+- İndirme adı: `30-azulejo-mosaic__corner_spray.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/corner_spray.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1000 px (6:5) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: flap.png (listede #197)
+
+```
+A restrained, elegant corner arrangement growing out from near the top-left corner toward the centre, alone, on a fully transparent background, photorealistic: two or three slender olive sprigs with narrow silvery grey-green leaves (#7C8A6A, pale undersides) and no fruit, a few small sprays of white jasmine with star-shaped five-petal flowers and pink-tinged buds kept very pale, and tucked among them two loose hand-painted azulejo tiles (cobalt quarter-medallion pattern on creamy glaze, as flap.png) lying at gentle angles, one partly behind the leaves. Light and airy, not a heavy bouquet. It reaches toward the top and left sides of the image but stays 6% inside them, and the bottom-right half of the canvas is completely empty. Soft morning sun from the top-left. No lemons, no yellow, no fruit, no vase, no pot. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: sol üstten çıkan hafif küme (zeytin, yasemin, iki gevşek çini); sağ alt yarı boş; limon/sarı/meyve yok; kenara değmiyor; gerçek alfa.
+
+#### 207. W15 Çini frizi (bölüm ayırıcı)
+
+- İndirme adı: `30-azulejo-mosaic__divider.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/divider.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×240 px (20:3) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A slim horizontal divider, alone, on a fully transparent background: in the centre a short row of five small square hand-painted azulejo tiles touching edge to edge (cobalt #1F4A9E on creamy glaze #FAF8F2, fine ivory grout lines; the middle tile a full rosette, the others a wavy ribbon border motif), together about 34% of the canvas width and 60% of its height, and from both sides of this row a fine hand-painted cobalt brush line tapers out to a hair-fine point, the whole divider spanning x 8–92% of the canvas at the vertical centre. Glaze sheen in soft morning sun from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: ortada 5 küçük çini (orta rozet), iki yana incelen kobalt fırça çizgisi; iki uçta boşluk; gerçek alfa.
+
+#### 208. W16 Sarmaşıklı terrakota saksı (imza süsü)
+
+- İndirme adı: `30-azulejo-mosaic__terracotta_pot.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/terracotta_pot.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 900×1000 px (9:10) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A single small hand-thrown terracotta pot, alone, seen from the front at eye level, on a fully transparent background, photorealistic: a classic rounded pot with a rolled rim in warm unglazed terracotta (#AE583A, dusty lighter #E4A688 patina, a faint white lime bloom near the base), a single band of small hand-painted cobalt rosettes on creamy glaze around its belly; from it grows a small cascade of trailing ivy with glossy dark green leaves (kept muted) and a few sprigs of white jasmine, the ivy spilling over the rim and down one side. The pot and plant span about x 15–85% and y 8–92% of the canvas. Soft morning sun from the top-left. No saucer, no ground, no shelf. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: tek terrakota saksı, gövdede ince kobalt rozet bandı; sarmaşık + yasemin; zemin/tabak yok; gerçek alfa.
+
+#### 209. W17 Mozaik karoları — iki ayrı dosya
+
+- İndirme adı: `30-azulejo-mosaic__mosaic_tile_a.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/mosaic_tile_a.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: flap.png (listede #197)
+
+```
+This prompt describes a set of 2 separate images (mosaic_tile_a, mosaic_tile_b). Make ONLY ONE image now: mosaic_tile_a (number 1 of 2).
+
+A single square hand-painted Portuguese-style azulejo tile, alone, seen perfectly flat and straight on, on a fully transparent background, filling exactly x 8–92% and y 8–92% of the square: creamy white tin glaze (#FAF8F2) with the warm sheen of real glaze, painted in cobalt blue (#1F4A9E, night blue #102554 where the brush pooled) with soft wet-edged brushstrokes, crisp square corners with only a hair of hand-made irregularity, a thin ivory edge like a grout margin. Soft morning sun from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make two files with exactly the same size, light and glaze: a = one quarter of the large medallion from flap.png — the quarter rosette in one corner, carnation buds and an acanthus scroll; b = a full small four-petal rosette in the centre with tiny dots in the four corners.)
+```
+
+Kontrol: iki dosya, aynı boy ve sır; a = çeyrek madalyon, b = ortada küçük rozet; kare, kenara değmiyor; gerçek alfa.
+
+#### 210. W17 Mozaik karoları — iki ayrı dosya
+
+- İndirme adı: `30-azulejo-mosaic__mosaic_tile_b.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/mosaic_tile_b.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: flap.png (listede #197)
+
+```
+This prompt describes a set of 2 separate images (mosaic_tile_a, mosaic_tile_b). Make ONLY ONE image now: mosaic_tile_b (number 2 of 2).
+
+A single square hand-painted Portuguese-style azulejo tile, alone, seen perfectly flat and straight on, on a fully transparent background, filling exactly x 8–92% and y 8–92% of the square: creamy white tin glaze (#FAF8F2) with the warm sheen of real glaze, painted in cobalt blue (#1F4A9E, night blue #102554 where the brush pooled) with soft wet-edged brushstrokes, crisp square corners with only a hair of hand-made irregularity, a thin ivory edge like a grout margin. Soft morning sun from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make two files with exactly the same size, light and glaze: a = one quarter of the large medallion from flap.png — the quarter rosette in one corner, carnation buds and an acanthus scroll; b = a full small four-petal rosette in the centre with tiny dots in the four corners.)
+```
+
+Kontrol: iki dosya, aynı boy ve sır; a = çeyrek madalyon, b = ortada küçük rozet; kare, kenara değmiyor; gerçek alfa.
+
+#### 211. W18 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `30-azulejo-mosaic__accent_1.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/accent_1.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_1 (number 1 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft morning sun from the top-left. No other object. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. (Make three files, the same light and scale: 1 = one tiny square hand-painted azulejo tile chip, cobalt rosette on creamy glaze, slightly tilted; 2 = one single narrow olive leaf, silvery grey-green with a pale underside, gently curved; 3 = one single white jasmine flower with five star-shaped petals and a faint pink tinge on the back of one petal.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (çini parçası, zeytin yaprağı, yasemin); kenara değmiyor; gerçek alfa.
+
+#### 212. W18 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `30-azulejo-mosaic__accent_2.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/accent_2.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_2 (number 2 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft morning sun from the top-left. No other object. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. (Make three files, the same light and scale: 1 = one tiny square hand-painted azulejo tile chip, cobalt rosette on creamy glaze, slightly tilted; 2 = one single narrow olive leaf, silvery grey-green with a pale underside, gently curved; 3 = one single white jasmine flower with five star-shaped petals and a faint pink tinge on the back of one petal.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (çini parçası, zeytin yaprağı, yasemin); kenara değmiyor; gerçek alfa.
+
+#### 213. W18 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `30-azulejo-mosaic__accent_3.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/accent_3.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_3 (number 3 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft morning sun from the top-left. No other object. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. (Make three files, the same light and scale: 1 = one tiny square hand-painted azulejo tile chip, cobalt rosette on creamy glaze, slightly tilted; 2 = one single narrow olive leaf, silvery grey-green with a pale underside, gently curved; 3 = one single white jasmine flower with five star-shaped petals and a faint pink tinge on the back of one petal.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (çini parçası, zeytin yaprağı, yasemin); kenara değmiyor; gerçek alfa.
+
+#### 214. W19 Website hero + paylaşım görseli (og:image kaynağı)
+
+- İndirme adı: `30-azulejo-mosaic__web_hero.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/parts/web_hero.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1024 px (3:2) · opak · PNG
+- Ek görsel: flap.png (listede #197), env_front.png (listede #196), twine.png (listede #199), tile_front.png (listede #200), whitewash_ground.png (listede #193), corner_spray.png (listede #206), terracotta_pot.png (listede #208)
+
+```
+Wide horizontal still life, photorealistic, soft Atlantic morning sun from the top-left with a warm clean sheen on the glaze: the closed portrait envelope of flap.png and env_front.png — its stepped flap of hand-painted cobalt azulejo tiles, its calm glaze-white pocket with one row of border tiles — tied in a cross with natural jute twine (as twine.png) and closed by the loose swallow tile (as tile_front.png) at the lowest step, lying slightly below the centre on a sunlit whitewashed plaster surface (as whitewash_ground.png); at the left slender olive sprigs, white jasmine and two loose azulejo tiles (as corner_spray.png); at the right the small terracotta pot with trailing ivy (as terracotta_pot.png), slightly out of focus; a few jasmine flowers and one tiny tile chip scattered. Only cobalt, night blue, glaze white, whitewash and terracotta with small touches of olive green. The top 20% of the image is calm and soft (only out-of-focus plaster and leaves). This image is cropped to 1200×630 for link previews: keep the whole envelope, twine and tile visible with at least 5% empty margin below it. No people, no lemons. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: zarf + sicim + karo bütün, altında ≥%5 boşluk; üst %20 sakin; limon/sarı yok; yazı yok.
+
+#### 215. P1 — Ön yüz
+
+- İndirme adı: `30-azulejo-mosaic__print__invitation_front_r_5x7.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/print/invitation_front_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+- Ek görsel: glaze_paper.png (listede #194), flap.png (listede #197), story_frame.png (listede #204)
+
+```
+The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the thick creamy glaze-white cotton card of glaze_paper.png (#FAF8F2). Across the top, between 9% and 91% of the width, a band of hand-painted Portuguese-style azulejo border tiles in a single row (cobalt #1F4A9E on creamy glaze, fine ivory grout lines; corner tiles with quarter rosettes, border tiles with a wavy ribbon and small rosettes, exactly as in flap.png and story_frame.png), and from the centre of this band a small hanging cresting of three tiles forming a shallow stepped point, like the stepped envelope flap; nothing in this top band reaches lower than 17% of the height. Along the bottom, between 92% and 96% of the height and from 14% to 86% of the width, a fine double cobalt brush line with one small cobalt rosette tile at its centre. The rectangle from 19% to 91% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm paper (the names, date and venue are set there): no tile, no leaf, no line, no shadow, no stain in it. No ornament within 8% of the left and right edges. Soft morning sun from the top-left, the warm sheen of glaze on the painted tiles. Only cobalt, night blue and glaze white. No lemons, no QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: tam taşma sır beyazı kâğıt; üstte tek sıra bordür çinisi + ortada üç çinilik basamak tepelik (%17'nin üstünde); altta ince kobalt çift çizgi + küçük rozet; %19–%91 × %10–%90 tamamen boş; yan %8 boş; yazı yok.
+
+#### 216. P2 — Arka yüz
+
+- İndirme adı: `30-azulejo-mosaic__print__invitation_back_r_5x7.png`
+- Hedef: `collections/30_Azulejo_Mosaic/assets/gpt/print/invitation_back_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+
+```
+The back of the same printed wedding invitation, full bleed, portrait 5.25:7.25, perfectly flat: the same thick creamy glaze-white cotton card, only a short row of five small hand-painted cobalt azulejo tiles across the top centre (between 32% and 68% of the width; the middle one a full rosette, the others a wavy ribbon motif) with a fine cobalt brush line tapering out from both sides of it toward 20% and 80% of the width, all of it staying above 11% of the height. The whole area below 13% of the height, from 9% to 91% of the width, is COMPLETELY EMPTY paper (a schedule and a QR code are set there): no tile, no line, no shadow, no stain. No ornament within 8% of the left and right edges. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: ön yüzle aynı kâğıt; yalnız üst ortada 5 küçük çini + incelen kobalt çizgi (%11'in üstünde); %13'ün altı boş; yazı/QR yok.
+
+### 31_Sky_Lantern_Festival
+
+Sohbetin ilk mesajı (dosyanın GPT notu):
+
+```
+This design was completely redesigned on 2026-10-22: generate PAKET 5R (website layers) first, in order and in ONE chat, then PAKET 6R (printable invitation). PAKET 2 (sample photos) ALREADY EXISTS — do not regenerate it. Sections marked GEÇERSİZ are not wanted. Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, characters, symbols, names, dates, initials, monograms, logos, brand marks, QR codes or watermarks in any image** — also never on a lantern, the envelope, the card or the panels (the lanterns are plain, undecorated rice paper). **Culturally neutral:** no temple, pagoda, dragon, costume, crowd, script or symbol of any country, festival or religion. **No fire:** a lantern is lit only by a warm glow inside its own paper — no flame visible, no smoke, no sparks. Give W1 `dusk_ground.png`, W3 `rice_paper.png`, W4 `env_back.png` and W8 `lantern_unlit.png` as the style reference of every later part: the same hand dip-dyed washi in a dusk gradient (dusk violet → dusky rose → lantern amber) with visible long fibres, the same warm ivory rice paper, the same plain rice-paper sky lantern with fine bamboo ribs, the same soft last daylight from the top-left. Parts drawn on the same envelope canvas (W4, W5, W6, W8, W9, W10) keep the envelope in exactly the same box.
+```
+
+#### 217. W1 Alacakaranlık dip-dye washi (kapak ve sayfa zemini, tam boy)
+
+- İndirme adı: `31-sky-lantern-festival__dusk_ground.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/dusk_ground.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1080×2340 px (6:13) · opak · PNG
+
+```
+A tall, perfectly flat, front-facing full-bleed sheet of handmade washi paper, hand dip-dyed in a soft vertical dusk gradient, photographed evenly: the top third deep dusk violet (from #1B1430 at the very top to #2B1F45), melting through violet (#4A3466) in the middle into a soft dusky rose band (#E7B4A6) at about 72% of the height, and a warm lantern-amber glow (#F2A65A to a pale #FFD08A) along the bottom 10%. The colour transitions are soft, natural dye bleeds with gentle cloudy variation, never banded and never a digital gradient. Long, fine kozo fibres are visible throughout the paper as faint lighter strands; in the upper violet part a very sparse scattering of tiny warm gold-leaf flecks catches the light. Very low contrast everywhere so light text reads on the top half and dark text reads on the bottom part. No horizon, no landscape, no moon, no stars drawn, no lanterns, no fold, no crease, no stain, no vignette, no shadow. The left and right edges must tile horizontally without a visible seam. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+
+Kontrol: tam boy; üst menekşe → orta gül → alt kehribar, bantsız yumuşak geçiş; lifler görünür, seyrek altın pul yalnız üstte; manzara/fener/yıldız çizimi yok; sol-sağ kenar dikişsiz.
+
+#### 218. W2 Menekşe washi (uzun sayfaların devamı, dikişsiz)
+
+- İndirme adı: `31-sky-lantern-festival__dusk_tile.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/dusk_tile.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1024×1024 px (1:1) · opak · PNG
+- Ek görsel: dusk_ground.png (listede #217)
+
+```
+A seamless, tileable, perfectly flat top-down texture of the same handmade washi paper as dusk_ground.png in its deep dusk violet (#2B1F45, gently varying toward #1B1430 and #4A3466): long fine kozo fibres as faint lighter strands, a soft cloudy dye variation, a very sparse scattering of tiny warm gold-leaf flecks. Evenly lit by soft light from the top-left, very low contrast so light text reads everywhere. No fold, no crease, no stain, no vignette, no shadow, no pattern, no stars, no lanterns. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+
+Kontrol: dikişsiz (2×2 yan yana ek yeri yok); W1'in menekşe bölümüyle aynı kâğıt ve ton; sakin, açık renk yazı okunur.
+
+#### 219. W3 Pirinç kâğıdı (kartlar, paneller, form; dikişsiz)
+
+- İndirme adı: `31-sky-lantern-festival__rice_paper.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/rice_paper.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, perfectly flat top-down texture of fine handmade rice paper in a warm ivory (#F7EEDD): soft visible long fibres and a few delicate inclusions of slightly lighter fibre, a gentle translucent cloudiness, an even tone with only the gentlest variation. Evenly lit by soft light from the top-left, no fold, no crease, no deckle edge, no stain, no shadow, no vignette, no printing, no pattern. Calm enough for fine dark ink text to read on it everywhere. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+
+Kontrol: dikişsiz; sıcak fildişi `#F7EEDD` civarı; lifler hafif, leke/kat/desen yok; üstüne koyu yazı okunur.
+
+#### 220. W4 Zarfın arkası (iç astar: alacakaranlık göğü)
+
+- İndirme adı: `31-sky-lantern-festival__env_back.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/env_back.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1080×1500 px (18:25) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: dusk_ground.png (listede #217)
+
+```
+The back panel of an open portrait envelope, seen perfectly straight from the front, on a fully transparent background. The envelope occupies exactly x 7–93% and y 6–94% of the 1080×1500 canvas (a portrait rectangle, about 0.7:1, crisp straight edges, softly rounded corners). Its outer paper is the hand dip-dyed dusk washi of dusk_ground.png (violet at the top fading to dusky rose and a little amber at the bottom), visible only as a slim margin along the top and both sides. Inside, it is lined with a printed washi lining showing a soft hand-painted dusk sky: deep violet (#2B1F45) at the top, melting into dusky rose (#E7B4A6) and a glowing amber horizon (#F2A65A) low down, with a delicate scattering of tiny gold-leaf star flecks in the upper part, the fibres of the paper visible through the print; a very gentle shade toward the bottom where the front pocket will sit. No flap, no front pocket, no lantern, no thread, no card inside, no landscape, no moon, no drawn stars or symbols. Soft light from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+
+Kontrol: dikey panel x %7–93 · y %6–94; iç astar alacakaranlık göğü + seyrek altın pul, kenarlarda ince dip-dye pay; kapak/cep/fener yok; gerçek alfa.
+
+#### 221. W5 Zarfın ön cebi (altın çivi dahil)
+
+- İndirme adı: `31-sky-lantern-festival__env_front.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/env_front.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1080×1500 px (18:25) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_back.png (listede #220), dusk_ground.png (listede #217)
+
+```
+Only the front pocket of the same portrait dip-dyed washi envelope as env_back.png, on the same 1080×1500 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 7–93% and y 6–94% of the canvas; the pocket spans the full envelope width (x 7–93%) from its top edge down to the envelope's bottom edge at 94% of the canvas height. Its top edge is one soft, shallow arc: it starts at 44% of the canvas height at both side edges and dips gently to 49% at the horizontal centre, cut clean, the faint thickness of the handmade paper visible along the cut. The paper is the hand dip-dyed dusk washi of dusk_ground.png, continuing the gradient: soft violet-rose near the pocket's top edge deepening to dusky rose and a warm amber glow toward the bottom, long kozo fibres visible, the soft fold lines of the side and bottom flaps barely visible. On the pocket, at the horizontal centre, one small polished warm-gold domed stud (a round button-like rivet) centred at 50% of the width and 87% of the height, its diameter 4% of the canvas width, catching a crisp highlight from the top-left. Everything above the pocket's edge is completely transparent. No flap, no lantern, no thread, no card. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+
+Kontrol: cep tam genişlik; üst kenarı yanlarda %44, ortada %49'a inen sığ yay; altın kubbe çivi (%50, %87), çap %4; üstü tamamen şeffaf; iplik/fener yok; gerçek alfa.
+
+#### 222. W6 Fener karnı kapak (kapalı, dış yüz)
+
+- İndirme adı: `31-sky-lantern-festival__flap.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/flap.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1080×1500 px (18:25) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: dusk_ground.png (listede #217)
+
+```
+Only the closed flap of the same portrait dip-dyed washi envelope, on the same 1080×1500 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 7–93% and y 6–94% of the canvas; the flap spans its full width (x 7–93%), hinged along a softly rounded fold at the envelope's top edge (6% of the canvas height). Its free lower edge has the silhouette of the round belly of a paper lantern: it meets the two side edges at 47% of the canvas height, runs almost level along the outer fifth on each side, then swells downward in one full, generous, rounded curve to its lowest point at the horizontal centre at 62% of the canvas height (not a V, not a point, not scalloped, not a narrow U). Along this whole edge the paper is hand-torn: a soft feathered deckle where fine long kozo fibres stand out slightly beyond the edge, very delicate. The flap is the hand dip-dyed dusk washi of dusk_ground.png: deep dusk violet (#2B1F45) at the fold, melting into violet and a soft dusky rose glow toward its lower edge, long fibres visible, a very sparse scattering of tiny gold-leaf flecks near the fold. A whisper of contact shade on the flap itself just along its torn edge, soft light from the top-left. Everything below the flap's edge is completely transparent. No lantern, no thread, no stud, no seal, no card. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+
+Kontrol: kapak tam genişlik; kenarı yanlarda %47, dış beşte birde neredeyse yatay, ortada dolgun yuvarlak karınla %62; tüylü yırtık lif kenar; menekşe → gül gradyan; altı şeffaf; gerçek alfa.
+
+#### 223. W7 Kapağın iç yüzü (açıkken dik)
+
+- İndirme adı: `31-sky-lantern-festival__flap_in.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/flap_in.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1080×700 px (1.543:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: flap.png (listede #222)
+
+```
+The inside of the same lantern-belly envelope flap, alone, seen straight on as it stands upright when the envelope is open, on a fully transparent background: the outline of flap.png mirrored vertically. Its straight fold edge is at the BOTTOM, along 94% of the image height, spanning x 18.5–81.5% of the width; its two short straight sides rise to 30% of the image height; from there the edge runs almost level along the outer fifth on each side and then rises in one full, generous, rounded belly curve to its highest point at the horizontal centre at 6% of the image height, the whole edge hand-torn with a soft feathered deckle of fine fibres. The inside surface is a warm washi lining dip-dyed from a soft dusky rose (#E7B4A6) near the fold to a glowing lantern amber (#F2A65A) and pale glow (#FFD08A) toward the curved edge, with long fibres visible and a light scattering of tiny warm gold-leaf flecks, like the warm light inside a lantern. Soft light from the top-left. No lantern, no thread, no seal, no drawn stars. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+
+Kontrol: düz katlama kenarı altta (%94), yanlar %30'a, karın tepesi ortada %6; x %18,5–81,5; tüylü yırtık kenar; gül → kehribar washi + altın pullar; düz renk değil; gerçek alfa.
+
+#### 224. W8 Sönük pirinç kâğıdı gökyüzü feneri (kapanış)
+
+- İndirme adı: `31-sky-lantern-festival__lantern_unlit.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/lantern_unlit.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1080×1500 px (18:25) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_back.png (listede #220), flap.png (listede #222)
+
+```
+On the same 1080×1500 canvas as env_back.png and flap.png, in exactly the same place (the envelope box is x 7–93% and y 6–94% of the canvas, but the envelope itself is NOT drawn here), only one small UNLIT paper sky lantern standing upright, on a fully transparent background, occupying exactly x 36–64% and y 44–80% of the canvas: a plain, undecorated lantern of warm ivory rice paper (#F7EEDD) with softly rounded shoulders at the top, a gently tapering tall cylindrical body, and an open round mouth at the bottom held by a thin dark wire ring (at 77–80% of the canvas height); fine vertical split-bamboo ribs show faintly through the translucent paper, the paper has a soft natural crinkle and visible fibres. It is NOT lit: the paper is in soft dusk light from the top-left with gentle shading on the right side, cool and quiet, no glow, no flame, no light inside. No string, no stud, no pattern, no decoration on the paper. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+
+Kontrol: tek sönük fener, kutu x %36–64 · y %44–80; yuvarlak omuz, silindir gövde, altta tel halka (%77–80); ışık/alev yok; desen/yazı yok; zarf çizilmemiş; gerçek alfa.
+
+#### 225. W9 Yanık fener (aynı fener, içeriden ışıyor)
+
+- İndirme adı: `31-sky-lantern-festival__lantern_lit.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/lantern_lit.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1080×1500 px (18:25) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: lantern_unlit.png (listede #224)
+
+```
+The identical paper sky lantern of lantern_unlit.png, on the same 1080×1500 canvas, in exactly the same position and size (x 36–64% and y 44–80% of the canvas), with exactly the same silhouette, shoulders, bamboo ribs and wire ring, on a fully transparent background — but now LIT from inside: the rice paper glows warmly from within, brightest pale glow (#FFD08A) in the lower middle of the body, deepening to lantern amber (#F2A65A) toward the shoulders and the edges, the fine bamboo ribs showing as soft darker lines against the light, the paper's fibres glowing. The light stays entirely INSIDE the lantern's own paper: no flame visible, no smoke, no rays, no sparks, no glow, halo or light spill outside the lantern's outline (the website adds the glow). No string, no stud, no pattern, no decoration. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+
+Kontrol: W8 ile birebir aynı yer, boy ve silüet; içeriden sıcak ışıma; dışında hâle/ışın yok; alev yok; gerçek alfa.
+
+#### 226. W10 Kehribar ipek iplik ve fiyonk
+
+- İndirme adı: `31-sky-lantern-festival__silk_thread.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/silk_thread.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1080×1500 px (18:25) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_front.png (listede #221), lantern_unlit.png (listede #224)
+
+```
+On the same 1080×1500 canvas as env_front.png and lantern_unlit.png, in exactly the same place (the envelope, the stud and the lantern are NOT drawn here), only a fine amber silk thread, on a fully transparent background: the thread hangs from the centre of the lantern's bottom wire ring at 50% of the width and 80% of the height straight down to where the gold stud sits (centred at 50%, 87%), winds twice around that round stud (the thread loops visible as a small ring of thread about 5% of the canvas width across, its centre left open where the stud is), and is tied there in a small neat bow whose two short tails fall softly, one ending at about 45% of the width and 91% of the height, the other at about 55% of the width and 91.5% of the height. Lustrous amber silk (#F2A65A) with a soft sheen in light from the top-left, very fine (about 0.6% of the canvas width thick). Everything else is fully transparent. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+
+Kontrol: ince kehribar iplik (%50, %80) → (%50, %87); çivi yerinde ortası boş iki tur halka + küçük fiyonk, kuyruklar ~(%45, %91) ve (%55, %91,5); zarf/çivi/fener çizilmemiş; gerçek alfa.
+
+#### 227. W11 Zarftaki kart (boş)
+
+- İndirme adı: `31-sky-lantern-festival__card_small.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/card_small.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1400 px (5:7) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: rice_paper.png (listede #219)
+
+```
+A flat portrait invitation card, alone, seen straight on, on a fully transparent background: thick warm ivory rice paper as rice_paper.png (#F7EEDD), the card spanning x 7–93% and y 6–94% of the canvas, with a softly torn deckle edge on all four sides. Along its top edge the paper is very softly dip-dyed in dusky rose (#E7B4A6) fading into the ivory within the top 12% of the card, with a hint of amber where the colour meets the paper; a single hair-fine warm gold-leaf line runs as a border inset about 6% from the card's edge. The whole card inside the border is EMPTY paper (the website sets the names, date and venue there in HTML). Soft light from the top-left, a hair-fine contact shade only along the card's own deckle. No lantern, no flowers, no ornament, no photo. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+
+Kontrol: tırtıklı pirinç kâğıdı kart; üst kenarda hafif gül dip-dye; ince altın kıl çizgi bordür; içi tamamen boş; gerçek alfa.
+
+#### 228. W12 Fener silüetli portre penceresi (home)
+
+- İndirme adı: `31-sky-lantern-festival__lantern_frame.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/lantern_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1300 px (10:13) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A portrait photo frame in the shape of a tall paper sky lantern, alone, seen straight on, on a fully transparent background: a lantern silhouette of warm ivory rice paper (#F7EEDD) spanning about x 8–92% and y 6–94% of the canvas, with softly rounded shoulders at the top, gently tapering sides, and a thin dark wire ring across its open bottom; fine vertical split-bamboo ribs show through the paper border, which glows very softly warm (pale glow #FFD08A at its inner edge fading to ivory), the light staying inside the paper. In the middle a portrait photo window with a rounded arched top: exactly 700 px wide and 900 px tall overall, its top-left corner at x 150 px, y 230 px, the top of the window a full semicircle and the sides and bottom straight, filled with flat pure green #00FF00 (no texture, no shading, crisp edges, nothing over it). Soft light from the top-left. No flame, no string, no flowers, no pattern. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+
+Kontrol: fener silüeti x %8–92 · y %6–94; pencere düz `#00FF00`, kemerli üst, 700×900, sol üst (150, 230); kenar içeride hafif sıcak; dışında hâle yok; gerçek alfa.
+
+#### 229. W13 Asılı pirinç kâğıdı panel (story çerçevesi)
+
+- İndirme adı: `31-sky-lantern-festival__paper_panel.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/paper_panel.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1300 px (10:13) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A hanging rice-paper panel used as a portrait photo frame, alone, seen straight on, on a fully transparent background: a sheet of warm ivory rice paper (#F7EEDD, soft fibres, a gently torn deckle along its two long sides) spanning x 8–92% of the width, held between two slim natural split-bamboo rods, one across the top at about 11% of the height and one across the bottom at about 92%, each rod extending slightly beyond the paper on both sides; from the ends of the top rod a fine amber silk hanging cord (#F2A65A) rises in a soft triangle to a small loop at about 6% of the height. In the middle a portrait photo window exactly 760 px wide and 950 px tall (4:5), its top-left corner at x 120 px, y 200 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, nothing over it). The paper around the window glows very faintly warm along the window's lower edge, the light staying inside the paper. Soft light from the top-left. No lantern, no flowers, no pattern. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+
+Kontrol: pencere düz `#00FF00`, 760×950 (4:5), sol üst (120, 200); üstte ve altta bambu çubuk, üstte kehribar askı ipi; yeşil başka yerde yok; gerçek alfa.
+
+#### 230. W14 Geniş bambu panel (mekân fotoğrafı)
+
+- İndirme adı: `31-sky-lantern-festival__wide_panel.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/wide_panel.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1000 px (8:5) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A wide landscape rice-paper panel used as a photo frame, alone, seen straight on, on a fully transparent background: a sheet of warm ivory rice paper (#F7EEDD, soft fibres, softly torn deckle along its left and right edges) spanning x 7–93% and y 9–91% of the canvas, held between two slim natural split-bamboo rods along its top edge (at about 8% of the height) and its bottom edge (at about 92%), each rod extending slightly beyond the paper to x 6% and x 94%. In the middle a landscape photo window exactly 1280 px wide and 720 px tall (16:9), its top-left corner at x 160 px, y 140 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, nothing over it). A very faint warm glow in the paper along the window's lower edge, staying inside the paper. Soft light from the top-left. No hanging cord, no lantern, no flowers. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+
+Kontrol: pencere düz `#00FF00`, 1280×720 (16:9), sol üst (160, 140); üstte ve altta bambu çubuk; gerçek alfa.
+
+#### 231. W15 Uzak küçük fener (arka planda yükselen)
+
+- İndirme adı: `31-sky-lantern-festival__far_lantern.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/far_lantern.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 400×560 px (5:7) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: lantern_lit.png (listede #225)
+
+```
+A single small lit paper sky lantern seen from slightly below and at a distance, as if floating high in the evening air, alone, on a fully transparent background, spanning about x 25–75% and y 10–90% of the canvas: the same plain rice-paper lantern as lantern_lit.png (rounded shoulders, tapering cylindrical body, thin wire ring at the open bottom, faint bamboo ribs), glowing warmly from inside (pale glow #FFD08A at the lower middle, amber #F2A65A toward the edges), very slightly soft as if a little out of focus. The light stays entirely inside the lantern's own paper: no flame, no rays, no halo outside its outline. No string. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+
+Kontrol: tek küçük yanık fener, hafif yumuşak; dışında hâle yok; alev/ip yok; gerçek alfa.
+
+#### 232. W16 Köşe süsü (gül pembesi bahçe gülleri + çayır otları)
+
+- İndirme adı: `31-sky-lantern-festival__corner_spray.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/corner_spray.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1000 px (6:5) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A restrained, romantic corner spray of flowers growing out from near the top-left corner toward the centre, alone, on a fully transparent background, photorealistic: two dusky rose garden roses (#E7B4A6, soft layered petals with a warmer apricot heart), one pale apricot spray rose and two small buds, a few long soft feathery meadow grasses and wispy seed heads catching the light, and one short curling tail of amber silk ribbon (#F2A65A) with a soft sheen; stems hidden. Airy and light, not dense. It reaches toward the top and left sides of the image but stays 6% inside them, and the bottom-right half of the canvas is completely empty. Soft dusk light from the top-left. No lantern, no vase, no glitter, no other colours. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+
+Kontrol: sol üstten çıkan hafif küme, sağ alt yarı boş; gül pembesi + kayısı + çayır otu + kehribar kurdele; yoğun değil; gerçek alfa.
+
+#### 233. W17 Minik fener dizisi (bölüm ayırıcı)
+
+- İndirme adı: `31-sky-lantern-festival__divider.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/divider.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×240 px (20:3) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A slim horizontal divider, alone, on a fully transparent background: one very fine warm-gold thread running horizontally across x 8–92% of the canvas, sagging very gently at its centre, with seven miniature plain rice-paper lanterns hanging from it at even intervals on tiny threads, the middle one slightly larger and the others gradually smaller toward both ends; each miniature lantern glows warmly from inside (pale glow #FFD08A to amber #F2A65A), the light staying inside its own paper. Elegant and fine, not a party garland. No tassels, no other colours, no halo outside the lanterns. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+
+Kontrol: ince altın iplik, yedi minik yanık fener (ortadaki büyük); fenerlerin dışında hâle yok; iki uçta boşluk; gerçek alfa.
+
+#### 234. W18 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `31-sky-lantern-festival__accent_1.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/accent_1.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_1 (number 1 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft dusk light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one tiny irregular flake of warm gold leaf, thin and slightly curled, with a crisp metallic highlight; 2 = one single loose dusky rose petal (#E7B4A6), softly cupped, a warmer apricot tone at its base; 3 = one single dandelion wish seed — a slender seed with its fine white feathery parachute fully open, delicate and airy.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (altın varak pulu, gül yaprağı, karahindiba tohumu); kenara değmiyor; gerçek alfa.
+
+#### 235. W18 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `31-sky-lantern-festival__accent_2.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/accent_2.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_2 (number 2 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft dusk light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one tiny irregular flake of warm gold leaf, thin and slightly curled, with a crisp metallic highlight; 2 = one single loose dusky rose petal (#E7B4A6), softly cupped, a warmer apricot tone at its base; 3 = one single dandelion wish seed — a slender seed with its fine white feathery parachute fully open, delicate and airy.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (altın varak pulu, gül yaprağı, karahindiba tohumu); kenara değmiyor; gerçek alfa.
+
+#### 236. W18 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `31-sky-lantern-festival__accent_3.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/accent_3.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_3 (number 3 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft dusk light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one tiny irregular flake of warm gold leaf, thin and slightly curled, with a crisp metallic highlight; 2 = one single loose dusky rose petal (#E7B4A6), softly cupped, a warmer apricot tone at its base; 3 = one single dandelion wish seed — a slender seed with its fine white feathery parachute fully open, delicate and airy.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (altın varak pulu, gül yaprağı, karahindiba tohumu); kenara değmiyor; gerçek alfa.
+
+#### 237. W19 Website hero + paylaşım görseli (og:image kaynağı)
+
+- İndirme adı: `31-sky-lantern-festival__web_hero.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/parts/web_hero.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1024 px (3:2) · opak · PNG
+- Ek görsel: flap.png (listede #222), env_front.png (listede #221), dusk_ground.png (listede #217), lantern_lit.png (listede #225), corner_spray.png (listede #232)
+
+```
+Wide horizontal still life at dusk, photorealistic product photography: the closed portrait dip-dyed washi envelope of flap.png and env_front.png with its lantern-belly flap and torn feathered edge lies slightly below the centre on a soft sheet of the dusk washi of dusk_ground.png; on it, tied by its fine amber silk thread to the small gold stud, stands the small paper sky lantern of lantern_lit.png, glowing warmly from inside (no flame visible); at the left a restrained spray of dusky rose garden roses, a pale apricot rose and feathery meadow grasses (as corner_spray.png); a few tiny gold-leaf flakes and one dandelion seed lie on the paper; behind, softly out of focus in a violet-to-amber evening sky, three distant lit paper lanterns rise at different heights. Only dusk violet, dusky rose, lantern amber, glow and rice-paper ivory tones; soft last daylight from the top-left. The top 20% of the image is calm and soft (only the out-of-focus sky and one distant lantern). This image is cropped to 1200×630 for link previews: keep the whole envelope and lantern visible with at least 5% empty margin below the envelope. No people, no fire, no smoke. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+
+Kontrol: zarf + yanık fener bütün, altında ≥%5 boşluk; fenerde alev yok; üst %20 sakin; yazı yok.
+
+#### 238. P1 — Ön yüz
+
+- İndirme adı: `31-sky-lantern-festival__print__invitation_front_r_5x7.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/print/invitation_front_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+- Ek görsel: rice_paper.png (listede #219)
+
+```
+The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the warm ivory rice paper of rice_paper.png (#F7EEDD). Across the very top, a soft hand dip-dyed band of dusk washi colour bleeds down into the paper — dusk violet (#2B1F45) at the top edge melting through violet and dusky rose (#E7B4A6) into a faint amber glow and then into the ivory — the coloured band fading out completely by 15% of the height, with a few tiny warm gold-leaf flecks in it; within this band, between 20% and 80% of the width, three small plain rice-paper sky lanterns glowing softly from inside rise at slightly different heights (the light staying inside each lantern, no flame), none reaching lower than 17% of the height. Along the bottom, between 93% and 96% of the height and from 14% to 86% of the width, one fine warm-gold line with a single tiny glowing lantern at its centre. The rectangle from 19% to 91% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm paper (the names, date and venue are set there): no lantern, no fleck, no line, no colour, no shadow, no stain in it. No ornament within 8% of the left and right edges except the soft colour of the dyed band. Soft light from the top-left. No QR code. No text, letters, numbers, characters, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: tam taşma; üstte %15'te tamamen sönen dip-dye alacakaranlık bandı + üç küçük yanık fener (%17'nin üstünde); altta ince altın çizgi + minik fener; %19–%91 × %10–%90 tamamen boş; yazı yok.
+
+#### 239. P2 — Arka yüz
+
+- İndirme adı: `31-sky-lantern-festival__print__invitation_back_r_5x7.png`
+- Hedef: `collections/31_Sky_Lantern_Festival/assets/gpt/print/invitation_back_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+
+```
+The back of the same printed wedding invitation, full bleed, portrait 5.25:7.25, perfectly flat: the same warm ivory rice paper, only a short string of five miniature plain rice-paper lanterns glowing softly from inside hanging from one fine warm-gold thread across the top centre (between 30% and 70% of the width), its lowest point staying above 11% of the height, and a very faint dusky rose dye blush along the top edge fading out by 6% of the height. The whole area below 13% of the height, from 9% to 91% of the width, is COMPLETELY EMPTY paper (a schedule and a QR code are set there): no lantern, no line, no colour, no shadow, no stain. No ornament within 8% of the left and right edges. No QR code. No text, letters, numbers, characters, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: ön yüzle aynı kâğıt; yalnız üst ortada beş minik fener dizisi (%11'in üstünde); %13'ün altı boş; yazı/QR yok.
+
+### 32_Music_Box_Ballerina
+
+Sohbetin ilk mesajı (dosyanın GPT notu):
+
+```
+This design was completely REDESIGNED on 2026-10-22. Generate PAKET 5R (website layers) first, in order and in ONE chat, then PAKET 6R (printable invitation). **PAKET 2 sample photos already exist — do not regenerate them.** Sections marked GEÇERSİZ are not wanted. Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, names, dates, initials, monograms, crests, musical notation, logos, brand marks, QR codes or watermarks in any image** (also not on the keyhole plate, the key, the figurine's base, the card or the mirrors). The ballerina is a small porcelain-and-tulle music-box figurine with a serene, softly suggested porcelain face (eyes gently closed) — not a photograph of a real dancer, not a doll or toy brand, not a cartoon. The music box look is an original design: it must not copy any real music box, jewellery box, brand or seller's design. Give W1 `page_ground.png`, W2 `card_paper.png` and W3 `env_back.png` as the style reference of every later part: the same blush silk satin, the same cream cotton card, the same rose-quartz silk satin envelope with its quilted blush lining, the same soft gold filigree, the same soft daylight from the top-left. Parts drawn on the same envelope canvas (W3, W4, W5, W7) keep the envelope in exactly the same box.
+```
+
+#### 240. W1 Pudra ipek saten (sayfa zemini, kapak sayfası)
+
+- İndirme adı: `32-music-box-ballerina__page_ground.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/page_ground.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, perfectly flat top-down texture of a very pale blush silk satin (#F7E4E2), like the lining of an antique vanity drawer: a fine smooth weave with a soft, even, liquid sheen that drifts only very gently across the surface, very low contrast so dark rose text reads on it everywhere. Perfectly flat and evenly lit by soft daylight from the top-left: no folds, no wrinkles, no ripples, no pattern, no quilting, no stains, no shadow, no vignette, no flowers. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: çok açık pudra saten, sakin; dikişsiz (2×2 yan yana ek yeri yok); kırışık/desen/kapitone yok; her yerde yazı okunur.
+
+#### 241. W2 Krem pamuk kart kâğıdı (kartlar, bantlar, form)
+
+- İndirme adı: `32-music-box-ballerina__card_paper.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/card_paper.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1536 px (1:1) · opak · PNG
+
+```
+A seamless, tileable, perfectly flat top-down texture of thick mould-made cotton card in a warm cream (#FFF8F4) with the faintest blush undertone: a gentle soft tooth, a few faint cotton fibres, an even tone with only the gentlest natural cloudiness. Evenly lit by soft daylight from the top-left, no fold, no crease, no deckle edge, no stain, no shadow, no vignette, no printing, no pattern, no gold. Calm enough for fine dark rose ink text to read on it everywhere. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: dikişsiz; krem `#FFF8F4` civarı; leke/kat/desen yok; üstüne koyu yazı okunur.
+
+#### 242. W3 Zarfın arkası (kapitone pudra saten astar görünür)
+
+- İndirme adı: `32-music-box-ballerina__env_back.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/env_back.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1500×1200 px (5:4) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+The back panel of an open horizontal envelope made of rose-quartz silk satin (#EECDD0) wrapped over stiff board, seen perfectly straight from the front, on a fully transparent background. The envelope occupies exactly x 7–93% and y 7–93% of the canvas (a 1.25:1 rectangle with very slightly softened corners and crisp folded satin edges). We see its inside: it is lined with tufted, quilted pale blush satin (#F7E4E2) like the interior of an antique music box — soft rounded diamond quilting with a tiny cream pearl button at each crossing, a gentle sheen on every puff where the light from the top-left catches it — the quilting covers the panel almost completely, with a slim margin of rose-quartz satin and a hair-fine soft-gold piping (#C9A45C) along the top and both sides; a very gentle shade toward the bottom where the front pocket will sit. No flap, no front pocket, no keyhole plate, no key, no card, no figurine inside. Soft daylight from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: yatay panel x %7–93 · y %7–93; iç yüz kapitone pudra saten + minik inci düğmeler, kenarlarda ince gül kuvarsı pay ve altın biye; kapak/cep/plaka yok; gerçek alfa.
+
+#### 243. W4 Zarfın ön cebi
+
+- İndirme adı: `32-music-box-ballerina__env_front.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/env_front.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1500×1200 px (5:4) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_back.png (listede #242)
+
+```
+Only the front pocket of the same horizontal rose-quartz satin envelope as env_back.png, on the same 1500×1200 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 7–93% and y 7–93% of the canvas; the pocket spans the full envelope width (x 7–93%) from its top edge down to the envelope's bottom edge at 93% of the canvas height. Its top edge is one soft, smooth arc: it starts at 40% of the canvas height at both side edges and dips gently to 47% at the horizontal centre, cut clean, the satin neatly folded over a stiff board so the edge has a soft rounded thickness. Rose-quartz silk satin (#EECDD0) with a soft liquid sheen flowing from the top-left, the faint folded seams of the two side flaps barely visible, and at each of the two bottom corners a tiny soft-gold filigree corner mount (pierced scrollwork, each about 5% of the envelope's width), like the little gilt corners of an antique music box. Everything above the pocket's edge is completely transparent. No flap, no keyhole plate, no key, no card. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: cep tam genişlik; üst kenarı yanlarda %40, ortada %47'ye inen yumuşak yay; alt köşelerde minik telkâri köşe süsü; üstü tamamen şeffaf; gerçek alfa.
+
+#### 244. W5 Bombe müzik kutusu kapağı (kapalı, dış yüz)
+
+- İndirme adı: `32-music-box-ballerina__flap.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/flap.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1500×1200 px (5:4) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+Only the closed flap of the same horizontal rose-quartz satin envelope, on the same 1500×1200 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 7–93% and y 7–93% of the canvas; the flap spans its full width (x 7–93%), hinged along a softly rounded fold at the envelope's top edge (7% of the canvas height). Its free lower edge is the serpentine outline of an antique music-box lid: it meets the two side edges at 44% of the canvas height, rises gently into two soft concave shoulders that reach 41% of the canvas height at 22% and 78% of the width, and then swells forward in one full, generous convex curve to a broad, softly rounded lowest point at the horizontal centre, at 66% of the canvas height (not a V, not a sharp point, not scalloped, not straight). A fine soft-gold filigree border (#C9A45C, delicate pierced scrollwork about 1.2% of the canvas height wide, gently worn gilding) follows the whole free edge. Rose-quartz silk satin (#EECDD0) stretched smooth over the flap with a soft liquid sheen from the top-left and a whisper of contact shade on the flap itself just along its curved edge. Everything below the flap's edge is completely transparent. No keyhole plate, no key, no seal, no ribbon, no card. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: kapak tam genişlik; kenar yanlarda %44, omuzlar (%22/%78) %41, ortada %66'da geniş yuvarlak uç (V/sivri/tarak değil); kenar boyunca ince altın telkâri; plaka/anahtar yok; altı şeffaf; gerçek alfa.
+
+#### 245. W6 Kapağın iç yüzü — ayna saten + oval ayna (açıkken dik)
+
+- İndirme adı: `32-music-box-ballerina__flap_in.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/flap_in.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1500×900 px (5:3) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+- Ek görsel: flap.png (listede #244)
+
+```
+The inside of the same serpentine music-box flap, alone, seen straight on as it stands upright when the envelope is open, on a fully transparent background: the outline of flap.png mirrored vertically. Its straight fold edge is at the BOTTOM, along 93% of the image height, spanning x 7–93% of the width (exactly as wide as the envelope); its two straight sides rise to 44% of the image height, the two soft shoulders at 22% and 78% of the width sit at 48%, and its serpentine edge swells UP in one full curve to a broad, softly rounded highest point at the horizontal centre, at 14% of the image height. The same fine soft-gold filigree border follows the whole curved edge. The inside is lined with smooth rose-gold silk satin (#B76E79) stretched taut, with a soft mirror-like sheen from the top-left, and in its centre is set an upright oval bevelled mirror whose glass area is the photo window: an oval exactly 380 px wide and 470 px tall, its bounding box from x 560 px to x 940 px and from y 230 px to y 700 px, filled with flat pure green #00FF00 (no texture, no shading, no reflection, smooth clean oval edge, nothing over it), surrounded by a slim soft-gold beaded bezel about 18 px wide that stays entirely outside the green oval. Soft daylight from the top-left. No key, no keyhole plate, no ribbon, no figurine. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: düz katlama kenarı altta (%93), yanlar %44'e, omuzlar %48, tepe ortada %14; rose gold ayna saten; ortada düz `#00FF00` oval, ~380×470, kutu (560–940, 230–700); ince altın boncuklu bezel pencereye binmiyor; gerçek alfa.
+
+#### 246. W7 Telkâri anahtar deliği plakası (kapağın ucunda)
+
+- İndirme adı: `32-music-box-ballerina__escutcheon.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/escutcheon.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1500×1200 px (5:4) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: env_back.png (listede #242), flap.png (listede #244)
+
+```
+On the same 1500×1200 canvas as env_back.png and flap.png, in exactly the same place (the envelope box is x 7–93% and y 7–93% of the canvas, but the envelope itself is NOT drawn here), only a small ornate keyhole escutcheon plate, on a fully transparent background: an upright rococo cartouche-shaped plate of soft-gold filigree (#C9A45C, fine pierced scrollwork with tiny leaf curls, gently worn gilding, a slightly domed solid centre) spanning exactly x 44–56% and y 54–72% of the canvas, symmetrical about the vertical centre line, hanging like a little clasp from the tip of a music-box lid. In its solid centre a classic keyhole: a small round opening whose centre is at exactly x 50%, y 62% of the canvas, with a short tapered slot below it, the opening dark deep rose-brown (#4A2F35). Soft daylight from the top-left, warm highlights on the gilding. No key, no lock body, no letters, no crest, no screws other than two tiny gilt pins at the top. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: tek simetrik telkâri plaka x %44–56 · y %54–72; anahtar deliği merkezi (%50, %62); anahtar yok, harf/arma yok; zarf çizilmemiş; gerçek alfa.
+
+#### 247. W8 Pirinç kurma anahtarı (önden, dönme ekseni merkezde)
+
+- İndirme adı: `32-music-box-ballerina__key.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/key.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 800×800 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A single antique music-box winding key, seen exactly from the front as it sits in a keyhole facing the viewer, alone, on a fully transparent background: a small round polished brass collar exactly at the centre of the canvas (its centre at 400, 400 px), and attached to it a flat, ornate openwork key bow facing the viewer — two graceful heart-shaped scrolled lobes of pierced soft-gold brass (#C9A45C with warm highlights), extending equally to the left and to the right of the collar, perfectly mirror-symmetrical, spanning about x 10–90% of the canvas width and about y 28–72% of its height, with a few tiny leaf curls and one small cream pearl set at the centre of the collar. The shaft is hidden behind the collar (it points straight away from the viewer into the keyhole). Soft daylight from the top-left, crisp warm reflections. No keyhole plate, no ribbon, no tassel, no chain. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: boyun tam tuval merkezinde (400, 400); iki loblu tutamak sağa-sola eşit ve ayna simetrik (x ~%10–90); plaka/kurdele yok; gerçek alfa.
+
+#### 248. W9 Porselen balerin — önden
+
+- İndirme adı: `32-music-box-ballerina__ballerina_front.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/ballerina_front.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 800×1200 px (2:3) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A small antique porcelain music-box ballerina figurine, seen exactly from the front, standing upright and centred, alone, on a fully transparent background, photorealistic: glazed cream porcelain (#FFF8F4) skin and bodice with a soft pearly lustre, a serene, softly suggested porcelain face with eyes gently closed and hair in a smooth low bun, poised en pointe with both legs together (feet crossed tightly in sous-sus), both arms raised above her head in a rounded, perfectly symmetrical fifth position, wearing a classical short tutu of layered real blush silk tulle (#F7E4E2 to #EECDD0) standing out evenly on both sides, a hint of soft-gold edging on the bodice, standing on a small round soft-gold filigree pedestal base. The whole figure and base are perfectly mirror-symmetrical about the vertical centre line and span exactly x 22–78% and y 6–94% of the canvas, the base centred at x 50% at the bottom. Soft daylight from the top-left. Elegant and refined, not a doll, not a toy, not a cartoon, not a real person. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: tek figür, önden, ayna simetrik (kollar yuvarlak 5. pozisyonda, ayaklar bitişik); siluet + kaide x %22–78 · y %6–94; porselen yüz yumuşak, gözler kapalı; oyuncak/gerçek kişi değil; gerçek alfa.
+
+#### 249. W10 Porselen balerin — arkadan (W9 ile aynı siluet)
+
+- İndirme adı: `32-music-box-ballerina__ballerina_back.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/ballerina_back.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 800×1200 px (2:3) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: ballerina_front.png (listede #248)
+
+```
+The same porcelain music-box ballerina figurine as ballerina_front.png, on the same 800×1200 canvas and in exactly the same place and size, now seen exactly from BEHIND, on a fully transparent background: the same pose (en pointe, legs together, both arms raised in the same rounded symmetrical fifth position), the same layered blush silk tulle tutu, the back of the cream porcelain bodice with fine soft-gold edging and a tiny laced back, the smooth low bun of her hair with two tiny pearl pins, the same small round soft-gold filigree pedestal. Its outline must match ballerina_front.png as closely as possible: the figure and base span exactly x 22–78% and y 6–94% of the canvas, mirror-symmetrical, base centred at x 50%. Soft daylight from the top-left. No face visible. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: W9 ile aynı tuval, aynı kutu, aynı poz; arkadan (topuz + inci tokalar, sırt); siluetler üst üste konunca kenarları çakışıyor; gerçek alfa.
+
+#### 250. W11 Zarftaki kart (boş)
+
+- İndirme adı: `32-music-box-ballerina__card_small.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/card_small.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1300 px (10:13) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: card_paper.png (listede #241)
+
+```
+A flat portrait invitation card, alone, seen straight on, on a fully transparent background: the thick cream cotton card of card_paper.png (#FFF8F4) with softly rounded corners, spanning x 7–93% and y 6–94% of the canvas, a fine soft-gold foil border line (#C9A45C, a crisp warm metallic shine) inset about 5% from the card's edge and a second hair-fine rose-gold line (#B76E79) just inside it; at the top centre, inside the border, one small delicate soft-gold filigree flourish (symmetrical scrolls around a tiny blush rosebud), no wider than 26% of the card and no lower than 13% of the card's height. Below it the whole card inside the border is EMPTY paper (the website sets the names, date and venue there in HTML). Soft daylight from the top-left, a hair-fine contact shade on the card's own edge only. No photo, no other ornament. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: boş krem kart, yuvarlak köşe, ince altın + rose gold çift bordür; üst ortada küçük telkâri + gonca (%13'ün üstünde); altı tamamen boş; gerçek alfa.
+
+#### 251. W12 Varaklı oval ayna — home portresi
+
+- İndirme adı: `32-music-box-ballerina__portrait_frame.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/portrait_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1300 px (10:13) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+An ornate antique gilded oval vanity mirror frame, alone, seen straight on, on a fully transparent background: a carved and gilded frame in soft gold (#C9A45C, warm highlights, gently worn gilding with a hint of rose-gold in the recesses) with a fine inner bead of tiny cream pearls, crowned at the top by a symmetrical crest of filigree scrolls and leaf curls holding a small cluster of three blush garden roses (#EECDD0, deep rose shade #8A4A55 in their hearts) with two pale sage leaves. The frame spans about x 8–92% and y 6–94% of the canvas. The glass area is the photo window: an upright oval exactly 640 px wide and 820 px tall, its bounding box from x 180 px to x 820 px and from y 330 px to y 1150 px, filled with flat pure green #00FF00 (no texture, no shading, no reflection, smooth clean oval edge, nothing over it); the crest sits entirely above y 330 px except where the frame meets it. Soft daylight from the top-left. No ribbon, no bow, no glass reflection over the window. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: düz `#00FF00` oval, ~640×820, kutu (180–820, 330–1150); varaklı çerçeve + inci boncuk; tepede telkâri + üç gül; fiyonk/kurdele yok; pencereye bir şey binmiyor; gerçek alfa.
+
+#### 252. W13 İnci boncuklu oval ayna — story çerçevesi
+
+- İndirme adı: `32-music-box-ballerina__mirror_frame.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/mirror_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1000×1250 px (4:5) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A slender antique oval hand-mirror-style frame without a handle, alone, seen straight on, on a fully transparent background: a narrow frame of soft-gold filigree (#C9A45C, fine pierced scrollwork, gently worn gilding) with an outer row of tiny cream pearls and a fine inner bevel, small symmetrical leaf curls at the top and bottom only. The frame's outer edge spans about x 6–94% and y 6–94% of the canvas. The glass area is the photo window: an upright oval exactly 760 px wide and 950 px tall, its bounding box from x 120 px to x 880 px and from y 150 px to y 1100 px, filled with flat pure green #00FF00 (no texture, no shading, no reflection, smooth clean oval edge, nothing over it). Lighter and simpler than an ornate crested mirror: no roses, no crest. Soft daylight from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: düz `#00FF00` oval, ~760×950 (4:5), kutu (120–880, 150–1100); ince telkâri + inci dizisi; gül/arma yok; gerçek alfa.
+
+#### 253. W14 Geniş varaklı ayna (mekân fotoğrafı)
+
+- İndirme adı: `32-music-box-ballerina__venue_frame.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/venue_frame.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×1000 px (8:5) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+
+```
+A wide antique gilded overmantel mirror frame, alone, seen straight on, on a fully transparent background: a carved and gilded rectangular frame in soft gold (#C9A45C, gently worn gilding, a hint of rose-gold in the recesses) with a fine inner bead of tiny cream pearls, delicate symmetrical filigree scrolls at the four corners and a small filigree flourish at the top centre. The frame spans about x 6–94% and y 6–94% of the canvas. The glass area is the photo window: a landscape rectangle exactly 1360 px wide and 765 px tall (16:9), its top-left corner at x 120 px, y 117 px, filled with flat pure green #00FF00 (no texture, no shading, no reflection, straight edges, nothing over it). Soft daylight from the top-left. No roses, no ribbon. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: düz `#00FF00` dikdörtgen, ~1360×765 (16:9), sol üst ~(120, 117); varaklı çerçeve + inci boncuk + köşe telkârileri; pencereye bir şey binmiyor; gerçek alfa.
+
+#### 254. W15 Köşe süsü (ölçülü: iki bahçe gülü + tül + telkâri)
+
+- İndirme adı: `32-music-box-ballerina__corner_spray.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/corner_spray.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1200×1000 px (6:5) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A restrained, romantic corner spray growing out from near the top-left corner toward the centre, alone, on a fully transparent background, photorealistic: two blush garden roses (#EECDD0, many soft layered petals, deep rose shade #8A4A55 in their hearts), one cream rosebud, four or five pale sage-green leaves (#9DAA94), a soft wisp of blush silk tulle drifting out of the spray, and one fine soft-gold filigree scroll curling along it. Airy and light, not a heavy bouquet. It reaches toward the top and left sides of the image but stays 6% inside them, and the bottom-right half of the canvas is completely empty. Soft daylight from the top-left. No vase, no ribbon bow, no glitter, no other flower or colour. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: sol üstten çıkan hafif küme (2 gül, 1 gonca, az yaprak, tül, telkâri); sağ alt yarı boş; fiyonk yok; kenara değmiyor; gerçek alfa.
+
+#### 255. W16 Telkâri ayırıcı (bölüm ayırıcı)
+
+- İndirme adı: `32-music-box-ballerina__divider.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/divider.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1600×200 px (8:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+A slim horizontal divider of fine soft-gold filigree, alone, on a fully transparent background: a delicate symmetrical line of pierced gilded scrollwork and tiny leaf curls (#C9A45C, warm highlights) running horizontally across x 10–90% of the canvas at the vertical centre, thinning toward both ends, with one small lustrous cream pearl (#FFF8F4) set at its exact centre between two tiny mirrored scrolls. Elegant and fine. No flowers, no ribbon, no beads of other colours. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+
+Kontrol: yatay simetrik telkâri çizgi, ortada tek inci; uçlarda boşluk; gerçek alfa.
+
+#### 256. W17 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `32-music-box-ballerina__accent_1.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/accent_1.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_1 (number 1 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft daylight from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one single loose blush garden-rose petal (#EECDD0), soft and gently cupped, a deeper rose shade in its fold; 2 = one small round lustrous cream pearl (#FFF8F4) with a soft pink overtone highlight; 3 = one small soft wisp of blush silk tulle (#F7E4E2), gathered and drifting, with a few hair-fine soft-gold threads woven in.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (gül yaprağı, inci, tül parçası); kenara değmiyor; gerçek alfa.
+
+#### 257. W17 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `32-music-box-ballerina__accent_2.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/accent_2.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_2 (number 2 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft daylight from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one single loose blush garden-rose petal (#EECDD0), soft and gently cupped, a deeper rose shade in its fold; 2 = one small round lustrous cream pearl (#FFF8F4) with a soft pink overtone highlight; 3 = one small soft wisp of blush silk tulle (#F7E4E2), gathered and drifting, with a few hair-fine soft-gold threads woven in.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (gül yaprağı, inci, tül parçası); kenara değmiyor; gerçek alfa.
+
+#### 258. W17 Süzülen küçük nesneler — üç ayrı dosya
+
+- İndirme adı: `32-music-box-ballerina__accent_3.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/accent_3.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+
+```
+This prompt describes a set of 3 separate images (accent_1, accent_2, accent_3). Make ONLY ONE image now: accent_3 (number 3 of 3).
+
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft daylight from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one single loose blush garden-rose petal (#EECDD0), soft and gently cupped, a deeper rose shade in its fold; 2 = one small round lustrous cream pearl (#FFF8F4) with a soft pink overtone highlight; 3 = one small soft wisp of blush silk tulle (#F7E4E2), gathered and drifting, with a few hair-fine soft-gold threads woven in.)
+```
+
+Kontrol: her dosyada tek nesne; üç dosya farklı (gül yaprağı, inci, tül parçası); kenara değmiyor; gerçek alfa.
+
+#### 259. W18 Website hero + paylaşım görseli (og:image kaynağı)
+
+- İndirme adı: `32-music-box-ballerina__web_hero.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/parts/web_hero.png`
+- Bölüm: PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım) (website parçası (PAKET 5))
+- Şart: 1536×1024 px (3:2) · opak · PNG
+- Ek görsel: flap.png (listede #244), escutcheon.png (listede #246), key.png (listede #247), page_ground.png (listede #240), ballerina_front.png (listede #248), corner_spray.png (listede #254)
+
+```
+Wide horizontal still life, photorealistic luxury product photography, soft daylight from the top-left: the closed horizontal rose-quartz satin envelope of flap.png with its serpentine music-box flap and fine gold filigree edge, the filigree keyhole plate of escutcheon.png at the flap's tip with the brass winding key of key.png in it, lying slightly below the centre on pale blush silk satin (as page_ground.png); at the right the porcelain ballerina figurine of ballerina_front.png standing on her gilt pedestal; at the left a small airy spray of blush garden roses with a wisp of tulle (as corner_spray.png); a few loose rose petals and three small cream pearls scattered; behind, softly out of focus, the oval of a gilded vanity mirror reflecting only soft pink light. Only rose quartz, blush, cream, rose gold and soft gold tones. The top 20% of the image is calm and soft (only out-of-focus satin and mirror light). This image is cropped to 1200×630 for link previews: keep the whole envelope, key and figurine visible with at least 5% empty margin below them. No people. No text, letters, numbers, monograms, musical notation, logos or watermarks.
+```
+
+Kontrol: zarf + plaka + anahtar + balerin bütün, altında ≥%5 boşluk; üst %20 sakin; yazı/nota yok.
+
+#### 260. P1 — Ön yüz
+
+- İndirme adı: `32-music-box-ballerina__print__invitation_front_r_5x7.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/print/invitation_front_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+- Ek görsel: card_paper.png (listede #241), divider.png (listede #255), portrait_frame.png (listede #251)
+
+```
+The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the thick cream cotton card of card_paper.png (#FFF8F4). Across the top centre, between 22% and 78% of the width, a delicate symmetrical soft-gold filigree crest (fine pierced scrolls and leaf curls, as divider.png and the crest of portrait_frame.png) holding a small cluster of three blush garden roses (#EECDD0) with two pale sage leaves and a soft wisp of blush tulle drifting from it to each side; nothing in this top band reaches lower than 17% of the height. Along the bottom, between 93% and 96% of the height and from 14% to 86% of the width, a fine soft-gold filigree rule with one small cream pearl at its centre. The rectangle from 19% to 91% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm paper (the names, date and venue are set there): no petal, no line, no shadow, no stain in it. No ornament within 8% of the left and right edges. Soft daylight from the top-left. Only cream, blush, rose quartz, rose gold and soft gold tones. No QR code. No text, letters, numbers, monograms, musical notation, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: tam taşma; %19–%91 × %10–%90 tamamen boş; telkâri + güller yalnız üstte (%17'nin üstünde), telkâri çizgi + inci yalnız altta; yan %8 boş; yazı/nota yok.
+
+#### 261. P2 — Arka yüz
+
+- İndirme adı: `32-music-box-ballerina__print__invitation_back_r_5x7.png`
+- Hedef: `collections/32_Music_Box_Ballerina/assets/gpt/print/invitation_back_r_5x7.png`
+- Bölüm: PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm) (baskı parçası (PAKET 6 / G139))
+- Şart: 1575×2175 px (21:29) · opak · PNG
+
+```
+The back of the same printed wedding invitation, full bleed, portrait 5.25:7.25, perfectly flat: the same thick cream cotton card, only a short symmetrical soft-gold filigree flourish across the top centre (between 34% and 66% of the width) with one tiny blush rosebud at its middle, its lowest point staying above 11% of the height. The whole area below 13% of the height, from 9% to 91% of the width, is COMPLETELY EMPTY paper (a schedule and a QR code are set there): no petal, no line, no shadow, no stain. No ornament within 8% of the left and right edges. No QR code. No text, letters, numbers, monograms, musical notation, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+
+Kontrol: ön yüzle aynı kâğıt; yalnız üst ortada kısa telkâri + gonca (%11'in üstünde); %13'ün altı boş; yazı/QR yok.
+
 ### 33_Marigold_Mehndi
 
 Sohbetin ilk mesajı (dosyanın GPT notu):
@@ -41,7 +3720,7 @@ Sohbetin ilk mesajı (dosyanın GPT notu):
 Generate PAKET 5 (website layers) first, in order and in ONE chat, then PAKET 2 (sample photos), then PAKET 6 (printable invitation). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, scripts of any language, monograms, logos or watermarks in any image. No religious symbols or deities** (no Om, no swastika, no Ganesha, no temple, no sacred fire, no kalash): this is a festive, cultural look — marigolds, henna patterns, silk, brass lamps, carved arches — not a religious one. Give W2.1 `silk.png`, W2.14 `velvet.png`, W2.15 `paper.png` and W2.2 `sleeve.png` as the style reference of every later part: the same fuchsia silk, the same velvet, the same saffron paper, the same warm gold.
 ```
 
-#### 1. W2.2 Altın lazer kesim paisley kılıf (açılışta yana kayar)
+#### 262. W2.2 Altın lazer kesim paisley kılıf (açılışta yana kayar)
 
 - İndirme adı: `33-marigold-mehndi__sleeve.png`
 - Hedef: `collections/33_Marigold_Mehndi/assets/gpt/parts/sleeve.png`
@@ -54,7 +3733,7 @@ A wide horizontal band of thin gold metallic card, laser-cut in an intricate ope
 
 Kontrol: bant tuvali dolduruyor (2,4:1); kesik yerleri gerçekten şeffaf; püskül/mühür yok; gerçek alfa.
 
-#### 2. W2.9 Kına deseni zemini (Story arka planı)
+#### 263. W2.9 Kına deseni zemini (Story arka planı)
 
 - İndirme adı: `33-marigold-mehndi__mehndi_pattern.png`
 - Hedef: `collections/33_Marigold_Mehndi/assets/gpt/parts/mehndi_pattern.png`
@@ -67,7 +3746,7 @@ A seamless, tileable all-over pattern of fine henna (mehndi) line art in a light
 
 Kontrol: dikişsiz; yalnız ince çizgi; motifler seyrek; alfa.
 
-#### 3. W2.13 Zarfın düz kapağı (ön yüz)
+#### 264. W2.13 Zarfın düz kapağı (ön yüz)
 
 - İndirme adı: `33-marigold-mehndi__flap.png`
 - Hedef: `collections/33_Marigold_Mehndi/assets/gpt/parts/flap.png`
@@ -89,7 +3768,7 @@ Sohbetin ilk mesajı (dosyanın GPT notu):
 Generate PAKET 5 (website layers) first, in order and in ONE chat, then PAKET 2 (sample photos), then PAKET 6 (printable invitation). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, logos, monograms, seals with writing or watermarks in any image.** The only character allowed anywhere is the double happiness character 囍, and only in W2.11 `xi_gold.png` (and in W2.20 / PAKET 6 where the prompt asks for it) — never any other Chinese character, no stamp, no calligraphy, no religious symbol (no Buddha, no temple, no deity, no incense, no shrine). Give W2.2 `red_paper.png`, W2.3 `cream_paper.png`, W2.4 `gold_leaf.png` and W2.7 `envelope_flap.png` as the style reference of every later part: the same cinnabar paper, the same warm cream, the same gold leaf, the same crisp paper-cut technique.
 ```
 
-#### 4. W2.6 Zarfın ön cebi
+#### 265. W2.6 Zarfın ön cebi
 
 - İndirme adı: `34-red-lacquer-double-happiness__envelope_pocket.png`
 - Hedef: `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/envelope_pocket.png`
@@ -103,7 +3782,7 @@ The front pocket of the same tall vertical red envelope as envelope_back.png, se
 
 Kontrol: cep %30'dan aşağı, üstü tamamen şeffaf; cep düz (düğme, ip, 囍 yok); gerçek alfa.
 
-#### 5. W2.12 Dış kâğıt kesim pencere (kırmızı; ortadan ikiye kesilir)
+#### 266. W2.12 Dış kâğıt kesim pencere (kırmızı; ortadan ikiye kesilir)
 
 - İndirme adı: `34-red-lacquer-double-happiness__veil_outer.png`
 - Hedef: `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/veil_outer.png`
@@ -117,13 +3796,13 @@ A single sheet of red Chinese paper-cut (jianzhi) in the same cinnabar red paper
 
 Kontrol: tuvali dolduran tek kâğıt kesim; ortadan simetrik; açık yerler gerçekten şeffaf; yazı yok.
 
-#### 6. W2.13 İç kâğıt kesim pencere (altın; ortadan ikiye kesilir)
+#### 267. W2.13 İç kâğıt kesim pencere (altın; ortadan ikiye kesilir)
 
 - İndirme adı: `34-red-lacquer-double-happiness__veil_inner.png`
 - Hedef: `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/veil_inner.png`
 - Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
 - Şart: 968×1400 px (0.691:1) · şeffaf zemin (gerçek alfa) · PNG
-- Ek görsel: veil_outer.png (listede #5)
+- Ek görsel: veil_outer.png (listede #266)
 
 ```
 A single sheet of fine gold paper-cut (gold-leaf paper) of the same size, seen flat and straight on, on a fully transparent background, filling the image edge to edge (0.69:1): a lighter, finer pattern than veil_outer.png — a delicate lattice of plum blossoms and small cloud scrolls with two smaller peonies, about 60% of the area cut away (fully transparent openings), crisp edges, a soft gold satin shine from the top-left. Perfectly mirror-symmetric left to right (it is cut down the vertical centre line into two halves). No character, no text, letters, numbers or symbols. True transparent background PNG (real alpha channel). RETRY NOTE: the first attempt touched the image border. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
@@ -139,7 +3818,7 @@ Sohbetin ilk mesajı (dosyanın GPT notu):
 Generate PAKET 5 (website layers) first, in order and in ONE chat, then PAKET 2 (sample photos), then PAKET 6 (printable invitation). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, monograms, clan crests, coats of arms, flags, religious symbols, logos or watermarks in any image.** The tartan is an original heather-and-moss sett invented for this design — it must not copy any registered clan or brand tartan. Give W2.1 `tartan_wool.png`, W2.2 `cream_paper.png` and W2.6 `envelope_back.png` as the style reference of every later part: the same wool, the same cream paper, the same warm saddle leather and antique brass, the same soft daylight.
 ```
 
-#### 7. W2.7 Zarfın ön cebi
+#### 268. W2.7 Zarfın ön cebi
 
 - İndirme adı: `35-highland-tartan-thistle__envelope_front.png`
 - Hedef: `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/envelope_front.png`
@@ -153,7 +3832,7 @@ Only the front pocket of the same tartan wool envelope as envelope_back.png, on 
 
 Kontrol: cep tuvalin %34'ünden alta, tam genişlikte; üstü tamamen şeffaf; kayış/toka yok; gerçek alfa.
 
-#### 8. W2.8 Zarfın düz kapağı (V değil)
+#### 269. W2.8 Zarfın düz kapağı (V değil)
 
 - İndirme adı: `35-highland-tartan-thistle__flap.png`
 - Hedef: `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/flap.png`
@@ -175,7 +3854,7 @@ Sohbetin ilk mesajı (dosyanın GPT notu):
 Generate PAKET 5 (website layers) first, in order and in ONE chat, then PAKET 2 (sample photos), then PAKET 6 (printable invitation). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, Latin plant names, labels with writing, logos, monograms or watermarks in any image** (a blank label, a blank seed packet and engraved botanical line art without lettering are fine). Give W3.1 `fern_ground.png`, W3.3 `herbarium_paper.png` and W3.4 `packet_body.png` as the style reference of every later part: the same deep fern green, the same herbarium paper, the same kraft, copper and jute, the same soft daylight through glass.
 ```
 
-#### 9. W3.6 Bakır bitki etiketi (boş; monogram/numara site yazar)
+#### 270. W3.6 Bakır bitki etiketi (boş; monogram/numara site yazar)
 
 - İndirme adı: `36-victorian-glasshouse__copper_tag.png`
 - Hedef: `collections/36_Victorian_Glasshouse/assets/gpt/parts/copper_tag.png`
@@ -188,7 +3867,7 @@ A small antique copper plant label as used in a Victorian glasshouse, seen strai
 
 Kontrol: boş merkez; delik sol üstte, düz `#00FF00`; ip yok; alfa.
 
-#### 10. W3.10 Eğrelti otları ve orkide (açılış ve home çerçevesi)
+#### 271. W3.10 Eğrelti otları ve orkide (açılış ve home çerçevesi)
 
 - İndirme adı: `36-victorian-glasshouse__ferns.png`
 - Hedef: `collections/36_Victorian_Glasshouse/assets/gpt/parts/ferns.png`
@@ -209,7 +3888,7 @@ Sohbetin ilk mesajı (dosyanın GPT notu):
 Generate PAKET 5 (website layers) first, in order and in ONE chat, then PAKET 2 (sample photos), then PAKET 6 (printable invitation). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, monograms, logos, signatures or watermarks in any image.** Give W2.1 `cream_paper.png`, W2.4 `env_back.png` and W2.6 `petal_centre.png` as the style reference of every later part: the same cream paper, the same soft gold, the same sage and lilac, the same Art Nouveau line (Mucha-style poster + stained glass). No peacock feathers anywhere (that is another design).
 ```
 
-#### 11. W2.6 Üç taç yaprağı kapak (sol, sağ, orta) — üç ayrı dosya, aynı tuval
+#### 272. W2.6 Üç taç yaprağı kapak (sol, sağ, orta) — üç ayrı dosya, aynı tuval
 
 - İndirme adı: `37-art-nouveau-lily__petal_right.png`
 - Hedef: `collections/37_Art_Nouveau_Lily/assets/gpt/parts/petal_right.png`
@@ -225,7 +3904,7 @@ The three closed petal-shaped flaps of the same envelope as env_back.png, each a
 
 Kontrol: üç dosya aynı tuval; üst üste konunca kapalı zarf (uçlar ~%50, %57–61'de buluşur); menteşe kenarları zarfın
 
-#### 12. W2.6 Üç taç yaprağı kapak (sol, sağ, orta) — üç ayrı dosya, aynı tuval
+#### 273. W2.6 Üç taç yaprağı kapak (sol, sağ, orta) — üç ayrı dosya, aynı tuval
 
 - İndirme adı: `37-art-nouveau-lily__petal_centre.png`
 - Hedef: `collections/37_Art_Nouveau_Lily/assets/gpt/parts/petal_centre.png`
@@ -249,7 +3928,7 @@ Sohbetin ilk mesajı (dosyanın GPT notu):
 Generate PAKET 5 (website layers) first, in order and in ONE chat, then PAKET 2 (sample photos), then PAKET 6 (printable invitation). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, words cut into the paper, names, dates, logos, monograms or watermarks in any image.** **No religious symbols** (no crosses, saints, hearts with flames or thorns, churches, altars) and **no Day of the Dead imagery** (no skulls, skeletons, calaveras, marigold altars): this is a joyful wedding fiesta. Give W1 `kraft_paper.png`, W3 `cream_paper.png` and W8 `flag_1.png` as the style reference of every later part: the same kraft, the same cream paper, the same crisp hand-cut tissue paper in the same six colours, the same warm afternoon sun from the top-left.
 ```
 
-#### 13. W5 Zarfın cebi (arkadan, kapaksız)
+#### 274. W5 Zarfın cebi (arkadan, kapaksız)
 
 - İndirme adı: `38-papel-picado-fiesta__envelope_pocket.png`
 - Hedef: `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/envelope_pocket.png`
@@ -263,7 +3942,7 @@ The back of a portrait kraft paper envelope seen perfectly straight on, on a ful
 
 Kontrol: zarf tuvali dolduruyor (0,74:1); üstte düz açık kenar, V kapak **yok**; mühür/ip yok; gerçek alfa.
 
-#### 14. W12 Bugenvil salkımı (köşe süsü)
+#### 275. W12 Bugenvil salkımı (köşe süsü)
 
 - İndirme adı: `38-papel-picado-fiesta__bougainvillea.png`
 - Hedef: `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/bougainvillea.png`
@@ -281,7 +3960,7 @@ Kontrol: salkım sol üst köşeden taşar; sağ alt üçte bir boş; saksı/duv
 
 ### 21_Crimson_Rose_Atelier
 
-#### 15. İstem — fildişi güller (yalnız istenirse) — isteğe bağlı
+#### 276. İstem — fildişi güller (yalnız istenirse) — isteğe bağlı
 
 - İndirme adı: `21-crimson-rose-atelier__v07-ivory-rose__rose-branch.png`
 - Hedef: `collections/21_Crimson_Rose_Atelier/variants/V07_ivory_rose/gpt/rose-branch.png`
