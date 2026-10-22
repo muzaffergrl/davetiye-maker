@@ -2,8 +2,8 @@
 title: "Düğün Websitesine Neler Konmalı: Kontrol Listesi ve Örnekler"
 description: Olmazsa olmazlar, işe yarayan ekstralar ve atlanacaklar olarak ayrılmış eksiksiz bir düğün websitesi kontrol listesi; gizlilik ipuçları ve sayfa sayfa yapı.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 2
 keyword: düğün websitesine neler konmalı
 quickAnswer: Her düğün websitesinde isimleriniz, tarih, saat dilimiyle birlikte tören saati, harita linkiyle mekân, program ve nasıl ve ne zamana kadar LCV verileceği bulunmalı. İşe yarayan ekstralar hikâyeniz, ulaşım ve otel bilgileri, kıyafet kuralı, hediye listesi linki ve sık sorulan soruların yanıtlarıdır. Ev adresinizi ve özel planlarınızı koymayın.

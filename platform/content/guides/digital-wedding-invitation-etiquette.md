@@ -2,8 +2,8 @@
 title: "Digital Wedding Invitations: Etiquette, Pros and Cons"
 description: Are digital wedding invitations acceptable? An honest look at etiquette, pros and cons, who may still need paper, how to send them and message wording.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 5
 keyword: digital wedding invitation etiquette
 quickAnswer: Digital wedding invitations are widely used and fine for most guests, but traditional etiquette still prefers paper for formal weddings. A good middle ground is to send most invitations digitally, mail a simple printed card with a QR code to guests who prefer paper, and send every invitation personally rather than as a group message.
@@ -52,7 +52,7 @@ A simple printed card with your names, the date and a QR code that opens your we
 
 **Choose the channel they actually use.** Text or WhatsApp for most friends, email for colleagues and older guests who prefer it. Avoid sending the only copy through a social network.
 
-**Check the preview before you send.** Most messaging apps show a preview card for a link: an image, a title and a short description. Send the link to yourself first. If the preview shows your names and the date, guests know at a glance what it is. If it shows something generic, guests may mistake it for spam.
+**Check the preview before you send.** Most messaging apps show a preview card for a link: an image, a title and a short description. Send the link to yourself first. If the preview shows your names and the date, guests know at a glance what it is. If it shows something generic, guests may mistake it for spam. Our guide to [wedding website privacy](/guides/wedding-website-privacy) explains what a forwarded preview reveals.
 
 **Address the people who are invited.** If the invitation is for one person or a couple only, say their names in your message. If children or a plus-one are invited, say so.
 

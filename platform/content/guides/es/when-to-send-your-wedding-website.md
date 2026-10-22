@@ -13,7 +13,7 @@ La web es la única parte de la papelería de tu boda que puedes compartir pront
 
 ## El calendario
 
-Calcula hacia atrás desde la fecha de tu boda. Los plazos de las invitaciones y las respuestas que verás abajo siguen las recomendaciones del [Emily Post Institute](https://emilypost.com/advice/invitation-timing); lo demás son consejos prácticos sobre cómo encaja la web en ese calendario.
+Calcula hacia atrás desde la fecha de tu boda. Los plazos de las invitaciones y las respuestas que verás abajo siguen el [calendario de planificación de boda](https://emilypost.com/advice/wedding-planning-series) del Emily Post Institute y sus consejos sobre las [tarjetas de respuesta](https://emilypost.com/advice/how-to-word-a-wedding-response-card); lo demás son consejos prácticos sobre cómo encaja la web en ese calendario.
 
 | Cuándo | Qué hacer | Estado de la web |
 |---|---|---|
@@ -87,7 +87,7 @@ Los planes cambian: un lugar cierra, una urgencia familiar obliga a mover la fec
 
 ## Cómo lo resuelven nuestras webs de boda
 
-Puedes publicar tu web pronto, con lo que ya sabes, y añadir detalles más adelante; los invitados ven siempre la última versión. El formulario de respuesta muestra tu fecha límite y deja de aceptar respuestas después de ella. Las respuestas, los totales y una descarga en CSV están en tu panel. Consulta [cómo funciona](/how-it-works) o prueba en el móvil el [diseño Olive & Ivory](/designs/olive-ivory).
+Puedes publicar tu web pronto, con lo que ya sabes, y añadir detalles más adelante; los invitados ven siempre la última versión. El formulario de respuesta muestra tu fecha límite y deja de aceptar respuestas después de ella. Las respuestas, los totales y una descarga en Excel o CSV están en tu panel. Consulta [cómo funciona](/how-it-works) o prueba en el móvil el [diseño Olive & Ivory](/designs/olive-ivory).
 
 ## FAQ
 

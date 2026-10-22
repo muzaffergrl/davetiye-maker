@@ -2,8 +2,8 @@
 title: Telefonda Düğün Websitesi Nasıl Yapılır? (Adım Adım)
 description: Düğün websitenizi telefonda kurmak için platformdan bağımsız, pratik bir rehber: önce neleri toplamalı, sekiz adım ve linki nasıl test etmeli.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 1
 keyword: düğün websitesi nasıl yapılır
 quickAnswer: Önce bilgilerinizi toplayın (isimler, tarih, saat dilimi, mekân, program, birkaç fotoğraf ve LCV son tarihi). Sonra telefondan düzenleyebileceğiniz bir platform seçin, temel bilgileri ekleyin, kısa bir karşılama yazın, yanıtları ayarlayın, her sayfayı telefonda önizleyin, yayınlayın, linki test edin ve paylaşın.
@@ -118,6 +118,8 @@ Yayınlayın, ardından linki tam olarak misafirlerin alacağı şekilde test ed
 4. QR kod basacaksanız basılı bir provadan iki farklı telefonla tarayın.
 5. Deneme yanıtınızı silin ya da saymamak için not alın.
 
+[Düğün LCV'si için QR kod](/guides/qr-code-wedding-rsvp) ve [düğün websitesi gizliliği](/guides/wedding-website-privacy) rehberlerimiz basılı kodları ve iletilen bir linkin neyi gösterdiğini anlatıyor.
+
 **Süre:** 10 dakika.
 
 ## 8. adım: Doğru zamanda paylaşın
@@ -126,7 +128,7 @@ Birçok çift websitesini "Tarihi ayırın" (save the date) kartıyla birlikte y
 
 ## Bizim düğün websitelerimizle nasıl işler
 
-[Düğün websitesi tasarımlarımızdan](/designs) birini seçerseniz yukarıdaki adımlar şöyle karşılık bulur: canlı demoyu telefonunuzda denersiniz, tasarımı Etsy'den satın alırsınız, websitenizi Etsy sipariş numaranızla başlatırsınız ve telefon ekranları için tasarlanmış özel bir panelde düzenlersiniz. Yanıtlar panelinize gelir ve CSV olarak indirilebilir. [Nasıl çalışır](/how-it-works) sayfasına ve [özelliklerin](/features) tam listesine bakın. Diğer platformlar da iyi seçenekler; 1. adımdaki kontrol listesi hepsi için işe yarar.
+[Düğün websitesi tasarımlarımızdan](/designs) birini seçerseniz yukarıdaki adımlar şöyle karşılık bulur: canlı demoyu telefonunuzda denersiniz, tasarımı Etsy'den satın alırsınız, websitenizi Etsy sipariş numaranızla başlatırsınız ve telefon ekranları için tasarlanmış özel bir panelde düzenlersiniz. Yanıtlar panelinize gelir ve Excel ya da CSV olarak indirilebilir. [Nasıl çalışır](/how-it-works) sayfasına ve [özelliklerin](/features) tam listesine bakın. Diğer platformlar da iyi seçenekler; 1. adımdaki kontrol listesi hepsi için işe yarar.
 
 ## FAQ
 

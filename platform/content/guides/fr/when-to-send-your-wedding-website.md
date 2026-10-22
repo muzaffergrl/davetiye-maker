@@ -13,7 +13,7 @@ Le site est le seul élément de votre papeterie de mariage que vous pouvez part
 
 ## Le calendrier
 
-Partez de la date de votre mariage et remontez le temps. Les délais ci-dessous pour les faire-part et les réponses suivent les recommandations de l'[Emily Post Institute](https://emilypost.com/advice/invitation-timing) ; le reste relève de conseils pratiques sur la place du site dans ce calendrier.
+Partez de la date de votre mariage et remontez le temps. Les délais ci-dessous pour les faire-part et les réponses suivent le [calendrier de préparation du mariage](https://emilypost.com/advice/wedding-planning-series) de l'Emily Post Institute et ses conseils sur les [cartons-réponses](https://emilypost.com/advice/how-to-word-a-wedding-response-card) ; le reste relève de conseils pratiques sur la place du site dans ce calendrier.
 
 | Quand | Quoi faire | État du site |
 |---|---|---|
@@ -87,7 +87,7 @@ Les projets évoluent : un lieu ferme, une urgence familiale décale la date, le
 
 ## Comment nos sites de mariage gèrent tout cela
 
-Vous pouvez publier votre site tôt, avec ce que vous savez, et ajouter les détails plus tard ; les invités voient toujours la dernière version. Le formulaire de réponse affiche votre date limite et cesse d'accepter des réponses après celle-ci. Les réponses, les totaux et un téléchargement CSV se trouvent dans votre panneau. Découvrez [comment ça marche](/how-it-works) ou essayez le [design Olive & Ivory](/designs/olive-ivory) sur votre téléphone.
+Vous pouvez publier votre site tôt, avec ce que vous savez, et ajouter les détails plus tard ; les invités voient toujours la dernière version. Le formulaire de réponse affiche votre date limite et cesse d'accepter des réponses après celle-ci. Les réponses, les totaux et un téléchargement Excel ou CSV se trouvent dans votre panneau. Découvrez [comment ça marche](/how-it-works) ou essayez le [design Olive & Ivory](/designs/olive-ivory) sur votre téléphone.
 
 ## FAQ
 

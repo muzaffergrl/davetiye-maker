@@ -2,14 +2,14 @@
 title: "Düğün Websitesi Metinleri: Her Bölüm İçin Örnekler"
 description: Karşılamadan hikâyemize, kıyafet kuralından hediye listesine, ulaşımdan LCV'ye kadar düğün websitenizin her bölümü için üç farklı tonda özgün metin örnekleri.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 4
 keyword: düğün websitesi metinleri
 quickAnswer: Her bölümü kısa, net ve nazik tutun. Karşılama için bir iki cümle, her fotoğraf açıklaması için tek satır, ne anlama geldiğine dair ipucuyla açık bir kıyafet kuralı, nazik bir hediye listesi satırı, pratik ulaşım notları ve son tarihi açıkça yazılmış bir LCV satırı kullanın. Bir ton seçin ve her yerde onu kullanın.
 ---
 
-Düğün websitesi metinleri çoğunlukla iki şekilde ters gider: ya çok az şey söyler ("Detaylar yakında") ya da çok fazla (mekân adresinden önce üç sayfalık bir aşk hikâyesi). Aşağıdaki örnekler çoğu website oluşturucunun metin alanlarına sığacak kadar kısa yazıldı. Örneğin kendi websitelerimizde Hikâyemiz girişi en fazla 200 karakter, her fotoğraf açıklaması da en fazla 60 karakterdir.
+Düğün websitesi metinleri çoğunlukla iki şekilde ters gider: ya çok az şey söyler ("Detaylar yakında") ya da çok fazla (mekân adresinden önce üç sayfalık bir aşk hikâyesi). Aşağıdaki örnekler çoğu website oluşturucunun metin alanlarına sığacak kadar kısa yazıldı. Örneğin kendi websitelerimizde Hikâyemiz girişi en fazla {{storyIntroChars}} karakter, her fotoğraf açıklaması da en fazla {{storyCaptionChars}} karakterdir.
 
 Her bölümde üç farklı tonda örnek var. Size en çok benzeyeni seçin ve baştan sona onu kullanın; resmî bir karşılamayı esprili bir SSS ile karıştırmak misafirlere tuhaf gelir.
 

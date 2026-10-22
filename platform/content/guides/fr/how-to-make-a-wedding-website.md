@@ -2,8 +2,8 @@
 title: Créer son site de mariage sur téléphone, étape par étape
 description: Un guide pratique, valable pour toute plateforme, pour créer votre site de mariage sur téléphone : quoi préparer, huit étapes et comment tester le lien.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 1
 keyword: créer un site de mariage
 quickAnswer: Rassemblez d'abord vos informations (prénoms, date, fuseau horaire, lieu, programme, quelques photos et une date limite de RSVP). Choisissez ensuite une plateforme modifiable sur téléphone, ajoutez l'essentiel, écrivez un court mot d'accueil, configurez les réponses, prévisualisez chaque page sur votre téléphone, publiez, testez le lien et partagez-le.
@@ -118,6 +118,8 @@ Publiez, puis testez le lien exactement comme les invités le recevront :
 4. Si vous imprimez un QR code, scannez-le sur une épreuve imprimée avec deux téléphones différents.
 5. Supprimez votre réponse test, ou notez-la pour ne pas la compter.
 
+Nos guides sur le [QR code pour le RSVP du mariage](/guides/qr-code-wedding-rsvp) et la [confidentialité du site de mariage](/guides/wedding-website-privacy) traitent des codes imprimés et de ce que montre un lien transféré.
+
 **Temps :** 10 minutes.
 
 ## Étape 8 : le partager au bon moment
@@ -126,7 +128,7 @@ Beaucoup de couples partagent le site avec le save the date (l'annonce « réser
 
 ## Comment cela fonctionne avec nos sites de mariage
 
-Si vous choisissez l'un de nos [designs de site de mariage](/designs), les étapes ci-dessus se déroulent ainsi : vous essayez la démo en ligne sur votre téléphone, vous achetez le design sur Etsy, vous démarrez votre site avec votre numéro de commande Etsy et vous le modifiez dans un panneau privé pensé pour les écrans de téléphone. Les réponses arrivent dans votre panneau, avec un téléchargement CSV. Découvrez [comment ça marche](/how-it-works) et la liste complète des [fonctionnalités](/features). D'autres plateformes sont aussi de bons choix ; la liste de l'étape 1 s'applique à toutes.
+Si vous choisissez l'un de nos [designs de site de mariage](/designs), les étapes ci-dessus se déroulent ainsi : vous essayez la démo en ligne sur votre téléphone, vous achetez le design sur Etsy, vous démarrez votre site avec votre numéro de commande Etsy et vous le modifiez dans un panneau privé pensé pour les écrans de téléphone. Les réponses arrivent dans votre panneau, avec un téléchargement Excel ou CSV. Découvrez [comment ça marche](/how-it-works) et la liste complète des [fonctionnalités](/features). D'autres plateformes sont aussi de bons choix ; la liste de l'étape 1 s'applique à toutes.
 
 ## FAQ
 

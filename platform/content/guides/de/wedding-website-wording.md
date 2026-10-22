@@ -2,14 +2,14 @@
 title: "Hochzeitswebsite-Texte: Beispiele für jeden Abschnitt"
 description: Eigene Textbeispiele für jeden Teil Ihrer Hochzeitswebsite, von Begrüßung und Geschichte über Dresscode, Wunschliste und Anreise bis RSVP, in drei Tonlagen.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 4
 keyword: Texte Hochzeitswebsite
 quickAnswer: Halten Sie jeden Abschnitt kurz, konkret und freundlich. Ein oder zwei Sätze zur Begrüßung, eine Zeile pro Bildunterschrift, ein klarer Dresscode mit einem Hinweis, was er bedeutet, eine dezente Zeile zur Wunschliste, praktische Hinweise zur Anreise und eine RSVP-Zeile mit ausgeschriebener Frist. Wählen Sie eine Tonlage und bleiben Sie überall dabei.
 ---
 
-Die meisten Texte auf Hochzeitswebsites gehen auf eine von zwei Arten schief: Sie sagen zu wenig („Details folgen“) oder viel zu viel (eine dreiseitige Liebesgeschichte vor der Adresse der Location). Die Beispiele unten sind kurz genug für die Textfelder der meisten Website-Baukästen. Auf unseren eigenen Websites zum Beispiel hat die Einleitung von Our Story bis zu 200 Zeichen und jede Bildunterschrift bis zu 60.
+Die meisten Texte auf Hochzeitswebsites gehen auf eine von zwei Arten schief: Sie sagen zu wenig („Details folgen“) oder viel zu viel (eine dreiseitige Liebesgeschichte vor der Adresse der Location). Die Beispiele unten sind kurz genug für die Textfelder der meisten Website-Baukästen. Auf unseren eigenen Websites zum Beispiel hat die Einleitung von Our Story bis zu {{storyIntroChars}} Zeichen und jede Bildunterschrift bis zu {{storyCaptionChars}}.
 
 Für jeden Abschnitt gibt es Beispiele in drei Tonlagen. Wählen Sie die, die nach Ihnen klingt, und bleiben Sie durchgehend dabei; eine förmliche Begrüßung neben witzigen FAQ wirkt auf Gäste seltsam.
 

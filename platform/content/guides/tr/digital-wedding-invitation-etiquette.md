@@ -2,8 +2,8 @@
 title: "Dijital Düğün Davetiyeleri: Görgü Kuralları, Artı ve Eksiler"
 description: Dijital düğün davetiyesi göndermek uygun mu? Görgü kuralları, artılar ve eksiler, kimin hâlâ kâğıt isteyebileceği, nasıl gönderileceği ve mesaj metinleri.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 5
 keyword: dijital düğün davetiyesi görgü kuralları
 quickAnswer: Dijital düğün davetiyeleri yaygın olarak kullanılır ve çoğu misafir için uygundur, ancak geleneksel görgü kuralları resmî düğünlerde hâlâ kâğıdı tercih eder. İyi bir orta yol, davetiyelerin çoğunu dijital göndermek, kâğıdı tercih eden misafirlere QR kodlu basit bir basılı kart postalamak ve her davetiyeyi grup mesajı yerine kişisel olarak göndermektir.
@@ -52,7 +52,7 @@ Misafir listenizi gözden geçirin ve kâğıt için kısa bir liste ayırın:
 
 **Gerçekten kullandıkları kanalı seçin.** Arkadaşların çoğu için SMS ya da WhatsApp, iş arkadaşları ve bunu tercih eden yaşça büyük misafirler için e-posta. Tek kopyayı bir sosyal ağ üzerinden göndermekten kaçının.
 
-**Göndermeden önce önizlemeye bakın.** Çoğu mesajlaşma uygulaması bir link için önizleme kartı gösterir: bir görsel, bir başlık ve kısa bir açıklama. Linki önce kendinize gönderin. Önizleme isimlerinizi ve tarihi gösteriyorsa misafirler ne olduğunu bir bakışta anlar. Genel bir şey gösteriyorsa misafirler onu spam sanabilir.
+**Göndermeden önce önizlemeye bakın.** Çoğu mesajlaşma uygulaması bir link için önizleme kartı gösterir: bir görsel, bir başlık ve kısa bir açıklama. Linki önce kendinize gönderin. Önizleme isimlerinizi ve tarihi gösteriyorsa misafirler ne olduğunu bir bakışta anlar. Genel bir şey gösteriyorsa misafirler onu spam sanabilir. [Düğün websitesi gizliliği](/guides/wedding-website-privacy) rehberimiz iletilen bir önizlemenin neyi açığa çıkardığını anlatıyor.
 
 **Davet edilen kişilere hitap edin.** Davetiye yalnızca bir kişi ya da bir çift içinse mesajınızda isimlerini yazın. Çocuklar ya da artı bir kişi davetliyse bunu belirtin.
 

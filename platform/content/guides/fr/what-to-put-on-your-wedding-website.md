@@ -2,8 +2,8 @@
 title: "Que mettre sur son site de mariage : liste et exemples"
 description: La liste complète pour votre site de mariage : l'indispensable, les extras utiles et ce qu'il faut omettre, avec conseils de confidentialité et plan des pages.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 2
 keyword: que mettre sur un site de mariage
 quickAnswer: Tout site de mariage doit indiquer vos prénoms, la date, l'heure de la cérémonie avec son fuseau horaire, le lieu avec un lien de carte, le programme, et comment répondre et avant quelle date. Extras utiles : votre histoire, voyage et hôtels, dress code, liste de mariage et questions fréquentes. Omettez votre adresse et vos projets privés.

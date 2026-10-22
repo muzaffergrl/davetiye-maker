@@ -2,8 +2,8 @@
 title: "Invitaciones de boda digitales: etiqueta, pros y contras"
 description: ¿Son aceptables las invitaciones de boda digitales? Etiqueta, pros y contras, quién puede necesitar papel, cómo enviarlas y qué escribir en el mensaje.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 5
 keyword: etiqueta invitaciones de boda digitales
 quickAnswer: Las invitaciones digitales están muy extendidas y van bien para la mayoría, aunque la etiqueta tradicional prefiere el papel en bodas formales. Un buen término medio: casi todas en digital, una tarjeta impresa sencilla con código QR para quien prefiera papel, y cada invitación enviada de forma personal, no en un grupo.
@@ -52,7 +52,7 @@ Una tarjeta impresa sencilla con vuestros nombres, la fecha y un código QR que 
 
 **Elige el canal que de verdad usan.** Mensaje o WhatsApp para la mayoría de los amigos, correo para compañeros de trabajo e invitados mayores que lo prefieran. Evita enviar la única copia a través de una red social.
 
-**Revisa la vista previa antes de enviar.** La mayoría de las aplicaciones de mensajería muestran una tarjeta de vista previa del enlace: una imagen, un título y una breve descripción. Envíate primero el enlace a ti. Si la vista previa muestra vuestros nombres y la fecha, los invitados sabrán de un vistazo qué es. Si muestra algo genérico, pueden confundirlo con spam.
+**Revisa la vista previa antes de enviar.** La mayoría de las aplicaciones de mensajería muestran una tarjeta de vista previa del enlace: una imagen, un título y una breve descripción. Envíate primero el enlace a ti. Si la vista previa muestra vuestros nombres y la fecha, los invitados sabrán de un vistazo qué es. Si muestra algo genérico, pueden confundirlo con spam. Nuestra guía sobre la [privacidad de la web de boda](/guides/wedding-website-privacy) explica lo que revela una vista previa reenviada.
 
 **Dirígete a las personas invitadas.** Si la invitación es solo para una persona o una pareja, escribe sus nombres en el mensaje. Si están invitados los niños o un acompañante, dilo.
 

@@ -2,8 +2,8 @@
 title: How to Make a Wedding Website on Your Phone (Step by Step)
 description: A practical, platform-neutral walkthrough for building your wedding website on a phone: what to gather first, eight steps, and how to test the link.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 1
 keyword: how to make a wedding website
 quickAnswer: Gather your details first (names, date, time zone, venue, schedule, a few photos and an RSVP deadline). Then pick a platform you can edit on your phone, add the essentials, write a short welcome, set up replies, preview every page on your phone, publish, test the link and share it.
@@ -118,6 +118,8 @@ Publish, then test the link exactly as guests will receive it:
 4. If you will print a QR code, scan it from a printed proof with two different phones.
 5. Remove your test reply, or note it so you do not count it.
 
+Our guides to [QR codes for wedding RSVPs](/guides/qr-code-wedding-rsvp) and [wedding website privacy](/guides/wedding-website-privacy) cover printed codes and what a forwarded link shows.
+
 **Time:** 10 minutes.
 
 ## Step 8: Share it at the right time
@@ -126,7 +128,7 @@ Many couples share the website with or soon after the save the date, and again w
 
 ## How this works with our wedding websites
 
-If you choose one of our [wedding website designs](/designs), the steps above map like this: you try the live demo on your phone, buy the design on Etsy, start your website with your Etsy order number, and edit it in a private panel designed for phone screens. Replies arrive in your panel with a CSV download. See [how it works](/how-it-works) and the full list of [features](/features). Other platforms are good choices too; the checklist in step 1 works for all of them.
+If you choose one of our [wedding website designs](/designs), the steps above map like this: you try the live demo on your phone, buy the design on Etsy, start your website with your Etsy order number, and edit it in a private panel designed for phone screens. Replies arrive in your panel, with an Excel or CSV download. See [how it works](/how-it-works) and the full list of [features](/features). Other platforms are good choices too; the checklist in step 1 works for all of them.
 
 ## FAQ
 

@@ -13,7 +13,7 @@ Die RSVP-Frist wirkt wie eine Kleinigkeit, doch fast alles danach hängt an ihr:
 
 ## Die kurze Antwort: zwei bis drei Wochen vorher
 
-Etikette-Ratgeber, darunter das [Emily Post Institute](https://emilypost.com/advice/invitation-timing), nennen denselben Rahmen: Antworten etwa zwei bis drei Wochen vor der Hochzeit, Einladungen sechs bis acht Wochen vorher. So haben Gäste vier bis sechs Wochen Zeit zum Antworten, und Sie haben Zeit, den letzten Antworten nachzugehen, bevor Ihre Dienstleister Zahlen brauchen.
+Etikette-Ratgeber, darunter der [Hochzeitsplanungs-Zeitplan](https://emilypost.com/advice/wedding-planning-series) des Emily Post Institute und seine Hinweise zu [Antwortkarten](https://emilypost.com/advice/how-to-word-a-wedding-response-card), nennen denselben Rahmen: Antworten etwa zwei bis drei Wochen vor der Hochzeit, Einladungen sechs bis acht Wochen vorher. So haben Gäste vier bis sechs Wochen Zeit zum Antworten, und Sie haben Zeit, den letzten Antworten nachzugehen, bevor Ihre Dienstleister Zahlen brauchen.
 
 Der allgemeine Rahmen ist ein Ausgangspunkt. Die eigentliche Frist ergibt sich aus Ihren Verträgen.
 

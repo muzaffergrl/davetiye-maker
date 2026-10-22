@@ -13,7 +13,7 @@ The RSVP deadline looks like a small detail, but almost everything after it depe
 
 ## The short answer: two to three weeks before
 
-Etiquette guides, including the [Emily Post Institute](https://emilypost.com/advice/invitation-timing), give the same general range: replies due about two to three weeks before the wedding, with invitations sent six to eight weeks ahead. That leaves guests four to six weeks to answer, and leaves you time to chase the last replies before your vendors need numbers.
+Etiquette guides, including the Emily Post Institute's [wedding planning timeline](https://emilypost.com/advice/wedding-planning-series) and its advice on [response cards](https://emilypost.com/advice/how-to-word-a-wedding-response-card), give the same general range: replies due about two to three weeks before the wedding, with invitations sent six to eight weeks ahead. That leaves guests four to six weeks to answer, and leaves you time to chase the last replies before your vendors need numbers.
 
 The general range is a starting point. The real deadline comes from your contracts.
 

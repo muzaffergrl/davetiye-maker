@@ -13,7 +13,7 @@ LCV son tarihi küçük bir ayrıntı gibi görünür, ama ondan sonraki neredey
 
 ## Kısa cevap: iki ila üç hafta önce
 
-[Emily Post Institute](https://emilypost.com/advice/invitation-timing) dahil görgü rehberleri aynı genel aralığı verir: yanıtlar düğünden yaklaşık iki ila üç hafta önce gelmeli, davetiyeler altı ila sekiz hafta önce gönderilmelidir. Bu, misafirlere yanıt için dört ila altı hafta bırakır; size de tedarikçiler sayı istemeden önce son yanıtların peşine düşecek zamanı.
+Emily Post Institute'un [düğün planlama takvimi](https://emilypost.com/advice/wedding-planning-series) ve [yanıt kartları](https://emilypost.com/advice/how-to-word-a-wedding-response-card) hakkındaki önerileri dahil görgü rehberleri aynı genel aralığı verir: yanıtlar düğünden yaklaşık iki ila üç hafta önce gelmeli, davetiyeler altı ila sekiz hafta önce gönderilmelidir. Bu, misafirlere yanıt için dört ila altı hafta bırakır; size de tedarikçiler sayı istemeden önce son yanıtların peşine düşecek zamanı.
 
 Genel aralık bir başlangıç noktasıdır. Asıl son tarih sözleşmelerinizden gelir.
 

@@ -13,7 +13,7 @@ Website, düğün kırtasiyenizin erkenden paylaşıp geliştirmeye devam edebil
 
 ## Zaman çizelgesi
 
-Düğün tarihinizden geriye doğru çalışın. Aşağıdaki davetiye ve yanıt zamanlaması [Emily Post Institute](https://emilypost.com/advice/invitation-timing) rehberliğini izliyor; geri kalanı, websitenin bunun etrafına nasıl yerleşeceğine dair pratik tavsiyelerdir.
+Düğün tarihinizden geriye doğru çalışın. Aşağıdaki davetiye ve yanıt zamanlaması Emily Post Institute'un [düğün planlama takvimini](https://emilypost.com/advice/wedding-planning-series) ve [yanıt kartları](https://emilypost.com/advice/how-to-word-a-wedding-response-card) hakkındaki önerilerini izliyor; geri kalanı, websitenin bunun etrafına nasıl yerleşeceğine dair pratik tavsiyelerdir.
 
 | Ne zaman | Ne yapmalı | Websitenin durumu |
 |---|---|---|
@@ -87,7 +87,7 @@ Planlar değişir: bir mekân kapanır, bir aile acil durumu tarihi kaydırır, 
 
 ## Düğün websitelerimiz bunu nasıl yönetiyor
 
-Websitenizi bildiklerinizle erkenden yayınlayabilir, ayrıntıları sonra ekleyebilirsiniz; misafirler her zaman en güncel sürümü görür. Yanıt formu yanıt son tarihinizi gösterir ve bu tarihten sonra yanıt almayı durdurur. Yanıtlar, toplamlar ve CSV indirme panelinizdedir. [Nasıl çalışır](/how-it-works) sayfasına bakın ya da [Olive & Ivory tasarımını](/designs/olive-ivory) telefonunuzda deneyin.
+Websitenizi bildiklerinizle erkenden yayınlayabilir, ayrıntıları sonra ekleyebilirsiniz; misafirler her zaman en güncel sürümü görür. Yanıt formu yanıt son tarihinizi gösterir ve bu tarihten sonra yanıt almayı durdurur. Yanıtlar, toplamlar ve Excel ya da CSV indirme panelinizdedir. [Nasıl çalışır](/how-it-works) sayfasına bakın ya da [Olive & Ivory tasarımını](/designs/olive-ivory) telefonunuzda deneyin.
 
 ## FAQ
 

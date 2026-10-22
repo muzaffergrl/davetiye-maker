@@ -2,8 +2,8 @@
 title: "Was auf die Hochzeitswebsite gehört: Checkliste & Beispiele"
 description: Checkliste für Ihre Hochzeitswebsite: Pflichtangaben, hilfreiche Extras und was Sie weglassen, mit Tipps zur Privatsphäre und einer Struktur Seite für Seite.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 2
 keyword: was gehört auf die Hochzeitswebsite
 quickAnswer: Jede Hochzeitswebsite braucht Ihre Namen, das Datum, die Uhrzeit der Trauung mit Zeitzone, die Location mit Kartenlink, den Ablauf sowie wie und bis wann geantwortet wird. Hilfreiche Extras sind Ihre Geschichte, Anreise und Hotels, der Dresscode, ein Link zur Wunschliste und Antworten auf häufige Fragen. Lassen Sie Ihre Wohnadresse und private Pläne weg.

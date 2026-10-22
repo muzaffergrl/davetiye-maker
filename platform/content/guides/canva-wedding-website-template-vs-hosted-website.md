@@ -2,8 +2,8 @@
 title: Canva Wedding Website Template vs a Hosted Wedding Website
 description: A fair comparison of Canva wedding website templates and hosted wedding websites: editing, accounts, RSVP, your link, design freedom and who fixes problems.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 6
 keyword: canva wedding website template
 quickAnswer: A Canva template gives you full design freedom and works well if you enjoy designing and already use Canva; you set up publishing and RSVP yourself. A hosted wedding website keeps the design fixed but handles hosting, RSVP and editing in one simple panel. Choose by how much time you want to spend building.
@@ -96,7 +96,7 @@ If a listing leaves any of these unclear, message the seller before you buy. A c
 
 ## How our hosted websites answer those questions
 
-Our designs open from a sealed envelope or keepsake ([how animated envelope invitations work](/guides/animated-envelope-wedding-invitations)) into four pages: Home, Our Story, Details and RSVP. You can try every design as a [live demo](/designs) first. You edit names, date, venue, schedule, {{photoSpots}} photos, questions and answers and up to {{rsvpQuestions}} RSVP questions in a panel designed for phone screens; the artwork, colors and fonts stay as designed. Replies, totals and a CSV download are in your panel. Your website stays online until {{months}} months after your wedding date. The [features page](/features) has the full list, including what is not included.
+Our designs open from a sealed envelope or keepsake ([how animated envelope invitations work](/guides/animated-envelope-wedding-invitations)) into four pages: Home, Our Story, Details and RSVP. You can try every design as a [live demo](/designs) first. You edit names, date, venue, schedule, {{photoSpots}} photos, questions and answers and up to {{rsvpQuestions}} RSVP questions in a panel designed for phone screens; the artwork, colors and fonts stay as designed. Replies, totals and an Excel or CSV download are in your panel. Your website stays online until {{months}} months after your wedding date. The [features page](/features) has the full list, including what is not included.
 
 ## FAQ
 

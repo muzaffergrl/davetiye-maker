@@ -2,14 +2,14 @@
 title: "Textes pour site de mariage : exemples pour chaque section"
 description: Des exemples de textes originaux pour chaque partie de votre site de mariage, de l'accueil à votre histoire, du dress code à la liste, au voyage et au RSVP.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 4
 keyword: texte site de mariage
 quickAnswer: Gardez chaque section courte, précise et bienveillante. Une ou deux phrases pour l'accueil, une ligne par légende de photo, un dress code clair avec un indice de ce qu'il signifie, une phrase délicate sur la liste de mariage, des infos de voyage pratiques et une ligne RSVP avec la date limite en toutes lettres. Choisissez un ton et gardez-le partout.
 ---
 
-La plupart des textes de site de mariage pèchent de l'une de deux façons : ils en disent trop peu (« Détails à venir ») ou beaucoup trop (une histoire d'amour de trois pages avant l'adresse du lieu). Les exemples ci-dessous sont assez courts pour tenir dans les champs de texte de la plupart des outils de création de site. Sur nos propres sites, par exemple, l'introduction de Notre histoire compte jusqu'à 200 caractères et chaque légende de photo jusqu'à 60.
+La plupart des textes de site de mariage pèchent de l'une de deux façons : ils en disent trop peu (« Détails à venir ») ou beaucoup trop (une histoire d'amour de trois pages avant l'adresse du lieu). Les exemples ci-dessous sont assez courts pour tenir dans les champs de texte de la plupart des outils de création de site. Sur nos propres sites, par exemple, l'introduction de Notre histoire compte jusqu'à {{storyIntroChars}} caractères et chaque légende de photo jusqu'à {{storyCaptionChars}}.
 
 Chaque section propose des exemples dans trois tons. Choisissez celui qui vous ressemble et gardez-le partout : mêler un accueil solennel à une FAQ pleine de blagues paraît étrange aux invités.
 

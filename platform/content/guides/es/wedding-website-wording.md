@@ -2,14 +2,14 @@
 title: "Textos para la web de tu boda: ejemplos para cada sección"
 description: Ejemplos originales de textos para cada parte de la web de tu boda: bienvenida, historia, vestimenta, lista de bodas, viaje y RSVP, en tres tonos.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 4
 keyword: textos para web de boda
 quickAnswer: Que cada sección sea breve, concreta y amable: una o dos frases de bienvenida, una línea por pie de foto, un código de vestimenta claro con una pista de su significado, una frase delicada sobre la lista, notas de viaje prácticas y la fecha límite de confirmación escrita completa. Elige un tono y úsalo en todo.
 ---
 
-Casi todos los textos de las webs de boda fallan de una de dos maneras: dicen demasiado poco ("Detalles por confirmar") o muchísimo más de la cuenta (una historia de amor de tres páginas antes de la dirección del lugar). Los ejemplos de abajo están escritos para caber en los campos de texto de la mayoría de los creadores de webs. En nuestras propias webs, por ejemplo, la introducción de Nuestra historia admite hasta 200 caracteres y cada pie de foto hasta 60.
+Casi todos los textos de las webs de boda fallan de una de dos maneras: dicen demasiado poco ("Detalles por confirmar") o muchísimo más de la cuenta (una historia de amor de tres páginas antes de la dirección del lugar). Los ejemplos de abajo están escritos para caber en los campos de texto de la mayoría de los creadores de webs. En nuestras propias webs, por ejemplo, la introducción de Nuestra historia admite hasta {{storyIntroChars}} caracteres y cada pie de foto hasta {{storyCaptionChars}}.
 
 Cada sección tiene ejemplos en tres tonos. Elige el que suene a vosotros y úsalo de principio a fin; mezclar una bienvenida formal con unas preguntas frecuentes en broma desconcierta a los invitados.
 

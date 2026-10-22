@@ -13,7 +13,7 @@ Die Website ist der eine Teil Ihrer Hochzeitspapeterie, den Sie früh teilen und
 
 ## Der Zeitplan
 
-Planen Sie rückwärts von Ihrem Hochzeitsdatum. Das Timing für Einladungen und Antworten unten folgt den Empfehlungen des [Emily Post Institute](https://emilypost.com/advice/invitation-timing); der Rest sind praktische Hinweise dazu, wie sich eine Website darin einfügt.
+Planen Sie rückwärts von Ihrem Hochzeitsdatum. Das Timing für Einladungen und Antworten unten folgt dem [Hochzeitsplanungs-Zeitplan](https://emilypost.com/advice/wedding-planning-series) des Emily Post Institute und seinen Hinweisen zu [Antwortkarten](https://emilypost.com/advice/how-to-word-a-wedding-response-card); der Rest sind praktische Hinweise dazu, wie sich eine Website darin einfügt.
 
 | Wann | Was zu tun ist | Stand der Website |
 |---|---|---|
@@ -87,7 +87,7 @@ Pläne ändern sich: Eine Location schließt, ein familiärer Notfall verschiebt
 
 ## So machen es unsere Hochzeitswebsites
 
-Sie können Ihre Website früh veröffentlichen, mit dem, was Sie schon wissen, und Details später ergänzen; Gäste sehen immer die neueste Version. Das Antwortformular zeigt Ihre Antwortfrist und nimmt danach keine Antworten mehr an. Antworten, Summen und ein CSV-Download liegen in Ihrem Panel. Lesen Sie, [wie es funktioniert](/how-it-works), oder probieren Sie das [Design Olive & Ivory](/designs/olive-ivory) auf Ihrem Handy aus.
+Sie können Ihre Website früh veröffentlichen, mit dem, was Sie schon wissen, und Details später ergänzen; Gäste sehen immer die neueste Version. Das Antwortformular zeigt Ihre Antwortfrist und nimmt danach keine Antworten mehr an. Antworten, Summen und ein Download als Excel oder CSV liegen in Ihrem Panel. Lesen Sie, [wie es funktioniert](/how-it-works), oder probieren Sie das [Design Olive & Ivory](/designs/olive-ivory) auf Ihrem Handy aus.
 
 ## FAQ
 

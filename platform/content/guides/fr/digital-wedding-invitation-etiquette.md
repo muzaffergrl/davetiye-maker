@@ -2,8 +2,8 @@
 title: "Faire-part de mariage numérique : usages, avantages, limites"
 description: Un faire-part de mariage numérique, est-ce acceptable ? Usages, avantages et limites, invités à qui envoyer du papier, envoi et messages à copier.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 5
 keyword: faire-part de mariage numérique
 quickAnswer: Les faire-part de mariage numériques sont très répandus et conviennent à la plupart des invités, mais l'étiquette traditionnelle préfère encore le papier pour les mariages formels. Bon compromis : la plupart des invitations en numérique, une simple carte imprimée avec QR code pour ceux qui préfèrent le papier, et chaque invitation envoyée personnellement, jamais dans un message de groupe.
@@ -52,7 +52,7 @@ Une simple carte imprimée avec vos prénoms, la date et un QR code qui ouvre vo
 
 **Choisissez le canal qu'ils utilisent vraiment.** SMS ou WhatsApp pour la plupart des amis, e-mail pour les collègues et les invités plus âgés qui le préfèrent. Évitez d'envoyer l'unique exemplaire via un réseau social.
 
-**Vérifiez l'aperçu avant d'envoyer.** La plupart des messageries affichent un aperçu du lien : une image, un titre et une courte description. Envoyez-vous d'abord le lien. Si l'aperçu montre vos prénoms et la date, les invités comprennent d'un coup d'œil de quoi il s'agit. S'il affiche quelque chose de générique, ils risquent de le prendre pour un spam.
+**Vérifiez l'aperçu avant d'envoyer.** La plupart des messageries affichent un aperçu du lien : une image, un titre et une courte description. Envoyez-vous d'abord le lien. Si l'aperçu montre vos prénoms et la date, les invités comprennent d'un coup d'œil de quoi il s'agit. S'il affiche quelque chose de générique, ils risquent de le prendre pour un spam. Notre guide sur la [confidentialité du site de mariage](/guides/wedding-website-privacy) explique ce que révèle un aperçu transféré.
 
 **Nommez les personnes invitées.** Si l'invitation ne concerne qu'une personne ou un couple, citez leurs prénoms dans votre message. Si les enfants ou un accompagnant sont invités, dites-le.
 

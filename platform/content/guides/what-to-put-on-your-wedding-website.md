@@ -2,8 +2,8 @@
 title: "What to Put on Your Wedding Website: Checklist and Examples"
 description: A complete wedding website checklist sorted into must-haves, helpful extras and things to leave off, with privacy tips and a page-by-page structure.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 2
 keyword: what to put on a wedding website
 quickAnswer: Every wedding website needs your names, the date, the ceremony time with its time zone, the venue with a map link, the schedule, and how and by when to RSVP. Helpful extras are your story, travel and hotel details, the dress code, a registry link and answers to common questions. Leave off your home address and private plans.

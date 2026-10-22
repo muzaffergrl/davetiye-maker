@@ -2,8 +2,8 @@
 title: "Qué poner en la web de tu boda: lista y ejemplos"
 description: Lista completa para la web de tu boda: imprescindibles, extras útiles y qué dejar fuera, con consejos de privacidad y una estructura página a página.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 2
 keyword: qué poner en la web de boda
 quickAnswer: Toda web de boda necesita vuestros nombres, la fecha, la hora de la ceremonia con su zona horaria, el lugar con enlace al mapa, el programa, y cómo y hasta cuándo confirmar. Extras útiles: vuestra historia, viaje y hotel, código de vestimenta, lista de bodas y preguntas frecuentes. Deja fuera tu dirección y los planes privados.

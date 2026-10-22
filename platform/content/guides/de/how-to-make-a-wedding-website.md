@@ -2,8 +2,8 @@
 title: Hochzeitswebsite am Handy erstellen (Schritt für Schritt)
 description: Eine praktische, plattformunabhängige Anleitung für Ihre Hochzeitswebsite am Handy: was Sie vorbereiten, acht Schritte und wie Sie den Link testen.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 1
 keyword: Hochzeitswebsite erstellen
 quickAnswer: Sammeln Sie zuerst Ihre Angaben (Namen, Datum, Zeitzone, Location, Ablauf, ein paar Fotos und eine RSVP-Frist). Wählen Sie dann eine Plattform, die Sie am Handy bearbeiten können, tragen Sie das Wichtigste ein, schreiben Sie eine kurze Begrüßung, richten Sie die Antworten ein, prüfen Sie jede Seite am Handy, veröffentlichen Sie, testen Sie den Link und teilen Sie ihn.
@@ -118,6 +118,8 @@ Veröffentlichen Sie und testen Sie den Link genau so, wie Ihre Gäste ihn bekom
 4. Wenn Sie einen QR-Code drucken, scannen Sie ihn auf einem gedruckten Probeexemplar mit zwei verschiedenen Handys.
 5. Löschen Sie Ihre Testantwort oder notieren Sie sie, damit Sie sie nicht mitzählen.
 
+Unsere Ratgeber zum [QR-Code für die Hochzeits-RSVP](/guides/qr-code-wedding-rsvp) und zum [Datenschutz der Hochzeitswebsite](/guides/wedding-website-privacy) behandeln gedruckte Codes und das, was ein weitergeleiteter Link zeigt.
+
 **Zeit:** 10 Minuten.
 
 ## Schritt 8: Zum richtigen Zeitpunkt teilen
@@ -126,7 +128,7 @@ Viele Paare teilen die Website mit oder kurz nach dem Save-the-Date und dann noc
 
 ## So funktioniert das mit unseren Hochzeitswebsites
 
-Wenn Sie sich für eines unserer [Designs für Hochzeitswebsites](/designs) entscheiden, sehen die Schritte oben so aus: Sie probieren die Live-Demo auf Ihrem Handy aus, kaufen das Design auf Etsy, starten Ihre Website mit Ihrer Etsy-Bestellnummer und bearbeiten sie in einem privaten Panel, das für Handybildschirme gemacht ist. Die Antworten kommen in Ihrem Panel an, mit CSV-Download. Lesen Sie, [wie es funktioniert](/how-it-works), und sehen Sie sich die vollständige Liste der [Funktionen](/features) an. Auch andere Plattformen sind eine gute Wahl; die Checkliste aus Schritt 1 funktioniert für alle.
+Wenn Sie sich für eines unserer [Designs für Hochzeitswebsites](/designs) entscheiden, sehen die Schritte oben so aus: Sie probieren die Live-Demo auf Ihrem Handy aus, kaufen das Design auf Etsy, starten Ihre Website mit Ihrer Etsy-Bestellnummer und bearbeiten sie in einem privaten Panel, das für Handybildschirme gemacht ist. Die Antworten kommen in Ihrem Panel an, mit Download als Excel oder CSV. Lesen Sie, [wie es funktioniert](/how-it-works), und sehen Sie sich die vollständige Liste der [Funktionen](/features) an. Auch andere Plattformen sind eine gute Wahl; die Checkliste aus Schritt 1 funktioniert für alle.
 
 ## FAQ
 

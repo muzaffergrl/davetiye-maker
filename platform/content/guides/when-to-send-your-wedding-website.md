@@ -13,7 +13,7 @@ The website is the one part of your wedding stationery you can share early and k
 
 ## The timeline
 
-Work backwards from your wedding date. The timing for invitations and replies below follows the guidance of the [Emily Post Institute](https://emilypost.com/advice/invitation-timing); the rest is practical advice for how a website fits around it.
+Work backwards from your wedding date. The timing for invitations and replies below follows the Emily Post Institute's [wedding planning timeline](https://emilypost.com/advice/wedding-planning-series) and its advice on [response cards](https://emilypost.com/advice/how-to-word-a-wedding-response-card); the rest is practical advice for how a website fits around it.
 
 | When | What to do | Website status |
 |---|---|---|
@@ -87,7 +87,7 @@ Plans change: a venue closes, a family emergency moves the date, travel rules sh
 
 ## How our wedding websites handle this
 
-You can publish your website early, with what you know, and add details later; guests always see the latest version. The reply form shows your reply-by date and stops taking replies after it. Replies, totals and a CSV download are in your panel. See [how it works](/how-it-works) or try the [Olive & Ivory design](/designs/olive-ivory) on your phone.
+You can publish your website early, with what you know, and add details later; guests always see the latest version. The reply form shows your reply-by date and stops taking replies after it. Replies, totals and an Excel or CSV download are in your panel. See [how it works](/how-it-works) or try the [Olive & Ivory design](/designs/olive-ivory) on your phone.
 
 ## FAQ
 

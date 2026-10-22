@@ -2,8 +2,8 @@
 title: "Digitale Hochzeitseinladungen: Etikette, Vor- und Nachteile"
 description: Sind digitale Hochzeitseinladungen in Ordnung? Ein ehrlicher Blick auf Etikette, Vor- und Nachteile, wer noch Papier braucht, den Versand und passende Texte.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 5
 keyword: digitale Hochzeitseinladung Etikette
 quickAnswer: Digitale Hochzeitseinladungen sind weit verbreitet und für die meisten Gäste völlig in Ordnung, doch die klassische Etikette bevorzugt bei formellen Hochzeiten weiterhin Papier. Ein guter Mittelweg: die meisten Einladungen digital verschicken, Gästen, die Papier mögen, eine einfache gedruckte Karte mit QR-Code senden und jede Einladung persönlich statt als Gruppennachricht verschicken.
@@ -52,7 +52,7 @@ Eine einfache gedruckte Karte mit Ihren Namen, dem Datum und einem QR-Code, der 
 
 **Wählen Sie den Kanal, den die Gäste wirklich nutzen.** SMS oder WhatsApp für die meisten Freunde, E-Mail für Kollegen und ältere Gäste, die das bevorzugen. Verschicken Sie die einzige Ausfertigung nicht über ein soziales Netzwerk.
 
-**Prüfen Sie vor dem Senden die Vorschau.** Die meisten Messenger zeigen zu einem Link eine Vorschaukarte: ein Bild, einen Titel und eine kurze Beschreibung. Schicken Sie den Link zuerst an sich selbst. Zeigt die Vorschau Ihre Namen und das Datum, wissen die Gäste auf einen Blick, worum es geht. Zeigt sie etwas Allgemeines, halten Gäste die Nachricht womöglich für Spam.
+**Prüfen Sie vor dem Senden die Vorschau.** Die meisten Messenger zeigen zu einem Link eine Vorschaukarte: ein Bild, einen Titel und eine kurze Beschreibung. Schicken Sie den Link zuerst an sich selbst. Zeigt die Vorschau Ihre Namen und das Datum, wissen die Gäste auf einen Blick, worum es geht. Zeigt sie etwas Allgemeines, halten Gäste die Nachricht womöglich für Spam. Unser Ratgeber zum [Datenschutz der Hochzeitswebsite](/guides/wedding-website-privacy) erklärt, was eine weitergeleitete Vorschau verrät.
 
 **Sprechen Sie die Eingeladenen an.** Gilt die Einladung nur für eine Person oder ein Paar, nennen Sie in Ihrer Nachricht die Namen. Sind Kinder oder eine Begleitung eingeladen, sagen Sie es.
 

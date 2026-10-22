@@ -13,7 +13,7 @@ La date limite du RSVP ressemble à un détail, mais presque tout ce qui suit en
 
 ## La réponse courte : deux à trois semaines avant
 
-Les guides de savoir-vivre, dont l'[Emily Post Institute](https://emilypost.com/advice/invitation-timing), donnent la même fourchette : des réponses environ deux à trois semaines avant le mariage, avec des faire-part envoyés six à huit semaines avant. Les invités ont ainsi quatre à six semaines pour répondre, et vous avez le temps de relancer les derniers avant que vos prestataires ne demandent des chiffres.
+Les guides de savoir-vivre, dont le [calendrier de préparation du mariage](https://emilypost.com/advice/wedding-planning-series) de l'Emily Post Institute et ses conseils sur les [cartons-réponses](https://emilypost.com/advice/how-to-word-a-wedding-response-card), donnent la même fourchette : des réponses environ deux à trois semaines avant le mariage, avec des faire-part envoyés six à huit semaines avant. Les invités ont ainsi quatre à six semaines pour répondre, et vous avez le temps de relancer les derniers avant que vos prestataires ne demandent des chiffres.
 
 Cette fourchette est un point de départ. La vraie date vient de vos contrats.
 

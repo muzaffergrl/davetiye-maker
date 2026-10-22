@@ -2,14 +2,14 @@
 title: "Wedding Website Wording: Examples for Every Section"
 description: Original wording examples for every part of your wedding website, from the welcome and our story to dress code, registry, travel and RSVP, in three tones.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 4
 keyword: wedding website wording
 quickAnswer: Keep each section short, specific and kind. Use one or two sentences for the welcome, one line per photo caption, a clear dress code with a hint of what it means, a gentle registry line, practical travel notes and an RSVP line with the deadline written out. Pick one tone and use it everywhere.
 ---
 
-Most wedding website wording goes wrong in one of two ways: it says too little ("Details TBC") or far too much (a three-page love story before the venue address). The examples below are written to be short enough for the text fields of most website builders. On our own websites, for example, the Our Story intro is up to 200 characters and each photo caption up to 60.
+Most wedding website wording goes wrong in one of two ways: it says too little ("Details TBC") or far too much (a three-page love story before the venue address). The examples below are written to be short enough for the text fields of most website builders. On our own websites, for example, the Our Story intro is up to {{storyIntroChars}} characters and each photo caption up to {{storyCaptionChars}}.
 
 Every section has examples in three tones. Choose the one that sounds like you and use it throughout; mixing a formal welcome with a jokey FAQ feels odd to guests.
 

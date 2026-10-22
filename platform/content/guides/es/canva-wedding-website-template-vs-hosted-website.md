@@ -2,8 +2,8 @@
 title: Plantilla de Canva o web de boda alojada: cuál elegir
 description: Comparación justa entre plantillas de web de boda de Canva y webs alojadas: edición, cuentas, RSVP, tu enlace, libertad de diseño y quién resuelve problemas.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 6
 keyword: plantilla web de boda canva
 quickAnswer: Una plantilla de Canva te da total libertad de diseño y funciona bien si te gusta diseñar y ya usas Canva; la publicación y las confirmaciones las configuras tú. Una web de boda alojada mantiene el diseño fijo, pero se encarga del alojamiento, las confirmaciones y la edición en un panel sencillo. Elige según cuánto tiempo quieras dedicar a construirla.
@@ -96,7 +96,7 @@ Si un anuncio deja alguna de estas cosas poco clara, escribe al vendedor antes d
 
 ## Cómo responden nuestras webs alojadas a esas preguntas
 
-Nuestros diseños se abren desde un sobre cerrado o un recuerdo ([cómo funcionan las invitaciones con sobre animado](/guides/animated-envelope-wedding-invitations)) y dan paso a cuatro páginas: Inicio, Nuestra historia, Detalles y RSVP. Puedes probar cada diseño antes como [demo en vivo](/designs). Editas los nombres, la fecha, el lugar, el programa, {{photoSpots}} fotos, preguntas y respuestas y hasta {{rsvpQuestions}} preguntas de confirmación en un panel pensado para pantallas de móvil; las ilustraciones, los colores y las tipografías se mantienen tal como se diseñaron. Las respuestas, los totales y una descarga en CSV están en tu panel. Tu web sigue en línea hasta {{months}} meses después de la fecha de tu boda. La [página de funciones](/features) tiene la lista completa, incluido lo que no está incluido.
+Nuestros diseños se abren desde un sobre cerrado o un recuerdo ([cómo funcionan las invitaciones con sobre animado](/guides/animated-envelope-wedding-invitations)) y dan paso a cuatro páginas: Inicio, Nuestra historia, Detalles y RSVP. Puedes probar cada diseño antes como [demo en vivo](/designs). Editas los nombres, la fecha, el lugar, el programa, {{photoSpots}} fotos, preguntas y respuestas y hasta {{rsvpQuestions}} preguntas de confirmación en un panel pensado para pantallas de móvil; las ilustraciones, los colores y las tipografías se mantienen tal como se diseñaron. Las respuestas, los totales y una descarga en Excel o CSV están en tu panel. Tu web sigue en línea hasta {{months}} meses después de la fecha de tu boda. La [página de funciones](/features) tiene la lista completa, incluido lo que no está incluido.
 
 ## FAQ
 

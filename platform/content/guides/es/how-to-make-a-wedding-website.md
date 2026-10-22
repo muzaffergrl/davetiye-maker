@@ -2,8 +2,8 @@
 title: Cómo crear la web de tu boda desde el móvil (paso a paso)
 description: Una guía práctica y válida para cualquier plataforma para crear la web de tu boda desde el móvil: qué reunir antes, ocho pasos y cómo probar el enlace.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 1
 keyword: cómo hacer una web de boda
 quickAnswer: Reúne antes los datos (nombres, fecha, zona horaria, lugar, programa, unas cuantas fotos y la fecha límite de confirmación). Después elige una plataforma que puedas editar desde el móvil, añade lo esencial, escribe una bienvenida breve, configura las respuestas, revisa cada página en el móvil, publica, prueba el enlace y compártelo.
@@ -118,6 +118,8 @@ Publica y prueba el enlace exactamente como lo recibirán los invitados:
 4. Si vas a imprimir un código QR, escanéalo desde una prueba impresa con dos móviles distintos.
 5. Borra tu respuesta de prueba, o apúntala para no contarla.
 
+Nuestras guías sobre el [código QR para confirmar asistencia](/guides/qr-code-wedding-rsvp) y la [privacidad de la web de boda](/guides/wedding-website-privacy) explican los códigos impresos y lo que muestra un enlace reenviado.
+
 **Tiempo:** 10 minutos.
 
 ## Paso 8: Compártela en el momento adecuado
@@ -126,7 +128,7 @@ Muchas parejas comparten la web junto con el aviso de "reserva la fecha" (save t
 
 ## Cómo funciona esto con nuestras webs de boda
 
-Si eliges uno de nuestros [diseños de web de boda](/designs), los pasos anteriores quedan así: pruebas la demo en vivo en el móvil, compras el diseño en Etsy, empiezas tu web con tu número de pedido de Etsy y la editas en un panel privado pensado para pantallas de móvil. Las respuestas llegan a tu panel, con descarga en CSV. Consulta [cómo funciona](/how-it-works) y la lista completa de [funciones](/features). Otras plataformas también son buenas opciones; la lista del paso 1 sirve para todas.
+Si eliges uno de nuestros [diseños de web de boda](/designs), los pasos anteriores quedan así: pruebas la demo en vivo en el móvil, compras el diseño en Etsy, empiezas tu web con tu número de pedido de Etsy y la editas en un panel privado pensado para pantallas de móvil. Las respuestas llegan a tu panel, con descarga en Excel o CSV. Consulta [cómo funciona](/how-it-works) y la lista completa de [funciones](/features). Otras plataformas también son buenas opciones; la lista del paso 1 sirve para todas.
 
 ## FAQ
 

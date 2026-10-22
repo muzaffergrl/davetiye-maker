@@ -13,7 +13,7 @@ La fecha límite de confirmación parece un detalle, pero casi todo lo que viene
 
 ## La respuesta corta: dos o tres semanas antes
 
-Las guías de etiqueta, entre ellas el [Emily Post Institute](https://emilypost.com/advice/invitation-timing), dan el mismo margen general: respuestas unas dos o tres semanas antes de la boda e invitaciones enviadas entre seis y ocho semanas antes. Así los invitados tienen de cuatro a seis semanas para responder, y tú tienes tiempo de perseguir las últimas respuestas antes de que los proveedores pidan números.
+Las guías de etiqueta, entre ellas el [calendario de planificación de boda](https://emilypost.com/advice/wedding-planning-series) del Emily Post Institute y sus consejos sobre las [tarjetas de respuesta](https://emilypost.com/advice/how-to-word-a-wedding-response-card), dan el mismo margen general: respuestas unas dos o tres semanas antes de la boda e invitaciones enviadas entre seis y ocho semanas antes. Así los invitados tienen de cuatro a seis semanas para responder, y tú tienes tiempo de perseguir las últimas respuestas antes de que los proveedores pidan números.
 
 Ese margen es un punto de partida. La fecha real sale de tus contratos.
 
