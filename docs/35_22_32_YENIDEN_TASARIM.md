@@ -80,8 +80,9 @@ delikleri; 47 tuck + negatif halkası; 48 cüzdan + kartuş; 33 kılıf; 34 ip-d
 
 ```
 Task: BKE Studio — REDESIGN of 11 wedding-website designs 22–32: generate every image in their GPT_PROMPTS.md files
-(repo muzaffergrl/davetiye-maker, branch main).
-First run: git pull --rebase origin main.
+(repo muzaffergrl/davetiye-maker, branch claude/modest-brown-pwe1sm — the new prompt files are ONLY on this branch,
+not on main). First run: git fetch origin claude/modest-brown-pwe1sm && git checkout claude/modest-brown-pwe1sm
+&& git pull --rebase origin claude/modest-brown-pwe1sm.
 
 Work in parallel: one sub-agent per design (22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32). Each sub-agent works ONLY inside
 its own folder collections/<NN>_*/assets/gpt/ (parts/ and print/) and does this:
@@ -103,7 +104,8 @@ its own folder collections/<NN>_*/assets/gpt/ (parts/ and print/) and does this:
    Never stop early.
 4. Save each image with the exact path and file name on its "Kaydet" line (PNG). Never overwrite a different existing
    file; a retry you want to keep separately is saved as name_v2.png.
-5. Commit and push often (git pull --rebase origin main before every push), only that design's new image files:
+5. Commit and push often to claude/modest-brown-pwe1sm (git pull --rebase origin claude/modest-brown-pwe1sm before every
+   push; never push to main), only that design's new image files:
      "PAKET 5R <NN>: website katmanları (W1–W6)" … "PAKET 6R <NN>: basılı davetiye"
 6. At the end report per design: files saved, files that failed the checklist and why.
 ```
