@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 23 · alindi 0 · inceleme 0 · blokaj 2 · bitti 221 · iptal 257 · toplam 503
+Özet: hazir 22 · alindi 0 · inceleme 1 · blokaj 2 · bitti 221 · iptal 257 · toplam 503
 
 İptal edilen görevler (K22/K24 ile anlamını yitirenler) listelenmez; yalnız sayıları var. Ayrıntı: `python3 tools/gorev.py liste --hepsi`.
 
@@ -37,11 +37,11 @@ Bağımlılık bekleyen: 0 · Biten: 8 · İptal: 42
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (0)**
+**Üzerinde çalışılan / incelemede / blokaj (1)**
 
-- (yok)
+- `G423` inceleme · claude-session-01HjhGPm — Tasarım 23 Velvet Jewel Box — tema yeniden kurulumu (39 pilot yapısı, PAKET 5R parçaları)
 
-Bağımlılık bekleyen: 11 · Biten: 127 · İptal: 83
+Bağımlılık bekleyen: 10 · Biten: 127 · İptal: 83
 
 ## claude-metin
 
