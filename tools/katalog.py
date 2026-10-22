@@ -520,6 +520,12 @@ EK_TEMALAR = [
          dekor="Chantilly dantel, kuğu çifti (kalem gravür), siyah ipek fiyonk, inci çiçeği (lily of the valley), beyaz kuğu tüyü", teknik="fotogerçekçi dantel/ipek/pamuk + kalem-mürekkep gravür",
          font=("Bonheur Royale", "Crimson Pro"), palet_adi="ivory-noir-swan",
          hareket="Kuğu mührün kalkması, kurdele kuyruklarının mühür altından iki yana kayması, dantelin duvak gibi kalkıp süzülmesi, yay kapağın 3B açılışı, süzülen kuğu tüyü, baskıların dantel duvağının kalkması, program satırlarında sallanan inci çiçeği çanları, yanıtta tüy ve çan yağmuru."),
+    dict(no=43, klasor="43_Chartreuse_Garden_Party", ad="Chartreuse Garden Party",
+         zarf="Yatay chartreuse zarf, 7 taraklı dalgalı kapak, mühür yok; kapağın ucuna yakın iki yarıktan geçirilmiş tek bir pembe düğün çiçeği (ranunculus) sapı kapatır. Sap yana kayıp yarıklardan çıkar, çiçek takla atarak düşer, dalgalı kapak 3B açılıp pembe-bordo guaj çiçekli astarını gösterir, zarfın arkasından 4 guaj çiçek kümesi sırayla patlar gibi büyür, yatık duran krem kart doğrularak yükselir.",
+         foto="Siyah-beyaz anlık baskılar (beyaz çerçeve, kalın alt kenar) altın tel çiçekçi çubuklarında: sahnesine gelince ayaklı kâsedeki guaj aranjmandan art arda yükselip hafifçe sallanır.",
+         dekor="Guaj şakayık, düğün çiçeği (ranunculus), ıtır (sweet pea), bordo kozmos, aslanpençesi (lady's mantle), ayaklı kâse aranjmanı, altın tel çiçekçi çubuğu, küçük çiçek çelengi", teknik="elle boyanmış guaj (opak, kadifemsi fırça izi) + fotogerçekçi kâğıt",
+         font=("Hurricane", "Fraunces"), palet_adi="chartreuse-pink-burgundy",
+         hareket="Çiçek sapının yarıklardan kayıp çıkması ve çiçeğin takla atarak düşmesi, dalgalı kapağın 3B açılışı, guaj çiçek kümelerinin sırayla patlayarak büyümesi, yatık kartın doğrularak yükselmesi, anlık baskıların aranjmandan çubuklarıyla yükselip sallanması, program satırlarında dönerek açılan kozmos, yanıtta yaprak ve çiçek yağmuru."),
 ]
 
 # Demo kaydının Our Story bloğu (`content.demo.json` → `story`; G053 metinleri, G057'den beri tek kaynak burası):

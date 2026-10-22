@@ -534,6 +534,18 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     ink: '#1B1A18', accent: '#8F8A82', front: [22,  13,  12,  13], back: [15,  12,  10,  12],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
+  // 43 (G443, 2026-10-22): the design's own PAKET 6 grounds (cream cotton; front: a gouache garland of peonies, ranunculus
+  // and cosmos across the top, a small spray at the foot; back: a short garland at the top), one per side, `cover` for 5×7
+  // and A5. Ornament measured on the art: front 4–15 % and 93–96 % of the height, back 3–12 %; the boxes sit inside the
+  // empty area (G149).
+  'chartreuse-garden-party': {
+    collection: '43_Chartreuse_Garden_Party',
+    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
+    fonts: gf('family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Hurricane'),
+    script: "'Hurricane', cursive", serif: "'Fraunces', Georgia, serif",
+    ink: '#6B1730', accent: '#4F7A3A', front: [20,  13,  12,  13], back: [15,  12,  10,  12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
+  },
 };
 
 export function printLayout(themeId: string): PrintLayout | null {

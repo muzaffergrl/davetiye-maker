@@ -60,6 +60,8 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
   'silver-photo-booth': { music: 'evening-strings', opening: [[0, 'tap'], [180, 'whoosh'], [1150, 'paper'], [1700, 'slide'], [2200, 'chime']] },
   // Swan Chantilly Lace: the seal lifts (seal) · the ribbon tails slip (ribbon) · the lace rises (whoosh) · the flap opens (paper) · card rises (slide) · forward (chime)
   'swan-chantilly-lace': { music: 'evening-strings', opening: [[0, 'seal'], [250, 'ribbon'], [700, 'whoosh'], [1500, 'paper'], [2100, 'slide'], [2750, 'chime']] },
+  // Chartreuse Garden Party: the stem slides out of the slits (ribbon) · the flap opens (paper) · the flower clusters burst out (whoosh) · card rises (slide) · forward (chime)
+  'chartreuse-garden-party': { music: 'garden-waltz', opening: [[0, 'ribbon'], [500, 'paper'], [1000, 'whoosh'], [1500, 'slide'], [2300, 'chime']] },
   'maison-patisserie': { music: 'garden-waltz', opening: [[200, 'ribbon'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
   // Orient Express Voyage: strap buckle (closure) · cover swings open (open) · ticket slides out (rise) · forward
   'orient-express-voyage': { music: 'evening-strings', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },

@@ -218,6 +218,12 @@ export const WEDDING_GLOSSARY: readonly Row[] = [
   ["Champagne", "Şampanya", "Champán", "Champagner", "Champagne"],
   ["Will the ceremony be outdoors?", "Tören açık havada mı olacak?", "¿La ceremonia será al aire libre?", "Findet die Trauung im Freien statt?", "La cérémonie aura-t-elle lieu en plein air ?"],
   ["Yes, on the lakeside lawn. Please choose shoes that are comfortable on grass; dinner and dancing are indoors.", "Evet, göl kıyısındaki çimende. Lütfen çimende rahat edeceğiniz ayakkabılar seçin; akşam yemeği ve dans kapalı alanda.", "Sí, en el césped junto al lago. Elijan un calzado cómodo para la hierba; la cena y el baile son en el interior.", "Ja, auf dem Rasen am See. Bitte wählen Sie Schuhe, die auf Gras bequem sind; Abendessen und Tanz finden drinnen statt.", "Oui, sur la pelouse au bord du lac. Choisissez des chaussures confortables sur l'herbe ; le dîner et la danse ont lieu à l'intérieur."],
+  // G443 Chartreuse Garden Party (43): demo programme and questions
+  ["Lemonade & lawn games", "Limonata ve çim oyunları", "Limonada y juegos en el césped", "Limonade & Rasenspiele", "Limonade et jeux de pelouse"],
+  ["Garden supper", "Bahçe akşam yemeği", "Cena en el jardín", "Abendessen im Garten", "Dîner au jardin"],
+  ["Garden party chic", "Şık bahçe partisi", "Fiesta en el jardín chic", "Gartenparty-Schick", "Garden-party chic"],
+  ["Is the celebration outdoors?", "Kutlama açık havada mı?", "¿La celebración es al aire libre?", "Findet die Feier im Freien statt?", "La fête a-t-elle lieu en plein air ?"],
+  ["Yes, the ceremony and supper are in the garden. Comfortable shoes for the lawn are a good idea.", "Evet, tören ve akşam yemeği bahçede. Çimen için rahat ayakkabılar iyi bir fikir.", "Sí, la ceremonia y la cena son en el jardín. Un calzado cómodo para el césped es buena idea.", "Ja, Trauung und Abendessen finden im Garten statt. Bequeme Schuhe für den Rasen sind eine gute Idee.", "Oui, la cérémonie et le dîner ont lieu au jardin. Des chaussures confortables pour la pelouse sont une bonne idée."],
 ];
 
 /** "and" between two terms, per language (Spanish "y" becomes "e" before an i- sound). */

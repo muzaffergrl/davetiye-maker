@@ -318,6 +318,8 @@ const dict: Dict = {
   "Picture us together": "Ein Bild von uns beiden",
   // G440 Swan Chantilly Lace (40, coming)
   "A promise in lace": "Ein Versprechen in Spitze",
+  // G443 Chartreuse Garden Party (43, coming)
+  "Let love bloom": "Lass die Liebe erblühen",
 };
 
 export default dict;

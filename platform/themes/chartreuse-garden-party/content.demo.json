@@ -1,0 +1,122 @@
+{
+  "record_kind": "demo",
+  "event_type": "wedding",
+  "locale": "en-US",
+  "partners": [
+    {
+      "display_name": "Poppy",
+      "full_name": "Poppy Arden Wells"
+    },
+    {
+      "display_name": "Hugo",
+      "full_name": "Hugo Bastien Clarke"
+    }
+  ],
+  "name_display": "Poppy & Hugo",
+  "initials": "P&H",
+  "host_line": "Together with their families",
+  "date": "2027-05-01",
+  "ceremony_time": "15:00",
+  "timezone": "America/Chicago",
+  "venue": {
+    "name": "Hartwell Garden Terrace",
+    "city": "Nashville",
+    "region": "Tennessee",
+    "country": "United States",
+    "address": null
+  },
+  "schedule": [
+    {
+      "label": "Ceremony",
+      "time": "15:00",
+      "location": "The garden arch"
+    },
+    {
+      "label": "Lemonade & lawn games",
+      "time": "15:45",
+      "location": "The croquet lawn"
+    },
+    {
+      "label": "Garden supper",
+      "time": "17:30",
+      "location": "The long table"
+    },
+    {
+      "label": "Dancing",
+      "time": "19:30",
+      "location": "The terrace"
+    }
+  ],
+  "dress_code": "Garden party chic",
+  "rsvp": {
+    "deadline": "2027-03-27",
+    "method": null,
+    "required": {
+      "email": false,
+      "message": false
+    },
+    "questions": [
+      {
+        "id": "meal",
+        "label": "Your meal preference",
+        "type": "choice",
+        "required": false,
+        "options": [
+          "Vegetarian",
+          "Fish",
+          "Chicken"
+        ]
+      }
+    ]
+  },
+  "urls": {
+    "website": null,
+    "rsvp_form": null,
+    "map": null,
+    "registry": null,
+    "accommodation": null
+  },
+  "media": {
+    "hero_portrait": null,
+    "memory_photos": [],
+    "venue_image": null,
+    "couple_clip": null
+  },
+  "optional_blocks": {
+    "our_story": true,
+    "countdown": true,
+    "dress_code": true,
+    "registry": true,
+    "travel_stay": true,
+    "faq": true,
+    "guest_policy": false
+  },
+  "story": {
+    "intro": "A first picnic, many flower-market Saturdays and a yes in the garden led us to",
+    "items": [
+      {
+        "caption": "Our first picnic"
+      },
+      {
+        "caption": "Flower market Saturdays"
+      },
+      {
+        "caption": "Yes, in the garden"
+      }
+    ]
+  },
+  "audio": {
+    "music": "garden-waltz",
+    "effects": true
+  },
+  "faq": [
+    {
+      "q": "When should we arrive?",
+      "a": "Please arrive 20 minutes before the ceremony."
+    },
+    {
+      "q": "Is the celebration outdoors?",
+      "a": "Yes, the ceremony and supper are in the garden. Comfortable shoes for the lawn are a good idea."
+    }
+  ]
+}

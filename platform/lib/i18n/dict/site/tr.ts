@@ -318,6 +318,8 @@ const dict: Dict = {
   "Picture us together": "Bizi birlikte hayal edin",
   // G440 Swan Chantilly Lace (40, coming)
   "A promise in lace": "Dantelde bir söz",
+  // G443 Chartreuse Garden Party (43, coming)
+  "Let love bloom": "Aşk çiçek açsın",
 };
 
 export default dict;
