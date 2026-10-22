@@ -353,7 +353,7 @@ export function DesignPage({ id, m }: { id: string; m: Market }) {
       </Section>
 
       {/* phones: the same order — Etsy (primary) first, the live demo second */}
-      <div className={s.stickyBar}>
+      <div className={s.stickyBar} data-sticky-cta="">
         {d.status === 'live' ? <EtsyButton design={d} placement="design-sticky" m={m} /> : <span className={`${s.btn} ${s.btnDisabled}`} aria-disabled="true">{t('Coming soon on Etsy')}</span>}
         <a className={`${s.btn} ${s.btnSecondary}`} href={demoPath(d.id)} data-demo={d.id} data-demo-placement="design-sticky">
           <Play aria-hidden size={16} strokeWidth={2} />

@@ -89,6 +89,11 @@ export const HelpSheet = lazyView(
   () => import('./HelpSheet.tsx').then((m) => m.HelpSheet),
   null,
 );
+export const SupportSheet = lazyView(
+  dynamic(() => import('./SupportSheet.tsx').then((m) => m.SupportSheet)),
+  () => import('./SupportSheet.tsx').then((m) => m.SupportSheet),
+  null,
+);
 export const IdentitySheet = lazyView(
   dynamic(() => import('./IdentitySheet.tsx').then((m) => m.IdentitySheet)),
   () => import('./IdentitySheet.tsx').then((m) => m.IdentitySheet),
@@ -110,7 +115,7 @@ const VIEWS = {
   share: [ShareView],
 } as const;
 export type ChunkView = keyof typeof VIEWS;
-const SHEETS = [HelpSheet, IdentitySheet, LiveSheetBody];
+const SHEETS = [HelpSheet, IdentitySheet, LiveSheetBody, SupportSheet];
 
 /** Starts (or joins) the download of a view's chunk; resolves when it is here (never rejects). */
 export function loadView(view: ChunkView): Promise<void> {

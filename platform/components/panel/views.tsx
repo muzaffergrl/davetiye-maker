@@ -2,7 +2,7 @@
 // The panel's Home view (G060, docs/16 §6; K29 simpler panel): status, progress + next three tasks, replies, dates.
 // G181: the other views have their own modules (EditListView, ShareView, HelpSheet, guests.tsx), each loaded with its view.
 
-import { Archive, ChevronRight, CircleCheckBig, Copy, Download, Heart, Hourglass, MessageCircleQuestionMark, Pencil, Send, Share2, Sparkles, Users, type LucideIcon } from 'lucide-react';
+import { Archive, ChevronRight, CircleCheckBig, Copy, Download, Heart, Hourglass, MessageCircle, MessageCircleQuestionMark, Pencil, Send, Share2, Sparkles, Users, type LucideIcon } from 'lucide-react';
 import { formatDate, formatDateLong } from '../../lib/content/format.ts';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import { photoAt, type PanelMeta, type PanelTheme } from '../../lib/panel/model.ts';
@@ -35,6 +35,7 @@ export function HomeView({
   onShare,
   onContinueSetup,
   onHelp,
+  onChat,
   onCopy,
   excelUrl,
 }: {
@@ -54,6 +55,8 @@ export function HomeView({
   onShare: () => void;
   onContinueSetup: () => void;
   onHelp: (topic?: string) => void;
+  /** The AI support chat (SupportSheet). */
+  onChat?: () => void;
   onCopy: () => void;
   /** G140 (K45 item 2): the guest list as Excel, one tap from Home (same file as Guests → Download Excel). */
   excelUrl?: string;
@@ -175,6 +178,11 @@ export function HomeView({
 
       {!r.archived ? <SettingsCard content={content} meta={meta} onGo={onGo} onHelp={onHelp} /> : null}
 
+      {onChat ? (
+        <Button variant="tertiary" icon={MessageCircle} onClick={onChat} data-open-support>
+          {t('Chat with us')}
+        </Button>
+      ) : null}
       <Button variant="tertiary" icon={MessageCircleQuestionMark} onClick={() => onHelp()}>
         {t('Help & questions')}
       </Button>

@@ -5,7 +5,9 @@ import { formatDateLong } from '../../lib/content/format.ts';
 import { isPlaceholder, PANEL_BRAND } from '../../lib/panel/brand.ts';
 import { type PanelMeta } from '../../lib/panel/model.ts';
 import { ARCHIVE_AFTER_MONTHS, ARCHIVE_TEXT, changesRuleText, FREE_CHANGES_TEXT, UNDO_TEXT } from '../../lib/panel/rights.ts';
+import { MessageCircle } from 'lucide-react';
 import { Sheet } from './Sheet.tsx';
+import { Button } from './ui.tsx';
 import styles from './panel.module.css';
 import { t } from '../../lib/i18n/client.ts';
 
@@ -14,7 +16,7 @@ import { t } from '../../lib/i18n/client.ts';
 
 // Help
 
-export function HelpSheet({ meta, locale, onClose, topic }: { meta: PanelMeta; locale: string; onClose: () => void; topic?: string }) {
+export function HelpSheet({ meta, locale, onClose, topic, onChat }: { meta: PanelMeta; locale: string; onClose: () => void; topic?: string; onChat?: () => void }) {
   const r = meta.rights;
   const total = r.limit + r.granted;
   const until = r.onlineUntil ? formatDateLong(r.onlineUntil, locale) : null;
@@ -22,6 +24,14 @@ export function HelpSheet({ meta, locale, onClose, topic }: { meta: PanelMeta; l
   return (
     <Sheet title={t('Help')} onClose={onClose} testId="help">
       <div className={styles.help}>
+        {onChat ? (
+          <section className={styles.helpChat}>
+            <p>{t('Ask our assistant: it usually answers in a few seconds.')}</p>
+            <Button variant="secondary" icon={MessageCircle} onClick={onChat} data-open-support>
+              {t('Chat with us')}
+            </Button>
+          </section>
+        ) : null}
         <section data-autofocus={topic === 'changes' || undefined} tabIndex={-1}>
           <h3 className={styles.subTitle}>{t('How do name and date changes work?')}</h3>
           <p>
