@@ -25,12 +25,12 @@ Kullanıcı (2026-10-22): "N1 ve N2'yi yazmaya başla" (docs/36 §5 brifleri).
 - G1 ile tutarlılık: N2 "toplam dört ya da beş soru" diyor (2 temel + G1'deki 2–3 kendi sorusu).
 - Kontrol: build temiz; iki sayfa 200, tek H1, Article + BreadcrumbList; 390 px'te yatay taşma yok (tablolar kendi kutusunda
   kayıyor). Görüntüler `platform/previews/g193/`.
-- Testler: TEST_SONUCU
+- Testler: `npm test` 1689/1689 (0 hata, 0 atlanan), typecheck ve build temiz.
 - Çeviri yapılmadı: TR/DE/ES/FR sayfaları şimdilik İngilizce metni gösteriyor (G144 davranışı). Site noindex olduğu için
   arama tarafında zararı yok; lansmandan önce çevrilmeli.
 
 ## Önerilen görevler (entegratöre)
-- N1 + N2 çevirisi (`content/guides/{tr,de,es,fr}/`), mevcut çevirilere yeni iç link cümleleri.
+- ~~N1 + N2 çevirisi~~ → G194 (yapıldı).
 - Dalga 2: N3, N4 (docs/36).
 
 ## Günlük

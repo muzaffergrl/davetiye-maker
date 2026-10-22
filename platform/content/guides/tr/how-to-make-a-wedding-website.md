@@ -90,7 +90,7 @@ Catering firmanız ve mekânınız kişi sayısı istemeden önce neyi bilmeniz 
 - Kısa bir yanıt olarak beslenme ihtiyaçları ya da alerjiler
 - İsteğe bağlı olarak bir şarkı isteği ya da çifte bir not
 
-Özel soruları iki üç taneyle sınırlayın; her ek soru misafirlerin formu tamamlama ihtimalini düşürür. Yanıt son tarihini düğünden yaklaşık iki ila üç hafta önceye ya da catering firmanızın kesin sayı tarihinden birkaç gün önceye koyun. [Zamanlama rehberimiz](/guides/when-to-send-your-wedding-website) bu tarihten geriye doğru nasıl hesap yapacağınızı anlatıyor.
+Özel soruları iki üç taneyle sınırlayın; her ek soru misafirlerin formu tamamlama ihtimalini düşürür. Yanıt son tarihini düğünden yaklaşık iki ila üç hafta önceye ya da catering firmanızın kesin sayı tarihinden birkaç gün önceye koyun. [Zamanlama rehberimiz](/guides/when-to-send-your-wedding-website) bu tarihten geriye doğru nasıl hesap yapacağınızı anlatıyor; [düğün LCV soruları](/guides/wedding-rsvp-questions) rehberi de her soru için örnek metin veriyor.
 
 **Süre:** 10 dakika.
 

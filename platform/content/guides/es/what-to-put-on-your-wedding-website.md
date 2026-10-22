@@ -77,7 +77,7 @@ Cuatro páginas cortas se leen mejor en el móvil que una página larguísima o 
 1. **Inicio.** Nombres, fecha, lugar, una bienvenida de una línea y un botón claro para confirmar. Aquí encaja bien "Añadir al calendario".
 2. **Nuestra historia.** Unas cuantas fotos con pies cortos y una o dos frases sobre vosotros.
 3. **Detalles.** El programa, el lugar con el mapa, el código de vestimenta, viaje y alojamiento, la lista de bodas, y las preguntas y respuestas.
-4. **RSVP.** El formulario de respuesta, tu fecha límite y las preguntas que necesites responder (elección de menú, necesidades alimentarias).
+4. **RSVP.** El formulario de respuesta, tu fecha límite y las preguntas que necesites responder (elección de menú, necesidades alimentarias; mira [qué preguntas incluir en la confirmación](/guides/wedding-rsvp-questions)).
 
 Es la estructura que usan nuestros diseños, después de un sobre o un recuerdo que se abre y da paso a la página de inicio. Puedes verla en cualquier [demo en vivo](/designs), y la [página de funciones](/features) indica qué puede incluir cada página.
 

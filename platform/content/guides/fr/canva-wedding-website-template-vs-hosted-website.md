@@ -96,7 +96,7 @@ Si une annonce laisse l'un de ces points dans le flou, écrivez au vendeur avant
 
 ## Comment nos sites hébergés répondent à ces questions
 
-Nos designs s'ouvrent depuis une enveloppe scellée ou un souvenir sur quatre pages : Accueil, Notre histoire, Détails et RSVP. Vous pouvez d'abord essayer chaque design en [démo en ligne](/designs). Vous modifiez les prénoms, la date, le lieu, le programme, {{photoSpots}} photos, les questions-réponses et jusqu'à {{rsvpQuestions}} questions de RSVP dans un panneau pensé pour les écrans de téléphone ; les illustrations, les couleurs et les polices restent telles qu'elles ont été conçues. Les réponses, les totaux et un téléchargement CSV se trouvent dans votre panneau. Votre site reste en ligne jusqu'à {{months}} mois après la date de votre mariage. La [page des fonctionnalités](/features) donne la liste complète, y compris ce qui n'est pas inclus.
+Nos designs s'ouvrent depuis une enveloppe scellée ou un souvenir ([comment fonctionnent les faire-part à enveloppe animée](/guides/animated-envelope-wedding-invitations)) sur quatre pages : Accueil, Notre histoire, Détails et RSVP. Vous pouvez d'abord essayer chaque design en [démo en ligne](/designs). Vous modifiez les prénoms, la date, le lieu, le programme, {{photoSpots}} photos, les questions-réponses et jusqu'à {{rsvpQuestions}} questions de RSVP dans un panneau pensé pour les écrans de téléphone ; les illustrations, les couleurs et les polices restent telles qu'elles ont été conçues. Les réponses, les totaux et un téléchargement CSV se trouvent dans votre panneau. Votre site reste en ligne jusqu'à {{months}} mois après la date de votre mariage. La [page des fonctionnalités](/features) donne la liste complète, y compris ce qui n'est pas inclus.
 
 ## FAQ
 

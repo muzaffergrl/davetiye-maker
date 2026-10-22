@@ -94,7 +94,7 @@ Après la date limite, appelez les derniers invités. Les proches plus âgés, e
 
 ## Un faire-part numérique qui reste une vraie invitation
 
-Ce que l'on aime dans le papier, c'est en partie le moment où on l'ouvre. Nos sites de mariage cherchent à préserver ce moment : vos invités ouvrent votre lien et découvrent une enveloppe scellée (ou, dans certains designs, un souvenir comme un livre d'histoires) à vos prénoms ; ils la touchent et elle s'ouvre sur votre site, avec les détails et le formulaire de réponse. Vous pouvez l'essayer sur votre téléphone avec la [démo Blush Garden Rose](/designs/blush-garden-rose), ou lire [comment ça marche](/how-it-works).
+Ce que l'on aime dans le papier, c'est en partie le moment où on l'ouvre. Nos sites de mariage cherchent à préserver ce moment : vos invités ouvrent votre lien et découvrent une enveloppe scellée (ou, dans certains designs, un souvenir comme un livre d'histoires) à vos prénoms ; ils la touchent et elle s'ouvre sur votre site, avec les détails et le formulaire de réponse. Vous pouvez l'essayer sur votre téléphone avec la [démo Blush Garden Rose](/designs/blush-garden-rose), ou lire [comment ça marche](/how-it-works). Notre guide des [faire-part à enveloppe animée](/guides/animated-envelope-wedding-invitations) présente les deux sortes que vous rencontrerez et ce qu'il faut vérifier avant de choisir.
 
 ## FAQ
 

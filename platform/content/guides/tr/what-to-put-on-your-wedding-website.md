@@ -77,7 +77,7 @@ Dört kısa sayfa, telefonda çok uzun tek bir sayfadan ya da on minik sayfadan 
 1. **Ana Sayfa.** İsimler, tarih, mekân, tek satırlık bir karşılama ve yanıt vermek için belirgin bir düğme. Takvime ekle buraya iyi uyar.
 2. **Hikâyemiz.** Kısa açıklamalı birkaç fotoğraf ve sizin hakkınızda bir iki cümle.
 3. **Detaylar.** Program, haritalı mekân, kıyafet kuralı, ulaşım ve konaklama, hediye listesi ve sorular ve yanıtlar.
-4. **LCV.** Yanıt formu, yanıt son tarihiniz ve yanıtlanması gereken sorular (yemek tercihi, beslenme ihtiyaçları).
+4. **LCV.** Yanıt formu, yanıt son tarihiniz ve yanıtlanması gereken sorular (yemek tercihi, beslenme ihtiyaçları; bkz. [hangi LCV soruları sorulmalı](/guides/wedding-rsvp-questions)).
 
 Tasarımlarımız, ana sayfaya açılan bir zarf ya da hatıra kutusunun ardından bu yapıyı kullanır. Bunu herhangi bir [canlı demoda](/designs) görebilirsiniz; [özellikler sayfası](/features) da her sayfanın neler içerebileceğini listeliyor.
 

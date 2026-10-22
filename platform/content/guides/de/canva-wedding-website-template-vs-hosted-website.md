@@ -96,7 +96,7 @@ Bleibt in einem Angebot etwas davon unklar, schreiben Sie dem Verkäufer vor dem
 
 ## Wie unsere gehosteten Websites diese Fragen beantworten
 
-Unsere Designs öffnen sich aus einem versiegelten Umschlag oder einem Erinnerungsstück zu vier Seiten: Home, Our Story, Details und RSVP. Jedes Design können Sie zuerst als [Live-Demo](/designs) ausprobieren. Namen, Datum, Location, Ablauf, {{photoSpots}} Fotos, Fragen und Antworten sowie bis zu {{rsvpQuestions}} RSVP-Fragen bearbeiten Sie in einem Panel, das für Handybildschirme gemacht ist; Illustrationen, Farben und Schriften bleiben wie gestaltet. Antworten, Summen und ein CSV-Download liegen in Ihrem Panel. Ihre Website bleibt bis {{months}} Monate nach Ihrem Hochzeitsdatum online. Auf der [Seite mit den Funktionen](/features) finden Sie die vollständige Liste, auch das, was nicht enthalten ist.
+Unsere Designs öffnen sich aus einem versiegelten Umschlag oder einem Erinnerungsstück ([so funktionieren animierte Umschlag-Einladungen](/guides/animated-envelope-wedding-invitations)) zu vier Seiten: Home, Our Story, Details und RSVP. Jedes Design können Sie zuerst als [Live-Demo](/designs) ausprobieren. Namen, Datum, Location, Ablauf, {{photoSpots}} Fotos, Fragen und Antworten sowie bis zu {{rsvpQuestions}} RSVP-Fragen bearbeiten Sie in einem Panel, das für Handybildschirme gemacht ist; Illustrationen, Farben und Schriften bleiben wie gestaltet. Antworten, Summen und ein CSV-Download liegen in Ihrem Panel. Ihre Website bleibt bis {{months}} Monate nach Ihrem Hochzeitsdatum online. Auf der [Seite mit den Funktionen](/features) finden Sie die vollständige Liste, auch das, was nicht enthalten ist.
 
 ## FAQ
 

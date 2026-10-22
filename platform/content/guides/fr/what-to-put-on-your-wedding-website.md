@@ -77,7 +77,7 @@ Quatre pages courtes se lisent plus facilement sur téléphone qu'une très long
 1. **Accueil.** Prénoms, date, lieu, une phrase d'accueil et un bouton bien visible pour répondre. Le bouton « Ajouter au calendrier » y trouve bien sa place.
 2. **Notre histoire.** Quelques photos avec de courtes légendes et une ou deux phrases sur vous.
 3. **Détails.** Le programme, le lieu avec la carte, le dress code, le voyage et l'hébergement, la liste de mariage et les questions-réponses.
-4. **RSVP.** Le formulaire de réponse, votre date limite et les questions auxquelles vous avez besoin de réponses (choix du menu, régimes alimentaires).
+4. **RSVP.** Le formulaire de réponse, votre date limite et les questions auxquelles vous avez besoin de réponses (choix du menu, régimes alimentaires ; voir [quelles questions RSVP poser](/guides/wedding-rsvp-questions)).
 
 C'est le plan qu'utilisent nos designs, après une enveloppe ou un souvenir qui s'ouvre sur la page d'accueil. Vous pouvez le voir dans n'importe quelle [démo en ligne](/designs), et la [page des fonctionnalités](/features) liste ce que chaque page peut contenir.
 

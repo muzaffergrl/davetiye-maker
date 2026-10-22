@@ -94,7 +94,7 @@ Son tarihten sonra kalan birkaç misafiri arayın. Özellikle yaşlı akrabalar 
 
 ## Hâlâ davetiye gibi hissettiren bir dijital davetiye
 
-İnsanların kâğıtta sevdiği şeyin bir kısmı, onu açma anıdır. Düğün websitelerimiz bu anı korumaya çalışır: misafirler linkinizi açar ve isimlerinizin yazılı olduğu mühürlü bir zarf (ya da bazı tasarımlarda hikâye kitabı gibi bir hatıra) görür, ona dokunur ve zarf ayrıntılar ve yanıt formuyla websitenize açılır. Bunu telefonunuzda [Blush Garden Rose demosunda](/designs/blush-garden-rose) deneyebilir ya da [nasıl çalıştığını](/how-it-works) okuyabilirsiniz.
+İnsanların kâğıtta sevdiği şeyin bir kısmı, onu açma anıdır. Düğün websitelerimiz bu anı korumaya çalışır: misafirler linkinizi açar ve isimlerinizin yazılı olduğu mühürlü bir zarf (ya da bazı tasarımlarda hikâye kitabı gibi bir hatıra) görür, ona dokunur ve zarf ayrıntılar ve yanıt formuyla websitenize açılır. Bunu telefonunuzda [Blush Garden Rose demosunda](/designs/blush-garden-rose) deneyebilir ya da [nasıl çalıştığını](/how-it-works) okuyabilirsiniz. [Animasyonlu zarf davetiyeleri](/guides/animated-envelope-wedding-invitations) rehberimiz karşınıza çıkacak iki türü ve seçmeden önce neye bakmanız gerektiğini anlatıyor.
 
 ## FAQ
 

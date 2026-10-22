@@ -90,7 +90,7 @@ Bei den meisten Baukästen können Sie jedes Foto für seinen Rahmen zuschneiden
 - Ernährungswünsche oder Allergien, als kurze Antwort
 - Optional ein Musikwunsch oder eine Nachricht an das Paar
 
-Beschränken Sie sich auf zwei oder drei eigene Fragen; jede zusätzliche Frage senkt die Chance, dass Gäste das Formular abschließen. Setzen Sie die Antwortfrist etwa zwei bis drei Wochen vor der Hochzeit oder ein paar Tage vor dem Termin, an dem Ihr Caterer die endgültige Zahl braucht. Unser [Ratgeber zum Timing](/guides/when-to-send-your-wedding-website) erklärt, wie Sie von diesem Termin aus rückwärts planen.
+Beschränken Sie sich auf zwei oder drei eigene Fragen; jede zusätzliche Frage senkt die Chance, dass Gäste das Formular abschließen. Setzen Sie die Antwortfrist etwa zwei bis drei Wochen vor der Hochzeit oder ein paar Tage vor dem Termin, an dem Ihr Caterer die endgültige Zahl braucht. Unser [Ratgeber zum Timing](/guides/when-to-send-your-wedding-website) erklärt, wie Sie von diesem Termin aus rückwärts planen, und der Ratgeber zu [RSVP-Fragen für die Hochzeit](/guides/wedding-rsvp-questions) hat Formulierungen für jede Frage.
 
 **Zeit:** 10 Minuten.
 

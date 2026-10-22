@@ -94,7 +94,7 @@ Pasada la fecha límite, llama a los últimos invitados. Sobre todo los familiar
 
 ## Una invitación digital que sigue pareciendo una invitación
 
-Parte de lo que gusta del papel es el momento de abrirla. Nuestras webs de boda intentan conservar ese momento: los invitados abren tu enlace y ven un sobre cerrado (o, en algunos diseños, un recuerdo como un libro de cuentos) con vuestros nombres, lo tocan y se abre en tu web con los detalles y el formulario de respuesta. Puedes probarlo en el móvil con la [demo de Blush Garden Rose](/designs/blush-garden-rose), o leer [cómo funciona](/how-it-works).
+Parte de lo que gusta del papel es el momento de abrirla. Nuestras webs de boda intentan conservar ese momento: los invitados abren tu enlace y ven un sobre cerrado (o, en algunos diseños, un recuerdo como un libro de cuentos) con vuestros nombres, lo tocan y se abre en tu web con los detalles y el formulario de respuesta. Puedes probarlo en el móvil con la [demo de Blush Garden Rose](/designs/blush-garden-rose), o leer [cómo funciona](/how-it-works). Nuestra guía de [invitaciones con sobre animado](/guides/animated-envelope-wedding-invitations) explica los dos tipos que vas a encontrar y qué revisar antes de elegir.
 
 ## FAQ
 

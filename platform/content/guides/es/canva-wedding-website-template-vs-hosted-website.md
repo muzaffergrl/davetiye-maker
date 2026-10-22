@@ -96,7 +96,7 @@ Si un anuncio deja alguna de estas cosas poco clara, escribe al vendedor antes d
 
 ## Cómo responden nuestras webs alojadas a esas preguntas
 
-Nuestros diseños se abren desde un sobre cerrado o un recuerdo y dan paso a cuatro páginas: Inicio, Nuestra historia, Detalles y RSVP. Puedes probar cada diseño antes como [demo en vivo](/designs). Editas los nombres, la fecha, el lugar, el programa, {{photoSpots}} fotos, preguntas y respuestas y hasta {{rsvpQuestions}} preguntas de confirmación en un panel pensado para pantallas de móvil; las ilustraciones, los colores y las tipografías se mantienen tal como se diseñaron. Las respuestas, los totales y una descarga en CSV están en tu panel. Tu web sigue en línea hasta {{months}} meses después de la fecha de tu boda. La [página de funciones](/features) tiene la lista completa, incluido lo que no está incluido.
+Nuestros diseños se abren desde un sobre cerrado o un recuerdo ([cómo funcionan las invitaciones con sobre animado](/guides/animated-envelope-wedding-invitations)) y dan paso a cuatro páginas: Inicio, Nuestra historia, Detalles y RSVP. Puedes probar cada diseño antes como [demo en vivo](/designs). Editas los nombres, la fecha, el lugar, el programa, {{photoSpots}} fotos, preguntas y respuestas y hasta {{rsvpQuestions}} preguntas de confirmación en un panel pensado para pantallas de móvil; las ilustraciones, los colores y las tipografías se mantienen tal como se diseñaron. Las respuestas, los totales y una descarga en CSV están en tu panel. Tu web sigue en línea hasta {{months}} meses después de la fecha de tu boda. La [página de funciones](/features) tiene la lista completa, incluido lo que no está incluido.
 
 ## FAQ
 

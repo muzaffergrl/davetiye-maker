@@ -96,7 +96,7 @@ Bir ilan bunlardan herhangi birini belirsiz bırakıyorsa satın almadan önce s
 
 ## Barındırılan websitelerimiz bu soruları nasıl yanıtlıyor
 
-Tasarımlarımız mühürlü bir zarftan ya da hatıra kutusundan dört sayfaya açılır: Ana Sayfa, Hikâyemiz, Detaylar ve LCV. Her tasarımı önce [canlı demo](/designs) olarak deneyebilirsiniz. İsimleri, tarihi, mekânı, programı, {{photoSpots}} fotoğrafı, soruları ve yanıtları ve en fazla {{rsvpQuestions}} LCV sorusunu telefon ekranları için tasarlanmış bir panelde düzenlersiniz; çizimler, renkler ve yazı tipleri tasarlandığı gibi kalır. Yanıtlar, toplamlar ve CSV indirme panelinizdedir. Websiteniz düğün tarihinizden sonra {{months}} aya kadar yayında kalır. [Özellikler sayfasında](/features) neyin dahil olmadığı da dahil olmak üzere tam liste var.
+Tasarımlarımız mühürlü bir zarftan ya da hatıra kutusundan ([animasyonlu zarf davetiyeleri nasıl çalışır](/guides/animated-envelope-wedding-invitations)) dört sayfaya açılır: Ana Sayfa, Hikâyemiz, Detaylar ve LCV. Her tasarımı önce [canlı demo](/designs) olarak deneyebilirsiniz. İsimleri, tarihi, mekânı, programı, {{photoSpots}} fotoğrafı, soruları ve yanıtları ve en fazla {{rsvpQuestions}} LCV sorusunu telefon ekranları için tasarlanmış bir panelde düzenlersiniz; çizimler, renkler ve yazı tipleri tasarlandığı gibi kalır. Yanıtlar, toplamlar ve CSV indirme panelinizdedir. Websiteniz düğün tarihinizden sonra {{months}} aya kadar yayında kalır. [Özellikler sayfasında](/features) neyin dahil olmadığı da dahil olmak üzere tam liste var.
 
 ## FAQ
 

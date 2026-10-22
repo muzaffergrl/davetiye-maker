@@ -77,7 +77,7 @@ Vier kurze Seiten lesen sich am Handy leichter als eine sehr lange Seite oder ze
 1. **Home.** Namen, Datum, Location, eine Zeile zur Begrüßung und ein klarer Button zum Antworten. „Zum Kalender hinzufügen“ passt gut hierher.
 2. **Our Story.** Ein paar Fotos mit kurzen Bildunterschriften und ein oder zwei Sätze über Sie.
 3. **Details.** Der Ablauf, die Location mit Karte, Dresscode, Anreise und Unterkunft, Wunschliste sowie Fragen und Antworten.
-4. **RSVP.** Das Antwortformular, Ihre Antwortfrist und alle Fragen, die Sie beantwortet haben möchten (Menüwahl, Ernährungswünsche).
+4. **RSVP.** Das Antwortformular, Ihre Antwortfrist und alle Fragen, die Sie beantwortet haben möchten (Menüwahl, Ernährungswünsche; siehe [welche RSVP-Fragen sinnvoll sind](/guides/wedding-rsvp-questions)).
 
 Diese Struktur nutzen unsere Designs, nach einem Umschlag oder Erinnerungsstück, das sich zur Startseite öffnet. Sie sehen sie in jeder [Live-Demo](/designs), und auf der [Seite mit den Funktionen](/features) steht, was jede Seite enthalten kann.
 

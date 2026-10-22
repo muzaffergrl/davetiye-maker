@@ -94,7 +94,7 @@ Nach der Frist rufen Sie die letzten Gäste an. Gerade ältere Verwandte haben d
 
 ## Eine digitale Einladung, die sich trotzdem wie eine Einladung anfühlt
 
-Was viele an Papier lieben, ist der Moment des Öffnens. Unsere Hochzeitswebsites versuchen, diesen Moment zu bewahren: Gäste öffnen Ihren Link und sehen einen versiegelten Umschlag (oder, bei manchen Designs, ein Erinnerungsstück wie ein Märchenbuch) mit Ihren Namen, tippen darauf, und er öffnet sich zu Ihrer Website mit den Details und dem Antwortformular. Probieren Sie es in der [Demo von Blush Garden Rose](/designs/blush-garden-rose) auf Ihrem Handy aus oder lesen Sie, [wie es funktioniert](/how-it-works).
+Was viele an Papier lieben, ist der Moment des Öffnens. Unsere Hochzeitswebsites versuchen, diesen Moment zu bewahren: Gäste öffnen Ihren Link und sehen einen versiegelten Umschlag (oder, bei manchen Designs, ein Erinnerungsstück wie ein Märchenbuch) mit Ihren Namen, tippen darauf, und er öffnet sich zu Ihrer Website mit den Details und dem Antwortformular. Probieren Sie es in der [Demo von Blush Garden Rose](/designs/blush-garden-rose) auf Ihrem Handy aus oder lesen Sie, [wie es funktioniert](/how-it-works). Unser Ratgeber zu [animierten Umschlag-Einladungen](/guides/animated-envelope-wedding-invitations) erklärt die zwei Arten, die Sie finden werden, und was Sie vor der Wahl prüfen sollten.
 
 ## FAQ
 

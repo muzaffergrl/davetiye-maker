@@ -90,7 +90,7 @@ Decide qué necesitas saber antes de que el catering y el lugar te pidan las cif
 - Necesidades alimentarias o alergias, como respuesta breve
 - De forma opcional, una canción que quieran escuchar o una nota para la pareja
 
-Limita las preguntas personalizadas a dos o tres; cada pregunta de más reduce la probabilidad de que los invitados terminen el formulario. Fija la fecha límite de respuesta unas dos o tres semanas antes de la boda, o unos días antes de la fecha en que el catering necesita el número definitivo. Nuestra [guía de plazos](/guides/when-to-send-your-wedding-website) explica cómo calcular hacia atrás desde esa fecha.
+Limita las preguntas personalizadas a dos o tres; cada pregunta de más reduce la probabilidad de que los invitados terminen el formulario. Fija la fecha límite de respuesta unas dos o tres semanas antes de la boda, o unos días antes de la fecha en que el catering necesita el número definitivo. Nuestra [guía de plazos](/guides/when-to-send-your-wedding-website) explica cómo calcular hacia atrás desde esa fecha, y la guía de [preguntas para la confirmación de asistencia](/guides/wedding-rsvp-questions) tiene textos para cada pregunta.
 
 **Tiempo:** 10 minutos.
 
