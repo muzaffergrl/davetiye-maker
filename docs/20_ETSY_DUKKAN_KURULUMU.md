@@ -407,6 +407,41 @@ açıklaması, 13 etiketi, bölümü, `START_HERE.pdf`'i, v4 görselleri (01–0
 - **Yenileme:** Automatic (Etsy'nin önerisi; 01–21 ile aynı). **AI beyanı:** "With an AI generator" + açıklamadaki AI cümlesi.
 - **Yayın:** yapılmadı. Yayın ilan başına 0,20 USD ve herkese açık bir adımdır; kullanıcının açık "yayınla" onayıyla yapılır.
 
+### 7.12 K49 fiyatları + 3 hizmet taslağı (2026-10-22, yerel oturum, Claude in Chrome; docs/36)
+Shop Manager → Listings: **Draft 45, Active 0** (yayın yok; 15 ücretsiz kredi duruyor). Ekranlar: `docs/20_etsy_taslaklar_20261022/`.
+- **Fiyat 1.460 → 1.190 TL (K49):** 42 tasarım taslağının hepsi (01–21, 22–32, 39–48) Listings → seç "Select 42 on all pages" →
+  Bulk edit → Prices → "Edit prices for all buyers" → **Set new amount 1190** → Apply. Etsy kartlarda "1,190.00 TL United States /
+  Everywhere else" gösteriyor (ikisi de 1.190). Sonra iki sayfa listesi okunarak doğrulandı: 37 + 5 tasarım = 42, hepsi 1.190 TL.
+  Sale / üstü çizili fiyat açılmadı. (Önce quick edit denendi: Chartreuse 1190'a otomatik kaydetti, sayfadan çıkarken
+  "Leave site?" penceresi sekmeyi kilitledi; toplu fiyat yoluna geçildi.) §7.11'deki "1.460 TL" kararının yerini K49 alır.
+- **3 hizmet taslağı** (`collections/_services/<id>/package/listing/etsy_upload.json`; başlık ve açıklama JS ile json'dakiyle
+  birebir karşılaştırıldı, kaydetmeden önce form değerleri okundu, kayıttan sonra düzenleyici yeniden açılıp okundu):
+
+  | Hizmet | Etsy ID | Fiyat | Dosya | Görsel |
+  |---|---|---|---|---|
+  | setup-service | [4601001732](https://www.etsy.com/your/shops/me/listing-editor/edit/4601001732) | 990 TL | SETUP_SERVICE.pdf | 4 (01 Featured) |
+  | custom-design | [4601005548](https://www.etsy.com/your/shops/me/listing-editor/edit/4601005548) | 4.490 TL | CUSTOM_DESIGN.pdf | 4 (01 Featured) |
+  | extra-revision | [4601008536](https://www.etsy.com/your/shops/me/listing-editor/edit/4601008536) | 690 TL | EXTRA_REVISION.pdf | 4 (01 Featured) |
+
+  Ortak alanlar: kategori **Invitations** (Etsy'nin "Your top categories" önerisi, tasarımlarla aynı), tür **Digital**, 13 etiket,
+  Occasion **Wedding**, Who made it **I did**, What is it **A finished product**, "How is this digital content created?" **With an
+  AI generator**, adet 999, yenileme **Automatic**, bölüm **Services** (bu turda oluşturuldu, section id 61066231), video yok,
+  indirim yok. Girilmeyen: görsel alt metinleri (tasarımlardaki gibi), "This digital item is made to order" kutusu (işaretlenmedi:
+  PDF satın alınca hemen insin diye; yeni düzenleyicide "When was it made" dijital ilanda görünmüyor).
+- **Etsy uyarısı:** taslak oluştururken hizmet/özel tasarım/AI için hiçbir uyarı ya da engel çıkmadı.
+- **Dikkat (dükkân ayarı):** düzenleyicideki "Note to buyers for digital items" dükkân geneli metin ("Your download is your START HERE
+  guide…"). Hizmet alıcısına da bu gidecek; hizmet PDF'i START HERE değil. Yayından önce metin hizmetleri de kapsayacak şekilde
+  genelleştirilmeli (§1.5).
+- **Etsy kuralları (okunan: Help Center "What Can I Sell on Etsy?" → Services or rentals; `etsy.com/legal/policy/services`,
+  son güncelleme 2026-06-09; Creativity Standards):** Etsy'de hizmet genelde yasak; yalnız yeni bir ürün (dijital dosya dahil)
+  üreten hizmetlere izin var. Açıkça izinli: "Digital Creative Services" (özel tasarım, dijital dosya olarak; teslim e-posta ya
+  da Etsy Messages ile) ve alıcının mevcut ürününü değiştiren "Modification Services". Açıkça yasak: "Add-ons with no physical
+  item associated" — yalnız fiyatı baştan belirlenemeyen özel siparişlerde ek ödeme "Create Custom Order" ile alınabilir.
+  Değerlendirme: **custom-design** izinli sınıfta (yeni dijital tasarım). **extra-revision** başlığında "Add On" geçiyor ve
+  tek başına ürün değil; Etsy'nin örneğine göre bu ödeme Custom Order ile alınmalı, ayrı ilan riskli. **setup-service** de
+  "Add On" diye satılıyor ve yeni ürün üretmiyor (alıcının sitesine veri girişi); "modification service" sayılabilir ama gri
+  alan. Yayın kararından önce bu iki ilanın yayınlanmaması ya da Custom Order'a çevrilmesi önerilir; taslaklar duruyor.
+
 ## 8. İlan paketi (01–05) — yüklemeye hazır, Etsy'ye eklenmedi (2026-10-15)
 
 Kullanıcı kararı (2026-10-15): ilanlar **yüklenecek biçimde hazırlanır ama Etsy'ye eklenmez** (taslak da açılmaz). Önce testler yapılacak.
