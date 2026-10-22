@@ -276,15 +276,16 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     ink: '#1E2626', accent: '#5E1622', front: [14.5, 12, 11.5, 12], back: [14, 11, 9, 11],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 25 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
+  // 25 (G425, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): ivory ticket card, a brass-foil fan header
+  // with two dried-rose sprigs across the top (down to ~14.5 %), a brass rule over a row of perforation dots at the
+  // bottom (from ~93 %) and a brass double frame ~3 % inside the trim on the front; one small fan with short rules at the
+  // top of the back (~11.5 %). `cover` for 5×7 and A5 (ChatGPT's 1068×1473). Boxes ~2.5 % clear of it all.
   'orient-express-voyage': {
     collection: '25_Orient_Express_Voyage',
-    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Limelight&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400'),
     script: "'Limelight', Georgia, serif", serif: "'Cormorant Garamond', Georgia, serif",
-    ink: '#1E3A2C', accent: '#7A5C24', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#14261C', accent: '#7C5B25', front: [17, 10, 10, 10], back: [14, 10, 8, 10],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
   // 26 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's

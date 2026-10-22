@@ -79,6 +79,8 @@ amblem, logo, QR yok; isimler ve tarih HTML.
   "Black tie optional"; URL ve medya null). Değişmedi.
 - GPT istekleri: `assets/gpt/GPT_PROMPTS.md` (PAKET 5R website katmanları W1–W19 = 21 dosya, PAKET 2 örnek fotoğraflar
   **var**, PAKET 6R basılı davetiye ön/arka); prova şekli `assets/gpt/kuru_sekil.json`. GPT görevi **G225** (G222–G232).
-- Tema: `platform/themes/orient-express-voyage/` **yeniden kurulacak** (G425; G422–G432, 39 pilot yapısı, `docs/34`).
-  Codex `envelope-v3*`, `opening*`, `interior*` dosyaları kaldırılır. Durum: **coming** (yeniden tasarım, concept).
+- Tema: `platform/themes/orient-express-voyage/` **yeniden kuruldu** (G425, 2026-10-22; 39 pilot yapısı, `docs/34`, pilot
+  G423 dersleri `docs/35` §6a) — GPT parçaları G225 (PAKET 5R 21 dosya, PAKET 6R 2 dosya). Codex `envelope-v3*`,
+  `opening*`, `interior*` dosyaları kaldırıldı. Durum: **editable_draft**, katalogda `preview` ("Coming soon"); satış yok.
+  Katalog kapak görüntüsü/klibi henüz eski (yeniden yakalama bekliyor).
 - Etsy taslağı: `package/listing/listing_v3.md` (yayınlanmadı, K41) — tema kurulunca yeni açılışa göre güncellenir.

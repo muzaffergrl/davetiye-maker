@@ -1259,9 +1259,9 @@ const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> 
     home: msg("Ivory programme paper, peacock velvet, burgundy curtains and antique gold. Your portrait stands in a gilded proscenium and the invitation opens on a band of velvet like opening night."),
   },
   'orient-express-voyage': {
-    style: msg("Bottle-green envelope, brass route seal and details inspired by a first-class rail journey."),
-    opening: msg("Your guests tap the envelope. A long green ticket sleeve slides left as the portrait invitation emerges to the right, then settles before the wedding home page opens."),
-    home: msg("Bottle green, brass and warm ivory meet the romance of a vintage rail journey. The envelope opens onto your invitation, route details and celebration."),
+    style: msg("Bottle-green leather ticket sleeve with brass corners, a turn-lock and a blank luggage tag on a red cord."),
+    opening: msg("Your guests tap the envelope. The luggage tag swings, the brass turn-lock clicks open, the end tab swings aside onto red silk and the first-class ticket with your portrait slides out of the sleeve, turns upright and comes forward before the wedding home page opens."),
+    home: msg("Antique map paper, bottle-green leather, brass and ivory ticket card. Your portrait sits in a mahogany carriage window and the route of your day is drawn across an old map."),
   },
   'kintsugi-washi': {
     style: msg("Indigo washi envelope, fine kintsugi-gold lines and quiet botanical details."),
@@ -1315,20 +1315,6 @@ for (const [id, preview] of Object.entries(PREVIEW_DESIGN_COPY)) {
 
 // Interior art/layout/motion differ for these eleven previews; envelope copy and other products are unchanged.
 const UNIQUE_INTERIORS: Record<string,{fonts:string[];home:string;story:string;details:string;rsvp:string}> = {
-  "orient-express-voyage": {
-    "fonts": [
-      "Cormorant Garamond",
-      "Great Vibes",
-      "Lora",
-      "Allura",
-      "Cinzel",
-      "Libre Baskerville"
-    ],
-    "home": "A first-class travel invitation with a brass carriage-window portrait and cream ticket stationery.",
-    "story": "A horizontal carriage-window photo journey with captions under each panoramic view.",
-    "details": "A rail-journey itinerary with paired time and destination columns.",
-    "rsvp": "A green-and-brass travel-ticket reply suite."
-  },
   "kintsugi-washi": {
     "fonts": [
       "Cormorant Garamond",
@@ -1475,6 +1461,22 @@ const REBUILT: Record<string, Pick<DesignCopy, 'fonts' | 'pages' | 'palette' | '
       { name: msg('Antique gold'), hex: '#C9A45C' },
     ],
     llmsLine: 'a peacock linen envelope whose burgundy velvet stage curtains are tied by a gold tasselled cord over a blank ticket, a gilded proscenium portrait and programme pages for the story.',
+  },
+  'orient-express-voyage': {
+    fonts: ['Limelight', 'Cormorant Garamond'],
+    pages: {
+      home: msg('Your portrait in a brass and mahogany carriage window on an ivory first-class ticket, the invitation on a band of green leather with a pocket watch over the countdown, a map with the route of the day, and a luggage tag to sign off.'),
+      story: msg('Three sliding sash windows of a sleeper carriage, left and right: each leather blind rolls up and the photo slides behind the glass like passing scenery as guests scroll.'),
+      details: msg('The itinerary on an ivory ticket card under an old map on which the route is drawn station by station to the venue, the venue in a wide panorama window, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('An ivory ticket reply card on green leather with your reply-by date and the configurable RSVP form; punched ticket discs and rose buds drift down when a reply is sent.'),
+    },
+    palette: [
+      { name: msg('Ivory'), hex: '#F3EBD9' },
+      { name: msg('Bottle green'), hex: '#1E3A2C' },
+      { name: msg('Brass'), hex: '#B8914B' },
+      { name: msg('Claret'), hex: '#8C2F39' },
+    ],
+    llmsLine: 'a long bottle-green leather ticket sleeve with a brass turn-lock and a luggage tag, a first-class ticket that slides out of it, carriage-window portraits and a route drawn across an old map.',
   },
 };
 for (const [id, r] of Object.entries(REBUILT)) Object.assign(DESIGN_COPY[id], r);

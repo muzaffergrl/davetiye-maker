@@ -1,84 +1,87 @@
-<!DOCTYPE html><!-- Orient Express Voyage · page 3 — Our Story (/<slug>/story): three antique-gold arch frames (comp scene 3),
-     photo slots story_1..3 (theme.json → media.memory_photos.0..2), captions story.items.0..2.caption.
-     The whole page is off (404) when optional_blocks.our_story is false. Kicker / title = design copy. --><html lang="en" class="no-js"><head>
+<!doctype html>
+<!-- Orient Express Voyage · page 3 — story (/<slug>/story). Redesign of 2026-10-22 (docs/35 row 25, G425). On warm ivory map
+     paper the kicker, "Our Story" (a gleam of lamplight passes over it once) and the intro; below, on a band of
+     bottle-green leather between two brass luggage-rack rails, three sliding sash windows of a sleeper carriage, left —
+     right — left: as each comes in its leather blind rolls up into the frame's own blind, and while the page scrolls the
+     photo slides behind the glass like passing scenery (site.js initScenery; still with reduced motion). A caption beside
+     each window. Personal text: none — filled on the server. Design texts: data-copy (G068). -->
+<html lang="en" class="no-js">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f3ebd9">
 <title data-text="{copy.story_title} · {name_display}">Our Story</title>
-<meta name="description" data-attr-content="{copy.story_title} · {name_display} · {date|date-long}" content="Our story">
+<meta name="description" data-attr-content="{copy.story_title} · {name_display} · {date|date-long}" content="Our Story">
 <meta property="og:type" content="website">
 <meta property="og:title" data-attr-content="{copy.story_title} · {name_display}" content="Our Story">
 <meta property="og:description" data-attr-content="{date|date-long} · {venue.city_region}" content="">
-<meta name="theme-color" content="#F5EEE2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Cinzel&amp;family=Libre+Baskerville&amp;display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Limelight&display=swap">
 <style>/* names fallback: scripts/font-fallback.ts */
 @font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:85.4%;ascent-override:99.5%;descent-override:46.8%;line-gap-override:0%}
 @font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:73.4%;ascent-override:115.7%;descent-override:54.5%;line-gap-override:0%}</style>
-<link rel="stylesheet" href="site.css"><link rel="stylesheet" href="interior.css">
+<link rel="stylesheet" href="site.css">
 <script>document.documentElement.classList.replace('no-js','js');</script>
-<script src="site.js" defer=""></script>
-<script>(function(r){if(!matchMedia("(prefers-reduced-motion: reduce)").matches){r.classList.add("u-loading");setTimeout(function(){r.classList.remove("u-loading")},2200)}})(document.documentElement);</script><script src="interior-motion.js" defer=""></script></head>
-<body data-optional="our_story" data-pending="This link will be added soon." data-interior="orient-express-voyage" data-interior-layout="voyage">
-
-<main class="site-main">
-  <header class="page-head" data-scene="story-head">
-    
-    <p class="kicker" data-copy="story_kicker" data-u-part="kicker">Moments we hold dear</p>
-    <h1 class="script" data-copy="story_title" data-u-part="title">Our Story</h1>
-    
-    <p class="lede" data-if="story.intro" data-u-part="lede"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
+<script src="site.js" defer></script>
+</head>
+<body class="page-story" data-optional="our_story" data-pending="This link will be added soon.">
+<main class="story-page">
+  <header class="page-heading" data-scene="story-head">
+    <p class="eyebrow" data-copy="story_kicker" data-step="kicker">Moments we hold dear</p>
+    <h1 class="gleam" data-copy="story_title" data-step="title">Our Story</h1>
+    <p class="body-text intro" data-if="story.intro" data-step="intro"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
   </header>
-
-  <section class="wrap u-gallery" aria-label="Photo journey; scroll horizontally" data-gallery="voyage" tabindex="0">
-    <figure class="u-memory" data-scene="story-frame">
-      <div class="u-frame" data-u-part="frame">
-        <div class="photo-slot" data-slot="story_1">
-          <img data-photo="story_1" src="img/ph_interior-480.webp" srcset="img/ph_interior-480.webp 480w, img/ph_interior-800.webp 800w" sizes="(min-width:768px) 520px, 80vw" alt="" data-attr-alt="{story.items.0.caption}">
+  <section class="carriages leather-band" aria-label="Photographs" data-copy-attr="aria-label:album_label">
+    <span class="rail" aria-hidden="true"></span>
+    <figure class="window" data-scene="story-window">
+      <span class="frame sash" data-scenery="ltr" data-step="frame">
+        <span class="photo-slot" data-slot="story_1">
+          <img data-photo="story_1" src="img/ph_sash-640.webp" alt="" data-attr-alt="{story.items.0.caption}" sizes="min(66vw, 280px)" fetchpriority="high">
           <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
-        </div>
-        
-      <img class="u-art" src="img/interior-frame-480.webp" srcset="img/interior-frame-480.webp 480w, img/interior-frame-800.webp 800w" sizes="(min-width:768px) 520px, 92vw" alt="" loading="lazy"></div>
-      <figcaption data-field="story.items.0.caption" data-u-part="caption"></figcaption>
+          <span class="blind" aria-hidden="true"></span>
+        </span>
+        <span class="cut" aria-hidden="true"></span>
+      </span>
+      <figcaption data-step="caption"><span class="num" aria-hidden="true">01</span> <span data-field="story.items.0.caption"></span></figcaption>
     </figure>
-    <figure class="u-memory" data-scene="story-frame">
-      <div class="u-frame" data-u-part="frame">
-        <div class="photo-slot" data-slot="story_2">
-          <img data-photo="story_2" src="img/ph_interior-480.webp" srcset="img/ph_interior-480.webp 480w, img/ph_interior-800.webp 800w" sizes="(min-width:768px) 520px, 80vw" alt="" data-attr-alt="{story.items.1.caption}" loading="lazy">
+    <figure class="window" data-scene="story-window">
+      <span class="frame sash" data-scenery="rtl" data-step="frame">
+        <span class="photo-slot" data-slot="story_2">
+          <img data-photo="story_2" src="img/ph_sash-640.webp" alt="" data-attr-alt="{story.items.1.caption}" sizes="min(66vw, 280px)" loading="lazy">
           <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
-        </div>
-        
-      <img class="u-art" src="img/interior-frame-480.webp" srcset="img/interior-frame-480.webp 480w, img/interior-frame-800.webp 800w" sizes="(min-width:768px) 520px, 92vw" alt="" loading="lazy"></div>
-      <figcaption data-field="story.items.1.caption" data-u-part="caption"></figcaption>
+          <span class="blind" aria-hidden="true"></span>
+        </span>
+        <span class="cut" aria-hidden="true"></span>
+      </span>
+      <figcaption data-step="caption"><span class="num" aria-hidden="true">02</span> <span data-field="story.items.1.caption"></span></figcaption>
     </figure>
-    <figure class="u-memory" data-scene="story-frame">
-      <div class="u-frame" data-u-part="frame">
-        <div class="photo-slot" data-slot="story_3">
-          <img data-photo="story_3" src="img/ph_interior-480.webp" srcset="img/ph_interior-480.webp 480w, img/ph_interior-800.webp 800w" sizes="(min-width:768px) 520px, 80vw" alt="" data-attr-alt="{story.items.2.caption}" loading="lazy">
+    <figure class="window" data-scene="story-window">
+      <span class="frame sash" data-scenery="ltr" data-step="frame">
+        <span class="photo-slot" data-slot="story_3">
+          <img data-photo="story_3" src="img/ph_sash-640.webp" alt="" data-attr-alt="{story.items.2.caption}" sizes="min(66vw, 280px)" loading="lazy">
           <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
-        </div>
-        
-      <img class="u-art" src="img/interior-frame-480.webp" srcset="img/interior-frame-480.webp 480w, img/interior-frame-800.webp 800w" sizes="(min-width:768px) 520px, 92vw" alt="" loading="lazy"></div>
-      <figcaption data-field="story.items.2.caption" data-u-part="caption"></figcaption>
+          <span class="blind" aria-hidden="true"></span>
+        </span>
+        <span class="cut" aria-hidden="true"></span>
+      </span>
+      <figcaption data-step="caption"><span class="num" aria-hidden="true">03</span> <span data-field="story.items.2.caption"></span></figcaption>
     </figure>
+    <span class="rail" aria-hidden="true"></span>
   </section>
-
-  <section class="section next-sec" data-scene="story-next">
-    
-    <a class="btn btn-ghost" href="details.html" data-if="!thank_you_hides_details" data-u-part="link"><span data-copy="day_title">The Day</span> <span aria-hidden="true">→</span></a>
-    <!-- thank-you mode with the Details page hidden (G075): back home instead of a link to a closed page -->
-    <a class="btn btn-ghost" href="home.html" data-if="thank_you_hides_details" data-u-part="link"><span data-copy="home_link">Home</span> <span aria-hidden="true">→</span></a>
-  </section>
+  <footer class="signature" data-scene="story-next">
+    <p class="sig-names" data-field="name_display" data-step="names"></p>
+    <p data-step="links" data-if="!thank_you_hides_details"><a class="btn btn-ghost" href="details.html"><span data-copy="day_title">The Day</span> <span aria-hidden="true">→</span></a></p>
+    <p data-step="links" data-if="thank_you_hides_details"><a class="btn btn-ghost" href="home.html"><span data-copy="home_link">Home</span></a></p>
+  </footer>
 </main>
-
 <nav class="site-nav" aria-label="Wedding pages">
   <ul>
     <li><a href="home.html"><span data-copy="nav_home">Home</span></a></li>
     <li data-optional="our_story"><a href="story.html" aria-current="page"><span data-copy="nav_story">Story</span></a></li>
     <li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on" data-copy="nav_details">Details</span><span data-if="thank_you_on" data-copy="nav_day">The Day</span></a></li>
-    <li data-if="!rsvp.method !thank_you_on"><a class="nav-rsvp" href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
+    <li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
   </ul>
 </nav>
-
-
-</body></html>
+</body>
+</html>

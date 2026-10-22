@@ -2,7 +2,7 @@
 id: G425
 baslik: Tasarım 25 Orient Express Voyage — tema yeniden kurulumu (39 pilot yapısı, PAKET 5R parçaları)
 rol: claude-kod
-durum: hazir
+durum: inceleme
 alan:
 oncelik: 2
 bagimli: [G225, G423]
@@ -35,3 +35,19 @@ Pilot G423 (Velvet Jewel Box) örnek alınır.
 - [ ] Önizleme kareleri `platform/previews/g425/`; Sonuç yazılı; durum `coming`
 
 ## Sonuç
+
+2026-10-22 (claude-kod, dal `claude/g425-orient-express-voyage`): tema G423 pilotunun yapısıyla yeni PAKET 5R
+parçalarından baştan kuruldu (`platform/themes/orient-express-voyage/`, README). Kapalı sayfa: harita kâğıdı zemin,
+"Together with their families" + Limelight isimler, ortada 2,18:1 şişe yeşili deri bilet kılıfı (pirinç köşelik, sağ uçta
+dil kapak, çevirmeli kilit = sabit plaka + dönen düğme, kuşgözünden kırmızı iple boş bagaj etiketi), altta tarih · şehir +
+Tap to open, Skip. Açılış (3,8 s): etiket sarkacı → kilit düğmesi 90° → dil kapak sağ menteşede 3B açılır (gerçek bordo
+ipek iç yüz) → kılıf sola çekilirken bilet ağızdan sağa kayar, dikleşir, öne gelir → buhar + zımba pulu + gül goncası;
+360 px'te her şey ekranda (test hesaplıyor). İç sayfalar: maun-pirinç vagon pencereleri (ölçülmüş pencere + teknik maske),
+9 dilimli bilet kartı (home), yeşil deri bant + cep saati, haritada istasyon istasyon çizilen rota (home + yapışkan
+itinerary), story'de deri perdesi kalkan, kaydırınca manzara gibi akan sürgülü pencereler, panorama mekân penceresi.
+Paylaşılan: designs.ts (PREVIEW + REBUILT, UNIQUE_INTERIORS'tan çıktı), tr/de/es/fr çevirileri, ses = MOTION, baskı
+PAKET 6R + ölçülen kutular, katalog eksenleri, Codex fikstürlerinden/listelerinden çıkarıldı, demo fotoğrafları kendi
+PAKET 2'si. Test: `tests/theme-orient-express-voyage.test.ts` 12/12; istenen set 84/85 (bilinen "claims we never make").
+Kareler 390×844, 360×740, 1280×800 + gerçek zamanlı açılış/kaydırma. Bekleyen: katalog kapak/klip yakalama (üretim
+build'i), `variants` paletleri, gerçek cihaz denemesi, `platform/previews/g425/` (seyrek checkout'ta yok, kareler oturum
+geçici klasöründe).
