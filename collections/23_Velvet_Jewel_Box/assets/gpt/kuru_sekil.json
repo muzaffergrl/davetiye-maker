@@ -1,7 +1,23 @@
 {
- "_note": "G167 dry-run shapes (tools/gpt_kuru_deneme.py --sekil): where each W2 part sits on its canvas per GPT_PROMPTS.md, % of the canvas [x0, y0, x1, y1]. Test geometry only, not a product file.",
- "box_closed.png": {"kutu": [14, 50, 86, 80]},
- "box_open.png": {"kutu": [14, 22, 86, 80]},
- "closure.png": {"kutu": [38.5, 52, 61.5, 62]},
- "card_small.png": {"kutu": [5, 35, 95, 65], "pencere": [9, 39, 36, 61]}
+ "_not": "Tasarım 23 kuru deneme (yeniden tasarım 2026-10-22; tools/gpt_kuru_deneme.py --sekil, tema kurulunca): parçaların prompt'taki yeri, tuval yüzdesiyle. Zarf katmanları aynı kutuda (x 7–93, y 7–93). Oval pencereler kutu olarak verildi. Deneme görseli ürün değildir.",
+ "moire_ground.png": {"ton": [236, 220, 192], "gren": 0.2},
+ "ivory_paper.png": {"ton": [248, 237, 224], "gren": 0.2},
+ "velvet.png": {"ton": [42, 19, 40], "gren": 0.25},
+ "env_back.png": {"kutu": [7, 7, 93, 93], "ton": [232, 211, 176]},
+ "env_front.png": {"kutu": [7, 42, 93, 93], "ton": [42, 19, 40]},
+ "flap.png": {"kutu": [7, 7, 93, 60], "ton": [48, 22, 46]},
+ "flap_in.png": {"kutu": [7, 8.3, 93, 92], "ton": [232, 211, 176]},
+ "ribbon_band.png": {"kutu": [46, 6.5, 54, 93.5], "ton": [232, 211, 176]},
+ "ring.png": {"kutu": [24, 14, 76, 86], "ton": [201, 154, 134]},
+ "card_small.png": {"kutu": [7, 6, 93, 94], "ton": [248, 237, 224]},
+ "cameo_frame.png": {"kutu": [8, 6, 92, 94], "pencere": [18, 18.4, 82, 84], "ton": [201, 154, 134]},
+ "tray_frame.png": {"kutu": [7, 6, 93, 94], "pencere": [20, 18.8, 80, 81.2], "ton": [42, 19, 40]},
+ "venue_frame.png": {"kutu": [6, 7, 94, 93], "pencere": [7.5, 11.8, 92.5, 88.3], "ton": [201, 154, 134]},
+ "corner_spray.png": {"kutu": [6, 6, 70, 62], "ton": [240, 226, 210]},
+ "divider.png": {"kutu": [8, 30, 92, 70], "ton": [248, 237, 224]},
+ "ring_box.png": {"kutu": [20, 10, 80, 90], "ton": [42, 19, 40]},
+ "accent_1.png": {"kutu": [22, 22, 78, 78], "ton": [248, 237, 224]},
+ "accent_2.png": {"kutu": [22, 22, 78, 78], "ton": [232, 211, 176]},
+ "accent_3.png": {"kutu": [22, 22, 78, 78], "ton": [245, 245, 248]},
+ "web_hero.png": {"ton": [236, 220, 192]}
 }

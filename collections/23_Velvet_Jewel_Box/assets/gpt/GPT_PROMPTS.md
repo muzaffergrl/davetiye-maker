@@ -1,115 +1,246 @@
-# GPT görsel istekleri — Tasarım 23 · Velvet Jewel Box
+# GPT görsel istekleri — Tasarım 23 · Velvet Jewel Box (yeniden tasarım, 2026-10-22)
 
-> **Instructions for GPT:** This design ("Velvet Jewel Box") was redesigned on 2026-10-18/19: its website is warm ivory stationery paper with abundant photorealistic flowers in the corners, opened from a themed cover object. The old website parts (PAKET 5) are NO LONGER needed — do not generate them. Generate PAKET 3 (the Etsy listing scenes) and PAKET 6 (the printed invitation grounds) in ONE chat; PAKET 2 (sample photos) is optional and comes last. Before the first image, attach these two images from the repository as the style reference of every image: `platform/themes/velvet-jewel-box/img/bg_scene-1024.webp` (the website background: paper, flowers, colors, light) and `platform/themes/velvet-jewel-box/img/v3-closed-880.webp` (the design's closed cover object). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". No text, letters, numbers, logos, monograms or watermarks in any image.
+> **Instructions for GPT:** This design is being REDESIGNED (2026-10-22). Generate PAKET 5R (website layers) first, in
+> order and in ONE chat, then PAKET 6R (printable invitation). PAKET 2 sample photos already exist — do NOT regenerate
+> them. Sections marked GEÇERSİZ are not wanted. Use each English prompt exactly as written, follow its checklist, and
+> save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, names, dates,
+> initials, monograms, crests, engravings, hallmarks, logos, brand marks, QR codes or watermarks in any image** (also not
+> inside the ring band, on the ribbon, on the ring box or on the frames). Nothing may resemble a real jewellery brand's
+> box, colour or packaging. Give W1 `moire_ground.png`, W3 `velvet.png` and W4 `env_back.png` as the style reference of
+> every later part: the same pale champagne silk moiré, the same deep aubergine silk velvet with its soft pile sheen, the
+> same champagne silk satin lining with stitched seed pearls, the same polished rose gold, the same soft studio light from
+> the top-left. Parts drawn on the same envelope canvas (W4 env_back, W5 env_front, W6 flap, W8 ribbon_band) keep the
+> envelope in exactly the same box.
 
-Bu dosya Velvet Jewel Box'ın **bütün görsel parçalarının** tek kaynağıdır (G161). Tasarım `tools/katalog.py`
-`EK_TEMALAR`'da; bu dosya elle yazıldı. Tema şu an **geçici** parçalarla çalışıyor: `platform/themes/velvet-jewel-box/
-build_images.py` başka koleksiyonların GPT dokularını (17 kadife benzeri karo, 14 saten karo, 01 kâğıt, 14 saten fiyonk)
-bu paletin tonlarına çevirip düz dikdörtgenlerden bir yer tutucu kutu kuruyor. Aşağıdaki parçalar gelince aynı betik
-onlara geçer (kutu açılışı: kapak menteşesinde 90°'ye döner, saten iç kapak devralır — docs/11 §7.1).
+Bu dosya tasarım 23'ün **bütün görsel parçalarının** tek kaynağıdır (yeniden tasarım: `docs/35_22_32_YENIDEN_TASARIM.md`
+§4 satır 23; görev G223 → tema G423). 18–20 Ekim'in Codex kapağı (sekizgen kadife kitap, `img/v3-*`/`v4-*`) ve eski
+PAKET 5/6 bölümleri bırakıldı (git geçmişinde). Durum **concept**: tema `platform/themes/velvet-jewel-box/` 39 pilot
+yapısıyla yeniden kurulacak; her parçanın nasıl kullanılacağı aşağıdaki "Kullanım" satırlarındadır, gelmeyen parçanın
+yerine çizilmiş yedek konmaz (K21). Kişisel alanlar (isimler, tarih, baş harfler, mekân) HTML'dir, hiçbir görsele
+pişirilmez. QR'ı GPT çizmez (`tools/make_qr.py`).
 
 ## Nereye?
-- Repo `muzaffergrl/davetiye-maker`; klasör `collections/23_Velvet_Jewel_Box/assets/gpt/` altında `parts/` (PAKET 5),
-  `photos/` (PAKET 2) ve `print/` (PAKET 6). Repoya yazamıyorsan dur ve bunu çıktında açıkça söyle; kullanıcıya yükleme
-  işi verme.
+- Repo `muzaffergrl/davetiye-maker`; klasör `collections/23_Velvet_Jewel_Box/assets/gpt/` altındaki `parts/` (PAKET 5R)
+  ve `print/` (PAKET 6R). `photos/` (PAKET 2) dolu, dokunulmaz. Repoya yazamıyorsan dur ve bunu çıktında açıkça söyle;
+  kullanıcıya yükleme işi verme.
+- Sonra (Claude): `python3 tools/kit_check.py collections/23_Velvet_Jewel_Box --paket 5` (oran, gerçek alfa, kenar payı,
+  foto penceresi) + göz kontrolü. Tema yeniden kurulunca `python3 platform/themes/velvet-jewel-box/build_images.py`
+  (alfa kutusu + arka katmanın kutusuna yerleştirme, `keyed_window`) ve `python3 tools/gpt_kuru_deneme.py --tema
+  velvet-jewel-box --sekil collections/23_Velvet_Jewel_Box/assets/gpt/kuru_sekil.json` (prova). PAKET 6R için aşağıdaki
+  "Gelince" adımı.
 
 ## Stil ve renk
-- Teknik: **photorealistic luxury product photography** (gerçek kadife, gerçek saten, gerçek metal), stüdyo ışığı.
-- Renkler: night `#1C0B1A` · aubergine `#2A1328` · plum `#4A2142` · champagne `#E8D3B0` · rose gold `#C99A86` · ivory `#F8EDE0`
-- Işık: yumuşak, sol üstten; bütün parçalarda aynı. Parçalarda düşen gölge yok (gölgeyi site ekler).
-- Klasik, romantik, zengin; gerçek bir markaya (mücevher markaları dahil), kişiye ya da başka bir satıcının tasarımına benzemesin.
+- Teknik: **photorealistic luxury product photography** — real deep aubergine silk velvet with a soft directional pile
+  and velvety shadows, real champagne silk satin with a liquid sheen, real pale champagne silk moiré with its watered
+  pattern, real ivory seed pearls with a soft orient, real polished rose gold, one real round brilliant diamond. The mood
+  of a winter townhouse salon: classic, romantic, rich and calm; precious but never flashy. Not cartoon, not flat vector,
+  not a glitter print, not a jewellery advert with sparkle rays.
+- Renkler (yalnız bunlar): night `#1C0B1A` · aubergine `#2A1328` · plum `#4A2142` · champagne `#E8D3B0` · rose gold
+  `#C99A86` · ivory `#F8EDE0`. Çiçek yalnız W14 köşe süsünde (şampanya-allık gül goncası) ve ölçülü.
+- Işık: yumuşak stüdyo ışığı **sol üstten**; kadifede havın derin gölgesi, satende ve rose goldda temiz parlak vurgu;
+  bütün parçalarda aynı. Şeffaf parçalarda gerçek alfa (beyaz ya da dama deseni değil), her kenarda en az %6 boşluk,
+  nesnenin dışında düşen gölge/hâle/ışın yok (gölgeyi ve parıltıyı site ekler).
+- Foto penceresi (`#00FF00`) yalnız W11 `cameo_frame`, W12 `tray_frame`, W13 `venue_frame`'de istenir; diğer parçalarda
+  yeşil yok.
+- Gerçek bir mücevher markasına (kutu rengi, kurdele, logo), bir mekâna, sanatçıya ya da başka bir satıcının tasarımına
+  benzemesin. **40'tan ayrı:** fildişi pamuk, yay kapak, dantel, kuğu mühür yok. **46'dan ayrı:** fiyonk ve delik yok;
+  tek düz saten bant. **32'den ayrı:** telkâri, anahtar, balerin yok.
 
-## Parçalar gelince (Claude) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+## Zarf geometrisi (W4–W6, W8, W9 ve W18 buna göre)
+Tuval **1200×1200** (kare). Zarf **kare (1:1)**, önden görünür, kutusu **x %7–93, y %7–93**. Dört katman **aynı tuvalde,
+aynı kutuda** çizilir: W4 arka, W5 ön cep, W6 kapak, W8 saten bant; Claude her birini kendi alfa kutusuna kırpar ve W4'ün
+kutusuna göre yerleştirir. Tuval yüzdeleri:
+- **Ön cep (W5):** tam genişlik (x %7–93); üst kenarı tek yumuşak, çok sığ yay — yanlarda **%42**, ortada **%45**'e iner;
+  zarfın alt kenarına (%93) kadar.
+- **Üç loblu (yonca) kapak (W6):** üst katlama çizgisi %7, tam genişlik. Serbest kenarı **üç yumuşak dışbükey lob**:
+  yan kenarlara **%44**'te değer; sol lobun en alt noktası **(x %24, y %52)**; loblar arası yumuşak girinti **(x %37,
+  y %48)** ve **(x %63, y %48)**; orta lob en derin, yuvarlak ucu **(x %50, y %60)**; sağ lobun en alt noktası **(x %76,
+  y %52)**. Kapak cebin kenarını her yerde örter (girintilerde de: cep orada ~%44,7, kapak %48).
+- **Saten bant (W8):** dikey, ortada **x %46–54** (eni zarfın ~%9'u); zarfın üst ve alt kenarında yumuşak kıvrımla
+  arkaya döner (görünen boy **y %6,5–93,5**); orta lobun ucunun hemen altında küçük yassı bir düğüm, merkezi **(x %50,
+  y %62)**. Bant kapağın ve cebin üstünden geçer.
+- **Yüzük (W9, ayrı 600×600 tuval):** zarf tuvalinde merkezi **(x %50, y %56)**, yüzüğün dış eni zarf tuval eninin
+  **%13**'ü (zarf eninin ~%15'i); düğümün hemen üstünde, bandın üzerinde durur.
+- **Kapağın iç yüzü (W7, ayrı 1200×760 tuval):** aynı yonca çizgisi dikey aynalanmış, aynı en (x %7–93); düz katlama
+  kenarı **altta %92**, yan kenarlar **%33,6**'ya, yan lobların tepesi **(x %24 / %76, y %20,9)**, girintiler **(x %37 /
+  %63, y %27,2)**, orta lobun tepesi **(x %50, y %8,3)**.
+- Kat sırası (alttan üste): W4 arka → kart (W10) → W5 cep → W6 kapak → W8 bant → W9 yüzük.
 
-> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
-```bash
-python3 platform/themes/velvet-jewel-box/build_images.py      # parts/ → img/ (+ manifest.json stage ölçüleri)
-# site.css'teki /* stage:begin … stage:end */ bloğunu (parça yerleri, sahne oranı, kapak/kart yolu, kart penceresi)
-# betik manifest'ten kendisi yazar; elle kopya yok. Eklem/menteşe ölçümü tarifin dışına düşerse betik UYARI yazar ve
-# tarifin değerine (eklem %63, menteşe eklemin %4,5 üstü) döner → box_closed/box_open'a bakıp SEAM_PCT / HINGE_PCT ver.
-cd platform && node --test tests/theme-velvet-jewel-box.test.ts   # CSS = manifest denetimi
-PORT=3401 node scripts/theme-check.cjs --theme velvet-jewel-box --stress --compare none --no-video
-# PAKET 6: aşağıdaki "PAKET 6 gelince" adımları (layouts.ts değişikliği + G149 ölçümü), sonra:
-node scripts/build-print-assets.ts --theme velvet-jewel-box
-```
-Dosya adları kaynak ölçüsüne bağlı değil (`box_lid-732.webp` …): GPT parçası hangi boyda gelirse gelsin sayfaların ve
-baskı düzeninin istediği adlar üretilir. Kuru prova: `python3 tools/gpt_kuru_deneme.py --tema velvet-jewel-box --sekil
-collections/23_Velvet_Jewel_Box/assets/gpt/kuru_sekil.json` (deneme görselleriyle, repoya dokunmaz).
+Açılış: taşta kısa ışıltı (CSS, GPT taşın üstünde) → yüzük bant boyunca yukarı kayar, zarftan ayrılır ve isimlerin üstüne
+süzülür (home'da küçük süs; imzada kutusuna oturur) → bant düğümden ikiye ayrılır (Claude W8'i düğümde kırpar): üst
+yarısı kapağın üstünden geri çekilir, alt yarısı aşağı kayıp söner → yonca kapak üst katlama çizgisinde 3B açılır, 90°'de
+iç yüz (W7: şampanya saten + inci kenar) devralır → inci kenarlı fildişi kart (W10) cebin arkasından yükselir, cep
+dudağını geçince öne gelir → inciler, şampanya gül yaprakları ve elmas pırıltıları (W17) süzülür → home.
 
 ---
 
-## PAKET 5 — W2 parçaları (website katmanları; YAZI YOK) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+## PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım)
 
-> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
-
-Yedi parça (W2.1–W2.7). Tek görselde tek nesne, düşen gölge yok, ışık sol üstten, şeffaflar gerçek alfa. **W2.1 kapalı kutu, W2.2 fiyonk ve
-W2.3 açık kutu aynı 1024×1536 tuvalde, aynı konumda** çizilir (üst üste konunca kutunun gövdesi çakışmalı). Site kutuyu
-kapak/gövde ekleminden ve kapağın arka menteşesinden keser; bu çizgiler net ve yatay olmalı.
-
-#### W2.1 Kapalı kutu — fiyonk OLMADAN
-**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/box_closed.png` · 1024×1536 · **Şeffaf zemin**
+#### W1 Şampanya ipek hare (sayfa zemini)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/moire_ground.png` · 1536×1536 · opak, dikişsiz
 
 ```
-A closed luxury ring box covered in deep aubergine plum velvet (#2A1328 to #4A2142, soft velvet pile with gentle highlights where the light catches it), seen from the front and slightly from above, wider than tall, with a softly rounded lid sitting on the base; a thin rose-gold metal rim runs along the seam where the lid meets the base, as one crisp straight horizontal line across the whole front. Place it exactly where it will sit in box_open.png: horizontally centered, about 72% of the image width, the bottom edge of the base at about 80% of the image height, the lid/base seam at about 63% of the image height, the top of the lid at about 50%. The empty upper half of the image is left for the lid to open and the card to rise into. Only this one object, no ribbon, no bow, no jewelry. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow, halo, light rays or haze outside the object's outline — the website adds light effects. No text, letters, numbers, logo or monogram. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+A seamless, tileable, perfectly flat top-down texture of pale champagne silk moiré (between #E8D3B0 and #F3E6D0), the luxurious watered-silk fabric of an old townhouse salon wall: soft, wide, flowing watermark ripples in the weave that shift gently between slightly lighter and slightly darker champagne, a fine horizontal rib, a faint pearly sheen. Very low contrast so dark text reads on it everywhere. Perfectly flat and evenly lit by soft studio light from the top-left: no folds, no wrinkles, no seams, no stains, no shadow, no vignette, no flowers, no pattern other than the moiré itself. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: tek nesne; fiyonk yok; kapak/gövde eklemi net yatay çizgi (rose gold kenar); ölçü ve konum tarife yakın; gölge yok; gerçek alfa.
+Kontrol: dikişsiz (2×2 ek yeri yok); açık şampanya, düşük kontrast; hare dalgası yumuşak; kırışık/çiçek yok; üstünde koyu yazı okunur.
+Kullanım: tema kurulunca bütün sayfaların zemini ve kapak (kapalı zarf) sayfası; zarf ve kart üstünde sakin malzeme.
 
-#### W2.2 Kapanış elemanı — saten fiyonk (tek başına, aynı tuvalde)
-**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/closure.png` · 1024×1536 · **Şeffaf zemin**
-
-```
-Only a champagne satin ribbon bow (#E8D3B0, glossy satin with soft folds and two short tails) with a single small round ivory pearl at its knot, alone, drawn exactly where it sits on the front of the lid of box_closed.png — same canvas, same scale and perspective (give box_closed.png as the reference image): centered horizontally on the front of the lid, about 23% of the image width, its knot at about 57% of the image height. The ribbon does NOT wrap around the box: it is a bow resting on the lid's front. Without the box behind it. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow outside the object's outline. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
-```
-Kontrol: yalnız fiyonk + inci; kutu yok; box_closed üstüne konunca kapağın önünde, ortada; kuyruklar gövdeye taşmıyor; gölge yok; alfa.
-
-#### W2.3 Açık kutu — boş
-**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/box_open.png` · 1024×1536 · **Şeffaf zemin**
+#### W2 Fildişi pamuk kâğıt (kartlar, form)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/ivory_paper.png` · 1536×1536 · opak, dikişsiz
 
 ```
-The SAME aubergine velvet ring box as box_closed.png — same size, same position on the canvas, same angle, same material and light (give box_closed.png as the reference image) — now open: the lid has swung up and back on its rear hinge and stands upright above the base, showing its inside lined with smooth champagne satin (#E8D3B0) gathered in soft radiant folds toward the center; the inside of the base holds a plump champagne satin cushion with a single empty horizontal slit across its middle (no ring in it). The base's velvet front is exactly the same as in box_closed.png, and the line where the satin cushion meets the lid's satin lining at the back hinge is a clear straight horizontal line. Nothing inside, no ring, no card, no bow. Front view, perfectly straight, not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow outside the object's outline. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+A seamless, tileable, perfectly flat top-down texture of thick mould-made cotton paper in a warm ivory (#F8EDE0), the kind used for fine engraved stationery: a gentle felt tooth, a few faint long cotton fibres, the slightest natural cloudiness, an even tone with only the gentlest variation and a very faint satin lustre. Evenly lit by soft studio light from the top-left, no fold, no crease, no deckle edge, no stain, no shadow, no vignette, no printing, no pattern. Calm enough for fine dark text to read on it everywhere. The edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: box_closed ile aynı ölçü, konum, açı (gövdenin önü birebir çakışıyor); kapak dik, içi saten; yastık boş; menteşe çizgisi net; gölge yok; alfa.
+Kontrol: dikişsiz; sıcak fildişi `#F8EDE0` civarı; leke/kat/desen yok; üstüne koyu yazı okunur.
+Kullanım: tema kurulunca home kartı, saten kartlar, RSVP formu ve zarftan yükselen kartın kâğıt dokusu.
 
-#### W2.4 Kutudan yükselen küçük kart (boş)
-**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
-
-```
-The small invitation card that rises out of the velvet ring box, alone: a thick ivory cotton card (#F8EDE0) with a fine rose-gold foil edge, landscape, about 2:1 wider than tall, filling about 90% of the image width, centered (it is scaled into the box later). On its left third a portrait photo window with softly rounded corners, about 4:5 tall, filled with flat pure green #00FF00 (no texture, no shading). The rest of the card is blank ivory paper (no text). Front view, perfectly straight, centered and not cropped, with generous empty margin all around. Lit like every other part: soft light from the top-left. No cast shadow and no drop shadow. No glow outside the object's outline. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
-```
-Kontrol: pencere düz #00FF00, keskin kenarlı; kartın sağ üçte ikisi boş düz kâğıt; ~2:1; tuvalin ~%90 genişliği; gölge yok; alfa.
-Site pencereyi şeffaf yapar, yerini ölçer (`manifest stage.card.window_pct`) ve fotoğrafı tam oraya koyar; yazı pencerenin sağında.
-
-#### W2.5 Kadife sayfa zemini (kutu sayfası + home)
-**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/bg_page.png` · 1024×1536 · opak
+#### W3 Patlıcan ipek kadife (koyu bantlar)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/velvet.png` · 1536×1536 · opak, dikişsiz
 
 ```
-A vertical phone-screen background: a close, softly lit expanse of deep aubergine velvet (#1C0B1A to #2A1328) with a few long, gentle folds and a very soft pool of warm light slightly below the center, the velvet pile catching faint plum highlights. Darker toward the edges. The whole central area stays calm and even (no object, no box, no jewelry, no text) so light ivory text reads on it. Photorealistic, same light as the box.
+A seamless, tileable, perfectly flat top-down texture of deep aubergine silk velvet (#2A1328, with soft plum highlights toward #4A2142 and velvety shadows toward #1C0B1A): a dense, fine, even pile with the soft directional sheen of real silk velvet, the faintest crush marks only as gentle tonal drifts, no folds. Evenly lit by soft studio light from the top-left, very low contrast so ivory and champagne text reads on it everywhere. No wrinkles, no seams, no stains, no pattern, no flowers, no vignette. The edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: orta sakin ve koyu; kıvrımlar yalnız hafif; nesne yok; yazı yok.
+Kontrol: dikişsiz; koyu patlıcan kadife, hav dokusu görünür ama sakin; desen/kırışık yok; üstünde fildişi yazı okunur.
+Kullanım: tema kurulunca home davet bandı, RSVP kartının altındaki bant, story vitrininin zemini ve imza bölümü.
 
-#### W2.6 Şampanya saten zemin (açık bölümler)
-**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/satin_bg.png` · 1536×1024 · opak
+#### W4 Zarfın arkası (iç astar görünür)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/env_back.png` · 1200×1200 · **Şeffaf zemin**
 
 ```
-A wide background of smooth champagne satin (#E8D3B0 to #F3E4C8) with soft, wide, flowing diagonal folds and a gentle sheen from the top-left, very low contrast so dark plum text reads on any part of it. Edge to edge, no object, no ribbon ends, no pearls, no text. Photorealistic.
+The back panel of an open square envelope covered in deep aubergine silk velvet (as velvet.png), seen perfectly straight from the front, on a fully transparent background. The envelope occupies exactly x 7–93% and y 7–93% of the canvas (a perfect square) with very slightly softened corners. We see its inside: it is lined with smooth champagne silk satin (#E8D3B0) with a soft liquid sheen catching the light from the top-left, the satin covering the panel almost completely, edged along its top and both sides by a fine row of tiny stitched ivory seed pearls (#F8EDE0), with a slim margin of aubergine velvet showing beyond the pearls; a very gentle shade toward the bottom where the front pocket will sit. No flap, no front pocket, no ribbon, no ring, no card inside. Soft studio light from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: düşük kontrast; her yerinde koyu yazı okunur; nesne yok; kenara kadar saten.
+Kontrol: kare panel x %7–93 · y %7–93; iç yüz şampanya saten, üst ve yanlarda inci dikişi, dışında ince kadife pay; kapak/cep/bant yok; gerçek alfa.
+Kullanım: tema kurulunca `.env-back` — kapak açılınca kartın arkasında görünen saten iç; bütün zarf katmanları bunun alfa kutusuna göre yerleşir.
 
-> **Ertelendi (üretme):** inci dizisi ayırıcı, tek inci accent, alyanslar ve vitrin altlığı ilk sürümde istenmişti ama
-> hiçbir sayfa onları kullanmıyor (G167 denetimi) — boşa üretim olmasın diye listeden çıkarıldı. Tema onlara yer
-> açarsa (ör. karuselin altına altlık) prompt'ları buraya yeniden eklenir.
+#### W5 Zarfın ön cebi
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/env_front.png` · 1200×1200 · **Şeffaf zemin**
 
-#### W2.7 Website hero + paylaşım görseli (og:image kaynağı)
+```
+Only the front pocket of the same square aubergine silk velvet envelope as env_back.png, on the same 1200×1200 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 7–93% and y 7–93% of the canvas; the pocket spans the full envelope width (x 7–93%) from its top edge down to the envelope's bottom edge at 93% of the canvas height. Its top edge is one smooth, very shallow arc: it starts at 42% of the canvas height at both side edges and dips only slightly to 45% at the horizontal centre, cut clean, with a fine rolled velvet edge and the faint thickness of a padded panel visible along it. Deep aubergine silk velvet of velvet.png with its soft directional pile sheen, the soft fold lines of the two side flaps and the bottom flap barely visible as gentle tonal seams in the velvet, lit by soft studio light from the top-left. Everything above the pocket's edge is completely transparent. No flap, no ribbon, no ring, no card, no pearls on the pocket. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: cep tam genişlik; üst kenarı yanlarda %42, ortada %45 (çok sığ yay); üstü tamamen şeffaf; aynı kadife; gerçek alfa.
+Kullanım: tema kurulunca `.env-front` — kart bunun arkasından yükselir; kapak açıkken üst kenarı görünür.
+
+#### W6 Üç loblu (yonca) kapak (kapalı, dış yüz)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/flap.png` · 1200×1200 · **Şeffaf zemin**
+
+```
+Only the closed flap of the same square aubergine silk velvet envelope, on the same 1200×1200 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 7–93% and y 7–93% of the canvas; the flap spans its full width (x 7–93%), hinged along a softly rounded fold at the envelope's top edge (7% of the canvas height). Its free lower edge is made of THREE soft, rounded, convex lobes like a trefoil, smooth and continuous (not pointed, not a V, not scalloped lace): the edge meets the left side at 44% of the canvas height, swells down into the left lobe whose lowest point is at x 24%, y 52%, rises into a soft rounded notch at x 37%, y 48%, swells down into the largest centre lobe whose broad rounded tip is at x 50%, y 60%, rises into a second soft notch at x 63%, y 48%, swells into the right lobe lowest at x 76%, y 52%, and meets the right side at 44%. The flap is padded aubergine silk velvet (as velvet.png) with a soft directional pile sheen and a fine rolled edge along the lobes, a whisper of contact shade on the flap itself just along its lobed edge, soft studio light from the top-left. Everything below the flap's edge is completely transparent. No ribbon, no ring, no pearls, no seal, no card. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: kapak tam genişlik; serbest kenar üç yuvarlak lob (yanlarda %44, yan lob dipleri %52, girintiler %48, orta lob ucu %60); kadife, süssüz; altı şeffaf; gerçek alfa.
+Kullanım: tema kurulunca kapalı kapak; açılışta üst katlama çizgisinde 3B kalkar, 90°'de W7 iç yüz devralır.
+
+#### W7 Kapağın iç yüzü (açıkken dik)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/flap_in.png` · 1200×760 · **Şeffaf zemin**
+
+```
+The inside of the same trefoil envelope flap, alone, seen straight on as it stands upright when the envelope is open, on a fully transparent background: the outline of flap.png mirrored vertically. Its straight fold edge is at the BOTTOM, along 92% of the image height, spanning x 7–93% of the width (exactly as wide as the envelope); its two straight sides rise to 33.6% of the image height; the left lobe's highest point is at x 24%, y 20.9%, a soft rounded notch at x 37%, y 27.2%, the largest centre lobe's broad rounded top at x 50%, y 8.3%, a second notch at x 63%, y 27.2%, the right lobe's highest point at x 76%, y 20.9%. The inside is lined with the same smooth champagne silk satin (#E8D3B0) as env_back.png, with a soft liquid sheen and a few gentle satin ripples catching the light from the top-left, and a fine row of tiny stitched ivory seed pearls follows the whole lobed edge just inside it; a slim margin of aubergine velvet shows beyond the pearls along the lobed edge. Soft studio light from the top-left. No ribbon, no ring, no card. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: düz katlama kenarı altta (%92), yanlar %33,6'ya, yan lob tepeleri %20,9, orta lob tepesi %8,3; şampanya saten + lob kenarı boyunca inci dikişi + ince kadife pay; düz renk değil; gerçek alfa.
+Kullanım: tema kurulunca kapak açıldığında zarfın üstünde dik duran iç yüz (3B dönüşün arka yüzü); kart yükselirken arkasında satende ışık süpürmesi (CSS maske).
+
+#### W8 Şampanya saten bant (zarfı dikey saran)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/ribbon_band.png` · 1200×1200 · **Şeffaf zemin**
+
+```
+On the same 1200×1200 canvas as env_back.png and flap.png, in exactly the same place (the envelope box is x 7–93% and y 7–93% of the canvas, but the envelope itself is NOT drawn here), only a single flat champagne silk satin ribbon that wraps the closed envelope vertically, on a fully transparent background: the ribbon (#E8D3B0, a rich liquid sheen with soft lighter highlights where it catches the light from the top-left) runs straight down the centre from x 46% to x 54% of the canvas, from y 6.5% to y 93.5%; at both ends it turns over in a soft rounded fold, as if it bends over the envelope's top and bottom edges and continues behind it. Just below the centre, at x 50%, y 62%, the ribbon makes one small, neat, flat knot (a simple tidy wrap, slightly wider than the ribbon, no bow, no loops, no tails). Along its length the ribbon lies flat with one or two very gentle soft ripples. Everything outside the ribbon is fully transparent: no envelope, no flap, no ring, no pearls. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: tek dikey saten bant x %46–54 / y %6,5–93,5; iki uç yumuşak kıvrık; (%50, %62)'de küçük yassı düğüm, fiyonk yok; zarf çizilmemiş; gerçek alfa.
+Kullanım: tema kurulunca aynı zarf tuvalinde tam tuval katman; açılışta yüzük kalkınca düğümde ikiye kırpılır: üst yarısı kapağın üstünden geri, alt yarısı aşağı çekilip söner.
+
+#### W9 Rose gold tek taş yüzük (kapanış)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/ring.png` · 600×600 · **Şeffaf zemin**
+
+```
+A single rose gold solitaire engagement ring, alone, standing upright and seen perfectly straight from the front, on a fully transparent background, centred and filling about 72% of the canvas height: a slim, highly polished round band in rose gold (#C99A86 with bright warm highlights and soft deeper reflections), and on top a single round brilliant-cut diamond held in a delicate six-claw rose gold setting, its crisp facets catching the soft studio light from the top-left with clean white and faint champagne reflections. The open centre of the band is truly transparent (real alpha). Elegant, classic, not oversized. No engraving, no hallmark, no inscription inside the band, no other stones, no box, no ribbon, no sparkle rays, no star flares. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: tek yüzük, önden dik; rose gold ince bant + altı tırnaklı tek taş; bandın içi şeffaf; kazıma/yazı/ışın yok; gerçek alfa.
+Kullanım: tema kurulunca zarf tuvalinde (x %50, y %56), eni tuvalin %13'ü; açılışta taşta CSS parıltısı → banttan yukarı kayıp isimlerin üstüne süzülür; home'da küçük süs, imzada açık yüzük kutusuna (W16) oturur.
+
+#### W10 Zarftaki kart (boş)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/card_small.png` · 1000×1300 · **Şeffaf zemin**
+
+```
+A flat portrait invitation card, alone, seen perfectly straight on, on a fully transparent background: the thick warm ivory cotton card of ivory_paper.png (#F8EDE0) with very slightly rounded corners, spanning x 7–93% and y 6–94% of the canvas. A fine rose gold foil border line (#C99A86, crisp metallic shine) is inset about 5% from the card's edge, and just inside it a delicate continuous row of tiny ivory seed pearls set along the border on all four sides, slightly larger at the four corners. The whole card inside the pearl border is EMPTY paper (the website sets the names, date and venue there in HTML). Soft studio light from the top-left, a hair-fine contact shade on the card's own edge only. No flowers, no ring, no photo, no ornament in the middle. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: boş fildişi kart; rose gold folyo çizgi + içinde tohum incisi dizisi; içi tamamen boş; gerçek alfa.
+Kullanım: tema kurulunca alfa kutusuna kırpılır → zarftan yükselen kart (cebin arkasından, dudağı geçince öne) ve home kartının çerçevesi; isimler, tarih, mekân HTML.
+
+#### W11 Rose gold + inci oval kamea çerçeve (home portresi)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/cameo_frame.png` · 1000×1250 · **Şeffaf zemin**
+
+```
+An upright oval cameo-style portrait frame, alone, seen straight on, on a fully transparent background, like a precious antique locket frame: a polished rose gold oval bezel (#C99A86, warm highlights, soft deeper reflections) with a fine beaded inner rim, surrounded by a continuous ring of graduated ivory seed pearls (#F8EDE0, soft orient), and at the top centre a small, delicate rose gold ribbon bow with two short tails resting on the pearls. The frame's outer edge spans about x 8–92% and y 6–94% of the canvas. In the middle an upright OVAL photo window exactly 640 px wide and 820 px tall, centred at x 500 px, y 640 px (its bounding box from x 180 to 820 px and y 230 to 1050 px), filled with flat pure green #00FF00 (no texture, no shading, smooth clean oval edge, nothing over it). Soft studio light from the top-left. No glass reflection over the window, no gemstones other than the pearls, no flowers. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: düz `#00FF00` dikey oval pencere ~640×820, merkez ~(500, 640); rose gold bezel + inci halkası + üstte küçük rose gold fiyonk; pencereye binen yok; gerçek alfa.
+Kullanım: tema kurulunca pencere ölçülür ve şeffaf yapılır (oval maske) → home kartındaki portre (`hero_portrait`), foto satende ışık süpürmesiyle belirir; teşekkür modunda teşekkür fotoğrafı.
+
+#### W12 Kadife yüzük tepsisi oval yuvası (story vitrini)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/tray_frame.png` · 1000×1250 · **Şeffaf zemin**
+
+```
+A single upright panel from a jeweller's display tray, alone, seen straight on, on a fully transparent background: a softly padded, rounded-rectangle cushion of deep aubergine silk velvet (as velvet.png) with gently rounded corners and a soft tufted edge, spanning about x 7–93% and y 6–94% of the canvas; set into its centre a slim polished rose gold oval bezel (#C99A86) with a fine beaded rim, and a single row of tiny ivory seed pearls around the bezel. Inside the bezel an upright OVAL photo window exactly 600 px wide and 780 px tall, centred at x 500 px, y 625 px (its bounding box from x 200 to 800 px and y 235 to 1015 px), filled with flat pure green #00FF00 (no texture, no shading, smooth clean oval edge, nothing over it). The velvet shows its soft directional pile sheen and velvety shadows around the bezel. Soft studio light from the top-left. No ring, no jewellery, no glass, no flowers. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: düz `#00FF00` dikey oval ~600×780, merkez ~(500, 625); kadife yastık panel + rose gold bezel + inci sırası; yüzük/cam yok; gerçek alfa.
+Kullanım: tema kurulunca pencere ölçülür ve şeffaf yapılır → story'deki döner vitrinin üç yuvası (3B silindir karusel) ve home'daki hikâye tanıtımı.
+
+#### W13 İnci kenarlı geniş çerçeve (mekân fotoğrafı)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/venue_frame.png` · 1600×1000 · **Şeffaf zemin**
+
+```
+A wide landscape picture frame, alone, seen straight on, on a fully transparent background: a slim polished rose gold frame (#C99A86, warm highlights) with softly rounded corners and a fine raised beaded inner lip, and just inside the lip a continuous row of tiny ivory seed pearls on all four sides, slightly larger pearls at the four corners. The frame's outer edge spans about x 6–94% and y 7–93% of the canvas. In the middle a landscape photo window exactly 1360 px wide and 765 px tall (16:9), its top-left corner at x 120 px, y 118 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges with only very slightly rounded corners, nothing over it). Soft studio light from the top-left. No bow, no flowers, no glass reflection. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: düz `#00FF00` ~1360×765 (16:9), sol üst ~(120, 118); ince rose gold çerçeve + iç kenarda inci sırası; gerçek alfa.
+Kullanım: tema kurulunca pencere ölçülür ve şeffaf yapılır → details'te mekân fotoğrafı (`venue`).
+
+#### W14 Köşe süsü (inci dizileri + saten kurdele + gül goncası)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/corner_spray.png` · 1200×1000 · **Şeffaf zemin**
+
+```
+A refined corner ornament growing out from near the top-left corner toward the centre, alone, on a fully transparent background, photorealistic: two or three graceful looping strands of ivory seed pearls (#F8EDE0, soft orient) draped in soft swags, a loop of champagne silk satin ribbon (#E8D3B0) with two long softly curling tails, one half-open champagne-blush garden rose and two small closed buds with a few dark plum-green leaves tucked among the ribbon. Restrained and elegant, more jewellery than bouquet. It reaches toward the top and left sides of the image but stays 6% inside them, and the bottom-right half of the canvas is completely empty. Soft studio light from the top-left. No ring, no gemstones, no glitter, no other flowers or colours. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: sol üstten çıkan ölçülü süs (inci + saten kurdele + tek gül + iki gonca); sağ alt yarı boş; kenara değmiyor; gerçek alfa.
+Kullanım: tema kurulunca home kartının iki üst köşesi (sağda aynalanır), RSVP kartı ve imzada küçük. Kapak sayfasında kullanılmaz ya da yalnız tek köşede, asla metnin altında değil.
+
+#### W15 Tohum incisi dizisi (bölüm ayırıcı)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/divider.png` · 1600×200 · **Şeffaf zemin**
+
+```
+A slim horizontal divider, alone, on a fully transparent background: one straight strand of graduated ivory seed pearls (#F8EDE0, soft orient and tiny bright highlights) running horizontally across x 8–92% of the canvas at the vertical centre, the pearls largest in the middle and gradually smaller toward both ends, with a tiny polished rose gold bar clasp (#C99A86) exactly at the centre. Fine and elegant. No tassels, no other colours, no bow. Soft studio light from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: yatay tek dizi, ortada büyük uçlarda küçük inciler, ortada küçük rose gold klips; iki uçta boşluk; gerçek alfa.
+Kullanım: tema kurulunca başlıkların altında bölüm ayırıcı (home davet bandı ve gün, details program, RSVP formu).
+
+#### W16 Açık kadife yüzük kutusu (imza, boş)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/ring_box.png` · 900×800 · **Şeffaf zemin**
+
+```
+A small open ring box, alone, seen from the front and very slightly from above, on a fully transparent background, photorealistic: a softly rounded box covered in deep aubergine silk velvet (as velvet.png) with a fine rose gold rim line where the lid meets the base; the lid stands open at about 100 degrees, its inside lined with champagne silk satin with a soft sheen; in the base a plump champagne satin cushion with a single empty slit in its centre (NO ring in it). The box spans about x 20–80% and y 10–90% of the canvas. Soft studio light from the top-left, velvety shadows in the pile. No ring, no jewellery, no logo or stamp inside the lid, no ribbon. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: tek açık kutu, kadife dış + saten iç; yastıkta boş yarık (yüzük YOK); kapak içinde logo/yazı yok; gerçek alfa.
+Kullanım: tema kurulunca home imzası ve RSVP teşekkürü: W9 yüzüğü yukarıdan süzülüp yarığa oturur, "Open it again" (tekrar oynat) linkinin üstünde.
+
+#### W17 Süzülen küçük nesneler — üç ayrı dosya
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/accent_1.png`, `accent_2.png`, `accent_3.png` · her biri 512×512 · **Şeffaf zemin**
+
+```
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft studio light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one single round ivory seed pearl (#F8EDE0) with a soft pink-champagne orient and one tiny bright highlight; 2 = one single loose champagne-blush rose petal (#E8D3B0 shading to a soft blush), velvety and softly cupped, a faint deeper shade in its fold; 3 = one single small loose round brilliant-cut diamond seen from the top, crisp clean facets with white and faint champagne reflections, NO sparkle rays, NO star flare.)
+```
+Kontrol: her dosyada tek nesne; üç dosya farklı (inci, gül yaprağı, elmas); ışın/hâle yok; kenara değmiyor; gerçek alfa.
+Kullanım: tema kurulunca açılışta ve RSVP gönderilince süzülen küçük nesneler (her biri ayrı katman, kendi fazında); elmasa CSS ile kısa parıltı.
+
+#### W18 Website hero + paylaşım görseli (og:image kaynağı)
 **Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/web_hero.png` · 1536×1024 · opak
 
 ```
-Wide horizontal product photograph: the closed aubergine velvet ring box from box_closed.png with its champagne satin bow and pearl (closure.png) resting on a draped champagne satin cloth, a loose strand of ivory pearls curling beside it, soft studio light from the top-left on an aubergine velvet backdrop. The box sits slightly below the center. The center-top area is calm velvet. This image is also cropped to 1200×630 for link previews: keep the box and bow completely visible with at least 5% empty margin below them, and keep the top 20% to velvet only. Photorealistic. No text, letters, numbers, logos or watermarks.
+Wide horizontal still life, photorealistic luxury product photography, soft studio light from the top-left: the closed square aubergine silk velvet envelope of flap.png with its three-lobed trefoil flap, wrapped vertically by the champagne satin ribbon of ribbon_band.png with its small flat knot, and the rose gold solitaire ring of ring.png resting on the ribbon just above the knot, lying slightly below the centre on pale champagne silk moiré (as moire_ground.png); at the left a few looping strands of ivory seed pearls and a champagne satin ribbon tail with one half-open champagne-blush rose (as corner_spray.png); at the right, softly out of focus, the small open aubergine velvet ring box of ring_box.png (empty); a few loose pearls and one rose petal scattered. Only aubergine, plum, champagne, rose gold and ivory tones. The top 20% of the image is calm and soft (only out-of-focus moiré). This image is cropped to 1200×630 for link previews: keep the whole envelope, ribbon and ring visible with at least 5% empty margin below the envelope. No people. No text, letters, numbers, monograms, logos or watermarks.
 ```
-Kontrol: kutu + fiyonk altta tam görünür; üst %20 yalnız kadife; yazı yok.
+Kontrol: zarf + bant + yüzük bütün, altında ≥%5 boşluk; üst %20 sakin; kutu boş; yazı yok.
+Kullanım: tema kurulunca `og-1200x630.jpg` (alta hizalı kırpım: üstten ~%21) ve katalog kapağı yedeği.
 
 ---
 
-## PAKET 2 — Örnek fotoğraflar (kurgu çift Isabelle & Julian; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+## PAKET 2 — Örnek fotoğraflar (kurgu çift Isabelle & Julian; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor) — var, yeniden üretme
 
 Bütün fotoğraflar **aynı kurgu çift** (her prompt aynı tarifi taşır: Isabelle uzun koyu kahve saç, alçak topuz, buğday
 ten; Julian kısa koyu sarı saç, kısa düzgün sakal, açık ten), gerçek ya da ünlü birine benzemeyen; aynı renk düzeni
@@ -154,35 +285,44 @@ Photorealistic landscape 16:9: a grand fictional New York townhouse ballroom pre
 
 ---
 
-## PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
+## PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm)
 
-> **Neden yeniden yazıldı (2026-10-20):** website 18–19 Ekim'de fildişi kâğıt + köşe çiçekleri görünümüne geçti; eski baskı prompt'ları eski görünümü (ve artık olmayan PAKET 5 parçalarını) istiyordu. `platform/lib/print/layouts.ts` `'velvet-jewel-box'` bloğunun geçici kaynakları yeniden kurulumda `img/`'den silindi: panel şu an `public/print/velvet-jewel-box/`'deki eski çıktıyı (eski görünüm) basıyor ve `build-print-assets` bu tema için yeniden koşamaz. Bu zeminler gelince:
-> Platform her yüz için **tek** zemin kullanır ve onu taşma payıyla `cover` olarak yayar (5×7 ve A5 aynı zeminden).
-> 1. `layouts.ts` `'velvet-jewel-box'` bloğunda `sources` → bu zeminler (`print/invitation_front.png` + `print/invitation_back.png`), `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }`.
-> 2. Zemin artık **açık fildişi**: `ink` / `accent` koyu tonlara (temanın site metin rengi) alınır; açık mürekkep kalmaz.
-> 3. Metin kutuları (`front` / `back`) gerçek görselde ölçülür (G149; süsten ~%2 açıklık), `node --test tests/g149-print-layout.test.ts`.
-> 4. `cd platform && node scripts/build-print-assets.ts --theme velvet-jewel-box`; `public/print/velvet-jewel-box/`'deki artık kaynak olmayan eski dosyalar silinir; 5×7 ve A5 örnek PDF'ine göz atılır.
-> Ek görsel (her iki yüz için sohbetin başında): `platform/themes/velvet-jewel-box/img/bg_scene-1024.webp`.
+> Panelden indirilen basılı davetiye (`platform/lib/print/layouts.ts`, `'velvet-jewel-box'` bloğu var). Eski zeminler
+> (`print/invitation_front.png`, `print/invitation_back.png`; fildişi + yoğun köşe çiçekleri) eski görünüme aittir; yeni
+> zeminler **yeni adlarla** istenir, eskiler tema kurulunca silinir.
+> **Dosya adı ve ölçü:** `print/invitation_front_r_5x7.png`, `print/invitation_back_r_5x7.png`, **1575×2175 px** = 5×7 in
+> + 1/8 in taşma, 300 ppi. Ayrı A5 dosyası istenmez: A5 + 3 mm taşma (154×216 mm, oran 0,713) aynı sayfadan yanlardan
+> ~%0,8 kırpılarak basılır (~260 ppi). Bu yüzden önemli hiçbir şey yan kenarların %8'ine girmez.
+> **Yazı alanı:** ön yüzde yükseklikte %19–%91 × genişlikte %10–%90 **tamamen boş** (isimler, tarih, mekân); arka yüzde
+> %13'ün altı, genişlikte %9–%91 boş (program + QR; QR'ı GPT çizmez, `tools/make_qr.py` gerçek URL'den üretir).
+> Süsleme yalnız üst ve alt bantlarda. Zemin açık fildişi: `ink` / `accent` koyu (patlıcan, plum) kalır.
+>
+> **Gelince (elle, tek blok; otomatik değil — G149: kutular gerçek görselde ölçülür):**
+> 1. `layouts.ts` `'velvet-jewel-box'` bloğunda `sources` → `{ front: 'print/invitation_front_r_5x7.png', back:
+>    'print/invitation_back_r_5x7.png' }`; `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg:
+>    cover('back'), images: [] } }`.
+> 2. Kutuları görselde ölç (süslemenin ~%2 dışında kalsın; `tests/g149-print-layout.test.ts`).
+> 3. `cd platform && node scripts/build-print-assets.ts --theme velvet-jewel-box` (artık kaynak olmayan eski
+>    `public/print/velvet-jewel-box/` dosyaları silinir) ve `node scripts/print-sample.ts --theme velvet-jewel-box
+>    --invite 5x7 --bleed` + `--invite a5 --bleed` ile iki boyutu göz kontrolü.
 
-#### P6.1 Ön yüz
-**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/print/invitation_front.png` · 1819×2551 px (300 ppi), opak
-
+#### P1 — Ön yüz
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/print/invitation_front_r_5x7.png` · 1575×2175 · opak
 ```
-A full-bleed printable wedding invitation ground for the "Velvet Jewel Box" design, front side, portrait, seen perfectly flat and straight on, 1819 × 2551 px at 300 ppi (it is trimmed later). Match the attached website background (bg_scene-1024.webp) exactly in style: the same warm ivory, softly textured stationery paper running edge to edge and the same deep plum velvet, antique gold, ivory and dusty mauve roses, elegant gemstone-inspired filigree and softly draped silk, in the same photorealistic stationery-photography finish with soft light from the top-left. Place the decoration ONLY in two places: an abundant arrangement gathered at the top-left corner and trailing along the top edge, staying entirely within the top 16% of the height, and a smaller matching arrangement gathered at the bottom-right corner, staying entirely within the bottom 14% of the height. A very fine antique-gold foil hairline frame inset about 6% from every edge. Keep every ornament at least 4% inside the image edges. The whole rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm ivory paper (the names, date and venue are printed there in dark ink): no petal, leaf, line, shadow or stain in it. No envelope, no card, no frame object, no people. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1819 × 2551 px.
+The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the thick warm ivory cotton card of ivory_paper.png (#F8EDE0). Across the top, between 9% and 91% of the width, two graceful swags of ivory seed pearl strands (as divider.png) hang in gentle curves from near the top corners and meet at the top centre in a small, neat champagne silk satin bow with short tails, one small half-open champagne-blush rose bud tucked into the bow; nothing in this top band reaches lower than 17% of the height. Along the bottom, between 93% and 96% of the height and from 14% to 86% of the width, a fine double rule of rose gold foil (#C99A86) with one single seed pearl at its centre. The rectangle from 19% to 91% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm paper (the names, date and venue are set there): no pearl, no petal, no line, no shadow, no stain in it. No ornament within 8% of the left and right edges. Soft studio light from the top-left. Only ivory, champagne, blush and rose gold tones. No ring, no velvet. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
 ```
-Kontrol: tam taşma fildişi kâğıt (site zeminiyle aynı); çiçekler yalnız üst %16 (sol üst) ve alt %14 (sağ alt); %18–84 yükseklik × %10–90 genişlik tamamen boş; ince altın çerçeve; yazı yok; 1819×2551.
+Kontrol: tam taşma fildişi; %19–%91 × %10–%90 tamamen boş; inci salkımları + saten fiyonk + gonca yalnız üstte (%17'nin üstünde), rose gold çift çizgi + tek inci yalnız altta; yan %8 boş; yazı yok.
 
-#### P6.2 Arka yüz
-**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/print/invitation_back.png` · 1819×2551 px (300 ppi), opak
-
+#### P2 — Arka yüz
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/print/invitation_back_r_5x7.png` · 1575×2175 · opak
 ```
-The back side of the same "Velvet Jewel Box" invitation (give invitation_front.png as the reference image): portrait, full bleed, perfectly flat, 1819 × 2551 px at 300 ppi, the same warm ivory stationery paper edge to edge and the same very fine antique-gold foil hairline frame inset about 6% from every edge. Decoration ONLY a slim spray of the same flowers and foliage centred along the top edge, staying entirely within the top 11% of the height and at least 4% inside the image edges. Everything from 13% to 92% of the height and from 10% to 90% of the width is COMPLETELY EMPTY paper for the schedule, the details and a QR code: no petal, line, shadow or stain. Same style, colors and light. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1819 × 2551 px.
+The back of the same printed wedding invitation, full bleed, portrait 5.25:7.25, perfectly flat: the same thick warm ivory cotton card, only one short swag of graduated ivory seed pearls across the top centre (between 32% and 68% of the width) with a tiny rose gold bar clasp at its middle, its lowest point staying above 11% of the height. The whole area below 13% of the height, from 9% to 91% of the width, is COMPLETELY EMPTY paper (a schedule and a QR code are set there): no pearl, no line, no shadow, no stain. No ornament within 8% of the left and right edges. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
 ```
-Kontrol: ön yüzle aynı kâğıt ve çerçeve; çiçek yalnız üst %11'de ince dal; %13–92 × %10–90 boş; yazı yok; 1819×2551.
+Kontrol: ön yüzle aynı kâğıt; yalnız üst ortada kısa inci salkımı (%11'in üstünde); %13'ün altı boş; yazı/QR yok.
 
 ---
 
-## PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
+## PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir) — GEÇERSİZ (2026-10-22: yeniden tasarım; tema kurulunca yeniden yazılacak)
 
 > Yeni (2026-10-14): kullanıcı ilan görsellerinin çok daha etkileyici ve profesyonel olmasını istedi. Bu sahneler ilan
 > görsellerinin zeminidir. Ekranlar **düz #00FF00**; Claude gerçek site ekranlarını perspektifle oraya yerleştirir
