@@ -33,11 +33,11 @@ Kullanıcı (2026-10-22): "dalga 5 ile devam et, N9 ve N10'u yaz" (docs/36).
 - İç linkler (İngilizce): G2 ve G4 → N9; G3 ve G4 → N10; N10 → N9, N5.
 - Kontrol: build temiz; N9 ve N10 200, tek H1, Article + BreadcrumbList; jetonlar sayfada gerçek değerle ("up to 12 questions",
   "up to 6 hotels"); /guides 16 rehber; 390 px'te yatay taşma yok. Görüntüler `platform/previews/g201/`.
-- Testler: TEST_SONUCU
-- Çeviri yapılmadı: N9/N10 diğer dillerde İngilizce görünür; bu dalganın iç link cümleleri çevirilerde yok.
+- Testler: `npm test` 1696/1696 (0 hata, 0 atlanan; g201 testi dahil), build temiz.
+- Çeviri: G202.
 
 ## Önerilen görevler (entegratöre)
-- N9 + N10 çevirisi ve çevirilerde bu dalganın iç link cümleleri.
+- ~~N9 + N10 çevirisi~~ → G202 (yapıldı).
 - Dalga 6: N11 (gizlilik ve şifre), N12 (RSVP için QR kod) ve G2 gizlilik bölümü (docs/36).
 
 ## Günlük

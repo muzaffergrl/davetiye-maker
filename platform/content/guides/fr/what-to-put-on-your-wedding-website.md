@@ -36,7 +36,7 @@ Ajoutez-les s'ils s'appliquent à votre mariage. Chacun vous épargne une poign�
 - **Voyage et hébergement.** Les hôtels à proximité, les chambres réservées et leur date limite de réservation, l'aéroport le plus proche, le stationnement et les horaires de navette.
 - **Dress code.** Un ou deux mots et une phrase d'explication, par exemple « Chic champêtre : costumes ou robes ; la cérémonie a lieu sur l'herbe. »
 - **Lien vers la liste de mariage.** Un seul lien, dans sa propre section, pas répété sur chaque page. Les guides d'étiquette comme celui de l'[Emily Post Institute](https://emilypost.com/advice/wedding-website-tips) déconseillent de mettre la liste de mariage au premier plan.
-- **Questions-réponses.** Enfants, accompagnants, stationnement, accessibilité, plan en cas de pluie, option végétarienne ou non.
+- **Questions-réponses.** Enfants, accompagnants, stationnement, accessibilité, plan en cas de pluie, option végétarienne ou non. Voyez les [exemples de FAQ pour un site de mariage](/guides/wedding-website-faq-examples) pour des réponses à adapter.
 - **Ajouter au calendrier.** Un bouton qui ajoute la date, l'heure et le lieu directement dans le calendrier de l'invité.
 - **Compte à rebours.** Une petite touche sympathique ; facultative.
 

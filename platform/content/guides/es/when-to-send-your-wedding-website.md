@@ -52,7 +52,7 @@ Las guías de etiqueta no coinciden sobre si poner la dirección de la web en la
 
 ## Bodas de destino
 
-Si la mayoría de los invitados tiene que coger un avión, pedir días libres o renovar el pasaporte, adelántalo todo:
+Si la mayoría de los invitados tiene que coger un avión, pedir días libres o renovar el pasaporte, adelántalo todo (lo que necesita la propia web está en la [lista para la web de una boda de destino](/guides/destination-wedding-website-checklist)):
 
 - Comparte la web con el "reserva la fecha" en cuanto la fecha sea firme, con la información de viaje y hotel ya incluida.
 - Añade los plazos de los bloques de habitaciones, los aeropuertos más cercanos y cómo llegar del aeropuerto al lugar.

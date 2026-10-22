@@ -91,7 +91,7 @@ Halten Sie es kurz und dankbar und bringen Sie es in einem Abschnitt unter statt
 
 ## Anreise und Unterkunft
 
-Hier gilt: praktisch schlägt poetisch. Nennen Sie Namen, Entfernungen und Fristen.
+Hier gilt: praktisch schlägt poetisch. Nennen Sie Namen, Entfernungen und Fristen. Für eine Hochzeit im Ausland siehe die [Checkliste für die Website einer Destination-Hochzeit](/guides/destination-wedding-website-checklist).
 
 - *Der nächste Flughafen ist Sacramento (SMF), etwa 75 Minuten mit dem Auto.*
 - *Im The Vineyard Inn haben wir bis zum 1. April Zimmer reserviert. Nennt bei der Buchung unsere Namen.*
@@ -118,7 +118,7 @@ Fragen, die Sie dem Formular hinzufügen könnten, klar formuliert:
 
 ## Fragen und Antworten
 
-Beantworten Sie zuerst die Frage und ergänzen Sie dann ein hilfreiches Detail.
+Beantworten Sie zuerst die Frage und ergänzen Sie dann ein hilfreiches Detail. Weitere Fragen und Beispielantworten stehen in den [FAQ-Beispielen für die Hochzeitswebsite](/guides/wedding-website-faq-examples).
 
 | Frage | Antwort |
 |---|---|

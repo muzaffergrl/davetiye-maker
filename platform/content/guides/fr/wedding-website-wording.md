@@ -89,7 +89,7 @@ Restez bref et reconnaissant, et regroupez-la dans une seule section plutôt que
 
 ## Voyage et hébergement
 
-Ici, le pratique l'emporte sur le poétique. Donnez des noms, des distances et des dates limites.
+Ici, le pratique l'emporte sur le poétique. Donnez des noms, des distances et des dates limites. Pour un mariage à l'étranger, voyez la [liste pour le site d'un mariage à destination](/guides/destination-wedding-website-checklist).
 
 - *L'aéroport le plus proche est celui de Sacramento (SMF), à environ 75 minutes en voiture.*
 - *Nous avons réservé des chambres au Vineyard Inn jusqu'au 1er avril. Donnez nos noms lors de votre réservation.*
@@ -116,7 +116,7 @@ Questions que vous pouvez ajouter au formulaire, formulées clairement :
 
 ## Questions-réponses
 
-Répondez d'abord à la question, puis ajoutez un détail utile.
+Répondez d'abord à la question, puis ajoutez un détail utile. D'autres questions et réponses types se trouvent dans les [exemples de FAQ pour un site de mariage](/guides/wedding-website-faq-examples).
 
 | Question | Réponse |
 |---|---|

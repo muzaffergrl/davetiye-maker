@@ -36,7 +36,7 @@ Añádelos si encajan con tu boda. Cada uno te ahorra unos cuantos mensajes.
 - **Viaje y alojamiento.** Hoteles cercanos, el bloque de habitaciones si lo hay y su plazo de reserva, el aeropuerto más cercano, el aparcamiento y los horarios del autobús lanzadera.
 - **Código de vestimenta.** Una o dos palabras y una frase de explicación, por ejemplo: "Formal de jardín: trajes o vestidos; la ceremonia es sobre césped."
 - **Enlace a la lista de bodas.** Un solo enlace en su propia sección, sin repetirlo en cada página. Guías de etiqueta como la del [Emily Post Institute](https://emilypost.com/advice/wedding-website-tips) desaconsejan poner la lista en primer plano.
-- **Preguntas y respuestas.** Niños, acompañantes, aparcamiento, accesibilidad, qué pasa si llueve, si hay opción vegetariana.
+- **Preguntas y respuestas.** Niños, acompañantes, aparcamiento, accesibilidad, qué pasa si llueve, si hay opción vegetariana. Mira los [ejemplos de preguntas frecuentes](/guides/wedding-website-faq-examples) para respuestas que puedes adaptar.
 - **Añadir al calendario.** Un botón que lleva la fecha, la hora y el lugar directamente al calendario del invitado.
 - **Cuenta atrás.** Un toque pequeño y simpático; opcional.
 

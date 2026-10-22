@@ -36,7 +36,7 @@ Düğününüz için geçerliyse bunları ekleyin. Her biri sizi bir avuç mesaj
 - **Ulaşım ve konaklama.** Yakındaki oteller, varsa oda bloğu ve rezervasyon son tarihi, en yakın havalimanı, otopark ve servis saatleri.
 - **Kıyafet kuralı.** Bir iki kelime ve bir açıklama cümlesi, örneğin "Bahçe resmî: takım elbise ya da elbise; tören çimlerin üzerinde."
 - **Hediye listesi linki.** Her sayfada tekrarlanmayan, kendi bölümünde tek bir link. [Emily Post Institute](https://emilypost.com/advice/wedding-website-tips) gibi görgü rehberleri hediye listesini en öne koymamayı tavsiye ediyor.
-- **Sorular ve yanıtlar.** Çocuklar, artı bir kişi, otopark, erişilebilirlik, yağmur yağarsa ne olacağı, vejetaryen seçenek olup olmadığı.
+- **Sorular ve yanıtlar.** Çocuklar, artı bir kişi, otopark, erişilebilirlik, yağmur yağarsa ne olacağı, vejetaryen seçenek olup olmadığı. Uyarlayabileceğiniz yanıtlar için [düğün websitesi SSS örneklerine](/guides/wedding-website-faq-examples) bakın.
 - **Takvime ekle.** Tarihi, saati ve mekânı doğrudan misafirin takvimine ekleyen bir düğme.
 - **Geri sayım.** Küçük, sevimli bir dokunuş; isteğe bağlı.
 

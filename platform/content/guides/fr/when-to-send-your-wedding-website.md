@@ -52,7 +52,7 @@ Les guides d'étiquette divergent sur l'opportunité de mettre l'adresse du site
 
 ## Mariages à destination
 
-Si la plupart des invités doivent prendre l'avion, poser des congés ou renouveler leur passeport, avancez tout :
+Si la plupart des invités doivent prendre l'avion, poser des congés ou renouveler leur passeport, avancez tout (ce dont le site lui-même a besoin figure dans la [liste pour le site d'un mariage à destination](/guides/destination-wedding-website-checklist)) :
 
 - Partagez le site avec le save the date dès que la date est fixée, avec les informations de voyage et d'hôtel déjà en ligne.
 - Ajoutez les dates limites des blocs de chambres, les aéroports les plus proches et le trajet de l'aéroport au lieu.

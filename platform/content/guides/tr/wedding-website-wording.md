@@ -89,7 +89,7 @@ Kısa ve minnettar tutun; her sayfaya değil, tek bir bölüme koyun.
 
 ## Ulaşım ve konaklama
 
-Burada pratiklik şiirsellikten önce gelir. İsimler, mesafeler ve son tarihler verin.
+Burada pratiklik şiirsellikten önce gelir. İsimler, mesafeler ve son tarihler verin. Yurt dışında bir düğün için [destination düğün websitesi kontrol listesine](/guides/destination-wedding-website-checklist) bakın.
 
 - *En yakın havalimanı Sacramento (SMF), arabayla yaklaşık 75 dakika.*
 - *The Vineyard Inn'de 1 Nisan'a kadar odalar ayırttık. Rezervasyon yaparken isimlerimizi söyleyin.*
@@ -116,7 +116,7 @@ Forma ekleyebileceğiniz, açık ifadeli sorular:
 
 ## Sorular ve yanıtlar
 
-Önce soruyu yanıtlayın, sonra işe yarar bir ayrıntı ekleyin.
+Önce soruyu yanıtlayın, sonra işe yarar bir ayrıntı ekleyin. Daha fazla soru ve örnek yanıt [düğün websitesi SSS örneklerinde](/guides/wedding-website-faq-examples).
 
 | Soru | Yanıt |
 |---|---|

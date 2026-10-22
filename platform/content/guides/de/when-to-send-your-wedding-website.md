@@ -52,7 +52,7 @@ Etikette-Ratgeber sind sich uneinig, ob die Website-Adresse auf die eigentliche 
 
 ## Hochzeiten im Ausland
 
-Wenn die meisten Gäste fliegen, Urlaub nehmen oder einen Reisepass erneuern müssen, ziehen Sie alles vor:
+Wenn die meisten Gäste fliegen, Urlaub nehmen oder einen Reisepass erneuern müssen, ziehen Sie alles vor (was die Website selbst braucht, zeigt die [Checkliste für die Website einer Destination-Hochzeit](/guides/destination-wedding-website-checklist)):
 
 - Teilen Sie die Website mit dem Save-the-Date, sobald das Datum feststeht, mit Informationen zu Anreise und Hotel bereits darauf.
 - Ergänzen Sie Fristen für Zimmerkontingente, die nächstgelegenen Flughäfen und wie man vom Flughafen zur Location kommt.

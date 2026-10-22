@@ -52,7 +52,7 @@ Görgü rehberleri website adresinin ana davetiye kartına konması konusunda fa
 
 ## Yurt dışı ya da uzak mekân düğünleri
 
-Misafirlerin çoğu uçakla gelmek, izin almak ya da pasaport yenilemek zorundaysa her şeyi öne çekin:
+Misafirlerin çoğu uçakla gelmek, izin almak ya da pasaport yenilemek zorundaysa her şeyi öne çekin (sitenin kendisinde neler olması gerektiği için [destination düğün websitesi kontrol listesine](/guides/destination-wedding-website-checklist) bakın):
 
 - Tarih kesinleşir kesinleşmez websiteyi, ulaşım ve otel bilgileri zaten üzerinde olacak şekilde "Tarihi ayırın" kartıyla paylaşın.
 - Oda bloğu son tarihlerini, en yakın havalimanlarını ve havalimanından mekâna nasıl gidileceğini ekleyin.

@@ -89,7 +89,7 @@ Breve y agradecido, y en una sola sección en lugar de en todas las páginas.
 
 ## Viaje y alojamiento
 
-Aquí lo práctico gana a lo poético. Da nombres, distancias y plazos.
+Aquí lo práctico gana a lo poético. Da nombres, distancias y plazos. Para una boda en el extranjero, mira la [lista para la web de una boda de destino](/guides/destination-wedding-website-checklist).
 
 - *El aeropuerto más cercano es el de Sacramento (SMF), a unos 75 minutos en coche.*
 - *Hemos reservado habitaciones en The Vineyard Inn hasta el 1 de abril. Menciona nuestros nombres al reservar.*
@@ -116,7 +116,7 @@ Preguntas que puedes añadir al formulario, con una redacción clara:
 
 ## Preguntas y respuestas
 
-Responde primero a la pregunta y después añade un detalle útil.
+Responde primero a la pregunta y después añade un detalle útil. Hay más preguntas y respuestas de ejemplo en los [ejemplos de preguntas frecuentes](/guides/wedding-website-faq-examples).
 
 | Pregunta | Respuesta |
 |---|---|
