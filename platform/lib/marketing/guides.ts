@@ -7,13 +7,14 @@
 // public path of the cover image, GPT MK12–MK17 once composed), coverAlt.
 // Tokens replaced from config: {{brand}}, {{domain}} (G195: the site's host, as in couple addresses), {{months}},
 // {{rsvpQuestions}}, {{scheduleRows}}, {{faqItems}}, {{photoSpots}}, {{storyPhotos}}, {{storyIntroChars}}, {{storyCaptionChars}}
-// (G199: the Our Story limits the panel enforces).
+// (G199: the Our Story limits the panel enforces), {{travelStays}} (G201: hotels in the travel and stay section).
 // G144: a translation is content/guides/<lang>/<slug>.md (same slug, same frontmatter keys); the English file decides
 // which guides exist and their order. Without a translation the language page shows the English article (loadGuidesIn).
 
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { MARKETING, type MarketingConfig } from './config.ts';
+import { CONTENT_LIMITS } from '../content/limits.ts';
 import { LIMITS } from './facts.ts';
 import { DEFAULT_LANG, type Lang } from './i18n.ts';
 import { siteHost } from './site.ts';
@@ -65,6 +66,7 @@ export function fillTokens(text: string, cfg: MarketingConfig = MARKETING): stri
     storyPhotos: String(LIMITS.storyPhotos),
     storyIntroChars: String(LIMITS.storyIntroChars),
     storyCaptionChars: String(LIMITS.storyCaptionChars),
+    travelStays: String(CONTENT_LIMITS.travelStays),
   };
   return text.replace(/\{\{(\w+)\}\}/g, (all, key: string) => {
     if (!(key in values)) throw new Error(`unknown token ${all}`);

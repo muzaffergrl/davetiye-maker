@@ -52,7 +52,7 @@ Etiquette guides differ on putting the website address on the main invitation ca
 
 ## Destination weddings
 
-If most guests have to fly, take time off or renew a passport, move everything earlier:
+If most guests have to fly, take time off or renew a passport, move everything earlier (our [destination wedding website checklist](/guides/destination-wedding-website-checklist) covers what the site itself needs):
 
 - Share the website with the save the date as soon as the date is fixed, with travel and hotel information already on it.
 - Add room-block deadlines, the nearest airports and how to get from the airport to the venue.

@@ -36,7 +36,7 @@ Add these if they apply to your wedding. Each one saves you a handful of message
 - **Travel and stay.** Nearby hotels, any room block and its booking deadline, the nearest airport, parking and shuttle times.
 - **Dress code.** One or two words and a sentence of explanation, such as "Garden formal: suits or dresses; the ceremony is on grass."
 - **Registry link.** One link on its own section, not repeated on every page. Etiquette guides such as the [Emily Post Institute](https://emilypost.com/advice/wedding-website-tips) advise against putting the registry front and center.
-- **Questions and answers.** Children, plus-ones, parking, accessibility, what happens if it rains, whether there is a vegetarian option.
+- **Questions and answers.** Children, plus-ones, parking, accessibility, what happens if it rains, whether there is a vegetarian option. Our [wedding website FAQ examples](/guides/wedding-website-faq-examples) have answers you can adapt.
 - **Add to calendar.** A button that puts the date, time and venue straight into a guest's calendar.
 - **Countdown.** A small, friendly touch; optional.
 

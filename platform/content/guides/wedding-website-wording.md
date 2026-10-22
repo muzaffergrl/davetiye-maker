@@ -89,7 +89,7 @@ Keep it short and grateful, and place it in one section rather than on every pag
 
 ## Travel and stay
 
-Practical beats poetic here. Give names, distances and deadlines.
+Practical beats poetic here. Give names, distances and deadlines. For a wedding abroad, see the [destination wedding website checklist](/guides/destination-wedding-website-checklist).
 
 - *The nearest airport is Sacramento (SMF), about 75 minutes by car.*
 - *We've reserved rooms at The Vineyard Inn until April 1. Mention our names when you book.*
@@ -116,7 +116,7 @@ Questions you might add to the form, with clear wording:
 
 ## Questions and answers
 
-Answer the question first, then add one helpful detail.
+Answer the question first, then add one helpful detail. More questions and sample answers are in our [wedding website FAQ examples](/guides/wedding-website-faq-examples).
 
 | Question | Answer |
 |---|---|
