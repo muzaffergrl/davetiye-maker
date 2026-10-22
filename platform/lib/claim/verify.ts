@@ -15,7 +15,8 @@
 //                   mode, never a 500 — and a later re-check (admin button; the buyer's panel; Publish) verifies the
 //                   site by itself once Etsy can be asked (lib/etsy/recheck.ts).
 //   trust           TrustOrderVerifier ("trust first, verify later", lib/claim/trust.ts): Etsy is asked as in "etsy"
-//                   mode when it can be; a definite answer stays (verified / rejected), anything else — Etsy not
+//                   mode when it can be, then the shop's mailbox (G192, lib/mailbox: Etsy's signed "You made a sale"
+//                   email); a definite answer stays (verified / rejected), anything else — Etsy not
 //                   connected, payment still processing, Etsy not answering — is "provisional": the site is made and
 //                   can be PUBLISHED at once. A later check (hourly cron, admin button) verifies it, or holds it
 //                   (offline + pending) when Etsy says the order is not ours / cancelled / refunded; unverified after
@@ -26,6 +27,7 @@
 // Register a verifier in code with setOrderVerifier() (tests do this) or by the env switch above.
 
 import { EtsyOrderVerifier } from '../etsy/verify.ts';
+import { MailOrderVerifier } from '../mailbox/verify.ts';
 
 export type OrderCheckReason = 'not_found' | 'email_mismatch' | 'theme_mismatch' | 'not_paid';
 
@@ -90,14 +92,44 @@ export class ManualOrderVerifier implements OrderVerifier {
 }
 
 /**
- * Trust mode: Etsy's definite answers stand (verified / rejected); anything open — not connected, not paid yet, Etsy not
- * answering — lets the buyer in at once as "provisional" instead of making them wait or retry.
+ * Asks its sources in order and keeps the first definite answer (verified / rejected). A source that read the order and
+ * found it unpaid (pending + unpaid: Etsy's receipt) also ends the chain — a mail must not overrule Etsy. Otherwise:
+ * pending when a source said pending, else unavailable. close() closes the sources that hold a connection.
+ */
+export class ChainOrderVerifier implements OrderVerifier {
+  readonly kind = 'chain';
+  readonly #sources: OrderVerifier[];
+  constructor(sources: OrderVerifier[]) {
+    this.#sources = sources;
+  }
+
+  async check(input: OrderCheckInput): Promise<OrderCheck> {
+    let pending: OrderCheck | null = null;
+    let unavailable = false;
+    for (const v of this.#sources) {
+      const r = await v.check(input);
+      if (r.result === 'verified' || r.result === 'rejected' || (r.result === 'pending' && r.unpaid)) return r;
+      if (r.result === 'pending' || r.result === 'provisional') pending ??= r;
+      if (r.result === 'unavailable') unavailable = true;
+    }
+    return pending ?? (unavailable ? { result: 'unavailable' } : { result: 'pending' });
+  }
+
+  async close(): Promise<void> {
+    for (const v of this.#sources) await (v as { close?: () => Promise<void> }).close?.();
+  }
+}
+
+/**
+ * Trust mode: definite answers stand (verified / rejected) — from Etsy, else from the shop's mailbox; anything open — not
+ * connected, not paid yet, no mail yet, nobody answering — lets the buyer in at once as "provisional" instead of making
+ * them wait or retry.
  */
 export class TrustOrderVerifier implements OrderVerifier {
   readonly kind = 'trust';
   readonly #inner: OrderVerifier;
   constructor(opts: { inner?: OrderVerifier } = {}) {
-    this.#inner = opts.inner ?? new EtsyOrderVerifier();
+    this.#inner = opts.inner ?? new ChainOrderVerifier([new EtsyOrderVerifier(), new MailOrderVerifier()]);
   }
 
   async check(input: OrderCheckInput): Promise<OrderCheck> {

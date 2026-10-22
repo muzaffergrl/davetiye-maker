@@ -1,12 +1,191 @@
 {
- "39": {"name": "Silver Photo Booth", "ink": "#1E1E1E", "deep": "#45474B", "ivory": "#F5F0E6", "primary": "#9EA3A8", "bg": "page_ground.png", "script": "Yesteryear"},
- "40": {"name": "Swan Chantilly Lace", "ink": "#1B1A18", "deep": "#0F0E0D", "ivory": "#F4EEE2", "primary": "#8F8A82", "bg": "ivory_cotton.png", "script": "Bonheur Royale"},
- "41": {"name": "Painted Lily Pond", "ink": "#2F3A45", "deep": "#3F5A73", "ivory": "#F4EEDF", "primary": "#6F8FAE", "bg": "canvas_ground.png", "script": "Comforter Brush"},
- "42": {"name": "Espresso Pastoral", "ink": "#2A1E17", "deep": "#6E5140", "ivory": "#F1E6D2", "primary": "#3B2A21", "bg": "cream_parchment.png", "script": "Mea Culpa"},
- "43": {"name": "Chartreuse Garden Party", "ink": "#2A1B1F", "deep": "#6B1730", "ivory": "#FBF6EA", "primary": "#C7CF3C", "bg": "cream_paper.png", "script": "Hurricane"},
- "44": {"name": "Blue Toile Pavilion", "ink": "#22324A", "deep": "#2E4A72", "ivory": "#F7F6F1", "primary": "#2E4A72", "bg": "porcelain_paper.png", "script": "MonteCarlo"},
- "45": {"name": "Suede Ranch Lace", "ink": "#2E221A", "deep": "#714629", "ivory": "#F3EBDD", "primary": "#A97C54", "bg": "cream_paper.png", "script": "Rochester"},
- "46": {"name": "Bordeaux Silk Bow", "ink": "#2A1316", "deep": "#7A1E2C", "ivory": "#F7F1E6", "primary": "#7A1E2C", "bg": "ivory_moire.png", "script": "Carattere"},
- "47": {"name": "Monochrome Darkroom", "ink": "#161616", "deep": "#2A2A2A", "ivory": "#F4F2EE", "primary": "#A3262A", "bg": "fiber_paper.png", "script": "Herr Von Muellerhoff"},
- "48": {"name": "Navy Ivory Crest", "ink": "#1A2236", "deep": "#1C2A48", "ivory": "#F5F0E3", "primary": "#B8964F", "bg": "ivory_cotton.png", "script": "Mr De Haviland"}
+ "22": {
+  "name": "Nocturne Lake Estate",
+  "ink": "#2B2A26",
+  "deep": "#1C1D15",
+  "ivory": "#FBF6EC",
+  "primary": "#C7A978",
+  "bg": "none.png",
+  "script": "Italiana"
+ },
+ "23": {
+  "name": "Velvet Jewel Box",
+  "ink": "#2A1328",
+  "deep": "#4A2142",
+  "ivory": "#FBF5EE",
+  "primary": "#C99A86",
+  "bg": "none.png",
+  "script": "Pinyon Script"
+ },
+ "24": {
+  "name": "Grand Theatre Premiere",
+  "ink": "#0E3D40",
+  "deep": "#16595B",
+  "ivory": "#F3EBD8",
+  "primary": "#C9A45C",
+  "bg": "none.png",
+  "script": "Italianno"
+ },
+ "25": {
+  "name": "Orient Express Voyage",
+  "ink": "#1B2A22",
+  "deep": "#1E3A2C",
+  "ivory": "#F3EBD9",
+  "primary": "#B8914B",
+  "bg": "none.png",
+  "script": "Allura"
+ },
+ "26": {
+  "name": "Kintsugi & Washi",
+  "ink": "#161C36",
+  "deep": "#242E58",
+  "ivory": "#F3ECDC",
+  "primary": "#C9A55A",
+  "bg": "none.png",
+  "script": "Shippori Mincho"
+ },
+ "27": {
+  "name": "Riad Lantern Nights",
+  "ink": "#1D2A2A",
+  "deep": "#0F2F31",
+  "ivory": "#F6EEDF",
+  "primary": "#E3A54A",
+  "bg": "none.png",
+  "script": "Italianno"
+ },
+ "28": {
+  "name": "Maison Pâtisserie",
+  "ink": "#3B4636",
+  "deep": "#5E7A55",
+  "ivory": "#FBF5EC",
+  "primary": "#E8B4B8",
+  "bg": "none.png",
+  "script": "Parisienne"
+ },
+ "29": {
+  "name": "Celestial Observatory",
+  "ink": "#1A2140",
+  "deep": "#11193A",
+  "ivory": "#EEEBE3",
+  "primary": "#C8A24E",
+  "bg": "none.png",
+  "script": "Pinyon Script"
+ },
+ "30": {
+  "name": "Azulejo Mosaic",
+  "ink": "#102554",
+  "deep": "#1F4A9E",
+  "ivory": "#F2EDE3",
+  "primary": "#AE583A",
+  "bg": "none.png",
+  "script": "Italianno"
+ },
+ "31": {
+  "name": "Sky Lantern Festival",
+  "ink": "#2A2238",
+  "deep": "#2B1F45",
+  "ivory": "#F7EEDD",
+  "primary": "#F2A65A",
+  "bg": "none.png",
+  "script": "Allura"
+ },
+ "32": {
+  "name": "Music Box Ballerina",
+  "ink": "#5A3A40",
+  "deep": "#B76E79",
+  "ivory": "#FBF1EE",
+  "primary": "#EECDD0",
+  "bg": "none.png",
+  "script": "Great Vibes"
+ },
+ "39": {
+  "name": "Silver Photo Booth",
+  "ink": "#1E1E1E",
+  "deep": "#45474B",
+  "ivory": "#F5F0E6",
+  "primary": "#9EA3A8",
+  "bg": "page_ground.png",
+  "script": "Yesteryear"
+ },
+ "40": {
+  "name": "Swan Chantilly Lace",
+  "ink": "#1B1A18",
+  "deep": "#0F0E0D",
+  "ivory": "#F4EEE2",
+  "primary": "#8F8A82",
+  "bg": "ivory_cotton.png",
+  "script": "Bonheur Royale"
+ },
+ "41": {
+  "name": "Painted Lily Pond",
+  "ink": "#2F3A45",
+  "deep": "#3F5A73",
+  "ivory": "#F4EEDF",
+  "primary": "#6F8FAE",
+  "bg": "canvas_ground.png",
+  "script": "Comforter Brush"
+ },
+ "42": {
+  "name": "Espresso Pastoral",
+  "ink": "#2A1E17",
+  "deep": "#6E5140",
+  "ivory": "#F1E6D2",
+  "primary": "#3B2A21",
+  "bg": "cream_parchment.png",
+  "script": "Mea Culpa"
+ },
+ "43": {
+  "name": "Chartreuse Garden Party",
+  "ink": "#2A1B1F",
+  "deep": "#6B1730",
+  "ivory": "#FBF6EA",
+  "primary": "#C7CF3C",
+  "bg": "cream_paper.png",
+  "script": "Hurricane"
+ },
+ "44": {
+  "name": "Blue Toile Pavilion",
+  "ink": "#22324A",
+  "deep": "#2E4A72",
+  "ivory": "#F7F6F1",
+  "primary": "#2E4A72",
+  "bg": "porcelain_paper.png",
+  "script": "MonteCarlo"
+ },
+ "45": {
+  "name": "Suede Ranch Lace",
+  "ink": "#2E221A",
+  "deep": "#714629",
+  "ivory": "#F3EBDD",
+  "primary": "#A97C54",
+  "bg": "cream_paper.png",
+  "script": "Rochester"
+ },
+ "46": {
+  "name": "Bordeaux Silk Bow",
+  "ink": "#2A1316",
+  "deep": "#7A1E2C",
+  "ivory": "#F7F1E6",
+  "primary": "#7A1E2C",
+  "bg": "ivory_moire.png",
+  "script": "Carattere"
+ },
+ "47": {
+  "name": "Monochrome Darkroom",
+  "ink": "#161616",
+  "deep": "#2A2A2A",
+  "ivory": "#F4F2EE",
+  "primary": "#A3262A",
+  "bg": "fiber_paper.png",
+  "script": "Herr Von Muellerhoff"
+ },
+ "48": {
+  "name": "Navy Ivory Crest",
+  "ink": "#1A2236",
+  "deep": "#1C2A48",
+  "ivory": "#F5F0E3",
+  "primary": "#B8964F",
+  "bg": "ivory_cotton.png",
+  "script": "Mr De Haviland"
+ }
 }

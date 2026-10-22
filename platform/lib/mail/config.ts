@@ -29,7 +29,7 @@ export interface SmtpConfig {
 export type MailSetup = { state: 'ready'; config: SmtpConfig } | { state: 'missing'; missing: string[] };
 
 /** A Gmail app password as Google shows it ("abcd efgh ijkl mnop"): the spaces are not part of it. */
-function cleanPass(raw: string): string {
+export function cleanPass(raw: string): string {
   const t = raw.trim();
   return /^[a-z]{4}( [a-z]{4}){3}$/i.test(t) ? t.replace(/ /g, '') : t;
 }

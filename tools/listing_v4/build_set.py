@@ -13,7 +13,10 @@ import slides
 THEMES = {nn: th for nn, th, _ in json.loads((HERE / "themes.json").read_text())}
 PICKS = json.loads((HERE / "picks.json").read_text())
 # what opens on the first page (from the opening of each design)
-OPENS = {"06": "gatefold", "09": "linen pouch", "12": "travel wallet", "13": "storybook", "14": "lace gatefold", "18": "vellum sleeve"}
+OPENS = {"06": "gatefold", "09": "linen pouch", "12": "travel wallet", "13": "storybook", "14": "lace gatefold", "18": "vellum sleeve",
+         # 23–32: the word each listing (listing_v3.md) uses for its opening object
+         "23": "jewel box", "24": "velvet curtain", "25": "ticket wallet", "26": "origami", "27": "riad doors", "28": "parcel",
+         "29": "star chart", "30": "tile panel", "31": "silk pouch", "32": "music box"}
 SCRIPTS = ("Vibes", "Script", "Pinyon", "Allura", "Parisienne", "Italianno", "Alex Brush", "Tangerine", "Monsieur", "Rouge",
            "Petit Formal", "Herr Von", "Mrs Saint", "Imperial", "Bilbo", "Carattere", "Ballet", "Corinthia", "Luxurious",
            "Hurricane", "Meow", "Birthstone", "Water Brush", "Sacramento", "Dancing", "Satisfy", "Cormorant Upright")

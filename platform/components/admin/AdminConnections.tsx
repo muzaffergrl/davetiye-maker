@@ -2,7 +2,7 @@
 // Shop admin — "Bağlantılar" card (G147): email sending (on / not configured, test email) and the Etsy shop connection
 // (connect once, disconnect, re-check pending orders). Calls /api/admin/connections (lib/admin/connections.ts).
 // Only env NAMES are ever shown, never values; the notice address is shown partly hidden.
-import { Mail, RefreshCw, Store, Unplug } from 'lucide-react';
+import { Inbox, Mail, RefreshCw, Store, Unplug } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -10,6 +10,7 @@ import type { TrustSweepSummary } from '../../lib/claim/trust.ts';
 import type { RecheckSummary } from '../../lib/etsy/recheck.ts';
 import type { EtsyStatus } from '../../lib/etsy/shop.ts';
 import type { MailStatus } from '../../lib/mail/index.ts';
+import type { MailboxStatus } from '../../lib/mailbox/verify.ts';
 import styles from './admin.module.css';
 import { stamp } from './format.ts';
 
@@ -45,7 +46,8 @@ function StatusLine({ status }: { status: Status }) {
   );
 }
 
-export default function AdminConnections(props: { mail: MailStatus; etsy: EtsyStatus }) {
+export default function AdminConnections(props: { mail: MailStatus; mailbox: MailboxStatus; etsy: EtsyStatus }) {
+  const mailbox = props.mailbox;
   const router = useRouter();
   const [mail, setMail] = useState(props.mail);
   const [etsy, setEtsy] = useState(props.etsy);
@@ -130,6 +132,71 @@ export default function AdminConnections(props: { mail: MailStatus; etsy: EtsySt
         <StatusLine status={status['mail-test'] ?? null} />
       </div>
 
+      {/* G192: the order mailbox (Etsy's sale emails in Gmail) — trust mode verifies orders from it until Etsy is connected. */}
+      <div data-mailbox-status={mailbox.enabled ? 'on' : 'off'} style={{ marginBottom: 18 }}>
+        <div className={styles.row} style={{ justifyContent: 'space-between' }}>
+          <strong>
+            <Inbox size={16} aria-hidden /> Sipariş e-postaları (Gmail)
+          </strong>
+          {mailbox.enabled ? <span className={styles.badgeOk}>Açık</span> : <span className={styles.badgeMuted}>Ayarlanmadı</span>}
+        </div>
+        {mailbox.enabled ? (
+          <>
+            <p className={styles.hint}>
+              {mailbox.user} kutusundaki Etsy &quot;You made a sale&quot; e-postalarıyla sipariş doğrulanır (yalnız Etsy imzalı, yalnız &quot;Order #&quot;
+              numarası){mailbox.source === 'smtp' ? '; giriş, e-posta gönderimindeki Gmail hesabıyla' : ''}. Kutuda yalnız okunur, hiçbir şey değişmez.
+            </p>
+            <div className={styles.row} style={{ marginTop: 10 }}>
+              <button
+                type="button"
+                className={styles.btnSmall}
+                disabled={busy !== null}
+                onClick={async () => {
+                  const data = await act('mailbox-test');
+                  if (data) {
+                    setStatus((m) => ({
+                      ...m,
+                      'mailbox-test': {
+                        kind: 'ok',
+                        text: `Gmail'e bağlanıldı. Son 30 günde Etsy'den ${data.etsyMails} e-posta var${data.etsyMails ? '' : ' (Etsy bildirimleri bu adrese mi geliyor? Etsy → Settings → Account → Email)'}.`,
+                      },
+                    }));
+                  }
+                }}
+                data-action="mailbox-test"
+              >
+                {busy === 'mailbox-test' ? 'Bağlanılıyor…' : 'Gelen kutusunu dene'}
+              </button>
+              {etsy.mode === 'trust' ? (
+                <button
+                  type="button"
+                  className={styles.btnSmall}
+                  disabled={busy !== null}
+                  onClick={async () => {
+                    setTrust(null);
+                    const data = await act('trust-sweep');
+                    if (data?.trust) {
+                      setTrust(data.trust);
+                      if (data.trust.verified || data.trust.held || data.trust.review) router.refresh();
+                    }
+                  }}
+                  data-action="trust-sweep"
+                >
+                  <RefreshCw size={16} aria-hidden /> {busy === 'trust-sweep' ? 'Kontrol ediliyor…' : 'Doğrulanmamış siparişleri şimdi kontrol et'}
+                </button>
+              ) : null}
+            </div>
+          </>
+        ) : (
+          <p className={styles.hint}>
+            Etsy bağlanana kadar siparişleri Gmail&apos;deki Etsy satış e-postalarından doğrulamak için: ORDER_MAIL_USER (Etsy bildirimlerinin geldiği
+            Gmail) ve ORDER_MAIL_PASS (o hesabın 16 harfli uygulama şifresi). E-posta gönderimi aynı Gmail&apos;le ayarlıysa ayrıca gerekmez (kurulum:
+            docs/10 §3).
+          </p>
+        )}
+        <StatusLine status={status['mailbox-test'] ?? status['trust-sweep'] ?? null} />
+      </div>
+
       {/* Etsy */}
       <div data-etsy-status={!etsy.configured ? 'not_configured' : etsy.connected ? 'connected' : 'not_connected'}>
         <div className={styles.row} style={{ justifyContent: 'space-between' }}>
@@ -140,7 +207,12 @@ export default function AdminConnections(props: { mail: MailStatus; etsy: EtsySt
         </div>
         <p className={styles.hint}>Sipariş kontrolü: {MODE_TEXT[etsy.mode]}</p>
 
-        {etsy.mode === 'trust' && (!etsy.connected || etsy.reconnect) ? (
+        {etsy.mode === 'trust' && (!etsy.connected || etsy.reconnect) && mailbox.enabled ? (
+          <p className={styles.hint} data-trust-mailbox="">
+            Etsy bağlı değil: siparişler saatte bir Gmail&apos;deki Etsy satış e-postalarından doğrulanıyor (yukarıda). İptal/iade e-postası gelen
+            site yayından kalkar; 48 saatte satış e-postası bulunamayan sipariş &quot;Yapılacak&quot;a düşer.
+          </p>
+        ) : etsy.mode === 'trust' && (!etsy.connected || etsy.reconnect) ? (
           <div className={styles.callout} role="note" style={{ marginTop: 10 }} data-trust-manual="">
             <p className={styles.calloutTitle} style={{ marginBottom: 4 }}>
               Etsy bağlı değil — siparişler kendiliğinden doğrulanmıyor
@@ -282,10 +354,15 @@ export default function AdminConnections(props: { mail: MailStatus; etsy: EtsySt
             ) : null}
           </div>
         ) : null}
+        {trust && !trust.checked ? (
+          <p className={`${styles.status} ${styles.statusOk}`} role="status" data-trust-summary="">
+            Doğrulanmamış sipariş yok.
+          </p>
+        ) : null}
         {trust && trust.checked ? (
           <div className={`${styles.status} ${styles.statusOk}`} role="status" data-trust-summary="">
             <p style={{ margin: 0 }}>
-              Önce güven: {trust.checked} doğrulanmamış sipariş kontrol edildi: {trust.verified} onaylandı, {trust.held} yayından kaldırılıp beklemeye
+              {trust.etsy ? '' : 'Etsy de Gmail de sorulamadı; '}Önce güven: {trust.checked} doğrulanmamış sipariş kontrol edildi: {trust.verified} onaylandı, {trust.held} yayından kaldırılıp beklemeye
               alındı, {trust.review} için 48 saat doldu, {trust.waiting} bekliyor.
               {trust.remaining ? ` ${trust.remaining} sipariş daha var: yeniden basın.` : ''}
             </p>
