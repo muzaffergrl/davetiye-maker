@@ -570,9 +570,9 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     id: 'chartreuse-garden-party',
     collection: '43_Chartreuse_Garden_Party',
     demoCouple: 'Poppy & Hugo',
-    style: msg('A landscape chartreuse envelope held shut by a single pink ranunculus, hand-painted gouache flowers and black-and-white instant prints on gold florist picks'),
+    style: msg('A landscape chartreuse envelope held shut by a single pink ranunculus, gouache-style flowers and black-and-white instant prints on gold florist picks'),
     metaDescription: msg('A chartreuse garden party wedding website: the ranunculus slides out, gouache flowers burst open and your invitation rises out of the envelope. Personalize it in your online editor.'),
-    intro: msg('Bright chartreuse paper, cream cotton and hand-painted gouache peonies, ranunculus, sweet peas and burgundy cosmos, like a spring party in the garden. Your invitation waits in a scalloped envelope, and every photo is a black-and-white instant print that rises out of a flower arrangement.'),
+    intro: msg('Bright chartreuse paper, cream cotton and gouache-style peonies, ranunculus, sweet peas and burgundy cosmos, like a spring party in the garden. Your invitation waits in a scalloped envelope, and every photo is a black-and-white instant print that rises out of a flower arrangement.'),
     opening: msg('Your guests tap the envelope. The pink ranunculus slides its stem out of the flap and tumbles away, the scalloped flap opens onto a lining of painted flowers, four flower clusters burst out one after another, and the card with your portrait turns upright as it rises out of the envelope to become your home page.'),
     pages: {
       home: msg('Your portrait as a black-and-white instant print on a cream card with painted flowers at two corners, then the invitation between garlands of small flowers, a countdown and calendar links, three prints rising out of a flower arrangement and the day on a chartreuse band.'),
