@@ -81,7 +81,7 @@ QR codes fail on paper for a handful of predictable reasons. Check each one befo
 - [ ] Scan the printed proof with two different phones, in normal indoor light
 - [ ] Make sure the address it opens will stay the same until after the wedding
 
-The last point matters more than it looks. A code printed on two hundred cards cannot be changed. If you might move your website later, use an address you control for as long as guests need it, not a temporary link. Our guide to [QR codes for wedding RSVPs](/guides/qr-code-wedding-rsvp) covers static and redirect codes, sizes for signs and logos in the code.
+The last point matters more than it looks. A code printed on two hundred cards cannot be changed. If you might move your website later, use an address you control for as long as guests need it, not a temporary link. Our guide to [QR codes for wedding RSVPs](/guides/qr-code-wedding-rsvp) covers static and redirect codes, sizes for signs and logos in the code. For paper, bleed and envelopes, see [how to print wedding invitations at home or a print shop](/guides/print-wedding-invitations-at-home).
 
 ## Digital invitations: the link is the invitation
 

@@ -59,7 +59,7 @@ Short labels read best on a phone. Put the place in its own field if your websit
 | 8:30 PM | First dance and dancing | The Grand Hall |
 | 11:00 PM | Farewell | Main entrance |
 
-If guests arrive before the ceremony, add "Guests arrive" or "Doors open" fifteen to thirty minutes earlier, so nobody turns up exactly on time and misses the start.
+If guests arrive before the ceremony, add "Guests arrive" or "Doors open" fifteen to thirty minutes earlier, so nobody turns up exactly on time and misses the start. For events on other days, see our [wedding weekend itinerary](/guides/wedding-weekend-itinerary) guide.
 
 ## Dress code wording
 

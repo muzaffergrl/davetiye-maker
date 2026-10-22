@@ -94,7 +94,7 @@ Destination weddings often stretch over two or three days. Lay them out so guest
 - **Saturday, June 12, 2027:** ceremony at 4:00 pm, reception to follow (all guests)
 - **Sunday, June 13, 2027:** farewell brunch, 11:00 am (all guests)
 
-Write the time zone once at the top of the schedule: *"All times are local time in Lisbon (WEST, UTC+1)."* Guests adding events to their calendars from another country will see the right times.
+Write the time zone once at the top of the schedule: *"All times are local time in Lisbon (WEST, UTC+1)."* Guests adding events to their calendars from another country will see the right times. Our [wedding weekend itinerary](/guides/wedding-weekend-itinerary) guide covers what to tell guests about each event, and when.
 
 ## Answer the cost question honestly
 

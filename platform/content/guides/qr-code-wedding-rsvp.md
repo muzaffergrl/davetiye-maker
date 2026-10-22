@@ -87,7 +87,7 @@ If your website has a guest password, print it next to the code too, or guests w
 4. Check that it opens the right page, and that the reply form works when you send a test reply.
 5. Delete the test reply before inviting guests, if your platform lets you.
 
-For the questions on the reply form itself, see [which RSVP questions to ask](/guides/wedding-rsvp-questions).
+For the questions on the reply form itself, see [which RSVP questions to ask](/guides/wedding-rsvp-questions). For paper, bleed and envelopes, see [how to print wedding invitations at home or a print shop](/guides/print-wedding-invitations-at-home).
 
 ## QR codes on our wedding websites
 
