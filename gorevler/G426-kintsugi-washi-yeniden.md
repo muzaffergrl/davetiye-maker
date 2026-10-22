@@ -2,7 +2,7 @@
 id: G426
 baslik: Tasarım 26 Kintsugi & Washi — tema yeniden kurulumu (39 pilot yapısı, PAKET 5R parçaları)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan:
 oncelik: 2
 bagimli: [G226, G423]
@@ -55,3 +55,5 @@ parçalarından (26 dosya, hepsi var) yeniden kuruldu; çizim yok (K21).
   (`scratchpad/g426/kintsugi-washi-sheet.png`). Bekleyen: katalog kapak/klibi yeniden yakalama, paletler (variants),
   font-fallback ölçümü, gerçek cihaz denemesi.
 
+## Günlük
+- 2026-10-22 entegratör onayladı

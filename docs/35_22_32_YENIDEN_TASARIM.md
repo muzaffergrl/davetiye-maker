@@ -174,5 +174,15 @@ Küçük makinede 10 ayrı `next dev` çalışmaz (15 GB / 4 çekirdek). Her otu
   PAKET 3 GEÇERSİZ) ve `assets/gpt/kuru_sekil.json` yeniden yazıldı.
 - GPT bekleyen: 22–32 için **261 görsel** (PAKET 5R 239 parça + PAKET 6R 22 baskı zemini; tasarım başına 22–28).
 - Görev dosyaları G222–G232, G422–G432; `docs/26` / `docs/27` `tools/gpt_bekleyen.py --yaz` ile yenilendi.
-- Henüz yapılmayan: GPT görselleri (G222–G232), tema yeniden kurulumu (G422–G432). Mevcut canlı demo sayfaları bu süreçte
-  değişmedi.
+- GPT görselleri (G222–G232) geldi; pilot G423 + kalan 10 tema (G422, G424–G432) paralel worktree'lerde yeniden kuruldu
+  ve bu dala birleştirildi. Eski Codex testleri (`unique-openings`, `unique-interiors`, `physical-lining` + fikstürler,
+  `test_recolor_parts` G177) kaldırıldı; 11 tema `designs.ts` `REBUILT` tablosunda.
+- Entegrasyon rötuşları: Kintsugi sahne küçülmesi kanatlardan sonra; Nocturne koyu zarfa ay ışığı/kenar parıltısı;
+  Music Box kapak isimleri koyu + büyük. `scripts/marketing-assets.ts` artık `assets.json`'da canlıları önce yazar (g082–g097).
+- Katalog kartları: 10 tema production build + `capture.ts` ile yeniden yakalandı (`assets.json`, `public/marketing/designs/`).
+
+### 7a. Açık kalanlar
+
+- Renk varyantları (palet) yeni parçalardan yeniden üretilmedi; `theme.json`'dan `variants` kaldırıldı.
+- Gerçek telefon testi yok (yalnız headless Chromium 390×844 / 360×740).
+- Yazı tipi yedekleri ve baskı (print) çıktıları yalnız otomatik testle denetlendi; basılı deneme yok.

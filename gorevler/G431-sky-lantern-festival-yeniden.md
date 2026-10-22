@@ -2,7 +2,7 @@
 id: G431
 baslik: Tasarım 31 Sky Lantern Festival — tema yeniden kurulumu (39 pilot yapısı, PAKET 5R parçaları)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-session-01HjhGPm
 oncelik: 2
 bagimli: [G231, G423]
@@ -55,3 +55,6 @@ Yeniden kurulum tamamlandı (2026-10-22, dal `claude/g431-sky-lantern-festival`)
   demo fotoğrafları; Codex fikstürlerinden ve listelerden tema çıkarıldı.
 - Ertelenen: paletler (variants) yeni sanattan; font-fallback ölçümü (Corinthia) yeniden koşulmadı; katalog kapak/klip
   yeniden yakalama (üretim build'i, entegratör).
+
+## Günlük
+- 2026-10-22 entegratör onayladı

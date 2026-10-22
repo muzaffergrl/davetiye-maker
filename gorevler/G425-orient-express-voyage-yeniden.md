@@ -2,7 +2,7 @@
 id: G425
 baslik: Tasarım 25 Orient Express Voyage — tema yeniden kurulumu (39 pilot yapısı, PAKET 5R parçaları)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan:
 oncelik: 2
 bagimli: [G225, G423]
@@ -51,3 +51,6 @@ PAKET 2'si. Test: `tests/theme-orient-express-voyage.test.ts` 12/12; istenen set
 Kareler 390×844, 360×740, 1280×800 + gerçek zamanlı açılış/kaydırma. Bekleyen: katalog kapak/klip yakalama (üretim
 build'i), `variants` paletleri, gerçek cihaz denemesi, `platform/previews/g425/` (seyrek checkout'ta yok, kareler oturum
 geçici klasöründe).
+
+## Günlük
+- 2026-10-22 entegratör onayladı

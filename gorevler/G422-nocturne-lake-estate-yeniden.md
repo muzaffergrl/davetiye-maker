@@ -2,7 +2,7 @@
 id: G422
 baslik: Tasarım 22 Nocturne Lake Estate — tema yeniden kurulumu (39 pilot yapısı, PAKET 5R parçaları)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan:
 oncelik: 2
 bagimli: [G222, G423]
@@ -53,3 +53,6 @@ Kuruldu (2026-10-22, dal `claude/g422-nocturne-lake-estate`; birleştirme entegr
   (kutular ölçüldü), katalog eksenleri, font-fallback ölçüldü.
 - Ertelenen: paletler (variants), katalog kartı/klibi yeniden yakalama (`public/marketing`, assets.json bu görevde yok),
   `platform/previews/g422/` (seyrek checkout'ta yok; kareler oturum karalama klasöründe).
+
+## Günlük
+- 2026-10-22 entegratör onayladı

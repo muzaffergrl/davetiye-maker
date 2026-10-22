@@ -2,7 +2,7 @@
 id: G427
 baslik: Tasarım 27 Riad Lantern Nights — tema yeniden kurulumu (39 pilot yapısı, PAKET 5R parçaları)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-session-01HjhGPm
 oncelik: 2
 bagimli: [G227, G423]
@@ -53,3 +53,6 @@ Yeniden kuruldu (2026-10-22, dal `claude/g427-riad-lantern-nights`).
 - Platform: designs.ts metinleri (+tr/de/es/fr), ses zamanları, PAKET 6R baskı düzeni (kutular ölçüldü), katalog
   eksenleri, demo fotoğrafları; Codex test listelerinden çıkarıldı.
 - Ertelenen: paletler (variants), font-fallback ölçümü (Cinzel için tahmini değer), katalog kartı/klibi yeniden yakalama.
+
+## Günlük
+- 2026-10-22 entegratör onayladı

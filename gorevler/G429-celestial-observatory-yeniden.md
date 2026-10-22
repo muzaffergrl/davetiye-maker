@@ -2,7 +2,7 @@
 id: G429
 baslik: Tasarım 29 Celestial Observatory — tema yeniden kurulumu (39 pilot yapısı, PAKET 5R parçaları)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-session-01HjhGPm
 oncelik: 2
 bagimli: [G229, G423]
@@ -52,3 +52,6 @@ G429 tamamlandı (2026-10-22, dal `claude/g429-celestial-observatory`; pilot G42
   (kutular ölçüldü, örnek PDF göz kontrolü), katalog eksenleri, Codex fikstürlerinden çıkarıldı, demo fotoğrafları.
 - Göz kontrolü: 390×844, 360×740, 1280×800 Chromium; açılış sabit zamanlarda ve gerçek zamanlı; taşma 0. Gerçek telefonda denenmedi.
 - Ertelenen: paletler (variants) yeni sanattan; font-fallback Imperial Script için yeniden ölçülmedi; katalog kartı/klibi yeniden yakalanmadı.
+
+## Günlük
+- 2026-10-22 entegratör onayladı

@@ -2,7 +2,7 @@
 id: G423
 baslik: Tasarım 23 Velvet Jewel Box — tema yeniden kurulumu (39 pilot yapısı, PAKET 5R parçaları)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-session-01HjhGPm
 oncelik: 1
 bagimli: [G223]
@@ -48,3 +48,5 @@ Pilot tamamlandı (2026-10-22; commit'ler 3b29582a, f744c017, dal `claude/modest
   katalog ekranları + açılış klibi yeniden yakalandı.
 - Ertelenen: paletler (variants) yeni sanattan yeniden üretilecek; font-fallback ölçümü yeniden koşulmadı.
 
+## Günlük
+- 2026-10-22 entegratör onayladı

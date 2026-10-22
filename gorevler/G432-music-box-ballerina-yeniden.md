@@ -2,7 +2,7 @@
 id: G432
 baslik: Tasarım 32 Music Box Ballerina — tema yeniden kurulumu (39 pilot yapısı, PAKET 5R parçaları)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan: claude-session-01HjhGPm
 oncelik: 2
 bagimli: [G232, G423]
@@ -55,3 +55,6 @@ Tema yeniden kuruldu (2026-10-22, dal `claude/g432-music-box-ballerina`; pilot G
   test listelerinden/fikstürlerinden 32 çıkarıldı.
 - Ertelenen: paletler (variants) yeni sanattan; font-fallback ölçümü Ballet için yeniden koşulmadı; katalog kapak/klibi
   yeniden yakalanmadı (üretim build'i ister).
+
+## Günlük
+- 2026-10-22 entegratör onayladı

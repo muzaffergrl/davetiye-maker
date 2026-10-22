@@ -2,7 +2,7 @@
 id: G428
 baslik: Tasarım 28 Maison Pâtisserie — tema yeniden kurulumu (39 pilot yapısı, PAKET 5R parçaları)
 rol: claude-kod
-durum: inceleme
+durum: bitti
 alan:
 oncelik: 2
 bagimli: [G228, G423]
@@ -59,3 +59,6 @@ Yeniden kurulum tamamlandı (2026-10-22, dal `claude/g428-maison-patisserie`); i
   denenmedi.
 - Ertelenen: paletler (variants) yeni sanattan; font-fallback ölçümü; katalog kapak/klip yeniden yakalama (üretim build'i
   ister); eski `print/invitation_front.png`/`invitation_back.png` dosyaları duruyor.
+
+## Günlük
+- 2026-10-22 entegratör onayladı
