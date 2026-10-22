@@ -337,15 +337,16 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     ink: '#141A33', accent: '#7A5A1E', front: [18.5, 12, 11, 12], back: [13, 11, 9, 11],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 30 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
+  // 30 (G430, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): glaze-white card, a row of cobalt azulejo
+  // border tiles with a stepped three-tile cresting across the top (down to ~15.3 %) and a double cobalt rule with a
+  // small rosette tile near the bottom (from ~91.8 %) on the front; a five-tile frieze at the top of the back (~11.8 %).
+  // `cover` for 5×7 and A5 (ChatGPT's 1069×1472). Dark ink on the glaze; boxes ~2 % clear of it all.
   'azulejo-mosaic': {
     collection: '30_Azulejo_Mosaic',
-    sources: { front: 'print/invitation_front.png', back: 'print/invitation_back.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Arizonia&family=Cormorant+Upright:wght@400;500;600'),
     script: "'Arizonia', cursive", serif: "'Cormorant Upright', Georgia, serif",
-    ink: '#173A80', accent: '#8C4128', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#173A80', accent: '#8C4128', front: [17.5, 11, 10.5, 11], back: [14, 11, 9, 11],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
   // 31 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's

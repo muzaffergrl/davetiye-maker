@@ -1284,9 +1284,9 @@ const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> 
     home: msg("Midnight paper, silver-ivory chart paper, gold leaf and antique brass. Your portrait sits in a gilded celestial medallion and your story in brass planisphere rings that turn as guests scroll."),
   },
   'azulejo-mosaic': {
-    style: msg("Cobalt-and-ivory envelope, terracotta accent and Portuguese azulejo-inspired details."),
-    opening: msg("Your guests tap the envelope. Three azulejo folder panels unfold in sequence, revealing the cobalt-tile portrait invitation before the wedding home page opens."),
-    home: msg("Cobalt, whitewash and terracotta recall painted tiles in the sun. Open the invitation to reveal your story and celebration, tile by tile."),
+    style: msg("Glaze-white envelope with a stepped flap of painted cobalt azulejo tiles, tied with jute twine and closed by a loose swallow tile."),
+    opening: msg("Your guests tap the envelope. The jute twine slips off, the loose swallow tile turns over to show its terracotta back and drops away, the stepped tile flap opens onto its terracotta lining and the card with your portrait rises from behind the pocket before the wedding home page opens."),
+    home: msg("Sunlit whitewash, cobalt tiles and warm terracotta. Your portrait sits in a tiled limestone niche and every photo is uncovered tile by tile."),
   },
   'sky-lantern-festival': {
     style: msg("Dusky-plum envelope, an amber lantern charm and lantern-lit details at twilight."),
@@ -1315,18 +1315,6 @@ for (const [id, preview] of Object.entries(PREVIEW_DESIGN_COPY)) {
 
 // Interior art/layout/motion differ for these eleven previews; envelope copy and other products are unchanged.
 const UNIQUE_INTERIORS: Record<string,{fonts:string[];home:string;story:string;details:string;rsvp:string}> = {
-  "azulejo-mosaic": {
-    "fonts": [
-      "Cormorant Garamond",
-      "Great Vibes",
-      "Lora",
-      "Italianno"
-    ],
-    "home": "A Portuguese porcelain suite with a cobalt tile portrait and matching azulejo stationery.",
-    "story": "Square azulejo photo tiles form a porcelain mosaic gallery with cobalt captions.",
-    "details": "A tile-framed celebration programme with terracotta time accents and a square venue panel.",
-    "rsvp": "A cobalt-and-porcelain reply panel with terracotta accents."
-  },
   "sky-lantern-festival": {
     "fonts": [
       "Cormorant Garamond",
@@ -1490,6 +1478,22 @@ const REBUILT: Record<string, Pick<DesignCopy, 'fonts' | 'pages' | 'palette' | '
       { name: msg('Brass'), hex: '#9B7A3C' },
     ],
     llmsLine: 'a midnight-blue envelope with a gold-foil dome flap closed by a turning brass astrolabe, a gilded celestial medallion portrait and round planisphere photo rings.',
+  },
+  'azulejo-mosaic': {
+    fonts: ['Arizonia', 'Cormorant Upright'],
+    pages: {
+      home: msg('Your portrait in a tiled limestone niche on a glaze-white card, uncovered tile by tile, the invitation on a band edged with border tiles, a countdown and calendar links, and a terracotta pot to sign off.'),
+      story: msg('Three photos in azulejo-bordered frames, left, right and left; each one is uncovered tile by tile as guests scroll to it.'),
+      details: msg('The order of the day on a glaze-white card under a frieze of tiles, the venue in a wide tile-panel frame, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('A glaze-white reply card with your reply-by date and the configurable RSVP form; a row of tiles turns over and olive leaves drift down when a reply is sent.'),
+    },
+    palette: [
+      { name: msg('Whitewash'), hex: '#F2EDE3' },
+      { name: msg('Cobalt'), hex: '#1F4A9E' },
+      { name: msg('Night blue'), hex: '#102554' },
+      { name: msg('Terracotta'), hex: '#AE583A' },
+    ],
+    llmsLine: 'a glaze-white envelope with a stepped flap of painted cobalt azulejo tiles, tied with jute twine and closed by a loose swallow tile; photos uncovered tile by tile; cobalt, whitewash and terracotta.',
   },
 };
 for (const [id, r] of Object.entries(REBUILT)) Object.assign(DESIGN_COPY[id], r);
