@@ -120,7 +120,8 @@ def test_pdf(tmp: Path):
     pdf = b.build_pdf(md, tmp / "START_HERE.pdf", png, v["START_URL"], v["DESIGN_NAME"])
     uris = b.pdf_uris(pdf)
     assert v["START_URL"] in uris and set(uris) == {v["START_URL"], v["PRIVACY_URL"], v["MY_URL"]}, uris
-    assert 5 <= b.pdf_page_count(pdf) <= 10, b.pdf_page_count(pdf)  # G154: + Languages and Downloads (10 pages)
+    # G154: + Languages and Downloads (10 pages); 2026-10-22 look: cover, quick start page, contents (13–14 pages)
+    assert 8 <= b.pdf_page_count(pdf) <= 15, b.pdf_page_count(pdf)
     text = b.eu.lk.pdf_text(pdf) or ""
     # since G121 even the preview tab names the wallet: no "envelope" in any case
     assert "Tropical Destination" in text and "tap the wallet" in text and "envelope" not in text.lower(), text[:200]
