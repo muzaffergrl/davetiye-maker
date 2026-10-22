@@ -20,7 +20,7 @@ Kullanıcı (2026-10-22): "N9 ve N10'u 4 dile çevir".
 - Doğrulama: **16 rehberin 64 çevirisinin hepsinde** link kümesi, H2 ve SSS sayısı İngilizceyle aynı; kırık link, jeton ve
   frontmatter kaçışı yok; başlık ≤ 60, açıklama ≤ 160 (TR N9 başlığı ve 3 açıklama kısaltıldı).
 - Build: N9, N10 × 4 dil, 8 sayfa 200, tek H1, `html lang` ve Article `inLanguage` doğru, İngilizce uyarısı yok.
-- Testler: TEST_SONUCU
+- Testler: `npm test` 1696/1696 (0 hata, 0 atlanan; build güncel), typecheck temiz.
 - Ana dili konuşan biri tarafından okunmadı.
 
 ## Günlük
