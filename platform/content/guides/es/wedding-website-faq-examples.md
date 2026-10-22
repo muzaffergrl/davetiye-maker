@@ -91,7 +91,7 @@ Lo mismo vale para las bodas solo de adultos, los regalos en dinero y la ceremon
 ## Qué no poner en las preguntas frecuentes
 
 - **Datos privados.** Direcciones de casa, códigos de portal o el sitio de una fiesta posterior con amigos íntimos van en mensajes personales, no en una página que cualquiera con el enlace puede abrir.
-- **Información que va en otro sitio.** El programa, el mapa y los hoteles tienen su propia sección; las preguntas frecuentes deben remitir a ellas, no repetirlas.
+- **Información que va en otro sitio.** El programa, el mapa y los hoteles tienen su propia sección; las preguntas frecuentes deben remitir a ellas, no repetirlas. Para los invitados que viajan, nuestra [lista para la web de una boda de destino](/guides/destination-wedding-website-checklist) explica qué necesitan esas secciones.
 - **Bromas que necesitan contexto.** Las respuestas graciosas están bien si las entiende cualquier invitado.
 - **Cantidades de regalo.** Aunque prefieras regalos en dinero, no sugieras nunca una cantidad.
 

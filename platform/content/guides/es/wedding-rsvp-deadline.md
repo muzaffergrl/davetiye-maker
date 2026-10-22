@@ -80,7 +80,7 @@ El día después de tu fecha límite, descarga tus respuestas y compáralas con 
 
 ## Cómo gestionan la fecha límite nuestras webs de boda
 
-Fijas la fecha límite en tu panel y los invitados la ven en tu página de RSVP. El formulario se cierra solo al final de ese día, en la zona horaria de tu web, y quienes lo abran después ven que las respuestas están cerradas. Puedes cambiar la fecha en tu panel cuando quieras, y eso también vuelve a abrir el formulario. Las respuestas, los totales y la descarga en Excel o CSV están en tu panel, y puedes añadir tú mismo las respuestas que recibas por teléfono. Mira las [funciones de RSVP](/features), prueba el formulario en la [demo de Olive & Ivory](/designs/olive-ivory) y lee [cuándo enviar tu web de boda y las invitaciones](/guides/when-to-send-your-wedding-website) para el calendario completo, desde el save the date hasta el día.
+Fijas la fecha límite en tu panel y los invitados la ven en tu página de RSVP. El formulario se cierra solo al final de ese día, en la zona horaria de tu web, y quienes lo abran después ven que las respuestas están cerradas. Puedes cambiar la fecha en tu panel cuando quieras, y eso también vuelve a abrir el formulario. Las respuestas, los totales y la descarga en Excel o CSV están en tu panel, y puedes añadir tú mismo las respuestas que recibas por teléfono. Mira las [funciones de RSVP](/features), prueba el formulario en la [demo de Olive & Ivory](/designs/olive-ivory) y lee [cuándo enviar tu web de boda y las invitaciones](/guides/when-to-send-your-wedding-website) para el calendario completo, desde el save the date hasta el día. Si todavía estás montando tu web, empieza por [cómo hacer una web de boda desde el móvil](/guides/how-to-make-a-wedding-website).
 
 ## FAQ
 

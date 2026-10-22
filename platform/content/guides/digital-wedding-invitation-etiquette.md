@@ -74,6 +74,15 @@ Short, warm and clear about the action you need. Adapt these:
 **When children are invited:**
 *"Hi Jo! The whole family is invited, little ones included. When you reply, let us know their ages so we can plan meals: (link)."*
 
+**With a plus-one:**
+*"Hi Leo! We'd love you to join us on June 12, and you're welcome to bring a guest. When you reply, just add their name: (link)."*
+
+**If a detail changes after you have sent it:**
+*"Hi Maya, a quick update: the ceremony now starts at 4:30 pm instead of 4:00 pm. Everything else stays the same, and the website always has the latest details: (link)."*
+
+**A save the date, months before the invitation:**
+*"Hi Sam! Save the date: we're getting married on June 12, 2027 in Napa. A formal invitation will follow, and our website already has the first details: (link)."*
+
 ## Making a digital invitation feel personal
 
 Small choices make a digital invitation feel as considered as a paper one:
@@ -90,7 +99,7 @@ A week before your reply-by date, check your list and send a gentle note to anyo
 
 *"Hi Tom, just a friendly reminder that we're finalizing numbers for the caterer. Could you reply by Friday? Here's the link again: (link). Thank you!"*
 
-After the deadline, call the last few guests. Older relatives in particular may have opened the link and not found the reply button; a quick call solves it. See our guide on [when to send your wedding website and invitations](/guides/when-to-send-your-wedding-website) for the full timeline.
+After the deadline, call the last few guests. Older relatives in particular may have opened the link and not found the reply button; a quick call solves it. See our guide on [when to send your wedding website and invitations](/guides/when-to-send-your-wedding-website) for the full timeline. Our guide on [what to do when guests don't RSVP](/guides/guests-did-not-rsvp) has a follow-up plan and more messages.
 
 ## A digital invitation that still feels like an invitation
 

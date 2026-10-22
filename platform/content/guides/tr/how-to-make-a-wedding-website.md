@@ -39,7 +39,7 @@ Doğru seçim görünüşten çok nerede düzenleyeceğinize ve yanıtların siz
 | Ne kadar süre yayında kalır | Misafirler düğünden sonra da fotoğraf ve bilgi arar | Site ne zamana kadar yayında kalacak? |
 | Hesaplar | Bazı oluşturucular sizden, bazıları misafirlerden de hesap ister | Misafirlerimin yanıt vermek için kayıt olması gerekiyor mu? |
 
-Büyük düğün hediye listesi siteleri gibi ücretsiz platformlar, tasarım aracı şablonları ve bizimki gibi barındırılan tasarımlar bu sorulara farklı yanıtlar verir. Karar vermeden önce telefonunuzda bir demo açın; size herhangi bir özellik listesinden daha fazlasını gösterir.
+Büyük düğün hediye listesi siteleri gibi ücretsiz platformlar, tasarım aracı şablonları ve bizimki gibi barındırılan tasarımlar bu sorulara farklı yanıtlar verir. Karar vermeden önce telefonunuzda bir demo açın; size herhangi bir özellik listesinden daha fazlasını gösterir. Zarftan açılan davetiyeleri seviyorsanız [animasyonlu zarf davetiyeleri](/guides/animated-envelope-wedding-invitations) rehberimiz karşınıza çıkacak iki türü anlatıyor.
 
 **Süre:** Çoğu telefonda olmak üzere 30 ila 60 dakikalık inceleme.
 
@@ -59,7 +59,7 @@ Bu adımdan sonra dursanız bile websiteniz zaten işe yarar. Geri kalan her şe
 
 ## 3. adım: Kısa bir karşılama ve hikâyenizi yazın
 
-Misafirler ilk satırları okur, sonra göz gezdirir. Karşılamayı iki üç cümlede, hikâye girişini bir iki cümlede tutun. Ne yazacağınızdan emin değilseniz [düğün websitesi metinleri rehberimizde](/guides/wedding-website-wording) her bölüm için üç farklı tonda, kısa metin alanlarına sığacak şekilde yazılmış örnekler var.
+Misafirler ilk satırları okur, sonra göz gezdirir. Karşılamayı iki üç cümlede, hikâye girişini bir iki cümlede tutun. Ne yazacağınızdan emin değilseniz [düğün websitesi metinleri rehberimizde](/guides/wedding-website-wording) her bölüm için üç farklı tonda, kısa metin alanlarına sığacak şekilde yazılmış örnekler var. Daha uzun bir hikâye için [Hikâyemiz örneklerine](/guides/wedding-website-our-story-examples) bakın.
 
 İyi bir karşılama kim olduğunuzu, misafirlerin geleceğine sevindiğinizi ve ihtiyaç duydukları bilgiyi nerede bulacaklarını söyler:
 

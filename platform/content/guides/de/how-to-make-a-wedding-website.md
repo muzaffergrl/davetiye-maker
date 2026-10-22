@@ -39,7 +39,7 @@ Die richtige Wahl hängt weniger vom Aussehen ab als davon, wo Sie bearbeiten un
 | Wie lange sie online bleibt | Gäste suchen auch nach dem Tag nach Fotos und Details | Bis wann bleibt die Seite online? |
 | Konten | Manche Baukästen brauchen ein Konto für Sie, manche auch für Gäste | Müssen sich meine Gäste registrieren, um zu antworten? |
 
-Kostenlose Plattformen wie große Hochzeits-Wunschlistenportale, Vorlagen aus Design-Tools und gehostete Designs wie unsere beantworten diese Fragen jeweils anders. Öffnen Sie vor der Entscheidung eine Demo auf Ihrem Handy; sie zeigt mehr als jede Funktionsliste.
+Kostenlose Plattformen wie große Hochzeits-Wunschlistenportale, Vorlagen aus Design-Tools und gehostete Designs wie unsere beantworten diese Fragen jeweils anders. Öffnen Sie vor der Entscheidung eine Demo auf Ihrem Handy; sie zeigt mehr als jede Funktionsliste. Mögen Sie Einladungen, die sich aus einem Umschlag öffnen, erklärt unser Ratgeber zu [animierten Umschlag-Einladungen](/guides/animated-envelope-wedding-invitations) die zwei Arten, die Sie finden werden.
 
 **Zeit:** 30 bis 60 Minuten Umschauen, meist am Handy.
 
@@ -59,7 +59,7 @@ Selbst wenn Sie nach diesem Schritt aufhören, ist Ihre Website schon nützlich.
 
 ## Schritt 3: Eine kurze Begrüßung und Ihre Geschichte schreiben
 
-Gäste lesen die ersten Zeilen und überfliegen dann. Halten Sie die Begrüßung bei zwei oder drei Sätzen und die Einleitung Ihrer Geschichte bei einem oder zwei. Wenn Sie nicht sicher sind, was Sie schreiben sollen: Unser [Ratgeber zu Texten für die Hochzeitswebsite](/guides/wedding-website-wording) hat Beispiele für jeden Abschnitt in drei Tonlagen, passend für kurze Textfelder.
+Gäste lesen die ersten Zeilen und überfliegen dann. Halten Sie die Begrüßung bei zwei oder drei Sätzen und die Einleitung Ihrer Geschichte bei einem oder zwei. Wenn Sie nicht sicher sind, was Sie schreiben sollen: Unser [Ratgeber zu Texten für die Hochzeitswebsite](/guides/wedding-website-wording) hat Beispiele für jeden Abschnitt in drei Tonlagen, passend für kurze Textfelder. Für eine längere Geschichte sehen Sie sich unsere [Beispiele für „Unsere Geschichte“](/guides/wedding-website-our-story-examples) an.
 
 Eine gute Begrüßung sagt, wer Sie sind, dass Sie sich über die Gäste freuen und wo sie finden, was sie brauchen:
 

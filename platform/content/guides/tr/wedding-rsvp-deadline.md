@@ -80,7 +80,7 @@ Son tarihinizin ertesi günü yanıtlarınızı indirin ve misafir listenizle ka
 
 ## Düğün websitelerimiz son tarihi nasıl yönetir?
 
-Son yanıt tarihinizi panelinizde belirlersiniz ve misafirler onu LCV sayfanızda görür. Form o günün sonunda, websitenizin saat diliminde kendiliğinden kapanır; sonradan açan misafirler yanıtların kapandığını görür. Tarihi panelinizde istediğiniz zaman değiştirebilirsiniz; bu formu da yeniden açar. Yanıtlar, toplamlar ve Excel ya da CSV indirme panelinizdedir; telefonla aldığınız yanıtları da kendiniz ekleyebilirsiniz. [LCV özelliklerine](/features) bakın, [Olive & Ivory demosunda](/designs/olive-ivory) yanıt formunu deneyin ve "tarihi ayırın" kartlarından düğün gününe kadar tam zaman çizelgesi için [düğün websitesi ve davetiyeler ne zaman gönderilir](/guides/when-to-send-your-wedding-website) rehberini okuyun.
+Son yanıt tarihinizi panelinizde belirlersiniz ve misafirler onu LCV sayfanızda görür. Form o günün sonunda, websitenizin saat diliminde kendiliğinden kapanır; sonradan açan misafirler yanıtların kapandığını görür. Tarihi panelinizde istediğiniz zaman değiştirebilirsiniz; bu formu da yeniden açar. Yanıtlar, toplamlar ve Excel ya da CSV indirme panelinizdedir; telefonla aldığınız yanıtları da kendiniz ekleyebilirsiniz. [LCV özelliklerine](/features) bakın, [Olive & Ivory demosunda](/designs/olive-ivory) yanıt formunu deneyin ve "tarihi ayırın" kartlarından düğün gününe kadar tam zaman çizelgesi için [düğün websitesi ve davetiyeler ne zaman gönderilir](/guides/when-to-send-your-wedding-website) rehberini okuyun. Sitenizi hâlâ kuruyorsanız [telefonunuzda düğün websitesi nasıl yapılır](/guides/how-to-make-a-wedding-website) rehberiyle başlayın.
 
 ## FAQ
 

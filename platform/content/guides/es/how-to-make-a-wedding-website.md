@@ -39,7 +39,7 @@ La elección correcta depende menos del aspecto que de dónde vas a editar y de 
 | Cuánto tiempo sigue en línea | Los invitados buscan fotos y detalles después del día | ¿Hasta cuándo seguirá activa la web? |
 | Cuentas | Algunos creadores piden una cuenta para ti y otros también para los invitados | ¿Tienen mis invitados que registrarse para responder? |
 
-Las plataformas gratuitas, como las grandes listas de bodas, las plantillas de herramientas de diseño y los diseños alojados como los nuestros responden a esto de forma distinta. Abre una demo en el móvil antes de decidir; enseña más que cualquier lista de funciones.
+Las plataformas gratuitas, como las grandes listas de bodas, las plantillas de herramientas de diseño y los diseños alojados como los nuestros responden a esto de forma distinta. Abre una demo en el móvil antes de decidir; enseña más que cualquier lista de funciones. Si te gustan las invitaciones que se abren desde un sobre, nuestra guía de [invitaciones con sobre animado](/guides/animated-envelope-wedding-invitations) explica los dos tipos que vas a encontrar.
 
 **Tiempo:** de 30 a 60 minutos mirando, casi todo desde el móvil.
 
@@ -59,7 +59,7 @@ Si te quedas en este paso, tu web ya es útil. Todo lo demás es un añadido. Nu
 
 ## Paso 3: Escribe una bienvenida breve y vuestra historia
 
-Los invitados leen las primeras líneas y luego echan un vistazo al resto. Limita la bienvenida a dos o tres frases y la introducción de la historia a una o dos. Si no sabes qué escribir, nuestra [guía de textos para la web de boda](/guides/wedding-website-wording) tiene ejemplos para cada sección en tres tonos, pensados para campos de texto cortos.
+Los invitados leen las primeras líneas y luego echan un vistazo al resto. Limita la bienvenida a dos o tres frases y la introducción de la historia a una o dos. Si no sabes qué escribir, nuestra [guía de textos para la web de boda](/guides/wedding-website-wording) tiene ejemplos para cada sección en tres tonos, pensados para campos de texto cortos. Para una historia más larga, mira los [ejemplos de «Nuestra historia»](/guides/wedding-website-our-story-examples).
 
 Una buena bienvenida dice quiénes sois, que os alegra que vengan y dónde encontrar lo que necesitan:
 

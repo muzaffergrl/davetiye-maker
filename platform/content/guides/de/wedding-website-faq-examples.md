@@ -91,7 +91,7 @@ Dasselbe gilt für Feiern nur für Erwachsene, Geldgeschenke und eine Trauung oh
 ## Was nicht ins FAQ gehört
 
 - **Private Details.** Wohnadressen, Türcodes oder der Ort einer Nachfeier für enge Freunde gehören in persönliche Nachrichten, nicht auf eine Seite, die jeder mit dem Link öffnen kann.
-- **Informationen, die anderswo stehen.** Ablauf, Karte und Hotels haben eigene Bereiche; das FAQ sollte auf sie verweisen, statt sie zu wiederholen.
+- **Informationen, die anderswo stehen.** Ablauf, Karte und Hotels haben eigene Bereiche; das FAQ sollte auf sie verweisen, statt sie zu wiederholen. Für Gäste, die anreisen, zeigt unsere [Checkliste für die Website einer Destination-Hochzeit](/guides/destination-wedding-website-checklist), was diese Bereiche brauchen.
 - **Witze, die Kontext brauchen.** Lustige Antworten sind in Ordnung, wenn jeder Gast sie versteht.
 - **Geldbeträge.** Auch wenn Sie Geldgeschenke bevorzugen, nennen Sie nie einen Betrag.
 

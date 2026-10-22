@@ -91,7 +91,7 @@ The same applies to adults-only weddings, cash gifts and a no-phones ceremony. I
 ## What not to put in the FAQ
 
 - **Private details.** Home addresses, door codes or the location of an after-party for close friends belong in personal messages, not on a page anyone with the link can open.
-- **Information that belongs elsewhere.** The schedule, the map and hotels have their own sections; the FAQ should point to them, not repeat them.
+- **Information that belongs elsewhere.** The schedule, the map and hotels have their own sections; the FAQ should point to them, not repeat them. For guests who travel, our [destination wedding website checklist](/guides/destination-wedding-website-checklist) covers what those sections need.
 - **Jokes that need context.** Funny answers are fine if every guest will get them.
 - **Gift amounts.** Even when you prefer cash gifts, never suggest an amount.
 

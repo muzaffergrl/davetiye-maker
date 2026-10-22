@@ -73,7 +73,7 @@ G1 de her kümenin ilk rehberine link verir.
 | Dalga | Ay | Yeni | Güncelleme |
 |---|---|---|---|
 | 1 | Kasım 2026 (lansmanla) | N1 zarf, N2 RSVP soruları — **yazıldı (G193) ve TR/DE/ES/FR'ye çevrildi (G194), 2026-10-22** | — |
-| 2 | Aralık 2026 | N3 davetiye mi site mi, N4 davetiyeye site linki — **yazıldı (G195) ve TR/DE/ES/FR'ye çevrildi (G196), 2026-10-22** | G5 mesaj örnekleri |
+| 2 | Aralık 2026 | N3 davetiye mi site mi, N4 davetiyeye site linki — **yazıldı (G195) ve TR/DE/ES/FR'ye çevrildi (G196), 2026-10-22** | G5 mesaj örnekleri (**G206**: yanında biriyle davet, gönderdikten sonra değişiklik, save the date; N6'ya link) |
 | 3 | Ocak 2027 | N5 RSVP tarihi, N6 cevap vermeyen misafir — **yazıldı (G197) ve TR/DE/ES/FR'ye çevrildi (G198), 2026-10-22** | G3 başlık + RSVP bölümü (**G197'de yapıldı**); 6 eski rehberin 3 aylık gözden geçirmesi (**G205'te erken yapıldı, 2026-10-22**: kaynaklar, ürün iddiaları, iç linkler; 5 dil) |
 | 4 | Şubat 2027 | N7 ücretsiz/ücretli, N8 Our Story — **yazıldı (G199) ve TR/DE/ES/FR'ye çevrildi (G200), 2026-10-22** | — |
 | 5 | Mart 2027 | N9 SSS örnekleri, N10 destination — **yazıldı (G201) ve TR/DE/ES/FR'ye çevrildi (G202), 2026-10-22** | — |
@@ -111,6 +111,9 @@ Her rehber önce İngilizce yazılır ve gözden geçirilir; sonra 4 dile çevri
 | N10 | ✓ | G2, G3, N9 | — |
 | N11 | ✓ | G2, N4 | `/features` (guest password) |
 | N12 | ✓ | N4, N2 | `/features` (QR) |
+
+**Durum (G206, 2026-10-22):** matris 5 dilde tamam; eksik 5 bağlantı (G1 → N1, G1 → N8, N5 → G1, N12 → G1, N9 → N10)
+eklendi ve `tests/g206.test.ts` matrisi her dilde denetliyor.
 
 Yayın günü ters linkler de eklenir: her yeni rehber en az **3 iç link** alır (G1 + 2 kardeş; footer G191'den beri hepsini
 listeliyor).
@@ -162,6 +165,10 @@ listeliyor).
 - **Ürün cümlesi (facts.ts):** "up to 10 questions of your own", "Excel or CSV download".
 
 ## 6. Ölçüm (falsifiability)
+
+**Plan durumu (2026-10-22):** 12 rehber yazıldı ve çevrildi, matris ve G5 güncellemesi tamam, ilk 6 rehber erken gözden
+geçirildi (G205). Kalan işler veriye bağlı: lansman + GSC bağlantısı → gerçek sorgu verisiyle yeni konu sırası (§0 "Sınır"),
+bu tablodaki ölçümler ve 2027-01-22 civarı 18 rehberin gözden geçirmesi.
 
 | Dalga | Nasıl anlarız işe yaramadı |
 |---|---|

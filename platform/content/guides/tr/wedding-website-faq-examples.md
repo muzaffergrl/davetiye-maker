@@ -91,7 +91,7 @@ Aynısı yetişkinlere özel düğünler, para hediyeleri ve telefonsuz tören i
 ## SSS'ye neler konmamalı?
 
 - **Mahrem ayrıntılar.** Ev adresleri, kapı şifreleri ya da yakın arkadaşlar için düğün sonrası buluşmanın yeri, linke sahip herkesin açabildiği bir sayfaya değil, kişisel mesajlara aittir.
-- **Başka yerde duran bilgiler.** Programın, haritanın ve otellerin kendi bölümleri var; SSS onları tekrarlamamalı, onlara yönlendirmelidir.
+- **Başka yerde duran bilgiler.** Programın, haritanın ve otellerin kendi bölümleri var; SSS onları tekrarlamamalı, onlara yönlendirmelidir. Yolculuk yapan misafirler için bu bölümlere neler gerektiğini [destination düğün websitesi kontrol listemiz](/guides/destination-wedding-website-checklist) anlatıyor.
 - **Bağlam gerektiren şakalar.** Her misafir anlayacaksa komik yanıtlar sorun değildir.
 - **Hediye tutarları.** Para hediyesini tercih etseniz bile asla bir tutar önermeyin.
 

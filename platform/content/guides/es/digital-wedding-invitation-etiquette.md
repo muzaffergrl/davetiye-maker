@@ -74,6 +74,15 @@ Breve, cálido y claro sobre lo que necesitas que hagan. Adapta estos ejemplos:
 **Cuando los niños están invitados:**
 *"¡Hola, Jo! Está invitada toda la familia, peques incluidos. Cuando confirmes, dinos sus edades para poder organizar los menús: (enlace)."*
 
+**Con acompañante:**
+*"¡Hola, Leo! Nos encantaría que vinieras el 12 de junio, y puedes traer acompañante. Cuando confirmes, añade su nombre: (enlace)."*
+
+**Si cambia algún detalle después de enviarla:**
+*"Hola, Maya: un aviso rápido. La ceremonia empieza ahora a las 16:30 en lugar de a las 16:00. Todo lo demás sigue igual, y en la web siempre están los detalles actualizados: (enlace)."*
+
+**Un save the date, meses antes de la invitación:**
+*"¡Hola, Sam! Guárdate la fecha: nos casamos el 12 de junio de 2027 en Napa. La invitación formal llegará más adelante, y en nuestra web ya están los primeros detalles: (enlace)."*
+
 ## Cómo hacer que una invitación digital resulte personal
 
 Pequeñas decisiones hacen que una invitación digital parezca tan cuidada como una de papel:
@@ -90,7 +99,7 @@ Una semana antes de tu fecha límite de confirmación, revisa la lista y envía 
 
 *"Hola, Tom, solo un recordatorio cariñoso: estamos cerrando el número de invitados con el catering. ¿Podrías confirmarnos antes del viernes? Aquí tienes otra vez el enlace: (enlace). ¡Gracias!"*
 
-Pasada la fecha límite, llama a los últimos invitados. Sobre todo los familiares mayores pueden haber abierto el enlace sin encontrar el botón de respuesta; una llamada rápida lo resuelve. Consulta nuestra guía sobre [cuándo enviar tu web de boda y las invitaciones](/guides/when-to-send-your-wedding-website) para ver el calendario completo.
+Pasada la fecha límite, llama a los últimos invitados. Sobre todo los familiares mayores pueden haber abierto el enlace sin encontrar el botón de respuesta; una llamada rápida lo resuelve. Consulta nuestra guía sobre [cuándo enviar tu web de boda y las invitaciones](/guides/when-to-send-your-wedding-website) para ver el calendario completo. Nuestra guía sobre [qué hacer si los invitados no confirman](/guides/guests-did-not-rsvp) tiene un plan de seguimiento y más mensajes.
 
 ## Una invitación digital que sigue pareciendo una invitación
 

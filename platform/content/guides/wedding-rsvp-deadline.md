@@ -80,7 +80,7 @@ The day after your deadline, download your replies and compare them with your gu
 
 ## How our wedding websites handle the deadline
 
-You set your reply-by date in your panel, and guests see it on your RSVP page. The form closes on its own at the end of that day, in your website's time zone, and guests who open it later see that replies are closed. You can change the date in your panel at any time, which also reopens the form. Replies, totals and an Excel or CSV download are in your panel, and you can add replies you received by phone yourself. See the [RSVP features](/features), try the reply form in the [Olive & Ivory demo](/designs/olive-ivory), and read [when to send your wedding website](/guides/when-to-send-your-wedding-website) for the full timeline from save the dates to the day.
+You set your reply-by date in your panel, and guests see it on your RSVP page. The form closes on its own at the end of that day, in your website's time zone, and guests who open it later see that replies are closed. You can change the date in your panel at any time, which also reopens the form. Replies, totals and an Excel or CSV download are in your panel, and you can add replies you received by phone yourself. See the [RSVP features](/features), try the reply form in the [Olive & Ivory demo](/designs/olive-ivory), and read [when to send your wedding website](/guides/when-to-send-your-wedding-website) for the full timeline from save the dates to the day. If you are still setting up your site, start with [how to make a wedding website on your phone](/guides/how-to-make-a-wedding-website).
 
 ## FAQ
 

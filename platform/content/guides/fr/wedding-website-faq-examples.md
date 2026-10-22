@@ -91,7 +91,7 @@ Il en va de même pour les mariages entre adultes, les cadeaux en argent et la c
 ## Ce qui n'a pas sa place dans la FAQ
 
 - **Les informations privées.** Adresses personnelles, codes d'entrée ou lieu d'un after entre amis proches relèvent des messages personnels, pas d'une page que toute personne ayant le lien peut ouvrir.
-- **Ce qui est déjà ailleurs.** Le programme, le plan et les hôtels ont leur propre rubrique ; la FAQ doit y renvoyer, pas les répéter.
+- **Ce qui est déjà ailleurs.** Le programme, le plan et les hôtels ont leur propre rubrique ; la FAQ doit y renvoyer, pas les répéter. Pour les invités qui voyagent, notre [liste pour le site d'un mariage à destination](/guides/destination-wedding-website-checklist) détaille ce dont ces rubriques ont besoin.
 - **Les blagues qui demandent du contexte.** Les réponses drôles sont bienvenues si tous les invités les comprennent.
 - **Les montants de cadeaux.** Même si vous préférez l'argent, ne suggérez jamais de montant.
 

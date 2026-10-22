@@ -74,6 +74,15 @@ Kurz, herzlich und klar darin, was Sie von den Gästen brauchen. Passen Sie dies
 **Wenn Kinder eingeladen sind:**
 *„Hallo Jo! Die ganze Familie ist eingeladen, die Kleinen natürlich auch. Sag uns bei deiner Antwort bitte, wie alt sie sind, damit wir das Essen planen können: (Link).“*
 
+**Mit Begleitung:**
+*„Hallo Leo! Wir würden uns freuen, wenn du am 12. Juni dabei bist, und du darfst gern eine Begleitung mitbringen. Schreib bei deiner Antwort einfach ihren Namen dazu: (Link).“*
+
+**Wenn sich nach dem Versand ein Detail ändert:**
+*„Hallo Maya, ein kurzes Update: Die Trauung beginnt jetzt um 16:30 Uhr statt um 16:00 Uhr. Alles andere bleibt gleich, und auf der Website stehen immer die aktuellen Details: (Link).“*
+
+**Ein Save-the-Date, Monate vor der Einladung:**
+*„Hallo Sam! Save the Date: Wir heiraten am 12. Juni 2027 in Napa. Die offizielle Einladung folgt, und auf unserer Website stehen schon die ersten Details: (Link).“*
+
 ## So wirkt eine digitale Einladung persönlich
 
 Kleine Entscheidungen lassen eine digitale Einladung so durchdacht wirken wie eine aus Papier:
@@ -90,7 +99,7 @@ Eine Woche vor Ihrer Antwortfrist prüfen Sie Ihre Liste und schicken allen, die
 
 *„Hallo Tom, nur eine kurze Erinnerung: Wir geben bald die Gästezahl an den Caterer weiter. Könntest du bis Freitag antworten? Hier ist noch einmal der Link: (Link). Danke dir!“*
 
-Nach der Frist rufen Sie die letzten Gäste an. Gerade ältere Verwandte haben den Link vielleicht geöffnet, aber den Antwort-Button nicht gefunden; ein kurzer Anruf löst das. Den vollständigen Zeitplan finden Sie in unserem Ratgeber dazu, [wann Sie Hochzeitswebsite und Einladungen verschicken](/guides/when-to-send-your-wedding-website).
+Nach der Frist rufen Sie die letzten Gäste an. Gerade ältere Verwandte haben den Link vielleicht geöffnet, aber den Antwort-Button nicht gefunden; ein kurzer Anruf löst das. Den vollständigen Zeitplan finden Sie in unserem Ratgeber dazu, [wann Sie Hochzeitswebsite und Einladungen verschicken](/guides/when-to-send-your-wedding-website). Unser Ratgeber, [was tun, wenn Gäste nicht antworten](/guides/guests-did-not-rsvp), hat einen Plan zum Nachfassen und weitere Nachrichten.
 
 ## Eine digitale Einladung, die sich trotzdem wie eine Einladung anfühlt
 

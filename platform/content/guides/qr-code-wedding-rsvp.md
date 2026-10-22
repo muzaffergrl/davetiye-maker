@@ -52,14 +52,14 @@ A widely used rule of thumb is that a code can be scanned from about ten times i
 
 These sizes include no margin. Add a clear white border around the code: the code's creator, DENSO WAVE, specifies a [quiet zone four modules wide](https://www.qrcode.com/en/howto/code.html) on every side.
 
-## Logos, colours and other design risks
+## Logos, colors and other design risks
 
 Designers like to make QR codes match the invitation. Some changes are safe; others make the code fail on some phones.
 
 - **A logo or monogram in the middle.** QR codes can rebuild missing parts using error correction. DENSO WAVE lists [four levels](https://www.qrcode.com/en/about/error_correction.html), from L (about 7% of the data can be restored) to H (about 30%). A logo uses up that margin, so a crease or smudge on top of it can make the code unreadable. If you add one, use level H, keep the logo small and test the printed card.
 - **Gold foil, metallic or glossy ink.** Reflections hide parts of the code under indoor light. Print the code in flat ink.
 - **Light code on a dark card.** Many phone cameras still read it, but not all. A dark code on a light background is the reliable choice.
-- **Low contrast colours.** A pale sage or blush code on ivory paper may not scan. Keep the code dark enough to read clearly at a glance.
+- **Low contrast colors.** A pale sage or blush code on ivory paper may not scan. Keep the code dark enough to read clearly at a glance.
 - **Rounded dots and decorative corners.** Some generators allow them; test carefully, since older phones can struggle.
 
 ## Signs at the venue
@@ -91,7 +91,7 @@ For the questions on the reply form itself, see [which RSVP questions to ask](/g
 
 ## QR codes on our wedding websites
 
-Every website comes with a QR code generated from your real website address, with no forwarding service in between, so it works for as long as your website is online: until {{months}} months after your wedding date. It uses error correction level Q and the full four-module margin. In your panel you can download it as SVG, or as PNG in three sizes (for screens, printed cards and signs), in black or your design's colour darkened until it scans like black. You can also download a printable 4 × 6 in (10 × 15 cm) QR card with your names, the date and, if you like, your guest password, and the printable invitation in your design has an optional back side with the details and the code. After the wedding, the same code opens your thank-you page if you switch it on. See the [sharing features](/features), or open the [Olive & Ivory demo](/designs/olive-ivory).
+Every website comes with a QR code generated from your real website address, with no forwarding service in between, so it works for as long as your website is online: until {{months}} months after your wedding date. It uses error correction level Q and the full four-module margin. In your panel you can download it as SVG, or as PNG in three sizes (for screens, printed cards and signs), in black or your design's color darkened until it scans like black. You can also download a printable 4 × 6 in (10 × 15 cm) QR card with your names, the date and, if you like, your guest password, and the printable invitation in your design has an optional back side with the details and the code. After the wedding, the same code opens your thank-you page if you switch it on. See the [sharing features](/features), or open the [Olive & Ivory demo](/designs/olive-ivory). If you are still setting up your site, start with [how to make a wedding website on your phone](/guides/how-to-make-a-wedding-website).
 
 ## FAQ
 

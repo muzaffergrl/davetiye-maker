@@ -74,6 +74,15 @@ Kısa, sıcak ve sizden beklenen eylem konusunda net olsun. Bunları kendinize g
 **Çocuklar davetliyse:**
 *"Merhaba Jo! Bütün aile davetli, küçükler de dahil. Yanıt verirken yemekleri planlayabilmemiz için yaşlarını da yazar mısın: (link)."*
 
+**Yanında biriyle davetliyse:**
+*"Merhaba Leo! 12 Haziran'da seni aramızda görmeyi çok isteriz; yanında birini de getirebilirsin. Yanıt verirken onun adını eklemen yeterli: (link)."*
+
+**Gönderdikten sonra bir ayrıntı değişirse:**
+*"Merhaba Maya, kısa bir güncelleme: tören artık 16.00 yerine 16.30'da başlıyor. Geri kalan her şey aynı; websitede her zaman en güncel bilgiler var: (link)."*
+
+**Davetiyeden aylar önce, tarihi ayırın mesajı:**
+*"Merhaba Sam! Tarihi ayır: 12 Haziran 2027'de Napa'da evleniyoruz. Resmî davetiye arkadan gelecek; ilk ayrıntılar şimdiden websitemizde: (link)."*
+
 ## Dijital davetiyeyi kişisel hissettirmek
 
 Küçük seçimler, dijital bir davetiyeyi kâğıt bir davetiye kadar özenli hissettirir:
@@ -90,7 +99,7 @@ Yanıt son tarihinizden bir hafta önce listenizi kontrol edin ve eksik olan her
 
 *"Merhaba Tom, catering için sayıları kesinleştiriyoruz, küçük bir hatırlatma. Cumaya kadar yanıt verebilir misin? Link tekrar burada: (link). Teşekkürler!"*
 
-Son tarihten sonra kalan birkaç misafiri arayın. Özellikle yaşlı akrabalar linki açıp yanıt düğmesini bulamamış olabilir; kısa bir telefon bunu çözer. Tam zaman çizelgesi için [düğün websitesi ve davetiyelerin ne zaman gönderileceği](/guides/when-to-send-your-wedding-website) hakkındaki rehberimize bakın.
+Son tarihten sonra kalan birkaç misafiri arayın. Özellikle yaşlı akrabalar linki açıp yanıt düğmesini bulamamış olabilir; kısa bir telefon bunu çözer. Tam zaman çizelgesi için [düğün websitesi ve davetiyelerin ne zaman gönderileceği](/guides/when-to-send-your-wedding-website) hakkındaki rehberimize bakın. [Misafirler LCV vermediyse ne yapılır](/guides/guests-did-not-rsvp) rehberimizde bir takip planı ve daha fazla mesaj var.
 
 ## Hâlâ davetiye gibi hissettiren bir dijital davetiye
 

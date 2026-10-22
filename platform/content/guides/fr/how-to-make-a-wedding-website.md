@@ -39,7 +39,7 @@ Le bon choix dépend moins de l'apparence que de l'endroit où vous ferez vos mo
 | Durée de mise en ligne | Les invités cherchent les photos et les détails après le jour J | Jusqu'à quand le site restera-t-il en ligne ? |
 | Comptes | Certains outils exigent un compte pour vous, d'autres aussi pour les invités | Mes invités doivent-ils s'inscrire pour répondre ? |
 
-Les plateformes gratuites, comme les grands sites de listes de mariage, les modèles d'outils de design et les designs hébergés comme les nôtres, répondent chacune différemment à ces questions. Ouvrez une démo sur votre téléphone avant de décider : elle en dit plus que n'importe quelle liste de fonctionnalités.
+Les plateformes gratuites, comme les grands sites de listes de mariage, les modèles d'outils de design et les designs hébergés comme les nôtres, répondent chacune différemment à ces questions. Ouvrez une démo sur votre téléphone avant de décider : elle en dit plus que n'importe quelle liste de fonctionnalités. Si vous aimez les invitations qui s'ouvrent d'une enveloppe, notre guide des [faire-part à enveloppe animée](/guides/animated-envelope-wedding-invitations) présente les deux sortes que vous rencontrerez.
 
 **Temps :** 30 à 60 minutes de recherche, surtout sur votre téléphone.
 
@@ -59,7 +59,7 @@ Si vous vous arrêtez après cette étape, votre site est déjà utile. Tout le 
 
 ## Étape 3 : écrire un court mot d'accueil et votre histoire
 
-Les invités lisent les premières lignes, puis parcourent le reste. Limitez le mot d'accueil à deux ou trois phrases et l'introduction de votre histoire à une ou deux. Si vous ne savez pas quoi écrire, notre [guide des textes pour site de mariage](/guides/wedding-website-wording) propose des exemples pour chaque section dans trois tons, écrits pour tenir dans des champs de texte courts.
+Les invités lisent les premières lignes, puis parcourent le reste. Limitez le mot d'accueil à deux ou trois phrases et l'introduction de votre histoire à une ou deux. Si vous ne savez pas quoi écrire, notre [guide des textes pour site de mariage](/guides/wedding-website-wording) propose des exemples pour chaque section dans trois tons, écrits pour tenir dans des champs de texte courts. Pour une histoire plus longue, voyez nos [exemples de « Notre histoire »](/guides/wedding-website-our-story-examples).
 
 Un bon mot d'accueil dit qui vous êtes, que vous êtes heureux de la venue de vos invités et où trouver ce dont ils ont besoin :
 

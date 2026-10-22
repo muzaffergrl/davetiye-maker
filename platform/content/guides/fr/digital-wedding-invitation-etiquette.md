@@ -74,6 +74,15 @@ Court, chaleureux et clair sur ce que vous attendez. Adaptez ces exemples :
 **Quand les enfants sont invités :**
 *« Coucou Jo ! Toute la famille est invitée, les petits compris. En répondant, indique-nous leur âge pour que nous puissions prévoir les repas : (lien). »*
 
+**Avec un accompagnant :**
+*« Coucou Leo ! Nous serions ravis de te voir le 12 juin, et tu peux venir accompagné. En répondant, ajoute simplement son prénom : (lien). »*
+
+**Si un détail change après l'envoi :**
+*« Coucou Maya, petite mise à jour : la cérémonie commence désormais à 16 h 30 au lieu de 16 h. Tout le reste ne change pas, et le site a toujours les informations à jour : (lien). »*
+
+**Un save the date, des mois avant le faire-part :**
+*« Coucou Sam ! Save the date : nous nous marions le 12 juin 2027 à Napa. Le faire-part officiel suivra, et notre site présente déjà les premiers détails : (lien). »*
+
 ## Rendre un faire-part numérique personnel
 
 De petits choix rendent un faire-part numérique aussi soigné qu'un faire-part papier :
@@ -90,7 +99,7 @@ Une semaine avant la date limite de réponse, vérifiez votre liste et envoyez u
 
 *« Coucou Tom, petit rappel amical : nous finalisons le nombre d'invités pour le traiteur. Pourrais-tu répondre d'ici vendredi ? Voici à nouveau le lien : (lien). Merci ! »*
 
-Après la date limite, appelez les derniers invités. Les proches plus âgés, en particulier, ont peut-être ouvert le lien sans trouver le bouton de réponse ; un rapide coup de fil règle la question. Consultez notre guide sur [quand envoyer votre site de mariage et vos faire-part](/guides/when-to-send-your-wedding-website) pour le calendrier complet.
+Après la date limite, appelez les derniers invités. Les proches plus âgés, en particulier, ont peut-être ouvert le lien sans trouver le bouton de réponse ; un rapide coup de fil règle la question. Consultez notre guide sur [quand envoyer votre site de mariage et vos faire-part](/guides/when-to-send-your-wedding-website) pour le calendrier complet. Notre guide sur [que faire quand les invités ne répondent pas](/guides/guests-did-not-rsvp) propose un plan de relance et d'autres messages.
 
 ## Un faire-part numérique qui reste une vraie invitation
 

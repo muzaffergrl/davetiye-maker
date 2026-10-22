@@ -39,7 +39,7 @@ The right choice depends less on looks than on where you will edit and how repli
 | How long it stays online | Guests look for photos and details after the day | Until when will the site stay up? |
 | Accounts | Some builders need an account for you, some for guests too | Do my guests need to sign up to reply? |
 
-Free platforms such as large wedding registries, design-tool templates and hosted designs like ours all answer these differently. Open a demo on your phone before you decide; it shows more than any list of features.
+Free platforms such as large wedding registries, design-tool templates and hosted designs like ours all answer these differently. Open a demo on your phone before you decide; it shows more than any list of features. If you like invitations that open from an envelope, our guide to [animated envelope invitations](/guides/animated-envelope-wedding-invitations) explains the two kinds you will find.
 
 **Time:** 30 to 60 minutes of looking, mostly on your phone.
 
@@ -59,7 +59,7 @@ If you stop after this step, your website is already useful. Everything else is 
 
 ## Step 3: Write a short welcome and your story
 
-Guests read the first lines, then scan. Keep the welcome to two or three sentences and the story intro to one or two. If you are not sure what to write, our [wedding website wording guide](/guides/wedding-website-wording) has examples for every section in three tones, written to fit short text fields.
+Guests read the first lines, then scan. Keep the welcome to two or three sentences and the story intro to one or two. If you are not sure what to write, our [wedding website wording guide](/guides/wedding-website-wording) has examples for every section in three tones, written to fit short text fields. For a longer story, see our [Our Story examples](/guides/wedding-website-our-story-examples).
 
 A good welcome says who you are, that you are glad guests are coming, and where to find what they need:
 
