@@ -22,8 +22,8 @@ const ROOT = join(import.meta.dirname, '..', '..');
 
 /** Source folders / files of each namespace (relative to platform/). */
 export const SOURCES: Record<Namespace, string[]> = {
-  panel: ['components/panel', 'components/my', 'app/edit', 'app/start', 'app/my', 'app/signin', 'lib/panel', 'lib/rsvp', 'lib/claim', 'lib/content/validate.ts', 'lib/audio', 'lib/themes', 'lib/i18n/panel-extra.ts'],
-  market: ['app/(marketing)', 'components/marketing', 'lib/marketing'],
+  panel: ['components/panel', 'components/my', 'app/edit', 'app/start', 'app/my', 'app/signin', 'lib/panel', 'lib/rsvp', 'lib/claim', 'lib/content/validate.ts', 'lib/audio', 'lib/themes', 'lib/i18n/panel-extra.ts', 'components/support'],
+  market: ['app/(marketing)', 'components/marketing', 'lib/marketing', 'components/support'],
   site: ['lib/theme', 'lib/site', 'lib/i18n/site.ts'],
 };
 

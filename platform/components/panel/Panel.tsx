@@ -27,6 +27,7 @@ import {
   House,
   Image as ImageIcon,
   Mail,
+  MessageCircle,
   Pencil,
   Send,
   Share2,
@@ -74,7 +75,7 @@ import { firstOpenStep, readSetup, writeSetup } from './setup-state.ts';
 import { Sheet } from './Sheet.tsx';
 import { Badge, Banner, Button, cx, IconButton, SaveIndicator, SnackbarProvider, useSnackbar } from './ui.tsx';
 import { usePanel } from './usePanel.ts';
-import { EditListView, EditorPage, GuestPrintView, GuestsView, HelpSheet, HomeView, IdentitySheet, LiveSheetBody, loadView, markHydrated, prefetchViews, Setup, ShareView, type ChunkView } from './lazy.tsx';
+import { EditListView, EditorPage, GuestPrintView, GuestsView, HelpSheet, HomeView, IdentitySheet, LiveSheetBody, loadView, markHydrated, prefetchViews, Setup, ShareView, SupportSheet, type ChunkView } from './lazy.tsx';
 import { nextSteps } from './next-steps.ts';
 import { useReplies } from './replies.ts';
 import styles from './panel.module.css';
@@ -164,6 +165,7 @@ type Dialog =
   | { kind: 'offline' }
   | { kind: 'message'; title: string; text: string }
   | { kind: 'help'; topic?: string }
+  | { kind: 'chat' }
   | { kind: 'identity'; focus: 'names' | 'date' };
 
 /** Line icons of the six editor pages (Edit list, page heads, Review). */
@@ -872,7 +874,8 @@ function PanelApp({
           <p className={styles.breakAll}>{dialog.text}</p>
         </Sheet>
       ) : null}
-      {dialog?.kind === 'help' ? <HelpSheet meta={meta} locale={content.locale} topic={dialog.topic} onClose={() => setDialog(null)} /> : null}
+      {dialog?.kind === 'help' ? <HelpSheet meta={meta} locale={content.locale} topic={dialog.topic} onClose={() => setDialog(null)} onChat={() => setDialog({ kind: 'chat' })} /> : null}
+      {dialog?.kind === 'chat' ? <SupportSheet slug={initial.slug} editKey={editKey} onClose={() => setDialog(null)} /> : null}
       {dialog?.kind === 'identity' && rights.anchor ? (
         <IdentitySheet
           content={content}
@@ -1069,6 +1072,7 @@ function PanelApp({
             </p>
             <div className={styles.appBarActions}>
               <SaveIndicator state={saveState} message={panel.saveMessage} onSaveNow={() => void panel.flush()} compact />
+              {!sectionPage && !shopUntil ? <IconButton icon={MessageCircle} label={t('Chat with us')} onClick={() => setDialog({ kind: 'chat' })} data-open-support /> : null}
               {!wide ? <IconButton icon={Eye} label={t('Preview')} onClick={() => (sectionPage ? pagePreview(sectionPage) : openPreview(null))} data-open-preview /> : null}
               {publishControl}
             </div>
@@ -1184,6 +1188,7 @@ function PanelApp({
                   go({ view: 'setup', step: setupStep ?? 1 });
                 }}
                 onHelp={(topic) => setDialog({ kind: 'help', topic })}
+                onChat={() => setDialog({ kind: 'chat' })}
                 onCopy={() => void copy(url)}
                 excelUrl={panel.api.repliesExcelUrl()}
               />

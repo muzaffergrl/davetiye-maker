@@ -1,5 +1,5 @@
 // /privacy (docs/14 §6.10). Written from what the code does today (G154, 2026-10-17: re-read against lib/data,
-// lib/device-keys.ts, lib/google, lib/mail, lib/rsvp, lib/site/access.ts, lib/i18n/auto-translate.ts). K25: no legal
+// lib/device-keys.ts, lib/google, lib/mail, lib/rsvp, lib/site/access.ts, lib/i18n/auto-translate.ts; 2026-10-22: lib/support, the AI live help chat). K25: no legal
 // identity, so the notice names the shop and the support email. K48: the retention and deletion texts come from config
 // (policies); the "not legal advice, have it reviewed" note lives in the docs (docs/14 §6.10), not on the public page.
 // G144: one body for every language.
@@ -141,6 +141,11 @@ export function PrivacyPage({ m }: { m: Market }) {
               <li>
                 {t(
                   'Translate automatically in the editor uses your browser’s own translator when it has one, and then nothing leaves your device. Otherwise your texts are sent to the free MyMemory translation service (translated.net); the editor says so next to the button.',
+                )}
+              </li>
+              <li>
+                {t(
+                  'The live help chat on this website and in the editor is an AI assistant run by Google Gemini: the messages you type, the address of the page you are on and, in the editor, a few facts about your website (its design, whether it is published and how many name and date changes are left; never names, guests or replies) are sent to Google to write the answer. On the free Gemini service Google may use these messages to improve its products, and people at Google may read them, so please do not type personal details. We do not keep the conversations; your browser keeps them only until you close the tab.',
                 )}
               </li>
             </ul>
