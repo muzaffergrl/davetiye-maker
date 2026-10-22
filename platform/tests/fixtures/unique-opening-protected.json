@@ -70,13 +70,5 @@
   "sky-lantern-festival/interior.css": "2e042b685974ce5ce0cfc26c20f00c69965bfbf68a922a76518441823d77a481",
   "sky-lantern-festival/interior-motion.js": "1beed79c2fd519bac688419b8a58bca0088dffdb30be085368441c8a649f0a1b",
   "sky-lantern-festival/content.demo.json": "591f1c869208a8d96995edacead9326d9811b4e31586b144e2b695b03f7f0ad2",
-  "sky-lantern-festival/site.css": "fc1f6196f9e0501d99d5e4c4f56d1b03a13a0501fd1f70963f48c10f5c1ffa0f",
-  "music-box-ballerina/home.html": "761eadce0026f4d5bc406be35ad63f3d7e1509a8277d42758230ad760408b074",
-  "music-box-ballerina/story.html": "47940ab28c692ccead423bdd6c4b3e9d58aeb70ec61b12f4e8a4b56636699cd7",
-  "music-box-ballerina/details.html": "314813e289f8b85eb96619bdab73d4943e01f06d34244888612cb20438bdf3cc",
-  "music-box-ballerina/rsvp.html": "f057e4108d26fddf799b58151627badd92ff9623548eae111f9573b29c0f90c4",
-  "music-box-ballerina/interior.css": "a293cc29364ba6771c46b759bc36b88f7ee605940fbad13f70d1f2732ba17b01",
-  "music-box-ballerina/interior-motion.js": "0ae36b11e60f542fd7d6ad66978bd3470567e423d4df44609ac09a8444d09dd5",
-  "music-box-ballerina/content.demo.json": "a4de909d5cfe046b46f1eadc1ae351eb4faa407be9892efa7fa253e8767a325b",
-  "music-box-ballerina/site.css": "407b651f3bccbfad587503c405c575ab6dd1a7bea91dd669a161aa8a26e91cdd"
+  "sky-lantern-festival/site.css": "fc1f6196f9e0501d99d5e4c4f56d1b03a13a0501fd1f70963f48c10f5c1ffa0f"
 }

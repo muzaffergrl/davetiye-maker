@@ -352,15 +352,16 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     ink: '#3B2A4A', accent: '#9A5A26', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 32 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
+  // 32 (G432, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): cream cotton card, a soft-gold filigree crest
+  // with three blush roses and wisps of tulle across the top (down to ~19 %), a filigree rule with a pearl near the bottom
+  // (~92–95 %) on the front; one short filigree flourish with a rosebud at the top of the back (~11 %). `cover` for 5×7 and
+  // A5 (ChatGPT's 1069×1472). Boxes ~2 % clear of it all (G149).
   'music-box-ballerina': {
     collection: '32_Music_Box_Ballerina',
-    sources: { front: 'print/invitation_front.png', back: 'print/invitation_back.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Ballet:opsz@16..72&family=Gilda+Display'),
     script: "'Ballet', cursive", serif: "'Gilda Display', Georgia, serif",
-    ink: '#4A2F35', accent: '#8A4A55', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#4A2F35', accent: '#8A4A55', front: [21, 11, 10, 11], back: [13, 10, 9, 10],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
   // 33 (G182, interim until PAKET 6 print/invitation_front_5x7.png + print/invitation_back_5x7.png, 1575×2175, one sheet
