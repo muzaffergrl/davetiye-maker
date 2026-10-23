@@ -88,12 +88,5 @@ export const apiKeyHeader = (cfg: Pick<EtsyConfig, 'keystring' | 'sharedSecret'>
 
 export const etsyRedirectUri = (origin: string) => `${origin.replace(/\/+$/, '')}${ETSY_CALLBACK_PATH}`;
 
-/** CLAIM_ORDER_VERIFICATION as the admin shows it. */
-export type VerificationMode = 'off' | 'manual' | 'etsy' | 'trust' | 'invalid';
-
-export function verificationMode(env: Record<string, string | undefined> = process.env): VerificationMode {
-  const mode = (env.CLAIM_ORDER_VERIFICATION ?? '').trim().toLowerCase();
-  if (mode === '' || mode === 'off') return 'off';
-  if (mode === 'manual' || mode === 'etsy' || mode === 'trust') return mode;
-  return 'invalid';
-}
+/** CLAIM_ORDER_VERIFICATION as the admin shows it (parsed in lib/claim/mode.ts, shared with /start and the launch gate). */
+export { verificationMode, type VerificationMode } from '../claim/mode.ts';

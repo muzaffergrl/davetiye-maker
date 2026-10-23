@@ -28,6 +28,7 @@
 
 import { EtsyOrderVerifier } from '../etsy/verify.ts';
 import { MailOrderVerifier } from '../mailbox/verify.ts';
+import { verificationMode } from './mode.ts';
 
 export type OrderCheckReason = 'not_found' | 'email_mismatch' | 'theme_mismatch' | 'not_paid';
 
@@ -151,12 +152,13 @@ let override: OrderVerifier | null = null;
 /** The verifier /start uses. Throws VerifierConfigError for an unknown value (a typo must not silently skip checks). */
 export function getOrderVerifier(): OrderVerifier {
   if (override) return override;
-  const mode = (process.env.CLAIM_ORDER_VERIFICATION ?? '').trim().toLowerCase();
-  if (mode === '' || mode === 'off') return new FormatOnlyVerifier();
+  const mode = verificationMode(process.env);
+  if (mode === 'off') return new FormatOnlyVerifier();
   if (mode === 'manual') return new ManualOrderVerifier();
   if (mode === 'etsy') return new EtsyOrderVerifier();
   if (mode === 'trust') return new TrustOrderVerifier();
-  throw new VerifierConfigError(`Unknown CLAIM_ORDER_VERIFICATION "${mode}" (use "off", "manual", "trust" or "etsy").`);
+  const typed = (process.env.CLAIM_ORDER_VERIFICATION ?? '').trim().toLowerCase();
+  throw new VerifierConfigError(`Unknown CLAIM_ORDER_VERIFICATION "${typed}" (use "off", "manual", "trust" or "etsy").`);
 }
 
 /** Replaces the verifier (fakes in tests). null restores the env choice. */

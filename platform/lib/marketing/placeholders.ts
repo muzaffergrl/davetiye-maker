@@ -2,6 +2,7 @@
 // e.g. "[BRAND]", "[PRICE]", "[SUPPORT EMAIL]", "[ETSY LISTING URL]". Placeholders stay visible on pages until the
 // decision is made; they are never written into JSON-LD; with `launched: true` a leftover placeholder stops the build.
 
+import { verificationMode } from '../claim/mode.ts';
 import type { DesignCommerce, MarketingConfig } from './config.ts';
 
 /** A whole value that is a placeholder: "[BRAND]". */
@@ -92,6 +93,14 @@ export function launchProblems(cfg: MarketingConfig, env: Record<string, string 
   if (!cfg.verified.orderCheck) {
     out.push('verified.orderCheck is false: /start accepts any order number (set CLAIM_ORDER_VERIFICATION=manual, trust or etsy, G060-fix)');
   }
+  // The flag above is a promise in the copy; this is the switch itself, read from the BUILD's environment (the production
+  // build on Vercel sees the production variables): a launched site whose /start would not check orders must not build.
+  const mode = verificationMode(env);
+  if (mode === 'off') {
+    out.push('CLAIM_ORDER_VERIFICATION is off (or unset) in this build: production /start would accept any order number — set it to trust, manual or etsy');
+  } else if (mode === 'invalid') {
+    out.push('CLAIM_ORDER_VERIFICATION has an unknown value in this build (use trust, manual or etsy): /start would refuse every claim');
+  }
   // K42 services are optional: only one with a real Etsy listing must carry a real price.
   for (const sv of cfg.services ?? []) {
     if (realEtsyUrl(sv.etsyListingUrl) && !realPrice(sv.price)) out.push(`services.${sv.id}.price is not a real price`);
@@ -112,10 +121,10 @@ export function designLaunchProblems(d: DesignCommerce): string[] {
   return out;
 }
 
-/** Throws when the site is launched with placeholders left (the build stops: docs/14 §10). */
-export function assertLaunchReady(cfg: MarketingConfig): void {
+/** Throws when the site is launched with placeholders left (the build stops: docs/14 §10). `env`: the build's environment. */
+export function assertLaunchReady(cfg: MarketingConfig, env: Record<string, string | undefined> = process.env): void {
   if (!cfg.launched) return;
-  const problems = launchProblems(cfg);
+  const problems = launchProblems(cfg, env);
   if (problems.length) {
     throw new Error(`Marketing site is set to launched but is not ready:\n - ${problems.join('\n - ')}\n(lib/marketing/config.ts)`);
   }
