@@ -55,7 +55,9 @@ def test_template():
     t = b.template()
     assert t.startswith("# Start Here: Your {DESIGN_NAME} Wedding Website\n"), t[:60]
     assert set(b.PLACEHOLDER.findall(t)) == {"{DESIGN_NAME}", "{START_URL}", "{PRIVACY_URL}", "{TERMS_URL}", "{MY_URL}", "{OPENING}",
-                                             "{OPENING_TAB}", "{LANGUAGE_FONTS}"}
+                                             "{OPENING_TAB}", "{LANGUAGE_FONTS}", "{MUSIC_TRACKS}"}
+    # review 2026-10-23: the story music line names the design's own tracks (21: five, Rose Nocturne first), not a fixed four
+    assert "choose {MUSIC_TRACKS}, **Your own music** or **No music**" in t and "one of four tracks" not in t
     # review 2026-10-23: one website per DESIGN bought (two designs in one order: one each, G951), never "one per order";
     # the terms of use are linked next to the privacy notice
     assert "One order starts one website" not in t and "Each design you bought starts one website" in t
@@ -86,9 +88,22 @@ def test_values():
         assert v["OPENING_TAB"] == v["OPENING"].capitalize(), (no, v["OPENING_TAB"])
         assert b.design_language(theme) == LANGUAGE[no], (no, b.design_fonts(theme))
         assert v["LANGUAGE_FONTS"] == b.LANGUAGE_LINES[LANGUAGE[no]]
+        if theme == "crimson-rose-atelier":  # K59: its own track, offered first and suggested (catalog.ts tracksFor)
+            assert v["MUSIC_TRACKS"] == ("one of five tracks made for your website (**Rose Nocturne**, **First Light**, "
+                                         "**Garden Waltz**, **Evening Strings**, **Music Box**; **Rose Nocturne** was made "
+                                         "for this design and is marked as suggested)"), v["MUSIC_TRACKS"]
+        else:
+            assert v["MUSIC_TRACKS"] == ("one of four tracks made for your website (**First Light**, **Garden Waltz**, "
+                                         "**Evening Strings**, **Music Box**; one is marked as suggested for your design)"), (no, v)
         dark = b.qr_dark(folder, theme)  # G175: 22–32 read the palette of designs.ts (no palette.json yet)
         assert 1.05 / (b._luminance(dark) + 0.05) >= 7, (no, dark)
     assert b.values("olive-ivory", "https://example.org/")["START_URL"] == "https://example.org/start?theme=olive-ivory"
+    # a catalogue with a second own track, and one whose suggested track is missing
+    cat = (b.AUDIO_CATALOG.read_text(encoding="utf-8")
+           .replace("  {\n    id: 'rose-nocturne',", "  { id: 'rose-two', theme: 'crimson-rose-atelier', label: 'Rose Two', url: '/x.mp3' },\n  {\n    id: 'rose-nocturne',"))
+    assert b.music_tracks_line("crimson-rose-atelier", cat).startswith("one of six tracks made for your website (**Rose Two**, **Rose Nocturne**, ")
+    assert "**Rose Two** and **Rose Nocturne** were made for this design" in b.music_tracks_line("crimson-rose-atelier", cat)
+    expect_exit(b.music_tracks_line, "olive-ivory", cat.replace("'olive-ivory': { music: 'first-light'", "'olive-ivory': { music: 'nope'"))
     expect_exit(b.language_class, ["Great Vibes", "A Font Nobody Checked"])
     assert b.language_class(["Great Vibes", "EB Garamond"]) == "cyrillic"
     assert b.language_class(["Pinyon Script", "Cormorant Garamond"]) == "latin-ext"

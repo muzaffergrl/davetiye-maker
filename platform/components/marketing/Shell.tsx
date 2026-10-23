@@ -48,9 +48,6 @@ export function Header({ m = enMarket }: { m?: Market }) {
           <UserRound aria-hidden size={18} strokeWidth={1.75} />
           <span>{t('Create your website')}</span>
         </a>
-        <a href={m.href('/designs')} className={`${s.btn} ${s.btnSmall} ${s.headerCta}`} data-track="nav_designs">
-          {t('See designs')}
-        </a>
         <LangSwitch
           current={m.lang}
           langs={LANGS.map((l) => ({ lang: l, name: LANG_NAMES[l] }))}

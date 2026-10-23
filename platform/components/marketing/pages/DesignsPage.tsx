@@ -4,7 +4,7 @@
 // real opening on hover / ▶ and can be compared side by side. G144: one body for every language.
 import { MARKETING } from '../../../lib/marketing/config.ts';
 import { catalogDesigns } from '../../../lib/marketing/designs.ts';
-import { FIXED, sitePageNames } from '../../../lib/marketing/facts.ts';
+import { FIXED_SENTENCE, sitePageNames } from '../../../lib/marketing/facts.ts';
 import type { Market } from '../../../lib/marketing/i18n.ts';
 import { breadcrumbs, graph, itemList, webPage } from '../../../lib/marketing/schema.ts';
 import { pageMetadata } from '../../../lib/marketing/seo.ts';
@@ -60,7 +60,7 @@ export function DesignsPage({ m }: { m: Market }) {
               <h2 className={s.h2}>{t('What makes each one different')}</h2>
               <CheckList items={[t('The envelope or keepsake and how it opens'), t('The painted artwork and frames'), t('Colors and fonts')]} />
               <p className={s.small}>
-                {t('{fixed} stay as designed; you change the content.', { fixed: FIXED.map((f) => t(f)).join(', ') })}{' '}
+                {t(FIXED_SENTENCE)}{' '}
                 {t('Not sure which to pick? Read')}{' '}
                 <a href={m.href('/guides/what-to-put-on-your-wedding-website')}>{t('what to put on your wedding website')}</a>{' '}
                 {t('or see')} <a href={m.href('/how-it-works')}>{t('how it works')}</a>.

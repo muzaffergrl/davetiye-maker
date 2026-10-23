@@ -203,6 +203,10 @@ K59: 21 ve sonrası her tasarım kendi bileşenleri, animasyonu **ve kendi sesle
 - Üretim: `tools/audio_packs.py --pack <tema>` (numpy + scipy + ffmpeg). Ses yüksekliği ortak kütüphaneyle aynı ölçekte
   (efekt −20…−24 LUFS, ≤ −1,5 dBTP; müzik −17,5 LUFS), böylece `FX_GAIN 0.5` / `MUSIC_VOL 0.55` her tasarımda aynı dengeyi
   verir (2026-10-23 birleştirmede paket bu ölçeğe getirildi; önceki tepe normalizasyonunda −15…−28 LUFS dağınıktı).
+  Tepe tavanı bir efekti hedefin altına çekecekse (keskin geçiş: 21'in `crack`'i 25 dB tepe/ortalama farkıyla −27 LUFS'ta
+  kalıyordu) `level(limit=True)` önce bakışlı tepe sınırlayıcıyı (`soft_limit`: 1,5 ms önden iner, 40 ms'de döner, iki
+  kanalda aynı kazanç) uygular; hedefe tavan altında ulaşan efektlere dokunmaz (21'in öbür 10 efekti bit bit aynı).
+  Ölçüm (MP3, BS.1770 + ffmpeg ebur128): `crack` −20,2 LUFS / −1,7 dBTP; paketin 11 efekti −20,2…−24,4 LUFS.
 
 ## 6. Oynatıcı (`platform/public/audio/audio.js`, G969)
 

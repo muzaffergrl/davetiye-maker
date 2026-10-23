@@ -19,6 +19,9 @@ change Ek A and run this again. Placeholders filled per design ({…} left over 
                    Kintsugi & Washi's folded paper is "origami")
   {OPENING_TAB}    the same word capitalised: the panel's first preview tab (G121, lib/panel/model.ts openingTabLabel)
   {LANGUAGE_FONTS} one of LANGUAGE_LINES, from the design's fonts (designs.ts `fonts`) and FONT_SUBSETS below
+  {MUSIC_TRACKS}   the panel's story tracks for the design (platform/lib/audio/catalog.ts: tracksFor = its own tracks
+                   first, then the shared ones; the suggested one = DESIGN_SOUND[id].music), counted and named
+                   (review 2026-10-23: 21 has its own Rose Nocturne, so "four tracks" was wrong there)
 
 Writes per design, in collections/<NN_*>/package/customer/:
   START_HERE.md            Ek A, filled in
@@ -73,6 +76,7 @@ SOURCE = REPO / "docs" / "19_ALICI_YOLCULUGU.md"
 START_MARK, END_MARK = "<!-- g091:start-here:start -->", "<!-- g091:start-here:end -->"
 BASE_URL = os.environ.get("GUIDE_BASE_URL", "https://bkestudio.com")
 DESIGN_COPY = REPO / "platform" / "lib" / "marketing" / "designs.ts"
+AUDIO_CATALOG = REPO / "platform" / "lib" / "audio" / "catalog.ts"
 MAKE_QR = TOOLS / "make_qr.py"
 QR_SCALE = 20  # make_qr.py default; listing_kit.qr_matches compares at this scale
 PLACEHOLDER = re.compile(r"\{[A-Z_]+\}")
@@ -258,7 +262,53 @@ def values(theme: str, base: str = BASE_URL) -> dict[str, str]:
         "OPENING": eu.opening_object(theme),
         "OPENING_TAB": opening_tab(eu.opening_object(theme)),
         "LANGUAGE_FONTS": LANGUAGE_LINES[design_language(theme)],
+        "MUSIC_TRACKS": music_tracks_line(theme),
     }
+
+
+def music_tracks(theme: str, catalog: str | None = None) -> tuple[list[tuple[str, str]], list[tuple[str, str]], str]:
+    """The story tracks the panel offers for a design, as (id, label) lists in panel order — lib/audio/catalog.ts
+    tracksFor: the design's own tracks (MUSIC_TRACKS[].theme), then the shared ones — and the id of its suggested track
+    (DESIGN_SOUND[theme].music, else DEFAULT_TRACK_ID: what MusicFields.tsx marks "(suggested for this design)")."""
+    src = AUDIO_CATALOG.read_text(encoding="utf-8") if catalog is None else catalog
+    m = re.search(r"export const MUSIC_TRACKS[^=]*=\s*\[(.*?)^\];", src, re.S | re.M)
+    if not m:
+        raise SystemExit(f"{AUDIO_CATALOG.relative_to(REPO)}: no MUSIC_TRACKS list")
+    own, shared = [], []
+    for body in re.findall(r"\{(.*?)\}", m.group(1), re.S):
+        f = dict(re.findall(r"\b(id|theme|label):\s*'([^']*)'", body))
+        if "id" not in f or "label" not in f:
+            raise SystemExit(f"{AUDIO_CATALOG.relative_to(REPO)}: a MUSIC_TRACKS entry without id or label: {body.strip()}")
+        if "theme" not in f:
+            shared.append((f["id"], f["label"]))
+        elif f["theme"] == theme:
+            own.append((f["id"], f["label"]))
+    d = re.search(rf"^\s*'{re.escape(theme)}':\s*\{{\s*music:\s*'([^']+)'", src, re.M)
+    default = re.search(r"^export const DEFAULT_TRACK_ID = '([^']+)'", src, re.M)
+    suggested = d.group(1) if d else (default.group(1) if default else "")
+    return own, shared, suggested
+
+
+NUMBER_WORDS = {2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten"}
+
+
+def music_tracks_line(theme: str, catalog: str | None = None) -> str:
+    """'one of <n> tracks made for your website (**A**, **B** …; <which one is suggested>)' for Ek A's Story music line."""
+    own, shared, suggested = music_tracks(theme, catalog)
+    tracks = own + shared
+    if len(tracks) not in NUMBER_WORDS:
+        raise SystemExit(f"{len(tracks)} story tracks for '{theme}': add the number word to NUMBER_WORDS")
+    names = ", ".join(f"**{label}**" for _, label in tracks)
+    if suggested not in dict(tracks):
+        raise SystemExit(f"'{theme}': its suggested track '{suggested}' is not among its tracks")
+    if not own:
+        note = "one is marked as suggested for your design"
+    elif len(own) == 1 and own[0][0] == suggested:
+        note = f"**{own[0][1]}** was made for this design and is marked as suggested"
+    else:
+        made = " and ".join(f"**{label}**" for _, label in own)
+        note = f"{made} {'was' if len(own) == 1 else 'were'} made for this design; one is marked as suggested for it"
+    return f"one of {NUMBER_WORDS[len(tracks)]} tracks made for your website ({names}; {note})"
 
 
 def opening_tab(opening: str) -> str:

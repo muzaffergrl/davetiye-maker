@@ -63,6 +63,14 @@ test('Own sound pack and music: the opening cues follow the crack, flap, draw, r
  assert.deepEqual(s.cues,{story:['page'],rsvp:['fold','stamp'],home:['petal']});
 });
 
+test('The home petal sound plays only when petals fall (none without sprites, with reduced motion or without animation)',async()=>{
+ // review 2026-10-23: the cue was sent whenever sprites existed, also with reduced motion (petals() drew nothing then)
+ const js=await readFile(path.join('themes',id,'site.js'),'utf8');
+ assert.match(js,/if \(!PETALS\.length \|\| !layer \|\| reduce \|\| !canAnimate \|\| !count\) return false;/);
+ assert.match(js,/if \(petals\(MOTION\.petals\.arrive, null\)\) sfx\('petal'\);/);
+ assert.equal((js.match(/sfx\('petal'\)/g)??[]).length,1,'the petal sound has one caller, behind petals()');
+});
+
 test('Every demo photo is a bundled theme asset, with no external photo dependency',async()=>{
  const theme=await claimableTheme(id);assert.ok(theme);const media=theme.demo.media;
  for(const url of [media.hero_portrait,...(media.memory_photos??[]),media.venue_image]){

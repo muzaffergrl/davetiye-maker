@@ -364,10 +364,35 @@ def encode(x: np.ndarray, dest: str, bitrate: str, title: str, keep_wav: str | N
 MUSIC_LUFS = -17.5
 
 
-def level(x: np.ndarray, target_lufs: float, tp_db: float = -1.5) -> np.ndarray:
-    """To the shared library's level: integrated loudness target, then the true-peak ceiling (as tools/audio_fx.master)."""
+def soft_limit(x: np.ndarray, ceiling: float, look: float = 0.0015, release: float = 0.04) -> np.ndarray:
+    """A look-ahead peak limiter: the gain falls smoothly over `look` seconds before a peak above `ceiling` and comes back
+    over `release` seconds, so a sharp transient is turned down instead of the whole effect (no waveshaping, no added
+    harmonics). The gain is the same on both channels (the stereo image stays)."""
+    need = np.minimum(1.0, ceiling / np.maximum(np.max(np.abs(x), axis=0), 1e-12))
+    k = max(1, int(look * SR))
+    pad = np.pad(need, k, mode="edge")
+    g = np.lib.stride_tricks.sliding_window_view(pad, 2 * k + 1).min(axis=1)  # falls k samples before the peak
+    a, cur, out = math.exp(-1 / (release * SR)), 1.0, np.empty_like(g)
+    for i, v in enumerate(g):  # instant down, exponential back up (never above g)
+        cur = v if v < cur else v + (cur - v) * a
+        out[i] = cur
+    out = np.convolve(np.pad(out, k // 2, mode="edge"), np.ones(k + 1 - k % 2) / (k + 1 - k % 2), mode="valid")[:x.shape[1]]
+    return x * out
+
+
+def level(x: np.ndarray, target_lufs: float, tp_db: float = -1.5, limit: bool = False) -> np.ndarray:
+    """To the shared library's level: integrated loudness target, then the true-peak ceiling (as tools/audio_fx.master).
+    With `limit` (the effects), a transient that would make the ceiling pull the whole sound under its target is
+    turned down by soft_limit first (review 2026-10-23: 21's crack had a 25 dB crest, the ceiling left it at
+    −27 LUFS instead of −20). Sounds that reach their target under the ceiling are not touched."""
+    ceiling = 10 ** (tp_db / 20)
     x = x * 10 ** ((target_lufs - loudness(x)) / 20)
-    tp, ceiling = true_peak(x), 10 ** (tp_db / 20)
+    for _ in range(12 if limit else 0):
+        if true_peak(x) <= ceiling:
+            break
+        x = soft_limit(x, ceiling * 0.94)
+        x = x * 10 ** ((target_lufs - loudness(x)) / 20)
+    tp = true_peak(x)
     return x * (ceiling / tp) if tp > ceiling else x
 
 
@@ -797,7 +822,7 @@ def main() -> int:
             for k, (name, fn) in enumerate(sorted(spec["fx"].items())):
                 if args.fx and name not in args.fx:
                     continue
-                x = level(fn(np.random.default_rng(spec["seed"] + k)), spec["lufs"][name])
+                x = level(fn(np.random.default_rng(spec["seed"] + k)), spec["lufs"][name], limit=True)
                 dest = os.path.join(AUDIO, "fx", pack, f"{name}.mp3")
                 encode(x, dest, "96k", f"{pack} {name}", args.wav)
                 print(f"fx/{pack}/{name}.mp3  {x.shape[1] / SR:4.2f} s  {os.path.getsize(dest) / 1024:5.1f} KB  "

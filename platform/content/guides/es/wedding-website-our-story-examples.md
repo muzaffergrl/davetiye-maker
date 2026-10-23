@@ -2,7 +2,7 @@
 title: "Ejemplos de «Nuestra historia» para tu web de boda"
 description: Cómo escribir «Nuestra historia» en tu web de boda: cinco estructuras, ejemplos originales en distintos tonos, ideas para pies de foto y qué dejar fuera.
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-23
 reviewed: 2026-10-22
 order: 14
 keyword: ejemplos nuestra historia web de boda
@@ -99,7 +99,7 @@ Un buen pie de foto dice dónde o cuándo, y añade un detalle humano.
 
 ## Cómo funciona la página «Nuestra historia» en nuestras webs de boda
 
-Todos nuestros diseños tienen una página «Nuestra historia»: una introducción corta de hasta {{storyIntroChars}} caracteres y {{storyPhotos}} fotos, cada una con un pie de hasta {{storyCaptionChars}} caracteres, mostradas en los marcos del diseño. Recortas cada foto a su marco en tu panel y ves la página antes de publicarla. También puedes elegir música para esta página, una de cuatro pistas, tu propio archivo o ninguna, y desactivar la página si lo prefieres. Abre la [demo de Olive & Ivory](/designs/olive-ivory) en el móvil para ver una página «Nuestra historia», lee las [funciones](/features) o empieza por [cómo hacer una web de boda desde el móvil](/guides/how-to-make-a-wedding-website). Nuestra lista de [qué poner en tu web de boda](/guides/what-to-put-on-your-wedding-website) cubre las demás páginas.
+Todos nuestros diseños tienen una página «Nuestra historia»: una introducción corta de hasta {{storyIntroChars}} caracteres y {{storyPhotos}} fotos, cada una con un pie de hasta {{storyCaptionChars}} caracteres, mostradas en los marcos del diseño. Recortas cada foto a su marco en tu panel y ves la página antes de publicarla. También puedes elegir música para esta página, una pista creada para tu web, tu propio archivo o ninguna, y desactivar la página si lo prefieres. Abre la [demo de Olive & Ivory](/designs/olive-ivory) en el móvil para ver una página «Nuestra historia», lee las [funciones](/features) o empieza por [cómo hacer una web de boda desde el móvil](/guides/how-to-make-a-wedding-website). Nuestra lista de [qué poner en tu web de boda](/guides/what-to-put-on-your-wedding-website) cubre las demás páginas.
 
 ## FAQ
 

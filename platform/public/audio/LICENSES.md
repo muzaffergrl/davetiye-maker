@@ -86,8 +86,8 @@ ya da başkasına ait beste yok. Eser BKE Studio'nundur; atıf gerekmez, ticari 
 yeniden üretir (`python3 tools/audio_packs.py --pack <tasarım>`; numpy + scipy + ffmpeg).
 
 Biçim: efektler MP3 stereo 44,1 kHz 96 kb/s, müzik MP3 stereo 44,1 kHz 112 kb/s. Ses yüksekliği ortak kütüphaneyle aynı
-ölçekte (`tools/audio_fx.py` BS.1770 ölçeri): efektler −20…−24 LUFS, gerçek tepe ≤ −1,5 dBTP (`crack` keskin bir tık
-olduğundan tepe tavanında kalır, ≈ −27 LUFS); müzik −17,5 LUFS hedef (ortak parçalar −17…−19 LUFS). Paketin efektleri o
+ölçekte (`tools/audio_fx.py` BS.1770 ölçeri): efektler −20…−24 LUFS, gerçek tepe ≤ −1,5 dBTP (`crack`'in keskin tıkı
+bakışlı tepe sınırlayıcıdan geçer, `level(limit=True)`: −20,2 LUFS, −1,7 dBTP; 2026-10-23); müzik −17,5 LUFS hedef (ortak parçalar −17…−19 LUFS). Paketin efektleri o
 tasarımda ortak efektlerin yerini alır (`tap` ve `chime` dahil); oynatıcı ve kazançlar ortaktır (`public/audio/audio.js`).
 
 | Dosya | Tür | Süre | Boyut | Kaynak | Lisans | Üretim tarihi |

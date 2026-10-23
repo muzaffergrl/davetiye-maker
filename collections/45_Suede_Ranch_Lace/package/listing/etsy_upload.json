@@ -245,11 +245,6 @@
     },
     {
       "where": "before publishing",
-      "check": "The demo's track decided (First Light in `content.demo.json` against the design default Garden Waltz in `catalog.ts`)",
-      "text": ""
-    },
-    {
-      "where": "before publishing",
       "check": "Order check mode read in production (`CLAIM_ORDER_VERIFICATION`: off, manual or etsy)",
       "text": ""
     },

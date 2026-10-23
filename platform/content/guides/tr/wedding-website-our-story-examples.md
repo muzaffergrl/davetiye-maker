@@ -2,7 +2,7 @@
 title: Düğün Websitesi İçin “Hikâyemiz” Örnekleri
 description: Düğün websitenizin Hikâyemiz bölümü nasıl yazılır: beş yapı, farklı tonlarda özgün örnekler, fotoğraf açıklaması fikirleri ve dışarıda bırakılacaklar.
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-23
 reviewed: 2026-10-22
 order: 14
 keyword: düğün websitesi hikâyemiz örnekleri
@@ -99,7 +99,7 @@ Tasarımınız birkaç fotoğrafı her birinin altında kısa bir satırla göst
 
 ## Düğün websitelerimizde Hikâyemiz sayfası nasıl çalışır?
 
-Tasarımlarımızın her birinde bir Hikâyemiz sayfası vardır: en fazla {{storyIntroChars}} karakterlik kısa bir giriş satırı ve her biri en fazla {{storyCaptionChars}} karakterlik bir açıklamayla, tasarımın çerçevelerinde gösterilen {{storyPhotos}} hikâye fotoğrafı. Her fotoğrafı panelinizde çerçevesine göre kırpar ve yayınlamadan önce sayfayı önizlersiniz. Bu sayfa için müzik de seçebilirsiniz: dört parçadan biri, kendi dosyanız ya da hiçbiri; isterseniz sayfayı kapatabilirsiniz. Bir Hikâyemiz sayfası görmek için [Olive & Ivory demosunu](/designs/olive-ivory) telefonunuzda açın, [özellikleri](/features) okuyun ya da [telefonunuzda düğün websitesi nasıl yapılır](/guides/how-to-make-a-wedding-website) rehberiyle başlayın. [Düğün websitesine ne konur](/guides/what-to-put-on-your-wedding-website) kontrol listemiz diğer sayfaları kapsıyor.
+Tasarımlarımızın her birinde bir Hikâyemiz sayfası vardır: en fazla {{storyIntroChars}} karakterlik kısa bir giriş satırı ve her biri en fazla {{storyCaptionChars}} karakterlik bir açıklamayla, tasarımın çerçevelerinde gösterilen {{storyPhotos}} hikâye fotoğrafı. Her fotoğrafı panelinizde çerçevesine göre kırpar ve yayınlamadan önce sayfayı önizlersiniz. Bu sayfa için müzik de seçebilirsiniz: websiteniz için hazırlanmış bir parça, kendi dosyanız ya da hiçbiri; isterseniz sayfayı kapatabilirsiniz. Bir Hikâyemiz sayfası görmek için [Olive & Ivory demosunu](/designs/olive-ivory) telefonunuzda açın, [özellikleri](/features) okuyun ya da [telefonunuzda düğün websitesi nasıl yapılır](/guides/how-to-make-a-wedding-website) rehberiyle başlayın. [Düğün websitesine ne konur](/guides/what-to-put-on-your-wedding-website) kontrol listemiz diğer sayfaları kapsıyor.
 
 ## FAQ
 

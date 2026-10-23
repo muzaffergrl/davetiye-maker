@@ -378,10 +378,24 @@ function ClaimForm({
     }
   };
 
-  const showMessage = (m: FormMessage) => {
-    setMessage(m);
-    if (m) window.setTimeout(() => messageRef.current?.focus(), 0);
-  };
+  const showMessage = (m: FormMessage) => setMessage(m);
+
+  // The choice (G951) and the form's message are drawn at the top of the form, above the button that was tapped: once
+  // React has put them in the page, they take the focus and come into view. A timer set next to setState could run
+  // before that render (review 2026-10-23: on a 390 px phone the choice appeared 612 px above the screen, focus stayed
+  // on the page and nothing seemed to happen).
+  useEffect(() => {
+    const el = choiceRef.current;
+    if (!choice || !el) return;
+    el.focus({ preventScroll: true });
+    el.scrollIntoView({ block: el.offsetHeight < window.innerHeight ? 'center' : 'start' });
+  }, [choice]);
+  useEffect(() => {
+    const el = messageRef.current;
+    if (!message || !el) return;
+    el.focus({ preventScroll: true });
+    el.scrollIntoView({ block: el.offsetHeight < window.innerHeight ? 'center' : 'start' });
+  }, [message]);
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -443,7 +457,6 @@ function ClaimForm({
       const asked = res.status === 200 && body.ok ? parseChoice(body) : null;
       if (asked) {
         setChoice(asked);
-        window.setTimeout(() => choiceRef.current?.focus(), 0);
         return;
       }
       // G146: this order's website, started with this email: it is opened on this device (a device key).

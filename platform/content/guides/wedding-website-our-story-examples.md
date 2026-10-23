@@ -2,7 +2,7 @@
 title: "Our Story Examples for Your Wedding Website"
 description: How to write the Our Story section of your wedding website: five structures, original examples in different tones, photo caption ideas and what to leave out.
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-23
 reviewed: 2026-10-22
 order: 14
 keyword: wedding website our story examples
@@ -99,7 +99,7 @@ A good caption says where or when, and adds one human detail.
 
 ## How the Our Story page works on our wedding websites
 
-Every one of our designs has an Our Story page: a short intro line of up to {{storyIntroChars}} characters and {{storyPhotos}} story photos, each with a caption of up to {{storyCaptionChars}} characters, shown in the frames of the design. You crop each photo to its frame in your panel and preview the page before you publish. You can also choose music for this page, one of four tracks, your own file or none, and turn the page off if you prefer. Open the [Olive & Ivory demo](/designs/olive-ivory) on your phone to see an Our Story page, read the [features](/features), or start with [how to make a wedding website on your phone](/guides/how-to-make-a-wedding-website). Our checklist of [what to put on your wedding website](/guides/what-to-put-on-your-wedding-website) covers the other pages.
+Every one of our designs has an Our Story page: a short intro line of up to {{storyIntroChars}} characters and {{storyPhotos}} story photos, each with a caption of up to {{storyCaptionChars}} characters, shown in the frames of the design. You crop each photo to its frame in your panel and preview the page before you publish. You can also choose music for this page, a track made for your website, your own file or none, and turn the page off if you prefer. Open the [Olive & Ivory demo](/designs/olive-ivory) on your phone to see an Our Story page, read the [features](/features), or start with [how to make a wedding website on your phone](/guides/how-to-make-a-wedding-website). Our checklist of [what to put on your wedding website](/guides/what-to-put-on-your-wedding-website) covers the other pages.
 
 ## FAQ
 

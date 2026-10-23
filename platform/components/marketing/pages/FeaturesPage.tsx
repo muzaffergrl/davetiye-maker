@@ -49,7 +49,7 @@ export function FeaturesPage({ m }: { m: Market }) {
         t('An optional live countdown to the day'),
         // G154: G127 map, G126 music, G144 languages (the same words as "What's included", facts.ts)
         t('A map of your venue and directions with Google Maps, Apple Maps or Waze'),
-        t('Music on your Our Story page (one of four tracks made for your website, or your own file) and sound effects; you can turn each off'),
+        t('Music on your Our Story page (a track made for your website, or your own file) and sound effects; you can turn each off'),
         t('Your website in English, Spanish, French, German or Turkish, or in several: built-in texts come translated, and your own texts can be translated automatically as a draft you check'),
       ],
       screen: designScreen(a.id, 'schedule'),

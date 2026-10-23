@@ -72,7 +72,7 @@ export function included(cfg: MarketingConfig = MARKETING, t: T = enT): string[]
     t('{n} photo spots with cropping', { n: LIMITS.photoSpots }),
     t('Optional countdown, dress code, registry and travel links, and questions and answers'),
     t('A map of your venue and directions with Google Maps, Apple Maps or Waze'),
-    t('Music on your Our Story page (one of four tracks made for your website, or your own file) and sound effects; you can turn each off'),
+    t('Music on your Our Story page (a track made for your website, or your own file) and sound effects; you can turn each off'),
     t('Your website in English, Spanish, French, German or Turkish, or in several: built-in texts come translated, and your own texts can be translated automatically as a draft you check'),
     t('A link preview with your names and date when you share your link'),
     t('A QR code to download as PNG or SVG'),
@@ -105,7 +105,7 @@ export function editable(t: T = enT): string[] {
     t('Venue name, address and a map link'),
     t('The order of the day (up to {n} rows)', { n: LIMITS.scheduleRows }),
     t('Your story: an intro line and photo captions'),
-    t('Music for your Our Story page: one of four tracks, your own file or none'),
+    t('Music for your Our Story page: a track made for your website, your own file or none'),
     t('{n} photos: a portrait, {story} story photos and the venue, each cropped to its frame', { n: LIMITS.photoSpots, story: LIMITS.storyPhotos }),
     t('Questions and answers for guests (up to {n})', { n: LIMITS.faqItems }),
     t('RSVP deadline and up to {n} questions of your own', { n: LIMITS.rsvpQuestions }),
@@ -117,6 +117,8 @@ export function editable(t: T = enT): string[] {
 
 /** What stays as designed. */
 export const FIXED: readonly string[] = [msg('The artwork'), msg('Colors and fonts'), msg('Page layout and the opening animation')];
+/** FIXED as one sentence (/designs): its own key, since the list labels start with a capital (review 2026-10-23). */
+export const FIXED_SENTENCE = msg('The artwork, colors and fonts, page layout and opening animation stay as designed; you change the content.');
 
 /** docs/16 §11.7 wording, from config. */
 export function editRightsText(cfg: MarketingConfig = MARKETING, t: T = enT): { short: string; long: string; rest: string } {

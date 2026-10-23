@@ -346,7 +346,9 @@
 .pdb .pdb-thumb {
   position: relative;
   display: block;
-  aspect-ratio: 4 / 5;
+  /* 3:5 of the real 320 × 693 envelope screen, a little above its middle: the couple's names and the whole envelope fit on
+     every design (a 4:5 crop cut the names line in half on Art Deco, Velvet, Music Box, Ivory Lace …; review 2026-10-23) */
+  aspect-ratio: 3 / 5;
   overflow: hidden;
   border-radius: 12px;
   background: #ece5d8;
@@ -359,7 +361,7 @@
   max-width: none;
   margin: 0;
   object-fit: cover;
-  object-position: 50% 52%;
+  object-position: 50% 45%;
   transition: transform 0.35s ease;
 }
 .pdb .pdb-item:hover .pdb-thumb img {

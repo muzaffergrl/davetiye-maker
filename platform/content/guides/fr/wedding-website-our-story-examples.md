@@ -2,7 +2,7 @@
 title: "Exemples de « Notre histoire » pour votre site de mariage"
 description: Comment écrire « Notre histoire » sur votre site de mariage : cinq structures, des exemples originaux, des idées de légendes et ce qu'il faut éviter.
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-23
 reviewed: 2026-10-22
 order: 14
 keyword: exemples notre histoire site de mariage
@@ -99,7 +99,7 @@ Une bonne légende dit où ou quand, et ajoute un détail humain.
 
 ## La page « Notre histoire » sur nos sites de mariage
 
-Chacun de nos designs a une page « Notre histoire » : une courte introduction de {{storyIntroChars}} caractères au plus et {{storyPhotos}} photos, chacune avec une légende de {{storyCaptionChars}} caractères au plus, présentées dans les cadres du design. Vous recadrez chaque photo dans votre panneau et prévisualisez la page avant de la publier. Vous pouvez aussi choisir une musique pour cette page, l'un des quatre morceaux, votre propre fichier ou aucune, et désactiver la page si vous préférez. Ouvrez la [démo Olive & Ivory](/designs/olive-ivory) sur votre téléphone pour voir une page « Notre histoire », consultez les [fonctionnalités](/features) ou commencez par [comment créer un site de mariage sur votre téléphone](/guides/how-to-make-a-wedding-website). Notre liste de [ce qu'il faut mettre sur votre site de mariage](/guides/what-to-put-on-your-wedding-website) couvre les autres pages.
+Chacun de nos designs a une page « Notre histoire » : une courte introduction de {{storyIntroChars}} caractères au plus et {{storyPhotos}} photos, chacune avec une légende de {{storyCaptionChars}} caractères au plus, présentées dans les cadres du design. Vous recadrez chaque photo dans votre panneau et prévisualisez la page avant de la publier. Vous pouvez aussi choisir une musique pour cette page, un morceau créé pour votre site, votre propre fichier ou aucune, et désactiver la page si vous préférez. Ouvrez la [démo Olive & Ivory](/designs/olive-ivory) sur votre téléphone pour voir une page « Notre histoire », consultez les [fonctionnalités](/features) ou commencez par [comment créer un site de mariage sur votre téléphone](/guides/how-to-make-a-wedding-website). Notre liste de [ce qu'il faut mettre sur votre site de mariage](/guides/what-to-put-on-your-wedding-website) couvre les autres pages.
 
 ## FAQ
 

@@ -2,7 +2,7 @@
 title: "„Unsere Geschichte“: Beispiele für Ihre Hochzeitswebsite"
 description: So schreiben Sie „Unsere Geschichte“ für Ihre Hochzeitswebsite: fünf Aufbauten, eigene Beispiele in mehreren Tönen, Bildunterschriften und was wegbleibt.
 published: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-23
 reviewed: 2026-10-22
 order: 14
 keyword: Hochzeitswebsite unsere Geschichte Beispiele
@@ -99,7 +99,7 @@ Eine gute Bildunterschrift sagt, wo oder wann, und fügt ein menschliches Detail
 
 ## So funktioniert die Seite „Unsere Geschichte“ auf unseren Hochzeitswebsites
 
-Jedes unserer Designs hat eine Seite „Our Story“: eine kurze Einleitung mit bis zu {{storyIntroChars}} Zeichen und {{storyPhotos}} Fotos, jedes mit einer Bildunterschrift von bis zu {{storyCaptionChars}} Zeichen, gezeigt in den Rahmen des Designs. Sie schneiden jedes Foto in Ihrem Panel auf seinen Rahmen zu und sehen die Seite vor dem Veröffentlichen in der Vorschau. Sie können für diese Seite auch Musik wählen, einen von vier Titeln, Ihre eigene Datei oder keine, und die Seite ausschalten, wenn Sie möchten. Öffnen Sie die [Demo von Olive & Ivory](/designs/olive-ivory) auf Ihrem Handy, um eine solche Seite zu sehen, lesen Sie die [Funktionen](/features) oder beginnen Sie mit [Hochzeitswebsite am Handy erstellen](/guides/how-to-make-a-wedding-website). Unsere Checkliste dazu, [was auf Ihre Hochzeitswebsite gehört](/guides/what-to-put-on-your-wedding-website), deckt die anderen Seiten ab.
+Jedes unserer Designs hat eine Seite „Our Story“: eine kurze Einleitung mit bis zu {{storyIntroChars}} Zeichen und {{storyPhotos}} Fotos, jedes mit einer Bildunterschrift von bis zu {{storyCaptionChars}} Zeichen, gezeigt in den Rahmen des Designs. Sie schneiden jedes Foto in Ihrem Panel auf seinen Rahmen zu und sehen die Seite vor dem Veröffentlichen in der Vorschau. Sie können für diese Seite auch Musik wählen, einen für Ihre Website gemachten Titel, Ihre eigene Datei oder keine, und die Seite ausschalten, wenn Sie möchten. Öffnen Sie die [Demo von Olive & Ivory](/designs/olive-ivory) auf Ihrem Handy, um eine solche Seite zu sehen, lesen Sie die [Funktionen](/features) oder beginnen Sie mit [Hochzeitswebsite am Handy erstellen](/guides/how-to-make-a-wedding-website). Unsere Checkliste dazu, [was auf Ihre Hochzeitswebsite gehört](/guides/what-to-put-on-your-wedding-website), deckt die anderen Seiten ab.
 
 ## FAQ
 

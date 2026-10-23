@@ -949,7 +949,7 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
 ## 5. START HERE rehberi
 
 **Ortak kaynak:** Ek A (bu belgenin sonunda, iki işaret satırı arasında: `g091:start-here:start` … `end`). Yer tutucular
-(`{DESIGN_NAME}`, `{START_URL}`, `{PRIVACY_URL}`, `{TERMS_URL}`, `{OPENING}`, `{OPENING_TAB}`, `{LANGUAGE_FONTS}`) Ek A'nın başındaki tabloda. **Üretim tek
+(`{DESIGN_NAME}`, `{START_URL}`, `{PRIVACY_URL}`, `{TERMS_URL}`, `{OPENING}`, `{OPENING_TAB}`, `{LANGUAGE_FONTS}`, `{MUSIC_TRACKS}`) Ek A'nın başındaki tabloda. **Üretim tek
 komut (G122):** `python3 tools/build_customer_guides.py` — 20 tasarımın her biri için `package/customer/START_HERE.md`,
 `START_HERE.pdf`, `img/start_qr.{png,svg}` (yalnız `tools/make_qr.py`, gerçek başlat linkinden), `img/start_qr_page.png`; sonra
 denetim. `--designs 06-20` seçim, `--check` yalnız denetim, `--base-url` / `GUIDE_BASE_URL` başka alan adı (karar gelince).
@@ -1158,6 +1158,7 @@ metni burada değiştir, komutu yeniden koş. Yer tutucular (araç doldurur; dol
 | `{OPENING}` | Misafirin ilk dokunduğu nesne: `envelope`; 06 ve 14 `gatefold`, 09 `pouch`, 12 `wallet`, 13 `book`, 18 `sleeve` | `platform/lib/marketing/designs.ts` `opening` ("Your guests tap the …") |
 | `{OPENING_TAB}` | Aynı kelime büyük harfle: panelin ilk önizleme sekmesi (`Envelope`, `Gatefold`, `Pouch`, `Wallet`, `Book`, `Sleeve`) | G121: `platform/lib/panel/model.ts` `openingTabLabel` (aynı `designs.ts` cümlesinden) |
 | `{LANGUAGE_FONTS}` | Tasarım fontlarının dil kapsamı (3 cümleden biri, aşağıda) | `designs.ts` `fonts` + aracın `FONT_SUBSETS` tablosu (Google Fonts CSS, 2026-10-16) |
+| `{MUSIC_TRACKS}` | Panelin Story müzik parçaları, sayısı ve adlarıyla: ortak dört parça ("one is marked as suggested for your design"); kendi parçası olan tasarımda o önce ve önerilen (21: beş parça, **Rose Nocturne**) | `platform/lib/audio/catalog.ts` `MUSIC_TRACKS` (`tracksFor` sırası) + `DESIGN_SOUND[id].music` (2026-10-23 inceleme: 21'de "four tracks" yanlıştı) |
 
 `{LANGUAGE_FONTS}`: bütün fontlar latin-ext + Kiril (01, 03, 19) → "Accented Latin letters and Cyrillic use the design's fonts;
 other alphabets show in a plain standard font." · hepsi latin-ext, en az biri Kiril'siz (02, 05, 07–10, 12, 14–17, 20) → "Accented
@@ -1312,7 +1313,7 @@ The editor shows what guests' maps will find (the pin of your link, or your addr
 
 Open **Edit → Our Story** and scroll to **Music & sound** at the end of the page.
 
-- **Story music:** choose one of four tracks made for your website (**First Light**, **Garden Waltz**, **Evening Strings**, **Music Box**; one is marked as suggested for your design), **Your own music** or **No music**. Tap **Listen** to hear it.
+- **Story music:** choose {MUSIC_TRACKS}, **Your own music** or **No music**. Tap **Listen** to hear it.
 - **Your own music:** tap **Choose a file** and upload an MP3 or M4A file of up to 10 MB. Only upload music you have the right to use (your own recording or a licence that allows it).
 - **Sound effects:** soft sounds when guests open the {OPENING}, move between pages and send their reply. Turn it off for a quiet website.
 

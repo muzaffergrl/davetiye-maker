@@ -256,6 +256,22 @@ try {
   );
   check('second claim: no new site before the buyer asks', (await adapter.findSitesByOrderRef(ORDER)).length === 1 && !(await adapter.getSiteBySlug('other-and-pair')));
   check('choice: no horizontal overflow at 390 px', (await overflow(page)) <= 0);
+  // review 2026-10-23: the choice is drawn at the top of the form, far above the tapped button on a phone; it must take
+  // the focus and come on screen by itself (a timer focus ran before React rendered it: nothing seemed to happen)
+  const onScreen = (selector: string) =>
+    page
+      .waitForFunction((sel: string) => document.activeElement === document.querySelector(sel), selector, { timeout: 3000 })
+      .catch(() => null)
+      .then(() =>
+        page.evaluate((sel: string) => {
+          const el = document.querySelector(sel) as HTMLElement | null;
+          if (!el) return null;
+          const r = el.getBoundingClientRect();
+          return { focused: document.activeElement === el, top: Math.round(r.top), bottom: Math.round(r.bottom), vh: innerHeight };
+        }, selector),
+      );
+  const seen = await onScreen('[data-start-choice]');
+  check('choice: focused and on screen after the tap (390 px)', !!seen && seen.focused && seen.top >= 0 && seen.top < seen.vh - 80, JSON.stringify(seen));
   await page.locator('[data-start-choice]').scrollIntoViewIfNeeded();
   await shot(page, '06_order_choice_390');
 
@@ -263,6 +279,9 @@ try {
   await page.fill('#start-email', 'someone@example.test');
   await page.click('button[type="submit"]');
   await page.waitForSelector('[data-start-my-link]');
+  await page.evaluate(() => document.querySelector('[data-start-my-link]')?.closest('[tabindex="-1"]')?.setAttribute('data-test-message', ''));
+  const msgSeen = await onScreen('[data-test-message]');
+  check('message: focused and on screen after the tap (390 px)', !!msgSeen && msgSeen.focused && msgSeen.top >= 0 && msgSeen.top < msgSeen.vh - 80, JSON.stringify(msgSeen));
   const usedText = await page.locator('main').innerText();
   check(
     'second claim, another email: friendly message with the way to /my',

@@ -117,7 +117,7 @@ The editor shows what guests' maps will find (the pin of your link, or your addr
 
 Open **Edit → Our Story** and scroll to **Music & sound** at the end of the page.
 
-- **Story music:** choose one of four tracks made for your website (**First Light**, **Garden Waltz**, **Evening Strings**, **Music Box**; one is marked as suggested for your design), **Your own music** or **No music**. Tap **Listen** to hear it.
+- **Story music:** choose one of five tracks made for your website (**Rose Nocturne**, **First Light**, **Garden Waltz**, **Evening Strings**, **Music Box**; **Rose Nocturne** was made for this design and is marked as suggested), **Your own music** or **No music**. Tap **Listen** to hear it.
 - **Your own music:** tap **Choose a file** and upload an MP3 or M4A file of up to 10 MB. Only upload music you have the right to use (your own recording or a licence that allows it).
 - **Sound effects:** soft sounds when guests open the envelope, move between pages and send their reply. Turn it off for a quiet website.
 

@@ -138,8 +138,8 @@
         img.loading = 'lazy';
         img.decoding = 'async';
         img.alt = '';
-        img.width = 160;
-        img.height = 200;
+        img.width = 150;
+        img.height = 250;
         img.src = it.thumb;
         thumb.appendChild(img);
       }

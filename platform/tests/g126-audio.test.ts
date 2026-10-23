@@ -3,7 +3,7 @@
 // several parts) and serving the couple's file (published only while chosen, Range → 206).
 import { before, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import * as cheerio from 'cheerio';
 import { POST as musicRoute } from '../app/api/edit/[slug]/music/route.ts';
@@ -11,6 +11,7 @@ import { PUT as saveRoute, GET as stateRoute } from '../app/api/edit/[slug]/rout
 import { GET as pageRoute } from '../app/[slug]/[page]/route.ts';
 import { GET as siteRoute } from '../app/[slug]/route.ts';
 import { GET as mediaRoute } from '../app/media/[...path]/route.ts';
+import { BUNDLED_DEMO_CONTENT } from '../lib/claim/demo/index.ts';
 import { customMusicFile, DESIGN_SOUND, EFFECT_NAMES, effectsOn, MUSIC_TRACKS, resolveMusic } from '../lib/audio/catalog.ts';
 import type { ContentRecord } from '../lib/content/types.ts';
 import { validateContent } from '../lib/content/validate.ts';
@@ -51,6 +52,20 @@ test('every design has its sounds; tracks ≤ 1.5 MB, effects ≤ 56 KB (G967), 
   }
   for (const [id, s] of Object.entries(DESIGN_SOUND)) assert.ok(MUSIC_TRACKS.some((t) => t.id === s.music), `${id}: unknown track`);
   for (const track of MUSIC_TRACKS) if (track.theme) assert.ok(DESIGN_SOUND[track.theme], `${track.id}: no design ${track.theme}`);
+});
+
+test('a demo plays its design’s own track: content.demo.json audio.music is absent or DESIGN_SOUND[id].music', () => {
+  // A buyer's first draft is a copy of the demo (draftFromDemo), so a demo track other than the design's default would
+  // start every new website on it while the panel suggests another one (review 2026-10-23: 21, 45).
+  const themes = readdirSync(THEMES_DIR).filter((t) => t !== '_sample' && statSync(path.join(THEMES_DIR, t)).isDirectory());
+  for (const t of themes) {
+    const own = path.join(THEMES_DIR, t, 'content.demo.json');
+    const record = (existsSync(own) ? demo(t) : BUNDLED_DEMO_CONTENT[t]) as ContentRecord | undefined;
+    assert.ok(record, `${t}: no demo content`);
+    const music = record.audio?.music;
+    if (music !== undefined) assert.equal(music, DESIGN_SOUND[t]?.music, `${t}: the demo plays ${music}, the design's track is ${DESIGN_SOUND[t]?.music}`);
+    assert.equal(resolveMusic(record, t)?.trackId, DESIGN_SOUND[t]?.music, `${t}: demo story music`);
+  }
 });
 
 test('a design sound pack holds every cue it plays, tap and chime; shared designs use only the shared effects', () => {

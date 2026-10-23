@@ -7,7 +7,7 @@
 --out:cubic-bezier(.16,1,.3,1);--io:cubic-bezier(.65,0,.35,1);--soft:cubic-bezier(.2,.7,.2,1);--pmap-border:var(--line);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
 body{margin:0;background:var(--cream) url(img/paper-1200.webp) 0 0/1100px;color:var(--ink);font:400 18px/1.65 var(--serif);padding-bottom:80px;overflow-x:clip}
 body.dark{background:var(--deep);color:var(--cream)}
 img{display:block;max-width:100%}
@@ -463,6 +463,13 @@ legend{padding:0;margin-bottom:6px;width:100%;overflow-wrap:anywhere}
  .schedule{columns:1}
  .reply-box{padding-inline:12%}
 }
+/* wider than a column (letter 760, day 820, reply 700): the roses run on past its edge to the screen instead of stopping
+   in a straight line there (review 2026-10-23). body clips them at the screen (overflow-x:clip) only because html has its
+   own overflow-x: without it body's value moves to the viewport (as hidden), body clips nothing and the page could be
+   scrolled sideways (measured: 229 px at 900 px wide) */
+@media(min-width:761px){.opening{overflow-x:visible}}
+@media(min-width:821px){.programme{overflow-x:visible}}
+@media(min-width:701px){.rsvp-page{overflow-x:visible}}
 @media(max-width:359px){
  .opening .names{--fs:11.6vw}
  .site-nav a{min-width:60px;padding-inline:9px}

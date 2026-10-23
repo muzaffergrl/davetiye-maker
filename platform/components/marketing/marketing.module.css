@@ -467,9 +467,6 @@
   text-decoration-color: var(--gold);
   text-decoration-thickness: 2px;
 }
-.headerCta {
-  display: none !important;
-}
 .mobileMenu {
   margin-left: auto;
 }
@@ -548,27 +545,23 @@
   .nav {
     display: block;
   }
-  .headerCta {
-    display: inline-flex !important;
-    margin-left: 8px;
-  }
   .mobileMenu {
     display: none;
   }
 }
 /* G099: 1024–1279 px — logo, six links, "My website" and "See designs" did not fit one row (at 1024 "How it works"
    wrapped to three lines and "See designs" ran off the screen, since G095). Here the links stay on one line with less
-   padding and the header "See designs" button is left out ("Designs" is the first link); "My website" stays. */
-@media (min-width: 1024px) and (max-width: 1279.98px) {
+   padding and the header "See designs" button is left out ("Designs" is the first link); "My website" stays.
+   Review 2026-10-23: from 1280 px up the header is no wider (1200 px container), and "How it works", "See designs"
+   (es: "Preguntas frecuentes") broke onto two lines in all five languages — so the rule holds on every desktop width,
+   and the header "See designs" button is gone (it showed on no width any more). */
+@media (min-width: 1024px) {
   .headerInner {
     gap: 12px;
   }
   .nav a {
     padding: 0 9px;
     white-space: nowrap;
-  }
-  .headerCta {
-    display: none !important;
   }
 }
 

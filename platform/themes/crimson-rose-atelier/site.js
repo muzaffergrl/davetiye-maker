@@ -150,9 +150,10 @@ function initCountdown() {
 /* -- petals (PAKET 8 W3.4): sprites named by parts.css; they tumble down from a point and are gone */
 let PETALS = [];
 try { PETALS = getComputedStyle(root).getPropertyValue('--cra-petals').replace(/["']/g, ' ').trim().split(/\s+/).filter(Boolean); } catch (e) { PETALS = []; }
+/** Spawns `count` petals; false when none fall (no sprites yet, reduced motion, no animation) — then no petal sound either. */
 function petals(count, from) {
   const layer = $('.accent-layer');
-  if (!PETALS.length || !layer || reduce || !canAnimate || !count) return;
+  if (!PETALS.length || !layer || reduce || !canAnimate || !count) return false;
   const W = innerWidth, H = innerHeight;
   for (let i = 0; i < count; i++) {
     const img = new Image(), s = 18 + Math.random() * 18;
@@ -168,6 +169,7 @@ function petals(count, from) {
     layer.append(img);
     img.animate(frames, { duration: 2800 + Math.random() * 1800, delay: i * 60, easing: 'linear', fill: 'both' }).onfinish = () => img.remove();
   }
+  return true;
 }
 
 /* -- the letter */
@@ -249,7 +251,7 @@ function initEnvelope() {
 /* -- home: a few petals settle as the card lands */
 function initHome() {
   if (!$('.page-home') || !root.classList.contains('from-envelope')) return;
-  setTimeout(() => { petals(MOTION.petals.arrive, null); if (PETALS.length) sfx('petal'); }, 650);
+  setTimeout(() => { if (petals(MOTION.petals.arrive, null)) sfx('petal'); }, 650);
 }
 
 /* -- the album: leaves turn like a real book (drag from the right edge, buttons, arrows, thumbnails) */
@@ -260,7 +262,9 @@ function initAlbum() {
   leaves.forEach((l) => { const s = document.createElement('span'); s.className = 'leaf-shade'; s.setAttribute('aria-hidden', 'true'); l.append(s); });
   let active = clamp(Number(location.hash.replace('#chapter-', '')) - 1 || 0, 0, last), busy = false;
   const shade = (leaf, deg) => { leaf.lastChild.style.opacity = String(Math.sin(Math.min(180, Math.abs(deg)) * Math.PI / 180) * 0.95); };
-  function layout() {
+  // first: the call while the page loads. It writes no #chapter-1 into a plain /story address: the browser scrolls to the
+  // URL's fragment when loading ends, and the page would open past its title (review 2026-10-23: 277–305 px down)
+  function layout(first = false) {
     leaves.forEach((l, i) => {
       l.classList.toggle('turned', i < active);
       l.classList.toggle('under', i === active + 1);
@@ -274,7 +278,7 @@ function initAlbum() {
     tabs.forEach((b, i) => b.setAttribute('aria-pressed', String(i === active)));
     $('[data-album-number]').textContent = String(active + 1).padStart(2, '0');
     prev.disabled = active === 0; next.disabled = active === last;
-    history.replaceState(null, '', '#chapter-' + (active + 1));
+    if (!first || location.hash) history.replaceState(null, '', '#chapter-' + (active + 1));
   }
   function sway() { if (ribbon && canAnimate && !reduce) ribbon.animate([{ rotate: '0deg' }, { rotate: '-7deg' }, { rotate: '4deg' }, { rotate: '0deg' }], { duration: 1400, easing: 'ease-out' }); }
   // dir +1: the active leaf turns over to the left; -1: the last turned leaf comes back. from = the drag angle reached
@@ -304,7 +308,7 @@ function initAlbum() {
     while (active !== i) await turn(i > active ? 1 : -1, 0, Math.abs(i - active) > 1);
   }
   $('.album-controls').hidden = false; $('.album-tabs').hidden = false; $('.album-hint').hidden = false;
-  layout();
+  layout(true);
   prev.addEventListener('click', () => { if (!busy) turn(-1); });
   next.addEventListener('click', () => { if (!busy) turn(1); });
   tabs.forEach((t, i) => t.addEventListener('click', () => goTo(i)));

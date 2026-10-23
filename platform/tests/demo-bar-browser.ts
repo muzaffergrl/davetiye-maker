@@ -10,7 +10,9 @@
 // focus back; axe-core finds nothing serious in the bar. Then at 390: a tap on the pill and on the backdrop leaves the
 // envelope closed and a tap on the envelope still opens it; ?lang=tr lasts through the opening and a nav tap; one tap on
 // a design opens its demo on the same page; scrolling down hides the pill and scrolling up shows it; inside an iframe
-// there is no bar. --shots writes a screenshot of each width closed and open. Exit 1 on any failure.
+// there is no bar; the thumbnails are 3:5. Review 2026-10-23 (21 Crimson Rose Atelier): its story page opens at its title
+// (390, 1280) and at 900 / 1280 its roses run past the column with no sideways scroll. --shots writes a screenshot of each
+// width closed and open. Exit 1 on any failure.
 
 import { mkdirSync, mkdtempSync, readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
@@ -157,7 +159,49 @@ async function main() {
     const frame = page.frames().find((f: { url: () => string }) => f.url().includes('/start/demo/'));
     const inFrame = frame ? await frame.evaluate(() => document.querySelectorAll('.pdb, #demo-bar-data').length) : -1;
     check(inFrame === 0, 'no bar inside an iframe');
+    // review 2026-10-23: the thumbnails are 3:5 crops of the envelope screen (the 4:5 crop halved the names line)
+    await page.goto(`${BASE}/start/demo/olive-ivory`);
+    await page.waitForSelector('.pdb-pill');
+    await page.tap('.pdb-pill');
+    await page.waitForTimeout(400);
+    const ratios: number[] = await page.evaluate(() =>
+      Array.from(document.querySelectorAll('.pdb-thumb')).map((t) => t.getBoundingClientRect().width / t.getBoundingClientRect().height),
+    );
+    check(ratios.length > 0 && ratios.every((r) => Math.abs(r - 0.6) < 0.02), `thumbnails are 3:5 (${ratios.length})`);
     await ctx.close();
+    // 21 (review 2026-10-23): its story page opens at the top (no #chapter-1 written while loading: the browser scrolled
+    // past the title to it) and, wider than its columns, its roses neither stop in a straight line nor scroll sideways
+    for (const w of [390, 1280]) {
+      const c = await browser.newContext({ viewport: { width: w, height: 844 } });
+      const p = await c.newPage();
+      await p.goto(`${BASE}/start/demo/crimson-rose-atelier/story`, { waitUntil: 'load' });
+      await p.waitForTimeout(1200);
+      const top = await p.evaluate(() => ({ y: scrollY, hash: location.hash }));
+      check(top.y === 0 && top.hash === '', `${w}: 21 story opens at its title (${JSON.stringify(top)})`);
+      await c.close();
+    }
+    for (const w of [900, 1280]) {
+      const c = await browser.newContext({ viewport: { width: w, height: 860 } });
+      const p = await c.newPage();
+      for (const pg of ['', '/details', '/rsvp']) {
+        await p.goto(`${BASE}/start/demo/crimson-rose-atelier${pg}`, { waitUntil: 'load' });
+        await p.waitForTimeout(1500);
+        const x = await p.evaluate(() => {
+          scrollTo({ left: 400, top: 0, behavior: 'instant' as ScrollBehavior });
+          const moved = scrollX;
+          const flower = document.querySelector('.opening .rose-a, .head-rose');
+          const col = flower?.closest('.opening, .programme, .rsvp-page');
+          return {
+            sw: document.scrollingElement!.scrollWidth - innerWidth,
+            moved,
+            past: flower && col ? Math.round(flower.getBoundingClientRect().right - col.getBoundingClientRect().right) : 0,
+            clip: col ? getComputedStyle(col).overflowX : '',
+          };
+        });
+        check(x.sw <= 0 && x.moved === 0 && x.clip === 'visible', `${w}: 21${pg || ' envelope'} roses run past the column, no sideways scroll (${JSON.stringify(x)})`);
+      }
+      await c.close();
+    }
   } finally {
     await browser.close();
     server?.stop();
