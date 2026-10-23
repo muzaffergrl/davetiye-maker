@@ -6,10 +6,10 @@ import { CalendarDays, TriangleAlert } from 'lucide-react';
 import { formatDate, formatDateLong } from '../../lib/content/format.ts';
 import type { ContentRecord } from '../../lib/content/types.ts';
 import { sampleDateLeft } from '../../lib/panel/model.ts';
-import { ARCHIVE_AFTER_MONTHS, ARCHIVE_TEXT, changesRuleText, FREE_CHANGES_TEXT, IDENTITY_CHANGE_LIMIT, UNDO_TEXT, type RightsView } from '../../lib/panel/rights.ts';
+import { ARCHIVE_AFTER_MONTHS, ARCHIVE_TEXT, DATE_FREE_DAYS, IDENTITY_CHANGE_LIMIT, TYPO_MAX_DISTANCE, UNDO_TEXT, type RightsView } from '../../lib/panel/rights.ts';
 import { Button } from './ui.tsx';
 import styles from './panel.module.css';
-import { t } from '../../lib/i18n/client.ts';
+import { t, tn } from '../../lib/i18n/client.ts';
 
 /** The rules shown before EVERY first publish (wizard step 6 and the editor's first Publish), docs/16 §11.7. */
 export function RulesBox({ rights, locale, total = IDENTITY_CHANGE_LIMIT }: { rights: RightsView; locale: string; total?: number }) {
@@ -18,8 +18,9 @@ export function RulesBox({ rights, locale, total = IDENTITY_CHANGE_LIMIT }: { ri
     <div className={styles.rules} data-rules>
       <h3 className={styles.rulesTitle}>{t('Good to know before you publish')}</h3>
       <ul>
-        <li>{changesRuleText(total)}</li>
-        <li>{t(FREE_CHANGES_TEXT)}</li>
+        {/* the rules in the panel language (changesRuleText / FREE_CHANGES_TEXT are the English source, numbers filled in) */}
+        <li>{tn(total, 'After you publish, you have {n} change in total for your names, monogram and wedding date (changing several in one go counts once).', 'After you publish, you have {n} changes in total for your names, monogram and wedding date (changing several in one go counts once).')}</li>
+        <li>{t('Always free: fixing a small typo (up to {letters} letters in a name), adding a surname, and moving your date by up to {days} days.', { letters: TYPO_MAX_DISTANCE, days: DATE_FREE_DAYS })}</li>
         <li>{t(UNDO_TEXT)}</li>
         <li>{t('Everything else — time, venue, schedule, story, photos, details and replies — you can change as often as you like.')}</li>
         <li>

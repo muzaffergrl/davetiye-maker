@@ -26,6 +26,7 @@ import type { ContentRecord } from '../content/types.ts';
 import { isValidTimeZone, parseIsoDate, zonedTimeToUtc } from '../content/format.ts';
 import type { Identity, IdentityLogEntry, IdentityRights, SiteRecord } from '../data/types.ts';
 import { MARKETING } from '../marketing/config.ts';
+import { msg } from '../i18n/translate.ts';
 
 export type { Identity, IdentityName, IdentityRights, IdentityLogEntry } from '../data/types.ts';
 
@@ -61,7 +62,7 @@ export function changesRuleText(total: number = IDENTITY_CHANGE_LIMIT): string {
 /** What never uses a change. */
 export const FREE_CHANGES_TEXT = `Always free: fixing a small typo (up to ${TYPO_MAX_DISTANCE} letters in a name), adding a surname, and moving your date by up to ${DATE_FREE_DAYS} days.`;
 /** The undo rule. */
-export const UNDO_TEXT = 'Changed something by mistake? Undo it right away (before you publish it, or within 10 minutes) and you get the change back.';
+export const UNDO_TEXT = msg('Changed something by mistake? Undo it right away (before you publish it, or within 10 minutes) and you get the change back.');
 /** Before the first publish (names and date pages, Home). */
 export function beforePublishText(total: number = IDENTITY_CHANGE_LIMIT): string {
   return `Change these freely until you publish. After that, names and date can change ${total} times (small fixes are free).`;
@@ -71,7 +72,7 @@ export function rightsOneLine(total: number = IDENTITY_CHANGE_LIMIT): string {
   return `After publishing you can change names or the date ${total} ${total === 1 ? 'time' : 'times'}.`;
 }
 /** What happens at the archive date (rules box, help, the reminder before it). */
-export const ARCHIVE_TEXT = 'Then your website closes for guests; you can still see your content and download your replies.';
+export const ARCHIVE_TEXT = msg('Then your website closes for guests; you can still see your content and download your replies.');
 /** Answer of every write endpoint once a site is archived (403 archived). */
 export const ARCHIVED_MESSAGE = 'This website is archived. You can still see your content and download your replies, but it can no longer be changed.';
 

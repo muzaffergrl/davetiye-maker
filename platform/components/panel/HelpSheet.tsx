@@ -4,12 +4,12 @@
 import { formatDateLong } from '../../lib/content/format.ts';
 import { isPlaceholder, PANEL_BRAND } from '../../lib/panel/brand.ts';
 import { type PanelMeta } from '../../lib/panel/model.ts';
-import { ARCHIVE_AFTER_MONTHS, ARCHIVE_TEXT, changesRuleText, FREE_CHANGES_TEXT, UNDO_TEXT } from '../../lib/panel/rights.ts';
+import { ARCHIVE_AFTER_MONTHS, ARCHIVE_TEXT, DATE_FREE_DAYS, TYPO_MAX_DISTANCE, UNDO_TEXT } from '../../lib/panel/rights.ts';
 import { MessageCircle } from 'lucide-react';
 import { Sheet } from './Sheet.tsx';
 import { Button } from './ui.tsx';
 import styles from './panel.module.css';
-import { t } from '../../lib/i18n/client.ts';
+import { t, tn } from '../../lib/i18n/client.ts';
 
 
 // ---------------------------------------------------------------------------------------------
@@ -35,9 +35,10 @@ export function HelpSheet({ meta, locale, onClose, topic, onChat }: { meta: Pane
         <section data-autofocus={topic === 'changes' || undefined} tabIndex={-1}>
           <h3 className={styles.subTitle}>{t('How do name and date changes work?')}</h3>
           <p>
-            {t('Until you publish, you can change everything freely.')} {changesRuleText(total)}
+            {t('Until you publish, you can change everything freely.')}{' '}
+            {tn(total, 'After you publish, you have {n} change in total for your names, monogram and wedding date (changing several in one go counts once).', 'After you publish, you have {n} changes in total for your names, monogram and wedding date (changing several in one go counts once).')}
           </p>
-          <p>{t(FREE_CHANGES_TEXT)}</p>
+          <p>{t('Always free: fixing a small typo (up to {letters} letters in a name), adding a surname, and moving your date by up to {days} days.', { letters: TYPO_MAX_DISTANCE, days: DATE_FREE_DAYS })}</p>
           <p>{t(UNDO_TEXT)}</p>
           <p>{t('Everything else — time, venue, schedule, story, photos, details and replies — you can change as often as you like.')}</p>
           {r.phase !== 'before_publish' ? (
