@@ -1,7 +1,10 @@
 // G144: panel texts in fr (keys = the English text; tests/i18n.test.ts reports missing keys). Missing = English.
 import type { Dict } from '../../translate.ts';
+import legal from '../legal/panel-fr.ts';
 
 const dict: Dict = {
+  // G961: terms of use, KVKK notice (dict/legal/panel-fr.ts)
+  ...legal,
   '(Only date moves of up to {days} days are free.)': '(Seuls les décalages de date de {days} jours maximum sont gratuits.)',
   '(one row per guest)': '(une ligne par invité)',
   '(optional)': '(facultatif)',

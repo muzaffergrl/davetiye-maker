@@ -7,7 +7,7 @@ import { DEFAULT_LANG, isLang, LANGS, type Lang } from '../i18n/langs.ts';
 export const PREFIXED_LANGS = LANGS.filter((l): l is Exclude<Lang, 'en'> => l !== DEFAULT_LANG);
 
 /** First path segments of the localized marketing pages ('' = home). Others (/start, /my, /themes …) stay unprefixed. */
-const LOCALIZED_SEGMENTS = new Set(['', 'designs', 'how-it-works', 'features', 'pricing', 'faq', 'guides', 'about', 'contact', 'privacy']);
+const LOCALIZED_SEGMENTS = new Set(['', 'designs', 'how-it-works', 'features', 'pricing', 'faq', 'guides', 'about', 'contact', 'privacy', 'terms', 'kvkk']);
 
 /**
  * The address of a marketing path in `lang`: href('tr', '/designs') → '/tr/designs', href('tr', '/') → '/tr',

@@ -519,6 +519,15 @@
   color: var(--c-text);
 }
 
+/* G961: the terms / privacy / KVKK links under the button (aubergine, underlined, like the panel's text links). */
+.small a {
+  color: var(--c-heading);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
 .breakAll {
   word-break: break-all;
   color: var(--c-text);

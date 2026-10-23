@@ -1,7 +1,10 @@
 // G144: market texts in tr (keys = the English text; tests/i18n.test.ts reports missing keys). Missing = English.
 import type { Dict } from '../../translate.ts';
+import legal from '../legal/market-tr.ts';
 
 const dict: Dict = {
+  // G961: terms of use, KVKK notice (dict/legal/market-tr.ts)
+  ...legal,
   '+{n} more': '+{n} tane daha',
   ', and every step is explained in': ' sayfasında; her adım ise şurada anlatılıyor:',
   '24 hours': '24 saat',
@@ -666,7 +669,6 @@ const dict: Dict = {
   'We make wedding websites that open like a real invitation, sold on Etsy and edited from your phone. Here is how we design, test and host them.': 'Gerçek bir davetiye gibi açılan, Etsy\'de satılan ve telefondan düzenlenen düğün websiteleri yapıyoruz. Tasarım, test ve barındırma sürecimizi anlatıyoruz.',
   'We reply within {responseTime}. If something stops guests from opening your website or replying, put "Urgent" in the subject line and tell us your wedding date. For everything else, a short description and a screenshot help us answer in one message. [Contact us](/contact).': '{responseTime} içinde yanıt veririz. Davetlilerin websitenizi açmasını ya da yanıt vermesini engelleyen bir sorun varsa konu satırına "Urgent" (Acil) yazın ve düğün tarihinizi belirtin. Diğer her şey için kısa bir açıklama ve bir ekran görüntüsü, tek mesajda yanıt vermemize yardımcı olur. [Bize ulaşın](/contact).',
   'We reply within {time}.': '{time} içinde yanıt veririz.',
-  'We use them to create, host and show your website, to keep one website per order and to help you when you contact us. To confirm an order, we may look up its number among our Etsy shop’s orders. Payment is handled by Etsy under Etsy’s own privacy policy; we never see your card details.': 'Bunları websitenizi oluşturmak, barındırmak ve göstermek, her sipariş için tek website kuralını korumak ve bize ulaştığınızda size yardımcı olmak için kullanırız. Bir siparişi onaylamak için numarasını Etsy mağazamızın siparişleri arasında arayabiliriz. Ödemeyi Etsy, kendi gizlilik politikası kapsamında alır; kart bilgilerinizi hiç görmeyiz.',
   'We will never ask for your edit link.': 'Düzenleme bağlantınızı asla istemeyiz.',
   'Websites are hosted on Vercel in the United States. Content, replies, photos and music are kept in a private Vercel Blob store.': 'Websiteler Amerika Birleşik Devletleri\'nde Vercel üzerinde barındırılır. İçerik, yanıtlar, fotoğraflar ve müzik gizli bir Vercel Blob deposunda tutulur.',
   'Wedding Website Designs with Envelope Opening': 'Zarf Açılışlı Düğün Websitesi Tasarımları',
@@ -699,7 +701,6 @@ const dict: Dict = {
   'What your guests see after the {thing} opens': '{thing} açıldıktan sonra davetlilerinizin gördükleri',
   'What’s included': 'Neler dahil',
   'Wheat Gold': 'Buğday Altını',
-  'When email sending is switched on, we use your email address to send you your edit link after you start, the sign-in links you ask for and, only if you turn it on under Guests, a short email for each new guest reply. These emails go through our email provider. We send no newsletters or ads.': 'E-posta gönderimi açıkken e-posta adresinizi şunlar için kullanırız: başladıktan sonra düzenleme bağlantınızı, istediğiniz giriş bağlantılarını ve yalnızca Davetliler altında açarsanız her yeni davetli yanıtı için kısa bir e-postayı göndermek. Bu e-postalar e-posta sağlayıcımız üzerinden gider. Bülten ya da reklam göndermeyiz.',
   'When should the RSVP deadline be?': 'RSVP son tarihi ne zaman olmalı?',
   'When this notice changes, the date at the top changes too.': 'Bu bildirim değiştiğinde en üstteki tarih de değişir.',
   'When to share it': 'Ne zaman paylaşmalı',

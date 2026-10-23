@@ -1,5 +1,5 @@
 'use client';
-import { setUiLocale, t } from '../../lib/i18n/client.ts';
+import { setUiLocale, t, uiLang } from '../../lib/i18n/client.ts';
 import type { Lang } from '../../lib/i18n/langs.ts';
 import type { Dict } from '../../lib/i18n/translate.ts';
 // /start form and result (G045). Phone first (390 px), in the edit panel's BKE Studio look (G080: StartShell —
@@ -24,6 +24,7 @@ import {
   NAME_MAX,
   type ClaimField,
 } from '../../lib/claim/fields.ts';
+import { href as marketingHref } from '../../lib/marketing/lang-path.ts';
 import { markOpenedExisting, rememberEditor, takeStartPrefill } from '../../lib/panel/remember.ts';
 import { PalettePicker } from '../../components/palette/PalettePicker.tsx';
 import { StartShell } from './shell.tsx';
@@ -645,9 +646,39 @@ function ClaimForm({
       <button className={styles.primary} type="submit" disabled={busy}>
         {busy ? t('Creating your website…') : t('Create my website')}
       </button>
+      <LegalLine />
       <p className={styles.small}>{t('Your website starts as a private draft. Nobody can see it until you press Publish in the editor.')}</p>
       <p className={styles.small}>{t('Need help? Message us on Etsy with your order number.')}</p>
     </form>
+  );
+}
+
+/**
+ * G961 (decision 7): the terms and the data notices, one line under the button, in the interface language (the sales
+ * site's /terms, /privacy and /kvkk in that language; new tab, so the form keeps what was typed). Accepting the terms
+ * is not consent to data processing: the notices only inform (KVKK art. 10), so the line says so.
+ */
+function LegalLine() {
+  const lang = uiLang();
+  const links: Record<string, { href: string; label: string }> = {
+    terms: { href: marketingHref(lang, '/terms'), label: t('Terms of use') },
+    privacy: { href: marketingHref(lang, '/privacy'), label: t('Privacy notice') },
+    kvkk: { href: marketingHref(lang, '/kvkk'), label: t('KVKK notice') },
+  };
+  const parts = t('By creating your website you accept our {terms}. Our {privacy} and {kvkk} explain how we use your data.').split(/(\{(?:terms|privacy|kvkk)\})/);
+  return (
+    <p className={styles.small} data-start-legal="">
+      {parts.map((part, i) => {
+        const link = /^\{(\w+)\}$/.exec(part)?.[1];
+        return link && links[link] ? (
+          <a key={i} href={links[link].href} target="_blank" rel="noopener">
+            {links[link].label}
+          </a>
+        ) : (
+          part
+        );
+      })}
+    </p>
   );
 }
 

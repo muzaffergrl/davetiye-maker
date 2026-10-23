@@ -16,6 +16,8 @@ export const RESERVED_SLUGS: ReadonlySet<string> = new Set([
   'checkout', 'buy', 'cart', 'order', 'orders', 'gift', 'search', 'feed', 'rss', 'sitemap', 'llms', 'llms.txt',
   'llms-full.txt', 'opengraph-image', 'twitter-image', 'icon', 'apple-icon', 'save-the-date', 'wedding-websites',
   'refund', 'refunds', 'cookies', 'accessibility', 'marketing', 'not-found',
+  // G961: the KVKK notice (Turkey's data protection law) at /kvkk ('terms' is reserved above)
+  'kvkk',
   // brand kit served from public/brand/ (GM02: favicons, app icons)
   'brand',
   // G144: the sales site's language prefixes (/tr …, rewritten by next.config.ts to app/(marketing)/i18n/[lang]) and

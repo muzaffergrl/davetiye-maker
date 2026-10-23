@@ -46,6 +46,11 @@ export interface ServiceCommerce {
   price: string;
   /** The listing's Etsy Share & Save link, no query parameters added. */
   etsyListingUrl: string;
+  /**
+   * Owner, 2026-10-23: the service listings stay Etsy drafts. false = offered nowhere to buyers (sales site extras, panel
+   * help, terms); true only once the listing is published on Etsy (launchProblems then wants its real listing URL).
+   */
+  onSale: boolean;
 }
 
 export interface MarketingConfig {
@@ -98,6 +103,13 @@ export interface MarketingConfig {
   verified: { editRights: boolean; archive: boolean; realDevices: boolean; privacyText: boolean; orderCheck: boolean };
   /** K42 extras (G130): "We set it up for you" and custom design. Optional for launch while their listing is not live. */
   services: ServiceCommerce[];
+  /**
+   * K25 (2026-10-14): no legal identity yet. /terms, /kvkk and /privacy name the seller and data controller as the brand,
+   * the Etsy shop and the support email; these two add the legal name and postal address once decided. null = not
+   * decided: the pages say both are given on request by email (never a bracket placeholder) and launchProblems lists
+   * them. `updated`: the date of the legal pages (the effective date of /terms, /kvkk and /privacy), YYYY-MM-DD.
+   */
+  legal: { controllerName: string | null; postalAddress: string | null; updated: string };
   designs: DesignCommerce[];
 }
 
@@ -150,10 +162,13 @@ export const MARKETING: MarketingConfig = {
   // editRights + archive: G060 (panel v2) implements them; flip to true when it is merged and live-checked.
   verified: { editRights: false, archive: false, realDevices: false, privacyText: false, orderCheck: false },
   // K42 services; prices K49 (user, 2026-10-22, TRY; docs/23 §1, docs/35 §8b). The listings are not on Etsy yet (K41).
+  // Owner 2026-10-23: both stay Etsy drafts (onSale: false), so buyers are not offered them yet; prices unchanged.
   services: [
-    { id: 'setup-service', name: 'We set it up for you', price: '990', etsyListingUrl: '[ETSY LISTING URL]' },
-    { id: 'custom-design', name: 'Custom design', price: '4490', etsyListingUrl: '[ETSY LISTING URL]' },
+    { id: 'setup-service', name: 'We set it up for you', price: '990', etsyListingUrl: '[ETSY LISTING URL]', onSale: false },
+    { id: 'custom-design', name: 'Custom design', price: '4490', etsyListingUrl: '[ETSY LISTING URL]', onSale: false },
   ],
+  // G961 (decision 7, 2026-10-23): Terms of use + KVKK notice. Legal name and postal address are open decisions (docs/39).
+  legal: { controllerName: null, postalAddress: null, updated: '2026-10-23' },
   designs: [
     // New product (G142): platform theme ready for review; sale approval and price remain pending.
     {

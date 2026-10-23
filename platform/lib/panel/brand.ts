@@ -10,6 +10,8 @@ export const PANEL_BRAND = {
   shopName: MARKETING.etsy.shopName,
   /** Support e-mail address. */
   supportEmail: MARKETING.support.email,
+  /** Owner 2026-10-23: "We set it up for you" is mentioned in Help only once its Etsy listing is on sale (config onSale). */
+  setupServiceOnSale: MARKETING.services.some((sv) => sv.id === 'setup-service' && sv.onSale === true),
 } as const;
 
 /** Publishing while the shop has not confirmed the Etsy order yet (CLAIM_ORDER_VERIFICATION=manual, G060-fix). */

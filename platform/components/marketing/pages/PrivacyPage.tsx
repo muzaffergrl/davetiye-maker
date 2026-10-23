@@ -2,14 +2,16 @@
 // lib/device-keys.ts, lib/google, lib/mail, lib/rsvp, lib/site/access.ts, lib/i18n/auto-translate.ts; 2026-10-22: lib/support, the AI live help chat). K25: no legal
 // identity, so the notice names the shop and the support email. K48: the retention and deletion texts come from config
 // (policies); the "not legal advice, have it reviewed" note lives in the docs (docs/14 §6.10), not on the public page.
-// G144: one body for every language.
+// G144: one body for every language. G961 (2026-10-23): legal basis, the KVKK notice and terms links, the shop's Gmail
+// (sending + reading Etsy's order emails, owner decision 2), one website per design bought, the controller sentence.
 import { MARKETING } from '../../../lib/marketing/config.ts';
 import type { Market } from '../../../lib/marketing/i18n.ts';
+import { controllerIdentity, controllerKnown } from '../../../lib/marketing/legal.ts';
 import { breadcrumbs, graph, webPage } from '../../../lib/marketing/schema.ts';
 import { pageMetadata } from '../../../lib/marketing/seo.ts';
 import { corePage } from '../../../lib/marketing/site.ts';
 import s from '../marketing.module.css';
-import { Container, Eyebrow, JsonLd, LastUpdated, Section } from '../ui.tsx';
+import { Container, Eyebrow, InlineMd, JsonLd, LastUpdated, Section } from '../ui.tsx';
 
 export function privacyMetadata(m: Market) {
   return pageMetadata(corePage('/privacy', MARKETING, m.t), { lang: m.lang, t: m.t });
@@ -21,6 +23,7 @@ export function PrivacyPage({ m }: { m: Market }) {
   const cfg = MARKETING;
   const b = cfg.brand.name;
   const email = cfg.support.email;
+  const who = controllerIdentity(cfg);
   return (
     <>
       <Section className={s.pageHead}>
@@ -45,7 +48,10 @@ export function PrivacyPage({ m }: { m: Market }) {
                 brand: b,
                 shop: cfg.etsy.shopName,
                 email,
-              })}
+              })}{' '}
+              {controllerKnown(cfg)
+                ? t('{brand} is run by {name}, {address}.', { brand: b, name: who.name!, address: who.address! })
+                : t('Our full legal name and postal address are provided on request by email.')}
             </p>
 
             <h2 id="couples">{t('What we collect from couples')}</h2>
@@ -66,14 +72,14 @@ export function PrivacyPage({ m }: { m: Market }) {
             </ul>
             <p>
               {t(
-                'We use them to create, host and show your website, to keep one website per order and to help you when you contact us. To confirm an order, we may look up its number among our Etsy shop’s orders. Payment is handled by Etsy under Etsy’s own privacy policy; we never see your card details.',
+                'We use them to create, host and show your website, to keep one website per design bought and to help you when you contact us. To confirm an order, we may look up its number among our Etsy shop’s orders and in the sale emails Etsy sends to our shop’s Gmail inbox. Payment is handled by Etsy under Etsy’s own privacy policy; we never see your card details.',
               )}
             </p>
 
             <h2 id="emails">{t('Emails')}</h2>
             <p>
               {t(
-                'When email sending is switched on, we use your email address to send you your edit link after you start, the sign-in links you ask for and, only if you turn it on under Guests, a short email for each new guest reply. These emails go through our email provider. We send no newsletters or ads.',
+                'When email sending is switched on, we use your email address to send you your edit link after you start, the sign-in links you ask for and, only if you turn it on under Guests, a short email for each new guest reply. These emails are sent from our shop’s Gmail account, so they pass through Google. We send no newsletters or ads.',
               )}
             </p>
 
@@ -102,6 +108,11 @@ export function PrivacyPage({ m }: { m: Market }) {
               </li>
               <li>{t('We can access the data to give support and to keep the service running. We do not sell or share it.')}</li>
               <li>{t('Our hosting provider keeps standard technical logs of requests.')}</li>
+              <li>
+                {t(
+                  'Our shop’s email runs on Google’s Gmail: it sends your edit and sign-in links and receives Etsy’s order emails, which we read only to confirm orders.',
+                )}
+              </li>
             </ul>
 
             <h2 id="how-long">{t('How long we keep it')}</h2>
@@ -109,6 +120,13 @@ export function PrivacyPage({ m }: { m: Market }) {
               {t(
                 'A website stays online until {months} months after the wedding date. {retention} When a couple takes their website offline, its photos are no longer shown to anyone.',
                 { months: cfg.hosting.monthsAfterWedding, retention: t(cfg.policies.retention) },
+              )}
+            </p>
+
+            <h2 id="legal-basis">{t('Legal basis')}</h2>
+            <p>
+              {t(
+                'We use your data to provide what you bought (our contract with you), to meet legal obligations such as keeping sales records, and for our legitimate interests in keeping the platform secure and free of spam and fake orders. Guest replies are kept for the couple, who decide what guests are asked.',
               )}
             </p>
 
@@ -143,7 +161,7 @@ export function PrivacyPage({ m }: { m: Market }) {
                   'Translate automatically in the editor uses your browser’s own translator when it has one, and then nothing leaves your device. Otherwise your texts are sent to the free MyMemory translation service (translated.net); the editor says so next to the button.',
                 )}
               </li>
-              <li>
+              <li id="ai-chat">
                 {t(
                   'The live help chat on this website and in the editor is an AI assistant run by Google Gemini: the messages you type, the address of the page you are on and, in the editor, a few facts about your website (its design, whether it is published and how many name and date changes are left; never names, guests or replies) are sent to Google to write the answer. On the free Gemini service Google may use these messages to improve its products, and people at Google may read them, so please do not type personal details. We do not keep the conversations; your browser keeps them only until you close the tab.',
                 )}
@@ -155,7 +173,18 @@ export function PrivacyPage({ m }: { m: Market }) {
               {t(
                 'You can change or remove your content in your panel at any time, take your website offline, sign out other devices and disconnect Google Sheets. {deletion} You can also write to {email} from the email address you used when you started your website. We confirm it is you before we delete anything.',
                 { deletion: t(cfg.policies.deletion), email },
-              )}
+              )}{' '}
+              {t('You can also complain to the data protection authority where you live.')}
+            </p>
+
+            <h2 id="kvkk">{t('Turkey (KVKK)')}</h2>
+            <p>
+              <InlineMd
+                text={t(
+                  'We are based in Turkey. Our [KVKK notice](/kvkk) explains how we process data under Turkey’s data protection law, your rights under it and how to apply. The rules for buying and using a design are in our [terms of use](/terms).',
+                )}
+                m={m}
+              />
             </p>
 
             <h2 id="changes">{t('Changes to this notice')}</h2>

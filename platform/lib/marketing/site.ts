@@ -165,7 +165,29 @@ export function corePages(cfg: MarketingConfig = MARKETING, t: T = enT): PageEnt
       description:
         t('What we collect when you buy, edit and publish a wedding website and when guests reply, where it is stored, who can see it and how long we keep it.'),
       kind: 'WebPage',
-      updated: u,
+      // G961: the legal pages share their own date (config legal.updated)
+      updated: cfg.legal.updated,
+    },
+    // G961 (decision 7, 2026-10-23): terms of use and the KVKK notice (components/marketing/pages/TermsPage.tsx, KvkkPage.tsx).
+    {
+      path: '/terms',
+      label: t('Terms'),
+      title: withBrand(t('Terms of Use'), cfg),
+      h1: t('Terms of use'),
+      description:
+        t('The terms for buying a wedding website design on Etsy and using it on our platform: what you get, hosting, edits, returns, your content and support.'),
+      kind: 'WebPage',
+      updated: cfg.legal.updated,
+    },
+    {
+      path: '/kvkk',
+      label: t('KVKK'),
+      title: withBrand(t('KVKK Privacy Notice (Turkey)'), cfg),
+      h1: t('KVKK privacy notice'),
+      description:
+        t('How we process personal data under Turkey’s data protection law (KVKK): the data controller, purposes, legal bases, transfers abroad and your rights.'),
+      kind: 'WebPage',
+      updated: cfg.legal.updated,
     },
   ];
 }
@@ -215,7 +237,7 @@ export const NAV = [
 
 /** First path segments the marketing site uses (tests: all reserved in lib/slug.ts). */
 export const MARKETING_SEGMENTS = [
-  'designs', 'how-it-works', 'features', 'pricing', 'faq', 'guides', 'about', 'contact', 'privacy',
+  'designs', 'how-it-works', 'features', 'pricing', 'faq', 'guides', 'about', 'contact', 'privacy', 'terms', 'kvkk',
   'robots.txt', 'sitemap.xml', 'llms.txt', 'llms-full.txt', 'marketing',
   // G144: the language prefixes (/tr …, rewritten by next.config.ts) and the folder they are rewritten to
   'i18n', 'tr', 'es', 'de', 'fr',

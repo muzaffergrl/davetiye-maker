@@ -90,7 +90,9 @@ export function HelpSheet({ meta, locale, onClose, topic, onChat }: { meta: Pane
             )}
             .
           </p>
-          <p>{t('Prefer us to do it? Send us your details on Etsy and we enter them for you, as a separate Etsy purchase.')}</p>
+          {PANEL_BRAND.setupServiceOnSale ? (
+            <p>{t('Prefer us to do it? Send us your details on Etsy and we enter them for you, as a separate Etsy purchase.')}</p>
+          ) : null}
         </section>
       </div>
     </Sheet>

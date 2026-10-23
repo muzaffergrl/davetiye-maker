@@ -11,7 +11,10 @@ Dosyalar:
   `collections/_services/extra-revision/package/listing/listing_v3.md` + `etsy_upload.json` (`python3 tools/etsy_upload.py --designs services`).
 - Satış sitesi: `/pricing` → "Extras" bölümü (`platform/components/marketing/ExtraServices.tsx`); fiyat ve Etsy linki
   `platform/lib/marketing/config.ts` `services` alanından. Link yer tutucuyken "Coming soon on Etsy"; fiyat (TRY) görünür.
-- Panel: Help → "Need help?" altında tek satır "Prefer us to do it? …" (`platform/components/panel/views.tsx`).
+- Panel: Help → "Need help?" altında tek satır "Prefer us to do it? …" (`platform/components/panel/HelpSheet.tsx`).
+- **2026-10-23 (sahip):** hizmet ilanları Etsy'de **taslak kalır**. `config.ts` → `services[].onSale: false`: `/pricing` Extras
+  bölümü ve paneldeki satır **gizli**, kullanım koşulları hizmetlerden söz etmez (G961, docs/39). İlan yayınlanınca
+  gerçek `etsyListingUrl` + `onSale: true` yeter; fiyatlar değişmedi.
 - Admin mesajları: `setup_service_details`, `setup_service_done`, `custom_design_brief`, `custom_design_ready`, `custom_design_extra_round`
   (`platform/lib/admin/message-templates.json`; docs/19 §4.5'teki kopya aynı).
 
