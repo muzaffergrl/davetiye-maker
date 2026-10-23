@@ -137,13 +137,16 @@ A single straight vertical leather strap, seen straight from the front, on a ful
 Kontrol: tek dikey kayış; iki kenarda krem dikiş; alt ucu yuvarlak; toka yok; gerçek alfa.
 Kullanım: alfa kutusuna kırpılır → `strap-200` = `.strap` (zarfın üst kenarından cebe iner); açılışta tokadan yukarı kayıp çıkar.
 
-#### W2.10 Pirinç toka
-**Kaydet:** `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/buckle.png` · 560×320 · **Şeffaf zemin**
+#### W2.10 Pirinç toka (v2, 2026-10-23: dikey kayış için)
+**Kaydet:** `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/buckle.png` · 560×400 · **Şeffaf zemin**
+
+Neden v2: ilk toka yatay kayış için çizildi (orta çubuk dik, dil yana bakıyor); bizim kayışımız dikey. Tema denetimi (2026-10-23)
+ortha çubuğun kayışa dik (yatay), dilin aşağı bakması gerektiğini buldu.
 
 ```
-A single antique brass strap buckle, seen straight from the front, on a fully transparent background, filling the image edge to edge (about 1.75:1): a rectangular frame with softly rounded corners and a centre bar, with its pointed prong lying flat across the bar, in warm antique brass (#A88437) with gentle highlights and a little patina, finely engraved with a simple border line. The openings inside the frame are fully transparent (the strap shows through them). Soft daylight from the top-left. No strap, no shadow outside the buckle. No text, letters, numbers, crests or symbols. True transparent background PNG (real alpha channel).
+A single antique brass strap buckle made for a VERTICAL strap, seen straight from the front, on a fully transparent background, filling the image edge to edge (about 1.4:1, wider than tall): a rectangular frame with softly rounded corners whose long sides run horizontally; a straight centre bar running HORIZONTALLY across the middle of the frame from its left side to its right side; a pointed prong hinged on the centre bar, lying flat and pointing STRAIGHT DOWN, at a right angle to the bar, its tip resting on the bottom side of the frame. Warm antique brass (#A88437) with gentle highlights and a little patina, finely engraved with a simple border line. The two openings inside the frame (above and below the centre bar) are fully transparent (the strap shows through them). Soft daylight from the top-left. No strap, no shadow outside the buckle. No text, letters, numbers, crests or symbols. True transparent background PNG (real alpha channel).
 ```
-Kontrol: tek toka; çerçeve içi şeffaf; dil ortadaki çubuğun üstünde; gerçek alfa.
+Kontrol: tek toka; geniş kenarlar yatay; orta çubuk yatay; dil aşağı bakıyor; çerçeve içi şeffaf; gerçek alfa.
 Kullanım: alfa kutusuna kırpılır → `buckle-320` = `.buckle`; açılışta çerçeve alt çubuğu üstünde öne devrilir, sonra kayışla
 birlikte kayar.
 

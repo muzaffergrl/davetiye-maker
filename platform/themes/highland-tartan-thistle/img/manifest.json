@@ -231,16 +231,16 @@
  },
  "buckle": {
   "src_size": [
-   1625,
-   890
+   1444,
+   963
   ],
-  "ratio": 1.82584,
+  "ratio": 1.49948,
   "files": [
    {
     "file": "buckle-320.webp",
     "w": 320,
-    "h": 175,
-    "bytes": 14704
+    "h": 213,
+    "bytes": 17844
    }
   ]
  },
@@ -459,9 +459,9 @@
   ],
   "buckle_in_strap": [
    -30.0,
-   51.68,
+   50.45,
    160.0,
-   11.3
+   13.75
   ],
   "_note": "% of the closed envelope (left, top, width, height), measured on the GPT layers' alpha boxes; buckle_in_strap in % of the strap box"
  },
@@ -498,7 +498,7 @@
   ],
   "pad": 0.04,
   "file": "favicon.png",
-  "bytes": 54852
+  "bytes": 54858
  },
  "parts": {
   "used": [
@@ -543,5 +543,5 @@
    "light_above": 140
   }
  },
- "bytes_total": 2235592
+ "bytes_total": 2238192
 }
