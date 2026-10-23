@@ -25,52 +25,58 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
    build'i ister) → `etsy_upload.py`; en sonda bu dosyayı yeniden yazar. Tasarım × adım tablosu ve live engelleri basılır.
    Yerleştirmeden yalnız adımlar: `--koleksiyon NN|all`. Hiçbir tasarımı live yapmaz, yayınlamaz, Etsy'ye göndermez.
 
-**Toplam eksik: 15**
+**Toplam eksik: 29**
 
 | Prompt dosyası | Bölüm | Var | Eksik |
 |---|---|---|---|
-| `collections/33_Marigold_Mehndi/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 15 | 3 |
-| `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 20 | 3 |
-| `collections/35_Highland_Tartan_Thistle/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 18 | 2 |
-| `collections/36_Victorian_Glasshouse/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 17 | 2 |
-| `collections/37_Art_Nouveau_Lily/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 14 | 2 |
-| `collections/38_Papel_Picado_Fiesta/assets/gpt/GPT_PROMPTS.md` | PAKET 5 — Website katmanları (YAZI YOK) | 19 | 2 |
+| `collections/49_Ivory_Pearl_Atelier/assets/gpt/GPT_PROMPTS.md` | 1. comps/W1_opening.png | 0 | 1 |
+| `collections/49_Ivory_Pearl_Atelier/assets/gpt/GPT_PROMPTS.md` | 2. parts/envelope_closed.png | 0 | 1 |
+| `collections/49_Ivory_Pearl_Atelier/assets/gpt/GPT_PROMPTS.md` | 3. parts/closure.png | 0 | 1 |
+| `collections/49_Ivory_Pearl_Atelier/assets/gpt/GPT_PROMPTS.md` | 4. parts/accent_bow.png | 0 | 1 |
+| `collections/49_Ivory_Pearl_Atelier/assets/gpt/GPT_PROMPTS.md` | 5. parts/envelope_open.png | 0 | 1 |
+| `collections/49_Ivory_Pearl_Atelier/assets/gpt/GPT_PROMPTS.md` | 6. parts/invitation_card.png | 0 | 1 |
+| `collections/49_Ivory_Pearl_Atelier/assets/gpt/GPT_PROMPTS.md` | 7. textures/bg_page.png | 0 | 1 |
 | `collections/21_Crimson_Rose_Atelier/variants/GPT_PROMPTS.md` | İstem — fildişi güller (yalnız istenirse) | 0 | 1 |
+| `brand/social/GPT_PROMPTS.md` | SM1 — Instagram öne çıkan (highlight) kapakları | 0 | 5 |
+| `brand/social/GPT_PROMPTS.md` | SM2 — Zeminler (Claude başlık ve gerçek ekranları üstüne yerleştirir) | 0 | 6 |
+| `brand/social/GPT_PROMPTS.md` | SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek) | 0 | 10 |
 
 ## Eksik dosyalar
 
-### `collections/33_Marigold_Mehndi/assets/gpt/GPT_PROMPTS.md`
+### `collections/49_Ivory_Pearl_Atelier/assets/gpt/GPT_PROMPTS.md`
 
-- `collections/33_Marigold_Mehndi/assets/gpt/parts/sleeve.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/33_Marigold_Mehndi/assets/gpt/parts/mehndi_pattern.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/33_Marigold_Mehndi/assets/gpt/parts/flap.png` — PAKET 5 — Website katmanları (YAZI YOK)
-
-### `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/GPT_PROMPTS.md`
-
-- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/envelope_pocket.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/veil_outer.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/veil_inner.png` — PAKET 5 — Website katmanları (YAZI YOK)
-
-### `collections/35_Highland_Tartan_Thistle/assets/gpt/GPT_PROMPTS.md`
-
-- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/envelope_front.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/flap.png` — PAKET 5 — Website katmanları (YAZI YOK)
-
-### `collections/36_Victorian_Glasshouse/assets/gpt/GPT_PROMPTS.md`
-
-- `collections/36_Victorian_Glasshouse/assets/gpt/parts/copper_tag.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/36_Victorian_Glasshouse/assets/gpt/parts/ferns.png` — PAKET 5 — Website katmanları (YAZI YOK)
-
-### `collections/37_Art_Nouveau_Lily/assets/gpt/GPT_PROMPTS.md`
-
-- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/petal_right.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/37_Art_Nouveau_Lily/assets/gpt/parts/petal_centre.png` — PAKET 5 — Website katmanları (YAZI YOK)
-
-### `collections/38_Papel_Picado_Fiesta/assets/gpt/GPT_PROMPTS.md`
-
-- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/envelope_pocket.png` — PAKET 5 — Website katmanları (YAZI YOK)
-- `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/bougainvillea.png` — PAKET 5 — Website katmanları (YAZI YOK)
+- `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/comps/W1_opening.png` — 1. comps/W1_opening.png
+- `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/parts/envelope_closed.png` — 2. parts/envelope_closed.png
+- `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/parts/closure.png` — 3. parts/closure.png
+- `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/parts/accent_bow.png` — 4. parts/accent_bow.png
+- `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/parts/envelope_open.png` — 5. parts/envelope_open.png
+- `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/parts/invitation_card.png` — 6. parts/invitation_card.png
+- `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/textures/bg_page.png` — 7. textures/bg_page.png
 
 ### `collections/21_Crimson_Rose_Atelier/variants/GPT_PROMPTS.md`
 
 - `collections/21_Crimson_Rose_Atelier/variants/V07_ivory_rose/gpt/rose-branch.png` — İstem — fildişi güller (yalnız istenirse)
+
+### `brand/social/GPT_PROMPTS.md`
+
+- `brand/social/gpt/highlight_designs.png` — SM1 — Instagram öne çıkan (highlight) kapakları
+- `brand/social/gpt/highlight_how.png` — SM1 — Instagram öne çıkan (highlight) kapakları
+- `brand/social/gpt/highlight_rsvp.png` — SM1 — Instagram öne çıkan (highlight) kapakları
+- `brand/social/gpt/highlight_faq.png` — SM1 — Instagram öne çıkan (highlight) kapakları
+- `brand/social/gpt/highlight_tips.png` — SM1 — Instagram öne çıkan (highlight) kapakları
+- `brand/social/gpt/bg_carousel_cover_light.png` — SM2 — Zeminler (Claude başlık ve gerçek ekranları üstüne yerleştirir)
+- `brand/social/gpt/bg_carousel_inner_light.png` — SM2 — Zeminler (Claude başlık ve gerçek ekranları üstüne yerleştirir)
+- `brand/social/gpt/bg_carousel_dark.png` — SM2 — Zeminler (Claude başlık ve gerçek ekranları üstüne yerleştirir)
+- `brand/social/gpt/bg_story_light.png` — SM2 — Zeminler (Claude başlık ve gerçek ekranları üstüne yerleştirir)
+- `brand/social/gpt/bg_story_dark.png` — SM2 — Zeminler (Claude başlık ve gerçek ekranları üstüne yerleştirir)
+- `brand/social/gpt/bg_pin_guide.png` — SM2 — Zeminler (Claude başlık ve gerçek ekranları üstüne yerleştirir)
+- `brand/social/gpt/scene_planning_desk.png` — SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek)
+- `brand/social/gpt/scene_phone_on_envelope.png` — SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek)
+- `brand/social/gpt/scene_just_engaged_winter.png` — SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek)
+- `brand/social/gpt/scene_dinner_table.png` — SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek)
+- `brand/social/gpt/scene_linen_flatlay.png` — SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek)
+- `brand/social/gpt/scene_garden_golden_hour.png` — SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek)
+- `brand/social/gpt/scene_guest_cafe.png` — SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek)
+- `brand/social/gpt/scene_qr_welcome_table.png` — SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek)
+- `brand/social/gpt/scene_autumn_thanks.png` — SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek)
+- `brand/social/gpt/scene_winter_cozy.png` — SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek)

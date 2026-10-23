@@ -41,8 +41,8 @@ GRUPLAR = {
     "d": "D · Diğer (marka)",
 }
 TURLER = {"web": "website parçası (PAKET 5)", "foto": "örnek fotoğraf (PAKET 2)", "mockup": "ilan sahnesi (PAKET 3)",
-          "baski": "baskı parçası (PAKET 6 / G139)", "varyant": "palet varyantı"}
-TUR_SIRA = ["web", "foto", "mockup", "baski", "varyant"]
+          "baski": "baskı parçası (PAKET 6 / G139)", "varyant": "palet varyantı", "sosyal": "sosyal medya (GM10)"}
+TUR_SIRA = ["web", "foto", "mockup", "baski", "varyant", "sosyal"]
 BASKI_BOLUM = re.compile(r"PAKET\s*6|G139", re.I)
 ISTEGE_BAGLI = re.compile(r"yalnız istenirse|isteğe bağlı|optional", re.I)
 ON_METIN = re.compile(r"\*\*Instructions for GPT[^*]*\*\*", re.I)
@@ -274,6 +274,8 @@ def _koleksiyon(hedef: str) -> tuple[int | None, str | None]:
 def _tur(hedef: str, bolum: str, prompt_dosyasi: str) -> str:
     if "/variants/" in prompt_dosyasi:
         return "varyant"
+    if hedef.startswith("brand/social/"):
+        return "sosyal"
     if "/photos/" in hedef:
         return "foto"
     if "/mockups/" in hedef:
