@@ -1,7 +1,7 @@
 # Güncel durum — 23 Ekim 2026
 
 Ürün (K22/K24): Etsy alıcısının **bizim platformumuzda panelden düzenlediği düğün websitesi**. Kararlar:
-`docs/01_KULLANICI_KARARLARI.md` (bugün K50–K58) · görevler: `gorevler/PANO.md` · platform: `docs/10_SITE_PLATFORMU.md` ·
+`docs/01_KULLANICI_KARARLARI.md` (bugün K50–K59) · görevler: `gorevler/PANO.md` · platform: `docs/10_SITE_PLATFORMU.md` ·
 **lansman: `docs/29_LANSMAN_LISTESI.md`** · makinece: `PROJECT_STATE.json`.
 
 ## 1. Canlıda (bkestudio.com)
@@ -29,13 +29,18 @@
 | Entegratör: katalog satıştakileri önce gösteriyor; 22–32 ses testleri yeni açılışlara; 21/49 `etsy_upload.json` `preview`; /start seçim kutusu cilası; /terms-/kvkk meta açıklamaları es/de/fr | bu dal |
 | **Üç incelemenin düzeltmeleri** (2026-10-23): RSVP sayacı yazılamazsa yanıt kaydedilir ama *beklemede* (sayılmaz, G953); sipariş numarası denemelerinde yalnız eşleşmeyenler sayılır (3 tasarımlı alıcı /my'de 429 almaz); 10 site sınırında `order_full` doğru nedeni söyler; Gmail satış e-postasının saydığından fazla site `pending`; blob yedeği 0600/0700; "bir sipariş = bir site" metinleri → "her tasarım bir site" (/start, /how-it-works, SSS + canlı destek bilgisi, START HERE ×49, Etsy ilanı ×49) + Kullanım koşulları linki; /about tek cümle ("gerçek telefonlarda denendi"); Terms'te PDF sözü düzeltildi; önizleme (21, 49, 22–32) kartında fiyat yok; Privacy dükkân adı + 48 ay; footer telefonda 6 rehber; /my'de adres bölünmez; TR "websitesi" / "canlı destek sohbeti"; GPT bekleyen listesi yeniden üretildi | bu dal (fixer) |
 
+| **Demo çubuğu** (sahip isteği): `/start/demo/<tema>` sayfalarında tasarım adını gösteren hap; dokununca katalog (Şimdi satışta: 01–20 · "Coming soon on Etsy": 13 önizleme, kapak = gerçek zarf ekranı `assets.json`), Ana sayfa + Tüm tasarımlar; çerçeve içinde (önizleme, satış sitesi diyaloğu) yok; `?lang=` sayfadan sayfaya | demo dalı (`claude/adoring-gates-demo`) |
+| **21 Crimson Rose Atelier yeniden tasarım** (K59 — eskiden o dalda "K50"): kendi bileşenleri, 3D açılış (mühür ikiye çatlar → kapak → kart çekilir → yükselir), kendi ses paketi (11 efekt, `public/audio/fx/crimson-rose-atelier/`) + kendi müziği `rose-nocturne`, PAKET 8 GPT prompt'ları (15 parça bekliyor; `parts.css` gelince açar), satış sitesi ekranları + açılış klibi yeniden çekildi. 21 `preview` + 1.190 TL kaldı | kind-johnson dalı (`kj-21`) |
+| **Ses birleştirme:** tek katalog tipi + tek oynatıcı — 48 tema ortak 50 efektten kendi listesiyle, 21 kendi paketi/ipuçları/müziğiyle (`pack`, `cues`, `MUSIC_TRACKS[].theme`); paket aynı oynatıcıdan (boşta ön çözme, iOS kilidi, ses saati, Skip/sessiz/gizli sekme, azaltılmış harekette ilk ipucu, `FX_GAIN 0.5`); `invite:sfx` sayfa ipuçları önceden çözülür; paket dosyaları ortak ölçeğe getirildi (−20…−24 LUFS, müzik −17,5; `tools/audio_packs.py level()`) | birleştirme (docs/40 §5a) |
+| Birleştirme düzeltmeleri: 21'in yeni meta açıklaması tr/es/de/fr'de 160 karakteri aşıyordu (marketing-build) → kısaltıldı; 21 START HERE + ilan dil satırı latin-ext (Corinthia'da Kiril yok); docs/26–27 araçla yeniden üretildi (37 eksik görsel) | bu dal |
+
 Yayına çıkması: bu dal main'e alınınca (push = production). Sonra `docs/38` adım 0 kontrolleri ve canlı kontrol.
 
 ## 3. Satış durumu
 | Tasarım | Platform (`config.ts`) | Fiyat | Etsy |
 |---|---|---|---|
 | **01–20** | `live` — **ilk satış dalgası** (K55) | 1.190 TL (K49) | Taslak; 19 görsel + video + PDF; sahibin "yayınla"sıyla tek tek (docs/38) |
-| 21 Crimson Rose Atelier | `preview` ("Coming soon on Etsy") | 1.190 TL | Taslak kalır |
+| 21 Crimson Rose Atelier | `preview` ("Coming soon on Etsy"); **K59 yeniden tasarım** | 1.190 TL | Taslak kalır; görseller/video ve §2 metni **eski tasarımı** gösteriyor (docs/38 Ek) |
 | 22–32 | `preview` (yeni tasarım) | `[PRICE]` | Taslak; görseller/video **eski tasarımı** gösteriyor (K54: yeniden çekilecek) |
 | 33–48 | `coming` (gizli) | `[PRICE]` | Taslak |
 | 49 Ivory Pearl Atelier | `preview` | 1.190 TL | Taslak kalır |
@@ -48,6 +53,12 @@ linki) `listing_v3.md` §2 ve `etsy_upload.json`'da. START HERE PDF'leri de bu y
 yapıştırma `docs/38` adım 1 ile birlikte yapılmalı.
 
 ## 4. Testler (23 Ekim, bu dal, Next.js 16.4.3 ile `npm ci` sonrası)
+- **Son birleştirmeden sonra (demo çubuğu + 21 + ses birleştirme):** `npm test` **1969/1969** (0 atlanan, build varken),
+  typecheck yeşil, build yeşil (trace-check, JS bütçeleri: en büyük /edit 189,7/205 KB). Tarayıcı: `final-smoke` 45/45 × 3
+  (01 Olive & Ivory, 06 Art Deco, 19 Midnight Garden), `demo-bar-browser` 176 kontrol temiz (360–1280 px, TR, iframe),
+  `claim-browser` 57/57, `g087-browser` 68/68, `theme-check` 21 `--stress` 117 geçti / 0 hata / 49 uyarı (44 Google Fonts —
+  vekil engeli, 5 eksik W1 karşılaştırma görseli), `marketing-build` 2/2. Python araç testleri 113/113; `etsy_upload.py
+  --check` 52/52; 49 `content.demo.json` temiz; görev denetimi temiz.
 - `npm test` **1946/1946** (0 hata, 0 atlanan; build varken), typecheck yeşil, build yeşil (trace-check ve JS bütçeleri dahil).
 - Tarayıcı (build ile, Chromium 390 px): `final-smoke` 45/45 × 3 (01 Olive & Ivory, 06 Art Deco, 19 Midnight Garden),
   `g087-browser` 68/68, `claim-browser` 57/57 (iki tasarımlı sipariş: seçim ekranı, "Aç", "bir site daha"), `marketing-build` 2/2.
@@ -67,10 +78,12 @@ gerçek Etsy makbuzu / satış e-postasıyla G951, blob yedeğinin gerçek depod
 5. 01–20 için ilan ilan "yayınla" (K55, `docs/38`).
 6. Etsy ilan yenileme: otomatik mi elle mi (her `etsy_upload.json`'da tek açık madde).
 7. "Tested on iPhone and Android phones" cümlesi: denemede iki tür telefon da var mıydı? Yoksa `verified.realDevices` geri alınır.
-8. 21'in yeniden tasarımı (`claude/kind-johnson-6eetik`, başka oturum) birleşsin mi; o dal `lib/audio/catalog.ts`'e de dokunuyor.
+8. ~~21'in yeniden tasarımı birleşsin mi~~ → birleştirildi (K59); 21'in Etsy medyası ve ilan metni yeniden tasarıma göre yenilenecek (docs/38 Ek).
 9. Blob yedeklerinin yeri ve haftalık çalıştırma; Black Friday indirimi.
 
 ## 6. Bilinen kalanlar
+- 21: PAKET 8'in 15 GPT parçası bekleniyor (docs/26–27); ilan görselleri/video + §2 metni eski tasarım (docs/38 Ek); kendi
+  sesleri ve müziği de dinlenmedi.
 - Sesler kimse tarafından dinlenmedi (ölçüm ve spektrogramla denetlendi); yeni oynatıcı telefonda denenmedi. Beğenilmeyen efekt
   `tools/audio_fx.py`'de, tema eşlemesi `platform/lib/audio/catalog.ts`'te tek satır (docs/40 §8).
 - 22–32: Etsy medyası yeniden çekilecek; paletler yeni parçalardan üretilmedi; gerçek telefon testi yok.

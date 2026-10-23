@@ -152,3 +152,19 @@ Questions? Message us on Etsy with your order number.
 
 **Kullanıcıdan gereken:** bloğu yerel oturuma yapıştırmak; 4. adımdaki raporu görünce **"yayınla"** demek (ya da demeyip
 düzeltme istemek). Link listesi bulut oturumuna gelince satış sitesinde `launched: true` için docs/29 C3 yapılır.
+
+---
+
+## Ek: 21 Crimson Rose Atelier yeniden tasarımı sonrası açık iş (2026-10-23, K59 birleştirmesi)
+
+21 ilk dalgada değil (K55, taslak kalır); bu iş yayından önce yapılmalı, yukarıdaki bloğu etkilemez.
+- **İlan medyası:** Etsy taslağındaki 19 görsel + 4:5 video ve repodaki `collections/21_Crimson_Rose_Atelier/package/listing/
+  images_v4/` + `video_v4_4x5.mp4` **eski tasarımı** gösteriyor. Satış sitesi ekranları ve açılış klibi
+  (`platform/public/marketing/designs/crimson-rose-atelier/`) yeni tasarımdan çekildi (kind-johnson dalı). Yeniden üretim
+  `tools/listing_v4` A–E aşamaları (`stageLinux.sh 21`, `build_set.py 21`, `stageELinux.sh 21`; yerel production build) +
+  `picks.json`/`newpal.json`'da 21 için açılış karesi ve script font (Corinthia) seçimi ister; göz seçimi ve inceleme gerektiği
+  için birleştirmede yapılmadı.
+- **İlan metni:** `listing_v3.md` §2 açılışı ve sayfaları hâlâ eski tasarımla anlatıyor (mühür kalkar, oval portre, yatay
+  albüm; "4 parça müzik" — 21'de artık kendi parçası `Rose Nocturne` + 4 ortak parça). Dil satırı düzeltildi (Corinthia'da
+  Kiril yok → latin-ext satırı; START HERE 21 de yeniden üretildi). §2 yeni tasarıma göre yeniden yazılıp
+  `python3 tools/etsy_upload.py --designs 21` ile JSON yenilenmeli; sonra taslağa yapıştırılır.

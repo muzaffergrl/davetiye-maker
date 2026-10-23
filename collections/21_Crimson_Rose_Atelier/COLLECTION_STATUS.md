@@ -2,7 +2,10 @@
 
 **Durum (2026-10-23):** ilk satış dalgasında **değil** (K55: yalnız 01–20) — `config.ts` `preview` (katalogda "Coming soon on
 Etsy", üretimde /start kapalı; G954, entegrasyon dalında). Fiyat 1.190 TL (K49). Etsy'de taslak (4600049152), 19 v4 görsel +
-video + START HERE; taslak kalır. Yeniden tasarımı başka bir dalda (`claude/kind-johnson-6eetik`) sahibin onayını bekliyor.
+video + START HERE; taslak kalır. **K59 yeniden tasarımı birleştirildi (2026-10-23, `claude/kind-johnson-6eetik` → entegrasyon
+dalı):** kendi bileşenleri, 3D açılış, kendi ses paketi (`platform/public/audio/fx/crimson-rose-atelier/`, 11 efekt) ve müziği
+(`rose-nocturne`); satış sitesi ekranları + açılış klibi yeni tasarımdan; PAKET 8'in 15 GPT parçası bekleniyor. Etsy görselleri,
+video ve `listing_v3.md` §2 hâlâ eski tasarım (docs/38 Ek); dil satırı latin-ext'e düzeltildi, START HERE yeniden üretildi.
 Önceki durum: 2026-10-17'den beri `live` (kullanıcı kararı). Tema standardında (G142: theme-check `--stress` 0 hata, final-smoke 45/45, g051 44/44).
 Satış sitesi ekranları + açılış videosu: `platform/public/marketing/designs/crimson-rose-atelier/` (G142 gerçek çekimi).
 Tasarım özeti: `DESIGN_BRIEF.md`. Çalışma adı marka değildir.

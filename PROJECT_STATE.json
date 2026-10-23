@@ -803,12 +803,13 @@
       "listing_package": {
         "status": "prepared",
         "uploaded_to_etsy": "draft",
-        "etsy": "draft with 19 v4 images + video + START_HERE.pdf; stays a draft (K55, not in the first wave)",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf; stays a draft (K55, not in the first wave). Images, video and listing_v3 §2 still show the PRE-redesign design (follow-up: docs/38 Ek); language line now latin-ext (Corinthia has no Cyrillic)",
         "listing": "collections/21_Crimson_Rose_Atelier/package/listing/listing_v3.md",
         "etsy_upload": "collections/21_Crimson_Rose_Atelier/package/listing/etsy_upload.json (tools/etsy_upload.py)",
         "images": "collections/21_Crimson_Rose_Atelier/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
         "start_here": "collections/21_Crimson_Rose_Atelier/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)"
-      }
+      },
+      "redesign": "K59 atelier redesign merged 2026-10-23 (kind-johnson): own components, 3D opening (crack, flap, draw, reveal, bloom), own sound pack fx/crimson-rose-atelier/ (11) + own music rose-nocturne; PAKET 8 GPT parts (15) pending; sales-site screens + opening clip re-captured"
     },
     {
       "id": "22_Nocturne_Lake_Estate",
@@ -1857,12 +1858,14 @@
       "claude/adoring-gates-code (G951–G955, Next 16.4.3, CI audit)",
       "claude/adoring-gates-vis (01–20 guest-site polish, panel + sales-site fixes, docs/41)",
       "claude/adoring-gates-audio (G967–G969 sound effects, docs/40)",
-      "origin/main 4a9fff921"
+      "origin/main 4a9fff921",
+      "claude/adoring-gates-demo (demo bar on /start/demo pages: catalogue pill with the 20 live + 13 preview designs, Home, All designs)",
+      "kj-21 = origin/claude/kind-johnson-6eetik (21 Crimson Rose Atelier redesign, K59; own sound pack + rose-nocturne) — audio unified: one catalog type (pack/cues/theme track), one player (public/audio/audio.js), pack levelled to the shared loudness scale"
     ],
     "not_merged": [
-      "claude/kind-johnson-6eetik (21 redesign + its own sound packs; awaits owner approval)",
       "PR #32 (22–32 content parity, superseded in part by merge-2)",
       "PR #11, #16, #31"
-    ]
+    ],
+    "validation_after_final_merge": "npm test 1969/1969 (0 skipped), typecheck + build green (budgets ok); final-smoke 45/45 x3 (olive-ivory, art-deco-black-tie, midnight-garden); demo-bar-browser 176 ok; claim-browser 57/57; g087-browser 68/68; theme-check crimson-rose-atelier --stress 117 passed / 0 failed / 49 warnings (Google Fonts blocked by proxy, no W1 comps); marketing-build 2/2; tools/tests 113/113; etsy_upload --check 52 OK; content.demo.json 49 clean; gorev kontrol clean"
   }
 }
