@@ -641,7 +641,8 @@
   align-items: center;
   min-height: 44px;
   min-width: 44px;
-  padding: 4px 0;
+  /* even rhythm: a two-line name ("Dusty Blue & / Champagne") kept only 8 px from its neighbours, one-line names 24 */
+  padding: 10px 0;
   font-size: 15px;
   line-height: 1.35;
 }
@@ -840,6 +841,25 @@
   font: 600 13px/1 var(--sans);
   white-space: nowrap;
   box-shadow: 0 8px 20px -8px rgb(0 0 0 / 0.45);
+}
+/* Phones: the poster is only 144–160 px wide — TR "Açmak için dokunun" was cut off at both sides. A tighter pill that
+   may take two balanced lines, centred within the poster. */
+@media (max-width: 599.98px) {
+  .tapLabel {
+    left: 6px;
+    right: 6px;
+    width: fit-content;
+    max-width: calc(100% - 12px);
+    margin-inline: auto;
+    transform: none;
+    gap: 4px;
+    padding: 7px 10px;
+    font-size: 12px;
+    line-height: 1.15;
+    white-space: normal;
+    text-align: center;
+    text-wrap: balance;
+  }
 }
 @media (min-width: 1024px) {
   .tapLabel {
@@ -2085,6 +2105,8 @@
   font-weight: 400;
   letter-spacing: 0;
   color: var(--muted);
+  /* "one-time, on Etsy" moves to the next line as a whole (it broke at its hyphen: "one-" / "time" on phones) */
+  white-space: nowrap;
 }
 .compare {
   font-size: 22px;
@@ -2391,13 +2413,14 @@
 .contactEmail {
   display: inline-block;
   font-family: var(--display);
-  font-size: 26px;
+  /* one line on a 390 px phone (it broke as "…@gmail." / "com" at 26 px) */
+  font-size: clamp(20px, 5.6vw, 26px);
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--anchor);
   line-height: 1.2;
   margin: 0 0 6px !important;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 /* ---------- misc ---------- */
@@ -2577,7 +2600,9 @@
   }
 }
 
-@media (max-width: 429px) {
+/* Up to 519 px (was 429): at 430–480 px the one-line button with its icon pushed the menu button past the right edge
+   (TR by 30 px, EN by 16 px, DE by 7 px; the page clip hid it). */
+@media (max-width: 519.98px) {
   .myBtn {
     padding: 0 12px;
     font-size: 13.5px;

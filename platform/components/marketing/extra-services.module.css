@@ -39,4 +39,5 @@
   font-size: 15px;
   font-weight: 400;
   color: var(--muted);
+  white-space: nowrap;
 }

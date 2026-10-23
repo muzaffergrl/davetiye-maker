@@ -147,8 +147,10 @@
   /* design page screens: a fan of the real screens (our own take on a "card spread"). At rest the four screens hang
      from their bottom edge on a gentle arc; the one under the pointer or finger lifts out and straightens, its
      neighbours lean away. On entry they are dealt out of one stack into the fan. Static transforms + :has(), no JS. */
-  [data-fx-deal] {
-    padding-inline: 10px;
+  ul[data-fx-deal] {
+    /* (ul: above the list's own `padding: 0` in marketing.module.css, whichever file loads last)
+       room for the outer screens' 6° lean: with 10 px their top corner ran 5 px (390) to 17 px (768) off the screen */
+    padding-inline: clamp(16px, 4vw, 30px);
     padding-top: 14px;
   }
   [data-fx-deal] > * {
