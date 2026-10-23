@@ -63,6 +63,12 @@ KESİN SINIRLAR
    - Her taslağı kayıttan sonra yeniden aç ve dosyayı oku: ad, boyut ve dosya ID'si (bugünkü yüklemeden mi; §7.13 yöntemi —
      boyut eski/yeniyi ayırt etmeyebilir). Hiçbir başka alana dokunma. Liste boşsa bu adımı atla ve söyle.
 
+1b) Açıklama (2026-10-23 inceleme; 0'da G951 yayında değilse ATLA ve söyle): taslak açıklamaları hâlâ "One website per order"
+   diyor. 01–20'nin (ve isteğe bağlı 21–49'un) her taslağında Description alanını sil → collections/<NN_*>/package/listing/
+   etsy_upload.json içindeki `description` değerini AYNEN yapıştır → "Save draft" → yeniden açıp oku: "One website for each design
+   you buy (two designs in one order: one website each)" ve "Terms of use: https://bkestudio.com/terms" satırları var mı. Başka alana
+   dokunma.
+
 2) Yer tutucu — 22–32 ilan medyası (K54): yeni tasarımdan yeniden çekilecek. Main'de şu komut yeni bir commit göstermiyorsa
    ATLA ve "re-render commit'i yok" yaz:
        git log --oneline d3becd6db..origin/main -- 'collections/2[2-9]_*/package/listing/images_v4' 'collections/3[0-2]_*/package/listing/images_v4' 'collections/2[2-9]_*/package/listing/video_v4_4x5.mp4' 'collections/3[0-2]_*/package/listing/video_v4_4x5.mp4'

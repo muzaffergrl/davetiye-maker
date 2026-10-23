@@ -27,6 +27,7 @@
 | 01–20 misafir sitesi görsel cilası (şifre sayfası, satır kırılımları, kontrast, yatay telefon); panel üst çubuğu, satış sitesi başlığı, 5 dil eksikleri, 404 sayfaları | vis dalı (docs/41) |
 | **Ses efektleri** (K57, G967–G969): 10 → 50 efekt (koddan, fiziksel modelle; kendi işimiz), 49 temanın her birine kendi açılış listesi (3–8 ses, animasyon adımlarına oturuyor), ses saatine göre zamanlayan oynatıcı | audio dalı (docs/40) |
 | Entegratör: katalog satıştakileri önce gösteriyor; 22–32 ses testleri yeni açılışlara; 21/49 `etsy_upload.json` `preview`; /start seçim kutusu cilası; /terms-/kvkk meta açıklamaları es/de/fr | bu dal |
+| **Üç incelemenin düzeltmeleri** (2026-10-23): RSVP sayacı yazılamazsa yanıt kaydedilir ama *beklemede* (sayılmaz, G953); sipariş numarası denemelerinde yalnız eşleşmeyenler sayılır (3 tasarımlı alıcı /my'de 429 almaz); 10 site sınırında `order_full` doğru nedeni söyler; Gmail satış e-postasının saydığından fazla site `pending`; blob yedeği 0600/0700; "bir sipariş = bir site" metinleri → "her tasarım bir site" (/start, /how-it-works, SSS + canlı destek bilgisi, START HERE ×49, Etsy ilanı ×49) + Kullanım koşulları linki; /about tek cümle ("gerçek telefonlarda denendi"); Terms'te PDF sözü düzeltildi; önizleme (21, 49, 22–32) kartında fiyat yok; Privacy dükkân adı + 48 ay; footer telefonda 6 rehber; /my'de adres bölünmez; TR "websitesi" / "canlı destek sohbeti"; GPT bekleyen listesi yeniden üretildi | bu dal (fixer) |
 
 Yayına çıkması: bu dal main'e alınınca (push = production). Sonra `docs/38` adım 0 kontrolleri ve canlı kontrol.
 
@@ -42,6 +43,9 @@ Yayına çıkması: bu dal main'e alınınca (push = production). Sonra `docs/38
 
 Etsy: **52 taslak, 0 aktif** (docs/20 §7.13). Bütün tasarım taslaklarındaki START HERE PDF'i eski görünümlü (hizmet daveti ve
 "Canva" cümlesi var); yeni PDF'ler repoda, yüklemesi `docs/38` adım 1.
+2026-10-23 inceleme: Etsy taslaklarındaki açıklama hâlâ "One website per order" diyor; yeni metin (tasarım başına bir site + Terms
+linki) `listing_v3.md` §2 ve `etsy_upload.json`'da. START HERE PDF'leri de bu yüzden yeniden üretildi (14 sayfa): yükleme ve açıklama
+yapıştırma `docs/38` adım 1 ile birlikte yapılmalı.
 
 ## 4. Testler (23 Ekim, bu dal, Next.js 16.4.3 ile `npm ci` sonrası)
 - `npm test` **1946/1946** (0 hata, 0 atlanan; build varken), typecheck yeşil, build yeşil (trace-check ve JS bütçeleri dahil).
