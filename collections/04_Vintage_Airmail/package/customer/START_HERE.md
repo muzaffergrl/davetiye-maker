@@ -48,9 +48,9 @@ Open the start link. At the top you see a small live demo of your design (**Open
 - **Your first names:** as your guests know you. You can change them later in the editor.
 - **Website address:** made from your names, for example …/avery-and-jordan. "Available" means it is free. You can change it here, but **not later**, so check the spelling.
 
-Tap **Create my website**. One order starts one website. Your website starts as a private draft: nobody can see it until you publish.
+Tap **Create my website**. Each design you bought starts one website. Your website starts as a private draft: nobody can see it until you publish.
 
-If your connection drops, tap **Create my website** again: you get your link back. If your order already has a website and you enter the email you started with, the page opens it for you. With another email it says "This order already has a website": see Troubleshooting.
+If your connection drops, tap **Create my website** again: you get your link back. If your order already has a website and you enter the email you started with, the page shows it with **Open it**. Bought two designs in this order, or the same design twice? Open the start link of the other design (or this link again) with the same order number and email, and start your second website there. With another email it says "This order already has a website": see Troubleshooting.
 
 ## Step 2. Set up in three steps
 
@@ -227,7 +227,7 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 **Can guests see each other's replies?** No. Only you see them, in your private editor.
 
-**Can I start a second website with my order?** No. One order starts one website.
+**Can I start a second website with my order?** Only for another design you bought in the same order: each design starts one website. If your order has two designs, or the same design twice, start one website for each with the same order number and email. One design cannot be used for two different events.
 
 **Is there music?** Yes, if you like: soft music on your Our Story page (see Music and sound above). Choose **No music** to turn it off.
 
@@ -265,6 +265,6 @@ In your editor, **Help & questions** at the bottom of Home answers the most comm
 
 Message BKE Studio on Etsy (in the conversation of your order), or write to **bkestudio01@gmail.com**. We reply within **24 hours**. Please include your order number, your website address, what you see (a screenshot helps) and your phone and browser. Never send your edit link: we never need it.
 
-Your guests' replies are visible only in your private editor, not on your website. To have your website, its photos and your guests' replies deleted sooner, message us on Etsy with your order number: we delete them within 30 days. Privacy notice: [https://bkestudio.com/privacy](https://bkestudio.com/privacy).
+Your guests' replies are visible only in your private editor, not on your website. To have your website, its photos and your guests' replies deleted sooner, message us on Etsy with your order number: we delete them within 30 days. Privacy notice: [https://bkestudio.com/privacy](https://bkestudio.com/privacy). Terms of use: [https://bkestudio.com/terms](https://bkestudio.com/terms).
 
 The design's sample names, dates, places and photos are fictional. Replace them before you share your website.

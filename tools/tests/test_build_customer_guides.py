@@ -5,7 +5,7 @@
 Covered: Ek A is found and holds exactly the placeholders the tool fills; the design values (20 designs, the six that
 open from something other than an envelope, the language line from the fonts, a dark QR colour with ≥ 7:1 contrast);
 an unknown placeholder or font stops the build; the label check finds a renamed button and a changed quoted text; a
-guide PDF built in a temporary folder has the clickable start link, the privacy link and nothing else, and its QR is
+guide PDF built in a temporary folder has the clickable start link, /my, the privacy and terms links and nothing else, and its QR is
 the make_qr.py picture; and every committed guide passes `check` (links, QR module by module, Ek A equality, labels;
 the jsQR raster reading for two designs when node + jsqr are there). Nothing in the repository is written.
 """
@@ -52,8 +52,12 @@ def expect_exit(fn, *args):
 def test_template():
     t = b.template()
     assert t.startswith("# Start Here: Your {DESIGN_NAME} Wedding Website\n"), t[:60]
-    assert set(b.PLACEHOLDER.findall(t)) == {"{DESIGN_NAME}", "{START_URL}", "{PRIVACY_URL}", "{MY_URL}", "{OPENING}",
+    assert set(b.PLACEHOLDER.findall(t)) == {"{DESIGN_NAME}", "{START_URL}", "{PRIVACY_URL}", "{TERMS_URL}", "{MY_URL}", "{OPENING}",
                                              "{OPENING_TAB}", "{LANGUAGE_FONTS}"}
+    # review 2026-10-23: one website per DESIGN bought (two designs in one order: one each, G951), never "one per order";
+    # the terms of use are linked next to the privacy notice
+    assert "One order starts one website" not in t and "Each design you bought starts one website" in t
+    assert "Terms of use: [{TERMS_URL}]({TERMS_URL})" in t
     # G148 (G146/K46): the order number + email on /my are the way back; the edit link is a shortcut, not "the key"
     assert "> **Continue on another device**" in t and "[{MY_URL}]({MY_URL})" in t, "no /my box"
     assert "Purchases and reviews" in t and '"Order #…"' in t, "where the order number is"
@@ -74,6 +78,7 @@ def test_values():
         v = b.values(theme)
         assert v["START_URL"] == f"https://bkestudio.com/start?theme={theme}", v
         assert v["PRIVACY_URL"] == "https://bkestudio.com/privacy"
+        assert v["TERMS_URL"] == "https://bkestudio.com/terms"
         assert v["MY_URL"] == "https://bkestudio.com/my"
         assert v["OPENING"] == NOT_ENVELOPE.get(theme, "envelope"), (no, v["OPENING"])
         assert v["OPENING_TAB"] == v["OPENING"].capitalize(), (no, v["OPENING_TAB"])
@@ -129,7 +134,7 @@ def test_pdf(tmp: Path):
     assert b.eu.lk.qr_matches(png, v["START_URL"], scale=b.QR_SCALE) and "segno" in svg.read_text(encoding="utf-8")
     pdf = b.build_pdf(md, tmp / "START_HERE.pdf", png, v["START_URL"], v["DESIGN_NAME"])
     uris = b.pdf_uris(pdf)
-    assert v["START_URL"] in uris and set(uris) == {v["START_URL"], v["PRIVACY_URL"], v["MY_URL"]}, uris
+    assert v["START_URL"] in uris and set(uris) == {v["START_URL"], v["PRIVACY_URL"], v["TERMS_URL"], v["MY_URL"]}, uris
     # G154: + Languages and Downloads (10 pages); 2026-10-22 look: cover, quick start page, contents (13–14 pages)
     assert 8 <= b.pdf_page_count(pdf) <= 15, b.pdf_page_count(pdf)
     text = b.eu.lk.pdf_text(pdf) or ""

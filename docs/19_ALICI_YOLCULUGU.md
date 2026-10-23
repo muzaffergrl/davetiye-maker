@@ -370,7 +370,7 @@ No Canva account, no app, no design skills.
 
 GOOD TO KNOW
 • Digital product: nothing is printed or shipped. Nothing to fill in at checkout.
-• One website per order. You choose your web address when you start; it cannot be changed later. A custom domain (yournames.com) is not included.
+• One website for each design you buy (two designs in one order: one website each). You choose your web address when you start; it cannot be changed later. A custom domain (yournames.com) is not included.
 • Your Etsy order number is your key: with it and your email, your editor opens right away, and again on any phone or computer to continue where you left off. No account or password.
 • If your editor says it is confirming your Etsy order, you can set everything up in the meantime; Publish opens once the order is confirmed, usually within 24 hours.
 • After you publish, names and date can be changed 3 times in total; typo fixes and moving the date by up to 7 days are always free. Everything else can be changed as often as you like.
@@ -378,6 +378,7 @@ GOOD TO KNOW
 • Colors and fonts do not change.
 • The painted design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. Sample names, dates, places and photos are fictional.
 • No returns, exchanges or cancellations: this is a digital product with instant access. If something on your website does not work as described, message us on Etsy and we will fix it.
+• Terms of use: https://bkestudio.com/terms
 
 QUESTIONS?
 Message us here on Etsy. We reply within 24 hours.
@@ -948,7 +949,7 @@ Karar bekleyen politikalar şablonda **köşeli parantezle** durur (`[ORDER CHEC
 ## 5. START HERE rehberi
 
 **Ortak kaynak:** Ek A (bu belgenin sonunda, iki işaret satırı arasında: `g091:start-here:start` … `end`). Yer tutucular
-(`{DESIGN_NAME}`, `{START_URL}`, `{PRIVACY_URL}`, `{OPENING}`, `{OPENING_TAB}`, `{LANGUAGE_FONTS}`) Ek A'nın başındaki tabloda. **Üretim tek
+(`{DESIGN_NAME}`, `{START_URL}`, `{PRIVACY_URL}`, `{TERMS_URL}`, `{OPENING}`, `{OPENING_TAB}`, `{LANGUAGE_FONTS}`) Ek A'nın başındaki tabloda. **Üretim tek
 komut (G122):** `python3 tools/build_customer_guides.py` — 20 tasarımın her biri için `package/customer/START_HERE.md`,
 `START_HERE.pdf`, `img/start_qr.{png,svg}` (yalnız `tools/make_qr.py`, gerçek başlat linkinden), `img/start_qr_page.png`; sonra
 denetim. `--designs 06-20` seçim, `--check` yalnız denetim, `--base-url` / `GUIDE_BASE_URL` başka alan adı (karar gelince).
@@ -1152,6 +1153,7 @@ metni burada değiştir, komutu yeniden koş. Yer tutucular (araç doldurur; dol
 | `{DESIGN_NAME}` | Tasarımın adı ("Olive & Ivory") | `platform/themes/<id>/theme.json` `name` (= `/start`'taki "Design: …") |
 | `{START_URL}` | `https://bkestudio.com/start?theme=<id>` | `--base-url` / `GUIDE_BASE_URL`; rota `platform/app/start/page.tsx` |
 | `{PRIVACY_URL}` | `https://bkestudio.com/privacy` | aynı taban; rota `platform/app/(marketing)/privacy/page.tsx` |
+| `{TERMS_URL}` | `https://bkestudio.com/terms` | aynı taban; rota `platform/app/(marketing)/terms/page.tsx` (G961, kullanım koşulları; 2026-10-23 inceleme: satın alma yolundan link) |
 | `{MY_URL}` | `https://bkestudio.com/my` | G148: aynı taban; rota `platform/app/my/page.tsx` (satış sitesinin "Create your website" düğmesi; sipariş no + e-posta → editör, G146/K46) |
 | `{OPENING}` | Misafirin ilk dokunduğu nesne: `envelope`; 06 ve 14 `gatefold`, 09 `pouch`, 12 `wallet`, 13 `book`, 18 `sleeve` | `platform/lib/marketing/designs.ts` `opening` ("Your guests tap the …") |
 | `{OPENING_TAB}` | Aynı kelime büyük harfle: panelin ilk önizleme sekmesi (`Envelope`, `Gatefold`, `Pouch`, `Wallet`, `Book`, `Sleeve`) | G121: `platform/lib/panel/model.ts` `openingTabLabel` (aynı `designs.ts` cümlesinden) |
@@ -1241,9 +1243,9 @@ Open the start link. At the top you see a small live demo of your design (**Open
 - **Your first names:** as your guests know you. You can change them later in the editor.
 - **Website address:** made from your names, for example …/avery-and-jordan. "Available" means it is free. You can change it here, but **not later**, so check the spelling.
 
-Tap **Create my website**. One order starts one website. Your website starts as a private draft: nobody can see it until you publish.
+Tap **Create my website**. Each design you bought starts one website. Your website starts as a private draft: nobody can see it until you publish.
 
-If your connection drops, tap **Create my website** again: you get your link back. If your order already has a website and you enter the email you started with, the page opens it for you. With another email it says "This order already has a website": see Troubleshooting.
+If your connection drops, tap **Create my website** again: you get your link back. If your order already has a website and you enter the email you started with, the page shows it with **Open it**. Bought two designs in this order, or the same design twice? Open the start link of the other design (or this link again) with the same order number and email, and start your second website there. With another email it says "This order already has a website": see Troubleshooting.
 
 ## Step 2. Set up in three steps
 
@@ -1420,7 +1422,7 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 **Can guests see each other's replies?** No. Only you see them, in your private editor.
 
-**Can I start a second website with my order?** No. One order starts one website.
+**Can I start a second website with my order?** Only for another design you bought in the same order: each design starts one website. If your order has two designs, or the same design twice, start one website for each with the same order number and email. One design cannot be used for two different events.
 
 **Is there music?** Yes, if you like: soft music on your Our Story page (see Music and sound above). Choose **No music** to turn it off.
 
@@ -1458,7 +1460,7 @@ In your editor, **Help & questions** at the bottom of Home answers the most comm
 
 Message BKE Studio on Etsy (in the conversation of your order), or write to **bkestudio01@gmail.com**. We reply within **24 hours**. Please include your order number, your website address, what you see (a screenshot helps) and your phone and browser. Never send your edit link: we never need it.
 
-Your guests' replies are visible only in your private editor, not on your website. To have your website, its photos and your guests' replies deleted sooner, message us on Etsy with your order number: we delete them within 30 days. Privacy notice: [{PRIVACY_URL}]({PRIVACY_URL}).
+Your guests' replies are visible only in your private editor, not on your website. To have your website, its photos and your guests' replies deleted sooner, message us on Etsy with your order number: we delete them within 30 days. Privacy notice: [{PRIVACY_URL}]({PRIVACY_URL}). Terms of use: [{TERMS_URL}]({TERMS_URL}).
 
 The design's sample names, dates, places and photos are fictional. Replace them before you share your website.
 ````

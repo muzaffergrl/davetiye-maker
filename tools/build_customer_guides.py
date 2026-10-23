@@ -11,6 +11,7 @@ change Ek A and run this again. Placeholders filled per design ({…} left over 
   {DESIGN_NAME}    platform/themes/<id>/theme.json "name" (what /start shows as "Design: …")
   {START_URL}      <base>/start?theme=<id>      (route: platform/app/start/page.tsx)
   {PRIVACY_URL}    <base>/privacy               (route: platform/app/(marketing)/privacy/page.tsx)
+  {TERMS_URL}      <base>/terms                 (route: platform/app/(marketing)/terms/page.tsx; G961 terms of use)
   {MY_URL}         <base>/my                    (G146/G148: the Etsy order number + email open the editor on any
                                                  device; route platform/app/my/page.tsx, "Create your website")
   {OPENING}        what guests tap first: envelope, gatefold, pouch, wallet, book, sleeve, box, curtain, origami, door,
@@ -44,8 +45,8 @@ Checks (always after a build, or alone with --check):
   - start_qr.png encodes exactly the start URL (re-encoded and compared module by module), start_qr_page.png holds the
     same pixels, and both — plus every rendered page of the PDF — decode with jsQR (platform's devDependency, run with
     node) to the start URL; the PDF holds exactly one QR
-  - the PDF's links are the start URL (at least once), the /my page (at least once, G148) and the privacy notice,
-    nothing else
+  - the PDF's links are the start URL (at least once), the /my page (at least once, G148), the privacy notice and the
+    terms of use, nothing else
 Needs: reportlab, segno, Pillow, numpy, pypdf, pdftoppm (poppler; or PyMuPDF) and node + jsqr for the raster check (looked up in
 platform/node_modules, then in the main checkout of a git worktree, or JSQR_DIR); without node/jsqr the raster check is
 reported as skipped, never as passed.
@@ -237,6 +238,11 @@ def privacy_url(base: str = BASE_URL) -> str:
     return f"{base.rstrip('/')}/privacy"
 
 
+def terms_url(base: str = BASE_URL) -> str:
+    """G961: the terms of use (/start says that creating a website accepts them; linked from the guide too)."""
+    return f"{base.rstrip('/')}/terms"
+
+
 def my_url(base: str = BASE_URL) -> str:
     """G148: the page where the Etsy order number + email open the editor on any device (G146, K46)."""
     return f"{base.rstrip('/')}/my"
@@ -247,6 +253,7 @@ def values(theme: str, base: str = BASE_URL) -> dict[str, str]:
         "DESIGN_NAME": eu.theme_name(theme),
         "START_URL": start_url(theme, base),
         "PRIVACY_URL": privacy_url(base),
+        "TERMS_URL": terms_url(base),
         "MY_URL": my_url(base),
         "OPENING": eu.opening_object(theme),
         "OPENING_TAB": opening_tab(eu.opening_object(theme)),
@@ -1033,7 +1040,7 @@ def check(no: str, folder: str, theme: str, base: str = BASE_URL, raster: bool =
         p.append(f"START_HERE.pdf has no clickable {url}")
     if vals["MY_URL"] not in uris:
         p.append(f"START_HERE.pdf has no clickable {vals['MY_URL']}")
-    other = sorted(set(uris) - {url, vals["PRIVACY_URL"], vals["MY_URL"]})
+    other = sorted(set(uris) - {url, vals["PRIVACY_URL"], vals["TERMS_URL"], vals["MY_URL"]})
     if other:
         p.append(f"START_HERE.pdf links elsewhere: {other}")
     facts["pages"] = pdf_page_count(pdf)
