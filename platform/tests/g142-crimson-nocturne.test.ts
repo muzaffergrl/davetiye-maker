@@ -33,7 +33,7 @@ for (const t of THEMES) {
     assert.equal(stage.attr('role'), 'button');
     assert.equal(stage.attr('tabindex'), '0');
     // the seal, the flap, the pocket and the card are their own layers (AGENTS şart 4, docs/11 §7.3)
-    const pieces = ['.env-seal', '.env-flap', '.env-pocket', '.env-card', '.env-back'];
+    const pieces = ['.env-seal', '.seal-half.l', '.seal-half.r', '.env-flap', '.flap-face', '.flap-back', '.env-pocket', '.env-card', '.env-inside'];
     for (const sel of pieces) assert.equal(stage.find(sel).length, 1, sel);
     assert.equal($('.replay').length, 1);
     assert.equal($('.replay[hidden]').length, 0, '.replay is shown by the opened state, not by removing [hidden]');

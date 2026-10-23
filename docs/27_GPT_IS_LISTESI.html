@@ -39,7 +39,7 @@ button.ok{border-color:var(--ok);color:var(--ok)}
 <body>
 <main>
 <h1>GPT iş listesi</h1>
-<p>22 görsel ChatGPT'de üretilecek. Her madde kendi başına yapıştırılabilir İngilizce prompt; işaretlerin bu tarayıcıda saklanır. Üretildi: <code>python3 tools/gpt_is_listesi.py --yaz</code> (elle düzenlenmez).</p>
+<p>37 görsel ChatGPT'de üretilecek. Her madde kendi başına yapıştırılabilir İngilizce prompt; işaretlerin bu tarayıcıda saklanır. Üretildi: <code>python3 tools/gpt_is_listesi.py --yaz</code> (elle düzenlenmez).</p>
 <details class="notes" open><summary>ChatGPT'de nasıl çalışılır</summary><ol>
 <li>Her tasarım için <b>yeni bir sohbet</b> aç ve o tasarımın maddelerini aynı sohbette sırayla üret (stil, ışık, malzeme tutarlı kalsın). Tasarım başlığındaki İngilizce GPT notu varsa önce onu gönder; notta adı geçen repo görsellerini (ör. 22–32&#x27;de <code>bg_scene-1024.webp</code> ve <code>v3-closed-880.webp</code>) o ilk mesaja ekle.</li>
 <li><b>Her mesajda tek görsel:</b> &quot;Prompt&#x27;u kopyala&quot; → ChatGPT&#x27;ye yapıştır → gönder. Prompt&#x27;u kısaltma, Türkçeye çevirme.</li>
@@ -51,19 +51,212 @@ button.ok{border-color:var(--ok);color:var(--ok)}
 <li>Görselde yazı, harf, logo, QR benzeri kare çıkarsa yeniden üret — hiçbir parçada yazı istenmiyor.</li>
 </ol></details>
 <details class="notes"><summary>Neden bu sıra</summary><p>22–32 tasarımları 18–19 Ekim 2026&#x27;da imagegen sanatıyla yeniden kuruldu: website parçaları (PAKET 5) artık istenmiyor; bu tasarımlardan yalnız ilan sahneleri (PAKET 3) ve yeni görünüme uyan baskı zeminleri (PAKET 6) isteniyor, örnek fotoğrafları (PAKET 2) isteğe bağlı ve grubun sonunda. 33–38 ancak kendi website parçaları (PAKET 5) gelince geçici yer tutuculardan çıkıp live olabilir; örnek fotoğraflar (PAKET 2) theme-check ve demo için, ilan sahneleri (PAKET 3) ve baskı zeminleri (PAKET 6) satış paketi için gerekir. 01–21&#x27;in website parçaları tam; bu gruptaki 2× baskı parçaları yalnız basılı davetiyeyi ~230 ppi&#x27;den 300 ppi&#x27;ye çıkarır (bugünkü parçalarla da çalışıyor). Palet varyantları en sonda: o paletler <code>coming</code> ve GPT gelene dek asıl renkli parçayla görünüyor; fildişi gül paleti yalnız istenirse.</p><ul>
+<li>B · Tasarım 01–21 rötuş / baskı parçaları: 15</li>
 <li>C · Palet varyantı görselleri: 1</li>
 <li>D · Diğer (marka): 21</li>
 </ul></details>
 <div class="bar">
-<select id="f-grup" aria-label="Grup"><option value="">Bütün gruplar</option><option value="c">C · Palet varyantı görselleri</option><option value="d">D · Diğer (marka)</option></select>
+<select id="f-grup" aria-label="Grup"><option value="">Bütün gruplar</option><option value="b">B · Tasarım 01–21 rötuş / baskı parçaları</option><option value="c">C · Palet varyantı görselleri</option><option value="d">D · Diğer (marka)</option></select>
 <select id="f-tasarim" aria-label="Tasarım"><option value="">Bütün tasarımlar</option><option value="21_Crimson_Rose_Atelier">21_Crimson_Rose_Atelier</option><option value="brand">brand</option></select>
 <label><input type="checkbox" id="f-bitmeyen"> yalnız bitmeyenler</label>
 <span id="sayac"></span>
 </div>
+<h2 class="baslik-grup" data-k="b">B · Tasarım 01–21 rötuş / baskı parçaları</h2>
+<h3 class="baslik-tasarim" data-k="21_Crimson_Rose_Atelier">21_Crimson_Rose_Atelier</h3>
+<section class="item" id="m1" data-ad="21-crimson-rose-atelier__velvet.png" data-grup="b" data-tasarim="21_Crimson_Rose_Atelier">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #1"><div><div><span class="no">#1</span><b>W3.1 Kadife fon — telefon (açılış ve RSVP sayfasının zemini)</b></div><div class="meta">İndirme adı: <span class="fn">21-crimson-rose-atelier__velvet.png</span></div></div></div>
+<div class="meta">Hedef: <code>collections/21_Crimson_Rose_Atelier/assets/gpt/parts/velvet.png</code></div>
+<div class="meta">PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 · website parçası (PAKET 5)</div>
+<div class="meta"><b>Şart:</b> 1024×1536 px (2:3) · opak · PNG</div>
+<div class="meta"><b>Ek görsel:</b> design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)</div>
+<pre>You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called &quot;Crimson Rose Atelier&quot;: deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+A full-frame vertical photograph (2:3) of deep oxblood crushed silk velvet (#29070B in the shadows, #5B1018 in the lit pile), filling the whole canvas edge to edge, lit by one soft warm light from the upper left as if by candlelight in a dark room. The velvet lies almost flat: the middle 60% of the frame (from 20% to 80% of the width and from 15% to 80% of the height) is a CALM, even, slightly darker area with only the fine velvet pile visible, so text and an envelope can sit on it. Only along the left edge, the right edge and the bottom 20% the velvet gathers into a few soft, large, luxurious folds with gentle rich highlights. A subtle natural vignette. No objects, no flowers, no petals, no gold, no envelope, no shadows of objects, no text.</pre>
+<div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
+<div class="kontrol">Kontrol: orta bölge sakin ve düz; kıvrımlar yalnız kenarlarda ve altta; renk koyu kan kırmızısı (kahverengi/mor değil); nesne yok.</div>
+</section>
+<section class="item" id="m2" data-ad="21-crimson-rose-atelier__velvet_wide.png" data-grup="b" data-tasarim="21_Crimson_Rose_Atelier">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #2"><div><div><span class="no">#2</span><b>W3.2 Kadife fon — geniş ekran</b></div><div class="meta">İndirme adı: <span class="fn">21-crimson-rose-atelier__velvet_wide.png</span></div></div></div>
+<div class="meta">Hedef: <code>collections/21_Crimson_Rose_Atelier/assets/gpt/parts/velvet_wide.png</code></div>
+<div class="meta">PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 · website parçası (PAKET 5)</div>
+<div class="meta"><b>Şart:</b> 1536×1024 px (3:2) · opak · PNG</div>
+<div class="meta"><b>Ek görsel:</b> design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png), velvet.png (listede #1)</div>
+<pre>You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called &quot;Crimson Rose Atelier&quot;: deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+The same oxblood crushed silk velvet as velvet.png, now a full-frame horizontal photograph (3:2) filling the canvas edge to edge, the same color, pile, light from the upper left and vignette. The middle 60% of the width and the middle 70% of the height are a CALM, even area; a few soft large folds only along the left and right edges and the bottom. No objects, no flowers, no gold, no text.</pre>
+<div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
+<div class="kontrol">Kontrol: velvet.png ile aynı kumaş ve renk; orta bölge sakin.</div>
+</section>
+<section class="item" id="m3" data-ad="21-crimson-rose-atelier__satin_drape.png" data-grup="b" data-tasarim="21_Crimson_Rose_Atelier">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #3"><div><div><span class="no">#3</span><b>W3.3 Saten dökümü (açılış sahnesinin altı)</b></div><div class="meta">İndirme adı: <span class="fn">21-crimson-rose-atelier__satin_drape.png</span></div></div></div>
+<div class="meta">Hedef: <code>collections/21_Crimson_Rose_Atelier/assets/gpt/parts/satin_drape.png</code></div>
+<div class="meta">PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 · website parçası (PAKET 5)</div>
+<div class="meta"><b>Şart:</b> 1800×700 px (18:7) · şeffaf zemin (gerçek alfa) · PNG</div>
+<div class="meta"><b>Ek görsel:</b> design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)</div>
+<pre>You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called &quot;Crimson Rose Atelier&quot;: deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+A length of deep burgundy silk satin fabric (#4B0C17 with luminous #8E2333 highlights) lying horizontally in soft, generous, flowing folds, seen from the front and slightly above, as if draped across the bottom of a table under an envelope. The fabric forms a wide horizontal band (about 2.6:1) whose upper edge is a soft irregular fabric edge with folds rising and falling; its left and right ends fade out naturally in folds. Rich liquid satin sheen, one soft warm light from the upper left. Nothing else: no petals, no roses, no ribbon, no envelope. True transparent background PNG around the fabric, no cast shadow outside it.</pre>
+<div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
+<div class="kontrol">Kontrol: tek parça saten; üst kenar yumuşak kumaş kenarı; gerçek alfa; başka nesne yok.</div>
+</section>
+<section class="item" id="m4" data-ad="21-crimson-rose-atelier__petal_1.png" data-grup="b" data-tasarim="21_Crimson_Rose_Atelier">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #4"><div><div><span class="no">#4</span><b>W3.4 Gül yaprakları (süzülen yapraklar) — beş ayrı dosya</b></div><div class="meta">İndirme adı: <span class="fn">21-crimson-rose-atelier__petal_1.png</span></div></div></div>
+<div class="meta">Hedef: <code>collections/21_Crimson_Rose_Atelier/assets/gpt/parts/petal_1.png</code></div>
+<div class="meta">PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 · website parçası (PAKET 5)</div>
+<div class="meta"><b>Şart:</b> 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG</div>
+<div class="meta"><b>Ek görsel:</b> design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)</div>
+<pre>You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called &quot;Crimson Rose Atelier&quot;: deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+This prompt describes a set of 5 separate images (petal_1, petal_2, petal_3, petal_4, petal_5). Make ONLY ONE image now: petal_1 (number 1 of 5).
+
+A single loose petal of the same dark crimson red rose as in rose-branch.png, photographed for real, alone, on a fully transparent background: velvety deep red (#8E0F1E, darker #4A0610 at the base and in the curl, a soft luminous edge where the light catches it), natural fine veins, filling about 55% of the square, centred, not cropped. No stem, no leaf, no whole flower, no water drops, no shadow, no other petal. True transparent background PNG. (Make five different petals: 1 = a wide gently cupped petal seen from above, 2 = a petal curled at one edge, 3 = a narrow folded petal seen from the side, 4 = a small inner petal, 5 = a petal lit from behind so its edge glows.)</pre>
+<div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
+<div class="kontrol">Kontrol: beş dosya, her biri tek yaprak, birbirinden farklı; gül rengi rose-branch.png ile aynı; gölge yok; gerçek alfa.</div>
+</section>
+<section class="item" id="m5" data-ad="21-crimson-rose-atelier__petal_2.png" data-grup="b" data-tasarim="21_Crimson_Rose_Atelier">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #5"><div><div><span class="no">#5</span><b>W3.4 Gül yaprakları (süzülen yapraklar) — beş ayrı dosya</b></div><div class="meta">İndirme adı: <span class="fn">21-crimson-rose-atelier__petal_2.png</span></div></div></div>
+<div class="meta">Hedef: <code>collections/21_Crimson_Rose_Atelier/assets/gpt/parts/petal_2.png</code></div>
+<div class="meta">PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 · website parçası (PAKET 5)</div>
+<div class="meta"><b>Şart:</b> 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG</div>
+<div class="meta"><b>Ek görsel:</b> design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)</div>
+<pre>You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called &quot;Crimson Rose Atelier&quot;: deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+This prompt describes a set of 5 separate images (petal_1, petal_2, petal_3, petal_4, petal_5). Make ONLY ONE image now: petal_2 (number 2 of 5).
+
+A single loose petal of the same dark crimson red rose as in rose-branch.png, photographed for real, alone, on a fully transparent background: velvety deep red (#8E0F1E, darker #4A0610 at the base and in the curl, a soft luminous edge where the light catches it), natural fine veins, filling about 55% of the square, centred, not cropped. No stem, no leaf, no whole flower, no water drops, no shadow, no other petal. True transparent background PNG. (Make five different petals: 1 = a wide gently cupped petal seen from above, 2 = a petal curled at one edge, 3 = a narrow folded petal seen from the side, 4 = a small inner petal, 5 = a petal lit from behind so its edge glows.)</pre>
+<div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
+<div class="kontrol">Kontrol: beş dosya, her biri tek yaprak, birbirinden farklı; gül rengi rose-branch.png ile aynı; gölge yok; gerçek alfa.</div>
+</section>
+<section class="item" id="m6" data-ad="21-crimson-rose-atelier__petal_3.png" data-grup="b" data-tasarim="21_Crimson_Rose_Atelier">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #6"><div><div><span class="no">#6</span><b>W3.4 Gül yaprakları (süzülen yapraklar) — beş ayrı dosya</b></div><div class="meta">İndirme adı: <span class="fn">21-crimson-rose-atelier__petal_3.png</span></div></div></div>
+<div class="meta">Hedef: <code>collections/21_Crimson_Rose_Atelier/assets/gpt/parts/petal_3.png</code></div>
+<div class="meta">PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 · website parçası (PAKET 5)</div>
+<div class="meta"><b>Şart:</b> 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG</div>
+<div class="meta"><b>Ek görsel:</b> design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)</div>
+<pre>You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called &quot;Crimson Rose Atelier&quot;: deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+This prompt describes a set of 5 separate images (petal_1, petal_2, petal_3, petal_4, petal_5). Make ONLY ONE image now: petal_3 (number 3 of 5).
+
+A single loose petal of the same dark crimson red rose as in rose-branch.png, photographed for real, alone, on a fully transparent background: velvety deep red (#8E0F1E, darker #4A0610 at the base and in the curl, a soft luminous edge where the light catches it), natural fine veins, filling about 55% of the square, centred, not cropped. No stem, no leaf, no whole flower, no water drops, no shadow, no other petal. True transparent background PNG. (Make five different petals: 1 = a wide gently cupped petal seen from above, 2 = a petal curled at one edge, 3 = a narrow folded petal seen from the side, 4 = a small inner petal, 5 = a petal lit from behind so its edge glows.)</pre>
+<div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
+<div class="kontrol">Kontrol: beş dosya, her biri tek yaprak, birbirinden farklı; gül rengi rose-branch.png ile aynı; gölge yok; gerçek alfa.</div>
+</section>
+<section class="item" id="m7" data-ad="21-crimson-rose-atelier__petal_4.png" data-grup="b" data-tasarim="21_Crimson_Rose_Atelier">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #7"><div><div><span class="no">#7</span><b>W3.4 Gül yaprakları (süzülen yapraklar) — beş ayrı dosya</b></div><div class="meta">İndirme adı: <span class="fn">21-crimson-rose-atelier__petal_4.png</span></div></div></div>
+<div class="meta">Hedef: <code>collections/21_Crimson_Rose_Atelier/assets/gpt/parts/petal_4.png</code></div>
+<div class="meta">PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 · website parçası (PAKET 5)</div>
+<div class="meta"><b>Şart:</b> 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG</div>
+<div class="meta"><b>Ek görsel:</b> design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)</div>
+<pre>You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called &quot;Crimson Rose Atelier&quot;: deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+This prompt describes a set of 5 separate images (petal_1, petal_2, petal_3, petal_4, petal_5). Make ONLY ONE image now: petal_4 (number 4 of 5).
+
+A single loose petal of the same dark crimson red rose as in rose-branch.png, photographed for real, alone, on a fully transparent background: velvety deep red (#8E0F1E, darker #4A0610 at the base and in the curl, a soft luminous edge where the light catches it), natural fine veins, filling about 55% of the square, centred, not cropped. No stem, no leaf, no whole flower, no water drops, no shadow, no other petal. True transparent background PNG. (Make five different petals: 1 = a wide gently cupped petal seen from above, 2 = a petal curled at one edge, 3 = a narrow folded petal seen from the side, 4 = a small inner petal, 5 = a petal lit from behind so its edge glows.)</pre>
+<div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
+<div class="kontrol">Kontrol: beş dosya, her biri tek yaprak, birbirinden farklı; gül rengi rose-branch.png ile aynı; gölge yok; gerçek alfa.</div>
+</section>
+<section class="item" id="m8" data-ad="21-crimson-rose-atelier__petal_5.png" data-grup="b" data-tasarim="21_Crimson_Rose_Atelier">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #8"><div><div><span class="no">#8</span><b>W3.4 Gül yaprakları (süzülen yapraklar) — beş ayrı dosya</b></div><div class="meta">İndirme adı: <span class="fn">21-crimson-rose-atelier__petal_5.png</span></div></div></div>
+<div class="meta">Hedef: <code>collections/21_Crimson_Rose_Atelier/assets/gpt/parts/petal_5.png</code></div>
+<div class="meta">PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 · website parçası (PAKET 5)</div>
+<div class="meta"><b>Şart:</b> 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG</div>
+<div class="meta"><b>Ek görsel:</b> design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)</div>
+<pre>You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called &quot;Crimson Rose Atelier&quot;: deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+This prompt describes a set of 5 separate images (petal_1, petal_2, petal_3, petal_4, petal_5). Make ONLY ONE image now: petal_5 (number 5 of 5).
+
+A single loose petal of the same dark crimson red rose as in rose-branch.png, photographed for real, alone, on a fully transparent background: velvety deep red (#8E0F1E, darker #4A0610 at the base and in the curl, a soft luminous edge where the light catches it), natural fine veins, filling about 55% of the square, centred, not cropped. No stem, no leaf, no whole flower, no water drops, no shadow, no other petal. True transparent background PNG. (Make five different petals: 1 = a wide gently cupped petal seen from above, 2 = a petal curled at one edge, 3 = a narrow folded petal seen from the side, 4 = a small inner petal, 5 = a petal lit from behind so its edge glows.)</pre>
+<div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
+<div class="kontrol">Kontrol: beş dosya, her biri tek yaprak, birbirinden farklı; gül rengi rose-branch.png ile aynı; gölge yok; gerçek alfa.</div>
+</section>
+<section class="item" id="m9" data-ad="21-crimson-rose-atelier__oval_frame.png" data-grup="b" data-tasarim="21_Crimson_Rose_Atelier">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #9"><div><div><span class="no">#9</span><b>W3.5 Altın oval portre çerçevesi</b></div><div class="meta">İndirme adı: <span class="fn">21-crimson-rose-atelier__oval_frame.png</span></div></div></div>
+<div class="meta">Hedef: <code>collections/21_Crimson_Rose_Atelier/assets/gpt/parts/oval_frame.png</code></div>
+<div class="meta">PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 · website parçası (PAKET 5)</div>
+<div class="meta"><b>Şart:</b> 1000×1250 px (4:5) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG</div>
+<div class="meta"><b>Ek görsel:</b> design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)</div>
+<pre>You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called &quot;Crimson Rose Atelier&quot;: deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+A slim antique oval picture frame of warm champagne gold (#C9A66D, highlights #EBD3A0), the same gold as seal.png, seen straight from the front, filling the canvas (4:5): a fine beaded inner rim, a softly rounded polished outer moulding and a delicate hand-chased leaf pattern along it, refined and light, never heavy or baroque, no crest and no bow on top. The opening inside is an exact OVAL whose bounding box is 4:5 — from 6% to 94% of the image width and from 6% to 94% of the image height — and the whole opening is filled with flat pure green #00FF00 (no texture, no shading, crisp edge, nothing in front of it). Soft warm light from the upper left. Nothing else. True transparent background PNG outside the frame, no shadow outside the frame.</pre>
+<div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
+<div class="kontrol">Kontrol: pencere düz `#00FF00` ve oval, kutusu 4:5 ve %6–%94; çerçeve ince; tepe süsü/fiyonk yok; gerçek alfa.</div>
+</section>
+<section class="item" id="m10" data-ad="21-crimson-rose-atelier__torn_edge.png" data-grup="b" data-tasarim="21_Crimson_Rose_Atelier">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #10"><div><div><span class="no">#10</span><b>W3.6 Yırtık kâğıt kenarı (bordo → fildişi geçişi)</b></div><div class="meta">İndirme adı: <span class="fn">21-crimson-rose-atelier__torn_edge.png</span></div></div></div>
+<div class="meta">Hedef: <code>collections/21_Crimson_Rose_Atelier/assets/gpt/parts/torn_edge.png</code></div>
+<div class="meta">PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 · website parçası (PAKET 5)</div>
+<div class="meta"><b>Şart:</b> 2048×320 px (32:5) · şeffaf zemin (gerçek alfa) · PNG</div>
+<div class="meta"><b>Ek görsel:</b> design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)</div>
+<pre>You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called &quot;Crimson Rose Atelier&quot;: deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+The torn bottom edge of a sheet of thick deep oxblood cotton paper (#4B0C17, the same paper as envelope-closed.png), seen straight from the front on a fully transparent background. The oxblood paper fills the whole top 55% of the image edge to edge (from the left edge to the right edge), and below it the sheet ends in a hand-torn, gently irregular edge that wanders across the full width between 55% and 85% of the image height; along the tear a fine, pale cream fibrous rim (#EADCC5) of exposed paper core with tiny loose fibres. Below the tear everything is fully transparent. The left and right ends of the tear are at the same height so the strip can repeat side by side. Soft warm light from the upper left, no cast shadow, no objects, no text.</pre>
+<div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
+<div class="kontrol">Kontrol: kâğıt üstte kenardan kenara; yırtık tüm genişlikte; lifli açık kenar; altı tamamen şeffaf; sağ ve sol uç aynı yükseklikte.</div>
+</section>
+<section class="item" id="m11" data-ad="21-crimson-rose-atelier__ribbon.png" data-grup="b" data-tasarim="21_Crimson_Rose_Atelier">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #11"><div><div><span class="no">#11</span><b>W3.7 Saten kurdele (albüm ayracı)</b></div><div class="meta">İndirme adı: <span class="fn">21-crimson-rose-atelier__ribbon.png</span></div></div></div>
+<div class="meta">Hedef: <code>collections/21_Crimson_Rose_Atelier/assets/gpt/parts/ribbon.png</code></div>
+<div class="meta">PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 · website parçası (PAKET 5)</div>
+<div class="meta"><b>Şart:</b> 500×1800 px (5:18) · şeffaf zemin (gerçek alfa) · PNG</div>
+<div class="meta"><b>Ek görsel:</b> design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)</div>
+<pre>You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called &quot;Crimson Rose Atelier&quot;: deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+One long narrow deep burgundy silk satin ribbon (#5B1018 with luminous #9A2037 highlights, about 6% of the image width wide) hanging vertically from the very top edge of the image down to 90% of its height with a gentle natural S-curve and one soft twist, its lower end cut in a neat V (swallowtail). Rich satin sheen, soft warm light from the upper left. Nothing else, no bow, no knot. True transparent background PNG, no shadow outside the ribbon.</pre>
+<div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
+<div class="kontrol">Kontrol: tek kurdele, üst kenardan başlar; ucu V kesik; fiyonk yok; gerçek alfa.</div>
+</section>
+<section class="item" id="m12" data-ad="21-crimson-rose-atelier__gold_sprig.png" data-grup="b" data-tasarim="21_Crimson_Rose_Atelier">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #12"><div><div><span class="no">#12</span><b>W3.8 Altın yaprak dalı (bölüm süsü)</b></div><div class="meta">İndirme adı: <span class="fn">21-crimson-rose-atelier__gold_sprig.png</span></div></div></div>
+<div class="meta">Hedef: <code>collections/21_Crimson_Rose_Atelier/assets/gpt/parts/gold_sprig.png</code></div>
+<div class="meta">PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 · website parçası (PAKET 5)</div>
+<div class="meta"><b>Şart:</b> 600×600 px (1:1) · şeffaf zemin (gerçek alfa) · PNG</div>
+<div class="meta"><b>Ek görsel:</b> design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)</div>
+<pre>You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called &quot;Crimson Rose Atelier&quot;: deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+One small delicate sprig of hot-foil stamped champagne gold leaves (#C9A66D, highlights #EBD3A0) — the same olive sprig as on seal.png — seven slender leaves on one fine curved stem, rising diagonally from bottom-left to top-right, as if pressed into paper: subtle relief, a fine metallic foil shine, filling about 70% of the square. No paper behind it, no berries, no text. True transparent background PNG, no shadow.</pre>
+<div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
+<div class="kontrol">Kontrol: tek ince dal, mühürdeki dalla aynı aile; folyo parıltısı; gerçek alfa.</div>
+</section>
+<section class="item" id="m13" data-ad="21-crimson-rose-atelier__album_page.png" data-grup="b" data-tasarim="21_Crimson_Rose_Atelier">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #13"><div><div><span class="no">#13</span><b>W3.9 Albüm sayfası (Story&#x27;de çevrilen sayfa)</b></div><div class="meta">İndirme adı: <span class="fn">21-crimson-rose-atelier__album_page.png</span></div></div></div>
+<div class="meta">Hedef: <code>collections/21_Crimson_Rose_Atelier/assets/gpt/parts/album_page.png</code></div>
+<div class="meta">PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 · website parçası (PAKET 5)</div>
+<div class="meta"><b>Şart:</b> 1024×1400 px (0.731:1) · şeffaf zemin (gerçek alfa) · PNG</div>
+<div class="meta"><b>Ek görsel:</b> design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)</div>
+<pre>You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called &quot;Crimson Rose Atelier&quot;: deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+One thick handmade ivory cotton album page (#F6EDDD), seen straight from the front, filling about 92% of the canvas height, portrait: the left edge is straight (the bound side) with a soft gutter shadow running along it inside the page, the top, right and bottom edges are softly DECKLED (natural torn handmade edges). A warm subtle paper grain, the page completely EMPTY: no photo, no photo corners, no border, no flowers, no text. Soft warm light from the upper left. True transparent background PNG around the page, no cast shadow outside the page.</pre>
+<div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
+<div class="kontrol">Kontrol: sol kenar düz + iç gölge; diğer üç kenar deckle; sayfa boş; gerçek alfa.</div>
+</section>
+<section class="item" id="m14" data-ad="21-crimson-rose-atelier__rose_corner.png" data-grup="b" data-tasarim="21_Crimson_Rose_Atelier">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #14"><div><div><span class="no">#14</span><b>W3.10 Gül kümesi (sayfa köşesi)</b></div><div class="meta">İndirme adı: <span class="fn">21-crimson-rose-atelier__rose_corner.png</span></div></div></div>
+<div class="meta">Hedef: <code>collections/21_Crimson_Rose_Atelier/assets/gpt/parts/rose_corner.png</code></div>
+<div class="meta">PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 · website parçası (PAKET 5)</div>
+<div class="meta"><b>Şart:</b> 1400×1100 px (14:11) · şeffaf zemin (gerçek alfa) · PNG</div>
+<div class="meta"><b>Ek görsel:</b> design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)</div>
+<pre>You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called &quot;Crimson Rose Atelier&quot;: deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+A lush corner arrangement of the same dark crimson red roses and dark olive leaves as rose-branch.png, flowing out of the bottom-left corner of the image towards the upper right: three open roses and two buds low in the corner, leaves and a few loose fallen petals reaching up and to the right, the arrangement touching the LEFT and BOTTOM edges of the canvas (it will sit in a page corner) and fading into open leaves towards the top-right, about 60% of the canvas filled. Photographed for real, soft warm light from the upper left. Nothing else, no vase, no ribbon. True transparent background PNG, no cast shadow outside the flowers.</pre>
+<div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
+<div class="kontrol">Kontrol: küme sol-alt köşeye dayalı; güller rose-branch.png ile aynı; gerçek alfa.</div>
+</section>
+<section class="item" id="m15" data-ad="21-crimson-rose-atelier__rose_bloom.png" data-grup="b" data-tasarim="21_Crimson_Rose_Atelier">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #15"><div><div><span class="no">#15</span><b>W3.11 Tek gül (küçük vurgu)</b></div><div class="meta">İndirme adı: <span class="fn">21-crimson-rose-atelier__rose_bloom.png</span></div></div></div>
+<div class="meta">Hedef: <code>collections/21_Crimson_Rose_Atelier/assets/gpt/parts/rose_bloom.png</code></div>
+<div class="meta">PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 · website parçası (PAKET 5)</div>
+<div class="meta"><b>Şart:</b> 700×700 px (1:1) · şeffaf zemin (gerçek alfa) · PNG</div>
+<div class="meta"><b>Ek görsel:</b> design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)</div>
+<pre>You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called &quot;Crimson Rose Atelier&quot;: deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+A single open dark crimson red rose bloom with two dark olive leaves, the same rose as rose-branch.png, seen three-quarter from above, centred, filling about 75% of the square, photographed for real with soft warm light from the upper left. No stem beyond a short piece, no vase, no other flowers. True transparent background PNG, no shadow.</pre>
+<div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
+<div class="kontrol">Kontrol: tek gül + iki yaprak; gerçek alfa.</div>
+</section>
 <h2 class="baslik-grup" data-k="c">C · Palet varyantı görselleri</h2>
 <h3 class="baslik-tasarim" data-k="21_Crimson_Rose_Atelier">21_Crimson_Rose_Atelier</h3>
-<section class="item" id="m1" data-ad="21-crimson-rose-atelier__v07-ivory-rose__rose-branch.png" data-grup="c" data-tasarim="21_Crimson_Rose_Atelier">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #1"><div><div><span class="no">#1</span><b>İstem — fildişi güller (yalnız istenirse)</b> <i>(isteğe bağlı)</i></div><div class="meta">İndirme adı: <span class="fn">21-crimson-rose-atelier__v07-ivory-rose__rose-branch.png</span></div></div></div>
+<section class="item" id="m16" data-ad="21-crimson-rose-atelier__v07-ivory-rose__rose-branch.png" data-grup="c" data-tasarim="21_Crimson_Rose_Atelier">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #16"><div><div><span class="no">#16</span><b>İstem — fildişi güller (yalnız istenirse)</b> <i>(isteğe bağlı)</i></div><div class="meta">İndirme adı: <span class="fn">21-crimson-rose-atelier__v07-ivory-rose__rose-branch.png</span></div></div></div>
 <div class="meta">Hedef: <code>collections/21_Crimson_Rose_Atelier/variants/V07_ivory_rose/gpt/rose-branch.png</code></div>
 <div class="meta">İstem — fildişi güller (yalnız istenirse) · palet varyantı</div>
 <div class="meta"><b>Şart:</b> 1374×1145 px (6:5) · şeffaf zemin (gerçek alfa) · PNG</div>
@@ -74,8 +267,8 @@ Reference: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png<
 </section>
 <h2 class="baslik-grup" data-k="d">D · Diğer (marka)</h2>
 <h3 class="baslik-tasarim" data-k="brand">brand</h3>
-<section class="item" id="m2" data-ad="brand__social__highlight_designs.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #2"><div><div><span class="no">#2</span><b>SM1.1 Designs — mühürlü zarf</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__highlight_designs.png</span></div></div></div>
+<section class="item" id="m17" data-ad="brand__social__highlight_designs.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #17"><div><div><span class="no">#17</span><b>SM1.1 Designs — mühürlü zarf</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__highlight_designs.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/highlight_designs.png</code></div>
 <div class="meta">SM1 — Instagram öne çıkan (highlight) kapakları · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1080×1920 px (9:16) · opak · PNG</div>
@@ -85,8 +278,8 @@ An Instagram story highlight cover, 9:16 portrait: a solid deep aubergine (#2B15
 <div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
 <div class="kontrol">Kontrol: ikon tam ortada ve genişliğin ~%34&#x27;ü; tek çizgi, düz altın; zemin düz patlıcan; yazı yok.</div>
 </section>
-<section class="item" id="m3" data-ad="brand__social__highlight_how.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #3"><div><div><span class="no">#3</span><b>SM1.2 How it works — telefon ve dokunuş</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__highlight_how.png</span></div></div></div>
+<section class="item" id="m18" data-ad="brand__social__highlight_how.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #18"><div><div><span class="no">#18</span><b>SM1.2 How it works — telefon ve dokunuş</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__highlight_how.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/highlight_how.png</code></div>
 <div class="meta">SM1 — Instagram öne çıkan (highlight) kapakları · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1080×1920 px (9:16) · opak · PNG</div>
@@ -96,8 +289,8 @@ Same style and size as the previous highlight cover (solid deep aubergine #2B152
 <div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
 <div class="kontrol">Kontrol: SM1.1 ile aynı çizgi kalınlığı ve boyut; telefon + parmak ucu; yazı yok.</div>
 </section>
-<section class="item" id="m4" data-ad="brand__social__highlight_rsvp.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #4"><div><div><span class="no">#4</span><b>SM1.3 RSVP — yanıt kartı</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__highlight_rsvp.png</span></div></div></div>
+<section class="item" id="m19" data-ad="brand__social__highlight_rsvp.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #19"><div><div><span class="no">#19</span><b>SM1.3 RSVP — yanıt kartı</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__highlight_rsvp.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/highlight_rsvp.png</code></div>
 <div class="meta">SM1 — Instagram öne çıkan (highlight) kapakları · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1080×1920 px (9:16) · opak · PNG</div>
@@ -107,8 +300,8 @@ Same style and size as the previous highlight covers (solid deep aubergine #2B15
 <div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
 <div class="kontrol">Kontrol: kartta harf yok (yalnız çizgi ve tik); aynı stil.</div>
 </section>
-<section class="item" id="m5" data-ad="brand__social__highlight_faq.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #5"><div><div><span class="no">#5</span><b>SM1.4 FAQ — konuşma balonu</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__highlight_faq.png</span></div></div></div>
+<section class="item" id="m20" data-ad="brand__social__highlight_faq.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #20"><div><div><span class="no">#20</span><b>SM1.4 FAQ — konuşma balonu</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__highlight_faq.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/highlight_faq.png</code></div>
 <div class="meta">SM1 — Instagram öne çıkan (highlight) kapakları · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1080×1920 px (9:16) · opak · PNG</div>
@@ -118,8 +311,8 @@ Same style and size as the previous highlight covers (solid deep aubergine #2B15
 <div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
 <div class="kontrol">Kontrol: soru işareti ya da harf yok; aynı stil.</div>
 </section>
-<section class="item" id="m6" data-ad="brand__social__highlight_tips.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #6"><div><div><span class="no">#6</span><b>SM1.5 Tips — açık defter</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__highlight_tips.png</span></div></div></div>
+<section class="item" id="m21" data-ad="brand__social__highlight_tips.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #21"><div><div><span class="no">#21</span><b>SM1.5 Tips — açık defter</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__highlight_tips.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/highlight_tips.png</code></div>
 <div class="meta">SM1 — Instagram öne çıkan (highlight) kapakları · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1080×1920 px (9:16) · opak · PNG</div>
@@ -129,8 +322,8 @@ Same style and size as the previous highlight covers (solid deep aubergine #2B15
 <div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
 <div class="kontrol">Kontrol: sayfalarda yazı yok; beş kapak yan yana aynı aileden görünüyor.</div>
 </section>
-<section class="item" id="m7" data-ad="brand__social__bg_carousel_cover_light.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #7"><div><div><span class="no">#7</span><b>SM2.1 Kaydırmalı gönderi kapağı — açık</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__bg_carousel_cover_light.png</span></div></div></div>
+<section class="item" id="m22" data-ad="brand__social__bg_carousel_cover_light.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #22"><div><div><span class="no">#22</span><b>SM2.1 Kaydırmalı gönderi kapağı — açık</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__bg_carousel_cover_light.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/bg_carousel_cover_light.png</code></div>
 <div class="meta">SM2 — Zeminler (Claude başlık ve gerçek ekranları üstüne yerleştirir) · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1080×1350 px (4:5) · opak · PNG</div>
@@ -140,8 +333,8 @@ Overhead photograph, 4:5 portrait, of a warm paper surface (#EDE5D7 to #FAF7F0) 
 <div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
 <div class="kontrol">Kontrol: sol %65 tamamen boş; nesneler yalnız sağ kenarda; yazı yok.</div>
 </section>
-<section class="item" id="m8" data-ad="brand__social__bg_carousel_inner_light.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #8"><div><div><span class="no">#8</span><b>SM2.2 Kaydırmalı gönderi iç sayfası — açık</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__bg_carousel_inner_light.png</span></div></div></div>
+<section class="item" id="m23" data-ad="brand__social__bg_carousel_inner_light.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #23"><div><div><span class="no">#23</span><b>SM2.2 Kaydırmalı gönderi iç sayfası — açık</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__bg_carousel_inner_light.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/bg_carousel_inner_light.png</code></div>
 <div class="meta">SM2 — Zeminler (Claude başlık ve gerçek ekranları üstüne yerleştirir) · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1080×1350 px (4:5) · opak · PNG</div>
@@ -151,8 +344,8 @@ Overhead photograph, 4:5 portrait, of the same warm paper surface as the previou
 <div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
 <div class="kontrol">Kontrol: neredeyse boş; gölge yalnız sağ üst köşede; düz ışık (metin okunur kalsın).</div>
 </section>
-<section class="item" id="m9" data-ad="brand__social__bg_carousel_dark.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #9"><div><div><span class="no">#9</span><b>SM2.3 Kaydırmalı gönderi — koyu (kapak ya da son sayfa)</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__bg_carousel_dark.png</span></div></div></div>
+<section class="item" id="m24" data-ad="brand__social__bg_carousel_dark.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #24"><div><div><span class="no">#24</span><b>SM2.3 Kaydırmalı gönderi — koyu (kapak ya da son sayfa)</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__bg_carousel_dark.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/bg_carousel_dark.png</code></div>
 <div class="meta">SM2 — Zeminler (Claude başlık ve gerçek ekranları üstüne yerleştirir) · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1080×1350 px (4:5) · opak · PNG</div>
@@ -162,8 +355,8 @@ Overhead photograph, 4:5 portrait, of deep aubergine (#2B1526) heavyweight cotto
 <div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
 <div class="kontrol">Kontrol: %80 boş koyu zemin; nesneler yalnız sağ alt köşede; yazı yok.</div>
 </section>
-<section class="item" id="m10" data-ad="brand__social__bg_story_light.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #10"><div><div><span class="no">#10</span><b>SM2.4 Hikâye zemini — açık</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__bg_story_light.png</span></div></div></div>
+<section class="item" id="m25" data-ad="brand__social__bg_story_light.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #25"><div><div><span class="no">#25</span><b>SM2.4 Hikâye zemini — açık</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__bg_story_light.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/bg_story_light.png</code></div>
 <div class="meta">SM2 — Zeminler (Claude başlık ve gerçek ekranları üstüne yerleştirir) · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1080×1920 px (9:16) · opak · PNG</div>
@@ -173,8 +366,8 @@ Overhead photograph, 9:16 portrait, of a warm paper surface (#EDE5D7 to #FAF7F0)
 <div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
 <div class="kontrol">Kontrol: orta %70 boş (Instagram&#x27;ın üst/alt arayüzü kenar süsleri örter, sorun değil); yazı yok.</div>
 </section>
-<section class="item" id="m11" data-ad="brand__social__bg_story_dark.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #11"><div><div><span class="no">#11</span><b>SM2.5 Hikâye zemini — koyu</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__bg_story_dark.png</span></div></div></div>
+<section class="item" id="m26" data-ad="brand__social__bg_story_dark.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #26"><div><div><span class="no">#26</span><b>SM2.5 Hikâye zemini — koyu</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__bg_story_dark.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/bg_story_dark.png</code></div>
 <div class="meta">SM2 — Zeminler (Claude başlık ve gerçek ekranları üstüne yerleştirir) · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1080×1920 px (9:16) · opak · PNG</div>
@@ -184,8 +377,8 @@ Overhead photograph, 9:16 portrait, of deep aubergine (#2B1526) heavyweight cott
 <div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
 <div class="kontrol">Kontrol: orta %70 boş; altın düz renk (folyo parlaması yok); yazı yok.</div>
 </section>
-<section class="item" id="m12" data-ad="brand__social__bg_pin_guide.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #12"><div><div><span class="no">#12</span><b>SM2.6 Pinterest rehber pini zemini</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__bg_pin_guide.png</span></div></div></div>
+<section class="item" id="m27" data-ad="brand__social__bg_pin_guide.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #27"><div><div><span class="no">#27</span><b>SM2.6 Pinterest rehber pini zemini</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__bg_pin_guide.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/bg_pin_guide.png</code></div>
 <div class="meta">SM2 — Zeminler (Claude başlık ve gerçek ekranları üstüne yerleştirir) · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1000×1500 px (2:3) · opak · PNG</div>
@@ -195,8 +388,8 @@ Overhead styled flat lay photograph, 2:3 portrait, on warm off-white linen (#FAF
 <div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
 <div class="kontrol">Kontrol: alt %75 boş kâğıt; kâğıtta yazı/çizgi yok; nesneler yalnız üst kenarda.</div>
 </section>
-<section class="item" id="m13" data-ad="brand__social__scene_planning_desk.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #13"><div><div><span class="no">#13</span><b>SM3.1 Planlama masası, telefon elde</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__scene_planning_desk.png</span></div></div></div>
+<section class="item" id="m28" data-ad="brand__social__scene_planning_desk.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #28"><div><div><span class="no">#28</span><b>SM3.1 Planlama masası, telefon elde</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__scene_planning_desk.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/scene_planning_desk.png</code></div>
 <div class="meta">SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek) · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1080×1350 px (4:5) · opak · düz #00FF00 pencere · PNG</div>
@@ -206,8 +399,8 @@ Lifestyle photograph, 4:5 portrait, seen from slightly above: a fictional woman&
 <div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
 <div class="kontrol">Kontrol: ekran büyük, düz yeşil, parmaksız; yüzük var; plannerda yazı yok; sol üst sakin.</div>
 </section>
-<section class="item" id="m14" data-ad="brand__social__scene_phone_on_envelope.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #14"><div><div><span class="no">#14</span><b>SM3.2 Mühürlü zarfın üstünde telefon</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__scene_phone_on_envelope.png</span></div></div></div>
+<section class="item" id="m29" data-ad="brand__social__scene_phone_on_envelope.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #29"><div><div><span class="no">#29</span><b>SM3.2 Mühürlü zarfın üstünde telefon</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__scene_phone_on_envelope.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/scene_phone_on_envelope.png</code></div>
 <div class="meta">SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek) · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1080×1350 px (4:5) · opak · düz #00FF00 pencere · PNG</div>
@@ -217,8 +410,8 @@ Overhead photograph, 4:5 portrait: a smartphone lying flat on top of a real crea
 <div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
 <div class="kontrol">Kontrol: mühür yüzü boş (harf/sembol yok); telefon düz ve ortada; yeşil yansımasız.</div>
 </section>
-<section class="item" id="m15" data-ad="brand__social__scene_just_engaged_winter.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #15"><div><div><span class="no">#15</span><b>SM3.3 Yeni nişanlı, kış ışıkları</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__scene_just_engaged_winter.png</span></div></div></div>
+<section class="item" id="m30" data-ad="brand__social__scene_just_engaged_winter.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #30"><div><div><span class="no">#30</span><b>SM3.3 Yeni nişanlı, kış ışıkları</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__scene_just_engaged_winter.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/scene_just_engaged_winter.png</code></div>
 <div class="meta">SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek) · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1080×1350 px (4:5) · opak · düz #00FF00 pencere · PNG</div>
@@ -228,8 +421,8 @@ Lifestyle photograph, 4:5 portrait: close-up of a fictional woman&#x27;s left ha
 <div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
 <div class="kontrol">Kontrol: iki el doğal ve doğru; yüzük görünür; ekran büyük ve açık; yüz yok.</div>
 </section>
-<section class="item" id="m16" data-ad="brand__social__scene_dinner_table.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #16"><div><div><span class="no">#16</span><b>SM3.4 Akşam yemeği masası (Pinterest)</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__scene_dinner_table.png</span></div></div></div>
+<section class="item" id="m31" data-ad="brand__social__scene_dinner_table.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #31"><div><div><span class="no">#31</span><b>SM3.4 Akşam yemeği masası (Pinterest)</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__scene_dinner_table.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/scene_dinner_table.png</code></div>
 <div class="meta">SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek) · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1000×1500 px (2:3) · opak · düz #00FF00 pencere · PNG</div>
@@ -239,8 +432,8 @@ Lifestyle photograph, 2:3 portrait: an elegant candlelit dinner table set for a 
 <div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
 <div class="kontrol">Kontrol: ekran büyük ve okunur açıda; üst %25 sakin; masada yazılı kart yok.</div>
 </section>
-<section class="item" id="m17" data-ad="brand__social__scene_linen_flatlay.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #17"><div><div><span class="no">#17</span><b>SM3.5 Çiçekli keten, üstten (Pinterest)</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__scene_linen_flatlay.png</span></div></div></div>
+<section class="item" id="m32" data-ad="brand__social__scene_linen_flatlay.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #32"><div><div><span class="no">#32</span><b>SM3.5 Çiçekli keten, üstten (Pinterest)</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__scene_linen_flatlay.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/scene_linen_flatlay.png</code></div>
 <div class="meta">SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek) · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1000×1500 px (2:3) · opak · düz #00FF00 pencere · PNG</div>
@@ -250,8 +443,8 @@ Overhead flat lay photograph, 2:3 portrait, on soft white linen: a smartphone in
 <div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
 <div class="kontrol">Kontrol: telefon düz; üst %20 boş; kartta yazı yok.</div>
 </section>
-<section class="item" id="m18" data-ad="brand__social__scene_garden_golden_hour.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #18"><div><div><span class="no">#18</span><b>SM3.6 Bahçede altın saat (hikâye / Reel kapağı)</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__scene_garden_golden_hour.png</span></div></div></div>
+<section class="item" id="m33" data-ad="brand__social__scene_garden_golden_hour.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #33"><div><div><span class="no">#33</span><b>SM3.6 Bahçede altın saat (hikâye / Reel kapağı)</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__scene_garden_golden_hour.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/scene_garden_golden_hour.png</code></div>
 <div class="meta">SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek) · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1080×1920 px (9:16) · opak · düz #00FF00 pencere · PNG</div>
@@ -261,8 +454,8 @@ Lifestyle photograph, 9:16 portrait: a fictional woman&#x27;s hand holding a sma
 <div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
 <div class="kontrol">Kontrol: ekran dikeyde ortada; üst ve alt %20 sakin (Reel arayüzü oraya biner); yazı yok.</div>
 </section>
-<section class="item" id="m19" data-ad="brand__social__scene_guest_cafe.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #19"><div><div><span class="no">#19</span><b>SM3.7 Kafede davetiyeyi alan misafir</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__scene_guest_cafe.png</span></div></div></div>
+<section class="item" id="m34" data-ad="brand__social__scene_guest_cafe.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #34"><div><div><span class="no">#34</span><b>SM3.7 Kafede davetiyeyi alan misafir</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__scene_guest_cafe.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/scene_guest_cafe.png</code></div>
 <div class="meta">SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek) · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1080×1350 px (4:5) · opak · düz #00FF00 pencere · PNG</div>
@@ -272,8 +465,8 @@ Lifestyle photograph, 4:5 portrait: a fictional man in his thirties (not resembl
 <div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
 <div class="kontrol">Kontrol: kimliği belirgin yüz yok; ekran okunur açıda; yazı yok.</div>
 </section>
-<section class="item" id="m20" data-ad="brand__social__scene_qr_welcome_table.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #20"><div><div><span class="no">#20</span><b>SM3.8 Karşılama masasında QR kartı (yeşil alan = QR)</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__scene_qr_welcome_table.png</span></div></div></div>
+<section class="item" id="m35" data-ad="brand__social__scene_qr_welcome_table.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #35"><div><div><span class="no">#35</span><b>SM3.8 Karşılama masasında QR kartı (yeşil alan = QR)</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__scene_qr_welcome_table.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/scene_qr_welcome_table.png</code></div>
 <div class="meta">SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek) · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1080×1350 px (4:5) · opak · düz #00FF00 pencere · PNG</div>
@@ -283,8 +476,8 @@ Lifestyle photograph, 4:5 portrait: a wedding welcome table with a small framed 
 <div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
 <div class="kontrol">Kontrol: yeşil alan tam kare ve tek; kartta başka yazı/desen yok; telefon yok. (Claude buraya `tools/make_qr.py` ile gerçek QR koyar.)</div>
 </section>
-<section class="item" id="m21" data-ad="brand__social__scene_autumn_thanks.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #21"><div><div><span class="no">#21</span><b>SM3.9 Sonbahar şükran masası (teşekkür modu)</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__scene_autumn_thanks.png</span></div></div></div>
+<section class="item" id="m36" data-ad="brand__social__scene_autumn_thanks.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #36"><div><div><span class="no">#36</span><b>SM3.9 Sonbahar şükran masası (teşekkür modu)</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__scene_autumn_thanks.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/scene_autumn_thanks.png</code></div>
 <div class="meta">SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek) · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1080×1350 px (4:5) · opak · düz #00FF00 pencere · PNG</div>
@@ -294,8 +487,8 @@ Lifestyle photograph, 4:5 portrait, seen from slightly above: a cozy late-Novemb
 <div class="btns"><button type="button" class="kp primary">Prompt'u kopyala</button><button type="button" class="ka">Dosya adını kopyala</button><button type="button" class="sorun-btn">Sorun</button></div>
 <div class="kontrol">Kontrol: ekran büyük ve açık; mevsim hissi var; yazı yok.</div>
 </section>
-<section class="item" id="m22" data-ad="brand__social__scene_winter_cozy.png" data-grup="d" data-tasarim="brand">
-<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #22"><div><div><span class="no">#22</span><b>SM3.10 Kış masası, kahve ve battaniye</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__scene_winter_cozy.png</span></div></div></div>
+<section class="item" id="m37" data-ad="brand__social__scene_winter_cozy.png" data-grup="d" data-tasarim="brand">
+<div class="head"><input type="checkbox" class="cb" aria-label="Bitti #37"><div><div><span class="no">#37</span><b>SM3.10 Kış masası, kahve ve battaniye</b></div><div class="meta">İndirme adı: <span class="fn">brand__social__scene_winter_cozy.png</span></div></div></div>
 <div class="meta">Hedef: <code>brand/social/gpt/scene_winter_cozy.png</code></div>
 <div class="meta">SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek) · sosyal medya (GM10)</div>
 <div class="meta"><b>Şart:</b> 1080×1350 px (4:5) · opak · düz #00FF00 pencere · PNG</div>

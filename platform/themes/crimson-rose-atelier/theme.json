@@ -1,7 +1,7 @@
 {
   "id": "crimson-rose-atelier",
   "name": "Crimson Rose Atelier",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "pages": {
     "index": "index.html",
     "home": "home.html",
@@ -41,7 +41,8 @@
       "default": "You are invited",
       "max": 40,
       "pages": [
-        "index"
+        "index",
+        "home"
       ]
     },
     "card_line": {
@@ -75,6 +76,13 @@
     },
     "foot_kicker": {
       "default": "With love",
+      "max": 30,
+      "pages": [
+        "home"
+      ]
+    },
+    "invite_cue": {
+      "default": "The invitation",
       "max": 30,
       "pages": [
         "home"
@@ -134,6 +142,13 @@
     "schedule_title": {
       "default": "Order of the Day",
       "max": 30,
+      "pages": [
+        "details"
+      ]
+    },
+    "ceremony_line": {
+      "default": "The ceremony begins at",
+      "max": 40,
       "pages": [
         "details"
       ]
@@ -215,7 +230,15 @@
       "default": "With love and thanks",
       "max": 40,
       "pages": [
-        "index"
+        "index",
+        "home"
+      ]
+    },
+    "ceremony_after": {
+      "default": "The ceremony began at",
+      "max": 40,
+      "pages": [
+        "details"
       ]
     },
     "home_link": {
@@ -237,6 +260,7 @@
       "default": "Every chapter led to you",
       "max": 40,
       "pages": [
+        "home",
         "story"
       ]
     },
@@ -603,6 +627,15 @@
       "label": "album chapter",
       "panel": "story"
     },
+    "album_hint": {
+      "default": "Swipe to turn the page",
+      "max": 30,
+      "pages": [
+        "story"
+      ],
+      "label": "album hint",
+      "panel": "story"
+    },
     "album_next": {
       "default": "Next chapter",
       "max": 30,
@@ -725,9 +758,7 @@
       ],
       "status": "coming",
       "print": {
-        "art": [
-          "branch"
-        ],
+        "art": [],
         "ink": "#2C3931",
         "accent": "#1E3A30"
       }

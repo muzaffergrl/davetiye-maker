@@ -25,16 +25,35 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
    build'i ister) → `etsy_upload.py`; en sonda bu dosyayı yeniden yazar. Tasarım × adım tablosu ve live engelleri basılır.
    Yerleştirmeden yalnız adımlar: `--koleksiyon NN|all`. Hiçbir tasarımı live yapmaz, yayınlamaz, Etsy'ye göndermez.
 
-**Toplam eksik: 22**
+**Toplam eksik: 37**
 
 | Prompt dosyası | Bölüm | Var | Eksik |
 |---|---|---|---|
+| `collections/21_Crimson_Rose_Atelier/assets/gpt/GPT_PROMPTS.md` | PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 | 0 | 15 |
 | `collections/21_Crimson_Rose_Atelier/variants/GPT_PROMPTS.md` | İstem — fildişi güller (yalnız istenirse) | 0 | 1 |
 | `brand/social/GPT_PROMPTS.md` | SM1 — Instagram öne çıkan (highlight) kapakları | 0 | 5 |
 | `brand/social/GPT_PROMPTS.md` | SM2 — Zeminler (Claude başlık ve gerçek ekranları üstüne yerleştirir) | 0 | 6 |
 | `brand/social/GPT_PROMPTS.md` | SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek) | 0 | 10 |
 
 ## Eksik dosyalar
+
+### `collections/21_Crimson_Rose_Atelier/assets/gpt/GPT_PROMPTS.md`
+
+- `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/velvet.png` — PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23
+- `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/velvet_wide.png` — PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23
+- `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/satin_drape.png` — PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23
+- `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/petal_1.png` — PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23
+- `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/petal_2.png` — PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23
+- `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/petal_3.png` — PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23
+- `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/petal_4.png` — PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23
+- `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/petal_5.png` — PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23
+- `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/oval_frame.png` — PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23
+- `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/torn_edge.png` — PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23
+- `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/ribbon.png` — PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23
+- `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/gold_sprig.png` — PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23
+- `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/album_page.png` — PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23
+- `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/rose_corner.png` — PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23
+- `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/rose_bloom.png` — PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23
 
 ### `collections/21_Crimson_Rose_Atelier/variants/GPT_PROMPTS.md`
 

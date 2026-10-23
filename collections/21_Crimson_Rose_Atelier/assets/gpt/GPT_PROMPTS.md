@@ -240,3 +240,117 @@ Kontrol (gözle; piksel ölçme yok): 1 adet düz, parlak, tek tonda yeşil alan
 ### 7.V Promo video (2. video) — GPT'ye verilmez
 Claude gerçek site kaydından üretir (`package/listing/video_promo.mp4`, 1080×1080, H.264, sessiz, 12–15 sn): açılış → sayfalar →
 düzenleyici → RSVP. Videoda gösterilen her şey gerçek siteden gelir; yapay zekâ videosu kullanılmaz.
+
+---
+
+## PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23
+
+> Kullanıcı (2026-10-23): "20'den sonrası profesyonel bir tasarımcının elinden çıkmış gibi olmalı; her şablona özel
+> tasarım, bileşen, animasyon ve ses". 21 bu dalganın ilki. Tasarım panosundaki (`mockups/design-board.png`) zenginliğin
+> parçaları hiç üretilmemişti: kadife/saten fon, tek tek gül yaprakları, altın oval çerçeve, yırtık kâğıt kenarı, saten
+> kurdele, altın yaprak dalı, albüm sayfası. Tema bu parçalar **yokken de** çalışır; `build_images.py` var olanları
+> `parts.css`'e yazar (yoksa kural yok, sayfa site.css görünümünde kalır). Hepsini **tek sohbette**, sırayla üret.
+
+**Instructions for GPT (send before the first image):**
+```
+You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called "Crimson Rose Atelier": deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+```
+
+#### W3.1 Kadife fon — telefon (açılış ve RSVP sayfasının zemini)
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/velvet.png` · 1024×1536 · opak
+
+```
+A full-frame vertical photograph (2:3) of deep oxblood crushed silk velvet (#29070B in the shadows, #5B1018 in the lit pile), filling the whole canvas edge to edge, lit by one soft warm light from the upper left as if by candlelight in a dark room. The velvet lies almost flat: the middle 60% of the frame (from 20% to 80% of the width and from 15% to 80% of the height) is a CALM, even, slightly darker area with only the fine velvet pile visible, so text and an envelope can sit on it. Only along the left edge, the right edge and the bottom 20% the velvet gathers into a few soft, large, luxurious folds with gentle rich highlights. A subtle natural vignette. No objects, no flowers, no petals, no gold, no envelope, no shadows of objects, no text.
+```
+Kontrol: orta bölge sakin ve düz; kıvrımlar yalnız kenarlarda ve altta; renk koyu kan kırmızısı (kahverengi/mor değil); nesne yok.
+Kullanım: `velvet-720` / `velvet-1080` = açılış sayfası (index) ve RSVP sayfası zemini (`background-size: cover`), üstünde CSS mum ışığı hâlesi nefes alır.
+
+#### W3.2 Kadife fon — geniş ekran
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/velvet_wide.png` · 1536×1024 · opak
+
+```
+The same oxblood crushed silk velvet as velvet.png, now a full-frame horizontal photograph (3:2) filling the canvas edge to edge, the same color, pile, light from the upper left and vignette. The middle 60% of the width and the middle 70% of the height are a CALM, even area; a few soft large folds only along the left and right edges and the bottom. No objects, no flowers, no gold, no text.
+```
+Kontrol: velvet.png ile aynı kumaş ve renk; orta bölge sakin.
+Kullanım: `velvet_wide-1600` = 700 px ve üstü ekranlarda aynı zemin.
+
+#### W3.3 Saten dökümü (açılış sahnesinin altı)
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/satin_drape.png` · 1800×700 · **Şeffaf zemin**
+
+```
+A length of deep burgundy silk satin fabric (#4B0C17 with luminous #8E2333 highlights) lying horizontally in soft, generous, flowing folds, seen from the front and slightly above, as if draped across the bottom of a table under an envelope. The fabric forms a wide horizontal band (about 2.6:1) whose upper edge is a soft irregular fabric edge with folds rising and falling; its left and right ends fade out naturally in folds. Rich liquid satin sheen, one soft warm light from the upper left. Nothing else: no petals, no roses, no ribbon, no envelope. True transparent background PNG around the fabric, no cast shadow outside it.
+```
+Kontrol: tek parça saten; üst kenar yumuşak kumaş kenarı; gerçek alfa; başka nesne yok.
+Kullanım: `satin-1200` = açılış sayfasında zarfın altında, ekranın alt kenarından yükselen kumaş (yavaş paralaks); RSVP sayfasının altı.
+
+#### W3.4 Gül yaprakları (süzülen yapraklar) — beş ayrı dosya
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/petal_1.png`, `petal_2.png`, `petal_3.png`, `petal_4.png`, `petal_5.png` · her biri 512×512 · **Şeffaf zemin**
+
+```
+A single loose petal of the same dark crimson red rose as in rose-branch.png, photographed for real, alone, on a fully transparent background: velvety deep red (#8E0F1E, darker #4A0610 at the base and in the curl, a soft luminous edge where the light catches it), natural fine veins, filling about 55% of the square, centred, not cropped. No stem, no leaf, no whole flower, no water drops, no shadow, no other petal. True transparent background PNG. (Make five different petals: 1 = a wide gently cupped petal seen from above, 2 = a petal curled at one edge, 3 = a narrow folded petal seen from the side, 4 = a small inner petal, 5 = a petal lit from behind so its edge glows.)
+```
+Kontrol: beş dosya, her biri tek yaprak, birbirinden farklı; gül rengi rose-branch.png ile aynı; gölge yok; gerçek alfa.
+Kullanım: `petal_1..5-96` (`--cra-petals`): açılışta mühür kırılınca 9 yaprak zarfın üstünden dönerek düşer; home'a varışta 4 yaprak süzülür; RSVP gönderilince 14 yaprak yağar. Dosya yoksa yaprak yok.
+
+#### W3.5 Altın oval portre çerçevesi
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/oval_frame.png` · 1000×1250 · **Şeffaf zemin** · pencere #00FF00
+
+```
+A slim antique oval picture frame of warm champagne gold (#C9A66D, highlights #EBD3A0), the same gold as seal.png, seen straight from the front, filling the canvas (4:5): a fine beaded inner rim, a softly rounded polished outer moulding and a delicate hand-chased leaf pattern along it, refined and light, never heavy or baroque, no crest and no bow on top. The opening inside is an exact OVAL whose bounding box is 4:5 — from 6% to 94% of the image width and from 6% to 94% of the image height — and the whole opening is filled with flat pure green #00FF00 (no texture, no shading, crisp edge, nothing in front of it). Soft warm light from the upper left. Nothing else. True transparent background PNG outside the frame, no shadow outside the frame.
+```
+Kontrol: pencere düz `#00FF00` ve oval, kutusu 4:5 ve %6–%94; çerçeve ince; tepe süsü/fiyonk yok; gerçek alfa.
+Kullanım: yeşil pencere ölçülür ve şeffaf yapılır → `oval_frame-640`; home'daki oval portrenin (ve zarftan çıkan kartın portresinin) üstüne oturur; pencerenin şekli `mask_oval.png` olur.
+
+#### W3.6 Yırtık kâğıt kenarı (bordo → fildişi geçişi)
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/torn_edge.png` · 2048×320 · **Şeffaf zemin**
+
+```
+The torn bottom edge of a sheet of thick deep oxblood cotton paper (#4B0C17, the same paper as envelope-closed.png), seen straight from the front on a fully transparent background. The oxblood paper fills the whole top 55% of the image edge to edge (from the left edge to the right edge), and below it the sheet ends in a hand-torn, gently irregular edge that wanders across the full width between 55% and 85% of the image height; along the tear a fine, pale cream fibrous rim (#EADCC5) of exposed paper core with tiny loose fibres. Below the tear everything is fully transparent. The left and right ends of the tear are at the same height so the strip can repeat side by side. Soft warm light from the upper left, no cast shadow, no objects, no text.
+```
+Kontrol: kâğıt üstte kenardan kenara; yırtık tüm genişlikte; lifli açık kenar; altı tamamen şeffaf; sağ ve sol uç aynı yükseklikte.
+Kullanım: `torn_edge-1200` = home'da bordo bölümün alt kenarı (düz çizgi yerine), fildişi kâğıda yırtıkla geçer.
+
+#### W3.7 Saten kurdele (albüm ayracı)
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/ribbon.png` · 500×1800 · **Şeffaf zemin**
+
+```
+One long narrow deep burgundy silk satin ribbon (#5B1018 with luminous #9A2037 highlights, about 6% of the image width wide) hanging vertically from the very top edge of the image down to 90% of its height with a gentle natural S-curve and one soft twist, its lower end cut in a neat V (swallowtail). Rich satin sheen, soft warm light from the upper left. Nothing else, no bow, no knot. True transparent background PNG, no shadow outside the ribbon.
+```
+Kontrol: tek kurdele, üst kenardan başlar; ucu V kesik; fiyonk yok; gerçek alfa.
+Kullanım: `ribbon-180` = Story albümünün sayfa ayracı: albümün üst kenarından sarkar, sayfa çevrilince hafifçe sallanır.
+
+#### W3.8 Altın yaprak dalı (bölüm süsü)
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/gold_sprig.png` · 600×600 · **Şeffaf zemin**
+
+```
+One small delicate sprig of hot-foil stamped champagne gold leaves (#C9A66D, highlights #EBD3A0) — the same olive sprig as on seal.png — seven slender leaves on one fine curved stem, rising diagonally from bottom-left to top-right, as if pressed into paper: subtle relief, a fine metallic foil shine, filling about 70% of the square. No paper behind it, no berries, no text. True transparent background PNG, no shadow.
+```
+Kontrol: tek ince dal, mühürdeki dalla aynı aile; folyo parıltısı; gerçek alfa.
+Kullanım: `sprig-120` = bölüm başlıklarının üstündeki küçük altın süs (home, Story, Details, RSVP); üstünden ışık süpürmesi geçer.
+
+#### W3.9 Albüm sayfası (Story'de çevrilen sayfa)
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/album_page.png` · 1024×1400 · **Şeffaf zemin**
+
+```
+One thick handmade ivory cotton album page (#F6EDDD), seen straight from the front, filling about 92% of the canvas height, portrait: the left edge is straight (the bound side) with a soft gutter shadow running along it inside the page, the top, right and bottom edges are softly DECKLED (natural torn handmade edges). A warm subtle paper grain, the page completely EMPTY: no photo, no photo corners, no border, no flowers, no text. Soft warm light from the upper left. True transparent background PNG around the page, no cast shadow outside the page.
+```
+Kontrol: sol kenar düz + iç gölge; diğer üç kenar deckle; sayfa boş; gerçek alfa.
+Kullanım: `album_page-720` = Story'deki üç sayfalık albümün her sayfası (ön yüz); sayfalar 3B çevrilir, fotoğraf ve başlık sayfanın üstüne dizilir.
+
+#### W3.10 Gül kümesi (sayfa köşesi)
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/rose_corner.png` · 1400×1100 · **Şeffaf zemin**
+
+```
+A lush corner arrangement of the same dark crimson red roses and dark olive leaves as rose-branch.png, flowing out of the bottom-left corner of the image towards the upper right: three open roses and two buds low in the corner, leaves and a few loose fallen petals reaching up and to the right, the arrangement touching the LEFT and BOTTOM edges of the canvas (it will sit in a page corner) and fading into open leaves towards the top-right, about 60% of the canvas filled. Photographed for real, soft warm light from the upper left. Nothing else, no vase, no ribbon. True transparent background PNG, no cast shadow outside the flowers.
+```
+Kontrol: küme sol-alt köşeye dayalı; güller rose-branch.png ile aynı; gerçek alfa.
+Kullanım: `rose_corner-640` = Details ve RSVP sayfalarının alt köşeleri (sağda aynalanır), home altbilgisi.
+
+#### W3.11 Tek gül (küçük vurgu)
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/rose_bloom.png` · 700×700 · **Şeffaf zemin**
+
+```
+A single open dark crimson red rose bloom with two dark olive leaves, the same rose as rose-branch.png, seen three-quarter from above, centred, filling about 75% of the square, photographed for real with soft warm light from the upper left. No stem beyond a short piece, no vase, no other flowers. True transparent background PNG, no shadow.
+```
+Kontrol: tek gül + iki yaprak; gerçek alfa.
+Kullanım: `rose_bloom-200` = Details program çizgisinin sonu, RSVP kartının köşesi, teşekkür kartı.

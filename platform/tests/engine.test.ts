@@ -359,11 +359,12 @@ test('site-data JSON is injected before the first head script and cannot break o
   const data = siteData($);
   assert.equal(data.derived.venue_city_region, `${content.venue.city}, Georgia`);
   // Only what theme JS needs: never the content record or the photo map (sections switched off would leak).
-  // G126: + sound (the platform's sound settings: track URL, effects on/off, opening cues — no content)
+  // G126: + sound (the platform's sound settings: track URL, effects on/off, opening cues — no content); 2026-10-23: + cues
+  // (the names of the design's own page sounds, from its pack)
   assert.deepEqual(Object.keys(data).sort(), ['derived', 'i18n', 'lang', 'lang_primary', 'langs', 'page', 'pages', 'preview', 'rsvp_form', 'slug', 'sound', 'theme', 'variant']);
   // G128: the reply form's ids, types and flags only (no question texts)
   assert.deepEqual(Object.keys(data.rsvp_form).sort(), ['questions', 'required']);
-  assert.deepEqual(Object.keys(data.sound).sort(), ['effects', 'fx', 'music', 'opening']);
+  assert.deepEqual(Object.keys(data.sound).sort(), ['cues', 'effects', 'fx', 'music', 'opening']);
   assert.equal(data.slug, 'clara-and-julian');
   assert.equal(data.page, 'home');
   assert.equal(data.derived.countdown_target_utc, '2027-05-15T20:00:00.000Z');

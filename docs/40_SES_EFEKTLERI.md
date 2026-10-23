@@ -147,7 +147,7 @@ seçmediği durumda Our Story'deki varsayılan parça.
 | 18 | Wildflower Meadow Vellum | `wildflower-meadow-vellum` | first-light | 80 `peel` · 980 `vellum` · 1760 `slide-quick` · 3020 `harp` | 1. dalga |
 | 19 | Midnight Garden | `midnight-garden` | evening-strings | 90 `seal` · 960 `paper-soft` · 1320 `lantern` · 2380 `slide` · 3860 `stars` | 1. dalga |
 | 20 | Coastal Seaside | `coastal-seaside` | garden-waltz | 60 `wave` · 1150 `paper` · 2240 `slide` · 3660 `chime` | 1. dalga |
-| 21 | Crimson Rose Atelier | `crimson-rose-atelier` | evening-strings | 0 `seal-lift` · 400 `paper-crisp` · 1600 `slide` · 3000 `harp` | |
+| 21 | Crimson Rose Atelier | `crimson-rose-atelier` | **rose-nocturne** (kendi) | **kendi paketi** `fx/crimson-rose-atelier/`: 0 `crack` · 480 `flap` · 1150 `draw` · 2250 `reveal` · 3150 `bloom`; sayfa ipuçları: home `petal`, story `page`, rsvp `fold` + `stamp` | K59 yeniden tasarım (§5a) |
 | 22 | Nocturne Lake Estate | `nocturne-lake-estate` | evening-strings | 0 `sparkle` · 800 `vellum` · 1500 `paper` · 2000 `shimmer` · 2500 `slide-quick` · 3250 `stars` | yeniden tasarım (G422–G432) |
 | 23 | Velvet Jewel Box | `velvet-jewel-box` | music-box | 0 `sparkle` · 180 `brooch` · 700 `ribbon` · 1250 `velvet` · 1850 `slide-quick` · 2500 `chime` | yeniden tasarım (G422–G432) |
 | 24 | Grand Theatre Premiere | `grand-theatre-premiere` | evening-strings | 0 `slide-quick` · 650 `tear` · 1100 `cord` · 1600 `curtain` (sol 0,45) · 1740 `curtain` (sağ 0,45) · 2900 `slide-quick` · 3600 `chime-warm` | yeniden tasarım (G422–G432) |
@@ -187,6 +187,23 @@ seçmediği durumda Our Story'deki varsayılan parça.
   değiştirdi → çakışmada bu dalın (`claude/adoring-gates-audio`) `catalog.ts`'i alınmalı; o dalın efekt adları
   (`tap`/`whoosh`/`chime` …) burada da var, ama yeni listeler daha zengin.
 
+## 5a. Tasarıma özel ses paketi (K59, 21'den başlayarak)
+
+K59: 21 ve sonrası her tasarım kendi bileşenleri, animasyonu **ve kendi sesleriyle** gelir. Model ortak sistemin içindedir
+(tek katalog tipi, tek oynatıcı):
+
+- `catalog.ts` `DESIGN_SOUND[<tema>].pack = '<tema>'` → o tasarımın efektleri `public/audio/fx/<tema>/<ad>.mp3`'ten gelir
+  (ortak efektlerin yerine; `tap` ve `chime` dahil). `opening` aynı biçimde (`[ms, ad]` / `[ms, ad, pan]`), adlar paketin
+  dosyalarıdır; ms yine `MOTION.envelope` adımlarının başlangıcı (test).
+- `cues: { home?, story?, details?, rsvp? }` → temanın kendi anları (sayfa çevrilir, yanıt mühürlenir): `site.js`
+  `document.dispatchEvent(new CustomEvent('invite:sfx', {detail: {name}}))`; oynatıcı yalnız listedeki adları çalar, boşta
+  önceden çözer. Sayfa ipuçları yalnız paketli tasarımda (test).
+- Kendi müziği: `MUSIC_TRACKS[]` satırı `theme: '<tema>'` ile → panel o tasarımda önce onu önerir (`tracksFor`), varsayılan
+  `DESIGN_SOUND[<tema>].music`.
+- Üretim: `tools/audio_packs.py --pack <tema>` (numpy + scipy + ffmpeg). Ses yüksekliği ortak kütüphaneyle aynı ölçekte
+  (efekt −20…−24 LUFS, ≤ −1,5 dBTP; müzik −17,5 LUFS), böylece `FX_GAIN 0.5` / `MUSIC_VOL 0.55` her tasarımda aynı dengeyi
+  verir (2026-10-23 birleştirmede paket bu ölçeğe getirildi; önceki tepe normalizasyonunda −15…−28 LUFS dağınıktı).
+
 ## 6. Oynatıcı (`platform/public/audio/audio.js`, G969)
 
 - **Ön yükleme:** sayfa boşta iken açılışın bütün efektleri ve `tap` indirilir **ve çözülür** (`OfflineAudioContext`:
@@ -196,6 +213,8 @@ seçmediği durumda Our Story'deki varsayılan parça.
 - **iOS:** ilk dokunuşta bağlam açılır, içinde 1 örneklik sessiz tampon çalınır (eski iOS kilidi); `touchend`'de saat önceden
   uyandırılır. Saat geç uyanırsa ipuçları dokunuşun zaman çizgisinde kalır; adımından 350 ms'den geç kalacak olan atlanır.
 - **Pan:** üçüncü sayı varsa `StereoPannerNode` (yoksa ortada).
+- **Paket ve sayfa ipuçları (K59):** `fx` taban adresi paketi gösterir; `invite:sfx` olayı listedeki adı ortak `play()` ile
+  çalar (aynı kazanç, aynı sessiz/gecikme kuralları); ipucu olan sayfada iOS saati de ilk `touchend`'de uyandırılır.
 - **Sessiz / Skip / gizli sekme / Replay:** açılışın kendi kazanç düğümü 25 ms'de söner; Replay baştan başlatır.
 - **Azaltılmış hareket:** yalnız ilk ipucu (kapanış sesi).
 - **Seviye:** `FX_GAIN 0.5` (eski 0.32; dosyalar artık tutarlı −20 LUFS çevresinde), müzik `MUSIC_VOL 0.55` aynı.

@@ -1,5 +1,214 @@
 {
- "_note": "G142: build_images.py (placeholders + manifest); envelope, seal, rose, paper and sample photos are the G133 WebP files of the collection's GPT PNGs.",
+ "_note": "2026-10-23 atelier redesign: build_images.py cuts every image from the collection's GPT parts; the demo photos, og and favicon are the G133 files.",
+ "env_closed": {
+  "src_size": [
+   1375,
+   735
+  ],
+  "ratio": 1.87075,
+  "files": [
+   {
+    "file": "env_closed-720.webp",
+    "w": 720,
+    "h": 385,
+    "bytes": 25888
+   },
+   {
+    "file": "env_closed-1100.webp",
+    "w": 1100,
+    "h": 588,
+    "bytes": 90924
+   }
+  ]
+ },
+ "env_inside": {
+  "src_size": [
+   1375,
+   735
+  ],
+  "ratio": 1.87075,
+  "files": [
+   {
+    "file": "env_inside-720.webp",
+    "w": 720,
+    "h": 385,
+    "bytes": 17806
+   },
+   {
+    "file": "env_inside-1100.webp",
+    "w": 1100,
+    "h": 588,
+    "bytes": 54914
+   }
+  ]
+ },
+ "stage": {
+  "ratio": 1.8707,
+  "inside_src": [
+   164,
+   385,
+   1372,
+   983
+  ],
+  "flap": "clip-path polygon in site.css (hinge = top edge of the body, tip at 76.6 % of its height)"
+ },
+ "card_portrait": {
+  "src_size": [
+   952,
+   1420
+  ],
+  "ratio": 0.67042,
+  "files": [
+   {
+    "file": "card_portrait-520.webp",
+    "w": 520,
+    "h": 776,
+    "bytes": 54736
+   },
+   {
+    "file": "card_portrait-860.webp",
+    "w": 860,
+    "h": 1283,
+    "bytes": 119960
+   }
+  ]
+ },
+ "card_portrait_band": {
+  "src_size": [
+   952,
+   426
+  ],
+  "ratio": 2.23474,
+  "files": [
+   {
+    "file": "card_portrait_band-520.webp",
+    "w": 520,
+    "h": 233,
+    "bytes": 7516
+   },
+   {
+    "file": "card_portrait_band-860.webp",
+    "w": 860,
+    "h": 385,
+    "bytes": 16450
+   }
+  ]
+ },
+ "card_formal": {
+  "src_size": [
+   991,
+   1450
+  ],
+  "ratio": 0.68345,
+  "files": [
+   {
+    "file": "card_formal-520.webp",
+    "w": 520,
+    "h": 761,
+    "bytes": 80568
+   },
+   {
+    "file": "card_formal-860.webp",
+    "w": 860,
+    "h": 1258,
+    "bytes": 192428
+   }
+  ]
+ },
+ "card_formal_band": {
+  "src_size": [
+   991,
+   101
+  ],
+  "ratio": 9.81188,
+  "files": [
+   {
+    "file": "card_formal_band-520.webp",
+    "w": 520,
+    "h": 53,
+    "bytes": 2094
+   },
+   {
+    "file": "card_formal_band-860.webp",
+    "w": 860,
+    "h": 88,
+    "bytes": 4980
+   }
+  ]
+ },
+ "cards": {
+  "card_portrait": {
+   "ratio": 0.6704,
+   "band": [
+    0.55,
+    0.85
+   ]
+  },
+  "card_formal": {
+   "ratio": 0.6834,
+   "band": [
+    0.54,
+    0.61
+   ]
+  }
+ },
+ "seal": {
+  "src_size": [
+   1098,
+   1108
+  ],
+  "ratio": 0.99097,
+  "files": [
+   {
+    "file": "seal-160.webp",
+    "w": 160,
+    "h": 161,
+    "bytes": 10812
+   },
+   {
+    "file": "seal-320.webp",
+    "w": 320,
+    "h": 323,
+    "bytes": 32362
+   }
+  ]
+ },
+ "rose": {
+  "src_size": [
+   1246,
+   1076
+  ],
+  "ratio": 1.15799,
+  "files": [
+   {
+    "file": "rose-420.webp",
+    "w": 420,
+    "h": 363,
+    "bytes": 38340
+   },
+   {
+    "file": "rose-800.webp",
+    "w": 800,
+    "h": 691,
+    "bytes": 110604
+   }
+  ]
+ },
+ "paper": {
+  "src_size": [
+   2048,
+   3072
+  ],
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "paper-1200.webp",
+    "w": 1200,
+    "h": 1800,
+    "bytes": 24418
+   }
+  ]
+ },
  "ph_portrait": {
   "src_size": [
    640,
@@ -59,6 +268,7 @@
    "aspect": "1778/1000"
   }
  },
+ "paket8": [],
  "og": {
   "size": [
    1200,
@@ -79,7 +289,7 @@
   "particles": ".accent-layer",
   "first_screen": {
    "landscape": false,
-   "names_min_px": 34
+   "names_min_px": 15
   },
   "backdrop": {
    "edge_max": 2.2,
@@ -88,5 +298,5 @@
    "light_above": 110
   }
  },
- "bytes_total": 1201740
+ "bytes_total": 1650522
 }

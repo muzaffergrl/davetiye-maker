@@ -50,6 +50,26 @@ test('every design has its sounds; tracks ≤ 1.5 MB, effects ≤ 56 KB (G967), 
     assert.ok(licences.includes(`fx/${name}.mp3`), `${name} not in LICENSES.md`);
   }
   for (const [id, s] of Object.entries(DESIGN_SOUND)) assert.ok(MUSIC_TRACKS.some((t) => t.id === s.music), `${id}: unknown track`);
+  for (const track of MUSIC_TRACKS) if (track.theme) assert.ok(DESIGN_SOUND[track.theme], `${track.id}: no design ${track.theme}`);
+});
+
+test('a design sound pack holds every cue it plays, tap and chime; shared designs use only the shared effects', () => {
+  const licences = readFileSync(path.join(AUDIO_DIR, 'LICENSES.md'), 'utf8');
+  for (const [id, s] of Object.entries(DESIGN_SOUND)) {
+    if (!s.pack) {
+      for (const [, fx] of s.opening) assert.ok((EFFECT_NAMES as readonly string[]).includes(fx), `${id}: ${fx} is not a shared effect`);
+      assert.equal(s.cues, undefined, `${id}: page cues need a pack`);
+      continue;
+    }
+    const names = new Set(['tap', 'chime', ...s.opening.map((c) => c[1]), ...Object.values(s.cues ?? {}).flat()]);
+    for (const name of names) {
+      const file = path.join(AUDIO_DIR, 'fx', s.pack, `${name}.mp3`);
+      const size = statSync(file).size;
+      assert.ok(size > 500 && size <= 40 * 1024, `${s.pack}/${name}: ${size} bytes`);
+      assert.ok(detectAudioType(readFileSync(file)), `${s.pack}/${name} is not an mp3`);
+      assert.ok(licences.includes(`fx/${s.pack}/${name}.mp3`), `${s.pack}/${name} not in LICENSES.md`);
+    }
+  }
 });
 
 // 22–32 were redesigned on their own branch (G422–G432, owner decision 2026-10-23: that version is the valid one); their

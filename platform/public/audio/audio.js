@@ -2,12 +2,18 @@
  * play, with the settings in #site-data → "sound" (lib/audio/site-sound.ts):
  *
  *   { music: "/audio/music/first-light.mp3" | "/media/…" | null,   (story page only)
- *     effects: true, fx: "/audio/fx/", opening: [[ms, "seal"], [ms, "curtain", -0.4], …] } (index page only;
- *     the optional third number is a stereo pan, −1 left … 1 right)
+ *     effects: true, fx: "/audio/fx/" | "/audio/fx/<design pack>/",
+ *     opening: [[ms, "seal"], [ms, "curtain", -0.4], …],               (index page only; the optional third number
+ *                                                                     is a stereo pan, −1 left … 1 right)
+ *     cues: ["page", …] }                                             (the theme's own cues on this page)
+ *   "fx" is the shared effect library, or the design's own sound pack (K59; lib/audio/catalog.ts DesignSound.pack):
+ *   the same player, only the files differ.
  *
  * - Effects (Web Audio, small stereo mp3 files): the opening cues when the guest taps the envelope (.stage) or
  *   "Replay" (.replay), timed on the theme's choreography; a soft tick on links between pages; a chime when an RSVP is
- *   sent (form.js "rsvp:state" success). Nothing sounds before the guest's own tap (browser rules).
+ *   sent (form.js "rsvp:state" success). A theme plays its own cues with document.dispatchEvent(new CustomEvent(
+ *   'invite:sfx', {detail: {name}})) — a page turned, a reply sealed (only names listed in "cues"). Nothing sounds
+ *   before the guest's own tap (browser rules).
  *   The files are fetched and decoded while the page is idle (an OfflineAudioContext decodes without a gesture), so
  *   the first cue is not late on a phone; at the tap every cue is scheduled on the audio clock (sample-accurate, not
  *   at the mercy of a busy main thread while the opening animates). If the clock is still waking up (iOS resumes
@@ -263,12 +269,21 @@
   document.addEventListener('rsvp:state', function (e) {
     if (e.detail && e.detail.state === 'success') play('chime', 800);
   });
+  var CUES = Object.create(null);
+  (S.effects ? S.cues || [] : []).forEach(function (n) {
+    CUES[n] = 1;
+  });
+  var hasCues = Object.keys(CUES).length > 0;
+  document.addEventListener('invite:sfx', function (e) {
+    var name = e.detail && e.detail.name;
+    if (typeof name === 'string' && CUES[name]) play(name, 400);
+  });
 
   // iOS: wake the audio clock on the first touch, so it is running by the time the tap's click arrives
   document.addEventListener(
     'touchend',
     function () {
-      if (!muted && S.effects && data.page === 'index') ensureCtx();
+      if (!muted && S.effects && (data.page === 'index' || hasCues)) ensureCtx();
     },
     { capture: true, passive: true, once: true }
   );
@@ -287,6 +302,9 @@
         names[c[1]] = 1;
       });
       if (document.querySelector('[data-rsvp-form]')) names.chime = 1;
+      Object.keys(CUES).forEach(function (n) {
+        names[n] = 1;
+      });
       // fetch + decode now, not at the tap (no first-play lag on phones)
       Object.keys(names).forEach(function (n) {
         buffer(n);

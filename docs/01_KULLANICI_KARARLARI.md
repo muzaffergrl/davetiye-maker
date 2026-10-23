@@ -62,6 +62,7 @@ Gerekçeli tam tablo: `00_ANA_DEVIR.md` §10. Burada yalnız **geçerli** kararl
 | K56 | (2026-10-23) **Siteye Kullanım Koşulları (`/terms`) ve uygun bir KVKK aydınlatma notu (`/kvkk`) eklenir**, şimdiye kadarki kararlarla tutarlı (K25 yasal kimlik yok, K36 iade yok, K37, K48 saklama/silme). Bilinmeyen yasal bilgiler **uydurulmaz**, sitede köşeli parantezli yer tutucu herkese açık gösterilmez; açıklar belgelerde TODO olarak kalır (K58) | sohbet |
 | K57 | (2026-10-23) **Ses efektleri çok daha fazla, her şablona uygun ve daha kaliteli** olmalı ("şuankiler çok amatör"). K44 (3)'ün ses kısmını genişletir | sohbet |
 | K58 | (2026-10-23) **Başka karar gerektirmeyen her iş paralel ve hızlı yapılır.** Hâlâ açık (uydurulmaz, belgelerde TODO): veri sorumlusunun yasal adı + posta adresi; satıcının yasal/vergi statüsü; uygulanacak hukuk seçimi; Gemini ücretli katmanı; eski Vercel projesinin (`davetiye-platform`) duraklatılması | sohbet |
+| K59 | (2026-10-23) **21 ve sonrası "profesyonel bir tasarımcının elinden çıkmış gibi":** her şablona **özel tasarım, bileşen, animasyon ve özel sesler**; mevcut hâller kabul edilemez. Sırayla, **21'den başlanır**. Yeni görsel parçalar **GPT'de** üretilir (kullanıcı seçimi; Claude prompt'ları `GPT_PROMPTS.md` + `docs/27`'ye yazar, parçalar gelince yerleştirir); K21 sürer. Sesler: tasarım başına kendi efekt paketi + kendi müziği (`tools/audio_packs.py`, `lib/audio/catalog.ts` `pack` / `cues` / `MUSIC_TRACKS[].theme`) | sohbet |
 
 ## Geçersizleşenler
 

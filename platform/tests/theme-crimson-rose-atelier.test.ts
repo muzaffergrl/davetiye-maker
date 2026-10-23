@@ -57,8 +57,10 @@ test('New album stays optional and thank-you mode closes RSVP without discarding
  const reply=cheerio.load((await render('rsvp',demo)).html);assert.equal(reply('[data-rsvp-form]').length,0);
 });
 
-test('Default audio cues match the independently animated opening',()=>{
- assert.deepEqual(designSound(id),{music:'evening-strings',opening:[[0,'seal-lift'],[400,'paper-crisp'],[1600,'slide'],[3000,'harp']]});
+test('Own sound pack and music: the opening cues follow the crack, flap, draw, reveal and bloom steps',()=>{
+ const s=designSound(id);assert.equal(s.music,'rose-nocturne');assert.equal(s.pack,id);
+ assert.deepEqual(s.opening,[[0,'crack'],[480,'flap'],[1150,'draw'],[2250,'reveal'],[3150,'bloom']]);
+ assert.deepEqual(s.cues,{story:['page'],rsvp:['fold','stamp'],home:['petal']});
 });
 
 test('Every demo photo is a bundled theme asset, with no external photo dependency',async()=>{

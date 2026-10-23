@@ -1,7 +1,8 @@
 # Platform sesleri — kaynak ve lisans kaydı (G126)
 
 Bu klasördeki **bütün** ses dosyaları BKE Studio için **koddan sentezlendi**: fon müzikleri `tools/audio_synth.py` ile
-(2026-10-16), ses efektleri `tools/audio_fx.py` ile (G967, 2026-10-23; eski 10 efektin yerini aldı, adları korundu).
+(2026-10-16), ortak ses efektleri `tools/audio_fx.py` ile (G967, 2026-10-23; eski 10 efektin yerini aldı, adları korundu),
+tasarıma özel paketler (kendi efektleri + kendi müziği, K59) `tools/audio_packs.py` ile (2026-10-23; aşağıda ayrı tablo).
 Hiçbir dış kayıt, örnek (sample), ses kütüphanesi dosyası ya da başkasına ait beste kullanılmadı: notalar betikteki
 kurallarla (sabit tohum) üretilir; müzikte tını toplamsal sentez + sentetik yankı, efektlerde nesnenin fiziğinden kurulan
 sentez (sürtünme, kırılma, modal rezonans, yapış-kay, kabarcık …) + sentetik küçük oda yankısıdır. Eser BKE Studio'nundur;
@@ -74,6 +75,32 @@ Kamu malı kullanım notu: `first-light` parçasının armoni dizisi (I–V–vi
 | `fx/brush.mp3` | Efekt — dört geniş fırça darbesi (ıslak suluboya) | 1,4 s | ~20 KB | `tools/audio_fx.py` (fiziğe dayalı foley sentezi) | BKE Studio'nun kendi eseri, atıfsız | 2026-10-23 |
 | `fx/pen.mp3` | Efekt — baş harfler mürekkeple yazılır (uç cızırtısı) | 0,7 s | ~11 KB | `tools/audio_fx.py` (fiziğe dayalı foley sentezi) | BKE Studio'nun kendi eseri, atıfsız | 2026-10-23 |
 
-Biçim: müzik MP3 mono 44,1 kHz 64 kb/s (döngüye uygun, yankı kuyruğu başa katlanır); efektler MP3 stereo 44,1 kHz
-112 kb/s, −20…−24 LUFS bütünleşik, gerçek tepe ≤ −1,5 dBTP (kodlama sonrası ≤ −1,9 dBTP ölçüldü), tıksız giriş/çıkış.
+Biçim (ortak dosyalar): müzik MP3 mono 44,1 kHz 64 kb/s (döngüye uygun, yankı kuyruğu başa katlanır); efektler MP3 stereo
+44,1 kHz 112 kb/s, −20…−24 LUFS bütünleşik, gerçek tepe ≤ −1,5 dBTP (kodlama sonrası ≤ −1,9 dBTP ölçüldü), tıksız giriş/çıkış.
 Efekt listesi, tema eşlemesi ve yeniden üretim: `docs/40_SES_EFEKTLERI.md`; açılış zamanlamaları: `platform/lib/audio/catalog.ts`.
+
+## Tasarıma özel paketler (K59, 2026-10-23)
+
+Kaynak: `tools/audio_packs.py` (özgün sentez; notalar betikte elle yazıldı, stereo salon yankısı sentetik). Dış kayıt, örnek
+ya da başkasına ait beste yok. Eser BKE Studio'nundur; atıf gerekmez, ticari kullanım serbesttir. Aynı betik aynı sesleri
+yeniden üretir (`python3 tools/audio_packs.py --pack <tasarım>`; numpy + scipy + ffmpeg).
+
+Biçim: efektler MP3 stereo 44,1 kHz 96 kb/s, müzik MP3 stereo 44,1 kHz 112 kb/s. Ses yüksekliği ortak kütüphaneyle aynı
+ölçekte (`tools/audio_fx.py` BS.1770 ölçeri): efektler −20…−24 LUFS, gerçek tepe ≤ −1,5 dBTP (`crack` keskin bir tık
+olduğundan tepe tavanında kalır, ≈ −27 LUFS); müzik −17,5 LUFS hedef (ortak parçalar −17…−19 LUFS). Paketin efektleri o
+tasarımda ortak efektlerin yerini alır (`tap` ve `chime` dahil); oynatıcı ve kazançlar ortaktır (`public/audio/audio.js`).
+
+| Dosya | Tür | Süre | Boyut | Kaynak | Lisans | Üretim tarihi |
+|---|---|---|---|---|---|---|
+| `music/rose-nocturne.mp3` | Fon müziği — Crimson Rose Atelier: piyano, arp, yaylılar; Re minör vals, 76 bpm, döngü (elle bestelendi) | 95 s | ~1296 KB | `tools/audio_packs.py` (özgün sentez) | BKE Studio'nun kendi eseri, atıfsız | 2026-10-23 |
+| `fx/crimson-rose-atelier/crack.mp3` | Efekt — altın mum mühür bastırılıp ikiye kırılır, parçalar kâğıda düşer | 1,0 s | ~12 KB | aynı | aynı | 2026-10-23 |
+| `fx/crimson-rose-atelier/flap.mp3` | Efekt — ağır bordo kapak yapışkanından ayrılıp menteşede kalkar | 1,3 s | ~16 KB | aynı | aynı | 2026-10-23 |
+| `fx/crimson-rose-atelier/draw.mp3` | Efekt — deckle kenarlı kart cepten çekilir (kâğıt üstünde kâğıt) | 1,5 s | ~18 KB | aynı | aynı | 2026-10-23 |
+| `fx/crimson-rose-atelier/reveal.mp3` | Efekt — kart mum ışığına yükselir: arp süpürmesi + yaylı kabarması | 3,2 s | ~38 KB | aynı | aynı | 2026-10-23 |
+| `fx/crimson-rose-atelier/bloom.mp3` | Efekt — kart misafire doğru gelir: sıcak piyano akoru + hava | 2,2 s | ~27 KB | aynı | aynı | 2026-10-23 |
+| `fx/crimson-rose-atelier/page.mp3` | Efekt — kalın albüm sayfası sağdan sola çevrilir | 1,1 s | ~13 KB | aynı | aynı | 2026-10-23 |
+| `fx/crimson-rose-atelier/fold.mp3` | Efekt — yanıt kartı katlanıp zarfa kayar | 1,1 s | ~14 KB | aynı | aynı | 2026-10-23 |
+| `fx/crimson-rose-atelier/stamp.mp3` | Efekt — mühür zarfa bastırılır | 0,8 s | ~10 KB | aynı | aynı | 2026-10-23 |
+| `fx/crimson-rose-atelier/petal.mp3` | Efekt — home'a varışta yapraklar süzülür (çok yumuşak hava + arp flajoleleri) | 2,4 s | ~29 KB | aynı | aynı | 2026-10-23 |
+| `fx/crimson-rose-atelier/tap.mp3` | Efekt — sayfalar arası yumuşak tık | 0,3 s | ~4 KB | aynı | aynı | 2026-10-23 |
+| `fx/crimson-rose-atelier/chime.mp3` | Efekt — yanıt gönderildi: iki arp notası + celesta | 2,4 s | ~29 KB | aynı | aynı | 2026-10-23 |

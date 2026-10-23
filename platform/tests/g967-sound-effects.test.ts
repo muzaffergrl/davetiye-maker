@@ -1,9 +1,10 @@
 // G967–G969: the sound-effect library (50 stereo foley files), every theme's own opening cue list, and the player
 // (public/audio/audio.js) run against a fake Web Audio: decoding before the tap, cues on the audio clock relative to the
-// tap, stereo pan, mute, reduced motion, Skip, a clock that wakes up late (iOS).
+// tap, stereo pan, mute, reduced motion, Skip, a clock that wakes up late (iOS). K59: a design's own sound pack
+// (fx/<pack>/) goes through the same player; its page cues ('invite:sfx') are preloaded and played like every effect.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { DESIGN_SOUND, EFFECT_NAMES, type OpeningCue } from '../lib/audio/catalog.ts';
@@ -22,8 +23,12 @@ test('G967 library: 35–60 effects, one file each (no strays), ≤ 56 KB each a
   assert.ok(EFFECT_NAMES.length >= 35 && EFFECT_NAMES.length <= 60, `${EFFECT_NAMES.length} effects`);
   for (const name of G126) assert.ok((EFFECT_NAMES as readonly string[]).includes(name), `G126 name ${name} kept`);
   assert.equal(new Set(EFFECT_NAMES).size, EFFECT_NAMES.length, 'unique names');
-  const files = readdirSync(FX_DIR).filter((f) => !f.startsWith('.'));
+  const entries = readdirSync(FX_DIR).filter((f) => !f.startsWith('.'));
+  const files = entries.filter((f) => statSync(path.join(FX_DIR, f)).isFile());
   assert.deepEqual(new Set(files), new Set(EFFECT_NAMES.map((n) => `${n}.mp3`)), 'fx/ holds exactly the catalogue');
+  // the folders are the designs' own packs (K59), each used by its design
+  const packs = new Set(Object.values(DESIGN_SOUND).map((s) => s.pack).filter(Boolean));
+  assert.deepEqual(new Set(entries.filter((f) => !files.includes(f))), packs, 'fx/<folder> = a design sound pack');
   const licences = readFileSync(path.join(AUDIO_DIR, 'LICENSES.md'), 'utf8');
   let total = 0;
   for (const name of EFFECT_NAMES) {
@@ -46,7 +51,8 @@ test('G968 every theme has its own opening: 3–8 cues, answers the tap within 2
     assert.ok(cues.length >= 3 && cues.length <= 8, `${theme}: ${cues.length} cues`);
     assert.ok(cues[0][0] <= 250, `${theme}: first cue at ${cues[0][0]} ms`);
     for (const c of cues) {
-      assert.ok((EFFECT_NAMES as readonly string[]).includes(c[1]), `${theme}: unknown effect ${c[1]}`);
+      if (s.pack) assert.ok(existsSync(path.join(FX_DIR, s.pack, `${c[1]}.mp3`)), `${theme}: ${c[1]} not in its pack`);
+      else assert.ok((EFFECT_NAMES as readonly string[]).includes(c[1]), `${theme}: unknown effect ${c[1]}`);
       assert.ok(Number.isInteger(c[0]) && c[0] >= 0 && c[0] < 5000, `${theme}: ${c[0]} ms`);
       if (c.length === 3) assert.ok(Number.isFinite(c[2]) && c[2] !== 0 && Math.abs(c[2]) <= 1, `${theme}: pan ${c[2]}`);
     }
@@ -58,7 +64,7 @@ test('G968 every theme has its own opening: 3–8 cues, answers the tap within 2
 
 test('G968 every effect is heard somewhere (an opening, or the player: tap = page links, chime = RSVP sent)', () => {
   const used = new Set<string>(['tap', 'chime']);
-  for (const s of Object.values(DESIGN_SOUND)) for (const c of s.opening) used.add(c[1]);
+  for (const s of Object.values(DESIGN_SOUND)) if (!s.pack) for (const c of s.opening) used.add(c[1]);
   for (const name of EFFECT_NAMES) assert.ok(used.has(name), `${name} is never played`);
 });
 
@@ -75,7 +81,7 @@ interface Played {
 }
 
 /** Runs public/audio/audio.js in a VM with a fake DOM and a fake Web Audio; time is moved by hand. */
-function player(opts: { opening: unknown[]; muted?: boolean; reduce?: boolean; resumeDelayMs?: number }) {
+function player(opts: { opening: unknown[]; muted?: boolean; reduce?: boolean; resumeDelayMs?: number; page?: string; fx?: string; cues?: string[] }) {
   let now = 0;
   const idle: Array<() => void> = [];
   const timers: Array<{ at: number; fn: () => void }> = [];
@@ -162,7 +168,12 @@ function player(opts: { opening: unknown[]; muted?: boolean; reduce?: boolean; r
   class Offline {
     decodeAudioData = decode('offline');
   }
-  const siteData = JSON.stringify({ slug: 'g967', page: 'index', sound: { music: null, effects: true, fx: '/audio/fx/', opening: opts.opening } });
+  const fetched: string[] = [];
+  const siteData = JSON.stringify({
+    slug: 'g967',
+    page: opts.page ?? 'index',
+    sound: { music: null, effects: true, fx: opts.fx ?? '/audio/fx/', opening: opts.opening, ...(opts.cues ? { cues: opts.cues } : {}) },
+  });
   const el = () => ({ type: '', className: '', innerHTML: '', style: {}, setAttribute() {}, addEventListener() {}, appendChild() {}, classList: { toggle() {} } });
   const sandbox: Record<string, unknown> = {
     document: {
@@ -186,7 +197,7 @@ function player(opts: { opening: unknown[]; muted?: boolean; reduce?: boolean; r
     setInterval: () => 0,
     clearInterval() {},
     sessionStorage: { getItem: (k: string) => (opts.muted && k === 'invite:sound:g967' ? 'off' : null), setItem() {}, removeItem() {} },
-    fetch: (url: string) => Promise.resolve({ ok: true, arrayBuffer: () => Promise.resolve(new TextEncoder().encode(url.split('/').pop()!.replace('.mp3', '')).buffer) }),
+    fetch: (url: string) => (fetched.push(url), Promise.resolve({ ok: true, arrayBuffer: () => Promise.resolve(new TextEncoder().encode(url.split('/').pop()!.replace('.mp3', '')).buffer) })),
     getComputedStyle: () => ({ backgroundColor: '#fff', color: '#000' }),
     location: { origin: 'https://wedding.example', pathname: '/g967', search: '' },
     navigator: {},
@@ -205,7 +216,12 @@ function player(opts: { opening: unknown[]; muted?: boolean; reduce?: boolean; r
   return {
     played,
     decoded,
+    fetched,
     contexts: () => contexts,
+    async emit(type: string, detail: unknown) {
+      for (const fn of listeners[type] ?? []) fn({ detail });
+      await settle();
+    },
     async idle() {
       idle.splice(0).forEach((fn) => fn());
       await settle();
@@ -278,4 +294,23 @@ test('G969 player: a clock that wakes up late (iOS) keeps the cues on the tap’
   await p.wake();
   // the seal (0 ms) is 500 ms late → dropped; the flap (260 ms) is 240 ms late → at once; the rest keep their places
   assert.deepEqual(offsets(p.played), [['paper-soft', 0, 0], ['curtain', 680, -0.45], ['slide', 1120, 0], ['chime', 2500, 0]]);
+});
+
+test('G969 player + K59 pack: the files come from the design pack; its page cues are decoded early and play on invite:sfx, only when listed', async () => {
+  const pack = '/audio/fx/crimson-rose-atelier/';
+  const p = player({ opening: [], page: 'story', fx: pack, cues: ['page'] });
+  await p.idle();
+  assert.equal(p.contexts(), 0, 'no AudioContext before a tap');
+  assert.deepEqual(p.decoded.sort(), ['offline:page', 'offline:tap']);
+  assert.ok(p.fetched.every((u) => u.startsWith(pack)), p.fetched.join(', '));
+  await p.click('.album');
+  await p.emit('invite:sfx', { name: 'page' });
+  await p.emit('invite:sfx', { name: 'stamp' }); // not a cue of this page
+  await p.emit('invite:sfx', { name: 'constructor' }); // never an inherited key
+  assert.deepEqual(offsets(p.played).map(([n]) => n), ['page']);
+  assert.equal(p.played.find((x) => x.name === 'page')!.run, null, 'through the shared effect gain');
+  const off = player({ opening: [], page: 'story', fx: pack, cues: ['page'], muted: true });
+  await off.idle();
+  await off.emit('invite:sfx', { name: 'page' });
+  assert.equal(offsets(off.played).length, 0, 'sound switched off');
 });

@@ -217,8 +217,8 @@ THEMES: dict[str, Theme] = {
         Theme(id="crimson-rose-atelier", no="21", folder="21_Crimson_Rose_Atelier", name="Crimson Rose Atelier",
               tagline="Crimson roses, a burgundy envelope with a gold botanical wax seal, an offset oval portrait and a "
                       "landscape chapter album",
-              corner_tl="platform/themes/crimson-rose-atelier/img/rose-branch.webp",
-              corner_br="platform/themes/crimson-rose-atelier/img/rose-branch.webp"),
+              corner_tl="platform/themes/crimson-rose-atelier/img/rose-800.webp",
+              corner_br="platform/themes/crimson-rose-atelier/img/rose-800.webp"),
     )},
 }
 # The listing text each tool reads (G091: listing_v3.md replaced listing.md, which stays as the earlier record).
