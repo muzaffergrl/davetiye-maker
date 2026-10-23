@@ -575,6 +575,17 @@ export class BlobAdapter implements DataAdapter {
     return records.filter((r): r is RsvpRecord => r !== null);
   }
 
+  async listRecentRsvps(siteId: string, sinceMs: number): Promise<RsvpRecord[]> {
+    if (!UUID_RE.test(siteId)) return [];
+    // File names start with the creation time in ms, 13 digits (saveRsvp): no read for the older ones.
+    const recent = (await this.listAll(this.rsvpPrefix(siteId))).filter((p) => {
+      const ms = Number(/\/(\d{13})-[^/]*\.json$/.exec(p)?.[1] ?? NaN);
+      return !Number.isFinite(ms) || ms >= sinceMs;
+    });
+    const records = await mapLimit(recent, READ_CONCURRENCY, async (p) => (await this.readJson<RsvpRecord>(p))?.data ?? null);
+    return records.filter((r): r is RsvpRecord => r !== null && Date.parse(r.createdAt) >= sinceMs);
+  }
+
   /** Pathnames of these replies (the reply id is the last part of the file name). */
   private async rsvpPathsFor(siteId: string, ids: readonly string[]): Promise<string[]> {
     if (!UUID_RE.test(siteId) || !ids.length) return [];

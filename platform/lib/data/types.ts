@@ -403,6 +403,12 @@ export interface DataAdapter {
   saveRsvp(siteId: string, input: RsvpInput): Promise<RsvpRecord>;
   /** Oldest first. */
   listRsvps(siteId: string): Promise<RsvpRecord[]>;
+  /**
+   * G953: the replies created at or after `sinceMs` (epoch ms), oldest first — the guest form's duplicate check without
+   * reading every reply (blob: one listing, the time is in the file name; only the recent files are read). Optional:
+   * without it the caller filters listRsvps.
+   */
+  listRecentRsvps?(siteId: string, sinceMs: number): Promise<RsvpRecord[]>;
   /** Deletes these replies of the site (unknown ids are ignored). Returns how many were deleted. */
   deleteRsvps(siteId: string, ids: readonly string[]): Promise<number>;
   /** Sets or clears `held` on these replies of the site. Returns how many changed. */
