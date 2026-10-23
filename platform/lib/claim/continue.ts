@@ -104,15 +104,6 @@ export function ownedSites(sites: readonly SiteRecord[], email: string): SiteRec
   return out.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 }
 
-/**
- * The order's website started with this email, else null: the newest one — of `preferTheme` when one of them uses it
- * (/start of a design opens that design's website).
- */
-export function ownedSite(sites: readonly SiteRecord[], email: string, preferTheme: string | null = null): SiteRecord | null {
-  const owned = ownedSites(sites, email);
-  return (preferTheme ? owned.find((s) => s.theme === preferTheme) : undefined) ?? owned[0] ?? null;
-}
-
 /** G951: a design's name for the buyer ("Olive & Ivory"): the sales catalogue's, else its id in words (a private design). */
 export function designName(themeId: string): string {
   return MARKETING.designs.find((d) => d.id === themeId)?.name ?? themeId.split(/[-_]+/).filter(Boolean).map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');
