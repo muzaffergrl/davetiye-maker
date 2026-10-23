@@ -1,7 +1,8 @@
 // G953: a guest's RSVP is never lost to a shared counter. On the blob store every limit is a conditional write that can
 // lose a race with other guests answering at the same moment (WriteConflictError) or hit a passing storage error: the
-// counters are best effort, the reply is stored. The duplicate check reads only the replies of its window (blob: one
-// listing, the time is in the file name), not every reply of the site on every submit.
+// reply is stored, but HELD (a flood is what makes counters collide: a counter that could not count never lets a reply
+// into the couple's head count unseen). The duplicate check reads only the replies of its window (blob: one listing, the
+// time is in the file name), not every reply of the site on every submit.
 import { before, test } from 'node:test';
 import assert from 'node:assert/strict';
 import { cpSync } from 'node:fs';
@@ -46,20 +47,28 @@ class ConflictLimiter implements RateLimiter {
   }
 }
 
-test('every counter conflicting: the reply is still stored and counted (not held), the guest gets the normal answer', async () => {
+test('every counter conflicting: the reply is still stored, but held (not counted), the guest gets the normal answer', async () => {
   const adapter = getDataAdapter();
   const { site } = await createSiteWithKeys(adapter, { slug: 'g953-conflict', theme: '_sample', content: content() });
   await publishSite(adapter, site.id);
   const limiter = new ConflictLimiter(() => true);
-  const res = await submitRsvp({ adapter, limiter, ip: '198.51.100.7' }, 'g953-conflict', { name: 'Mara Quinn', attending: 'yes', guests: 2 });
+  const stored: string[] = [];
+  const res = await submitRsvp({ adapter, limiter, ip: '198.51.100.7', onStored: (_s, r) => stored.push(r.name) }, 'g953-conflict', {
+    name: 'Mara Quinn',
+    attending: 'yes',
+    guests: 2,
+  });
   assert.equal(res.status, 200);
   assert.equal(res.body.ok, true);
+  assert.equal(JSON.stringify(res.body).includes('held'), false, 'the guest is never told');
   const list = await adapter.listRsvps(site.id);
-  assert.deepEqual(list.map((r) => [r.name, r.guests, r.held ?? false]), [['Mara Quinn', 2, false]]);
+  assert.deepEqual(list.map((r) => [r.name, r.guests, r.held ?? false]), [['Mara Quinn', 2, true]]);
+  assert.deepEqual(stored, [], 'a held reply goes to no sheet / email');
   assert.ok(limiter.tried.some((k) => k.startsWith('rsvp:site:')), 'the volume counters were tried');
+  assert.ok(limiter.tried.some((k) => k.startsWith('rsvp:held:')), 'the held store counter was tried, and its failure refused nothing');
 });
 
-test('one counter conflicting (the per-site one, the busiest key): the reply is stored', async () => {
+test('one counter conflicting (the per-site one, the busiest key): every reply is stored, held', async () => {
   const adapter = getDataAdapter();
   const { site } = await createSiteWithKeys(adapter, { slug: 'g953-one', theme: '_sample', content: content() });
   await publishSite(adapter, site.id);
@@ -67,7 +76,24 @@ test('one counter conflicting (the per-site one, the busiest key): the reply is 
   for (const name of ['Ann Lee', 'Bo Park', 'Cy Diaz']) {
     assert.equal((await submitRsvp({ adapter, limiter, ip: '198.51.100.8' }, 'g953-one', { name, attending: 'no' })).status, 200);
   }
-  assert.equal((await adapter.listRsvps(site.id)).length, 3);
+  assert.deepEqual((await adapter.listRsvps(site.id)).map((r) => r.held ?? false), [true, true, true]);
+});
+
+test('a per-IP counter that cannot be counted never lets the reply through as "under the limit": stored, held', async () => {
+  const adapter = getDataAdapter();
+  const { site } = await createSiteWithKeys(adapter, { slug: 'g953-ip', theme: '_sample', content: content() });
+  await publishSite(adapter, site.id);
+  for (const [i, prefix] of ['rsvp:ip:', 'rsvp:site-ip:', 'rsvp:site-ip-stored:'].entries()) {
+    const limiter = new ConflictLimiter((k) => k.startsWith(prefix));
+    const name = `Guest ${['One', 'Two', 'Three'][i]}`;
+    assert.equal((await submitRsvp({ adapter, limiter, ip: `198.51.100.${11 + i}` }, 'g953-ip', { name, attending: 'no' })).status, 200);
+  }
+  // and with every counter working the reply is counted as before
+  assert.equal((await submitRsvp({ adapter, limiter: new MemoryRateLimiter(), ip: '198.51.100.14' }, 'g953-ip', { name: 'Guest Four', attending: 'no' })).status, 200);
+  assert.deepEqual(
+    (await adapter.listRsvps(site.id)).map((r) => [r.name, r.held ?? false]),
+    [['Guest One', true], ['Guest Two', true], ['Guest Three', true], ['Guest Four', false]],
+  );
 });
 
 test('the limits still work when the counters do: over the per-site budget replies are held, not lost', async () => {

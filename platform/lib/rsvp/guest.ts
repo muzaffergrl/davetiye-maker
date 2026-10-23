@@ -12,6 +12,8 @@
 //   7. identical reply in the last few minutes             -> 200 success, stored once
 //   8. unusual volume (site or this IP on this site)       -> stored as HELD for the couple's review
 //      (the guest sees the normal success); held store full -> 429 busy
+//      G953: a limit counter that cannot be written (storage race / error) never refuses and never counts as "under the
+//      limit": the reply is stored HELD as well
 //   9. store                                               -> 200 success
 // Responses never contain other guests' data, ids or counts, and never say a reply was held.
 
@@ -138,15 +140,16 @@ function sameReply(a: RsvpRecord, b: RsvpInput): boolean {
 
 /**
  * G953: a shared counter (blob: one conditional write per hit) may lose a race with other guests answering at the same
- * moment and throw (WriteConflictError, a passing storage error). A counter is only a guard against floods: when it
- * cannot be counted the reply goes through as if it was under the limit — a guest's answer is never lost to a counter.
+ * moment and throw (WriteConflictError, a passing storage error). A guest's answer is never lost to a counter, but a
+ * counter that could not be counted never lets a reply through as if it were under the limit either (a flood is exactly
+ * what makes the counters collide): `failed` — the reply is stored HELD for the couple's review (submitRsvp).
  */
-async function bestEffortHit(limiter: RateLimiter, key: string, rule: RateLimitRule): Promise<{ allowed: boolean; retryAfterMs: number }> {
+async function bestEffortHit(limiter: RateLimiter, key: string, rule: RateLimitRule): Promise<{ allowed: boolean; retryAfterMs: number; failed?: true }> {
   try {
     return await limiter.hit(key, rule);
   } catch (e) {
-    console.error(`[rsvp] counter skipped: ${e instanceof Error ? e.name : 'error'}`);
-    return { allowed: true, retryAfterMs: 0 };
+    console.error(`[rsvp] counter not counted, the reply is held: ${e instanceof Error ? e.name : 'error'}`);
+    return { allowed: true, retryAfterMs: 0, failed: true };
   }
 }
 
@@ -199,12 +202,14 @@ export async function submitRsvp(ctx: GuestContext, slug: string, body: unknown)
   if (recent.some((r) => r.source !== 'couple' && Date.parse(r.createdAt) >= since && sameReply(r, parsed.value))) return success();
 
   // Over either volume rule the reply is still stored, but held: junk cannot inflate the couple's
-  // head count, and real guests are not locked out while it lasts. G953: the counters are best effort (bestEffortHit):
-  // one that cannot be written counts as under the limit, and the reply is saved.
+  // head count, and real guests are not locked out while it lasts. G953: a counter that could not be counted (any of
+  // them, the per-IP ones above too: bestEffortHit `failed`) holds the reply the same way: saved, never counted unseen.
   const perSite = await bestEffortHit(limiter, `rsvp:site:${site.id}`, limits.perSite);
   const perSiteIpStored = await bestEffortHit(limiter, `rsvp:site-ip-stored:${site.id}:${ip}`, limits.perSiteIpStored);
-  const held = !perSite.allowed || !perSiteIpStored.allowed;
+  const uncounted = Boolean(perIp.failed || perSiteIp.failed || perSite.failed || perSiteIpStored.failed);
+  const held = uncounted || !perSite.allowed || !perSiteIpStored.allowed;
   if (held) {
+    // a held-store counter that cannot be counted does not refuse the reply (it is held already)
     const room = await bestEffortHit(limiter, `rsvp:held:${site.id}`, limits.heldPerSite);
     if (!room.allowed) return errorResult(429, 'busy', {}, retryAfter(room.retryAfterMs));
   }
