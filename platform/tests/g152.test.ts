@@ -108,7 +108,7 @@ const keyOf = (editPath: string) => new URL(editPath, BASE).searchParams.get('k'
 
 // ------------------------------------------------------------------------------------------------ 1. Etsy units
 
-test('designUnits: quantities of design lines; service listings never count; at least 1, at most MAX_ORDER_SITES', () => {
+test('designUnits: quantities of design lines; service listings never count; 1 without readable lines, at most MAX_ORDER_SITES', () => {
   const services = listingServices({ services: { '900': 'setup', '901': 'custom_design', '902': 'extra_revision', '903': 'other', x: 'setup' } });
   assert.deepEqual([...services], [['900', 'setup'], ['901', 'custom_design'], ['902', 'extra_revision']], 'unknown kinds and bad ids are ignored');
   assert.equal(listingServices().size, 0, 'the shipped file has no services yet');
@@ -116,7 +116,7 @@ test('designUnits: quantities of design lines; service listings never count; at 
   assert.equal(designUnits({ transactions: [{ listing_id: 1, quantity: 2 }] }, services), 2, 'one design bought twice = two websites');
   assert.equal(designUnits({ transactions: [{ listing_id: 1 }, { listing_id: 2, quantity: 1 }] }, services), 2, 'two designs');
   assert.equal(designUnits({ transactions: [{ listing_id: 1 }, { listing_id: 900 }, { listing_id: 901, quantity: 3 }, { listing_id: 902 }] }, services), 1, 'setup / custom design / revision never count');
-  assert.equal(designUnits({ transactions: [{ listing_id: 900 }] }, services), 1, 'only a service line: still one website');
+  assert.equal(designUnits({ transactions: [{ listing_id: 900 }] }, services), 0, 'G951: only a service line: no design website (the shop looks)');
   assert.equal(designUnits({ transactions: [] }, services), 1);
   assert.equal(designUnits(null, services), 1);
   assert.equal(designUnits({ transactions: [{ listing_id: 1, quantity: 0 }, { listing_id: 2, quantity: -3 }, { listing_id: 3, quantity: 1.5 as never }] }, services), 3, 'odd quantities count as 1');

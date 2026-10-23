@@ -148,7 +148,8 @@ test('MailOrderVerifier: sale -> verified, cancelled -> rejected, nothing -> pen
   const order = '3456789013';
   const box = fakeBox({ [order]: [saleMail(order)], '3456789014': [saleMail('3456789014', { subject: 'Order #3456789014 refunded' })] });
   const v = new MailOrderVerifier({ mailbox: box.factory });
-  assert.deepEqual(await v.check(input(order)), { result: 'verified' });
+  // G951: the sale mail's item line names our design: one design website (a mail's count is information, source "mail")
+  assert.deepEqual(await v.check(input(order)), { result: 'verified', source: 'mail', units: 1 });
   assert.deepEqual(await v.check(input('3456789014')), { result: 'rejected', reason: 'not_paid' });
   assert.deepEqual(await v.check(input('3456789015')), { result: 'pending' }, 'no mail (yet) decides nothing');
   assert.deepEqual(await v.check(input('boom')), { result: 'unavailable' });
@@ -319,7 +320,7 @@ test('IMAP against a local Gmail-like server: All Mail, X-GM-RAW search, headers
     assert.deepEqual(await box.find('7400000099'), []);
     await box.close();
     const v = (o: string) => new MailOrderVerifier({ mailbox: () => new ImapOrderMailbox(cfg) }).check(input(o));
-    assert.deepEqual(await v('7400000031'), { result: 'verified' });
+    assert.deepEqual(await v('7400000031'), { result: 'verified', source: 'mail' }, 'no item line of ours: the lines are not known');
     assert.deepEqual(await v('7400000032'), { result: 'pending' }, 'DMARC failed: does not count');
     assert.deepEqual(await v('7400000033'), { result: 'pending' }, 'not from Etsy');
     assert.deepEqual(await v('4433221100'), { result: 'pending' }, 'a listing number in a real sale mail');

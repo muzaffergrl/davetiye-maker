@@ -39,6 +39,8 @@ export interface AdminSiteSummary {
   needsAction: boolean;
   /** Trust mode: provisional (publishable) and the trust window ran out without a verified order — the shop should look. */
   orderReview?: boolean;
+  /** G951: the order's lines (Etsy receipt / sale email) show no design for this website — services only. The shop looks. */
+  orderNoDesign?: boolean;
   /** The shop's private note (never shown to the buyer). */
   note: string | null;
   noteAt: string | null;
@@ -233,7 +235,11 @@ export function adminDashboard(list: readonly AdminSiteSummary[], now: Date = ne
       todos.push({
         kind: 'confirm',
         site: s,
-        text: s.order === 'provisional' ? `Sipariş #${s.orderRef ?? '—'} 48 saatte doğrulanamadı — Etsy'de bakın (site yayınlanabilir)` : `Sipariş #${s.orderRef ?? '—'} onay bekliyor`,
+        text: s.orderNoDesign
+          ? `Sipariş #${s.orderRef ?? '—'}: siparişte tasarım görünmüyor (yalnız hizmet) — Etsy'de bakın${s.order === 'provisional' ? ' (site yayınlanabilir)' : ''}`
+          : s.order === 'provisional'
+            ? `Sipariş #${s.orderRef ?? '—'} 48 saatte doğrulanamadı — Etsy'de bakın (site yayınlanabilir)`
+            : `Sipariş #${s.orderRef ?? '—'} onay bekliyor`,
       });
     }
   }

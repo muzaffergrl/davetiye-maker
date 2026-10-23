@@ -7,7 +7,10 @@
 //     about — so a pile of 100 unresolved old orders never starves the new ones; no write is needed to keep the order):
 //     Etsy (app settings + shop connected) and/or the shop's mailbox (G192, lib/mailbox: Etsy's signed sale / cancellation
 //     emails over IMAP) can be asked — or a verifier given by a test:
-//       verified                                          -> orderCheck verified by "etsy" (nothing else changes)
+//       verified                                          -> orderCheck verified by "etsy" (nothing else changes) — G951:
+//                                                            only when the order pays for THIS website (lib/claim/verify.ts
+//                                                            checkCoversSlot): services only -> flagged noDesign, waits;
+//                                                            a further website beyond the receipt's units -> waits (To-do)
 //       rejected (not ours / cancelled / refunded / other
 //                 email / other design)                   -> HELD: orderCheck pending + offline (lib/sites.ts holdOrder),
 //                                                            shop notice "held"
@@ -31,7 +34,7 @@ import { getDataAdapter } from '../data/index.ts';
 import type { DataAdapter, SiteRecord } from '../data/types.ts';
 import { StaleSiteError } from '../data/types.ts';
 import { etsySetup, verificationMode } from '../etsy/config.ts';
-import { markVerifiedByEtsy, RECHECK_BATCH } from '../etsy/recheck.ts';
+import { markNoDesign, markVerifiedByEtsy, RECHECK_BATCH, themeIsPrivate } from '../etsy/recheck.ts';
 import { connectedShop } from '../etsy/shop.ts';
 import { EtsyOrderVerifier } from '../etsy/verify.ts';
 import { mailboxSetup } from '../mailbox/config.ts';
@@ -39,7 +42,7 @@ import { MailOrderVerifier } from '../mailbox/verify.ts';
 import { getShopNotifier, type ShopNotifier } from '../mail/index.ts';
 import { fail, json, requestOrigin } from '../panel/http.ts';
 import { holdOrder, orderProvisional, TRUST_WINDOW_MS, trustExpired } from '../sites.ts';
-import { ChainOrderVerifier, type OrderCheckReason, type OrderVerifier } from './verify.ts';
+import { ChainOrderVerifier, checkCoversSlot, orderCoverage, type OrderCheckReason, type OrderVerifier } from './verify.ts';
 
 export { TRUST_WINDOW_MS, trustExpired } from '../sites.ts';
 
@@ -169,14 +172,25 @@ export async function sweepProvisionalOrders(adapter: DataAdapter, opts: SweepOp
     try {
       let hold: HoldReason | null = null;
       let verified = false;
+      let units: number | null = null;
       if (verifier) {
         const check = await verifier.check({ orderNumber: site.orderRef!, email: site.ownerEmail ?? '', theme: site.theme });
-        if (check.result === 'verified') verified = true;
-        else if (check.result === 'rejected') hold = check.reason;
+        if (check.result === 'verified') {
+          // G951: verified only when the order pays for THIS website: not services only; a further website of the order
+          // (orderSlot >= 2) only within the Etsy receipt's units. Otherwise it stays provisional for the shop (To-do).
+          const priv = await themeIsPrivate(site.theme);
+          const cover = orderCoverage(check, priv);
+          if (checkCoversSlot(check, site.orderSlot ?? 1, priv)) {
+            verified = true;
+            units = cover.receipt ? cover.units : null;
+          } else if (cover.noDesign) {
+            await markNoDesign(adapter, site.id);
+          }
+        } else if (check.result === 'rejected') hold = check.reason;
         else if (check.result === 'pending' && check.unpaid && expired) hold = 'not_paid_in_time';
       }
       if (verified) {
-        await markVerifiedByEtsy(adapter, site.id, now);
+        await markVerifiedByEtsy(adapter, site.id, now, { units });
         result = { ...base, result: 'verified' };
       } else if (hold) {
         await holdOrder(adapter, site.id, { by: 'etsy', note: `Etsy: ${HOLD_REASON_TEXT[hold]}` }, now);

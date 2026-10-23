@@ -32,18 +32,31 @@ import { verificationMode } from './mode.ts';
 
 export type OrderCheckReason = 'not_found' | 'email_mismatch' | 'theme_mismatch' | 'not_paid';
 
+/**
+ * What an accepted order's lines say (G152, G951), when the verifier could read them:
+ *   units   websites of READY designs the order pays for (designs × quantity; services never count). 0 = the order holds
+ *           services only (setup, extra revision, custom design): it pays for no ready design. Absent = unknown (one site).
+ *   custom  custom-design lines: each includes the website of its own private design (G151); absent = none.
+ *   source  "mail": read from Etsy's sale email (lib/mailbox) — a best reading of a text, never enough to add websites by
+ *           itself; absent: the Etsy receipt (or a verifier that read one).
+ */
+export interface OrderItemsInfo {
+  units?: number;
+  custom?: number;
+  source?: 'mail';
+}
+
 export type OrderCheck =
   /** Verification is off: only the format and the one-site-per-order rule apply. */
   | { result: 'not_checked' }
-  /** `units` (G152, Etsy only): how many websites the order pays for (designs × quantity); absent = 1. */
-  | { result: 'verified'; units?: number }
+  | ({ result: 'verified' } & OrderItemsInfo)
   /**
    * Accepted for now; the shop confirms the order by hand before the site can be published (manual mode). `unpaid`
    * (Etsy): the receipt is ours but not paid yet — otherwise Etsy could not be asked.
    */
-  | { result: 'pending'; units?: number; unpaid?: boolean }
+  | ({ result: 'pending'; unpaid?: boolean } & OrderItemsInfo)
   /** Trust mode: accepted and publishable now; checked again later (lib/claim/trust.ts). */
-  | { result: 'provisional'; units?: number }
+  | ({ result: 'provisional' } & OrderItemsInfo)
   | { result: 'rejected'; reason: OrderCheckReason }
   /** The outside service could not answer; nothing is created, the buyer may retry. */
   | { result: 'unavailable' };
@@ -74,6 +87,38 @@ export const MAX_ORDER_SITES = 10;
 export function orderUnits(check: OrderCheck): number {
   const n = check.result === 'verified' || check.result === 'pending' || check.result === 'provisional' ? check.units : undefined;
   return typeof n === 'number' && Number.isInteger(n) && n > 1 ? Math.min(n, MAX_ORDER_SITES) : 1;
+}
+
+/** G951: what one order check says about the websites of the order (pure). */
+export interface OrderCoverage {
+  /** Websites the order pays for (ready designs, + custom designs for a private theme); null = the lines were not read. */
+  units: number | null;
+  /** The number comes from the Etsy receipt (it may decide how many websites the order gets); false: unknown or a mail. */
+  receipt: boolean;
+  /** The order's lines were read and hold no design for this website (services only). */
+  noDesign: boolean;
+}
+
+/** `privateTheme`: the website is of a private custom design listed for this order (its custom-design line counts). */
+export function orderCoverage(check: OrderCheck, privateTheme = false): OrderCoverage {
+  if (check.result !== 'verified' && check.result !== 'pending' && check.result !== 'provisional') return { units: null, receipt: false, noDesign: false };
+  if (typeof check.units !== 'number' || !Number.isInteger(check.units) || check.units < 0) return { units: null, receipt: false, noDesign: false };
+  const custom = privateTheme && typeof check.custom === 'number' && check.custom > 0 ? check.custom : 0;
+  const units = Math.min(check.units + custom, MAX_ORDER_SITES);
+  return { units, receipt: check.source !== 'mail', noDesign: units === 0 };
+}
+
+/**
+ * G951: does this check confirm the website of design unit `slot` (1 = the order's first website)? The first one: unless
+ * the lines show no design. A further one (slot ≥ 2): only with the Etsy receipt's units (a sale email is a best reading
+ * of a text: the shop looks).
+ */
+export function checkCoversSlot(check: OrderCheck, slot: number, privateTheme = false): boolean {
+  if (check.result !== 'verified') return false;
+  const c = orderCoverage(check, privateTheme);
+  if (c.noDesign) return false;
+  if (slot <= 1) return true;
+  return c.receipt && c.units !== null && c.units >= slot;
 }
 
 /** Default: no outside verification. */
@@ -136,7 +181,13 @@ export class TrustOrderVerifier implements OrderVerifier {
   async check(input: OrderCheckInput): Promise<OrderCheck> {
     const r = await this.#inner.check(input);
     if (r.result === 'verified' || r.result === 'rejected' || r.result === 'provisional') return r;
-    return r.result === 'pending' && r.units ? { result: 'provisional', units: r.units } : { result: 'provisional' };
+    if (r.result !== 'pending') return { result: 'provisional' };
+    // what the receipt said about its lines stays with the answer (G951)
+    const info: OrderItemsInfo = {};
+    if (typeof r.units === 'number') info.units = r.units;
+    if (r.custom) info.custom = r.custom;
+    if (r.source) info.source = r.source;
+    return { result: 'provisional', ...info };
   }
 }
 

@@ -43,6 +43,8 @@ export function summarizeSite(site: SiteRecord, replies: number, now: Date = new
   const pending = orderPending(site);
   const provisional = orderProvisional(site);
   const review = provisional && trustExpired(site, now.getTime());
+  // G951: the order's lines show no design for this website (services only); until the shop confirms it
+  const noDesign = Boolean(site.orderCheck?.noDesign) && site.orderCheck?.status !== 'verified';
   const state: AdminSiteState = rights.archived ? 'archived' : site.status === 'published' ? 'published' : 'draft';
   const date = (site.content as unknown as { date?: unknown })?.date;
   return {
@@ -70,8 +72,9 @@ export function summarizeSite(site: SiteRecord, replies: number, now: Date = new
     guestPassword: Boolean(site.guestAccess?.enabled),
     unpublishedChanges:
       site.status === 'published' && site.publishedContent !== null && JSON.stringify(site.content) !== JSON.stringify(site.publishedContent),
-    needsAction: (pending || review) && !rights.archived,
+    needsAction: (pending || review || noDesign) && !rights.archived,
     orderReview: review,
+    orderNoDesign: noDesign,
     note: site.adminNote?.text || null,
     noteAt: site.adminNote?.at ?? null,
     place: placeOf(site),

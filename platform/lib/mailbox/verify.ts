@@ -4,7 +4,9 @@
 //
 //   mailbox not set up                      -> pending (as if nothing was found; never a 500)
 //   a signed Etsy cancellation / refund mail -> rejected not_paid
-//   a signed Etsy sale mail for this order  -> verified (one website: a mail does not tell how many designs reliably)
+//   a signed Etsy sale mail for this order  -> verified, source "mail" (G951: + `units` / `custom` when its item lines name
+//                                              our listings — units 0 = services only: no design website is confirmed;
+//                                              a mail's count never adds websites by itself, lib/claim/verify.ts)
 //   nothing (yet)                           -> pending (the mail may still be on its way; "not found" decides nothing)
 //   IMAP down / wrong password / timeout    -> unavailable
 // The rules for what counts: lib/mailbox/orders.ts.
@@ -13,7 +15,7 @@ import type { OrderCheck, OrderCheckInput, OrderVerifier } from '../claim/verify
 import { maskAddress } from '../mail/index.ts';
 import { mailboxSetup } from './config.ts';
 import { ImapOrderMailbox, mailboxErrorCode, type OrderMailbox } from './imap.ts';
-import { judgeOrderMails } from './orders.ts';
+import { judgeOrderMails, saleMailItems } from './orders.ts';
 
 /** One look-up may take this long (IMAP sign-in + search + a few mails) before /start goes on without it. */
 export const MAIL_CHECK_TIMEOUT_MS = 12_000;
@@ -52,7 +54,11 @@ export class MailOrderVerifier implements OrderVerifier {
       ]);
       const v = judgeOrderMails(mails, input.orderNumber);
       if (v.cancelled) return { result: 'rejected', reason: 'not_paid' };
-      return v.sale ? { result: 'verified' } : { result: 'pending' };
+      if (!v.sale) return { result: 'pending' };
+      const items = saleMailItems(mails, input.orderNumber);
+      return items
+        ? { result: 'verified', source: 'mail', units: items.designs, ...(items.custom ? { custom: items.custom } : {}) }
+        : { result: 'verified', source: 'mail' };
     } catch (e) {
       console.error(`[mailbox] order check unavailable: ${mailboxErrorCode(e)}`);
       await this.close(); // a broken connection is not reused

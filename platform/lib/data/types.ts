@@ -129,6 +129,13 @@ export interface OrderCheckRecord {
   note?: string;
   /** Trust mode: when the shop was told that the trust window ran out without a verified order (sent once). */
   reviewAt?: string;
+  /** G951: websites of the order the Etsy receipt pays for, kept with a verification by the receipt (orderSlot <= units). */
+  units?: number;
+  /**
+   * G951: the order's lines (Etsy receipt or sale email) hold no design for this website — services only (setup, extra
+   * revision; a custom design outside its own private design). Not decided against the buyer: the shop looks (admin To-do).
+   */
+  noDesign?: boolean;
 }
 
 /** One name of the couple as the edit-rights rule sees it (docs/16 §11.2). */

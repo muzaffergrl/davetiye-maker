@@ -42,7 +42,7 @@
 import { randomInt } from 'node:crypto';
 import { isValidTimeZone } from '../content/format.ts';
 import type { ContentRecord } from '../content/types.ts';
-import { OrderRefTakenError, SlugTakenError, type DataAdapter, type SiteRecord } from '../data/types.ts';
+import { OrderRefTakenError, SlugTakenError, type DataAdapter, type OrderCheckRecord, type SiteRecord } from '../data/types.ts';
 import { defaultInitials, defaultNameDisplay } from '../panel/model.ts';
 import { hashKey, verifyKey } from '../keys.ts';
 import { ipBucket, type RateLimiter } from '../rsvp/rate-limit.ts';
@@ -69,7 +69,8 @@ import { getShopNotifier, type ShopNotifier } from '../mail/index.ts';
 import { claimableTheme } from './themes.ts';
 import { THEME_IN_REVIEW, type ApprovalEnv } from '../themes/approval.ts';
 import { themeStartable } from '../themes/offered.ts';
-import { getOrderVerifier, orderUnits, type OrderVerifier } from './verify.ts';
+import { isPrivateTheme } from '../theme/theme.ts';
+import { getOrderVerifier, orderCoverage, orderUnits, type OrderCheck, type OrderVerifier } from './verify.ts';
 
 export interface ClaimContext {
   adapter: DataAdapter;
@@ -231,6 +232,27 @@ export async function slugAvailability(adapter: DataAdapter, input: unknown): Pr
   }
   const reason = problem ?? 'taken';
   return { value, available: false, reason, message: slugProblemMessage(reason), suggestion: await findFreeSlug(adapter, value) };
+}
+
+// ---------------------------------------------------------------------------------------------
+// The order check written with a new site
+
+/**
+ * The orderCheck a new site starts with (pure). G951: an order whose lines hold no design for this website (services
+ * only: lib/claim/verify.ts orderCoverage) is never "verified": in trust mode the site is provisional (publishable, the
+ * shop looks), otherwise pending (the shop confirms first) — with `noDesign` for the admin's To-do. A receipt's units are
+ * kept with a verification (`units`).
+ */
+export function claimOrderCheck(check: OrderCheck, verifierKind: string, at: string, privateTheme = false): OrderCheckRecord | null {
+  const cover = orderCoverage(check, privateTheme);
+  const flag = cover.noDesign ? { noDesign: true } : {};
+  if (check.result === 'verified' && !cover.noDesign) {
+    return { status: 'verified', at, by: 'etsy', ...(cover.receipt && cover.units !== null ? { units: cover.units } : {}) };
+  }
+  if (check.result === 'verified') return { status: verifierKind === 'trust' ? 'provisional' : 'pending', at, by: 'claim', ...flag };
+  if (check.result === 'pending') return { status: 'pending', at, by: 'claim', ...flag };
+  if (check.result === 'provisional') return { status: 'provisional', at, by: 'claim', ...flag };
+  return null;
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -433,14 +455,7 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
     // Manual order checks (G060-fix): the draft is made now, publishing waits for the shop (scripts/verify-order.ts).
     // Trust mode: the draft is made and publishable now; the order is checked later (lib/claim/trust.ts).
     const at = new Date(now()).toISOString();
-    const orderCheck =
-      check.result === 'pending'
-        ? { status: 'pending' as const, at, by: 'claim' as const }
-        : check.result === 'provisional'
-          ? { status: 'provisional' as const, at, by: 'claim' as const }
-          : check.result === 'verified'
-            ? { status: 'verified' as const, at, by: 'etsy' as const }
-            : null;
+    const orderCheck = claimOrderCheck(check, verifier.kind, at, isPrivateTheme(theme.manifest));
     let created: Awaited<ReturnType<typeof createSiteWithKeys>> | null = null;
     /** Units another instance took while this claim ran (the order index refused them; a listing may not show them yet). */
     const lostSlots = new Set<number>();

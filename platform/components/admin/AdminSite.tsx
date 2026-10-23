@@ -227,6 +227,12 @@ export default function AdminSite(props: {
               : 'Alıcı siteyi düzenleyebiliyor ama siz onaylayana kadar yayınlayamaz.'}
             {!trustCheck && s.orderNote ? ` Not: ${s.orderNote}` : ''}
           </p>
+          {s.orderNoDesign ? (
+            <p className={styles.hint} data-order-no-design="">
+              Etsy siparişinde (makbuz ya da satış e-postası) bu site için tasarım görünmüyor: yalnız hizmet (kurulum / ek revizyon /
+              özel tasarım) satın alınmış olabilir. Etsy&apos;de bakın; alıcı tasarımı ayrı bir siparişle aldıysa ona o sipariş numarasını yazın.
+            </p>
+          ) : null}
           <ol className={styles.steps}>
             <li>
               Etsy&apos;de siparişi bulun: <strong>#{s.orderRef ?? '—'}</strong>{' '}
