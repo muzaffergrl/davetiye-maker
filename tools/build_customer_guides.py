@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""START HERE guides for designs 01–48 (G122; 21: G137; G148; 22–32: G175; 33–48: 2026-10-22): Markdown + PDF + the real start QR, from ONE source text.
+"""START HERE guides for designs 01–49 (G122; 21: G137; G148; 22–32: G175; 33–49: 2026-10-22): Markdown + PDF + the real start QR, from ONE source text.
 
-  python3 tools/build_customer_guides.py                   # all 48 designs: build, then check
+  python3 tools/build_customer_guides.py                   # all 49 designs: build, then check
   python3 tools/build_customer_guides.py --designs 06-20   # only these ("06-20", "07,12", "01,06-08", "all")
   python3 tools/build_customer_guides.py --check           # build nothing; check what is on disk (exit 1 on a problem)
   python3 tools/build_customer_guides.py --base-url https://…   # another host for the start link (or GUIDE_BASE_URL)
@@ -678,6 +678,8 @@ def build_pdf(markdown: str, out: Path, qr_png: Path, url: str, name: str, hero:
                     f.append(KeepTogether(last + [Spacer(1, 10), _EndMark()]))
                     continue
                 f.append(Heading(head, kicker, key, toc, space_before=4 if sec.startswith(QUICK_START) else 26))
+                if sec.startswith(QUICK_START):  # room between the gold bar and the first numbered badge (2026-10-23)
+                    f.append(Spacer(1, 10))
             elif kind == "h3":
                 f.append(Paragraph(inl(b[1]), S["h3"]))
             elif kind == "num":
@@ -728,7 +730,10 @@ def build_pdf(markdown: str, out: Path, qr_png: Path, url: str, name: str, hero:
                                        Spacer(1, 10)]))
             elif kind == "p":
                 lead = sec_i < 0  # the thank-you line under the title
-                f.append((Paragraph if lead else WholeParagraph)(inl(b[1]), S["lead" if lead else "body"]))
+                para = (Paragraph if lead else WholeParagraph)(inl(b[1]), S["lead" if lead else "body"])
+                if b[1].rstrip().endswith(":"):  # "… (at the top on a computer):" stays with what it introduces
+                    para.keepWithNext = True
+                f.append(para)
         return f
 
     class _EndMark(Spacer):

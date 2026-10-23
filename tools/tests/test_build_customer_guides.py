@@ -97,8 +97,11 @@ def test_labels():
     # G131: labels from lib/audio (track names), lib/rsvp (answer types) and the guest scripts ("Play music") are found,
     # and a renamed one still fails
     for label in ("**Music & sound**", "**Evening Strings**", "**Yes / No**", "**Preview map**", "**Connect Google Sheets**",
-                  '"Play music"', '"Google Sheets: coming soon"', "Prefer us to do it?"):
+                  '"Play music"', '"Google Sheets: coming soon"'):
         assert label in md, label
+    # 2026-10-23 (owner): the setup service and extra revision stay Etsy drafts, so the guide invites to no paid service
+    # (G130's "Prefer us to do it? … as a separate Etsy purchase" is gone) and never names Canva
+    assert "Prefer us to do it?" not in md and "separate Etsy purchase" not in md and "canva" not in md.lower()
     # G148: the /my labels (components/my) and the sales site's button (marketing/Shell.tsx) are found; a renamed one fails
     for label in ("**Open or start your website**", "**Create your website**", "**Share → Use on another device**"):
         assert label in md, label

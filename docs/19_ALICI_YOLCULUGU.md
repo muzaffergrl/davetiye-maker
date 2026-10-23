@@ -1025,6 +1025,13 @@ After the wedding → Online süresi → Quick answers → Troubleshooting → H
   başlık ve "Good to know" onay kartı; 2. sayfada yalnız hızlı başlangıç (numaralı rozetler + QR kartı); "Step 1"den önce koyu
   "The full guide" şeridi ve sayfa numaralı, tıklanabilir içindekiler; PDF yer imleri; tablolar, kutular ve iletişim kartı;
   renkler `brand/tokens.json`. Metin yine yalnız Ek A (+ düzenin birkaç sabit yön levhası, `GUIDE_TEXT`). 13–14 sayfa.
+- 2026-10-23 (sahip kararı): kurulum hizmeti ve ek revizyon şimdilik Etsy taslağı, satılmıyor → Ek A'dan "Prefer us to do it? …
+  as a separate Etsy purchase" satırı çıkarıldı (G130 satırı; rehber artık ücretli hizmete davet etmiyor, "message us on Etsy"
+  satırları duruyor). "You do not need Canva, …" → "You do not need an app or an account" (alıcı PDF'inde Canva adı geçmez).
+  Düzen cilası: hızlı başlangıç başlığının altın çizgisi ile 1. rozet arasına 10 pt; ":" ile biten paragraf (ör. Step 3'ün "Use the
+  buttons … (at the top on a computer):") tanıttığı listeden ayrı sayfaya düşmez. 01–49 yeni görünümle yeniden üretildi (13–14
+  sayfa); 22–32 yeni temaların kapak görseli ve zarf açılışıyla. Not: paneldeki Help
+  (`HelpSheet.tsx`) ve satış sitesi `/pricing` (`ExtraServices.tsx`) bu satırı hâlâ gösteriyor — ayrı iş.
 
 ---
 
@@ -1190,7 +1197,7 @@ Thank you for choosing BKE Studio. This guide takes you from this PDF to a live 
 
 ## Good to know before you begin
 
-- You do not need Canva, an app or an account. Everything works in the web browser of your phone or computer.
+- You do not need an app or an account. Everything works in the web browser of your phone or computer.
 - Your Etsy order number and your email address are your way in: they open your editor on any phone or computer. There is no password.
 - You fill in your website yourself, in a simple editor. Every change saves by itself.
 - Nobody sees your website until you publish it, and you can keep changing it after you publish.
@@ -1450,8 +1457,6 @@ Your website stays online until **12 months after your wedding date**. Home → 
 In your editor, **Help & questions** at the bottom of Home answers the most common questions.
 
 Message BKE Studio on Etsy (in the conversation of your order), or write to **bkestudio01@gmail.com**. We reply within **24 hours**. Please include your order number, your website address, what you see (a screenshot helps) and your phone and browser. Never send your edit link: we never need it.
-
-Prefer us to do it? Send us your details on Etsy and we enter them for you, as a separate Etsy purchase.
 
 Your guests' replies are visible only in your private editor, not on your website. To have your website, its photos and your guests' replies deleted sooner, message us on Etsy with your order number: we delete them within 30 days. Privacy notice: [{PRIVACY_URL}]({PRIVACY_URL}).
 
