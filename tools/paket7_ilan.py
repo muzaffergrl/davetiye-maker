@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parent.parent
 TALIMAT = re.compile(r'design called "(?P<name>[^"]+)".*?Keep one consistent set across all images: (?P<set>.+?), the same '
                      r'light and the same color world \((?P<palette>[^)]+)\)', re.S)
 BASLIK = "## PAKET 7"
-# PAKET 3'ü olmayan tasarımlar (33–48, 2026-10-22): set ve renk dünyası buradan; her biri kendi DESIGN_BRIEF / "Stil ve renk"
+# PAKET 3'ü olmayan tasarımlar (33–49, 2026-10-22/23): set ve renk dünyası buradan; her biri kendi DESIGN_BRIEF / "Stil ve renk"
 # bölümünden. Biçim PAKET 3 ile aynı: "zemin, süs, süs ve süs" (ilk parça zemin).
 EK_SETLER = {
     "33": ("a fuchsia silk cloth over a carved dark wood low table, fresh marigold garlands, a saffron silk tassel, a small brass "
@@ -54,6 +54,8 @@ EK_SETLER = {
            "black centres and warm white fibre photo paper", "black and white only: noir, charcoal, graphite, silver grey and warm paper white, no red"),
     "48": ("a navy linen tablecloth, white magnolia blossoms and bay laurel sprigs, a navy grosgrain ribbon and an ivory wax seal",
            "navy, deep navy, ivory, parchment and polished gold in fresh morning seaside light"),
+    "49": ("an ivory cotton paper cloth over a pale oak table, a champagne silk ribbon, a mother-of-pearl seal with a fine gold edge, "
+           "white garden roses and a strand of pearls", "ivory, champagne, pearl white and fine gold in soft bridal daylight"),
 }
 
 SCREEN = ("Every phone, tablet and laptop is a generic modern device with thin even bezels and rounded corners, no logo, no brand "

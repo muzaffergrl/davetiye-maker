@@ -40,7 +40,8 @@ LANGUAGE = {"01": "cyrillic", "02": "latin-ext", "03": "cyrillic", "04": "latin"
             # 45 Rochester and Lustria, 48 Goudy Bookletter 1911 are latin only)
             "33": "latin-ext", "34": "latin", "35": "latin", "36": "latin-ext", "37": "latin", "38": "latin-ext",
             "39": "latin-ext", "40": "latin-ext", "41": "latin", "42": "latin-ext", "43": "latin-ext", "44": "latin-ext",
-            "45": "latin", "46": "latin-ext", "47": "latin-ext", "48": "latin"}
+            "45": "latin", "46": "latin-ext", "47": "latin-ext", "48": "latin",
+            "49": "cyrillic"}  # 49 Ivory Pearl Atelier: Cormorant Garamond + Lora
 
 
 def expect_exit(fn, *args):
@@ -71,7 +72,7 @@ def test_template():
 
 
 def test_values():
-    assert [no for no, _, _ in eu.DESIGNS] == [f"{i:02d}" for i in range(1, 49)]
+    assert [no for no, _, _ in eu.DESIGNS] == [f"{i:02d}" for i in range(1, 50)]
     for no, folder, theme in eu.DESIGNS:
         v = b.values(theme)
         assert v["START_URL"] == f"https://bkestudio.com/start?theme={theme}", v

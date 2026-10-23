@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Upload-ready Etsy listing data for designs 01–48 and the K42 services, built from each listing_v3.md (2026-10-15; 06–20: G123; services: G130; 22–32: G175).
+"""Upload-ready Etsy listing data for designs 01–49 and the K42 services, built from each listing_v3.md (2026-10-15; 06–20: G123; services: G130; 22–32: G175).
 
   python3 tools/etsy_upload.py                      # writes collections/<NN_*>/package/listing/etsy_upload.json, prints a summary
   python3 tools/etsy_upload.py --designs 06-20      # only these designs ("06-20", "07,12", "all")
@@ -57,7 +57,6 @@ from listing_kit import listing_fields, tag_problems, title_problems  # noqa: E4
 
 REPO = TOOLS.parent
 DESIGNS = [
-    ("49", "49_Ivory_Pearl_Atelier", "ivory-pearl-atelier"),
     ("01", "01_Olive_Ivory", "olive-ivory"),
     ("02", "02_Dusty_Blue", "dusty-blue-champagne"),
     ("03", "03_Blush_Garden_Rose", "blush-garden-rose"),
@@ -108,6 +107,7 @@ DESIGNS = [
     ("46", "46_Bordeaux_Silk_Bow", "bordeaux-silk-bow"),
     ("47", "47_Monochrome_Darkroom", "monochrome-darkroom"),
     ("48", "48_Navy_Ivory_Crest", "navy-ivory-crest"),
+    ("49", "49_Ivory_Pearl_Atelier", "ivory-pearl-atelier"),  # Ivory Pearl Atelier (ff82ba13), live
 ]
 PRICE_TRY = 1190
 QUANTITY = 999  # Etsy's maximum; the user wants no stock limit (2026-10-16)

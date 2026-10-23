@@ -42,7 +42,7 @@ COMING: set[str] = {"nocturne-lake-estate", "velvet-jewel-box", "grand-theatre-p
 
 def test_design_table():
     nos = [no for no, _, _ in eu.DESIGNS]
-    assert nos == [f"{i:02d}" for i in range(1, 49)], nos
+    assert nos == [f"{i:02d}" for i in range(1, 50)], nos
     copy = (REPO / "platform" / "lib" / "marketing" / "designs.ts").read_text(encoding="utf-8")
     config = (REPO / "platform" / "lib" / "marketing" / "config.ts").read_text(encoding="utf-8")
     live = set(re.findall(r"id: '([a-z0-9-]+)',\s*\n\s*name: '[^']+',\s*\n\s*status: 'live'", config))
@@ -92,8 +92,8 @@ def test_select():
     assert [d[0] for d in eu.select("06-20")] == [f"{i:02d}" for i in range(6, 21)]
     assert [d[0] for d in eu.select("12,7")] == ["07", "12"]
     assert [d[0] for d in eu.select("01,06-08")] == ["01", "06", "07", "08"]
-    assert len(eu.select("all")) == 48
-    for bad in ("49", "6-x", "00", "01-50"):
+    assert len(eu.select("all")) == 49
+    for bad in ("50", "6-x", "00", "01-51"):
         try:
             eu.select(bad)
         except SystemExit:
@@ -181,7 +181,7 @@ def test_services():
 
 def test_check_exit():
     assert eu.main(["--check"]) == 0
-    # --strict counts the files Etsy needs of every listing that "all" builds: the 48 designs and (G130) the services
+    # --strict counts the files Etsy needs of every listing that "all" builds: the 49 designs and (G130) the services
     files = ("listing images", "listing video", "digital file")
     missing = {no: any(b.startswith(files) for b in eu.build(no, folder, theme)[0]["blockers"])
                for no, folder, theme in eu.DESIGNS}
