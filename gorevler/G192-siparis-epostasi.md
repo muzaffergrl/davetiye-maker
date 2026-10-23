@@ -31,7 +31,8 @@ Kullanıcı talebi (2026-10-22): Etsy uygulaması onaylanana kadar sipariş doğ
 ### Yapılmadı / açık
 - Gerçek Etsy satış e-postası görülmedi (bağlı Gmail'de Etsy e-postası yok; henüz satış yok). Biçim tahmini; ilk satışta kontrol.
 - Canlıda açılması için `ORDER_MAIL_USER` + `ORDER_MAIL_PASS` (ya da Gmail SMTP ayarları) Vercel'e girilmeli.
-- Dükkânın Etsy bildirimlerinin hangi Gmail'e gittiği bilinmiyor (docs/15'te `bkestudio.help@gmail.com` geçiyor).
+- Dükkânın Etsy bildirimleri `bkestudio01@gmail.com`'a geliyor (kullanıcı, 2026-10-22). Vercel'de SMTP_* (ya da ORDER_MAIL_*) bu
+  adresle girilecek; uygulama şifresini kullanıcı Google hesabından alır.
 
 ## Günlük
 - 2026-10-22 alindi + inceleme: claude-session_015RTF9kCAoVGh7PDNq8XYeP (kullanıcı talebi)
