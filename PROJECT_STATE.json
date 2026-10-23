@@ -5,7 +5,7 @@
   "product_language": "en",
   "delivery_platform": "own website platform + edit panel (K24); Canva delivery dropped",
   "sales_channel": "Etsy",
-  "last_updated": "2026-10-20",
+  "last_updated": "2026-10-23",
   "status_levels": [
     "concept",
     "editable_draft",
@@ -16,15 +16,19 @@
     "sale_ready"
   ],
   "undecided": [
-    "etsy_listing_upload (K41: after manual tests)",
+    "data_controller_identity: legal name + postal address (K58; docs/39 §4, docs/28) — /terms and /kvkk say 'given on request by email' until set; launchProblems lists both",
+    "seller_legal_tax_status (K58)",
+    "governing_law (K58; /terms has no governing-law clause, only 'your country's mandatory consumer protections stay')",
+    "gemini: paid tier decision + GEMINI_API_KEY (K58)",
+    "old Vercel project davetiye-platform (team daimonflora): pause or keep (K58)",
+    "etsy_listing_renewal: automatic (proposed) or manual — the one open blocker in every live etsy_upload.json",
+    "first-wave publish: the owner's explicit 'yayınla', listing by listing, 01–20 only (K55; docs/38)",
+    "realDevices copy: the site says 'Tested on iPhone and Android phones' (verified.realDevices true, K52) — confirm both kinds of phone were among the owner's test, else set it back to false",
+    "blob backup: where the backups live and whether a weekly run is scheduled (docs/10 §2c TODO, G955)",
+    "21 Crimson Rose Atelier redesign (branch claude/kind-johnson-6eetik, another session): merge approval; it touches lib/audio/catalog.ts and public/audio like G967",
+    "Black Friday (Nov 27) discount: yes/no and rate (social media session asked)",
     "subscription_budget",
-    "revision_scope",
-    "email_provider: SMTP code ready (G147); account / app password not set",
-    "order_check_time / extension / deletion policies",
-    "next_product_after_collection_01",
-    "launch_date",
-    "privacy_policy_controller_identity: legal name + postal address for docs/28_ETSY_GIZLILIK_METNI.md (text ready)",
-    "etsy_listing_renewal: automatic (proposed) or manual — the one open item in every etsy_upload.json"
+    "launch_date"
   ],
   "collections": [
     {
@@ -126,7 +130,7 @@
         "guest_pdf_export": "not_done",
         "start_here_pdf": "done for platform (G091)",
         "canva_free_buyer_test": "not_done",
-        "etsy_listing": "prepared, not uploaded (K41)"
+        "etsy_listing": "Etsy draft (see listing_package)"
       },
       "phase1_design_no": 1,
       "phase1_note": "Aşama 1'de yeni hatta (G101/G201/G301) yeniden kurulur; mevcut Canva dosyaları silinmez.",
@@ -134,10 +138,10 @@
       "listing_package": {
         "listing": "collections/01_Olive_Ivory/package/listing/listing_v3.md",
         "etsy_upload": "collections/01_Olive_Ivory/package/listing/etsy_upload.json (tools/etsy_upload.py)",
-        "images": "collections/01_Olive_Ivory/package/listing/images_editorial/ (v4, 8 × 2000 px)",
-        "start_here": "collections/01_Olive_Ivory/package/customer/START_HERE.md + START_HERE.pdf (G091)",
-        "uploaded_to_etsy": false,
-        "note": "K41: Etsy'ye testlerden sonra yüklenir; v4 görseller ve etsy_upload entegratör dalında, main'de değil"
+        "images": "collections/01_Olive_Ivory/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/01_Olive_Ivory/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)",
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf (docs/20 §7.13); FIRST WAVE (K55): publish on the owner's 'yayınla' (docs/38); new-look PDF to upload"
       },
       "deliverables_note": "Canva/video dönemi alanları (K22/K24 ile askıda); güncel paket: listing_package + platform.themes",
       "sales_site": "live"
@@ -236,10 +240,10 @@
       "listing_package": {
         "listing": "collections/02_Dusty_Blue/package/listing/listing_v3.md",
         "etsy_upload": "collections/02_Dusty_Blue/package/listing/etsy_upload.json (tools/etsy_upload.py)",
-        "images": "collections/02_Dusty_Blue/package/listing/images_editorial/ (v4, 8 × 2000 px)",
-        "start_here": "collections/02_Dusty_Blue/package/customer/START_HERE.md + START_HERE.pdf (G091)",
-        "uploaded_to_etsy": false,
-        "note": "K41: Etsy'ye testlerden sonra yüklenir; v4 görseller ve etsy_upload entegratör dalında, main'de değil"
+        "images": "collections/02_Dusty_Blue/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/02_Dusty_Blue/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)",
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf (docs/20 §7.13); FIRST WAVE (K55): publish on the owner's 'yayınla' (docs/38); new-look PDF to upload"
       },
       "deliverables_note": "Canva/video dönemi alanları (K22/K24 ile askıda); güncel paket: listing_package + platform.themes",
       "sales_site": "live"
@@ -263,10 +267,10 @@
       "listing_package": {
         "listing": "collections/03_Blush_Garden_Rose/package/listing/listing_v3.md",
         "etsy_upload": "collections/03_Blush_Garden_Rose/package/listing/etsy_upload.json (tools/etsy_upload.py)",
-        "images": "collections/03_Blush_Garden_Rose/package/listing/images_editorial/ (v4, 8 × 2000 px)",
-        "start_here": "collections/03_Blush_Garden_Rose/package/customer/START_HERE.md + START_HERE.pdf (G091)",
-        "uploaded_to_etsy": false,
-        "note": "K41: Etsy'ye testlerden sonra yüklenir; v4 görseller ve etsy_upload entegratör dalında, main'de değil"
+        "images": "collections/03_Blush_Garden_Rose/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/03_Blush_Garden_Rose/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)",
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf (docs/20 §7.13); FIRST WAVE (K55): publish on the owner's 'yayınla' (docs/38); new-look PDF to upload"
       },
       "sales_site": "live"
     },
@@ -288,10 +292,10 @@
       "listing_package": {
         "listing": "collections/04_Vintage_Airmail/package/listing/listing_v3.md",
         "etsy_upload": "collections/04_Vintage_Airmail/package/listing/etsy_upload.json (tools/etsy_upload.py)",
-        "images": "collections/04_Vintage_Airmail/package/listing/images_editorial/ (v4, 8 × 2000 px)",
-        "start_here": "collections/04_Vintage_Airmail/package/customer/START_HERE.md + START_HERE.pdf (G091)",
-        "uploaded_to_etsy": false,
-        "note": "K41: Etsy'ye testlerden sonra yüklenir; v4 görseller ve etsy_upload entegratör dalında, main'de değil"
+        "images": "collections/04_Vintage_Airmail/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/04_Vintage_Airmail/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)",
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf (docs/20 §7.13); FIRST WAVE (K55): publish on the owner's 'yayınla' (docs/38); new-look PDF to upload"
       },
       "sales_site": "live"
     },
@@ -313,10 +317,10 @@
       "listing_package": {
         "listing": "collections/05_Lemon_Mediterranean/package/listing/listing_v3.md",
         "etsy_upload": "collections/05_Lemon_Mediterranean/package/listing/etsy_upload.json (tools/etsy_upload.py)",
-        "images": "collections/05_Lemon_Mediterranean/package/listing/images_editorial/ (v4, 8 × 2000 px)",
-        "start_here": "collections/05_Lemon_Mediterranean/package/customer/START_HERE.md + START_HERE.pdf (G091)",
-        "uploaded_to_etsy": false,
-        "note": "K41: Etsy'ye testlerden sonra yüklenir; v4 görseller ve etsy_upload entegratör dalında, main'de değil"
+        "images": "collections/05_Lemon_Mediterranean/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/05_Lemon_Mediterranean/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)",
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf (docs/20 §7.13); FIRST WAVE (K55): publish on the owner's 'yayınla' (docs/38); new-look PDF to upload"
       },
       "sales_site": "live"
     },
@@ -342,7 +346,12 @@
           "G123 (listing text)",
           "G124 (listing images)"
         ],
-        "uploaded_to_etsy": false
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf (docs/20 §7.13); FIRST WAVE (K55): publish on the owner's 'yayınla' (docs/38); new-look PDF to upload",
+        "listing": "collections/06_Art_Deco_Noir/package/listing/listing_v3.md",
+        "etsy_upload": "collections/06_Art_Deco_Noir/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/06_Art_Deco_Noir/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/06_Art_Deco_Noir/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)"
       },
       "sales_site": "live"
     },
@@ -368,7 +377,12 @@
           "G123 (listing text)",
           "G124 (listing images)"
         ],
-        "uploaded_to_etsy": false
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf (docs/20 §7.13); FIRST WAVE (K55): publish on the owner's 'yayınla' (docs/38); new-look PDF to upload",
+        "listing": "collections/07_Burgundy_Velvet/package/listing/listing_v3.md",
+        "etsy_upload": "collections/07_Burgundy_Velvet/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/07_Burgundy_Velvet/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/07_Burgundy_Velvet/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)"
       },
       "sales_site": "live"
     },
@@ -394,7 +408,12 @@
           "G123 (listing text)",
           "G124 (listing images)"
         ],
-        "uploaded_to_etsy": false
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf (docs/20 §7.13); FIRST WAVE (K55): publish on the owner's 'yayınla' (docs/38); new-look PDF to upload",
+        "listing": "collections/08_Winter_Evergreen/package/listing/listing_v3.md",
+        "etsy_upload": "collections/08_Winter_Evergreen/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/08_Winter_Evergreen/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/08_Winter_Evergreen/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)"
       },
       "sales_site": "live"
     },
@@ -420,7 +439,12 @@
           "G123 (listing text)",
           "G124 (listing images)"
         ],
-        "uploaded_to_etsy": false
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf (docs/20 §7.13); FIRST WAVE (K55): publish on the owner's 'yayınla' (docs/38); new-look PDF to upload",
+        "listing": "collections/09_Lavender_Provence/package/listing/listing_v3.md",
+        "etsy_upload": "collections/09_Lavender_Provence/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/09_Lavender_Provence/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/09_Lavender_Provence/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)"
       },
       "sales_site": "live"
     },
@@ -446,7 +470,12 @@
           "G123 (listing text)",
           "G124 (listing images)"
         ],
-        "uploaded_to_etsy": false
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf (docs/20 §7.13); FIRST WAVE (K55): publish on the owner's 'yayınla' (docs/38); new-look PDF to upload",
+        "listing": "collections/10_Tuscan_Vineyard/package/listing/listing_v3.md",
+        "etsy_upload": "collections/10_Tuscan_Vineyard/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/10_Tuscan_Vineyard/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/10_Tuscan_Vineyard/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)"
       },
       "sales_site": "live"
     },
@@ -472,7 +501,12 @@
           "G123 (listing text)",
           "G124 (listing images)"
         ],
-        "uploaded_to_etsy": false
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf (docs/20 §7.13); FIRST WAVE (K55): publish on the owner's 'yayınla' (docs/38); new-look PDF to upload",
+        "listing": "collections/11_Boho_Pampas/package/listing/listing_v3.md",
+        "etsy_upload": "collections/11_Boho_Pampas/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/11_Boho_Pampas/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/11_Boho_Pampas/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)"
       },
       "sales_site": "live"
     },
@@ -498,7 +532,12 @@
           "G123 (listing text)",
           "G124 (listing images)"
         ],
-        "uploaded_to_etsy": false
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf (docs/20 §7.13); FIRST WAVE (K55): publish on the owner's 'yayınla' (docs/38); new-look PDF to upload",
+        "listing": "collections/12_Tropical_Destination/package/listing/listing_v3.md",
+        "etsy_upload": "collections/12_Tropical_Destination/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/12_Tropical_Destination/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/12_Tropical_Destination/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)"
       },
       "sales_site": "live"
     },
@@ -524,7 +563,12 @@
           "G123 (listing text)",
           "G124 (listing images)"
         ],
-        "uploaded_to_etsy": false
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf (docs/20 §7.13); FIRST WAVE (K55): publish on the owner's 'yayınla' (docs/38); new-look PDF to upload",
+        "listing": "collections/13_Enchanted_Forest/package/listing/listing_v3.md",
+        "etsy_upload": "collections/13_Enchanted_Forest/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/13_Enchanted_Forest/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/13_Enchanted_Forest/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)"
       },
       "sales_site": "live"
     },
@@ -550,7 +594,12 @@
           "G123 (listing text)",
           "G124 (listing images)"
         ],
-        "uploaded_to_etsy": false
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf (docs/20 §7.13); FIRST WAVE (K55): publish on the owner's 'yayınla' (docs/38); new-look PDF to upload",
+        "listing": "collections/14_Ivory_Lace_Pearl/package/listing/listing_v3.md",
+        "etsy_upload": "collections/14_Ivory_Lace_Pearl/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/14_Ivory_Lace_Pearl/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/14_Ivory_Lace_Pearl/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)"
       },
       "sales_site": "live"
     },
@@ -576,7 +625,12 @@
           "G123 (listing text)",
           "G124 (listing images)"
         ],
-        "uploaded_to_etsy": false
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf (docs/20 §7.13); FIRST WAVE (K55): publish on the owner's 'yayınla' (docs/38); new-look PDF to upload",
+        "listing": "collections/15_Cherry_Blossom/package/listing/listing_v3.md",
+        "etsy_upload": "collections/15_Cherry_Blossom/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/15_Cherry_Blossom/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/15_Cherry_Blossom/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)"
       },
       "sales_site": "live"
     },
@@ -602,7 +656,12 @@
           "G123 (listing text)",
           "G124 (listing images)"
         ],
-        "uploaded_to_etsy": false
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf (docs/20 §7.13); FIRST WAVE (K55): publish on the owner's 'yayınla' (docs/38); new-look PDF to upload",
+        "listing": "collections/16_Sunflower_Rustic/package/listing/listing_v3.md",
+        "etsy_upload": "collections/16_Sunflower_Rustic/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/16_Sunflower_Rustic/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/16_Sunflower_Rustic/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)"
       },
       "sales_site": "live"
     },
@@ -628,7 +687,12 @@
           "G123 (listing text)",
           "G124 (listing images)"
         ],
-        "uploaded_to_etsy": false
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf (docs/20 §7.13); FIRST WAVE (K55): publish on the owner's 'yayınla' (docs/38); new-look PDF to upload",
+        "listing": "collections/17_Emerald_Gold_Estate/package/listing/listing_v3.md",
+        "etsy_upload": "collections/17_Emerald_Gold_Estate/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/17_Emerald_Gold_Estate/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/17_Emerald_Gold_Estate/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)"
       },
       "sales_site": "live"
     },
@@ -654,7 +718,12 @@
           "G123 (listing text)",
           "G124 (listing images)"
         ],
-        "uploaded_to_etsy": false
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf (docs/20 §7.13); FIRST WAVE (K55): publish on the owner's 'yayınla' (docs/38); new-look PDF to upload",
+        "listing": "collections/18_Wildflower_Vellum/package/listing/listing_v3.md",
+        "etsy_upload": "collections/18_Wildflower_Vellum/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/18_Wildflower_Vellum/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/18_Wildflower_Vellum/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)"
       },
       "sales_site": "live"
     },
@@ -680,7 +749,12 @@
           "G123 (listing text)",
           "G124 (listing images)"
         ],
-        "uploaded_to_etsy": false
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf (docs/20 §7.13); FIRST WAVE (K55): publish on the owner's 'yayınla' (docs/38); new-look PDF to upload",
+        "listing": "collections/19_Midnight_Garden/package/listing/listing_v3.md",
+        "etsy_upload": "collections/19_Midnight_Garden/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/19_Midnight_Garden/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/19_Midnight_Garden/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)"
       },
       "sales_site": "live"
     },
@@ -706,7 +780,12 @@
           "G123 (listing text)",
           "G124 (listing images)"
         ],
-        "uploaded_to_etsy": false
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf (docs/20 §7.13); FIRST WAVE (K55): publish on the owner's 'yayınla' (docs/38); new-look PDF to upload",
+        "listing": "collections/20_Coastal_Seaside/package/listing/listing_v3.md",
+        "etsy_upload": "collections/20_Coastal_Seaside/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/20_Coastal_Seaside/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/20_Coastal_Seaside/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)"
       },
       "sales_site": "live"
     },
@@ -720,11 +799,15 @@
       "design_brief": "collections/21_Crimson_Rose_Atelier/DESIGN_BRIEF.md",
       "canva_designs": [],
       "theme": "crimson-rose-atelier",
-      "sales_site": "live",
+      "sales_site": "preview",
       "listing_package": {
         "status": "prepared",
-        "uploaded_to_etsy": false,
-        "notes": "G137/G148"
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf; stays a draft (K55, not in the first wave)",
+        "listing": "collections/21_Crimson_Rose_Atelier/package/listing/listing_v3.md",
+        "etsy_upload": "collections/21_Crimson_Rose_Atelier/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/21_Crimson_Rose_Atelier/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/21_Crimson_Rose_Atelier/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)"
       }
     },
     {
@@ -740,8 +823,8 @@
       "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
-        "uploaded_to_etsy": false,
-        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft; images/video show the OLD design — re-shoot from the new theme (K54, docs/38 step 2); stays a draft"
       }
     },
     {
@@ -757,8 +840,8 @@
       "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
-        "uploaded_to_etsy": false,
-        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft; images/video show the OLD design — re-shoot from the new theme (K54, docs/38 step 2); stays a draft"
       }
     },
     {
@@ -774,8 +857,8 @@
       "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
-        "uploaded_to_etsy": false,
-        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft; images/video show the OLD design — re-shoot from the new theme (K54, docs/38 step 2); stays a draft"
       }
     },
     {
@@ -791,8 +874,8 @@
       "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
-        "uploaded_to_etsy": false,
-        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft; images/video show the OLD design — re-shoot from the new theme (K54, docs/38 step 2); stays a draft"
       }
     },
     {
@@ -808,8 +891,8 @@
       "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
-        "uploaded_to_etsy": false,
-        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft; images/video show the OLD design — re-shoot from the new theme (K54, docs/38 step 2); stays a draft"
       }
     },
     {
@@ -825,8 +908,8 @@
       "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
-        "uploaded_to_etsy": false,
-        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft; images/video show the OLD design — re-shoot from the new theme (K54, docs/38 step 2); stays a draft"
       }
     },
     {
@@ -842,8 +925,8 @@
       "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
-        "uploaded_to_etsy": false,
-        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft; images/video show the OLD design — re-shoot from the new theme (K54, docs/38 step 2); stays a draft"
       }
     },
     {
@@ -859,8 +942,8 @@
       "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
-        "uploaded_to_etsy": false,
-        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft; images/video show the OLD design — re-shoot from the new theme (K54, docs/38 step 2); stays a draft"
       }
     },
     {
@@ -876,8 +959,8 @@
       "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
-        "uploaded_to_etsy": false,
-        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft; images/video show the OLD design — re-shoot from the new theme (K54, docs/38 step 2); stays a draft"
       }
     },
     {
@@ -893,8 +976,8 @@
       "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
-        "uploaded_to_etsy": false,
-        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft; images/video show the OLD design — re-shoot from the new theme (K54, docs/38 step 2); stays a draft"
       }
     },
     {
@@ -910,8 +993,8 @@
       "sales_site": "preview",
       "listing_package": {
         "status": "in_progress",
-        "uploaded_to_etsy": false,
-        "notes": "START HERE + etsy_upload: G175; listing images/video after GPT mockups"
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft; images/video show the OLD design — re-shoot from the new theme (K54, docs/38 step 2); stays a draft"
       }
     },
     {
@@ -927,8 +1010,8 @@
       "sales_site": "coming",
       "listing_package": {
         "status": "draft",
-        "uploaded_to_etsy": false,
-        "notes": "3rd wave (docs/24, K23 envelope first page); listing_v3.md draft; START HERE + etsy_upload + listing images/video after GPT parts"
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 images + video + START_HERE.pdf; stays a draft (coming)"
       }
     },
     {
@@ -944,8 +1027,8 @@
       "sales_site": "coming",
       "listing_package": {
         "status": "draft",
-        "uploaded_to_etsy": false,
-        "notes": "3rd wave (docs/24, K23 envelope first page); listing_v3.md draft; START HERE + etsy_upload + listing images/video after GPT parts"
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 images + video + START_HERE.pdf; stays a draft (coming)"
       }
     },
     {
@@ -961,8 +1044,8 @@
       "sales_site": "coming",
       "listing_package": {
         "status": "draft",
-        "uploaded_to_etsy": false,
-        "notes": "3rd wave (docs/24, K23 envelope first page); listing_v3.md draft; START HERE + etsy_upload + listing images/video after GPT parts"
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 images + video + START_HERE.pdf; stays a draft (coming)"
       }
     },
     {
@@ -978,8 +1061,8 @@
       "sales_site": "coming",
       "listing_package": {
         "status": "draft",
-        "uploaded_to_etsy": false,
-        "notes": "3rd wave (docs/24, K23 envelope first page); listing_v3.md draft; START HERE + etsy_upload + listing images/video after GPT parts"
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 images + video + START_HERE.pdf; stays a draft (coming)"
       }
     },
     {
@@ -995,8 +1078,8 @@
       "sales_site": "coming",
       "listing_package": {
         "status": "draft",
-        "uploaded_to_etsy": false,
-        "notes": "3rd wave (docs/24, K23 envelope first page); listing_v3.md draft; START HERE + etsy_upload + listing images/video after GPT parts"
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 images + video + START_HERE.pdf; stays a draft (coming)"
       }
     },
     {
@@ -1012,8 +1095,177 @@
       "sales_site": "coming",
       "listing_package": {
         "status": "draft",
-        "uploaded_to_etsy": false,
-        "notes": "3rd wave (docs/24, K23 envelope first page); listing_v3.md draft; START HERE + etsy_upload + listing images/video after GPT parts"
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 images + video + START_HERE.pdf; stays a draft (coming)"
+      }
+    },
+    {
+      "id": "39_Silver_Photo_Booth",
+      "working_name": "Silver Photo Booth",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 39,
+      "content_record": "collections/39_Silver_Photo_Booth/content.demo.json",
+      "design_brief": "collections/39_Silver_Photo_Booth/DESIGN_BRIEF.md",
+      "theme": "silver-photo-booth",
+      "sales_site": "coming",
+      "listing_package": {
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 images + video + START_HERE.pdf; stays a draft (coming)"
+      }
+    },
+    {
+      "id": "40_Swan_Chantilly_Lace",
+      "working_name": "Swan Chantilly Lace",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 40,
+      "content_record": "collections/40_Swan_Chantilly_Lace/content.demo.json",
+      "design_brief": "collections/40_Swan_Chantilly_Lace/DESIGN_BRIEF.md",
+      "theme": "swan-chantilly-lace",
+      "sales_site": "coming",
+      "listing_package": {
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 images + video + START_HERE.pdf; stays a draft (coming)"
+      }
+    },
+    {
+      "id": "41_Painted_Lily_Pond",
+      "working_name": "Painted Lily Pond",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 41,
+      "content_record": "collections/41_Painted_Lily_Pond/content.demo.json",
+      "design_brief": "collections/41_Painted_Lily_Pond/DESIGN_BRIEF.md",
+      "theme": "painted-lily-pond",
+      "sales_site": "coming",
+      "listing_package": {
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 images + video + START_HERE.pdf; stays a draft (coming)"
+      }
+    },
+    {
+      "id": "42_Espresso_Pastoral",
+      "working_name": "Espresso Pastoral",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 42,
+      "content_record": "collections/42_Espresso_Pastoral/content.demo.json",
+      "design_brief": "collections/42_Espresso_Pastoral/DESIGN_BRIEF.md",
+      "theme": "espresso-pastoral",
+      "sales_site": "coming",
+      "listing_package": {
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 images + video + START_HERE.pdf; stays a draft (coming)"
+      }
+    },
+    {
+      "id": "43_Chartreuse_Garden_Party",
+      "working_name": "Chartreuse Garden Party",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 43,
+      "content_record": "collections/43_Chartreuse_Garden_Party/content.demo.json",
+      "design_brief": "collections/43_Chartreuse_Garden_Party/DESIGN_BRIEF.md",
+      "theme": "chartreuse-garden-party",
+      "sales_site": "coming",
+      "listing_package": {
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 images + video + START_HERE.pdf; stays a draft (coming)"
+      }
+    },
+    {
+      "id": "44_Blue_Toile_Pavilion",
+      "working_name": "Blue Toile Pavilion",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 44,
+      "content_record": "collections/44_Blue_Toile_Pavilion/content.demo.json",
+      "design_brief": "collections/44_Blue_Toile_Pavilion/DESIGN_BRIEF.md",
+      "theme": "blue-toile-pavilion",
+      "sales_site": "coming",
+      "listing_package": {
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 images + video + START_HERE.pdf; stays a draft (coming)"
+      }
+    },
+    {
+      "id": "45_Suede_Ranch_Lace",
+      "working_name": "Suede Ranch Lace",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 45,
+      "content_record": "collections/45_Suede_Ranch_Lace/content.demo.json",
+      "design_brief": "collections/45_Suede_Ranch_Lace/DESIGN_BRIEF.md",
+      "theme": "suede-ranch-lace",
+      "sales_site": "coming",
+      "listing_package": {
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 images + video + START_HERE.pdf; stays a draft (coming)"
+      }
+    },
+    {
+      "id": "46_Bordeaux_Silk_Bow",
+      "working_name": "Bordeaux Silk Bow",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 46,
+      "content_record": "collections/46_Bordeaux_Silk_Bow/content.demo.json",
+      "design_brief": "collections/46_Bordeaux_Silk_Bow/DESIGN_BRIEF.md",
+      "theme": "bordeaux-silk-bow",
+      "sales_site": "coming",
+      "listing_package": {
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 images + video + START_HERE.pdf; stays a draft (coming)"
+      }
+    },
+    {
+      "id": "47_Monochrome_Darkroom",
+      "working_name": "Monochrome Darkroom",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 47,
+      "content_record": "collections/47_Monochrome_Darkroom/content.demo.json",
+      "design_brief": "collections/47_Monochrome_Darkroom/DESIGN_BRIEF.md",
+      "theme": "monochrome-darkroom",
+      "sales_site": "coming",
+      "listing_package": {
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 images + video + START_HERE.pdf; stays a draft (coming)"
+      }
+    },
+    {
+      "id": "48_Navy_Ivory_Crest",
+      "working_name": "Navy Ivory Crest",
+      "is_brand_decision": false,
+      "status": "editable_draft",
+      "phase1_design_no": 48,
+      "content_record": "collections/48_Navy_Ivory_Crest/content.demo.json",
+      "design_brief": "collections/48_Navy_Ivory_Crest/DESIGN_BRIEF.md",
+      "theme": "navy-ivory-crest",
+      "sales_site": "coming",
+      "listing_package": {
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 images + video + START_HERE.pdf; stays a draft (coming)"
+      }
+    },
+    {
+      "id": "49_Ivory_Pearl_Atelier",
+      "working_name": "Ivory Pearl Atelier",
+      "is_brand_decision": false,
+      "status": "functional_pilot",
+      "phase1_design_no": 49,
+      "content_record": "collections/49_Ivory_Pearl_Atelier/content.demo.json",
+      "design_brief": "collections/49_Ivory_Pearl_Atelier/DESIGN_BRIEF.md",
+      "theme": "ivory-pearl-atelier",
+      "sales_site": "preview",
+      "listing_package": {
+        "uploaded_to_etsy": "draft",
+        "etsy": "draft with 19 v4 images + video + START_HERE.pdf; stays a draft (K55, not in the first wave)",
+        "listing": "collections/49_Ivory_Pearl_Atelier/package/listing/listing_v3.md",
+        "etsy_upload": "collections/49_Ivory_Pearl_Atelier/package/listing/etsy_upload.json (tools/etsy_upload.py)",
+        "images": "collections/49_Ivory_Pearl_Atelier/package/listing/images_v4/ (19) + video_v4_4x5.mp4",
+        "start_here": "collections/49_Ivory_Pearl_Atelier/package/customer/START_HERE.md + START_HERE.pdf (new look, 3c75ce9f4)"
       }
     }
   ],
@@ -1022,7 +1274,8 @@
     "phase1": "20 farklı tasarım (docs/09_TASARIM_KATALOGU.md)",
     "phase2": "5 palettes per design: 01–21 built by recolor (G153, G156–G158; status coming), 22–32 in G177; Etsy: one listing per design + palette variation (docs/25 §5). Old GP2–GP4 / G070–G074 Canva-era tasks cancelled 2026-10-17",
     "doc": "docs/06_FABRIKA_PLANI.md",
-    "phase3_new_designs": "22–32 (docs/24): themes built before GPT parts, status coming; GPT list docs/26"
+    "phase3_new_designs": "22–32: redesigned (K54, G422–G432, branch modest-brown) and merged 2026-10-23 — 'preview', Etsy drafts still show the OLD media; 33–48: themes built, 'coming'; 49: built, 'preview' (not in the first wave); GPT list docs/26 (29 images missing)",
+    "first_wave": "K55 (2026-10-23): only 01–20 are sold first; 21 and 49 'preview' (catalogue 'Coming soon on Etsy'), 22–32 preview, 33–48 coming; every other Etsy listing stays a draft"
   },
   "test_designs_not_for_sale": [
     {
@@ -1048,292 +1301,507 @@
   "canva_account_plan": "Pro (kullanıcı beyanı 2026-10-09)",
   "platform": {
     "doc": "docs/10_SITE_PLATFORMU.md",
-    "code": "platform/ (Next.js 16)",
+    "code": "platform/ (Next.js 16.4.3 since 2026-10-23, a9a08eeb9; CI runs npm audit --omit=dev --audit-level=high)",
     "hosting": {
       "provider": "vercel",
-      "team": "daimonflora-gmailcoms-projects",
-      "project": "davetiye-platform",
-      "project_id": "prj_WRKdVHmsou7QU2B5UhgO8uksAobj",
-      "region": "iad1",
-      "production_url": "https://davetiye-platform-five.vercel.app",
-      "git_integration": false,
-      "deployed_commit": "477589f (2026-10-17; platform tree 387fcfbd77ae; G139 PDF downloads, G144 languages, G145 panel audit) — dpl_BdTLgKpin8Pfse8cEzzDdapYxaS3; last deploy recorded in docs/10 §2c. Later deploy commands were handed to the user's local session (e62dc79, then main 84e108e); none is confirmed run until docs/10 §2c gets its line",
-      "undeployed_branch": "main 84e108e (PR #24): K46 access from any device (G146), Etsy auto-check + SMTP (G147, off until env), G148–G159, 21 Crimson live, 22–32 coming, palettes 01–21 (coming); claude/zealous-fermi-hy1o40 adds G172 security fixes",
-      "domain": "bkestudio.com (primary, 0dedaed2 2026-10-19); xn--bkestudo-zkb.com → 308 → bkestudio.com. G190 (2026-10-20): START HERE 01–32 + QR, service guides, etsy_upload.json, listing PDFs 01–21, listing_v3 01–38, docs/05/19/20/22 use https://bkestudio.com.",
-      "live_project_note": "2026-10-20: the cloud session's Vercel connector (team daimonflora-gmailcoms-projects) sees davetiye-platform with its last production deploy on 2026-10-17 (477589f) and no custom domain; bkestudio.com is served by a Vercel project this connector cannot see (the user's local session). Which commit is live there is not recorded in docs/10 §2c."
+      "team": "bkestudio (Pro)",
+      "project": "davetiye-maker",
+      "git_integration": true,
+      "deploy_rule": "push to main = production (docs/10 §2c, 2026-10-20)",
+      "production_url": "https://bkestudio.com",
+      "domain": "bkestudio.com (primary since 0dedaed2, 2026-10-19); xn--bkestudo-zkb.com → 308 → bkestudio.com",
+      "last_main_seen": "origin/main 4a9fff921 — GitHub commit status from Vercel 'success' 2026-10-23 14:46Z; that it went to production is not confirmed from the cloud session (GitHub deployments API 403, the Vercel connector sees only the old team) and bkestudio.com cannot be opened from here (proxy 403)",
+      "this_branch": "claude/adoring-gates-10grne: the 2026-10-23 integration (merge-1..3, docs, legal, code, vis, audio, origin/main 4a9fff921) — NOT pushed, NOT deployed; goes live when it reaches main",
+      "live_check": ".github/workflows/live-check.yml (G966): hourly read-only check of bkestudio.com, one issue on failure — runs once it is on main; drop --allow-404 /terms,/kvkk when those pages are live",
+      "old_project": {
+        "team": "daimonflora-gmailcoms-projects",
+        "project": "davetiye-platform",
+        "project_id": "prj_WRKdVHmsou7QU2B5UhgO8uksAobj",
+        "production_url": "https://davetiye-platform-five.vercel.app",
+        "last_deploy": "477589f (2026-10-17) dpl_BdTLgKpin8Pfse8cEzzDdapYxaS3, READY",
+        "pause": "open owner decision (K58)"
+      }
     },
     "data": {
       "adapter": "blob",
       "store": "davetiye-platform-data (private)",
-      "supabase": "not used (docs/10 §2c)"
+      "supabase": "not used (docs/10 §2c)",
+      "backup": "platform/scripts/blob-backup.mjs (G955): read-only copy of the production Blob store with manifest + SHA-256, resumable, --verify; never run on the real store (no token in the cloud session); storage place and schedule open"
     },
     "themes": {
       "olive-ivory": {
         "design": "01",
+        "name": "Olive & Ivory",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": true
+        "first_wave": true,
+        "price_try": 1190,
+        "deployed": "main (live as functional pilot); 2026-10-23 polish (docs/41) and sounds (docs/40) only on this branch"
       },
       "dusty-blue-champagne": {
         "design": "02",
+        "name": "Dusty Blue & Champagne",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": true
+        "first_wave": true,
+        "price_try": 1190,
+        "deployed": "main (live as functional pilot); 2026-10-23 polish (docs/41) and sounds (docs/40) only on this branch"
       },
       "blush-garden-rose": {
         "design": "03",
+        "name": "Blush Garden Rose",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": true,
+        "first_wave": true,
+        "price_try": 1190,
+        "deployed": "main (live as functional pilot); 2026-10-23 polish (docs/41) and sounds (docs/40) only on this branch",
         "demo_site": "/clara-and-julian"
-      },
-      "mediterranean-lemon": {
-        "design": "05",
-        "status": "functional_pilot",
-        "sales_site": "live",
-        "deployed": true
       },
       "vintage-airmail-love-letter": {
         "design": "04",
+        "name": "Vintage Airmail Love Letter",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": true
+        "first_wave": true,
+        "price_try": 1190,
+        "deployed": "main (live as functional pilot); 2026-10-23 polish (docs/41) and sounds (docs/40) only on this branch"
+      },
+      "mediterranean-lemon": {
+        "design": "05",
+        "name": "Mediterranean Lemon",
+        "status": "functional_pilot",
+        "sales_site": "live",
+        "first_wave": true,
+        "price_try": 1190,
+        "deployed": "main (live as functional pilot); 2026-10-23 polish (docs/41) and sounds (docs/40) only on this branch"
       },
       "art-deco-black-tie": {
         "design": "06",
+        "name": "Art Deco Black-Tie",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": true
+        "first_wave": true,
+        "price_try": 1190,
+        "deployed": "main (live as functional pilot); 2026-10-23 polish (docs/41) and sounds (docs/40) only on this branch"
       },
       "burgundy-velvet-autumn": {
         "design": "07",
+        "name": "Burgundy Velvet Autumn",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": true
+        "first_wave": true,
+        "price_try": 1190,
+        "deployed": "main (live as functional pilot); 2026-10-23 polish (docs/41) and sounds (docs/40) only on this branch"
       },
       "winter-evergreen": {
         "design": "08",
+        "name": "Winter Evergreen",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": true
+        "first_wave": true,
+        "price_try": 1190,
+        "deployed": "main (live as functional pilot); 2026-10-23 polish (docs/41) and sounds (docs/40) only on this branch"
       },
       "lavender-provence": {
         "design": "09",
+        "name": "Lavender Provence",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": true
+        "first_wave": true,
+        "price_try": 1190,
+        "deployed": "main (live as functional pilot); 2026-10-23 polish (docs/41) and sounds (docs/40) only on this branch"
       },
       "tuscan-vineyard": {
         "design": "10",
+        "name": "Tuscan Vineyard",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": true
+        "first_wave": true,
+        "price_try": 1190,
+        "deployed": "main (live as functional pilot); 2026-10-23 polish (docs/41) and sounds (docs/40) only on this branch"
       },
       "boho-pampas-terracotta": {
         "design": "11",
+        "name": "Boho Pampas Terracotta",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": true
+        "first_wave": true,
+        "price_try": 1190,
+        "deployed": "main (live as functional pilot); 2026-10-23 polish (docs/41) and sounds (docs/40) only on this branch"
       },
       "tropical-destination": {
         "design": "12",
+        "name": "Tropical Destination",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": true
+        "first_wave": true,
+        "price_try": 1190,
+        "deployed": "main (live as functional pilot); 2026-10-23 polish (docs/41) and sounds (docs/40) only on this branch"
       },
       "enchanted-forest-storybook": {
         "design": "13",
+        "name": "Enchanted Forest Storybook",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": true
+        "first_wave": true,
+        "price_try": 1190,
+        "deployed": "main (live as functional pilot); 2026-10-23 polish (docs/41) and sounds (docs/40) only on this branch"
       },
       "ivory-lace-pearls": {
         "design": "14",
+        "name": "Ivory Lace & Pearls",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": true
+        "first_wave": true,
+        "price_try": 1190,
+        "deployed": "main (live as functional pilot); 2026-10-23 polish (docs/41) and sounds (docs/40) only on this branch"
       },
       "cherry-blossom-spring": {
         "design": "15",
+        "name": "Cherry Blossom Spring",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": true
+        "first_wave": true,
+        "price_try": 1190,
+        "deployed": "main (live as functional pilot); 2026-10-23 polish (docs/41) and sounds (docs/40) only on this branch"
       },
       "sunflower-rustic-barn": {
         "design": "16",
+        "name": "Sunflower Rustic Barn",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": true
+        "first_wave": true,
+        "price_try": 1190,
+        "deployed": "main (live as functional pilot); 2026-10-23 polish (docs/41) and sounds (docs/40) only on this branch"
       },
       "emerald-gold-estate": {
         "design": "17",
+        "name": "Emerald & Gold Estate",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": true
+        "first_wave": true,
+        "price_try": 1190,
+        "deployed": "main (live as functional pilot); 2026-10-23 polish (docs/41) and sounds (docs/40) only on this branch"
       },
       "wildflower-meadow-vellum": {
         "design": "18",
+        "name": "Wildflower Meadow Vellum",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": true
+        "first_wave": true,
+        "price_try": 1190,
+        "deployed": "main (live as functional pilot); 2026-10-23 polish (docs/41) and sounds (docs/40) only on this branch"
       },
       "midnight-garden": {
         "design": "19",
+        "name": "Midnight Garden",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": true
+        "first_wave": true,
+        "price_try": 1190,
+        "deployed": "main (live as functional pilot); 2026-10-23 polish (docs/41) and sounds (docs/40) only on this branch"
       },
       "coastal-seaside": {
         "design": "20",
+        "name": "Coastal Seaside",
         "status": "functional_pilot",
         "sales_site": "live",
-        "deployed": true
+        "first_wave": true,
+        "price_try": 1190,
+        "deployed": "main (live as functional pilot); 2026-10-23 polish (docs/41) and sounds (docs/40) only on this branch"
       },
       "crimson-rose-atelier": {
         "design": "21",
+        "name": "Crimson Rose Atelier",
         "status": "functional_pilot",
-        "sales_site": "live",
-        "deployed": "main 84e108e (not confirmed live)"
+        "sales_site": "preview",
+        "first_wave": false,
+        "price_try": 1190,
+        "note": "K55: held back from the first wave (was live 2026-10-17 … 10-23); catalogue \"Coming soon on Etsy\", not startable in production; redesign on claude/kind-johnson-6eetik awaits approval"
       },
       "nocturne-lake-estate": {
         "design": "22",
+        "name": "Nocturne Lake Estate",
         "status": "editable_draft",
         "sales_site": "preview",
-        "deployed": false,
-        "waits_for": "rebuilt again 2026-10-22 from layered GPT parts (PAKET 5R, docs/35; G422–G432); owner declared this version valid, merged to main 2026-10-23, not deployed; catalog screens recaptured; Etsy listing media (images_v4, video_v4_4x5) and START HERE screens still show the old design; palettes (variants) must be redone from the new parts; no real-phone test"
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "redesigned 2026-10-22 (K54, G422–G432) and merged 2026-10-23; catalogue cards and opening clips recaptured; own opening sounds (G967); Etsy draft still shows the OLD design (images_v4, video_v4_4x5); palettes not rebuilt from the new parts; no real-phone test"
       },
       "velvet-jewel-box": {
         "design": "23",
+        "name": "Velvet Jewel Box",
         "status": "editable_draft",
         "sales_site": "preview",
-        "deployed": false,
-        "waits_for": "rebuilt again 2026-10-22 from layered GPT parts (PAKET 5R, docs/35; G422–G432); owner declared this version valid, merged to main 2026-10-23, not deployed; catalog screens recaptured; Etsy listing media (images_v4, video_v4_4x5) and START HERE screens still show the old design; palettes (variants) must be redone from the new parts; no real-phone test"
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "redesigned 2026-10-22 (K54, G422–G432) and merged 2026-10-23; catalogue cards and opening clips recaptured; own opening sounds (G967); Etsy draft still shows the OLD design (images_v4, video_v4_4x5); palettes not rebuilt from the new parts; no real-phone test"
       },
       "grand-theatre-premiere": {
         "design": "24",
+        "name": "Grand Theatre Premiere",
         "status": "editable_draft",
         "sales_site": "preview",
-        "deployed": false,
-        "waits_for": "rebuilt again 2026-10-22 from layered GPT parts (PAKET 5R, docs/35; G422–G432); owner declared this version valid, merged to main 2026-10-23, not deployed; catalog screens recaptured; Etsy listing media (images_v4, video_v4_4x5) and START HERE screens still show the old design; palettes (variants) must be redone from the new parts; no real-phone test"
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "redesigned 2026-10-22 (K54, G422–G432) and merged 2026-10-23; catalogue cards and opening clips recaptured; own opening sounds (G967); Etsy draft still shows the OLD design (images_v4, video_v4_4x5); palettes not rebuilt from the new parts; no real-phone test"
       },
       "orient-express-voyage": {
         "design": "25",
+        "name": "Orient Express Voyage",
         "status": "editable_draft",
         "sales_site": "preview",
-        "deployed": false,
-        "waits_for": "rebuilt again 2026-10-22 from layered GPT parts (PAKET 5R, docs/35; G422–G432); owner declared this version valid, merged to main 2026-10-23, not deployed; catalog screens recaptured; Etsy listing media (images_v4, video_v4_4x5) and START HERE screens still show the old design; palettes (variants) must be redone from the new parts; no real-phone test"
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "redesigned 2026-10-22 (K54, G422–G432) and merged 2026-10-23; catalogue cards and opening clips recaptured; own opening sounds (G967); Etsy draft still shows the OLD design (images_v4, video_v4_4x5); palettes not rebuilt from the new parts; no real-phone test"
       },
       "kintsugi-washi": {
         "design": "26",
+        "name": "Kintsugi & Washi",
         "status": "editable_draft",
         "sales_site": "preview",
-        "deployed": false,
-        "waits_for": "rebuilt again 2026-10-22 from layered GPT parts (PAKET 5R, docs/35; G422–G432); owner declared this version valid, merged to main 2026-10-23, not deployed; catalog screens recaptured; Etsy listing media (images_v4, video_v4_4x5) and START HERE screens still show the old design; palettes (variants) must be redone from the new parts; no real-phone test"
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "redesigned 2026-10-22 (K54, G422–G432) and merged 2026-10-23; catalogue cards and opening clips recaptured; own opening sounds (G967); Etsy draft still shows the OLD design (images_v4, video_v4_4x5); palettes not rebuilt from the new parts; no real-phone test"
       },
       "riad-lantern-nights": {
         "design": "27",
+        "name": "Riad Lantern Nights",
         "status": "editable_draft",
         "sales_site": "preview",
-        "deployed": false,
-        "waits_for": "rebuilt again 2026-10-22 from layered GPT parts (PAKET 5R, docs/35; G422–G432); owner declared this version valid, merged to main 2026-10-23, not deployed; catalog screens recaptured; Etsy listing media (images_v4, video_v4_4x5) and START HERE screens still show the old design; palettes (variants) must be redone from the new parts; no real-phone test"
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "redesigned 2026-10-22 (K54, G422–G432) and merged 2026-10-23; catalogue cards and opening clips recaptured; own opening sounds (G967); Etsy draft still shows the OLD design (images_v4, video_v4_4x5); palettes not rebuilt from the new parts; no real-phone test"
       },
       "maison-patisserie": {
         "design": "28",
+        "name": "Maison Pâtisserie",
         "status": "editable_draft",
         "sales_site": "preview",
-        "deployed": false,
-        "waits_for": "rebuilt again 2026-10-22 from layered GPT parts (PAKET 5R, docs/35; G422–G432); owner declared this version valid, merged to main 2026-10-23, not deployed; catalog screens recaptured; Etsy listing media (images_v4, video_v4_4x5) and START HERE screens still show the old design; palettes (variants) must be redone from the new parts; no real-phone test"
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "redesigned 2026-10-22 (K54, G422–G432) and merged 2026-10-23; catalogue cards and opening clips recaptured; own opening sounds (G967); Etsy draft still shows the OLD design (images_v4, video_v4_4x5); palettes not rebuilt from the new parts; no real-phone test"
       },
       "celestial-observatory": {
         "design": "29",
+        "name": "Celestial Observatory",
         "status": "editable_draft",
         "sales_site": "preview",
-        "deployed": false,
-        "waits_for": "rebuilt again 2026-10-22 from layered GPT parts (PAKET 5R, docs/35; G422–G432); owner declared this version valid, merged to main 2026-10-23, not deployed; catalog screens recaptured; Etsy listing media (images_v4, video_v4_4x5) and START HERE screens still show the old design; palettes (variants) must be redone from the new parts; no real-phone test"
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "redesigned 2026-10-22 (K54, G422–G432) and merged 2026-10-23; catalogue cards and opening clips recaptured; own opening sounds (G967); Etsy draft still shows the OLD design (images_v4, video_v4_4x5); palettes not rebuilt from the new parts; no real-phone test"
       },
       "azulejo-mosaic": {
         "design": "30",
+        "name": "Azulejo Mosaic",
         "status": "editable_draft",
         "sales_site": "preview",
-        "deployed": false,
-        "waits_for": "rebuilt again 2026-10-22 from layered GPT parts (PAKET 5R, docs/35; G422–G432); owner declared this version valid, merged to main 2026-10-23, not deployed; catalog screens recaptured; Etsy listing media (images_v4, video_v4_4x5) and START HERE screens still show the old design; palettes (variants) must be redone from the new parts; no real-phone test"
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "redesigned 2026-10-22 (K54, G422–G432) and merged 2026-10-23; catalogue cards and opening clips recaptured; own opening sounds (G967); Etsy draft still shows the OLD design (images_v4, video_v4_4x5); palettes not rebuilt from the new parts; no real-phone test"
       },
       "sky-lantern-festival": {
         "design": "31",
+        "name": "Sky Lantern Festival",
         "status": "editable_draft",
         "sales_site": "preview",
-        "deployed": false,
-        "waits_for": "rebuilt again 2026-10-22 from layered GPT parts (PAKET 5R, docs/35; G422–G432); owner declared this version valid, merged to main 2026-10-23, not deployed; catalog screens recaptured; Etsy listing media (images_v4, video_v4_4x5) and START HERE screens still show the old design; palettes (variants) must be redone from the new parts; no real-phone test"
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "redesigned 2026-10-22 (K54, G422–G432) and merged 2026-10-23; catalogue cards and opening clips recaptured; own opening sounds (G967); Etsy draft still shows the OLD design (images_v4, video_v4_4x5); palettes not rebuilt from the new parts; no real-phone test"
       },
       "music-box-ballerina": {
         "design": "32",
+        "name": "Music Box Ballerina",
         "status": "editable_draft",
         "sales_site": "preview",
-        "deployed": false,
-        "waits_for": "rebuilt again 2026-10-22 from layered GPT parts (PAKET 5R, docs/35; G422–G432); owner declared this version valid, merged to main 2026-10-23, not deployed; catalog screens recaptured; Etsy listing media (images_v4, video_v4_4x5) and START HERE screens still show the old design; palettes (variants) must be redone from the new parts; no real-phone test"
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "redesigned 2026-10-22 (K54, G422–G432) and merged 2026-10-23; catalogue cards and opening clips recaptured; own opening sounds (G967); Etsy draft still shows the OLD design (images_v4, video_v4_4x5); palettes not rebuilt from the new parts; no real-phone test"
       },
       "marigold-mehndi": {
         "design": "33",
+        "name": "Marigold & Mehndi",
         "status": "editable_draft",
         "sales_site": "coming",
-        "deployed": false,
-        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "theme built (33–38: f49265eac/d3becd6db/121c6a9a1; 39–48 fourth wave); hidden on the sales site; Etsy draft with 19 images + video"
       },
       "red-lacquer-double-happiness": {
         "design": "34",
+        "name": "Red Lacquer & Double Happiness",
         "status": "editable_draft",
         "sales_site": "coming",
-        "deployed": false,
-        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "theme built (33–38: f49265eac/d3becd6db/121c6a9a1; 39–48 fourth wave); hidden on the sales site; Etsy draft with 19 images + video"
       },
       "highland-tartan-thistle": {
         "design": "35",
+        "name": "Highland Tartan & Thistle",
         "status": "editable_draft",
         "sales_site": "coming",
-        "deployed": false,
-        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "theme built (33–38: f49265eac/d3becd6db/121c6a9a1; 39–48 fourth wave); hidden on the sales site; Etsy draft with 19 images + video"
       },
       "victorian-glasshouse": {
         "design": "36",
+        "name": "Victorian Glasshouse",
         "status": "editable_draft",
         "sales_site": "coming",
-        "deployed": false,
-        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "theme built (33–38: f49265eac/d3becd6db/121c6a9a1; 39–48 fourth wave); hidden on the sales site; Etsy draft with 19 images + video"
       },
       "art-nouveau-lily": {
         "design": "37",
+        "name": "Art Nouveau Lily",
         "status": "editable_draft",
         "sales_site": "coming",
-        "deployed": false,
-        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "theme built (33–38: f49265eac/d3becd6db/121c6a9a1; 39–48 fourth wave); hidden on the sales site; Etsy draft with 19 images + video"
       },
       "papel-picado-fiesta": {
         "design": "38",
+        "name": "Papel Picado Fiesta",
         "status": "editable_draft",
         "sales_site": "coming",
-        "deployed": false,
-        "waits_for": "GPT parts (docs/26), then tools/gpt_yerlestir.py (G176) + eye review"
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "theme built (33–38: f49265eac/d3becd6db/121c6a9a1; 39–48 fourth wave); hidden on the sales site; Etsy draft with 19 images + video"
+      },
+      "silver-photo-booth": {
+        "design": "39",
+        "name": "Silver Photo Booth",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "theme built (33–38: f49265eac/d3becd6db/121c6a9a1; 39–48 fourth wave); hidden on the sales site; Etsy draft with 19 images + video"
+      },
+      "swan-chantilly-lace": {
+        "design": "40",
+        "name": "Swan Chantilly Lace",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "theme built (33–38: f49265eac/d3becd6db/121c6a9a1; 39–48 fourth wave); hidden on the sales site; Etsy draft with 19 images + video"
+      },
+      "painted-lily-pond": {
+        "design": "41",
+        "name": "Painted Lily Pond",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "theme built (33–38: f49265eac/d3becd6db/121c6a9a1; 39–48 fourth wave); hidden on the sales site; Etsy draft with 19 images + video"
+      },
+      "espresso-pastoral": {
+        "design": "42",
+        "name": "Espresso Pastoral",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "theme built (33–38: f49265eac/d3becd6db/121c6a9a1; 39–48 fourth wave); hidden on the sales site; Etsy draft with 19 images + video"
+      },
+      "chartreuse-garden-party": {
+        "design": "43",
+        "name": "Chartreuse Garden Party",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "theme built (33–38: f49265eac/d3becd6db/121c6a9a1; 39–48 fourth wave); hidden on the sales site; Etsy draft with 19 images + video"
+      },
+      "blue-toile-pavilion": {
+        "design": "44",
+        "name": "Blue Toile Pavilion",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "theme built (33–38: f49265eac/d3becd6db/121c6a9a1; 39–48 fourth wave); hidden on the sales site; Etsy draft with 19 images + video"
+      },
+      "suede-ranch-lace": {
+        "design": "45",
+        "name": "Suede Ranch Lace",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "theme built (33–38: f49265eac/d3becd6db/121c6a9a1; 39–48 fourth wave); hidden on the sales site; Etsy draft with 19 images + video"
+      },
+      "bordeaux-silk-bow": {
+        "design": "46",
+        "name": "Bordeaux Silk Bow",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "theme built (33–38: f49265eac/d3becd6db/121c6a9a1; 39–48 fourth wave); hidden on the sales site; Etsy draft with 19 images + video"
+      },
+      "monochrome-darkroom": {
+        "design": "47",
+        "name": "Monochrome Darkroom",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "theme built (33–38: f49265eac/d3becd6db/121c6a9a1; 39–48 fourth wave); hidden on the sales site; Etsy draft with 19 images + video"
+      },
+      "navy-ivory-crest": {
+        "design": "48",
+        "name": "Navy Ivory Crest",
+        "status": "editable_draft",
+        "sales_site": "coming",
+        "first_wave": false,
+        "price": "[PRICE]",
+        "note": "theme built (33–38: f49265eac/d3becd6db/121c6a9a1; 39–48 fourth wave); hidden on the sales site; Etsy draft with 19 images + video"
+      },
+      "ivory-pearl-atelier": {
+        "design": "49",
+        "name": "Ivory Pearl Atelier",
+        "status": "functional_pilot",
+        "sales_site": "preview",
+        "first_wave": false,
+        "price_try": 1190,
+        "note": "K55: not in the first wave; catalogue \"Coming soon on Etsy\"; Etsy draft 4601572630"
       }
     },
     "tests": {
-      "platform_npm_test": "1654/1657 (3 skipped, 0 fail) on claude/focused-tesla-37o26v, 2026-10-20; typecheck green; build not run in the cloud session",
-      "tools_pytest": "2026-10-20: 11 fail = test_recolor_parts g177 22–32 (palette parts missing from manifests since the 2026-10-18/19 rebuild; pre-existing, not from G190); the rest green",
-      "live": "2026-10-17 477589f: live-check 130/130 with 20 sale themes, blob-smoke green (docs/10 §2c)"
+      "date": "2026-10-23, branch claude/adoring-gates-10grne after all merges, npm ci with Next.js 16.4.3",
+      "platform_npm_test": "1946/1946 pass, 0 fail, 0 skipped (with the build present)",
+      "typecheck": "green",
+      "build": "green, incl. postbuild trace-check (84 functions, largest 157.2/200 MB) and js-budget (40 routes within budget; /edit/[slug] 189.7/205 KB)",
+      "browser": "final-smoke 45/45 for olive-ivory, art-deco-black-tie, midnight-garden; g087-browser 68/68; claim-browser 57/57 (two-design order choice); marketing-build 2/2",
+      "tools_pytest": "113/113",
+      "etsy_upload_check": "exit 0, 52/52 OK",
+      "validate_content": "49/49 content.demo.json OK",
+      "task_check": "gorev.py kontrol clean",
+      "not_run": "live site checks (bkestudio.com unreachable from the cloud session), real phones, sound by ear"
     },
     "not_tested": [
-      "real iPhone/Android",
+      "the 2026-10-23 integration on bkestudio.com (not pushed)",
+      "real iPhone/Android after the 2026-10-23 changes (the owner tested the live site before them, K52)",
+      "sound effects by ear and on phones (iOS unlock path)",
+      "G951 with a real Etsy receipt / real Etsy sale e-mail",
+      "SMTP / IMAP / Google Sheets with bkestudio01 (docs/37 not run)",
+      "blob-backup.mjs on the production store",
       "multi-instance rate limits",
       "cost/load"
     ],
     "presale_blockers": [
-      "deploy the current branch to the project that serves bkestudio.com and record it in docs/10 §2c (user; docs/29 B1)",
-      "Vercel env: CLAIM_ORDER_VERIFICATION=manual, ADMIN_PASSWORD ≥ 12 chars, PLATFORM_PUBLIC_URL / MARKETING_SITE_URL = https://bkestudio.com (user; docs/29 B2)",
-      "email: SMTP_* / MAIL_FROM / ADMIN_NOTIFY_EMAIL (optional; /my works without it)",
-      "real-device manual test (docs/20_ELLE_TEST_PLANI.md; docs/29 B4)",
-      "privacy: legal name + postal address into docs/28 → Etsy Policy settings (docs/29 B5)",
-      "Etsy listing renewal decision, then upload the 21 listings (K41; docs/29 B6–B7)",
-      "listing URLs → tools/ilan_baglantilari.py --yaz, verified.* → true, launched: true (docs/29 C)",
-      "hosting plan: Vercel Hobby is non-commercial — confirm the serving project's team is on Pro"
+      "push this integration to main → Vercel production → docs/38 step 0 (G951/G954 live, /terms + /kvkk 200) + live-check",
+      "docs/37 (local session): SMTP + IMAP order mail + Google Sheets with bkestudio01@gmail.com; trust mode stays",
+      "docs/38 (local session): new START HERE PDFs on every draft, 22–32 media re-shoot (when rendered), shop message + FAQ, pre-publish report",
+      "owner's 'yayınla' → publish 01–20 one by one → tools/ilan_baglantilari.py --yaz with the 20 links",
+      "Etsy privacy policy (docs/28) + legal.controllerName/postalAddress (K58)",
+      "verified.editRights / archive / orderCheck / privacyText → true when their checks are done, then launched: true (launchProblems must be empty)",
+      "renewal decision (every etsy_upload.json)"
     ],
     "static_preview_artifact": "https://claude.ai/artifact/LBc4yLieUxQnLtRZ72dxwm (design 03 static, private)",
     "admin": {
@@ -1341,9 +1809,18 @@
       "url": "/admin",
       "version": "v2 (G095)",
       "password": "ADMIN_PASSWORD env (temporary short, K33; never in repo)",
-      "order_verification": "manual (K34) — added to Vercel and tested live on 2026-10-15 (G092 Sonuç, G096); reported not active on 2026-10-16, not re-read: verify before launch"
+      "order_verification": "live: trust (G191, 2026-10-22: sites start at once, the shop checks later); plan K51: Gmail/IMAP reading of Etsy sale e-mails (bkestudio01, docs/37) confirms orders; Etsy API not connected"
     },
-    "last_live_check": "2026-10-17 (477589f; docs/10 §2c)"
+    "last_live_check": "2026-10-20 bkestudio.com live-check --no-write 107/116 (9 = missing /clara-and-julian demo in this project’s Blob; docs/10 §2c); nothing newer recorded",
+    "first_wave": "designs 01–20 (K55); config.ts: 20 live, 13 preview (21, 22–32, 49), 16 coming (33–48)",
+    "order_flow": {
+      "access": "Etsy order number + e-mail (K46); /my lists every website of the order started with that e-mail",
+      "multi_design_order": "G951 (K53): the same order + e-mail on /start gets a choice — open a website or start one more; an Etsy receipt (when read) caps the websites at its design units (409 order_full), trust/Gmail mode allows it as provisional with an immediate admin To-do, manual mode = pending; max 10 per order; service-only orders do not verify a design website (G951 order items). Browser-tested with the build (claim-browser 57/57); not tested live",
+      "downloads_lock": "G952: PDF downloads closed (403) while the order is pending/held or the site archived",
+      "rsvp": "G953: counters optional (a reply is stored even if a counter write conflicts); duplicate check reads only the last 5 minutes"
+    },
+    "legal_pages": "G961 (K56): /terms + /kvkk (EN; TR original of the KVKK notice at /tr/kvkk; es/de/fr), privacy additions, footer/sitemap/llms.txt links, one line on /start; legal.controllerName/postalAddress null (K58) — the pages say 'on request by email', launchProblems lists both; services onSale false (not offered to buyers). Only on this branch; docs/39 (14 open points for a lawyer/the owner); not a lawyer's text",
+    "audio": "G967–G969 (K57): 50 synthesised effects (tools/audio_fx.py, own work, public/audio/LICENSES.md), −20…−24 LUFS; every theme its own 3–8 cue opening on its MOTION steps (lib/audio/catalog.ts); player schedules on the audio clock, skip/mute/hidden tab silence it. Nobody has listened yet (demo reel in the audio session's scratchpad); not tried on a real phone. docs/40"
   },
   "brand": {
     "name": "BKE Studio",
@@ -1352,7 +1829,7 @@
     "assets": "brand/assets/gpt/final/",
     "domain": "bkestudio.com",
     "domain_note": "primary since 0dedaed2 (2026-10-19); the earlier IDN xn--bkestudo-zkb.com (bkestudıo.com) answers 308 → bkestudio.com (checked from the cloud session 2026-10-20). Vercel DNS for bkestudio.com reads configured (get_domain_config), but the page itself could not be opened from the cloud session (network policy).",
-    "support_email": "bkestudio01@gmail.com (K33, corrected 2026-10-23 per 519d39f8); response time 24 hours (K37)",
+    "support_email": "bkestudio01@gmail.com (K33, final K50 2026-10-23: site, panel, START HERE 01–49, service PDFs, listings); response time 24 hours (K37)",
     "etsy_shop_name": "STUDIOBKE (K35; Etsy's real shop name, brand in copy stays BKE Studio)",
     "etsy_shop": {
       "url": "https://studiobke.etsy.com",
@@ -1361,10 +1838,31 @@
       "currency": "TRY (K38)",
       "offsite_ads": "off (K39)",
       "refunds": "none; 'we will fix it' promise (K36)",
-      "listings": "0 active / 0 draft — packages 01–05 prepared, not uploaded (K41)",
-      "privacy_policy": "not published; English text ready in docs/28_ETSY_GIZLILIK_METNI.md (needs legal name + postal address)"
-    }
+      "listings": "52 drafts (49 designs + 3 services), 0 active (docs/20 §7.13, 2026-10-23). 01–49 each have 19 v4 images + 4:5 video + START_HERE.pdf; the 22–32 drafts show the OLD design (re-shoot from the new themes, K54, docs/38 step 2); every design draft still carries the old-look START HERE PDF (new look regenerated in the repo 3c75ce9f4, upload = docs/38 step 1). First wave = 01–20 only, published one by one on the owner's 'yayınla' (K55)",
+      "privacy_policy": "not published on Etsy; English text docs/28 (updated 2026-10-23, G961); legal name + postal address open (K58)",
+      "buyer_message": "docs/38 step 3a has the new 'Message to Buyers for Digital Items' (incl. 'Bought two designs?' once G951 is live) and two FAQ answers; not entered yet"
+    },
+    "google_account": "bkestudio01@gmail.com — SMTP sending, IMAP reading of Etsy order e-mails and the Google Sheets OAuth client (K51); setup by the local session with docs/37, not done yet"
   },
-  "gpt_queue": "2026-10-20: 351 GPT images imported (codex/generated-visuals-2026-10-20, merged); Claude check: 317 pass, 34 rejected (all 33–38 + one palette) and moved to docs/qa/2026-10-20-generated-visuals/reddedilen/ — docs/27 lists those 34. Report: docs/qa/2026-10-20-generated-visuals/CLAUDE_KONTROL.md",
-  "launch_checklist": "docs/29_LANSMAN_LISTESI.md"
+  "gpt_queue": "2026-10-23: docs/26 + docs/27 regenerated after the merges — 29 GPT images missing (GM10 social, 21/49 extras, palettes); 2026-10-20 import report docs/qa/2026-10-20-generated-visuals/CLAUDE_KONTROL.md",
+  "launch_checklist": "docs/29_LANSMAN_LISTESI.md",
+  "integration_2026_10_23": {
+    "branch": "claude/adoring-gates-10grne (not pushed)",
+    "merged": [
+      "merge-1: gallant-fermi (G192 note), ecstatic-fermat (social media, G970–G971), nice-faraday (SEO/GEO/AEO, G980–G992)",
+      "merge-2: origin/claude/modest-brown-pwe1sm — new 22–32 (K54)",
+      "merge-3: origin/claude/zealous-hopper-pl88vi (PR #37) — START HERE new look, 01–49 regenerated",
+      "claude/adoring-gates-docs (K50–K58, docs/37, docs/38, G966 live check)",
+      "claude/adoring-gates-legal (G961 /terms + /kvkk, services hidden)",
+      "claude/adoring-gates-code (G951–G955, Next 16.4.3, CI audit)",
+      "claude/adoring-gates-vis (01–20 guest-site polish, panel + sales-site fixes, docs/41)",
+      "claude/adoring-gates-audio (G967–G969 sound effects, docs/40)",
+      "origin/main 4a9fff921"
+    ],
+    "not_merged": [
+      "claude/kind-johnson-6eetik (21 redesign + its own sound packs; awaits owner approval)",
+      "PR #32 (22–32 content parity, superseded in part by merge-2)",
+      "PR #11, #16, #31"
+    ]
+  }
 }

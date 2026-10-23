@@ -1,12 +1,15 @@
 # davetiye-maker
 
-**Dijital Davetiye ve Özel Gün Şablon İşi** — yabancı (İngilizce) Etsy alıcılarına satılan,
-alıcının **Canva'da kendisinin kişiselleştirdiği** eşleşik ürün setleri:
+**BKE Studio** (Etsy dükkânı **STUDIOBKE**) — yabancı (İngilizce) Etsy alıcılarına satılan **düğün websitesi tasarımları**.
+Alıcı Etsy'den bir tasarım alır, Etsy'nin verdiği START HERE PDF'indeki linkle **bkestudio.com/start**'a gelir, Etsy sipariş
+numarası + e-postasıyla kendi sitesini açar ve **telefondan panelde** düzenleyip yayınlar (K22/K24):
 
-- 🎬 Animasyonlu dikey davetiye videosu (9:16, 1080 × 1920)
-- 🌐 Tek sayfalık, mobil öncelikli düğün/etkinlik websitesi (RSVP, konum, geri sayım)
-- 📄 Misafir davetiyesi PDF / görseli
-- 📘 Alıcıya giden **START HERE** erişim PDF'si (template linki + kullanım rehberi)
+- Mobil öncelikli site: kapalı zarf (bazı tasarımlarda kanatlı kart, kese, kitap) açılışı, temaya özel ses efektleriyle; ana sayfa, hikâye, detaylar, RSVP
+- Düzenleme paneli: isim, tarih, foto, program, RSVP soruları, müzik, 5 dil; yanıtlar Excel / Google Sheets
+- Basılabilir davetiye PDF'i ve paylaşım QR'ı panelden; alıcıya giden **START HERE** PDF'i (QR'lı başlangıç rehberi)
+
+Kod `platform/` (Next.js), 49 tasarım `platform/themes/` + `collections/` (01–20 ilk satış dalgası, K55). Canva / video dönemi
+(K22 öncesi) belgeleri tarihçedir; güncel durum `docs/18_GUNCEL_DURUM.md` ve `PROJECT_STATE.json`.
 
 > Bu repo **dahili geliştirme deposudur**. Müşteriye satılan paket değildir; düzenleme
 > linkleri ve rakip referansları içerir. Private tutulmalıdır.
@@ -18,8 +21,11 @@ alıcının **Canva'da kendisinin kişiselleştirdiği** eşleşik ürün setler
 | [`00_ANA_DEVIR.md`](00_ANA_DEVIR.md) | İşin tamamı: ne, neden, nasıl, karar geçmişi, son durum (**tek gerçek kaynak**) |
 | [`AGENTS.md`](AGENTS.md) | Yapay zekâ ajanları (Claude Code, Codex/Astra) için kısa çalışma kuralları |
 | [`CLAUDE.md`](CLAUDE.md) | Claude Code'a özel ekler (AGENTS.md'yi içe alır) |
-| [`PROJECT_STATE.json`](PROJECT_STATE.json) | Makinece okunur durum haritası (Canva design ID'leri, açık işler) |
-| [`docs/02_SIRADAKI_ISLER.md`](docs/02_SIRADAKI_ISLER.md) | Somut sıradaki işler |
+| [`PROJECT_STATE.json`](PROJECT_STATE.json) | Makinece okunur durum haritası (satış durumu, yayın, açık kararlar) |
+| [`docs/18_GUNCEL_DURUM.md`](docs/18_GUNCEL_DURUM.md) | Bugünkü durum, tek sayfa |
+| [`docs/29_LANSMAN_LISTESI.md`](docs/29_LANSMAN_LISTESI.md) | İlk satış dalgası (01–20) lansman listesi |
+| [`docs/10_SITE_PLATFORMU.md`](docs/10_SITE_PLATFORMU.md) | Platform mimarisi ve yayın kaydı (§2c) |
+| [`gorevler/PANO.md`](gorevler/PANO.md) | Rol başına alınabilir görevler |
 
 ## Klasör yapısı
 
@@ -31,7 +37,10 @@ docs/
   01_KULLANICI_KARARLARI.md  Kısa, izlenebilir karar kaydı
   02_SIRADAKI_ISLER.md       Üretim bitiş sırası
   03_URUN_ICERIK_SEMASI.json Tek içerik kaydı şeması (JSON Schema)
+platform/                  Site + panel + satış sitesi (Next.js; README'si içinde)
+  themes/<tema>/           49 tasarımın platform temaları
 collections/
+  NN_<Ad>/                 Tasarım başına içerik kaydı, GPT parçaları, Etsy paketi (package/listing, package/customer)
   01_Olive_Ivory/            İlk koleksiyon (çalışma adı — marka değil)
     COLLECTION_STATUS.md
     content.demo.json        Demo içerik kaydı (Avery & Jordan — kurgu)
@@ -78,5 +87,6 @@ NODE_PATH="$(npm root -g)" node tools/render_motion.mjs collections/02_Dusty_Blu
 
 ## Durum
 
-İlk koleksiyon (Olive & Ivory) **satışa hazır değil**. Gerçek durum için
-[`collections/01_Olive_Ivory/COLLECTION_STATUS.md`](collections/01_Olive_Ivory/COLLECTION_STATUS.md).
+2026-10-23: 01–20 ilk satış dalgası (Etsy'de taslak, sahibin "yayınla" onayını bekliyor; K55), 21–49 önizleme / yakında.
+Ayrıntı ve açık kararlar: [`docs/18_GUNCEL_DURUM.md`](docs/18_GUNCEL_DURUM.md), lansman adımları:
+[`docs/29_LANSMAN_LISTESI.md`](docs/29_LANSMAN_LISTESI.md).

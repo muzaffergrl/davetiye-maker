@@ -34,6 +34,7 @@ Yalnız kendi rolündeki görevi al.
 | G7NN | (iptal, K22/K24) Tasarım NN — Canva dönemi kılavuz + ilan metni; yerine G122 (START HERE), G123 (ilan metni) | — |
 | G8NN | Tasarım NN — mockup görselleri (Paket 3) | gpt-gorsel |
 | G9NN | (iptal, K22/K24) Tasarım NN — Canva seti ilan kiti; yerine ilan görselleri v4 (01–05) ve G124 (06–20) | — |
+| G950–G969 | 2026-10-23 paralel iş akışının işleri (tasarım numarası değildir): G951–G955 kod (bir siparişte birden çok tasarım, PDF kilidi, RSVP sayaçları, ilk dalga 01–20, blob yedeği), G956 görsel cila (docs/41), G961 kullanım koşulları + KVKK (docs/39), G964–G966 yerel kurulum belgeleri (docs/37, docs/38) ve canlı izleme, G967–G969 ses efektleri (docs/40). Görev dosyası yalnız G964–G966'da; ötekilerin kaydı commit mesajları ve ilgili belge | claude-kod / claude-tarayici |
 | G970–G999 | Paralel dallardan gelip main'deki başka görevle aynı numarayı taşıyan görevler, birleştirmede buraya taşındı (2026-10-23): G970–G971 sosyal medya (docs/35_SOSYAL_MEDYA), G980–G992 SEO/GEO/AEO ve rehberler (docs/35_SEO_GEO_AEO, docs/36). Tasarım numarası değildir | claude-kod / claude-metin / claude-tarayici |
 | GMNN | Marka kimliği (BKE Studio, K26): GM01 GPT görselleri, GM02 marka kiti, GM03 ortak ilan şablonu (GPT), GM04/GM05 satış sitesi ve panel arayüz comp'ları (GPT) | gpt-gorsel / claude-kod |
 | GANN | (iptal, K22/K24) Tasarım NN — video animasyonu | — |

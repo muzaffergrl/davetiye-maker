@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 4 · alindi 0 · inceleme 23 · blokaj 2 · bitti 243 · iptal 257 · toplam 529
+Özet: hazir 6 · alindi 0 · inceleme 24 · blokaj 2 · bitti 243 · iptal 257 · toplam 532
 
 İptal edilen görevler (K22/K24 ile anlamını yitirenler) listelenmez; yalnız sayıları var. Ayrıntı: `python3 tools/gorev.py liste --hepsi`.
 
@@ -21,9 +21,10 @@ Bağımlılık bekleyen: 0 · Biten: 24 · İptal: 64
 
 ## claude-tarayici
 
-**Alınabilir (0)**
+**Alınabilir (2)**
 
-- (yok)
+- `G964` p1 — Yerel oturum — e-posta (SMTP), Gmail sipariş doğrulaması (IMAP) ve Google Sheets'i bkestudio01@gmail.com ile aç (K51) → `gorevler/G964-yerel-google-eposta.md`
+- `G965` p1 — Yerel oturum — Etsy ilk satış dalgası: PDF yenileme, alıcı mesajı + SSS, yalnız 01–20 yayını ("yayınla" onayıyla) (K55) → `gorevler/G965-yerel-etsy-ilk-dalga.md`
 
 **Üzerinde çalışılan / incelemede / blokaj (0)**
 
@@ -37,11 +38,12 @@ Bağımlılık bekleyen: 1 · Biten: 8 · İptal: 42
 
 - (yok)
 
-**Üzerinde çalışılan / incelemede / blokaj (3)**
+**Üzerinde çalışılan / incelemede / blokaj (4)**
 
 - `G191` inceleme · claude-session_015RTF9kCAoVGh7PDNq8XYeP — Sipariş kontrolü "önce güven, sonra doğrula" (CLAIM_ORDER_VERIFICATION=trust) + saatlik kontrol
 - `G192` inceleme · claude-session_015RTF9kCAoVGh7PDNq8XYeP — Önce güven modunda siparişi Gmail'deki Etsy satış e-postasından doğrulama (IMAP)
 - `G980` inceleme · claude-session-nice-faraday — Satış sitesi SEO / GEO / AEO — claude-seo ile denetim ve düzeltme
+- `G966` inceleme · claude-session_012jLH6SCFqEm45m7Yf9wdxm — Canlı izleme — saatlik salt okunur bkestudio.com kontrolü (GitHub Actions) + başarısızlıkta tek issue
 
 Bağımlılık bekleyen: 1 · Biten: 138 · İptal: 83
 
