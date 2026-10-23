@@ -1020,6 +1020,11 @@ After the wedding → Online süresi → Quick answers → Troubleshooting → H
   (1,6 inç, tıklanabilir); `invariant` (aynı girdi → bayt bayt aynı PDF). Denetim: Markdown = Ek A'nın doldurulmuş hâli (eski kopya
   hata), QR modül modül (segno) ve jsQR ile raster (PNG'ler + PDF'in bütün sayfaları, tam bir QR), PDF linkleri yalnız başlat linki
   + `/my` (G148, en az bir kez) + gizlilik metni, zarfsız tasarımda "envelope" yok. 9 sayfa (G148 sonrası da).
+- Görünüm (2026-10-22, kullanıcı isteği: "cilalı, anlaşılır, göz yormayan, logolu"): BKE Studio logosu (`brand/svg`, vektör yol olarak
+  çizilir, font yok); kapakta tasarımın kendi yazısız görseli (`platform/themes/<id>/img/og-1200x630.jpg`) + "Design: …" etiketi,
+  başlık ve "Good to know" onay kartı; 2. sayfada yalnız hızlı başlangıç (numaralı rozetler + QR kartı); "Step 1"den önce koyu
+  "The full guide" şeridi ve sayfa numaralı, tıklanabilir içindekiler; PDF yer imleri; tablolar, kutular ve iletişim kartı;
+  renkler `brand/tokens.json`. Metin yine yalnız Ek A (+ düzenin birkaç sabit yön levhası, `GUIDE_TEXT`). 13–14 sayfa.
 
 ---
 

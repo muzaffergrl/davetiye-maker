@@ -28,7 +28,10 @@ Writes per design, in collections/<NN_*>/package/customer/:
                            tools/listing_kit.py scale pictures to the text width)
   START_HERE.pdf           US Letter, reportlab, standard PDF fonts (no font file is embedded or shipped); the QR is
                            img/start_qr.png itself and is a clickable link to the start URL; consecutive "> " lines
-                           of Ek A are one framed box (G148: "Continue on another device")
+                           of Ek A are one framed box (G148: "Continue on another device"). Look (2026-10-22): the
+                           BKE Studio logo (brand/svg, vector), a cover with the design's picture
+                           (platform/themes/<id>/img/og-1200x630.jpg), the quick start alone on page 2, a clickable
+                           contents with page numbers before Step 1, PDF bookmarks, brand/tokens.json colours
 
 Checks (always after a build, or alone with --check):
   - START_HERE.md is exactly Ek A filled in now (stale copies fail), holds the start link and no {…};
@@ -316,26 +319,128 @@ def make_start_qr(url: str, img_dir: Path, dark: str) -> tuple[Path, Path, Path]
 
 
 # ----------------------------------------------------------------------------- PDF (reportlab, standard fonts)
+# 2026-10-22 look: BKE Studio logo (brand/svg, drawn as vector paths, no font), a cover with the design's own picture
+# (platform/themes/<id>/img/og-1200x630.jpg: no text in it), the quick start on a page of its own, a clickable "full
+# guide" contents (+ PDF bookmarks), numbered badges, cards, colours of brand/tokens.json. The words are still only Ek A
+# plus a few fixed signposts of the layout (GUIDE_TEXT); standard PDF fonts only (Helvetica, Times-Italic, ZapfDingbats).
 
-def _pdf_parts():
-    """reportlab objects, imported on first use (the checks run without reportlab)."""
+BRAND_SVG = REPO / "brand" / "svg"
+BRAND_TOKENS = REPO / "brand" / "tokens.json"
+PAGE_W, PAGE_H, MARGIN = 612, 792, 54
+TEXT_W = PAGE_W - 2 * MARGIN
+HERO_H = 214  # the cover picture, full text width
+QUICK_START = "Start now"  # the H2 that opens page 2 (Ek A "## Start now: the first 5 steps")
+QA_SECTIONS = ("Quick answers", "Troubleshooting")  # "**question** answer" lines become question/answer pairs
+GUIDE_TEXT = {  # the layout's own signposts (not panel labels; nothing here is checked against the platform source)
+    "full_kicker": "THE FULL GUIDE",
+    "full_title": "Everything else, when you need it",
+    "full_body": "You do not need to read it all now. Each part below explains one area of your editor. "
+                 "Tap a topic to jump to it.",
+    "contents": "In this guide",
+}
+
+
+def _colours() -> dict[str, str]:
+    tok = json.loads(BRAND_TOKENS.read_text(encoding="utf-8"))["color"]
+    c = {k: tok[k]["hex"] for k in ("anchor", "accent", "paper", "ink", "secondary", "paper_light")}
+    # derived for the guide: card white, hairlines, a soft tint for boxes, a darker gold that is readable as small text
+    # on paper_light (5.6:1) and a muted ink for page furniture (6.0:1)
+    c.update(card="#FFFFFF", line="#E6DCCB", tint="#F3ECE0", gold_text="#7A5F2E", muted="#655862")
+    return c
+
+
+def _svg_shapes(svg: Path) -> tuple[list[float], list[tuple[str, str]]]:
+    """viewBox and (fill, d) of a brand SVG: flat paths of absolute M/L/C/Z only (traced logos, brand/README.md)."""
+    text = svg.read_text(encoding="utf-8")
+    vb = [float(x) for x in re.search(r'viewBox="([^"]+)"', text).group(1).split()]
+    shapes = re.findall(r'<path fill="(#[0-9A-Fa-f]{6})" d="([^"]+)"', text)
+    if not shapes or re.search(r"[^MLCZ0-9.,\s-]", "".join(d for _, d in shapes)):
+        raise SystemExit(f"{svg.relative_to(REPO)}: not a flat M/L/C/Z path logo")
+    return vb, shapes
+
+
+def draw_logo(canv, svg: Path, x: float, y: float, height: float) -> float:
+    """Draw a brand SVG with its bottom-left corner at (x, y), `height` pt tall; returns its width."""
+    from reportlab.lib.colors import HexColor
+    from reportlab.pdfgen.canvas import FILL_NON_ZERO
+    vb, shapes = _svg_shapes(svg)
+    s = height / vb[3]
+    canv.saveState()
+    canv.translate(x - vb[0] * s, y + (vb[1] + vb[3]) * s)
+    canv.scale(s, -s)
+    for fill, d in shapes:
+        p, cmd, nums = canv.beginPath(), None, []
+        for tok in re.findall(r"[MLCZ]|-?(?:\d+\.?\d*|\.\d+)", d):
+            if tok in "MLCZ":
+                cmd, nums = tok, []
+                if tok == "Z":
+                    p.close()
+                continue
+            nums.append(float(tok))
+            if cmd == "M" and len(nums) == 2:
+                p.moveTo(*nums)
+                cmd, nums = "L", []  # further pairs after M are lines
+            elif cmd == "L" and len(nums) == 2:
+                p.lineTo(*nums)
+                nums = []
+            elif cmd == "C" and len(nums) == 6:
+                p.curveTo(*nums)
+                nums = []
+        canv.setFillColor(HexColor(fill))
+        canv.drawPath(p, stroke=0, fill=1, fillMode=FILL_NON_ZERO)
+    canv.restoreState()
+    return vb[2] * s
+
+
+def hero_picture(theme: str) -> Path | None:
+    p = REPO / "platform" / "themes" / theme / "img" / "og-1200x630.jpg"
+    return p if p.exists() else None
+
+
+def _inline(text: str, link: str = "#2B1526", bold: str = "#2B1526") -> str:
+    text = escape(text).replace("—", "-").replace("–", "-")
+    text = re.sub(r"\[([^\]]+)\]\((https?://[^)]+)\)", rf'<a href="\2" color="{link}"><u>\1</u></a>', text)
+    return re.sub(r"\*\*([^*]+)\*\*", rf'<font color="{bold}"><b>\1</b></font>', text)
+
+
+def _pdf_parts(c: dict[str, str]):
+    """reportlab styles and flowables, imported on first use (the checks run without reportlab)."""
     from reportlab.lib.colors import HexColor
     from reportlab.lib.styles import ParagraphStyle
     from reportlab.platypus import Flowable, Paragraph
 
-    ink, paper, gold = HexColor("#2B1526"), HexColor("#FAF7F0"), HexColor("#D0AE6A")
-    styles = {
-        "body": ParagraphStyle("GuideBody", fontName="Helvetica", fontSize=10, leading=15, spaceAfter=8, textColor=ink),
-        "title": ParagraphStyle("GuideTitle", fontName="Helvetica-Bold", fontSize=25, leading=30, spaceAfter=20, textColor=ink),
-        "h2": ParagraphStyle("GuideH2", fontName="Helvetica-Bold", fontSize=15, leading=20, spaceBefore=17, spaceAfter=10,
-                             textColor=ink, keepWithNext=True),
-        "h3": ParagraphStyle("GuideH3", fontName="Helvetica-Bold", fontSize=11, leading=16, spaceBefore=10, spaceAfter=6,
-                             textColor=ink, keepWithNext=True),
-        "cell": ParagraphStyle("GuideCell", fontName="Helvetica", fontSize=9, leading=13, textColor=ink),
-        # G148: the framed box ("> " lines of Ek A)
-        "box": ParagraphStyle("GuideBox", fontName="Helvetica", fontSize=10, leading=15, spaceAfter=5, textColor=ink),
-        "boxtitle": ParagraphStyle("GuideBoxTitle", fontName="Helvetica-Bold", fontSize=11, leading=16, spaceAfter=6,
-                                   textColor=ink),
+    H = {k: HexColor(v) for k, v in c.items()}
+    body = dict(fontName="Helvetica", fontSize=10.2, leading=15.6, textColor=H["ink"])
+    S = {
+        "body": ParagraphStyle("GBody", spaceAfter=8, **body),
+        "lead": ParagraphStyle("GLead", fontName="Helvetica", fontSize=11.5, leading=17.5, textColor=H["ink"], spaceAfter=16),
+        "bullet": ParagraphStyle("GBullet", spaceAfter=5, leftIndent=16, bulletIndent=2, bulletFontName="Helvetica-Bold",
+                                 bulletFontSize=11, bulletColor=H["accent"], **body),
+        "step": ParagraphStyle("GStep", **body),
+        "cover_title": ParagraphStyle("GCoverTitle", fontName="Helvetica-Bold", fontSize=40, leading=44,
+                                      textColor=H["anchor"], spaceAfter=4),
+        "cover_sub": ParagraphStyle("GCoverSub", fontName="Times-Italic", fontSize=21, leading=26, textColor=H["anchor"],
+                                    spaceAfter=14),
+        "kicker": ParagraphStyle("GKicker", fontName="Helvetica-Bold", fontSize=8, leading=11, textColor=H["gold_text"]),
+        "h2": ParagraphStyle("GH2", fontName="Helvetica-Bold", fontSize=17, leading=21.5, textColor=H["anchor"]),
+        "h3": ParagraphStyle("GH3", fontName="Helvetica-Bold", fontSize=11.5, leading=16, spaceBefore=10, spaceAfter=6,
+                             textColor=H["anchor"], keepWithNext=True),
+        "card_title": ParagraphStyle("GCardTitle", fontName="Helvetica-Bold", fontSize=12, leading=16, spaceAfter=9,
+                                     textColor=H["anchor"]),
+        "cell": ParagraphStyle("GCell", fontName="Helvetica", fontSize=9.4, leading=13.6, textColor=H["ink"]),
+        "cell_head": ParagraphStyle("GCellHead", fontName="Helvetica-Bold", fontSize=9.4, leading=13.6,
+                                    textColor=H["paper_light"]),
+        "q": ParagraphStyle("GQ", fontName="Helvetica-Bold", fontSize=10.4, leading=15, textColor=H["anchor"], spaceAfter=3),
+        "a": ParagraphStyle("GA", spaceAfter=0, **body),
+        "band_title": ParagraphStyle("GBandTitle", fontName="Helvetica-Bold", fontSize=18, leading=23,
+                                     textColor=H["paper_light"], spaceAfter=6),
+        "band_body": ParagraphStyle("GBandBody", fontName="Helvetica", fontSize=10.4, leading=15.5,
+                                    textColor=H["paper"]),
+        "band_kicker": ParagraphStyle("GBandKicker", fontName="Helvetica-Bold", fontSize=8, leading=11,
+                                      textColor=H["accent"], spaceAfter=6),
+        "toc": ParagraphStyle("GToc", fontName="Helvetica", fontSize=10, leading=14, textColor=H["ink"]),
+        "toc_page": ParagraphStyle("GTocPage", fontName="Helvetica", fontSize=10, leading=14, textColor=H["muted"],
+                                   alignment=2),
     }
 
     class WholeParagraph(Paragraph):
@@ -358,32 +463,82 @@ def _pdf_parts():
             self.canv.drawImage(self.path, 0, 0, self.size, self.size)
             self.canv.linkURL(self.url, (0, 0, self.size, self.size), relative=1, thickness=0)
 
-    return ink, paper, gold, styles, WholeParagraph, LinkedImage
+    class Badge(Flowable):
+        """A numbered circle: filled (the quick start) or a gold ring (lists further on)."""
+
+        def __init__(self, n: str, d: float, filled: bool):
+            super().__init__()
+            self.n, self.d, self.filled = n, d, filled
+
+        def wrap(self, *_):
+            return self.d, self.d
+
+        def draw(self):
+            cv, r = self.canv, self.d / 2
+            if self.filled:
+                cv.setFillColor(H["anchor"])
+                cv.circle(r, r, r, stroke=0, fill=1)
+                cv.setFillColor(H["paper_light"])
+            else:
+                cv.setStrokeColor(H["accent"])
+                cv.setLineWidth(1.2)
+                cv.setFillColor(H["card"])
+                cv.circle(r, r, r - 0.6, stroke=1, fill=1)
+                cv.setFillColor(H["anchor"])
+            size = self.d * 0.5
+            cv.setFont("Helvetica-Bold", size)
+            cv.drawCentredString(r, r - size * 0.36, self.n)
+
+    class Heading(Flowable):
+        """A section title: optional kicker ("STEP 3"), the title, a short gold bar; a PDF bookmark and a jump target."""
+
+        def __init__(self, title: str, kicker: str, key: str, toc_title: str, space_before: float = 24):
+            super().__init__()
+            self.title, self.kicker, self.toc_key, self.toc_title = title, kicker, key, toc_title
+            self.spaceBefore, self.keepWithNext = space_before, True
+
+        def wrap(self, aw, ah):
+            self._t = Paragraph(f'<a name="{self.toc_key}"/>{_inline(self.title)}', S["h2"])
+            self._k = Paragraph(self.kicker, S["kicker"]) if self.kicker else None
+            _, self._th = self._t.wrap(aw, ah)
+            self._kh = self._k.wrap(aw, ah)[1] + 3 if self._k else 0
+            self.width, self.height = aw, self._kh + self._th + 14
+            return self.width, self.height
+
+        def draw(self):
+            y = self.height
+            if self._k:
+                self._k.drawOn(self.canv, 0, y - self._kh + 3)
+                y -= self._kh
+            self._t.drawOn(self.canv, 0, y - self._th)
+            self.canv.setFillColor(H["accent"])
+            self.canv.roundRect(0, 2, 30, 2.6, 1.3, stroke=0, fill=1)
+
+    class Check(Flowable):
+        """A drawn check mark (the cover's "Good to know" list)."""
+
+        def wrap(self, *_):
+            return 12, 12
+
+        def draw(self):
+            cv = self.canv
+            cv.setStrokeColor(H["gold_text"])
+            cv.setLineWidth(1.8)
+            cv.setLineCap(1)
+            cv.setLineJoin(1)
+            p = cv.beginPath()
+            p.moveTo(1.5, 5.5)
+            p.lineTo(4.8, 2.2)
+            p.lineTo(10.5, 9.5)
+            cv.drawPath(p, stroke=1, fill=0)
+
+    return H, S, WholeParagraph, LinkedImage, Badge, Heading, Check
 
 
-def _inline(text: str) -> str:
-    text = escape(text).replace("—", "-").replace("–", "-")
-    text = re.sub(r"\[([^\]]+)\]\((https?://[^)]+)\)", r'<a href="\2" color="#2B1526"><u>\1</u></a>', text)
-    return re.sub(r"\*\*([^*]+)\*\*", r"<b>\1</b>", text)
-
-
-def build_pdf(markdown: str, out: Path, qr_png: Path, url: str, name: str) -> Path:
-    from reportlab.platypus import SimpleDocTemplate, Spacer, Table, TableStyle
-
-    ink, paper, gold, styles, WholeParagraph, LinkedImage = _pdf_parts()
-    from reportlab.platypus import Paragraph
-
-    def footer(canvas, doc):
-        canvas.saveState()
-        canvas.setStrokeColor(gold)
-        canvas.line(48, 42, 564, 42)
-        canvas.setFillColor(ink)
-        canvas.setFont("Helvetica", 8)
-        canvas.drawString(48, 28, f"BKE Studio  |  Start Here: {name}")
-        canvas.drawRightString(564, 28, str(doc.page))
-        canvas.restoreState()
-
-    flow, lines, i = [], markdown.splitlines(), 0
+def _blocks(markdown: str) -> list[tuple]:
+    """Ek A as blocks: ("title", text) ("h2", text) ("h3", text) ("p", text) ("li", text) ("num", n, text)
+    ("table", rows) ("box", lines) ("qr",)."""
+    out, lines, i = [], markdown.splitlines(), 0
     while i < len(lines):
         line = lines[i]
         i += 1
@@ -394,60 +549,273 @@ def build_pdf(markdown: str, out: Path, qr_png: Path, url: str, name: str) -> Pa
             while i < len(lines) and lines[i].startswith("|"):
                 rows.append(lines[i])
                 i += 1
-            data = []
-            for r in rows:
-                if re.match(r"^\|[\s:|-]+\|$", r):
-                    continue
-                cells = [c.strip() for c in r.strip().strip("|").split("|")]
-                if not data:
-                    cells = [f"**{c}**" for c in cells]
-                data.append([Paragraph(_inline(c), styles["cell"]) for c in cells])
-            table = Table(data, colWidths=[108, 408], repeatRows=1, hAlign="LEFT")
-            table.setStyle(TableStyle([
-                ("BACKGROUND", (0, 0), (-1, 0), paper), ("VALIGN", (0, 0), (-1, -1), "TOP"),
-                ("LEFTPADDING", (0, 0), (-1, -1), 8), ("RIGHTPADDING", (0, 0), (-1, -1), 8),
-                ("TOPPADDING", (0, 0), (-1, -1), 8), ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
-                ("LINEBELOW", (0, 0), (-1, -1), 0.5, gold)]))
-            flow.extend([table, Spacer(1, 10)])
-            continue
-        if line.startswith(">"):
-            # G148: consecutive "> " lines = one framed box on paper; a line that is only **bold** is its title
+            out.append(("table", [[c.strip() for c in r.strip().strip("|").split("|")]
+                                  for r in rows if not re.match(r"^\|[\s:|-]+\|$", r)]))
+        elif line.startswith(">"):
             box = [line]
             while i < len(lines) and lines[i].startswith(">"):
                 box.append(lines[i])
                 i += 1
-            inner = []
-            for b in (x[1:].strip() for x in box):
-                if not b:
-                    continue
-                m = re.fullmatch(r"\*\*([^*]+)\*\*", b)
-                inner.append(Paragraph(_inline(m.group(1) if m else b), styles["boxtitle" if m else "box"]))
-            frame = Table([[inner]], colWidths=[504], hAlign="LEFT")  # the text column (516 less the frame's 2 × 6 pt)
-            frame.setStyle(TableStyle([
-                ("BACKGROUND", (0, 0), (-1, -1), paper), ("BOX", (0, 0), (-1, -1), 1, gold),
-                ("LEFTPADDING", (0, 0), (-1, -1), 14), ("RIGHTPADDING", (0, 0), (-1, -1), 14),
-                ("TOPPADDING", (0, 0), (-1, -1), 10), ("BOTTOMPADDING", (0, 0), (-1, -1), 6)]))
-            flow.extend([frame, Spacer(1, 12)])
-            continue
-        if line.startswith("!["):
-            # The start QR of tools/make_qr.py, 1.6 in, clickable.
-            flow.extend([LinkedImage(qr_png, 115, url), Spacer(1, 12)])
-            continue
-        if line.startswith("# "):
-            style, line = "title", line[2:]
+            out.append(("box", [b for b in (x[1:].strip() for x in box) if b]))
+        elif line.startswith("!["):
+            out.append(("qr",))
+        elif line.startswith("# "):
+            out.append(("title", line[2:]))
         elif line.startswith("## "):
-            style, line = "h2", line[3:]
+            out.append(("h2", line[3:]))
         elif line.startswith("### "):
-            style, line = "h3", line[4:]
+            out.append(("h3", line[4:]))
+        elif line.startswith("- "):
+            out.append(("li", line[2:]))
+        elif m := re.match(r"^(\d+)\. (.*)$", line):
+            out.append(("num", m.group(1), m.group(2)))
         else:
-            style = "body"
-            if line.startswith("- "):
-                line = "• " + line[2:]
-        flow.append((WholeParagraph if style == "body" else Paragraph)(_inline(line), styles[style]))
+            out.append(("p", line))
+    return out
+
+
+def _sections(blocks: list[tuple]) -> list[tuple[str, str, str, str]]:
+    """(key, kicker, title, contents title) of every H2."""
+    out = []
+    for n, b in enumerate(x for x in blocks if x[0] == "h2"):
+        m = re.match(r"^Step (\d+)\. (.*)$", b[1])
+        kicker, title = (f"STEP {m.group(1)}", m.group(2)) if m else ("", b[1])
+        if b[1].startswith(QUICK_START):
+            kicker = "QUICK START"
+        toc = f"Step {m.group(1)}: {m.group(2)}" if m else b[1]
+        out.append((f"s{n:02d}", kicker, title, toc))
+    return out
+
+
+def build_pdf(markdown: str, out: Path, qr_png: Path, url: str, name: str, hero: Path | None = None) -> Path:
+    from PIL import Image
+    from reportlab.platypus import (KeepTogether, PageBreak, Paragraph, SimpleDocTemplate, Spacer, Table,
+                                    TableStyle)
+
+    c = _colours()
+    H, S, WholeParagraph, LinkedImage, Badge, Heading, Check = _pdf_parts(c)
+    inl = lambda t: _inline(t, link=c["anchor"], bold=c["anchor"])  # noqa: E731
+    blocks = _blocks(markdown)
+    sections = _sections(blocks)
+    title = next(b[1] for b in blocks if b[0] == "title")
+    big, small = (title.split(": ", 1) + [""])[:2]
+
+    def card(inner: list, bg: str = "card", pad: float = 16, border: bool = True, width: float = TEXT_W) -> Table:
+        t = Table([[inner]], colWidths=[width], hAlign="LEFT")
+        style = [("BACKGROUND", (0, 0), (-1, -1), H[bg]), ("ROUNDEDCORNERS", [10, 10, 10, 10]),
+                 ("LEFTPADDING", (0, 0), (-1, -1), pad), ("RIGHTPADDING", (0, 0), (-1, -1), pad),
+                 ("TOPPADDING", (0, 0), (-1, -1), pad - 2), ("BOTTOMPADDING", (0, 0), (-1, -1), pad - 6)]
+        if border:
+            style.append(("BOX", (0, 0), (-1, -1), 0.7, H["line"]))
+        t.setStyle(TableStyle(style))
+        return t
+
+    def numbered(n: str, text: str, big_badge: bool, width: float = TEXT_W) -> Table:
+        d = 24 if big_badge else 18
+        gap = 14 if big_badge else 10
+        p = Paragraph(inl(text), S["step"])
+        t = Table([[Badge(n, d, big_badge), p]], colWidths=[d + gap, width - d - gap], hAlign="LEFT")
+        t.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "TOP"), ("LEFTPADDING", (0, 0), (-1, -1), 0),
+                               ("RIGHTPADDING", (0, 0), (-1, -1), 0), ("TOPPADDING", (0, 0), (-1, -1), 0),
+                               ("BOTTOMPADDING", (0, 0), (-1, -1), 0), ("TOPPADDING", (1, 0), (1, 0), 3 if big_badge else 1)]))
+        return t
+
+    def contents(pages: dict[str, int]) -> list:
+        rows = [(f'<a href="#{k}" color="{c["ink"]}">{escape(t)}</a>', str(pages.get(k, ""))) for k, _, _, t in sections]
+        half = (len(rows) + 1) // 2
+        left, right = rows[:half], rows[half:] + [("", "")] * (2 * half - len(rows))
+        data = [[Paragraph(a, S["toc"]), Paragraph(b, S["toc_page"]), "", Paragraph(x, S["toc"]),
+                 Paragraph(y, S["toc_page"])] for (a, b), (x, y) in zip(left, right)]
+        col = (TEXT_W - 20) / 2
+        t = Table(data, colWidths=[col - 26, 26, 20, col - 26, 26], hAlign="LEFT")
+        t.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "TOP"), ("LEFTPADDING", (0, 0), (-1, -1), 0),
+                               ("RIGHTPADDING", (0, 0), (-1, -1), 0), ("TOPPADDING", (0, 0), (-1, -1), 3),
+                               ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
+                               ("LINEBELOW", (0, 0), (1, -1), 0.5, H["line"]),
+                               ("LINEBELOW", (3, 0), (4, len(rows) - half - 1), 0.5, H["line"])]))
+        return [Spacer(1, 10), Paragraph(GUIDE_TEXT["contents"], S["card_title"]), t]
+
+    def flow(pages: dict[str, int]) -> list:
+        f, sec, sec_i, i = [Spacer(1, HERO_H + 40)], "", -1, 0
+        while i < len(blocks):
+            b = blocks[i]
+            i += 1
+            kind = b[0]
+            if kind == "title":
+                f += [Paragraph(escape(big), S["cover_title"])]
+                if small:
+                    f.append(Paragraph(escape(small), S["cover_sub"]))
+            elif kind == "h2":
+                sec_i += 1
+                sec = b[1]
+                key, kicker, head, toc = sections[sec_i]
+                if sec_i in (1, 2):  # the quick start alone on page 2; "Come back on any device" opens page 3
+                    f.append(PageBreak())
+                elif re.match(r"^Step 1\. ", sec):  # the full guide starts: a signpost and the contents, together
+                    f += [KeepTogether([Spacer(1, 2), card([
+                        Paragraph(GUIDE_TEXT["full_kicker"], S["band_kicker"]),
+                        Paragraph(GUIDE_TEXT["full_title"], S["band_title"]),
+                        Paragraph(GUIDE_TEXT["full_body"], S["band_body"])], bg="anchor", pad=18, border=False),
+                        *contents(pages)])]
+                if sec_i == 0:  # "Good to know" on the cover: one card of check marks
+                    items = []
+                    while i < len(blocks) and blocks[i][0] == "li":
+                        row = Table([[Check(), Paragraph(inl(blocks[i][1]), S["step"])]], colWidths=[22, TEXT_W - 62])
+                        row.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "TOP"), ("LEFTPADDING", (0, 0), (-1, -1), 0),
+                                                 ("RIGHTPADDING", (0, 0), (-1, -1), 0), ("TOPPADDING", (0, 0), (0, 0), 2),
+                                                 ("TOPPADDING", (1, 0), (1, 0), 0), ("BOTTOMPADDING", (0, 0), (-1, -1), 7)]))
+                        items.append(row)
+                        i += 1
+                    f.append(card([Paragraph(f'<a name="{key}"/>{escape(head)}', S["card_title"]), *items], pad=20))
+                    continue
+                if sec.startswith("Help and privacy"):  # the last section, kept on one page: the way to reach us on a card
+                    last = [Heading(head, kicker, key, toc, space_before=26)]
+                    while i < len(blocks) and blocks[i][0] == "p":
+                        para = Paragraph(inl(blocks[i][1]), S["body"])
+                        last += [Spacer(1, 2), card([para], bg="tint", pad=16, border=False), Spacer(1, 10)] \
+                            if "@" in blocks[i][1] else [para]
+                        i += 1
+                    f.append(KeepTogether(last + [Spacer(1, 10), _EndMark()]))
+                    continue
+                f.append(Heading(head, kicker, key, toc, space_before=4 if sec.startswith(QUICK_START) else 26))
+            elif kind == "h3":
+                f.append(Paragraph(inl(b[1]), S["h3"]))
+            elif kind == "num":
+                quick = sec.startswith(QUICK_START)
+                f += [numbered(b[1], b[2], quick), Spacer(1, 14 if quick else 9)]
+            elif kind == "li":
+                f.append(WholeParagraph(inl(b[1]), S["bullet"], bulletText="•"))
+            elif kind == "qr":
+                # the start QR (tools/make_qr.py), clickable, in a card with the typed-address line that follows it
+                side = []
+                if i < len(blocks) and blocks[i][0] == "p" and "Type this address" in blocks[i][1]:
+                    side.append(Paragraph(inl(blocks[i][1]), S["step"]))
+                    i += 1
+                qr = 112
+                inner = Table([[LinkedImage(qr_png, qr, url), side]], colWidths=[qr + 18, TEXT_W - 38 - 32 - qr - 18])
+                inner.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "MIDDLE"), ("LEFTPADDING", (0, 0), (-1, -1), 0),
+                                           ("RIGHTPADDING", (0, 0), (-1, -1), 0), ("TOPPADDING", (0, 0), (-1, -1), 0),
+                                           ("BOTTOMPADDING", (0, 0), (-1, -1), 0)]))
+                q = card([inner], pad=16, width=TEXT_W - 38)
+                wrap = Table([["", q]], colWidths=[38, TEXT_W - 38], hAlign="LEFT")
+                wrap.setStyle(TableStyle([("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+                                          ("TOPPADDING", (0, 0), (-1, -1), 0), ("BOTTOMPADDING", (0, 0), (-1, -1), 0)]))
+                f += [wrap, Spacer(1, 16)]
+            elif kind == "table":
+                rows = b[1]
+                data = [[Paragraph(inl(x), S["cell_head"]) for x in rows[0]]]
+                data += [[Paragraph(f"<b>{inl(r[0])}</b>", S["cell"]), Paragraph(inl(r[1]), S["cell"])] for r in rows[1:]]
+                t = Table(data, colWidths=[104, TEXT_W - 104], repeatRows=1, hAlign="LEFT")
+                st = [("BACKGROUND", (0, 0), (-1, 0), H["anchor"]), ("BACKGROUND", (0, 1), (-1, -1), H["card"]),
+                      ("ROUNDEDCORNERS", [8, 8, 8, 8]), ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                      ("LEFTPADDING", (0, 0), (-1, -1), 10), ("RIGHTPADDING", (0, 0), (-1, -1), 10),
+                      ("TOPPADDING", (0, 0), (-1, -1), 8), ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
+                      ("LINEBELOW", (0, 1), (-1, -2), 0.5, H["line"]), ("BOX", (0, 0), (-1, -1), 0.7, H["line"])]
+                t.setStyle(TableStyle(st))
+                f += [Spacer(1, 4), t, Spacer(1, 14)]
+            elif kind == "box":
+                inner = []
+                for line in b[1]:
+                    if m := re.fullmatch(r"\*\*([^*]+)\*\*", line):
+                        inner.append(Paragraph(inl(m.group(1)), S["card_title"]))
+                    elif m := re.match(r"^(\d+)\. (.*)$", line):
+                        inner += [numbered(m.group(1), m.group(2), False, TEXT_W - 36), Spacer(1, 7)]
+                    else:
+                        inner.append(Paragraph(inl(line), S["body"]))
+                f += [Spacer(1, 2), card(inner, bg="tint", pad=18, border=False), Spacer(1, 14)]
+            elif kind == "p" and sec.startswith(QA_SECTIONS) and (m := re.match(r"^\*\*(.+?)\*\*\s*(.*)$", b[1])):
+                f.append(KeepTogether([Paragraph(inl(m.group(1)), S["q"]), Paragraph(inl(m.group(2)), S["a"]),
+                                       Spacer(1, 10)]))
+            elif kind == "p":
+                lead = sec_i < 0  # the thank-you line under the title
+                f.append((Paragraph if lead else WholeParagraph)(inl(b[1]), S["lead" if lead else "body"]))
+        return f
+
+    class _EndMark(Spacer):
+        """The logo, small and centred, under the last section."""
+
+        def __init__(self):
+            super().__init__(TEXT_W, 40)
+
+        def draw(self):
+            vb, _ = _svg_shapes(BRAND_SVG / "bke-logo-horizontal-anchor.svg")
+            h = 18
+            draw_logo(self.canv, BRAND_SVG / "bke-logo-horizontal-anchor.svg", (TEXT_W - vb[2] * h / vb[3]) / 2, 8, h)
+
+    def page_bg(canv):
+        canv.setFillColor(H["paper_light"])
+        canv.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
+
+    hero_file = None
+
+    def cover(canv, doc):
+        canv.saveState()
+        page_bg(canv)
+        draw_logo(canv, BRAND_SVG / "bke-logo-horizontal-anchor.svg", MARGIN, PAGE_H - 70, 24)
+        top = PAGE_H - 92
+        p = canv.beginPath()
+        p.roundRect(MARGIN, top - HERO_H, TEXT_W, HERO_H, 14)
+        canv.saveState()
+        canv.clipPath(p, stroke=0, fill=0)
+        if hero_file:
+            canv.drawImage(str(hero_file), MARGIN, top - HERO_H, TEXT_W, HERO_H)
+        else:
+            canv.setFillColor(H["paper"])
+            canv.rect(MARGIN, top - HERO_H, TEXT_W, HERO_H, stroke=0, fill=1)
+            draw_logo(canv, BRAND_SVG / "bke-monogram-anchor.svg", PAGE_W / 2 - 50, top - HERO_H / 2 - 46, 92)
+        canv.restoreState()
+        # the design's name on a white label over the picture (as /start says "Design: …")
+        label = f"Design: {name}"
+        canv.setFont("Helvetica-Bold", 9)
+        w = canv.stringWidth(label, "Helvetica-Bold", 9) + 24
+        canv.setFillColor(H["card"])
+        canv.roundRect(MARGIN + 14, top - HERO_H + 14, w, 22, 11, stroke=0, fill=1)
+        canv.setFillColor(H["anchor"])
+        canv.drawString(MARGIN + 26, top - HERO_H + 21.5, label)
+        canv.restoreState()
+
+    state = {"total": 0}
+
+    def later(canv, doc):
+        canv.saveState()
+        page_bg(canv)
+        canv.setStrokeColor(H["line"])
+        canv.setLineWidth(0.7)
+        canv.line(MARGIN, 44, PAGE_W - MARGIN, 44)
+        draw_logo(canv, BRAND_SVG / "bke-monogram-small-anchor.svg", MARGIN, 24, 12)
+        canv.setFillColor(H["muted"])
+        canv.setFont("Helvetica", 8)
+        canv.drawString(MARGIN + 20, 27, f"Start Here  ·  {name}")
+        total = state["total"]
+        canv.drawRightString(PAGE_W - MARGIN, 27, f"{doc.page} / {total}" if total else str(doc.page))
+        canv.restoreState()
+
+    class GuideDoc(SimpleDocTemplate):
+        def afterFlowable(self, fl):
+            key = getattr(fl, "toc_key", None)
+            if key:
+                self.canv.addOutlineEntry(fl.toc_title, key, level=0)
+                self.pages_of[key] = self.page
+
     out.parent.mkdir(parents=True, exist_ok=True)
-    SimpleDocTemplate(str(out), pagesize=(612, 792), leftMargin=48, rightMargin=48, topMargin=48, bottomMargin=56,
-                      title=f"Start Here: {name}", author="BKE Studio", subject=f"Your {name} wedding website: how to start",
-                      lang="en-US", invariant=1).build(flow, onFirstPage=footer, onLaterPages=footer)
+    with tempfile.TemporaryDirectory(prefix="guide_hero_") as tmp:
+        if hero:
+            im = Image.open(hero).convert("RGB")
+            want = TEXT_W / HERO_H
+            h = round(im.width / want)
+            if h <= im.height:
+                top = (im.height - h) // 2
+                im = im.crop((0, top, im.width, top + h))
+            hero_file = Path(tmp) / "hero.jpg"
+            im.save(hero_file, quality=86, optimize=True, progressive=False)
+        pages: dict[str, int] = {}
+        for _ in range(2):  # pass 1 finds the page of every section, pass 2 prints them in the contents
+            doc = GuideDoc(str(out), pagesize=(PAGE_W, PAGE_H), leftMargin=MARGIN, rightMargin=MARGIN, topMargin=MARGIN,
+                           bottomMargin=62, title=f"Start Here: {name}", author="BKE Studio",
+                           subject=f"Your {name} wedding website: how to start", lang="en-US", invariant=1)
+            doc.pages_of = {}
+            doc.build(flow(pages), onFirstPage=cover, onLaterPages=later)
+            pages, state["total"] = {**dict(doc.pages_of), sections[0][0]: 1}, doc.page  # "Good to know": the cover
     return out
 
 
@@ -460,7 +828,7 @@ def build(no: str, folder: str, theme: str, base: str = BASE_URL, tmpl: str | No
     out.mkdir(parents=True, exist_ok=True)
     (out / "START_HERE.md").write_text(md, encoding="utf-8")
     png, svg, page = make_start_qr(vals["START_URL"], out / "img", qr_dark(folder, theme))
-    pdf = build_pdf(md, out / "START_HERE.pdf", png, vals["START_URL"], vals["DESIGN_NAME"])
+    pdf = build_pdf(md, out / "START_HERE.pdf", png, vals["START_URL"], vals["DESIGN_NAME"], hero_picture(theme))
     return [out / "START_HERE.md", png, svg, page, pdf]
 
 
