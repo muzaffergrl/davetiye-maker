@@ -478,8 +478,18 @@ Shop Manager → Listings: **Draft 45, Active 0** (yayın yok; 15 ücretsiz kred
 
   ID'ler `tools/etsy_ids_22_48.json`'da (01–21: `tools/listing_v4/etsy_ids.json`). 22–48'in `listing_v3.md` §4 "Shop section"
   satırları Etsy'deki gerçek bölümle dolduruldu (Listings → Sections filtresiyle okundu).
-- Durum: **Draft 52** (49 tasarım + 3 hizmet), Active 0; yayın yok. Açık kalan: 33–38 ve 49'a v4 görselleri + video, 22–30 ve
-  47–48'e 09–19 görselleri (ana oturumun setleri).
+- **Medya güncellemeleri (aynı gün, ana oturumun v4 commit'leri eb814afb, e22e6ad8, 698631a7, 90f16e9b):**
+  - 22, 47, 48: 09–19 eklendi (01–08 ve video değişmedi).
+  - 23–32: 01/02/07 (yeni açılış adları), 06 ("Envelope" yerine tasarımın gerçek açılışı), 09–19 ve yeniden çekilen video →
+    görsellerin hepsi ve video silinip 19 görsel + yeni video sırayla yüklendi.
+  - 06, 09, 12, 13, 14, 18: 06 görseli değişti → 19 görsel silinip sırayla yeniden yüklendi (video korundu).
+  - 33–38: 19 görsel; video 33, 34, 35'te (36–38'inki çekildikçe eklenir).
+  - Yöntem notu: yeni düzenleyicide tek görseli yerinde değiştirmenin güvenilir yolu yok. Medya penceresinde silme her zaman
+    birinci öğeden başlıyor (küçük resme tıklamak seçimi değiştirmedi; iki denemede 1–14 silindi, ikisi de kaydedilmeden atıldı).
+    Bu yüzden tüm görseller silinip sırayla yüklendi. Kaydetme yalnız 19 görsel ve video sayısı tuttuğunda yapıldı; tutmadığında
+    (13'te bir görsel geç geldi) değişiklik atılıp tasarım yeniden yapıldı. Her taslak kayıttan sonra yeniden açılıp sayıldı.
+- Durum: **Draft 52** (49 tasarım + 3 hizmet), Active 0; yayın yok. 01–48'in hepsinde 19 görsel + START_HERE.pdf; video 01–35 ve
+  39–48'de. Açık kalan: 36–38 videoları (çekiliyor), 49'un v4 seti (ana oturum).
 
 ## 8. İlan paketi (01–05) — yüklemeye hazır, Etsy'ye eklenmedi (2026-10-15)
 

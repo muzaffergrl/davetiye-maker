@@ -50,134 +50,134 @@
       "n": 1,
       "file": "collections/37_Art_Nouveau_Lily/package/listing/images_v4/01_cover.jpg",
       "alt": "Art Nouveau Lily wedding website with RSVP: two phones show the closed cream envelope with three petal flaps under a stained-glass lily medallion, and the card with a sample arched portrait and the names Odette & Felix; badges: No Canva needed, RSVP guest list included, Edit on your phone",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 2,
       "file": "collections/37_Art_Nouveau_Lily/package/listing/images_v4/02_reveal.jpg",
       "alt": "Opens like a real envelope: three phones show guests tapping the envelope, the petal flaps opening like a lily, and the card with your photo rising out; sound and animation included",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 3,
       "file": "collections/37_Art_Nouveau_Lily/package/listing/images_v4/03_rsvp.jpg",
       "alt": "Collect RSVPs with ease: a guest's reply form in this design and the couple's guest list in the editor with reply counts and a Download Excel button; badges: your own questions, Excel guest list download",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 4,
       "file": "collections/37_Art_Nouveau_Lily/package/listing/images_v4/04_edit.jpg",
       "alt": "Edit everything on your phone, no Canva, no app, no account: the editor's list of pages, the Headings & labels screen and the \"Your website is live\" screen; every change saves by itself",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 5,
       "file": "collections/37_Art_Nouveau_Lily/package/listing/images_v4/05_pages.jpg",
       "alt": "Every page included: four phones show Home with the arched portrait on a cream card, Our Story, Details with the order of the day, and RSVP; countdown, schedule, map, Q&A, add-to-calendar, music, dress code, travel and registry",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 6,
       "file": "collections/37_Art_Nouveau_Lily/package/listing/images_v4/06_included.jpg",
       "alt": "What's included: the invitation on a phone beside a checklist: the envelope opening and four pages, online RSVP with your own questions, guest list and one-tap Excel download, countdown and add-to-calendar, 5 photos, music and venue map, QR code and printable invitation, editor on phone or computer, online until 12 months after your wedding",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 7,
       "file": "collections/37_Art_Nouveau_Lily/package/listing/images_v4/07_demo.jpg",
       "alt": "Try it before you buy: the closed lily envelope on a phone next to a QR code of the live demo; sample names and photos, yours replace them",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 8,
       "file": "collections/37_Art_Nouveau_Lily/package/listing/images_v4/08_how.jpg",
       "alt": "How it works: open the START HERE guide from your Etsy purchases, start with your Etsy order number and first names, personalize, then publish and share one link by text, WhatsApp, email or QR; the setup step \"Add your photo\" on a phone",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 9,
       "file": "collections/37_Art_Nouveau_Lily/package/listing/images_v4/09_closeup.jpg",
       "alt": "Designed to be opened: a close-up of a phone in a styled scene, showing the opened card with a sample photo and the names",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 10,
       "file": "collections/37_Art_Nouveau_Lily/package/listing/images_v4/10_tap.jpg",
       "alt": "One tap and it opens: a hand about to tap a phone that shows the closed lily envelope; sound and animation included",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 11,
       "file": "collections/37_Art_Nouveau_Lily/package/listing/images_v4/11_home.jpg",
       "alt": "Guests open it anywhere, with no app and no account: a guest at home holds a phone with the Home page",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 12,
       "file": "collections/37_Art_Nouveau_Lily/package/listing/images_v4/12_devices.jpg",
       "alt": "Beautiful on every screen: the website on a tablet and on a phone",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 13,
       "file": "collections/37_Art_Nouveau_Lily/package/listing/images_v4/13_laptop.jpg",
       "alt": "Edit on your laptop too: the private editor with its page preview on a laptop",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 14,
       "file": "collections/37_Art_Nouveau_Lily/package/listing/images_v4/14_together.jpg",
       "alt": "Plan it together: the guest list on a phone and on a laptop; your editor opens on any device",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 15,
       "file": "collections/37_Art_Nouveau_Lily/package/listing/images_v4/15_print.jpg",
       "alt": "Print it or send it: the printable invitation in this design (5 × 7 in or A5 PDF) beside a phone with the closed lily envelope",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 16,
       "file": "collections/37_Art_Nouveau_Lily/package/listing/images_v4/16_need.jpg",
       "alt": "Everything your guests need: four phones show the invitation, the venue and map, questions and answers, and a sent RSVP",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 17,
       "file": "collections/37_Art_Nouveau_Lily/package/listing/images_v4/17_day.jpg",
       "alt": "On the wedding day: the order of the day on a phone at a reception table, with add-to-calendar buttons",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 18,
       "file": "collections/37_Art_Nouveau_Lily/package/listing/images_v4/18_replies.jpg",
       "alt": "Every reply in one place: the list of replies on a phone beside a bouquet; download it as Excel in one tap",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 19,
       "file": "collections/37_Art_Nouveau_Lily/package/listing/images_v4/19_share.jpg",
       "alt": "Share it with one link by text, WhatsApp, email or QR: one person shows the Share screen to another; your own address with your names",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     }
   ],
   "gpt_mockup_scenes": [
@@ -315,7 +315,6 @@
     }
   ],
   "blockers": [
-    "listing images missing: collections/37_Art_Nouveau_Lily/package/listing/images_v4/01_cover.jpg, collections/37_Art_Nouveau_Lily/package/listing/images_v4/02_reveal.jpg, collections/37_Art_Nouveau_Lily/package/listing/images_v4/03_rsvp.jpg, collections/37_Art_Nouveau_Lily/package/listing/images_v4/04_edit.jpg, collections/37_Art_Nouveau_Lily/package/listing/images_v4/05_pages.jpg, collections/37_Art_Nouveau_Lily/package/listing/images_v4/06_included.jpg, collections/37_Art_Nouveau_Lily/package/listing/images_v4/07_demo.jpg, collections/37_Art_Nouveau_Lily/package/listing/images_v4/08_how.jpg, collections/37_Art_Nouveau_Lily/package/listing/images_v4/09_closeup.jpg, collections/37_Art_Nouveau_Lily/package/listing/images_v4/10_tap.jpg, collections/37_Art_Nouveau_Lily/package/listing/images_v4/11_home.jpg, collections/37_Art_Nouveau_Lily/package/listing/images_v4/12_devices.jpg, collections/37_Art_Nouveau_Lily/package/listing/images_v4/13_laptop.jpg, collections/37_Art_Nouveau_Lily/package/listing/images_v4/14_together.jpg, collections/37_Art_Nouveau_Lily/package/listing/images_v4/15_print.jpg, collections/37_Art_Nouveau_Lily/package/listing/images_v4/16_need.jpg, collections/37_Art_Nouveau_Lily/package/listing/images_v4/17_day.jpg, collections/37_Art_Nouveau_Lily/package/listing/images_v4/18_replies.jpg, collections/37_Art_Nouveau_Lily/package/listing/images_v4/19_share.jpg",
     "listing video missing",
     "sales status 'coming' in platform/lib/marketing/config.ts (K41: not for sale)",
     "price not decided for this design (config.ts price '[PRICE]'; 1190 TL is the 01–21 design price, docs/23 §1)",
