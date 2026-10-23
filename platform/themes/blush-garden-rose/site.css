@@ -25,7 +25,7 @@
   --safe-b: env(safe-area-inset-bottom, 0px);
 }
 *, *::before, *::after { box-sizing: border-box; }
-/* overflow-x clip on the root: animated parts (bow sliding off, petals) must never widen the mobile layout viewport */
+/* overflow-x clip on the root: animated parts (bow, petals) never widen the layout viewport */
 html { -webkit-text-size-adjust: 100%; background: var(--page); overflow-x: clip; }
 body {
   margin: 0;
@@ -49,6 +49,7 @@ button { font: inherit; color: inherit; }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 /* ---------------------------------------------------------------- type */
 .kicker {
+  text-wrap: balance;
   font-family: var(--display);
   font-weight: 600;
   font-size: 12px;
@@ -194,7 +195,7 @@ button { font: inherit; color: inherit; }
 /* "Replay" sits low (painted florals on many phones): a soft wash behind it, a 44 px tap target */
 .env-after .replay { background: #fff9f6c7; border: 0; border-radius: 999px; padding: 12px 18px; min-height: 44px; cursor: pointer; }
 .skip {
-  position: fixed; z-index: 20; top: max(14px, env(safe-area-inset-top)); right: 16px;
+  position: fixed; z-index: 20; top: max(14px, env(safe-area-inset-top)); right: calc(16px + env(safe-area-inset-right));
   display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; justify-content: center;
   padding: 10px 8px;
   font-family: var(--display); font-weight: 600; font-size: 12.5px; letter-spacing: .26em; text-transform: uppercase;
@@ -231,9 +232,7 @@ button { font: inherit; color: inherit; }
 .card-copy .kicker + .kicker { margin-top: 1.2cqw; font-size: max(12px, 4.2cqw); }
 @container (max-width:160px){.card-copy .kicker+.kicker{display:none}}
 
-/* ==========================================================================
-   Photo slot (data-slot = photo key; img[data-photo] is the swappable photo; .ph-mark = GPT petal + label)
-   ========================================================================== */
+/* == Photo slot (data-slot = photo key; img[data-photo] is the swappable photo; .ph-mark = GPT petal + label) */
 .photo-slot { position: absolute; overflow: hidden; background: rgb(var(--c-eed7d6)); container-type: inline-size; }
 .photo-slot > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .mask-card { -webkit-mask: url("img/mask_card.png") center / 100% 100% no-repeat; mask: url("img/mask_card.png") center / 100% 100% no-repeat; }
@@ -546,7 +545,7 @@ html[data-preview="true"] .photo-slot[data-photo-state="placeholder"] > .ph-mark
 .closing { padding: 40px 0 24px; }
 .closing .bow { width: min(70vw, 340px); margin: 0 auto; }
 .closing .title { font-size: clamp(54px, 15vw, 84px); margin-top: 4px; }
-.closing .line { font-family: var(--display); font-style: italic; font-size: 20px; color: var(--ink-soft); margin-top: 4px; }
+.closing .line { font-family: var(--display); font-style: italic; font-size: 20px; color: var(--ink-soft); margin-top: 4px; text-wrap: balance; }
 .closing .kicker { margin-top: 18px; overflow-wrap: anywhere; }
 /* after a reply the form's own thank-you answers the guest ("We'll miss you" / "We can't wait…"): the closing
    below must not repeat it or, for a guest who declined, contradict it (site.js sets data-rsvp-replied) */
@@ -657,3 +656,4 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
   .env-hint, .cue span[aria-hidden] { animation: none; }
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: .01ms !important; }
 }
+@media(max-width:600px){.sig>span{display:block}.sig>.mdot{display:none}}

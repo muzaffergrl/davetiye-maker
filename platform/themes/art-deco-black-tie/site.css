@@ -1,4 +1,4 @@
-/* Art Deco Black-Tie (06): GPT parts only (docs/11 §5.7); % = img/manifest.json */
+/* Art Deco Black-Tie (06): GPT parts only; % = img/manifest.json */
 
 /* -- tokens (palette.json: navy-deco-gold) */
 :root {
@@ -44,8 +44,7 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .nowrap { white-space: nowrap; }
 [data-empty] { display: none; }
 :focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; border-radius: 4px; }
-
-/* -- type: tall deco capitals (Italiana) + spaced geometric sans (Josefin Sans) */
+/* -- type: Italiana capitals + Josefin Sans */
 .deco { font-family: var(--deco); font-weight: 400; text-transform: uppercase; letter-spacing: .05em; color: var(--gold-light); line-height: 1.1;
         text-shadow: 0 0 18px rgb(var(--c-c9a55c)/.22); }
 .kicker {
@@ -64,7 +63,6 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .wrap { position: relative; width: min(100% - 40px, 420px); margin-inline: auto; }
 .section { position: relative; }
 .orn, .names-orn, .head-orn, .sec-orn, .cap-orn, .hint-orn, .card-orn, .dress-orn { display: block; height: auto; margin-inline: auto; }
-
 /* -- buttons: navy pill, fine gold outline (catalogue "buton") */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: .6em; min-height: 50px; min-width: 156px;
@@ -79,7 +77,6 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .btn-ghost { background: rgb(var(--c-0e1626)/.55); box-shadow: inset 0 0 0 1px rgb(var(--c-e6cf8f)/.7); }
 .btn-sm { min-height: 44px; min-width: 0; padding: 10px 18px; font-size: 11.5px; letter-spacing: .2em; text-indent: .2em; }
 .btn .star { width: 14px; height: auto; display: block; }
-
 /* -- navigation (W1: gold divider over spaced capitals) */
 .site-nav {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; view-transition-name: site-nav;
@@ -101,7 +98,6 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .site-nav a[aria-current="page"] { color: var(--gold-light); }
 .site-nav a[aria-current="page"] span { border-bottom-color: var(--gold); }
 .site-main { position: relative; z-index: 1; padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 24px); }
-
 /* -- entrances (MOTION.scenes) */
 .js [data-step] {
   opacity: 0;
@@ -122,11 +118,11 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 /* a corner cluster grows out of its corner (never past the screen edge) */
 .js [data-a="glide-tl"] { transform: scale(.9); transform-origin: 0 0; --dur: 1600ms; }
 .js [data-a="glide-br"] { transform: scale(.9); transform-origin: 100% 100%; --dur: 1600ms; }
-/* sweep (06): a doorway lights up from the dark as a band of gold light crosses it */
+/* sweep (06): a band of gold light crosses the doorway */
 .js [data-a="sweep"] { transform: translate3d(0, 14px, 0); --dur: 1500ms; }
 .js [data-a="sweep"] > * { filter: brightness(.3); transition: filter 1600ms var(--ease) var(--d, 0ms); }
 .js [data-a="sweep"].in > * { filter: none; }
-/* the band moves by background-position (a transform widened the page), masked to the doorway (frame + window) */
+/* the band moves by background-position (a transform widened the page) */
 .js [data-a="sweep"]::after {
   content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; mix-blend-mode: screen; opacity: 0;
   background: linear-gradient(112deg, rgb(var(--c-ffe4a0)/0) 42%, rgb(var(--c-ffe4a0)/.34) 50%, rgb(var(--c-ffe4a0)/0) 58%) 100% 0 / 250% 100% no-repeat;
@@ -141,7 +137,6 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .js [data-a="turn-in"] { transform: rotate(-70deg) scale(.86); --dur: 1400ms; }
 /* a card set down, always opaque */
 .js [data-a="set"] { opacity: 1; transform: translate3d(0, 24px, 0) scale(.97); --dur: 1300ms; }
-
 /* -- photo slots (docs/11 §5.6, §9) */
 .photo-slot { position: absolute; overflow: hidden; background: rgb(var(--c-1a2740)); }
 .photo-slot > img[data-photo] { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; display: block; }
@@ -157,7 +152,6 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
   font: 400 11px/1.3 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft); text-align: center;
 }
 .ph-mark img { width: 28%; max-width: 44px; opacity: .9; }
-
 /* -- card_small (= home hero card) */
 .card { position: relative; aspect-ratio: 809 / 1157; container-type: inline-size; }
 .card > .photo-slot { left: 15.698%; top: 11.063%; width: 68.603%; height: 49.092%; } /* photo_slots.card */
@@ -167,7 +161,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
   position: absolute; left: 7%; right: 7%; top: 63.5%; bottom: 7.5%;
   display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 2.2cqw;
 }
-.card-copy .card-line { font-size: 8.1cqw; line-height: 1.04; color: var(--bronze); text-shadow: none; letter-spacing: .02em; text-wrap: balance; max-width: 100%; }
+.card-copy .card-line { font-size: 8.1cqw; line-height: 1.04; color: color-mix(in srgb, var(--bronze) 86%, #000); text-shadow: none; letter-spacing: .02em; text-wrap: balance; max-width: 100%; }
 .card-copy .card-orn { width: 44cqw; }
 .card-copy .kicker { font-size: max(11px, 4.5cqw); letter-spacing: .08em; line-height: 1.3; color: var(--card-ink); overflow-wrap: anywhere; }
 /* site.js fitCopy */
@@ -175,11 +169,10 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .card-copy[data-wrap] .cc-city { display: block; }
 .card-copy[data-wrap] .nowrap { white-space: normal; }
 .card-copy[data-drop~="c"] .sep, .card-copy[data-drop~="c"] .cc-city, .card-copy[data-drop~="s"] .card-line, .card-copy[data-drop~="s"] .card-orn { display: none; }
-
 /* -- backdrop: rays + whole decor_tl / decor_br + three small pieces */
 .scene-bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
 .rays { position: absolute; left: 50%; top: 0; width: max(150vw, 560px); max-width: none; height: auto; translate: -50% 0; opacity: .95; }
-/* the rays end above the envelope's first line (W1.1; site.js --re = its top) */
+/* the rays end above the envelope's first line (site.js --re) */
 .page-envelope .rays { -webkit-mask-image: linear-gradient(#000 calc(var(--re, 200vh) - 64px), transparent calc(var(--re, 200vh) - 6px)); mask-image: linear-gradient(#000 calc(var(--re, 200vh) - 64px), transparent calc(var(--re, 200vh) - 6px)); }
 @media (min-aspect-ratio: 3/4) { .rays { width: max(80vw, 560px); } }
 .float { position: absolute; display: block; height: auto; filter: drop-shadow(0 5px 6px rgba(0, 0, 0, .35)); }
@@ -199,16 +192,15 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 @media (min-aspect-ratio: 3/4) {
   .scene-bg .corner-tl, .scene-bg .corner-br { --cw: min(24vw, 40vh, 340px); }
 }
-
 /* == page 1 — envelope (W1.1) */
 .page-envelope { overflow-x: clip; }
 .skip {
-  position: fixed; top: calc(6px + env(safe-area-inset-top)); right: 8px; z-index: 50; min-width: 48px; min-height: 44px;
+  position: fixed; top: calc(6px + env(safe-area-inset-top)); right: calc(8px + env(safe-area-inset-right)); z-index: 50; min-width: 48px; min-height: 44px;
   display: flex; align-items: center; justify-content: center; padding: 0 12px; text-decoration: none;
   font: 400 12px/1 var(--sans); letter-spacing: .26em; text-transform: uppercase; color: var(--ink-soft);
 }
 .skip span { padding-bottom: 3px; border-bottom: 1px solid var(--hair); }
-/* --obj = closed folder, --w = --obj / .48512 (closed_obj.frac_w); empty top .10077 × --w (card room) */
+/* --obj closed folder, --w = --obj / .48512; empty top .10077 × --w */
 .env-page {
   --obj: min(80vw, 30.78svh, 400px); --w: calc(var(--obj) * var(--ok, 1) / .48512); --nm: clamp(34px, 10.4vw, 66px);
   position: relative; z-index: 1; min-height: 100svh; display: flex; flex-direction: column; align-items: center;
@@ -227,7 +219,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
   margin-top: calc(max(14px, var(--nm) * var(--names-scale, 1) * .32) - var(--w) * .10077); cursor: pointer; border-radius: 6px;
 }
 .stage:focus-visible { outline-offset: -4px; }
-/* the opened folder fits the screen (docs/11 §7.1: × min(1, .94 × 100vw / open spread); site.js --os) */
+/* the opened folder fits the screen (site.js --os) */
 .env { position: absolute; inset: 0; transform-origin: 50% 56.344%; } /* closed_obj.center_pct */
 .env > img, .closure > img { position: absolute; display: block; }
 /* layers bottom → top (stage.parts) */
@@ -242,7 +234,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 .card-slot { position: absolute; inset: 0; z-index: 1; clip-path: inset(-200% -10% 0 -10%); }
 .env .card { position: absolute; left: 30.521%; top: 67.089%; width: 38.81%; } /* stage.parts.card */
 .env .card .card-img { filter: drop-shadow(0 10px 16px rgba(0, 0, 0, .38)); }
-/* the gold medallion clasp on the seam (manifest closure), turning about its pearl */
+/* the gold clasp on the seam (manifest closure) */
 .closure { position: absolute; z-index: 5; left: 44.002%; top: 45.221%; width: 12.797%; height: 18.55%;
            transform-origin: 46.285% 46.082%; /* closure.pearl_center_in_crop_pct */
            filter: drop-shadow(0 7px 8px rgba(0, 0, 0, .45)) drop-shadow(0 1px 1px rgba(0, 0, 0, .35)); } /* stage.parts.closure */
@@ -555,7 +547,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .reply-panel .note { margin-top: 6px; }
 .reply-panel .textlink { margin-top: 4px; }
 .closing .title { font-size: clamp(40px, 12vw, 58px); }
-.closing .line { margin-top: 6px; font-size: 18px; color: var(--ivory); }
+.closing .line { margin-top: 6px; font-size: 18px; color: var(--ivory); text-wrap: balance; }
 .closing .kicker { margin-top: 12px; overflow-wrap: break-word; }
 .closing .replay-line { margin-top: 22px; }
 html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line { display: none; }
@@ -618,3 +610,6 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
   .js .env-hint, .js .float { animation: none !important; }
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: 1ms !important; }
 }
+/* password page (gate.ts): navy ink, names in Italiana */
+[data-site-gate]{--ink:var(--card-ink);--ink-soft:var(--card-ink);--script:var(--deco)}
+@media(max-width:600px){.sig>span{display:block}.sig>.mdot{display:none}}

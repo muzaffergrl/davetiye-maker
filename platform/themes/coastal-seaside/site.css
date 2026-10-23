@@ -1,4 +1,4 @@
-/* Coastal Seaside (20): GPT parts only (docs/11 §5.7); % = img/manifest.json */
+/* Coastal Seaside (20): GPT parts only; % = img/manifest.json */
 /* -- tokens (palette.json: seaside) */
 :root {
   --page: #D8EEF6; /* manifest page_color */
@@ -58,7 +58,7 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 :is(.foot,.closing,.reply-panel) .textlink{padding:14px 0;margin:-14px 0}
 .wrap { position: relative; width: min(100% - 40px, 430px); margin-inline: auto; }
 .section { position: relative; }
-/* W1.4 / W1.5: a row of shells and sea glass (GPT divider) between two hairlines (1 px dividers) */
+/* W1.4 / W1.5: shells and sea glass (GPT divider) between two hairlines */
 .orn { display: flex; align-items: center; gap: 10px; width: min(100%, 250px); margin-inline: auto; }
 .orn::before, .orn::after { content: ""; flex: 1 1 0; height: 1px; background: var(--hair); }
 .orn img { width: 92px; height: auto; display: block; filter: drop-shadow(0 2px 2px rgb(var(--c-1e3246)/.14)); }
@@ -185,12 +185,12 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 /* == page 1 — envelope (W1.1) */
 .page-envelope { overflow-x: clip; }
 .skip {
-  position: fixed; top: calc(6px + env(safe-area-inset-top)); right: 8px; z-index: 50; min-width: 48px; min-height: 44px;
+  position: fixed; top: calc(6px + env(safe-area-inset-top)); right: calc(8px + env(safe-area-inset-right)); z-index: 50; min-width: 48px; min-height: 44px;
   display: flex; align-items: center; justify-content: center; padding: 0 12px; text-decoration: none;
   font: 400 11.5px/1 var(--serif); letter-spacing: .22em; text-transform: uppercase; color: var(--ink-soft);
 }
 .skip span { padding-bottom: 3px; border-bottom: 1px solid var(--hair); }
-/* --obj = closed envelope, --w = --obj / .99084 (closed_obj.frac_w); empty top .65648 × --w */
+/* --obj closed envelope, --w = --obj / .99084; empty top .65648 × --w */
 .env-page {
   --obj: min(82vw, calc(36svh * 1.5474), 440px); --w: calc(var(--obj) * var(--ok, 1) / .99084); --nm: clamp(60px, 18vw, 104px);
   position: relative; z-index: 1; min-height: 100svh; display: flex; flex-direction: column; align-items: center;
@@ -502,7 +502,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 /* == page 5 — RSVP (W1.5) */
 .rsvp-top { padding: clamp(96px, 28vw, 150px) 0 0; }
 .rsvp-top .wrap { --ww: min(100vw - 40px, 420px); z-index: 1; width: var(--ww); }
-/* the shell rests on the shoreline at the bottom of the card: the text ends above the slice (80 %), the shell overlaps it */
+/* the shell rests on the shoreline at the card's foot: text ends above the slice (80 %) */
 .rsvp-text { padding: 13cqw 11% calc(var(--bot-h) * .3); }
 .title-orn { width: 72cqw; gap: 2.6cqw; margin-top: 3cqw; }
 .title-orn img { width: 26cqw; }
@@ -515,7 +515,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .sig-unit { --sg: 1; }
 .rsvp-text .love { margin-top: calc(5cqw * var(--sg)); font-size: max(11px, 2.8cqw); letter-spacing: .24em; }
 .rsvp-text .sign { margin-top: calc(.6cqw * var(--sg)); font-size: calc(14cqw * var(--sg)); line-height: calc(.7 + .3 * var(--sg)); text-wrap: balance; overflow-wrap: break-word; max-width: 100%; }
-/* the scallop shell from the envelope (W1.5), on the wave at the card's foot (≈ 32 % of its width with the twine) */
+/* the scallop shell from the envelope (W1.5), on the wave at the card's foot */
 .card-bundle { --sg: 1; position: relative; width: calc(32cqw * var(--sg)); aspect-ratio: 700 / 361; margin-top: calc(var(--bot-h) * .32);
                filter: drop-shadow(0 7px 8px #281e143d) drop-shadow(0 1px 1px #281e1433); }
 .reply-sec { padding: 50px 0 10px; }
@@ -550,7 +550,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .reply-panel .note { margin-top: 6px; }
 .reply-panel .textlink { margin-top: 4px; }
 .closing .title { font-size: 80px; }
-.closing .line { margin-top: 4px; font-style: italic; font-size: 18px; color: var(--ink); }
+.closing .line { margin-top: 4px; font-style: italic; font-size: 18px; color: var(--ink); text-wrap: balance; }
 .closing .kicker { margin-top: 12px; overflow-wrap: break-word; }
 .closing .replay-line { margin-top: 22px; }
 html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line { display: none; }
@@ -609,3 +609,4 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
   .js .env-hint p, .js .float { animation: none !important; }
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: 1ms !important; }
 }
+@media(max-width:600px){.sig>span{display:block}.sig>.mdot{display:none}}

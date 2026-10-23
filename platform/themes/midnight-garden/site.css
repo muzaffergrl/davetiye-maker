@@ -1,4 +1,4 @@
-/* Midnight Garden (19): GPT parts only (docs/11 §5.7); % = img/manifest.json */
+/* Midnight Garden (19): GPT parts only; % = img/manifest.json */
 /* -- tokens (palette.json: midnight) */
 :root {
   --page: #0E0D0E; /* manifest page_color */
@@ -180,12 +180,12 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 /* == page 1 — envelope (W1.1) */
 .page-envelope { overflow-x: clip; }
 .skip {
-  position: fixed; top: calc(6px + env(safe-area-inset-top)); right: 8px; z-index: 50; min-width: 48px; min-height: 44px;
+  position: fixed; top: calc(6px + env(safe-area-inset-top)); right: calc(8px + env(safe-area-inset-right)); z-index: 50; min-width: 48px; min-height: 44px;
   display: flex; align-items: center; justify-content: center; padding: 0 12px; text-decoration: none;
   font: 500 14px/1 var(--sc); letter-spacing: .22em; text-transform: lowercase; color: var(--ink-soft);
 }
 .skip span { padding-bottom: 3px; border-bottom: 1px solid var(--hair); }
-/* --obj = closed envelope, --w = --obj / .99551 (closed_obj.frac_w); empty top .68288 × --w */
+/* --obj closed envelope, --w = --obj / .99551; empty top .68288 × --w */
 .env-page {
   --obj: min(84vw, calc(38svh * 1.5644), 440px); --w: calc(var(--obj) * var(--ok, 1) / .99551); --nm: clamp(32px, 9.4vw, 60px);
   position: relative; z-index: 1; min-height: 100svh; display: flex; flex-direction: column; align-items: center;
@@ -442,7 +442,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .no-js .frame > .glow, .frame.in > .glow { opacity: 1; }
 .pane figcaption { margin-top: 10px; font-size: 15px; letter-spacing: .26em; line-height: 1.4; color: var(--ink-soft); text-wrap: balance; overflow-wrap: break-word; padding: 0 4px; }
 @media (min-width: 720px) {
-  /* the comp's salon: 1 high left, 2 lower right, 3 under 1 (no spanning item) */
+  /* the comp's salon: 1 high left, 2 lower right, 3 under 1 */
   .salon { --fw: min(29vw, 320px); display: grid; grid-template-columns: var(--fw) var(--fw); column-gap: 5vw; justify-content: center; padding-top: 40px; }
   .p-1, .p-2, .p-3 { margin: 0; align-self: start; }
   .p-2 { grid-area: 1 / 2; margin-top: 48%; }
@@ -547,7 +547,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .reply-panel .note { margin-top: 6px; }
 .reply-panel .textlink { margin-top: 4px; }
 .closing .title { font-size: 44px; }
-.closing .line { margin-top: 4px; font-style: italic; font-size: 20px; color: var(--ink); }
+.closing .line { margin-top: 4px; font-style: italic; font-size: 20px; color: var(--ink); text-wrap: balance; }
 .closing .kicker { margin-top: 12px; overflow-wrap: break-word; }
 .closing .replay-line { margin-top: 22px; }
 html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line { display: none; }
@@ -607,3 +607,6 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
   .js .env-hint p, .js .float { animation: none !important; }
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: 1ms !important; }
 }
+/* password page (gate.ts): dark ink on its light card, names in Playfair SC */
+[data-site-gate]{--ink:var(--night);--ink-soft:var(--seal-ink);--script:var(--disp)}
+@media(max-width:600px){.sig>span{display:block}.sig>.mdot{display:none}}
