@@ -103,7 +103,9 @@ describes only the look of a missing part. The demo shows the design's PAKET 2 p
 
 ## What waits for GPT
 
-Nothing of PAKET 5 or PAKET 2. PAKET 6 (print) by hand: `lib/print/layouts.ts` (steps in GPT_PROMPTS.md).
+Nothing of PAKET 5 or PAKET 2. PAKET 6 is in (2026-10-23): `lib/print/layouts.ts` takes `print/invitation_front_5x7.png` /
+`invitation_back_5x7.png` as one `cover` ground per side, the text boxes measured on the art (G149);
+`node scripts/build-print-assets.ts --theme papel-picado-fiesta` writes `public/print/papel-picado-fiesta/front.webp` and `back.webp`.
 
 ## Known limits
 

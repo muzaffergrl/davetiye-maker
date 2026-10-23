@@ -128,9 +128,9 @@ sized by the card (cqw) and `fitCard` keeps the last line above the card's botto
 
 ## What waits for GPT
 
-Nothing of PAKET 5 or PAKET 2. Still **by hand**: PAKET 6 (`print/invitation_front_5x7`, `invitation_back_5x7` are in the
-collection) → `lib/print/layouts.ts`, `node scripts/build-print-assets.ts --theme victorian-glasshouse` (G149,
-GPT_PROMPTS.md PAKET 6).
+Nothing of PAKET 5 or PAKET 2. PAKET 6 is in (2026-10-23): `lib/print/layouts.ts` takes `print/invitation_front_5x7.png` /
+`invitation_back_5x7.png` as one `cover` ground per side, the text boxes measured on the art (G149);
+`node scripts/build-print-assets.ts --theme victorian-glasshouse` writes `public/print/victorian-glasshouse/front.webp` and `back.webp`.
 
 ## Deviations from the standard
 
