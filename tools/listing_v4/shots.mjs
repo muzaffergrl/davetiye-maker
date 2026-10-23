@@ -8,7 +8,8 @@ mkdirSync(out, { recursive: true });
 const b = await chromium.launch();
 const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, locale: 'en-US' });
 const p = await ctx.newPage();
-const url = `https://bkestudio.com/start/demo/${theme}`;
+// DEMO_BASE: a local `next start` (…/start/demo) when the live site does not have the theme version to show yet
+const url = `${process.env.DEMO_BASE || 'https://bkestudio.com/start/demo'}/${theme}`;
 await p.goto(url, { waitUntil: 'networkidle' });
 await p.waitForTimeout(1500);
 await p.goto(`${url}/home`, { waitUntil: 'networkidle' }); // warm the home page's images too

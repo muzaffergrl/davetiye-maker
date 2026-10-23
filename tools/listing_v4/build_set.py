@@ -6,7 +6,7 @@ from PIL import Image
 import segno
 
 HERE = Path(__file__).resolve().parent
-ROOT = Path("C:/Users/Foto/Documents/davetiye-maker")
+ROOT = Path(os.environ.get("DM_ROOT", "C:/Users/Foto/Documents/davetiye-maker"))   # repo root (DM_ROOT on other machines)
 sys.path.insert(0, str(HERE))
 import slides
 
@@ -14,9 +14,9 @@ THEMES = {nn: th for nn, th, _ in json.loads((HERE / "themes.json").read_text())
 PICKS = json.loads((HERE / "picks.json").read_text())
 # what opens on the first page (from the opening of each design)
 OPENS = {"06": "gatefold", "09": "linen pouch", "12": "travel wallet", "13": "storybook", "14": "lace gatefold", "18": "vellum sleeve",
-         # 23–32: the word each listing (listing_v3.md) uses for its opening object
-         "23": "jewel box", "24": "velvet curtain", "25": "ticket wallet", "26": "origami", "27": "riad doors", "28": "parcel",
-         "29": "star chart", "30": "tile panel", "31": "silk pouch", "32": "music box", "36": "seed packet"}
+         # 22–32 (redesign K54, 2026-10-23): every new theme opens its own envelope (catalogue, panel tab and listing say
+         # "envelope"); only 25's listing and button name it a ticket sleeve
+         "25": "ticket sleeve", "36": "seed packet"}
 SCRIPTS = ("Vibes", "Script", "Pinyon", "Allura", "Parisienne", "Italianno", "Alex Brush", "Tangerine", "Monsieur", "Rouge",
            "Petit Formal", "Herr Von", "Mrs Saint", "Imperial", "Bilbo", "Carattere", "Ballet", "Corinthia", "Luxurious",
            "Hurricane", "Meow", "Birthstone", "Water Brush", "Sacramento", "Dancing", "Satisfy", "Cormorant Upright")

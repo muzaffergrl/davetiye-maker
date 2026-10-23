@@ -20,6 +20,14 @@ Mutlak yollar (repo kökü `C:/Users/Foto/Documents/davetiye-maker`, ffmpeg içi
 font `newpal.json`'dan. B+C tek komut: `stageBC.sh NN …`. PAKET 7 sahneleri (`assets/gpt/mockups/p7_*.png`) yoksa `build_set.py`
 yaşam tarzı görsellerini atlar (kapak + 7 bilgi görseli); sahneler gelince aynı komut 19 görselin tamamını üretir.
 
+**22–32 yeniden tasarım (K54, 2026-10-23):** yeni temalar canlı sitede yokken yerel production build'den çekildi (Linux bulut
+oturumu). Betikler `DM_ROOT` (repo kökü) ve `DEMO_BASE` (A için yerel `…/start/demo`) ile her makinede çalışır; varsayılanlar
+yukarıdaki Windows yollarıdır. Linux'ta A+C+B: `stageLinux.sh NN …`, E: `stageELinux.sh NN …` (ikisi de `serve.ts` ile yerel
+sunucu açar; PDF → PNG `pdftoppm`, video `ffmpeg`; `imageio_ffmpeg` yoksa sistemdeki). Çalışma klasöründe
+`node_modules/playwright-core` → `platform/node_modules/playwright-core` bağlantısı yeter. Yeni 11 temanın hepsi kendi zarfıyla
+açılır: görsellerde nesne "envelope", yalnız 25'te ilan başlığıyla aynı "ticket sleeve"; zemin dokusu ve script font
+(tema CSS'indeki script ailesi; temada script yoksa eski seçim) `newpal.json`'da.
+
 Kurallar: telefon ekranları her zaman gerçek ekran görüntüsü; yazılar HTML'den (GPT görsele yazı koymaz); QR `segno` ile gerçek
 demo adresinden; görsellerdeki maddeler ilan açıklamasındaki doğrulanmış özelliklerden. Renk paletleri platformda "coming"
 olduğu sürece palet görseli sete girmez.

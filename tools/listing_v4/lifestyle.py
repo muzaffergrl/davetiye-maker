@@ -4,7 +4,7 @@ import json, os, subprocess, sys
 from pathlib import Path
 from PIL import Image
 
-sys.path.insert(0, "C:/Users/Foto/Documents/davetiye-maker/tools")
+sys.path.insert(0, os.path.join(os.environ.get("DM_ROOT", "C:/Users/Foto/Documents/davetiye-maker"), "tools"))
 from mockup_compose import birlestir_cok, yesil_maske, yesil_bolgeler
 import numpy as np
 import slides

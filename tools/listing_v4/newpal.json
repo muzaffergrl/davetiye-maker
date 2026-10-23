@@ -5,7 +5,7 @@
   "deep": "#1C1D15",
   "ivory": "#FBF6EC",
   "primary": "#C7A978",
-  "bg": "none.png",
+  "bg": "ivory_laid.png",
   "script": "Italiana"
  },
  "23": {
@@ -14,7 +14,7 @@
   "deep": "#4A2142",
   "ivory": "#FBF5EE",
   "primary": "#C99A86",
-  "bg": "none.png",
+  "bg": "moire_ground.png",
   "script": "Pinyon Script"
  },
  "24": {
@@ -23,7 +23,7 @@
   "deep": "#16595B",
   "ivory": "#F3EBD8",
   "primary": "#C9A45C",
-  "bg": "none.png",
+  "bg": "page_ground.png",
   "script": "Italianno"
  },
  "25": {
@@ -32,7 +32,7 @@
   "deep": "#1E3A2C",
   "ivory": "#F3EBD9",
   "primary": "#B8914B",
-  "bg": "none.png",
+  "bg": "page_ground.png",
   "script": "Allura"
  },
  "26": {
@@ -41,8 +41,8 @@
   "deep": "#242E58",
   "ivory": "#F3ECDC",
   "primary": "#C9A55A",
-  "bg": "none.png",
-  "script": "Shippori Mincho"
+  "bg": "page_ground.png",
+  "script": "Allura"
  },
  "27": {
   "name": "Riad Lantern Nights",
@@ -50,7 +50,7 @@
   "deep": "#0F2F31",
   "ivory": "#F6EEDF",
   "primary": "#E3A54A",
-  "bg": "none.png",
+  "bg": "tadelakt_ground.png",
   "script": "Italianno"
  },
  "28": {
@@ -59,7 +59,7 @@
   "deep": "#5E7A55",
   "ivory": "#FBF5EC",
   "primary": "#E8B4B8",
-  "bg": "none.png",
+  "bg": "page_ground.png",
   "script": "Parisienne"
  },
  "29": {
@@ -68,8 +68,8 @@
   "deep": "#11193A",
   "ivory": "#EEEBE3",
   "primary": "#C8A24E",
-  "bg": "none.png",
-  "script": "Pinyon Script"
+  "bg": "chart_paper.png",
+  "script": "Imperial Script"
  },
  "30": {
   "name": "Azulejo Mosaic",
@@ -77,8 +77,8 @@
   "deep": "#1F4A9E",
   "ivory": "#F2EDE3",
   "primary": "#AE583A",
-  "bg": "none.png",
-  "script": "Italianno"
+  "bg": "whitewash_ground.png",
+  "script": "Arizonia"
  },
  "31": {
   "name": "Sky Lantern Festival",
@@ -86,8 +86,8 @@
   "deep": "#2B1F45",
   "ivory": "#F7EEDD",
   "primary": "#F2A65A",
-  "bg": "none.png",
-  "script": "Allura"
+  "bg": "rice_paper.png",
+  "script": "Corinthia"
  },
  "32": {
   "name": "Music Box Ballerina",
@@ -95,7 +95,7 @@
   "deep": "#B76E79",
   "ivory": "#FBF1EE",
   "primary": "#EECDD0",
-  "bg": "none.png",
+  "bg": "page_ground.png",
   "script": "Great Vibes"
  },
  "33": {

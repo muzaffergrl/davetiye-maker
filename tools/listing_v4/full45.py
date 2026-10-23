@@ -5,9 +5,12 @@ so Etsy's autoplay loop has no jump."""
 import json, subprocess, sys, tempfile
 from pathlib import Path
 from PIL import Image
-import imageio_ffmpeg
-
-FF = imageio_ffmpeg.get_ffmpeg_exe()
+try:
+    import imageio_ffmpeg
+    FF = imageio_ffmpeg.get_ffmpeg_exe()
+except ImportError:                       # Linux: the system ffmpeg
+    import shutil
+    FF = shutil.which("ffmpeg")
 d, out = Path(sys.argv[1]), Path(sys.argv[2])
 meta = json.loads((d / "frames.json").read_text())
 fr = meta["frames"]

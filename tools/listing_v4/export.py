@@ -1,8 +1,8 @@
 """setNN/*.png → collections/NN_*/package/listing/images_v4/NN-name.jpg (Etsy upload order)."""
-import glob, sys
+import glob, os, sys
 from pathlib import Path
 from PIL import Image
-ROOT = Path("C:/Users/Foto/Documents/davetiye-maker")
+ROOT = Path(os.environ.get("DM_ROOT", "C:/Users/Foto/Documents/davetiye-maker"))
 for nn in sys.argv[1:]:
     d = Path(glob.glob(str(ROOT / f"collections/{nn}_*"))[0]) / "package/listing/images_v4"
     d.mkdir(parents=True, exist_ok=True)
