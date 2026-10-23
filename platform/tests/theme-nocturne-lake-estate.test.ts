@@ -290,11 +290,9 @@ test('thank-you mode closes RSVP, keeps the story and the card carries the thank
   assert.equal(cheerio.load((await render('rsvp', demo)).html)('[data-rsvp-form]').length, 0);
 });
 
-test('opening sounds: the glint, the moon rising, the band, the flap, the card — on the MOTION times', () => {
-  const sound = designSound(id);
-  assert.deepEqual(sound, { music: 'evening-strings', opening: [[0, 'chime'], [200, 'whoosh'], [800, 'slide'], [1500, 'paper'], [2500, 'slide']] });
-  const at = (k: string) => Number(new RegExp(`${k}: \\[(\\d+), `).exec(js)![1]);
-  assert.deepEqual(sound!.opening.map(([t]) => t), [at('glint'), at('moon'), at('vellum'), at('flap'), at('rise')]);
+test('opening sounds (G967): the glint, the vellum band, the flap, the moonlight, the card, forward — on the MOTION times', () => {
+  const at = (k: string) => Number(new RegExp(`\\b${k}: \\[(\\d+), `).exec(js)![1]);
+  assert.deepEqual(designSound(id), { music: 'evening-strings', opening: [[at('glint'), 'sparkle'], [at('vellum'), 'vellum'], [at('flap'), 'paper'], [at('light'), 'shimmer'], [at('rise'), 'slide-quick'], [at('forward'), 'stars']] });
 });
 
 test('RSVP keeps the shared form contract; a reply is answered with the GPT accents and the lantern', async () => {

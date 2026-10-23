@@ -145,10 +145,12 @@ test('launch gate lists the undecided controller identity; a decided config pass
   const problems = launchProblems({ ...MARKETING, launched: true });
   assert.ok(problems.some((p) => p.startsWith('legal.controllerName')));
   assert.ok(problems.some((p) => p.startsWith('legal.postalAddress')));
-  assert.deepEqual(launchProblems(readyConfig()), []);
+  // the build environment of a launch has order verification on (G954, tests/marketing-config.test.ts)
+  const env = { CLAIM_ORDER_VERIFICATION: 'trust' };
+  assert.deepEqual(launchProblems(readyConfig(), env), []);
   const onSale = readyConfig();
   onSale.services = onSale.services.map((s) => ({ ...s, onSale: true }));
-  assert.ok(launchProblems(onSale).some((p) => p.includes('on sale without a real Etsy listing URL')));
+  assert.ok(launchProblems(onSale, env).some((p) => p.includes('on sale without a real Etsy listing URL')));
 });
 
 test('services that stay Etsy drafts are offered nowhere (sales site extras, panel help); prices unchanged', () => {

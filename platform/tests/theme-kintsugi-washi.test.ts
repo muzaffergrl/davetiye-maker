@@ -289,9 +289,9 @@ test('thank-you mode closes RSVP, keeps the story and the card carries the thank
   assert.equal(cheerio.load((await render('rsvp', demo)).html)('[data-rsvp-form]').length, 0);
 });
 
-test('opening sounds = MOTION: the button, the cord, the first and the last flap, the card, forward', () => {
-  const [b0] = step('button'), [c0] = step('cord'), [n0] = step('flapN'), [w0] = step('flapW'), [r0] = step('rise'), [f0] = step('forward');
-  assert.deepEqual(designSound(id), { music: 'first-light', opening: [[b0, 'clasp'], [c0, 'ribbon'], [n0, 'paper'], [w0, 'paper'], [r0, 'slide'], [f0, 'chime']] });
+test('opening sounds (G967) = MOTION: the button, the cord, the four folds from their sides, the card, forward', () => {
+  const at = (k: string) => Number(new RegExp(`\\b${k}: \\[(\\d+), `).exec(js)![1]);
+  assert.deepEqual(designSound(id), { music: 'first-light', opening: [[at('button'), 'porcelain'], [at('cord'), 'cord', 0.3], [at('flapN'), 'fold'], [at('flapE'), 'fold-2', 0.35], [at('flapS'), 'fold'], [at('flapW'), 'fold-2', -0.35], [at('rise'), 'slide-quick'], [at('forward'), 'chime']] });
 });
 
 test('RSVP keeps the shared form contract; a reply is answered with the GPT accents (gold leaf, ink drops, petals)', async () => {

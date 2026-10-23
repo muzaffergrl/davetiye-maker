@@ -273,9 +273,10 @@ test('thank-you mode closes RSVP, keeps the story and the card carries the thank
   assert.equal(cheerio.load((await render('rsvp', demo)).html)('[data-rsvp-form]').length, 0);
 });
 
-test('opening sounds = MOTION: the rete, the glints, the astrolabe, the flap, the card', () => {
-  const [t0] = step('turn'), [g0] = step('glint'), [a0] = step('astro'), [l0] = step('flap'), [r0] = step('rise');
-  assert.deepEqual(designSound(id), { music: 'evening-strings', opening: [[t0, 'clasp'], [g0, 'chime'], [a0, 'whoosh'], [l0, 'paper'], [r0, 'slide']] });
+test('opening sounds (G967) = MOTION: the rete, the glints, the astrolabe, the flap, the stars, the card, forward', () => {
+  const at = (k: string) => Number(new RegExp(`\\b${k}: \\[(\\d+), `).exec(js)![1]);
+  const acc = Number(/\baccents: (\d+)/.exec(js)![1]);
+  assert.deepEqual(designSound(id), { music: 'evening-strings', opening: [[at('turn'), 'lock'], [at('glint'), 'sparkle'], [at('astro'), 'whoosh'], [at('flap'), 'paper'], [acc, 'stars'], [at('rise'), 'slide-quick'], [at('forward'), 'chime']] });
 });
 
 test('RSVP keeps the shared form contract; a reply is answered with rising GPT star dust', async () => {

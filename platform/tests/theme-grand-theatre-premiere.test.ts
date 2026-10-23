@@ -289,9 +289,9 @@ test('thank-you mode closes RSVP, keeps the story and the card carries the thank
   assert.equal(cheerio.load((await render('rsvp', demo)).html)('[data-rsvp-form]').length, 0);
 });
 
-test('opening sounds = MOTION: the ticket, the tear, the cord, the curtains, the card rising, coming forward', () => {
-  const at = (k: string) => Number(new RegExp(`${k}: \\[(\\d+),`).exec(js)![1]);
-  assert.deepEqual(designSound(id), { music: 'evening-strings', opening: [[at('ticket'), 'paper'], [at('tear'), 'tear'], [at('rope'), 'ribbon'], [at('curtainL'), 'whoosh'], [at('rise'), 'slide'], [at('forward'), 'chime']] });
+test('opening sounds (G967) = MOTION: the ticket, the tear, the cord, each curtain from its side, the programme rising, forward', () => {
+  const at = (k: string) => Number(new RegExp(`\\b${k}: \\[(\\d+), `).exec(js)![1]);
+  assert.deepEqual(designSound(id), { music: 'evening-strings', opening: [[at('ticket'), 'slide-quick'], [at('tear'), 'tear'], [at('rope'), 'cord'], [at('curtainL'), 'curtain', -0.45], [at('curtainR'), 'curtain', 0.45], [at('rise'), 'slide-quick'], [at('forward'), 'chime-warm']] });
 });
 
 test('RSVP keeps the shared form contract; a reply tears a fresh ticket and the GPT accents drift (confetti, petals)', async () => {

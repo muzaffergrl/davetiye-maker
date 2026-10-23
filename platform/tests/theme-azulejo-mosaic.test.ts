@@ -271,8 +271,9 @@ test('thank-you mode closes RSVP, keeps the story and the card carries the thank
   assert.equal(cheerio.load((await render('rsvp', demo)).html)('[data-rsvp-form]').length, 0);
 });
 
-test('opening sounds: the knot, the twine, the tile, the flap, the corner tiles, the card', () => {
-  assert.deepEqual(designSound(id), { music: 'garden-waltz', opening: [[0, 'tap'], [380, 'ribbon'], [900, 'clasp'], [1750, 'paper'], [2050, 'chime'], [2400, 'slide']] });
+test('opening sounds (G967) = MOTION: the knot, the swallow tile, the flap, the corner tiles, the card, forward', () => {
+  const at = (k: string) => Number(new RegExp(`\\b${k}: \\[(\\d+), `).exec(js)![1]);
+  assert.deepEqual(designSound(id), { music: 'garden-waltz', opening: [[at('knot'), 'twine'], [at('tile'), 'tile'], [at('flap'), 'paper-crisp'], [at('wave'), 'tile', 0.3], [at('rise'), 'slide-quick'], [at('forward'), 'chime']] });
 });
 
 test('RSVP keeps the shared form contract; a reply is answered with turning tiles and the GPT accents', async () => {

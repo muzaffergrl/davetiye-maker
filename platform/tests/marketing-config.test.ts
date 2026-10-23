@@ -79,8 +79,12 @@ test('first sales wave = designs 01–20 (owner, 2026-10-23): launchProblems lis
   const flags = problems.filter((p) => p.startsWith('verified.'));
   const open = (Object.entries(MARKETING.verified) as Array<[string, boolean]>).filter(([k, v]) => !v && k !== 'realDevices').map(([k]) => k);
   assert.deepEqual(flags.map((p) => p.split(' ')[0].replace('verified.', '')).sort(), open.sort());
+  // G961 (K56/K58): the data controller's legal name and postal address stay open until the owner decides them
+  const legal = problems.filter((p) => p.startsWith('legal.'));
+  const openLegal = (['controllerName', 'postalAddress'] as const).filter((k) => !real(MARKETING.legal[k]));
+  assert.deepEqual(legal.map((p) => p.split(' ')[0].replace('legal.', '')).sort(), [...openLegal].sort());
   assert.ok(!problems.some((p) => /realDevices|crimson-rose-atelier|ivory-pearl-atelier/.test(p)), problems.join(' | '));
-  assert.equal(problems.length, links.length + flags.length, problems.join(' | '));
+  assert.equal(problems.length, links.length + flags.length + legal.length, problems.join(' | '));
 });
 
 /** The build environment of a production launch: orders are checked (trust first, verify later). */
