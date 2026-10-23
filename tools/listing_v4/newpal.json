@@ -98,6 +98,60 @@
   "bg": "none.png",
   "script": "Great Vibes"
  },
+ "33": {
+  "name": "Marigold & Mehndi",
+  "ink": "#FAEBD0",
+  "deep": "#C9A24A",
+  "ivory": "#FAEBD0",
+  "primary": "#3E0726",
+  "bg": "velvet.png",
+  "script": "Rozha One"
+ },
+ "34": {
+  "name": "Red Lacquer & Double Happiness",
+  "ink": "#F5ECD8",
+  "deep": "#C9A14A",
+  "ivory": "#F5ECD8",
+  "primary": "#4A0A0E",
+  "bg": "lacquer.png",
+  "script": "Luxurious Script"
+ },
+ "35": {
+  "name": "Highland Tartan & Thistle",
+  "ink": "#F1EADB",
+  "deep": "#A88437",
+  "ivory": "#F1EADB",
+  "primary": "#20291D",
+  "bg": "moss_ground.png",
+  "script": "Rouge Script"
+ },
+ "36": {
+  "name": "Victorian Glasshouse",
+  "ink": "#1E2B24",
+  "deep": "#2F523E",
+  "ivory": "#F3EDDF",
+  "primary": "#B26A3C",
+  "bg": "glass_ground.png",
+  "script": "Monsieur La Doulaise"
+ },
+ "37": {
+  "name": "Art Nouveau Lily",
+  "ink": "#F4ECDB",
+  "deep": "#B8964E",
+  "ivory": "#F4ECDB",
+  "primary": "#55634E",
+  "bg": "sage_paper.png",
+  "script": "Ephesis"
+ },
+ "38": {
+  "name": "Papel Picado Fiesta",
+  "ink": "#3B2418",
+  "deep": "#B0502F",
+  "ivory": "#FBF4E8",
+  "primary": "#D63A7A",
+  "bg": "limewash_wall.png",
+  "script": "Oleo Script"
+ },
  "39": {
   "name": "Silver Photo Booth",
   "ink": "#1E1E1E",

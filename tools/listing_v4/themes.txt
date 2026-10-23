@@ -30,6 +30,12 @@
 30 azulejo-mosaic
 31 sky-lantern-festival
 32 music-box-ballerina
+33 marigold-mehndi
+34 red-lacquer-double-happiness
+35 highland-tartan-thistle
+36 victorian-glasshouse
+37 art-nouveau-lily
+38 papel-picado-fiesta
 39 silver-photo-booth
 40 swan-chantilly-lace
 41 painted-lily-pond

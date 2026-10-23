@@ -122,7 +122,7 @@ def slides(c):
         '<div class="c" style="top:2120px"><div class="foot">Countdown · schedule · map · Q&amp;A</div></div>'
         '<div class="c" style="top:2200px"><div class="foot" style="font-weight:600;letter-spacing:.06em;text-transform:none">add-to-calendar · music · dress code · travel &amp; registry</div></div>')
     # 6 — what's included
-    items = ["Envelope opening + Home, Our Story, Details &amp; RSVP pages", "Online RSVP with your own questions",
+    items = [c.get("opens", "envelope").capitalize() + " opening + Home, Our Story, Details &amp; RSVP pages", "Online RSVP with your own questions",
              "Guest list &amp; one-tap Excel download", "Countdown &amp; add-to-calendar", "Your 5 photos, music &amp; venue map",
              "QR code + printable invitation (PDF)", "Easy editor on phone or computer", "Online until 12 months after your wedding"]
     S["06_included"] = (title(f"{nm}", "What's", r="included") +
