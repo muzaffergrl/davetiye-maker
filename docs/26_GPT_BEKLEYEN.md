@@ -25,33 +25,16 @@ Gelen dosyalar tek komutla yerleşir ve etkilenen tasarımlar yeniden kurulur:
    build'i ister) → `etsy_upload.py`; en sonda bu dosyayı yeniden yazar. Tasarım × adım tablosu ve live engelleri basılır.
    Yerleştirmeden yalnız adımlar: `--koleksiyon NN|all`. Hiçbir tasarımı live yapmaz, yayınlamaz, Etsy'ye göndermez.
 
-**Toplam eksik: 29**
+**Toplam eksik: 22**
 
 | Prompt dosyası | Bölüm | Var | Eksik |
 |---|---|---|---|
-| `collections/49_Ivory_Pearl_Atelier/assets/gpt/GPT_PROMPTS.md` | 1. comps/W1_opening.png | 0 | 1 |
-| `collections/49_Ivory_Pearl_Atelier/assets/gpt/GPT_PROMPTS.md` | 2. parts/envelope_closed.png | 0 | 1 |
-| `collections/49_Ivory_Pearl_Atelier/assets/gpt/GPT_PROMPTS.md` | 3. parts/closure.png | 0 | 1 |
-| `collections/49_Ivory_Pearl_Atelier/assets/gpt/GPT_PROMPTS.md` | 4. parts/accent_bow.png | 0 | 1 |
-| `collections/49_Ivory_Pearl_Atelier/assets/gpt/GPT_PROMPTS.md` | 5. parts/envelope_open.png | 0 | 1 |
-| `collections/49_Ivory_Pearl_Atelier/assets/gpt/GPT_PROMPTS.md` | 6. parts/invitation_card.png | 0 | 1 |
-| `collections/49_Ivory_Pearl_Atelier/assets/gpt/GPT_PROMPTS.md` | 7. textures/bg_page.png | 0 | 1 |
 | `collections/21_Crimson_Rose_Atelier/variants/GPT_PROMPTS.md` | İstem — fildişi güller (yalnız istenirse) | 0 | 1 |
 | `brand/social/GPT_PROMPTS.md` | SM1 — Instagram öne çıkan (highlight) kapakları | 0 | 5 |
 | `brand/social/GPT_PROMPTS.md` | SM2 — Zeminler (Claude başlık ve gerçek ekranları üstüne yerleştirir) | 0 | 6 |
 | `brand/social/GPT_PROMPTS.md` | SM3 — Yaşam sahneleri (tek yeşil ekran; gerçek ekran yerleşecek) | 0 | 10 |
 
 ## Eksik dosyalar
-
-### `collections/49_Ivory_Pearl_Atelier/assets/gpt/GPT_PROMPTS.md`
-
-- `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/comps/W1_opening.png` — 1. comps/W1_opening.png
-- `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/parts/envelope_closed.png` — 2. parts/envelope_closed.png
-- `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/parts/closure.png` — 3. parts/closure.png
-- `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/parts/accent_bow.png` — 4. parts/accent_bow.png
-- `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/parts/envelope_open.png` — 5. parts/envelope_open.png
-- `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/parts/invitation_card.png` — 6. parts/invitation_card.png
-- `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/textures/bg_page.png` — 7. textures/bg_page.png
 
 ### `collections/21_Crimson_Rose_Atelier/variants/GPT_PROMPTS.md`
 

@@ -2,7 +2,7 @@
 
 `python3 tools/gpt_is_listesi.py --yaz` (ya da `tools/gpt_bekleyen.py --yaz`) ile üretilir; elle düzenlenmez. Kaynak: bütün `GPT_PROMPTS.md` dosyaları. Her madde kendi başına yapıştırılabilir tam İngilizce prompt'tur. Tıklanabilir, kopyalama düğmeli ve işaretlenebilir sürüm: [`27_GPT_IS_LISTESI.html`](27_GPT_IS_LISTESI.html) (tarayıcıda aç).
 
-**Toplam: 29 görsel** · C · Palet varyantı görselleri: 1 · D · Diğer (marka): 28
+**Toplam: 22 görsel** · C · Palet varyantı görselleri: 1 · D · Diğer (marka): 21
 
 ## Neden bu sıra
 
@@ -24,7 +24,6 @@
 | Grup | Tasarım | Görsel |
 |---|---|---|
 | C | 21_Crimson_Rose_Atelier | 1 |
-| D | / | 7 |
 | D | brand | 21 |
 
 ## C · Palet varyantı görselleri
@@ -47,95 +46,9 @@ Reference: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png
 
 ## D · Diğer (marka)
 
-### /
-
-#### 2. 1. comps/W1_opening.png
-
-- İndirme adı: `__workspace__davetiye-maker__collections__49-ivory-pearl-atelier__comps__w1_opening.png`
-- Hedef: `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/comps/W1_opening.png`
-- Bölüm: 1. comps/W1_opening.png (website parçası (PAKET 5))
-- Şart: opak · PNG
-- UYARI: prompt bloğu bulunamadı
-
-```
-(prompt bulunamadı — prompt dosyasına bak)
-```
-
-#### 3. 2. parts/envelope_closed.png
-
-- İndirme adı: `__workspace__davetiye-maker__collections__49-ivory-pearl-atelier__envelope_closed.png`
-- Hedef: `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/parts/envelope_closed.png`
-- Bölüm: 2. parts/envelope_closed.png (website parçası (PAKET 5))
-- Şart: opak · PNG
-- UYARI: prompt bloğu bulunamadı
-
-```
-(prompt bulunamadı — prompt dosyasına bak)
-```
-
-#### 4. 3. parts/closure.png
-
-- İndirme adı: `__workspace__davetiye-maker__collections__49-ivory-pearl-atelier__closure.png`
-- Hedef: `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/parts/closure.png`
-- Bölüm: 3. parts/closure.png (website parçası (PAKET 5))
-- Şart: opak · PNG
-- UYARI: prompt bloğu bulunamadı
-
-```
-(prompt bulunamadı — prompt dosyasına bak)
-```
-
-#### 5. 4. parts/accent_bow.png
-
-- İndirme adı: `__workspace__davetiye-maker__collections__49-ivory-pearl-atelier__accent_bow.png`
-- Hedef: `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/parts/accent_bow.png`
-- Bölüm: 4. parts/accent_bow.png (website parçası (PAKET 5))
-- Şart: opak · PNG
-- UYARI: prompt bloğu bulunamadı
-
-```
-(prompt bulunamadı — prompt dosyasına bak)
-```
-
-#### 6. 5. parts/envelope_open.png
-
-- İndirme adı: `__workspace__davetiye-maker__collections__49-ivory-pearl-atelier__envelope_open.png`
-- Hedef: `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/parts/envelope_open.png`
-- Bölüm: 5. parts/envelope_open.png (website parçası (PAKET 5))
-- Şart: opak · PNG
-- UYARI: prompt bloğu bulunamadı
-
-```
-(prompt bulunamadı — prompt dosyasına bak)
-```
-
-#### 7. 6. parts/invitation_card.png
-
-- İndirme adı: `__workspace__davetiye-maker__collections__49-ivory-pearl-atelier__invitation_card.png`
-- Hedef: `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/parts/invitation_card.png`
-- Bölüm: 6. parts/invitation_card.png (website parçası (PAKET 5))
-- Şart: opak · PNG
-- UYARI: prompt bloğu bulunamadı
-
-```
-(prompt bulunamadı — prompt dosyasına bak)
-```
-
-#### 8. 7. textures/bg_page.png
-
-- İndirme adı: `__workspace__davetiye-maker__collections__49-ivory-pearl-atelier__textures__bg_page.png`
-- Hedef: `/workspace/davetiye-maker/collections/49_Ivory_Pearl_Atelier/assets/gpt/textures/bg_page.png`
-- Bölüm: 7. textures/bg_page.png (website parçası (PAKET 5))
-- Şart: opak · PNG
-- UYARI: prompt bloğu bulunamadı
-
-```
-(prompt bulunamadı — prompt dosyasına bak)
-```
-
 ### brand
 
-#### 9. SM1.1 Designs — mühürlü zarf
+#### 2. SM1.1 Designs — mühürlü zarf
 
 - İndirme adı: `brand__social__highlight_designs.png`
 - Hedef: `brand/social/gpt/highlight_designs.png`
@@ -150,7 +63,7 @@ An Instagram story highlight cover, 9:16 portrait: a solid deep aubergine (#2B15
 
 Kontrol: ikon tam ortada ve genişliğin ~%34'ü; tek çizgi, düz altın; zemin düz patlıcan; yazı yok.
 
-#### 10. SM1.2 How it works — telefon ve dokunuş
+#### 3. SM1.2 How it works — telefon ve dokunuş
 
 - İndirme adı: `brand__social__highlight_how.png`
 - Hedef: `brand/social/gpt/highlight_how.png`
@@ -165,7 +78,7 @@ Same style and size as the previous highlight cover (solid deep aubergine #2B152
 
 Kontrol: SM1.1 ile aynı çizgi kalınlığı ve boyut; telefon + parmak ucu; yazı yok.
 
-#### 11. SM1.3 RSVP — yanıt kartı
+#### 4. SM1.3 RSVP — yanıt kartı
 
 - İndirme adı: `brand__social__highlight_rsvp.png`
 - Hedef: `brand/social/gpt/highlight_rsvp.png`
@@ -180,7 +93,7 @@ Same style and size as the previous highlight covers (solid deep aubergine #2B15
 
 Kontrol: kartta harf yok (yalnız çizgi ve tik); aynı stil.
 
-#### 12. SM1.4 FAQ — konuşma balonu
+#### 5. SM1.4 FAQ — konuşma balonu
 
 - İndirme adı: `brand__social__highlight_faq.png`
 - Hedef: `brand/social/gpt/highlight_faq.png`
@@ -195,7 +108,7 @@ Same style and size as the previous highlight covers (solid deep aubergine #2B15
 
 Kontrol: soru işareti ya da harf yok; aynı stil.
 
-#### 13. SM1.5 Tips — açık defter
+#### 6. SM1.5 Tips — açık defter
 
 - İndirme adı: `brand__social__highlight_tips.png`
 - Hedef: `brand/social/gpt/highlight_tips.png`
@@ -210,7 +123,7 @@ Same style and size as the previous highlight covers (solid deep aubergine #2B15
 
 Kontrol: sayfalarda yazı yok; beş kapak yan yana aynı aileden görünüyor.
 
-#### 14. SM2.1 Kaydırmalı gönderi kapağı — açık
+#### 7. SM2.1 Kaydırmalı gönderi kapağı — açık
 
 - İndirme adı: `brand__social__bg_carousel_cover_light.png`
 - Hedef: `brand/social/gpt/bg_carousel_cover_light.png`
@@ -225,7 +138,7 @@ Overhead photograph, 4:5 portrait, of a warm paper surface (#EDE5D7 to #FAF7F0) 
 
 Kontrol: sol %65 tamamen boş; nesneler yalnız sağ kenarda; yazı yok.
 
-#### 15. SM2.2 Kaydırmalı gönderi iç sayfası — açık
+#### 8. SM2.2 Kaydırmalı gönderi iç sayfası — açık
 
 - İndirme adı: `brand__social__bg_carousel_inner_light.png`
 - Hedef: `brand/social/gpt/bg_carousel_inner_light.png`
@@ -240,7 +153,7 @@ Overhead photograph, 4:5 portrait, of the same warm paper surface as the previou
 
 Kontrol: neredeyse boş; gölge yalnız sağ üst köşede; düz ışık (metin okunur kalsın).
 
-#### 16. SM2.3 Kaydırmalı gönderi — koyu (kapak ya da son sayfa)
+#### 9. SM2.3 Kaydırmalı gönderi — koyu (kapak ya da son sayfa)
 
 - İndirme adı: `brand__social__bg_carousel_dark.png`
 - Hedef: `brand/social/gpt/bg_carousel_dark.png`
@@ -255,7 +168,7 @@ Overhead photograph, 4:5 portrait, of deep aubergine (#2B1526) heavyweight cotto
 
 Kontrol: %80 boş koyu zemin; nesneler yalnız sağ alt köşede; yazı yok.
 
-#### 17. SM2.4 Hikâye zemini — açık
+#### 10. SM2.4 Hikâye zemini — açık
 
 - İndirme adı: `brand__social__bg_story_light.png`
 - Hedef: `brand/social/gpt/bg_story_light.png`
@@ -270,7 +183,7 @@ Overhead photograph, 9:16 portrait, of a warm paper surface (#EDE5D7 to #FAF7F0)
 
 Kontrol: orta %70 boş (Instagram'ın üst/alt arayüzü kenar süsleri örter, sorun değil); yazı yok.
 
-#### 18. SM2.5 Hikâye zemini — koyu
+#### 11. SM2.5 Hikâye zemini — koyu
 
 - İndirme adı: `brand__social__bg_story_dark.png`
 - Hedef: `brand/social/gpt/bg_story_dark.png`
@@ -285,7 +198,7 @@ Overhead photograph, 9:16 portrait, of deep aubergine (#2B1526) heavyweight cott
 
 Kontrol: orta %70 boş; altın düz renk (folyo parlaması yok); yazı yok.
 
-#### 19. SM2.6 Pinterest rehber pini zemini
+#### 12. SM2.6 Pinterest rehber pini zemini
 
 - İndirme adı: `brand__social__bg_pin_guide.png`
 - Hedef: `brand/social/gpt/bg_pin_guide.png`
@@ -300,7 +213,7 @@ Overhead styled flat lay photograph, 2:3 portrait, on warm off-white linen (#FAF
 
 Kontrol: alt %75 boş kâğıt; kâğıtta yazı/çizgi yok; nesneler yalnız üst kenarda.
 
-#### 20. SM3.1 Planlama masası, telefon elde
+#### 13. SM3.1 Planlama masası, telefon elde
 
 - İndirme adı: `brand__social__scene_planning_desk.png`
 - Hedef: `brand/social/gpt/scene_planning_desk.png`
@@ -315,7 +228,7 @@ Lifestyle photograph, 4:5 portrait, seen from slightly above: a fictional woman'
 
 Kontrol: ekran büyük, düz yeşil, parmaksız; yüzük var; plannerda yazı yok; sol üst sakin.
 
-#### 21. SM3.2 Mühürlü zarfın üstünde telefon
+#### 14. SM3.2 Mühürlü zarfın üstünde telefon
 
 - İndirme adı: `brand__social__scene_phone_on_envelope.png`
 - Hedef: `brand/social/gpt/scene_phone_on_envelope.png`
@@ -330,7 +243,7 @@ Overhead photograph, 4:5 portrait: a smartphone lying flat on top of a real crea
 
 Kontrol: mühür yüzü boş (harf/sembol yok); telefon düz ve ortada; yeşil yansımasız.
 
-#### 22. SM3.3 Yeni nişanlı, kış ışıkları
+#### 15. SM3.3 Yeni nişanlı, kış ışıkları
 
 - İndirme adı: `brand__social__scene_just_engaged_winter.png`
 - Hedef: `brand/social/gpt/scene_just_engaged_winter.png`
@@ -345,7 +258,7 @@ Lifestyle photograph, 4:5 portrait: close-up of a fictional woman's left hand wi
 
 Kontrol: iki el doğal ve doğru; yüzük görünür; ekran büyük ve açık; yüz yok.
 
-#### 23. SM3.4 Akşam yemeği masası (Pinterest)
+#### 16. SM3.4 Akşam yemeği masası (Pinterest)
 
 - İndirme adı: `brand__social__scene_dinner_table.png`
 - Hedef: `brand/social/gpt/scene_dinner_table.png`
@@ -360,7 +273,7 @@ Lifestyle photograph, 2:3 portrait: an elegant candlelit dinner table set for a 
 
 Kontrol: ekran büyük ve okunur açıda; üst %25 sakin; masada yazılı kart yok.
 
-#### 24. SM3.5 Çiçekli keten, üstten (Pinterest)
+#### 17. SM3.5 Çiçekli keten, üstten (Pinterest)
 
 - İndirme adı: `brand__social__scene_linen_flatlay.png`
 - Hedef: `brand/social/gpt/scene_linen_flatlay.png`
@@ -375,7 +288,7 @@ Overhead flat lay photograph, 2:3 portrait, on soft white linen: a smartphone in
 
 Kontrol: telefon düz; üst %20 boş; kartta yazı yok.
 
-#### 25. SM3.6 Bahçede altın saat (hikâye / Reel kapağı)
+#### 18. SM3.6 Bahçede altın saat (hikâye / Reel kapağı)
 
 - İndirme adı: `brand__social__scene_garden_golden_hour.png`
 - Hedef: `brand/social/gpt/scene_garden_golden_hour.png`
@@ -390,7 +303,7 @@ Lifestyle photograph, 9:16 portrait: a fictional woman's hand holding a smartpho
 
 Kontrol: ekran dikeyde ortada; üst ve alt %20 sakin (Reel arayüzü oraya biner); yazı yok.
 
-#### 26. SM3.7 Kafede davetiyeyi alan misafir
+#### 19. SM3.7 Kafede davetiyeyi alan misafir
 
 - İndirme adı: `brand__social__scene_guest_cafe.png`
 - Hedef: `brand/social/gpt/scene_guest_cafe.png`
@@ -405,7 +318,7 @@ Lifestyle photograph, 4:5 portrait: a fictional man in his thirties (not resembl
 
 Kontrol: kimliği belirgin yüz yok; ekran okunur açıda; yazı yok.
 
-#### 27. SM3.8 Karşılama masasında QR kartı (yeşil alan = QR)
+#### 20. SM3.8 Karşılama masasında QR kartı (yeşil alan = QR)
 
 - İndirme adı: `brand__social__scene_qr_welcome_table.png`
 - Hedef: `brand/social/gpt/scene_qr_welcome_table.png`
@@ -420,7 +333,7 @@ Lifestyle photograph, 4:5 portrait: a wedding welcome table with a small framed 
 
 Kontrol: yeşil alan tam kare ve tek; kartta başka yazı/desen yok; telefon yok. (Claude buraya `tools/make_qr.py` ile gerçek QR koyar.)
 
-#### 28. SM3.9 Sonbahar şükran masası (teşekkür modu)
+#### 21. SM3.9 Sonbahar şükran masası (teşekkür modu)
 
 - İndirme adı: `brand__social__scene_autumn_thanks.png`
 - Hedef: `brand/social/gpt/scene_autumn_thanks.png`
@@ -435,7 +348,7 @@ Lifestyle photograph, 4:5 portrait, seen from slightly above: a cozy late-Novemb
 
 Kontrol: ekran büyük ve açık; mevsim hissi var; yazı yok.
 
-#### 29. SM3.10 Kış masası, kahve ve battaniye
+#### 22. SM3.10 Kış masası, kahve ve battaniye
 
 - İndirme adı: `brand__social__scene_winter_cozy.png`
 - Hedef: `brand/social/gpt/scene_winter_cozy.png`
