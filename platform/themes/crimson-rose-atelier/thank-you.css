@@ -1,10 +1,7 @@
 /* Crimson Rose Atelier — thank-you mode (G075, docs/11 §3.6): loaded only after the wedding (data-if="thank_you_on").
-   The same envelope and pages; the card and the invitation carry the couple's thank-you. No new artwork. */
-html[data-thank-you] .opening-heading{margin-bottom:-10px}
-html[data-thank-you] .home-hero .hero-request{max-width:200px;font:italic 400 22px/1.25 var(--serif);letter-spacing:0;text-transform:none}
-html[data-thank-you] .signature{padding-top:20px}
-.ty-title{font-style:italic;font-size:clamp(16px,4.4vw,28px)}
-.oval-decor{display:grid;place-items:center;background:var(--cream)}
-.oval-decor .rose{width:110%;max-width:none}
-.thank-you-copy>.eyebrow{margin-top:14px}
-.reply-card.thank-you-copy h2{margin-bottom:24px}
+   The same letter and pages; the card and the formal invitation carry the couple's thank-you. No new artwork. */
+.ty-title{font:italic 400 calc(8cqw*var(--fit,1))/1.15 var(--serif);text-transform:none;letter-spacing:0}
+.thank-you-copy h2{overflow-wrap:anywhere}
+.reply-card.thank-you-copy .reply-box{text-align:center}
+.reply-card.thank-you-copy h2{font:italic 400 34px/1.15 var(--serif);margin-bottom:24px;color:var(--wine)}
+html[data-thank-you] .formal-body .script{margin-top:10px}

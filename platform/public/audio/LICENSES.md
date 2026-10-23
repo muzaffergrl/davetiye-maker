@@ -32,3 +32,23 @@ Kamu malı kullanım notu: `first-light` parçasının armoni dizisi (I–V–vi
 
 Biçim: MP3 mono 44,1 kHz; müzik 64 kb/s, efekt 48 kb/s. Müzik dosyaları döngüye uygundur (yankı kuyruğu başa katlanır).
 Tema eşlemesi ve açılış zamanlamaları: `platform/lib/audio/catalog.ts`.
+
+## Tasarıma özel paketler (2026-10-23)
+
+Kaynak: `tools/audio_packs.py` (özgün sentez; notalar betikte elle yazıldı, stereo salon yankısı sentetik). Dış kayıt, örnek
+ya da başkasına ait beste yok. Eser BKE Studio'nundur; atıf gerekmez, ticari kullanım serbesttir.
+
+| Dosya | Tür | Süre | Kaynak | Lisans | Üretim tarihi |
+|---|---|---|---|---|---|
+| `music/rose-nocturne.mp3` | Fon müziği — Crimson Rose Atelier: piyano, arp, yaylılar; Re minör vals, 76 bpm, döngü (elle bestelendi) | 95 s | `tools/audio_packs.py` | BKE Studio'nun kendi eseri, atıfsız | 2026-10-23 |
+| `fx/crimson-rose-atelier/crack.mp3` | Efekt — altın mum mühür bastırılıp ikiye kırılır, parçalar kâğıda düşer | 0,95 s | aynı | aynı | 2026-10-23 |
+| `fx/crimson-rose-atelier/flap.mp3` | Efekt — ağır bordo kapak yapışkanından ayrılıp menteşede kalkar | 1,3 s | aynı | aynı | 2026-10-23 |
+| `fx/crimson-rose-atelier/draw.mp3` | Efekt — deckle kenarlı kart cepten çekilir (kâğıt üstünde kâğıt) | 1,5 s | aynı | aynı | 2026-10-23 |
+| `fx/crimson-rose-atelier/reveal.mp3` | Efekt — kart mum ışığına yükselir: arp süpürmesi + yaylı kabarması | 3,2 s | aynı | aynı | 2026-10-23 |
+| `fx/crimson-rose-atelier/bloom.mp3` | Efekt — kart misafire doğru gelir: sıcak piyano akoru + hava | 2,2 s | aynı | aynı | 2026-10-23 |
+| `fx/crimson-rose-atelier/page.mp3` | Efekt — kalın albüm sayfası sağdan sola çevrilir | 1,05 s | aynı | aynı | 2026-10-23 |
+| `fx/crimson-rose-atelier/fold.mp3` | Efekt — yanıt kartı katlanıp zarfa kayar | 1,1 s | aynı | aynı | 2026-10-23 |
+| `fx/crimson-rose-atelier/stamp.mp3` | Efekt — mühür zarfa bastırılır | 0,75 s | aynı | aynı | 2026-10-23 |
+| `fx/crimson-rose-atelier/petal.mp3` | Efekt — home'a varışta yapraklar süzülür (çok yumuşak hava + arp flajoleleri) | 2,4 s | aynı | aynı | 2026-10-23 |
+| `fx/crimson-rose-atelier/tap.mp3` | Efekt — sayfalar arası yumuşak tık | 0,26 s | aynı | aynı | 2026-10-23 |
+| `fx/crimson-rose-atelier/chime.mp3` | Efekt — yanıt gönderildi: iki arp notası + celesta | 2,4 s | aynı | aynı | 2026-10-23 |

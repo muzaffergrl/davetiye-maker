@@ -1,17 +1,20 @@
 <!doctype html>
-<!-- Crimson Rose Atelier · page 1 — envelope landing (/<slug>). Oxblood paper, a crimson rose branch at the top-right, the
-     names in large Cormorant, the burgundy envelope with its gold botanical wax seal, "TAP TO OPEN". Opening (docs/11 §7.3,
-     kapak): on tap the seal lifts and drops away, the flap (cut from the closed envelope) turns up on its hinge, the open
-     envelope's lining shows, and the ivory card — the oval portrait, "Our wedding", the names, the date — rises out of the
-     pocket, comes forward and flies to home (view transition invite-card → the home oval portrait). Seal, flap, pocket and
-     card are separate layers that move on their own. Personal text: none — [data-field] / [data-text] / [data-photo] are
-     filled on the server. Thank-you mode (G075): the same opening; the card carries the thank-you title and the date, its
-     oval the thank-you photo or — without one — the rose branch. Design texts: data-copy (G068, theme.json "copy"). -->
+<!-- Crimson Rose Atelier · page 1 — the atelier letter (/<slug>). A candlelit oxblood room (velvet + satin when the
+     PAKET 8 parts exist, parts.css), crimson roses in two corners, the names in engraved capitals and the burgundy
+     envelope with its gold botanical wax seal, which catches the light now and then. The envelope leans towards the
+     guest's finger. Opening (docs/11 §7.3, kapak; numbers = MOTION.envelope in site.js): the seal is pressed and cracks
+     in two, the halves fall left and right (crack) → the heavy flap turns up on its hinge in 3D, its inside showing
+     (flap) → the deckled card is drawn out of the pocket, its rose first (draw) → it lifts free into the candlelight
+     while the envelope sinks out of focus (reveal) → it comes forward to the guest (bloom) → home (view transition
+     invite-card onto the home hero card). Every piece is a GPT part cut by build_images.py; seal halves, flap faces,
+     pocket and card move on their own. Personal text: none — [data-field] / [data-text] / [data-photo] are filled on
+     the server. Thank-you mode (G075): the same opening; the card carries the thank-you title and the date, its oval
+     the thank-you photo or — without one — the rose. Design texts: data-copy (G068, theme.json "copy"). -->
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#39090e">
+<meta name="theme-color" content="#29070b">
 <title data-text="{name_display} · {copy.envelope_kicker}">Crimson Rose Atelier</title>
 <meta name="description" data-if="!thank_you_on" data-attr-content="{copy.envelope_kicker} · {name_display} · {date|date-long} · {venue.city_region}" content="A wedding invitation">
 <meta name="description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {name_display} · {date|date-long}" content="Thank you">
@@ -21,11 +24,12 @@
 <meta property="og:description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {date|date-long}" content="Thank you">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Corinthia&family=Manrope:wght@400;500;600&display=swap">
 <style>/* names fallback: scripts/font-fallback.ts */
-@font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:96.7%;ascent-override:95.2%;descent-override:30%;line-gap-override:0%}
-@font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:83.1%;ascent-override:110.7%;descent-override:34.9%;line-gap-override:0%}</style>
+@font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:95.9%;ascent-override:96%;descent-override:30.2%;line-gap-override:0%}
+@font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:94%;ascent-override:97.9%;descent-override:30.9%;line-gap-override:0%}</style>
 <link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="parts.css">
 <link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
 <script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
 (function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'';if(sessionStorage.getItem('invite:opened'+k)&&!/[?&]replay=1(&|$)/.test(location.search))r.classList.add('is-opened');}catch(e){}})(document.documentElement);
@@ -40,43 +44,56 @@
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"selector_matches":"a[data-enter]"},"eagerness":"immediate"}]}</script>
 <script src="site.js" defer></script>
 </head>
-<body class="page-opening" data-pending="This link will be added soon.">
+<body class="page-opening dark" data-pending="This link will be added soon.">
 <a class="textlink skip" href="home.html" data-skip><span data-copy="envelope_skip">Skip</span> <span aria-hidden="true">→</span></a>
+<div class="atmos" aria-hidden="true"><span class="velvet"></span><span class="glow"></span><span class="satin"></span></div>
 <main class="opening">
-  <div class="opening-flowers" aria-hidden="true"><img class="rose opening-rose" src="img/rose-branch.webp" alt=""></div>
-  <div class="opening-heading">
-    <p class="eyebrow" data-if="!thank_you_on" data-copy="envelope_kicker">You are invited</p>
-    <p class="eyebrow" data-if="thank_you_on" data-copy="ty_kicker">With love and thanks</p>
-    <h1 class="names"><span data-field="partners.0.display_name" class="first-name"></span><span class="amp">&amp;</span><span data-field="partners.1.display_name" class="second-name"></span></h1>
-    <p class="eyebrow"><span data-field="date"></span><span aria-hidden="true"> · </span><span data-field="venue.city"></span></p>
+  <div class="opening-flowers" aria-hidden="true">
+    <img class="rose rose-a" src="img/rose-420.webp" srcset="img/rose-420.webp 420w, img/rose-800.webp 800w" sizes="(min-width: 700px) 440px, 78vw" alt="">
+    <img class="rose rose-b" src="img/rose-420.webp" srcset="img/rose-420.webp 420w, img/rose-800.webp 800w" sizes="(min-width: 700px) 360px, 62vw" alt="">
   </div>
+  <header class="opening-heading">
+    <p class="eyebrow kicker" data-if="!thank_you_on" data-copy="envelope_kicker">You are invited</p>
+    <p class="eyebrow kicker" data-if="thank_you_on" data-copy="ty_kicker">With love and thanks</p>
+    <h1 class="names engraved" data-fit="3.6"><span data-field="partners.0.display_name" class="first-name"></span><span class="amp">&amp;</span><span data-field="partners.1.display_name" class="second-name"></span></h1>
+    <p class="eyebrow when"><span data-field="date"></span><span class="dot" aria-hidden="true">·</span><span data-field="venue.city"></span></p>
+  </header>
   <div class="stage" role="button" tabindex="0" aria-label="Open the invitation" data-copy-attr="aria-label:envelope_open">
-    <span class="env-back" aria-hidden="true"><img data-defer loading="lazy" fetchpriority="low" decoding="async" src="img/envelope-open.webp" alt=""></span>
-    <span class="env-card" aria-hidden="true">
-      <span class="card-oval photo-slot" data-slot="hero_portrait">
-        <img data-defer loading="lazy" fetchpriority="low" decoding="async" data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_portrait-640.webp" alt="" sizes="min(23vw, 140px)">
-        <span class="ph-mark" data-if="!thank_you_on"><span>Your photo here</span></span>
-        <img data-defer loading="lazy" fetchpriority="low" decoding="async" class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_portrait-640.webp" sizes="min(23vw, 140px)" alt="">
-        <span class="ty-decor" data-if="thank_you_on !thank_you.photo"><img src="img/rose-branch.webp" alt=""></span>
+    <span class="env">
+      <span class="env-inside" aria-hidden="true"><img data-defer loading="lazy" fetchpriority="low" decoding="async" src="img/env_inside-720.webp" srcset="img/env_inside-720.webp 720w, img/env_inside-1100.webp 1100w" sizes="min(92vw, 560px)" alt=""></span>
+      <span class="card-well" aria-hidden="true">
+        <span class="env-card card-portrait">
+          <img class="card-art" data-defer loading="lazy" fetchpriority="low" decoding="async" src="img/card_portrait-520.webp" srcset="img/card_portrait-520.webp 520w, img/card_portrait-860.webp 860w" sizes="(min-width: 700px) 400px, 84vw" alt="">
+          <span class="card-body">
+            <span class="framed">
+              <span class="card-oval photo-slot" data-slot="hero_portrait">
+                <img data-defer loading="lazy" fetchpriority="low" decoding="async" data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_portrait-640.webp" alt="" sizes="(min-width: 700px) 160px, 34vw">
+                <span class="ph-mark" data-if="!thank_you_on"><span>Your photo here</span></span>
+                <img data-defer loading="lazy" fetchpriority="low" decoding="async" class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_portrait-640.webp" sizes="(min-width: 700px) 160px, 34vw" alt="">
+                <span class="ty-decor" data-if="thank_you_on !thank_you.photo"><img data-defer loading="lazy" fetchpriority="low" decoding="async" src="img/rose-420.webp" alt=""></span>
+              </span>
+              <span class="oval-frame"></span>
+            </span>
+            <span class="script card-line" data-if="!thank_you_on" data-copy="card_line">Our wedding</span>
+            <span class="card-names" data-if="!thank_you_on" data-field="name_display"></span>
+            <span class="card-names ty-title" data-if="thank_you_on" data-field="thank_you_title"></span>
+            <span class="eyebrow card-date"><span data-field="date" data-format="weekday"></span><span aria-hidden="true">, </span><span data-field="date"></span></span>
+          </span>
+        </span>
       </span>
-      <span class="card-text">
-        <span class="eyebrow" data-if="!thank_you_on" data-copy="card_line">Our wedding</span>
-        <span class="card-names" data-if="!thank_you_on" data-field="name_display"></span>
-        <span class="card-names ty-title" data-if="thank_you_on" data-field="thank_you_title"></span>
-        <span class="eyebrow" data-field="date"></span>
-      </span>
+      <span class="env-pocket" aria-hidden="true"><img src="img/env_closed-720.webp" srcset="img/env_closed-720.webp 720w, img/env_closed-1100.webp 1100w" sizes="min(92vw, 560px)" alt="" fetchpriority="high"></span>
+      <span class="env-flap" aria-hidden="true"><span class="flap-face"><img src="img/env_closed-720.webp" srcset="img/env_closed-720.webp 720w, img/env_closed-1100.webp 1100w" sizes="min(92vw, 560px)" alt=""></span><span class="flap-back"><img src="img/env_closed-720.webp" srcset="img/env_closed-720.webp 720w, img/env_closed-1100.webp 1100w" sizes="min(92vw, 560px)" alt=""></span></span>
+      <span class="env-seal" aria-hidden="true"><span class="seal-half l"><img src="img/seal-160.webp" srcset="img/seal-160.webp 160w, img/seal-320.webp 320w" sizes="18vw" alt=""></span><span class="seal-half r"><img src="img/seal-160.webp" srcset="img/seal-160.webp 160w, img/seal-320.webp 320w" sizes="18vw" alt=""></span><span class="seal-glint"></span></span>
     </span>
-    <span class="env-pocket" aria-hidden="true"><img src="img/envelope-closed.webp" alt="" fetchpriority="high"></span>
-    <span class="env-flap" aria-hidden="true"><img src="img/envelope-closed.webp" alt=""></span>
-    <span class="env-seal" aria-hidden="true"><img src="img/seal.webp" alt=""></span>
   </div>
   <div class="opening-actions">
     <p class="eyebrow tap-hint" aria-hidden="true"><span data-copy="envelope_hint_tap">Tap to open</span></p>
-    <a class="btn enter" href="home.html" data-enter><span data-copy="envelope_enter">Enter</span></a>
+    <a class="btn btn-light enter" href="home.html" data-enter><span data-copy="envelope_enter">Enter</span></a>
     <button class="textlink replay" type="button"><span data-copy="envelope_replay">Replay the opening</span></button>
   </div>
   <!-- without JavaScript (no <noscript>: its content is raw text, the platform could not rewrite the link) -->
-  <p class="nojs-only"><a class="btn" href="home.html"><span data-copy="envelope_open">Open the invitation</span></a></p>
+  <p class="nojs-only"><a class="btn btn-light" href="home.html"><span data-copy="envelope_open">Open the invitation</span></a></p>
 </main>
+<div class="accent-layer" aria-hidden="true"></div>
 </body>
 </html>

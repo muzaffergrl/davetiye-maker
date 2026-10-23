@@ -5,7 +5,7 @@
 
 import { Music, Pause, Play, Upload } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { designSound, findTrack, MUSIC_TRACKS } from '../../lib/audio/catalog.ts';
+import { designSound, findTrack, tracksFor } from '../../lib/audio/catalog.ts';
 import { previewPhotoUrl } from '../../lib/panel/model.ts';
 import { Group, Switch, usePanelContext } from './fields.tsx';
 import { MUSIC_ACCEPT, musicFileProblem } from './music-upload.ts';
@@ -73,7 +73,7 @@ export function MusicFields() {
   };
 
   const options = [
-    ...MUSIC_TRACKS.map((tr) => ({
+    ...tracksFor(themeId).map((tr) => ({
       value: tr.id,
       label: tr.id === fallback ? t('{track} (suggested for this design)', { track: t(tr.label) }) : t(tr.label),
       hint: t(tr.mood),

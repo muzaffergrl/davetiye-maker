@@ -1,0 +1,886 @@
+{
+ "base": "next start (production build)",
+ "theme": "crimson-rose-atelier",
+ "errors": [],
+ "warnings": [
+  "index@360: Google font not loaded (Manrope) — fallback font shown",
+  "story@360: Google font not loaded (Manrope) — fallback font shown",
+  "details@360: Google font not loaded (Corinthia) — fallback font shown",
+  "rsvp@360: Google font not loaded (Manrope) — fallback font shown",
+  "index@390: Google font not loaded (Manrope) — fallback font shown",
+  "story@390: Google font not loaded (Manrope) — fallback font shown",
+  "details@390: Google font not loaded (Corinthia) — fallback font shown",
+  "rsvp@390: Google font not loaded (Manrope) — fallback font shown",
+  "index@430: Google font not loaded (Manrope) — fallback font shown",
+  "story@430: Google font not loaded (Manrope) — fallback font shown",
+  "details@430: Google font not loaded (Corinthia) — fallback font shown",
+  "rsvp@430: Google font not loaded (Manrope) — fallback font shown",
+  "index@768: Google font not loaded (Manrope) — fallback font shown",
+  "story@768: Google font not loaded (Manrope) — fallback font shown",
+  "details@768: Google font not loaded (Corinthia) — fallback font shown",
+  "rsvp@768: Google font not loaded (Manrope) — fallback font shown",
+  "index@1280: Google font not loaded (Manrope) — fallback font shown",
+  "story@1280: Google font not loaded (Manrope) — fallback font shown",
+  "details@1280: Google font not loaded (Corinthia) — fallback font shown",
+  "rsvp@1280: Google font not loaded (Manrope) — fallback font shown",
+  "index@390 (no photos): Google font not loaded (Manrope) — fallback font shown",
+  "story@390 (no photos): Google font not loaded (Manrope) — fallback font shown",
+  "details@390 (no photos): Google font not loaded (Corinthia) — fallback font shown",
+  "rsvp@390 (no photos): Google font not loaded (Manrope) — fallback font shown",
+  "index@390 (changed content): Google font not loaded (Manrope) — fallback font shown",
+  "story@390 (changed content): Google font not loaded (Manrope) — fallback font shown",
+  "details@390 (changed content): Google font not loaded (Corinthia) — fallback font shown",
+  "rsvp@390 (changed content): Google font not loaded (Manrope) — fallback font shown",
+  "index@360 (stress record): Google font not loaded (Manrope) — fallback font shown",
+  "story@360 (stress record): Google font not loaded (Manrope) — fallback font shown",
+  "details@360 (stress record): Google font not loaded (Corinthia) — fallback font shown",
+  "rsvp@360 (stress record): Google font not loaded (Manrope) — fallback font shown",
+  "index@390 (stress record): Google font not loaded (Manrope) — fallback font shown",
+  "story@390 (stress record): Google font not loaded (Manrope) — fallback font shown",
+  "details@390 (stress record): Google font not loaded (Corinthia) — fallback font shown",
+  "rsvp@390 (stress record): Google font not loaded (Manrope) — fallback font shown",
+  "index@360 (stress record, thank-you mode): Google font not loaded (Manrope) — fallback font shown",
+  "home@360 (stress record, thank-you mode): Google font not loaded (Manrope) — fallback font shown",
+  "details@360 (stress record, thank-you mode): Google font not loaded (Corinthia) — fallback font shown",
+  "rsvp@360 (stress record, thank-you mode): Google font not loaded (Manrope) — fallback font shown",
+  "index@390 (stress record, thank-you mode): Google font not loaded (Manrope) — fallback font shown",
+  "home@390 (stress record, thank-you mode): Google font not loaded (Manrope) — fallback font shown",
+  "details@390 (stress record, thank-you mode): Google font not loaded (Corinthia) — fallback font shown",
+  "rsvp@390 (stress record, thank-you mode): Google font not loaded (Manrope) — fallback font shown"
+ ],
+ "passed": [
+  "thank-you mode (G075): every page has its thank-you markers (docs/11 §3.6)",
+  "editable texts (G068): 87 copy keys = theme.json \"copy\", no unmarked visible text",
+  "fonts: Google Fonts link with 3 families (Cormorant Garamond, Corinthia, Manrope), display=swap",
+  "seed: 5 sample photos uploaded to the demo site (collections/21_Crimson_Rose_Atelier/assets/gpt/photos (PAKET 2))",
+  "index@360: no overflow, 7 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@360: no overflow, 21 fields = content record, 28 design texts, title ok, images loaded, no painted card, 5 photo slots user",
+  "story@360: no overflow, 7 fields = content record, 11 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@360: no overflow, 22 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@360: no overflow, 7 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@390: no overflow, 7 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@390: no overflow, 21 fields = content record, 28 design texts, title ok, images loaded, no painted card, 5 photo slots user",
+  "story@390: no overflow, 7 fields = content record, 11 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@390: no overflow, 22 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@390: no overflow, 7 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@430: no overflow, 7 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@430: no overflow, 21 fields = content record, 28 design texts, title ok, images loaded, no painted card, 5 photo slots user",
+  "story@430: no overflow, 7 fields = content record, 11 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@430: no overflow, 22 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@430: no overflow, 7 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@768: no overflow, 7 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@768: no overflow, 21 fields = content record, 28 design texts, title ok, images loaded, no painted card, 5 photo slots user",
+  "story@768: no overflow, 7 fields = content record, 11 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@768: no overflow, 22 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@768: no overflow, 7 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@1280: no overflow, 7 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@1280: no overflow, 21 fields = content record, 28 design texts, title ok, images loaded, no painted card, 5 photo slots user",
+  "story@1280: no overflow, 7 fields = content record, 11 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@1280: no overflow, 22 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@1280: no overflow, 7 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "photo slots: every theme.json slot (hero_portrait, story_1, story_2, story_3, venue) is on a page",
+  "index@390 (no photos): no overflow, 7 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "home@390 (no photos): no overflow, 21 fields = content record, 28 design texts, title ok, images loaded, no painted card, 5 photo slots placeholder",
+  "story@390 (no photos): no overflow, 7 fields = content record, 11 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@390 (no photos): no overflow, 22 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "rsvp@390 (no photos): no overflow, 7 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "home@390 (draft preview, no photos): no overflow, 21 fields = content record, 28 design texts, title ok, images loaded, no painted card, 5 photo slots preview-placeholder",
+  "envelope closed @360×640: 4 texts (eyebrow, names, eyebrow, eyebrow) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @360×640: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @375×553: 4 texts (eyebrow, names, eyebrow, eyebrow) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @375×553: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @390×690: 4 texts (eyebrow, names, eyebrow, eyebrow) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @390×690: \"Replay the opening\" on the plain painted ground",
+  "envelope closed @390×844: 4 texts (eyebrow, names, eyebrow, eyebrow) on the plain painted ground, envelope and hint on screen",
+  "envelope opened @390×844: \"Replay the opening\" on the plain painted ground",
+  "home @360×640: home-hero (9 pieces, no CTA in the hero, names 22.4 px) ends at 555, above the nav (top 577)",
+  "home@360×640: no overflow, 21 fields = content record, 28 design texts, title ok, images loaded, no painted card, 5 photo slots user",
+  "home @375×553: home-hero (9 pieces, no CTA in the hero, names 18.9 px) ends at 476, above the nav (top 490)",
+  "home@375×553: no overflow, 21 fields = content record, 28 design texts, title ok, images loaded, no painted card, 5 photo slots user",
+  "home @360×640 (design range): names 19.7 px (≥ 15); nothing partly under the nav (top 577): the first screen ends at 555",
+  "home@360×640 (design range): no overflow, 21 fields = content record, 28 design texts, title ok, images loaded, no painted card, 5 photo slots user",
+  "home @375×553 (design range): names 16.6 px (≥ 15); nothing partly under the nav (top 490): the first screen ends at 476",
+  "home@375×553 (design range): no overflow, 21 fields = content record, 28 design texts, title ok, images loaded, no painted card, 5 photo slots user",
+  "home @360×640 (stress record): names 16 px (≥ 15); the first screen ends at 555, above the nav (top 577)",
+  "home@360×640 (stress record): no overflow, 21 fields = content record, 28 design texts, title ok, images loaded, no painted card, 5 photo slots user",
+  "home @375×553 (stress record): names 16 px (≥ 15); the first screen ends at 476, above the nav (top 490)",
+  "home@375×553 (stress record): no overflow, 21 fields = content record, 28 design texts, title ok, images loaded, no painted card, 5 photo slots user",
+  "touch targets ≥ 44 px: envelope Skip 84×44, home \"Replay the envelope\" 201×44, rsvp \"Replay the envelope\" 167×44",
+  "envelope → /olivia-and-james/home in 5742 ms, card transition flag set",
+  "envelope → home: the card lands on a visible home card (opacity 1 at the first frame)",
+  "home first scene (home-hero): sequential entrance finished (2 steps)",
+  "countdown target from the platform: 2027-06-12 16:00 Europe/Rome = 2027-06-12 14:00 UTC",
+  "home → story through the nav (/<slug>/story)",
+  "back to the envelope: opened state with \"Enter\" + \"Replay the opening\" (no forced replay)",
+  "replay restarts the opening",
+  "details without map / hotel / registry links: no dead buttons for guests",
+  "RSVP empty name: message in the theme slot, linked with aria-describedby, focus on the field, nothing sent",
+  "RSVP: card button → form, a reply (yes, 2 guests) is stored for this site and the thank-you panel shows",
+  "RSVP: after a reply the closing section does not repeat or contradict the thank-you",
+  "RSVP: \"Send another reply\" reopens the form",
+  "theme demo RSVP page (/start/demo/…/rsvp): no 404, no console error",
+  "external requests: Google Fonts only",
+  "nav in the envelope → home view transition 390×844: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
+  "nav in the envelope → home view transition 360×640: the opaque nav arrives whole — its label row at 0 and 120 ms = the settled nav (nothing of the envelope page behind the labels)",
+  "nav leaving the envelope page 390×844: the old nav is not drawn over the envelope page at 0 / 120 ms (it leaves at once)",
+  "nav leaving the envelope page 360×640: the old nav is not drawn over the envelope page at 0 / 120 ms (it leaves at once)",
+  "Skip → home",
+  "per-site session keys: another site on the same origin starts with a closed envelope",
+  "countdown after the start (2027-06-12T15:00:00.000Z) → \"today: Today is the day — we're celebrating!\"",
+  "countdown after the start (2027-06-17T14:00:00.000Z) → \"after: Thank you for celebrating with us.\"",
+  "prefers-reduced-motion: straight to home without animation (285 ms), everything visible",
+  "draft preview: envelope → home → details keep ?preview=<key> (page map from #site-data)",
+  "RSVP in a draft preview: the preview notice shows, nothing is posted or stored",
+  "index@390 (changed content): no overflow, 7 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "home@390 (changed content): no overflow, 21 fields = content record, 28 design texts, title ok, images loaded, no painted card, 5 photo slots user",
+  "story@390 (changed content): no overflow, 7 fields = content record, 11 design texts, title ok, images loaded, no painted card, 3 photo slots user",
+  "details@390 (changed content): no overflow, 24 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot user",
+  "rsvp@390 (changed content): no overflow, 7 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "content change (names, date, venue, 4 schedule rows) → every page shows the new record after reload",
+  "index@360 (stress record): no overflow, 7 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "home@360 (stress record): no overflow, 21 fields = content record, 28 design texts, title ok, images loaded, no painted card, 5 photo slots placeholder",
+  "story@360 (stress record): no overflow, 7 fields = content record, 11 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@360 (stress record): no overflow, 43 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "rsvp@360 (stress record): no overflow, 7 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@390 (stress record): no overflow, 7 fields = content record, 7 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "home@390 (stress record): no overflow, 21 fields = content record, 28 design texts, title ok, images loaded, no painted card, 5 photo slots placeholder",
+  "story@390 (stress record): no overflow, 7 fields = content record, 11 design texts, title ok, images loaded, no painted card, 3 photo slots placeholder",
+  "details@390 (stress record): no overflow, 43 fields = content record, 13 design texts, title ok, images loaded, no painted card, 1 photo slot placeholder",
+  "rsvp@390 (stress record): no overflow, 7 fields = content record, 27 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@360 (stress record, thank-you mode): no overflow, 7 fields = content record, 6 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "home@360 (stress record, thank-you mode): no overflow, 15 fields = content record, 15 design texts, title ok, images loaded, no painted card, 4 photo slots thank-you",
+  "details@360 (stress record, thank-you mode): no overflow, 43 fields = content record, 8 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "rsvp@360 (stress record, thank-you mode): no overflow, 3 fields = content record, 6 design texts, title ok, images loaded, no painted card, no photo slot",
+  "index@390 (stress record, thank-you mode): no overflow, 7 fields = content record, 6 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "home@390 (stress record, thank-you mode): no overflow, 15 fields = content record, 15 design texts, title ok, images loaded, no painted card, 4 photo slots thank-you",
+  "details@390 (stress record, thank-you mode): no overflow, 43 fields = content record, 8 design texts, title ok, images loaded, no painted card, 1 photo slot thank-you",
+  "rsvp@390 (stress record, thank-you mode): no overflow, 3 fields = content record, 6 design texts, title ok, images loaded, no painted card, no photo slot",
+  "stress record (docs/11 §12: 40-character names and full names, 80-character venue, 10 schedule rows of 60-character labels and places, long host line and dress code; G068: 87 design texts at their max): every page at 360/390 (and in thank-you mode) without overflow, cut-off text or card text over decor; envelope texts on the plain ground, envelope and hint on screen",
+  "index first view (390×844, DPR 3, placeholders): 694 KB",
+  "home first view (390×844, DPR 3, placeholders): 664 KB",
+  "index first view (390×844, DPR 3, seeded sample photos): 757 KB",
+  "home first view (390×844, DPR 3, seeded sample photos): 1464 KB",
+  "palette midnight-navy (coming): 47 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette plum-gold (coming): 47 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette dusty-rose (coming): 47 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette emerald-ruby (coming): 47 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground",
+  "palette terracotta-rust (coming): 47 texts on 5 pages reach 4.5:1 (body) / 3:1 (large, script) on the painted ground"
+ ],
+ "info": {
+  "setup": {
+   "collection": "collections/21_Crimson_Rose_Atelier",
+   "demo_record": "platform/themes/crimson-rose-atelier/content.demo.json",
+   "photos": "collections/21_Crimson_Rose_Atelier/assets/gpt/photos (PAKET 2)",
+   "w1_comps": [],
+   "compare": "none",
+   "checks_table": "img/manifest.json theme_check",
+   "cards": "auto (no free_zone in img/manifest.json)",
+   "fonts": [
+    "Cormorant Garamond 400/500/600/italic 400/italic 500",
+    "Corinthia",
+    "Manrope 400/500/600"
+   ]
+  },
+  "thank_you": "complete",
+  "copy": {
+   "keys": 87,
+   "unmarked": 0,
+   "problems": 0
+  },
+  "seed_photos": [
+   "hero_portrait → media.hero_portrait (101 KB, 869×1086, variants 640)",
+   "story_1 → media.memory_photos.0 (168 KB, 1448×1086, variants 640/1280)",
+   "story_2 → media.memory_photos.1 (274 KB, 1448×1086, variants 640/1280)",
+   "story_3 → media.memory_photos.2 (161 KB, 1448×1086, variants 640/1280)",
+   "venue → media.venue_image (355 KB, 1672×941, variants 640/1280)"
+  ],
+  "envelope_backdrop": [
+   {
+    "at": "360x640",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "eyebrow kicker",
+      "edge": 0.53,
+      "dark": 0
+     },
+     {
+      "box": "names engraved",
+      "edge": 0.61,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow when",
+      "edge": 0.53,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow tap-hint",
+      "edge": 1.3,
+      "dark": 0.002
+     }
+    ]
+   },
+   {
+    "at": "360x640",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "textlink replay",
+      "edge": 0.86,
+      "dark": 0.022
+     }
+    ]
+   },
+   {
+    "at": "375x553",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "eyebrow kicker",
+      "edge": 0.69,
+      "dark": 0
+     },
+     {
+      "box": "names engraved",
+      "edge": 0.62,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow when",
+      "edge": 0.5,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow tap-hint",
+      "edge": 1.8,
+      "dark": 0.002
+     }
+    ]
+   },
+   {
+    "at": "375x553",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "textlink replay",
+      "edge": 0.91,
+      "dark": 0.013
+     }
+    ]
+   },
+   {
+    "at": "390x690",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "eyebrow kicker",
+      "edge": 0.57,
+      "dark": 0
+     },
+     {
+      "box": "names engraved",
+      "edge": 0.6,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow when",
+      "edge": 0.51,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow tap-hint",
+      "edge": 1.29,
+      "dark": 0.002
+     }
+    ]
+   },
+   {
+    "at": "390x690",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "textlink replay",
+      "edge": 0.84,
+      "dark": 0.022
+     }
+    ]
+   },
+   {
+    "at": "390x844",
+    "state": "closed",
+    "boxes": [
+     {
+      "box": "eyebrow kicker",
+      "edge": 0.71,
+      "dark": 0
+     },
+     {
+      "box": "names engraved",
+      "edge": 0.57,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow when",
+      "edge": 0.47,
+      "dark": 0
+     },
+     {
+      "box": "eyebrow tap-hint",
+      "edge": 1.29,
+      "dark": 0.002
+     }
+    ]
+   },
+   {
+    "at": "390x844",
+    "state": "opened",
+    "boxes": [
+     {
+      "box": "textlink replay",
+      "edge": 0.8,
+      "dark": 0.022
+     }
+    ]
+   }
+  ],
+  "home_first_screen_landscape": "not required (img/manifest.json theme_check.first_screen.landscape unset): measured only",
+  "home_first_screen": [
+   {
+    "at": "360x640",
+    "record": "demo",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 577,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 555,
+    "above": 555,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 22.4
+   },
+   {
+    "at": "375x553",
+    "record": "demo",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 490,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 476,
+    "above": 476,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 18.9
+   },
+   {
+    "at": "844x390",
+    "record": "demo",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 327,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 480,
+    "above": 322,
+    "below": 394,
+    "cta": null,
+    "bad": [
+     "div.hero-card.card-portrait.in bottom 480",
+     "p.script.card-line \"Our wedding\" bottom 364",
+     "span.first-name \"Olivia\" bottom 389",
+     "span.amp \"&\" bottom 393",
+     "span.second-name \"James\" bottom 387",
+     "span \"Saturday\" bottom 415",
+     "span \"June 12, 2027\" bottom 413"
+    ],
+    "partly": [
+     "div.hero-card.card-portrait.in 102–480",
+     "p.script.card-line \"Our wedding\" 331–364",
+     "span.first-name \"Olivia\" 365–389",
+     "span.amp \"&\" 363–393",
+     "span.second-name \"James\" 364–387"
+    ],
+    "names": 18.5
+   },
+   {
+    "at": "667x375",
+    "record": "demo",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 312,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 434,
+    "above": 276,
+    "below": null,
+    "cta": null,
+    "bad": [
+     "div.hero-card.card-portrait.in bottom 434",
+     "p.script.card-line \"Our wedding\" bottom 315",
+     "span.first-name \"Olivia\" bottom 338",
+     "span.amp \"&\" bottom 342",
+     "span.second-name \"James\" bottom 337",
+     "span \"Saturday\" bottom 363",
+     "span \"June 12, 2027\" bottom 385"
+    ],
+    "partly": [
+     "div.hero-card.card-portrait.in 86–434",
+     "p.script.card-line \"Our wedding\" 284–315",
+     "span.first-name \"Olivia\" 316–338",
+     "span.amp \"&\" 315–342",
+     "span.second-name \"James\" 314–337",
+     "span \"Saturday\" 344–363",
+     "span \"June 12, 2027\" 343–385"
+    ],
+    "names": 17
+   },
+   {
+    "at": "360x640",
+    "record": "range",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 577,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 555,
+    "above": 555,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 19.7
+   },
+   {
+    "at": "375x553",
+    "record": "range",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 490,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 476,
+    "above": 476,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 16.6
+   },
+   {
+    "at": "844x390",
+    "record": "range",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 327,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 480,
+    "above": 302,
+    "below": 391,
+    "cta": null,
+    "bad": [
+     "div.hero-card.card-portrait.in bottom 480",
+     "p.script.card-line \"Our wedding\" bottom 345",
+     "span.first-name \"Alexandrina Rose\" bottom 368",
+     "span.amp \"&\" bottom 391",
+     "span.second-name \"Maximilian James\" bottom 386",
+     "span \"Wednesday\" bottom 410",
+     "span \"29 September 2027\" bottom 433"
+    ],
+    "partly": [
+     "div.hero-card.card-portrait.in 102–480",
+     "p.script.card-line \"Our wedding\" 312–345",
+     "span.first-name \"Alexandrina Rose\" 344–368",
+     "span.amp \"&\" 364–391",
+     "span.second-name \"Maximilian James\" 362–386"
+    ],
+    "names": 16.3
+   },
+   {
+    "at": "667x375",
+    "record": "range",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 312,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 434,
+    "above": 277,
+    "below": null,
+    "cta": null,
+    "bad": [
+     "div.hero-card.card-portrait.in.is-long bottom 434",
+     "span.first-name \"Alexandrina Rose\" bottom 316",
+     "span.amp \"&\" bottom 319",
+     "span.second-name \"Maximilian James\" bottom 335",
+     "span \"Wednesday\" bottom 359",
+     "span \"29 September 2027\" bottom 382"
+    ],
+    "partly": [
+     "div.hero-card.card-portrait.in.is-long 86–434",
+     "span.first-name \"Alexandrina Rose\" 276–316",
+     "span.amp \"&\" 293–319",
+     "span.second-name \"Maximilian James\" 311–335",
+     "span \"Wednesday\" 341–359",
+     "span \"29 September 2027\" 340–382"
+    ],
+    "names": 16
+   },
+   {
+    "at": "360x640",
+    "record": "stress",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 577,
+    "screen": 640,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 555,
+    "above": 555,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 16
+   },
+   {
+    "at": "375x553",
+    "record": "stress",
+    "required": true,
+    "scene": "home-hero",
+    "navTop": 490,
+    "screen": 553,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 476,
+    "above": 476,
+    "below": null,
+    "cta": null,
+    "bad": [],
+    "partly": [],
+    "names": 16
+   },
+   {
+    "at": "844x390",
+    "record": "stress",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 327,
+    "screen": 390,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 480,
+    "above": 298,
+    "below": 415,
+    "cta": null,
+    "bad": [
+     "div.hero-card.card-portrait.in.is-long bottom 480",
+     "span.first-name \"Charlotte-Elizabeth Anne\" bottom 356",
+     "span.amp \"&\" bottom 379",
+     "span.second-name \"Maximilian Alexander Fit\" bottom 410",
+     "span \"Saturday\" bottom 436",
+     "span \"June 12, 2027\" bottom 434"
+    ],
+    "partly": [
+     "div.hero-card.card-portrait.in.is-long 102–480",
+     "span.first-name \"Charlotte-Elizabeth Anne\" 297–356",
+     "span.amp \"&\" 352–379",
+     "span.second-name \"Maximilian Alexander Fit\" 351–410"
+    ],
+    "names": 16
+   },
+   {
+    "at": "667x375",
+    "record": "stress",
+    "required": false,
+    "scene": "home-hero",
+    "navTop": 312,
+    "screen": 375,
+    "bottomNav": true,
+    "items": 9,
+    "lowest": 434,
+    "above": 310,
+    "below": 385,
+    "cta": null,
+    "bad": [
+     "div.hero-card.card-portrait.in.is-long bottom 434",
+     "span.second-name \"Maximilian Alexander Fit\" bottom 378",
+     "span \"Saturday\" bottom 405",
+     "span \"June 12, 2027\" bottom 426"
+    ],
+    "partly": [
+     "div.hero-card.card-portrait.in.is-long 86–434",
+     "span.second-name \"Maximilian Alexander Fit\" 303–378"
+    ],
+    "names": 16
+   }
+  ],
+  "envelope_to_home_ms": 5742,
+  "home_card_first_frame": {
+   "opacity": 1,
+   "from": true
+  },
+  "nav_vt_390x844": {
+   "nav_animations": [],
+   "opaque_label_row": true,
+   "settled_vs_alone": "0.00 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.00 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
+  },
+  "nav_vt_360x640": {
+   "nav_animations": [],
+   "opaque_label_row": true,
+   "settled_vs_alone": "0.00 %",
+   "frames": [
+    {
+     "t": 0,
+     "differ": "0.00 %"
+    },
+    {
+     "t": 120,
+     "differ": "0.00 %"
+    }
+   ]
+  },
+  "nav_back_vt_390x844": {
+   "nav_animations": [],
+   "frames": [
+    {
+     "t": 0,
+     "nav_drawn": "0.00 %"
+    },
+    {
+     "t": 120,
+     "nav_drawn": "0.00 %"
+    }
+   ]
+  },
+  "nav_back_vt_360x640": {
+   "nav_animations": [],
+   "frames": [
+    {
+     "t": 0,
+     "nav_drawn": "0.00 %"
+    },
+    {
+     "t": 120,
+     "nav_drawn": "0.01 %"
+    }
+   ]
+  },
+  "stress_record": {
+   "slug": "stress-site",
+   "pages": [
+    "index",
+    "home",
+    "story",
+    "details",
+    "rsvp"
+   ],
+   "widths": [
+    360,
+    390
+   ],
+   "copy_keys_at_max": 87,
+   "thank_you": true
+  },
+  "first_view_index_kb_placeholders": 694,
+  "first_view_index_files": [
+   [
+    "/themes/crimson-rose-atelier/img/card_portrait-860.webp",
+    119960
+   ],
+   [
+    "/themes/crimson-rose-atelier/img/rose-800.webp",
+    110604
+   ],
+   [
+    "/themes/crimson-rose-atelier/img/env_closed-1100.webp",
+    90924
+   ],
+   [
+    "/themes/crimson-rose-atelier/img/env_inside-1100.webp",
+    54914
+   ],
+   [
+    "/audio/fx/crimson-rose-atelier/reveal.mp3",
+    39289
+   ],
+   [
+    "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+    37640
+   ],
+   [
+    "https://fonts.gstatic.com/s/corinthia/v13/wEO_EBrAnchaJyPMHE01VvoK.woff2",
+    36676
+   ],
+   [
+    "/themes/crimson-rose-atelier/img/seal-320.webp",
+    32362
+   ]
+  ],
+  "first_view_home_kb_placeholders": 664,
+  "first_view_home_files": [
+   [
+    "/themes/crimson-rose-atelier/img/card_formal-860.webp",
+    192428
+   ],
+   [
+    "/themes/crimson-rose-atelier/img/card_portrait-860.webp",
+    119960
+   ],
+   [
+    "/themes/crimson-rose-atelier/img/rose-800.webp",
+    110604
+   ],
+   [
+    "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrEtImSo.woff2",
+    39260
+   ],
+   [
+    "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+    37640
+   ],
+   [
+    "https://fonts.gstatic.com/s/corinthia/v13/wEO_EBrAnchaJyPMHE01VvoK.woff2",
+    36676
+   ],
+   [
+    "/audio/fx/crimson-rose-atelier/petal.mp3",
+    29571
+   ],
+   [
+    "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggexSg.woff2",
+    24836
+   ]
+  ],
+  "first_view_index_kb_photos": 757,
+  "first_view_index_files_photos": [
+   [
+    "/themes/crimson-rose-atelier/img/card_portrait-860.webp",
+    119960
+   ],
+   [
+    "/themes/crimson-rose-atelier/img/rose-800.webp",
+    110604
+   ],
+   [
+    "/themes/crimson-rose-atelier/img/env_closed-1100.webp",
+    90924
+   ],
+   [
+    "/media/00dd36ee-3e12-4128-afee-d7c9680f449b/10c3f140354c0b0ff804845b7a1c212e-640w.jpg",
+    65556
+   ],
+   [
+    "/themes/crimson-rose-atelier/img/env_inside-1100.webp",
+    54914
+   ],
+   [
+    "/audio/fx/crimson-rose-atelier/reveal.mp3",
+    39289
+   ],
+   [
+    "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2",
+    37640
+   ],
+   [
+    "https://fonts.gstatic.com/s/corinthia/v13/wEO_EBrAnchaJyPMHE01VvoK.woff2",
+    36676
+   ]
+  ],
+  "first_view_home_kb_photos": 1464,
+  "first_view_home_files_photos": [
+   [
+    "/media/00dd36ee-3e12-4128-afee-d7c9680f449b/a362111a1e4e1c178cc512fbcdb29660-1280w.jpg",
+    239953
+   ],
+   [
+    "/media/00dd36ee-3e12-4128-afee-d7c9680f449b/b1c0f31a70c8734c5998c5a2d5199820-1280w.jpg",
+    233666
+   ],
+   [
+    "/themes/crimson-rose-atelier/img/card_formal-860.webp",
+    192428
+   ],
+   [
+    "/media/00dd36ee-3e12-4128-afee-d7c9680f449b/d551dc83adba28490d248c49f32215a4-1280w.jpg",
+    144063
+   ],
+   [
+    "/media/00dd36ee-3e12-4128-afee-d7c9680f449b/13ceed3dad988810b6b944f39b3fb16d-1280w.jpg",
+    137616
+   ],
+   [
+    "/themes/crimson-rose-atelier/img/card_portrait-860.webp",
+    119960
+   ],
+   [
+    "/themes/crimson-rose-atelier/img/rose-800.webp",
+    110604
+   ],
+   [
+    "/media/00dd36ee-3e12-4128-afee-d7c9680f449b/10c3f140354c0b0ff804845b7a1c212e-640w.jpg",
+    65556
+   ]
+  ],
+  "compare": {
+   "source": "none",
+   "pages": []
+  },
+  "variants": {
+   "original": {
+    "measured": 47,
+    "low": 0,
+    "as_original": 0
+   },
+   "midnight-navy": {
+    "measured": 47,
+    "low": 0,
+    "as_original": 0
+   },
+   "plum-gold": {
+    "measured": 47,
+    "low": 0,
+    "as_original": 0
+   },
+   "dusty-rose": {
+    "measured": 47,
+    "low": 0,
+    "as_original": 0
+   },
+   "emerald-ruby": {
+    "measured": 47,
+    "low": 0,
+    "as_original": 0
+   },
+   "terracotta-rust": {
+    "measured": 47,
+    "low": 0,
+    "as_original": 0
+   }
+  }
+ }
+}

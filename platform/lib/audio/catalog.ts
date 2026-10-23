@@ -5,6 +5,11 @@
 
 export interface MusicTrack {
   id: string;
+  /**
+   * A design's own track: offered in the panel only for that theme id (listed first there). Without it the track is
+   * shared by every design. The id stays valid everywhere (a site keeps its choice if the design changes).
+   */
+  theme?: string;
   /** Buyer-facing name in the panel. */
   label: string;
   /** One line under the name in the panel. */
@@ -18,14 +23,32 @@ export const MUSIC_TRACKS: readonly MusicTrack[] = [
   { id: 'garden-waltz', label: 'Garden Waltz', mood: 'Light piano waltz, sunny and graceful', url: '/audio/music/garden-waltz.mp3' },
   { id: 'evening-strings', label: 'Evening Strings', mood: 'Soft strings and piano, calm and elegant', url: '/audio/music/evening-strings.mp3' },
   { id: 'music-box', label: 'Music Box', mood: 'Music box lullaby, sweet and whimsical', url: '/audio/music/music-box.mp3' },
+  {
+    id: 'rose-nocturne',
+    theme: 'crimson-rose-atelier',
+    label: 'Rose Nocturne',
+    mood: 'Candlelit waltz for piano, harp and strings',
+    url: '/audio/music/rose-nocturne.mp3',
+  },
 ];
+
+/** The tracks the panel offers for a design: its own tracks first, then the shared ones. */
+export function tracksFor(themeId: string | null | undefined): MusicTrack[] {
+  return [...MUSIC_TRACKS.filter((t) => t.theme && t.theme === themeId), ...MUSIC_TRACKS.filter((t) => !t.theme)];
+}
 
 export type EffectName = 'seal' | 'ribbon' | 'clasp' | 'paper' | 'slide' | 'page' | 'tear' | 'whoosh' | 'chime' | 'tap';
 export const EFFECT_NAMES: readonly EffectName[] = ['seal', 'ribbon', 'clasp', 'paper', 'slide', 'page', 'tear', 'whoosh', 'chime', 'tap'];
 export const EFFECTS_BASE_URL = '/audio/fx/';
 
-/** One cue of an opening: [ms after the tap, effect]. */
-export type OpeningCue = readonly [number, EffectName];
+/**
+ * One cue of an opening: [ms after the tap, effect]. The effect is one of EFFECT_NAMES, or — for a design with its own
+ * sound pack (DesignSound.pack) — the name of a file in that pack (tests/g126-audio.test.ts checks every file).
+ */
+export type OpeningCue = readonly [number, EffectName | (string & {})];
+
+/** The pages a theme can play its own cues on (DesignSound.cues). */
+export type SoundPage = 'index' | 'home' | 'story' | 'details' | 'rsvp';
 
 export interface DesignSound {
   /** Default music track id when the couple has not chosen one. */
@@ -36,14 +59,32 @@ export interface DesignSound {
    * flap or doors, the card leaving its pocket, and a soft chime as it comes forward.
    */
   opening: readonly OpeningCue[];
+  /**
+   * The design's own sound pack: public/audio/fx/<pack>/<name>.mp3 replaces the shared effects for this design. It holds
+   * every opening cue, 'tap' (links between pages) and 'chime' (an RSVP sent), plus the design's cues below.
+   */
+  pack?: string;
+  /**
+   * Effects the theme plays itself, per page (site.js: document.dispatchEvent(new CustomEvent('invite:sfx', {detail:
+   * {name}})) — a page turned, a reply sealed). Only from the pack; audio.js preloads them and plays them only after
+   * the guest's own tap, like every effect.
+   */
+  cues?: Readonly<Partial<Record<SoundPage, readonly string[]>>>;
 }
 
 /**
  * Per theme id. `step` names in the comments = the MOTION.envelope key whose start the cue uses.
  */
 export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
-  // Crimson Rose Atelier: botanical seal, flap, card, chime.
-  'crimson-rose-atelier': { music: 'evening-strings', opening: [[0, 'seal'], [400, 'paper'], [1600, 'slide'], [3000, 'chime']] },
+  // Crimson Rose Atelier (own pack, 2026-10-23): the wax seal cracks in two (crack) · the heavy flap turns up (flap) · the
+  // card slides out of the pocket (draw) · it lifts free into the light (reveal: harp and strings) · forward (bloom).
+  // Pages: the album leaf turns (page), the reply is sealed into the envelope (stamp).
+  'crimson-rose-atelier': {
+    music: 'rose-nocturne',
+    pack: 'crimson-rose-atelier',
+    opening: [[0, 'crack'], [480, 'flap'], [1150, 'draw'], [2250, 'reveal'], [3150, 'bloom']],
+    cues: { story: ['page'], rsvp: ['fold', 'stamp'], home: ['petal'] },
+  },
   // Nocturne Lake Estate: gold seal lifts off (closure) · flap turns up (lift) · card rises (rise) · forward
   'nocturne-lake-estate': { music: 'evening-strings', opening: [[200, 'seal'], [880, 'paper'], [1800, 'slide'], [3140, 'chime']] },
   // Velvet Jewel Box: satin bow slides off (closure) · lid on its hinge (lid) · card rises (rise) · forward
@@ -148,6 +189,12 @@ export const DEFAULT_OPENING: readonly OpeningCue[] = [[0, 'seal'], [400, 'paper
 
 export function findTrack(id: string | null | undefined): MusicTrack | null {
   return MUSIC_TRACKS.find((t) => t.id === id) ?? null;
+}
+
+/** Base URL of a design's effect files: its own pack, else the shared effects. */
+export function effectsBase(themeId: string): string {
+  const pack = DESIGN_SOUND[themeId]?.pack;
+  return pack ? `${EFFECTS_BASE_URL}${pack}/` : EFFECTS_BASE_URL;
 }
 
 export function designSound(themeId: string): DesignSound {

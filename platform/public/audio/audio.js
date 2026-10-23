@@ -2,11 +2,14 @@
  * play, with the settings in #site-data → "sound" (lib/audio/site-sound.ts):
  *
  *   { music: "/audio/music/first-light.mp3" | "/media/…" | null,   (story page only)
- *     effects: true, fx: "/audio/fx/", opening: [[ms, "seal"], …] } (index page only)
+ *     effects: true, fx: "/audio/fx/" | "/audio/fx/<design pack>/", opening: [[ms, "seal"], …] (index page only),
+ *     cues: ["page", …] }                                             (the theme's own cues on this page)
  *
  * - Effects (Web Audio, small mp3 files): the opening cues when the guest taps the envelope (.stage) or "Replay"
  *   (.replay), timed on the theme's choreography; a soft tick on links between pages; a chime when an RSVP is sent
- *   (form.js "rsvp:state" success). Nothing sounds before the guest's own tap (browser rules).
+ *   (form.js "rsvp:state" success). A theme plays its own cues with document.dispatchEvent(new CustomEvent(
+ *   'invite:sfx', {detail: {name}})) — a page turned, a reply sealed (only names listed in "cues"; the files come from
+ *   the design's pack). Nothing sounds before the guest's own tap (browser rules).
  * - Music (story page): tries to start after the page loads (allowed once the guest has tapped on the site in most
  *   browsers); if the browser blocks it, a small "Play music" button appears. Soft fade in / out, loops, pauses in a
  *   hidden tab, resumes where it was when the guest comes back to the story page.
@@ -176,6 +179,14 @@
   document.addEventListener('rsvp:state', function (e) {
     if (e.detail && e.detail.state === 'success') play('chime', 800);
   });
+  var CUES = {};
+  (S.cues || []).forEach(function (n) {
+    CUES[n] = 1;
+  });
+  document.addEventListener('invite:sfx', function (e) {
+    var name = e.detail && e.detail.name;
+    if (typeof name === 'string' && CUES[name]) play(name, 400);
+  });
 
   function idle(fn) {
     if ('requestIdleCallback' in window) requestIdleCallback(fn, { timeout: 3000 });
@@ -188,6 +199,9 @@
         names[c[1]] = 1;
       });
       if (document.querySelector('[data-rsvp-form]')) names.chime = 1;
+      Object.keys(CUES).forEach(function (n) {
+        names[n] = 1;
+      });
       Object.keys(names).forEach(fetchFx);
     });
   }

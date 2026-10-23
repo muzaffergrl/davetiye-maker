@@ -123,7 +123,9 @@ function opening(shots: string, outDir: string): VideoAsset | null {
     if (statSync(mp4).size <= VIDEO_MAX_BYTES || crf >= 35) break;
     crf += 2;
   }
-  ffmpeg(['-ss', leadIn.toFixed(2), '-i', webm, '-frames:v', '1', '-c:v', 'libwebp', '-quality', String(WEBP_QUALITY), poster]);
+  // the poster is the closed invitation just before the tap (capture.ts taps 1.2 s after the lead-in): a theme whose page
+  // fades / unveils in (21 since 2026-10-23) would otherwise show a half-drawn first frame
+  ffmpeg(['-ss', (leadIn + 1.1).toFixed(2), '-i', webm, '-frames:v', '1', '-c:v', 'libwebp', '-quality', String(WEBP_QUALITY), poster]);
   const probe = execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'stream=width,height:format=duration', '-of', 'json', mp4], { encoding: 'utf8' });
   const p = JSON.parse(probe);
   return {

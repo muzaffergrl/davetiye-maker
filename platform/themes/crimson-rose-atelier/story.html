@@ -1,9 +1,102 @@
-<!doctype html><html lang="en" class="no-js"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#39090e"><title data-text="{copy.story_title} · {name_display}">Our Story</title>
+<!doctype html>
+<!-- Crimson Rose Atelier · page 3 — our story (/<slug>/story). "A little book of us": a small album on the candlelit
+     oxblood, three thick deckled leaves (the theme's GPT card; the PAKET 8 album page when it exists), one photograph and a
+     handwritten caption on each. The guest turns the leaves like a real book: the page lifts from the right edge under
+     the finger, bends towards them with light sliding across it, and lands on the left (Web Animations; buttons,
+     keyboard arrows and the chapter thumbnails do the same). The satin bookmark ribbon (PAKET 8) sways with every turn.
+     Without JavaScript every leaf is readable one under another. Personal text: none — filled on the server. -->
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#29070b">
+<title data-text="{copy.story_title} · {name_display}">Our Story</title>
 <meta name="description" data-attr-content="{copy.story_title} · {name_display} · {date|date-long}" content="Our story">
 <meta property="og:type" content="website">
 <meta property="og:title" data-attr-content="{copy.story_title} · {name_display}" content="Our Story">
 <meta property="og:description" data-attr-content="{date|date-long} · {venue.city_region}" content="">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600&display=swap"><style>/* names fallback: scripts/font-fallback.ts */
-@font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:96.7%;ascent-override:95.2%;descent-override:30%;line-gap-override:0%}
-@font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:83.1%;ascent-override:110.7%;descent-override:34.9%;line-gap-override:0%}</style>
-<link rel="stylesheet" href="site.css"><script>document.documentElement.classList.replace('no-js','js');</script><script src="site.js" defer></script></head><body class="page-story" data-optional="our_story" data-pending="This link will be added soon."><main class="album-page"><header class="album-heading" data-scene="story-head"><p data-copy="story_kicker" class="eyebrow" data-step="kicker">Every chapter led to you</p><h1 data-copy="story_title" data-step="title">A little book of us</h1><p class="album-intro" data-if="story.intro" data-step="intro"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p></header><section class="album" aria-label="Our story album" aria-roledescription="carousel" data-scene="story-frame"><div class="album-pages" data-step="album"><figure class="album-leaf" id="chapter-1" data-album-page="0" role="group" aria-roledescription="slide" aria-label="1 of 3"><div class="album-photo photo-slot" data-slot="story_1"><img data-photo="story_1" src="img/ph_land-640.webp" alt="" data-attr-alt="{story.items.0.caption}" sizes="(min-width: 700px) 710px, 90vw" fetchpriority="high"><span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span></div><figcaption><span class="chapter-no"><span data-copy="album_chapter">Chapter</span> 01</span><span data-field="story.items.0.caption" class="album-caption"></span></figcaption></figure><figure class="album-leaf" id="chapter-2" data-album-page="1" role="group" aria-roledescription="slide" aria-label="2 of 3"><div class="album-photo photo-slot" data-slot="story_2"><img data-photo="story_2" src="img/ph_land-640.webp" alt="" data-attr-alt="{story.items.1.caption}" sizes="(min-width: 700px) 710px, 90vw" loading="lazy"><span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span></div><figcaption><span class="chapter-no"><span data-copy="album_chapter">Chapter</span> 02</span><span data-field="story.items.1.caption" class="album-caption"></span></figcaption></figure><figure class="album-leaf" id="chapter-3" data-album-page="2" role="group" aria-roledescription="slide" aria-label="3 of 3"><div class="album-photo photo-slot" data-slot="story_3"><img data-photo="story_3" src="img/ph_land-640.webp" alt="" data-attr-alt="{story.items.2.caption}" sizes="(min-width: 700px) 710px, 90vw" loading="lazy"><span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span></div><figcaption><span class="chapter-no"><span data-copy="album_chapter">Chapter</span> 03</span><span data-field="story.items.2.caption" class="album-caption"></span></figcaption></figure></div><div class="album-controls" hidden><button class="circle-btn" type="button" data-album-prev data-copy-attr="aria-label:album_previous" aria-label="Previous chapter">←</button><p class="album-status" aria-live="polite"><span data-album-number>01</span> <span aria-hidden="true">/</span> 03</p><button class="circle-btn" type="button" data-album-next data-copy-attr="aria-label:album_next" aria-label="Next chapter">→</button></div><div class="album-tabs" hidden aria-label="Choose an album chapter"><button type="button" data-album-go="0" aria-label="Chapter 1" aria-pressed="true"><img data-photo="story_1" src="img/ph_land-640.webp" alt="" sizes="75px" loading="lazy"></button><button type="button" data-album-go="1" aria-label="Chapter 2" aria-pressed="false"><img data-photo="story_2" src="img/ph_land-640.webp" alt="" sizes="75px" loading="lazy"></button><button type="button" data-album-go="2" aria-label="Chapter 3" aria-pressed="false"><img data-photo="story_3" src="img/ph_land-640.webp" alt="" sizes="75px" loading="lazy"></button></div></section><section class="album-after" data-scene="story-next"><img class="rose " src="img/rose-branch.webp" alt="" aria-hidden="true" loading="lazy"><p class="italic" data-field="name_display"></p><p class="eyebrow" data-field="date"></p><a class="btn btn-ghost" href="details.html" data-if="!thank_you_hides_details"><span data-copy="day_title" >The celebration</span> →</a><a class="btn btn-ghost" href="home.html" data-if="thank_you_hides_details"><span data-copy="home_link" >Home</span></a></section></main><nav class="site-nav" aria-label="Wedding pages"><ul><li ><a href="home.html" ><span data-copy="nav_home" >Home</span></a></li><li data-optional="our_story"><a href="story.html" aria-current="page"><span data-copy="nav_story" >Story</span></a></li><li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on" data-copy="nav_details">Details</span><span data-if="thank_you_on" data-copy="nav_day">The Day</span></a></li><li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html" ><span data-copy="nav_rsvp" >RSVP</span></a></li></ul></nav></body></html>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Corinthia&family=Manrope:wght@400;500;600&display=swap">
+<style>/* names fallback: scripts/font-fallback.ts */
+@font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:95.9%;ascent-override:96%;descent-override:30.2%;line-gap-override:0%}
+@font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:94%;ascent-override:97.9%;descent-override:30.9%;line-gap-override:0%}</style>
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="parts.css">
+<script>document.documentElement.classList.replace('no-js','js');</script>
+<script src="site.js" defer></script>
+</head>
+<body class="page-story dark" data-optional="our_story" data-pending="This link will be added soon.">
+<div class="atmos" aria-hidden="true"><span class="velvet"></span><span class="glow"></span></div>
+<main class="story">
+  <header class="story-head" data-scene="story-head">
+    <span class="sprig" aria-hidden="true" data-step="kicker"></span>
+    <p data-copy="story_kicker" class="eyebrow" data-step="kicker">Every chapter led to you</p>
+    <h1 data-copy="story_title" data-step="title">A little book of us</h1>
+    <p class="story-intro" data-if="story.intro" data-step="intro"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
+  </header>
+  <section class="album" aria-label="Our story album" aria-roledescription="carousel" data-scene="story-frame">
+    <div class="book" data-step="album">
+      <span class="ribbon" aria-hidden="true"></span>
+      <div class="album-pages">
+        <figure class="album-leaf" id="chapter-1" data-album-page="0" role="group" aria-roledescription="slide" aria-label="1 of 3">
+          <div class="leaf-face">
+            <p class="eyebrow chapter-no"><span data-copy="album_chapter">Chapter</span></p>
+            <div class="album-photo photo-slot" data-slot="story_1">
+              <img data-photo="story_1" src="img/ph_land-640.webp" alt="" data-attr-alt="{story.items.0.caption}" sizes="(min-width: 700px) 330px, 62vw" fetchpriority="high">
+              <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+            </div>
+            <figcaption class="script album-caption" data-field="story.items.0.caption"></figcaption>
+          </div>
+        </figure>
+        <figure class="album-leaf" id="chapter-2" data-album-page="1" role="group" aria-roledescription="slide" aria-label="2 of 3">
+          <div class="leaf-face">
+            <p class="eyebrow chapter-no"><span data-copy="album_chapter">Chapter</span></p>
+            <div class="album-photo photo-slot" data-slot="story_2">
+              <img data-photo="story_2" src="img/ph_land-640.webp" alt="" data-attr-alt="{story.items.1.caption}" sizes="(min-width: 700px) 330px, 62vw" loading="lazy">
+              <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+            </div>
+            <figcaption class="script album-caption" data-field="story.items.1.caption"></figcaption>
+          </div>
+        </figure>
+        <figure class="album-leaf" id="chapter-3" data-album-page="2" role="group" aria-roledescription="slide" aria-label="3 of 3">
+          <div class="leaf-face">
+            <p class="eyebrow chapter-no"><span data-copy="album_chapter">Chapter</span></p>
+            <div class="album-photo photo-slot" data-slot="story_3">
+              <img data-photo="story_3" src="img/ph_land-640.webp" alt="" data-attr-alt="{story.items.2.caption}" sizes="(min-width: 700px) 330px, 62vw" loading="lazy">
+              <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+            </div>
+            <figcaption class="script album-caption" data-field="story.items.2.caption"></figcaption>
+          </div>
+        </figure>
+      </div>
+    </div>
+    <div class="album-controls" hidden>
+      <button class="circle-btn" type="button" data-album-prev data-copy-attr="aria-label:album_previous" aria-label="Previous chapter">←</button>
+      <p class="album-status" aria-live="polite"><span data-album-number>01</span> <span aria-hidden="true">/</span> 03</p>
+      <button class="circle-btn" type="button" data-album-next data-copy-attr="aria-label:album_next" aria-label="Next chapter">→</button>
+    </div>
+    <p class="album-hint eyebrow" hidden data-copy="album_hint">Swipe to turn the page</p>
+    <div class="album-tabs" hidden aria-label="Choose an album chapter">
+      <button type="button" data-album-go="0" aria-label="Chapter 1" aria-pressed="true"><img data-photo="story_1" src="img/ph_land-640.webp" alt="" sizes="75px" loading="lazy"></button>
+      <button type="button" data-album-go="1" aria-label="Chapter 2" aria-pressed="false"><img data-photo="story_2" src="img/ph_land-640.webp" alt="" sizes="75px" loading="lazy"></button>
+      <button type="button" data-album-go="2" aria-label="Chapter 3" aria-pressed="false"><img data-photo="story_3" src="img/ph_land-640.webp" alt="" sizes="75px" loading="lazy"></button>
+    </div>
+  </section>
+  <section class="album-after" data-scene="story-next">
+    <img class="rose" src="img/rose-420.webp" srcset="img/rose-420.webp 420w, img/rose-800.webp 800w" sizes="200px" alt="" aria-hidden="true" loading="lazy" data-step="rose">
+    <p class="signature-names" data-field="name_display" data-step="names"></p>
+    <p class="eyebrow" data-field="date" data-step="names" data-i="1"></p>
+    <p data-step="link"><a class="btn btn-light" href="details.html" data-if="!thank_you_hides_details"><span data-copy="day_title">The celebration</span> <span aria-hidden="true">→</span></a><a class="btn btn-light" href="home.html" data-if="thank_you_hides_details"><span data-copy="home_link">Home</span></a></p>
+  </section>
+</main>
+<nav class="site-nav" aria-label="Wedding pages">
+  <ul>
+    <li><a href="home.html"><span data-copy="nav_home">Home</span></a></li>
+    <li data-optional="our_story"><a href="story.html" aria-current="page"><span data-copy="nav_story">Story</span></a></li>
+    <li data-if="!thank_you_hides_details"><a href="details.html"><span data-if="!thank_you_on" data-copy="nav_details">Details</span><span data-if="thank_you_on" data-copy="nav_day">The Day</span></a></li>
+    <li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
+  </ul>
+</nav>
+</body>
+</html>

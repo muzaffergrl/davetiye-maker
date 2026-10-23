@@ -37,31 +37,31 @@
     ]
   },
   "parts": {
+    "card_formal": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "card_formal_band": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "card_portrait": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "card_portrait_band": {
+      "recolor": "auto",
+      "group": "rose"
+    },
     "couple-photo": {
       "recolor": "keep",
       "why": "photo: never recoloured"
     },
-    "story_2": {
-      "recolor": "keep",
-      "why": "photo: never recoloured"
-    },
-    "story_3": {
-      "recolor": "keep",
-      "why": "photo: never recoloured"
-    },
-    "venue": {
-      "recolor": "keep",
-      "why": "photo: never recoloured"
-    },
-    "envelope-closed": {
+    "env_closed": {
       "recolor": "auto",
       "group": "envelope"
     },
-    "envelope-open": {
-      "recolor": "auto",
-      "group": "envelope"
-    },
-    "og-1200x630": {
+    "env_inside": {
       "recolor": "auto",
       "group": "envelope"
     },
@@ -69,11 +69,11 @@
       "recolor": "keep",
       "why": "gold wax seal"
     },
-    "seal": {
-      "recolor": "keep",
-      "why": "gold wax seal"
+    "og-1200x630": {
+      "recolor": "auto",
+      "group": "envelope"
     },
-    "paper-background": {
+    "paper": {
       "recolor": "keep",
       "why": "ivory paper"
     },
@@ -89,9 +89,25 @@
       "recolor": "keep",
       "why": "photo placeholder: ivory paper"
     },
-    "rose-branch": {
+    "rose": {
       "recolor": "auto",
       "group": "rose"
+    },
+    "seal": {
+      "recolor": "keep",
+      "why": "gold wax seal"
+    },
+    "story_2": {
+      "recolor": "keep",
+      "why": "photo: never recoloured"
+    },
+    "story_3": {
+      "recolor": "keep",
+      "why": "photo: never recoloured"
+    },
+    "venue": {
+      "recolor": "keep",
+      "why": "photo: never recoloured"
     }
   },
   "print": {
