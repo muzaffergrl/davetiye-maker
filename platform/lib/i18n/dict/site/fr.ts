@@ -337,6 +337,17 @@ const dict: Dict = {
   // Ivory Pearl Atelier
   "A day to remember": "Un jour inoubliable",
   "Celebrate with us in": "Célébrez avec nous à",
+  "Close envelope": "Refermer l’enveloppe",
+  "Close the box": "Refermer l’écrin",
+  "Close the curtain": "Fermer le rideau",
+  "Close the wallet": "Refermer le porte-billets",
+  "Fold the origami closed": "Replier l’origami",
+  "Close the doors": "Fermer les portes",
+  "Close the parcel": "Refermer le colis",
+  "Close the star chart": "Refermer la carte du ciel",
+  "Close the tile panel": "Refermer le panneau",
+  "Close the pouch": "Refermer la pochette",
+  "Close the music box": "Refermer la boîte à musique",
 };
 
 export default dict;

@@ -36,10 +36,10 @@ VERIFY markers come out only after the test is done; if a test fails, delete or 
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 112 characters.
+Etsy limit: 140 characters. This title: 119 characters.
 
 ```text
-Music Box Ballerina Wedding Website with RSVP, Music Box Opening Digital Invitation, Online Editor, Blush Ballet
+Music Box Ballerina Wedding Website with RSVP, Digital Invitation with a Music Box Opening, Online Editor, Blush Ballet
 ```
 
 ## 2. Description

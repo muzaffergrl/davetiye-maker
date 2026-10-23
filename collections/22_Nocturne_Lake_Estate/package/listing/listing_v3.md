@@ -40,10 +40,10 @@ VERIFY markers come out only after the test is done; if a test fails, delete or 
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 114 characters.
+Etsy limit: 140 characters. This title: 122 characters.
 
 ```text
-Nocturne Lake Estate Wedding Website with RSVP, Envelope Opening Digital Invitation, Online Editor, Black and Gold
+Nocturne Lake Estate Wedding Website with RSVP, Digital Invitation with an Envelope Opening, Online Editor, Black and Gold
 ```
 
 ## 2. Description

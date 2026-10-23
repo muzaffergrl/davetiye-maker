@@ -14,7 +14,7 @@ change Ek A and run this again. Placeholders filled per design ({…} left over 
   {MY_URL}         <base>/my                    (G146/G148: the Etsy order number + email open the editor on any
                                                  device; route platform/app/my/page.tsx, "Create your website")
   {OPENING}        what guests tap first: envelope, gatefold, pouch, wallet, book, sleeve, box, curtain, origami, door,
-                   dome, wall or lantern (platform/lib/marketing/designs.ts, "Your guests tap the <thing>."; G175: 26
+                   parcel, chart or panel (platform/lib/marketing/designs.ts, "Your guests tap the <thing>."; G175: 26
                    Kintsugi & Washi's folded paper is "origami")
   {OPENING_TAB}    the same word capitalised: the panel's first preview tab (G121, lib/panel/model.ts openingTabLabel)
   {LANGUAGE_FONTS} one of LANGUAGE_LINES, from the design's fonts (designs.ts `fonts`) and FONT_SUBSETS below

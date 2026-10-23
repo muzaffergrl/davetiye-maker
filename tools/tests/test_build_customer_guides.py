@@ -24,7 +24,7 @@ NOT_ENVELOPE = {"art-deco-black-tie": "gatefold", "lavender-provence": "pouch", 
                 # G175: designs 22–32 (22 opens from an envelope)
                 "velvet-jewel-box": "box", "grand-theatre-premiere": "curtain", "orient-express-voyage": "wallet",
                 "kintsugi-washi": "origami", "riad-lantern-nights": "door", "maison-patisserie": "parcel",
-                "celestial-observatory": "dome", "azulejo-mosaic": "wall", "sky-lantern-festival": "lantern",
+                "celestial-observatory": "chart", "azulejo-mosaic": "panel", "sky-lantern-festival": "pouch",
                 "music-box-ballerina": "box"}
 # G123's listing language lines (2026-10-16): latin-only font → "latin", all Cyrillic → "cyrillic", else "latin-ext".
 LANGUAGE = {"01": "cyrillic", "02": "latin-ext", "03": "cyrillic", "04": "latin", "05": "latin-ext", "06": "latin",
@@ -113,7 +113,8 @@ def test_labels():
     book = b.fill(b.template(), b.values("enchanted-forest-storybook"))
     assert "**Book** is the opening page" in book and b.label_problems(book, "enchanted-forest-storybook") == []
     # G175: the new opening objects of 22–32 the same way (26's folded paper is the "Origami" tab in the panel)
-    for theme, tab in (("kintsugi-washi", "Origami"), ("grand-theatre-premiere", "Curtain"), ("azulejo-mosaic", "Wall")):
+    for theme, tab in (("kintsugi-washi", "Origami"), ("grand-theatre-premiere", "Curtain"), ("azulejo-mosaic", "Panel"),
+                       ("celestial-observatory", "Chart"), ("maison-patisserie", "Parcel"), ("sky-lantern-festival", "Pouch")):
         md = b.fill(b.template(), b.values(theme))
         assert f"**{tab}** is the opening page" in md and b.label_problems(md, theme) == [], theme
         assert "envelope" not in md.lower(), theme

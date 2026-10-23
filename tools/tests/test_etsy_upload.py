@@ -27,7 +27,7 @@ NOT_ENVELOPE = {"art-deco-black-tie": "gatefold", "lavender-provence": "pouch", 
                 # G175: designs 22–32 (22 opens from an envelope)
                 "velvet-jewel-box": "box", "grand-theatre-premiere": "curtain", "orient-express-voyage": "wallet",
                 "kintsugi-washi": "origami", "riad-lantern-nights": "door", "maison-patisserie": "parcel",
-                "celestial-observatory": "dome", "azulejo-mosaic": "wall", "sky-lantern-festival": "lantern",
+                "celestial-observatory": "chart", "azulejo-mosaic": "panel", "sky-lantern-festival": "pouch",
                 "music-box-ballerina": "box"}
 # G142: design 21 opened for sale (config.ts "live"); G175: 22–32 are "coming" (K41), 33–48 too (2026-10-22) — remove a
 # design here when it opens

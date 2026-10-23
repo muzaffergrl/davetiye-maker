@@ -28,7 +28,7 @@ opening (a paper lantern in cupped hands rising into the sky); that opening is n
 | Price, quantity | **Blocker:** 1,190 TL is the approved shop price for a template design (docs/23 §1, user, 2026-10-16) and is used here as the proposal; it is not confirmed for this design (`config.ts` price `[PRICE]`). Quantity 999 (Etsy's maximum, no stock limit). |
 | Design fonts and other languages | Read on 2026-10-22 from the Google Fonts subset lists (via the gwfh.mranftl.com mirror of the Google Fonts API; the css2 response this task received showed no subset comments). Website: Allura (latin, latin-ext, vietnamese: **no Cyrillic**), Cormorant Garamond and Lora (latin-ext + Cyrillic). Printable invitation (`layouts.ts`): Bellefair (hebrew, latin, latin-ext) and Corinthia (latin, latin-ext, vietnamese). So the language line says: accented Latin letters in the design's fonts, Cyrillic and other alphabets in a plain standard font in some or all places. |
 | Etsy rules | `etsy.com/legal/creativity` and the help page "How to Manage Your Digital Listings" answered 403 to this task's fetch (2026-10-22). A web search on 2026-10-22 returned Etsy's House Rules excerpt: items generated with AI tools from the seller's own prompts belong to "Designed by a seller", and the listing description must disclose the use of AI. The AI sentence in GOOD TO KNOW is written for that; re-check in the listing editor (§11). Canva is not part of this product (K24) and was not checked. |
-| START HERE guide | `package/customer/START_HERE.md` + `.pdf` with the start QR, built 2026-10-20 (G190, `tools/build_customer_guides.py`, docs/19 Ek A). Its start link and QR answer only once the design is live (404 today). Its first section says guests "tap the lantern", from the full `designs.ts` entry; the website shows a silk pouch (§11). |
+| START HERE guide | `package/customer/START_HERE.md` + `.pdf` with the start QR, built 2026-10-20 (G190, `tools/build_customer_guides.py`, docs/19 Ek A), rebuilt 2026-10-22 for the opening word. Its start link and QR answer only once the design is live (404 today). It says guests "tap the pouch" and names the editor's preview tab "Pouch", which matches the silk pouch on the website. |
 | Printable invitation | `layouts.ts` entry of 2026-10-20 (G190): the PAKET 6 grounds of the redesign (ivory paper, the website's flowers in two corners, a gold hairline frame), 5 × 7 in and A5. Not printed yet. |
 | Listing images and video | **Not built yet.** Planned: the v4 set (docs/20 §7.10, `tools/listing_v4/README.md`): cover + 7 info images + 11 lifestyle images = 19 JPGs in `package/listing/images_v4/`, and a 4:5 hover video `package/listing/video_v4_4x5.mp4` (§5, §6). The 11 lifestyle images wait for this design's PAKET 7 GPT scenes (`assets/gpt/mockups/p7_*.png`, none yet). Nothing uploaded to Etsy. |
 
@@ -36,10 +36,10 @@ VERIFY markers come out only after the test is done; if a test fails, delete or 
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 118 characters.
+Etsy limit: 140 characters. This title: 125 characters.
 
 ```text
-Sky Lantern Festival Wedding Website with RSVP, Silk Pouch Opening Digital Invitation, Online Editor, Twilight Lantern
+Sky Lantern Festival Wedding Website with RSVP, Digital Invitation with a Silk Pouch Opening, Online Editor, Twilight Lantern
 ```
 
 ## 2. Description
@@ -282,7 +282,7 @@ link; one review request per order, the same text for everyone, never with an in
 - [x] Live demo of this design answers on the live site (`200`, coordinator's curl, 2026-10-22)
 - [ ] Start link and demo opened on a real phone; the QR in START_HERE.pdf scanned with a phone camera
 - [x] START HERE guide written for this design (`package/customer/START_HERE.md` + `.pdf` with the start QR; G190, 2026-10-20)
-- [ ] START HERE and the editor's opening tab say "lantern" (guests "tap the lantern"); the website shows a silk pouch: the user decides the word, then the guide is rebuilt or kept
+- [x] Opening word (2026-10-22): "pouch" in `designs.ts`, the editor's preview tab and START HERE (guide rebuilt), matching the silk pouch on the website
 - [ ] `designs.ts`: the full entry of this design still describes the lantern-in-hands opening; bring it in line with the theme (coordinator) so the sales site, the guide and this listing say the same
 - [ ] Questions & answers and RSVP questions tried on the live site with this design
 - [ ] Music, map and directions, the reply form and Excel download tried on the live site with this design; the 4 tracks listened to on a real phone and approved; Google Sheets connected with a real Google account

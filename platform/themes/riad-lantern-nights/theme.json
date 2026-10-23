@@ -117,7 +117,7 @@
       ]
     },
     "home_replay": {
-      "default": "Replay the envelope",
+      "default": "Replay the opening",
       "max": 30,
       "pages": [
         "home"
@@ -704,14 +704,14 @@
       ]
     },
     "rsvp_replay": {
-      "default": "Replay the envelope",
+      "default": "Replay the opening",
       "max": 30,
       "pages": [
         "rsvp"
       ]
     },
     "envelope_close": {
-      "default": "Close envelope",
+      "default": "Close the doors",
       "max": 30,
       "pages": [
         "index"

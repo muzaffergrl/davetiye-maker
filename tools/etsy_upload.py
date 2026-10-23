@@ -30,7 +30,7 @@ The JSON is what a browser session pastes into Etsy's listing editor (docs/20 §
   2026-10-16, tools/listing_editorial.py, docs/21).
 - Rules (`rule_problems`, `--check` fails): Etsy's title and tag rules (tools/listing_kit.py), the design's name in the
   title, its own demo link in the description and no other design's, and — for the designs that do not open from an
-  envelope (gatefold, pouch, wallet, book, sleeve, box, curtain, origami, door, dome, wall, lantern of
+  envelope (gatefold, pouch, wallet, book, sleeve, box, curtain, origami, door, parcel, chart, panel of
   platform/lib/marketing/designs.ts, `openingObject`) — no
   "envelope" in the title, tags, description or alt texts.
 - Palettes (G153, G178): `variations` (docs/25 §5) with each option's image (palette_<id>.jpg from
