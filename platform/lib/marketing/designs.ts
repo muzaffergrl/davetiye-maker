@@ -535,7 +535,7 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
       details: msg('An ivory programme, your venue photograph, directions, calendar links, dress code, travel, the menu and questions and answers.'),
       rsvp: msg('A simple ivory reply card. After a reply, a single nacre light pass crosses the confirmation and the thank-you title settles gently into place.'),
     },
-    palette: [{ name: msg('Ivory'), hex: '#F4EFE6' }, { name: msg('Champagne'), hex: '#D4C1A1' }, { name: msg('Antique Gold'), hex: '#B59A69' }],
+    palette: [{ name: msg('Ivory'), hex: '#F4EFE6' }, { name: msg('Champagne'), hex: '#D4C1A1' }, { name: msg('Antique gold'), hex: '#B59A69' }],
     fonts: ['Cormorant Garamond', 'Lora'],
     llmsLine: 'ivory cotton, champagne silk, a turning pearl seal, a split silk bow, a letter rising in an arc, silk-wipe photographs and a nacre RSVP confirmation.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
@@ -1435,10 +1435,14 @@ export function liveDesign(id: string, cfg: MarketingConfig = MARKETING): Design
   return liveDesigns(cfg).find((d) => d.id === id) ?? null;
 }
 
-/** Live and preview designs shown in the catalogue; hidden 'coming' designs are excluded. */
+/**
+ * Live and preview designs shown in the catalogue; hidden 'coming' designs are excluded. The live designs (the ones on
+ * sale, K55: 01–20) come first, then the "Coming soon on Etsy" previews — each group in config order — so /designs and
+ * the home gallery never open on designs a buyer cannot buy yet.
+ */
 export function catalogDesigns(cfg: MarketingConfig = MARKETING): Design[] {
-  return cfg.designs
-    .filter((d) => d.status !== 'coming')
+  const shown = cfg.designs.filter((d) => d.status !== 'coming');
+  return [...shown.filter((d) => d.status === 'live'), ...shown.filter((d) => d.status !== 'live')]
     .map((d) => {
       // a 'preview' design keeps its envelope-cover catalogue copy (main f1228e88) until it goes live; its full copy
       // (DESIGN_COPY, G175) still names the panel's opening tab (lib/panel/state.ts)
