@@ -240,127 +240,137 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
       back: { bg: cover('paper'), images: [sealAt('top')] },
     },
   },
-  // 22 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
+  // 22 (G422, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): ivory laid card, a gold crescent over olive
+  // branches at the top (down to ~15 %), a gold hairline (~77 %) over the oil-painted night lake along the bottom on the
+  // front; a short olive-and-crescent at the top of the back (~10.5 %) and a slim lake strip below ~93 %. `cover` for 5×7
+  // and A5 (ChatGPT's 1067×1474). Charcoal ink; boxes ~2 % clear of it all.
   'nocturne-lake-estate': {
     collection: '22_Nocturne_Lake_Estate',
-    sources: { front: 'print/invitation_front.png', back: 'print/invitation_back.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500'),
     script: "'Cinzel', Georgia, serif", serif: "'Cormorant Garamond', Georgia, serif", caps: "'Jost', Arial, sans-serif",
     namesInCaps: true,
-    ink: '#1C1D15', accent: '#8A6A3C', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#1C1D15', accent: '#8A6A3C', front: [17, 10, 25.5, 10], back: [12.5, 9, 9.5, 9],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 23 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
+  // 23 (G423, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): ivory card, seed-pearl swags and a champagne
+  // satin bow across the top (down to ~18.5 %), a rose gold double rule near the bottom (~91 %) on the front; one short
+  // pearl swag at the top of the back (~11 %). `cover` for 5×7 and A5 (ChatGPT's 1068×1473). Boxes ~2 % clear of it all.
   'velvet-jewel-box': {
     collection: '23_Velvet_Jewel_Box',
-    sources: { front: 'print/invitation_front.png', back: 'print/invitation_back.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Pinyon+Script'),
     script: "'Pinyon Script', cursive", serif: "'Bodoni Moda', Georgia, serif",
-    ink: '#3A1A36', accent: '#8A5A3A', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#3A1834', accent: '#9A6650', front: [20.5, 12, 11, 12], back: [13.5, 11, 9, 11],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 24 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked. Grand Theatre's A5 pair (print/invitation_*_a5.png) is for print shops; the panel uses the 5×7 pair for both sizes.
+  // 24 (G424, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): ivory card, a gold-fringed burgundy velvet
+  // valance with a blank gilded cartouche across the top (down to ~12.3 %), a gilded double rule with a tassel near the
+  // bottom (from ~90.7 %) on the front; a short gilded acanthus with a tassel at the top of the back (~11.7 %). `cover`
+  // for 5×7 and A5 (ChatGPT's 1070×1470). Boxes ~2 % clear of it all (measured on the images).
   'grand-theatre-premiere': {
     collection: '24_Grand_Theatre_Premiere',
-    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Abril+Fatface&family=Playfair+Display:ital,wght@0,400;0,600;1,400'),
     script: "'Abril Fatface', Georgia, serif", serif: "'Playfair Display', Georgia, serif",
-    ink: '#1E2626', accent: '#6E5119', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#1E2626', accent: '#5E1622', front: [14.5, 12, 11.5, 12], back: [14, 11, 9, 11],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 25 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
+  // 25 (G425, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): ivory ticket card, a brass-foil fan header
+  // with two dried-rose sprigs across the top (down to ~14.5 %), a brass rule over a row of perforation dots at the
+  // bottom (from ~93 %) and a brass double frame ~3 % inside the trim on the front; one small fan with short rules at the
+  // top of the back (~11.5 %). `cover` for 5×7 and A5 (ChatGPT's 1068×1473). Boxes ~2.5 % clear of it all.
   'orient-express-voyage': {
     collection: '25_Orient_Express_Voyage',
-    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Limelight&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400'),
     script: "'Limelight', Georgia, serif", serif: "'Cormorant Garamond', Georgia, serif",
-    ink: '#1E3A2C', accent: '#7A5C24', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#14261C', accent: '#7C5B25', front: [17, 10, 10, 10], back: [14, 10, 8, 10],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 26 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
+  // 26 (G426, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): rice-paper card, a torn strip of indigo washi
+  // with a gold kintsugi seam and a white plum sprig across the top (down to ~19.3 %), one gold seam near the bottom
+  // (~91 %) on the front; one short gold seam with a plum blossom at the top of the back (~12.8 %). `cover` for 5×7 and
+  // A5 (ChatGPT's 1068×1472). Dark indigo ink; boxes ~2 % clear of it all.
   'kintsugi-washi': {
     collection: '26_Kintsugi_Washi',
-    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Allura&family=Shippori+Mincho:wght@400;600'),
     script: "'Allura', cursive", serif: "'Shippori Mincho', Georgia, serif",
-    ink: '#1D2340', accent: '#7A5C22', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#1D2340', accent: '#7A5C22', front: [21.5, 12, 11, 12], back: [15, 11, 9, 11],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 27 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
+  // 27 (G427, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): ivory cotton paper, a brass-edged zellige arc
+  // with bougainvillea and orange blossom at its ends across the top (down to ~18.5 %) and a zellige band near the bottom
+  // (~89.5–93 %) on the front; one short brass line with a zellige star at the top of the back (~11.5 %). `cover` for 5×7
+  // and A5 (ChatGPT's 1068×1472). Boxes ~2 % clear of it all.
   'riad-lantern-nights': {
     collection: '27_Riad_Lantern_Nights',
-    sources: { front: 'print/print_front.png', back: 'print/print_back.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Cinzel:wght@400;500&family=Marcellus&family=Marcellus+SC'),
     script: "'Cinzel', Georgia, serif", serif: "'Marcellus', Georgia, serif", caps: "'Marcellus SC', Georgia, serif",
     namesInCaps: true,
-    ink: '#3A2114', accent: '#8F5418', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#0F2F31', accent: '#8A5A1C', front: [20.5, 11, 12.5, 11], back: [13.5, 11, 9, 11],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 28 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
+  // 28 (G428, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): cream cotton card, a swag of piped icing with
+  // gold dragées and a rose satin bow with a sugared bud across the top (down to ~18 %), a gold scalloped line near the
+  // bottom (92–94 %) on the front; one short icing swag with a rose bud at the top of the back (~11.5 %). `cover` for 5×7
+  // and A5 (ChatGPT's 1069×1472). Boxes ~2 % clear of it all.
   'maison-patisserie': {
     collection: '28_Maison_Patisserie',
-    sources: { front: 'print/invitation_front.png', back: 'print/invitation_back.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Italiana&family=Parisienne'),
     script: "'Parisienne', cursive", serif: "'Italiana', Georgia, serif",
-    ink: '#3E3A32', accent: '#9B4F5A', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#3E3A32', accent: '#9B4F5A', front: [20, 10, 10, 10], back: [13.5, 10, 8, 10],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 29 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
+  // 29 (G429, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): silver-ivory chart paper, a gold constellation
+  // arch with a small brass astrolabe across the top (down to ~16 %) and seven gold moon phases near the bottom (~91 %)
+  // on the front; one short constellation with a crescent at the top of the back (~10 %). `cover` for 5×7 and A5
+  // (ChatGPT's 1069×1472). Midnight ink, gold-ink accent; boxes ~2 % clear of it all.
   'celestial-observatory': {
     collection: '29_Celestial_Observatory',
-    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Forum&family=Imperial+Script'),
     script: "'Imperial Script', cursive", serif: "'Forum', Georgia, serif",
-    ink: '#141A33', accent: '#7A5A1E', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#141A33', accent: '#7A5A1E', front: [18.5, 12, 11, 12], back: [13, 11, 9, 11],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 30 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
+  // 30 (G430, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): glaze-white card, a row of cobalt azulejo
+  // border tiles with a stepped three-tile cresting across the top (down to ~15.3 %) and a double cobalt rule with a
+  // small rosette tile near the bottom (from ~91.8 %) on the front; a five-tile frieze at the top of the back (~11.8 %).
+  // `cover` for 5×7 and A5 (ChatGPT's 1069×1472). Dark ink on the glaze; boxes ~2 % clear of it all.
   'azulejo-mosaic': {
     collection: '30_Azulejo_Mosaic',
-    sources: { front: 'print/invitation_front.png', back: 'print/invitation_back.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Arizonia&family=Cormorant+Upright:wght@400;500;600'),
     script: "'Arizonia', cursive", serif: "'Cormorant Upright', Georgia, serif",
-    ink: '#173A80', accent: '#8C4128', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#173A80', accent: '#8C4128', front: [17.5, 11, 10.5, 11], back: [14, 11, 9, 11],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 31 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
+  // 31 (G431, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): rice paper with a dip-dyed dusk band and three
+  // small lit lanterns across the top (down to ~17 %), a fine gold line with a tiny lantern near the bottom (~92 %) on the
+  // front; a short string of miniature lanterns at the top of the back (~9.5 %). `cover` for 5×7 and A5 (ChatGPT's
+  // 1068×1473). Boxes ~2 % clear of it all.
   'sky-lantern-festival': {
     collection: '31_Sky_Lantern_Festival',
-    sources: { front: 'print/print_front.png', back: 'print/print_back.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Bellefair&family=Corinthia'),
     script: "'Corinthia', cursive", serif: "'Bellefair', Georgia, serif",
-    ink: '#3B2A4A', accent: '#9A5A26', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#3B2A4A', accent: '#8C4C48', front: [19, 12, 10, 12], back: [12, 11, 9, 11],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 32 (G190, 2026-10-20): the PAKET 6 grounds that match the 2026-10-18/19 redesign (ivory paper, the website's
-  // flowers in two corners, a gold hairline frame), one per side, `cover` for 5×7 and A5 (~200 ppi: ChatGPT's 1059×1486).
-  // Dark ink on the ivory; boxes inside the prompts' empty area (front 18–84 % × 10–90 %, back 13–92 %), G149-checked.
+  // 32 (G432, 2026-10-22): the PAKET 6R grounds of the redesign (docs/35): cream cotton card, a soft-gold filigree crest
+  // with three blush roses and wisps of tulle across the top (down to ~19 %), a filigree rule with a pearl near the bottom
+  // (~92–95 %) on the front; one short filigree flourish with a rosebud at the top of the back (~11 %). `cover` for 5×7 and
+  // A5 (ChatGPT's 1069×1472). Boxes ~2 % clear of it all (G149).
   'music-box-ballerina': {
     collection: '32_Music_Box_Ballerina',
-    sources: { front: 'print/invitation_front.png', back: 'print/invitation_back.png' },
+    sources: { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' },
     fonts: gf('family=Ballet:opsz@16..72&family=Gilda+Display'),
     script: "'Ballet', cursive", serif: "'Gilda Display', Georgia, serif",
-    ink: '#4A2F35', accent: '#8A4A55', front: [19, 13, 17, 13], back: [14, 12, 9, 12],
+    ink: '#4A2F35', accent: '#8A4A55', front: [21, 11, 10, 11], back: [13, 10, 9, 10],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
   // 33 (G182, interim until PAKET 6 print/invitation_front_5x7.png + print/invitation_back_5x7.png, 1575×2175, one sheet

@@ -90,116 +90,121 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     llmsLine: 'crimson roses and a gold-sealed burgundy envelope; an offset oval portrait and a landscape chapter album on ivory paper.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
+  // G422 (docs/35, 2026-10-22): rebuilt from its own layered GPT parts; written against the theme as built.
   'nocturne-lake-estate': {
     id: 'nocturne-lake-estate',
     collection: '22_Nocturne_Lake_Estate',
     demoCouple: 'Eleanor & Luca',
-    style: msg('Black tie by the lake: a black envelope with a gold wax seal, Lake Como at dusk and an asymmetric photo gallery'),
-    metaDescription: msg('A black-tie wedding website with a gold-sealed black envelope, Lake Como at dusk and a photo gallery. Personalize it in your online editor.'),
-    intro: msg('Black paper, champagne gold and candlelight by the water. Your names rise over a lake at dusk, then the invitation, a quiet gallery and the evening, hour by hour.'),
-    opening: msg('Your guests tap the envelope. A curved charcoal letter flap lifts on its hinge. The portrait rises from behind the illustrated lakeside pocket and settles before the wedding home page opens.'),
+    style: msg('Charcoal laid-paper envelope with a deep diamond flap, a vellum lake-panorama band and a hammered gold crescent brooch'),
+    metaDescription: msg('A charcoal envelope with a gold crescent brooch opens onto Lake Como at night: villa-window photos and candlelit details. Personalize it in your online editor.'),
+    intro: msg('Charcoal laid paper, champagne gold and an oil-painted lake at night. Your portrait sits in an arched villa window and your story photos behind shutters that open as guests scroll.'),
+    opening: msg('Your guests tap the envelope. The gold crescent catches the moonlight and rises to stay above it as the moon, the vellum band slides away, the diamond flap opens onto a painted night sky over the lake and the ivory card with your portrait rises from the pocket before the wedding home page opens.'),
     pages: {
-      home: msg('Your names in capitals over Lake Como at dusk, then the invitation beside your portrait, a countdown and calendar links.'),
-      story: msg('An asymmetric gallery: one tall photo and two landscape frames with captions. Each opens larger in a quiet viewer.'),
-      details: msg('The evening as a timeline beside a wide venue photo, with an optional map and directions, calendar links, dress code and questions and answers.'),
-      rsvp: msg('A dark reply card with your reply-by date and the shared configurable reply form.'),
+      home: msg('An oil-painted lake at night with the gold crescent as the moon, your portrait in an arched villa window on an ivory card, the invitation on ivory laid paper with a countdown and calendar links, and a candle lantern to sign off.'),
+      story: msg('Three photos in villa windows, left and right, each behind two charcoal shutters that open outward as guests scroll while the photo warms out of the candlelight.'),
+      details: msg('The order of the evening on an ivory card, the venue in a wide frame over a stone balustrade with two lanterns, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('An ivory reply card with your reply-by date and the configurable RSVP form; gold leaf and rose petals drift down and the lantern glows brighter when a reply is sent.'),
     },
     palette: [
       { name: msg('Night'), hex: '#11120F' },
       { name: msg('Charcoal'), hex: '#1C1D15' },
       { name: msg('Champagne'), hex: '#E0C7A4' },
       { name: msg('Gold'), hex: '#C7A978' },
+      { name: msg('Ivory'), hex: '#F1E4CC' },
     ],
-    fonts: ['Italiana', 'Cormorant Garamond', 'Lora'],
-    llmsLine: 'black tie by Lake Como: a black envelope with a gold wax seal, names over the lake at dusk and an asymmetric photo gallery.',
+    fonts: ['Cinzel', 'Cormorant Garamond', 'Jost'],
+    llmsLine: 'a charcoal laid-paper envelope with a diamond flap, a vellum lake-panorama band and a gold crescent brooch that rises as the moon, an arched villa window portrait and story photos behind opening shutters.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
+  // G423 (docs/35, 2026-10-22): rebuilt from its own layered GPT parts; written against the theme as built.
   'velvet-jewel-box': {
     id: 'velvet-jewel-box',
     collection: '23_Velvet_Jewel_Box',
     demoCouple: 'Isabelle & Julian',
-    style: msg('Aubergine velvet jewel box, pearls, velvet roses and rose-gold filigree'),
-    metaDescription: msg('A plum velvet jewel box opens into your wedding website: an oval pearl-locket portrait, champagne satin and rose gold. Personalize it in your online editor.'),
-    intro: msg('Aubergine velvet, champagne satin and a touch of rose gold. The invitation opens into a polished celebration with a keepsake feel.'),
-    opening: msg('Your guests tap the box. The octagonal velvet jewel box opens along its left hinges, revealing an oval portrait on pearl-and-plum stationery before the wedding home page opens.'),
+    style: msg('Aubergine velvet envelope in a champagne satin band, a rose-gold solitaire threaded on the ribbon'),
+    metaDescription: msg('A velvet envelope with a rose-gold ring opens into your wedding website: a pearl cameo portrait and champagne satin. Personalize it in your online editor.'),
+    intro: msg('Champagne moiré, aubergine velvet, seed pearls and rose gold. Your portrait sits in an oval pearl cameo and the invitation opens on a band of velvet like a jewellery case.'),
+    opening: msg('Your guests tap the envelope. The diamond catches the light, the ring slides off the satin band and floats away, the band parts, the lobed velvet flap opens onto champagne satin and the pearl-edged card with your portrait rises out of the pocket before the wedding home page opens.'),
     pages: {
-      home: msg('Your names in a shimmering script over plum velvet, then the invitation beside your portrait on champagne satin, a countdown and calendar links.'),
-      story: msg('Three photos with captions on a turning display, like jewelry in a case. Guests swipe or drag it, or use the arrows or the keyboard.'),
-      details: msg('The order of the day on satin beside a wide venue photo, with an optional map and directions, calendar links, dress code and questions and answers.'),
-      rsvp: msg('A velvet reply card with your reply-by date and the shared configurable reply form.'),
+      home: msg('Your portrait in an oval rose gold and pearl cameo on an ivory card, the invitation on a band of aubergine velvet with a countdown and calendar links, and an open ring box to sign off.'),
+      story: msg('Three photos in the oval settings of a velvet ring tray on a turning display. Guests swipe or drag it, or use the arrows or the keyboard.'),
+      details: msg('The order of the day on an ivory card under a strand of pearls, the venue in a wide pearl-edged frame, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('An ivory reply card on aubergine velvet with your reply-by date and the configurable RSVP form; pearls and petals drift down when a reply is sent.'),
     },
     palette: [
+      { name: msg('Champagne'), hex: '#E8D3B0' },
       { name: msg('Aubergine'), hex: '#2A1328' },
       { name: msg('Plum'), hex: '#4A2142' },
-      { name: msg('Champagne'), hex: '#E8D3B0' },
       { name: msg('Rose gold'), hex: '#C99A86' },
     ],
-    fonts: ['Pinyon Script', 'Cormorant Infant', 'Lora'],
-    llmsLine: 'an octagonal aubergine velvet jewel box that opens on its left hinges to an oval pearl-locket portrait card; champagne satin, rose gold and locket-framed story photos.',
+    fonts: ['Pinyon Script', 'Bodoni Moda'],
+    llmsLine: 'an aubergine velvet envelope in a champagne satin band with a rose gold ring threaded on it, an oval pearl cameo portrait and a turning photo display.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
+  // G424 (docs/35, 2026-10-22): rebuilt from its own layered GPT parts; written against the theme as built.
   'grand-theatre-premiere': {
     id: 'grand-theatre-premiere',
     collection: '24_Grand_Theatre_Premiere',
     demoCouple: 'Charlotte & Theodore',
-    style: msg('Burgundy velvet curtain, antique-gold swag and an ivory playbill-inspired schedule'),
-    metaDescription: msg('A theatre wedding website: two velvet curtain panels part to reveal your portrait in a gilded ticket frame. Personalize it in your online editor.'),
-    intro: msg('Peacock blue, antique gold and warm ivory set the scene. The invitation opens like opening night, then leads into your story and the evening programme.'),
-    opening: msg('Your guests tap the curtain. Two burgundy velvet curtain panels swing apart one after the other, revealing the portrait card in its gilded theatre-ticket frame before the wedding home page opens.'),
+    style: msg('Peacock linen envelope with burgundy velvet curtains, a gold tasselled cord and a blank theatre ticket'),
+    metaDescription: msg('Velvet curtains on a peacock envelope open into your wedding website: a gilded proscenium portrait and a programme. Personalize it in your online editor.'),
+    intro: msg('Ivory programme paper, peacock velvet, burgundy curtains and antique gold. Your portrait stands in a gilded proscenium and the invitation opens on a band of velvet like opening night.'),
+    opening: msg('Your guests tap the envelope. The ticket slides out and tears at its perforation, the gold cord unties, the velvet curtains swing open onto gold silk, a spotlight sweeps the painted stage and the programme card with your portrait rises from behind the footlights before the wedding home page opens.'),
     pages: {
-      home: msg('Your names on a programme card standing on the open stage, then the invitation beside your portrait, a countdown to curtain-up and calendar links.'),
-      story: msg('Intermission: three photo cards on a dark stage, Scene I to III. A spotlight follows the tap and lights the photo your guest chooses.'),
-      details: msg('The evening as a theatre programme, Act I, Act II and on, with the venue photo, an optional map and directions, calendar links, dress code and questions and answers.'),
-      rsvp: msg('Reserve your seat: the reply form is a theatre ticket, and its stub tears off when a guest sends the reply.'),
+      home: msg('Your portrait in a gilded proscenium on an ivory programme card, the invitation on a band of peacock velvet with a countdown and calendar links, and antique opera glasses to sign off.'),
+      story: msg('Three photos on the pages of a theatre programme, Act I, II and III. Each page turns in as a spotlight finds it.'),
+      details: msg('The order of the day on an ivory programme board, the venue in a wide gilded proscenium, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('An ivory reply card on peacock velvet with your reply-by date and the configurable RSVP form; a ticket tears and gold confetti drifts down when a reply is sent.'),
     },
     palette: [
-      { name: msg('Velvet'), hex: '#0E3D40' },
-      { name: msg('Peacock'), hex: '#16595B' },
-      { name: msg('Antique gold'), hex: '#C9A45C' },
       { name: msg('Ivory'), hex: '#F3EBD8' },
+      { name: msg('Peacock'), hex: '#16595B' },
+      { name: msg('Burgundy'), hex: '#5E1622' },
+      { name: msg('Antique gold'), hex: '#C9A45C' },
     ],
-    fonts: ['Italianno', 'Bodoni Moda', 'Lora'],
-    llmsLine: 'opening night: two burgundy velvet curtain panels swing apart to a portrait card in a gilded theatre-ticket frame; ticket-framed story photos and a playbill programme.',
+    fonts: ['Abril Fatface', 'Playfair Display'],
+    llmsLine: 'a peacock linen envelope whose burgundy velvet stage curtains are tied by a gold tasselled cord over a blank ticket, a gilded proscenium portrait and programme pages for the story.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
+  // G425 (docs/35, 2026-10-22): rebuilt from its own layered GPT parts; written against the theme as built.
   'orient-express-voyage': {
     id: 'orient-express-voyage',
     collection: '25_Orient_Express_Voyage',
     demoCouple: 'Amelia & Rafael',
-    style: msg('Bottle-green ticket wallet, a gold locomotive emblem and details inspired by a first-class rail journey'),
-    metaDescription: msg('A vintage rail journey wedding website: a green ticket wallet slides away to your portrait in a brass carriage window. Personalize it in your online editor.'),
-    intro: msg('Bottle green, brass and warm ivory meet the romance of a vintage rail journey. The ticket wallet opens onto your invitation, route details and celebration.'),
-    opening: msg('Your guests tap the wallet. The long green ticket wallet slides away to the left as the portrait invitation emerges to the right, then settles before the wedding home page opens.'),
+    style: msg('Bottle-green leather ticket sleeve with brass corners, a turn-lock and a blank luggage tag on a red cord'),
+    metaDescription: msg('A green leather ticket sleeve with a brass lock opens into your wedding website: carriage-window photos and a route map. Personalize it in your online editor.'),
+    intro: msg('Antique map paper, bottle-green leather, brass and ivory ticket card. Your portrait sits in a mahogany carriage window and the route of your day is drawn across an old map.'),
+    opening: msg('Your guests tap the envelope. The luggage tag swings, the brass turn-lock clicks open, the end tab swings aside onto red silk and the first-class ticket with your portrait slides out of the sleeve, turns upright and comes forward before the wedding home page opens.'),
     pages: {
-      home: msg('Your names over a travel poster, the invitation beside your portrait with a luggage tag, a departure countdown and a map whose route draws itself as guests scroll.'),
-      story: msg('Three photos in carriage windows on green panelling. As guests scroll, each photo glides past its window like passing scenery.'),
-      details: msg('The day as stations along a route on an antique map, one by one, then the venue, an optional map and directions, calendar links, dress code and questions and answers.'),
-      rsvp: msg('A boarding pass with your reply-by date and the shared configurable reply form; a sent reply gets a boarding stamp.'),
+      home: msg('Your portrait in a brass and mahogany carriage window on an ivory first-class ticket, the invitation on a band of green leather with a pocket watch over the countdown, a map with the route of the day, and a luggage tag to sign off.'),
+      story: msg('Three sliding sash windows of a sleeper carriage, left and right: each leather blind rolls up and the photo slides behind the glass like passing scenery as guests scroll.'),
+      details: msg('The itinerary on an ivory ticket card under an old map on which the route is drawn station by station to the venue, the venue in a wide panorama window, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('An ivory ticket reply card on green leather with your reply-by date and the configurable RSVP form; punched ticket discs and rose buds drift down when a reply is sent.'),
     },
     palette: [
+      { name: msg('Ivory'), hex: '#F3EBD9' },
       { name: msg('Bottle green'), hex: '#1E3A2C' },
       { name: msg('Brass'), hex: '#B8914B' },
-      { name: msg('Ivory'), hex: '#F3EBD9' },
-      { name: msg('Route red'), hex: '#8C2F39' },
+      { name: msg('Claret'), hex: '#8C2F39' },
     ],
-    fonts: ['Allura', 'Cinzel', 'Libre Baskerville'],
-    llmsLine: 'a vintage rail journey: a bottle-green ticket wallet slides away as a portrait card in a brass carriage-window frame comes out; carriage-window story photos and a rail itinerary.',
+    fonts: ['Limelight', 'Cormorant Garamond'],
+    llmsLine: 'a long bottle-green leather ticket sleeve with a brass turn-lock and a luggage tag, a first-class ticket that slides out of it, carriage-window portraits and a route drawn across an old map.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
-  // G175 (coming): written against the theme as built (G164); the paper pieces are interim until the GPT parts arrive.
+  // G426 (docs/35, 2026-10-22): rebuilt from its own layered GPT parts; written against the theme as built.
   'kintsugi-washi': {
     id: 'kintsugi-washi',
     collection: '26_Kintsugi_Washi',
     demoCouple: 'Naomi & Kai',
-    style: msg('Folded indigo-and-ivory washi origami, fine kintsugi-gold lines and quiet botanical details'),
-    metaDescription: msg('A wedding website wrapped in folded indigo washi paper: the folds open one by one to your invitation card. Personalize it in your online editor.'),
-    intro: msg('Washi paper, sumi ink and delicate gold seams bring a quiet, handcrafted feeling to your invitation, story and garden celebration.'),
-    opening: msg('Your guests tap the origami. The gold seal slides off and four washi folds open in sequence around the kintsugi portrait invitation before the wedding home page opens.'),
+    style: msg('A square pinwheel packet of indigo washi crossed by gold kintsugi seams, tied with a gold-and-ivory cord round a mended porcelain button'),
+    metaDescription: msg('A washi packet with gold kintsugi seams unfolds into your wedding website: torn-paper photo mats and ink-bloom photos. Personalize it in your online editor.'),
+    intro: msg('Rice-ivory washi, indigo paper and gold kintsugi seams. Your photos appear through a spreading ink bloom in torn washi mats, and a mended tea bowl signs off.'),
+    opening: msg('Your guests tap the envelope. The porcelain button turns and lifts away, the cord unwinds, the four indigo flaps unfold one by one onto their gold-flecked insides and the rice-paper card with your portrait rises toward them before the wedding home page opens.'),
     pages: {
-      home: msg('Your portrait, names, date and venue on a rice-paper card on indigo, then the invitation on a rice-paper band, a countdown and calendar links.'),
-      story: msg('Three moments, left, right and left again; each photo appears like ink spreading on paper as guests scroll to it.'),
-      details: msg('The order of the day on rice paper, a venue photo that appears like ink, an optional map and directions, travel, menu, registry and questions and answers.'),
-      rsvp: msg('A rice-paper reply card with your reply-by date and the shared configurable reply form.'),
+      home: msg('Your portrait in a torn indigo washi mat on a deckled rice-paper card, the invitation on rice paper between gold kintsugi seams with a countdown and calendar links, and a mended tea bowl to sign off.'),
+      story: msg('Three moments, left, right and left, in torn rice-paper mats; each photo appears through a spreading ink bloom and light runs along the gold seam.'),
+      details: msg('The order of the day on a rice-paper card under a gold seam, the venue in wide torn indigo washi, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('A rice-paper reply card with a plum sprig, your reply-by date and the configurable RSVP form; gold leaf and petals drift down when a reply is sent.'),
     },
     palette: [
       { name: msg('Indigo'), hex: '#242E58' },
@@ -207,48 +212,49 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
       { name: msg('Rice paper'), hex: '#F3ECDC' },
       { name: msg('Gold'), hex: '#C9A55A' },
     ],
-    fonts: ['Shippori Mincho', 'Cormorant Garamond', 'Lora'],
-    llmsLine: 'ivory-and-indigo washi folded like origami: a gold seal slides off and the four folds open one by one to a portrait card in a deckle-edged washi mount; fine kintsugi-gold seams.',
+    fonts: ['Allura', 'Shippori Mincho'],
+    llmsLine: 'a square pinwheel packet of indigo washi with gold kintsugi seams, tied with a cord round a mended porcelain button, its four flaps unfolding one by one; photos appear through an ink bloom.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
-  // G165 (coming): written against the theme as built; the doors and tiles are interim pieces until the GPT parts arrive.
+  // G427 (docs/35, 2026-10-22): rebuilt from its own layered GPT parts; written against the theme as built.
   'riad-lantern-nights': {
     id: 'riad-lantern-nights',
     collection: '27_Riad_Lantern_Nights',
     demoCouple: 'Leila & Adrian',
-    style: msg('Deep teal riad doors, brass ring handles and saffron lantern accents inspired by Marrakech'),
-    metaDescription: msg('A riad wedding website: teal doors swing open to your portrait in a lantern-lit arch, with zellige tile details. Personalize it in your online editor.'),
-    intro: msg('Teal, warm cedar and saffron light bring the feeling of a lantern-lit riad. Open the invitation to find the courtyard, your story and the celebration details.'),
-    opening: msg('Your guests tap the door. Two horseshoe-arch riad doors open on their side hinges, revealing the lantern-framed portrait invitation before the wedding home page opens.'),
+    style: msg('Deep teal envelope with a horseshoe-arch flap, a saffron silk cord and a pierced brass lantern charm'),
+    metaDescription: msg('A teal envelope with an arched flap and a brass lantern opens into your wedding website: carved arches and zellige tiles. Personalize it in your online editor.'),
+    intro: msg('Warm tadelakt plaster, deep teal, saffron and brass. Your portrait sits in a carved stucco arch, zellige tiles are set one by one and lantern light finds every photo.'),
+    opening: msg('Your guests tap the envelope. The little brass lantern lights up, the saffron cord slips off its brass stud and falls away with its tassel, the arched flap rises like a riad doorway onto glazed zellige and the arch-topped card with your portrait comes out of the pocket before the wedding home page opens.'),
     pages: {
-      home: msg('Your portrait and names on an ivory card in the lantern light, then a row of zellige tiles, the invitation, a countdown and calendar links.'),
-      story: msg('Three tall windows: each photo comes out of the dark as the lantern light reaches it. Each opens larger in a quiet viewer.'),
-      details: msg('The evening hour by hour on the teal wall, a venue photo in warm light, with an optional map and directions, calendar links, dress code and questions and answers.'),
-      rsvp: msg('A reply panel under the lantern’s glow, with your reply-by date and the shared configurable reply form.'),
+      home: msg('Your portrait in a carved stucco horseshoe arch on an arch-topped ivory card, a band of zellige tiles set one by one, the invitation on cotton paper with a countdown and calendar links, and the day under a lit brass lantern.'),
+      story: msg('Three tall carved cedar horseshoe-arch windows, left and right; each photo waits in the dark until warm lantern light sweeps down over it.'),
+      details: msg('The order of the day on an ivory cotton-paper card, the venue in a wide cedar frame under a stucco arch frieze, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('An ivory reply card with your reply-by date and the configurable RSVP form; the brass lantern lights up and bougainvillea petals drift down when a reply is sent.'),
     },
     palette: [
       { name: msg('Night teal'), hex: '#0F2F31' },
       { name: msg('Saffron'), hex: '#E3A54A' },
       { name: msg('Brass'), hex: '#C9A35B' },
-      { name: msg('Cedar'), hex: '#3A2114' },
+      { name: msg('Ivory'), hex: '#F6EAD2' },
     ],
-    fonts: ['Italianno', 'Amiri', 'Lora'],
-    llmsLine: 'a lantern-lit riad: two teal doors under a gold arch swing open to a portrait card in an arched frame with a brass lantern; horseshoe-arch story photos and zellige details.',
+    fonts: ['Cinzel', 'Marcellus SC', 'Marcellus'],
+    llmsLine: 'a deep teal envelope with a horseshoe-arch flap closed by a saffron cord and a pierced brass lantern charm, zellige linings, carved stucco and cedar arch photo frames.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
+  // G428 (docs/35, 2026-10-22): rebuilt from its own layered GPT parts; written against the theme as built.
   'maison-patisserie': {
     id: 'maison-patisserie',
     collection: '28_Maison_Patisserie',
     demoCouple: 'Camille & Oliver',
-    style: msg('Pistachio parcel, rose-satin bow and cream-and-gold pâtisserie-inspired flourishes'),
-    metaDescription: msg('A pistachio parcel tied with a rose satin bow opens into your wedding website, with photos on scalloped porcelain plates. Personalize it in your online editor.'),
-    intro: msg('Pistachio, rose and cream evoke the window of a French pâtisserie. The invitation opens onto your celebration, story and carefully arranged details.'),
-    opening: msg('Your guests tap the parcel. The scalloped ivory flap of the pistachio parcel lifts, and the porcelain-framed portrait invitation rises from its pocket before the wedding home page opens.'),
+    style: msg('Cream envelope with a scalloped pistachio doily flap, wrapped in a rose sleeve band with a satin bow and a sugared rose bud'),
+    metaDescription: msg('A cream envelope with a rose satin bow opens into your wedding website: an icing-oval portrait and porcelain cake plates. Personalize it in your online editor.'),
+    intro: msg('Cream pinstriped pastry paper, pistachio, rose satin and gold-rimmed porcelain. Your portrait sits in a piped icing oval and the invitation opens under a rose satin bow like a pâtisserie box.'),
+    opening: msg('Your guests tap the envelope. The sugared rose bud rolls off the knot, the satin bow unties and slips away, the rose sleeve band slides off to the right, the scalloped pistachio flap opens onto its rose doily lining and the cream card with your portrait rises out of the pocket as macarons and sugar pearls drop in, before the wedding home page opens.'),
     pages: {
-      home: msg('The card from the parcel with your portrait, names and date, then the invitation, a countdown and calendar links.'),
-      story: msg('Three photos on a display-case shelf: guests swipe or drag them along, and the photo in the middle steps forward.'),
-      details: msg('The order of the day on card paper beside the venue photo, an optional map, dress code, travel and a menu set out like a display case.'),
-      rsvp: msg('A reply card with macaron-coloured choices; a light shower of sugar pearls when a reply is sent.'),
+      home: msg('Your portrait in a piped icing oval on a cream card, the invitation under a rose satin bow with a countdown and calendar links, and a stand of macarons to sign off.'),
+      story: msg('Three photos in gold-rimmed porcelain cake plates on a glass display-case shelf. Guests swipe or drag it, or use the arrows or the keyboard, and the plate in the middle steps forward.'),
+      details: msg('The order of the day on a cream card under a line of piped icing, the venue behind the glass of a pistachio pâtisserie window, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('A cream reply card with macaron-coloured choices, your reply-by date and the configurable RSVP form; sugar pearls and macarons drop in when a reply is sent.'),
     },
     palette: [
       { name: msg('Pistachio'), hex: '#A9C49C' },
@@ -256,108 +262,108 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
       { name: msg('Cream'), hex: '#FBF5EC' },
       { name: msg('Gold'), hex: '#B8995A' },
     ],
-    fonts: ['Parisienne', 'Playfair Display', 'Lora'],
-    llmsLine: 'a pistachio parcel tied with a rose satin bow: its scalloped flap lifts and a portrait card in a porcelain frame rises from the pocket; scalloped porcelain photo plates and a menu-style programme.',
+    fonts: ['Parisienne', 'Italiana'],
+    llmsLine: 'a cream envelope with a scalloped pistachio doily flap in a rose sleeve band with a satin bow and a sugared rose bud, an icing-oval portrait and porcelain cake plates on a sliding display-case shelf.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
-  // G168 (coming): written against the theme as built (README); the stars, star chart and brass rims arrive with the GPT parts.
+  // G429 (docs/35, 2026-10-22): rebuilt from its own layered GPT parts; written against the theme as built.
   'celestial-observatory': {
     id: 'celestial-observatory',
     collection: '29_Celestial_Observatory',
     demoCouple: 'Celeste & Rowan',
-    style: msg('Midnight-blue star chart, a gold compass rose and antique-brass celestial details'),
-    metaDescription: msg('A midnight-blue star chart swings open into your wedding website, with your portrait in a round brass astrolabe frame. Personalize it in your online editor.'),
-    intro: msg('Midnight blue, chart-paper ivory and antique brass set a stargazing mood. Open the invitation to find your story beneath the night sky.'),
-    opening: msg('Your guests tap the chart. The two curved halves of the midnight-blue star chart swing open on their side hinges, revealing the astrolabe portrait invitation before the wedding home page opens.'),
+    style: msg('Midnight-blue envelope with a gold-foil dome flap, closed by an antique brass astrolabe'),
+    metaDescription: msg('A midnight envelope with a brass astrolabe opens into your wedding website: a celestial portrait medallion and star rings. Personalize it in your online editor.'),
+    intro: msg('Midnight paper, silver-ivory chart paper, gold leaf and antique brass. Your portrait sits in a gilded celestial medallion and your story in brass planisphere rings that turn as guests scroll.'),
+    opening: msg("Your guests tap the envelope. The astrolabe's star pointer turns and its tips glint, the astrolabe floats away, the dome flap opens like an observatory dome over a star-atlas lining and the chart-paper card with your portrait rises out of the pocket while gold stars light up, before the wedding home page opens."),
     pages: {
-      home: msg('Your round portrait and names on a chart-paper card under the night sky, then the invitation, a countdown, calendar links and your initials traced again as a constellation.'),
-      story: msg('Three round photos, each uncovered by a sweep that turns once round it like a star dial as guests scroll to it.'),
-      details: msg('The order of the day on chart paper, a venue photo swept in like the beam of a telescope, an optional map, dress code, travel and questions and answers.'),
-      rsvp: msg('A chart-paper reply card under the midnight sky with your names and reply-by date, then the reply form.'),
+      home: msg('Your portrait in a gilded celestial medallion on a chart-paper card under a small brass astrolabe, the invitation on the night between gold moon phases with a countdown and calendar links, and a brass telescope to sign off.'),
+      story: msg('Three round photos in brass planisphere rings, left, right, left: each photo is uncovered by a dial sweep and each ring turns as guests scroll.'),
+      details: msg('The order of the day on chart paper, each line lit by a gold star, the venue in a wide brass-framed star chart swept in like a telescope beam, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('A chart-paper reply card on the midnight sky with your reply-by date and the configurable RSVP form; gold star dust rises when a reply is sent.'),
     },
     palette: [
       { name: msg('Midnight'), hex: '#11193A' },
-      { name: msg('Silver'), hex: '#C9CFDC' },
-      { name: msg('Brass'), hex: '#9B7A3C' },
-      { name: msg('Gold'), hex: '#C8A24E' },
       { name: msg('Ivory'), hex: '#EEEBE3' },
+      { name: msg('Gold'), hex: '#C8A24E' },
+      { name: msg('Brass'), hex: '#9B7A3C' },
     ],
-    fonts: ['Pinyon Script', 'Cinzel', 'Cormorant Garamond'],
-    llmsLine: 'a midnight-blue star chart whose two curved halves swing open to a portrait card in a round brass astrolabe frame; astrolabe story photos; midnight, ivory and antique brass.',
+    fonts: ['Imperial Script', 'Forum'],
+    llmsLine: 'a midnight-blue envelope with a gold-foil dome flap closed by a turning brass astrolabe, a gilded celestial medallion portrait and round planisphere photo rings.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
-  // G169 (coming): written against the theme as built; the tiles are interim pieces until the GPT parts arrive.
+  // G430 (docs/35, 2026-10-22): rebuilt from its own layered GPT parts; written against the theme as built.
   'azulejo-mosaic': {
     id: 'azulejo-mosaic',
     collection: '30_Azulejo_Mosaic',
     demoCouple: 'Inês & Mateo',
-    style: msg('Cobalt-and-ivory tile panel, a gold rosette and Portuguese azulejo-inspired details'),
-    metaDescription: msg('A folding panel of painted azulejo tiles opens into your wedding website, with your photos in square cobalt tile frames. Personalize it in your online editor.'),
-    intro: msg('Cobalt, whitewash and terracotta recall painted tiles in the sun. Open the invitation to reveal your story and celebration, tile by tile.'),
-    opening: msg('Your guests tap the panel. The three parts of the azulejo tile panel fold open in sequence, revealing the cobalt-tile portrait invitation before the wedding home page opens.'),
+    style: msg('Glaze-white envelope with a stepped flap of painted cobalt azulejo tiles, tied with jute twine and closed by a loose swallow tile'),
+    metaDescription: msg('An azulejo-tiled envelope opens into your wedding website: photos uncovered tile by tile in cobalt and terracotta. Personalize it in your online editor.'),
+    intro: msg('Sunlit whitewash, cobalt tiles and warm terracotta. Your portrait sits in a tiled limestone niche and every photo is uncovered tile by tile.'),
+    opening: msg('Your guests tap the envelope. The jute twine slips off, the loose swallow tile turns over to show its terracotta back and drops away, the stepped tile flap opens onto its terracotta lining and the card with your portrait rises from behind the pocket before the wedding home page opens.'),
     pages: {
-      home: msg('Your portrait and names on a card on the cobalt wall, a frieze of tiles, then the invitation, a countdown and calendar links.'),
-      story: msg('Three photos, each hidden under a small mosaic of tiles that turn over in a wave as guests scroll to it.'),
-      details: msg('The order of the day on a white card, a venue photo uncovered tile by tile, an optional map, dress code, travel and questions and answers.'),
-      rsvp: msg('A white reply card under a frieze of tiles; when a reply is sent, the thank-you is revealed tile by tile.'),
+      home: msg('Your portrait in a tiled limestone niche on a glaze-white card, uncovered tile by tile, the invitation on a band edged with border tiles, a countdown and calendar links, and a terracotta pot to sign off.'),
+      story: msg('Three photos in azulejo-bordered frames, left, right and left; each one is uncovered tile by tile as guests scroll to it.'),
+      details: msg('The order of the day on a glaze-white card under a frieze of tiles, the venue in a wide tile-panel frame, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('A glaze-white reply card with your reply-by date and the configurable RSVP form; a row of tiles turns over and olive leaves drift down when a reply is sent.'),
     },
     palette: [
+      { name: msg('Whitewash'), hex: '#F2EDE3' },
       { name: msg('Cobalt'), hex: '#1F4A9E' },
       { name: msg('Night blue'), hex: '#102554' },
-      { name: msg('Whitewash'), hex: '#F2EDE3' },
       { name: msg('Terracotta'), hex: '#AE583A' },
     ],
-    fonts: ['Italianno', 'Cormorant Garamond', 'Lora'],
-    llmsLine: 'a folding panel of cobalt-and-white azulejo tiles: its three parts fold open one after another to a portrait card in a square tile frame; square tile story photos; cobalt, whitewash and terracotta.',
+    fonts: ['Arizonia', 'Cormorant Upright'],
+    llmsLine: 'a glaze-white envelope with a stepped flap of painted cobalt azulejo tiles, tied with jute twine and closed by a loose swallow tile; photos uncovered tile by tile; cobalt, whitewash and terracotta.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
-  // G170 (coming): written against the theme as built; the lantern, hands and card are interim pieces until the GPT parts arrive.
+  // G431 (docs/35, 2026-10-22): rebuilt from its own layered GPT parts; written against the theme as built.
   'sky-lantern-festival': {
     id: 'sky-lantern-festival',
     collection: '31_Sky_Lantern_Festival',
     demoCouple: 'Sophie & Daniel',
-    style: msg('Embroidered coral silk pouch with a gold cord and tassel, and lantern-lit details at twilight'),
-    metaDescription: msg('A sky lantern wedding website: an embroidered silk pouch opens to your portrait, framed by blossoms and glowing lanterns. Personalize it in your online editor.'),
-    intro: msg('Plum, dusky rose and lantern amber bring the last light of day into your invitation, story and celebration pages.'),
-    opening: msg('Your guests tap the pouch. The scalloped top of the coral silk pouch lifts, and its portrait invitation rises out of the pouch before the wedding home page opens.'),
+    style: msg('Dip-dyed dusk washi envelope with a lantern-belly flap and a paper sky lantern tied to a gold stud with amber silk'),
+    metaDescription: msg('A paper sky lantern lights and rises from a dusk washi envelope into your wedding website: photos in warm lantern light. Personalize it in your online editor.'),
+    intro: msg('Dusk violet, dusky rose and lantern amber on hand-dyed washi. Your portrait waits in a paper-lantern window on a rice-paper card, and every photo opens in a circle of warm lantern light.'),
+    opening: msg('Your guests tap the envelope. The paper lantern lights up from inside, the silk thread slips free and the lantern rises out of sight while distant lanterns drift up behind it, the lantern-belly flap opens onto warm amber washi and the rice-paper card with your portrait rises out of the pocket before the wedding home page opens.'),
     pages: {
-      home: msg('Your portrait and names on a rice-paper card in the dusk sky, then the invitation, a countdown and calendar links, with a few lanterns drifting up as guests scroll.'),
-      story: msg('Three photos along a path of lanterns: each waits in the dark until a small lantern rises past it and its light opens the photo.'),
-      details: msg('The evening hour by hour, each line with a small lantern that lights up in turn, a venue photo, an optional map and directions, calendar links, dress code and questions and answers.'),
-      rsvp: msg('A reply panel under a warm lantern glow; when a reply is sent, one lantern rises up the screen.'),
+      home: msg('Your portrait in a paper-lantern window on a rice-paper card under the lantern that rose from the envelope, the invitation between strings of tiny lanterns with a countdown and calendar links, and a lit lantern to sign off.'),
+      story: msg('Three photos on hanging rice-paper panels, left, right and left, each opening in a circle of warm light as guests scroll while distant lanterns drift up.'),
+      details: msg('The order of the day on rice paper, each line with a little lantern that lights in turn, the venue on a wide bamboo panel, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('A rice-paper reply card with your reply-by date and the configurable RSVP form; when a reply is sent, a lantern rises with gold leaf, petals and wish seeds.'),
     },
     palette: [
       { name: msg('Dusk violet'), hex: '#2B1F45' },
-      { name: msg('Lantern amber'), hex: '#F2A65A' },
       { name: msg('Dusky rose'), hex: '#E7B4A6' },
+      { name: msg('Lantern amber'), hex: '#F2A65A' },
       { name: msg('Rice paper'), hex: '#F7EEDD' },
     ],
-    fonts: ['Allura', 'Cormorant Garamond', 'Lora'],
-    llmsLine: 'an embroidered coral silk pouch tied with a gold cord: its scalloped top lifts and a portrait card framed by blossoms and glowing lanterns rises out; lantern-window story photos at twilight.',
+    fonts: ['Corinthia', 'Bellefair'],
+    llmsLine: 'a dip-dyed dusk washi envelope with a lantern-belly flap and a paper sky lantern that lights and rises away; photos open in warm lantern light on rice-paper panels.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
+  // G432 (docs/35, 2026-10-22): rebuilt from its own layered GPT parts; written against the theme as built.
   'music-box-ballerina': {
     id: 'music-box-ballerina',
     collection: '32_Music_Box_Ballerina',
     demoCouple: 'Juliette & Arthur',
-    style: msg('Oval ivory-and-blush music box, satin ballet slippers and a gold-edged floral cameo'),
-    metaDescription: msg('A blush music box opens into your wedding website: its cameo lid lifts and your photos appear in oval cameo frames. Personalize it in your online editor.'),
-    intro: msg('Rose quartz, blush satin and soft gold give this invitation the feeling of a treasured keepsake. Open it to reveal your story and wedding details.'),
-    opening: msg('Your guests tap the box. The cameo lid of the oval music box lifts on its hinge, and the floral cameo portrait invitation rises out of the box before the wedding home page opens.'),
+    style: msg('Rose-quartz satin envelope with a serpentine music-box lid, a gold filigree keyhole plate and a brass winding key'),
+    metaDescription: msg('A satin envelope with a music-box lid and key opens into your wedding website: a turning ballerina and oval mirror frames. Personalize it in your online editor.'),
+    intro: msg('Blush silk satin, rose quartz, soft-gold filigree and a porcelain ballerina. Your portrait sits in a gilded oval vanity mirror and every photo clears like a misted mirror.'),
+    opening: msg('Your guests tap the envelope. The brass key turns twice, the music-box lid swings up and your portrait appears in its oval mirror, a porcelain ballerina rises and turns two pirouettes, and the cream card rises out of the pocket and comes forward before the wedding home page opens.'),
     pages: {
-      home: msg('The card from the music box with your names and date, then the invitation beside your portrait in an oval mirror, a countdown and calendar links.'),
-      story: msg('Your three photos appear one at a time in the music box mirror: guests swipe or tap the arrows, and the little ballerina turns with each photo.'),
-      details: msg('The order of the day on blush satin beside the venue photo, an optional map, dress code, travel and the menu.'),
-      rsvp: msg('A reply card on blush satin; a few rose petals drift down and the ballerina turns once when a reply is sent.'),
+      home: msg('Your portrait in a gilded oval vanity mirror crowned with roses on a cream card, the invitation on a band of rose-quartz satin with a countdown and calendar links, and a porcelain ballerina who turns a pirouette to sign off.'),
+      story: msg('Three photos in pearl-beaded oval mirrors, left and right in turn; each one clears like a misted mirror as guests scroll, and the little ballerina turns between them.'),
+      details: msg('The order of the day on a cream card under a filigree rule, the venue in a wide gilded mirror, an optional map, travel, menu, registry and questions.'),
+      rsvp: msg('A cream reply card on rose-quartz satin with your reply-by date and the configurable RSVP form; when a reply is sent the key turns, the ballerina turns a pirouette and petals drift down.'),
     },
     palette: [
       { name: msg('Rose quartz'), hex: '#EECDD0' },
       { name: msg('Blush'), hex: '#F7E4E2' },
       { name: msg('Rose gold'), hex: '#B76E79' },
-      { name: msg('Gold'), hex: '#C9A45C' },
+      { name: msg('Soft gold'), hex: '#C9A45C' },
     ],
-    fonts: ['Great Vibes', 'Cormorant Infant', 'Lora'],
-    llmsLine: 'an oval ivory-and-blush music box with satin ballet slippers on its cameo lid: the lid lifts and a cameo portrait card rises out; oval cameo story photos; rose quartz, blush and gold.',
+    fonts: ['Ballet', 'Gilda Display'],
+    llmsLine: 'a rose-quartz satin envelope with a music-box lid and a brass winding key; the lid opens onto a mirror with the couple\'s portrait and a porcelain ballerina turns.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
   // G182 (coming): written against the theme as built (README); the paisley sleeve, tassel, marigolds, henna, arches and
@@ -1385,158 +1391,28 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
 /**
  * These themes are present in the platform, but their final artwork and sale approval are still pending.
  * Keep their catalogue copy explicit about that status; do not invent prices, palettes, or buyer-ready claims.
+ * docs/35 (2026-10-22): the eleven were rebuilt from their own layered GPT parts; their DESIGN_COPY entries above are
+ * written against the rebuilt themes and are the only copy (tools/build_customer_guides.py and tools/etsy_upload.py read
+ * the opening, fonts and palette from that source text, so the catalogue, the editor's preview tab
+ * (lib/panel/state.ts themeOpening), START HERE and the Etsy listing name the same object and fonts).
  */
-const PREVIEW_DESIGN_COPY: Record<string, Pick<DesignCopy, 'style' | 'opening'> & { home: string }> = {
-  'nocturne-lake-estate': {
-    style: msg('Charcoal envelope, champagne-gold botanical seal and a candlelit Lake Como wedding'),
-    opening: msg("Your guests tap the envelope. A curved charcoal letter flap lifts on its hinge. The portrait rises from behind the illustrated lakeside pocket and settles before the wedding home page opens."),
-    home: msg("Charcoal paper, champagne gold and candlelight by the water. A quiet, refined invitation opens onto the lake, the story and the evening ahead."),
-  },
-  'velvet-jewel-box': {
-    style: msg('Aubergine velvet jewel box, pearls, velvet roses and rose-gold filigree'),
-    opening: msg('Your guests tap the box. The octagonal velvet jewel box opens along its left hinges, revealing an oval portrait on pearl-and-plum stationery before the wedding home page opens.'),
-    home: msg("Aubergine velvet, champagne satin and a touch of rose gold. The invitation opens into a polished celebration with a keepsake feel."),
-  },
-  'grand-theatre-premiere': {
-    style: msg('Burgundy velvet curtain, antique-gold swag and an ivory playbill-inspired schedule'),
-    opening: msg('Your guests tap the curtain. Two burgundy velvet curtain panels swing apart one after the other, revealing the portrait card in its gilded theatre-ticket frame before the wedding home page opens.'),
-    home: msg("Peacock blue, antique gold and warm ivory set the scene. The invitation opens like opening night, then leads into your story and the evening programme."),
-  },
-  'orient-express-voyage': {
-    style: msg('Bottle-green ticket wallet, a gold locomotive emblem and details inspired by a first-class rail journey'),
-    opening: msg('Your guests tap the wallet. The long green ticket wallet slides away to the left as the portrait invitation emerges to the right, then settles before the wedding home page opens.'),
-    home: msg('Bottle green, brass and warm ivory meet the romance of a vintage rail journey. The ticket wallet opens onto your invitation, route details and celebration.'),
-  },
-  'kintsugi-washi': {
-    style: msg('Folded indigo-and-ivory washi origami, fine kintsugi-gold lines and quiet botanical details'),
-    opening: msg('Your guests tap the origami. The gold seal slides off and four washi folds open in sequence around the kintsugi portrait invitation before the wedding home page opens.'),
-    home: msg("Washi paper, sumi ink and delicate gold seams bring a quiet, handcrafted feeling to your invitation, story and garden celebration."),
-  },
-  'riad-lantern-nights': {
-    style: msg('Deep teal riad doors, brass ring handles and saffron lantern accents inspired by Marrakech'),
-    opening: msg('Your guests tap the door. Two horseshoe-arch riad doors open on their side hinges, revealing the lantern-framed portrait invitation before the wedding home page opens.'),
-    home: msg("Teal, warm cedar and saffron light bring the feeling of a lantern-lit riad. Open the invitation to find the courtyard, your story and the celebration details."),
-  },
-  'maison-patisserie': {
-    style: msg('Pistachio parcel, rose-satin bow and cream-and-gold pâtisserie-inspired flourishes'),
-    opening: msg('Your guests tap the parcel. The scalloped ivory flap of the pistachio parcel lifts, and the porcelain-framed portrait invitation rises from its pocket before the wedding home page opens.'),
-    home: msg("Pistachio, rose and cream evoke the window of a French pâtisserie. The invitation opens onto your celebration, story and carefully arranged details."),
-  },
-  'celestial-observatory': {
-    style: msg('Midnight-blue star chart, a gold compass rose and antique-brass celestial details'),
-    opening: msg('Your guests tap the chart. The two curved halves of the midnight-blue star chart swing open on their side hinges, revealing the astrolabe portrait invitation before the wedding home page opens.'),
-    home: msg("Midnight blue, chart-paper ivory and antique brass set a stargazing mood. Open the invitation to find your story beneath the night sky."),
-  },
-  'azulejo-mosaic': {
-    style: msg('Cobalt-and-ivory tile panel, a gold rosette and Portuguese azulejo-inspired details'),
-    opening: msg('Your guests tap the panel. The three parts of the azulejo tile panel fold open in sequence, revealing the cobalt-tile portrait invitation before the wedding home page opens.'),
-    home: msg("Cobalt, whitewash and terracotta recall painted tiles in the sun. Open the invitation to reveal your story and celebration, tile by tile."),
-  },
-  'sky-lantern-festival': {
-    style: msg('Embroidered coral silk pouch with a gold cord and tassel, and lantern-lit details at twilight'),
-    opening: msg('Your guests tap the pouch. The scalloped top of the coral silk pouch lifts, and its portrait invitation rises out of the pouch before the wedding home page opens.'),
-    home: msg("Plum, dusky rose and lantern amber bring the last light of day into your invitation, story and celebration pages."),
-  },
-  'music-box-ballerina': {
-    style: msg('Oval ivory-and-blush music box, satin ballet slippers and a gold-edged floral cameo'),
-    opening: msg('Your guests tap the box. The cameo lid of the oval music box lifts on its hinge, and the floral cameo portrait invitation rises out of the box before the wedding home page opens.'),
-    home: msg("Rose quartz, blush satin and soft gold give this invitation the feeling of a treasured keepsake. Open it to reveal your story and wedding details."),
-  },
-};
-
-// The eleven rebuilt designs now share the complete Blush page structure.
-// 2026-10-22: each opens from its own object (envelope, box, curtain, wallet, origami, door, parcel, chart, panel, pouch,
-// box); the preview `opening` and `style` are the same strings as DESIGN_COPY's, which tools/build_customer_guides.py
-// and tools/etsy_upload.py read, so the catalogue, the editor's preview tab (lib/panel/state.ts themeOpening), START HERE
-// and the Etsy listing name the same object. `fonts` and `llmsLine` stay DESIGN_COPY's own (the fonts each theme loads).
-for (const [id, preview] of Object.entries(PREVIEW_DESIGN_COPY)) {
-  const full = DESIGN_COPY[id];
-  if (!full) continue;
-  full.style = preview.style.replace(/[.!?]+$/, '');
-  full.intro = preview.home;
-  full.opening = preview.opening;
-  full.pages = {home: msg('Your portrait in an ornate arch card, names, date, venue, invitation, countdown and links to the other pages.'),story: msg('Three framed photographs with editable captions and your story.'),details: msg('An ornate programme card, venue photograph, optional map, schedule, calendar links, travel, registry and questions.'),rsvp: msg('A cream reply card, reply-by date and the configurable RSVP form.')};
-  full.palette = [{name: msg('Ivory paper'), hex: '#F5EEE2'}, {name: msg('Gold'), hex: '#B99459'}, ...full.palette.slice(0, 2)];
-}
-
-// Interior art/layout/motion differ for these eleven previews; the opening copy and other products are unchanged.
-const UNIQUE_INTERIORS: Record<string,{home:string;story:string;details:string;rsvp:string}> = {
-  "nocturne-lake-estate": {
-    "home": "An Italian lakeside terrace: panoramic portrait, refined names and candlelit ivory invitation.",
-    "story": "Panoramic villa frames: a full-width opening photograph and two intimate moments beneath it.",
-    "details": "A villa dinner programme with generous time columns and a panoramic venue photograph.",
-    "rsvp": "A charcoal-and-champagne reply suite with Italian botanical stationery."
-  },
-  "velvet-jewel-box": {
-    "home": "An aubergine velvet jewellery suite with an oval pearl portrait and a silk-lined invitation.",
-    "story": "Three oval pearl-set locket portraits, alternating with handwritten captions like keepsakes in a jewellery case.",
-    "details": "Pearl-edged keepsake panels and an intimate evening programme.",
-    "rsvp": "A velvet-and-rose-gold reply card and silk-lined response form."
-  },
-  "grand-theatre-premiere": {
-    "home": "A peacock-teal theatre premiere with a ticket-shaped portrait and an ivory playbill invitation.",
-    "story": "Landscape theatre-ticket photographs presented as three acts, with bold playbill captions.",
-    "details": "A playbill programme arranged in paired acts with a stage-like venue feature.",
-    "rsvp": "A premiere reply suite, framed by burgundy curtain details and antique brass."
-  },
-  "orient-express-voyage": {
-    "home": "A first-class travel invitation with a brass carriage-window portrait and cream ticket stationery.",
-    "story": "A horizontal carriage-window photo journey with captions under each panoramic view.",
-    "details": "A rail-journey itinerary with paired time and destination columns.",
-    "rsvp": "A green-and-brass travel-ticket reply suite."
-  },
-  "kintsugi-washi": {
-    "home": "An indigo-and-ivory washi composition with square kintsugi photo mounts and torn-paper stationery.",
-    "story": "Asymmetric washi photo mounts paired with captions, alternating gently from side to side.",
-    "details": "A quiet folded-paper programme with gold-repaired margins and a square venue mount.",
-    "rsvp": "A handmade washi reply letter with indigo type and fine kintsugi details."
-  },
-  "riad-lantern-nights": {
-    "home": "A Moroccan courtyard suite with an arched portrait, brass lantern details and mosaic-edged stationery.",
-    "story": "A riad arcade of horseshoe-arch portraits: one central arch followed by two smaller windows.",
-    "details": "A courtyard evening programme beneath an ivory plaster arch, with teal and saffron details.",
-    "rsvp": "An arched riad reply card and a lantern-lit response form."
-  },
-  "maison-patisserie": {
-    "home": "A pistachio-and-strawberry salon with a porcelain portrait and scalloped menu invitation.",
-    "story": "Scalloped porcelain photo plates arranged as a Parisian scrapbook, with alternating caption positions.",
-    "details": "A Parisian menu-style programme and porcelain-framed venue photograph.",
-    "rsvp": "A cream patisserie reply menu with pink ribbon and pistachio details."
-  },
-  "celestial-observatory": {
-    "home": "A midnight observatory with a circular brass astrolabe portrait and an ivory star-chart invitation.",
-    "story": "Circular astrolabe portraits trace an asymmetric constellation across the page, each appearing in its own orbit.",
-    "details": "An observatory programme with measured celestial chart typography and circular venue framing.",
-    "rsvp": "A midnight-and-brass star-chart reply suite."
-  },
-  "azulejo-mosaic": {
-    "home": "A Portuguese porcelain suite with a cobalt tile portrait and matching azulejo stationery.",
-    "story": "Square azulejo photo tiles form a porcelain mosaic gallery with cobalt captions.",
-    "details": "A tile-framed celebration programme with terracotta time accents and a square venue panel.",
-    "rsvp": "A cobalt-and-porcelain reply panel with terracotta accents."
-  },
-  "sky-lantern-festival": {
-    "home": "A twilight lantern suite with a floating paper-window portrait and warm amber invitation.",
-    "story": "Tall lantern-window photographs float along a staggered twilight trail with alternating captions.",
-    "details": "A lantern-paper evening programme with softly spaced time markers.",
-    "rsvp": "A warm lantern-paper reply letter against dusky plum."
-  },
-  "music-box-ballerina": {
-    "home": "A ballet keepsake suite with an oval cameo portrait, champagne satin and blush silk stationery.",
-    "story": "Oval cameo photographs sit like pages of a ballet keepsake album, with a larger central portrait.",
-    "details": "A music-box recital programme with paired entries and porcelain cameo venue framing.",
-    "rsvp": "A blush satin-lined reply suite with gold cameo ornament."
-  }
-};
-for(const [id,p]of Object.entries(UNIQUE_INTERIORS)){
- const full=DESIGN_COPY[id];
- full.intro=msg(p.home);
- full.pages={home:msg(p.home),story:msg(p.story),details:msg(p.details),rsvp:msg(p.rsvp)};
-}
+const PREVIEW_DESIGNS: ReadonlySet<string> = new Set([
+  'nocturne-lake-estate',
+  'velvet-jewel-box',
+  'grand-theatre-premiere',
+  'orient-express-voyage',
+  'kintsugi-washi',
+  'riad-lantern-nights',
+  'maison-patisserie',
+  'celestial-observatory',
+  'azulejo-mosaic',
+  'sky-lantern-festival',
+  'music-box-ballerina',
+]);
 
 function previewDesignCopy(d: DesignCommerce): DesignCopy | undefined {
   const full = DESIGN_COPY[d.id];
-  if (!PREVIEW_DESIGN_COPY[d.id] || !full) return undefined;
+  if (!PREVIEW_DESIGNS.has(d.id) || !full) return undefined;
   return {...full, metaDescription: msg(d.name + ' wedding website. Explore the animated opening, invitation, photo story, details and RSVP. Customize photos and collect guest replies.'), intro: msg(full.intro.replace(/[.!?]+$/, '') + '. Explore the complete demo; Etsy availability is pending.')};
 }
 

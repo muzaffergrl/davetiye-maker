@@ -1,110 +1,25 @@
 {
- "_not": "G167 kuru deneme (tools/gpt_kuru_deneme.py --sekil): her parçanın GPT_PROMPTS.md'deki yeri, tuval yüzdesi [x0,y0,x1,y1]. Ürün değil. \"ton\": prompt'un istediği açık krem zemin (W2.10 orta %70 sakin ve açık; W2.11 karo; W2.9 kart).",
- "box_base.png": {
-  "kutu": [
-   3.125,
-   3.125,
-   96.875,
-   96.875
-  ]
- },
- "lid.png": {
-  "kutu": [
-   3.125,
-   3.125,
-   96.875,
-   96.875
-  ]
- },
- "tissue_left.png": {
-  "kutu": [
-   5.3,
-   5.3,
-   53.5,
-   94.7
-  ]
- },
- "tissue_right.png": {
-  "kutu": [
-   46.5,
-   5.3,
-   94.7,
-   94.7
-  ]
- },
- "ribbon_cross.png": {
-  "kutu": [
-   44.9,
-   3.125,
-   55.1,
-   96.875
-  ]
- },
- "bow_left.png": {
-  "kutu": [
-   20.7,
-   32.2,
-   50.0,
-   65.4
-  ]
- },
- "bow_right.png": {
-  "kutu": [
-   50.0,
-   32.2,
-   79.3,
-   65.4
-  ]
- },
- "bow_knot.png": {
-  "kutu": [
-   45.6,
-   43.5,
-   54.4,
-   54.3
-  ]
- },
- "card_small.png": {
-  "kutu": [
-   15.0,
-   19.2,
-   85.0,
-   80.8
-  ],
-  "ton": [
-   245,
-   240,
-   230
-  ]
- },
- "shelf.png": {
-  "kutu": [
-   2.0,
-   47.5,
-   98.0,
-   52.5
-  ]
- },
- "accent_1.png": {
-  "kutu": [
-   25.0,
-   25.0,
-   75.0,
-   75.0
-  ]
- },
- "bg_page.png": {
-  "ton": [
-   240,
-   233,
-   220
-  ]
- },
- "bg_tile.png": {
-  "ton": [
-   240,
-   233,
-   220
-  ]
- }
+ "_not": "Tasarım 28 kuru deneme (tools/gpt_kuru_deneme.py --sekil, tema yeniden kurulunca; 2026-10-22 PAKET 5R): parçaların prompt'taki yeri, tuval yüzdesiyle. Zarf katmanları aynı 1560×1200 tuvalde, aynı kutuda (x 7–93, y 7–93). Deneme görseli ürün değildir.",
+ "page_ground.png": {"ton": [251, 245, 236], "gren": 0.2},
+ "cream_paper.png": {"ton": [251, 245, 236], "gren": 0.2},
+ "env_back.png": {"kutu": [7, 7, 93, 93], "ton": [232, 180, 184]},
+ "env_front.png": {"kutu": [7, 40, 93, 93], "ton": [251, 245, 236]},
+ "flap.png": {"kutu": [7, 7, 93, 60], "ton": [169, 196, 156]},
+ "flap_in.png": {"kutu": [7, 13, 93, 87], "ton": [232, 180, 184]},
+ "sleeve_band.png": {"kutu": [6, 52, 94, 72], "ton": [232, 180, 184]},
+ "bow.png": {"kutu": [6, 53, 94, 84], "ton": [214, 150, 158]},
+ "bow_untied.png": {"kutu": [6, 60.5, 94, 80], "ton": [214, 150, 158]},
+ "rosebud.png": {"kutu": [15, 15, 85, 85], "ton": [214, 150, 158]},
+ "card_small.png": {"kutu": [7, 6, 93, 94], "ton": [251, 245, 236]},
+ "cameo_frame.png": {"kutu": [6, 6, 94, 94], "pencere": [16, 17.2, 84, 85.2], "ton": [246, 240, 230]},
+ "plate_frame.png": {"kutu": [6, 6, 94, 94], "pencere": [15, 15, 85, 85], "ton": [250, 249, 246]},
+ "shelf.png": {"kutu": [6, 20, 94, 80], "ton": [184, 153, 90]},
+ "vitrine_wide.png": {"kutu": [6, 6, 94, 94], "pencere": [10, 21.74, 90, 84.35], "ton": [169, 196, 156]},
+ "corner_spray.png": {"kutu": [6, 6, 80, 72], "ton": [232, 180, 184]},
+ "divider.png": {"kutu": [8, 25, 92, 75], "ton": [246, 240, 230]},
+ "cake_stand.png": {"kutu": [18, 8, 82, 92], "ton": [250, 249, 246]},
+ "accent_1.png": {"kutu": [22, 22, 78, 78], "ton": [169, 196, 156]},
+ "accent_2.png": {"kutu": [22, 22, 78, 78], "ton": [184, 153, 90]},
+ "accent_3.png": {"kutu": [22, 22, 78, 78], "ton": [232, 180, 184]},
+ "web_hero.png": {"ton": [251, 245, 236]}
 }

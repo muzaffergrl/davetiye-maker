@@ -3,7 +3,7 @@
 `python3 tools/gorev.py pano` ile üretilir; **gerçek durum görev dosyalarındadır**. Bu dosya kabuk
 çalıştıramayan ajanlar içindir: kendi rolünün **Alınabilir** listesindeki ilk görevi al.
 
-Özet: hazir 4 · alindi 0 · inceleme 23 · blokaj 2 · bitti 221 · iptal 257 · toplam 507
+Özet: hazir 4 · alindi 0 · inceleme 23 · blokaj 2 · bitti 243 · iptal 257 · toplam 529
 
 İptal edilen görevler (K22/K24 ile anlamını yitirenler) listelenmez; yalnız sayıları var. Ayrıntı: `python3 tools/gorev.py liste --hepsi`.
 
@@ -43,7 +43,7 @@ Bağımlılık bekleyen: 1 · Biten: 8 · İptal: 42
 - `G192` inceleme · claude-session_015RTF9kCAoVGh7PDNq8XYeP — Önce güven modunda siparişi Gmail'deki Etsy satış e-postasından doğrulama (IMAP)
 - `G980` inceleme · claude-session-nice-faraday — Satış sitesi SEO / GEO / AEO — claude-seo ile denetim ve düzeltme
 
-Bağımlılık bekleyen: 1 · Biten: 127 · İptal: 83
+Bağımlılık bekleyen: 1 · Biten: 138 · İptal: 83
 
 ## claude-metin
 
@@ -100,4 +100,4 @@ Bağımlılık bekleyen: 0 · Biten: 2 · İptal: 20
 
 - `GM07` blokaj · gpt-gorsel-GM07 — Tasarım 15–20 rötuş parçaları — tema ajanlarının önerdiği 6 GPT parçası (yuvarlak çerçeveler, fiyonk, geri sayım kutusu, hap dalı, yatay çerçeve)
 
-Bağımlılık bekleyen: 0 · Biten: 50 · İptal: 28
+Bağımlılık bekleyen: 0 · Biten: 61 · İptal: 28

@@ -1,117 +1,25 @@
 {
-  "_not": "G167 kuru deneme (tools/gpt_kuru_deneme.py --sekil): parçaların GPT_PROMPTS.md'deki yeri, tuval yüzdesi [x0, y0, x1, y1]. Kapılar: 74 % genişlik, alt kenar 94 %, oran 0,76 → üst 29,1 %. Kapı çerçevesi kapıları çevreler (deneme görseli opak dikdörtgen: açıklığı şeffaf olamaz, kapıları örter — deneme artefaktı). bg_page / bg_tile: gece teali, düşük gren (prompt: orta sakin, düz sıva) — yoksa rastgele renk + gren theme-check'in zemin denetimine takılır (deneme artefaktı).",
-  "doors_closed.png": {
-    "kutu": [
-      13,
-      29.1,
-      87,
-      94
-    ]
-  },
-  "doorway.png": {
-    "kutu": [
-      3,
-      8,
-      97,
-      97
-    ]
-  },
-  "card_small.png": {
-    "kutu": [
-      15,
-      16.7,
-      85,
-      83.3
-    ],
-    "pencere": [
-      32.5,
-      22,
-      67.5,
-      51
-    ]
-  },
-  "lantern.png": {
-    "kutu": [
-      36,
-      0,
-      64,
-      62
-    ]
-  },
-  "frame_arch.png": {
-    "kutu": [
-      20,
-      20,
-      80,
-      80
-    ],
-    "pencere": [
-      29,
-      27,
-      71,
-      74
-    ]
-  },
-  "frame_landscape.png": {
-    "kutu": [
-      10,
-      15,
-      90,
-      85
-    ],
-    "pencere": [
-      15,
-      20.5,
-      85,
-      79.5
-    ]
-  },
-  "bougainvillea_tl.png": {
-    "kutu": [
-      0,
-      0,
-      58,
-      58
-    ]
-  },
-  "bougainvillea_br.png": {
-    "kutu": [
-      42,
-      42,
-      100,
-      100
-    ]
-  },
-  "divider.png": {
-    "kutu": [
-      8,
-      45,
-      92,
-      55
-    ]
-  },
-  "accent_1.png": {
-    "kutu": [
-      22,
-      20,
-      78,
-      80
-    ]
-  },
-  "bg_page.png": {
-    "ton": [
-      15,
-      47,
-      49
-    ],
-    "gren": 0.15
-  },
-  "bg_tile.png": {
-    "ton": [
-      15,
-      47,
-      49
-    ],
-    "gren": 0.15
-  }
+ "_not": "Tasarım 27 kuru deneme (2026-10-22 yeniden tasarım; tools/gpt_kuru_deneme.py --sekil, tema yeniden kurulunca): parçaların prompt'taki yeri, tuval yüzdesiyle. Zarf katmanları (env_back, env_front, flap, stud, cord) aynı 1080×1440 tuvalde, zarf kutusu x 7–93, y 6–94. Fener sönük/yanık aynı 600×900 tuvalde. Çerçeve pencereleri: arch_frame ve story_frame at nalı kemer biçimli (kutu verildi, maske yeşilden), venue_frame dikdörtgen. Deneme görseli ürün değildir.",
+ "tadelakt_ground.png": {"ton": [239, 227, 204], "gren": 0.2},
+ "cotton_paper.png": {"ton": [246, 234, 210], "gren": 0.2},
+ "env_back.png": {"kutu": [7, 6, 93, 94], "ton": [30, 106, 106]},
+ "env_front.png": {"kutu": [7, 46, 93, 94], "ton": [22, 73, 75]},
+ "flap.png": {"kutu": [7, 6, 93, 62], "ton": [22, 73, 75]},
+ "flap_in.png": {"kutu": [7, 7, 93, 93], "ton": [30, 106, 106]},
+ "stud.png": {"kutu": [46.5, 53.4, 53.5, 58.6], "ton": [201, 163, 91]},
+ "cord.png": {"kutu": [38, 51, 62, 91], "ton": [227, 165, 74]},
+ "lantern_unlit.png": {"kutu": [25, 4, 75, 92], "ton": [201, 163, 91]},
+ "lantern_lit.png": {"kutu": [25, 4, 75, 92], "ton": [255, 208, 138]},
+ "card_small.png": {"kutu": [7, 6, 93, 94], "ton": [246, 234, 210]},
+ "arch_frame.png": {"kutu": [6, 5, 94, 95], "pencere": [14, 19.23, 86, 88.46], "ton": [244, 239, 228]},
+ "story_frame.png": {"kutu": [6, 5, 94, 95], "pencere": [16, 20, 84, 88], "ton": [58, 33, 20]},
+ "venue_frame.png": {"kutu": [5, 6, 95, 94], "pencere": [10, 23.64, 90, 89.09], "ton": [58, 33, 20]},
+ "corner_spray.png": {"kutu": [6, 6, 70, 60], "ton": [184, 50, 106]},
+ "divider.png": {"kutu": [8, 30, 92, 70], "ton": [201, 163, 91]},
+ "hanging_lantern.png": {"kutu": [18, 6, 82, 93], "ton": [227, 165, 74]},
+ "zellige_tile.png": {"ton": [30, 106, 106], "gren": 0.3},
+ "accent_1.png": {"kutu": [22, 22, 78, 78], "ton": [184, 50, 106]},
+ "accent_2.png": {"kutu": [22, 22, 78, 78], "ton": [244, 239, 228]},
+ "accent_3.png": {"kutu": [22, 22, 78, 78], "ton": [201, 163, 91]},
+ "web_hero.png": {"ton": [239, 227, 204]}
 }

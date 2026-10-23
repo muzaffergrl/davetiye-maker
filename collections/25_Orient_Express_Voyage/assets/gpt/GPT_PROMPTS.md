@@ -1,185 +1,257 @@
-# GPT görsel istekleri — Tasarım 25 · Orient Express Voyage
+# GPT görsel istekleri — Tasarım 25 · Orient Express Voyage (2026-10-22 yeniden tasarım)
 
-> **Instructions for GPT:** This design ("Orient Express Voyage") was redesigned on 2026-10-18/19: its website is warm ivory stationery paper with abundant photorealistic flowers in the corners, opened from a themed cover object. The old website parts (PAKET 5) are NO LONGER needed — do not generate them. Generate PAKET 3 (the Etsy listing scenes) and PAKET 6 (the printed invitation grounds) in ONE chat; PAKET 2 (sample photos) is optional and comes last. Before the first image, attach these two images from the repository as the style reference of every image: `platform/themes/orient-express-voyage/img/bg_scene-1024.webp` (the website background: paper, flowers, colors, light) and `platform/themes/orient-express-voyage/img/v3-closed-880.webp` (the design's closed cover object). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". No text, letters, numbers, logos, monograms or watermarks in any image.
+> **Instructions for GPT:** This design is being REDESIGNED from scratch (2026-10-22). Generate PAKET 5R (website layers)
+> first, in order and in ONE chat, then PAKET 6R (printable invitation). PAKET 2 (sample photos) ALREADY EXISTS — do not
+> regenerate it. Sections marked GEÇERSİZ are not wanted. Use each English prompt exactly as written, follow its
+> checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers,
+> names, dates, initials, monograms, crests, emblems, logos, brand marks, QR codes or watermarks in any image** — the
+> luggage tag, the ticket card, the lock, the watch dial and the map are all completely blank (no numerals, no place
+> names, no route numbers, no railway company marks). This is an invented 1930s luxury sleeper-train world: it must not
+> copy any real railway company, train, poster, livery, ticket or seller's design. Give W1 `page_ground.png`, W2
+> `ticket_paper.png` and W4 `env_front.png` as the style reference of every later part: the same warm ivory antique map
+> paper, the same ivory ticket card, the same bottle-green embossed leather-grain paper with gold-tooled lines and polished
+> brass, the same route-red moiré silk lining, the same warm lamplight from the top-left. Parts drawn on the same sleeve
+> canvas (W3, W4, W5, W7, W8, W9) keep the sleeve in exactly the same box.
 
-Tasarım 25 (G163, `docs/24_YENI_TASARIMLAR.md`) GPT parçaları **gelmeden** kuruldu (22 Nocturne gibi). Platform teması
-`platform/themes/orient-express-voyage/` şu an her parça için **geçici düz palet tonları** kullanıyor (çizim yok, K21).
-PAKET 5 dosyaları `assets/gpt/parts/` altına kaydedilince tek komut yeterli (PAKET 6 için aşağıdaki "PAKET 6 gelince"):
-
-```bash
-python3 platform/themes/orient-express-voyage/build_images.py   # parts/ → img/ + site.css stage bloğu (gelen parça kullanılır, eksikler geçici kalır)
-```
-
-`img/manifest.json` → `"interim"` hâlâ GPT bekleyen parçaları listeler. Build ölçtüğü yerleri (kayış kutusu ve toka
-kesimi, bilet kutusu ve penceresi, vagon camı ve çerçeve oranı) `site.css`'teki `/* stage:begin … stage:end */` bloğuna
-kendisi yazar (G167); elle yüzde eşitlemek gerekmez. Cep üst kenarı parçanın kendi alfasıdır. Sonra göz kontrolü (390 px
-ekran görüntüleri). Basılı davetiye (PAKET 6) kendiliğinden geçmez: aşağıda "PAKET 6 gelince".
-
-Prova (G167, gerçek repoya dokunmaz): `python3 tools/gpt_kuru_deneme.py --tema orient-express-voyage --sekil
-collections/25_Orient_Express_Voyage/assets/gpt/kuru_sekil.json` — her istenen dosyayı doğru ölçü/alfa/#00FF00 penceresiyle
-deneme görseliyle doldurup build'i koşar. `kuru_sekil.json` parçaların prompt'taki yerleridir (tuval %).
+Bu dosya tasarım 25'in **bütün görsel parçalarının** tek kaynağıdır (yeniden tasarım: `docs/35_22_32_YENIDEN_TASARIM.md`
+§3–§4, satır 25; GPT görevi G225). Eski PAKET 5 (W2.x, 18–20 Ekim'den önce) ve eski PAKET 6 kaldırıldı (git geçmişinde).
+Tema (`platform/themes/orient-express-voyage/`) 39 pilotunun yapısıyla **yeniden kurulacak** (G425); şimdiki Codex
+`envelope-v3` kurulumu bu parçaları kullanmaz. Gelmeyen parçanın yerine çizilmiş yedek konmaz (K21). Kişisel alanlar
+(isimler, tarih, baş harfler, mekân) HTML'dir, hiçbir görsele pişirilmez; QR'ı GPT çizmez (`tools/make_qr.py`).
 
 ## Nereye?
 - Repo `muzaffergrl/davetiye-maker`; klasör `collections/25_Orient_Express_Voyage/assets/gpt/` altındaki `parts/`
-  (PAKET 5), `photos/` (PAKET 2), `print/` (PAKET 6). Repoya yazamıyorsan dur ve bunu çıktında açıkça söyle; kullanıcıya
-  yükleme işi verme.
+  (PAKET 5R) ve `print/` (PAKET 6R). `photos/` (PAKET 2) zaten dolu. Repoya yazamıyorsan dur ve bunu çıktında açıkça
+  söyle; kullanıcıya yükleme işi verme.
+- Sonra (Claude): `python3 tools/kit_check.py collections/25_Orient_Express_Voyage --paket 5` (oran, gerçek alfa, kenar
+  payı, foto penceresi) + göz kontrolü. Tema yeniden kurulunca `python3 platform/themes/orient-express-voyage/build_images.py`
+  ve `python3 tools/gpt_kuru_deneme.py --tema orient-express-voyage --sekil
+  collections/25_Orient_Express_Voyage/assets/gpt/kuru_sekil.json` (prova). PAKET 6R için aşağıdaki "Gelince" adımı.
 
-## Stil ve renk (her parça)
-- Teknik: **vintage travel poster lithograph** — 1920s–30s railway poster: flat but rich colour areas, soft stone-litho
-  grain, subtle registration texture, gentle gradients in the sky; objects (wallet, ticket, tag, clock) are rendered as
-  **realistic luxury objects in warm, painterly light** so they read as real things on a poster-coloured world.
-- Palet: bottle green `#1E3A2C` · deep green `#11241B` · soft green `#2E5240` · brass `#B8914B` · light brass `#D8BD84`
-  · ivory `#F3EBD9` · paper `#ECE1C8` · route red `#8C2F39` (accent only).
-- Işık: warm, soft, from the top-left; the same in every part.
-- Klasik, romantik, zengin; ultra-minimal değil. Gerçek bir markaya, trene, şirkete, kişiye veya başka bir satıcının
-  tasarımına benzemesin (no real railway company insignia, no real train livery, no real station).
-- Yazı yok: biletin, etiketin, haritanın, saatin, damganın üstünde harf/rakam/simge YOK (isimler ve tarih sitede ayrı
-  metin katmanıdır).
+## Stil ve renk
+- Teknik: **photorealistic luxury product photography** — real bottle-green embossed leather-grain paper (fine pebbled
+  grain, like a hand-bound travel document case), real gold tooling pressed into it, real polished and softly aged brass
+  (crisp warm highlights, no green patina), real route-red moiré silk, real heavy ivory ticket card, real mahogany with a
+  deep French-polish gloss; a 1930s luxury sleeper train at night: classic, romantic, rich and calm. Not cartoon, not flat
+  vector, not steampunk (no gears, no cogs), not a theme-park or costume look, not a travel poster.
+- Renkler (yalnız bunlar): bottle green `#1E3A2C` · deep `#11241B` · brass `#B8914B` · light brass `#D8BD84` · ivory
+  `#F3EBD9` · route red `#8C2F39`; maun yalnız çerçevelerde (`#4A2618` civarı), kurutulmuş çiçekler fildişi + soluk
+  lavanta.
+- Işık: sıcak **lamba ışığı sol üstten** (vagon tavan lambası gibi), pirinçte temiz sıcak parlak vurgular; bütün
+  parçalarda aynı. Şeffaf parçalarda gerçek alfa (beyaz ya da dama deseni değil), her kenarda en az %6 boşluk, nesnenin
+  dışında gölge/hâle yok (gölgeyi site ekler).
+- Foto penceresi (`#00FF00`) yalnız W11 `portrait_frame`, W12 `story_frame` ve W13 `venue_frame`'de; diğer parçalarda
+  yeşil yok.
+- **04 Vintage Airmail'den ayrı:** pul, posta damgası, hava postası çizgisi, mektup yok. **35'ten ayrı:** kayış ve toka
+  yok (kilit çevirmeli düğme). **48'den ayrı:** üst kapak ve mühür yok (kapak sağ uçta, dikey).
 
----
+## Kılıf geometrisi (W3, W4, W5, W7, W8, W9 buna göre)
+Tuval **1600×1100** (yatay). Kılıf kutusu **x %6–86, y %8–66** (1280×638 px ≈ 2,0:1); sağdaki %14 ve alttaki %34 boş
+(kart sağa kayar, etiket aşağı sarkar). Altı katman **aynı tuvalde, aynı kutuda** çizilir; Claude her birini kendi alfa
+kutusuna kırpar ve arka katmanın (W3) kutusuna göre yerleştirir (tuval yüzdeleri):
+- **W3 kılıfın arkası / içi:** tam kutu `6, 8, 86, 66`; iç yüz bordo hareli ipek astar, üst-alt-sol kenarda ince yeşil
+  deri pay; sağ uç açık (ağız).
+- **W4 ön yüz:** tam kutu `6, 8, 86, 66`; sağ kenarda (x %86) ortada **yarım ay parmak oyuğu**: y %29–45, derinliği
+  x %83'e kadar (oyuk şeffaf → altındaki astar görünür); **sol** iki köşede pirinç köşelik; altın yaldız çift çerçeve çizgisi.
+- **W5 dil kapak (kapalı):** x %72–86 · y %8–66; menteşe **sağ kenar** (x %86, yuvarlatılmış kat); serbest kenarı sola
+  bakan **yumuşak yuvarlak sivri uç**: üst ve alt kenara x %74,5'te değer, ucu x %72'de, y %37'de; **sağ** iki köşesinde
+  pirinç köşelik.
+- **W7 kilit plakası:** kapağın ucunda, kutu x %73,5–78,5 · y %30–44 (dikey oval uçlu pirinç plaka, dört perçin, ortada
+  yuva); merkezi **(%76, %37)**.
+- **W8 kilit düğmesi (döner):** kutu x %73,2–78,8 · y %35–39, kapalıyken **yatay**; döner mili tam **(%76, %37)** (ortada
+  kubbe perçin). Açılışta 90° döner (dikey).
+- **W9 bagaj etiketi:** gövdede pirinç kuşgözü **(%67,5, %59)** (çapı tuval eninin ~%1,6'sı), kırmızı pamuk ip kuşgözünden
+  geçip aşağı sarkar; etiket dikey, kutu x %63–72 · y %70–94; sarkaç mili = kuşgözü.
+- **W6 kapağın iç yüzü** ayrı tuvalde (600×1300): W5'in yatay aynası (menteşe solda x %16,5, sivri uç sağda x %83,5,
+  y %6–94; oran ≈0,35:1).
+- Kart (W10, dikey bilet) kılıfın içinde **90° yan yatar**, ön yüzün arkasında tamamen gizli (yalnız parmak oyuğundan
+  kenarı görünür).
+- Kat sırası (alttan üste): W3 arka → kart (W10) → W4 ön yüz → W9 etiket → W5 dil kapak → W7 plaka → W8 düğme (W7 ve W8
+  açılışta kapakla birlikte döner).
 
-## PAKET 5 — Website katmanları (W2; şeffaflar gerçek alfa, düşen gölge yok) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
-
-> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
-
-Cüzdan parçaları (W2.1–W2.6) **aynı 1024×1536 tuvalde, aynı konumda** çizilir: cüzdan yatayda ortalı, genişliği tuvalin
-~%62'si, yüksekliği ~%62'si (dik, 2:3), üst kenarı tuvalin ~%19'unda. Build her parçayı kendi alfa kutusundan kapalı
-cüzdanın kutusuna oturtur; yine de aynı ölçü ve açıyla çizilmeleri gerekir.
-
-#### W2.1 Kapalı bilet cüzdanı — kayış OLMADAN
-**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/wallet_closed.png` · 1024×1536 · **Şeffaf zemin**
-
-```
-A luxurious vintage first-class railway ticket wallet, closed, seen perfectly straight from the front: a tall portrait rectangle (2:3), bottle-green (#1E3A2C) fine-grain leather with softly rounded corners, a slim debossed border line running inside the edge, small polished brass corner caps on the four corners, and a narrow stitched spine visible along the LEFT edge (the cover opens from the left like a book). WITHOUT any strap or buckle — the front is clean leather. Place it horizontally centered, about 62% of the image width, top edge at about 19% of the image height. Warm painterly light from the top-left, gentle leather sheen, rendered like a realistic object in a 1930s travel-poster world. Only this one object. Not cropped, generous empty margin. No cast shadow, no drop shadow, no glow outside the outline. No text, letters, numbers, emblem or monogram. True transparent background PNG (real alpha channel — not white, not a checkerboard).
-```
-Kontrol: kayış/toka yok; sırt solda; dikey 2:3; pirinç köşeler; yazı yok; gölge yok; gerçek alfa.
-
-#### W2.2 Kayış ve pirinç toka (tek başına, cüzdanla aynı yerde)
-**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/wallet_strap.png` · 1024×1536 · **Şeffaf zemin**
-
-```
-Only the leather strap of the same ticket wallet (give wallet_closed.png as the reference image), alone on the same canvas in exactly the place where it wraps the closed wallet: one horizontal strap of darker cognac-brown leather (#5C3A24) with fine edge stitching, about 10% of the wallet's height tall, crossing the whole width of the wallet a little below its middle (top edge at about 53% of the wallet's height), its two ends wrapping just around the left and right edges; the edge stitching is dark brown thread (not gold, not brass). On the right part of the strap, at about 62–75% of the wallet's width, a polished brass buckle with a short tongue holding the strap closed; the buckle frame is as tall as the strap or a little taller, and it is the only brass on the strap. Nothing else: no wallet behind it. Same light and perspective as wallet_closed.png. No cast shadow, no glow. No text. True transparent background PNG (real alpha channel).
-```
-Kontrol: yalnız kayış + toka; tokanın sol kenarı net (build kayışı tokanın hemen solundan ikiye keser — kayıştaki tek
-pirinç renkli şey toka olmalı; dikiş koyu kahve); cüzdan yok; alfa.
-
-#### W2.3 Kapağın içi (açılınca soldaki yüz)
-**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/wallet_inside_cover.png` · 1024×1536 · **Şeffaf zemin**
-
-```
-The INSIDE of the same wallet's front cover (reference: wallet_closed.png), seen straight on as it lies open to the left: the same portrait 2:3 size and position on the canvas, lined with soft deep-green suede (#11241B) with a thin brass-coloured stitched edge, the spine edge now on the RIGHT side, and a small slanted leather slip pocket in the lower half holding nothing. Same light from the top-left. No cast shadow, no glow. No text, letters or numbers. True transparent background PNG (real alpha channel).
-```
-Kontrol: kapalıyla aynı ölçü; sırt sağda; boş cep; yazı yok; alfa.
-
-#### W2.4 Cüzdanın içi — sağ panel (bilet cebinin arkası)
-**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/wallet_inside.png` · 1024×1536 · **Şeffaf zemin**
-
-```
-The inside right panel of the same open wallet (reference: wallet_closed.png), same size and same position as the closed wallet on the canvas: deep-green suede lining (#11241B) with brass stitching along the edges, the spine edge on the LEFT. The upper half is plain empty lining (a ticket will sit there). Do NOT draw the pocket front and do not draw a ticket. Same light. No cast shadow, no glow. No text. True transparent background PNG (real alpha channel).
-```
-Kontrol: düz astar; cep önü ve bilet yok; kapalıyla aynı ölçü; alfa.
-
-#### W2.5 Bilet cebinin ön dudağı (tek başına)
-**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/wallet_pocket.png` · 1024×1536 · **Şeffaf zemin**
-
-```
-Only the front lip of the ticket pocket of the same wallet, on the same canvas and in the same place as wallet_inside.png: a bottle-green leather pocket covering the LOWER 54% of the inside panel, full panel width, with a straight top edge (crisp, with a tiny stitched hem and a small half-moon thumb notch in its middle), brass stitching on its sides. Everything above its top edge is transparent. Same light. No cast shadow, no glow. No text. True transparent background PNG (real alpha channel).
-```
-Kontrol: yalnız cep önü; üst kenar düz ve net (bilet bunun arkasından çıkar); üstü tamamen şeffaf; alfa.
-
-#### W2.6 İstasyon zemini (zarf sayfası, telefon)
-**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/bg_station.png` · 1024×1536 · opak
-
-```
-A vertical phone-screen background in vintage travel-poster lithograph style: a grand railway station hall at night seen from the platform, deep bottle-green shadows (#11241B), a warm brass glow from hanging lamps only along the very top edge (the top 5% of the image), faint iron arches and a sleeping carriage silhouette blurred at the far left and right edges. The whole central area (from 7% to 92% of the height, the middle 70% of the width) stays calm, dark (deep green, well below mid-grey), nearly flat with only a very fine, low-contrast grain, and EMPTY so ivory text and the ticket wallet read on it. No people, no signs, no clock face with numbers, no text.
-```
-Kontrol: orta (%7–92) sakin, koyu yeşil ve çok ince grenli (ivory yazı üstünde — theme-check zarf zemini ölçüsü: kenar
-≤ 2,2, açık piksel ≤ %5); lamba ışığı yalnız en üst %5'te; dekor yalnız kenarlarda; yazı/tabela yok.
-
-#### W2.7 Birinci sınıf bilet (portre penceresi #00FF00)
-**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/ticket.png` · 1024×1536 · **Şeffaf zemin**
-
-```
-A vintage first-class railway ticket card, alone, seen straight on, portrait (about 500:760), thick ivory card stock (#F3EBD9) with a fine engraved guilloche border printed in bottle green and brass along the edges, a perforated tear-off line across the card at about 88% of its height, and slightly rounded corners. In the upper half, centered, a portrait photo window filled with flat pure green #00FF00 (no texture, no shading): window width about 46% of the card width, window height about 38% of the card height, its top at 7% of the card height, a 4:5 portrait. The lower half below the window (from 49% to 86% of the card height) is EMPTY plain ivory card for text. Centered on the canvas, about 50% of the canvas width. Same light as the wallet. No cast shadow, no glow. No text, letters, numbers, prices, serial numbers or emblems. True transparent background PNG (real alpha channel).
-```
-Kontrol: pencere düz #00FF00 ve 4:5; alt yarı boş fildişi (isimler + tarih oraya); delikli koçan çizgisi; yazı yok; alfa.
-
-#### W2.8 Seyahat afişi (home hero + paylaşım görseli)
-**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/poster_hero.png` · 1024×1536 · opak
-
-```
-A vertical vintage travel poster lithograph, 1930s style, flat rich colour areas with stone-litho grain: an elegant bottle-green and brass luxury sleeper train crossing a stone viaduct over a river valley at golden hour, cypress trees and distant mountains, a lakeside town with warm windows far below. The TOP 45% is a calm, pale golden-ivory sky with very soft gradients and nothing in it (dark green names are set there), the middle shows the viaduct and train, the bottom 25% deep green valley shadows. No people close up, no text, no letters, no numbers, no logos, no railway company insignia. Also cropped to 1200×630 for link previews from the middle: keep the train on the viaduct in the vertical middle band.
-```
-Kontrol: üst %45 sakin açık gökyüzü; tren viyadükte ortada; yazı/logo yok; litografi dokusu.
-
-#### W2.9 Eski harita (rota bandı)
-**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/map.png` · 1536×1024 · opak
-
-```
-A horizontal antique travel map in the same lithograph style: aged ivory paper (#ECE1C8) with soft folds, a fictional coastline and sea tinted soft bottle green, delicate hatched mountains, rivers, tiny town clusters drawn as dots and squares, a decorative compass rose in a corner, faint grid lines. ABSOLUTELY NO readable place names, letters, numbers or labels anywhere (no cartouche text). Leave a clear, uncluttered diagonal band from the lower-left corner to the upper-right corner (a route line will be drawn along it by the website). Muted, elegant, warm.
-```
-Kontrol: hiç yazı/etiket yok; sol alt → sağ üst köşegen sakin; kurgu coğrafya.
-
-#### W2.10 Bagaj etiketi (sallanır)
-**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/luggage_tag.png` · 1024×1536 · **Şeffaf zemin**
-
-```
-A single vintage leather-and-card luggage tag hanging straight down, seen from the front: a tall rounded-top tag of warm kraft-tan card (#C4A070) with a thin bottle-green leather edge, a brass eyelet near the top centre with a short loop of twine above it (the twine's top end is the pivot, straight above the eyelet). The whole object, twine loop included, is about 300:560 and about 80% of the image height; measured over that whole object, the card face from 36% to 90% of its height is EMPTY plain card for text. Only this object, centered. Same light. No cast shadow, no glow. No text, letters or numbers. True transparent background PNG (real alpha channel).
-```
-Kontrol: düz duruyor; ip üstte ortada (dönme noktası); yüz, ip dahil nesne yüksekliğinin %36–90'ında boş; yazı yok; alfa.
-
-#### W2.11 İstasyon saati (geri sayım)
-**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/station_clock.png` · 1024×1024 · **Şeffaf zemin**
-
-```
-An antique brass railway station clock seen straight on, round, with an ornate polished brass bezel and a short brass bracket at the top, an ivory dial with simple bar hour marks ONLY (no numerals, no letters, no brand name), slim dark green hands showing about ten past ten. Filling about 80% of the square, centered. Same light. No cast shadow, no glow. True transparent background PNG (real alpha channel).
-```
-Kontrol: rakam/yazı yok; çubuk işaretler; alfa.
-
-#### W2.12 Vagon penceresi (cam #00FF00)
-**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/carriage_window.png` · 1024×1536 · **Şeffaf zemin**
-
-```
-A single railway carriage window frame seen straight on: a portrait polished brass window frame whose glass opening is exactly 3:4 (portrait), with softly rounded top corners and a slim lower sill, set in a narrow band of dark varnished bottle-green wood panelling around it (only a thin band, about 7% of the width), a tiny brass latch on the lower sill. The glass area is filled with flat pure green #00FF00 (no texture, no reflection, no shading). Outside the frame the image is transparent. Same light. No cast shadow, no glow. No text. True transparent background PNG (real alpha channel).
-```
-Kontrol: cam düz #00FF00, cam açıklığı 3:4 (fotoğraflar 3:4); çerçeve ince; dışı şeffaf; alfa.
-
-#### W2.13 Vagon ahşap paneli (dikişsiz)
-**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/carriage_wall.png` · 1024×1024 · opak
-
-```
-A seamless tileable texture of luxury railway carriage panelling: deep bottle-green (#1E3A2C) lacquered wood with a subtle fine grain and very faint marquetry inlay lines, evenly lit, low contrast, no strong highlights, no objects. Must repeat seamlessly on all four sides. No text.
-```
-Kontrol: dikişsiz; düşük kontrast (üstünde fildişi yazı okunur).
-
-#### W2.14 Litografi kâğıdı (dikişsiz sayfa zemini)
-**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/bg_paper.png` · 1024×1024 · opak
-
-```
-A seamless tileable texture of warm ivory lithograph poster paper (#F3EBD9): very soft stone-litho grain and faint fibres, evenly lit, very low contrast, no stains, no folds, no objects. Must repeat seamlessly on all four sides. No text.
-```
-Kontrol: dikişsiz; çok sakin (koyu yeşil yazı okunur).
-
-#### W2.15 Biniş kartı (RSVP formu, 3 dilim)
-**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/boarding_pass.png` · 1024×1536 · **Şeffaf zemin**
-
-```
-A vintage railway boarding pass, portrait, seen straight on, filling about 95% of the canvas width: thick ivory card (#F3EBD9). Top 14%: a bottle-green printed header band with a fine brass guilloche edge (NO text in it). From 16% to 84% of the height: completely PLAIN, even ivory card with no marks at all, the same width from top to bottom (a form sits there and this band is repeated vertically by the website). At about 86% of the height a perforated tear-off line across the card; below it the stub with a small empty brass-printed rectangle frame. Same light. No cast shadow, no glow. No text, letters, numbers or barcodes. True transparent background PNG (real alpha channel).
-```
-Kontrol: orta bant (%16–84) tamamen düz ve kenarları paralel (build %16 / %45–55 / %82'den keser, orta dilim tekrarlanır);
-delikli çizgi ~%86'da (kesimin altında); başlık bandı ve koçan yazısız; alfa.
-
-#### W2.16 Biniş damgası (RSVP sonrası + favicon)
-**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/stamp.png` · 1024×1024 · **Şeffaf zemin**
-
-```
-A single round vintage rubber-stamp impression in deep route-red ink (#8C2F39), as if pressed on paper: a double ring border with a small art deco locomotive front silhouette and two small stars in the centre, slightly uneven ink coverage and worn edges. ABSOLUTELY NO letters, words, numbers or dates in the rings. Filling about 80% of the square, slightly rotated. True transparent background PNG (real alpha channel; the paper is NOT included, only the ink).
-```
-Kontrol: yalnız mürekkep; harf/rakam yok; kağıt yok; alfa.
+Açılış: dokununca etiket ipinde sarkaç gibi sallanır (±14°, sönümlü) → kilit düğmesi 90° döner (yataydan dikeye, küçük
+"tık") → dil kapak sağ menteşesinde **3B** yana açılır (90°'yi geçince iç yüz W6: bordo ipek) → kılıfın içindeki bilet
+**sağa kayarak** ağızdan çıkar, yan yatıştan dikleşir, büyüyüp ortaya gelir; kılıf hafifçe aşağı çekilip söner → buhar
+bulutu, zımba pulları ve kurutulmuş gül goncası (W18) süzülür → home.
 
 ---
 
-## PAKET 2 — Örnek fotoğraflar (kurgu çift Amelia & Rafael; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+## PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım)
+
+#### W1 Antika harita kâğıdı (sayfa zemini)
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/page_ground.png` · 1536×1536 · opak, dikişsiz
+
+```
+A seamless, tileable, perfectly flat top-down texture of warm ivory antique map paper (#F3EBD9, gentle warm variation toward #E8DCC2): a fine laid-paper tooth, a few soft cotton fibres, and, printed very faintly into it, the ghost of an old hand-engraved map — barely visible fine sepia contour traces, a dotted coastline fragment and a few hair-fine dashed route lines in a faded route red (#8C2F39 at very low strength), all so pale that they read as texture, not as a map. Absolutely no lettering, no place names, no numbers, no compass rose, no legend, no grid labels. Evenly lit by warm lamplight from the top-left, no fold, no crease, no stain, no burn marks, no vignette, no shadow. Calm enough for dark green and black text to read on it everywhere. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: sıcak fildişi, çok soluk harita izi (okunur bir harita değil); yazı/rakam/pusula yok; dikişsiz (2×2 ek yeri yok); koyu yazı her yerde okunur.
+Kullanım: tema kurulunca bütün sayfaların zemini ve açılış sayfası (kapalı kılıfın arkası).
+
+#### W2 Fildişi bilet kartonu (kartlar, bantlar, form)
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/ticket_paper.png` · 1536×1536 · opak, dikişsiz
+
+```
+A seamless, tileable, flat top-down texture of heavy ivory ticket card stock (#F3EBD9): a smooth matte surface with a soft felted tooth, the faintest warm cream variation, a few tiny darker cotton flecks, like the thick board of an old first-class railway ticket. Evenly lit by warm lamplight from the top-left. No printing, no pattern, no guilloche, no border, no perforation, no fold, no stain, no shadow, no vignette. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: sakin fildişi karton; dikişsiz; baskı/desen yok; koyu yazı okunur.
+Kullanım: tema kurulunca home bilet kartı, davet bandı, details program kartı, RSVP formu.
+
+#### W3 Kılıfın arkası (bordo ipek astar görünür)
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/env_back.png` · 1600×1100 · **Şeffaf zemin**
+
+```
+The back panel of a long horizontal leather ticket sleeve, seen perfectly straight on, on a fully transparent background. The sleeve occupies exactly x 6–86% and y 8–66% of the 1600×1100 canvas (about 2 wide : 1 tall) — the same box is used later by env_front.png, flap.png, lock_plate.png, lock_key.png and luggage_tag.png, so keep it exactly there; the rest of the canvas (right 14%, bottom 34%) stays empty and transparent. We look at the INSIDE of the back panel: it is lined with smooth route-red moiré silk (#8C2F39, a soft watered-silk shimmer catching the warm light, slightly deeper toward the bottom and right where the front panel will cover it); along the top edge, the bottom edge and the left end a slim rim (about 2% of the canvas height) of the sleeve's own bottle-green embossed leather-grain paper (#1E3A2C, a fine pebbled grain) shows, its edge finished with a hair-fine gold-tooled line. The right end is the open mouth of the sleeve: the silk simply ends at the right edge of the box, cleanly. Warm lamplight from the top-left. No front panel, no flap, no lock, no tag, no card, no ticket inside. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: kutu x %6–86 / y %8–66; iç yüz bordo hareli ipek, üst-alt-sol kenarda ince yeşil deri pay; ön yüz/kapak/kart yok; gerçek alfa.
+Kullanım: tema kurulunca kılıf kutusuna (`6, 8, 86, 66`) kırpılır → en arka kat; parmak oyuğundan ve kapak açılınca ağızda bordo ipek görünür, bilet bunun önünden kayar.
+
+#### W4 Kılıfın ön yüzü
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/env_front.png` · 1600×1100 · **Şeffaf zemin**
+
+```
+Only the front panel of the same long horizontal ticket sleeve as env_back.png, on the same 1600×1100 canvas and in exactly the same place, on a fully transparent background: the sleeve box is again exactly x 6–86% and y 8–66% of the canvas, and the front panel fills that whole box. It is luxurious bottle-green embossed leather-grain paper (#1E3A2C with a fine pebbled grain, the deepest folds toward #11241B, a soft satin glow where the warm light catches it), like a hand-bound first-class travel document case; a gold-tooled double frame line (#B8914B, crisply pressed into the grain, the outer line a little heavier) runs around the panel about 3% of the canvas height inside its edges, with a tiny art-deco fan flourish of gold tooling at the middle of the left end only; the two LEFT corners are capped with polished brass corner protectors (small right-angled brass caps with softly rounded tips and one tiny rivet each, bright warm highlights toward #D8BD84). At the right end, in the middle of the right edge, a clean half-moon thumb notch is cut into the panel: it spans from 29% to 45% of the canvas height and reaches in to 83% of the canvas width; the notch is fully transparent (the lining behind will show there), its cut edge neat with the faint thickness of the leather paper visible. Warm lamplight from the top-left. No flap, no lock, no tag, no card, no stitching other than the tooling, no monogram, no emblem. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: kutu x %6–86 / y %8–66 tam dolu; sağ kenarda şeffaf yarım ay oyuk (y %29–45, x %83'e kadar); yalnız sol köşelerde pirinç; altın yaldız çift çizgi; yazı/amblem yok; gerçek alfa.
+Kullanım: tema kurulunca aynı kutuya kırpılır → ön yüz (`.env-front`); bilet bunun arkasında yan yatar, oyuktan kenarı görünür, kapak açılınca ağızdan sağa kayar.
+
+#### W5 Dil kapak (kapalı, dış yüz)
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/flap.png` · 1600×1100 · **Şeffaf zemin**
+
+```
+Only the closed end-tab flap of the same ticket sleeve, on the same 1600×1100 canvas and in exactly the same place, on a fully transparent background (the sleeve box is again x 6–86% and y 8–66%, but only the tab is drawn). The tab is folded over the RIGHT end of the sleeve: it is hinged along a softly rolled vertical fold at the sleeve's right edge (x 86% of the canvas), spans the full sleeve height (y 8–66%), and lies flat on the front; its free edge on the left is one soft, rounded point facing LEFT: the edge meets the top and bottom edges at x 74.5% and curves smoothly to a gently rounded tip at x 72%, y 37% (not a sharp arrow, not straight, not scalloped). Material: the same bottle-green embossed leather-grain paper (#1E3A2C), a single gold-tooled line (#B8914B) following its edge about 1.5% inside, a faint contact shade on the tab itself just inside its free edge so it reads as a separate layer, and the two RIGHT corners capped with polished brass corner protectors matching env_front.png. Everything else is fully transparent. Warm lamplight from the top-left. No lock, no plate, no rivet in the middle, no tag, no seal. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: dil x %72–86 / y %8–66; menteşe sağda, yuvarlak sivri uç solda x %72 · y %37; sağ köşelerde pirinç; kilit yok; altı/yanı şeffaf; gerçek alfa.
+Kullanım: tema kurulunca kapak kutusuna (`72, 8, 86, 66`) kırpılır → kapalı dil; açılışta kilit döndükten sonra sağ kenarındaki menteşede 3B yana açılır (90°'de W6 devralır).
+
+#### W6 Dil kapağın iç yüzü (açıkken)
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/flap_in.png` · 600×1300 · **Şeffaf zemin**
+
+```
+The inside of the same end-tab flap as flap.png, alone, seen straight on as it lies opened flat to the right of the sleeve, on a fully transparent background: exactly the same outline and proportions as the tab of flap.png (about 0.35 wide : 1 tall) but mirrored horizontally — its straight hinge edge runs along the LEFT side at 16.5% of the canvas width, from 6% to 94% of the height, and its soft rounded point faces RIGHT, its tip at 83.5% of the width at the vertical centre (the free edge meets the top and bottom at about 71.5% of the width). The inside is lined with the same route-red moiré silk (#8C2F39) as env_back.png, with a slim rim of bottle-green leather-grain paper and a hair-fine gold-tooled line along the edge; where the lock passes through, at 64% of the width and 50% of the height, a small round polished brass backing washer with one tiny rivet. Warm lamplight from the top-left. No lock button, no tag. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: menteşe solda, uç sağda; oranı W5'teki dille aynı (≈0,35:1); bordo ipek astar + küçük pirinç pul (%64, %50); gerçek alfa.
+Kullanım: tema kurulunca alfa kutusuna kırpılır, dil yüksekliğine ölçeklenir → kapak 90°'yi geçince kılıfın sağında açık duran iç yüz.
+
+#### W7 Çevirmeli kilit plakası
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/lock_plate.png` · 1600×1100 · **Şeffaf zemin**
+
+```
+On the same 1600×1100 canvas as env_front.png and flap.png, in exactly the same place (the sleeve and the tab themselves are NOT drawn here), only the escutcheon plate of a small luggage turn-lock riveted on the tip of the tab, on a fully transparent background: an upright polished brass plate with gently rounded oval ends, spanning x 73.5–78.5% and y 30–44% of the canvas, softly bevelled edges, a fine engraved border line, four small domed brass rivets (one near each end and one at each side), and in its exact centre, at x 76% and y 37% of the canvas, a short horizontal slot opening (dark #11241B inside) through which a turn button passes. Polished, softly aged brass (#B8914B, crisp warm highlights toward #D8BD84, warm brown lows), warm lamplight from the top-left, no green patina, no scratches. No turn button (it is a separate part), no keyhole, no lettering. Everything else fully transparent. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: tek dikey pirinç plaka x %73,5–78,5 / y %30–44, dört perçin, merkezde (%76, %37) yatay yuva; düğme yok; gerçek alfa.
+Kullanım: tema kurulunca aynı tuval konumunda kapağın çocuğu → kapakla birlikte döner.
+
+#### W8 Kilit düğmesi (dönen parça)
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/lock_key.png` · 1600×1100 · **Şeffaf zemin**
+
+```
+On the same 1600×1100 canvas as lock_plate.png, in exactly the same place (the plate, the tab and the sleeve are NOT drawn), only the turn button of the luggage turn-lock, on a fully transparent background: a horizontal polished brass turn button shaped like a slim rounded oval bar with softly flared ends, spanning x 73.2–78.8% and y 35–39% of the canvas, its long axis perfectly horizontal (the locked position), with a raised domed rivet exactly at its centre at x 76% and y 37% of the canvas (the pivot), a fine ridge along its top face and crisp warm highlights (#B8914B toward #D8BD84) from the warm lamplight at the top-left. It must be perfectly symmetrical around the centre rivet so it can rotate around it. Everything else fully transparent. No plate, no key, no chain. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: yatay simetrik pirinç düğme x %73,2–78,8 / y %35–39; merkez perçin tam (%76, %37); plaka yok; gerçek alfa.
+Kullanım: tema kurulunca döner mili (%76, %37) → açılışta 90° dönüp dikleşir ("unlock"); kapakla birlikte döner.
+
+#### W9 Bagaj etiketi (kuşgözü + kırmızı ip)
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/luggage_tag.png` · 1600×1100 · **Şeffaf zemin**
+
+```
+On the same 1600×1100 canvas as env_front.png, in exactly the same place (the sleeve itself is NOT drawn), only a blank vintage luggage tag hanging from the sleeve, on a fully transparent background: a small round polished brass grommet set in the sleeve at x 67.5% and y 59% of the canvas (its ring about 1.6% of the canvas width across, an open dark centre); a soft twisted route-red cotton cord (#8C2F39) loops through the grommet and hangs straight down to the tag; the tag hangs vertically below the sleeve, its body spanning x 63–72% and y 70–94% of the canvas: a heavy ivory card tag (#F3EBD9, as ticket_paper.png) with its two top corners clipped at 45°, a small brass-reinforced eyelet near its top centre where the cord is knotted, a slim route-red band printed across its lower quarter and a fine gold double line around its edge — the whole tag is otherwise COMPLETELY BLANK (no writing lines, no numbers, no letters). The cord and tag hang naturally under gravity, perfectly upright. Warm lamplight from the top-left. Everything else fully transparent. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: kuşgözü (%67,5, %59); ip dikey; etiket x %63–72 / y %70–94, köşeleri kesik, tamamen boş; kılıf çizilmemiş; gerçek alfa.
+Kullanım: tema kurulunca sarkaç mili kuşgözü → açılışın ilk vuruşunda sallanır, kapalı sayfada çok hafif nefes salınımı; home imzasında küçük.
+
+#### W10 Birinci sınıf bilet kartı (boş)
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/card_small.png` · 1000×1400 · **Şeffaf zemin**
+
+```
+A flat portrait first-class railway ticket card, alone, seen straight on, on a fully transparent background: the heavy ivory card of ticket_paper.png (#F3EBD9) spanning x 7–93% and y 6–94% of the canvas, its four corners clipped with small concave (inward-rounded) cuts like a classic ticket; a fine brass-foil double border (#B8914B, a crisp metallic shine) inset about 5% from the edge; a small brass-foil art-deco fan (sunburst) ornament at the top centre inside the border, about 20% of the card's width; at 80% of the card's height a horizontal perforated tear line (a neat row of tiny round perforation holes, truly transparent) separating a lower stub, and in the stub, left of centre, one round punched hole about 5% of the card width, truly transparent. Apart from these, the card is COMPLETELY EMPTY paper (the website sets the names, date and venue there in HTML). A hair-fine contact shade on the card's own edge only. Warm lamplight from the top-left. No photo, no flowers, no printing. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: dikey bilet, içe yuvarlak kesik köşeler, pirinç folyo çift bordür, üst ortada küçük yelpaze süsü; %80'de delikli yırtma çizgisi, koçanda zımba deliği (şeffaf); başka her yer boş; gerçek alfa.
+Kullanım: tema kurulunca kılıfın içinde 90° yan yatar → açılışta sağa kayarak çıkar, dikleşir, ortaya gelir; home kartı (isimler, tarih, mekân HTML); RSVP gönderilince koçandaki zımba deliğinden pul düşer.
+
+#### W11 Vagon penceresi — portre (home)
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/portrait_frame.png` · 1000×1250 · **Şeffaf zemin**
+
+```
+A luxury sleeper-carriage window frame, alone, seen straight on, on a fully transparent background: a deep French-polished mahogany surround (#4A2618 with rich warm grain and a glossy sheen) with softly rounded outer corners, lined on its inner edge by a slim polished brass bead (#B8914B, warm highlights toward #D8BD84) and with four small brass screw-heads near its corners; the frame's outer edge spans about x 6–94% and y 6–94% of the canvas. In the middle a portrait photo window exactly 760 px wide and 950 px tall (4:5), its top-left corner at x 120 px, y 150 px, filled with flat pure green #00FF00 (no texture, no shading, nothing over it, its corners rounded like a carriage window with a radius of about 40 px). The frame is a little deeper at the bottom (a narrow brass-edged sill). Warm lamplight from the top-left. No glass, no reflection, no curtain and no blind over the window, no handle. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: pencere düz `#00FF00`, ~760×950 (4:5), sol üst ~(120, 150), yuvarlak köşe; maun + pirinç çerçeve; pencerede cam/perde yok; gerçek alfa.
+Kullanım: tema kurulunca pencere ölçülür ve şeffaf yapılır → home bilet kartının üstündeki portre ve imza öncesi tanıtım.
+
+#### W12 Sürgülü vagon penceresi (story çerçevesi)
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/story_frame.png` · 1000×1400 · **Şeffaf zemin**
+
+```
+A sliding sash window of a 1930s sleeper carriage, alone, seen straight on, on a fully transparent background: a French-polished mahogany frame (#4A2618, warm glossy grain) with softly rounded outer corners and a slim polished brass inner bead, spanning about x 6–94% and y 6–94% of the canvas; across the top, above the window and not covering it, a short rolled-up bottle-green leather window blind (#1E3A2C) held by two small brass clips; below the window, on the lower frame rail, a small polished brass sash latch and a short loop of brown leather pull strap. In the middle a portrait photo window exactly 720 px wide and 960 px tall (3:4), its top-left corner at x 140 px, y 220 px, filled with flat pure green #00FF00 (no texture, no shading, nothing over it, corners rounded with a radius of about 36 px). Warm lamplight from the top-left. No glass, no reflection, no raindrops, no curtain over the window. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: pencere düz `#00FF00`, ~720×960 (3:4), sol üst ~(140, 220); üstte sarılı yeşil deri perde pencereye binmiyor; altta pirinç mandal + deri kayış; gerçek alfa.
+Kullanım: tema kurulunca pencere ölçülür ve şeffaf yapılır → story'deki üç an (sol–sağ–sol): kaydırırken foto camın ardında manzara gibi yana akar, perde açılışta CSS maskeyle yukarı çekilmiş gibi açılır; home hikâye tanıtımı.
+
+#### W13 Gözlem vagonu panorama penceresi (mekân)
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/venue_frame.png` · 1600×1100 · **Şeffaf zemin**
+
+```
+A wide panoramic observation-carriage window frame, alone, seen straight on, on a fully transparent background: a French-polished mahogany frame (#4A2618, warm glossy grain) with gently rounded outer corners, an inner polished brass bead (#B8914B, warm highlights toward #D8BD84), small brass screw-heads evenly spaced along it, and a slim brass-edged sill along the bottom; the frame's outer edge spans about x 6–94% and y 6–94% of the canvas. In the middle a landscape photo window exactly 1320 px wide and 880 px tall (3:2), its top-left corner at x 140 px, y 100 px, filled with flat pure green #00FF00 (no texture, no shading, nothing over it, corners rounded with a radius of about 40 px). No mullion or bar across the window. Warm lamplight from the top-left. No glass, no reflection, no curtain. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: pencere düz `#00FF00`, ~1320×880 (3:2), sol üst ~(140, 100); ortada kayıt/çubuk yok; maun + pirinç; gerçek alfa.
+Kullanım: tema kurulunca pencere ölçülür ve şeffaf yapılır → details'te son durak (mekân fotoğrafı), foto soldan sağa "trenden görülen manzara" gibi kayarak yerleşir.
+
+#### W14 Köşe süsü (pirinç köşe + kurutulmuş çiçek)
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/corner_spray.png` · 1200×1000 · **Şeffaf zemin**
+
+```
+A restrained, elegant corner ornament growing out from near the top-left corner toward the centre, alone, on a fully transparent background, photorealistic: a slim polished brass art-deco corner bracket (two straight arms meeting at a right angle in the top-left, ending in small stepped deco tips, like the corner fitting of a carriage luggage rack; #B8914B with warm highlights) and, tucked along it, a small spray of dried ivory garden roses (two blooms and a bud, papery petals), a few sprigs of dried pale lavender and silvery eucalyptus, tied with a short route-red velvet ribbon (#8C2F39) whose tail curls downward. Calm and sparse, not a full bouquet. It reaches toward the top and left sides of the image but stays 6% inside them, and the bottom-right half of the canvas is completely empty. Warm lamplight from the top-left. No vase, no other colours, no glitter. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: sol üstte pirinç köşe + seyrek kurutulmuş çiçek ve bordo kurdele; sağ alt yarı boş; kenara değmiyor; gerçek alfa.
+Kullanım: tema kurulunca home kartının ve RSVP formunun köşeleri (sağda aynalanır), imzada küçük; kapak sayfasında en fazla bir köşe, asla metnin altında değil.
+
+#### W15 Pirinç bagaj rafı rayı (bölüm ayırıcı)
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/divider.png` · 1600×200 · **Şeffaf zemin**
+
+```
+A slim horizontal divider made of one polished brass luggage-rack rail, alone, on a fully transparent background: a thin round brass rod running horizontally across x 8–92% of the canvas at the vertical centre, held at each end by a small stepped art-deco brass bracket, and at its exact centre a tiny brass fan (sunburst) ornament; polished, softly aged brass (#B8914B, crisp warm highlights toward #D8BD84) in warm lamplight from the top-left. Fine and elegant. No ropes, no luggage, no net. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: yatay ince pirinç ray, iki uçta deco tutucu, ortada küçük yelpaze; iki uçta boşluk; gerçek alfa.
+Kullanım: tema kurulunca başlıkların altında bölüm ayırıcı (home davet ve yolculuk, details program, RSVP formu).
+
+#### W16 Pirinç cep saati (rakamsız kadran)
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/pocket_watch.png` · 800×800 · **Şeffaf zemin**
+
+```
+A single open antique brass pocket watch, alone, seen perfectly straight on, on a fully transparent background, the round case filling about 62% of the canvas a little above centre: a polished brass case (#B8914B, warm highlights toward #D8BD84) with a fluted bezel, a crown and bow at the top, and a short loop of fine brass chain curling down to the lower right; the dial is plain ivory enamel (#F3EBD9) with twelve tiny brass dots instead of numerals, a small inner track of fine dots and two slender blued-steel hands, no seconds dial. Absolutely no numerals, no Roman numerals, no brand name, no writing on the dial. Warm lamplight from the top-left, a soft reflection on the dome of the crystal. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+```
+Kontrol: tek cep saati; kadranda rakam/yazı yok (yalnız 12 nokta); kısa zincir; gerçek alfa.
+Kullanım: tema kurulunca home davet bandında geri sayımın yanında (akrep/yelkovan yok sayılır, hareket yalnız hafif ışıltı), imzada küçük.
+
+#### W17 Yazısız antika harita paneli (yolculuk / itinerary)
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/route_map.png` · 1600×1000 · opak
+
+```
+A wide antique hand-engraved map panel, full bleed, seen perfectly flat from above, of an INVENTED countryside (not a real country or region): warm ivory map paper (#F3EBD9) with fine sepia engraved hills shown by hachures, a winding river, a soft coastline along the bottom-right with tiny engraved waves, small forests drawn as clusters of tiny trees, a few tiny engraved villages as clusters of roofs, and a very faint hand-drawn railway line in thin sepia crossing from the left edge to the right edge in gentle curves; soft hand-coloured washes of pale bottle green on the forests and pale route red barely tinting the hills; the paper has a gentle warm tone variation and soft lamplight from the top-left. Absolutely no lettering, no place names, no numbers, no compass rose, no legend, no scale bar, no border text, no grid labels. Calm, low contrast, so a thin red route line and small labels drawn later by the website stay readable. No text, letters, numbers, monograms, logos or watermarks.
+```
+Kontrol: uydurma kır haritası, soluk ve sakin; hiçbir yazı/rakam/pusula/ölçek yok; tam taşma.
+Kullanım: tema kurulunca home "yolculuk" bölümü ve details "The itinerary" yapışkan haritası; rota çizgisi ve istasyon noktaları sitenin UI çizgisi (kaydırmayla çizilir).
+
+#### W18 Süzülen küçük nesneler — üç ayrı dosya
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/accent_1.png`, `accent_2.png`, `accent_3.png` · her biri 512×512 · **Şeffaf zemin**
+
+```
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, warm lamplight from the top-left. No other object. No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (real alpha channel — not white, not a checkerboard). Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. (Make three files, the same light and scale: 1 = one soft rounded puff of white locomotive steam, soft and billowing, its edges fading into true transparency (real partial alpha, not a hard outline), faintly warm-lit from the top-left; 2 = one tiny round punched-out disc of heavy ivory ticket card (#F3EBD9), seen slightly tilted, its cut edge showing the card's thickness, blank; 3 = one single dried ivory garden-rose bud with two dried leaves and a short sprig of pale lavender.)
+```
+Kontrol: her dosyada tek nesne; üç dosya farklı (buhar, zımba pulu, kurutulmuş gonca); buharın kenarı yumuşak gerçek alfa; kenara değmiyor.
+Kullanım: tema kurulunca açılışın sonunda (bilet dikleşirken) süzülen nesneler — buhar soldan sağa sürüklenir, pullar düşer, gonca döner; RSVP gönderilince zımba pulları.
+
+#### W19 Website hero + paylaşım görseli (og:image kaynağı)
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/parts/web_hero.png` · 1536×1024 · opak
+
+```
+Wide horizontal still life, photorealistic luxury product photography, warm lamplight from the top-left with crisp warm highlights on brass: the closed long bottle-green leather ticket sleeve of env_front.png with its right-end tab of flap.png, the brass turn-lock of lock_plate.png and lock_key.png in its locked horizontal position, and the blank ivory luggage tag of luggage_tag.png hanging on its red cord, lying slightly below the centre on a polished mahogany carriage table partly covered by the faint ivory antique map paper of page_ground.png; at the left a small spray of dried ivory roses and lavender tied with route-red velvet ribbon (as corner_spray.png); at the right the open brass pocket watch of pocket_watch.png with its blank numeral-free dial and a blank ivory first-class ticket (as card_small.png) peeking from under the sleeve; behind, softly out of focus, the warm glow of a carriage lamp and dark green upholstery. The top 20% of the image is calm and soft (only out-of-focus warm light). This image is cropped to 1200×630 for link previews: keep the whole sleeve and tag visible with at least 5% empty margin below the tag. No people. No text, letters, numbers, monograms, logos or watermarks (the tag, ticket and watch dial are blank).
+```
+Kontrol: kılıf + kilit + etiket bütün, etiketin altında ≥%5 boşluk; etiket/bilet/kadran boş; üst %20 sakin; yazı yok.
+Kullanım: tema kurulunca `og-1200x630.jpg` (alta hizalı kırpım) ve katalog kapağı yedeği.
+
+---
+
+## PAKET 2 — Örnek fotoğraflar (kurgu çift Amelia & Rafael; gerçek kişiye benzemesin) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor) — var, yeniden üretme
 
 Beş fotoğrafta **aynı kurgu çift**: her prompt aynı tanımı tekrarlar (GPT 2.1'i referans alır). Ünlü, model ya da
 tanınmış birine benzerlik yok; yüzler sıradan ve doğal. Hepsi opak JPG.
@@ -221,49 +293,43 @@ Landscape 3:2: a fictional grand historic station hall turned wedding venue at d
 
 ---
 
-## PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
+## PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm)
 
-> **Neden yeniden yazıldı (2026-10-20):** website 18–19 Ekim'de fildişi kâğıt + köşe çiçekleri görünümüne geçti; eski baskı prompt'ları eski görünümü (ve artık olmayan PAKET 5 parçalarını) istiyordu. `platform/lib/print/layouts.ts` `'orient-express-voyage'` bloğunun geçici kaynakları yeniden kurulumda `img/`'den silindi: panel şu an `public/print/orient-express-voyage/`'deki eski çıktıyı (eski görünüm) basıyor ve `build-print-assets` bu tema için yeniden koşamaz. Bu zeminler gelince:
-> Platform her yüz için **tek** zemin kullanır ve onu taşma payıyla `cover` olarak yayar (5×7 ve A5 aynı zeminden).
-> 1. `layouts.ts` `'orient-express-voyage'` bloğunda `sources` → bu zeminler (`print/invitation_front_5x7.png` + `print/invitation_back_5x7.png`), `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }`.
-> 2. Zemin artık **açık fildişi**: `ink` / `accent` koyu tonlara (temanın site metin rengi) alınır; açık mürekkep kalmaz.
-> 3. Metin kutuları (`front` / `back`) gerçek görselde ölçülür (G149; süsten ~%2 açıklık), `node --test tests/g149-print-layout.test.ts`.
-> 4. `cd platform && node scripts/build-print-assets.ts --theme orient-express-voyage`; `public/print/orient-express-voyage/`'deki artık kaynak olmayan eski dosyalar silinir; 5×7 ve A5 örnek PDF'ine göz atılır.
-> Ek görsel (her iki yüz için sohbetin başında): `platform/themes/orient-express-voyage/img/bg_scene-1024.webp`.
+> Panelden indirilen basılı davetiye (`platform/lib/print/layouts.ts`). `'orient-express-voyage'` bloğu **var** ama eski
+> zeminleri (`print/invitation_front_5x7.png`, `print/invitation_back_5x7.png`, 18–20 Ekim görünümü) gösteriyor; yeni
+> zeminler **yeni dosya adlarıyla** istenir, eski dosyalar tema yeniden kurulana kadar yerinde kalır.
+> **Ölçü:** **1575×2175 px** = 5×7 in + 1/8 in taşma, 300 ppi. Ayrı A5 dosyası istenmez: A5 + 3 mm taşma (154×216 mm,
+> oran 0,713) aynı sayfadan yanlardan ~%0,8 kırpılarak basılır (~260 ppi). Bu yüzden önemli hiçbir şey yan kenarların
+> %8'ine girmez.
+> **Yazı alanı:** ön yüzde yükseklikte %19–%91 × genişlikte %10–%90 **tamamen boş** (isimler, tarih, mekân); arka yüzde
+> %13'ün altı, genişlikte %9–%91 boş (program + QR; QR'ı GPT çizmez, `tools/make_qr.py` gerçek URL'den üretir).
+> Süsleme yalnız üst ve alt bantlarda.
+>
+> **Gelince (elle, tek blok; otomatik değil — G149: kutular gerçek görselde ölçülür):**
+> 1. Tema yeniden kurulunca (G425) `layouts.ts` `'orient-express-voyage'` bloğunda `sources` → `{ front:
+>    'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' }`; `composed` aynı kalır (`{ front: { bg:
+>    cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }`).
+> 2. `front`/`back` kutularını görselde ölç (süslemenin ~%2 dışında kalsın; `tests/g149-print-layout.test.ts`).
+> 3. `cd platform && node scripts/build-print-assets.ts --theme orient-express-voyage` ve `node scripts/print-sample.ts
+>    --theme orient-express-voyage --invite 5x7 --bleed` + `--invite a5 --bleed` ile iki boyutu göz kontrolü.
 
-#### P6.1 Ön yüz
-**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/print/invitation_front_5x7.png` · 1575×2175 px (300 ppi), opak
-
+#### P1 — Ön yüz
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/print/invitation_front_r_5x7.png` · 1575×2175 · opak
 ```
-A full-bleed printable wedding invitation ground for the "Orient Express Voyage" design, front side, portrait, seen perfectly flat and straight on, 1575 × 2175 px at 300 ppi (it is trimmed later). Match the attached website background (bg_scene-1024.webp) exactly in style: the same warm ivory, softly textured stationery paper running edge to edge and the same deep forest green, warm parchment, champagne gold, ivory roses, delicate antique train travel map details and brass ornament, in the same photorealistic stationery-photography finish with soft light from the top-left. Place the decoration ONLY in two places: an abundant arrangement gathered at the top-left corner and trailing along the top edge, staying entirely within the top 16% of the height, and a smaller matching arrangement gathered at the bottom-right corner, staying entirely within the bottom 14% of the height. A very fine antique-gold foil hairline frame inset about 6% from every edge. Keep every ornament at least 4% inside the image edges. The whole rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm ivory paper (the names, date and venue are printed there in dark ink): no petal, leaf, line, shadow or stain in it. No envelope, no card, no frame object, no people. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575 × 2175 px.
+The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the heavy ivory ticket card of ticket_paper.png (#F3EBD9). Across the top, between 9% and 91% of the width, an art-deco brass-foil header (#B8914B, crisp metallic shine): a small fan (sunburst) ornament at the centre with fine double rules running out to both sides and ending in small stepped deco tips, and at each end of the rules a tiny sprig of dried ivory rose and lavender; nothing in this top band reaches lower than 17% of the height. Along the bottom, between 93% and 96% of the height and from 14% to 86% of the width, a fine brass-foil rule with a neat row of tiny perforation dots beneath it, like the tear line of a ticket. A hair-fine brass-foil double frame line runs around the sheet about 4% inside the trim (inside the 8% side margins it is the only element, and it never crosses the empty area). The rectangle from 19% to 91% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm card (the names, date and venue are set there): no ornament, no line, no petal, no shadow, no stain in it. Warm lamplight from the top-left. Only ivory, brass and a touch of route red (#8C2F39) in the rose ribbon. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
 ```
-Kontrol: tam taşma fildişi kâğıt (site zeminiyle aynı); çiçekler yalnız üst %16 (sol üst) ve alt %14 (sağ alt); %18–84 yükseklik × %10–90 genişlik tamamen boş; ince altın çerçeve; yazı yok; 1575×2175.
+Kontrol: tam taşma; %19–%91 × %10–%90 tamamen boş; deco başlık yalnız üstte (%17'nin üstünde), delikli çizgi yalnız altta; çerçeve çizgisi boş alana girmiyor; yazı/QR yok.
 
-#### P6.2 Arka yüz
-**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/print/invitation_back_5x7.png` · 1575×2175 px (300 ppi), opak
-
+#### P2 — Arka yüz
+**Kaydet:** `collections/25_Orient_Express_Voyage/assets/gpt/print/invitation_back_r_5x7.png` · 1575×2175 · opak
 ```
-The back side of the same "Orient Express Voyage" invitation (give invitation_front_5x7.png as the reference image): portrait, full bleed, perfectly flat, 1575 × 2175 px at 300 ppi, the same warm ivory stationery paper edge to edge and the same very fine antique-gold foil hairline frame inset about 6% from every edge. Decoration ONLY a slim spray of the same flowers and foliage centred along the top edge, staying entirely within the top 11% of the height and at least 4% inside the image edges. Everything from 13% to 92% of the height and from 10% to 90% of the width is COMPLETELY EMPTY paper for the schedule, the details and a QR code: no petal, line, shadow or stain. Same style, colors and light. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1575 × 2175 px.
+The back of the same printed wedding invitation, full bleed, portrait 5.25:7.25, perfectly flat: the same heavy ivory ticket card, only a small brass-foil art-deco fan ornament with short double rules at the top centre (between 32% and 68% of the width), its lowest point staying above 11% of the height. The whole area below 13% of the height, from 9% to 91% of the width, is COMPLETELY EMPTY card (a schedule and a QR code are set there): no ornament, no line, no shadow, no stain. No ornament within 8% of the left and right edges. No QR code. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
 ```
-Kontrol: ön yüzle aynı kâğıt ve çerçeve; çiçek yalnız üst %11'de ince dal; %13–92 × %10–90 boş; yazı yok; 1575×2175.
+Kontrol: ön yüzle aynı karton; yalnız üst ortada küçük yelpaze süsü (%11'in üstünde); %13'ün altı boş; yazı/QR yok.
 
 ---
 
-## Kontrol (Claude, parçalar gelince) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
-
-> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
-1. `python3 platform/themes/orient-express-voyage/build_images.py` → `manifest.json` `"interim": []`, `checks.green` temiz
-   (#00FF00 kalmadı), tema klasörü ≤ 3 MB.
-2. `site.css` `/* stage:begin … stage:end */` bloğu build tarafından yazıldı mı bak (`git diff site.css`): kayış, bilet,
-   bilet penceresi, vagon camı ve çerçeve oranı manifestten gelir; elle eşitleme yok.
-3. `content.demo.json` (koleksiyon + tema kopyası) `media` alanları PAKET 2 fotoğraflarına bağlanabilir (Nocturne gibi tema
-   içi örnek) — ya da theme-check'in PAKET 2 tohumlamasıyla yetinilir.
-4. `cd platform && NODE_PATH=/opt/node22/lib/node_modules node scripts/theme-check.cjs --theme orient-express-voyage --stress
-   --compare none` 0 hata; 390 px ekran görüntülerine gözle bakılır; sonra satış kararı (`coming` → `live`).
-
----
-
-## PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
+## PAKET 3 — Etsy ilan sahneleri (görev G175) — GEÇERSİZ (2026-10-22: yeniden tasarım; tema kurulunca yeniden yazılacak)
 
 > Yeni (2026-10-14): kullanıcı ilan görsellerinin çok daha etkileyici ve profesyonel olmasını istedi. Bu sahneler ilan
 > görsellerinin zeminidir. Ekranlar **düz #00FF00**; Claude gerçek site ekranlarını perspektifle oraya yerleştirir

@@ -1,158 +1,245 @@
-# GPT görsel istekleri — Tasarım 31 · Sky Lantern Festival
+# GPT görsel istekleri — Tasarım 31 · Sky Lantern Festival (yeniden tasarım, 2026-10-22)
 
-> **Instructions for GPT:** This design ("Sky Lantern Festival") was redesigned on 2026-10-18/19: its website is warm ivory stationery paper with abundant photorealistic flowers in the corners, opened from a themed cover object. The old website parts (PAKET 5) are NO LONGER needed — do not generate them. Generate PAKET 3 (the Etsy listing scenes) and PAKET 6 (the printed invitation grounds) in ONE chat; PAKET 2 (sample photos) is optional and comes last. Before the first image, attach these two images from the repository as the style reference of every image: `platform/themes/sky-lantern-festival/img/bg_scene-1024.webp` (the website background: paper, flowers, colors, light) and `platform/themes/sky-lantern-festival/img/v3-closed-880.webp` (the design's closed cover object). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". No text, letters, numbers, logos, monograms or watermarks in any image.
+> **Instructions for GPT:** This design was completely redesigned on 2026-10-22: generate PAKET 5R (website layers) first, in order and in ONE chat, then PAKET 6R (printable invitation). PAKET 2 (sample photos) ALREADY EXISTS — do not regenerate it. Sections marked GEÇERSİZ are not wanted. Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, characters, symbols, names, dates, initials, monograms, logos, brand marks, QR codes or watermarks in any image** — also never on a lantern, the envelope, the card or the panels (the lanterns are plain, undecorated rice paper). **Culturally neutral:** no temple, pagoda, dragon, costume, crowd, script or symbol of any country, festival or religion. **No fire:** a lantern is lit only by a warm glow inside its own paper — no flame visible, no smoke, no sparks. Give W1 `dusk_ground.png`, W3 `rice_paper.png`, W4 `env_back.png` and W8 `lantern_unlit.png` as the style reference of every later part: the same hand dip-dyed washi in a dusk gradient (dusk violet → dusky rose → lantern amber) with visible long fibres, the same warm ivory rice paper, the same plain rice-paper sky lantern with fine bamboo ribs, the same soft last daylight from the top-left. Parts drawn on the same envelope canvas (W4, W5, W6, W8, W9, W10) keep the envelope in exactly the same box.
 
-Bu dosya tasarım 31'in **bütün görsel parçalarının** tek kaynağıdır (G170). Tasarım `tools/katalog.py` `EK_TEMALAR`'da
-(eksenler + hareket imzası) kayıtlı, üreteçlere girmediği için dosya elle yazıldı. Tema (`platform/themes/sky-lantern-festival/`)
-bu parçalar gelmeden kuruldu: `build_images.py` eksik her parça için repodaki başka GPT görsellerinden **geçici** bir katman
-kesiyor (02'nin suluboya yıkamasından satır satır tonlanmış alacakaranlık göğü ve sayfa zemini, 18'in pamuk kâğıdından
-fener/uzak fener/kart tonları; çizim yok, K21). Betiğin GPT kolu hazır — her parça dosyası `parts/` altına konduğu anda
-(parça parça) kullanılır, sayfalar aynı dosya adlarını alır, ölçülen pencere yüzdeleri `img/manifest.json`'a ve `site.css`
-sonundaki üretilen `@gpt-layers` bloğuna yazılır (elle düzenlenmez). Yalnız GPT'yle var olan katmanlar (avuçlar, yıldız
-tozu, ayırıcı, pirinç kâğıdı paspartu, yatay çerçeve) o blok açana kadar gizlidir. Tema `live` olmadan önce göz
-kontrolünden geçer (bkz. en alttaki "Parçalar gelince").
+Bu dosya tasarım 31'in **bütün görsel parçalarının** tek kaynağıdır (yeniden tasarım: `docs/35_22_32_YENIDEN_TASARIM.md`
+§3–§4; görev G231). Eski PAKET 5 (W2.x, avuçlar + fener) ve Codex `envelope-v3` kapağı geçersiz; eski PAKET 6 bölümü
+kaldırıldı (git geçmişinde). Platform teması (`platform/themes/sky-lantern-festival/`) bu parçalarla **39 pilotunun
+yapısıyla baştan kurulacak** (G431, `docs/34_TEMA_HATTI_40_48.md`); her parçanın nasıl kullanılacağı "Kullanım"
+satırlarındadır, gelmeyen parçanın yerine çizilmiş yedek konmaz (K21). Kişisel alanlar (isimler, tarih, baş harfler, mekân)
+HTML'dir, hiçbir görsele pişirilmez. QR'ı GPT çizmez (`tools/make_qr.py`).
 
 ## Nereye?
 - Repo `muzaffergrl/davetiye-maker`; klasör `collections/31_Sky_Lantern_Festival/assets/gpt/` altındaki `parts/`
-  (PAKET 5), `photos/` (PAKET 2) ve `print/` (PAKET 6). Repoya yazamıyorsan dur ve bunu çıktında açıkça söyle; kullanıcıya
-  yükleme işi verme.
+  (PAKET 5R) ve `print/` (PAKET 6R). `photos/` (PAKET 2) dolu — dokunma. Repoya yazamıyorsan dur ve bunu çıktında açıkça
+  söyle; kullanıcıya yükleme işi verme.
+- Sonra (Claude): `python3 tools/kit_check.py collections/31_Sky_Lantern_Festival --paket 5` (oran, gerçek alfa, kenar
+  payı, foto penceresi) + göz kontrolü. Tema yeniden kurulunca `python3 platform/themes/sky-lantern-festival/build_images.py`
+  ve `python3 tools/gpt_kuru_deneme.py --tema sky-lantern-festival --sekil
+  collections/31_Sky_Lantern_Festival/assets/gpt/kuru_sekil.json` (prova). PAKET 6R için aşağıdaki "Gelince" adımı.
 
 ## Stil ve renk
-- Teknik: **soft watercolor with glowing light** — wet-on-wet watercolor washes for the sky, delicate rice-paper texture
-  for the lanterns, light painted as warm glow (the lit paper glows from inside). Romantic, airy, elegant. Not a photo,
-  not flat vector, not cartoon, not anime.
-- Renkler: dusk violet `#2B1F45` · deep `#1B1430` · violet `#4A3466` · dusky rose `#E7B4A6` · lantern amber `#F2A65A` ·
-  glow `#FFD08A` · rice paper `#F7EEDD` · ink `#3B2A4A`.
-- Işık: fenerin kendi sıcak ışığı (içeriden) ve ufuktaki son gün ışığı; diğer her şey alacakaranlık. Bütün parçalarda aynı.
-- **Kültürel olarak nötr ve zarif:** sade, yuvarlak hatlı beyaz/fildişi pirinç kâğıdı dilek feneri (ince bambu iskelet
-  hafifçe seçilir). Kostüm, festival kalabalığı, tapınak, pagoda, ejderha, yazı/karakter, belirli bir ülkenin simgesi yok.
-  27 Riad Lantern Nights (pirinç delikli metal fener, kapı, çini), 26 Kintsugi (çivit washi, altın damar), 19 Midnight Garden
-  (siyah, koyu güller) ya da 29 Celestial Observatory (pirinç gözlemevi, yıldız haritası) gibi görünmesin.
-- Gerçek bir kişiye, mekâna, markaya veya başka bir satıcının tasarımına benzemesin.
+- Teknik: **photorealistic paper, silk and gold product photography with warm light** — real hand dip-dyed washi with long
+  visible kozo fibres and a soft deckle, real warm ivory rice paper, real fine split-bamboo ribs, real amber silk thread,
+  real polished warm gold, real garden roses; a lit lantern glows softly from inside its own paper. An open-air wedding at
+  dusk: romantic, airy, rich and calm; classic, broad appeal. Not watercolor clip-art, not flat vector, not cartoon, not
+  anime, not neon, not a festival poster.
+- Renkler (yalnız bunlar): dusk violet `#2B1F45` · deep `#1B1430` · violet `#4A3466` · dusky rose `#E7B4A6` · lantern
+  amber `#F2A65A` · glow `#FFD08A` · rice paper `#F7EEDD` · ink `#3B2A4A`; metal yalnız sıcak altın varak (çivi, pullar,
+  ince çizgiler).
+- Işık: alacakaranlığın yumuşak son ışığı **sol üstten**, bütün parçalarda aynı. Yanık fener ışığı **yalnız kendi kâğıdının
+  içinde** — kâğıdın dışında hâle, ışın, parıltı yok (hâleyi site ekler). Şeffaf parçalarda gerçek alfa, nesne her kenardan
+  en az %6 içeride, nesnenin dışında gölge/hâle yok.
+- Fener: sade, yuvarlak omuzlu, uzunca silindir gövdeli pirinç kâğıdı **gökyüzü feneri**; ince dikey bambu kaburgalar kâğıdın
+  içinden hafifçe seçilir, altta açık ağız ve ince tel halka, desen/yazı/karakter yok. Alev görünmez.
+- Foto penceresi (`#00FF00`) yalnız W12 `lantern_frame`, W13 `paper_panel`, W14 `wide_panel`'da; diğer parçalarda yeşil yok.
+- Gerçek bir kişiye, mekâna, markaya, festivale ya da başka bir satıcının tasarımına benzemesin. **27 Riad'dan ayrı:** pirinç
+  delikli metal fener, teal, safran, zellige, kemer yok. **29 Celestial'dan ayrı:** pirinç alet, yıldız haritası, gravür yok.
+  **26 Kintsugi'den ayrı:** çivit, altın damar, origami katı yok. **39'dan ayrı:** U kapak, gümüş, şerit yok.
+
+## Zarf geometrisi (W4–W6, W8–W10 ve W19 buna göre)
+Tuval **1080×1500** (dikey). Zarf kutusu **x %7–93, y %6–94** (zarf ≈0,7:1). Altı katman **aynı tuvalde, aynı kutuda**
+çizilir: W4 arka (astar), W5 ön cep (altın çivi dahil), W6 kapak, W10 ipek iplik, W8 sönük fener, W9 yanık fener; Claude
+her birini kendi kutusuna kırpar ve arka katmanın kutusuna göre yerleştirir (`docs/34` §2.2). Tuval yüzdeleri:
+- **ön cep (W5):** tam genişlik; üst kenarı yanlarda **%44**'te, ortada **%49**'a inen sığ yay; alt kenar %94. Cebin
+  üstünde, ortada **altın kubbe çivi**: merkez **(%50, %87)**, çapı tuval eninin **%4**'ü.
+- **fener karnı kapak (W6):** üst katlama çizgisi %6; serbest kenarı yanlara **%47**'de değer, dış beşte birlik kısımda
+  neredeyse yatay gider, sonra tek, dolgun, yuvarlak bir **karın kavisiyle** ortada **%62**'ye iner (V değil, sivri değil,
+  tarak değil); kenar elle yırtılmış washi gibi **tüylü lifli**. Kapak cebin üst kenarını her yerde örter.
+- **fener (W8 sönük / W9 yanık — aynı fener, aynı yer):** kutu **x %36–64, y %44–80**; dik durur, kapağın ucunu (%62)
+  örter; alttaki açık ağzın tel halkası **y %77–80**.
+- **ipek iplik (W10):** fenerin tel halkasının ortasından (%50, %80) çiviye (%50, %87) iner, çiviye iki tur dolanır ve küçük
+  bir fiyonkla bağlanır; fiyonk kuyrukları yaklaşık **(%45, %91)** ve **(%55, %91,5)**'te biter.
+- **açık kapağın iç yüzü (W7)** ayrı tuvalde (1080×700): aynı kapak çizgisi dikey aynalanmış, oran korunur → tuval
+  **x %18,5–81,5**, katlama kenarı altta **%94**, yan köşeler **%30**, karın tepesi **%6**.
+- Kat sırası (alttan üste): W4 arka → kart (W11) → W5 cep → W6 kapak → W10 iplik → W8 sönük fener → W9 yanık fener
+  (başta saydam).
+
+Açılış: dokununca W9 yanık fener W8'in üstüne yavaşça belirir (içeriden ışıma, site sıcak hâleyi ekler) → ipek fiyonk
+gevşer, iplik fenerle birlikte yukarı kayıp söner → fener hafif sağ-sol salınımla yükselir ve ekranın üstünden çıkar
+(home'da küçük "ay" olarak asılı kalır); arka planda üç uzak fener (W15) farklı hızlarda yükselir → kapak üst katlama
+çizgisinde **3B** açılır, 90°'de iç yüz W7 devralır (gül-kehribar washi + altın pullar) → pirinç kâğıdı kart (W11) cepten
+yükselir, cep dudağını geçince öne gelir → dilek tohumları ve altın pullar (W18) süzülür → home. Toplam ≤ 5,5 s; açılışta
+ekranda düğme yok.
 
 ---
 
-## PAKET 5 — website katmanları (YAZI YOK) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+## PAKET 5R — Website katmanları (YAZI YOK; 2026-10-22 yeniden tasarım)
 
-> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
-
-Tek görselde tek nesne, düşen gölge yok, şeffaflar gerçek alfa (beyaz ya da dama tahtası değil).
-**W2.1 avuçlar, W2.2 sönük fener ve W2.3 yanan fener aynı 1024×1536 tuvalde, aynı konumda** çizilir: üst üste konunca fener
-avuçların içinde durur; yanan fener sönüğün tam üstüne oturur (site önce sönüğü gösterir, dokununca yananı üstüne açar,
-sonra fener yükselirken avuçlar aşağı iner). Ortak ölçü (tuval yüzdesi): fener x %31–69, y %27–67 (ortası y %47 — sitenin
-ışık hâlesi oraya ortalanır); avuçlar x %14–86, y %58–100 (bilekler alt kenardan çıkar; parmaklar fenerin yalnız en alt
-~%10'unu sarar). `build_images.py` üç tuvali olduğu gibi (kesmeden) 800×1200'e ölçekler ve sahnenin üstüne tam oturtur.
-
-#### W2.1 Avuçlar (fenersiz)
-**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/hands.png` · 1024×1536 · **Şeffaf zemin**
+#### W1 Alacakaranlık dip-dye washi (kapak ve sayfa zemini, tam boy)
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/dusk_ground.png` · 1080×2340 · opak
 
 ```
-Two gently cupped hands seen from the front and slightly below, held together and raised as if offering something up to the sky, alone on a transparent background, soft watercolor illustration: graceful, elegant hands in warm backlight, painted in soft muted rose-beige and violet shadow tones so that they read as anyone's hands (no rings, no nail polish, no sleeves beyond the wrists, no jewellery), the fingertips and the inner palms lit warm amber from above as if by a glowing lantern. The hands sit in the lower part of the image: from 14% to 86% of the image width and from 58% of the image height down to the bottom edge (the wrists leave the image at the bottom edge). The space ABOVE the cupped fingers — from 27% to 67% of the image height, from 31% to 69% of the width — is EMPTY and transparent: a paper lantern will sit there, its lowest part resting in the cup of the fingers. Front view, symmetrical, not cropped at the sides. No lantern, no object in the hands, no cast shadow, no glow or halo outside the hands' outline. No text. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+A tall, perfectly flat, front-facing full-bleed sheet of handmade washi paper, hand dip-dyed in a soft vertical dusk gradient, photographed evenly: the top third deep dusk violet (from #1B1430 at the very top to #2B1F45), melting through violet (#4A3466) in the middle into a soft dusky rose band (#E7B4A6) at about 72% of the height, and a warm lantern-amber glow (#F2A65A to a pale #FFD08A) along the bottom 10%. The colour transitions are soft, natural dye bleeds with gentle cloudy variation, never banded and never a digital gradient. Long, fine kozo fibres are visible throughout the paper as faint lighter strands; in the upper violet part a very sparse scattering of tiny warm gold-leaf flecks catches the light. Very low contrast everywhere so light text reads on the top half and dark text reads on the bottom part. No horizon, no landscape, no moon, no stars drawn, no lanterns, no fold, no crease, no stain, no vignette, no shadow. The left and right edges must tile horizontally without a visible seam. No text, letters, numbers, characters, monograms, logos or watermarks.
 ```
-Kontrol: avuçlar alt kenardan giriyor, x %14–86, üstü %58; fenerin yeri boş; yüzük/oje/takı yok; ten tonu yumuşak, ışığa
-gömülü (herkesin eli gibi); gölge/hâle yok; gerçek alfa. (Yeri: açılış sayfasında fenerin önünde; dokununca açılıp aşağı iner.)
+Kontrol: tam boy; üst menekşe → orta gül → alt kehribar, bantsız yumuşak geçiş; lifler görünür, seyrek altın pul yalnız üstte; manzara/fener/yıldız çizimi yok; sol-sağ kenar dikişsiz.
+Kullanım: tema kurulunca kapak sayfası ve bütün sayfaların üst zemini (`background-size: 100% auto`, üste hizalı); altında W2 devam eder. Açılışta hafif paralaks (uzak fenerlerden yavaş).
 
-#### W2.2 Sönük kâğıt fener
-**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/lantern_dark.png` · 1024×1536 · **Şeffaf zemin**
-
-```
-A single paper sky lantern, unlit, alone on a transparent background, soft watercolor with delicate rice-paper texture: a tall, softly rounded lantern of ivory rice paper (#F7EEDD) gently tinted dusky rose and violet by the evening light, slightly wider at the top than at the open bottom, with a fine, barely visible bamboo frame and a thin bamboo ring at the open bottom. It is placed exactly where the hands of hands.png will hold it: from 31% to 69% of the image width and from 27% to 67% of the image height (its centre at 47% of the height). Elegant and simple — no pattern, no symbols, no tassels, no writing on the paper. Front view, perfectly straight and symmetrical, not cropped. No hands, no flame visible, no cast shadow, no glow or halo outside its outline. No text. True transparent background PNG (real alpha channel — not white, not a checkerboard).
-```
-Kontrol: tek fener, x %31–69, y %27–67; desen/yazı/püskül yok; sönük (iç ışık yok); gölge/hâle yok; alfa. (Stil referansı:
-bundan sonraki her parça bu fenerle aynı kâğıt ve aynı suluboya.)
-
-#### W2.3 Yanan kâğıt fener (aynı fener, içeriden ışıyor)
-**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/lantern_lit.png` · 1024×1536 · **Şeffaf zemin**
+#### W2 Menekşe washi (uzun sayfaların devamı, dikişsiz)
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/dusk_tile.png` · 1024×1024 · opak, dikişsiz
 
 ```
-The same paper sky lantern as lantern_dark.png (give it as the reference image), on exactly the same canvas position and with exactly the same outline (from 31% to 69% of the image width, from 27% to 67% of the image height), now lit from inside by a small warm flame near its open bottom: the rice paper glows warm amber and honey gold (#F2A65A to #FFD08A), brightest in the lower middle and softer toward the top, the fine bamboo frame showing as slightly darker lines through the glowing paper. The glow stays INSIDE the lantern's outline — no halo, no light rays, no glow on the transparent background (the website adds the halo). No hands, no cast shadow. No text. True transparent background PNG.
+A seamless, tileable, perfectly flat top-down texture of the same handmade washi paper as dusk_ground.png in its deep dusk violet (#2B1F45, gently varying toward #1B1430 and #4A3466): long fine kozo fibres as faint lighter strands, a soft cloudy dye variation, a very sparse scattering of tiny warm gold-leaf flecks. Evenly lit by soft light from the top-left, very low contrast so light text reads everywhere. No fold, no crease, no stain, no vignette, no shadow, no pattern, no stars, no lanterns. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, characters, monograms, logos or watermarks.
 ```
-Kontrol: hattı W2.2 ile birebir aynı (üst üste konunca kaymıyor); ışık yalnız kâğıdın içinde; dışarıda hâle yok; alfa.
+Kontrol: dikişsiz (2×2 yan yana ek yeri yok); W1'in menekşe bölümüyle aynı kâğıt ve ton; sakin, açık renk yazı okunur.
+Kullanım: tema kurulunca W1'in altında uzun sayfaların (home, details, rsvp) ve geniş ekran kenarlarının zemini; W1'in alt kehribarından buna CSS geçişiyle bağlanır.
 
-#### W2.4 Alacakaranlık göğü (açılış sayfası ve ana sayfanın ilk ekranı)
-**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/sky_dusk.png` · 1080×1920 · opak
-
-```
-A vertical phone-screen background: a dusk sky painted in soft wet-on-wet watercolor that fills the whole canvas — deep violet (#2B1F45) at the top, melting through soft violet and dusky rose (#E7B4A6) in the middle to a warm amber glow (#F2A65A) along the horizon at the very bottom, with a few long, soft, translucent clouds lit rose and gold from below, and the faintest first stars near the top. A low, calm line of distant hills in soft violet silhouette along the bottom 8% only. No lanterns, no people, no buildings, no moon, no text. The whole central area stays calm and open (names and an invitation card are placed over it). Soft, romantic, luminous.
-```
-Kontrol: üst mor → orta pembe → alt kehribar; orta sakin; fener/kişi/yazı yok; tepeler yalnız en alt bantta. (Yeri: açılış
-sayfasının arka planı — fener yükselirken yavaşça aşağı kayar, paralaks — ve ana sayfanın ilk ekranı; 16:9 kırpımı program
-bandının zemini.)
-
-#### W2.5 Yıldız tozu (paralaks katmanı)
-**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/star_dust.png` · 1080×1920 · **Şeffaf zemin**
+#### W3 Pirinç kâğıdı (kartlar, paneller, form; dikişsiz)
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/rice_paper.png` · 1536×1536 · opak, dikişsiz
 
 ```
-A transparent overlay of scattered star dust for a dusk sky: many tiny soft pinpoints of warm white and pale gold light of different sizes, a few slightly larger soft sparkles, denser in the upper third of the image and fading out toward the bottom, with a gentle sweep of fine glittering dust crossing diagonally from the upper left. Painted softly, like flecks of white gouache flicked onto watercolor. Nothing else — no sky color, no clouds, no lanterns, no moon, no text. Most of the image stays empty and transparent. True transparent background PNG (real alpha channel).
+A seamless, tileable, perfectly flat top-down texture of fine handmade rice paper in a warm ivory (#F7EEDD): soft visible long fibres and a few delicate inclusions of slightly lighter fibre, a gentle translucent cloudiness, an even tone with only the gentlest variation. Evenly lit by soft light from the top-left, no fold, no crease, no deckle edge, no stain, no shadow, no vignette, no printing, no pattern. Calm enough for fine dark ink text to read on it everywhere. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers, characters, monograms, logos or watermarks.
 ```
-Kontrol: yalnız ince yıldız noktaları; zemin şeffaf; üstte yoğun, altta seyrek; yazı yok. (Yeri: gök katmanının önünde; açılışta
-gökten daha hızlı kayar — iki katmanlı paralaks; ana sayfanın ilk ekranında da.)
+Kontrol: dikişsiz; sıcak fildişi `#F7EEDD` civarı; lifler hafif, leke/kat/desen yok; üstüne koyu yazı okunur.
+Kullanım: tema kurulunca home kartı, davet bandı, program ve RSVP formunun kâğıdı.
 
-#### W2.6 Uzaktaki küçük fener
-**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/lantern_far.png` · 1024×1024 · **Şeffaf zemin**
-
-```
-One small, distant paper sky lantern, lit and glowing warm amber from inside, alone on a transparent background, in the same watercolor and rice-paper style as lantern_lit.png: the same simple softly rounded shape, about two thirds as wide as it is tall (2:3), centred, filling about 60% of the image height. The glow stays inside its outline (no halo, no rays). No text. True transparent background PNG.
-```
-Kontrol: tek fener, oran ~2:3, ortalı; hâle yok; alfa. (Yeri: açılışta yükselen üç uzak fener, ana sayfada kaydırdıkça
-süzülen fenerler, fotoğrafların yanından yükselen küçük fenerler, programın her satırındaki fener, RSVP'de göğe bırakılan
-fener — site 72 ve 144 px keser; ışık hâlesini CSS ekler.)
-
-#### W2.7 Fenerin ışığında beliren küçük davet kartı (boş)
-**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/card_small.png` · 1024×1536 · **Şeffaf zemin**
+#### W4 Zarfın arkası (iç astar: alacakaranlık göğü)
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/env_back.png` · 1080×1500 · **Şeffaf zemin**
 
 ```
-A small portrait invitation card, alone: thick warm ivory rice paper (#F7EEDD) with visible soft fibres and a gently deckled edge, about 0.7 as wide as it is tall, with a very faint wash of dusky rose and amber light along its upper edge, as if lit by a lantern above it. In its upper half, horizontally centred, a portrait photo window about 4:5 with softly rounded corners, about half as wide as the card, its top about 8% of the card's height below the card's top edge, filled with flat pure green #00FF00 (no texture, no shading, crisp outline). Everything below the window — at least the lower 42% of the card — is blank, even ivory paper (no text, no ornament: names and date are added there by the website). Front view, perfectly straight, centered and not cropped, with generous empty margin all around. No cast shadow and no drop shadow. No glow outside the object's outline. No text, letters or numbers. True transparent background PNG (real alpha channel — not white, not a checkerboard).
+The back panel of an open portrait envelope, seen perfectly straight from the front, on a fully transparent background. The envelope occupies exactly x 7–93% and y 6–94% of the 1080×1500 canvas (a portrait rectangle, about 0.7:1, crisp straight edges, softly rounded corners). Its outer paper is the hand dip-dyed dusk washi of dusk_ground.png (violet at the top fading to dusky rose and a little amber at the bottom), visible only as a slim margin along the top and both sides. Inside, it is lined with a printed washi lining showing a soft hand-painted dusk sky: deep violet (#2B1F45) at the top, melting into dusky rose (#E7B4A6) and a glowing amber horizon (#F2A65A) low down, with a delicate scattering of tiny gold-leaf star flecks in the upper part, the fibres of the paper visible through the print; a very gentle shade toward the bottom where the front pocket will sit. No flap, no front pocket, no lantern, no thread, no card inside, no landscape, no moon, no drawn stars or symbols. Soft light from the top-left. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
 ```
-Kontrol: pencere düz #00FF00, kartın üst yarısında ortalı; pencerenin altı düz kâğıt; kenar yumuşak tırtıklı; alfa. (Claude:
-pencere şeffaf yapılır, portre kartın ARKASINA, ölçülen pencereye konur; pencere altındaki düz kâğıt `free_zone` olur,
-theme-check kart yazısını onunla denetler.)
+Kontrol: dikey panel x %7–93 · y %6–94; iç astar alacakaranlık göğü + seyrek altın pul, kenarlarda ince dip-dye pay; kapak/cep/fener yok; gerçek alfa.
+Kullanım: tema kurulunca `.env-back` — kapak açılınca kartın arkasında görünen gök astarı; açılıştan sonra astardaki altın pullara hafif ışık kıpırtısı (CSS maske).
 
-#### W2.8 Döşenebilir sayfa zemini
-**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/bg_tile.png` · 1024×1024 · opak · **dikişsiz**
-
-```
-A seamless, tileable texture of a deep evening sky in soft watercolor: dusk violet to deep night violet (#1B1430 to #3A2A5C), gentle wet-on-wet blooms and a fine paper grain, evenly lit with no vignette, no light spot, no stars, no clouds with hard edges and no pattern that shows when the tile repeats. Edges must match perfectly left-right and top-bottom. No text, no objects.
-```
-Kontrol: 2×2 yan yana konunca dikiş görünmüyor; ışık lekesi yok; açık renk yazı üstünde okunuyor.
-
-#### W2.9 Pirinç kâğıdı paspartu (story fotoğrafları)
-**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/frame_paper.png` · 1024×1536 · **Şeffaf zemin**
+#### W5 Zarfın ön cebi (altın çivi dahil)
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/env_front.png` · 1080×1500 · **Şeffaf zemin**
 
 ```
-A soft rice-paper photo mat, alone: a portrait sheet of ivory rice paper (#F7EEDD) with visible fibres and gently deckled edges, about 2:3 overall, its inside lit faintly amber from below as if a lantern were rising beneath it. A portrait window exactly 3:4, centred, about 72% of the mat's width, filled with flat pure green #00FF00 (no texture, no shading, crisp straight edges). Front view, perfectly straight, centered and not cropped, with generous empty margin. No cast shadow, no glow outside the outline. No text. True transparent background PNG.
+Only the front pocket of the same portrait dip-dyed washi envelope as env_back.png, on the same 1080×1500 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 7–93% and y 6–94% of the canvas; the pocket spans the full envelope width (x 7–93%) from its top edge down to the envelope's bottom edge at 94% of the canvas height. Its top edge is one soft, shallow arc: it starts at 44% of the canvas height at both side edges and dips gently to 49% at the horizontal centre, cut clean, the faint thickness of the handmade paper visible along the cut. The paper is the hand dip-dyed dusk washi of dusk_ground.png, continuing the gradient: soft violet-rose near the pocket's top edge deepening to dusky rose and a warm amber glow toward the bottom, long kozo fibres visible, the soft fold lines of the side and bottom flaps barely visible. On the pocket, at the horizontal centre, one small polished warm-gold domed stud (a round button-like rivet) centred at 50% of the width and 87% of the height, its diameter 4% of the canvas width, catching a crisp highlight from the top-left. Everything above the pocket's edge is completely transparent. No flap, no lantern, no thread, no card. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
 ```
-Kontrol: pencere 3:4 düz #00FF00; kâğıt kenarı ince; alfa. (Claude pencereyi şeffaf yapar ve ölçer; story ve home'daki üç
-fotoğraf paspartunun arkasına, pencereye oturur.)
+Kontrol: cep tam genişlik; üst kenarı yanlarda %44, ortada %49'a inen sığ yay; altın kubbe çivi (%50, %87), çap %4; üstü tamamen şeffaf; iplik/fener yok; gerçek alfa.
+Kullanım: tema kurulunca `.env-front` — kart bunun arkasından yükselir; çivi cebin parçası olarak yerinde kalır, ipek iplik (W10) çözülünce çıplak görünür.
 
-#### W2.10 Yatay çerçeve (mekân fotoğrafı)
-**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/frame_landscape.png` · 1536×1024 · **Şeffaf zemin**
-
-```
-A wide rice-paper photo mat in the same style as frame_paper.png, alone: a slim ivory rice-paper border with gently deckled outer edges, its opening exactly 16:9 and filled with flat pure green #00FF00 (no texture, no shading). Front view, perfectly straight, centered, not cropped, generous margin. No cast shadow, no glow outside the outline. No text. True transparent background PNG.
-```
-Kontrol: pencere 16:9 düz #00FF00; kenar ince; alfa. (Yeri: details'te mekân fotoğrafının paspartusu.)
-
-#### W2.11 Ayırıcı — yıldız tozu izi
-**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/divider.png` · 1536×512 · **Şeffaf zemin**
+#### W6 Fener karnı kapak (kapalı, dış yüz)
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/flap.png` · 1080×1500 · **Şeffaf zemin**
 
 ```
-A slim horizontal ornament, alone: a gentle trail of warm gold star dust drifting from left to right, with three tiny glowing paper lanterns rising along it at different heights (the middle one slightly larger), about 10 times wider than tall, centred, soft watercolor and gouache flecks. No shadow, no halo, no text. True transparent background PNG.
+Only the closed flap of the same portrait dip-dyed washi envelope, on the same 1080×1500 canvas and in exactly the same place, on a fully transparent background. The envelope occupies exactly x 7–93% and y 6–94% of the canvas; the flap spans its full width (x 7–93%), hinged along a softly rounded fold at the envelope's top edge (6% of the canvas height). Its free lower edge has the silhouette of the round belly of a paper lantern: it meets the two side edges at 47% of the canvas height, runs almost level along the outer fifth on each side, then swells downward in one full, generous, rounded curve to its lowest point at the horizontal centre at 62% of the canvas height (not a V, not a point, not scalloped, not a narrow U). Along this whole edge the paper is hand-torn: a soft feathered deckle where fine long kozo fibres stand out slightly beyond the edge, very delicate. The flap is the hand dip-dyed dusk washi of dusk_ground.png: deep dusk violet (#2B1F45) at the fold, melting into violet and a soft dusky rose glow toward its lower edge, long fibres visible, a very sparse scattering of tiny gold-leaf flecks near the fold. A whisper of contact shade on the flap itself just along its torn edge, soft light from the top-left. Everything below the flap's edge is completely transparent. No lantern, no thread, no stud, no seal, no card. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
 ```
-Kontrol: ince, yatay, ortalı; üç küçük fener; alfa. (Yeri: home davetinde isimlerle tarih arasında, details başlığının altında.)
+Kontrol: kapak tam genişlik; kenarı yanlarda %47, dış beşte birde neredeyse yatay, ortada dolgun yuvarlak karınla %62; tüylü yırtık lif kenar; menekşe → gül gradyan; altı şeffaf; gerçek alfa.
+Kullanım: tema kurulunca kapalı kapak; fener kalkınca üst katlama çizgisinde 3B açılır, 90°'de W7 iç yüz devralır.
 
-#### W2.12 Paylaşım görseli kaynağı
+#### W7 Kapağın iç yüzü (açıkken dik)
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/flap_in.png` · 1080×700 · **Şeffaf zemin**
+
+```
+The inside of the same lantern-belly envelope flap, alone, seen straight on as it stands upright when the envelope is open, on a fully transparent background: the outline of flap.png mirrored vertically. Its straight fold edge is at the BOTTOM, along 94% of the image height, spanning x 18.5–81.5% of the width; its two short straight sides rise to 30% of the image height; from there the edge runs almost level along the outer fifth on each side and then rises in one full, generous, rounded belly curve to its highest point at the horizontal centre at 6% of the image height, the whole edge hand-torn with a soft feathered deckle of fine fibres. The inside surface is a warm washi lining dip-dyed from a soft dusky rose (#E7B4A6) near the fold to a glowing lantern amber (#F2A65A) and pale glow (#FFD08A) toward the curved edge, with long fibres visible and a light scattering of tiny warm gold-leaf flecks, like the warm light inside a lantern. Soft light from the top-left. No lantern, no thread, no seal, no drawn stars. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+Kontrol: düz katlama kenarı altta (%94), yanlar %30'a, karın tepesi ortada %6; x %18,5–81,5; tüylü yırtık kenar; gül → kehribar washi + altın pullar; düz renk değil; gerçek alfa.
+Kullanım: tema kurulunca kapak açıldığında zarfın üstünde dik duran iç yüz (3B dönüşün arka yüzü; asla düz renk dolgu değil).
+
+#### W8 Sönük pirinç kâğıdı gökyüzü feneri (kapanış)
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/lantern_unlit.png` · 1080×1500 · **Şeffaf zemin**
+
+```
+On the same 1080×1500 canvas as env_back.png and flap.png, in exactly the same place (the envelope box is x 7–93% and y 6–94% of the canvas, but the envelope itself is NOT drawn here), only one small UNLIT paper sky lantern standing upright, on a fully transparent background, occupying exactly x 36–64% and y 44–80% of the canvas: a plain, undecorated lantern of warm ivory rice paper (#F7EEDD) with softly rounded shoulders at the top, a gently tapering tall cylindrical body, and an open round mouth at the bottom held by a thin dark wire ring (at 77–80% of the canvas height); fine vertical split-bamboo ribs show faintly through the translucent paper, the paper has a soft natural crinkle and visible fibres. It is NOT lit: the paper is in soft dusk light from the top-left with gentle shading on the right side, cool and quiet, no glow, no flame, no light inside. No string, no stud, no pattern, no decoration on the paper. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+Kontrol: tek sönük fener, kutu x %36–64 · y %44–80; yuvarlak omuz, silindir gövde, altta tel halka (%77–80); ışık/alev yok; desen/yazı yok; zarf çizilmemiş; gerçek alfa.
+Kullanım: tema kurulunca zarf tuvalinde kapanış katmanı (kapağın ucunu örter); açılışta W9 üstüne belirir, sonra ikisi birlikte yükselir.
+
+#### W9 Yanık fener (aynı fener, içeriden ışıyor)
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/lantern_lit.png` · 1080×1500 · **Şeffaf zemin**
+
+```
+The identical paper sky lantern of lantern_unlit.png, on the same 1080×1500 canvas, in exactly the same position and size (x 36–64% and y 44–80% of the canvas), with exactly the same silhouette, shoulders, bamboo ribs and wire ring, on a fully transparent background — but now LIT from inside: the rice paper glows warmly from within, brightest pale glow (#FFD08A) in the lower middle of the body, deepening to lantern amber (#F2A65A) toward the shoulders and the edges, the fine bamboo ribs showing as soft darker lines against the light, the paper's fibres glowing. The light stays entirely INSIDE the lantern's own paper: no flame visible, no smoke, no rays, no sparks, no glow, halo or light spill outside the lantern's outline (the website adds the glow). No string, no stud, no pattern, no decoration. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+Kontrol: W8 ile birebir aynı yer, boy ve silüet; içeriden sıcak ışıma; dışında hâle/ışın yok; alev yok; gerçek alfa.
+Kullanım: tema kurulunca W8'in tam üstünde, başta saydam; dokununca belirir (site sıcak hâleyi ve nefes alan ışımayı CSS ile ekler) → fener yükselir; home imzasında ve RSVP gönderiminde de kullanılır.
+
+#### W10 Kehribar ipek iplik ve fiyonk
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/silk_thread.png` · 1080×1500 · **Şeffaf zemin**
+
+```
+On the same 1080×1500 canvas as env_front.png and lantern_unlit.png, in exactly the same place (the envelope, the stud and the lantern are NOT drawn here), only a fine amber silk thread, on a fully transparent background: the thread hangs from the centre of the lantern's bottom wire ring at 50% of the width and 80% of the height straight down to where the gold stud sits (centred at 50%, 87%), winds twice around that round stud (the thread loops visible as a small ring of thread about 5% of the canvas width across, its centre left open where the stud is), and is tied there in a small neat bow whose two short tails fall softly, one ending at about 45% of the width and 91% of the height, the other at about 55% of the width and 91.5% of the height. Lustrous amber silk (#F2A65A) with a soft sheen in light from the top-left, very fine (about 0.6% of the canvas width thick). Everything else is fully transparent. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+Kontrol: ince kehribar iplik (%50, %80) → (%50, %87); çivi yerinde ortası boş iki tur halka + küçük fiyonk, kuyruklar ~(%45, %91) ve (%55, %91,5); zarf/çivi/fener çizilmemiş; gerçek alfa.
+Kullanım: tema kurulunca zarf tuvalinde cep ile fener arasında; açılışta fiyonk gevşer (hafif ölçek/döndürme), iplik fenerle birlikte yukarı kayarak söner.
+
+#### W11 Zarftaki kart (boş)
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/card_small.png` · 1000×1400 · **Şeffaf zemin**
+
+```
+A flat portrait invitation card, alone, seen straight on, on a fully transparent background: thick warm ivory rice paper as rice_paper.png (#F7EEDD), the card spanning x 7–93% and y 6–94% of the canvas, with a softly torn deckle edge on all four sides. Along its top edge the paper is very softly dip-dyed in dusky rose (#E7B4A6) fading into the ivory within the top 12% of the card, with a hint of amber where the colour meets the paper; a single hair-fine warm gold-leaf line runs as a border inset about 6% from the card's edge. The whole card inside the border is EMPTY paper (the website sets the names, date and venue there in HTML). Soft light from the top-left, a hair-fine contact shade only along the card's own deckle. No lantern, no flowers, no ornament, no photo. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+Kontrol: tırtıklı pirinç kâğıdı kart; üst kenarda hafif gül dip-dye; ince altın kıl çizgi bordür; içi tamamen boş; gerçek alfa.
+Kullanım: tema kurulunca alfa kutusuna kırpılır → zarftan yükselen kart ve home kartı (isimler, tarih, mekân HTML).
+
+#### W12 Fener silüetli portre penceresi (home)
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/lantern_frame.png` · 1000×1300 · **Şeffaf zemin**
+
+```
+A portrait photo frame in the shape of a tall paper sky lantern, alone, seen straight on, on a fully transparent background: a lantern silhouette of warm ivory rice paper (#F7EEDD) spanning about x 8–92% and y 6–94% of the canvas, with softly rounded shoulders at the top, gently tapering sides, and a thin dark wire ring across its open bottom; fine vertical split-bamboo ribs show through the paper border, which glows very softly warm (pale glow #FFD08A at its inner edge fading to ivory), the light staying inside the paper. In the middle a portrait photo window with a rounded arched top: exactly 700 px wide and 900 px tall overall, its top-left corner at x 150 px, y 230 px, the top of the window a full semicircle and the sides and bottom straight, filled with flat pure green #00FF00 (no texture, no shading, crisp edges, nothing over it). Soft light from the top-left. No flame, no string, no flowers, no pattern. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+Kontrol: fener silüeti x %8–92 · y %6–94; pencere düz `#00FF00`, kemerli üst, 700×900, sol üst (150, 230); kenar içeride hafif sıcak; dışında hâle yok; gerçek alfa.
+Kullanım: tema kurulunca pencere ölçülür ve şeffaf yapılır (`keyed_window`) → home kartının portresi; foto alttan büyüyen sıcak ışık dairesiyle açılır.
+
+#### W13 Asılı pirinç kâğıdı panel (story çerçevesi)
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/paper_panel.png` · 1000×1300 · **Şeffaf zemin**
+
+```
+A hanging rice-paper panel used as a portrait photo frame, alone, seen straight on, on a fully transparent background: a sheet of warm ivory rice paper (#F7EEDD, soft fibres, a gently torn deckle along its two long sides) spanning x 8–92% of the width, held between two slim natural split-bamboo rods, one across the top at about 11% of the height and one across the bottom at about 92%, each rod extending slightly beyond the paper on both sides; from the ends of the top rod a fine amber silk hanging cord (#F2A65A) rises in a soft triangle to a small loop at about 6% of the height. In the middle a portrait photo window exactly 760 px wide and 950 px tall (4:5), its top-left corner at x 120 px, y 200 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, nothing over it). The paper around the window glows very faintly warm along the window's lower edge, the light staying inside the paper. Soft light from the top-left. No lantern, no flowers, no pattern. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+Kontrol: pencere düz `#00FF00`, 760×950 (4:5), sol üst (120, 200); üstte ve altta bambu çubuk, üstte kehribar askı ipi; yeşil başka yerde yok; gerçek alfa.
+Kullanım: tema kurulunca pencere ölçülür ve şeffaf yapılır → story'nin üç anı (sol–sağ–sol, hafif sallanma) ve home'daki hikâye tanıtımı; foto alttan büyüyen ışık dairesiyle açılır.
+
+#### W14 Geniş bambu panel (mekân fotoğrafı)
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/wide_panel.png` · 1600×1000 · **Şeffaf zemin**
+
+```
+A wide landscape rice-paper panel used as a photo frame, alone, seen straight on, on a fully transparent background: a sheet of warm ivory rice paper (#F7EEDD, soft fibres, softly torn deckle along its left and right edges) spanning x 7–93% and y 9–91% of the canvas, held between two slim natural split-bamboo rods along its top edge (at about 8% of the height) and its bottom edge (at about 92%), each rod extending slightly beyond the paper to x 6% and x 94%. In the middle a landscape photo window exactly 1280 px wide and 720 px tall (16:9), its top-left corner at x 160 px, y 140 px, filled with flat pure green #00FF00 (no texture, no shading, straight edges, nothing over it). A very faint warm glow in the paper along the window's lower edge, staying inside the paper. Soft light from the top-left. No hanging cord, no lantern, no flowers. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+Kontrol: pencere düz `#00FF00`, 1280×720 (16:9), sol üst (160, 140); üstte ve altta bambu çubuk; gerçek alfa.
+Kullanım: tema kurulunca pencere ölçülür ve şeffaf yapılır → details'te mekân fotoğrafı (soldan sağa ışık süpürmesiyle açılır).
+
+#### W15 Uzak küçük fener (arka planda yükselen)
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/far_lantern.png` · 400×560 · **Şeffaf zemin**
+
+```
+A single small lit paper sky lantern seen from slightly below and at a distance, as if floating high in the evening air, alone, on a fully transparent background, spanning about x 25–75% and y 10–90% of the canvas: the same plain rice-paper lantern as lantern_lit.png (rounded shoulders, tapering cylindrical body, thin wire ring at the open bottom, faint bamboo ribs), glowing warmly from inside (pale glow #FFD08A at the lower middle, amber #F2A65A toward the edges), very slightly soft as if a little out of focus. The light stays entirely inside the lantern's own paper: no flame, no rays, no halo outside its outline. No string. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+Kontrol: tek küçük yanık fener, hafif yumuşak; dışında hâle yok; alev/ip yok; gerçek alfa.
+Kullanım: tema kurulunca açılışta arka planda üç kopya farklı boy/hız/bulanıklıkla yükselir (paralaks); story ve home'da kaydırdıkça yavaş süzülen 2–3 fener; RSVP gönderiminde uzaklaşan fener.
+
+#### W16 Köşe süsü (gül pembesi bahçe gülleri + çayır otları)
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/corner_spray.png` · 1200×1000 · **Şeffaf zemin**
+
+```
+A restrained, romantic corner spray of flowers growing out from near the top-left corner toward the centre, alone, on a fully transparent background, photorealistic: two dusky rose garden roses (#E7B4A6, soft layered petals with a warmer apricot heart), one pale apricot spray rose and two small buds, a few long soft feathery meadow grasses and wispy seed heads catching the light, and one short curling tail of amber silk ribbon (#F2A65A) with a soft sheen; stems hidden. Airy and light, not dense. It reaches toward the top and left sides of the image but stays 6% inside them, and the bottom-right half of the canvas is completely empty. Soft dusk light from the top-left. No lantern, no vase, no glitter, no other colours. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+Kontrol: sol üstten çıkan hafif küme, sağ alt yarı boş; gül pembesi + kayısı + çayır otu + kehribar kurdele; yoğun değil; gerçek alfa.
+Kullanım: tema kurulunca yalnız home kartının bir köşesi (gerekirse aynalanır), imza ve RSVP kapanışında küçük; kapak sayfasında **metnin altına girmeyecek** şekilde en fazla bir köşe.
+
+#### W17 Minik fener dizisi (bölüm ayırıcı)
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/divider.png` · 1600×240 · **Şeffaf zemin**
+
+```
+A slim horizontal divider, alone, on a fully transparent background: one very fine warm-gold thread running horizontally across x 8–92% of the canvas, sagging very gently at its centre, with seven miniature plain rice-paper lanterns hanging from it at even intervals on tiny threads, the middle one slightly larger and the others gradually smaller toward both ends; each miniature lantern glows warmly from inside (pale glow #FFD08A to amber #F2A65A), the light staying inside its own paper. Elegant and fine, not a party garland. No tassels, no other colours, no halo outside the lanterns. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks.
+```
+Kontrol: ince altın iplik, yedi minik yanık fener (ortadaki büyük); fenerlerin dışında hâle yok; iki uçta boşluk; gerçek alfa.
+Kullanım: tema kurulunca başlıkların altında bölüm ayırıcı; programda satırlar gelirken fenerler soldan sağa tek tek "yanar" (CSS maskesiyle parlaklık).
+
+#### W18 Süzülen küçük nesneler — üç ayrı dosya
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/accent_1.png`, `accent_2.png`, `accent_3.png` · her biri 512×512 · **Şeffaf zemin**
+
+```
+A single small object, alone, centred, on a fully transparent background, filling about 55% of the square, photorealistic, soft dusk light from the top-left. No other object. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around. True transparent background PNG (real alpha channel — not white, not a checkerboard). No cast shadow or drop shadow outside the object, no glow or halo outside the object. No text, letters, numbers, characters, monograms, logos or watermarks. (Make three files, the same light and scale: 1 = one tiny irregular flake of warm gold leaf, thin and slightly curled, with a crisp metallic highlight; 2 = one single loose dusky rose petal (#E7B4A6), softly cupped, a warmer apricot tone at its base; 3 = one single dandelion wish seed — a slender seed with its fine white feathery parachute fully open, delicate and airy.)
+```
+Kontrol: her dosyada tek nesne; üç dosya farklı (altın varak pulu, gül yaprağı, karahindiba tohumu); kenara değmiyor; gerçek alfa.
+Kullanım: tema kurulunca açılışta (fener kalktıktan sonra) ve RSVP gönderiminde süzülen küçük nesneler; tohumlar yukarı, yaprak ve pullar aşağı süzülür (her biri ayrı katman, kendi fazında).
+
+#### W19 Website hero + paylaşım görseli (og:image kaynağı)
 **Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/parts/web_hero.png` · 1536×1024 · opak
 
 ```
-A wide scene for a link-preview image in the same watercolor style and palette: the dusk sky of sky_dusk.png (deep violet above, dusky rose, an amber horizon over low violet hills), the lit paper lantern of lantern_lit.png rising in the lower middle of the image just above the gently cupped hands of hands.png that have just let it go, a warm soft glow around the lantern, and five or six small distant lanterns drifting higher at different sizes. The lantern and the hands sit in the lower-middle and are fully visible; the top 20% of the image is calm sky with nothing important. No people other than the hands, no text, no letters.
+Wide horizontal still life at dusk, photorealistic product photography: the closed portrait dip-dyed washi envelope of flap.png and env_front.png with its lantern-belly flap and torn feathered edge lies slightly below the centre on a soft sheet of the dusk washi of dusk_ground.png; on it, tied by its fine amber silk thread to the small gold stud, stands the small paper sky lantern of lantern_lit.png, glowing warmly from inside (no flame visible); at the left a restrained spray of dusky rose garden roses, a pale apricot rose and feathery meadow grasses (as corner_spray.png); a few tiny gold-leaf flakes and one dandelion seed lie on the paper; behind, softly out of focus in a violet-to-amber evening sky, three distant lit paper lanterns rise at different heights. Only dusk violet, dusky rose, lantern amber, glow and rice-paper ivory tones; soft last daylight from the top-left. The top 20% of the image is calm and soft (only the out-of-focus sky and one distant lantern). This image is cropped to 1200×630 for link previews: keep the whole envelope and lantern visible with at least 5% empty margin below the envelope. No people, no fire, no smoke. No text, letters, numbers, characters, monograms, logos or watermarks.
 ```
-Kontrol: fener ve avuçlar alt-ortada tam görünüyor; üst %20 sakin; yazı yok. (`tema_build.og_kirp(hiza="alt")` →
-`og-1200x630.jpg`.)
+Kontrol: zarf + yanık fener bütün, altında ≥%5 boşluk; fenerde alev yok; üst %20 sakin; yazı yok.
+Kullanım: tema kurulunca `og-1200x630.jpg` (alta hizalı kırpım) ve katalog posterinin yedeği.
 
 ---
 
-## PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor)
+## PAKET 2 — örnek fotoğraflar (kurgu çift: Sophie & Daniel) — isteğe bağlı (demo şu an ortak örnek fotoğrafları kullanıyor) — var, yeniden üretme
 
 Demo içeriği (`content.demo.json`): **Sophie & Daniel**, *The Meadowlark Terrace* (kurgu), Santa Barbara, California,
 September 18, 2027. Kurgu kişiler: **gerçek bir kişiye (ünlü dahil) benzemesin**; yüzler doğal, yaşları 28–34; tek bir kurgu
@@ -199,63 +286,46 @@ A wide photograph of a fictional hilltop garden terrace set for an evening weddi
 
 Kontrol (PAKET 2): beş fotoğrafta aynı kurgu çift; gerçek kişiye benzemiyor; yazı yok; oranlar doğru (`python3 tools/kit_check.py collections/31_Sky_Lantern_Festival --paket 2`).
 
----
-
-## PAKET 6 — Basılı davetiye zeminleri (G139; 300 ppi; YAZI YOK; 2026-10-20 yeni tasarıma göre)
-
-> **Neden yeniden yazıldı (2026-10-20):** website 18–19 Ekim'de fildişi kâğıt + köşe çiçekleri görünümüne geçti; eski baskı prompt'ları eski görünümü (ve artık olmayan PAKET 5 parçalarını) istiyordu. `platform/lib/print/layouts.ts` `'sky-lantern-festival'` bloğunun geçici kaynakları yeniden kurulumda `img/`'den silindi: panel şu an `public/print/sky-lantern-festival/`'deki eski çıktıyı (eski görünüm) basıyor ve `build-print-assets` bu tema için yeniden koşamaz. Bu zeminler gelince:
-> Platform her yüz için **tek** zemin kullanır ve onu taşma payıyla `cover` olarak yayar (5×7 ve A5 aynı zeminden).
-> 1. `layouts.ts` `'sky-lantern-festival'` bloğunda `sources` → bu zeminler (`print/print_front.png` + `print/print_back.png`), `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }`.
-> 2. Zemin artık **açık fildişi**: `ink` / `accent` koyu tonlara (temanın site metin rengi) alınır; açık mürekkep kalmaz.
-> 3. Metin kutuları (`front` / `back`) gerçek görselde ölçülür (G149; süsten ~%2 açıklık), `node --test tests/g149-print-layout.test.ts`.
-> 4. `cd platform && node scripts/build-print-assets.ts --theme sky-lantern-festival`; `public/print/sky-lantern-festival/`'deki artık kaynak olmayan eski dosyalar silinir; 5×7 ve A5 örnek PDF'ine göz atılır.
-> Ek görsel (her iki yüz için sohbetin başında): `platform/themes/sky-lantern-festival/img/bg_scene-1024.webp`.
-
-#### P6.1 Ön yüz
-**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/print/print_front.png` · 1819×2551 px (300 ppi), opak
-
-```
-A full-bleed printable wedding invitation ground for the "Sky Lantern Festival" design, front side, portrait, seen perfectly flat and straight on, 1819 × 2551 px at 300 ppi (it is trimmed later). Match the attached website background (bg_scene-1024.webp) exactly in style: the same warm ivory, softly textured stationery paper running edge to edge and the same warm dusk indigo, champagne and soft coral, distant warm sky lanterns, ivory roses and soft eucalyptus foliage, in the same photorealistic stationery-photography finish with soft light from the top-left. Place the decoration ONLY in two places: an abundant arrangement gathered at the top-left corner and trailing along the top edge, staying entirely within the top 16% of the height, and a smaller matching arrangement gathered at the bottom-right corner, staying entirely within the bottom 14% of the height. A very fine antique-gold foil hairline frame inset about 6% from every edge. Keep every ornament at least 4% inside the image edges. The whole rectangle from 18% to 84% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm ivory paper (the names, date and venue are printed there in dark ink): no petal, leaf, line, shadow or stain in it. No envelope, no card, no frame object, no people. No text, letters, numbers, monograms, logos or watermarks. Print quality, sharp at 1819 × 2551 px.
-```
-Kontrol: tam taşma fildişi kâğıt (site zeminiyle aynı); çiçekler yalnız üst %16 (sol üst) ve alt %14 (sağ alt); %18–84 yükseklik × %10–90 genişlik tamamen boş; ince altın çerçeve; yazı yok; 1819×2551.
-
-#### P6.2 Arka yüz
-**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/print/print_back.png` · 1819×2551 px (300 ppi), opak
-
-```
-The back side of the same "Sky Lantern Festival" invitation (give print_front.png as the reference image): portrait, full bleed, perfectly flat, 1819 × 2551 px at 300 ppi, the same warm ivory stationery paper edge to edge and the same very fine antique-gold foil hairline frame inset about 6% from every edge. Decoration ONLY a slim spray of the same flowers and foliage centred along the top edge, staying entirely within the top 11% of the height and at least 4% inside the image edges. Everything from 13% to 92% of the height and from 10% to 90% of the width is COMPLETELY EMPTY paper for the schedule, the details and a QR code: no petal, line, shadow or stain. Same style, colors and light. No text, letters, numbers, logos or watermarks. Print quality, sharp at 1819 × 2551 px.
-```
-Kontrol: ön yüzle aynı kâğıt ve çerçeve; çiçek yalnız üst %11'de ince dal; %13–92 × %10–90 boş; yazı yok; 1819×2551.
 
 ---
 
-## Parçalar gelince (Claude) — GEÇERSİZ (2026-10-20: website 18–19 Ekim'de yeniden kuruldu; üretme)
+## PAKET 6R — Basılı davetiye (G139; 5×7 in; 2026-10-22 yeni görünüm)
 
-> **GEÇERSİZ (2026-10-20).** Tasarım 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (yeni kapak `img/v3-*`, yeni zemin `img/bg_scene-*`, yeni iç sayfalar; `docs/qa/2026-10-18-*.md`, `docs/qa/2026-10-19-*.md`). Bu bölüm artık istenmez, sayılmaz ve yerleştirilmez; tarihçe için duruyor. `build_images.py` emekli (img/'yi silerdi).
+> Panelden indirilen basılı davetiye (`platform/lib/print/layouts.ts`). Bu tasarımın `'sky-lantern-festival'` bloğu
+> eski zeminleri (`print/print_front.png`, `print/print_back.png`, eski çiçekli fildişi görünüm) gösteriyor; yeni zeminler
+> gelince G431 bloğu bunlara çevirir. Eski dosyalar silinmez (geçmiş).
+> **Dosya adı ve ölçü:** `print/invitation_front_r_5x7.png`, `print/invitation_back_r_5x7.png`, **1575×2175 px** = 5×7 in +
+> 1/8 in taşma, 300 ppi. Ayrı A5 dosyası istenmez: A5 + 3 mm taşma (oran 0,713) aynı sayfadan yanlardan ~%0,8 kırpılarak
+> basılır. Bu yüzden önemli hiçbir şey yan kenarların %8'ine girmez.
+> **Yazı alanı:** ön yüzde yükseklikte %19–%91 × genişlikte %10–%90 **tamamen boş** (isimler, tarih, mekân); arka yüzde
+> %13'ün altı, genişlikte %9–%91 boş (program + QR; QR'ı GPT çizmez, `tools/make_qr.py` gerçek URL'den üretir).
+> Süsleme yalnız üst ve alt bantlarda. Kâğıt açık (pirinç kâğıdı): koyu tam taşma zemin baskıda mürekkep yer, istenmez.
+>
+> **Gelince (elle, tek blok; otomatik değil — G149: kutular gerçek görselde ölçülür):**
+> 1. G431'de `layouts.ts` `'sky-lantern-festival'` bloğu: `sources` → `{ front: 'print/invitation_front_r_5x7.png', back:
+>    'print/invitation_back_r_5x7.png' }`; `composed` → `{ front: { bg: cover('front'), images: [] }, back: { bg:
+>    cover('back'), images: [] } }`.
+> 2. Kutuları görselde ölç (süslemenin ~%2 dışında kalsın; `tests/g149-print-layout.test.ts`).
+> 3. `cd platform && node scripts/build-print-assets.ts --theme sky-lantern-festival` ve `node scripts/print-sample.ts
+>    --theme sky-lantern-festival --invite 5x7 --bleed` + `--invite a5 --bleed` ile iki boyutu göz kontrolü.
 
-```bash
-python3 tools/kit_check.py collections/31_Sky_Lantern_Festival                    # ölçü / alfa / #00FF00 pencere denetimi
-python3 platform/themes/sky-lantern-festival/build_images.py                    # parts/ → img/ + manifest.json + site.css @gpt-layers
-cd platform && PORT=3405 NODE_PATH=/opt/node22/lib/node_modules node scripts/theme-check.cjs --theme sky-lantern-festival --stress --compare none
-node --test tests/theme-sky-lantern-festival.test.ts                            # CSS @gpt-layers = manifest
+#### P1 — Ön yüz
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/print/invitation_front_r_5x7.png` · 1575×2175 · opak
 ```
+The front of a printed wedding invitation, full bleed, portrait 5.25:7.25, seen perfectly flat: the whole sheet is the warm ivory rice paper of rice_paper.png (#F7EEDD). Across the very top, a soft hand dip-dyed band of dusk washi colour bleeds down into the paper — dusk violet (#2B1F45) at the top edge melting through violet and dusky rose (#E7B4A6) into a faint amber glow and then into the ivory — the coloured band fading out completely by 15% of the height, with a few tiny warm gold-leaf flecks in it; within this band, between 20% and 80% of the width, three small plain rice-paper sky lanterns glowing softly from inside rise at slightly different heights (the light staying inside each lantern, no flame), none reaching lower than 17% of the height. Along the bottom, between 93% and 96% of the height and from 14% to 86% of the width, one fine warm-gold line with a single tiny glowing lantern at its centre. The rectangle from 19% to 91% of the height and from 10% to 90% of the width is COMPLETELY EMPTY, calm paper (the names, date and venue are set there): no lantern, no fleck, no line, no colour, no shadow, no stain in it. No ornament within 8% of the left and right edges except the soft colour of the dyed band. Soft light from the top-left. No QR code. No text, letters, numbers, characters, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+Kontrol: tam taşma; üstte %15'te tamamen sönen dip-dye alacakaranlık bandı + üç küçük yanık fener (%17'nin üstünde); altta ince altın çizgi + minik fener; %19–%91 × %10–%90 tamamen boş; yazı yok.
 
-`build_images.py` her parçayı dosyası varsa kullanır, yoksa geçici parçayı keser; çıktı uyarıları (`manifest.json`
-`warnings`: oran %4'ten fazla farklı, 1,5×'ten fazla büyütme, pencere yok) göz kontrolünde okunur. Kesim: `hands`,
-`lantern_dark`, `lantern_lit` → aynı tuval, kesilmeden 800×1200 (sahnenin üstüne tam oturur; fenerin alfa kutusu
-`manifest.stage.lantern_box_pct` — hâle CSS'te fenerin ortasına, y %47); `sky_dusk` → `sky` (1080×1920) + 16:9 `sky_band`;
-`star_dust` → paralaks katmanı; `lantern_far` → alfa kırpımı, 144×216 (72 + 144 px); `card_small` → kart (878×1254),
-#00FF00 pencere şeffaf, pencere ve düz kâğıt ölçülür; `frame_paper` / `frame_landscape` → pencere şeffaf + ölçü (foto
-arkada); `bg_tile` → `bg_wall`; `divider` → yalnız GPT'yle görünen katman; `web_hero` → `og-1200x630.jpg`
-(`og_kirp(hiza="alt")`); PAKET 2 → demo kaydının `media`'sı (tema varlığı, ayrı iş); PAKET 6 → yukarıdaki elle geçiş. Sonra
-göz kontrolü (gerçek iPhone/Android dahil) ve satış kararı (`coming` → `live`).
-
-Kuru deneme (gerçek repo değişmez): `python3 tools/gpt_kuru_deneme.py --tema sky-lantern-festival --sekil
-collections/31_Sky_Lantern_Festival/assets/gpt/kuru_sekil.json [--theme-check --stress --port 3405]`.
+#### P2 — Arka yüz
+**Kaydet:** `collections/31_Sky_Lantern_Festival/assets/gpt/print/invitation_back_r_5x7.png` · 1575×2175 · opak
+```
+The back of the same printed wedding invitation, full bleed, portrait 5.25:7.25, perfectly flat: the same warm ivory rice paper, only a short string of five miniature plain rice-paper lanterns glowing softly from inside hanging from one fine warm-gold thread across the top centre (between 30% and 70% of the width), its lowest point staying above 11% of the height, and a very faint dusky rose dye blush along the top edge fading out by 6% of the height. The whole area below 13% of the height, from 9% to 91% of the width, is COMPLETELY EMPTY paper (a schedule and a QR code are set there): no lantern, no line, no colour, no shadow, no stain. No ornament within 8% of the left and right edges. No QR code. No text, letters, numbers, characters, monograms, logos or watermarks. Print quality, sharp at 1575×2175 px.
+```
+Kontrol: ön yüzle aynı kâğıt; yalnız üst ortada beş minik fener dizisi (%11'in üstünde); %13'ün altı boş; yazı/QR yok.
 
 ---
 
-## PAKET 3 — Etsy ilan sahneleri (görev G175; GPT tasarlar, Claude gerçek ekranları yeşile yerleştirir)
+## PAKET 3 — Etsy ilan sahneleri (görev G175) — GEÇERSİZ (2026-10-22: yeniden tasarım; tema kurulunca yeniden yazılacak)
 
 > Yeni (2026-10-14): kullanıcı ilan görsellerinin çok daha etkileyici ve profesyonel olmasını istedi. Bu sahneler ilan
 > görsellerinin zeminidir. Ekranlar **düz #00FF00**; Claude gerçek site ekranlarını perspektifle oraya yerleştirir

@@ -1855,9 +1855,9 @@
           "width": 640,
           "height": 1385,
           "files": {
-            "320": "/marketing/designs/nocturne-lake-estate/envelope-v4-320.webp",
-            "480": "/marketing/designs/nocturne-lake-estate/envelope-v4-480.webp",
-            "640": "/marketing/designs/nocturne-lake-estate/envelope-v4-640.webp"
+            "320": "/marketing/designs/nocturne-lake-estate/envelope-320.webp",
+            "480": "/marketing/designs/nocturne-lake-estate/envelope-480.webp",
+            "640": "/marketing/designs/nocturne-lake-estate/envelope-640.webp"
           }
         },
         "home": {
@@ -1871,7 +1871,7 @@
         },
         "invitation": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/nocturne-lake-estate/invitation-320.webp",
             "480": "/marketing/designs/nocturne-lake-estate/invitation-480.webp",
@@ -1889,16 +1889,25 @@
         },
         "details": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/nocturne-lake-estate/details-320.webp",
             "480": "/marketing/designs/nocturne-lake-estate/details-480.webp",
             "640": "/marketing/designs/nocturne-lake-estate/details-640.webp"
           }
         },
+        "schedule": {
+          "width": 640,
+          "height": 1285,
+          "files": {
+            "320": "/marketing/designs/nocturne-lake-estate/schedule-320.webp",
+            "480": "/marketing/designs/nocturne-lake-estate/schedule-480.webp",
+            "640": "/marketing/designs/nocturne-lake-estate/schedule-640.webp"
+          }
+        },
         "rsvp": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/nocturne-lake-estate/rsvp-320.webp",
             "480": "/marketing/designs/nocturne-lake-estate/rsvp-480.webp",
@@ -1907,7 +1916,7 @@
         },
         "form": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/nocturne-lake-estate/form-320.webp",
             "480": "/marketing/designs/nocturne-lake-estate/form-480.webp",
@@ -1916,12 +1925,12 @@
         }
       },
       "opening": {
-        "file": "/marketing/designs/nocturne-lake-estate/opening-v4.mp4",
-        "poster": "/marketing/designs/nocturne-lake-estate/envelope-v4-640.webp",
+        "file": "/marketing/designs/nocturne-lake-estate/opening.mp4",
+        "poster": "/marketing/designs/nocturne-lake-estate/opening-poster.webp",
         "width": 390,
         "height": 844,
-        "seconds": 8.67,
-        "bytes": 420160
+        "seconds": 10,
+        "bytes": 279197
       }
     },
     "velvet-jewel-box": {
@@ -1930,9 +1939,9 @@
           "width": 640,
           "height": 1385,
           "files": {
-            "320": "/marketing/designs/velvet-jewel-box/envelope-v4-320.webp",
-            "480": "/marketing/designs/velvet-jewel-box/envelope-v4-480.webp",
-            "640": "/marketing/designs/velvet-jewel-box/envelope-v4-640.webp"
+            "320": "/marketing/designs/velvet-jewel-box/envelope-320.webp",
+            "480": "/marketing/designs/velvet-jewel-box/envelope-480.webp",
+            "640": "/marketing/designs/velvet-jewel-box/envelope-640.webp"
           }
         },
         "home": {
@@ -1946,7 +1955,7 @@
         },
         "invitation": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/velvet-jewel-box/invitation-320.webp",
             "480": "/marketing/designs/velvet-jewel-box/invitation-480.webp",
@@ -1955,7 +1964,7 @@
         },
         "story": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/velvet-jewel-box/story-320.webp",
             "480": "/marketing/designs/velvet-jewel-box/story-480.webp",
@@ -1964,16 +1973,25 @@
         },
         "details": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/velvet-jewel-box/details-320.webp",
             "480": "/marketing/designs/velvet-jewel-box/details-480.webp",
             "640": "/marketing/designs/velvet-jewel-box/details-640.webp"
           }
         },
-        "rsvp": {
+        "schedule": {
           "width": 640,
           "height": 1385,
+          "files": {
+            "320": "/marketing/designs/velvet-jewel-box/schedule-320.webp",
+            "480": "/marketing/designs/velvet-jewel-box/schedule-480.webp",
+            "640": "/marketing/designs/velvet-jewel-box/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/velvet-jewel-box/rsvp-320.webp",
             "480": "/marketing/designs/velvet-jewel-box/rsvp-480.webp",
@@ -1982,7 +2000,7 @@
         },
         "form": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/velvet-jewel-box/form-320.webp",
             "480": "/marketing/designs/velvet-jewel-box/form-480.webp",
@@ -1991,12 +2009,12 @@
         }
       },
       "opening": {
-        "file": "/marketing/designs/velvet-jewel-box/opening-v4.mp4",
-        "poster": "/marketing/designs/velvet-jewel-box/envelope-v4-640.webp",
+        "file": "/marketing/designs/velvet-jewel-box/opening.mp4",
+        "poster": "/marketing/designs/velvet-jewel-box/opening-poster.webp",
         "width": 390,
         "height": 844,
-        "seconds": 8.3,
-        "bytes": 456025
+        "seconds": 10,
+        "bytes": 293114
       }
     },
     "grand-theatre-premiere": {
@@ -2005,9 +2023,9 @@
           "width": 640,
           "height": 1385,
           "files": {
-            "320": "/marketing/designs/grand-theatre-premiere/envelope-v4-320.webp",
-            "480": "/marketing/designs/grand-theatre-premiere/envelope-v4-480.webp",
-            "640": "/marketing/designs/grand-theatre-premiere/envelope-v4-640.webp"
+            "320": "/marketing/designs/grand-theatre-premiere/envelope-320.webp",
+            "480": "/marketing/designs/grand-theatre-premiere/envelope-480.webp",
+            "640": "/marketing/designs/grand-theatre-premiere/envelope-640.webp"
           }
         },
         "home": {
@@ -2021,7 +2039,7 @@
         },
         "invitation": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/grand-theatre-premiere/invitation-320.webp",
             "480": "/marketing/designs/grand-theatre-premiere/invitation-480.webp",
@@ -2039,16 +2057,25 @@
         },
         "details": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/grand-theatre-premiere/details-320.webp",
             "480": "/marketing/designs/grand-theatre-premiere/details-480.webp",
             "640": "/marketing/designs/grand-theatre-premiere/details-640.webp"
           }
         },
+        "schedule": {
+          "width": 640,
+          "height": 1285,
+          "files": {
+            "320": "/marketing/designs/grand-theatre-premiere/schedule-320.webp",
+            "480": "/marketing/designs/grand-theatre-premiere/schedule-480.webp",
+            "640": "/marketing/designs/grand-theatre-premiere/schedule-640.webp"
+          }
+        },
         "rsvp": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/grand-theatre-premiere/rsvp-320.webp",
             "480": "/marketing/designs/grand-theatre-premiere/rsvp-480.webp",
@@ -2057,7 +2084,7 @@
         },
         "form": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/grand-theatre-premiere/form-320.webp",
             "480": "/marketing/designs/grand-theatre-premiere/form-480.webp",
@@ -2066,12 +2093,12 @@
         }
       },
       "opening": {
-        "file": "/marketing/designs/grand-theatre-premiere/opening-v4.mp4",
-        "poster": "/marketing/designs/grand-theatre-premiere/envelope-v4-640.webp",
+        "file": "/marketing/designs/grand-theatre-premiere/opening.mp4",
+        "poster": "/marketing/designs/grand-theatre-premiere/opening-poster.webp",
         "width": 390,
         "height": 844,
-        "seconds": 8.37,
-        "bytes": 423617
+        "seconds": 10,
+        "bytes": 339305
       }
     },
     "orient-express-voyage": {
@@ -2080,9 +2107,9 @@
           "width": 640,
           "height": 1385,
           "files": {
-            "320": "/marketing/designs/orient-express-voyage/envelope-v4-320.webp",
-            "480": "/marketing/designs/orient-express-voyage/envelope-v4-480.webp",
-            "640": "/marketing/designs/orient-express-voyage/envelope-v4-640.webp"
+            "320": "/marketing/designs/orient-express-voyage/envelope-320.webp",
+            "480": "/marketing/designs/orient-express-voyage/envelope-480.webp",
+            "640": "/marketing/designs/orient-express-voyage/envelope-640.webp"
           }
         },
         "home": {
@@ -2105,7 +2132,7 @@
         },
         "story": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/orient-express-voyage/story-320.webp",
             "480": "/marketing/designs/orient-express-voyage/story-480.webp",
@@ -2114,16 +2141,25 @@
         },
         "details": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/orient-express-voyage/details-320.webp",
             "480": "/marketing/designs/orient-express-voyage/details-480.webp",
             "640": "/marketing/designs/orient-express-voyage/details-640.webp"
           }
         },
+        "schedule": {
+          "width": 640,
+          "height": 1285,
+          "files": {
+            "320": "/marketing/designs/orient-express-voyage/schedule-320.webp",
+            "480": "/marketing/designs/orient-express-voyage/schedule-480.webp",
+            "640": "/marketing/designs/orient-express-voyage/schedule-640.webp"
+          }
+        },
         "rsvp": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/orient-express-voyage/rsvp-320.webp",
             "480": "/marketing/designs/orient-express-voyage/rsvp-480.webp",
@@ -2132,7 +2168,7 @@
         },
         "form": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/orient-express-voyage/form-320.webp",
             "480": "/marketing/designs/orient-express-voyage/form-480.webp",
@@ -2141,12 +2177,12 @@
         }
       },
       "opening": {
-        "file": "/marketing/designs/orient-express-voyage/opening-v4.mp4",
-        "poster": "/marketing/designs/orient-express-voyage/envelope-v4-640.webp",
+        "file": "/marketing/designs/orient-express-voyage/opening.mp4",
+        "poster": "/marketing/designs/orient-express-voyage/opening-poster.webp",
         "width": 390,
         "height": 844,
-        "seconds": 8.4,
-        "bytes": 419423
+        "seconds": 10,
+        "bytes": 371396
       }
     },
     "kintsugi-washi": {
@@ -2155,9 +2191,9 @@
           "width": 640,
           "height": 1385,
           "files": {
-            "320": "/marketing/designs/kintsugi-washi/envelope-v3-320.webp",
-            "480": "/marketing/designs/kintsugi-washi/envelope-v3-480.webp",
-            "640": "/marketing/designs/kintsugi-washi/envelope-v3-640.webp"
+            "320": "/marketing/designs/kintsugi-washi/envelope-320.webp",
+            "480": "/marketing/designs/kintsugi-washi/envelope-480.webp",
+            "640": "/marketing/designs/kintsugi-washi/envelope-640.webp"
           }
         },
         "home": {
@@ -2171,7 +2207,7 @@
         },
         "invitation": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/kintsugi-washi/invitation-320.webp",
             "480": "/marketing/designs/kintsugi-washi/invitation-480.webp",
@@ -2189,16 +2225,25 @@
         },
         "details": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/kintsugi-washi/details-320.webp",
             "480": "/marketing/designs/kintsugi-washi/details-480.webp",
             "640": "/marketing/designs/kintsugi-washi/details-640.webp"
           }
         },
+        "schedule": {
+          "width": 640,
+          "height": 1285,
+          "files": {
+            "320": "/marketing/designs/kintsugi-washi/schedule-320.webp",
+            "480": "/marketing/designs/kintsugi-washi/schedule-480.webp",
+            "640": "/marketing/designs/kintsugi-washi/schedule-640.webp"
+          }
+        },
         "rsvp": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/kintsugi-washi/rsvp-320.webp",
             "480": "/marketing/designs/kintsugi-washi/rsvp-480.webp",
@@ -2207,7 +2252,7 @@
         },
         "form": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/kintsugi-washi/form-320.webp",
             "480": "/marketing/designs/kintsugi-washi/form-480.webp",
@@ -2216,12 +2261,12 @@
         }
       },
       "opening": {
-        "file": "/marketing/designs/kintsugi-washi/opening-v3.mp4",
-        "poster": "/marketing/designs/kintsugi-washi/envelope-v3-640.webp",
+        "file": "/marketing/designs/kintsugi-washi/opening.mp4",
+        "poster": "/marketing/designs/kintsugi-washi/opening-poster.webp",
         "width": 390,
         "height": 844,
-        "seconds": 8.68,
-        "bytes": 536829
+        "seconds": 10,
+        "bytes": 329631
       }
     },
     "riad-lantern-nights": {
@@ -2230,9 +2275,9 @@
           "width": 640,
           "height": 1385,
           "files": {
-            "320": "/marketing/designs/riad-lantern-nights/envelope-v3-320.webp",
-            "480": "/marketing/designs/riad-lantern-nights/envelope-v3-480.webp",
-            "640": "/marketing/designs/riad-lantern-nights/envelope-v3-640.webp"
+            "320": "/marketing/designs/riad-lantern-nights/envelope-320.webp",
+            "480": "/marketing/designs/riad-lantern-nights/envelope-480.webp",
+            "640": "/marketing/designs/riad-lantern-nights/envelope-640.webp"
           }
         },
         "home": {
@@ -2246,7 +2291,7 @@
         },
         "invitation": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/riad-lantern-nights/invitation-320.webp",
             "480": "/marketing/designs/riad-lantern-nights/invitation-480.webp",
@@ -2255,7 +2300,7 @@
         },
         "story": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/riad-lantern-nights/story-320.webp",
             "480": "/marketing/designs/riad-lantern-nights/story-480.webp",
@@ -2264,16 +2309,25 @@
         },
         "details": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/riad-lantern-nights/details-320.webp",
             "480": "/marketing/designs/riad-lantern-nights/details-480.webp",
             "640": "/marketing/designs/riad-lantern-nights/details-640.webp"
           }
         },
-        "rsvp": {
+        "schedule": {
           "width": 640,
           "height": 1385,
+          "files": {
+            "320": "/marketing/designs/riad-lantern-nights/schedule-320.webp",
+            "480": "/marketing/designs/riad-lantern-nights/schedule-480.webp",
+            "640": "/marketing/designs/riad-lantern-nights/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/riad-lantern-nights/rsvp-320.webp",
             "480": "/marketing/designs/riad-lantern-nights/rsvp-480.webp",
@@ -2282,7 +2336,7 @@
         },
         "form": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/riad-lantern-nights/form-320.webp",
             "480": "/marketing/designs/riad-lantern-nights/form-480.webp",
@@ -2291,12 +2345,12 @@
         }
       },
       "opening": {
-        "file": "/marketing/designs/riad-lantern-nights/opening-v3.mp4",
-        "poster": "/marketing/designs/riad-lantern-nights/envelope-v3-640.webp",
+        "file": "/marketing/designs/riad-lantern-nights/opening.mp4",
+        "poster": "/marketing/designs/riad-lantern-nights/opening-poster.webp",
         "width": 390,
         "height": 844,
-        "seconds": 8.96,
-        "bytes": 576317
+        "seconds": 10,
+        "bytes": 410989
       }
     },
     "maison-patisserie": {
@@ -2305,9 +2359,9 @@
           "width": 640,
           "height": 1385,
           "files": {
-            "320": "/marketing/designs/maison-patisserie/envelope-v4-320.webp",
-            "480": "/marketing/designs/maison-patisserie/envelope-v4-480.webp",
-            "640": "/marketing/designs/maison-patisserie/envelope-v4-640.webp"
+            "320": "/marketing/designs/maison-patisserie/envelope-320.webp",
+            "480": "/marketing/designs/maison-patisserie/envelope-480.webp",
+            "640": "/marketing/designs/maison-patisserie/envelope-640.webp"
           }
         },
         "home": {
@@ -2321,7 +2375,7 @@
         },
         "invitation": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/maison-patisserie/invitation-320.webp",
             "480": "/marketing/designs/maison-patisserie/invitation-480.webp",
@@ -2339,16 +2393,25 @@
         },
         "details": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/maison-patisserie/details-320.webp",
             "480": "/marketing/designs/maison-patisserie/details-480.webp",
             "640": "/marketing/designs/maison-patisserie/details-640.webp"
           }
         },
+        "schedule": {
+          "width": 640,
+          "height": 1285,
+          "files": {
+            "320": "/marketing/designs/maison-patisserie/schedule-320.webp",
+            "480": "/marketing/designs/maison-patisserie/schedule-480.webp",
+            "640": "/marketing/designs/maison-patisserie/schedule-640.webp"
+          }
+        },
         "rsvp": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/maison-patisserie/rsvp-320.webp",
             "480": "/marketing/designs/maison-patisserie/rsvp-480.webp",
@@ -2357,7 +2420,7 @@
         },
         "form": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/maison-patisserie/form-320.webp",
             "480": "/marketing/designs/maison-patisserie/form-480.webp",
@@ -2366,12 +2429,12 @@
         }
       },
       "opening": {
-        "file": "/marketing/designs/maison-patisserie/opening-v4.mp4",
-        "poster": "/marketing/designs/maison-patisserie/envelope-v4-640.webp",
+        "file": "/marketing/designs/maison-patisserie/opening.mp4",
+        "poster": "/marketing/designs/maison-patisserie/opening-poster.webp",
         "width": 390,
         "height": 844,
-        "seconds": 8.37,
-        "bytes": 374763
+        "seconds": 10,
+        "bytes": 255279
       }
     },
     "celestial-observatory": {
@@ -2380,9 +2443,9 @@
           "width": 640,
           "height": 1385,
           "files": {
-            "320": "/marketing/designs/celestial-observatory/envelope-v4-320.webp",
-            "480": "/marketing/designs/celestial-observatory/envelope-v4-480.webp",
-            "640": "/marketing/designs/celestial-observatory/envelope-v4-640.webp"
+            "320": "/marketing/designs/celestial-observatory/envelope-320.webp",
+            "480": "/marketing/designs/celestial-observatory/envelope-480.webp",
+            "640": "/marketing/designs/celestial-observatory/envelope-640.webp"
           }
         },
         "home": {
@@ -2396,7 +2459,7 @@
         },
         "invitation": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/celestial-observatory/invitation-320.webp",
             "480": "/marketing/designs/celestial-observatory/invitation-480.webp",
@@ -2405,7 +2468,7 @@
         },
         "story": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/celestial-observatory/story-320.webp",
             "480": "/marketing/designs/celestial-observatory/story-480.webp",
@@ -2414,16 +2477,25 @@
         },
         "details": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/celestial-observatory/details-320.webp",
             "480": "/marketing/designs/celestial-observatory/details-480.webp",
             "640": "/marketing/designs/celestial-observatory/details-640.webp"
           }
         },
+        "schedule": {
+          "width": 640,
+          "height": 1285,
+          "files": {
+            "320": "/marketing/designs/celestial-observatory/schedule-320.webp",
+            "480": "/marketing/designs/celestial-observatory/schedule-480.webp",
+            "640": "/marketing/designs/celestial-observatory/schedule-640.webp"
+          }
+        },
         "rsvp": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/celestial-observatory/rsvp-320.webp",
             "480": "/marketing/designs/celestial-observatory/rsvp-480.webp",
@@ -2432,7 +2504,7 @@
         },
         "form": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/celestial-observatory/form-320.webp",
             "480": "/marketing/designs/celestial-observatory/form-480.webp",
@@ -2441,12 +2513,12 @@
         }
       },
       "opening": {
-        "file": "/marketing/designs/celestial-observatory/opening-v4.mp4",
-        "poster": "/marketing/designs/celestial-observatory/envelope-v4-640.webp",
+        "file": "/marketing/designs/celestial-observatory/opening.mp4",
+        "poster": "/marketing/designs/celestial-observatory/opening-poster.webp",
         "width": 390,
         "height": 844,
-        "seconds": 9.2,
-        "bytes": 699427
+        "seconds": 10,
+        "bytes": 272902
       }
     },
     "azulejo-mosaic": {
@@ -2455,9 +2527,9 @@
           "width": 640,
           "height": 1385,
           "files": {
-            "320": "/marketing/designs/azulejo-mosaic/envelope-v4-320.webp",
-            "480": "/marketing/designs/azulejo-mosaic/envelope-v4-480.webp",
-            "640": "/marketing/designs/azulejo-mosaic/envelope-v4-640.webp"
+            "320": "/marketing/designs/azulejo-mosaic/envelope-320.webp",
+            "480": "/marketing/designs/azulejo-mosaic/envelope-480.webp",
+            "640": "/marketing/designs/azulejo-mosaic/envelope-640.webp"
           }
         },
         "home": {
@@ -2471,7 +2543,7 @@
         },
         "invitation": {
           "width": 640,
-          "height": 1385,
+          "height": 1283,
           "files": {
             "320": "/marketing/designs/azulejo-mosaic/invitation-320.webp",
             "480": "/marketing/designs/azulejo-mosaic/invitation-480.webp",
@@ -2489,16 +2561,25 @@
         },
         "details": {
           "width": 640,
-          "height": 1385,
+          "height": 1283,
           "files": {
             "320": "/marketing/designs/azulejo-mosaic/details-320.webp",
             "480": "/marketing/designs/azulejo-mosaic/details-480.webp",
             "640": "/marketing/designs/azulejo-mosaic/details-640.webp"
           }
         },
-        "rsvp": {
+        "schedule": {
           "width": 640,
           "height": 1385,
+          "files": {
+            "320": "/marketing/designs/azulejo-mosaic/schedule-320.webp",
+            "480": "/marketing/designs/azulejo-mosaic/schedule-480.webp",
+            "640": "/marketing/designs/azulejo-mosaic/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1283,
           "files": {
             "320": "/marketing/designs/azulejo-mosaic/rsvp-320.webp",
             "480": "/marketing/designs/azulejo-mosaic/rsvp-480.webp",
@@ -2507,7 +2588,7 @@
         },
         "form": {
           "width": 640,
-          "height": 1385,
+          "height": 1283,
           "files": {
             "320": "/marketing/designs/azulejo-mosaic/form-320.webp",
             "480": "/marketing/designs/azulejo-mosaic/form-480.webp",
@@ -2516,12 +2597,12 @@
         }
       },
       "opening": {
-        "file": "/marketing/designs/azulejo-mosaic/opening-v4.mp4",
-        "poster": "/marketing/designs/azulejo-mosaic/envelope-v4-640.webp",
+        "file": "/marketing/designs/azulejo-mosaic/opening.mp4",
+        "poster": "/marketing/designs/azulejo-mosaic/opening-poster.webp",
         "width": 390,
         "height": 844,
-        "seconds": 8.4,
-        "bytes": 524486
+        "seconds": 10,
+        "bytes": 418069
       }
     },
     "sky-lantern-festival": {
@@ -2530,9 +2611,9 @@
           "width": 640,
           "height": 1385,
           "files": {
-            "320": "/marketing/designs/sky-lantern-festival/envelope-v4-320.webp",
-            "480": "/marketing/designs/sky-lantern-festival/envelope-v4-480.webp",
-            "640": "/marketing/designs/sky-lantern-festival/envelope-v4-640.webp"
+            "320": "/marketing/designs/sky-lantern-festival/envelope-320.webp",
+            "480": "/marketing/designs/sky-lantern-festival/envelope-480.webp",
+            "640": "/marketing/designs/sky-lantern-festival/envelope-640.webp"
           }
         },
         "home": {
@@ -2546,7 +2627,7 @@
         },
         "invitation": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/sky-lantern-festival/invitation-320.webp",
             "480": "/marketing/designs/sky-lantern-festival/invitation-480.webp",
@@ -2555,7 +2636,7 @@
         },
         "story": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/sky-lantern-festival/story-320.webp",
             "480": "/marketing/designs/sky-lantern-festival/story-480.webp",
@@ -2564,16 +2645,25 @@
         },
         "details": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/sky-lantern-festival/details-320.webp",
             "480": "/marketing/designs/sky-lantern-festival/details-480.webp",
             "640": "/marketing/designs/sky-lantern-festival/details-640.webp"
           }
         },
+        "schedule": {
+          "width": 640,
+          "height": 1285,
+          "files": {
+            "320": "/marketing/designs/sky-lantern-festival/schedule-320.webp",
+            "480": "/marketing/designs/sky-lantern-festival/schedule-480.webp",
+            "640": "/marketing/designs/sky-lantern-festival/schedule-640.webp"
+          }
+        },
         "rsvp": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/sky-lantern-festival/rsvp-320.webp",
             "480": "/marketing/designs/sky-lantern-festival/rsvp-480.webp",
@@ -2582,7 +2672,7 @@
         },
         "form": {
           "width": 640,
-          "height": 1385,
+          "height": 1191,
           "files": {
             "320": "/marketing/designs/sky-lantern-festival/form-320.webp",
             "480": "/marketing/designs/sky-lantern-festival/form-480.webp",
@@ -2591,12 +2681,12 @@
         }
       },
       "opening": {
-        "file": "/marketing/designs/sky-lantern-festival/opening-v4.mp4",
-        "poster": "/marketing/designs/sky-lantern-festival/envelope-v4-640.webp",
+        "file": "/marketing/designs/sky-lantern-festival/opening.mp4",
+        "poster": "/marketing/designs/sky-lantern-festival/opening-poster.webp",
         "width": 390,
         "height": 844,
-        "seconds": 8.3,
-        "bytes": 444886
+        "seconds": 10,
+        "bytes": 367213
       }
     },
     "music-box-ballerina": {
@@ -2605,9 +2695,9 @@
           "width": 640,
           "height": 1385,
           "files": {
-            "320": "/marketing/designs/music-box-ballerina/envelope-v4-320.webp",
-            "480": "/marketing/designs/music-box-ballerina/envelope-v4-480.webp",
-            "640": "/marketing/designs/music-box-ballerina/envelope-v4-640.webp"
+            "320": "/marketing/designs/music-box-ballerina/envelope-320.webp",
+            "480": "/marketing/designs/music-box-ballerina/envelope-480.webp",
+            "640": "/marketing/designs/music-box-ballerina/envelope-640.webp"
           }
         },
         "home": {
@@ -2621,7 +2711,7 @@
         },
         "invitation": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/music-box-ballerina/invitation-320.webp",
             "480": "/marketing/designs/music-box-ballerina/invitation-480.webp",
@@ -2646,9 +2736,18 @@
             "640": "/marketing/designs/music-box-ballerina/details-640.webp"
           }
         },
-        "rsvp": {
+        "schedule": {
           "width": 640,
           "height": 1385,
+          "files": {
+            "320": "/marketing/designs/music-box-ballerina/schedule-320.webp",
+            "480": "/marketing/designs/music-box-ballerina/schedule-480.webp",
+            "640": "/marketing/designs/music-box-ballerina/schedule-640.webp"
+          }
+        },
+        "rsvp": {
+          "width": 640,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/music-box-ballerina/rsvp-320.webp",
             "480": "/marketing/designs/music-box-ballerina/rsvp-480.webp",
@@ -2657,7 +2756,7 @@
         },
         "form": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/music-box-ballerina/form-320.webp",
             "480": "/marketing/designs/music-box-ballerina/form-480.webp",
@@ -2666,12 +2765,12 @@
         }
       },
       "opening": {
-        "file": "/marketing/designs/music-box-ballerina/opening-v4.mp4",
-        "poster": "/marketing/designs/music-box-ballerina/envelope-v4-640.webp",
+        "file": "/marketing/designs/music-box-ballerina/opening.mp4",
+        "poster": "/marketing/designs/music-box-ballerina/opening-poster.webp",
         "width": 390,
         "height": 844,
-        "seconds": 8.6,
-        "bytes": 404850
+        "seconds": 10,
+        "bytes": 341043
       }
     }
   },

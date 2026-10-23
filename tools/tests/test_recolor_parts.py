@@ -233,16 +233,10 @@ def test_root_tokens_reads_every_root_block():
     assert rp.rgb_hex(toks["--gold"][1]) == "#C9A45C"
 
 
-G177 = {"22": "nocturne-lake-estate", "23": "velvet-jewel-box", "24": "grand-theatre-premiere", "25": "orient-express-voyage",
-        "26": "kintsugi-washi", "27": "riad-lantern-nights", "28": "maison-patisserie", "29": "celestial-observatory",
-        "30": "azulejo-mosaic", "31": "sky-lantern-festival", "32": "music-box-ballerina"}
-
-
-@pytest.mark.parametrize("no,theme", sorted(G177.items()))
-def test_g177_designs_are_complete(no, theme):
-    """G177: 22–32 got their palettes CSS-only (every part is interim until GPT); the five stay coming."""
-    test_pilot_designs_are_complete(no, theme)
-    test_variants_css_header_comment_closes_once(theme)
+# docs/35: 22 (G422) and 23 (G423) were rebuilt from their own layered GPT parts; their palettes are redone from the new
+# art later.
+# G177 (22–32, CSS-only palettes of the October build) ended with docs/35: all eleven were rebuilt from their own
+# layered GPT parts (G422–G432); their palettes are redone from the new art later.
 
 
 def test_channels_go_to_the_colour_root_not_the_stage_block():

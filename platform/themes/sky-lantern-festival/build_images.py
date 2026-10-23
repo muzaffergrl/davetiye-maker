@@ -1,53 +1,53 @@
 #!/usr/bin/env python3
-"""Sky Lantern Festival (31) — GPT sources → img/ (docs/11 §5.4; tools/tema_build.py). G170.
+"""Sky Lantern Festival (31) — GPT sources → img/ (docs/11 §5.4, docs/34, docs/35; tools/tema_build.py). Task G431.
 
-Two source modes, chosen PART BY PART (each PAKET 5 part is used as soon as its file exists; a missing part keeps its
-interim stand-in). Either way the pages get the same file names (fixed pixel sizes below), so nothing in the HTML changes
-when GPT's parts arrive.
+Redesign of 2026-10-22 (docs/35): every picture is the design's own PAKET 5R part
+(collections/31_Sky_Lantern_Festival/assets/gpt/GPT_PROMPTS.md), cut, keyed, scaled — nothing is drawn (K21, docs/11 §5.7):
 
-GPT parts (collections/31_Sky_Lantern_Festival/assets/gpt/parts/, PAKET 5 in GPT_PROMPTS.md):
-  hands, lantern_dark, lantern_lit   ONE 1024×1536 canvas, same position (the lantern held in cupped hands): each is
-                   scaled whole to SCENE_PX and shown full size over the stage (CSS inset 0), so they stay registered;
-                   the lantern's alpha box goes to the manifest (stage.lantern_box_pct; the halo is centred on it)
-  sky_dusk         the dusk sky (9:16, opaque) → sky (the opening page and the home hero) + a 16:9 cover crop → sky_band
-  star_dust        star specks on transparent (same 9:16) → a parallax layer over the sky (GPT only)
-  lantern_far      one small distant lantern → lantern_far (the drifting lanterns, schedule marks, the reply's lantern)
-  card_small       the card alone, scaled to the card size below; its #00FF00 window keyed transparent and measured
-                   (stage.card.window_pct) — the portrait sits BEHIND the card, so the window shape is GPT's own outline;
-                   the plain paper under the window = free_zone (theme-check: card text stays on it)
-  frame_paper      #00FF00 → transparent, window measured: the story / teaser photos sit behind a rice-paper mat
-  frame_landscape  #00FF00 → transparent, window measured: the venue photo's frame
-  divider          a trail of star dust (GPT only)
-  bg_tile → bg_wall, web_hero → og-1200x630.jpg
-The measured numbers go to img/manifest.json AND to the generated block at the end of site.css ("@gpt-layers", written
-by this script; never edit it by hand), so CSS and manifest cannot drift.
+  dusk_ground (W1)    ground-640/853        the dip-dyed dusk washi (violet → rose → amber): the cover ground (cover, fixed)
+                                            and the dusk glow behind the home hero
+  dusk_tile (W2)      tile-640/1024         the seamless violet washi: every inner page's ground
+  rice_paper (W3)     paper-640/1024        rice paper: the reply card, the programme, the day band
+  env_back (W4)       back-720              the portrait envelope's back with its starry dusk-sky lining (the envelope box)
+  env_front (W5)      front-720             the front pocket with its gold stud (the card rises from behind it)
+  flap (W6)           flap-720              the lantern-belly flap, outside (closed; it swings up on its top edge)
+  flap_in (W7)        flap_in-720           the flap's inside (rose → amber washi with gold flecks), shown once it is open
+  lantern_unlit (W8)  unlit-320             the paper sky lantern tied to the stud (the closure)
+  lantern_lit (W9)    lit-320               the same lantern lit from inside (crossfades over W8; CSS adds the warm halo)
+  silk_thread (W10)   thread-120            the amber silk thread from the lantern's wire ring, wound round the stud in a bow
+  card_small (W11)    card-720              the deckle-edged rice-paper card that rises from the envelope (and the home card)
+  lantern_frame (W12) lframe-720            the lantern-silhouette portrait frame; arched window measured → mask_arch.png
+  paper_panel (W13)   panel-720             the hanging rice-paper panel (story, story teaser); window measured
+  wide_panel (W14)    wide-1100             the wide bamboo-rod panel (venue); window measured
+  far_lantern (W15)   far-200               the small far lantern: rising behind the opening, drifting on the pages, the
+                                            programme's row lanterns, the lantern released after a reply
+  corner_spray (W16)  spray-720             roses and meadow grasses (one corner of the home card and of the reply card)
+  divider (W17)       divider-1000          the string of miniature lanterns (section dividers)
+  accent_1..3 (W18)   gold/petal/seed-160   gold leaf, a rose petal, a dandelion seed: drifting during the opening and a reply
+  web_hero (W19)      og-1200x630.jpg       share image (tema_build.og_kirp, bottom-aligned)
 
-INTERIM (a part not there yet): stand-ins cut from GPT pixels already in the repo (nothing drawn, K21 — cut, toned,
-blurred, scaled and placed only; the theme stays "coming" and is never sold on these):
+The envelope layers (W4, W5, W6, W8, W9, W10) share one canvas; GPT drifted between them (the flap ~7 % wider than the
+back, the pocket ~2 % wider), so each is cut to its own alpha box and laid in the envelope box (the back's alpha box);
+pocket and flap span its width — manifest `stage`, the numbers site.css uses (tests/theme-sky-lantern-festival.test.ts
+compares them). GPT drew the lantern 43 % of the envelope's width (the prompt asked ~33 %) so it hid the whole belly of
+the flap: both lanterns (unlit and lit, each cut to its own box) are laid in one box, scaled to LANTERN_W of the
+envelope's width about their wire ring (which keeps sitting on the stud). The thread is laid by its own box; its rows
+above the scaled lantern's shoulders are dropped (GPT's larger lantern hid them).
+Photo windows: GPT left the window's middle transparent inside a soft green rim; the window = the green pixels plus the
+transparent hole they enclose, cleared whole, the green spill round it neutralised. The lantern frame's window has an
+arched top: its measured shape is written as a technical alpha mask (mask_arch.png) that site.css applies with
+mask-image (the photo's corners never show past the arch).
 
-  wash   collections/02_Dusty_Blue/assets/gpt/parts/bg_tile.png          (1024², soft blue watercolor wash)
-  paper  collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png   (1254², plain cotton paper)
-
-  sky          the wash toned row by row: deep violet at the top, dusk rose in the middle, amber at the horizon
-  bg_wall      the wash toned deep dusk violet (repeats): the evening sky of every page
-  lantern_*    a tall rectangle of the paper, toned dusky rose (dark) and glowing amber (lit), on the scene canvas
-  lantern_far  the lit paper, small: the distant lanterns
-  card_paper   the paper toned warm rice-paper ivory: the invitation card that appears in the lantern's light
-  ph_*         photo placeholders (blurred, lifted crops of the sky)
-  og / favicon the lit lantern rising in the dusk sky, two distant ones beside it (placed, not painted)
-  hands, star_dust, frame_paper, frame_landscape, divider: none until GPT (hidden in the CSS)
-
-  python3 platform/themes/sky-lantern-festival/build_images.py
+  python3 platform/themes/sky-lantern-festival/build_images.py [--still <png>]
 """
 from __future__ import annotations
 
 import json
-import re
 import sys
 from pathlib import Path
 
 import numpy as np
-from PIL import Image, ImageEnhance
+from PIL import Image, ImageDraw, ImageFilter
 
 THEME = Path(__file__).resolve().parent
 ROOT = THEME.parents[2]
@@ -56,360 +56,210 @@ import tema_build as tb  # noqa: E402
 
 COL = ROOT / "collections/31_Sky_Lantern_Festival"
 PARTS = COL / "assets/gpt/parts"
-SRC = {
-    "wash": ROOT / "collections/02_Dusty_Blue/assets/gpt/parts/bg_tile.png",
-    "paper": ROOT / "collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png",
-}
 OUT = THEME / "img"
-CSS = THEME / "site.css"
-# fixed pixel sizes of the pieces the pages name by file (img/<name>-<width>.webp): a GPT part is scaled to these, so
-# its files carry the same names as the interim ones (tema_build.webp names a file by its width)
-SCENE_PX = (800, 1200)           # hands / lantern canvas, 2:3 (GPT 1024×1536)
-SCENE_W = [400, 800]
-SKY_PX = (1080, 1920)            # 9:16
-SKY_W = [540, 1080]
-BAND_W = 1024                    # sky_band, 16:9
-FAR_PX = (144, 216)              # one distant lantern, 2:3
-CARD_PX = (878, 1254)            # the card, .70
-# the interim lantern on the scene canvas (fractions: x0, y0, x1, y1) = where the prompts put GPT's lantern
-LANTERN_BOX = (0.31, 0.27, 0.69, 0.67)
-GREEN_TINT = 80                  # #00FF00 key: g - max(r, b) above this (and g > 150) = window
 
-used: dict[str, str] = {}
+PH_TONE = (236, 214, 200)        # placeholder tone (rice paper in dusk light)
+REQUIRED = ["dusk_ground", "dusk_tile", "rice_paper", "env_back", "env_front", "flap", "flap_in", "lantern_unlit",
+            "lantern_lit", "silk_thread", "card_small", "lantern_frame", "paper_panel", "wide_panel", "far_lantern",
+            "corner_spray", "divider", "accent_1", "accent_2", "accent_3", "web_hero"]
+LANTERN_W = 34.0                 # % of the envelope width (GPT_PROMPTS geometry: x 36–64 % of the canvas ≈ 33 %)
+CARD_W = 78.0                    # % of the envelope width: the card sits inside the pocket
+CARD_TOP = 9.0                   # % of the envelope height
 
 
-def gpt(name: str, mode: str = "RGBA") -> Image.Image | None:
-    p = PARTS / f"{name}.png"
-    if p.exists():
-        used[name] = f"gpt parts/{name}.png"
-        return Image.open(p).convert(mode)
-    return None
+def part(ad: str) -> Image.Image:
+    return Image.open(PARTS / f"{ad}.png").convert("RGBA")
 
 
-def tone(im: Image.Image, dark, light, gamma: float = 1.0) -> Image.Image:
-    """Duotone of the image's own luminance: shadows → `dark`, highlights → `light` (the grain stays, nothing added)."""
-    g = np.asarray(im.convert("L")).astype(float) / 255
-    g = (g - g.min()) / max(g.max() - g.min(), 1e-6)
-    g = g ** gamma
-    d, l = np.array(dark, float), np.array(light, float)
-    rgb = d + (l - d) * g[..., None]
-    return Image.fromarray(np.clip(rgb, 0, 255).astype(np.uint8), "RGB")
+def box(im: Image.Image, esik: int = 8):
+    return tb.alfa_kutusu(np.asarray(im)[..., 3], esik=esik)
 
 
-def dusk(im: Image.Image, stops) -> Image.Image:
-    """The wash toned row by row: each row is a duotone of its own luminance between the (dark, light) pair of the
-    nearest stops (top → bottom) — colour grading of GPT's watercolor, no shape and no line added."""
-    g = np.asarray(im.convert("L")).astype(float) / 255
-    g = (g - g.min()) / max(g.max() - g.min(), 1e-6)
-    h = g.shape[0]
-    pos = np.array([s[0] for s in stops])
-    out = np.empty(g.shape + (3,))
-    for y in range(h):
-        t = y / max(h - 1, 1)
-        i = min(max(int(np.searchsorted(pos, t)) - 1, 0), len(stops) - 2)
-        k = (t - pos[i]) / max(pos[i + 1] - pos[i], 1e-6)
-        d = np.array(stops[i][1], float) * (1 - k) + np.array(stops[i + 1][1], float) * k
-        l = np.array(stops[i][2], float) * (1 - k) + np.array(stops[i + 1][2], float) * k
-        out[y] = d + (l - d) * g[y][:, None]
-    return Image.fromarray(np.clip(out, 0, 255).astype(np.uint8), "RGB")
+def trim(im: Image.Image, esik: int = 8) -> Image.Image:
+    k = box(im, esik)
+    return im.crop(k) if k else im
 
 
-def alpha_crop(im: Image.Image, esik: int = 24) -> Image.Image:
-    k = tb.alfa_kutusu(np.asarray(im)[..., 3], esik=esik)
-    if k is None:
-        raise ValueError("part is fully transparent")
-    return im.crop(k)
+def r2(v: float) -> float:
+    return round(float(v), 2)
 
 
-def to_size(im: Image.Image, size, name: str, notes: list) -> Image.Image:
-    """Scale a GPT piece to the fixed size the pages name; note an aspect change > 4 % or an upscale > 1.5×."""
-    w, h = im.size
-    d = (w / h) / (size[0] / size[1]) - 1
-    if abs(d) > 0.04:
-        notes.append(f"{name}: aspect {w}/{h} differs {d:+.1%} from {size[0]}/{size[1]} — stretched to fit; check the part")
-    if size[0] / w > 1.5:
-        notes.append(f"{name}: upscaled {size[0] / w:.2f}× ({w} → {size[0]} px)")
-    return im.resize(size, Image.LANCZOS) if im.size != tuple(size) else im
+def _grow(m: np.ndarray, px: int) -> np.ndarray:
+    """Dilate a boolean mask by `px` pixels (PIL MaxFilter; no scipy on the build machines)."""
+    im = Image.fromarray(m.astype(np.uint8) * 255, "L").filter(ImageFilter.MaxFilter(2 * px + 1))
+    return np.asarray(im) > 127
 
 
-def key_green(im: Image.Image):
-    """#00FF00 window → transparent (2 px grown, so no green fringe), the green spill on its edge neutralised.
-    Returns (RGBA image, window box (x0, y0, x1, y1) or None)."""
-    a = np.asarray(im.convert("RGBA")).astype(np.int16)
-    tint = a[..., 1] - np.maximum(a[..., 0], a[..., 2])
-    win = (tint > GREEN_TINT) & (a[..., 1] > 150) & (a[..., 3] > 0)
-    if win.sum() < 0.002 * win.size:
-        return im.convert("RGBA"), None
-    win = tb.en_buyuk_bolge(win)
-    if not 0.03 < win.sum() / max((a[..., 3] > 0).sum(), 1) < 0.9:      # a sliver, or the whole piece: not a window
-        return im.convert("RGBA"), None
+def _fill_holes(m: np.ndarray) -> np.ndarray:
+    """m plus every pixel not reachable from the border without crossing m (scipy's binary_fill_holes)."""
+    h, w = m.shape
+    pad = np.zeros((h + 2, w + 2), np.uint8)
+    pad[1:-1, 1:-1] = m.astype(np.uint8) * 255
+    im = Image.fromarray(pad, "L").copy()
+    ImageDraw.floodfill(im, (0, 0), 128)
+    return (np.asarray(im)[1:-1, 1:-1] != 128)
+
+
+def keyed_window(im: Image.Image):
+    """The photo window of a framed part: GPT's green is a closed rim (soft towards the middle) round an already
+    transparent hole, so the window = the green with everything it encloses, grown 2 px and cleared; the green spill in a
+    12 px ring round it is neutralised. (RGBA, window box (L, T, W, H) % of the image, window mask) or (im, None, None)."""
+    c = np.asarray(im).copy()
+    rgb = c[..., :3].astype(np.int16)
+    green = (rgb[..., 1] > 110) & (rgb[..., 1] - np.maximum(rgb[..., 0], rgb[..., 2]) > 50) & (c[..., 3] > 30)
+    if green.sum() < 256:
+        return im, None, None
+    win = _grow(_fill_holes(_grow(green, 1)), 2)
     ys, xs = np.nonzero(win)
-    box = (int(xs.min()), int(ys.min()), int(xs.max()) + 1, int(ys.max()) + 1)
-    grown = tb.genislet(win, 2)
-    out = a.copy()
-    out[..., 3][grown] = 0
-    # the hidden pixels take the frame's own colour round the window: lossy WebP (4:2:0 chroma) would otherwise bleed
-    # the invisible green into the visible edge
-    ring = tb.genislet(win, 10) & ~grown & (a[..., 3] > 200)
-    if ring.any():
-        out[..., :3][grown] = np.median(a[..., :3][ring], 0).astype(np.int16)
-    spill = tb.genislet(win, 5) & ~grown & (tint > 0)            # green cast on the frame's inner edge
-    out[..., 1][spill] = np.maximum(out[..., 0], out[..., 2])[spill]
-    return Image.fromarray(np.clip(out, 0, 255).astype(np.uint8), "RGBA"), box
+    h, w = c.shape[:2]
+    x0, x1, y0, y1 = xs.min(), xs.max() + 1, ys.min(), ys.max() + 1
+    c[win, 3] = 0
+    ring = _grow(win, 12) & ~win
+    rgb = c[..., :3].astype(np.int16)
+    spill = ring & (rgb[..., 1] > np.maximum(rgb[..., 0], rgb[..., 2]) + 6)
+    c[..., 1] = np.where(spill, ((rgb[..., 0] + rgb[..., 2]) // 2).clip(0, 255), c[..., 1]).astype(np.uint8)
+    return (Image.fromarray(c, "RGBA"), (100 * x0 / w, 100 * y0 / h, 100 * (x1 - x0) / w, 100 * (y1 - y0) / h),
+            win[y0:y1, x0:x1])
 
 
-def pct_box(box, size):
-    W, H = size
-    x0, y0, x1, y1 = box
-    return [round(100 * x0 / W, 2), round(100 * y0 / H, 2), round(100 * (x1 - x0) / W, 2), round(100 * (y1 - y0) / H, 2)]
+def place(inner, outer):
+    """The box `inner` (x0, y0, x1, y1 px) in % of the box `outer`: [left, top, width, height]."""
+    ox0, oy0, ox1, oy1 = outer
+    ow, oh = ox1 - ox0, oy1 - oy0
+    x0, y0, x1, y1 = inner
+    return [r2(100 * (x0 - ox0) / ow), r2(100 * (y0 - oy0) / oh), r2(100 * (x1 - x0) / ow), r2(100 * (y1 - y0) / oh)]
 
 
-def framed(name: str, out_w: int, manifest: dict, notes: list):
-    """frame_paper / frame_landscape: the frame alone, window keyed → {file, aspect, window_pct} or None."""
-    im = gpt(name)
-    if im is None:
-        return None
-    im, win = key_green(alpha_crop(im))
-    if win is None:
-        notes.append(f"{name}: no #00FF00 window found — not used")
-        used[name] += " (no window: not used)"
-        return None
-    tb.webp(im, name, [out_w], 84, manifest, out=OUT)
-    return {"file": manifest[name]["files"][-1]["file"], "aspect": f"{im.width}/{im.height}",
-            "window_pct": pct_box(win, im.size)}
-
-
-def card_layout(card: Image.Image, win, notes: list) -> dict:
-    """The GPT card: window box, plain-paper zone (free_zone, theme-check) and the text block's padding under the window
-    (% of the card width, CSS padding)."""
-    W, H = card.size
-    wp = pct_box(win, card.size)
-    zone = tb.serbest_bolge(card, .5, adim=1.0, ornek=(.74, .80))
-    below = wp[1] + wp[3] + 2
-    rows = [r for r in zone if r[0] >= below and r[1] is not None]
-    if not rows:
-        notes.append("card_small: no plain paper under the window — text padding is a guess (8 %)")
-        side, last = 8.0, 92.0
-    else:
-        last = max(r[0] for r in rows) + 1
-        mid = [r for r in rows if r[0] <= last - 2] or rows
-        side = max(max(r[1] for r in mid), max(100 - r[2] for r in mid)) + 2
-    k = H / W                                                   # % of height → % of width
-    return {"window_pct": wp, "free_zone": zone,
-            "pad_pct_of_width": [round(below * k, 2), round(side, 2), round(max(100 - last + 2, 4) * k, 2)]}
-
-
-def gpt_css(stage: dict, layers: dict) -> str:
-    """The generated block at the end of site.css: switches on the GPT-only layers and places the GPT card window and
-    the photo frames with the numbers measured above. Empty (a comment) while all are interim."""
-    r = []
-    card = stage.get("card", {})
-    if card.get("window_pct"):
-        x, y, w, h = card["window_pct"]
-        pt, ps, pb = card["pad_pct_of_width"]
-        r += [f".hero-card{{aspect-ratio:{CARD_PX[0]}/{CARD_PX[1]};width:min(84vw,400px,calc((100svh - var(--nav-h) - 120px) * {CARD_PX[0] / CARD_PX[1]:.4f}))}}",
-              ".hero-card>.card-img,.stage .card>.card-img{object-fit:fill;z-index:1}",
-              f".hero-copy{{position:static;min-height:100%;display:flex;flex-direction:column;justify-content:center;justify-content:safe center;padding:{pt}% {ps}% {pb}%}}",
-              f".hero-photo,.stage .card-photo{{position:absolute;left:{x}%;top:{y}%;width:{w}%;height:{h}%;margin:0;z-index:0}}",
-              ".hero-copy>:not(.hero-photo),.card-copy>:not(.card-photo){position:relative;z-index:2;zoom:var(--k,1)}",
-              ".hero-photo.ty-fill{display:block}",
-              f".card-copy{{position:static;justify-content:center;justify-content:safe center;padding:{pt}% {ps}% {pb}%}}"]
-    paper = layers.get("frame_paper")
-    if paper:
-        x, y, w, h = paper["window_pct"]
-        r += [f".lit-photo{{aspect-ratio:{paper['aspect']};background:none}}",
-              f".lit-photo>img{{position:absolute;left:{x}%;top:{y}%;width:{w}%;height:{h}%}}",
-              f".lit-photo>.mat{{display:block;background-image:url(img/{paper['file']})}}"]
-    land = layers.get("frame_landscape")
-    if land:
-        x, y, w, h = land["window_pct"]
-        r += [f".venue-photo{{aspect-ratio:{land['aspect']};background:none}}",
-              f".venue-photo>img{{position:absolute;left:{x}%;top:{y}%;width:{w}%;height:{h}%}}",
-              f".venue-photo>.frame{{display:block;background-image:url(img/{land['file']})}}"]
-    if layers.get("hands"):
-        r.append(f".hands{{display:block;background-image:url(img/{layers['hands']['file']})}}")
-    if layers.get("star_dust"):
-        r.append(f".stars{{display:block;background-image:url(img/{layers['star_dust']['file']})}}")
-    if layers.get("divider"):
-        r.append(f".divider{{display:block;aspect-ratio:{layers['divider']['aspect']};background-image:url(img/{layers['divider']['file']})}}")
-    body = "\n".join(r) if r else "/* no GPT layer yet: interim pieces only */"
-    return ("/* @gpt-layers — generated by build_images.py from img/manifest.json (stage, gpt_layers); do not edit by hand */\n"
-            + body + "\n/* @end gpt-layers */\n")
-
-
-def write_css_block(block: str) -> None:
-    css = CSS.read_text(encoding="utf-8")
-    pat = re.compile(r"/\* @gpt-layers.*?/\* @end gpt-layers \*/\n", re.S)
-    css = pat.sub(lambda m: block, css) if pat.search(css) else css.rstrip("\n") + "\n" + block
-    CSS.write_text(css, encoding="utf-8")
-
-
-# Emekli (2026-10-20): tema 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (docs/qa/2026-10-18-*.md,
-# docs/qa/2026-10-19-*.md); img/ artık bu betiğin çıktısı değil. Bu betik img/'yi silip eski geçici kesimi kurar ve
-# yeni kapak / iç sayfa görsellerini yok eder, bu yüzden çalışmaz. tools/gpt_yerlestir.py bu adımı atlar.
-EMEKLI = "tema 2026-10-18/19 yeniden kurulumuyla değişti; img/ elle yönetiliyor (silmemek için çalışmaz)"
+def envelope_still(layers: dict, stage: dict, h: int, keys=("back", "front", "flap", "thread", "unlit")) -> Image.Image:
+    """The closed envelope as the index page shows it — a composition check (--still <file>)."""
+    w = round(h * stage["aspect"])
+    pad = round(h * .1)
+    canvas = Image.new("RGBA", (w + 2 * pad, h + 2 * pad), (128, 128, 128, 255))
+    for key in keys:
+        L, T, W, H = stage["lantern" if key in ("unlit", "lit") else key]
+        im = layers[key].resize((max(1, round(w * W / 100)), max(1, round(h * H / 100))), Image.LANCZOS)
+        canvas.alpha_composite(im, (pad + round(w * L / 100), pad + round(h * T / 100)))
+    return canvas
 
 
 def main() -> int:
-    if EMEKLI:
-        print(f"build_images.py çalıştırılmadı: {EMEKLI}", file=sys.stderr)
-        return 2
-    notes: list[str] = []
+    missing = [k for k in REQUIRED if not (PARTS / f"{k}.png").exists()]
+    if missing:
+        print("ERROR: parts missing: " + ", ".join(missing), file=sys.stderr)
+        return 1
     manifest: dict = {}
+    OUT.mkdir(exist_ok=True)
     for old in list(OUT.glob("*.webp")) + list(OUT.glob("*.jpg")) + list(OUT.glob("*.png")):
         old.unlink()
 
-    wash = Image.open(SRC["wash"]).convert("RGB")
-    paper = Image.open(SRC["paper"]).convert("RGB")
-    stage: dict = {"canvas": "2:3 scene (hands + lantern on one canvas)", "lantern_box_pct": [round(100 * v, 2) for v in LANTERN_BOX]}
-    layers: dict = {}
+    ground = Image.open(PARTS / "dusk_ground.png").convert("RGB")
+    tile = Image.open(PARTS / "dusk_tile.png").convert("RGB")
+    paper = Image.open(PARTS / "rice_paper.png").convert("RGB")
+    tb.webp(ground, "ground", [640, 853], 74, manifest, out=OUT)
+    tb.webp(tile, "tile", [640, 1024], 70, manifest, out=OUT)
+    tb.webp(paper, "paper", [640, 1024], 72, manifest, out=OUT)
 
-    # ---------------------------------------------------------------- the lantern in the hands (one canvas)
-    scene: dict[str, Image.Image] = {}
-    for name in ("lantern_dark", "lantern_lit", "hands"):
-        im = gpt(name)
-        if im is not None:
-            scene[name] = to_size(im, SCENE_PX, name, notes)
-    lit_paper = tone(paper, (150, 62, 18), (255, 218, 150), gamma=0.7)                  # glowing amber paper
-    dark_paper = tone(paper, (64, 40, 62), (206, 168, 160), gamma=1.0)                 # dusky rose paper, unlit
-    W, H = SCENE_PX
-    x0, y0, x1, y1 = (round(LANTERN_BOX[0] * W), round(LANTERN_BOX[1] * H), round(LANTERN_BOX[2] * W), round(LANTERN_BOX[3] * H))
-    for name, src in (("lantern_dark", dark_paper), ("lantern_lit", lit_paper)):
-        if name in scene:
-            continue
-        canvas = Image.new("RGBA", SCENE_PX, (0, 0, 0, 0))
-        canvas.paste(tb.kapla(src, (x1 - x0) / (y1 - y0)).resize((x1 - x0, y1 - y0), Image.LANCZOS).convert("RGBA"), (x0, y0))
-        scene[name] = canvas
-        used[name] = f"interim (18 paper toned {'amber, lit' if name == 'lantern_lit' else 'dusky rose'})"
-    for name in ("lantern_dark", "lantern_lit"):
-        tb.webp(scene[name], name, SCENE_W, 82, manifest, out=OUT)
-    k = tb.alfa_kutusu(np.asarray(scene["lantern_dark"])[..., 3], esik=24)
-    if k is not None:
-        stage["lantern_box_pct"] = [round(100 * k[0] / W, 2), round(100 * k[1] / H, 2), round(100 * k[2] / W, 2), round(100 * k[3] / H, 2)]
-    if "hands" in scene:
-        tb.webp(scene["hands"], "hands", SCENE_W, 82, manifest, out=OUT)
-        layers["hands"] = {"file": manifest["hands"]["files"][-1]["file"]}
-
-    # ---------------------------------------------------------------- the sky, the page wall, the distant lantern
-    sky_src = gpt("sky_dusk", "RGB")
-    if sky_src is not None:
-        sky = to_size(sky_src, SKY_PX, "sky", notes)
-    else:
-        sky = dusk(tb.kapla(wash, SKY_PX[0] / SKY_PX[1]), [
-            (0.0, (24, 16, 44), (66, 48, 104)),       # deep violet
-            (0.45, (58, 36, 82), (150, 104, 150)),    # dusk mauve
-            (0.75, (120, 64, 82), (226, 150, 132)),   # rose
-            (1.0, (170, 92, 52), (250, 196, 126)),    # amber horizon
-        ]).resize(SKY_PX, Image.LANCZOS)
-        used["sky_dusk"] = "interim (02 watercolor wash toned violet → rose → amber)"
-    tb.webp(sky, "sky", SKY_W, 74, manifest, out=OUT)
-    band = tb.kapla(sky.crop((0, round(SKY_PX[1] * .25), SKY_PX[0], SKY_PX[1])), 16 / 9)
-    tb.webp(band.resize((BAND_W, round(BAND_W * 9 / 16)), Image.LANCZOS), "sky_band", [640, 1024], 72, manifest, out=OUT)
-
-    wall_src = gpt("bg_tile", "RGB")
-    if wall_src is not None:
-        wall = wall_src.resize((640, 640), Image.LANCZOS)
-    else:
-        wall = tone(wash, (20, 14, 38), (58, 42, 88), gamma=1.0).resize((640, 640), Image.LANCZOS)   # deep dusk violet
-        used["bg_tile"] = "interim (02 watercolor wash toned dusk violet)"
-    tb.webp(wall, "bg_wall", [640], 72, manifest, out=OUT)
-
-    far_src = gpt("lantern_far")
-    if far_src is not None:
-        far = to_size(alpha_crop(far_src), FAR_PX, "lantern_far", notes)
-    else:
-        far = tb.kapla(lit_paper, FAR_PX[0] / FAR_PX[1]).resize(FAR_PX, Image.LANCZOS).convert("RGBA")
-        used["lantern_far"] = "interim (18 paper toned amber, small)"
-    tb.webp(far, "lantern_far", [FAR_PX[0] // 2, FAR_PX[0]], 82, manifest, out=OUT)
-
-    stars = gpt("star_dust")
-    if stars is not None:
-        tb.webp(to_size(stars, SKY_PX, "star_dust", notes), "star_dust", SKY_W, 80, manifest, out=OUT)
-        layers["star_dust"] = {"file": manifest["star_dust"]["files"][-1]["file"]}
-
-    # ---------------------------------------------------------------- the card
-    card_src = gpt("card_small")
-    if card_src is not None:
-        card, win = key_green(to_size(alpha_crop(card_src), CARD_PX, "card_paper", notes))
-        tb.webp(card, "card_paper", [480, 960], 82, manifest, out=OUT)
-        if win is None:
-            notes.append("card_small: no #00FF00 window found — the portrait stays in the text flow")
-            stage["card"] = {"window_pct": None}
-        else:
-            lay = card_layout(card, win, notes)
-            manifest["card_paper"]["free_zone"] = lay.pop("free_zone")
-            stage["card"] = lay
-    else:
-        card = tone(paper, (204, 178, 146), (253, 246, 232), gamma=0.8)                   # warm rice-paper ivory
-        tb.webp(tb.kapla(card, 0.7), "card_paper", [480, 960], 78, manifest, out=OUT)
-        used["card_small"] = "interim (18 paper toned rice-paper ivory)"
-
-    # ---------------------------------------------------------------- GPT-only layers (hidden in the CSS until they exist)
-    div = gpt("divider")
-    if div is not None:
-        div = alpha_crop(div)
-        tb.webp(div, "divider", [320, 640], 84, manifest, out=OUT)
-        layers["divider"] = {"file": manifest["divider"]["files"][-1]["file"], "aspect": f"{div.width}/{div.height}"}
-    for name, w in (("frame_paper", 720), ("frame_landscape", 1024)):
-        f = framed(name, w, manifest, notes)
-        if f:
-            layers[name] = f
-
-    # ---------------------------------------------------------------- placeholders
-    slots = {}
-    for key, shape, ratio, w in (("hero_portrait", "portrait", 4 / 5, 640), ("story", "story", 3 / 4, 480), ("venue", "wide", 16 / 9, 640)):
-        ph = tb.yer_tutucu(sky, (0, round(sky.height * .2), sky.width, round(sky.height * .8)), ratio, w=w,
-                           ton=(92, 70, 120), karisim=.3, bulanik=10)
-        tb.webp(ph, f"ph_{shape}", [w], 74, manifest, out=OUT)
-        slots[key] = f"ph_{shape}-{w}.webp"
-    manifest["placeholders"] = slots
-
-    # ---------------------------------------------------------------- og + favicon
-    lit_box = tb.alfa_kutusu(np.asarray(scene["lantern_lit"])[..., 3], esik=24)
-    lit = scene["lantern_lit"].crop(lit_box)
-    hero = gpt("web_hero", "RGB")
-    if hero is not None:
-        og, og_info = tb.og_kirp(hero, hiza="alt")
-        manifest["og"] = {**og_info, "file": "og-1200x630.jpg", "bytes": tb.og_kaydet(og, OUT / "og-1200x630.jpg")}
-    else:   # the lit lantern rising in the dusk sky, two distant ones beside it
-        ow, oh = tb.OG_OLCU
-        og = tb.kapla(sky, ow / oh).resize((ow, oh), Image.LANCZOS)
-        lh = 280
-        lw = round(lh * lit.width / lit.height)
-        og.paste(lit.resize((lw, lh), Image.LANCZOS), ((ow - lw) // 2, 150), lit.resize((lw, lh), Image.LANCZOS))
-        for x, y, s in ((300, 150, 64), (880, 80, 46)):
-            f = far.resize((round(s * FAR_PX[0] / FAR_PX[1]), s), Image.LANCZOS)
-            og.paste(f, (x, y), f)
-        manifest["og"] = {"composed": "sky + lantern_lit (centre) + two lantern_far", "file": "og-1200x630.jpg",
-                          "bytes": tb.og_kaydet(og, OUT / "og-1200x630.jpg")}
-    icon, icon_info = tb.ikon(scene["lantern_lit"], pay=0.12)
-    icon.save(OUT / "favicon.png", optimize=True)
-    manifest["favicon"] = {**icon_info, "file": "favicon.png", "bytes": (OUT / "favicon.png").stat().st_size}
-
-    # ---------------------------------------------------------------- stage geometry, CSS block, checks, manifest
-    gpt_all = all(v.startswith("gpt") for v in used.values())
-    manifest["_note"] = ("G170 build from the PAKET 5 parts (GPT_PROMPTS.md)." if gpt_all else
-                         "G170 build: every PAKET 5 part that exists is used (see 'sources'); the others are stand-ins "
-                         "cut and toned from GPT pixels of 02 (watercolor wash) and 18 (paper) — see build_images.py.")
-    manifest["sources"] = dict(sorted(used.items()))
+    # the envelope: the back's alpha box is the envelope box; pocket and flap span its width
+    raw = {k: part(n) for k, n in (("back", "env_back"), ("front", "env_front"), ("flap", "flap"),
+                                   ("thread", "silk_thread"), ("unlit", "lantern_unlit"), ("lit", "lantern_lit"))}
+    boxes = {k: box(v, 24 if k == "thread" else 8) for k, v in raw.items()}
+    bx = boxes["back"]
+    bw, bh = bx[2] - bx[0], bx[3] - bx[1]
+    front = place(boxes["front"], bx)
+    flap = place(boxes["flap"], bx)
+    unlit = place(boxes["unlit"], bx)
+    stage = {
+        "aspect": round(bw / bh, 4),
+        "back": [0, 0, 100, 100],
+        "front": [0, front[1], 100, r2(100 - front[1])],
+        "flap": [0, 0, 100, r2(flap[1] + flap[3])],
+    }
+    layers = {k: raw[k].crop(boxes[k]) for k in ("back", "front", "flap", "unlit", "lit")}
+    # the lantern: scaled to LANTERN_W about its bottom (the wire ring stays on the stud), centred
+    lh = unlit[3] * LANTERN_W / unlit[2]
+    bottom = unlit[1] + unlit[3]
+    stage["lantern"] = [r2(50 - LANTERN_W / 2), r2(bottom - lh), LANTERN_W, r2(lh)]
+    # the thread: its own box, minus the rows hidden above the (smaller) lantern's shoulders
+    tx0, ty0, tx1, ty1 = boxes["thread"]
+    ty0 = max(ty0, round(bx[1] + bh * (stage["lantern"][1] + lh * .12) / 100))
+    layers["thread"] = raw["thread"].crop((tx0, ty0, tx1, ty1))
+    thread = place((tx0, ty0, tx1, ty1), bx)
+    stage["thread"] = [r2(50 - thread[2] / 2), thread[1], thread[2], thread[3]]
+    card = trim(part("card_small"))
+    stage["card_ratio"] = round(card.width / card.height, 4)
+    stage["card"] = [r2(50 - CARD_W / 2), CARD_TOP, CARD_W, r2(CARD_W * stage["aspect"] / stage["card_ratio"])]
+    stage["_note"] = ("%% of the closed envelope (left, top, width, height): the back's alpha box is the envelope; pocket "
+                      "and flap span its width; both lanterns share one box, scaled to %g %% of the width about their "
+                      "wire ring; the thread by its own box; the card %g %% wide inside the pocket" % (LANTERN_W, CARD_W))
+    for key in ("back", "front", "flap"):
+        tb.webp(layers[key], key, [720], 82, manifest, out=OUT)
+    tb.webp(layers["unlit"], "unlit", [320], 86, manifest, out=OUT)
+    tb.webp(layers["lit"], "lit", [320], 86, manifest, out=OUT)
+    tb.webp(layers["thread"], "thread", [120], 88, manifest, out=OUT)
+    flap_in = trim(part("flap_in"))
+    tb.webp(flap_in, "flap_in", [720], 82, manifest, out=OUT)
+    stage["flap_in_ratio"] = round(flap_in.width / flap_in.height, 4)
+    tb.webp(card, "card", [720], 80, manifest, out=OUT)
     manifest["stage"] = stage
-    manifest["gpt_layers"] = layers
-    if notes:
-        manifest["warnings"] = notes
-    write_css_block(gpt_css(stage, layers))
-    # #00FF00 left visible: only the files cut from a part with a green window
-    keyed = [f for f in sorted(OUT.glob("*.webp")) if f.name.split("-")[0] in ("card_paper", "frame_paper", "frame_landscape")]
-    manifest["checks"] = {"green": {f.name: n for f in keyed if (n := tb.yesil_gorunur(f))}}
-    manifest["theme_check"] = {"particles": ".accent-layer,.drift", "first_screen": {"landscape": False, "names_min_px": 30},
-                               "backdrop": {"edge_max": 2.2, "dark_max": 0.05, "dark_below": 0, "light_above": 110}}
+
+    # the frames: window measured (green rim + the transparent hole it encloses)
+    for src, name, width in (("lantern_frame", "lframe", 720), ("paper_panel", "panel", 720), ("wide_panel", "wide", 1100)):
+        keyed, win, mask = keyed_window(trim(part(src)))
+        if win is None:
+            print(f"ERROR {src}.png: no #00FF00 window found", file=sys.stderr)
+            return 1
+        tb.webp(keyed, name, [width], 84, manifest, out=OUT)
+        manifest[name]["window_pct"] = [r2(v) for v in win]
+        manifest[name]["window_px"] = [round(keyed.width * win[2] / 100), round(keyed.height * win[3] / 100)]
+        if name == "lframe":
+            # the arched window as a technical alpha mask (its own measured pixels, softened ~1 px), 320 px wide
+            m = Image.fromarray(mask.astype(np.uint8) * 255, "L").filter(ImageFilter.GaussianBlur(1.2))
+            m = m.resize((320, round(320 * m.height / m.width)), Image.LANCZOS)
+            a = Image.new("RGBA", m.size, (0, 0, 0, 0))
+            a.putalpha(m)
+            a.save(OUT / "mask_arch.png", optimize=True)
+            manifest[name]["mask"] = "mask_arch.png"
+
+    for src, name, width, q in (("far_lantern", "far", 200, 86), ("corner_spray", "spray", 720, 82),
+                                ("divider", "divider", 1000, 84), ("accent_1", "gold", 160, 88),
+                                ("accent_2", "petal", 160, 86), ("accent_3", "seed", 160, 86)):
+        tb.webp(trim(part(src)), name, [width], q, manifest, out=OUT)
+
+    def aspect(name):
+        w, h = manifest[name]["window_px"]
+        return f"{w}/{h}"
+    slots = {}
+    for shape, name in (("arch", "lframe"), ("panel", "panel"), ("wide", "wide")):
+        w, h = manifest[name]["window_px"]
+        ph = tb.yer_tutucu(paper, (0, 0, paper.width, paper.height), w / h, w=640, ton=PH_TONE, karisim=.4, bulanik=10)
+        tb.webp(ph, f"ph_{shape}", [640], 74, manifest, out=OUT)
+        slots[shape] = f"ph_{shape}-640.webp"
+    manifest["placeholders"] = slots
+    manifest["photo_slots"] = {"hero_portrait": {"aspect": aspect("lframe")}, "story_1": {"aspect": aspect("panel")},
+                               "story_2": {"aspect": aspect("panel")}, "story_3": {"aspect": aspect("panel")},
+                               "venue": {"aspect": aspect("wide")}}
+
+    og, og_info = tb.og_kirp(Image.open(PARTS / "web_hero.png"), hiza="alt")
+    manifest["og"] = {**og_info, "file": "og-1200x630.jpg", "source": "parts/web_hero.png",
+                      "bytes": tb.og_kaydet(og, OUT / "og-1200x630.jpg")}
+    icon, icon_info = tb.ikon(layers["lit"])
+    icon.save(OUT / "favicon.png", optimize=True)
+    manifest["favicon"] = {**icon_info, "file": "favicon.png", "bytes": (OUT / "favicon.png").stat().st_size,
+                           "source": "the lit paper lantern"}
+    if "--still" in sys.argv:
+        envelope_still(layers, stage, 900).save(sys.argv[sys.argv.index("--still") + 1])
+
+    manifest["parts"] = {"used": sorted(REQUIRED), "waiting_for_gpt": []}
+    manifest["_note"] = "G431 build from the design's own PAKET 5R parts (all present; docs/35). Nothing drawn."
+    manifest["checks"] = {"green": tb.yesil_denetle(OUT)}
+    manifest["theme_check"] = {"particles": ".accent-layer", "first_screen": {"landscape": False, "names_min_px": 32}}
     manifest["bytes_total"] = tb.klasor_boyutu(THEME)
     tb.manifest_yaz(OUT, manifest)
-    for n in notes:
-        print("WARNING", n, file=sys.stderr)
-    print(f"sky-lantern-festival: theme folder {manifest['bytes_total'] / 1e6:.2f} MB · GPT parts used: "
-          f"{sum(v.startswith('gpt') for v in used.values())}/{len(used)}")
+    print(json.dumps({k: stage[k] for k in ("aspect", "front", "flap", "lantern", "thread", "card", "flap_in_ratio", "card_ratio")}))
+    print({n: (manifest[n]["window_pct"], manifest[n]["src_size"]) for n in ("lframe", "panel", "wide")})
+    print(f"sky-lantern-festival: theme folder {manifest['bytes_total'] / 1e6:.2f} MB, green residue: {manifest['checks']['green']}")
     if manifest["checks"]["green"]:
-        print("ERROR: visible #00FF00", manifest["checks"]["green"], file=sys.stderr)
+        print("ERROR: green residue in img/", file=sys.stderr)
         return 1
     if manifest["bytes_total"] > tb.TEMA_BUTCE:
         print("ERROR: theme folder over 3 MB", file=sys.stderr)

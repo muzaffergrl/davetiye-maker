@@ -1,8 +1,8 @@
 // G175: every design of lib/marketing/config.ts — live and off sale (22–38) — has its own opening sentence in
 // lib/marketing/designs.ts, so the panel's first preview tab is named after it (openingTabLabel, G121) and never falls
 // back to "Opening"; the START HERE guides (tools/build_customer_guides.py) print the same word. 26 Kintsugi & Washi had
-// no sales copy (G164) and showed "Opening"; its object is the origami. Every opening word is translated on the sales
-// site (OPENING_THINGS) and in the panel (I18N_STRICT, keys.ts).
+// no sales copy (G164) and showed "Opening"; its object was the origami until the docs/35 redesign. Every opening word
+// is translated on the sales site (OPENING_THINGS) and in the panel (I18N_STRICT, keys.ts).
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -15,16 +15,16 @@ import { themeOpening } from '../lib/panel/state.ts';
 
 const COMING_OPENINGS: Record<string, string> = {
   'nocturne-lake-estate': 'envelope',
-  'velvet-jewel-box': 'box',
-  'grand-theatre-premiere': 'curtain',
-  'orient-express-voyage': 'wallet',
-  'kintsugi-washi': 'origami',
-  'riad-lantern-nights': 'door',
-  'maison-patisserie': 'parcel',
-  'celestial-observatory': 'chart',
-  'azulejo-mosaic': 'panel',
-  'sky-lantern-festival': 'pouch',
-  'music-box-ballerina': 'box',
+  'velvet-jewel-box': 'envelope',
+  'grand-theatre-premiere': 'envelope',
+  'orient-express-voyage': 'envelope',
+  'kintsugi-washi': 'envelope',
+  'riad-lantern-nights': 'envelope',
+  'maison-patisserie': 'envelope',
+  'celestial-observatory': 'envelope',
+  'azulejo-mosaic': 'envelope',
+  'sky-lantern-festival': 'envelope',
+  'music-box-ballerina': 'envelope',
   'marigold-mehndi': 'envelope',
   'red-lacquer-double-happiness': 'envelope',
   'highland-tartan-thistle': 'envelope',
@@ -56,8 +56,8 @@ test('G175: every configured design has an opening object, and the panel tab is 
     assert.equal(openingPlace(themeOpening(d.id)), word, d.id);
     assert.ok(OPENING_THINGS[word], `${d.id}: '${word}' missing from OPENING_THINGS`);
   }
-  // 22–32 are off sale ('coming', or 'preview' in the catalogue since main f1228e88); 2026-10-22: each rebuilt theme names
-  // its own opening object (22 is the only envelope among them)
+  // 22–32 are off sale ('coming', or 'preview' in the catalogue since main f1228e88); since the docs/35 redesign
+  // (G422–G432, merged 2026-10-23) each of them opens from its own closed envelope (K23 strict)
   const offSale = MARKETING.designs.filter((d) => d.status !== 'live');
   assert.deepEqual(Object.fromEntries(offSale.map((d) => [d.id, themeOpening(d.id)])), COMING_OPENINGS);
   // while in preview the catalogue copy names the same object as the panel and START HERE
@@ -67,8 +67,9 @@ test('G175: every configured design has an opening object, and the panel tab is 
 });
 
 // The START HERE guides (tools/build_customer_guides.py) and the Etsy check (tools/etsy_upload.py) read the opening and the
-// fonts from the source text of DESIGN_COPY; the module may replace a design's copy when it loads (PREVIEW_DESIGN_COPY,
-// UNIQUE_INTERIORS). Both must agree, or the guide names another object or other fonts than the site and the panel.
+// fonts from the source text of DESIGN_COPY; nothing may replace a design's copy when the module loads (the 22–32 preview
+// overrides were folded into DESIGN_COPY on 2026-10-23). Both must agree, or the guide names another object or other
+// fonts than the site and the panel.
 test('G175: the opening sentence and the fonts the tools read from designs.ts are the ones the site and the panel use', () => {
   const src = readFileSync(path.join(import.meta.dirname, '..', 'lib', 'marketing', 'designs.ts'), 'utf8');
   for (const d of MARKETING.designs) {

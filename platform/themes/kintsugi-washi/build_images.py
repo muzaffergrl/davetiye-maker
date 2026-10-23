@@ -1,40 +1,38 @@
 #!/usr/bin/env python3
-"""Kintsugi & Washi (26) — GPT sources → img/ (docs/11 §5.4; tools/tema_build.py). Interim build (G164).
+"""Kintsugi & Washi (26) — GPT sources → img/ (docs/11 §5.4, docs/34, docs/35; tools/tema_build.py). Task G426.
 
-The design's own PAKET 5 parts are ordered in collections/26_Kintsugi_Washi/assets/gpt/GPT_PROMPTS.md and do not exist
-yet. Until they arrive the theme is built like Nocturne (G142): every picture is cut, toned, scaled or blurred from GPT
-pixels that already exist — nothing is drawn (K21, docs/11 §5.7). Interim sources (plain paper textures, no motif):
+Redesign of 2026-10-22 (docs/35): every picture is the design's own PAKET 5R part
+(collections/26_Kintsugi_Washi/assets/gpt/GPT_PROMPTS.md), cut, keyed, scaled — nothing is drawn (K21, docs/11 §5.7):
 
-  indigo washi   collections/06_Art_Deco_Noir/assets/gpt/parts/bg_tile.png        deep navy paper, toned to indigo
-  rice paper     collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png    white cotton paper, toned to rice ivory
+  page_ground (W1)    ground-640/1024       undyed rice-ivory washi with sparse gold fibres: every page ground
+  card_paper (W2)     paper-640/1024        smooth rice-paper card stock: the invitation band, the programme, the form
+  env_back (W3)       back-720              the packet's undyed inside floor (the packet box)
+  flap_n/e/s/w (W4–7) flap_n-720, flap_e-440, flap_s-720, flap_w-440   the four indigo washi flaps of the tatō fold
+  flap_in_* (W8–11)   in_n-720, in_e-440, in_s-720, in_w-440            their real inner faces (gold-flecked undyed washi)
+  cord_band (W12)     cord-720              the twisted gold-and-ivory cord round the packet, figure-eight round the button
+  button (W13)        button-240            the kintsugi-mended porcelain button at the centre
+  card_small (W14)    card-720              the deckled rice-paper card that rises from the centre
+  frame_portrait (W15) portrait-720         the indigo washi mat of the portrait; window measured
+  frame_story (W16)   story-720             the rice-paper story mat (portrait); window measured
+  frame_story_wide (W17) wide-900           the rice-paper story mat (landscape, 5:4); window measured
+  frame_venue (W18)   venue-1100            the wide torn indigo washi of the venue; window measured
+  ink_bloom (W19)     ink-512               the sumi ink bloom: a CSS mask (mask-image) through which each photo appears
+  corner_sprig (W20)  sprig-560             the white plum sprig (cover corner, home card, reply card)
+  divider (W21)       divider-1000          a single gold kintsugi seam (section dividers)
+  mended_bowl (W22)   bowl-480              the kintsugi-mended tea bowl of the signature
+  accent_1..3 (W23)   flake/drop/petal-160  gold-leaf flake, indigo ink drop, plum petal: they drift during the opening
+  web_hero (W24)      og-1200x630.jpg       share image (tema_build.og_kirp, bottom-aligned)
 
-Toning keeps each paper's own grain (`tonla`: the source's luminance deviation around the palette colour). When the
-design's own parts are in parts/ (washi_indigo.png, washi_inner.png, rice_paper.png) they replace the interim sources
-automatically. Every other PAKET 5 part is optional and taken the moment it exists (G167): the build cuts / keys /
-scales it into img/ and writes `parts.css` (loaded by every page after site.css) with the rules that use it. Without the
-part the rule is not written and the page keeps its interim look — so a page never asks for a picture the build did
-not make, and nothing is drawn as a stand-in (K21):
-
-  kintsugi_veins (W2.4)  vein_top/bottom/left/right   cut along the fold lines, one per fold's outside face (::after)
-                         vein_glint                   the whole closed sheet minus the band: mask of the gold light
-                                                      (.sheen) — the shimmer runs along the veins only
-  ink_bleed (W2.5)       ink-640                      the ink-bloom photo mask (.ink) instead of the soft discs
-  sumi_stroke (W2.6)     sumi_stroke-640              brush stroke painted in under the headings on rice paper
-  gold_flake_1..3 (W2.7) flake_1..3-200               drifting gold leaf (site.js reads them from --kw-flakes)
-  obi_band (W2.8)        obi-800                      the rice-paper band round the packet
-  card_small (W2.9)      card_small-860               the card inside the folds; #00FF00 window keyed to alpha,
-                                                      the portrait slot placed on the measured window
-  web_hero (W2.10)       og-1200x630.jpg              share image (tema_build.og_kirp, bottom-aligned)
-
-Outputs (img/):
-  washi_indigo-640/1024   outer faces of the four folds (CSS background) and the page ground
-  washi_inner-640         inside of the folds (the 90°→180° half of each fold)
-  washi_night-640         the page ground (same paper, darker, finer grain: texts sit on it)
-  rice-640/1024           the invitation card, the home cards, the reply panel
-  ph_portrait/land/wide   neutral placeholders (rice paper, softly blurred; no person, no text)
-  og-1200x630.jpg         web_hero, or the closed folded packet on indigo — a montage of the same crops the page uses
-  favicon.png             the closed packet alone (tema_build.ikon; with the band and veins when they exist)
-  ../parts.css            the rules for the optional parts above (comment only while none exists)
+The packet layers (W3–W7, W12) share one canvas; GPT drifted ~1–3 % between them (the east flap runs 3 % below the
+floor, the west flap starts 2 % right of it), so each is cut to its own alpha box and laid in the packet box (the floor's
+alpha box): every flap keeps its hinge on its own edge of the square and spans that edge; its depth (to its point) is
+measured — manifest `stage`, the numbers site.css uses (tests/theme-kintsugi-washi.test.ts compares them). The cord is
+placed by its box. The button has its own canvas: it is centred on the empty circle the cord's figure-eight leaves
+(measured: the transparent hole the cord encloses round its centre) and sized to cover the inner half of that ring.
+Each inner face is cut to its alpha box and shares its flap's box exactly (the CSS reflection puts it over the hinge);
+the south inner face is mirrored left–right so its point lands where the outside's point is (GPT drew it 10 % off).
+Photo windows: green rim + everything it encloses (GPT left the middle transparent), or — the venue mat came without
+green — the transparent hole the mat encloses; cleared whole, the green spill round it neutralised.
 
   python3 platform/themes/kintsugi-washi/build_images.py
 """
@@ -45,7 +43,7 @@ import sys
 from pathlib import Path
 
 import numpy as np
-from PIL import Image, ImageEnhance, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter
 
 THEME = Path(__file__).resolve().parent
 ROOT = THEME.parents[2]
@@ -56,286 +54,227 @@ COL = ROOT / "collections/26_Kintsugi_Washi"
 PARTS = COL / "assets/gpt/parts"
 OUT = THEME / "img"
 
-# palette (site.css :root)
-INDIGO = (36, 46, 88)            # --indigo   #242E58  outer washi
-INNER = (60, 72, 116)            # --indigo-2 #3C4874  inside of a fold
-NIGHT = (22, 28, 54)             # --night    #161C36  page ground (smoother grain: text sits on it)
-RICE = (243, 236, 220)           # --rice     #F3ECDC
-RICE_SHADE = (228, 218, 198)     # placeholder tone
-
-INTERIM = {
-    "washi_indigo": ROOT / "collections/06_Art_Deco_Noir/assets/gpt/parts/bg_tile.png",
-    "rice_paper": ROOT / "collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png",
-}
-
-# closed packet geometry (site.css .fold): width/height, and each fold's box in % of the packet
-PACKET = 0.70
-FOLDS = {                         # name: (left, top, width, height) %, brightness (light from the top-left)
-    "right": ((50, 0, 50, 100), .90),
-    "left": ((0, 0, 50, 100), 1.0),
-    "bottom": ((0, 62, 100, 38), .94),
-    "top": ((0, 0, 100, 40), 1.07),
-}
-BAND = (0, 45, 100, 11)           # the rice-paper band round the middle (closure)
+PH_TONE = (243, 236, 220)        # placeholder tone (rice ivory #F3ECDC)
+REQUIRED = ["page_ground", "card_paper", "env_back", "flap_n", "flap_e", "flap_s", "flap_w", "flap_in_n", "flap_in_e",
+            "flap_in_s", "flap_in_w", "cord_band", "button", "card_small", "frame_portrait", "frame_story",
+            "frame_story_wide", "frame_venue", "ink_bloom", "corner_sprig", "divider", "mended_bowl",
+            "accent_1", "accent_2", "accent_3", "web_hero"]
+CARD_H = 84.0                    # % of the packet's height: the card lying on the floor, under the flaps
+BUTTON_OVER = 1.14               # the button covers the inner half of the cord's ring (× the hole's diameter)
 
 
-def tonla(src: Image.Image, renk, sigma: float) -> Image.Image:
-    """The palette colour carrying the source paper's own grain: per-pixel luminance deviation × sigma levels."""
-    g = np.asarray(src.convert("L"), float)
-    d = (g - g.mean()) / (g.std() + 1e-6)
-    out = np.clip(np.array(renk, float)[None, None, :] + d[..., None] * sigma, 0, 255)
-    return Image.fromarray(out.astype(np.uint8), "RGB")
+def part(ad: str) -> Image.Image:
+    return Image.open(PARTS / f"{ad}.png").convert("RGBA")
 
 
-def kaynak(ad: str):
-    own = PARTS / f"{ad}.png"
-    if own.exists():
-        return Image.open(own).convert("RGB"), str(own.relative_to(ROOT)), True
-    return Image.open(INTERIM[ad]).convert("RGB"), str(INTERIM[ad].relative_to(ROOT)), False
-
-
-def part(ad: str):
-    """An optional PAKET 5 part (RGBA) or None."""
-    p = PARTS / f"{ad}.png"
-    return Image.open(p).convert("RGBA") if p.exists() else None
+def box(im: Image.Image, esik: int = 8):
+    return tb.alfa_kutusu(np.asarray(im)[..., 3], esik=esik)
 
 
 def trim(im: Image.Image, esik: int = 8) -> Image.Image:
-    k = tb.alfa_kutusu(np.asarray(im)[..., 3], esik=esik)
+    k = box(im, esik)
     return im.crop(k) if k else im
 
 
-def square(im: Image.Image) -> Image.Image:
-    """Transparent padding to a square (the part keeps its proportions when CSS scales it per axis)."""
-    s = max(im.size)
-    out = Image.new("RGBA", (s, s), (0, 0, 0, 0))
-    out.alpha_composite(im, ((s - im.width) // 2, (s - im.height) // 2))
-    return out
+def r2(v: float) -> float:
+    return round(float(v), 2)
 
 
-def packet(washi: Image.Image, rice: Image.Image, h: int, veins=None, obi=None) -> Image.Image:
-    """The closed folded packet as the page shows it (same crops, same order, light shade at each fold edge)."""
-    w = round(h * PACKET)
-    canvas = Image.new("RGBA", (w + 80, h + 80), (0, 0, 0, 0))
-    ox = oy = 40
+def _grow(m: np.ndarray, px: int) -> np.ndarray:
+    """Dilate a boolean mask by `px` pixels (PIL MaxFilter; no scipy on the build machines)."""
+    im = Image.fromarray(m.astype(np.uint8) * 255, "L").filter(ImageFilter.MaxFilter(2 * px + 1))
+    return np.asarray(im) > 127
 
-    def layer(src, box, bright, offset):
-        lx, ty, lw, lh = box
-        x0, y0 = round(w * lx / 100), round(h * ty / 100)
-        cw, ch = round(w * (lx + lw) / 100) - x0, round(h * (ty + lh) / 100) - y0
-        crop = src.crop((offset[0], offset[1], offset[0] + cw, offset[1] + ch))
-        crop = ImageEnhance.Brightness(crop).enhance(bright).convert("RGBA")
-        shade = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
-        shade.paste((8, 10, 24, 120), (ox + x0 + 2, oy + y0 + 5, ox + x0 + cw + 2, oy + y0 + ch + 5))
-        canvas.alpha_composite(shade.filter(ImageFilter.GaussianBlur(6)))
-        canvas.alpha_composite(crop, (ox + x0, oy + y0))
 
-    big = washi.resize((max(w, 1024), max(w, 1024)))
-    layer(rice.resize((max(w, 1024), max(w, 1024))), (0, 0, 100, 100), 1.0, (0, 0))
-    for i, (_, (box, bright)) in enumerate(FOLDS.items()):
-        layer(big, box, bright, (37 * i, 53 * i))
-    if veins is not None:
-        canvas.alpha_composite(veins.resize((w, h), Image.LANCZOS), (ox, oy))
-    if obi is not None:
-        bx0, by0 = round(-w * .03), round(h * BAND[1] / 100)
-        o = obi.resize((round(w * 1.06), round(h * BAND[3] / 100)), Image.LANCZOS)
-        canvas.alpha_composite(o, (ox + bx0, oy + by0))
+def _fill_holes(m: np.ndarray) -> np.ndarray:
+    """m plus every pixel not reachable from the border without crossing m (scipy's binary_fill_holes)."""
+    h, w = m.shape
+    pad = np.zeros((h + 2, w + 2), np.uint8)
+    pad[1:-1, 1:-1] = m.astype(np.uint8) * 255
+    im = Image.fromarray(pad, "L").copy()
+    ImageDraw.floodfill(im, (0, 0), 128)
+    return (np.asarray(im)[1:-1, 1:-1] != 128)
+
+
+def _region(m: np.ndarray, seed) -> np.ndarray:
+    """The 4-connected region of the boolean mask m that contains `seed` (x, y) (PIL flood fill)."""
+    im = Image.fromarray(m.astype(np.uint8) * 255, "L").copy()
+    ImageDraw.floodfill(im, seed, 128)
+    return np.asarray(im) == 128
+
+
+def keyed_window(im: Image.Image):
+    """The photo window of a mat: GPT's green rim with everything it encloses (the middle came transparent) — or, for a
+    mat without green, the transparent hole the mat encloses; grown 2 px and cleared; the green spill in a 12 px ring
+    round it is neutralised. (RGBA, window box (L, T, W, H) % of the image, how) or (im, None, None)."""
+    c = np.asarray(im).copy()
+    rgb = c[..., :3].astype(np.int16)
+    green = (rgb[..., 1] > 120) & (rgb[..., 1] - np.maximum(rgb[..., 0], rgb[..., 2]) > 60) & (c[..., 3] > 40)
+    if green.sum() >= 256:
+        win = _grow(_fill_holes(_grow(green, 1)), 2)
+        how = "green rim + the hole it encloses"
     else:
-        layer(rice.resize((max(w, 1024), max(w, 1024))), BAND, .98, (200, 300))
-    return canvas
+        solid = c[..., 3] > 40
+        hole = _fill_holes(solid) & ~solid
+        if hole.sum() < 256:
+            return im, None, None
+        win = _grow(hole, 2)
+        how = "the transparent hole the mat encloses (no green)"
+    ys, xs = np.nonzero(win)
+    h, w = c.shape[:2]
+    x0, x1, y0, y1 = xs.min(), xs.max() + 1, ys.min(), ys.max() + 1
+    c[win, 3] = 0
+    ring = _grow(win, 12) & ~win
+    rgb = c[..., :3].astype(np.int16)
+    spill = ring & (rgb[..., 1] > np.maximum(rgb[..., 0], rgb[..., 2]) + 6)
+    c[..., 1] = np.where(spill, ((rgb[..., 0] + rgb[..., 2]) // 2).clip(0, 255), c[..., 1]).astype(np.uint8)
+    return Image.fromarray(c, "RGBA"), (100 * x0 / w, 100 * y0 / h, 100 * (x1 - x0) / w, 100 * (y1 - y0) / h), how
 
 
-def optional_parts(manifest: dict) -> tuple[list[str], dict]:
-    """W2.4–W2.9: whatever exists → img/ + the CSS rules that use it (parts.css). Returns (css rules, the parts)."""
-    css, got = [], {}
-    pct = lambda v: f"{v:.2f}".rstrip("0").rstrip(".")  # noqa: E731
-
-    veins = part("kintsugi_veins")
-    if veins is not None:
-        # the sheet IS the closed packet (0.70:1): stretch to it, then cut along the fold lines (manifest stage)
-        H = 1540
-        W = round(H * PACKET)
-        v = np.asarray(veins.resize((W, H), Image.LANCZOS)).copy()
-        got["kintsugi_veins"] = veins
-        cuts = {  # fold: (fold box in % of the packet, the part of it the closed packet shows)
-            "top": ((0, 0, 100, 40), (0, 0, 100, 40)),
-            "bottom": ((0, 62, 100, 38), (0, 62, 100, 38)),
-            "left": ((0, 0, 50, 100), (0, 40, 50, 22)),
-            "right": ((50, 0, 50, 100), (50, 40, 50, 22)),
-        }
-        for name, (fold, show) in cuts.items():
-            m = np.zeros((H, W), bool)
-            m[round(H * show[1] / 100):round(H * (show[1] + show[3]) / 100),
-              round(W * show[0] / 100):round(W * (show[0] + show[2]) / 100)] = True
-            a = v.copy()
-            a[..., 3] = np.where(m, a[..., 3], 0)
-            x0, y0 = round(W * fold[0] / 100), round(H * fold[1] / 100)
-            x1, y1 = round(W * (fold[0] + fold[2]) / 100), round(H * (fold[1] + fold[3]) / 100)
-            piece = Image.fromarray(a[y0:y1, x0:x1], "RGBA")
-            tb.webp(piece, f"vein_{name}", [760 if fold[2] == 100 else 380], 86, manifest, out=OUT)
-            fname = manifest[f"vein_{name}"]["files"][0]["file"]
-            css.append(f".f-{name} .face.out::after{{content:\"\";position:absolute;inset:0;"
-                       f"background:url(img/{fname}) 0 0/100% 100% no-repeat}}")
-        # the glint: a light masked by the veins the closed packet shows (not under the band: the band hides them)
-        g = v.copy()
-        g[round(H * BAND[1] / 100):round(H * (BAND[1] + BAND[3]) / 100), :, 3] = 0
-        tb.webp(Image.fromarray(g, "RGBA"), "vein_glint", [540], 86, manifest, out=OUT)
-        gf = manifest["vein_glint"]["files"][0]["file"]
-        css.append(f".sheen{{background-image:linear-gradient(105deg,#0000 40%,#fff3c8 50%,#0000 60%);"
-                   f"-webkit-mask:url(img/{gf}) 0 0/100% 100% no-repeat;mask:url(img/{gf}) 0 0/100% 100% no-repeat}}")
-        # the opening glint ends as the top fold starts to turn (the mask does not turn with the folds)
-        css.append(".is-opening .sheen{animation-duration:430ms}")
-
-    ink = part("ink_bleed")
-    if ink is not None:
-        got["ink_bleed"] = ink
-        tb.webp(square(trim(ink)), "ink", [640], 86, manifest, out=OUT)
-        f = manifest["ink"]["files"][0]["file"]
-        u = f"url(img/{f})"
-        css.append(f".js .ink{{-webkit-mask-image:{u},{u},{u};mask-image:{u},{u},{u}}}")
-
-    stroke = part("sumi_stroke")
-    if stroke is not None:
-        got["sumi_stroke"] = stroke
-        st = trim(stroke)
-        tb.webp(st, "sumi_stroke", [640], 84, manifest, out=OUT)
-        f = manifest["sumi_stroke"]["files"][0]["file"]
-        r = f"{st.width}/{st.height}"
-        css.append(f".paper-band h2::after,.reply-card .form-title::after{{content:\"\";display:block;width:min(66%,280px);"
-                   f"aspect-ratio:{r};margin:10px auto 0;background:url(img/{f}) 0 50%/100% 100% no-repeat}}")
-        # painted in from the pressed head to the dry tail once the heading has risen (scene step)
-        css.append(".js .paper-band h2[data-step]::after{clip-path:inset(0 100% 0 0);"
-                   "transition:clip-path 1.1s .5s cubic-bezier(.55,0,.25,1)}")
-        css.append(".js .paper-band h2[data-step].in::after{clip-path:inset(0)}")
-
-    flakes = []
-    for n in (1, 2, 3):
-        fl = part(f"gold_flake_{n}")
-        if fl is not None:
-            got[f"gold_flake_{n}"] = fl
-            tb.webp(square(trim(fl)), f"flake_{n}", [200], 84, manifest, out=OUT)
-            flakes.append("img/" + manifest[f"flake_{n}"]["files"][0]["file"])
-    if flakes:
-        css.append(":root{--kw-flakes:\"" + " ".join(flakes) + "\"}")
-
-    obi = part("obi_band")
-    if obi is not None:
-        got["obi_band"] = obi
-        tb.webp(trim(obi), "obi", [800], 84, manifest, out=OUT)
-        f = manifest["obi"]["files"][0]["file"]
-        css.append(f".band{{background:url(img/{f}) 0 0/100% 100% no-repeat}}")
-
-    card = part("card_small")
-    if card is not None:
-        c = np.asarray(trim(card)).copy()
-        rgb = c[..., :3].astype(np.int16)
-        green = (rgb[..., 1] > 150) & (rgb[..., 1] - np.maximum(rgb[..., 0], rgb[..., 2]) > 80)
-        ys, xs = np.nonzero(green)
-        if len(ys):
-            ch, cw = c.shape[:2]
-            wx0, wy0, wx1, wy1 = xs.min(), ys.min(), xs.max() + 1, ys.max() + 1
-            # the window (+2 px of green fringe) becomes transparent; the portrait slot sits on it, 0.4 % over its edge
-            c[max(wy0 - 2, 0):wy1 + 2, max(wx0 - 2, 0):wx1 + 2, 3] = 0
-            got["card_small"] = card
-            tb.webp(Image.fromarray(c, "RGBA"), "card_small", [860], 82, manifest, out=OUT)
-            f = manifest["card_small"]["files"][0]["file"]
-            L, T = 100 * wx0 / cw - .4, 100 * wy0 / ch - .4
-            Wd, Hd = 100 * (wx1 - wx0) / cw + .8, 100 * (wy1 - wy0) / ch + .8
-            below = 100 * wy1 / ch / PACKET + 3           # window bottom in % of the card's WIDTH (padding), + 3 % gap
-            manifest["card_small"]["window_pct"] = [round(L, 2), round(T, 2), round(Wd, 2), round(Hd, 2)]
-            css.append(f".fold .card{{background:url(img/{f}) 0 0/100% 100% no-repeat;justify-content:flex-start;"
-                       f"padding-top:{pct(below)}%}}")
-            css.append(f".fold .card .card-photo,.fold .card.tight .card-photo{{position:absolute;left:{pct(L)}%;"
-                       f"top:{pct(T)}%;width:{pct(Wd)}%;height:{pct(Hd)}%;aspect-ratio:auto}}")
-        else:
-            print("WARNING card_small.png: no #00FF00 window found — the card stays rice paper", file=sys.stderr)
-            manifest["card_small_rejected"] = "no #00FF00 window"
-    return css, got
-
-
-# Emekli (2026-10-20): tema 18–19 Ekim 2026'da imagegen sanatıyla yeniden kuruldu (docs/qa/2026-10-18-*.md,
-# docs/qa/2026-10-19-*.md); img/ artık bu betiğin çıktısı değil. Bu betik img/'yi silip eski geçici kesimi kurar ve
-# yeni kapak / iç sayfa görsellerini yok eder, bu yüzden çalışmaz. tools/gpt_yerlestir.py bu adımı atlar.
-EMEKLI = "tema 2026-10-18/19 yeniden kurulumuyla değişti; img/ elle yönetiliyor (silmemek için çalışmaz)"
+def cord_hole(cord: Image.Image):
+    """The empty circle in the middle of the cord's figure-eight (canvas px): (cx, cy, diameter)."""
+    a = np.asarray(cord)[..., 3] > 40
+    hole = _fill_holes(a) & ~a
+    k = tb.alfa_kutusu(a.astype(np.uint8) * 255, esik=128)
+    seed = ((k[0] + k[2]) // 2, (k[1] + k[3]) // 2)
+    if not hole[seed[1], seed[0]]:
+        raise SystemExit("ERROR cord_band.png: the middle of the cord is not an enclosed empty circle")
+    r = _region(hole, seed)
+    ys, xs = np.nonzero(r)
+    return ((xs.min() + xs.max() + 1) / 2, (ys.min() + ys.max() + 1) / 2,
+            ((xs.max() + 1 - xs.min()) + (ys.max() + 1 - ys.min())) / 2)
 
 
 def main() -> int:
-    if EMEKLI:
-        print(f"build_images.py çalıştırılmadı: {EMEKLI}", file=sys.stderr)
-        return 2
+    missing = [k for k in REQUIRED if not (PARTS / f"{k}.png").exists()]
+    if missing:
+        print("ERROR: parts missing: " + ", ".join(missing), file=sys.stderr)
+        return 1
     manifest: dict = {}
     OUT.mkdir(exist_ok=True)
     for old in list(OUT.glob("*.webp")) + list(OUT.glob("*.jpg")) + list(OUT.glob("*.png")):
         old.unlink()
 
-    washi_src, washi_from, washi_own = kaynak("washi_indigo")
-    rice_src, rice_from, rice_own = kaynak("rice_paper")
-    washi = washi_src if washi_own else tonla(washi_src, INDIGO, 9)
-    rice = rice_src if rice_own else tonla(rice_src, RICE, 6)
-    inner_path = PARTS / "washi_inner.png"
-    inner = Image.open(inner_path).convert("RGB") if inner_path.exists() else tonla(washi_src, INNER, 8)
-    manifest["sources"] = {"washi_indigo": washi_from, "rice_paper": rice_from,
-                           "washi_inner": str(inner_path.relative_to(ROOT)) if inner_path.exists() else washi_from + " (toned lighter)"}
+    ground = Image.open(PARTS / "page_ground.png").convert("RGB")
+    paper = Image.open(PARTS / "card_paper.png").convert("RGB")
+    tb.webp(ground, "ground", [640, 1024], 72, manifest, out=OUT)
+    tb.webp(paper, "paper", [640, 1024], 72, manifest, out=OUT)
 
-    tb.webp(washi, "washi_indigo", [640, 1024], 74, manifest, out=OUT)
-    tb.webp(inner, "washi_inner", [640], 74, manifest, out=OUT)
-    night = tonla(washi_src, NIGHT, 4).filter(ImageFilter.GaussianBlur(.6))
-    tb.webp(night, "washi_night", [640], 72, manifest, out=OUT)
-    tb.webp(rice, "rice", [640, 1024], 76, manifest, out=OUT)
+    # the packet: the floor's alpha box is the packet box; each flap keeps its hinge on its edge and spans it
+    raw = {k: part(n) for k, n in (("back", "env_back"), ("n", "flap_n"), ("e", "flap_e"), ("s", "flap_s"),
+                                   ("w", "flap_w"), ("cord", "cord_band"))}
+    boxes = {k: box(v) for k, v in raw.items()}
+    bx = boxes["back"]
+    bw, bh = bx[2] - bx[0], bx[3] - bx[1]
 
+    def px(x):
+        return 100 * (x - bx[0]) / bw
+
+    def py(y):
+        return 100 * (y - bx[1]) / bh
+    n_depth, s_top = py(boxes["n"][3]), py(boxes["s"][1])
+    e_left, w_depth = px(boxes["e"][0]), px(boxes["w"][2])
+    cb = boxes["cord"]
+    stage = {
+        "aspect": round(bw / bh, 4),
+        "back": [0, 0, 100, 100],
+        "n": [0, 0, 100, r2(n_depth)],
+        "e": [r2(e_left), 0, r2(100 - e_left), 100],
+        "s": [0, r2(s_top), 100, r2(100 - s_top)],
+        "w": [0, 0, r2(w_depth), 100],
+        "cord": [r2(px(cb[0])), r2(py(cb[1])), r2(100 * (cb[2] - cb[0]) / bw), r2(100 * (cb[3] - cb[1]) / bh)],
+    }
+    # how far each open flap lies beyond the square (% of the packet): the opening scales the stage to fit them
+    stage["reach"] = {"n": stage["n"][3], "e": stage["e"][2], "s": stage["s"][3], "w": stage["w"][2]}
+    layers = {k: raw[k].crop(boxes[k]) for k in raw}
+    hx, hy, hd = cord_hole(raw["cord"])
+    button = trim(part("button"))
+    bd = hd * BUTTON_OVER
+    stage["button"] = [r2(px(hx - bd / 2)), r2(py(hy - bd / 2)), r2(100 * bd / bw), r2(100 * bd / bh)]
+    stage["cord_hole"] = [r2(px(hx)), r2(py(hy)), r2(100 * hd / bw)]
+    card = trim(part("card_small"))
+    ch = CARD_H
+    cw = ch * card.width / card.height * bh / bw
+    stage["card"] = [r2(50 - cw / 2), r2(50 - ch / 2), r2(cw), ch]
+    stage["card_ratio"] = round(card.width / card.height, 4)
+    stage["_note"] = ("% of the closed packet (left, top, width, height): the floor's alpha box is the packet; each flap "
+                      "keeps its hinge on its edge and spans it, its depth measured (reach = how far it lies beyond "
+                      "the square once open); the cord by its box; the button centred on the cord's empty circle "
+                      f"(cord_hole = centre x, y, diameter) at {BUTTON_OVER} × its diameter; the card centred, "
+                      f"{CARD_H} % high")
+    tb.webp(layers["back"], "back", [720], 80, manifest, out=OUT)
+    tb.webp(layers["n"], "flap_n", [720], 82, manifest, out=OUT)
+    tb.webp(layers["s"], "flap_s", [720], 82, manifest, out=OUT)
+    tb.webp(layers["e"], "flap_e", [440], 82, manifest, out=OUT)
+    tb.webp(layers["w"], "flap_w", [440], 82, manifest, out=OUT)
+    tb.webp(layers["cord"], "cord", [720], 84, manifest, out=OUT)
+    tb.webp(button, "button", [240], 88, manifest, out=OUT)
+    # the inner faces, each in its flap's box (the south one mirrored: its point then sits where the outside's does)
+    inner = {"n": trim(part("flap_in_n")), "e": trim(part("flap_in_e")),
+             "s": trim(part("flap_in_s")).transpose(Image.FLIP_LEFT_RIGHT), "w": trim(part("flap_in_w"))}
+    for k, w in (("n", 720), ("s", 720), ("e", 440), ("w", 440)):
+        tb.webp(inner[k], f"in_{k}", [w], 80, manifest, out=OUT)
+    stage["inner_mirrored"] = ["s"]
+    tb.webp(card, "card", [720], 80, manifest, out=OUT)
+    manifest["stage"] = stage
+
+    # the mats: window measured
+    for src, name, width in (("frame_portrait", "portrait", 720), ("frame_story", "story", 720),
+                             ("frame_story_wide", "wide", 900), ("frame_venue", "venue", 1100)):
+        keyed, win, how = keyed_window(trim(part(src)))
+        if win is None:
+            print(f"ERROR {src}.png: no photo window found", file=sys.stderr)
+            return 1
+        tb.webp(keyed, name, [width], 84, manifest, out=OUT)
+        manifest[name]["window_pct"] = [r2(v) for v in win]
+        manifest[name]["window_px"] = [round(keyed.width * win[2] / 100), round(keyed.height * win[3] / 100)]
+        manifest[name]["window_from"] = how
+
+    # the ink bloom as a mask: its alpha only (the pixels black), never shown as a picture
+    ink = trim(part("ink_bloom"))
+    a = np.asarray(ink).copy()
+    a[..., :3] = 0
+    tb.webp(Image.fromarray(a, "RGBA"), "ink", [512], 86, manifest, out=OUT)
+    for src, name, width, q in (("corner_sprig", "sprig", 560, 84), ("divider", "divider", 1000, 84),
+                                ("mended_bowl", "bowl", 480, 84), ("accent_1", "flake", 160, 86),
+                                ("accent_2", "drop", 160, 86), ("accent_3", "petal", 160, 86)):
+        tb.webp(trim(part(src)), name, [width], q, manifest, out=OUT)
+
+    def aspect(name):
+        w, h = manifest[name]["window_px"]
+        return f"{w}/{h}"
     slots = {}
-    for key, shape, ratio in (("hero_portrait", "portrait", 4 / 5), ("story", "land", 5 / 4), ("venue", "wide", 16 / 9)):
-        ph = tb.yer_tutucu(rice, (0, 0, rice.width, rice.height), ratio, w=640, ton=RICE_SHADE, karisim=.55, bulanik=10)
-        tb.webp(ph, f"ph_{shape}", [640], 74, manifest, out=OUT)
-        slots[key] = f"ph_{shape}-640.webp"
+    for name in ("portrait", "story", "wide", "venue"):
+        w, h = manifest[name]["window_px"]
+        ph = tb.yer_tutucu(ground, (0, 0, ground.width, ground.height), w / h, w=640, ton=PH_TONE, karisim=.4, bulanik=10)
+        tb.webp(ph, f"ph_{name}", [640], 74, manifest, out=OUT)
+        slots[name] = f"ph_{name}-640.webp"
     manifest["placeholders"] = slots
-    manifest["photo_slots"] = {"hero_portrait": {"aspect": "4/5"}, "story_1": {"aspect": "4/5"},
-                               "story_2": {"aspect": "5/4"}, "story_3": {"aspect": "4/5"}, "venue": {"aspect": "16/9"}}
-    manifest["stage"] = {"packet_aspect": PACKET, "folds_pct": {k: v[0] for k, v in FOLDS.items()},
-                         "fold_brightness": {k: v[1] for k, v in FOLDS.items()}, "band_pct": BAND,
-                         "open_spread": {"width": 2.0, "height": 1.78,
-                                         "_note": "side folds lie out left/right, top/bottom folds above/below"}}
+    manifest["photo_slots"] = {"hero_portrait": {"aspect": aspect("portrait")}, "story_1": {"aspect": aspect("story")},
+                               "story_2": {"aspect": aspect("wide")}, "story_3": {"aspect": aspect("story")},
+                               "venue": {"aspect": aspect("venue")}}
 
-    css, got = optional_parts(manifest)
-    veins, obi = got.get("kintsugi_veins"), got.get("obi_band")
-    hero = PARTS / "web_hero.png"
-    if hero.exists():
-        og, og_info = tb.og_kirp(Image.open(hero), hiza="alt")
-        manifest["og"] = {**og_info, "file": "og-1200x630.jpg", "source": "parts/web_hero.png",
-                          "bytes": tb.og_kaydet(og, OUT / "og-1200x630.jpg")}
-        got["web_hero"] = True
-    else:   # the closed packet on the indigo ground (montage of the page's own crops, no text)
-        og = night.resize((1200, 1200)).crop((0, 285, 1200, 915))
-        pk = packet(washi, rice, 470, veins, obi)
-        og.paste(pk, ((1200 - pk.width) // 2, (630 - pk.height) // 2), pk)
-        manifest["og"] = {"file": "og-1200x630.jpg", "source": "montage: closed packet (washi_indigo + rice) on night washi",
-                          "bytes": tb.og_kaydet(og, OUT / "og-1200x630.jpg")}
-    icon, icon_info = tb.ikon(packet(washi, rice, 400, veins, obi))
+    og, og_info = tb.og_kirp(Image.open(PARTS / "web_hero.png"), hiza="alt")
+    manifest["og"] = {**og_info, "file": "og-1200x630.jpg", "source": "parts/web_hero.png",
+                      "bytes": tb.og_kaydet(og, OUT / "og-1200x630.jpg")}
+    icon, icon_info = tb.ikon(button)
     icon.save(OUT / "favicon.png", optimize=True)
-    manifest["favicon"] = {**icon_info, "file": "favicon.png", "bytes": (OUT / "favicon.png").stat().st_size}
+    manifest["favicon"] = {**icon_info, "file": "favicon.png", "bytes": (OUT / "favicon.png").stat().st_size,
+                           "source": "the kintsugi porcelain button"}
 
-    optional = ["kintsugi_veins", "ink_bleed", "sumi_stroke", "gold_flake_1", "gold_flake_2", "gold_flake_3",
-                "obi_band", "card_small", "web_hero"]
-    missing = [k for k in optional if k not in got] + [k for k in ("washi_indigo", "rice_paper") if
-                                                         not (PARTS / f"{k}.png").exists()]
-    manifest["parts"] = {"used": sorted(got), "waiting_for_gpt": missing}
-    manifest["_note"] = ("G164/G167 build from the design's own PAKET 5 parts. Nothing drawn." if not missing else
-                         "G164 interim build: papers toned from other designs' plain GPT textures; the design's own "
-                         "PAKET 5 parts are taken as they arrive (GPT_PROMPTS.md, manifest parts). Nothing drawn.")
-    head = ("/* Kintsugi & Washi — GENERATED by build_images.py (do not edit): rules for the design's optional GPT parts\n"
-            "   (W2.4–W2.9, GPT_PROMPTS.md) that exist in collections/26_Kintsugi_Washi/assets/gpt/parts/. A part that\n"
-            "   is not there has no rule: the page keeps its look from site.css. */\n")
-    (THEME / "parts.css").write_text(head + ("\n".join(css) + "\n" if css else "/* none yet */\n"), encoding="utf-8")
-    manifest["parts_css_rules"] = len(css)
-
-    green = tb.yesil_denetle(OUT)
-    manifest["checks"] = {"green": green}
-    manifest["theme_check"] = {"particles": ".accent-layer", "first_screen": {"landscape": False, "names_min_px": 32},
-                               "backdrop": {"edge_max": 2.2, "dark_max": 0.05, "dark_below": 0, "light_above": 140}}
+    manifest["parts"] = {"used": sorted(REQUIRED), "waiting_for_gpt": [], "not_used": ["env_back_v1 (earlier attempt)"]}
+    manifest["_note"] = "G426 build from the design's own PAKET 5R parts (all present; docs/35). Nothing drawn."
+    manifest["checks"] = {"green": tb.yesil_denetle(OUT)}
+    manifest["theme_check"] = {"particles": ".accent-layer", "first_screen": {"landscape": False, "names_min_px": 32}}
     manifest["bytes_total"] = tb.klasor_boyutu(THEME)
     tb.manifest_yaz(OUT, manifest)
-    print(json.dumps(manifest["sources"], indent=1))
-    print(f"kintsugi-washi: theme folder {manifest['bytes_total'] / 1e6:.2f} MB")
+    print(json.dumps({k: stage[k] for k in ("aspect", "n", "e", "s", "w", "cord", "button", "cord_hole", "card")}))
+    print({n: (manifest[n]["window_pct"], manifest[n]["src_size"], manifest[n]["window_px"])
+           for n in ("portrait", "story", "wide", "venue")})
+    print(f"kintsugi-washi: theme folder {manifest['bytes_total'] / 1e6:.2f} MB, green residue: {manifest['checks']['green']}")
+    if manifest["checks"]["green"]:
+        print("ERROR: green residue in img/", file=sys.stderr)
+        return 1
     if manifest["bytes_total"] > tb.TEMA_BUTCE:
         print("ERROR: theme folder over 3 MB", file=sys.stderr)
         return 1

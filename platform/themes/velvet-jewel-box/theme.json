@@ -1,7 +1,7 @@
 {
   "id": "velvet-jewel-box",
   "name": "Velvet Jewel Box",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "pages": {
     "index": "index.html",
     "home": "home.html",
@@ -11,41 +11,41 @@
   },
   "photos": {
     "hero_portrait": {
-      "label": "Portrait on the invitation card",
+      "label": "Portrait in the oval rose gold cameo (the card from the envelope and the home card)",
       "source": "media.hero_portrait",
-      "aspect": "567/595"
+      "aspect": "777/1007"
     },
     "story_1": {
-      "label": "Our Story photo 1",
+      "label": "Our Story photo 1 (oval setting on the turning display)",
       "source": "media.memory_photos.0",
-      "aspect": "691/928"
+      "aspect": "669/992"
     },
     "story_2": {
-      "label": "Our Story photo 2",
+      "label": "Our Story photo 2 (oval setting on the turning display)",
       "source": "media.memory_photos.1",
-      "aspect": "691/928"
+      "aspect": "669/992"
     },
     "story_3": {
-      "label": "Our Story photo 3",
+      "label": "Our Story photo 3 (oval setting on the turning display)",
       "source": "media.memory_photos.2",
-      "aspect": "691/928"
+      "aspect": "669/992"
     },
     "venue": {
-      "label": "Venue photo",
+      "label": "Venue photo (wide pearl-edged frame)",
       "source": "media.venue_image",
-      "aspect": "691/928"
+      "aspect": "1281/651"
     }
   },
   "copy": {
     "envelope_kicker": {
-      "default": "You are invited",
+      "default": "Together with their families",
       "max": 28,
       "pages": [
         "index"
       ]
     },
     "card_line": {
-      "default": "We're getting married",
+      "default": "Our wedding",
       "max": 32,
       "pages": [
         "index",
@@ -53,8 +53,15 @@
       ]
     },
     "invite_request": {
-      "default": "request the pleasure of your company at the celebration of their marriage",
+      "default": "request the pleasure of your company at their wedding",
       "max": 110,
+      "pages": [
+        "home"
+      ]
+    },
+    "invite_at": {
+      "default": "at",
+      "max": 12,
       "pages": [
         "home"
       ]
@@ -63,8 +70,7 @@
       "default": "With love,",
       "max": 24,
       "pages": [
-        "home",
-        "rsvp"
+        "home"
       ]
     },
     "foot_kicker": {
@@ -74,29 +80,8 @@
         "home"
       ]
     },
-    "share_invited": {
-      "default": "You're invited",
-      "max": 40,
-      "pages": [
-        "index"
-      ]
-    },
-    "invite_cue": {
-      "default": "Our invitation",
-      "max": 30,
-      "pages": [
-        "home"
-      ]
-    },
     "envelope_hint_tap": {
       "default": "Tap to open",
-      "max": 24,
-      "pages": [
-        "index"
-      ]
-    },
-    "envelope_hint_click": {
-      "default": "Click to open",
       "max": 24,
       "pages": [
         "index"
@@ -117,7 +102,7 @@
       ]
     },
     "home_replay": {
-      "default": "Replay the opening",
+      "default": "Open it again",
       "max": 30,
       "pages": [
         "home"
@@ -131,7 +116,7 @@
       ]
     },
     "envelope_open": {
-      "default": "Open the invitation",
+      "default": "Open the envelope",
       "max": 30,
       "pages": [
         "index"
@@ -161,15 +146,8 @@
       ]
     },
     "ceremony_line": {
-      "default": "Ceremony at",
+      "default": "The ceremony begins at",
       "max": 40,
-      "pages": [
-        "details"
-      ]
-    },
-    "ceremony_in": {
-      "default": "in",
-      "max": 12,
       "pages": [
         "details"
       ]
@@ -179,13 +157,6 @@
       "max": 24,
       "pages": [
         "details"
-      ]
-    },
-    "home_day_cue": {
-      "default": "Schedule & venue",
-      "max": 24,
-      "pages": [
-        "home"
       ]
     },
     "calendar_title": {
@@ -261,32 +232,11 @@
         "index"
       ]
     },
-    "ty_more": {
-      "default": "Look back with us",
-      "max": 30,
-      "pages": [
-        "home"
-      ]
-    },
-    "ty_cue": {
-      "default": "A note from us",
-      "max": 30,
-      "pages": [
-        "home"
-      ]
-    },
     "ceremony_after": {
       "default": "The ceremony began at",
       "max": 40,
       "pages": [
         "details"
-      ]
-    },
-    "closing_line_after": {
-      "default": "It meant the world to have you with us.",
-      "max": 60,
-      "pages": [
-        "rsvp"
       ]
     },
     "home_link": {
@@ -306,7 +256,7 @@
       ]
     },
     "story_kicker": {
-      "default": "Moments we hold dear",
+      "default": "Treasured moments",
       "max": 40,
       "pages": [
         "home",
@@ -316,13 +266,6 @@
     "home_story_cue": {
       "default": "Read our story",
       "max": 24,
-      "pages": [
-        "home"
-      ]
-    },
-    "home_more": {
-      "default": "More about the day",
-      "max": 30,
       "pages": [
         "home"
       ]
@@ -525,10 +468,9 @@
       ]
     },
     "rsvp_title": {
-      "default": "Will You Join Us?",
+      "default": "Kindly reply",
       "max": 30,
       "pages": [
-        "home",
         "rsvp"
       ]
     },
@@ -540,13 +482,6 @@
         "rsvp"
       ]
     },
-    "teaser_rsvp_by": {
-      "default": "Reply by",
-      "max": 20,
-      "pages": [
-        "home"
-      ]
-    },
     "rsvp_button": {
       "default": "RSVP",
       "max": 16,
@@ -556,16 +491,9 @@
         "rsvp"
       ]
     },
-    "home_rsvp_cue": {
-      "default": "Reply now",
-      "max": 20,
-      "pages": [
-        "home"
-      ]
-    },
-    "form_kicker": {
-      "default": "Kindly reply",
-      "max": 30,
+    "rsvp_wait": {
+      "default": "We can't wait to celebrate with you",
+      "max": 50,
       "pages": [
         "rsvp"
       ]
@@ -606,14 +534,14 @@
       ]
     },
     "form_yes": {
-      "default": "Joyfully accepts",
+      "default": "Yes, we'll be there!",
       "max": 30,
       "pages": [
         "rsvp"
       ]
     },
     "form_no": {
-      "default": "Regretfully declines",
+      "default": "Sadly, we can't make it",
       "max": 30,
       "pages": [
         "rsvp"
@@ -662,7 +590,7 @@
       ]
     },
     "rsvp_thanks_yes": {
-      "default": "We can't wait to celebrate with you.",
+      "default": "Your reply is with us. We look forward to celebrating together.",
       "max": 120,
       "pages": [
         "rsvp"
@@ -689,92 +617,62 @@
         "rsvp"
       ]
     },
-    "closing_title": {
-      "default": "Thank you",
-      "max": 30,
-      "pages": [
-        "rsvp"
-      ]
-    },
-    "closing_line": {
-      "default": "We can't wait to celebrate with you.",
-      "max": 60,
-      "pages": [
-        "rsvp"
-      ]
-    },
     "rsvp_replay": {
-      "default": "Replay the opening",
+      "default": "Open the invitation again",
       "max": 30,
       "pages": [
         "rsvp"
       ]
     },
-    "envelope_close": {
-      "default": "Close the box",
-      "max": 30,
+    "album_label": {
+      "default": "Photographs",
+      "max": 17,
       "pages": [
-        "index"
+        "story"
       ],
-      "label": "Close envelope button",
+      "label": "Name of the turning display (screen readers)",
+      "panel": "story"
+    },
+    "album_next": {
+      "default": "Next photograph",
+      "max": 23,
+      "pages": [
+        "story"
+      ],
+      "label": "Next photo button (screen readers)",
+      "panel": "story"
+    },
+    "album_previous": {
+      "default": "Previous photograph",
+      "max": 29,
+      "pages": [
+        "story"
+      ],
+      "label": "Previous photo button (screen readers)",
+      "panel": "story"
+    },
+    "home_intro": {
+      "default": "A promise kept in velvet",
+      "max": 36,
+      "pages": [
+        "home"
+      ],
+      "label": "Invitation heading",
       "panel": "us"
+    },
+    "home_location": {
+      "default": "Join us in",
+      "max": 15,
+      "pages": [
+        "home"
+      ],
+      "label": "Line above the city",
+      "panel": "day"
     }
   },
   "swatch": [
-    "#2A1328",
     "#E8D3B0",
+    "#2A1328",
     "#C99A86"
-  ],
-  "variants": [
-    {
-      "id": "emerald-velvet",
-      "name": "Emerald Velvet & Champagne",
-      "swatch": [
-        "#1F4636",
-        "#E8D3B0",
-        "#F8EDE0"
-      ],
-      "status": "coming"
-    },
-    {
-      "id": "sapphire-velvet",
-      "name": "Sapphire Velvet & Gold",
-      "swatch": [
-        "#24315C",
-        "#E8D3B0",
-        "#F8EDE0"
-      ],
-      "status": "coming"
-    },
-    {
-      "id": "ruby-velvet",
-      "name": "Ruby Velvet & Gold",
-      "swatch": [
-        "#5A1628",
-        "#E8D3B0",
-        "#F8EDE0"
-      ],
-      "status": "coming"
-    },
-    {
-      "id": "mauve-velvet",
-      "name": "Mauve Velvet & Rose Gold",
-      "swatch": [
-        "#553442",
-        "#E8D3B0",
-        "#F8EDE0"
-      ],
-      "status": "coming"
-    },
-    {
-      "id": "onyx-velvet",
-      "name": "Onyx Velvet & Champagne",
-      "swatch": [
-        "#2E2A2D",
-        "#E8D3B0",
-        "#F8EDE0"
-      ],
-      "status": "coming"
-    }
   ]
 }

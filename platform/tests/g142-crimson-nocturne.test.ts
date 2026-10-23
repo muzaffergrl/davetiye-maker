@@ -9,7 +9,9 @@ import * as cheerio from 'cheerio';
 import { manifestProblems, scanCopy } from '../lib/theme/copy-scan.ts';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
-const THEMES = ['crimson-rose-atelier', 'nocturne-lake-estate'] as const;
+// docs/35: 22 Nocturne Lake Estate was rebuilt from its own layered GPT parts (G422); its own test is
+// tests/theme-nocturne-lake-estate.test.ts.
+const THEMES = ['crimson-rose-atelier'] as const;
 const PAGES = ['index', 'home', 'story', 'details', 'rsvp'] as const;
 const read = (t: string, f: string) => readFileSync(path.join(ROOT, 'themes', t, f), 'utf8');
 
@@ -31,7 +33,7 @@ for (const t of THEMES) {
     assert.equal(stage.attr('role'), 'button');
     assert.equal(stage.attr('tabindex'), '0');
     // the seal, the flap, the pocket and the card are their own layers (AGENTS şart 4, docs/11 §7.3)
-    const pieces = t === 'crimson-rose-atelier' ? ['.env-seal', '.env-flap', '.env-pocket', '.env-card', '.env-back'] : ['.v3-closed', '.v3-lid', '.v3-front', '.v3-lining', '.v3-pocket', '.env .card'];
+    const pieces = ['.env-seal', '.env-flap', '.env-pocket', '.env-card', '.env-back'];
     for (const sel of pieces) assert.equal(stage.find(sel).length, 1, sel);
     assert.equal($('.replay').length, 1);
     assert.equal($('.replay[hidden]').length, 0, '.replay is shown by the opened state, not by removing [hidden]');
@@ -43,8 +45,8 @@ for (const t of THEMES) {
     assert.equal(stage.find('[data-slot="hero_portrait"] img[data-photo="hero_portrait"]').length, 1);
     assert.equal(stage.find('[data-field="thank_you_title"]').length, 1);
     // opened: the hint is display:none (an animation cannot keep it visible), Enter + Replay show
-    assert.match(css, t === 'crimson-rose-atelier' ? /\.is-opened \.tap-hint[^{]*\{display:none\}/ : /\.is-opened \.env-hint\s*\{\s*display:\s*none;?\s*\}/);
-    assert.match(css, t === 'crimson-rose-atelier' ? /\.is-opened \.replay\{display:inline-flex/ : /\.is-opened \.env-after/);
+    assert.match(css, /\.is-opened \.tap-hint[^{]*\{display:none\}/);
+    assert.match(css, /\.is-opened \.replay\{display:inline-flex/);
   });
 
   test(`${t}: session keys per site, same in site.js and the <head> scripts`, () => {
