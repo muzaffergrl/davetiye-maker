@@ -419,7 +419,9 @@ export function ordersCsv(list: readonly AdminSiteSummary[], origin: string): st
  * waiting"; a live site closing within 30 days → "closing soon"; otherwise "how to publish".
  */
 export function defaultTemplateId(s: Pick<AdminSiteSummary, 'needsAction' | 'state' | 'onlineUntil'> & { order?: AdminOrderState }, now: number = Date.now()): string {
-  if (s.needsAction && s.order !== 'provisional') return 'publish_blocked_pending';
+  // only when Publish really waits for the shop (G951: a further website of an order or "no design" in trust / off mode is
+  // not blocked)
+  if (s.needsAction && s.order !== 'provisional' && s.order !== 'not_required' && s.order !== 'verified') return 'publish_blocked_pending';
   if (s.state === 'published' && s.onlineUntil) {
     const left = (Date.parse(`${s.onlineUntil}T00:00:00Z`) - now) / DAY_MS;
     if (left >= -1 && left <= CLOSING_WITHIN_DAYS) return 'archive_notice';
