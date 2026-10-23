@@ -13,6 +13,8 @@ import type { Dict } from '../../lib/i18n/translate.ts';
 // every retry (kept in sessionStorage until a claim succeeds). If the site was created but the answer
 // never arrived (phone switched networks), the retry gets a fresh edit link instead of "order used"
 // (lib/claim/claim.ts). After a network error the form retries once by itself.
+// G951: an order that already has a website started with this email answers with a choice — open it, or start one more
+// website (a second design bought in the same Etsy order); the buttons post again with intent "open" / "add".
 
 import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
 import {
@@ -62,6 +64,25 @@ type SlugStatus =
   | { kind: 'unknown' };
 
 type FormMessage = { tone: 'error' | 'notice'; title?: string; text: string; link?: { href: string; label: string } } | null;
+
+/**
+ * G951: the order already has a website (or several) started with this email: open one, or start one more — only when
+ * the order holds another design (the server says whether it may: `add`; else `message` says why not).
+ */
+interface OrderChoice {
+  sites: Array<{ slug: string; names: string; design: string; sameDesign: boolean }>;
+  add: { design: string; sameDesign: boolean } | null;
+  message: string | null;
+}
+
+function parseChoice(body: Record<string, any>): OrderChoice | null {
+  if (body.next !== 'choose' || !Array.isArray(body.sites)) return null;
+  const sites = (body.sites as Array<Record<string, unknown>>)
+    .filter((x) => typeof x?.slug === 'string')
+    .map((x) => ({ slug: String(x.slug), names: typeof x.names === 'string' ? x.names : '', design: typeof x.design === 'string' ? x.design : '', sameDesign: x.sameDesign === true }));
+  const add = body.add && typeof body.add === 'object' && typeof body.add.design === 'string' ? { design: String(body.add.design), sameDesign: body.add.sameDesign === true } : null;
+  return sites.length ? { sites, add, message: typeof body.message === 'string' ? body.message : null } : null;
+}
 
 const STORE_KEY = 'start:claim-result:v1';
 const TOKEN_KEY = 'start:claim-token:v1';
@@ -269,7 +290,9 @@ function ClaimForm({
   const [submitted, setSubmitted] = useState(false);
   const [serverErrors, setServerErrors] = useState<Partial<Record<ClaimField, string>>>({});
   const [message, setMessage] = useState<FormMessage>(null);
+  const [choice, setChoice] = useState<OrderChoice | null>(null);
   const [busy, setBusy] = useState(false);
+  const choiceRef = useRef<HTMLDivElement>(null);
   const honeypot = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLDivElement>(null);
   const checkSeq = useRef(0);
@@ -359,8 +382,13 @@ function ClaimForm({
     if (m) window.setTimeout(() => messageRef.current?.focus(), 0);
   };
 
-  async function onSubmit(e: FormEvent) {
+  function onSubmit(e: FormEvent) {
     e.preventDefault();
+    void submit();
+  }
+
+  /** `extra` (G951): {intent: "open", openSlug} opens one of the order's websites; {intent: "add"} starts one more. */
+  async function submit(extra: { intent?: 'open' | 'add'; openSlug?: string } = {}) {
     if (busy) return;
     setSubmitted(true);
     setMessage(null);
@@ -385,6 +413,7 @@ function ClaimForm({
       // G135: the draft starts in this phone's time zone (the server keeps the design's when it does not know it).
       timeZone: phoneTimeZone(),
       website: honeypot.current?.value ?? '',
+      ...extra,
     });
     const send = () =>
       fetch('/api/start', {
@@ -409,7 +438,14 @@ function ClaimForm({
       } catch {
         /* handled below */
       }
-      // G146: this order already has a website, started with this email: it is opened on this device (a device key).
+      // G951: this order already has a website started with this email: open it, or start one more (the buyer chooses).
+      const asked = res.status === 200 && body.ok ? parseChoice(body) : null;
+      if (asked) {
+        setChoice(asked);
+        window.setTimeout(() => choiceRef.current?.focus(), 0);
+        return;
+      }
+      // G146: this order's website, started with this email: it is opened on this device (a device key).
       if (res.status === 200 && body.ok && body.existing && typeof body.editPath === 'string' && typeof body.slug === 'string') {
         forgetClaimToken();
         tokenRef.current = null;
@@ -422,6 +458,7 @@ function ClaimForm({
       if (res.status === 201 && body.ok) {
         forgetClaimToken();
         tokenRef.current = null;
+        setChoice(null);
         onCreated({
           theme: theme.id,
           slug: String(body.slug),
@@ -452,6 +489,10 @@ function ClaimForm({
             text: t(String(body.message)),
             link: { href: '/my#continue', label: t('Continue with your order number') },
           });
+          break;
+        case 'order_full':
+          // G951: "start one more" when every design of the Etsy order already has its website
+          showMessage({ tone: 'notice', text: t(String(body.message)) });
           break;
         case 'slug_taken':
           setSlugAuto(false);
@@ -495,6 +536,49 @@ function ClaimForm({
     <form className={styles.card} onSubmit={onSubmit} noValidate aria-busy={busy || undefined}>
       <h2 className={styles.cardTitle}>{t('Your details')}</h2>
 
+      {choice ? (
+        <div ref={choiceRef} tabIndex={-1} role="region" aria-labelledby="start-choice-title" className={styles.choice} data-start-choice="">
+          <p id="start-choice-title" className={styles.alertTitle}>
+            {choice.sites.length === 1 ? t('Your Etsy order already has a website.') : t('Your Etsy order already has {n} websites.', { n: choice.sites.length })}
+          </p>
+          <ul className={styles.choiceList}>
+            {choice.sites.map((x) => (
+              <li key={x.slug} className={styles.choiceSite} data-start-choice-site={x.slug}>
+                <div className={styles.choiceText}>
+                  <strong>{x.design || x.slug}</strong>
+                  <span>{x.names ? `${x.names} · ` : ''}/{x.slug}</span>
+                </div>
+                <button type="button" className={styles.secondary} disabled={busy} onClick={() => void submit({ intent: 'open', openSlug: x.slug })} data-start-open={x.slug}>
+                  {t('Open it')}
+                </button>
+              </li>
+            ))}
+          </ul>
+          {choice.add ? (
+            <div className={styles.choiceAdd}>
+              <button type="button" className={styles.secondary} disabled={busy} onClick={() => void submit({ intent: 'add' })} data-start-add="">
+                {choice.add.sameDesign
+                  ? t('Start another website with this design')
+                  : choice.sites.length === 1
+                    ? t('Start a second website with {design}', { design: choice.add.design })
+                    : t('Start one more website with {design}', { design: choice.add.design })}
+              </button>
+              <p className={styles.hint}>
+                {choice.add.sameDesign
+                  ? t('Only if you bought this design more than once in this order.')
+                  : choice.sites.length === 1
+                    ? t('Only if you bought both designs in this order.')
+                    : t('Only if you bought this design in the same order too.')}
+              </p>
+            </div>
+          ) : choice.message ? (
+            <p className={styles.hint} data-start-choice-full="">
+              {t(choice.message)}
+            </p>
+          ) : null}
+        </div>
+      ) : null}
+
       {message ? (
         <div
           ref={messageRef}
@@ -529,10 +613,11 @@ function ClaimForm({
             setOrderNumber(e.target.value);
             clearServer('orderNumber');
             if (message?.tone === 'notice') setMessage(null);
+            setChoice(null);
           }}
         />
         <p className={styles.hint} id="start-order-hint">
-          {t('Find it in your Etsy order confirmation email, or on Etsy under Purchases and reviews. One website per order.')}
+          {t('Find it in your Etsy order confirmation email, or on Etsy under Purchases and reviews. One website for each design you bought.')}
         </p>
         {errorText('orderNumber')}
       </div>
@@ -552,6 +637,7 @@ function ClaimForm({
           onChange={(e) => {
             setEmail(e.target.value);
             clearServer('email');
+            setChoice(null);
           }}
         />
         <p className={styles.hint} id="start-email-hint">

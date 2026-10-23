@@ -1406,6 +1406,18 @@ const dict: Dict = {
   "Open the panel again (RSVP page)": "Rouvrir le panneau (page RSVP)",
   "Downloads open once your order is confirmed.": "Les téléchargements seront disponibles dès que votre commande sera confirmée.",
   "This website is archived, so its PDFs can no longer be made.": "Ce site est archivé : ses PDF ne peuvent plus être créés.",
+  "Your Etsy order already has a website.": "Votre commande Etsy a déjà un site.",
+  "Your Etsy order already has {n} websites.": "Votre commande Etsy a déjà {n} sites.",
+  "Open it": "Ouvrir",
+  "Start another website with this design": "Créer un autre site avec ce design",
+  "Start a second website with {design}": "Créer un deuxième site avec {design}",
+  "Start one more website with {design}": "Créer un site de plus avec {design}",
+  "Only if you bought this design more than once in this order.": "Uniquement si vous avez acheté ce design plusieurs fois dans cette commande.",
+  "Only if you bought both designs in this order.": "Uniquement si vous avez acheté les deux designs dans cette commande.",
+  "Only if you bought this design in the same order too.": "Uniquement si vous avez aussi acheté ce design dans la même commande.",
+  "Find it in your Etsy order confirmation email, or on Etsy under Purchases and reviews. One website for each design you bought.": "Vous le trouverez dans l’e-mail de confirmation de commande Etsy, ou sur Etsy dans Achats et avis. Un site pour chaque design acheté.",
+  "Every design in this Etsy order already has its website. To start another website, please buy the design on Etsy and use that order number.": "Chaque design de cette commande Etsy a déjà son site. Pour créer un autre site, achetez le design sur Etsy et utilisez ce numéro de commande.",
+  "This order already has the most websites one order can have. Please message us on Etsy if you need another one.": "Cette commande a déjà le nombre maximal de sites possible pour une commande. Si vous en avez besoin d’un autre, écrivez-nous sur Etsy.",
 };
 
 export default dict;

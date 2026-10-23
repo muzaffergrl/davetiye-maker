@@ -1406,6 +1406,18 @@ const dict: Dict = {
   "Open the panel again (RSVP page)": "Fliesentafel erneut öffnen (Antwortseite)",
   "Downloads open once your order is confirmed.": "Downloads sind möglich, sobald Ihre Bestellung bestätigt ist.",
   "This website is archived, so its PDFs can no longer be made.": "Diese Website ist archiviert, daher können keine PDFs mehr erstellt werden.",
+  "Your Etsy order already has a website.": "Für Ihre Etsy-Bestellung gibt es bereits eine Website.",
+  "Your Etsy order already has {n} websites.": "Für Ihre Etsy-Bestellung gibt es bereits {n} Websites.",
+  "Open it": "Öffnen",
+  "Start another website with this design": "Eine weitere Website mit diesem Design beginnen",
+  "Start a second website with {design}": "Eine zweite Website mit {design} beginnen",
+  "Start one more website with {design}": "Eine weitere Website mit {design} beginnen",
+  "Only if you bought this design more than once in this order.": "Nur wenn Sie dieses Design in dieser Bestellung mehr als einmal gekauft haben.",
+  "Only if you bought both designs in this order.": "Nur wenn Sie beide Designs in dieser Bestellung gekauft haben.",
+  "Only if you bought this design in the same order too.": "Nur wenn Sie dieses Design ebenfalls in derselben Bestellung gekauft haben.",
+  "Find it in your Etsy order confirmation email, or on Etsy under Purchases and reviews. One website for each design you bought.": "Sie finden sie in Ihrer Etsy-Bestellbestätigung per E-Mail oder auf Etsy unter „Käufe und Bewertungen“. Eine Website für jedes Design, das Sie gekauft haben.",
+  "Every design in this Etsy order already has its website. To start another website, please buy the design on Etsy and use that order number.": "Für jedes Design dieser Etsy-Bestellung gibt es bereits eine Website. Für eine weitere Website kaufen Sie das Design bitte auf Etsy und verwenden diese Bestellnummer.",
+  "This order already has the most websites one order can have. Please message us on Etsy if you need another one.": "Diese Bestellung hat bereits die meisten Websites, die eine Bestellung haben kann. Wenn Sie eine weitere brauchen, schreiben Sie uns bitte auf Etsy.",
 };
 
 export default dict;

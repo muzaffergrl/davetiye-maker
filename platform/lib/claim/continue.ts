@@ -12,8 +12,10 @@
 //      (G151: when a private theme — a custom design — lists this order number, + startPath "/start?theme=<id>&order=<no>")
 //   6. a website whose owner email matches (normalised, constant time) -> a new DEVICE KEY (lib/device-keys.ts)
 //                                                                    -> 200 {next: "edit", slug, editPath, names}
-//      G152: SEVERAL websites of the order (multi-item Etsy order) match -> 200 {next: "choose", sites: [{slug, names}]}
-//      (no key yet); the page asks which one and posts again with {slug}: that one opens (same checks, same counters).
+//      G152: SEVERAL websites of the order (multi-item Etsy order) match -> 200 {next: "choose", sites: [{slug, names,
+//      design}]} (no key yet; G951: every website of the order started with this email, with its design's name); the page
+//      asks which one and posts again with {slug}: that one opens (same checks, same counters). Never the first one by
+//      default.
 //   7. anything else                                                -> 403 no_match, one generic message (it never says
 //                                                                       whose the order is or which email it has)
 // POST /api/my/signin-link {orderNumber, email} — only while an email provider is set up (getEditLinkMailer().enabled;
@@ -111,6 +113,11 @@ export function ownedSite(sites: readonly SiteRecord[], email: string, preferThe
   return (preferTheme ? owned.find((s) => s.theme === preferTheme) : undefined) ?? owned[0] ?? null;
 }
 
+/** G951: a design's name for the buyer ("Olive & Ivory"): the sales catalogue's, else its id in words (a private design). */
+export function designName(themeId: string): string {
+  return MARKETING.designs.find((d) => d.id === themeId)?.name ?? themeId.split(/[-_]+/).filter(Boolean).map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');
+}
+
 /** The couple's names as the panel shows them (for the "On this device" list on /my). */
 export function siteNames(site: SiteRecord): string {
   const c = site.content;
@@ -163,7 +170,8 @@ export async function continueWithOrder(ctx: ContinueContext, raw: Record<string
   if (!owned.length) return continueError(403, 'no_match');
   if (owned.length > 1 && !wanted) {
     // G152: names and addresses only of the websites this email started (never another buyer's).
-    return { status: 200, body: { ok: true, next: 'choose', sites: owned.map((s) => ({ slug: s.slug, names: siteNames(s) })) } };
+    // G951: with the design of each, so two websites of one couple (two designs in one order) can be told apart.
+    return { status: 200, body: { ok: true, next: 'choose', sites: owned.map((s) => ({ slug: s.slug, names: siteNames(s), design: designName(s.theme) })) } };
   }
   const site = wanted ? owned.find((s) => s.slug === wanted) : owned[0];
   if (!site) return continueError(403, 'no_match');
@@ -201,7 +209,7 @@ export async function emailSignInLink(ctx: ContinueContext, raw: Record<string, 
         to: site.ownerEmail,
         editUrl: `${origin}${deviceEditPath(site.slug, key)}`,
         siteUrl: `${origin}/${site.slug}`,
-        themeName: MARKETING.designs.find((d) => d.id === site.theme)?.name ?? site.theme,
+        themeName: designName(site.theme),
         orderNumber,
         kind: 'signin',
       });

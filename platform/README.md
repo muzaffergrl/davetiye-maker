@@ -1222,7 +1222,18 @@ Tema/demo yoksa: `/start` (temasız) ve geçersiz tema → dostça sayfa + sunul
 - **Sipariş numarası biçimi (VARSAYIM, Etsy API ile doğrulanmadı):** Etsy'de "Order #1234567890" (makbuz numarası), yalnız
   rakam. Boşluk, `-`, `.`, baştaki `#` ve "Order"/"Order number:" atılır; kalan **8–12 ASCII rakam** olmalı (bugünkü numaralar
   10 hane; aralık iki yöne pay bırakır). Değiştirmek: `ORDER_NUMBER_MIN/MAX` (`fields.ts`).
-- **Sipariş başına bir site:** aynı numara (biçimi farklı yazılsa da) ikinci kez → `409 order_used`, dostça mesaj:
+- **Bir siparişte birden fazla tasarım (G951):** sipariş, aldığı her tasarım birimi için bir site taşıyabilir (en çok
+  `MAX_ORDER_SITES` = 10; `orderSlot` 1, 2 …). Aynı sipariş + **aynı e-posta** ile `/start` → seçim ekranı `200 {next:"choose",
+  sites:[{slug, names, design, sameDesign}], add}`: "Siparişinizin zaten sitesi var: <Tasarım A> → Aç" ve "<Tasarım B> ile ikinci
+  siteyi başlat (yalnız ikisini de bu siparişte aldıysanız)"; aynı tasarım → "Bu tasarımla bir site daha başlat". Butonlar aynı
+  formu `intent:"open"`+`openSlug` / `intent:"add"` ile yeniden yollar. Ek site: Etsy makbuzu okunduysa yalnız makbuzun tasarım
+  birimleri kadar (`409 order_full`; eklenemiyorsa ve bu tasarımın sitesi varsa doğrudan o açılır); trust (Gmail / henüz yok) →
+  izinli, `provisional` ve admin'de **hemen** "Sipariş #… artık N siteye sahip — Etsy siparişinde N tasarım olduğunu kontrol
+  edin"; manual → `pending`. Başka e-posta → her zaman `409 order_used`. `/my` siparişin bu e-postayla açılmış bütün sitelerini
+  tasarım adıyla listeler. Admin site sayfası siparişin bütün sitelerini gösterir; "Yeni sipariş" mevcut siparişe ancak
+  "Etsy'de baktım: bir tasarım daha var" onayıyla site ekler. Yalnız hizmet içeren sipariş (kurulum / ek revizyon / özel
+  tasarım; Etsy makbuzunda başlıktan, satış e-postasında kalem satırlarından) tasarım sitesini doğrulamaz (`noDesign`, admin To-do).
+- **Sipariş başına bir site (eski kural; G951 öncesi):** aynı numara (biçimi farklı yazılsa da) ikinci kez → `409 order_used`, dostça mesaj:
   "A website has already been started with this order number. Open it with the edit link you saved … message the shop on Etsy".
   Yanıtta slug, e-posta, link ya da kayıt bilgisi **yok**; düz anahtar zaten saklanmadığı için yeniden gösterilemez.
   Aynı süreçte eşzamanlı denemeler sipariş no başına kilitle sıralanır (test: 6 paralel istek → 1 site).
@@ -1242,7 +1253,7 @@ Tema/demo yoksa: `/start` (temasız) ve geçersiz tema → dostça sayfa + sunul
 |---|---|
 | `POST /api/start` `application/json`, ≤ 4 KB: `{theme, orderNumber, email, names: [a, b], slug?, claimToken?, website?}` | `201 {ok, slug, status:"draft", editUrl, editPath, siteUrl, emailSent}` · `400 invalid (+fields: orderNumber/email/name1/name2/slug)` · `400 bad_json` · `403 order_not_verified` · `404 theme_unavailable` · `409 order_used` · `409 slug_taken (+fields.slug, suggestion)` · `413` · `415` · `429 rate_limited/busy (+Retry-After)` · `503 verification_unavailable` · `500` |
 | `GET /api/start/slug?value=<adres>` | `200 {ok, value, available, reason: null\|missing\|format\|reserved\|taken, message, suggestion}` · `429` |
-| G146: aynı sipariş + **sitenin e-postası** ile `POST /api/start` | `200 {ok, existing:true, slug, editPath (cihaz anahtarı), siteUrl, names, orderPending}` (link değişmez); başka e-posta → `409 order_used` (mesaj `/my`'ı gösterir) |
+| G146/G951: aynı sipariş + **sitenin e-postası** ile `POST /api/start` | `200 {ok, next:"choose", sites, add, full?, message?}`; `intent:"open", openSlug` → `200 {ok, existing:true, slug, editPath (cihaz anahtarı), siteUrl, names, orderPending}` (link değişmez); `intent:"add"` → `201` (yeni site, sonraki birim) ya da `409 order_full`; başka e-posta → `409 order_used` (mesaj `/my`'ı gösterir) |
 | `POST /api/my/continue` `application/json`, ≤ 1 KB: `{orderNumber, email, website?}` | `200 {next:"edit", slug, editPath, names}` (cihaz anahtarı) · `200 {next:"start"}` (sipariş için site yok) · `403 no_match` (tek genel mesaj) · `400 invalid (+fields)` · `413` · `415` · `429 (+Retry-After)` · `500` |
 | `POST /api/my/signin-link` (aynı gövde) | e-posta sağlayıcısı yoksa `503 unavailable`; varsa her zaman `200 {ok, message}` — eşleşirse kayıtlı sahip adresine `kind:"signin"` link |
 | `GET/POST /api/edit/<slug>/devices` (Bearer) | `{access: owner\|shop\|device, devices:[{id,label,createdAt,via,current}]}` · `POST {action:"sign-out-others"}` → `{removed, …}` (dükkân linki `403`) |

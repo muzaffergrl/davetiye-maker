@@ -334,12 +334,18 @@ test('claim: a retry with the same claim token recovers a lost answer (new link)
     assert.deepEqual(Object.keys(r.body).sort(), ['code', 'message', 'ok']);
   }
   // Once published (the buyer clearly has the link) or after the retry window, the token no longer reissues the link.
-  // G146: the same email then signs this device in instead (a device key; the edit link is NOT replaced).
+  // G951: the same email gets the choice (open the order's website / start one more), no link; "open" signs this
+  // device in (a device key, G146; the edit link is NOT replaced).
   await publishSite(getDataAdapter(), site.id);
   const after = await postClaim(form({ orderNumber: order, claimToken: token, email: 'rowan@example.test' }));
   assert.equal(after.status, 200, JSON.stringify(after.body));
-  assert.equal(after.body.existing, true);
+  assert.equal(after.body.next, 'choose');
+  assert.deepEqual(after.body.sites.map((x: Json) => x.slug), [site.slug]);
   assert.equal(after.body.editUrl, undefined, 'no edit link in the answer');
+  const opened = await postClaim(form({ orderNumber: order, email: 'rowan@example.test', intent: 'open', openSlug: site.slug }));
+  assert.equal(opened.status, 200);
+  assert.equal(opened.body.existing, true);
+  assert.equal(opened.body.editUrl, undefined, 'no edit link in the answer');
   assert.ok(await authorizeEditor(getDataAdapter(), site.slug, keyOf(retry.body.editUrl)), 'the edit link still works');
 
   const late = freshOrder();
@@ -349,8 +355,8 @@ test('claim: a retry with the same claim token recovers a lost answer (new link)
   assert.equal((await claimSite(ctx(Date.now()), body)).status, 201);
   assert.equal((await claimSite(ctx(Date.now() + 60_000), body)).status, 201, 'within the window');
   const lateLogin = await claimSite(ctx(Date.now() + CLAIM_RETRY_WINDOW_MS + 60_000), body);
-  assert.equal(lateLogin.status, 200, 'after the window: the same email signs in (no new link)');
-  assert.equal(lateLogin.body.existing, true);
+  assert.equal(lateLogin.status, 200, 'after the window: the same email gets the choice (no new link)');
+  assert.equal(lateLogin.body.next, 'choose');
   assert.equal((await claimSite(ctx(Date.now() + CLAIM_RETRY_WINDOW_MS + 60_000), { ...body, email: 'other@example.test' })).status, 409, 'another email: order used');
 });
 
@@ -380,12 +386,13 @@ test('claim: parallel attempts with one order number create exactly one site', a
   const statuses = results.map((r) => r.status).sort();
   assert.deepEqual(statuses, [201, 409, 409, 409, 409, 409]);
   assert.equal((await getDataAdapter().findSitesByOrderRef(order)).length, 1);
-  // G146: the same email from several tabs at once: one website, the other tabs are signed in to it.
+  // The same email from several tabs at once: one website; the other tabs get the choice with it (G951; never a second one
+  // without the buyer asking for it).
   const same = freshOrder();
   const tabs = await Promise.all(Array.from({ length: 4 }, () => postClaim(form({ orderNumber: same, email: 'pat@example.test' }))));
   assert.deepEqual(tabs.map((r) => r.status).sort(), [200, 200, 200, 201]);
   const slug = tabs.find((r) => r.status === 201)!.body.slug;
-  assert.ok(tabs.filter((r) => r.status === 200).every((r) => r.body.existing === true && r.body.slug === slug));
+  assert.ok(tabs.filter((r) => r.status === 200).every((r) => r.body.next === 'choose' && r.body.sites.length === 1 && r.body.sites[0].slug === slug));
   assert.equal((await getDataAdapter().findSitesByOrderRef(same)).length, 1);
 });
 

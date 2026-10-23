@@ -1406,6 +1406,18 @@ const dict: Dict = {
   "Open the panel again (RSVP page)": "Panoyu yeniden aç (Katılım sayfası)",
   "Downloads open once your order is confirmed.": "İndirmeler, siparişiniz onaylanınca açılır.",
   "This website is archived, so its PDFs can no longer be made.": "Bu web sitesi arşivde; PDF'leri artık oluşturulamaz.",
+  "Your Etsy order already has a website.": "Etsy siparişinizin zaten bir websitesi var.",
+  "Your Etsy order already has {n} websites.": "Etsy siparişinizin zaten {n} websitesi var.",
+  "Open it": "Aç",
+  "Start another website with this design": "Bu tasarımla bir website daha başlat",
+  "Start a second website with {design}": "{design} ile ikinci bir website başlat",
+  "Start one more website with {design}": "{design} ile bir website daha başlat",
+  "Only if you bought this design more than once in this order.": "Yalnız bu tasarımı bu siparişte birden fazla aldıysanız.",
+  "Only if you bought both designs in this order.": "Yalnız iki tasarımı da bu siparişte aldıysanız.",
+  "Only if you bought this design in the same order too.": "Yalnız bu tasarımı da aynı siparişte aldıysanız.",
+  "Find it in your Etsy order confirmation email, or on Etsy under Purchases and reviews. One website for each design you bought.": "Etsy sipariş onay e-postanızda ya da Etsy'de Satın alımlar ve değerlendirmeler bölümünde bulabilirsiniz. Aldığınız her tasarım için bir website.",
+  "Every design in this Etsy order already has its website. To start another website, please buy the design on Etsy and use that order number.": "Bu Etsy siparişindeki her tasarımın zaten bir websitesi var. Başka bir website başlatmak için lütfen tasarımı Etsy'den satın alın ve o siparişin numarasını kullanın.",
+  "This order already has the most websites one order can have. Please message us on Etsy if you need another one.": "Bu sipariş, bir siparişin sahip olabileceği en fazla websitesine ulaştı. Bir tane daha gerekiyorsa lütfen bize Etsy'den yazın.",
 };
 
 export default dict;
