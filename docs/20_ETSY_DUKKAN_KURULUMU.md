@@ -77,20 +77,25 @@ GOOD TO KNOW
 ```
 
 ### 1.4 Message to Buyers (makbuz + sipariş onay e-postası) [doğrulandı; alanda sınır tanımlı değil]
-docs/19 §4.4. `{START_BASE}` = `https://bkestudio.com/start` (G189, 2026-10-18: marka alan adı bkestudıo.com; Etsy elle yazılmış `ı`'yı her tarayıcıda göstermeyebileceği için IDNA biçimi yazılır, docs/05 §C). **Dükkânda bu iki mesaj eski Vercel adresiyle kaydedildiyse yenisiyle değiştirilir.**
+docs/19 §4.4. `{START_BASE}` = `https://bkestudio.com/start` (G189, 2026-10-18: marka alan adı bkestudıo.com; Etsy elle yazılmış `ı`'yı her tarayıcıda göstermeyebileceği için IDNA biçimi yazılır, docs/05 §C).
+**2026-10-23 (Etsy'ye girildi, yeniden okunup doğrulandı; §7.13):** hizmet alıcıları da kapsandı (§7.12 "Dikkat") ve docs/19 §4.4'teki
+`/my` cümlesi eklendi (sipariş no + e-postayla her cihazdan devam; eski "edit link'ini kaydet, e-postayla gönderemiyoruz" cümlesi START
+HERE'deki güncel akışla çelişiyordu).
 
 ```text
-Thank you! Start your wedding website from the START HERE PDF in your download, or at https://bkestudio.com/start (choose the design you bought). Please save your private edit link when it appears. Questions? Message us on Etsy.
+Thank you! Wedding website design: start it from the START HERE PDF in your download, or at https://bkestudio.com/start (choose the design you bought). To continue later on any device, open https://bkestudio.com/my with the same order number and email. Service order (setup, custom design or extra revision): open the PDF in your download to see what happens next. Questions? Message us on Etsy.
 ```
 
 ### 1.5 Message to Buyers for Digital Items (indirme sayfası; bütün dijital ilanlar) [doğrulandı; alanda sınır tanımlı değil]
+2026-10-23: §1.4'teki gibi güncellendi ve Etsy'ye girildi (607 karakter).
 
 ```text
-Thank you for your order! Your download is your START HERE guide (PDF). Open it and tap the start link inside.
+Thank you for your order!
 
-Can't open the PDF? Start here instead and choose the design you bought: https://bkestudio.com/start
+Wedding website design: your download is your START HERE guide (PDF). Open it and tap the start link inside. Can’t open the PDF? Start here instead and choose the design you bought: https://bkestudio.com/start
+You will enter your Etsy order number, your email and your first names. To continue later on any phone or computer, open https://bkestudio.com/my and enter the same order number and email. No account or password.
 
-You will enter your Etsy order number, your email and your first names. Then SAVE YOUR EDIT LINK when it appears: it opens your editor, and we cannot email it to you yet.
+Service order (setup, custom design or extra revision): your download is a short PDF that tells you what to send us and what happens next.
 
 Questions? Message us here on Etsy with your order number.
 ```

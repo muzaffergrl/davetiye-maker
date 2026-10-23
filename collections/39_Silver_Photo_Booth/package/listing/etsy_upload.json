@@ -42,7 +42,7 @@
   "digital_files": [
     {
       "file": "collections/39_Silver_Photo_Booth/package/customer/START_HERE.pdf",
-      "bytes": 54245
+      "bytes": 54246
     }
   ],
   "images": [
@@ -106,81 +106,93 @@
       "n": 9,
       "file": "collections/39_Silver_Photo_Booth/package/listing/images_v4/09_closeup.jpg",
       "alt": "Designed to be opened: a close-up of a phone on pearl-grey satin, showing the opened card with a sample photo and the names",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 10,
       "file": "collections/39_Silver_Photo_Booth/package/listing/images_v4/10_tap.jpg",
       "alt": "One tap and it opens: a hand about to tap a phone that shows the closed silver envelope with its photo strip; sound and animation included",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 11,
       "file": "collections/39_Silver_Photo_Booth/package/listing/images_v4/11_home.jpg",
       "alt": "Guests open it anywhere, with no app and no account: a guest at home holds a phone with the Home page",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 12,
       "file": "collections/39_Silver_Photo_Booth/package/listing/images_v4/12_devices.jpg",
       "alt": "Beautiful on every screen: the website on a tablet and on a phone",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 13,
       "file": "collections/39_Silver_Photo_Booth/package/listing/images_v4/13_laptop.jpg",
       "alt": "Edit on your laptop too: the private editor with its page preview on a laptop",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 14,
       "file": "collections/39_Silver_Photo_Booth/package/listing/images_v4/14_together.jpg",
       "alt": "Plan it together: the guest list on a phone and on a laptop; your editor opens on any device",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 15,
       "file": "collections/39_Silver_Photo_Booth/package/listing/images_v4/15_print.jpg",
       "alt": "Print it or send it: the printable invitation in this design (5 × 7 in or A5 PDF) beside a phone with the closed silver envelope",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 16,
       "file": "collections/39_Silver_Photo_Booth/package/listing/images_v4/16_need.jpg",
       "alt": "Everything your guests need: four phones show the invitation, the venue and map, questions and answers, and a sent RSVP",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 17,
       "file": "collections/39_Silver_Photo_Booth/package/listing/images_v4/17_day.jpg",
       "alt": "On the wedding day: the order of the day on a phone at a reception table, with add-to-calendar buttons",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 18,
       "file": "collections/39_Silver_Photo_Booth/package/listing/images_v4/18_replies.jpg",
       "alt": "Every reply in one place: the list of replies on a phone beside a bouquet; download it as Excel in one tap",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 19,
       "file": "collections/39_Silver_Photo_Booth/package/listing/images_v4/19_share.jpg",
       "alt": "Share it with one link by text, WhatsApp, email or QR: one person shows the Share screen to another; your own address with your names",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     }
   ],
-  "gpt_mockup_scenes": [],
+  "gpt_mockup_scenes": [
+    "collections/39_Silver_Photo_Booth/assets/gpt/mockups/p7_01_closeup.png",
+    "collections/39_Silver_Photo_Booth/assets/gpt/mockups/p7_02_hand_tap.png",
+    "collections/39_Silver_Photo_Booth/assets/gpt/mockups/p7_03_guest_home.png",
+    "collections/39_Silver_Photo_Booth/assets/gpt/mockups/p7_04_phone_tablet.png",
+    "collections/39_Silver_Photo_Booth/assets/gpt/mockups/p7_05_laptop.png",
+    "collections/39_Silver_Photo_Booth/assets/gpt/mockups/p7_06_couple_planning.png",
+    "collections/39_Silver_Photo_Booth/assets/gpt/mockups/p7_07_print_card.png",
+    "collections/39_Silver_Photo_Booth/assets/gpt/mockups/p7_08_four_phones.png",
+    "collections/39_Silver_Photo_Booth/assets/gpt/mockups/p7_09_venue_table.png",
+    "collections/39_Silver_Photo_Booth/assets/gpt/mockups/p7_10_bouquet.png",
+    "collections/39_Silver_Photo_Booth/assets/gpt/mockups/p7_11_share.png"
+  ],
   "video": {
     "file": "collections/39_Silver_Photo_Booth/package/listing/video_v4_4x5.mp4",
     "exists": true
@@ -298,7 +310,6 @@
     }
   ],
   "blockers": [
-    "listing images missing: collections/39_Silver_Photo_Booth/package/listing/images_v4/09_closeup.jpg, collections/39_Silver_Photo_Booth/package/listing/images_v4/10_tap.jpg, collections/39_Silver_Photo_Booth/package/listing/images_v4/11_home.jpg, collections/39_Silver_Photo_Booth/package/listing/images_v4/12_devices.jpg, collections/39_Silver_Photo_Booth/package/listing/images_v4/13_laptop.jpg, collections/39_Silver_Photo_Booth/package/listing/images_v4/14_together.jpg, collections/39_Silver_Photo_Booth/package/listing/images_v4/15_print.jpg, collections/39_Silver_Photo_Booth/package/listing/images_v4/16_need.jpg, collections/39_Silver_Photo_Booth/package/listing/images_v4/17_day.jpg, collections/39_Silver_Photo_Booth/package/listing/images_v4/18_replies.jpg, collections/39_Silver_Photo_Booth/package/listing/images_v4/19_share.jpg",
     "sales status 'coming' in platform/lib/marketing/config.ts (K41: not for sale)",
     "price not decided for this design (config.ts price '[PRICE]'; 1190 TL is the 01–21 design price, docs/23 §1)",
     "renewal not decided"

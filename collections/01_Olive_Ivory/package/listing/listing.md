@@ -74,7 +74,7 @@ No Canva account, no app and no design skills needed. Your guests need no app an
 - No returns, exchanges or cancellations: this is a digital product with instant access. If something on your website does not work as described, message us on Etsy and we will fix it.
 
 **QUESTIONS?**
-Message BKE Studio on Etsy or write to bkestudio@gmail.com. We answer within 24 hours.
+Message BKE Studio on Etsy or write to bkestudio01@gmail.com. We answer within 24 hours.
 
 ---
 

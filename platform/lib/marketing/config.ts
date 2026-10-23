@@ -115,9 +115,9 @@ export const MARKETING: MarketingConfig = {
   domain: 'bkestudio.com',
   // Vercel is serving the purchased domain; keep it as the production fallback when no public URL env var is set.
   siteUrl: process.env.MARKETING_SITE_URL || process.env.PLATFORM_PUBLIC_URL || 'https://bkestudio.com',
-  // K33 (2026-10-15): shop name BKE Studio, support address bkestudio@gmail.com ("for now"). Response time 24 hours (user,
+  // K33 (2026-10-15): shop name BKE Studio; support address bkestudio01@gmail.com (the user corrected it on 2026-10-16: the first-written bkestudio@gmail.com was wrong). Response time 24 hours (user,
   // 2026-10-15). K48 (2026-10-17): the Etsy shop link is the shop STUDIOBKE (K35: Etsy's real shop name; copy says BKE Studio).
-  support: { email: 'bkestudio@gmail.com', responseTime: msg('24 hours') },
+  support: { email: 'bkestudio01@gmail.com', responseTime: msg('24 hours') },
   etsy: { shopUrl: 'https://www.etsy.com/shop/STUDIOBKE', shopName: 'BKE Studio' },
   currency: 'TRY',
   hosting: { monthsAfterWedding: 12 },
@@ -647,7 +647,7 @@ export const MARKETING: MarketingConfig = {
       id: 'ivory-pearl-atelier',
       name: 'Ivory Pearl Atelier',
       status: 'live',
-      price: '1460',
+      price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-22',

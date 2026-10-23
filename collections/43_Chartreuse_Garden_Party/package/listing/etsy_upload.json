@@ -42,7 +42,7 @@
   "digital_files": [
     {
       "file": "collections/43_Chartreuse_Garden_Party/package/customer/START_HERE.pdf",
-      "bytes": 53182
+      "bytes": 53183
     }
   ],
   "images": [
@@ -106,81 +106,93 @@
       "n": 9,
       "file": "collections/43_Chartreuse_Garden_Party/package/listing/images_v4/09_closeup.jpg",
       "alt": "(draft, not built yet) Designed to be opened: a close-up of a phone with the open Chartreuse Garden Party envelope, your photo and your names",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 10,
       "file": "collections/43_Chartreuse_Garden_Party/package/listing/images_v4/10_tap.jpg",
       "alt": "(draft, not built yet) One tap and it opens: a hand taps the chartreuse envelope with its ranunculus on a phone; sound and animation included",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 11,
       "file": "collections/43_Chartreuse_Garden_Party/package/listing/images_v4/11_home.jpg",
       "alt": "(draft, not built yet) Guests open it anywhere, no app and no account: the Home page on a guest's phone; just one link on any phone",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 12,
       "file": "collections/43_Chartreuse_Garden_Party/package/listing/images_v4/12_devices.jpg",
       "alt": "(draft, not built yet) Beautiful on every screen: the Home page on a tablet and the invitation on a phone",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 13,
       "file": "collections/43_Chartreuse_Garden_Party/package/listing/images_v4/13_laptop.jpg",
       "alt": "(draft, not built yet) Edit on your laptop too: the private editor with its preview on a laptop",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 14,
       "file": "collections/43_Chartreuse_Garden_Party/package/listing/images_v4/14_together.jpg",
       "alt": "(draft, not built yet) Plan it together: the guest list in the editor on a phone and on a laptop; open your editor on any device",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 15,
       "file": "collections/43_Chartreuse_Garden_Party/package/listing/images_v4/15_print.jpg",
       "alt": "(draft, not built yet) Print it or send it: the printable invitation in the Chartreuse Garden Party design (5 × 7 in or A5 PDF) next to the closed envelope on a phone",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 16,
       "file": "collections/43_Chartreuse_Garden_Party/package/listing/images_v4/16_need.jpg",
       "alt": "(draft, not built yet) Everything your guests need: four phones show the invitation, the venue and map, questions and answers, and a sent RSVP",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 17,
       "file": "collections/43_Chartreuse_Garden_Party/package/listing/images_v4/17_day.jpg",
       "alt": "(draft, not built yet) The order of the day, with add-to-calendar buttons, on a phone",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 18,
       "file": "collections/43_Chartreuse_Garden_Party/package/listing/images_v4/18_replies.jpg",
       "alt": "(draft, not built yet) Every reply in one place: the guest list in the editor on a phone; download it as Excel in one tap",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 19,
       "file": "collections/43_Chartreuse_Garden_Party/package/listing/images_v4/19_share.jpg",
       "alt": "(draft, not built yet) Share it with one link by text, WhatsApp, email or QR: the editor's Share screen on a phone",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     }
   ],
-  "gpt_mockup_scenes": [],
+  "gpt_mockup_scenes": [
+    "collections/43_Chartreuse_Garden_Party/assets/gpt/mockups/p7_01_closeup.png",
+    "collections/43_Chartreuse_Garden_Party/assets/gpt/mockups/p7_02_hand_tap.png",
+    "collections/43_Chartreuse_Garden_Party/assets/gpt/mockups/p7_03_guest_home.png",
+    "collections/43_Chartreuse_Garden_Party/assets/gpt/mockups/p7_04_phone_tablet.png",
+    "collections/43_Chartreuse_Garden_Party/assets/gpt/mockups/p7_05_laptop.png",
+    "collections/43_Chartreuse_Garden_Party/assets/gpt/mockups/p7_06_couple_planning.png",
+    "collections/43_Chartreuse_Garden_Party/assets/gpt/mockups/p7_07_print_card.png",
+    "collections/43_Chartreuse_Garden_Party/assets/gpt/mockups/p7_08_four_phones.png",
+    "collections/43_Chartreuse_Garden_Party/assets/gpt/mockups/p7_09_venue_table.png",
+    "collections/43_Chartreuse_Garden_Party/assets/gpt/mockups/p7_10_bouquet.png",
+    "collections/43_Chartreuse_Garden_Party/assets/gpt/mockups/p7_11_share.png"
+  ],
   "video": {
     "file": "collections/43_Chartreuse_Garden_Party/package/listing/video_v4_4x5.mp4",
     "exists": true
@@ -308,7 +320,6 @@
     }
   ],
   "blockers": [
-    "listing images missing: collections/43_Chartreuse_Garden_Party/package/listing/images_v4/09_closeup.jpg, collections/43_Chartreuse_Garden_Party/package/listing/images_v4/10_tap.jpg, collections/43_Chartreuse_Garden_Party/package/listing/images_v4/11_home.jpg, collections/43_Chartreuse_Garden_Party/package/listing/images_v4/12_devices.jpg, collections/43_Chartreuse_Garden_Party/package/listing/images_v4/13_laptop.jpg, collections/43_Chartreuse_Garden_Party/package/listing/images_v4/14_together.jpg, collections/43_Chartreuse_Garden_Party/package/listing/images_v4/15_print.jpg, collections/43_Chartreuse_Garden_Party/package/listing/images_v4/16_need.jpg, collections/43_Chartreuse_Garden_Party/package/listing/images_v4/17_day.jpg, collections/43_Chartreuse_Garden_Party/package/listing/images_v4/18_replies.jpg, collections/43_Chartreuse_Garden_Party/package/listing/images_v4/19_share.jpg",
     "sales status 'coming' in platform/lib/marketing/config.ts (K41: not for sale)",
     "price not decided for this design (config.ts price '[PRICE]'; 1190 TL is the 01–21 design price, docs/23 §1)",
     "renewal not decided"

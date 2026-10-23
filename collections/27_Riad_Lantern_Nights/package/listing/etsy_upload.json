@@ -42,7 +42,7 @@
   "digital_files": [
     {
       "file": "collections/27_Riad_Lantern_Nights/package/customer/START_HERE.pdf",
-      "bytes": 52905
+      "bytes": 52908
     }
   ],
   "images": [
@@ -185,6 +185,17 @@
     "collections/27_Riad_Lantern_Nights/assets/gpt/mockups/flatlay_phone.png",
     "collections/27_Riad_Lantern_Nights/assets/gpt/mockups/hand_phone_edit.png",
     "collections/27_Riad_Lantern_Nights/assets/gpt/mockups/laptop_phone.png",
+    "collections/27_Riad_Lantern_Nights/assets/gpt/mockups/p7_01_closeup.png",
+    "collections/27_Riad_Lantern_Nights/assets/gpt/mockups/p7_02_hand_tap.png",
+    "collections/27_Riad_Lantern_Nights/assets/gpt/mockups/p7_03_guest_home.png",
+    "collections/27_Riad_Lantern_Nights/assets/gpt/mockups/p7_04_phone_tablet.png",
+    "collections/27_Riad_Lantern_Nights/assets/gpt/mockups/p7_05_laptop.png",
+    "collections/27_Riad_Lantern_Nights/assets/gpt/mockups/p7_06_couple_planning.png",
+    "collections/27_Riad_Lantern_Nights/assets/gpt/mockups/p7_07_print_card.png",
+    "collections/27_Riad_Lantern_Nights/assets/gpt/mockups/p7_08_four_phones.png",
+    "collections/27_Riad_Lantern_Nights/assets/gpt/mockups/p7_09_venue_table.png",
+    "collections/27_Riad_Lantern_Nights/assets/gpt/mockups/p7_10_bouquet.png",
+    "collections/27_Riad_Lantern_Nights/assets/gpt/mockups/p7_11_share.png",
     "collections/27_Riad_Lantern_Nights/assets/gpt/mockups/three_phones.png"
   ],
   "video": {

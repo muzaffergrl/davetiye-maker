@@ -610,7 +610,7 @@ try {
     const first = page.locator('[data-testid="identity"] input').first();
     await first.fill('Hannah');
     const zero = await page.locator('[data-identity-class]').innerText();
-    check('rights 0: §11.8 text with the support email and the shop name (K33)', zero.includes("You've used all 3 name and date changes") && zero.includes('bkestudio@gmail.com') && zero.includes('BKE Studio'), zero);
+    check('rights 0: §11.8 text with the support email and the shop name (K33)', zero.includes("You've used all 3 name and date changes") && zero.includes('bkestudio01@gmail.com') && zero.includes('BKE Studio'), zero);
     check('rights 0: the change button is disabled', await page.locator('[data-identity-submit]').isDisabled());
     await shot(page, '23_identity_no_rights');
     await first.fill('Clare');

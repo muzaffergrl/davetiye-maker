@@ -42,7 +42,7 @@
   "digital_files": [
     {
       "file": "collections/34_Red_Lacquer_Double_Happiness/package/customer/START_HERE.pdf",
-      "bytes": 58931
+      "bytes": 58932
     }
   ],
   "images": [
@@ -180,7 +180,19 @@
       "status": "missing"
     }
   ],
-  "gpt_mockup_scenes": [],
+  "gpt_mockup_scenes": [
+    "collections/34_Red_Lacquer_Double_Happiness/assets/gpt/mockups/p7_01_closeup.png",
+    "collections/34_Red_Lacquer_Double_Happiness/assets/gpt/mockups/p7_02_hand_tap.png",
+    "collections/34_Red_Lacquer_Double_Happiness/assets/gpt/mockups/p7_03_guest_home.png",
+    "collections/34_Red_Lacquer_Double_Happiness/assets/gpt/mockups/p7_04_phone_tablet.png",
+    "collections/34_Red_Lacquer_Double_Happiness/assets/gpt/mockups/p7_05_laptop.png",
+    "collections/34_Red_Lacquer_Double_Happiness/assets/gpt/mockups/p7_06_couple_planning.png",
+    "collections/34_Red_Lacquer_Double_Happiness/assets/gpt/mockups/p7_07_print_card.png",
+    "collections/34_Red_Lacquer_Double_Happiness/assets/gpt/mockups/p7_08_four_phones.png",
+    "collections/34_Red_Lacquer_Double_Happiness/assets/gpt/mockups/p7_09_venue_table.png",
+    "collections/34_Red_Lacquer_Double_Happiness/assets/gpt/mockups/p7_10_bouquet.png",
+    "collections/34_Red_Lacquer_Double_Happiness/assets/gpt/mockups/p7_11_share.png"
+  ],
   "video": {
     "file": "collections/34_Red_Lacquer_Double_Happiness/package/listing/video_v4_4x5.mp4",
     "exists": false

@@ -12,7 +12,7 @@ satış sitesi için metin önerileri (§6) ve açık kalanlar (§7).
 karar verilmemiş ticari alan köşeli parantezli yer tutucu (`[ORDER CHECK TIME]`, `[EXTENSION POLICY]` …) kalır (**K48, 2026-10-17:**
 G154 bunları koordinatör varsayılanlarıyla doldurdu — sipariş onayı "usually within 24 hours", uzatma Online until'dan önce
 Etsy'den istenir, silme 30 gün, arşiv 12 ay; yalnız §4.5 şablonları admin kopyasıyla birlikte G155'te); tarih `June 12, 2027`;
-rakip metni kopyalanmaz. **K33 (2026-10-15):** dükkân adı **BKE Studio**, destek e-postası **bkestudio@gmail.com** (şimdilik);
+rakip metni kopyalanmaz. **K33 (2026-10-15):** dükkân adı **BKE Studio**, destek e-postası **bkestudio01@gmail.com** (2026-10-16 kullanıcı düzeltmesi; ilk yazılan bkestudio@gmail.com yanlıştı);
 bütün alıcı metinlerinde bu değerler kullanılır. Ürün metni İngilizce, açıklamalar Türkçe.
 
 **Dayanak:** kaynak kod (2026-10-15, main `9fd88e1`) — `platform/app/start/StartForm.tsx`, `lib/claim/*`, `components/panel/*`,
@@ -308,7 +308,7 @@ tutucu) · — ürün yapmıyor (açıkça "no").
 |---|---|---|---|---|
 | 76 | What happens after the wedding? | You can turn your website into a thank-you page (automatically the day after, or right away), with your own message and photo. Replies close. | İ, SH | ✓ |
 | 77 | What happens after it closes? Can I extend it? | Your website closes for guests; in your editor you can still see your content and download your replies. Need it longer? Message us on Etsy before your Online until date and we can extend it. To delete your data sooner, message us on Etsy with your order number: we delete your website, photos and guest replies within 30 days. | SH, M | ✓ (K48) |
-| 78 | How do I get help, and how fast? | Message BKE Studio on Etsy with your order number (or email bkestudio@gmail.com). We reply within 24 hours. We never ask for your edit link. | İ, SH, P | ✓ (K33; süre 2026-10-15) |
+| 78 | How do I get help, and how fast? | Message BKE Studio on Etsy with your order number (or email bkestudio01@gmail.com). We reply within 24 hours. We never ask for your edit link. | İ, SH, P | ✓ (K33; süre 2026-10-15) |
 
 ---
 
@@ -458,22 +458,23 @@ sipariş onay e-postası) ve **Message to Buyers for Digital Items** (indirme sa
 Bu yüzden tasarıma özel link konamaz: temasız `/start` adresi alıcıya aldığı tasarımı seçtirir (G080 "Choose your design").
 `{START_BASE}` = `https://bkestudio.com/start`, `{MY_PAGE}` = `https://bkestudio.com/my` (G148: sipariş no + e-postayla her cihazdan devam, G146) (G189, 2026-10-18: marka alan adı bkestudıo.com, IDNA biçimi; docs/05 §C).
 
-**Message to Buyers for Digital Items** (indirme sayfası):
+**Message to Buyers for Digital Items** (indirme sayfası; 2026-10-23 hizmet paragrafıyla Etsy'ye girildi, docs/20 §1.5):
 
 ```text
-Thank you for your order! Your download is your START HERE guide (PDF). Open it and tap the start link inside.
+Thank you for your order!
 
-Can't open the PDF? Start here instead and choose the design you bought: {START_BASE}
-
+Wedding website design: your download is your START HERE guide (PDF). Open it and tap the start link inside. Can’t open the PDF? Start here instead and choose the design you bought: {START_BASE}
 You will enter your Etsy order number, your email and your first names. To continue later on any phone or computer, open {MY_PAGE} and enter the same order number and email. No account or password.
+
+Service order (setup, custom design or extra revision): your download is a short PDF that tells you what to send us and what happens next.
 
 Questions? Message us here on Etsy with your order number.
 ```
 
-**Message to Buyers** (makbuz ve onay e-postası; kısa):
+**Message to Buyers** (makbuz ve onay e-postası; kısa; 2026-10-23 Etsy'ye girildi, docs/20 §1.4):
 
 ```text
-Thank you! Start your wedding website from the START HERE PDF in your download, or at {START_BASE} (choose the design you bought). To continue later on any device, open {MY_PAGE} with the same order number and email. Questions? Message us on Etsy.
+Thank you! Wedding website design: start it from the START HERE PDF in your download, or at {START_BASE} (choose the design you bought). To continue later on any device, open {MY_PAGE} with the same order number and email. Service order (setup, custom design or extra revision): open the PDF in your download to see what happens next. Questions? Message us on Etsy.
 ```
 
 Notlar: Etsy mesajlarında alıcı Etsy dışında satın almaya yönlendirilmez; bu metinler yalnız teslimattır (docs/15 §4.1).
@@ -1012,7 +1013,7 @@ After the wedding → Online süresi → Quick answers → Troubleshooting → H
 - G148 (K46): Etsy'nin indirmesi herkese aynı PDF → rehberde alıcıya özel kod yok; anahtar Etsy sipariş numarası + e-posta. Rehber
   e-posta gönderimi vaat etmez (SMTP kapalı, G147) ve otomatik Etsy doğrulaması iddia etmez; "We are confirming your Etsy order"
   bölümü `manual` modda doğru olduğu için kaldı. "Lost your link? Message us on Etsy" ana yol değil, en son çare.
-- K33: dükkân adı **BKE Studio**, destek e-postası **bkestudio@gmail.com**; yanıt süresi **24 saat** (kullanıcı, 2026-10-15).
+- K33: dükkân adı **BKE Studio**, destek e-postası **bkestudio01@gmail.com** (2026-10-16 düzeltmesi); yanıt süresi **24 saat** (kullanıcı, 2026-10-15).
 - Ekran görüntüsü yok: ekranlar K29/G100 panelinden yeniden alınmadı. Canlı tabanla `capture` yeniden alınınca rehbere görsel
   eklenebilir (önerilen görev, §7).
 - PDF: reportlab, US Letter, standart PDF fontları (font dosyası gömülmez ya da pakete konmaz); QR = `img/start_qr.png`'nin kendisi
@@ -1443,7 +1444,7 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 In your editor, **Help & questions** at the bottom of Home answers the most common questions.
 
-Message BKE Studio on Etsy (in the conversation of your order), or write to **bkestudio@gmail.com**. We reply within **24 hours**. Please include your order number, your website address, what you see (a screenshot helps) and your phone and browser. Never send your edit link: we never need it.
+Message BKE Studio on Etsy (in the conversation of your order), or write to **bkestudio01@gmail.com**. We reply within **24 hours**. Please include your order number, your website address, what you see (a screenshot helps) and your phone and browser. Never send your edit link: we never need it.
 
 Prefer us to do it? Send us your details on Etsy and we enter them for you, as a separate Etsy purchase.
 

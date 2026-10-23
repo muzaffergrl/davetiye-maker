@@ -478,7 +478,7 @@ LABEL_SOURCES = [REPO / "platform" / "components" / "panel", REPO / "platform" /
                  REPO / "platform" / "lib" / "print" / "labels.ts"]
 # Bold text in the guide that is emphasis, not a panel label (checked by hand against the source, 2026-10-16).
 NOT_LABELS = {"First publish", "After that", "What stays as designed", "What guests do", "What you do", "not later",
-              "3 changes in total", "12 months after your wedding date", "24 hours", "bkestudio@gmail.com",
+              "3 changes in total", "12 months after your wedding date", "24 hours", "bkestudio01@gmail.com",
               "Save your edit link", "Your own wording", "Sample text", "Saving",
               "Step 1 of 3",  # "Step {step} of {SETUP_STEP_COUNT}" in Setup.tsx
               "Continue on another device"}  # G148: the title of the guide's own box, not a UI label

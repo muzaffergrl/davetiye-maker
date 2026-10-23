@@ -42,7 +42,7 @@
   "digital_files": [
     {
       "file": "collections/48_Navy_Ivory_Crest/package/customer/START_HERE.pdf",
-      "bytes": 53320
+      "bytes": 53321
     }
   ],
   "images": [
@@ -180,7 +180,19 @@
       "status": "missing"
     }
   ],
-  "gpt_mockup_scenes": [],
+  "gpt_mockup_scenes": [
+    "collections/48_Navy_Ivory_Crest/assets/gpt/mockups/p7_01_closeup.png",
+    "collections/48_Navy_Ivory_Crest/assets/gpt/mockups/p7_02_hand_tap.png",
+    "collections/48_Navy_Ivory_Crest/assets/gpt/mockups/p7_03_guest_home.png",
+    "collections/48_Navy_Ivory_Crest/assets/gpt/mockups/p7_04_phone_tablet.png",
+    "collections/48_Navy_Ivory_Crest/assets/gpt/mockups/p7_05_laptop.png",
+    "collections/48_Navy_Ivory_Crest/assets/gpt/mockups/p7_06_couple_planning.png",
+    "collections/48_Navy_Ivory_Crest/assets/gpt/mockups/p7_07_print_card.png",
+    "collections/48_Navy_Ivory_Crest/assets/gpt/mockups/p7_08_four_phones.png",
+    "collections/48_Navy_Ivory_Crest/assets/gpt/mockups/p7_09_venue_table.png",
+    "collections/48_Navy_Ivory_Crest/assets/gpt/mockups/p7_10_bouquet.png",
+    "collections/48_Navy_Ivory_Crest/assets/gpt/mockups/p7_11_share.png"
+  ],
   "video": {
     "file": "collections/48_Navy_Ivory_Crest/package/listing/video_v4_4x5.mp4",
     "exists": true

@@ -34,7 +34,7 @@ sys.path.insert(0, str(TOOLS))
 
 MESSAGES = REPO / "platform" / "lib" / "admin" / "message-templates.json"
 LOGO = REPO / "brand" / "svg" / "bke-logo-horizontal-anchor.svg"
-SUPPORT_EMAIL = "bkestudio@gmail.com"  # K33
+SUPPORT_EMAIL = "bkestudio01@gmail.com"  # K33
 SHOP = "BKE Studio"
 INK, GOLD, PAPER = "#2B1526", "#D0AE6A", "#FAF7F0"
 

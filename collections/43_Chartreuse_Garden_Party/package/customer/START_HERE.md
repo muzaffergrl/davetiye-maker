@@ -263,7 +263,7 @@ Your website stays online until **12 months after your wedding date**. Home → 
 
 In your editor, **Help & questions** at the bottom of Home answers the most common questions.
 
-Message BKE Studio on Etsy (in the conversation of your order), or write to **bkestudio@gmail.com**. We reply within **24 hours**. Please include your order number, your website address, what you see (a screenshot helps) and your phone and browser. Never send your edit link: we never need it.
+Message BKE Studio on Etsy (in the conversation of your order), or write to **bkestudio01@gmail.com**. We reply within **24 hours**. Please include your order number, your website address, what you see (a screenshot helps) and your phone and browser. Never send your edit link: we never need it.
 
 Prefer us to do it? Send us your details on Etsy and we enter them for you, as a separate Etsy purchase.
 

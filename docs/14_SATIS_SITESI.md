@@ -655,7 +655,7 @@ Gruplar ve sorular (her yanıt ilk cümlede cevap verir, 40–80 kelime, ilgili 
 - **Designs:** Is the artwork AI-generated? (Yes: created with AI image tools, then assembled, tested and hosted by us) ·
   Is there a matching save the date? (Not yet) · Do you sell printed invitations? (No; G154: panelin basılabilir davetiyesi —
   Share → Downloads, 5 × 7 in / A5, arka yüz, taşma payı, kesim işaretleri; G139)
-- **Support:** How do I contact you? (bkestudio@gmail.com, K33) · How fast do you reply? (24 hours, 2026-10-15)
+- **Support:** How do I contact you? (bkestudio01@gmail.com, K33) · How fast do you reply? (24 hours, 2026-10-15)
 
 Şema: FAQPage, görünen metinle birebir aynı (isteğe bağlı; Google'da sonuç yok, diğer motorlar okuyabilir).
 
@@ -689,7 +689,7 @@ Kurallar:
 - **H1:** `Contact us`
 
 İçerik:
-- `bkestudio@gmail.com` (mailto, K33), yanıt süresi 24 saat (2026-10-15), mesaja eklenecekler (Etsy sipariş numarası, site adresi).
+- `bkestudio01@gmail.com` (mailto, K33), yanıt süresi 24 saat (2026-10-15), mesaja eklenecekler (Etsy sipariş numarası, site adresi).
 - **Güvenlik notu:** `We will never ask for your edit link.`
 - Etsy siparişleri için Etsy mesajları da kullanılabilir.
 - Form yok: e-posta sağlayıcısı yok; sahte form kurulmaz.
@@ -1319,7 +1319,7 @@ export const MARKETING = {
     logo: null as string | null,       // marka kararından sonra
   },
   siteUrl: process.env.MARKETING_SITE_URL ?? process.env.PLATFORM_PUBLIC_URL ?? 'https://[DOMAIN]',
-  support: { email: '[SUPPORT EMAIL]', responseTime: '[RESPONSE TIME]' }, // 2026-10-15: bkestudio@gmail.com, '24 hours' (güncel değer config.ts'te)
+  support: { email: '[SUPPORT EMAIL]', responseTime: '[RESPONSE TIME]' }, // 2026-10-15: bkestudio01@gmail.com, '24 hours' (güncel değer config.ts'te)
   etsy: { shopUrl: '[ETSY SHOP URL]' },
   currency: 'USD',
   hosting: { monthsAfterWedding: 12 }, // K25 (uygulaması G060, docs/16 §11.9)

@@ -42,7 +42,7 @@
   "digital_files": [
     {
       "file": "collections/25_Orient_Express_Voyage/package/customer/START_HERE.pdf",
-      "bytes": 54108
+      "bytes": 54109
     }
   ],
   "images": [
@@ -185,6 +185,15 @@
     "collections/25_Orient_Express_Voyage/assets/gpt/mockups/flatlay_phone.png",
     "collections/25_Orient_Express_Voyage/assets/gpt/mockups/hand_phone_edit.png",
     "collections/25_Orient_Express_Voyage/assets/gpt/mockups/laptop_phone.png",
+    "collections/25_Orient_Express_Voyage/assets/gpt/mockups/p7_01_closeup.png",
+    "collections/25_Orient_Express_Voyage/assets/gpt/mockups/p7_02_hand_tap.png",
+    "collections/25_Orient_Express_Voyage/assets/gpt/mockups/p7_03_guest_home.png",
+    "collections/25_Orient_Express_Voyage/assets/gpt/mockups/p7_04_phone_tablet.png",
+    "collections/25_Orient_Express_Voyage/assets/gpt/mockups/p7_05_laptop.png",
+    "collections/25_Orient_Express_Voyage/assets/gpt/mockups/p7_06_couple_planning.png",
+    "collections/25_Orient_Express_Voyage/assets/gpt/mockups/p7_09_venue_table.png",
+    "collections/25_Orient_Express_Voyage/assets/gpt/mockups/p7_10_bouquet.png",
+    "collections/25_Orient_Express_Voyage/assets/gpt/mockups/p7_11_share.png",
     "collections/25_Orient_Express_Voyage/assets/gpt/mockups/three_phones.png"
   ],
   "video": {

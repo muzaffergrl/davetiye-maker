@@ -20,7 +20,7 @@ yayında; bu bayrak "gizlilik metni taslak değil" demektir).
 PRIVACY POLICY — BKE Studio (Etsy shop STUDIOBKE)
 
 Who is responsible for your data
-[DATA CONTROLLER NAME], [POSTAL ADDRESS], trading as BKE Studio on Etsy, is the data controller for the information described below. Contact: bkestudio@gmail.com or Etsy Messages. Our full notice is at https://bkestudio.com/privacy.
+[DATA CONTROLLER NAME], [POSTAL ADDRESS], trading as BKE Studio on Etsy, is the data controller for the information described below. Contact: bkestudio01@gmail.com or Etsy Messages. Our full notice is at https://bkestudio.com/privacy.
 
 What we collect and why
 • From your Etsy order: your name, email address, the order number and the items bought, as Etsy shares them with sellers. We use them to deliver your order, to confirm one website per order and to answer your messages. Payment is handled by Etsy; we never see your card details.
@@ -39,7 +39,7 @@ How long we keep it
 Your website stays online until 12 months after the wedding date. After that "Online until" date we keep it archived for 12 months, then we delete it with its photos and replies. Etsy order records are kept as long as Etsy and tax law require.
 
 Your rights
-You can see, change or remove your content in your editor at any time, take your website offline, sign out other devices and disconnect Google Sheets. You have the right to access, correct, delete, restrict or object to the processing of your data and to receive a copy of it. Message us on Etsy with your order number, or write to bkestudio@gmail.com from the email you used when you started your website: we confirm it is you, then we delete your website, its photos and your guests' replies within 30 days. Guests can ask you, or us, to correct or delete their reply. You can also complain to your local data protection authority.
+You can see, change or remove your content in your editor at any time, take your website offline, sign out other devices and disconnect Google Sheets. You have the right to access, correct, delete, restrict or object to the processing of your data and to receive a copy of it. Message us on Etsy with your order number, or write to bkestudio01@gmail.com from the email you used when you started your website: we confirm it is you, then we delete your website, its photos and your guests' replies within 30 days. Guests can ask you, or us, to correct or delete their reply. You can also complain to your local data protection authority.
 
 Changes
 When this policy changes, we update it here and on https://bkestudio.com/privacy.

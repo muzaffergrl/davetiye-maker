@@ -42,7 +42,7 @@
   "digital_files": [
     {
       "file": "collections/23_Velvet_Jewel_Box/package/customer/START_HERE.pdf",
-      "bytes": 53444
+      "bytes": 53446
     }
   ],
   "images": [
@@ -106,78 +106,78 @@
       "n": 9,
       "file": "collections/23_Velvet_Jewel_Box/package/listing/images_v4/09_closeup.jpg",
       "alt": "Designed to be opened: a close-up scene with a phone showing the opened card with a portrait in its oval pearl locket frame and the sample names",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 10,
       "file": "collections/23_Velvet_Jewel_Box/package/listing/images_v4/10_tap.jpg",
       "alt": "For your guests, one tap and it opens: a hand taps the closed velvet jewel box on a phone screen; sound and animation included",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 11,
       "file": "collections/23_Velvet_Jewel_Box/package/listing/images_v4/11_home.jpg",
       "alt": "No app, no account: guests open the home page anywhere, with just one link on any phone",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 12,
       "file": "collections/23_Velvet_Jewel_Box/package/listing/images_v4/12_devices.jpg",
       "alt": "Beautiful on every screen: the home page on a tablet and the invitation on a phone",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 13,
       "file": "collections/23_Velvet_Jewel_Box/package/listing/images_v4/13_laptop.jpg",
       "alt": "Your private editor on a laptop too, with a preview of every change",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 14,
       "file": "collections/23_Velvet_Jewel_Box/package/listing/images_v4/14_together.jpg",
       "alt": "Plan it together and open your editor on any device: the guest list on a phone and on a laptop",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 15,
       "file": "collections/23_Velvet_Jewel_Box/package/listing/images_v4/15_print.jpg",
       "alt": "Print it or send it: the printable invitation in this design (5 × 7 in or A5 PDF) next to the closed jewel box on a phone",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 16,
       "file": "collections/23_Velvet_Jewel_Box/package/listing/images_v4/16_need.jpg",
       "alt": "Everything your guests need, on four phones: the invitation, the venue and map, questions and answers, and a sent RSVP",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 17,
       "file": "collections/23_Velvet_Jewel_Box/package/listing/images_v4/17_day.jpg",
       "alt": "On the wedding day: the order of the day on a phone, with add-to-calendar buttons",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 18,
       "file": "collections/23_Velvet_Jewel_Box/package/listing/images_v4/18_replies.jpg",
       "alt": "Guest list included, every reply in one place: the reply list in the editor; download it as Excel in one tap",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 19,
       "file": "collections/23_Velvet_Jewel_Box/package/listing/images_v4/19_share.jpg",
       "alt": "Share it with one link by text, WhatsApp, email or QR code: the editor's Share screen on a phone and your own web address with your names",
-      "exists": false,
-      "status": "missing"
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     }
   ],
   "gpt_mockup_scenes": [
@@ -185,6 +185,17 @@
     "collections/23_Velvet_Jewel_Box/assets/gpt/mockups/flatlay_phone.png",
     "collections/23_Velvet_Jewel_Box/assets/gpt/mockups/hand_phone_edit.png",
     "collections/23_Velvet_Jewel_Box/assets/gpt/mockups/laptop_phone.png",
+    "collections/23_Velvet_Jewel_Box/assets/gpt/mockups/p7_01_closeup.png",
+    "collections/23_Velvet_Jewel_Box/assets/gpt/mockups/p7_02_hand_tap.png",
+    "collections/23_Velvet_Jewel_Box/assets/gpt/mockups/p7_03_guest_home.png",
+    "collections/23_Velvet_Jewel_Box/assets/gpt/mockups/p7_04_phone_tablet.png",
+    "collections/23_Velvet_Jewel_Box/assets/gpt/mockups/p7_05_laptop.png",
+    "collections/23_Velvet_Jewel_Box/assets/gpt/mockups/p7_06_couple_planning.png",
+    "collections/23_Velvet_Jewel_Box/assets/gpt/mockups/p7_07_print_card.png",
+    "collections/23_Velvet_Jewel_Box/assets/gpt/mockups/p7_08_four_phones.png",
+    "collections/23_Velvet_Jewel_Box/assets/gpt/mockups/p7_09_venue_table.png",
+    "collections/23_Velvet_Jewel_Box/assets/gpt/mockups/p7_10_bouquet.png",
+    "collections/23_Velvet_Jewel_Box/assets/gpt/mockups/p7_11_share.png",
     "collections/23_Velvet_Jewel_Box/assets/gpt/mockups/three_phones.png"
   ],
   "video": {
@@ -309,7 +320,6 @@
     }
   ],
   "blockers": [
-    "listing images missing: collections/23_Velvet_Jewel_Box/package/listing/images_v4/09_closeup.jpg, collections/23_Velvet_Jewel_Box/package/listing/images_v4/10_tap.jpg, collections/23_Velvet_Jewel_Box/package/listing/images_v4/11_home.jpg, collections/23_Velvet_Jewel_Box/package/listing/images_v4/12_devices.jpg, collections/23_Velvet_Jewel_Box/package/listing/images_v4/13_laptop.jpg, collections/23_Velvet_Jewel_Box/package/listing/images_v4/14_together.jpg, collections/23_Velvet_Jewel_Box/package/listing/images_v4/15_print.jpg, collections/23_Velvet_Jewel_Box/package/listing/images_v4/16_need.jpg, collections/23_Velvet_Jewel_Box/package/listing/images_v4/17_day.jpg, collections/23_Velvet_Jewel_Box/package/listing/images_v4/18_replies.jpg, collections/23_Velvet_Jewel_Box/package/listing/images_v4/19_share.jpg",
     "sales status 'preview' in platform/lib/marketing/config.ts (K41: not for sale)",
     "price not decided for this design (config.ts price '[PRICE]'; 1190 TL is the 01–21 design price, docs/23 §1)",
     "renewal not decided"
