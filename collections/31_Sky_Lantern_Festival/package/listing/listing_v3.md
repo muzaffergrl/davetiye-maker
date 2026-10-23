@@ -30,7 +30,7 @@ opening (a paper lantern in cupped hands rising into the sky); that opening is n
 | Etsy rules | `etsy.com/legal/creativity` and the help page "How to Manage Your Digital Listings" answered 403 to this task's fetch (2026-10-22). A web search on 2026-10-22 returned Etsy's House Rules excerpt: items generated with AI tools from the seller's own prompts belong to "Designed by a seller", and the listing description must disclose the use of AI. The AI sentence in GOOD TO KNOW is written for that; re-check in the listing editor (§11). Canva is not part of this product (K24) and was not checked. |
 | START HERE guide | `package/customer/START_HERE.md` + `.pdf` with the start QR, built 2026-10-20 (G190, `tools/build_customer_guides.py`, docs/19 Ek A), rebuilt 2026-10-22 for the opening word. Its start link and QR answer only once the design is live (404 today). It says guests "tap the pouch" and names the editor's preview tab "Pouch", which matches the silk pouch on the website. |
 | Printable invitation | `layouts.ts` entry of 2026-10-20 (G190): the PAKET 6 grounds of the redesign (ivory paper, the website's flowers in two corners, a gold hairline frame), 5 × 7 in and A5. Not printed yet. |
-| Listing images and video | **Not built yet.** Planned: the v4 set (docs/20 §7.10, `tools/listing_v4/README.md`): cover + 7 info images + 11 lifestyle images = 19 JPGs in `package/listing/images_v4/`, and a 4:5 hover video `package/listing/video_v4_4x5.mp4` (§5, §6). The 11 lifestyle images wait for this design's PAKET 7 GPT scenes (`assets/gpt/mockups/p7_*.png`, none yet). Nothing uploaded to Etsy. |
+| Listing images and video | **Built** (v4 set, docs/20 §7.10): 19 JPGs in `package/listing/images_v4/` (§5) and `package/listing/video_v4_4x5.mp4` (§6), both on the Etsy draft (2026-10-23, docs/20 §7.13). |
 
 VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence. `python3 tools/etsy_upload.py --check` checks the title, tags and text rules of this file; the files it lists as blockers (images, video) and every open VERIFY keep `ready_to_publish` false.
 
@@ -187,7 +187,7 @@ The v4 set (docs/20 §7.10, `tools/listing_v4/README.md`, the template approved 
 
 ## 6. Video
 
-`package/listing/video_v4_4x5.mp4`: **not built yet.** Planned (`tools/listing_v4/stageE.sh`, docs/20 §7.10): the silk pouch opening recorded from the live demo in slow motion (page time 50× slower, `rec.mjs`) and played back at 60 fps by `full45.py`: 1080 × 1350 (4:5, the shape of Etsy's search grid), H.264, silent, about 10 seconds; its last 0.4 s dissolve into the first frame, so Etsy's loop has no jump. Sample names and photos. [VERIFY: Etsy video rules in the listing editor]
+`package/listing/video_v4_4x5.mp4`: **built** (2026-10-23, on the Etsy draft, docs/20 §7.13). As planned (`tools/listing_v4/stageE.sh`, docs/20 §7.10): the silk pouch opening recorded from the live demo in slow motion (page time 50× slower, `rec.mjs`) and played back at 60 fps by `full45.py`: 1080 × 1350 (4:5, the shape of Etsy's search grid), H.264, silent, about 10 seconds; its last 0.4 s dissolve into the first frame, so Etsy's loop has no jump. Sample names and photos. [VERIFY: Etsy video rules in the listing editor]
 
 ## 7. FAQ (end of the description, or the shop FAQ)
 
