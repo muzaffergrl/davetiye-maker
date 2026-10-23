@@ -9,7 +9,7 @@ opening-design.json, content.demo.json, index.html, story.html, details.html and
 the live demo page. This replaces the 2026-10-17 draft, which described the earlier opening (a turning brass key and a ballerina rising
 from the box); that opening is no longer in the theme.
 
-**2026-10-23 (merge of the docs/35 redesign, G422–G432):** the owner declared the rebuilt design valid and it was merged to main. §1 title, §2 description and §3 tags now describe the rebuilt theme (its envelope, opening and pages, from `platform/lib/marketing/designs.ts`, which is written against the theme as built). Still the old design until the listing media are re-rendered: the rows of §0 about the opening and the pages, the §5 images and alt texts (`images_v4/`), the §6 video (`video_v4_4x5.mp4`) and the START HERE screens. Do not publish before that.
+**2026-10-23 (merge of the docs/35 redesign, G422–G432):** the owner declared the rebuilt design valid and it was merged to main. §1 title, §2 description and §3 tags now describe the rebuilt theme (its envelope, opening and pages, from `platform/lib/marketing/designs.ts`, which is written against the theme as built). Still the old design until the listing media are re-rendered: the rows of §0 about the opening and the pages, the §5 images and alt texts (`images_v4/`), the §6 video (`video_v4_4x5.mp4`). The START HERE guide was regenerated in the new look on 2026-10-23 and names the envelope. Do not publish before that.
 
 ## 0. Status before publishing
 
@@ -30,7 +30,7 @@ from the box); that opening is no longer in the theme.
 | Price, quantity | **Blocker:** 1,190 TL is the approved shop price for a template design (docs/23 §1, user, 2026-10-16) and is used here as the proposal; it is not confirmed for this design (`config.ts` price `[PRICE]`). Quantity 999 (Etsy's maximum, no stock limit). |
 | Design fonts and other languages | Read on 2026-10-22 from the Google Fonts subset lists (via the gwfh.mranftl.com mirror of the Google Fonts API; the css2 response this task received showed no subset comments). Website: Great Vibes, Cormorant Infant and Lora (all latin-ext + Cyrillic). Printable invitation (`layouts.ts`): Ballet (latin, latin-ext, vietnamese) and Gilda Display (latin, latin-ext): **no Cyrillic**. So the language line says: accented Latin letters in the design's fonts, Cyrillic and other alphabets in a plain standard font in some or all places (the printable invitation). |
 | Etsy rules | `etsy.com/legal/creativity` and the help page "How to Manage Your Digital Listings" answered 403 to this task's fetch (2026-10-22). A web search on 2026-10-22 returned Etsy's House Rules excerpt: items generated with AI tools from the seller's own prompts belong to "Designed by a seller", and the listing description must disclose the use of AI. The AI sentence in GOOD TO KNOW is written for that; re-check in the listing editor (§11). Canva is not part of this product (K24) and was not checked. |
-| START HERE guide | `package/customer/START_HERE.md` + `.pdf` with the start QR, built 2026-10-20 (G190, `tools/build_customer_guides.py`, docs/19 Ek A). Its start link and QR answer only once the design is live (404 today). It says guests "tap the box" and names the editor's preview tab "Box", which matches the music box. |
+| START HERE guide | `package/customer/START_HERE.md` + `.pdf` with the start QR, built 2026-10-20 (G190, `tools/build_customer_guides.py`, docs/19 Ek A). Its start link and QR answer only once the design is live (404 today). It says guests "tap the envelope" and names the editor's preview tab **Envelope**, which matches the rebuilt envelope. **2026-10-23 (review fixes):** rebuilt for every design from docs/19 Ek A (`python3 tools/build_customer_guides.py`, all 49 OK): 14 pages in the new look; it says each design bought starts one website (two designs in one order: one each); its links are the start link, `/my`, the privacy notice and the terms of use; the QR decodes to the start link (jsQR). Not scanned with a phone camera. |
 | Printable invitation | `layouts.ts` entry of 2026-10-20 (G190): the PAKET 6 grounds of the redesign (ivory paper, the website's flowers in two corners, a gold hairline frame), 5 × 7 in and A5. Not printed yet. |
 | Listing images and video | **Built** (v4 set, docs/20 §7.10): 19 JPGs in `package/listing/images_v4/` (§5) and `package/listing/video_v4_4x5.mp4` (§6), both on the Etsy draft (2026-10-23, docs/20 §7.13). |
 
@@ -103,7 +103,7 @@ No Canva account, no app, no design skills.
 
 GOOD TO KNOW
 • Digital product: nothing is printed or shipped. Nothing to fill in at checkout.
-• One website per order. You choose your web address when you start (for example …/juliette-and-arthur); it cannot be changed later. A custom domain (yournames.com) is not included.
+• One website for each design you buy (two designs in one order: one website each). You choose your web address when you start (for example …/juliette-and-arthur); it cannot be changed later. A custom domain (yournames.com) is not included.
 • Your Etsy order number is your key: with it and your email, your editor opens right away, and again on any phone or computer to continue where you left off. No account or password.
 • If your editor says it is confirming your Etsy order, you can set everything up in the meantime; Publish opens once the order is confirmed, usually within 24 hours.
 • After you publish, names and date can be changed 3 times in total; typo fixes and moving the date by up to 7 days are always free. Everything else can be changed as often as you like.
@@ -111,6 +111,7 @@ GOOD TO KNOW
 • Colors and fonts do not change. Music plays only on your Our Story page, and some phones wait for a guest's tap before it starts. Upload only music you have the right to use.
 • The painted design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. Sample names, dates, places and photos are fictional.
 • No returns, exchanges or cancellations: this is a digital product with instant access. If something on your website does not work as described, message us on Etsy and we will fix it.
+• Terms of use: https://bkestudio.com/terms
 
 QUESTIONS?
 Message us here on Etsy. We reply within 24 hours.

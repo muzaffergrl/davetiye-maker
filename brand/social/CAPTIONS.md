@@ -3,7 +3,7 @@
 Written 2026-10-22 for `docs/35_SOSYAL_MEDYA.md`. Calendar: `brand/social/takvim.csv` (one row per post, code in the `kod`
 column). Language: English, US spelling. Images: `brand/social/GPT_PROMPTS.md` (GPT) + real screens (Claude).
 
-**Honesty rules for every caption (docs/35 §8).** Each sentence describes something the platform does today and that the
+**Honesty rules for every caption (docs/35_SOSYAL_MEDYA.md §8).** Each sentence describes something the platform does today and that the
 Etsy listing (`collections/*/package/listing/listing_v3.md` §2) already promises. No reviews, customer counts, "best
 seller", "loved by", prices or discounts unless they are real at posting time. Sample couples are fictional and always
 called "sample". A design that does not open from an envelope is never called an envelope (06, 14 gatefold; 09 pouch;

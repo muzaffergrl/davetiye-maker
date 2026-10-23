@@ -202,4 +202,4 @@ Kontrol: telefon düz ve ortada; mühür yüzü boş; üst %20 sakin; yazı yok.
   panel, Share) `tools/mockup_compose.py` ile yerleşir; SM3.8'e `tools/make_qr.py` ile bkestudio.com QR'ı.
 - Başlıklar HTML şablonuyla, marka fontlarıyla (Archivo / Montserrat / DM Sans; `brand/tokens.json`) eklenir. Logo SVG'den.
 - Hiçbir gönderide uydurma yorum, "best seller", müşteri sayısı ya da gerçek olmayan çift yer almaz. Demo çiftler "sample".
-- Fotogerçekçi GPT sahnesi içeren gönderilerde platformların yapay zekâ etiketi açılır (docs/35 §8).
+- Fotogerçekçi GPT sahnesi içeren gönderilerde platformların yapay zekâ etiketi açılır (docs/35_SOSYAL_MEDYA.md §8).

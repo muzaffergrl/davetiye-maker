@@ -1,8 +1,8 @@
 # Etsy listing v3: Ivory Pearl Atelier Wedding Website (design 49)
 
 Internal listing kit for the seller (2026-10-23). **Not published on Etsy.** No Etsy listing or draft exists for this design yet (it is not in
-`tools/etsy_ids_22_48.json`, and `config.ts` still has `[ETSY LISTING URL]`). The design itself is on sale on the sales site
-(`platform/lib/marketing/config.ts`: `live`, price 1190). Theme `ivory-pearl-atelier` (design 49, built on 2026-10-22 from the design's own GPT parts).
+`tools/etsy_ids_22_48.json`, and `config.ts` still has `[ETSY LISTING URL]`). The design is NOT for sale: `preview` since 2026-10-23
+(K55, owner decision 6: the first sales wave is designs 01–20 only; `platform/lib/marketing/config.ts`: `preview`, price 1190 kept). Theme `ivory-pearl-atelier` (design 49, built on 2026-10-22 from the design's own GPT parts).
 This kit follows the shop's listing standard, the 40 and 21 listings (G154): the same sections, headings and shop-wide wording. Every sentence answers a
 buyer question from `docs/19_ALICI_YOLCULUGU.md` §3 and promises only what the platform does today. Product language: English (US spelling).
 This file replaces the text of 2026-10-22, whose title, description and tags did not follow the shop standard. Its true design facts are kept here.
@@ -15,7 +15,7 @@ site.css), `platform/lib/marketing/designs.ts` (sales-site copy, "Your guests ta
 
 | Item | Status on 2026-10-23 |
 |---|---|
-| Sale status | **On sale on the sales site.** `platform/lib/marketing/config.ts` lists it as `live`, price 1190 (updated 2026-10-22, comment: "user requested catalogue release; the Etsy listing is prepared separately"). There is no Etsy listing or draft yet. |
+| Sale status | **`preview` — not in the first sales wave** (K55, owner decision 6, 2026-10-23: designs 01–20 only). `platform/lib/marketing/config.ts` lists it as `preview` (catalogue "Coming soon on Etsy", no checkout, not startable in production), price 1190 kept for when it goes live; `etsy_upload.json` `sales_status` `preview` (`ready_to_publish` false). It was `live` from 2026-10-22 ("user requested catalogue release; the Etsy listing is prepared separately"). There is no Etsy listing or draft yet. |
 | Design artwork | 7 GPT PNGs (`assets/gpt/`, DESIGN_BRIEF): an opening comp W1, the closed and open envelope, the pearl closure, the champagne silk bow, a blank invitation card and the silk page texture. All production parts carry no text; names, date and wording are HTML. This design has no PAKET 2 photos of its own, no PAKET 6 print grounds and no PAKET 7 scenes (the PAKET 7 prompts are in `assets/gpt/GPT_PROMPTS.md`; none has been made yet). |
 | Start link `https://bkestudio.com/start?theme=ivory-pearl-atelier` | **Loads on the live site** (WebFetch, 2026-10-23: "Start your wedding website", "Design: Ivory Pearl Atelier", fields Etsy order number, Email address, first names, Website address; the HTTP status code itself was not read). Not opened on a phone. |
 | Live demo `https://bkestudio.com/start/demo/ivory-pearl-atelier` (in the description under TRY THE LIVE DEMO; planned image 7 carries its QR code) | **Loads on the live site** (WebFetch, 2026-10-23: "Clara & Julian · June 12, 2027", "Together with their families", "Tap to open", "Skip"). Sample couple: Clara & Julian at The Rosewater Conservatory, Savannah, Georgia, on June 12, 2027 at 4:00 PM. All of them are fictional (`content.demo.json`). The demo map pin is on Savannah (`platform/lib/claim/demo-map.ts`; the venue is fictional). The sample photos are design 03's fictional sample photos (theme README; `platform/lib/claim/demo-photos.json`; `package/qa/checks.json`: "using the 03 sample photos"). Not opened on a real phone. |
@@ -31,7 +31,7 @@ site.css), `platform/lib/marketing/designs.ts` (sales-site copy, "Your guests ta
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, quantity | **1,190 TL**: the K49 launch price the user approved on 2026-10-22 for every template design (docs/20 §7.12). It is in `config.ts` (1190) and `tools/etsy_upload.py` (`PRICE_TRY`). `DESIGN_BRIEF.md` still says 1.460 TRY, the price before K49. Quantity 999 (no stock limit). Renewal and the Etsy listing URL are open. |
 | Design fonts and other languages | Cormorant Garamond (names, headings) and Lora (body): both latin + latin-ext + Cyrillic. Source: the `FONT_SUBSETS` table of `tools/build_customer_guides.py`, which the START HERE guide uses too. The language line in GOOD TO KNOW is the guide's Cyrillic line. |
-| START HERE guide | `package/customer/START_HERE.md` + `.pdf` rebuilt on 2026-10-23 (`tools/build_customer_guides.py`, docs/19 Ek A). QR and links were verified: the links are the start link, `/my` and the privacy notice, and the QR decodes to the start link. The QR has not been scanned with a phone camera. The support email in the guide is the older one (row above). |
+| START HERE guide | `package/customer/START_HERE.md` + `.pdf` rebuilt on 2026-10-23 (`tools/build_customer_guides.py`, docs/19 Ek A). QR and links were verified: the links are the start link, `/my` and the privacy notice, and the QR decodes to the start link. The QR has not been scanned with a phone camera. The support email in the guide is the older one (row above). **2026-10-23 (review fixes):** rebuilt for every design from docs/19 Ek A (`python3 tools/build_customer_guides.py`, all 49 OK): 14 pages in the new look; it says each design bought starts one website (two designs in one order: one each); its links are the start link, `/my`, the privacy notice and the terms of use; the QR decodes to the start link (jsQR). Not scanned with a phone camera. |
 | Listing images and video | **Built** (v4 set, docs/20 §7.10): 19 JPGs in `package/listing/images_v4/` (§5) and `package/listing/video_v4_4x5.mp4` (§6), both on the Etsy draft (2026-10-23, docs/20 §7.13). |
 | Etsy and Canva rules (checked 2026-10-23) | Etsy: a direct read of etsy.com/legal/creativity and of the help page on digital listings (115015628347) answered 403. Web-search excerpts of 2026-10-23 say the following. Etsy's House Rules / Creativity Standards ask sellers to disclose AI use in the listing description and list seller-prompted AI creations under "Designed by". Etsy's help page allows up to 5 digital files of up to 20 MB each. The AI sentence in GOOD TO KNOW follows this. The listing-editor settings stay a §11 box. Canva: not applicable (the product uses no Canva). |
 
@@ -104,7 +104,7 @@ No Canva account, no app, no design skills.
 
 GOOD TO KNOW
 • Digital product: nothing is printed or shipped. Nothing to fill in at checkout.
-• One website per order. You choose your web address when you start (for example …/clara-and-julian); it cannot be changed later. A custom domain (yournames.com) is not included.
+• One website for each design you buy (two designs in one order: one website each). You choose your web address when you start (for example …/clara-and-julian); it cannot be changed later. A custom domain (yournames.com) is not included.
 • Your Etsy order number is your key: with it and your email, your editor opens right away, and again on any phone or computer to continue where you left off. No account or password.
 • If your editor says it is confirming your Etsy order, you can set everything up in the meantime; Publish opens once the order is confirmed, usually within 24 hours.
 • After you publish, names and date can be changed 3 times in total; typo fixes and moving the date by up to 7 days are always free. Everything else can be changed as often as you like.
@@ -112,6 +112,7 @@ GOOD TO KNOW
 • Colors and fonts do not change. Music plays only on your Our Story page, and some phones wait for a guest's tap before it starts. Upload only music you have the right to use.
 • The design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. Sample names, dates, places and photos are fictional.
 • No returns, exchanges or cancellations: this is a digital product with instant access. If something on your website does not work as described, message us on Etsy and we will fix it.
+• Terms of use: https://bkestudio.com/terms
 
 QUESTIONS?
 Message us here on Etsy. We reply within 24 hours.
@@ -157,7 +158,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Style / theme | Classic, Romantic (if offered) |
 | Personalization | Off (nothing to fill in at checkout; the buyer fills in the website) |
 | Digital file | `START_HERE.pdf` from `package/customer/` (rebuilt 2026-10-23; Etsy: up to 5 files, 20 MB each) |
-| Price | **1,190 TL** (the K49 launch price the user approved on 2026-10-22 for every template design, docs/20 §7.12 and docs/35 §8b; about USD 24.02 at 49.55 TRY per USD, docs/23 §1). Shop currency TRY (K38). This design is on sale at this price (`config.ts` `live`, 1190, 2026-10-22) |
+| Price | **1,190 TL** (the K49 launch price the user approved on 2026-10-22 for every template design, docs/20 §7.12 and docs/35 §8b; about USD 24.02 at 49.55 TRY per USD, docs/23 §1). Shop currency TRY (K38). This design is not on sale (`config.ts` `preview` since 2026-10-23, K55; the price 1190 is kept) |
 | Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) [VERIFY: whether Etsy lowers a digital listing's quantity on each sale] |
 | Shop section | Classic & Vintage (the docs/20 §7.11 rule of 2026-10-22: designs that are neither floral nor summer go here; also the section of the earlier text of this file) |
 | Renewal | [AUTO RENEW: yes/no] (the 22–48 drafts on Etsy use Automatic, docs/20 §7.11; this design has no Etsy draft yet) |
@@ -288,7 +289,7 @@ Rules:
 
 ## 10. What differs from the 01–20 listings
 
-- A new design (49, built 2026-10-22 from its own 7 GPT parts), opened for sale on the sales site (`live`, 1,190 TL) before its Etsy listing exists. Its start link and demo load on the live site (2026-10-23). The description follows the 21 and 40 listings word for word outside the design-specific lines (design paragraph, sample web address, wording example, guests' first view, language line). Two shop-wide sentences were reworded, because the shop's word rule allows that word only in "no app": the preview-card line in WHAT YOUR GUESTS SEE ("A link sent by text or WhatsApp usually shows a preview card …") and the first FAQ question ("Do I need Canva or anything to install?").
+- A new design (49, built 2026-10-22 from its own 7 GPT parts), opened for sale on the sales site (`live`, 1,190 TL) before its Etsy listing exists; back to `preview` on 2026-10-23 (K55: the first sales wave is 01–20 only). Its start link and demo load on the live site (2026-10-23). The description follows the 21 and 40 listings word for word outside the design-specific lines (design paragraph, sample web address, wording example, guests' first view, language line). Two shop-wide sentences were reworded, because the shop's word rule allows that word only in "no app": the preview-card line in WHAT YOUR GUESTS SEE ("A link sent by text or WhatsApp usually shows a preview card …") and the first FAQ question ("Do I need Canva or anything to install?").
 - The opening (README step table) runs in these steps:
   - The pearl seal turns and follows an arc to the right (0–0.9 s).
   - The two halves of the champagne silk bow above the names drift apart (0.12–1.22 s).
@@ -309,7 +310,7 @@ Rules:
 
 ## 11. Before you publish this listing
 
-- [x] The user approves this design's sale and price (`config.ts` `live`, 1190, 2026-10-22; K49 launch price)
+- [ ] The user approves this design's sale and price (approved 2026-10-22, `live`, 1190, K49 launch price; K55 on 2026-10-23 took it out of the first wave: `config.ts` `preview`; needs the owner's go again)
 - [x] Start link loads on the live site with this design named (WebFetch, 2026-10-23: "Design: Ivory Pearl Atelier")
 - [x] Live demo loads on the live site (WebFetch, 2026-10-23: Clara & Julian, June 12, 2027)
 - [ ] Start link and demo opened on a real phone; the QR in START_HERE.pdf scanned with a phone camera

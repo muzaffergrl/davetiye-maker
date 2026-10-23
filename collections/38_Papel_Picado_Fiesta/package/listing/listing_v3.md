@@ -28,7 +28,7 @@ religious or cultural claim the theme does not make.
 | Price, quantity | **Blocker:** 1,190 TL is the approved shop price for a template design (docs/23 §1, user, 2026-10-16) and is used here as the proposal; it is not confirmed for this design (`config.ts` price `[PRICE]`). Quantity 999 (Etsy's maximum, no stock limit). |
 | Design fonts and other languages | Google Fonts subsets read on 2026-10-22: Oleo Script (latin, latin-ext: no Cyrillic; names and headings) and Alegreya (latin-ext, Cyrillic, Greek; body), on the website and on the printable invitation. The language line is the guide's "latin-ext" line (`tools/build_customer_guides.py` `LANGUAGE_LINES`, coordinator 2026-10-22): accented Latin letters in the design's fonts, Cyrillic and other alphabets in a plain standard font in some or all places. |
 | Etsy rules | `etsy.com/legal/creativity` and the help page "How to Manage Your Digital Listings" answered 403 to this task's fetch (2026-10-22). A web search on 2026-10-22 returned Etsy's House Rules excerpt: items generated with AI tools from the seller's own prompts belong to "Designed by a seller", and the listing description must disclose the use of AI. The AI sentence in GOOD TO KNOW is written for that; re-check in the listing editor (§11). Canva is not part of this product (K24) and was not checked. |
-| START HERE guide | `package/customer/START_HERE.md` + `.pdf`, **built and checked 2026-10-22** (coordinator, `tools/build_customer_guides.py`, the same source text as 31–32, docs/19 Ek A): 10 pages; its links are the start link, the `/my` page and the privacy notice; the QR decodes to the start link (jsQR). The start link answers only once the design is live (404 today). |
+| START HERE guide | `package/customer/START_HERE.md` + `.pdf`, **built and checked 2026-10-22** (coordinator, `tools/build_customer_guides.py`, the same source text as 31–32, docs/19 Ek A): 10 pages; its links are the start link, the `/my` page and the privacy notice; the QR decodes to the start link (jsQR). The start link answers only once the design is live (404 today). **2026-10-23 (review fixes):** rebuilt for every design from docs/19 Ek A (`python3 tools/build_customer_guides.py`, all 49 OK): 14 pages in the new look; it says each design bought starts one website (two designs in one order: one each); its links are the start link, `/my`, the privacy notice and the terms of use; the QR decodes to the start link (jsQR). Not scanned with a phone camera. |
 | Printable invitation | `layouts.ts` still uses the **interim** layout (cream paper with a garland of the theme's six flags, interim tissue rectangles). The design's PAKET 6 sheets are in `assets/gpt/print/invitation_front_5x7.png` and `invitation_back_5x7.png` but not wired (steps in `GPT_PROMPTS.md` PAKET 6). Not printed yet. |
 | Listing images and video | **Built** (v4 set, docs/20 §7.10): 19 JPGs in `package/listing/images_v4/` (§5) and `package/listing/video_v4_4x5.mp4` (§6), both on the Etsy draft (2026-10-23, docs/20 §7.13). |
 
@@ -101,7 +101,7 @@ No Canva account, no app, no design skills.
 
 GOOD TO KNOW
 • Digital product: nothing is printed or shipped. Nothing to fill in at checkout.
-• One website per order. You choose your web address when you start (for example …/valeria-and-diego); it cannot be changed later. A custom domain (yournames.com) is not included.
+• One website for each design you buy (two designs in one order: one website each). You choose your web address when you start (for example …/valeria-and-diego); it cannot be changed later. A custom domain (yournames.com) is not included.
 • Your Etsy order number is your key: with it and your email, your editor opens right away, and again on any phone or computer to continue where you left off. No account or password.
 • If your editor says it is confirming your Etsy order, you can set everything up in the meantime; Publish opens once the order is confirmed, usually within 24 hours.
 • After you publish, names and date can be changed 3 times in total; typo fixes and moving the date by up to 7 days are always free. Everything else can be changed as often as you like.
@@ -109,6 +109,7 @@ GOOD TO KNOW
 • Colors and fonts do not change. Music plays only on your Our Story page, and some phones wait for a guest's tap before it starts. Upload only music you have the right to use.
 • The painted design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. Sample names, dates, places and photos are fictional.
 • No returns, exchanges or cancellations: this is a digital product with instant access. If something on your website does not work as described, message us on Etsy and we will fix it.
+• Terms of use: https://bkestudio.com/terms
 
 QUESTIONS?
 Message us here on Etsy. We reply within 24 hours.

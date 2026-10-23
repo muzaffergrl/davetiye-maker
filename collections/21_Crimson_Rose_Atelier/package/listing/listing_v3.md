@@ -10,7 +10,7 @@ index.html, home.html, story.html) and `platform/lib/marketing/designs.ts` (sale
 
 | Item | Status on 2026-10-17 |
 |---|---|
-| Sale status | **On sale** (K47, user, 2026-10-17): `platform/lib/marketing/config.ts` lists it as `live`, price 1190 (G142 `76fe0dc`, coordinator `ce62d11`). Same flow, guide and listing text as 01–20 (G148). |
+| Sale status | **`preview` — not in the first sales wave** (K55, owner decision 6, 2026-10-23: the first wave is designs 01–20 only). `platform/lib/marketing/config.ts` lists it as `preview` (catalogue "Coming soon on Etsy", no checkout, not startable in production) and `etsy_upload.json` has `sales_status` `preview` (`ready_to_publish` false). From 2026-10-17 (K47) until then it was `live`, price 1190 (G142 `76fe0dc`, coordinator `ce62d11`); the price stays for when it goes live. Same flow, guide and listing text as 01–20 (G148). Do not publish the Etsy draft. |
 | Start link `https://bkestudio.com/start?theme=crimson-rose-atelier` | **Not live**: the design is in the repository (G133, branch `codex/crimson-rose-atelier`) and has not been deployed; the user asked for a local demo only. Opened only in a local production build (2026-10-17, G137 capture: /start shows "Design: Crimson Rose Atelier"). Not opened on a phone. |
 | Live demo `https://bkestudio.com/start/demo/crimson-rose-atelier` (in the description under TRY THE LIVE DEMO, and named in image 8) | **Not live**, for the same reason. In the local production build the demo route opens this design's envelope with the sample couple Olivia & James (G133 test, G137 capture). |
 | Current platform release (simpler editor K29, Headings & labels, thank-you page, guest password, RSVP v2) | Live on production since G079 (2026-10-15) for 01–20. This design needs the next deploy; its editor features were tried only in the local production build of this task (setup, Edit, Guests, Share screens of the capture). |
@@ -25,7 +25,7 @@ index.html, home.html, story.html) and `platform/lib/marketing/designs.ts` (sale
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, quantity | 1,190 TL, the same as 01–20 (K47, 2026-10-17; `config.ts` price 1190); no stock limit (999, Etsy's maximum). Renewal and the Etsy listing URL are still open. Hosting extension (on request via Etsy before the "Online until" date, no price promised): K48, 2026-10-17. |
 | Design fonts and other languages | Checked on 2026-10-17 from the Google Fonts CSS of the fonts this theme loads: Cormorant Garamond and Manrope (both latin-ext + Cyrillic). The language line in GOOD TO KNOW and in the START HERE guide is written from this. |
-| START HERE guide | `package/customer/START_HERE.md` + `.pdf` rebuilt in G148 (2026-10-17, `python3 tools/build_customer_guides.py`, from docs/19 Ek A; G146 access with the Etsy order number + email): 9 pages, about 56 KB. Its links are the start link (in the text and on the QR), the `/my` page ("Continue on another device") and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://bkestudio.com/start?theme=crimson-rose-atelier` (jsQR on every rendered page). The start link answers only after this design is deployed. G154 (2026-10-17) rebuilt it from Ek A again (K48 order-check, extension and deletion texts, a Languages section, Share → Downloads, the start address in plain text under the QR): 10 pages, about 59 KB; `--check` with jsQR passes. |
+| START HERE guide | `package/customer/START_HERE.md` + `.pdf` rebuilt in G148 (2026-10-17, `python3 tools/build_customer_guides.py`, from docs/19 Ek A; G146 access with the Etsy order number + email): 9 pages, about 56 KB. Its links are the start link (in the text and on the QR), the `/my` page ("Continue on another device") and the privacy notice; the QR is made by `tools/make_qr.py` and decodes to `https://bkestudio.com/start?theme=crimson-rose-atelier` (jsQR on every rendered page). The start link answers only after this design is deployed. G154 (2026-10-17) rebuilt it from Ek A again (K48 order-check, extension and deletion texts, a Languages section, Share → Downloads, the start address in plain text under the QR): 10 pages, about 59 KB; `--check` with jsQR passes. **2026-10-23 (review fixes):** rebuilt for every design from docs/19 Ek A (`python3 tools/build_customer_guides.py`, all 49 OK): 14 pages in the new look; it says each design bought starts one website (two designs in one order: one each); its links are the start link, `/my`, the privacy notice and the terms of use; the QR decodes to the start link (jsQR). Not scanned with a phone camera. |
 | Listing image 9 | `09_devices.png` built on 2026-10-17 (G148, K47): "Start on your phone, continue on any device", real screens of a local production build with G146 (`/my`, Share → "Use on another device"). G146 is live only after the next deploy: publish image 9 with it. |
 | Listing images and video | **Produced** on 2026-10-17 from local production builds of the repository: images 3, 5, 6 and 7 and `video.mp4` (12 s, §6) in G137; images 1, 2, 4 and 8 in G137 (second pass) on this design's GPT mockup scenes (G821, `assets/gpt/mockups/`). All 8 in `images_editorial/` (§5). Nothing uploaded to Etsy. |
 
@@ -98,7 +98,7 @@ No Canva account, no app, no design skills.
 
 GOOD TO KNOW
 • Digital product: nothing is printed or shipped. Nothing to fill in at checkout.
-• One website per order. You choose your web address when you start (for example …/olivia-and-james); it cannot be changed later. A custom domain (yournames.com) is not included.
+• One website for each design you buy (two designs in one order: one website each). You choose your web address when you start (for example …/olivia-and-james); it cannot be changed later. A custom domain (yournames.com) is not included.
 • Your Etsy order number is your key: with it and your email, your editor opens right away, and again on any phone or computer to continue where you left off. No account or password.
 • If your editor says it is confirming your Etsy order, you can set everything up in the meantime; Publish opens once the order is confirmed, usually within 24 hours.
 • After you publish, names and date can be changed 3 times in total; typo fixes and moving the date by up to 7 days are always free. Everything else can be changed as often as you like.
@@ -106,6 +106,7 @@ GOOD TO KNOW
 • Colors and fonts do not change. Music plays only on your Our Story page, and some phones wait for a guest's tap before it starts. Upload only music you have the right to use.
 • The painted design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. Sample names, dates, places and photos are fictional.
 • No returns, exchanges or cancellations: this is a digital product with instant access. If something on your website does not work as described, message us on Etsy and we will fix it.
+• Terms of use: https://bkestudio.com/terms
 
 QUESTIONS?
 Message us here on Etsy. We reply within 24 hours.
@@ -263,14 +264,14 @@ link; one review request per order, the same text for everyone, never with an in
 
 ## 10. What differs from the 01–20 listings
 
-- A new design (G133), opened for sale on 2026-10-17 (K47, `live`, 1,190 TL); its start link and demo answer on the live site only after the next deploy (not checked in G148). The editor screens were seen in a local production build.
+- A new design (G133), opened for sale on 2026-10-17 (K47, `live`, 1,190 TL); its start link and demo answer on the live site only after the next deploy (not checked in G148). The editor screens were seen in a local production build. **2026-10-23 (K55):** back to `preview`, not in the first sales wave (01–20 only).
 - The guests' first view is "a sealed envelope" (as 01–05: this envelope carries a gold wax seal); Our Story is a landscape photo album the guests swipe through, so the description names it "Our Story as a photo album".
 - "What you can change" has no monogram line (this design shows none) and gives "A little book of us", this design's story heading, as the second example of your own wording.
 - Language line from this theme's real fonts (§0): both have Cyrillic.
 
 ## 11. Before you publish this listing
 
-- [x] The user approves this design's sale and price (K47, 2026-10-17: `config.ts` `live`, 1190)
+- [ ] The user approves this design's sale and price (K47 on 2026-10-17 approved it; K55 on 2026-10-23 took it out of the first wave: `config.ts` `preview`; needs the owner's go again)
 - [ ] Design deployed; start link and demo of this design answer on the live site (`200`, design named)
 - [ ] Start link and demo opened on a real phone; the QR in START_HERE.pdf scanned with a phone camera
 - [x] START HERE guide written for this design (`package/customer/START_HERE.md` + `.pdf` with the start QR; G137, 2026-10-17)

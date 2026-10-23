@@ -31,7 +31,7 @@ no historical or commercial pattern.
 | Response time, refund policy | Decided on 2026-10-15 (docs/20 §6): 24 hours; no returns, exchanges or cancellations, with a promise to fix what does not work as described. |
 | Price, quantity | Proposal **1,190 TL**, the shop price the user approved for a template design (docs/23 §1, 2026-10-16). **Blocker** until the user confirms it for this design (`config.ts` still has `[PRICE]`). Quantity 999 (no stock limit). Renewal and the Etsy listing URL are open. |
 | Design fonts and other languages | MonteCarlo (names, headings) and Rosarivo (body, small capitals): both latin + latin-ext, no Cyrillic. Source: the `FONT_SUBSETS` table of `tools/build_customer_guides.py` (read from fonts.googleapis.com/css2; the START HERE guide uses the same table), cross-checked on 2026-10-22 with the google/fonts `METADATA.pb` files (same subsets). The language line in GOOD TO KNOW is the guide's "latin-ext" line. |
-| START HERE guide | `package/customer/START_HERE.md` + `.pdf` built and checked on 2026-10-22 (`tools/build_customer_guides.py`, docs/19 Ek A): 10 pages; links = the start link, `/my` and the privacy notice; the QR decodes to the start link (jsQR). The start link answers only once the design is live (404 on 2026-10-22). The QR has not been scanned with a phone camera. |
+| START HERE guide | `package/customer/START_HERE.md` + `.pdf` built and checked on 2026-10-22 (`tools/build_customer_guides.py`, docs/19 Ek A): 10 pages; links = the start link, `/my` and the privacy notice; the QR decodes to the start link (jsQR). The start link answers only once the design is live (404 on 2026-10-22). The QR has not been scanned with a phone camera. **2026-10-23 (review fixes):** rebuilt for every design from docs/19 Ek A (`python3 tools/build_customer_guides.py`, all 49 OK): 14 pages in the new look; it says each design bought starts one website (two designs in one order: one each); its links are the start link, `/my`, the privacy notice and the terms of use; the QR decodes to the start link (jsQR). Not scanned with a phone camera. |
 | Listing images and video | **Built** (v4 set, docs/20 §7.10): 19 JPGs in `package/listing/images_v4/` (§5) and `package/listing/video_v4_4x5.mp4` (§6), both on the Etsy draft (2026-10-23, docs/20 §7.13). |
 | Etsy and Canva rules (checked 2026-10-22) | Etsy: a direct read of etsy.com/legal/creativity and of the help page on digital listings answered 403. Web-search excerpts of Etsy's Creativity Standards and Seller Policy (2026-10-22) say that AI use must be disclosed in the listing description and that seller-prompted AI creations count as "Designed by a seller"; the AI sentence in GOOD TO KNOW follows this. The listing-editor settings stay a §11 box. Canva: not applicable (the product uses no Canva). |
 
@@ -104,7 +104,7 @@ No Canva account, no app, no design skills.
 
 GOOD TO KNOW
 • Digital product: nothing is printed or shipped. Nothing to fill in at checkout.
-• One website per order. You choose your web address when you start (for example …/adeline-and-victor); it cannot be changed later. A custom domain (yournames.com) is not included.
+• One website for each design you buy (two designs in one order: one website each). You choose your web address when you start (for example …/adeline-and-victor); it cannot be changed later. A custom domain (yournames.com) is not included.
 • Your Etsy order number is your key: with it and your email, your editor opens right away, and again on any phone or computer to continue where you left off. No account or password.
 • If your editor says it is confirming your Etsy order, you can set everything up in the meantime; Publish opens once the order is confirmed, usually within 24 hours.
 • After you publish, names and date can be changed 3 times in total; typo fixes and moving the date by up to 7 days are always free. Everything else can be changed as often as you like.
@@ -112,6 +112,7 @@ GOOD TO KNOW
 • Colors and fonts do not change. Music plays only on your Our Story page, and some phones wait for a guest's tap before it starts. Upload only music you have the right to use.
 • The toile pattern, the other design elements and the sample photos were made with AI image tools from our own descriptions, then edited and assembled by us. Sample names, dates, places and photos are fictional.
 • No returns, exchanges or cancellations: this is a digital product with instant access. If something on your website does not work as described, message us on Etsy and we will fix it.
+• Terms of use: https://bkestudio.com/terms
 
 QUESTIONS?
 Message us here on Etsy. We reply within 24 hours.
