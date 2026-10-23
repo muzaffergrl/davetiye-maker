@@ -195,7 +195,7 @@
   ],
   "video": {
     "file": "collections/37_Art_Nouveau_Lily/package/listing/video_v4_4x5.mp4",
-    "exists": false
+    "exists": true
   },
   "open_checks": [
     {
@@ -315,7 +315,6 @@
     }
   ],
   "blockers": [
-    "listing video missing",
     "sales status 'coming' in platform/lib/marketing/config.ts (K41: not for sale)",
     "price not decided for this design (config.ts price '[PRICE]'; 1190 TL is the 01–21 design price, docs/23 §1)",
     "renewal not decided"

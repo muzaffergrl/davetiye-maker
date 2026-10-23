@@ -108,10 +108,9 @@ canvas, and the `.jharokha` box is the henna's (the frame 82 % of it) — the pa
 
 ## What waits for GPT
 
-Nothing of PAKET 5 or PAKET 2. Still **by hand**: PAKET 6 (`print/invitation_front_5x7.png`, `invitation_back_5x7.png`
-are in the collection) → `lib/print/layouts.ts` still builds the printed sheets from the paper / silk textures; the boxes
-are measured on the art (G149), `node scripts/build-print-assets.ts --theme marigold-mehndi` — steps in GPT_PROMPTS.md
-PAKET 6.
+Nothing of PAKET 5 or PAKET 2. PAKET 6 is in (2026-10-23): `lib/print/layouts.ts` takes `print/invitation_front_5x7.png` /
+`invitation_back_5x7.png` as one `cover` ground per side, the text boxes measured on the art (G149);
+`node scripts/build-print-assets.ts --theme marigold-mehndi` writes `public/print/marigold-mehndi/front.webp` and `back.webp`.
 
 ## Deviations from the standard
 

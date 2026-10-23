@@ -483,13 +483,16 @@ Shop Manager → Listings: **Draft 45, Active 0** (yayın yok; 15 ücretsiz kred
   - 23–32: 01/02/07 (yeni açılış adları), 06 ("Envelope" yerine tasarımın gerçek açılışı), 09–19 ve yeniden çekilen video →
     görsellerin hepsi ve video silinip 19 görsel + yeni video sırayla yüklendi.
   - 06, 09, 12, 13, 14, 18: 06 görseli değişti → 19 görsel silinip sırayla yeniden yüklendi (video korundu).
-  - 33–38: 19 görsel; video 33, 34, 35'te (36–38'inki çekildikçe eklenir).
+  - 33–38: 19 görsel + video (videolar ana oturumda çekildikçe eklendi, 19942dc2).
+  - 49: açılıştaki kopuk kapak hatası 9719a4fe'de düzeltildi (canlıda); ana oturum açılış karelerini ve videoyu yeniden çekti
+    (ebb81949) → 19 görsel silinip sırayla yeniden yüklendi, video eklendi.
   - Yöntem notu: yeni düzenleyicide tek görseli yerinde değiştirmenin güvenilir yolu yok. Medya penceresinde silme her zaman
     birinci öğeden başlıyor (küçük resme tıklamak seçimi değiştirmedi; iki denemede 1–14 silindi, ikisi de kaydedilmeden atıldı).
     Bu yüzden tüm görseller silinip sırayla yüklendi. Kaydetme yalnız 19 görsel ve video sayısı tuttuğunda yapıldı; tutmadığında
     (13'te bir görsel geç geldi) değişiklik atılıp tasarım yeniden yapıldı. Her taslak kayıttan sonra yeniden açılıp sayıldı.
-- Durum: **Draft 52** (49 tasarım + 3 hizmet), Active 0; yayın yok. 01–48'in hepsinde 19 görsel + START_HERE.pdf; video 01–35 ve
-  39–48'de. Açık kalan: 36–38 videoları (çekiliyor), 49'un v4 seti (ana oturum).
+- Durum: **Draft 52** (49 tasarım + 3 hizmet), Active 0; yayın yok. 01–49'un hepsinde 19 görsel + video + START_HERE.pdf, 3 hizmette
+  4 görsel + PDF; `tools/etsy_upload.py --check --strict` 0 (eksik dosya yok). Etsy'nin "With video" filtresi 44 gösteriyor: videosu
+  ayrı kayıtla eklenen 35–38 ve 49 henüz sayılmıyor; düzenleyicide beşinde de video kayıtlı (kapak resmi + Trim video).
 
 ## 8. İlan paketi (01–05) — yüklemeye hazır, Etsy'ye eklenmedi (2026-10-15)
 

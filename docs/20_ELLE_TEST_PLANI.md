@@ -54,3 +54,4 @@ Her tasarım için (`/designs/<id>` → demo → /start ile test sitesi): açıl
 ## Bulgu kaydı
 | Tarih | Kim | Cihaz | Adım | Sorun | Ekran görüntüsü | Durum |
 |---|---|---|---|---|---|---|
+| 2026-10-23 | sahibi | gerçek telefonlar (model kaydı yok) | uçtan uca (kapsam kaydı yok) | 2026-10-23 - sahibi gerçek telefonlarda denedi: sorun yok (kullanıcı beyanı; ayrıntı kaydı yok) | — | beyan (K52); satırlar `[x]` işaretlenmedi |

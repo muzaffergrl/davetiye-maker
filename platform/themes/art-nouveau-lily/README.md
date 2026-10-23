@@ -97,7 +97,7 @@ The design's own parts need no template work when they arrive (G167): `python3 b
 exists in `collections/37_Art_Nouveau_Lily/assets/gpt/parts/` and writes `parts.css`; the manifest lists `parts.used`
 and `parts.waiting_for_gpt`. `python3 tools/gpt_kuru_deneme.py --tema art-nouveau-lily --sekil
 collections/37_Art_Nouveau_Lily/assets/gpt/kuru_sekil.json [--theme-check --stress]` rehearses the drop-in with neutral
-test images (repo untouched) — passed 16/18 (only PAKET 6, by hand).
+test images (repo untouched) — passed 16/18 (only PAKET 6, by hand at the time; wired on 2026-10-23).
 
 ## Built from the GPT parts (2026-10-22)
 
@@ -122,8 +122,9 @@ card (cqw), `fitCard` keeps the last line above the card's bottom margin.
 ## What waits for GPT
 
 Nothing of PAKET 5 or PAKET 2 (no part had to be regenerated: `petal_right` is upscaled 1.23×, still above its display
-size). Still **by hand**: PAKET 6 print sheets → `lib/print/layouts.ts`, `node scripts/build-print-assets.ts --theme
-art-nouveau-lily` (G149, GPT_PROMPTS.md PAKET 6).
+size). PAKET 6 is in (2026-10-23): `lib/print/layouts.ts` takes `print/invitation_front_5x7.png` /
+`invitation_back_5x7.png` as one `cover` ground per side, the text boxes measured on the art (G149);
+`node scripts/build-print-assets.ts --theme art-nouveau-lily` writes `public/print/art-nouveau-lily/front.webp` and `back.webp`.
 
 ## Deviations from the standard
 

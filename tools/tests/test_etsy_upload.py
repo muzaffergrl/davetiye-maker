@@ -191,8 +191,8 @@ def test_check_exit():
     assert eu.main(["--check", "--strict", "--designs", "21"]) == (1 if missing["21"] else 0)
     assert eu.main(["--check", "--strict", "--designs", "services"]) == (1 if services_missing else 0)
     assert eu.main(["--check", "--designs", "22-48"]) == 0  # G175: rules green although the GPT files are missing
-    designs_22_48 = any(v for no, v in missing.items() if "22" <= no <= "48")
-    assert eu.main(["--check", "--strict", "--designs", "22-48"]) == (1 if designs_22_48 else 0)
+    later = any(v for no, v in missing.items() if "22" <= no <= "48")
+    assert eu.main(["--check", "--strict", "--designs", "22-48"]) == (1 if later else 0)  # 2026-10-23: every v4 file is in
 
 
 def main():

@@ -68,16 +68,6 @@ const gf = (q: string) => `https://fonts.googleapis.com/css2?${q}&display=swap`;
 const cover = (name: string, at = 'center') => `url(${name}.webp) ${at} / cover no-repeat`;
 const sealAt = (edge: 'top' | 'bottom') => ({ src: 'seal', style: `${edge}:4%;left:50%;width:17%;transform:translateX(-50%)` });
 
-/** 38 (G187): a garland of the theme's flags across the top, sagging toward the middle (each flag hangs square to it). */
-const flagGarland = (n: number, top: number, width: number) =>
-  Array.from({ length: n }, (_, i) => {
-    const t = (i + 0.5) / n;
-    const step = Math.min(14, 84 / n);
-    return {
-      src: `flag${(i % 6) + 1}`,
-      style: `top:${(top + 4 * t * (1 - t) * 2.4).toFixed(2)}%;left:${(50 + (i - (n - 1) / 2) * step - width * 0.4).toFixed(2)}%;width:${(width * 0.8).toFixed(2)}%;transform:rotate(${((t - 0.5) * -8).toFixed(1)}deg)`,
-    };
-  });
 
 export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
   'olive-ivory': {
@@ -373,152 +363,77 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     ink: '#4A2F35', accent: '#8A4A55', front: [21, 11, 10, 11], back: [13, 10, 9, 10],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 33 (G182, interim until PAKET 6 print/invitation_front_5x7.png + print/invitation_back_5x7.png, 1575×2175, one sheet
-  // per side for 5×7 and A5 — GPT_PROMPTS.md): saffron-ivory paper with a band of the envelope's fuchsia silk at its top
-  // and bottom edge — both toned textures cut by the theme build (img/paper, img/silk; no shape drawn). The prompts keep
-  // the front / back boxes below empty on the art; on arrival: sources → { front, back } of those two files, composed →
-  // { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }, re-measure the boxes on the
-  // art (G149), then build-print-assets.
+  // 33 (2026-10-23): the design's own PAKET 6 grounds (saffron-ivory paper; front: a marigold garland of two swags across the top and a band of fuchsia silk
+  // with gold trim at the foot, henna vines up the lower sides; back: a fuchsia silk band at the top with a few petals), one per side, `cover`
+  // for 5×7 and A5 (ChatGPT's ~1068×1473, ~200 ppi). Ornament measured on the art: front 0–16 % and 84–100 % of the height, side vines within 9 % of the width; back 0–17 %; the boxes sit inside the
+  // empty area (G149).
   'marigold-mehndi': {
     collection: '33_Marigold_Mehndi',
-    sources: { paper: 'platform/themes/marigold-mehndi/img/paper-1024.webp', silk: 'platform/themes/marigold-mehndi/img/silk-640.webp' },
+    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
     fonts: gf('family=Rozha+One&family=Yrsa:ital,wght@0,400;0,500;1,400'),
     script: "'Rozha One', Georgia, serif", serif: "'Yrsa', Georgia, serif",
-    ink: '#3A0F24', accent: '#8E1048', front: [21, 13, 19, 13], back: [17, 12, 10, 12],
-    composed: {
-      front: {
-        bg: 'url(paper.webp) 0 0 / 2.4in repeat',
-        images: [
-          { src: 'silk', style: 'top:0;left:0;width:100%;height:13%;object-fit:cover' },
-          { src: 'silk', style: 'bottom:0;left:0;width:100%;height:11%;object-fit:cover;object-position:50% 80%' },
-        ],
-      },
-      back: { bg: 'url(paper.webp) 0 0 / 2.4in repeat', images: [{ src: 'silk', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover' }] },
-    },
+    ink: '#3A0F24', accent: '#8E1048', front: [21, 13, 19, 13], back: [20, 12, 10, 12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 34 (G183, interim until PAKET 6 print/invitation_front_5x7.png + print/invitation_back_5x7.png, 1575×2175, one sheet
-  // per side for 5×7 and A5 — GPT_PROMPTS.md): warm cream paper with a band of the cinnabar envelope paper at its top and
-  // bottom edge — both toned textures cut by the theme build (img/cream, img/red; no shape drawn). The prompts keep the
-  // front / back boxes below empty on the art; on arrival: sources → { front, back } of those two files, composed →
-  // { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }, re-measure the boxes on the
-  // art (G149), then build-print-assets.
+  // 34 (2026-10-23): the design's own PAKET 6 grounds (warm cream paper; front: a red papercut of peonies with a gold double-happiness medallion
+  // across the top and a papercut band at the foot, each with a thin gold rule; back: a scalloped cinnabar band at the top), one per side, `cover`
+  // for 5×7 and A5 (ChatGPT's ~1068×1473, ~200 ppi). Ornament measured on the art: front 0–18.5 % and 84–100 %, back 0–12 %; the boxes sit inside the
+  // empty area (G149).
   'red-lacquer-double-happiness': {
     collection: '34_Red_Lacquer_Double_Happiness',
-    sources: { paper: 'platform/themes/red-lacquer-double-happiness/img/cream-1024.webp', red: 'platform/themes/red-lacquer-double-happiness/img/red-1024.webp' },
+    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
     fonts: gf('family=Luxurious+Script&family=Prata'),
     script: "'Luxurious Script', cursive", serif: "'Prata', Georgia, serif",
-    ink: '#3A0D0E', accent: '#8C1A1F', front: [17, 13, 15, 13], back: [12, 12, 10, 12],
-    composed: {
-      front: {
-        bg: 'url(paper.webp) 0 0 / 2.4in repeat',
-        images: [
-          { src: 'red', style: 'top:0;left:0;width:100%;height:11%;object-fit:cover' },
-          { src: 'red', style: 'bottom:0;left:0;width:100%;height:9%;object-fit:cover;object-position:50% 80%' },
-        ],
-      },
-      back: { bg: 'url(paper.webp) 0 0 / 2.4in repeat', images: [{ src: 'red', style: 'top:0;left:0;width:100%;height:6%;object-fit:cover' }] },
-    },
+    ink: '#3A0D0E', accent: '#8C1A1F', front: [21, 13, 19, 13], back: [15, 12, 10, 12],
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 35 (G184, interim until PAKET 6 print/invitation_front_5x7.png + print/invitation_back_5x7.png, 1575×2175, one sheet
-  // per side for 5×7 and A5 — GPT_PROMPTS.md): cream paper with a band of the heather wool at its top and bottom edge —
-  // both toned textures cut by the theme build (img/paper, img/wool; no shape drawn, no tartan line drawn). The prompts
-  // keep the front / back boxes below empty on the art; on arrival: sources → { front, back } of those two files,
-  // composed → { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }, re-measure the
-  // boxes on the art (G149), then build-print-assets.
+  // 35 (2026-10-23): the design's own PAKET 6 grounds (cream paper; front: a band of the heather tartan with a thistle sprig across the top and a tartan
+  // band at the foot; back: a narrow tartan band at the top), one per side, `cover`
+  // for 5×7 and A5 (ChatGPT's ~1068×1473, ~200 ppi). Ornament measured on the art: front 0–18 % and 87–100 %, back 0–13 %; the boxes sit inside the
+  // empty area (G149).
   'highland-tartan-thistle': {
     collection: '35_Highland_Tartan_Thistle',
-    sources: { paper: 'platform/themes/highland-tartan-thistle/img/paper-1024.webp', wool: 'platform/themes/highland-tartan-thistle/img/wool-640.webp' },
+    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
     fonts: gf('family=Rouge+Script&family=Sorts+Mill+Goudy:ital@0;1'),
     script: "'Rouge Script', cursive", serif: "'Sorts Mill Goudy', Georgia, serif",
     ink: '#2A2620', accent: '#46512C', front: [21, 13, 19, 13], back: [17, 12, 10, 12],
-    composed: {
-      front: {
-        bg: 'url(paper.webp) 0 0 / 2.4in repeat',
-        images: [
-          { src: 'wool', style: 'top:0;left:0;width:100%;height:12%;object-fit:cover' },
-          { src: 'wool', style: 'bottom:0;left:0;width:100%;height:10%;object-fit:cover;object-position:50% 80%' },
-        ],
-      },
-      back: { bg: 'url(paper.webp) 0 0 / 2.4in repeat', images: [{ src: 'wool', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover' }] },
-    },
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 36 (G185, before its GPT parts): both sides on the theme's herbarium paper (img/paper-1024, toned by the theme
-  // build from 16's plain GPT paper) — front: a band of the deep fern ground at the top with the copper label plate in
-  // it (img/copper-320, a crop of 17's plain metal) and a thin kraft band at the bottom (img/kraft-640); back: a narrow
-  // fern band at the top. Crops and toning of GPT pixels; no shape drawn. When PAKET 6 arrives (GPT_PROMPTS.md:
-  // print/invitation_front_5x7.png + print/invitation_back_5x7.png, 1575×2175, one ground per side for 5×7 and A5):
-  // sources → { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' }, composed → { front:
-  // { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }, then build-print-assets +
-  // tests/g149-print-layout.test.ts (re-measure the boxes).
+  // 36 (2026-10-23): the design's own PAKET 6 grounds (herbarium paper; front: the glasshouse's iron arch with ferns across the top and small fern
+  // clusters in the two lower corners; back: a fringe of fern fronds along the top), one per side, `cover`
+  // for 5×7 and A5 (ChatGPT's ~1068×1473, ~200 ppi). Ornament measured on the art: front 0–11 % (the corner ferns stay below the box and outside 14 % of the width), back 0–6.5 %; the boxes sit inside the
+  // empty area (G149).
   'victorian-glasshouse': {
     collection: '36_Victorian_Glasshouse',
-    sources: {
-      paper: 'platform/themes/victorian-glasshouse/img/paper-1024.webp',
-      fern: 'platform/themes/victorian-glasshouse/img/fern-640.webp',
-      copper: 'platform/themes/victorian-glasshouse/img/copper-320.webp',
-      kraft: 'platform/themes/victorian-glasshouse/img/kraft-640.webp',
-    },
+    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
     fonts: gf('family=Monsieur+La+Doulaise&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400'),
     script: "'Monsieur La Doulaise', cursive", serif: "'Old Standard TT', Georgia, serif",
     ink: '#1E2B24', accent: '#8A4A22', front: [20, 12, 14, 12], back: [13, 12, 8, 12],
-    composed: {
-      front: {
-        bg: 'url(paper.webp) 0 0 / 2.4in repeat',
-        images: [
-          { src: 'fern', style: 'top:0;left:0;width:100%;height:12%;object-fit:cover' },
-          { src: 'copper', style: 'top:3%;left:50%;width:9%;height:7%;object-fit:cover;transform:translateX(-50%)' },
-          { src: 'kraft', style: 'bottom:0;left:0;width:100%;height:6%;object-fit:cover' },
-        ],
-      },
-      back: { bg: 'url(paper.webp) 0 0 / 2.4in repeat', images: [{ src: 'fern', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover' }] },
-    },
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 37 (G186, interim until PAKET 6 print/invitation_front_5x7.png + print/invitation_back_5x7.png, 1575×2175, one sheet
-  // per side for 5×7 and A5 — GPT_PROMPTS.md): cream paper with a band of the sage ground at its top and bottom edge —
-  // both toned textures from the theme build (img/paper, img/sage; no shape drawn). The prompts keep the front / back
-  // boxes below empty on the art; on arrival: sources → { front, back } of those two files, composed → { front: { bg:
-  // cover('front'), images: [] }, back: { bg: cover('back'), images: [] } }, re-measure the boxes on the art (G149), then
-  // build-print-assets.
+  // 37 (2026-10-23): the design's own PAKET 6 grounds (cream paper inside a fine sage and gold Art Nouveau frame; front: a lily medallion with
+  // whiplash stems at the top and lilies at the foot; back: a slim gold rule with a small lily at the top), one per side, `cover`
+  // for 5×7 and A5 (ChatGPT's ~1068×1473, ~200 ppi). Ornament measured on the art: front 0–15.5 % and 89–100 %, frame lines within 3.5 % of the width; back 0–9 %; the boxes sit inside the
+  // empty area (G149).
   'art-nouveau-lily': {
     collection: '37_Art_Nouveau_Lily',
-    sources: { paper: 'platform/themes/art-nouveau-lily/img/paper-1024.webp', sage: 'platform/themes/art-nouveau-lily/img/sage-1024.webp' },
+    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
     fonts: gf('family=Ephesis&family=Federant&family=Linden+Hill'),
     script: "'Ephesis', cursive", serif: "'Linden Hill', Georgia, serif",
     ink: '#2E3228', accent: '#7A5D22', front: [21, 13, 19, 13], back: [17, 12, 10, 12],
-    composed: {
-      front: {
-        bg: 'url(paper.webp) 0 0 / 2.4in repeat',
-        images: [
-          { src: 'sage', style: 'top:0;left:0;width:100%;height:13%;object-fit:cover' },
-          { src: 'sage', style: 'bottom:0;left:0;width:100%;height:11%;object-fit:cover;object-position:50% 80%' },
-        ],
-      },
-      back: { bg: 'url(paper.webp) 0 0 / 2.4in repeat', images: [{ src: 'sage', style: 'top:0;left:0;width:100%;height:7%;object-fit:cover' }] },
-    },
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
-  // 38 (G187): composed until its print grounds arrive (GPT_PROMPTS.md PAKET 6) — the website's cream paper with a
-  // garland of the theme's six flags along the top (front: full width, sagging; back: a short garland), images from the
-  // theme build (interim tissue rectangles until the GPT flags, see themes/papel-picado-fiesta/build_images.py; no shape
-  // drawn). On arrival: sources -> print/invitation_front_5x7.png + print/invitation_back_5x7.png, composed ->
-  // cover('front') / cover('back') with no images, boxes re-measured on the art (G149) — steps in GPT_PROMPTS.md PAKET 6.
+  // 38 (2026-10-23): the design's own PAKET 6 grounds (cream paper; front: a sagging garland of six papel picado flags with bougainvillea at the top left
+  // and a thin embroidered band at the foot; back: a short garland of flags at the top), one per side, `cover`
+  // for 5×7 and A5 (ChatGPT's ~1068×1473, ~200 ppi). Ornament measured on the art: front 0–16 % and 91.5–100 %, back 0–11.5 %; the boxes sit inside the
+  // empty area (G149).
   'papel-picado-fiesta': {
     collection: '38_Papel_Picado_Fiesta',
-    sources: {
-      paper: 'platform/themes/papel-picado-fiesta/img/paper-1024.webp',
-      flag1: 'platform/themes/papel-picado-fiesta/img/flag_1-200.webp',
-      flag2: 'platform/themes/papel-picado-fiesta/img/flag_2-200.webp',
-      flag3: 'platform/themes/papel-picado-fiesta/img/flag_3-200.webp',
-      flag4: 'platform/themes/papel-picado-fiesta/img/flag_4-200.webp',
-      flag5: 'platform/themes/papel-picado-fiesta/img/flag_5-200.webp',
-      flag6: 'platform/themes/papel-picado-fiesta/img/flag_6-200.webp',
-    },
+    sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
     fonts: gf('family=Alegreya:ital,wght@0,400;0,500;1,400&family=Oleo+Script'),
     script: "'Oleo Script', cursive", serif: "'Alegreya', Georgia, serif",
     ink: '#3B2418', accent: '#8A3A1F', front: [22, 13, 12, 13], back: [15, 12, 10, 12],
-    composed: {
-      front: { bg: cover('paper'), images: flagGarland(6, 3, 12) },
-      back: { bg: cover('paper'), images: flagGarland(4, 2.5, 8) },
-    },
+    composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
   'ivory-pearl-atelier': {
     collection: '49_Ivory_Pearl_Atelier',
@@ -548,7 +463,7 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
     fonts: gf('family=Bonheur+Royale&family=Crimson+Pro:ital,wght@0,400;0,500;1,400'),
     script: "'Bonheur Royale', cursive", serif: "'Crimson Pro', Georgia, serif",
-    ink: '#1B1A18', accent: '#8F8A82', front: [22,  13,  12,  13], back: [15,  12,  10,  12],
+    ink: '#1B1A18', accent: '#8F8A82', front: [22,  13,  12,  13], back: [15, 12, 10, 12],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
   // 43 (G443, 2026-10-22): the design's own PAKET 6 grounds (cream cotton; front: a gouache garland of peonies, ranunculus
@@ -560,7 +475,7 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
     fonts: gf('family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Hurricane'),
     script: "'Hurricane', cursive", serif: "'Fraunces', Georgia, serif",
-    ink: '#6B1730', accent: '#4F7A3A', front: [20,  13,  12,  13], back: [15,  12,  10,  12],
+    ink: '#6B1730', accent: '#4F7A3A', front: [20,  13,  12,  13], back: [15, 12, 10, 12],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
   // 46 (G446, 2026-10-22): the design's own PAKET 6 grounds (ivory linen; front: a claret satin ribbon across the top tied in
@@ -571,7 +486,7 @@ export const PRINT_LAYOUTS: Record<string, PrintLayout> = {
     sources: { front: 'print/invitation_front_5x7.png', back: 'print/invitation_back_5x7.png' },
     fonts: gf('family=Brygada+1918:ital,wght@0,400;0,500;1,400&family=Carattere'),
     script: "'Carattere', cursive", serif: "'Brygada 1918', Georgia, serif",
-    ink: '#7A1E2C', accent: '#5A4446', front: [19,  13,  14,  13], back: [15,  12,  10,  12],
+    ink: '#7A1E2C', accent: '#5A4446', front: [19,  13,  14,  13], back: [15, 12, 10, 12],
     composed: { front: { bg: cover('front'), images: [] }, back: { bg: cover('back'), images: [] } },
   },
   // 47 (G447, 2026-10-22): the design's own PAKET 6 grounds (white fibre paper; front: a strip of negative with two anemones

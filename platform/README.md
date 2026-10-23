@@ -294,7 +294,14 @@ Yayından sonra, `platform/`'dan (`vercel link` sonrası `.env.local`'da `BLOB_R
 ```bash
 node --env-file=.env.local scripts/live-check.mjs --base https://<canlı adres>   # okuma + geçici sitede yazma yolu
 node --env-file=.env.local scripts/blob-smoke.mjs                                # gerçek private depoda adaptör varsayımları
+node scripts/live-ping.mjs --base https://bkestudio.com --allow-404 /terms,/kvkk  # salt okunur nabız (sır yok, veri yazmaz)
 ```
+
+- `live-ping` (G966): yalnız Node yerleşikleri; `/`, `/start`, `/start/demo/olive-ivory`, `/privacy`, `/terms`, `/kvkk` → 200 + tam HTML,
+  aynı kökte en çok 3 yönlendirme (başka host FAIL), süre `--max-ms` 10000 (üstü FAIL) / `--warn-ms` 4000, TLS sertifikası ≥ 7 gün
+  (21'in altı WARN), yasal sayfaların görünen metninde köşeli parantezli yer tutucu FAIL (K56). `--allow-404` sayfaları henüz yoksa WARN.
+  GitHub Actions `.github/workflows/live-check.yml` saatte bir (dakika 23) koşar; başarısızlıkta tek bir "Canlı kontrol başarısız"
+  issue'su açar/günceller (etiket `canli-kontrol`), geçince kapatır. Test: `node --test tests/live-ping.test.ts` (yerel sahte sunucu).
 
 - `live-check`: demo sitenin 5 sayfası + CSP, `og:image` (mutlak, bu sitede), `/event.ics`, `/media` fotoğrafları, tema varlığı,
   RSVP durumu, yanlış anahtarlı panel 404; `DEMO_EDIT_KEY` verilirse panel sayfası (`X-Frame-Options: DENY`, `no-referrer`) ve panel
