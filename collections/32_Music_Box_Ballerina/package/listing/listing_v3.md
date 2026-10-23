@@ -9,6 +9,8 @@ opening-design.json, content.demo.json, index.html, story.html, details.html and
 the live demo page. This replaces the 2026-10-17 draft, which described the earlier opening (a turning brass key and a ballerina rising
 from the box); that opening is no longer in the theme.
 
+**2026-10-23 (merge of the docs/35 redesign, G422–G432):** the owner declared the rebuilt design valid and it was merged to main. §1 title, §2 description and §3 tags now describe the rebuilt theme (its envelope, opening and pages, from `platform/lib/marketing/designs.ts`, which is written against the theme as built). Still the old design until the listing media are re-rendered: the rows of §0 about the opening and the pages, the §5 images and alt texts (`images_v4/`), the §6 video (`video_v4_4x5.mp4`) and the START HERE screens. Do not publish before that.
+
 ## 0. Status before publishing
 
 | Item | Status on 2026-10-22 |
@@ -36,10 +38,10 @@ VERIFY markers come out only after the test is done; if a test fails, delete or 
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 119 characters.
+Etsy limit: 140 characters. This title: 128 characters.
 
 ```text
-Music Box Ballerina Wedding Website with RSVP, Digital Invitation with a Music Box Opening, Online Editor, Blush Ballet
+Music Box Ballerina Wedding Website with RSVP, Digital Invitation with a Music Box Envelope Opening, Online Editor, Blush Ballet
 ```
 
 ## 2. Description
@@ -50,7 +52,7 @@ Paste from the line below. Section titles in capitals and "•" bullets read wel
 
 A wedding website that opens like a keepsake music box, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
 
-Rose quartz, blush satin and soft gold, with blush roses, satin ribbon and a little gold music box on ivory paper. Your guests tap an oval ivory-and-blush music box trimmed with pearls, gold scrolls and roses, a pair of satin ballet slippers on its cameo lid: the lid lifts on its rose-gold hinge and a card with your portrait in an oval cameo frame, tied with a blush satin bow under a tiny ballerina cameo, rises out of the box and comes forward. Then your invitation follows: Home with your oval cameo portrait on champagne satin, Our Story as a keepsake album of oval cameo photos, Details and RSVP.
+Blush silk satin, rose quartz, soft-gold filigree and a porcelain ballerina. Your guests tap a rose-quartz satin envelope with a serpentine music-box lid, a gold filigree keyhole plate and a brass winding key: the key turns twice, the lid swings up and your portrait appears in its oval mirror, a porcelain ballerina rises and turns two pirouettes, and the cream card rises out of the pocket and comes forward. Then your invitation follows: Home with your portrait in a gilded oval vanity mirror crowned with roses, Our Story as three photos in pearl-beaded oval mirrors that clear like misted glass, Details with the venue in a wide gilded mirror, and RSVP.
 
 TRY THE LIVE DEMO
 See the music box open on your own phone before you buy (sample names and photos):
@@ -58,7 +60,7 @@ https://bkestudio.com/start/demo/music-box-ballerina
 Copy the link into your phone's browser.
 
 WHAT YOU GET
-• Your wedding website in the Music Box Ballerina design: the music box opening, Home, Our Story, Details and RSVP pages
+• Your wedding website in the Music Box Ballerina design: the music box envelope opening, Home, Our Story, Details and RSVP pages
 • A private online editor, designed for phone screens and also working on a computer, with a preview of every page
 • Online RSVP: replies, head counts and up to 10 questions of your own (choices, yes/no, short or long answer, number); you choose which fields are required
 • Download every reply as an Excel file (or CSV) in one tap, or connect your own Google Sheet
@@ -91,7 +93,7 @@ WHAT YOU CAN CHANGE
 What stays as designed: the artwork, colors, fonts, page layout and the music box animation.
 
 WHAT YOUR GUESTS SEE
-Your link opens a closed music box. One tap opens it into your pages. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging services show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
+Your link opens a closed satin envelope with a music-box lid. One tap opens it into your pages. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging services show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
 
 WHAT YOU NEED
 • A phone or computer with a web browser
@@ -269,7 +271,7 @@ link; one review request per order, the same text for everyone, never with an in
 ## 10. What differs from the 01–21 listings
 
 - Not for sale (`preview`); the price is a proposal; the start link answers 404 until the design is live.
-- The closed object is an oval music box, not an envelope: "opens like a keepsake music box", "the music box opening", "a closed music box". The word envelope appears nowhere in the title, tags, description or alt texts (`etsy_upload.py` rule for designs that do not open from one). No ballerina animation is promised: the ballerina is a small cameo on the portrait frame, and the slippers are on the lid.
+- Opening object (2026-10-23): the rebuilt design opens from its own envelope (`designs.ts` "Your guests tap the envelope."); §1–§3 say "music box envelope" and "a closed satin envelope with a music-box lid". The §0 rows about the opening, the §5 images and alt texts and the §6 video still show the old opening until they are re-rendered.
 - The opening of the 2026-10-17 draft (key, rising ballerina, petals) is gone from the theme; this text describes the 2026-10-18/19 rebuild.
 - "What you can change" has no monogram line (this design shows none) and gives "You are invited" and "We're getting married", two of this design's headings, as examples.
 - Language line: the website fonts have Cyrillic, the printable invitation's fonts do not (§0).

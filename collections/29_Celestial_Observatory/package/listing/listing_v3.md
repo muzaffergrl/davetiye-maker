@@ -6,8 +6,10 @@ Written from the 21 listing (`collections/21_Crimson_Rose_Atelier/package/listin
 does today. Product language: English (US spelling). This text replaces the version of 2026-10-17, which described the interim theme before its
 rebuild with the GPT parts (2026-10-18/19). Design facts come from `platform/themes/celestial-observatory/` (README, theme.json, content.demo.json,
 index.html, home.html, story.html, details.html, opening-design.json, interior-design.json, the shared opening script and the opening artwork in
-`img/`), `platform/lib/marketing/designs.ts` ("Your guests tap the dome."), `platform/lib/audio/catalog.ts`, `platform/lib/print/layouts.ts`,
-`platform/lib/claim/demo-map.ts` and `platform/lib/claim/demo-photos.json`. This design does not open from an envelope: its own object is a hinged star chart.
+`img/`), `platform/lib/marketing/designs.ts` ("Your guests tap the envelope." since the docs/35 redesign), `platform/lib/audio/catalog.ts`, `platform/lib/print/layouts.ts`,
+`platform/lib/claim/demo-map.ts` and `platform/lib/claim/demo-photos.json`. Since the docs/35 redesign (merged 2026-10-23) it opens from its own envelope.
+
+**2026-10-23 (merge of the docs/35 redesign, G422–G432):** the owner declared the rebuilt design valid and it was merged to main. §1 title, §2 description and §3 tags now describe the rebuilt theme (its envelope, opening and pages, from `platform/lib/marketing/designs.ts`, which is written against the theme as built). Still the old design until the listing media are re-rendered: the rows of §0 about the opening and the pages, the §5 images and alt texts (`images_v4/`), the §6 video (`video_v4_4x5.mp4`) and the START HERE screens. Do not publish before that.
 
 ## 0. Status before publishing
 
@@ -18,7 +20,7 @@ index.html, home.html, story.html, details.html, opening-design.json, interior-d
 | Live demo `https://bkestudio.com/start/demo/celestial-observatory` (in the description under TRY THE LIVE DEMO) | **Answers 200** on the live site (curl, 2026-10-22). It shows this design with the fictional sample couple Celeste & Rowan (Starlight Ridge Observatory Gardens, a fictional venue in Flagstaff, Arizona; August 14, 2027, 7:00 p.m.), a demo map pin in Flagstaff (`lib/claim/demo-map.ts`) and the shared fictional sample photos (`demo-photos.json`: the Blush Garden Rose set; `content.demo.json` sets no photos). Not opened on a real phone. |
 | Opening (theme rebuilt with its GPT parts on 2026-10-18/19) | `index.html` + the shared opening script (`opening-design.json`: kind `crescent-observatory`, pieces `left` and `right`, no pocket): a square midnight-blue star chart in gold (crescent moons, moon phases, stars, a sun and a compass rose in the middle), split along an S-shaped curve into two halves, with gold corner scrolls and ivory roses (`img/v3-closed-880.webp`). At the tap the left half and then the right one swing open, and a card with the portrait in a round brass astrolabe frame (`interior-frame`: a midnight-blue ring with brass rings, stars, crescents and navy flowers), the names, "We're getting married" and the date comes forward; then the home page opens. Sound effects at the tap (`catalog.ts`: seal, paper, slide, chime). With reduced motion on, the opening is skipped and the home page opens. |
 | Pages | README and `interior-design.json` (layout `observatory`): Home "a midnight observatory with a circular brass astrolabe portrait and an ivory star-chart invitation"; Story "circular astrolabe portraits trace an asymmetric constellation across the page, each appearing in its own orbit"; Details "an observatory programme with measured celestial chart typography and circular venue framing"; RSVP "a midnight-and-brass star-chart reply suite". Reduced motion and printing show all content without animation (README). |
-| Name of the opening | `designs.ts` `DESIGN_COPY`: "Your guests tap the chart." (the word `tools/etsy_upload.py` checks; this listing says "star chart"). Since 2026-10-22 the catalogue's preview copy (`PREVIEW_DESIGN_COPY`) starts with the same sentence, so the sales site, the editor's preview tab **Chart** (`lib/panel/state.ts` `themeOpening`) and START HERE ("tap the chart") name the same object (read from the code and tests, not yet seen on the live site). The guest-facing defaults in `theme.json` say "Replay the opening" (`home_replay`, `rsvp_replay`) and "Close the star chart" (`envelope_close`) since 2026-10-22, not deployed yet; buyers can rename them under Headings & labels (§11). |
+| Name of the opening | Since the docs/35 redesign (merged 2026-10-23) `designs.ts` `DESIGN_COPY` says "Your guests tap the envelope." (the word `tools/etsy_upload.py` checks; this listing says "astrolabe envelope"): the sales site, the editor's preview tab **Envelope** (`lib/panel/state.ts` `themeOpening`) and the theme's own open button ("Open the envelope") name the same object (`tests/g175-openings.test.ts`, `tests/unique-openings.test.ts`; read from the code and tests, not yet seen on the live site). START HERE still names the old object until it is regenerated. |
 | Current platform release | The theme is on production (its demo answers 200). The editor flow (setup, Edit, Guests, Share) was not tried with this design: the start link answers 404 until the design goes live. The shop-wide features in §2 are those of the 21 listing (G154). |
 | Order check (`CLAIM_ORDER_VERIFICATION`) | As in the 21 listing: decided on (K34), but the mode in production was not read (no access to the live settings). The description claims no order check: it says what happens if the editor shows "We are confirming your Etsy order" (Publish opens once the order is confirmed, usually within 24 hours), which is true in every mode (G154, K48). |
 | Questions & answers, RSVP questions | Platform features, the same for every design. **Not tried on the live site** with this design. |
@@ -41,10 +43,10 @@ VERIFY markers come out only after the test is done; if a test fails, delete or 
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 123 characters.
+Etsy limit: 140 characters. This title: 132 characters.
 
 ```text
-Celestial Observatory Wedding Website with RSVP, Digital Invitation with a Star Chart Opening, Online Editor, Navy and Gold
+Celestial Observatory Wedding Website with RSVP, Digital Invitation with an Astrolabe Envelope Opening, Online Editor, Navy and Gold
 ```
 
 ## 2. Description
@@ -53,17 +55,17 @@ Paste from the line below. Section titles in capitals and "•" bullets read wel
 
 ---
 
-A wedding website that opens like a real star chart, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
+A wedding website that opens like an observatory dome, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
 
-Midnight blue, chart-paper ivory and antique gold, for a wedding under the stars. Your guests tap a midnight-blue star chart with gold moons, stars and a compass rose: its two curved halves swing open one after the other, and a card with your portrait in a round brass astrolabe frame comes forward. Then your invitation follows: Home with your names and a round astrolabe portrait, Our Story in round astrolabe frames set like a constellation, Details as a star-chart program, and RSVP.
+Midnight paper, silver-ivory chart paper, gold leaf and antique brass, for a wedding under the stars. Your guests tap a midnight-blue envelope with a gold-foil dome flap, closed by an antique brass astrolabe: the astrolabe's star pointer turns and its tips glint, the astrolabe floats away, the dome flap opens over a star-atlas lining, and a chart-paper card with your portrait rises out of the pocket while gold stars light up. Then your invitation follows: Home with your portrait in a gilded celestial medallion, Our Story as three round photos in brass planisphere rings that turn as guests scroll, Details with each line of the day lit by a gold star, and RSVP.
 
 TRY THE LIVE DEMO
-See the star chart open on your own phone before you buy (sample names and photos):
+See the envelope open on your own phone before you buy (sample names and photos):
 https://bkestudio.com/start/demo/celestial-observatory
 Copy the link into your phone's browser.
 
 WHAT YOU GET
-• Your wedding website in the Celestial Observatory design: star chart opening, Home, Our Story, Details and RSVP pages
+• Your wedding website in the Celestial Observatory design: astrolabe envelope opening, Home, Our Story, Details and RSVP pages
 • A private online editor, designed for phone screens and also working on a computer, with a preview of every page
 • Online RSVP: replies, head counts and up to 10 questions of your own (choices, yes/no, short or long answer, number); you choose which fields are required
 • Download every reply as an Excel file (or CSV) in one tap, or connect your own Google Sheet
@@ -93,10 +95,10 @@ WHAT YOU CAN CHANGE
 • RSVP deadline and your reply form: required or optional fields and up to 10 questions of your own
 • The design's headings, labels and buttons, in your own words (for example "You are invited" or "Moments we hold dear")
 • Which optional sections show
-What stays as designed: the artwork, colors, fonts, page layout and the star chart animation.
+What stays as designed: the artwork, colors, fonts, page layout and the envelope animation.
 
 WHAT YOUR GUESTS SEE
-Your link opens a closed star chart. One tap opens it into your pages. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging apps show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
+Your link opens a midnight-blue envelope closed by a brass astrolabe. One tap opens it into your pages. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging apps show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
 
 WHAT YOU NEED
 • A phone or computer with a web browser
@@ -276,7 +278,7 @@ link; one review request per order, the same text for everyone, never with an in
 
 - Rewritten on 2026-10-22 for the rebuilt theme (GPT parts, 2026-10-18/19). The 2026-10-17 text described the interim opening (a brass observatory dome whose slit shutter opens onto the night sky, a constellation line tracing the initials, photos uncovered by a sweeping dial); now a flat star chart whose two curved halves swing open, a card with an astrolabe portrait, and round astrolabe frames on Our Story (layout `observatory`). The listing claims no dome, no traced initials and no dial sweep.
 - Not for sale (`preview`): the demo answers on the live site, the start link does not (404); the price is a proposal.
-- Its own opening object: the title, tags, description and alt texts say "star chart" and never the default object word (`tools/etsy_upload.py` rule). `designs.ts`, the editor's preview tab and the START HERE guide say "chart" since 2026-10-22 (§0).
+- Opening object (2026-10-23): the rebuilt design opens from its own envelope (`designs.ts` "Your guests tap the envelope."); §1–§3 say "astrolabe envelope". The §5 images and alt texts and the §6 video still show the old opening until they are re-rendered.
 - Language line: the guide builder's "latin-ext" sentence, as in START HERE; it matches this theme's real fonts (§0: only Cormorant Garamond, the running text, has Cyrillic).
 - Images: the 19-image v4 set and the 4:5 hover video are planned (§5, §6) instead of the 9 editorial images and square video of the 21 kit.
 

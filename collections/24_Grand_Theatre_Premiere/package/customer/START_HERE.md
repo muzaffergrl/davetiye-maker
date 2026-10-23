@@ -8,7 +8,7 @@ Thank you for choosing BKE Studio. This guide takes you from this PDF to a live 
 - Your Etsy order number and your email address are your way in: they open your editor on any phone or computer. There is no password.
 - You fill in your website yourself, in a simple editor. Every change saves by itself.
 - Nobody sees your website until you publish it, and you can keep changing it after you publish.
-- Your guests need no app and no account either: they open your link and tap the curtain.
+- Your guests need no app and no account either: they open your link and tap the envelope.
 
 ## Start now: the first 5 steps
 
@@ -90,7 +90,7 @@ Use the buttons at the bottom of the screen (at the top on a computer):
 
 **Your own wording.** At the end of every Edit page, open **Headings & labels on this page**. There you can rewrite the design's texts in your own words, for example "You are invited", "Will You Join Us?" or the menu. Leave a box empty to keep the design's text; **Reset to design text** brings it back. On **Us** you can also pick suggested wording for a vow renewal, an elopement party or a commitment ceremony. Wording changes never use a name or date change.
 
-**What stays as designed:** the artwork, colors, fonts, page layout and the curtain animation.
+**What stays as designed:** the artwork, colors, fonts, page layout and the envelope animation.
 
 **Sample text.** Boxes that still hold the design's sample text look faded (in italics, with a dashed border), and the top of the page says how many are left, for example "3 fields still show sample text". Tap **Go to the first one** and type your own text before you share your website. Home lists what is left.
 
@@ -119,7 +119,7 @@ Open **Edit → Our Story** and scroll to **Music & sound** at the end of the pa
 
 - **Story music:** choose one of four tracks made for your website (**First Light**, **Garden Waltz**, **Evening Strings**, **Music Box**; one is marked as suggested for your design), **Your own music** or **No music**. Tap **Listen** to hear it.
 - **Your own music:** tap **Choose a file** and upload an MP3 or M4A file of up to 10 MB. Only upload music you have the right to use (your own recording or a licence that allows it).
-- **Sound effects:** soft sounds when guests open the curtain, move between pages and send their reply. Turn it off for a quiet website.
+- **Sound effects:** soft sounds when guests open the envelope, move between pages and send their reply. Turn it off for a quiet website.
 
 Guests hear the music softly on your Our Story page (no Our Story page, no music). A small sound button at the top left of every page turns the sound off or on. Some phones wait for a tap before music starts: then guests see a "Play music" button.
 
@@ -137,7 +137,7 @@ Machine translation is only a first draft: if you can, ask someone who speaks th
 
 ## Step 5. Preview and publish
 
-Tap the eye icon at the top to preview your pages: **Curtain**, **Home**, **Story**, **Details** and **RSVP**. **Curtain** is the opening page, where guests tap the curtain. The X at the top closes the preview. On a computer the preview stays on the right.
+Tap the eye icon at the top to preview your pages: **Envelope**, **Home**, **Story**, **Details** and **RSVP**. **Envelope** is the opening page, where guests tap the envelope. The X at the top closes the preview. On a computer the preview stays on the right.
 
 **First publish:** tap **Publish**. **Before you publish** lists anything guests would still see from the design (sample text, photo places without a photo, sections without a link). Tap an item to fix it, or tap **Publish my website** and fix it later. Then **Your website is live** shows your link with **Copy link**, **Open website** and, on a phone, **Share**; the QR code is under **More ways to share**. You find both again under **Share** at any time.
 

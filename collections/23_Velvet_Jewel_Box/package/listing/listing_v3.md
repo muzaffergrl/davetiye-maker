@@ -6,8 +6,10 @@ Written from the 21 listing (`collections/21_Crimson_Rose_Atelier/package/listin
 does today. Product language: English (US spelling). This text replaces the version of 2026-10-17, which described the interim theme before its
 rebuild with the GPT parts (2026-10-18/19). Design facts come from `platform/themes/velvet-jewel-box/` (README, theme.json, content.demo.json,
 index.html, home.html, story.html, details.html, opening-design.json, interior-design.json, the shared opening script and the opening artwork in
-`img/`), `platform/lib/marketing/designs.ts` ("Your guests tap the box."), `platform/lib/audio/catalog.ts`, `platform/lib/print/layouts.ts`,
-`platform/lib/claim/demo-map.ts` and `platform/lib/claim/demo-photos.json`. This design does not open from an envelope: its own object is a jewel box.
+`img/`), `platform/lib/marketing/designs.ts` ("Your guests tap the envelope." since the docs/35 redesign), `platform/lib/audio/catalog.ts`, `platform/lib/print/layouts.ts`,
+`platform/lib/claim/demo-map.ts` and `platform/lib/claim/demo-photos.json`. Since the docs/35 redesign (merged 2026-10-23) it opens from its own envelope.
+
+**2026-10-23 (merge of the docs/35 redesign, G422–G432):** the owner declared the rebuilt design valid and it was merged to main. §1 title, §2 description and §3 tags now describe the rebuilt theme (its envelope, opening and pages, from `platform/lib/marketing/designs.ts`, which is written against the theme as built). Still the old design until the listing media are re-rendered: the rows of §0 about the opening and the pages, the §5 images and alt texts (`images_v4/`), the §6 video (`video_v4_4x5.mp4`) and the START HERE screens. Do not publish before that.
 
 ## 0. Status before publishing
 
@@ -18,7 +20,7 @@ index.html, home.html, story.html, details.html, opening-design.json, interior-d
 | Live demo `https://bkestudio.com/start/demo/velvet-jewel-box` (in the description under TRY THE LIVE DEMO) | **Answers 200** on the live site (curl, 2026-10-22). It shows this design with the fictional sample couple Isabelle & Julian (Halvern House, New York, USA; November 13, 2027, 5:00 p.m.), a demo map pin in New York (`lib/claim/demo-map.ts`) and the shared fictional sample photos (`demo-photos.json`: the Blush Garden Rose set; `content.demo.json` sets no photos). Not opened on a real phone. |
 | Opening (theme rebuilt with its GPT parts on 2026-10-18/19) | `index.html` + the shared opening script (`opening-design.json`: kind `octagonal-jewel-book`, one piece `lid`, no pocket): an octagonal plum velvet jewel box with gold hinges on the left, rose-gold filigree, pearls, velvet roses and an oval cartouche (`img/v3-closed-880.webp`). At the tap the lid swings open on its left hinges to an ivory lining (`img/v4-lining.webp`), and a card with the portrait in an oval pearl locket frame (`interior-frame`: plum velvet, pearls, a velvet rose, a champagne satin bow), the names, "We're getting married" and the date rises out and comes forward; then the home page opens. Sound effects at the tap (`catalog.ts`: ribbon, paper, slide, chime; its comment still names the satin bow of the earlier opening). With reduced motion on, the opening is skipped and the home page opens. |
 | Pages | README and `interior-design.json` (layout `jewel`): Home "an aubergine velvet jewellery suite with an oval pearl portrait and a silk-lined invitation"; Story "three oval pearl-set locket portraits, alternating with handwritten captions"; Details "pearl-edged keepsake panels and an intimate evening programme"; RSVP "a velvet-and-rose-gold reply card". Reduced motion and printing show all content without animation (README). |
-| Name of the opening | `designs.ts` `DESIGN_COPY`: "Your guests tap the box." (the word `tools/etsy_upload.py` checks; this listing says "jewel box"). Since 2026-10-22 the catalogue's preview copy (`PREVIEW_DESIGN_COPY`) starts with the same sentence, so the sales site, the editor's preview tab **Box** (`lib/panel/state.ts` `themeOpening`) and START HERE ("tap the box") name the same object (read from the code and tests, not yet seen on the live site). The guest-facing defaults in `theme.json` say "Replay the opening" (`home_replay`, `rsvp_replay`) and "Close the box" (`envelope_close`) since 2026-10-22, not deployed yet; buyers can rename them under Headings & labels (§11). |
+| Name of the opening | Since the docs/35 redesign (merged 2026-10-23) `designs.ts` `DESIGN_COPY` says "Your guests tap the envelope." (the word `tools/etsy_upload.py` checks; this listing says "velvet envelope"): the sales site, the editor's preview tab **Envelope** (`lib/panel/state.ts` `themeOpening`) and the theme's own open button ("Open the envelope") name the same object (`tests/g175-openings.test.ts`, `tests/unique-openings.test.ts`; read from the code and tests, not yet seen on the live site). START HERE still names the old object until it is regenerated. |
 | Current platform release | The theme is on production (its demo answers 200). The editor flow (setup, Edit, Guests, Share) was not tried with this design: the start link answers 404 until the design goes live. The shop-wide features in §2 are those of the 21 listing (G154). |
 | Order check (`CLAIM_ORDER_VERIFICATION`) | As in the 21 listing: decided on (K34), but the mode in production was not read (no access to the live settings). The description claims no order check: it says what happens if the editor shows "We are confirming your Etsy order" (Publish opens once the order is confirmed, usually within 24 hours), which is true in every mode (G154, K48). |
 | Questions & answers, RSVP questions | Platform features, the same for every design. **Not tried on the live site** with this design. |
@@ -41,10 +43,10 @@ VERIFY markers come out only after the test is done; if a test fails, delete or 
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 122 characters.
+Etsy limit: 140 characters. This title: 128 characters.
 
 ```text
-Velvet Jewel Box Wedding Website with RSVP, Digital Invitation with a Jewel Box Opening, Online Editor, Plum and Rose Gold
+Velvet Jewel Box Wedding Website with RSVP, Digital Invitation with a Velvet Envelope Opening, Online Editor, Plum and Rose Gold
 ```
 
 ## 2. Description
@@ -53,17 +55,17 @@ Paste from the line below. Section titles in capitals and "•" bullets read wel
 
 ---
 
-A wedding website that opens like a real jewel box, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
+A wedding website that opens from a velvet envelope like a jewelry case, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
 
-Aubergine velvet, rose gold and pearls, like a keepsake from a jewelry case. Your guests tap an octagonal plum velvet jewel box with rose-gold filigree, pearls and velvet roses: its lid swings open on gold hinges to an ivory lining, and a card with your portrait in an oval pearl locket frame rises out. Then your invitation follows: Home with your names and an oval locket portrait, Our Story as three locket portraits with captions, Details with the order of the evening, and RSVP.
+Champagne moiré, aubergine velvet, seed pearls and rose gold, like a keepsake from a jewelry case. Your guests tap an aubergine velvet envelope in a champagne satin band with a rose-gold solitaire ring threaded on the ribbon: the diamond catches the light, the ring slides off the band and floats away, the band parts, the lobed velvet flap opens onto champagne satin, and a pearl-edged card with your portrait rises out of the pocket. Then your invitation follows: Home with your portrait in an oval pearl cameo and the invitation on a band of velvet, Our Story as three photos in the oval settings of a velvet ring tray on a turning display, Details with the order of the day under a strand of pearls, and RSVP.
 
 TRY THE LIVE DEMO
-See the jewel box open on your own phone before you buy (sample names and photos):
+See the velvet envelope open on your own phone before you buy (sample names and photos):
 https://bkestudio.com/start/demo/velvet-jewel-box
 Copy the link into your phone's browser.
 
 WHAT YOU GET
-• Your wedding website in the Velvet Jewel Box design: jewel box opening, Home, Our Story, Details and RSVP pages
+• Your wedding website in the Velvet Jewel Box design: velvet envelope opening, Home, Our Story, Details and RSVP pages
 • A private online editor, designed for phone screens and also working on a computer, with a preview of every page
 • Online RSVP: replies, head counts and up to 10 questions of your own (choices, yes/no, short or long answer, number); you choose which fields are required
 • Download every reply as an Excel file (or CSV) in one tap, or connect your own Google Sheet
@@ -93,10 +95,10 @@ WHAT YOU CAN CHANGE
 • RSVP deadline and your reply form: required or optional fields and up to 10 questions of your own
 • The design's headings, labels and buttons, in your own words (for example "You are invited" or "Moments we hold dear")
 • Which optional sections show
-What stays as designed: the artwork, colors, fonts, page layout and the jewel box animation.
+What stays as designed: the artwork, colors, fonts, page layout and the envelope animation.
 
 WHAT YOUR GUESTS SEE
-Your link opens a closed velvet jewel box. One tap opens it into your pages. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging apps show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
+Your link opens a closed velvet envelope with a ring on its satin band. One tap opens it into your pages. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging apps show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
 
 WHAT YOU NEED
 • A phone or computer with a web browser
@@ -128,7 +130,7 @@ Etsy: 13 tags, each up to 20 characters (counted below). Keyword choices are hyp
 wedding website
 rsvp website
 digital invitation
-jewel box invitation
+velvet invitation
 online rsvp
 wedding rsvp
 wedding invitation
@@ -276,7 +278,7 @@ link; one review request per order, the same text for everyone, never with an in
 
 - Rewritten on 2026-10-22 for the rebuilt theme (GPT parts, 2026-10-18/19). The 2026-10-17 text described the interim opening (a ring box with a satin bow, a lid on a top hinge, a turning photo display on Our Story); now an octagonal velvet jewel box whose lid swings open on side hinges, a card with an oval pearl locket portrait, and three locket portraits on Our Story (layout `jewel`).
 - Not for sale (`preview`): the demo answers on the live site, the start link does not (404); the price is a proposal.
-- Its own opening object: the title, tags, description and alt texts say "jewel box" and never the default object word (`tools/etsy_upload.py` rule). The guests' first view is "a closed velvet jewel box". The theme's default guest labels were renamed on 2026-10-22 ("Replay the opening", "Close the box"); the editor's preview tab still needs a look on the live site (§0, §11).
+- Opening object (2026-10-23): the rebuilt design opens from its own envelope (`designs.ts` "Your guests tap the envelope."); §1–§3 say "velvet envelope". The §5 images and alt texts and the §6 video still show the old opening until they are re-rendered.
 - Default track Music Box (21: Evening Strings); the second heading example is the design's story kicker, "Moments we hold dear".
 - Language line: the guide builder's "latin-ext" sentence, as in START HERE; it matches this theme's real fonts (§0: Pinyon Script, the script and opening-names font, has no Cyrillic).
 - Images: the 19-image v4 set and the 4:5 hover video are planned (§5, §6) instead of the 9 editorial images and square video of the 21 kit.

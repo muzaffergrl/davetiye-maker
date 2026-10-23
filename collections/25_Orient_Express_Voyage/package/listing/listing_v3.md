@@ -6,8 +6,10 @@ Written from the 21 listing (`collections/21_Crimson_Rose_Atelier/package/listin
 does today. Product language: English (US spelling). This text replaces the version of 2026-10-17, which described the interim theme before its
 rebuild with the GPT parts (2026-10-18/19). Design facts come from `platform/themes/orient-express-voyage/` (README, theme.json, content.demo.json,
 index.html, home.html, story.html, details.html, opening-design.json, interior-design.json, the shared opening script and the opening artwork in
-`img/`), `platform/lib/marketing/designs.ts` ("Your guests tap the wallet."), `platform/lib/audio/catalog.ts`, `platform/lib/print/layouts.ts`,
-`platform/lib/claim/demo-map.ts` and `platform/lib/claim/demo-photos.json`. This design does not open from an envelope: its own object is a ticket wallet.
+`img/`), `platform/lib/marketing/designs.ts` ("Your guests tap the envelope." since the docs/35 redesign), `platform/lib/audio/catalog.ts`, `platform/lib/print/layouts.ts`,
+`platform/lib/claim/demo-map.ts` and `platform/lib/claim/demo-photos.json`. Since the docs/35 redesign (merged 2026-10-23) it opens from its own envelope.
+
+**2026-10-23 (merge of the docs/35 redesign, G422–G432):** the owner declared the rebuilt design valid and it was merged to main. §1 title, §2 description and §3 tags now describe the rebuilt theme (its envelope, opening and pages, from `platform/lib/marketing/designs.ts`, which is written against the theme as built). Still the old design until the listing media are re-rendered: the rows of §0 about the opening and the pages, the §5 images and alt texts (`images_v4/`), the §6 video (`video_v4_4x5.mp4`) and the START HERE screens. Do not publish before that.
 
 ## 0. Status before publishing
 
@@ -19,7 +21,7 @@ index.html, home.html, story.html, details.html, opening-design.json, interior-d
 | Live demo `https://bkestudio.com/start/demo/orient-express-voyage` (in the description under TRY THE LIVE DEMO) | **Answers 200** on the live site (curl, 2026-10-22). It shows this design with the fictional sample couple Amelia & Rafael (Palazzo Ferrovia, Venice, Italy; September 25, 2027, 4:00 p.m.), a demo map pin in Venice (`lib/claim/demo-map.ts`) and the shared fictional sample photos (`demo-photos.json`: the Blush Garden Rose set; `content.demo.json` sets no photos). Not opened on a real phone. |
 | Opening (theme rebuilt with its GPT parts on 2026-10-18/19) | `index.html` + the shared opening script (`opening-design.json`: kind `railway-ticket-sleeve`, one piece `sleeve`, no pocket): a long bottle-green ticket wallet with a gold frame, a gold locomotive emblem under an arch, a walnut band with an ivory rose and a ticket tab at its right edge (`img/v3-closed-880.webp`). At the tap the wallet slides away to the left, and a card with the portrait in a brass carriage-window frame (`interior-frame`: green and walnut with brass rails, a lamp, an ivory rose and a luggage tag), the names, "We're getting married" and the date slides out to the right and comes forward; then the home page opens. Sound effects at the tap (`catalog.ts`: seal, paper, slide, chime; its comment still names the strap buckle of the earlier opening). With reduced motion on, the opening is skipped and the home page opens. |
 | Pages | README and `interior-design.json` (layout `voyage`): Home "a first-class travel invitation with a brass carriage-window portrait and cream ticket stationery"; Story "a horizontal carriage-window photo journey with captions under each panoramic view"; Details "a rail-journey itinerary with paired time and destination columns"; RSVP "a green-and-brass travel-ticket reply suite". Reduced motion and printing show all content without animation (README). |
-| Name of the opening | `designs.ts` `DESIGN_COPY`: "Your guests tap the wallet." (the word `tools/etsy_upload.py` checks; this listing says "ticket wallet"). Since 2026-10-22 the catalogue's preview copy (`PREVIEW_DESIGN_COPY`) starts with the same sentence, so the sales site, the editor's preview tab **Wallet** (`lib/panel/state.ts` `themeOpening`) and START HERE ("tap the wallet") name the same object (read from the code and tests, not yet seen on the live site). The guest-facing defaults in `theme.json` say "Replay the opening" (`home_replay`, `rsvp_replay`) and "Close the wallet" (`envelope_close`) since 2026-10-22, not deployed yet; buyers can rename them under Headings & labels (§11). |
+| Name of the opening | Since the docs/35 redesign (merged 2026-10-23) `designs.ts` `DESIGN_COPY` says "Your guests tap the envelope." (the word `tools/etsy_upload.py` checks; this listing says "ticket sleeve"): the sales site, the editor's preview tab **Envelope** (`lib/panel/state.ts` `themeOpening`) and the theme's own open button ("Open the ticket sleeve") name the same object (`tests/g175-openings.test.ts`, `tests/unique-openings.test.ts`; read from the code and tests, not yet seen on the live site). START HERE still names the old object until it is regenerated. |
 | Current platform release | The theme is on production (its demo answers 200). The editor flow (setup, Edit, Guests, Share) was not tried with this design: the start link answers 404 until the design goes live. The shop-wide features in §2 are those of the 21 listing (G154). |
 | Order check (`CLAIM_ORDER_VERIFICATION`) | As in the 21 listing: decided on (K34), but the mode in production was not read (no access to the live settings). The description claims no order check: it says what happens if the editor shows "We are confirming your Etsy order" (Publish opens once the order is confirmed, usually within 24 hours), which is true in every mode (G154, K48). |
 | Questions & answers, RSVP questions | Platform features, the same for every design. **Not tried on the live site** with this design. |
@@ -45,7 +47,7 @@ VERIFY markers come out only after the test is done; if a test fails, delete or 
 Etsy limit: 140 characters. This title: 133 characters.
 
 ```text
-Orient Express Voyage Wedding Website with RSVP, Digital Invitation with a Ticket Wallet Opening, Online Editor, Vintage Train Travel
+Orient Express Voyage Wedding Website with RSVP, Digital Invitation with a Ticket Sleeve Opening, Online Editor, Vintage Train Travel
 ```
 
 ## 2. Description
@@ -54,17 +56,17 @@ Paste from the line below. Section titles in capitals and "•" bullets read wel
 
 ---
 
-A wedding website that opens like a real ticket wallet, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
+A wedding website that opens like a real leather ticket sleeve, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
 
-Bottle green, brass and walnut, in the spirit of a vintage rail journey. Your guests tap a bottle-green ticket wallet with a gold locomotive emblem, a walnut band and an ivory rose: the wallet slides away, and a card with your portrait in a brass carriage-window frame comes out. Then your invitation follows: Home with your names and a carriage-window portrait, Our Story as a journey through three carriage windows, Details as a rail itinerary, and RSVP.
+Antique map paper, bottle-green leather, brass and ivory, in the spirit of a vintage rail journey. Your guests tap a long bottle-green leather ticket sleeve with brass corners, a brass turn-lock and a blank luggage tag on a red cord: the tag swings, the turn-lock clicks open, the end tab swings aside onto red silk, and a first-class ticket with your portrait slides out, turns upright and comes forward. Then your invitation follows: Home with your portrait in a brass and mahogany carriage window and a map with the route of your day, Our Story as three sliding sash windows of a sleeper carriage, Details as an itinerary with the route drawn station by station to the venue, and RSVP.
 
 TRY THE LIVE DEMO
-See the ticket wallet open on your own phone before you buy (sample names and photos):
+See the ticket sleeve open on your own phone before you buy (sample names and photos):
 https://bkestudio.com/start/demo/orient-express-voyage
 Copy the link into your phone's browser.
 
 WHAT YOU GET
-• Your wedding website in the Orient Express Voyage design: ticket wallet opening, Home, Our Story, Details and RSVP pages
+• Your wedding website in the Orient Express Voyage design: ticket sleeve opening, Home, Our Story, Details and RSVP pages
 • A private online editor, designed for phone screens and also working on a computer, with a preview of every page
 • Online RSVP: replies, head counts and up to 10 questions of your own (choices, yes/no, short or long answer, number); you choose which fields are required
 • Download every reply as an Excel file (or CSV) in one tap, or connect your own Google Sheet
@@ -94,10 +96,10 @@ WHAT YOU CAN CHANGE
 • RSVP deadline and your reply form: required or optional fields and up to 10 questions of your own
 • The design's headings, labels and buttons, in your own words (for example "You are invited" or "Moments we hold dear")
 • Which optional sections show
-What stays as designed: the artwork, colors, fonts, page layout and the ticket wallet animation.
+What stays as designed: the artwork, colors, fonts, page layout and the ticket sleeve animation.
 
 WHAT YOUR GUESTS SEE
-Your link opens a closed ticket wallet. One tap opens it into your pages. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging apps show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
+Your link opens a closed leather ticket sleeve. One tap opens it into your pages. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging apps show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
 
 WHAT YOU NEED
 • A phone or computer with a web browser
@@ -277,7 +279,7 @@ link; one review request per order, the same text for everyone, never with an in
 
 - Rewritten on 2026-10-22 for the rebuilt theme (GPT parts, 2026-10-18/19). The 2026-10-17 text described the interim opening (a leather strap unbuckling, a cover swinging open, a route map drawing itself, a boarding stamp on the RSVP); now a green ticket wallet slides away and a card with a carriage-window portrait comes out; Our Story is a journey through carriage windows (layout `voyage`). The listing claims no route animation and no boarding stamp.
 - Not for sale (`preview`): the demo answers on the live site, the start link does not (404); the price is a proposal.
-- Its own opening object: the title, tags, description and alt texts say "ticket wallet" and never the default object word (`tools/etsy_upload.py` rule). The guests' first view is "a closed ticket wallet". The theme's default guest labels were renamed on 2026-10-22 ("Replay the opening", "Close the wallet"); the editor's preview tab still needs a look on the live site (§0, §11).
+- Opening object (2026-10-23): the rebuilt design opens from its own envelope (`designs.ts` "Your guests tap the envelope."); §1–§3 say "ticket sleeve". The §5 images and alt texts and the §6 video still show the old opening until they are re-rendered.
 - Design name flagged as a possible trademark (§0): used only where the design must be named, never as a tag.
 - Language line: the guide builder's "latin-ext" sentence, as in START HERE; it matches this theme's real fonts (§0: none of the three has Cyrillic, the "all places" case).
 - Images: the 19-image v4 set and the 4:5 hover video are planned (§5, §6) instead of the 9 editorial images and square video of the 21 kit.

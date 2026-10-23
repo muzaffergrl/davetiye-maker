@@ -9,6 +9,8 @@ index.html, home.html, story.html, details.html, opening-design.json, interior-d
 `platform/lib/marketing/designs.ts` ("Your guests tap the envelope."), `platform/lib/audio/catalog.ts`, `platform/lib/print/layouts.ts`,
 `platform/lib/claim/demo-map.ts` and `platform/lib/claim/demo-photos.json`.
 
+**2026-10-23 (merge of the docs/35 redesign, G422–G432):** the owner declared the rebuilt design valid and it was merged to main. §1 title, §2 description and §3 tags now describe the rebuilt theme (its envelope, opening and pages, from `platform/lib/marketing/designs.ts`, which is written against the theme as built). Still the old design until the listing media are re-rendered: the rows of §0 about the opening and the pages, the §5 images and alt texts (`images_v4/`), the §6 video (`video_v4_4x5.mp4`) and the START HERE screens. Do not publish before that.
+
 ## 0. Status before publishing
 
 | Item | Status on 2026-10-22 |
@@ -54,7 +56,7 @@ Paste from the line below. Section titles in capitals and "•" bullets read wel
 
 A wedding website that opens like a real envelope, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
 
-Charcoal paper, champagne gold and candlelight by an Italian lake. Your guests tap a long charcoal envelope with a gold wax seal, an ivory rose and a villa in gold line art: the curved flap lifts with its seal, and a card with your portrait in a gold balustrade frame rises from the pocket. Then your invitation follows: Home with your names and a panoramic portrait, Our Story with one wide photo and two smaller ones, Details with the evening hour by hour, and RSVP.
+Charcoal laid paper, champagne gold and an oil-painted lake at night. Your guests tap a charcoal laid-paper envelope with a deep diamond flap, a vellum lake-panorama band and a hammered gold crescent brooch: the crescent catches the moonlight and rises to stay above the envelope as the moon, the vellum band slides away, the diamond flap opens onto a painted night sky over the lake, and an ivory card with your portrait rises from the pocket. Then your invitation follows: Home with your portrait in an arched villa window, Our Story as three photos in villa windows behind charcoal shutters that open as guests scroll, Details with the order of the evening and the venue over a stone balustrade, and RSVP.
 
 TRY THE LIVE DEMO
 See the envelope open on your own phone before you buy (sample names and photos):
@@ -95,7 +97,7 @@ WHAT YOU CAN CHANGE
 What stays as designed: the artwork, colors, fonts, page layout and the envelope animation.
 
 WHAT YOUR GUESTS SEE
-Your link opens a sealed charcoal envelope. One tap opens it into your pages. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging apps show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
+Your link opens a charcoal envelope with a gold crescent brooch. One tap opens it into your pages. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging apps show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
 
 WHAT YOU NEED
 • A phone or computer with a web browser
@@ -135,7 +137,7 @@ black tie wedding
 black and gold
 lake como wedding
 italy wedding
-wax seal invitation
+moonlight wedding
 villa wedding
 ```
 

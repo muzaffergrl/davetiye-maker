@@ -9,6 +9,8 @@ opening-design.json, interior-design.json, content.demo.json, index.html, home.h
 `platform/lib/claim/demo-photos.json` and the live demo page. This replaces the 2026-10-17 draft (G170), which described the earlier
 opening (a paper lantern in cupped hands rising into the sky); that opening is no longer in the theme.
 
+**2026-10-23 (merge of the docs/35 redesign, G422–G432):** the owner declared the rebuilt design valid and it was merged to main. §1 title, §2 description and §3 tags now describe the rebuilt theme (its envelope, opening and pages, from `platform/lib/marketing/designs.ts`, which is written against the theme as built). Still the old design until the listing media are re-rendered: the rows of §0 about the opening and the pages, the §5 images and alt texts (`images_v4/`), the §6 video (`video_v4_4x5.mp4`) and the START HERE screens. Do not publish before that.
+
 ## 0. Status before publishing
 
 | Item | Status on 2026-10-22 |
@@ -36,10 +38,10 @@ VERIFY markers come out only after the test is done; if a test fails, delete or 
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 125 characters.
+Etsy limit: 140 characters. This title: 135 characters.
 
 ```text
-Sky Lantern Festival Wedding Website with RSVP, Digital Invitation with a Silk Pouch Opening, Online Editor, Twilight Lantern
+Sky Lantern Festival Wedding Website with RSVP, Digital Invitation with a Sky Lantern Envelope Opening, Online Editor, Twilight Lantern
 ```
 
 ## 2. Description
@@ -48,17 +50,17 @@ Paste from the line below. Section titles in capitals and "•" bullets read wel
 
 ---
 
-A wedding website that opens from an embroidered silk pouch, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
+A wedding website that opens as a paper sky lantern rises, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
 
-Dusky plum, coral and lantern amber, with peach roses on ivory paper and, in one corner, a twilight lake under floating sky lanterns. Your guests tap a coral silk pouch embroidered with blossoms and gold clouds, tied with a gold cord, a knot charm and a coral tassel: its scalloped top lifts and a card with your portrait, in a plum frame of blossoms and glowing lanterns, rises out of the pouch and comes forward. Then your invitation follows: Home with your portrait and a warm amber invitation, Our Story with tall lantern-window photos along a twilight trail, Details and RSVP.
+Dusk violet, dusky rose and lantern amber on hand-dyed washi. Your guests tap a dip-dyed dusk washi envelope with a lantern-belly flap and a little paper sky lantern tied to a gold stud with amber silk: the lantern lights up from inside, the silk thread slips free and the lantern rises out of sight while distant lanterns drift up behind it, the flap opens onto warm amber washi, and a rice-paper card with your portrait rises out of the pocket. Then your invitation follows: Home with your portrait in a paper-lantern window, Our Story as three photos on hanging rice-paper panels, each opening in a circle of warm light, Details with a little lantern that lights for each line of the day, and RSVP.
 
 TRY THE LIVE DEMO
-See the silk pouch open on your own phone before you buy (sample names and photos):
+See the sky lantern rise on your own phone before you buy (sample names and photos):
 https://bkestudio.com/start/demo/sky-lantern-festival
 Copy the link into your phone's browser.
 
 WHAT YOU GET
-• Your wedding website in the Sky Lantern Festival design: the silk pouch opening, Home, Our Story, Details and RSVP pages
+• Your wedding website in the Sky Lantern Festival design: the sky lantern envelope opening, Home, Our Story, Details and RSVP pages
 • A private online editor, designed for phone screens and also working on a computer, with a preview of every page
 • Online RSVP: replies, head counts and up to 10 questions of your own (choices, yes/no, short or long answer, number); you choose which fields are required
 • Download every reply as an Excel file (or CSV) in one tap, or connect your own Google Sheet
@@ -88,10 +90,10 @@ WHAT YOU CAN CHANGE
 • RSVP deadline and your reply form: required or optional fields and up to 10 questions of your own
 • The design's headings, labels and buttons, in your own words (for example "We're getting married" or "Moments we hold dear")
 • Which optional sections show
-What stays as designed: the artwork, colors, fonts, page layout and the silk pouch animation.
+What stays as designed: the artwork, colors, fonts, page layout and the lantern animation.
 
 WHAT YOUR GUESTS SEE
-Your link opens a closed silk pouch. One tap opens it into your pages. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging services show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
+Your link opens a dusk-colored washi envelope with a paper lantern. One tap opens it into your pages. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging services show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
 
 WHAT YOU NEED
 • A phone or computer with a web browser
@@ -132,7 +134,7 @@ twilight wedding
 plum wedding
 coral wedding
 romantic wedding
-pouch invitation
+lantern invitation
 ```
 
 Character counts: 15 · 12 · 18 · 11 · 12 · 18 · 15 · 11 · 16 · 12 · 13 · 16 · 16 (all ≤ 20).
@@ -269,7 +271,7 @@ link; one review request per order, the same text for everyone, never with an in
 ## 10. What differs from the 01–21 listings
 
 - Not for sale (`preview`); the price is a proposal; the start link answers 404 until the design is live.
-- The closed object is a coral silk pouch, not an envelope: "opens from an embroidered silk pouch", "the silk pouch opening", "a closed silk pouch". The word envelope appears nowhere in the title, tags, description or alt texts (`etsy_upload.py` rule for designs that do not open from one). No real lantern release is shown or promised: the lanterns are pictures in the frames and the backdrop.
+- Opening object (2026-10-23): the rebuilt design opens from its own envelope (`designs.ts` "Your guests tap the envelope."); §1–§3 say "sky lantern envelope" and "a dusk-colored washi envelope with a paper lantern". The §0 rows about the opening, the §5 images and alt texts and the §6 video still show the old opening until they are re-rendered.
 - The opening of the 2026-10-17 draft (lantern in cupped hands rising into the sky) is gone from the theme; this text describes the 2026-10-18/19 rebuild.
 - "What you can change" has no monogram line (this design shows none) and gives "We're getting married" and "Moments we hold dear", two of this design's headings, as examples.
 - Language line from this theme's real fonts (§0): Allura has no Cyrillic.

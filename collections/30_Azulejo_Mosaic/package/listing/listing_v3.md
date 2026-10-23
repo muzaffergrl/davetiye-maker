@@ -6,9 +6,10 @@ Written from the 21 listing (`collections/21_Crimson_Rose_Atelier/package/listin
 does today. Product language: English (US spelling). This text replaces the version of 2026-10-17, which described the interim theme before its
 rebuild with the GPT parts (2026-10-18/19). Design facts come from `platform/themes/azulejo-mosaic/` (README, theme.json, content.demo.json,
 index.html, home.html, story.html, details.html, opening-design.json, interior-design.json, the shared opening script and the opening artwork in
-`img/`), `platform/lib/marketing/designs.ts` ("Your guests tap the wall."), `platform/lib/audio/catalog.ts`, `platform/lib/print/layouts.ts`,
-`platform/lib/claim/demo-map.ts` and `platform/lib/claim/demo-photos.json`. This design does not open from an envelope: its own object is a folding
-panel of azulejo tiles.
+`img/`), `platform/lib/marketing/designs.ts` ("Your guests tap the envelope." since the docs/35 redesign), `platform/lib/audio/catalog.ts`, `platform/lib/print/layouts.ts`,
+`platform/lib/claim/demo-map.ts` and `platform/lib/claim/demo-photos.json`. Since the docs/35 redesign (merged 2026-10-23) it opens from its own envelope.
+
+**2026-10-23 (merge of the docs/35 redesign, G422–G432):** the owner declared the rebuilt design valid and it was merged to main. §1 title, §2 description and §3 tags now describe the rebuilt theme (its envelope, opening and pages, from `platform/lib/marketing/designs.ts`, which is written against the theme as built). Still the old design until the listing media are re-rendered: the rows of §0 about the opening and the pages, the §5 images and alt texts (`images_v4/`), the §6 video (`video_v4_4x5.mp4`) and the START HERE screens. Do not publish before that.
 
 ## 0. Status before publishing
 
@@ -19,7 +20,7 @@ panel of azulejo tiles.
 | Live demo `https://bkestudio.com/start/demo/azulejo-mosaic` (in the description under TRY THE LIVE DEMO) | **Answers 200** on the live site (curl, 2026-10-22). It shows this design with the fictional sample couple Inês & Mateo (Quinta da Andorinha Azul, Sintra, Portugal; June 5, 2027, 5:00 p.m.), a demo map pin in Sintra (`lib/claim/demo-map.ts`) and the shared fictional sample photos (`demo-photos.json`: the Blush Garden Rose set; `content.demo.json` sets no photos). Not opened on a real phone. |
 | Opening (theme rebuilt with its GPT parts on 2026-10-18/19) | `index.html` + the shared opening script (`opening-design.json`: kind `trifold-azulejo`, pieces `left`, `middle` and `right`, no pocket): a panel of cobalt-and-white azulejo tiles in three parts, two tile side panels with blue scrolls, white flowers, olive sprigs and gold edges and a cream middle panel with a gold rosette (`img/v3-closed-880.webp`). At the tap the right panel, then the left one, then the middle panel fold open, and a card with the portrait in a square tile frame (`interior-frame`: cobalt-and-white tiles with olive sprigs and gold corners), the names, "We're getting married" and the date comes forward; then the home page opens. Sound effects at the tap (`catalog.ts`: seal, paper, slide, chime). With reduced motion on, the opening is skipped and the home page opens. |
 | Pages | README and `interior-design.json` (layout `mosaic`): Home "a Portuguese porcelain suite with a cobalt tile portrait and matching azulejo stationery"; Story "square azulejo photo tiles form a porcelain mosaic gallery with cobalt captions"; Details "a tile-framed celebration programme with terracotta time accents and a square venue panel"; RSVP "a cobalt-and-porcelain reply panel with terracotta accents". Reduced motion and printing show all content without animation (README). |
-| Name of the opening | `designs.ts` `DESIGN_COPY`: "Your guests tap the panel." (the word `tools/etsy_upload.py` checks; this listing says "tile panel"). Since 2026-10-22 the catalogue's preview copy (`PREVIEW_DESIGN_COPY`) starts with the same sentence, so the sales site, the editor's preview tab **Panel** (`lib/panel/state.ts` `themeOpening`) and START HERE ("tap the panel") name the same object (read from the code and tests, not yet seen on the live site). The guest-facing defaults in `theme.json` say "Replay the opening" (`home_replay`, `rsvp_replay`) and "Close the tile panel" (`envelope_close`) since 2026-10-22, not deployed yet; buyers can rename them under Headings & labels (§11). |
+| Name of the opening | Since the docs/35 redesign (merged 2026-10-23) `designs.ts` `DESIGN_COPY` says "Your guests tap the envelope." (the word `tools/etsy_upload.py` checks; this listing says "tiled envelope"): the sales site, the editor's preview tab **Envelope** (`lib/panel/state.ts` `themeOpening`) and the theme's own open button ("Open the envelope") name the same object (`tests/g175-openings.test.ts`, `tests/unique-openings.test.ts`; read from the code and tests, not yet seen on the live site). START HERE still names the old object until it is regenerated. |
 | Current platform release | The theme is on production (its demo answers 200). The editor flow (setup, Edit, Guests, Share) was not tried with this design: the start link answers 404 until the design goes live. The shop-wide features in §2 are those of the 21 listing (G154). |
 | Order check (`CLAIM_ORDER_VERIFICATION`) | As in the 21 listing: decided on (K34), but the mode in production was not read (no access to the live settings). The description claims no order check: it says what happens if the editor shows "We are confirming your Etsy order" (Publish opens once the order is confirmed, usually within 24 hours), which is true in every mode (G154, K48). |
 | Questions & answers, RSVP questions | Platform features, the same for every design. **Not tried on the live site** with this design. |
@@ -42,10 +43,10 @@ VERIFY markers come out only after the test is done; if a test fails, delete or 
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 124 characters.
+Etsy limit: 140 characters. This title: 128 characters.
 
 ```text
-Azulejo Mosaic Wedding Website with RSVP, Digital Invitation with a Tile Panel Opening, Online Editor, Cobalt Blue and White
+Azulejo Mosaic Wedding Website with RSVP, Digital Invitation with a Tiled Envelope Opening, Online Editor, Cobalt Blue and White
 ```
 
 ## 2. Description
@@ -54,17 +55,17 @@ Paste from the line below. Section titles in capitals and "•" bullets read wel
 
 ---
 
-A wedding website that opens like a real folding panel of painted tiles, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
+A wedding website that opens from an envelope of painted tiles, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
 
-Cobalt and white tiles, gold and a touch of terracotta, inspired by Portuguese azulejos. Your guests tap a panel of cobalt-and-white azulejo tiles with a gold rosette: its side panels fold back one after the other, then the middle panel, and a card with your portrait in a tile frame comes forward. Then your invitation follows: Home with your names and a square tile portrait, Our Story as square azulejo photo tiles, Details in a tile-framed program, and RSVP.
+Sunlit whitewash, cobalt tiles and warm terracotta, inspired by Portuguese azulejos. Your guests tap a glaze-white envelope with a stepped flap of painted cobalt azulejo tiles, tied with jute twine and closed by a loose swallow tile: the twine slips off, the tile turns over to show its terracotta back and drops away, the stepped flap opens onto its terracotta lining, and a card with your portrait rises from behind the pocket. Then your invitation follows: Home with your portrait in a tiled limestone niche, uncovered tile by tile, Our Story as three photos in azulejo-bordered frames, each uncovered tile by tile, Details with the venue in a wide tile-panel frame, and RSVP.
 
 TRY THE LIVE DEMO
-See the tile panels open on your own phone before you buy (sample names and photos):
+See the tiled envelope open on your own phone before you buy (sample names and photos):
 https://bkestudio.com/start/demo/azulejo-mosaic
 Copy the link into your phone's browser.
 
 WHAT YOU GET
-• Your wedding website in the Azulejo Mosaic design: tile panel opening, Home, Our Story, Details and RSVP pages
+• Your wedding website in the Azulejo Mosaic design: tiled envelope opening, Home, Our Story, Details and RSVP pages
 • A private online editor, designed for phone screens and also working on a computer, with a preview of every page
 • Online RSVP: replies, head counts and up to 10 questions of your own (choices, yes/no, short or long answer, number); you choose which fields are required
 • Download every reply as an Excel file (or CSV) in one tap, or connect your own Google Sheet
@@ -94,10 +95,10 @@ WHAT YOU CAN CHANGE
 • RSVP deadline and your reply form: required or optional fields and up to 10 questions of your own
 • The design's headings, labels and buttons, in your own words (for example "You are invited" or "Moments we hold dear")
 • Which optional sections show
-What stays as designed: the artwork, colors, fonts, page layout and the tile panel animation.
+What stays as designed: the artwork, colors, fonts, page layout and the envelope animation.
 
 WHAT YOUR GUESTS SEE
-Your link opens a closed panel of azulejo tiles. One tap opens it into your pages. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging apps show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
+Your link opens a closed envelope of cobalt azulejo tiles. One tap opens it into your pages. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging apps show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
 
 WHAT YOU NEED
 • A phone or computer with a web browser
@@ -277,7 +278,7 @@ link; one review request per order, the same text for everyone, never with an in
 
 - Rewritten on 2026-10-22 for the rebuilt theme (GPT parts, 2026-10-18/19). The 2026-10-17 text described the interim opening (a wall of tiles turning over one by one in a wave from the guest's touch, photos uncovered tile by tile, a thank-you revealed tile by tile); now a tile panel in three parts that fold open, a card with a square tile portrait, and square photo tiles on Our Story (layout `mosaic`). The listing claims no tile wave.
 - Not for sale (`preview`): the demo answers on the live site, the start link does not (404); the price is a proposal.
-- Its own opening object: the title, tags, description and alt texts say "tile panel" and never the default object word (`tools/etsy_upload.py` rule). `designs.ts`, the editor's preview tab and the START HERE guide say "panel" since 2026-10-22 (§0).
+- Opening object (2026-10-23): the rebuilt design opens from its own envelope (`designs.ts` "Your guests tap the envelope."); §1–§3 say "tiled envelope". The §5 images and alt texts and the §6 video still show the old opening until they are re-rendered.
 - Language line: the guide builder's "latin-ext" sentence, as in START HERE; it matches this theme's real fonts (§0: Italianno, the script and opening-names font, has no Cyrillic).
 - Images: the 19-image v4 set and the 4:5 hover video are planned (§5, §6) instead of the 9 editorial images and square video of the 21 kit.
 

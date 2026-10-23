@@ -23,12 +23,9 @@ import listing_kit as lk  # noqa: E402
 REPO = TOOLS.parent
 NOT_ENVELOPE = {"art-deco-black-tie": "gatefold", "lavender-provence": "pouch", "tropical-destination": "wallet",
                 "enchanted-forest-storybook": "book", "ivory-lace-pearls": "gatefold",
-                "wildflower-meadow-vellum": "sleeve",
-                # G175: designs 22–32 (22 opens from an envelope)
-                "velvet-jewel-box": "box", "grand-theatre-premiere": "curtain", "orient-express-voyage": "wallet",
-                "kintsugi-washi": "origami", "riad-lantern-nights": "door", "maison-patisserie": "parcel",
-                "celestial-observatory": "chart", "azulejo-mosaic": "panel", "sky-lantern-festival": "pouch",
-                "music-box-ballerina": "box"}
+                "wildflower-meadow-vellum": "sleeve"}
+# G175: designs 22–32 opened from their own objects (box, curtain, wallet …) until the docs/35 redesign; since the merge
+# of 2026-10-23 all eleven open from an envelope (K23 strict)
 # G142: design 21 opened for sale (config.ts "live"); G175: 22–32 are "coming" (K41), 33–48 too (2026-10-22) — remove a
 # design here when it opens
 COMING: set[str] = {"nocturne-lake-estate", "velvet-jewel-box", "grand-theatre-premiere", "orient-express-voyage",
@@ -182,7 +179,7 @@ def test_services():
 def test_check_exit():
     assert eu.main(["--check"]) == 0
     # --strict counts the files Etsy needs of every listing that "all" builds: the 49 designs and (G130) the services
-    files = ("listing images", "listing video", "digital file")
+    files = ("listing images", "listing video", "digital file", "palette images")  # = etsy_upload.main's --strict files
     missing = {no: any(b.startswith(files) for b in eu.build(no, folder, theme)[0]["blockers"])
                for no, folder, theme in eu.DESIGNS}
     designs_missing = any(missing.values())
@@ -194,7 +191,8 @@ def test_check_exit():
     assert eu.main(["--check", "--strict", "--designs", "21"]) == (1 if missing["21"] else 0)
     assert eu.main(["--check", "--strict", "--designs", "services"]) == (1 if services_missing else 0)
     assert eu.main(["--check", "--designs", "22-48"]) == 0  # G175: rules green although the GPT files are missing
-    assert eu.main(["--check", "--strict", "--designs", "22-48"]) == 1
+    designs_22_48 = any(v for no, v in missing.items() if "22" <= no <= "48")
+    assert eu.main(["--check", "--strict", "--designs", "22-48"]) == (1 if designs_22_48 else 0)
 
 
 def main():

@@ -6,9 +6,10 @@ Written from the 21 listing (`collections/21_Crimson_Rose_Atelier/package/listin
 does today. Product language: English (US spelling). This text replaces the version of 2026-10-17, which described the interim theme before its
 rebuild with the GPT parts (2026-10-18/19). Design facts come from `platform/themes/kintsugi-washi/` (README, theme.json, content.demo.json,
 index.html, home.html, story.html, details.html, opening-design.json, interior-design.json, the shared opening script and the opening artwork in
-`img/`), `platform/lib/marketing/designs.ts` ("Your guests tap the origami."), `platform/lib/audio/catalog.ts`, `platform/lib/print/layouts.ts`,
-`platform/lib/claim/demo-map.ts` and `platform/lib/claim/demo-photos.json`. This design does not open from an envelope: its own object is folded
-washi paper (origami).
+`img/`), `platform/lib/marketing/designs.ts` ("Your guests tap the envelope." since the docs/35 redesign), `platform/lib/audio/catalog.ts`, `platform/lib/print/layouts.ts`,
+`platform/lib/claim/demo-map.ts` and `platform/lib/claim/demo-photos.json`. Since the docs/35 redesign (merged 2026-10-23) it opens from its own envelope.
+
+**2026-10-23 (merge of the docs/35 redesign, G422–G432):** the owner declared the rebuilt design valid and it was merged to main. §1 title, §2 description and §3 tags now describe the rebuilt theme (its envelope, opening and pages, from `platform/lib/marketing/designs.ts`, which is written against the theme as built). Still the old design until the listing media are re-rendered: the rows of §0 about the opening and the pages, the §5 images and alt texts (`images_v4/`), the §6 video (`video_v4_4x5.mp4`) and the START HERE screens. Do not publish before that.
 
 ## 0. Status before publishing
 
@@ -19,7 +20,7 @@ washi paper (origami).
 | Live demo `https://bkestudio.com/start/demo/kintsugi-washi` (in the description under TRY THE LIVE DEMO) | **Answers 200** on the live site (curl, 2026-10-22). It shows this design with the fictional sample couple Naomi & Kai (Stillwater Garden Pavilion, Hood River, Oregon; October 9, 2027, 4:00 p.m.), a demo map pin in Hood River (`lib/claim/demo-map.ts`) and the shared fictional sample photos (`demo-photos.json`: the Blush Garden Rose set; `content.demo.json` sets no photos). Not opened on a real phone. |
 | Opening (theme rebuilt with its GPT parts on 2026-10-18/19) | `index.html` + the shared opening script (`opening-design.json`: kind `four-fold-washi`, pieces `lid`, `right`, `left`, `bottom` and a fastening, no pocket): a folded square of ivory washi paper with indigo bands, gold kintsugi seams, a gold-leaf disc in the middle and an ivory blossom (`img/v3-closed-880.webp`). At the tap the gold disc slides off, the four folds open one by one (top, right, left, bottom), and a card with the portrait in a deckle-edged washi mount (`interior-frame`: indigo and ivory torn paper with gold seams and ivory blossoms), the names, "We're getting married" and the date rises out and comes forward; then the home page opens. Sound effects at the tap (`catalog.ts`: seal, paper, slide, chime). With reduced motion on, the opening is skipped and the home page opens. |
 | Pages | README and `interior-design.json` (layout `washi`): Home "an indigo-and-ivory washi composition with square kintsugi photo mounts and torn-paper stationery"; Story "asymmetric washi photo mounts paired with captions, alternating gently from side to side"; Details "a quiet folded-paper programme with gold-repaired margins and a square venue mount"; RSVP "a washi reply letter with indigo type and fine kintsugi details". Reduced motion and printing show all content without animation (README). |
-| Name of the opening | `designs.ts` `DESIGN_COPY`: "Your guests tap the origami." (the word `tools/etsy_upload.py` checks; this listing says "origami"). Since 2026-10-22 the catalogue's preview copy (`PREVIEW_DESIGN_COPY`) starts with the same sentence, so the sales site, the editor's preview tab **Origami** (`lib/panel/state.ts` `themeOpening`) and START HERE ("tap the origami") name the same object (read from the code and tests, not yet seen on the live site). The guest-facing defaults in `theme.json` say "Replay the opening" (`home_replay`, `rsvp_replay`) and "Fold the origami closed" (`envelope_close`) since 2026-10-22, not deployed yet; buyers can rename them under Headings & labels (§11). |
+| Name of the opening | Since the docs/35 redesign (merged 2026-10-23) `designs.ts` `DESIGN_COPY` says "Your guests tap the envelope." (the word `tools/etsy_upload.py` checks; this listing says "folded washi envelope"): the sales site, the editor's preview tab **Envelope** (`lib/panel/state.ts` `themeOpening`) and the theme's own open button ("Open the invitation") name the same object (`tests/g175-openings.test.ts`, `tests/unique-openings.test.ts`; read from the code and tests, not yet seen on the live site). START HERE still names the old object until it is regenerated. |
 | Current platform release | The theme is on production (its demo answers 200). The editor flow (setup, Edit, Guests, Share) was not tried with this design: the start link answers 404 until the design goes live. The shop-wide features in §2 are those of the 21 listing (G154). |
 | Order check (`CLAIM_ORDER_VERIFICATION`) | As in the 21 listing: decided on (K34), but the mode in production was not read (no access to the live settings). The description claims no order check: it says what happens if the editor shows "We are confirming your Etsy order" (Publish opens once the order is confirmed, usually within 24 hours), which is true in every mode (G154, K48). |
 | Questions & answers, RSVP questions | Platform features, the same for every design. **Not tried on the live site** with this design. |
@@ -42,10 +43,10 @@ VERIFY markers come out only after the test is done; if a test fails, delete or 
 
 ## 1. Title
 
-Etsy limit: 140 characters. This title: 118 characters.
+Etsy limit: 140 characters. This title: 123 characters.
 
 ```text
-Kintsugi & Washi Wedding Website with RSVP, Digital Invitation with an Origami Opening, Online Editor, Indigo and Gold
+Kintsugi & Washi Wedding Website with RSVP, Digital Invitation with a Folded Washi Envelope, Online Editor, Indigo and Gold
 ```
 
 ## 2. Description
@@ -54,17 +55,17 @@ Paste from the line below. Section titles in capitals and "•" bullets read wel
 
 ---
 
-A wedding website that unfolds like real origami, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
+A wedding website that unfolds from a folded washi envelope, with online RSVP built in. You fill it in yourself on your phone or computer and share one link with your guests. No Canva, no app, no account.
 
-Ivory washi paper, deep indigo and fine gold seams in the spirit of kintsugi. Your guests tap a folded square of washi with indigo bands, gold seams and an ivory blossom: the gold seal slides off, the four folds open one by one, and a card with your portrait in a deckle-edged washi mount rises out. Then your invitation follows: Home with your names and a square washi portrait, Our Story in washi photo mounts that alternate from side to side, Details as a folded-paper program, and RSVP.
+Indigo washi, rice paper and fine gold seams in the spirit of kintsugi. Your guests tap a square pinwheel packet of indigo washi crossed by gold kintsugi seams, tied with a gold-and-ivory cord round a mended porcelain button: the button turns and lifts away, the cord unwinds, the four indigo flaps unfold one by one onto their gold-flecked insides, and a rice-paper card with your portrait rises up. Then your invitation follows: Home with your portrait in a torn indigo washi mat, Our Story as three moments in torn rice-paper mats, each appearing through a spreading ink bloom, Details with the order of the day under a gold seam, and RSVP.
 
 TRY THE LIVE DEMO
-See the origami unfold on your own phone before you buy (sample names and photos):
+See the washi folds open on your own phone before you buy (sample names and photos):
 https://bkestudio.com/start/demo/kintsugi-washi
 Copy the link into your phone's browser.
 
 WHAT YOU GET
-• Your wedding website in the Kintsugi & Washi design: origami opening, Home, Our Story, Details and RSVP pages
+• Your wedding website in the Kintsugi & Washi design: folded washi envelope opening, Home, Our Story, Details and RSVP pages
 • A private online editor, designed for phone screens and also working on a computer, with a preview of every page
 • Online RSVP: replies, head counts and up to 10 questions of your own (choices, yes/no, short or long answer, number); you choose which fields are required
 • Download every reply as an Excel file (or CSV) in one tap, or connect your own Google Sheet
@@ -94,10 +95,10 @@ WHAT YOU CAN CHANGE
 • RSVP deadline and your reply form: required or optional fields and up to 10 questions of your own
 • The design's headings, labels and buttons, in your own words (for example "You are invited" or "Moments we hold dear")
 • Which optional sections show
-What stays as designed: the artwork, colors, fonts, page layout and the origami animation.
+What stays as designed: the artwork, colors, fonts, page layout and the folding animation.
 
 WHAT YOUR GUESTS SEE
-Your link opens a folded square of washi paper. One tap unfolds it into your pages. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging apps show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
+Your link opens a folded washi envelope tied with a cord. One tap unfolds it into your pages. Guests reply on the RSVP page and add your date to their calendar. They need no app and no account, and an email address is optional. Most messaging apps show a preview card with your names and date. Your website is not listed on Google: only people with your link or QR code can open it.
 
 WHAT YOU NEED
 • A phone or computer with a web browser
@@ -277,7 +278,7 @@ link; one review request per order, the same text for everyone, never with an in
 
 - Rewritten on 2026-10-22 for the rebuilt theme (GPT parts, 2026-10-18/19). The 2026-10-17 text described the interim opening (a paper band sliding off an indigo fold, photos appearing like spreading ink); now an ivory washi fold with indigo bands and gold seams, a gold disc that slides off and four folds that open in turn; washi photo mounts on the pages (layout `washi`). The listing claims no ink effect.
 - Not for sale (`preview`): the demo answers on the live site, the start link does not (404); the price is a proposal.
-- Its own opening object: the title, tags, description and alt texts say "origami" or "folded washi" and never the default object word (`tools/etsy_upload.py` rule). The guests' first view is "a folded square of washi paper". The theme's default guest labels were renamed on 2026-10-22 ("Replay the opening", "Fold the origami closed"); the editor's preview tab still needs a look on the live site (§0, §11).
+- Opening object (2026-10-23): the rebuilt design opens from its own envelope (`designs.ts` "Your guests tap the envelope."); §1–§3 say "folded washi envelope". The §5 images and alt texts and the §6 video still show the old opening until they are re-rendered.
 - Default track First Light (21: Evening Strings).
 - Language line: the guide builder's "latin-ext" sentence, as in START HERE; it matches this theme's real fonts (§0: Shippori Mincho, the script font, has Japanese but no Cyrillic).
 - Images: the 19-image v4 set and the 4:5 hover video are planned (§5, §6) instead of the 9 editorial images and square video of the 21 kit.

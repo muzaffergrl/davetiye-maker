@@ -20,22 +20,19 @@ import etsy_upload as eu  # noqa: E402
 
 NOT_ENVELOPE = {"art-deco-black-tie": "gatefold", "lavender-provence": "pouch", "tropical-destination": "wallet",
                 "enchanted-forest-storybook": "book", "ivory-lace-pearls": "gatefold",
-                "wildflower-meadow-vellum": "sleeve",
-                # G175: designs 22–32 (22 opens from an envelope)
-                "velvet-jewel-box": "box", "grand-theatre-premiere": "curtain", "orient-express-voyage": "wallet",
-                "kintsugi-washi": "origami", "riad-lantern-nights": "door", "maison-patisserie": "parcel",
-                "celestial-observatory": "chart", "azulejo-mosaic": "panel", "sky-lantern-festival": "pouch",
-                "music-box-ballerina": "box"}
+                "wildflower-meadow-vellum": "sleeve"}
+# G175: designs 22–32 opened from their own objects until the docs/35 redesign; since its merge (2026-10-23) all eleven
+# open from an envelope
 # G123's listing language lines (2026-10-16): latin-only font → "latin", all Cyrillic → "cyrillic", else "latin-ext".
 LANGUAGE = {"01": "cyrillic", "02": "latin-ext", "03": "cyrillic", "04": "latin", "05": "latin-ext", "06": "latin",
             "07": "latin-ext", "08": "latin-ext", "09": "latin-ext", "10": "latin-ext", "11": "latin", "12": "latin-ext",
             "13": "latin", "14": "latin-ext", "15": "latin-ext", "16": "latin-ext", "17": "latin-ext", "18": "latin",
             "19": "cyrillic", "20": "latin-ext", "21": "cyrillic",
-            # G175: Google Fonts subsets read on 2026-10-17; 2026-10-22: designs.ts fonts synced with the rebuilt 22–32
-            # themes (22: Italiana is latin only; 28 no longer loads it; 32: the website fonts have Cyrillic, its printable
-            # invitation's fonts do not, PRINT_FONTS)
-            "22": "latin", "23": "latin-ext", "24": "latin-ext", "25": "latin-ext", "26": "latin-ext",
-            "27": "latin-ext", "28": "latin-ext", "29": "latin-ext", "30": "latin-ext", "31": "latin-ext", "32": "latin-ext",
+            # G175: Google Fonts subsets read on 2026-10-17; 2026-10-23: the fonts of the docs/35 redesign (designs.ts =
+            # the fonts each rebuilt theme loads; 28: Italiana is latin only; Cinzel, Limelight, Allura, Ballet … have no
+            # Cyrillic)
+            "22": "latin-ext", "23": "latin-ext", "24": "latin-ext", "25": "latin-ext", "26": "latin-ext",
+            "27": "latin-ext", "28": "latin", "29": "latin-ext", "30": "latin-ext", "31": "latin-ext", "32": "latin-ext",
             # designs 33–48: fonts.googleapis.com/css2 read on 2026-10-22 (34 Prata, 35 Rouge Script, 37 Federant, 41 Arapey,
             # 45 Rochester and Lustria, 48 Goudy Bookletter 1911 are latin only)
             "33": "latin-ext", "34": "latin", "35": "latin", "36": "latin-ext", "37": "latin", "38": "latin-ext",
@@ -113,12 +110,13 @@ def test_labels():
     # G121: the preview tab is computed (openingTabLabel), so "Book" passes for the book design only through that rule
     book = b.fill(b.template(), b.values("enchanted-forest-storybook"))
     assert "**Book** is the opening page" in book and b.label_problems(book, "enchanted-forest-storybook") == []
-    # G175: the new opening objects of 22–32 the same way (26's folded paper is the "Origami" tab in the panel)
-    for theme, tab in (("kintsugi-washi", "Origami"), ("grand-theatre-premiere", "Curtain"), ("azulejo-mosaic", "Panel"),
+    # G175 → docs/35 (merged 2026-10-23): the rebuilt 22–32 all open from an envelope; their guides name the Envelope tab
+    # and none of the old objects' tabs (26's "Origami", 24's "Curtain" …)
+    for theme, old in (("kintsugi-washi", "Origami"), ("grand-theatre-premiere", "Curtain"), ("azulejo-mosaic", "Panel"),
                        ("celestial-observatory", "Chart"), ("maison-patisserie", "Parcel"), ("sky-lantern-festival", "Pouch")):
         md = b.fill(b.template(), b.values(theme))
-        assert f"**{tab}** is the opening page" in md and b.label_problems(md, theme) == [], theme
-        assert "envelope" not in md.lower(), theme
+        assert "**Envelope** is the opening page" in md and b.label_problems(md, theme) == [], theme
+        assert f"**{old}**" not in md, theme
 
 
 def test_pdf(tmp: Path):
