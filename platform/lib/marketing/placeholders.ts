@@ -95,7 +95,12 @@ export function launchProblems(cfg: MarketingConfig, env: Record<string, string 
   // K42 services are optional: only one with a real Etsy listing must carry a real price.
   for (const sv of cfg.services ?? []) {
     if (realEtsyUrl(sv.etsyListingUrl) && !realPrice(sv.price)) out.push(`services.${sv.id}.price is not a real price`);
+    // Owner 2026-10-23: a service offered to buyers needs its published Etsy listing.
+    if (sv.onSale && !realEtsyUrl(sv.etsyListingUrl)) out.push(`services.${sv.id} is on sale without a real Etsy listing URL`);
   }
+  // G961 (K25): the KVKK notice names the data controller; until decided it says "on request by email" (docs/39).
+  if (!real(cfg.legal?.controllerName)) out.push('legal.controllerName is not set: the data controller’s legal name (KVKK notice, terms; docs/39)');
+  if (!real(cfg.legal?.postalAddress)) out.push('legal.postalAddress is not set: the data controller’s postal address (KVKK notice, terms; docs/39)');
   const live = cfg.designs.filter((d) => d.status === 'live');
   if (!live.length) out.push('no live design');
   for (const d of live) out.push(...designLaunchProblems(d));

@@ -1,6 +1,8 @@
 // K42 (G130): the two paid extras on /pricing — "We set it up for you" and custom design (docs/23_EK_HIZMETLER.md).
 // Each is its own Etsy listing (lib/marketing/config.ts `services`). Until a listing is live the card says
 // "Coming soon on Etsy" (EtsyButton); a price shows only when it is real (no placeholder text reaches the page).
+// Owner 2026-10-23: only services marked `onSale` in config are shown; the listings stay Etsy drafts, so today the
+// section is hidden (prices unchanged).
 import { MARKETING, type ServiceCommerce } from '../../lib/marketing/config.ts';
 import { enMarket, msg, type Market } from '../../lib/marketing/i18n.ts';
 import { realPrice } from '../../lib/marketing/placeholders.ts';
@@ -38,7 +40,8 @@ function ServicePrice({ service, m }: { service: ServiceCommerce; m: Market }) {
   );
 }
 
-export function ExtraServices({ services = MARKETING.services, m = enMarket }: { services?: ServiceCommerce[]; m?: Market }) {
+export function ExtraServices({ services: all = MARKETING.services, m = enMarket }: { services?: ServiceCommerce[]; m?: Market }) {
+  const services = all.filter((sv) => sv.onSale === true);
   if (!services.length) return null;
   const { t } = m;
   return (
