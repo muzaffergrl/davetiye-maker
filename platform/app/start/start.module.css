@@ -585,6 +585,11 @@
   gap: var(--s-3);
 }
 
+/* "You can copy this link again later…" sat right under the buttons (.saveBox p has no top margin) */
+.saveBox .actions + .small {
+  margin-top: var(--s-3);
+}
+
 .copyStatus {
   min-height: 1.4em;
   margin: var(--s-2) 0 0 !important;

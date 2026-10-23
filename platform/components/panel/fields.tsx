@@ -134,6 +134,7 @@ export function TextField(
         <textarea
           {...common}
           rows={rows}
+          style={{ '--rows': rows } as React.CSSProperties}
           className={styles.textarea}
           onChange={(e) => {
             setTyping(true);

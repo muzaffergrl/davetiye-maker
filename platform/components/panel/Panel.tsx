@@ -1049,10 +1049,11 @@ function PanelApp({
           </p>
         ) : null}
         {/* Bar (comps u2_*): logo · [back + page title] · names (where there is room) · save state · Preview · Publish.
-            A wide Publish button leaves no room for the full logo on a phone: the small monogram stands in (Brand.tsx). */}
+            A Publish button or the "Live" badge leaves no room for the full logo on a phone: the small monogram stands
+            in (Brand.tsx); the full logo only where the bar's end is empty (Home while live, the changes bar below). */}
         <header className={styles.appBar} inert={(previewOpen && !wide) || undefined}>
           <div className={styles.appBarInner}>
-            <BrandLogo compact={!liveCalm && !showChanges} className={cx(styles.appBarBrand, sectionPage && styles.appBarBrandSection)} />
+            <BrandLogo compact={publishControl !== null} className={cx(styles.appBarBrand, sectionPage && styles.appBarBrandSection)} />
             {sectionPage ? (
               <>
                 <button type="button" className={styles.backBtn} onClick={back} aria-label={t('Back to Edit')}>
@@ -1072,7 +1073,10 @@ function PanelApp({
             </p>
             <div className={styles.appBarActions}>
               <SaveIndicator state={saveState} message={panel.saveMessage} onSaveNow={() => void panel.flush()} compact />
-              {!sectionPage && !shopUntil ? <IconButton icon={MessageCircle} label={t('Chat with us')} onClick={() => setDialog({ kind: 'chat' })} data-open-support /> : null}
+              {!sectionPage && !shopUntil ? (
+                // under 360 px the bar keeps its room for Publish / "Live"; "Chat with us" stays on Home and in Help
+                <IconButton icon={MessageCircle} label={t('Chat with us')} onClick={() => setDialog({ kind: 'chat' })} className={publishControl !== null ? styles.barOptional : undefined} data-open-support />
+              ) : null}
               {!wide ? <IconButton icon={Eye} label={t('Preview')} onClick={() => (sectionPage ? pagePreview(sectionPage) : openPreview(null))} data-open-preview /> : null}
               {publishControl}
             </div>

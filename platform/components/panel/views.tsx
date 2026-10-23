@@ -294,9 +294,20 @@ function StatusCard({
   // "Live" on Home); a short sentence and, when live, the link under it. The progress card below stays the anchor.
   // A short action ("Share", "Publish") sits beside the label; a long one ("Continue setup · Step 2 of 3") gets its own row.
   const inline = action !== null && action.label.length <= 16;
+  // "Continue setup · Step 1 of 3": on a phone the two parts take a line each, without the dot (it was left at the
+  // start of the second line, "· Step 1 of 3"); on a wider screen one line with the dot.
+  const dot = action ? action.label.indexOf(' · ') : -1;
   const actionButton = action ? (
     <Button variant={action.variant} icon={action.icon} block={!inline} onClick={action.run} className={inline ? styles.statusAction : undefined} data-status-action>
-      {action.label}
+      {dot > 0 ? (
+        <>
+          <span className={styles.labelPart}>{action.label.slice(0, dot)}</span>
+          <span className={styles.labelDot}> · </span>
+          <span className={styles.labelPart}>{action.label.slice(dot + 3)}</span>
+        </>
+      ) : (
+        action.label
+      )}
     </Button>
   ) : null;
   return (
