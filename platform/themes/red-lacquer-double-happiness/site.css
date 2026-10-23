@@ -104,9 +104,10 @@ to{transform:translateX(120vw)}}
 .opening .names{font-size:clamp(52px,15vw,72px)}
 .opening-foot{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:22px;min-height:84px;position:relative;z-index:9}
 .opening-date{font-size:11px}
-/* the closed envelope: 0.66 wide per high (manifest stage); every layer in % of it */
-.stage{--obj:min(62vw,calc(46svh * .66),300px);position:relative;width:var(--obj);margin:24px auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent;z-index:5}
-.opening:has(.names.long-names) .stage{--obj:min(54vw,calc(40svh * .66),300px)}
+/* the closed envelope: --env-ratio wide per high (0.66 asked; parts.css: the GPT layers' measured shape, manifest stage);
+   every layer in % of it */
+.stage{--env-ratio:.66;--obj:min(62vw,calc(46svh * var(--env-ratio)),300px);position:relative;width:var(--obj);margin:24px auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent;z-index:5}
+.opening:has(.names.long-names) .stage{--obj:min(54vw,calc(40svh * var(--env-ratio)),300px)}
 .envelope{position:relative;width:100%;aspect-ratio:.66;--tex:calc(var(--obj) * 1.5);perspective:1000px}
 .envelope>*{position:absolute}
 .stage::before{content:"";position:absolute;inset:3% -2% -4%;z-index:0;background:radial-gradient(closest-side,#16020399,#0000);pointer-events:none} /* contact shade on the lacquer (light only) */
@@ -117,9 +118,10 @@ to{transform:translateX(120vw)}}
 .card.tight .card-photo{width:42%}
 .card-photo .ph-mark{font-size:8px}
 .card-photo .ty-decor,.card-photo .ty-decor img{display:block;width:100%;height:100%;object-fit:cover}
-.card-line{margin-top:7%;font-size:7.5px;letter-spacing:.22em;color:var(--gold-ink)}
-.card-names{font:400 clamp(18px,15cqw,40px)/1.15 var(--script);color:var(--cinnabar);overflow-wrap:anywhere;text-wrap:balance;margin-top:1%}
-.card-date{font-size:7.5px;margin-top:3%;color:var(--gold-ink)}
+/* the card's texts are sized by the card (cqw): the same layout at every envelope size, so long names fit at all */
+.card-line{margin-top:7%;font-size:3.6cqw;letter-spacing:.22em;color:var(--gold-ink)}
+.card-names{font:400 13cqw/1.15 var(--script);color:var(--cinnabar);overflow-wrap:anywhere;text-wrap:balance;margin-top:1%}
+.card-date{font-size:3.6cqw;margin-top:3%;color:var(--gold-ink)}
 /* the two paper-cut windows over the card (outer red, inner gold), each in two halves on their outer edges */
 .veil{position:absolute;top:0;bottom:0;width:50%;z-index:3;backface-visibility:hidden}
 .veil.l{left:0;transform-origin:0 50%}

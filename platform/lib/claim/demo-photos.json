@@ -8,6 +8,13 @@
       "story_3": "/demo/art-deco-black-tie/story_3-804w.webp",
       "venue": "/demo/art-deco-black-tie/venue-1280w.webp"
     },
+    "art-nouveau-lily": {
+      "hero_portrait": "/demo/art-nouveau-lily/hero_portrait-1060w.webp",
+      "story_1": "/demo/art-nouveau-lily/story_1-1060w.webp",
+      "story_2": "/demo/art-nouveau-lily/story_2-1060w.webp",
+      "story_3": "/demo/art-nouveau-lily/story_3-1060w.webp",
+      "venue": "/demo/art-nouveau-lily/venue-1280w.webp"
+    },
     "azulejo-mosaic": {
       "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
       "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
@@ -113,12 +120,26 @@
       "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
       "venue": "/demo/blush-garden-rose/venue-1280w.webp"
     },
+    "highland-tartan-thistle": {
+      "hero_portrait": "/demo/highland-tartan-thistle/hero_portrait-1122w.webp",
+      "story_1": "/demo/highland-tartan-thistle/story_1-1122w.webp",
+      "story_2": "/demo/highland-tartan-thistle/story_2-1122w.webp",
+      "story_3": "/demo/highland-tartan-thistle/story_3-1122w.webp",
+      "venue": "/demo/highland-tartan-thistle/venue-1280w.webp"
+    },
     "ivory-lace-pearls": {
       "hero_portrait": "/demo/ivory-lace-pearls/hero_portrait-1024w.webp",
       "story_1": "/demo/ivory-lace-pearls/story_1-1024w.webp",
       "story_2": "/demo/ivory-lace-pearls/story_2-1024w.webp",
       "story_3": "/demo/ivory-lace-pearls/story_3-1024w.webp",
       "venue": "/demo/ivory-lace-pearls/venue-1280w.webp"
+    },
+    "ivory-pearl-atelier": {
+      "hero_portrait": "/demo/ivory-pearl-atelier/hero_portrait-1024w.webp",
+      "story_1": "/demo/ivory-pearl-atelier/story_1-1024w.webp",
+      "story_2": "/demo/ivory-pearl-atelier/story_2-1024w.webp",
+      "story_3": "/demo/ivory-pearl-atelier/story_3-1024w.webp",
+      "venue": "/demo/ivory-pearl-atelier/venue-1280w.webp"
     },
     "kintsugi-washi": {
       "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
@@ -140,6 +161,13 @@
       "story_2": "/demo/blush-garden-rose/story_2-1024w.webp",
       "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
       "venue": "/demo/blush-garden-rose/venue-1280w.webp"
+    },
+    "marigold-mehndi": {
+      "hero_portrait": "/demo/marigold-mehndi/hero_portrait-1122w.webp",
+      "story_1": "/demo/marigold-mehndi/story_1-1122w.webp",
+      "story_2": "/demo/marigold-mehndi/story_2-1122w.webp",
+      "story_3": "/demo/marigold-mehndi/story_3-1122w.webp",
+      "venue": "/demo/marigold-mehndi/venue-1280w.webp"
     },
     "mediterranean-lemon": {
       "hero_portrait": "/demo/mediterranean-lemon/hero_portrait-1024w.webp",
@@ -204,6 +232,20 @@
       "story_3": "/demo/painted-lily-pond/story_3-1086w.webp",
       "venue": "/demo/painted-lily-pond/venue-1280w.webp"
     },
+    "papel-picado-fiesta": {
+      "hero_portrait": "/demo/papel-picado-fiesta/hero_portrait-1122w.webp",
+      "story_1": "/demo/papel-picado-fiesta/story_1-1122w.webp",
+      "story_2": "/demo/papel-picado-fiesta/story_2-1122w.webp",
+      "story_3": "/demo/papel-picado-fiesta/story_3-1122w.webp",
+      "venue": "/demo/papel-picado-fiesta/venue-1280w.webp"
+    },
+    "red-lacquer-double-happiness": {
+      "hero_portrait": "/demo/red-lacquer-double-happiness/hero_portrait-1254w.webp",
+      "story_1": "/demo/red-lacquer-double-happiness/story_1-1254w.webp",
+      "story_2": "/demo/red-lacquer-double-happiness/story_2-1254w.webp",
+      "story_3": "/demo/red-lacquer-double-happiness/story_3-1254w.webp",
+      "venue": "/demo/red-lacquer-double-happiness/venue-1280w.webp"
+    },
     "riad-lantern-nights": {
       "hero_portrait": "/demo/blush-garden-rose/hero_portrait-1024w.webp",
       "story_1": "/demo/blush-garden-rose/story_1-1024w.webp",
@@ -267,6 +309,13 @@
       "story_3": "/demo/blush-garden-rose/story_3-1024w.webp",
       "venue": "/demo/blush-garden-rose/venue-1280w.webp"
     },
+    "victorian-glasshouse": {
+      "hero_portrait": "/demo/victorian-glasshouse/hero_portrait-1122w.webp",
+      "story_1": "/demo/victorian-glasshouse/story_1-1122w.webp",
+      "story_2": "/demo/victorian-glasshouse/story_2-1122w.webp",
+      "story_3": "/demo/victorian-glasshouse/story_3-1122w.webp",
+      "venue": "/demo/victorian-glasshouse/venue-1280w.webp"
+    },
     "vintage-airmail-love-letter": {
       "hero_portrait": "/demo/vintage-airmail-love-letter/hero_portrait-1024w.webp",
       "story_1": "/demo/vintage-airmail-love-letter/story_1-1024w.webp",
@@ -287,13 +336,6 @@
       "story_2": "/demo/winter-evergreen/story_2-1024w.webp",
       "story_3": "/demo/winter-evergreen/story_3-1024w.webp",
       "venue": "/demo/winter-evergreen/venue-1280w.webp"
-    },
-    "ivory-pearl-atelier": {
-      "hero_portrait": "/demo/ivory-pearl-atelier/hero_portrait-1024w.webp",
-      "story_1": "/demo/ivory-pearl-atelier/story_1-1024w.webp",
-      "story_2": "/demo/ivory-pearl-atelier/story_2-1024w.webp",
-      "story_3": "/demo/ivory-pearl-atelier/story_3-1024w.webp",
-      "venue": "/demo/ivory-pearl-atelier/venue-1280w.webp"
     }
   }
 }

@@ -92,16 +92,20 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .page-opening{padding-bottom:0;background:radial-gradient(ellipse at 50% 40%,#46553a99 0,#20291d00 64%) fixed,var(--ground) url(img/ground-640.webp) 0 0/640px repeat}
 .skip{position:fixed;top:calc(6px + env(safe-area-inset-top));right:10px;z-index:20;padding-inline:14px;background:#151b13b3;border-radius:100px;text-decoration:none}
 .opening{position:relative;min-height:100svh;max-width:760px;margin:auto;padding:50px 20px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:clip}
-.opening>.hills{position:absolute;left:0;right:0;bottom:0;height:62%;pointer-events:none;opacity:.9}
+/* the painted hills (GPT W2.4, an opaque picture with a pale sky): their top edge fades into the moss ground, and they
+   are dimmed so the cream date and hint read on them (light only) */
+.opening>.hills{position:absolute;left:0;right:0;bottom:0;height:62%;pointer-events:none;opacity:.9;filter:brightness(.68) saturate(.9);-webkit-mask-image:linear-gradient(#0000,#000 30%);mask-image:linear-gradient(#0000,#000 30%)}
 .opening-heading{position:relative;z-index:9;max-width:100%}
 .opening-heading>.eyebrow{margin-bottom:2px}
 .opening-heading>.eyebrow+.eyebrow{margin-bottom:8px;color:var(--cream)}
 .opening .names{font-size:clamp(50px,14.5vw,70px)}
 .opening-foot{position:relative;z-index:9;margin-top:22px;display:flex;flex-direction:column;align-items:center;gap:6px}
 .opening-date{font-size:12px;color:var(--cream)}
-/* the envelope: 0.9 wide per high (manifest stage); back, card, front pocket, flap, strap and buckle in % of it */
-.stage{--obj:min(70vw,calc(40svh * .9),320px);position:relative;width:var(--obj);margin:26px auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent;z-index:5}
-.opening:has(.names.long-names) .stage{--obj:min(62vw,calc(34svh * .9),300px)}
+.opening-foot .eyebrow{text-shadow:0 1px 2px #151b13,0 0 10px #151b13cc,0 0 18px #151b1399} /* halo over the misty hills (light only) */
+/* the envelope: --env-ratio wide per high (0.9 asked; parts.css: the GPT layers' measured shape, manifest stage); back,
+   card, front pocket, flap, strap and buckle in % of it */
+.stage{--env-ratio:.9;--obj:min(70vw,calc(40svh * var(--env-ratio)),320px);position:relative;width:var(--obj);margin:26px auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent;z-index:5}
+.opening:has(.names.long-names) .stage{--obj:min(62vw,calc(34svh * var(--env-ratio)),300px)}
 .satchel{position:relative;width:100%;aspect-ratio:.9;perspective:1100px;--tex:calc(var(--obj) * 1.3)}
 .satchel>*{position:absolute}
 .stage::before{content:"";position:absolute;inset:6% -2% -5%;z-index:0;background:radial-gradient(closest-side,#000a,#0000);pointer-events:none} /* contact shade (light only) */
@@ -113,9 +117,10 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .card.tight .card-photo{width:32%}
 .card-photo .ph-mark{font-size:8px}
 .card-photo .ty-decor,.card-photo .ty-decor img{display:block;width:100%;height:100%;object-fit:cover}
-.card-line{margin-top:7%;font-size:8px;letter-spacing:.2em;color:var(--brass-ink)}
-.card-names{font:400 clamp(18px,15cqw,40px)/1.15 var(--script);color:var(--moss-ink);overflow-wrap:anywhere;text-wrap:balance;margin-top:1%}
-.card-date{font-size:8px;margin-top:3%;color:var(--brass-ink)}
+/* the card's texts are sized by the card (cqw): the same layout at every envelope size, so long names fit at all */
+.card-line{margin-top:4%;font-size:3.6cqw;letter-spacing:.2em;color:var(--brass-ink)}
+.card-names{font:400 11cqw/1.12 var(--script);color:var(--moss-ink);overflow-wrap:anywhere;text-wrap:balance;margin-top:1%}
+.card-date{font-size:3.6cqw;margin-top:2%;color:var(--brass-ink)}
 .env-front{left:0;top:34%;width:100%;height:66%;z-index:4;background:var(--heather) url(img/wool-640.webp) 0 0/var(--tex) repeat;filter:drop-shadow(0 -2px 3px #0006)}
 /* the straight flap on its top fold: the outer wool face, and the darker lining on its back */
 .flap{left:0;top:0;width:100%;height:56%;z-index:5;transform-origin:50% 0;transform-style:preserve-3d}

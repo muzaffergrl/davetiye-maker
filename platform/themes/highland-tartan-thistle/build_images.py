@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Highland Tartan & Thistle (35) — GPT sources → img/ (docs/11 §5.4; tools/tema_build.py). Interim build (G184).
+"""Highland Tartan & Thistle (35) — GPT sources → img/ (docs/11 §5.4; tools/tema_build.py). G184.
 
-The design's own PAKET 5 parts are ordered in collections/35_Highland_Tartan_Thistle/assets/gpt/GPT_PROMPTS.md and do not
-exist yet. Until they arrive the theme is built like Celestial Observatory (G168): every picture is cut, toned, scaled
-or blurred from GPT pixels that already exist — nothing is drawn (K21, docs/11 §5.7). There is no tartan among them, so
-the interim wool is a plain woven linen toned heather (no stripe is drawn to fake a tartan). Interim sources (no motif):
+Since 2026-10-22 every picture is the design's own PAKET 5 part (collections/35_Highland_Tartan_Thistle/assets/gpt/
+GPT_PROMPTS.md), cut to its alpha box, keyed or scaled — nothing is drawn (K21, docs/11 §5.7). The interim sources below
+stay only as the look of a part that is missing (none is):
 
   wool         collections/09_Lavender_Provence/assets/gpt/parts/bg_tile.png     plain woven linen, toned heather / moss
   moss ground  collections/17_Emerald_Gold_Estate/assets/gpt/parts/bg_tile.png   plain green velvet, toned dark moss
@@ -44,6 +43,17 @@ asks for a picture the build did not make; nothing is drawn as a stand-in (K21):
 Outputs without parts (img/): wool, ground, paper, leather, brass, mist, placeholders ph_oval / ph_wide, og montage of
 the closed envelope on the moss ground, favicon.
 
+The envelope (eye check 2026-10-22): the three layers were asked on one canvas in one place, cut by the asked boxes and
+stretched over them — but GPT drifted: the pocket came 2.5 % narrower than the back and stopped 3 % above its foot (the
+back's dark lining showed under it), the flap started 5 % below the back's top (the back's tartan edge showed above it).
+The strap came 0.13:1 instead of 0.18:1 and was squashed into its box. As in designs 39–48 each layer is cut to its alpha
+box and laid by its measured edges: the back's alpha box is the envelope; the pocket spans its width with its foot on
+the back's foot; the flap spans the width from the fold at its own height; the strap keeps its own proportions (its cut
+end at the top edge, as if it ran over it); the buckle keeps its own and sits on the flap's lower edge; the card keeps
+its own inside the pocket. manifest `stage` (the asked boxes in `stage_asked`) and parts.css carry the numbers. Photo
+windows: GPT left the middle of the oval #00FF00 window of the locket rim transparent inside a soft green rim — the
+window = the green + the hole it encloses, cleared, the spill round it removed.
+
   python3 platform/themes/highland-tartan-thistle/build_images.py
 """
 from __future__ import annotations
@@ -53,7 +63,7 @@ import sys
 from pathlib import Path
 
 import numpy as np
-from PIL import Image, ImageEnhance, ImageFilter
+from PIL import Image, ImageDraw, ImageEnhance, ImageFilter
 
 THEME = Path(__file__).resolve().parent
 ROOT = THEME.parents[2]
@@ -89,6 +99,12 @@ FLAP = (0, 0, 100, 56)            # the straight flap on its top fold
 STRAP = (42, -5, 16, 86)          # the leather strap (runs over the top edge)
 BUCKLE = (36.9, 47.5, 26.2, 14.6) # the buckle on the strap (in % of the envelope)
 CARD = (9, 7, 82, 86)             # the card in the pocket (0.858:1)
+# measured envelope (the GPT layers laid by their alpha boxes)
+FLAP_FOLD = 0                     # the flap's fold on the envelope's top edge
+STRAP_W, STRAP_TOP = 12.5, -1     # strap width (% of the envelope width); its cut end just over the top edge
+BUCKLE_W = 20                     # buckle width (% of the envelope width), centred on the strap at the flap's lower edge
+CARD_W = 80                       # the card's width in the pocket (% of the envelope width), its own proportions
+BUDGET = 2_500_000                # theme folder (docs/11 §6 allows 3 MB; the 39–48 wave keeps ≤ 2.5 MB)
 LOCKET = "4/5"                    # oval photo window (aspect of every locket)
 
 
@@ -126,19 +142,48 @@ def square(im: Image.Image) -> Image.Image:
 
 
 def green_window(im: Image.Image):
-    """#00FF00 window of a part: (RGBA with the window + 2 px fringe made transparent, (L, T, W, H) % of the image) or
-    (None, None) when the part has no green window."""
+    """The #00FF00 window of a framed part: (RGBA with the window cleared, (L, T, W, H) % of the image) or (None, None).
+
+    The window = the green pixels + the transparent hole they enclose (GPT left the middle of the locket rim's oval
+    window transparent inside a soft green rim): flood-filled from the green pixel nearest the green box's centre,
+    cleared with a 2 px margin, with any other spot of key green; the spill in a 20 px ring round them is neutralised
+    (green → the mean of red and blue). These frames have no green of their own."""
     c = np.asarray(im).copy()
     rgb = c[..., :3].astype(np.int16)
-    green = (rgb[..., 1] > 150) & (rgb[..., 1] - np.maximum(rgb[..., 0], rgb[..., 2]) > 80) & (c[..., 3] > 128)
+    green = (rgb[..., 1] > 120) & (rgb[..., 1] - np.maximum(rgb[..., 0], rgb[..., 2]) > 60) & (c[..., 3] > 40)
     ys, xs = np.nonzero(green)
-    if not len(ys):
+    if len(ys) < 256:
         return None, None
     h, w = c.shape[:2]
-    x0, y0, x1, y1 = xs.min(), ys.min(), xs.max() + 1, ys.max() + 1
-    m = Image.fromarray((green * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(5))
-    c[..., 3] = np.where(np.asarray(m) > 0, 0, c[..., 3])
+    free = ((c[..., 3] < 128) | green).astype(np.uint8) * 255
+    pad = Image.fromarray(np.pad(free, 1, constant_values=255), "L").copy()   # (a copy: floodfill on a numpy view is lost)
+    ImageDraw.floodfill(pad, (0, 0), 100)
+    enclosed = np.asarray(pad)[1:-1, 1:-1] == 255
+    cx, cy = (xs.min() + xs.max()) / 2, (ys.min() + ys.max()) / 2
+    k = int(np.argmin((xs - cx) ** 2 + (ys - cy) ** 2))
+    if not enclosed[ys[k], xs[k]]:
+        return None, None
+    lab = Image.fromarray((enclosed * 255).astype(np.uint8), "L").copy()
+    ImageDraw.floodfill(lab, (int(xs[k]), int(ys[k])), 50)
+    win = np.asarray(lab) == 50
+    wy, wx = np.nonzero(win)
+    x0, y0, x1, y1 = wx.min(), wy.min(), wx.max() + 1, wy.max() + 1
+    key = win | ((rgb[..., 1] > 140) & (rgb[..., 1] - np.maximum(rgb[..., 0], rgb[..., 2]) > 80) & (c[..., 3] > 40))
+    grown = np.asarray(Image.fromarray((key * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(5))) > 0
+    c[..., 3] = np.where(grown, 0, c[..., 3])
+    ring = np.asarray(Image.fromarray((key * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(41))) > 0
+    rgb = c[..., :3].astype(np.int16)
+    spill = ring & (rgb[..., 1] > np.maximum(rgb[..., 0], rgb[..., 2]) + 4)
+    c[..., 1] = np.where(spill, ((rgb[..., 0] + rgb[..., 2]) // 2).clip(0, 255), c[..., 1]).astype(np.uint8)
     return Image.fromarray(c, "RGBA"), (100 * x0 / w, 100 * y0 / h, 100 * (x1 - x0) / w, 100 * (y1 - y0) / h)
+
+
+def alpha_box(im: Image.Image, esik: int = 8):
+    return tb.alfa_kutusu(np.asarray(im)[..., 3], esik=esik)
+
+
+def r2(v: float) -> float:
+    return round(float(v), 2)
 
 
 def brass_plate() -> Image.Image:
@@ -166,9 +211,28 @@ def mist_bank(src: Image.Image) -> Image.Image:
     return im.filter(ImageFilter.GaussianBlur(6))
 
 
-def envelope(wool: Image.Image, leather: Image.Image, brass: Image.Image, h: int, got: dict) -> Image.Image:
+def envelope(wool: Image.Image, leather: Image.Image, brass: Image.Image, h: int, got: dict, stage: dict | None = None) -> Image.Image:
     """The closed envelope as the page shows it: the wool pocket and flap (GPT parts, or the toned wool), the strap
-    (GPT, or the toned leather) and the buckle (GPT, or the brass crop)."""
+    (GPT, or the toned leather) and the buckle (GPT, or the brass crop). With the measured stage every GPT layer sits
+    in its measured box."""
+    if stage and "front" in stage:
+        w = round(h * stage["aspect"])
+        o = 40
+        canvas = Image.new("RGBA", (w + 2 * o, h + 2 * o), (0, 0, 0, 0))
+
+        def put(im, b):
+            x0, y0 = round(w * b[0] / 100), round(h * b[1] / 100)
+            bw, bh = max(1, round(w * b[2] / 100)), max(1, round(h * b[3] / 100))
+            canvas.alpha_composite(im.resize((bw, bh), Image.LANCZOS), (o + x0, max(0, o + y0)))
+
+        for key, b in (("envelope_back", stage["back"]), ("envelope_front", stage["front"]), ("flap", stage["flap"])):
+            put(got[key], b)
+        if "strap" in stage:
+            put(got["strap"], stage["strap"])
+            sl, st, sw, sh = stage["strap"]
+            bl, bt, bw_, bh_ = stage["buckle_in_strap"]
+            put(got["buckle"], (sl + sw * bl / 100, st + sh * bt / 100, sw * bw_ / 100, sh * bh_ / 100))
+        return canvas
     w = round(h * STAGE)
     o = 40
     canvas = Image.new("RGBA", (w + 2 * o, h + 2 * o), (0, 0, 0, 0))
@@ -214,27 +278,67 @@ def optional_parts(manifest: dict) -> tuple[list[str], dict]:
         f = manifest["hills"]["files"][0]["file"]
         css.append(f".opening>.hills{{display:block;background:url(img/{f}) 50% 100%/cover no-repeat}}")
 
-    # the envelope layers share one canvas of the stage's ratio, each drawn in its own place (GPT_PROMPTS.md "Envelope
-    # geometry"): the canvas is cut to the layer's box (manifest stage) and stretched over that box
-    for name, out, size, sel, b in (("envelope_back", "env_back", 760, ".env-back", (0, 0, 100, 100)),
-                                    ("envelope_front", "env_front", 760, ".env-front", FRONT),
-                                    ("flap", "flap", 760, ".flap::before", FLAP)):
-        p = part(name)
-        if p is not None:
-            W, H = p.size
-            p = p.crop((round(W * b[0] / 100), round(H * b[1] / 100), round(W * (b[0] + b[2]) / 100), round(H * (b[1] + b[3]) / 100)))
-            got[name] = p
-            tb.webp(p, out, [size], 84, manifest, out=OUT)
+    # the envelope: every layer cut to its alpha box and laid by its measured edges (the back's alpha box = the envelope)
+    back, front, flap, strap, buckle = (part(n) for n in ("envelope_back", "envelope_front", "flap", "strap", "buckle"))
+    box_css = lambda b: f"left:{pct(b[0])}%;top:{pct(b[1])}%;width:{pct(b[2])}%;height:{pct(b[3])}%"  # noqa: E731
+    if back is not None and front is not None and flap is not None:
+        got["envelope_back"] = back.crop(alpha_box(back))
+        got["envelope_front"] = front.crop(alpha_box(front))
+        got["flap"] = flap.crop(alpha_box(flap))
+        bw, bh = got["envelope_back"].size
+        aspect = bw / bh
+        hgt = lambda im: 100 * (im.height * bw / im.width) / bh   # noqa: E731  (at the envelope's width, % of its height)
+        front_h, flap_h = hgt(got["envelope_front"]), hgt(got["flap"])
+        stage = {"aspect": round(aspect, 4), "back": [0, 0, 100, 100], "front": [0, r2(100 - front_h), 100, r2(front_h)],
+                 "flap": [0, FLAP_FOLD, 100, r2(flap_h)]}
+        if strap is not None and buckle is not None:
+            got["strap"], got["buckle"] = trim(strap), trim(buckle)
+            sh = STRAP_W * got["strap"].height / got["strap"].width * aspect       # % of the height
+            stage["strap"] = [r2(50 - STRAP_W / 2), STRAP_TOP, STRAP_W, r2(sh)]
+            bh_ = BUCKLE_W * got["buckle"].height / got["buckle"].width * aspect   # % of the height
+            edge = FLAP_FOLD + flap_h                                              # the flap's lower edge
+            # the buckle in % of the strap box (it is a child of .strap and leaves with it)
+            stage["buckle_in_strap"] = [r2(50 - 50 * BUCKLE_W / STRAP_W), r2(100 * (edge - bh_ / 2 - STRAP_TOP) / sh),
+                                        r2(100 * BUCKLE_W / STRAP_W), r2(100 * bh_ / sh)]
+        stage["_note"] = ("% of the closed envelope (left, top, width, height), measured on the GPT layers' alpha boxes; "
+                          "buckle_in_strap in % of the strap box")
+        manifest["stage_measured"] = stage
+        for name, out, size, sel in (("envelope_back", "env_back", 760, ".env-back"), ("envelope_front", "env_front", 760, ".env-front"),
+                                     ("flap", "flap", 760, ".flap::before")):
+            tb.webp(got[name], out, [size], 84, manifest, out=OUT)
             f = manifest[out]["files"][0]["file"]
             css.append(f"{sel}{{background:url(img/{f}) 0 0/100% 100% no-repeat;filter:drop-shadow(0 2px 3px #0007)}}")
-    for name, out, size, sel in (("strap", "strap", 200, ".strap"), ("buckle", "buckle", 320, ".buckle")):
-        p = part(name)
-        if p is not None:
-            p = trim(p)
-            got[name] = p
-            tb.webp(p, out, [size], 84, manifest, out=OUT)
-            f = manifest[out]["files"][0]["file"]
-            css.append(f"{sel}{{background:url(img/{f}) 0 0/100% 100% no-repeat}}")
+        css.append(f".stage{{--env-ratio:{stage['aspect']}}}")
+        css.append(f".satchel{{aspect-ratio:{stage['aspect']}}}")
+        css.append(f".satchel>.env-front{{{box_css(stage['front'])}}}")
+        css.append(f".satchel>.flap{{{box_css(stage['flap'])}}}")
+        if "strap" in stage:
+            for name, out, size, sel in (("strap", "strap", 200, ".strap"), ("buckle", "buckle", 320, ".buckle")):
+                tb.webp(got[name], out, [size], 84, manifest, out=OUT)
+                f = manifest[out]["files"][0]["file"]
+                css.append(f"{sel}{{background:url(img/{f}) 0 0/100% 100% no-repeat}}")
+            css.append(f".satchel>.strap{{{box_css(stage['strap'])}}}")
+            css.append(f".strap>.buckle{{{box_css(stage['buckle_in_strap'])}}}")
+    else:
+        for name, out, size, sel, b in (("envelope_back", "env_back", 760, ".env-back", (0, 0, 100, 100)),
+                                        ("envelope_front", "env_front", 760, ".env-front", FRONT),
+                                        ("flap", "flap", 760, ".flap::before", FLAP)):
+            p = part(name)
+            if p is not None:
+                W, H = p.size
+                p = p.crop((round(W * b[0] / 100), round(H * b[1] / 100), round(W * (b[0] + b[2]) / 100), round(H * (b[1] + b[3]) / 100)))
+                got[name] = p
+                tb.webp(p, out, [size], 84, manifest, out=OUT)
+                f = manifest[out]["files"][0]["file"]
+                css.append(f"{sel}{{background:url(img/{f}) 0 0/100% 100% no-repeat;filter:drop-shadow(0 2px 3px #0007)}}")
+        for name, out, size, sel in (("strap", "strap", 200, ".strap"), ("buckle", "buckle", 320, ".buckle")):
+            p = part(name)
+            if p is not None:
+                p = trim(p)
+                got[name] = p
+                tb.webp(p, out, [size], 84, manifest, out=OUT)
+                f = manifest[out]["files"][0]["file"]
+                css.append(f"{sel}{{background:url(img/{f}) 0 0/100% 100% no-repeat}}")
 
     for name, out, size, rule in (
         ("heather_sprig", "sprig", 420, ".sprig{{display:block;opacity:0;background:url(img/{f}) 50% 100%/contain no-repeat}}"),
@@ -296,8 +400,14 @@ def optional_parts(manifest: dict) -> tuple[list[str], dict]:
             f = manifest["card_small"]["files"][0]["file"]
             L, T, W, H = win
             manifest["card_small"]["window_pct"] = [round(v, 2) for v in win]
-            card_ratio = CARD[2] / 100 * STAGE / (CARD[3] / 100)
-            below = (T + H) / card_ratio + 3      # window bottom in % of the card's WIDTH (padding), + 3 % gap
+            # the card at its own proportions in the pocket (measured stage when there is one)
+            aspect = (manifest.get("stage_measured") or {}).get("aspect", STAGE)
+            ch = CARD_W / (keyed.width / keyed.height) * aspect       # % of the envelope's height
+            card_box = [r2(50 - CARD_W / 2), r2((100 - ch) / 2), CARD_W, r2(ch)]
+            manifest["card_small"]["box_pct"] = card_box
+            # padding % is of the containing block's width (the envelope): the window's foot + 3 % of the card's height
+            below = (T + H + 3) / 100 * card_box[3] / aspect
+            css.append(f".satchel>.card{{{box_css(card_box)}}}")
             css.append(f".satchel .card{{background:url(img/{f}) 0 0/100% 100% no-repeat;justify-content:flex-start;"
                        f"padding-top:{pct(below)}%}}")
             css.append(f".satchel .card .card-photo,.satchel .card.tight .card-photo{{position:absolute;"
@@ -347,6 +457,9 @@ def main() -> int:
                                                     "layers share one canvas of this ratio"}
 
     css, got = optional_parts(manifest)
+    if "stage_measured" in manifest:   # the GPT layers' measured geometry is the envelope; the asked boxes stay as a note
+        manifest["stage_asked"] = manifest.pop("stage")
+        manifest["stage"] = manifest.pop("stage_measured")
     for k, own in (("tartan_wool", wool_own), ("moss_ground", ground_own), ("cream_paper", paper_own), ("mist", mist_own is not None)):
         if own:
             got[k] = True
@@ -360,11 +473,11 @@ def main() -> int:
         og = ground.resize((1200, 1200)).crop((0, 285, 1200, 915)).convert("RGBA")
         bank = mist.resize((1500, 300), Image.LANCZOS)
         og.alpha_composite(bank, (-150, 360))
-        env = envelope(wool, leather, brass, 520, got)
+        env = envelope(wool, leather, brass, 520, got, manifest["stage"])
         og.alpha_composite(env, ((1200 - env.width) // 2, (630 - env.height) // 2))
         manifest["og"] = {"file": "og-1200x630.jpg", "source": "montage: closed envelope (wool, leather, brass) on the moss ground",
                           "bytes": tb.og_kaydet(og.convert("RGB"), OUT / "og-1200x630.jpg")}
-    icon, icon_info = tb.ikon(envelope(wool, leather, brass, 400, got))
+    icon, icon_info = tb.ikon(envelope(wool, leather, brass, 400, got, manifest["stage"]))
     icon.save(OUT / "favicon.png", optimize=True)
     manifest["favicon"] = {**icon_info, "file": "favicon.png", "bytes": (OUT / "favicon.png").stat().st_size}
 
@@ -380,19 +493,26 @@ def main() -> int:
     head = ("/* Highland Tartan & Thistle — GENERATED by build_images.py (do not edit): rules for the design's optional GPT\n"
             "   parts (W2.4–W2.17, GPT_PROMPTS.md) that exist in collections/35_Highland_Tartan_Thistle/assets/gpt/parts/.\n"
             "   A part that is not there has no rule: the page keeps its look from site.css. */\n")
-    (THEME / "parts.css").write_text(head + ("\n".join(css) + "\n" if css else "/* none yet */\n"), encoding="utf-8")
+    (THEME / "parts.css").write_text(head + ("\n".join(css) + "\n" if css else "/* none yet */\n"), encoding="utf-8", newline="\n")   # LF on Windows too (.gitattributes eol=lf)
     manifest["parts_css_rules"] = len(css)
 
     green = tb.yesil_denetle(OUT)
     manifest["checks"] = {"green": green}
+    big = {f["file"]: f["bytes"] for v in manifest.values() if isinstance(v, dict) for f in v.get("files", []) if f["bytes"] > 250_000}
     manifest["theme_check"] = {"particles": ".accent-layer", "first_screen": {"landscape": False, "names_min_px": 32},
                                "backdrop": {"edge_max": 2.2, "dark_max": 0.05, "dark_below": 0, "light_above": 140}}
     manifest["bytes_total"] = tb.klasor_boyutu(THEME)
     tb.manifest_yaz(OUT, manifest)
+    mf = OUT / "manifest.json"   # LF on Windows too (.gitattributes eol=lf)
+    mf.write_bytes(mf.read_bytes().replace(b"\r\n", b"\n"))
     print(json.dumps(manifest["sources"], indent=1))
     print(f"highland-tartan-thistle: theme folder {manifest['bytes_total'] / 1e6:.2f} MB")
-    if manifest["bytes_total"] > tb.TEMA_BUTCE:
-        print("ERROR: theme folder over 3 MB", file=sys.stderr)
+    print(f"green residue: {green}; files over 250 kB: {big}")
+    if green or big:
+        print("ERROR: green residue / a file over 250 kB in img/", file=sys.stderr)
+        return 1
+    if manifest["bytes_total"] > BUDGET:
+        print(f"ERROR: theme folder over {BUDGET / 1e6:.1f} MB", file=sys.stderr)
         return 1
     return 0
 

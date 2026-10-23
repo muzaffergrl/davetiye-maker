@@ -92,9 +92,15 @@ function fitCard() {
   if (!card || !names) return;
   card.classList.remove('tight');
   names.style.fontSize = '';
-  const over = () => card.scrollHeight > card.clientHeight + 1;
+  // over = the last line ends below the card's text area (into its bottom padding, the painted border) or outside it
+  const over = () => {
+    const last = [...card.children].filter((n) => n.offsetParent && getComputedStyle(n).position !== 'absolute').pop();
+    const pb = parseFloat(getComputedStyle(card).paddingBottom) || 0;
+    return card.scrollHeight > card.clientHeight + 1 || (last && last.offsetTop + last.offsetHeight > card.clientHeight - pb + 1);
+  };
   let size = parseFloat(getComputedStyle(names).fontSize);
-  for (let i = 0; i < 40 && over() && size > 14; i++) { size -= 1; names.style.fontSize = size + 'px'; }
+  const floor = card.clientWidth * 0.06;     // 6cqw: the card's texts scale with it (site.css)
+  for (let i = 0; i < 60 && over() && size > floor; i++) { size = Math.max(floor, size * 0.94); names.style.fontSize = size + 'px'; }
   if (over()) card.classList.add('tight');
 }
 

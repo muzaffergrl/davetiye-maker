@@ -1,8 +1,9 @@
-// Victorian Glasshouse (36, G185): platform theme built before its GPT parts (interim fern, glass, herbarium paper,
-// kraft, copper and twine), the seed-packet opening (K23: a closed envelope — packet body, flap with two faces, twine
+// Victorian Glasshouse (36, G185): platform theme built from its own GPT parts (all of PAKET 5 since 2026-10-22; the
+// interim fern, glass, herbarium paper, kraft, copper and twine stay only as the look of a missing part), the packet laid
+// by the GPT pieces' measured proportions, the seed-packet opening (K23: a closed envelope — packet body, flap with two faces, twine
 // halves, copper label, card, mist, ferns, arches), editable texts, scenes, the 4:5 specimens under glass with the mist
-// wipe and the swinging copper labels, parallax, demo route, thank-you mode, audio cues, RSVP contract, print layout.
-// Off sale ("coming") until approval.
+// wipe and the swinging copper labels, parallax, demo route with the design's own sample photos, thank-you mode, audio
+// cues, RSVP contract, print layout, a ≤ 2.5 MB folder. Off sale ("coming") until approval.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
@@ -163,7 +164,7 @@ test('img/manifest.json names og + favicon; build script, README and thank-you s
   for (const f of ['thank-you.css', 'build_images.py', 'README.md']) assert.ok(existsSync(path.join(ROOT, 'themes', id, f)), f);
 });
 
-test('demo route renders every page with placeholders and preview navigation', async () => {
+test('demo route renders every page with the design\'s own sample photos (G155) and preview navigation', async () => {
   for (const page of PAGES) {
     const response = await handleDemoPage(new Request('https://preview.example/start/demo/' + id + (page === 'index' ? '' : '/' + page)), id, page);
     assert.equal(response.status, 200, page);
@@ -172,7 +173,10 @@ test('demo route renders every page with placeholders and preview navigation', a
     const data = JSON.parse($('#site-data').text());
     assert.equal(data.preview, true);
     assert.match(data.pages.home, /^\/start\/demo\/victorian-glasshouse\/home/);
-    if (page === 'home') assert.match($('[data-photo="hero_portrait"]').attr('src') || '', /img\/ph_tall-640\.webp/);
+    // the demo fills the empty slots with the design's PAKET 2 photos (public/demo/victorian-glasshouse)
+    if (page === 'home') assert.match($('[data-photo="hero_portrait"]').attr('src') || '', /^\/demo\/victorian-glasshouse\/hero_portrait-\d+w\.webp/);
+    if (page === 'story') for (const n of [1, 2, 3]) assert.match($(`[data-photo="story_${n}"]`).attr('src') || '', new RegExp(`^/demo/victorian-glasshouse/story_${n}-\\d+w\\.webp`));
+    if (page === 'details') assert.match($('[data-photo="venue"]').attr('src') || '', /^\/demo\/victorian-glasshouse\/venue-\d+w\.webp/);
     if (page === 'story') assert.equal($('.moment').length, 3);
     if (page === 'index') assert.equal($('.tag-plate [data-field="initials"]').text(), 'F&E');
   }
@@ -240,4 +244,34 @@ test('G167: optional GPT parts come in through the generated parts.css — a pag
   assert.equal(m.parts_css_rules, (parts.match(/^[^/\s][^\n]*\{/gm) ?? []).length, 'manifest counts the rules parts.css carries');
   if (!m.parts.used.length) assert.match(parts, /none yet/);
   assert.doesNotMatch(parts, /<svg|data:image/);
+});
+
+test('all PAKET 5 parts are used; the packet is laid by the GPT pieces\' own proportions; the label\'s hole is keyed; ≤ 2.5 MB', () => {
+  const m = JSON.parse(read('img/manifest.json'));
+  const parts = read('parts.css');
+  assert.deepEqual(m.parts.waiting_for_gpt, []);
+  assert.equal(m.parts.used.length, 16);
+  const st = m.stage;
+  const ratio = (k: string) => m[k].src_size[0] / m[k].src_size[1];
+  const toW = (h: number) => h / st.aspect;      // % of the height → % of the width
+  assert.equal(m.stage_asked.aspect, 0.68);
+  // the body spans the width at its own height from the mouth to the foot; the flap spans the width at its own height
+  assert.ok(Math.abs(st.body[1] + st.body[3] - 100) < 0.01);
+  assert.ok(Math.abs(100 / toW(st.body[3]) - ratio('packet_body')) / ratio('packet_body') < 0.01, 'body at its own proportions');
+  assert.ok(Math.abs(100 / toW(st.flap[3]) - ratio('flap_out')) / ratio('flap_out') < 0.01, 'flap at its own proportions (not 1.58× too tall)');
+  assert.match(parts, new RegExp(`\\.stage\\{--env-ratio:${st.aspect}\\}`));
+  assert.match(parts, new RegExp(`\\.packet\\{aspect-ratio:${st.aspect}\\}`));
+  assert.match(parts, new RegExp(`\\.pk-flap\\{height:${st.flap[3]}%\\}`));
+  assert.match(css, /\.stage\{--env-ratio:\.68;--obj:min\([^;]*var\(--env-ratio\)/);
+  // the copper label's #00FF00 hole is keyed through (a real hole, small: ~0.3 % of the label) and no key green is left
+  const [hl, ht, hw, hh] = m.tag.hole_pct;
+  assert.ok(hl < 20 && ht < 20 && hw > 3 && hh > 3, 'the hole at the label\'s top-left');
+  for (const k of Object.keys(m.checks.green)) assert.match(k, /^(ferns|leaf_\d)-/, `${k}: key green left`);
+  // the card's text starts under its window (padding % of the packet's width, scaled by the card's height in it)
+  const [, T, , H] = m.card_small.window_pct;
+  const top = Number(/\.packet \.card\{[^}]*padding-top:([\d.]+)%/.exec(parts)![1]);
+  assert.ok(Math.abs(top - ((T + H + 3) / 100) * (80 / st.aspect)) < 0.05, String(top));
+  // size: docs/11 §6 (every file ≤ 250 kB, folder ≤ 3 MB); this wave keeps the folder ≤ 2.5 MB
+  assert.ok(m.bytes_total <= 2_500_000, String(m.bytes_total));
+  for (const [k, v] of Object.entries(m as Record<string, { files?: { bytes: number }[] }>)) for (const f of v.files ?? []) assert.ok(f.bytes <= 250_000, k);
 });

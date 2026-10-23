@@ -96,7 +96,9 @@ test('the demo records and a buyer\'s first draft stay without the sample photos
   assert.deepEqual(gap.media.memory_photos, []);
   // a theme without sample photos of its own is left as it is
   const plain = { media: { hero_portrait: null, memory_photos: [], couple_clip: null, venue_image: null } };
-  assert.equal(withDemoPhotos('marigold-mehndi', theme.manifest.photos, plain), plain);
+  // (33 Marigold got its own PAKET 2 photos on 2026-10-22: a theme id without any stands in)
+  assert.equal(demoPhotoUrls('no-such-theme'), null);
+  assert.equal(withDemoPhotos('no-such-theme', theme.manifest.photos, plain), plain);
   // 21 Crimson's record links its theme photos itself: not in the manifest, unchanged
   const crimson = (await claimableTheme('crimson-rose-atelier'))!;
   assert.equal(demoPhotoUrls('crimson-rose-atelier'), null);

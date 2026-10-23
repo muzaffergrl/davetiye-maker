@@ -1,8 +1,9 @@
-// Art Nouveau Lily (37, G186): platform theme built before its GPT parts (interim cream, sage and lilac papers), the
-// envelope opening (back with lining, pocket, three petal flaps each with a front and a lining face, medallion, light
+// Art Nouveau Lily (37, G186): platform theme built from its own GPT parts (all of PAKET 5 since 2026-10-22; the
+// interim cream, sage and lilac papers stay only as the look of a missing part), the envelope layers registered by their
+// measured alpha boxes, the envelope opening (back with lining, pocket, three petal flaps each with a front and a lining face, medallion, light
 // through the glass, card), editable texts, scenes, the stained-glass arch photo slots whose colours come alive behind a
-// band of light, the gold whiplash lines drawn by a mask, demo route, thank-you mode, audio cues, RSVP contract, print
-// layout. Off sale ("coming") until approval.
+// band of light, the gold whiplash lines drawn by a mask, demo route with the design's own sample photos, thank-you
+// mode, audio cues, RSVP contract, print layout, a ≤ 2.5 MB folder. Off sale ("coming") until approval.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
@@ -165,7 +166,7 @@ test('img/manifest.json names og + favicon; build script, README and thank-you s
   for (const f of ['thank-you.css', 'build_images.py', 'README.md']) assert.ok(existsSync(path.join(ROOT, 'themes', id, f)), f);
 });
 
-test('demo route renders every page with placeholders and preview navigation', async () => {
+test('demo route renders every page with the design\'s own sample photos (G155) and preview navigation', async () => {
   for (const page of PAGES) {
     const response = await handleDemoPage(new Request('https://preview.example/start/demo/' + id + (page === 'index' ? '' : '/' + page)), id, page);
     assert.equal(response.status, 200, page);
@@ -174,7 +175,10 @@ test('demo route renders every page with placeholders and preview navigation', a
     const data = JSON.parse($('#site-data').text());
     assert.equal(data.preview, true);
     assert.match(data.pages.home, /^\/start\/demo\/art-nouveau-lily\/home/);
-    if (page === 'home') assert.match($('[data-photo="hero_portrait"]').attr('src') || '', /img\/ph_arch-640\.webp/);
+    // the demo fills the empty slots with the design's PAKET 2 photos (public/demo/art-nouveau-lily)
+    if (page === 'home') assert.match($('[data-photo="hero_portrait"]').attr('src') || '', /^\/demo\/art-nouveau-lily\/hero_portrait-\d+w\.webp/);
+    if (page === 'story') for (const n of [1, 2, 3]) assert.match($(`[data-photo="story_${n}"]`).attr('src') || '', new RegExp(`^/demo/art-nouveau-lily/story_${n}-\\d+w\\.webp`));
+    if (page === 'details') assert.match($('[data-photo="venue"]').attr('src') || '', /^\/demo\/art-nouveau-lily\/venue-\d+w\.webp/);
     if (page === 'story') assert.equal($('.moment').length, 3);
   }
 });
@@ -243,4 +247,35 @@ test('G167: optional GPT parts come in through the generated parts.css — a pag
   if (!m.parts.used.length) assert.match(parts, /none yet/);
   // the K21 rules of site.css hold for the generated file too
   assert.doesNotMatch(parts, /<svg|data:image/);
+});
+
+test('all PAKET 5 parts are used; the envelope layers are registered by their measured alpha boxes; ≤ 2.5 MB', () => {
+  const m = JSON.parse(read('img/manifest.json'));
+  const parts = read('parts.css');
+  assert.deepEqual(m.parts.waiting_for_gpt, []);
+  assert.equal(m.parts.used.length, 13);
+  const st = m.stage, b = st.boxes_pct;
+  assert.equal(m.stage_asked.aspect, 0.758);
+  assert.ok(Math.abs(st.aspect - 0.758) / 0.758 < 0.01, String(st.aspect));
+  // pocket: the envelope's width, its foot on the back's foot; left / right petals: the full height from their hinge
+  // edges, mirror boxes; centre petal: the full width from the top edge (its hinge) — no lilac back showing round them
+  assert.deepEqual([b.env_pocket[0], b.env_pocket[2]], [0, 100]);
+  assert.ok(Math.abs(b.env_pocket[1] + b.env_pocket[3] - 100) < 0.05, 'pocket foot');
+  assert.deepEqual([b.petal_left[0], b.petal_left[1], b.petal_left[3]], [0, 0, 100]);
+  assert.ok(Math.abs(b.petal_right[0] + b.petal_right[2] - 100) < 0.05 && b.petal_right[3] === 100, 'right petal on the right edge, full height');
+  assert.ok(Math.abs(b.petal_right[2] - b.petal_left[2]) < 0.5, 'the petals mirror each other');
+  assert.ok(b.petal_left[2] >= 50 && b.petal_right[0] <= 50, 'the side petals meet in the middle');
+  assert.deepEqual([b.petal_centre[0], b.petal_centre[1], b.petal_centre[2]], [0, 0, 100]);
+  assert.ok(b.petal_centre[3] > b.env_pocket[1], 'the centre petal reaches over the pocket mouth');
+  assert.match(parts, new RegExp(`\\.stage\\{--env-ratio:${st.aspect}\\}`));
+  assert.match(parts, new RegExp(`\\.envelope\\{aspect-ratio:${st.aspect}\\}`));
+  assert.match(css, /\.stage\{--env-ratio:\.758;--obj:min\([^;]*var\(--env-ratio\)/);
+  // the card's text starts under its window (padding % of the envelope's width, scaled by the card's height in it)
+  const [, T, , H] = m.card_small.window_pct;
+  const top = Number(/\.envelope \.card\{[^}]*padding-top:([\d.]+)%/.exec(parts)![1]);
+  assert.ok(Math.abs(top - ((T + H + 3) / 100) * (82 / st.aspect)) < 0.05, String(top));
+  assert.deepEqual(m.checks.green, {});
+  // size: docs/11 §6 (every file ≤ 250 kB, folder ≤ 3 MB); this wave keeps the folder ≤ 2.5 MB
+  assert.ok(m.bytes_total <= 2_500_000, String(m.bytes_total));
+  for (const [k, v] of Object.entries(m as Record<string, { files?: { bytes: number }[] }>)) for (const f of v.files ?? []) assert.ok(f.bytes <= 250_000, k);
 });

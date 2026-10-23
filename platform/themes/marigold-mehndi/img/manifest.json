@@ -1,9 +1,9 @@
 {
  "sources": {
-  "silk": "collections/14_Ivory_Lace_Pearl/assets/gpt/parts/bg_tile.png",
-  "velvet": "collections/06_Art_Deco_Noir/assets/gpt/parts/bg_tile.png",
-  "paper": "collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png",
-  "gold": "collections/17_Emerald_Gold_Estate/assets/gpt/parts/closure.png (plain metal field (0.42, 0.32, 0.58, 0.48))"
+  "silk": "collections\\33_Marigold_Mehndi\\assets\\gpt\\parts\\silk.png",
+  "velvet": "collections\\33_Marigold_Mehndi\\assets\\gpt\\parts\\velvet.png",
+  "paper": "collections\\33_Marigold_Mehndi\\assets\\gpt\\parts\\paper.png",
+  "gold": "collections\\17_Emerald_Gold_Estate\\assets\\gpt\\parts\\closure.png (plain metal field (0.42, 0.32, 0.58, 0.48); interim sleeve only)"
  },
  "silk": {
   "src_size": [
@@ -16,7 +16,7 @@
     "file": "silk-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 102140
+    "bytes": 32486
    }
   ]
  },
@@ -31,7 +31,7 @@
     "file": "velvet-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 13612
+    "bytes": 48136
    }
   ]
  },
@@ -46,7 +46,7 @@
     "file": "ground-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 1186
+    "bytes": 17706
    }
   ]
  },
@@ -61,13 +61,13 @@
     "file": "paper-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 14000
+    "bytes": 17832
    },
    {
     "file": "paper-1024.webp",
     "w": 1024,
     "h": 1024,
-    "bytes": 54774
+    "bytes": 68928
    }
   ]
  },
@@ -97,7 +97,7 @@
     "file": "ph_arch-640.webp",
     "w": 640,
     "h": 800,
-    "bytes": 1870
+    "bytes": 1572
    }
   ]
  },
@@ -112,7 +112,7 @@
     "file": "ph_wide-640.webp",
     "w": 640,
     "h": 360,
-    "bytes": 924
+    "bytes": 798
    }
   ]
  },
@@ -138,43 +138,328 @@
   }
  },
  "stage": {
-  "aspect": 0.8,
-  "flap_pct": [
+  "aspect": 1.0578,
+  "flap": [
    0,
    0,
    100,
-   42
+   27.97
   ],
-  "pocket_pct": [
+  "front": [
    0,
-   38,
+   25.33,
    100,
-   62
+   74.67
   ],
-  "sleeve_pct": [
+  "sleeve": [
    -4,
-   30,
+   20.5,
    108,
-   36
+   29.89
   ],
-  "card_pct": [
-   8,
-   6,
-   84,
-   92
+  "lining": [
+   3,
+   2.5,
+   94,
+   38.02
   ],
-  "_note": "% of the closed envelope (left, top, width, height); the GPT pieces are stretched to these boxes"
+  "tassel_in_sleeve": [
+   67.13,
+   92.92,
+   10.19
+  ],
+  "tassel_bottom": 76.85,
+  "card": [
+   18.9,
+   4.0,
+   62.2,
+   92.0
+  ],
+  "card_ratio": 0.7151,
+  "_note": "% of the closed envelope (left, top, width, height), measured from the GPT pieces at their own proportions; tassel_in_sleeve = left, top, width in % of the sleeve box"
+ },
+ "sleeve": {
+  "src_size": [
+   1242,
+   325
+  ],
+  "ratio": 3.82154,
+  "files": [
+   {
+    "file": "sleeve-900.webp",
+    "w": 900,
+    "h": 236,
+    "bytes": 181164
+   }
+  ]
+ },
+ "petal_1": {
+  "src_size": [
+   1024,
+   1024
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "petal_1-96.webp",
+    "w": 96,
+    "h": 96,
+    "bytes": 3928
+   }
+  ]
+ },
+ "petal_2": {
+  "src_size": [
+   1026,
+   1026
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "petal_2-96.webp",
+    "w": 96,
+    "h": 96,
+    "bytes": 2990
+   }
+  ]
+ },
+ "petal_3": {
+  "src_size": [
+   896,
+   896
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "petal_3-96.webp",
+    "w": 96,
+    "h": 96,
+    "bytes": 4310
+   }
+  ]
+ },
+ "arch": {
+  "src_size": [
+   1082,
+   1413
+  ],
+  "ratio": 0.76575,
+  "files": [
+   {
+    "file": "arch-640.webp",
+    "w": 640,
+    "h": 836,
+    "bytes": 110676
+   }
+  ],
+  "window_pct": [
+   19.87,
+   26.11,
+   60.35,
+   57.96
+  ],
+  "window_aspect": 0.7973,
+  "box": {
+   "aspect": 0.7718,
+   "arch": [
+    8.95,
+    8.62,
+    82.2,
+    82.85
+   ],
+   "photo": [
+    24.79,
+    29.76,
+    50.59,
+    49.01
+   ],
+   "_note": "% of the .jharokha box (left, top, width, height)",
+   "henna": [
+    0.0,
+    0.0,
+    100.0,
+    100.0
+   ]
+  }
+ },
+ "henna": {
+  "src_size": [
+   1079,
+   1398
+  ],
+  "ratio": 0.77182,
+  "files": [
+   {
+    "file": "henna-640.webp",
+    "w": 640,
+    "h": 829,
+    "bytes": 209856
+   }
+  ]
+ },
+ "diya": {
+  "src_size": [
+   1335,
+   636
+  ],
+  "ratio": 2.09906,
+  "files": [
+   {
+    "file": "diya-160.webp",
+    "w": 160,
+    "h": 76,
+    "bytes": 6210
+   }
+  ],
+  "wick_tip_pct": [
+   95.96,
+   26.34
+  ]
+ },
+ "flame": {
+  "src_size": [
+   504,
+   1659
+  ],
+  "ratio": 0.3038,
+  "files": [
+   {
+    "file": "flame-96.webp",
+    "w": 96,
+    "h": 316,
+    "bytes": 7560
+   }
+  ]
+ },
+ "garland": {
+  "src_size": [
+   1920,
+   650
+  ],
+  "ratio": 2.95385,
+  "files": [
+   {
+    "file": "garland-900.webp",
+    "w": 900,
+    "h": 305,
+    "bytes": 77884
+   }
+  ]
+ },
+ "mehndi": {
+  "src_size": [
+   1095,
+   1095
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "mehndi-560.webp",
+    "w": 560,
+    "h": 560,
+    "bytes": 167824
+   }
+  ]
+ },
+ "tassel": {
+  "src_size": [
+   793,
+   1947
+  ],
+  "ratio": 0.40729,
+  "files": [
+   {
+    "file": "tassel-200.webp",
+    "w": 200,
+    "h": 491,
+    "bytes": 33538
+   }
+  ]
+ },
+ "env_front": {
+  "src_size": [
+   1401,
+   989
+  ],
+  "ratio": 1.41658,
+  "files": [
+   {
+    "file": "env_front-900.webp",
+    "w": 900,
+    "h": 635,
+    "bytes": 206282
+   }
+  ]
+ },
+ "flap": {
+  "src_size": [
+   1592,
+   421
+  ],
+  "ratio": 3.78147,
+  "files": [
+   {
+    "file": "flap-900.webp",
+    "w": 900,
+    "h": 238,
+    "bytes": 58308
+   }
+  ]
+ },
+ "card_small": {
+  "src_size": [
+   984,
+   1376
+  ],
+  "ratio": 0.71512,
+  "files": [
+   {
+    "file": "card_small-860.webp",
+    "w": 860,
+    "h": 1203,
+    "bytes": 195848
+   }
+  ],
+  "window_pct": [
+   19.61,
+   10.1,
+   60.57,
+   48.11
+  ],
+  "text_zone": {
+   "top": 60.9,
+   "bottom": 93.02,
+   "side_wide": 8.43,
+   "side_mid": 18.09,
+   "side_low": 26.52,
+   "_note": "% of the card: top / bottom of the height, the sprigs' / border's inset from each side (wide = upper third, mid = upper 60 %, low = all)"
+  }
  },
  "og": {
+  "src_size": [
+   1536,
+   1024
+  ],
+  "crop": [
+   0,
+   218,
+   1536,
+   806
+  ],
+  "align": "alt",
+  "size": [
+   1200,
+   630
+  ],
   "file": "og-1200x630.jpg",
-  "source": "montage: closed envelope (silk + gold sleeve) on the velvet ground",
-  "bytes": 82788
+  "source": "parts/web_hero.png",
+  "bytes": 192662
  },
  "favicon": {
   "src_box": [
-   33,
-   39,
-   356,
+   37,
+   47,
+   463,
    434
   ],
   "size": [
@@ -183,35 +468,35 @@
   ],
   "pad": 0.04,
   "file": "favicon.png",
-  "bytes": 36346
+  "bytes": 50730
  },
  "parts": {
-  "used": [],
-  "waiting_for_gpt": [
-   "sleeve",
+  "used": [
+   "card_small",
+   "diya",
+   "envelope_front",
+   "flame",
+   "flap",
+   "garland",
+   "henna",
+   "jharokha",
+   "mehndi_pattern",
    "petal_1",
    "petal_2",
    "petal_3",
-   "jharokha",
-   "henna",
-   "diya",
-   "flame",
-   "garland",
-   "mehndi_pattern",
-   "card_small",
+   "sleeve",
    "tassel",
-   "envelope_front",
-   "flap",
-   "web_hero",
-   "silk",
-   "velvet",
-   "paper"
-  ]
+   "web_hero"
+  ],
+  "waiting_for_gpt": []
  },
- "_note": "G182 interim build: silk, velvet, paper and gold cut and toned from other designs' plain GPT pictures; the design's own PAKET 5 parts are taken as they arrive (GPT_PROMPTS.md, manifest parts). Nothing drawn.",
- "parts_css_rules": 0,
+ "_note": "G182 build from the design's own PAKET 5 parts. Nothing drawn.",
+ "parts_css_rules": 29,
  "checks": {
-  "green": {}
+  "green": {
+   "garland-900.webp": 855
+  },
+  "_note": "garland-900: green mango leaves of the GPT garland (W2.8), not key residue"
  },
  "theme_check": {
   "particles": ".accent-layer",
@@ -226,5 +511,5 @@
    "light_above": 140
   }
  },
- "bytes_total": 427290
+ "bytes_total": 1878384
 }

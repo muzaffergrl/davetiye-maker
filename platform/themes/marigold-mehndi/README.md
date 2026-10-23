@@ -2,8 +2,8 @@
 
 A fuchsia silk envelope held in a gold laser-cut paisley sleeve, marigold garlands, henna, brass diyas and carved
 Rajasthani jharokha arches; saffron, fuchsia and gold. New design of the 33–38 wave (`docs/24_YENI_TASARIMLAR.md`, task
-G182). Status: **coming** (`lib/marketing/config.ts`) — the design's own GPT parts do not exist yet; sale, price and
-approval wait for them and for an eye check.
+G182). Status: **coming** (`lib/marketing/config.ts`). Since 2026-10-22 the theme is built from all 18 of its own GPT
+parts (PAKET 5) and the demo shows its own PAKET 2 photos; sale, price and approval wait for the user's eye check.
 
 ## Files (docs/11 §1)
 
@@ -14,8 +14,8 @@ approval wait for them and for an eye check.
 | `index.html` … `rsvp.html` | closed envelope · home · story · details · RSVP |
 | `site.css` / `thank-you.css` | tokens, layout, the envelope keyframes, the henna flow / thank-you mode (G075) |
 | `site.js` | `MOTION` (opening steps, petals, scenes, henna, diyas, accents), long names, card fit, scenes, diya rows, countdown, opening, petals |
-| `build_images.py` | GPT textures → `img/` (interim toning, gold crop, placeholders, og montage, favicon, `manifest.json`); every optional GPT part that exists → `img/` + `parts.css` |
-| `parts.css` | **generated** by `build_images.py` (do not edit): the rules for the optional GPT parts present in `parts/`; a comment only while none exists. Linked by every page after `site.css` |
+| `build_images.py` | GPT parts → `img/` (cut to their alpha boxes, #00FF00 windows keyed, scaled; placeholders, og, favicon, `manifest.json`) + `parts.css`; measures the envelope pieces, the jharokha window, the card's text zone and the diya's wick |
+| `parts.css` | **generated** by `build_images.py` (do not edit): the rules for the GPT parts present in `parts/`, with the measured boxes (envelope `--env-ratio` and layers, jharokha box, card padding, flame on the wick, `--garland-ratio`). Linked by every page after `site.css` |
 
 Shared platform layers: RSVP (`/rsvp/form.js`, questions, guest names), map block (`data-map`, demo pin Jaipur),
 music + opening sounds (`lib/audio/catalog.ts`: Evening Strings; tassel 0 · sleeve 300 · flap 1250 · card 2500 ·
@@ -28,9 +28,12 @@ by designs 01–32 (docs/24's "Cormorant Infant" is design 17's body font, so Yr
 
 The catalogue cover's order (`components/marketing/InvitationCover.tsx`): "Together with their families", "invite you
 to celebrate", the names (Rozha One), the envelope in the middle, below it the row of diyas, the date · city and "Tap to
-open"; Skip in the corner. The envelope is **not** the V flap + wax seal of 01–32: a portrait silk envelope with a
-straight top flap, held shut by a gold sleeve wrapped round its middle (the sleeve covers the flap's lower edge), a silk
-tassel hanging from the sleeve.
+open"; Skip in the corner (below the marigold garland, which hangs from the top edge: the texts start under its measured
+depth, `--garland-drop`; on short screens it hangs higher). The envelope is **not** the V flap + wax seal of 01–32: a
+silk envelope with a straight top flap, held shut by a gold sleeve wrapped round it (the sleeve covers the flap's lower
+edge), a silk tassel hanging from the sleeve. Its shape is the GPT pieces' own (1.06:1, see "Built from the GPT parts"),
+not the 0.8 portrait first planned; its width = what the screen height leaves after the texts (`--chrome`), at most
+76vw / 330 px.
 
 ## Opening
 
@@ -68,58 +71,61 @@ at once, flames lit.
   thank-you panel (GPT petals only).
 - Text steps slide in from the side and settle, the way the sleeve slid off the envelope (not the shared rise).
 
-## Interim build (until the GPT parts arrive)
+## Built from the GPT parts (2026-10-22)
 
-The design's own parts are ordered in `collections/33_Marigold_Mehndi/assets/gpt/GPT_PROMPTS.md` (PAKET 5 website
-layers, PAKET 2 sample photos, PAKET 6 print sheets). Like Celestial Observatory (G168) the theme is built from GPT pixels
-that already exist, cut and toned, nothing drawn (K21):
+All PAKET 5 parts of `collections/33_Marigold_Mehndi/assets/gpt/parts/` are used (`img/manifest.json` `parts.used`,
+`waiting_for_gpt` empty); nothing is drawn (K21). `python3 build_images.py` rebuilds `img/` and `parts.css`.
 
-- fuchsia silk = `collections/14_Ivory_Lace_Pearl/assets/gpt/parts/bg_tile.png` (ivory satin waves) toned fuchsia with its
-  own sheen (`tonla`); the envelope's back, pocket and flap are rectangles of it (darker back, darker flap);
-- velvet = `collections/06_Art_Deco_Noir/assets/gpt/parts/bg_tile.png` (plain navy paper) toned velvet-fuchsia; the page
-  ground is the same, darker and smoother;
-- saffron paper = `collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png` (plain cotton paper) toned saffron-ivory;
-- gold = the plain metal field inside `collections/17_Emerald_Gold_Estate/assets/gpt/parts/closure.png` (a rectangle
-  between the laurel); the interim sleeve is a plain band of it with light falling on it;
-- no tassel, petals, arches, henna, diyas, flames, garlands or mehndi pattern: their elements stay hidden
-  (`display:none`) until `parts.css` shows them, so the photos are plain 4:5 crops for now. The look is plain until then;
-  sale needs the GPT parts + an eye check.
+| Part | Built into | Where |
+|---|---|---|
+| W2.1 `silk` | `silk-640` | the envelope's back (darkened) |
+| W2.14 `velvet` | `velvet-640`, `ground-640` (66 %) | the lining, the flap's inner face; the page ground |
+| W2.15 `paper` | `paper-640/1024` | home card, bands, programme, reply form; placeholders `ph_arch` / `ph_wide` |
+| W2.12 `envelope_front`, W2.13 `flap`, W2.2 `sleeve`, W2.11 `tassel` | `env_front-900`, `flap-900`, `sleeve-900`, `tassel-200` | the closed envelope, laid by measured boxes (below) |
+| W2.10 `card_small` | `card_small-860` + `mask_card.png` | the card rising from the lining: #00FF00 window keyed, the portrait masked into it; names / date in the plain paper below it (`manifest card_small.text_zone`: the window's rim, the corner sprigs) |
+| W2.4 `jharokha` | `arch-640` + `mask_arch.png` | round every portrait photo (home card, story teaser, the three story moments) |
+| W2.5 `henna` | `henna-640` | behind each arch, flowing in line by line after the photo |
+| W2.6 `diya`, W2.7 `flame` | `diya-160`, `flame-96` | the rows (opening 5, home 5, RSVP 3); each flame stands on the wick tip measured at the spout (`manifest diya.wick_tip_pct`) |
+| W2.8 `garland` | `garland-900` | top of the opening and of the home hero; small under the invitation, programme and reply headings |
+| W2.9 `mehndi_pattern` | `mehndi-560` | behind the story page (14 %), cut to its alpha box so the tile repeats without empty lanes |
+| W2.3 `petal_1..3` | `petal_N-96` (`--mm-petals`) | the 14 petals of the opening, the 12 of a sent reply |
+| W2.16 `web_hero` | `og-1200x630.jpg` | share image (`tema_build.og_kirp`, bottom-aligned) |
+| PAKET 2 photos | `public/demo/marigold-mehndi/*` + `lib/claim/demo-photos.json` | the live demo (`node scripts/build-demo-photos.ts --theme marigold-mehndi`); seed / theme-check use the same folder |
 
-The design's own parts need no template work when they arrive (G167): `python3 build_images.py` takes each part that
-exists in `collections/33_Marigold_Mehndi/assets/gpt/parts/` and writes `parts.css`; the manifest lists `parts.used` and
-`parts.waiting_for_gpt`. `python3 tools/gpt_kuru_deneme.py --tema marigold-mehndi --sekil
-collections/33_Marigold_Mehndi/assets/gpt/kuru_sekil.json [--theme-check --stress]` rehearses the drop-in with neutral
-test images (repo untouched) — passed 18/20 (only PAKET 6, by hand).
+**The envelope (eye check 2026-10-22).** GPT gave the pieces their own proportions, not the boxes asked for (flap
+3.78:1 instead of 1.9:1, sleeve 3.82:1 instead of 2.4:1, pocket 1.42:1 instead of 1.29:1): stretched to the 0.8 stage the
+flap and the sleeve were twice / 1.6× too tall. As in 39–48 each piece is cut to its alpha box and laid at its own size
+(`manifest stage`, `parts.css`): pocket and flap span the width, the flap's piped lower edge 2.5 % over the pocket's mouth
+→ stage 1.058:1; the sleeve 108 % wide at its own height, the flap's lower edge a quarter down it; the tassel 11 % wide,
+26 % in from the right, its loop over the sleeve's lower edge; the card (0.72:1) 92 % of the envelope's height, centred,
+hidden while closed; the lining and the flap's velvet face follow the flap's height.
+
+**The jharokha.** GPT left the middle of the green window transparent inside a soft green rim; the first build keyed
+only the green, so the photo mask was a ring. Now the window = the green + the hole the frame encloses (flood fill), cleared
+with a 2 px margin, the green spill round it neutralised; the mask is the filled arch. GPT also drew the frame edge to edge,
+so the henna canvas (asked to sit round it) overlapped the carving: the henna is set **behind** the frame at 1.22× its
+canvas, and the `.jharokha` box is the henna's (the frame 82 % of it) — the page widths were raised to match.
 
 ## What waits for GPT
 
-| Part | Then (automatic) |
-|---|---|
-| W2.1 `silk`, W2.14 `velvet`, W2.15 `paper` | same roles, instead of the toned interim textures (the page ground = the velvet at 66 %) |
-| W2.2 `sleeve` | `sleeve-900` = the sleeve band (laser-cut, the silk shows through) instead of the plain gold |
-| W2.3 `petal_1..3` | `petal_N-96` + `--mm-petals` → the 14 petals of the opening, the 12 of a sent reply |
-| W2.4 `jharokha` | #00FF00 window measured (`manifest arch.window_pct`, warning when not 4:5), keyed → `arch-640` round every portrait photo; the window's shape → `mask_arch.png`, the photo cut to it. No window → warning, photos stay plain |
-| W2.5 `henna` | `henna-720` over each arch, flowing in line by line after its photo |
-| W2.6 `diya`, W2.7 `flame` | `diya-160` → the rows (opening 5, home 5, RSVP 3) appear; `flame-96` lit one by one |
-| W2.8 `garland` | `garland-900`: top of the opening and the home hero, small under headings |
-| W2.9 `mehndi_pattern` | `mehndi-640` behind the story page (14 %) |
-| W2.10 `card_small` | arched #00FF00 window measured (`manifest card_small.window_pct`), keyed, shape → `mask_card.png` → `card_small-860` = the card from the lining; the portrait slot sits in the window, the text starts below it. No window → warning, card stays saffron paper |
-| W2.11 `tassel` | `tassel-200` hanging from the sleeve: sways, swings on tap |
-| W2.12 `envelope_front`, W2.13 `flap` | `env_front-900`, `flap-900` instead of the silk rectangles |
-| W2.16 `web_hero` | `og-1200x630.jpg` (`tema_build.og_kirp`, bottom-aligned) instead of the montage |
-| PAKET 2 photos | `npm run seed -- --photos` / theme-check photos (now 03's photos, noted) |
-| PAKET 6 `print/invitation_front_5x7`, `invitation_back_5x7` | **by hand** (one block; boxes are measured on the art, G149): `lib/print/layouts.ts` → those sheets, `node scripts/build-print-assets.ts --theme marigold-mehndi` — steps in GPT_PROMPTS.md PAKET 6 |
+Nothing of PAKET 5 or PAKET 2. Still **by hand**: PAKET 6 (`print/invitation_front_5x7.png`, `invitation_back_5x7.png`
+are in the collection) → `lib/print/layouts.ts` still builds the printed sheets from the paper / silk textures; the boxes
+are measured on the art (G149), `node scripts/build-print-assets.ts --theme marigold-mehndi` — steps in GPT_PROMPTS.md
+PAKET 6.
 
 ## Deviations from the standard
 
 - No W1 comps (the design starts from docs/24, not from PAKET 5 W1) → no comp map; `theme-check --compare none`.
 - No `devRender` / `DEV_CONTENT` (as Celestial Observatory, Kintsugi): the theme is rendered by the platform only.
-- The envelope is built from texture rectangles + the sleeve band until the GPT pieces (W2.2, W2.12, W2.13) arrive; it
-  uses no `parts_prep` cut (§7): the pieces are drawn on their own canvases at the stage boxes above.
-- One generated stylesheet (`parts.css`) beside `site.css` (docs/11 §1 lists `site.css` only).
+- The envelope pieces are separate GPT canvases, not one `parts_prep` cut (§7): each is cut to its alpha box and laid by
+  its measured size; the stage aspect follows from them (1.058:1, not the planned 0.8).
+- One generated stylesheet (`parts.css`) beside `site.css` (docs/11 §1 lists `site.css` only); it also carries the
+  measured boxes (site.css keeps the interim look for a missing part).
 - No `variants.css` (G177 palettes are for 22–32).
 
 ## Not tried
 
-Real iPhone / Android, Vercel deployment, real buyer photos, slow network, the GPT parts themselves, Safari's handling of
-`@property --flow` (without it the henna flow is skipped and the photo simply appears).
+Real iPhone / Android, Vercel deployment, real buyer photos, slow network, Safari's handling of `@property --flow`
+(without it the henna flow is skipped and the photo simply appears), `theme-check.cjs` on a production build. Checked on
+2026-10-22 in Chromium only (demo route, 360×640 / 375×553 / 390×844 / 430×932: closed, opening seeked frame by frame,
+opened; home / story / details / RSVP full pages; 40-character names on the card).

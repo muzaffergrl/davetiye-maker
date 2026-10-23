@@ -368,7 +368,7 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     demoCouple: 'Anaya & Kabir',
     style: msg('A fuchsia silk envelope in a gold paisley sleeve with a silk tassel, marigold garlands, henna and carved arch photo frames'),
     metaDescription: msg('A fuchsia silk envelope slips out of its gold paisley sleeve and opens into your wedding website, with marigolds, henna and carved arch frames. Personalize it in your online editor.'),
-    intro: msg('Saffron, fuchsia and gold, like a festive silk invitation. Your invitation waits in a silk envelope held by a laser-cut gold sleeve, and every photo sits in a carved arch window traced with henna.'),
+    intro: msg('Saffron, fuchsia and gold, like a festive silk invitation. Your invitation waits in a silk envelope held by a laser-cut gold sleeve, and your portrait and story photos sit in carved arch windows traced with henna.'),
     opening: msg('Your guests tap the envelope. Its silk tassel swings, the gold paisley sleeve slides away, the flap opens onto a velvet lining and marigold petals drift down while small lamps light one by one. The card with your portrait rises out of the envelope and comes forward to become your home page.'),
     pages: {
       home: msg('Your portrait in a carved arch and your names on a saffron card under a marigold garland, then the invitation, a countdown and calendar links, with a row of lamps that light one by one.'),
@@ -516,7 +516,9 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },
   'ivory-pearl-atelier': {
-    id: 'ivory-pearl-atelier', collection: '49_Ivory_Pearl_Atelier', demoCouple: 'Clara & Julian',
+    id: 'ivory-pearl-atelier',
+    collection: '49_Ivory_Pearl_Atelier',
+    demoCouple: 'Clara & Julian',
     style: msg('Ivory cotton paper, champagne silk and a mother-of-pearl seal with fine gold edges'),
     metaDescription: msg('An ivory wedding website with champagne silk, a pearl seal that turns away and an invitation that rises in an arc. Personalize it in your online editor.'),
     intro: msg('Quiet ivory, champagne silk and a luminous pearl. Fine gold edges and textured cotton paper give this invitation its understated bridal elegance.'),

@@ -1,9 +1,9 @@
 {
  "sources": {
-  "kraft_paper": "collections/04_Vintage_Airmail/assets/gpt/parts/bg_tile.png",
-  "limewash_wall": "collections/11_Boho_Pampas/assets/gpt/parts/bg_tile.png",
-  "cream_paper": "collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png",
-  "terracotta": "collections/11_Boho_Pampas/assets/gpt/parts/bg_tile.png"
+  "kraft_paper": "collections\\38_Papel_Picado_Fiesta\\assets\\gpt\\parts\\kraft_paper.png",
+  "limewash_wall": "collections\\38_Papel_Picado_Fiesta\\assets\\gpt\\parts\\limewash_wall.png",
+  "cream_paper": "collections\\38_Papel_Picado_Fiesta\\assets\\gpt\\parts\\cream_paper.png",
+  "terracotta": "collections\\38_Papel_Picado_Fiesta\\assets\\gpt\\parts\\terracotta.png"
  },
  "kraft": {
   "src_size": [
@@ -16,13 +16,13 @@
     "file": "kraft-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 34170
+    "bytes": 45556
    },
    {
     "file": "kraft-1024.webp",
     "w": 1024,
     "h": 1024,
-    "bytes": 103370
+    "bytes": 135024
    }
   ]
  },
@@ -37,13 +37,13 @@
     "file": "wall-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 2962
+    "bytes": 6062
    },
    {
     "file": "wall-1024.webp",
     "w": 1024,
     "h": 1024,
-    "bytes": 10538
+    "bytes": 26962
    }
   ]
  },
@@ -58,13 +58,13 @@
     "file": "paper-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 5470
+    "bytes": 10518
    },
    {
     "file": "paper-1024.webp",
     "w": 1024,
     "h": 1024,
-    "bytes": 24278
+    "bytes": 42914
    }
   ]
  },
@@ -79,22 +79,22 @@
     "file": "terra-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 31294
+    "bytes": 52358
    }
   ]
  },
  "flag_1": {
   "src_size": [
-   200,
-   250
+   1122,
+   1265
   ],
-  "ratio": 0.8,
+  "ratio": 0.88696,
   "files": [
    {
     "file": "flag_1-200.webp",
     "w": 200,
-    "h": 250,
-    "bytes": 7084
+    "h": 225,
+    "bytes": 34098
    }
   ]
  },
@@ -115,16 +115,16 @@
  },
  "flag_2": {
   "src_size": [
-   200,
-   250
+   1122,
+   1275
   ],
-  "ratio": 0.8,
+  "ratio": 0.88,
   "files": [
    {
     "file": "flag_2-200.webp",
     "w": 200,
-    "h": 250,
-    "bytes": 7306
+    "h": 227,
+    "bytes": 37462
    }
   ]
  },
@@ -145,16 +145,16 @@
  },
  "flag_3": {
   "src_size": [
-   200,
-   250
+   1122,
+   1292
   ],
-  "ratio": 0.8,
+  "ratio": 0.86842,
   "files": [
    {
     "file": "flag_3-200.webp",
     "w": 200,
-    "h": 250,
-    "bytes": 7160
+    "h": 230,
+    "bytes": 35594
    }
   ]
  },
@@ -175,16 +175,16 @@
  },
  "flag_4": {
   "src_size": [
-   200,
-   250
+   1122,
+   1262
   ],
-  "ratio": 0.8,
+  "ratio": 0.88906,
   "files": [
    {
     "file": "flag_4-200.webp",
     "w": 200,
-    "h": 250,
-    "bytes": 7206
+    "h": 225,
+    "bytes": 35906
    }
   ]
  },
@@ -205,16 +205,16 @@
  },
  "flag_5": {
   "src_size": [
-   200,
-   250
+   1122,
+   1279
   ],
-  "ratio": 0.8,
+  "ratio": 0.87725,
   "files": [
    {
     "file": "flag_5-200.webp",
     "w": 200,
-    "h": 250,
-    "bytes": 7220
+    "h": 228,
+    "bytes": 37284
    }
   ]
  },
@@ -235,16 +235,16 @@
  },
  "flag_6": {
   "src_size": [
-   200,
-   250
+   1122,
+   1263
   ],
-  "ratio": 0.8,
+  "ratio": 0.88836,
   "files": [
    {
     "file": "flag_6-200.webp",
     "w": 200,
-    "h": 250,
-    "bytes": 7202
+    "h": 225,
+    "bytes": 34988
    }
   ]
  },
@@ -264,12 +264,12 @@
   ]
  },
  "flags": {
-  "flag_1": "interim: collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png toned (214, 58, 122), plain rectangle",
-  "flag_2": "interim: collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png toned (242, 163, 27), plain rectangle",
-  "flag_3": "interim: collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png toned (28, 150, 164), plain rectangle",
-  "flag_4": "interim: collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png toned (118, 166, 58), plain rectangle",
-  "flag_5": "interim: collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png toned (122, 79, 160), plain rectangle",
-  "flag_6": "interim: collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.png toned (232, 86, 55), plain rectangle"
+  "flag_1": "collections/38_Papel_Picado_Fiesta/assets/gpt/parts/flag_1.png",
+  "flag_2": "collections/38_Papel_Picado_Fiesta/assets/gpt/parts/flag_2.png",
+  "flag_3": "collections/38_Papel_Picado_Fiesta/assets/gpt/parts/flag_3.png",
+  "flag_4": "collections/38_Papel_Picado_Fiesta/assets/gpt/parts/flag_4.png",
+  "flag_5": "collections/38_Papel_Picado_Fiesta/assets/gpt/parts/flag_5.png",
+  "flag_6": "collections/38_Papel_Picado_Fiesta/assets/gpt/parts/flag_6.png"
  },
  "ph_portrait": {
   "src_size": [
@@ -282,7 +282,7 @@
     "file": "ph_portrait-640.webp",
     "w": 640,
     "h": 800,
-    "bytes": 1190
+    "bytes": 1280
    }
   ]
  },
@@ -297,7 +297,7 @@
     "file": "ph_wide-640.webp",
     "w": 640,
     "h": 360,
-    "bytes": 600
+    "bytes": 586
    }
   ]
  },
@@ -322,7 +322,183 @@
    "aspect": "16/9"
   }
  },
- "stage": {
+ "pocket": {
+  "src_size": [
+   913,
+   1217
+  ],
+  "ratio": 0.75021,
+  "files": [
+   {
+    "file": "pocket-720.webp",
+    "w": 720,
+    "h": 960,
+    "bytes": 123970
+   }
+  ]
+ },
+ "flap": {
+  "src_size": [
+   1952,
+   592
+  ],
+  "ratio": 3.2973,
+  "files": [
+   {
+    "file": "flap-720.webp",
+    "w": 720,
+    "h": 218,
+    "bytes": 13562
+   }
+  ]
+ },
+ "liner": {
+  "src_size": [
+   1965,
+   610
+  ],
+  "ratio": 3.22131,
+  "files": [
+   {
+    "file": "liner-720.webp",
+    "w": 720,
+    "h": 224,
+    "bytes": 69654
+   }
+  ]
+ },
+ "bulb": {
+  "src_size": [
+   804,
+   1332
+  ],
+  "ratio": 0.6036,
+  "files": [
+   {
+    "file": "bulb-96.webp",
+    "w": 96,
+    "h": 159,
+    "bytes": 6846
+   }
+  ],
+  "aspect": 0.6036
+ },
+ "frame_1": {
+  "src_size": [
+   1145,
+   1340
+  ],
+  "ratio": 0.85448,
+  "files": [
+   {
+    "file": "frame_1-720.webp",
+    "w": 720,
+    "h": 843,
+    "bytes": 173412
+   }
+  ],
+  "window_pct": [
+   21.31,
+   20.67,
+   57.47,
+   61.57
+  ]
+ },
+ "frame_2": {
+  "src_size": [
+   1145,
+   1344
+  ],
+  "ratio": 0.85193,
+  "files": [
+   {
+    "file": "frame_2-720.webp",
+    "w": 720,
+    "h": 845,
+    "bytes": 182398
+   }
+  ],
+  "window_pct": [
+   20.7,
+   20.68,
+   58.78,
+   59.45
+  ]
+ },
+ "frame_3": {
+  "src_size": [
+   1145,
+   1362
+  ],
+  "ratio": 0.84068,
+  "files": [
+   {
+    "file": "frame_3-720.webp",
+    "w": 720,
+    "h": 856,
+    "bytes": 195580
+   }
+  ],
+  "window_pct": [
+   21.48,
+   24.6,
+   57.12,
+   56.53
+  ]
+ },
+ "frame_wide": {
+  "src_size": [
+   1572,
+   975
+  ],
+  "ratio": 1.61231,
+  "files": [
+   {
+    "file": "frame_wide-1100.webp",
+    "w": 1100,
+    "h": 682,
+    "bytes": 218654
+   }
+  ],
+  "window_pct": [
+   13.3,
+   22.56,
+   73.47,
+   56.41
+  ]
+ },
+ "bloom": {
+  "src_size": [
+   999,
+   884
+  ],
+  "ratio": 1.13009,
+  "files": [
+   {
+    "file": "bloom-720.webp",
+    "w": 720,
+    "h": 637,
+    "bytes": 119586
+   }
+  ]
+ },
+ "embroidery": {
+  "src_size": [
+   1950,
+   130
+  ],
+  "ratio": 15.0,
+  "files": [
+   {
+    "file": "embroidery-1200.webp",
+    "w": 1200,
+    "h": 80,
+    "bytes": 40110
+   }
+  ],
+  "_note": "repeated along the divider at the divider's height (site.css .embroidery)"
+ },
+ "stage_asked": {
   "aspect": 0.74,
   "flap_pct": [
    0,
@@ -345,17 +521,49 @@
   "flag_ratio": 0.8,
   "_note": "% of the closed envelope (left, top, width, height); six flags across the band"
  },
+ "stage": {
+  "aspect": 0.7502,
+  "pocket": [
+   0,
+   0,
+   100,
+   100
+  ],
+  "flap": [
+   0,
+   0,
+   100,
+   22.75
+  ],
+  "liner_pct_of_flap": 102.36,
+  "_note": "% of the closed envelope (left, top, width, height), measured on the GPT pieces at their own proportions; the flag band keeps the asked box (BAND)"
+ },
  "og": {
+  "src_size": [
+   1536,
+   1024
+  ],
+  "crop": [
+   0,
+   218,
+   1536,
+   806
+  ],
+  "align": "alt",
+  "size": [
+   1200,
+   630
+  ],
   "file": "og-1200x630.jpg",
-  "source": "montage: closed envelope (kraft + tissue band) on the wall",
-  "bytes": 69603
+  "source": "parts/web_hero.png",
+  "bytes": 153959
  },
  "favicon": {
   "src_box": [
-   31,
-   35,
-   322,
-   426
+   32,
+   36,
+   320,
+   424
   ],
   "size": [
    180,
@@ -363,41 +571,41 @@
   ],
   "pad": 0.04,
   "file": "favicon.png",
-  "bytes": 24128
+  "bytes": 32377
  },
  "parts": {
-  "used": [],
-  "waiting_for_gpt": [
-   "envelope_pocket",
-   "envelope_flap",
-   "flap_liner",
-   "bulb",
-   "frame_1",
-   "frame_2",
-   "frame_3",
-   "frame_wide",
+  "used": [
    "bougainvillea",
+   "bulb",
    "embroidery_band",
-   "web_hero",
+   "envelope_flap",
+   "envelope_pocket",
    "flag_1",
    "flag_2",
    "flag_3",
    "flag_4",
    "flag_5",
    "flag_6",
-   "kraft_paper",
-   "limewash_wall",
-   "cream_paper",
-   "terracotta"
-  ]
+   "flap_liner",
+   "frame_1",
+   "frame_2",
+   "frame_3",
+   "frame_wide",
+   "web_hero"
+  ],
+  "waiting_for_gpt": []
  },
- "_note": "G187 interim build: kraft, wall, paper, terracotta and the tissue flags cut and toned from other designs' plain GPT papers; the design's own PAKET 5 parts are taken as they arrive (GPT_PROMPTS.md, manifest parts). Nothing drawn.",
- "parts_css_rules": 0,
+ "_note": "G187 build from the design's own PAKET 5 parts. Nothing drawn.",
+ "parts_css_rules": 22,
  "checks": {
   "green": {
-   "flag_4-200.webp": 93,
+   "bloom-720.webp": 3,
+   "embroidery-1200.webp": 1424,
+   "flag_4-200.webp": 53,
+   "liner-720.webp": 1169,
    "tissue_4-480.webp": 2614
-  }
+  },
+  "_note": "flag_4 / tissue_4 / embroidery / liner / bloom: the parts' own green, not key residue; frames must be clean"
  },
  "theme_check": {
   "particles": ".accent-layer",
@@ -406,5 +614,5 @@
    "names_min_px": 32
   }
  },
- "bytes_total": 658529
+ "bytes_total": 2185826
 }

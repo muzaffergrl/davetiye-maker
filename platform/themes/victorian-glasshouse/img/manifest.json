@@ -1,11 +1,11 @@
 {
  "sources": {
-  "fern_ground": "collections/17_Emerald_Gold_Estate/assets/gpt/parts/bg_tile.png",
-  "glass_ground": "collections/13_Enchanted_Forest/assets/gpt/parts/bg_tile.png",
-  "herbarium_paper": "collections/16_Sunflower_Rustic/assets/gpt/parts/bg_tile.png",
-  "kraft": "collections/04_Vintage_Airmail/assets/gpt/parts/bg_tile.png (plain aged paper, toned kraft)",
-  "copper": "collections/17_Emerald_Gold_Estate/assets/gpt/parts/closure.png (plain metal field (0.42, 0.32, 0.58, 0.48), toned copper)",
-  "twine": "collections/10_Tuscan_Vineyard/assets/gpt/parts/closure.png (jute strands (462, 1192, 562, 1418), no leaf)"
+  "fern_ground": "collections\\36_Victorian_Glasshouse\\assets\\gpt\\parts\\fern_ground.png",
+  "glass_ground": "collections\\36_Victorian_Glasshouse\\assets\\gpt\\parts\\glass_ground.png",
+  "herbarium_paper": "collections\\36_Victorian_Glasshouse\\assets\\gpt\\parts\\herbarium_paper.png",
+  "kraft": "collections\\04_Vintage_Airmail\\assets\\gpt\\parts\\bg_tile.png (plain aged paper, toned kraft)",
+  "copper": "collections\\17_Emerald_Gold_Estate\\assets\\gpt\\parts\\closure.png (plain metal field (0.42, 0.32, 0.58, 0.48), toned copper)",
+  "twine": "collections\\10_Tuscan_Vineyard\\assets\\gpt\\parts\\closure.png (jute strands (462, 1192, 562, 1418), no leaf)"
  },
  "fern": {
   "src_size": [
@@ -18,7 +18,7 @@
     "file": "fern-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 9354
+    "bytes": 13582
    }
   ]
  },
@@ -33,13 +33,13 @@
     "file": "glass-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 5388
+    "bytes": 46392
    },
    {
     "file": "glass-1024.webp",
     "w": 1024,
     "h": 1024,
-    "bytes": 18870
+    "bytes": 147994
    }
   ]
  },
@@ -54,13 +54,13 @@
     "file": "paper-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 10242
+    "bytes": 9706
    },
    {
     "file": "paper-1024.webp",
     "w": 1024,
     "h": 1024,
-    "bytes": 43130
+    "bytes": 36262
    }
   ]
  },
@@ -120,7 +120,7 @@
     "file": "ph_tall-640.webp",
     "w": 640,
     "h": 800,
-    "bytes": 1188
+    "bytes": 1470
    }
   ]
  },
@@ -135,7 +135,7 @@
     "file": "ph_wide-640.webp",
     "w": 640,
     "h": 360,
-    "bytes": 588
+    "bytes": 710
    }
   ]
  },
@@ -160,7 +160,252 @@
    "aspect": "16/9"
   }
  },
- "stage": {
+ "packet_body": {
+  "src_size": [
+   985,
+   1392
+  ],
+  "ratio": 0.70761,
+  "files": [
+   {
+    "file": "packet_body-700.webp",
+    "w": 700,
+    "h": 989,
+    "bytes": 221466
+   }
+  ]
+ },
+ "flap_out": {
+  "src_size": [
+   1857,
+   519
+  ],
+  "ratio": 3.57803,
+  "files": [
+   {
+    "file": "flap_out-700.webp",
+    "w": 700,
+    "h": 196,
+    "bytes": 19142
+   }
+  ]
+ },
+ "flap_in": {
+  "src_size": [
+   1858,
+   524
+  ],
+  "ratio": 3.5458,
+  "files": [
+   {
+    "file": "flap_in-700.webp",
+    "w": 700,
+    "h": 197,
+    "bytes": 20308
+   }
+  ]
+ },
+ "tag": {
+  "src_size": [
+   962,
+   1296
+  ],
+  "ratio": 0.74228,
+  "files": [
+   {
+    "file": "tag-360.webp",
+    "w": 360,
+    "h": 485,
+    "bytes": 52536
+   }
+  ],
+  "ratio_wh": 0.7423,
+  "hole_pct": [
+   6.86,
+   5.25,
+   7.48,
+   5.56
+  ]
+ },
+ "twine_own": {
+  "src_size": [
+   108,
+   1983
+  ],
+  "ratio": 0.05446,
+  "files": [
+   {
+    "file": "twine_own-108.webp",
+    "w": 108,
+    "h": 1983,
+    "bytes": 120316
+   }
+  ]
+ },
+ "mist": {
+  "src_size": [
+   1254,
+   1254
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "mist-640.webp",
+    "w": 640,
+    "h": 640,
+    "bytes": 181696
+   }
+  ]
+ },
+ "arches": {
+  "src_size": [
+   1514,
+   613
+  ],
+  "ratio": 2.46982,
+  "files": [
+   {
+    "file": "arches-1200.webp",
+    "w": 1200,
+    "h": 486,
+    "bytes": 91986
+   }
+  ]
+ },
+ "ferns": {
+  "src_size": [
+   1504,
+   512
+  ],
+  "ratio": 2.9375,
+  "files": [
+   {
+    "file": "ferns-1000.webp",
+    "w": 1000,
+    "h": 340,
+    "bytes": 120350
+   }
+  ]
+ },
+ "sprig": {
+  "src_size": [
+   2019,
+   505
+  ],
+  "ratio": 3.99802,
+  "files": [
+   {
+    "file": "sprig-700.webp",
+    "w": 700,
+    "h": 175,
+    "bytes": 44246
+   }
+  ]
+ },
+ "frame": {
+  "src_size": [
+   1044,
+   1323
+  ],
+  "ratio": 0.78912,
+  "files": [
+   {
+    "file": "frame-800.webp",
+    "w": 800,
+    "h": 1014,
+    "bytes": 88382
+   }
+  ],
+  "window_pct": [
+   12.26,
+   14.21,
+   75.29,
+   75.96
+  ]
+ },
+ "label": {
+  "src_size": [
+   2047,
+   533
+  ],
+  "ratio": 3.84053,
+  "files": [
+   {
+    "file": "label-640.webp",
+    "w": 640,
+    "h": 167,
+    "bytes": 18908
+   }
+  ]
+ },
+ "leaf_1": {
+  "src_size": [
+   814,
+   814
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "leaf_1-200.webp",
+    "w": 200,
+    "h": 200,
+    "bytes": 13314
+   }
+  ]
+ },
+ "leaf_2": {
+  "src_size": [
+   984,
+   984
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "leaf_2-200.webp",
+    "w": 200,
+    "h": 200,
+    "bytes": 7630
+   }
+  ]
+ },
+ "leaf_3": {
+  "src_size": [
+   918,
+   918
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "leaf_3-200.webp",
+    "w": 200,
+    "h": 200,
+    "bytes": 11096
+   }
+  ]
+ },
+ "card_small": {
+  "src_size": [
+   947,
+   1374
+  ],
+  "ratio": 0.68923,
+  "files": [
+   {
+    "file": "card_small-860.webp",
+    "w": 860,
+    "h": 1248,
+    "bytes": 74878
+   }
+  ],
+  "window_pct": [
+   18.06,
+   8.01,
+   63.67,
+   52.26
+  ],
+  "text_top_pct_of_card": 63.26
+ },
+ "stage_asked": {
   "aspect": 0.68,
   "flap_pct": [
    0,
@@ -194,17 +439,49 @@
   ],
   "_note": "% of the closed seed packet (left, top, width, height)"
  },
+ "stage": {
+  "aspect": 0.6722,
+  "body": [
+   0,
+   5,
+   100,
+   95
+  ],
+  "flap": [
+   0,
+   0,
+   100,
+   18.79
+  ],
+  "flap_in_pct_of_flap": 100.91,
+  "_note": "% of the closed packet (left, top, width, height), measured on the GPT pieces at their own proportions; twine and label keep the asked boxes (TWINE, TAG)"
+ },
  "og": {
+  "src_size": [
+   1536,
+   1024
+  ],
+  "crop": [
+   0,
+   218,
+   1536,
+   806
+  ],
+  "align": "alt",
+  "size": [
+   1200,
+   630
+  ],
   "file": "og-1200x630.jpg",
-  "source": "montage: closed seed packet (kraft, twine, copper) on the fern ground",
-  "bytes": 94470
+  "source": "parts/web_hero.png",
+  "bytes": 200725
  },
  "favicon": {
   "src_box": [
    20,
    25,
-   302,
-   430
+   299,
+   435
   ],
   "size": [
    180,
@@ -212,36 +489,38 @@
   ],
   "pad": 0.04,
   "file": "favicon.png",
-  "bytes": 26339
+  "bytes": 33911
  },
  "parts": {
-  "used": [],
-  "waiting_for_gpt": [
-   "packet_body",
-   "packet_flap",
-   "packet_flap_in",
+  "used": [
+   "card_small",
    "copper_tag",
-   "twine",
-   "glass_mist",
-   "ironwork",
    "ferns",
-   "orchid_sprig",
-   "specimen_frame",
+   "glass_mist",
    "herbarium_label",
+   "ironwork",
    "leaf_1",
    "leaf_2",
    "leaf_3",
-   "card_small",
-   "web_hero",
-   "fern_ground",
-   "glass_ground",
-   "herbarium_paper"
-  ]
+   "orchid_sprig",
+   "packet_body",
+   "packet_flap",
+   "packet_flap_in",
+   "specimen_frame",
+   "twine",
+   "web_hero"
+  ],
+  "waiting_for_gpt": []
  },
- "_note": "G185 interim build: fern, glass, herbarium paper, kraft, copper and twine cut and toned from other designs' plain GPT pictures; the design's own PAKET 5 parts are taken as they arrive (GPT_PROMPTS.md, manifest parts). Nothing drawn.",
- "parts_css_rules": 0,
+ "_note": "G185 build from the design's own PAKET 5 parts. Nothing drawn.",
+ "parts_css_rules": 20,
  "checks": {
-  "green": {}
+  "green": {
+   "ferns-1000.webp": 15,
+   "leaf_1-200.webp": 3,
+   "leaf_2-200.webp": 135
+  },
+  "_note": "ferns / leaf_N: the GPT foliage's own green, not key residue"
  },
  "theme_check": {
   "particles": ".accent-layer",
@@ -256,5 +535,5 @@
    "light_above": 140
   }
  },
- "bytes_total": 378027
+ "bytes_total": 1760127
 }

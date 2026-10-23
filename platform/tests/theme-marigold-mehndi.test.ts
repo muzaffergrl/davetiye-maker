@@ -1,9 +1,9 @@
-// Marigold & Mehndi (33, G182): platform theme built before its GPT parts (interim silk, velvet, paper and gold), the
-// closed envelope (K23 strict: the catalogue cover's order — families, names, envelope, date · place, "Tap to open",
+// Marigold & Mehndi (33, G182): platform theme built from its own GPT parts (all 18 of PAKET 5; the interim silk,
+// velvet, paper and gold of site.css stay only as the look without a part), the closed envelope (K23 strict: the catalogue cover's order — families, names, envelope, date · place, "Tap to open",
 // Skip) and its own opening (tassel pendulum, the paisley sleeve sliding off, the straight silk flap handing over to
 // its velvet face, petals, diya flames, the card rising from the lining — no V flap, no wax seal), editable texts,
-// scenes, the jharokha photo slots with the henna flow, demo route, thank-you mode, audio cues, RSVP contract, print
-// layout. Off sale ("coming") until approval.
+// scenes, the jharokha photo slots with the henna flow, demo route with the design's own sample photos, thank-you mode,
+// audio cues, RSVP contract, print layout; the envelope laid by the measured GPT pieces. Off sale ("coming") until approval.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
@@ -189,7 +189,7 @@ test('img/manifest.json names og + favicon; build script, README and thank-you s
   for (const [k, v] of Object.entries(m as Record<string, { files?: { bytes: number }[] }>)) for (const f of v.files ?? []) assert.ok(f.bytes <= 250_000, k);
 });
 
-test('demo route renders every page with placeholders and preview navigation', async () => {
+test('demo route renders every page with the design\'s own sample photos (G155) and preview navigation', async () => {
   for (const page of PAGES) {
     const response = await handleDemoPage(new Request('https://preview.example/start/demo/' + id + (page === 'index' ? '' : '/' + page)), id, page);
     assert.equal(response.status, 200, page);
@@ -199,7 +199,10 @@ test('demo route renders every page with placeholders and preview navigation', a
     assert.equal(data.preview, true);
     assert.match(data.pages.home, /^\/start\/demo\/marigold-mehndi\/home/);
     if (page === 'index') assert.match($('h1.names').text(), /Anaya\s*&\s*Kabir/);
-    if (page === 'home') assert.match($('[data-photo="hero_portrait"]').attr('src') || '', /img\/ph_arch-640\.webp/);
+    // the demo fills the empty slots with the design's PAKET 2 photos (public/demo/marigold-mehndi, fictional couple)
+    if (page === 'home') assert.match($('[data-photo="hero_portrait"]').attr('src') || '', /^\/demo\/marigold-mehndi\/hero_portrait-\d+w\.webp/);
+    if (page === 'story') for (const n of [1, 2, 3]) assert.match($(`[data-photo="story_${n}"]`).attr('src') || '', new RegExp(`^/demo/marigold-mehndi/story_${n}-\\d+w\\.webp`));
+    if (page === 'details') assert.match($('[data-photo="venue"]').attr('src') || '', /^\/demo\/marigold-mehndi\/venue-\d+w\.webp/);
     if (page === 'story') assert.equal($('.moment').length, 3);
   }
 });
@@ -267,4 +270,54 @@ test('G167: optional GPT parts come in through the generated parts.css — a pag
   for (const k of m.parts.waiting_for_gpt as string[]) {
     assert.ok(prompts.includes(`collections/33_Marigold_Mehndi/assets/gpt/parts/${k}.png`) || prompts.includes(`\`${k}.png\``), k);
   }
+});
+
+test('all PAKET 5 parts are used; the envelope, the jharokha and the card are laid by their measured GPT pieces', () => {
+  const m = JSON.parse(read('img/manifest.json'));
+  const parts = read('parts.css');
+  assert.deepEqual(m.parts.waiting_for_gpt, []);
+  assert.deepEqual(m.parts.used, ['card_small', 'diya', 'envelope_front', 'flame', 'flap', 'garland', 'henna', 'jharokha',
+    'mehndi_pattern', 'petal_1', 'petal_2', 'petal_3', 'sleeve', 'tassel', 'web_hero']);
+  for (const k of ['silk', 'velvet', 'paper']) assert.match(m.sources[k], new RegExp(`33_Marigold_Mehndi.*${k}\.png$`), k);
+  // the envelope: pocket and flap span the width at their own heights (the flap over the pocket's mouth), so the stage is
+  // the pieces' own shape, not the 0.8 the parts were asked for — no piece is stretched
+  const st = m.stage;
+  const ratio = (k: string) => m[k].src_size[0] / m[k].src_size[1];
+  const pctW = (h: number) => (h * 100) / st.aspect / 100;     // % of the stage height → % of its width
+  assert.ok(Math.abs(100 / pctW(st.flap[3]) - ratio('flap')) / ratio('flap') < 0.01, 'flap at its own proportions');
+  assert.ok(Math.abs(100 / pctW(st.front[3]) - ratio('env_front')) / ratio('env_front') < 0.01, 'pocket at its own proportions');
+  assert.ok(Math.abs(st.sleeve[2] / pctW(st.sleeve[3]) - ratio('sleeve')) / ratio('sleeve') < 0.01, 'sleeve at its own proportions');
+  assert.ok(st.front[1] < st.flap[3], 'the flap overlaps the pocket mouth');
+  assert.ok(st.sleeve[1] < st.flap[3] && st.sleeve[1] + st.sleeve[3] > st.flap[3], 'the sleeve covers the flap\'s lower edge');
+  assert.ok(st.card[1] >= 0 && st.card[1] + st.card[3] <= 100 && st.card[0] >= 0 && st.card[0] + st.card[2] <= 100, 'card hidden inside the closed envelope');
+  assert.ok(st.tassel_bottom < 100, 'the tassel ends on the envelope');
+  // parts.css carries exactly these numbers
+  const num = (v: number) => String(v).replace(/\.0+$/, '');
+  assert.match(parts, new RegExp(`\.stage\{--env-ratio:${st.aspect}\}`));
+  assert.match(parts, new RegExp(`\.parcel>\.flap\{left:0%;top:0%;width:100%;height:${num(st.flap[3])}%`));
+  assert.match(parts, new RegExp(`\.parcel>\.env-front\{left:0%;top:${num(st.front[1])}%;width:100%;height:${num(st.front[3])}%`));
+  assert.match(parts, new RegExp(`\.parcel>\.sleeve\{left:${num(st.sleeve[0])}%;top:${num(st.sleeve[1])}%;width:${num(st.sleeve[2])}%;height:${num(st.sleeve[3])}%`));
+  assert.match(parts, new RegExp(`\.parcel>\.card\{left:${num(st.card[0])}%;top:${num(st.card[1])}%;width:${num(st.card[2])}%;height:${num(st.card[3])}%`));
+  assert.match(css, /\.stage\{--env-ratio:\.8;[^}]*--obj:min\([^;]*var\(--env-ratio\)/);
+  // the jharokha: the whole arched window is cleared (GPT left its middle transparent inside a soft green rim) — the
+  // photo mask is a filled arch, not a ring; the henna sits behind the frame, round it
+  const box = m.arch.box;
+  assert.ok(Math.abs(m.arch.window_aspect - 0.8) < 0.03, 'window ≈ 4:5');
+  assert.ok(box.arch[0] > 5 && box.arch[2] < 90 && box.henna[2] === 100, 'arch inside the henna box');
+  assert.match(parts, /\.jharokha>\.henna\{display:block;z-index:0;/);
+  assert.match(parts, /\.jharokha>\.arch\{display:block;[^}]*z-index:2;/);
+  assert.match(parts, /\.jharokha>\.photo-slot\{position:absolute;z-index:1;[^}]*mask:url\(img\/mask_arch\.png\)/);
+  assert.deepEqual(Object.keys(m.checks.green), ['garland-900.webp'], 'no key green left (only the garland\'s own leaves)');
+  // the card's text starts under its window and stays between the corner sprigs; the flame sits on the measured wick
+  const z = m.card_small.text_zone;
+  assert.ok(z.top > m.card_small.window_pct[1] + m.card_small.window_pct[3] && z.bottom < 97 && z.side_low > z.side_mid);
+  assert.match(parts, /\.parcel \.card \.card-names\{margin-inline:[\d.]+%\}/);
+  assert.match(parts, /\.parcel \.card \.card-date\{margin-inline:[\d.]+%\}/);
+  const [wx, wy] = m.diya.wick_tip_pct;
+  assert.ok(wx > 80 && wy < 50, 'the wick is at the spout on the right');
+  assert.match(parts, new RegExp(`\.flame\{[^}]*left:${num(wx)}%;bottom:${num(Math.round((100 - wy) * 100) / 100)}%`));
+  // the garland: the texts start below it (its measured ratio drives the top padding)
+  assert.match(parts, /:root\{--garland-ratio:[\d.]+\}/);
+  assert.match(css, /--garland-drop:calc\(var\(--gw\) \/ var\(--garland-ratio\)/);
+  assert.match(css, /\.opening\{[^}]*padding:max\(50px,calc\(var\(--garland-drop,0px\) \+ \d+px\)\)/);
 });

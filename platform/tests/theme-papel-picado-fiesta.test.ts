@@ -1,9 +1,10 @@
-// Papel Picado Fiesta (38, G187): platform theme built before its GPT parts (interim kraft, wall, paper, terracotta and
-// tissue flags), the closed envelope of the third wave (K23 strict: a kraft envelope with a straight flap held by a belly
+// Papel Picado Fiesta (38, G187): platform theme built from its own GPT parts (all of PAKET 5 since 2026-10-22; the
+// interim kraft, wall, paper, terracotta and tissue flags stay only as the look of a missing part), the envelope laid by
+// the GPT pieces' own proportions, the closed envelope of the third wave (K23 strict: a kraft envelope with a straight flap held by a belly
 // band of cut-paper flags — no V flap, no wax seal), its opening (band works loose, the six flags fly up into a garland
 // and wave, the flap swings up on its top edge, string lights, card rises), editable texts, scenes, the hanging cut-paper
-// frames that drop in and swing, the wind from the scroll speed, demo route, thank-you mode, audio cues, RSVP contract,
-// print layout. Off sale ("coming") until approval.
+// frames that drop in and swing, the wind from the scroll speed, demo route with the design's own sample photos,
+// thank-you mode, audio cues, RSVP contract, print layout, a ≤ 2.5 MB folder. Off sale ("coming") until approval.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
@@ -168,7 +169,7 @@ test('img/manifest.json names og + favicon; build script, README and thank-you s
   for (const f of ['thank-you.css', 'build_images.py', 'README.md']) assert.ok(existsSync(path.join(ROOT, 'themes', id, f)), f);
 });
 
-test('demo route renders every page with placeholders and preview navigation', async () => {
+test('demo route renders every page with the design\'s own sample photos (G155) and preview navigation', async () => {
   for (const page of PAGES) {
     const response = await handleDemoPage(new Request('https://preview.example/start/demo/' + id + (page === 'index' ? '' : '/' + page)), id, page);
     assert.equal(response.status, 200, page);
@@ -177,7 +178,10 @@ test('demo route renders every page with placeholders and preview navigation', a
     const data = JSON.parse($('#site-data').text());
     assert.equal(data.preview, true);
     assert.match(data.pages.home, /^\/start\/demo\/papel-picado-fiesta\/home/);
-    if (page === 'home') assert.match($('[data-photo="hero_portrait"]').attr('src') || '', /img\/ph_portrait-640\.webp/);
+    // the demo fills the empty slots with the design's PAKET 2 photos (public/demo/papel-picado-fiesta)
+    if (page === 'home') assert.match($('[data-photo="hero_portrait"]').attr('src') || '', /^\/demo\/papel-picado-fiesta\/hero_portrait-\d+w\.webp/);
+    if (page === 'story') for (const n of [1, 2, 3]) assert.match($(`[data-photo="story_${n}"]`).attr('src') || '', new RegExp(`^/demo/papel-picado-fiesta/story_${n}-\\d+w\\.webp`));
+    if (page === 'details') assert.match($('[data-photo="venue"]').attr('src') || '', /^\/demo\/papel-picado-fiesta\/venue-\d+w\.webp/);
     if (page === 'story') assert.equal($('.moment').length, 3);
   }
 });
@@ -244,4 +248,27 @@ test('G167: optional GPT parts come in through the generated parts.css — a pag
   if (!m.parts.used.length) assert.match(parts, /none yet/);
   // the K21 rules of site.css hold for the generated file too
   assert.doesNotMatch(parts, /<svg|data:image/);
+});
+
+test('all PAKET 5 parts are used; the envelope by the GPT pieces\' own proportions; frames keyed clean; ≤ 2.5 MB', () => {
+  const m = JSON.parse(read('img/manifest.json'));
+  const parts = read('parts.css');
+  assert.deepEqual(m.parts.waiting_for_gpt, []);
+  assert.equal(m.parts.used.length, 17);
+  const st = m.stage;
+  const ratio = (k: string) => m[k].src_size[0] / m[k].src_size[1];
+  assert.equal(m.stage_asked.aspect, 0.74);
+  // the stage is the pocket's own shape (GPT gave 1079×1458, alpha box 0.75:1); the flap spans the width at its own
+  // height (3.30:1, not stretched into the asked 100 × 30 box)
+  assert.ok(Math.abs(st.aspect - ratio('pocket')) / ratio('pocket') < 0.01, 'stage = the pocket');
+  assert.ok(Math.abs(100 / (st.flap[3] / st.aspect) - ratio('flap')) / ratio('flap') < 0.01, 'flap at its own proportions');
+  assert.match(parts, new RegExp(`\\.stage\\{--env-ratio:${st.aspect};--flap-h:[\\d.]+\\}`));
+  assert.match(parts, new RegExp(`\\.envelope\\{aspect-ratio:${st.aspect}\\}`));
+  assert.match(parts, new RegExp(`\\.flap\\{height:${st.flap[3]}%\\}`));
+  assert.match(css, /\.stage\{--env-ratio:\.74;--flap-h:\.3;--obj:min\([^;]*var\(--env-ratio\)[^;]*\);[^}]*margin:calc\(var\(--obj\) \/ var\(--env-ratio\) \* var\(--flap-h\)/);
+  // frame_3's window had a transparent middle in a soft green rim: the whole window is cleared, no key green in a frame
+  for (const k of Object.keys(m.checks.green)) assert.doesNotMatch(k, /^frame_/, `${k}: key green left`);
+  // size: docs/11 §6 (every file ≤ 250 kB, folder ≤ 3 MB); this wave keeps the folder ≤ 2.5 MB
+  assert.ok(m.bytes_total <= 2_500_000, String(m.bytes_total));
+  for (const [k, v] of Object.entries(m as Record<string, { files?: { bytes: number }[] }>)) for (const f of v.files ?? []) assert.ok(f.bytes <= 250_000, k);
 });

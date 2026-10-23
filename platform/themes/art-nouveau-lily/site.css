@@ -91,8 +91,8 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .opening .names{font-size:clamp(54px,15.5vw,76px)}
 .opening-date{font-size:11px}
 /* the closed envelope: 0.758 wide per high (manifest stage); the card, pocket and petal flaps in % of it */
-.stage{--obj:min(64vw,calc(43svh * .758),300px);position:relative;width:var(--obj);margin:26px auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent;z-index:5}
-.opening:has(.names.long-names) .stage{--obj:min(56vw,calc(36svh * .758),300px)}
+.stage{--env-ratio:.758;--obj:min(64vw,calc(43svh * var(--env-ratio)),300px);position:relative;width:var(--obj);margin:26px auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent;z-index:5}
+.opening:has(.names.long-names) .stage{--obj:min(56vw,calc(36svh * var(--env-ratio)),300px)}
 .envelope{position:relative;width:100%;aspect-ratio:.758;perspective:1300px;--tex:calc(var(--obj) * 1.5)}
 .envelope>*{position:absolute}
 .stage::before{content:"";position:absolute;inset:6% 1% -4%;z-index:0;background:radial-gradient(closest-side,#1e261acc,#0000);pointer-events:none} /* contact shade on the ground (light only) */
@@ -104,9 +104,9 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .card.tight .card-photo{width:34%}
 .card-photo .ph-mark{font-size:8px}
 .card-photo .ty-decor,.card-photo .ty-decor img{display:block;width:100%;height:100%;object-fit:cover}
-.card-line{margin-top:7%;font-size:7.5px;letter-spacing:.2em;color:var(--gold-ink)}
-.card-names{font:400 clamp(20px,17cqw,44px)/1.05 var(--script);color:var(--lilac-ink);overflow-wrap:anywhere;text-wrap:balance;margin-top:1%}
-.card-date{font-size:7.5px;margin-top:3%;color:var(--gold-ink)}
+.card-line{margin-top:7%;font-size:3.57cqw;letter-spacing:.2em;color:var(--gold-ink)}
+.card-names{font:400 14.4cqw/1.05 var(--script);color:var(--lilac-ink);overflow-wrap:anywhere;text-wrap:balance;margin-top:1%}
+.card-date{font-size:3.57cqw;margin-top:3%;color:var(--gold-ink)}
 /* the pocket: the lower front, its top edge rising softly to a point (a cut of the cream paper) */
 .env-pocket{inset:0;z-index:3;background:linear-gradient(180deg,#0000 54%,#2e32281a 60%,#0000 70%),var(--cream) url(img/paper-640.webp) 0 0/var(--tex) repeat;filter:brightness(.97);clip-path:polygon(0 61%,24% 59%,42% 56.5%,50% 55%,58% 56.5%,76% 59%,100% 61%,100% 100%,0 100%)}
 /* the petal flaps: each a 3D wrapper turning on its hinge; front = cream petal, back = lilac lining (the back's cut is

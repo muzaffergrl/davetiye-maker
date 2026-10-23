@@ -1,9 +1,10 @@
-// Red Lacquer & Double Happiness (34, G183): platform theme built before its GPT parts (interim red paper, lacquer,
-// cream paper and gold leaf), the envelope opening (K23 strict: a closed envelope first — back, pocket, 囍, flap with two
+// Red Lacquer & Double Happiness (34, G183): platform theme built from its own GPT parts (all of PAKET 5 since
+// 2026-10-22; the interim red paper, lacquer, cream paper and gold leaf stay only as the look of a missing part), the
+// envelope laid by the GPT layers' measured alpha boxes, the envelope opening (K23 strict: a closed envelope first — back, pocket, 囍, flap with two
 // faces, the string-and-button closure, the card wrapped in two paper-cut windows; the cord unwinds, the flap lifts, the
 // card comes up, the windows open one layer after the other, gold clouds), editable texts, scenes, the round moon gate
-// photo slots with their sliding doors, the paper-cut parallax, demo route, thank-you mode, audio cues, RSVP contract,
-// print layout. Off sale ("coming") until approval.
+// photo slots with their sliding doors, the paper-cut parallax, demo route with the design's own sample photos,
+// thank-you mode, audio cues, RSVP contract, print layout, a ≤ 2.5 MB folder. Off sale ("coming") until approval.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
@@ -177,10 +178,16 @@ test('img/manifest.json names og + favicon; build script, README and thank-you s
   const m = JSON.parse(read('img/manifest.json'));
   for (const k of ['og', 'favicon']) assert.ok(existsSync(path.join(ROOT, 'themes', id, 'img', m[k].file)), k);
   for (const f of ['thank-you.css', 'build_images.py', 'README.md']) assert.ok(existsSync(path.join(ROOT, 'themes', id, f)), f);
-  assert.equal(m.stage.aspect, 0.66);
+  // the envelope's shape is the GPT back's alpha box (asked 0.66; manifest stage_asked keeps the asked boxes)
+  assert.equal(m.stage_asked.aspect, 0.66);
+  assert.ok(Math.abs(m.stage.aspect - 0.66) / 0.66 < 0.03, String(m.stage.aspect));
+  // size: docs/11 §6 (every file ≤ 250 kB, folder ≤ 3 MB); this wave keeps the folder ≤ 2.5 MB
+  assert.ok(m.bytes_total <= 2_500_000, String(m.bytes_total));
+  for (const [k, v] of Object.entries(m as Record<string, { files?: { bytes: number }[] }>)) for (const f of v.files ?? []) assert.ok(f.bytes <= 250_000, k);
+  assert.deepEqual(m.checks.green, {}, 'no key green left in img/');
 });
 
-test('demo route renders every page with placeholders and preview navigation', async () => {
+test('demo route renders every page with the design\'s own sample photos (G155) and preview navigation', async () => {
   for (const page of PAGES) {
     const response = await handleDemoPage(new Request('https://preview.example/start/demo/' + id + (page === 'index' ? '' : '/' + page)), id, page);
     assert.equal(response.status, 200, page);
@@ -189,7 +196,11 @@ test('demo route renders every page with placeholders and preview navigation', a
     const data = JSON.parse($('#site-data').text());
     assert.equal(data.preview, true);
     assert.match(data.pages.home, /^\/start\/demo\/red-lacquer-double-happiness\/home/);
-    if (page === 'home') assert.match($('[data-photo="hero_portrait"]').attr('src') || '', /img\/ph_round-640\.webp/);
+    // the demo fills the empty slots with the design's PAKET 2 photos (public/demo/red-lacquer-double-happiness)
+    if (page === 'home') assert.match($('[data-photo="hero_portrait"]').attr('src') || '', /^\/demo\/red-lacquer-double-happiness\/hero_portrait-\d+w\.webp/);
+    if (page === 'index') assert.match($('.card [data-photo="hero_portrait"]').attr('src') || '', /^\/demo\/red-lacquer-double-happiness\/hero_portrait-/);
+    if (page === 'story') for (const n of [1, 2, 3]) assert.match($(`[data-photo="story_${n}"]`).attr('src') || '', new RegExp(`^/demo/red-lacquer-double-happiness/story_${n}-\\d+w\\.webp`));
+    if (page === 'details') assert.match($('[data-photo="venue"]').attr('src') || '', /^\/demo\/red-lacquer-double-happiness\/venue-\d+w\.webp/);
     if (page === 'story') assert.equal($('.moment').length, 3);
     if (page === 'index') assert.match($('.opening-heading .eyebrow').first().text(), /Together with their families/);
   }
@@ -260,4 +271,52 @@ test('G167: optional GPT parts come in through the generated parts.css — a pag
   assert.equal(m.parts_css_rules, (parts.match(/^[^/\s][^\n]*\{/gm) ?? []).length, 'manifest counts the rules parts.css carries');
   if (!m.parts.used.length) assert.match(parts, /none yet/);
   assert.doesNotMatch(parts, /<svg|data:image/);
+});
+
+test('all PAKET 5 parts are used; the envelope is laid by the GPT layers\' measured alpha boxes', () => {
+  const m = JSON.parse(read('img/manifest.json'));
+  const parts = read('parts.css');
+  assert.deepEqual(m.parts.waiting_for_gpt, []);
+  assert.equal(m.parts.used.length, 19);
+  for (const k of ['red_paper', 'lacquer', 'cream_paper', 'gold_leaf']) assert.match(m.sources[k], new RegExp(`34_Red_Lacquer_Double_Happiness.*${k}\\.png$`), k);
+  const st = m.stage;
+  const ratio = (k: string) => m[k].src_size[0] / m[k].src_size[1];
+  const toW = (h: number) => h / st.aspect;      // % of the height → % of the width
+  // the back's alpha box is the envelope; the pocket spans its width with its foot on the back's foot; the flap spans
+  // the width from the fold — each at its own proportions (no cream lining above the flap, no back round the pocket)
+  assert.deepEqual(st.back, [0, 0, 100, 100]);
+  assert.ok(Math.abs(ratio('env_back') - st.aspect) / st.aspect < 0.01, 'back = the envelope box');
+  assert.equal(st.pocket[0], 0); assert.equal(st.pocket[2], 100);
+  assert.ok(Math.abs(st.pocket[1] + st.pocket[3] - 100) < 0.05, 'pocket foot on the back foot');
+  assert.ok(Math.abs(100 / toW(st.pocket[3]) - ratio('pocket')) / ratio('pocket') < 0.01, 'pocket at its own proportions');
+  assert.deepEqual(st.flap.slice(0, 3), [0, 0, 100]);
+  assert.ok(Math.abs(100 / toW(st.flap[3]) - ratio('flap')) / ratio('flap') < 0.01, 'flap at its own proportions');
+  assert.ok(st.pocket[1] < st.flap[3], 'the flap covers the pocket mouth');
+  // the cord's two loops ring the two buttons: loop centres on the button centres, loops a little wider than a button
+  const [L, T, W, H] = st.string;
+  const [top, bottom] = st.cord_loops_pct;
+  for (const [i, loop] of [top, bottom].entries()) {
+    assert.ok(Math.abs(L + (W * loop[0]) / 100 - 50) < 0.6, `loop ${i} centred`);
+    assert.ok(Math.abs(T + (H * loop[1]) / 100 - st.button_centres[i][1]) < 0.3, `loop ${i} on its button`);
+    assert.ok((W * loop[2]) / 100 > 14 && (W * loop[2]) / 100 < 14 * 1.25, `loop ${i} rings a 14 % button`);
+  }
+  assert.ok(Math.abs((st.flap[3] * st.button_flap_top_pct_of_flap) / 100 - st.button_centres[0][1]) < 0.05, 'flap button in the flap');
+  // parts.css carries exactly these numbers
+  const num = (v: number) => String(v);
+  assert.match(parts, new RegExp(`\\.stage\\{--env-ratio:${st.aspect}\\}`));
+  assert.match(parts, new RegExp(`\\.envelope\\{aspect-ratio:${st.aspect}\\}`));
+  assert.match(parts, new RegExp(`\\.pocket\\{left:0%;top:${num(st.pocket[1])}%;width:100%;height:${num(st.pocket[3])}%\\}`));
+  assert.match(parts, new RegExp(`\\.flap\\{height:${num(st.flap[3])}%\\}`));
+  assert.match(parts, new RegExp(`\\.flap-in\\{bottom:auto;height:${num(st.flap_in_pct_of_flap)}%\\}`));
+  assert.match(parts, new RegExp(`\\.b-flap\\{top:${num(st.button_flap_top_pct_of_flap)}%\\}`));
+  assert.match(parts, new RegExp(`\\.b-body\\{top:${num(st.button_centres[1][1])}%\\}`));
+  assert.match(parts, new RegExp(`\\.string\\{left:${num(L)}%;top:${num(T)}%;width:${num(W)}%;height:${num(H)}%\\}`));
+  assert.match(css, /\.stage\{--env-ratio:\.66;--obj:min\([^;]*var\(--env-ratio\)/);
+  // a scalloped flap casts its shadow by its alpha (drop-shadow), not as a box
+  assert.match(parts, /\.flap-out\{[^}]*filter:drop-shadow\([^}]*box-shadow:none\}/);
+  // the card at its own proportions inside the envelope, its round window keyed whole (no green rim)
+  const cb = m.card_small.box_pct;
+  assert.ok(cb[1] >= 0 && cb[1] + cb[3] <= 100, 'the card is inside the closed envelope');
+  assert.ok(Math.abs((cb[2] / toW(cb[3])) - ratio('card_small')) / ratio('card_small') < 0.01, 'card at its own proportions');
+  assert.match(parts, new RegExp(`\\.envelope>\\.card\\{left:${cb[0]}%;top:${cb[1]}%;width:${cb[2]}%;height:${cb[3]}%\\}`));
 });

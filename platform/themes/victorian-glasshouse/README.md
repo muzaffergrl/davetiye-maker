@@ -2,8 +2,8 @@
 
 A Victorian glasshouse at dusk: deep fern green, misted glass, herbarium paper, kraft, copper and jute. New design of
 the 33–38 wave (`docs/24_YENI_TASARIMLAR.md`, row 36, task G185; K23 strict: the first page is a closed envelope).
-Status: **coming** (`lib/marketing/config.ts`, price `[PRICE]`) — the design's own GPT parts do not exist yet; sale,
-price and approval wait for them and for an eye check.
+Status: **coming** (`lib/marketing/config.ts`, price `[PRICE]`). Since 2026-10-22 the theme is built from all of its own
+GPT parts (PAKET 5) and the demo shows its own PAKET 2 photos; sale, price and approval wait for the user's eye check.
 
 ## Files (docs/11 §1)
 
@@ -14,8 +14,8 @@ price and approval wait for them and for an eye check.
 | `index.html` … `rsvp.html` | closed seed packet · home · story · details · RSVP |
 | `site.css` / `thank-you.css` | tokens, layout, the packet keyframes, the mist and its wipe, the specimens under glass, the swinging labels / thank-you mode (G075) |
 | `site.js` | `MOTION` (opening steps, scenes, parallax, leaflets), long names, card fit, scenes (the mist wipe and the label swing follow each step), parallax (`--sy`), countdown, opening, leaflets |
-| `build_images.py` | GPT textures → `img/` (interim toning, copper and twine crops, placeholders, og montage, favicon, `manifest.json`); every optional GPT part that exists → `img/` + `parts.css` |
-| `parts.css` | **generated** by `build_images.py` (do not edit): the rules for the optional GPT parts present in `parts/`; a comment only while none exists. Linked by every page after `site.css` |
+| `build_images.py` | GPT parts → `img/` (cut to their alpha boxes, #00FF00 windows / hole keyed, scaled; placeholders, og, favicon, `manifest.json`) + `parts.css`; lays the packet by the pieces' own proportions; folder ≤ 2.5 MB, every file ≤ 250 kB, no key green (exit ≠ 0 otherwise) |
+| `parts.css` | **generated** by `build_images.py` (do not edit): the rules for the GPT parts present in `parts/`, with the measured packet (`--env-ratio`, flap height) and the card's text start. Linked by every page after `site.css` |
 
 Shared platform layers: RSVP (`/rsvp/form.js`, questions, guest names), map block (`data-map`, demo pin Columbus,
 Ohio), music + opening sounds (`lib/audio/catalog.ts`: Garden Waltz; label 0 · twine 300 · flap 900 · card 1700 ·
@@ -97,26 +97,40 @@ exists in `collections/36_Victorian_Glasshouse/assets/gpt/parts/` and writes `pa
 collections/36_Victorian_Glasshouse/assets/gpt/kuru_sekil.json [--theme-check --stress]` rehearses the drop-in with
 neutral test images (repo untouched).
 
+## Built from the GPT parts (2026-10-22)
+
+All PAKET 5 parts are used (`img/manifest.json` `parts.used` = 16, `waiting_for_gpt` empty); nothing is drawn (K21).
+The table of "Interim build" above now describes only the look of a part that is missing.
+
+| Part | Built into | Where |
+|---|---|---|
+| W3.1 `fern_ground`, W3.2 `glass_ground`, W3.3 `herbarium_paper` | `fern-640`, `glass-640/1024`, `paper-640/1024` | page grounds, cards, bands, print sheets |
+| W3.4 `packet_body`, W3.5 `packet_flap`, `packet_flap_in` | `packet_body-700`, `flap_out-700`, `flap_in-700` | the packet, laid by the pieces' own proportions (below) |
+| W3.6 `copper_tag` | `tag-360` | every copper label; its #00FF00 hole keyed through (`manifest tag.hole_pct`, ~0.3 % of the label — kit_check calls it small; on the page it reads as a real hole with its eyelet ring, the kraft / fern showing through) |
+| W3.7 `twine` | `twine_own-108` | the twine down the packet and the labels' cords |
+| W3.8 `glass_mist` | `mist-640` | the opening's mist and every pane's fog (a soft veil: 640 px q 70, was 900 px / 370 kB, over the 250 kB file budget) |
+| W3.9 `ironwork`, W3.10 `ferns`, W3.11 `orchid_sprig` | `arches-1200`, `ferns-1000`, `sprig-700` | arches (parallax), ferns round the card, the sprig under headings |
+| W3.12 `specimen_frame`, W3.13 `herbarium_label` | `frame-800`, `label-640` | round every 4:5 photo; the story captions |
+| W3.14 `leaf_1..3` | `leaf_N-200` | leaflets of the opening and of a sent reply |
+| W3.15 `card_small` | `card_small-860` | the card from the packet; window keyed, the portrait set in it |
+| W3.16 `web_hero` | `og-1200x630.jpg` | share image |
+| PAKET 2 photos | `public/demo/victorian-glasshouse/*` + `lib/claim/demo-photos.json` | the live demo (`node scripts/build-demo-photos.ts --theme victorian-glasshouse`) |
+
+**The packet (eye check 2026-10-22).** The flap came 3.58:1, not the asked 100 × 30 box of the 0.68 stage (2.27:1), and
+was stretched 1.58× in height (its deckled edge and fern sprig thick and blurred); the body came 0.708:1. Now the body
+spans the width at its own height from its mouth (5 %) to the foot — the stage takes its shape, 0.672:1 (`manifest
+stage`; the asked boxes stay in `stage_asked`) — and the flap spans the width at its own height (18.8 %); twine, label
+and card keep their boxes (the card is already at its own 0.69:1). **Card text:** the first build set the text's top
+padding in % of the card's width, but a padding % is of the packet's width, so the text started 14 % too low and spilled
+past the card's foot (the risen card showed its date below the paper); now it starts 3 % under the window, the texts are
+sized by the card (cqw) and `fitCard` keeps the last line above the card's bottom margin. Green left in `ferns` /
+`leaf_N` is the foliage's own green (`checks.green`), not key colour.
+
 ## What waits for GPT
 
-| Part | Then (automatic) |
-|---|---|
-| W3.1 `fern_ground`, W3.2 `glass_ground`, W3.3 `herbarium_paper` | same roles, instead of the toned interim textures |
-| W3.4 `packet_body` | `packet_body-700` = the packet's front (stretched to the body box) |
-| W3.5 `packet_flap` | cut in two at its horizontal centre → `flap_out-700` (outer face) / `flap_in-700` (inner face) |
-| W3.6 `copper_tag` | `tag-360` (its #00FF00 hole keyed, `manifest tag.hole_pct`) = every copper label and the programme's row labels; the monogram / numbers sit on it |
-| W3.7 `twine` | `twine_own-160` = the twine down the packet and the labels' cords |
-| W3.8 `glass_mist` | `mist-900` = the texture of the opening's mist and of every pane's fog (the blur stays) |
-| W3.9 `ironwork` | `arches-1200` = `.arches` (opening, home hero, home signature, story page); parallax |
-| W3.10 `ferns` | `ferns-1000` = `.ferns` (opening — revealed by the wipe — and home hero) |
-| W3.11 `orchid_sprig` | `sprig-700` = `.sprig` under the headings (opens from its centre) |
-| W3.12 `specimen_frame` | #00FF00 window measured (`manifest frame.window_pct`), keyed → `frame-800` round every 4:5 photo; the pane sits in the window. No window → warning, photos stay without a case |
-| W3.13 `herbarium_label` | `label-640` = the caption labels under the story specimens |
-| W3.14 `leaf_1..3` | `leaf_N-200` + `--vg-leaves` → two leaflets in the opening, a few on a sent reply |
-| W3.15 `card_small` | #00FF00 window measured (`manifest card_small.window_pct`), keyed → `card_small-860` = the card from the packet; the portrait slot sits on the window |
-| W3.16 `web_hero` | `og-1200x630.jpg` (`tema_build.og_kirp`, bottom-aligned) instead of the montage |
-| PAKET 2 photos | `npm run seed -- --photos` / theme-check photos (now another design's photos, noted) |
-| PAKET 6 `print/invitation_front_5x7`, `invitation_back_5x7` | **by hand** (one block; boxes are measured on the art, G149): `lib/print/layouts.ts` → those sheets, `node scripts/build-print-assets.ts --theme victorian-glasshouse` — steps in GPT_PROMPTS.md PAKET 6 |
+Nothing of PAKET 5 or PAKET 2. Still **by hand**: PAKET 6 (`print/invitation_front_5x7`, `invitation_back_5x7` are in the
+collection) → `lib/print/layouts.ts`, `node scripts/build-print-assets.ts --theme victorian-glasshouse` (G149,
+GPT_PROMPTS.md PAKET 6).
 
 ## Deviations from the standard
 
@@ -128,6 +142,7 @@ neutral test images (repo untouched).
 
 ## Not tried
 
-Real iPhone / Android, Vercel deployment, real buyer photos, slow network, the GPT parts themselves, Safari's handling
-of `@property --wipe` and `backdrop-filter` under a mask (without `@property` the wipe jumps at its end; without
+Real iPhone / Android, Vercel deployment, real buyer photos, slow network, `theme-check.cjs` on a production build
+(checked on 2026-10-22 in Chromium only: demo route at 360×640 and 390×844, the opening seeked frame by frame, all pages,
+40-character names on the card), Safari's handling of `@property --wipe` and `backdrop-filter` under a mask (without `@property` the wipe jumps at its end; without
 `backdrop-filter` the mist is only the pale veil).

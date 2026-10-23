@@ -79,6 +79,8 @@ TISSUE_SRC = ROOT / "collections/18_Wildflower_Vellum/assets/gpt/parts/bg_tile.p
 
 # closed envelope geometry (site.css .envelope): width/height, flap, band and card in % of the envelope
 ENVELOPE = 0.74
+BUDGET = 2_500_000                # theme folder (docs/11 §6 allows 3 MB; the 39–48 wave keeps ≤ 2.5 MB)
+HAZE = 12                         # alpha below this is GPT haze round a cut-out part (bougainvillea): cleared
 FLAP = (0, 0, 100, 30)            # left, top, width, height — the straight flap, hinged on the top edge
 BAND = (0, 22, 100, 15.4)         # the belly band of six flags (each 16.67 % wide, 0.8 : 1)
 CARD = (7, 5, 86, 90)             # the card in the pocket
@@ -114,19 +116,36 @@ def trim(im: Image.Image, esik: int = 8) -> Image.Image:
 
 
 def green_window(im: Image.Image):
-    """#00FF00 window of a part: (RGBA with the window + 2 px fringe made transparent, (L, T, W, H) % of the image) or
-    (None, None) when the part has no green window."""
+    """The #00FF00 window of a framed part (a rectangle in every frame of this design): (RGBA with the window cleared,
+    (L, T, W, H) % of the image) or (None, None).
+
+    GPT left the middle of frame_3's window transparent inside a soft green rim (the first build keyed only the green,
+    and a green ring stayed round the photo). As in silver-photo-booth: the rectangle the green outlines (0.5–99.5
+    percentiles, robust to a stray pixel) is cleared with a 2 px margin and the green spill in a 12 px ring round it is
+    neutralised (green → the mean of red and blue)."""
     c = np.asarray(im).copy()
     rgb = c[..., :3].astype(np.int16)
-    green = (rgb[..., 1] > 150) & (rgb[..., 1] - np.maximum(rgb[..., 0], rgb[..., 2]) > 80) & (c[..., 3] > 128)
+    green = (rgb[..., 1] > 120) & (rgb[..., 1] - np.maximum(rgb[..., 0], rgb[..., 2]) > 60) & (c[..., 3] > 40)
     ys, xs = np.nonzero(green)
-    if not len(ys):
+    if len(ys) < 256:
         return None, None
     h, w = c.shape[:2]
-    x0, y0, x1, y1 = xs.min(), ys.min(), xs.max() + 1, ys.max() + 1
-    m = Image.fromarray((green * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(5))
-    c[..., 3] = np.where(np.asarray(m) > 0, 0, c[..., 3])
+    x0, x1 = int(np.percentile(xs, .5)), int(np.percentile(xs, 99.5)) + 1
+    y0, y1 = int(np.percentile(ys, .5)), int(np.percentile(ys, 99.5)) + 1
+    c[max(0, y0 - 2):y1 + 2, max(0, x0 - 2):x1 + 2, 3] = 0
+    ring = np.zeros((h, w), bool)
+    ring[max(0, y0 - 14):y1 + 14, max(0, x0 - 14):x1 + 14] = True
+    rgb = c[..., :3].astype(np.int16)
+    spill = ring & (rgb[..., 1] > np.maximum(rgb[..., 0], rgb[..., 2]) + 4)
+    c[..., 1] = np.where(spill, ((rgb[..., 0] + rgb[..., 2]) // 2).clip(0, 255), c[..., 1]).astype(np.uint8)
     return Image.fromarray(c, "RGBA"), (100 * x0 / w, 100 * y0 / h, 100 * (x1 - x0) / w, 100 * (y1 - y0) / h)
+
+
+def dehaze(im: Image.Image, below: int = HAZE) -> Image.Image:
+    """A cut-out part without GPT's faint alpha haze round it: alpha below `below` → 0."""
+    c = np.asarray(im.convert("RGBA")).copy()
+    c[..., 3] = np.where(c[..., 3] < below, 0, c[..., 3])
+    return Image.fromarray(c, "RGBA")
 
 
 def tissue(n: int) -> Image.Image:
@@ -185,6 +204,25 @@ def optional_parts(manifest: dict) -> tuple[list[str], dict]:
             tb.webp(t, out, [720], 84, manifest, out=OUT)
             f = manifest[out]["files"][0]["file"]
             css.append(f"{sel}{{background:url(img/{f}) 0 0/100% 100% no-repeat;filter:none}}")
+    # the envelope by the GPT pieces' own proportions (eye check 2026-10-22): the pocket came 1079×1458 (alpha box
+    # 0.75:1, the asked stage 0.74) and the flap 3.30:1 instead of the asked 100 × 30 box (2.47:1) — stretched 1.34× in
+    # height. Now the stage is the pocket's shape and the flap (and its liner) span the width at their own heights.
+    if "envelope_pocket" in got and "envelope_flap" in got:
+        pk, fl = got["envelope_pocket"], got["envelope_flap"]
+        aspect = pk.width / pk.height
+        flap_h = 100 * aspect * fl.height / fl.width
+        stage = {"aspect": round(aspect, 4), "pocket": [0, 0, 100, 100], "flap": [0, 0, 100, round(flap_h, 2)]}
+        if "flap_liner" in got:
+            ln = got["flap_liner"]
+            stage["liner_pct_of_flap"] = round(100 * (ln.height / ln.width) / (fl.height / fl.width), 2)
+        stage["_note"] = ("% of the closed envelope (left, top, width, height), measured on the GPT pieces at their own "
+                          "proportions; the flag band keeps the asked box (BAND)")
+        manifest["stage_measured"] = stage
+        css.append(f".stage{{--env-ratio:{stage['aspect']};--flap-h:{round(flap_h / 100, 4)}}}")
+        css.append(f".envelope{{aspect-ratio:{stage['aspect']}}}")
+        css.append(f".flap{{height:{pct(flap_h)}%}}")
+        if "liner_pct_of_flap" in stage:
+            css.append(f".flap-in{{bottom:auto;height:{pct(stage['liner_pct_of_flap'])}%}}")
 
     bulb = part("bulb")
     if bulb is not None:
@@ -205,7 +243,7 @@ def optional_parts(manifest: dict) -> tuple[list[str], dict]:
             manifest[f"frame_{n}_rejected"] = "no #00FF00 window"
             continue
         got[f"frame_{n}"] = keyed
-        tb.webp(keyed, f"frame_{n}", [720], 84, manifest, out=OUT)
+        tb.webp(keyed, f"frame_{n}", [720], 80, manifest, out=OUT)   # each ≤ 250 kB
         f = manifest[f"frame_{n}"]["files"][0]["file"]
         manifest[f"frame_{n}"]["window_pct"] = [round(v, 2) for v in win]
         L, T, W, H = win
@@ -237,7 +275,7 @@ def optional_parts(manifest: dict) -> tuple[list[str], dict]:
 
     bloom = part("bougainvillea")
     if bloom is not None:
-        b = trim(bloom)
+        b = trim(dehaze(bloom))      # GPT left a faint alpha haze (alpha 1–11) round the cluster
         got["bougainvillea"] = b
         tb.webp(b, "bloom", [720], 82, manifest, out=OUT)
         f = manifest["bloom"]["files"][0]["file"]
@@ -304,6 +342,9 @@ def main() -> int:
                          "_note": "% of the closed envelope (left, top, width, height); six flags across the band"}
 
     css, got = optional_parts(manifest)
+    if "stage_measured" in manifest:   # the GPT pieces' measured geometry is the envelope; the asked boxes stay as a note
+        manifest["stage_asked"] = manifest.pop("stage")
+        manifest["stage"] = manifest.pop("stage_measured")
     for n in range(1, 7):
         if (PARTS / f"flag_{n}.png").exists():
             got[f"flag_{n}"] = True
@@ -334,19 +375,30 @@ def main() -> int:
     head = ("/* Papel Picado Fiesta — GENERATED by build_images.py (do not edit): rules for the design's optional GPT\n"
             "   parts (W5–W13, GPT_PROMPTS.md) that exist in collections/38_Papel_Picado_Fiesta/assets/gpt/parts/.\n"
             "   A part that is not there has no rule: the page keeps its look from site.css. */\n")
-    (THEME / "parts.css").write_text(head + ("\n".join(css) + "\n" if css else "/* none yet */\n"), encoding="utf-8")
+    (THEME / "parts.css").write_text(head + ("\n".join(css) + "\n" if css else "/* none yet */\n"), encoding="utf-8", newline="\n")   # LF on Windows too (.gitattributes eol=lf)
     manifest["parts_css_rules"] = len(css)
 
     green = tb.yesil_denetle(OUT)
-    manifest["checks"] = {"green": green}
+    # the green flag (flag_4 / tissue_4), the embroidery's and the bougainvillea's leaves are green by nature; a frame
+    # (a keyed window) must be clean
+    manifest["checks"] = {"green": green, "_note": "flag_4 / tissue_4 / embroidery / liner / bloom: the parts' own green, "
+                                                   "not key residue; frames must be clean"}
+    big = {f["file"]: f["bytes"] for v in manifest.values() if isinstance(v, dict) for f in v.get("files", []) if f["bytes"] > 250_000}
+    keyed_green = {k: v for k, v in green.items() if k.startswith("frame_")}
     # a light ground: theme-check's default backdrop profile (dark_below 170) applies
     manifest["theme_check"] = {"particles": ".accent-layer", "first_screen": {"landscape": False, "names_min_px": 32}}
     manifest["bytes_total"] = tb.klasor_boyutu(THEME)
     tb.manifest_yaz(OUT, manifest)
+    mf = OUT / "manifest.json"   # LF on Windows too (.gitattributes eol=lf)
+    mf.write_bytes(mf.read_bytes().replace(b"\r\n", b"\n"))
     print(json.dumps(manifest["sources"], indent=1))
     print(f"papel-picado-fiesta: theme folder {manifest['bytes_total'] / 1e6:.2f} MB")
-    if manifest["bytes_total"] > tb.TEMA_BUTCE:
-        print("ERROR: theme folder over 3 MB", file=sys.stderr)
+    print(f"green (natural greens allowed): {green}; files over 250 kB: {big}")
+    if keyed_green or big:
+        print(f"ERROR: key green {keyed_green} / a file over 250 kB {big} in img/", file=sys.stderr)
+        return 1
+    if manifest["bytes_total"] > BUDGET:
+        print(f"ERROR: theme folder over {BUDGET / 1e6:.1f} MB", file=sys.stderr)
         return 1
     return 0
 

@@ -1,7 +1,9 @@
-// Highland Tartan & Thistle (35, G184): platform theme built before its GPT parts (interim wool, ground, paper, leather,
-// brass and mist), the strapped-envelope opening (K23 strict: buckle, strap, straight flap, sprig, card, two banks of
+// Highland Tartan & Thistle (35, G184): platform theme built from its own GPT parts (all of PAKET 5 since 2026-10-22;
+// the interim wool, ground, paper, leather, brass and mist stay only as the look of a missing part), the envelope laid by
+// the GPT layers' measured alpha boxes, the strapped-envelope opening (K23 strict: buckle, strap, straight flap, sprig, card, two banks of
 // mist), editable texts, scenes, the locket photo slots whose lids swing open, the mist behind the pages, demo route,
-// thank-you mode, audio cues, RSVP contract, print layout. Off sale ("coming") until approval.
+// the design's own sample photos, thank-you mode, audio cues, RSVP contract, print layout, a ≤ 2.5 MB folder. Off sale
+// ("coming") until approval.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
@@ -172,7 +174,7 @@ test('img/manifest.json names og + favicon; build script, README and thank-you s
   for (const f of ['thank-you.css', 'build_images.py', 'README.md']) assert.ok(existsSync(path.join(ROOT, 'themes', id, f)), f);
 });
 
-test('demo route renders every page with placeholders and preview navigation', async () => {
+test('demo route renders every page with the design\'s own sample photos (G155) and preview navigation', async () => {
   for (const page of PAGES) {
     const response = await handleDemoPage(new Request('https://preview.example/start/demo/' + id + (page === 'index' ? '' : '/' + page)), id, page);
     assert.equal(response.status, 200, page);
@@ -182,7 +184,10 @@ test('demo route renders every page with placeholders and preview navigation', a
     assert.equal(data.preview, true);
     assert.match(data.pages.home, /^\/start\/demo\/highland-tartan-thistle\/home/);
     if (page === 'index') assert.match($('.opening-heading').text(), /Together with their families/);
-    if (page === 'home') assert.match($('[data-photo="hero_portrait"]').attr('src') || '', /img\/ph_oval-640\.webp/);
+    // the demo fills the empty slots with the design's PAKET 2 photos (public/demo/highland-tartan-thistle)
+    if (page === 'home') assert.match($('[data-photo="hero_portrait"]').attr('src') || '', /^\/demo\/highland-tartan-thistle\/hero_portrait-\d+w\.webp/);
+    if (page === 'story') for (const n of [1, 2, 3]) assert.match($(`[data-photo="story_${n}"]`).attr('src') || '', new RegExp(`^/demo/highland-tartan-thistle/story_${n}-\\d+w\\.webp`));
+    if (page === 'details') assert.match($('[data-photo="venue"]').attr('src') || '', /^\/demo\/highland-tartan-thistle\/venue-\d+w\.webp/);
     if (page === 'story') assert.equal($('.moment').length, 3);
   }
 });
@@ -249,4 +254,49 @@ test('G167: optional GPT parts come in through the generated parts.css — a pag
   assert.equal(m.parts_css_rules, (parts.match(/^[^/\s][^\n]*\{/gm) ?? []).length, 'manifest counts the rules parts.css carries');
   if (!m.parts.used.length) assert.match(parts, /none yet/);
   assert.doesNotMatch(parts, /<svg|data:image/);
+});
+
+test('all PAKET 5 parts are used; the envelope is laid by the GPT layers\' measured alpha boxes; ≤ 2.5 MB', () => {
+  const m = JSON.parse(read('img/manifest.json'));
+  const parts = read('parts.css');
+  assert.deepEqual(m.parts.waiting_for_gpt, []);
+  assert.equal(m.parts.used.length, 20);
+  const st = m.stage;
+  const ratio = (k: string) => m[k].src_size[0] / m[k].src_size[1];
+  const toW = (h: number) => h / st.aspect;      // % of the height → % of the width
+  // the back's alpha box is the envelope; the pocket spans its width with its foot on the back's foot; the flap spans
+  // the width from the fold — each at its own proportions (no back edge above the flap, no lining under the pocket)
+  assert.equal(m.stage_asked.aspect, 0.9);
+  assert.deepEqual(st.back, [0, 0, 100, 100]);
+  assert.ok(Math.abs(ratio('env_back') - st.aspect) / st.aspect < 0.01, 'back = the envelope box');
+  assert.ok(Math.abs(st.front[1] + st.front[3] - 100) < 0.05, 'pocket foot on the back foot');
+  assert.ok(Math.abs(100 / toW(st.front[3]) - ratio('env_front')) / ratio('env_front') < 0.01, 'pocket at its own proportions');
+  assert.deepEqual(st.flap.slice(0, 3), [0, 0, 100]);
+  assert.ok(Math.abs(100 / toW(st.flap[3]) - ratio('flap')) / ratio('flap') < 0.01, 'flap at its own proportions');
+  assert.ok(st.front[1] < st.flap[3], 'the flap covers the pocket mouth');
+  // strap and buckle at their own proportions; the buckle centred on the flap's lower edge
+  const [sl, stp, sw, sh] = st.strap;
+  assert.ok(Math.abs(sw / toW(sh) - ratio('strap')) / ratio('strap') < 0.01, 'strap at its own proportions');
+  const [bl, bt, bw, bh] = st.buckle_in_strap;
+  assert.ok(Math.abs((sw * bw) / 100 / toW((sh * bh) / 100) - ratio('buckle')) / ratio('buckle') < 0.01, 'buckle at its own proportions');
+  assert.ok(Math.abs(stp + (sh * (bt + bh / 2)) / 100 - st.flap[3]) < 0.1, 'buckle on the flap\'s lower edge');
+  assert.ok(Math.abs(sl + (sw * (bl + bw / 2)) / 100 - 50) < 0.1, 'buckle centred');
+  const num = (v: number) => String(v);
+  assert.match(parts, new RegExp(`\\.stage\\{--env-ratio:${st.aspect}\\}`));
+  assert.match(parts, new RegExp(`\\.satchel\\{aspect-ratio:${st.aspect}\\}`));
+  assert.match(parts, new RegExp(`\\.satchel>\\.env-front\\{left:0%;top:${num(st.front[1])}%;width:100%;height:${num(st.front[3])}%\\}`));
+  assert.match(parts, new RegExp(`\\.satchel>\\.flap\\{left:0%;top:0%;width:100%;height:${num(st.flap[3])}%\\}`));
+  assert.match(parts, new RegExp(`\\.satchel>\\.strap\\{left:${num(sl)}%;top:${num(stp)}%;width:${num(sw)}%;height:${num(sh)}%\\}`));
+  assert.match(parts, new RegExp(`\\.strap>\\.buckle\\{left:${num(bl)}%;top:${num(bt)}%;width:${num(bw)}%;height:${num(bh)}%\\}`));
+  assert.match(css, /\.stage\{--env-ratio:\.9;--obj:min\([^;]*var\(--env-ratio\)/);
+  // the card at its own proportions inside the closed envelope; the locket's oval window keyed whole (no green rim)
+  const cb = m.card_small.box_pct;
+  assert.ok(cb[1] >= 0 && cb[1] + cb[3] <= 100, 'card inside the closed envelope');
+  assert.ok(Math.abs(cb[2] / toW(cb[3]) - ratio('card_small')) / ratio('card_small') < 0.01, 'card at its own proportions');
+  assert.deepEqual(m.checks.green, {}, 'no key green left in img/');
+  // the painted hills: their top edge fades into the ground, dimmed under the cream date and hint (light only)
+  assert.match(css, /\.opening>\.hills\{[^}]*filter:brightness\([^}]*mask-image:linear-gradient\(#0000,#000 30%\)/);
+  // size: docs/11 §6 (every file ≤ 250 kB, folder ≤ 3 MB); this wave keeps the folder ≤ 2.5 MB
+  assert.ok(m.bytes_total <= 2_500_000, String(m.bytes_total));
+  for (const [k, v] of Object.entries(m as Record<string, { files?: { bytes: number }[] }>)) for (const f of v.files ?? []) assert.ok(f.bytes <= 250_000, k);
 });

@@ -2,8 +2,9 @@
 
 A tartan wool envelope held shut by a leather strap and a brass buckle, over misty Highland hills; heather, thistle,
 cream paper and antique brass lockets. New design of the 33–38 wave (`docs/24_YENI_TASARIMLAR.md`, row 35, task G184;
-K23 strict: the first page is a closed envelope). Status: **coming** (`lib/marketing/config.ts`) — the design's own GPT
-parts do not exist yet; sale, price and approval wait for them and for an eye check.
+K23 strict: the first page is a closed envelope). Status: **coming** (`lib/marketing/config.ts`). Since 2026-10-22 the
+theme is built from all of its own GPT parts (PAKET 5) and the demo shows its own PAKET 2 photos; sale, price and approval
+wait for the user's eye check.
 
 ## Files (docs/11 §1)
 
@@ -14,8 +15,8 @@ parts do not exist yet; sale, price and approval wait for them and for an eye ch
 | `index.html` … `rsvp.html` | closed envelope · home · story · details · RSVP |
 | `site.css` / `thank-you.css` | tokens, layout, the envelope keyframes, the mist, the locket lids and the mist reveal / thank-you mode (G075) |
 | `site.js` | `MOTION` (opening steps, scenes, the mist's scroll drift, accents), long names, card fit, scenes, the mist behind the pages (`--mist`), countdown, opening, heather florets of a sent reply |
-| `build_images.py` | GPT textures → `img/` (interim toning, brass crop, mist from a blurred texture, placeholders, og montage, favicon, `manifest.json`); every optional GPT part that exists → `img/` + `parts.css` |
-| `parts.css` | **generated** by `build_images.py` (do not edit): the rules for the optional GPT parts present in `parts/`; a comment only while none exists. Linked by every page after `site.css` |
+| `build_images.py` | GPT parts → `img/` (cut to their alpha boxes, #00FF00 windows keyed, scaled; placeholders, og, favicon, `manifest.json`) + `parts.css`; lays the envelope layers by their measured alpha boxes; folder ≤ 2.5 MB, every file ≤ 250 kB (exit ≠ 0 otherwise) |
+| `parts.css` | **generated** by `build_images.py` (do not edit): the rules for the GPT parts present in `parts/`, with the measured envelope (`--env-ratio`, pocket, flap, strap, buckle, card). Linked by every page after `site.css` |
 
 Shared platform layers: RSVP (`/rsvp/form.js`, questions, guest names), map block (`data-map`, demo pin Pitlochry),
 music + opening sounds (`lib/audio/catalog.ts`: Evening Strings; buckle 150 · strap 600 · flap 1300 · card 2500 · chime
@@ -63,49 +64,44 @@ Reduced motion: no opening (tap → home), no sheen, no hint breathing, no mist 
   again". When a reply is sent (`rsvp:state` success) a few heather florets drift down (GPT florets only).
 - Text steps come **out of the mist**: from a soft blur they sharpen, drifting in a little from the left.
 
-## Interim build (until the GPT parts arrive)
+## Built from the GPT parts (2026-10-22)
 
-The design's own parts are ordered in `collections/35_Highland_Tartan_Thistle/assets/gpt/GPT_PROMPTS.md` (PAKET 5 website
-layers, PAKET 2 sample photos, PAKET 6 print sheets). Like Celestial Observatory (G168) the theme is built from GPT pixels
-that already exist, cut, toned and blurred, nothing drawn (K21):
+All PAKET 5 parts of `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/` are used (`img/manifest.json`
+`parts.used` = 20, `waiting_for_gpt` empty); nothing is drawn (K21). `python3 build_images.py` rebuilds `img/` and
+`parts.css`. The interim sources (other designs' plain textures toned, 17's brass, a blurred mist) stay in the build only
+as the look of a missing part; leather and brass textures remain as the strap's / buckle's interim look.
 
-- wool = `collections/09_Lavender_Provence/assets/gpt/parts/bg_tile.png` (plain woven linen) toned heather — **no tartan
-  yet**: a tartan is a pattern, and no stripe is drawn to fake one; the envelope's back and the flap's lining are the same
-  wool darkened;
-- moss ground = `collections/17_Emerald_Gold_Estate/assets/gpt/parts/bg_tile.png` (plain green velvet) toned dark moss;
-- cream paper = `collections/01_Olive_Ivory/assets/gpt/parts/bg_tile.png` toned cream;
-- leather = `collections/07_Burgundy_Velvet/assets/gpt/parts/bg_tile.png` (mottled velvet) toned saddle brown;
-- brass = the plain metal field inside `collections/17_Emerald_Gold_Estate/assets/gpt/parts/closure.png`; the interim
-  buckle is a rectangle of it, the interim locket lid an oval crop of it with light on it;
-- mist = `collections/08_Winter_Evergreen/assets/gpt/parts/bg_tile.png` blurred hard, its own soft blotches as the alpha;
-- no hills, heather, thistle, locket rims or florets: their elements stay hidden (`display:none`) until `parts.css`
-  shows them. The look is plain until then; sale needs the GPT parts + an eye check.
+| Part | Built into | Where |
+|---|---|---|
+| W2.1 `tartan_wool`, W2.2 `cream_paper`, W2.3 `moss_ground` | `wool-640`, `paper-640/1024`, `ground-640` | the flap's lining (darkened), thank-you decor; cards, bands, form, print sheets; the page ground |
+| W2.4 `hills` | `hills-1024` | behind the envelope (bottom 62 %); its top edge fades into the ground and it is dimmed (`filter`, a gradient mask — light only) so the cream date and hint read on it; the texts below the envelope get a dark halo |
+| W2.5 `mist` | `mist-1024` | the two mist banks (opening, home hero, story / details) |
+| W2.6 `envelope_back`, W2.7 `envelope_front`, W2.8 `flap`, W2.9 `strap`, W2.10 `buckle` | `env_back-760`, `env_front-760`, `flap-760`, `strap-182`, `buckle-320` | the closed envelope, laid by measured boxes (below) |
+| W2.11 `heather_sprig`, W2.12 `heather_divider`, W2.13 `heather_floret_1..3`, W2.16 `thistle` | `sprig-420`, `divider-800`, `floret_N-96`, `thistle-400` | the sprig from the pocket, under headings, a sent reply, signatures |
+| W2.14 `locket_rim`, W2.15 `locket_lid` | `rim-640`, `lid-560` | round every oval photo; the lid swings open |
+| W2.17 `card_small` | `card_small-760` | the card in the envelope; oval window keyed, the portrait set in it |
+| W2.18 `web_hero` | `og-1200x630.jpg` | share image (`tema_build.og_kirp`, bottom-aligned) |
+| PAKET 2 photos | `public/demo/highland-tartan-thistle/*` + `lib/claim/demo-photos.json` | the live demo (`node scripts/build-demo-photos.ts --theme highland-tartan-thistle`); seed / theme-check use the same folder |
 
-The design's own parts need no template work when they arrive (G167): `python3 build_images.py` takes each part that
-exists in `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/` and writes `parts.css`; the manifest lists
-`parts.used` and `parts.waiting_for_gpt`. `python3 tools/gpt_kuru_deneme.py --tema highland-tartan-thistle --sekil
-collections/35_Highland_Tartan_Thistle/assets/gpt/kuru_sekil.json [--theme-check --stress]` rehearses the drop-in with
-neutral test images (repo untouched).
+**The envelope (eye check 2026-10-22).** The three layers were asked on one canvas in one place and the first build cut
+that canvas at the asked boxes; GPT drifted — the pocket came 2.5 % narrower than the back and stopped 3 % above its foot
+(the back's dark lining showed as a band under it), the flap started 5 % below the back's top (the back's tartan edge
+showed as a strip above it); the strap came 0.13:1 instead of 0.18:1 and was squashed. As in 39–48 every layer is cut to
+its alpha box and laid by its measured edges (`manifest stage`; the asked boxes stay in `stage_asked`): the back's alpha
+box is the envelope (0.935:1); the pocket spans its width with its foot on the back's foot (72.6 % high); the flap spans
+the width from the fold at its own height (51 %); the strap at its own proportions, 12.5 % wide, its cut end just over the
+top edge; the buckle at its own proportions, 20 % wide, centred on the flap's lower edge; the card at its own 0.83:1, 80 %
+wide. **Locket rim:** GPT left the middle of the oval #00FF00 window transparent inside a soft green rim — the window =
+the green + the hole it encloses (flood fill), cleared, the spill neutralised (`checks.green` empty). The card's texts are
+sized by the card (cqw) and `fitCard` keeps the last line above the card's bottom border.
 
 ## What waits for GPT
 
-| Part | Then (automatic) |
-|---|---|
-| W2.1 `tartan_wool`, W2.2 `cream_paper`, W2.3 `moss_ground` | same roles, instead of the toned interim textures |
-| W2.4 `hills` | `hills-1024` = `.hills` behind the envelope (opening) |
-| W2.5 `mist` | `mist-1024` = every mist bank (instead of the blurred texture) |
-| W2.6 `envelope_back`, W2.7 `envelope_front`, W2.8 `flap` | one canvas of the envelope's ratio; each scaled to its box (`.env-back`, `.env-front`, `.flap::before`); the flap's lining stays the darker wool |
-| W2.9 `strap`, W2.10 `buckle` | trimmed → `strap-200`, `buckle-320` on the strap and buckle boxes |
-| W2.11 `heather_sprig` | `sprig-420` = the sprig that rises out of the pocket |
-| W2.12 `heather_divider` | `divider-800` = `.band-sprig` under the headings on cream paper |
-| W2.13 `heather_floret_1..3` | `floret_N-96` + `--ht-florets` → the florets of a sent reply |
-| W2.14 `locket_rim` | #00FF00 oval window measured (`manifest rim.window_pct`), keyed → `rim-640` round every oval photo; photo and lid sit in the window; the locket takes the part's ratio. No window → warning, photos stay without a rim |
-| W2.15 `locket_lid` | `lid-560` = the lid that swings open (instead of the brass crop) |
-| W2.16 `thistle` | `thistle-400` = home signature, RSVP closing |
-| W2.17 `card_small` | oval #00FF00 window measured (`manifest card_small.window_pct`), keyed → `card_small-760` = the card in the envelope; the portrait slot sits on the window. No window → warning, card stays cream paper |
-| W2.18 `web_hero` | `og-1200x630.jpg` (`tema_build.og_kirp`, bottom-aligned) instead of the montage |
-| PAKET 2 photos | `npm run seed -- --photos` / theme-check photos (now 03's photos, noted) |
-| PAKET 6 `print/invitation_front_5x7`, `invitation_back_5x7` | **by hand** (one block; boxes are measured on the art, G149): `lib/print/layouts.ts` → those sheets, `node scripts/build-print-assets.ts --theme highland-tartan-thistle` — steps in GPT_PROMPTS.md PAKET 6 |
+Nothing of PAKET 5 or PAKET 2. Possible regenerate: W2.10 `buckle` is drawn for a horizontal strap (centre bar upright,
+prong pointing sideways); on the vertical strap the prong crosses the strap. A portrait buckle (centre bar across, prong
+pointing down) would read truer. Still **by hand**: PAKET 6 (`print/invitation_front_5x7`, `invitation_back_5x7`) →
+`lib/print/layouts.ts`, `node scripts/build-print-assets.ts --theme highland-tartan-thistle` (G149, GPT_PROMPTS.md
+PAKET 6).
 
 ## Deviations from the standard
 
@@ -116,5 +112,7 @@ neutral test images (repo untouched).
 
 ## Not tried
 
-Real iPhone / Android, Vercel deployment, real buyer photos, slow network, the GPT parts themselves, Safari's handling of
-`@property --clear` (without it the venue photo simply appears) and of the 3D flap's backface.
+Real iPhone / Android, Vercel deployment, real buyer photos, slow network, Safari's handling of `@property --clear`
+(without it the venue photo simply appears) and of the 3D flap's backface, `theme-check.cjs` on a production build.
+Checked on 2026-10-22 in Chromium only (demo route at 360×640 and 390×844: closed, the opening seeked frame by frame,
+home / story / details / RSVP full pages, 40-character names on the card).

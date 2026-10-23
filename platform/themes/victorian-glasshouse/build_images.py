@@ -86,6 +86,7 @@ BODY = (0, 5, 100, 95)            # the front wall below the mouth (the back wal
 CARD = (9, 4, 82, 80)             # the card inside (0.70:1)
 TWINE = (45, -3, 10, 106)         # the twine down the middle (cut at the knot: top half up, bottom half down)
 TAG = (49, 40, 30, 30)            # the copper label hanging from the knot (pivot = its hole, top-left)
+BUDGET = 2_500_000                # theme folder (docs/11 §6 allows 3 MB; the 39–48 wave keeps ≤ 2.5 MB)
 
 
 def tonla(src: Image.Image, renk, sigma: float) -> Image.Image:
@@ -148,20 +149,22 @@ def twine_strip() -> Image.Image:
     return Image.open(TWINE_SRC).convert("RGBA").crop(TWINE_BOX)
 
 
-def packet(kraft: Image.Image, copper: Image.Image, twine: Image.Image, h: int, own: dict) -> Image.Image:
+def packet(kraft: Image.Image, copper: Image.Image, twine: Image.Image, h: int, own: dict, stage: dict | None = None) -> Image.Image:
     """The closed seed packet as the page shows it: the kraft body and its flap (GPT, or darker / lighter kraft), the
-    twine down the middle and the copper label at the knot."""
-    w = round(h * STAGE)
+    twine down the middle and the copper label at the knot (the measured stage when the GPT body and flap exist)."""
+    measured = stage is not None and "flap" in stage
+    w = round(h * (stage["aspect"] if measured else STAGE))
+    BODY_, FLAP_ = (stage["body"], stage["flap"]) if measured else (BODY, FLAP)
     canvas = Image.new("RGBA", (w + 60, h + 60), (0, 0, 0, 0))
     o = 30
     box = lambda b: (round(w * b[0] / 100), round(h * b[1] / 100), round(w * b[2] / 100), round(h * b[3] / 100))  # noqa: E731
     shade = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
     shade.paste((6, 14, 10, 140), (o + 5, o + 10, o + w + 5, o + h + 10))
     canvas.alpha_composite(shade.filter(ImageFilter.GaussianBlur(9)))
-    x, y, bw, bh = box(BODY)
+    x, y, bw, bh = box(BODY_)
     body = own.get("packet_body") or ImageEnhance.Brightness(kraft).enhance(.94).resize((max(bw, bh),) * 2).crop((0, 0, bw, bh))
     canvas.alpha_composite(body.convert("RGBA").resize((bw, bh)), (o + x, o + y))
-    x, y, fw, fh = box(FLAP)
+    x, y, fw, fh = box(FLAP_)
     flap = own.get("flap_out") or ImageEnhance.Brightness(kraft).enhance(1.06).resize((max(fw, fh),) * 2).crop((0, 0, fw, fh))
     canvas.alpha_composite(flap.convert("RGBA").resize((fw, fh)), (o + x, o + y))
     x, y, tw, th = box(TWINE)
@@ -199,6 +202,28 @@ def optional_parts(manifest: dict) -> tuple[list[str], dict]:
             f = manifest[out]["files"][0]["file"]
             css.append(f"{cls}{{background:url(img/{f}) 0 0/100% 100% no-repeat;filter:none}}")
 
+    # the packet laid by the measured GPT pieces (eye check 2026-10-22): the flap came 3.58:1 instead of the asked
+    # 100 × 30 box of a 0.68 stage (2.27:1) and was stretched 1.58× in height; the body 0.708:1 instead of 0.716. Now the
+    # body spans the width at its own height from its mouth (BODY's top) to the foot — the stage takes its shape — and
+    # the flap spans the width at its own height from the fold (the inner face at its own height under it)
+    if "packet_body" in got and "flap_out" in got:
+        bw_, bh_ = got["packet_body"].size
+        aspect = (100 - BODY[1]) / 100 * bw_ / bh_
+        fo = got["flap_out"]
+        flap_h = 100 * aspect * fo.height / fo.width
+        stage = {"aspect": round(aspect, 4), "body": [0, BODY[1], 100, 100 - BODY[1]], "flap": [0, 0, 100, round(flap_h, 2)]}
+        if "flap_in" in got:
+            fi = got["flap_in"]
+            stage["flap_in_pct_of_flap"] = round(100 * (fi.height / fi.width) / (fo.height / fo.width), 2)
+        stage["_note"] = ("% of the closed packet (left, top, width, height), measured on the GPT pieces at their own "
+                          "proportions; twine and label keep the asked boxes (TWINE, TAG)")
+        manifest["stage_measured"] = stage
+        css.append(f".stage{{--env-ratio:{stage['aspect']}}}")
+        css.append(f".packet{{aspect-ratio:{stage['aspect']}}}")
+        css.append(f".pk-flap{{height:{pct(stage['flap'][3])}%}}")
+        if "flap_in_pct_of_flap" in stage:
+            css.append(f".pk-flap-in{{bottom:auto;height:{pct(stage['flap_in_pct_of_flap'])}%}}")
+
     tag = part("copper_tag")
     if tag is not None:
         keyed, win = green_window(trim(tag))
@@ -222,7 +247,7 @@ def optional_parts(manifest: dict) -> tuple[list[str], dict]:
     mist = part("glass_mist")
     if mist is not None:
         got["glass_mist"] = mist
-        tb.webp(mist, "mist", [900], 78, manifest, out=OUT)
+        tb.webp(mist, "mist", [640], 70, manifest, out=OUT)   # a soft veil (cover): ≤ 250 kB
         f = manifest["mist"]["files"][0]["file"]
         css.append(f".mist,.fog{{background-image:url(img/{f});background-size:cover}}")
 
@@ -293,8 +318,11 @@ def optional_parts(manifest: dict) -> tuple[list[str], dict]:
             f = manifest["card_small"]["files"][0]["file"]
             L, T, W, H = win
             manifest["card_small"]["window_pct"] = [round(v, 2) for v in win]
-            card_ratio = CARD[2] / 100 * STAGE / (CARD[3] / 100)
-            below = (T + H) / card_ratio + 3      # window bottom in % of the card's WIDTH (padding), + 3 % gap
+            # padding % is of the containing block's width (the packet), not the card's: the window's foot + 3 % of
+            # the card's height, in % of the packet's width (the first build put the text 14 % too low, so it spilled)
+            aspect = (manifest.get("stage_measured") or {}).get("aspect", STAGE)
+            below = (T + H + 3) / 100 * CARD[3] / aspect
+            manifest["card_small"]["text_top_pct_of_card"] = round(T + H + 3, 2)
             css.append(f".packet .card{{background:url(img/{f}) 0 0/100% 100% no-repeat;justify-content:flex-start;"
                        f"padding-top:{pct(below)}%}}")
             css.append(f".packet .card .card-photo,.packet .card.tight .card-photo{{position:absolute;"
@@ -341,6 +369,9 @@ def main() -> int:
                          "tag_pct": TAG, "_note": "% of the closed seed packet (left, top, width, height)"}
 
     css, got = optional_parts(manifest)
+    if "stage_measured" in manifest:   # the GPT pieces' measured geometry is the packet; the asked boxes stay as a note
+        manifest["stage_asked"] = manifest.pop("stage")
+        manifest["stage"] = manifest.pop("stage_measured")
     hero = PARTS / "web_hero.png"
     if hero.exists():
         og, og_info = tb.og_kirp(Image.open(hero), hiza="alt")
@@ -349,11 +380,11 @@ def main() -> int:
         got["web_hero"] = True
     else:   # the closed seed packet on the fern ground (montage of the page's own crops, no text)
         og = fern.resize((1200, 1200)).crop((0, 285, 1200, 915))
-        pk = packet(kraft, copper, twine, 520, got)
+        pk = packet(kraft, copper, twine, 520, got, manifest["stage"])
         og.paste(pk, ((1200 - pk.width) // 2, (630 - pk.height) // 2), pk)
         manifest["og"] = {"file": "og-1200x630.jpg", "source": "montage: closed seed packet (kraft, twine, copper) on the fern ground",
                           "bytes": tb.og_kaydet(og, OUT / "og-1200x630.jpg")}
-    icon, icon_info = tb.ikon(packet(kraft, copper, twine, 400, got))
+    icon, icon_info = tb.ikon(packet(kraft, copper, twine, 400, got, manifest["stage"]))
     icon.save(OUT / "favicon.png", optimize=True)
     manifest["favicon"] = {**icon_info, "file": "favicon.png", "bytes": (OUT / "favicon.png").stat().st_size}
 
@@ -371,19 +402,28 @@ def main() -> int:
     head = ("/* Victorian Glasshouse — GENERATED by build_images.py (do not edit): rules for the design's optional GPT\n"
             "   parts (W3.4–W3.15, GPT_PROMPTS.md) that exist in collections/36_Victorian_Glasshouse/assets/gpt/parts/.\n"
             "   A part that is not there has no rule: the page keeps its look from site.css. */\n")
-    (THEME / "parts.css").write_text(head + ("\n".join(css) + "\n" if css else "/* none yet */\n"), encoding="utf-8")
+    (THEME / "parts.css").write_text(head + ("\n".join(css) + "\n" if css else "/* none yet */\n"), encoding="utf-8", newline="\n")   # LF on Windows too (.gitattributes eol=lf)
     manifest["parts_css_rules"] = len(css)
 
     green = tb.yesil_denetle(OUT)
-    manifest["checks"] = {"green": green}
+    # ferns and leaflets are green by nature (not key residue); every keyed window part must be clean
+    manifest["checks"] = {"green": green, "_note": "ferns / leaf_N: the GPT foliage's own green, not key residue"}
+    big = {f["file"]: f["bytes"] for v in manifest.values() if isinstance(v, dict) for f in v.get("files", []) if f["bytes"] > 250_000}
+    keyed_green = {k: v for k, v in green.items() if not k.startswith(("ferns", "leaf_"))}
     manifest["theme_check"] = {"particles": ".accent-layer", "first_screen": {"landscape": False, "names_min_px": 32},
                                "backdrop": {"edge_max": 2.2, "dark_max": 0.05, "dark_below": 0, "light_above": 140}}
     manifest["bytes_total"] = tb.klasor_boyutu(THEME)
     tb.manifest_yaz(OUT, manifest)
+    mf = OUT / "manifest.json"   # LF on Windows too (.gitattributes eol=lf)
+    mf.write_bytes(mf.read_bytes().replace(b"\r\n", b"\n"))
     print(json.dumps(manifest["sources"], indent=1))
     print(f"victorian-glasshouse: theme folder {manifest['bytes_total'] / 1e6:.2f} MB")
-    if manifest["bytes_total"] > tb.TEMA_BUTCE:
-        print("ERROR: theme folder over 3 MB", file=sys.stderr)
+    print(f"green (foliage allowed): {green}; files over 250 kB: {big}")
+    if keyed_green or big:
+        print(f"ERROR: key green {keyed_green} / a file over 250 kB {big} in img/", file=sys.stderr)
+        return 1
+    if manifest["bytes_total"] > BUDGET:
+        print(f"ERROR: theme folder over {BUDGET / 1e6:.1f} MB", file=sys.stderr)
         return 1
     return 0
 

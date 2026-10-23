@@ -1,8 +1,8 @@
 {
  "sources": {
-  "cream_paper": "collections/01_Olive_Ivory/assets/gpt/parts/bg_tile.png",
-  "sage_paper": "collections/13_Enchanted_Forest/assets/gpt/parts/bg_tile.png",
-  "lilac_lining": "collections/15_Cherry_Blossom/assets/gpt/parts/bg_tile.png"
+  "cream_paper": "collections\\37_Art_Nouveau_Lily\\assets\\gpt\\parts\\cream_paper.png",
+  "sage_paper": "collections\\37_Art_Nouveau_Lily\\assets\\gpt\\parts\\sage_paper.png",
+  "lilac_lining": "collections\\37_Art_Nouveau_Lily\\assets\\gpt\\parts\\lilac_lining.png"
  },
  "paper": {
   "src_size": [
@@ -15,13 +15,13 @@
     "file": "paper-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 8596
+    "bytes": 8082
    },
    {
     "file": "paper-1024.webp",
     "w": 1024,
     "h": 1024,
-    "bytes": 65982
+    "bytes": 45286
    }
   ]
  },
@@ -36,13 +36,13 @@
     "file": "sage-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 7394
+    "bytes": 12418
    },
    {
     "file": "sage-1024.webp",
     "w": 1024,
     "h": 1024,
-    "bytes": 23684
+    "bytes": 45022
    }
   ]
  },
@@ -57,7 +57,7 @@
     "file": "lining-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 16406
+    "bytes": 42104
    }
   ]
  },
@@ -72,7 +72,7 @@
     "file": "ph_arch-640.webp",
     "w": 640,
     "h": 896,
-    "bytes": 1588
+    "bytes": 1204
    }
   ]
  },
@@ -87,7 +87,7 @@
     "file": "ph_wide-640.webp",
     "w": 640,
     "h": 360,
-    "bytes": 702
+    "bytes": 544
    }
   ]
  },
@@ -112,7 +112,261 @@
    "aspect": "16/9"
   }
  },
- "stage": {
+ "env_back": {
+  "src_size": [
+   1045,
+   1382
+  ],
+  "ratio": 0.75615,
+  "files": [
+   {
+    "file": "env_back-900.webp",
+    "w": 900,
+    "h": 1190,
+    "bytes": 162992
+   }
+  ]
+ },
+ "env_pocket": {
+  "src_size": [
+   1045,
+   1382
+  ],
+  "ratio": 0.75615,
+  "files": [
+   {
+    "file": "env_pocket-900.webp",
+    "w": 900,
+    "h": 1190,
+    "bytes": 33524
+   }
+  ]
+ },
+ "petal_l": {
+  "src_size": [
+   1045,
+   1382
+  ],
+  "ratio": 0.75615,
+  "files": [
+   {
+    "file": "petal_l-900.webp",
+    "w": 900,
+    "h": 1190,
+    "bytes": 60664
+   }
+  ]
+ },
+ "petal_l_m": {
+  "src_size": [
+   1045,
+   1382
+  ],
+  "ratio": 0.75615,
+  "files": [
+   {
+    "file": "petal_l_m-900.webp",
+    "w": 900,
+    "h": 1190,
+    "bytes": 47992
+   }
+  ]
+ },
+ "petal_r": {
+  "src_size": [
+   1045,
+   1382
+  ],
+  "ratio": 0.75615,
+  "files": [
+   {
+    "file": "petal_r-900.webp",
+    "w": 900,
+    "h": 1190,
+    "bytes": 61130
+   }
+  ]
+ },
+ "petal_r_m": {
+  "src_size": [
+   1045,
+   1382
+  ],
+  "ratio": 0.75615,
+  "files": [
+   {
+    "file": "petal_r_m-900.webp",
+    "w": 900,
+    "h": 1190,
+    "bytes": 46234
+   }
+  ]
+ },
+ "petal_c": {
+  "src_size": [
+   1045,
+   1382
+  ],
+  "ratio": 0.75615,
+  "files": [
+   {
+    "file": "petal_c-900.webp",
+    "w": 900,
+    "h": 1190,
+    "bytes": 67402
+   }
+  ]
+ },
+ "petal_c_m": {
+  "src_size": [
+   1045,
+   1382
+  ],
+  "ratio": 0.75615,
+  "files": [
+   {
+    "file": "petal_c_m-900.webp",
+    "w": 900,
+    "h": 1190,
+    "bytes": 48456
+   }
+  ]
+ },
+ "medallion": {
+  "src_size": [
+   1208,
+   1208
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "medallion-400.webp",
+    "w": 400,
+    "h": 400,
+    "bytes": 58710
+   }
+  ]
+ },
+ "card_small": {
+  "src_size": [
+   1029,
+   1447
+  ],
+  "ratio": 0.71113,
+  "files": [
+   {
+    "file": "card_small-860.webp",
+    "w": 860,
+    "h": 1209,
+    "bytes": 82466
+   }
+  ],
+  "window_pct": [
+   22.35,
+   7.12,
+   55.3,
+   50.66
+  ],
+  "text_top_pct_of_card": 60.77
+ },
+ "mask_card": {
+  "file": "mask_card.png",
+  "size": [
+   480,
+   618
+  ],
+  "bytes": 7207
+ },
+ "arch": {
+  "src_size": [
+   1065,
+   1416
+  ],
+  "ratio": 0.75212,
+  "files": [
+   {
+    "file": "arch-640.webp",
+    "w": 640,
+    "h": 851,
+    "bytes": 104804
+   }
+  ],
+  "window_pct": [
+   16.81,
+   14.69,
+   66.48,
+   75.0
+  ]
+ },
+ "mask_arch": {
+  "file": "mask_arch.png",
+  "size": [
+   480,
+   720
+  ],
+  "bytes": 7221
+ },
+ "halo": {
+  "src_size": [
+   1247,
+   1247
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "halo-900.webp",
+    "w": 900,
+    "h": 900,
+    "bytes": 230910
+   }
+  ]
+ },
+ "lily": {
+  "src_size": [
+   965,
+   1552
+  ],
+  "ratio": 0.62178,
+  "files": [
+   {
+    "file": "lily-480.webp",
+    "w": 480,
+    "h": 772,
+    "bytes": 131434
+   }
+  ]
+ },
+ "whip": {
+  "src_size": [
+   1934,
+   299
+  ],
+  "ratio": 6.46823,
+  "files": [
+   {
+    "file": "whip-800.webp",
+    "w": 800,
+    "h": 124,
+    "bytes": 38898
+   }
+  ]
+ },
+ "petal": {
+  "src_size": [
+   1027,
+   1027
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "petal-128.webp",
+    "w": 128,
+    "h": 128,
+    "bytes": 4856
+   }
+  ]
+ },
+ "stage_asked": {
   "aspect": 0.758,
   "canvas_px": [
    1000,
@@ -306,17 +560,72 @@
   },
   "_note": "% of the closed envelope (left, top, width, height); GPT W2.4–W2.6 are drawn on this canvas, stacked 1:1"
  },
+ "stage": {
+  "aspect": 0.7562,
+  "boxes_pct": {
+   "env_back": [
+    0,
+    0,
+    100,
+    100
+   ],
+   "env_pocket": [
+    0.0,
+    52.53,
+    100.0,
+    47.47
+   ],
+   "env_pocket_scale": 0.978,
+   "petal_left": [
+    0.0,
+    0.0,
+    51.67,
+    100.0
+   ],
+   "petal_left_scale": 0.98,
+   "petal_right": [
+    48.33,
+    0.0,
+    51.67,
+    100.0
+   ],
+   "petal_right_scale": 1.233,
+   "petal_centre": [
+    0.0,
+    0.0,
+    100.0,
+    56.58
+   ],
+   "petal_centre_scale": 1.098
+  },
+  "_note": "% of the envelope (the back's alpha box): where each GPT layer was laid (scaled uniformly) on the registered canvas the page stacks 1:1"
+ },
  "og": {
+  "src_size": [
+   1536,
+   1024
+  ],
+  "crop": [
+   0,
+   218,
+   1536,
+   806
+  ],
+  "align": "alt",
+  "size": [
+   1200,
+   630
+  ],
   "file": "og-1200x630.jpg",
-  "source": "montage: closed envelope (cream paper cuts) on the sage ground",
-  "bytes": 70991
+  "source": "parts/web_hero.png",
+  "bytes": 159490
  },
  "favicon": {
   "src_box": [
-   28,
-   34,
-   335,
-   432
+   29,
+   35,
+   333,
+   430
   ],
   "size": [
    180,
@@ -324,31 +633,28 @@
   ],
   "pad": 0.04,
   "file": "favicon.png",
-  "bytes": 21978
+  "bytes": 36058
  },
  "parts": {
-  "used": [],
-  "waiting_for_gpt": [
+  "used": [
+   "arch_window",
+   "card_small",
    "env_back",
    "env_pocket",
+   "halo",
+   "lily_medallion",
+   "lily_spray",
+   "petal_centre",
+   "petal_drift",
    "petal_left",
    "petal_right",
-   "petal_centre",
-   "lily_medallion",
-   "card_small",
-   "arch_window",
-   "halo",
-   "lily_spray",
-   "whiplash",
-   "petal_drift",
    "web_hero",
-   "cream_paper",
-   "sage_paper",
-   "lilac_lining"
-  ]
+   "whiplash"
+  ],
+  "waiting_for_gpt": []
  },
- "_note": "G186 interim build: cream, sage and lilac papers toned from other designs' plain GPT pictures; the design's own PAKET 5 parts are taken as they arrive (GPT_PROMPTS.md, manifest parts). Nothing drawn.",
- "parts_css_rules": 0,
+ "_note": "G186 build from the design's own PAKET 5 parts. Nothing drawn.",
+ "parts_css_rules": 21,
  "checks": {
   "green": {}
  },
@@ -365,5 +671,5 @@
    "light_above": 140
   }
  },
- "bytes_total": 353271
+ "bytes_total": 1693661
 }

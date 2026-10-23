@@ -1,11 +1,11 @@
 {
  "sources": {
-  "tartan_wool": "collections/09_Lavender_Provence/assets/gpt/parts/bg_tile.png",
-  "moss_ground": "collections/17_Emerald_Gold_Estate/assets/gpt/parts/bg_tile.png",
-  "cream_paper": "collections/01_Olive_Ivory/assets/gpt/parts/bg_tile.png",
-  "leather": "collections/07_Burgundy_Velvet/assets/gpt/parts/bg_tile.png (toned saddle brown)",
-  "brass": "collections/17_Emerald_Gold_Estate/assets/gpt/parts/closure.png (plain metal field (0.42, 0.32, 0.58, 0.48))",
-  "mist": "collections/08_Winter_Evergreen/assets/gpt/parts/bg_tile.png (blurred; its own blotches as alpha)"
+  "tartan_wool": "collections\\35_Highland_Tartan_Thistle\\assets\\gpt\\parts\\tartan_wool.png",
+  "moss_ground": "collections\\35_Highland_Tartan_Thistle\\assets\\gpt\\parts\\moss_ground.png",
+  "cream_paper": "collections\\35_Highland_Tartan_Thistle\\assets\\gpt\\parts\\cream_paper.png",
+  "leather": "collections\\07_Burgundy_Velvet\\assets\\gpt\\parts\\bg_tile.png (toned saddle brown)",
+  "brass": "collections\\17_Emerald_Gold_Estate\\assets\\gpt\\parts\\closure.png (plain metal field (0.42, 0.32, 0.58, 0.48))",
+  "mist": "parts/mist.png"
  },
  "wool": {
   "src_size": [
@@ -18,7 +18,7 @@
     "file": "wool-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 49512
+    "bytes": 126224
    }
   ]
  },
@@ -33,7 +33,7 @@
     "file": "ground-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 3752
+    "bytes": 72464
    }
   ]
  },
@@ -48,13 +48,13 @@
     "file": "paper-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 8344
+    "bytes": 15096
    },
    {
     "file": "paper-1024.webp",
     "w": 1024,
     "h": 1024,
-    "bytes": 67946
+    "bytes": 57904
    }
   ]
  },
@@ -90,16 +90,16 @@
  },
  "mist": {
   "src_size": [
-   1024,
-   512
+   1774,
+   523
   ],
-  "ratio": 2.0,
+  "ratio": 3.39197,
   "files": [
    {
     "file": "mist-1024.webp",
     "w": 1024,
-    "h": 512,
-    "bytes": 58302
+    "h": 302,
+    "bytes": 70742
    }
   ]
  },
@@ -114,7 +114,7 @@
     "file": "ph_oval-640.webp",
     "w": 640,
     "h": 800,
-    "bytes": 1534
+    "bytes": 1040
    }
   ]
  },
@@ -129,7 +129,7 @@
     "file": "ph_wide-640.webp",
     "w": 640,
     "h": 360,
-    "bytes": 764
+    "bytes": 514
    }
   ]
  },
@@ -154,7 +154,250 @@
    "aspect": "16/9"
   }
  },
- "stage": {
+ "hills": {
+  "src_size": [
+   1086,
+   1448
+  ],
+  "ratio": 0.75,
+  "files": [
+   {
+    "file": "hills-1024.webp",
+    "w": 1024,
+    "h": 1365,
+    "bytes": 139080
+   }
+  ]
+ },
+ "env_back": {
+  "src_size": [
+   1156,
+   1237
+  ],
+  "ratio": 0.93452,
+  "files": [
+   {
+    "file": "env_back-760.webp",
+    "w": 760,
+    "h": 813,
+    "bytes": 236634
+   }
+  ]
+ },
+ "env_front": {
+  "src_size": [
+   1098,
+   853
+  ],
+  "ratio": 1.28722,
+  "files": [
+   {
+    "file": "env_front-760.webp",
+    "w": 760,
+    "h": 590,
+    "bytes": 164836
+   }
+  ]
+ },
+ "flap": {
+  "src_size": [
+   1106,
+   603
+  ],
+  "ratio": 1.83416,
+  "files": [
+   {
+    "file": "flap-760.webp",
+    "w": 760,
+    "h": 414,
+    "bytes": 109046
+   }
+  ]
+ },
+ "strap": {
+  "src_size": [
+   182,
+   1412
+  ],
+  "ratio": 0.1289,
+  "files": [
+   {
+    "file": "strap-182.webp",
+    "w": 182,
+    "h": 1412,
+    "bytes": 81574
+   }
+  ]
+ },
+ "buckle": {
+  "src_size": [
+   1625,
+   890
+  ],
+  "ratio": 1.82584,
+  "files": [
+   {
+    "file": "buckle-320.webp",
+    "w": 320,
+    "h": 175,
+    "bytes": 14704
+   }
+  ]
+ },
+ "sprig": {
+  "src_size": [
+   552,
+   1665
+  ],
+  "ratio": 0.33153,
+  "files": [
+   {
+    "file": "sprig-420.webp",
+    "w": 420,
+    "h": 1267,
+    "bytes": 198528
+   }
+  ]
+ },
+ "divider": {
+  "src_size": [
+   1878,
+   357
+  ],
+  "ratio": 5.2605,
+  "files": [
+   {
+    "file": "divider-800.webp",
+    "w": 800,
+    "h": 152,
+    "bytes": 70746
+   }
+  ]
+ },
+ "thistle": {
+  "src_size": [
+   909,
+   1344
+  ],
+  "ratio": 0.67634,
+  "files": [
+   {
+    "file": "thistle-400.webp",
+    "w": 400,
+    "h": 591,
+    "bytes": 95588
+   }
+  ]
+ },
+ "floret_1": {
+  "src_size": [
+   984,
+   984
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "floret_1-96.webp",
+    "w": 96,
+    "h": 96,
+    "bytes": 6448
+   }
+  ]
+ },
+ "floret_2": {
+  "src_size": [
+   953,
+   953
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "floret_2-96.webp",
+    "w": 96,
+    "h": 96,
+    "bytes": 5008
+   }
+  ]
+ },
+ "floret_3": {
+  "src_size": [
+   1047,
+   1047
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "floret_3-96.webp",
+    "w": 96,
+    "h": 96,
+    "bytes": 4540
+   }
+  ]
+ },
+ "rim": {
+  "src_size": [
+   1046,
+   1376
+  ],
+  "ratio": 0.76017,
+  "files": [
+   {
+    "file": "rim-640.webp",
+    "w": 640,
+    "h": 842,
+    "bytes": 93498
+   }
+  ],
+  "window_pct": [
+   10.71,
+   18.39,
+   78.59,
+   72.89
+  ]
+ },
+ "lid": {
+  "src_size": [
+   1068,
+   1289
+  ],
+  "ratio": 0.82855,
+  "files": [
+   {
+    "file": "lid-560.webp",
+    "w": 560,
+    "h": 676,
+    "bytes": 158890
+   }
+  ]
+ },
+ "card_small": {
+  "src_size": [
+   1090,
+   1314
+  ],
+  "ratio": 0.82953,
+  "files": [
+   {
+    "file": "card_small-760.webp",
+    "w": 760,
+    "h": 916,
+    "bytes": 97188
+   }
+  ],
+  "window_pct": [
+   26.33,
+   8.52,
+   46.88,
+   51.75
+  ],
+  "box_pct": [
+   10.0,
+   4.94,
+   80,
+   90.12
+  ]
+ },
+ "stage_asked": {
   "aspect": 0.9,
   "front_pct": [
    0,
@@ -188,17 +431,66 @@
   ],
   "_note": "% of the closed envelope (left, top, width, height); the GPT envelope layers share one canvas of this ratio"
  },
+ "stage": {
+  "aspect": 0.9345,
+  "back": [
+   0,
+   0,
+   100,
+   100
+  ],
+  "front": [
+   0,
+   27.4,
+   100,
+   72.6
+  ],
+  "flap": [
+   0,
+   0,
+   100,
+   50.95
+  ],
+  "strap": [
+   43.75,
+   -1,
+   12.5,
+   90.63
+  ],
+  "buckle_in_strap": [
+   -30.0,
+   51.68,
+   160.0,
+   11.3
+  ],
+  "_note": "% of the closed envelope (left, top, width, height), measured on the GPT layers' alpha boxes; buckle_in_strap in % of the strap box"
+ },
  "og": {
+  "src_size": [
+   1536,
+   1024
+  ],
+  "crop": [
+   0,
+   218,
+   1536,
+   806
+  ],
+  "align": "alt",
+  "size": [
+   1200,
+   630
+  ],
   "file": "og-1200x630.jpg",
-  "source": "montage: closed envelope (wool, leather, brass) on the moss ground",
-  "bytes": 86848
+  "source": "parts/web_hero.png",
+  "bytes": 195021
  },
  "favicon": {
   "src_box": [
-   28,
-   20,
-   392,
-   446
+   40,
+   36,
+   374,
+   404
   ],
   "size": [
    180,
@@ -206,35 +498,35 @@
   ],
   "pad": 0.04,
   "file": "favicon.png",
-  "bytes": 24027
+  "bytes": 54852
  },
  "parts": {
-  "used": [],
-  "waiting_for_gpt": [
-   "tartan_wool",
+  "used": [
+   "buckle",
+   "card_small",
    "cream_paper",
-   "moss_ground",
-   "hills",
-   "mist",
    "envelope_back",
    "envelope_front",
    "flap",
-   "strap",
-   "buckle",
-   "heather_sprig",
    "heather_divider",
    "heather_floret_1",
    "heather_floret_2",
    "heather_floret_3",
-   "locket_rim",
+   "heather_sprig",
+   "hills",
    "locket_lid",
+   "locket_rim",
+   "mist",
+   "moss_ground",
+   "strap",
+   "tartan_wool",
    "thistle",
-   "card_small",
    "web_hero"
-  ]
+  ],
+  "waiting_for_gpt": []
  },
- "_note": "G184 interim build: wool, ground, paper, leather, brass and mist cut, toned and blurred from other designs' plain GPT pictures; the design's own PAKET 5 parts are taken as they arrive (GPT_PROMPTS.md, manifest parts). Nothing drawn.",
- "parts_css_rules": 0,
+ "_note": "G184 build from the design's own PAKET 5 parts. Nothing drawn.",
+ "parts_css_rules": 23,
  "checks": {
   "green": {}
  },
@@ -251,5 +543,5 @@
    "light_above": 140
   }
  },
- "bytes_total": 448645
+ "bytes_total": 2235592
 }

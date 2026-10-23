@@ -143,6 +143,48 @@ def on_canvas(im: Image.Image) -> Image.Image:
     return im if im.size == CANVAS else im.resize(CANVAS, Image.LANCZOS)
 
 
+def alpha_box(im: Image.Image, esik: int = 8):
+    return tb.alfa_kutusu(np.asarray(im)[..., 3], esik=esik)
+
+
+def register(parts: dict) -> tuple[dict, dict]:
+    """The envelope layers laid by their measured alpha boxes on one registered canvas (eye check 2026-10-22).
+
+    GPT drew W2.4–W2.6 on one canvas but drifted between them: the right petal came 20 % smaller than the left one and
+    stopped short of the right edge (the lilac back showed beside it), the centre petal started 11 % below the back's
+    top and 9 % narrower (the back showed above it), the pocket came 2 % wider than the back. As in designs 39–48: the
+    back's alpha box is the envelope; the pocket spans its width with its foot on the back's foot; the left petal spans
+    its height from the left edge (its hinge), the right petal the same from the right edge (same proportions as the
+    left, scaled up); the centre petal spans the width from the top edge (its hinge). Each is scaled uniformly and set
+    on a canvas of the envelope's size, so site.css keeps its stacked 1:1 layers and edge hinges. Returns (the layers,
+    the measured boxes in % of the envelope)."""
+    back = parts["env_back"].crop(alpha_box(parts["env_back"]))
+    W, H = back.size
+    out, boxes = {"env_back": back}, {"env_back": [0, 0, 100, 100]}
+
+    def lay(name, fit, anchor):
+        im = parts[name].crop(alpha_box(parts[name]))
+        k = W / im.width if fit == "width" else H / im.height
+        w, h = round(im.width * k), round(im.height * k)
+        x = {"left": 0, "right": W - w, "centre": (W - w) // 2}[anchor[0]]
+        y = {"top": 0, "bottom": H - h}[anchor[1]]
+        c = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        c.paste(im.resize((w, h), Image.LANCZOS), (x, y), im.resize((w, h), Image.LANCZOS))
+        out[name] = c
+        boxes[name] = [round(100 * x / W, 2), round(100 * y / H, 2), round(100 * w / W, 2), round(100 * h / H, 2)]
+        boxes[name + "_scale"] = round(k, 3)
+
+    if "env_pocket" in parts:
+        lay("env_pocket", "width", ("centre", "bottom"))
+    if "petal_left" in parts:
+        lay("petal_left", "height", ("left", "top"))
+    if "petal_right" in parts:
+        lay("petal_right", "height", ("right", "top"))
+    if "petal_centre" in parts:
+        lay("petal_centre", "width", ("centre", "top"))
+    return out, boxes
+
+
 def cut(src: Image.Image, poly, size) -> Image.Image:
     """The paper cut along a polygon (% of the box) — the interim petals and pocket, as site.css clip-path does."""
     w, h = size
@@ -180,9 +222,22 @@ def optional_parts(manifest: dict) -> tuple[list[str], dict]:
     css, got = [], {}
     pct = lambda v: f"{v:.2f}".rstrip("0").rstrip(".")  # noqa: E731
 
-    back = part("env_back")
+    raw = {n: part(n) for n in ("env_back", "env_pocket", "petal_left", "petal_right", "petal_centre")}
+    raw = {k: v for k, v in raw.items() if v is not None}
+    registered = None
+    if "env_back" in raw:
+        registered, boxes = register(raw)
+        aspect = registered["env_back"].width / registered["env_back"].height
+        manifest["stage_measured"] = {"aspect": round(aspect, 4), "boxes_pct": boxes,
+                                      "_note": "% of the envelope (the back's alpha box): where each GPT layer was laid "
+                                               "(scaled uniformly) on the registered canvas the page stacks 1:1"}
+        css.append(f".stage{{--env-ratio:{round(aspect, 4)}}}")
+        css.append(f".envelope{{aspect-ratio:{round(aspect, 4)}}}")
+    reg = lambda n, im: registered[n] if registered and n in registered else on_canvas(im)  # noqa: E731
+
+    back = raw.get("env_back")
     if back is not None:
-        got["env_back"] = on_canvas(back)
+        got["env_back"] = reg("env_back", back)
         tb.webp(got["env_back"], "env_back", [900], 82, manifest, out=OUT)
         f = manifest["env_back"]["files"][0]["file"]
         css.append(f".env-back{{background:url(img/{f}) 0 0/100% 100% no-repeat}}")
@@ -190,7 +245,7 @@ def optional_parts(manifest: dict) -> tuple[list[str], dict]:
 
     pocket = part("env_pocket")
     if pocket is not None:
-        got["env_pocket"] = on_canvas(pocket)
+        got["env_pocket"] = reg("env_pocket", pocket)
         tb.webp(got["env_pocket"], "env_pocket", [900], 84, manifest, out=OUT)
         f = manifest["env_pocket"]["files"][0]["file"]
         css.append(f".env-pocket{{background:url(img/{f}) 0 0/100% 100% no-repeat;clip-path:none;filter:none}}")
@@ -200,7 +255,7 @@ def optional_parts(manifest: dict) -> tuple[list[str], dict]:
         p = part(ad)
         if p is None:
             continue
-        p = on_canvas(p)
+        p = reg(ad, p)
         got[ad] = p
         tb.webp(p, f"petal_{side}", [900], 84, manifest, out=OUT)
         tb.webp(mirror(p), f"petal_{side}_m", [900], 60, manifest, out=OUT)   # only its alpha is used (mask)
@@ -229,8 +284,11 @@ def optional_parts(manifest: dict) -> tuple[list[str], dict]:
             mf = mask_png(shape, "card", manifest)
             L, T, W, H = win
             manifest["card_small"]["window_pct"] = [round(v, 2) for v in win]
-            card_ratio = CARD[2] / 100 * STAGE / (CARD[3] / 100)
-            below = (T + H) / card_ratio + 3      # window bottom in % of the card's WIDTH (padding), + 3 % gap
+            # padding % is of the containing block's width (the envelope), not the card's: the window's foot + 3 % of
+            # the card's height, in % of the envelope's width (the first build put the text 17 % too low)
+            aspect = (manifest.get("stage_measured") or {}).get("aspect", STAGE)
+            below = (T + H + 3) / 100 * CARD[3] / aspect
+            manifest["card_small"]["text_top_pct_of_card"] = round(T + H + 3, 2)
             css.append(f".envelope .card{{background:url(img/{f}) 0 0/100% 100% no-repeat;justify-content:flex-start;"
                        f"padding-top:{pct(below)}%}}")
             css.append(f".envelope .card .card-photo,.envelope .card.tight .card-photo{{position:absolute;"
@@ -317,6 +375,9 @@ def main() -> int:
         "_note": "% of the closed envelope (left, top, width, height); GPT W2.4–W2.6 are drawn on this canvas, stacked 1:1"}
 
     css, got = optional_parts(manifest)
+    if "stage_measured" in manifest:   # the GPT layers' measured geometry is the envelope; the asked one stays as a note
+        manifest["stage_asked"] = manifest.pop("stage")
+        manifest["stage"] = manifest.pop("stage_measured")
     hero = PARTS / "web_hero.png"
     if hero.exists():
         og, og_info = tb.og_kirp(Image.open(hero), hiza="alt")
@@ -349,7 +410,7 @@ def main() -> int:
     head = ("/* Art Nouveau Lily — GENERATED by build_images.py (do not edit): rules for the design's optional GPT\n"
             "   parts (W2.4–W2.13, GPT_PROMPTS.md) that exist in collections/37_Art_Nouveau_Lily/assets/gpt/parts/.\n"
             "   A part that is not there has no rule: the page keeps its look from site.css. */\n")
-    (THEME / "parts.css").write_text(head + ("\n".join(css) + "\n" if css else "/* none yet */\n"), encoding="utf-8")
+    (THEME / "parts.css").write_text(head + ("\n".join(css) + "\n" if css else "/* none yet */\n"), encoding="utf-8", newline="\n")   # LF on Windows too (.gitattributes eol=lf)
     manifest["parts_css_rules"] = len(css)
 
     green = tb.yesil_denetle(OUT)
@@ -359,6 +420,8 @@ def main() -> int:
                                "backdrop": {"edge_max": 2.2, "dark_max": 0.05, "dark_below": 0, "light_above": 140}}
     manifest["bytes_total"] = tb.klasor_boyutu(THEME)
     tb.manifest_yaz(OUT, manifest)
+    mf = OUT / "manifest.json"   # LF on Windows too (.gitattributes eol=lf)
+    mf.write_bytes(mf.read_bytes().replace(b"\r\n", b"\n"))
     print(json.dumps(manifest["sources"], indent=1))
     print(f"art-nouveau-lily: theme folder {manifest['bytes_total'] / 1e6:.2f} MB")
     if manifest["bytes_total"] > tb.TEMA_BUTCE:

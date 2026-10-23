@@ -107,9 +107,10 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .opening-date{position:relative;z-index:9;font-size:11px;margin-top:20px}
 /* the flap folds up and back over its hinge (the free edge goes away from the viewer, like a seed packet's tucked
    flap): past 90° it drops behind the card, its inner face standing above the packet */
-/* the closed packet: 0.68 wide per high (manifest stage); flap, body, card, twine and label in % of it */
-.stage{--obj:min(60vw,calc(42svh * .68),290px);position:relative;width:var(--obj);margin:18px auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent;z-index:5}
-.opening:has(.names.long-names) .stage{--obj:min(52vw,calc(36svh * .68),290px)}
+/* the closed packet: --env-ratio wide per high (0.68 asked; parts.css: the GPT pieces' measured shape, manifest stage);
+   flap, body, card, twine and label in % of it */
+.stage{--env-ratio:.68;--obj:min(60vw,calc(42svh * var(--env-ratio)),290px);position:relative;width:var(--obj);margin:18px auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent;z-index:5}
+.opening:has(.names.long-names) .stage{--obj:min(52vw,calc(36svh * var(--env-ratio)),290px)}
 .packet{position:relative;width:100%;aspect-ratio:.68;--tex:calc(var(--obj) * 1.3);perspective:1000px}
 .packet>*{position:absolute}
 .stage::before{content:"";position:absolute;inset:6% -4% -5% 4%;z-index:0;background:radial-gradient(closest-side,#0a1610b3,#0000);pointer-events:none} /* contact shade on the fern (light only) */
@@ -133,9 +134,10 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .card.tight .card-photo{width:40%}
 .card-photo .ph-mark{font-size:8px}
 .card-photo .ty-decor,.card-photo .ty-decor img{display:block;width:100%;height:100%;object-fit:cover}
-.card-line{margin-top:7%;font-size:8px;letter-spacing:.2em}
-.card-names{font:400 clamp(18px,15cqw,40px)/1.25 var(--script);color:var(--fern);overflow-wrap:anywhere;text-wrap:balance}
-.card-date{font-size:8px;margin-top:2%}
+/* the card's texts are sized by the card (cqw): the same layout at every packet size, so long names fit at all */
+.card-line{margin-top:3%;font-size:3.8cqw;letter-spacing:.2em}
+.card-names{font:400 11.5cqw/1.18 var(--script);color:var(--fern);overflow-wrap:anywhere;text-wrap:balance}
+.card-date{font-size:3.8cqw;margin-top:2%}
 /* light from the glass roof passing over the kraft (light only) */
 .sheen{inset:0;z-index:7;pointer-events:none;background:linear-gradient(105deg,#0000 38%,#fff6e33d 50%,#0000 62%) 130% 0/300% 100% no-repeat;mix-blend-mode:screen;opacity:0}
 .js .sheen{animation:sheen-idle 9s 1.6s ease-in-out infinite}

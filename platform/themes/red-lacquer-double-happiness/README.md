@@ -2,8 +2,9 @@
 
 A tall red paper envelope with a gold-leaf 囍, closed with a red cord wound round two paper buttons; paper-cut peonies,
 red lacquer, gold clouds and round moon gates. New design of the 33–38 wave (`docs/24_YENI_TASARIMLAR.md`, task G183,
-K23 strict: the first page is a closed envelope). Status: **coming** (`lib/marketing/config.ts`) — the design's own GPT
-parts do not exist yet; sale, price and approval wait for them and for an eye check.
+K23 strict: the first page is a closed envelope). Status: **coming** (`lib/marketing/config.ts`). Since 2026-10-22 the
+theme is built from all of its own GPT parts (PAKET 5) and the demo shows its own PAKET 2 photos; sale, price and approval
+wait for the user's eye check.
 
 ## Files (docs/11 §1)
 
@@ -14,8 +15,8 @@ parts do not exist yet; sale, price and approval wait for them and for an eye ch
 | `index.html` … `rsvp.html` | closed envelope · home · story · details · RSVP |
 | `site.css` / `thank-you.css` | tokens, layout, the envelope keyframes, the moon gate doors, the unfolding text / thank-you mode (G075) |
 | `site.js` | `MOTION` (opening steps, scenes, cloud drift, accents), long names, card fit, scenes, paper-cut parallax (`data-depth`), clouds, countdown, opening, the interim 囍 font switch |
-| `build_images.py` | GPT textures → `img/` (interim toning, gold crop, placeholders, og montage, favicon, `manifest.json`); every optional GPT part that exists → `img/` + `parts.css` |
-| `parts.css` | **generated** by `build_images.py` (do not edit): rules for the optional GPT parts present in `parts/`; a comment only while none exists. Linked by every page after `site.css` |
+| `build_images.py` | GPT parts → `img/` (cut to their alpha boxes, #00FF00 windows keyed, scaled; placeholders, og, favicon, `manifest.json`) + `parts.css`; lays the envelope layers by their measured alpha boxes; folder ≤ 2.5 MB, every file ≤ 250 kB (exit ≠ 0 otherwise) |
+| `parts.css` | **generated** by `build_images.py` (do not edit): rules for the GPT parts present in `parts/`, with the measured envelope (`--env-ratio`, pocket, flap, flap inside, buttons, cord, card). Linked by every page after `site.css` |
 
 Shared platform layers: RSVP (`/rsvp/form.js`, questions, guest names), map block (`data-map`, demo pin Vancouver),
 music + opening sounds (`lib/audio/catalog.ts`: First Light; cord 0 · flap 900 · card 1500 · red window 2150 · gold window
@@ -60,59 +61,63 @@ Reduced motion: no opening (tap → home), no gloss, no tap-hint breathing, no d
 - Text steps unfold from their top edge, folded back (rotateX), like a paper cut being opened out.
 - Bottom nav with `scroll-padding-bottom`.
 
-## Interim build (until the GPT parts arrive)
+## Built from the GPT parts (2026-10-22)
 
-Parts ordered in `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/GPT_PROMPTS.md` (PAKET 5 W2.1–W2.20, PAKET 2,
-PAKET 6). Built from GPT pixels that already exist, cut and toned, nothing drawn (K21):
+All PAKET 5 parts of `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/` are used (`img/manifest.json`
+`parts.used` = 19, `waiting_for_gpt` empty); nothing is drawn (K21). `python3 build_images.py` rebuilds `img/` and
+`parts.css`. The interim sources (other designs' plain papers toned, a crop of 17's gold, the Ma Shan Zheng 囍) stay in
+the build only as the look of a missing part.
 
-- red paper = `collections/04_Vintage_Airmail/assets/gpt/parts/bg_tile.png` toned cinnabar (`tonla`, its own fibres);
-- lacquer ground = `collections/07_Burgundy_Velvet/assets/gpt/parts/bg_tile.png` toned deep lacquer red;
-- cream paper = `collections/01_Olive_Ivory/assets/gpt/parts/bg_tile.png` toned warm cream;
-- gold leaf = the plain metal field inside `collections/17_Emerald_Gold_Estate/assets/gpt/parts/closure.png`;
-- the envelope = rectangles of the red paper (back darker, flap lighter), the buttons = round crops of the gold leaf, the
-  two windows = plain red and gold halves, the moon gate doors = halves of the red paper;
-- 囍 = the character U+56CD of **Ma Shan Zheng** as generated content (`.xi::before`), filled with the gold leaf
-  (background-clip). No text node, not edited, not translated (docs/24: 囍 is gold leaf, not a text layer). Its
-  stylesheet is not render-blocking (`media="print"` switched on by site.js) and the character shows only once the font
-  has it (`.xi-ready`). Google's `text=` subset URL answered 400 / without CORS here, so the normal unicode-range slices
-  are used (one 28 KB slice holds U+56CD). GPT's `xi_gold` replaces it (`parts.css` → `content:none`).
-- no cord, clouds, moon gate frame, paper-cut border, paper-cut layers or tassel: hidden (`display:none`) until
-  `parts.css` shows them. The look is plain until then; sale needs the GPT parts + an eye check.
+| Part | Built into | Where |
+|---|---|---|
+| W2.1 `lacquer`, W2.2 `red_paper`, W2.3 `cream_paper`, W2.4 `gold_leaf` | `lacquer-640`, `red-640/1024`, `cream-640/1024`, `gold-480` | page ground; doors, thank-you window; cards, bands, form; print sheets (`lib/print/layouts.ts` reads the 1024 files) |
+| W2.5 `envelope_back`, W2.6 `envelope_pocket`, W2.7 `envelope_flap`, W2.8 `flap_inside`, W2.9 `button`, W2.10 `string` | `env_back-720`, `pocket-720`, `flap-720`, `flap_in-720`, `button-240`, `string-320` | the closed envelope, laid by measured boxes (below) |
+| W2.11 `xi_gold` | `xi-400` | the gold-leaf 囍 on the pocket (the interim character goes: `content:none`) |
+| W2.12 `veil_outer`, W2.13 `veil_inner` | `veil_o_l/r-300`, `veil_i_l/r-300` | the two paper-cut windows over the card, cut in two at the centre |
+| W2.14 `card_small` | `card_small-720` | the card; round window keyed, the portrait set in it, the texts under it |
+| W2.15 `cloud_1..3` | `cloud_N-400` (`--rl-clouds`) | the clouds of the opening, the idle drift, the RSVP accent |
+| W2.16 `moon_gate` | `gate-720` | round every round photo |
+| W2.17 `peony_band` | `band-800` | under the headings on cream paper |
+| W2.18 `jianzhi_far`, `jianzhi_near` | `cut_far-720` (32 % opacity), `cut_near-640` | the two parallax layers |
+| W2.19 `tassel` | `tassel-300` | the signatures (sways) |
+| W2.20 `web_hero` | `og-1200x630.jpg` | share image (`tema_build.og_kirp`, bottom-aligned) |
+| PAKET 2 photos | `public/demo/red-lacquer-double-happiness/*` + `lib/claim/demo-photos.json` | the live demo (`node scripts/build-demo-photos.ts --theme red-lacquer-double-happiness`); seed / theme-check use the same folder |
 
-`python3 build_images.py` takes each part that exists in `parts/` and writes `parts.css`; the manifest lists `parts.used`
-and `parts.waiting_for_gpt`. `python3 tools/gpt_kuru_deneme.py --tema red-lacquer-double-happiness --sekil
-collections/34_Red_Lacquer_Double_Happiness/assets/gpt/kuru_sekil.json` rehearses the drop-in — passed 23/25 (only
-PAKET 6, by hand).
+**The envelope (eye check 2026-10-22).** GPT drifted between the layers it drew on one canvas — the pocket came 3 %
+narrower than the back and stopped 4 % above its foot, so the back showed as a border round it — and drew the flap, its
+inside and the cord on canvases of their own (the flap's alpha box started 7 % below its canvas top, so the back's cream
+lining showed as a strip above the closed flap). As in 39–48 every layer is cut to its alpha box and laid by its
+measured edges (`manifest stage`; the asked boxes stay in `stage_asked`): the back's alpha box is the envelope (0.651:1);
+the pocket spans its width with its foot on the back's foot (uniform scale 1.06); the flap spans the width from the fold
+at its own height (44.9 %), its button just above the flap's tip; the flap's inside at its own height (91 % of the flap)
+under the fold; the cord scaled so its two loops — measured as the cord's two enclosed holes — ring the two buttons (loop
+1.09 × the button), which fixes the body button at 54.7 %. The flap's shadow follows its scalloped edge (drop-shadow),
+the cord gets a hairline shadow on the red paper. The card keeps its own 0.67:1 (88 % wide, 85 % of the height).
+
+**Photo windows.** GPT left the middle of the round #00FF00 windows (card, moon gate) transparent inside a soft green rim,
+and one spot of key green between two peony leaves of the gate: the window = the green + the hole it encloses (flood
+fill), cleared, every key-green spot cleared, the spill round them neutralised — `checks.green` is empty.
+
+**Size.** The first build of the full set was 3.94 MB (four veil halves of 340–410 kB). Now 2.49 MB, every file ≤ 250 kB:
+the veil halves 300 px wide (q 70; a card is ≤ 270 CSS px wide), the envelope layers and the card 720 px, the far paper
+cut 720 px (q 68, shown at 32 %), the near one 640 px.
 
 ## What waits for GPT
 
-| Part | Then (automatic) |
-|---|---|
-| W2.1 `lacquer`, W2.2 `red_paper`, W2.3 `cream_paper`, W2.4 `gold_leaf` | same roles, instead of the toned interim textures |
-| W2.5 `envelope_back`, W2.6 `envelope_pocket` | full envelope canvas → `env_back-900`, `pocket-900` |
-| W2.7 `envelope_flap`, W2.8 `flap_inside` | the two faces of the flap (`flap-900`, `flap_in-900`) |
-| W2.9 `button` | `button-240` for both buttons (instead of the gold crops) |
-| W2.10 `string` | `string-320` on its box (manifest `stage.string_pct`); unwinds and falls in the opening |
-| W2.11 `xi_gold` | `xi-400`; the interim Ma Shan Zheng character goes |
-| W2.12 `veil_outer`, W2.13 `veil_inner` | trimmed, cut in two at the centre → `veil_o_l/r`, `veil_i_l/r` |
-| W2.14 `card_small` | round #00FF00 window measured, keyed → the card; portrait placed on the window. No window → warning |
-| W2.15 `cloud_1..3` | `--rl-clouds` → the clouds of the opening, the idle drift, the RSVP accent |
-| W2.16 `moon_gate` | #00FF00 window measured, keyed → `gate-720` round every round photo. No window → warning |
-| W2.17 `peony_band` | `band-800` under the headings on cream paper |
-| W2.18 `jianzhi_far`, `jianzhi_near` | the two parallax layers (`cut_far-900`, `cut_near-700`) |
-| W2.19 `tassel` | `tassel-300` in the signatures (sways) |
-| W2.20 `web_hero` | `og-1200x630.jpg` instead of the montage |
-| PAKET 2 photos | `npm run seed -- --photos` / theme-check photos (now 03's photos) |
-| PAKET 6 print sheets | **by hand** (G149): `lib/print/layouts.ts`, `node scripts/build-print-assets.ts --theme red-lacquer-double-happiness` |
+Nothing of PAKET 5 or PAKET 2. Still **by hand**: PAKET 6 (`print/invitation_front_5x7.png`, `invitation_back_5x7.png`
+are in the collection) → `lib/print/layouts.ts` still builds the printed sheets from the cream / red textures;
+`node scripts/build-print-assets.ts --theme red-lacquer-double-happiness` (G149, steps in GPT_PROMPTS.md PAKET 6).
 
 ## Deviations from the standard
 
 - No W1 comps (the design starts from docs/24) → `theme-check --compare none`.
 - No `devRender` / `DEV_CONTENT` (as Nocturne, Kintsugi, Celestial): rendered by the platform only.
 - One generated stylesheet (`parts.css`) beside `site.css`.
-- A typeface character (囍) stands in for a GPT part while it is missing — the only interim piece that is not a crop.
+- A typeface character (囍) stood in for the GPT 囍 while it was missing (now `content:none`; kept for a missing part).
+- The envelope is the GPT layers' measured shape (0.651:1), not the asked 0.66; one generated stylesheet carries it.
 
 ## Not tried
 
-Real iPhone / Android, Vercel deployment, real buyer photos, slow network, the GPT parts themselves, Safari's 3D
-backface handling of the flap and windows.
+Real iPhone / Android, Vercel deployment, real buyer photos, slow network, Safari's 3D backface handling of the flap
+and windows, `theme-check.cjs` on a production build. Checked on 2026-10-22 in Chromium only (demo route at 360×640 and
+390×844: closed, the opening seeked frame by frame, home / story / details / RSVP full pages).

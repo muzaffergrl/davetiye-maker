@@ -2,8 +2,8 @@
 
 A cream envelope closed by three petal flaps under a stained-glass lily; sage, cream, lilac and gold, like an Art Nouveau
 (Mucha-style) poster with stained glass. New design of the 33–38 wave (`docs/24_YENI_TASARIMLAR.md` row 37, task G186).
-Status: **coming** (`lib/marketing/config.ts`, price `[PRICE]`) — the design's own GPT parts do not exist yet; sale,
-price and approval wait for them and for an eye check.
+Status: **coming** (`lib/marketing/config.ts`, price `[PRICE]`). Since 2026-10-22 the theme is built from all of its
+own GPT parts (PAKET 5) and the demo shows its own PAKET 2 photos; sale, price and approval wait for the user's eye check.
 
 ## Files (docs/11 §1)
 
@@ -14,8 +14,8 @@ price and approval wait for them and for an eye check.
 | `index.html` … `rsvp.html` | closed envelope · home · story · details · RSVP |
 | `site.css` / `thank-you.css` | tokens, layout, the envelope (interim cuts, hinges, keyframes), the stained-glass light, the whiplash reveal / thank-you mode (G075) |
 | `site.js` | `MOTION` (opening steps, scenes, accents), long names, card fit, scenes, the light moving through the windows (`--p`), countdown, opening, the lily petals of a sent reply |
-| `build_images.py` | GPT papers → `img/` (interim toning, placeholders, og montage, favicon, `manifest.json`); every optional GPT part that exists → `img/` + `parts.css` |
-| `parts.css` | **generated** by `build_images.py` (do not edit): the rules for the optional GPT parts present in `parts/`; a comment only while none exists. Linked by every page after `site.css` |
+| `build_images.py` | GPT parts → `img/` (cut, keyed, scaled; the envelope layers registered by their measured alpha boxes; placeholders, og, favicon, `manifest.json`) + `parts.css` |
+| `parts.css` | **generated** by `build_images.py` (do not edit): the rules for the GPT parts present in `parts/`, with the envelope's measured `--env-ratio` and the card's text start. Linked by every page after `site.css` |
 
 Shared platform layers: RSVP (`/rsvp/form.js`, questions, guest names), map block (`data-map`, demo pin Nancy), music +
 opening sounds (`lib/audio/catalog.ts`: Garden Waltz; touch 0 · glass chime 300 · side petals 1100 · centre petal 1500 ·
@@ -99,24 +99,31 @@ and `parts.waiting_for_gpt`. `python3 tools/gpt_kuru_deneme.py --tema art-nouvea
 collections/37_Art_Nouveau_Lily/assets/gpt/kuru_sekil.json [--theme-check --stress]` rehearses the drop-in with neutral
 test images (repo untouched) — passed 16/18 (only PAKET 6, by hand).
 
+## Built from the GPT parts (2026-10-22)
+
+All PAKET 5 parts are used (`img/manifest.json` `parts.used` = 13, `waiting_for_gpt` empty); nothing is drawn (K21). The
+"Interim build" section above now describes only the look of a missing part. The demo shows the design's PAKET 2 photos
+(`public/demo/art-nouveau-lily/*`, `lib/claim/demo-photos.json`, `node scripts/build-demo-photos.ts --theme
+art-nouveau-lily`).
+
+**The envelope (eye check 2026-10-22).** W2.4–W2.6 were asked on one canvas, stacked 1:1, but GPT drifted between them:
+`petal_right` came 20 % smaller than `petal_left` (same 0.39:1 shape) and stopped short of the right edge, so the lilac
+back showed beside it; `petal_centre` started 11 % below the back's top and came 9 % narrower (GPT's own note: it may not
+line up), so the back showed above it; the pocket came 2 % wider than the back. `build_images.py register()` lays each
+layer by its measured alpha box on a canvas of the envelope's size (the back's alpha box, 0.756:1), scaled uniformly:
+the pocket spans the width with its foot on the back's foot (× 0.98); the left petal spans the height from the left edge
+(× 0.98), the right petal the same from the right edge (× 1.23, a mirror box of the left); the centre petal spans the
+width from the top edge (× 1.10, 56.6 % high, its tip on the medallion). site.css keeps its stacked layers and edge
+hinges; the boxes are in `manifest stage.boxes_pct` (the asked canvas in `stage_asked`). Closed, no lilac shows; the
+petals meet under the medallion. **Card text:** the first build set its top padding in % of the card's width, but a
+padding % is of the envelope's width — the text started 17 % too low; now 3 % under the window, the texts sized by the
+card (cqw), `fitCard` keeps the last line above the card's bottom margin.
+
 ## What waits for GPT
 
-| Part | Then (automatic) |
-|---|---|
-| W2.1 `cream_paper`, W2.2 `sage_paper`, W2.3 `lilac_lining` | same roles, instead of the toned interim papers |
-| W2.4 `env_back` | `env_back-900` = the back with its lining (the interim lining rectangle goes) |
-| W2.5 `env_pocket` | `env_pocket-900` = the pocket (the interim cut goes) |
-| W2.6 `petal_left/right/centre` | `petal_l/r/c-900` = the petal fronts; their mirrors `petal_*_m-900` cut the lilac lining of each back face (masks) |
-| W2.7 `lily_medallion` | `medallion-400` = `.medallion` where the points meet (glows, lifts away) |
-| W2.8 `card_small` | arched #00FF00 window measured (`manifest card_small.window_pct`) and keyed, its shape → `mask_card.png`: `card_small-860` = the card from the pocket; the portrait slot sits in the window, the text starts below it. No window → warning, card stays cream paper |
-| W2.9 `arch_window` | arched #00FF00 window measured (`manifest arch.window_pct`), its shape → `mask_arch.png`: `arch-640` = the frame over every portrait photo (home card, teaser, story); the arch takes the frame's ratio, the photo the window. No window → warning, photos stay plain windows |
-| W2.10 `halo` | `halo-900` = `.halo` behind the home card |
-| W2.11 `lily_spray` | `lily-480` = `.lily` beside the home card (right one mirrored) and over the signatures |
-| W2.12 `whiplash` | `whip-800` = `.whip` under the headings; drawn by the flowing mask (`--flow`) |
-| W2.13 `petal_drift` | `petal-128` + `--anl-petals` → the six petals of a sent reply |
-| W2.14 `web_hero` | `og-1200x630.jpg` (`tema_build.og_kirp`, bottom-aligned) instead of the montage |
-| PAKET 2 photos | `npm run seed -- --photos` / theme-check photos (now 03's photos, noted) |
-| PAKET 6 `print/invitation_front_5x7`, `invitation_back_5x7` | **by hand** (one block; boxes are measured on the art, G149): `lib/print/layouts.ts` → those sheets, `node scripts/build-print-assets.ts --theme art-nouveau-lily` — steps in GPT_PROMPTS.md PAKET 6 |
+Nothing of PAKET 5 or PAKET 2 (no part had to be regenerated: `petal_right` is upscaled 1.23×, still above its display
+size). Still **by hand**: PAKET 6 print sheets → `lib/print/layouts.ts`, `node scripts/build-print-assets.ts --theme
+art-nouveau-lily` (G149, GPT_PROMPTS.md PAKET 6).
 
 ## Deviations from the standard
 
@@ -128,6 +135,8 @@ test images (repo untouched) — passed 16/18 (only PAKET 6, by hand).
 
 ## Not tried
 
-Real iPhone / Android, Vercel deployment, real buyer photos, slow network, the GPT parts themselves, Safari's handling of
+Real iPhone / Android, Vercel deployment, real buyer photos, slow network, `theme-check.cjs` on a production build
+(checked on 2026-10-22 in Chromium only: demo route at 360×640 and 390×844, the opening seeked frame by frame, all pages,
+40-character names on the card), Safari's handling of
 `@property --band` / `--flow` (without it the light band and the whiplash mask jump to their end state: the photo and the
 line simply appear) and of `preserve-3d` with `backface-visibility` on the petals.

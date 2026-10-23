@@ -8,8 +8,8 @@
      flames under the envelope light one by one (GPT), then the card with the arched portrait, "Our wedding", the names
      and the date rises out of the lining, comes forward and flies to home (view transition invite-card → the home hero
      card). Envelope back, lining, card, pocket front, flap (two faces), sleeve, tassel, light, petals and diyas are
-     separate layers; nothing is one picture that fades, and nothing is a V flap or a wax seal. Silk, velvet, gold and
-     paper are GPT pixels cut and toned by build_images.py (interim until the PAKET 5 parts, GPT_PROMPTS.md). Personal
+     separate layers; nothing is one picture that fades, and nothing is a V flap or a wax seal. Every picture is the
+     design's own GPT part (PAKET 5, GPT_PROMPTS.md), cut and laid by measured boxes by build_images.py (parts.css). Personal
      text: none — [data-field] / [data-text] / [data-photo] are filled on the server. Thank-you mode (G075): the same
      opening; the card carries the thank-you title and the date, its window the thank-you photo or — without one — the
      velvet lining. Design texts: data-copy (G068, theme.json "copy"). -->
@@ -59,8 +59,8 @@
       <!-- the silk back of the envelope and its velvet-fuchsia lining (seen when the flap is open) -->
       <span class="env-back"></span>
       <span class="lining"></span>
-      <!-- the card that rises out of the lining (interim: saffron-ivory paper toned from GPT texture; card_small with
-           an arched #00FF00 window replaces it, GPT_PROMPTS.md W2.10) -->
+      <!-- the card that rises out of the lining (GPT W2.10 card_small: its arched #00FF00 window keyed, the portrait
+           masked into it, the texts in the plain paper below it — parts.css) -->
       <div class="card" aria-hidden="true">
         <div class="card-photo photo-slot" data-slot="hero_portrait">
           <img data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_arch-640.webp" sizes="min(34vw, 190px)" alt="">
@@ -80,7 +80,7 @@
       <span class="sheen"></span>
     </div>
   </div>
-  <!-- the brass diyas under the envelope, their flames lit one by one (GPT W2.6/W2.7; hidden until they exist) -->
+  <!-- the brass diyas under the envelope, their flames lit one by one on the wick (GPT W2.6/W2.7) -->
   <div class="diyas" aria-hidden="true">
     <span class="diya"><span class="flame"></span></span>
     <span class="diya"><span class="flame"></span></span>

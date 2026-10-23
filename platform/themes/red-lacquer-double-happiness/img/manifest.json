@@ -1,9 +1,9 @@
 {
  "sources": {
-  "red_paper": "collections/04_Vintage_Airmail/assets/gpt/parts/bg_tile.png",
-  "lacquer": "collections/07_Burgundy_Velvet/assets/gpt/parts/bg_tile.png",
-  "cream_paper": "collections/01_Olive_Ivory/assets/gpt/parts/bg_tile.png",
-  "gold_leaf": "collections/17_Emerald_Gold_Estate/assets/gpt/parts/closure.png (plain metal field (0.42, 0.32, 0.58, 0.48))"
+  "red_paper": "collections\\34_Red_Lacquer_Double_Happiness\\assets\\gpt\\parts\\red_paper.png",
+  "lacquer": "collections\\34_Red_Lacquer_Double_Happiness\\assets\\gpt\\parts\\lacquer.png",
+  "cream_paper": "collections\\34_Red_Lacquer_Double_Happiness\\assets\\gpt\\parts\\cream_paper.png",
+  "gold_leaf": "collections\\34_Red_Lacquer_Double_Happiness\\assets\\gpt\\parts\\gold_leaf.png"
  },
  "lacquer": {
   "src_size": [
@@ -16,7 +16,7 @@
     "file": "lacquer-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 3626
+    "bytes": 7484
    }
   ]
  },
@@ -31,13 +31,13 @@
     "file": "red-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 15608
+    "bytes": 38190
    },
    {
     "file": "red-1024.webp",
     "w": 1024,
     "h": 1024,
-    "bytes": 57422
+    "bytes": 125354
    }
   ]
  },
@@ -52,13 +52,13 @@
     "file": "cream-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 4790
+    "bytes": 8342
    },
    {
     "file": "cream-1024.webp",
     "w": 1024,
     "h": 1024,
-    "bytes": 39200
+    "bytes": 39588
    }
   ]
  },
@@ -73,7 +73,7 @@
     "file": "gold-480.webp",
     "w": 480,
     "h": 480,
-    "bytes": 4964
+    "bytes": 46318
    }
   ]
  },
@@ -88,7 +88,7 @@
     "file": "ph_round-640.webp",
     "w": 640,
     "h": 640,
-    "bytes": 1384
+    "bytes": 1204
    }
   ]
  },
@@ -103,7 +103,7 @@
     "file": "ph_wide-640.webp",
     "w": 640,
     "h": 360,
-    "bytes": 848
+    "bytes": 732
    }
   ]
  },
@@ -128,7 +128,325 @@
    "aspect": "16/9"
   }
  },
- "stage": {
+ "env_back": {
+  "src_size": [
+   990,
+   1521
+  ],
+  "ratio": 0.65089,
+  "files": [
+   {
+    "file": "env_back-720.webp",
+    "w": 720,
+    "h": 1106,
+    "bytes": 185458
+   }
+  ]
+ },
+ "pocket": {
+  "src_size": [
+   935,
+   975
+  ],
+  "ratio": 0.95897,
+  "files": [
+   {
+    "file": "pocket-720.webp",
+    "w": 720,
+    "h": 751,
+    "bytes": 86664
+   }
+  ]
+ },
+ "flap": {
+  "src_size": [
+   1385,
+   956
+  ],
+  "ratio": 1.44874,
+  "files": [
+   {
+    "file": "flap-720.webp",
+    "w": 720,
+    "h": 497,
+    "bytes": 64124
+   }
+  ]
+ },
+ "flap_in": {
+  "src_size": [
+   1362,
+   855
+  ],
+  "ratio": 1.59298,
+  "files": [
+   {
+    "file": "flap_in-720.webp",
+    "w": 720,
+    "h": 452,
+    "bytes": 47974
+   }
+  ]
+ },
+ "string": {
+  "src_size": [
+   642,
+   1382
+  ],
+  "ratio": 0.46454,
+  "files": [
+   {
+    "file": "string-320.webp",
+    "w": 320,
+    "h": 689,
+    "bytes": 48020
+   }
+  ]
+ },
+ "button": {
+  "src_size": [
+   1050,
+   1050
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "button-240.webp",
+    "w": 240,
+    "h": 240,
+    "bytes": 26342
+   }
+  ]
+ },
+ "xi": {
+  "src_size": [
+   1083,
+   1083
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "xi-400.webp",
+    "w": 400,
+    "h": 400,
+    "bytes": 59420
+   }
+  ]
+ },
+ "veil_o_l": {
+  "src_size": [
+   467,
+   1379
+  ],
+  "ratio": 0.33865,
+  "files": [
+   {
+    "file": "veil_o_l-300.webp",
+    "w": 300,
+    "h": 886,
+    "bytes": 134940
+   }
+  ]
+ },
+ "veil_o_r": {
+  "src_size": [
+   467,
+   1379
+  ],
+  "ratio": 0.33865,
+  "files": [
+   {
+    "file": "veil_o_r-300.webp",
+    "w": 300,
+    "h": 886,
+    "bytes": 130296
+   }
+  ]
+ },
+ "veil_i_l": {
+  "src_size": [
+   455,
+   1379
+  ],
+  "ratio": 0.32995,
+  "files": [
+   {
+    "file": "veil_i_l-300.webp",
+    "w": 300,
+    "h": 909,
+    "bytes": 185086
+   }
+  ]
+ },
+ "veil_i_r": {
+  "src_size": [
+   456,
+   1379
+  ],
+  "ratio": 0.33067,
+  "files": [
+   {
+    "file": "veil_i_r-300.webp",
+    "w": 300,
+    "h": 907,
+    "bytes": 183048
+   }
+  ]
+ },
+ "card_small": {
+  "src_size": [
+   942,
+   1402
+  ],
+  "ratio": 0.6719,
+  "files": [
+   {
+    "file": "card_small-720.webp",
+    "w": 720,
+    "h": 1072,
+    "bytes": 78442
+   }
+  ],
+  "window_pct": [
+   19.75,
+   8.77,
+   60.4,
+   40.01
+  ],
+  "box_pct": [
+   6,
+   8.0,
+   88,
+   85.25
+  ]
+ },
+ "cloud_1": {
+  "src_size": [
+   1729,
+   482
+  ],
+  "ratio": 3.58714,
+  "files": [
+   {
+    "file": "cloud_1-400.webp",
+    "w": 400,
+    "h": 112,
+    "bytes": 17778
+   }
+  ]
+ },
+ "cloud_2": {
+  "src_size": [
+   1643,
+   689
+  ],
+  "ratio": 2.38462,
+  "files": [
+   {
+    "file": "cloud_2-400.webp",
+    "w": 400,
+    "h": 168,
+    "bytes": 23382
+   }
+  ]
+ },
+ "cloud_3": {
+  "src_size": [
+   1653,
+   599
+  ],
+  "ratio": 2.7596,
+  "files": [
+   {
+    "file": "cloud_3-400.webp",
+    "w": 400,
+    "h": 145,
+    "bytes": 19688
+   }
+  ]
+ },
+ "gate": {
+  "src_size": [
+   1220,
+   1220
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "gate-720.webp",
+    "w": 720,
+    "h": 720,
+    "bytes": 98222
+   }
+  ],
+  "window_pct": [
+   13.61,
+   12.87,
+   73.61,
+   71.07
+  ]
+ },
+ "band": {
+  "src_size": [
+   2149,
+   345
+  ],
+  "ratio": 6.22899,
+  "files": [
+   {
+    "file": "band-800.webp",
+    "w": 800,
+    "h": 128,
+    "bytes": 46620
+   }
+  ]
+ },
+ "cut_far": {
+  "src_size": [
+   1231,
+   1218
+  ],
+  "ratio": 1.01067,
+  "files": [
+   {
+    "file": "cut_far-720.webp",
+    "w": 720,
+    "h": 712,
+    "bytes": 241326
+   }
+  ]
+ },
+ "cut_near": {
+  "src_size": [
+   1450,
+   865
+  ],
+  "ratio": 1.6763,
+  "files": [
+   {
+    "file": "cut_near-640.webp",
+    "w": 640,
+    "h": 382,
+    "bytes": 130854
+   }
+  ]
+ },
+ "tassel": {
+  "src_size": [
+   592,
+   1855
+  ],
+  "ratio": 0.31914,
+  "files": [
+   {
+    "file": "tassel-300.webp",
+    "w": 300,
+    "h": 940,
+    "bytes": 82386
+   }
+  ]
+ },
+ "stage_asked": {
   "aspect": 0.66,
   "pocket_top_pct": 30,
   "flap_pct": [
@@ -174,17 +492,87 @@
   ],
   "_note": "% of the closed envelope (left, top, width, height); GPT_PROMPTS.md asks for these"
  },
+ "stage": {
+  "aspect": 0.6509,
+  "back": [
+   0,
+   0,
+   100,
+   100
+  ],
+  "pocket": [
+   0,
+   32.13,
+   100,
+   67.87
+  ],
+  "flap": [
+   0,
+   0,
+   100,
+   44.93
+  ],
+  "flap_tip_pct_of_flap": 99.9,
+  "button_flap_top_pct_of_flap": 97.0,
+  "flap_in_pct_of_flap": 90.95,
+  "button_centres": [
+   [
+    50,
+    43.58
+   ],
+   [
+    50,
+    54.67
+   ]
+  ],
+  "cord_loops_pct": [
+   [
+    48.91,
+    21.93,
+    87.54,
+    41.1
+   ],
+   [
+    49.0,
+    67.38,
+    87.69,
+    40.3
+   ]
+  ],
+  "string": [
+   41.48,
+   38.23,
+   17.42,
+   24.4
+  ],
+  "_note": "% of the closed envelope (left, top, width, height), measured on the GPT layers' alpha boxes; the flap button and the inside face in % of the flap box"
+ },
  "og": {
+  "src_size": [
+   1536,
+   1024
+  ],
+  "crop": [
+   0,
+   218,
+   1536,
+   806
+  ],
+  "align": "alt",
+  "size": [
+   1200,
+   630
+  ],
   "file": "og-1200x630.jpg",
-  "source": "montage: closed envelope (red paper + gold) on the lacquer ground",
-  "bytes": 78513
+  "source": "parts/web_hero.png",
+  "bytes": 137012
  },
  "favicon": {
   "src_box": [
-   28,
-   34,
-   296,
-   432
+   40,
+   40,
+   260,
+   400
   ],
   "size": [
    180,
@@ -192,38 +580,34 @@
   ],
   "pad": 0.04,
   "file": "favicon.png",
-  "bytes": 22587
+  "bytes": 34789
  },
  "parts": {
-  "used": [],
-  "waiting_for_gpt": [
-   "envelope_back",
-   "envelope_pocket",
-   "envelope_flap",
-   "flap_inside",
+  "used": [
    "button",
-   "string",
-   "xi_gold",
-   "veil_outer",
-   "veil_inner",
    "card_small",
    "cloud_1",
    "cloud_2",
    "cloud_3",
-   "moon_gate",
-   "peony_band",
+   "envelope_back",
+   "envelope_flap",
+   "envelope_pocket",
+   "flap_inside",
    "jianzhi_far",
    "jianzhi_near",
+   "moon_gate",
+   "peony_band",
+   "string",
    "tassel",
+   "veil_inner",
+   "veil_outer",
    "web_hero",
-   "lacquer",
-   "red_paper",
-   "cream_paper",
-   "gold_leaf"
-  ]
+   "xi_gold"
+  ],
+  "waiting_for_gpt": []
  },
- "_note": "G183 interim build: red paper, lacquer, cream paper and gold leaf cut and toned from other designs' plain GPT pictures; the design's own PAKET 5 parts are taken as they arrive (GPT_PROMPTS.md, manifest parts). Nothing drawn.",
- "parts_css_rules": 0,
+ "_note": "G183 build from the design's own PAKET 5 parts. Nothing drawn.",
+ "parts_css_rules": 30,
  "checks": {
   "green": {}
  },
@@ -240,5 +624,5 @@
    "light_above": 140
   }
  },
- "bytes_total": 353967
+ "bytes_total": 2487807
 }

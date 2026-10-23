@@ -111,8 +111,8 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .opening-heading>.eyebrow:first-child{margin-bottom:8px}
 .opening .names{font-size:clamp(46px,13.5vw,66px)}
 /* the closed envelope: 0.74 wide per high (manifest stage); flap, band and card in % of it */
-.stage{--obj:min(58vw,calc(40svh * .74),280px);position:relative;width:var(--obj);margin:calc(var(--obj) / .74 * .3 + 10px) auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent;z-index:5}
-.opening:has(.names.long-names) .stage{--obj:min(52vw,calc(35svh * .74),280px)}
+.stage{--env-ratio:.74;--flap-h:.3;--obj:min(58vw,calc(40svh * var(--env-ratio)),280px);position:relative;width:var(--obj);margin:calc(var(--obj) / var(--env-ratio) * var(--flap-h) + 10px) auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent;z-index:5}
+.opening:has(.names.long-names) .stage{--obj:min(52vw,calc(35svh * var(--env-ratio)),280px)}
 .envelope{position:relative;width:100%;aspect-ratio:.74;--tex:calc(var(--obj) * 1.6)}
 .envelope>*{position:absolute}
 .card{left:7%;top:5%;width:86%;height:90%;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8% 8% 7%;text-align:center;view-transition-name:none;container-type:inline-size}
@@ -121,9 +121,10 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .card.tight .card-photo{width:40%}
 .card-photo .ph-mark{font-size:8px}
 .card-photo .ty-decor,.card-photo .ty-decor img{display:block;width:100%;height:100%;object-fit:cover}
-.card-line{margin-top:8%;font-size:8px;letter-spacing:.2em}
-.card-names{font:400 clamp(17px,13cqw,34px)/1.12 var(--sign);color:var(--pink);overflow-wrap:anywhere;text-wrap:balance;margin-top:1%}
-.card-date{font-size:8px;margin-top:3%}
+/* the card's texts are sized by the card (cqw): the same layout at every envelope size, so long names fit at all */
+.card-line{margin-top:8%;font-size:3.8cqw;letter-spacing:.2em}
+.card-names{font:400 11cqw/1.12 var(--sign);color:var(--pink);overflow-wrap:anywhere;text-wrap:balance;margin-top:1%}
+.card-date{font-size:3.8cqw;margin-top:3%}
 .pocket{inset:0;z-index:2;background:var(--kraft) url(img/kraft-640.webp) 0 100%/var(--tex) repeat;box-shadow:0 14px 22px -10px rgb(59 36 24/.55)}
 .flap{left:0;top:0;width:100%;height:30%;z-index:3;transform-origin:50% 0;transform-style:preserve-3d}
 .flap-out,.flap-in{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
@@ -368,8 +369,8 @@ html[data-rsvp-replied] .rsvp-page .page-heading .body-text{display:none}
 @media(max-height:700px) and (max-width:759px){
 .opening{padding-top:104px}
 .opening .names{font-size:clamp(40px,11.5vw,54px)}
-.stage{--obj:min(52vw,calc(34svh * .74),280px);margin-top:calc(var(--obj) / .74 * .3 + 6px)}
-.opening:has(.names.long-names) .stage{--obj:min(48vw,calc(31svh * .74),280px)}
+.stage{--obj:min(52vw,calc(34svh * var(--env-ratio)),280px);margin-top:calc(var(--obj) / var(--env-ratio) * var(--flap-h) + 6px)}
+.opening:has(.names.long-names) .stage{--obj:min(48vw,calc(31svh * var(--env-ratio)),280px)}
 .opening-actions{margin-top:14px}
 .hero{padding-top:104px;padding-bottom:14px}
 .hero-card{padding:14px 18px 16px}
