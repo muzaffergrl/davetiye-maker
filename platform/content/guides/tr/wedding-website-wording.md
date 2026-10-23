@@ -2,14 +2,14 @@
 title: "Düğün Websitesi Metinleri: Her Bölüm İçin Örnekler"
 description: Karşılamadan hikâyemize, kıyafet kuralından hediye listesine, ulaşımdan LCV'ye kadar düğün websitenizin her bölümü için üç farklı tonda özgün metin örnekleri.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 4
 keyword: düğün websitesi metinleri
 quickAnswer: Her bölümü kısa, net ve nazik tutun. Karşılama için bir iki cümle, her fotoğraf açıklaması için tek satır, ne anlama geldiğine dair ipucuyla açık bir kıyafet kuralı, nazik bir hediye listesi satırı, pratik ulaşım notları ve son tarihi açıkça yazılmış bir LCV satırı kullanın. Bir ton seçin ve her yerde onu kullanın.
 ---
 
-Düğün websitesi metinleri çoğunlukla iki şekilde ters gider: ya çok az şey söyler ("Detaylar yakında") ya da çok fazla (mekân adresinden önce üç sayfalık bir aşk hikâyesi). Aşağıdaki örnekler çoğu website oluşturucunun metin alanlarına sığacak kadar kısa yazıldı. Örneğin kendi websitelerimizde Hikâyemiz girişi en fazla 200 karakter, her fotoğraf açıklaması da en fazla 60 karakterdir.
+Düğün websitesi metinleri çoğunlukla iki şekilde ters gider: ya çok az şey söyler ("Detaylar yakında") ya da çok fazla (mekân adresinden önce üç sayfalık bir aşk hikâyesi). Aşağıdaki örnekler çoğu website oluşturucunun metin alanlarına sığacak kadar kısa yazıldı. Örneğin kendi websitelerimizde Hikâyemiz girişi en fazla {{storyIntroChars}} karakter, her fotoğraf açıklaması da en fazla {{storyCaptionChars}} karakterdir.
 
 Her bölümde üç farklı tonda örnek var. Size en çok benzeyeni seçin ve baştan sona onu kullanın; resmî bir karşılamayı esprili bir SSS ile karıştırmak misafirlere tuhaf gelir.
 
@@ -30,7 +30,7 @@ Karşılama ana sayfada yer alır. Merhaba deyin, sevindiğinizi söyleyin ve mi
 
 ## Hikâyemiz girişi ve fotoğraf açıklamaları
 
-Giriş bir iki cümledir. Açıklamalar birkaç kelimedir: bir yer, bir an, bir tarih.
+Giriş bir iki cümledir. Açıklamalar birkaç kelimedir: bir yer, bir an, bir tarih. Daha uzun hikâye yapıları ve örnekler için [Hikâyemiz örneklerine](/guides/wedding-website-our-story-examples) bakın.
 
 | Ton | Hikâye girişi |
 |---|---|
@@ -59,7 +59,7 @@ Kısa etiketler telefonda en iyi okunur. Websitenizde ayrı bir alan varsa yeri 
 | 20:30 | İlk dans ve eğlence | The Grand Hall |
 | 23:00 | Uğurlama | Ana giriş |
 
-Misafirler törenden önce geliyorsa on beş ila otuz dakika önceye "Misafirlerin gelişi" ya da "Kapılar açılıyor" ekleyin; böylece kimse tam saatinde gelip başlangıcı kaçırmaz.
+Misafirler törenden önce geliyorsa on beş ila otuz dakika önceye "Misafirlerin gelişi" ya da "Kapılar açılıyor" ekleyin; böylece kimse tam saatinde gelip başlangıcı kaçırmaz. Başka günlerdeki etkinlikler için [düğün hafta sonu programı](/guides/wedding-weekend-itinerary) rehberimize bakın.
 
 ## Kıyafet kuralı metinleri
 
@@ -89,7 +89,7 @@ Kısa ve minnettar tutun; her sayfaya değil, tek bir bölüme koyun.
 
 ## Ulaşım ve konaklama
 
-Burada pratiklik şiirsellikten önce gelir. İsimler, mesafeler ve son tarihler verin.
+Burada pratiklik şiirsellikten önce gelir. İsimler, mesafeler ve son tarihler verin. Yurt dışında bir düğün için [destination düğün websitesi kontrol listesine](/guides/destination-wedding-website-checklist) bakın.
 
 - *En yakın havalimanı Sacramento (SMF), arabayla yaklaşık 75 dakika.*
 - *The Vineyard Inn'de 1 Nisan'a kadar odalar ayırttık. Rezervasyon yaparken isimlerimizi söyleyin.*
@@ -99,7 +99,7 @@ Burada pratiklik şiirsellikten önce gelir. İsimler, mesafeler ve son tarihler
 
 ## LCV metinleri
 
-LCV satırında son tarih açıkça yazılı olmalı. Katılamama seçeneği de katılma seçeneği kadar nazik olmalı.
+LCV satırında son tarih açıkça yazılı olmalı. Katılamama seçeneği de katılma seçeneği kadar nazik olmalı. Misafirleri basılı bir karttan websitenize yönlendiren satırlar için [düğün websitesi davetiyeye nasıl eklenir](/guides/wedding-website-on-invitation) rehberine bakın.
 
 | Ton | Yanıt satırı | Katılıyorum | Katılamıyorum |
 |---|---|---|---|
@@ -116,7 +116,7 @@ Forma ekleyebileceğiniz, açık ifadeli sorular:
 
 ## Sorular ve yanıtlar
 
-Önce soruyu yanıtlayın, sonra işe yarar bir ayrıntı ekleyin.
+Önce soruyu yanıtlayın, sonra işe yarar bir ayrıntı ekleyin. Daha fazla soru ve örnek yanıt [düğün websitesi SSS örneklerinde](/guides/wedding-website-faq-examples).
 
 | Soru | Yanıt |
 |---|---|

@@ -2,14 +2,14 @@
 title: "Qué poner en la web de tu boda: lista y ejemplos"
 description: Lista completa para la web de tu boda: imprescindibles, extras útiles y qué dejar fuera, con consejos de privacidad y una estructura página a página.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 2
 keyword: qué poner en la web de boda
 quickAnswer: Toda web de boda necesita vuestros nombres, la fecha, la hora de la ceremonia con su zona horaria, el lugar con enlace al mapa, el programa, y cómo y hasta cuándo confirmar. Extras útiles: vuestra historia, viaje y hotel, código de vestimenta, lista de bodas y preguntas frecuentes. Deja fuera tu dirección y los planes privados.
 ---
 
-La web de una boda tiene una sola misión: responder a las preguntas de tus invitados antes de que tengan que hacértelas. Las buenas son breves, exactas y fáciles de leer en el móvil. Esta lista lo ordena todo en tres grupos, para que empieces por lo importante y pares cuando tengas suficiente.
+La web de una boda tiene una sola misión: responder a las preguntas de tus invitados antes de que tengan que hacértelas. Las buenas son breves, exactas y fáciles de leer en el móvil. Esta lista lo ordena todo en tres grupos, para que empieces por lo importante y pares cuando tengas suficiente. ¿No tienes claro si necesitas una web? Mira [invitación digital o web de boda](/guides/wedding-website-vs-invitation).
 
 ## Los imprescindibles
 
@@ -32,11 +32,11 @@ Son los datos que los invitados buscan primero. Si falta alguno, alguien te escr
 
 Añádelos si encajan con tu boda. Cada uno te ahorra unos cuantos mensajes.
 
-- **Vuestra historia.** Una introducción breve y unas cuantas fotos con pies de foto. Que sea ligera; a los invitados les gusta, pero vienen por los detalles.
+- **Vuestra historia.** Una introducción breve y unas cuantas fotos con pies de foto. Que sea ligera; a los invitados les gusta, pero vienen por los detalles. Mira los [ejemplos de «Nuestra historia»](/guides/wedding-website-our-story-examples) para estructuras y textos.
 - **Viaje y alojamiento.** Hoteles cercanos, el bloque de habitaciones si lo hay y su plazo de reserva, el aeropuerto más cercano, el aparcamiento y los horarios del autobús lanzadera.
 - **Código de vestimenta.** Una o dos palabras y una frase de explicación, por ejemplo: "Formal de jardín: trajes o vestidos; la ceremonia es sobre césped."
 - **Enlace a la lista de bodas.** Un solo enlace en su propia sección, sin repetirlo en cada página. Guías de etiqueta como la del [Emily Post Institute](https://emilypost.com/advice/wedding-website-tips) desaconsejan poner la lista en primer plano.
-- **Preguntas y respuestas.** Niños, acompañantes, aparcamiento, accesibilidad, qué pasa si llueve, si hay opción vegetariana.
+- **Preguntas y respuestas.** Niños, acompañantes, aparcamiento, accesibilidad, qué pasa si llueve, si hay opción vegetariana. Mira los [ejemplos de preguntas frecuentes](/guides/wedding-website-faq-examples) para respuestas que puedes adaptar.
 - **Añadir al calendario.** Un botón que lleva la fecha, la hora y el lugar directamente al calendario del invitado.
 - **Cuenta atrás.** Un toque pequeño y simpático; opcional.
 
@@ -53,7 +53,7 @@ El enlace de tu web llega más lejos de lo que crees: los invitados lo reenvían
 - **Nombres de invitados o listas de respuestas.** Las respuestas solo deben verlas vosotros.
 - **Las fechas exactas en que estaréis fuera de casa**, como el día de salida de la luna de miel junto a vuestra dirección.
 
-Si tu plataforma lo permite, comprueba si tu web se muestra a los buscadores y elige lo que te convenga. Para la mayoría de las parejas, una web que solo encuentran los invitados que tienen el enlace es la opción más tranquila.
+Si tu plataforma lo permite, comprueba si tu web se muestra a los buscadores y elige lo que te convenga. Para la mayoría de las parejas, una web que solo encuentran los invitados que tienen el enlace es la opción más tranquila. Nuestra guía sobre la [privacidad de la web de boda](/guides/wedding-website-privacy) explica las vistas previas de los enlaces y cuándo merece la pena una contraseña para invitados.
 
 ## Notas prácticas que los invitados agradecen
 
@@ -65,6 +65,7 @@ Estos pequeños detalles rara vez llegan a las webs de boda, y son justo lo que 
 - **Comida.** Si vas a preguntar por alergias o por la elección de menú, di dónde: "Cuéntanoslo en tu confirmación."
 - **Vuelta a casa.** Los horarios del último tren, un número de taxi o los horarios del autobús lanzadera evitan agobios de madrugada.
 - **A quién llamar ese día.** El nombre y el número de un amigo para dudas, para que los invitados no te llamen en plena ceremonia.
+- **Idioma.** Si algunos invitados leen mejor otro idioma, plantéate una [web de boda bilingüe](/guides/bilingual-wedding-website).
 
 ## Mantenerla al día
 
@@ -77,7 +78,7 @@ Cuatro páginas cortas se leen mejor en el móvil que una página larguísima o 
 1. **Inicio.** Nombres, fecha, lugar, una bienvenida de una línea y un botón claro para confirmar. Aquí encaja bien "Añadir al calendario".
 2. **Nuestra historia.** Unas cuantas fotos con pies cortos y una o dos frases sobre vosotros.
 3. **Detalles.** El programa, el lugar con el mapa, el código de vestimenta, viaje y alojamiento, la lista de bodas, y las preguntas y respuestas.
-4. **RSVP.** El formulario de respuesta, tu fecha límite y las preguntas que necesites responder (elección de menú, necesidades alimentarias).
+4. **RSVP.** El formulario de respuesta, tu fecha límite y las preguntas que necesites responder (elección de menú, necesidades alimentarias; mira [qué preguntas incluir en la confirmación](/guides/wedding-rsvp-questions)).
 
 Es la estructura que usan nuestros diseños, después de un sobre o un recuerdo que se abre y da paso a la página de inicio. Puedes verla en cualquier [demo en vivo](/designs), y la [página de funciones](/features) indica qué puede incluir cada página.
 

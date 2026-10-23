@@ -2,8 +2,8 @@
 title: Créer son site de mariage sur téléphone, étape par étape
 description: Un guide pratique, valable pour toute plateforme, pour créer votre site de mariage sur téléphone : quoi préparer, huit étapes et comment tester le lien.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 1
 keyword: créer un site de mariage
 quickAnswer: Rassemblez d'abord vos informations (prénoms, date, fuseau horaire, lieu, programme, quelques photos et une date limite de RSVP). Choisissez ensuite une plateforme modifiable sur téléphone, ajoutez l'essentiel, écrivez un court mot d'accueil, configurez les réponses, prévisualisez chaque page sur votre téléphone, publiez, testez le lien et partagez-le.
@@ -20,7 +20,7 @@ Rassemblez tout cela dans une seule note sur votre téléphone avant d'ouvrir un
 - [ ] Le nom du lieu, son adresse complète et un lien de carte copié depuis Google Maps ou Apple Maps
 - [ ] Le déroulé de la journée : cérémonie, vin d'honneur, dîner, soirée dansante, avec les horaires
 - [ ] Trois à cinq photos qui vous plaisent à tous les deux, dont un portrait qui se recadre bien
-- [ ] Votre date limite de RSVP (voir [quand la fixer](/guides/when-to-send-your-wedding-website))
+- [ ] Votre date limite de RSVP (voir [quand la fixer](/guides/wedding-rsvp-deadline))
 - [ ] Les liens que vous voulez partager : liste de mariage, chambres réservées à l'hôtel, transport
 - [ ] Les réponses aux questions que les invités posent toujours : dress code, stationnement, enfants, accompagnants
 
@@ -35,11 +35,11 @@ Le bon choix dépend moins de l'apparence que de l'endroit où vous ferez vos mo
 | Appareil de modification | L'essentiel de l'organisation se fait sur téléphone, entre deux choses | Puis-je tout modifier depuis mon téléphone, sans ordinateur portable ? |
 | RSVP | Des réponses dispersées entre SMS, e-mails et formulaires sont difficiles à compter | Les réponses arrivent-elles dans une seule liste que je peux télécharger ? |
 | Aperçu du lien | Les invités décident de toucher le lien d'après l'aperçu | Le lien partagé affiche-t-il nos prénoms et la date ? |
-| Coût | Certains outils sont gratuits mais vendent des options ; d'autres se paient une fois | Combien vais-je payer au total, et pour combien de temps ? |
+| Coût | Certains outils sont gratuits mais vendent des options ; d'autres se paient une fois | Combien vais-je payer au total, et pour combien de temps ? ([gratuit ou payant](/guides/free-vs-paid-wedding-websites)) |
 | Durée de mise en ligne | Les invités cherchent les photos et les détails après le jour J | Jusqu'à quand le site restera-t-il en ligne ? |
 | Comptes | Certains outils exigent un compte pour vous, d'autres aussi pour les invités | Mes invités doivent-ils s'inscrire pour répondre ? |
 
-Les plateformes gratuites, comme les grands sites de listes de mariage, les modèles d'outils de design et les designs hébergés comme les nôtres, répondent chacune différemment à ces questions. Ouvrez une démo sur votre téléphone avant de décider : elle en dit plus que n'importe quelle liste de fonctionnalités.
+Les plateformes gratuites, comme les grands sites de listes de mariage, les modèles d'outils de design et les designs hébergés comme les nôtres, répondent chacune différemment à ces questions. Ouvrez une démo sur votre téléphone avant de décider : elle en dit plus que n'importe quelle liste de fonctionnalités. Si vous aimez les invitations qui s'ouvrent d'une enveloppe, notre guide des [faire-part à enveloppe animée](/guides/animated-envelope-wedding-invitations) présente les deux sortes que vous rencontrerez.
 
 **Temps :** 30 à 60 minutes de recherche, surtout sur votre téléphone.
 
@@ -59,7 +59,7 @@ Si vous vous arrêtez après cette étape, votre site est déjà utile. Tout le 
 
 ## Étape 3 : écrire un court mot d'accueil et votre histoire
 
-Les invités lisent les premières lignes, puis parcourent le reste. Limitez le mot d'accueil à deux ou trois phrases et l'introduction de votre histoire à une ou deux. Si vous ne savez pas quoi écrire, notre [guide des textes pour site de mariage](/guides/wedding-website-wording) propose des exemples pour chaque section dans trois tons, écrits pour tenir dans des champs de texte courts.
+Les invités lisent les premières lignes, puis parcourent le reste. Limitez le mot d'accueil à deux ou trois phrases et l'introduction de votre histoire à une ou deux. Si vous ne savez pas quoi écrire, notre [guide des textes pour site de mariage](/guides/wedding-website-wording) propose des exemples pour chaque section dans trois tons, écrits pour tenir dans des champs de texte courts. Pour une histoire plus longue, voyez nos [exemples de « Notre histoire »](/guides/wedding-website-our-story-examples).
 
 Un bon mot d'accueil dit qui vous êtes, que vous êtes heureux de la venue de vos invités et où trouver ce dont ils ont besoin :
 
@@ -90,7 +90,7 @@ Décidez de ce que vous devez savoir avant que le traiteur et le lieu ne vous de
 - Régimes alimentaires ou allergies, en réponse courte
 - En option, une demande de chanson ou un petit mot pour les mariés
 
-Limitez les questions personnalisées à deux ou trois ; chaque question supplémentaire réduit les chances que les invités terminent le formulaire. Fixez la date limite de réponse environ deux à trois semaines avant le mariage, ou quelques jours avant la date à laquelle votre traiteur veut le nombre définitif. Notre [guide du calendrier](/guides/when-to-send-your-wedding-website) explique comment remonter le temps à partir de cette date.
+Limitez les questions personnalisées à deux ou trois ; chaque question supplémentaire réduit les chances que les invités terminent le formulaire. Fixez la date limite de réponse environ deux à trois semaines avant le mariage, ou quelques jours avant la date à laquelle votre traiteur veut le nombre définitif. Notre guide pour [choisir la date limite du RSVP](/guides/wedding-rsvp-deadline) explique comment remonter le temps à partir de cette date, et le guide des [questions RSVP pour un mariage](/guides/wedding-rsvp-questions) propose une formulation pour chaque question.
 
 **Temps :** 10 minutes.
 
@@ -118,6 +118,8 @@ Publiez, puis testez le lien exactement comme les invités le recevront :
 4. Si vous imprimez un QR code, scannez-le sur une épreuve imprimée avec deux téléphones différents.
 5. Supprimez votre réponse test, ou notez-la pour ne pas la compter.
 
+Nos guides sur le [QR code pour le RSVP du mariage](/guides/qr-code-wedding-rsvp) et la [confidentialité du site de mariage](/guides/wedding-website-privacy) traitent des codes imprimés et de ce que montre un lien transféré.
+
 **Temps :** 10 minutes.
 
 ## Étape 8 : le partager au bon moment
@@ -126,7 +128,7 @@ Beaucoup de couples partagent le site avec le save the date (l'annonce « réser
 
 ## Comment cela fonctionne avec nos sites de mariage
 
-Si vous choisissez l'un de nos [designs de site de mariage](/designs), les étapes ci-dessus se déroulent ainsi : vous essayez la démo en ligne sur votre téléphone, vous achetez le design sur Etsy, vous démarrez votre site avec votre numéro de commande Etsy et vous le modifiez dans un panneau privé pensé pour les écrans de téléphone. Les réponses arrivent dans votre panneau, avec un téléchargement CSV. Découvrez [comment ça marche](/how-it-works) et la liste complète des [fonctionnalités](/features). D'autres plateformes sont aussi de bons choix ; la liste de l'étape 1 s'applique à toutes.
+Si vous choisissez l'un de nos [designs de site de mariage](/designs), les étapes ci-dessus se déroulent ainsi : vous essayez la démo en ligne sur votre téléphone, vous achetez le design sur Etsy, vous démarrez votre site avec votre numéro de commande Etsy et vous le modifiez dans un panneau privé pensé pour les écrans de téléphone. Les réponses arrivent dans votre panneau, avec un téléchargement Excel ou CSV. Découvrez [comment ça marche](/how-it-works) et la liste complète des [fonctionnalités](/features). D'autres plateformes sont aussi de bons choix ; la liste de l'étape 1 s'applique à toutes.
 
 ## FAQ
 

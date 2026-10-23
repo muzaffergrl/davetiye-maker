@@ -2,8 +2,8 @@
 title: "Digital Wedding Invitations: Etiquette, Pros and Cons"
 description: Are digital wedding invitations acceptable? An honest look at etiquette, pros and cons, who may still need paper, how to send them and message wording.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 5
 keyword: digital wedding invitation etiquette
 quickAnswer: Digital wedding invitations are widely used and fine for most guests, but traditional etiquette still prefers paper for formal weddings. A good middle ground is to send most invitations digitally, mail a simple printed card with a QR code to guests who prefer paper, and send every invitation personally rather than as a group message.
@@ -52,7 +52,7 @@ A simple printed card with your names, the date and a QR code that opens your we
 
 **Choose the channel they actually use.** Text or WhatsApp for most friends, email for colleagues and older guests who prefer it. Avoid sending the only copy through a social network.
 
-**Check the preview before you send.** Most messaging apps show a preview card for a link: an image, a title and a short description. Send the link to yourself first. If the preview shows your names and the date, guests know at a glance what it is. If it shows something generic, guests may mistake it for spam.
+**Check the preview before you send.** Most messaging apps show a preview card for a link: an image, a title and a short description. Send the link to yourself first. If the preview shows your names and the date, guests know at a glance what it is. If it shows something generic, guests may mistake it for spam. Our guide to [wedding website privacy](/guides/wedding-website-privacy) explains what a forwarded preview reveals.
 
 **Address the people who are invited.** If the invitation is for one person or a couple only, say their names in your message. If children or a plus-one are invited, say so.
 
@@ -74,6 +74,15 @@ Short, warm and clear about the action you need. Adapt these:
 **When children are invited:**
 *"Hi Jo! The whole family is invited, little ones included. When you reply, let us know their ages so we can plan meals: (link)."*
 
+**With a plus-one:**
+*"Hi Leo! We'd love you to join us on June 12, and you're welcome to bring a guest. When you reply, just add their name: (link)."*
+
+**If a detail changes after you have sent it:**
+*"Hi Maya, a quick update: the ceremony now starts at 4:30 pm instead of 4:00 pm. Everything else stays the same, and the website always has the latest details: (link)."*
+
+**A save the date, months before the invitation:**
+*"Hi Sam! Save the date: we're getting married on June 12, 2027 in Napa. A formal invitation will follow, and our website already has the first details: (link)."*
+
 ## Making a digital invitation feel personal
 
 Small choices make a digital invitation feel as considered as a paper one:
@@ -90,11 +99,11 @@ A week before your reply-by date, check your list and send a gentle note to anyo
 
 *"Hi Tom, just a friendly reminder that we're finalizing numbers for the caterer. Could you reply by Friday? Here's the link again: (link). Thank you!"*
 
-After the deadline, call the last few guests. Older relatives in particular may have opened the link and not found the reply button; a quick call solves it. See our guide on [when to share your website and set the RSVP deadline](/guides/when-to-send-your-wedding-website) for the full timeline.
+After the deadline, call the last few guests. Older relatives in particular may have opened the link and not found the reply button; a quick call solves it. See our guide on [when to send your wedding website and invitations](/guides/when-to-send-your-wedding-website) for the full timeline. Our guide on [what to do when guests don't RSVP](/guides/guests-did-not-rsvp) has a follow-up plan and more messages.
 
 ## A digital invitation that still feels like an invitation
 
-Part of what people love about paper is the moment of opening it. Our wedding websites try to keep that moment: guests open your link and see a sealed envelope (or, in some designs, a keepsake such as a storybook) with your names, tap it, and it opens into your website with the details and the reply form. You can try it in the [Blush Garden Rose demo](/designs/blush-garden-rose) on your phone, or read [how it works](/how-it-works).
+Part of what people love about paper is the moment of opening it. Our wedding websites try to keep that moment: guests open your link and see a sealed envelope (or, in some designs, a keepsake such as a storybook) with your names, tap it, and it opens into your website with the details and the reply form. You can try it in the [Blush Garden Rose demo](/designs/blush-garden-rose) on your phone, or read [how it works](/how-it-works). Our guide to [animated envelope invitations](/guides/animated-envelope-wedding-invitations) explains the two kinds you will find and what to check before choosing.
 
 ## FAQ
 

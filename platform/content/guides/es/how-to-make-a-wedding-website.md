@@ -2,8 +2,8 @@
 title: Cómo crear la web de tu boda desde el móvil (paso a paso)
 description: Una guía práctica y válida para cualquier plataforma para crear la web de tu boda desde el móvil: qué reunir antes, ocho pasos y cómo probar el enlace.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 1
 keyword: cómo hacer una web de boda
 quickAnswer: Reúne antes los datos (nombres, fecha, zona horaria, lugar, programa, unas cuantas fotos y la fecha límite de confirmación). Después elige una plataforma que puedas editar desde el móvil, añade lo esencial, escribe una bienvenida breve, configura las respuestas, revisa cada página en el móvil, publica, prueba el enlace y compártelo.
@@ -20,7 +20,7 @@ Reúne todo esto en una sola nota del móvil antes de abrir cualquier creador de
 - [ ] El nombre del lugar, la dirección completa y un enlace al mapa copiado de Google Maps o Apple Maps
 - [ ] El orden del día: ceremonia, cóctel, cena y baile, con sus horas
 - [ ] Entre tres y cinco fotos que os gusten a los dos, incluido un retrato que se recorte bien
-- [ ] Tu fecha límite de confirmación (consulta [cuándo fijarla](/guides/when-to-send-your-wedding-website))
+- [ ] Tu fecha límite de confirmación (consulta [cuándo fijarla](/guides/wedding-rsvp-deadline))
 - [ ] Los enlaces que quieres compartir: lista de bodas, bloque de habitaciones de hotel, transporte
 - [ ] Las respuestas a lo que los invitados siempre preguntan: código de vestimenta, aparcamiento, niños, acompañantes
 
@@ -35,11 +35,11 @@ La elección correcta depende menos del aspecto que de dónde vas a editar y de 
 | Dispositivo para editar | Casi toda la organización se hace desde el móvil, entre otras tareas | ¿Puedo cambiarlo todo desde el móvil, sin portátil? |
 | Confirmación de asistencia | Las respuestas repartidas entre mensajes, correos y formularios son difíciles de contar | ¿Llegan las respuestas a una sola lista que pueda descargar? |
 | Vista previa del enlace | Los invitados deciden si tocar el enlace según la vista previa | ¿El enlace compartido muestra nuestros nombres y la fecha? |
-| Coste | Algunas herramientas son gratuitas pero venden mejoras; otras cobran una sola vez | ¿Cuánto pago en total, y por cuánto tiempo? |
+| Coste | Algunas herramientas son gratuitas pero venden mejoras; otras cobran una sola vez | ¿Cuánto pago en total, y por cuánto tiempo? ([gratis o de pago](/guides/free-vs-paid-wedding-websites)) |
 | Cuánto tiempo sigue en línea | Los invitados buscan fotos y detalles después del día | ¿Hasta cuándo seguirá activa la web? |
 | Cuentas | Algunos creadores piden una cuenta para ti y otros también para los invitados | ¿Tienen mis invitados que registrarse para responder? |
 
-Las plataformas gratuitas, como las grandes listas de bodas, las plantillas de herramientas de diseño y los diseños alojados como los nuestros responden a esto de forma distinta. Abre una demo en el móvil antes de decidir; enseña más que cualquier lista de funciones.
+Las plataformas gratuitas, como las grandes listas de bodas, las plantillas de herramientas de diseño y los diseños alojados como los nuestros responden a esto de forma distinta. Abre una demo en el móvil antes de decidir; enseña más que cualquier lista de funciones. Si te gustan las invitaciones que se abren desde un sobre, nuestra guía de [invitaciones con sobre animado](/guides/animated-envelope-wedding-invitations) explica los dos tipos que vas a encontrar.
 
 **Tiempo:** de 30 a 60 minutos mirando, casi todo desde el móvil.
 
@@ -59,7 +59,7 @@ Si te quedas en este paso, tu web ya es útil. Todo lo demás es un añadido. Nu
 
 ## Paso 3: Escribe una bienvenida breve y vuestra historia
 
-Los invitados leen las primeras líneas y luego echan un vistazo al resto. Limita la bienvenida a dos o tres frases y la introducción de la historia a una o dos. Si no sabes qué escribir, nuestra [guía de textos para la web de boda](/guides/wedding-website-wording) tiene ejemplos para cada sección en tres tonos, pensados para campos de texto cortos.
+Los invitados leen las primeras líneas y luego echan un vistazo al resto. Limita la bienvenida a dos o tres frases y la introducción de la historia a una o dos. Si no sabes qué escribir, nuestra [guía de textos para la web de boda](/guides/wedding-website-wording) tiene ejemplos para cada sección en tres tonos, pensados para campos de texto cortos. Para una historia más larga, mira los [ejemplos de «Nuestra historia»](/guides/wedding-website-our-story-examples).
 
 Una buena bienvenida dice quiénes sois, que os alegra que vengan y dónde encontrar lo que necesitan:
 
@@ -90,7 +90,7 @@ Decide qué necesitas saber antes de que el catering y el lugar te pidan las cif
 - Necesidades alimentarias o alergias, como respuesta breve
 - De forma opcional, una canción que quieran escuchar o una nota para la pareja
 
-Limita las preguntas personalizadas a dos o tres; cada pregunta de más reduce la probabilidad de que los invitados terminen el formulario. Fija la fecha límite de respuesta unas dos o tres semanas antes de la boda, o unos días antes de la fecha en que el catering necesita el número definitivo. Nuestra [guía de plazos](/guides/when-to-send-your-wedding-website) explica cómo calcular hacia atrás desde esa fecha.
+Limita las preguntas personalizadas a dos o tres; cada pregunta de más reduce la probabilidad de que los invitados terminen el formulario. Fija la fecha límite de respuesta unas dos o tres semanas antes de la boda, o unos días antes de la fecha en que el catering necesita el número definitivo. Nuestra guía para [elegir la fecha límite de confirmación](/guides/wedding-rsvp-deadline) explica cómo calcular hacia atrás desde esa fecha, y la guía de [preguntas para la confirmación de asistencia](/guides/wedding-rsvp-questions) tiene textos para cada pregunta.
 
 **Tiempo:** 10 minutos.
 
@@ -118,6 +118,8 @@ Publica y prueba el enlace exactamente como lo recibirán los invitados:
 4. Si vas a imprimir un código QR, escanéalo desde una prueba impresa con dos móviles distintos.
 5. Borra tu respuesta de prueba, o apúntala para no contarla.
 
+Nuestras guías sobre el [código QR para confirmar asistencia](/guides/qr-code-wedding-rsvp) y la [privacidad de la web de boda](/guides/wedding-website-privacy) explican los códigos impresos y lo que muestra un enlace reenviado.
+
 **Tiempo:** 10 minutos.
 
 ## Paso 8: Compártela en el momento adecuado
@@ -126,7 +128,7 @@ Muchas parejas comparten la web junto con el aviso de "reserva la fecha" (save t
 
 ## Cómo funciona esto con nuestras webs de boda
 
-Si eliges uno de nuestros [diseños de web de boda](/designs), los pasos anteriores quedan así: pruebas la demo en vivo en el móvil, compras el diseño en Etsy, empiezas tu web con tu número de pedido de Etsy y la editas en un panel privado pensado para pantallas de móvil. Las respuestas llegan a tu panel, con descarga en CSV. Consulta [cómo funciona](/how-it-works) y la lista completa de [funciones](/features). Otras plataformas también son buenas opciones; la lista del paso 1 sirve para todas.
+Si eliges uno de nuestros [diseños de web de boda](/designs), los pasos anteriores quedan así: pruebas la demo en vivo en el móvil, compras el diseño en Etsy, empiezas tu web con tu número de pedido de Etsy y la editas en un panel privado pensado para pantallas de móvil. Las respuestas llegan a tu panel, con descarga en Excel o CSV. Consulta [cómo funciona](/how-it-works) y la lista completa de [funciones](/features). Otras plataformas también son buenas opciones; la lista del paso 1 sirve para todas.
 
 ## FAQ
 

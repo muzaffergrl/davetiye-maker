@@ -2,14 +2,14 @@
 title: "Hochzeitswebsite-Texte: Beispiele für jeden Abschnitt"
 description: Eigene Textbeispiele für jeden Teil Ihrer Hochzeitswebsite, von Begrüßung und Geschichte über Dresscode, Wunschliste und Anreise bis RSVP, in drei Tonlagen.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 4
 keyword: Texte Hochzeitswebsite
 quickAnswer: Halten Sie jeden Abschnitt kurz, konkret und freundlich. Ein oder zwei Sätze zur Begrüßung, eine Zeile pro Bildunterschrift, ein klarer Dresscode mit einem Hinweis, was er bedeutet, eine dezente Zeile zur Wunschliste, praktische Hinweise zur Anreise und eine RSVP-Zeile mit ausgeschriebener Frist. Wählen Sie eine Tonlage und bleiben Sie überall dabei.
 ---
 
-Die meisten Texte auf Hochzeitswebsites gehen auf eine von zwei Arten schief: Sie sagen zu wenig („Details folgen“) oder viel zu viel (eine dreiseitige Liebesgeschichte vor der Adresse der Location). Die Beispiele unten sind kurz genug für die Textfelder der meisten Website-Baukästen. Auf unseren eigenen Websites zum Beispiel hat die Einleitung von Our Story bis zu 200 Zeichen und jede Bildunterschrift bis zu 60.
+Die meisten Texte auf Hochzeitswebsites gehen auf eine von zwei Arten schief: Sie sagen zu wenig („Details folgen“) oder viel zu viel (eine dreiseitige Liebesgeschichte vor der Adresse der Location). Die Beispiele unten sind kurz genug für die Textfelder der meisten Website-Baukästen. Auf unseren eigenen Websites zum Beispiel hat die Einleitung von Our Story bis zu {{storyIntroChars}} Zeichen und jede Bildunterschrift bis zu {{storyCaptionChars}}.
 
 Für jeden Abschnitt gibt es Beispiele in drei Tonlagen. Wählen Sie die, die nach Ihnen klingt, und bleiben Sie durchgehend dabei; eine förmliche Begrüßung neben witzigen FAQ wirkt auf Gäste seltsam.
 
@@ -32,7 +32,7 @@ Die Begrüßung steht auf der Startseite. Sagen Sie Hallo, sagen Sie, dass Sie s
 
 ## Einleitung zu Ihrer Geschichte und Bildunterschriften
 
-Die Einleitung besteht aus ein oder zwei Sätzen. Bildunterschriften sind ein paar Worte: ein Ort, ein Moment, ein Datum.
+Die Einleitung besteht aus ein oder zwei Sätzen. Bildunterschriften sind ein paar Worte: ein Ort, ein Moment, ein Datum. Längere Aufbauten und Beispiele finden Sie unter [Beispiele für „Unsere Geschichte“](/guides/wedding-website-our-story-examples).
 
 | Tonlage | Einleitung der Geschichte |
 |---|---|
@@ -61,7 +61,7 @@ Kurze Bezeichnungen lesen sich am Handy am besten. Setzen Sie den Ort in ein eig
 | 20:30 Uhr | Eröffnungstanz und Party | The Grand Hall |
 | 23:00 Uhr | Verabschiedung | Haupteingang |
 
-Wenn Gäste vor der Trauung ankommen, ergänzen Sie fünfzehn bis dreißig Minuten vorher „Ankunft der Gäste“ oder „Einlass“, damit niemand genau pünktlich erscheint und den Anfang verpasst.
+Wenn Gäste vor der Trauung ankommen, ergänzen Sie fünfzehn bis dreißig Minuten vorher „Ankunft der Gäste“ oder „Einlass“, damit niemand genau pünktlich erscheint und den Anfang verpasst. Für Feiern an anderen Tagen lesen Sie unseren Ratgeber zum [Programm fürs Hochzeitswochenende](/guides/wedding-weekend-itinerary).
 
 ## Texte zum Dresscode
 
@@ -91,7 +91,7 @@ Halten Sie es kurz und dankbar und bringen Sie es in einem Abschnitt unter statt
 
 ## Anreise und Unterkunft
 
-Hier gilt: praktisch schlägt poetisch. Nennen Sie Namen, Entfernungen und Fristen.
+Hier gilt: praktisch schlägt poetisch. Nennen Sie Namen, Entfernungen und Fristen. Für eine Hochzeit im Ausland siehe die [Checkliste für die Website einer Destination-Hochzeit](/guides/destination-wedding-website-checklist).
 
 - *Der nächste Flughafen ist Sacramento (SMF), etwa 75 Minuten mit dem Auto.*
 - *Im The Vineyard Inn haben wir bis zum 1. April Zimmer reserviert. Nennt bei der Buchung unsere Namen.*
@@ -101,7 +101,7 @@ Hier gilt: praktisch schlägt poetisch. Nennen Sie Namen, Entfernungen und Frist
 
 ## Texte für die RSVP
 
-Die RSVP-Zeile sollte die Frist enthalten, ausgeschrieben. Die Absage-Option sollte genauso freundlich sein wie die Zusage.
+Die RSVP-Zeile sollte die Frist enthalten, ausgeschrieben. Die Absage-Option sollte genauso freundlich sein wie die Zusage. Für die Zeilen, die Gäste von einer gedruckten Karte auf Ihre Website führen, siehe [Hochzeitswebsite auf die Einladung bringen](/guides/wedding-website-on-invitation).
 
 | Tonlage | Antwortzeile | Zusage | Absage |
 |---|---|---|---|
@@ -118,7 +118,7 @@ Fragen, die Sie dem Formular hinzufügen könnten, klar formuliert:
 
 ## Fragen und Antworten
 
-Beantworten Sie zuerst die Frage und ergänzen Sie dann ein hilfreiches Detail.
+Beantworten Sie zuerst die Frage und ergänzen Sie dann ein hilfreiches Detail. Weitere Fragen und Beispielantworten stehen in den [FAQ-Beispielen für die Hochzeitswebsite](/guides/wedding-website-faq-examples).
 
 | Frage | Antwort |
 |---|---|

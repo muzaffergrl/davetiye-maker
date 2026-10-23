@@ -1,19 +1,19 @@
 ---
-title: When to Share Your Wedding Website and Set the RSVP Deadline
-description: A backward timeline from your wedding date for save the dates, the website, invitations, reminders and the RSVP deadline, plus how to pick the right date.
+title: When to Send Your Wedding Website and Invitations
+description: A backward timeline from your wedding date for save the dates, the website, invitations and reminders, plus destination and short-notice weddings.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 3
 keyword: when to send wedding website
-quickAnswer: Share your wedding website with your save the dates, as soon as the date and venue are set, and again with the invitations six to eight weeks before the wedding. Set the RSVP deadline two to three weeks before the day, or a few days before your caterer needs final numbers.
+quickAnswer: Share your wedding website with your save the dates, as soon as the date and venue are set, and again with the invitations six to eight weeks before the wedding. Keep the website growing in between, and set the RSVP deadline about two to three weeks before the day, before your caterer needs final numbers.
 ---
 
 The website is the one part of your wedding stationery you can share early and keep improving. Guests can save the date months ahead, then come back for the schedule, the hotel and the reply form when you add them. The timing questions are really two: **when to share the link**, and **when replies must be in**.
 
 ## The timeline
 
-Work backwards from your wedding date. The timing for invitations and replies below follows the guidance of the [Emily Post Institute](https://emilypost.com/advice/invitation-timing); the rest is practical advice for how a website fits around it.
+Work backwards from your wedding date. The timing for invitations and replies below follows the Emily Post Institute's [wedding planning timeline](https://emilypost.com/advice/wedding-planning-series) and its advice on [response cards](https://emilypost.com/advice/how-to-word-a-wedding-response-card); the rest is practical advice for how a website fits around it. For what to change once the day is over, see [what to do with your wedding website after the wedding](/guides/wedding-website-after-the-wedding).
 
 | When | What to do | Website status |
 |---|---|---|
@@ -46,41 +46,35 @@ Everyone who receives a save the date should later receive an invitation. If you
 Invitations traditionally go out six to eight weeks before the wedding. Whether your invitation is printed or digital, it should point guests to the website for the details and the reply. Two common ways:
 
 - **A link in the message** you send with a digital invitation. Check that the link preview shows your names and date.
-- **A QR code or short link** on a details card in a paper invitation. Scan the printed proof with two phones before printing everything.
+- **A QR code or short link** on a details card in a paper invitation. Scan the printed proof with two phones before printing everything. Our guide on [putting your website on the invitation](/guides/wedding-website-on-invitation) has wording for each card.
 
 Etiquette guides differ on putting the website address on the main invitation card; a separate details card is the safe middle ground. Registry information never goes on the invitation itself.
 
 ## Destination weddings
 
-If most guests have to fly, take time off or renew a passport, move everything earlier:
+If most guests have to fly, take time off or renew a passport, move everything earlier (our [destination wedding website checklist](/guides/destination-wedding-website-checklist) covers what the site itself needs):
 
 - Share the website with the save the date as soon as the date is fixed, with travel and hotel information already on it.
 - Add room-block deadlines, the nearest airports and how to get from the airport to the venue.
 - Send invitations earlier than for a local wedding, so guests can still book flights at reasonable prices.
 - Set the RSVP deadline earlier too, if hotels or caterers need numbers well before the day.
 
-## Choosing the RSVP deadline
+## The RSVP deadline and reminders
 
-The right deadline is the latest date that still gives you time to act. Start from the deadlines in your contracts:
+The reply-by date anchors the second half of the timeline. Set it about two to three weeks before the wedding, and at least a week before the earliest date your caterer or venue needs final numbers; our guide to [choosing the RSVP deadline](/guides/wedding-rsvp-deadline) shows how to work it out from your contracts, with an example. Write it in full on every card and on the website.
 
-1. Find the date your caterer needs final numbers (and meal choices, if they need them).
-2. Find any venue deadline for seating plans, rentals or transport.
-3. Take the earliest of those dates and go back about one week. That is your RSVP deadline.
-4. Check it against the general rule of two to three weeks before the wedding. If it is much earlier, guests may need a reminder.
+About a week before that date, send a short personal reminder to anyone who has not replied, and call the last few after it. Our guide on [what to do when guests don't RSVP](/guides/guests-did-not-rsvp) has a follow-up plan and messages you can copy.
 
-A few practical points:
+## If the wedding is less than three months away
 
-- **Pick a weekday.** A Sunday deadline gives you the weekend's replies; a Monday gives you time to chase on the same day.
-- **Write it in words** on the website and invitation: "Kindly reply by May 15, 2027".
-- **Close the form after the deadline** so late replies come to you directly and you know to tell the caterer. Some platforms, including ours, close the form automatically after your reply-by date.
+Short engagements, a venue cancellation or a family reason can all compress the timeline. The order stays the same; the gaps get shorter:
 
-## Reminders: what to send and when
-
-About a week before the deadline, look at your reply list and send a short, warm message to anyone who has not answered. Keep it personal and easy to act on:
-
-*"Hi Sam, we're finalizing numbers for the caterer. Could you let us know by Friday if you can make it? Here's the link: (your link). Thank you!"*
-
-After the deadline, call or message the last few guests yourself. A two-minute call usually beats a third reminder.
+- **Skip the save the date.** Send the invitation itself as soon as the date and venue are confirmed.
+- **Publish the website first, even if it is brief.** Names, date, venue and the reply form are enough to start; add the schedule and hotels within days.
+- **Consider a digital invitation.** It removes printing and postage time, and etiquette guides describe digital invitations as a good fit for weddings planned at short notice. Our guide to [digital wedding invitation etiquette](/guides/digital-wedding-invitation-etiquette) covers who may still need paper.
+- **Give guests at least four weeks.** If you can, send invitations at least six weeks ahead; with less time, call the people who matter most before the invitations arrive.
+- **Share hotel and travel details immediately.** Rooms near the venue fill fast when guests book late.
+- **Ask your caterer for their latest final-numbers date**, and set your reply-by date from it.
 
 ## If your date or venue changes
 
@@ -93,7 +87,7 @@ Plans change: a venue closes, a family emergency moves the date, travel rules sh
 
 ## How our wedding websites handle this
 
-You can publish your website early, with what you know, and add details later; guests always see the latest version. The reply form shows your reply-by date and stops taking replies after it. Replies, totals and a CSV download are in your panel. See [how it works](/how-it-works) or try the [Olive & Ivory design](/designs/olive-ivory) on your phone.
+You can publish your website early, with what you know, and add details later; guests always see the latest version. The reply form shows your reply-by date and stops taking replies after it. Replies, totals and an Excel or CSV download are in your panel. See [how it works](/how-it-works) or try the [Olive & Ivory design](/designs/olive-ivory) on your phone.
 
 ## FAQ
 

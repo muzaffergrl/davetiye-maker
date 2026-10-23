@@ -2,14 +2,14 @@
 title: "Was auf die Hochzeitswebsite gehört: Checkliste & Beispiele"
 description: Checkliste für Ihre Hochzeitswebsite: Pflichtangaben, hilfreiche Extras und was Sie weglassen, mit Tipps zur Privatsphäre und einer Struktur Seite für Seite.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 2
 keyword: was gehört auf die Hochzeitswebsite
 quickAnswer: Jede Hochzeitswebsite braucht Ihre Namen, das Datum, die Uhrzeit der Trauung mit Zeitzone, die Location mit Kartenlink, den Ablauf sowie wie und bis wann geantwortet wird. Hilfreiche Extras sind Ihre Geschichte, Anreise und Hotels, der Dresscode, ein Link zur Wunschliste und Antworten auf häufige Fragen. Lassen Sie Ihre Wohnadresse und private Pläne weg.
 ---
 
-Eine Hochzeitswebsite hat eine Aufgabe: die Fragen Ihrer Gäste zu beantworten, bevor sie Sie fragen müssen. Gute Websites sind kurz, genau und am Handy leicht zu lesen. Diese Checkliste ordnet alles in drei Gruppen, damit Sie mit dem Wichtigen beginnen und aufhören können, sobald es genug ist.
+Eine Hochzeitswebsite hat eine Aufgabe: die Fragen Ihrer Gäste zu beantworten, bevor sie Sie fragen müssen. Gute Websites sind kurz, genau und am Handy leicht zu lesen. Diese Checkliste ordnet alles in drei Gruppen, damit Sie mit dem Wichtigen beginnen und aufhören können, sobald es genug ist. Nicht sicher, ob Sie überhaupt eine Website brauchen? Lesen Sie [digitale Einladung oder Hochzeitswebsite](/guides/wedding-website-vs-invitation).
 
 ## Die Pflichtangaben
 
@@ -32,11 +32,11 @@ Nach diesen Angaben suchen Gäste zuerst. Fehlt eine davon, wird Ihnen jemand ei
 
 Ergänzen Sie diese, wenn sie auf Ihre Hochzeit zutreffen. Jedes Extra erspart Ihnen eine Handvoll Nachrichten.
 
-- **Ihre Geschichte.** Eine kurze Einleitung und ein paar Fotos mit Bildunterschriften. Halten Sie es leicht; Gäste lesen es gern, aber sie kommen wegen der Details.
+- **Ihre Geschichte.** Eine kurze Einleitung und ein paar Fotos mit Bildunterschriften. Halten Sie es leicht; Gäste lesen es gern, aber sie kommen wegen der Details. Aufbauten und Formulierungen finden Sie unter [Beispiele für „Unsere Geschichte“](/guides/wedding-website-our-story-examples).
 - **Anreise und Unterkunft.** Hotels in der Nähe, ein eventuelles Zimmerkontingent mit Buchungsfrist, der nächste Flughafen, Parken und Shuttle-Zeiten.
 - **Dresscode.** Ein oder zwei Worte und ein erklärender Satz, etwa „Garden Formal: Anzüge oder Kleider; die Trauung findet auf Rasen statt.“
 - **Link zur Wunschliste.** Ein Link in einem eigenen Abschnitt, nicht auf jeder Seite wiederholt. Etikette-Ratgeber wie das [Emily Post Institute](https://emilypost.com/advice/wedding-website-tips) raten davon ab, die Wunschliste in den Vordergrund zu stellen.
-- **Fragen und Antworten.** Kinder, Begleitung, Parken, Barrierefreiheit, was bei Regen passiert, ob es eine vegetarische Option gibt.
+- **Fragen und Antworten.** Kinder, Begleitung, Parken, Barrierefreiheit, was bei Regen passiert, ob es eine vegetarische Option gibt. Antworten zum Anpassen finden Sie in den [FAQ-Beispielen für die Hochzeitswebsite](/guides/wedding-website-faq-examples).
 - **Zum Kalender hinzufügen.** Ein Button, der Datum, Uhrzeit und Location direkt in den Kalender eines Gastes einträgt.
 - **Countdown.** Eine kleine, freundliche Note; optional.
 
@@ -53,7 +53,7 @@ Der Link zu Ihrer Website kommt weiter herum, als Sie denken: Gäste leiten ihn 
 - **Namen von Gästen oder Antwortlisten.** Die Antworten sollten nur für Sie sichtbar sein.
 - **Genaue Zeiten, zu denen Sie nicht zu Hause sind**, etwa das Abreisedatum in die Flitterwochen neben Ihrer Adresse.
 
-Wenn Ihre Plattform es anbietet, prüfen Sie, ob Ihre Website Suchmaschinen angezeigt wird, und wählen Sie, was zu Ihnen passt. Für die meisten Paare ist eine Website, die nur Gäste mit dem Link finden, die entspanntere Wahl.
+Wenn Ihre Plattform es anbietet, prüfen Sie, ob Ihre Website Suchmaschinen angezeigt wird, und wählen Sie, was zu Ihnen passt. Für die meisten Paare ist eine Website, die nur Gäste mit dem Link finden, die entspanntere Wahl. Unser Ratgeber zum [Datenschutz der Hochzeitswebsite](/guides/wedding-website-privacy) erklärt Linkvorschauen und wann sich ein Gäste-Passwort lohnt.
 
 ## Praktische Hinweise, für die Gäste dankbar sind
 
@@ -65,6 +65,7 @@ Diese kleinen Details schaffen es selten auf Hochzeitswebsites, und genau danach
 - **Essen.** Wenn Sie nach Allergien oder der Menüwahl fragen, sagen Sie wo: „Sagt es uns in eurer RSVP.“
 - **Nach Hause kommen.** Zeiten der letzten Bahn, eine Taxinummer oder ein Shuttle-Fahrplan ersparen spät abends Stress.
 - **Ansprechperson am Tag.** Name und Nummer einer Freundin oder eines Freundes für Fragen, damit Gäste Sie nicht während der Trauung anrufen.
+- **Sprache.** Lesen manche Gäste eine andere Sprache leichter, denken Sie über eine [zweisprachige Hochzeitswebsite](/guides/bilingual-wedding-website) nach.
 
 ## Die Website aktuell halten
 
@@ -77,7 +78,7 @@ Vier kurze Seiten lesen sich am Handy leichter als eine sehr lange Seite oder ze
 1. **Home.** Namen, Datum, Location, eine Zeile zur Begrüßung und ein klarer Button zum Antworten. „Zum Kalender hinzufügen“ passt gut hierher.
 2. **Our Story.** Ein paar Fotos mit kurzen Bildunterschriften und ein oder zwei Sätze über Sie.
 3. **Details.** Der Ablauf, die Location mit Karte, Dresscode, Anreise und Unterkunft, Wunschliste sowie Fragen und Antworten.
-4. **RSVP.** Das Antwortformular, Ihre Antwortfrist und alle Fragen, die Sie beantwortet haben möchten (Menüwahl, Ernährungswünsche).
+4. **RSVP.** Das Antwortformular, Ihre Antwortfrist und alle Fragen, die Sie beantwortet haben möchten (Menüwahl, Ernährungswünsche; siehe [welche RSVP-Fragen sinnvoll sind](/guides/wedding-rsvp-questions)).
 
 Diese Struktur nutzen unsere Designs, nach einem Umschlag oder Erinnerungsstück, das sich zur Startseite öffnet. Sie sehen sie in jeder [Live-Demo](/designs), und auf der [Seite mit den Funktionen](/features) steht, was jede Seite enthalten kann.
 

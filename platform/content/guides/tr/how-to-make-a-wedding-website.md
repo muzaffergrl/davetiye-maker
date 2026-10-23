@@ -2,8 +2,8 @@
 title: Telefonda Düğün Websitesi Nasıl Yapılır? (Adım Adım)
 description: Düğün websitenizi telefonda kurmak için platformdan bağımsız, pratik bir rehber: önce neleri toplamalı, sekiz adım ve linki nasıl test etmeli.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 1
 keyword: düğün websitesi nasıl yapılır
 quickAnswer: Önce bilgilerinizi toplayın (isimler, tarih, saat dilimi, mekân, program, birkaç fotoğraf ve LCV son tarihi). Sonra telefondan düzenleyebileceğiniz bir platform seçin, temel bilgileri ekleyin, kısa bir karşılama yazın, yanıtları ayarlayın, her sayfayı telefonda önizleyin, yayınlayın, linki test edin ve paylaşın.
@@ -20,7 +20,7 @@ Herhangi bir website oluşturucuyu açmadan önce bunları telefonunuzda tek bir
 - [ ] Mekânın adı, tam adresi ve Google Maps ya da Apple Maps'ten kopyalanmış bir harita linki
 - [ ] Günün akışı, saatleriyle birlikte: tören, kokteyl, yemek, dans
 - [ ] İkinizin de sevdiği üç ila beş fotoğraf; bunlardan biri iyi kırpılabilen dikey bir portre olsun
-- [ ] LCV son tarihiniz (bkz. [ne zaman belirlemeli](/guides/when-to-send-your-wedding-website))
+- [ ] LCV son tarihiniz (bkz. [ne zaman belirlemeli](/guides/wedding-rsvp-deadline))
 - [ ] Paylaşmak istediğiniz linkler: hediye listesi, otel oda bloğu, ulaşım
 - [ ] Misafirlerin her zaman sorduğu soruların yanıtları: kıyafet kuralı, otopark, çocuklar, artı bir kişi
 
@@ -35,11 +35,11 @@ Doğru seçim görünüşten çok nerede düzenleyeceğinize ve yanıtların siz
 | Düzenleme cihazı | Planlamanın çoğu telefonda, başka işlerin arasında yapılır | Her şeyi bilgisayar olmadan telefonumdan değiştirebilir miyim? |
 | LCV | Mesajlara, e-postalara ve formlara dağılmış yanıtları saymak zordur | Yanıtlar indirebileceğim tek bir listede toplanıyor mu? |
 | Link önizlemesi | Misafirler dokunup dokunmamaya önizlemeye bakarak karar verir | Paylaşılan link isimlerimizi ve tarihimizi gösteriyor mu? |
-| Maliyet | Bazı araçlar ücretsizdir ama yükseltme satar; bazıları tek seferlik ücret alır | Toplamda ne ödüyorum ve ne kadar süre için? |
+| Maliyet | Bazı araçlar ücretsizdir ama yükseltme satar; bazıları tek seferlik ücret alır | Toplamda ne ödüyorum ve ne kadar süre için? ([ücretsiz mi, ücretli mi](/guides/free-vs-paid-wedding-websites)) |
 | Ne kadar süre yayında kalır | Misafirler düğünden sonra da fotoğraf ve bilgi arar | Site ne zamana kadar yayında kalacak? |
 | Hesaplar | Bazı oluşturucular sizden, bazıları misafirlerden de hesap ister | Misafirlerimin yanıt vermek için kayıt olması gerekiyor mu? |
 
-Büyük düğün hediye listesi siteleri gibi ücretsiz platformlar, tasarım aracı şablonları ve bizimki gibi barındırılan tasarımlar bu sorulara farklı yanıtlar verir. Karar vermeden önce telefonunuzda bir demo açın; size herhangi bir özellik listesinden daha fazlasını gösterir.
+Büyük düğün hediye listesi siteleri gibi ücretsiz platformlar, tasarım aracı şablonları ve bizimki gibi barındırılan tasarımlar bu sorulara farklı yanıtlar verir. Karar vermeden önce telefonunuzda bir demo açın; size herhangi bir özellik listesinden daha fazlasını gösterir. Zarftan açılan davetiyeleri seviyorsanız [animasyonlu zarf davetiyeleri](/guides/animated-envelope-wedding-invitations) rehberimiz karşınıza çıkacak iki türü anlatıyor.
 
 **Süre:** Çoğu telefonda olmak üzere 30 ila 60 dakikalık inceleme.
 
@@ -59,7 +59,7 @@ Bu adımdan sonra dursanız bile websiteniz zaten işe yarar. Geri kalan her şe
 
 ## 3. adım: Kısa bir karşılama ve hikâyenizi yazın
 
-Misafirler ilk satırları okur, sonra göz gezdirir. Karşılamayı iki üç cümlede, hikâye girişini bir iki cümlede tutun. Ne yazacağınızdan emin değilseniz [düğün websitesi metinleri rehberimizde](/guides/wedding-website-wording) her bölüm için üç farklı tonda, kısa metin alanlarına sığacak şekilde yazılmış örnekler var.
+Misafirler ilk satırları okur, sonra göz gezdirir. Karşılamayı iki üç cümlede, hikâye girişini bir iki cümlede tutun. Ne yazacağınızdan emin değilseniz [düğün websitesi metinleri rehberimizde](/guides/wedding-website-wording) her bölüm için üç farklı tonda, kısa metin alanlarına sığacak şekilde yazılmış örnekler var. Daha uzun bir hikâye için [Hikâyemiz örneklerine](/guides/wedding-website-our-story-examples) bakın.
 
 İyi bir karşılama kim olduğunuzu, misafirlerin geleceğine sevindiğinizi ve ihtiyaç duydukları bilgiyi nerede bulacaklarını söyler:
 
@@ -90,7 +90,7 @@ Catering firmanız ve mekânınız kişi sayısı istemeden önce neyi bilmeniz 
 - Kısa bir yanıt olarak beslenme ihtiyaçları ya da alerjiler
 - İsteğe bağlı olarak bir şarkı isteği ya da çifte bir not
 
-Özel soruları iki üç taneyle sınırlayın; her ek soru misafirlerin formu tamamlama ihtimalini düşürür. Yanıt son tarihini düğünden yaklaşık iki ila üç hafta önceye ya da catering firmanızın kesin sayı tarihinden birkaç gün önceye koyun. [Zamanlama rehberimiz](/guides/when-to-send-your-wedding-website) bu tarihten geriye doğru nasıl hesap yapacağınızı anlatıyor.
+Özel soruları iki üç taneyle sınırlayın; her ek soru misafirlerin formu tamamlama ihtimalini düşürür. Yanıt son tarihini düğünden yaklaşık iki ila üç hafta önceye ya da catering firmanızın kesin sayı tarihinden birkaç gün önceye koyun. [LCV son tarihini seçmek](/guides/wedding-rsvp-deadline) rehberimiz bu tarihten geriye doğru nasıl hesap yapacağınızı anlatıyor; [düğün LCV soruları](/guides/wedding-rsvp-questions) rehberi de her soru için örnek metin veriyor.
 
 **Süre:** 10 dakika.
 
@@ -118,6 +118,8 @@ Yayınlayın, ardından linki tam olarak misafirlerin alacağı şekilde test ed
 4. QR kod basacaksanız basılı bir provadan iki farklı telefonla tarayın.
 5. Deneme yanıtınızı silin ya da saymamak için not alın.
 
+[Düğün LCV'si için QR kod](/guides/qr-code-wedding-rsvp) ve [düğün websitesi gizliliği](/guides/wedding-website-privacy) rehberlerimiz basılı kodları ve iletilen bir linkin neyi gösterdiğini anlatıyor.
+
 **Süre:** 10 dakika.
 
 ## 8. adım: Doğru zamanda paylaşın
@@ -126,7 +128,7 @@ Birçok çift websitesini "Tarihi ayırın" (save the date) kartıyla birlikte y
 
 ## Bizim düğün websitelerimizle nasıl işler
 
-[Düğün websitesi tasarımlarımızdan](/designs) birini seçerseniz yukarıdaki adımlar şöyle karşılık bulur: canlı demoyu telefonunuzda denersiniz, tasarımı Etsy'den satın alırsınız, websitenizi Etsy sipariş numaranızla başlatırsınız ve telefon ekranları için tasarlanmış özel bir panelde düzenlersiniz. Yanıtlar panelinize gelir ve CSV olarak indirilebilir. [Nasıl çalışır](/how-it-works) sayfasına ve [özelliklerin](/features) tam listesine bakın. Diğer platformlar da iyi seçenekler; 1. adımdaki kontrol listesi hepsi için işe yarar.
+[Düğün websitesi tasarımlarımızdan](/designs) birini seçerseniz yukarıdaki adımlar şöyle karşılık bulur: canlı demoyu telefonunuzda denersiniz, tasarımı Etsy'den satın alırsınız, websitenizi Etsy sipariş numaranızla başlatırsınız ve telefon ekranları için tasarlanmış özel bir panelde düzenlersiniz. Yanıtlar panelinize gelir ve Excel ya da CSV olarak indirilebilir. [Nasıl çalışır](/how-it-works) sayfasına ve [özelliklerin](/features) tam listesine bakın. Diğer platformlar da iyi seçenekler; 1. adımdaki kontrol listesi hepsi için işe yarar.
 
 ## FAQ
 

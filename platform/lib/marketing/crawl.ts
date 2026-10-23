@@ -2,7 +2,7 @@
 // content, served by static route handlers in app/(marketing)/.
 
 import { MARKETING, type MarketingConfig } from './config.ts';
-import { liveDesigns } from './designs.ts';
+import { catalogDesigns, liveDesigns } from './designs.ts';
 import { definition, editRightsText, hostingText, included, NOT_INCLUDED, SITE_PAGES } from './facts.ts';
 import { faqGroups, plainAnswer } from './faq.ts';
 import type { Guide } from './guides.ts';
@@ -73,9 +73,12 @@ export interface SitemapEntry {
 /** Every indexable marketing URL in every language (also the link check's page list). English first per page. */
 export function sitemapEntries(guides: Guide[], cfg: MarketingConfig = MARKETING): SitemapEntry[] {
   const pages: Array<{ path: string; lastmod: string }> = corePages(cfg).map((p) => ({ path: p.path, lastmod: p.updated }));
-  for (const d of liveDesigns(cfg)) {
+  // G980: every design page the catalogue links (live and preview) is indexable, so the sitemap lists them all;
+  // llms.txt stays with the designs that can be bought.
+  const designs = catalogDesigns(cfg);
+  for (const d of designs) {
     const p = designPage(d.id, cfg)!;
-    pages.splice(2 + liveDesigns(cfg).indexOf(d), 0, { path: p.path, lastmod: p.updated });
+    pages.splice(2 + designs.indexOf(d), 0, { path: p.path, lastmod: p.updated });
   }
   for (const g of guides) pages.push({ path: g.path, lastmod: g.updated });
   return pages.flatMap(({ path, lastmod }) => {

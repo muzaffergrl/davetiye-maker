@@ -2,8 +2,8 @@
 title: "Digitale Hochzeitseinladungen: Etikette, Vor- und Nachteile"
 description: Sind digitale Hochzeitseinladungen in Ordnung? Ein ehrlicher Blick auf Etikette, Vor- und Nachteile, wer noch Papier braucht, den Versand und passende Texte.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 5
 keyword: digitale Hochzeitseinladung Etikette
 quickAnswer: Digitale Hochzeitseinladungen sind weit verbreitet und für die meisten Gäste völlig in Ordnung, doch die klassische Etikette bevorzugt bei formellen Hochzeiten weiterhin Papier. Ein guter Mittelweg: die meisten Einladungen digital verschicken, Gästen, die Papier mögen, eine einfache gedruckte Karte mit QR-Code senden und jede Einladung persönlich statt als Gruppennachricht verschicken.
@@ -52,7 +52,7 @@ Eine einfache gedruckte Karte mit Ihren Namen, dem Datum und einem QR-Code, der 
 
 **Wählen Sie den Kanal, den die Gäste wirklich nutzen.** SMS oder WhatsApp für die meisten Freunde, E-Mail für Kollegen und ältere Gäste, die das bevorzugen. Verschicken Sie die einzige Ausfertigung nicht über ein soziales Netzwerk.
 
-**Prüfen Sie vor dem Senden die Vorschau.** Die meisten Messenger zeigen zu einem Link eine Vorschaukarte: ein Bild, einen Titel und eine kurze Beschreibung. Schicken Sie den Link zuerst an sich selbst. Zeigt die Vorschau Ihre Namen und das Datum, wissen die Gäste auf einen Blick, worum es geht. Zeigt sie etwas Allgemeines, halten Gäste die Nachricht womöglich für Spam.
+**Prüfen Sie vor dem Senden die Vorschau.** Die meisten Messenger zeigen zu einem Link eine Vorschaukarte: ein Bild, einen Titel und eine kurze Beschreibung. Schicken Sie den Link zuerst an sich selbst. Zeigt die Vorschau Ihre Namen und das Datum, wissen die Gäste auf einen Blick, worum es geht. Zeigt sie etwas Allgemeines, halten Gäste die Nachricht womöglich für Spam. Unser Ratgeber zum [Datenschutz der Hochzeitswebsite](/guides/wedding-website-privacy) erklärt, was eine weitergeleitete Vorschau verrät.
 
 **Sprechen Sie die Eingeladenen an.** Gilt die Einladung nur für eine Person oder ein Paar, nennen Sie in Ihrer Nachricht die Namen. Sind Kinder oder eine Begleitung eingeladen, sagen Sie es.
 
@@ -74,6 +74,15 @@ Kurz, herzlich und klar darin, was Sie von den Gästen brauchen. Passen Sie dies
 **Wenn Kinder eingeladen sind:**
 *„Hallo Jo! Die ganze Familie ist eingeladen, die Kleinen natürlich auch. Sag uns bei deiner Antwort bitte, wie alt sie sind, damit wir das Essen planen können: (Link).“*
 
+**Mit Begleitung:**
+*„Hallo Leo! Wir würden uns freuen, wenn du am 12. Juni dabei bist, und du darfst gern eine Begleitung mitbringen. Schreib bei deiner Antwort einfach ihren Namen dazu: (Link).“*
+
+**Wenn sich nach dem Versand ein Detail ändert:**
+*„Hallo Maya, ein kurzes Update: Die Trauung beginnt jetzt um 16:30 Uhr statt um 16:00 Uhr. Alles andere bleibt gleich, und auf der Website stehen immer die aktuellen Details: (Link).“*
+
+**Ein Save-the-Date, Monate vor der Einladung:**
+*„Hallo Sam! Save the Date: Wir heiraten am 12. Juni 2027 in Napa. Die offizielle Einladung folgt, und auf unserer Website stehen schon die ersten Details: (Link).“*
+
 ## So wirkt eine digitale Einladung persönlich
 
 Kleine Entscheidungen lassen eine digitale Einladung so durchdacht wirken wie eine aus Papier:
@@ -90,11 +99,11 @@ Eine Woche vor Ihrer Antwortfrist prüfen Sie Ihre Liste und schicken allen, die
 
 *„Hallo Tom, nur eine kurze Erinnerung: Wir geben bald die Gästezahl an den Caterer weiter. Könntest du bis Freitag antworten? Hier ist noch einmal der Link: (Link). Danke dir!“*
 
-Nach der Frist rufen Sie die letzten Gäste an. Gerade ältere Verwandte haben den Link vielleicht geöffnet, aber den Antwort-Button nicht gefunden; ein kurzer Anruf löst das. Den vollständigen Zeitplan finden Sie in unserem Ratgeber dazu, [wann Sie Ihre Website teilen und die RSVP-Frist setzen](/guides/when-to-send-your-wedding-website).
+Nach der Frist rufen Sie die letzten Gäste an. Gerade ältere Verwandte haben den Link vielleicht geöffnet, aber den Antwort-Button nicht gefunden; ein kurzer Anruf löst das. Den vollständigen Zeitplan finden Sie in unserem Ratgeber dazu, [wann Sie Hochzeitswebsite und Einladungen verschicken](/guides/when-to-send-your-wedding-website). Unser Ratgeber, [was tun, wenn Gäste nicht antworten](/guides/guests-did-not-rsvp), hat einen Plan zum Nachfassen und weitere Nachrichten.
 
 ## Eine digitale Einladung, die sich trotzdem wie eine Einladung anfühlt
 
-Was viele an Papier lieben, ist der Moment des Öffnens. Unsere Hochzeitswebsites versuchen, diesen Moment zu bewahren: Gäste öffnen Ihren Link und sehen einen versiegelten Umschlag (oder, bei manchen Designs, ein Erinnerungsstück wie ein Märchenbuch) mit Ihren Namen, tippen darauf, und er öffnet sich zu Ihrer Website mit den Details und dem Antwortformular. Probieren Sie es in der [Demo von Blush Garden Rose](/designs/blush-garden-rose) auf Ihrem Handy aus oder lesen Sie, [wie es funktioniert](/how-it-works).
+Was viele an Papier lieben, ist der Moment des Öffnens. Unsere Hochzeitswebsites versuchen, diesen Moment zu bewahren: Gäste öffnen Ihren Link und sehen einen versiegelten Umschlag (oder, bei manchen Designs, ein Erinnerungsstück wie ein Märchenbuch) mit Ihren Namen, tippen darauf, und er öffnet sich zu Ihrer Website mit den Details und dem Antwortformular. Probieren Sie es in der [Demo von Blush Garden Rose](/designs/blush-garden-rose) auf Ihrem Handy aus oder lesen Sie, [wie es funktioniert](/how-it-works). Unser Ratgeber zu [animierten Umschlag-Einladungen](/guides/animated-envelope-wedding-invitations) erklärt die zwei Arten, die Sie finden werden, und was Sie vor der Wahl prüfen sollten.
 
 ## FAQ
 

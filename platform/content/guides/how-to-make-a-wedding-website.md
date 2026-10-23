@@ -2,8 +2,8 @@
 title: How to Make a Wedding Website on Your Phone (Step by Step)
 description: A practical, platform-neutral walkthrough for building your wedding website on a phone: what to gather first, eight steps, and how to test the link.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 1
 keyword: how to make a wedding website
 quickAnswer: Gather your details first (names, date, time zone, venue, schedule, a few photos and an RSVP deadline). Then pick a platform you can edit on your phone, add the essentials, write a short welcome, set up replies, preview every page on your phone, publish, test the link and share it.
@@ -20,7 +20,7 @@ Collect these in one note on your phone before you open any website builder. It 
 - [ ] The venue name, full address and a map link copied from Google Maps or Apple Maps
 - [ ] The order of the day: ceremony, cocktail hour, dinner, dancing, with times
 - [ ] Three to five photos you both like, including one portrait that crops well
-- [ ] Your RSVP deadline (see [when to set it](/guides/when-to-send-your-wedding-website))
+- [ ] Your RSVP deadline (see [when to set it](/guides/wedding-rsvp-deadline))
 - [ ] Links you want to share: registry, hotel block, transport
 - [ ] Answers to the questions guests always ask: dress code, parking, children, plus-ones
 
@@ -35,11 +35,11 @@ The right choice depends less on looks than on where you will edit and how repli
 | Editing device | Most planning happens on a phone, between other tasks | Can I change everything from my phone, without a laptop? |
 | RSVP | Replies scattered across texts, emails and forms are hard to count | Do replies arrive in one list I can download? |
 | Link preview | Guests decide whether to tap from the preview | Does the shared link show our names and date? |
-| Cost | Some tools are free but sell upgrades; others charge once | What do I pay in total, and for how long? |
+| Cost | Some tools are free but sell upgrades; others charge once | What do I pay in total, and for how long? ([free vs paid](/guides/free-vs-paid-wedding-websites)) |
 | How long it stays online | Guests look for photos and details after the day | Until when will the site stay up? |
 | Accounts | Some builders need an account for you, some for guests too | Do my guests need to sign up to reply? |
 
-Free platforms such as large wedding registries, design-tool templates and hosted designs like ours all answer these differently. Open a demo on your phone before you decide; it shows more than any list of features.
+Free platforms such as large wedding registries, design-tool templates and hosted designs like ours all answer these differently. Open a demo on your phone before you decide; it shows more than any list of features. If you like invitations that open from an envelope, our guide to [animated envelope invitations](/guides/animated-envelope-wedding-invitations) explains the two kinds you will find.
 
 **Time:** 30 to 60 minutes of looking, mostly on your phone.
 
@@ -59,7 +59,7 @@ If you stop after this step, your website is already useful. Everything else is 
 
 ## Step 3: Write a short welcome and your story
 
-Guests read the first lines, then scan. Keep the welcome to two or three sentences and the story intro to one or two. If you are not sure what to write, our [wedding website wording guide](/guides/wedding-website-wording) has examples for every section in three tones, written to fit short text fields.
+Guests read the first lines, then scan. Keep the welcome to two or three sentences and the story intro to one or two. If you are not sure what to write, our [wedding website wording guide](/guides/wedding-website-wording) has examples for every section in three tones, written to fit short text fields. For a longer story, see our [Our Story examples](/guides/wedding-website-our-story-examples).
 
 A good welcome says who you are, that you are glad guests are coming, and where to find what they need:
 
@@ -90,7 +90,7 @@ Decide what you need to know before your caterer and venue ask for numbers, and 
 - Dietary needs or allergies, as a short answer
 - Optionally, a song request or a note to the couple
 
-Keep custom questions to two or three; every extra question lowers the chance that guests finish the form. Set the reply-by date about two to three weeks before the wedding, or a few days before your caterer's final-count date. Our [timing guide](/guides/when-to-send-your-wedding-website) explains how to work backwards from that date.
+Keep custom questions to two or three; every extra question lowers the chance that guests finish the form. Set the reply-by date about two to three weeks before the wedding, or a few days before your caterer's final-count date. Our guide to [choosing the RSVP deadline](/guides/wedding-rsvp-deadline) explains how to work backwards from that date, and the guide to [wedding RSVP questions](/guides/wedding-rsvp-questions) has wording for each question.
 
 **Time:** 10 minutes.
 
@@ -118,6 +118,8 @@ Publish, then test the link exactly as guests will receive it:
 4. If you will print a QR code, scan it from a printed proof with two different phones.
 5. Remove your test reply, or note it so you do not count it.
 
+Our guides to [QR codes for wedding RSVPs](/guides/qr-code-wedding-rsvp) and [wedding website privacy](/guides/wedding-website-privacy) cover printed codes and what a forwarded link shows.
+
 **Time:** 10 minutes.
 
 ## Step 8: Share it at the right time
@@ -126,7 +128,7 @@ Many couples share the website with or soon after the save the date, and again w
 
 ## How this works with our wedding websites
 
-If you choose one of our [wedding website designs](/designs), the steps above map like this: you try the live demo on your phone, buy the design on Etsy, start your website with your Etsy order number, and edit it in a private panel designed for phone screens. Replies arrive in your panel with a CSV download. See [how it works](/how-it-works) and the full list of [features](/features). Other platforms are good choices too; the checklist in step 1 works for all of them.
+If you choose one of our [wedding website designs](/designs), the steps above map like this: you try the live demo on your phone, buy the design on Etsy, start your website with your Etsy order number, and edit it in a private panel designed for phone screens. Replies arrive in your panel, with an Excel or CSV download. See [how it works](/how-it-works) and the full list of [features](/features). Other platforms are good choices too; the checklist in step 1 works for all of them.
 
 ## FAQ
 

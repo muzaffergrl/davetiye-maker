@@ -2,8 +2,8 @@
 title: Canva Düğün Websitesi Şablonu mu, Barındırılan Site mi?
 description: Canva düğün websitesi şablonu ile barındırılan sitenin adil karşılaştırması: düzenleme, hesaplar, LCV, linkiniz, tasarım özgürlüğü ve sorunları kimin çözdüğü.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 6
 keyword: canva düğün websitesi şablonu
 quickAnswer: Canva şablonu size tam tasarım özgürlüğü verir; tasarım yapmayı seviyor ve zaten Canva kullanıyorsanız iyi işler, ama yayınlamayı ve LCV'yi kendiniz kurarsınız. Barındırılan düğün websitesinde tasarım sabit kalır, ancak barındırma, LCV ve düzenleme tek ve basit bir panelde halledilir. Kurmaya ne kadar zaman ayırmak istediğinize göre seçin.
@@ -96,7 +96,7 @@ Bir ilan bunlardan herhangi birini belirsiz bırakıyorsa satın almadan önce s
 
 ## Barındırılan websitelerimiz bu soruları nasıl yanıtlıyor
 
-Tasarımlarımız mühürlü bir zarftan ya da hatıra kutusundan dört sayfaya açılır: Ana Sayfa, Hikâyemiz, Detaylar ve LCV. Her tasarımı önce [canlı demo](/designs) olarak deneyebilirsiniz. İsimleri, tarihi, mekânı, programı, {{photoSpots}} fotoğrafı, soruları ve yanıtları ve en fazla {{rsvpQuestions}} LCV sorusunu telefon ekranları için tasarlanmış bir panelde düzenlersiniz; çizimler, renkler ve yazı tipleri tasarlandığı gibi kalır. Yanıtlar, toplamlar ve CSV indirme panelinizdedir. Websiteniz düğün tarihinizden sonra {{months}} aya kadar yayında kalır. [Özellikler sayfasında](/features) neyin dahil olmadığı da dahil olmak üzere tam liste var.
+Tasarımlarımız mühürlü bir zarftan ya da hatıra kutusundan ([animasyonlu zarf davetiyeleri nasıl çalışır](/guides/animated-envelope-wedding-invitations)) dört sayfaya açılır: Ana Sayfa, Hikâyemiz, Detaylar ve LCV. Her tasarımı önce [canlı demo](/designs) olarak deneyebilirsiniz. İsimleri, tarihi, mekânı, programı, {{photoSpots}} fotoğrafı, soruları ve yanıtları ve en fazla {{rsvpQuestions}} LCV sorusunu telefon ekranları için tasarlanmış bir panelde düzenlersiniz; çizimler, renkler ve yazı tipleri tasarlandığı gibi kalır. Yanıtlar, toplamlar ve Excel ya da CSV indirme panelinizdedir. Websiteniz düğün tarihinizden sonra {{months}} aya kadar yayında kalır. [Özellikler sayfasında](/features) neyin dahil olmadığı da dahil olmak üzere tam liste var.
 
 ## FAQ
 
@@ -114,4 +114,4 @@ Kurulduktan sonra iyi çalışabilir: bir form bağlarsınız (Canva'nın kendis
 
 ### Hangisi daha ucuz?
 
-Fiyatlar satıcıya göre değişir. Kendi alan adınız gibi özellikler için gerekecek ücretli planlar dahil toplam maliyeti ve websitenin ne kadar süre yayında kalacağını karşılaştırın. Sonra kurmaya harcayacağınız zamanı kazanacağınız zamanla tartın.
+Fiyatlar satıcıya göre değişir. Kendi alan adınız gibi özellikler için gerekecek ücretli planlar dahil toplam maliyeti ve websitenin ne kadar süre yayında kalacağını karşılaştırın. Sonra kurmaya harcayacağınız zamanı kazanacağınız zamanla tartın. [Ücretsiz mi, ücretli mi düğün websitesi](/guides/free-vs-paid-wedding-websites) rehberimiz gözden kaçması kolay maliyetleri listeliyor.

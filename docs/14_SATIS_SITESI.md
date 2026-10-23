@@ -1685,6 +1685,12 @@ React Bits Pro lisansı yok; açık kaynak React Bits (MIT) fikirleri kütüphan
 
 ---
 
+## 15. SEO / GEO / AEO denetimi (G980, 2026-10-22)
+
+claude-seo ile yerel production build üzerinde yapılan denetim, puan (yayına hazır hâli 86/100), bulgular ve lansman günü
+işleri: **`docs/35_SEO_GEO_AEO.md`**. G980'de iki değişiklik var. Footer bütün rehberleri listeliyor. Sitemap,
+`launched: true` olunca katalogdaki `preview` tasarım sayfalarını da içeriyor; llms.txt yine yalnız `live` tasarımları listeliyor.
+
 ## Ek A — GPT prompt'ları (İngilizce, aynen kullanılır)
 
 Her prompt kendi başına çalışır; stil ve kurallar içinde yazılı. Paralel dağılım §12.1'de, kayıt ve commit kuralı §12'nin başında.

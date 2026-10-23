@@ -2,8 +2,8 @@
 title: "Invitaciones de boda digitales: etiqueta, pros y contras"
 description: ¿Son aceptables las invitaciones de boda digitales? Etiqueta, pros y contras, quién puede necesitar papel, cómo enviarlas y qué escribir en el mensaje.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 5
 keyword: etiqueta invitaciones de boda digitales
 quickAnswer: Las invitaciones digitales están muy extendidas y van bien para la mayoría, aunque la etiqueta tradicional prefiere el papel en bodas formales. Un buen término medio: casi todas en digital, una tarjeta impresa sencilla con código QR para quien prefiera papel, y cada invitación enviada de forma personal, no en un grupo.
@@ -52,7 +52,7 @@ Una tarjeta impresa sencilla con vuestros nombres, la fecha y un código QR que 
 
 **Elige el canal que de verdad usan.** Mensaje o WhatsApp para la mayoría de los amigos, correo para compañeros de trabajo e invitados mayores que lo prefieran. Evita enviar la única copia a través de una red social.
 
-**Revisa la vista previa antes de enviar.** La mayoría de las aplicaciones de mensajería muestran una tarjeta de vista previa del enlace: una imagen, un título y una breve descripción. Envíate primero el enlace a ti. Si la vista previa muestra vuestros nombres y la fecha, los invitados sabrán de un vistazo qué es. Si muestra algo genérico, pueden confundirlo con spam.
+**Revisa la vista previa antes de enviar.** La mayoría de las aplicaciones de mensajería muestran una tarjeta de vista previa del enlace: una imagen, un título y una breve descripción. Envíate primero el enlace a ti. Si la vista previa muestra vuestros nombres y la fecha, los invitados sabrán de un vistazo qué es. Si muestra algo genérico, pueden confundirlo con spam. Nuestra guía sobre la [privacidad de la web de boda](/guides/wedding-website-privacy) explica lo que revela una vista previa reenviada.
 
 **Dirígete a las personas invitadas.** Si la invitación es solo para una persona o una pareja, escribe sus nombres en el mensaje. Si están invitados los niños o un acompañante, dilo.
 
@@ -74,6 +74,15 @@ Breve, cálido y claro sobre lo que necesitas que hagan. Adapta estos ejemplos:
 **Cuando los niños están invitados:**
 *"¡Hola, Jo! Está invitada toda la familia, peques incluidos. Cuando confirmes, dinos sus edades para poder organizar los menús: (enlace)."*
 
+**Con acompañante:**
+*"¡Hola, Leo! Nos encantaría que vinieras el 12 de junio, y puedes traer acompañante. Cuando confirmes, añade su nombre: (enlace)."*
+
+**Si cambia algún detalle después de enviarla:**
+*"Hola, Maya: un aviso rápido. La ceremonia empieza ahora a las 16:30 en lugar de a las 16:00. Todo lo demás sigue igual, y en la web siempre están los detalles actualizados: (enlace)."*
+
+**Un save the date, meses antes de la invitación:**
+*"¡Hola, Sam! Guárdate la fecha: nos casamos el 12 de junio de 2027 en Napa. La invitación formal llegará más adelante, y en nuestra web ya están los primeros detalles: (enlace)."*
+
 ## Cómo hacer que una invitación digital resulte personal
 
 Pequeñas decisiones hacen que una invitación digital parezca tan cuidada como una de papel:
@@ -90,11 +99,11 @@ Una semana antes de tu fecha límite de confirmación, revisa la lista y envía 
 
 *"Hola, Tom, solo un recordatorio cariñoso: estamos cerrando el número de invitados con el catering. ¿Podrías confirmarnos antes del viernes? Aquí tienes otra vez el enlace: (enlace). ¡Gracias!"*
 
-Pasada la fecha límite, llama a los últimos invitados. Sobre todo los familiares mayores pueden haber abierto el enlace sin encontrar el botón de respuesta; una llamada rápida lo resuelve. Consulta nuestra guía sobre [cuándo compartir tu web y fijar la fecha límite de confirmación](/guides/when-to-send-your-wedding-website) para ver el calendario completo.
+Pasada la fecha límite, llama a los últimos invitados. Sobre todo los familiares mayores pueden haber abierto el enlace sin encontrar el botón de respuesta; una llamada rápida lo resuelve. Consulta nuestra guía sobre [cuándo enviar tu web de boda y las invitaciones](/guides/when-to-send-your-wedding-website) para ver el calendario completo. Nuestra guía sobre [qué hacer si los invitados no confirman](/guides/guests-did-not-rsvp) tiene un plan de seguimiento y más mensajes.
 
 ## Una invitación digital que sigue pareciendo una invitación
 
-Parte de lo que gusta del papel es el momento de abrirla. Nuestras webs de boda intentan conservar ese momento: los invitados abren tu enlace y ven un sobre cerrado (o, en algunos diseños, un recuerdo como un libro de cuentos) con vuestros nombres, lo tocan y se abre en tu web con los detalles y el formulario de respuesta. Puedes probarlo en el móvil con la [demo de Blush Garden Rose](/designs/blush-garden-rose), o leer [cómo funciona](/how-it-works).
+Parte de lo que gusta del papel es el momento de abrirla. Nuestras webs de boda intentan conservar ese momento: los invitados abren tu enlace y ven un sobre cerrado (o, en algunos diseños, un recuerdo como un libro de cuentos) con vuestros nombres, lo tocan y se abre en tu web con los detalles y el formulario de respuesta. Puedes probarlo en el móvil con la [demo de Blush Garden Rose](/designs/blush-garden-rose), o leer [cómo funciona](/how-it-works). Nuestra guía de [invitaciones con sobre animado](/guides/animated-envelope-wedding-invitations) explica los dos tipos que vas a encontrar y qué revisar antes de elegir.
 
 ## FAQ
 

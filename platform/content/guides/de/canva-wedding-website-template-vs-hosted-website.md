@@ -2,8 +2,8 @@
 title: Canva-Vorlage oder gehostete Hochzeitswebsite?
 description: Ein fairer Vergleich von Canva-Vorlagen und gehosteten Hochzeitswebsites: Bearbeiten, Konten, RSVP, Ihr Link, Gestaltungsfreiheit und wer bei Problemen hilft.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 6
 keyword: Canva Vorlage Hochzeitswebsite
 quickAnswer: Eine Canva-Vorlage bietet volle Gestaltungsfreiheit und passt gut, wenn Sie gern gestalten und Canva schon nutzen; Veröffentlichung und RSVP richten Sie selbst ein. Eine gehostete Hochzeitswebsite hat ein festes Design, übernimmt aber Hosting, RSVP und Bearbeitung in einem einfachen Panel. Entscheiden Sie danach, wie viel Zeit Sie ins Bauen stecken möchten.
@@ -96,7 +96,7 @@ Bleibt in einem Angebot etwas davon unklar, schreiben Sie dem Verkäufer vor dem
 
 ## Wie unsere gehosteten Websites diese Fragen beantworten
 
-Unsere Designs öffnen sich aus einem versiegelten Umschlag oder einem Erinnerungsstück zu vier Seiten: Home, Our Story, Details und RSVP. Jedes Design können Sie zuerst als [Live-Demo](/designs) ausprobieren. Namen, Datum, Location, Ablauf, {{photoSpots}} Fotos, Fragen und Antworten sowie bis zu {{rsvpQuestions}} RSVP-Fragen bearbeiten Sie in einem Panel, das für Handybildschirme gemacht ist; Illustrationen, Farben und Schriften bleiben wie gestaltet. Antworten, Summen und ein CSV-Download liegen in Ihrem Panel. Ihre Website bleibt bis {{months}} Monate nach Ihrem Hochzeitsdatum online. Auf der [Seite mit den Funktionen](/features) finden Sie die vollständige Liste, auch das, was nicht enthalten ist.
+Unsere Designs öffnen sich aus einem versiegelten Umschlag oder einem Erinnerungsstück ([so funktionieren animierte Umschlag-Einladungen](/guides/animated-envelope-wedding-invitations)) zu vier Seiten: Home, Our Story, Details und RSVP. Jedes Design können Sie zuerst als [Live-Demo](/designs) ausprobieren. Namen, Datum, Location, Ablauf, {{photoSpots}} Fotos, Fragen und Antworten sowie bis zu {{rsvpQuestions}} RSVP-Fragen bearbeiten Sie in einem Panel, das für Handybildschirme gemacht ist; Illustrationen, Farben und Schriften bleiben wie gestaltet. Antworten, Summen und ein Download als Excel oder CSV liegen in Ihrem Panel. Ihre Website bleibt bis {{months}} Monate nach Ihrem Hochzeitsdatum online. Auf der [Seite mit den Funktionen](/features) finden Sie die vollständige Liste, auch das, was nicht enthalten ist.
 
 ## FAQ
 
@@ -114,4 +114,4 @@ Auf den meisten gehosteten Plattformen können Sie den Inhalt ändern, nicht abe
 
 ### Was ist günstiger?
 
-Die Preise unterscheiden sich je nach Anbieter. Vergleichen Sie die Gesamtkosten, einschließlich eines eventuell nötigen kostenpflichtigen Tarifs für Funktionen wie eine eigene Domain, und wie lange die Website online bleibt. Wägen Sie dann die Zeit, die Sie ins Bauen stecken, gegen die Zeit ab, die Sie sparen.
+Die Preise unterscheiden sich je nach Anbieter. Vergleichen Sie die Gesamtkosten, einschließlich eines eventuell nötigen kostenpflichtigen Tarifs für Funktionen wie eine eigene Domain, und wie lange die Website online bleibt. Wägen Sie dann die Zeit, die Sie ins Bauen stecken, gegen die Zeit ab, die Sie sparen. Unser Ratgeber [kostenlose oder bezahlte Hochzeitswebsite](/guides/free-vs-paid-wedding-websites) listet die Kosten, die leicht übersehen werden.

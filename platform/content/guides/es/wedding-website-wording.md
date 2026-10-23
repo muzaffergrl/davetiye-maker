@@ -2,14 +2,14 @@
 title: "Textos para la web de tu boda: ejemplos para cada sección"
 description: Ejemplos originales de textos para cada parte de la web de tu boda: bienvenida, historia, vestimenta, lista de bodas, viaje y RSVP, en tres tonos.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 4
 keyword: textos para web de boda
 quickAnswer: Que cada sección sea breve, concreta y amable: una o dos frases de bienvenida, una línea por pie de foto, un código de vestimenta claro con una pista de su significado, una frase delicada sobre la lista, notas de viaje prácticas y la fecha límite de confirmación escrita completa. Elige un tono y úsalo en todo.
 ---
 
-Casi todos los textos de las webs de boda fallan de una de dos maneras: dicen demasiado poco ("Detalles por confirmar") o muchísimo más de la cuenta (una historia de amor de tres páginas antes de la dirección del lugar). Los ejemplos de abajo están escritos para caber en los campos de texto de la mayoría de los creadores de webs. En nuestras propias webs, por ejemplo, la introducción de Nuestra historia admite hasta 200 caracteres y cada pie de foto hasta 60.
+Casi todos los textos de las webs de boda fallan de una de dos maneras: dicen demasiado poco ("Detalles por confirmar") o muchísimo más de la cuenta (una historia de amor de tres páginas antes de la dirección del lugar). Los ejemplos de abajo están escritos para caber en los campos de texto de la mayoría de los creadores de webs. En nuestras propias webs, por ejemplo, la introducción de Nuestra historia admite hasta {{storyIntroChars}} caracteres y cada pie de foto hasta {{storyCaptionChars}}.
 
 Cada sección tiene ejemplos en tres tonos. Elige el que suene a vosotros y úsalo de principio a fin; mezclar una bienvenida formal con unas preguntas frecuentes en broma desconcierta a los invitados.
 
@@ -30,7 +30,7 @@ La bienvenida va en la página de inicio. Saluda, di que os alegra y señala lo 
 
 ## Introducción de vuestra historia y pies de foto
 
-La introducción ocupa una o dos frases. Los pies de foto, unas pocas palabras: un lugar, un momento, una fecha.
+La introducción ocupa una o dos frases. Los pies de foto, unas pocas palabras: un lugar, un momento, una fecha. Para estructuras más largas y ejemplos, mira los [ejemplos de «Nuestra historia»](/guides/wedding-website-our-story-examples).
 
 | Tono | Introducción de la historia |
 |---|---|
@@ -59,7 +59,7 @@ En el móvil se leen mejor los nombres cortos. Pon el lugar en su propio campo s
 | 20:30 | Primer baile y fiesta | The Grand Hall |
 | 23:00 | Despedida | Entrada principal |
 
-Si los invitados llegan antes de la ceremonia, añade "Llegada de invitados" o "Apertura de puertas" entre quince y treinta minutos antes, para que nadie llegue justo a la hora y se pierda el comienzo.
+Si los invitados llegan antes de la ceremonia, añade "Llegada de invitados" o "Apertura de puertas" entre quince y treinta minutos antes, para que nadie llegue justo a la hora y se pierda el comienzo. Para los actos de otros días, mira nuestra guía sobre el [programa del fin de semana de boda](/guides/wedding-weekend-itinerary).
 
 ## Cómo escribir el código de vestimenta
 
@@ -89,7 +89,7 @@ Breve y agradecido, y en una sola sección en lugar de en todas las páginas.
 
 ## Viaje y alojamiento
 
-Aquí lo práctico gana a lo poético. Da nombres, distancias y plazos.
+Aquí lo práctico gana a lo poético. Da nombres, distancias y plazos. Para una boda en el extranjero, mira la [lista para la web de una boda de destino](/guides/destination-wedding-website-checklist).
 
 - *El aeropuerto más cercano es el de Sacramento (SMF), a unos 75 minutos en coche.*
 - *Hemos reservado habitaciones en The Vineyard Inn hasta el 1 de abril. Menciona nuestros nombres al reservar.*
@@ -99,7 +99,7 @@ Aquí lo práctico gana a lo poético. Da nombres, distancias y plazos.
 
 ## Textos para la confirmación (RSVP)
 
-La línea de confirmación debe incluir la fecha límite escrita completa. La opción de rechazar debe ser tan amable como la de aceptar.
+La línea de confirmación debe incluir la fecha límite escrita completa. La opción de rechazar debe ser tan amable como la de aceptar. Para las líneas que llevan a los invitados de una tarjeta impresa a tu web, mira [cómo poner la web de boda en la invitación](/guides/wedding-website-on-invitation).
 
 | Tono | Línea de respuesta | Aceptar | Rechazar |
 |---|---|---|---|
@@ -116,7 +116,7 @@ Preguntas que puedes añadir al formulario, con una redacción clara:
 
 ## Preguntas y respuestas
 
-Responde primero a la pregunta y después añade un detalle útil.
+Responde primero a la pregunta y después añade un detalle útil. Hay más preguntas y respuestas de ejemplo en los [ejemplos de preguntas frecuentes](/guides/wedding-website-faq-examples).
 
 | Pregunta | Respuesta |
 |---|---|

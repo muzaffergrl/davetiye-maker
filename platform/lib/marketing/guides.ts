@@ -5,15 +5,19 @@
 // Frontmatter keys: title (≤ 60 chars, the <title> and H1), description (120–160 chars), published, updated,
 // reviewed (YYYY-MM-DD), quickAnswer (40–60 words), keyword (main search phrase), order (number), cover (optional
 // public path of the cover image, GPT MK12–MK17 once composed), coverAlt.
-// Tokens replaced from config: {{brand}}, {{months}}, {{rsvpQuestions}}, {{scheduleRows}}, {{faqItems}}, {{photoSpots}}.
+// Tokens replaced from config: {{brand}}, {{domain}} (G195: the site's host, as in couple addresses), {{months}},
+// {{rsvpQuestions}}, {{scheduleRows}}, {{faqItems}}, {{photoSpots}}, {{storyPhotos}}, {{storyIntroChars}}, {{storyCaptionChars}}
+// (G199: the Our Story limits the panel enforces), {{travelStays}} (G982: hotels in the travel and stay section).
 // G144: a translation is content/guides/<lang>/<slug>.md (same slug, same frontmatter keys); the English file decides
 // which guides exist and their order. Without a translation the language page shows the English article (loadGuidesIn).
 
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { MARKETING, type MarketingConfig } from './config.ts';
+import { CONTENT_LIMITS } from '../content/limits.ts';
 import { LIMITS } from './facts.ts';
 import { DEFAULT_LANG, type Lang } from './i18n.ts';
+import { siteHost } from './site.ts';
 import { blocksText, parseBlocks, parseFrontmatter, type Block } from './markdown.ts';
 
 export interface GuideFaq {
@@ -53,11 +57,16 @@ const DAY_RE = /^\d{4}-\d{2}-\d{2}$/;
 export function fillTokens(text: string, cfg: MarketingConfig = MARKETING): string {
   const values: Record<string, string> = {
     brand: cfg.brand.name,
+    domain: siteHost(cfg),
     months: String(cfg.hosting.monthsAfterWedding),
     rsvpQuestions: String(LIMITS.rsvpQuestions),
     scheduleRows: String(LIMITS.scheduleRows),
     faqItems: String(LIMITS.faqItems),
     photoSpots: String(LIMITS.photoSpots),
+    storyPhotos: String(LIMITS.storyPhotos),
+    storyIntroChars: String(LIMITS.storyIntroChars),
+    storyCaptionChars: String(LIMITS.storyCaptionChars),
+    travelStays: String(CONTENT_LIMITS.travelStays),
   };
   return text.replace(/\{\{(\w+)\}\}/g, (all, key: string) => {
     if (!(key in values)) throw new Error(`unknown token ${all}`);

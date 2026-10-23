@@ -2,14 +2,14 @@
 title: "Wedding Website Wording: Examples for Every Section"
 description: Original wording examples for every part of your wedding website, from the welcome and our story to dress code, registry, travel and RSVP, in three tones.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 4
 keyword: wedding website wording
 quickAnswer: Keep each section short, specific and kind. Use one or two sentences for the welcome, one line per photo caption, a clear dress code with a hint of what it means, a gentle registry line, practical travel notes and an RSVP line with the deadline written out. Pick one tone and use it everywhere.
 ---
 
-Most wedding website wording goes wrong in one of two ways: it says too little ("Details TBC") or far too much (a three-page love story before the venue address). The examples below are written to be short enough for the text fields of most website builders. On our own websites, for example, the Our Story intro is up to 200 characters and each photo caption up to 60.
+Most wedding website wording goes wrong in one of two ways: it says too little ("Details TBC") or far too much (a three-page love story before the venue address). The examples below are written to be short enough for the text fields of most website builders. On our own websites, for example, the Our Story intro is up to {{storyIntroChars}} characters and each photo caption up to {{storyCaptionChars}}.
 
 Every section has examples in three tones. Choose the one that sounds like you and use it throughout; mixing a formal welcome with a jokey FAQ feels odd to guests.
 
@@ -30,7 +30,7 @@ The welcome sits on the home page. Say hello, say you are glad, and point to wha
 
 ## Our story intro and photo captions
 
-The intro is one or two sentences. Captions are a few words: a place, a moment, a date.
+The intro is one or two sentences. Captions are a few words: a place, a moment, a date. For longer story structures and examples, see [Our Story examples](/guides/wedding-website-our-story-examples).
 
 | Tone | Story intro |
 |---|---|
@@ -59,7 +59,7 @@ Short labels read best on a phone. Put the place in its own field if your websit
 | 8:30 PM | First dance and dancing | The Grand Hall |
 | 11:00 PM | Farewell | Main entrance |
 
-If guests arrive before the ceremony, add "Guests arrive" or "Doors open" fifteen to thirty minutes earlier, so nobody turns up exactly on time and misses the start.
+If guests arrive before the ceremony, add "Guests arrive" or "Doors open" fifteen to thirty minutes earlier, so nobody turns up exactly on time and misses the start. For events on other days, see our [wedding weekend itinerary](/guides/wedding-weekend-itinerary) guide.
 
 ## Dress code wording
 
@@ -89,7 +89,7 @@ Keep it short and grateful, and place it in one section rather than on every pag
 
 ## Travel and stay
 
-Practical beats poetic here. Give names, distances and deadlines.
+Practical beats poetic here. Give names, distances and deadlines. For a wedding abroad, see the [destination wedding website checklist](/guides/destination-wedding-website-checklist).
 
 - *The nearest airport is Sacramento (SMF), about 75 minutes by car.*
 - *We've reserved rooms at The Vineyard Inn until April 1. Mention our names when you book.*
@@ -99,7 +99,7 @@ Practical beats poetic here. Give names, distances and deadlines.
 
 ## RSVP wording
 
-The RSVP line should include the deadline, written out. The decline option should be as kind as the accept option.
+The RSVP line should include the deadline, written out. The decline option should be as kind as the accept option. For the lines that point guests from a printed card to your website, see [how to put your wedding website on the invitation](/guides/wedding-website-on-invitation).
 
 | Tone | Reply line | Accept | Decline |
 |---|---|---|---|
@@ -116,7 +116,7 @@ Questions you might add to the form, with clear wording:
 
 ## Questions and answers
 
-Answer the question first, then add one helpful detail.
+Answer the question first, then add one helpful detail. More questions and sample answers are in our [wedding website FAQ examples](/guides/wedding-website-faq-examples).
 
 | Question | Answer |
 |---|---|

@@ -2,14 +2,14 @@
 title: "Textes pour site de mariage : exemples pour chaque section"
 description: Des exemples de textes originaux pour chaque partie de votre site de mariage, de l'accueil à votre histoire, du dress code à la liste, au voyage et au RSVP.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 4
 keyword: texte site de mariage
 quickAnswer: Gardez chaque section courte, précise et bienveillante. Une ou deux phrases pour l'accueil, une ligne par légende de photo, un dress code clair avec un indice de ce qu'il signifie, une phrase délicate sur la liste de mariage, des infos de voyage pratiques et une ligne RSVP avec la date limite en toutes lettres. Choisissez un ton et gardez-le partout.
 ---
 
-La plupart des textes de site de mariage pèchent de l'une de deux façons : ils en disent trop peu (« Détails à venir ») ou beaucoup trop (une histoire d'amour de trois pages avant l'adresse du lieu). Les exemples ci-dessous sont assez courts pour tenir dans les champs de texte de la plupart des outils de création de site. Sur nos propres sites, par exemple, l'introduction de Notre histoire compte jusqu'à 200 caractères et chaque légende de photo jusqu'à 60.
+La plupart des textes de site de mariage pèchent de l'une de deux façons : ils en disent trop peu (« Détails à venir ») ou beaucoup trop (une histoire d'amour de trois pages avant l'adresse du lieu). Les exemples ci-dessous sont assez courts pour tenir dans les champs de texte de la plupart des outils de création de site. Sur nos propres sites, par exemple, l'introduction de Notre histoire compte jusqu'à {{storyIntroChars}} caractères et chaque légende de photo jusqu'à {{storyCaptionChars}}.
 
 Chaque section propose des exemples dans trois tons. Choisissez celui qui vous ressemble et gardez-le partout : mêler un accueil solennel à une FAQ pleine de blagues paraît étrange aux invités.
 
@@ -30,7 +30,7 @@ Le mot d'accueil se trouve sur la page d'accueil. Dites bonjour, dites que vous 
 
 ## Introduction de votre histoire et légendes des photos
 
-L'introduction tient en une ou deux phrases. Les légendes font quelques mots : un lieu, un moment, une date.
+L'introduction tient en une ou deux phrases. Les légendes font quelques mots : un lieu, un moment, une date. Pour des structures plus longues et des exemples, voyez les [exemples de « Notre histoire »](/guides/wedding-website-our-story-examples).
 
 | Ton | Introduction de l'histoire |
 |---|---|
@@ -59,7 +59,7 @@ Les intitulés courts se lisent mieux sur téléphone. Mettez le lieu dans son p
 | 20 h 30 | Ouverture du bal et soirée dansante | The Grand Hall |
 | 23 h 00 | Au revoir | Entrée principale |
 
-Si les invités arrivent avant la cérémonie, ajoutez « Arrivée des invités » ou « Ouverture des portes » quinze à trente minutes plus tôt, pour que personne n'arrive pile à l'heure et ne manque le début.
+Si les invités arrivent avant la cérémonie, ajoutez « Arrivée des invités » ou « Ouverture des portes » quinze à trente minutes plus tôt, pour que personne n'arrive pile à l'heure et ne manque le début. Pour les moments des autres jours, consultez notre guide sur le [programme du week-end de mariage](/guides/wedding-weekend-itinerary).
 
 ## Formuler le dress code
 
@@ -89,7 +89,7 @@ Restez bref et reconnaissant, et regroupez-la dans une seule section plutôt que
 
 ## Voyage et hébergement
 
-Ici, le pratique l'emporte sur le poétique. Donnez des noms, des distances et des dates limites.
+Ici, le pratique l'emporte sur le poétique. Donnez des noms, des distances et des dates limites. Pour un mariage à l'étranger, voyez la [liste pour le site d'un mariage à destination](/guides/destination-wedding-website-checklist).
 
 - *L'aéroport le plus proche est celui de Sacramento (SMF), à environ 75 minutes en voiture.*
 - *Nous avons réservé des chambres au Vineyard Inn jusqu'au 1er avril. Donnez nos noms lors de votre réservation.*
@@ -99,7 +99,7 @@ Ici, le pratique l'emporte sur le poétique. Donnez des noms, des distances et d
 
 ## Formuler le RSVP
 
-La ligne RSVP doit indiquer la date limite, écrite en toutes lettres. L'option de refus doit être aussi aimable que l'option d'acceptation.
+La ligne RSVP doit indiquer la date limite, écrite en toutes lettres. L'option de refus doit être aussi aimable que l'option d'acceptation. Pour les lignes qui mènent les invités d'une carte imprimée à votre site, voyez [comment indiquer son site de mariage sur le faire-part](/guides/wedding-website-on-invitation).
 
 | Ton | Ligne de réponse | Accepter | Décliner |
 |---|---|---|---|
@@ -116,7 +116,7 @@ Questions que vous pouvez ajouter au formulaire, formulées clairement :
 
 ## Questions-réponses
 
-Répondez d'abord à la question, puis ajoutez un détail utile.
+Répondez d'abord à la question, puis ajoutez un détail utile. D'autres questions et réponses types se trouvent dans les [exemples de FAQ pour un site de mariage](/guides/wedding-website-faq-examples).
 
 | Question | Réponse |
 |---|---|

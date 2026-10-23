@@ -2,8 +2,8 @@
 title: "Dijital Düğün Davetiyeleri: Görgü Kuralları, Artı ve Eksiler"
 description: Dijital düğün davetiyesi göndermek uygun mu? Görgü kuralları, artılar ve eksiler, kimin hâlâ kâğıt isteyebileceği, nasıl gönderileceği ve mesaj metinleri.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 5
 keyword: dijital düğün davetiyesi görgü kuralları
 quickAnswer: Dijital düğün davetiyeleri yaygın olarak kullanılır ve çoğu misafir için uygundur, ancak geleneksel görgü kuralları resmî düğünlerde hâlâ kâğıdı tercih eder. İyi bir orta yol, davetiyelerin çoğunu dijital göndermek, kâğıdı tercih eden misafirlere QR kodlu basit bir basılı kart postalamak ve her davetiyeyi grup mesajı yerine kişisel olarak göndermektir.
@@ -52,7 +52,7 @@ Misafir listenizi gözden geçirin ve kâğıt için kısa bir liste ayırın:
 
 **Gerçekten kullandıkları kanalı seçin.** Arkadaşların çoğu için SMS ya da WhatsApp, iş arkadaşları ve bunu tercih eden yaşça büyük misafirler için e-posta. Tek kopyayı bir sosyal ağ üzerinden göndermekten kaçının.
 
-**Göndermeden önce önizlemeye bakın.** Çoğu mesajlaşma uygulaması bir link için önizleme kartı gösterir: bir görsel, bir başlık ve kısa bir açıklama. Linki önce kendinize gönderin. Önizleme isimlerinizi ve tarihi gösteriyorsa misafirler ne olduğunu bir bakışta anlar. Genel bir şey gösteriyorsa misafirler onu spam sanabilir.
+**Göndermeden önce önizlemeye bakın.** Çoğu mesajlaşma uygulaması bir link için önizleme kartı gösterir: bir görsel, bir başlık ve kısa bir açıklama. Linki önce kendinize gönderin. Önizleme isimlerinizi ve tarihi gösteriyorsa misafirler ne olduğunu bir bakışta anlar. Genel bir şey gösteriyorsa misafirler onu spam sanabilir. [Düğün websitesi gizliliği](/guides/wedding-website-privacy) rehberimiz iletilen bir önizlemenin neyi açığa çıkardığını anlatıyor.
 
 **Davet edilen kişilere hitap edin.** Davetiye yalnızca bir kişi ya da bir çift içinse mesajınızda isimlerini yazın. Çocuklar ya da artı bir kişi davetliyse bunu belirtin.
 
@@ -74,6 +74,15 @@ Kısa, sıcak ve sizden beklenen eylem konusunda net olsun. Bunları kendinize g
 **Çocuklar davetliyse:**
 *"Merhaba Jo! Bütün aile davetli, küçükler de dahil. Yanıt verirken yemekleri planlayabilmemiz için yaşlarını da yazar mısın: (link)."*
 
+**Yanında biriyle davetliyse:**
+*"Merhaba Leo! 12 Haziran'da seni aramızda görmeyi çok isteriz; yanında birini de getirebilirsin. Yanıt verirken onun adını eklemen yeterli: (link)."*
+
+**Gönderdikten sonra bir ayrıntı değişirse:**
+*"Merhaba Maya, kısa bir güncelleme: tören artık 16.00 yerine 16.30'da başlıyor. Geri kalan her şey aynı; websitede her zaman en güncel bilgiler var: (link)."*
+
+**Davetiyeden aylar önce, tarihi ayırın mesajı:**
+*"Merhaba Sam! Tarihi ayır: 12 Haziran 2027'de Napa'da evleniyoruz. Resmî davetiye arkadan gelecek; ilk ayrıntılar şimdiden websitemizde: (link)."*
+
 ## Dijital davetiyeyi kişisel hissettirmek
 
 Küçük seçimler, dijital bir davetiyeyi kâğıt bir davetiye kadar özenli hissettirir:
@@ -90,11 +99,11 @@ Yanıt son tarihinizden bir hafta önce listenizi kontrol edin ve eksik olan her
 
 *"Merhaba Tom, catering için sayıları kesinleştiriyoruz, küçük bir hatırlatma. Cumaya kadar yanıt verebilir misin? Link tekrar burada: (link). Teşekkürler!"*
 
-Son tarihten sonra kalan birkaç misafiri arayın. Özellikle yaşlı akrabalar linki açıp yanıt düğmesini bulamamış olabilir; kısa bir telefon bunu çözer. Tam zaman çizelgesi için [websitenizi ne zaman paylaşacağınız ve LCV son tarihini nasıl belirleyeceğiniz](/guides/when-to-send-your-wedding-website) hakkındaki rehberimize bakın.
+Son tarihten sonra kalan birkaç misafiri arayın. Özellikle yaşlı akrabalar linki açıp yanıt düğmesini bulamamış olabilir; kısa bir telefon bunu çözer. Tam zaman çizelgesi için [düğün websitesi ve davetiyelerin ne zaman gönderileceği](/guides/when-to-send-your-wedding-website) hakkındaki rehberimize bakın. [Misafirler LCV vermediyse ne yapılır](/guides/guests-did-not-rsvp) rehberimizde bir takip planı ve daha fazla mesaj var.
 
 ## Hâlâ davetiye gibi hissettiren bir dijital davetiye
 
-İnsanların kâğıtta sevdiği şeyin bir kısmı, onu açma anıdır. Düğün websitelerimiz bu anı korumaya çalışır: misafirler linkinizi açar ve isimlerinizin yazılı olduğu mühürlü bir zarf (ya da bazı tasarımlarda hikâye kitabı gibi bir hatıra) görür, ona dokunur ve zarf ayrıntılar ve yanıt formuyla websitenize açılır. Bunu telefonunuzda [Blush Garden Rose demosunda](/designs/blush-garden-rose) deneyebilir ya da [nasıl çalıştığını](/how-it-works) okuyabilirsiniz.
+İnsanların kâğıtta sevdiği şeyin bir kısmı, onu açma anıdır. Düğün websitelerimiz bu anı korumaya çalışır: misafirler linkinizi açar ve isimlerinizin yazılı olduğu mühürlü bir zarf (ya da bazı tasarımlarda hikâye kitabı gibi bir hatıra) görür, ona dokunur ve zarf ayrıntılar ve yanıt formuyla websitenize açılır. Bunu telefonunuzda [Blush Garden Rose demosunda](/designs/blush-garden-rose) deneyebilir ya da [nasıl çalıştığını](/how-it-works) okuyabilirsiniz. [Animasyonlu zarf davetiyeleri](/guides/animated-envelope-wedding-invitations) rehberimiz karşınıza çıkacak iki türü ve seçmeden önce neye bakmanız gerektiğini anlatıyor.
 
 ## FAQ
 

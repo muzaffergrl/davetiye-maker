@@ -2,14 +2,14 @@
 title: "What to Put on Your Wedding Website: Checklist and Examples"
 description: A complete wedding website checklist sorted into must-haves, helpful extras and things to leave off, with privacy tips and a page-by-page structure.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 2
 keyword: what to put on a wedding website
 quickAnswer: Every wedding website needs your names, the date, the ceremony time with its time zone, the venue with a map link, the schedule, and how and by when to RSVP. Helpful extras are your story, travel and hotel details, the dress code, a registry link and answers to common questions. Leave off your home address and private plans.
 ---
 
-A wedding website has one job: to answer your guests' questions before they have to ask you. Good ones are short, accurate and easy to read on a phone. This checklist sorts everything into three groups, so you can start with what matters and stop when you have enough.
+A wedding website has one job: to answer your guests' questions before they have to ask you. Good ones are short, accurate and easy to read on a phone. This checklist sorts everything into three groups, so you can start with what matters and stop when you have enough. Not sure you need a website at all? See [digital invitation or wedding website](/guides/wedding-website-vs-invitation).
 
 ## The must-haves
 
@@ -32,11 +32,11 @@ These are the details guests look for first. If any of them is missing, someone 
 
 Add these if they apply to your wedding. Each one saves you a handful of messages.
 
-- **Your story.** A short intro and a few photos with captions. Keep it light; guests enjoy it, but they come for the details.
+- **Your story.** A short intro and a few photos with captions. Keep it light; guests enjoy it, but they come for the details. See [Our Story examples](/guides/wedding-website-our-story-examples) for structures and wording.
 - **Travel and stay.** Nearby hotels, any room block and its booking deadline, the nearest airport, parking and shuttle times.
 - **Dress code.** One or two words and a sentence of explanation, such as "Garden formal: suits or dresses; the ceremony is on grass."
 - **Registry link.** One link on its own section, not repeated on every page. Etiquette guides such as the [Emily Post Institute](https://emilypost.com/advice/wedding-website-tips) advise against putting the registry front and center.
-- **Questions and answers.** Children, plus-ones, parking, accessibility, what happens if it rains, whether there is a vegetarian option.
+- **Questions and answers.** Children, plus-ones, parking, accessibility, what happens if it rains, whether there is a vegetarian option. Our [wedding website FAQ examples](/guides/wedding-website-faq-examples) have answers you can adapt.
 - **Add to calendar.** A button that puts the date, time and venue straight into a guest's calendar.
 - **Countdown.** A small, friendly touch; optional.
 
@@ -53,7 +53,7 @@ Your website link travels further than you think: guests forward it, screenshots
 - **Guest names or reply lists.** Replies should only be visible to you.
 - **Exact times you will be away from home**, such as a honeymoon departure date next to your address.
 
-If your platform offers it, check whether your website is shown to search engines and choose what suits you. For most couples, a website that only guests with the link can find is the calmer choice.
+If your platform offers it, check whether your website is shown to search engines and choose what suits you. For most couples, a website that only guests with the link can find is the calmer choice. Our guide to [wedding website privacy](/guides/wedding-website-privacy) explains link previews and when a guest password is worth adding.
 
 ## Practical notes guests are grateful for
 
@@ -65,6 +65,7 @@ These small details rarely make it onto wedding websites, and they are exactly w
 - **Food.** If you will ask about allergies or meal choices, say where: "Tell us in your RSVP."
 - **Getting home.** Last train times, a taxi number or a shuttle schedule save late-night stress.
 - **Who to contact on the day.** A friend's name and number for questions, so guests do not call you during the ceremony.
+- **Language.** If some guests read another language more comfortably, consider a [bilingual wedding website](/guides/bilingual-wedding-website).
 
 ## Keeping it up to date
 
@@ -77,7 +78,7 @@ Four short pages are easier to read on a phone than one very long page or ten ti
 1. **Home.** Names, date, venue, a one-line welcome, and a clear button to reply. Add to calendar fits well here.
 2. **Our Story.** A few photos with short captions and one or two sentences about you.
 3. **Details.** The schedule, venue with map, dress code, travel and stay, registry, and questions and answers.
-4. **RSVP.** The reply form, your reply-by date and any questions you need answered (meal choice, dietary needs).
+4. **RSVP.** The reply form, your reply-by date and any questions you need answered (meal choice, dietary needs; see [which RSVP questions to ask](/guides/wedding-rsvp-questions)).
 
 This is the structure our designs use, after an envelope or keepsake that opens into the home page. You can see it in any [live demo](/designs), and the [features page](/features) lists what each page can hold.
 

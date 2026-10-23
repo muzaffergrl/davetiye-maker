@@ -2,8 +2,8 @@
 title: "Faire-part de mariage numérique : usages, avantages, limites"
 description: Un faire-part de mariage numérique, est-ce acceptable ? Usages, avantages et limites, invités à qui envoyer du papier, envoi et messages à copier.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 5
 keyword: faire-part de mariage numérique
 quickAnswer: Les faire-part de mariage numériques sont très répandus et conviennent à la plupart des invités, mais l'étiquette traditionnelle préfère encore le papier pour les mariages formels. Bon compromis : la plupart des invitations en numérique, une simple carte imprimée avec QR code pour ceux qui préfèrent le papier, et chaque invitation envoyée personnellement, jamais dans un message de groupe.
@@ -52,7 +52,7 @@ Une simple carte imprimée avec vos prénoms, la date et un QR code qui ouvre vo
 
 **Choisissez le canal qu'ils utilisent vraiment.** SMS ou WhatsApp pour la plupart des amis, e-mail pour les collègues et les invités plus âgés qui le préfèrent. Évitez d'envoyer l'unique exemplaire via un réseau social.
 
-**Vérifiez l'aperçu avant d'envoyer.** La plupart des messageries affichent un aperçu du lien : une image, un titre et une courte description. Envoyez-vous d'abord le lien. Si l'aperçu montre vos prénoms et la date, les invités comprennent d'un coup d'œil de quoi il s'agit. S'il affiche quelque chose de générique, ils risquent de le prendre pour un spam.
+**Vérifiez l'aperçu avant d'envoyer.** La plupart des messageries affichent un aperçu du lien : une image, un titre et une courte description. Envoyez-vous d'abord le lien. Si l'aperçu montre vos prénoms et la date, les invités comprennent d'un coup d'œil de quoi il s'agit. S'il affiche quelque chose de générique, ils risquent de le prendre pour un spam. Notre guide sur la [confidentialité du site de mariage](/guides/wedding-website-privacy) explique ce que révèle un aperçu transféré.
 
 **Nommez les personnes invitées.** Si l'invitation ne concerne qu'une personne ou un couple, citez leurs prénoms dans votre message. Si les enfants ou un accompagnant sont invités, dites-le.
 
@@ -74,6 +74,15 @@ Court, chaleureux et clair sur ce que vous attendez. Adaptez ces exemples :
 **Quand les enfants sont invités :**
 *« Coucou Jo ! Toute la famille est invitée, les petits compris. En répondant, indique-nous leur âge pour que nous puissions prévoir les repas : (lien). »*
 
+**Avec un accompagnant :**
+*« Coucou Leo ! Nous serions ravis de te voir le 12 juin, et tu peux venir accompagné. En répondant, ajoute simplement son prénom : (lien). »*
+
+**Si un détail change après l'envoi :**
+*« Coucou Maya, petite mise à jour : la cérémonie commence désormais à 16 h 30 au lieu de 16 h. Tout le reste ne change pas, et le site a toujours les informations à jour : (lien). »*
+
+**Un save the date, des mois avant le faire-part :**
+*« Coucou Sam ! Save the date : nous nous marions le 12 juin 2027 à Napa. Le faire-part officiel suivra, et notre site présente déjà les premiers détails : (lien). »*
+
 ## Rendre un faire-part numérique personnel
 
 De petits choix rendent un faire-part numérique aussi soigné qu'un faire-part papier :
@@ -90,11 +99,11 @@ Une semaine avant la date limite de réponse, vérifiez votre liste et envoyez u
 
 *« Coucou Tom, petit rappel amical : nous finalisons le nombre d'invités pour le traiteur. Pourrais-tu répondre d'ici vendredi ? Voici à nouveau le lien : (lien). Merci ! »*
 
-Après la date limite, appelez les derniers invités. Les proches plus âgés, en particulier, ont peut-être ouvert le lien sans trouver le bouton de réponse ; un rapide coup de fil règle la question. Consultez notre guide sur [quand partager votre site et fixer la date limite du RSVP](/guides/when-to-send-your-wedding-website) pour le calendrier complet.
+Après la date limite, appelez les derniers invités. Les proches plus âgés, en particulier, ont peut-être ouvert le lien sans trouver le bouton de réponse ; un rapide coup de fil règle la question. Consultez notre guide sur [quand envoyer votre site de mariage et vos faire-part](/guides/when-to-send-your-wedding-website) pour le calendrier complet. Notre guide sur [que faire quand les invités ne répondent pas](/guides/guests-did-not-rsvp) propose un plan de relance et d'autres messages.
 
 ## Un faire-part numérique qui reste une vraie invitation
 
-Ce que l'on aime dans le papier, c'est en partie le moment où on l'ouvre. Nos sites de mariage cherchent à préserver ce moment : vos invités ouvrent votre lien et découvrent une enveloppe scellée (ou, dans certains designs, un souvenir comme un livre d'histoires) à vos prénoms ; ils la touchent et elle s'ouvre sur votre site, avec les détails et le formulaire de réponse. Vous pouvez l'essayer sur votre téléphone avec la [démo Blush Garden Rose](/designs/blush-garden-rose), ou lire [comment ça marche](/how-it-works).
+Ce que l'on aime dans le papier, c'est en partie le moment où on l'ouvre. Nos sites de mariage cherchent à préserver ce moment : vos invités ouvrent votre lien et découvrent une enveloppe scellée (ou, dans certains designs, un souvenir comme un livre d'histoires) à vos prénoms ; ils la touchent et elle s'ouvre sur votre site, avec les détails et le formulaire de réponse. Vous pouvez l'essayer sur votre téléphone avec la [démo Blush Garden Rose](/designs/blush-garden-rose), ou lire [comment ça marche](/how-it-works). Notre guide des [faire-part à enveloppe animée](/guides/animated-envelope-wedding-invitations) présente les deux sortes que vous rencontrerez et ce qu'il faut vérifier avant de choisir.
 
 ## FAQ
 

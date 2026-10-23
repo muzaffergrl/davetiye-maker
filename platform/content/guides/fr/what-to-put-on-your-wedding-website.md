@@ -2,14 +2,14 @@
 title: "Que mettre sur son site de mariage : liste et exemples"
 description: La liste complète pour votre site de mariage : l'indispensable, les extras utiles et ce qu'il faut omettre, avec conseils de confidentialité et plan des pages.
 published: 2026-10-14
-updated: 2026-10-14
-reviewed: 2026-10-14
+updated: 2026-10-22
+reviewed: 2026-10-22
 order: 2
 keyword: que mettre sur un site de mariage
 quickAnswer: Tout site de mariage doit indiquer vos prénoms, la date, l'heure de la cérémonie avec son fuseau horaire, le lieu avec un lien de carte, le programme, et comment répondre et avant quelle date. Extras utiles : votre histoire, voyage et hôtels, dress code, liste de mariage et questions fréquentes. Omettez votre adresse et vos projets privés.
 ---
 
-Un site de mariage n'a qu'une mission : répondre aux questions de vos invités avant qu'ils n'aient à vous les poser. Les bons sites sont courts, exacts et faciles à lire sur téléphone. Cette liste classe tout en trois groupes, pour que vous commenciez par ce qui compte et vous arrêtiez quand vous en avez assez.
+Un site de mariage n'a qu'une mission : répondre aux questions de vos invités avant qu'ils n'aient à vous les poser. Les bons sites sont courts, exacts et faciles à lire sur téléphone. Cette liste classe tout en trois groupes, pour que vous commenciez par ce qui compte et vous arrêtiez quand vous en avez assez. Vous ne savez pas si un site vous est utile ? Voyez [faire-part numérique ou site de mariage](/guides/wedding-website-vs-invitation).
 
 ## L'indispensable
 
@@ -32,11 +32,11 @@ Ce sont les informations que les invités cherchent en premier. S'il en manque u
 
 Ajoutez-les s'ils s'appliquent à votre mariage. Chacun vous épargne une poignée de messages.
 
-- **Votre histoire.** Une courte introduction et quelques photos légendées. Restez léger ; les invités apprécient, mais ils viennent pour les informations pratiques.
+- **Votre histoire.** Une courte introduction et quelques photos légendées. Restez léger ; les invités apprécient, mais ils viennent pour les informations pratiques. Voyez les [exemples de « Notre histoire »](/guides/wedding-website-our-story-examples) pour des structures et des formulations.
 - **Voyage et hébergement.** Les hôtels à proximité, les chambres réservées et leur date limite de réservation, l'aéroport le plus proche, le stationnement et les horaires de navette.
 - **Dress code.** Un ou deux mots et une phrase d'explication, par exemple « Chic champêtre : costumes ou robes ; la cérémonie a lieu sur l'herbe. »
 - **Lien vers la liste de mariage.** Un seul lien, dans sa propre section, pas répété sur chaque page. Les guides d'étiquette comme celui de l'[Emily Post Institute](https://emilypost.com/advice/wedding-website-tips) déconseillent de mettre la liste de mariage au premier plan.
-- **Questions-réponses.** Enfants, accompagnants, stationnement, accessibilité, plan en cas de pluie, option végétarienne ou non.
+- **Questions-réponses.** Enfants, accompagnants, stationnement, accessibilité, plan en cas de pluie, option végétarienne ou non. Voyez les [exemples de FAQ pour un site de mariage](/guides/wedding-website-faq-examples) pour des réponses à adapter.
 - **Ajouter au calendrier.** Un bouton qui ajoute la date, l'heure et le lieu directement dans le calendrier de l'invité.
 - **Compte à rebours.** Une petite touche sympathique ; facultative.
 
@@ -53,7 +53,7 @@ Le lien de votre site circule plus loin que vous ne le pensez : les invités le 
 - **Les noms des invités ou les listes de réponses.** Les réponses ne doivent être visibles que par vous.
 - **Les moments précis où vous serez absents de chez vous**, comme la date de départ en voyage de noces à côté de votre adresse.
 
-Si votre plateforme le propose, vérifiez si votre site est visible par les moteurs de recherche et choisissez ce qui vous convient. Pour la plupart des couples, un site que seuls les invités disposant du lien peuvent trouver est le choix le plus serein.
+Si votre plateforme le propose, vérifiez si votre site est visible par les moteurs de recherche et choisissez ce qui vous convient. Pour la plupart des couples, un site que seuls les invités disposant du lien peuvent trouver est le choix le plus serein. Notre guide sur la [confidentialité du site de mariage](/guides/wedding-website-privacy) explique les aperçus de lien et quand ajouter un mot de passe invités.
 
 ## Les informations pratiques que les invités apprécient
 
@@ -65,6 +65,7 @@ Ces petits détails figurent rarement sur les sites de mariage, et ce sont juste
 - **Repas.** Si vous demandez les allergies ou le choix du menu, dites où : « Indiquez-le-nous dans votre RSVP. »
 - **Le retour.** Les horaires du dernier train, un numéro de taxi ou les horaires d'une navette évitent le stress en fin de soirée.
 - **Qui contacter le jour J.** Le prénom et le numéro d'un ami pour les questions, afin que les invités ne vous appellent pas pendant la cérémonie.
+- **Langue.** Si certains invités lisent plus facilement une autre langue, pensez à un [site de mariage bilingue](/guides/bilingual-wedding-website).
 
 ## Tenir le site à jour
 
@@ -77,7 +78,7 @@ Quatre pages courtes se lisent plus facilement sur téléphone qu'une très long
 1. **Accueil.** Prénoms, date, lieu, une phrase d'accueil et un bouton bien visible pour répondre. Le bouton « Ajouter au calendrier » y trouve bien sa place.
 2. **Notre histoire.** Quelques photos avec de courtes légendes et une ou deux phrases sur vous.
 3. **Détails.** Le programme, le lieu avec la carte, le dress code, le voyage et l'hébergement, la liste de mariage et les questions-réponses.
-4. **RSVP.** Le formulaire de réponse, votre date limite et les questions auxquelles vous avez besoin de réponses (choix du menu, régimes alimentaires).
+4. **RSVP.** Le formulaire de réponse, votre date limite et les questions auxquelles vous avez besoin de réponses (choix du menu, régimes alimentaires ; voir [quelles questions RSVP poser](/guides/wedding-rsvp-questions)).
 
 C'est le plan qu'utilisent nos designs, après une enveloppe ou un souvenir qui s'ouvre sur la page d'accueil. Vous pouvez le voir dans n'importe quelle [démo en ligne](/designs), et la [page des fonctionnalités](/features) liste ce que chaque page peut contenir.
 
