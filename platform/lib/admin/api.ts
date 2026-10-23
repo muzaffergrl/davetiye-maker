@@ -284,7 +284,8 @@ export async function siteAction(req: Request, id: string, action: string): Prom
     let extra: Record<string, unknown> = {};
     switch (action as AdminAction) {
       case 'confirm': {
-        const note = text(body.note) || 'Checked in Etsy';
+        // No note typed: a neutral line (it must not claim what was checked).
+        const note = text(body.note) || 'Dükkân onayladı';
         updated = await confirmOrder(adapter, site.id, note);
         break;
       }

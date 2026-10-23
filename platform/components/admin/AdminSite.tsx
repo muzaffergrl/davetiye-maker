@@ -70,8 +70,10 @@ export default function AdminSite(props: {
   const [shopEditUrl, setShopEditUrl] = useState<string | null>(null);
   const [confirming, setConfirming] = useState<string | null>(null);
 
-  const [note, setNote] = useState('Etsy\'de kontrol edildi: ödendi, iade/iptal yok, tasarım doğru');
-  const [holdNote, setHoldNote] = useState('Etsy\'de bulunamadı / uymadı');
+  // Empty on purpose: the note is kept with the site as the shop's own words; a pre-filled "checked: paid …" would be saved
+  // even when nothing was checked (empty -> the server writes a neutral "Dükkân onayladı").
+  const [note, setNote] = useState('');
+  const [holdNote, setHoldNote] = useState('');
   // Trust mode: the order is not verified, the site can already be published (confirm or hold it here).
   const trustCheck = s.order === 'provisional';
   const [grantAdd, setGrantAdd] = useState('1');
@@ -251,7 +253,14 @@ export default function AdminSite(props: {
           <label className={styles.label} htmlFor="confirm-note">
             Not (siteyle saklanır)
           </label>
-          <input id="confirm-note" className={styles.input} value={note} onChange={(e) => setNote(e.target.value)} maxLength={300} />
+          <input
+            id="confirm-note"
+            className={styles.input}
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            maxLength={300}
+            placeholder="İsteğe bağlı: neye baktığınızı kısaca yazın"
+          />
           <div className={styles.row} style={{ marginTop: 12 }}>
             <button
               type="button"
@@ -282,7 +291,14 @@ export default function AdminSite(props: {
               <label className={styles.label} htmlFor="hold-note">
                 Bekletme nedeni (&quot;Yayından kaldır ve beklet&quot; ile siteyle saklanır)
               </label>
-              <input id="hold-note" className={styles.input} value={holdNote} onChange={(e) => setHoldNote(e.target.value)} maxLength={300} />
+              <input
+                id="hold-note"
+                className={styles.input}
+                value={holdNote}
+                onChange={(e) => setHoldNote(e.target.value)}
+                maxLength={300}
+                placeholder="İsteğe bağlı: neden beklettiğinizi kısaca yazın"
+              />
               <p className={styles.hint}>Bekletilen site yayından kalkar; sipariş sonradan doğru çıkarsa &quot;Siparişi onayla&quot; ve &quot;Alıcı adına yayınla&quot;.</p>
             </>
           ) : (

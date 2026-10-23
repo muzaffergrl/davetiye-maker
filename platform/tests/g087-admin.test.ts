@@ -178,6 +178,21 @@ test('confirm: a pending order can be published only after the shop confirms it'
   await publishSite(adapter, site.id);
 });
 
+test('confirm without a note: a neutral history line, and the admin form starts empty (no pre-filled "paid" claim)', async () => {
+  const { site } = await newSite({ pending: true });
+  const cookie = await signIn();
+  const res = await act(site.id, 'confirm', cookie, { note: '' });
+  assert.equal(res.status, 200);
+  const body = await res.json();
+  assert.ok(body.history.some((h: { text: string }) => /Sipariş onaylandı: Dükkân onayladı$/.test(h.text)));
+  assert.ok(!body.history.some((h: { text: string }) => /ödendi|Checked in Etsy/.test(h.text)));
+  const ui = readFileSync(path.join(PLATFORM_ROOT, 'components/admin/AdminSite.tsx'), 'utf8');
+  assert.match(ui, /const \[note, setNote\] = useState\(''\)/);
+  assert.match(ui, /const \[holdNote, setHoldNote\] = useState\(''\)/);
+  assert.doesNotMatch(ui, /kontrol edildi: ödendi/);
+  assert.match(ui, /id="confirm-note"[\s\S]{0,200}placeholder="/);
+});
+
 test('reissue: new link shown once, old link dead, new link works', async () => {
   const { site, editKey } = await newSite();
   const cookie = await signIn();
