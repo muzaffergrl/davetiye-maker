@@ -69,11 +69,25 @@ KESİN SINIRLAR
    you buy (two designs in one order: one website each)" ve "Terms of use: https://bkestudio.com/terms" satırları var mı. Başka alana
    dokunma.
 
-2) Yer tutucu — 22–32 ilan medyası (K54): yeni tasarımdan yeniden çekilecek. Main'de şu komut yeni bir commit göstermiyorsa
-   ATLA ve "re-render commit'i yok" yaz:
-       git log --oneline d3becd6db..origin/main -- 'collections/2[2-9]_*/package/listing/images_v4' 'collections/3[0-2]_*/package/listing/images_v4' 'collections/2[2-9]_*/package/listing/video_v4_4x5.mp4' 'collections/3[0-2]_*/package/listing/video_v4_4x5.mp4'
-   Varsa: 22–32 taslaklarında §7.13 yöntemi (medya penceresinde bütün görseller + video silinir, images_v4/01…19 sırayla ve
-   video_v4_4x5.mp4 yüklenir; 19 görsel + 1 video tutmadan kaydetme; kayıttan sonra yeniden açıp say). Bu taslaklar yayınlanmaz.
+2) 22–32 ilan medyası (K54) — yeni tasarımdan YENİDEN ÜRETİLDİ (commit 079bb37dc, 2026-10-23; bulut oturumu, yerel production
+   build: yeni 22–32 canlı sitede henüz yoktu). Taslaklardaki görsel + video hâlâ ESKİ tasarım; bu adım onları değiştirir.
+   Önce yeni medyanın main'de olduğunu doğrula (d3becd6db'den sonra bu yollara dokunan tek iş bu re-render):
+       git log --oneline d3becd6db..origin/main -- 'collections/2[2-9]_*/package/listing/video_v4_4x5.mp4' 'collections/3[0-2]_*/package/listing/video_v4_4x5.mp4'
+   Boşsa ATLA ve "22–32 re-render commit'i main'de yok" yaz. Varsa 11 taslakta, birer birer (ID'ler
+   tools/etsy_ids_22_48.json: 22 4600945866 · 23 4600920465 · 24 4600921121 · 25 4600921807 · 26 4600922483 · 27 4600923129 ·
+   28 4600949936 · 29 4600950586 · 30 4600925245 · 31 4600951986 · 32 4600952678), docs/20 §7.13 yöntemiyle:
+   - Medya penceresinde bütün görseller + video silinir.
+   - collections/<NN_*>/package/listing/images_v4/01_cover.jpg … 19_share.jpg SIRAYLA yüklenir (01 birincil görsel), sonra
+     collections/<NN_*>/package/listing/video_v4_4x5.mp4.
+   - 19 görsel + 1 video tutmadan kaydetme (tutmazsa değişikliği at, baştan yap); tutarsa "Save draft".
+   - Yeniden aç, say ve birincil görselin YENİ tasarım olduğunu gör: 22 kömür zarf + vellum göl bandı + altın hilal · 23 mürdüm
+     kadife zarf + saten bant + pırlanta yüzük · 24 kırmızı kadife perdeli zarf + bilet + püsküllü kordon · 25 yeşil deri bilet
+     kılıfı + pirinç kilit + bagaj etiketi · 26 lacivert washi zarf + altın kintsugi çizgileri + porselen düğme · 27 petrol zarf +
+     safran kordon + pirinç fener · 28 fıstık yeşili zarf + pembe saten fiyonk · 29 gece mavisi zarf + altın usturlap · 30 basamaklı
+     mavi-beyaz çini zarf + jüt sicim · 31 mor-amber zarf + kâğıt fener · 32 pembe saten zarf + altın anahtar deliği.
+   Başka alana dokunma. Bu taslaklar YAYINLANMAZ (22–32 'preview', K55). Raporda her taslak için görsel/video sayısını yaz.
+   Not: listing_v4'ü yerel makinede canlı demodan (bkestudio.com/start/demo/…) 22–32 için ÇALIŞTIRMA: canlı site yeni temaları
+   ancak entegre main yayınlanınca gösterir; o zamana kadar eski tasarımı çeker.
 
 3) Dükkân metinleri (Shop Manager → Settings → Info & Appearance; ve Shop Home editor → FAQ)
    a) "Message to Buyers for Digital Items" alanını sil ve AYNEN şunu yapıştır (0'da G951 yoksa "Bought two designs? …" cümlesini çıkar):

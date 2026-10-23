@@ -212,15 +212,25 @@ Birleştirmede main'in 22–32 için yaptıkları ve karşılığı:
   `package/customer/START_HERE.{md,pdf}` + QR sayfası `tools/build_customer_guides.py --designs 22-32` ile yeniden üretildi
   (metin: "tap the envelope", önizleme sekmesi **Envelope**; `--check` 11/11 OK).
 
-### 8a. Hâlâ ESKİ tasarımı gösteren ilan medyası (yeniden render bekliyor)
+### 8a. İlan medyası: eski tasarımdan yeniye (yeniden render: 2026-10-23 akşam)
+
+**2026-10-23 (akşam), commit 079bb37dc:** 11 tasarımın ilan görselleri ve hover videosu yeni temalardan yeniden üretildi.
+Yeni 22–32 canlı sitede olmadığı için hepsi yerel production build'den (`next start`): açılış kareleri yerel
+`/start/demo/<tema>`'dan, misafir/panel ekranları `capture.ts`'ten, tablet/laptop/basılı davetiye `serve.ts` + `devices.mjs`'ten
+(`tools/listing_v4/stageLinux.sh`), video `stageELinux.sh` ile. Görsellerde açılış nesnesi "envelope" (25'te ilan başlığıyla
+aynı "ticket sleeve"); zemin dokusu ve script font `newpal.json`'da yeni temaya göre; açılış kareleri `picks.json`'da göz seçimi.
 
 Her biri 22–32'nin 11 koleksiyonunda, `collections/<NN>_*/` altında:
-- `package/listing/images_v4/01_cover.jpg … 19_share.jpg` (19 görsel): eski temanın ekranları, açılış kareleri ve PAKET 7
-  sahneleriyle üretildi; hepsi yeniden üretilmeli (`tools/listing_v4`).
-- `package/listing/video_v4_4x5.mp4`: eski açılışın kaydı.
-- `listing_v3.md` §0'daki açılış/sayfa satırları ve §5 alt metinleri: eski görselleri anlatır (görseller yenilenince yazılır).
-- `assets/gpt/mockups/p7_01 … p7_11*.png` (PAKET 7 ilan sahneleri, main): eski tasarım için yazıldı; bazı sahnelerde eski nesne
-  aksesuar olarak geçer (ör. 23 §7.3 "closed aubergine velvet jewel box"). Yeniden render'da gözden geçirilmeli.
-- Etsy taslakları (docs/20 §7.13): yukarıdaki görsel/video ve eski START HERE PDF'i taşır; yeni metin + yeni medya ile
-  güncellenmeli.
+- `package/listing/images_v4/01_cover.jpg … 19_share.jpg` (19 görsel): **yeniden üretildi** (yeni temanın ekranları ve açılış
+  kareleri; 09–19 PAKET 7 sahneleriyle).
+- `package/listing/video_v4_4x5.mp4`: **yeniden kaydedildi** (yeni açılış → home, 60 fps, 9,6–11,3 sn).
+- `listing_v3.md` §5 alt metinleri (1, 2, 5, 6, 7, 9, 10, 15 yeni dosyalara göre yeniden yazıldı), §5 girişi, §6 ve §0 "Listing
+  images and video" satırı güncel; `etsy_upload.json` yeniden üretildi. **Hâlâ eski:** §0'daki açılış/sayfa/font satırları
+  (eski temanın `envelope-v3`/`interior-design.json` anlatımı) — ilan metni işi.
+- `assets/gpt/mockups/p7_01 … p7_11*.png` (PAKET 7 ilan sahneleri): değiştirilmeden yeniden kullanıldı. Eski tasarım için
+  yazıldılar ama aksesuarları (masa, çiçek, kırtasiye, 23'te kadife kutular, 25'te yeşil deri cüzdan, 32'de bale ayakkabısı ve
+  müzik kutusu) yeni temaların renk ve konusuyla uyumlu; içlerindeki ekranlar yeni tasarım. Yeni sahne gerekmedi.
+- Etsy taslakları (docs/20 §7.13): hâlâ eski görsel/video taşır → yükleme docs/38 adım 2 (yerel oturum). Bu taslaklar yayınlanmaz.
+- Görsel 7'deki QR ve açıklamadaki demo linki `https://bkestudio.com/start/demo/<tema>`: canlı demo yeni tasarımı ancak entegre
+  main yayınlanınca gösterir.
 - Renk paletleri (`variants`) yeni parçalardan üretilmediği için `etsy_upload.json`'da 22–32'nin palet varyasyonu yok.
