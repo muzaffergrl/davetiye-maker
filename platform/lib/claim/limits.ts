@@ -7,7 +7,7 @@
 
 import { createHash } from 'node:crypto';
 import { getDataAdapter } from '../data/index.ts';
-import { AdapterRateLimiter, MemoryRateLimiter, type RateLimitRule, type RateLimiter } from '../rsvp/rate-limit.ts';
+import { AdapterRateLimiter, MemoryRateLimiter, type RateLimitResult, type RateLimitRule, type RateLimiter } from '../rsvp/rate-limit.ts';
 
 export interface ClaimLimits {
   /** Every POST /api/start from one address (wrong order numbers count too: slows down guessing). */
@@ -32,13 +32,14 @@ export const DEFAULT_CLAIM_LIMITS: ClaimLimits = {
 
 /**
  * G146: "continue with your Etsy order number + email" (/my, POST /api/my/continue) and an order that already has a
- * website on /start. Each attempt counts, right or wrong. The per-order window is shared by both ways in, so guessing
- * the email of one order number stays slow however many addresses try.
+ * website on /start. Per address every attempt counts, right or wrong; per order number only the attempts that did not
+ * match (orderAttempts). The per-order window is shared by both ways in, so guessing the email of one order number stays
+ * slow however many addresses try.
  */
 export interface ContinueLimits {
   /** POST /api/my/continue from one address. */
   perIp: RateLimitRule;
-  /** Sign-in attempts for one order number (/my and /start together). */
+  /** Sign-in attempts for one order number that did not match (/my and /start together; orderAttempts). */
   perOrder: RateLimitRule;
   /** POST /api/my/signin-link from one address. */
   signInLinksPerIp: RateLimitRule;
@@ -52,6 +53,23 @@ export const DEFAULT_CONTINUE_LIMITS: ContinueLimits = {
   signInLinksPerIp: { limit: 5, windowMs: 60 * MINUTE },
   signInLinksPerOrder: { limit: 3, windowMs: 60 * MINUTE },
 };
+
+/**
+ * The attempts of one order number (/my and /start together, `rule` = ContinueLimits.perOrder). Only attempts that do
+ * NOT match count — another email than the order's websites were started with, a website that is not this email's —
+ * so guessing the email of an order number stays slow, while a buyer with several designs in one order who opens their
+ * websites again and again with the right email is never locked out (review of G951: three designs, then /my -> 429).
+ * `check()` before answering (a full window refuses even the right email), `miss()` on an answer that did not match.
+ * A limiter without peek() counts every attempt in check(), as before.
+ */
+export function orderAttempts(limiter: RateLimiter, key: string, rule: RateLimitRule): { check(): Promise<RateLimitResult>; miss(): Promise<void> } {
+  return {
+    check: () => (limiter.peek ? limiter.peek(key, rule) : limiter.hit(key, rule)),
+    miss: async () => {
+      if (limiter.peek) await limiter.hit(key, rule);
+    },
+  };
+}
 
 /** Limiter key of one order number (a hash: the full number is never kept in a counter name). */
 export function orderLimitKey(prefix: string, orderNumber: string): string {

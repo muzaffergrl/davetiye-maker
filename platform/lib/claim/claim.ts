@@ -20,8 +20,9 @@
 //      a RETRY of the same claim first: same claim token (the form sends one random token and repeats it on every retry),
 //      same email, still an unpublished draft, created < 24 h ago. The first answer was lost on the way (phone changed
 //      network), so the buyer never saw the link: the keys are reissued (the unseen old link stops working) -> 201.
-//      Otherwise (every answer below counts against the order number's attempts, shared with /my: lib/claim/limits.ts
-//      DEFAULT_CONTINUE_LIMITS.perOrder -> 429 rate_limited):
+//      Otherwise (a full window of the order number's attempts, shared with /my -> 429 rate_limited; only the answers
+//      that do not match — another email, a website that is not this email's — count: lib/claim/limits.ts orderAttempts,
+//      DEFAULT_CONTINUE_LIMITS.perOrder):
 //        another email than the order's websites were started with  -> 409 order_used (no slug, email or link)
 //        the same email (lib/claim/continue.ts sameOwnerEmail)       -> 200 {next: "choose", sites, add}: the page asks
 //            "Your order already has a website: <Design A> -> Open it" / "Start a second website with <Design B> (only if
@@ -32,11 +33,12 @@
 //        intent "open" + openSlug (one of the websites listed)      -> signed in on this device with a new DEVICE KEY
 //            (lib/device-keys.ts; the edit link is untouched) -> 200 {existing: true, slug, editPath}
 //        intent "add"                                               -> a further website for the order (step 7 on), in
-//            the next free design unit (orderSlot), or 409 order_full when `add` would be null:
+//            the next free design unit (orderSlot), or 409 order_full (+ `full`, its own message) when `add` would be null:
 //              Etsy receipt read (etsy / trust mode with Etsy connected): only within its design units (the receipt's
 //                designs must also match this design when its listings are mapped: lib/etsy/verify.ts theme_mismatch);
 //              trust mode without the receipt (Gmail / nothing yet): allowed, provisional, and the admin gets a To-do
-//                "Order #… now has N websites; check the Etsy order has N designs" AT ONCE (lib/admin/view.ts);
+//                "Order #… now has N websites; check the Etsy order has N designs" AT ONCE (lib/admin/view.ts) — except
+//                beyond the designs Etsy's sale email lists: pending, the shop confirms first (claimOrderCheck);
 //              manual: allowed, pending like any claim (the shop confirms it).
 //      The blob adapter keeps one order index file per unit (orders/<no>~<unit>.json).
 //   7. website address: typed one must be free             -> 409 slug_taken (+ suggestion); otherwise the first free one from the names
@@ -74,7 +76,7 @@ import {
 import { designName, deviceEditPath, ownedSites, siteNames } from './continue.ts';
 import { deviceLabel, mintDeviceKey } from '../device-keys.ts';
 import { msg } from '../i18n/translate.ts';
-import { DEFAULT_CLAIM_LIMITS, DEFAULT_CONTINUE_LIMITS, getClaimRateLimiter, orderLimitKey, type ClaimLimits, type ContinueLimits } from './limits.ts';
+import { DEFAULT_CLAIM_LIMITS, DEFAULT_CONTINUE_LIMITS, getClaimRateLimiter, orderAttempts, orderLimitKey, type ClaimLimits, type ContinueLimits } from './limits.ts';
 import { getEditLinkMailer, type EditLinkMailer } from './mailer.ts';
 import { getShopNotifier, type ShopNotifier } from '../mail/index.ts';
 import { claimableTheme } from './themes.ts';
@@ -264,6 +266,9 @@ export async function slugAvailability(adapter: DataAdapter, input: unknown): Pr
  * only: lib/claim/verify.ts orderCoverage) is never "verified": in trust mode the site is provisional (publishable, the
  * shop looks), otherwise pending (the shop confirms first) — with `noDesign` for the admin's To-do. A receipt's units are
  * kept with a verification (`units`).
+ * A further website (slot >= 2) BEYOND the designs Etsy's sale email lists (Gmail, `source: "mail"`) is pending even in
+ * trust mode: a mail never adds websites by itself (within its count they stay provisional with the admin's To-do), and
+ * when it says fewer, the shop confirms before that website can be published.
  */
 export function claimOrderCheck(check: OrderCheck, verifierKind: string, at: string, privateTheme = false, slot = 1): OrderCheckRecord | null {
   const cover = orderCoverage(check, privateTheme);
@@ -272,9 +277,11 @@ export function claimOrderCheck(check: OrderCheck, verifierKind: string, at: str
   if (check.result === 'verified' && checkCoversSlot(check, slot, privateTheme)) {
     return { status: 'verified', at, by: 'etsy', ...(cover.receipt && cover.units !== null ? { units: cover.units } : {}) };
   }
-  if (check.result === 'verified') return { status: verifierKind === 'trust' ? 'provisional' : 'pending', at, by: 'claim', ...flag };
+  const read = check.result === 'verified' || check.result === 'pending' || check.result === 'provisional';
+  const beyondMail = read && check.source === 'mail' && cover.units !== null && slot >= 2 && slot > cover.units;
+  if (check.result === 'verified') return { status: verifierKind === 'trust' && !beyondMail ? 'provisional' : 'pending', at, by: 'claim', ...flag };
   if (check.result === 'pending') return { status: 'pending', at, by: 'claim', ...flag };
-  if (check.result === 'provisional') return { status: 'provisional', at, by: 'claim', ...flag };
+  if (check.result === 'provisional') return { status: beyondMail ? 'pending' : 'provisional', at, by: 'claim', ...flag };
   return null;
 }
 
@@ -476,16 +483,24 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
    * new website takes; anything else is the answer.
    */
   const existingOrder = async (sites: SiteRecord[], check: OrderCheck, taken: ReadonlySet<number>): Promise<ClaimResult | number> => {
-    const perOrder = await limiter.hit(orderLimitKey('my:order', orderNumber), (ctx.continueLimits ?? DEFAULT_CONTINUE_LIMITS).perOrder);
+    // only the answers that do not match use up the order number's attempts (limits.ts orderAttempts)
+    const attempts = orderAttempts(limiter, orderLimitKey('my:order', orderNumber), (ctx.continueLimits ?? DEFAULT_CONTINUE_LIMITS).perOrder);
+    const perOrder = await attempts.check();
     if (!perOrder.allowed) return claimError(429, 'rate_limited', {}, retryAfter(perOrder.retryAfterMs));
     const owned = ownedSites(sites, email);
-    if (!owned.length) return claimError(409, 'order_used');
+    const used = async () => {
+      await attempts.miss();
+      return claimError(409, 'order_used');
+    };
+    if (!owned.length) return used();
     if (intent === 'open') {
       const site = owned.find((x) => x.slug === openSlug);
-      return site ? signIn(site) : claimError(409, 'order_used');
+      return site ? signIn(site) : used();
     }
     const room = orderRoom(sites, check, isPrivateTheme(theme.manifest), taken);
-    if (intent === 'add') return room.slot ?? claimError(409, 'order_full');
+    // the reason of its own: the receipt's designs all have their website, or MAX_ORDER_SITES
+    const full = room.full ?? 'max';
+    if (intent === 'add') return room.slot ?? claimError(409, 'order_full', { full, message: ORDER_FULL_MESSAGES[full] });
     const same = owned.find((x) => x.theme === theme.id);
     if (room.slot === null && same) return signIn(same); // nothing can be added: the lost-link case opens it at once
     const body: ClaimChooseBody = {
@@ -493,7 +508,7 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
       next: 'choose',
       sites: owned.map((x) => ({ slug: x.slug, names: siteNames(x), design: designName(x.theme), sameDesign: x.theme === theme.id })),
       add: room.slot === null ? null : { design: theme.name, sameDesign: Boolean(same) },
-      ...(room.slot === null ? { full: room.full ?? 'max', message: ORDER_FULL_MESSAGES[room.full ?? 'max'] } : {}),
+      ...(room.slot === null ? { full, message: ORDER_FULL_MESSAGES[full] } : {}),
     };
     return { status: 200, body: body as unknown as Record<string, unknown> };
   };

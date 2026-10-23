@@ -8,6 +8,8 @@
 //   2. honeypot filled                                              -> 400 invalid (nothing done)
 //   3. field checks (fields.ts, same rules as the browser)          -> 400 invalid (+ fields)
 //   4. attempts for this order number (shared with /start)          -> 429 rate_limited
+//      (only the answers that do not match count — 5 and 7 —, lib/claim/limits.ts orderAttempts: a buyer with several
+//       websites opening them one by one with the right email is never locked out)
 //   5. no website for the order number yet                          -> 200 {next: "start"} (the page goes on to /start)
 //      (G151: when a private theme — a custom design — lists this order number, + startPath "/start?theme=<id>&order=<no>")
 //   6. a website whose owner email matches (normalised, constant time) -> a new DEVICE KEY (lib/device-keys.ts)
@@ -31,7 +33,7 @@ import { msg } from '../i18n/translate.ts';
 import { MARKETING } from '../marketing/config.ts';
 import { ipBucket, type RateLimiter } from '../rsvp/rate-limit.ts';
 import { emailError, normalizeEmail, normalizeOrderNumber, orderNumberError } from './fields.ts';
-import { DEFAULT_CONTINUE_LIMITS, getClaimRateLimiter, orderLimitKey, type ContinueLimits } from './limits.ts';
+import { DEFAULT_CONTINUE_LIMITS, getClaimRateLimiter, orderAttempts, orderLimitKey, type ContinueLimits } from './limits.ts';
 import { getEditLinkMailer, type EditLinkMailer } from './mailer.ts';
 import { privateThemeForOrder } from './themes.ts';
 
@@ -148,24 +150,30 @@ export async function continueWithOrder(ctx: ContinueContext, raw: Record<string
 
   const orderNumber = normalizeOrderNumber(text(raw.orderNumber))!;
   const email = normalizeEmail(text(raw.email))!;
-  const perOrder = await limiter.hit(orderLimitKey('my:order', orderNumber), limits.perOrder);
+  const attempts = orderAttempts(limiter, orderLimitKey('my:order', orderNumber), limits.perOrder);
+  const perOrder = await attempts.check();
   if (!perOrder.allowed) return continueError(429, 'rate_limited', {}, retryAfter(perOrder.retryAfterMs));
+  const noMatch = async () => {
+    await attempts.miss();
+    return continueError(403, 'no_match');
+  };
 
   const sites = await ctx.adapter.findSitesByOrderRef(orderNumber);
   if (!sites.length) {
+    await attempts.miss(); // nothing opened: counts like an answer that did not match
     const custom = await privateThemeForOrder(orderNumber);
     return { status: 200, body: { ok: true, next: 'start', ...(custom ? { startPath: privateStartPath(custom.id, orderNumber) } : {}) } };
   }
   const owned = ownedSites(sites, email);
   const wanted = typeof raw.slug === 'string' && raw.slug ? raw.slug : null;
-  if (!owned.length) return continueError(403, 'no_match');
+  if (!owned.length) return noMatch();
   if (owned.length > 1 && !wanted) {
     // G152: names and addresses only of the websites this email started (never another buyer's).
     // G951: with the design of each, so two websites of one couple (two designs in one order) can be told apart.
     return { status: 200, body: { ok: true, next: 'choose', sites: owned.map((s) => ({ slug: s.slug, names: siteNames(s), design: designName(s.theme) })) } };
   }
   const site = wanted ? owned.find((s) => s.slug === wanted) : owned[0];
-  if (!site) return continueError(403, 'no_match');
+  if (!site) return noMatch();
   const now = new Date((ctx.now ?? Date.now)());
   const { key } = await mintDeviceKey(ctx.adapter, site, { label: deviceLabel(ctx.userAgent), via: 'continue', now });
   return { status: 200, body: { ok: true, next: 'edit', slug: site.slug, editPath: deviceEditPath(site.slug, key), names: siteNames(site) } };

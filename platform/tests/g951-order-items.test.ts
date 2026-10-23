@@ -108,6 +108,12 @@ test('coverage: services only confirm no website; a custom design confirms its o
   assert.deepEqual(claimOrderCheck(v({ units: 2 }), 'etsy', at), { status: 'verified', at, by: 'etsy', units: 2 });
   assert.deepEqual(claimOrderCheck(v({ units: 1, source: 'mail' }), 'trust', at), { status: 'verified', at, by: 'etsy' });
   assert.deepEqual(claimOrderCheck({ result: 'provisional', units: 0 }, 'trust', at), { status: 'provisional', at, by: 'claim', noDesign: true });
+  // a further website beyond what the sale email lists: pending even in trust mode; within it, provisional
+  assert.deepEqual(claimOrderCheck(v({ units: 1, source: 'mail' }), 'trust', at, false, 2), { status: 'pending', at, by: 'claim' });
+  assert.deepEqual(claimOrderCheck(v({ units: 2, source: 'mail' }), 'trust', at, false, 2), { status: 'provisional', at, by: 'claim' });
+  assert.deepEqual(claimOrderCheck({ result: 'provisional', units: 1, source: 'mail' }, 'trust', at, false, 2), { status: 'pending', at, by: 'claim' });
+  assert.deepEqual(claimOrderCheck({ result: 'provisional' }, 'trust', at, false, 2), { status: 'provisional', at, by: 'claim' }, 'nothing read: provisional');
+  assert.deepEqual(claimOrderCheck(v({ units: 1 }), 'trust', at, false, 2), { status: 'provisional', at, by: 'claim' }, 'the receipt (not a mail): To-do, as before');
   assert.equal(claimOrderCheck({ result: 'not_checked' }, 'format-only', at), null);
 });
 

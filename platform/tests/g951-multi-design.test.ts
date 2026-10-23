@@ -172,9 +172,15 @@ test('limits stay: the order number\'s attempts (shared with /my) and MAX_ORDER_
   const order = freshOrder();
   const limiter = new MemoryRateLimiter();
   assert.equal((await claim(adapter, TRUST, { orderNumber: order }, limiter)).status, 201);
+  // the right email never uses up the order number's attempts (orderAttempts) …
+  const right: number[] = [];
+  for (let i = 0; i < 8; i++) right.push((await claim(adapter, TRUST, { orderNumber: order, theme: 'second-design' }, limiter)).status);
+  assert.deepEqual(right, [200, 200, 200, 200, 200, 200, 200, 200]);
+  // … every other email does: six a window per order number (DEFAULT_CONTINUE_LIMITS.perOrder), then even the right one waits
   const statuses: number[] = [];
-  for (let i = 0; i < 7; i++) statuses.push((await claim(adapter, TRUST, { orderNumber: order, theme: 'second-design' }, limiter)).status);
-  assert.deepEqual(statuses, [200, 200, 200, 200, 200, 200, 429], 'six a window per order number (DEFAULT_CONTINUE_LIMITS.perOrder)');
+  for (let i = 0; i < 7; i++) statuses.push((await claim(adapter, TRUST, { orderNumber: order, email: `guess${i}@example.test` }, limiter)).status);
+  assert.deepEqual(statuses, [409, 409, 409, 409, 409, 409, 429]);
+  assert.equal((await claim(adapter, TRUST, { orderNumber: order, theme: 'second-design' }, limiter)).status, 429);
   // never more than MAX_ORDER_SITES
   const full = Array.from({ length: MAX_ORDER_SITES }, (_, i) => ({ orderSlot: i + 1 }));
   assert.deepEqual(orderRoom(full, { result: 'provisional' }), { slot: null, full: 'max' });
@@ -184,6 +190,81 @@ test('limits stay: the order number\'s attempts (shared with /my) and MAX_ORDER_
   assert.deepEqual(orderRoom([{}], { result: 'verified', units: 1, source: 'mail' }), { slot: 2 }, 'a mail never decides how many');
   assert.deepEqual(orderRoom([{}], { result: 'not_checked' }), { slot: 2 });
   assert.deepEqual(orderRoom([{}], { result: 'provisional' }, false, new Set([2])), { slot: 3 }, 'a unit another instance just took');
+});
+
+test('three designs in one order, one buyer: every website is started and then opened again on /my, never 429', async () => {
+  const adapter = getDataAdapter();
+  const order = freshOrder();
+  const limiter = new MemoryRateLimiter();
+  const v = etsy(3);
+  const step = (body: Json) => claim(adapter, v, { orderNumber: order, ...body }, limiter);
+  assert.equal((await step({})).status, 201);
+  assert.equal((await step({ theme: 'second-design' })).body.next, 'choose');
+  assert.equal((await step({ theme: 'second-design', intent: 'add' })).status, 201);
+  assert.equal((await step({ theme: 'second-design' })).body.next, 'choose');
+  assert.equal((await step({ theme: 'second-design', intent: 'add' })).status, 201);
+  const sites = await adapter.findSitesByOrderRef(order);
+  assert.equal(sites.length, 3);
+  const my = (body: Json = {}) =>
+    continueWithOrder({ adapter, origin: BASE, ip: '198.51.100.240', limiter }, { orderNumber: order, email: 'avery@example.test', ...body });
+  for (let round = 0; round < 2; round++) {
+    const list = await my();
+    assert.equal(list.status, 200);
+    assert.equal(list.body.next, 'choose');
+    for (const s of sites) {
+      const open = await my({ slug: s.slug });
+      assert.equal(open.status, 200, `round ${round}: ${s.slug}`);
+      assert.equal(open.body.next, 'edit');
+    }
+  }
+  // a website that is not this email's still counts as a miss
+  assert.equal((await my({ slug: 'not-a-site-of-this-order' })).status, 403);
+});
+
+test('"Start another website" at MAX_ORDER_SITES says so (not "every design of the receipt")', async () => {
+  const adapter = getDataAdapter();
+  const order = freshOrder();
+  const limiter = new MemoryRateLimiter();
+  for (let i = 0; i < MAX_ORDER_SITES; i++) {
+    assert.equal((await claim(adapter, TRUST, { orderNumber: order, ...(i ? { intent: 'add' } : {}) }, limiter)).status, 201);
+  }
+  const add = await claim(adapter, TRUST, { orderNumber: order, theme: 'second-design', intent: 'add' }, limiter);
+  assert.equal(add.status, 409);
+  assert.equal(add.body.code, 'order_full');
+  assert.equal(add.body.full, 'max');
+  assert.match(add.body.message, /most websites one order can have/);
+  const receipt = freshOrder();
+  assert.equal((await claim(adapter, etsy(1), { orderNumber: receipt }, limiter)).status, 201);
+  const add2 = await claim(adapter, etsy(1), { orderNumber: receipt, theme: 'second-design', intent: 'add' }, limiter);
+  assert.deepEqual([add2.status, add2.body.full], [409, 'receipt']);
+  assert.match(add2.body.message, /Every design in this Etsy order already has its website/);
+});
+
+test('trust + Gmail: a website beyond the designs the sale email lists waits for the shop (pending); within it, provisional', async () => {
+  const adapter = getDataAdapter();
+  const mailOne = verifier('trust', { result: 'verified', source: 'mail', units: 1 });
+  const order = freshOrder();
+  const a = await claim(adapter, mailOne, { orderNumber: order });
+  assert.equal(a.status, 201);
+  assert.equal(a.body.orderPending, false);
+  const b = await claim(adapter, mailOne, { orderNumber: order, theme: 'second-design', intent: 'add' });
+  assert.equal(b.status, 201);
+  assert.equal(b.body.orderPending, true, 'the mail lists one design: the second website is not publishable yet');
+  const second = (await adapter.findSitesByOrderRef(order)).find((s) => s.slug === b.body.slug)!;
+  assert.deepEqual([second.orderSlot, second.orderCheck?.status], [2, 'pending']);
+  assert.equal(summarizeSite(second, 0).needsAction, true);
+
+  const mailTwo = verifier('trust', { result: 'verified', source: 'mail', units: 2 });
+  const two = freshOrder();
+  assert.equal((await claim(adapter, mailTwo, { orderNumber: two })).status, 201);
+  const c = await claim(adapter, mailTwo, { orderNumber: two, theme: 'second-design', intent: 'add' });
+  assert.equal(c.body.orderPending, false, 'within the mail\'s count: provisional, the admin\'s To-do');
+  const third = await claim(adapter, mailTwo, { orderNumber: two, intent: 'add' });
+  assert.equal(third.body.orderPending, true);
+  // nothing read from a mail (no units): provisional as before
+  const plain = freshOrder();
+  assert.equal((await claim(adapter, TRUST, { orderNumber: plain })).status, 201);
+  assert.equal((await claim(adapter, TRUST, { orderNumber: plain, theme: 'second-design', intent: 'add' })).body.orderPending, false);
 });
 
 test('the hourly check: a further website is verified only by the receipt\'s units, never by a sale email', async () => {
