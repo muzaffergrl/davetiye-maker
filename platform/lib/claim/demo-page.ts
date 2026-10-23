@@ -7,6 +7,8 @@
 // (frame-ancestors 'self': /start embeds it in an iframe). Internal and unknown themes -> 404.
 // G151: a private theme (custom design for one buyer) only for the shop admin (admin session cookie); everyone else
 // gets the same 404 as an unknown theme.
+// Demo bar (owner 2026-10-23, lib/marketing/demo-bar.ts): the pill + catalogue of the other designs, added here only —
+// not when a frame asks for the page (Sec-Fetch-Dest: iframe: the /start preview, the sales site's demo dialog).
 
 import { isAdminRequest } from '../admin/auth.ts';
 import { calendarEvent } from '../calendar.ts';
@@ -14,7 +16,8 @@ import { publicOrigin } from '../panel/http.ts';
 import { icsResponse } from '../site/ics.ts';
 import { siteCsp, isSitePage } from '../site/render.ts';
 import { renderTemplate, VARIANT_PARAM } from '../theme/engine.ts';
-import { readThemePage } from '../theme/theme.ts';
+import { loadTheme, readThemePage } from '../theme/theme.ts';
+import { demoBarFor, demoBarLang, framedRequest, withDemoBar } from '../marketing/demo-bar.ts';
 import { withDemoMap } from './demo-map.ts';
 import { withDemoPhotos } from './demo-photos.ts';
 import { claimableTheme } from './themes.ts';
@@ -53,6 +56,9 @@ export async function handleDemoPage(req: Request, themeId: string, page: string
     if (!theme) return demoNotFound();
     const template = await readThemePage(theme.loaded, page);
     if (template === null) return demoNotFound();
+    const url = new URL(req.url);
+    // the visitor's language (?lang=, or the sales-site page they came from): the bar's words, kept by the page links
+    const visitorLang = demoBarLang(url, req.headers);
     const { html, disabled, scriptHashes, frameSources } = renderTemplate({
       html: template,
       // The demo always shows the invitation (G075): its fictional wedding date passing must not turn it into a thank-you.
@@ -69,14 +75,25 @@ export async function handleDemoPage(req: Request, themeId: string, page: string
       slug: demoBase(theme.id).slice(1),
       // G153: ?variant=<id> shows one of the design's palettes (live ones, and ones still in review for the review itself);
       // page links keep it
-      variant: new URL(req.url).searchParams.get(VARIANT_PARAM),
+      variant: url.searchParams.get(VARIANT_PARAM),
       variantInLinks: true,
+      linkLang: visitorLang,
       previewKey: DEMO_PREVIEW_MARK,
-      origin: publicOrigin(req.headers, new URL(req.url).origin),
+      origin: publicOrigin(req.headers, url.origin),
       share: theme.loaded.share,
     });
     if (disabled) return demoNotFound();
-    return new Response(html, {
+    let body = html;
+    if (!framedRequest(req.headers)) {
+      try {
+        const hasPage = async (id: string) => Boolean((await loadTheme(id))?.manifest.pages[page]);
+        body = withDemoBar(html, await demoBarFor(visitorLang, { id: theme.id, name: theme.name }, page, hasPage));
+      } catch (e) {
+        // the demo itself never fails because of its bar
+        console.error(`[claim] demo bar ${themeId}/${page}:`, e);
+      }
+    }
+    return new Response(body, {
       status: 200,
       headers: {
         'Content-Type': 'text/html; charset=utf-8',
@@ -84,6 +101,8 @@ export async function handleDemoPage(req: Request, themeId: string, page: string
         'X-Content-Type-Options': 'nosniff',
         'X-Robots-Tag': 'noindex, nofollow',
         'Referrer-Policy': 'strict-origin-when-cross-origin',
+        // the demo bar: left out of framed requests; its language may come from the referring sales-site page
+        Vary: 'Sec-Fetch-Dest, Referer',
         // G151: a private theme's demo was opened with the admin cookie: never kept by a shared cache.
         'Cache-Control': theme.manifest.private ? 'private, no-store' : 'public, max-age=0, must-revalidate',
       },

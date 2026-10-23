@@ -109,6 +109,12 @@ export interface RenderOptions {
    */
   lang?: Lang | null;
   dict?: Dict;
+  /**
+   * Demo bar (owner request 2026-10-23, lib/marketing/demo-bar.ts): the visitor's language on a live demo. Links between
+   * pages keep ?lang=<it> although the page itself stays in the content's language, so the bar keeps the visitor's
+   * language from page to page. Only when the page is in the site's primary language.
+   */
+  linkLang?: Lang | null;
 }
 
 /** Query parameter of a page's language (G144): /<slug>/details?lang=de. Absent = the site's primary language. */
@@ -302,8 +308,8 @@ export function renderTemplate(opts: RenderOptions): RenderResult {
   // G144: the page's language. The couple's words: approved translations (lib/i18n/content.ts); fixed words: the dictionary.
   const langs = siteLangs(opts.content);
   const lang: Lang = opts.lang && langs.all.includes(opts.lang) ? opts.lang : langs.primary;
-  /** ?lang= that page links carry (none for the primary language). */
-  const langParam = lang === langs.primary ? null : lang;
+  /** ?lang= that page links carry (none for the primary language, except a demo visitor's linkLang). */
+  const langParam = lang !== langs.primary ? lang : opts.linkLang && opts.linkLang !== langs.primary ? opts.linkLang : null;
   const dict: Dict = lang === 'en' ? {} : (opts.dict ?? {});
   const lookup = (en: string): string | null => dict[en.replace(/\s+/g, ' ').trim()] ?? null;
   const t = (en: string, vars?: Vars): string => interpolate(lookup(en) ?? en, vars);
