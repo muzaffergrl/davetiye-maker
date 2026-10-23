@@ -1,0 +1,142 @@
+[
+  {
+    "name": "manifest contract: new independent product and five photo slots",
+    "pass": true
+  },
+  {
+    "name": "demo content validates against current schema",
+    "pass": true
+  },
+  {
+    "name": "index: current engine renders with no unresolved fields",
+    "pass": true
+  },
+  {
+    "name": "index: preview keys retained on internal navigation",
+    "pass": true
+  },
+  {
+    "name": "index: no hardcoded old theme, couple or decor",
+    "pass": true
+  },
+  {
+    "name": "index: thank-you state renders correctly",
+    "pass": true
+  },
+  {
+    "name": "home: current engine renders with no unresolved fields",
+    "pass": true
+  },
+  {
+    "name": "home: preview keys retained on internal navigation",
+    "pass": true
+  },
+  {
+    "name": "home: no hardcoded old theme, couple or decor",
+    "pass": true
+  },
+  {
+    "name": "home: thank-you state renders correctly",
+    "pass": true
+  },
+  {
+    "name": "story: current engine renders with no unresolved fields",
+    "pass": true
+  },
+  {
+    "name": "story: preview keys retained on internal navigation",
+    "pass": true
+  },
+  {
+    "name": "story: no hardcoded old theme, couple or decor",
+    "pass": true
+  },
+  {
+    "name": "story: thank-you state renders correctly",
+    "pass": true
+  },
+  {
+    "name": "details: current engine renders with no unresolved fields",
+    "pass": true
+  },
+  {
+    "name": "details: preview keys retained on internal navigation",
+    "pass": true
+  },
+  {
+    "name": "details: no hardcoded old theme, couple or decor",
+    "pass": true
+  },
+  {
+    "name": "details: thank-you state renders correctly",
+    "pass": true
+  },
+  {
+    "name": "rsvp: current engine renders with no unresolved fields",
+    "pass": true
+  },
+  {
+    "name": "rsvp: preview keys retained on internal navigation",
+    "pass": true
+  },
+  {
+    "name": "rsvp: no hardcoded old theme, couple or decor",
+    "pass": true
+  },
+  {
+    "name": "rsvp: thank-you state renders correctly",
+    "pass": true
+  },
+  {
+    "name": "gallery has three independent photo slots and a native lightbox",
+    "pass": true
+  },
+  {
+    "name": "story switch removes page and every story link",
+    "pass": true
+  },
+  {
+    "name": "external RSVP mode removes internal form and links",
+    "pass": true
+  },
+  {
+    "name": "maps use shared consent block for ceremony and reception",
+    "pass": true
+  },
+  {
+    "name": "ten questions and all five types in shared form",
+    "pass": true
+  },
+  {
+    "name": "Story music supports selected track and custom upload source",
+    "pass": true
+  },
+  {
+    "name": "audio is disabled cleanly and music stays on Story",
+    "pass": true
+  },
+  {
+    "name": "opening sound cues use matching choreography timings",
+    "pass": true
+  },
+  {
+    "name": "password pages retain private metadata treatment",
+    "pass": true
+  },
+  {
+    "name": "calendar links computed by shared platform engine",
+    "pass": true
+  },
+  {
+    "name": "long names remain editable content",
+    "pass": true
+  },
+  {
+    "name": "empty photos use safe placeholder assets",
+    "pass": true
+  },
+  {
+    "name": "thank you hide-details setting removes Details page and links",
+    "pass": true
+  }
+]
