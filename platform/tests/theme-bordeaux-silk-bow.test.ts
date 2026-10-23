@@ -270,7 +270,7 @@ test('thank-you mode closes RSVP, keeps the story and the card carries the thank
 });
 
 test('opening sounds: the bow, the ribbon pulled through, the flap, the card', () => {
-  assert.deepEqual(designSound(id), { music: 'evening-strings', opening: [[0, 'ribbon'], [1000, 'whoosh'], [1500, 'paper'], [2100, 'slide'], [2750, 'chime']] });
+  assert.deepEqual(designSound(id), { music: 'evening-strings', opening: [[0, 'bow'], [1000, 'ribbon'], [1500, 'paper-soft'], [2100, 'slide-quick'], [2750, 'chime-warm']] });
 });
 
 test('RSVP keeps the shared form contract; a reply ties the bow again and the GPT accents (petals, ribbon ends) drift down', async () => {

@@ -229,7 +229,7 @@ test('thank-you mode closes RSVP, keeps the story and the card carries the thank
 });
 
 test('opening sounds: the cord, the flap, the card, the two windows, forward', () => {
-  assert.deepEqual(designSound(id), { music: 'first-light', opening: [[0, 'ribbon'], [900, 'paper'], [1500, 'slide'], [2150, 'paper'], [2550, 'paper'], [3150, 'chime']] });
+  assert.deepEqual(designSound(id), { music: 'first-light', opening: [[0, 'cord'], [900, 'paper'], [1500, 'slide-quick'], [2150, 'fold'], [2550, 'fold-2'], [3150, 'chime-warm']] });
   assert.deepEqual(designSound(id)!.opening.map(([ms]) => ms), [start('untie'), start('flap'), start('rise'), start('outer'), start('inner'), start('forward')]);
 });
 

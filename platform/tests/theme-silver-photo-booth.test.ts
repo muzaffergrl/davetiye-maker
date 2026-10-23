@@ -253,7 +253,7 @@ test('thank-you mode closes RSVP, keeps the story and the card carries the thank
 });
 
 test('opening sounds: the flashbulb, the strip, the flap, the card, the second flash', () => {
-  assert.deepEqual(designSound(id), { music: 'evening-strings', opening: [[0, 'tap'], [180, 'whoosh'], [1150, 'paper'], [1700, 'slide'], [2200, 'chime']] });
+  assert.deepEqual(designSound(id), { music: 'evening-strings', opening: [[0, 'flash'], [180, 'slide-quick', -0.3], [1150, 'paper'], [1700, 'slide-quick'], [2200, 'flash', 0.2]] });
 });
 
 test('RSVP keeps the shared form contract; a reply is answered with flashes and the GPT accents', async () => {

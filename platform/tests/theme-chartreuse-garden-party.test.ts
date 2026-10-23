@@ -239,7 +239,7 @@ test('thank-you mode closes RSVP, keeps the story and the card carries the thank
 });
 
 test('opening sounds: the stem, the flap, the flowers, the card', () => {
-  assert.deepEqual(designSound(id), { music: 'garden-waltz', opening: [[0, 'ribbon'], [500, 'paper'], [1000, 'whoosh'], [1500, 'slide'], [2300, 'chime']] });
+  assert.deepEqual(designSound(id), { music: 'garden-waltz', opening: [[0, 'twig'], [500, 'paper-crisp'], [1000, 'petals'], [1500, 'slide-quick'], [2300, 'chime']] });
 });
 
 test('RSVP keeps the shared form contract; a reply is answered with the GPT accents (petals, sprigs, cosmos)', async () => {

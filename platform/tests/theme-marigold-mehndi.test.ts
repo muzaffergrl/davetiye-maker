@@ -229,10 +229,10 @@ test('thank-you mode closes RSVP, keeps the story and the card carries the thank
   assert.equal(cheerio.load((await render('rsvp', demo)).html)('[data-rsvp-form]').length, 0);
 });
 
-test('opening sounds: the tassel, the sleeve, the flap, the card, forward — each on its MOTION step', () => {
+test('opening sounds: the tassel, the sleeve, the flap, the petals, the diyas, the card, forward — each on its MOTION step', () => {
   const s = designSound(id);
-  assert.deepEqual(s, { music: 'evening-strings', opening: [[0, 'ribbon'], [300, 'slide'], [1250, 'paper'], [2500, 'slide'], [3150, 'chime']] });
-  assert.deepEqual(s.opening.map(([ms]) => ms), [start('tassel'), start('sleeve'), start('flap'), start('rise'), start('forward')]);
+  assert.deepEqual(s, { music: 'evening-strings', opening: [[0, 'cord'], [300, 'slide', 0.4], [1250, 'paper-crisp'], [1600, 'petals'], [1800, 'lantern'], [2500, 'slide-quick'], [3150, 'chime-warm']] });
+  assert.deepEqual(s.opening.map(([ms]) => ms), [start('tassel'), start('sleeve'), start('flap'), start('petals'), start('diyas'), start('rise'), start('forward')]);
 });
 
 test('RSVP keeps the shared form contract; question labels leave room for the "(optional)" mark', async () => {

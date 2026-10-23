@@ -215,7 +215,7 @@ test('thank-you mode closes RSVP, keeps the story and the card carries the thank
 });
 
 test('opening sounds: the buckle, the strap, the flap, the card', () => {
-  assert.deepEqual(designSound(id), { music: 'evening-strings', opening: [[150, 'clasp'], [600, 'ribbon'], [1300, 'paper'], [2500, 'slide'], [3150, 'chime']] });
+  assert.deepEqual(designSound(id), { music: 'evening-strings', opening: [[0, 'whoosh'], [150, 'buckle'], [600, 'strap'], [1300, 'velvet'], [2500, 'slide-quick'], [3150, 'chime-warm']] });
 });
 
 test('RSVP keeps the shared form contract; question labels leave room for the "(optional)" mark', async () => {

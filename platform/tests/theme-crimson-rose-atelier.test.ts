@@ -56,7 +56,7 @@ test('New album stays optional and thank-you mode closes RSVP without discarding
 });
 
 test('Default audio cues match the independently animated opening',()=>{
- assert.deepEqual(designSound(id),{music:'evening-strings',opening:[[0,'seal'],[400,'paper'],[1600,'slide'],[3000,'chime']]});
+ assert.deepEqual(designSound(id),{music:'evening-strings',opening:[[0,'seal-lift'],[400,'paper-crisp'],[1600,'slide'],[3000,'harp']]});
 });
 
 test('Every demo photo is a bundled theme asset, with no external photo dependency',async()=>{
