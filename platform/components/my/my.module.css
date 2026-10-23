@@ -342,3 +342,10 @@
 .detailsBody {
   padding: 0 18px 18px;
 }
+
+/* G951 list: the address moves to its own line as a whole ("/avery-and-jordan-2"), and breaks only when it is wider than
+   the line (as /start .choiceSlug) — never "/avery-and-" + "jordan-2" at 360 px */
+.slug {
+  display: inline-block;
+  max-width: 100%;
+}

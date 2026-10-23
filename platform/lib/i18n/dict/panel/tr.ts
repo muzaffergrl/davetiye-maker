@@ -586,7 +586,6 @@ const dict: Dict = {
   'On this page': 'Bu sayfada',
   'On your website: {time}': 'Websitenizde: {time}',
   'On {date} at midnight ({city} time) guests start seeing your thank-you page, and replies close.': '{date} gece yarısı ({city} saati) davetliler teşekkür sayfanızı görmeye başlar ve yanıtlar kapanır.',
-  'One order starts one website. Questions? Message us on Etsy with your order number.': 'Bir sipariş bir website başlatır. Sorularınız mı var? Sipariş numaranızla bize Etsy\'den mesaj gönderin.',
   'One photo is enough to start: it opens your website. The others are optional.': 'Başlamak için bir fotoğraf yeterli: websitenizi o açar. Diğerleri isteğe bağlıdır.',
   'One thing needs fixing before you publish.': 'Yayınlamadan önce düzeltilmesi gereken bir şey var.',
   'Online until': 'Yayında kalacağı tarih',
@@ -1348,7 +1347,7 @@ const dict: Dict = {
   "Original": "Orijinal",
   "Color palette changed. Your texts and photos stay as they are.": "Renk paleti değişti. Metinleriniz ve fotoğraflarınız olduğu gibi kalır.",
   "The color palette could not be changed. Please try again.": "Renk paleti değiştirilemedi. Lütfen tekrar deneyin.",
-  "The same design in other colors. Your change shows on your website at once; your texts and photos are not changed.": "Aynı tasarım, başka renklerde. Seçiminiz web sitenizde hemen görünür; metinleriniz ve fotoğraflarınız değişmez.",
+  "The same design in other colors. Your change shows on your website at once; your texts and photos are not changed.": "Aynı tasarım, başka renklerde. Seçiminiz websitenizde hemen görünür; metinleriniz ve fotoğraflarınız değişmez.",
   "You can change the colors later in your editor.": "Renkleri daha sonra düzenleyicinizde değiştirebilirsiniz.",
   // G169 Azulejo Mosaic
   // G168 Celestial Observatory
@@ -1422,7 +1421,7 @@ const dict: Dict = {
   "Open the panel again (home page)": "Panoyu yeniden aç (ana sayfa)",
   "Open the panel again (RSVP page)": "Panoyu yeniden aç (Katılım sayfası)",
   "Downloads open once your order is confirmed.": "İndirmeler, siparişiniz onaylanınca açılır.",
-  "This website is archived, so its PDFs can no longer be made.": "Bu web sitesi arşivde; PDF'leri artık oluşturulamaz.",
+  "This website is archived, so its PDFs can no longer be made.": "Bu websitesi arşivde; PDF'leri artık oluşturulamaz.",
   "Your Etsy order already has a website.": "Etsy siparişinizin zaten bir websitesi var.",
   "Your Etsy order already has {n} websites.": "Etsy siparişinizin zaten {n} websitesi var.",
   "Open it": "Aç",
@@ -1435,6 +1434,7 @@ const dict: Dict = {
   "Find it in your Etsy order confirmation email, or on Etsy under Purchases and reviews. One website for each design you bought.": "Etsy sipariş onay e-postanızda ya da Etsy'de Satın alımlar ve değerlendirmeler bölümünde bulabilirsiniz. Aldığınız her tasarım için bir website.",
   "Every design in this Etsy order already has its website. To start another website, please buy the design on Etsy and use that order number.": "Bu Etsy siparişindeki her tasarımın zaten bir websitesi var. Başka bir website başlatmak için lütfen tasarımı Etsy'den satın alın ve o siparişin numarasını kullanın.",
   "This order already has the most websites one order can have. Please message us on Etsy if you need another one.": "Bu sipariş, bir siparişin sahip olabileceği en fazla websitesine ulaştı. Bir tane daha gerekiyorsa lütfen bize Etsy'den yazın.",
+  "One website for each design you bought. Questions? Message us on Etsy with your order number.": "Aldığınız her tasarım için bir website. Sorularınız mı var? Sipariş numaranızla bize Etsy'den mesaj gönderin.",
 };
 
 export default dict;

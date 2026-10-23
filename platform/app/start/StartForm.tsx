@@ -927,7 +927,7 @@ function ResultView({ result, themeName, onStartOver }: { result: ClaimResultVie
         <button type="button" className={styles.linkButton} onClick={onStartOver}>
           {t('Start with a different order')}
         </button>
-        <p className={styles.small}>{t('One order starts one website. Questions? Message us on Etsy with your order number.')}</p>
+        <p className={styles.small}>{t('One website for each design you bought. Questions? Message us on Etsy with your order number.')}</p>
       </section>
     </div>
   );

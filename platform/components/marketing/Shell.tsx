@@ -16,6 +16,9 @@ import s from './marketing.module.css';
 
 const HEADER_LOGO_H = 36;
 
+/** Guides the footer shows below 900 px (two columns): the full list made one ~1500 px column on a 360 px phone. */
+const FOOTER_GUIDES_SHORT = 6;
+
 export function Header({ m = enMarket }: { m?: Market }) {
   const { t } = m;
   return (
@@ -160,9 +163,10 @@ export function Footer({ guides, m = enMarket }: { guides: Guide[]; m?: Market }
           <div>
             <h2 className={s.footerTitle}>{t('Guides')}</h2>
             <ul>
-              {/* G980: every guide, so none depends on /guides alone for its site-wide links */}
-              {guides.map((g) => (
-                <li key={g.slug}>
+              {/* G980: every guide, so none depends on /guides alone for its site-wide links; phones and tablets show the
+                  first FOOTER_GUIDES_SHORT (CSS footerGuideMore), the rest stays in the page for crawlers, "All guides" below */}
+              {guides.map((g, i) => (
+                <li key={g.slug} className={i >= FOOTER_GUIDES_SHORT ? s.footerGuideMore : undefined}>
                   <a href={m.href(g.path)}>{g.title.replace(/\s*\(.*\)$/, '').replace(/:.*$/, '')}</a>
                 </li>
               ))}

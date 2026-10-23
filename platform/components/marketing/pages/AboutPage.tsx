@@ -81,17 +81,24 @@ export function AboutPage({ m }: { m: Market }) {
       <Section band labelledBy="tested">
         <Container narrow>
           <h2 id="tested" className={s.h2}>
-            {t('What we test, and what we have not tested yet')}
+            {MARKETING.verified.realDevices ? t('What we test') : t('What we test, and what we have not tested yet')}
           </h2>
-          <p>
-            {t(
-              'Before a design goes live we run automated checks of the opening, every page, long names, missing photos, the RSVP form and the editing panel in a browser at several screen sizes. The editing panel is {claim};',
-              { claim: inSentence(phoneClaim(MARKETING, t), m.lang) },
-            )}
-            {MARKETING.verified.realDevices
-              ? ` ${t('it has been tested on real iPhone and Android phones.')}`
-              : ` ${t('it has not yet been tested on every real phone model. If something looks wrong on yours, tell us and we will fix it.')}`}
-          </p>
+          {/* realDevices (owner decision 3): one plain sentence, no device claim spliced into another sentence */}
+          {MARKETING.verified.realDevices ? (
+            <p>
+              {t(
+                'Before a design goes live we run automated checks of the opening, every page, long names, missing photos, the RSVP form and the editing panel in a browser at several screen sizes. We have also tested them on real phones. If something still looks wrong on yours, tell us and we will fix it.',
+              )}
+            </p>
+          ) : (
+            <p>
+              {t(
+                'Before a design goes live we run automated checks of the opening, every page, long names, missing photos, the RSVP form and the editing panel in a browser at several screen sizes. The editing panel is {claim};',
+                { claim: inSentence(phoneClaim(MARKETING, t), m.lang) },
+              )}{' '}
+              {t('it has not yet been tested on every real phone model. If something looks wrong on yours, tell us and we will fix it.')}
+            </p>
+          )}
           <TextLink href={m.href('/contact')}>{t('Contact us')}</TextLink>
         </Container>
       </Section>

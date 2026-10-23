@@ -106,7 +106,7 @@ export function DesignPage({ id, m }: { id: string; m: Market }) {
   const demo = demoDesigns(MARKETING, m, [d]);
   const video = openingVideo(d.id);
   const hasScreens = SITE_PAGES.some((p) => designScreen(d.id, p.key));
-  const price = realPrice(d.price);
+  const price = d.status === 'live' ? realPrice(d.price) : null; // never a price on a 'Coming soon' design
   const others = catalogDesigns().filter((x) => x.id !== d.id);
   const related = d.copy.relatedGuides.map((g) => loadGuideIn(g, m.lang)).filter((g) => !!g);
   // G099: what guests tap first here (envelope, gatefold, pouch, wallet, book or sleeve), from the design's own opening

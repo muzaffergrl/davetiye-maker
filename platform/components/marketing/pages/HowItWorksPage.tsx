@@ -55,7 +55,7 @@ export function HowItWorksPage({ m }: { m: Market }) {
         <>
           <p>
             {t(
-              'Open the link from your PDF. Enter your Etsy order number, your email and your first names, and choose your web address. Your draft website is created in the design you bought. One order starts one website.',
+              'Open the link from your PDF. Enter your Etsy order number, your email and your first names, and choose your web address. Your draft website is created in the design you bought. Each design you bought starts one website.',
             )}
           </p>
           <aside className={s.callout}>

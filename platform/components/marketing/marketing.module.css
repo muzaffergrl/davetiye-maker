@@ -649,6 +649,12 @@
 .footerMuted {
   color: var(--on-dark-muted);
 }
+/* the guides after the first six (Shell.tsx FOOTER_GUIDES_SHORT) on phones and tablets: "All guides" lists them */
+@media (max-width: 899px) {
+  .footerGuideMore {
+    display: none !important;
+  }
+}
 .footerBottom {
   max-width: calc(1200px + 2 * var(--gutter));
   margin: 40px auto 0;

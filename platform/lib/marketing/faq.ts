@@ -60,7 +60,7 @@ export function faqGroups(cfg: MarketingConfig = MARKETING, t: T = enT): FaqGrou
         {
           id: 'one-order-one-website',
           q: t('Can I use one purchase for two weddings?'),
-          a: t('No. One Etsy order creates one wedding website. The order number is used when you start your website, and the same order cannot start a second one. If you are planning more than one event, buy the design once for each website. [See how it works](/how-it-works).'),
+          a: t('No. Each design you buy on Etsy starts one wedding website, for one event. If one order has two designs, or the same design twice, you start one website for each: open the start link of each design and enter the same order number and email. If you are planning more than one event, buy the design once for each website. [See how it works](/how-it-works).'),
         },
       ],
     },

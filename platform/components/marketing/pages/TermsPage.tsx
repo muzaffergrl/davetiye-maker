@@ -182,7 +182,7 @@ export function TermsPage({ m }: { m: Market }) {
                 'We may update the platform to fix problems, improve features or follow the law. If an update would take away something your purchase includes, we tell you before it happens.',
               )}
             </p>
-            <p>{t('Keep your own copy of what matters: you can download your guests’ replies as an Excel file and your website as a PDF at any time.')}</p>
+            <p>{t('Keep your own copy of what matters: you can download your guests’ replies as an Excel file at any time, and your website as a PDF from when your order is confirmed until your “Online until” date.')}</p>
 
             <h2 id="ai-chat">{t('Live help chat')}</h2>
             <p>

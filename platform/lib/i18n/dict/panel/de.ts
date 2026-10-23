@@ -586,7 +586,6 @@ const dict: Dict = {
   'On this page': 'Auf dieser Seite',
   'On your website: {time}': 'Auf Ihrer Website: {time}',
   'On {date} at midnight ({city} time) guests start seeing your thank-you page, and replies close.': 'Am {date} um Mitternacht (Ortszeit {city}) sehen Gäste Ihre Dankesseite, und die Antworten schließen.',
-  'One order starts one website. Questions? Message us on Etsy with your order number.': 'Eine Bestellung startet eine Website. Fragen? Schreiben Sie uns auf Etsy mit Ihrer Bestellnummer.',
   'One photo is enough to start: it opens your website. The others are optional.': 'Ein Foto reicht für den Anfang: Es eröffnet Ihre Website. Die anderen sind optional.',
   'One thing needs fixing before you publish.': 'Vor dem Veröffentlichen muss noch eine Sache korrigiert werden.',
   'Online until': 'Online bis',
@@ -1435,6 +1434,7 @@ const dict: Dict = {
   "Find it in your Etsy order confirmation email, or on Etsy under Purchases and reviews. One website for each design you bought.": "Sie finden sie in Ihrer Etsy-Bestellbestätigung per E-Mail oder auf Etsy unter „Käufe und Bewertungen“. Eine Website für jedes Design, das Sie gekauft haben.",
   "Every design in this Etsy order already has its website. To start another website, please buy the design on Etsy and use that order number.": "Für jedes Design dieser Etsy-Bestellung gibt es bereits eine Website. Für eine weitere Website kaufen Sie das Design bitte auf Etsy und verwenden diese Bestellnummer.",
   "This order already has the most websites one order can have. Please message us on Etsy if you need another one.": "Diese Bestellung hat bereits die meisten Websites, die eine Bestellung haben kann. Wenn Sie eine weitere brauchen, schreiben Sie uns bitte auf Etsy.",
+  "One website for each design you bought. Questions? Message us on Etsy with your order number.": "Eine Website für jedes Design, das Sie gekauft haben. Fragen? Schreiben Sie uns auf Etsy mit Ihrer Bestellnummer.",
 };
 
 export default dict;

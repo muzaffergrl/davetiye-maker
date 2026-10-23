@@ -42,7 +42,8 @@ export function DesignCard({
   const video = v ? { file: v.file, poster: v.poster, width: v.width, height: v.height } : null;
   const H = headingLevel === 2 ? 'h2' : 'h3';
   const hasCover = !env && hasEnvelopeCover(design.id);
-  const price = realPrice(design.price);
+  // a price only for a design on sale: a 'preview' card says "Coming soon on Etsy" and nothing that looks buyable
+  const price = design.status === 'live' ? realPrice(design.price) : null;
   const sizes = '(min-width: 1024px) 220px, (min-width: 600px) 30vw, 34vw';
   return (
     <article className={hasCover ? s.designCard + ' ' + s.envelopeDesignCard : s.designCard} data-fx-spot data-status={design.status} data-styles={styles?.length ? styles.join(' ') : undefined}>

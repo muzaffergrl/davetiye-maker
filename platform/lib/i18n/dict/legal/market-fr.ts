@@ -26,7 +26,6 @@ const dict: Dict = {
   "KVKK notice": "Notice KVKK",
   "KVKK privacy notice": "Notice de confidentialité KVKK",
   "Keep your order number, email and private edit link to yourself: anyone who has them can edit your website. We will never ask for your edit link.": "Gardez pour vous votre numéro de commande, votre e-mail et votre lien de modification privé : toute personne qui les a peut modifier votre site. Nous ne vous demanderons jamais votre lien de modification.",
-  "Keep your own copy of what matters: you can download your guests’ replies as an Excel file and your website as a PDF at any time.": "Gardez votre propre copie de ce qui compte : vous pouvez télécharger à tout moment les réponses de vos invités en fichier Excel et votre site en PDF.",
   "Legal basis": "Base juridique",
   "Live help chat": "Chat d’aide en direct",
   "Our full legal name and postal address are provided on request by email.": "Notre nom légal complet et notre adresse postale vous sont communiqués sur demande par e-mail.",
@@ -80,6 +79,7 @@ const dict: Dict = {
   "try to get into websites, editors or data that are not yours, overload the platform or get around its limits;": "tenter d’accéder à des sites, éditeurs ou données qui ne sont pas les vôtres, surcharger la plateforme ou contourner ses limites ;",
   "{brand} is run by {name}, {address}.": "{brand} est exploité par {name}, {address}.",
   "{brand} sells on Etsy in the shop {shop}. You can reach us at {email} or through Etsy messages.": "{brand} vend sur Etsy dans la boutique {shop}. Vous pouvez nous joindre à {email} ou par la messagerie Etsy.",
+  "Keep your own copy of what matters: you can download your guests’ replies as an Excel file at any time, and your website as a PDF from when your order is confirmed until your “Online until” date.": "Gardez votre propre copie de ce qui compte : vous pouvez télécharger à tout moment les réponses de vos invités en fichier Excel, et votre site en PDF dès que votre commande est confirmée et jusqu’à votre date « En ligne jusqu’au ».",
 };
 
 export default dict;

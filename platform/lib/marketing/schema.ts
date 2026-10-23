@@ -131,7 +131,8 @@ export function product(design: Design, cfg: MarketingConfig = MARKETING, m: Mar
     .map((k) => screens[k]?.files['640'])
     .filter((f): f is string => !!f)
     .map((f) => absUrl(f, cfg));
-  const price = realPrice(design.price);
+  // an Offer only for a design on sale ('preview' = Coming soon on Etsy, even with a listing link)
+  const price = design.status === 'live' ? realPrice(design.price) : null;
   const url = realEtsyUrl(design.etsyListingUrl);
   const video = videoObject(design, cfg, m);
   const { t } = m;

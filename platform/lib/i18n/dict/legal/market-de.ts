@@ -26,7 +26,6 @@ const dict: Dict = {
   "KVKK notice": "KVKK-Hinweis",
   "KVKK privacy notice": "KVKK-Datenschutzhinweis",
   "Keep your order number, email and private edit link to yourself: anyone who has them can edit your website. We will never ask for your edit link.": "Behalten Sie Bestellnummer, E-Mail und privaten Bearbeitungslink für sich: Wer sie hat, kann Ihre Website bearbeiten. Wir fragen nie nach Ihrem Bearbeitungslink.",
-  "Keep your own copy of what matters: you can download your guests’ replies as an Excel file and your website as a PDF at any time.": "Bewahren Sie eine eigene Kopie des Wichtigen auf: Sie können die Antworten Ihrer Gäste jederzeit als Excel-Datei und Ihre Website als PDF herunterladen.",
   "Legal basis": "Rechtsgrundlage",
   "Live help chat": "Live-Hilfe-Chat",
   "Our full legal name and postal address are provided on request by email.": "Unseren vollständigen rechtlichen Namen und unsere Postanschrift teilen wir Ihnen auf Anfrage per E-Mail mit.",
@@ -80,6 +79,7 @@ const dict: Dict = {
   "try to get into websites, editors or data that are not yours, overload the platform or get around its limits;": "zu versuchen, auf fremde Websites, Editoren oder Daten zuzugreifen, die Plattform zu überlasten oder ihre Grenzen zu umgehen;",
   "{brand} is run by {name}, {address}.": "{brand} wird betrieben von {name}, {address}.",
   "{brand} sells on Etsy in the shop {shop}. You can reach us at {email} or through Etsy messages.": "{brand} verkauft auf Etsy im Shop {shop}. Sie erreichen uns unter {email} oder über Etsy-Nachrichten.",
+  "Keep your own copy of what matters: you can download your guests’ replies as an Excel file at any time, and your website as a PDF from when your order is confirmed until your “Online until” date.": "Bewahren Sie eine eigene Kopie des Wichtigen auf: Die Antworten Ihrer Gäste können Sie jederzeit als Excel-Datei herunterladen, Ihre Website als PDF ab der Bestätigung Ihrer Bestellung bis zu Ihrem „Online bis“-Datum.",
 };
 
 export default dict;

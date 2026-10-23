@@ -444,7 +444,8 @@ function ContinueForm({ theme, designs, emailLinkEnabled }: { theme: MyDesign | 
                 <p className={s.names}>{c.names || c.slug}</p>
                 {/* G951: two websites of one couple (two designs in one order) are told apart by their design */}
                 <p className={s.small} style={{ marginTop: 0, overflowWrap: 'anywhere' }}>
-                  {c.design ? `${c.design} · ` : ''}/{c.slug}
+                  {c.design ? `${c.design} · ` : ''}
+                  <span className={s.slug}>/{c.slug}</span>
                 </p>
               </div>
               <div className={s.editorActions}>

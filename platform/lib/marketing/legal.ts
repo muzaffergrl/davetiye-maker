@@ -81,11 +81,11 @@ function kvkkTr(cfg: MarketingConfig, t: T): string {
     : `Veri sorumlusunun açık adı (unvanı) ve posta adresi, ${f.mail} adresine yazmanız hâlinde size bildirilir.`;
   const cap = f.cap ? ` (en geç ilk yayından ${f.cap} ay sonrasına kadar)` : '';
   return `
-Bu aydınlatma metni, 6698 sayılı Kişisel Verilerin Korunması Kanunu (“KVKK”) m. 10 ve Aydınlatma Yükümlülüğünün Yerine Getirilmesinde Uyulacak Usul ve Esaslar Hakkında Tebliğ uyarınca hazırlanmıştır. Düğün web sitesi tasarımlarımızı satın alan çiftlerin, onların sitelerinde yanıt veren davetlilerin ve sitelerimizi ziyaret edenlerin kişisel verilerini nasıl işlediğimizi açıklar.
+Bu aydınlatma metni, 6698 sayılı Kişisel Verilerin Korunması Kanunu (“KVKK”) m. 10 ve Aydınlatma Yükümlülüğünün Yerine Getirilmesinde Uyulacak Usul ve Esaslar Hakkında Tebliğ uyarınca hazırlanmıştır. Düğün websitesi tasarımlarımızı satın alan çiftlerin, onların sitelerinde yanıt veren davetlilerin ve sitelerimizi ziyaret edenlerin kişisel verilerini nasıl işlediğimizi açıklar.
 
 ## 1. Veri sorumlusu
 
-Veri sorumlusu, Etsy'deki ${f.shopLink} dükkânında düğün web sitesi tasarımları satan **${f.brand}**'dur. ${identity}
+Veri sorumlusu, Etsy'deki ${f.shopLink} dükkânında düğün websitesi tasarımları satan **${f.brand}**'dur. ${identity}
 
 İletişim: ${f.mail} veya Etsy mesajları.
 
@@ -110,7 +110,7 @@ Davetli yanıtlarında hangi soruların sorulacağını ve yanıtların ne için
 
 - **Teknik kayıtlar:** barındırma sağlayıcımızın tuttuğu standart istek kayıtları (IP adresi, tarayıcı bilgisi, zaman). İstenmeyen istekleri (spam) önlemek için IP adresinin kendisi değil, tek yönlü özeti ile en çok 24 saatlik bir sayaç kullanılır.
 - **Çerezler ve tarayıcı depolaması:** düzenleyicide seçtiğiniz dil, henüz kaydedilmemiş değişiklikler ve bu cihazda açtığınız düzenleyiciler tarayıcınızda tutulur; satış sitemiz çerez kullanmaz. Ayrıntılar gizlilik bildirimindedir.
-- **Canlı yardım sohbeti:** yazdığınız mesajlar, bulunduğunuz sayfanın adresi ve düzenleyiciden soruyorsanız sitenizle ilgili birkaç bilgi (tasarım, yayında olup olmadığı, kalan isim ve tarih değişikliği hakkı). İsimler, davetliler ve yanıtlar sohbete gönderilmez.
+- **Canlı destek sohbeti:** yazdığınız mesajlar, bulunduğunuz sayfanın adresi ve düzenleyiciden soruyorsanız sitenizle ilgili birkaç bilgi (tasarım, yayında olup olmadığı, kalan isim ve tarih değişikliği hakkı). İsimler, davetliler ve yanıtlar sohbete gönderilmez.
 
 ## 3. İşleme amaçları ve hukuki sebepler
 
@@ -118,20 +118,20 @@ Davetli yanıtlarında hangi soruların sorulacağını ve yanıtların ne için
 - **Siparişin doğrulanması:** sipariş numarasının dükkânımızın Etsy siparişlerinde ve Etsy'nin gönderdiği satış e-postalarında aranması; her siparişte satın alınan tasarım sayısı kadar site açılması. Hukuki sebep: m. 5/2-c ve sahte sipariş numarasıyla site açılmasını önlemedeki meşru menfaatimiz (m. 5/2-f).
 - **Davetli yanıtlarının toplanması:** yanıtların saklanması, çifte gösterilmesi ve çift isterse çiftin kendi Google Drive'ındaki tabloya yazılması. Hukuki sebep: çiftle aramızdaki sözleşmenin ifası için, davetlilerin temel hak ve özgürlüklerine zarar vermeyen meşru menfaatimiz (m. 5/2-f).
 - **Güvenlik ve kötüye kullanımın önlenmesi:** spam sınırları, cihaz anahtarlarının özetleri, teknik kayıtlar. Hukuki sebep: meşru menfaat (m. 5/2-f).
-- **Canlı yardım sohbeti:** sorunuzu yanıtlamak. Sohbeti kullanmak isteğe bağlıdır. Hukuki sebep: meşru menfaat (m. 5/2-f); alıcılar için ayrıca m. 5/2-c.
+- **Canlı destek sohbeti:** sorunuzu yanıtlamak. Sohbeti kullanmak isteğe bağlıdır. Hukuki sebep: meşru menfaat (m. 5/2-f); alıcılar için ayrıca m. 5/2-c.
 - **Yasal yükümlülükler:** satış kayıtlarının tutulması, yetkili kurumların talepleri ve bu metindeki başvuruların yanıtlanması. Hukuki sebep: hukuki yükümlülüğümüzün yerine getirilmesi (m. 5/2-ç).
 - **Hakların korunması:** olası bir uyuşmazlıkta. Hukuki sebep: bir hakkın tesisi, kullanılması veya korunması (m. 5/2-e).
 
 ## 4. Toplama yöntemi
 
-Kişisel verileri elektronik ortamda; Etsy'den (sipariş bilgileri ve Etsy mesajları), Etsy'nin dükkânımızın e-posta kutusuna gönderdiği satış e-postalarından, başlangıç formundan ve düzenleme panelinden, düğün sitelerindeki yanıt formundan, e-posta yazışmalarından ve canlı yardım sohbetinden, tamamen veya kısmen otomatik yollarla topluyoruz.
+Kişisel verileri elektronik ortamda; Etsy'den (sipariş bilgileri ve Etsy mesajları), Etsy'nin dükkânımızın e-posta kutusuna gönderdiği satış e-postalarından, başlangıç formundan ve düzenleme panelinden, düğün sitelerindeki yanıt formundan, e-posta yazışmalarından ve canlı destek sohbetinden, tamamen veya kısmen otomatik yollarla topluyoruz.
 
 ## 5. Aktarım ve yurt dışına aktarım
 
 Kişisel verileri satmıyoruz. Hizmeti sunmak için aşağıdaki sağlayıcıları onların standart hizmet koşullarıyla kullanıyoruz. Sunucuları Türkiye dışında olduğundan bu kullanım, KVKK m. 9 kapsamında yurt dışına aktarımdır:
 
 - **Vercel Inc. (ABD):** sitelerin, düzenleyicinin ve satış sitesinin barındırılması; içerik, fotoğraf, müzik ve yanıtların saklandığı özel depolama alanı; teknik kayıtlar.
-- **Google LLC (ABD):** dükkânımızın Gmail hesabı (düzenleme ve giriş bağlantısı e-postalarının gönderilmesi, Etsy satış e-postalarının alınması ve siparişi doğrulamak için okunması); canlı yardım sohbetinin yapay zekâ asistanı Gemini; Google Sheets (çift bağlarsa yanıtlar çiftin kendi Google Drive'ındaki tabloya yazılır); düğün sitelerindeki yazı tipleri (Google Fonts) ve bir davetli “Haritayı göster”e dokunursa Google Haritalar.
+- **Google LLC (ABD):** dükkânımızın Gmail hesabı (düzenleme ve giriş bağlantısı e-postalarının gönderilmesi, Etsy satış e-postalarının alınması ve siparişi doğrulamak için okunması); canlı destek sohbetinin yapay zekâ asistanı Gemini; Google Sheets (çift bağlarsa yanıtlar çiftin kendi Google Drive'ındaki tabloya yazılır); düğün sitelerindeki yazı tipleri (Google Fonts) ve bir davetli “Haritayı göster”e dokunursa Google Haritalar.
 - **translated.net (MyMemory çeviri hizmeti, İtalya):** düzenleyicide “Otomatik çevir” kullandığınızda tarayıcınızın kendi çevirmeni yoksa, çevrilecek metinler tarayıcınızdan doğrudan bu hizmete gönderilir.
 - **Etsy:** satın alma, ödeme ve Etsy mesajları Etsy üzerinden yürür; Etsy bu veriler için kendi gizlilik politikasına göre ayrıca veri sorumlusudur. Siparişi doğrulamak için sipariş numarasını Etsy'de sorgulayabiliriz.
 
@@ -146,7 +146,7 @@ Kanunen yetkili kamu kurum ve kuruluşlarına, yalnızca talep hâlinde ve mevzu
 - **Cihaz kayıtları ve Google Sheets bağlantısı:** siteyle birlikte; cihazın oturumunu kapattığınızda ya da bağlantıyı kestiğinizde daha önce silinir.
 - **Sipariş kayıtları (Etsy siparişi ve satış e-postaları):** satış kaydı olarak, Etsy kuralları ve vergi mevzuatının gerektirdiği süre boyunca.
 - **Destek yazışmaları:** Etsy mesajları Etsy'de, e-postalar dükkânımızın e-posta kutusunda kalır; silinmelerini ${f.mail} adresinden isteyebilirsiniz.
-- **Canlı yardım sohbeti:** biz saklamayız; tarayıcınız konuşmayı yalnızca sekmeyi kapatana kadar tutar.
+- **Canlı destek sohbeti:** biz saklamayız; tarayıcınız konuşmayı yalnızca sekmeyi kapatana kadar tutar.
 - **Teknik kayıtlar:** barındırma sağlayıcısının kendi saklama sürelerine göre.
 
 ## 7. KVKK m. 11 kapsamındaki haklarınız

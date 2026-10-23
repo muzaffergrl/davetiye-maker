@@ -6,7 +6,7 @@
 // (sending + reading Etsy's order emails, owner decision 2), one website per design bought, the controller sentence.
 import { MARKETING } from '../../../lib/marketing/config.ts';
 import type { Market } from '../../../lib/marketing/i18n.ts';
-import { controllerIdentity, controllerKnown } from '../../../lib/marketing/legal.ts';
+import { controllerIdentity, controllerKnown, ONLINE_CAP_MONTHS, shopHandle } from '../../../lib/marketing/legal.ts';
 import { breadcrumbs, graph, webPage } from '../../../lib/marketing/schema.ts';
 import { pageMetadata } from '../../../lib/marketing/seo.ts';
 import { corePage } from '../../../lib/marketing/site.ts';
@@ -46,7 +46,8 @@ export function PrivacyPage({ m }: { m: Market }) {
             <p>
               {t('{brand} sells wedding website designs on Etsy as {shop}. For anything about your data, write to {email}.', {
                 brand: b,
-                shop: cfg.etsy.shopName,
+                // the Etsy shop's own name (as on Terms and the KVKK notice), from its real URL; else the configured name
+                shop: shopHandle(cfg) ?? cfg.etsy.shopName,
                 email,
               })}{' '}
               {controllerKnown(cfg)
@@ -117,10 +118,16 @@ export function PrivacyPage({ m }: { m: Market }) {
 
             <h2 id="how-long">{t('How long we keep it')}</h2>
             <p>
-              {t(
-                'A website stays online until {months} months after the wedding date. {retention} When a couple takes their website offline, its photos are no longer shown to anyone.',
-                { months: cfg.hosting.monthsAfterWedding, retention: t(cfg.policies.retention) },
-              )}
+              {/* the same limits as Terms and the KVKK notice (lib/marketing/legal.ts ONLINE_CAP_MONTHS) */}
+              {ONLINE_CAP_MONTHS
+                ? t(
+                    'A website stays online until {months} months after the wedding date, and at most {cap} months after it is first published. {retention} When a couple takes their website offline, its photos are no longer shown to anyone.',
+                    { months: cfg.hosting.monthsAfterWedding, cap: ONLINE_CAP_MONTHS, retention: t(cfg.policies.retention) },
+                  )
+                : t(
+                    'A website stays online until {months} months after the wedding date. {retention} When a couple takes their website offline, its photos are no longer shown to anyone.',
+                    { months: cfg.hosting.monthsAfterWedding, retention: t(cfg.policies.retention) },
+                  )}
             </p>
 
             <h2 id="legal-basis">{t('Legal basis')}</h2>
