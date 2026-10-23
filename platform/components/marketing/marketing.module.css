@@ -3207,13 +3207,24 @@
   font-weight: 500;
   color: var(--muted);
 }
-/* G141: a gallery of nine designs or more is four across on wide screens (20 = 4 × 5; beats the G085 spans) */
+/* G141: a gallery of nine designs or more is four across on wide screens (20 = 4 × 5; beats the G085 spans).
+   2026-10-23 (33 cards = 20 on sale + 13 "Coming soon"): eight tracks, each card spans two, so an unfinished last row
+   sits centered (33 = 8 × 4 + 1 left a lone card at the left edge); the cards keep the four-across width. */
 @media (min-width: 1200px) {
   .gallery .cardGrid:has(> :nth-child(9)) {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(8, minmax(0, 1fr));
   }
   .gallery .cardGrid:has(> :nth-child(9)) > :nth-child(n):nth-last-child(n) {
-    grid-column: auto;
+    grid-column: span 2;
+  }
+  .gallery .cardGrid:has(> :nth-child(9)) > :nth-child(4n + 1):nth-last-child(3) {
+    grid-column: 2 / span 2;
+  }
+  .gallery .cardGrid:has(> :nth-child(9)) > :nth-child(4n + 1):nth-last-child(2) {
+    grid-column: 3 / span 2;
+  }
+  .gallery .cardGrid:has(> :nth-child(9)) > :nth-child(4n + 1):last-child {
+    grid-column: 4 / span 2;
   }
 }
 
