@@ -186,3 +186,41 @@ Küçük makinede 10 ayrı `next dev` çalışmaz (15 GB / 4 çekirdek). Her otu
 - Renk varyantları (palet) yeni parçalardan yeniden üretilmedi; `theme.json`'dan `variants` kaldırıldı.
 - Gerçek telefon testi yok (yalnız headless Chromium 390×844 / 360×740).
 - Yazı tipi yedekleri ve baskı (print) çıktıları yalnız otomatik testle denetlendi; basılı deneme yok.
+
+## 8. Main'e birleştirme (2026-10-23)
+
+**2026-10-23: owner declared this version valid; merged to main.** Kullanıcı (sahip) bu dalı (`claude/modest-brown-pwe1sm`,
+G422–G432) geçerli sürüm ilan etti; `claude/adoring-gates-10grne` üzerinden main'e birleştirildi. 22–32 satış durumu main'deki gibi
+**`preview`** kaldı (satışa açılmadı; ilk satış dalgası yalnız 01–20).
+
+Birleştirmede main'in 22–32 için yaptıkları ve karşılığı:
+- `0f437b58e` (eski temalara açılış kelimesi box/curtain/wallet/origami/door/parcel/chart/panel/pouch/box, "Close the …"
+  düğmeleri, "Replay the opening", font eşitleme): o kelimeler eski açılışların nesneleriydi. Yeni 11 temanın hepsi kendi
+  **zarfıyla** açılır (K23 sıkı; 25'inki deri bilet kılıfı, 26'nınki katlanmış washi paketi — yine zarf türü), bu yüzden katalog,
+  panel sekmesi (**Envelope**), START HERE ve Etsy metni "envelope" der; temanın kendi açma düğmesi "Open the envelope" /
+  "Open the ticket sleeve" / "Open the invitation". Açılış sırasında düğme yok (§3), "Close the …" anahtarı yeni temalarda yok.
+- `designs.ts`: 22–32 kopyası artık tek kaynak — `DESIGN_COPY` girdileri yeni temalara göre (stil, açılış, sayfalar, palet,
+  fontlar, llmsLine, yeni meta açıklamalar); `PREVIEW_DESIGN_COPY`/`REBUILT`/`UNIQUE_INTERIORS` üzerine yazmaları kaldırıldı
+  (`PREVIEW_DESIGNS` kümesi). Böylece `tools/build_customer_guides.py` ve `tools/etsy_upload.py`'nin kaynaktan okuduğu
+  açılış/font/palet, sitenin gösterdiğiyle aynı (`tests/g175-openings.test.ts`). Çeviriler: noktasız stil anahtarları ve 11 meta
+  açıklama × tr/de/es/fr.
+- `tests/unique-openings.test.ts` yeni 11 tema için yeniden yazıldı (üretim ayrıştırıcısı, açılış nesnesi katalog = panel =
+  tema düğmesi, replay linkleri, eski envelope-v3 dosyalarının yokluğu, her zarfın kendi kapanışı); eski özet fikstürü
+  `tests/fixtures/unique-opening-protected.json` silindi (koruduğu dosyalar yok).
+- 28 Maison Pâtisserie demo harita pini Savannah → Newport, RI (`lib/claim/demo-map.ts`; demo kaydı Newport).
+- `listing_v3.md` §1 başlık, §2 açıklama, §3 etiketler ve `etsy_upload.json` (22–32) yeni temaya göre;
+  `package/customer/START_HERE.{md,pdf}` + QR sayfası `tools/build_customer_guides.py --designs 22-32` ile yeniden üretildi
+  (metin: "tap the envelope", önizleme sekmesi **Envelope**; `--check` 11/11 OK).
+
+### 8a. Hâlâ ESKİ tasarımı gösteren ilan medyası (yeniden render bekliyor)
+
+Her biri 22–32'nin 11 koleksiyonunda, `collections/<NN>_*/` altında:
+- `package/listing/images_v4/01_cover.jpg … 19_share.jpg` (19 görsel): eski temanın ekranları, açılış kareleri ve PAKET 7
+  sahneleriyle üretildi; hepsi yeniden üretilmeli (`tools/listing_v4`).
+- `package/listing/video_v4_4x5.mp4`: eski açılışın kaydı.
+- `listing_v3.md` §0'daki açılış/sayfa satırları ve §5 alt metinleri: eski görselleri anlatır (görseller yenilenince yazılır).
+- `assets/gpt/mockups/p7_01 … p7_11*.png` (PAKET 7 ilan sahneleri, main): eski tasarım için yazıldı; bazı sahnelerde eski nesne
+  aksesuar olarak geçer (ör. 23 §7.3 "closed aubergine velvet jewel box"). Yeniden render'da gözden geçirilmeli.
+- Etsy taslakları (docs/20 §7.13): yukarıdaki görsel/video ve eski START HERE PDF'i taşır; yeni metin + yeni medya ile
+  güncellenmeli.
+- Renk paletleri (`variants`) yeni parçalardan üretilmediği için `etsy_upload.json`'da 22–32'nin palet varyasyonu yok.
