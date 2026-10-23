@@ -1,5 +1,8 @@
 # Yerel oturum talimatı: K49 fiyatları + hizmet taslakları (2026-10-22)
 
+> **2026-10-23:** Bu belgedeki işler yapıldı (docs/20 §7.12). Sıradaki Etsy adımları (PDF yenileme, alıcı mesajı, yalnız 01–20 yayını,
+> K55) → `docs/38_YEREL_ETSY_ILK_DALGA.md`. Aşağıdaki blok tarihsel kayıttır; yeniden yapıştırma.
+
 Bulut oturumu etsy.com'a ulaşamıyor (proxy 403). Bu işi kullanıcının bilgisayarındaki Claude (Claude in Chrome, docs/30 ile
 aynı oturum) yapar. Aşağıdaki bloğu **olduğu gibi** yerel oturuma yapıştır. Fiyat kararı: K49 (docs/01), gerekçe docs/35 §8b.
 

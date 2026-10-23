@@ -1,5 +1,9 @@
 # Yerel oturum için lansman talimatı (2026-10-20)
 
+> **2026-10-23:** Bu belgenin Etsy adımları (4) ve fiyatı (1.460 TL, "21 tasarım") eskidi. Etsy ilk dalgası (yalnız 01–20, K55, fiyat
+> 1.190 TL K49) → `docs/38_YEREL_ETSY_ILK_DALGA.md`; e-posta + Gmail sipariş doğrulaması + Google Sheets → `docs/37_YEREL_GOOGLE_EPOSTA_KURULUM.md`.
+> Aşağıdaki blok tarihsel kayıttır; yeniden yapıştırma.
+
 Aşağıdaki bloğu **olduğu gibi** yerel Claude Code / Codex oturumuna yapıştır. Bulut oturumunun erişemediği üç şeyi o yapar:
 bkestudio.com'u sunan Vercel projesi, tarayıcıda Etsy ve gerçek yayın. Satışın açılması için sitenin `launched: true`
 olması **şart değil**: alıcı Etsy'den alır, PDF'teki link `bkestudio.com/start`'a gider. `launched` yalnız satış sitesinin
