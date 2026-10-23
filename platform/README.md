@@ -306,6 +306,26 @@ node --env-file=.env.local scripts/blob-smoke.mjs                               
   makineden art arda çok koşturmak 429 verebilir.
 - `blob-smoke`: yukarıdaki gerçek-depo doğrulamaları; yalnız `smoke-<zaman>-*` / `SMOKE<zaman>` yollarına yazar ve siler.
 - Çıkış kodu 0 = hepsi geçti. Windows'ta çalışır (Node 22, `.env.local`).
+
+### Yedek (`scripts/blob-backup.mjs`, G955)
+
+Production Blob deposunun salt-okunur yedeği (docs/10 §2c "Yedek": kim, ne sıklıkla). Depoya **yazmaz, silmez** (yalnız `list` + `get`).
+
+```bash
+vercel env pull --environment=production .env.production.local      # production deposunun BLOB_READ_WRITE_TOKEN'ı
+node --env-file=.env.production.local scripts/blob-backup.mjs --dry-run                       # yalnız sayı/boyut (önek başına)
+node --env-file=.env.production.local scripts/blob-backup.mjs --out ~/bke-backups/blob-2026-10-23
+```
+
+- Çıktı: `<out>/files/<blob yolu>` (baytlar olduğu gibi), `<out>/progress.jsonl` (kopyalanan her dosya; sürdürmek için),
+  `<out>/manifest.json` (sonda: `complete`, sayı, bayt, önek sayıları, her dosyanın boyutu + SHA-256 + yükleme zamanı, `failed`).
+- Sürdürülebilir: aynı `--out` ile yeniden çalıştırınca boyutu ve yükleme zamanı aynı olan dosyalar yeniden indirilmez; dosyalar
+  `.part` olarak yazılıp tamamlanınca adlandırılır. `--verify` eldeki dosyaları yeniden özetler (bozulan yeniden iner).
+- Seçenekler: `--prefix rsvps/` (yalnız bir bölüm), `--concurrency 4` (en çok 16). Çıkış kodu 0 = hepsi kopyalandı, 1 = bazıları
+  kalmadı (aynı komutu tekrarlayın), 2 = kullanım hatası (token yok, `--out` yok ya da repo içinde).
+- `--out` repo dışında olmalı (betik repo içini reddeder): yedek alıcı e-postaları ve misafir yanıtları içerir; asla commit edilmez.
+  Token hiçbir çıktıya yazılmaz. Geri yükleme betiği yok (henüz yazılmadı): gerekirse dosyalar aynı yollarla depoya geri konur.
+- Test: `node --test tests/g955-blob-backup.test.ts` (sahte depo: `tests/fake-blob.ts`; yalnız `list`/`get` geçirilir).
 - Windows notları (G077): `npm test`'teki `tools/validate_content.py` karşılaştırması (g055-limits, `astral-name-40`) Python UTF-8 kipi
   kapalıyken kalıyor → `PYTHONUTF8=1` ile koşturun. Eski bir yerel `.next/` (silinmiş bir rotanın `.next/types/validator.ts`'i) `npm run
   typecheck`'i kırar → `.next`'i silip typecheck/build. Tohumlama: `DATA_ADAPTER=blob PLATFORM_DATA_DIR=<yerel geçici klasör> node
