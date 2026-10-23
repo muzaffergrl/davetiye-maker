@@ -1352,7 +1352,7 @@
     "assets": "brand/assets/gpt/final/",
     "domain": "bkestudio.com",
     "domain_note": "primary since 0dedaed2 (2026-10-19); the earlier IDN xn--bkestudo-zkb.com (bkestudıo.com) answers 308 → bkestudio.com (checked from the cloud session 2026-10-20). Vercel DNS for bkestudio.com reads configured (get_domain_config), but the page itself could not be opened from the cloud session (network policy).",
-    "support_email": "bkestudio@gmail.com (K33); response time 24 hours (K37)",
+    "support_email": "bkestudio01@gmail.com (K33, corrected 2026-10-23 per 519d39f8); response time 24 hours (K37)",
     "etsy_shop_name": "STUDIOBKE (K35; Etsy's real shop name, brand in copy stays BKE Studio)",
     "etsy_shop": {
       "url": "https://studiobke.etsy.com",
