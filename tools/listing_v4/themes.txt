@@ -40,3 +40,4 @@
 46 bordeaux-silk-bow
 47 monochrome-darkroom
 48 navy-ivory-crest
+49 ivory-pearl-atelier

@@ -187,5 +187,14 @@
   "primary": "#B8964F",
   "bg": "ivory_cotton.png",
   "script": "Mr De Haviland"
+ },
+ "49": {
+  "name": "Ivory Pearl Atelier",
+  "ink": "#55432E",
+  "deep": "#8A683C",
+  "ivory": "#F4EFE6",
+  "primary": "#D4C1A1",
+  "bg": "../../../../../platform/themes/ivory-pearl-atelier/img/bg-1024.webp",
+  "script": "Pinyon Script"
  }
 }
