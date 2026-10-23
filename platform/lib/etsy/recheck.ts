@@ -9,9 +9,10 @@
 // shop's "Siparişi onayla" does that. Provisional sites (trust mode) are checked by lib/claim/trust.ts.
 
 import { getClaimRateLimiter } from '../claim/limits.ts';
-import type { OrderCheck, OrderVerifier } from '../claim/verify.ts';
+import { checkCoversSlot, orderCoverage, type OrderCheck, type OrderVerifier } from '../claim/verify.ts';
 import { StaleSiteError, type DataAdapter, type SiteRecord } from '../data/types.ts';
 import { orderPending } from '../sites.ts';
+import { isPrivateTheme, loadTheme } from '../theme/theme.ts';
 import { etsySetup, verificationMode } from './config.ts';
 import { connectedShop } from './shop.ts';
 import { EtsyOrderVerifier } from './verify.ts';
@@ -29,15 +30,48 @@ export interface RecheckResult {
   reason?: string;
 }
 
-/** orderCheck := verified by Etsy (idempotent; retried on a concurrent write). */
-export async function markVerifiedByEtsy(adapter: DataAdapter, siteId: string, now: Date = new Date()): Promise<SiteRecord> {
+/**
+ * orderCheck := verified by Etsy (idempotent; retried on a concurrent write). `units` (G951): the receipt's websites, kept
+ * so the admin knows this website is one the order pays for.
+ */
+export async function markVerifiedByEtsy(adapter: DataAdapter, siteId: string, now: Date = new Date(), opts: { units?: number | null } = {}): Promise<SiteRecord> {
   for (let attempt = 1; ; attempt++) {
     const site = await adapter.getSiteById(siteId);
     if (!site) throw new Error(`site ${siteId} not found`);
     if (site.orderCheck?.status === 'verified') return site;
-    const orderCheck = { status: 'verified' as const, at: now.toISOString(), by: 'etsy' as const, note: 'Etsy receipt paid (automatic check)' };
+    const orderCheck = {
+      status: 'verified' as const,
+      at: now.toISOString(),
+      by: 'etsy' as const,
+      note: 'Etsy receipt paid (automatic check)',
+      ...(typeof opts.units === 'number' ? { units: opts.units } : {}),
+    };
     try {
       return await adapter.patchSite(siteId, { orderCheck }, { expectedUpdatedAt: site.updatedAt });
+    } catch (e) {
+      if (!(e instanceof StaleSiteError) || attempt >= 5) throw e;
+    }
+  }
+}
+
+/** G951: is this a private custom design (G151)? Its order's custom-design line counts as its website. */
+export async function themeIsPrivate(themeId: string): Promise<boolean> {
+  try {
+    const t = await loadTheme(themeId);
+    return Boolean(t && isPrivateTheme(t.manifest));
+  } catch {
+    return false;
+  }
+}
+
+/** G951: orderCheck.noDesign := true (once; nothing else changes; retried on a concurrent write). */
+export async function markNoDesign(adapter: DataAdapter, siteId: string): Promise<void> {
+  for (let attempt = 1; ; attempt++) {
+    const site = await adapter.getSiteById(siteId);
+    if (!site?.orderCheck || site.orderCheck.noDesign || site.orderCheck.status === 'verified') return;
+    try {
+      await adapter.patchSite(siteId, { orderCheck: { ...site.orderCheck, noDesign: true } }, { expectedUpdatedAt: site.updatedAt });
+      return;
     } catch (e) {
       if (!(e instanceof StaleSiteError) || attempt >= 5) throw e;
     }
@@ -51,8 +85,15 @@ export async function recheckSite(adapter: DataAdapter, site: SiteRecord, opts: 
   const verifier = opts.verifier ?? new EtsyOrderVerifier({ adapter });
   const check = await verifier.check({ orderNumber: site.orderRef, email: site.ownerEmail ?? '', theme: site.theme });
   if (check.result === 'verified') {
-    await markVerifiedByEtsy(adapter, site.id, opts.now);
-    return { ...base, result: 'verified' };
+    // G951: only when the order pays for THIS website (not services only; a further website within the receipt's units)
+    const priv = await themeIsPrivate(site.theme);
+    if (checkCoversSlot(check, site.orderSlot ?? 1, priv)) {
+      const c = orderCoverage(check, priv);
+      await markVerifiedByEtsy(adapter, site.id, opts.now, { units: c.receipt ? c.units : null });
+      return { ...base, result: 'verified' };
+    }
+    if (orderCoverage(check, priv).noDesign) await markNoDesign(adapter, site.id);
+    return { ...base, result: 'pending', reason: orderCoverage(check, priv).noDesign ? 'no_design' : 'more_sites_than_units' };
   }
   return { ...base, result: check.result, ...(check.result === 'rejected' ? { reason: check.reason } : {}) };
 }

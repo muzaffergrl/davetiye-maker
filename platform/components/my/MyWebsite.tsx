@@ -216,7 +216,7 @@ function ContinueForm({ theme, designs, emailLinkEnabled }: { theme: MyDesign | 
   const [message, setMessage] = useState<Message>(null);
   const [busy, setBusy] = useState<'continue' | 'signin' | null>(null);
   const [pick, setPick] = useState(false);
-  const [choices, setChoices] = useState<Array<{ slug: string; names: string }> | null>(null);
+  const [choices, setChoices] = useState<Array<{ slug: string; names: string; design: string }> | null>(null);
   const [design, setDesign] = useState(designs[0]?.id ?? '');
   const honeypot = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLDivElement>(null);
@@ -308,7 +308,7 @@ function ContinueForm({ theme, designs, emailLinkEnabled }: { theme: MyDesign | 
       setChoices(
         (body.sites as Array<Record<string, unknown>>)
           .filter((x) => typeof x?.slug === 'string')
-          .map((x) => ({ slug: String(x.slug), names: typeof x.names === 'string' ? x.names : '' })),
+          .map((x) => ({ slug: String(x.slug), names: typeof x.names === 'string' ? x.names : '', design: typeof x.design === 'string' ? x.design : '' })),
       );
       return;
     }
@@ -442,8 +442,9 @@ function ContinueForm({ theme, designs, emailLinkEnabled }: { theme: MyDesign | 
             <div key={c.slug} className={s.editor}>
               <div>
                 <p className={s.names}>{c.names || c.slug}</p>
-                <p className={s.small} style={{ marginTop: 0 }}>
-                  /{c.slug}
+                {/* G951: two websites of one couple (two designs in one order) are told apart by their design */}
+                <p className={s.small} style={{ marginTop: 0, overflowWrap: 'anywhere' }}>
+                  {c.design ? `${c.design} · ` : ''}/{c.slug}
                 </p>
               </div>
               <div className={s.editorActions}>

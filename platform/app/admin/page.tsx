@@ -23,6 +23,7 @@ export const metadata: Metadata = {
 
 const TODO_LABEL: Record<AdminTodo['kind'], string> = {
   confirm: 'Onayla',
+  order_sites: 'Kontrol et',
   shop_edit: 'Kapat',
   not_published: 'Hatırlat',
   closing: 'Kapanıyor',

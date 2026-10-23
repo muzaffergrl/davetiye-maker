@@ -2,10 +2,15 @@
 // site with orderCheck "provisional" (lib/claim/verify.ts TrustOrderVerifier) and it can be published at once. Its order
 // is checked afterwards, here:
 //
-//   sweepProvisionalOrders — every provisional site with an order number, oldest first (RECHECK_BATCH per run):
+//   sweepProvisionalOrders — the provisional sites with an order number, RECHECK_BATCH per run, in sweepOrder()'s order
+//     (G953: new sites first, then the ones not reported yet, then a rotating share of those the shop was already told
+//     about — so a pile of 100 unresolved old orders never starves the new ones; no write is needed to keep the order):
 //     Etsy (app settings + shop connected) and/or the shop's mailbox (G192, lib/mailbox: Etsy's signed sale / cancellation
 //     emails over IMAP) can be asked — or a verifier given by a test:
-//       verified                                          -> orderCheck verified by "etsy" (nothing else changes)
+//       verified                                          -> orderCheck verified by "etsy" (nothing else changes) — G951:
+//                                                            only when the order pays for THIS website (lib/claim/verify.ts
+//                                                            checkCoversSlot): services only -> flagged noDesign, waits;
+//                                                            a further website beyond the receipt's units -> waits (To-do)
 //       rejected (not ours / cancelled / refunded / other
 //                 email / other design)                   -> HELD: orderCheck pending + offline (lib/sites.ts holdOrder),
 //                                                            shop notice "held"
@@ -29,7 +34,7 @@ import { getDataAdapter } from '../data/index.ts';
 import type { DataAdapter, SiteRecord } from '../data/types.ts';
 import { StaleSiteError } from '../data/types.ts';
 import { etsySetup, verificationMode } from '../etsy/config.ts';
-import { markVerifiedByEtsy, RECHECK_BATCH } from '../etsy/recheck.ts';
+import { markNoDesign, markVerifiedByEtsy, RECHECK_BATCH, themeIsPrivate } from '../etsy/recheck.ts';
 import { connectedShop } from '../etsy/shop.ts';
 import { EtsyOrderVerifier } from '../etsy/verify.ts';
 import { mailboxSetup } from '../mailbox/config.ts';
@@ -37,7 +42,7 @@ import { MailOrderVerifier } from '../mailbox/verify.ts';
 import { getShopNotifier, type ShopNotifier } from '../mail/index.ts';
 import { fail, json, requestOrigin } from '../panel/http.ts';
 import { holdOrder, orderProvisional, TRUST_WINDOW_MS, trustExpired } from '../sites.ts';
-import { ChainOrderVerifier, type OrderCheckReason, type OrderVerifier } from './verify.ts';
+import { ChainOrderVerifier, checkCoversSlot, orderCoverage, type OrderCheckReason, type OrderVerifier } from './verify.ts';
 
 export { TRUST_WINDOW_MS, trustExpired } from '../sites.ts';
 
@@ -106,6 +111,33 @@ async function autoVerifier(adapter: DataAdapter): Promise<ChainOrderVerifier | 
   return sources.length ? new ChainOrderVerifier(sources) : null;
 }
 
+/** A site claimed this recently is "new": it goes first in the sweep (two hourly runs). */
+export const SWEEP_NEW_MS = 2 * 60 * 60_000;
+
+/**
+ * G953: which provisional sites one run checks, in order (pure). Before, the oldest RECHECK_BATCH went first every run, so
+ * once 100 unresolved orders had piled up (the shop already told about each) a new site was never checked again. Now:
+ *   1. new sites (claimed within SWEEP_NEW_MS), newest first — never checked yet, the buyer may be waiting on them;
+ *   2. the others not reported to the shop yet (no reviewAt), oldest first — they still need their check / 48 h notice;
+ *   3. the ones the shop was already told about (reviewAt), in a window that moves by the run's free places every hour
+ *      (hour index × places, modulo their number): each of them is checked again in turn, none blocks the rest.
+ * No "last checked" stamp is stored: a write per site and run would move the site's version under the buyer's open panel.
+ */
+export function sweepOrder(sites: readonly SiteRecord[], now: Date, batch: number = RECHECK_BATCH): SiteRecord[] {
+  const t = now.getTime();
+  const at = (s: SiteRecord) => Date.parse(s.orderCheck?.at ?? s.createdAt) || 0;
+  const fresh = sites.filter((s) => !s.orderCheck?.reviewAt && t - at(s) < SWEEP_NEW_MS).sort((a, b) => at(b) - at(a) || a.id.localeCompare(b.id));
+  const open = sites.filter((s) => !s.orderCheck?.reviewAt && t - at(s) >= SWEEP_NEW_MS).sort((a, b) => at(a) - at(b) || a.id.localeCompare(b.id));
+  const told = sites
+    .filter((s) => s.orderCheck?.reviewAt)
+    .sort((a, b) => (a.orderCheck!.reviewAt ?? '').localeCompare(b.orderCheck!.reviewAt ?? '') || a.id.localeCompare(b.id));
+  const head = [...fresh, ...open].slice(0, batch);
+  const places = Math.min(batch - head.length, told.length);
+  if (places <= 0) return head;
+  const start = (Math.floor(t / 3_600_000) * places) % told.length;
+  return [...head, ...Array.from({ length: places }, (_, i) => told[(start + i) % told.length])];
+}
+
 /** One run over the provisional sites (see the top of this file). Never throws for one site: it is left for the next run. */
 export async function sweepProvisionalOrders(adapter: DataAdapter, opts: SweepOptions = {}): Promise<TrustSweepSummary> {
   const now = opts.now ?? new Date();
@@ -114,8 +146,9 @@ export async function sweepProvisionalOrders(adapter: DataAdapter, opts: SweepOp
   const verifier = opts.verifier === undefined ? own : opts.verifier;
   const notifier = opts.notifier ?? getShopNotifier();
   const origin = (opts.origin ?? process.env.PLATFORM_PUBLIC_URL ?? '').replace(/\/+$/, '');
-  const all = (await adapter.listSites()).filter((s) => orderProvisional(s) && s.orderRef).reverse();
-  const summary: TrustSweepSummary = { etsy: verifier !== null, checked: 0, verified: 0, held: 0, review: 0, waiting: 0, remaining: Math.max(0, all.length - RECHECK_BATCH), results: [] };
+  const all = (await adapter.listSites()).filter((s) => orderProvisional(s) && s.orderRef);
+  const batch = sweepOrder(all, now);
+  const summary: TrustSweepSummary = { etsy: verifier !== null, checked: 0, verified: 0, held: 0, review: 0, waiting: 0, remaining: Math.max(0, all.length - batch.length), results: [] };
 
   const notify = async (site: SiteRecord, kind: 'held' | 'review', reason?: HoldReason) => {
     if (!notifier.enabled) return;
@@ -132,21 +165,32 @@ export async function sweepProvisionalOrders(adapter: DataAdapter, opts: SweepOp
     }
   };
 
-  for (const site of all.slice(0, RECHECK_BATCH)) {
+  for (const site of batch) {
     const base = { siteId: site.id, slug: site.slug, orderRef: site.orderRef };
     const expired = trustExpired(site, now.getTime(), windowMs);
     let result: TrustSweepResult;
     try {
       let hold: HoldReason | null = null;
       let verified = false;
+      let units: number | null = null;
       if (verifier) {
         const check = await verifier.check({ orderNumber: site.orderRef!, email: site.ownerEmail ?? '', theme: site.theme });
-        if (check.result === 'verified') verified = true;
-        else if (check.result === 'rejected') hold = check.reason;
+        if (check.result === 'verified') {
+          // G951: verified only when the order pays for THIS website: not services only; a further website of the order
+          // (orderSlot >= 2) only within the Etsy receipt's units. Otherwise it stays provisional for the shop (To-do).
+          const priv = await themeIsPrivate(site.theme);
+          const cover = orderCoverage(check, priv);
+          if (checkCoversSlot(check, site.orderSlot ?? 1, priv)) {
+            verified = true;
+            units = cover.receipt ? cover.units : null;
+          } else if (cover.noDesign) {
+            await markNoDesign(adapter, site.id);
+          }
+        } else if (check.result === 'rejected') hold = check.reason;
         else if (check.result === 'pending' && check.unpaid && expired) hold = 'not_paid_in_time';
       }
       if (verified) {
-        await markVerifiedByEtsy(adapter, site.id, now);
+        await markVerifiedByEtsy(adapter, site.id, now, { units });
         result = { ...base, result: 'verified' };
       } else if (hold) {
         await holdOrder(adapter, site.id, { by: 'etsy', note: `Etsy: ${HOLD_REASON_TEXT[hold]}` }, now);

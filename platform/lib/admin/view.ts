@@ -39,6 +39,15 @@ export interface AdminSiteSummary {
   needsAction: boolean;
   /** Trust mode: provisional (publishable) and the trust window ran out without a verified order — the shop should look. */
   orderReview?: boolean;
+  /** G951: the order's lines (Etsy receipt / sale email) show no design for this website — services only. The shop looks. */
+  orderNoDesign?: boolean;
+  /** G951: which website of its Etsy order this is (1 = the first; 2, 3 … for further designs of a multi-design order). */
+  orderSlot?: number;
+  /**
+   * G951: a further website of the order (orderSlot >= 2) that neither the Etsy receipt's units nor the shop confirmed yet:
+   * "Order #… now has N websites; check the Etsy order has N designs" (at once, not after 48 h).
+   */
+  orderExtraUnconfirmed?: boolean;
   /** The shop's private note (never shown to the buyer). */
   note: string | null;
   noteAt: string | null;
@@ -146,7 +155,7 @@ export function isSale(s: AdminSiteSummary): boolean {
 }
 
 export interface AdminTodo {
-  kind: 'confirm' | 'shop_edit' | 'not_published' | 'closing' | 'unpublished_changes' | 'retention';
+  kind: 'confirm' | 'order_sites' | 'shop_edit' | 'not_published' | 'closing' | 'unpublished_changes' | 'retention';
   site: AdminSiteSummary;
   /** Turkish one-liner for the shop. */
   text: string;
@@ -164,6 +173,11 @@ export interface AdminDashboard {
   /** Weddings in the next 60 days (published or not), soonest first. */
   upcoming: AdminSiteSummary[];
   customers: number;
+}
+
+/** G951: the To-do of an Etsy order with several websites (Turkish, the shop's words). */
+export function orderSitesText(orderRef: string, sites: number): string {
+  return `Sipariş #${orderRef} artık ${sites} siteye sahip — Etsy siparişinde ${sites} tasarım olduğunu kontrol edin`;
 }
 
 /** Started but not published after this many days: a gentle reminder may help (template start_link_reminder / how_to_publish). */
@@ -228,12 +242,24 @@ export function adminDashboard(list: readonly AdminSiteSummary[], now: Date = ne
   }
 
   const todos: AdminTodo[] = [];
+  // G951: an Etsy order with several websites, one of them not confirmed by the receipt or the shop: one To-do per order
+  const extraOrders = new Set<string>();
   for (const s of list) {
-    if (s.needsAction) {
+    if (!s.orderExtraUnconfirmed || !s.orderRef || extraOrders.has(s.orderRef) || s.state === 'archived') continue;
+    extraOrders.add(s.orderRef);
+    const n = list.filter((x) => x.orderRef === s.orderRef).length;
+    todos.push({ kind: 'order_sites', site: s, text: orderSitesText(s.orderRef, n) });
+  }
+  for (const s of list) {
+    if (s.needsAction && !(s.orderExtraUnconfirmed && !s.orderNoDesign && s.order !== 'pending')) {
       todos.push({
         kind: 'confirm',
         site: s,
-        text: s.order === 'provisional' ? `Sipariş #${s.orderRef ?? '—'} 48 saatte doğrulanamadı — Etsy'de bakın (site yayınlanabilir)` : `Sipariş #${s.orderRef ?? '—'} onay bekliyor`,
+        text: s.orderNoDesign
+          ? `Sipariş #${s.orderRef ?? '—'}: siparişte tasarım görünmüyor (yalnız hizmet) — Etsy'de bakın${s.order === 'provisional' ? ' (site yayınlanabilir)' : ''}`
+          : s.order === 'provisional'
+            ? `Sipariş #${s.orderRef ?? '—'} 48 saatte doğrulanamadı — Etsy'de bakın (site yayınlanabilir)`
+            : `Sipariş #${s.orderRef ?? '—'} onay bekliyor`,
       });
     }
   }
@@ -393,7 +419,9 @@ export function ordersCsv(list: readonly AdminSiteSummary[], origin: string): st
  * waiting"; a live site closing within 30 days → "closing soon"; otherwise "how to publish".
  */
 export function defaultTemplateId(s: Pick<AdminSiteSummary, 'needsAction' | 'state' | 'onlineUntil'> & { order?: AdminOrderState }, now: number = Date.now()): string {
-  if (s.needsAction && s.order !== 'provisional') return 'publish_blocked_pending';
+  // only when Publish really waits for the shop (G951: a further website of an order or "no design" in trust / off mode is
+  // not blocked)
+  if (s.needsAction && s.order !== 'provisional' && s.order !== 'not_required' && s.order !== 'verified') return 'publish_blocked_pending';
   if (s.state === 'published' && s.onlineUntil) {
     const left = (Date.parse(`${s.onlineUntil}T00:00:00Z`) - now) / DAY_MS;
     if (left >= -1 && left <= CLOSING_WITHIN_DAYS) return 'archive_notice';

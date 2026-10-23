@@ -69,3 +69,15 @@ fieldset:disabled .option,
   opacity: 0.55;
   cursor: default;
 }
+
+/* G952: "Downloads open once your order is confirmed." — the lock sits on the first line of the text. */
+.locked {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.locked svg {
+  flex: none;
+  margin-top: 2px;
+}

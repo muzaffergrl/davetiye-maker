@@ -16,24 +16,35 @@
 //       "etsy": the receipt is read from Etsy — G147; not connected yet -> "pending" like manual;
 //       "trust": Etsy when it can answer, otherwise "provisional": publishable now, checked later — lib/claim/trust.ts)
 //      (before the "used" check: with verification on, a stranger gets the same 403 for used and unused numbers)
-//   6. order number already used for a website              -> 409 order_used (no slug, email or link in the answer)
-//      G152: "used" means every design unit of the order has its website. The verifier says how many websites the order
-//      pays for (Etsy mode: the receipt's design lines × quantity, lib/etsy/verify.ts designUnits; off / manual: 1); while a
-//      unit is free, /start makes a new site for it (step 7 on). The blob adapter keeps one order index file per unit.
-//      … unless it is a RETRY of the same claim: same claim token (the form sends one random token
-//      and repeats it on every retry), same email, still an unpublished draft, created < 24 h ago.
-//      The first answer was lost on the way (phone changed network), so the buyer never saw the
-//      link: the keys are reissued (the unseen old link stops working) -> 201 with the new link.
-//      … or (G146) the email is the one the website was started with (lib/claim/continue.ts sameOwnerEmail): the buyer
-//      is signed in on this device with a new DEVICE KEY (lib/device-keys.ts; the edit link is untouched)
-//      -> 200 {existing: true, slug, editPath}. These sign-ins count against the order number's attempts (shared with
-//      /my, lib/claim/limits.ts DEFAULT_CONTINUE_LIMITS.perOrder) -> 429 rate_limited.
+//   6. the order number already has a website (G951 — two or more designs in one Etsy order):
+//      a RETRY of the same claim first: same claim token (the form sends one random token and repeats it on every retry),
+//      same email, still an unpublished draft, created < 24 h ago. The first answer was lost on the way (phone changed
+//      network), so the buyer never saw the link: the keys are reissued (the unseen old link stops working) -> 201.
+//      Otherwise (every answer below counts against the order number's attempts, shared with /my: lib/claim/limits.ts
+//      DEFAULT_CONTINUE_LIMITS.perOrder -> 429 rate_limited):
+//        another email than the order's websites were started with  -> 409 order_used (no slug, email or link)
+//        the same email (lib/claim/continue.ts sameOwnerEmail)       -> 200 {next: "choose", sites, add}: the page asks
+//            "Your order already has a website: <Design A> -> Open it" / "Start a second website with <Design B> (only if
+//            you bought both in this order)" (the same design bought twice: "Start another website with this design");
+//            `add` is null when the order may not get another website (`full`: "receipt" — the Etsy receipt's designs
+//            all have their website — or "max", MAX_ORDER_SITES). When no website can be added and one of them is of
+//            this design, it is opened at once instead (the lost-link case) -> 200 {existing: true, slug, editPath}.
+//        intent "open" + openSlug (one of the websites listed)      -> signed in on this device with a new DEVICE KEY
+//            (lib/device-keys.ts; the edit link is untouched) -> 200 {existing: true, slug, editPath}
+//        intent "add"                                               -> a further website for the order (step 7 on), in
+//            the next free design unit (orderSlot), or 409 order_full when `add` would be null:
+//              Etsy receipt read (etsy / trust mode with Etsy connected): only within its design units (the receipt's
+//                designs must also match this design when its listings are mapped: lib/etsy/verify.ts theme_mismatch);
+//              trust mode without the receipt (Gmail / nothing yet): allowed, provisional, and the admin gets a To-do
+//                "Order #… now has N websites; check the Etsy order has N designs" AT ONCE (lib/admin/view.ts);
+//              manual: allowed, pending like any claim (the shop confirms it).
+//      The blob adapter keeps one order index file per unit (orders/<no>~<unit>.json).
 //   7. website address: typed one must be free             -> 409 slug_taken (+ suggestion); otherwise the first free one from the names
 //   8. per-IP and global "sites created" limits             -> 429 rate_limited / busy
 //   9. create the draft (createSiteWithKeys), emails        -> 201 {slug, editUrl, editPath, siteUrl, emailSent}
 //      (G147: the edit link to the buyer when SMTP is set; a NEW pending or provisional site is also announced to the shop)
 //
-// One website per order unit is enforced here with findSitesByOrderRef + an in-process lock.
+// One website per order unit is enforced here with findSitesByOrderRef + an in-process lock (units: step 6).
 // Several server instances (Vercel) need a storage guarantee as well: the blob adapter (G048) keeps
 // an orders/<number>.json index (orders/<number>~<unit>.json for units 2, 3 …, G152) created only if absent and throws
 // OrderRefTakenError: the claim then reads the order again and takes the next free unit, or answers as for a used order
@@ -42,7 +53,7 @@
 import { randomInt } from 'node:crypto';
 import { isValidTimeZone } from '../content/format.ts';
 import type { ContentRecord } from '../content/types.ts';
-import { OrderRefTakenError, SlugTakenError, type DataAdapter, type SiteRecord } from '../data/types.ts';
+import { OrderRefTakenError, SlugTakenError, type DataAdapter, type OrderCheckRecord, type SiteRecord } from '../data/types.ts';
 import { defaultInitials, defaultNameDisplay } from '../panel/model.ts';
 import { hashKey, verifyKey } from '../keys.ts';
 import { ipBucket, type RateLimiter } from '../rsvp/rate-limit.ts';
@@ -60,7 +71,7 @@ import {
   suggestSlugBase,
   type ClaimField,
 } from './fields.ts';
-import { deviceEditPath, ownedSite, siteNames } from './continue.ts';
+import { designName, deviceEditPath, ownedSites, siteNames } from './continue.ts';
 import { deviceLabel, mintDeviceKey } from '../device-keys.ts';
 import { msg } from '../i18n/translate.ts';
 import { DEFAULT_CLAIM_LIMITS, DEFAULT_CONTINUE_LIMITS, getClaimRateLimiter, orderLimitKey, type ClaimLimits, type ContinueLimits } from './limits.ts';
@@ -69,7 +80,8 @@ import { getShopNotifier, type ShopNotifier } from '../mail/index.ts';
 import { claimableTheme } from './themes.ts';
 import { THEME_IN_REVIEW, type ApprovalEnv } from '../themes/approval.ts';
 import { themeStartable } from '../themes/offered.ts';
-import { getOrderVerifier, orderUnits, type OrderVerifier } from './verify.ts';
+import { isPrivateTheme } from '../theme/theme.ts';
+import { checkCoversSlot, getOrderVerifier, MAX_ORDER_SITES, orderCoverage, type OrderCheck, type OrderVerifier } from './verify.ts';
 
 export interface ClaimContext {
   adapter: DataAdapter;
@@ -118,6 +130,7 @@ export type ClaimErrorCode =
   | 'theme_unavailable'
   | 'theme_in_review'
   | 'order_used'
+  | 'order_full'
   | 'order_not_verified'
   | 'verification_unavailable'
   | 'slug_taken'
@@ -128,6 +141,14 @@ export type ClaimErrorCode =
   | 'bad_json'
   | 'server';
 
+/** G951: why the choice offers no further website (shown under the order's websites). */
+export const ORDER_FULL_MESSAGES: Record<'receipt' | 'max', string> = {
+  receipt: msg(
+    'Every design in this Etsy order already has its website. To start another website, please buy the design on Etsy and use that order number.',
+  ),
+  max: msg('This order already has the most websites one order can have. Please message us on Etsy if you need another one.'),
+};
+
 export const CLAIM_MESSAGES: Record<ClaimErrorCode, string> = {
   invalid: 'Please check the highlighted fields.',
   theme_unavailable: 'This design is not available. Please open the start link from your Etsy download again.',
@@ -136,6 +157,8 @@ export const CLAIM_MESSAGES: Record<ClaimErrorCode, string> = {
   order_used: msg(
     'A website has already been started with this order number. To open it, go to /my and enter this order number with the email you used when you started it.',
   ),
+  // G951: "Start another website" when the order may not get one more (its Etsy receipt's designs all have a website).
+  order_full: ORDER_FULL_MESSAGES.receipt,
   order_not_verified: 'We could not confirm this order. Please check your Etsy order number and email address.',
   verification_unavailable: 'We could not check your order right now. Please try again in a few minutes.',
   slug_taken: 'This website address is already taken. Please choose another one.',
@@ -234,6 +257,28 @@ export async function slugAvailability(adapter: DataAdapter, input: unknown): Pr
 }
 
 // ---------------------------------------------------------------------------------------------
+// The order check written with a new site
+
+/**
+ * The orderCheck a new site starts with (pure). G951: an order whose lines hold no design for this website (services
+ * only: lib/claim/verify.ts orderCoverage) is never "verified": in trust mode the site is provisional (publishable, the
+ * shop looks), otherwise pending (the shop confirms first) — with `noDesign` for the admin's To-do. A receipt's units are
+ * kept with a verification (`units`).
+ */
+export function claimOrderCheck(check: OrderCheck, verifierKind: string, at: string, privateTheme = false, slot = 1): OrderCheckRecord | null {
+  const cover = orderCoverage(check, privateTheme);
+  const flag = cover.noDesign ? { noDesign: true } : {};
+  // G951: a further website of the order (slot >= 2) is verified only within the Etsy receipt's units
+  if (check.result === 'verified' && checkCoversSlot(check, slot, privateTheme)) {
+    return { status: 'verified', at, by: 'etsy', ...(cover.receipt && cover.units !== null ? { units: cover.units } : {}) };
+  }
+  if (check.result === 'verified') return { status: verifierKind === 'trust' ? 'provisional' : 'pending', at, by: 'claim', ...flag };
+  if (check.result === 'pending') return { status: 'pending', at, by: 'claim', ...flag };
+  if (check.result === 'provisional') return { status: 'provisional', at, by: 'claim', ...flag };
+  return null;
+}
+
+// ---------------------------------------------------------------------------------------------
 // One claim at a time per order number (this process)
 
 const orderLocks = new Map<string, Promise<unknown>>();
@@ -284,7 +329,49 @@ export interface ClaimExistingBody {
   orderPending: boolean;
 }
 
-/** POST /api/start body: {theme, variant?, orderNumber, email, names: [first, second], slug?, claimToken?, timeZone?, website? (honeypot)}. */
+/**
+ * G951: the order already has a website (or several) started with this email — the page asks: open one of them, or
+ * start one more (`add`, null when the order may not get another: `full`).
+ */
+export interface ClaimChooseBody {
+  ok: true;
+  next: 'choose';
+  /** The order's websites started with this email (names and addresses only; never another buyer's). */
+  sites: Array<{ slug: string; names: string; design: string; sameDesign: boolean }>;
+  /** Starting one more website with the design of this page; `sameDesign`: the order already has one of it. */
+  add: { design: string; sameDesign: boolean } | null;
+  /** Why `add` is null: the Etsy receipt's designs all have a website ("receipt"), or MAX_ORDER_SITES ("max"). */
+  full?: 'receipt' | 'max';
+  /** With `full`: the words for it (English; the page translates). */
+  message?: string;
+}
+
+/**
+ * G951: may the order get one more website, and in which design unit (orderSlot)? Pure.
+ *   MAX_ORDER_SITES websites already                         -> no ("max")
+ *   the Etsy receipt was read (check units, not a mail)      -> only while websites < its units ("receipt")
+ *   otherwise (trust without the receipt, Gmail, manual, off) -> yes: the shop is told / confirms (admin To-do)
+ * `taken`: units another instance just took (their index exists, a listing may not show the site yet).
+ */
+export function orderRoom(
+  sites: readonly Pick<SiteRecord, 'orderSlot'>[],
+  check: OrderCheck,
+  privateTheme = false,
+  taken: ReadonlySet<number> = new Set(),
+): { slot: number | null; full?: 'receipt' | 'max' } {
+  const used = new Set([...taken, ...sites.map((x) => x.orderSlot ?? 1)]);
+  const count = Math.max(sites.length, used.size);
+  if (count >= MAX_ORDER_SITES) return { slot: null, full: 'max' };
+  const cover = orderCoverage(check, privateTheme);
+  if (cover.receipt && cover.units !== null && count >= cover.units) return { slot: null, full: 'receipt' };
+  for (let n = 1; n <= MAX_ORDER_SITES; n++) if (!used.has(n)) return { slot: n };
+  return { slot: null, full: 'max' };
+}
+
+/**
+ * POST /api/start body: {theme, variant?, orderNumber, email, names: [first, second], slug?, claimToken?, timeZone?,
+ * intent? ("open" + openSlug | "add", G951), website? (honeypot)}.
+ */
 export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>): Promise<ClaimResult> {
   const { adapter } = ctx;
   const limiter = ctx.limiter ?? getClaimRateLimiter();
@@ -364,35 +451,51 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
     return answer(reissued.site.slug, reissued.editKey, orderPending(reissued.site));
   };
 
-  /**
-   * Every unit of the order has its website: "order used", or (G146) the buyer's own website — of this design when they
-   * have several (G152) — opened on this device with a device key, when the email is the one it was started with.
-   */
-  const usedOrSignIn = async (sites: SiteRecord[]): Promise<ClaimResult> => {
-    const perOrder = await limiter.hit(orderLimitKey('my:order', orderNumber), (ctx.continueLimits ?? DEFAULT_CONTINUE_LIMITS).perOrder);
-    if (!perOrder.allowed) return claimError(429, 'rate_limited', {}, retryAfter(perOrder.retryAfterMs));
-    const owned = ownedSite(sites, email, theme.id);
-    if (!owned) return claimError(409, 'order_used');
-    const { key } = await mintDeviceKey(adapter, owned, { label: deviceLabel(ctx.userAgent), via: 'start', now: new Date(now()) });
+  /** G146: the buyer's own website of this order opened on this device with a device key (the edit link is untouched). */
+  const signIn = async (site: SiteRecord): Promise<ClaimResult> => {
+    const { key } = await mintDeviceKey(adapter, site, { label: deviceLabel(ctx.userAgent), via: 'start', now: new Date(now()) });
     const origin = ctx.origin.replace(/\/+$/, '');
     const body: ClaimExistingBody = {
       ok: true,
       existing: true,
-      slug: owned.slug,
-      editPath: deviceEditPath(owned.slug, key),
-      siteUrl: `${origin}/${owned.slug}`,
-      names: siteNames(owned),
-      orderPending: orderPending(owned),
+      slug: site.slug,
+      editPath: deviceEditPath(site.slug, key),
+      siteUrl: `${origin}/${site.slug}`,
+      names: siteNames(site),
+      orderPending: orderPending(site),
     };
     return { status: 200, body: body as unknown as Record<string, unknown> };
   };
 
-  /** G152: the first design unit (1 … units) no site of the order uses yet, or null when all are used. */
-  const freeSlot = (sites: SiteRecord[], units: number, taken: ReadonlySet<number> = new Set()): number | null => {
-    if (sites.length >= units) return null;
-    const used = new Set([...taken, ...sites.map((s) => s.orderSlot ?? 1)]);
-    for (let n = 1; n <= units; n++) if (!used.has(n)) return n;
-    return null;
+  const intent = raw.intent === 'open' || raw.intent === 'add' ? raw.intent : null;
+  const openSlug = typeof raw.openSlug === 'string' ? raw.openSlug.slice(0, 80) : '';
+
+  /**
+   * G951: the order already has websites (step 6 at the top): "order used" for another email; for the same email the
+   * choice (open one / start one more), the website asked for, or the unit for one more. A number = the design unit the
+   * new website takes; anything else is the answer.
+   */
+  const existingOrder = async (sites: SiteRecord[], check: OrderCheck, taken: ReadonlySet<number>): Promise<ClaimResult | number> => {
+    const perOrder = await limiter.hit(orderLimitKey('my:order', orderNumber), (ctx.continueLimits ?? DEFAULT_CONTINUE_LIMITS).perOrder);
+    if (!perOrder.allowed) return claimError(429, 'rate_limited', {}, retryAfter(perOrder.retryAfterMs));
+    const owned = ownedSites(sites, email);
+    if (!owned.length) return claimError(409, 'order_used');
+    if (intent === 'open') {
+      const site = owned.find((x) => x.slug === openSlug);
+      return site ? signIn(site) : claimError(409, 'order_used');
+    }
+    const room = orderRoom(sites, check, isPrivateTheme(theme.manifest), taken);
+    if (intent === 'add') return room.slot ?? claimError(409, 'order_full');
+    const same = owned.find((x) => x.theme === theme.id);
+    if (room.slot === null && same) return signIn(same); // nothing can be added: the lost-link case opens it at once
+    const body: ClaimChooseBody = {
+      ok: true,
+      next: 'choose',
+      sites: owned.map((x) => ({ slug: x.slug, names: siteNames(x), design: designName(x.theme), sameDesign: x.theme === theme.id })),
+      add: room.slot === null ? null : { design: theme.name, sameDesign: Boolean(same) },
+      ...(room.slot === null ? { full: room.full ?? 'max', message: ORDER_FULL_MESSAGES[room.full ?? 'max'] } : {}),
+    };
+    return { status: 200, body: body as unknown as Record<string, unknown> };
   };
 
   return withOrderLock(orderNumber, async () => {
@@ -400,15 +503,20 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
     const check = await verifier.check({ orderNumber, email, theme: theme.id, cached: true });
     if (check.result === 'rejected') return claimError(403, 'order_not_verified');
     if (check.result === 'unavailable') return claimError(503, 'verification_unavailable', {}, { 'Retry-After': '60' });
-    const units = orderUnits(check);
 
-    let existing = await adapter.findSitesByOrderRef(orderNumber);
-    if (existing.length) {
-      const retry = await retryOf(existing);
+    /** Units another instance took while this claim ran (the order index refused them; a listing may not show them yet). */
+    const lostSlots = new Set<number>();
+    /** The design unit a new website takes, or the answer (a retry's link, the choice, a sign-in, "used", "full"). */
+    const plan = async (sites: SiteRecord[]): Promise<ClaimResult | number> => {
+      if (!sites.length && !lostSlots.size) return 1;
+      const retry = await retryOf(sites);
       if (retry) return retry;
-    }
-    let slot = freeSlot(existing, units);
-    if (slot === null) return usedOrSignIn(existing);
+      return existingOrder(sites, check, lostSlots);
+    };
+    let existing = await adapter.findSitesByOrderRef(orderNumber);
+    const first = await plan(existing);
+    if (typeof first !== 'number') return first;
+    let slot = first;
 
     const taken = async (from: string) =>
       claimError(409, 'slug_taken', { fields: { slug: FIELD_MESSAGES.slugTaken }, suggestion: await findFreeSlug(adapter, from) });
@@ -433,18 +541,11 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
     // Manual order checks (G060-fix): the draft is made now, publishing waits for the shop (scripts/verify-order.ts).
     // Trust mode: the draft is made and publishable now; the order is checked later (lib/claim/trust.ts).
     const at = new Date(now()).toISOString();
-    const orderCheck =
-      check.result === 'pending'
-        ? { status: 'pending' as const, at, by: 'claim' as const }
-        : check.result === 'provisional'
-          ? { status: 'provisional' as const, at, by: 'claim' as const }
-          : check.result === 'verified'
-            ? { status: 'verified' as const, at, by: 'etsy' as const }
-            : null;
     let created: Awaited<ReturnType<typeof createSiteWithKeys>> | null = null;
-    /** Units another instance took while this claim ran (the order index refused them; a listing may not show them yet). */
-    const lostSlots = new Set<number>();
     for (let tries = 0; !created; tries++) {
+      // G951: a further website (slot >= 2) is verified only within the Etsy receipt's units; otherwise it waits for the
+      // shop (pending) or, in trust mode, is publishable with an admin To-do (provisional).
+      const orderCheck = claimOrderCheck(check, verifier.kind, at, isPrivateTheme(theme.manifest), slot);
       try {
         created = await createSiteWithKeys(adapter, {
           slug,
@@ -460,14 +561,12 @@ export async function claimSite(ctx: ClaimContext, raw: Record<string, unknown>)
         });
       } catch (e) {
         // Another server instance won the race for this unit (possibly our own earlier attempt of this claim): read the
-        // order again — the recovered link, the next free unit (G152), or "used" / sign-in.
+        // order again — the recovered link, the choice / "used" (G951), or for "add" the next free unit (G152).
         if (e instanceof OrderRefTakenError) {
-          existing = await adapter.findSitesByOrderRef(orderNumber);
-          const retry = await retryOf(existing);
-          if (retry) return retry;
           lostSlots.add(slot);
-          const next = freeSlot(existing, units, lostSlots);
-          if (next === null) return usedOrSignIn(existing);
+          existing = await adapter.findSitesByOrderRef(orderNumber);
+          const next = await plan(existing);
+          if (typeof next !== 'number') return next;
           slot = next;
           continue;
         }

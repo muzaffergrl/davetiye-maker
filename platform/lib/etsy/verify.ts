@@ -13,7 +13,11 @@
 // G152 — multi-item orders: "verified" and "pending" carry `units`, the websites the receipt pays for: the quantities of
 //   its lines that are designs (mapped to a theme in listings.json, or not mapped at all); add-on service listings
 //   (listings.json "services": setup, custom design, extra revision) never count. lib/claim/claim.ts then allows that many
-//   websites for the order number (at least 1, at most MAX_ORDER_SITES).
+//   websites for the order number (at most MAX_ORDER_SITES).
+// G951 — while listings.json maps nothing, a line is a service by its TITLE too (lib/etsy/services.ts: the service
+//   listings' titles): a receipt of services only has 0 units (it pays for no ready design: lib/claim/verify.ts
+//   orderCoverage "no design"); custom-design lines are counted apart (`custom`): each includes the website of its own
+//   private design (G151). A receipt without readable lines still counts as one website.
 // Fallbacks (never a 500 on /start):
 //   app settings missing, shop not connected, Etsy no longer accepts the connection, or Etsy refuses our app (401/403 on
 //   the token itself) -> pending, exactly like manual mode; the admin card shows why.
@@ -29,6 +33,7 @@ import { MAX_ORDER_SITES, type OrderCheck, type OrderCheckInput, type OrderVerif
 import { etsySetup } from './config.ts';
 import { canReadReceipts, EtsyError, getShopReceipt, type EtsyReceipt } from './client.ts';
 import { orderCacheKey, readCachedFacts, rememberFacts } from './order-cache.ts';
+import { serviceKindOfTitle, type ServiceKind } from './services.ts';
 import { clearEtsyError, connectedShop, EtsyNotConnectedError, noteEtsyError, shopAccessToken } from './shop.ts';
 
 /** listing_id -> theme id, from listings.json (bad entries are ignored). */
@@ -42,7 +47,7 @@ export function listingThemes(raw: unknown = LISTINGS): Map<string, string> {
   return out;
 }
 
-export type ServiceKind = 'setup' | 'custom_design' | 'extra_revision';
+export type { ServiceKind } from './services.ts';
 const SERVICE_KINDS: readonly string[] = ['setup', 'custom_design', 'extra_revision'];
 
 /** listing_id -> service kind, from listings.json "services" (bad entries are ignored). */
@@ -61,19 +66,32 @@ const listingIdOf = (t: unknown): string => {
   return typeof id === 'number' || typeof id === 'string' ? String(id) : '';
 };
 
+/** The service an order line is: its listing id in listings.json "services", else its title (G951), else null (a design). */
+export function lineService(t: unknown, services: Map<string, ServiceKind> = listingServices()): ServiceKind | null {
+  if (!t || typeof t !== 'object') return null;
+  return services.get(listingIdOf(t)) ?? serviceKindOfTitle((t as { title?: unknown }).title);
+}
+
+const quantityOf = (t: { quantity?: unknown }) => Math.min(typeof t.quantity === 'number' && Number.isInteger(t.quantity) && t.quantity > 0 ? t.quantity : 1, MAX_ORDER_SITES);
+
 /**
- * G152: the websites a receipt pays for — the summed quantity of its design lines (a service listing never counts). At
- * least 1 (a receipt without readable lines is still one design), at most MAX_ORDER_SITES.
+ * G152: the websites of ready designs a receipt pays for — the summed quantity of its design lines (a service line never
+ * counts, by listing id or, G951, by title), at most MAX_ORDER_SITES. 0 when it has lines and all are services; 1 when
+ * it has no readable line (nothing is known: one website, as before).
  */
 export function designUnits(receipt: Pick<EtsyReceipt, 'transactions'> | null, services: Map<string, ServiceKind> = listingServices()): number {
+  const lines = (Array.isArray(receipt?.transactions) ? receipt.transactions : []).filter((t) => t && typeof t === 'object');
+  if (!lines.length) return 1;
   let units = 0;
-  for (const t of Array.isArray(receipt?.transactions) ? receipt.transactions : []) {
-    if (!t || typeof t !== 'object') continue;
-    if (services.has(listingIdOf(t))) continue;
-    const q = typeof t.quantity === 'number' && Number.isInteger(t.quantity) && t.quantity > 0 ? t.quantity : 1;
-    units += Math.min(q, MAX_ORDER_SITES);
-  }
-  return Math.max(1, Math.min(units, MAX_ORDER_SITES));
+  for (const t of lines) if (!lineService(t, services)) units += quantityOf(t);
+  return Math.min(units, MAX_ORDER_SITES);
+}
+
+/** G951: the custom-design lines of a receipt (each includes the website of its private design, G151). */
+export function customUnits(receipt: Pick<EtsyReceipt, 'transactions'> | null, services: Map<string, ServiceKind> = listingServices()): number {
+  let n = 0;
+  for (const t of Array.isArray(receipt?.transactions) ? receipt.transactions : []) if (lineService(t, services) === 'custom_design') n += quantityOf(t);
+  return Math.min(n, MAX_ORDER_SITES);
 }
 
 /**
@@ -83,7 +101,8 @@ export function designUnits(receipt: Pick<EtsyReceipt, 'transactions'> | null, s
  */
 export type ReceiptFacts =
   | { found: false }
-  | { found: true; closed: boolean; buyer: string | null; themes: string[]; units: number; paid: boolean };
+  /** `custom` (G951): custom-design lines; absent = none. */
+  | { found: true; closed: boolean; buyer: string | null; themes: string[]; units: number; custom?: number; paid: boolean };
 
 /** One-way form of an email address for comparing (the cache never holds the address). */
 export function emailHash(email: string): string {
@@ -108,12 +127,15 @@ export function receiptFacts(
     const theme = id ? listings.get(id) : undefined;
     if (theme) themes.add(theme);
   }
+  const services = opts.services ?? listingServices();
+  const custom = customUnits(receipt, services);
   return {
     found: true,
     closed: status === 'canceled' || status === 'cancelled' || status === 'fully refunded',
     buyer,
     themes: [...themes].sort(),
-    units: designUnits(receipt, opts.services ?? listingServices()),
+    units: designUnits(receipt, services),
+    ...(custom ? { custom } : {}),
     paid: receipt.is_paid === true,
   };
 }
@@ -124,8 +146,9 @@ export function decideFacts(facts: ReceiptFacts, input: OrderCheckInput): OrderC
   if (facts.closed) return { result: 'rejected', reason: 'not_paid' };
   if (facts.buyer && facts.buyer !== emailHash(input.email)) return { result: 'rejected', reason: 'email_mismatch' };
   if (facts.themes.length && !facts.themes.includes(input.theme)) return { result: 'rejected', reason: 'theme_mismatch' };
-  if (!facts.paid) return { result: 'pending', units: facts.units, unpaid: true };
-  return { result: 'verified', units: facts.units };
+  const custom = facts.custom ? { custom: facts.custom } : {};
+  if (!facts.paid) return { result: 'pending', units: facts.units, ...custom, unpaid: true };
+  return { result: 'verified', units: facts.units, ...custom };
 }
 
 /** The decision for one receipt (pure; exported for the tests). */

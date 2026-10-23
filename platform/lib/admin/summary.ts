@@ -30,6 +30,15 @@ function placeOf(site: SiteRecord): string | null {
   return parts.length ? parts.join(', ') : null;
 }
 
+/**
+ * G951: a further website of an order (orderSlot >= 2) is confirmed when the shop confirmed it (by "support": "Siparişi
+ * onayla", or made in the admin) or the Etsy receipt that verified it pays for that many websites (orderCheck.units).
+ */
+export function extraConfirmed(site: Pick<SiteRecord, 'orderCheck'>, slot: number): boolean {
+  const c = site.orderCheck;
+  return c?.status === 'verified' && (c.by === 'support' || (typeof c.units === 'number' && c.units >= slot));
+}
+
 /** Made in the admin ("Yeni sipariş"): no /start claim token, order confirmed by the shop. */
 export function madeByShop(site: SiteRecord): boolean {
   return Boolean(site.orderRef) && !site.claimTokenHash && site.orderCheck?.by === 'support' && site.orderCheck.note === SHOP_CREATED_NOTE;
@@ -43,6 +52,10 @@ export function summarizeSite(site: SiteRecord, replies: number, now: Date = new
   const pending = orderPending(site);
   const provisional = orderProvisional(site);
   const review = provisional && trustExpired(site, now.getTime());
+  // G951: the order's lines show no design for this website (services only); until the shop confirms it
+  const noDesign = Boolean(site.orderCheck?.noDesign) && site.orderCheck?.status !== 'verified';
+  const slot = site.orderSlot ?? 1;
+  const extraUnconfirmed = Boolean(site.orderRef) && slot >= 2 && !extraConfirmed(site, slot);
   const state: AdminSiteState = rights.archived ? 'archived' : site.status === 'published' ? 'published' : 'draft';
   const date = (site.content as unknown as { date?: unknown })?.date;
   return {
@@ -70,8 +83,11 @@ export function summarizeSite(site: SiteRecord, replies: number, now: Date = new
     guestPassword: Boolean(site.guestAccess?.enabled),
     unpublishedChanges:
       site.status === 'published' && site.publishedContent !== null && JSON.stringify(site.content) !== JSON.stringify(site.publishedContent),
-    needsAction: (pending || review) && !rights.archived,
+    needsAction: (pending || review || noDesign || extraUnconfirmed) && !rights.archived,
     orderReview: review,
+    orderNoDesign: noDesign,
+    orderSlot: slot,
+    orderExtraUnconfirmed: extraUnconfirmed,
     note: site.adminNote?.text || null,
     noteAt: site.adminNote?.at ?? null,
     place: placeOf(site),

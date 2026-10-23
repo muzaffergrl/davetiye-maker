@@ -466,8 +466,11 @@ test('blob: claim maps a lost order race (OrderRefTakenError) to 409 order_used'
   const again = await claimSite(ctx, { ...form, email: 'other@example.test', names: ['Other', 'Pair'] });
   assert.equal(again.status, 409);
   assert.equal(again.body.code, 'order_used');
-  // G146: the same email signs in to it (a device key in the site document, not a new website).
-  const mine = await claimSite(ctx, { ...form, names: ['Other', 'Pair'] });
+  // G951: the same email gets the choice; G146: "open" signs in to it (a device key in the site document, not a new website).
+  const ask = await claimSite(ctx, { ...form, names: ['Other', 'Pair'] });
+  assert.equal(ask.status, 200, JSON.stringify(ask.body));
+  assert.equal(ask.body.next, 'choose');
+  const mine = await claimSite(ctx, { ...form, names: ['Other', 'Pair'], intent: 'open', openSlug: first.body.slug });
   assert.equal(mine.status, 200, JSON.stringify(mine.body));
   assert.equal(mine.body.existing, true);
   assert.ok(fake.paths().some((p) => /^docs\/[0-9a-f-]+\/devices\.json$/.test(p)), 'device key stored as a site document');

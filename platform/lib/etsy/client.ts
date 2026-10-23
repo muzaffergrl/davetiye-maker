@@ -166,6 +166,8 @@ export interface EtsyReceiptTransaction {
   seller_user_id?: number;
   /** Units bought of this listing (G152: a design bought twice = two websites). */
   quantity?: number;
+  /** The listing's title when it was bought (G951: tells a service line from a design while listings.json is empty). */
+  title?: string | null;
 }
 
 /** The fields of a ShopReceipt the order check reads (Etsy's OpenAPI schema, lib/etsy/config.ts). */

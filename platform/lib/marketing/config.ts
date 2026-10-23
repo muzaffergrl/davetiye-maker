@@ -160,7 +160,9 @@ export const MARKETING: MarketingConfig = {
   aiTrainingBots: 'allow',
   copyUpdated: '2026-10-18',
   // editRights + archive: G060 (panel v2) implements them; flip to true when it is merged and live-checked.
-  verified: { editRights: false, archive: false, realDevices: false, privacyText: false, orderCheck: false },
+  // realDevices: owner decision 3 (2026-10-23): the owner tested on real phones, no problems. The copy then says "Tested on
+  // iPhone and Android phones" (facts.ts phoneClaim) — that assumes both kinds of phone were among them.
+  verified: { editRights: false, archive: false, realDevices: true, privacyText: false, orderCheck: false },
   // K42 services; prices K49 (user, 2026-10-22, TRY; docs/23 §1, docs/35 §8b). The listings are not on Etsy yet (K41).
   // Owner 2026-10-23: both stay Etsy drafts (onSale: false), so buyers are not offered them yet; prices unchanged.
   services: [
@@ -647,21 +649,24 @@ export const MARKETING: MarketingConfig = {
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-15',
     },
-    // Opened for sale by the user on 2026-10-17 (G142); same price as the other designs (K42, etsy_upload.json price_try).
+    // Opened for sale by the user on 2026-10-17 (G142); 2026-10-23 (owner decision 6): the first sales wave is ONLY designs
+    // 01–20, so 21 is back to 'preview' (in the catalogue as "Coming soon on Etsy", no checkout, not startable in
+    // production: lib/themes/approval.ts). Price stays the launch price (K49) for when it goes live.
     {
       id: 'crimson-rose-atelier',
       name: 'Crimson Rose Atelier',
-      status: 'live',
+      status: 'preview',
       price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',
       updated: '2026-10-17',
     },
-    // 49: user requested catalogue release; the Etsy listing is prepared separately.
+    // 49: user requested catalogue release; the Etsy listing is prepared separately. 2026-10-23 (owner decision 6): not in
+    // the first sales wave (01–20) -> 'preview' like 21 (catalogue "Coming soon on Etsy", not startable in production).
     {
       id: 'ivory-pearl-atelier',
       name: 'Ivory Pearl Atelier',
-      status: 'live',
+      status: 'preview',
       price: '1190',
       compareAtPrice: null,
       etsyListingUrl: '[ETSY LISTING URL]',

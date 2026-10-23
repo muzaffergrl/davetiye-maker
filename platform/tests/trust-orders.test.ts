@@ -14,7 +14,7 @@ import { defaultTemplateId } from '../lib/admin/view.ts';
 import { siteHistory, summarizeSite } from '../lib/admin/summary.ts';
 import { setClaimRateLimiter } from '../lib/claim/limits.ts';
 import { setEditLinkMailer } from '../lib/claim/mailer.ts';
-import { cronOrdersRoute, sweepProvisionalOrders, TRUST_WINDOW_MS } from '../lib/claim/trust.ts';
+import { cronOrdersRoute, sweepOrder, sweepProvisionalOrders, TRUST_WINDOW_MS } from '../lib/claim/trust.ts';
 import { getOrderVerifier, setOrderVerifier, TrustOrderVerifier, type OrderCheck, type OrderCheckInput, type OrderVerifier } from '../lib/claim/verify.ts';
 import { getDataAdapter } from '../lib/data/index.ts';
 import type { SiteRecord } from '../lib/data/types.ts';
@@ -289,4 +289,33 @@ test('shop emails for trust mode: Turkish, one-line subject, escaped', () => {
   assert.match(pendingOrderEmail({ ...base, kind: 'review' }).text, /48 saatte/);
   assert.match(pendingOrderEmail(base).subject, /needs a check/, 'default stays the manual-mode notice');
   for (const m of [p, h]) assert.ok(!/[\r\n]/.test(m.subject));
+});
+
+// G953: the sweep's order. Before, the oldest RECHECK_BATCH (100) provisional sites went first in every run: once 100
+// unresolved orders had piled up (the shop already told about each), a new site was never checked again.
+test('sweepOrder: new sites first, then the unreported ones, then a rotating share of the reported ones — none starves', () => {
+  const now = new Date('2026-10-23T12:00:00Z');
+  const ago = (ms: number) => new Date(now.getTime() - ms).toISOString();
+  const H = 3_600_000;
+  const mk = (id: string, at: string, reviewAt?: string) =>
+    ({ id, slug: id, createdAt: at, orderRef: '1', orderCheck: { status: 'provisional', at, by: 'claim', ...(reviewAt ? { reviewAt } : {}) } }) as unknown as SiteRecord;
+  const told = Array.from({ length: 150 }, (_, i) => mk(`told-${String(i).padStart(3, '0')}`, ago(30 * 24 * H + i * H), ago(20 * 24 * H - i * 60_000)));
+  const open = [mk('open-old', ago(40 * H)), mk('open-new', ago(5 * H))];
+  const fresh = [mk('fresh-1', ago(30 * 60_000)), mk('fresh-2', ago(90 * 60_000))];
+  const all = [...told, ...open, ...fresh];
+
+  const run = sweepOrder(all, now);
+  assert.equal(run.length, 100);
+  assert.deepEqual(run.slice(0, 4).map((s) => s.id), ['fresh-1', 'fresh-2', 'open-old', 'open-new'], 'never-checked first, then the unreported ones oldest first');
+  assert.equal(new Set(run.map((s) => s.id)).size, 100, 'no site twice');
+  // every reported site comes round within a few hourly runs (96 places per run here)
+  const seen = new Set<string>();
+  for (let h = 0; h < 2; h++) for (const s of sweepOrder(all, new Date(now.getTime() + h * H))) seen.add(s.id);
+  assert.equal(told.filter((s) => !seen.has(s.id)).length, 0, 'all 150 reported sites checked within 2 runs');
+  // a site claimed now is in the very next run however many old ones wait
+  const newcomer = mk('just-now', ago(60_000));
+  assert.equal(sweepOrder([...told, newcomer], now)[0].id, 'just-now');
+  // small numbers: everything, in the same order
+  assert.deepEqual(sweepOrder([...fresh, ...open], now).map((s) => s.id), ['fresh-1', 'fresh-2', 'open-old', 'open-new']);
+  assert.deepEqual(sweepOrder([], now), []);
 });

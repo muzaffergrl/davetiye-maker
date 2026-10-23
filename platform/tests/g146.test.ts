@@ -389,8 +389,16 @@ test('/start: an order that already has a website opens it for the same email (d
   assert.equal(first.status, 201, JSON.stringify(first.body));
   const editKey = new URL(first.body.editUrl).searchParams.get('k')!;
 
-  // another phone, same order + email (other case): signed in, no second website, no new edit link
-  const again = await post(claimRoute, '/api/start', { ...form, email: 'MILA@example.test', names: ['Other', 'Names'] });
+  // another phone, same order + email (other case): G951 the choice — open the order's website or start one more (no
+  // second website without asking, no new edit link); "open" signs this device in
+  const choice = await post(claimRoute, '/api/start', { ...form, email: 'MILA@example.test', names: ['Other', 'Names'] });
+  assert.equal(choice.status, 200, JSON.stringify(choice.body));
+  assert.equal(choice.body.next, 'choose');
+  assert.deepEqual(choice.body.sites, [{ slug: first.body.slug, names: 'Mila & Theo', design: 'Sample Design', sameDesign: true }]);
+  assert.deepEqual(choice.body.add, { design: 'Sample Design', sameDesign: true });
+  assert.equal(choice.body.editUrl, undefined);
+  assert.equal(choice.body.editPath, undefined, 'no key before the buyer chooses');
+  const again = await post(claimRoute, '/api/start', { ...form, email: 'MILA@example.test', names: ['Other', 'Names'], intent: 'open', openSlug: first.body.slug });
   assert.equal(again.status, 200, JSON.stringify(again.body));
   assert.equal(again.body.existing, true);
   assert.equal(again.body.slug, first.body.slug);

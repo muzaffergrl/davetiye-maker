@@ -47,7 +47,8 @@ function validFacts(f: unknown): f is ReceiptFacts {
     x.themes.every((t) => typeof t === 'string') &&
     typeof x.units === 'number' &&
     Number.isInteger(x.units) &&
-    x.units >= 1
+    x.units >= 0 &&
+    (x.custom === undefined || (typeof x.custom === 'number' && Number.isInteger(x.custom) && x.custom >= 0))
   );
 }
 

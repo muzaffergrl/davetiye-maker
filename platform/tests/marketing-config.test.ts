@@ -7,6 +7,7 @@ import path from 'node:path';
 import { claimableTheme } from '../lib/claim/themes.ts';
 import { MARKETING } from '../lib/marketing/config.ts';
 import { DESIGN_COPY, liveDesigns } from '../lib/marketing/designs.ts';
+import { verificationMode } from '../lib/claim/mode.ts';
 import { assertLaunchReady, findPlaceholders, hasPlaceholder, isPlaceholder, launchProblems, real, realEtsyUrl, realPrice } from '../lib/marketing/placeholders.ts';
 import assets from '../lib/marketing/assets.json' with { type: 'json' };
 import { checkManifest, type AssetManifest } from '../scripts/marketing-assets.ts';
@@ -57,9 +58,56 @@ test('launch gate: a launched config has no problems; an unlaunched one lists ev
   assert.throws(() => assertLaunchReady({ ...MARKETING, launched: true }), /not ready/);
 });
 
+test('first sales wave = designs 01–20 (owner, 2026-10-23): launchProblems lists exactly their 20 Etsy links + the open verified flags', () => {
+  const FIRST_WAVE = [
+    'olive-ivory', 'dusty-blue-champagne', 'blush-garden-rose', 'vintage-airmail-love-letter', 'mediterranean-lemon',
+    'art-deco-black-tie', 'burgundy-velvet-autumn', 'winter-evergreen', 'lavender-provence', 'tuscan-vineyard',
+    'boho-pampas-terracotta', 'tropical-destination', 'enchanted-forest-storybook', 'ivory-lace-pearls', 'cherry-blossom-spring',
+    'sunflower-rustic-barn', 'emerald-gold-estate', 'wildflower-meadow-vellum', 'midnight-garden', 'coastal-seaside',
+  ];
+  const live = MARKETING.designs.filter((d) => d.status === 'live').map((d) => d.id);
+  assert.deepEqual([...live].sort(), [...FIRST_WAVE].sort());
+  for (const id of ['crimson-rose-atelier', 'ivory-pearl-atelier']) {
+    const d = MARKETING.designs.find((x) => x.id === id);
+    assert.equal(d?.status, 'preview', `${id}: in the catalogue as coming soon, not on sale`);
+    assert.equal(d?.price, '1190', `${id}: K49 launch price`);
+  }
+  assert.equal(MARKETING.verified.realDevices, true, 'owner tested on real phones (2026-10-23)');
+  const problems = launchProblems(MARKETING, { CLAIM_ORDER_VERIFICATION: 'trust' });
+  const links = problems.filter((p) => /^designs\.[a-z0-9-]+\.etsyListingUrl is not a real Etsy URL$/.test(p));
+  assert.deepEqual(links.map((p) => p.split('.')[1]).sort(), [...FIRST_WAVE].sort());
+  const flags = problems.filter((p) => p.startsWith('verified.'));
+  const open = (Object.entries(MARKETING.verified) as Array<[string, boolean]>).filter(([k, v]) => !v && k !== 'realDevices').map(([k]) => k);
+  assert.deepEqual(flags.map((p) => p.split(' ')[0].replace('verified.', '')).sort(), open.sort());
+  assert.ok(!problems.some((p) => /realDevices|crimson-rose-atelier|ivory-pearl-atelier/.test(p)), problems.join(' | '));
+  assert.equal(problems.length, links.length + flags.length, problems.join(' | '));
+});
+
+/** The build environment of a production launch: orders are checked (trust first, verify later). */
+const READY_ENV = { CLAIM_ORDER_VERIFICATION: 'trust' };
+
+test('launch gate: the build must have order verification switched on (off / unset / a typo block the launch)', () => {
+  for (const mode of ['trust', 'manual', 'etsy', ' Trust ']) {
+    assert.deepEqual(launchProblems(readyConfig(), { CLAIM_ORDER_VERIFICATION: mode }), [], mode);
+  }
+  for (const env of [{}, { CLAIM_ORDER_VERIFICATION: '' }, { CLAIM_ORDER_VERIFICATION: 'off' }]) {
+    const problems = launchProblems(readyConfig(), env);
+    assert.equal(problems.length, 1, JSON.stringify(env));
+    assert.match(problems[0], /CLAIM_ORDER_VERIFICATION is off/);
+  }
+  const typo = launchProblems(readyConfig(), { CLAIM_ORDER_VERIFICATION: 'trusted' });
+  assert.equal(typo.length, 1);
+  assert.match(typo[0], /CLAIM_ORDER_VERIFICATION has an unknown value/);
+  assert.throws(() => assertLaunchReady(readyConfig(), {}), /CLAIM_ORDER_VERIFICATION is off/);
+  // the same parser as /start and the admin (lib/claim/mode.ts)
+  assert.equal(verificationMode({ CLAIM_ORDER_VERIFICATION: 'ETSY' }), 'etsy');
+  assert.equal(verificationMode({ CLAIM_ORDER_VERIFICATION: 'x' }), 'invalid');
+  assert.equal(verificationMode({}), 'off');
+});
+
 test('a fully decided config launches; one leftover placeholder or a vercel.app origin blocks it', () => {
-  assert.deepEqual(launchProblems(readyConfig()), []);
-  assert.doesNotThrow(() => assertLaunchReady(readyConfig()));
+  assert.deepEqual(launchProblems(readyConfig(), READY_ENV), []);
+  assert.doesNotThrow(() => assertLaunchReady(readyConfig(), READY_ENV));
   const p = readyConfig();
   p.designs.find((d) => d.status === 'live')!.price = '[PRICE]';
   assert.throws(() => assertLaunchReady(p), /price/);

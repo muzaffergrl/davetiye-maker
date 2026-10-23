@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { MESSAGE_TEMPLATES, messageMissing, renderMessage } from '../../lib/admin/messages.ts';
 import { defaultTemplateId, retentionDue, retentionDates, RETENTION_AFTER_ARCHIVE_MONTHS, shopDay, type AdminHistoryEntry, type AdminSiteSummary } from '../../lib/admin/view.ts';
-import type { AdminContentView, AdminDeviceView, AdminRsvpView } from '../../lib/admin/api.ts';
+import type { AdminContentView, AdminDeviceView, AdminOrderSite, AdminRsvpView } from '../../lib/admin/api.ts';
 import { CopyButton, copyText } from './CopyButton.tsx';
 import styles from './admin.module.css';
 import { StateBadges } from './badges.tsx';
@@ -51,6 +51,8 @@ export default function AdminSite(props: {
   previewPath: string;
   /** G152: devices signed in with the order number (read-only list; "Tüm cihazlarda oturumu kapat"). */
   devices?: AdminDeviceView[];
+  /** G951: every website of this site's Etsy order (this one included). */
+  orderSites?: AdminOrderSite[];
   origin: string;
 }) {
   const router = useRouter();
@@ -60,6 +62,7 @@ export default function AdminSite(props: {
   const [rsvp, setRsvp] = useState(props.rsvp);
   const [previewPath, setPreviewPath] = useState(props.previewPath);
   const [devices, setDevices] = useState<AdminDeviceView[]>(props.devices ?? []);
+  const [orderSites, setOrderSites] = useState<AdminOrderSite[]>(props.orderSites ?? []);
   const [noteText, setNoteText] = useState(props.summary.note ?? '');
   const [emailText, setEmailText] = useState(props.summary.ownerEmail ?? '');
   const [editingEmail, setEditingEmail] = useState(false);
@@ -70,8 +73,10 @@ export default function AdminSite(props: {
   const [shopEditUrl, setShopEditUrl] = useState<string | null>(null);
   const [confirming, setConfirming] = useState<string | null>(null);
 
-  const [note, setNote] = useState('Etsy\'de kontrol edildi: ödendi, iade/iptal yok, tasarım doğru');
-  const [holdNote, setHoldNote] = useState('Etsy\'de bulunamadı / uymadı');
+  // Empty on purpose: the note is kept with the site as the shop's own words; a pre-filled "checked: paid …" would be saved
+  // even when nothing was checked (empty -> the server writes a neutral "Dükkân onayladı").
+  const [note, setNote] = useState('');
+  const [holdNote, setHoldNote] = useState('');
   // Trust mode: the order is not verified, the site can already be published (confirm or hold it here).
   const trustCheck = s.order === 'provisional';
   const [grantAdd, setGrantAdd] = useState('1');
@@ -161,6 +166,7 @@ export default function AdminSite(props: {
       if (data.rsvp) setRsvp(data.rsvp);
       if (data.previewPath) setPreviewPath(data.previewPath);
       if (Array.isArray(data.devices)) setDevices(data.devices);
+      if (Array.isArray(data.orderSites)) setOrderSites(data.orderSites);
       if (data.editUrl) setEditUrl(data.editUrl);
       if (action === 'shop-edit-end') setShopEditUrl(null);
       if (data.shopEditUrl) setShopEditUrl(data.shopEditUrl);
@@ -225,6 +231,19 @@ export default function AdminSite(props: {
               : 'Alıcı siteyi düzenleyebiliyor ama siz onaylayana kadar yayınlayamaz.'}
             {!trustCheck && s.orderNote ? ` Not: ${s.orderNote}` : ''}
           </p>
+          {s.orderExtraUnconfirmed ? (
+            <p className={styles.hint} data-order-extra="">
+              Bu Etsy siparişiyle {Math.max(orderSites.length, s.orderSlot ?? 2)} site açıldı (bu, {s.orderSlot}. site). Etsy siparişinde{' '}
+              {Math.max(orderSites.length, s.orderSlot ?? 2)} tasarım (ya da aynı tasarımdan {Math.max(orderSites.length, s.orderSlot ?? 2)} adet) var mı?
+              Varsa onaylayın; yoksa alıcıya Etsy&apos;den yazın.
+            </p>
+          ) : null}
+          {s.orderNoDesign ? (
+            <p className={styles.hint} data-order-no-design="">
+              Etsy siparişinde (makbuz ya da satış e-postası) bu site için tasarım görünmüyor: yalnız hizmet (kurulum / ek revizyon /
+              özel tasarım) satın alınmış olabilir. Etsy&apos;de bakın; alıcı tasarımı ayrı bir siparişle aldıysa ona o sipariş numarasını yazın.
+            </p>
+          ) : null}
           <ol className={styles.steps}>
             <li>
               Etsy&apos;de siparişi bulun: <strong>#{s.orderRef ?? '—'}</strong>{' '}
@@ -251,7 +270,14 @@ export default function AdminSite(props: {
           <label className={styles.label} htmlFor="confirm-note">
             Not (siteyle saklanır)
           </label>
-          <input id="confirm-note" className={styles.input} value={note} onChange={(e) => setNote(e.target.value)} maxLength={300} />
+          <input
+            id="confirm-note"
+            className={styles.input}
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            maxLength={300}
+            placeholder="İsteğe bağlı: neye baktığınızı kısaca yazın"
+          />
           <div className={styles.row} style={{ marginTop: 12 }}>
             <button
               type="button"
@@ -282,7 +308,14 @@ export default function AdminSite(props: {
               <label className={styles.label} htmlFor="hold-note">
                 Bekletme nedeni (&quot;Yayından kaldır ve beklet&quot; ile siteyle saklanır)
               </label>
-              <input id="hold-note" className={styles.input} value={holdNote} onChange={(e) => setHoldNote(e.target.value)} maxLength={300} />
+              <input
+                id="hold-note"
+                className={styles.input}
+                value={holdNote}
+                onChange={(e) => setHoldNote(e.target.value)}
+                maxLength={300}
+                placeholder="İsteğe bağlı: neden beklettiğinizi kısaca yazın"
+              />
               <p className={styles.hint}>Bekletilen site yayından kalkar; sipariş sonradan doğru çıkarsa &quot;Siparişi onayla&quot; ve &quot;Alıcı adına yayınla&quot;.</p>
             </>
           ) : (
@@ -353,6 +386,30 @@ export default function AdminSite(props: {
           <Fact label="Misafir şifresi">{s.guestPassword ? 'Açık' : 'Kapalı'}</Fact>
         </dl>
       </section>
+
+      {orderSites.length > 1 ? (
+        <section className={styles.card} aria-labelledby="order-sites-title" data-order-sites={orderSites.length}>
+          <h2 id="order-sites-title" className={styles.h2}>
+            Bu siparişin siteleri ({orderSites.length})
+          </h2>
+          <p className={styles.actionText}>Aynı Etsy siparişinde birden fazla tasarım alınmışsa her tasarımın kendi sitesi olur.</p>
+          <ul className={styles.history} style={{ overflowWrap: 'anywhere' }}>
+            {orderSites.map((o) => (
+              <li key={o.id} data-order-site={o.slot}>
+                {o.slot}. site · <strong>{o.themeName}</strong> · {o.names} · /{o.slug}
+                {o.ownerEmail && o.ownerEmail !== s.ownerEmail ? ` · ${o.ownerEmail}` : ''}{' '}
+                {o.current ? (
+                  '(bu sayfa)'
+                ) : (
+                  <Link className={styles.link} href={`/admin/site/${o.id}`}>
+                    Aç
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       <section className={styles.card} aria-labelledby="note-title" data-note="">
         <h2 id="note-title" className={styles.h2}>

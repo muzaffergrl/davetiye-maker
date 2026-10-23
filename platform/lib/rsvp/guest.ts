@@ -22,7 +22,7 @@ import { previewAccess } from '../sites.ts';
 import { isReservedSlug, isValidSlugFormat } from '../slug.ts';
 import { DEFAULT_RSVP_LIMITS, DUPLICATE_WINDOW_MS, themeMaxGuests, type RsvpLimits } from './config.ts';
 import { closedMessage, rsvpWindow } from './deadline.ts';
-import { getRsvpRateLimiter, ipBucket, type RateLimiter } from './rate-limit.ts';
+import { getRsvpRateLimiter, ipBucket, type RateLimiter, type RateLimitRule } from './rate-limit.ts';
 import { formQuestions, parseSubmission, isHoneypotFilled, requiredFields } from './validate.ts';
 
 export type RsvpState = 'success' | 'closed' | 'error';
@@ -136,6 +136,32 @@ function sameReply(a: RsvpRecord, b: RsvpInput): boolean {
   );
 }
 
+/**
+ * G953: a shared counter (blob: one conditional write per hit) may lose a race with other guests answering at the same
+ * moment and throw (WriteConflictError, a passing storage error). A counter is only a guard against floods: when it
+ * cannot be counted the reply goes through as if it was under the limit — a guest's answer is never lost to a counter.
+ */
+async function bestEffortHit(limiter: RateLimiter, key: string, rule: RateLimitRule): Promise<{ allowed: boolean; retryAfterMs: number }> {
+  try {
+    return await limiter.hit(key, rule);
+  } catch (e) {
+    console.error(`[rsvp] counter skipped: ${e instanceof Error ? e.name : 'error'}`);
+    return { allowed: true, retryAfterMs: 0 };
+  }
+}
+
+/** G953: the site's replies of the duplicate window (an adapter that can, reads only those); [] when they cannot be read. */
+async function recentReplies(adapter: DataAdapter, siteId: string, sinceMs: number): Promise<RsvpRecord[]> {
+  try {
+    if (adapter.listRecentRsvps) return await adapter.listRecentRsvps(siteId, sinceMs);
+    return (await adapter.listRsvps(siteId)).filter((r) => Date.parse(r.createdAt) >= sinceMs);
+  } catch (e) {
+    // The duplicate check is a convenience (a double tap): without it the reply is stored, never refused.
+    console.error(`[rsvp] duplicate check skipped: ${e instanceof Error ? e.name : 'error'}`);
+    return [];
+  }
+}
+
 /** Handles one guest reply. `body` is the parsed JSON object. */
 export async function submitRsvp(ctx: GuestContext, slug: string, body: unknown): Promise<RsvpResult> {
   const limiter = ctx.limiter ?? getRsvpRateLimiter(ctx.adapter);
@@ -143,7 +169,7 @@ export async function submitRsvp(ctx: GuestContext, slug: string, body: unknown)
   const now = ctx.now ?? new Date();
 
   const ip = ipBucket(ctx.ip ?? '');
-  const perIp = await limiter.hit(`rsvp:ip:${ip}`, limits.perIp);
+  const perIp = await bestEffortHit(limiter, `rsvp:ip:${ip}`, limits.perIp);
   if (!perIp.allowed) return errorResult(429, 'rate_limited', {}, retryAfter(perIp.retryAfterMs));
 
   const site = await publishedSite(ctx.adapter, slug);
@@ -151,7 +177,7 @@ export async function submitRsvp(ctx: GuestContext, slug: string, body: unknown)
   // G076: no reply to a password-protected website without its guest cookie (nothing is stored).
   if (isProtected(site) && !guestMayEnter(site, ctx.cookie, now.getTime())) return errorResult(401, 'password_required');
 
-  const perSiteIp = await limiter.hit(`rsvp:site-ip:${site.id}:${ip}`, limits.perSiteIp);
+  const perSiteIp = await bestEffortHit(limiter, `rsvp:site-ip:${site.id}:${ip}`, limits.perSiteIp);
   if (!perSiteIp.allowed) return errorResult(429, 'rate_limited', {}, retryAfter(perSiteIp.retryAfterMs));
 
   const w = rsvpWindow(site.publishedContent, now);
@@ -168,17 +194,18 @@ export async function submitRsvp(ctx: GuestContext, slug: string, body: unknown)
     return { status: 400, body: { ok: false, state: 'error', code: 'invalid', message: first, fields: parsed.errors } };
   }
 
-  const recent = await ctx.adapter.listRsvps(site.id);
   const since = now.getTime() - DUPLICATE_WINDOW_MS;
+  const recent = await recentReplies(ctx.adapter, site.id, since);
   if (recent.some((r) => r.source !== 'couple' && Date.parse(r.createdAt) >= since && sameReply(r, parsed.value))) return success();
 
   // Over either volume rule the reply is still stored, but held: junk cannot inflate the couple's
-  // head count, and real guests are not locked out while it lasts.
-  const perSite = await limiter.hit(`rsvp:site:${site.id}`, limits.perSite);
-  const perSiteIpStored = await limiter.hit(`rsvp:site-ip-stored:${site.id}:${ip}`, limits.perSiteIpStored);
+  // head count, and real guests are not locked out while it lasts. G953: the counters are best effort (bestEffortHit):
+  // one that cannot be written counts as under the limit, and the reply is saved.
+  const perSite = await bestEffortHit(limiter, `rsvp:site:${site.id}`, limits.perSite);
+  const perSiteIpStored = await bestEffortHit(limiter, `rsvp:site-ip-stored:${site.id}:${ip}`, limits.perSiteIpStored);
   const held = !perSite.allowed || !perSiteIpStored.allowed;
   if (held) {
-    const room = await limiter.hit(`rsvp:held:${site.id}`, limits.heldPerSite);
+    const room = await bestEffortHit(limiter, `rsvp:held:${site.id}`, limits.heldPerSite);
     if (!room.allowed) return errorResult(429, 'busy', {}, retryAfter(room.retryAfterMs));
   }
 

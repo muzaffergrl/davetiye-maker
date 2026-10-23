@@ -38,7 +38,7 @@ test('public/demo matches lib/claim/demo-photos.json (scripts/build-demo-photos.
 });
 
 test(`every design on sale (${LIVE.length}) has sample photos for every photo slot: its own in public/demo, or set by its demo record`, async () => {
-  assert.ok(LIVE.length >= 21);
+  assert.ok(LIVE.length >= 20); // first sales wave: 01–20 (owner, 2026-10-23)
   for (const id of LIVE) {
     const theme = await claimableTheme(id);
     assert.ok(theme, id);

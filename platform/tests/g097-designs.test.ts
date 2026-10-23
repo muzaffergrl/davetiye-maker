@@ -210,7 +210,7 @@ test('15–20 are live, named as their themes, with design pages and placeholder
   }
   // 14 before them, in the order G094 left
   assert.ok(ids.indexOf('ivory-lace-pearls') < ids.indexOf('cherry-blossom-spring'));
-  assert.deepEqual(MARKETING.designs.filter((x) => x.status !== 'live').map((x) => x.id), ['nocturne-lake-estate', 'velvet-jewel-box', 'grand-theatre-premiere', 'orient-express-voyage', 'kintsugi-washi', 'riad-lantern-nights', 'maison-patisserie', 'celestial-observatory', 'azulejo-mosaic', 'sky-lantern-festival', 'music-box-ballerina', 'marigold-mehndi', 'red-lacquer-double-happiness', 'highland-tartan-thistle', 'victorian-glasshouse', 'art-nouveau-lily', 'papel-picado-fiesta', 'silver-photo-booth', 'swan-chantilly-lace', 'chartreuse-garden-party', 'bordeaux-silk-bow', 'monochrome-darkroom', 'navy-ivory-crest', 'painted-lily-pond', 'espresso-pastoral', 'blue-toile-pavilion', 'suede-ranch-lace']);
+  assert.deepEqual(MARKETING.designs.filter((x) => x.status !== 'live').map((x) => x.id), ['nocturne-lake-estate', 'velvet-jewel-box', 'grand-theatre-premiere', 'orient-express-voyage', 'kintsugi-washi', 'riad-lantern-nights', 'maison-patisserie', 'celestial-observatory', 'azulejo-mosaic', 'sky-lantern-festival', 'music-box-ballerina', 'marigold-mehndi', 'red-lacquer-double-happiness', 'highland-tartan-thistle', 'victorian-glasshouse', 'art-nouveau-lily', 'papel-picado-fiesta', 'silver-photo-booth', 'swan-chantilly-lace', 'chartreuse-garden-party', 'bordeaux-silk-bow', 'monochrome-darkroom', 'navy-ivory-crest', 'painted-lily-pond', 'espresso-pastoral', 'blue-toile-pavilion', 'suede-ranch-lace', 'crimson-rose-atelier', 'ivory-pearl-atelier']); // 21 + 49: not in the first sales wave 01–20 (owner, 2026-10-23)
 });
 
 test('design page titles ≤ 60 characters (also with a 12-character brand)', () => {
@@ -265,7 +265,11 @@ test('copy matches each theme: demo couple, fonts, palette tokens, collection, g
 test('every live design has its real screens and opening clip in assets.json and on disk, and nothing else is there', () => {
   assert.deepEqual(checkManifest(manifest), []);
   const ids = liveDesigns().map((d) => d.id);
-  assert.deepEqual(Object.keys(manifest.designs), [...ids, ...MARKETING.designs.filter((d) => d.status === 'preview').map((d) => d.id)], 'assets.json keeps live captures first, then complete preview captures');
+  // live captures first (config order), then the complete preview captures (a design taken off sale keeps its captures)
+  const keys = Object.keys(manifest.designs);
+  assert.deepEqual(keys.slice(0, ids.length), ids, 'assets.json keeps live captures first');
+  const previewIds = MARKETING.designs.filter((d) => d.status === 'preview').map((d) => d.id);
+  assert.deepEqual([...keys.slice(ids.length)].sort(), [...previewIds].sort(), 'then complete preview captures');
   for (const id of ids) {
     const m = manifest.designs[id];
     assert.ok(m, `no ${id} entry: node scripts/marketing-assets.ts --designs ${id} --shots <capture>`);

@@ -1407,6 +1407,20 @@ const dict: Dict = {
   "Open the panel again (panel page)": "Abrir el panel de nuevo (página del panel)",
   "Open the panel again (home page)": "Abrir el panel de nuevo (página de inicio)",
   "Open the panel again (RSVP page)": "Abrir el panel de nuevo (página de RSVP)",
+  "Downloads open once your order is confirmed.": "Las descargas se activan en cuanto se confirme tu pedido.",
+  "This website is archived, so its PDFs can no longer be made.": "Este sitio web está archivado, así que ya no se pueden crear sus PDF.",
+  "Your Etsy order already has a website.": "Tu pedido de Etsy ya tiene un sitio web.",
+  "Your Etsy order already has {n} websites.": "Tu pedido de Etsy ya tiene {n} sitios web.",
+  "Open it": "Abrir",
+  "Start another website with this design": "Empezar otro sitio web con este diseño",
+  "Start a second website with {design}": "Empezar un segundo sitio web con {design}",
+  "Start one more website with {design}": "Empezar un sitio web más con {design}",
+  "Only if you bought this design more than once in this order.": "Solo si compraste este diseño más de una vez en este pedido.",
+  "Only if you bought both designs in this order.": "Solo si compraste los dos diseños en este pedido.",
+  "Only if you bought this design in the same order too.": "Solo si también compraste este diseño en el mismo pedido.",
+  "Find it in your Etsy order confirmation email, or on Etsy under Purchases and reviews. One website for each design you bought.": "Lo encontrarás en el correo de confirmación de tu pedido de Etsy, o en Etsy en Compras y reseñas. Un sitio web por cada diseño que compraste.",
+  "Every design in this Etsy order already has its website. To start another website, please buy the design on Etsy and use that order number.": "Cada diseño de este pedido de Etsy ya tiene su sitio web. Para empezar otro sitio web, compra el diseño en Etsy y usa ese número de pedido.",
+  "This order already has the most websites one order can have. Please message us on Etsy if you need another one.": "Este pedido ya tiene el máximo de sitios web que puede tener un pedido. Si necesitas otro, escríbenos por Etsy.",
 };
 
 export default dict;

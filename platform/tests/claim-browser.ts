@@ -7,7 +7,9 @@
 // Flow: no/invalid theme link -> /start?theme=… shows the live demo -> field errors -> fill the form
 // (address follows the names, availability hint) -> create -> big edit link + "Save this link" + copy
 // -> reload keeps the link -> "Open my editor" opens the panel (G039) with the buyer's names ->
-// the same order number again gets the friendly "already has a website" message (nothing leaked) ->
+// the same order number + email again gets the choice (G951: open the order's website / start one more), "Open it" and
+// "Start another website with this design" work, another email gets the friendly "already has a website" message
+// (nothing leaked) ->
 // a taken address moves to "-2" -> desktop layout. If platform/themes/blush-garden-rose exists (G038),
 // its start page and editor are captured too.
 // Fixture theme "sample-design" = a copy of _sample (test scaffolding, not a design) with the 03 demo record.
@@ -234,17 +236,74 @@ try {
   await page.waitForSelector('#start-order');
   check('start another: form again, email kept', (await page.inputValue('#start-email')) === 'avery@example.test' && (await page.inputValue('#start-order')) === '');
 
-  // Same order number again -> friendly message, no link, no address of the first site.
+  // G951: the same order number + the same email again -> the choice (open the order's website, or start one more —
+  // only if the design was bought twice): no link in the page, no new site until the buyer asks for one.
+  // (Selectors are data attributes: several elements carry role="status" — the address hint too — so a role locator is
+  // not unique in Playwright's strict mode.)
   await fillForm(page, { order: ORDER, names: ['Other', 'Pair'] });
   await page.waitForSelector('[data-slug-available]');
   await page.click('button[type="submit"]');
-  await page.waitForSelector('[role="status"]:has-text("already has a website")');
+  await page.waitForSelector('[data-start-choice]');
+  const choiceText = await page.locator('[data-start-choice]').innerText();
+  check(
+    'second claim, same email: the choice',
+    choiceText.includes('Your Etsy order already has a website.') && choiceText.includes('Open it') && choiceText.includes('Start another website with this design'),
+    choiceText.slice(0, 200),
+  );
+  check(
+    "second claim, same email: the order's website listed, no link",
+    (await page.locator('[data-start-open="avery-and-jordan"]').count()) === 1 && !(await page.locator('main').innerText()).includes('k=') && (await page.locator('[data-edit-link]').count()) === 0,
+  );
+  check('second claim: no new site before the buyer asks', (await adapter.findSitesByOrderRef(ORDER)).length === 1 && !(await adapter.getSiteBySlug('other-and-pair')));
+  check('choice: no horizontal overflow at 390 px', (await overflow(page)) <= 0);
+  await page.locator('[data-start-choice]').scrollIntoViewIfNeeded();
+  await shot(page, '06_order_choice_390');
+
+  // Another email with the same order number -> the friendly "already has a website" notice (the way to /my), nothing leaked.
+  await page.fill('#start-email', 'someone@example.test');
+  await page.click('button[type="submit"]');
+  await page.waitForSelector('[data-start-my-link]');
   const usedText = await page.locator('main').innerText();
-  check('second claim with the same order: friendly message', usedText.includes('This order already has a website') && usedText.includes('edit link you saved'));
-  check('second claim: no link or first address leaked', !usedText.includes('avery-and-jordan') && !usedText.includes('k=') && (await page.locator('[data-edit-link]').count()) === 0);
-  check('second claim: no new site', (await adapter.findSitesByOrderRef(ORDER)).length === 1 && !(await adapter.getSiteBySlug('other-and-pair')));
-  await page.locator('[role="status"]').scrollIntoViewIfNeeded();
-  await shot(page, '06_order_used_390');
+  check(
+    'second claim, another email: friendly message with the way to /my',
+    usedText.includes('This order already has a website') && (await page.locator('[data-start-my-link]').getAttribute('href')) === '/my#continue',
+  );
+  check(
+    'second claim, another email: no link or first address leaked',
+    !usedText.includes('avery-and-jordan') && !usedText.includes('k=') && (await page.locator('[data-edit-link]').count()) === 0 && (await page.locator('[data-start-choice]').count()) === 0,
+  );
+  check('second claim, another email: still one site', (await adapter.findSitesByOrderRef(ORDER)).length === 1);
+  await page.locator('[data-start-my-link]').scrollIntoViewIfNeeded();
+  await shot(page, '06b_order_used_390');
+  await page.fill('#start-email', 'avery@example.test');
+
+  // The two buttons of the choice, each in a fresh tab (sessionStorage is per tab: no stored result there).
+  {
+    const tab = await ctx.newPage();
+    await tab.goto(`${BASE}/start?theme=${FIXTURE}`, { waitUntil: 'networkidle' });
+    await fillForm(tab, { order: ORDER, email: 'avery@example.test', names: ['Other', 'Pair'] });
+    await tab.waitForSelector('[data-slug-available]');
+    await tab.click('button[type="submit"]');
+    await tab.waitForSelector('[data-start-open="avery-and-jordan"]');
+    await tab.click('[data-start-open="avery-and-jordan"]');
+    await tab.waitForURL(/\/edit\/avery-and-jordan\?k=/);
+    check('choice "Open it": the order\'s website opens on this device', /\/edit\/avery-and-jordan\?k=/.test(tab.url()));
+    await tab.close();
+  }
+  {
+    const tab = await ctx.newPage();
+    await tab.goto(`${BASE}/start?theme=${FIXTURE}`, { waitUntil: 'networkidle' });
+    await fillForm(tab, { order: ORDER, email: 'avery@example.test', names: ['Other', 'Pair'] });
+    await tab.waitForSelector('[data-slug-available]');
+    await tab.click('button[type="submit"]');
+    await tab.waitForSelector('[data-start-add]');
+    await tab.click('[data-start-add]');
+    await tab.waitForSelector('[data-edit-link]');
+    check('choice "Start another website with this design": a second website of the order', (await tab.inputValue('[data-edit-link]')).includes('/edit/other-and-pair?k='));
+    const both = await adapter.findSitesByOrderRef(ORDER);
+    check('the order now has 2 websites (units 1 and 2)', both.length === 2 && both.map((x) => x.orderSlot ?? 1).sort().join() === '1,2');
+    await tab.close();
+  }
 
   // New order, same names: the automatic address moves to "-2"; typing the taken one offers the free one.
   await fillForm(page, { order: '4821559032', names: ['Avery', 'Jordan'] });

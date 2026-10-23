@@ -142,6 +142,23 @@ export interface AdminSiteDetail {
   previewPath: string;
   /** G152: devices signed in with the order number + email (G146 device keys; labels and dates only, newest first). */
   devices: AdminDeviceView[];
+  /** G951: every website of this site's Etsy order (this one included), by design unit; empty without an order number. */
+  orderSites: AdminOrderSite[];
+}
+
+/** G951: one website of an Etsy order, as the order's list in the admin shows it. */
+export interface AdminOrderSite {
+  id: string;
+  slug: string;
+  themeName: string;
+  names: string;
+  ownerEmail: string | null;
+  state: AdminSiteSummary['state'];
+  order: AdminSiteSummary['order'];
+  /** 1 = the order's first website. */
+  slot: number;
+  /** The site of the page it is shown on. */
+  current: boolean;
 }
 
 export interface AdminDeviceView {
@@ -193,7 +210,18 @@ async function detailOf(site: SiteRecord, adapter: DataAdapter, now: Date = new 
     rsvp: { counts: rsvp.counts, responses: rsvp.responses },
     previewPath: `/${site.slug}?preview=${encodeURIComponent(panelPreviewToken(site.id, site.previewKeyHash, now.getTime()))}`,
     devices: (await listDevices(adapter, site)).map(({ label, createdAt, via }) => ({ label, createdAt, via })),
+    orderSites: site.orderRef ? orderSitesOf(await adapter.findSitesByOrderRef(site.orderRef), site.id, now) : [],
   };
+}
+
+/** G951: the order's websites for the admin (pure). */
+export function orderSitesOf(sites: readonly SiteRecord[], currentId: string, now: Date = new Date()): AdminOrderSite[] {
+  return sites
+    .map((x) => {
+      const sum = summarizeSite(x, 0, now);
+      return { id: x.id, slug: x.slug, themeName: sum.themeName, names: sum.names, ownerEmail: x.ownerEmail, state: sum.state, order: sum.order, slot: x.orderSlot ?? 1, current: x.id === currentId };
+    })
+    .sort((a, b) => a.slot - b.slot || a.slug.localeCompare(b.slug));
 }
 
 /** POST /api/admin/sites — the shop starts a website for a buyer ("Yeni sipariş"). */
@@ -284,7 +312,8 @@ export async function siteAction(req: Request, id: string, action: string): Prom
     let extra: Record<string, unknown> = {};
     switch (action as AdminAction) {
       case 'confirm': {
-        const note = text(body.note) || 'Checked in Etsy';
+        // No note typed: a neutral line (it must not claim what was checked).
+        const note = text(body.note) || 'Dükkân onayladı';
         updated = await confirmOrder(adapter, site.id, note);
         break;
       }

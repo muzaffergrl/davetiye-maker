@@ -1,22 +1,33 @@
 // "Yeni sipariş" in the shop admin (G095): the shop starts a website for a buyer (the buyer asked for help, an
 // order from another channel, a replacement). Same rules as /start (lib/claim/claim.ts): a claimable theme open for
-// sale, one website per order number, a free address, the theme's demo content with the buyer's names. The order is
-// confirmed by the shop in the same write (it made the site itself); the edit link is returned ONCE and never stored.
+// sale, a free address, the theme's demo content with the buyer's names. The order is confirmed by the shop in the same
+// write (it made the site itself); the edit link is returned ONCE and never stored.
+// G951: an order number that already has websites is refused with their list (`orderSites`) — unless the shop confirms
+// that the Etsy order holds one more design (`addToOrder: true`, the form's explicit second step): the website then takes
+// the order's next free design unit (orderSlot), at most MAX_ORDER_SITES.
 
 import { OrderRefTakenError, SlugTakenError, type DataAdapter } from '../data/types.ts';
-import { draftFromDemo, findFreeSlug } from '../claim/claim.ts';
+import { draftFromDemo, findFreeSlug, orderRoom } from '../claim/claim.ts';
 import { cleanName, emailError, nameError, normalizeEmail, normalizeOrderNumber, normalizeSlugInput, orderNumberError, slugProblem, slugProblemMessage, suggestSlugBase } from '../claim/fields.ts';
 import { claimableTheme, claimableThemes, type ClaimableThemeEntry } from '../claim/themes.ts';
 import { themeOpenForClaims } from '../themes/approval.ts';
 import { themeStartable } from '../themes/offered.ts';
 import { createSiteWithKeys } from '../sites.ts';
-import { SHOP_CREATED_NOTE } from './summary.ts';
+import { MAX_ORDER_SITES } from '../claim/verify.ts';
+import { SHOP_CREATED_NOTE, summarizeSite, themeName } from './summary.ts';
 
 export type AdminCreateField = 'theme' | 'orderNumber' | 'email' | 'name1' | 'name2' | 'slug';
 
 export type AdminCreateResult =
-  | { ok: true; id: string; slug: string; editUrl: string; siteUrl: string }
-  | { ok: false; message: string; fields?: Partial<Record<AdminCreateField, string>>; existingId?: string };
+  | { ok: true; id: string; slug: string; editUrl: string; siteUrl: string; orderSlot: number }
+  | {
+      ok: false;
+      message: string;
+      fields?: Partial<Record<AdminCreateField, string>>;
+      existingId?: string;
+      /** G951: the order's websites; with it the form asks "add one more website to this order?" (`addToOrder`). */
+      orderSites?: Array<{ id: string; slug: string; themeName: string; names: string; ownerEmail: string | null }>;
+    };
 
 /** Designs the shop can start a website from (claimable and open for sale) + every private custom design (G151). */
 export async function adminCreatableThemes(): Promise<ClaimableThemeEntry[]> {
@@ -52,9 +63,23 @@ export async function adminCreateSite(adapter: DataAdapter, origin: string, body
   const orderNumber = normalizeOrderNumber(orderRaw)!;
   const email = normalizeEmail(emailRaw)!;
   const existing = await adapter.findSitesByOrderRef(orderNumber);
+  const room = orderRoom(existing, { result: 'not_checked' });
   if (existing.length) {
-    return { ok: false, message: `Bu sipariş numarasının zaten bir sitesi var (/${existing[0].slug}).`, fields: { orderNumber: 'Bu siparişin zaten sitesi var.' }, existingId: existing[0].id };
+    const orderSites = existing.map((x) => ({ id: x.id, slug: x.slug, themeName: themeName(x.theme), names: summarizeSite(x, 0, now).names, ownerEmail: x.ownerEmail }));
+    if (room.slot === null) {
+      return { ok: false, message: `Bu siparişte zaten ${existing.length} site var (en çok ${MAX_ORDER_SITES}).`, fields: { orderNumber: 'Bu siparişe site eklenemez.' }, existingId: existing[0].id, orderSites };
+    }
+    if (body.addToOrder !== true) {
+      return {
+        ok: false,
+        message: `Bu sipariş numarasının zaten ${existing.length === 1 ? 'bir sitesi' : `${existing.length} sitesi`} var. Etsy siparişinde bir tasarım daha varsa aşağıdan onaylayıp ekleyin.`,
+        fields: { orderNumber: 'Bu siparişin zaten sitesi var.' },
+        existingId: existing[0].id,
+        orderSites,
+      };
+    }
   }
+  const slot = existing.length ? room.slot! : 1;
   const buyerNames = names.slice(0, partnerCount).map(cleanName);
   let slug = slugRaw;
   if (slug) {
@@ -75,6 +100,7 @@ export async function adminCreateSite(adapter: DataAdapter, origin: string, body
       orderRef: orderNumber,
       ownerEmail: email,
       orderCheck: { status: 'verified', at: now.toISOString(), by: 'support', note: SHOP_CREATED_NOTE },
+      ...(slot > 1 ? { orderSlot: slot } : {}),
     });
     const base = origin.replace(/\/+$/, '');
     return {
@@ -83,9 +109,10 @@ export async function adminCreateSite(adapter: DataAdapter, origin: string, body
       slug: created.site.slug,
       editUrl: `${base}/edit/${created.site.slug}?k=${encodeURIComponent(created.editKey)}`,
       siteUrl: `${base}/${created.site.slug}`,
+      orderSlot: slot,
     };
   } catch (e) {
-    if (e instanceof OrderRefTakenError) return { ok: false, message: 'Bu sipariş numarasının zaten bir sitesi var.', fields: { orderNumber: 'Bu siparişin zaten sitesi var.' } };
+    if (e instanceof OrderRefTakenError) return { ok: false, message: 'Bu siparişe tam o sırada başka bir site eklendi; sayfayı yenileyip tekrar deneyin.', fields: { orderNumber: 'Bu siparişin zaten sitesi var.' } };
     if (e instanceof SlugTakenError) return { ok: false, message: 'Bu adres az önce alındı; başka bir adres deneyin.', fields: { slug: 'Bu adres dolu.' } };
     throw e;
   }

@@ -108,7 +108,7 @@ const keyOf = (editPath: string) => new URL(editPath, BASE).searchParams.get('k'
 
 // ------------------------------------------------------------------------------------------------ 1. Etsy units
 
-test('designUnits: quantities of design lines; service listings never count; at least 1, at most MAX_ORDER_SITES', () => {
+test('designUnits: quantities of design lines; service listings never count; 1 without readable lines, at most MAX_ORDER_SITES', () => {
   const services = listingServices({ services: { '900': 'setup', '901': 'custom_design', '902': 'extra_revision', '903': 'other', x: 'setup' } });
   assert.deepEqual([...services], [['900', 'setup'], ['901', 'custom_design'], ['902', 'extra_revision']], 'unknown kinds and bad ids are ignored');
   assert.equal(listingServices().size, 0, 'the shipped file has no services yet');
@@ -116,7 +116,7 @@ test('designUnits: quantities of design lines; service listings never count; at 
   assert.equal(designUnits({ transactions: [{ listing_id: 1, quantity: 2 }] }, services), 2, 'one design bought twice = two websites');
   assert.equal(designUnits({ transactions: [{ listing_id: 1 }, { listing_id: 2, quantity: 1 }] }, services), 2, 'two designs');
   assert.equal(designUnits({ transactions: [{ listing_id: 1 }, { listing_id: 900 }, { listing_id: 901, quantity: 3 }, { listing_id: 902 }] }, services), 1, 'setup / custom design / revision never count');
-  assert.equal(designUnits({ transactions: [{ listing_id: 900 }] }, services), 1, 'only a service line: still one website');
+  assert.equal(designUnits({ transactions: [{ listing_id: 900 }] }, services), 0, 'G951: only a service line: no design website (the shop looks)');
   assert.equal(designUnits({ transactions: [] }, services), 1);
   assert.equal(designUnits(null, services), 1);
   assert.equal(designUnits({ transactions: [{ listing_id: 1, quantity: 0 }, { listing_id: 2, quantity: -3 }, { listing_id: 3, quantity: 1.5 as never }] }, services), 3, 'odd quantities count as 1');
@@ -145,15 +145,26 @@ for (const kind of ['local', 'blob'] as const) {
     return new BlobAdapter({ token: fake.token, client: fake.client(), retryDelayMs: () => 1 });
   };
 
-  test(`${kind}: an order with 2 design units holds 2 websites; then sign-in (same email) or order_used`, async () => {
+  test(`${kind}: an order with 2 design units holds 2 websites (the buyer asks for the second); then sign-in (same email) or order_used`, async () => {
     const adapter = open();
     const order = freshOrder();
     const etsy = unitsVerifier(2);
     const a = await claim(adapter, { orderNumber: order, email: 'avery@example.test' }, { verifier: etsy });
     assert.equal(a.status, 201);
-    const b = await claim(adapter, { orderNumber: order, email: 'avery@example.test', theme: 'second-design', names: ['Sam', 'Lee'] }, { verifier: etsy });
+    // G951: the second design of the order: first the choice (open the first website / start a second one) …
+    const ask = await claim(adapter, { orderNumber: order, email: 'avery@example.test', theme: 'second-design', names: ['Sam', 'Lee'] }, { verifier: etsy });
+    assert.equal(ask.status, 200);
+    assert.equal(ask.body.next, 'choose');
+    assert.deepEqual(ask.body.sites, [{ slug: a.body.slug, names: 'Avery & Jordan', design: 'Sample Design', sameDesign: false }]);
+    assert.deepEqual(ask.body.add, { design: 'Second Design', sameDesign: false });
+    assert.equal((await adapter.findSitesByOrderRef(order)).length, 1, 'nothing made before the buyer chooses');
+    // … then "Start a second website with Second Design"
+    const b = await claim(adapter, { orderNumber: order, email: 'avery@example.test', theme: 'second-design', names: ['Sam', 'Lee'], intent: 'add' }, { verifier: etsy });
     assert.equal(b.status, 201, 'the second unit: a new website');
     assert.notEqual(b.body.slug, a.body.slug);
+    const full = await claim(adapter, { orderNumber: order, email: 'avery@example.test', intent: 'add' }, { verifier: etsy });
+    assert.equal(full.status, 409, 'the receipt pays for two: no third');
+    assert.equal(full.body.code, 'order_full');
     const sites = await adapter.findSitesByOrderRef(order);
     assert.equal(sites.length, 2);
     assert.deepEqual(sites.map((s) => s.orderSlot ?? 1).sort(), [1, 2]);
@@ -171,12 +182,15 @@ for (const kind of ['local', 'blob'] as const) {
     assert.equal((await adapter.findSitesByOrderRef(order)).length, 2, 'never a third');
   });
 
-  test(`${kind}: off / manual keep one website per order; a claim retry recovers its link instead of using a unit`, async () => {
+  test(`${kind}: another email never gets a website of the order; a claim retry recovers its link instead of using a unit`, async () => {
     const adapter = open();
     const order = freshOrder();
     assert.equal((await claim(adapter, { orderNumber: order, email: 'avery@example.test' })).status, 201);
     const second = await claim(adapter, { orderNumber: order, email: 'other@example.test', theme: 'second-design' });
-    assert.equal(second.status, 409, 'off mode: one site per order, as before');
+    assert.equal(second.status, 409, 'another email: order used');
+    const added = await claim(adapter, { orderNumber: order, email: 'other@example.test', theme: 'second-design', intent: 'add' });
+    assert.equal(added.status, 409, 'not even when asking for one more');
+    assert.equal(added.body.code, 'order_used');
     const manual = freshOrder();
     const pending: OrderVerifier = { kind: 'manual', check: async () => ({ result: 'pending' }) };
     assert.equal((await claim(adapter, { orderNumber: manual, email: 'avery@example.test' }, { verifier: pending })).status, 201);
@@ -225,27 +239,35 @@ test('blob: a claim that loses the race for a unit (another instance, not visibl
   const order = freshOrder();
   // another instance made unit 1 a moment ago; this instance's first look at the order does not see it yet
   await createSiteWithKeys(adapter, { slug: `g152-race-${counter}`, theme: '_sample', content: demoContent(), orderRef: order, ownerEmail: 'first@example.test' });
-  let stale = true;
-  const lagging = new Proxy(adapter, {
-    get(target, prop) {
-      if (prop === 'findSitesByOrderRef') {
-        return async (ref: string) => {
-          if (stale) {
-            stale = false;
-            return [];
-          }
-          return target.findSitesByOrderRef(ref);
-        };
-      }
-      const v = Reflect.get(target, prop, target);
-      return typeof v === 'function' ? v.bind(target) : v;
-    },
-  }) as DataAdapter;
-  const r = await claim(lagging, { orderNumber: order, email: 'second@example.test' }, { verifier: unitsVerifier(2) });
-  assert.equal(r.status, 201);
+  const lagging = () => {
+    let stale = true;
+    return new Proxy(adapter, {
+      get(target, prop) {
+        if (prop === 'findSitesByOrderRef') {
+          return async (ref: string) => {
+            if (stale) {
+              stale = false;
+              return [];
+            }
+            return target.findSitesByOrderRef(ref);
+          };
+        }
+        const v = Reflect.get(target, prop, target);
+        return typeof v === 'function' ? v.bind(target) : v;
+      },
+    }) as DataAdapter;
+  };
+  // G951: the same email without asking for one more: the lost race ends in the choice, nothing is made
+  const ask = await claim(lagging(), { orderNumber: order, email: 'first@example.test' }, { verifier: unitsVerifier(2) });
+  assert.equal(ask.status, 200);
+  assert.equal(ask.body.next, 'choose');
+  // asking for one more: unit 1 is refused by its index file, unit 2 is taken
+  const r = await claim(lagging(), { orderNumber: order, email: 'first@example.test', intent: 'add' }, { verifier: unitsVerifier(2) });
+  assert.equal(r.status, 201, JSON.stringify(r.body));
   const sites = await adapter.findSitesByOrderRef(order);
   assert.deepEqual(sites.map((s) => s.orderSlot ?? 1), [1, 2]);
-  // all units used now: a third (another email) gets order_used
+  // another email (racing or not): order_used
+  assert.equal((await claim(lagging(), { orderNumber: order, email: 'third@example.test', intent: 'add' }, { verifier: unitsVerifier(3) })).status, 409);
   assert.equal((await claim(adapter, { orderNumber: order, email: 'third@example.test' }, { verifier: unitsVerifier(2) })).status, 409);
 });
 
@@ -254,9 +276,11 @@ test('/my: several websites of the order started with this email → a chooser (
   const order = freshOrder();
   const etsy = unitsVerifier(3);
   const a = await claim(adapter, { orderNumber: order, email: 'avery@example.test' }, { verifier: etsy });
-  const b = await claim(adapter, { orderNumber: order, email: 'avery@example.test', theme: 'second-design', names: ['Sam', 'Lee'] }, { verifier: etsy });
-  const c = await claim(adapter, { orderNumber: order, email: 'friend@example.test', names: ['Kim', 'Ray'] }, { verifier: etsy });
-  assert.deepEqual([a.status, b.status, c.status], [201, 201, 201]);
+  const b = await claim(adapter, { orderNumber: order, email: 'avery@example.test', theme: 'second-design', names: ['Sam', 'Lee'], intent: 'add' }, { verifier: etsy });
+  assert.deepEqual([a.status, b.status], [201, 201]);
+  // a website of the same order with another email (made by the shop in the admin): never shown to this email
+  const made = await createSiteWithKeys(adapter, { slug: `g152-friend-${counter}`, theme: 'sample-design', content: demoContent(), orderRef: order, ownerEmail: 'friend@example.test', orderSlot: 3 });
+  const c = { body: { slug: made.site.slug } };
   const ctx = () => ({ adapter, origin: BASE, ip: freshIp(), userAgent: IPHONE, limiter: new MemoryRateLimiter() });
 
   const choose = await continueWithOrder(ctx(), { orderNumber: order, email: 'Avery@example.test' });
@@ -264,7 +288,8 @@ test('/my: several websites of the order started with this email → a chooser (
   assert.equal(choose.body.next, 'choose');
   const list = choose.body.sites as Json[];
   assert.deepEqual(list.map((s) => s.slug).sort(), [a.body.slug, b.body.slug].sort(), 'only the websites this email started');
-  assert.ok(list.every((s) => typeof s.names === 'string' && s.names.length && Object.keys(s).sort().join() === 'names,slug'), 'no key, no email');
+  assert.ok(list.every((s) => typeof s.names === 'string' && s.names.length && Object.keys(s).sort().join() === 'design,names,slug'), 'no key, no email');
+  assert.deepEqual(list.map((s) => s.design).sort(), ['Sample Design', 'Second Design'], 'G951: each with its design');
   assert.ok(!JSON.stringify(choose.body).includes('?k='));
 
   const picked = await continueWithOrder(ctx(), { orderNumber: order, email: 'avery@example.test', slug: b.body.slug });

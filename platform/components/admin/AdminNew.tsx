@@ -1,6 +1,8 @@
 'use client';
 // "Yeni sipariş" form (G095): design, Etsy order number, buyer's email, first names, optional address → POST
 // /api/admin/sites. The edit link is shown ONCE with the ready Etsy message (template shop_created_site).
+// G951: an order number that already has websites shows them; the shop can add one more website to that order only
+// after ticking "the Etsy order holds one more design" (addToOrder) and sending again.
 import { ArrowRight, Check, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -11,6 +13,7 @@ import styles from './admin.module.css';
 import { CopyButton } from './CopyButton.tsx';
 
 type Created = { id: string; slug: string; editUrl: string; siteUrl: string; names: string; design: string };
+type OrderSite = { id: string; slug: string; themeName: string; names: string; ownerEmail: string | null };
 
 export default function AdminNew({ themes, initialTheme }: { themes: Array<{ id: string; name: string; privateOrders?: string[] }>; initialTheme: string }) {
   const router = useRouter();
@@ -18,10 +21,19 @@ export default function AdminNew({ themes, initialTheme }: { themes: Array<{ id:
   const [errors, setErrors] = useState<Partial<Record<AdminCreateField, string>>>({});
   const [message, setMessage] = useState<string | null>(null);
   const [existingId, setExistingId] = useState<string | null>(null);
+  const [orderSites, setOrderSites] = useState<OrderSite[] | null>(null);
+  const [addToOrder, setAddToOrder] = useState(false);
   const [busy, setBusy] = useState(false);
   const [created, setCreated] = useState<Created | null>(null);
 
-  const set = (k: keyof typeof v) => (e: { target: { value: string } }) => setV((x) => ({ ...x, [k]: e.target.value }));
+  const set = (k: keyof typeof v) => (e: { target: { value: string } }) => {
+    setV((x) => ({ ...x, [k]: e.target.value }));
+    // another order number: the confirmation was for the previous one
+    if (k === 'orderNumber') {
+      setOrderSites(null);
+      setAddToOrder(false);
+    }
+  };
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -30,7 +42,11 @@ export default function AdminNew({ themes, initialTheme }: { themes: Array<{ id:
     setMessage(null);
     setExistingId(null);
     try {
-      const res = await fetch('/api/admin/sites', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(v) });
+      const res = await fetch('/api/admin/sites', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ ...v, ...(orderSites && addToOrder ? { addToOrder: true } : {}) }),
+      });
       if (res.status === 401) {
         router.refresh();
         return;
@@ -40,8 +56,11 @@ export default function AdminNew({ themes, initialTheme }: { themes: Array<{ id:
         setErrors(data?.fields ?? {});
         setMessage(data?.message ?? 'Olmadı. Tekrar deneyin.');
         setExistingId(data?.existingId ?? null);
+        setOrderSites(Array.isArray(data?.orderSites) ? data.orderSites : null);
         return;
       }
+      setOrderSites(null);
+      setAddToOrder(false);
       const design = themes.find((t) => t.id === v.theme)?.name ?? v.theme;
       const names = [v.name1.trim(), v.name2.trim()].filter(Boolean).join(' & ');
       setCreated({ id: data.id, slug: data.slug, editUrl: data.editUrl, siteUrl: data.siteUrl, names, design });
@@ -154,15 +173,35 @@ export default function AdminNew({ themes, initialTheme }: { themes: Array<{ id:
       {message ? (
         <p className={`${styles.status} ${styles.statusErr}`} role="alert">
           {message}{' '}
-          {existingId ? (
+          {existingId && !orderSites ? (
             <Link className={styles.link} href={`/admin/site/${existingId}`}>
               Mevcut siteyi aç <ExternalLink size={14} aria-hidden style={{ verticalAlign: '-2px' }} />
             </Link>
           ) : null}
         </p>
       ) : null}
-      <button type="submit" className={`${styles.btn} ${styles.full}`} style={{ marginTop: 18 }} disabled={busy} data-action="create">
-        {busy ? 'Oluşturuluyor…' : 'Siteyi oluştur'}
+      {orderSites ? (
+        <div className={styles.callout} style={{ marginTop: 12 }} data-order-sites={orderSites.length}>
+          <p className={styles.calloutTitle}>Bu siparişin siteleri ({orderSites.length})</p>
+          <ul className={styles.history} style={{ overflowWrap: 'anywhere' }}>
+            {orderSites.map((o) => (
+              <li key={o.id}>
+                <strong>{o.themeName}</strong> · {o.names} · /{o.slug}
+                {o.ownerEmail ? ` · ${o.ownerEmail}` : ''}{' '}
+                <Link className={styles.link} href={`/admin/site/${o.id}`}>
+                  Aç <ExternalLink size={14} aria-hidden style={{ verticalAlign: '-2px' }} />
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <label style={{ display: 'flex', gap: 8, alignItems: 'flex-start', marginTop: 10 }}>
+            <input type="checkbox" checked={addToOrder} onChange={(e) => setAddToOrder(e.target.checked)} data-add-to-order="" />
+            <span>Etsy&apos;de baktım: bu siparişte bir tasarım daha var. Bu siparişe bir site daha ekle.</span>
+          </label>
+        </div>
+      ) : null}
+      <button type="submit" className={`${styles.btn} ${styles.full}`} style={{ marginTop: 18 }} disabled={busy || (orderSites !== null && !addToOrder)} data-action="create">
+        {busy ? 'Oluşturuluyor…' : orderSites ? 'Bu siparişe site ekle' : 'Siteyi oluştur'}
       </button>
       <p className={styles.hint}>Site, tasarımın örnek metin ve fotoğraflarıyla açılır; alıcı her şeyi kendi panelinden değiştirir.</p>
     </form>
