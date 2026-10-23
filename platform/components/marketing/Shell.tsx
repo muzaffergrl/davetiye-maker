@@ -182,6 +182,13 @@ export function Footer({ guides, m = enMarket }: { guides: Guide[]; m?: Market }
               <li>
                 <a href={m.href('/privacy')}>{t('Privacy')}</a>
               </li>
+              {/* G961 (decision 7): terms of use and the KVKK notice, in every language */}
+              <li>
+                <a href={m.href('/terms')}>{t('Terms of use')}</a>
+              </li>
+              <li>
+                <a href={m.href('/kvkk')}>{t('KVKK notice')}</a>
+              </li>
               <li>
                 <a href="/admin" rel="nofollow" data-shop-login="">
                   {t('Shop login')}

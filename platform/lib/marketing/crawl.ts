@@ -134,7 +134,7 @@ export function llmsTxt(guides: Guide[], cfg: MarketingConfig = MARKETING): stri
   out.push('', '## Guides');
   for (const g of guides) out.push(`- [${g.title}](${absUrl(g.path, cfg)}): ${g.description}`);
   out.push('', '## Optional');
-  for (const path of ['/about', '/contact', '/privacy']) {
+  for (const path of ['/about', '/contact', '/privacy', '/terms', '/kvkk']) {
     const p = corePages(cfg).find((x) => x.path === path)!;
     out.push(`- [${p.label}](${absUrl(p.path, cfg)})`);
   }

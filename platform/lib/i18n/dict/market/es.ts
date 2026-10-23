@@ -1,7 +1,10 @@
 // G144: market texts in es (keys = the English text; tests/i18n.test.ts reports missing keys). Missing = English.
 import type { Dict } from '../../translate.ts';
+import legal from '../legal/market-es.ts';
 
 const dict: Dict = {
+  // G961: terms of use, KVKK notice (dict/legal/market-es.ts)
+  ...legal,
   '+{n} more': '+{n} más',
   ', and every step is explained in': ', y cada paso se explica en',
   '24 hours': '24 horas',
@@ -666,7 +669,6 @@ const dict: Dict = {
   'We make wedding websites that open like a real invitation, sold on Etsy and edited from your phone. Here is how we design, test and host them.': 'Hacemos webs de boda que se abren como una invitación real, se venden en Etsy y se editan desde tu móvil. Así es como las diseñamos, probamos y alojamos.',
   'We reply within {responseTime}. If something stops guests from opening your website or replying, put "Urgent" in the subject line and tell us your wedding date. For everything else, a short description and a screenshot help us answer in one message. [Contact us](/contact).': 'Respondemos en un plazo de {responseTime}. Si algo impide que los invitados abran tu web o respondan, pon "Urgent" en el asunto y dinos la fecha de tu boda. Para todo lo demás, una breve descripción y una captura de pantalla nos ayudan a responder en un solo mensaje. [Contáctanos](/contact).',
   'We reply within {time}.': 'Respondemos en un plazo de {time}.',
-  'We use them to create, host and show your website, to keep one website per order and to help you when you contact us. To confirm an order, we may look up its number among our Etsy shop’s orders. Payment is handled by Etsy under Etsy’s own privacy policy; we never see your card details.': 'Los usamos para crear, alojar y mostrar tu web, para mantener una web por pedido y para ayudarte cuando nos contactas. Para confirmar un pedido, podemos buscar su número entre los pedidos de nuestra tienda de Etsy. El pago lo gestiona Etsy según su propia política de privacidad; nunca vemos los datos de tu tarjeta.',
   'We will never ask for your edit link.': 'Nunca te pediremos tu enlace de edición.',
   'Websites are hosted on Vercel in the United States. Content, replies, photos and music are kept in a private Vercel Blob store.': 'Las webs se alojan en Vercel, en Estados Unidos. El contenido, las respuestas, las fotos y la música se guardan en un almacén privado de Vercel Blob.',
   'Wedding Website Designs with Envelope Opening': 'Diseños de web de boda con apertura de sobre',
@@ -699,7 +701,6 @@ const dict: Dict = {
   'What your guests see after the {thing} opens': 'Lo que ven tus invitados después de que se abra el {thing}',
   'What’s included': 'Qué incluye',
   'Wheat Gold': 'Oro trigo',
-  'When email sending is switched on, we use your email address to send you your edit link after you start, the sign-in links you ask for and, only if you turn it on under Guests, a short email for each new guest reply. These emails go through our email provider. We send no newsletters or ads.': 'Cuando el envío de correos está activado, usamos tu correo electrónico para enviarte tu enlace de edición después de empezar, los enlaces de acceso que pidas y, solo si lo activas en Invitados, un correo breve por cada nueva respuesta. Estos correos salen a través de nuestro proveedor de correo. No enviamos boletines ni publicidad.',
   'When should the RSVP deadline be?': '¿Cuándo debe ser la fecha límite de RSVP?',
   'When this notice changes, the date at the top changes too.': 'Cuando este aviso cambie, también cambiará la fecha de arriba.',
   'When to share it': 'Cuándo compartirla',
