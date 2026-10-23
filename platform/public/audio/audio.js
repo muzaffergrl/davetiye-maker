@@ -2,11 +2,18 @@
  * play, with the settings in #site-data → "sound" (lib/audio/site-sound.ts):
  *
  *   { music: "/audio/music/first-light.mp3" | "/media/…" | null,   (story page only)
- *     effects: true, fx: "/audio/fx/", opening: [[ms, "seal"], …] } (index page only)
+ *     effects: true, fx: "/audio/fx/", opening: [[ms, "seal"], [ms, "curtain", -0.4], …] } (index page only;
+ *     the optional third number is a stereo pan, −1 left … 1 right)
  *
- * - Effects (Web Audio, small mp3 files): the opening cues when the guest taps the envelope (.stage) or "Replay"
- *   (.replay), timed on the theme's choreography; a soft tick on links between pages; a chime when an RSVP is sent
- *   (form.js "rsvp:state" success). Nothing sounds before the guest's own tap (browser rules).
+ * - Effects (Web Audio, small stereo mp3 files): the opening cues when the guest taps the envelope (.stage) or
+ *   "Replay" (.replay), timed on the theme's choreography; a soft tick on links between pages; a chime when an RSVP is
+ *   sent (form.js "rsvp:state" success). Nothing sounds before the guest's own tap (browser rules).
+ *   The files are fetched and decoded while the page is idle (an OfflineAudioContext decodes without a gesture), so
+ *   the first cue is not late on a phone; at the tap every cue is scheduled on the audio clock (sample-accurate, not
+ *   at the mercy of a busy main thread while the opening animates). If the clock is still waking up (iOS resumes
+ *   asynchronously) the cues are placed relative to the tap; one that would sound more than 350 ms after its step is
+ *   dropped. Muting, "Skip", a hidden tab or a replay fade the running opening out at once. Effects sit well under
+ *   the music (−20…−24 LUFS files × FX_GAIN; music −17…−18 LUFS × MUSIC_VOL).
  * - Music (story page): tries to start after the page loads (allowed once the guest has tapped on the site in most
  *   browsers); if the browser blocks it, a small "Play music" button appears. Soft fade in / out, loops, pauses in a
  *   hidden tab, resumes where it was when the guest comes back to the story page.
@@ -26,7 +33,7 @@
   var S = data && data.sound;
   if (!S || (!S.effects && !S.music)) return;
 
-  var FX_GAIN = 0.32;
+  var FX_GAIN = 0.5;
   var MUSIC_VOL = 0.55;
   var root = document.documentElement;
   var suffix = data.slug ? ':' + data.slug : '';
@@ -57,10 +64,21 @@
 
   /* ---------------------------------------------------------------- effects */
   var AC = window.AudioContext || window.webkitAudioContext;
+  var OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+  var LATE = 350;
   var ctx = null;
   var out = null;
+  var decoder = null;
   var raw = {};
   var decoded = {};
+  var clock =
+    window.performance && performance.now
+      ? function () {
+          return performance.now();
+        }
+      : function () {
+          return Date.now();
+        };
 
   function fetchFx(name) {
     if (!raw[name]) {
@@ -86,58 +104,127 @@
       out = ctx.createGain();
       out.gain.value = FX_GAIN;
       out.connect(ctx.destination);
+      // older iOS only unlocks Web Audio once something has played inside the gesture
+      try {
+        var s = ctx.createBufferSource();
+        s.buffer = ctx.createBuffer(1, 1, 22050);
+        s.connect(ctx.destination);
+        s.start(0);
+      } catch (e) {}
     }
     if (ctx.state === 'suspended' && ctx.resume) ctx.resume();
     return ctx;
   }
+  // decoding needs a context but not a running one: before the tap an OfflineAudioContext does it (no autoplay
+  // warning, no gesture); an AudioBuffer plays in any context of the page
+  function decodingCtx() {
+    if (ctx) return ctx;
+    if (!decoder && OAC) {
+      try {
+        decoder = new OAC(2, 1, 44100);
+      } catch (e) {
+        OAC = null;
+      }
+    }
+    return decoder;
+  }
   function buffer(name) {
     if (!decoded[name]) {
       decoded[name] = fetchFx(name).then(function (ab) {
-        if (!ab || !ctx) return null;
+        var dc = decodingCtx();
+        if (!ab || !dc) {
+          if (ab) decoded[name] = null; // no context yet: decode again after the tap
+          return null;
+        }
         return new Promise(function (ok) {
+          var fail = function () {
+            ok(null);
+          };
           // the callback form works in old Safari, the promise form everywhere else
-          var p = ctx.decodeAudioData(ab.slice(0), ok, function () {
-            ok(null);
-          });
-          if (p && p.then) p.then(ok, function () {
-            ok(null);
-          });
+          var p = dc.decodeAudioData(ab.slice(0), ok, fail);
+          if (p && p.then) p.then(ok, fail);
         });
       });
     }
     return decoded[name];
   }
+  // when the audio clock is running (resume() is asynchronous on iOS)
+  function whenRunning(fn) {
+    if (!ctx || ctx.state === 'running' || !ctx.resume) return fn();
+    var done = false;
+    var go = function () {
+      if (!done) {
+        done = true;
+        fn();
+      }
+    };
+    var p = ctx.resume();
+    if (p && p.then) p.then(go, go);
+    setTimeout(go, 600);
+  }
+  function source(b, dest, pan, when) {
+    var src = ctx.createBufferSource();
+    src.buffer = b;
+    var to = dest;
+    if (pan && ctx.createStereoPanner) {
+      to = ctx.createStereoPanner();
+      to.pan.value = Math.max(-1, Math.min(1, pan));
+      to.connect(dest);
+    }
+    src.connect(to);
+    src.start(when || 0);
+    return src;
+  }
   function play(name, maxLateMs) {
     if (muted || !S.effects || !ensureCtx()) return;
-    var asked = Date.now();
+    var asked = clock();
     buffer(name).then(function (b) {
-      if (!b || muted || Date.now() - asked > (maxLateMs || 350)) return;
-      var src = ctx.createBufferSource();
-      src.buffer = b;
-      src.connect(out);
-      src.start(0);
+      if (!b || muted || !ctx) return;
+      whenRunning(function () {
+        if (!muted && clock() - asked <= (maxLateMs || LATE)) source(b, out, 0, 0);
+      });
     });
   }
 
-  var cues = [];
-  var openingUntil = 0;
+  var opening = null; // { gain, until }
   function cancelOpening() {
-    cues.splice(0).forEach(clearTimeout);
-    openingUntil = 0;
+    if (opening && ctx) {
+      var g = opening.gain;
+      try {
+        g.gain.setTargetAtTime(0, ctx.currentTime, 0.025);
+      } catch (e) {
+        g.gain.value = 0;
+      }
+      setTimeout(function () {
+        try {
+          g.disconnect();
+        } catch (e) {}
+      }, 300);
+    }
+    opening = null;
+  }
+  function openingRuns() {
+    return opening && clock() < opening.until;
   }
   function startOpening() {
     cancelOpening();
     var list = (S.opening || []).slice(0, reduce ? 1 : 99);
     if (!list.length || muted || !ensureCtx()) return;
+    var tapped = clock();
+    var run = { gain: ctx.createGain(), until: tapped + list[list.length - 1][0] + 600 };
+    run.gain.connect(out);
+    opening = run;
     list.forEach(function (c) {
-      buffer(c[1]);
+      buffer(c[1]).then(function (b) {
+        if (!b || muted || opening !== run) return;
+        whenRunning(function () {
+          if (muted || opening !== run) return;
+          var due = c[0] - (clock() - tapped); // ms from now until the cue's step
+          if (due < -LATE) return;
+          source(b, run.gain, c[2] || 0, ctx.currentTime + Math.max(0, due) / 1000 + 0.005);
+        });
+      });
     });
-    list.forEach(function (c) {
-      cues.push(setTimeout(function () {
-        play(c[1]);
-      }, c[0]));
-    });
-    openingUntil = Date.now() + list[list.length - 1][0] + 600;
   }
 
   function navigates(a, e) {
@@ -165,7 +252,7 @@
         }
         if (t.closest('.stage')) {
           if (root.classList.contains('is-opened')) play('tap');
-          else if (Date.now() > openingUntil) startOpening();
+          else if (!openingRuns()) startOpening();
           return;
         }
       }
@@ -177,18 +264,33 @@
     if (e.detail && e.detail.state === 'success') play('chime', 800);
   });
 
+  // iOS: wake the audio clock on the first touch, so it is running by the time the tap's click arrives
+  document.addEventListener(
+    'touchend',
+    function () {
+      if (!muted && S.effects && data.page === 'index') ensureCtx();
+    },
+    { capture: true, passive: true, once: true }
+  );
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) cancelOpening();
+  });
+
   function idle(fn) {
-    if ('requestIdleCallback' in window) requestIdleCallback(fn, { timeout: 3000 });
-    else setTimeout(fn, 1500);
+    if ('requestIdleCallback' in window) requestIdleCallback(fn, { timeout: 2000 });
+    else setTimeout(fn, 1200);
   }
-  if (S.effects) {
+  if (S.effects && !muted) {
     idle(function () {
       var names = { tap: 1 };
       (S.opening || []).forEach(function (c) {
         names[c[1]] = 1;
       });
       if (document.querySelector('[data-rsvp-form]')) names.chime = 1;
-      Object.keys(names).forEach(fetchFx);
+      // fetch + decode now, not at the tap (no first-play lag on phones)
+      Object.keys(names).forEach(function (n) {
+        buffer(n);
+      });
     });
   }
 
