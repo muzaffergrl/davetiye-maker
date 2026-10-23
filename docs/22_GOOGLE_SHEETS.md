@@ -5,6 +5,10 @@ Alıcı panelde **Guests → Google Sheets → Connect Google Sheets**'e dokunur
 silinen yanıtta ve yayınlamada (form alanları değişmiş olabilir) tablo baştan yazılır. Kod: `platform/lib/google/`,
 uçlar `platform/app/api/edit/[slug]/google`, `platform/app/api/google/callback`.
 
+> **2026-10-23 (K51):** kurulum dükkânın Google hesabı **bkestudio01@gmail.com** ile, yerel oturumun tek bloğuyla yapılır:
+> `docs/37_YEREL_GOOGLE_EPOSTA_KURULUM.md` (e-posta + Gmail sipariş doğrulamasıyla birlikte). Kod yalnız Sheets API'sini çağırır;
+> aşağıdaki 2. adımdaki Google Drive API'yi açmak gerekmez (zararsız).
+
 **Bu adımlar yapılmadan düğme panelde görünmez** ("Google Sheets: coming soon" satırı çıkar); Excel indirme her durumda çalışır.
 
 ## Google Cloud'da yapılacaklar (bir kez, dükkân hesabıyla)
