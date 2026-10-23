@@ -2,7 +2,9 @@
 // site with orderCheck "provisional" (lib/claim/verify.ts TrustOrderVerifier) and it can be published at once. Its order
 // is checked afterwards, here:
 //
-//   sweepProvisionalOrders — every provisional site with an order number, oldest first (RECHECK_BATCH per run):
+//   sweepProvisionalOrders — the provisional sites with an order number, RECHECK_BATCH per run, in sweepOrder()'s order
+//     (G953: new sites first, then the ones not reported yet, then a rotating share of those the shop was already told
+//     about — so a pile of 100 unresolved old orders never starves the new ones; no write is needed to keep the order):
 //     Etsy (app settings + shop connected) and/or the shop's mailbox (G192, lib/mailbox: Etsy's signed sale / cancellation
 //     emails over IMAP) can be asked — or a verifier given by a test:
 //       verified                                          -> orderCheck verified by "etsy" (nothing else changes)
@@ -106,6 +108,33 @@ async function autoVerifier(adapter: DataAdapter): Promise<ChainOrderVerifier | 
   return sources.length ? new ChainOrderVerifier(sources) : null;
 }
 
+/** A site claimed this recently is "new": it goes first in the sweep (two hourly runs). */
+export const SWEEP_NEW_MS = 2 * 60 * 60_000;
+
+/**
+ * G953: which provisional sites one run checks, in order (pure). Before, the oldest RECHECK_BATCH went first every run, so
+ * once 100 unresolved orders had piled up (the shop already told about each) a new site was never checked again. Now:
+ *   1. new sites (claimed within SWEEP_NEW_MS), newest first — never checked yet, the buyer may be waiting on them;
+ *   2. the others not reported to the shop yet (no reviewAt), oldest first — they still need their check / 48 h notice;
+ *   3. the ones the shop was already told about (reviewAt), in a window that moves by the run's free places every hour
+ *      (hour index × places, modulo their number): each of them is checked again in turn, none blocks the rest.
+ * No "last checked" stamp is stored: a write per site and run would move the site's version under the buyer's open panel.
+ */
+export function sweepOrder(sites: readonly SiteRecord[], now: Date, batch: number = RECHECK_BATCH): SiteRecord[] {
+  const t = now.getTime();
+  const at = (s: SiteRecord) => Date.parse(s.orderCheck?.at ?? s.createdAt) || 0;
+  const fresh = sites.filter((s) => !s.orderCheck?.reviewAt && t - at(s) < SWEEP_NEW_MS).sort((a, b) => at(b) - at(a) || a.id.localeCompare(b.id));
+  const open = sites.filter((s) => !s.orderCheck?.reviewAt && t - at(s) >= SWEEP_NEW_MS).sort((a, b) => at(a) - at(b) || a.id.localeCompare(b.id));
+  const told = sites
+    .filter((s) => s.orderCheck?.reviewAt)
+    .sort((a, b) => (a.orderCheck!.reviewAt ?? '').localeCompare(b.orderCheck!.reviewAt ?? '') || a.id.localeCompare(b.id));
+  const head = [...fresh, ...open].slice(0, batch);
+  const places = Math.min(batch - head.length, told.length);
+  if (places <= 0) return head;
+  const start = (Math.floor(t / 3_600_000) * places) % told.length;
+  return [...head, ...Array.from({ length: places }, (_, i) => told[(start + i) % told.length])];
+}
+
 /** One run over the provisional sites (see the top of this file). Never throws for one site: it is left for the next run. */
 export async function sweepProvisionalOrders(adapter: DataAdapter, opts: SweepOptions = {}): Promise<TrustSweepSummary> {
   const now = opts.now ?? new Date();
@@ -114,8 +143,9 @@ export async function sweepProvisionalOrders(adapter: DataAdapter, opts: SweepOp
   const verifier = opts.verifier === undefined ? own : opts.verifier;
   const notifier = opts.notifier ?? getShopNotifier();
   const origin = (opts.origin ?? process.env.PLATFORM_PUBLIC_URL ?? '').replace(/\/+$/, '');
-  const all = (await adapter.listSites()).filter((s) => orderProvisional(s) && s.orderRef).reverse();
-  const summary: TrustSweepSummary = { etsy: verifier !== null, checked: 0, verified: 0, held: 0, review: 0, waiting: 0, remaining: Math.max(0, all.length - RECHECK_BATCH), results: [] };
+  const all = (await adapter.listSites()).filter((s) => orderProvisional(s) && s.orderRef);
+  const batch = sweepOrder(all, now);
+  const summary: TrustSweepSummary = { etsy: verifier !== null, checked: 0, verified: 0, held: 0, review: 0, waiting: 0, remaining: Math.max(0, all.length - batch.length), results: [] };
 
   const notify = async (site: SiteRecord, kind: 'held' | 'review', reason?: HoldReason) => {
     if (!notifier.enabled) return;
@@ -132,7 +162,7 @@ export async function sweepProvisionalOrders(adapter: DataAdapter, opts: SweepOp
     }
   };
 
-  for (const site of all.slice(0, RECHECK_BATCH)) {
+  for (const site of batch) {
     const base = { siteId: site.id, slug: site.slug, orderRef: site.orderRef };
     const expired = trustExpired(site, now.getTime(), windowMs);
     let result: TrustSweepResult;
