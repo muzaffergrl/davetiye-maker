@@ -33,7 +33,7 @@ before(() => {
 
 // ------------------------------------------------------------------------------------------------- catalogue
 
-test('every design has its sounds; tracks ≤ 1.5 MB, effects ≤ 40 KB, all in LICENSES.md', () => {
+test('every design has its sounds; tracks ≤ 1.5 MB, effects ≤ 56 KB (G967), all in LICENSES.md', () => {
   const themes = readdirSync(THEMES_DIR).filter((t) => t !== '_sample' && statSync(path.join(THEMES_DIR, t)).isDirectory());
   assert.deepEqual(new Set(themes), new Set(Object.keys(DESIGN_SOUND)), 'every theme has one sound entry');
   for (const t of themes) assert.ok(DESIGN_SOUND[t], `${t} has no sound entry`);
@@ -46,18 +46,36 @@ test('every design has its sounds; tracks ≤ 1.5 MB, effects ≤ 40 KB, all in 
   }
   for (const name of EFFECT_NAMES) {
     const size = statSync(path.join(AUDIO_DIR, 'fx', `${name}.mp3`)).size;
-    assert.ok(size > 500 && size <= 40 * 1024, `${name}: ${size} bytes`);
+    assert.ok(size > 500 && size <= 56 * 1024, `${name}: ${size} bytes`);
     assert.ok(licences.includes(`fx/${name}.mp3`), `${name} not in LICENSES.md`);
   }
   for (const [id, s] of Object.entries(DESIGN_SOUND)) assert.ok(MUSIC_TRACKS.some((t) => t.id === s.music), `${id}: unknown track`);
 });
 
-test('opening cues start with a step of the theme’s own MOTION.envelope (site.js)', () => {
+// 22–32 were redesigned on their own branch (G422–G432, owner decision 2026-10-23: that version is the valid one); their
+// cues follow the new MOTION. Until that branch is merged, a theme still carrying the old shared opening (this exact
+// set of step starts) is reported, not failed; once merged the check is strict for every theme.
+const PRE_REDESIGN_STARTS = '0,200,360,880,1280,1430,1800,3140';
+const REDESIGNED = new Set(['nocturne-lake-estate', 'velvet-jewel-box', 'grand-theatre-premiere', 'orient-express-voyage', 'kintsugi-washi',
+  'riad-lantern-nights', 'maison-patisserie', 'celestial-observatory', 'azulejo-mosaic', 'sky-lantern-festival', 'music-box-ballerina']);
+
+/** Step starts of a theme's MOTION.envelope: `key: [start, …]`, and the moments given as a bare number (accents, petals, snow). */
+function envelopeStarts(theme: string): Set<number> {
+  const js = readFileSync(path.join(THEMES_DIR, theme, 'site.js'), 'utf8');
+  const block = /envelope:\s*\{([\s\S]*?)\n\s*\}/.exec(js.slice(js.indexOf('const MOTION = {')));
+  assert.ok(block, `${theme}: no MOTION.envelope`);
+  const starts = [...block[1].matchAll(/\w+\s*:\s*\[\s*(\d+)\s*,/g)].map((m) => Number(m[1]));
+  starts.push(...[...block[1].matchAll(/\b(?:accents|petals|snow)\s*:\s*(\d+)\s*[,\n]/g)].map((m) => Number(m[1])));
+  return new Set(starts);
+}
+
+test('opening cues start with a step of the theme’s own MOTION.envelope (site.js)', (t) => {
   for (const [theme, s] of Object.entries(DESIGN_SOUND)) {
-    const js = readFileSync(path.join(THEMES_DIR, theme, 'site.js'), 'utf8');
-    const block = /envelope:\s*\{([\s\S]*?)\n\s*\}/.exec(js.slice(js.indexOf('const MOTION = {')));
-    assert.ok(block, `${theme}: no MOTION.envelope`);
-    const starts = new Set([...block[1].matchAll(/\w+\s*:\s*\[\s*(\d+)\s*,/g)].map((m) => Number(m[1])));
+    const starts = envelopeStarts(theme);
+    if (REDESIGNED.has(theme) && [...starts].sort((a, b) => a - b).join(',') === PRE_REDESIGN_STARTS) {
+      t.diagnostic(`${theme}: pre-redesign site.js in this tree; its cues follow the 22–32 redesign (checked once merged)`);
+      continue;
+    }
     for (const [ms, fx] of s.opening) assert.ok(starts.has(ms), `${theme}: cue ${fx} at ${ms} ms matches no step (${[...starts].join(', ')})`);
     const times = s.opening.map((c) => c[0]);
     assert.deepEqual(times, [...times].sort((a, b) => a - b), `${theme}: cues in order`);

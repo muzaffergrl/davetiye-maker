@@ -1,13 +1,20 @@
 #!/usr/bin/env python3
-"""G126 — platform sesleri: özgün fon müzikleri ve ses efektleri, tamamen koddan sentezlenir.
+"""G126 / G967 — platform sesleri: özgün fon müzikleri ve ses efektleri, tamamen koddan sentezlenir.
 
-Neden sentez: ses kütüphanelerine (Freesound, Wikimedia Commons, Musopen, Kenney) bu çalışma ortamından ulaşılamadı
-(ağ politikası). Sentezde dış kayıt, örnek (sample) ya da başkasının bestesi yoktur: notalar bu betikteki kurallarla
-(sabit tohumlu) üretilir, tını toplamsal sentezle çizilir. Sonuç BKE Studio'nun kendi eseridir; lisans kaydı
-platform/public/audio/LICENSES.md.
+Neden sentez: ses kütüphanelerine (Freesound, Wikimedia Commons, Musopen, Kenney, OpenGameArt) bu çalışma ortamından
+ulaşılamadı (ağ politikası; 2026-10-16 ve 2026-10-23 denendi). Sentezde dış kayıt, örnek (sample) ya da başkasının bestesi
+yoktur: notalar bu betikteki kurallarla (sabit tohumlu) üretilir, tını toplamsal sentezle çizilir. Efektler fiziğe dayalı
+foley sentezidir (tools/audio_fx.py, yalnız numpy). Sonuç BKE Studio'nun kendi eseridir; lisans kaydı
+platform/public/audio/LICENSES.md, efekt listesi ve tema eşlemesi docs/40_SES_EFEKTLERI.md.
 
-Kullanım (repo kökünden):  python3 tools/audio_synth.py [--out platform/public/audio] [--only music|fx] [--wav]
-Gerekenler: numpy, scipy, ffmpeg (libmp3lame). Aynı girdiler aynı dosyaları üretir (MP3 kodlayıcı farkı hariç).
+Kullanım (repo kökünden):
+  python3 tools/audio_synth.py --only fx                 # 50 efektin hepsi → platform/public/audio/fx/*.mp3
+  python3 tools/audio_synth.py --only fx seal chime      # yalnız adı verilenler
+  python3 tools/audio_synth.py --only music              # 4 fon müziği (scipy gerekir)
+  python3 tools/audio_synth.py --list                    # efekt tablosu (Markdown; LICENSES.md / docs/40 için)
+  [--out platform/public/audio] [--wav]
+Gerekenler: numpy, ffmpeg (libmp3lame); müzik için ayrıca scipy. Aynı girdiler aynı dosyaları üretir (aynı ffmpeg
+sürümüyle bayt bayt; tohum = efekt adı).
 """
 
 from __future__ import annotations
@@ -21,7 +28,11 @@ import tempfile
 import wave
 
 import numpy as np
-from scipy.signal import butter, fftconvolve, sosfilt
+
+import audio_fx
+
+# scipy only for the music (imported in main() when music is rendered; the effects need numpy alone)
+butter = fftconvolve = sosfilt = None
 
 SR = 44100
 A4 = 440.0
@@ -341,217 +352,66 @@ def render_track(track_id: str) -> np.ndarray:
     return loop * 10 ** (-3 / 20)
 
 
-# ------------------------------------------------------------------------------------------------------------------- SFX
-
-
-def bandnoise(n: int, lo: float, hi: float, rng, order: int = 2) -> np.ndarray:
-    return sosfilt(butter(order, [lo, hi], "bandpass", fs=SR, output="sos"), rng.standard_normal(n))
-
-
-def env_ad(n: int, attack: float, decay: float) -> np.ndarray:
-    t = np.arange(n) / SR
-    a = np.clip(t / max(attack, 1e-4), 0, 1)
-    return a * np.exp(-np.maximum(t - attack, 0) / decay)
-
-
-def smooth_noise(n: int, rate: float, rng) -> np.ndarray:
-    """Slow random 0..1 contour (interpolated), for crinkle density / swells."""
-    pts = max(2, int(n / SR * rate) + 2)
-    v = rng.uniform(0, 1, pts)
-    return np.interp(np.linspace(0, pts - 1, n), np.arange(pts), v)
-
-
-def sweep_noise(n: int, f_from: float, f_to: float, rng, bw: float = 0.9, blocks: int = 24) -> np.ndarray:
-    """Band-passed noise whose centre moves from f_from to f_to (overlapping blocks, raised-cosine crossfades)."""
-    noise = rng.standard_normal(n)
-    out = np.zeros(n)
-    size = n // blocks
-    win = np.hanning(2 * size)
-    for b in range(blocks + 1):
-        c = f_from * (f_to / f_from) ** (b / blocks)
-        lo, hi = c / (1 + bw), min(c * (1 + bw), SR * 0.45)
-        y = sosfilt(butter(2, [lo, hi], "bandpass", fs=SR, output="sos"), noise)
-        start = (b - 1) * size
-        seg = slice(max(0, start), min(n, start + 2 * size))
-        w = win[seg.start - start: seg.stop - start]
-        out[seg] += y[seg] * w
-    return out
-
-
-def crackles(n: int, rate: float, rng, lo=1500, hi=7000, width=0.0025) -> np.ndarray:
-    out = np.zeros(n)
-    k = int(rate * n / SR)
-    for _ in range(k):
-        i = int(rng.uniform(0, n - 1))
-        m = int(width * SR * rng.uniform(0.5, 1.5))
-        g = rng.uniform(0.2, 1.0)
-        burst = rng.standard_normal(m) * np.exp(-np.arange(m) / (m / 4)) * g
-        out[i:i + m] += burst[: n - i]
-    return sosfilt(butter(2, [lo, hi], "bandpass", fs=SR, output="sos"), out)
-
-
-def fx_seal(rng):
-    """Wax seal: a crisp double crack with a small body thump."""
-    n = int(0.32 * SR)
-    out = np.zeros(n)
-    for start, g in ((0.0, 1.0), (0.028, 0.6), (0.061, 0.25)):
-        i = int(start * SR)
-        m = int(0.03 * SR)
-        out[i:i + m] += bandnoise(m, 1800, 7500, rng) * env_ad(m, 0.0004, 0.004) * g * 3
-    t = np.arange(int(0.08 * SR)) / SR
-    out[: len(t)] += np.sin(2 * math.pi * 140 * t) * np.exp(-t / 0.018) * 0.35
-    out += crackles(n, 60, rng, 2500, 8000, 0.0015) * env_ad(n, 0.01, 0.06) * 0.4
-    return out
-
-
-def fx_ribbon(rng):
-    """Silk ribbon slipping off: airy band-passed hiss with a soft swell."""
-    n = int(0.85 * SR)
-    t = np.arange(n) / SR
-    swell = np.sin(np.pi * np.clip(t / 0.85, 0, 1)) ** 1.6
-    out = sweep_noise(n, 5200, 2600, rng, 0.6) * swell * (0.7 + 0.3 * smooth_noise(n, 18, rng))
-    return out * 0.55
-
-
-def fx_clasp(rng):
-    """Brass clasp / snap: two clicks and a short metallic ring."""
-    n = int(0.42 * SR)
-    t = np.arange(n) / SR
-    out = np.zeros(n)
-    for start, g in ((0.0, 1.0), (0.055, 0.7)):
-        i = int(start * SR)
-        m = int(0.012 * SR)
-        out[i:i + m] += bandnoise(m, 2000, 9000, rng) * env_ad(m, 0.0002, 0.0018) * g * 3
-    ring = sum(a * np.sin(2 * math.pi * f * t) * np.exp(-t / d) for f, a, d in ((2380, 0.22, 0.09), (3710, 0.14, 0.06), (5530, 0.09, 0.04)))
-    i = int(0.055 * SR)
-    out[i:] += ring[: n - i]
-    return out
-
-
-def fx_paper(rng):
-    """The envelope flap lifting: a soft paper rustle with a few crinkles."""
-    n = int(0.75 * SR)
-    t = np.arange(n) / SR
-    shape = np.sin(np.pi * np.clip(t / 0.75, 0, 1)) ** 1.2
-    body = sweep_noise(n, 1400, 3400, rng, 0.8) * shape * 0.45
-    crk = crackles(n, 35, rng, 1500, 6000, 0.003) * shape * 0.8
-    return body + crk
-
-
-def fx_slide(rng):
-    """The card sliding out of its pocket: a smooth, rising paper-on-paper glide."""
-    n = int(1.15 * SR)
-    t = np.arange(n) / SR
-    shape = np.clip(t / 0.25, 0, 1) * np.clip((1.15 - t) / 0.45, 0, 1)
-    return sweep_noise(n, 900, 2600, rng, 0.7) * shape * 0.4
-
-
-def fx_page(rng):
-    """A page / cover turning: a swish that brightens, ending in a soft flap."""
-    n = int(0.62 * SR)
-    t = np.arange(n) / SR
-    shape = np.sin(np.pi * np.clip(t / 0.5, 0, 1)) ** 2
-    swish = sweep_noise(n, 700, 4200, rng, 0.9) * shape * 0.55
-    i = int(0.46 * SR)
-    m = n - i
-    flap = bandnoise(m, 200, 1600, rng) * env_ad(m, 0.002, 0.03) * 0.9
-    swish[i:] += flap
-    return swish + crackles(n, 20, rng, 2000, 6000) * shape * 0.4
-
-
-def fx_tear(rng):
-    """A perforated tear strip: a fast run of tiny ticks inside a dry paper rasp."""
-    n = int(0.8 * SR)
-    t = np.arange(n) / SR
-    shape = np.clip(t / 0.05, 0, 1) * np.clip((0.8 - t) / 0.2, 0, 1)
-    rasp = bandnoise(n, 1500, 6000, rng) * shape * 0.25
-    ticks = np.zeros(n)
-    pos = 0.02
-    while pos < 0.72:
-        i = int(pos * SR)
-        m = int(0.004 * SR)
-        ticks[i:i + m] += rng.standard_normal(m) * np.exp(-np.arange(m) / 30) * rng.uniform(0.5, 1)
-        pos += rng.uniform(0.018, 0.03)
-    return rasp + sosfilt(butter(2, [1800, 8000], "bandpass", fs=SR, output="sos"), ticks) * shape * 1.2
-
-
-def fx_whoosh(rng):
-    """A watercolour wave sweeping across: a soft, wide whoosh."""
-    n = int(1.5 * SR)
-    t = np.arange(n) / SR
-    shape = np.sin(np.pi * np.clip(t / 1.5, 0, 1)) ** 2
-    return sweep_noise(n, 400, 1800, rng, 1.2) * shape * 0.6
-
-
-def fx_chime(rng):
-    """A soft three-note sparkle (E6, G#6, B6) as the card comes forward / a reply is sent."""
-    n = int(1.6 * SR)
-    t = np.arange(n) / SR
-    out = np.zeros(n)
-    for k, (note, g) in enumerate((("E6", 0.5), ("G#6", 0.4), ("B6", 0.35))):
-        i = int(k * 0.07 * SR)
-        tt = t[: n - i]
-        f = freq(midi(note))
-        tone = (np.sin(2 * math.pi * f * tt) + 0.25 * np.sin(2 * math.pi * f * 2.76 * tt) * np.exp(-tt / 0.15)) * np.exp(-tt / 0.45)
-        tone[: int(0.002 * SR)] *= np.linspace(0, 1, int(0.002 * SR))
-        out[i:] += tone * g
-    return out * 0.5
-
-
-def fx_tap(rng):
-    """A tiny soft paper tick for moving between pages."""
-    n = int(0.12 * SR)
-    out = bandnoise(n, 900, 5000, rng) * env_ad(n, 0.001, 0.012) * 0.9
-    t = np.arange(n) / SR
-    out += np.sin(2 * math.pi * 520 * t) * np.exp(-t / 0.02) * 0.08
-    return out
-
-
-EFFECTS = {"seal": fx_seal, "ribbon": fx_ribbon, "clasp": fx_clasp, "paper": fx_paper, "slide": fx_slide,
-           "page": fx_page, "tear": fx_tear, "whoosh": fx_whoosh, "chime": fx_chime, "tap": fx_tap}
-
-
-def render_fx(name: str) -> np.ndarray:
-    rng = np.random.default_rng(1000 + sorted(EFFECTS).index(name))
-    x = EFFECTS[name](rng)
-    x = sosfilt(butter(1, 60, "highpass", fs=SR, output="sos"), x)
-    pad = np.zeros(int(0.15 * SR))  # room for a short reverb tail
-    x = np.concatenate([x, pad])
-    room = fftconvolve(x, reverb_ir(0.5, rng, 7000, 0.006))[: len(x)]
-    x = x * 0.85 + room * 0.15
-    fade = int(0.01 * SR)
-    x[-fade:] *= np.linspace(1, 0, fade)
-    return x / np.max(np.abs(x)) * 10 ** (-4 / 20)
-
 
 # ------------------------------------------------------------------------------------------------------------------- I/O
 
 
-def write_wav(path: str, x: np.ndarray):
-    pcm = (np.clip(x, -1, 1) * 32767).astype("<i2")
+def write_wav(path: str, x: np.ndarray, rng: np.random.Generator | None = None):
+    """16-bit WAV; mono (n,) or stereo (2, n). With rng: TPDF dither (deterministic)."""
+    x = np.atleast_2d(x)
+    if rng is not None:
+        x = x + (rng.uniform(-0.5, 0.5, x.shape) + rng.uniform(-0.5, 0.5, x.shape)) / 32768
+    pcm = (np.clip(x.T, -1, 1) * 32767).round().astype("<i2")
     with wave.open(path, "wb") as w:
-        w.setnchannels(1)
+        w.setnchannels(x.shape[0])
         w.setsampwidth(2)
         w.setframerate(SR)
         w.writeframes(pcm.tobytes())
 
 
-def encode_mp3(x: np.ndarray, dest: str, bitrate: str, title: str):
+def encode_mp3(x: np.ndarray, dest: str, bitrate: str, title: str, channels: int = 1, rng=None):
     with tempfile.TemporaryDirectory() as tmp:
         src = os.path.join(tmp, "in.wav")
-        write_wav(src, x)
-        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", src, "-ac", "1", "-codec:a", "libmp3lame", "-b:a", bitrate,
+        write_wav(src, x, rng)
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", src, "-ac", str(channels), "-codec:a", "libmp3lame", "-b:a", bitrate,
                         "-map_metadata", "-1", "-metadata", f"title={title}", "-metadata", "artist=BKE Studio", "-id3v2_version", "3",
                         dest], check=True)
 
 
+FX_BITRATE = "112k"  # stereo (joint) — effects are 0.3–3.8 s, so every file stays well under 60 KB
+
+
+def render_effect(name: str, out_dir: str, keep_wav: bool = False) -> tuple[float, int, float]:
+    """Renders one effect to <out_dir>/fx/<name>.mp3; returns (seconds, bytes, LUFS before encoding)."""
+    x = audio_fx.render(name)
+    dest = os.path.join(out_dir, "fx", f"{name}.mp3")
+    encode_mp3(x, dest, FX_BITRATE, name, channels=2, rng=audio_fx.rng_for("dither:" + name))
+    if keep_wav:
+        write_wav(dest[:-4] + ".wav", x)
+    return x.shape[1] / SR, os.path.getsize(dest), audio_fx.loudness(x)
+
+
 def main() -> int:
+    global butter, fftconvolve, sosfilt
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default=os.path.join(os.path.dirname(__file__), "..", "platform", "public", "audio"))
     ap.add_argument("--only", choices=["music", "fx"])
     ap.add_argument("--wav", action="store_true", help="also keep a .wav next to each mp3 (not committed)")
+    ap.add_argument("--list", action="store_true", help="print the effect table (Markdown) from the files in --out")
+    ap.add_argument("names", nargs="*", help="effects to render (default: all)")
     args = ap.parse_args()
+    if args.list:
+        print("| Dosya | Efekt | Süre | Boyut |")
+        print("|---|---|---|---|")
+        for name, e in audio_fx.EFFECTS.items():
+            path = os.path.join(args.out, "fx", f"{name}.mp3")
+            size = os.path.getsize(path) if os.path.exists(path) else 0
+            dur = audio_fx.render(name).shape[1] / SR if size else 0
+            secs = f"{dur:.1f}".replace(".", ",")
+            print(f"| `fx/{name}.mp3` | {e.tr} | {secs} s | {size / 1024:.0f} KB |")
+        return 0
     if args.only != "fx":
+        from scipy.signal import butter, fftconvolve, sosfilt  # noqa: F811 (module globals used by the music code)
         os.makedirs(os.path.join(args.out, "music"), exist_ok=True)
         for tid in TRACKS:
             x = render_track(tid)
@@ -562,13 +422,13 @@ def main() -> int:
             print(f"music/{tid}.mp3  {len(x) / SR:5.1f} s  {os.path.getsize(dest) / 1024:6.0f} KB")
     if args.only != "music":
         os.makedirs(os.path.join(args.out, "fx"), exist_ok=True)
-        for name in EFFECTS:
-            x = render_fx(name)
-            dest = os.path.join(args.out, "fx", f"{name}.mp3")
-            encode_mp3(x, dest, "48k", name)
-            if args.wav:
-                write_wav(dest[:-4] + ".wav", x)
-            print(f"fx/{name}.mp3  {len(x) / SR:4.2f} s  {os.path.getsize(dest) / 1024:5.1f} KB")
+        names = args.names or list(audio_fx.EFFECTS)
+        unknown = [n for n in names if n not in audio_fx.EFFECTS]
+        if unknown:
+            ap.error("unknown effect(s): " + ", ".join(unknown))
+        for name in names:
+            dur, size, lufs = render_effect(name, args.out, args.wav)
+            print(f"fx/{name}.mp3  {dur:4.2f} s  {size / 1024:5.1f} KB  {lufs:6.1f} LUFS")
     return 0
 
 

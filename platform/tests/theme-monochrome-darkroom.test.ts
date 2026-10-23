@@ -249,7 +249,7 @@ test('thank-you mode closes RSVP, keeps the story and the card carries the thank
 });
 
 test('opening sounds: the film, the flap, the safelight, the card, the tray', () => {
-  assert.deepEqual(designSound(id), { music: 'first-light', opening: [[0, 'whoosh'], [800, 'paper'], [1400, 'tap'], [1700, 'slide'], [2300, 'chime']] });
+  assert.deepEqual(designSound(id), { music: 'first-light', opening: [[0, 'film'], [800, 'paper-crisp'], [1700, 'slide-quick'], [2300, 'water']] });
 });
 
 test('RSVP keeps the shared form contract; a reply closes and opens the shutter and the GPT accents (petals, film) drift down', async () => {

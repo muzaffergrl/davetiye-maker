@@ -234,7 +234,7 @@ test('thank-you mode closes RSVP, keeps the story and the card carries the thank
 });
 
 test('opening sounds: the brooch, the flap, the doves, the card', () => {
-  assert.deepEqual(designSound(id), { music: 'garden-waltz', opening: [[0, 'seal'], [500, 'paper'], [900, 'whoosh'], [1500, 'slide'], [2150, 'chime']] });
+  assert.deepEqual(designSound(id), { music: 'garden-waltz', opening: [[0, 'brooch'], [500, 'paper'], [900, 'wings'], [1500, 'slide-quick'], [2150, 'chime']] });
 });
 
 test('RSVP keeps the shared form contract; a reply brings two doves to the garland and the GPT accents (florets, delphiniums) drift down', async () => {

@@ -1590,7 +1590,7 @@ Test: `tests/g140-share.test.ts`; görüntüler `previews/g140/`.
 
 ## Ses: Story müziği ve efektler (G126)
 
-- **Dosyalar:** `public/audio/music/*.mp3` (4 parça, 490–700 KB, döngü) ve `public/audio/fx/*.mp3` (10 efekt, 2–11 KB) —
+- **Dosyalar:** `public/audio/music/*.mp3` (4 parça, 490–700 KB, döngü) ve `public/audio/fx/*.mp3` (G967: 50 stereo foley efekti, 5–50 KB; liste ve tema eşlemesi `docs/40_SES_EFEKTLERI.md`) —
   `tools/audio_synth.py` ile koddan sentezlendi (dış kaynak yok; kayıt `public/audio/LICENSES.md`). Tema eşlemesi, varsayılan
   parça ve açılış zamanlamaları: `lib/audio/catalog.ts` (`DESIGN_SOUND`; zamanlar temanın `site.js` `MOTION.envelope` adımlarıyla
   aynı — `tests/g126-audio.test.ts` denetler).
@@ -1600,7 +1600,9 @@ Test: `tests/g140-share.test.ts`; görüntüler `previews/g140/`.
 - **Motor:** ses varsa `site-data`'ya `sound` ({music, effects, fx, opening}) ve `<head>`'e tek `<script src="/audio/audio.js" defer>`
   (`lib/audio/site-sound.ts`); çalacak bir şey yoksa ikisi de yok. CSP değişmedi (`media-src 'self' blob: https:` zaten vardı).
 - **audio.js:** efektler Web Audio ile, ilk ses misafirin dokunuşundan sonra (`.stage` dokunuşu → açılış dizisi, `.replay` →
-  yeniden, `[data-skip]`/linkler → hafif tık, `rsvp:state` success → çan). Story'de yüklenince `play()` denenir; engellenirse
+  yeniden, `[data-skip]`/linkler → hafif tık, `rsvp:state` success → çan). G969: açılışın dosyaları boşta indirilip çözülür
+  (`OfflineAudioContext`), dokunuşta bütün ipuçları ses saatine yerleşir (pan: ipucunun 3. sayısı), Skip / sessiz / gizli sekme
+  açılışı söndürür (ayrıntı `docs/40_SES_EFEKTLERI.md` §6). Story'de yüklenince `play()` denenir; engellenirse
   "♪ Play music" düğmesi; panel önizlemesinde (iframe) ve Data Saver'da otomatik denenmez. Her sayfada sol üstte ses düğmesi;
   tercih `sessionStorage` `invite:sound:<slug>`, müzik konumu `invite:sound-at:<slug>`. Gizli sekmede durur.
 - **Yükleme:** `POST /api/edit/<slug>/music` (`lib/panel/music.ts`): MP3 / M4A / AAC, ≤ 10 MB, MIME + dosya imzası
