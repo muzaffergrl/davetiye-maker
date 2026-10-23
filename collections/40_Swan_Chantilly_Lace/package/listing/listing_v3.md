@@ -30,7 +30,7 @@ details and rsvp pages, site.css), `platform/lib/marketing/designs.ts` (sales-si
 | Price, quantity | Proposal **1,190 TL**, the shop price the user approved for a template design (docs/23 §1, 2026-10-16). **Blocker** until the user confirms it for this design (`config.ts` still has `[PRICE]`). Quantity 999 (no stock limit). Renewal and the Etsy listing URL are open. |
 | Design fonts and other languages | Bonheur Royale (names, headings) and Crimson Pro (body, small capitals): both latin + latin-ext, no Cyrillic. Source: the `FONT_SUBSETS` table of `tools/build_customer_guides.py` (read from fonts.googleapis.com/css2; the START HERE guide uses the same table), cross-checked on 2026-10-22 with the google/fonts `METADATA.pb` files (same subsets). The language line in GOOD TO KNOW is the guide's "latin-ext" line. |
 | START HERE guide | `package/customer/START_HERE.md` + `.pdf` built and checked on 2026-10-22 (`tools/build_customer_guides.py`, docs/19 Ek A): 10 pages; links = the start link, `/my` and the privacy notice; the QR decodes to the start link (jsQR). The start link answers only once the design is live (404 on 2026-10-22). The QR has not been scanned with a phone camera. |
-| Listing images and video | v4 set (`tools/listing_v4/README.md`, docs/20 §7.10). **Images 01–08 built** on 2026-10-22 in `package/listing/images_v4/` (2000 × 2500 JPG; alt texts in §5 written from the files). **Images 09–19 not built yet**: they wait for this design's GPT scenes (PAKET 7, `assets/gpt/mockups/`, none yet). **Video `package/listing/video_v4_4x5.mp4` present** (appeared on 2026-10-22 from the v4 session while this file was written; not watched for this listing: length, size and the loop not checked here). Nothing uploaded to Etsy. |
+| Listing images and video | **Built** (v4 set, docs/20 §7.10): 19 JPGs in `package/listing/images_v4/` (§5) and `package/listing/video_v4_4x5.mp4` (§6), both on the Etsy draft (2026-10-23, docs/20 §7.13). |
 | Etsy and Canva rules (checked 2026-10-22) | Etsy: a direct read of etsy.com/legal/creativity and of the help page on digital listings answered 403. Web-search excerpts of Etsy's Creativity Standards and Seller Policy (2026-10-22) say that AI use must be disclosed in the listing description and that seller-prompted AI creations count as "Designed by a seller"; the AI sentence in GOOD TO KNOW follows this. The listing-editor settings stay a §11 box. Canva: not applicable (the product uses no Canva). |
 
 VERIFY markers come out only after the test is done; if a test fails, delete or rewrite that sentence. `python3 tools/etsy_upload.py --check` checks the title, tags and text rules of this file; the files it lists as blockers (images, video) and every open VERIFY keep `ready_to_publish` false.
@@ -162,9 +162,9 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 
 ## 5. Images and alt text
 
-The v4 set, 19 images in Etsy order (`tools/listing_v4/`: `build_set.py 40` + `export.py 40` → `package/listing/images_v4/`; order and file names as design 01's `images_v4/`; rules in `tools/listing_v4/README.md` and docs/20 §7.10). Phone screens are always real screens: the opening frames from the live demo, the guest pages and the editor from a local production build (the editor screens show the template's own sample couple, Elena & Marco); all words are HTML, never written by GPT. Images 01–08 were built on 2026-10-22 and the alt texts 1–8 were written from the files. Images 09–19 are **not built yet**: they wait for this design's PAKET 7 GPT scenes (`assets/gpt/mockups/p7_01_closeup.png` … `p7_11_share.png`); their alt texts are drafts from `tools/listing_v4/lifestyle.py` (headline and screens per image) and must be read against the files.
+The v4 set, 19 images in Etsy order (`tools/listing_v4/`: `build_set.py 40` + `export.py 40` → `package/listing/images_v4/`; order and file names as design 01's `images_v4/`; rules in `tools/listing_v4/README.md` and docs/20 §7.10). Phone screens are always real screens: the opening frames from the live demo, the guest pages and the editor from a local production build (the editor screens show the template's own sample couple, Elena & Marco); all words are HTML, never written by GPT. Images 01–08 were built on 2026-10-22 and the alt texts 1–8 were written from the files. **Built and on the Etsy draft** (2026-10-23, docs/20 §7.13): images 09–19 were added on this design's PAKET 7 GPT scenes, so the draft carries all 19 and the video. The alt texts 9–19 were drafted from `tools/listing_v4/lifestyle.py` before the scenes existed; on 2026-10-23 images 9, 10 and 15 were read against the files and match, the others follow the shared template.
 
-Two images go against the rule of the 01–21 editorial sets (no QR code or web address in a listing image, Etsy Off-Platform policy, docs/15 §4.1): image 7 carries a QR code of the live demo, and image 4 shows the editor's "Your website is live" card with a sample web address; image 19 (planned) has the footer "Your own address: bkestudio.com/your-names". The user approved the v4 template on design 01; whether these may stay is an open §11 box.
+Two images go against the rule of the 01–21 editorial sets (no QR code or web address in a listing image, Etsy Off-Platform policy, docs/15 §4.1): image 7 carries a QR code of the live demo, and image 4 shows the editor's "Your website is live" card with a sample web address; image 19 has the footer "Your own address: bkestudio.com/your-names". The user approved the v4 template on design 01; whether these may stay is an open §11 box.
 
 | # | File | Alt text |
 |---|---|---|
@@ -176,17 +176,17 @@ Two images go against the rule of the 01–21 editorial sets (no QR code or web 
 | 6 | `06_included.jpg` | What's included: the invitation card with the swans and "A promise in lace" on a phone, next to a checklist: envelope opening and four pages, online RSVP with your own questions, guest list and one-tap Excel download, countdown and add-to-calendar, your 5 photos, music and venue map, QR code and printable invitation, editor on phone or computer, online until 12 months after your wedding |
 | 7 | `07_demo.jpg` | Try it before you buy: the sealed lace envelope on a phone next to a QR code of the live demo, to scan with your phone camera or tap the demo link in the description; sample names and photos that yours replace |
 | 8 | `08_how.jpg` | How it works: 1 buy and open the START HERE guide from your Etsy purchases, 2 start with your Etsy order number and first names, 3 personalize names, date, photos, story and RSVP questions, 4 publish and share one link by text, WhatsApp, email or QR; the setup's Add your photo step on a phone |
-| 9 | `09_closeup.jpg` | (draft, not built yet) Designed to be opened: a close-up of a phone with the open Swan Chantilly Lace envelope, your photo and your names |
-| 10 | `10_tap.jpg` | (draft, not built yet) One tap and it opens: a hand taps the sealed lace envelope on a phone; sound and animation included |
-| 11 | `11_home.jpg` | (draft, not built yet) Guests open it anywhere, no app and no account: the Home page on a guest's phone; just one link on any phone |
-| 12 | `12_devices.jpg` | (draft, not built yet) Beautiful on every screen: the Home page on a tablet and the invitation on a phone |
-| 13 | `13_laptop.jpg` | (draft, not built yet) Edit on your laptop too: the private editor with its preview on a laptop |
-| 14 | `14_together.jpg` | (draft, not built yet) Plan it together: the guest list in the editor on a phone and on a laptop; open your editor on any device |
-| 15 | `15_print.jpg` | (draft, not built yet) Print it or send it: the printable invitation in the Swan Chantilly Lace design (5 × 7 in or A5 PDF) next to the sealed envelope on a phone |
-| 16 | `16_need.jpg` | (draft, not built yet) Everything your guests need: four phones show the invitation, the venue and map, questions and answers, and a sent RSVP |
-| 17 | `17_day.jpg` | (draft, not built yet) The order of the day, with add-to-calendar buttons, on a phone |
-| 18 | `18_replies.jpg` | (draft, not built yet) Every reply in one place: the guest list in the editor on a phone; download it as Excel in one tap |
-| 19 | `19_share.jpg` | (draft, not built yet) Share it with one link by text, WhatsApp, email or QR: the editor's Share screen on a phone |
+| 9 | `09_closeup.jpg` | Designed to be opened: a close-up of a phone with the open Swan Chantilly Lace envelope, your photo and your names |
+| 10 | `10_tap.jpg` | One tap and it opens: a hand taps the sealed lace envelope on a phone; sound and animation included |
+| 11 | `11_home.jpg` | Guests open it anywhere, no app and no account: the Home page on a guest's phone; just one link on any phone |
+| 12 | `12_devices.jpg` | Beautiful on every screen: the Home page on a tablet and the invitation on a phone |
+| 13 | `13_laptop.jpg` | Edit on your laptop too: the private editor with its preview on a laptop |
+| 14 | `14_together.jpg` | Plan it together: the guest list in the editor on a phone and on a laptop; open your editor on any device |
+| 15 | `15_print.jpg` | Print it or send it: the printable invitation in the Swan Chantilly Lace design (5 × 7 in or A5 PDF) next to the sealed envelope on a phone |
+| 16 | `16_need.jpg` | Everything your guests need: four phones show the invitation, the venue and map, questions and answers, and a sent RSVP |
+| 17 | `17_day.jpg` | The order of the day, with add-to-calendar buttons, on a phone |
+| 18 | `18_replies.jpg` | Every reply in one place: the guest list in the editor on a phone; download it as Excel in one tap |
+| 19 | `19_share.jpg` | Share it with one link by text, WhatsApp, email or QR: the editor's Share screen on a phone |
 
 ## 6. Video
 

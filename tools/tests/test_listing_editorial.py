@@ -30,9 +30,9 @@ DARK = {"art-deco-black-tie", "emerald-gold-estate", "midnight-garden"}
 
 
 def test_theme_table():
-    assert len(lk.THEMES) == 21
-    # G175: etsy_upload also lists the coming designs 22–32; they join THEMES when their GPT parts and scenes exist
+    # G175: etsy_upload also lists the coming designs 22–48; they join THEMES when they go live (49 is live, ff82ba13)
     live = [d for d in eu.DESIGNS if eu.commerce(d[2])["status"] == "live"]
+    assert len(lk.THEMES) == len(live) == 22
     assert sorted((t.no, t.folder, t.id) for t in lk.THEMES.values()) == sorted(live)
     for t in lk.THEMES.values():
         assert t.name == eu.theme_name(t.id), (t.id, t.name, eu.theme_name(t.id))
@@ -109,7 +109,7 @@ def test_trust_scene_and_stills():
 
 def test_select():
     assert [t.no for t in le.select(["06-08", "13"])] == ["06", "07", "08", "13"]
-    assert [t.no for t in le.select(["olive-ivory", "01", "all"])] == [f"{i:02d}" for i in range(1, 22)]
+    assert [t.no for t in le.select(["olive-ivory", "01", "all"])] == [f"{i:02d}" for i in range(1, 22)] + ["49"]
     for bad in (["22"], ["nope"]):
         try:
             le.select(bad)
@@ -133,8 +133,14 @@ def test_built_sets():
                             for f in ("cover_hand_v2.png", "cover_hand.png", "three_phones.png"))
         assert set(files) <= set(expected) and (not missing or (no_scenes and missing == lk.UPLOAD_SCENES)), (t.id, files)
         md = (t.package / "listing" / lk.LISTING_MD).read_text(encoding="utf-8")
-        rows = re.findall(r"^\| \d \| `(\d\d_\w+\.png)` \|", eu.section(md, 5), re.M)
-        assert rows == expected, (t.id, rows)
+        v4 = t.package / "listing" / eu.V4_DIR
+        if all((v4 / f"{n}.jpg").exists() for n in eu.V4_IMAGES):
+            # 2026-10-21/23: the v4 set replaced the editorial set on every Etsy draft; §5 lists the v4 JPGs
+            rows = re.findall(r"^\| \d+ \| `(\d\d_\w+\.jpg)` \|", eu.section(md, 5), re.M)
+            assert rows == [f"{n}.jpg" for n in eu.V4_IMAGES], (t.id, rows)
+        else:
+            rows = re.findall(r"^\| \d \| `(\d\d_\w+\.png)` \|", eu.section(md, 5), re.M)
+            assert rows == expected, (t.id, rows)
         for f in files:
             im = Image.open(d / f)
             assert im.size == (2000, 2000), (t.id, f, im.size)

@@ -48,66 +48,136 @@
   "images": [
     {
       "n": 1,
-      "file": "collections/01_Olive_Ivory/package/listing/images_editorial/01_cover.png",
-      "alt": "Olive & Ivory wedding website with online RSVP on a phone held in a hand, among olive branches, olives and ivory linen: the opening page with a sage envelope with lace and a gold wax seal and the names Avery & Jordan",
+      "file": "collections/01_Olive_Ivory/package/listing/images_v4/01_cover.jpg",
+      "alt": "Olive & Ivory wedding website with RSVP: two phones show the sage envelope with ivory lace and a gold wax seal under the names Avery & Jordan, and the open envelope with the photo card; badges No Canva needed, RSVP guest list included, Edit on your phone",
       "exists": true,
-      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 2,
-      "file": "collections/01_Olive_Ivory/package/listing/images_editorial/02_opening.png",
-      "alt": "It opens like a real invitation: three phones show the envelope closed, the envelope opening, and the invitation card rising out of it",
+      "file": "collections/01_Olive_Ivory/package/listing/images_v4/02_reveal.jpg",
+      "alt": "Opens like a real envelope: three phones show 1 guests tap the sealed olive envelope, 2 it opens onto an olive-leaf liner, 3 the card with your photo rises, We're getting married, June 12, 2027; sound and animation included",
       "exists": true,
-      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 3,
-      "file": "collections/01_Olive_Ivory/package/listing/images_editorial/03_pages.png",
-      "alt": "Every page guests need, on five phone screens: home with a countdown, our story, the invitation card, the order of the day and the RSVP page",
+      "file": "collections/01_Olive_Ivory/package/listing/images_v4/03_rsvp.jpg",
+      "alt": "Collect RSVPs with ease, online RSVP built in: the guest's reply form on one phone, and the editor's guest list with guests coming, not coming and replies on another; badges for your own questions and the Excel guest list download",
       "exists": true,
-      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 4,
-      "file": "collections/01_Olive_Ivory/package/listing/images_editorial/04_edit.png",
-      "alt": "Make every word yours: the online editor on a phone held in two hands, next to a list of what you change (names, date and venue; photos and story; schedule and questions and answers; every heading and label). The artwork, colors and fonts stay as designed",
+      "file": "collections/01_Olive_Ivory/package/listing/images_v4/04_edit.jpg",
+      "alt": "Edit everything on your phone, no Canva, no app, no account: three editor screens, 1 pick a page, 2 change any text, 3 publish; a No Canva needed badge; every change saves by itself",
       "exists": true,
-      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 5,
-      "file": "collections/01_Olive_Ivory/package/listing/images_editorial/05_rsvp.png",
-      "alt": "Every reply in one place: the guest's RSVP form with a meal choice, and the couple's guest list in the editor with each reply and a Download Excel button",
+      "file": "collections/01_Olive_Ivory/package/listing/images_v4/05_pages.jpg",
+      "alt": "Every page beautifully included, Olive & Ivory, 4 pages and the envelope: Home with the photo card, names and countdown, Our Story with a photo carousel, Details with the order of the day, and RSVP; countdown, schedule, map, Q&A, add-to-calendar, music, dress code, travel and registry",
       "exists": true,
-      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 6,
-      "file": "collections/01_Olive_Ivory/package/listing/images_editorial/06_details.png",
-      "alt": "Everything guests ask: the order of the day with add-to-calendar buttons, the venue with a photo, and questions and answers",
+      "file": "collections/01_Olive_Ivory/package/listing/images_v4/06_included.jpg",
+      "alt": "What's included in Olive & Ivory: the invitation on a phone next to a checklist: envelope opening with Home, Our Story, Details and RSVP pages, online RSVP with your own questions, guest list and one-tap Excel download, countdown and add-to-calendar, your 5 photos, music and venue map, QR code and printable invitation PDF, easy editor on phone or computer, online until 12 months after your wedding",
       "exists": true,
-      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 7,
-      "file": "collections/01_Olive_Ivory/package/listing/images_editorial/07_how.png",
-      "alt": "Three simple steps: start with your Etsy order number, personalize your names, date and a photo, then publish and share one link or print the QR code",
+      "file": "collections/01_Olive_Ivory/package/listing/images_v4/07_demo.jpg",
+      "alt": "Try it before you buy: the sealed olive envelope with lace and a gold seal on a phone next to a QR code of the live demo; scan it with your phone camera or tap the demo link in the description; sample names and photos, yours replace them",
       "exists": true,
-      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 8,
-      "file": "collections/01_Olive_Ivory/package/listing/images_editorial/08_included.png",
-      "alt": "What is included: the envelope opening and four pages, your own online editor, online RSVP and guest list, QR code and START HERE guide; online until 12 months after your wedding, live demo link in the description",
+      "file": "collections/01_Olive_Ivory/package/listing/images_v4/08_how.jpg",
+      "alt": "How it works, simple 3-step setup: 1 buy and open the START HERE guide from your Etsy purchases, 2 start with your Etsy order number and first names, 3 personalize names, date, photos, story, RSVP questions, 4 publish and share one link by text, WhatsApp, email or QR; the Add your photo step on a phone",
       "exists": true,
-      "status": "current: editorial set of 2026-10-16 (tools/listing_editorial.py, docs/21; real screens of the K29 editor, DPR 3 opening stills, GPT mockup scenes for images 1, 2, 4 and 8; listing_v3 §5)"
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
     {
       "n": 9,
-      "file": "collections/01_Olive_Ivory/package/listing/images_editorial/09_devices.png",
-      "alt": "Start on your phone, continue on any device: one phone shows the \"Open or start your website\" form with an Etsy order number and email filled in; another shows the editor's \"Use on another device\" card with three devices signed in with the same order number (an iPhone, an Android phone and a Mac) and a \"Sign out other devices\" button. No account or password",
+      "file": "collections/01_Olive_Ivory/package/listing/images_v4/09_closeup.jpg",
+      "alt": "Designed to be opened: a phone among olive branches, green olives and white blossoms shows the open sage envelope with its olive-leaf liner and the card with the couple's photo; caption A photo, a wax seal and your names",
       "exists": true,
-      "status": "current: image 9 of 2026-10-17 (G148; tools/listing_editorial.py --capture devices, real screens of /my and Share → Use on another device from a local build with G146; no web address or QR)"
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
+    },
+    {
+      "n": 10,
+      "file": "collections/01_Olive_Ivory/package/listing/images_v4/10_tap.jpg",
+      "alt": "One tap and it opens, for your guests: a hand holds a phone with the sealed olive envelope under the names Avery & Jordan, a finger ready to tap, on linen with olives and white blossoms; sound and animation included",
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
+    },
+    {
+      "n": 11,
+      "file": "collections/01_Olive_Ivory/package/listing/images_v4/11_home.jpg",
+      "alt": "Guests open it anywhere, no app, no account: a guest's phone shows the Olive & Ivory home page with the photo card, names and countdown; just one link on any phone",
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
+    },
+    {
+      "n": 12,
+      "file": "collections/01_Olive_Ivory/package/listing/images_v4/12_devices.jpg",
+      "alt": "Beautiful on every screen, phone, tablet and computer: the Olive & Ivory home page on a tablet and the invitation on a phone",
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
+    },
+    {
+      "n": 13,
+      "file": "collections/01_Olive_Ivory/package/listing/images_v4/13_laptop.jpg",
+      "alt": "Edit on your laptop too, your private editor: the editor on a laptop with the page's fields beside a preview of the website; see every change in the preview",
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
+    },
+    {
+      "n": 14,
+      "file": "collections/01_Olive_Ivory/package/listing/images_v4/14_together.jpg",
+      "alt": "Plan it together, open your editor on any device: the editor's guest list on a phone and on a laptop",
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
+    },
+    {
+      "n": 15,
+      "file": "collections/01_Olive_Ivory/package/listing/images_v4/15_print.jpg",
+      "alt": "Print it or send it, printable invitation included: the printed card with olive branches and a gold border next to a phone with the sealed envelope, on linen with olives and a green ribbon; 5×7 in or A5 PDF in your design",
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
+    },
+    {
+      "n": 16,
+      "file": "collections/01_Olive_Ivory/package/listing/images_v4/16_need.jpg",
+      "alt": "Everything your guests need, on four phones: the invitation, the venue with its photo and map, questions and answers, and the thank-you after a sent RSVP",
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
+    },
+    {
+      "n": 17,
+      "file": "collections/01_Olive_Ivory/package/listing/images_v4/17_day.jpg",
+      "alt": "The order of the day, on the wedding day: the Details page's schedule on a phone, with add-to-calendar buttons",
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
+    },
+    {
+      "n": 18,
+      "file": "collections/01_Olive_Ivory/package/listing/images_v4/18_replies.jpg",
+      "alt": "Every reply in one place, guest list included: the editor's list of replies on a phone, each marked coming or not coming; download it as Excel in one tap",
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
+    },
+    {
+      "n": 19,
+      "file": "collections/01_Olive_Ivory/package/listing/images_v4/19_share.jpg",
+      "alt": "Share it with one link by text, WhatsApp, email or QR: the editor's Share screen on a phone with the website link and a Copy link button; caption Your own address: bkestudio.com/your-names",
+      "exists": true,
+      "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     }
   ],
   "gpt_mockup_scenes": [
@@ -139,7 +209,7 @@
     "collections/01_Olive_Ivory/assets/gpt/mockups/three_phones.png"
   ],
   "video": {
-    "file": "collections/01_Olive_Ivory/package/listing/video.mp4",
+    "file": "collections/01_Olive_Ivory/package/listing/video_v4_4x5.mp4",
     "exists": true
   },
   "open_checks": [
