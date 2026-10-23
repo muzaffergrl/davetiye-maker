@@ -547,7 +547,10 @@ function ClaimForm({
               <li key={x.slug} className={styles.choiceSite} data-start-choice-site={x.slug}>
                 <div className={styles.choiceText}>
                   <strong>{x.design || x.slug}</strong>
-                  <span>{x.names ? `${x.names} · ` : ''}/{x.slug}</span>
+                  <span>
+                    {x.names ? `${x.names} · ` : ''}
+                    <span className={styles.choiceSlug}>/{x.slug}</span>
+                  </span>
                 </div>
                 <button type="button" className={styles.secondary} disabled={busy} onClick={() => void submit({ intent: 'open', openSlug: x.slug })} data-start-open={x.slug}>
                   {t('Open it')}

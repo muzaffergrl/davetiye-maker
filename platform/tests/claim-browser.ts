@@ -376,7 +376,10 @@ try {
 
   // 4. The real theme (G038), when it is on this branch.
   if (hasRealTheme) {
-    const rc = await browser.newContext(device);
+    // Another buyer on another phone: its own client address (x-forwarded-for, as Vercel's edge sets it). The flow above
+    // already spent this connection's 10 /start attempts per 15 minutes (G951's choice adds "Open it" and "Start
+    // another website" posts), and that limit is working as intended — it is not what this step checks.
+    const rc = await browser.newContext({ ...device, extraHTTPHeaders: { 'x-forwarded-for': '203.0.113.40' } });
     const rp = await rc.newPage();
     const res = await rp.goto(`${BASE}/start?theme=${REAL_THEME}`, { waitUntil: 'networkidle' });
     const ok = res.status() === 200 && (await rp.locator('h1').innerText()) === 'Start your website';
