@@ -7,7 +7,9 @@
 // Buyer: /start (manual order check) → panel Home says the order is being confirmed (no Publish there) → the sample
 // reply-by date follows the new wedding date. Shop: /admin off without ADMIN_PASSWORD → sign-in (wrong, right) → list
 // ("Yapılacak" first, search) → site page → confirm the order → the buyer can publish → ready Etsy message → new edit
-// link (old link dead, new link opens the panel) → delete needs the address. 390 × 844 and 1280 × 900; axe-core, touch
+// link (old link dead, new link opens the panel) → delete needs the address. "My website" (/my, G146): order number +
+// email first, the private edit link folded ("Have your private edit link?"); the sales-site header keeps its menu button
+// on screen at 360, 390 and 430 px (TR). 390 × 844 and 1280 × 900; axe-core, touch
 // targets, no horizontal scroll. Screenshots + checks.json → previews/g087/ (or $G087_SHOTS_DIR). Exit 1 on a failed check.
 
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
@@ -286,8 +288,14 @@ try {
     const ctx = await browser.newContext(BUYER);
     const page = await ctx.newPage();
     await page.goto(`${BASE}/my`);
-    await page.waitForSelector('#my-edit-link');
+    // G146 (K46): the way in on any device is the Etsy order number + email; the private edit link is a folded
+    // shortcut ("Have your private edit link?", opened by /my#link).
+    await page.waitForSelector('[data-my-continue] [data-my-submit]');
     check('/my without a saved editor: no "On this device"', (await page.locator('[data-my-saved]').count()) === 0);
+    check('/my: order number + email is the way in', (await page.locator('[data-my-continue] input').count()) >= 2);
+    check('/my: the edit-link box is folded until asked for', !(await page.locator('#my-edit-link').isVisible()));
+    await page.click('[data-my-link] summary');
+    await page.waitForSelector('#my-edit-link');
     await page.fill('#my-edit-link', 'https://example.com/whatever');
     await page.click('[data-my-paste]');
     await page.waitForSelector('#my-edit-link-err');
@@ -306,7 +314,9 @@ try {
     check('"Open editor" goes back into the panel', page.url().includes('/edit/nora'));
     await page.goto(`${BASE}/`);
     check('sales site header: "My website" button at 390', await page.locator('header [data-my-website]').isVisible());
-    const menu390 = await page.locator('header summary').boundingBox();
+    // the menu button (the header also holds the language switch's <summary>, G144)
+    const MENU = 'header details:not([data-lang-switch]) > summary';
+    const menu390 = await page.locator(MENU).boundingBox();
     check('sales site 390: the menu button is still on screen', Boolean(menu390 && menu390.x + menu390.width <= 390), JSON.stringify(menu390));
     check('sales site 390: no horizontal scroll', (await overflow(page)) <= 0);
     await shot(page, 'a12_home_header_390');
@@ -315,10 +325,18 @@ try {
     const p360 = await small.newPage();
     await p360.goto(`${BASE}/`);
     check('sales site 360: header fits', (await overflow(p360)) <= 0 && (await p360.locator('header [data-my-website]').isVisible()));
-    const menu360 = await p360.locator('header summary').boundingBox();
+    const menu360 = await p360.locator(MENU).boundingBox();
     check('sales site 360: the menu button is still on screen', Boolean(menu360 && menu360.x + menu360.width <= 360), JSON.stringify(menu360));
     await shot(p360, 'a13_home_header_360');
     await small.close();
+    // 430 px, Turkish (the longest "Create your website"): the one-line button pushed the menu button off the screen
+    const wide = await browser.newContext({ ...BUYER, locale: 'tr-TR', viewport: { width: 430, height: 932 } });
+    const p430 = await wide.newPage();
+    await p430.goto(`${BASE}/tr`);
+    const menu430 = await p430.locator(MENU).boundingBox();
+    check('sales site 430 (TR): the menu button is still on screen', Boolean(menu430 && menu430.x + menu430.width <= 430), JSON.stringify(menu430));
+    await shot(p430, 'a14_home_header_430_tr');
+    await wide.close();
   });
 
   await block('delete needs the address', async () => {
