@@ -38,7 +38,7 @@
   "quantity": 999,
   "renewal": null,
   "sales_status": "preview",
-  "shop_section": "[SHOP SECTION]: the user's choice",
+  "shop_section": "Classic & Vintage",
   "digital_files": [
     {
       "file": "collections/24_Grand_Theatre_Premiere/package/customer/START_HERE.pdf",
@@ -296,11 +296,6 @@
     {
       "where": "before publishing",
       "check": "Image 7 (QR code of the demo) and image 19 (web address) decided against docs/15 §1 and Etsy's Off-Platform policy",
-      "text": ""
-    },
-    {
-      "where": "before publishing",
-      "check": "Shop section chosen (§4)",
       "text": ""
     },
     {

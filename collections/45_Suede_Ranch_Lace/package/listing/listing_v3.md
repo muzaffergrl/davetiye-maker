@@ -157,7 +157,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Digital file | `START_HERE.pdf` from `package/customer/` (built 2026-10-22; Etsy: up to 5 files, 20 MB each) |
 | Price | Proposed: **1,190 TL** (the launch price the user approved on 2026-10-22 for a template design (K49); about USD 24.02 at 49.55 TRY per USD, docs/23 §1). Shop currency TRY (K38). **Not confirmed for this design yet** (blocker, §11) |
 | Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) [VERIFY: whether Etsy lowers a digital listing's quantity on each sale] |
-| Shop section | [SHOP SECTION] (the user's choice; docs/20 §3 lists the existing sections) |
+| Shop section | Classic & Vintage (Etsy draft, docs/20 §7.11) |
 | Renewal | [AUTO RENEW: yes/no] |
 
 ## 5. Images and alt text
@@ -304,7 +304,7 @@ link; one review request per order, the same text for everyone, never with an in
 - [ ] PAKET 7 GPT scenes made for this design; images 09–19 built; alt texts 9–19 rewritten against the files
 - [ ] Image 7 (demo QR), image 4 (sample web address on the editor's live card) and image 19 (address in the footer) checked against Etsy's Off-Platform policy (docs/15 §4.1)
 - [ ] Hover video `video_v4_4x5.mp4` produced from the live demo; first and last frame compared
-- [ ] Shop section chosen (§4)
+- [x] Shop section chosen (§4)
 - [ ] Etsy rules re-checked in the listing editor (title, tags, images, video, AI disclosure, "Designed by"); the official pages could not be read directly on 2026-10-22 (403)
 - [ ] `python3 tools/etsy_upload.py --check` passes and no VERIFY is left in this file
 

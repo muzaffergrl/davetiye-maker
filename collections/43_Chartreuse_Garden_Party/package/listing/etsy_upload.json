@@ -38,7 +38,7 @@
   "quantity": 999,
   "renewal": null,
   "sales_status": "coming",
-  "shop_section": "[SHOP SECTION]",
+  "shop_section": "Floral & Garden",
   "digital_files": [
     {
       "file": "collections/43_Chartreuse_Garden_Party/package/customer/START_HERE.pdf",
@@ -301,11 +301,6 @@
     {
       "where": "before publishing",
       "check": "Hover video `video_v4_4x5.mp4` produced from the live demo; first and last frame compared",
-      "text": ""
-    },
-    {
-      "where": "before publishing",
-      "check": "Shop section chosen (§4)",
       "text": ""
     },
     {

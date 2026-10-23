@@ -156,7 +156,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Digital file | `START_HERE.pdf` from `package/customer/` (built and checked 2026-10-22; Etsy: up to 5 files, 20 MB each, as recorded in the 21 listing) |
 | Price | **1,190 TL proposed** (the approved shop price for a template design, user, 2026-10-16, docs/23 §1; about USD 24.02 at 49.55 TRY per USD). Shop currency TRY (K38). **Not confirmed for this design** (`config.ts` `[PRICE]`): blocker until the user confirms it |
 | Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) [VERIFY: whether Etsy lowers a digital listing's quantity on each sale] |
-| Shop section | Suggestion: `Summer & Destination` (an existing section, docs/20 §3; the user's choice) |
+| Shop section | Summer & Destination (docs/20 §7.11 rule; Etsy draft 2026-10-23) |
 | Renewal | [AUTO RENEW: yes/no] |
 
 ## 5. Images and alt text
@@ -301,7 +301,7 @@ link; one review request per order, the same text for everyone, never with an in
 - [ ] Video built (`video_v4_4x5.mp4`) from the live demo with the placed parts, and watched
 - [ ] QR code of the live demo in image 07 and our web address in images 04 and 19: the user decides against docs/15 ("Etsy dışına yönlendirme": no QR in the listing, Off-Platform policy)
 - [ ] `tools/etsy_upload.py` reads `images_editorial/` and `video.mp4`; pointed at `images_v4/` and `video_v4_4x5.mp4` (coordinator)
-- [ ] Shop section chosen (§4)
+- [x] Shop section chosen (§4)
 - [ ] Etsy rules re-checked in the listing editor (title, tags, images, video, AI disclosure, "Designed by")
 - [ ] `python3 tools/etsy_upload.py --check` passes and no VERIFY is left in this file
 

@@ -38,7 +38,7 @@
   "quantity": 999,
   "renewal": null,
   "sales_status": "coming",
-  "shop_section": "[SHOP SECTION]",
+  "shop_section": "Classic & Vintage",
   "digital_files": [
     {
       "file": "collections/48_Navy_Ivory_Crest/package/customer/START_HERE.pdf",
@@ -306,11 +306,6 @@
     {
       "where": "before publishing",
       "check": "Hover video `video_v4_4x5.mp4` produced from the live demo; first and last frame compared",
-      "text": ""
-    },
-    {
-      "where": "before publishing",
-      "check": "Shop section chosen (§4)",
       "text": ""
     },
     {

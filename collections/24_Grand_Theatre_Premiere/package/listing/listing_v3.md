@@ -162,7 +162,7 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 | Digital file | `START_HERE.pdf` from `package/customer/` (G190, 2026-10-20; Etsy: up to 5 files, 20 MB each) |
 | Price | **1,190 TL (proposal)**: the launch price the user approved on 2026-10-22 for a template design (K49) (about USD 24.02 at 49.55 TRY per USD, docs/23 §1). Shop currency TRY (K38). **Not confirmed for this design** (`config.ts` price `[PRICE]`, status `preview`): a blocker until the user confirms it |
 | Quantity | 999, Etsy's maximum (user, 2026-10-16: no stock limit) [VERIFY: whether Etsy lowers a digital listing's quantity on each sale] |
-| Shop section | [SHOP SECTION]: the user's choice (docs/20 §3). Suggestion: `Classic & Vintage` (designs.ts style: classic) |
+| Shop section | Classic & Vintage (Etsy draft, docs/20 §7.11) |
 | Renewal | [AUTO RENEW: yes/no] (the 01–21 drafts were saved with Automatic, docs/20 §7.9; the decision is the user's) |
 
 ## 5. Images and alt text
@@ -305,7 +305,7 @@ link; one review request per order, the same text for everyone, never with an in
 - [ ] PAKET 7 prompts written for this design and its 11 GPT scenes made (`assets/gpt/mockups/p7_NN_*.png`)
 - [ ] `tools/listing_v4` set up for this design (`themes.json` row, `picks.json` opening frames, `OPENS` "velvet curtain", the default object word of images 5 and 6 replaced) and the v4 set built: 19 JPGs in `images_v4/` and `video_v4_4x5.mp4`; all 19 alt texts read against the files
 - [ ] Image 7 (QR code of the demo) and image 19 (web address) decided against docs/15 §1 and Etsy's Off-Platform policy
-- [ ] Shop section chosen (§4)
+- [x] Shop section chosen (§4)
 - [ ] Etsy draft created for this design (title, description, tags, category, digital file, images, video)
 - [ ] Etsy rules re-checked on the official pages (`00_ANA_DEVIR.md` §34) and in the listing editor (title, tags, images, video, AI disclosure, "Designed by"), with the date written in §0
 - [ ] `python3 tools/etsy_upload.py --check` passes and no VERIFY is left in this file

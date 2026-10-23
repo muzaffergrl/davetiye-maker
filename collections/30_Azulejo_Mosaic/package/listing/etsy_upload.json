@@ -38,7 +38,7 @@
   "quantity": 999,
   "renewal": null,
   "sales_status": "preview",
-  "shop_section": "[SHOP SECTION]: the user's choice",
+  "shop_section": "Summer & Destination",
   "digital_files": [
     {
       "file": "collections/30_Azulejo_Mosaic/package/customer/START_HERE.pdf",
@@ -185,6 +185,17 @@
     "collections/30_Azulejo_Mosaic/assets/gpt/mockups/flatlay_phone.png",
     "collections/30_Azulejo_Mosaic/assets/gpt/mockups/hand_phone_edit.png",
     "collections/30_Azulejo_Mosaic/assets/gpt/mockups/laptop_phone.png",
+    "collections/30_Azulejo_Mosaic/assets/gpt/mockups/p7_01_closeup.png",
+    "collections/30_Azulejo_Mosaic/assets/gpt/mockups/p7_02_hand_tap.png",
+    "collections/30_Azulejo_Mosaic/assets/gpt/mockups/p7_03_guest_home.png",
+    "collections/30_Azulejo_Mosaic/assets/gpt/mockups/p7_04_phone_tablet.png",
+    "collections/30_Azulejo_Mosaic/assets/gpt/mockups/p7_05_laptop.png",
+    "collections/30_Azulejo_Mosaic/assets/gpt/mockups/p7_06_couple_planning.png",
+    "collections/30_Azulejo_Mosaic/assets/gpt/mockups/p7_07_print_card.png",
+    "collections/30_Azulejo_Mosaic/assets/gpt/mockups/p7_08_four_phones.png",
+    "collections/30_Azulejo_Mosaic/assets/gpt/mockups/p7_09_venue_table.png",
+    "collections/30_Azulejo_Mosaic/assets/gpt/mockups/p7_10_bouquet.png",
+    "collections/30_Azulejo_Mosaic/assets/gpt/mockups/p7_11_share.png",
     "collections/30_Azulejo_Mosaic/assets/gpt/mockups/three_phones.png"
   ],
   "video": {
@@ -285,11 +296,6 @@
     {
       "where": "before publishing",
       "check": "Image 7 (QR code of the demo) and image 19 (web address) decided against docs/15 §1 and Etsy's Off-Platform policy",
-      "text": ""
-    },
-    {
-      "where": "before publishing",
-      "check": "Shop section chosen (§4)",
       "text": ""
     },
     {

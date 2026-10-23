@@ -449,6 +449,38 @@ Shop Manager → Listings: **Draft 45, Active 0** (yayın yok; 15 ücretsiz kred
   alan. Yayın kararından önce bu iki ilanın yayınlanmaması ya da Custom Order'a çevrilmesi önerilir; taslaklar duruyor.
 - **Kullanıcı kararı (2026-10-22):** kurulum ve ek revizyon taslakta kalır; yayın sırasında yeniden konuşulur.
 
+### 7.13 Destek e-postası düzeltmesi, PDF değişimi, 40–46 görselleri, alıcı mesajları (2026-10-23, yerel oturum, Claude in Chrome)
+- **Destek e-postası:** gerçek adres **bkestudio01@gmail.com** (K33'te yanlış yazılan `bkestudio@gmail.com` 49 START HERE rehberinde,
+  3 hizmet PDF'inde, sitede ve panelde geçiyordu). Kaynaklar düzeltildi, rehberler yeniden üretildi (`--check` + jsQR OK, 52 PDF'te
+  eski adres yok), commit 519d39f8.
+- **Etsy dijital dosyaları:** 45 taslağın hepsinde (01–32, 39–48, 3 hizmet) eski PDF kaldırıldı, yenisi yüklendi, "Save draft";
+  her taslak yeniden açılıp dosya okundu. Boyut eski/yeni ayırt etmiyor (1–3 bayt fark), bu yüzden dosya ID'si kontrol edildi:
+  hepsi bugünkü yüklemeden (ID ≥ 1525510910658; eski taslaktaki örnek 1525230797132). Not: dosya yükleme kaydetmeden de kalıcı
+  olabiliyor (44'te görüldü), kaldırma ise kayıt ister.
+- **40–46:** v4 09–19 yaşam tarzı görselleri (ana oturumun e2e6c545 seti) eklendi → 19 görsel + video; sıra Etsy'de kontrol edildi.
+- **Alıcı mesajları (§1.4, §1.5):** hizmet alıcılarını ve `/my` ile her cihazdan devam akışını kapsayacak biçimde Info & Appearance'a
+  girildi, yeniden okunup doğrulandı (önceki metin yedekte: §7.8).
+- **33–38 ve 49 taslakları açıldı** (21'in Copy'si → "Delete all" ile 21'in görsel ve videosu silindi → tasarımın başlığı, açıklaması,
+  13 etiketi, bölümü ve START_HERE.pdf'i; 1.190 TL, 999 adet 21'den). Açıklama elle yazılmadı: sayfaya geçici bir dosya girdisi
+  eklenip `etsy_upload.json`'daki metin dosyadan okundu; kayıttan sonra her taslak yeniden açılıp başlık, açıklama SHA-256'sı,
+  etiket sayısı, bölüm, fiyat ve PDF okundu, hepsi birebir. Etsy fotoğrafsız taslağa izin veriyor. Görseller ve video, ana oturumun
+  v4 setleri gelince eklenecek. 21'in asıl taslağı ayrıca kontrol edildi (19 görsel, video, PDF, 13 etiket duruyor).
+
+  | Tasarım | Etsy ID | Bölüm |
+  |---|---|---|
+  | 33 Marigold & Mehndi | [4601541371](https://www.etsy.com/your/shops/me/listing-editor/edit/4601541371) | Floral & Garden |
+  | 34 Red Lacquer & Double Happiness | [4601542447](https://www.etsy.com/your/shops/me/listing-editor/edit/4601542447) | Classic & Vintage |
+  | 35 Highland Tartan & Thistle | [4601569622](https://www.etsy.com/your/shops/me/listing-editor/edit/4601569622) | Classic & Vintage |
+  | 36 Victorian Glasshouse | [4601570298](https://www.etsy.com/your/shops/me/listing-editor/edit/4601570298) | Floral & Garden |
+  | 37 Art Nouveau Lily | [4601571032](https://www.etsy.com/your/shops/me/listing-editor/edit/4601571032) | Floral & Garden |
+  | 38 Papel Picado Fiesta | [4601571808](https://www.etsy.com/your/shops/me/listing-editor/edit/4601571808) | Summer & Destination |
+  | 49 Ivory Pearl Atelier | [4601572630](https://www.etsy.com/your/shops/me/listing-editor/edit/4601572630) | Classic & Vintage |
+
+  ID'ler `tools/etsy_ids_22_48.json`'da (01–21: `tools/listing_v4/etsy_ids.json`). 22–48'in `listing_v3.md` §4 "Shop section"
+  satırları Etsy'deki gerçek bölümle dolduruldu (Listings → Sections filtresiyle okundu).
+- Durum: **Draft 52** (49 tasarım + 3 hizmet), Active 0; yayın yok. Açık kalan: 33–38 ve 49'a v4 görselleri + video, 22–30 ve
+  47–48'e 09–19 görselleri (ana oturumun setleri).
+
 ## 8. İlan paketi (01–05) — yüklemeye hazır, Etsy'ye eklenmedi (2026-10-15)
 
 Kullanıcı kararı (2026-10-15): ilanlar **yüklenecek biçimde hazırlanır ama Etsy'ye eklenmez** (taslak da açılmaz). Önce testler yapılacak.

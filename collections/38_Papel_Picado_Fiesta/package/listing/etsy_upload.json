@@ -38,7 +38,7 @@
   "quantity": 999,
   "renewal": null,
   "sales_status": "coming",
-  "shop_section": "Suggestion: `Summer & Destination`",
+  "shop_section": "Summer & Destination",
   "digital_files": [
     {
       "file": "collections/38_Papel_Picado_Fiesta/package/customer/START_HERE.pdf",
@@ -301,11 +301,6 @@
     {
       "where": "before publishing",
       "check": "`tools/etsy_upload.py` reads `images_editorial/` and `video.mp4`; pointed at `images_v4/` and `video_v4_4x5.mp4` (coordinator)",
-      "text": ""
-    },
-    {
-      "where": "before publishing",
-      "check": "Shop section chosen (§4)",
       "text": ""
     },
     {

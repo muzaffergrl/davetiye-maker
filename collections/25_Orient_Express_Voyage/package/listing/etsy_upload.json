@@ -38,7 +38,7 @@
   "quantity": 999,
   "renewal": null,
   "sales_status": "preview",
-  "shop_section": "[SHOP SECTION]: the user's choice",
+  "shop_section": "Classic & Vintage",
   "digital_files": [
     {
       "file": "collections/25_Orient_Express_Voyage/package/customer/START_HERE.pdf",
@@ -191,6 +191,8 @@
     "collections/25_Orient_Express_Voyage/assets/gpt/mockups/p7_04_phone_tablet.png",
     "collections/25_Orient_Express_Voyage/assets/gpt/mockups/p7_05_laptop.png",
     "collections/25_Orient_Express_Voyage/assets/gpt/mockups/p7_06_couple_planning.png",
+    "collections/25_Orient_Express_Voyage/assets/gpt/mockups/p7_07_print_card.png",
+    "collections/25_Orient_Express_Voyage/assets/gpt/mockups/p7_08_four_phones.png",
     "collections/25_Orient_Express_Voyage/assets/gpt/mockups/p7_09_venue_table.png",
     "collections/25_Orient_Express_Voyage/assets/gpt/mockups/p7_10_bouquet.png",
     "collections/25_Orient_Express_Voyage/assets/gpt/mockups/p7_11_share.png",
@@ -299,11 +301,6 @@
     {
       "where": "before publishing",
       "check": "Image 7 (QR code of the demo) and image 19 (web address) decided against docs/15 §1 and Etsy's Off-Platform policy",
-      "text": ""
-    },
-    {
-      "where": "before publishing",
-      "check": "Shop section chosen (§4)",
       "text": ""
     },
     {
