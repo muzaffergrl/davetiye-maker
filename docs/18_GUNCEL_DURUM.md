@@ -52,6 +52,10 @@ yapıştırma `docs/38` adım 1 ile birlikte yapılmalı.
 - Tarayıcı (build ile, Chromium 390 px): `final-smoke` 45/45 × 3 (01 Olive & Ivory, 06 Art Deco, 19 Midnight Garden),
   `g087-browser` 68/68, `claim-browser` 57/57 (iki tasarımlı sipariş: seçim ekranı, "Aç", "bir site daha"), `marketing-build` 2/2.
 - Python araç testleri 113/113; `etsy_upload.py --check` 52/52; 49 `content.demo.json` doğrulaması temiz; görev denetimi temiz.
+- İnceleme düzeltmelerinden sonra (fixer, aynı gün): `npm test` **1951/1951**, typecheck ve build yeşil, `claim-browser` 57/57,
+  `marketing-build` 2/2, Python araç testleri 113/113, `build_customer_guides.py --check` 49/49 (jsQR), `etsy_upload.py --check` 0.
+  `marketing-browser` 1004/1095: 91 hata eski kart sayısı/satır beklentileri (süit G141'den beri güncellenmedi: 33 kart = 20 satışta
+  + 13 "Coming soon"), Compare kutusu 20 px ve /contact e-posta linki dokunma hedefi — inceleme düzeltmeleriyle ilgisiz, açık iş.
 **Koşulmayanlar:** gerçek telefon (bugünkü değişikliklerden sonra), seslerin kulakla dinlenmesi, canlı sitede herhangi bir şey,
 gerçek Etsy makbuzu / satış e-postasıyla G951, blob yedeğinin gerçek depoda çalışması.
 
