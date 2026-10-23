@@ -3,7 +3,7 @@
    the top left; the envelope page's "Skip" at the top right — there the switcher goes under it). Theme font and ink
    through inherit/currentColor; --plang-* to override. */
 .pl-lang {
-  position: fixed; z-index: 56; top: calc(8px + env(safe-area-inset-top)); right: 8px;
+  position: fixed; z-index: 56; top: calc(8px + env(safe-area-inset-top)); right: calc(8px + env(safe-area-inset-right));
   font: inherit; font-size: 12px; line-height: 1; letter-spacing: .08em; color: var(--plang-ink, inherit);
 }
 body:has(.skip) .pl-lang { top: calc(56px + env(safe-area-inset-top)); }
