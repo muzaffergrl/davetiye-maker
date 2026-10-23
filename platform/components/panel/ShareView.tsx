@@ -130,7 +130,8 @@ export function ShareView({
       ) : null}
 
       {/* G139: website PDF + printable invitation, in reach without opening anything. */}
-      {!archived ? <DownloadsCard slug={slug} editKey={editKey} live={live} online={online} /> : null}
+      {/* G952: locked (visible, buttons off) while the Etsy order is being confirmed or held. */}
+      {!archived ? <DownloadsCard slug={slug} editKey={editKey} live={live} online={online} locked={meta.orderPending} /> : null}
 
       {/* G121 (docs/18 §4 P2, Linktree): the QR code folds away like the password and the edit link (same title). */}
       {live ? (

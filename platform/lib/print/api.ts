@@ -6,9 +6,15 @@
 // Same "Authorization: Bearer <edit key>" as the rest of the panel API (401 for anything else). Both use the saved
 // draft (what the couple sees in the editor). Abuse cap: PDF_LIMITS.perSitePerDay per site (shared counter when the
 // adapter has one, lib/claim/limits.ts). Answer: the PDF as an attachment, or a JSON error the panel shows.
+// G952: no PDF while the site's order waits for the shop or was held (orderCheck "pending"; in etsy / trust mode the
+// order is asked once more first, like Publish) -> 403 order_pending, nor for an archived website -> 403 archived.
+// Neither counts against the daily cap.
 
 import { getClaimRateLimiter } from '../claim/limits.ts';
 import { getDataAdapter } from '../data/index.ts';
+import { autoRecheck, RECHECK_PUBLISH_MS } from '../etsy/recheck.ts';
+import { isArchived } from '../panel/rights.ts';
+import { orderPending } from '../sites.ts';
 import { authorizeEditor } from '../rsvp/couple.ts';
 import { bearerKey, fail, json, publicOrigin, unauthorized } from '../panel/http.ts';
 import { publicSiteUrl } from '../panel/model.ts';
@@ -48,8 +54,13 @@ export function downloadFileName(slug: string, d: DownloadRequest): string {
 
 export async function download(req: Request, slug: string): Promise<Response> {
   const adapter = getDataAdapter();
-  const site = await authorizeEditor(adapter, slug, bearerKey(req));
+  let site = await authorizeEditor(adapter, slug, bearerKey(req));
   if (!site) return unauthorized();
+  if (isArchived(site)) return fail(403, 'archived', printLabel('panel_locked_archived'));
+  if (orderPending(site)) {
+    site = await autoRecheck(adapter, site, RECHECK_PUBLISH_MS);
+    if (orderPending(site)) return fail(403, 'order_pending', printLabel('panel_locked_order'));
+  }
   let body: unknown;
   try {
     body = await req.json();

@@ -1404,6 +1404,8 @@ const dict: Dict = {
   "Open the panel again (panel page)": "Rouvrir le panneau (page du panneau)",
   "Open the panel again (home page)": "Rouvrir le panneau (page d’accueil)",
   "Open the panel again (RSVP page)": "Rouvrir le panneau (page RSVP)",
+  "Downloads open once your order is confirmed.": "Les téléchargements seront disponibles dès que votre commande sera confirmée.",
+  "This website is archived, so its PDFs can no longer be made.": "Ce site est archivé : ses PDF ne peuvent plus être créés.",
 };
 
 export default dict;

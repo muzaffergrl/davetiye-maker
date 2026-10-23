@@ -1404,6 +1404,8 @@ const dict: Dict = {
   "Open the panel again (panel page)": "Panoyu yeniden aç (pano sayfası)",
   "Open the panel again (home page)": "Panoyu yeniden aç (ana sayfa)",
   "Open the panel again (RSVP page)": "Panoyu yeniden aç (Katılım sayfası)",
+  "Downloads open once your order is confirmed.": "İndirmeler, siparişiniz onaylanınca açılır.",
+  "This website is archived, so its PDFs can no longer be made.": "Bu web sitesi arşivde; PDF'leri artık oluşturulamaz.",
 };
 
 export default dict;

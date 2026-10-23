@@ -4,7 +4,7 @@
 // Authorization header, waits for the PDF (a spinner and a line saying it can take up to a minute) and saves it.
 // Texts: lib/print/labels.ts (one place for the coming languages).
 
-import { Download, FileText, Mail } from 'lucide-react';
+import { Download, FileText, Lock, Mail } from 'lucide-react';
 import { useState } from 'react';
 import { PRINT_LABELS, type PrintLabelKey } from '../../lib/print/labels.ts';
 import { t } from '../../lib/i18n/client.ts';
@@ -33,7 +33,11 @@ function fileName(res: Response, fallback: string): string {
   return m ? m[1] : fallback;
 }
 
-export function DownloadsCard({ slug, editKey, live, online }: { slug: string; editKey: string; live: boolean; online: boolean }) {
+/**
+ * `locked` (G952): the order is still being confirmed (or was held) — the card stays visible with its buttons off and
+ * says when they open; the server refuses the PDF too (lib/print/api.ts, 403 order_pending).
+ */
+export function DownloadsCard({ slug, editKey, live, online, locked = false }: { slug: string; editKey: string; live: boolean; online: boolean; locked?: boolean }) {
   const snack = useSnackbar();
   const [busy, setBusy] = useState<Kind | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -68,11 +72,18 @@ export function DownloadsCard({ slug, editKey, live, online }: { slug: string; e
     }
   }
 
-  const disabled = !online || busy !== null;
+  const disabled = locked || !online || busy !== null;
   return (
-    <Card title={printLabel('panel_title')} titleId="downloads" icon={Download} data-downloads>
+    <Card title={printLabel('panel_title')} titleId="downloads" icon={Download} data-downloads data-downloads-locked={locked ? '' : undefined}>
       <p className={styles.cardText}>{printLabel('panel_intro')}</p>
-      {!live ? <p className={styles.hint}>{printLabel('panel_unpublished')}</p> : null}
+      {locked ? (
+        <p className={`${styles.hint} ${own.locked}`} data-downloads-locked-note>
+          <Lock size={16} strokeWidth={1.75} aria-hidden="true" />
+          <span>{printLabel('panel_locked_order')}</span>
+        </p>
+      ) : !live ? (
+        <p className={styles.hint}>{printLabel('panel_unpublished')}</p>
+      ) : null}
       {error ? (
         <Banner tone="danger" role="alert" data-download-error>
           {error}
@@ -117,7 +128,7 @@ export function DownloadsCard({ slug, editKey, live, online }: { slug: string; e
           {printLabel('panel_invite_button')}
         </Button>
       </fieldset>
-      {!online ? <p className={styles.hint}>{printLabel('panel_offline')}</p> : null}
+      {!online && !locked ? <p className={styles.hint}>{printLabel('panel_offline')}</p> : null}
     </Card>
   );
 }

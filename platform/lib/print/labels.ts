@@ -36,6 +36,9 @@ export const PRINT_LABELS = {
     panel_offline: 'You are offline. Connect to download your PDF.',
     panel_unpublished: 'Your website is not published yet: the QR code will open it once you publish.',
     limit_reached: 'You have made {count} PDFs today. Please try again tomorrow.',
+    // G952: no PDFs while the Etsy order is still being confirmed (or was held), nor for an archived website
+    panel_locked_order: 'Downloads open once your order is confirmed.',
+    panel_locked_archived: 'This website is archived, so its PDFs can no longer be made.',
   },
 } as const;
 
