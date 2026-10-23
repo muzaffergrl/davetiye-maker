@@ -6,6 +6,7 @@ import os from 'node:os';
 import { loadTheme, readThemePage } from '../lib/theme/theme.ts';
 import { validateContent } from '../lib/content/validate.ts';
 import { themeOpenForClaims } from '../lib/themes/approval.ts';
+import { MARKETING } from '../lib/marketing/config.ts';
 import { DESIGN_COPY } from '../lib/marketing/designs.ts';
 import { printLayout } from '../lib/print/layouts.ts';
 import { LocalAdapter } from '../lib/data/local/index.ts';
@@ -20,7 +21,10 @@ test('Ivory Pearl: all five editable pages render the demo and their local asset
   const t = await loadTheme(id);
   assert.ok(t);
   assert.equal(DESIGN_COPY[id].demoCouple, content.name_display);
-  assert.equal(themeOpenForClaims(id, { env: { VERCEL_ENV: 'production' } }), true);
+  // Not in the first sales wave 01–20 (owner, 2026-10-23): a catalogue preview, closed on production /start.
+  assert.equal(themeOpenForClaims(id, { env: { VERCEL_ENV: 'production' } }), false);
+  assert.equal(MARKETING.designs.find((d) => d.id === id)?.status, 'preview');
+  assert.equal(MARKETING.designs.find((d) => d.id === id)?.price, '1190');
   for (const page of ['index', 'home', 'story', 'details', 'rsvp'] as const) {
     const source = await readThemePage(t, page);
     assert.ok(source);

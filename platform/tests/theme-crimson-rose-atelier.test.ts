@@ -16,10 +16,12 @@ import type {PageName} from '../lib/theme/theme.ts';
 import type {ContentRecord} from '../lib/content/types.ts';
 const id='crimson-rose-atelier';
 
-test('Crimson is an independent product, open for sale (user, 2026-10-17)',async()=>{
+test('Crimson is an independent product; not in the first sales wave 01–20 (owner, 2026-10-23): catalogue preview, closed on production /start',async()=>{
  const theme=await claimableTheme(id);assert.ok(theme);assert.equal(theme.name,'Crimson Rose Atelier');
- assert.equal(MARKETING.designs.find(d=>d.id===id)?.status,'live');
- assert.equal(themeOpenForClaims(id,{env:{VERCEL_ENV:'production'}}),true);
+ const d=MARKETING.designs.find(d=>d.id===id);
+ assert.equal(d?.status,'preview');assert.equal(d?.price,'1190');
+ assert.equal(themeOpenForClaims(id,{env:{VERCEL_ENV:'production'}}),false);
+ assert.equal(themeOpenForClaims(id,{env:{}}),true,'still startable locally / on previews');
  assert.equal(openingObject(DESIGN_COPY[id]),'envelope');assert.ok(designStyles(id).includes('floral'));
  assert.equal(Object.keys(theme.manifest.photos).length,5);
 });

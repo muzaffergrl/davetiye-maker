@@ -41,6 +41,9 @@ const COMING_OPENINGS: Record<string, string> = {
   'espresso-pastoral': 'envelope',
   'blue-toile-pavilion': 'envelope',
   'suede-ranch-lace': 'envelope',
+  // 21 + 49: catalogue preview since 2026-10-23 (first sales wave = 01–20)
+  'crimson-rose-atelier': 'envelope',
+  'ivory-pearl-atelier': 'envelope',
 };
 
 test('G175: every configured design has an opening object, and the panel tab is named after it', () => {

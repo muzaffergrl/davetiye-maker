@@ -57,6 +57,31 @@ test('launch gate: a launched config has no problems; an unlaunched one lists ev
   assert.throws(() => assertLaunchReady({ ...MARKETING, launched: true }), /not ready/);
 });
 
+test('first sales wave = designs 01–20 (owner, 2026-10-23): launchProblems lists exactly their 20 Etsy links + the open verified flags', () => {
+  const FIRST_WAVE = [
+    'olive-ivory', 'dusty-blue-champagne', 'blush-garden-rose', 'vintage-airmail-love-letter', 'mediterranean-lemon',
+    'art-deco-black-tie', 'burgundy-velvet-autumn', 'winter-evergreen', 'lavender-provence', 'tuscan-vineyard',
+    'boho-pampas-terracotta', 'tropical-destination', 'enchanted-forest-storybook', 'ivory-lace-pearls', 'cherry-blossom-spring',
+    'sunflower-rustic-barn', 'emerald-gold-estate', 'wildflower-meadow-vellum', 'midnight-garden', 'coastal-seaside',
+  ];
+  const live = MARKETING.designs.filter((d) => d.status === 'live').map((d) => d.id);
+  assert.deepEqual([...live].sort(), [...FIRST_WAVE].sort());
+  for (const id of ['crimson-rose-atelier', 'ivory-pearl-atelier']) {
+    const d = MARKETING.designs.find((x) => x.id === id);
+    assert.equal(d?.status, 'preview', `${id}: in the catalogue as coming soon, not on sale`);
+    assert.equal(d?.price, '1190', `${id}: K49 launch price`);
+  }
+  assert.equal(MARKETING.verified.realDevices, true, 'owner tested on real phones (2026-10-23)');
+  const problems = launchProblems(MARKETING, { CLAIM_ORDER_VERIFICATION: 'trust' });
+  const links = problems.filter((p) => /^designs\.[a-z0-9-]+\.etsyListingUrl is not a real Etsy URL$/.test(p));
+  assert.deepEqual(links.map((p) => p.split('.')[1]).sort(), [...FIRST_WAVE].sort());
+  const flags = problems.filter((p) => p.startsWith('verified.'));
+  const open = (Object.entries(MARKETING.verified) as Array<[string, boolean]>).filter(([k, v]) => !v && k !== 'realDevices').map(([k]) => k);
+  assert.deepEqual(flags.map((p) => p.split(' ')[0].replace('verified.', '')).sort(), open.sort());
+  assert.ok(!problems.some((p) => /realDevices|crimson-rose-atelier|ivory-pearl-atelier/.test(p)), problems.join(' | '));
+  assert.equal(problems.length, links.length + flags.length, problems.join(' | '));
+});
+
 test('a fully decided config launches; one leftover placeholder or a vercel.app origin blocks it', () => {
   assert.deepEqual(launchProblems(readyConfig()), []);
   assert.doesNotThrow(() => assertLaunchReady(readyConfig()));
