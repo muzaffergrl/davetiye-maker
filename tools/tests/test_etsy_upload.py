@@ -35,6 +35,9 @@ COMING: set[str] = {"nocturne-lake-estate", "velvet-jewel-box", "grand-theatre-p
                     "art-nouveau-lily", "papel-picado-fiesta", "silver-photo-booth", "swan-chantilly-lace",
                     "painted-lily-pond", "espresso-pastoral", "chartreuse-garden-party", "blue-toile-pavilion",
                     "suede-ranch-lace", "bordeaux-silk-bow", "monochrome-darkroom", "navy-ivory-crest"}
+# K55 (2026-10-23): the first sales wave is only 01–20 — 21 and 49 keep their decided price and full listing set but are
+# 'preview' (catalogue "Coming soon on Etsy", Etsy draft); move one to the live set when it is published
+HELD: set[str] = {"crimson-rose-atelier", "ivory-pearl-atelier"}
 
 
 def test_design_table():
@@ -44,7 +47,9 @@ def test_design_table():
     config = (REPO / "platform" / "lib" / "marketing" / "config.ts").read_text(encoding="utf-8")
     live = set(re.findall(r"id: '([a-z0-9-]+)',\s*\n\s*name: '[^']+',\s*\n\s*status: 'live'", config))
     every = {t for _, _, t in eu.DESIGNS}
-    assert live == every - COMING, sorted(live ^ (every - COMING))
+    assert live == every - COMING - HELD, sorted(live ^ (every - COMING - HELD))
+    for theme in HELD:
+        assert re.search(rf"id: '{re.escape(theme)}',\s*\n\s*name: '[^']+',\s*\n\s*status: 'preview',\s*\n\s*price: '1190'", config), theme
     for theme in COMING:  # same TS style as the other entries since G142
         # off sale: 'coming', or 'preview' (in the site catalogue, no checkout; main f1228e88)
         assert re.search(rf"id: '{re.escape(theme)}',\s*\n\s*name: '[^']+',\s*\n\s*status: '(coming|preview)'", config), theme
@@ -135,6 +140,10 @@ def test_real_listings():
             assert any(b.startswith(f"sales status '{data['sales_status']}'") for b in data["blockers"]), no
             assert any(b.startswith("price not decided") for b in data["blockers"]), no
             assert data["price_note"].startswith("Proposed:"), no
+        elif theme in HELD:  # K55: price decided (K49), held back from the first wave — the status is the one blocker
+            assert data["sales_status"] == "preview" and "| Price | **1,190 TL**" in md, no
+            assert any(b.startswith("sales status 'preview'") for b in data["blockers"]), no
+            assert not any(b.startswith("price not decided") for b in data["blockers"]), no
         else:
             assert data["sales_status"] == "live" and "| Price | **1,190 TL**" in md, no
             assert not any(b.startswith(("sales status", "price not decided")) for b in data["blockers"]), no

@@ -30,10 +30,13 @@ DARK = {"art-deco-black-tie", "emerald-gold-estate", "midnight-garden"}
 
 
 def test_theme_table():
-    # G175: etsy_upload also lists the coming designs 22–48; they join THEMES when they go live (49 is live, ff82ba13)
+    # G175: etsy_upload also lists the coming designs 22–48; they join THEMES when they go live (49: ff82ba13). K55
+    # (2026-10-23): the first sales wave is 01–20 only; 21 and 49 keep their listing kits as 'preview' (Etsy drafts)
     live = [d for d in eu.DESIGNS if eu.commerce(d[2])["status"] == "live"]
-    assert len(lk.THEMES) == len(live) == 22
-    assert sorted((t.no, t.folder, t.id) for t in lk.THEMES.values()) == sorted(live)
+    held = [d for d in eu.DESIGNS if d[2] in {"crimson-rose-atelier", "ivory-pearl-atelier"}]
+    assert len(live) == 20 and all(eu.commerce(d[2])["status"] == "preview" for d in held)
+    assert len(lk.THEMES) == len(live) + len(held) == 22
+    assert sorted((t.no, t.folder, t.id) for t in lk.THEMES.values()) == sorted(live + held)
     for t in lk.THEMES.values():
         assert t.name == eu.theme_name(t.id), (t.id, t.name, eu.theme_name(t.id))
         assert (t.collection / "palette.json").exists(), t.id
