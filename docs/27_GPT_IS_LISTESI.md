@@ -2,7 +2,7 @@
 
 `python3 tools/gpt_is_listesi.py --yaz` (ya da `tools/gpt_bekleyen.py --yaz`) ile üretilir; elle düzenlenmez. Kaynak: bütün `GPT_PROMPTS.md` dosyaları. Her madde kendi başına yapıştırılabilir tam İngilizce prompt'tur. Tıklanabilir, kopyalama düğmeli ve işaretlenebilir sürüm: [`27_GPT_IS_LISTESI.html`](27_GPT_IS_LISTESI.html) (tarayıcıda aç).
 
-**Toplam: 15 görsel** · A · Tasarım 22–38 (yeni tasarımlar): 14 · C · Palet varyantı görselleri: 1
+**Toplam: 16 görsel** · B · Tasarım 01–21 rötuş / baskı parçaları: 15 · C · Palet varyantı görselleri: 1
 
 ## Neden bu sıra
 
@@ -23,265 +23,269 @@
 
 | Grup | Tasarım | Görsel |
 |---|---|---|
-| A | 33_Marigold_Mehndi | 3 |
-| A | 34_Red_Lacquer_Double_Happiness | 3 |
-| A | 35_Highland_Tartan_Thistle | 2 |
-| A | 36_Victorian_Glasshouse | 2 |
-| A | 37_Art_Nouveau_Lily | 2 |
-| A | 38_Papel_Picado_Fiesta | 2 |
+| B | 21_Crimson_Rose_Atelier | 15 |
 | C | 21_Crimson_Rose_Atelier | 1 |
 
-## A · Tasarım 22–38 (yeni tasarımlar)
+## B · Tasarım 01–21 rötuş / baskı parçaları
 
-### 33_Marigold_Mehndi
+### 21_Crimson_Rose_Atelier
 
-Sohbetin ilk mesajı (dosyanın GPT notu):
+#### 1. W3.1 Kadife fon — telefon (açılış ve RSVP sayfasının zemini)
 
-```
-Generate PAKET 5 (website layers) first, in order and in ONE chat, then PAKET 2 (sample photos), then PAKET 6 (printable invitation). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, scripts of any language, monograms, logos or watermarks in any image. No religious symbols or deities** (no Om, no swastika, no Ganesha, no temple, no sacred fire, no kalash): this is a festive, cultural look — marigolds, henna patterns, silk, brass lamps, carved arches — not a religious one. Give W2.1 `silk.png`, W2.14 `velvet.png`, W2.15 `paper.png` and W2.2 `sleeve.png` as the style reference of every later part: the same fuchsia silk, the same velvet, the same saffron paper, the same warm gold.
-```
-
-#### 1. W2.2 Altın lazer kesim paisley kılıf (açılışta yana kayar)
-
-- İndirme adı: `33-marigold-mehndi__sleeve.png`
-- Hedef: `collections/33_Marigold_Mehndi/assets/gpt/parts/sleeve.png`
-- Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
-- Şart: 1200×500 px (12:5) · şeffaf zemin (gerçek alfa) · PNG
+- İndirme adı: `21-crimson-rose-atelier__velvet.png`
+- Hedef: `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/velvet.png`
+- Bölüm: PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 (website parçası (PAKET 5))
+- Şart: 1024×1536 px (2:3) · opak · PNG
+- Ek görsel: design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)
 
 ```
-A wide horizontal band of thin gold metallic card, laser-cut in an intricate openwork pattern of paisleys, small marigold flowers and fine vines, seen straight from the front on a fully transparent background, the band filling the image edge to edge (2.4:1): warm gold (#C9A24A) with gold-leaf highlights (#EBCD84), the cut-outs are TRUE TRANSPARENT holes (about 40% of the band is open lace, so the silk behind shows through), a slim solid gold edge along the top and bottom. Soft warm light from the top-left, the gold gently curved as if wrapped round an envelope. No tassel, no seal, no shadow outside the band. No text, letters, numbers or symbols. True transparent background PNG (real alpha channel — not white, not a checkerboard). RETRY NOTE: the first attempt touched the image border. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called "Crimson Rose Atelier": deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+A full-frame vertical photograph (2:3) of deep oxblood crushed silk velvet (#29070B in the shadows, #5B1018 in the lit pile), filling the whole canvas edge to edge, lit by one soft warm light from the upper left as if by candlelight in a dark room. The velvet lies almost flat: the middle 60% of the frame (from 20% to 80% of the width and from 15% to 80% of the height) is a CALM, even, slightly darker area with only the fine velvet pile visible, so text and an envelope can sit on it. Only along the left edge, the right edge and the bottom 20% the velvet gathers into a few soft, large, luxurious folds with gentle rich highlights. A subtle natural vignette. No objects, no flowers, no petals, no gold, no envelope, no shadows of objects, no text.
 ```
 
-Kontrol: bant tuvali dolduruyor (2,4:1); kesik yerleri gerçekten şeffaf; püskül/mühür yok; gerçek alfa.
+Kontrol: orta bölge sakin ve düz; kıvrımlar yalnız kenarlarda ve altta; renk koyu kan kırmızısı (kahverengi/mor değil); nesne yok.
 
-#### 2. W2.9 Kına deseni zemini (Story arka planı)
+#### 2. W3.2 Kadife fon — geniş ekran
 
-- İndirme adı: `33-marigold-mehndi__mehndi_pattern.png`
-- Hedef: `collections/33_Marigold_Mehndi/assets/gpt/parts/mehndi_pattern.png`
-- Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
-- Şart: 1024×1024 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
-
-```
-A seamless, tileable all-over pattern of fine henna (mehndi) line art in a light saffron-gold (#F7C27A) on a fully transparent background: an even scatter of small paisleys, tiny flowers, leaves and dots linked by delicate vines, thin even lines, no filled areas, generous space between motifs. The left/right and top/bottom edges must tile without a visible seam. No text, letters, numbers or symbols. True transparent background PNG (real alpha channel). RETRY NOTE: the first attempt touched the image border. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
-```
-
-Kontrol: dikişsiz; yalnız ince çizgi; motifler seyrek; alfa.
-
-#### 3. W2.13 Zarfın düz kapağı (ön yüz)
-
-- İndirme adı: `33-marigold-mehndi__flap.png`
-- Hedef: `collections/33_Marigold_Mehndi/assets/gpt/parts/flap.png`
-- Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
-- Şart: 1524×800 px (1.905:1) · şeffaf zemin (gerçek alfa) · PNG
-- Ek görsel: silk.png (repoda: collections/33_Marigold_Mehndi/assets/gpt/parts/silk.png)
+- İndirme adı: `21-crimson-rose-atelier__velvet_wide.png`
+- Hedef: `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/velvet_wide.png`
+- Bölüm: PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 (website parçası (PAKET 5))
+- Şart: 1536×1024 px (3:2) · opak · PNG
+- Ek görsel: design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png), velvet.png (listede #1)
 
 ```
-The closed top flap of the same fuchsia silk envelope, seen straight from the front on a fully transparent background, filling the image edge to edge (1.9:1): a RECTANGULAR flap (not a V, not a point) of the same fuchsia raw silk as silk.png, its lower edge straight with a slim gold piping and a delicate border of tiny gold-embroidered paisleys along it, a soft fold highlight along the top edge where it is hinged. Soft warm light from the top-left. No seal, no button, no sleeve, no shadow outside. No text, letters, numbers or symbols. True transparent background PNG (real alpha channel). RETRY NOTE: the first attempt touched the image border. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called "Crimson Rose Atelier": deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+The same oxblood crushed silk velvet as velvet.png, now a full-frame horizontal photograph (3:2) filling the canvas edge to edge, the same color, pile, light from the upper left and vignette. The middle 60% of the width and the middle 70% of the height are a CALM, even area; a few soft large folds only along the left and right edges and the bottom. No objects, no flowers, no gold, no text.
 ```
 
-Kontrol: dikdörtgen kapak (V değil); alt kenar düz ve altın biyeli; mühür yok; alfa.
+Kontrol: velvet.png ile aynı kumaş ve renk; orta bölge sakin.
 
-### 34_Red_Lacquer_Double_Happiness
+#### 3. W3.3 Saten dökümü (açılış sahnesinin altı)
 
-Sohbetin ilk mesajı (dosyanın GPT notu):
-
-```
-Generate PAKET 5 (website layers) first, in order and in ONE chat, then PAKET 2 (sample photos), then PAKET 6 (printable invitation). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, logos, monograms, seals with writing or watermarks in any image.** The only character allowed anywhere is the double happiness character 囍, and only in W2.11 `xi_gold.png` (and in W2.20 / PAKET 6 where the prompt asks for it) — never any other Chinese character, no stamp, no calligraphy, no religious symbol (no Buddha, no temple, no deity, no incense, no shrine). Give W2.2 `red_paper.png`, W2.3 `cream_paper.png`, W2.4 `gold_leaf.png` and W2.7 `envelope_flap.png` as the style reference of every later part: the same cinnabar paper, the same warm cream, the same gold leaf, the same crisp paper-cut technique.
-```
-
-#### 4. W2.6 Zarfın ön cebi
-
-- İndirme adı: `34-red-lacquer-double-happiness__envelope_pocket.png`
-- Hedef: `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/envelope_pocket.png`
-- Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
-- Şart: 990×1500 px (0.660:1) · şeffaf zemin (gerçek alfa) · PNG
-- Ek görsel: envelope_back.png (repoda: collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/envelope_back.png), red_paper.png (repoda: collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/red_paper.png)
+- İndirme adı: `21-crimson-rose-atelier__satin_drape.png`
+- Hedef: `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/satin_drape.png`
+- Bölüm: PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 (website parçası (PAKET 5))
+- Şart: 1800×700 px (18:7) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)
 
 ```
-The front pocket of the same tall vertical red envelope as envelope_back.png, seen straight from the front, on a fully transparent background, drawn on the full envelope canvas: the pocket is the same cinnabar red paper as red_paper.png and covers the image from 30% of its height down to the bottom edge, full width; its top edge at 30% is a clean straight cut with a fine gold-leaf edge line; everything above 30% is fully transparent. Very soft folds of real paper at the sides, a hair of shadow under the top edge, soft warm light from the top-left. The pocket is PLAIN: no character, no flower, no button, no cord drawn on it (they are separate layers). No text, letters, numbers or symbols. True transparent background PNG (real alpha channel). RETRY NOTE: the first attempt touched the image border. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called "Crimson Rose Atelier": deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+A length of deep burgundy silk satin fabric (#4B0C17 with luminous #8E2333 highlights) lying horizontally in soft, generous, flowing folds, seen from the front and slightly above, as if draped across the bottom of a table under an envelope. The fabric forms a wide horizontal band (about 2.6:1) whose upper edge is a soft irregular fabric edge with folds rising and falling; its left and right ends fade out naturally in folds. Rich liquid satin sheen, one soft warm light from the upper left. Nothing else: no petals, no roses, no ribbon, no envelope. True transparent background PNG around the fabric, no cast shadow outside it.
 ```
 
-Kontrol: cep %30'dan aşağı, üstü tamamen şeffaf; cep düz (düğme, ip, 囍 yok); gerçek alfa.
+Kontrol: tek parça saten; üst kenar yumuşak kumaş kenarı; gerçek alfa; başka nesne yok.
 
-#### 5. W2.12 Dış kâğıt kesim pencere (kırmızı; ortadan ikiye kesilir)
+#### 4. W3.4 Gül yaprakları (süzülen yapraklar) — beş ayrı dosya
 
-- İndirme adı: `34-red-lacquer-double-happiness__veil_outer.png`
-- Hedef: `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/veil_outer.png`
-- Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
-- Şart: 968×1400 px (0.691:1) · şeffaf zemin (gerçek alfa) · PNG
-- Ek görsel: red_paper.png (repoda: collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/red_paper.png)
-
-```
-A single sheet of red Chinese paper-cut (jianzhi) in the same cinnabar red paper as red_paper.png, seen flat and straight on, on a fully transparent background, filling the image edge to edge (0.69:1): an intricate window grille pattern with a large blooming tree peony in the centre, peony leaves and buds, auspicious cloud scrolls and a fine lattice border all round, the cut-away parts fully transparent (real openings, about 45% of the area open), crisp clean cut edges with a hair of shadow. The design is perfectly mirror-symmetric left to right (it will be cut down the vertical centre line into two shutter halves), with no important detail exactly on the centre line. No character, no text, letters, numbers or symbols. True transparent background PNG (real alpha channel). RETRY NOTE: the first attempt touched the image border. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
-```
-
-Kontrol: tuvali dolduran tek kâğıt kesim; ortadan simetrik; açık yerler gerçekten şeffaf; yazı yok.
-
-#### 6. W2.13 İç kâğıt kesim pencere (altın; ortadan ikiye kesilir)
-
-- İndirme adı: `34-red-lacquer-double-happiness__veil_inner.png`
-- Hedef: `collections/34_Red_Lacquer_Double_Happiness/assets/gpt/parts/veil_inner.png`
-- Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
-- Şart: 968×1400 px (0.691:1) · şeffaf zemin (gerçek alfa) · PNG
-- Ek görsel: veil_outer.png (listede #5)
+- İndirme adı: `21-crimson-rose-atelier__petal_1.png`
+- Hedef: `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/petal_1.png`
+- Bölüm: PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)
 
 ```
-A single sheet of fine gold paper-cut (gold-leaf paper) of the same size, seen flat and straight on, on a fully transparent background, filling the image edge to edge (0.69:1): a lighter, finer pattern than veil_outer.png — a delicate lattice of plum blossoms and small cloud scrolls with two smaller peonies, about 60% of the area cut away (fully transparent openings), crisp edges, a soft gold satin shine from the top-left. Perfectly mirror-symmetric left to right (it is cut down the vertical centre line into two halves). No character, no text, letters, numbers or symbols. True transparent background PNG (real alpha channel). RETRY NOTE: the first attempt touched the image border. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called "Crimson Rose Atelier": deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+This prompt describes a set of 5 separate images (petal_1, petal_2, petal_3, petal_4, petal_5). Make ONLY ONE image now: petal_1 (number 1 of 5).
+
+A single loose petal of the same dark crimson red rose as in rose-branch.png, photographed for real, alone, on a fully transparent background: velvety deep red (#8E0F1E, darker #4A0610 at the base and in the curl, a soft luminous edge where the light catches it), natural fine veins, filling about 55% of the square, centred, not cropped. No stem, no leaf, no whole flower, no water drops, no shadow, no other petal. True transparent background PNG. (Make five different petals: 1 = a wide gently cupped petal seen from above, 2 = a petal curled at one edge, 3 = a narrow folded petal seen from the side, 4 = a small inner petal, 5 = a petal lit from behind so its edge glows.)
 ```
 
-Kontrol: altın, dış kattan daha ince ve açık; simetrik; açık yerler şeffaf; yazı yok.
+Kontrol: beş dosya, her biri tek yaprak, birbirinden farklı; gül rengi rose-branch.png ile aynı; gölge yok; gerçek alfa.
 
-### 35_Highland_Tartan_Thistle
+#### 5. W3.4 Gül yaprakları (süzülen yapraklar) — beş ayrı dosya
 
-Sohbetin ilk mesajı (dosyanın GPT notu):
-
-```
-Generate PAKET 5 (website layers) first, in order and in ONE chat, then PAKET 2 (sample photos), then PAKET 6 (printable invitation). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, monograms, clan crests, coats of arms, flags, religious symbols, logos or watermarks in any image.** The tartan is an original heather-and-moss sett invented for this design — it must not copy any registered clan or brand tartan. Give W2.1 `tartan_wool.png`, W2.2 `cream_paper.png` and W2.6 `envelope_back.png` as the style reference of every later part: the same wool, the same cream paper, the same warm saddle leather and antique brass, the same soft daylight.
-```
-
-#### 7. W2.7 Zarfın ön cebi
-
-- İndirme adı: `35-highland-tartan-thistle__envelope_front.png`
-- Hedef: `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/envelope_front.png`
-- Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
-- Şart: 1080×1200 px (9:10) · şeffaf zemin (gerçek alfa) · PNG
-- Ek görsel: envelope_back.png (repoda: collections/35_Highland_Tartan_Thistle/assets/gpt/parts/envelope_back.png), tartan_wool.png (repoda: collections/35_Highland_Tartan_Thistle/assets/gpt/parts/tartan_wool.png)
+- İndirme adı: `21-crimson-rose-atelier__petal_2.png`
+- Hedef: `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/petal_2.png`
+- Bölüm: PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)
 
 ```
-Only the front pocket of the same tartan wool envelope as envelope_back.png, on the same 1080×1200 canvas and in the same place, on a fully transparent background: a flat rectangle of the tartan wool of tartan_wool.png spanning the full width of the image from 34% of the image height down to the bottom edge, its straight top edge finished with a narrow folded hem and a fine line of cream stitching, soft daylight from the top-left. The upper 34% of the canvas is completely transparent. No flap, no strap, no buckle, no card, no shadow outside the pocket. No text, letters, numbers or symbols. True transparent background PNG (real alpha channel). RETRY NOTE: the first attempt touched the image border. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called "Crimson Rose Atelier": deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+This prompt describes a set of 5 separate images (petal_1, petal_2, petal_3, petal_4, petal_5). Make ONLY ONE image now: petal_2 (number 2 of 5).
+
+A single loose petal of the same dark crimson red rose as in rose-branch.png, photographed for real, alone, on a fully transparent background: velvety deep red (#8E0F1E, darker #4A0610 at the base and in the curl, a soft luminous edge where the light catches it), natural fine veins, filling about 55% of the square, centred, not cropped. No stem, no leaf, no whole flower, no water drops, no shadow, no other petal. True transparent background PNG. (Make five different petals: 1 = a wide gently cupped petal seen from above, 2 = a petal curled at one edge, 3 = a narrow folded petal seen from the side, 4 = a small inner petal, 5 = a petal lit from behind so its edge glows.)
 ```
 
-Kontrol: cep tuvalin %34'ünden alta, tam genişlikte; üstü tamamen şeffaf; kayış/toka yok; gerçek alfa.
+Kontrol: beş dosya, her biri tek yaprak, birbirinden farklı; gül rengi rose-branch.png ile aynı; gölge yok; gerçek alfa.
 
-#### 8. W2.8 Zarfın düz kapağı (V değil)
+#### 6. W3.4 Gül yaprakları (süzülen yapraklar) — beş ayrı dosya
 
-- İndirme adı: `35-highland-tartan-thistle__flap.png`
-- Hedef: `collections/35_Highland_Tartan_Thistle/assets/gpt/parts/flap.png`
-- Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
-- Şart: 1080×1200 px (9:10) · şeffaf zemin (gerçek alfa) · PNG
-- Ek görsel: tartan_wool.png (repoda: collections/35_Highland_Tartan_Thistle/assets/gpt/parts/tartan_wool.png)
-
-```
-Only the closed flap of the same tartan wool envelope, on the same 1080×1200 canvas and in the same place, on a fully transparent background: a flat rectangle of the tartan wool of tartan_wool.png spanning the full width of the image from the top edge down to 56% of the image height, folded down over the pocket, with a soft rounded fold along its top edge and a STRAIGHT bottom edge (not a V, not a point, not scalloped) finished with a narrow hem and a fine line of cream stitching; a very soft shade along its bottom edge. The lower 44% of the canvas is completely transparent. No strap, no buckle, no seal, no button, no card. No text, letters, numbers or symbols. True transparent background PNG (real alpha channel). RETRY NOTE: the first attempt touched the image border. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
-```
-
-Kontrol: kapak üstten %56'ya, tam genişlik; alt kenar **düz**; mühür/düğme/kayış yok; altı tamamen şeffaf; gerçek alfa.
-
-### 36_Victorian_Glasshouse
-
-Sohbetin ilk mesajı (dosyanın GPT notu):
+- İndirme adı: `21-crimson-rose-atelier__petal_3.png`
+- Hedef: `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/petal_3.png`
+- Bölüm: PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)
 
 ```
-Generate PAKET 5 (website layers) first, in order and in ONE chat, then PAKET 2 (sample photos), then PAKET 6 (printable invitation). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, Latin plant names, labels with writing, logos, monograms or watermarks in any image** (a blank label, a blank seed packet and engraved botanical line art without lettering are fine). Give W3.1 `fern_ground.png`, W3.3 `herbarium_paper.png` and W3.4 `packet_body.png` as the style reference of every later part: the same deep fern green, the same herbarium paper, the same kraft, copper and jute, the same soft daylight through glass.
+You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called "Crimson Rose Atelier": deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+This prompt describes a set of 5 separate images (petal_1, petal_2, petal_3, petal_4, petal_5). Make ONLY ONE image now: petal_3 (number 3 of 5).
+
+A single loose petal of the same dark crimson red rose as in rose-branch.png, photographed for real, alone, on a fully transparent background: velvety deep red (#8E0F1E, darker #4A0610 at the base and in the curl, a soft luminous edge where the light catches it), natural fine veins, filling about 55% of the square, centred, not cropped. No stem, no leaf, no whole flower, no water drops, no shadow, no other petal. True transparent background PNG. (Make five different petals: 1 = a wide gently cupped petal seen from above, 2 = a petal curled at one edge, 3 = a narrow folded petal seen from the side, 4 = a small inner petal, 5 = a petal lit from behind so its edge glows.)
 ```
 
-#### 9. W3.6 Bakır bitki etiketi (boş; monogram/numara site yazar)
+Kontrol: beş dosya, her biri tek yaprak, birbirinden farklı; gül rengi rose-branch.png ile aynı; gölge yok; gerçek alfa.
 
-- İndirme adı: `36-victorian-glasshouse__copper_tag.png`
-- Hedef: `collections/36_Victorian_Glasshouse/assets/gpt/parts/copper_tag.png`
-- Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
-- Şart: 600×800 px (3:4) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+#### 7. W3.4 Gül yaprakları (süzülen yapraklar) — beş ayrı dosya
 
-```
-A small antique copper plant label as used in a Victorian glasshouse, seen straight on, alone on a fully transparent background, filling the image edge to edge (3:4): a rectangular copper plate with softly rounded corners and a slim raised rim, warm copper (#B26A3C) with a gentle patina and a little verdigris (#6F9E8E) at the edges, a small round punched hole near the top-left corner filled with flat pure green #00FF00 (no texture, no shading), the centre of the plate smooth and EMPTY (the website stamps letters there). Soft daylight from the top-left. No string, no text, letters, numbers or engraving in the centre. True transparent background PNG (real alpha channel). RETRY NOTE: the first attempt had no window. The photo window must be a clearly visible, SOLID, fully opaque flat #00FF00 green area inside the object (not transparent, not a hole), at least 25% of the object's area.
-```
-
-Kontrol: boş merkez; delik sol üstte, düz `#00FF00`; ip yok; alfa.
-
-#### 10. W3.10 Eğrelti otları ve orkide (açılış ve home çerçevesi)
-
-- İndirme adı: `36-victorian-glasshouse__ferns.png`
-- Hedef: `collections/36_Victorian_Glasshouse/assets/gpt/parts/ferns.png`
-- Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
-- Şart: 1800×1200 px (3:2) · şeffaf zemin (gerçek alfa) · PNG
+- İndirme adı: `21-crimson-rose-atelier__petal_4.png`
+- Hedef: `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/petal_4.png`
+- Bölüm: PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)
 
 ```
-Lush botanical fern fronds rising from the bottom-left and bottom-right corners of the image on a fully transparent background, as a frame for something in the middle: maidenhair and sword ferns in deep and fresh greens, a few curled fiddleheads, and on the right one arching spray of white-and-blush moth orchids; photorealistic leaves with the fine detail of a botanical engraving, soft daylight from the top-left. The centre of the image (from 25% to 75% of the width and the whole upper 60%) is EMPTY transparency. No pots, no glass, no insects, no text. True transparent background PNG (real alpha channel). RETRY NOTE: the first attempt touched the image border. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called "Crimson Rose Atelier": deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+This prompt describes a set of 5 separate images (petal_1, petal_2, petal_3, petal_4, petal_5). Make ONLY ONE image now: petal_4 (number 4 of 5).
+
+A single loose petal of the same dark crimson red rose as in rose-branch.png, photographed for real, alone, on a fully transparent background: velvety deep red (#8E0F1E, darker #4A0610 at the base and in the curl, a soft luminous edge where the light catches it), natural fine veins, filling about 55% of the square, centred, not cropped. No stem, no leaf, no whole flower, no water drops, no shadow, no other petal. True transparent background PNG. (Make five different petals: 1 = a wide gently cupped petal seen from above, 2 = a petal curled at one edge, 3 = a narrow folded petal seen from the side, 4 = a small inner petal, 5 = a petal lit from behind so its edge glows.)
 ```
 
-Kontrol: bitkiler alt köşelerde, orta ve üst %60 boş; saksı/yazı yok; alfa.
+Kontrol: beş dosya, her biri tek yaprak, birbirinden farklı; gül rengi rose-branch.png ile aynı; gölge yok; gerçek alfa.
 
-### 37_Art_Nouveau_Lily
+#### 8. W3.4 Gül yaprakları (süzülen yapraklar) — beş ayrı dosya
 
-Sohbetin ilk mesajı (dosyanın GPT notu):
-
-```
-Generate PAKET 5 (website layers) first, in order and in ONE chat, then PAKET 2 (sample photos), then PAKET 6 (printable invitation). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, monograms, logos, signatures or watermarks in any image.** Give W2.1 `cream_paper.png`, W2.4 `env_back.png` and W2.6 `petal_centre.png` as the style reference of every later part: the same cream paper, the same soft gold, the same sage and lilac, the same Art Nouveau line (Mucha-style poster + stained glass). No peacock feathers anywhere (that is another design).
-```
-
-#### 11. W2.6 Üç taç yaprağı kapak (sol, sağ, orta) — üç ayrı dosya, aynı tuval
-
-- İndirme adı: `37-art-nouveau-lily__petal_right.png`
-- Hedef: `collections/37_Art_Nouveau_Lily/assets/gpt/parts/petal_right.png`
-- Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
-- Şart: 1000×1320 px (0.758:1) · şeffaf zemin (gerçek alfa) · PNG
-- Ek görsel: env_back.png (repoda: collections/37_Art_Nouveau_Lily/assets/gpt/parts/env_back.png), env_pocket.png (repoda: collections/37_Art_Nouveau_Lily/assets/gpt/parts/env_pocket.png), cream_paper.png (repoda: collections/37_Art_Nouveau_Lily/assets/gpt/parts/cream_paper.png)
+- İndirme adı: `21-crimson-rose-atelier__petal_5.png`
+- Hedef: `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/petal_5.png`
+- Bölüm: PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 (website parçası (PAKET 5))
+- Şart: 512×512 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)
 
 ```
-This prompt describes a set of 3 separate images (petal_left, petal_right, petal_centre). Make ONLY ONE image now: petal_right (number 2 of 3).
+You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called "Crimson Rose Atelier": deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
 
-The three closed petal-shaped flaps of the same envelope as env_back.png, each as its own image on the same 1000×1320 canvas and in its closed position, on a fully transparent background, so that the three images stacked on env_back.png and env_pocket.png show the closed envelope: (1) petal_left: a long lily-petal-shaped flap hinged along the whole left edge of the envelope, curving inward to a soft point at (50% across, 57% down); (2) petal_right: its mirror image hinged along the right edge, its point at the same spot; (3) petal_centre: a wider lily-petal flap hinged along the whole top edge, curving down to a soft point just below the other two, at (50%, 61%). All three in cream cotton paper (as cream_paper.png) with a fine flowing Art Nouveau gold-leaf whiplash border along their free edges, the centre petal with a delicate gold outline of a lily's veins; together they read as one elegant flower-like envelope front. Each image shows ONLY its own flap: everything else is fully transparent. Soft daylight from the top-left, a very soft contact shade on the paper along each free edge (on the flap itself, not outside it). No seal (the medallion is a separate image), no text, letters, numbers or symbols. True transparent background PNG (real alpha channel) for each file. RETRY NOTE: the first attempt touched the image border. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+This prompt describes a set of 5 separate images (petal_1, petal_2, petal_3, petal_4, petal_5). Make ONLY ONE image now: petal_5 (number 5 of 5).
+
+A single loose petal of the same dark crimson red rose as in rose-branch.png, photographed for real, alone, on a fully transparent background: velvety deep red (#8E0F1E, darker #4A0610 at the base and in the curl, a soft luminous edge where the light catches it), natural fine veins, filling about 55% of the square, centred, not cropped. No stem, no leaf, no whole flower, no water drops, no shadow, no other petal. True transparent background PNG. (Make five different petals: 1 = a wide gently cupped petal seen from above, 2 = a petal curled at one edge, 3 = a narrow folded petal seen from the side, 4 = a small inner petal, 5 = a petal lit from behind so its edge glows.)
 ```
 
-Kontrol: üç dosya aynı tuval; üst üste konunca kapalı zarf (uçlar ~%50, %57–61'de buluşur); menteşe kenarları zarfın
+Kontrol: beş dosya, her biri tek yaprak, birbirinden farklı; gül rengi rose-branch.png ile aynı; gölge yok; gerçek alfa.
 
-#### 12. W2.6 Üç taç yaprağı kapak (sol, sağ, orta) — üç ayrı dosya, aynı tuval
+#### 9. W3.5 Altın oval portre çerçevesi
 
-- İndirme adı: `37-art-nouveau-lily__petal_centre.png`
-- Hedef: `collections/37_Art_Nouveau_Lily/assets/gpt/parts/petal_centre.png`
-- Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
-- Şart: 1000×1320 px (0.758:1) · şeffaf zemin (gerçek alfa) · PNG
-- Ek görsel: env_back.png (repoda: collections/37_Art_Nouveau_Lily/assets/gpt/parts/env_back.png), env_pocket.png (repoda: collections/37_Art_Nouveau_Lily/assets/gpt/parts/env_pocket.png), cream_paper.png (repoda: collections/37_Art_Nouveau_Lily/assets/gpt/parts/cream_paper.png)
-
-```
-This prompt describes a set of 3 separate images (petal_left, petal_right, petal_centre). Make ONLY ONE image now: petal_centre (number 3 of 3).
-
-The three closed petal-shaped flaps of the same envelope as env_back.png, each as its own image on the same 1000×1320 canvas and in its closed position, on a fully transparent background, so that the three images stacked on env_back.png and env_pocket.png show the closed envelope: (1) petal_left: a long lily-petal-shaped flap hinged along the whole left edge of the envelope, curving inward to a soft point at (50% across, 57% down); (2) petal_right: its mirror image hinged along the right edge, its point at the same spot; (3) petal_centre: a wider lily-petal flap hinged along the whole top edge, curving down to a soft point just below the other two, at (50%, 61%). All three in cream cotton paper (as cream_paper.png) with a fine flowing Art Nouveau gold-leaf whiplash border along their free edges, the centre petal with a delicate gold outline of a lily's veins; together they read as one elegant flower-like envelope front. Each image shows ONLY its own flap: everything else is fully transparent. Soft daylight from the top-left, a very soft contact shade on the paper along each free edge (on the flap itself, not outside it). No seal (the medallion is a separate image), no text, letters, numbers or symbols. True transparent background PNG (real alpha channel) for each file. RETRY NOTE: the first attempt touched the image border. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
-```
-
-Kontrol: üç dosya aynı tuval; üst üste konunca kapalı zarf (uçlar ~%50, %57–61'de buluşur); menteşe kenarları zarfın
-
-### 38_Papel_Picado_Fiesta
-
-Sohbetin ilk mesajı (dosyanın GPT notu):
+- İndirme adı: `21-crimson-rose-atelier__oval_frame.png`
+- Hedef: `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/oval_frame.png`
+- Bölüm: PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 (website parçası (PAKET 5))
+- Şart: 1000×1250 px (4:5) · şeffaf zemin (gerçek alfa) · düz #00FF00 pencere · PNG
+- Ek görsel: design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)
 
 ```
-Generate PAKET 5 (website layers) first, in order and in ONE chat, then PAKET 2 (sample photos), then PAKET 6 (printable invitation). Use each English prompt exactly as written, follow its checklist, and save each file with the exact file name and folder shown under "Kaydet". **No text, letters, numbers, words cut into the paper, names, dates, logos, monograms or watermarks in any image.** **No religious symbols** (no crosses, saints, hearts with flames or thorns, churches, altars) and **no Day of the Dead imagery** (no skulls, skeletons, calaveras, marigold altars): this is a joyful wedding fiesta. Give W1 `kraft_paper.png`, W3 `cream_paper.png` and W8 `flag_1.png` as the style reference of every later part: the same kraft, the same cream paper, the same crisp hand-cut tissue paper in the same six colours, the same warm afternoon sun from the top-left.
+You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called "Crimson Rose Atelier": deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+A slim antique oval picture frame of warm champagne gold (#C9A66D, highlights #EBD3A0), the same gold as seal.png, seen straight from the front, filling the canvas (4:5): a fine beaded inner rim, a softly rounded polished outer moulding and a delicate hand-chased leaf pattern along it, refined and light, never heavy or baroque, no crest and no bow on top. The opening inside is an exact OVAL whose bounding box is 4:5 — from 6% to 94% of the image width and from 6% to 94% of the image height — and the whole opening is filled with flat pure green #00FF00 (no texture, no shading, crisp edge, nothing in front of it). Soft warm light from the upper left. Nothing else. True transparent background PNG outside the frame, no shadow outside the frame.
 ```
 
-#### 13. W5 Zarfın cebi (arkadan, kapaksız)
+Kontrol: pencere düz `#00FF00` ve oval, kutusu 4:5 ve %6–%94; çerçeve ince; tepe süsü/fiyonk yok; gerçek alfa.
 
-- İndirme adı: `38-papel-picado-fiesta__envelope_pocket.png`
-- Hedef: `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/envelope_pocket.png`
-- Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
-- Şart: 1110×1500 px (0.740:1) · şeffaf zemin (gerçek alfa) · PNG
-- Ek görsel: kraft_paper.png (repoda: collections/38_Papel_Picado_Fiesta/assets/gpt/parts/kraft_paper.png)
+#### 10. W3.6 Yırtık kâğıt kenarı (bordo → fildişi geçişi)
 
-```
-The back of a portrait kraft paper envelope seen perfectly straight on, on a fully transparent background, the envelope filling the image edge to edge (the image IS the envelope, 0.74:1): the same kraft paper as kraft_paper.png, the two side flaps and the bottom flap folded in and glued, their soft fold lines and slightly lifted paper edges visible, the top edge straight and open (this is where the card comes out — no flap is drawn, no V shape at the top). Warm sun from the top-left, a soft natural shade along the folds. No seal, no sticker, no stamp, no string, no card inside, no cast shadow outside the envelope. No text, letters, numbers or symbols. True transparent background PNG (real alpha channel — not white, not a checkerboard). RETRY NOTE: the first attempt touched the image border. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
-```
-
-Kontrol: zarf tuvali dolduruyor (0,74:1); üstte düz açık kenar, V kapak **yok**; mühür/ip yok; gerçek alfa.
-
-#### 14. W12 Bugenvil salkımı (köşe süsü)
-
-- İndirme adı: `38-papel-picado-fiesta__bougainvillea.png`
-- Hedef: `collections/38_Papel_Picado_Fiesta/assets/gpt/parts/bougainvillea.png`
-- Bölüm: PAKET 5 — Website katmanları (YAZI YOK) (website parçası (PAKET 5))
-- Şart: 1200×1000 px (6:5) · şeffaf zemin (gerçek alfa) · PNG
+- İndirme adı: `21-crimson-rose-atelier__torn_edge.png`
+- Hedef: `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/torn_edge.png`
+- Bölüm: PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 (website parçası (PAKET 5))
+- Şart: 2048×320 px (32:5) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)
 
 ```
-A lush cluster of magenta-fuchsia bougainvillea spilling diagonally from the top-left corner toward the centre, alone, on a fully transparent background: woody stems, fresh green leaves, many papery bracts in vivid fuchsia with tiny cream flowers at their hearts, a few single bracts drifting loose near the tips, photorealistic in warm top-left sun. The cluster touches the top and left edges and leaves the bottom-right third empty. No pot, no wall, no shadow, no other flower. No text. True transparent background PNG (real alpha channel). RETRY NOTE: the first attempt touched the image border. Keep the WHOLE object at least 6% inside every edge of the canvas: nothing may touch or be cut by the image border, and the background must be fully transparent all around.
+You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called "Crimson Rose Atelier": deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+The torn bottom edge of a sheet of thick deep oxblood cotton paper (#4B0C17, the same paper as envelope-closed.png), seen straight from the front on a fully transparent background. The oxblood paper fills the whole top 55% of the image edge to edge (from the left edge to the right edge), and below it the sheet ends in a hand-torn, gently irregular edge that wanders across the full width between 55% and 85% of the image height; along the tear a fine, pale cream fibrous rim (#EADCC5) of exposed paper core with tiny loose fibres. Below the tear everything is fully transparent. The left and right ends of the tear are at the same height so the strip can repeat side by side. Soft warm light from the upper left, no cast shadow, no objects, no text.
 ```
 
-Kontrol: salkım sol üst köşeden taşar; sağ alt üçte bir boş; saksı/duvar yok; alfa.
+Kontrol: kâğıt üstte kenardan kenara; yırtık tüm genişlikte; lifli açık kenar; altı tamamen şeffaf; sağ ve sol uç aynı yükseklikte.
+
+#### 11. W3.7 Saten kurdele (albüm ayracı)
+
+- İndirme adı: `21-crimson-rose-atelier__ribbon.png`
+- Hedef: `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/ribbon.png`
+- Bölüm: PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 (website parçası (PAKET 5))
+- Şart: 500×1800 px (5:18) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)
+
+```
+You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called "Crimson Rose Atelier": deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+One long narrow deep burgundy silk satin ribbon (#5B1018 with luminous #9A2037 highlights, about 6% of the image width wide) hanging vertically from the very top edge of the image down to 90% of its height with a gentle natural S-curve and one soft twist, its lower end cut in a neat V (swallowtail). Rich satin sheen, soft warm light from the upper left. Nothing else, no bow, no knot. True transparent background PNG, no shadow outside the ribbon.
+```
+
+Kontrol: tek kurdele, üst kenardan başlar; ucu V kesik; fiyonk yok; gerçek alfa.
+
+#### 12. W3.8 Altın yaprak dalı (bölüm süsü)
+
+- İndirme adı: `21-crimson-rose-atelier__gold_sprig.png`
+- Hedef: `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/gold_sprig.png`
+- Bölüm: PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 (website parçası (PAKET 5))
+- Şart: 600×600 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)
+
+```
+You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called "Crimson Rose Atelier": deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+One small delicate sprig of hot-foil stamped champagne gold leaves (#C9A66D, highlights #EBD3A0) — the same olive sprig as on seal.png — seven slender leaves on one fine curved stem, rising diagonally from bottom-left to top-right, as if pressed into paper: subtle relief, a fine metallic foil shine, filling about 70% of the square. No paper behind it, no berries, no text. True transparent background PNG, no shadow.
+```
+
+Kontrol: tek ince dal, mühürdeki dalla aynı aile; folyo parıltısı; gerçek alfa.
+
+#### 13. W3.9 Albüm sayfası (Story'de çevrilen sayfa)
+
+- İndirme adı: `21-crimson-rose-atelier__album_page.png`
+- Hedef: `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/album_page.png`
+- Bölüm: PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 (website parçası (PAKET 5))
+- Şart: 1024×1400 px (0.731:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)
+
+```
+You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called "Crimson Rose Atelier": deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+One thick handmade ivory cotton album page (#F6EDDD), seen straight from the front, filling about 92% of the canvas height, portrait: the left edge is straight (the bound side) with a soft gutter shadow running along it inside the page, the top, right and bottom edges are softly DECKLED (natural torn handmade edges). A warm subtle paper grain, the page completely EMPTY: no photo, no photo corners, no border, no flowers, no text. Soft warm light from the upper left. True transparent background PNG around the page, no cast shadow outside the page.
+```
+
+Kontrol: sol kenar düz + iç gölge; diğer üç kenar deckle; sayfa boş; gerçek alfa.
+
+#### 14. W3.10 Gül kümesi (sayfa köşesi)
+
+- İndirme adı: `21-crimson-rose-atelier__rose_corner.png`
+- Hedef: `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/rose_corner.png`
+- Bölüm: PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 (website parçası (PAKET 5))
+- Şart: 1400×1100 px (14:11) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)
+
+```
+You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called "Crimson Rose Atelier": deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+A lush corner arrangement of the same dark crimson red roses and dark olive leaves as rose-branch.png, flowing out of the bottom-left corner of the image towards the upper right: three open roses and two buds low in the corner, leaves and a few loose fallen petals reaching up and to the right, the arrangement touching the LEFT and BOTTOM edges of the canvas (it will sit in a page corner) and fading into open leaves towards the top-right, about 60% of the canvas filled. Photographed for real, soft warm light from the upper left. Nothing else, no vase, no ribbon. True transparent background PNG, no cast shadow outside the flowers.
+```
+
+Kontrol: küme sol-alt köşeye dayalı; güller rose-branch.png ile aynı; gerçek alfa.
+
+#### 15. W3.11 Tek gül (küçük vurgu)
+
+- İndirme adı: `21-crimson-rose-atelier__rose_bloom.png`
+- Hedef: `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/rose_bloom.png`
+- Bölüm: PAKET 8 — Atelier cilası: website katmanları (W3; YAZI YOK) — 2026-10-23 (website parçası (PAKET 5))
+- Şart: 700×700 px (1:1) · şeffaf zemin (gerçek alfa) · PNG
+- Ek görsel: design-board.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png), rose-branch.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png), envelope-closed.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png), seal.png (repoda: collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png)
+
+```
+You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called "Crimson Rose Atelier": deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. Attach these four images from the repository to this first message as the style reference of every image in this chat: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/rose-branch.png (the exact roses), collections/21_Crimson_Rose_Atelier/assets/gpt/decor/envelope-closed.png (the exact burgundy paper) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.
+
+A single open dark crimson red rose bloom with two dark olive leaves, the same rose as rose-branch.png, seen three-quarter from above, centred, filling about 75% of the square, photographed for real with soft warm light from the upper left. No stem beyond a short piece, no vase, no other flowers. True transparent background PNG, no shadow.
+```
+
+Kontrol: tek gül + iki yaprak; gerçek alfa.
 
 
 ## C · Palet varyantı görselleri
 
 ### 21_Crimson_Rose_Atelier
 
-#### 15. İstem — fildişi güller (yalnız istenirse) — isteğe bağlı
+#### 16. İstem — fildişi güller (yalnız istenirse) — isteğe bağlı
 
 - İndirme adı: `21-crimson-rose-atelier__v07-ivory-rose__rose-branch.png`
 - Hedef: `collections/21_Crimson_Rose_Atelier/variants/V07_ivory_rose/gpt/rose-branch.png`
