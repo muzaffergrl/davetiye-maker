@@ -4,7 +4,7 @@
 import { before, test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { cpSync, existsSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { chmodSync, cpSync, existsSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -73,6 +73,27 @@ test('backup: every blob copied byte for byte, manifest with sizes and SHA-256, 
   assert.ok(calls.every((c) => c === 'list' || c === 'get'));
   assert.deepEqual(fake.paths(), before, 'the store is unchanged');
   assert.ok(!readdirSync(out, { recursive: true }).some((f) => String(f).endsWith('.part')), 'no half-written file left');
+});
+
+test('private on disk: every file 0600, every folder the backup makes 0700, whatever the umask (POSIX)', { skip: process.platform === 'win32' }, async () => {
+  const { fake } = await filledStore();
+  const { client } = readOnly(fake);
+  const out = path.join(tmpDir('g955-modes-'), 'new-backup-folder');
+  const old = process.umask(0o022);
+  try {
+    await runBackup({ client, token: fake.token, out, log: quiet });
+    // a stopped earlier run's progress file with open permissions is closed again on the next run
+    chmodSync(path.join(out, 'progress.jsonl'), 0o644);
+    await runBackup({ client, token: fake.token, out, log: quiet });
+  } finally {
+    process.umask(old);
+  }
+  const mode = (p: string) => statSync(p).mode & 0o777;
+  assert.equal(mode(out), 0o700, 'the --out folder this run created');
+  for (const rel of readdirSync(out, { recursive: true }).map(String)) {
+    const p = path.join(out, rel);
+    assert.equal(mode(p), statSync(p).isDirectory() ? 0o700 : 0o600, rel);
+  }
 });
 
 test('resumable: a second run copies only what is new or changed; a lost file is fetched again', async () => {

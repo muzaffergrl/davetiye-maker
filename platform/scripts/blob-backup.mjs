@@ -16,6 +16,8 @@
 // del or copy. Resumable: a stopped run (network, laptop lid) is started again with the same --out: a blob already in
 // the folder with the same size and upload time (recorded in progress.jsonl / manifest.json) is not downloaded again.
 // Files are written as <name>.part and renamed when complete, so a half-written file never counts as done.
+// Private on disk: the copy holds buyers' emails and guests' replies, so every file is 0600 and every folder it makes
+// 0700 (owner only, whatever the umask; the --out folder itself too when this run creates it).
 // The token is never printed. Exit code: 0 = every blob copied, 1 = some failed (listed; run again), 2 = usage.
 //
 // Folder layout:  <out>/files/<blob pathname>   the bytes as stored
@@ -25,7 +27,7 @@
 //                                              failed: [{pathname, error}]}
 
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, renameSync, statSync, writeFileSync, appendFileSync } from 'node:fs';
+import { chmodSync, existsSync, mkdirSync, readFileSync, renameSync, statSync, writeFileSync, appendFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -47,6 +49,21 @@ export function safeRelative(pathname) {
 export function insideRepo(dir, repoRoot = REPO_ROOT) {
   const rel = path.relative(repoRoot, path.resolve(dir));
   return rel === '' || (!rel.startsWith('..') && !path.isAbsolute(rel));
+}
+
+/** Owner-only modes of the backup (the copy holds buyers' emails and guests' replies). */
+export const PRIVATE_DIR_MODE = 0o700;
+export const PRIVATE_FILE_MODE = 0o600;
+
+/** mkdir -p with owner-only folders (the mode applies to the folders it creates). */
+function privateDir(dir) {
+  mkdirSync(dir, { recursive: true, mode: PRIVATE_DIR_MODE });
+}
+
+/** A file only its owner can read: created 0600, and set again when it was already there (a stopped earlier run). */
+function writePrivate(file, data) {
+  writeFileSync(file, data, { mode: PRIVATE_FILE_MODE });
+  chmodSync(file, PRIVATE_FILE_MODE);
 }
 
 const iso = (d) => (d instanceof Date ? d.toISOString() : typeof d === 'string' ? new Date(d).toISOString() : null);
@@ -121,8 +138,10 @@ export async function runBackup({ client, token, out, dryRun = false, prefix = '
   if (dryRun) return { dryRun: true, startedAt, count: blobs.length, bytes, prefixes, files: [], failed: [] };
 
   const filesDir = path.join(out, 'files');
-  mkdirSync(filesDir, { recursive: true });
+  privateDir(filesDir);
+  chmodSync(filesDir, PRIVATE_DIR_MODE);
   const progressFile = path.join(out, 'progress.jsonl');
+  if (existsSync(progressFile)) chmodSync(progressFile, PRIVATE_FILE_MODE);
   const done = loadDone(out);
   const files = [];
   const failed = [];
@@ -152,10 +171,10 @@ export async function runBackup({ client, token, out, dryRun = false, prefix = '
         const buf = await readStream(res.stream);
         // the listing's upload time: the next run compares it with its own listing to skip this blob
         const entry = { pathname: b.pathname, size: buf.length, sha256: sha256(buf), uploadedAt: b.uploadedAt };
-        mkdirSync(path.dirname(target), { recursive: true });
-        writeFileSync(`${target}.part`, buf);
+        privateDir(path.dirname(target));
+        writePrivate(`${target}.part`, buf);
         renameSync(`${target}.part`, target);
-        appendFileSync(progressFile, `${JSON.stringify(entry)}\n`);
+        appendFileSync(progressFile, `${JSON.stringify(entry)}\n`, { mode: PRIVATE_FILE_MODE });
         files.push(entry);
         copied++;
         return;
@@ -187,7 +206,7 @@ export async function runBackup({ client, token, out, dryRun = false, prefix = '
     files,
     failed,
   };
-  writeFileSync(path.join(out, 'manifest.json.part'), `${JSON.stringify(summary, null, 2)}\n`);
+  writePrivate(path.join(out, 'manifest.json.part'), `${JSON.stringify(summary, null, 2)}\n`);
   renameSync(path.join(out, 'manifest.json.part'), path.join(out, 'manifest.json'));
   log(`copied ${copied}, already there ${skipped}, failed ${failed.length}${failed.length ? ' (run the same command again)' : ''} -> ${out}`);
   return summary;
