@@ -183,7 +183,7 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 
 /* == page 1 — envelope (W1.1) */
 .skip {
-  position: fixed; top: calc(6px + env(safe-area-inset-top)); right: 8px; z-index: 50; min-width: 48px; min-height: 44px;
+  position: fixed; top: calc(6px + env(safe-area-inset-top)); right: calc(8px + env(safe-area-inset-right)); z-index: 50; min-width: 48px; min-height: 44px;
   display: flex; align-items: center; justify-content: center; padding: 0 12px; text-decoration: none;
   font: 600 12.5px/1 var(--slab); letter-spacing: .24em; text-transform: uppercase; color: var(--ink-soft);
 }
@@ -539,7 +539,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .closing > .page-corner { right: 0; bottom: 0; width: var(--corner); }
 .closing > :not(.page-corner) { position: relative; z-index: 1; }
 .closing .title { font-size: 62px; }
-.closing .line { margin-top: 4px; font-style: italic; font-size: 20px; color: var(--ink-soft); }
+.closing .line { margin-top: 4px; font-style: italic; font-size: 20px; color: var(--ink-soft); text-wrap: balance; }
 .closing .kicker { margin-top: 12px; overflow-wrap: break-word; }
 .closing .replay-line { margin-top: 22px; }
 html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line { display: none; }
@@ -594,3 +594,4 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
   .js .env-hint, .js .float { animation: none !important; }
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: 1ms !important; }
 }
+@media(max-width:600px){.sig>span{display:block}.sig>.mdot{display:none}}

@@ -150,8 +150,8 @@ export const ORDER_FULL_MESSAGES: Record<'receipt' | 'max', string> = {
 };
 
 export const CLAIM_MESSAGES: Record<ClaimErrorCode, string> = {
-  invalid: 'Please check the highlighted fields.',
-  theme_unavailable: 'This design is not available. Please open the start link from your Etsy download again.',
+  invalid: msg('Please check the highlighted fields.'),
+  theme_unavailable: msg('This design is not available. Please open the start link from your Etsy download again.'),
   theme_in_review: THEME_IN_REVIEW.message,
   // G146: the order has a website and the email is not the one it was started with (the same email signs in instead).
   order_used: msg(
@@ -159,15 +159,15 @@ export const CLAIM_MESSAGES: Record<ClaimErrorCode, string> = {
   ),
   // G951: "Start another website" when the order may not get one more (its Etsy receipt's designs all have a website).
   order_full: ORDER_FULL_MESSAGES.receipt,
-  order_not_verified: 'We could not confirm this order. Please check your Etsy order number and email address.',
-  verification_unavailable: 'We could not check your order right now. Please try again in a few minutes.',
-  slug_taken: 'This website address is already taken. Please choose another one.',
-  rate_limited: 'Too many attempts from this connection. Please wait a few minutes and try again.',
-  busy: 'We are getting a lot of requests right now. Please try again in a few minutes.',
-  too_large: 'This form is too large to send. Please shorten your entries.',
-  unsupported: 'Please send the form from the start page.',
-  bad_json: 'This form could not be read. Please reload the page and try again.',
-  server: 'Something went wrong. Please try again in a moment.',
+  order_not_verified: msg('We could not confirm this order. Please check your Etsy order number and email address.'),
+  verification_unavailable: msg('We could not check your order right now. Please try again in a few minutes.'),
+  slug_taken: msg('This website address is already taken. Please choose another one.'),
+  rate_limited: msg('Too many attempts from this connection. Please wait a few minutes and try again.'),
+  busy: msg('We are getting a lot of requests right now. Please try again in a few minutes.'),
+  too_large: msg('This form is too large to send. Please shorten your entries.'),
+  unsupported: msg('Please send the form from the start page.'),
+  bad_json: msg('This form could not be read. Please reload the page and try again.'),
+  server: msg('Something went wrong. Please try again in a moment.'),
 };
 
 export function claimError(

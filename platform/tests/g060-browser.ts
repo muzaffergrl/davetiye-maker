@@ -436,7 +436,7 @@ try {
     // Save & exit -> Home with "Continue setup · Step 2 of 3"
     await page.click('[data-setup-exit]');
     await page.waitForSelector('[data-status-card]');
-    check('save & exit: Home offers "Continue setup · Step 2 of 3"', (await page.locator('[data-status-card]').innerText()).includes('Continue setup · Step 2 of 3'));
+    check('save & exit: Home offers "Continue setup · Step 2 of 3"', ((await page.locator('[data-status-card]').textContent()) ?? '').includes('Continue setup · Step 2 of 3'));
     await shot(page, '17_home_draft');
     await page.reload();
     await page.waitForSelector('[data-status-card]');

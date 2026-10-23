@@ -10,6 +10,7 @@
 
 import { CONTENT_LIMITS } from '../content/limits.ts';
 import { isReservedSlug, isValidSlugFormat, slugify } from '../slug.ts';
+import { msg } from '../i18n/translate.ts';
 
 export const ORDER_NUMBER_MIN = 8;
 export const ORDER_NUMBER_MAX = 12;
@@ -22,16 +23,16 @@ export const FALLBACK_SLUG = 'our-wedding';
 export type ClaimField = 'orderNumber' | 'email' | 'name1' | 'name2' | 'slug';
 
 export const FIELD_MESSAGES = {
-  orderMissing: 'Please enter your Etsy order number.',
+  orderMissing: msg('Please enter your Etsy order number.'),
   orderFormat: `Your Etsy order number has ${ORDER_NUMBER_MIN} to ${ORDER_NUMBER_MAX} digits, for example 1234567890.`,
-  emailMissing: 'Please enter your email address.',
-  emailFormat: 'Please enter a valid email address, like name@example.com.',
-  nameMissing: 'Please enter a first name.',
+  emailMissing: msg('Please enter your email address.'),
+  emailFormat: msg('Please enter a valid email address, like name@example.com.'),
+  nameMissing: msg('Please enter a first name.'),
   nameTooLong: `Please keep each name to ${NAME_MAX} characters or fewer.`,
-  slugMissing: 'Please choose a website address.',
-  slugFormat: 'Use 3 to 48 lowercase letters, numbers and single hyphens.',
-  slugReserved: 'This address is reserved. Please choose another one.',
-  slugTaken: 'This address is already taken.',
+  slugMissing: msg('Please choose a website address.'),
+  slugFormat: msg('Use 3 to 48 lowercase letters, numbers and single hyphens.'),
+  slugReserved: msg('This address is reserved. Please choose another one.'),
+  slugTaken: msg('This address is already taken.'),
 } as const;
 
 // Control characters, zero-width and bidi marks are removed from free text.

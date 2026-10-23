@@ -340,6 +340,34 @@
 :global(body:has([data-compare-tray])) .launcher {
   bottom: calc(112px + env(safe-area-inset-bottom));
 }
+/* Phones: at the very top of a page the round button sat on the first screen's main button (home: "Open the
+   invitation"); it comes in over the first 120 px of scrolling. Browsers without scroll-linked animations, and pages
+   too short to scroll, show it from the start as before. */
+@media (max-width: 599.98px) {
+  @supports (animation-timeline: scroll()) {
+    .launcher {
+      animation: scReveal linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 120px;
+    }
+  }
+}
+@keyframes scReveal {
+  from {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(14px) scale(0.92);
+  }
+  40% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+}
 
 .backdrop {
   position: fixed;

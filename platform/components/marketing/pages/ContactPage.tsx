@@ -32,7 +32,16 @@ export function ContactPage({ m }: { m: Market }) {
               <p className={s.contactLabel}>{t('Email')}</p>
               {email ? (
                 <a className={s.contactEmail} href={`mailto:${email}`} data-track="contact_email_click">
-                  {email}
+                  {/* a narrow phone breaks it after the @ ("name@" / "gmail.com"), never inside the domain */}
+                  {email.includes('@') ? (
+                    <>
+                      {email.slice(0, email.indexOf('@') + 1)}
+                      <wbr />
+                      {email.slice(email.indexOf('@') + 1)}
+                    </>
+                  ) : (
+                    email
+                  )}
                 </a>
               ) : (
                 <p className={s.contactEmail}>{cfg.support.email}</p>

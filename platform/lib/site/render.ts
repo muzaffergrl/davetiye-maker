@@ -69,10 +69,18 @@ function htmlHeaders(opts: {
   return h;
 }
 
+// Guests see these (a mistyped address, an archived website, an expired preview link): a quiet card on warm paper,
+// no couple's names and no platform branding (inline CSS only; the site CSP allows it).
+const PLAIN_CSS =
+  'html{color-scheme:light}body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center;' +
+  'background:#faf7f0;color:#3a2a35;font:17px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center}' +
+  'main{box-sizing:border-box;max-width:32rem;padding:48px 24px}' +
+  'main::before{content:"";display:block;width:56px;height:1px;margin:0 auto 28px;background:#c9a86a}' +
+  'h1{margin:0 0 12px;color:#2b1526;font:400 clamp(28px,7vw,36px)/1.2 Georgia,"Times New Roman",serif;text-wrap:balance}' +
+  'p{margin:0;color:#6b5f69;text-wrap:pretty}';
 const PLAIN_PAGE = (title: string, text: string) =>
   `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">` +
-  `<title>${title}</title></head><body style="font-family:system-ui,sans-serif;padding:2rem;text-align:center">` +
-  `<h1 style="font-weight:400">${title}</h1><p>${text}</p></body></html>`;
+  `<title>${title}</title><style>${PLAIN_CSS}</style></head><body><main><h1>${title}</h1><p>${text}</p></main></body></html>`;
 
 export function notFound(): Response {
   return new Response(PLAIN_PAGE('Page not found', 'This page does not exist or is not published yet.'), {

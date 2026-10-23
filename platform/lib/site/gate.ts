@@ -114,11 +114,14 @@ export const GATE_CSP = [
 // Theme tokens every design defines (docs/11): --page, --ink, --ink-soft, --ivory, --script; the body font comes from the
 // theme's own `body` rule. Plain UI only: a paper-coloured panel for legibility, no drawn ornament (K21). The theme's
 // cross-page transition (@view-transition) is switched off here: the error answer replaces the page at once.
+// The panel is light: a dark design whose --ink / --ink-soft are light, or that has no --script, sets them for this page
+// in its site.css ([data-site-gate] { --ink: …; --script: … }, e.g. 06, 17, 19). The panel is near-opaque (96 %) so a
+// dark page does not turn it grey.
 const GATE_CSS = `
 @view-transition{navigation:none}
 .site-gate{margin:0;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:24px 16px calc(24px + env(safe-area-inset-bottom))}
 .sg{position:relative;z-index:1;box-sizing:border-box;width:100%;max-width:420px;padding:32px 24px 28px;border-radius:16px;text-align:center;color:var(--ink,#2a2724);
-background:color-mix(in srgb,var(--ivory,#fffdf8) 90%,transparent);box-shadow:0 1px 2px rgb(0 0 0/.06),0 12px 32px rgb(0 0 0/.08)}
+background:color-mix(in srgb,var(--ivory,#fffdf8) 96%,transparent);box-shadow:0 1px 2px rgb(0 0 0/.06),0 12px 32px rgb(0 0 0/.08)}
 .sg *{box-sizing:border-box}
 .sg-kicker{margin:0;font-size:13px;line-height:1.6;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft,var(--ink,#45403b))}
 .sg-names{margin:6px 0 18px;font-family:var(--script,cursive);font-weight:400;font-size:clamp(36px,10.5vw,52px);line-height:1.3;color:var(--ink,#2a2724);overflow-wrap:anywhere}

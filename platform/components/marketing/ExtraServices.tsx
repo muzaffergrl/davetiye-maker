@@ -34,8 +34,8 @@ function ServicePrice({ service, m }: { service: ServiceCommerce; m: Market }) {
   if (!price) return null;
   return (
     <p className={x.price}>
-      {displayPrice(price)}
-      <span className={x.note}> {t('one-time, on Etsy')}</span>
+      {displayPrice(price)}{' '}
+      <span className={x.note}>{t('one-time, on Etsy')}</span>
     </p>
   );
 }

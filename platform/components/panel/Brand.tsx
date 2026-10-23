@@ -1,8 +1,8 @@
 // BKE Studio logo in the panel (G066 part B). Always the SVG from public/brand/ (copies of brand/svg/, never re-typeset
-// with a font). Horizontal logo at >= 24 px height (brand minimum); where a phone bar has no room for it (a long
-// "Publish changes" button, `compact`), the small monogram (brand rule: 16–47 px) stands in below 440 px, and on every
-// screen under 360 px (panel.module.css; the hidden image is display: none, so it is not read twice). Not a link: no brand
-// domain is decided (K26), and the panel has nowhere else to send the couple.
+// with a font). Horizontal logo at >= 24 px height (brand minimum); where a phone bar has no room for it (a Publish
+// button or the "Live" badge at the bar's end, `compact`), the small monogram (brand rule: 16–47 px) stands in below
+// 440 px, and on every screen under 360 px (panel.module.css; the hidden image is display: none, so it is not read
+// twice). Not a link: no brand domain is decided (K26), and the panel has nowhere else to send the couple.
 // Plain module (no 'use client'): the server-rendered "link not valid" page uses it too.
 import { BRAND_FILES, logoWidth } from '../../lib/marketing/brand.ts';
 import styles from './panel.module.css';

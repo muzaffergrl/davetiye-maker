@@ -1,4 +1,4 @@
-/* Mediterranean Lemon (05): GPT parts only (docs/11 §5.7); % = img/manifest.json */
+/* Mediterranean Lemon (05): GPT parts only; % = img/manifest.json */
 
 /* -- tokens (palette.json: lemon-azure) */
 :root {
@@ -193,12 +193,12 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 /* == page 1 — envelope (W1.1) */
 .page-envelope { overflow-x: clip; }
 .skip {
-  position: fixed; top: calc(6px + env(safe-area-inset-top)); right: 8px; z-index: 50; min-width: 48px; min-height: 44px;
+  position: fixed; top: calc(6px + env(safe-area-inset-top)); right: calc(8px + env(safe-area-inset-right)); z-index: 50; min-width: 48px; min-height: 44px;
   display: flex; align-items: center; justify-content: center; padding: 0 12px; text-decoration: none;
   font: 500 12px/1 var(--serif); letter-spacing: .24em; text-transform: uppercase; color: var(--ink-soft);
 }
 .skip span { padding-bottom: 3px; border-bottom: 1px solid var(--hair); }
-/* --obj = closed envelope, --w = --obj / .99214 (closed_obj.frac_w); empty top .63776 × --w */
+/* --obj closed envelope, --w = --obj / .99214 */
 .env-page {
   --obj: min(78vw, calc(40svh * 1.5928), 420px); --w: calc(var(--obj) * var(--ok, 1) / .99214); --nm: clamp(42px, 12.6vw, 78px);
   position: relative; z-index: 1; min-height: 100svh; display: flex; flex-direction: column; align-items: center;
@@ -474,7 +474,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
   .t-3 .wp-leaf { left: calc(100% + 14px); top: 70%; }
   .tile figcaption { font-size: 36px; }
 }
-/* desktop: 3 panels in a row = one fold unit (site.js tiles); head by height */
+/* desktop: 3 panels in a row (site.js tiles) */
 @media (min-width: 1024px) and (min-aspect-ratio: 5/4) and (min-height: 621px) {
   .page-head.page-head { padding-top: clamp(24px, 10svh - 40px, 90px); }
   .page-title { font-size: clamp(60px, 15svh - 36px, 104px); }
@@ -593,7 +593,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .reply-panel .note { margin-top: 6px; }
 .reply-panel .textlink { margin-top: 4px; }
 .closing .title { font-size: 62px; }
-.closing .line { margin-top: 4px; font-style: italic; font-size: 19px; color: var(--ink); }
+.closing .line { margin-top: 4px; font-style: italic; font-size: 19px; color: var(--ink); text-wrap: balance; }
 .closing .kicker { margin-top: 12px; overflow-wrap: break-word; }
 .closing .replay-line { margin-top: 22px; }
 html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line { display: none; }
@@ -659,3 +659,4 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
   .js .env-hint, .js .float { animation: none !important; }
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: 1ms !important; }
 }
+@media(max-width:600px){.sig>span{display:block}.sig>.mdot{display:none}}

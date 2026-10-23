@@ -102,8 +102,8 @@ export function PricingPage({ m }: { m: Market }) {
                           </s>{' '}
                         </>
                       ) : null}
-                      <span>{price ? displayPrice(price) : displayPrice(d.price)}</span>
-                      <span className={s.priceNote}> {t('one-time, on Etsy')}</span>
+                      <span>{price ? displayPrice(price) : displayPrice(d.price)}</span>{' '}
+                      <span className={s.priceNote}>{t('one-time, on Etsy')}</span>
                     </p>
                     <div className={s.cardActions}>
                       <EtsyButton design={d} placement="pricing" m={m} />

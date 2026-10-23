@@ -255,7 +255,8 @@ try {
     await dp.goto(`${SETUP}#home`);
     await dp.waitForSelector('[data-status-card]');
     await dp.waitForTimeout(500);
-    const label = await text(dp, '[data-status-action]');
+    // textContent: on a phone the two parts sit on two lines and the dot is hidden (views.tsx), the label is the same
+    const label = ((await dp.locator('[data-status-action]').first().textContent()) as string).replace(/\s+/g, ' ').trim();
     const card = await box(dp, '[data-status-card]');
     const btn = await box(dp, '[data-status-action]');
     check('home (draft): "Continue setup · Step n of 3" on its own full-width row', /^Continue setup · Step \d of 3$/.test(label) && btn.width >= card.width - 2 * 24 - 2, `${label} ${Math.round(btn.width)}/${Math.round(card.width)}`);

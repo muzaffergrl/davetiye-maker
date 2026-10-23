@@ -707,6 +707,14 @@
   background: var(--c-accent-soft);
 }
 
+/* A long text button (DE "Ortszeit Berlin verwenden (dieses Handy)") wraps inside its card instead of widening the
+   card past a 360 px screen. */
+.btn_tertiary {
+  max-width: 100%;
+  white-space: normal;
+  text-align: start;
+}
+
 .btn_danger {
   background: var(--c-danger);
   color: #fff;
@@ -744,6 +752,21 @@
   width: 100%;
   white-space: normal;
   text-align: center;
+}
+
+/* A label that wraps on a narrow phone breaks into even lines, not "Continue setup · Step 1 of / 3". */
+.btnBlock {
+  text-wrap: balance;
+}
+
+/* A two-part label ("Continue setup · Step 1 of 3", views.tsx): one line per part on a phone, without the dot. */
+@media (max-width: 479px) {
+  .labelPart {
+    display: block;
+  }
+  .labelDot {
+    display: none;
+  }
 }
 
 .btn_primary.btnBlock {
@@ -1044,6 +1067,20 @@
   text-decoration: none;
 }
 
+/* The smallest phones (< 360 px): the address and "Copy" may take two rows (DE "Kopieren" widened Home by 19 px at
+   320), and the bar's chat icon gives its room to Publish / "Live" (DE "Veröffentlichen" ran 29 px off the screen). */
+@media (max-width: 359px) {
+  .statusLink {
+    flex-wrap: wrap;
+  }
+  .statusLink .btn_tertiary {
+    margin-left: auto;
+  }
+  .barOptional {
+    display: none;
+  }
+}
+
 .statusLink .btn_tertiary:hover:not(:disabled) {
   background: #e4dac9;
 }
@@ -1150,6 +1187,8 @@
 .checkText {
   flex: 1;
   min-width: 0;
+  /* no lone last word ("… Ceremony time and Time" / "zone") */
+  text-wrap: pretty;
 }
 
 .chev {
@@ -1590,6 +1629,16 @@
   resize: vertical;
 }
 
+/* The box grows with its text where the browser can (no line cut in half at the bottom of a short box); the rows it
+   asks for stay the minimum. Elsewhere it keeps its rows and scrolls, as before. */
+@supports (field-sizing: content) {
+  .textarea {
+    field-sizing: content;
+    min-height: calc(var(--rows, 3) * 24px + 28px);
+    max-height: 560px;
+  }
+}
+
 .select {
   appearance: none;
   padding-right: 40px;
@@ -1817,6 +1866,9 @@
 /* Repeatable items */
 .item {
   display: grid;
+  /* one column that may shrink to the card (an auto column grew to its fields' widest content: DE schedule rows ran
+     23 px off a 320 px screen) */
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--s-4);
   min-width: 0;
   margin: 0;
@@ -4084,6 +4136,15 @@
   background: rgb(43 21 38 / 0.03);
 }
 
+/* The smallest phones: DE "Nach der Hochzeit · Automatisch" ran 4 px past a 320 px screen. */
+@media (max-width: 359px) {
+  .disclosureButton {
+    gap: var(--s-2);
+    padding-left: var(--s-4);
+    padding-right: var(--s-3);
+  }
+}
+
 .disclosureTitle {
   flex: 1;
   min-width: 0;
@@ -4095,10 +4156,16 @@
 }
 
 .disclosureStatus {
-  flex: none;
+  /* at most half the row: a long status ("Los Angeles · Month first") wraps on its side instead of squeezing the
+     title onto two lines ("More / options") on a phone */
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 50%;
   color: var(--c-text-muted);
   font-size: 14px;
   font-weight: 600;
+  text-align: end;
+  text-wrap: balance;
 }
 
 .disclosureChev {

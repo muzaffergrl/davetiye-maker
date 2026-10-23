@@ -1,4 +1,4 @@
-/* Cherry Blossom Spring (15): GPT parts only (docs/11 §5.7); % = img/manifest.json */
+/* Cherry Blossom Spring (15): GPT parts only; % = img/manifest.json */
 
 /* -- tokens (palette.json: sakura) */
 :root {
@@ -126,7 +126,7 @@ a, button, summary, label, [role="button"] { -webkit-tap-highlight-color: transp
 .js [data-a="sway-br"] { transform: rotate(-6deg) translate3d(5%, 5%, 0); transform-origin: 100% 100%; --dur: 1800ms; }
 .js [data-a="drop"] { transform: translate3d(-10px, -26px, 0) rotate(-9deg); --dur: 1400ms; }
 .js [data-a="set"] { opacity: 1; transform: translate3d(0, 24px, 0) scale(.97); --dur: 1300ms; }
-/* petal-l / -r (15): a frame drifts down like a falling petal, swaying as it settles (keyframes) */
+/* petal-l / -r (15): a frame drifts down like a falling petal */
 .js [data-a^="petal"] { transition: none; }
 .js [data-a="petal-l"].in { animation: petal-l 1800ms var(--ease-soft) both; }
 .js [data-a="petal-r"].in { animation: petal-r 1800ms var(--ease-soft) both; }
@@ -211,12 +211,12 @@ html[data-preview="true"] .photo-slot:not([data-photo-state]) > .ph-mark {
 /* == page 1 — envelope (W1.1) */
 .page-envelope { overflow-x: clip; }
 .skip {
-  position: fixed; top: calc(6px + env(safe-area-inset-top)); right: 8px; z-index: 50; min-width: 48px; min-height: 44px;
+  position: fixed; top: calc(6px + env(safe-area-inset-top)); right: calc(8px + env(safe-area-inset-right)); z-index: 50; min-width: 48px; min-height: 44px;
   display: flex; align-items: center; justify-content: center; padding: 0 12px; text-decoration: none;
   font: 400 11.5px/1 var(--serif); letter-spacing: .22em; text-transform: uppercase; color: var(--ink-soft);
 }
 .skip span { padding-bottom: 3px; border-bottom: 1px solid var(--hair); }
-/* --obj = closed envelope, --w = --obj / .99778 (closed_obj.frac_w); empty top .52334 × --w */
+/* --obj closed envelope, --w = --obj / .99778; empty top .52334 × --w */
 .env-page {
   --obj: min(80vw, calc(36svh * 1.3929), 430px); --w: calc(var(--obj) * var(--ok, 1) / .99778); --nm: clamp(38px, 11vw, 66px);
   position: relative; z-index: 1; min-height: 100svh; display: flex; flex-direction: column; align-items: center;
@@ -323,7 +323,7 @@ html:has(.page-envelope)::view-transition-group(site-nav) { display: none; } /* 
 .cd-row { display: flex; justify-content: center; gap: clamp(16px, 6vw, 36px); }
 .cd-cell { display: flex; flex-direction: column; align-items: center; min-width: 50px; }
 .cd-num { font: 400 clamp(28px, 8vw, 38px)/1 var(--serif); color: var(--script-ink); font-variant-numeric: lining-nums tabular-nums; }
-.cd-lbl { margin-top: 7px; font: 400 10.5px/1 var(--serif); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft); }
+.cd-lbl { margin-top: 7px; font: 400 10.5px/1 var(--serif); letter-spacing: .2em; text-transform: uppercase; color: color-mix(in srgb, var(--ink-soft) 80%, #000); }
 .cd-done { font-style: italic; font-size: 18px; color: var(--script-ink); }
 .countdown.is-done .cd-row { display: none; }
 @media (max-width: 359px) { .cd-row { gap: 12px; } .cd-cell { min-width: 44px; } .cd-lbl { letter-spacing: .12em; } }
@@ -365,7 +365,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .paper::before { top: calc(var(--top-h) - 1px); bottom: calc(var(--bot-h) - 1px); }
 .paper::after { bottom: 0; height: var(--bot-h); background-size: 100% auto; background-position: 0 100%; }
 .paper-text { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
-/* invitation_card: the only full-width plain row is 54–55 %; longer text stretches it (docs/11 §9) */
+/* invitation_card: plain row 54–55 % stretches with longer text (docs/11 §9) */
 .invite { --ar: .64674; --t: .54; --b: .55; }
 .invite::before, .invite::after { background-image: image-set(url("img/invitation_card-480.webp") 1x, url("img/invitation_card-900.webp") 2x); }
 .invite::before { background-size: 100% 10000%; background-position: 0 54.545%; } /* 1 / (.55 − .54); .54 / (1 − .01) */
@@ -471,7 +471,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .pf .orn { width: min(60%, 150px); margin-top: 4px; }
 .pf figcaption[data-empty] + .orn { display: none; }
 @media (min-width: 720px) {
-  /* the comp's diagonal: large frame on the left, a smaller one on the right half a frame lower, the third on the left */
+  /* the comp's diagonal */
   .petal-frames { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); width: min(100% - 48px, 920px); margin-inline: auto; column-gap: 2vw; padding-top: 40px; }
   .pf { align-self: start; }
   .pf-1 { --fw: min(34vw, 360px); grid-area: 1 / 1; justify-self: end; margin: 0; }
@@ -491,7 +491,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .sched-list { list-style: none; margin: 3cqw 0 0; padding: 0; width: 100%; }
 .sched-row { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .sched-row + .sched-row { margin-top: 2.6cqw; }
-/* W1.4: GPT twig between hairlines between rows (none on the first; 6+ rows: space only) */
+/* W1.4: GPT twig between rows (none on the first; 6+ rows: space only) */
 .row-orn { display: flex; align-items: center; gap: 2cqw; width: 58cqw; margin-bottom: 2.6cqw; }
 .row-orn::before, .row-orn::after { content: ""; flex: 1 1 0; height: 1px; background: var(--hair); }
 .row-orn img { width: 30cqw; height: auto; display: block; }
@@ -579,7 +579,7 @@ html.arrive-fade .site-main { animation: arrive-fade .55s ease-out both; }
 .reply-panel .note { margin-top: 6px; }
 .reply-panel .textlink { margin-top: 4px; }
 .closing .title { font-size: 50px; }
-.closing .line { margin-top: 4px; font-style: italic; font-size: 18.5px; color: var(--ink); }
+.closing .line { margin-top: 4px; font-style: italic; font-size: 18.5px; color: var(--ink); text-wrap: balance; }
 .closing .kicker { margin-top: 12px; overflow-wrap: break-word; }
 .closing .replay-line { margin-top: 22px; }
 html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line { display: none; }
@@ -645,3 +645,5 @@ html[data-rsvp-replied] .closing .title, html[data-rsvp-replied] .closing .line 
   .js .env-hint p, .js .float { animation: none !important; }
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: 1ms !important; }
 }
+@media(max-width:600px){.sig>span{display:block}.sig>.mdot{display:none}}
+@media(max-width:400px){.wd .at{display:block}.wd .mdot{display:none}}
