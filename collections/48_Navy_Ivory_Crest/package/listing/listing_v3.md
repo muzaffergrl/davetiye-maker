@@ -164,11 +164,11 @@ Values must be picked from Etsy's own lists in the listing editor. [VERIFY: ever
 
 ## 5. Images and alt text
 
-The v4 set, 19 images in Etsy order (`tools/listing_v4/`: `build_set.py 48` + `export.py 48` → `package/listing/images_v4/`; order and file names as design 01's `images_v4/`; rules in `tools/listing_v4/README.md` and docs/20 §7.10). Phone screens are always real screens: the opening frames from the live demo, the guest pages and the editor from a local production build (the editor screens show the template's own sample couple, Elena & Marco); all words are HTML, never written by GPT. Images 01–08 were built on 2026-10-22 and the alt texts 1–8 were written from the files. Images 09–19 are **not built yet**: they wait for this design's PAKET 7 GPT scenes (`assets/gpt/mockups/p7_01_closeup.png` … `p7_11_share.png`); their alt texts are drafts from `tools/listing_v4/lifestyle.py` (headline and screens per image) and must be read against the files.
+The v4 set, 19 images in Etsy order (`tools/listing_v4/`: `build_set.py 48` + `export.py 48` → `package/listing/images_v4/`; order and file names as design 01's `images_v4/`; rules in `tools/listing_v4/README.md` and docs/20 §7.10). Phone screens are always real screens: the opening frames from the live demo, the guest pages and the editor from a local production build (the editor screens show the template's own sample couple, Elena & Marco); all words are HTML, never written by GPT. Images 01–08 were built on 2026-10-22 and the alt texts 1–8 were written from the files. **Built and on the Etsy draft** (2026-10-23, docs/20 §7.13): images 09–19 were added on this design's PAKET 7 GPT scenes, so the draft carries all 19 and the video. The alt texts 9–19 were drafted from `tools/listing_v4/lifestyle.py` before the scenes existed; on 2026-10-23 images 9 and 10 were read against the files and match, the others follow the shared template.
 
 Image 2 uses the template's three labels "Guests tap · It opens · Your photo"; in this design the card from the envelope shows the crest and initials, not a photo, so the third label does not match the picture (the alt text below describes what is shown). The same holds for lifestyle image 9 ("Your photo and your names" over the open envelope).
 
-Two images go against the rule of the 01–21 editorial sets (no QR code or web address in a listing image, Etsy Off-Platform policy, docs/15 §4.1): image 7 carries a QR code of the live demo, and image 4 shows the editor's "Your website is live" card with a sample web address; image 19 (planned) has the footer "Your own address: bkestudio.com/your-names". The user approved the v4 template on design 01; whether these may stay is an open §11 box.
+Two images go against the rule of the 01–21 editorial sets (no QR code or web address in a listing image, Etsy Off-Platform policy, docs/15 §4.1): image 7 carries a QR code of the live demo, and image 4 shows the editor's "Your website is live" card with a sample web address; image 19 has the footer "Your own address: bkestudio.com/your-names". The user approved the v4 template on design 01; whether these may stay is an open §11 box.
 
 | # | File | Alt text |
 |---|---|---|
@@ -180,17 +180,17 @@ Two images go against the rule of the 01–21 editorial sets (no QR code or web 
 | 6 | `06_included.jpg` | What's included: the invitation "Together, always" under a gold laurel on a phone, next to a checklist: envelope opening and four pages, online RSVP with your own questions, guest list and one-tap Excel download, countdown and add-to-calendar, your 5 photos, music and venue map, QR code and printable invitation, editor on phone or computer, online until 12 months after your wedding |
 | 7 | `07_demo.jpg` | Try it before you buy: the sealed navy wallet envelope on a phone next to a QR code of the live demo, to scan with your phone camera or tap the demo link in the description; sample names and photos that yours replace |
 | 8 | `08_how.jpg` | How it works: 1 buy and open the START HERE guide from your Etsy purchases, 2 start with your Etsy order number and first names, 3 personalize names, date, photos, story and RSVP questions, 4 publish and share one link by text, WhatsApp, email or QR; the setup's Add your photo step on a phone (portrait in a notched ivory mat on the home card) |
-| 9 | `09_closeup.jpg` | (draft, not built yet) Designed to be opened: a close-up of a phone with the open Navy Ivory Crest envelope and the card with your crest, initials and names |
-| 10 | `10_tap.jpg` | (draft, not built yet) One tap and it opens: a hand taps the sealed navy wallet envelope on a phone; sound and animation included |
-| 11 | `11_home.jpg` | (draft, not built yet) Guests open it anywhere, no app and no account: the Home page on a guest's phone; just one link on any phone |
-| 12 | `12_devices.jpg` | (draft, not built yet) Beautiful on every screen: the Home page on a tablet and the invitation on a phone |
-| 13 | `13_laptop.jpg` | (draft, not built yet) Edit on your laptop too: the private editor with its preview on a laptop |
-| 14 | `14_together.jpg` | (draft, not built yet) Plan it together: the guest list in the editor on a phone and on a laptop; open your editor on any device |
-| 15 | `15_print.jpg` | (draft, not built yet) Print it or send it: the printable invitation in the Navy Ivory Crest design (5 × 7 in or A5 PDF) next to the sealed envelope on a phone |
-| 16 | `16_need.jpg` | (draft, not built yet) Everything your guests need: four phones show the invitation, the venue and map, questions and answers, and a sent RSVP |
-| 17 | `17_day.jpg` | (draft, not built yet) The order of the day, with add-to-calendar buttons, on a phone |
-| 18 | `18_replies.jpg` | (draft, not built yet) Every reply in one place: the guest list in the editor on a phone; download it as Excel in one tap |
-| 19 | `19_share.jpg` | (draft, not built yet) Share it with one link by text, WhatsApp, email or QR: the editor's Share screen on a phone |
+| 9 | `09_closeup.jpg` | Designed to be opened: a close-up of a phone with the open Navy Ivory Crest envelope and the card with your crest, initials and names |
+| 10 | `10_tap.jpg` | One tap and it opens: a hand taps the sealed navy wallet envelope on a phone; sound and animation included |
+| 11 | `11_home.jpg` | Guests open it anywhere, no app and no account: the Home page on a guest's phone; just one link on any phone |
+| 12 | `12_devices.jpg` | Beautiful on every screen: the Home page on a tablet and the invitation on a phone |
+| 13 | `13_laptop.jpg` | Edit on your laptop too: the private editor with its preview on a laptop |
+| 14 | `14_together.jpg` | Plan it together: the guest list in the editor on a phone and on a laptop; open your editor on any device |
+| 15 | `15_print.jpg` | Print it or send it: the printable invitation in the Navy Ivory Crest design (5 × 7 in or A5 PDF) next to the sealed envelope on a phone |
+| 16 | `16_need.jpg` | Everything your guests need: four phones show the invitation, the venue and map, questions and answers, and a sent RSVP |
+| 17 | `17_day.jpg` | The order of the day, with add-to-calendar buttons, on a phone |
+| 18 | `18_replies.jpg` | Every reply in one place: the guest list in the editor on a phone; download it as Excel in one tap |
+| 19 | `19_share.jpg` | Share it with one link by text, WhatsApp, email or QR: the editor's Share screen on a phone |
 
 ## 6. Video
 

@@ -218,9 +218,13 @@ def test_scenes():
     sys.path.insert(0, str(TOOLS / "listing_v2"))
     import kompozit as kz
     for t in lk.THEMES.values():
+        # 49 (ff82ba13) went live with the v4 set only (PAKET 7 scenes, tools/listing_v4): no PAKET 3 scenes to check
+        v4_only = not (t.collection / "assets" / "gpt" / "mockups" / "cover_hand.png").exists() and             (t.package / "listing" / "images_v4" / "19_share.jpg").exists()
         for name, (file, shots) in lk.SCENES.items():
             assert name in lk.IMAGES and set(shots) <= set(lk.SHOTS), name
             scene = t.collection / "assets" / "gpt" / "mockups" / file
+            if v4_only and not scene.exists():
+                continue
             assert scene.exists(), scene
             assert len(kz.ekran_bolgeleri(Image.open(scene))) == len(shots), (t.id, file)
     im = Image.new("RGB", (390, 844), "white")

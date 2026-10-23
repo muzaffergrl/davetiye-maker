@@ -56,7 +56,7 @@
     {
       "n": 2,
       "file": "collections/42_Espresso_Pastoral/package/listing/images_v4/02_reveal.jpg",
-      "alt": "Opens like a real envelope: three phones show 1 guests tap the lace-wrapped envelope, 2 it opens into the painterly landscape, 3 the card rises with your photo; sound and animation included",
+      "alt": "Opens like a real envelope: three phones show 1 guests tap the lace-wrapped envelope, 2 the flap opens and the card rises from the pocket, 3 the card with your photo over a painted landscape; sound and animation included",
       "exists": true,
       "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },
@@ -105,7 +105,7 @@
     {
       "n": 9,
       "file": "collections/42_Espresso_Pastoral/package/listing/images_v4/09_closeup.jpg",
-      "alt": "Designed to be opened: a close-up of a phone with the open Espresso Pastoral envelope, your photo and your names",
+      "alt": "Designed to be opened: a phone among dried roses, lace and a brass candlestick shows the card with your photo and your names over a painted landscape",
       "exists": true,
       "status": "current: v4 set (tools/listing_v4, docs/20 §7.10; 4:5, real screens of the live demo and of a local production build; images 09–19 on the design's GPT PAKET 7 scenes)"
     },

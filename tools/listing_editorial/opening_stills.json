@@ -20,5 +20,6 @@
   "wildflower-meadow-vellum": {"open_mid": 1800, "open_card": 3000},
   "midnight-garden": {"open_mid": 2400, "open_card": 3600},
   "coastal-seaside": {"open_mid": 2400, "open_card": 3600},
-  "crimson-rose-atelier": {"open_mid": 1200, "open_card": 2400}
+  "crimson-rose-atelier": {"open_mid": 1200, "open_card": 2400},
+  "ivory-pearl-atelier": {"open_mid": 1900, "open_card": 3200}
 }
