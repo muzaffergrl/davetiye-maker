@@ -510,3 +510,333 @@ Kontrol (gözle; piksel ölçme yok): 1 adet düz, parlak, tek tonda yeşil alan
 ### 7.V Promo video (2. video) — GPT'ye verilmez
 Claude gerçek site kaydından üretir (`package/listing/video_promo.mp4`, 1080×1080, H.264, sessiz, 12–15 sn): açılış → sayfalar →
 düzenleyici → RSVP. Videoda gösterilen her şey gerçek siteden gelir; yapay zekâ videosu kullanılmaz.
+
+---
+
+## PAKET 8 — Grand Theatre yeniden tasarım (2026-10-24)
+
+> Kullanıcı (2026-10-23/24): 21'den itibaren her tasarım "çok iyi bir profesyonel tasarımcının elinden çıkmış gibi" olacak
+> ("absurdly high quality", "cesur ve yaratıcı ol"); kendine özgü bileşen, hareket ve ses. 24'ün bugünkü sitesi (tavus
+> mavisi zarf + bordo kadife perde kanatları + kordon + bilet koçanı, PAKET 5R) birkaç yeniden kurulumun yamasıdır; çıta
+> değildir. PAKET 8 tasarımı baştan GPT'ye çizdirir (K21): önce **W1** tasarım panosu, sonra aynı sohbette panodan türeyen
+> **W2** parçaları. Tema bu parçalarla yeniden kurulur (Claude: kesim, maske, ölçek, ışık, HTML/CSS/JS; çizim yok). Dosyanın
+> başındaki "Instructions for GPT" notu (page_ground / env_back / curtain_left referansları) PAKET 8'e **uygulanmaz**.
+>
+> Claude için notlar:
+> - W1'in kayıt satırı bilerek kalın değil: yol `mockups/` altında olduğu için `kit_check` / `gpt_yerlestir` orada yeşil ekran
+>   arar. Panoyu GPT doğrudan commit eder; `gpt_yerlestir`'e verilmez.
+> - W1 demo metni `content.demo.json` ile aynı: Charlotte & Theodore · October 16, 2027 · The Larkmont Grand Theatre,
+>   Richmond, Virginia · RSVP son günü September 1, 2027 · program saatleri 5:00 / 6:00 / 7:15 / 9:00 PM. Geri sayım örneği
+>   357 gün (2026-10-24'ten).
+> - Dosya adları bilerek PAKET 5R'dekilerden farklı (`prog_*`, `flat_*`, `house_*`, `playbill_*`, `title_banner`,
+>   `frame_loge`, `divider_lyre`, `lorgnette`, `icon_*`, `toss_*`): `gpt_is_listesi` aynı yolda dosyadaki ilk prompt'u alır,
+>   eski PAKET 5R prompt'u kazanırdı. Eski parçalar diskte kalır; tema yeniden kurulana kadar onları kullanır.
+> - Foto pencereleri (proscenium açıklığı, loca penceresi) yeşil değil, **şeffaf açıklık** (21 TESLİM: düz yeşil tutmuyor).
+>   Prompt'larda bilerek yeşil hex kodu yok (`kit_check` yeşil pencere arardı). Maske, kapalı halkanın içindeki şeffaf
+>   bölgeden çıkarılır; portre maskesi = proscenium açıklığı − valans.
+> - Bant gibi ince parçalar (ayırıcı, başlık bandı) GPT'nin tutabildiği 3:2 tuvalde ortada bant olarak istenir; Claude kırpar.
+>   Bütün ölçüler GPT'nin yerel tuvalleri (1024×1024, 1024×1536, 1536×1024).
+> - Açılış nesnesi zarf değil, **program kitapçığı + açılır (pop-up) kâğıt tiyatro**. En yakın tip `kitap` (13): kapak sol
+>   sırttaki menteşede `rotateY 0→-90°`, 90°'de mermerli iç yüz (`prog_cover_in`, menteşe sağda) `90°→0` devralır, sonra kapak
+>   sola ekrandan çıkar; ardından `flat_*` katmanları sayfadan `rotateX(90°→0)`, `transform-origin` alt kenar, arkadan öne
+>   kademeli kalkar. `prog_*` dört parça aynı 1024×1536 tuvalde aynı kutuda; `flat_*` beş parça da aynı tuvalde (sahne
+>   sayfanın içinde durur). Hiza (sol, sağ, üst, alt kenar ±%1,5) PAKET 8 için otomatik koşmaz; Claude `tema_build.hiza_olc`
+>   ile ölçer, her katmanı kendi alfa kutusundan keser ve ölçülen kutusuyla yerleştirir (GPT kayması tema ölçüsüyle emilir).
+> - Kapaktaki isim/tarih canlı HTML'dir ve kapakla **aynı** 3B sarmalayıcıda döner (ayrı animasyonla taklit edilmez). START
+>   HERE / panelde açılış nesnesinin adı bugün `Curtain`; "Programme" olup olmayacağına entegratör karar verir.
+> - Paylaşım (og) görseli ayrıca istenmedi: Claude `house_lights` + kapalı `prog_cover` + `prog_pulltab`'dan kurar (eski
+>   `web_hero` yerinde kalır). PAKET 6R basılı davetiye ve PAKET 3/7 ilan sahneleri bu turda değişmez (yeni görünüme uyum
+>   gerekirse ayrı paket).
+> - Fontlar ve palet değişir (aşağıda); `DESIGN_BRIEF.md`, `COLLECTION_STATUS.md`, G177 renk varyantları entegratörde
+>   güncellenir. Palet ailesi korunur (tavus mavisi, antik altın, fildişi; bordo → biraz daha parlak **garnet**). Elsie Swash
+>   Caps geniştir: uzun isimlerde iki satır/ölçek, `scripts/font-fallback.ts` yeniden koşulur. Prova şekli `kuru_sekil.json`
+>   ve tema testi yeni katmanlara göre yeniden yazılır.
+
+### Sanat yönetimi — "The Paper Theatre"
+
+- **Signature.** The whole site is the couple's opening-night **souvenir programme** at an imaginary Belle Époque opera
+  house. Closed, it glows in a pool of light in the darkened auditorium, the names printed on its gilded proscenium cover.
+  The guest pulls its little silk tab: the house lights dim, the cover swings open on its corded spine, and a hand-coloured
+  **Victorian paper theatre pops up out of the page** layer by layer — painted garden backdrop, leafy wing flats, gilded
+  proscenium with footlights — the footlights warm, the little painted garnet curtain parts, and a painted ribbon banner
+  flies in on two gold cords carrying the couple's names.
+- **The stage carries the site.** Home = the same paper theatre, now with the couple's portrait as the scene. Story = three
+  "Acts" with a real scene change: the paper curtain sweeps closed, the photo changes, it opens again. Details = the
+  playbill's "Order of the Evening" with little engraved vignettes, the venue seen from inside a gilded theatre box. RSVP =
+  "Reserve your seat", and a curtain call when it is sent (an ivory rose lands on the card, gold-leaf confetti, applause).
+- **Two material worlds, never mixed up.** Everything the guest holds is **paper**: thick warm ivory cotton card,
+  hand-coloured engraving (fine sepia-black etched lines, soft watercolour and gouache tints), real raised burnished gold
+  leaf, die-cut edges with visible card thickness — the stage curtains are **painted card, not fabric**. The theatre around it
+  is **photographed for real**: the dark peacock auditorium, peacock silk damask, carved gilt, antique brass, an ivory rose.
+- **Colour.** pit `#061416` · velvet `#0E3D40` · peacock `#16595B` · garnet `#6E1A28` (sparingly: paper curtains, swags,
+  ribbon, buttons) · antique gold `#C9A45C` (gilt highlight `#E8CF95`) · ivory card `#F3EBD8` · sepia ink `#2B211C`.
+- **Not 21/22/23, not the others.** 21 owns oxblood velvet, red roses, torn paper, the gold oval frame, envelope + wax seal and
+  Didone type; 22 the moon, the night lake, mountains; 23 the jewel box, pearls, gems, rose gold, satin. Also off-limits:
+  Art Deco geometry and fans, gatefold doors (06), tickets, luggage and ticket punches (25 — this redesign drops the old ticket
+  stub), doors and lanterns (27), stars and constellations (29), music box and mirror (32), Art Nouveau whiplash (37), film
+  strips, photo booths, cinema marquee bulbs (39, 47). 24 has no envelope, no seal, no velvet drapes as decoration, no red
+  roses (one ivory rose only), no oval.
+- **Type (Google Fonts; no other design uses them — verified 2026-10-24, HTTP 200, latin + latin-ext).** *Elsie Swash Caps*
+  900 — the names and the big titles (a Victorian theatre-bill fat face with curly swash capitals, ≥ 28 px); *Elsie* 400/900 —
+  headings, countdown numerals; *Fanwood Text* + italic — body, captions and widely letter-spaced capitals for dates, labels,
+  buttons. Replaces Abril Fatface + Playfair Display.
+- **Motion (Claude builds it; GPT designs for it).** Pull-tab slides out → cover swings open in 3D onto its marbled endpaper →
+  flats stand up from the page back to front with a small overshoot → footlights warm, a spotlight finds centre stage (CSS
+  light) → paper curtains slide apart and gather → banner flies in and bounces on its cords → gold-leaf confetti → home. Home:
+  layered parallax of the flats on scroll; story: curtain scene change between Acts; details: each programme row "lit" in turn
+  as by a follow-spot; RSVP: curtain call.
+- **Sound (Claude synthesises them, `tools/audio_fx.py`; silent until the first tap).** (1) pull-tab: stiff card sliding out of
+  a paper slot + a flick of silk ribbon; (2) cover: a heavy card cover swinging open (air push, soft card landing); (3) pop-up:
+  three stiff card flats snapping upright one after another, each a little higher; (4) house lights down: a hushed orchestra
+  tuning A (oboe + strings), very low, 1.5 s; (5) curtain: card-on-card swish of the paper curtains + one warm string chord as
+  the stage appears; (6) curtain call (RSVP sent): short light applause made of many small hand claps + the rose landing.
+
+**Instructions for GPT (send before the first image):**
+```
+You are the art director, scene painter and still-life photographer of a luxury wedding stationery house, designing the mobile wedding website "Grand Theatre Premiere" from scratch. Its signature: the whole website is the couple's opening-night souvenir programme at an imaginary Belle Époque opera house. The closed programme glows in the darkened auditorium; when the guest pulls its little silk tab, the cover swings open and a Victorian paper theatre pops up out of the page, layer by layer — a painted garden backdrop, leafy wing flats, a gilded proscenium with footlights — and its little painted curtain parts. Two material worlds, never mixed up: (1) everything the guest holds is PAPER — thick warm ivory cotton card (#F3EBD8), hand-coloured engraving (fine sepia-black #2B211C etched lines with soft watercolour and gouache tints), real raised and burnished gold leaf (#C9A45C, highlights #E8CF95), crisp die-cut edges with a visible card thickness; the stage curtains are painted card, never fabric; (2) the theatre around it is photographed for real — a dark peacock auditorium (#061416, #0E3D40, #16595B), peacock silk damask, carved water-gilded wood, antique brass, an ivory rose. Accent colour: garnet (#6E1A28), used sparingly. Never: envelopes or wax seals, velvet drapes as decoration, red roses, torn paper edges, oval frames, moons, lakes or night water, stars, jewels or pearls, Art Deco geometry or fans, doors, lanterns, trains, tickets, film strips, marquee light bulbs, comedy/tragedy masks. Everything must look made and photographed for real: rich, tactile, believable, magazine-quality luxury; never clip-art, never flat vector, never cheap stock. One soft warm light from the upper left in every image. It is an imaginary theatre: it must not resemble any real theatre, show, poster, brand, artist or another seller's design. First you draw a design board of five phone screens (W1); then, giving that board as the reference image of every image, you make the production parts (W2): one object per image, no cast or drop shadow, no glow or halo outside the object, no text, letters, numbers, monograms, logos or watermarks. A transparent background must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard), and the object must stay at least 5% inside every edge.
+```
+
+#### W1 — Tasarım panosu (5 telefon ekranı; demo metin serbest, YALNIZ referans)
+Kaydet (W1): `collections/24_Grand_Theatre_Premiere/assets/gpt/mockups/design-board.png` · yaklaşık 1908×824 (≈2,3:1; araç vermiyorsa 1536×1024, beş ekran tek sırada) · opak · kit_check dışı
+
+```
+Use case: ui-mockup. Create a high-fidelity art direction board of FIVE mobile wedding website screens for a new luxury design called "Grand Theatre Premiere", each screen in a 390 by 844 proportion, arranged side by side in one row with generous, even gaps on a soft warm ivory-grey studio background (the whole board about 2.3:1). The attached photographs (hero_portrait.jpg, story_2.jpg and venue.jpg) are ONLY the identity and styling reference for the fictional couple (she: shoulder-length wavy auburn hair, fair skin with light freckles, ivory satin gown; he: short dark-brown hair, a short neat beard, olive skin, black tuxedo) and for the venue; everything else is new. The five screens must look like one finished, coherent, best-selling premium product made by a top luxury stationery designer: rich, tactile, romantic, classic and bold; never minimal, never flat vector, never clip-art.
+
+THE CONCEPT — "The Paper Theatre": the whole website is the couple's opening-night souvenir programme at an imaginary Belle Époque opera house. Everything the guest holds is PAPER: thick warm ivory cotton card (#F3EBD8), hand-coloured engraving (fine sepia-black etched lines with soft watercolour and gouache tints) and real raised, burnished gold leaf (#C9A45C), with crisp die-cut edges and a visible card thickness; the little stage curtains are painted card, not fabric. The theatre around it is photographed for real: the darkened auditorium in deep peacock teal and near-black (#061416, #0E3D40, #16595B), peacock silk damask, carved gilt, antique brass. Accent colour garnet (#6E1A28), used sparingly. NO envelope, no wax seal, no velvet drapes as decoration, no red roses, no torn paper, no oval frames, no moon, no lake, no stars, no jewels, no Art Deco, no tickets, no film strips, no light bulbs, no theatre masks.
+
+TYPOGRAPHY: the couple's names and the big headings in a Victorian theatre-bill fat face with curly swash capitals and round ball terminals — heavy, high-contrast, romantic, like the title line of an 1890s playbill (not a plain Bodoni, not Art Deco, not a script); dates, labels and buttons in widely letter-spaced old-style capitals; body text in a refined French old-style serif with elegant italics. Gold and ivory type on the dark auditorium; sepia-black and garnet type on ivory paper.
+
+Screen 1 — the opening (the closed programme): full-bleed, the darkened auditorium of the opera house a minute before the curtain: deep peacock-teal darkness, the curved gilded fronts of the box tiers softly out of focus, a few warm amber wall lamps glowing low near the top. At the top, tiny spaced gold capitals "YOU ARE INVITED TO OPENING NIGHT". In the middle, lit by a soft pool of warm light, the CLOSED souvenir programme, a tall 2:3 booklet seen perfectly straight on, about 78% of the screen width: a thick ivory cotton-card cover decorated as a hand-coloured engraving with raised gold leaf — a gilded proscenium-arch border (slender gilt columns up both sides, an arched crown with a small empty cartouche at its top, two little painted garnet curtain swags tied back in the upper corners, a tiny painted stage lip with a row of gilt footlights along the bottom); the booklet is bound at its left spine with a garnet silk cord laced through three small brass eyelets. Printed in sepia ink in the empty centre of the cover: "TOGETHER WITH THEIR FAMILIES", the names large on two lines "Charlotte" and "& Theodore", "request the pleasure of your company", "OCTOBER 16, 2027 · RICHMOND". From the middle of the programme's right edge a small ivory pull-tab with a gilt edge sticks out, a short loop of garnet silk ribbon threaded through its end. At the bottom "TAP TO RAISE THE CURTAIN" in tiny spaced capitals.
+
+Screen 2 — home: the same programme now OPEN: a Victorian paper theatre has popped up out of its page, seen straight on, filling the top 55% of the screen: layered die-cut hand-coloured card flats with visible paper edges and real depth between them — a gilded proscenium with a painted garnet swagged valance and a small empty cartouche on its crown, slim leafy painted wing flats at both sides, the little garnet paper curtains drawn open to the sides, and on the stage, as the scene, the couple's portrait (from the attached hero_portrait.jpg); along the stage lip a row of small footlights glowing warm. A painted ivory ribbon banner with swallowtail ends hangs on two thin gold cords across the top of the arch, with "Charlotte & Theodore" on it. Below, on the dark auditorium: "SATURDAY, OCTOBER 16, 2027" and "THE LARKMONT GRAND THEATRE · RICHMOND, VIRGINIA" in spaced capitals; then the top of a tall ivory programme page (a fine double gilt rule down its sides, a tiny engraved gilt proscenium vignette at its head) with "request the pleasure of your company at their wedding" in italic, a countdown of four plain numerals in the fat face with small spaced labels "357 DAYS · 06 HOURS · 42 MINUTES · 18 SECONDS" (no boxes, no tiles), and a garnet pill button "Reserve your seat".
+
+Screen 3 — story: a deep peacock silk damask page (tone-on-tone, quiet). At the top small spaced gold capitals "THE STORY SO FAR" and the heading "Our Story" in the fat face in ivory. In the middle a smaller paper theatre (the same gilded proscenium and garnet paper curtains) caught in the middle of a SCENE CHANGE: the left paper curtain is sweeping closed across a third of the stage while the right one is still open, and the scene on stage is the couple's photograph — the proposal at intermission (from the attached story_2.jpg). Under it "ACT II" in the fat face and the italic caption "The proposal at intermission"; a row of three small ivory programme tabs "ACT I · ACT II · ACT III" with ACT II in garnet, and two fine arrow buttons; two or three flakes of gold-leaf confetti drifting.
+
+Screen 4 — details: warm ivory programme paper (the inside of the programme). The heading "The Programme" in the fat face in sepia-black, "SATURDAY, OCTOBER 16, 2027" in spaced capitals, a fine gilt divider with a tiny gilded lyre at its centre. The order of the evening set like an 1890s playbill: four rows, each with a small hand-engraved vignette icon in sepia ink with touches of gold leaf at the left (two interlocked rings · two champagne coupes · a dinner plate with knife and fork · a violin with its bow), the time in spaced capitals, the event in the fat face and the room in italic: "5:00 PM · The Ceremony · On the main stage", "6:00 PM · Champagne in the Grand Foyer · The mirrored foyer", "7:15 PM · Dinner in the Stalls · The auditorium", "9:00 PM · First Dance & Encore · On the main stage"; a small engraved vignette of a top hat and gloves with "DRESS CODE · Black tie optional". Then the venue photograph (from the attached venue.jpg) seen FROM INSIDE A THEATRE BOX: the box's peacock silk damask curtains tied back with gold tassels at both sides, a carved gilt canopy above, and the padded peacock velvet elbow rail on its gilded parapet across the bottom in the foreground; under it "THE LARKMONT GRAND THEATRE · RICHMOND, VIRGINIA" and an outlined garnet button "View map".
+
+Screen 5 — RSVP: the dark auditorium, dimmed. A tall ivory programme page fills most of the screen (an engraved gilt proscenium vignette with a tiny garnet swag at its head, a fine double gilt rule down its sides): the heading "Kindly Reply" in the fat face, the italic line "Reserve your seat by September 1, 2027", then a real, readable form in sepia ink: "Your name" on a fine gilt underline, "Will you join us?" with two round options "Joyfully accepts" and "Regretfully declines", "Number of guests" as a select showing "2", "Your dinner choice" as a select showing "Beef tenderloin", and a full-width garnet button "Reserve my seat" with ivory text. Lying across the bottom edge of the card, as if just thrown at a curtain call, a single long-stemmed ivory rose tied with a short garnet ribbon, and at the lower right a pair of antique brass and mother-of-pearl opera glasses on a long handle; a few flakes of gold-leaf confetti.
+
+All five screens share one world (the same ivory card, gold leaf, garnet, peacock darkness and light) but each has its own composition — not all centred. Use exactly this English sample text and no other words. Photos show the fictional adult couple only, natural and tasteful, not resembling any real or famous person. No device frames or bezels, no hands, no laptop, no marketing collage, no logos, no watermarks, no captions outside the screens. This is a design reference board, not a final website.
+```
+Kontrol: 5 ekran yan yana, her biri ~390:844; 1. ekranda kapalı, sırtı kordonlu, varaklı proscenium kapaklı program + sağ
+kenarda çekme dili; 2. ekranda katmanlı açılır kâğıt tiyatro (arka resim/kanat/proscenium ayrı seçiliyor), sahnede çiftin
+portresi, isimli bayrak bandı; 3. ekranda yarı kapanmış kâğıt perde (sahne değişimi); 4. ekranda playbill programı + 4 gravür
+ikon + locadan mekân; 5. ekranda okunur form, fildişi gül + opera dürbünü; zarf/mühür/kadife drape/kırmızı gül/ay/yıldız/
+bilet/deco yok. Başlık harfi kıvrık kuyruklu Viktorya fat face (düz Bodoni değil). Metindeki küçük harf bozuklukları kabul
+(yalnız referans). Beğenilmezse yeniden üret (en çok 3 deneme); W2 bu panodan türer.
+Kullanım: Claude'un yerleşim, tipografi ölçeği ve renk referansı; programın ekran genişliğine oranı, bayrak bandı ve tiyatronun
+home'daki yeri buradan ölçülür.
+
+### W2 — Parçalar (panodan türer; HER parçada `design-board.png` referans görsel; YAZI YOK)
+
+Ortak kurallar: tek görselde tek nesne · şeffaflar gerçek alfa · zemine düşen gölge yok · nesnenin dışında ışıma/hâle/ışın yok
+(ayak lambası ışığını, spotu, salon ışığının kısılmasını site CSS ile ekler) · ışık sol üstten · oran önemli, piksel değil ·
+yaprak, saçak, lamba **sayısı** önemli değil, sayı için yeniden üretme.
+
+**Program tuvali (W2.1–W2.9, hepsi 1024×1536, aynı konum):** program kutusu x %12–88 · y %12–88 (2:3, sırt solda x %12,
+menteşe katı x ≈%14). Kâğıt tiyatro sayfanın içinde durur: proscenium x %14–86 · y %15–86; sahne açıklığı x %27–73 ·
+y %28–70 (valans en çok %33'e iner); perdeler x %26–51 ve %49–74 · y %27–70; arka resim x %22–78 · y %24–72; kanatlar
+x %22–35 ve %65–78 · y %26–71. Önce W2.1'i üret; W2.2–W2.4'ü **W2.1'i düzenleyerek**, W2.6–W2.9'u **W2.5'i düzenleyerek**
+(image edit) üret; araç düzenleme yapamıyorsa referans ver ve kutuyu aynı piksellerde tut.
+
+#### W2.1 Kapalı program — ön kapak (çekme dili OLMADAN)
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/prog_cover.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+Production asset for the "Grand Theatre Premiere" wedding website (give design-board.png as the style reference), matching the closed programme on screen 1 of the attached design board. ONE closed souvenir theatre programme (a tall booklet), alone, seen perfectly straight from the front, no perspective, no tilt. Placement on the canvas, exactly: its left edge at 12% and its right edge at 88% of the image width, its top edge at 12% and its bottom edge at 88% of the image height (a 2:3 booklet). The cover is thick warm ivory cotton card (#F3EBD8) with crisp die-cut edges, a hair-thin gilt edge all round and a visible card thickness along the right fore-edge and the bottom edge. It is decorated as a hand-coloured engraving with real raised, burnished gold leaf (#C9A45C, highlights #E8CF95): a gilded proscenium-arch border runs around the cover — two slender fluted gilt columns up the left and right sides, an arched crown across the top with a small EMPTY gilt cartouche at its centre, two small painted garnet (#6E1A28) curtain swags tied back with tiny gold tassels in the two upper corners, and along the bottom a narrow painted stage lip with a row of tiny unlit gilt footlight shells. Fine sepia-black (#2B211C) engraved lines and cross-hatching give the ornament its depth; the colours are soft watercolour tints. The large central field, from 22% to 78% of the canvas width and from 27% to 74% of the canvas height, is COMPLETELY EMPTY smooth ivory card (the website prints the names and the date there as live text): no ornament, no line, no stain, no shading change. Along the left edge the booklet is bound at its spine with a garnet silk cord laced through three small brass eyelets, and one crisp fold line runs parallel to the spine about 3% of the booklet's width in from it (the cover's hinge — it must read clearly). Nothing sticks out of the booklet (the pull-tab is a separate image). One soft warm light from the upper left. No cast shadow or drop shadow, no glow or halo outside the booklet. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: kutu x %12–88 · y %12–88 (±%2); orta alan (x %22–78 · y %27–74) tamamen boş; proscenium çerçevesi, köşelerde garnet swag, altta minik ayak lambaları; sırtta kordon + 3 kuşgözü, menteşe katı net; dışarı taşan dil yok; gerçek alfa.
+Kullanım: index'in kapalı programı; isimler/tarih orta alanda canlı metin, kapakla aynı 3B sarmalayıcıda döner; kapak `rotateY 0→-90°` (origin menteşe katı); og görselinin ana nesnesi; kartuşa istenirse `initials` canlı metin olarak konur.
+
+#### W2.2 İç sayfa — sahnenin durduğu sayfa (aynı tuval)
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/prog_page.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+The first inside page of the SAME programme as the attached prog_cover.png (give prog_cover.png and design-board.png as the reference images, and edit prog_cover.png if the tool allows): the same 1024×1536 canvas, the same box — its left, right, top and bottom edges on exactly the same pixels (x 12–88%, y 12–88%) — now seen with the cover gone. A plain page of the same thick warm ivory cotton card with a hair-thin gilt edge and a fine double gilt rule inset about 4% from its edges; along the left edge the same garnet silk cord through the same three small brass eyelets, and a soft natural gutter shade on the paper itself next to the spine. Otherwise the page is completely empty and calm: no ornament, no illustration, no stain. Seen perfectly straight from the front. One soft warm light from the upper left. No cast shadow or drop shadow, no glow outside the page. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: prog_cover.png'nin üstüne %50 saydam konunca dört kenar çakışıyor (gözle kayma yok); sayfa boş; kordon ve kuşgözleri aynı yerde; gerçek alfa.
+Kullanım: kapak açılınca görünen taban; kâğıt tiyatro katmanları bunun üstünde kalkar; home hero'nun alt katmanı.
+
+#### W2.3 Kapağın içi — mermerli forza (aynı tuval, menteşe SAĞDA)
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/prog_cover_in.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+The INSIDE of the same programme cover as the attached prog_cover.png, as seen when the cover has swung open to the left (give prog_cover.png and design-board.png as the reference images): the same 1024×1536 canvas and exactly the same outer box (x 12–88%, y 12–88%), but mirrored left-to-right — the hinge edge with the three brass eyelets, the garnet cord and the crisp fold line now runs along the RIGHT edge (at 88%), and the free edge with the card's visible thickness is on the left. The inside of the cover is lined with a classic hand-marbled endpaper — fine combed "peacock" marbling in peacock teal (#16595B), deep teal (#0E3D40), garnet (#6E1A28) and soft gold veins — set inside a narrow ivory card margin about 4% wide all round, the margin finished with a hair-thin gilt line. Seen perfectly straight from the front. One soft warm light from the upper left. No cast shadow or drop shadow, no glow outside the cover. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: dış kutu prog_cover ile aynı boyda; menteşe (kuşgözleri, kat çizgisi) sağ kenarda; mermer desen fildişi kenar payının içinde; gerçek alfa.
+Kullanım: kapak 90°'yi geçince devralan iç yüz (`rotateY 90°→0`, origin sağ kenar), sonra kapak sola ekrandan çıkar.
+
+#### W2.4 Çekme dili (aynı tuval)
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/prog_pulltab.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+Only the small pull-tab of the programme, alone, drawn exactly where it sits on the attached prog_cover.png — the same 1024×1536 canvas, the same scale and the same straight front view (edit prog_cover.png and remove the booklet, keeping only the tab). A narrow horizontal tab of the same thick ivory card with a hair-thin gilt edge, drawn complete: it spans from 83% to 94% of the image width and from 47% to 52.5% of the image height (its left part, up to 88%, is the part that sits hidden under the cover), its left end straight, its right end rounded, with a small brass eyelet near the rounded end through which a short loop of garnet silk ribbon (#6E1A28) is threaded, the loop hanging down to about 58% of the image height. Without the booklet: everything except the tab and its ribbon is fully transparent. One soft warm light from the upper left. No cast shadow or drop shadow, no glow outside the tab. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: yalnız dil + kurdele halkası; prog_cover.png'nin üstüne konunca sağ kenarın ortasından dışarı çıkıyor; program çizilmemiş; gerçek alfa.
+Kullanım: kapağın altında (katman sırası); dokununca (≤ 250 ms) sağa kayıp çıkar, kurdele sallanır, düşer → kapak açılır. Sürükleyerek de çekilebilir.
+
+#### W2.5 Kâğıt tiyatro — proscenium (ön katman, açıklık şeffaf)
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/flat_proscenium.png` · 1024×1536 · **Şeffaf zemin** · açıklık şeffaf
+
+```
+Production asset for the "Grand Theatre Premiere" wedding website (give design-board.png and prog_page.png as the reference images), matching the gilded proscenium of the paper theatre on screen 2 of the attached design board. ONE front flat of a Victorian paper theatre, alone, standing upright and seen perfectly straight from the front: a die-cut piece of thick ivory card, hand-coloured as an engraving with real raised, burnished gold leaf, its outline cut along the ornament with a visible thin card edge. Placement on the 1024×1536 canvas, exactly: the whole flat spans from 14% to 86% of the image width and from 15% to 86% of the image height (it stands inside the page of prog_page.png). Its parts: an arched crown across the top (from 15% to 28%) of carved gilt scrolls with a small EMPTY gilt cartouche at the top centre; two broad gilt pilasters with painted peacock-teal marble panels down the left side (14–27%) and the right side (73–86%); between them the stage opening, from 27% to 73% of the width and from 28% to 70% of the height, which is COMPLETELY TRANSPARENT (a real hole in the alpha channel, nothing inside it); across the top of the opening a painted garnet (#6E1A28) swagged valance with a painted gold fringe, its lowest point no lower than 33% of the image height; below the opening, from 70% to 79%, the front of the stage — a gilded moulded stage lip set with a row of small unlit brass footlight shells (half-domes opening upward); from 79% to 86% a painted base with a garnet panel and a gilt moulding. The ring of crown, pilasters and stage lip is closed all the way round the opening. No curtains, no backdrop, no scenery inside the opening (those are separate images). Fine sepia-black (#2B211C) engraved lines and cross-hatching, soft watercolour tints. One soft warm light from the upper left. No cast shadow or drop shadow, no glow or halo outside the flat, no light from the footlights. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: x %14–86 · y %15–86; açıklık (x %27–73 · y %28–70) tamamen şeffaf ve halka kapalı; valans ≤ %33; ayak lambaları sönük; kartuş boş; içinde perde/resim yok; kesik kâğıt kenarı görünüyor; gerçek alfa.
+Kullanım: tiyatronun ön katmanı (açılışta en son kalkar); home hero'da çiftin portresi açıklığın içinde (maske = açıklık − valans, ≈4:5); story'de sahne değişimi çerçevesi; ayak lambası kapçıklarında CSS sıcak ışık.
+
+#### W2.6 Kâğıt perde — sol yarı (aynı tuval)
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/flat_curtain_l.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+Only the LEFT half of the little house curtain of the same paper theatre, alone, drawn exactly where it hangs in the attached flat_proscenium.png — the same 1024×1536 canvas, the same scale and the same straight front view (edit flat_proscenium.png: remove the proscenium and draw only the left curtain that hangs behind it). A die-cut piece of thick card hand-painted as a heavy garnet stage curtain (#6E1A28 with deeper #3A0C14 folds and warm highlights on the fold crests) — painted in gouache and watercolour over fine engraved hatching, clearly PAINTED CARD, not real fabric — with a painted gold fringe along its bottom edge. It hangs inside the left half of the opening: from 26% to 51% of the image width and from 27% of the image height (its top hidden behind the valance) down to the stage floor at 70%; its outer left edge is straight and vertical, its inner right edge is a softly wavy fold line showing a thin ivory cut edge of the card, so it reads as cut paper. No tie-back, no cord, no tassel. Everything else fully transparent. One soft warm light from the upper left. No cast shadow or drop shadow, no glow outside the curtain. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: x %26–51 · y %27–70; flat_proscenium.png'nin altına konunca dış kenarı sol pilastrın arkasında, üstü valansın arkasında; boyalı kâğıt (kumaş değil); iç kenarda fildişi kesik kenar; gerçek alfa.
+Kullanım: proscenium'un arkasında; açılışta dışa doğru kayıp toplanır (`translateX` + `scaleX` .55, origin dış kenar); story'de sahne değişiminde kapanıp açılır.
+
+#### W2.7 Kâğıt perde — sağ yarı (aynı tuval)
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/flat_curtain_r.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+Only the RIGHT half of the little house curtain of the same paper theatre, the mirror twin of the attached flat_curtain_l.png, drawn exactly where it hangs in the attached flat_proscenium.png — the same 1024×1536 canvas, scale and straight front view (edit flat_proscenium.png: remove the proscenium and draw only the right curtain). The same die-cut card hand-painted as a heavy garnet stage curtain (#6E1A28, deeper #3A0C14 folds), the same painted gold fringe along the bottom; it hangs from 49% to 74% of the image width and from 27% down to 70% of the image height; its outer right edge straight and vertical, its inner left edge a softly wavy fold line with a thin ivory cut edge, overlapping the left curtain by about 1%. The light still falls from the upper left (not mirrored). No tie-back, no cord, no tassel. Everything else fully transparent. No cast shadow or drop shadow, no glow outside the curtain. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: x %49–74 · y %27–70; sol perdenin ikizi; ışık yine sol üstten; iç kenarda fildişi kesik kenar; gerçek alfa.
+Kullanım: sol perdeyle aynı (sağa açılır; sol perdeden 120 ms sonra).
+
+#### W2.8 Kâğıt tiyatro — boyalı arka resim (aynı tuval)
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/flat_backdrop.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+Only the painted backdrop at the back of the same paper theatre, alone, drawn exactly where it hangs behind the attached flat_proscenium.png — the same 1024×1536 canvas, scale and straight front view (edit flat_proscenium.png: remove the proscenium and draw only the backdrop behind it). A flat rectangle of hand-painted card with straight edges and a hair-thin gilt edge line, spanning from 22% to 78% of the image width and from 24% to 72% of the image height (larger than the stage opening, so no gap shows at its sides). Painted in the manner of a Victorian scene painter's backdrop, gouache and watercolour over fine engraved lines: a romantic formal garden at golden hour — a small classical rotunda (a round temple with slender columns and a shallow dome) on a gentle rise in the middle distance, a tiered stone fountain in front of it, tall plane trees and clipped yew hedges framing both sides, a warm apricot-and-rose sky with soft clouds. The middle third is calm and soft. NO moon, no stars, no lake, no sea, no mountains, no people, no flowers in the foreground, no other buildings. Everything outside the rectangle is fully transparent. One soft warm light from the upper left. No cast shadow or drop shadow, no glow outside the backdrop. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: dikdörtgen x %22–78 · y %24–72, açıklığın tamamını örtüyor; altın saatte bahçe + rotunda + çeşme; ay/göl/yıldız/insan yok; gerçek alfa.
+Kullanım: tiyatronun en arka katmanı (açılışta ilk kalkar); perde açılınca görünen sahne; home'da portre yokken yer tutucu sahne.
+
+#### W2.9 Kâğıt tiyatro — yapraklı kanatlar ("cut cloth", aynı tuval)
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/flat_wings.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+Only the scenery wings of the same paper theatre, alone, drawn exactly where they stand behind the attached flat_proscenium.png — the same 1024×1536 canvas, scale and straight front view (edit flat_proscenium.png: remove the proscenium and draw only the wings). ONE die-cut piece of hand-painted card, a "cut cloth" in the style of a Victorian paper theatre: a tall wing of painted garden foliage on the left (from 22% to 35% of the image width) and a matching one on the right (from 65% to 78%), each a column of leafy plane-tree branches and ivy with a small stone urn on a plinth at its foot, standing from 26% down to 71% of the image height, the two joined across the top by a narrow painted border of overhanging leafy branches from 26% to 31%. The card is die-cut along the outlines of the leaves (an irregular leafy cut edge with a visible thin card edge). Everything between 35% and 65% of the width below 31% of the height is COMPLETELY TRANSPARENT. Painted in gouache and watercolour over fine engraved lines, in warm greens, olive and soft gold, matching flat_backdrop.png. No flowers, no people. One soft warm light from the upper left. No cast shadow or drop shadow, no glow outside the card. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: iki kanat (x %22–35 ve %65–78) üstte ince yaprak bordürle bağlı tek parça; orta tamamen şeffaf; yaprak kenarından kesik kâğıt; gerçek alfa.
+Kullanım: arka resimle proscenium arasındaki orta katman (açılışta ikinci kalkar); home'da kaydırmayla en çok kayan katman (derinlik).
+
+#### W2.10 Bayrak bandı — isimlerin "uçarak" geldiği boyalı kurdele
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/title_banner.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+Production asset for the "Grand Theatre Premiere" wedding website (give design-board.png as the style reference), matching the ribbon banner with the names on screen 2 of the attached design board. ONE hand-painted paper banderole (a ribbon banner) of the paper theatre, alone, seen straight from the front: die-cut ivory card (#F3EBD8) painted with soft shading, a hair-thin gilt edge line along its long top and bottom edges. Its long front face is STRAIGHT and level and spans from about 10% to 90% of the image width, from 42% to 64% of the image height; at each end the ribbon folds back once and ends in a swallowtail, showing a little of its garnet-tinted (#6E1A28) reverse. Two thin twisted gold cords rise straight up from the two top corners of the front face to small brass rings at about 14% of the image height. The front face is COMPLETELY EMPTY (the website writes the names there as live text): no ornament, no line, no stain. Everything else fully transparent. One soft warm light from the upper left. No cast shadow or drop shadow, no glow outside the banner. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: ön yüz düz, yatay, boş; uçlar kırlangıç kuyruğu + garnet ters yüz; iki ip yukarıda halkalarla bitiyor, kenara değmiyor; gerçek alfa.
+Kullanım: açılışta perde açılınca yukarıdan iniş + iplerinde sekme (isimler canlı metin); home'da proscenium tepesinin önünde asılı.
+
+#### W2.11 Karanlık salon — telefon zemini
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/house_lights.png` · 1024×1536 · opak
+
+```
+Production background for the "Grand Theatre Premiere" wedding website (give design-board.png as the style reference), matching the dark auditorium behind screens 1 and 5 of the attached design board. A full-frame vertical (2:3) photograph, edge to edge, of the auditorium of an imaginary Belle Époque opera house a minute before the curtain rises, seen from the stalls looking toward the back and up: deep peacock-teal and near-black darkness (#061416 to #0E3D40), the curved fronts of three tiers of boxes softly out of focus with their antique-gold (#C9A45C) gilded mouldings just catching the light, small warm amber wall lamps on the tiers dimmed low and blurred into soft round points of light, the faint glint of a large crystal chandelier near the top edge. The middle of the frame, from 20% to 80% of the height, is calm and dark with no bright points, so an ivory programme and light text can sit on it; the brightest lamps are only in the upper fifth and toward the sides. Keep every important detail within the middle 85% of the width. Rich, moody, luxurious, true-to-life low-light photography with a subtle film grain. No people, no stage, no curtains, no seats in the foreground, no signs, no text, letters, numbers, logos or watermarks.
+```
+Kontrol: tam opak; orta %60 sakin ve karanlık (parlak nokta yok); loca katları ve lambalar yalnız üstte/yanlarda; perde/insan/yazı yok.
+Kullanım: index ve RSVP zemini; açılışta "salon ışığı kısılır" (CSS `brightness` + vinyet); home hero'nun arka planı.
+
+#### W2.12 Karanlık salon — geniş ekran
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/house_lights_wide.png` · 1536×1024 · opak
+
+```
+The same darkened auditorium as house_lights.png (give house_lights.png and design-board.png as the reference images), now a full-frame horizontal (3:2) photograph, edge to edge: the same deep peacock-teal and near-black darkness, the same curved gilded fronts of the box tiers softly out of focus, the same dimmed warm amber wall lamps blurred into soft points of light, the faint chandelier glint near the top. The middle half of the width and the middle of the height are calm and dark with no bright points. Same colours, light and film grain. No people, no stage, no curtains, no foreground seats, no signs, no text, letters, numbers, logos or watermarks.
+```
+Kontrol: house_lights ile aynı salon, renk ve ışık; orta yarı sakin; opak.
+Kullanım: 700 px ve üstü ekranlarda house_lights'ın yerine (index, home hero, RSVP).
+
+#### W2.13 Tavus mavisi ipek şam — dikişsiz doku
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/house_damask.png` · 1024×1024 · opak
+
+```
+Production texture for the "Grand Theatre Premiere" wedding website (give design-board.png as the style reference), the damask of the story page of the attached design board. A seamless, tileable square texture of peacock silk damask wall covering, seen perfectly flat and straight on: a classic symmetrical tone-on-tone damask of scrolling acanthus and palmettes (generic, not a copy of any historic or commercial pattern), the satin figure in peacock #16595B on a deep teal ground #0E3D40, very LOW contrast, about three motifs across the square. Perfectly even lighting: no vignette, no gradient, no hotspot, no folds, no seams, so that four copies placed side by side join invisibly (the left edge continues the right edge, the top edge continues the bottom edge). No gold, no objects, no text, letters, numbers, logos or watermarks.
+```
+Kontrol: düşük kontrast, eşit ışık; 2×2 dizince dikiş görünmüyor (Claude dizip bakar; küçük dikişi ofsetle kendisi giderir — yalnız bunun için yeniden üretme); opak.
+Kullanım: story sayfası ve home'daki koyu bantların zemini (`background-repeat`), üstünde CSS spot ışığı.
+
+#### W2.14 Fildişi program kâğıdı — dikişsiz doku
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/playbill_paper.png` · 1024×1024 · opak
+
+```
+Production texture for the "Grand Theatre Premiere" wedding website (give design-board.png as the style reference), the ivory paper of the details page of the attached design board. A seamless, tileable square texture of thick warm ivory cotton paper (#F3EBD8) seen perfectly flat and straight on: a fine soft felted tooth, the faintest natural cloudiness, a very few tiny flecks of gold leaf (no more than six over the whole square). Perfectly even lighting: no vignette, no gradient, no hotspot, no fold, no stain, no border, no printed pattern, calm enough for small dark text everywhere; four copies placed side by side join invisibly. No text, letters, numbers, logos or watermarks.
+```
+Kontrol: sıcak fildişi, sakin; altın pul çok seyrek; 2×2 dikişsiz; opak.
+Kullanım: details sayfası ve home'daki açık bantların zemini (`background-repeat`).
+
+#### W2.15 Program sayfası kartı (3 dilim: üst süs · tekrarlanan orta · alt süs)
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/playbill_card.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+Production asset for the "Grand Theatre Premiere" wedding website (give design-board.png as the style reference), matching the tall ivory programme page of screens 2 and 5 of the attached design board. ONE tall page of the souvenir programme, alone, portrait 2:3, seen perfectly straight from the front, filling about 84% of the image width and 90% of the image height, centred: thick warm ivory cotton card (#F3EBD8) with crisp die-cut edges and a hair-thin gilt edge all round. It is designed so the website can cut it into three horizontal slices and stretch the middle one. TOP band (the top 18% of the card): a small centred hand-coloured engraved vignette with raised gold leaf — a tiny gilded proscenium arch with a little painted garnet (#6E1A28) curtain swag and an empty cartouche — flanked by two fine gilt rules ending in tiny acanthus curls. MIDDLE band (from 18% to 86% of the card's height): plain ivory card with ONLY a fine double gilt rule running straight down each side, parallel to the edges, exactly the same at every height, nothing else; the left and right edges perfectly straight and vertical. BOTTOM band (the last 14%): the double rules turn the corners and close, with a small centred engraved gilt row of three tiny footlight shells above the bottom rule. No form fields, no photo window. One soft warm light from the upper left. No cast shadow or drop shadow, no glow outside the card. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: orta bantta yalnız iki yandaki düz çift çizgi (yükseklik boyunca aynı, tekrarlanabilir); üstte küçük proscenium vinyeti, altta üç minik ayak lambası; yan kenarlar dik; gerçek alfa.
+Kullanım: home davet kartı, details programı ve G138 blokları (travel, dress code, registry, SSS), RSVP formu; Claude üst · orta · alt diye keser, ortayı içeriğe göre uzatır.
+
+#### W2.16 Loca çerçevesi — mekân "en iyi koltuktan" (pencere şeffaf)
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/frame_loge.png` · 1536×1024 · **Şeffaf zemin** · pencere şeffaf
+
+```
+Production asset for the "Grand Theatre Premiere" wedding website (give design-board.png as the style reference), matching the frame around the venue photograph on screen 4 of the attached design board. ONE photo frame made of the inside of a private theatre box (a loge), as if the photo were the view out of the box, seen perfectly straight from the front and photographed for real: across the bottom, the box's parapet — a padded peacock velvet elbow rail (#16595B) with a fine gilt edge on top of a carved, water-gilded balustrade front (antique gold #C9A45C), together about 15% of the image height; at the left and the right, a peacock silk damask curtain gathered and tied back with a heavy gold silk tassel on a cord; across the top, a carved gilded canopy (pelmet) with a short peacock silk swag. Between them a clean rectangular opening of about 3:2, roughly from 18% to 82% of the image width and from 16% to 80% of the image height, which is COMPLETELY TRANSPARENT (a real hole in the alpha channel, nothing inside it); canopy, curtains and parapet meet at the corners so the frame is closed all the way round. The whole frame spans about 6–94% of the width and 6–94% of the height. One soft warm light from the upper left. No cast shadow or drop shadow, no glow or halo outside the frame. No people, no opera glasses, no text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: pencere ~3:2, tamamen şeffaf, çerçeve kesintisiz kapalı; altta kadife kol dayamalı varaklı korkuluk, yanlarda püsküllü ipek şam perde, üstte varaklı tente; gerçek alfa.
+Kullanım: details'te mekân fotoğrafı (`venue`); maske şeffaf açıklıktan; girişte perdeler CSS ile hafifçe yana kayar, fotoğrafta spot geçer.
+
+#### W2.17 Ayırıcı — varaklı lir
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/divider_lyre.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+Production asset for the "Grand Theatre Premiere" wedding website (give design-board.png as the style reference), matching the small dividers of the attached design board. ONE delicate horizontal divider in raised, burnished gold leaf, alone: at its exact centre a tiny gilded lyre (about 9% of the image height), and from it a hair-fine engraved gilt line running level to both sides, tapering into small acanthus curls at its ends; the whole divider about 72% of the image width, perfectly level in the vertical middle of the canvas. Very fine and elegant, a subtle real gold-leaf sheen. Nothing else, plenty of empty space above and below. One soft warm light from the upper left. No cast shadow or drop shadow, no glow. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: tek ince yatay çizgi + ortada küçük lir; uçlarda akantus kıvrımı; kenarlara değmiyor; gerçek alfa.
+Kullanım: başlık altları (home, story, details, rsvp); Claude dar şerit olarak kırpar; üstünden ışık süpürmesi.
+
+#### W2.18 Program ikonları — beş ayrı dosya (gravür vinyetleri)
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/icon_rings.png`, `icon_coupes.png`, `icon_dinner.png`, `icon_violin.png`, `icon_tophat.png` · her biri 1024×1024 · **Şeffaf zemin**
+
+```
+Production asset for the "Grand Theatre Premiere" wedding website (give design-board.png as the style reference), matching the small programme icons on screen 4 of the attached design board. ONE small hand-engraved vignette like the little cuts in an 1890s theatre playbill, alone: crisp sepia-black (#2B211C) engraved outlines of one even, fairly bold weight (about 2.5% of the image width), only a little fine hatching for volume, and a few small touches of real burnished gold leaf (#C9A45C) — simple and clearly readable when shown at 32–40 px, filling about 60% of the square, centred, perfectly straight. No paper behind it, no circle, frame or badge around it, no background shape. All five icons of this set share exactly the same line weight, ink colour, gold touches and style. One soft warm light from the upper left on the gold. No cast shadow, no glow. No text, letters, numbers or monogram. True transparent background PNG (a real alpha channel, not white, not a checkerboard). Make five separate images:
+icon_rings = two interlocked wedding rings
+icon_coupes = two champagne coupes touching at the rim
+icon_dinner = a round dinner plate seen from the front with a knife and a fork beside it
+icon_violin = a violin with its bow laid across it
+icon_tophat = a gentleman's top hat with a pair of evening gloves
+```
+Kontrol: beş dosya, her birinde tek ikon; hepsi aynı çizgi kalınlığı ve stilde; 40 px'te okunuyor; rozet/daire/kâğıt yok; gerçek alfa (Claude alfayı maske olarak kullanıp mürekkep rengini değiştirebilir).
+Kullanım: details programı (ceremony = rings, champagne = coupes, dinner = dinner, first dance & encore = violin), dress code = tophat; satırlar "takip spotu" ile sırayla aydınlanır.
+
+#### W2.19 Opera dürbünü (lorgnette)
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/lorgnette.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+Production asset for the "Grand Theatre Premiere" wedding website (give design-board.png as the style reference), matching the opera glasses on screen 5 of the attached design board. ONE pair of antique opera glasses on a long folding handle (a lorgnette), alone, photographed for real, lying slightly turned toward the viewer: two short barrels of warm antique gilt brass (#C9A45C toward deeper bronze) covered in mother-of-pearl, fine engraved bands, a slim brass bridge with a small focusing wheel, clear front lenses with only soft reflections, and a long slender brass handle with a mother-of-pearl inlay, the whole object laid on a gentle diagonal and filling about 72% of the square, centred. No case, no chain, no ribbon, no surface under it. One soft warm light from the upper left. No cast shadow or drop shadow, no glow or sparkle outside the object. No engraved letters, no text, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: tek opera dürbünü, uzun saplı; sedef + antik pirinç; yüzey/gölge yok; harf yok; gerçek alfa.
+Kullanım: home imzası ve RSVP kapanışı (yavaş salınım); teşekkür modunda da kalır.
+
+#### W2.20 Perde selamı — atılan gül ve varak konfeti (iki ayrı dosya)
+**Kaydet:** `collections/24_Grand_Theatre_Premiere/assets/gpt/parts/toss_rose.png`, `toss_confetto.png` · her biri 1024×1024 · **Şeffaf zemin**
+
+```
+Production asset for the "Grand Theatre Premiere" wedding website (give design-board.png as the style reference), matching the curtain-call rose and the drifting gold-leaf confetti of the attached design board. ONE single small object, alone, photographed for real, centred, not cropped, generous empty margin all round. One soft warm light from the upper left. Nothing else: no surface, no other objects, no dust, no sparkle. No cast shadow or drop shadow, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard). Make two separate images:
+toss_rose = one long-stemmed ivory garden rose (#F3EBD8, a faint warm blush deep in the petals) with two dark green leaves and a short garnet silk ribbon (#6E1A28) tied in a small knot round the stem, lying on a diagonal from lower left to upper right, filling about 80% of the diagonal
+toss_confetto = one small disc of genuine gold-leaf paper confetti (#C9A45C body, #E8CF95 highlights), very thin, slightly curled at one edge, catching the light, filling about 35% of the square
+```
+Kontrol: iki dosya, her birinde tek nesne; gül fildişi (kırmızı değil), kurdele garnet; konfeti tek pul; yüzey/parıltı yok; gerçek alfa.
+Kullanım: açılışın sonunda 6–8 konfeti (Claude döndürür/ölçekler); story'de 2–3 konfeti; RSVP gönderilince gül karta yay çizerek düşer + konfeti yağar (alkış sesiyle).
+
+### Instructions for GPT — iş sırası ve teslim (PAKET 8)
+
+```
+Work only on PAKET 8 of collections/24_Grand_Theatre_Premiere/assets/gpt/GPT_PROMPTS.md in the repository muzaffergrl/davetiye-maker (branch main). Ignore every other section of that file: PAKET 2, 3, 6R and 7 are done, PAKET 5R is the old look that this package replaces, and the note at the top of the file (page_ground / env_back / curtain_left as style references) does NOT apply to PAKET 8. Do NOT attach anything from collections/24_Grand_Theatre_Premiere/assets/gpt/parts/ that existed before this package (env_*, curtain_*, valance, ticket, rope, web_hero …) and nothing from platform/themes/; do not attach another design's board.
+
+1. ONE chat, in this order. Send the "Instructions for GPT (send before the first image)" message of PAKET 8 first. Then W1, the design board: attach collections/24_Grand_Theatre_Premiere/assets/gpt/photos/hero_portrait.jpg, story_2.jpg and venue.jpg as the identity reference of the couple and the venue only. The board is the design; if it is weak or misses its Kontrol line, make it again before going on (at most 3 tries). Commit and push the board as soon as it is chosen.
+2. Then W2, one image per prompt, in the order W2.1 to W2.20, in the same chat. Give the finished design-board.png as the reference image of EVERY W2 image. The programme canvas parts must line up: make W2.1 prog_cover first; make W2.2 prog_page, W2.3 prog_cover_in and W2.4 prog_pulltab by EDITING prog_cover.png (same 1024×1536 canvas, same box); give prog_page.png as a reference for W2.5 flat_proscenium; make W2.6 flat_curtain_l, W2.7 flat_curtain_r, W2.8 flat_backdrop and W2.9 flat_wings by EDITING flat_proscenium.png (same canvas). If your tool cannot edit, attach the base image as a reference and keep the box on the same pixels. Check by laying each one over its base at 50% opacity: the outline (or the opening) must sit in the same place at the same size; regenerate once if a shift is plainly visible and write any remaining difference in TESLIM.txt. For W2.12 also give house_lights.png.
+3. Use each English prompt exactly as written. One object per image. No text, letters, numbers, monograms, logos or watermarks in any W2 image (sample text is allowed on W1 only). In the two multi-image prompts (W2.18 icons, W2.20 rose and confetto) each listed line is its own image and its own file.
+4. Keep each image in the ratio of its Kaydet size: 1:1, 2:3 or 3:2 (W1 about 2.3:1). The pixel size may differ. Do not resize, crop, repaint or recolour any pixel with code — Claude crops thin bands and cuts the pieces.
+5. Photo windows (W2.5 the stage opening, W2.16 the loge window) are TRANSPARENT openings; a ring that closes all the way round them matters more than the opening itself. Never fill them with green, white or a picture.
+6. Counts (leaves, fringe strands, footlights, eyelets, damask motifs) do not matter; never regenerate for a count. Regenerate only for: a wrong object, text present, a cast/drop shadow or a glow outside the object, a fake background (white or checkerboard) instead of real alpha, an object touching the canvas edge, a wrong ratio, real fabric instead of painted card for the paper curtains, or a programme-canvas part that plainly does not line up with its base. At most 2 attempts per part; then keep the best one, note the defect and move on.
+7. Delivery: commit every PNG to the repository at exactly the path on its Kaydet line, with exactly that file name (the parts in collections/24_Grand_Theatre_Premiere/assets/gpt/parts/, the board at collections/24_Grand_Theatre_Premiere/assets/gpt/mockups/design-board.png). No zip, no Downloads folder, no other folder, nothing under platform/ or docs/, no new folder, no download names, no "_final", "_v2" or "(1)" suffixes; rejected tries are not committed. Save as PNG. Push to branch main; only if you cannot push to main, push a branch named codex/g24-paket8 and say so on the first line of TESLIM.txt. Run git pull --rebase origin main before each push. Push after W1, then after W2.4, W2.9, W2.14 and W2.20 ("24 PAKET 8: W1", "24 PAKET 8: W2 1/4", …) so nothing is lost if the chat breaks; the last commit is "24 PAKET 8: teslim". Touch no other file, write no code, do not run gpt_yerlestir.py or build_images.py.
+8. Finally write collections/24_Grand_Theatre_Premiere/assets/gpt/parts/TESLIM.txt in Turkish: branch and last commit; how many files were delivered (expected: the board + 25 parts); for every file the target size and the actual size, RGBA or RGB (real alpha channel or not), the number of attempts and every difference from its Kontrol line (be specific); the alignment results (prog_page, prog_cover_in and prog_pulltab against prog_cover; the two curtains, the backdrop and the wings against flat_proscenium: shift yes/no, roughly how much); anything skipped and why; which reference images were attached; and one line confirming that no pixels were changed by code. If you cannot write to the repository at all, stop and say so clearly in the chat; do not hand the upload to the user.
+```
