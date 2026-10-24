@@ -28,7 +28,7 @@
     "imapflow": "2.1.2",
     "lucide-react": "1.46.0",
     "next": "16.4.3",
-    "nodemailer": "10.0.16",
+    "nodemailer": "10.2.1",
     "pdf-lib": "1.17.1",
     "playwright-core": "1.56.1",
     "react": "19.3.0",
@@ -45,5 +45,8 @@
     "jsqr": "1.4.0",
     "pdfjs-dist": "5.4.296",
     "typescript": "5.9.3"
+  },
+  "overrides": {
+    "zod": "4.6.7"
   }
 }
