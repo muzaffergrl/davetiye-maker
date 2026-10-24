@@ -112,7 +112,7 @@ export const DESIGN_COPY: Record<string, DesignCopy> = {
       { name: msg('Gold'), hex: '#C7A978' },
       { name: msg('Ivory'), hex: '#F1E4CC' },
     ],
-    fonts: ['Cinzel', 'Cormorant Garamond', 'Jost'],
+    fonts: ['Waterfall', 'Castoro Titling', 'Castoro'],
     llmsLine: 'a charcoal laid-paper envelope with a diamond flap, a vellum lake-panorama band and a gold crescent brooch that rises as the moon, an arched villa window portrait and story photos behind opening shutters.',
     relatedGuides: ['wedding-website-wording', 'what-to-put-on-your-wedding-website'],
   },

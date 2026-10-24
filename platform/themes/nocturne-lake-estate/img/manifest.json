@@ -681,7 +681,13 @@
   "first_screen": {
    "landscape": false,
    "names_min_px": 30
+  },
+  "backdrop": {
+   "edge_max": 2.2,
+   "dark_max": 0.05,
+   "dark_below": 0,
+   "light_above": 110
   }
  },
- "bytes_total": 1695631
+ "bytes_total": 1718160
 }

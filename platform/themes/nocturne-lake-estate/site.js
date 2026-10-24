@@ -1,65 +1,60 @@
-/* Nocturne Lake Estate — shared behaviour of the five pages. Personal content is rendered by the platform (data-field,
-   data-text, data-photo); this script never writes it. Page addresses come from #site-data (data.pages) only.
-   Opening (docs/35 row 22, G422): the hammered gold crescent catches the moonlight, lifts off the vellum band and floats
-   up to stay in the night sky above the envelope as the moon, the vellum band slides down and fades, the deep diamond
-   flap opens on its top edge onto its painted night sky (with the lake painted inside the envelope they read as one
-   painting), light shimmers on the moon path, gold leaf, candle sparks and a white rose petal drift
-   (MOTION.accents.open), the ivory card rises from behind the pocket, comes forward and flies to home (view transition
-   invite-card). The CSS keyframes in site.css (".is-opening …") use the same numbers as MOTION.envelope.
-   Inner pages: the portrait sits in the arched gilded villa window, the story's photos behind charcoal shutters that open
-   outward as each window enters the view (the photo warms out of the dark), the venue over the terrace balustrade; a
-   reply is answered with gold leaf, petals and sparks drifting down while the lantern's flame grows. */
+/* Nocturne Lake Estate — the behaviour of the five pages (v2 of 2026-10-24, after the GPT design board). Personal
+   content is rendered by the platform (data-field, data-text, data-photo); this script never writes it (it only rolls
+   the countdown figures). Page addresses come from #site-data (data.pages) only. Sounds: the platform's audio.js plays
+   the opening cues on the same numbers as MOTION.envelope (lib/audio/catalog.ts: tick 0 · rise 150 · flap 650 · moon
+   1250 · draw 1350 · reveal 2400); the page cues ('leaf', 'ripple', 'press', 'clink') go to it as 'invite:sfx' events
+   and sound only after the guest's own tap.
+   Opening (docs/11 §7.3): tick — the gold moon seal in the valley of the mountain-cut flap is pressed and clicks free ·
+   rise — it lifts out of the valley and rises into the empty sky over the moon path, turning into the moon (a fixed
+   clone flies; the moon fades in under it) · flap — the flap lifts on its hinge to edge-on, its gold moiré inside
+   stands up from there · moon — the moon settles, its halo opens, light runs down the path, gold leaf drifts · draw —
+   the ivory card slides out of the pocket · reveal — it comes forward over the lake while the envelope sinks out of
+   focus · go — home (view transitions invite-card on the card's arch window and sky-moon on the moon). The CSS keyframes
+   in site.css (".is-opening …") use the same numbers. */
 const MOTION = {
   storage: { opened: 'invite:opened', arrive: 'invite:arrive' },   // + ':<slug>'; the <head> scripts use the same keys
   envelope: {
-    head: [0, 400],         // "Tap to open" and the date line fade (the names stay)
-    glint: [0, 600],        // the crescent catches the moonlight
-    moon: [200, 1500],      // the crescent lifts off the band and floats up to stay above the envelope as the moon
-    vellum: [800, 800],     // the vellum band slides down off the envelope and fades
-    flap: [1500, 800],      // the diamond flap opens on its top edge onto its painted night sky
-    light: [2000, 1600],    // light shimmers on the painted moon path of the lining
-    accents: 2300,          // gold leaf, candle sparks and a rose petal drift (MOTION.accents.open)
-    rise: [2500, 750],      // the card rises from behind the pocket
-    forward: [3250, 500],   // and comes forward
-    go: 3850,               // to home (view transition)
-    fadeOut: 300            // without a cross-document view transition
+    tick: [0, 160],         // the seal is pressed; "Tap to open" goes; the names leave (120–920)
+    rise: [150, 1100],      // the seal rises into the sky and becomes the moon (the moon fades in 1120–1570)
+    flap: [650, 700],       // the flap to edge-on (650–970), its moiré inside stands up (970–1350)
+    moon: [1250, 1800],     // halo, light down the path, gold leaf
+    draw: [1350, 950],      // the card slides out of the pocket
+    reveal: [2400, 900],    // it comes forward; the envelope sinks and blurs
+    bloom: [3300, 600],     // it settles, a little closer
+    go: 3900,               // to home (view transition)
+    fadeOut: 350            // without a cross-document view transition
   },
   scenes: {                 // scene → [[step, delay ms], …] — in order, never all at once
-    'home-hero': [['moon', 0], ['photo', 200], ['line', 1000], ['names', 1160], ['date', 1460], ['venue', 1640]],
-    'home-invite': [['title', 0], ['host', 300], ['names', 500], ['date', 860], ['venue', 1100], ['reply', 1360], ['count', 1560], ['calendar', 1760]],
-    'home-teasers': [['photo', 0], ['head', 900], ['link', 1200]],
-    'home-day': [['head', 0], ['list', 380], ['link', 700]],
-    'home-foot': [['lantern', 0], ['names', 700], ['links', 1000]],
-    'story-head': [['kicker', 0], ['title', 220], ['intro', 560]],
-    'story-moment': [['frame', 0], ['caption', 1500]],
-    'story-next': [['names', 0], ['links', 320]],
-    'details-head': [['date', 0], ['title', 200], ['venue', 520]],
-    'details-card': [['head', 0], ['row', 300], ['after', 900]],
-    'details-venue': [['head', 0], ['photo', 220], ['line', 1400]],
+    'home-hero': [['names', 200], ['meta', 700]],
+    'home-intro': [['photo', 0], ['line', 450], ['text', 700], ['count', 1000], ['cta', 1300], ['cue', 1600]],
+    'home-invite': [['card', 0], ['host', 350], ['names', 600], ['date', 1000], ['venue', 1300], ['reply', 1600], ['calendar', 1900]],
+    'home-teasers': [['head', 0], ['photo', 350], ['link', 900]],
+    'home-day': [['head', 0], ['list', 500], ['link', 900]],
+    'home-foot': [['seal', 0], ['names', 350], ['links', 750]],
+    'story-head': [['kicker', 0], ['title', 180], ['intro', 600]],
+    'story-frame': [['album', 0]],
+    'story-next': [['names', 0], ['links', 500]],
+    'details-head': [['title', 0], ['date', 350]],
+    'details-card': [['head', 0], ['row', 250], ['after', 900]],
+    'details-venue': [['photo', 0], ['line', 600]],
     'details-notes': [['note', 0]],
-    'details-faq': [['head', 0], ['item', 250]],
-    'rsvp-card': [['names', 0], ['title', 180], ['wait', 520], ['cta', 820]],
-    'rsvp-closing': [['lantern', 0], ['names', 500], ['links', 900]]
+    'details-faq': [['head', 0], ['item', 300]],
+    'rsvp-card': [['card', 0], ['title', 300], ['line', 650], ['form', 950]],
+    'rsvp-closing': [['names', 0], ['links', 500]]
   },
-  stagger: 170,
-  batchGap: 340,
-  arriveDelay: 150,
-  // the GPT accents (gold leaf, rose petal, candle spark): drifting over the opening envelope and over a reply
-  accents: {
-    open: [{ img: 'img/flake-160.webp', count: 5, dur: [2600, 3400], size: [12, 20] },
-      { img: 'img/petal-160.webp', count: 3, dur: [3000, 3800], size: [20, 30] },
-      { img: 'img/spark-160.webp', count: 6, dur: [2000, 2800], size: [14, 24] }],
-    reply: [{ img: 'img/flake-160.webp', count: 6, dur: [2600, 3600], size: [12, 20] },
-      { img: 'img/petal-160.webp', count: 5, dur: [3000, 4200], size: [20, 30] },
-      { img: 'img/spark-160.webp', count: 6, dur: [2200, 3000], size: [14, 24] }]
-  }
+  stagger: 200,
+  batchGap: 380,
+  arriveDelay: 160,
+  leaves: { open: 7, arrive: 4, reply: 12 },     // gold leaf (GPT W2.15)
+  slide: 900                                      // one story chapter
 };
 
 (() => {
 'use strict';
 const root = document.documentElement;
+const BASE = document.currentScript ? document.currentScript.src : location.href;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const $ = (q) => document.querySelector(q), $$ = (q) => [...document.querySelectorAll(q)];
+const $ = (q, el = document) => el.querySelector(q), $$ = (q, el = document) => [...el.querySelectorAll(q)];
 let SITE = null;
 try { SITE = JSON.parse($('#site-data')?.textContent || 'null'); } catch (e) { SITE = null; }
 const PAGES = (SITE && SITE.pages) || { index: 'index.html', home: 'home.html', story: 'story.html', details: 'details.html', rsvp: 'rsvp.html' };
@@ -67,44 +62,37 @@ const KEY = SITE && SITE.slug ? ':' + SITE.slug : '';
 const OPENED = MOTION.storage.opened + KEY, ARRIVE = MOTION.storage.arrive + KEY;
 const store = (k, v) => { try { sessionStorage.setItem(k, v); } catch (e) { /* private mode */ } };
 const crossDocVT = 'onpageswap' in window && Boolean(document.startViewTransition);
-const SCRIPT_URL = document.currentScript ? document.currentScript.src : location.href;
-const asset = (p) => new URL(p, SCRIPT_URL).href;
+const canAnimate = Boolean(Element.prototype.animate);
+const sfx = (name) => document.dispatchEvent(new CustomEvent('invite:sfx', { detail: { name } }));
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const center = (r) => ({ x: r.left + r.width / 2, y: r.top + r.height / 2 });
 
-/* -- long names: on one line while they fit, then smaller (never below the floor), then they wrap (never cut) */
-function fitNames() {
-  $$('.names').forEach((el) => {
-    el.style.fontSize = '';
-    const parts = [...el.querySelectorAll('[data-field]')];
-    el.classList.toggle('long-names', parts.some((n) => n.textContent.length > 12));
-    el.style.whiteSpace = 'nowrap';
-    const min = el.closest('.hero') ? 28 : 28;
-    let size = parseFloat(getComputedStyle(el).fontSize);
-    const wide = () => el.scrollWidth > el.clientWidth + 1;
-    for (let i = 0; i < 90 && wide() && size > min; i++) { size = Math.max(min, size - 1); el.style.fontSize = size + 'px'; }
-    if (wide()) el.style.whiteSpace = '';
+/* -- long names: [data-fit="n"] shrinks its type (CSS --fit) until each name fits its line and the block is at most n
+   lines, never under MIN_NAME px (a long name then wraps — never cut). Measured again when the fonts arrive and on resize. */
+const MIN_NAME = 30;
+function fitAll() {
+  $$('[data-fit]').forEach((el) => {
+    el.style.removeProperty('--fit');
+    el.classList.remove('wrap');
+    const n = parseFloat(el.dataset.fit) || 2;
+    const parts = $$('[data-field]', el);
+    const base = parseFloat(getComputedStyle(el).fontSize) || 20;
+    const kmin = Math.min(1, Math.max(0.45, MIN_NAME / base));
+    const wide = () => parts.some((p) => Math.max(p.scrollWidth, p.getBoundingClientRect().width) > el.clientWidth + 1);
+    const lines = () => el.getBoundingClientRect().height / (parseFloat(getComputedStyle(el).lineHeight) || base);
+    let k = 1;
+    while ((wide() || lines() > n + 0.3) && k > kmin) { k = Math.max(kmin, k - 0.03); el.style.setProperty('--fit', k.toFixed(3)); }
+    if (wide()) el.classList.add('wrap');
   });
-}
-
-/* -- the card in the pocket keeps its fixed paper: long names get smaller, then the portrait gets smaller */
-function fitCard() {
-  const card = $('.envelope .card'), names = card && card.querySelector('.card-names:not([hidden])');
-  if (!card || !names) return;
-  card.classList.remove('tight');
-  names.style.fontSize = '';
-  const over = () => card.scrollHeight > card.clientHeight + 1;
-  let size = parseFloat(getComputedStyle(names).fontSize);
-  for (let i = 0; i < 40 && over() && size > 9; i++) { size -= 1; names.style.fontSize = size + 'px'; }
-  if (over()) card.classList.add('tight');
 }
 
 /* -- scenes: [data-scene] plays its [data-step]s in the MOTION order when it enters the view */
 const stepIndex = (n) => Number(n.dataset.i !== undefined ? n.dataset.i : (n.dataset.repeatItem || '').split('.').pop()) || 0;
 function reveal(scene, base, instant) {
   const plan = new Map(MOTION.scenes[scene.dataset.scene] || []);
-  scene.querySelectorAll('[data-step]').forEach((n) => {
+  $$('[data-step]', scene).forEach((n) => {
     if (n.closest('[data-scene]') !== scene) return;
-    const delay = base + (plan.get(n.dataset.step) || 0) + stepIndex(n) * MOTION.stagger;
-    if (!instant) { n.style.transitionDelay = delay + 'ms'; n.style.setProperty('--d', delay + 'ms'); }
+    if (!instant) n.style.transitionDelay = (base + (plan.get(n.dataset.step) || 0) + stepIndex(n) * MOTION.stagger) + 'ms';
     n.classList.add('in');
   });
 }
@@ -119,89 +107,154 @@ function initScenes() {
         io.unobserve(s);
         reveal(s, i * MOTION.batchGap + (arrived && s.dataset.scene.startsWith('home-') ? MOTION.arriveDelay : 0), false);
       });
-  }, { threshold: 0.2, rootMargin: '0px 0px -6% 0px' });
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
   scenes.forEach((s) => io.observe(s));
 }
 
-/* -- the opening's and a reply's accents (MOTION.accents): the GPT accents fall, turning, and are removed when they land */
-function particles(moment, anchor) {
-  const groups = MOTION.accents[moment] || [];
-  if (reduce || !groups.length || !Element.prototype.animate) return;
-  const layer = document.createElement('div');
-  layer.className = 'accent-layer';
-  layer.setAttribute('aria-hidden', 'true');
-  document.body.append(layer);
-  const box = (anchor || document.body).getBoundingClientRect();
-  let left = 0, k = 0;
-  groups.forEach((g) => {
-    for (let i = 0; i < g.count; i++, k++) {
-      const img = Object.assign(document.createElement('img'), { src: asset(g.img), alt: '' });
-      const size = g.size[0] + Math.random() * (g.size[1] - g.size[0]);
-      const x = box.left + box.width * (0.04 + 0.92 * Math.random()), y = Math.max(-40, box.top - 30);
-      img.style.cssText = `position:fixed;left:${x}px;top:${y}px;width:${size}px`;
-      layer.append(img);
-      const dur = g.dur[0] + Math.random() * (g.dur[1] - g.dur[0]);
-      const dy = Math.min(innerHeight * 0.75, box.height + 60), dx = (Math.random() - 0.5) * 120, r = (Math.random() - 0.5) * 120;
-      left++;
-      img.animate([{ opacity: 0, transform: 'translate(0,0) rotate(0deg)' }, { opacity: 1, offset: 0.1 },
-        { transform: `translate(${dx * 0.5}px,${dy * 0.45}px) rotate(${r * 0.5}deg)`, offset: 0.5 },
-        { opacity: 1, offset: 0.8 },
-        { opacity: 0, transform: `translate(${dx}px,${dy}px) rotate(${r}deg)` }],
-      { duration: dur, delay: k * 110, easing: 'ease-in', fill: 'both' }).finished.then(() => { img.remove(); if (--left === 0) layer.remove(); });
-    }
-  });
+/* -- countdown: the target comes from the platform (site-data derived.countdown_target_utc); the figures roll */
+function odometer(cell, text) {
+  if (!cell._odo) { cell.textContent = ''; cell._sr = document.createElement('span'); cell._sr.className = 'sr-only'; cell.append(cell._sr); cell._odo = []; }
+  cell._sr.textContent = text;
+  while (cell._odo.length < text.length) {
+    const col = document.createElement('span'), strip = document.createElement('span');
+    col.className = 'odo'; col.setAttribute('aria-hidden', 'true');
+    for (let d = 0; d < 10; d++) { const i = document.createElement('i'); i.textContent = String(d); strip.append(i); }
+    col.append(strip); cell.append(col); cell._odo.push(col);
+  }
+  while (cell._odo.length > text.length) cell._odo.pop().remove();
+  cell._odo.forEach((col, i) => { col.firstChild.style.transform = `translateY(${-Number(text[i]) * 1.1}em)`; });
 }
-
-/* -- countdown: the target comes from the platform (site-data derived.countdown_target_utc) */
 function initCountdown() {
   $$('[data-countdown]').forEach((box) => {
     const target = Date.parse((SITE && SITE.derived && SITE.derived.countdown_target_utc) || '');
     if (!Number.isFinite(target)) { box.hidden = true; return; }
     box.dataset.targetUtc = new Date(target).toISOString();
-    const cells = Object.fromEntries([...box.querySelectorAll('[data-unit]')].map((n) => [n.dataset.unit, n]));
+    const cells = Object.fromEntries($$('[data-unit]', box).map((n) => [n.dataset.unit, n]));
     const tick = () => {
       const diff = target - Date.now();
       if (diff <= 0) {
         box.classList.add('is-done');
-        box.querySelectorAll('.cd-done').forEach((n) => { n.hidden = (n.dataset.when === 'today') !== (-diff < 864e5); });
+        $$('.cd-done', box).forEach((n) => { n.hidden = (n.dataset.when === 'today') !== (-diff < 864e5); });
         return false;
       }
       const s = Math.floor(diff / 1000);
       const v = { days: Math.floor(s / 86400), hours: Math.floor(s % 86400 / 3600), minutes: Math.floor(s % 3600 / 60), seconds: s % 60 };
-      Object.entries(v).forEach(([u, n]) => { if (cells[u]) cells[u].textContent = String(n).padStart(2, '0'); });
+      Object.entries(v).forEach(([u, n]) => { if (cells[u]) odometer(cells[u], String(n).padStart(2, '0')); });
       return true;
     };
     if (tick()) { const t = setInterval(() => { if (!tick()) clearInterval(t); }, 1000); }
   });
 }
 
+/* -- gold leaf (GPT W2.15): flakes drift down from a point, turning in the light, and are gone */
+const LEAVES = ['img/leaf1-160.webp', 'img/leaf2-160.webp', 'img/leaf3-160.webp'];
+/** Spawns `count` flakes; false when none fall (reduced motion, no animation) — then no sound either. */
+function leaves(count, from) {
+  const layer = $('.accent-layer');
+  if (!layer || reduce || !canAnimate || !count) return false;
+  const W = innerWidth, H = innerHeight;
+  for (let i = 0; i < count; i++) {
+    const img = new Image(), s = 14 + Math.random() * 16;
+    img.src = new URL(LEAVES[i % LEAVES.length], BASE).href; img.alt = ''; img.className = 'leaf';
+    img.style.setProperty('--s', s + 'px');
+    const x0 = (from ? from.x : Math.random() * W) + (Math.random() - 0.5) * (from ? 70 : 0), y0 = from ? from.y : -30;
+    const drift = (Math.random() - 0.5) * W * 0.5, fall = H - y0 + 60, spin = (Math.random() - 0.5) * 540;
+    const frames = [0, 0.25, 0.5, 0.75, 1].map((k) => ({
+      transform: `translate(${x0 + drift * k + Math.sin(k * 7 + i) * 26}px,${y0 + fall * (k * k * 0.35 + k * 0.65)}px) rotate(${spin * k}deg) rotateY(${k * 720}deg)`,
+      opacity: k < 0.8 ? 1 : 0
+    }));
+    if (from) frames[0].transform = `translate(${x0}px,${y0}px) scale(.3)`;
+    layer.append(img);
+    img.animate(frames, { duration: 3600 + Math.random() * 2200, delay: i * 90, easing: 'linear', fill: 'both' }).onfinish = () => img.remove();
+  }
+  return true;
+}
+
 /* -- the envelope */
 function initEnvelope() {
   const stage = $('.stage');
   if (!stage) return;
-  const card = $('.envelope .card'), E = MOTION.envelope;
+  const env = $('.env'), well = $('.card-well'), card = $('.env-card'), framed = $('.framed', card), seal = $('.env-seal'), E = MOTION.envelope;
+  const moon = $('.night .sky-moon');
   if (/[?&]replay=1(&|$)/.test(location.search)) root.classList.remove('is-opened');
   let state = root.classList.contains('is-opened') ? 'opened' : 'closed';
-  const timers = [];
+  const timers = [], anims = [];
+  const at = (ms, fn) => timers.push(setTimeout(fn, ms));
+  // the envelope leans towards the finger / pointer (a few degrees)
+  if (!reduce) {
+    const lean = (x, y) => { env.style.setProperty('--ry', (x * 6).toFixed(2) + 'deg'); env.style.setProperty('--rx', (-y * 5).toFixed(2) + 'deg'); };
+    stage.addEventListener('pointermove', (e) => {
+      if (state !== 'closed') return;
+      const r = stage.getBoundingClientRect();
+      lean((e.clientX - r.left) / r.width - 0.5, (e.clientY - r.top) / r.height - 0.5);
+    });
+    stage.addEventListener('pointerleave', () => lean(0, 0));
+    stage.addEventListener('pointerdown', () => { if (state === 'closed') env.style.scale = '.985'; });
+    addEventListener('pointerup', () => { env.style.scale = ''; });
+  }
   function go(withCard) {
     store(OPENED, '1');
-    if (withCard) { store(ARRIVE, '1'); card.style.viewTransitionName = 'invite-card'; } else card.style.viewTransitionName = 'none';
-    if (crossDocVT || reduce || !Element.prototype.animate) { location.href = PAGES.home; return; }
+    if (withCard) { store(ARRIVE, '1'); framed.style.viewTransitionName = 'invite-card'; } else framed.style.viewTransitionName = 'none';
+    if (crossDocVT || reduce || !canAnimate) { location.href = PAGES.home; return; }
     $('.opening').animate([{ opacity: 1 }, { opacity: 0 }], { duration: E.fadeOut, fill: 'forwards' });
     setTimeout(() => { location.href = PAGES.home; }, E.fadeOut);
+  }
+  // rise: a fixed clone of the seal flies from the valley to the moon's place in the sky; the moon fades in under it
+  function rise() {
+    if (!canAnimate || !moon) { seal.classList.add('is-gone'); return; }
+    const a = seal.getBoundingClientRect(), b = moon.getBoundingClientRect();
+    const fly = seal.cloneNode(true);
+    fly.className = 'seal-fly';
+    Object.assign(fly.style, { left: a.left + 'px', top: a.top + 'px', width: a.width + 'px', height: a.height + 'px' });
+    document.body.append(fly);
+    seal.classList.add('is-gone');
+    const p = center(a), q = center(b), dx = q.x - p.x, dy = q.y - p.y, s = (b.width * 1.12) / a.width;
+    const move = fly.animate([
+      { transform: 'none', opacity: 1 },
+      { transform: `translate(${dx * 0.18}px,${dy * 0.42}px) scale(${1 + (s - 1) * 0.35}) rotate(-10deg)`, opacity: 1, offset: 0.42 },
+      { transform: `translate(${dx}px,${dy}px) scale(${s}) rotate(-22deg)`, opacity: 1, offset: 0.86 },
+      { transform: `translate(${dx}px,${dy}px) scale(${s}) rotate(-24deg)`, opacity: 0 }
+    ], { duration: E.rise[1] + 300, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'forwards' });
+    anims.push(move);
+    move.onfinish = () => fly.remove();
+    move.oncancel = () => fly.remove();
+  }
+  function fly() {
+    well.classList.add('is-free');
+    root.classList.add('is-reveal');
+    if (!canAnimate) return;
+    const r0 = card.getBoundingClientRect(), wr = well.getBoundingClientRect();
+    const w = Math.min(innerWidth * 0.9, 460, Math.max(240, (innerHeight - 250) * 1.6926));
+    const s = w / r0.width, cx = innerWidth / 2, cy = clamp(innerHeight * 0.52, 220, innerHeight - 200);
+    const c = center(r0);
+    well.style.transformOrigin = `${c.x - wr.left}px ${c.y - wr.top}px`;
+    anims.push(well.animate([
+      { transform: 'none' },
+      { transform: `translate(${(cx - c.x) * 0.4}px,${(cy - c.y) * 0.3 - 18}px) rotate(2deg) scale(${1 + (s - 1) * 0.5})`, offset: 0.45 },
+      { transform: `translate(${cx - c.x}px,${cy - c.y}px) rotate(0deg) scale(${s})` }
+    ], { duration: E.reveal[1], easing: 'cubic-bezier(.35,.1,.2,1)', fill: 'forwards' }));
   }
   function play() {
     if (state !== 'closed') return;
     state = 'playing';
     if (reduce) { go(false); return; }
+    env.style.setProperty('--rx', '0deg'); env.style.setProperty('--ry', '0deg');
     root.classList.add('is-opening');
-    timers.push(setTimeout(() => particles('open', $('.stage')), E.accents));
-    timers.push(setTimeout(() => { state = 'done'; go(true); }, E.go));
+    at(E.rise[0], rise);
+    at(E.moon[0], () => { const r = moon?.getBoundingClientRect(); leaves(MOTION.leaves.open, r ? { x: r.left + r.width / 2, y: r.top + r.height * 0.6 } : null); });
+    at(E.reveal[0], fly);
+    at(E.bloom[0], () => { if (canAnimate) anims.push(card.animate([{ scale: '1' }, { scale: '1.03' }], { duration: E.bloom[1], easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'forwards' })); });
+    at(E.go, () => { state = 'done'; go(true); });
   }
   function reset() {
     timers.splice(0).forEach(clearTimeout);
-    root.classList.remove('is-opening', 'is-opened');
-    card.style.viewTransitionName = '';
+    anims.splice(0).forEach((a) => a.cancel());
+    $$('.seal-fly').forEach((n) => n.remove());
+    seal.classList.remove('is-gone');
+    root.classList.remove('is-opening', 'is-opened', 'is-reveal');
+    well.classList.remove('is-free');
+    well.style.transformOrigin = '';
+    framed.style.viewTransitionName = '';
     state = 'closed';
   }
   stage.addEventListener('click', () => { if (state === 'closed') play(); else if (state === 'opened') go(true); });
@@ -211,24 +264,127 @@ function initEnvelope() {
   $('.replay')?.addEventListener('click', () => { reset(); void stage.offsetWidth; requestAnimationFrame(play); });
   addEventListener('keydown', (e) => { if (e.key === 'Escape' && state === 'playing') { reset(); state = 'done'; go(false); } });
   addEventListener('pageshow', (e) => {
-    if (e.persisted && state !== 'closed') { timers.splice(0).forEach(clearTimeout); root.classList.remove('is-opening'); root.classList.add('is-opened'); card.style.viewTransitionName = ''; state = 'opened'; }
+    if (e.persisted && state !== 'closed') { reset(); root.classList.add('is-opened'); state = 'opened'; }
+  });
+}
+
+/* -- home: a few flakes of gold leaf drift down past the portrait as the photograph lands in its arch */
+function initHome() {
+  if (!$('.page-home') || !root.classList.contains('from-envelope')) return;
+  setTimeout(() => {
+    const r = $('.sky-moon')?.getBoundingClientRect();
+    if (leaves(MOTION.leaves.arrive, r ? { x: r.left + r.width / 2, y: r.top + r.height } : null)) sfx('leaf');
+  }, 1000);
+}
+
+/* -- story: one chapter at a time over the water (buttons, dots, arrows, swipe); its numeral is a CSS counter */
+function initSlides() {
+  const box = $('.chapters'), slides = $$('[data-slide]'), prev = $('[data-slide-prev]'), next = $('[data-slide-next]');
+  if (!box || slides.length < 2 || !prev || !next) return;
+  const dots = $$('[data-slide-go]'), last = slides.length - 1, label = $('.chapter-label'), count = $('.slide-count');
+  let active = clamp(Number(location.hash.replace('#chapter-', '')) - 1 || 0, 0, last);
+  box.classList.add('is-carousel');
+  $('.slide-controls').hidden = false;
+  count?.style.setProperty('--n', String(slides.length));
+  // first: no #chapter-1 is written into a plain /story address (the browser would scroll to it on load)
+  function layout(first = false) {
+    slides.forEach((s, i) => {
+      s.classList.toggle('is-active', i === active);
+      s.setAttribute('aria-hidden', String(i !== active));
+      s.inert = i !== active;
+    });
+    dots.forEach((b, i) => b.setAttribute('aria-pressed', String(i === active)));
+    label?.style.setProperty('--i', String(active + 1));
+    count?.style.setProperty('--i', String(active + 1));
+    prev.disabled = active === 0; next.disabled = active === last;
+    if (!first || location.hash) history.replaceState(null, '', '#chapter-' + (active + 1));
+  }
+  function goTo(i) {
+    i = clamp(i, 0, last);
+    if (i === active) return;
+    active = i; sfx('ripple'); layout();
+  }
+  layout(true);
+  prev.addEventListener('click', () => goTo(active - 1));
+  next.addEventListener('click', () => goTo(active + 1));
+  dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+  box.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(active - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); goTo(active + 1); }
+  });
+  let sx = null, sy = 0;
+  box.addEventListener('pointerdown', (e) => { sx = e.clientX; sy = e.clientY; });
+  box.addEventListener('pointerup', (e) => {
+    if (sx === null) return;
+    const dx = e.clientX - sx, dy = e.clientY - sy;
+    sx = null;
+    if (Math.abs(dx) > 42 && Math.abs(dx) > Math.abs(dy) * 1.3) goTo(active + (dx < 0 ? 1 : -1));
+  });
+  box.addEventListener('pointercancel', () => { sx = null; });
+  addEventListener('hashchange', () => { const n = Number(location.hash.replace('#chapter-', '')) - 1; if (Number.isInteger(n) && n >= 0 && n <= last) goTo(n); });
+}
+
+/* -- the evening: each moment gets its gold-foil icon, chosen from the buyer's own label (first match wins); CSS gives
+   the first four rows rings · coupes · candelabra · gramophone when nothing matches */
+const ICONS = [['rings', /ceremon|vow|wedding|i do|chapel|church|blessing/i], ['toast', /cocktail|toast|drink|champagne|aperitif|prosecco|welcome|reception drinks/i],
+  ['dinner', /dinner|supper|meal|lunch|brunch|feast|banquet|candle/i], ['dance', /danc|party|music|band|\bdj\b|gramophone/i],
+  ['boat', /boat|launch|ferry|cruise|arriv|gather|shuttle|transport|water taxi|depart|farewell/i], ['dress', /dress|attire|black tie/i]];
+function initIcons() {
+  $$('.schedule li').forEach((li) => {
+    const icon = $('.sched-icon', li);
+    if (!icon) return;
+    const text = $$('h3, p', li).map((n) => n.textContent).join(' ');
+    const hit = ICONS.find(([, re]) => re.test(text));
+    if (hit) icon.style.setProperty('--i', `url(${new URL(`img/icon-${hit[0]}-128.webp`, BASE).href})`);
+  });
+}
+
+/* -- the evening: the moon-path thread lights down the programme as the guest scrolls */
+function initThread() {
+  const list = $('.schedule');
+  if (!list || reduce || !list.children.length) return;
+  const items = $$('li', list);
+  let queued = false;
+  const update = () => {
+    queued = false;
+    const r = list.getBoundingClientRect();
+    const p = clamp((innerHeight * 0.85 - r.top) / Math.max(1, r.height), 0, 1);
+    list.style.setProperty('--draw', p.toFixed(3));
+    items.forEach((li) => li.classList.toggle('lit', (li.offsetTop + 20) / Math.max(1, r.height) <= p + 0.002));
+  };
+  addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+  addEventListener('resize', update, { passive: true });
+  update();
+}
+
+/* -- RSVP: when the reply is sent, the moon seal comes down onto the card, the moon brightens and gold leaf drifts */
+function initReply() {
+  document.addEventListener('rsvp:state', (e) => {
+    const st = e.detail && e.detail.state;
+    if (st === 'success' || st === 'ready') root.toggleAttribute('data-rsvp-replied', st === 'success');
+    if (st === 'ready') root.classList.remove('is-sealing');
+    if (st !== 'success' || !$('.press-seal')) return;
+    root.classList.remove('is-sealing'); void root.offsetWidth; root.classList.add('is-sealing');
+    if (reduce) return;
+    setTimeout(() => { sfx('press'); const r = $('.press-seal').getBoundingClientRect(); leaves(MOTION.leaves.reply, { x: r.left + r.width / 2, y: r.top }); }, 620);
+    setTimeout(() => sfx('clink'), 1100);
+    $('.press-seal').scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
 }
 
 function boot() {
-  document.addEventListener('rsvp:state', (e) => {
-    const st = e.detail && e.detail.state;
-    if (st === 'success' || st === 'ready') root.toggleAttribute('data-rsvp-replied', st === 'success');
-    // the reply is in: gold leaf, petals and sparks drift down over the thank-you panel; the lantern's flame grows (CSS)
-    if (st === 'success') requestAnimationFrame(() => particles('reply', $('.reply-panel[data-rsvp-state=success]') || $('.reply-card')));
-  });
-  const fit = () => { fitNames(); fitCard(); };
-  fit();
-  document.fonts?.ready.then(fit);
-  addEventListener('resize', fit, { passive: true });
+  fitAll();
+  document.fonts?.ready.then(fitAll);
+  let rt = 0;
+  addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(fitAll, 120); }, { passive: true });
   initEnvelope();
   initScenes();
   initCountdown();
+  initHome();
+  initSlides();
+  initIcons();
+  initThread();
+  initReply();
   root.dataset.js = 'ready';
 }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();

@@ -1,81 +1,96 @@
 <!doctype html>
-<!-- Nocturne Lake Estate · page 3 — story (/<slug>/story). Redesign of 2026-10-22 (docs/35 row 22, G422). A narrow strip of
-     the painted lake at night over the kicker, "Our Story" (a gold-leaf shimmer passes over it once) and the intro; below,
-     three moments left – right – left, each in a lacquered villa window behind two charcoal louvred shutters: as a window
-     enters the view its shutters open outward on their hinges and the photo warms out of the candlelit dark, then the
-     caption comes up. With reduced motion the shutters stay open. Personal text: none — filled on the server. Design
-     texts: data-copy (G068). -->
+<!-- Nocturne Lake Estate · story (/<slug>/story). v2 of 2026-10-24 after the GPT design board: on black cotton paper
+     "Chapter I" and the script heading, one photograph at a time in the slim gilded frame, floating above night water —
+     its own reflection beneath it, darker and broken by slow ripples (the page's signature) — the italic caption, "I / III"
+     with three gold dots and two arrow buttons (swipe too). Without JavaScript the three chapters stand one under the
+     other. The chapter numerals are CSS counters (upper-roman), not text. -->
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#11120f">
-<title data-text="{copy.story_title} · {name_display}">Our Story</title>
-<meta name="description" data-attr-content="{copy.story_title} · {name_display} · {date|date-long}" content="Our Story">
+<meta name="theme-color" content="#0b0d12">
+<title data-text="{copy.story_title} · {name_display}">Our story</title>
+<meta name="description" data-attr-content="{copy.story_title} · {name_display} · {date|date-long}" content="Our story">
 <meta property="og:type" content="website">
-<meta property="og:title" data-attr-content="{copy.story_title} · {name_display}" content="Our Story">
+<meta property="og:title" data-attr-content="{copy.story_title} · {name_display}" content="Our story">
 <meta property="og:description" data-attr-content="{date|date-long} · {venue.city_region}" content="">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&family=Castoro+Titling&family=Waterfall&display=swap">
 <style>/* names fallback: scripts/font-fallback.ts */
-@font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:129.4%;ascent-override:75.7%;descent-override:28.6%;line-gap-override:0%}
-@font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:111.3%;ascent-override:88%;descent-override:33.2%;line-gap-override:0%}</style>
+@font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:69.5%;ascent-override:126.6%;descent-override:40.3%;line-gap-override:0%}
+@font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:59.8%;ascent-override:147.2%;descent-override:46.8%;line-gap-override:0%}</style>
 <link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
 <script>document.documentElement.classList.replace('no-js','js');</script>
 <script src="site.js" defer></script>
 </head>
-<body class="page-story" data-optional="our_story" data-pending="This link will be added soon.">
+<body class="page-story paper" data-optional="our_story" data-pending="This link will be added soon.">
 <main class="story-page">
-  <span class="night-strip" aria-hidden="true"></span>
   <header class="page-heading" data-scene="story-head">
-    <p class="eyebrow" data-copy="story_kicker" data-step="kicker">Moments by the water</p>
-    <h1 class="foil" data-copy="story_title" data-step="title">Our Story</h1>
-    <p class="body-text intro" data-if="story.intro" data-step="intro"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
+    <p class="eyebrow chapter-label" data-step="kicker"><span data-copy="album_chapter">Chapter</span> <span class="chapter-no" aria-hidden="true"></span></p>
+    <h1 class="script-title" data-copy="story_title" data-step="title">Our story</h1>
+    <p class="story-intro" data-if="story.intro" data-step="intro"><span data-field="story.intro"></span> <span class="nowrap" data-field="date"></span>.</p>
   </header>
-  <span class="divider" aria-hidden="true"></span>
-  <ol class="moments" aria-label="Photographs" data-copy-attr="aria-label:album_label">
-    <li class="moment" data-scene="story-moment">
-      <span class="frame storywin villa moment-photo" data-step="frame">
-        <span class="photo-slot" data-slot="story_1">
-          <img data-photo="story_1" src="img/ph_story-640.webp" alt="" data-attr-alt="{story.items.0.caption}" sizes="min(58vw, 300px)" fetchpriority="high">
-          <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
-        </span>
-        <span class="cut" aria-hidden="true"></span>
-        <span class="shutter sh-l" aria-hidden="true"></span>
-        <span class="shutter sh-r" aria-hidden="true"></span>
-      </span>
-      <div class="moment-text" data-step="caption"><span class="num" aria-hidden="true">01</span><p data-field="story.items.0.caption"></p></div>
-    </li>
-    <li class="moment" data-scene="story-moment">
-      <span class="frame storywin villa moment-photo" data-step="frame">
-        <span class="photo-slot" data-slot="story_2">
-          <img data-photo="story_2" src="img/ph_story-640.webp" alt="" data-attr-alt="{story.items.1.caption}" sizes="min(58vw, 300px)" loading="lazy">
-          <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
-        </span>
-        <span class="cut" aria-hidden="true"></span>
-        <span class="shutter sh-l" aria-hidden="true"></span>
-        <span class="shutter sh-r" aria-hidden="true"></span>
-      </span>
-      <div class="moment-text" data-step="caption"><span class="num" aria-hidden="true">02</span><p data-field="story.items.1.caption"></p></div>
-    </li>
-    <li class="moment" data-scene="story-moment">
-      <span class="frame storywin villa moment-photo" data-step="frame">
-        <span class="photo-slot" data-slot="story_3">
-          <img data-photo="story_3" src="img/ph_story-640.webp" alt="" data-attr-alt="{story.items.2.caption}" sizes="min(58vw, 300px)" loading="lazy">
-          <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
-        </span>
-        <span class="cut" aria-hidden="true"></span>
-        <span class="shutter sh-l" aria-hidden="true"></span>
-        <span class="shutter sh-r" aria-hidden="true"></span>
-      </span>
-      <div class="moment-text" data-step="caption"><span class="num" aria-hidden="true">03</span><p data-field="story.items.2.caption"></p></div>
-    </li>
-  </ol>
-  <span class="divider" aria-hidden="true"></span>
+  <section class="chapters" aria-label="Photographs" data-copy-attr="aria-label:album_label" aria-roledescription="carousel" data-scene="story-frame">
+    <div class="slides" data-step="album">
+      <figure class="slide" id="chapter-1" data-slide="0" role="group" aria-roledescription="slide" aria-label="1 of 3">
+        <div class="floating">
+          <span class="float-photo">
+            <span class="land-photo photo-slot" data-slot="story_1">
+              <img data-photo="story_1" src="img/ph_land-640.webp" alt="" data-attr-alt="{story.items.0.caption}" sizes="(min-width: 700px) 520px, 84vw" fetchpriority="high">
+              <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+            </span>
+            <img class="land-frame" src="img/frame_land-720.webp" srcset="img/frame_land-720.webp 720w, img/frame_land-1100.webp 1100w" sizes="(min-width: 700px) 560px, 92vw" alt="" aria-hidden="true">
+          </span>
+          <span class="water" aria-hidden="true"><span class="reflection"><img data-photo="story_1" src="img/ph_land-640.webp" alt="" sizes="(min-width: 700px) 520px, 84vw"></span></span>
+        </div>
+        <figcaption class="caption" data-field="story.items.0.caption"></figcaption>
+      </figure>
+      <figure class="slide" id="chapter-2" data-slide="1" role="group" aria-roledescription="slide" aria-label="2 of 3">
+        <div class="floating">
+          <span class="float-photo">
+            <span class="land-photo photo-slot" data-slot="story_2">
+              <img data-photo="story_2" src="img/ph_land-640.webp" alt="" data-attr-alt="{story.items.1.caption}" sizes="(min-width: 700px) 520px, 84vw" loading="lazy">
+              <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+            </span>
+            <img class="land-frame" src="img/frame_land-720.webp" srcset="img/frame_land-720.webp 720w, img/frame_land-1100.webp 1100w" sizes="(min-width: 700px) 560px, 92vw" alt="" aria-hidden="true" loading="lazy">
+          </span>
+          <span class="water" aria-hidden="true"><span class="reflection"><img data-photo="story_2" src="img/ph_land-640.webp" alt="" sizes="(min-width: 700px) 520px, 84vw" loading="lazy"></span></span>
+        </div>
+        <figcaption class="caption" data-field="story.items.1.caption"></figcaption>
+      </figure>
+      <figure class="slide" id="chapter-3" data-slide="2" role="group" aria-roledescription="slide" aria-label="3 of 3">
+        <div class="floating">
+          <span class="float-photo">
+            <span class="land-photo photo-slot" data-slot="story_3">
+              <img data-photo="story_3" src="img/ph_land-640.webp" alt="" data-attr-alt="{story.items.2.caption}" sizes="(min-width: 700px) 520px, 84vw" loading="lazy">
+              <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+            </span>
+            <img class="land-frame" src="img/frame_land-720.webp" srcset="img/frame_land-720.webp 720w, img/frame_land-1100.webp 1100w" sizes="(min-width: 700px) 560px, 92vw" alt="" aria-hidden="true" loading="lazy">
+          </span>
+          <span class="water" aria-hidden="true"><span class="reflection"><img data-photo="story_3" src="img/ph_land-640.webp" alt="" sizes="(min-width: 700px) 520px, 84vw" loading="lazy"></span></span>
+        </div>
+        <figcaption class="caption" data-field="story.items.2.caption"></figcaption>
+      </figure>
+    </div>
+    <div class="slide-controls" hidden>
+      <button class="circle-btn" type="button" data-slide-prev data-copy-attr="aria-label:album_previous" aria-label="Previous chapter">←</button>
+      <div class="slide-status">
+        <p class="eyebrow slide-count" aria-hidden="true"></p>
+        <div class="dots">
+          <button type="button" data-slide-go="0" aria-label="Chapter 1" aria-pressed="true"></button>
+          <button type="button" data-slide-go="1" aria-label="Chapter 2" aria-pressed="false"></button>
+          <button type="button" data-slide-go="2" aria-label="Chapter 3" aria-pressed="false"></button>
+        </div>
+      </div>
+      <button class="circle-btn" type="button" data-slide-next data-copy-attr="aria-label:album_next" aria-label="Next chapter">→</button>
+    </div>
+  </section>
   <footer class="signature" data-scene="story-next">
-    <p class="sig-names" data-field="name_display" data-step="names"></p>
-    <p data-step="links" data-if="!thank_you_hides_details"><a class="btn btn-ghost" href="details.html"><span data-copy="day_title">The Evening</span> <span aria-hidden="true">→</span></a></p>
+    <span class="divider" aria-hidden="true" data-step="names"></span>
+    <p class="sig-names" data-field="name_display" data-step="names" data-i="1"></p>
+    <p data-step="links" data-if="!thank_you_hides_details"><a class="btn btn-ghost" href="details.html"><span data-copy="day_title">The evening</span> <span aria-hidden="true">→</span></a></p>
     <p data-step="links" data-if="thank_you_hides_details"><a class="btn btn-ghost" href="home.html"><span data-copy="home_link">Home</span></a></p>
   </footer>
 </main>
@@ -87,5 +102,6 @@
     <li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
   </ul>
 </nav>
+<div class="accent-layer" aria-hidden="true"></div>
 </body>
 </html>

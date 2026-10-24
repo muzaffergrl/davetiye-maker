@@ -1,44 +1,42 @@
 <!doctype html>
-<!-- Nocturne Lake Estate · page 4 — details (/<slug>/details). Redesign of 2026-10-22 (docs/35 row 22, G422). A narrow
-     strip of the painted lake at night over the date, "The Evening" and the venue; the order of the evening on an ivory
-     laid card under a gold olive divider, each row opening with a flake of gold leaf that settles in; the venue in the
-     wide gilded frame over a stone balustrade, its two lanterns glowing faintly, the photo warming out of the dark;
-     G127 map; G138 blocks, travel, menu, registry, FAQ. Text comes up out of the dark into the candlelight. Personal
-     text: none — filled on the server. Design texts: data-copy (G068). -->
+<!-- Nocturne Lake Estate · details (/<slug>/details). v2 of 2026-10-24 after the GPT design board: on black cotton paper
+     the script heading "The evening" with the date stacked in small capitals at its right; the order of the evening hung
+     on a thin broken gold thread like a moon path on water (the divider's own broken end, turned upright; light runs down
+     it as the guest scrolls), a gold-foil icon on it for each moment (chosen from the buyer's own label), the dress code
+     as its last stop; the venue in the slim gilded frame, its name in spaced capitals and "View map"; then the notes.
+     Personal text: data-field only. -->
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#11120f">
-<title data-text="{copy.day_title} · {name_display}">The Evening</title>
+<meta name="theme-color" content="#0b0d12">
+<title data-text="{copy.day_title} · {name_display}">The evening</title>
 <meta name="description" data-attr-content="{copy.day_title} · {name_display} · {date|date-long}" content="Schedule and venue">
 <meta property="og:type" content="website">
-<meta property="og:title" data-attr-content="{copy.day_title} · {name_display}" content="The Evening">
+<meta property="og:title" data-attr-content="{copy.day_title} · {name_display}" content="The evening">
 <meta property="og:description" data-attr-content="{date|date-long} · {venue.name} · {venue.city_region}" content="">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&family=Castoro+Titling&family=Waterfall&display=swap">
 <style>/* names fallback: scripts/font-fallback.ts */
-@font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:129.4%;ascent-override:75.7%;descent-override:28.6%;line-gap-override:0%}
-@font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:111.3%;ascent-override:88%;descent-override:33.2%;line-gap-override:0%}</style>
+@font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:69.5%;ascent-override:126.6%;descent-override:40.3%;line-gap-override:0%}
+@font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:59.8%;ascent-override:147.2%;descent-override:46.8%;line-gap-override:0%}</style>
 <link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
 <script>document.documentElement.classList.replace('no-js','js');</script>
 <script src="site.js" defer></script>
 </head>
-<body class="page-details" data-if="!thank_you_hides_details" data-pending="This link will be added soon.">
+<body class="page-details paper" data-if="!thank_you_hides_details" data-pending="This link will be added soon.">
 <main class="details-page">
-  <span class="night-strip" aria-hidden="true"></span>
-  <header class="page-heading" data-scene="details-head">
-    <p class="eyebrow" data-step="date"><span data-field="date" data-format="weekday"></span>, <span class="nowrap" data-field="date"></span></p>
-    <h1 data-copy="day_title" data-step="title">The Evening</h1>
-    <p class="venue-name" data-field="venue.name" data-step="venue"></p>
-    <p class="eyebrow" data-field="venue.city_region_country" data-step="venue" data-i="1"></p>
+  <header class="evening-head" data-scene="details-head">
+    <h1 class="script-title" data-copy="day_title" data-step="title">The evening</h1>
+    <p class="eyebrow head-date" data-step="date"><span data-field="date" data-format="month"></span> <span class="nowrap"><span data-field="date" data-format="day"></span>, <span data-field="date" data-format="year"></span></span></p>
   </header>
-  <section class="programme paper" data-scene="details-card">
-    <span class="divider" aria-hidden="true" data-step="head"></span>
-    <h2 data-copy="schedule_title" data-step="head" data-i="1">Order of the Evening</h2>
+  <section class="programme" data-scene="details-card">
+    <h2 class="eyebrow programme-title" data-copy="schedule_title" data-step="head">Order of the evening</h2>
     <ol class="schedule">
-      <li data-repeat="schedule" data-step="row"><span class="row-flake" aria-hidden="true"></span><time data-field=".time"></time><div><h3 data-field=".label"></h3><p data-if=".location" data-field=".location"></p></div></li>
+      <li data-repeat="schedule" data-step="row"><span class="icon sched-icon" aria-hidden="true"></span><div><time class="eyebrow" data-field=".time"></time><h3 class="eyebrow" data-field=".label"></h3><p data-if=".location" data-field=".location"></p></div></li>
+      <li class="dress-row" data-optional="dress_code" data-if="dress_code !thank_you_on" data-step="row" data-i="6"><span class="icon icon-dress" aria-hidden="true"></span><div><h3 class="eyebrow" data-copy="dress_label">Dress code</h3><p data-field="dress_code"></p></div></li>
     </ol>
     <p class="ceremony" data-if="ceremony_time !thank_you_on" data-step="after"><span data-copy="ceremony_line">The ceremony begins at</span> <span data-field="ceremony_time"></span>.</p>
     <p class="ceremony" data-if="ceremony_time thank_you_on" data-step="after"><span data-copy="ceremony_after">The ceremony began at</span> <span data-field="ceremony_time"></span>.</p>
@@ -51,51 +49,50 @@
     </div>
   </section>
   <section class="location" data-scene="details-venue">
-    <h2 data-copy="venue_title" data-step="head">The Venue</h2>
-    <div class="frame terrace villa venue-photo" data-step="photo">
-      <div class="photo-slot" data-slot="venue">
-        <img data-photo="venue" src="img/ph_wide-640.webp" alt="" data-attr-alt="{venue.name}" sizes="min(calc(100vw - 48px), 680px)" loading="lazy">
+    <h2 class="visually-hidden" data-copy="venue_title">The venue</h2>
+    <div class="float-photo venue-photo" data-step="photo">
+      <span class="land-photo photo-slot" data-slot="venue">
+        <img data-photo="venue" src="img/ph_land-640.webp" alt="" data-attr-alt="{venue.name}" sizes="(min-width: 700px) 560px, 84vw" loading="lazy">
         <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
-      </div>
-      <span class="cut" aria-hidden="true"></span>
-      <span class="glow g-l" aria-hidden="true"></span>
-      <span class="glow g-r" aria-hidden="true"></span>
+      </span>
+      <img class="land-frame" src="img/frame_land-720.webp" srcset="img/frame_land-720.webp 720w, img/frame_land-1100.webp 1100w" sizes="(min-width: 700px) 600px, 92vw" alt="" aria-hidden="true" loading="lazy">
     </div>
-    <p class="venue-line" data-step="line"><span data-field="venue.name"></span><span data-if="venue.address"> · </span><span data-if="venue.address" data-field="venue.address"></span></p>
-    <div class="map-section" data-if="map_block" data-step="line" data-i="1">
+    <p class="eyebrow venue-line" data-step="line"><span data-field="venue.name"></span><span data-if="venue.city">, </span><span data-field="venue.city"></span></p>
+    <p class="venue-address" data-if="venue.address" data-field="venue.address" data-step="line" data-i="1"></p>
+    <div class="map-section" data-if="map_block" data-step="line" data-i="2">
       <a class="btn btn-ghost" data-url="map" href="#" data-copy="view_map" data-if="urls.map !map_on">View map</a>
       <div data-map data-map-btn="btn btn-ghost" data-map-btn-sm="btn btn-ghost btn-sm"></div>
     </div>
   </section>
   <div class="detail-notes" data-scene="details-notes">
-    <section class="detail-note" data-optional="dress_code" data-if="dress_code !thank_you_on" data-step="note">
-      <h2 data-copy="dress_label">Dress code</h2>
-      <p class="body-text" data-field="dress_code"></p>
-    </section>
     <section class="detail-note" data-if="info_blocks !thank_you_on" data-step="note">
       <div data-blocks data-pex-btn="btn btn-ghost btn-sm"><span data-copy="blocks_more">Learn more</span></div>
     </section>
     <section class="detail-note" data-optional="travel_stay" data-if="travel_block !thank_you_on" data-step="note" data-i="1">
-      <h2 data-copy="travel_title">Travel &amp; Stay</h2>
+      <span class="divider" aria-hidden="true"></span>
+      <h2 class="script-title" data-copy="travel_title">Travel &amp; Stay</h2>
       <p data-if="urls.accommodation" data-copy="travel_note" class="body-text">Where to stay and how to get here: see the link below.</p>
       <div data-travel data-pex-btn="btn btn-ghost btn-sm"><span data-copy="travel_getting_here">Getting here</span><span data-copy="travel_airport">Airport &amp; station</span><span data-copy="travel_parking">Parking</span><span data-copy="travel_shuttle">Shuttle</span><span data-copy="travel_taxi">Taxi &amp; rideshare</span><span data-copy="travel_stays">Where to stay</span><span data-copy="travel_code">Booking code</span><span data-copy="travel_more">More info</span><span data-copy="travel_book">Book a room</span></div>
       <a data-if="urls.accommodation" href="#" class="textlink" data-url="accommodation"><span data-copy="travel_button">Where to stay</span> <span aria-hidden="true">↗</span></a>
     </section>
     <section class="detail-note" data-if="menu_block !thank_you_on" data-step="note" data-i="2">
-      <h2 data-copy="menu_title">The Menu</h2>
+      <span class="divider" aria-hidden="true"></span>
+      <h2 class="script-title" data-copy="menu_title">The Menu</h2>
       <div data-menu data-pex-btn="btn btn-ghost btn-sm"><span data-copy="menu_diet">Dietary needs</span><span data-copy="menu_served">A meal will be served.</span></div>
     </section>
     <section class="detail-note" data-optional="registry" data-if="urls.registry" data-step="note" data-i="3">
-      <h2 data-copy="registry_title">Registry</h2>
+      <span class="divider" aria-hidden="true"></span>
+      <h2 class="script-title" data-copy="registry_title">Registry</h2>
       <p data-copy="registry_note" class="body-text">Your presence is the greatest gift. For those who wish to honor us with a gift, our registry is linked below.</p>
       <a href="#" class="textlink" data-url="registry"><span data-copy="registry_button">View registry</span> <span aria-hidden="true">↗</span></a>
     </section>
   </div>
   <section class="faq" data-optional="faq" data-if="faq !thank_you_on" data-scene="details-faq">
-    <h2 data-copy="faq_title" data-step="head">Questions &amp; Answers</h2>
+    <span class="divider" aria-hidden="true" data-step="head"></span>
+    <h2 class="script-title" data-copy="faq_title" data-step="head" data-i="1">Questions &amp; Answers</h2>
     <details data-repeat="faq" data-step="item"><summary><span data-field=".q"></span></summary><p class="body-text" data-field=".a"></p></details>
   </section>
-  <p class="center" data-if="!rsvp.method !thank_you_on"><a class="btn" href="rsvp.html"><span data-copy="rsvp_button">RSVP</span></a></p>
+  <p class="center" data-if="!rsvp.method !thank_you_on"><a class="btn btn-gold" href="rsvp.html"><span data-copy="rsvp_title">Kindly reply</span></a></p>
 </main>
 <nav class="site-nav" aria-label="Wedding pages">
   <ul>
@@ -105,5 +102,6 @@
     <li data-if="!rsvp.method !thank_you_on"><a href="rsvp.html"><span data-copy="nav_rsvp">RSVP</span></a></li>
   </ul>
 </nav>
+<div class="accent-layer" aria-hidden="true"></div>
 </body>
 </html>

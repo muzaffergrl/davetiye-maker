@@ -1,11 +1,10 @@
-// Nocturne Lake Estate (22, G422): redesign of 2026-10-22 (docs/35 row 22), rebuilt on the pilot-39 structure (pilot
-// G423) from the design's own layered GPT parts (PAKET 5R). The closed envelope (K23 strict: a portrait charcoal
-// laid-paper envelope with a deep diamond flap edged in deckled gold foil, wrapped by a frosted vellum band with a
-// hammered gold crescent brooch — not the V flap + wax seal of 01–21), its opening (glint, the crescent rises to stay as
-// the moon, the band slides off, the flap opens on its top edge onto its painted night sky, light on the moon path, the
-// card rises from behind the pocket, accents drift), the envelope geometry shared by the build and site.css, editable
-// texts, scenes, the villa windows with measured windows (arched mask), the shutters on the story window's canvas, demo
-// route, thank-you mode, audio cues, RSVP contract, print layout. Off sale ("preview") until approval.
+// Nocturne Lake Estate (22) v2 of 2026-10-24: rebuilt after its GPT design board (PAKET 8 "The moon is missing") from
+// the PAKET 8 parts. The closed envelope (a black cotton envelope whose flap is die-cut along two mountain ridges, the
+// champagne-gold moon seal in its valley), its opening (the seal clicks free and rises into the empty sky to become the
+// moon, the flap lifts onto its gold moiré inside, the card is drawn from the pocket and comes forward), the envelope
+// geometry shared by the build and site.css, editable texts, scenes, the measured frame windows, the story photographs
+// over the water, the moon-path programme, the gilt card, demo route, thank-you mode, its own sounds, the RSVP contract,
+// K21 (nothing drawn: no SVG, no data images, every url() a theme image). Off sale ("preview") until approval.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
@@ -19,7 +18,7 @@ import { handleDemoPage } from '../lib/claim/demo-page.ts';
 import { DEMO_CITY_PINS } from '../lib/claim/demo-map.ts';
 import { themeOpenForClaims } from '../lib/themes/approval.ts';
 import { MARKETING } from '../lib/marketing/config.ts';
-import { DESIGN_COPY, DESIGN_STYLES, openingObject } from '../lib/marketing/designs.ts';
+import { DESIGN_COPY, openingObject } from '../lib/marketing/designs.ts';
 import { designSound } from '../lib/audio/catalog.ts';
 import { PRINT_LAYOUTS } from '../lib/print/layouts.ts';
 import { renderTemplate } from '../lib/theme/engine.ts';
@@ -41,7 +40,8 @@ const rule = (sel: string) => {
   return m[1];
 };
 const num = (body: string, prop: string) => Number(new RegExp(`(?:^|;)${prop}:(-?[\\d.]+)%`).exec(body)?.[1]);
-const close = (a: number, b: number, what: string) => assert.ok(Math.abs(a - b) < 0.011, `${what}: ${a} ≠ ${b}`);
+const close = (a: number, b: number, what: string, tol = 0.011) => assert.ok(Math.abs(a - b) < tol, `${what}: ${a} ≠ ${b}`);
+const step = (k: string) => /\[(\d+), (\d+)\]/.exec(new RegExp(`\\b${k}: \\[\\d+, \\d+\\]`).exec(js)![0])!.slice(1).map(Number);
 
 test('Nocturne Lake Estate is a platform theme, kept off sale until approval', async () => {
   const theme = await claimableTheme(id);
@@ -52,23 +52,36 @@ test('Nocturne Lake Estate is a platform theme, kept off sale until approval', a
   assert.equal(DESIGN_COPY[id].collection, '22_Nocturne_Lake_Estate');
   assert.match(DESIGN_COPY[id].opening, /^Your guests tap the envelope\. /);
   assert.equal(openingObject(DESIGN_COPY[id]), 'envelope');
-  assert.deepEqual(DESIGN_COPY[id].fonts, ['Cinzel', 'Cormorant Garamond', 'Jost']);
-  assert.deepEqual(DESIGN_STYLES[id], ['classic', 'destination']);
   assert.equal(themeOpenForClaims(id, { env: { VERCEL_ENV: 'production' } }), false);
   assert.ok(DEMO_CITY_PINS[id], 'demo map pin');
   assert.equal(PRINT_LAYOUTS[id]?.collection, '22_Nocturne_Lake_Estate');
-  assert.deepEqual(PRINT_LAYOUTS[id]?.sources, { front: 'print/invitation_front_r_5x7.png', back: 'print/invitation_back_r_5x7.png' });
   assert.deepEqual(Object.keys(theme.manifest.photos).sort(), ['hero_portrait', 'story_1', 'story_2', 'story_3', 'venue']);
   for (const [k, v] of Object.entries(manifest.photo_slots as Record<string, { aspect: string }>)) assert.equal(theme.manifest.photos[k].aspect, v.aspect, k);
 });
 
-test('demo record = collection record, fictional, URLs and media empty', async () => {
+test('fonts: Waterfall (names, script headings) + Castoro Titling (capitals) + Castoro (body) on every page, measured fallbacks', () => {
+  for (const p of PAGES) {
+    assert.match(html[p], /fonts\.googleapis\.com\/css2\?family=Castoro:ital@0;1&family=Castoro\+Titling&family=Waterfall&display=swap/, p);
+    assert.match(html[p], /@font-face\{font-family:fb1;[^}]*size-adjust:[\d.]+%/, `${p}: fb1`);
+    assert.doesNotMatch(html[p], /Cinzel|Jost|Cormorant/, p);
+  }
+  assert.match(css, /--script:'Waterfall',fb1,fb2,cursive;--caps:'Castoro Titling'/);
+  // Waterfall has thin strokes: the script is only used large (≥ 32 px) — names, headings, the card's names (≥ 11cqw)
+  for (const m of css.matchAll(/font:400 ([^;}]*) var\(--script\)/g)) {
+    const size = m[1];
+    const min = /clamp\((\d+)px/.exec(size)?.[1] ?? /^(\d+)px/.exec(size)?.[1];
+    if (min) assert.ok(Number(min) >= 32, `script at ${size}`);
+  }
+});
+
+test('demo record = collection record, fictional, URLs and media empty, its own music', async () => {
   const a = JSON.parse(await readFile(path.join(ROOT, 'themes', id, 'content.demo.json'), 'utf8'));
   const b = JSON.parse(await readFile(path.join(ROOT, '..', 'collections/22_Nocturne_Lake_Estate/content.demo.json'), 'utf8'));
   assert.deepEqual(a, b);
   assert.equal(a.record_kind, 'demo');
   assert.equal(a.name_display, 'Eleanor & Luca');
   assert.equal(a.date, '2027-09-18');
+  assert.equal(a.audio.music, 'moonlit-terrace');
   for (const v of Object.values(a.urls)) assert.equal(v, null);
   assert.equal(a.media.hero_portrait, null);
   assert.deepEqual(a.media.memory_photos, []);
@@ -82,128 +95,104 @@ test('editable texts = templates, no unmarked visible text', () => {
   assert.deepEqual(scan.unmarked ?? [], []);
 });
 
-test('envelope — back, shimmer, card, pocket, flap (outside + night-sky inside), vellum band and brooch are separate layers; no V flap or wax seal', () => {
+test('envelope — the moon seal, the mountain flap and its moiré inside, back, pocket and card are separate layers; the opening order', () => {
   const $ = cheerio.load(html.index);
   const stage = $('.stage');
   assert.equal(stage.attr('role'), 'button');
   assert.equal(stage.attr('tabindex'), '0');
-  for (const sel of ['.envelope > .back', '.envelope > .shimmer', '.envelope > .card', '.envelope > .front', '.envelope > .flap > .flap-out', '.envelope > .flap > .flap-in', '.envelope > .vellum', '.envelope > .moon']) assert.equal(stage.find(sel).length, 1, sel);
-  // not the V flap / wax seal of 01–21 and no Codex envelope-v3 controller any more
-  assert.doesNotMatch(html.index + css, /v-flap|wax|seal|clip-path:\s*polygon|envelope-v3|opening-site/i);
-  for (const f of ['envelope-v3.js', 'envelope-v3.css', 'opening-design.json', 'opening-site.js', 'interior.css', 'interior-motion.js', 'variants.css']) assert.ok(!existsSync(path.join(ROOT, 'themes', id, f)), f);
-  // the steps in MOTION order; the CSS keyframes carry the same numbers
-  const step = (k: string) => /\[(\d+), (\d+)\]/.exec(new RegExp(`${k}: \\[\\d+, \\d+\\]`).exec(js)![0])!.slice(1).map(Number);
-  const [g0, gd] = step('glint'), [m0, md] = step('moon'), [v0, vd] = step('vellum'), [l0, ld] = step('flap'), [s0, sd] = step('light'), [r0, rd] = step('rise'), [w0, wd] = step('forward');
-  const acc = Number(/accents: (\d+),/.exec(js)![1]);
+  for (const sel of ['.env > .env-inside', '.env > .env-back', '.env > .card-well > .env-card', '.env > .env-pocket', '.env > .env-flap', '.env > .env-seal']) assert.equal(stage.find(sel).length, 1, sel);
+  // the initials are live text on the seal's smooth centre; the moon waits in the empty sky
+  assert.equal(stage.find('.env-seal [data-field="initials"]').length, 1);
+  assert.equal($('.night > .sky-moon img[src="img/moon-320.webp"]').length, 1);
+  assert.match(css, /\.page-opening \.sky-moon,\.page-opening \.moon-halo\{opacity:0\}/);
+  // the steps: tick, rise, flap, moon, draw, reveal in this order; the CSS keyframes carry the same numbers
+  const [t0] = step('tick'), [r0, rd] = step('rise'), [f0] = step('flap'), [m0] = step('moon'), [d0, dd] = step('draw'), [v0, vd] = step('reveal');
   const go = Number(/go: (\d+)/.exec(js)![1]);
-  // the closure acts first (the brooch, then the band), then the flap, then the card; ≤ 5.5 s in all
-  assert.ok(g0 <= m0 && m0 < v0 && v0 < l0 && l0 < s0 && s0 < acc && acc < r0 && r0 < w0);
-  assert.ok(v0 >= m0 + 400, 'the band only moves once the brooch has lifted off it');
-  assert.ok(r0 >= l0 + ld, 'the card rises once the flap is open');
-  assert.ok(go >= w0 + wd && go <= 5500, 'home only after the card came forward, within 5.5 s');
-  assert.match(css, new RegExp(`\\.is-opening \\.moon::after\\{animation:glint ${gd}ms ${g0}ms`));
-  assert.match(css, new RegExp(`\\.is-opening \\.moon\\{animation:moon-rise ${md}ms ${m0}ms`));
-  assert.match(css, new RegExp(`\\.is-opening \\.vellum\\{animation:band-off ${vd}ms ${v0}ms`));
-  assert.match(css, new RegExp(`\\.is-opening \\.flap\\{animation:flap-open ${ld}ms ${l0}ms`));
-  assert.match(css, new RegExp(`\\.is-opening \\.shimmer\\{animation:shimmer ${sd}ms ${s0}ms`));
-  assert.match(css, new RegExp(`\\.is-opening \\.shimmer>i\\{animation:ripple ${sd}ms ${s0}ms`));
-  assert.match(css, new RegExp(`card-rise ${rd}ms ${r0}ms`));
-  assert.match(css, new RegExp(`card-forward ${wd}ms ${w0}ms`));
-  assert.match(js, /particles\('open', \$\('\.stage'\)\), E\.accents/);
-  // the 3D flap shows its real GPT inside (the painted night sky), never a plain colour
-  assert.match(css, /@keyframes flap-open\{from\{transform:perspective\(900px\) rotateX\(0\);z-index:4\}/);
-  assert.match(rule('.flap-in'), /^transform:rotateX\(180deg\);[^}]*background-image:url\(img\/flap_in-720\.webp\)/);
-  assert.match(css, /\.flap-out,\.flap-in\{[^}]*backface-visibility:hidden/);
-  // the moon stays above the envelope once the card has come forward (opened state = the keyframes' end)
-  const end = /@keyframes moon-rise\{[\s\S]*?100%\{transform:([^}]*)\}\}/.exec(css)![1];
-  assert.match(css, new RegExp(`\\.is-opened \\.moon\\{transform:${esc(end)}\\}`));
-  assert.doesNotMatch(/@keyframes moon-rise\{[\s\S]*?\}\}/.exec(css)![0], /opacity:0/, 'the moon does not fade away');
-  // no button or pill during the opening
+  assert.ok(t0 === 0 && t0 < r0 && r0 < f0 && f0 < m0 && m0 < d0 && d0 < v0);
+  assert.ok(m0 >= r0 + rd - 100, 'the moon settles as the seal arrives');
+  assert.ok(v0 >= d0 + dd, 'the card comes forward once it is out of the pocket');
+  assert.ok(go >= v0 + vd && go <= 5000, 'home after the card came forward, within 5 s');
+  assert.match(css, new RegExp(`\\.is-opening \\.env-flap\\{animation:flap-up \\.32s \\.${String(f0).padStart(3, '0').replace(/0+$/, '')}s`));
+  assert.match(css, new RegExp(`\\.is-opening \\.env-card\\{animation:show \\.01s [\\d.]+s forwards,draw \\.${String(dd).replace(/0+$/, '')}s ${d0 / 1000}s`));
+  assert.match(css, new RegExp(`\\.is-opening \\.path-light\\{animation:path-run [\\d.]+s ${m0 / 1000}s`));
+  // the flap lifts to edge-on, then its inside stands up from edge-on (3D, no backface trick, no plain colour)
+  assert.match(css, /@keyframes flap-up\{to\{transform:rotateX\(90deg\);visibility:hidden\}\}/);
+  assert.match(css, /@keyframes flap-in\{from\{visibility:visible;transform:rotateX\(-90deg\)/);
+  assert.match(js, /at\(E\.rise\[0\], rise\)/);
+  assert.match(js, /fly\.className = 'seal-fly'/);
+  // no button or pill during the opening; the opened state shows Enter + Replay
   assert.match(css, /\.enter,\.replay\{display:none\}/);
-  assert.match(css, /\.is-opened \.tap-hint,\.is-opening \.tap-hint\{display:none\}/);
-  // the catalogue cover layout
-  assert.equal($('.opening-heading [data-copy="envelope_kicker"]').text(), 'Together with their families');
+  assert.match(css, /\.is-opening \.tap-hint,\.is-opened \.tap-hint\{display:none\}/);
+  assert.match(css, /\.is-opened \.enter,\.is-opened \.replay\{display:inline-flex\}/);
+  assert.equal($('.opening-heading [data-copy="envelope_kicker"]').text(), 'You are invited');
   assert.equal($('.opening-heading h1.names [data-field="partners.0.display_name"]').length, 1);
-  assert.equal($('.opening-actions .opening-date [data-field="date"]').length, 1);
-  assert.equal($('.opening-actions .opening-date [data-field="venue.city"]').length, 1);
   assert.equal($('.opening-actions .tap-hint').length, 1);
   assert.equal($('.replay').length, 1);
+  assert.equal($('.replay[hidden]').length, 0);
   assert.equal($('a[data-enter][href="home.html"]').length, 1);
   assert.equal($('a[data-skip][href="home.html"]').length, 1);
   assert.equal($('p.nojs-only a[href="home.html"]').length, 1);
   assert.equal($('noscript').length, 0);
   assert.match($('script[type="speculationrules"]').text(), /a\[data-enter\]/);
-  assert.equal(stage.find('.card [data-slot="hero_portrait"] img[data-photo="hero_portrait"]').length, 1);
+  assert.equal(stage.find('.env-card [data-slot="hero_portrait"] img[data-photo="hero_portrait"]').length, 1);
   assert.equal(stage.find('[data-field="thank_you_title"]').length, 1);
-  assert.match(css, /\.is-opened \.replay\{display:inline-flex/);
-  // a calm material ground: no full-bleed florals on the cover
-  assert.doesNotMatch(html.index, /spray|florals/);
-  assert.match(css, /\.page-opening\{[^}]*url\(img\/night-640\.webp\)/);
 });
 
-test('one envelope geometry: the build\'s manifest stage = site.css layers; the windows = the measured ones', async () => {
-  const st = manifest.stage, a = String(st.aspect).replace('.', '\\.');
-  assert.match(css, new RegExp(`\\.envelope\\{position:relative;width:100%;aspect-ratio:${a}\\}`));
-  // the gap above the envelope = the open flap's inside standing up (it stands there without covering the names)
-  const inH = String(Math.round(st.flap_in_h * 10) / 1000).replace(/^0\./, '\\.');
-  assert.match(css, new RegExp(`\\.stage\\{--obj:[^;]*;[^}]*margin:calc\\(var\\(--obj\\) / ${a} \\* ${inH} \\+ \\d+px\\) auto 0`));
-  const box = (sel: string, k: 'front' | 'flap' | 'vellum' | 'moon' | 'card') => {
-    const b = rule(sel), [L, T, W, H] = st[k];
-    for (const [prop, v] of [['left', L], ['top', T], ['width', W], ['height', H]] as const) {
-      const got = num(b, prop);
-      if (Number.isFinite(got)) close(got, v, `${sel} ${prop}`);
-      else assert.equal(v, 0, `${sel} ${prop}: no % in site.css, manifest ${v}`);
+test('one envelope geometry: the build\'s manifest stage = site.css layers; the frame windows = the measured holes', async () => {
+  const st = manifest.stage;
+  assert.match(rule('.stage'), new RegExp(`aspect-ratio:${esc(String(st.aspect))}`));
+  assert.match(rule('.stage'), new RegExp(`\\* ${esc(String(st.aspect))}\\)`));
+  close(num(rule('.env-flap'), 'height'), st.flap_h, '.env-flap height');
+  close(num(rule('.env-inside'), 'height'), st.flap_in_h, '.env-inside height');
+  const seal = rule('.env-seal');
+  for (const [prop, v] of [['left', st.seal[0]], ['top', st.seal[1]], ['width', st.seal[2]], ['height', st.seal[3]]] as const) close(num(seal, prop), v, `.env-seal ${prop}`);
+  const card = rule('.env-card');
+  close(num(card, 'left'), st.card[0], '.env-card left');
+  close(num(card, 'top'), st.card[1], '.env-card top');
+  close(num(card, 'width'), st.card[2], '.env-card width');
+  assert.match(card, new RegExp(`aspect-ratio:${esc(String(st.card_ratio))}`));
+  // the seal sits on the valley's lowest point; the card lies inside the pocket, under its top edge
+  close(st.seal[0] + st.seal[2] / 2, st.valley[0], 'seal centre x = valley', 0.02);
+  assert.ok(st.seal[1] < st.valley[1] && st.seal[1] + st.seal[3] > st.valley[1], 'the seal covers the valley');
+  assert.ok(st.card[1] > st.pocket_top && st.card[1] + st.card[3] <= 100, 'card inside the pocket');
+  assert.ok(st.flap_cut.method === 'renk' && st.flap_cut.residual_sd < 2, 'the flap is cut along its gold hairline, not a geometric guess');
+  // the photo windows: measured from the parts' alpha holes, the photo box = window + a little bleed under the frame
+  const win = (k: string) => manifest[k].window_pct as number[];
+  const near = (sel: string, w: number[]) => {
+    const b = rule(sel);
+    for (const [i, prop] of ['left', 'top', 'width', 'height'].entries()) {
+      const got = num(b, prop), want = w[i], bleed = i < 2 ? -1 : 2;
+      assert.ok(Math.abs(got - want) <= Math.abs(bleed) + 0.3 && (i < 2 ? got <= want + 0.05 : got >= want - 0.05), `${sel} ${prop}: ${got} vs window ${want}`);
     }
   };
-  box('.front', 'front');
-  box('.flap', 'flap');
-  box('.vellum', 'vellum');
-  box('.moon', 'moon');
-  box('.card', 'card');
-  // the inside of the flap: as wide as the envelope, its own height (stage.flap_in_h) in % of the flap's box
-  close(num(rule('.flap-in'), 'height'), Math.round(10000 * st.flap_in_h / st.flap[3]) / 100, '.flap-in height');
-  // the band covers the flap's point, the brooch sits on the band, the card stays inside the pocket
-  assert.ok(st.vellum[1] < st.flap[3] && st.vellum[1] + st.vellum[3] > st.flap[3], 'the flap\'s point is under the band');
-  close(st.moon[1] + st.moon[3] / 2, st.vellum[1] + st.vellum[3] / 2, 'brooch centre = band centre');
-  assert.ok(st.card[1] + st.card[3] <= 100 && st.card[0] >= 0 && st.card[0] + st.card[2] <= 100, 'card inside the envelope');
-  assert.ok(st.card[1] > st.front[1], 'the card sits below the pocket\'s top edge (the lake shows above it)');
-  // the villa windows: photo in the measured window (+0.5 % under the frame on each side), aspect = the part
-  for (const [sel, k2] of [['.arch', 'window'], ['.storywin', 'story'], ['.terrace', 'terrace']] as const) {
-    const [L, T, W, H] = manifest[k2].window_pct;
-    const b = rule(`${sel}>.photo-slot`);
-    for (const [prop, v] of [['left', L - 0.5], ['top', T - 0.5], ['width', W + 1], ['height', H + 1]] as const) close(num(b, prop), v, `${sel} ${prop}`);
-    const [w, h] = manifest[k2].src_size;
-    assert.match(rule(sel), new RegExp(`aspect-ratio:${w}/${h}`), `${sel} aspect = the part`);
+  near('.env-card .framed', win('card'));
+  near('.hero-portrait .framed', win('frame_arch'));
+  near('.float-photo>.land-photo', win('frame_land'));
+  for (const [k, mask] of [['card', 'mask_card.png'], ['frame_arch', 'mask_arch.png']] as const) {
+    assert.equal(manifest[k].mask, mask);
+    const meta = await sharp(path.join(ROOT, 'themes', id, 'img', mask)).metadata();
+    assert.equal(meta.hasAlpha, true, mask);
   }
-  // the arch is not a rectangle: its measured window becomes the alpha mask (technical, no drawing)
-  assert.equal(manifest.window.mask, 'mask_arch.png');
-  assert.match(rule('.arch>.photo-slot'), /mask:url\(img\/mask_arch\.png\)/);
-  const mask = await sharp(path.join(ROOT, 'themes', id, 'img/mask_arch.png')).metadata();
-  assert.equal(mask.hasAlpha, true);
-  // the shutters on the story window's canvas, placed in % of the cut frame
-  for (const [sel, k] of [['.shutter.sh-l', 'shutter_l'], ['.shutter.sh-r', 'shutter_r']] as const) {
-    const [L, T, W, H] = manifest.shutters[k], b = rule(sel);
-    close(num(b, 'left'), L, `${sel} left`);
-    close(num(b, 'top'), T, `${sel} top`);
-    close(num(b, 'width'), W, `${sel} width`);
-    close(num(b, 'height'), H, `${sel} height`);
-  }
+  assert.match(rule('.hero-portrait'), new RegExp(`aspect-ratio:${manifest.frame_arch.src_size.join('/')}`));
+  assert.match(rule('.float-photo'), new RegExp(`aspect-ratio:${manifest.frame_land.src_size.join('/')}`));
 });
 
-test('session keys per site, view transition, scenes, placeholders, countdown, K21', () => {
+test('session keys per site, view transitions, scenes, placeholders, countdown, K21', () => {
   assert.match(js, /storage: \{ opened: 'invite:opened', arrive: 'invite:arrive' \}/);
   assert.match(html.index, /sessionStorage\.getItem\('invite:opened'\+k\)/);
   assert.match(html.home, /s\.getItem\('invite:arrive'\+k\)/);
   assert.match(css, /@view-transition\{navigation:auto\}/);
   assert.match(js, /viewTransitionName = 'invite-card'/);
-  assert.match(css, /\.from-envelope \.hero-card \[data-step\]\{opacity:1;clip-path:none;transform:none;transition:none;animation:none\}/);
-  assert.equal(cheerio.load(html.home)('.hero-card').length, 1);
-  assert.equal(cheerio.load(html.home)('.hero-moon[data-step]').length, 1, 'the moon reappears small on home');
+  assert.match(css, /\.hero-portrait \.framed\{view-transition-name:invite-card\}/);
+  assert.match(css, /\.from-envelope \.hero-portrait\[data-step\]\{opacity:1;transform:none;transition:none\}/);
+  // the moon carries the site: the opening's moon becomes home's (view transition sky-moon)
+  assert.match(css, /\.is-opening \.sky-moon,\.is-opened \.sky-moon,\.page-home \.sky-moon\{view-transition-name:sky-moon\}/);
   for (const p of PAGES) if (p !== 'index') assert.ok(cheerio.load(html[p])('[data-scene]').length > 0, `${p}: [data-scene]`);
+  const scenes = /scenes: \{[\s\S]*?\n  \}/.exec(js)![0];
   for (const p of PAGES) {
     const $ = cheerio.load(html[p]);
     $('[data-scene]').each((_, el) => {
-      const steps = new Set((/scenes: \{[\s\S]*?\n  \}/.exec(js)![0].match(new RegExp(`'${$(el).attr('data-scene')}': \\[([^\\n]*)\\]`))?.[1] ?? '').match(/'([a-z]+)'/g)?.map((s) => s.slice(1, -1)));
+      const steps = new Set((scenes.match(new RegExp(`'${$(el).attr('data-scene')}': \\[([^\\n]*)\\]`))?.[1] ?? '').match(/'([a-z]+)'/g)?.map((s) => s.slice(1, -1)));
       $(el).find('[data-step]').each((__, n) => { if ($(n).closest('[data-scene]').is(el)) assert.ok(steps.has($(n).attr('data-step')!), `${p}: ${$(el).attr('data-scene')} step ${$(n).attr('data-step')} in MOTION.scenes`); });
     });
   }
@@ -223,34 +212,48 @@ test('session keys per site, view transition, scenes, placeholders, countdown, K
     });
   }
   assert.deepEqual([...slots].sort(), ['hero_portrait', 'story_1', 'story_2', 'story_3', 'venue']);
-  // every photo sits in a GPT villa window; the story's windows have their two shutters (story + teaser)
-  assert.equal(cheerio.load(html.home)('.frame.arch.villa[data-step] > .photo-slot[data-slot="hero_portrait"] + .cut').length, 1);
-  assert.equal(cheerio.load(html.story)('.moments .moment[data-scene] .frame.storywin.villa > .photo-slot + .cut + .shutter.sh-l + .shutter.sh-r').length, 3);
-  assert.equal(cheerio.load(html.home)('.teaser .frame.storywin.villa > .shutter').length, 2);
-  assert.equal(cheerio.load(html.details)('.frame.terrace.villa > .photo-slot[data-slot="venue"]').length, 1);
-  assert.match(css, /\.js \.villa\[data-step\]\.in>\.shutter\.sh-l\{animation:shutter-l /);
-  assert.match(css, /@keyframes shutter-l\{to\{transform:rotateY\(-\d+deg\)\}\}/);
-  assert.match(css, /@keyframes shutter-r\{to\{transform:rotateY\(\d+deg\)\}\}/);
-  // reduced motion: the shutters stay open (hidden), the photos plain, the light effects off
-  assert.match(css, /prefers-reduced-motion:reduce[\s\S]*\.js \.villa>\.shutter\{display:none\}/);
-  assert.match(css, /prefers-reduced-motion:reduce[\s\S]*\.card::after,\.moon::after,\.shimmer,\.sparks\{display:none\}/);
   for (const r of css.match(/[^{}]*\.cd-[^{}]*\{[^}]*\}/g) ?? []) assert.doesNotMatch(r, /border|outline|box-shadow/, r);
   // K21: no drawn shapes — no SVG, no inline data images, every url() is a theme image
   for (const f of ['site.css', 'thank-you.css', ...PAGES.map((p) => `${p}.html`)]) assert.doesNotMatch(read(f), /<svg|data:image/, f);
-  for (const m of css.matchAll(/url\(([^)]+)\)/g)) assert.ok(existsSync(path.join(ROOT, 'themes', id, m[1])), m[1]);
-  // every image the pages, CSS and JS name exists in img/
+  for (const m of css.matchAll(/url\(([^)#]+)\)/g)) assert.ok(existsSync(path.join(ROOT, 'themes', id, m[1])), m[1]);
   for (const f of ['site.css', 'thank-you.css', 'site.js', ...PAGES.map((p) => `${p}.html`)]) {
     for (const m of read(f).matchAll(/img\/([A-Za-z0-9_.~-]+\.(?:webp|jpg|jpeg|png))/g)) assert.ok(existsSync(path.join(ROOT, 'themes', id, 'img', m[1])), `${f}: img/${m[1]}`);
   }
 });
 
-test('img/manifest.json: every PAKET 5 part used, no green left, og + favicon; build script, README and thank-you styles exist', () => {
+test('the pages follow the board: photographs over water, the moon-path programme with icons, the gilt card', () => {
+  const home = cheerio.load(html.home), story = cheerio.load(html.story), details = cheerio.load(html.details), rsvp = cheerio.load(html.rsvp);
+  assert.equal(home('.hero .night > .sky-moon').length, 1, 'home: the moon in its sky');
+  assert.equal(home('.hero > .balustrade').length, 1, 'home: the balustrade in front of the lake');
+  assert.equal(home('.hero-portrait > .framed [data-slot="hero_portrait"]').length, 1);
+  assert.equal(home('.hero-portrait > img.arch-frame').length, 1);
+  // each story photograph floats over the water with its own reflection (the same slot, mirrored by CSS)
+  assert.equal(story('.slide .floating > .float-photo [data-slot]').length, 3);
+  for (const n of [1, 2, 3]) assert.equal(story(`.slide .water .reflection img[data-photo="story_${n}"]`).length, 1, `story_${n} reflection`);
+  assert.match(rule('.reflection img'), /transform:scaleY\(-1\)/);
+  assert.equal(story('.chapter-no').text(), '', 'the chapter numeral is a CSS counter, not text');
+  assert.match(css, /\.chapter-no::after\{content:counter\(ch,upper-roman\)\}/);
+  assert.equal(home('.teaser .floating .water .reflection img[data-photo="story_1"]').length, 1);
+  // details: the schedule hangs on the thread (the divider's own broken end), an icon per moment, the dress code last
+  assert.equal(details('.schedule > li[data-repeat="schedule"] > .sched-icon').length, 1);
+  assert.equal(details('.schedule > li.dress-row .icon-dress').length, 1);
+  assert.match(css, /\.schedule::before,\.schedule::after\{[^}]*url\(img\/thread-44\.webp\)/);
+  for (const k of ['rings', 'toast', 'dinner', 'dance', 'boat', 'dress']) assert.ok(existsSync(path.join(ROOT, 'themes', id, `img/icon-${k}-128.webp`)), k);
+  assert.match(js, /\['rings', \/ceremon/);
+  // the gilt card: three GPT slices, the middle repeats
+  for (const page of [home, rsvp]) assert.equal(page('.gilt > .gilt-bg > i').length, 3);
+  assert.match(rule('.gilt-bg>i:nth-child(2)'), /url\(img\/gilt_mid-720\.webp\) 0 0\/100% auto repeat-y/);
+  assert.equal(rsvp('.reply-card .gilt [data-rsvp]').length, 1);
+});
+
+test('img/manifest.json: every PAKET 8 part used, og + favicon; build script, README and thank-you styles exist', () => {
   assert.deepEqual(manifest.parts.waiting_for_gpt, []);
   assert.equal(manifest.parts.used.length, 22);
-  assert.deepEqual(manifest.checks.green, {});
   for (const k of ['og', 'favicon']) assert.ok(existsSync(path.join(ROOT, 'themes', id, 'img', manifest[k].file)), k);
   for (const f of ['thank-you.css', 'build_images.py', 'README.md']) assert.ok(existsSync(path.join(ROOT, 'themes', id, f)), f);
   assert.ok(manifest.bytes_total <= 3_000_000, 'theme folder ≤ 3 MB');
+  assert.ok(Buffer.byteLength(css) <= 45_000, 'site.css ≤ 45 KB');
+  assert.ok(Buffer.byteLength(js) <= 35_000, 'site.js ≤ 35 KB');
 });
 
 test('demo route renders every page with the design\'s own sample photos (G155) and preview navigation', async () => {
@@ -262,9 +265,8 @@ test('demo route renders every page with the design\'s own sample photos (G155) 
     const data = JSON.parse($('#site-data').text());
     assert.equal(data.preview, true);
     assert.match(data.pages.home, /^\/start\/demo\/nocturne-lake-estate\/home/);
-    // the demo fills the empty slots with the design's PAKET 2 photos (public/demo/nocturne-lake-estate, fictional couple)
     if (page === 'home') assert.match($('[data-photo="hero_portrait"]').attr('src') || '', /^\/demo\/nocturne-lake-estate\/hero_portrait-\d+w\.webp/);
-    if (page === 'story') assert.equal($('.moment').length, 3);
+    if (page === 'story') assert.equal($('.slide').length, 3);
   }
 });
 
@@ -274,13 +276,13 @@ test('thank-you mode closes RSVP, keeps the story and the card carries the thank
   const demo = structuredClone(theme.demo);
   const render = async (page: PageName, content: ContentRecord) => renderTemplate({
     html: await readFile(path.join(theme.loaded.dir, theme.manifest.pages[page]!), 'utf8'), theme: theme.manifest, content, page,
-    slug: 'review', previewKey: 'demo', now: new Date('2026-10-21'),
+    slug: 'review', previewKey: 'demo', now: new Date('2026-10-24'),
   });
   demo.thank_you = { mode: 'on', message: 'Thank you for an evening we will treasure.', details: 'hide' };
   const index = cheerio.load((await render('index', demo)).html);
-  assert.ok(index('.card [data-field="thank_you_title"]').text().trim().length > 0);
-  assert.equal(index('.card [data-photo="hero_portrait"]').length, 0);
-  assert.equal(index('.card .ty-decor img').length, 1, 'no photo: a piece of the painted lake, never a placeholder');
+  assert.ok(index('.env-card [data-field="thank_you_title"]').text().trim().length > 0);
+  assert.equal(index('.env-card [data-photo="hero_portrait"]').length, 0);
+  assert.equal(index('.env-card .ty-decor img').length, 1, 'no photo: the moon in the arch window, never a placeholder');
   const home = cheerio.load((await render('home', demo)).html);
   assert.match(home.text(), /Thank you for an evening we will treasure/);
   assert.equal(home('a[href*="/rsvp"]').length, 0);
@@ -290,12 +292,15 @@ test('thank-you mode closes RSVP, keeps the story and the card carries the thank
   assert.equal(cheerio.load((await render('rsvp', demo)).html)('[data-rsvp-form]').length, 0);
 });
 
-test('opening sounds (G967): the glint, the vellum band, the flap, the moonlight, the card, forward — on the MOTION times', () => {
-  const at = (k: string) => Number(new RegExp(`\\b${k}: \\[(\\d+), `).exec(js)![1]);
-  assert.deepEqual(designSound(id), { music: 'evening-strings', opening: [[at('glint'), 'sparkle'], [at('vellum'), 'vellum'], [at('flap'), 'paper'], [at('light'), 'shimmer'], [at('rise'), 'slide-quick'], [at('forward'), 'stars']] });
+test('its own sounds (K59): tick, rise, flap, moon, draw, reveal on the MOTION times; leaf, ripple, press, clink on the pages', () => {
+  const at = (k: string) => step(k)[0];
+  const s = designSound(id);
+  assert.equal(s.music, 'moonlit-terrace');
+  assert.deepEqual(s.opening, [[at('tick'), 'tick'], [at('rise'), 'rise'], [at('flap'), 'flap'], [at('moon'), 'moon'], [at('draw'), 'draw'], [at('reveal'), 'reveal']]);
+  for (const cue of ['leaf', 'ripple', 'press', 'clink']) assert.match(js, new RegExp(`sfx\\('${cue}'\\)`), cue);
 });
 
-test('RSVP keeps the shared form contract; a reply is answered with the GPT accents and the lantern', async () => {
+test('RSVP keeps the shared form contract; a reply presses the moon seal and the moon brightens', async () => {
   const response = await handleDemoPage(new Request('https://preview.example/start/demo/' + id + '/rsvp'), id, 'rsvp');
   const $ = cheerio.load(await response.text());
   assert.equal($('script[src="/rsvp/form.js"][defer]').length, 1);
@@ -306,8 +311,7 @@ test('RSVP keeps the shared form contract; a reply is answered with the GPT acce
   const legend = $('[data-rsvp-question] legend').first();
   assert.equal(legend.attr('data-field'), undefined, 'the label is a child span, not the legend itself');
   assert.equal(legend.find('[data-field]').length, 1);
-  assert.equal($('a[href="#reply"]').length, 1);
-  assert.equal($('.signature .lantern .flame').length, 1);
-  assert.match(css, /html\[data-rsvp-replied\] \.lantern>\.flame\{animation:flame-up/);
-  for (const n of ['flake', 'petal', 'spark']) assert.match(js, new RegExp(`img: 'img/${n}-160\\.webp'`));
+  assert.equal($('[data-rsvp-state="success"] .press-seal .seal-initials').text(), 'E&L', 'the initials on the pressed seal');
+  assert.match(css, /\.is-sealing \.press-seal\{animation:seal-down /);
+  assert.match(css, /html\[data-rsvp-replied\] \.page-rsvp \.sky-moon\{filter:brightness/);
 });

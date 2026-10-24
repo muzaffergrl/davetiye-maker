@@ -1,23 +1,23 @@
 <!doctype html>
-<!-- Nocturne Lake Estate · page 1 — the closed envelope (/<slug>). Redesign of 2026-10-22 (docs/35 row 22, G422). On
-     charcoal-black laid paper with sparse gold flecks "Together with their families" and the names in Cinzel; below them
-     a portrait charcoal laid-paper envelope with a deep diamond flap edged in deckled champagne-gold foil, wrapped by a
-     frosted vellum belly band engraved with a lake panorama, a hammered gold crescent brooch pinned on it; under it the
-     date · the city and "Tap to open".
-     Opening (site.js MOTION.envelope): on tap the crescent catches the moonlight, lifts off the band and floats up to stay
-     above the envelope as the moon, the vellum band slides down and fades, the diamond flap opens on its top edge (3D)
-     onto its painted night sky — with the lake painted inside the envelope they read as one painting — light shimmers on
-     the moon path, gold leaf, candle sparks and a white rose petal drift, the ivory card rises from behind the pocket,
-     comes forward and flies to home (view transition invite-card → the home hero card). Back, card, pocket, flap
-     (outside + night-sky inside), band and brooch are separate layers, all GPT pixels cut by build_images.py. Personal
-     text: none — [data-field] / [data-text] / [data-photo] are filled on the server. Thank-you mode (G075): the same
-     opening; the card carries the thank-you title and the date, its window the thank-you photo or — without one — a
-     piece of the painted lake. Design texts: data-copy (G068, theme.json "copy"). -->
+<!-- Nocturne Lake Estate · page 1 — the closed envelope (/<slug>). v2 of 2026-10-24, composed after the GPT design
+     board (collections/22_Nocturne_Lake_Estate/assets/gpt/mockups/design-board.png, PAKET 8 "The moon is missing"):
+     an Italian lake on a black-tie night, a long golden moon path on the water — and an empty sky: the moon is the
+     champagne-gold seal sitting in the valley of the black envelope's mountain-cut flap. Above it "You are invited", the
+     names in a calligraphic script, the date; under it "Tap to open".
+     Opening (site.js MOTION.envelope; sounds lib/audio/catalog.ts on the same numbers): tick — the seal clicks free · rise
+     — it lifts out of the valley and rises into the sky over the path, turning into the moon · flap — the mountain flap
+     lifts on its hinge (3D) and its gold moiré inside stands up · moon — the moon settles, its light runs down the path ·
+     draw — the ivory card slides out of the pocket · reveal — it comes forward over the lake while the envelope sinks ·
+     go — home (view transition invite-card on the card's arch window: the photograph flies into the arch frame on home).
+     Flap, flap inside, back + lining, pocket, card and seal are separate GPT pixels (build_images.py). Personal text:
+     none — [data-field] / [data-text] / [data-photo] are filled on the server. Thank-you mode (G075): the same opening;
+     the card carries the thank-you title, its window the thank-you photo or — without one — the moon. Design texts:
+     data-copy (G068, theme.json "copy"). -->
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#11120f">
+<meta name="theme-color" content="#0b0d12">
 <title data-text="{name_display} · {copy.envelope_kicker}">Nocturne Lake Estate</title>
 <meta name="description" data-if="!thank_you_on" data-attr-content="{copy.envelope_kicker} · {name_display} · {date|date-long} · {venue.city_region}" content="A wedding invitation">
 <meta name="description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {name_display} · {date|date-long}" content="Thank you">
@@ -27,65 +27,73 @@
 <meta property="og:description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {date|date-long}" content="Thank you">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&family=Castoro+Titling&family=Waterfall&display=swap">
 <style>/* names fallback: scripts/font-fallback.ts */
-@font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:129.4%;ascent-override:75.7%;descent-override:28.6%;line-gap-override:0%}
-@font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:111.3%;ascent-override:88%;descent-override:33.2%;line-gap-override:0%}</style>
+@font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:69.5%;ascent-override:126.6%;descent-override:40.3%;line-gap-override:0%}
+@font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:59.8%;ascent-override:147.2%;descent-override:46.8%;line-gap-override:0%}</style>
 <link rel="stylesheet" href="site.css">
 <link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
 <script>/* early state — same keys as MOTION.storage in site.js (per site: suffixed with the slug from #site-data) */
 (function(r){r.classList.replace('no-js','js');try{var d=document.getElementById('site-data'),k=d?':'+JSON.parse(d.textContent).slug:'';if(sessionStorage.getItem('invite:opened'+k)&&!/[?&]replay=1(&|$)/.test(location.search))r.classList.add('is-opened');}catch(e){}})(document.documentElement);
+</script>
+<style>.js:not(.parts-on) img[data-defer]{display:none!important}</style>
+<script>/* deferred opening parts (G180, docs/11 §6): the images that only show after the tap ([data-defer], lazy) wait until the
+   closed object's own high-priority image(s) in .stage have loaded and painted, then all load at once (eager: a lazy part clipped by its card would
+   wait for the animation) — before the tap, so the opening never waits */
+(function(d,r){var on=function(){r.classList.add('parts-on');[].forEach.call(d.querySelectorAll('img[data-defer]'),function(i){i.loading='eager'})};if(r.classList.contains('is-opened')){on();return d.addEventListener('DOMContentLoaded',on)}addEventListener('pointerdown',on,true);addEventListener('keydown',on,true);addEventListener('load',on);d.addEventListener('DOMContentLoaded',function(){var h=d.querySelectorAll('.stage img[fetchpriority=high]');h=h.length?h:d.querySelectorAll('img[fetchpriority=high]');var n=h.length,one=function(){--n||requestAnimationFrame(function(){setTimeout(on)})};if(!n)on();h.forEach(function(i){i.complete?one():(i.addEventListener('load',one),i.addEventListener('error',one))})})})(document,document.documentElement);
 </script>
 <!-- prefetch the home page: the rule points at the "Enter" link, whose href the platform has already set to /<slug>/home -->
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"selector_matches":"a[data-enter]"},"eagerness":"immediate"}]}</script>
 <script src="site.js" defer></script>
 </head>
 <body class="page-opening" data-pending="This link will be added soon.">
-<a class="textlink skip" href="home.html" data-skip><span data-copy="envelope_skip">Skip</span></a>
-<!-- a few candle sparks (GPT accent) glinting on the laid paper -->
-<span class="sparks" aria-hidden="true"><i></i><i></i><i></i></span>
+<a class="textlink skip" href="home.html" data-skip><span data-copy="envelope_skip">Skip</span> <span aria-hidden="true">→</span></a>
+<!-- the night: the lake with its moon path (no moon yet); the moon the seal becomes, its halo, light running down the path -->
+<div class="night" aria-hidden="true"><span class="lake"></span><span class="path-light"></span><span class="moon-halo"></span><span class="sky-moon"><img data-defer loading="lazy" decoding="async" src="img/moon-320.webp" srcset="img/moon-320.webp 320w, img/moon-640.webp 640w" sizes="96px" alt=""></span></div>
 <main class="opening">
-  <div class="opening-heading">
-    <p class="eyebrow" data-if="!thank_you_on" data-copy="envelope_kicker">Together with their families</p>
-    <p class="eyebrow" data-if="thank_you_on" data-copy="ty_kicker">With love and thanks</p>
-    <h1 class="names" data-fit><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></h1>
-  </div>
+  <header class="opening-heading">
+    <p class="eyebrow kicker" data-if="!thank_you_on" data-copy="envelope_kicker">You are invited</p>
+    <p class="eyebrow kicker" data-if="thank_you_on" data-copy="ty_kicker">With love and thanks</p>
+    <h1 class="names" data-fit="2.4"><span data-field="partners.0.display_name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name"></span></h1>
+    <p class="eyebrow when" data-field="date"></p>
+  </header>
   <div class="stage" role="button" tabindex="0" aria-label="Open the envelope" data-copy-attr="aria-label:envelope_open">
-    <div class="envelope">
-      <!-- the back lined with the painted night lake (light shimmers on its moon path), then the card in the pocket -->
-      <span class="back"></span>
-      <span class="shimmer"><i></i></span>
-      <div class="card" aria-hidden="true">
-        <div class="card-photo frame arch">
-          <div class="photo-slot" data-slot="hero_portrait">
-            <img data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_arch-640.webp" sizes="min(16vw, 80px)" alt="">
-            <span class="ph-mark" data-if="!thank_you_on"><span>Your photo here</span></span>
-            <img class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_arch-640.webp" sizes="min(16vw, 80px)" alt="">
-            <span class="ty-decor" data-if="thank_you_on !thank_you.photo"><img src="img/band-640.webp" alt=""></span>
-          </div>
-          <span class="cut"></span>
-        </div>
-        <p class="eyebrow card-line" data-if="!thank_you_on" data-copy="card_line">Our wedding</p>
-        <p class="card-names" data-if="!thank_you_on" data-field="name_display"></p>
-        <p class="card-names ty-title" data-if="thank_you_on" data-field="thank_you_title"></p>
-        <p class="eyebrow card-date" data-field="date"></p>
-      </div>
-      <!-- the front pocket, the diamond flap (outside / night-sky inside) hinged on the top edge, the vellum band and the
-           crescent brooch pinned on it -->
-      <span class="front"></span>
-      <span class="flap"><span class="flap-out"></span><span class="flap-in"></span></span>
-      <span class="vellum"></span>
-      <span class="moon"></span>
-    </div>
+    <span class="env">
+      <span class="env-inside" aria-hidden="true"><img data-defer loading="lazy" fetchpriority="low" decoding="async" src="img/env_flap_in-720.webp" sizes="min(88vw, 470px)" alt=""></span>
+      <span class="env-back" aria-hidden="true"><img data-defer loading="lazy" fetchpriority="low" decoding="async" src="img/env_back-720.webp" srcset="img/env_back-720.webp 720w, img/env_back-938.webp 938w" sizes="min(88vw, 470px)" alt=""></span>
+      <span class="card-well" aria-hidden="true">
+        <span class="env-card">
+          <span class="framed">
+            <span class="card-window photo-slot" data-slot="hero_portrait">
+              <img data-defer loading="lazy" fetchpriority="low" decoding="async" data-if="!thank_you_on" data-photo="hero_portrait" src="img/ph_arch-640.webp" sizes="(min-width: 700px) 150px, 34vw" alt="">
+              <span class="ph-mark" data-if="!thank_you_on"><span>Your photo here</span></span>
+              <img data-defer loading="lazy" fetchpriority="low" decoding="async" class="ty-photo" data-if="thank_you_on thank_you.photo" data-field="thank_you.photo" src="img/ph_arch-640.webp" sizes="(min-width: 700px) 150px, 34vw" alt="">
+              <span class="ty-decor" data-if="thank_you_on !thank_you.photo"><img data-defer loading="lazy" fetchpriority="low" decoding="async" src="img/moon-320.webp" alt=""></span>
+            </span>
+          </span>
+          <img class="card-art" data-defer loading="lazy" fetchpriority="low" decoding="async" src="img/card-720.webp" srcset="img/card-720.webp 720w, img/card-1100.webp 1100w" sizes="(min-width: 700px) 440px, 90vw" alt="">
+          <span class="card-body">
+            <span class="card-line" data-if="!thank_you_on" data-copy="card_line">Our wedding</span>
+            <span class="card-names" data-if="!thank_you_on" data-field="name_display"></span>
+            <span class="card-names ty-title" data-if="thank_you_on" data-field="thank_you_title"></span>
+            <span class="card-date" data-field="date"></span>
+            <span class="card-place" data-field="venue.city"></span>
+          </span>
+        </span>
+      </span>
+      <span class="env-pocket" aria-hidden="true"><img src="img/env_pocket-720.webp" srcset="img/env_pocket-720.webp 720w, img/env_pocket-938.webp 938w" sizes="min(88vw, 470px)" alt="" fetchpriority="high"></span>
+      <span class="env-flap" aria-hidden="true"><img src="img/env_flap-720.webp" srcset="img/env_flap-720.webp 720w, img/env_flap-938.webp 938w" sizes="min(88vw, 470px)" alt="" fetchpriority="high"></span>
+      <span class="env-seal" aria-hidden="true"><img src="img/seal-200.webp" srcset="img/seal-200.webp 200w, img/seal-400.webp 400w" sizes="90px" alt="" fetchpriority="high"><span class="seal-initials" data-field="initials"></span><span class="seal-glint"></span></span>
+    </span>
   </div>
   <div class="opening-actions">
-    <p class="opening-date eyebrow"><span data-field="date"></span><span aria-hidden="true"> · </span><span data-field="venue.city"></span></p>
     <p class="eyebrow tap-hint" aria-hidden="true"><span data-copy="envelope_hint_tap">Tap to open</span></p>
-    <a class="btn enter" href="home.html" data-enter><span data-copy="envelope_enter">Enter</span></a>
+    <a class="btn btn-gold enter" href="home.html" data-enter><span data-copy="envelope_enter">Enter</span></a>
     <button class="textlink replay" type="button"><span data-copy="envelope_replay">Replay the opening</span></button>
   </div>
   <!-- without JavaScript (no <noscript>: its content is raw text, the platform could not rewrite the link) -->
-  <p class="nojs-only"><a class="btn" href="home.html"><span data-copy="envelope_open">Open the envelope</span></a></p>
+  <p class="nojs-only"><a class="btn btn-gold" href="home.html"><span data-copy="envelope_open">Open the envelope</span></a></p>
 </main>
+<div class="accent-layer" aria-hidden="true"></div>
 </body>
 </html>

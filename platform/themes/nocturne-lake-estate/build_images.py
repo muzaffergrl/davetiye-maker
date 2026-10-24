@@ -335,7 +335,9 @@ def main() -> int:
 
     manifest["parts"] = {"used": sorted(REQUIRED), "waiting_for_gpt": []}
     manifest["_note"] = "22 v2 (2026-10-24): built from the PAKET 8 parts after the GPT design board. Nothing drawn."
-    manifest["theme_check"] = {"particles": ".accent-layer", "first_screen": {"landscape": False, "names_min_px": 30}}
+    # light type on the night: "busy" = bright pixels (> 110) or strong edges under a text box (as 21)
+    manifest["theme_check"] = {"particles": ".accent-layer", "first_screen": {"landscape": False, "names_min_px": 30},
+                               "backdrop": {"edge_max": 2.2, "dark_max": 0.05, "dark_below": 0, "light_above": 110}}
     manifest["bytes_total"] = tb.klasor_boyutu(THEME)
     tb.manifest_yaz(OUT, manifest)
     print(json.dumps(stage))

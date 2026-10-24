@@ -1,418 +1,450 @@
-/* Nocturne Lake Estate (22) — redesign of 2026-10-22 (docs/35 row 22, G422): charcoal-black laid paper with sparse gold
-   flecks, warm ivory laid card, deckled champagne-gold foil, frosted vellum, hammered gold, gilded wrought iron and an
-   oil-painted lake at night; ink champagne on charcoal, charcoal on ivory. Visuals are GPT pixels only (img/,
-   build_images.py); CSS adds light and interface (docs/11 §5.7): text halos, the moon's glint, the light shimmering on
-   the painted moon path (a brightened copy of the GPT lining under a moving mask), candle glows, hairline rules, form
-   fields, buttons, the bottom nav, and motion — the crescent rising to stay as the moon, the vellum band sliding off,
-   the diamond flap opening on its top edge, the card rising, the shutters opening on their hinges. Nothing is drawn here. */
-:root{--night:#11120f;--charcoal:#1c1d15;--coal:#2a2b22;--champagne:#e0c7a4;--gold:#c7a978;--gold-ink:#8a6a3c;
---ivory:#f1e4cc;--ink:#1c1d15;--ink-soft:#4a473c;--line:#1c1d1526;--line-dark:#e0c7a42e;
---display:'Cinzel',fb1,fb2,'Trajan Pro',Georgia,serif;--serif:'Cormorant Garamond','Garamond','Georgia',serif;--sans:'Jost','Futura','Helvetica Neue',Arial,sans-serif;
---nav-h:62px;color-scheme:dark;
-}
+/* Nocturne Lake Estate (22) — v2 of 2026-10-24 after the GPT design board (PAKET 8 "The moon is missing"): Lake Como
+   on a black-tie night; black cotton paper with hand-gilded champagne edges, fine gold foil, a gold moiré lining, real
+   gold leaf, moonlit limestone and night water. Every picture is a GPT part (img/, build_images.py); CSS adds only
+   light (the moon's halo, light running down the moon path, glints), interface (type, form fields, buttons, the nav)
+   and motion — the seal rising to become the moon, the mountain flap lifting onto its moiré inside, the card drawn
+   from the pocket, reflections rippling on the water, the moon-path thread lighting down the evening. Nothing drawn.
+   Numbers in % of the envelope = img/manifest.json stage. */
+:root{--night:#0b0d12;--ink:#0f1620;--paper:#121210;--charcoal:#1c1d15;--champagne:#e0c7a4;--gold:#c7a978;--gold-deep:#9c7f52;
+--ivory:#f1e4cc;--stone:#cfc6b4;--muted:#b8aa91;--line:rgb(224 199 164/.32);
+--script:'Waterfall',fb1,fb2,cursive;--caps:'Castoro Titling','Castoro',Georgia,serif;--serif:'Castoro',Georgia,'Times New Roman',serif;
+--nav-h:62px;--io:cubic-bezier(.65,0,.35,1);--out:cubic-bezier(.2,.7,.2,1);color-scheme:dark}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;overflow-x:clip}
-body{margin:0;background:var(--charcoal) url(img/night-640.webp) 0 0/560px repeat;color:var(--champagne);font:400 19px/1.65 var(--serif);padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom))}
+html{scroll-behavior:smooth;overflow-x:clip;background:var(--paper)}
+body{margin:0;background:var(--paper) url(img/paper-512.webp) 0 0/420px repeat;color:var(--ivory);font:400 18px/1.65 var(--serif);padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom))}
 main{overflow-x:clip}
 button,input,textarea,select{font:inherit}
 button,a,input,select,textarea,summary{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 h1,h2,h3,p,figure,ul,ol{margin:0}
-h1,h2,h3{font-weight:400;line-height:1.2}
-h1{font:400 clamp(30px,8.6vw,44px)/1.2 var(--display);letter-spacing:.06em;color:var(--champagne);overflow-wrap:anywhere}
-h2{font:400 clamp(26px,7.2vw,36px)/1.25 var(--display);letter-spacing:.06em;color:var(--champagne);overflow-wrap:anywhere}
-h3{font:500 18px/1.45 var(--serif);letter-spacing:.02em}
+h1,h2,h3{font-weight:400;line-height:1.2;overflow-wrap:anywhere}
 button{cursor:pointer}
-button:disabled{opacity:.5;cursor:default}
+button:disabled{opacity:.45;cursor:default}
 [hidden]{display:none!important}
-:focus-visible{outline:2px solid var(--gold);outline-offset:5px}
+:focus-visible{outline:2px solid var(--champagne);outline-offset:5px}
 .nowrap{white-space:nowrap}
-.eyebrow{font:500 11px/1.9 var(--sans);text-transform:uppercase;letter-spacing:.32em;color:var(--gold);overflow-wrap:anywhere}
-.body-text{font-size:19px;line-height:1.7;color:#d7c8ae}
-.small{font:400 16px/1.75 var(--serif);color:#cdbd9f}
-/* warm ivory laid card (GPT texture) under the cards and bands: charcoal ink there */
-.paper,.paper-band{background:var(--ivory) url(img/ivory-640.webp) 0 0/480px repeat;color:var(--ink)}
-.paper h1,.paper h2,.paper-band h1,.paper-band h2,.paper .names,.paper-band .names{color:var(--ink);text-shadow:none}
-.paper .eyebrow,.paper-band .eyebrow{color:var(--gold-ink)}
-.paper .body-text,.paper-band .body-text,.paper .small,.paper-band .small{color:var(--ink-soft)}
-.btn{display:inline-flex;justify-content:center;align-items:center;gap:12px;min-height:48px;padding:12px 30px;border:1px solid var(--gold);background:var(--gold);color:var(--night);font:500 12px/1.5 var(--sans);letter-spacing:.26em;text-transform:uppercase;border-radius:2px;text-align:center;overflow-wrap:anywhere}
-.btn:hover{background:var(--champagne);border-color:var(--champagne)}
-.btn-ghost{background:rgb(17 18 15/.45);color:var(--champagne);border-color:rgb(224 199 164/.55)}
-.btn-ghost:hover{background:rgb(17 18 15/.75);border-color:var(--champagne)}
-.paper .btn,.paper-band .btn{background:var(--charcoal);border-color:var(--charcoal);color:var(--ivory)}
-.paper .btn:hover,.paper-band .btn:hover{background:var(--night)}
-.paper .btn-ghost,.paper-band .btn-ghost{background:rgb(241 228 204/.6);color:var(--ink);border-color:rgb(28 29 21/.4)}
-.paper .btn-ghost:hover,.paper-band .btn-ghost:hover{background:var(--ivory)}
-.btn-sm{min-height:44px;padding:9px 18px}
-.textlink{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;font:500 13px/1.6 var(--sans);border:0;background:transparent;color:inherit;letter-spacing:.16em;text-transform:uppercase;padding:8px 2px;text-decoration:underline;text-decoration-color:rgb(199 169 120/.6);text-underline-offset:7px}
-.center{text-align:center;margin:44px 0 10px}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.eyebrow{font:400 12px/1.8 var(--caps);letter-spacing:.3em;text-transform:uppercase;color:var(--champagne);overflow-wrap:anywhere}
+.script-title{font:400 clamp(54px,16vw,88px)/1.05 var(--script);color:var(--champagne);letter-spacing:0;text-wrap:balance}
+.body-text{font-size:18px;line-height:1.7;color:#dccfb6}
+.small{font:italic 400 16px/1.7 var(--serif);color:var(--muted)}
+.names{--fs:clamp(60px,18vw,112px);font:400 calc(var(--fs)*var(--fit,1))/1.02 var(--script);color:var(--champagne);text-wrap:balance;overflow-wrap:anywhere;text-shadow:0 2px 22px rgb(0 0 0/.7)}
+.names.wrap>span{display:inline}
+.names .amp{font-size:.82em}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:12px;min-height:48px;padding:12px 30px;border:1px solid var(--champagne);border-radius:1px;font:400 13px/1.4 var(--caps);letter-spacing:.28em;text-transform:uppercase;text-align:center;overflow-wrap:anywhere;transition:filter .3s,background-color .3s}
+.btn-gold{background:linear-gradient(180deg,#ecd8b4,#cdb083 52%,#b89a68);color:#14110b;box-shadow:inset 0 1px 0 rgb(255 245 225/.55)}
+.btn-gold:hover{filter:brightness(1.07)}
+.btn-ghost{background:rgb(11 13 18/.4);color:var(--champagne);border-color:rgb(224 199 164/.75)}
+.btn-ghost:hover{background:rgb(224 199 164/.1)}
+.btn-sm{min-height:44px;padding:9px 18px;font-size:11px}
+.btn-block{width:100%}
+.textlink{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 2px;border:0;background:transparent;color:var(--champagne);font:400 12px/1.6 var(--caps);letter-spacing:.24em;text-transform:uppercase;text-decoration:underline;text-decoration-color:rgb(199 169 120/.55);text-underline-offset:8px}
+.center{text-align:center;margin:48px 0 10px}
 .button-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 .no-js .nojs-only{display:block}
 .js .nojs-only{display:none}
-.names{font:400 clamp(32px,9.6vw,50px)/1.18 var(--display);letter-spacing:.05em;color:var(--champagne);overflow-wrap:anywhere;text-wrap:balance;text-shadow:0 2px 18px rgb(0 0 0/.65)}
-.names .amp{font:italic 400 .62em/1 var(--serif);letter-spacing:0;color:var(--gold);vertical-align:.08em}
-/* gold-leaf shimmer passing once over a heading (light over the letters, background-clip) */
-.foil{background:linear-gradient(100deg,currentColor 0 42%,#fff1d6 50%,currentColor 58% 100%) 100% 0/300% 100% no-repeat;-webkit-background-clip:text;background-clip:text}
-.js .foil.in{-webkit-text-fill-color:transparent;animation:foil 2.4s calc(var(--d,0ms) + 500ms) ease-in-out both}
-@keyframes foil{from{background-position:100% 0}to{background-position:0 0}}
+/* the gold moon-path rule (GPT divider) */
+.divider{display:block;width:min(74%,360px);aspect-ratio:1402/44;margin:0 auto;background:url(img/divider-720.webp) center/100% 100% no-repeat}
 
-/* photo slots: placeholders are a softened piece of the painted lake; "Your photo here" only in a preview */
-.photo-slot{position:relative;display:block;overflow:hidden;background:#2a2b24}
-.photo-slot>img{width:100%;height:100%;object-fit:cover;object-position:50% 34%}
-.ph-mark{display:none;position:absolute;inset:0;align-items:center;justify-content:center;pointer-events:none;font:400 12px/1.4 var(--sans);color:var(--champagne);text-align:center;letter-spacing:.08em}
+/* photo slots: placeholders are the softened lake; "Your photo here" only in a preview */
+.photo-slot{position:relative;display:block;overflow:hidden;background:#1b2130}
+.photo-slot>img{width:100%;height:100%;object-fit:cover;object-position:50% 32%}
+.ph-mark{display:none;position:absolute;inset:0;align-items:center;justify-content:center;pointer-events:none;font:400 11px/1.4 var(--caps);letter-spacing:.14em;color:var(--champagne);text-align:center}
 html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{display:flex}
-/* the villa windows: the GPT frame (.cut) over the photo, which sits in its measured window (manifest window_pct) */
-.frame{position:relative;display:block}
-.frame>.cut{position:absolute;inset:0;pointer-events:none;background:0 0/100% 100% no-repeat}
-.frame>.photo-slot{position:absolute}
-.arch{aspect-ratio:846/1330;filter:drop-shadow(0 12px 14px rgb(0 0 0/.45))}
-.arch>.cut{background-image:url(img/window-720.webp)}
-.arch>.photo-slot{left:13.33%;top:11.08%;width:73.22%;height:65.29%;-webkit-mask:url(img/mask_arch.png) 0 0/100% 100% no-repeat;mask:url(img/mask_arch.png) 0 0/100% 100% no-repeat}   /* the window is an arch: its measured mask */
-.storywin{aspect-ratio:995/1213;filter:drop-shadow(0 14px 16px rgb(0 0 0/.5));perspective:900px}
-.storywin>.cut{background-image:url(img/story-720.webp)}
-.storywin>.photo-slot{left:14.37%;top:8.98%;width:71.15%;height:76.52%}
-.terrace{aspect-ratio:1496/798;filter:drop-shadow(0 12px 14px rgb(0 0 0/.45))}
-.terrace>.cut{background-image:url(img/terrace-1100.webp)}
-.terrace>.photo-slot{left:6.65%;top:2.88%;width:86.76%;height:74.81%}
-/* the shutters (GPT W12, the story window's canvas, manifest shutters): closed in front of the window, they open
-   outward on their outer hinges and the photo warms out of candlelight */
-.shutter{position:absolute;z-index:2;background:0 0/100% 100% no-repeat;pointer-events:none;transform-style:preserve-3d}
-.shutter.sh-l{left:2.01%;top:.66%;width:48.44%;height:97.61%;background-image:url(img/shutter_l-360.webp);transform-origin:0 50%}
-.shutter.sh-r{left:49.35%;top:.58%;width:45.53%;height:97.61%;background-image:url(img/shutter_r-360.webp);transform-origin:100% 50%}
-.storywin>.photo-slot>img{transition:filter 1.8s ease-out}
-/* the lanterns on the terrace balustrade: a faint warm flicker (CSS light) */
-.terrace>.glow{position:absolute;top:56%;width:9%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgb(255 214 150/.55) 0,rgb(255 196 120/.18) 38%,rgb(255 196 120/0) 70%);mix-blend-mode:screen;opacity:.7}
-.terrace>.glow.g-l{left:2.6%}
-.terrace>.glow.g-r{left:97.4%}
-.js .terrace>.glow{animation:flicker 2.6s ease-in-out infinite}
-.js .terrace>.glow.g-r{animation-delay:-1.1s}
-@keyframes flicker{0%,100%{opacity:.55;scale:1}30%{opacity:.85;scale:1.08}55%{opacity:.6;scale:.96}80%{opacity:.8;scale:1.04}}
-.spray{display:block;aspect-ratio:1086/1025;background:url(img/spray-720.webp) 0 0/100% 100% no-repeat;pointer-events:none}
-.divider{display:block;width:min(72%,380px);aspect-ratio:1729/127;margin:0 auto;background:url(img/divider-1000.webp) center/100% 100% no-repeat}
-/* the hurricane lantern; its flame flickers (CSS light over the GPT flame) */
-.lantern{position:relative;display:block;width:min(22%,92px);aspect-ratio:464/1345;margin:0 auto;background:url(img/lantern-320.webp) center/100% 100% no-repeat;filter:drop-shadow(0 10px 12px rgb(0 0 0/.5))}
-.lantern>.flame{position:absolute;left:50%;top:63%;width:120%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgb(255 226 170/.7) 0,rgb(255 200 120/.25) 22%,rgb(255 200 120/0) 50%);mix-blend-mode:screen}
-.js .lantern>.flame{animation:flicker 2.2s ease-in-out infinite}
-html[data-rsvp-replied] .lantern>.flame{animation:flame-up 1.6s ease-out forwards,flicker 2.2s 1.6s ease-in-out infinite;width:190%}
-@keyframes flame-up{from{width:120%;opacity:.6}to{width:190%;opacity:1}}
 
-/* bottom nav */
-.site-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgb(17 18 15/.95);border-top:1px solid rgb(199 169 120/.55);padding:6px 8px max(6px,env(safe-area-inset-bottom));view-transition-name:site-nav}
-.site-nav ul{list-style:none;padding:0;display:flex;justify-content:center;gap:4px}
-.site-nav a{display:flex;align-items:center;justify-content:center;min-height:48px;min-width:68px;padding:8px 12px;font:500 11px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:#cdbd9f}
-.site-nav a[aria-current]{color:var(--champagne);text-decoration:underline;text-underline-offset:8px;text-decoration-color:rgb(199 169 120/.9)}
+/* ---------------------------------------------------------------- the night: lake, moon, light on the path */
+.night{position:absolute;inset:0;overflow:hidden;pointer-events:none;background:var(--night)}
+.night>.lake,.night>.path-light{position:absolute;inset:0;background:url(img/lake-720.webp) 50% 100%/cover no-repeat}
+.night>.path-light{filter:brightness(2.1) saturate(1.15);mix-blend-mode:screen;opacity:0;
+  -webkit-mask:linear-gradient(90deg,transparent 36%,#000 50%,transparent 64%),linear-gradient(transparent 0 46%,#000 50%,transparent 54% 100%) 0 0/100% 300% no-repeat;
+  -webkit-mask-composite:source-in;mask:linear-gradient(90deg,transparent 36%,#000 50%,transparent 64%) intersect,linear-gradient(transparent 0 46%,#000 50%,transparent 54% 100%) 0 0/100% 300% no-repeat}
+/* the moon (GPT) and its halo (CSS light) */
+.sky-moon{position:absolute;left:50%;top:var(--moon-y,7%);width:var(--moon-w,clamp(56px,16vw,96px));aspect-ratio:1;translate:-50% -50%;filter:drop-shadow(0 0 18px rgb(255 238 205/.45))}
+.sky-moon img{width:100%;height:100%;object-fit:contain}
+.moon-halo{position:absolute;left:50%;top:var(--moon-y,7%);width:calc(var(--moon-w,clamp(56px,16vw,96px)) * 4.4);aspect-ratio:1;translate:-50% -50%;border-radius:50%;background:radial-gradient(closest-side,rgb(255 236 200/.28),rgb(255 230 190/.1) 45%,transparent);mix-blend-mode:screen}
+@keyframes path-run{0%{opacity:0;-webkit-mask-position:0 0,0 -40%;mask-position:0 0,0 -40%}20%{opacity:1}100%{opacity:.5;-webkit-mask-position:0 0,0 140%;mask-position:0 0,0 140%}}
+@keyframes path-shimmer{0%{-webkit-mask-position:0 0,0 -20%;mask-position:0 0,0 -20%}100%{-webkit-mask-position:0 0,0 120%;mask-position:0 0,0 120%}}
+@keyframes breathe{50%{opacity:.5}}
+@keyframes show{to{opacity:1;visibility:visible}}
 
-/* ---------------------------------------------------------------- the envelope */
-.page-opening{padding-bottom:0;background:radial-gradient(ellipse at 28% 18%,rgb(200 210 220/.07) 0,rgb(200 210 220/0) 55%) fixed,radial-gradient(ellipse 72% 46% at 50% 60%,rgb(236 214 178/.2) 0,rgb(236 214 178/.07) 45%,rgb(236 214 178/0) 72%) fixed,var(--charcoal) url(img/night-640.webp) 0 0/560px repeat}
-.skip{position:fixed;top:calc(6px + env(safe-area-inset-top));right:10px;z-index:20;padding-inline:14px;background:rgb(17 18 15/.7);border:1px solid rgb(199 169 120/.4);border-radius:100px;text-decoration:none;color:var(--champagne)}
-.sparks{position:fixed;inset:0;pointer-events:none;z-index:1}
-.sparks>i{position:absolute;width:22px;aspect-ratio:1;background:url(img/spark-160.webp) center/100% 100% no-repeat;opacity:0}
-.sparks>i:nth-child(1){left:12%;top:24%}
-.sparks>i:nth-child(2){right:9%;top:46%;width:16px}
-.sparks>i:nth-child(3){left:18%;bottom:14%;width:18px}
-.js .sparks>i{animation:spark-twinkle 6s ease-in-out infinite}
-.js .sparks>i:nth-child(2){animation-delay:2s}
-.js .sparks>i:nth-child(3){animation-delay:4s}
-@keyframes spark-twinkle{0%,70%,100%{opacity:0;scale:.6}82%{opacity:.9;scale:1}}
-.opening{position:relative;z-index:2;min-height:100svh;max-width:760px;margin:auto;padding:clamp(56px,8svh,96px) 20px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:clip}
-.opening-heading{position:relative;z-index:2;max-width:100%}
-.opening-heading>.eyebrow:first-child{margin-bottom:8px}
-/* the closed portrait envelope: 0.7153 wide per high (manifest stage); layers in % of it. The gap above it is the open
-   flap's inside standing up (63.9 % of the envelope, stage.flap_in_h): the night sky stands there, and the moon stays in
-   it, without covering the names; the size follows the screen height (heading, gap, envelope and actions ≈ 260 px +
-   2.3 × the width) */
-.stage{--obj:min(68vw,calc((100svh - 260px) / 2.3),300px);position:relative;width:var(--obj);margin:calc(var(--obj) / 0.7153 * .639 + 6px) auto 0;cursor:pointer;outline-offset:8px;-webkit-tap-highlight-color:transparent;z-index:5}
-.opening:has(.names.long-names) .stage{--obj:min(62vw,calc((100svh - 300px) / 2.3),300px)}
-.envelope{position:relative;width:100%;aspect-ratio:0.7153}
-.envelope>*{position:absolute}
-.back{inset:0;z-index:0;background:url(img/back-720.webp) 0 0/100% 100% no-repeat;filter:drop-shadow(0 0 1px rgb(224 199 164/.55)) drop-shadow(0 0 18px rgb(236 214 178/.16)) drop-shadow(0 18px 22px rgb(0 0 0/.6))}
-/* light shimmering on the painted moon path: a brightened copy of the lining (GPT pixels) seen through moving bands */
-.shimmer{left:34%;top:3%;width:32%;height:48%;z-index:1;pointer-events:none;opacity:0;-webkit-mask:radial-gradient(ellipse 50% 50% at 50% 50%,#000 30%,transparent 100%);mask:radial-gradient(ellipse 50% 50% at 50% 50%,#000 30%,transparent 100%)}
-.shimmer>i{position:absolute;inset:0;background:url(img/back-720.webp) 50% 5.77%/312.5% 208.33% no-repeat;filter:brightness(1.9) contrast(1.25);mix-blend-mode:screen;-webkit-mask:repeating-linear-gradient(180deg,#000 0 3px,transparent 3px 9px) 0 0/100% 36px;mask:repeating-linear-gradient(180deg,#000 0 3px,transparent 3px 9px) 0 0/100% 36px}
-.card{left:18%;top:33%;width:64%;height:64.06%;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20% 8% 9%;text-align:center;view-transition-name:none;container-type:inline-size;background:url(img/card-720.webp) 0 0/100% 100% no-repeat;color:var(--ink)}   /* stage.card */
-.card::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgb(255 248 232/.6) 48%,transparent 66%) -160% 0/260% 100% no-repeat;opacity:0}
-.card-photo{width:44%;flex:none}
-.card.tight .card-photo{width:30%}
-.card-photo .ph-mark{font-size:7px}
-.card-photo .ty-decor,.card-photo .ty-decor img{display:block;width:100%;height:100%;object-fit:cover}
-.card-line{margin-top:5%;font-size:6px;letter-spacing:.26em;color:var(--gold-ink)}
-.card-names{font:400 clamp(11px,10cqw,26px)/1.2 var(--display);letter-spacing:.04em;color:var(--ink);overflow-wrap:anywhere;text-wrap:balance;margin-top:1%}
-.card-date{font-size:6px;letter-spacing:.16em;margin-top:3%;color:var(--gold-ink)}
-.front{left:0;top:20.45%;width:100%;height:79.55%;z-index:3;background:url(img/front-720.webp) 0 0/100% 100% no-repeat}   /* stage.front */
-.flap{left:0;top:0;width:100%;height:71.06%;z-index:4;transform-origin:50% 0;transform-style:preserve-3d}   /* stage.flap */
-.flap-out,.flap-in{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:0 0/100% 100% no-repeat}
-.flap-out{background-image:url(img/flap-720.webp);filter:drop-shadow(0 4px 5px rgb(0 0 0/.5))}
-/* the inside: the painted night sky; standing open it is as wide as the envelope and 63.9 % of its height
-   (stage.flap_in_h = 89.92 % of the flap's box), its fold on the hinge, reaching 2.1 % of the envelope's height over
-   the back's top margin so the painted mountains sit right on the painted shore */
-.flap-in{transform:rotateX(180deg);top:-2.95%;height:89.92%;background-image:url(img/flap_in-720.webp)}
-/* the frosted vellum band (GPT W7, opaque in the part: the vellum's translucency is CSS) and the crescent brooch */
-.vellum{left:-1.5%;top:53.97%;width:103%;height:24.38%;z-index:5;opacity:.8;background:url(img/vellum-720.webp) 0 0/100% 100% no-repeat;filter:drop-shadow(0 2px 3px rgb(0 0 0/.35))}   /* stage.vellum */
-.moon{left:37%;top:56.45%;width:26%;height:19.42%;z-index:7;background:url(img/moon-320.webp) center/100% 100% no-repeat;filter:drop-shadow(0 5px 5px rgb(0 0 0/.5))}   /* stage.moon */
-/* the crescent catches the moonlight: a small flare on its rim (CSS light) */
-.moon::after{content:"";position:absolute;left:30%;top:22%;width:60%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;background:radial-gradient(circle,rgb(255 252 240/.95) 0,rgb(255 244 220/.5) 18%,rgb(255 244 220/0) 52%);opacity:0;scale:.3}
-.opening-actions{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:22px;min-height:60px;position:relative;z-index:6}
-.opening-date{font-size:12px;color:var(--champagne)}
-.tap-hint{font-size:11px}
-.js .tap-hint{animation:breathe 3.2s ease-in-out infinite}
-@keyframes breathe{50%{opacity:.45}}
-.js .page-opening:not(.is-opening) .moon::after{animation:twinkle 4.8s 1.2s ease-in-out infinite}
-@keyframes twinkle{0%,82%,100%{opacity:0;scale:.3}90%{opacity:.85;scale:1}}
+/* ---------------------------------------------------------------- the envelope page */
+.page-opening{padding-bottom:0;background:var(--night)}
+.page-opening .night{position:fixed;--moon-y:17%;--moon-w:clamp(64px,20vw,112px)}
+.skip{position:fixed;top:calc(6px + env(safe-area-inset-top));right:10px;z-index:20;padding-inline:14px;background:rgb(11 13 18/.6);border:1px solid rgb(224 199 164/.4);border-radius:100px;text-decoration:none}
+.page-opening .sky-moon,.page-opening .moon-halo{opacity:0}
+.opening{position:relative;z-index:2;min-height:100svh;display:grid;grid-template-rows:auto 1fr auto auto;justify-items:center;text-align:center;padding:clamp(52px,10svh,110px) 20px max(18px,env(safe-area-inset-bottom))}
+.opening-heading{position:relative;z-index:3;max-width:100%;text-shadow:0 1px 14px rgb(5 8 14/.9)}
+.opening-heading .kicker{margin-bottom:6px}
+.opening .names{--fs:clamp(56px,17vw,104px);margin-bottom:8px}
+.opening .when{font-size:12px;letter-spacing:.34em}
+/* the closed envelope: 1.6089 wide per high (stage.aspect); the room above it is the open flap's inside (59 %) and
+   the card drawn out of the pocket; the size follows the screen height (heading + envelope + actions ≈ 300 px) */
+.stage{--w:min(86vw,470px,calc((100svh - 300px) * 1.6089));grid-row:3;position:relative;z-index:2;width:var(--w);aspect-ratio:1.6089;margin-top:calc(var(--w) / 1.6089 * .62);cursor:pointer;outline-offset:10px;-webkit-tap-highlight-color:transparent}
+.js .stage{animation:env-in 1.5s .3s var(--out) both}
+@keyframes env-in{from{opacity:0;transform:translateY(26px)}}
+/* its reflection in the water beneath it (CSS light: a soft gold sheen, not a drawing) */
+.stage::after{content:"";position:absolute;left:8%;right:8%;top:98%;height:26%;background:radial-gradient(closest-side,rgb(224 199 164/.16),transparent);filter:blur(4px);pointer-events:none;transition:opacity .8s}
+.env{position:absolute;inset:0;perspective:1100px;perspective-origin:50% 10%;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .6s var(--out),scale .2s}
+.env img{display:block;width:100%;height:100%;object-fit:fill}
+.env-inside,.env-back,.card-well,.env-pocket,.env-flap{position:absolute;pointer-events:none}
+.env-back,.card-well,.env-pocket{inset:0}
+.env-back{z-index:1;filter:drop-shadow(0 18px 20px rgb(0 0 0/.55))}
+/* the flap's moiré inside: stands above the hinge once open (stage.flap_in_h), lifted from -90° */
+.env-inside{left:0;bottom:100%;width:100%;height:59.35%;z-index:1;transform-origin:50% 100%;transform:rotateX(-90deg);visibility:hidden}
+.card-well{z-index:2}
+.env-card{position:absolute;left:4%;top:9.5%;width:92%;aspect-ratio:1.6926;display:block;container-type:inline-size;color:#1c1d15;opacity:0;visibility:hidden}   /* stage.card */
+.env-card>.card-art{position:absolute;inset:0;z-index:1}
+/* the arch window: the photo sits under the card's hole (card window_pct, its own mask) */
+.env-card .framed{position:absolute;left:4.2%;top:5.9%;width:32.6%;height:87.8%;z-index:0;-webkit-mask:url(img/mask_card.png) 0 0/100% 100% no-repeat;mask:url(img/mask_card.png) 0 0/100% 100% no-repeat}
+.card-window{width:100%;height:100%}
+.card-window .ph-mark{font-size:2.2cqw}
+.card-window .ty-decor,.card-window .ty-decor img{display:block;width:100%;height:100%;object-fit:cover;background:var(--ink)}
+.card-body{position:absolute;z-index:2;left:42%;right:5%;top:10%;bottom:10%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1.2cqw}
+.card-line{font:400 2.5cqw/1.5 var(--caps);letter-spacing:.3em;text-transform:uppercase;color:var(--gold-deep)}
+.card-names{font:400 calc(11cqw*var(--fit,1))/1.02 var(--script);color:#7c6440;overflow-wrap:anywhere;text-wrap:balance}
+.card-date{font:400 2.7cqw/1.5 var(--caps);letter-spacing:.24em;text-transform:uppercase;margin-top:1.4cqw;color:#2a281f}
+.card-date::before{content:"";display:block;width:16cqw;aspect-ratio:1402/44;margin:0 auto 1.6cqw;background:url(img/divider-720.webp) center/100% 100% no-repeat}
+.card-place{font:italic 400 3.4cqw/1.4 var(--serif);color:#4a463b}
+.env-pocket{z-index:3}
+.env-flap{left:0;top:0;width:100%;height:61.41%;z-index:4;transform-origin:50% 0;filter:drop-shadow(0 1.5px 1.2px rgb(0 0 0/.6))}   /* stage.flap_h */
+/* the moon seal in the valley (stage.seal) with the initials pressed into its smooth centre */
+.env-seal{position:absolute;left:39.43%;top:44.68%;width:19%;height:29.79%;z-index:5;container-type:inline-size;filter:drop-shadow(0 4px 5px rgb(0 0 0/.55))}
+.env-seal>img{width:100%;height:100%;object-fit:contain}
+.seal-initials{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:400 22cqw/1 var(--caps);letter-spacing:.02em;color:#866a40;text-shadow:0 1px 0 rgb(255 240 210/.55),0 -1px 0 rgb(70 50 20/.45);white-space:nowrap;padding-top:3%}
+.seal-glint{position:absolute;inset:14%;border-radius:50%;background:linear-gradient(115deg,transparent 35%,rgb(255 250 235/.75) 50%,transparent 65%) -150% 0/300% 100% no-repeat;mix-blend-mode:screen;pointer-events:none}
+.js .page-opening:not(.is-opening):not(.is-opened) .seal-glint{animation:glint 5.5s 1.8s ease-in-out infinite}
+@keyframes glint{0%,70%,100%{background-position:-150% 0}85%{background-position:250% 0}}
+/* the seal on its way to the sky (a fixed clone, site.js) */
+.seal-fly{position:fixed;z-index:9;container-type:inline-size;pointer-events:none;filter:drop-shadow(0 6px 10px rgb(0 0 0/.5))}
+.seal-fly>img{width:100%;height:100%;object-fit:contain}
+.seal-fly .seal-initials{animation:fade-out .5s .1s ease-in forwards}
+.seal-fly .seal-glint{display:none}
+@keyframes fade-out{to{opacity:0}}
+.opening-actions{grid-row:4;display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:22px;min-height:56px;position:relative;z-index:6}
+.tap-hint{position:relative;font-size:12px;letter-spacing:.36em;padding:4px 14px}
+/* a soft dark pool under the words over the glittering path (CSS light, not a shape) */
+.tap-hint::before,.opening-actions .replay::before{content:"";position:absolute;inset:-16px -48px;z-index:-1;background:radial-gradient(closest-side,rgb(6 9 14/.97) 62%,rgb(6 9 14/.8) 82%,transparent)}
+.opening-actions .replay{position:relative}
+.js .tap-hint>span{animation:breathe 3.2s ease-in-out infinite}
 .enter,.replay{display:none}
-.is-opened .enter{display:inline-flex}
-.is-opened .replay{display:inline-flex}
-.is-opened .tap-hint,.is-opening .tap-hint{display:none}
-.is-opened .skip{display:none}
+
+/* opening (numbers = MOTION.envelope): tick 0 · rise 150 · flap 650 · moon 1250 · draw 1350 · reveal 2400 */
 .is-opening .stage{pointer-events:none}
-.is-opening .opening-date{animation:dim 400ms ease-in forwards}
-.is-opening .moon::after{animation:glint 600ms 0ms ease-out forwards}
-.is-opening .moon{animation:moon-rise 1500ms 200ms cubic-bezier(.45,0,.25,1) forwards}
-.is-opening .vellum{animation:band-off 800ms 800ms cubic-bezier(.5,0,.6,1) forwards}
-.is-opening .flap{animation:flap-open 800ms 1500ms cubic-bezier(.5,0,.3,1) forwards}
-.is-opening .shimmer{animation:shimmer 1600ms 2000ms ease-in-out forwards}
-.is-opening .shimmer>i{animation:ripple 1600ms 2000ms linear forwards}
-.is-opening .envelope>.card{animation:card-rise 750ms 2500ms cubic-bezier(.3,0,.2,1) forwards,card-forward 500ms 3250ms cubic-bezier(.45,0,.2,1) forwards}
-.is-opening .envelope>.card::after{animation:sweep 1100ms 2700ms ease-in-out forwards}
-.is-opened .opening-date{opacity:.6}
-.is-opened .vellum{opacity:0;visibility:hidden}
-.is-opened .moon{transform:translate(53.85%,-526%) rotate(-10deg) scale(.55)}
-.is-opened .flap{transform:perspective(900px) rotateX(180deg);z-index:0}
-.is-opened .envelope>.card{z-index:8;transform:translateY(-10%) scale(1.3);view-transition-name:invite-card;filter:drop-shadow(0 18px 22px rgb(0 0 0/.55))}
-.is-opened .shimmer{opacity:.7}
-.js .is-opened .shimmer>i{animation:ripple 6s linear infinite}
-.is-opened .opening-actions{margin-top:26px}
-@keyframes dim{to{opacity:.6}}
-@keyframes glint{0%{opacity:0;scale:.3}45%{opacity:1;scale:1.3}100%{opacity:0;scale:.6}}
-/* the crescent lifts off the band, then floats up — smaller, turning a little — to stay in the night sky above the
-   envelope as the moon (the open flap's painted sky); it reappears small over the home page */
-@keyframes moon-rise{0%{transform:none}18%{transform:translateY(-14%) scale(1.06)}
-100%{transform:translate(53.85%,-526%) rotate(-10deg) scale(.55)}}
-/* the vellum band slides down off the envelope and fades */
-@keyframes band-off{0%{transform:none;opacity:.8}to{transform:translateY(70%);opacity:0}}
-@keyframes flap-open{from{transform:perspective(900px) rotateX(0);z-index:4}
-to{transform:perspective(900px) rotateX(180deg);z-index:0}}
-@keyframes shimmer{0%{opacity:0}30%{opacity:.9}100%{opacity:.7}}
-@keyframes ripple{from{-webkit-mask-position:0 0;mask-position:0 0}to{-webkit-mask-position:0 72px;mask-position:0 72px}}
-@keyframes card-rise{from{transform:translateY(0) scale(1);filter:drop-shadow(0 0 0 #0000)}
-to{transform:translateY(-52%) scale(.97);filter:drop-shadow(0 10px 14px rgb(0 0 0/.4))}}
-@keyframes card-forward{from{z-index:8;transform:translateY(-52%) scale(.97);filter:drop-shadow(0 10px 14px rgb(0 0 0/.4))}
-to{z-index:8;transform:translateY(-10%) scale(1.3);filter:drop-shadow(0 18px 22px rgb(0 0 0/.55))}}
-@keyframes sweep{0%{opacity:0;background-position:-160% 0}20%{opacity:1}100%{opacity:0;background-position:160% 0}}
+.is-opening .tap-hint,.is-opened .tap-hint{display:none}
+.is-opening .opening-heading{animation:head-out .8s .12s ease-in forwards}
+@keyframes head-out{to{opacity:0;filter:blur(6px);translate:0 -16px;visibility:hidden}}
+.is-opening .env-seal{animation:press .16s var(--io) forwards}
+@keyframes press{50%{scale:.9}100%{scale:.95}}
+.is-opening .env-flap{animation:flap-up .32s .65s cubic-bezier(.5,0,.9,.55) forwards}
+@keyframes flap-up{to{transform:rotateX(90deg);visibility:hidden}}
+.is-opening .env-inside{animation:flap-in .38s .97s cubic-bezier(.1,.45,.3,1) forwards}
+@keyframes flap-in{from{visibility:visible;transform:rotateX(-90deg);filter:brightness(1.6)}to{visibility:visible;transform:none;filter:none}}
+.is-opening .sky-moon{animation:moon-in .45s 1.12s ease-out forwards}
+@keyframes moon-in{to{opacity:1}}
+.is-opening .moon-halo{animation:halo-in 1.8s 1.2s ease-out forwards}
+@keyframes halo-in{0%{opacity:0;scale:.6}40%{opacity:1;scale:1.12}100%{opacity:.85;scale:1}}
+.is-opening .path-light{animation:path-run 1.9s 1.25s ease-in-out forwards}
+.is-opening .env-card{animation:show .01s 1.3s forwards,draw .95s 1.35s cubic-bezier(.45,.05,.25,1) forwards}
+@keyframes draw{to{transform:translateY(-103%)}}
+.card-well.is-free{z-index:8}
+.is-reveal .env-back,.is-reveal .env-pocket,.is-reveal .env-inside{transition:filter 1s var(--io),translate 1.1s var(--io),opacity 1.1s;filter:blur(5px) brightness(.45);translate:0 16%;opacity:.55}
+.is-reveal .stage::after{opacity:0}
+/* opened (session key, Back from home, after the opening): moon in the sky, flap open, card out, Enter + Replay */
+.is-opened .opening-heading{opacity:0;visibility:hidden}
+.is-opened .env-seal,.is-opening .env-seal.is-gone{opacity:0}
+.is-opened .env-flap{transform:rotateX(90deg);visibility:hidden}
+.is-opened .env-inside{transform:none;visibility:visible}
+.is-opened .sky-moon,.is-opened .moon-halo{opacity:1}
+.is-opened .path-light{opacity:.5}
+.is-opened .env-card{opacity:1;visibility:visible;transform:translateY(-103%)}
+.is-opened .card-well{z-index:8;transform-origin:50% -37%;transform:translateY(18%) scale(1.12)}
+.is-opened .env-back,.is-opened .env-pocket,.is-opened .env-inside{filter:blur(5px) brightness(.45);translate:0 16%;opacity:.55}
+.is-opened .stage::after{opacity:0}
+.is-opened .enter,.is-opened .replay{display:inline-flex}
+.is-opened .skip{display:none}
+.is-opened .card-well .framed{view-transition-name:invite-card}
+.is-opening .sky-moon,.is-opened .sky-moon,.page-home .sky-moon{view-transition-name:sky-moon}
+.js .is-opened .path-light,.js .page-home .path-light{animation:path-shimmer 7s linear infinite}
 
 /* ---------------------------------------------------------------- home */
-.hero{position:relative;min-height:calc(100svh - var(--nav-h));display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:0 20px 30px;overflow:clip}
-/* the painted lake at night across the top (GPT W14), fading into the laid paper; the moon stays in its sky */
-.hero-band{position:absolute;left:0;right:0;top:0;height:min(52svh,440px);background:url(img/band-1280.webp) 50% 0/cover no-repeat;-webkit-mask:linear-gradient(180deg,#000 55%,transparent);mask:linear-gradient(180deg,#000 55%,transparent);pointer-events:none}
-.hero-moon{position:relative;display:block;width:46px;aspect-ratio:953/995;margin:22px auto 0;translate:62px 0;background:url(img/moon-320.webp) center/100% 100% no-repeat;filter:drop-shadow(0 0 14px rgb(255 240 210/.35))}
-.hero-card{position:relative;width:min(86vw,370px);margin-top:min(12svh,96px);padding:30px 22px 28px;text-align:center;view-transition-name:invite-card;filter:drop-shadow(0 18px 24px rgb(0 0 0/.55))}
-.spray.sp-l{position:absolute;left:-9%;top:-8%;width:36%;z-index:2}
-.spray.sp-r{position:absolute;right:-9%;top:-8%;width:36%;z-index:2;transform:scaleX(-1)}
-.hero-photo{width:min(44vw,190px);margin:0 auto 12px}
-.hero .names{font-size:clamp(30px,8.6vw,42px);margin:4px 0 6px}
-.hero-date{font:400 19px/1.5 var(--serif);letter-spacing:.03em}
-.hero-venue{display:flex;flex-direction:column;gap:2px;margin-top:8px;font:italic 400 19px/1.45 var(--serif);overflow-wrap:anywhere}
-.hero-venue small{font:normal 500 10px/1.8 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--gold-ink)}
-.invitation{padding:48px 0;text-align:center}
-.invitation>.divider:first-child{margin-bottom:28px}
-.invitation>.divider:last-child{margin-top:40px}
-.invitation-copy,.invitation>.countdown,.invitation>.calendar{padding-inline:26px}
-.invitation-copy{max-width:540px;margin:auto}
-.invitation-copy h2{margin-bottom:10px}
-.invitation .host{margin:14px 0}
-.formal-names{font:400 22px/1.45 var(--display);letter-spacing:.04em;margin-bottom:12px;overflow-wrap:anywhere;color:var(--ink)}
-.formal-names .amp{font:italic 400 30px/1.1 var(--serif);color:var(--gold-ink)}
-.invitation-copy .body-text{max-width:340px;margin:auto}
-.date-block{display:flex;flex-direction:column;align-items:center;gap:2px;margin:26px auto 6px;color:var(--gold-ink)}
-.date-block>span{font:500 11px/1.8 var(--sans);letter-spacing:.32em;text-transform:uppercase}
-.date-block b{font:400 32px/1.25 var(--display);letter-spacing:.05em;color:var(--ink)}
-.venue-name{font:italic 400 23px/1.4 var(--serif);margin-top:16px;overflow-wrap:anywhere}
-.invitation-copy .btn{margin:24px 0 12px}
-.countdown{max-width:380px;margin:30px auto 0}
-.cd-row{display:flex;gap:14px;justify-content:center}
-.cd-row>div{flex:1;text-align:center}
-.cd-num{display:block;font:400 32px/1.3 var(--display);color:var(--ink);font-variant-numeric:tabular-nums}
-.cd-row small{font:500 10px/1.7 var(--sans);text-transform:uppercase;letter-spacing:.16em;color:var(--gold-ink)}
+.hero{position:relative;height:clamp(440px,64svh,720px);display:flex;flex-direction:column;align-items:center;text-align:center;overflow:clip}
+.hero .night{--moon-y:9%}
+.hero .night>.lake,.hero .night>.path-light{background-position:50% 74%}
+.hero .path-light{opacity:.5}
+.hero-copy{position:relative;z-index:2;margin-top:calc(9% + clamp(44px,13vw,80px));padding:0 16px;max-width:100%;text-shadow:0 2px 16px rgb(5 8 14/.85)}
+.hero-names{margin-bottom:10px}
+.hero-meta{font-size:10.5px;letter-spacing:.26em;display:flex;flex-wrap:wrap;justify-content:center;gap:0 .7em}
+.hero-meta .dot{color:var(--gold)}
+.hero-meta>span:first-child{flex-basis:100%}
+.hero-meta>span:first-child+.dot{display:none}
+/* the moonlit balustrade (GPT) across the foot of the lake */
+.balustrade{position:absolute;z-index:1;left:50%;bottom:-2px;width:max(100%,560px);aspect-ratio:1385/362;translate:-50% 0;background:url(img/balustrade-800.webp) 50% 100%/100% 100% no-repeat;filter:brightness(.92) drop-shadow(0 -6px 14px rgb(0 0 0/.35))}
+.hero::after{content:"";position:absolute;inset:auto 0 0;height:18%;z-index:1;background:linear-gradient(transparent,rgb(18 18 16/.9));pointer-events:none}
+.paper{background:var(--paper) url(img/paper-512.webp) 0 0/420px repeat}
+.intro{position:relative;z-index:2;display:grid;justify-items:center;text-align:center;padding:0 22px 44px}
+/* the arch-framed portrait overlaps the balustrade, off-centre to the left (design board) */
+.hero-portrait{position:relative;width:min(50vw,250px);aspect-ratio:771/1401;margin-top:calc(min(50vw,250px) * -1.05);justify-self:start;margin-left:max(4vw,calc(50% - 250px));filter:drop-shadow(0 18px 22px rgb(0 0 0/.6))}
+.hero-portrait .framed{position:absolute;left:5.4%;top:2.9%;width:89.2%;height:94.2%;-webkit-mask:url(img/mask_arch.png) 0 0/100% 100% no-repeat;mask:url(img/mask_arch.png) 0 0/100% 100% no-repeat}   /* frame_arch window_pct + bleed */
+.arch-photo{width:100%;height:100%}
+.arch-photo>img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.arch-photo.ty-decor{display:grid;place-items:center;background:var(--ink)}
+.arch-photo.ty-decor img{width:56%;height:auto}
+.arch-frame{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero-portrait .framed{view-transition-name:invite-card}
+.intro-copy{margin-top:22px;max-width:420px}
+.host{font:italic 400 19px/1.5 var(--serif);color:var(--ivory)}
+.request{font:italic 400 19px/1.5 var(--serif);color:#dccfb6;overflow-wrap:anywhere}
+.countdown{width:min(100%,380px);margin:26px auto 0}
+.cd-row{display:grid;grid-template-columns:repeat(4,1fr)}
+.cd-row>div{position:relative;display:flex;flex-direction:column;align-items:center;padding:4px 0}
+/* the cells are parted by the GPT thread (the divider's broken end, upright) */
+.cd-row>div+div::before{content:"";position:absolute;left:0;top:10%;bottom:10%;width:6px;translate:-50% 0;background:url(img/thread-44.webp) 50% 50%/100% auto repeat-y;opacity:.8}
+.cd-num{display:inline-flex;font:400 30px/1.1 var(--serif);color:var(--ivory);font-variant-numeric:lining-nums tabular-nums;height:1.1em}
+.cd-row small{font:400 9.5px/1.6 var(--caps);letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.odo{display:inline-block;height:1.1em;clip-path:inset(0 -2px);line-height:1.1}
+.odo>span{display:block;transition:transform .7s cubic-bezier(.3,.7,.2,1)}
+.odo i{display:block;font-style:normal;height:1.1em}
 .countdown.is-done .cd-row{display:none}
-.cd-done{font-size:19px}
-.calendar{margin:26px auto 0;text-align:center}
+.cd-done{font:italic 400 19px/1.5 var(--serif)}
+.intro-cta{margin-top:26px}
+.intro-cta .btn{min-width:min(100%,260px)}
+.cue{margin-top:14px}
+/* the gilt-edged black card (GPT, three slices; the plain middle repeats with the content) */
+.gilt{position:relative;width:min(100%,440px);margin:0 auto;container-type:inline-size}
+.gilt-bg{position:absolute;inset:0;display:flex;flex-direction:column;pointer-events:none;filter:drop-shadow(0 20px 26px rgb(0 0 0/.6))}
+.gilt-bg>i{display:block;flex:none;background:0 0/100% 100% no-repeat}
+.gilt-bg>i:nth-child(1){aspect-ratio:801/263;background-image:url(img/gilt_top-720.webp)}
+.gilt-bg>i:nth-child(2){flex:1;margin-block:-1px;background:url(img/gilt_mid-720.webp) 0 0/100% auto repeat-y}
+.gilt-bg>i:nth-child(3){aspect-ratio:801/236;background-image:url(img/gilt_bot-720.webp)}
+.gilt-body{position:relative;padding:31cqw 15cqw 26cqw;text-align:center}
+.invitation{padding:56px 18px 30px}
+.invitation .eyebrow{font-size:11px}
+.formal-names{margin:14px 0 10px;font:400 clamp(44px,13cqw,60px)/1.05 var(--script);color:var(--champagne);overflow-wrap:anywhere}
+.formal-names .amp{font-size:.7em;color:var(--gold)}
+.gilt .request{font-size:17px;max-width:30ch;margin:0 auto}
+.date-block{display:flex;flex-direction:column;align-items:center;margin:22px auto 4px;color:var(--gold)}
+.date-block>span{font:400 11px/1.8 var(--caps);letter-spacing:.3em;text-transform:uppercase}
+.date-block b{font:400 52px/1.1 var(--serif);color:var(--ivory)}
+.venue-name{font:italic 400 21px/1.4 var(--serif);margin-top:14px;color:var(--ivory);overflow-wrap:anywhere}
+.reply-call{margin-top:22px}
+.gilt .small{margin-top:8px}
+.calendar{margin:30px auto 0;text-align:center}
 .calendar>.eyebrow{font-size:11px;margin-bottom:10px}
-.teaser-photo{display:block}
-.teaser{display:flex;flex-direction:column;align-items:center;gap:20px;max-width:640px;margin:auto;padding:60px 24px;text-align:center}
-.teaser-photo{width:min(52vw,240px)}
-.teaser-text{min-width:0}
-.teaser-text h2{margin:6px 0 4px}
-.day{text-align:center;padding:60px 24px;border-block:1px solid var(--line-dark)}
-.day h2{margin:8px 0 14px}
-.day-peek{list-style:none;padding:0;margin:20px auto 28px;max-width:420px;display:grid;gap:8px;font-size:19px;overflow-wrap:anywhere}
+/* a photograph floating above night water, its reflection rippling beneath it (home teaser, story) */
+.teaser{padding:64px 18px 40px;text-align:center}
+.teaser .script-title{margin:2px 0 22px}
+.floating{position:relative;display:block;width:min(100%,560px);margin:0 auto}
+.float-photo{position:relative;z-index:2;display:block;aspect-ratio:1407/841;filter:drop-shadow(0 14px 18px rgb(0 0 0/.55))}
+.float-photo>.land-photo{position:absolute;left:4.5%;top:7.7%;width:91%;height:84.6%}   /* frame_land window_pct + bleed */
+.land-frame{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.water{position:relative;display:block;margin-top:-4.5%;aspect-ratio:1536/560;background:url(img/water-720.webp) 50% 0/cover no-repeat;-webkit-mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent),linear-gradient(#000 60%,transparent);-webkit-mask-composite:source-in;mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent) intersect,linear-gradient(#000 60%,transparent)}
+.reflection{position:absolute;left:4.5%;top:4%;width:91%;aspect-ratio:1268/703;overflow:hidden;opacity:.55;mix-blend-mode:screen;filter:brightness(.8) blur(.7px);
+  -webkit-mask:linear-gradient(#000,transparent 82%),repeating-linear-gradient(#000 0 3px,rgb(0 0 0/.35) 4px 7px,#000 8px 11px) 0 0/100% 22px;-webkit-mask-composite:source-in;
+  mask:linear-gradient(#000,transparent 82%) intersect,repeating-linear-gradient(#000 0 3px,rgb(0 0 0/.35) 4px 7px,#000 8px 11px) 0 0/100% 22px}
+.js .reflection{animation:ripple 3.2s linear infinite}
+@keyframes ripple{to{-webkit-mask-position:0 0,0 22px;mask-position:0 0,0 22px}}
+.reflection img{width:100%;height:100%;object-fit:cover;object-position:50% 32%;transform:scaleY(-1)}
+.js .reflection img{animation:sway 6s ease-in-out infinite}
+@keyframes sway{50%{transform:scaleY(-1.03) skewX(1.2deg) translateX(1.5%)}}
+.teaser .textlink{margin-top:10px}
+.day{padding:56px 22px;text-align:center}
+.day .script-title{margin:0 0 14px;font-size:clamp(48px,14vw,76px)}
+.day-peek{list-style:none;padding:0;margin:24px auto 28px;max-width:420px;display:grid;gap:10px;font:italic 400 18px/1.5 var(--serif);overflow-wrap:anywhere}
 .day-peek li:nth-child(n+5){display:none}
-.day-peek .time{font:500 13px/1 var(--sans);letter-spacing:.14em;color:var(--gold);margin-right:8px}
-.signature{position:relative;text-align:center;padding:52px 20px 36px}
-.signature>.lantern{margin-bottom:16px}
-.sig-names{font:400 30px/1.3 var(--display);letter-spacing:.05em;margin:6px 0 10px;color:var(--champagne);overflow-wrap:anywhere}
+.day-peek .time{font:normal 400 12px/1 var(--caps);letter-spacing:.2em;color:var(--gold);margin-right:8px}
+.signature{position:relative;text-align:center;padding:48px 22px 40px}
+.sig-seal{display:block;width:84px;aspect-ratio:1018/992;margin:0 auto 16px;position:relative;container-type:inline-size;background:url(img/seal-200.webp) center/contain no-repeat;filter:drop-shadow(0 6px 8px rgb(0 0 0/.5))}
+.sig-names{font:400 clamp(44px,12vw,64px)/1.1 var(--script);color:var(--champagne);margin:4px 0 10px;overflow-wrap:anywhere}
 
-/* ---------------------------------------------------------------- story: the shuttered villa windows */
-.page-heading{text-align:center;padding:60px 24px 40px;max-width:720px;margin:auto}
-.page-heading>.eyebrow{margin-bottom:10px}
-.page-heading h1{margin-bottom:16px}
-.page-heading .intro{max-width:460px;margin:auto}
-.page-heading .venue-name{margin-top:4px}
-/* a narrow strip of the painted lake over the page headings (details, rsvp, story) */
-.night-strip{display:block;height:clamp(110px,26vw,190px);background:url(img/band-1280.webp) 50% 58%/cover no-repeat;-webkit-mask:linear-gradient(180deg,transparent,#000 22%,#000 60%,transparent);mask:linear-gradient(180deg,transparent,#000 22%,#000 60%,transparent)}
-.night-strip+.page-heading{padding-top:6px}
-.story-page{max-width:1100px;margin:auto}
-.moments{list-style:none;margin:0;padding:10px 0 30px;display:grid;gap:52px}
-/* left – right – left: each window sits off-centre, with room on both sides for its opened shutters */
-.moment{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding:0 10px 0 max(16vw,20px)}
-.moment:nth-child(even){align-items:flex-end;padding:0 max(16vw,20px) 0 10px}
-.moment-photo{width:min(58vw,300px)}
-.moment-text{min-width:0;width:min(58vw,300px)}
-.moment:nth-child(even) .moment-text{text-align:right}
-.moment-text .num{display:block;font:500 11px/1.6 var(--sans);letter-spacing:.32em;color:var(--gold);margin-bottom:4px}
-.moment-text p{font:italic 400 20px/1.45 var(--serif);overflow-wrap:anywhere}
-.moment-text [data-empty]{display:none}
-.story-page>.divider{margin:10px auto 36px}
+/* ---------------------------------------------------------------- story */
+.story-page{max-width:900px;margin:auto;padding:0 18px}
+.page-heading{text-align:center;padding:52px 6px 18px}
+.chapter-label{font-size:12px;letter-spacing:.36em;counter-reset:ch var(--i,1)}
+.chapter-no::after{content:counter(ch,upper-roman)}
+.page-heading .script-title{margin:4px 0 6px}
+.story-intro{font:italic 400 18px/1.6 var(--serif);color:#dccfb6;max-width:440px;margin:6px auto 0}
+.chapters{padding:12px 0 8px}
+.slides{display:grid;gap:44px}
+.js .chapters.is-carousel .slides{display:grid;gap:0}
+.js .chapters.is-carousel .slide{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity .9s ease,visibility 0s .9s}
+.js .chapters.is-carousel .slide.is-active{opacity:1;visibility:visible;transition:opacity .9s ease}
+.slide{margin:0;touch-action:pan-y}
+.caption{margin:2px auto 0;max-width:420px;text-align:center;font:italic 400 20px/1.5 var(--serif);color:var(--ivory);overflow-wrap:anywhere}
+.caption:empty{display:none}
+.slide-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:520px;margin:22px auto 0}
+.circle-btn{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;border:1px solid rgb(224 199 164/.7);background:transparent;color:var(--champagne);font:400 20px/1 var(--serif)}
+.slide-status{display:grid;justify-items:center;gap:8px}
+.slide-count{counter-reset:cur var(--i,1) tot var(--n,3);font-size:12px;letter-spacing:.3em}
+.slide-count::before{content:counter(cur,upper-roman) " / " counter(tot,upper-roman)}
+.dots{display:flex;gap:4px}
+.dots button{width:24px;height:24px;padding:0;border:0;background:transparent;display:grid;place-items:center}
+.dots button::after{content:"";width:7px;height:7px;border-radius:50%;border:1px solid var(--gold);transition:background-color .3s}
+.dots button[aria-pressed=true]::after{background:var(--champagne)}
+.story-page>.signature .divider{margin-bottom:22px}
 
-/* ---------------------------------------------------------------- details */
-.details-page{max-width:1100px;margin:auto}
-.programme{padding:40px 24px 44px;margin:0 14px;box-shadow:0 16px 26px -14px rgb(0 0 0/.6)}
-.programme h2{text-align:center;margin-top:14px}
-.programme h2+.schedule{margin-top:22px}
-.schedule{list-style:none;margin:0 auto;padding:0;max-width:560px}
-.schedule li{position:relative;display:grid;grid-template-columns:18px 70px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--line)}
-.schedule li:first-child{border-top:0}
-.row-flake{width:14px;aspect-ratio:1;margin-top:6px;background:url(img/flake-160.webp) center/contain no-repeat}
-.schedule time{font:500 14px/1.9 var(--sans);color:var(--ink);letter-spacing:.08em}
-.schedule h3{overflow-wrap:anywhere}
-.schedule p{font-size:17px;color:var(--ink-soft);margin-top:2px;overflow-wrap:anywhere}
-.ceremony{font-size:18px;color:var(--ink-soft);margin:22px auto 0;max-width:560px;text-align:center}
+/* ---------------------------------------------------------------- details: the evening on the moon path */
+.details-page{max-width:820px;margin:auto;padding:0 20px}
+.evening-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;padding:46px 0 10px}
+.evening-head .script-title{font-size:clamp(56px,17vw,92px);text-align:left}
+.head-date{flex:none;max-width:9em;text-align:right;font-size:11px;line-height:1.9;padding-bottom:10px}
+.programme{padding:14px 0 10px}
+.programme-title{margin:0 0 18px;font-size:11px;color:var(--gold)}
+.schedule{--rail:70px;list-style:none;padding:0;margin:0;position:relative}
+/* the thread: the GPT divider's broken end turned upright, repeated; it lights down the evening as the guest scrolls */
+.schedule::before,.schedule::after{content:"";position:absolute;left:calc(var(--rail) / 2);top:8px;bottom:8px;width:8px;translate:-50% 0;background:url(img/thread-44.webp) 50% 0/100% auto repeat-y;opacity:.55}
+.schedule::after{opacity:1;filter:brightness(1.6) drop-shadow(0 0 4px rgb(255 226 170/.7));-webkit-mask:linear-gradient(#000 calc(var(--draw,0) * 100%),transparent calc(var(--draw,0) * 100% + 40px));mask:linear-gradient(#000 calc(var(--draw,0) * 100%),transparent calc(var(--draw,0) * 100% + 40px))}
+.schedule li{position:relative;display:grid;grid-template-columns:var(--rail) 1fr;gap:0 16px;padding:12px 0 18px}
+.icon{display:block;width:46px;aspect-ratio:1;justify-self:center;position:relative;z-index:1;background:var(--paper) var(--i) 50%/76% no-repeat;border-radius:50%;padding:4px}
+.sched-icon{--i:url(img/icon-boat-128.webp)}
+.schedule li:nth-child(1) .sched-icon{--i:url(img/icon-rings-128.webp)}
+.schedule li:nth-child(2) .sched-icon{--i:url(img/icon-toast-128.webp)}
+.schedule li:nth-child(3) .sched-icon{--i:url(img/icon-dinner-128.webp)}
+.schedule li:nth-child(4) .sched-icon{--i:url(img/icon-dance-128.webp)}
+.icon-dress{--i:url(img/icon-dress-128.webp)}
+.schedule time{display:block;font-size:12px;letter-spacing:.24em;color:var(--champagne)}
+.schedule h3{font-size:12px;line-height:1.7;letter-spacing:.3em;color:var(--ivory);margin-top:2px}
+.schedule p{font:italic 400 18px/1.5 var(--serif);color:#dccfb6;margin-top:2px;overflow-wrap:anywhere}
+.schedule li.lit .icon{filter:brightness(1.25) drop-shadow(0 0 6px rgb(255 226 170/.45));transition:filter .8s}
+.ceremony{font:italic 400 17px/1.6 var(--serif);color:var(--muted);margin:18px 0 0;text-align:center}
 .programme .calendar{margin-top:24px}
-.location{padding:56px 24px 10px;max-width:760px;margin:auto;text-align:center}
-.location h2{margin-bottom:22px}
-.venue-photo{margin:0 auto 18px}
-.venue-line{font-size:20px;overflow-wrap:anywhere}
-.map-section{margin-top:18px}
-.map-section .btn{white-space:normal}
-.detail-notes{display:grid;gap:26px;margin:40px auto 0;padding:0 24px;max-width:760px}
-.detail-note{border-top:1px solid var(--line-dark);padding-top:24px}
-.detail-note h2,.faq h2{font-size:26px;margin-bottom:10px}
+.location{padding:44px 0 6px;text-align:center}
+.venue-photo{width:min(100%,560px);margin:0 auto}
+.venue-line{margin-top:18px;font-size:12px;letter-spacing:.32em}
+.venue-address{font:italic 400 17px/1.5 var(--serif);color:var(--muted);margin-top:4px;overflow-wrap:anywhere}
+.map-section{margin-top:16px}
+.map-section .btn{white-space:normal;min-width:min(100%,240px)}
+.detail-notes{display:grid;gap:30px;margin:44px auto 0;max-width:640px;text-align:center}
+.detail-note .script-title,.faq .script-title{font-size:clamp(44px,12vw,60px);margin:14px 0 8px}
 .detail-note .body-text{margin-bottom:12px;overflow-wrap:anywhere}
-.faq{margin:44px auto 0;padding:0 24px;max-width:760px}
-.faq details{border-bottom:1px solid var(--line-dark);padding:10px 0}
-.faq summary{cursor:pointer;min-height:44px;font-size:20px;padding:8px 30px 8px 0;list-style:none;position:relative;overflow-wrap:anywhere}
+.faq{margin:44px auto 0;max-width:640px}
+.faq .script-title{text-align:center}
+.faq details{border-bottom:1px solid var(--line);padding:8px 0}
+.faq summary{cursor:pointer;min-height:44px;font:400 19px/1.45 var(--serif);padding:8px 30px 8px 0;list-style:none;position:relative;overflow-wrap:anywhere}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary::after{content:"+";content:"+" / "";position:absolute;right:4px;top:8px;color:var(--gold);font:400 22px/1 var(--serif)}
 .faq details[open] summary::after{content:"×";content:"×" / ""}
-.faq details .body-text{padding-block:10px;white-space:pre-line}
+.faq details .body-text{padding-block:8px;white-space:pre-line}
 
-/* ---------------------------------------------------------------- rsvp */
-.rsvp-page{max-width:640px;margin:auto;padding:0 20px}
-.rsvp-page .night-strip{margin:0 -20px}
-.rsvp-page .page-heading{padding-bottom:30px}
-.rsvp-page .page-heading>.eyebrow:last-of-type{margin-top:12px}
-.reply-cta{margin-top:20px}
-.reply-card{position:relative;padding:30px 22px;filter:drop-shadow(0 16px 24px rgb(0 0 0/.55))}
-.reply-card>.spray.sp-r{right:-6%;top:-7%;width:32%}
-.reply-card .divider{margin:8px auto 4px}
-.form-title{text-align:center;margin-bottom:6px}
-.reply-form{font:400 17px/1.7 var(--serif)}
-.field{display:block;margin-top:18px}
-.kicker{display:block;margin-bottom:8px;font:500 12px/1.7 var(--sans);letter-spacing:.1em;color:var(--gold-ink);overflow-wrap:anywhere}
-.opt{color:var(--ink-soft);font-size:11px}
-.field input,.field textarea,.question textarea{display:block;width:100%;border:1px solid rgb(28 29 21/.3);background:#fbf4e6;color:var(--ink);min-height:48px;padding:12px;border-radius:2px;font:400 18px/1.5 var(--serif)}
-.field textarea,.question textarea{resize:vertical}
-.choice{border:0;padding:0;margin:22px 0 0;min-width:0}
+/* ---------------------------------------------------------------- rsvp: the gilt card over the dimmed lake */
+.page-rsvp{background:var(--night)}
+.page-rsvp .night{position:fixed;--moon-y:6.5%;--moon-w:52px}
+.page-rsvp .night>.lake{background-image:url(img/lake_blur-480.webp)}
+.night.dim::after{content:"";position:absolute;inset:0;background:linear-gradient(rgb(8 10 14/.25),rgb(8 10 14/.6))}
+.page-rsvp .sky-moon{transition:filter 1.2s,scale 1.2s}
+html[data-rsvp-replied] .page-rsvp .sky-moon{filter:brightness(1.3) drop-shadow(0 0 26px rgb(255 238 205/.75));scale:1.12}
+html[data-rsvp-replied] .page-rsvp .moon-halo{opacity:1;scale:1.35;transition:scale 1.4s,opacity 1.4s}
+.rsvp-page{position:relative;z-index:2;max-width:560px;margin:auto;padding:max(64px,11svh) 14px 0}
+.rsvp-head{text-align:center}
+.rsvp-head .script-title{font-size:clamp(52px,16cqw,76px);margin-top:-2cqw}
+.by{font:italic 400 19px/1.5 var(--serif);color:var(--ivory)}
+.wait{font:italic 400 16px/1.6 var(--serif);color:var(--muted);margin-top:4px}
+html[data-rsvp-replied] .wait{display:none}
+.reply-cta{margin-top:2px}
+html[data-rsvp-replied] .reply-cta{display:none}
+.reply-box{margin-top:22px;text-align:left}
+.reply-form{font:400 17px/1.6 var(--serif)}
+.field{display:block;margin-top:20px}
+.kicker{display:block;margin-bottom:6px;font:400 11px/1.7 var(--caps);letter-spacing:.24em;text-transform:uppercase;color:var(--champagne);overflow-wrap:anywhere}
+.opt{color:var(--muted);letter-spacing:.12em;text-transform:none;font-family:var(--serif);font-style:italic;font-size:13px}
+.field input,.field textarea,.question textarea{display:block;width:100%;min-height:46px;padding:10px 2px;border:0;border-bottom:1px solid rgb(224 199 164/.75);border-radius:0;background:transparent;color:var(--ivory);font:400 19px/1.5 var(--serif)}
+.field textarea,.question textarea{resize:vertical;border:1px solid rgb(224 199 164/.45);padding:10px 12px;background:rgb(255 255 255/.03)}
+.field input:focus,.field textarea:focus{outline:0;border-color:var(--champagne);background:rgb(224 199 164/.06)}
+.field input[type=number]{width:7em}
+.choice{border:0;padding:0;margin:24px 0 0;min-width:0}
 .choice legend{padding:0;width:100%}
-.choice label{display:flex;align-items:center;gap:10px;min-height:46px;color:var(--ink);overflow-wrap:anywhere}
-input[type=radio]{accent-color:var(--charcoal);width:18px;height:18px;flex:none}
-.questions{margin-bottom:12px}
-.field-error{color:#a3211a;font:500 14px/1.6 var(--sans);margin-top:5px;overflow-wrap:anywhere}
+.choice label{display:flex;align-items:center;gap:12px;min-height:46px;font:italic 400 19px/1.4 var(--serif);color:var(--ivory);overflow-wrap:anywhere}
+input[type=radio]{appearance:none;-webkit-appearance:none;flex:none;width:22px;height:22px;margin:0;border:1px solid var(--champagne);border-radius:50%;display:grid;place-items:center}
+input[type=radio]::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--champagne);scale:0;transition:scale .2s}
+input[type=radio]:checked::after{scale:1}
+.questions{margin-bottom:10px}
+.field-error{color:#f0a49a;font:400 14px/1.6 var(--serif);margin-top:5px;overflow-wrap:anywhere}
 .field-error:empty{display:none}
-[aria-invalid=true]{border-color:#a3211a!important}
-.send{margin-top:26px}
-.send .btn{width:100%}
-.reply-panel{padding:18px 0;font:400 17px/1.8 var(--serif)}
-.panel-title{font:400 30px/1.3 var(--display);letter-spacing:.05em;color:var(--ink);margin-bottom:6px}
-.reply-panel[data-rsvp-state=error]{color:#a3211a}
-.reply-panel[data-rsvp-state=preview]{color:var(--gold-ink);border-top:1px solid var(--line);margin-top:18px}
-.note{color:var(--ink-soft)}
-html[data-rsvp-replied] .rsvp-page .page-heading .body-text{display:none}
-.thank-you-copy{text-align:center}
-.thank-you-copy h2{margin-bottom:20px}
+[aria-invalid=true]{border-color:#f0a49a!important}
+.send{margin-top:28px}
+.reply-panel{padding:16px 0 4px;font:italic 400 18px/1.7 var(--serif);text-align:center}
+.panel-title{font-size:56px;line-height:1.1;margin-bottom:4px}
+.reply-panel[data-rsvp-state=error]{color:#f0a49a}
+.reply-panel[data-rsvp-state=preview]{color:var(--champagne);border-top:1px solid var(--line);margin-top:16px}
+.note{color:#dccfb6}
+/* the moon seal pressed onto the card when a reply is sent (site.js .is-sealing) */
+.press-seal{display:block;width:96px;aspect-ratio:1018/992;margin:0 auto 6px;position:relative;container-type:inline-size;background:url(img/seal-200.webp) center/contain no-repeat;filter:drop-shadow(0 6px 8px rgb(0 0 0/.55))}
+.is-sealing .press-seal{animation:seal-down 1.1s cubic-bezier(.3,.1,.3,1) both}
+@keyframes seal-down{0%{opacity:0;transform:translateY(-90px) scale(1.5) rotate(-18deg)}55%{opacity:1;transform:translateY(0) scale(1.05) rotate(-3deg)}68%{transform:scale(.9)}100%{transform:none}}
+.thank-you-copy{text-align:center;margin-top:14px}
+.thank-you-copy h2{font:italic 400 26px/1.3 var(--serif);margin-bottom:20px}
+.rsvp-page>.signature{padding-top:40px}
+.rsvp-page .sig-names{font-size:clamp(40px,11vw,56px)}
+
+/* ---------------------------------------------------------------- nav */
+.site-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgb(11 13 18/.94);border-top:1px solid rgb(199 169 120/.5);padding:6px 8px max(6px,env(safe-area-inset-bottom));view-transition-name:site-nav}
+.site-nav ul{list-style:none;padding:0;margin:0;display:flex;justify-content:center;gap:2px}
+.site-nav li{flex:0 1 auto;min-width:0}
+.site-nav a{display:flex;align-items:center;justify-content:center;min-height:48px;min-width:64px;padding:8px 10px;font:400 11px/1.2 var(--caps);letter-spacing:.18em;text-transform:uppercase;text-align:center;overflow-wrap:anywhere;color:var(--muted)}
+.site-nav a[aria-current]{color:var(--champagne);text-decoration:underline;text-underline-offset:9px;text-decoration-color:rgb(199 169 120/.9)}
 
 /* ---------------------------------------------------------------- view transitions + scenes (docs/11 §8, §11) */
 @view-transition{navigation:auto}
-::view-transition-group(invite-card){animation-duration:.85s;animation-timing-function:cubic-bezier(.4,0,.2,1)}
+::view-transition-group(invite-card){animation-duration:.9s;animation-timing-function:cubic-bezier(.4,0,.2,1)}
+::view-transition-group(sky-moon){animation-duration:1.1s;animation-timing-function:cubic-bezier(.4,0,.2,1)}
 ::view-transition-new(site-nav):only-child{animation:none}
 ::view-transition-old(site-nav):only-child{animation:none;opacity:0}
-/* text comes up as if out of the dark: a soft rise into the candlelight (this design's step) */
-.js [data-step]{opacity:0;transform:translateY(10px);transition:opacity 1s ease-out,transform 1.2s cubic-bezier(.2,.7,.2,1)}
+html:has(.page-opening)::view-transition-group(site-nav){display:none}
+/* text comes up out of the night: a soft rise into the moonlight */
+.js [data-step]{opacity:0;transform:translateY(12px);transition:opacity 1s ease-out,transform 1.2s var(--out)}
 .js [data-step].in{opacity:1;transform:none}
-/* the villa windows: the frame settles; behind closed shutters, they open outward and the photo warms out of the dark */
-.js .villa[data-step]{transform:scale(.95)}
-.js .villa[data-step].in{transform:none}
-.js .villa[data-step] .photo-slot>img{filter:sepia(.75) saturate(1.4) brightness(.55) blur(3px)}
-.js .villa[data-step].in .photo-slot>img{filter:none;transition-delay:calc(var(--d,0ms) + 900ms)}
-.js .villa[data-step].in>.shutter.sh-l{animation:shutter-l 1.3s calc(var(--d,0ms) + 350ms) cubic-bezier(.45,0,.2,1) forwards}
-.js .villa[data-step].in>.shutter.sh-r{animation:shutter-r 1.3s calc(var(--d,0ms) + 450ms) cubic-bezier(.45,0,.2,1) forwards}
-@keyframes shutter-l{to{transform:rotateY(-104deg)}}
-@keyframes shutter-r{to{transform:rotateY(104deg)}}
-.no-js .shutter,.villa:not([data-step])>.shutter{display:none}
-/* the moon that rose off the envelope floats down into the painted sky over the home card */
-.js .hero-moon[data-step]{transform:translateY(-34px) rotate(-12deg) scale(1.2)}
-.js .hero-moon[data-step].in{transform:none}
-.js li[data-step] .row-flake{transform:translateY(-12px) rotate(-90deg);opacity:0}
-.js li[data-step].in .row-flake{animation:settle .9s calc(var(--d,0ms) + 120ms) cubic-bezier(.3,.6,.3,1) forwards}
-@keyframes settle{to{transform:none;opacity:1}}
-.from-envelope .hero-card [data-step]{opacity:1;clip-path:none;transform:none;transition:none;animation:none}
-.from-envelope .hero-card .photo-slot>img{filter:none}
+/* the floating photographs settle onto the water; their reflections follow */
+.js .floating[data-step] .water,.js [data-step]>.floating .water{opacity:0;transition:opacity 1.6s .5s}
+.js .floating[data-step].in .water,.js [data-step].in>.floating .water{opacity:1}
+.js .hero-portrait[data-step]{transform:translateY(24px) scale(.97)}
+.js .hero-portrait[data-step].in{transform:none}
+.from-envelope .hero-portrait[data-step]{opacity:1;transform:none;transition:none}
+.from-envelope .hero-names{transition-delay:.25s}
 .arrive-fade body{animation:fade-in .5s ease-out both}
 @keyframes fade-in{from{opacity:0}}
 .accent-layer{position:fixed;inset:0;pointer-events:none;z-index:30;overflow:hidden}
+.leaf{position:absolute;left:0;top:0;width:var(--s,24px);height:auto;will-change:transform;filter:drop-shadow(0 2px 2px rgb(0 0 0/.35))}
 
-@media(min-width:760px){
-.hero-card{width:410px;padding:36px 34px 34px}
-.invitation-copy,.invitation>.countdown,.invitation>.calendar{padding-inline:40px}
-.teaser{padding:90px 40px;gap:24px}
-.moment,.moment:nth-child(even){max-width:760px;margin:auto;width:100%;padding-inline:100px}
-.detail-notes{grid-template-columns:repeat(2,1fr);gap:36px}
-.programme{padding:64px 40px;margin:0 auto;max-width:760px}
-.page-heading{padding-top:84px}
+@media(min-width:700px){
+.night>.lake,.night>.path-light{background-image:url(img/lake_wide-1536.webp)}
+.page-rsvp .night>.lake{background-image:url(img/lake_blur-480.webp)}
+.hero{height:clamp(540px,80svh,820px)}
+.hero .night>.lake,.hero .night>.path-light{background-position:50% 80%}
+.balustrade{width:min(820px,92%);background-image:url(img/balustrade-1385.webp)}
+.hero-copy{margin-top:clamp(96px,16svh,150px)}
+.hero-portrait{justify-self:center;margin-left:0;margin-top:calc(min(50vw,250px) * -.66)}
+.intro{padding-bottom:64px}
+.invitation{padding-top:80px}
+.detail-notes{grid-template-columns:repeat(2,1fr);gap:40px}
 .site-nav a{min-width:110px}
 }
-@media(max-width:359px){
-.hero{padding-inline:12px}
-.hero-card{padding:24px 16px 22px}
-.rsvp-page{padding-inline:12px}
-.rsvp-page .night-strip{margin-inline:-12px}
-.reply-card{padding:24px 16px}
-.detail-notes,.faq,.location{padding-inline:16px}
-.programme{padding-inline:14px;margin-inline:8px}
-.schedule li{grid-template-columns:14px 60px 1fr;gap:8px}
-.cd-row{gap:8px}
-.teaser{padding-inline:16px}
-.site-nav a{min-width:60px;padding-inline:8px;letter-spacing:.08em}
+@media(max-width:400px){
+.site-nav a{min-width:0;padding-inline:7px;letter-spacing:.12em}
 }
-@media(max-height:700px) and (max-width:759px){
-.opening{padding-top:48px}
-.opening .names{font-size:clamp(28px,8.4vw,40px)}
-.stage{--obj:min(62vw,calc((100svh - 230px) / 2.3),300px);margin-top:calc(var(--obj) / 0.7153 * .639 + 4px)}
-.opening:has(.names.long-names) .stage{--obj:min(56vw,calc((100svh - 260px) / 2.3),300px)}
+@media(max-width:359px){
+.names{--fs:clamp(48px,17vw,64px)}
+.intro,.invitation,.teaser,.day{padding-inline:12px}
+.cd-num{font-size:25px}
+.schedule{--rail:56px}
+.icon{width:40px}
+.details-page{padding-inline:14px}
+.rsvp-page{padding-inline:8px}
+.site-nav a{min-width:0;padding-inline:6px;letter-spacing:.08em}
+}
+@media(max-height:700px) and (max-width:699px){
+.opening{padding-top:44px}
+.opening .names{--fs:clamp(46px,14vw,80px)}
+.stage{--w:min(84vw,470px,calc((100svh - 270px) * 1.6089))}
 .opening-actions{margin-top:14px}
-.hero-moon{margin-top:14px;width:38px}
-.hero-card{margin-top:min(8svh,60px);padding:22px 18px 18px}
-.hero-photo{width:min(30vw,130px);margin-bottom:8px}
-.hero .names{font-size:clamp(28px,8vw,38px);margin:2px 0 4px}
+.page-opening .night{--moon-y:13%}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
 *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition:none!important}
-.js [data-step]{opacity:1!important;clip-path:none!important;transform:none!important}
-.js li[data-step] .row-flake{transform:none!important;opacity:1!important;animation:none!important}
-.js .villa .photo-slot>img{filter:none!important}
-.js .villa>.shutter{display:none}
-.card::after,.moon::after,.shimmer,.sparks{display:none}
-.js .foil.in{-webkit-text-fill-color:currentColor;animation:none!important}
-.js .tap-hint{animation:none!important}
+.js [data-step]{opacity:1!important;transform:none!important}
+.js .floating .water{opacity:1!important}
+.reflection{filter:brightness(.8)}
+.seal-glint,.path-light{display:none}
 ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation-duration:1ms!important}
 }
 #reply{scroll-margin-top:64px}
