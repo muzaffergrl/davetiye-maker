@@ -1694,7 +1694,7 @@
         },
         "home": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/nocturne-lake-estate/home-320.webp",
             "480": "/marketing/designs/nocturne-lake-estate/home-480.webp",
@@ -1703,7 +1703,7 @@
         },
         "invitation": {
           "width": 640,
-          "height": 1285,
+          "height": 1236,
           "files": {
             "320": "/marketing/designs/nocturne-lake-estate/invitation-320.webp",
             "480": "/marketing/designs/nocturne-lake-estate/invitation-480.webp",
@@ -1712,7 +1712,7 @@
         },
         "story": {
           "width": 640,
-          "height": 1385,
+          "height": 1285,
           "files": {
             "320": "/marketing/designs/nocturne-lake-estate/story-320.webp",
             "480": "/marketing/designs/nocturne-lake-estate/story-480.webp",
@@ -1748,7 +1748,7 @@
         },
         "form": {
           "width": 640,
-          "height": 1285,
+          "height": 1247,
           "files": {
             "320": "/marketing/designs/nocturne-lake-estate/form-320.webp",
             "480": "/marketing/designs/nocturne-lake-estate/form-480.webp",
@@ -1762,7 +1762,7 @@
         "width": 390,
         "height": 844,
         "seconds": 10,
-        "bytes": 279197
+        "bytes": 420091
       }
     },
     "velvet-jewel-box": {

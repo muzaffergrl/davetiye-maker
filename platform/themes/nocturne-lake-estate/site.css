@@ -8,7 +8,8 @@
 :root{--night:#0b0d12;--ink:#0f1620;--paper:#121210;--charcoal:#1c1d15;--champagne:#e0c7a4;--gold:#c7a978;--gold-deep:#9c7f52;
 --ivory:#f1e4cc;--stone:#cfc6b4;--muted:#b8aa91;--line:rgb(224 199 164/.32);
 --script:'Waterfall',fb1,fb2,cursive;--caps:'Castoro Titling','Castoro',Georgia,serif;--serif:'Castoro',Georgia,'Times New Roman',serif;
---nav-h:62px;--io:cubic-bezier(.65,0,.35,1);--out:cubic-bezier(.2,.7,.2,1);color-scheme:dark}
+--nav-h:62px;--io:cubic-bezier(.65,0,.35,1);--out:cubic-bezier(.2,.7,.2,1);color-scheme:dark;
+}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip;background:var(--paper)}
 body{margin:0;background:var(--paper) url(img/paper-512.webp) 0 0/420px repeat;color:var(--ivory);font:400 18px/1.65 var(--serif);padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom))}
@@ -34,7 +35,7 @@ button:disabled{opacity:.45;cursor:default}
 .names.wrap>span{display:inline}
 .names .amp{font-size:.82em}
 .btn{display:inline-flex;justify-content:center;align-items:center;gap:12px;min-height:48px;padding:12px 30px;border:1px solid var(--champagne);border-radius:1px;font:400 13px/1.4 var(--caps);letter-spacing:.28em;text-transform:uppercase;text-align:center;overflow-wrap:anywhere;transition:filter .3s,background-color .3s}
-.btn-gold{background:linear-gradient(180deg,#ecd8b4,#cdb083 52%,#b89a68);color:#14110b;box-shadow:inset 0 1px 0 rgb(255 245 225/.55)}
+.btn-gold{background:linear-gradient(180deg,rgb(var(--c-ecd8b4)),rgb(var(--c-cdb083)) 52%,rgb(var(--c-b89a68)));color:rgb(var(--c-14110b));box-shadow:inset 0 1px 0 rgb(255 245 225/.55)}
 .btn-gold:hover{filter:brightness(1.07)}
 .btn-ghost{background:rgb(11 13 18/.4);color:var(--champagne);border-color:rgb(224 199 164/.75)}
 .btn-ghost:hover{background:rgb(224 199 164/.1)}
@@ -49,7 +50,7 @@ button:disabled{opacity:.45;cursor:default}
 .divider{display:block;width:min(74%,360px);aspect-ratio:1402/44;margin:0 auto;background:url(img/divider-720.webp) center/100% 100% no-repeat}
 
 /* photo slots: placeholders are the softened lake; "Your photo here" only in a preview */
-.photo-slot{position:relative;display:block;overflow:hidden;background:#1b2130}
+.photo-slot{position:relative;display:block;overflow:hidden;background:rgb(var(--c-1b2130))}
 .photo-slot>img{width:100%;height:100%;object-fit:cover;object-position:50% 32%}
 .ph-mark{display:none;position:absolute;inset:0;align-items:center;justify-content:center;pointer-events:none;font:400 11px/1.4 var(--caps);letter-spacing:.14em;color:var(--champagne);text-align:center}
 html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{display:flex}
@@ -94,7 +95,7 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 /* the flap's moiré inside: stands above the hinge once open (stage.flap_in_h), lifted from -90° */
 .env-inside{left:0;bottom:100%;width:100%;height:59.35%;z-index:1;transform-origin:50% 100%;transform:rotateX(-90deg);visibility:hidden}
 .card-well{z-index:2}
-.env-card{position:absolute;left:4%;top:9.5%;width:92%;aspect-ratio:1.6926;display:block;container-type:inline-size;color:#1c1d15;opacity:0;visibility:hidden}   /* stage.card */
+.env-card{position:absolute;left:4%;top:9.5%;width:92%;aspect-ratio:1.6926;display:block;container-type:inline-size;color:rgb(var(--c-1c1d15));opacity:0;visibility:hidden}   /* stage.card */
 .env-card>.card-art{position:absolute;inset:0;z-index:1}
 /* the arch window: the photo sits under the card's hole (card window_pct, its own mask) */
 .env-card .framed{position:absolute;left:4.2%;top:5.9%;width:32.6%;height:87.8%;z-index:0;-webkit-mask:url(img/mask_card.png) 0 0/100% 100% no-repeat;mask:url(img/mask_card.png) 0 0/100% 100% no-repeat}
@@ -103,16 +104,16 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .card-window .ty-decor,.card-window .ty-decor img{display:block;width:100%;height:100%;object-fit:cover;background:var(--ink)}
 .card-body{position:absolute;z-index:2;left:42%;right:5%;top:10%;bottom:10%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1.2cqw}
 .card-line{font:400 2.5cqw/1.5 var(--caps);letter-spacing:.3em;text-transform:uppercase;color:var(--gold-deep)}
-.card-names{font:400 calc(11cqw*var(--fit,1))/1.02 var(--script);color:#7c6440;overflow-wrap:anywhere;text-wrap:balance}
-.card-date{font:400 2.7cqw/1.5 var(--caps);letter-spacing:.24em;text-transform:uppercase;margin-top:1.4cqw;color:#2a281f}
+.card-names{font:400 calc(11cqw*var(--fit,1))/1.02 var(--script);color:rgb(var(--c-7c6440));overflow-wrap:anywhere;text-wrap:balance}
+.card-date{font:400 2.7cqw/1.5 var(--caps);letter-spacing:.24em;text-transform:uppercase;margin-top:1.4cqw;color:rgb(var(--c-2a281f))}
 .card-date::before{content:"";display:block;width:16cqw;aspect-ratio:1402/44;margin:0 auto 1.6cqw;background:url(img/divider-720.webp) center/100% 100% no-repeat}
-.card-place{font:italic 400 3.4cqw/1.4 var(--serif);color:#4a463b}
+.card-place{font:italic 400 3.4cqw/1.4 var(--serif);color:rgb(var(--c-4a463b))}
 .env-pocket{z-index:3}
 .env-flap{left:0;top:0;width:100%;height:61.41%;z-index:4;transform-origin:50% 0;filter:drop-shadow(0 1.5px 1.2px rgb(0 0 0/.6))}   /* stage.flap_h */
 /* the moon seal in the valley (stage.seal) with the initials pressed into its smooth centre */
 .env-seal{position:absolute;left:39.43%;top:44.68%;width:19%;height:29.79%;z-index:5;container-type:inline-size;filter:drop-shadow(0 4px 5px rgb(0 0 0/.55))}
 .env-seal>img{width:100%;height:100%;object-fit:contain}
-.seal-initials{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:400 22cqw/1 var(--caps);letter-spacing:.02em;color:#866a40;text-shadow:0 1px 0 rgb(255 240 210/.55),0 -1px 0 rgb(70 50 20/.45);white-space:nowrap;padding-top:3%}
+.seal-initials{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:400 22cqw/1 var(--caps);letter-spacing:.02em;color:rgb(var(--c-866a40));text-shadow:0 1px 0 rgb(255 240 210/.55),0 -1px 0 rgb(70 50 20/.45);white-space:nowrap;padding-top:3%}
 .seal-glint{position:absolute;inset:14%;border-radius:50%;background:linear-gradient(115deg,transparent 35%,rgb(255 250 235/.75) 50%,transparent 65%) -150% 0/300% 100% no-repeat;mix-blend-mode:screen;pointer-events:none}
 .js .page-opening:not(.is-opening):not(.is-opened) .seal-glint{animation:glint 5.5s 1.8s ease-in-out infinite}
 @keyframes glint{0%,70%,100%{background-position:-150% 0}85%{background-position:250% 0}}

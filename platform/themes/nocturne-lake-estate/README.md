@@ -83,9 +83,10 @@ Own pack `public/audio/fx/nocturne-lake-estate/` (tick, rise, flap, moon, draw, 
 chime) and own music `moonlit-terrace` (a 6/8 A-major barcarolle), all synthesized by `tools/audio_packs.py`; silent
 until the guest's first tap (audio.js).
 
-## Not yet
+## Approval and variants
 
-- The palettes (`collections/22_Nocturne_Lake_Estate/variants/`, G177) still follow the old parts: re-measure the
-  families on the PAKET 8 parts and rebuild with `tools/recolor_parts.py` after approval.
-- Marketing copy (`lib/marketing/designs.ts` and its four translations) and the listing/marketing captures describe
-  the previous build until approval.
+Approved by the user on 2026-10-24 (K60) and merged to main; still `preview` (off sale) in `lib/marketing/config.ts`
+until it is put on sale. Marketing copy (`lib/marketing/designs.ts` + tr/es/de/fr) and the marketing captures
+(`public/marketing/designs/nocturne-lake-estate/`) describe this build. Palettes (G177): V02–V06 rebuilt on the PAKET 8
+parts (`collections/22_Nocturne_Lake_Estate/variants/recolor.json`: families night + gold; the lake, moon, water,
+balustrade and photos are never recoloured), status `coming`.

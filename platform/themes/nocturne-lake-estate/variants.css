@@ -1,0 +1,98 @@
+/* G153 — renk paleti varyantları. ÜRETİLİR, elle düzenlenmez:
+   python3 tools/recolor_parts.py build --design 22
+   (kaynak: collections/22_Nocturne_Lake_Estate/variants/<V0x_slug>/palette.json + recolor.json).
+   :root = asıl paletin kanal token'ları (site.css'teki rgb(var(--c-…)) kullanımları); html[data-variant] blokları
+   yalnız paletin değiştirdiği token'lar. */
+:root {
+  --c-14110b: 20 17 11;
+  --c-1b2130: 27 33 48;
+  --c-1c1d15: 28 29 21;
+  --c-2a281f: 42 40 31;
+  --c-4a463b: 74 70 59;
+  --c-7c6440: 124 100 64;
+  --c-866a40: 134 106 64;
+  --c-b89a68: 184 154 104;
+  --c-cdb083: 205 176 131;
+  --c-ecd8b4: 236 216 180;
+}
+
+/* V04_burgundy_noir · Burgundy Noir & Gold */
+html[data-variant="burgundy-noir"] {
+  --c-14110b: 65 0 0;
+  --c-1b2130: 0 24 135;
+  --c-1c1d15: 73 0 0;
+  --c-2a281f: 102 0 0;
+  --c-4a463b: 150 0 0;
+  --charcoal: #490000;
+  --ink: #001D52;
+  --night: #001231;
+  --paper: #231000;
+}
+
+/* V03_emerald_night · Emerald Night & Gold */
+html[data-variant="emerald-night"] {
+  --c-14110b: 0 38 45;
+  --c-1b2130: 103 0 0;
+  --c-1c1d15: 0 44 81;
+  --c-2a281f: 0 63 87;
+  --c-4a463b: 0 99 116;
+  --charcoal: #002C51;
+  --ink: #47000E;
+  --night: #2B0306;
+  --paper: #071E25;
+}
+
+/* V02_midnight_navy · Midnight Navy & Champagne */
+html[data-variant="midnight-navy"] {
+  --c-14110b: 37 0 68;
+  --c-1b2130: 0 50 0;
+  --c-1c1d15: 68 0 62;
+  --c-2a281f: 75 0 97;
+  --c-4a463b: 105 37 144;
+  --charcoal: #44003E;
+  --ink: #171F00;
+  --night: #061700;
+  --paper: #211121;
+}
+
+/* V05_moonlit_silver · Moonlit Silver */
+html[data-variant="moonlit-silver"] {
+  --c-14110b: 25 17 37;
+  --c-1b2130: 28 42 0;
+  --c-1c1d15: 45 24 43;
+  --c-2a281f: 54 37 63;
+  --c-4a463b: 83 67 98;
+  --c-7c6440: 128 129 132;
+  --c-866a40: 134 136 139;
+  --c-b89a68: 183 186 191;
+  --c-cdb083: 206 208 213;
+  --c-ecd8b4: 241 231 215;
+  --champagne: #E3DBD0;
+  --charcoal: #2D182B;
+  --gold: #C7CACF;
+  --gold-deep: #9C9EA2;
+  --ink: #171B00;
+  --night: #0D1206;
+  --paper: #191419;
+}
+
+/* V06_plum_rose_gold · Plum Night & Rose Gold */
+html[data-variant="plum-rose-gold"] {
+  --c-14110b: 62 0 33;
+  --c-1b2130: 0 66 23;
+  --c-1c1d15: 91 0 0;
+  --c-2a281f: 109 0 38;
+  --c-4a463b: 151 0 80;
+  --c-7c6440: 130 98 89;
+  --c-866a40: 141 103 93;
+  --c-b89a68: 194 150 136;
+  --c-cdb083: 214 173 160;
+  --c-ecd8b4: 241 215 191;
+  --champagne: #E4C6B3;
+  --charcoal: #5B0000;
+  --gold: #D1A597;
+  --gold-deep: #A47C70;
+  --ink: #002D00;
+  --night: #001C0D;
+  --paper: #280C11;
+}

@@ -41,7 +41,7 @@ const ids = Object.keys(OPEN_LABEL);
 
 // the fastening that closes each envelope (docs/35 §4), named in its own opening sentence
 const CLOSURE: Record<string, RegExp> = {
-  'nocturne-lake-estate': /gold crescent/,
+  'nocturne-lake-estate': /gold seal/,
   'velvet-jewel-box': /\bring\b/,
   'grand-theatre-premiere': /gold cord/,
   'orient-express-voyage': /turn-lock/,
