@@ -1,0 +1,207 @@
+PAKET 8 — Grand Theatre yeniden tasarım / TESLİM
+Dal: main
+Son görsel commiti (teslim raporundan önce): dbfaf4bb65a893cc258795c2faa03cfcd9ee2b75 — 24 PAKET 8: W2 4/4
+Teslim commiti: bu dosyayı ekleyen “24 PAKET 8: teslim” commiti.
+Tarih: 24 Ekim 2026
+
+Teslim: 26 PNG = W1 tasarım panosu + 25 W2 parçası. Bu raporla 27 yeni dosya.
+Eksik/atlanan PAKET 8 görseli: yok.
+Bu bir görsel parça teslimidir. Kalan geometri farkları aşağıda açıkça kayıtlıdır; hepsi piksel hizalı kabul edilmemelidir.
+
+Kapsam ve yöntem
+- Yalnız PAKET 8 uygulandı. Dosya başındaki eski talimatlar ve PAKET 5R uygulanmadı.
+- W1 önce üretildi, seçildi, commit ve main'e push edildi; W2.1–W2.20 sonra aynı sohbette sırayla üretildi.
+- Pano 2 denemede seçildi. W2'de hiçbir dosya 2 denemeyi aşmadı; kusur kalınca en iyi deneme korunup not edildi.
+- Bütün İngilizce prompt blokları üretim aracına aynen iletildi; tek dosya seçimi, tuval/konum ve düzeltme açıklamaları ayrıca eklendi.
+- Çok dosyalı ikon/gül-konfeti promptlarında her seferinde yalnız ilgili tek dosya istendi; hiçbir sheet teslim edilmedi.
+- W1 referansları yalnız bu koleksiyonun photos/hero_portrait.jpg, story_2.jpg ve venue.jpg dosyalarıydı (kimlik ve mekân için). İkinci W1 denemesinde kendi ilk pano denemesi de düzenleme referansıydı.
+- HER W2 üretimine seçilen mockups/design-board.png bağlandı. Eski parts/ görselleri, platform/ ya da başka tasarımın panosu referans olarak bağlanmadı.
+- prog_page, prog_cover_in ve prog_pulltab, prog_cover görseli düzenleme hedefi verilerek üretildi. flat_proscenium'a prog_page bağlandı; iki perde, arka resim ve kanatlar flat_proscenium düzenleme hedefiyle üretildi.
+- Her push öncesi git pull --rebase origin main çalıştırıldı; eşzamanlı gelen diğer işler korundu. Force push yapılmadı.
+- PNG'ler Kaydet satırındaki tam ad/yollarda; dosya eki/deneme soneki yok. docs/ ve platform/ altında teslim yok. Başka depo dosyası düzenlenmedi.
+
+Dosya bazında kayıt
+Kutu ölçüleri [sol, üst, sağ hariç, alt hariç] biçimindedir. Nesne kutusu alfa>32 ile okunur; çok düşük alfa saçakları yüzünden alfa>0 kutusu daha geniş olabilir. Bu eşik yalnız ölçüm içindir; PNG'lere uygulanmadı.
+RGBA dosyalarında gerçek A kanalı ve alfa=0 boş alan var; beyaz/dama zemin kullanılmadı. RGB dosyalar opaktır. 1024 hedefli karelerin 1254×1254 üretilmesi paketin izin verdiği doğal tuval farkıdır; oran 1:1 korunur.
+
+1. collections/24_Grand_Theatre_Premiere/assets/gpt/mockups/design-board.png
+   Hedef: yaklaşık 1908×824 (≈2,3:1); gerçek: 1880×837; RGB (opak); deneme: 2.
+   Referanslar: hero_portrait.jpg; story_2.jpg; venue.jpg; ilk pano (yalnız düzeltme denemesinde).
+   Kontrol / fark: İkinci pano seçildi. Beş ekran tek sırada, demo çift ve mekân referanslarına bağlı, story'de sol perde sahnenin bir kısmını örtüyor. Hedefe göre RSVP üst süsü küçük vinyetten daha büyük bir proscenium gibi; kâğıt katmanlar hâlâ yer yer oyma mimari kadar hacimli görünüyor. Küçük metin kusurları yalnız referans panosunda kaldı.
+
+2. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/prog_cover.png
+   Hedef: 1024×1536; gerçek: 1024×1536; RGBA (gerçek alfa); deneme: 2.
+   Nesne kutusu: [97, 199, 914, 1367]; alfa min–max: 0–254; tam şeffaf piksel: %39.66. Kenar payları sol/üst/sağ/alt: %9.47 / %12.96 / %10.74 / %11.
+   Referanslar: design-board.png; ilk prog_cover denemesi (ikinci düzenlemede).
+   Kontrol / fark: Kordon, kuşgözleri, menteşe katı, boş kartuş ve sönük ayak lambaları var; dil yok. Ana metin alanı boş, fakat üst köşe swag/tasselleri tarif edilen boş dikdörtgenin üst yanlarına (yaklaşık x %22–31 ve %69–78, y %27–44) giriyor. Kutu hedef %12–88'den özellikle sol bağlama çıkıntısında geniş. İkinci deneme seçildi.
+   Deneme kaydı: İlk denemede nesne kutusu hedef %12–88'den büyüktü; görüntü düzenleme ile ikinci deneme yapıldı.
+
+3. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/prog_page.png
+   Hedef: 1024×1536; gerçek: 1024×1536; RGBA (gerçek alfa); deneme: 2.
+   Nesne kutusu: [98, 199, 913, 1366]; alfa min–max: 0–254; tam şeffaf piksel: %39.39. Kenar payları sol/üst/sağ/alt: %9.57 / %12.96 / %10.84 / %11.07.
+   Referanslar: prog_cover.png (image edit); design-board.png.
+   Kontrol / fark: İkinci deneme seçildi. Sayfa boş, çift varak cetvel ve soldaki kordon/kuşgözleri var. Kapakla dış alfa kutusu farkı en çok 1 px; görünür boyut kayması yok.
+   Deneme kaydı: İlk edit kapağa göre sayfayı büyüttü; ikinci edit kesin piksel kutusuyla üretildi. Kalan fark ölçümde belirtilecek.
+
+4. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/prog_cover_in.png
+   Hedef: 1024×1536; gerçek: 1024×1536; RGBA (gerçek alfa); deneme: 1.
+   Nesne kutusu: [113, 191, 929, 1369]; alfa min–max: 0–254; tam şeffaf piksel: %39.03. Kenar payları sol/üst/sağ/alt: %11.04 / %12.43 / %9.28 / %10.87.
+   Referanslar: prog_cover.png (image edit); design-board.png.
+   Kontrol / fark: Sağda menteşe, kuşgözleri ve kordon; solda serbest kalın kenar var. Mermer desen fildişi pay içinde. Desen ince taraktan çok geniş tavus tüyü dalgaları gibi. Aynalı kapak kutusuna göre üstte 8 px, diğer kenarlarda 2–3 px fark var.
+
+5. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/prog_pulltab.png
+   Hedef: 1024×1536; gerçek: 1024×1536; RGBA (gerçek alfa); deneme: 2.
+   Nesne kutusu: [778, 715, 970, 915]; alfa min–max: 0–254; tam şeffaf piksel: %98.58. Kenar payları sol/üst/sağ/alt: %75.98 / %46.55 / %5.27 / %40.43.
+   Referanslar: prog_cover.png (image edit); design-board.png.
+   Kontrol / fark: İkinci deneme seçildi. Yalnız dil ve kurdele halkası var; kitapçık yok. Sağ kenarı geçiyor. Nominal x %83–94 yerine toplam kutu x %75,98–94,73; solda gizlenecek kısım daha geniş. Halka nominal y %58 yerine %59,57'ye kadar iniyor.
+   Deneme kaydı: İlk denemede dil fazla büyük ve sağ kenara fazla yakındı (x833–1001,y753–977); ikinci edit küçük kayıt kutusuna göre üretildi.
+
+6. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/flat_proscenium.png
+   Hedef: 1024×1536; gerçek: 1024×1536; RGBA (gerçek alfa); deneme: 2.
+   Nesne kutusu: [24, 76, 1000, 1440]; alfa min–max: 0–254; tam şeffaf piksel: %56.61. Kenar payları sol/üst/sağ/alt: %2.34 / %4.95 / %2.34 / %6.25.
+   Referanslar: design-board.png; prog_page.png; ilk flat_proscenium denemesi (yalnız ikinci düzenlemede).
+   Kontrol / fark: İki denemede de nominal x %14–86 / y %15–86 kutusu tutulmadı. İnce fildişi kesik kart kenarı daha belirgin olan ilk deneme seçildi. Çerçeve ve açıklık hedeftekinden büyük; sayfa üstüne ham ölçekte oturmuyor. Yan paylar %2,34 ile ortak %5 şartından az. Halka kapalı, içi gerçek şeffaf; kartuş boş, ışıklar sönük, içinde perde/resim yok.
+   Deneme kaydı: İki denemede de istenen %14–86 / %15–86 kutusundan büyük çıktı. İkinci edit boyutu düzeltemedi. Görünür fildişi kesik kenarı daha iyi olan ilk deneme seçildi. Gerçek alfa kutusu ve açıklığı teslimde belirtilecek; kodla küçültülmedi.
+
+7. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/flat_curtain_l.png
+   Hedef: 1024×1536; gerçek: 1024×1536; RGBA (gerçek alfa); deneme: 2.
+   Nesne kutusu: [184, 386, 572, 1297]; alfa min–max: 0–254; tam şeffaf piksel: %79.9. Kenar payları sol/üst/sağ/alt: %17.97 / %25.13 / %44.14 / %15.56.
+   Referanslar: flat_proscenium.png (image edit); design-board.png; ilk sol perde denemesi (ikinci düzenlemede renk/kenar referansı).
+   Kontrol / fark: İkinci deneme seçildi; ilk denemedeki fazladan üst swag kaldırıldı. Fildişi kesik kâğıt kenarı var, ancak kıvrım/yüzey dokusu istenenden kumaşsı ve hacimli okunuyor. Seçilen büyük çerçeveye göre üretildiği için nominal yüzde kutusu tutulmadı. Saçak açıklığın altından 84 px aşağı taşıyor (ön sahne katmanı altında kalabilir).
+   Deneme kaydı: Nominal yüzde kutusu yerine seçilen çerçevenin gerçek açıklığına kayıt istendi; gerçek kutu hiza bölümünde. İlk deneme fazladan üst swag ve y≈1425'e inen fazla uzun etek içerdi; ikinci düzenleme yapıldı.
+
+8. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/flat_curtain_r.png
+   Hedef: 1024×1536; gerçek: 1024×1536; RGBA (gerçek alfa); deneme: 2.
+   Nesne kutusu: [387, 350, 795, 1287]; alfa min–max: 0–254; tam şeffaf piksel: %78.02. Kenar payları sol/üst/sağ/alt: %37.79 / %22.79 / %22.36 / %16.21.
+   Referanslar: flat_proscenium.png (image edit); flat_curtain_l.png; design-board.png.
+   Kontrol / fark: İkinci deneme seçildi. Sol perdeyle aynı garnet/altın ve fildişi kesik kenar; yüzeyi yine kumaşsı okunuyor. Nominal kutu tutulmadı. Sağ düz kenar x795'te, çerçevenin sağ iç kenarı yaklaşık x840–841'de: 45–46 px boşluk kalıyor. Sol perdeye göre üst kenar 36 px yukarıda, alt kenar 10 px yukarıda. İki deneme sınırı nedeniyle kalan fark kaydedildi.
+   Deneme kaydı: Seçilen sol perdenin ölçeğinde, gerçek çerçeve açıklığına göre istendi. İlk deneme sağda yaklaşık 55 px boşluk bıraktı ve 90 px yukarıdaydı; ikinci edit yapıldı.
+
+9. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/flat_backdrop.png
+   Hedef: 1024×1536; gerçek: 1024×1536; RGBA (gerçek alfa); deneme: 1.
+   Nesne kutusu: [140, 289, 883, 1215]; alfa min–max: 0–254; tam şeffaf piksel: %55.54. Kenar payları sol/üst/sağ/alt: %13.67 / %18.82 / %13.77 / %20.9.
+   Referanslar: flat_proscenium.png (image edit); design-board.png.
+   Kontrol / fark: Tek boyalı dikdörtgen; rotunda, çeşme, ağaçlar ve altın saat göğü var; ay/yıldız/göl/insan yok. Nominal kutudan büyük, fakat seçilen proscenium açıklığını tamamen örtüyor: açıklık içinde alfa<128 kalan boş piksel sayısı 0. flat_proscenium düzenleme hedefinden üretildi.
+   Deneme kaydı: Seçilen çerçevenin gerçek açıklığını örtmesi istendi; nominal kutu farkı ölçümde belirtilecek.
+
+10. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/flat_wings.png
+   Hedef: 1024×1536; gerçek: 1024×1536; RGBA (gerçek alfa); deneme: 2.
+   Nesne kutusu: [64, 262, 959, 1148]; alfa min–max: 0–254; tam şeffaf piksel: %72.57. Kenar payları sol/üst/sağ/alt: %6.25 / %17.06 / %6.35 / %25.26.
+   Referanslar: flat_proscenium.png (image edit); flat_backdrop.png; design-board.png; ilk kanat denemesi (ikinci düzenlemede).
+   Kontrol / fark: İki kanat üstten bağlı TEK alfa bileşeni; orta alan şeffaf, kesik kâğıt kenarı görünür, çiçek yok. İkinci edit aşağı alırken parçayı büyüttü ve yan payı ihlal etti; payı daha iyi olan ilk deneme seçildi. Kanatlar nominalden geniş; kaideler gerçek sahne açıklığının altından yaklaşık 65 px yukarıda kalıyor.
+   Deneme kaydı: Seçilen çerçevenin gerçek açıklığına kayıt istendi; nominal kutu farkı hiza ölçümünde. İlk denemede kaideler sahne tabanından yaklaşık 65 px yukarıdaydı; ikinci görüntü düzenlemesi aşağı kaydırma için yapıldı. İkinci edit parçayı hem büyüttü hem aşağı aldı, dış yapraklar yan payı ihlal etti; kenar payı ve görünümü daha iyi olan ilk deneme seçildi. Kaidelerde yaklaşık 65 px yukarıda kalma farkı sürüyor.
+
+11. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/title_banner.png
+   Hedef: 1536×1024; gerçek: 1536×1024; RGBA (gerçek alfa); deneme: 1.
+   Nesne kutusu: [21, 119, 1515, 744]; alfa min–max: 0–254; tam şeffaf piksel: %80.87. Kenar payları sol/üst/sağ/alt: %1.37 / %11.62 / %1.37 / %27.34.
+   Referanslar: design-board.png.
+   Kontrol / fark: Ön yüz düz, yatay ve boş; garnet ters yüz, kırlangıç uçlar, iki ip ve halkalar var. Uçlar kenara değmiyor; yan pay yalnız %1,37, ortak %5 pay hedefinden az. Ön yüz nominal y %42–64'ten biraz aşağıda. Dıştaki renkli ışık görüntüleyici önizlemesindeydi; alfa üstüne bindirmede dış hâle görülmedi.
+
+12. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/house_lights.png
+   Hedef: 1024×1536; gerçek: 1024×1536; RGB (opak); deneme: 1.
+   Referanslar: design-board.png.
+   Kontrol / fark: Opak, orta alan koyu ve sakin; aydınlık noktalar çoğunlukla üstte/yanlarda. Bazı loca nişlerinde çok koyu kumaş kıvrımları seçildiğinden 'no curtains' birebir sağlanmıyor. Loca katı ve lamba sayısı için yeniden üretim yapılmadı.
+
+13. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/house_lights_wide.png
+   Hedef: 1536×1024; gerçek: 1536×1024; RGB (opak); deneme: 1.
+   Referanslar: house_lights.png; design-board.png.
+   Kontrol / fark: Dikey salon referansıyla aynı ışık/renk dünyası; orta yarı genişlik koyu. Bazı loca nişlerinde dikey kaynaktaki koyu kumaş kıvrımları sürüyor. Opak, sahne/ön plan koltukları/yazı yok.
+
+14. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/house_damask.png
+   Hedef: 1024×1024; gerçek: 1254×1254; RGB (opak); deneme: 1.
+   Referanslar: design-board.png.
+   Kontrol / fark: Opak, eşit ışıklı tavus mavisi/teal damask. Motif kontrastı hedefteki 'çok düşük'ten biraz güçlü. 2×2 kontrolde motif birleşiminde küçük süreksizlikler görülüyor; Kontrol satırındaki yalnız dikiş için yeniden üretmeme talimatı uygulandı. Kodla ofset/dikiş onarımı yapılmadı.
+
+15. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/playbill_paper.png
+   Hedef: 1024×1024; gerçek: 1254×1254; RGB (opak); deneme: 1.
+   Referanslar: design-board.png.
+   Kontrol / fark: Opak, sıcak fildişi, sakin pamuk dokusu ve çok seyrek varak pulları. 2×2 görünümde belirgin tonal dikiş seçilmedi; piksel düzeyinde matematiksel döşenebilirlik iddiası yok.
+
+16. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/playbill_card.png
+   Hedef: 1024×1536; gerçek: 1024×1536; RGBA (gerçek alfa); deneme: 1.
+   Nesne kutusu: [88, 64, 937, 1463]; alfa min–max: 0–254; tam şeffaf piksel: %22.53. Kenar payları sol/üst/sağ/alt: %8.59 / %4.17 / %8.5 / %4.75.
+   Referanslar: design-board.png.
+   Kontrol / fark: Üst küçük proscenium vinyeti, boş kartuş; ortada yalnız düz çift yan cetvel; altta üç ayak lambası kabuğu var. Form alanı/foto penceresi/yazı yok; üç dilime uygun. Dikey pay üstte %4,17, altta %4,75 ile ortak %5 hedefinden biraz az.
+
+17. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/frame_loge.png
+   Hedef: 1536×1024; gerçek: 1536×1024; RGBA (gerçek alfa); deneme: 1.
+   Nesne kutusu: [43, 24, 1493, 984]; alfa min–max: 0–254; tam şeffaf piksel: %51.53. Kenar payları sol/üst/sağ/alt: %2.8 / %2.34 / %2.8 / %3.91.
+   Referanslar: design-board.png.
+   Kontrol / fark: Gerçek malzeme görünümlü loca: altta kadife kol dayama ve varaklı parapet, yanlarda püsküllü peacock perdeler, üstte varaklı tente. Halka kesintisiz kapalı ve açıklık gerçek alfa. Açıklığın alfa kutusu 1128×557 (~2,03:1), istenen ~3:2'den geniş. Dış paylar %2,34–3,91 ile %5–6 hedefinden az; kenara değmiyor. Kumaş yüzeyi damasktan çok kadifemsi okunuyor.
+
+18. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/divider_lyre.png
+   Hedef: 1536×1024; gerçek: 1536×1024; RGBA (gerçek alfa); deneme: 1.
+   Nesne kutusu: [191, 441, 1345, 568]; alfa min–max: 0–254; tam şeffaf piksel: %97.72. Kenar payları sol/üst/sağ/alt: %12.43 / %43.07 / %12.43 / %44.53.
+   Referanslar: design-board.png.
+   Kontrol / fark: Tek ince yatay çizgi, ortada lir, uçlarda küçük kıvrımlar; gerçek alfa. Lirli kutu yüksekliği 127 px (~%12,4), hedef ~%9'dan büyük; genişlik ~%75,1, hedef ~%72. Kırpma yapılmadı.
+
+19. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/icon_rings.png
+   Hedef: 1024×1024; gerçek: 1254×1254; RGBA (gerçek alfa); deneme: 1.
+   Nesne kutusu: [135, 375, 1126, 887]; alfa min–max: 0–255; tam şeffaf piksel: %81.18. Kenar payları sol/üst/sağ/alt: %10.77 / %29.9 / %10.21 / %29.27.
+   Referanslar: design-board.png.
+   Kontrol / fark: İki iç içe yüzük, tek vinyet; yazı/rozet/kâğıt yok. Gold alan ve ince tarama prompt'taki az vurgudan daha yoğun, ikon kare genişliğinin ~%79'unu dolduruyor (hedef ~%60). 40 px kontrolünde okunuyor.
+
+20. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/icon_coupes.png
+   Hedef: 1024×1024; gerçek: 1254×1254; RGBA (gerçek alfa); deneme: 1.
+   Nesne kutusu: [151, 313, 1106, 984]; alfa min–max: 0–255; tam şeffaf piksel: %80.05. Kenar payları sol/üst/sağ/alt: %12.04 / %24.96 / %11.8 / %21.53.
+   Referanslar: design-board.png; icon_rings.png.
+   Kontrol / fark: Kenarda birbirine değen iki coupe; tek vinyet, yazı/rozet/kâğıt yok. Yüzükle aynı sepya/altın gravür; altın ve tarama hedeftekinden yoğun, doluluk ~%76. 40 px'te okunuyor.
+
+21. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/icon_dinner.png
+   Hedef: 1024×1024; gerçek: 1254×1254; RGBA (gerçek alfa); deneme: 1.
+   Nesne kutusu: [90, 226, 1172, 1008]; alfa min–max: 0–255; tam şeffaf piksel: %62.79. Kenar payları sol/üst/sağ/alt: %7.18 / %18.02 / %6.54 / %19.62.
+   Referanslar: design-board.png; icon_rings.png.
+   Kontrol / fark: Önden daire tabak, yanında çatal ve bıçak; tek vinyet. Sepya/altın aile tutarlı; ince dekor ve altın hedeftekinden fazla, doluluk ~%86. 40 px'te nesne ayırt ediliyor, küçük tabak süsleri kayboluyor.
+
+22. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/icon_violin.png
+   Hedef: 1024×1024; gerçek: 1254×1254; RGBA (gerçek alfa); deneme: 1.
+   Nesne kutusu: [238, 74, 1192, 1193]; alfa min–max: 0–255; tam şeffaf piksel: %77.19. Kenar payları sol/üst/sağ/alt: %18.98 / %5.9 / %4.94 / %4.86.
+   Referanslar: design-board.png; icon_rings.png.
+   Kontrol / fark: Tek keman ve yayı, gravür ailesi aynı; yazı/rozet/kâğıt yok. İstenenden ayrıntılı ve büyük (yükseklik ~%89); sağ/alt pay ~%4,9 ile %5'e çok yakın. 40 px'te keman okunuyor, ince tel ayrıntıları kayboluyor.
+
+23. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/icon_tophat.png
+   Hedef: 1024×1024; gerçek: 1254×1254; RGBA (gerçek alfa); deneme: 1.
+   Nesne kutusu: [147, 254, 1187, 1077]; alfa min–max: 0–255; tam şeffaf piksel: %66.46. Kenar payları sol/üst/sağ/alt: %11.72 / %20.26 / %5.34 / %14.11.
+   Referanslar: design-board.png; icon_rings.png.
+   Kontrol / fark: Tek silindir şapka ve çift eldiven vinyeti; sepya/altın gravür, kâğıt/rozet/yazı yok. Şapka koyu sepya, eldivenler fildişi. Doluluk ~%83 ile ~%60 hedefinden büyük; 40 px'te okunuyor.
+
+24. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/lorgnette.png
+   Hedef: 1024×1024; gerçek: 1254×1254; RGBA (gerçek alfa); deneme: 1.
+   Nesne kutusu: [66, 83, 1220, 1162]; alfa min–max: 0–255; tam şeffaf piksel: %78.76. Kenar payları sol/üst/sağ/alt: %5.26 / %6.62 / %2.71 / %7.34.
+   Referanslar: design-board.png.
+   Kontrol / fark: Tek uzun saplı sedef/antik pirinç opera dürbünü, bütünü görünür; harf/yüzey/gölge yok. Gerçek alfa üstüne bindirmede dış renkli saçak/hâle görülmedi. Nesne hedef ~%72'den büyük; sağ pay %2,71 ile %5'ten az.
+
+25. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/toss_rose.png
+   Hedef: 1024×1024; gerçek: 1254×1254; RGBA (gerçek alfa); deneme: 1.
+   Nesne kutusu: [132, 130, 1201, 1175]; alfa min–max: 0–255; tam şeffaf piksel: %78.59. Kenar payları sol/üst/sağ/alt: %10.53 / %10.37 / %4.23 / %6.3.
+   Referanslar: design-board.png.
+   Kontrol / fark: Tek uzun saplı fildişi gül, iki koyu yeşil yaprak, garnet kurdele; doğru çapraz yön. Kurdele uçları kısa düğüm hedefinden uzun, sağ pay %4,23 ile %5'ten biraz az. Yüzey/gölge/yazı yok.
+
+26. collections/24_Grand_Theatre_Premiere/assets/gpt/parts/toss_confetto.png
+   Hedef: 1024×1024; gerçek: 1254×1254; RGBA (gerçek alfa); deneme: 1.
+   Nesne kutusu: [381, 375, 906, 877]; alfa min–max: 0–255; tam şeffaf piksel: %87.48. Kenar payları sol/üst/sağ/alt: %30.38 / %29.9 / %27.75 / %30.06.
+   Referanslar: design-board.png.
+   Kontrol / fark: Tek, ince, bir kenarı kıvrık varak disk; yazı/yüzey/ışıma yok. Kare genişliğinin ~%42'sini dolduruyor, hedef ~%35'ten büyük. Alfa üstüne bindirmede dış hâle/renkli saçak görülmedi.
+
+Hiza kontrolü — %50 üst üste bindirme + ham alfa ölçümü
+- Kaynak dosyalar yeniden boyutlandırılmadan, aynı tuvalde %50/%50 karşılaştırıldı. Önizlemeler yalnız geçici /tmp dosyalarıydı, repoya eklenmedi.
+- prog_page / prog_cover: görünür kayma YOK. Alfa kutusu farkı (sayfa eksi kapak) [+1, 0, -1, -1] px. Ana kâğıt kenarları ve bağlama oturuyor.
+- prog_cover_in / prog_cover: sağa geçen menteşe nedeniyle yatay aynalama beklenir. Aynalanmış kapak kutusu [110,199,927,1367], iç kapak [113,191,929,1369]; kalan fark [+3,-8,+2,+2] px. Küçük kayma VAR; en büyük fark üst kenarda 8 px (~%0,52 tuval yüksekliği). Doğrudan aynalanmamış kutuyla kıyaslanırsa x kenarları ~15–16 px farklıdır; bağlama tarafı değişiminin bir bölümüdür.
+- prog_pulltab / prog_cover: sağ kenardan çıkma işlevi DOĞRU; nominal ölçü/konum farkı VAR. Toplam dil+halka kutusu [778,715,970,915], hedef yaklaşık [850,722,963,891]. Sol gizli kısım 72 px fazla içeri uzanıyor; üst 7 px yukarıda, sağ uç 7 px sağda, halka 24 px fazla aşağıda. İki deneme sınırı sonrası korundu.
+- flat_proscenium / prog_page: ham tuvalde boyut farkı VAR. Çerçeve [24,76,1000,1440], sayfa [98,199,913,1366]. Hedefteki sayfa içine sığma gerçekleşmedi; çerçeve soldan 74, üstten 123, sağdan 87, alttan 74 px sayfa kutusunun dışına çıkıyor. İki üretim denemesinde de düzelmedi; kodla ölçeklenmedi.
+- Sahne açıklığı: kapalı şeffaf bileşen [182,384,841,1213], merkez alfa=0. Valans/yan kesikler nedeniyle bu kutu tam dikdörtgen maske değildir.
+- flat_curtain_l / flat_proscenium: fark VAR. Dış kenar x184, açıklığın sol sınırı x182–183; yaklaşık 1–2 px içeri fark. Üst y386, açıklığın başlangıcından ~2 px aşağıda. Etek altı y1297, açıklık tabanından 84 px aşağıda. Orta iç kenar dalgalı, y700'de x501'e gelir.
+- flat_curtain_r / flat_proscenium: fark VAR. Dış sağ x795, açıklık sağ sınırı x840–841; yaklaşık 45–46 px sola kayma/eksik genişlik. Üst y350, açıklık başlangıcından 34 px yukarıda (valans arkasında); alt y1287, açıklık altından 74 px aşağıda. y700'de iç kenar x445; sol perdeyle örtüşür. İki deneme sonrasında sağdaki açık şerit kaldı.
+- flat_backdrop / flat_proscenium: örtme hatası YOK; nominal kutuya göre boyut farkı VAR. Arka resim [140,289,883,1215], açıklığı solda 42, üstte 95, sağda 42, altta 2 px taşarak örter. Kapalı açıklık içindeki açıkta kalan piksel sayısı 0 (arka resim alfa<128 testi).
+- flat_wings / flat_proscenium: fark VAR. Kanat kutusu [64,262,959,1148]; nominalden geniş. Kaideler sahne açıklığının altından yaklaşık 65 px yukarıda. İkinci edit daha çok büyüttüğü için ilk deneme korundu. Üst bağlantı gerçek: alfa>32'de tek bağlı bileşen (389484 piksel); orta boş, iki ayrı dosya/nesne değil.
+- Frame_loge açıklığı da kapalı şeffaf bileşen: [205,224,1333,781], merkez alfa=0. Dış alana bağlı değil; yeşil/beyaz/fotoğraf dolgusu yok. Açıklık oranı ~2,03:1; ~3:2 hedefinden farkı ayrıca yukarıda kayıtlı.
+
+Diğer kontroller
+- Tüm 26 beklenen PNG açıldı; ad/yol, oran, kanal ve alfa değerleri okundu. 21 W2 parçası RGBA, 4 W2 zemin RGB; W1 RGB.
+- Beş ikon sırasıyla rings/coupes/dinner/violin/tophat olarak 40×40 geçici gösterimde kontrol edildi. Hepsi ayırt ediliyor; ince gravür ayrıntıları bu ölçekte kayboluyor. Teslim edilen ikonlar yeniden örneklenmedi.
+- İki doku geçici 2×2 dizilerek gözle kontrol edildi; farklar dosya notlarında. Dikişler kodla onarılmadı.
+- Alfa üstüne fildişi zemin bindirmesinde lorgnette ve confetto temiz göründü; üretim aracının alfa göstermeyen önizlemesindeki kırmızı/sarı dış piksel renkleri gerçek şeffaflıkta görünmüyor.
+- Reddedilen denemeler commit edilmedi. PNG'lerde yazı/monogram/logo/filigran görülmedi; demo metin yalnız W1'de.
+- Her teslim PNG'sinin SHA-256'sı /workspace/generated_images içindeki seçilen özgün imagegen çıktısı ile eşleşti (26/26). Dosyalar yalnız bayt olarak kopyalandı.
+
+Kodla piksel müdahalesi yapılmadı: teslim edilen hiçbir PNG yeniden boyutlandırılmadı, kırpılmadı, boyanmadı, renklendirilmedi veya yeniden kodlanmadı. Yalnız okuma/ölçüm ve teslim dosyalarından ayrı geçici QA bindirme/gösterimleri yapıldı.

@@ -1,0 +1,197 @@
+PAKET 8 — TESLİM
+Tarih: 24 Ekim 2026
+Dal: main
+Son commit (teslim kaydı): 25 PAKET 8: teslim — bu TESLIM.txt dosyasını ekleyen commit.
+Görsellerin son commit'i: 494e3dadad2c6267baea3f2c6fe9497ab8cae39a 25 PAKET 8: W2 5/5
+
+Teslim: 25 PNG = 1 W1 tasarım panosu + 24 W2 parçası. Ek olarak bu TESLIM.txt.
+Kaynak: collections/25_Orient_Express_Voyage/assets/gpt/GPT_PROMPTS.md dosyasının sonundaki PAKET 8.
+W1 önce ayrı commit/push edildi; W2 sırasıyla üretildi, 4/5/5/5/5 dosyalık gruplarla commit/push edildi.
+Bütün teslim PNG'leri Kaydet satırlarındaki ad ve yollarda. Seçilmeyen üç deneme commit edilmedi.
+
+DOĞRULAMA
+- 25 PNG açıldı ve PNG bütünlük denetimi geçti; W2 tuval oranlarının tamamı hedefle aynı. Piksel ölçüleri yerel imagegen çıktısıdır.
+- 4 RGB: pano, ceviz dokusu, keten dokusu, poster göğü. 21 RGBA: diğer parçalar. Her RGBA dosyada alfa 0 alan mevcut.
+- cabin_window ve cabin_window_wide merkezleri alfa 0; halka kapalılığı görsel olarak incelendi. Geniş açıklığın oran farkı aşağıda.
+- Üç peyzaj katmanı sol, sağ ve alt kenara bilerek uzanır. Diğer şeffaf parçalarda sınırdaki en yüksek alfa 0 veya 1; görünür nesne tuval kenarında kesilmiyor.
+- Bazı parçalarda %5'ten az kenar payı ve bazı saydam alanlarda seyrek alfa 1 gürültüsü var. Dosya bazında görülen boyut/yerleşim farkları aşağıda. Kodla alfa temizliği yapılmadı.
+- 25 teslim PNG'sinin her biri seçilen özgün imagegen PNG'siyle SHA-256 karşılaştırmasında bayt düzeyinde aynı.
+- Her görsel gözle incelendi: W2'de yazı, harf, rakam, monogram, logo, gerçek tren/şirket adı, arma veya gerçek livery görülmedi. W1 yalnız kurgu demo metni içeriyor.
+- Dokuların kusursuz 2×2 döşemesi, yatay katmanların kesintisiz animasyon döngüsü ve piktogramların 32 px gerçek site görünümü ayrıca test edilmedi. Yerleşim, dilimleme, ölçekleme, maskeleme ve hareket uygulaması bu görsel tesliminin dışında.
+- gpt_yerlestir.py ve build_images.py çalıştırılmadı; ürün kodu yazılmadı.
+
+ÖNEMLİ KALAN FARKLAR
+- cabin_window_wide: iki denemede de iç açıklık 3:2 olmadı. Seçilen ikinci dosyada merkez eksenlerde ölçülen açıklık 1135×564, oran 2,012:1. 3:2 mekân fotoğrafı cover ile daha fazla kırpılır.
+- cabin_window ile cabin_blind aynı tuvalde birebir hizada değil. Çerçeve açıklığının gerçek sınırları ölçülerek perde ölçeklenmeli/maskelenmeli; aşağıdaki yüzde notlarına bakılmalı.
+- Bazı nesneler prompt'taki yaklaşık tuval doluluğundan büyük; değişiklik yapılmadan yerel çıktılar teslim edildi.
+
+REFERANSLAR
+B = collections/25_Orient_Express_Voyage/assets/gpt/mockups/design-board.png (her W2 üretimine eklendi).
+W1 deneme 1: collections/25_Orient_Express_Voyage/assets/gpt/photos/hero_portrait.jpg ve collections/25_Orient_Express_Voyage/assets/gpt/photos/story_1.jpg; yalnız kurgu çiftin kimlik/giyim referansı.
+W1 deneme 2: aynı iki fotoğraf + ilk W1 çıktısı /workspace/generated_images/exec-9d5c865a-054d-4822-86bb-2bdb1513eb22.png.
+W2.11'in iki denemesinde de B + yeni PAKET 8 cabin_window.png verildi.
+W2.19–W2.22'de, istenen B referansına ek olarak yeni PAKET 8 icon_watch.png malzeme/kenar tutarlılığı için verildi.
+Eski PAKET 5R parçası, tema img/ görseli veya başka koleksiyon panosu referans olarak eklenmedi.
+
+DOSYA BAZINDA TESLİM
+
+W1 — collections/25_Orient_Express_Voyage/assets/gpt/mockups/design-board.png
+Hedef: yaklaşık 1908×824 (≈2,3:1), opak. Gerçek: 1903×826 px, RGB. Deneme: 2.
+Referans: yukarıdaki W1 deneme 1 ve 2 listeleri.
+Kontrol/fark: İkinci pano seçildi. Story başlığı fırça yazısı yerine geniş büyük harflerle çizildi; tipografi uygulamada fontlarla kurulacak. Sayaç karo ayrımı ince; üretim karosu ayrıca W2.16'da hazırlanır. Ekranlar 390:844 oranına yaklaşık. İlk deneme dar başlıklar, pirinç bordürlü tabelalar, çiçekli kakma ve çizgisel piktogramlar nedeniyle elendi.
+
+W2.1 — collections/25_Orient_Express_Voyage/assets/gpt/parts/walnut_tile.png
+Hedef: 1024×1024 px (1:1), opak. Gerçek: 1254×1254 px, RGB. Deneme: 1.
+Referans: B.
+Kontrol/fark: Belirgin vinyet, kakma ve pirinç yok. Damar hareketi güçlü; döşeme ekinde küçük fark kalabilir, yalnız dikiş için yeniden üretilmedi.
+
+W2.2 — collections/25_Orient_Express_Voyage/assets/gpt/parts/linen_tile.png
+Hedef: 1024×1024 px (1:1), opak. Gerçek: 1254×1254 px, RGB. Deneme: 1.
+Referans: B.
+Kontrol/fark: Kontrol satırına belirgin fark yok; eşit ışıklı fildişi keten. Döşeme dikişi yalnız gözle değerlendirildi.
+
+W2.3 — collections/25_Orient_Express_Voyage/assets/gpt/parts/poster_sky.png
+Hedef: 1024×1536 px (2:3), opak. Gerçek: 1024×1536 px, RGB. Deneme: 1.
+Referans: B.
+Kontrol/fark: Yalnız şafak göğü, opak poster tekniği. Bulut bantları tarifteki 3–4'ten fazla; sayı için yeniden üretilmedi.
+
+W2.4 — collections/25_Orient_Express_Voyage/assets/gpt/parts/poster_peaks.png
+Hedef: 1536×1024 px (3:2), şeffaf. Gerçek: 1536×1024 px, RGBA. Deneme: 1.
+Referans: B + collections/25_Orient_Express_Voyage/assets/gpt/parts/poster_sky.png.
+Kontrol/fark: Dağ üstü gerçek alfa; seyrek alfa 1 pikselleri mevcut. Yan uç sırt yükseklikleri birkaç piksel farklı; brief'in izin verdiği ayna döşeme/çapraz geçiş gerekebilir. Gökyüzü, su ve ağaç yok.
+Alfa: 0–254; tamamen saydam piksel: %46.91; tuval sınırındaki en yüksek alfa: 254.
+
+W2.5 — collections/25_Orient_Express_Voyage/assets/gpt/parts/poster_hills.png
+Hedef: 1536×1024 px (3:2), şeffaf. Gerçek: 1536×1024 px, RGBA. Deneme: 1.
+Referans: B + collections/25_Orient_Express_Voyage/assets/gpt/parts/poster_peaks.png.
+Kontrol/fark: Selvili tepeler, köy ve kemerli viyadük mevcut. Tepe çizgisi üstü alfa; uçların kesintisiz döngüsü uygulamada ayna döşeme gerektirebilir. Tabela ve su yok.
+Alfa: 0–254; tamamen saydam piksel: %52.12; tuval sınırındaki en yüksek alfa: 254.
+
+W2.6 — collections/25_Orient_Express_Voyage/assets/gpt/parts/poster_poplars.png
+Hedef: 1536×1024 px (3:2), şeffaf. Gerçek: 1536×1024 px, RGBA. Deneme: 1.
+Referans: B + collections/25_Orient_Express_Voyage/assets/gpt/parts/poster_hills.png.
+Kontrol/fark: Alt kenara dolu çit, araları şeffaf uzun ağaçlar; yan kenarda kesilmiş ağaç yok. Yaprak dokusu düz siluetten daha ayrıntılı; poster ailesi korunuyor. Yan dikiş montajda kontrol edilmeli.
+Alfa: 0–254; tamamen saydam piksel: %54.75; tuval sınırındaki en yüksek alfa: 254.
+
+W2.7 — collections/25_Orient_Express_Voyage/assets/gpt/parts/cabin_window.png
+Hedef: 1024×1536 px (2:3), şeffaf. Gerçek: 1024×1536 px, RGBA. Deneme: 1.
+Referans: B.
+Kontrol/fark: Kapalı ceviz-pirinç halka ve merkezde alfa 0 açıklık doğrulandı (yaklaşık 4:5); pelmet, pervaz/tutamak ve orta çıtçıt mevcut. Çerçeve yan boşluğu yaklaşık %3; istenen %8'den dar, ancak nesne kesilmiyor. Açıklığın altı yaklaşık %80'de, tarifteki %70'ten aşağıda; montajda gerçek açıklık ölçülmeli. Dışta seyrek çok düşük alfa pikselleri var.
+Alfa: 0–254; tamamen saydam piksel: %61.19; tuval sınırındaki en yüksek alfa: 1.
+
+W2.8 — collections/25_Orient_Express_Voyage/assets/gpt/parts/cabin_blind.png
+Hedef: 1024×1536 px (2:3), şeffaf. Gerçek: 1024×1536 px, RGBA. Deneme: 1.
+Referans: B + collections/25_Orient_Express_Voyage/assets/gpt/parts/cabin_window.png.
+Kontrol/fark: Tek yeşil nervürlü stor, pirinç çubuk ve orta halka; çerçeve yok. Çubuk yaklaşık %85 yükseklikte, prompt'taki %71 değil. Panel çerçeve açıklığından belirgin geniş; doğrudan aynı tuvalde birebir oturmuyor, Claude gerçek açıklığa ölçekleyip maskeler. Yan boşluk yaklaşık %2–3; nesne kesilmiyor.
+Alfa: 0–254; tamamen saydam piksel: %23.37; tuval sınırındaki en yüksek alfa: 1.
+
+W2.9 — collections/25_Orient_Express_Voyage/assets/gpt/parts/blind_tab.png
+Hedef: 1024×1024 px (1:1), şeffaf. Gerçek: 1254×1254 px, RGBA. Deneme: 1.
+Referans: B.
+Kontrol/fark: Dikişli koyu kahve deri dil, üst kelepçe ve alt çıtçıt; toka/delik/yazı yok. Çıtçıt soket çukuru yerine parlak kapak yüzü gibi görünüyor; diğer kontrol şartları uygun.
+Alfa: 0–255; tamamen saydam piksel: %77.83; tuval sınırındaki en yüksek alfa: 1.
+
+W2.10 — collections/25_Orient_Express_Voyage/assets/gpt/parts/wall_sconce.png
+Hedef: 1024×1536 px (2:3), şeffaf. Gerçek: 1024×1536 px, RGBA. Deneme: 1.
+Referans: B.
+Kontrol/fark: Tek pirinç aplik ve içten sıcak aydınlık opal lale abajur; fener gövdesi yok. Dış ışık görünen önizlemeye karşı alfa örnekleri kontrol edildi: nesne dışı çoğunlukla 0, kenarda seyrek alfa 1; ayrıca hale boyanmadı. Boyu tuvalin yaklaşık %75'i.
+Alfa: 0–254; tamamen saydam piksel: %71.71; tuval sınırındaki en yüksek alfa: 1.
+
+W2.11 — collections/25_Orient_Express_Voyage/assets/gpt/parts/cabin_window_wide.png
+Hedef: 1536×1024 px (3:2), şeffaf. Gerçek: 1536×1024 px, RGBA. Deneme: 2.
+Referans: B + collections/25_Orient_Express_Voyage/assets/gpt/parts/cabin_window.png.
+Kontrol/fark: İlk deneme açıklığı yaklaşık 2:1 olduğundan elendi. İkinci deneme seçildi: kenar boşluğu daha iyi ve halka kapalı/şeffaf; ancak açıklık hâlâ yaklaşık 2:1, istenen 3:2'ye ulaşmadı. En fazla iki deneme kuralı gereği üçüncü üretim yapılmadı. Mekân fotoğrafı cover ile daha fazla kırpılacak; gerçek açıklıktan maske çıkarılmalı. Pelmet işlevi yok; üst pervaz kalın.
+Alfa: 0–254; tamamen saydam piksel: %62.75; tuval sınırındaki en yüksek alfa: 0.
+
+W2.12 — collections/25_Orient_Express_Voyage/assets/gpt/parts/sill_rail.png
+Hedef: 1536×1024 px (3:2), şeffaf. Gerçek: 1536×1024 px, RGBA. Deneme: 1.
+Referans: B.
+Kontrol/fark: Ortada tek düz bant, iki uçta braket; arada ek bağlantı/süs yok, orta yapısal olarak tekrarlanabilir. Bant yaklaşık 9:1, tarifteki ~6:1'den ince; yatay kenar payı yaklaşık %2–3, nesne kesilmiyor. Doğal damar ve metal ışığı birebir sabit piksel dokusu değildir.
+Alfa: 0–254; tamamen saydam piksel: %84.55; tuval sınırındaki en yüksek alfa: 1.
+
+W2.13 — collections/25_Orient_Express_Voyage/assets/gpt/parts/inlay_divider.png
+Hedef: 1536×1024 px (3:2), şeffaf. Gerçek: 1536×1024 px, RGBA. Deneme: 1.
+Referans: B.
+Kontrol/fark: İnce ceviz şeritte yapraklı saten ağacı kakma, merkez baklava ve sivri uçlar; yelpaze/çiçek/donanım yok. Şerit tuvalin yaklaşık %92'sine uzanıyor, istenen ~%80'den geniş; kesilmiyor. Yükseklik yaklaşık %5.
+Alfa: 0–254; tamamen saydam piksel: %94.32; tuval sınırındaki en yüksek alfa: 0.
+
+W2.14 — collections/25_Orient_Express_Voyage/assets/gpt/parts/menu_card.png
+Hedef: 1024×1536 px (2:3), şeffaf. Gerçek: 1024×1536 px, RGBA. Deneme: 1.
+Referans: B + collections/25_Orient_Express_Voyage/assets/gpt/parts/linen_tile.png.
+Kontrol/fark: Üstte bağlı defne dalları, altta baklava, orta bantta yalnız çift dikey bordür; alan boş ve 3 dilim için yapısal olarak uygun. Kartın üst/alt boşluğu yaklaşık %3–4, istenen ~%5'ten az ama kesilmiyor. Doğal keten dokusu boyunca hafif ton farkı var.
+Alfa: 0–254; tamamen saydam piksel: %16.64; tuval sınırındaki en yüksek alfa: 1.
+
+W2.15 — collections/25_Orient_Express_Voyage/assets/gpt/parts/enamel_sign.png
+Hedef: 1536×1024 px (3:2), şeffaf. Gerçek: 1536×1024 px, RGBA. Deneme: 1.
+Referans: B.
+Kontrol/fark: Boş krem emaye, yeşil bordür, iki uçta pirinç vida ve düz tekrarlanabilir orta; yuvarlak köşeli dikdörtgen. Bant yaklaşık 5:1, istenen ~4:1'den ince. Yatay kenar boşluğu ~%3–4; kesilmiyor. Emaye yansıması hafif ton değişimi yaratıyor, orta şekil sabit.
+Alfa: 0–254; tamamen saydam piksel: %71.97; tuval sınırındaki en yüksek alfa: 0.
+
+W2.16 — collections/25_Orient_Express_Voyage/assets/gpt/parts/flip_tile.png
+Hedef: 1024×1024 px (1:1), şeffaf. Gerçek: 1254×1254 px, RGBA. Deneme: 1.
+Referans: B.
+Kontrol/fark: Tek boş siyah karo, yatay yarık ve iki pirinç pim net; pirinç çerçeve ve yaklaşık 4:3 nesne oranı uygun. Tuvalin yaklaşık %90 genişliğini kaplıyor, tarifteki %70'ten büyük; kenar payı var. Lake yüzey çok ince grenli.
+Alfa: 0–255; tamamen saydam piksel: %45.47; tuval sınırındaki en yüksek alfa: 1.
+
+W2.17 — collections/25_Orient_Express_Voyage/assets/gpt/parts/ticket_punch.png
+Hedef: 1024×1024 px (1:1), şeffaf. Gerçek: 1254×1254 px, RGBA. Deneme: 1.
+Referans: B.
+Kontrol/fark: Tam yandan, açık ağız solda, saplar sağda ve arada yay; nikel-pirinç malzeme, yazı yok. Nesne tuval genişliğinin yaklaşık %98'ini kaplıyor; istenen ~%80 ve %5 kenar payından büyük. Kesilmiş bölüm görünmüyor, yan pay çok dar.
+Alfa: 0–255; tamamen saydam piksel: %83.3; tuval sınırındaki en yüksek alfa: 1.
+
+W2.18 — collections/25_Orient_Express_Voyage/assets/gpt/parts/icon_watch.png
+Hedef: 1024×1024 px (1:1), şeffaf. Gerçek: 1254×1254 px, RGBA. Deneme: 2.
+Referans: B.
+Kontrol/fark: İlk deneme boş halkalı ve ayrıntılı saat gövdesi olduğu için elendi. İkinci seçildi: dolu pirinç kadran, iki ibre biçimli açıklık, açık kapak, kısa zincir; rakam yok. Kabartı/donanım sade piktogramdan biraz hacimli; 32 px gerçek UI testi yapılmadı.
+Alfa: 0–255; tamamen saydam piksel: %76.28; tuval sınırındaki en yüksek alfa: 1.
+
+W2.19 — collections/25_Orient_Express_Voyage/assets/gpt/parts/icon_rings.png
+Hedef: 1024×1024 px (1:1), şeffaf. Gerçek: 1254×1254 px, RGBA. Deneme: 1.
+Referans: B + collections/25_Orient_Express_Voyage/assets/gpt/parts/icon_watch.png.
+Kontrol/fark: İç içe iki geniş dolu pirinç halka, rozet/taş/yazı yok. Aynı pirinç ve kenar ailesi korunuyor; ince çizgi ikon değil. 32 px gerçek UI testi yapılmadı.
+Alfa: 0–255; tamamen saydam piksel: %84.3; tuval sınırındaki en yüksek alfa: 1.
+
+W2.20 — collections/25_Orient_Express_Voyage/assets/gpt/parts/icon_coupes.png
+Hedef: 1024×1024 px (1:1), şeffaf. Gerçek: 1254×1254 px, RGBA. Deneme: 1.
+Referans: B + collections/25_Orient_Express_Voyage/assets/gpt/parts/icon_watch.png.
+Kontrol/fark: Ağızlarından değen iki dolu pirinç coupe, güçlü sap ve taban; yazı/rozet yok. Malzeme ve kenar saatle tutarlı; 32 px gerçek UI testi yapılmadı.
+Alfa: 0–255; tamamen saydam piksel: %86.84; tuval sınırındaki en yüksek alfa: 0.
+
+W2.21 — collections/25_Orient_Express_Voyage/assets/gpt/parts/icon_dinner.png
+Hedef: 1024×1024 px (1:1), şeffaf. Gerçek: 1254×1254 px, RGBA. Deneme: 1.
+Referans: B + collections/25_Orient_Express_Voyage/assets/gpt/parts/icon_watch.png.
+Kontrol/fark: Dolu yuvarlak tabak, solda çatal ve sağda bıçak; aynı pirinç ve kenar işçiliği, yazı/ek rozet yok. Nesne grubu yaklaşık %75 genişlikte, tarifteki %60'tan büyük. 32 px gerçek UI testi yapılmadı.
+Alfa: 0–255; tamamen saydam piksel: %72.37; tuval sınırındaki en yüksek alfa: 0.
+
+W2.22 — collections/25_Orient_Express_Voyage/assets/gpt/parts/icon_dancing.png
+Hedef: 1024×1024 px (1:1), şeffaf. Gerçek: 1254×1254 px, RGBA. Deneme: 1.
+Referans: B + collections/25_Orient_Express_Voyage/assets/gpt/parts/icon_watch.png.
+Kontrol/fark: Solda T-bantlı topuklu kadın ayakkabısı, sağda bağcıklı erkek oxford; tek pirinç piktogram grubu. Dolu siluet ve sınırlı iç açıklıklar uygun; nesne genişliği yaklaşık %78, tarifteki %60'tan büyük. 32 px gerçek UI testi yapılmadı.
+Alfa: 0–255; tamamen saydam piksel: %86.93; tuval sınırındaki en yüksek alfa: 0.
+
+W2.23 — collections/25_Orient_Express_Voyage/assets/gpt/parts/steam_puff.png
+Hedef: 1024×1024 px (1:1), şeffaf. Gerçek: 1254×1254 px, RGBA. Deneme: 1.
+Referans: B.
+Kontrol/fark: Sola kıvrılarak uzanan tek buhar bulutu, sıcak beyaz/lila tonlar, gerçek kısmi alfa kenarlar; tren/baca/zemin yok. Bulut tuvalin yaklaşık %92 genişliğinde, hedef ~%70'ten büyük; sağ pay dar, kesilmiyor.
+Alfa: 0–254; tamamen saydam piksel: %65.02; tuval sınırındaki en yüksek alfa: 1.
+
+W2.24 — collections/25_Orient_Express_Voyage/assets/gpt/parts/ticket_disc.png
+Hedef: 1024×1024 px (1:1), şeffaf. Gerçek: 1254×1254 px, RGBA. Deneme: 1.
+Referans: B + collections/25_Orient_Express_Voyage/assets/gpt/parts/menu_card.png.
+Kontrol/fark: Tek boş fildişi keten disk, hafif eğimli; kesik kenar kalınlığı ve lifler görünür. Çap tuvalin yaklaşık %46'sı, istenen ~%40'a yakın; yazı/bordür/ek disk yok.
+Alfa: 0–255; tamamen saydam piksel: %82.95; tuval sınırındaki en yüksek alfa: 1.
+
+ATLANANLAR
+PAKET 8 içinde atlanan dosya yok. PAKET 2/3/5R/6R/7 üretimi bu görevin kapsamında değildi.
+
+ARA KAYITLAR
+9dbcc8e1b633386c1b1ebbf75609f919be945c92 25 PAKET 8: W1
+0bfaa33f0132cea85fceebd68d6ef8bc4f0b5c30 25 PAKET 8: W2 1/5
+7cef8438d696ff3fc99d19cfce6c654debcaa694 25 PAKET 8: W2 2/5
+875d1c85e291dfea33a6beb87292e5f5d9d2378b 25 PAKET 8: W2 3/5
+fc9beb2de1e7af327da3dc55d3ddf73c7e3f770a 25 PAKET 8: W2 4/5
+494e3dadad2c6267baea3f2c6fe9497ab8cae39a 25 PAKET 8: W2 5/5
+
+PİKSEL DEĞİŞİKLİĞİ BEYANI
+Hiçbir PNG'nin hiçbir pikseli kodla değiştirilmedi; yeniden boyutlandırma, kırpma, boyama, renk değiştirme veya alfa düzenleme yapılmadı. Özgün imagegen çıktıları yalnız belirtilen hedeflere dosya olarak kopyalandı.
+
