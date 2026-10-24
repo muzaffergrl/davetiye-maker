@@ -1,0 +1,47 @@
+Dal: main
+Son commit (rapor yazılırken HEAD): 79fa1340cbc1d7de7bc6eebc6ec57cc0e2fc6705 — G23 PAKET 8: W2 checkpoint (5/5).
+Bu rapor ve son iki taşın teslim commit'i: G23 PAKET 8: W2 parts + TESLIM (bu dosyayı ekleyen commit; kendi hash'i içerikte sabitlenemez).
+Tarih: 24 Ekim 2026, Europe/Istanbul.
+Teslim: 23 PNG = 1 W1 tasarım panosu + 22 W2 parçası; ayrıca bu TESLIM.txt.
+Kaynak: GPT_PROMPTS.md dosyasının sonundaki PAKET 8 ve kendi Instructions for GPT bloğu. Eski bg_scene/v3-closed veya başka koleksiyon panosu referans verilmedi.
+W1'de belirtilen beş mevcut fotoğraf referans verildi. Her W2 isteğinde aynı W1 panosu referans verildi. W2.4/5/6 kapalı kutu ek referansı verilerek düzenleme olarak üretildi.
+Dosya yolları: pano assets/gpt/mockups/design-board.png; aşağıdaki 22 parçanın tamamı assets/gpt/parts/ altında, adları değiştirilmeden kaydedildi.
+PNG'lere kodla boyutlandırma, kırpma, renk düzeltme veya piksel boyama uygulanmadı. Araç çıktıları dosya kopyasıyla kaydedildi. Yalnız hiza denetimi için /tmp altında %50 alfa bindirme önizlemeleri oluşturuldu; teslim dosyaları değişmedi.
+
+DOSYALAR — hedef → gerçek ölçü · renk/alfa · deneme · Kontrol sapması/not
+design-board.png · ~1908×824 / araç desteklemezse 1536×1024 → 1774×887 · RGB, opak · 1 deneme · Beş farklı ekran tek sırada; çiçeksiz mücevher dekoru, okunur form, November 13, 2027. Gerçek pano 2:1; ekranlar istenen 390:844 oranından daha dar (~322:810). Yalnız tasarım referansı; tam ölçülü UI ekranı değildir. Font ailesi görselden kesin doğrulanamaz; W1'deki Roma başlık görünümü referanstır.
+velvet_page.png · 1024×1536 → 1024×1536 · RGB, opak · 2 deneme · İkinci deneme daha mor; düz ve nesnesiz, kıvrım yok. Fotoğrafik tonlar hex paletle birebir değil; ortalama RGB yaklaşık 33,7,21, sıcak bordo yansıma kısmen kalıyor.
+velvet_tile.png · 1024×1024 → 1254×1254 · RGB, opak · 2 deneme · İkinci deneme daha mor, düz/eşit ışık. Tam piksel dikişsizliği garanti değil; 8 px kenar bantlarının ortalama RGB farkı sol–sağ en çok ~3, üst–alt <1. Küçük dikiş farkı için tekrar üretilmedi. Ortalama RGB yaklaşık 40,8,27; sabit hex renklerle birebir değil.
+box_closed.png · 1536×1024 → 1536×1024 · RGBA, gerçek alfa (0–254) · 2 deneme · İlk 4:3 tuval reddedildi; ikinci 3:2 seçildi. Ön duvar şeridi hedef ~%3 yerine yaklaşık %5–6. Klips/kurdele/yazı yok; kapak ön kenarı düz ve okunur. Kartuşta harf/monogram yok.
+clasp.png · 1536×1024 → 1536×1024 · RGBA, gerçek alfa (0–254) · 2 deneme · Daha küçük ve doğru konumdaki ilk deneme seçildi. Genişlik ~188 px (%12,2), hedef ~%9'dan geniş. Ön kenarın ortasını doğru kesiyor; yalnız klips var.
+box_open.png · 1536×1024 → 1536×1024 · RGBA, gerçek alfa (0–254) · 1 deneme · Dış gövde kapalı kutuyla yaklaşık 1–2 px farkla örtüşüyor. Orta bölme boş; yatay çekme kurdelesi, solda yüzük, sağda inci var. Orta ipek alan ~480×570, hedef 5:7'den daha geniş (~0,84 yerine 0,71); montajda kart buna göre yerleştirilmeli.
+lid_lining.png · 1536×1024 → 1536×1024 · RGBA, gerçek alfa (0–254) · 2 deneme · Daha yakın ilk deneme seçildi. Orta ipek alan boş, menteşeler altta. Üst/yan kenarlar yakın; alt rose-gold kenar kapalı kapak kenarından yaklaşık 40 px aşağıda. Tam hiza sağlanmadı; aşağıdaki hiza notuna bakınız.
+ivory_card.png · 1024×1536 → 1024×1536 · RGBA, gerçek alfa (0–254) · 2 deneme · İlk 5:7 tuval reddedildi. İkinci 2:3 tuval; yan kenarlar dik, orta bant boş ve düz. Kart nesnesi hedef 5:7'den biraz daha uzun (~0,66 oran); üst/alt süsler sınır bantlarına yakın. Yazı yok.
+silk_card.png · 1024×1536 → 1024×1536 · RGBA, gerçek alfa (0–254) · 1 deneme · Orta bant düz/kıvrımsız, yan kenarlar dik, süs yalnız üstte/altta. İpek yüzeyde düşük kontrastlı doğal parlaklık var; sayısal olarak tamamen tek renk değil.
+silk_pocket.png · 1536×1024 → 1536×1024 · RGBA, gerçek alfa (0–254) · 1 deneme · Tek pliseli ipek bant; düz yatay üst/alt kenar, ortada inci düğme. Bant yaklaşık 4,2:1, hedef yaklaşık 3:1'den daha yatay. Kıvrımların sayısı için tekrar üretilmedi.
+gem_frame.png · 1024×1536 → 1024×1536 · RGBA, gerçek alfa (0–254), iç pencere şeffaf · 2 deneme · İkinci deneme seçildi. Pencere bbox yaklaşık (122,251)–(903,1262): 781×1011, oran 0,773; hedef 4:5=0,8'den ~%3,4 daha uzun. Çerçeve tamamen kapalı, dört kesik köşede çift tırnak var. Şeffaf pencere merkezinden dış kenara geçiş bulunmadığı doğrulandı.
+tray_cell.png · 1024×1024 → 1254×1254 · RGBA, gerçek alfa (0–255) · 1 deneme · Kareye yakın hücre, boş sakin kadife taban, rose-gold kenar. Dış gövde 1065×1033; hafif en-boy farkı (~%3) var.
+display_pedestal.png · 1536×1024 → 1536×1024 · RGBA, gerçek alfa (0–254) · 1 deneme · Tek boş kaide, elips üst yüzey ve iki rose-gold bant. Üst kenar tuvalin ~%38,5'inde; hedef alt %55 bölgesinden ~%6,5 daha yukarıda başlıyor. Nesne kesilmemiş.
+pearl_divider.png · 1536×1024 → 1536×1024 · RGBA, gerçek alfa (0–254) · 1 deneme · Düz yatay inci dizisi ve ortada ametist damla; Kontrol satırında belirgin sapma görülmedi. İnci sayısı için tekrar üretilmedi.
+filigree_crest.png · 1536×1024 → 1536×1024 · RGBA, gerçek alfa (0–254) · 1 deneme · Simetrik, ortada ametist, yanlarda iki inci, taç yok. Süs hedef 2,5:1 yerine yaklaşık 3:1; genişlik hedef %70 yerine ~%81. Kıvrım sayısı için tekrar üretilmedi.
+icon_rings.png · 1024×1024 → 1254×1254 · RGBA, gerçek alfa (0–255) · 1 deneme · Tek yüzük ikonu, açık iç alanlar, badge yok. Metal çizgiler hedef ~%2,5'ten biraz kalın; ikon genişliği hedef ~%60 yerine ~%76. Diğer ikonların metal/çizgi referansı olarak kullanıldı.
+icon_coupes.png · 1024×1024 → 1254×1254 · RGBA, gerçek alfa (0–255) · 1 deneme · Tek kadeh ikonu, açık çizgiler, aynı rose-gold görünümü. Yerleşim hedef %60 yerine ~%77 genişlik; diğer ikonlarla çizgi kalınlığı yakın, matematiksel olarak aynı değil.
+icon_dinner.png · 1024×1024 → 1254×1254 · RGBA, gerçek alfa (0–255) · 1 deneme · Tek açık çizgili cloche/servis tabağı ikonu. Hedef %60 yerine ~%81 genişlik; metal rengi/çizgi dili sette yakın, birebir piksel eşitliği yok.
+icon_music.png · 1024×1024 → 1254×1254 · RGBA, gerçek alfa (0–255) · 1 deneme · Tek bağlı sekizlik notalar ikonu; nota başları açık. Hedef %60 yerine ~%76 genişlik/yükseklik, çizgiler biraz kalın; sette aynı metal görünümü.
+icon_key.png · 1024×1024 → 1254×1254 · RGBA, gerçek alfa (0–255) · 1 deneme · Tek filigran başlı anahtar; harf, taş, badge yok. Dikey ikon hedef %60 yerine ~%90 yükseklik; çizgi/metal görünümü setle yakın, uzun sap doğal olarak dolu metal çizgi.
+gem_amethyst.png · 1024×1024 → 1254×1254 · RGBA, gerçek alfa (0–255) · 1 deneme · Tek oval fasetli ametist, yuva/yüzey yok. Hedef ~%45 yerine ~%56 genişlik; dışarı taşan parıltı görülmedi.
+gem_morganite.png · 1024×1024 → 1254×1254 · RGBA, gerçek alfa (0–255) · 1 deneme · Tek damla kesim morganit, yuva/yüzey yok. Hedef ~%45 yerine ~%57 genişlik; dışarı taşan parıltı görülmedi.
+pearl.png · 1024×1024 → 1254×1254 · RGBA, gerçek alfa (0–255) · 1 deneme · Tek yuvarlak fildişi inci, pencere yansıması taşın üzerinde. Hedef ~%45 yerine ~%51 genişlik; yüzey/yuva/dış parıltı yok.
+
+HİZA KONTROLÜ
+Kutulu dört katman da aynı 1536×1024 tuvalde. Teslim PNG'leri değiştirilmeden, kapalı kutu üzerine %50 alfa ile açık kutu, klips ve astar bindirilerek gözle kontrol edildi.
+box_closed ↔ box_open: belirgin kayma YOK. Alfa>=128 dış sınırlar kapalı (184,111)–(1352,913), açık (185,109)–(1354,912); fark sol +1, üst -2, sağ +2, alt -1 px. Ön duvar ve yatay kenar örtüşüyor.
+box_closed ↔ clasp: yatay kayma YOK; klips merkez x=768. Görünür bbox (674,729)–(862,886), merkez y≈807,5; ön rose-gold kenarı (~y807) straddle ediyor. Hedefe göre biraz büyük; ikinci deneme daha da büyüktü ve seçilmedi.
+box_closed ↔ lid_lining: kayma/ölçek farkı VAR. İlk astar seçildi: bbox (190,107)–(1345,897), üst ve yanlarda ~4–9 px; alt rose-gold piping yaklaşık y847, kapalı kapakta ~y807: ~40 px fark. İkinci üretimde de alt kenar tam oturmadı. Menteşeler altta, astar boş ve kullanılabilir; aynı yuvaya otomatik takılmaya tam hazır diye değerlendirilmemeli. Bu oturumda kodla düzeltme yapılmadı.
+
+KONTROL KAPSAMI VE BELİRSİZLİKLER
+23 dosyanın PNG bütünlüğü, gerçek ölçüsü, RGB/RGBA modu ve alfa aralığı okundu. Şeffaf 20 dosyanın hepsinde alfa=0 arka plan ve dolu nesne alanı var; beyaz/dama desenli taklit zemin yok. Alfa>=128 nesnelerinin hiçbiri tuval kenarına değmiyor.
+Bazı araç önizlemelerinde siyah/kahverengi hâle veya renkli pikseller görünüyor: bu renkler büyük ölçüde alpha=0 olan gizli RGB verisinde. Alfa kompozitinde dış hâle görülmedi; düşük alfa kenar yumuşatması var. Teslimin RGB'ye düzleştirilmesi bu gizli renkleri açığa çıkarabilir; PNG alfa korunmalı.
+İkonlarda aynı W1 ve icon_rings referansı kullanıldı; aynı metal görünümü var, ancak çizgi kalınlıklarının matematiksel eşitliği garanti değil. Renk hex değerleri fotoğrafik çıktılarda tam eşleşmiyor; renk varyantı üretiminde bu fark hesaba katılmalı.
+W1'in pano/ekran oranları hedefle tam eşleşmedi; bu dosya uygulama ekran görüntüsü değil, görsel tasarım referansıdır. W1 tarih ve form metni gözle kontrol edildi; OCR veya gerçek web formu testi yapılmadı.
+Eksik/atlanan dosya: YOK. 30 üretim denemesi yapıldı (W1 1; W2 toplam 29); seçilmeyen ara çıktılar teslim klasörlerine eklenmedi. Site, montaj, hareket, ses veya uygulama testleri bu görsel tesliminin kapsamında yapılmadı.
