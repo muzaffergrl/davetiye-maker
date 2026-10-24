@@ -75,7 +75,9 @@ section>.atmos{position:absolute}
 @keyframes drift-in{from{opacity:0;translate:0 -18px;scale:.96}}
 .opening-heading{position:relative;z-index:3;text-align:center;max-width:100%;margin-bottom:clamp(26px,6vh,64px);color:var(--cream)}
 .kicker{color:var(--on-dark);margin-bottom:16px}
-.opening .kicker::after,.when::after{content:"";display:block;width:var(--rule-w,34px);height:var(--rule-h,1px);background:var(--rule-bg,var(--gold));margin:12px auto 0}
+/* the kicker keeps a plain gold rule; the flourish closes the heading block (outside every text box: theme-check) */
+.opening .kicker::after{content:"";display:block;width:34px;height:1px;background:var(--gold);margin:12px auto 0}
+.opening-heading::after{content:"";display:block;width:var(--rule-w,34px);height:var(--rule-h,1px);background:var(--rule-bg,var(--gold));margin:14px auto 0}
 .names{overflow-wrap:anywhere;line-height:.92;margin:0}
 .names>span{display:block;white-space:nowrap}
 .names.wrap>span{white-space:normal}
@@ -218,14 +220,14 @@ html[data-preview="true"] .photo-slot[data-photo-state=placeholder]>.ph-mark{dis
 .intro-copy{font:italic 400 20px/1.45 var(--serif);margin-top:16px}
 .intro .cue{text-align:center;margin-top:26px}
 .intro .textlink{color:var(--muted)}
-.invitation{padding:34px 18px 60px;max-width:900px;margin:auto}
+.invitation{padding:34px 18px 60px;max-width:900px;margin:auto;overflow-x:clip}
 /* the formal card: GPT invitation card in three slices — top (roses), a plain band that repeats, bottom (roses) */
 .card-formal{position:relative;width:min(100%,460px);margin:0 auto;aspect-ratio:.6834;padding:66% 0 56%;background:url(img/card_formal_band-860.webp) 0 0/100% auto repeat-y content-box;filter:drop-shadow(0 22px 30px rgb(41 7 11/.22));text-align:center;color:var(--ink)}
 .card-formal::before,.card-formal::after{content:"";position:absolute;left:0;right:0;pointer-events:none}
 .card-formal::before{top:0;aspect-ratio:1.2655;background:url(img/card_formal-860.webp) 50% 0/100% auto no-repeat}
 .card-formal::after{bottom:0;aspect-ratio:1.7523;background:url(img/card_formal-860.webp) 50% 100%/100% auto no-repeat}
 .formal-body{position:relative;z-index:1;padding:0 15%}
-.card-formal>.bow{position:absolute;right:-6%;top:-3%;width:30%;z-index:2;rotate:14deg;filter:drop-shadow(0 8px 10px rgb(41 7 11/.3))}
+.card-formal>.bow{position:absolute;right:-1%;top:-3%;width:27%;z-index:2;rotate:14deg;filter:drop-shadow(0 8px 10px rgb(41 7 11/.3))}
 .formal-body .host{color:var(--gold-ink);margin-bottom:16px}
 .formal-names{font:italic 400 clamp(26px,7.2vw,34px)/1.14 var(--serif);color:var(--wine);overflow-wrap:anywhere}
 .formal-names .amp{font:400 1.5em/.9 var(--script);font-style:normal;color:var(--gold-ink)}
