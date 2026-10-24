@@ -67,7 +67,8 @@ test('The home petal sound plays only when petals fall (none without sprites, wi
  // review 2026-10-23: the cue was sent whenever sprites existed, also with reduced motion (petals() drew nothing then)
  const js=await readFile(path.join('themes',id,'site.js'),'utf8');
  assert.match(js,/if \(!PETALS\.length \|\| !layer \|\| reduce \|\| !canAnimate \|\| !count\) return false;/);
- assert.match(js,/if \(petals\(MOTION\.petals\.arrive, null\)\) sfx\('petal'\);/);
+ // v2 (2026-10-24): the petals fall from the home portrait (a point or, without one, from the top)
+ assert.match(js,/if \(petals\(MOTION\.petals\.arrive, [^;]*\)\) sfx\('petal'\);/);
  assert.equal((js.match(/sfx\('petal'\)/g)??[]).length,1,'the petal sound has one caller, behind petals()');
 });
 
