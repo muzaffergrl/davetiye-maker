@@ -1,518 +1,643 @@
 {
- "night": {
+ "lake": {
   "src_size": [
-   1254,
-   1254
+   1024,
+   1536
+  ],
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "lake-720.webp",
+    "w": 720,
+    "h": 1080,
+    "bytes": 54164
+   },
+   {
+    "file": "lake-1024.webp",
+    "w": 1024,
+    "h": 1536,
+    "bytes": 92730
+   }
+  ]
+ },
+ "lake_wide": {
+  "src_size": [
+   1536,
+   1024
+  ],
+  "ratio": 1.5,
+  "files": [
+   {
+    "file": "lake_wide-1536.webp",
+    "w": 1536,
+    "h": 1024,
+    "bytes": 95430
+   }
+  ]
+ },
+ "lake_blur": {
+  "src_size": [
+   480,
+   720
+  ],
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "lake_blur-480.webp",
+    "w": 480,
+    "h": 720,
+    "bytes": 3322
+   }
+  ]
+ },
+ "water": {
+  "src_size": [
+   1536,
+   410
+  ],
+  "ratio": 3.74634,
+  "files": [
+   {
+    "file": "water-720.webp",
+    "w": 720,
+    "h": 192,
+    "bytes": 17642
+   },
+   {
+    "file": "water-1100.webp",
+    "w": 1100,
+    "h": 294,
+    "bytes": 38846
+   }
+  ]
+ },
+ "paper": {
+  "src_size": [
+   512,
+   512
   ],
   "ratio": 1.0,
   "files": [
    {
-    "file": "night-640.webp",
-    "w": 640,
-    "h": 640,
-    "bytes": 16236
+    "file": "paper-512.webp",
+    "w": 512,
+    "h": 512,
+    "bytes": 3680
+   }
+  ]
+ },
+ "env_back": {
+  "src_size": [
+   938,
+   583
+  ],
+  "ratio": 1.60892,
+  "files": [
+   {
+    "file": "env_back-720.webp",
+    "w": 720,
+    "h": 448,
+    "bytes": 29364
    },
    {
-    "file": "night-1024.webp",
-    "w": 1024,
-    "h": 1024,
-    "bytes": 64898
+    "file": "env_back-938.webp",
+    "w": 938,
+    "h": 583,
+    "bytes": 50794
    }
   ]
  },
- "ivory": {
+ "env_pocket": {
   "src_size": [
-   1254,
-   1254
+   938,
+   583
   ],
-  "ratio": 1.0,
+  "ratio": 1.60892,
   "files": [
    {
-    "file": "ivory-640.webp",
-    "w": 640,
-    "h": 640,
-    "bytes": 11632
+    "file": "env_pocket-720.webp",
+    "w": 720,
+    "h": 448,
+    "bytes": 28560
    },
    {
-    "file": "ivory-1024.webp",
-    "w": 1024,
-    "h": 1024,
-    "bytes": 33368
+    "file": "env_pocket-938.webp",
+    "w": 938,
+    "h": 583,
+    "bytes": 48222
    }
   ]
  },
- "band": {
+ "env_flap": {
   "src_size": [
-   1832,
-   859
+   938,
+   358
   ],
-  "ratio": 2.13271,
+  "ratio": 2.62011,
   "files": [
    {
-    "file": "band-640.webp",
-    "w": 640,
-    "h": 300,
-    "bytes": 14506
+    "file": "env_flap-720.webp",
+    "w": 720,
+    "h": 275,
+    "bytes": 22520
    },
    {
-    "file": "band-1280.webp",
-    "w": 1280,
-    "h": 600,
-    "bytes": 52580
+    "file": "env_flap-938.webp",
+    "w": 938,
+    "h": 358,
+    "bytes": 40398
    }
   ]
  },
- "back": {
+ "env_flap_in": {
   "src_size": [
-   892,
-   1247
+   938,
+   346
   ],
-  "ratio": 0.71532,
+  "ratio": 2.71098,
   "files": [
    {
-    "file": "back-720.webp",
+    "file": "env_flap_in-720.webp",
     "w": 720,
-    "h": 1007,
-    "bytes": 159400
+    "h": 266,
+    "bytes": 32132
    }
   ]
  },
- "front": {
+ "seal": {
   "src_size": [
-   935,
-   1009
+   1018,
+   992
   ],
-  "ratio": 0.92666,
+  "ratio": 1.02621,
   "files": [
    {
-    "file": "front-720.webp",
-    "w": 720,
-    "h": 777,
-    "bytes": 78190
-   }
-  ]
- },
- "flap": {
-  "src_size": [
-   945,
-   860
-  ],
-  "ratio": 1.09884,
-  "files": [
+    "file": "seal-200.webp",
+    "w": 200,
+    "h": 195,
+    "bytes": 12848
+   },
    {
-    "file": "flap-720.webp",
-    "w": 720,
-    "h": 655,
-    "bytes": 73758
-   }
-  ]
- },
- "vellum": {
-  "src_size": [
-   945,
-   304
-  ],
-  "ratio": 3.10855,
-  "files": [
-   {
-    "file": "vellum-720.webp",
-    "w": 720,
-    "h": 232,
-    "bytes": 63396
-   }
-  ]
- },
- "moon": {
-  "src_size": [
-   953,
-   995
-  ],
-  "ratio": 0.95779,
-  "files": [
-   {
-    "file": "moon-320.webp",
-    "w": 320,
-    "h": 334,
-    "bytes": 25758
-   }
-  ]
- },
- "flap_in": {
-  "src_size": [
-   1077,
-   962
-  ],
-  "ratio": 1.11954,
-  "files": [
-   {
-    "file": "flap_in-720.webp",
-    "w": 720,
-    "h": 643,
-    "bytes": 77448
+    "file": "seal-400.webp",
+    "w": 400,
+    "h": 390,
+    "bytes": 39878
    }
   ]
  },
  "card": {
   "src_size": [
-   904,
-   1265
+   1349,
+   797
   ],
-  "ratio": 0.71462,
+  "ratio": 1.6926,
   "files": [
    {
     "file": "card-720.webp",
     "w": 720,
-    "h": 1008,
-    "bytes": 96910
-   }
-  ]
- },
- "stage": {
-  "aspect": 0.7153,
-  "back": [
-   0,
-   0,
-   100,
-   100
-  ],
-  "front": [
-   0,
-   20.45,
-   100,
-   79.55
-  ],
-  "flap": [
-   0,
-   0,
-   100,
-   71.06
-  ],
-  "vellum": [
-   -1.5,
-   53.97,
-   103.0,
-   24.38
-  ],
-  "moon": [
-   37.0,
-   56.45,
-   26.0,
-   19.42
-  ],
-  "card": [
-   18.0,
-   33.0,
-   64.0,
-   64.06
-  ],
-  "card_ratio": 0.7146,
-  "flap_in_ratio": 1.1195,
-  "flap_in_h": 63.9,
-  "_note": "% of the closed envelope (left, top, width, height): the back's alpha box is the envelope; pocket and flap span its width (flap from the top edge, pocket down to the bottom edge), the band spans the flap's width + a fold at each end, the brooch sits on the band's centre, the card in the pocket; flap_in_h = the open flap's inside standing above the envelope (% of its height)"
- },
- "window": {
-  "src_size": [
-   846,
-   1330
-  ],
-  "ratio": 0.63609,
-  "files": [
+    "h": 425,
+    "bytes": 15746
+   },
    {
-    "file": "window-720.webp",
-    "w": 720,
-    "h": 1132,
-    "bytes": 180840
+    "file": "card-1100.webp",
+    "w": 1100,
+    "h": 650,
+    "bytes": 37860
    }
   ],
   "window_pct": [
-   13.83,
-   11.58,
-   72.22,
-   64.29
+   4.74,
+   6.4,
+   31.58,
+   86.83
   ],
   "window_px": [
-   611,
-   855
+   426,
+   692
+  ],
+  "mask": "mask_card.png"
+ },
+ "stage": {
+  "aspect": 1.6089,
+  "pocket_top": 7.38,
+  "flap_h": 61.41,
+  "flap_in_h": 59.35,
+  "valley": [
+   48.93,
+   61.06
+  ],
+  "open_scale": [
+   0.9979,
+   0.9388
+  ],
+  "hinge_open_px": 665,
+  "flap_cut": {
+   "method": "renk",
+   "points": 458,
+   "residual_sd": 0.68
+  },
+  "seal": [
+   39.43,
+   44.68,
+   19.0,
+   29.79
+  ],
+  "card": [
+   4.0,
+   9.5,
+   92.0,
+   87.45
+  ],
+  "card_ratio": 1.6926,
+  "_note": "% of the closed envelope body (left, top, width, height): pocket from pocket_top down, the flap from the top edge (flap_h), its inside standing above it (flap_in_h), the seal on the valley's lowest point, the card inside the pocket"
+ },
+ "moon": {
+  "src_size": [
+   966,
+   958
+  ],
+  "ratio": 1.00835,
+  "files": [
+   {
+    "file": "moon-320.webp",
+    "w": 320,
+    "h": 317,
+    "bytes": 32794
+   },
+   {
+    "file": "moon-640.webp",
+    "w": 640,
+    "h": 635,
+    "bytes": 110522
+   }
+  ]
+ },
+ "frame_arch": {
+  "src_size": [
+   771,
+   1401
+  ],
+  "ratio": 0.55032,
+  "files": [
+   {
+    "file": "frame_arch-480.webp",
+    "w": 480,
+    "h": 872,
+    "bytes": 40406
+   },
+   {
+    "file": "frame_arch-720.webp",
+    "w": 720,
+    "h": 1308,
+    "bytes": 79802
+   }
+  ],
+  "window_pct": [
+   5.97,
+   3.35,
+   88.07,
+   93.22
+  ],
+  "window_px": [
+   679,
+   1306
   ],
   "mask": "mask_arch.png"
  },
- "story": {
+ "frame_land": {
   "src_size": [
-   995,
-   1213
+   1407,
+   841
   ],
-  "ratio": 0.82028,
+  "ratio": 1.67301,
   "files": [
    {
-    "file": "story-720.webp",
+    "file": "frame_land-720.webp",
     "w": 720,
-    "h": 878,
-    "bytes": 75102
-   }
-  ],
-  "window_pct": [
-   14.87,
-   9.48,
-   70.15,
-   75.52
-  ],
-  "window_px": [
-   698,
-   916
-  ]
- },
- "terrace": {
-  "src_size": [
-   1496,
-   798
-  ],
-  "ratio": 1.87469,
-  "files": [
+    "h": 430,
+    "bytes": 30266
+   },
    {
-    "file": "terrace-1100.webp",
+    "file": "frame_land-1100.webp",
     "w": 1100,
-    "h": 587,
-    "bytes": 95910
+    "h": 657,
+    "bytes": 71524
    }
   ],
   "window_pct": [
-   7.15,
-   3.38,
-   85.76,
-   73.81
+   4.98,
+   8.2,
+   90.12,
+   83.59
   ],
   "window_px": [
-   1283,
-   589
+   1268,
+   703
   ]
  },
- "shutter_l": {
+ "gilt_top": {
   "src_size": [
-   482,
-   1184
+   801,
+   263
   ],
-  "ratio": 0.40709,
+  "ratio": 3.04563,
   "files": [
    {
-    "file": "shutter_l-360.webp",
-    "w": 360,
-    "h": 884,
-    "bytes": 56736
-   }
-  ]
- },
- "shutter_r": {
-  "src_size": [
-   453,
-   1184
-  ],
-  "ratio": 0.3826,
-  "files": [
-   {
-    "file": "shutter_r-360.webp",
-    "w": 360,
-    "h": 941,
-    "bytes": 56406
-   }
-  ]
- },
- "shutters": {
-  "shutter_l": [
-   2.01,
-   0.66,
-   48.44,
-   97.61
-  ],
-  "shutter_r": [
-   49.35,
-   0.58,
-   45.53,
-   97.61
-  ]
- },
- "spray": {
-  "src_size": [
-   1086,
-   1025
-  ],
-  "ratio": 1.05951,
-  "files": [
-   {
-    "file": "spray-720.webp",
+    "file": "gilt_top-720.webp",
     "w": 720,
-    "h": 680,
-    "bytes": 111582
+    "h": 236,
+    "bytes": 31086
+   }
+  ]
+ },
+ "gilt_mid": {
+  "src_size": [
+   801,
+   96
+  ],
+  "ratio": 8.34375,
+  "files": [
+   {
+    "file": "gilt_mid-720.webp",
+    "w": 720,
+    "h": 86,
+    "bytes": 5342
+   }
+  ]
+ },
+ "gilt_bot": {
+  "src_size": [
+   801,
+   236
+  ],
+  "ratio": 3.39407,
+  "files": [
+   {
+    "file": "gilt_bot-720.webp",
+    "w": 720,
+    "h": 212,
+    "bytes": 19644
+   }
+  ]
+ },
+ "balustrade": {
+  "src_size": [
+   1385,
+   362
+  ],
+  "ratio": 3.82597,
+  "files": [
+   {
+    "file": "balustrade-800.webp",
+    "w": 800,
+    "h": 209,
+    "bytes": 72074
+   },
+   {
+    "file": "balustrade-1385.webp",
+    "w": 1385,
+    "h": 362,
+    "bytes": 132094
    }
   ]
  },
  "divider": {
   "src_size": [
-   1729,
-   127
+   1402,
+   44
   ],
-  "ratio": 13.61417,
+  "ratio": 31.86364,
   "files": [
    {
-    "file": "divider-1000.webp",
-    "w": 1000,
-    "h": 73,
-    "bytes": 43412
+    "file": "divider-720.webp",
+    "w": 720,
+    "h": 23,
+    "bytes": 8112
+   },
+   {
+    "file": "divider-1100.webp",
+    "w": 1100,
+    "h": 35,
+    "bytes": 14100
    }
   ]
  },
- "lantern": {
+ "thread": {
   "src_size": [
-   464,
-   1345
+   44,
+   477
   ],
-  "ratio": 0.34498,
+  "ratio": 0.09224,
   "files": [
    {
-    "file": "lantern-320.webp",
-    "w": 320,
-    "h": 928,
-    "bytes": 113294
+    "file": "thread-44.webp",
+    "w": 44,
+    "h": 477,
+    "bytes": 4060
    }
   ]
  },
- "flake": {
+ "icon-rings": {
   "src_size": [
-   676,
-   710
+   862,
+   862
   ],
-  "ratio": 0.95211,
+  "ratio": 1.0,
   "files": [
    {
-    "file": "flake-160.webp",
+    "file": "icon-rings-128.webp",
+    "w": 128,
+    "h": 128,
+    "bytes": 7190
+   }
+  ]
+ },
+ "icon-toast": {
+  "src_size": [
+   888,
+   888
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "icon-toast-128.webp",
+    "w": 128,
+    "h": 128,
+    "bytes": 7618
+   }
+  ]
+ },
+ "icon-dinner": {
+  "src_size": [
+   1017,
+   1017
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "icon-dinner-128.webp",
+    "w": 128,
+    "h": 128,
+    "bytes": 6828
+   }
+  ]
+ },
+ "icon-dance": {
+  "src_size": [
+   948,
+   948
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "icon-dance-128.webp",
+    "w": 128,
+    "h": 128,
+    "bytes": 9850
+   }
+  ]
+ },
+ "icon-dress": {
+  "src_size": [
+   969,
+   969
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "icon-dress-128.webp",
+    "w": 128,
+    "h": 128,
+    "bytes": 6332
+   }
+  ]
+ },
+ "icon-boat": {
+  "src_size": [
+   1030,
+   1030
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "icon-boat-128.webp",
+    "w": 128,
+    "h": 128,
+    "bytes": 5990
+   }
+  ]
+ },
+ "leaf1": {
+  "src_size": [
+   848,
+   572
+  ],
+  "ratio": 1.48252,
+  "files": [
+   {
+    "file": "leaf1-160.webp",
     "w": 160,
-    "h": 168,
-    "bytes": 10720
+    "h": 108,
+    "bytes": 9094
    }
   ]
  },
- "petal": {
+ "leaf2": {
   "src_size": [
-   720,
-   651
+   798,
+   742
   ],
-  "ratio": 1.10599,
+  "ratio": 1.07547,
   "files": [
    {
-    "file": "petal-160.webp",
+    "file": "leaf2-160.webp",
     "w": 160,
-    "h": 145,
-    "bytes": 7386
+    "h": 149,
+    "bytes": 10098
    }
   ]
  },
- "spark": {
+ "leaf3": {
   "src_size": [
-   270,
-   275
+   599,
+   529
   ],
-  "ratio": 0.98182,
+  "ratio": 1.13233,
   "files": [
    {
-    "file": "spark-160.webp",
+    "file": "leaf3-160.webp",
     "w": 160,
-    "h": 163,
-    "bytes": 12386
+    "h": 141,
+    "bytes": 10480
    }
   ]
  },
  "ph_arch": {
   "src_size": [
    640,
-   896
+   1231
   ],
-  "ratio": 0.71429,
+  "ratio": 0.5199,
   "files": [
    {
     "file": "ph_arch-640.webp",
     "w": 640,
-    "h": 896,
-    "bytes": 3762
+    "h": 1231,
+    "bytes": 5428
    }
   ]
  },
- "ph_story": {
+ "ph_land": {
   "src_size": [
    640,
-   840
+   355
   ],
-  "ratio": 0.7619,
+  "ratio": 1.80282,
   "files": [
    {
-    "file": "ph_story-640.webp",
+    "file": "ph_land-640.webp",
     "w": 640,
-    "h": 840,
-    "bytes": 3484
-   }
-  ]
- },
- "ph_wide": {
-  "src_size": [
-   640,
-   294
-  ],
-  "ratio": 2.17687,
-  "files": [
-   {
-    "file": "ph_wide-640.webp",
-    "w": 640,
-    "h": 294,
-    "bytes": 1372
+    "h": 355,
+    "bytes": 2042
    }
   ]
  },
  "placeholders": {
   "arch": "ph_arch-640.webp",
-  "story": "ph_story-640.webp",
-  "wide": "ph_wide-640.webp"
+  "land": "ph_land-640.webp"
  },
  "photo_slots": {
   "hero_portrait": {
-   "aspect": "611/855"
+   "aspect": "679/1306"
   },
   "story_1": {
-   "aspect": "698/916"
+   "aspect": "1268/703"
   },
   "story_2": {
-   "aspect": "698/916"
+   "aspect": "1268/703"
   },
   "story_3": {
-   "aspect": "698/916"
+   "aspect": "1268/703"
   },
   "venue": {
-   "aspect": "1283/589"
+   "aspect": "1268/703"
   }
  },
  "og": {
-  "src_size": [
-   1536,
-   1024
-  ],
-  "crop": [
-   0,
-   218,
-   1536,
-   806
-  ],
-  "align": "alt",
+  "file": "og-1200x630.jpg",
   "size": [
    1200,
    630
   ],
-  "file": "og-1200x630.jpg",
-  "source": "parts/web_hero.png",
-  "bytes": 156026
+  "source": "night_lake_wide + moon_envelope_closed + moon_seal (composited)",
+  "bytes": 102732
  },
  "favicon": {
   "src_box": [
    0,
    0,
-   953,
-   995
+   1018,
+   992
   ],
   "size": [
    180,
@@ -520,40 +645,37 @@
   ],
   "pad": 0.04,
   "file": "favicon.png",
-  "bytes": 31696,
-  "source": "the gold crescent brooch"
+  "bytes": 54437,
+  "source": "the moon seal"
  },
  "parts": {
   "used": [
-   "accent_1",
-   "accent_2",
-   "accent_3",
-   "candle_lantern",
-   "card_small",
-   "corner_spray",
-   "divider",
-   "env_back",
-   "env_front",
-   "flap",
-   "flap_in",
-   "ivory_laid",
-   "moon_brooch",
-   "night_laid",
-   "nocturne_band",
-   "shutter_left",
-   "shutter_right",
-   "story_frame",
-   "terrace_frame",
-   "vellum_band",
-   "web_hero",
-   "window_frame"
+   "balustrade",
+   "card_gilt",
+   "card_invite",
+   "divider_moonpath",
+   "frame_arch",
+   "frame_landscape",
+   "gold_leaf_1",
+   "gold_leaf_2",
+   "gold_leaf_3",
+   "icon_boat",
+   "icon_ceremony",
+   "icon_dancing",
+   "icon_dinner",
+   "icon_dresscode",
+   "icon_toast",
+   "moon",
+   "moon_envelope_closed",
+   "moon_envelope_open",
+   "moon_seal",
+   "night_lake",
+   "night_lake_wide",
+   "paper_tile"
   ],
   "waiting_for_gpt": []
  },
- "_note": "G422 build from the design's own PAKET 5R parts (all present; docs/35). Nothing drawn.",
- "checks": {
-  "green": {}
- },
+ "_note": "22 v2 (2026-10-24): built from the PAKET 8 parts after the GPT design board. Nothing drawn.",
  "theme_check": {
   "particles": ".accent-layer",
   "first_screen": {
@@ -561,5 +683,5 @@
    "names_min_px": 30
   }
  },
- "bytes_total": 1862549
+ "bytes_total": 1695631
 }
