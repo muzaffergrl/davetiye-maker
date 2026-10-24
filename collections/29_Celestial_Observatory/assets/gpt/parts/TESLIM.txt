@@ -1,0 +1,209 @@
+29 — CELESTIAL OBSERVATORY / PAKET 8 TESLİMİ
+Tarih: 24 Ekim 2026
+Dal: main
+Son teslim commit'i: 29 PAKET 8: teslim (bu raporu ekleyen commit).
+Bu commit'in kesin SHA'sı: git log -1 --format=%H -- collections/29_Celestial_Observatory/assets/gpt/parts/TESLIM.txt
+Rapor öncesindeki son görsel commit'i: 0ae800a7 — 29 PAKET 8: W2 6/6.
+
+ADET VE KAPSAM
+26 PNG teslim edildi: mockups/design-board.png + parts/ altındaki 25 yeni parça.
+Bu metin 27. teslim dosyasıdır; görsel adedine dahil değildir. Atlanan parça yok.
+Yalnız PAKET 8 uygulandı. Eski parçalar, GPT_PROMPTS.md ve diğer klasörler değiştirilmedi.
+W1 bir kez, W2 toplam 31 kez üretildi: toplam 32 görsel üretim denemesi.
+İkinci deneme yapılanlar: W2.4, W2.6, W2.8, W2.9, W2.10 ve W2.13.
+W2.8'de ilk deneme seçildi; ikinci denemenin alt kenarı perspektifli göründü.
+Diğer iki denemeli parçalarda ikinci deneme seçildi. Reddedilen denemeler commit edilmedi.
+
+ÖNEMLİ SONUÇLAR
+Teslim kusursuz geometri onayı değildir: dairesel parçalarda ölçülen eksen farkı %0,78–1,47.
+Kepenk mevcut piksel konumunda pencereyi TAM örtmüyor: %99,72485 örtüyor.
+Kepenk yalnız 5 px yukarı taşınırsa pencerenin ölçülen açıklığını %100 örtüyor.
+Bu taşıma dosyaya uygulanmadı. İki deneme sınırında daha iyi olan ikinci kepenk tutuldu.
+Bazı parçaların kenar boşlukları %5'in altında; aşağıda ayrı ayrı yazıldı.
+
+DOSYA LİSTESİ
+Yollar bu koleksiyonun assets/gpt/ klasörüne göredir. Bütün dosyalar gerçek PNG'dir.
+RGB = alfa kanalı yok, opak. RGBA = gerçek alfa kanalı var, sıfır alfa pikselleri var.
+Hedef piksel ölçüsü ile aracın doğal çıktısı farklı olduğunda yeniden boyutlandırma yapılmadı.
+
+No   Dosya                         Hedef             Gerçek           Biçim        Deneme
+W1   mockups/design-board.png       ~1908×824          1881×836         RGB/opak     1
+01   parts/sky_plate.png            1024×1536          1024×1536        RGB/opak     1
+02   parts/night_tile.png           1024×1024          1254×1254        RGB/opak     1
+03   parts/chart_tile.png           1024×1024          1254×1254        RGB/opak     1
+04   parts/arm_stand.png            1024×1536          1024×1536        RGBA         2
+05   parts/arm_ring_equator.png     1024×1024          1254×1254        RGBA         1
+06   parts/arm_ring_ecliptic.png    1024×1024          1254×1254        RGBA         2
+07   parts/arm_ring_lace.png        1024×1024          1254×1254        RGBA         1
+08   parts/sky_chart.png            1024×1024          1254×1254        RGBA         2
+09   parts/frame_dome.png           1024×1536          1024×1536        RGBA         2
+10   parts/dome_shutter.png         1024×1536          1024×1536        RGBA         2
+11   parts/frame_lens.png           1024×1024          1254×1254        RGBA         1
+12   parts/frame_plate.png          1536×1024          1536×1024        RGBA         1
+13   parts/card_dome.png            1024×1536          1024×1536        RGBA         2
+14   parts/divider_stars.png        1536×1024          1536×1024        RGBA         1
+15   parts/dial_face.png            1024×1024          1254×1254        RGBA         1
+16   parts/dial_pointer.png         1024×1024          1254×1254        RGBA         1
+17   parts/icon_toast.png           1024×1024          1254×1254        RGBA         1
+18   parts/icon_rings.png           1024×1024          1254×1254        RGBA         1
+19   parts/icon_dinner.png          1024×1024          1254×1254        RGBA         1
+20   parts/icon_moon.png            1024×1024          1254×1254        RGBA         1
+21   parts/icon_bowtie.png          1024×1024          1254×1254        RGBA         1
+22   parts/icon_compass.png         1024×1024          1254×1254        RGBA         1
+23   parts/accent_star.png          1024×1024          1254×1254        RGBA         1
+24   parts/accent_twinkle.png       1024×1024          1254×1254        RGBA         1
+25   parts/accent_comet.png         1024×1024          1254×1254        RGBA         1
+
+ALFA VE ÖLÇÜM YÖNTEMİ
+22 şeffaf parçanın tamamında gerçek RGBA ve alfa=0 bölgeleri doğrulandı; beyaz/dama zemin değil.
+Alfa aralığı: arm_stand, frame_dome, dome_shutter, frame_plate, card_dome için 0–254;
+divider_stars için 0–253; diğer RGBA dosyalarında 0–255. Bazı metal/kâğıt yüzeyleri bu nedenle
+tam 255 yerine çok hafif yarı saydamdır. Kenarların yumuşatma pikselleri ayrıca yarı saydamdır.
+Alfa=0 piksellerde RGB renk/doku/ışık bilgisi bulunabiliyor; bu bölgeler doğru alfa ile görünmez.
+Üretim önizlemesindeki RGB ışık lekesi tek başına görünür bir alfa hâlesi olarak sayılmadı.
+Tarayıcıda farklı zeminlere montaj testi yapılmadı; görünür hâle/gölge bulunmadığına dair ayrı
+bir tarayıcı testi iddiası yoktur.
+Nesne kutuları alfa>127, açıklık bağlantısı alfa<16 ile yalnız okunarak ölçüldü.
+Kutular (x0,y0,x1,y1); x1/y1 dahil değildir. Daire uydurmasında alfa>200 dış sınırı kullanıldı;
+pimler ve ayak gibi çıkıntılar için eksenlere yakın açılar dışlandı. Bu bir piksel düzeltmesi değildir.
+
+DAİRELER: ALFA KUTUSU GENİŞLİĞİ × YÜKSEKLİĞİ
+Dosya                    Bütün nesnenin kutusu   Halka/gövde eksen çapları    Eksen farkı
+arm_stand.png            891×1423                874,54 / 887,39 px           %1,469
+arm_ring_equator.png     1172×1110               1104,92 / 1113,69 px         %0,794
+arm_ring_ecliptic.png    1150×1139               1131,92 / 1146,35 px         %1,275
+arm_ring_lace.png        1121×1187               1104,53 / 1116,23 px         %1,059
+sky_chart.png            1207×1197               1191,65 / 1204,00 px         %1,036
+frame_lens.png           1185×1176               1170,14 / 1179,27 px         %0,780
+dial_face.png            1184×1171               1163,77 / 1179,72 px         %1,371
+Sonuç: karşıdan, daireye yakın çizildiler; matematiksel olarak kusursuz daire değiller.
+arm_stand'ın bütün kutusu ayak ve yıldızı, iç halkaların kutuları pimleri de kapsar;
+bu nedenle bu kutuları doğrudan halka elipsliği diye yorumlamak doğru değildir.
+Sabit meridyenin halka merkezi yaklaşık (511,87;604,89); hedef (512;645,12) idi.
+Kapalı iç alfa açıklıklarının kutuları: stand 769×756; equator 957×948;
+ecliptic 970×959; lace 929×922. Dördünde de merkez açıklığı dış zemine bağlı değil:
+halkalar kesintisiz kapanıyor ve ortada nesne/harita/küre yok.
+İlk ecliptic denemesinin yaklaşık %2,7 eksen farkı nedeniyle yeniden üretim yapıldı.
+
+FOTOĞRAF PENCERELERİ VE KEPENK
+frame_dome: kapalı alfa açıklığı (212,411,811,1280), 599×869; oran 0,6893.
+  Hedef ~4:5=0,8 idi; pencere hedefe göre daha dar/uzun. Alfa<16 açıklık 481.917 piksel;
+  bunun 462.859 pikseli tam alfa=0, kalanlar kenar yumuşatması. Çevre kapalı.
+frame_lens: kapalı alfa açıklığı (250,238,1001,980), 751×742; tam eş çap değil.
+  Çap yaklaşık tuvalin %60'ı; hedef %62. Çevre kapalı, cam/fotoğraf/yansıma yok.
+frame_plate: kapalı alfa açıklığı (178,207,1359,818), 1181×611; oran 1,9329.
+  Hedef ~16:9=1,7778 idi; pencere daha geniş. Çevre kapalı, içine fotoğraf konmadı.
+dome_shutter: (202,414,825,1323), 623×909. frame_dome ile aynı 1024×1536 tuval.
+  Düzenleme girdisi frame_dome idi: pencereyi kapatma ve çerçeveyi kaldırma istendi.
+  İlk deneme (148,195,876,1374) ile çok büyük kaldı; ikinci deneme seçildi.
+  İkinci deneme mevcut konumda 480.591 / 481.917 açıklık pikselini örtüyor: %99,72485.
+  Örtülmeyen 1.326 piksel kemerin üstünde, yaklaşık (307,411,704,492) kutusunda.
+  Önerilen montaj kayması: x=0, y=-5 px. Aynı ölçekte bu kaymayla 481.917 / 481.917,
+  yani %100 örtme ölçüldü. Kayıtlı PNG taşınmadı/kırpılmadı. Orta dikiş düz ve dikey;
+  iki pirinç topuz var, çerçeve/denizlik çizilmedi. Kaymasız hiza kontrolü bu yüzden tam geçmedi.
+
+DOSYA BAZINDA KONTROL VE SAPMALAR
+W1: Beş ekran tek sırada; kapalı/açık armiller, büyük harita, kubbe portresi, dört kadran,
+  mercekli story, atlas mekân çerçevesi, program ve kubbe formu var. Gerçek pano oranı
+  2,250:1; hedef yaklaşık 2,3:1. Demo yazılar görsele pişmiş referans yazılarıdır;
+  gerçek font dosyası/çalışan form değildir. Küçük yazı/ölçek çizimi birebir tipografik garanti değildir.
+W2.1 sky_plate: opak gece mavisi gravür kâğıdı; yaylar, yıldızlar ve çapraz Samanyolu var.
+  Orta bantta Samanyolu/gravür izleri istenen sakin düzeyden daha belirgin kalıyor.
+W2.2 night_tile: opak; fotoğraf gök yok. Yıldız ve yay gravürü istenen çok soluk düzeyden
+  daha belirgin. 2×2 görsel montaj testi yapılmadı; tam dikişsizlik onaylanmadı.
+  Sol/sağ kenar ortalama RGB farkı 5,001/255, üst/alt 4,586/255; iç komşu farkı 4,811/5,430.
+W2.3 chart_tile: opak fildişi; az altın pul var. Izgara istenen neredeyse görünmez düzeyden
+  daha belirgin. 2×2 montaj yapılmadı; yayların kenardan tam devamı garanti değil.
+  Sol/sağ kenar RGB farkı 3,342/255, üst/alt 5,730/255; iç komşu farkı 2,467/3,094.
+W2.4 arm_stand: tek sabit halka, yıldızlı tepelik, torna ayak, kıvrık ayak uçları; içi açık.
+  İlk deneme üst kenara daha yakındı. Seçilen ikinci denemede de üst boşluk %2,60,
+  alt %4,75: %5 kuralını karşılamıyor. Halka dış çapı yaklaşık %86–87 (hedef %80);
+  merkezi hedefin yaklaşık 40 px üstünde. Taban hedefteki %36 genişlikten daha geniş.
+  Eksen farkı yukarıda; kusursuz daire değil. Yeşil pas, rakam, iç halka veya küre görülmedi.
+W2.5 equator: çentikli tek halka; 3 ve 9 yönünde pimler, gerçek alfa açıklığı.
+  Pimler dahil sol/sağ boşluk %3,11/%3,43; üst %4,70. Küçük eksen farkı yukarıda.
+W2.6 ecliptic: ikinci deneme seçildi; yıldız dizisi ve 12/6 yönünde pimler var, burç yok.
+  Yıldızlar altı köşeden çok sekiz köşeli görünüyor; bant hedefteki %10'dan daha ince.
+  Eksen farkı %1,275 kaldı. Sol/üst/sağ boşluk %4,07/%4,15/%4,23: %5 altında.
+W2.7 lace: iki kapalı kenar arasında yıldız/kıvrım oyma; merkez gerçek alfa açıklığı.
+  Bazı küçük oyma delikleri tam alfa=0 yerine düşük alfa tutuyor, tamamen temiz boşluk değiller.
+  Örnek orta annülüste tam sıfır alfa yaklaşık %3; alfa<16 alanlar yarıçapa göre daha fazla.
+  Üst/alt pim dahil boşluk %2,31/%3,03; küçük eksen farkı var.
+W2.8 sky_chart: ilk deneme seçildi. Ortası boş, dört küçük yıldızlı altın çift çizgi var;
+  kartuş yaklaşık disk çapının %32'si (hedef %50). Çap tuvalin yaklaşık %96'sı (hedef %88).
+  Sol/üst/sağ/alt boşluk %1,75/%1,83/%1,99/%2,71. Küçük eksen farkı yukarıda.
+W2.9 frame_dome: ikinci deneme; pirinç, yıldızlı mine, kubbe kaburgaları, tepe yıldızı ve sill var.
+  Tüm kenar boşlukları %5 üstünde; asıl sapma pencerenin 4:5'ten dar olmasıdır (yukarıda).
+W2.10 dome_shutter: ikinci deneme; örtme ve 5 px yukarı kaydırma ihtiyacı yukarıda ayrıntılı.
+W2.11 frame_lens: tırtıllı dış halka, çentikli bilezik ve koyu iç kenar var; pencere açık/kapalı çevreli.
+  Dış çap yaklaşık %94 (hedef %88); boşluklar %2,71/%2,31/%2,79/%3,91, %5 altında.
+  Pencere ve dış halkanın küçük eksen farkları yukarıda.
+W2.12 frame_plate: dönüşümlü altın/fildişi ölçek çubukları, köşe yıldızları ve pirinç dış kenar var.
+  Pencere 1,933:1 ile hedeften geniş; sol/sağ boşluk %2,80/%2,73, %5 altında.
+W2.13 card_dome: ikinci deneme; yazısız, foto/form alanı çizilmemiş, altta üç yıldız var.
+  Orta bantta y=650,800,1000,1200 satırlarının yan alfa sınırları aynı: x=146..877.
+  Düz yan kurallar bu ölçümde tekrarlanabilir; kâğıt dokusu piksel piksel aynı değil.
+  Bütün nesne genişliği tuvalin %72,66'sı (hedef yaklaşık %84). Kenar boşluğu en az %5,40.
+W2.14 divider_stars: tek yatay ayırıcı, ortada beş yıldız ve noktalı bağlantı, uçlarda noktalar.
+  Genişlik %84,90 (hedef %72); merkez yıldız grubu da hedefteki %14'ten daha geniş.
+W2.15 dial_face: kâğıt merkez boş, çentik halkası var; ibre/rakam/pim yok.
+  Dış çap yaklaşık %94 (hedef %86); kenar boşlukları %2,63–3,91, %5 altında.
+  Tam eş eksenli daire değil; fark %1,371.
+W2.16 dial_pointer: dikey tek pirinç ibre, uçta yıldız, altta açık göz var; kadran yok.
+  Nesne yüksekliği %77,11 ve genişliği %17,62; hedef %46/%9'dan büyük.
+W2.17 icon_toast: iki kupa, temas noktasında yıldız; ayrı rozet/zemin yok.
+  Genişlik %75,60 (hedef yaklaşık %60); tarama ve açık renk dolgu prompt'taki az taramadan yoğun.
+W2.18 icon_rings: çentikli, birbirine geçen iki önden halka; ayrı rozet yok.
+  Genişlik %66,03; altın/açık renk tarama yoğun. İki küçük halka için ayrı geometri uydurması yapılmadı.
+W2.19 icon_dinner: önden yuvarlak tabak, çatal ve bıçak; ayrı rozet yok.
+  Genişlik %74,48; tabakta ilave yıldız dekoru ve yoğun açık renk dolgu/tarama var.
+W2.20 icon_moon: yüzsüz hilal ve iki yıldız; genişlik %62,76.
+  Yıldızlar hedefteki çok küçük yıldızlardan daha büyük, tarama yoğun.
+W2.21 icon_bowtie: tek klasik papyon; genişlik %76,79, hedef %60'tan büyük; yoğun tarama var.
+W2.22 icon_compass: yuvarlak cep pusulası, yıldız uçlu ibre ve çentikler; yön harfi/rakam yok.
+  Asma halkasıyla yükseklik %82,70; hedef yaklaşık %60'tan büyük. İçinde ek pusula gülü var.
+  Altı ikon aynı referans stilinde fakat çizgi/tarama ağırlıkları tam sayısal eşlenmiş değildir.
+  32–40 px gerçek website montajında okunurluk testi yapılmadı.
+W2.23 accent_star: tek sekiz köşeli altın yıldız. Genişlik %74,32, yükseklik %77,35;
+  hedef yaklaşık %45'ten büyük. Kenarlara değmiyor.
+W2.24 accent_twinkle: tek dört köşeli gümüş-beyaz yıldız; sıcak altınsı ince kenarlar var.
+  Genişlik %54,55, yükseklik %56,54; hedef yaklaşık %35'ten büyük. Kenarlara değmiyor.
+W2.25 accent_comet: baş sol altta, kuyruk sağ üstte; başta sekiz köşeli yıldız var.
+  Kuyruk hafif eğriliyor ve başa yakın çizgiler yoğunlaşıp birleşiyor; uçta ayrı çizgiler/aralar var.
+  x=950, y=200..649 örnek kuyruğunda 110 tam alfa=0 ve 82 alfa>127 piksel ölçüldü.
+  Sağ uç x~%93,78'e gidiyor (hedef ~%88); en küçük kenar boşluğu %6,22, kesilme yok.
+W2 görsellerinde gözle okunur harf, rakam, monogram, takımyıldız adı, burç simgesi veya filigran görülmedi.
+Otomatik OCR yapılmadı; yıldız/çentik sayısı için yeniden üretim yapılmadı.
+
+REFERANSLAR VE İŞ SIRASI
+Ana talimat PAKET 8 içindeki Instructions for GPT metniydi; ilk üretimde aynen gönderildi.
+İngilizce W1/W2 prompt blokları aynen kullanıldı. Çoklu ikon/vurgu promptlarına yalnız o çağrıda
+hangi dosyanın üretileceği eklendi; her çağrı tek dosya üretti. Yeniden denemelerde geometri/konum
+düzeltme notu eklendi. W1, ardından W2.1–W2.25 aynı sohbette sırayla üretildi.
+W1: yalnız photos/hero_portrait.jpg, photos/story_1.jpg, photos/venue.jpg eklendi.
+Her W2: mockups/design-board.png eklendi.
+W2.2: ayrıca parts/sky_plate.png.
+W2.5, W2.6, W2.7: ayrıca parts/arm_stand.png.
+W2.10: ayrıca parts/frame_dome.png; birinci düzenleme referansı çerçeveydi.
+W2.16: ayrıca parts/dial_face.png.
+W2.18–22: ayrıca parts/icon_toast.png; W2.17 yalnız panoyla üretildi.
+Eski PAKET 5R parçası, print görseli, tema görseli veya başka koleksiyon panosu referans verilmedi.
+
+KAYITLAR
+63b315d8 — 29 PAKET 8: W1
+2fe0e41a — 29 PAKET 8: W2 1/6 (W2.4 sonrası)
+dc306856 — 29 PAKET 8: W2 2/6 (W2.8 sonrası)
+d3d4addb — 29 PAKET 8: W2 3/6 (W2.13 sonrası)
+282a3fc9 — 29 PAKET 8: W2 4/6 (W2.16 sonrası)
+b3007adc — 29 PAKET 8: W2 5/6 (W2.22 sonrası)
+0ae800a7 — 29 PAKET 8: W2 6/6 (W2.25 sonrası)
+Bu yedi ara kayıt main'e push edildi. Her push öncesi git pull --rebase origin main yapıldı.
+Eşzamanlı main güncellemesi nedeniyle bir push reddedildi; yeniden pull/rebase ve normal push ile çözüldü.
+Son kayıt bu raporu içeren 29 PAKET 8: teslim commit'idir; main'e normal push yapılır.
+
+PİKSEL BÜTÜNLÜĞÜ
+26/26 teslim PNG'sinin SHA-256 özeti seçilen imagegen kaynak dosyasıyla birebir aynı doğrulandı.
+Kodla hiçbir piksel değiştirilmedi: yeniden boyutlandırma, kırpma, boyama, renk değiştirme,
+arka plan silme, alfa değiştirme veya kepenk kaydırma yapılmadı; dosyalar yalnız kopyalandı.
+Kontrol betikleri yalnız piksel/başlık verilerini okudu; hiçbir görsel kaydetmedi.
+gpt_yerlestir.py, build_images.py, tema build'i veya platform montajı çalıştırılmadı.
