@@ -1,0 +1,39 @@
+Crimson Rose Atelier — PAKET 9 (W4.1–W4.13)
+Üretim: 24 Ekim 2026 · GPT imagegen · 13 ayrı PNG
+Kaynak: main, assets/gpt/GPT_PROMPTS.md → PAKET 9.
+Dosyalar Kaydet satırındaki ad ve yollardadır; tamamı gerçek alfa kanallı RGBA PNG.
+
+Parça   Dosya                 Gerçek ölçü     Prompt ölçüsü
+W4.1    oval_frame.png        1122×1402      1024×1280
+W4.2    icon_rings.png        1254×1254       512×512
+W4.3    icon_toast.png        1254×1254       512×512
+W4.4    icon_dinner.png       1254×1254       512×512
+W4.5    icon_dance.png        1254×1254       512×512
+W4.6    icon_cake.png         1254×1254       512×512
+W4.7    icon_sparkle.png      1254×1254       512×512
+W4.8    icon_pin.png          1254×1254       512×512
+W4.9    icon_dress.png        1254×1254       512×512
+W4.10   photo_corner.png      1254×1254       512×512
+W4.11   gold_flourish.png     2172×724       1536×512
+W4.12   ribbon_bow.png        1254×1254      1024×1024
+W4.13   rose_bud.png          1254×1254       512×512
+
+Referanslar: mockups/design-board.png, decor/seal.png ve decor/rose-branch.png.
+Instructions for GPT bloğundaki parts/gold_sprig.png ve parts/ribbon.png güncel
+main'de yoktu. Altın için mevcut mühür, ipek için pano ve W3.7'nin malzeme/renk
+tanımı kullanıldı. W4.3–W4.9 ikonlarında W4.2 ayrıca stil referansı verildi.
+
+Farklar: imagegen yukarıdaki doğal çözünürlükleri döndürdü; dosyalar yeniden
+örneklenmedi. Kare ve 3:1 oranları tam, oval tuvali 4:5'e yaklaşık (%0,04 fark).
+Oval iki denemede üretildi; ikinci seçildi. Çerçevenin görünür üst/alt boşluğu
+yaklaşık %4,6/%4,8 (genel %6 şartından dar); fiyongun yan boşlukları %5,9/%5,6.
+Süs çizgisi yüksekliği tuvalin yaklaşık %18,6'sı (prompt yaklaşık %12).
+Kabartmalı ikon çizgilerinin kalınlığı ve süs çizgisinin simetrisi yaklaşık.
+icon_dinner, icon_cake, photo_corner, gold_flourish ve ribbon_bow dosyalarının
+bazı tuval kenarı piksellerinde en çok 1/255 alfa var; görünür nesneler kesilmiyor.
+
+Kontrol: 13/13 hedef dosya açıldı; PNG/RGBA, alfa 0–255, şeffaf köşeler ve
+kenardan kesilmeyen görünür nesneler doğrulandı. Ovalin içi alfa=0, halka kapalı;
+boş pencerenin alfa=0 kutusu (175,193)–(948,1213), sağ/alt sınırlar hariç.
+Gözle: metin/logo/filigran yok; köşelik sol üst dik açılı; fiyonk iki ilmek ve
+V kesimli iki kuyruk; gonca tek ve iki yapraklı. Site entegrasyonu yapılmadı.
