@@ -554,8 +554,9 @@ test('search field: label, attributes, × and the group headings follow the resu
   // a group without results hides; the counts follow
   const sections = findAll(bar.panel, (e) => e.tag === 'section');
   const counts = findAll(bar.panel, (e) => e.className === 'pdb-count').map((c) => c.textContent);
-  assert.equal(bar.shown().length, 4);
-  assert.deepEqual(counts, ['2', '2']);
+  // 21 Crimson Rose Atelier is a velvet design too since its v2 (2026-10-24)
+  assert.equal(bar.shown().length, 5);
+  assert.deepEqual(counts, ['2', '3']);
   bar.type('07');
   assert.deepEqual(sections.map((x) => bar.visible(x)), [true, false]);
   assert.equal(findAll(bar.panel, (e) => e.className === 'pdb-count')[0].textContent, '1');
@@ -592,7 +593,7 @@ test('search: nothing found = a friendly message and "Show all designs"; the cou
   assert.equal(status.textContent, 'No designs match "zzz unicorns"');
   bar.type('velvet');
   bar.flush();
-  assert.equal(status.textContent, 'Designs found: 4');
+  assert.equal(status.textContent, 'Designs found: 5');
   bar.type('zzz');
   const all = bar.by('pdb-all');
   assert.equal(all.tag, 'button');
