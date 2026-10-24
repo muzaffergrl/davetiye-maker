@@ -6,7 +6,10 @@
    Opening (docs/11 §7.3, kapak): crack — the seal is pressed and cracks in two, the halves fall away · flap — the flap
    turns up on its hinge in 3D, its inside showing · draw — the card is drawn out of the pocket, rose first · reveal —
    it lifts free and flies to the guest while the envelope sinks out of focus · bloom — it settles, a little closer ·
-   go — home (view transition invite-card). The CSS keyframes in site.css (".is-opening …") use the same numbers. */
+   go — home: the card's photograph flies into the oval portrait on the first screen (view transition invite-card, named on the photograph).
+   Before the tap the envelope lies tilted at the foot of the screen (GPT design board); the tap straightens it and
+   lifts it into the middle (CSS transition, done before the card is drawn). The CSS keyframes in site.css
+   (".is-opening …") use the same numbers. */
 const MOTION = {
   storage: { opened: 'invite:opened', arrive: 'invite:arrive' },   // + ':<slug>'; the <head> scripts use the same keys
   envelope: {
@@ -22,9 +25,8 @@ const MOTION = {
     fadeOut: 350            // without a cross-document view transition
   },
   scenes: {                 // scene → [[step, delay ms], …] — in order, never all at once
-    'home-hero': [['kicker', 0], ['card', 120]],
-    'home-venue': [['venue', 0], ['cue', 380]],
-    'home-epigraph': [['sprig', 0], ['line', 220]],
+    'home-hero': [['kicker', 0], ['names', 140], ['request', 620]],
+    'home-intro': [['photo', 0], ['line', 300], ['date', 560], ['text', 900], ['cue', 1300]],
     'home-invite': [['card', 0], ['host', 350], ['names', 560], ['request', 900], ['date', 1150], ['venue', 1420], ['reply', 1700]],
     'home-count': [['count', 0], ['calendar', 420]],
     'home-teasers': [['head', 0], ['fan', 260], ['captions', 900], ['link', 1150]],
@@ -37,7 +39,7 @@ const MOTION = {
     'details-card': [['title', 0], ['list', 220]],
     'details-venue': [['photo', 0], ['copy', 600]],
     'details-notes': [['note', 0]],
-    'rsvp-card': [['rose', 0], ['title', 150], ['line', 520], ['cta', 900]],
+    'rsvp-card': [['title', 0], ['line', 380], ['cta', 760]],
     'rsvp-closing': [['rose', 0], ['names', 300], ['links', 650]]
   },
   stagger: 200,
@@ -176,7 +178,7 @@ function petals(count, from) {
 function initEnvelope() {
   const stage = $('.stage');
   if (!stage) return;
-  const env = $('.env'), well = $('.card-well'), card = $('.env-card'), E = MOTION.envelope;
+  const env = $('.env'), well = $('.card-well'), card = $('.env-card'), oval = $('.card-oval', card), E = MOTION.envelope;
   if (/[?&]replay=1(&|$)/.test(location.search)) root.classList.remove('is-opened');
   let state = root.classList.contains('is-opened') ? 'opened' : 'closed';
   const timers = [], anims = [];
@@ -195,7 +197,7 @@ function initEnvelope() {
   }
   function go(withCard) {
     store(OPENED, '1');
-    if (withCard) { store(ARRIVE, '1'); card.style.viewTransitionName = 'invite-card'; } else card.style.viewTransitionName = 'none';
+    if (withCard) { store(ARRIVE, '1'); oval.style.viewTransitionName = 'invite-card'; } else oval.style.viewTransitionName = 'none';
     if (crossDocVT || reduce || !canAnimate) { location.href = PAGES.home; return; }
     $('.opening').animate([{ opacity: 1 }, { opacity: 0 }], { duration: E.fadeOut, fill: 'forwards' });
     setTimeout(() => { location.href = PAGES.home; }, E.fadeOut);
@@ -235,7 +237,7 @@ function initEnvelope() {
     anims.splice(0).forEach((a) => a.cancel());
     root.classList.remove('is-opening', 'is-opened', 'is-reveal');
     well.classList.remove('is-free');
-    card.style.viewTransitionName = '';
+    oval.style.viewTransitionName = '';
     state = 'closed';
   }
   stage.addEventListener('click', () => { if (state === 'closed') play(); else if (state === 'opened') go(true); });
@@ -248,10 +250,13 @@ function initEnvelope() {
   });
 }
 
-/* -- home: a few petals settle as the card lands */
+/* -- home: a few petals fall from the portrait as the photograph lands in it */
 function initHome() {
   if (!$('.page-home') || !root.classList.contains('from-envelope')) return;
-  setTimeout(() => { if (petals(MOTION.petals.arrive, null)) sfx('petal'); }, 650);
+  setTimeout(() => {
+    const r = $('.hero-portrait')?.getBoundingClientRect();
+    if (petals(MOTION.petals.arrive, r ? { x: r.left + r.width / 2, y: r.top + r.height * 0.8 } : null)) sfx('petal');
+  }, 900);
 }
 
 /* -- the album: leaves turn like a real book (drag from the right edge, buttons, arrows, thumbnails) */

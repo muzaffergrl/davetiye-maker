@@ -1,8 +1,10 @@
 <!doctype html>
-<!-- Crimson Rose Atelier · page 2 — home (/<slug>/home). The card that rose from the envelope lands here (view transition
-     invite-card): the deckled ivory card on the candlelit oxblood, its oval portrait (gold frame when the PAKET 8 part
-     exists), "Our wedding", the names, the day; the venue beneath it. As the guest scrolls, the card lies back like a
-     card set down on a table and the ivory page slides over it. Then: a handwritten line that writes itself; the formal
+<!-- Crimson Rose Atelier · page 2 — home (/<slug>/home). The first screen follows the GPT design board
+     (assets/gpt/mockups/design-board.png): on the candlelit oxblood the hosts' line, the names in Didone capitals with a
+     gold script ampersand and the request; a torn paper edge (PAKET 8) gives way to ivory, and across it the oval
+     portrait (gold frame when the PAKET 8 part exists) with a crimson rose at its foot. The photograph in the envelope's
+     card flies into this oval (view transition invite-card, on the photograph). Beside it "Our wedding", the day, the place and the
+     couple's line. Then: the formal
      invitation on the second GPT card (3-slice: its roses stay in their corners, the paper between grows with the text);
      a countdown whose figures roll like an odometer; the three album prints fanned like photographs on a table, which
      spread when they come into view; "Join us in …" over the venue photograph, which opens like an iris; the signature.
@@ -22,10 +24,10 @@
 <meta property="og:description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {date|date-long}" content="Thank you">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Corinthia&family=Manrope:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Corinthia&display=swap">
 <style>/* names fallback: scripts/font-fallback.ts */
-@font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:95.9%;ascent-override:96%;descent-override:30.2%;line-gap-override:0%}
-@font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:94%;ascent-override:97.9%;descent-override:30.9%;line-gap-override:0%}</style>
+@font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:100.2%;ascent-override:112.7%;descent-override:39.9%;line-gap-override:0%}
+@font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:98.3%;ascent-override:115%;descent-override:40.7%;line-gap-override:0%}</style>
 <link rel="stylesheet" href="site.css">
 <link rel="stylesheet" href="parts.css">
 <link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
@@ -38,42 +40,37 @@
 <main>
 <section class="hero dark">
   <div class="atmos" aria-hidden="true"><span class="velvet"></span><span class="glow"></span></div>
-  <img class="rose hero-rose" src="img/rose-420.webp" srcset="img/rose-420.webp 420w, img/rose-800.webp 800w" sizes="(min-width: 700px) 420px, 66vw" alt="" aria-hidden="true">
   <div class="hero-top" data-scene="home-hero">
-  <p class="eyebrow kicker" data-if="!thank_you_on" data-copy="envelope_kicker" data-step="kicker">You are invited</p>
-  <p class="eyebrow kicker" data-if="thank_you_on" data-copy="ty_kicker" data-step="kicker">With love and thanks</p>
-  <div class="hero-stage">
-    <div class="hero-card card-portrait" data-step="card">
-      <img class="card-art" src="img/card_portrait-520.webp" srcset="img/card_portrait-520.webp 520w, img/card_portrait-860.webp 860w" sizes="(min-width: 700px) 400px, 84vw" alt="" fetchpriority="high">
-      <div class="card-body">
-        <div class="framed">
-          <div class="card-oval photo-slot" data-slot="hero_portrait" data-if="!thank_you_on">
-            <img data-photo="hero_portrait" src="img/ph_portrait-640.webp" alt="" data-attr-alt="Photo of {name_display}" sizes="(min-width: 700px) 160px, 34vw" fetchpriority="high">
-            <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
-          </div>
-          <div class="card-oval" data-if="thank_you_on thank_you.photo"><img data-field="thank_you.photo" src="img/ph_portrait-640.webp" alt="" data-attr-alt="Photo of {name_display}" sizes="(min-width: 700px) 160px, 34vw"></div>
-          <div class="card-oval ty-decor" data-if="thank_you_on !thank_you.photo"><img src="img/rose-420.webp" alt=""></div>
-          <span class="oval-frame" aria-hidden="true"></span>
-        </div>
-        <p class="script card-line" data-copy="card_line">Our wedding</p>
-        <h1 class="names card-names" data-fit="2"><span data-field="partners.0.display_name" class="first-name"></span> <span class="amp">&amp;</span> <span data-field="partners.1.display_name" class="second-name"></span></h1>
-        <p class="eyebrow card-date"><span data-field="date" data-format="weekday"></span><span aria-hidden="true">, </span><span data-field="date"></span></p>
-      </div>
-    </div>
-  </div>
-  </div>
-  <div class="hero-venue" data-scene="home-venue">
-    <p class="venue-line" data-field="venue.name" data-step="venue"></p>
-    <p class="eyebrow" data-field="venue.city_region" data-step="venue" data-i="1"></p>
-  <p class="cue" data-step="cue"><a class="textlink" href="#invitation"><span data-copy="invite_cue">The invitation</span> <span class="cue-line" aria-hidden="true"></span></a></p>
+    <p class="eyebrow kicker" data-if="host_line !thank_you_on" data-field="host_line" data-step="kicker"></p>
+    <p class="eyebrow kicker" data-if="!host_line !thank_you_on" data-copy="envelope_kicker" data-step="kicker">You are invited</p>
+    <p class="eyebrow kicker" data-if="thank_you_on" data-copy="ty_kicker" data-step="kicker">With love and thanks</p>
+    <h1 class="names hero-names" data-fit="3.4" data-step="names"><span data-field="partners.0.display_name" class="first-name"></span><span class="amp">&amp;</span><span data-field="partners.1.display_name" class="second-name"></span></h1>
+    <p class="eyebrow hero-request" data-if="!thank_you_on" data-copy="invite_request" data-step="request">invite you to celebrate their wedding</p>
   </div>
 </section>
 
 <div class="sheet">
 <span class="torn" aria-hidden="true"></span>
-<section class="epigraph" data-scene="home-epigraph">
-  <span class="sprig" aria-hidden="true" data-step="sprig"></span>
-  <p class="script write" data-copy="home_intro" data-step="line">A day for love, a lifetime of memories.</p>
+<section class="intro" data-scene="home-intro">
+  <div class="hero-portrait" data-step="photo">
+    <div class="framed">
+      <div class="card-oval photo-slot" data-slot="hero_portrait" data-if="!thank_you_on">
+        <img data-photo="hero_portrait" src="img/ph_portrait-640.webp" alt="" data-attr-alt="Photo of {name_display}" sizes="(min-width: 700px) 300px, 46vw" fetchpriority="high">
+        <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
+      </div>
+      <div class="card-oval" data-if="thank_you_on thank_you.photo"><img data-field="thank_you.photo" src="img/ph_portrait-640.webp" alt="" data-attr-alt="Photo of {name_display}" sizes="(min-width: 700px) 300px, 46vw"></div>
+      <div class="card-oval ty-decor" data-if="thank_you_on !thank_you.photo"><img src="img/rose-420.webp" alt=""></div>
+      <span class="oval-frame" aria-hidden="true"></span>
+    </div>
+    <span class="bloom" aria-hidden="true"></span>
+  </div>
+  <div class="intro-col">
+    <p class="script card-line" data-copy="card_line" data-step="line">Our wedding</p>
+    <p class="eyebrow" data-step="date"><span data-field="date"></span></p>
+    <p class="eyebrow rule-after" data-field="venue.city_region" data-step="date" data-i="1"></p>
+    <p class="intro-copy" data-copy="home_intro" data-step="text">A day for love, a lifetime of memories.</p>
+  </div>
+  <p class="cue" data-step="cue"><a class="textlink" href="#invitation"><span data-copy="invite_cue">The invitation</span> <span class="cue-line" aria-hidden="true"></span></a></p>
 </section>
 
 <section class="invitation" id="invitation" data-scene="home-invite">

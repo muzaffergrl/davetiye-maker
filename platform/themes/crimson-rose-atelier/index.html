@@ -1,12 +1,14 @@
 <!doctype html>
-<!-- Crimson Rose Atelier · page 1 — the atelier letter (/<slug>). A candlelit oxblood room (velvet + satin when the
-     PAKET 8 parts exist, parts.css), crimson roses in two corners, the names in engraved capitals and the burgundy
-     envelope with its gold botanical wax seal, which catches the light now and then. The envelope leans towards the
-     guest's finger. Opening (docs/11 §7.3, kapak; numbers = MOTION.envelope in site.js): the seal is pressed and cracks
+<!-- Crimson Rose Atelier · page 1 — the atelier letter (/<slug>). Composed after the GPT design board
+     (assets/gpt/mockups/design-board.png): a candlelit oxblood room (velvet + satin when the PAKET 8 parts exist,
+     parts.css), crimson roses in two corners, the names in Didone capitals with a gold script ampersand between gold
+     rules, and the burgundy envelope lying tilted at the foot of the screen, running off its edge, its gold botanical
+     wax seal catching the light now and then. The envelope leans towards the guest's finger; the tap straightens it and
+     lifts it into the middle. Opening (docs/11 §7.3, kapak; numbers = MOTION.envelope in site.js): the seal is pressed and cracks
      in two, the halves fall left and right (crack) → the heavy flap turns up on its hinge in 3D, its inside showing
      (flap) → the deckled card is drawn out of the pocket, its rose first (draw) → it lifts free into the candlelight
      while the envelope sinks out of focus (reveal) → it comes forward to the guest (bloom) → home (view transition
-     invite-card onto the home hero card). Every piece is a GPT part cut by build_images.py; seal halves, flap faces,
+     invite-card on the photograph: the card's photograph flies into the oval portrait of home). Every piece is a GPT part cut by build_images.py; seal halves, flap faces,
      pocket and card move on their own. Personal text: none — [data-field] / [data-text] / [data-photo] are filled on
      the server. Thank-you mode (G075): the same opening; the card carries the thank-you title and the date, its oval
      the thank-you photo or — without one — the rose. Design texts: data-copy (G068, theme.json "copy"). -->
@@ -24,10 +26,10 @@
 <meta property="og:description" data-if="thank_you_on" data-attr-content="{thank_you_title} · {date|date-long}" content="Thank you">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Corinthia&family=Manrope:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Corinthia&display=swap">
 <style>/* names fallback: scripts/font-fallback.ts */
-@font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:95.9%;ascent-override:96%;descent-override:30.2%;line-gap-override:0%}
-@font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:94%;ascent-override:97.9%;descent-override:30.9%;line-gap-override:0%}</style>
+@font-face{font-family:fb1;src:local(Times New Roman),local(Liberation Serif),local(Tinos);size-adjust:100.2%;ascent-override:112.7%;descent-override:39.9%;line-gap-override:0%}
+@font-face{font-family:fb2;src:local(Noto Serif),local(Droid Serif);size-adjust:98.3%;ascent-override:115%;descent-override:40.7%;line-gap-override:0%}</style>
 <link rel="stylesheet" href="site.css">
 <link rel="stylesheet" href="parts.css">
 <link rel="stylesheet" href="thank-you.css" data-if="thank_you_on">
@@ -83,7 +85,7 @@
       </span>
       <span class="env-pocket" aria-hidden="true"><img src="img/env_closed-720.webp" srcset="img/env_closed-720.webp 720w, img/env_closed-1100.webp 1100w" sizes="min(92vw, 560px)" alt="" fetchpriority="high"></span>
       <span class="env-flap" aria-hidden="true"><span class="flap-face"><img src="img/env_closed-720.webp" srcset="img/env_closed-720.webp 720w, img/env_closed-1100.webp 1100w" sizes="min(92vw, 560px)" alt=""></span><span class="flap-back"><img src="img/env_closed-720.webp" srcset="img/env_closed-720.webp 720w, img/env_closed-1100.webp 1100w" sizes="min(92vw, 560px)" alt=""></span></span>
-      <span class="env-seal" aria-hidden="true"><span class="seal-half l"><img src="img/seal-160.webp" srcset="img/seal-160.webp 160w, img/seal-320.webp 320w" sizes="18vw" alt=""></span><span class="seal-half r"><img src="img/seal-160.webp" srcset="img/seal-160.webp 160w, img/seal-320.webp 320w" sizes="18vw" alt=""></span><span class="seal-glint"></span></span>
+      <span class="env-seal" aria-hidden="true"><span class="seal-half l"><img src="img/seal-160.webp" srcset="img/seal-160.webp 160w, img/seal-320.webp 320w" sizes="18vw" alt=""></span><span class="seal-half r"><img src="img/seal-160.webp" srcset="img/seal-160.webp 160w, img/seal-320.webp 320w" sizes="18vw" alt=""></span><span class="seal-glint"></span><span class="sprig seal-sprig"></span></span>
     </span>
   </div>
   <div class="opening-actions">

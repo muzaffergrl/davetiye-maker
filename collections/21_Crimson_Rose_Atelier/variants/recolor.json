@@ -108,6 +108,62 @@
     "venue": {
       "recolor": "keep",
       "why": "photo: never recoloured"
+    },
+    "velvet": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "velvet_wide": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "satin": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "torn_edge": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "ribbon": {
+      "recolor": "auto",
+      "group": "envelope"
+    },
+    "petal_1": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "petal_2": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "petal_3": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "petal_4": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "petal_5": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "rose_corner": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "rose_bloom": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "sprig": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "album_page": {
+      "recolor": "keep",
+      "why": "plain ivory paper: no palette colour"
     }
   },
   "print": {

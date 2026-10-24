@@ -111,13 +111,13 @@ def optional_parts(manifest: dict) -> list[str]:
 
     if have("velvet.png"):
         im = Image.open(P / "velvet.png").convert("RGB")
-        tb.webp(im, "velvet", [720, 1080], 80, manifest, out=OUT)
-        rules.append(":root{--cra-velvet:url(img/velvet-720.webp);--cra-velvet-2x:url(img/velvet-1080.webp)}")
+        tb.webp(im, "velvet", [720, 1024], 80, manifest, out=OUT)
+        rules.append(":root{--cra-velvet:url(img/velvet-720.webp);--cra-velvet-2x:url(img/velvet-1024.webp)}.velvet{display:block}")
         found.append("velvet")
     if have("velvet_wide.png"):
         im = Image.open(P / "velvet_wide.png").convert("RGB")
-        tb.webp(im, "velvet_wide", [1600], 78, manifest, out=OUT)
-        rules.append("@media(min-width:700px){:root{--cra-velvet:url(img/velvet_wide-1600.webp);--cra-velvet-2x:url(img/velvet_wide-1600.webp)}}")
+        tb.webp(im, "velvet_wide", [1536], 78, manifest, out=OUT)
+        rules.append("@media(min-width:700px){:root{--cra-velvet:url(img/velvet_wide-1536.webp);--cra-velvet-2x:url(img/velvet_wide-1536.webp)}}")
         found.append("velvet_wide")
     if have("satin_drape.png"):
         im = trim(rgba(P / "satin_drape.png"))
@@ -140,6 +140,15 @@ def optional_parts(manifest: dict) -> list[str]:
         im = rgba(P / "oval_frame.png")
         arr = np.asarray(im).astype(int)
         green = (arr[..., 1] > 200) & (arr[..., 0] < 90) & (arr[..., 2] < 90) & (arr[..., 3] > 200)
+        if green.sum() <= 1000:
+            # PAKET 9 W4.1: the window may come transparent instead of green — then it is the transparent region
+            # enclosed by the (closed) frame ring: the clear component under the centre that does not touch the edge
+            from scipy import ndimage
+            lab, _ = ndimage.label(arr[..., 3] <= 40)
+            c = lab[arr.shape[0] // 2, arr.shape[1] // 2]
+            edge = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]])))
+            if c and c not in edge:
+                green = lab == c
         if green.sum() > 1000:
             ys, xs = np.where(green)
             x0, x1, y0, y1 = xs.min(), xs.max() + 1, ys.min(), ys.max() + 1
@@ -157,12 +166,28 @@ def optional_parts(manifest: dict) -> list[str]:
                          f".framed{{--fx:{pct(x0 / W)};--fy:{pct(y0 / H)};--fw:{pct((x1 - x0) / W)};--fh:{pct((y1 - y0) / H)};"
                          f"aspect-ratio:{W}/{H}}}"
                          ".framed>.photo-slot{-webkit-mask:url(img/mask_oval.png) 0 0/100% 100% no-repeat;"
-                         "mask:url(img/mask_oval.png) 0 0/100% 100% no-repeat;border-radius:0}")
+                         "mask:url(img/mask_oval.png) 0 0/100% 100% no-repeat;border-radius:0;box-shadow:none}")
             found.append("oval_frame")
     if have("torn_edge.png"):
+        # GPT drew the oxblood paper torn open over ivory: opaque paper above a ragged tear with its white fibres,
+        # nothing below. Kept: a strip of paper above the highest point of the tear, the tear and its fibres; the top
+        # of the strip fades out so it melts into the room's dark (cut + mask only). The sheet's straight top edge then
+        # sits under opaque paper, just above the tear, and the ivory sheet shows through below it.
         im = rgba(P / "torn_edge.png")
-        tb.webp(im, "torn_edge", [1200], 84, manifest, out=OUT)
-        rules.append(f".torn{{display:block;aspect-ratio:{im.width}/{im.height};background:url(img/torn_edge-1200.webp) 50% 0/100% 100% no-repeat}}")
+        al = np.asarray(im)[..., 3]
+        H, W = al.shape
+        gone = al <= 128
+        tear = np.array([int(np.argmax(gone[:, x])) if gone[:, x].any() else H for x in range(W)])
+        hi, lo = int(np.percentile(tear, 1)), int(np.percentile(tear, 99))
+        end = min(H, int(np.flatnonzero((al > 8).any(axis=1)).max()) + 2)
+        top = max(0, hi - max(60, int(1.3 * (lo - hi))))
+        strip = np.asarray(im.crop((0, top, W, end))).copy()
+        h = strip.shape[0]
+        ramp = np.clip(np.arange(h) / max(1, (hi - top) * .75), 0, 1) ** 1.5
+        strip[..., 3] = (strip[..., 3] * ramp[:, None]).astype(np.uint8)
+        tb.webp(Image.fromarray(strip, "RGBA"), "torn_edge", [1200], 84, manifest, out=OUT)
+        rules.append(f".torn{{display:block;aspect-ratio:{W}/{h};background:url(img/torn_edge-1200.webp) 50% 0/100% 100% no-repeat}}"
+                     f".sheet>.torn{{bottom:auto;top:0;margin:0;translate:0 -{pct((hi - top - 8) / h)}}}.sheet{{box-shadow:none}}")
         found.append("torn_edge")
     if have("ribbon.png"):
         im = trim(rgba(P / "ribbon.png"))
@@ -177,8 +202,11 @@ def optional_parts(manifest: dict) -> list[str]:
     if have("album_page.png"):
         im = trim(rgba(P / "album_page.png"))
         tb.webp(im, "album_page", [720], 82, manifest, out=OUT)
-        rules.append(f".leaf-face{{background:url(img/album_page-720.webp) 0 0/100% 100% no-repeat}}"
-                     f".book{{--page-ratio:{im.width}/{im.height}}}")
+        # the album becomes a real book of deckled pages (binding on the left): the leaves take the page's own shape
+        r = f"{im.width}/{im.height}"
+        rules.append(f".leaf-face{{background:url(img/album_page-720.webp) 0 0/100% 100% no-repeat;padding:12% 10% 12% 15%;aspect-ratio:{r}}}"
+                     f".js .book{{aspect-ratio:{r}}}"
+                     ".js .album-leaf::after,.leaf-shade{-webkit-mask-image:url(img/album_page-720.webp);mask-image:url(img/album_page-720.webp)}")
         found.append("album_page")
     if have("rose_corner.png"):
         im = trim(rgba(P / "rose_corner.png"))
@@ -187,9 +215,43 @@ def optional_parts(manifest: dict) -> list[str]:
         found.append("rose_corner")
     if have("rose_bloom.png"):
         im = trim(rgba(P / "rose_bloom.png"))
-        tb.webp(im, "rose_bloom", [200], 86, manifest, out=OUT)
-        rules.append(".bloom{display:block;background:url(img/rose_bloom-200.webp) 50%/contain no-repeat}")
+        tb.webp(im, "rose_bloom", [200, 400], 86, manifest, out=OUT)
+        rules.append(".bloom{display:block;background:url(img/rose_bloom-200.webp) 50%/contain no-repeat;"
+                     "background-image:image-set(url(img/rose_bloom-200.webp) 1x,url(img/rose_bloom-400.webp) 2x)}")
         found.append("rose_bloom")
+    # PAKET 9 (W4.x): programme icons, album photo corner, gold flourish, satin bow, rosebud
+    icons = []
+    for key in ("rings", "toast", "dinner", "dance", "cake", "sparkle", "pin", "dress"):
+        if have(f"icon_{key}.png"):
+            im = trim(rgba(P / f"icon_{key}.png"))
+            side = max(im.size)
+            sq = Image.new("RGBA", (side, side))
+            sq.paste(im, ((side - im.width) // 2, (side - im.height) // 2))
+            tb.webp(sq, f"icon_{key}", [96], 88, manifest, out=OUT)
+            icons.append(f"--cra-icon-{key}:url(img/icon_{key}-96.webp)")
+    if icons:
+        rules.append(":root{" + ";".join(icons) + "}.sched-icon{display:block}")
+        found.append(f"icons×{len(icons)}")
+    if have("photo_corner.png"):
+        im = trim(rgba(P / "photo_corner.png"))
+        tb.webp(im, "photo_corner", [120], 88, manifest, out=OUT)
+        rules.append(f":root{{--cra-corner:url(img/photo_corner-120.webp)}}.corners{{display:block}}")
+        found.append("photo_corner")
+    if have("gold_flourish.png"):
+        im = trim(rgba(P / "gold_flourish.png"))
+        tb.webp(im, "flourish", [600], 86, manifest, out=OUT)
+        rules.append(f".flourish{{display:block;aspect-ratio:{im.width}/{im.height};background:url(img/flourish-600.webp) 50%/contain no-repeat}}")
+        found.append("gold_flourish")
+    if have("ribbon_bow.png"):
+        im = trim(rgba(P / "ribbon_bow.png"))
+        tb.webp(im, "bow", [400], 86, manifest, out=OUT)
+        rules.append(f".bow{{display:block;aspect-ratio:{im.width}/{im.height};background:url(img/bow-400.webp) 50%/contain no-repeat}}")
+        found.append("ribbon_bow")
+    if have("rose_bud.png"):
+        im = trim(rgba(P / "rose_bud.png"))
+        tb.webp(im, "rose_bud", [200], 86, manifest, out=OUT)
+        rules.append(f".bud{{display:block;aspect-ratio:{im.width}/{im.height};background:url(img/rose_bud-200.webp) 50%/contain no-repeat}}")
+        found.append("rose_bud")
     head = ("/* Crimson Rose Atelier — GENERATED by build_images.py (do not edit): the PAKET 8 GPT parts (GPT_PROMPTS.md W3.x)\n"
             "   that exist in collections/21_Crimson_Rose_Atelier/assets/gpt/parts/, with the boxes measured on them. A part that\n"
             "   is not there has no rule: the page keeps its site.css look. */\n")

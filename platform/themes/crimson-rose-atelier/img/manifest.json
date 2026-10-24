@@ -268,7 +268,240 @@
    "aspect": "1778/1000"
   }
  },
- "paket8": [],
+ "velvet": {
+  "src_size": [
+   1024,
+   1536
+  ],
+  "ratio": 0.66667,
+  "files": [
+   {
+    "file": "velvet-720.webp",
+    "w": 720,
+    "h": 1080,
+    "bytes": 70352
+   },
+   {
+    "file": "velvet-1024.webp",
+    "w": 1024,
+    "h": 1536,
+    "bytes": 159514
+   }
+  ]
+ },
+ "velvet_wide": {
+  "src_size": [
+   1536,
+   1024
+  ],
+  "ratio": 1.5,
+  "files": [
+   {
+    "file": "velvet_wide-1536.webp",
+    "w": 1536,
+    "h": 1024,
+    "bytes": 123520
+   }
+  ]
+ },
+ "satin": {
+  "src_size": [
+   1963,
+   367
+  ],
+  "ratio": 5.34877,
+  "files": [
+   {
+    "file": "satin-1200.webp",
+    "w": 1200,
+    "h": 224,
+    "bytes": 39086
+   }
+  ]
+ },
+ "petal_1": {
+  "src_size": [
+   848,
+   848
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "petal_1-96.webp",
+    "w": 96,
+    "h": 96,
+    "bytes": 3316
+   }
+  ]
+ },
+ "petal_2": {
+  "src_size": [
+   920,
+   920
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "petal_2-96.webp",
+    "w": 96,
+    "h": 96,
+    "bytes": 3228
+   }
+  ]
+ },
+ "petal_3": {
+  "src_size": [
+   919,
+   919
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "petal_3-96.webp",
+    "w": 96,
+    "h": 96,
+    "bytes": 2822
+   }
+  ]
+ },
+ "petal_4": {
+  "src_size": [
+   680,
+   680
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "petal_4-96.webp",
+    "w": 96,
+    "h": 96,
+    "bytes": 3614
+   }
+  ]
+ },
+ "petal_5": {
+  "src_size": [
+   836,
+   836
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "petal_5-96.webp",
+    "w": 96,
+    "h": 96,
+    "bytes": 3898
+   }
+  ]
+ },
+ "torn_edge": {
+  "src_size": [
+   2172,
+   244
+  ],
+  "ratio": 8.90164,
+  "files": [
+   {
+    "file": "torn_edge-1200.webp",
+    "w": 1200,
+    "h": 135,
+    "bytes": 34064
+   }
+  ]
+ },
+ "ribbon": {
+  "src_size": [
+   208,
+   1454
+  ],
+  "ratio": 0.14305,
+  "files": [
+   {
+    "file": "ribbon-180.webp",
+    "w": 180,
+    "h": 1258,
+    "bytes": 41600
+   }
+  ]
+ },
+ "sprig": {
+  "src_size": [
+   814,
+   1054
+  ],
+  "ratio": 0.7723,
+  "files": [
+   {
+    "file": "sprig-120.webp",
+    "w": 120,
+    "h": 155,
+    "bytes": 9094
+   }
+  ]
+ },
+ "album_page": {
+  "src_size": [
+   990,
+   1368
+  ],
+  "ratio": 0.72368,
+  "files": [
+   {
+    "file": "album_page-720.webp",
+    "w": 720,
+    "h": 995,
+    "bytes": 74672
+   }
+  ]
+ },
+ "rose_corner": {
+  "src_size": [
+   1367,
+   1106
+  ],
+  "ratio": 1.23599,
+  "files": [
+   {
+    "file": "rose_corner-640.webp",
+    "w": 640,
+    "h": 518,
+    "bytes": 84618
+   }
+  ]
+ },
+ "rose_bloom": {
+  "src_size": [
+   1170,
+   1091
+  ],
+  "ratio": 1.07241,
+  "files": [
+   {
+    "file": "rose_bloom-200.webp",
+    "w": 200,
+    "h": 186,
+    "bytes": 13786
+   },
+   {
+    "file": "rose_bloom-400.webp",
+    "w": 400,
+    "h": 373,
+    "bytes": 40528
+   }
+  ]
+ },
+ "paket8": [
+  "velvet",
+  "velvet_wide",
+  "satin_drape",
+  "petals×5",
+  "torn_edge",
+  "ribbon",
+  "gold_sprig",
+  "album_page",
+  "rose_corner",
+  "rose_bloom"
+ ],
  "og": {
   "size": [
    1200,
@@ -298,5 +531,5 @@
    "light_above": 110
   }
  },
- "bytes_total": 1650522
+ "bytes_total": 2368991
 }
