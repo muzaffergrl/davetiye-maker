@@ -1,7 +1,7 @@
 {
   "tool": "tools/listing_templates/capture.ts (G059)",
   "theme": "crimson-rose-atelier",
-  "date": "2026-10-23",
+  "date": "2026-10-24",
   "server": "next start (local production build of this checkout), local adapter, temp data folder",
   "public_url_shown": "https://bkestudio.com",
   "viewport": "390x844, isMobile, touch, DPR 3 (screens) / 390x844 (recording)",
@@ -30,7 +30,7 @@
     },
     {
       "name": "g04_home_calendar.jpg",
-      "what": "Guest: home, reply-by + add to calendar (cut at 22–844 px: nothing clean to show at the edges)"
+      "what": "Guest: home, reply-by + add to calendar (cut at 31–844 px: nothing clean to show at the edges)"
     },
     {
       "name": "g05_story.jpg",
