@@ -20,8 +20,8 @@
 // Search (owner request 2026-10-24, "demo menüsünde arama kutusu da olsun"): a field above the grid filters it as the
 // visitor types. Each design carries its number (its collection, "07") and indexes into one shared list of search
 // words (`words`): its style filters, palette, opening object and the DEMO_BAR_SEARCH_WORDS its English copy matches,
-// each in English and — on a localized visit — in the visitor's language too ("gold altın"). The matching itself
-// (case, accents, Turkish ı/İ, every word must match) is the script's.
+// each in English and — on a localized visit — in the visitor's language too ("gold altın"), plus the little words to
+// leave out (DEMO_BAR_STOP). The matching itself (case, accents, Turkish ı/İ, every word must match) is the script's.
 
 import assets from './assets.json' with { type: 'json' };
 import { loadDict } from '../i18n/dicts.ts';
@@ -125,10 +125,25 @@ export function searchKeys(d: Pick<Design, 'id' | 'name' | 'copy'>): string[] {
   return [
     ...DEMO_BAR_SEARCH_WORDS.filter(([, re]) => re.test(text)).map(([w]) => w),
     ...designStyles(d.id).map((s) => STYLE_FILTERS.find((f) => f.id === s)!.label),
-    ...d.copy.palette.map((p) => p.name),
+    // a colour named after roses ("Rose gold", "Dusty Rose") is no rose: its other words only
+    ...d.copy.palette.map((p) => (/\brose\b/i.test(p.name) && !ROSE.test(p.name.toLowerCase()) ? p.name.replace(/\s*\brose\b\s*/i, ' ').trim() : p.name)),
     OPENING_THINGS[thing] ?? thing,
   ];
 }
+
+/**
+ * Little words a visitor types between the real ones ("gold and rose", "altın ve gül", "oro y rosas"): the script leaves
+ * them out of the query, unless nothing else is typed ("ve" is then the start of "velvet"), and out of the designs'
+ * words. English plus the visitor's language; lower case without accents, as the script compares. Never a search word
+ * ("or" is French gold).
+ */
+export const DEMO_BAR_STOP: Readonly<Record<Lang, readonly string[]>> = {
+  en: ['a', 'an', 'and', 'the', 'of', 'with', 'in', 'for'],
+  tr: ['ve', 'ile', 'de', 'da', 'icin'],
+  es: ['y', 'e', 'de', 'del', 'con', 'el', 'la', 'los', 'las', 'en', 'para'],
+  de: ['und', 'mit', 'der', 'die', 'das', 'den', 'dem', 'im', 'fur'],
+  fr: ['et', 'avec', 'de', 'du', 'des', 'le', 'la', 'les', 'au', 'aux', 'en', 'par', 'pour'],
+};
 
 /** "07" from "07_Burgundy_Velvet_Autumn" ('' without one). */
 export function designNumber(d: Pick<Design, 'copy'>): string {
@@ -168,6 +183,8 @@ export interface DemoBarData {
   groups: Array<{ id: DemoBarGroupId; label: string; items: DemoBarItem[] }>;
   /** Search words of the listed designs, each in English plus, on a localized visit, its translation ("Gold Altın"). */
   words: string[];
+  /** Little words the search leaves out (DEMO_BAR_STOP: English plus the visitor's language). */
+  stop: string[];
 }
 
 type ScreenManifest = { designs: Record<string, { screens?: Record<string, { files?: Record<string, string> }> }> };
@@ -262,6 +279,7 @@ export function demoBarData(opts: {
       (g) => g.items.length > 0,
     ),
     words,
+    stop: [...new Set([...DEMO_BAR_STOP[DEFAULT_LANG], ...DEMO_BAR_STOP[lang]])],
   };
 }
 

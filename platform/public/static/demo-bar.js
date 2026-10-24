@@ -3,8 +3,7 @@
    = that design's demo, same page, same ?lang=), "Home" and "All designs" of the sales site. Reads #demo-bar-data (the
    words are already in the visitor's language). Draws nothing inside a frame (the /start preview, the sales site's demo
    dialog). No framework, no storage; the only request is the brand font.
-   Search (owner request 2026-10-24): a field above the grid filters it as the visitor types — case, accents and Turkish
-   ı/İ ignored, every typed word must match the design's name, number or search words (D.words, built from its copy). */
+   Search (owner request 2026-10-24): a field above the grid filters it as the visitor types (rules: words(), hit()). */
 (function () {
   'use strict';
   var src = document.getElementById('demo-bar-data');
@@ -47,19 +46,11 @@
     return n;
   }
   function icon(d, cls) {
-    var s = document.createElementNS(SVG, 'svg');
-    s.setAttribute('viewBox', '0 0 24 24');
-    s.setAttribute('aria-hidden', 'true');
-    s.setAttribute('focusable', 'false');
+    var s = attrs(document.createElementNS(SVG, 'svg'), { viewBox: '0 0 24 24', 'aria-hidden': 'true', focusable: 'false' });
     if (cls) s.setAttribute('class', cls);
-    var p = document.createElementNS(SVG, 'path');
-    p.setAttribute('d', d);
-    p.setAttribute('fill', 'none');
-    p.setAttribute('stroke', 'currentColor');
-    p.setAttribute('stroke-width', '1.8');
-    p.setAttribute('stroke-linecap', 'round');
-    p.setAttribute('stroke-linejoin', 'round');
-    s.appendChild(p);
+    s.appendChild(
+      attrs(document.createElementNS(SVG, 'path'), { d: d, fill: 'none', stroke: 'currentColor', 'stroke-width': '1.8', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }),
+    );
     return s;
   }
   function mark() {
@@ -82,7 +73,7 @@
     return a;
   }
 
-  // ---------------------------------------------------------------- markup
+  // --- markup
   var root = el('div', 'pdb');
   root.setAttribute('data-demo-bar-ui', '');
   root.setAttribute('data-edge', 'top');
@@ -146,6 +137,10 @@
   var current = null;
   var groups = [];
   var known = Object.create(null); // every search word of the list: a typed word that is one matches whole words only
+  var STOP = D.stop || [];
+  function real(w) {
+    return STOP.indexOf(w) < 0;
+  }
   D.groups.forEach(function (g, gi) {
     var section = el('section', 'pdb-group');
     var title = el('h2', 'pdb-group-title');
@@ -188,7 +183,7 @@
       (it.k || []).forEach(function (i) {
         text += ' ' + ((D.words || [])[i] || '');
       });
-      var w = words(text);
+      var w = words(text).filter(real);
       w.forEach(function (x) {
         known[x] = 1;
       });
@@ -212,8 +207,9 @@
   root.appendChild(backdrop);
   root.appendChild(panel);
 
-  // ---------------------------------------------------------------- search
-  // lower case, accents off (é → e, ü → u, ç → c, İ → i), Turkish dotless ı → i, ß → ss; split into words
+  // --- search
+  // lower case, accents off (é → e, ü → u, ç → c, İ → i), Turkish dotless ı → i, ß → ss; split into words. The
+  // design's words: its name, number and search words (D.words, built from its copy); little words (D.stop) left out
   function words(s) {
     return String(s)
       .toLowerCase()
@@ -243,9 +239,16 @@
     return true;
   }
   var said = 0;
+  // the visitor's text in a message, as typed ("$&" is no replacement pattern)
+  function fill(s, k, v) {
+    return s.split(k).join(v);
+  }
   function filter(speak) {
     var raw = input.value.trim();
     var q = words(raw);
+    // little words only count alone: then they are the start of a word ("ve" → velvet)
+    var k = q.filter(real);
+    if (k.length) q = k;
     var n = 0;
     groups.forEach(function (g) {
       var c = 0;
@@ -263,14 +266,14 @@
     if (input.value) root.setAttribute('data-q', '');
     else root.removeAttribute('data-q');
     empty.hidden = n > 0;
-    emptyText.textContent = n ? '' : D.copy.noMatch.replace('{q}', raw);
+    emptyText.textContent = n ? '' : fill(D.copy.noMatch, '{q}', raw);
     list.scrollTop = 0;
     // read out once the visitor pauses (aria-live, polite)
     clearTimeout(said);
     if (!speak) status.textContent = '';
     else
       said = setTimeout(function () {
-        status.textContent = n ? D.copy.found.replace('{n}', n) : emptyText.textContent;
+        status.textContent = n ? fill(D.copy.found, '{n}', n) : emptyText.textContent;
       }, 600);
   }
   function first() {
@@ -296,27 +299,36 @@
       a.focus();
     }
   });
-  // the × in the field and "Show all designs": everything again, back in the field
-  function again() {
+  // a mouse or trackpad (not a touch screen)
+  function fine() {
+    return !!(window.matchMedia && window.matchMedia('(pointer: fine)').matches);
+  }
+  // × and "Show all designs": everything again; back in the field (a touch screen: "Show all" goes to the first design)
+  clear.addEventListener('click', function () {
     reset(true);
     input.focus();
-  }
-  clear.addEventListener('click', again);
-  all.addEventListener('click', again);
+  });
+  all.addEventListener('click', function () {
+    reset(true);
+    (fine() ? input : first() || close).focus({ preventScroll: true });
+  });
 
-  // ---------------------------------------------------------------- open / close
+  // --- open / close
   function focusables() {
     return [].filter.call(panel.querySelectorAll('a[href], button, input'), function (n) {
       return n.getClientRects().length > 0;
     });
   }
-  // Esc: clears the search first, closes on the next
+  // Esc: clears the search first (from the × or "Show all designs", which hide: back in the field), closes on the next
   function onKey(e) {
     if (e.key === 'Escape') {
       e.preventDefault();
       e.stopPropagation();
-      if (input.value) reset(true);
-      else hide(true);
+      if (input.value) {
+        var f = document.activeElement;
+        reset(true);
+        if (f === clear || f === all) input.focus();
+      } else hide(true);
     }
   }
   function onFocusIn(e) {
@@ -335,7 +347,7 @@
       list.scrollTop = Math.max(0, y);
     }
     // a mouse or trackpad: straight into the search; a touch screen: no keyboard popping up
-    (window.matchMedia && window.matchMedia('(pointer: fine)').matches ? input : close).focus({ preventScroll: true });
+    (fine() ? input : close).focus({ preventScroll: true });
     window.addEventListener('keydown', onKey, true);
     document.addEventListener('focusin', onFocusIn, true);
   }
@@ -390,7 +402,7 @@
     if (e.persisted) hide(false);
   });
 
-  // ---------------------------------------------------------------- out of the way while scrolling down
+  // --- out of the way while scrolling down
   // only the visitor's own scrolling counts (some pages scroll themselves to a section on load)
   var isAway = false;
   var touched = false;
@@ -435,7 +447,7 @@
     away(false);
   });
 
-  // ---------------------------------------------------------------- place: opposite the theme's nav, clear of corners
+  // --- place: opposite the theme's nav, clear of corners
   var frame = 0;
   function place() {
     frame = 0;
@@ -488,7 +500,7 @@
     vv.addEventListener('scroll', fit);
   }
 
-  // ---------------------------------------------------------------- mount
+  // --- mount
   if (!document.querySelector('link[data-pdb-font]')) {
     var font = document.createElement('link');
     font.rel = 'stylesheet';

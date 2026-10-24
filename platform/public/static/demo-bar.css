@@ -33,7 +33,7 @@
   flex: none;
 }
 
-/* ------------------------------------------------------------------ the pill (closed) */
+/* --- the pill (closed) */
 .pdb .pdb-pill {
   position: fixed;
   z-index: 2147483000;
@@ -87,6 +87,10 @@
 .pdb .pdb-all:focus-visible {
   outline: 2px solid var(--pdb-anchor);
   outline-offset: 3px;
+}
+/* the × is as tall as the field: its ring inside */
+.pdb .pdb-clear:focus-visible {
+  outline-offset: -3px;
 }
 /* scrolled down: out of the way until the visitor scrolls back up (or tabs to it) */
 .pdb[data-away] .pdb-pill {
@@ -149,7 +153,7 @@
   color: var(--pdb-muted);
 }
 
-/* ------------------------------------------------------------------ the catalogue (open) */
+/* --- the catalogue (open) */
 .pdb .pdb-backdrop {
   position: fixed;
   z-index: 2147483001;
@@ -211,6 +215,13 @@
 .pdb[data-kb] .pdb-links,
 .pdb[data-kb] .pdb-start {
   display: none;
+}
+/* a keyboard that shortens the whole page (no visual viewport to tell) */
+@media (max-height: 520px) and (pointer: coarse) {
+  .pdb .pdb-panel:has(.pdb-input:focus) .pdb-links,
+  .pdb .pdb-panel:has(.pdb-input:focus) .pdb-start {
+    display: none;
+  }
 }
 @keyframes pdb-fade {
   from {
@@ -312,7 +323,7 @@
   height: 14px;
 }
 
-/* ------------------------------------------------------------------ search (owner request 2026-10-24) */
+/* --- search (owner request 2026-10-24) */
 .pdb .pdb-search {
   position: relative;
   flex: none;
@@ -356,6 +367,13 @@
 .pdb .pdb-input:focus {
   border-color: var(--pdb-anchor);
   box-shadow: 0 0 0 3px rgb(208 174 106 / 0.5);
+}
+/* forced colours drop the shadow */
+@media (forced-colors: active) {
+  .pdb .pdb-input:focus {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
 }
 .pdb .pdb-input::-webkit-search-cancel-button,
 .pdb .pdb-input::-webkit-search-decoration {

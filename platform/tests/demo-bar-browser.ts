@@ -18,6 +18,11 @@
 // clears first and closes next, no sideways overflow, axe on the open panel while searching. At 360 / 390 / 1280 a Turkish
 // visitor typing "altın" and "kır"; at 1280 Enter opens the first result; at 390 a phone keyboard (a smaller visual
 // viewport) leaves the field and the first results above it.
+// Review 2026-10-24: "gold and rose" = "gold rose" ("ve", "y", "und", "et" too); "rose" is not the colour "rose gold";
+// a "$&" typed shows as typed; "Show all designs" on a touch screen does not bring the keyboard back (focus on the first
+// design), with a mouse it goes back to the field; Esc on the × leaves the focus in the field; in forced colours the
+// focused field has an outline; the ×'s focus ring stays inside the field; a short touch screen (a keyboard that
+// shortens the whole page) leaves out the links while typing.
 // --shots writes a screenshot of each width closed and open (and at 360 / 390 / 1280: "rose", "altın", nothing found).
 // Exit 1 on any failure.
 
@@ -89,7 +94,10 @@ async function searchChecks(page: Page, w: number, at: string) {
   await page.fill('.pdb-input', 'rose');
   await page.waitForTimeout(800);
   const rose = await shownNames(page);
-  check(rose.length > 0 && rose.length < total && rose.includes('Blush Garden Rose') && rose.includes('Crimson Rose Atelier') && !rose.includes('Mediterranean Lemon'), `${at}: "rose" filters (${rose.length} of ${total})`);
+  check(
+    rose.length > 0 && rose.length < total && rose.includes('Blush Garden Rose') && rose.includes('Crimson Rose Atelier') && !rose.includes('Mediterranean Lemon') && !rose.includes('Velvet Jewel Box'),
+    `${at}: "rose" filters, roses not "rose gold" (${rose.length} of ${total})`,
+  );
   check((await page.textContent('.pdb-panel [role="status"]')) === `Designs found: ${rose.length}`, `${at}: the count is read out`);
   check(!(await overflow(page)), `${at}: no sideways overflow while searching`);
   const clearBox = await page.locator('.pdb-clear').boundingBox();
@@ -121,14 +129,31 @@ async function searchChecks(page: Page, w: number, at: string) {
   });
   check(axe.length === 0, `${at}: axe serious/critical while searching: ${axe.join(', ') || 'none'}`);
   if (shots && [360, 390, 1280].includes(w)) await page.screenshot({ path: path.join(shots, `${w}-search-empty.png`) });
+  // "$&" is shown as typed
+  await page.fill('.pdb-input', 'zz$&');
+  check((await page.textContent('.pdb-empty-text')) === 'No designs match "zz$&"', `${at}: "zz$&" shown as typed`);
   await page.click('.pdb-all');
   check((await page.inputValue('.pdb-input')) === '' && (await shownNames(page)).length === total, `${at}: "Show all designs" brings them back`);
-  // Esc: clears first, the panel stays open
+  // a touch screen: on the first design (no keyboard popping up again); a mouse: back in the field
+  const after = await page.evaluate(() => document.activeElement?.className);
+  check(after === (w < 800 ? 'pdb-item' : 'pdb-input'), `${at}: after "Show all designs" the focus is on ${w < 800 ? 'the first design' : 'the field'} (${after})`);
+  // little words: "gold and rose" = "gold rose"
+  await page.fill('.pdb-input', 'gold rose');
+  const plain = await shownNames(page);
+  await page.fill('.pdb-input', 'gold and rose');
+  const withAnd = await shownNames(page);
+  check(plain.length > 0 && withAnd.join() === plain.join(), `${at}: "gold and rose" = "gold rose" (${withAnd.length})`);
+  // Esc: clears first, the panel stays open; from the × the focus stays in the field
   await page.fill('.pdb-input', 'gold');
+  await page.focus('.pdb-clear');
   await page.keyboard.press('Escape');
   await page.waitForTimeout(100);
-  const esc = await page.evaluate(() => ({ value: document.querySelector<HTMLInputElement>('.pdb-input')!.value, open: !document.querySelector<HTMLElement>('.pdb-panel')!.hidden }));
-  check(esc.value === '' && esc.open, `${at}: first Esc clears the search, the panel stays open`);
+  const esc = await page.evaluate(() => ({
+    value: document.querySelector<HTMLInputElement>('.pdb-input')!.value,
+    open: !document.querySelector<HTMLElement>('.pdb-panel')!.hidden,
+    focus: document.activeElement?.className,
+  }));
+  check(esc.value === '' && esc.open && esc.focus === 'pdb-input', `${at}: first Esc (on the ×) clears the search, the panel stays open, focus in the field (${JSON.stringify(esc)})`);
 }
 
 async function main() {
@@ -243,6 +268,93 @@ async function main() {
       const first = await p.evaluate(() => [...document.querySelectorAll<HTMLAnchorElement>('.pdb-item')].find((a) => a.getClientRects().length)?.getAttribute('href'));
       await Promise.all([p.waitForURL(/mediterranean-lemon/, { timeout: 15_000 }).catch(() => undefined), p.keyboard.press('Enter')]);
       check(first === '/start/demo/mediterranean-lemon/details' && p.url() === BASE + first, `1280: Enter opens the first result (${p.url()})`);
+      await c.close();
+    }
+    // search: a Turkish "ve", a German "und" (little words) change nothing
+    for (const [lang, q, plainQ] of [
+      ['tr', 'altın ve gül', 'altın gül'],
+      ['de', 'gold und rosen', 'gold rosen'],
+    ]) {
+      const c = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+      const p = await c.newPage();
+      await p.goto(`${BASE}/start/demo/olive-ivory?lang=${lang}`);
+      await p.waitForSelector('.pdb-pill');
+      await p.tap('.pdb-pill');
+      await p.waitForTimeout(300);
+      await p.fill('.pdb-input', plainQ);
+      const plain = await shownNames(p);
+      await p.fill('.pdb-input', q);
+      const got = await shownNames(p);
+      check(plain.length > 0 && got.join() === plain.join(), `390 ${lang}: "${q}" = "${plainQ}" (${got.length})`);
+      await c.close();
+    }
+    // focus rings at 1280 (a mouse: the field has focus on opening): forced colours (Windows contrast themes) show an
+    // outline on the field; the ×'s ring stays inside the field
+    {
+      const c = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+      const p = await c.newPage();
+      await p.emulateMedia({ forcedColors: 'active' });
+      await p.goto(`${BASE}/start/demo/olive-ivory`);
+      await p.waitForSelector('.pdb-pill');
+      await p.click('.pdb-pill');
+      await p.waitForTimeout(300);
+      const fc = await p.evaluate(() => {
+        const i = document.activeElement as HTMLElement;
+        const cs = getComputedStyle(i);
+        return { focus: i.className, style: cs.outlineStyle, width: cs.outlineWidth, forced: matchMedia('(forced-colors: active)').matches };
+      });
+      check(fc.forced && fc.focus === 'pdb-input' && fc.style === 'solid' && fc.width === '2px', `1280 forced colours: the focused field has an outline (${JSON.stringify(fc)})`);
+      if (args.shots) await p.screenshot({ path: path.join(args.shots, '1280-forced-colors-focus.png'), clip: { x: 300, y: 120, width: 680, height: 160 } });
+      await p.emulateMedia({ forcedColors: 'none' });
+      await p.keyboard.type('gold');
+      await p.keyboard.press('Tab');
+      const ring = await p.evaluate(() => {
+        const x = document.activeElement as HTMLElement;
+        const cs = getComputedStyle(x);
+        const grow = parseFloat(cs.outlineOffset) + parseFloat(cs.outlineWidth);
+        const b = x.getBoundingClientRect();
+        const f = document.querySelector('.pdb-input')!.getBoundingClientRect();
+        return {
+          focus: x.className,
+          visible: x.matches(':focus-visible'),
+          inside: b.top - grow >= f.top - 0.5 && b.bottom + grow <= f.bottom + 0.5 && b.right + grow <= f.right + 0.5,
+          box: [b.left, b.top, b.width, b.height].map(Math.round),
+          clip: { x: Math.round(f.right - 120), y: Math.round(f.top - 12), width: 132, height: Math.round(f.height + 24) },
+        };
+      });
+      check(ring.focus === 'pdb-clear' && ring.visible && ring.inside, `1280: the ×'s focus ring stays inside the field (${JSON.stringify(ring)})`);
+      if (args.shots) await p.screenshot({ path: path.join(args.shots, '1280-clear-focus.png'), clip: ring.clip });
+      await c.close();
+    }
+    // a short touch screen while typing (a keyboard that shortens the whole page, so the visual viewport tells nothing):
+    // the links make room for the results; back when the field loses focus
+    {
+      const c = await browser.newContext({ viewport: { width: 360, height: 400 }, isMobile: true, hasTouch: true });
+      const p = await c.newPage();
+      await p.goto(`${BASE}/start/demo/olive-ivory`);
+      await p.waitForSelector('.pdb-pill');
+      await p.tap('.pdb-pill');
+      await p.waitForTimeout(300);
+      const shown = () =>
+        p.evaluate(() => ({
+          links: document.querySelector('.pdb-links')!.getClientRects().length,
+          start: document.querySelector('.pdb-start')!.getClientRects().length,
+          kb: document.querySelector('.pdb')!.hasAttribute('data-kb'),
+          list: Math.round(document.querySelector('.pdb-scroll')!.getBoundingClientRect().height),
+        }));
+      const idle = await shown();
+      await p.tap('.pdb-input');
+      await p.keyboard.type('gold');
+      await p.waitForTimeout(150);
+      const typing = await shown();
+      if (args.shots) await p.screenshot({ path: path.join(args.shots, '360x400-typing.png') });
+      await p.evaluate(() => (document.activeElement as HTMLElement).blur());
+      await p.waitForTimeout(100);
+      const blurred = await shown();
+      check(
+        idle.links === 1 && idle.start === 1 && !typing.kb && typing.links === 0 && typing.start === 0 && typing.list > idle.list + 80 && blurred.links === 1,
+        `360×400 touch: typing leaves out the links (${JSON.stringify({ idle, typing, blurred })})`,
+      );
       await c.close();
     }
     // search: the phone keyboard (a visual viewport shorter than the page): the field and the first results stay above it

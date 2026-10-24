@@ -26,6 +26,7 @@ import {
   DEMO_BAR_GROUPS,
   DEMO_BAR_JS,
   DEMO_BAR_SEARCH_WORDS,
+  DEMO_BAR_STOP,
   demoBarData,
   demoBarFor,
   demoBarLang,
@@ -408,10 +409,12 @@ test('search: live, case- and accent-blind, every word must match, numbers, Turk
   assert.deepEqual(bar.type('roses'), rose);
   // every word must match (AND), in the catalogue's order
   const gold = bar.type('gold');
-  const both = bar.type('rose gold');
-  assert.deepEqual(both, rose.filter((id) => gold.includes(id)));
-  assert.ok(both.length > 0 && both.length < rose.length);
-  assert.deepEqual(bar.type('gold, rose'), both);
+  assert.deepEqual(bar.type('rose gold'), rose.filter((id) => gold.includes(id)));
+  const blue = bar.type('blue');
+  const both = bar.type('blue gold');
+  assert.deepEqual(both, blue.filter((id) => gold.includes(id)));
+  assert.ok(both.length > 0 && both.length < blue.length && both.length < gold.length, both.join());
+  assert.deepEqual(bar.type('gold, blue'), both);
   // numbers: "7" and "07" are design 07; a number with a word that design lacks: nothing
   assert.deepEqual(bar.type('7'), ['burgundy-velvet-autumn']);
   assert.deepEqual(bar.type('07'), ['burgundy-velvet-autumn']);
@@ -453,6 +456,78 @@ test('search: live, case- and accent-blind, every word must match, numbers, Turk
   assert.ok(fr.type('nœud').includes('blush-garden-rose'));
   assert.deepEqual(fr.type('noeud'), fr.type('nœud'));
   assert.ok(fr.type('dentelle').includes('olive-ivory'));
+});
+
+test('search: little words ("and", "ve", "y", "und", "et") neither empty the results nor narrow them', async () => {
+  const cur = { id: 'olive-ivory', name: 'Olive & Ivory' };
+  const en = searchBar(demoBarData({ current: cur, page: 'index', lang: null }));
+  const goldRose = en.type('gold rose');
+  assert.ok(goldRose.length > 0);
+  assert.deepEqual(en.type('gold and rose'), goldRose);
+  assert.deepEqual(en.type('The gold with the rose'), goldRose);
+  const tr = searchBar(await demoBarFor('tr', cur, 'index'));
+  const altinGul = tr.type('altın gül');
+  assert.ok(altinGul.includes('blush-garden-rose'), altinGul.join());
+  assert.deepEqual(tr.type('altın ve gül'), altinGul);
+  assert.deepEqual(tr.type('altın ile gül'), altinGul);
+  // typed alone, a little word is the start of a word: "ve" → Velvet, Vellum (not every design with "Klasik ve zarif")
+  const ve = tr.type('ve');
+  assert.ok(['burgundy-velvet-autumn', 'velvet-jewel-box', 'wildflower-meadow-vellum'].every((id) => ve.includes(id)), ve.join());
+  assert.ok(!ve.includes('olive-ivory'), ve.join());
+  for (const [lang, q, plain] of [
+    ['de', 'gold und rosen', 'gold rosen'],
+    ['es', 'oro y rosas', 'oro rosas'],
+    ['es', 'papel de arroz', 'papel arroz'],
+    ['fr', 'or et roses', 'or roses'],
+    ['fr', 'carte à volets', 'carte volets'],
+  ] as const) {
+    const bar = searchBar(await demoBarFor(lang, cur, 'index'));
+    const want = bar.type(plain);
+    assert.ok(want.length > 0, `${lang} ${plain}`);
+    assert.deepEqual(bar.type(q), want, `${lang} ${q}`);
+  }
+  // the list: English plus the visitor's language; lower case without accents (as the script compares); never a real
+  // search word or a word of a design's name ("or" is French gold)
+  assert.deepEqual(demoBarData({ current: cur, page: 'index', lang: null }).stop, DEMO_BAR_STOP.en);
+  const fold = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ı/g, 'i').split(/[^\p{L}]+/u);
+  const names = new Set(catalogDesigns().flatMap((d) => fold(d.name)));
+  for (const lang of LANGS) {
+    const dict = lang === 'en' ? null : await loadDict('market', lang);
+    if (dict) assert.deepEqual(demoBarData({ current: cur, page: 'index', lang, dict }).stop, [...new Set([...DEMO_BAR_STOP.en, ...DEMO_BAR_STOP[lang]])]);
+    const real = new Set(DEMO_BAR_SEARCH_WORDS.flatMap(([w]) => fold(`${w} ${dict?.[w] ?? ''}`)));
+    for (const s of DEMO_BAR_STOP[lang]) {
+      assert.match(s, /^[a-z]+$/, `${lang} ${s}`);
+      assert.ok(!real.has(s) && !names.has(s), `${lang}: "${s}" is a search word`);
+    }
+  }
+});
+
+test('search: "rose" means roses, not the colours "rose gold", "rose quartz", "dusty rose" (in every language)', async () => {
+  const cur = { id: 'olive-ivory', name: 'Olive & Ivory' };
+  const en = searchBar(demoBarData({ current: cur, page: 'index', lang: null }));
+  const rose = en.type('rose');
+  assert.ok(rose.includes('blush-garden-rose') && rose.includes('crimson-rose-atelier'), rose.join());
+  for (const id of ['velvet-jewel-box', 'music-box-ballerina', 'cherry-blossom-spring', 'sky-lantern-festival']) assert.ok(!rose.includes(id), `"rose" finds ${id}`);
+  // the colours' other words still find them
+  assert.ok(en.type('quartz').includes('music-box-ballerina'));
+  assert.ok(en.type('pink').includes('cherry-blossom-spring'));
+  assert.ok(en.type('gold').includes('velvet-jewel-box'));
+  const de = searchBar(await demoBarFor('de', cur, 'index'));
+  assert.deepEqual(de.type('rose'), de.type('rosen'));
+  assert.deepEqual(de.type('rosen'), rose);
+  const tr = searchBar(await demoBarFor('tr', cur, 'index'));
+  assert.deepEqual(tr.type('gül'), rose);
+});
+
+test('search: what the visitor typed shows as typed in the messages ($&, $` are not replacement patterns)', () => {
+  const bar = searchBar(demoBarData({ current: { id: 'olive-ivory', name: 'Olive & Ivory' }, page: 'index', lang: null }));
+  const status = find(bar.panel, (e) => e.getAttribute('role') === 'status')!;
+  for (const q of ['zz$&', '$`zx', "zq$'", 'zz$$b', '{q}{n}']) {
+    bar.type(q);
+    assert.equal(bar.by('pdb-empty-text').textContent, `No designs match "${q}"`, q);
+    bar.flush();
+    assert.equal(status.textContent, `No designs match "${q}"`, q);
+  }
 });
 
 test('search field: label, attributes, × and the group headings follow the results', () => {
@@ -527,9 +602,42 @@ test('search: nothing found = a friendly message and "Show all designs"; the cou
   assert.equal(bar.visible(empty), false);
   assert.equal(bar.root!.hasAttribute('data-q'), false);
   assert.equal(bar.shown().length, data.groups.flatMap((g) => g.items).length);
-  assert.equal(bar.doc.activeElement, bar.input);
+  // a touch screen: on the first design, no keyboard popping up again (no matchMedia here = not a fine pointer)
+  assert.equal(bar.doc.activeElement!.className, 'pdb-item');
+  assert.equal(bar.doc.activeElement!.href, data.groups[0].items[0].href);
   bar.flush();
   assert.equal(status.textContent, `Designs found: ${bar.shown().length}`);
+  // a mouse or trackpad: back in the field
+  const fine = searchBar(data, { fine: true });
+  fine.type('zzz');
+  fine.by('pdb-all').fire('click');
+  assert.ok(fine.doc.activeElement === fine.input, String(fine.doc.activeElement?.className));
+});
+
+test('search: Esc on the × or on "Show all designs" clears and leaves the focus in the field (not lost on the page)', () => {
+  const data = demoBarData({ current: { id: 'olive-ivory', name: 'Olive & Ivory' }, page: 'index', lang: null });
+  for (const [q, cls] of [
+    ['velvet', 'pdb-clear'],
+    ['zzz', 'pdb-all'],
+  ]) {
+    const bar = searchBar(data);
+    bar.type(q);
+    const btn = bar.by(cls);
+    assert.equal(bar.visible(btn), true, cls);
+    btn.focus();
+    bar.win.fire('keydown', { key: 'Escape' });
+    assert.equal(bar.input.value, '', cls);
+    assert.equal(bar.visible(btn), false, `${cls} is hidden now`);
+    assert.ok(bar.doc.activeElement === bar.input, `${cls}: focus in the field, not on ${bar.doc.activeElement?.className}`);
+    assert.equal(bar.panel.hidden, false);
+  }
+  // on a design in the grid the focus stays there (still shown)
+  const bar = searchBar(data);
+  bar.type('velvet');
+  bar.input.fire('keydown', { key: 'ArrowDown' });
+  const a = bar.doc.activeElement;
+  bar.win.fire('keydown', { key: 'Escape' });
+  assert.ok(a?.className === 'pdb-item' && bar.doc.activeElement === a);
 });
 
 test('search keys: Enter opens the first result, ArrowDown goes into the grid, Esc clears first and closes next', () => {
@@ -595,6 +703,15 @@ test('the phone keyboard: the panel ends above it and leaves out the links (visu
   const css = readFileSync(CSS_FILE, 'utf8');
   assert.match(css, /\.pdb\[data-kb\] \.pdb-panel \{[^}]*max-height: calc\(var\(--pdb-vh/);
   assert.match(css, /\.pdb\[data-kb\] \.pdb-links,\s*\.pdb\[data-kb\] \.pdb-start \{\s*display: none/);
+  // browsers that shorten the whole page for the keyboard (no visual viewport difference): a short touch screen with the
+  // field focused leaves out the links too
+  assert.match(css, /@media \(max-height: 520px\) and \(pointer: coarse\) \{\s*\.pdb \.pdb-panel:has\(\.pdb-input:focus\) \.pdb-links,\s*\.pdb \.pdb-panel:has\(\.pdb-input:focus\) \.pdb-start \{\s*display: none/);
+});
+
+test('focus rings: the search field shows one in forced colours; the ×\'s stays inside the field', () => {
+  const css = readFileSync(CSS_FILE, 'utf8');
+  assert.match(css, /@media \(forced-colors: active\) \{\s*\.pdb \.pdb-input:focus \{\s*outline: 2px solid Highlight;/);
+  assert.match(css, /\.pdb \.pdb-clear:focus-visible \{\s*outline-offset: -3px;/);
 });
 
 // ---------------------------------------------------------------- weight and safety
