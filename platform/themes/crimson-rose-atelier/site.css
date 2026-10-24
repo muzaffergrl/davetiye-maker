@@ -512,6 +512,7 @@ html:has(.page-opening)::view-transition-group(site-nav){display:none}
  .hero{padding-top:calc(58px + env(safe-area-inset-top))}
  .hero-names{--fs:clamp(50px,16vw,96px)}
  .stage{width:min(100vw,520px)}
+ .opening-heading::after{display:none}
  .is-opened .stage{scale:.7}
  .opening .rose-a{width:min(56vw,300px);top:-10%;right:-22%}
 }
