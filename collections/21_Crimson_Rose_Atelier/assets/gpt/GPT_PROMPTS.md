@@ -354,3 +354,118 @@ A single open dark crimson red rose bloom with two dark olive leaves, the same r
 ```
 Kontrol: tek gül + iki yaprak; gerçek alfa.
 Kullanım: `rose_bloom-200` = Details program çizgisinin sonu, RSVP kartının köşesi, teşekkür kartı.
+
+---
+
+## PAKET 9 — Atelier ikinci tur: çerçeve, program ikonları, albüm köşelikleri, süs çizgisi, fiyonk (W4; YAZI YOK) — 2026-10-24
+
+> Kullanıcı (2026-10-24): "ne lazımsa bol bol ürettirebilirsin, cesur ve yaratıcı ol". PAKET 8 bağlandı (kadife, saten,
+> yapraklar, yırtık kenar, kurdele, altın dal, albüm sayfası, gül köşesi, tek gül). Tasarım panosunda olup hâlâ eksik
+> kalanlar: ana sayfadaki **altın oval çerçeve** (PAKET 8'de iki denemede atlandı), Details programındaki **altın ikonlar**,
+> albüm fotoğraflarını sayfaya tutturan **altın köşelikler**, başlık altı **altın süs çizgisi** ve resmî davetiye kartının
+> köşesine iliştirilecek **saten fiyonk**. Hepsi **aynı sohbette**, PAKET 8 ile aynı ışık ve malzemeyle.
+> PAKET 8 dersleri: yeşil pencere şart değil (pencere şeffaf olabilir); uç oranlar tutmuyor, burada hepsi 1:1, 4:5 ya da
+> 3:1; yaprak/sayı adetine güvenilmiyor, adet şartı yok.
+
+**Instructions for GPT (send before the first image):**
+```
+You are the art director and still-life photographer of a luxury wedding stationery house, continuing the website of "Crimson Rose Atelier" (the same chat style as PAKET 8): deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D), dark crimson red roses with dark olive leaves. Attach as style references: collections/21_Crimson_Rose_Atelier/assets/gpt/mockups/design-board.png (the art direction), collections/21_Crimson_Rose_Atelier/assets/gpt/parts/gold_sprig.png (the exact gold leaf metal and its light), collections/21_Crimson_Rose_Atelier/assets/gpt/parts/ribbon.png (the exact silk) and collections/21_Crimson_Rose_Atelier/assets/gpt/decor/seal.png (the exact gold). Every image is ONE production asset photographed for real: tactile gold leaf / brushed champagne-gold metal or silk, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector. Never any text, letters, numbers, monograms, logos or watermarks. Transparent background = a TRUE transparent PNG (real alpha channel; not white, not a checkerboard), object at least 6% inside every edge, no cast shadow on the ground, no glow or halo around the object.
+When finished: commit every PNG to the repository at exactly the path in its "Kaydet" line (branch main, or a codex/... branch), plus a short TESLIM.txt in collections/21_Crimson_Rose_Atelier/assets/gpt/parts/ listing size and anything that differs. Do not rename the files and do not put them in another folder.
+```
+
+#### W4.1 Altın oval fotoğraf çerçevesi (ana sayfa portresi) — yeniden
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/oval_frame.png` · 1024×1280 (4:5) · **Şeffaf zemin, pencere de şeffaf**
+
+```
+A slim antique champagne-gold oval picture frame, upright, seen perfectly straight on: a narrow moulding with a fine beaded inner edge and a delicate engraved laurel band, a tiny bow-and-laurel crest at the top centre and a small leaf at the bottom centre, like the gold oval frame on the attached design board. The frame ring is closed all the way round and about 5% of the width thick; it fills about 90% of the canvas height. Everything outside the frame AND the whole oval opening inside it are fully transparent (a true alpha channel; the opening is empty, no glass, no backing, no photo, no colour). Soft warm light from the upper left, real gold leaf. No shadow, no glow, no text.
+```
+Kontrol: halka kapalı; dış ve iç tamamen şeffaf (iç pencere boş); çerçeve düz ve simetrik. Claude pencereyi alfadan ölçer.
+
+#### W4.2 Program ikonu — tören (yüzükler)
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/icon_rings.png` · 512×512 · **Şeffaf zemin**
+
+```
+A small embossed champagne-gold foil icon of two interlocked wedding rings, drawn as a fine single-weight line (about 3% of the canvas wide) and pressed into the gold like letterpress foil: a refined line-art emblem, not a filled shape, centred, filling about 70% of the square. Same line weight, same gold and same light as every other icon in this set. True transparent background PNG, no shadow, no glow, no text.
+```
+Kontrol: ince çizgi ikon; diğer ikonlarla aynı kalınlık; gerçek alfa.
+
+#### W4.3 Program ikonu — kadeh kaldırma (iki kadeh)
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/icon_toast.png` · 512×512 · **Şeffaf zemin**
+
+```
+A small embossed champagne-gold foil icon of two champagne coupes clinking with a tiny spark between them, drawn as a fine single-weight line (about 3% of the canvas wide), letterpress gold foil line-art, not filled, centred, filling about 70% of the square. Same line weight, gold and light as the ring icon. True transparent background PNG, no shadow, no glow, no text.
+```
+Kontrol: W4.2 ile aynı çizgi ve altın.
+
+#### W4.4 Program ikonu — akşam yemeği (çatal-bıçak ve tabak)
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/icon_dinner.png` · 512×512 · **Şeffaf zemin**
+
+```
+A small embossed champagne-gold foil icon of a dinner plate seen from above with a fork on the left and a knife on the right, fine single-weight line (about 3% of the canvas wide), letterpress gold foil line-art, not filled, centred, filling about 70% of the square. Same line weight, gold and light as the ring icon. True transparent background PNG, no shadow, no glow, no text.
+```
+
+#### W4.5 Program ikonu — dans (nota)
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/icon_dance.png` · 512×512 · **Şeffaf zemin**
+
+```
+A small embossed champagne-gold foil icon of two joined musical notes (a beamed pair of eighth notes), fine single-weight line (about 3% of the canvas wide), letterpress gold foil line-art, centred, filling about 70% of the square. Same line weight, gold and light as the ring icon. True transparent background PNG, no shadow, no glow, no text.
+```
+
+#### W4.6 Program ikonu — pasta
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/icon_cake.png` · 512×512 · **Şeffaf zemin**
+
+```
+A small embossed champagne-gold foil icon of a three-tier wedding cake with a tiny rose on top, fine single-weight line (about 3% of the canvas wide), letterpress gold foil line-art, not filled, centred, filling about 70% of the square. Same line weight, gold and light as the ring icon. True transparent background PNG, no shadow, no glow, no text.
+```
+
+#### W4.7 Program ikonu — gece / uğurlama (yıldız ışığı)
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/icon_sparkle.png` · 512×512 · **Şeffaf zemin**
+
+```
+A small embossed champagne-gold foil icon of a crescent moon with two small four-pointed stars, fine single-weight line (about 3% of the canvas wide), letterpress gold foil line-art, not filled, centred, filling about 70% of the square. Same line weight, gold and light as the ring icon. True transparent background PNG, no shadow, no glow, no text.
+```
+
+#### W4.8 Program ikonu — mekân (konum iğnesi)
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/icon_pin.png` · 512×512 · **Şeffaf zemin**
+
+```
+A small embossed champagne-gold foil icon of a map location pin with a tiny rose inside its round head, fine single-weight line (about 3% of the canvas wide), letterpress gold foil line-art, not filled, centred, filling about 70% of the square. Same line weight, gold and light as the ring icon. True transparent background PNG, no shadow, no glow, no text.
+```
+
+#### W4.9 Program ikonu — kıyafet (papyon)
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/icon_dress.png` · 512×512 · **Şeffaf zemin**
+
+```
+A small embossed champagne-gold foil icon of a classic bow tie, fine single-weight line (about 3% of the canvas wide), letterpress gold foil line-art, not filled, centred, filling about 70% of the square. Same line weight, gold and light as the ring icon. True transparent background PNG, no shadow, no glow, no text.
+```
+
+#### W4.10 Albüm fotoğraf köşeliği (tek köşe)
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/photo_corner.png` · 512×512 · **Şeffaf zemin**
+
+```
+One antique album photo-mount corner seen straight on: a small right-angled triangle of champagne-gold foil paper with a fine engraved filigree edge, its right angle pointing to the TOP-LEFT of the canvas, the two short sides along the top and left, the long diagonal edge lower-right, as used to hold a photograph on an album page. It fills about 70% of the square; the area under the corner is empty. True transparent background PNG, no photo, no shadow, no glow, no text.
+```
+Kontrol: tek köşe; dik açı sol üstte; gerçek alfa. Claude 4 köşeye döndürür.
+
+#### W4.11 Altın süs çizgisi (başlık altı)
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/gold_flourish.png` · 1536×512 (3:1) · **Şeffaf zemin**
+
+```
+A slim horizontal champagne-gold filigree divider for luxury stationery: two fine curling laurel tendrils that meet at a tiny rosebud in the centre, perfectly symmetric left and right, very thin and delicate, about 12% of the canvas tall, spanning about 85% of the width, centred. Real gold leaf with soft warm light from the upper left. True transparent background PNG, no shadow, no glow, no text.
+```
+Kontrol: simetrik, ince, ortada küçük gül goncası; gerçek alfa.
+
+#### W4.12 Saten fiyonk (resmî kartın köşesi)
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/ribbon_bow.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+A hand-tied bow of deep crimson silk satin ribbon (the same silk as ribbon.png), seen from the front, two full loops and two tails falling down and slightly apart with neatly cut V ends, soft sheen and realistic folds, centred, filling about 75% of the square. Soft warm light from the upper left. True transparent background PNG, no shadow on the ground, no glow, no text.
+```
+Kontrol: tek fiyonk, iki kuyruk; gerçek alfa.
+
+#### W4.13 Gül goncası (küçük süzülen aksesuar)
+**Kaydet:** `collections/21_Crimson_Rose_Atelier/assets/gpt/parts/rose_bud.png` · 512×512 · **Şeffaf zemin**
+
+```
+A single closed dark crimson rosebud on a short stem with two small dark olive leaves, lying diagonally, photographed for real with soft warm light from the upper left, the same rose variety as the attached references, filling about 70% of the square. True transparent background PNG, no shadow, no glow, no text.
+```
