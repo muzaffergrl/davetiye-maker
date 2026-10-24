@@ -497,3 +497,436 @@ Kontrol (gözle; piksel ölçme yok): 1 adet düz, parlak, tek tonda yeşil alan
 ### 7.V Promo video (2. video) — GPT'ye verilmez
 Claude gerçek site kaydından üretir (`package/listing/video_promo.mp4`, 1080×1080, H.264, sessiz, 12–15 sn): açılış → sayfalar →
 düzenleyici → RSVP. Videoda gösterilen her şey gerçek siteden gelir; yapay zekâ videosu kullanılmaz.
+
+---
+
+## PAKET 8 — Azulejo Mosaic yeniden tasarım (2026-10-24)
+
+> Kullanıcı (2026-10-23/24): 21'den itibaren her tasarım "çok iyi bir profesyonel tasarımcının elinden çıkmış gibi" olacak
+> ("cesur ve yaratıcı ol"); kendine özgü bileşen, hareket ve ses. 30'un bugünkü sitesi (G430, PAKET 5R: basamaklı çini
+> kapaklı zarf + jüt sicim + kırlangıç karosu + foto mozaiği) çıta değildir; kimlik korunur, düzey yükseltilir. PAKET 8
+> tasarımı baştan GPT'ye çizdirir (K21): önce **W1** tasarım panosu, sonra aynı sohbette panodan türeyen **W2** parçaları
+> (24 madde, 30 dosya). Claude yalnız keser, maskeler, ölçekler, aynalar/döndürür, dizer, ışık verir ve HTML/CSS/JS kurar;
+> çizmez. Dosyanın başındaki "Instructions for GPT" notu (whitewash_ground / env_back / flap referansları, yeşil foto
+> pencereleri) PAKET 8'e **uygulanmaz**.
+>
+> Claude için notlar:
+> - W1'in kayıt satırı bilerek kalın değil: yol `mockups/` altında olduğu için `kit_check` / `gpt_yerlestir` orada yeşil ekran
+>   arar. Panoyu GPT doğrudan commit eder; `gpt_yerlestir`'e verilmez.
+> - W1 demo metni `content.demo.json` ile aynı: Inês & Mateo · Saturday, June 5, 2027 · Quinta da Andorinha Azul, Sintra,
+>   Portugal · program 5:00 PM Ceremony (The chapel garden) / 6:00 PM Cocktail hour (The tiled courtyard) / 7:30 PM Dinner &
+>   dancing (The cloister terrace) · dress code Summer formal · RSVP son günü April 30, 2027 · yemek Vegetarian / Fish /
+>   Chicken · story "A rainy afternoon". Geri sayım örneği 224 gün (2026-10-24'ten). Panoya `story_2.jpg` **verilmez**: sarı
+>   tramvay, brief'teki kartpostal klişesi (demo fotoğrafının kendisi ayrı karar; entegratöre not).
+> - Dosya adları bilerek PAKET 5R'dekilerden farklı (`envelope_*`, `invite_card`, `tile_*`, `swallow_*`, `frame_*`,
+>   `card_glaze`, `divider_brush`, `icon_*`, `courtyard*`, `wall_whitewash`, `leaf_shadow`, `pot_jasmine`, `fountain`,
+>   `float_*`): `gpt_is_listesi` aynı yolda dosyadaki ilk prompt'u alır, eski PAKET 5R prompt'u kazanırdı. Eski parçalar
+>   silinmez; tema yeniden kurulana kadar canlı site onları kullanır.
+> - **Basamaklı kapak GPT parçası değil.** Claude kapağı `tile_pattern`'den kurar: ayna-döşeme (padrão: T · yatay ayna / dikey
+>   ayna · 180°) her birleşimde dikişsiz madalyon verir. Karo = ölçülen zarf genişliği / 6; basamaklar 3 / 4 / 5 karo (26
+>   karo), her karo ayrı 3B katman (ön `tile_pattern` ± `scale(-1,1)`, arka `tile_bisque`). Kapanış karosu `tile_swallow`
+>   (≈1,2× karo) sicimin ölçülen düğümüne oturur. Prompt geometrisi: zarf kutusu x %8–92 · y %15–85 (0,8:1); 3 karo = tuvalin
+>   y %43'ü; cep üst kenarı %41,5 (kapak her yerde örter); sicimin yatay kolu ve düğüm %61,7 (= 5 karo). GPT kayarsa ölçülen
+>   değer esastır (`tema_build.hiza_olc`; hiza PAKET 8 için otomatik koşmaz). Aynı karo setinden: home nişinin çevresi, foto
+>   mozaiği örtüleri, duvar süpürgeliği (`tile_border`), geri sayım (`tile_plain`), teşekkür panosu.
+> - Aynı tuvalde hizalanan gruplar: zarf (W2.1–W2.3), karo seti (W2.5–W2.9 ve W2.17 ikonları; aynı kare kutu), kırlangıç
+>   (W2.9 → W2.10 → W2.11; kuş karodan tam kalktığı yerde başlar). Her katman kendi alfa kutusundan kesilir.
+> - Foto pencereleri yeşil değil, **şeffaf açıklık** (21 TESLİM dersi; prompt'larda bilerek yeşil hex yok, `kit_check` yeşil
+>   pencere aramaz). Maske kapalı halkanın içindeki şeffaf bölgeden: niş = kemer (≈0,65), pano ≈4:5, geniş pano ≈16:9.
+> - İnce şerit (ayırıcı) 3:2 tuvalde ortada bant; `card_glaze` dikey 3 dilim. Bütün ölçüler GPT'nin yerel tuvalleri
+>   (1024×1024, 1024×1536, 1536×1024); pano ≈1908×824.
+> - `leaf_shadow` opaktır (beyaz zemin üstünde yalnız gölge): `mix-blend-mode: multiply`, düşük opaklık, yavaş salınım; beyazı
+>   seviye ayarıyla tam beyaza çekmek ışık işidir, çizim değildir. Bougainvillea 27'nindir (magenta): gölgeler yasemin + zeytin.
+> - Palet **aynen** korunur (G177 varyantları: `variants/recolor.json` çapaları cobalt `#1F4A9E` / terra `#AE583A`). Parçalar
+>   gelince çapalar gerçek parçalarda yeniden ölçülür ve `COLLECTION_STATUS.md`'deki `recolor_parts.py build/check` +
+>   `variant-check` adımları koşulur. Nötrler eski parçalarda zaten vardı: kireç taşı `#E9E1D2`, jüt `#B58E5E`.
+> - Fontlar değişir (aşağıda; Arizonia + Cormorant Upright'ın yerine), `scripts/font-fallback.ts` yeniden koşulur. Sevillana ve
+>   Lusitana Latin Extended-A taşımaz (ą ć č ę ł ń ś ź ż ş ğ yok; Latin-1 tam: ê ã ç é ñ var) → isim alanında yedek yüz;
+>   Lusitana'da ’ ve — yok → yalnız büyük harf satırlarında, gövdede asla. Faustina latin + latin-ext + vietnamca tam.
+> - Paylaşım (og) görseli ayrıca istenmedi: Claude `courtyard_wide` + zarf katmanları + dizilmiş karolar + sicim +
+>   `tile_swallow`'dan kurar (eski `web_hero` yerinde kalır). PAKET 6R baskı ve PAKET 3/7 ilan sahneleri bu turda değişmez
+>   (uyum gerekirse ayrı paket). Açılış nesnesi yine zarf; START HERE'deki eski `wall` / `Wall` adı entegratörde "envelope"
+>   yapılır. `DESIGN_BRIEF.md`, `COLLECTION_STATUS.md`, `kuru_sekil.json` ve tema testi entegratörde yeni parçalara göre
+>   güncellenir.
+> - Ses dosyası yok: aşağıdaki ipuçlarını Claude sentezler (`tools/audio_fx.py`, AGENTS şart 9; kırlangıç cıvıltısı da sentez,
+>   kayıt yok); ilk dokunuştan önce sessiz.
+
+### Sanat yönetimi — "Tile by tile" (the Blue Swallow)
+
+- **Signature.** The site is the sunlit courtyard of the Quinta da Andorinha Azul — the "Blue Swallow" estate — in the green
+  hills of Sintra on a June morning: lime-whitewashed walls, cool cobalt azulejos, sun-bleached terracotta, pale limestone,
+  jasmine and silver olive leaves whose shadows stir on the wall. Two ideas carry every page: (1) **everything is revealed
+  tile by tile** — thick hand-made tiles with a painted cobalt face and a terracotta biscuit back turn over one by one;
+  (2) **the Blue Swallow** — the swallow painted on the envelope's clasp tile lifts off the glaze as living brushwork when
+  the invitation opens, and from then on flies ahead of every reveal. (The demo story already says it: "Tile by tile…")
+- **Opening = the tile-flap envelope, opened by a flock.** On the whitewashed wall: a portrait glaze-white envelope whose
+  stepped flap is 26 separate thick tiles (6 across; 3, 4, 5 deep toward the centre), crossed with jute twine knotted over
+  the swallow tile at the lowest step. Tap → the knot loosens, the twine slips away → the clasp tile turns over; at 90° the
+  painted swallow lifts off and flies a wide arc → following it, the flap's tiles turn over one by one in a stepped wave from
+  the lowest step back up to the fold, each lifting off and sailing up out of the screen, terracotta backs flashing, like a
+  flock taking off → the open envelope shows its terracotta lining; the glaze card rises from the pocket and a sheen of
+  morning sun crosses it → home, where the swallow lands first and the flown tiles set themselves round the portrait niche.
+  Every piece moves on its own; nothing is a fade.
+- **Inside.** Home: the portrait in a limestone arched niche lined with border tiles, uncovered by a diagonal wave of turning
+  tiles behind the swallow; the names in big sunny hand lettering; the invitation on a glaze card painted by the tiles' own
+  brush; a countdown on painted house-number tiles. Story "Tile by tile": three moments, each in a painted baroque tile panel
+  (moldura), uncovered tile by tile as it scrolls in, the swallow crossing ahead. Details "The Day": each line of the
+  programme opens with a single-figure tile (figura avulsa) that turns into place; the venue in a wide tile panel. RSVP: the
+  reply card above a small tiled wall fountain; on send, tiles set a medallion panel, rings spread on the basin, two swallows
+  take off. Page change: a quick diagonal wave of turning tiles (optional, ≤ 600 ms).
+- **Three materials, never mixed up.** Ceramic: thick hand-made tiles, creamy tin glaze, cobalt brushwork with wet edges and
+  pooled night-blue, a calm satin gloss, terracotta biscuit backs, ivory grout. Paper: thick glaze-white cotton card painted in
+  cobalt ink by the same hand (no grout, no ceramic gloss on paper). Courtyard: lime-whitewash, limestone, sun-bleached
+  terracotta, jute, jasmine, olive, water. **No gold and no metal anywhere** — the one design of 21–30 without it.
+- **Colour (unchanged; the G177 colour variants depend on it).** cobalt `#1F4A9E` · night `#102554` · cobalt ink `#173A80` ·
+  glaze `#FAF8F2` · whitewash `#F2EDE3` · limestone `#E9E1D2` · terracotta `#AE583A` · deep terracotta `#8C4128` · terracotta
+  light `#E4A688` · olive `#7C8A6A` (tiny touches) · jute `#B58E5E`. No yellow, no pink, no purple, no gold.
+- **Not the others, no postcard.** 05 owns lemons, yellow and the V flap with a wax seal; 44 blue-and-white porcelain, toile,
+  cameos and engraved birds; 36 kraft paper, seed packets and tags; 27 zellige star mosaics, horseshoe arches, pierced
+  lanterns, doors, teal-and-saffron, bougainvillea and orange blossom; 21 velvet, red roses, torn paper, the gold oval, wax
+  seals; 22 the moon and night water; 23 jewel boxes, pearls, gems; 24 theatre curtains and tassels; 25 trains, brass,
+  tickets, luggage; 29 stars; 06 Art Deco fans and sunbursts. Never the Lisbon postcard: lemons, sardines, roosters, trams,
+  flags, the pear-shaped Portuguese guitar or fado scenes. No saints, angels, crosses or religious tile scenes. The swallow
+  is brush painting — never the 3D glazed ceramic swallow figurines sold as souvenirs. Patterns are original: no real panel,
+  church, palace, museum piece or seller's design.
+- **Type (Google Fonts; no theme or brief in the repo uses them; each answered HTTP 200 on 2026-10-24, also combined as
+  `family=Sevillana&family=Lusitana:wght@400;700&family=Faustina:ital,wght@0,400;0,500;1,400`).** *Sevillana* 400 — the names,
+  page headings and short hand-lettered lines ("Kindly reply", captions), ≥ 26 px, never in all capitals: sunny Iberian
+  fair-poster hand lettering with looping capitals. *Lusitana* 400/700 — widely letter-spaced capitals only (dates, labels,
+  buttons, countdown labels): a roman cut after 16th-century Portuguese book printing. *Faustina* 400/500 + italic — body,
+  times, captions and the form: a clean classic book serif with a soft italic.
+- **Motion (Claude builds it; GPT designs for it).** Opening ≈ 0–400 ms knot tug · 350–1000 twine slides off (strand down,
+  arms sideways) · 900–1500 clasp tile turns, swallow lifts at 90°, wings beat (glide ↔ wings-up) along an arc · 1300–2700
+  the flap wave (26 tiles, ~40 ms stagger, each: lift 4 px → turn → sail up out of the frame with a little spin) · 2600–3500
+  card rises, sun sheen, comes forward · 3600 home (view transition; the swallow arrives first, the niche surround sets tile by
+  tile). Everywhere: leaf shadows sway slowly; photos uncovered by diagonal tile waves; programme tiles turn into place;
+  countdown seconds on a house-number tile. Reduced motion: no turns, straight cuts.
+- **Sound (Claude synthesises them; silent until the first tap).** (1) knot: a rough jute tug and the soft hiss of twine
+  over paper; (2) clasp: the light glassy "tock" of a glazed tile lifted off another, with a faint ring; (3) swallow: a short
+  bright two-note twitter and a flutter of wings (FM chirps + filtered noise, no recorded birdsong); (4) flap wave: a quick
+  rising cascade of tiny ceramic clicks, one per tile, a little higher up each step; (5) courtyard bed: the soft trickle of
+  the wall fountain under a light morning air, very low, fading after the opening and returning on RSVP; (6) RSVP sent: tile
+  clicks settling into place, one clear glaze-and-glass chime, the two swallows' twitter.
+
+**Instructions for GPT (send before the first image):**
+```
+You are the art director, tile painter and still-life photographer of a luxury wedding stationery house, designing the mobile wedding website "Azulejo Mosaic" from scratch. The world is the sunlit whitewashed courtyard of an old quinta in the green hills of Sintra, Portugal, on a June morning — the estate is called the "Blue Swallow". Its signature: TILE BY TILE. Everything on the site is revealed by thick hand-made tiles turning over one by one (a painted cobalt face, a terracotta biscuit back), and the guide is a single swallow painted in cobalt brushwork that lifts off its tile when the invitation opens and flies ahead of every reveal. Three materials, never mixed up: (1) CERAMIC — thick hand-made tiles with a creamy white tin glaze (#FAF8F2) painted in cobalt (#1F4A9E, pooling to night blue #102554) with soft wet-edged strokes and gentle wash variations, slightly irregular hand-cut edges, a calm satin gloss, fine ivory grout; their backs unglazed terracotta biscuit (#AE583A, #8C4128, dusty #E4A688); (2) PAPER — thick glaze-white cotton card painted in cobalt ink by the same hand (no grout and no ceramic gloss on paper); (3) the COURTYARD — lime-whitewashed plaster (#F2EDE3), pale warm limestone (#E9E1D2), sun-bleached terracotta, natural jute twine (#B58E5E), white jasmine, silvery olive leaves (#7C8A6A, small touches only), clear water. Only these colours. No gold or metal of any kind, no yellow, no pink, no purple. The azulejo patterns are original, invented for this design: never a copy of a real tile panel, church, palace, museum piece, souvenir or another seller's design. Never: lemons, sardines, roosters, trams, flags, the pear-shaped Portuguese guitar or fado scenes, saints, angels, crosses or religious scenes, 3D ceramic swallow figurines, porcelain or toile, zellige or star mosaics, horseshoe arches, lanterns, doors, bougainvillea, orange blossom, roses, wax seals, Art Deco. Everything must look made and photographed for real: rich, tactile, sunlit, believable, magazine-quality luxury; never clip-art, never flat vector, never a cheap souvenir print. One soft warm Atlantic morning light from the upper left in every image. First you draw a design board of five phone screens (W1); then, giving that board as the reference image of every image, you make the production parts (W2): one object per image, no cast or drop shadow, no glow or halo outside the object, no text, letters, numbers, monograms, logos or watermarks. A transparent background must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard), and the object must stay at least 5% inside every edge.
+```
+
+#### W1 — Tasarım panosu (5 telefon ekranı; demo metin serbest, YALNIZ referans)
+Kaydet (W1): `collections/30_Azulejo_Mosaic/assets/gpt/mockups/design-board.png` · yaklaşık 1908×824 (≈2,3:1; araç vermiyorsa 1536×1024, beş ekran tek sırada) · opak · kit_check dışı
+
+```
+Use case: ui-mockup. Create a high-fidelity art direction board of FIVE mobile wedding website screens for a new luxury design called "Azulejo Mosaic", each screen in a 390 by 844 proportion, arranged side by side in one row with generous, even gaps on a soft warm limestone-grey studio background (the whole board about 2.3:1). The attached photographs (hero_portrait.jpg, story_1.jpg and venue.jpg) are ONLY the identity and styling reference for the fictional couple (she: long dark-brown wavy hair worn half up with a few jasmine flowers, olive skin, brown eyes, an ivory square-neck crepe gown; he: short dark wavy hair, a neat trimmed beard, light-tan skin, a navy suit, white shirt, navy tie and an olive-sprig boutonniere) and for the venue; everything else is new. The five screens must look like one finished, coherent, best-selling premium product made by a top luxury stationery designer: rich, tactile, sunlit, romantic, classic and bold; never minimal, never flat vector, never clip-art, never a souvenir print.
+
+THE CONCEPT — "Tile by tile": the sunlit whitewashed courtyard of an old quinta in the hills of Sintra on a June morning — the "Blue Swallow" estate. Lime-whitewashed walls (#F2EDE3) with soft dappled shadows of jasmine and olive leaves falling from the upper left; cool hand-painted cobalt azulejo tiles (#1F4A9E pooling to night blue #102554 on creamy tin glaze #FAF8F2) with thick hand-made bodies, slightly irregular edges and ivory grout; warm sun-bleached terracotta (#AE583A, #8C4128, #E4A688); pale limestone (#E9E1D2); natural jute twine; white jasmine and small silvery olive leaves. Everything is revealed TILE BY TILE — tiles with a painted cobalt face and a terracotta biscuit back turning over one by one — and a single swallow painted in cobalt brushwork flies ahead of every reveal. The original azulejo pattern of this design: a large round medallion (a four-petal rosette ringed by small stylised carnation buds) with sweeping acanthus scrolls, four tiles making one medallion; border tiles with a wavy ribbon and small rosettes. Paper is thick glaze-white cotton card painted in cobalt ink by the same hand. NO gold or metal anywhere, no yellow, no pink, no purple, no lemons, no trams, no roosters, no sardines, no flags, no Portuguese guitar, no religious figures, no zellige, no horseshoe arches, no lanterns, no doors, no bougainvillea, no roses, no wax seal.
+
+TYPOGRAPHY: the couple's names and the big headings in a sunny, romantic Iberian hand-lettered display script with looping, curled capitals, like the lettering painted by hand on an old Portuguese tile sign or an Andalusian fair poster — airy, warm and clearly legible (not a formal copperplate, not a casual marker); dates, labels and buttons in widely letter-spaced Renaissance roman capitals like the title page of a 16th-century Portuguese printed book; body text in a clean classic book serif with a soft italic. Cobalt and night-blue type on whitewash and paper; glaze-white type on cobalt buttons.
+
+Screen 1 — the opening (the closed envelope): full-bleed sunlit whitewashed courtyard wall with soft dappled jasmine-and-olive leaf shadows in the upper left; along the bottom of the screen a dado of cobalt azulejo tiles set in the wall and a strip of worn terracotta floor; at the lower right corner a sun-bleached terracotta pot of white jasmine standing on the floor, partly cut by the screen edge. At the top, tiny spaced capitals "TOGETHER WITH THEIR FAMILIES", the names "Inês & Mateo" large in the hand-lettered script in cobalt, and "JUNE 5, 2027 · SINTRA" in spaced capitals. In the middle, about 74% of the screen width, the CLOSED envelope seen perfectly straight on: portrait, about 4:5, thick creamy glaze-white cotton paper; its flap is made of REAL, SEPARATE, THICK hand-painted ceramic tiles — six square tiles across, set edge to edge with hairline gaps, stepping down toward the centre like a staircase (three tiles deep in the outer columns, four in the next, five in the two middle columns), their painting joining into round cobalt medallions; natural jute twine crosses the envelope (one strand straight down the centre, one straight across through the lowest step) and is tied in a small knot over one slightly larger loose tile sitting at the lowest step — that tile is painted with a single swallow in flight inside a small olive wreath; the calm glaze-white pocket below the flap has a hand-painted cobalt ribbon band along its bottom. Below the envelope "TAP TO OPEN" in tiny spaced capitals.
+
+Screen 2 — home: the whitewashed wall with leaf shadows. The top 55% of the screen: a shallow round-arched niche of pale limestone set into the wall, its opening lined with a band of cobalt border tiles, holding the couple's portrait (from the attached hero_portrait.jpg); across the lower right of the portrait a few painted tiles still cover the photo and are caught turning over — some edge-on, some showing their terracotta backs — revealing the photograph tile by tile; a small swallow painted in cobalt brushwork glides toward the niche's limestone ledge. Below: the names "Inês & Mateo" large in the script, "SATURDAY, JUNE 5, 2027" and "QUINTA DA ANDORINHA AZUL · SINTRA, PORTUGAL" in spaced capitals; then the top of a glaze-white cotton card with a hand-painted cobalt medallion flanked by acanthus scrolls at its head and the italic line "request the pleasure of your company at their wedding"; a countdown on four small square glazed house-number tiles, each with a fine painted cobalt border and its numeral painted in cobalt: "224", "07", "42", "18", with "DAYS · HOURS · MINUTES · SECONDS" in tiny spaced capitals under them; a cobalt pill button "Kindly reply" with glaze-white text.
+
+Screen 3 — story: the whitewashed wall. At the top small spaced capitals "TILE BY TILE" and the heading "Our Story" in the script. In the middle a tall framed azulejo panel: a painted baroque frame of cobalt acanthus scrolls and small carnation garlands on glazed tiles with visible grout lines, a scalloped crest with a small empty cartouche at its top, holding the couple's photograph (from the attached story_1.jpg, the café on a rainy afternoon). The photograph is being uncovered tile by tile: a diagonal wave of painted pattern tiles is turning over from the top left, about a third of the photo at the lower right is still covered, several tiles are caught mid-turn showing their terracotta backs, and the painted cobalt swallow flies across just ahead of the wave. Under the panel the caption "A rainy afternoon" in the script, a row of three tiny glazed tiles as page markers (the first painted solid cobalt) and two fine round arrow buttons; two or three small jasmine flowers drifting.
+
+Screen 4 — details: a glaze-white cotton card fills the upper part: the heading "The Day" in the script, "SATURDAY, JUNE 5, 2027" in spaced capitals, a fine hand-painted cobalt brush divider with a small rosette at its centre; the programme as three rows, each starting with a small square single-figure tile in the old Portuguese manner (one simple cobalt figure in the middle of the tile, tiny dot-crosses in its corners) — two interlocked rings · two wine glasses touching · a plate with a knife and a fork — then the time in spaced capitals, the event and the place in italic: "5:00 PM · Ceremony · The chapel garden", "6:00 PM · Cocktail hour · The tiled courtyard", "7:30 PM · Dinner & dancing · The cloister terrace"; a fourth row with a bow-tie tile "DRESS CODE · Summer formal". Below, on the whitewashed wall, the venue photograph (from the attached venue.jpg) inside a wide landscape azulejo panel with the same painted baroque cobalt frame and crest; under it "QUINTA DA ANDORINHA AZUL · SINTRA, PORTUGAL" in spaced capitals and an outlined terracotta button "View map".
+
+Screen 5 — RSVP: the whitewashed wall with leaf shadows. A tall glaze-white reply card fills most of the screen, a hand-painted cobalt medallion with acanthus scrolls at its head and a fine cobalt double line down its sides: the heading "Kindly Reply" in the script, the italic line "by April 30, 2027", then a real, readable form in cobalt ink: "Your name" on a fine underline, "Will you join us?" with two round options "Joyfully accepts" and "Regretfully declines", "Number of guests" as a select showing "2", "Your meal preference" as a select showing "Fish", and a full-width cobalt button "Send reply" with glaze-white text. Two painted cobalt swallows fly up from the card's upper right corner. At the bottom of the screen, partly behind the card, a small courtyard wall fountain: a little panel of cobalt tiles in a limestone surround, a thin clear stream falling from a carved limestone shell into a half-round limestone basin of clear water catching the sun, and beside it a terracotta pot of white jasmine.
+
+All five screens share one world (the same whitewash, cobalt tiles, terracotta, limestone, paper and light) but each has its own composition — not all centred. Use exactly this English sample text and no other words. Photos show the fictional adult couple only, natural and tasteful, not resembling any real or famous person. No device frames or bezels, no hands, no laptop, no marketing collage, no logos, no watermarks, no captions outside the screens. This is a design reference board, not a final website.
+```
+Kontrol: 5 ekran yan yana, her biri ~390:844; 1. ekranda badana duvar + yaprak gölgeleri + çini süpürgeliği, dikey zarf, kapak
+ayrı kalın karolardan 6 sütun basamaklı (merdiven, V/yay değil), sicim çapraz, en alt basamakta kırlangıçlı karo; 2. ekranda
+kemerli kireç taşı niş, portrenin köşesinde dönen karolar (terrakota sırt görünüyor), boyalı kırlangıç, ev numarası çinisi
+geri sayım; 3. ekranda boyalı barok çini panosunda fotoğraf dalga hâlinde açılıyor, önünde kırlangıç; 4. ekranda tek figürlü
+karo ikonları + geniş çini panosunda mekân; 5. ekranda okunur form + duvar çeşmesi + iki kırlangıç. Altın/metal, sarı/limon,
+pembe/mor, tramvay, horoz, bayrak, Portekiz gitarı, dini figür, zellige, kapı, fener, mühür yok. Başlık harfi güneşli İber el
+yazısı (resmî copperplate değil). Metindeki küçük harf bozuklukları kabul (yalnız referans). Sıradan ya da zayıfsa yeniden
+üret (en çok 3 deneme); W2 bu panodan türer.
+Kullanım: Claude'un yerleşim, tipografi ölçeği ve renk referansı; zarfın ekran genişliğine oranı, nişin ve kartların yeri,
+dalga ve kırlangıcın davranışı buradan ölçülür.
+
+### W2 — Parçalar (panodan türer; HER parçada `design-board.png` referans görsel; YAZI YOK)
+
+Ortak kurallar: tek görselde tek nesne · şeffaflar gerçek alfa · zemine düşen gölge yok · nesnenin dışında ışıma/hâle/ışın yok
+(güneş parıltısını, karo gölgesini, su pırıltısını site CSS ile ekler) · ışık sol üstten · oran önemli, piksel değil · karo,
+yaprak, çiçek, derz **sayısı** önemli değil, sayı için yeniden üretme.
+
+**Zarf tuvali (W2.1–W2.3, 1024×1536, aynı konum):** zarf kutusu x %8–92 · y %15–85 (≈4:5); cep üst kenarı y %41,5;
+sicimin dikey kolu x %50, yatay kolu ve düğüm y %61,7. Kapak çizilmez (Claude karolardan kurar). Önce W2.1; W2.2 ve W2.3
+**W2.1'i düzenleyerek**. **Karo tuvali (W2.5–W2.9 ve W2.17, 1024×1024, aynı kare):** karo x %10–90 · y %10–90. Önce W2.5;
+W2.6–W2.9 **W2.5'i düzenleyerek**; W2.10 **W2.9'u**, W2.11 **W2.10'u düzenleyerek**. Araç düzenleme yapamıyorsa referans
+ver ve kutuyu aynı piksellerde tut.
+
+#### W2.1 Zarfın arkası — açık, kapaksız (terrakota astar görünür)
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/envelope_back.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+Production asset for the "Azulejo Mosaic" wedding website (give design-board.png as the style reference), matching the envelope on screen 1 of the attached design board — but drawn OPEN and WITHOUT its tile flap (the flap's tiles are separate images). ONE back panel of a portrait envelope, alone, seen perfectly straight from the front, no perspective, no tilt. Placement on the canvas, exactly: its left edge at 8% and its right edge at 92% of the image width, its top edge at 15% and its bottom edge at 85% of the image height (a portrait rectangle of about 4:5 with crisp square corners). Its top edge is a clean straight cut: there is no paper flap at all. We see the inside of the envelope: it is lined with warm matte terracotta paper (#AE583A, deepening to #8C4128 toward the bottom) printed by hand with a small, even, slightly worn repeat of tiny cobalt (#1F4A9E) four-petal rosettes and dots, like a miniature azulejo motif; a slim margin of creamy glaze-white cotton paper (#FAF8F2), about 3% of the image width, shows along the top and both sides of the lining, and the paper's thickness shows as a hair-thin edge along the top. Nothing else: no pocket, no card, no twine, no tiles. One soft warm morning light from the upper left. No cast shadow or drop shadow, no glow or halo outside the envelope. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: kutu x %8–92 · y %15–85 (±%2); üst kenar düz (kapak yok); terrakota astar + küçük kobalt rozet deseni, üstte ve
+yanlarda ince sır beyazı pay; cep/kart/sicim/karo yok; gerçek alfa.
+Kullanım: zarfın en arka katmanı; kapalıyken üst kısmı Claude'un dizdiği kapak karolarının altında kalır; karolar uçunca açık
+zarfın içi olarak görünür; kart bunun önünde, cebin arkasında yükselir.
+
+#### W2.2 Zarfın ön cebi (aynı tuval)
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/envelope_pocket.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+The front pocket of the SAME envelope as the attached envelope_back.png (give envelope_back.png and design-board.png as the reference images, and edit envelope_back.png if the tool allows): the same 1024×1536 canvas, the same scale and the same straight front view; its left, right and bottom edges sit on exactly the same pixels as the envelope's (x 8% and 92%, bottom at 85%). The pocket spans the full width of the envelope, from a perfectly straight, crisp, horizontal top edge at 41.5% of the image height down to the envelope's bottom edge at 85%. It is thick creamy glaze-white cotton paper (#FAF8F2), calm and mostly plain, with the soft fold lines of its two side flaps and its bottom flap just visible, and the paper's thickness showing as a hair-thin edge along the cut top edge. Painted by hand in cobalt ink (#1F4A9E, pooling to #102554) with the same brush as the tiles: one fine line just below the top edge, and along the bottom, from 10% to 90% of the image width and about 2% above the bottom edge, a narrow band (about 4% of the image height) of a wavy ribbon with tiny rosettes in its curves, softly wet-edged like watercolour. Everything above the pocket's top edge is completely transparent (no lining, no back, no card). One soft warm morning light from the upper left; a hair-fine contact shade only on the paper itself. No cast shadow or drop shadow, no glow outside the pocket. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: envelope_back.png'nin üstüne %50 saydam konunca sol, sağ ve alt kenar çakışıyor (gözle kayma yok); üst kenar düz,
+y ≈%41,5; altta boyalı kobalt kurdele bandı; üstü tamamen şeffaf; gerçek alfa.
+Kullanım: kartın önündeki cep; kart bunun arkasından yükselir, dudağını geçince öne gelir; kapalıyken basamaklı karo kapağın
+altında görünen sakin beyaz yüzey.
+
+#### W2.3 Jüt sicim — çapraz bağ ve düğüm (aynı tuval)
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/envelope_twine.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+Only a length of natural jute twine tied round the SAME envelope as the attached envelope_back.png, drawn exactly where it lies on it — the same 1024×1536 canvas, the same scale and the same straight front view (edit envelope_back.png if the tool allows, then remove the envelope: the envelope itself is NOT drawn here). One vertical strand runs straight down the centre at 50% of the image width, from the envelope's top edge (15% of the height) to its bottom edge (85%), turning over in a tiny soft bend at both ends as if it continues behind; one horizontal strand runs straight across at 61.7% of the image height, from the envelope's left edge (8% of the width) to its right edge (92%), turning over in a tiny bend at both sides. The two strands meet at (50%, 61.7%) in a small, neat, slightly loose square knot, and two short loose ends hang from the knot down and to the right, the longest reaching about (57%, 71%), each ending in a few frayed fibres. The twine is about 1% of the image width thick: two twisted plies of natural golden-tan jute (#B58E5E with lighter #D2B48A fibres) with fine stray fibres. One soft warm morning light from the upper left; a whisper of contact shade only on the twine itself. Everything except the twine is fully transparent: no envelope, no tile, no paper. No cast shadow or drop shadow, no glow outside the twine. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: dikey kol x %50 (y %15–85), yatay kol y %61,7 (x %8–92); düğüm (%50, %61,7), iki kısa saçaklı uç sağ alta; zarf/karo
+çizilmemiş; gerçek alfa.
+Kullanım: en üst katman; Claude düğümden dikey kol (düğüm + uçlar onunla), sol kol, sağ kol diye üçe keser: düğüm gevşer,
+dikey kol aşağı kayar, kollar yanlara kayıp söner. Ölçülen düğüm = kapanış karosunun merkezi.
+
+#### W2.4 Zarftan yükselen davetiye kartı (boş)
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/invite_card.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+Production asset for the "Azulejo Mosaic" wedding website (give design-board.png as the style reference), matching the invitation card that rises out of the envelope. ONE flat portrait invitation card, alone, seen perfectly straight from the front, about 5:7, spanning from 14% to 86% of the image width and from 16% to 84% of the image height, centred: thick creamy glaze-white cotton card (#FAF8F2) with a fine soft tooth, crisp square corners and a hair-thin visible card edge. Hand-painted in cobalt ink (#1F4A9E, pooling to #102554) with a loaded brush, softly wet-edged like the tiles: a fine double border line inset about 6% from the card's edge, a tiny quarter-rosette in each of the four inner corners, and at the top centre, just inside the border, a small round wreath of olive leaves about 14% of the card's width whose centre is EMPTY paper (the website may set the couple's initials there as live text). Everything inside the border below the wreath, from 30% to 80% of the image height, is COMPLETELY EMPTY calm paper (the website sets the names, the date and the place there as live text): no ornament, no line, no stain, no shading change. One soft warm morning light from the upper left. No cast shadow or drop shadow, no glow outside the card. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: tek kart ~5:7; ince kobalt çift bordür, dört iç köşede minik çeyrek rozet, üst ortada içi boş zeytin çelengi;
+y %30–80 tamamen boş; gerçek alfa.
+Kullanım: cepten yükselen kart (isimler, tarih, yer canlı metin; çelenkte istenirse `initials`); Claude zarf genişliğinin
+~%88'ine ölçekler; view transition ile home kartına geçer.
+
+#### W2.5 Desen karosu — çeyrek madalyon (ayna-döşeme kaynağı)
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/tile_pattern.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+Production asset for the "Azulejo Mosaic" wedding website (give design-board.png as the style reference), matching the tiles of the envelope's stepped flap on screen 1 of the attached design board. ONE single square hand-made Portuguese-style ceramic tile, alone, lying perfectly flat and seen exactly straight on from above, no perspective, no tilt: the tile fills exactly from 10% to 90% of the image width and from 10% to 90% of the image height (a perfect square). Thick creamy white tin glaze (#FAF8F2) with a calm, even satin gloss — no bright reflection spot, no light streak and no gradient across the face (the website adds the sheen) — slightly irregular hand-cut edges with softly rounded corners and a hair-thin terracotta body just visible at the rim. Painted by hand in cobalt (#1F4A9E, pooling to night blue #102554 where the brush rested) with soft wet-edged strokes and gentle wash variations. The design is ONE QUARTER of a large repeating pattern, because the website mirrors this tile left-to-right and top-to-bottom to set whole panels: the exact centre of a large round medallion sits on the tile's TOP-LEFT corner — a quarter of a four-petal rosette fills that corner, ringed by a quarter circle of small stylised carnation buds and a fine painted ring; the exact centre of a secondary motif sits on the BOTTOM-RIGHT corner — a quarter of a cross of four curling acanthus leaves; between them sweeping acanthus scrolls fill the rest of the face. Every painted line that reaches an edge meets it cleanly, so that mirrored copies continue the pattern across the joints. An original pattern invented for this design. One soft warm morning light from the upper left. No cast shadow or drop shadow, no glow outside the tile. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: tek düz kare karo, x/y %10–90 (±%1,5); sol üst köşede çeyrek rozet + karanfil halkası, sağ alt köşede çeyrek akantus
+haçı; yüzde parlak nokta/ışık çizgisi/gradyan yok; gerçek alfa. (Claude 2×2 ayna dizip madalyonun kapandığına bakar; küçük
+uyumsuzluk için yeniden üretilmez.)
+Kullanım: bütün çini yüzeylerin tek kaynağı: basamaklı zarf kapağı (26 ayrı karo, ayna-döşeme), foto mozaiği örtüleri, home
+nişinin çevresine "yerleşen" karolar, teşekkür panosu; her karo ayrı 3B katman, arka yüzü tile_bisque; parlaklık CSS ile.
+
+#### W2.6 Karonun arkası — sırsız terrakota bisküvi (aynı kare)
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/tile_bisque.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+The unglazed BACK of the same tile as the attached tile_pattern.png (give tile_pattern.png and design-board.png as the reference images, and edit tile_pattern.png if the tool allows): the same 1024×1024 canvas, exactly the same square box (10–90% of the width and of the height), the same irregular outline and softly rounded corners, lying flat, seen straight on. Warm terracotta biscuit (#AE583A, with lighter dusty #E4A688 patches and deeper #8C4128 in the hollows), matte and slightly sandy, with a few shallow parallel ridges pressed into the clay, a faint ring of dried white lime mortar near one corner, and the thin rim of white glaze just visible at the edge. No pattern, no stamp, no mark. One soft warm morning light from the upper left. No cast shadow or drop shadow, no glow outside the tile. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: tile_pattern ile aynı kutu ve dış çizgi (%50 saydam üst üste: kayma yok); sırsız terrakota; damga/harf yok; gerçek alfa.
+Kullanım: dönen her karonun arka yüzü (kapak dalgası, kapanış karosu, foto mozaiği, programdaki ikon karoları, teşekkür panosu).
+
+#### W2.7 Bordür karosu (aynı kare)
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/tile_border.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+A BORDER tile from the same set as the attached tile_pattern.png (give tile_pattern.png and design-board.png as the reference images, and edit tile_pattern.png if the tool allows): the same 1024×1024 canvas, exactly the same square box (10–90% of the width and of the height), the same glaze, hand-made edges, calm satin gloss and cobalt brushwork, lying flat, seen straight on. Its painting: a broad wavy cobalt ribbon runs horizontally across the middle of the face from the left edge to the right edge, with a small four-petal rosette in each of its two curves; a fine straight cobalt line runs along the top edge and another along the bottom edge. Where the ribbon and the two lines meet the left and right edges they are at exactly the same height and thickness, so that tiles set side by side make one continuous border. No bright reflection spot, no gradient. One soft warm morning light from the upper left. No cast shadow or drop shadow, no glow outside the tile. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: aynı kutu; kurdele ve iki çizgi sol ve sağ kenarda aynı yükseklikte (yan yana sürekli bordür); gerçek alfa.
+Kullanım: sayfa altındaki duvar süpürgeliği (silhar), kart ve bant kenar sıraları, foto mozaiğinin kenar karoları; yatay
+dizilir, dikey kenarda 90° döndürülür.
+
+#### W2.8 Düz karo — "ev numarası çinisi" (aynı kare)
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/tile_plain.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+A PLAIN tile from the same set as the attached tile_pattern.png — the kind of tile used for hand-painted house numbers — (give tile_pattern.png and design-board.png as the reference images, and edit tile_pattern.png if the tool allows): the same 1024×1024 canvas, exactly the same square box (10–90% of the width and of the height), the same glaze, hand-made edges and light, lying flat, seen straight on. Its painting is only a fine double cobalt border line inset about 8% from the tile's edge and one tiny cobalt dot-flower in each corner inside it; the whole centre, from 25% to 75% of the image width and height, is COMPLETELY EMPTY white glaze (the website paints numbers and short words there as live text). No bright reflection spot, no gradient. One soft warm morning light from the upper left. No cast shadow or drop shadow, no glow outside the tile. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: aynı kutu; yalnız ince çift kobalt çerçeve + köşelerde minik nokta-çiçek; orta (%25–75) tamamen boş; gerçek alfa.
+Kullanım: geri sayım hücreleri (rakamlar canlı metin; saniye karosu dönerek değişir), story'de I · II · III sayfa işaretleri,
+RSVP teşekkür satırı.
+
+#### W2.9 Kapanış karosu — kırlangıç (aynı kare)
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/tile_swallow.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+The CLASP tile of the envelope, from the same set as the attached tile_pattern.png (give tile_pattern.png and design-board.png as the reference images, and edit tile_pattern.png if the tool allows), matching the loose tile at the lowest step of the flap on screen 1 of the attached design board: the same 1024×1024 canvas, exactly the same square box (10–90% of the width and of the height), the same glaze, hand-made edges, light and cobalt brushwork, lying flat, seen straight on. In its centre ONE swallow in flight, seen from below, wings spread wide, a deeply forked tail, painted in confident loaded cobalt strokes (darker night-blue pools at the wing roots and the head, a few tiny unpainted glaze highlights), the bird spanning about 56% of the image width with its body at the exact centre; around it a round wreath of small olive leaves painted lightly, not touching the bird; a quarter rosette in each corner and a fine double cobalt line framing the face. A painted picture flat on the glaze — not a raised or 3D ceramic bird. No bright reflection spot, no gradient. One soft warm morning light from the upper left. No cast shadow or drop shadow, no glow outside the tile. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: aynı kutu; ortada boyalı tek kırlangıç (alttan, kanatlar açık, çatal kuyruk) + zeytin çelengi + köşe rozetleri;
+kabartma/3B kuş değil; gerçek alfa.
+Kullanım: zarfın kapanışı (en alt basamakta, düğümün altında, ≈1,2× karo); açılışta 3B döner, 90°'de swallow_glide kalkar,
+arka yüzü tile_bisque; favicon ve og'de kapanış.
+
+#### W2.10 Kırlangıç — karodan kalkan boyalı kuş, süzülüş (aynı kare)
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/swallow_glide.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+The painted swallow of the attached tile_swallow.png, lifted off its tile (give tile_swallow.png and design-board.png as the reference images, and edit tile_swallow.png if the tool allows): the same 1024×1024 canvas, the bird at exactly the same place, size and pose — seen from below, wings spread wide, a deeply forked tail — but the tile, the glaze, the olive wreath, the corner rosettes and the border lines are all gone. What remains is only the swallow itself as living cobalt brush painting: the same confident wet-edged cobalt strokes (#1F4A9E, pooling to #102554), the same few tiny unpainted highlights now showing as pale glaze-white specks (#FAF8F2) inside the bird, a faint glossy glaze sheen on the paint, so that it reads as the painted bird that has peeled off the tile and come alive. Not a photograph of a real bird, not a 3D ceramic figurine, no added outline. Everything outside the bird is fully transparent. One soft warm morning light from the upper left. No cast shadow or drop shadow, no glow or halo outside the bird. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: tile_swallow'daki kuşla aynı yer, boy ve poz (%50 saydam üst üste: çakışıyor); karo/çelenk/çizgi yok; boyalı kobalt
+fırça kuşu (fotoğraf ya da seramik biblo değil); gerçek alfa.
+Kullanım: açılışta karodan kalkıp ekranda yay çizen kılavuz kırlangıç; sitede her açılış dalgasının önünde uçar (CSS motion
+path), home'da nişe süzülür, RSVP'de ikinci kopyayla havalanır; swallow_wingsup ile kanat çırpar.
+
+#### W2.11 Kırlangıç — kanatlar yukarıda (aynı kare)
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/swallow_wingsup.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+The SAME painted swallow as the attached swallow_glide.png (give swallow_glide.png and design-board.png as the reference images, and edit swallow_glide.png if the tool allows): the same 1024×1024 canvas; the body, head and forked tail at exactly the same place, size and angle; the same cobalt brush painting and pale glaze-white specks. Only the wings have changed: both raised high above the body in a V at the top of a wingbeat, slightly cupped, the wingtips staying at least 8% inside the top edge. Everything outside the bird is fully transparent. One soft warm morning light from the upper left. No cast shadow or drop shadow, no glow or halo outside the bird. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: gövde ve kuyruk swallow_glide ile aynı yerde; kanatlar yukarıda V; kenara değmiyor; gerçek alfa.
+Kullanım: glide ↔ wingsup ardışık (`steps`) = kanat çırpma; süzülürken yalnız glide.
+
+#### W2.12 Kireç taşı kemerli niş — home portresi (açıklık şeffaf)
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/frame_niche.png` · 1024×1536 · **Şeffaf zemin** · açıklık şeffaf
+
+```
+Production asset for the "Azulejo Mosaic" wedding website (give design-board.png as the style reference), matching the arched niche around the couple's portrait on screen 2 of the attached design board. ONE shallow arched wall niche, alone, seen perfectly straight from the front, photographed for real: a moulded surround of pale warm limestone (#E9E1D2, fine natural pores, softly worn edges) with a round-arched top and a small plain keystone, and at the bottom a projecting limestone ledge (a sill) about 7% of the image height. Just inside the limestone a band of hand-painted cobalt border tiles one tile wide (a wavy ribbon with small rosettes, cobalt #1F4A9E on creamy glaze #FAF8F2, fine ivory grout lines between the tiles) lines the opening up both sides, round the arch and along the bottom. The whole niche spans from 8% to 92% of the image width and from 6% to 94% of the image height. In the middle the round-arched opening — straight sides and a semicircular top — from 20% to 80% of the image width and from 19% to 81% of the image height, is COMPLETELY TRANSPARENT (a real hole in the alpha channel, nothing inside it: no wall, no glass, no picture); the tile band and the limestone close all the way round it. One soft warm morning light from the upper left. No cast shadow or drop shadow, no glow or halo outside the niche. No plants, no pots, no birds. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: kemerli açıklık (x %20–80 · y %19–81) tamamen şeffaf, halka (çini bandı + kireç taşı) kesintisiz kapalı; altta çıkıntılı
+eşik; bitki/kuş yok; gerçek alfa.
+Kullanım: home portresi (maske = şeffaf kemer açıklığı); portre tile_pattern mozaiğiyle diyagonal dalga hâlinde açılır;
+açılıştan uçan karolar nişin çevresine "yerleşir"; teşekkür modunda teşekkür fotoğrafı.
+
+#### W2.13 Boyalı barok çini panosu — story çerçevesi (pencere şeffaf)
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/frame_panel.png` · 1024×1536 · **Şeffaf zemin** · pencere şeffaf
+
+```
+Production asset for the "Azulejo Mosaic" wedding website (give design-board.png as the style reference), matching the framed tile panel around the story photograph on screen 3 of the attached design board. ONE portrait azulejo panel frame, alone, seen perfectly straight from the front, photographed for real: a painted baroque frame (a "moldura") on hand-made glazed tiles — broad cobalt (#1F4A9E, night blue #102554 in the deepest strokes) acanthus scrolls and small carnation garlands painted with soft wet-edged strokes on creamy white tin glaze (#FAF8F2) — with fine ivory grout lines forming a visible grid of square tiles across the whole frame and slightly irregular hand-made tile edges along its outline. At the top centre the frame rises in a scalloped crest of scrolls holding a small EMPTY oval cartouche (plain glaze inside); at the bottom centre a scrolled apron holds a wider EMPTY cartouche (plain glaze inside). The whole frame spans from 6% to 94% of the image width and from 7% to 93% of the image height. In the middle a rectangular window, from 18% to 82% of the image width and from 22% to 74% of the image height (about 4:5), is COMPLETELY TRANSPARENT (a real hole in the alpha channel, nothing inside it); a fine painted terracotta (#AE583A) line runs round the window's edge, and the frame closes all the way round it. An original pattern invented for this design; no saints, angels, figures or religious motifs. One soft warm morning light from the upper left. No cast shadow or drop shadow, no glow or halo outside the frame. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: pencere (x %18–82 · y %22–74, ≈4:5) tamamen şeffaf ve halka kapalı; üstte boş oval kartuşlu tepelik, altta boş
+kartuşlu etek; derz ızgarası görünür; figür/dini motif yok; gerçek alfa.
+Kullanım: story'nin üç anı (sol–sağ–sol) ve home'daki hikâye tanıtımı; fotoğraf tile_pattern mozaiğiyle açılır, önünde
+swallow_glide uçar; kartuşlara istenirse canlı metin (I, II, III).
+
+#### W2.14 Geniş çini panosu — mekân çerçevesi (pencere şeffaf)
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/frame_wide.png` · 1536×1024 · **Şeffaf zemin** · pencere şeffaf
+
+```
+Production asset for the "Azulejo Mosaic" wedding website (give design-board.png and frame_panel.png as the reference images), matching the wide framed tile panel around the venue photograph on screen 4 of the attached design board. ONE landscape azulejo panel frame from the same family as frame_panel.png, alone, seen perfectly straight from the front, photographed for real: the same painted baroque cobalt frame of acanthus scrolls and small carnation garlands on hand-made glazed tiles with fine ivory grout lines and slightly irregular tile edges along its outline, a scalloped crest at the top centre holding a small EMPTY oval cartouche, and a low scrolled apron at the bottom centre. The frame spans from 5% to 95% of the image width and from 6% to 94% of the image height. In the middle a rectangular window, from 15% to 85% of the image width and from 22% to 81% of the image height (about 16:9), is COMPLETELY TRANSPARENT (a real hole in the alpha channel, nothing inside it); a fine painted terracotta (#AE583A) line runs round it, and the frame closes all the way round. No saints, angels, figures or religious motifs. One soft warm morning light from the upper left. No cast shadow or drop shadow, no glow or halo outside the frame. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: pencere (x %15–85 · y %22–81, ≈16:9) tamamen şeffaf ve halka kapalı; frame_panel ile aynı aile; boş kartuşlu
+tepelik; gerçek alfa.
+Kullanım: details'te mekân fotoğrafı (`venue`, 16:9) — mozaikle açılır; geniş ekranda home hikâye tanıtımı.
+
+#### W2.15 Sır beyazı kart (3 dilim: üst süs · tekrarlanan orta · alt süs)
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/card_glaze.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+Production asset for the "Azulejo Mosaic" wedding website (give design-board.png as the style reference), matching the tall reply card of screen 5 and the programme card of screen 4 of the attached design board. ONE tall card of thick creamy glaze-white cotton paper (#FAF8F2, fine soft tooth), alone, portrait 2:3, seen perfectly straight from the front, spanning from 8% to 92% of the image width and from 5% to 95% of the image height, with crisp square corners and a hair-thin visible card edge. Hand-painted in cobalt ink (#1F4A9E, pooling to #102554) by the tiles' own brush, softly wet-edged. It is designed so the website can cut it into three horizontal slices and stretch the middle one. TOP band (the top 20% of the card): a centred painted medallion — a four-petal rosette ringed with small carnation buds, about 16% of the card's width — flanked by two sweeping acanthus scrolls that taper into a fine double line running out toward both sides. MIDDLE band (from 20% to 86% of the card's height): plain paper with ONLY a fine double cobalt line running straight down each side, about 5% in from the edges, exactly the same at every height, nothing else; the card's left and right edges perfectly straight and vertical. BOTTOM band (the last 14%): the double lines turn the two corners and close along the bottom, with one small painted rosette at the bottom centre. No form fields, no photo window, no tiles, no grout. One soft warm morning light from the upper left. No cast shadow or drop shadow, no glow outside the card. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: orta bantta yalnız iki yandaki düz çift çizgi (yükseklik boyunca aynı, tekrarlanabilir); üstte madalyon + akantus,
+altta küçük rozet; yan kenarlar dik; seramik/derz yok; gerçek alfa.
+Kullanım: home davet kartı, details programı ve G138 blokları (travel, dress code, menü, registry, SSS), RSVP formu; Claude üst ·
+orta · alt diye keser, ortayı içeriğe göre uzatır.
+
+#### W2.16 Ayırıcı — kobalt fırça çizgisi ve rozet
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/divider_brush.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+Production asset for the "Azulejo Mosaic" wedding website (give design-board.png as the style reference), matching the small dividers of the attached design board. ONE delicate horizontal divider painted by hand in cobalt ink (#1F4A9E, pooling to #102554), alone, on nothing: at its exact centre a small four-petal rosette with two tiny carnation buds, about 8% of the image height, and from it a fine brush line runs level to both sides, swelling slightly and tapering to hair-fine points, with a light dry-brush texture toward its ends; the whole divider about 70% of the image width, perfectly level in the vertical middle of the canvas. Nothing else, plenty of empty space above and below. One soft warm morning light from the upper left. No cast shadow or drop shadow, no glow. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: tek ince yatay fırça çizgisi + ortada küçük rozet; uçlar kıl inceliğinde; kenarlara değmiyor; gerçek alfa.
+Kullanım: başlık altları (home, story, details, rsvp); Claude dar şerit olarak kırpar; üstünden sabah ışığı süpürmesi.
+
+#### W2.17 Program ikonları — tek figürlü karolar (figura avulsa), altı ayrı dosya (aynı kare)
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/icon_rings.png`, `icon_glasses.png`, `icon_dinner.png`, `icon_guitar.png`, `icon_bowtie.png`, `icon_ship.png` · her biri 1024×1024 · **Şeffaf zemin**
+
+```
+Production asset for the "Azulejo Mosaic" wedding website (give design-board.png and tile_plain.png as the reference images), matching the small programme tiles on screen 4 of the attached design board. ONE small single-figure tile in the old Portuguese manner ("figura avulsa"), alone, from the same set as tile_plain.png: the same 1024×1024 canvas, the same square box (10–90% of the width and of the height), the same creamy tin glaze, hand-made edges, calm satin gloss and cobalt brushwork, lying flat, seen straight on. In its centre ONE simple figure painted in bold, confident cobalt strokes (#1F4A9E, pooling to #102554), filling about 50% of the tile and clearly readable when the tile is shown at 40 px; a tiny cobalt dot-cross in each of the four corners; no border line, no other ornament. All six tiles of this set share exactly the same brush weight, colour, corner dots and style. No bright reflection spot. One soft warm morning light from the upper left. No cast shadow or drop shadow, no glow outside the tile. No text, letters, numbers or monogram. True transparent background PNG (a real alpha channel, not white, not a checkerboard). Make six separate images:
+icon_rings = two interlocked wedding rings
+icon_glasses = two wine glasses touching at the rim
+icon_dinner = a round plate seen from the front with a knife and a fork beside it
+icon_guitar = a classical acoustic guitar with the classic figure-of-eight body, slightly tilted (not the pear-shaped Portuguese guitar)
+icon_bowtie = a gentleman's bow tie
+icon_ship = a small sailing ship with two sails on three short wave lines
+```
+Kontrol: altı dosya, her birinde tek figürlü karo; tile_plain ile aynı kutu; hepsi aynı fırça kalınlığı ve köşe noktaları; 40
+px'te okunuyor; harf/rakam yok; gerçek alfa.
+Kullanım: details programı (etiketten eşleme: ceremony = rings, cocktail/champagne = glasses, dinner = dinner, dancing/music =
+guitar, dress code = bowtie, travel & stay = ship); satır görününce karo 3B dönüp yerine oturur (arka yüz tile_bisque).
+
+#### W2.18 Avlu duvarı — telefon zemini
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/courtyard.png` · 1024×1536 · opak
+
+```
+Production background for the "Azulejo Mosaic" wedding website (give design-board.png as the style reference), matching the courtyard wall behind screens 1 and 5 of the attached design board. A full-frame vertical (2:3) photograph, edge to edge, of the sunlit whitewashed wall of an old quinta courtyard in the hills of Sintra on a summer morning, seen perfectly straight on: the upper 80% is calm lime-whitewashed plaster (#F2EDE3) with many thin limewash layers, a gentle hand-trowelled undulation, a delicate chalky bloom and here and there a very faint washed-out trace of old cobalt wash — very low contrast, so dark blue text reads on it everywhere; along the bottom, from 80% to 93% of the height, a dado of hand-painted cobalt azulejo tiles set flush in the wall — one row of border tiles with a wavy ribbon above two rows of medallion pattern tiles, fine ivory grout lines; from 93% to the bottom edge a strip of worn, sun-bleached terracotta floor tiles meeting the wall. Soft warm Atlantic morning sun from the upper left as a gentle light gradient across the plaster. NO leaf shadows, no plants, no pots, no windows, no doors, no arches, no lamps, no objects (they are separate images). Rich, true-to-life, luxurious photography with a subtle film grain. No text, letters, numbers, logos or watermarks.
+```
+Kontrol: tam opak; üst %80 sakin badana (orta kısım boş); altta çini süpürgeliği (%80–93) + terrakota zemin şeridi; yaprak
+gölgesi, bitki, kapı, pencere, kemer yok; yazı yok.
+Kullanım: index ve RSVP zemini (telefon); üstüne leaf_shadow (multiply), pot_jasmine ve fountain konur; home hero'nun ve
+og'nin tabanı (geniş ekranda courtyard_wide).
+
+#### W2.19 Avlu duvarı — geniş ekran
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/courtyard_wide.png` · 1536×1024 · opak
+
+```
+The same courtyard wall as courtyard.png (give courtyard.png and design-board.png as the reference images), now a full-frame horizontal (3:2) photograph, edge to edge, seen perfectly straight on: the same calm lime-whitewashed plaster in the upper part, the same dado of hand-painted cobalt azulejo tiles from 78% to 92% of the height (one row of border tiles above two rows of medallion pattern tiles), the same strip of sun-bleached terracotta floor below it, the same soft warm morning light from the upper left and the same film grain. The middle half of the width and the upper three quarters are calm and empty. NO leaf shadows, no plants, no pots, no windows, no doors, no arches, no objects. No text, letters, numbers, logos or watermarks.
+```
+Kontrol: courtyard ile aynı duvar, çini ve ışık; orta yarı sakin; opak.
+Kullanım: 700 px ve üstü ekranlarda courtyard'ın yerine (index, home hero, RSVP); og görselinin zemini.
+
+#### W2.20 Badana sıva — dikişsiz doku
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/wall_whitewash.png` · 1024×1024 · opak, dikişsiz
+
+```
+Production texture for the "Azulejo Mosaic" wedding website (give courtyard.png and design-board.png as the reference images), the whitewashed wall of the inner pages of the attached design board. A seamless, tileable square texture of the same sunlit lime-whitewashed plaster as courtyard.png, seen perfectly flat and straight on: warm soft white (#F2EDE3), thin limewash layers, a gentle trowelled undulation, faint soft brush marks, a delicate chalky bloom, at most one or two very faint washed-out traces of old cobalt wash. Very low contrast. Perfectly even lighting: no vignette, no gradient, no hotspot, no cracks, no stains, no tiles, so that four copies placed side by side join invisibly (the left edge continues the right edge, the top edge continues the bottom edge). No objects, no text, letters, numbers, logos or watermarks.
+```
+Kontrol: sakin badana, eşit ışık; 2×2 dizince dikiş görünmüyor (Claude dizip bakar; küçük dikişi ofsetle kendisi giderir — yalnız
+bunun için yeniden üretme); opak.
+Kullanım: home, story, details sayfalarının zemini (`background-repeat`), üstünde leaf_shadow ve sabah ışığı gradyanı.
+
+#### W2.21 Yaprak gölgesi — güneşte yasemin ve zeytin (çarpma katmanı)
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/leaf_shadow.png` · 1024×1536 · opak (beyaz zemin, multiply)
+
+```
+Production light overlay for the "Azulejo Mosaic" wedding website (give design-board.png as the style reference), the dappled leaf shadows that fall across the whitewashed walls of the attached design board. A full-frame vertical (2:3) image of ONLY SHADOWS on a pure flat white ground (#FFFFFF): the soft, sun-cast shadows of a jasmine vine and a few sprays of an old olive tree hanging over a courtyard wall from a pergola above and to the left — slender olive leaves, small jasmine leaves and star-shaped flower clusters, a few long trailing stems — in a cool, transparent-looking blue-grey (#8E9AAE at its darkest, most shadows much lighter), crisp where the stems are close to the wall and soft and blurred where they are further away, with small bright gaps of sunlight between the leaves. The shadows come in from the top-left corner and run along the top edge and down the left edge, with one lighter spray reaching in from the right edge; the middle and the whole lower half of the image stay almost completely white. Only the shadows: no actual leaves, flowers or branches, no wall texture, no colour, no gradient on the white ground. No text, letters, numbers, logos or watermarks.
+```
+Kontrol: zemin düz saf beyaz; yalnız mavi-gri yaprak gölgeleri (sol üst köşe, üst ve sol kenar yoğun, sağdan tek hafif dal);
+orta ve alt yarı neredeyse beyaz; gerçek yaprak, renk, doku yok; opak.
+Kullanım: Claude `mix-blend-mode: multiply` ile badana üstüne koyar (beyaz görünmez), düşük opaklıkta yavaşça salındırır;
+index'te tam, iç sayfalarda köşede; açılışta "kıpırdar".
+
+#### W2.22 Güneşte solmuş terrakota saksı + yasemin
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/pot_jasmine.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+Production asset for the "Azulejo Mosaic" wedding website (give design-board.png as the style reference), matching the terracotta pot of jasmine on screens 1 and 5 of the attached design board. ONE old sun-bleached terracotta pot planted with a jasmine bush in flower, alone, seen from the front at a slightly high eye level, photographed for real: a classic hand-thrown rounded pot with a rolled rim in warm unglazed terracotta (#AE583A) faded by years of sun to dusty #E4A688 on its upper side, a soft white lime bloom near the base and one small old chip in the rim; from it rises a loose, airy jasmine bush — slender twining stems, small dark-green leaves kept muted, many small white star-shaped five-petal flowers and a few pale buds (white only, no pink) — a few stems trailing over the rim. The pot and plant span about 15–85% of the image width and 8–92% of its height, the pot in the lower half. No saucer, no ground, no shelf, no tiles. One soft warm morning light from the upper left. No cast shadow or drop shadow, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: tek saksı, güneşte solmuş terrakota, kireç izi; beyaz yasemin (pembe yok); zemin/tabak yok; gerçek alfa.
+Kullanım: index sağ alt köşede zemine basar (hafif paralaks), RSVP'de çeşmenin yanında, home imzasında ("Open the envelope
+again" üstünde); 404/teşekkür modunda küçük süs.
+
+#### W2.23 Avlu duvar çeşmesi (chafariz)
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/fountain.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+Production asset for the "Azulejo Mosaic" wedding website (give design-board.png as the style reference), matching the small wall fountain at the bottom of screen 5 of the attached design board. ONE small Portuguese courtyard wall fountain, alone, seen perfectly straight from the front at eye level, photographed for real: a narrow upright panel of hand-painted cobalt azulejo tiles (two tiles wide and three high, the medallion pattern forming one round medallion, fine ivory grout lines) framed by a moulded pale limestone surround (#E9E1D2) with a small scrolled limestone crest on top; from a carved limestone scallop-shell spout at the foot of the panel a thin, clear, glassy stream of water falls into a half-round limestone basin below; the basin's front edge is moulded, and it is filled to just under its rim with clear, still water catching the morning light in a few soft bright reflections. The whole fountain spans about 18–82% of the image width and 6–94% of its height. No plants, no pots, no faces or masks, no coins, no figures, no religious motifs, no floor. One soft warm morning light from the upper left. No cast shadow or drop shadow, no glow or halo outside the fountain. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: tek duvar çeşmesi: 2×3 çini panosu (tek madalyon) + kireç taşı çerçeve ve tepelik, deniz kabuğu ağız, ince su akışı,
+yarım yuvarlak havuz; yüz/maske/bitki yok; gerçek alfa.
+Kullanım: RSVP sayfasının altında (kartın arkasından görünür); akışta ve havuz yüzeyinde CSS ışık pırıltısı (maske = suyun
+alfa bölgesi); gönderilince havuzda halka halka dalga, iki kırlangıç havalanır; çeşme şırıltısı sesi.
+
+#### W2.24 Süzülen küçük nesneler — iki ayrı dosya
+**Kaydet:** `collections/30_Azulejo_Mosaic/assets/gpt/parts/float_jasmine.png`, `float_leaf.png` · her biri 1024×1024 · **Şeffaf zemin**
+
+```
+Production asset for the "Azulejo Mosaic" wedding website (give design-board.png as the style reference), matching the drifting jasmine and olive leaves of the attached design board. ONE single small object, alone, photographed for real, centred, not cropped, generous empty margin all round. One soft warm morning light from the upper left. Nothing else: no surface, no other objects, no dust, no sparkle. No cast shadow or drop shadow, no glow or halo outside the object. No text, letters, numbers, monograms, logos or watermarks. True transparent background PNG (a real alpha channel, not white, not a checkerboard). Make two separate images:
+float_jasmine = one single white jasmine flower with five star-shaped petals and a short slender tube, seen slightly from above, filling about 40% of the square (white only, no pink)
+float_leaf = one single slender olive leaf, silvery grey-green (#7C8A6A) on top with its paler underside showing at one gently curled edge, lying on a diagonal, filling about 60% of the diagonal
+```
+Kontrol: iki dosya, her birinde tek nesne; yasemin beyaz (pembe yok), zeytin yaprağı gümüşi; yüzey/parıltı yok; gerçek alfa.
+Kullanım: açılışın sonunda 6–8 kopya süzülür (Claude döndürür/ölçekler), story'de 2–3, RSVP gönderilince yeniden.
+
+### Instructions for GPT — iş sırası ve teslim (PAKET 8)
+
+```
+Work only on PAKET 8 of collections/30_Azulejo_Mosaic/assets/gpt/GPT_PROMPTS.md in the repository muzaffergrl/davetiye-maker (branch main). Ignore every other section of that file: PAKET 2, 3, 6R and 7 are done or cancelled, PAKET 5R is the old look that this package replaces, and the note at the top of the file (whitewash_ground / env_back / flap as style references, green photo windows) does NOT apply to PAKET 8. Do NOT attach any image that existed in collections/30_Azulejo_Mosaic/assets/gpt/parts/ before this package (env_*, flap*, twine, tile_front, tile_back, mosaic_tile_*, card_small, niche_frame, story_frame, venue_frame, corner_spray, divider, terracotta_pot, accent_*, glaze_paper, whitewash_ground, web_hero), nothing from platform/themes/azulejo-mosaic/img/, no design board of another design, and not photos/story_2.jpg.
+
+1. ONE chat, in this order. Send the "Instructions for GPT (send before the first image)" message of PAKET 8 first. Then W1, the design board: attach collections/30_Azulejo_Mosaic/assets/gpt/photos/hero_portrait.jpg, story_1.jpg and venue.jpg as the identity reference of the couple and the venue only. The board is the design; if it is weak, looks ordinary or misses its Kontrol line, make it again before going on (at most 3 tries). Commit and push the board as soon as it is chosen.
+2. Then W2, one image per prompt, in the order W2.1 to W2.24, in the same chat. Give the finished design-board.png as the reference image of EVERY W2 image. The aligned groups must line up: make W2.1 envelope_back first, then W2.2 envelope_pocket and W2.3 envelope_twine by EDITING envelope_back.png (same 1024×1536 canvas, same envelope box); make W2.5 tile_pattern first, then W2.6 tile_bisque, W2.7 tile_border, W2.8 tile_plain and W2.9 tile_swallow by EDITING tile_pattern.png (same 1024×1024 canvas, same square); make W2.10 swallow_glide by EDITING tile_swallow.png and W2.11 swallow_wingsup by EDITING swallow_glide.png. Also give the extra references named in each prompt: frame_panel.png for W2.14, tile_plain.png for the six W2.17 icons, courtyard.png for W2.19 and W2.20. If your tool cannot edit, attach the base image as a reference and keep the box on the same pixels. Check by laying each one over its base at 50% opacity: the outline (for the swallows: the bird's body) must sit in the same place at the same size; regenerate once if a shift is plainly visible and write any remaining difference in TESLIM.txt.
+3. Use each English prompt exactly as written. One object per image. No text, letters, numbers, monograms, logos or watermarks in any W2 image (sample text is allowed on W1 only). In the two multi-image prompts (W2.17 icons, W2.24 floats) each listed line is its own image and its own file.
+4. Keep each image in the ratio of its Kaydet size: 1:1, 2:3 or 3:2 (W1 about 2.3:1). The pixel size may differ. Do not resize, crop, mirror, repaint or recolour any pixel with code — Claude crops, mirrors, assembles the tiles and cuts the pieces.
+5. Photo windows (W2.12 the niche, W2.13 the panel, W2.14 the wide panel) are TRANSPARENT openings; a ring that closes all the way round them matters more than the opening itself. Never fill them with green, white, glass or a picture.
+6. Counts (tiles in a dado or panel, leaves, flowers, grout lines, rosettes) do not matter; never regenerate for a count. Regenerate only for: a wrong object; text present; a cast/drop shadow or a glow outside the object; a fake background (white or checkerboard) instead of real alpha; an object touching the canvas edge; a wrong ratio; a photo window that is not transparent or not closed; a tile that is not a flat, straight-on square or that has a bright reflection spot; a swallow that is a photograph or a 3D ceramic figurine instead of cobalt brush painting; leaf_shadow with real leaves, colour or wall texture instead of shadows on white; gold, yellow, pink or purple anywhere; or an aligned-group part that plainly does not line up with its base. At most 2 attempts per part; then keep the best one, note the defect and move on.
+7. Delivery: commit every PNG to the repository at exactly the path on its Kaydet line, with exactly that file name (the parts in collections/30_Azulejo_Mosaic/assets/gpt/parts/, the board at collections/30_Azulejo_Mosaic/assets/gpt/mockups/design-board.png). No zip, no Downloads folder, no other folder, nothing under platform/ or docs/ (not docs/qa), no new folder, no download names, no "_final", "_v2" or "(1)" suffixes; rejected tries are not committed. Save as PNG. Push to branch main; only if you cannot push to main, push a branch named codex/g30-paket8 and say so on the first line of TESLIM.txt. Run git pull --rebase origin main before each push. Push after W1, then after W2.4, W2.11, W2.17 and W2.24 ("30 PAKET 8: W1", "30 PAKET 8: W2 1/4", …) so nothing is lost if the chat breaks; the last commit is "30 PAKET 8: teslim". Touch no other file, write no code, do not run gpt_yerlestir.py or build_images.py.
+8. Finally write collections/30_Azulejo_Mosaic/assets/gpt/parts/TESLIM.txt in Turkish: branch and last commit; how many files were delivered (expected: the board + 30 parts); for every file the target size and the actual size, RGBA or RGB (real alpha channel or not), the number of attempts and every difference from its Kontrol line (be specific); the alignment results (envelope_pocket and envelope_twine against envelope_back; tile_bisque, tile_border, tile_plain, tile_swallow and the six icons against tile_pattern; swallow_glide against tile_swallow; swallow_wingsup's body against swallow_glide: shift yes/no, roughly how much); anything skipped and why; which reference images were attached; and one line confirming that no pixels were changed by code. If you cannot write to the repository at all, stop and say so clearly in the chat; do not hand the upload to the user.
+```
