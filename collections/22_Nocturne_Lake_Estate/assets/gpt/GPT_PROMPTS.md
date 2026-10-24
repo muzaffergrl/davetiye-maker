@@ -482,3 +482,232 @@ Kontrol (gözle; piksel ölçme yok): 1 adet düz, parlak, tek tonda yeşil alan
 ### 7.V Promo video (2. video) — GPT'ye verilmez
 Claude gerçek site kaydından üretir (`package/listing/video_promo.mp4`, 1080×1080, H.264, sessiz, 12–15 sn): açılış → sayfalar →
 düzenleyici → RSVP. Videoda gösterilen her şey gerçek siteden gelir; yapay zekâ videosu kullanılmaz.
+
+---
+
+## PAKET 8 — Nocturne yeniden tasarım (2026-10-24)
+
+> Kullanıcı (2026-10-23/24): 21'den itibaren her tasarım "çok iyi bir profesyonel tasarımcının elinden çıkmış gibi" olacak;
+> kendine özgü bileşen, hareket ve ses. 22'nin bugünkü sitesi birkaç yeniden kurulumun yamasıdır (fildişi kâğıt + köşe
+> çiçekleri, siyah zarf + zeytin mühür); çıta değildir. PAKET 8 tasarımı baştan GPT'ye çizdirir (K21): önce **W1** tasarım
+> panosu, sonra aynı sohbette panodan türeyen **W2** parçaları. Tema bu parçalarla yeniden kurulur (Claude: kesim, maske,
+> ölçek, ışık, HTML/CSS/JS; çizim yok). Bu bölüm dosyanın başındaki "Instructions for GPT" notunun yerini alır.
+>
+> Claude için notlar:
+> - W1'in kayıt satırı bilerek kalın değil: yol `mockups/` altında olduğu için `kit_check` / `gpt_yerlestir` orada yeşil ekran
+>   arar. Panoyu GPT doğrudan commit eder; `gpt_yerlestir`'e verilmez.
+> - W1 demo tarihi `content.demo.json` ile aynı: September 18, 2027; RSVP son günü August 1, 2027 (21'deki June 12 değil).
+> - Foto pencereleri bu pakette yeşil değil, **şeffaf açıklık** istenir (21 TESLİM: GPT yeşili şeffafa çeviriyor). Maske,
+>   kapalı altın halkanın içindeki şeffaf bölgeden çıkarılır.
+> - 3:1 şeritler (balüstrat, ayırıcı) GPT'nin tutabildiği 3:2 tuvalde ortada bant olarak istenir; Claude kırpar. Bütün
+>   ölçüler GPT'nin yerel tuvalleri (1024×1024, 1024×1536, 1536×1024); oran denetimi (±%2) böylece geçer.
+> - Dosya adları bilerek GEÇERSİZ PAKET 5'tekilerden farklı (`moon_envelope_*`, `moon_seal`, `night_lake*`, `card_invite`,
+>   `divider_moonpath`, `gold_leaf_*`): `gpt_is_listesi` aynı yolda dosyadaki ilk prompt'u alır, eski PAKET 5 prompt'u kazanırdı.
+> - Kapak tipi zarf, eğri (dağ profili) kapak: `tema_build.kapak_kes("egri")` + `cep_kes("duz")`; mühür çapası = kapak
+>   kenarının en alt noktası (vadi). Kapalı/açık hiza (sol, sağ, alt kenar ±%1,5) PAKET 8 için otomatik koşmaz; Claude
+>   `tema_build.hiza_olc` ile ölçer.
+> - Paylaşım (og) görseli ayrıca istenmedi: Claude `night_lake_wide` + kapalı zarf + mühürden kurar. Açılış nesnesi yine zarf;
+>   START HERE ve paneldeki "Envelope" adı geçerli kalır. Fontlar değişir (aşağıda); `DESIGN_BRIEF.md` entegratörde güncellenir.
+
+### Sanat yönetimi — "The moon is missing"
+
+- **Signature.** The opening screen is Lake Como on a black-tie night: a long golden moon path glitters on the water, but
+  the sky above it is empty — the moon is the champagne-gold seal sitting in the valley of the envelope's mountain-cut flap.
+  On tap the seal clicks free and rises into the sky to become the moon; the mountain flap lifts in 3D (its gold moiré lining
+  catching the light); the ivory invitation rises out of the black envelope and flies to the home page.
+- **The moon carries the site.** Home = the same lake with the moon in place, the names across the sky, a moonlit stone
+  balustrade in front. Story = photographs floating above night water, each mirrored in it with a slow ripple. Details = the
+  evening's programme on a timeline drawn as a shimmering moon path, with small gold-foil icons. RSVP = a gilt-edged black
+  card; on sending, the moon seal presses onto the card, the moon brightens and gold leaf drifts down.
+- **Materials & colour.** Black cotton paper with hand-gilded champagne edges, champagne-gold foil hairlines, gold moiré
+  lining, real gold leaf, pale moonlit limestone, night water. Night `#11120F` · lake ink `#0F1620` · charcoal `#1C1D15` ·
+  champagne `#E0C7A4` · gold `#C7A978` · ivory `#F1E4CC` · stone `#CFC6B4`.
+- **Not 21, not the others.** 21 Crimson owns oxblood velvet, red roses, torn paper, the oval frame and Didone type — 22 has
+  no flowers, no velvet or satin drapes, no red, no torn paper, no Didone. Also off-limits (other designs own them): stars and
+  constellations (29), Art Deco geometry and fans (06), doors and lanterns (27), stage curtains (24).
+- **Type (Google Fonts; no other design uses them).** *Waterfall* — names and script headings, large sizes only (≥ 32 px,
+  thin strokes); *Castoro Titling* — letter-spaced capitals for dates, labels, buttons; *Castoro* — body and italic captions.
+- **Motion & sound (Claude builds them; GPT designs for them).** Seal tick → rise; flap 0→90° then the moiré inner face takes
+  over; moon-path shimmer; balustrade parallax; photo reflections ripple; gold leaf drifts. Sounds: wax tick, paper whisper, a
+  low bed of lake water and night cicadas under the opening, one warm string note when the moon settles, a crystal clink on
+  RSVP send — own recordings or clearly licensed only (AGENTS şart 9), silent until the guest's first tap.
+
+**Instructions for GPT (send before the first image):**
+```
+You are the art director and still-life photographer of a luxury wedding stationery house, designing the website of "Nocturne Lake Estate": Lake Como by night, a black-tie evening. Its signature: the moon is missing from the night sky until the guest opens the envelope — the champagne-gold seal sitting in the valley of the envelope's mountain-cut flap rises to become the moon. Materials: black cotton paper with hand-gilded champagne-gold edges, fine champagne-gold foil hairlines, a champagne-gold watered-silk (moiré) lining, real gold leaf, pale moonlit limestone and night water with a long golden moon path. Colours: night #11120F, lake ink #0F1620, charcoal #1C1D15, champagne #E0C7A4, gold #C7A978, ivory #F1E4CC, stone #CFC6B4. Never: flowers or petals, velvet or satin drapes, red, torn paper, stars or constellations, Art Deco geometry, doors, curtains. Everything is photographed for real: rich, tactile, believable materials, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. First you draw a design board of five phone screens (W1); then, giving that board as the reference image of every image, you make the production parts (W2): one object per image, one soft light from the upper left, no cast or drop shadow, no glow or halo outside the object, no text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge.
+```
+
+#### W1 — Tasarım panosu (5 telefon ekranı; demo metin serbest)
+Kaydet (W1): `collections/22_Nocturne_Lake_Estate/assets/gpt/mockups/design-board.png` · yaklaşık 1908×824 (≈2,3:1) · opak · kit_check dışı
+
+```
+Use case: ui-mockup. Create a high-fidelity art direction board of FIVE mobile wedding website screens for a new luxury design called "Nocturne Lake Estate", each screen in a 390 by 844 proportion, arranged side by side in one row with generous, even gaps on a soft warm stone-grey studio background (the whole board about 2.3:1). The attached photographs (give hero_portrait.jpg and story_2.jpg as the reference) are ONLY the identity and styling reference for the fictional couple (same faces, black tuxedo, ivory silk gown); everything else is new.
+
+Concept: Lake Como by night, a black-tie evening. Black cotton paper with hand-gilded champagne-gold edges and fine champagne-gold foil hairlines, ivory and champagne type, deep blue-black night water with a long glittering golden moon path, pale moonlit limestone. Rich, classic, romantic and luxurious; never minimal, never flat vector, never clip-art. NO flowers or petals, NO stars or constellations, NO Art Deco geometry, NO velvet, NO doors.
+
+Typography: the couple's names and the script headings in a flowing, high-contrast formal calligraphic script with elegant swashes; dates, labels and buttons in widely letter-spaced classical titling capitals with fine serifs; body text in a refined old-style serif with italics.
+
+Screen 1 — the opening (the closed invitation): full-bleed night. A calm blue-black sky fills the upper half, dark mountain silhouettes slope in from both sides, and on the lake below a long golden moon path glitters up the centre of the screen — but there is NO moon in the sky: the sky above the path is empty (the moon is still sealed in the envelope). At the top "YOU ARE INVITED" in tiny spaced capitals, the names "Eleanor & Luca" large in champagne-gold script, "SEPTEMBER 18, 2027" small. In the lower middle a landscape black cotton-paper envelope with hand-gilded edges, seen straight from the front: its flap is die-cut along the soft profile of two mountain ridges that dip into one deep valley at the centre, the cut edge traced by a fine gold foil hairline; in the valley sits a round champagne-gold wax seal that looks like a small golden full moon; fine broken gold hairlines across the lower part of the envelope suggest moonlight on water. Under it "TAP TO OPEN" in tiny spaced capitals.
+
+Screen 2 — home: the same night lake fills the top 55% of the screen, now with a large warm full moon high in the sky directly above its golden path; the names "Eleanor & Luca" very large in script across the sky, with "SEPTEMBER 18, 2027 · VILLA NOCTURNE · LAKE COMO" in tiny spaced capitals; across the bottom of the lake scene a moonlit carved limestone balustrade in the foreground. Below it, black cotton paper: a slim gilded arch-topped frame holding the couple's portrait, set off-centre to the left and overlapping the balustrade; beside and below it "Together with their families" and "request the pleasure of your company" in serif; a row of four small countdown cells ruled in fine gold; a slim champagne-gold button "Kindly reply".
+
+Screen 3 — story: black cotton paper; small spaced capitals "CHAPTER I" and the script heading "Our story"; one landscape photograph of the couple in a slim gilded rectangular frame floating above dark night water, and directly beneath it the photograph's own soft, darker, mirrored reflection broken by gentle ripples (the signature of this page); the italic caption "A quiet moment, just us"; a small "I / III" with three tiny gold dots and two fine arrow buttons; two or three tiny flakes of gold leaf drifting.
+
+Screen 4 — details: black cotton paper; the script heading "The evening" large at the top left with the date stacked in small capitals at the right; down the left side a vertical timeline drawn as a thin, broken, glittering gold line like a moon path on water, with small hot-foil gold line icons on it: two interlocked rings, two champagne coupes touching, a three-branch candelabra, a bow tie; beside each a time in spaced capitals and a line of italic serif: "6:30 PM · CEREMONY · The lower terrace", "7:30 PM · CHAMPAGNE · The balustrade garden", "8:30 PM · DINNER & DANCING · The great hall", "DRESS CODE · Black tie"; at the bottom a landscape photograph of a lakeside villa terrace at night in a slim gilded frame, "Villa Nocturne, Lake Como" and a slim outlined champagne button "View map".
+
+Screen 5 — RSVP: the night lake, dimmed, as the backdrop; a tall black cotton card with hand-gilded edges and a fine double gold foil border fills most of the screen: a tiny gold ornament at its top (a small full-moon disc above three short rippled hairlines), the script heading "Kindly reply", "by August 1, 2027" in small italic, then a real, readable form in ivory and champagne: "Your name" on a fine gold underline, "Will you join us?" with two round options "Joyfully accepts" and "Regretfully declines", "Number of guests" as a select field with a small chevron, and a full-width champagne-gold button "Send reply" with black text; a small rippled gold ornament at the bottom of the card; a few flakes of gold leaf drifting down.
+
+All five screens share one world (the same black paper, champagne gold, night lake, moon and light) but each has its own composition — not all centred. Exact English sample text only where given above. Photos show a fictional adult couple only, natural and tasteful. No device frames or bezels, no laptop, no marketing collage, no logos, no watermarks. This is a design reference board, not a final website.
+```
+Kontrol: 5 ekran yan yana, her biri ~390:844; 1. ekranda gökte **ay yok**, ay yolu var; zarf kapağı iki tepe + ortada tek vadi, vadide altın "ay" mühür; 2. ekranda ay yolun tam üstünde; 3. ekranda fotoğrafın sudaki yansıması; 4. ekranda ay yolu zaman çizgisi + 4 altın ikon; 5. ekranda yaldız kenarlı siyah kart, okunur form; çiçek/yıldız/kadife/deco yok; logo yok. Metindeki küçük harf bozuklukları kabul (yalnız referans).
+Kullanım: Claude'un yerleşim, tipografi ölçeği ve renk referansı; mühür/zarf genişlik oranı ve kartın konumu buradan ölçülür.
+
+#### W2.1 Kapalı zarf — dağ profili kesik kapak (mühürsüz)
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/moon_envelope_closed.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+Production asset for the "Nocturne Lake Estate" wedding website (give design-board.png as the style reference), matching the envelope on screen 1 of the attached design board. ONE closed luxury envelope, alone, made of thick black cotton paper with a soft velvety tooth (deep black #121210 with charcoal #1C1D15 highlights), landscape about 3:2 (wider than tall), all outer edges hand-gilded with a hair-thin champagne-gold edge. Seen perfectly straight from the front, no perspective, no tilt. Placement on the canvas: horizontally centred, its width about 84% of the image width and its bottom edge at about 88% of the image height; the whole upper part of the canvas above it stays empty (the flap will open into that space). The flap covers the upper part of the envelope and its free lower edge is die-cut along the soft profile of two mountain ridges around a lake: from the left side, at about 40% of the envelope's height, it rises to a broad rounded summit left of centre (about 22% down from the envelope's top edge), sweeps down into ONE deep, smooth, V-like valley exactly at the horizontal centre (its lowest point about 64% down), rises again to a slightly higher rounded summit right of centre (about 18% down) and descends to the right side at about 42%. Only large smooth curves: no small spikes, no trees, no buildings. A fine champagne-gold foil hairline runs exactly along this cut edge so it reads crisply, and the flap leaves only a hair-thin contact shade on the paper beneath it (on the object itself). Across the lowest third of the envelope, below the valley and never touching the flap's edge, a few very fine champagne-gold foil hairlines in short, gently broken horizontal strokes suggest moonlight glittering on water, densest in the centre and fading out towards the sides: subtle and elegant. NO seal and nothing else on it (the seal is a separate image). One soft light from the upper left. No cast shadow, no drop shadow, no glow, halo, rays or haze outside the envelope. No text, letters, numbers or monogram. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: tek zarf, mühür yok; kapak kenarı iki yuvarlak tepe + ortada tek derin vadi, altın kıl çizgiyle net okunuyor; alt üçte birdeki ince "ay ışığı" çizgileri kapağa değmiyor; zarf genişliği ~%84, alt kenar ~%88, üst kısım boş; gölge/ışıma yok; gerçek alfa.
+Kullanım: kapalı sahne; `kapak_kes("egri")` kapağı altın çizgiden keser (`env_closed`, `env_cflap`); vadinin dibi mühür çapası.
+
+#### W2.2 Açık zarf — kapak yukarıda, altın moiré astar (boş)
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/moon_envelope_open.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+The SAME envelope as in moon_envelope_closed.png (give moon_envelope_closed.png and design-board.png as the reference images, and edit moon_envelope_closed.png if the tool allows): the same black cotton paper, the same gilded edges, the same fine gold "moonlight" hairlines on its lower part, exactly the same size, position and angle on the canvas — its left, right and bottom edges sit on exactly the same pixels — now OPEN and empty. The mountain-cut flap is folded fully upward above the envelope's top edge (hinged on that top edge) and shows its INNER face: its outline is the closed flap's outline mirrored top-to-bottom (left and right unchanged), so its gilded die-cut edge now rises to one tall central point flanked by two soft dips. The inner face of the flap and the visible inside of the envelope are lined with champagne-gold metallic paper with a very fine embossed watered-silk (moiré) ripple pattern, softly luminous like moonlight on water. The front panel of the envelope ends at a straight, crisp, horizontal top edge about 10% of the envelope's height below its top edge, finished with a fine gold foil hairline, so a narrow band of the gold lining shows above it. Nothing inside: no card, no seal, no ornament. Seen perfectly straight from the front. One soft light from the upper left. No cast shadow, no drop shadow, no glow, halo, rays or haze outside the object. No text, letters, numbers or monogram. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: kapalı zarfın üstüne yarı saydam konunca sol, sağ ve alt kenar çakışıyor (gözle kayma yok); kapak yukarıda, iç yüzü altın moiré, kenarı ortada tek sivri tepe; cebin üst kenarı düz, altın çizgili, net; içi boş; gerçek alfa.
+Kullanım: `env_flap` (açık kapak, 90°'de devralır), `env_body` (astar + arka), `env_pocket` (`cep_kes("duz")`); kart cebin arkasından yükselir.
+
+#### W2.3 Kapanış — altın "ay" mühür
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/moon_seal.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+Production asset for the "Nocturne Lake Estate" wedding website (give design-board.png as the style reference), matching the seal in the valley of the envelope on screen 1 of the attached design board. ONE round wax seal of champagne-gold metallic wax (#C7A978 with soft #E0C7A4 highlights), alone, filling about 70% of the square, centred: a softly irregular poured-wax rim, and a face that reads as a small golden full moon — a narrow outer ring with a very delicate low-relief lunar texture (soft craters and maria), and a smooth, polished, completely EMPTY central disc about 60% of the seal's diameter (the website writes the couple's initials there as live text). No letters, no initials, no monogram, no crest, no stars. Seen perfectly straight from above, no perspective. Not cropped, generous empty margin all around. One soft light from the upper left. No cast shadow, no drop shadow, no glow or halo outside the seal. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: tek mühür; ortası boş ve pürüzsüz; dış halkada hafif ay dokusu; harf/monogram yok; kareyi ~%70 dolduruyor; gölge/ışıma yok; gerçek alfa.
+Kullanım: vadinin dibine oturur (genişlik / zarf genişliği W1'den); ortasında `data-field="initials"`; açılışta "tık" sesiyle kalkar, göğe yükselip ay olur (home'da `moon` parçasına devreder); RSVP gönderilince karta basılır.
+
+#### W2.4 Zarftan yükselen davetiye kartı (fildişi, kemer pencereli)
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/card_invite.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+Production asset for the "Nocturne Lake Estate" wedding website (give design-board.png as the style reference), matching the invitation that rises from the black envelope in the attached design board. ONE thick ivory cotton invitation card (#F1E4CC, fine natural paper tooth), alone, landscape about 3:2, filling about 86% of the image width, centred, its edges hand-gilded with a thin bright champagne-gold line around the whole outline. On the left side of the card an arch-topped (round-top) photo window, about 2:3 tall, set inside a fine double champagne-gold foil line; the window itself is a clean opening that is COMPLETELY TRANSPARENT (a real hole in the alpha channel, nothing inside), and the gold line and the card close all the way round it. The right 55% of the card is blank ivory paper (the website writes the names and the date there as live text). No other ornament. Seen perfectly straight from the front. Not cropped, at least 5% empty margin on every side. One soft light from the upper left. No cast shadow, no drop shadow, no glow outside the card. No text, letters, numbers or monogram. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: tek kart; kemer pencere tamamen şeffaf ve altın çift çizgi kesintisiz kapalı; sağ taraf boş; yaldızlı kenar; gerçek alfa.
+Kullanım: açılış kartı (`hero_portrait` pencerede, isim/tarih canlı metin); Claude zarf genişliğinin ~%92'sine ölçekler; cepten yükselir, öne gelir, portre home'daki kemer çerçeveye uçar.
+
+#### W2.5 Gece gölü — telefon zemini (ay YOK)
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/night_lake.png` · 1024×1536 · opak
+
+```
+Production background for the "Nocturne Lake Estate" wedding website (give design-board.png as the style reference), matching screens 1 and 2 of the attached design board. A full-frame vertical (2:3) photograph of Lake Como at night, edge to edge: a calm, smooth, deep blue-black sky (#0F1620, fading to near-black #0B0D12 at the very top) fills the top 45% with no clouds, no stars and NO MOON — the sky stays completely empty (the website places the moon there). Below it dark mountain silhouettes slope down from the left and right edges towards a lower gap at the centre, a few tiny warm village lights along the far shore, the water's horizon at about 55% of the height. On the black water a long glittering champagne-gold moon path runs from the horizon straight down the exact horizontal centre to the bottom edge, made of small broken shimmering reflections and widening towards the bottom; the water to the left and right is calm and dark with only faint ripples. Keep every important detail within the middle 85% of the width. Moody, rich, luxurious and true-to-life night photography with a subtle film grain. No people, no boats, no buildings or plants in the foreground, no balustrade, no text, no watermark.
+```
+Kontrol: üst %45 boş, pürüzsüz gece göğü (ay yok, yıldız yok, bulut yok); ay yolu tam ortada ufuktan alt kenara; dağlar iki yandan ortaya iniyor; tamamen opak; yazı yok.
+Kullanım: açılış sayfası zemini; home hero zemini (ay `moon` parçası yolun tam üstüne konur); RSVP arka planı (karartılmış); ay yolunun üstünde CSS ışık süpürmesi; story'de su bölümü.
+
+#### W2.6 Gece gölü — geniş ekran
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/night_lake_wide.png` · 1536×1024 · opak
+
+```
+The same night scene as night_lake.png (give night_lake.png and design-board.png as the reference images), now a full-frame horizontal (3:2) photograph, edge to edge: the same calm, smooth, empty blue-black sky in the top 45% with no clouds, no stars and NO MOON; the same dark mountain silhouettes sloping down from both sides towards the centre, the same tiny warm village lights, the horizon at about 55% of the height, and the same long glittering champagne-gold moon path running from the horizon straight down the exact horizontal centre to the bottom edge. The middle half of the width is calm. Same colours, light and film grain. No people, no boats, no foreground objects, no text, no watermark.
+```
+Kontrol: night_lake ile aynı gece, renk ve ışık; ay yok; ay yolu tam ortada; opak.
+Kullanım: 700 px ve üstü ekranlarda night_lake'in yerine (açılış, home hero, RSVP).
+
+#### W2.7 Siyah pamuk kâğıt — dikişsiz doku
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/paper_tile.png` · 1024×1024 · opak
+
+```
+Production texture for the "Nocturne Lake Estate" wedding website (give design-board.png as the style reference), the black paper of the attached design board. A seamless, tileable square texture of thick black cotton paper seen perfectly flat and straight on: deep black #121210 with a fine, soft felted tooth and a few very sparse, faint champagne fibres. Perfectly even lighting with no vignette, no gradient and no hotspot, so that four copies placed side by side join invisibly (the left edge continues the right edge, the top edge continues the bottom edge). No folds, no stains, no objects, no gold lines, no text.
+```
+Kontrol: eşit ışık, vinyet yok; 2×2 dizince dikiş görünmüyor (Claude dizip bakar; gerekirse dikişi kendisi giderir); opak; nesne/yazı yok.
+Kullanım: iç sayfaların kâğıt zemini (home alt bölümü, story, details), `background-repeat`.
+
+#### W2.8 Dolunay
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/moon.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+Production asset for the "Nocturne Lake Estate" wedding website (give design-board.png as the style reference), matching the moon on screen 2 of the attached design board. The full moon alone, photographed for real through a long lens: a warm champagne-ivory tint (#F2E8D2 in the light areas, soft grey-gold maria), a crisp, perfectly round edge, filling about 70% of the square, centred. Nothing around it: no halo, no glow, no clouds, no stars, no sky. True transparent background PNG (a real alpha channel, not white, not a checkerboard, not black).
+```
+Kontrol: tek ay; kenar keskin, hâle yok; çevresi gerçek alfa (siyah gök değil).
+Kullanım: home göğünde ay yolunun tam üstü (açılışta yükselen mühür burada aya dönüşür); CSS hâle ve yavaş nefes; RSVP gönderilince parlar.
+
+#### W2.9 Taş balüstrat (ön plan)
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/balustrade.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+Production asset for the "Nocturne Lake Estate" wedding website (give design-board.png as the style reference), matching the balustrade across the bottom of the lake scene on screen 2 of the attached design board. ONE straight section of a classical Italian villa terrace balustrade in pale carved limestone (#CFC6B4 with cool moonlit highlights and a few warm candle-gold glints on the top rail), seen perfectly straight from the front at eye level: a square pedestal at each end and between them a row of turned, vase-shaped balusters under a continuous moulded top rail, standing on a plain base rail. The section is a wide horizontal band about 3:1: it fills about 90% of the image width and sits in the vertical middle of the canvas, with empty transparent space above and below it. The gaps between the balusters are COMPLETELY TRANSPARENT (no lake, no sky, no wall behind them). Not cropped, at least 5% empty margin at the left and right ends. One soft light from the upper left. No cast shadow, no glow outside the stone, no plants, no candles, no urns, no text. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: tek balüstrat bölümü, iki ucunda kaide; babaların arası tamamen şeffaf; ~3:1 bant tuvalin ortasında; kenarlara değmiyor; gerçek alfa. Baba sayısı önemsiz.
+Kullanım: home hero'nun altında ön plan (yavaş paralaks), RSVP sayfasının altı; geniş ekranda Claude iki baba arasındaki birimi kesip yan yana dizer.
+
+#### W2.10 Kemerli portre çerçevesi
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/frame_arch.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+Production asset for the "Nocturne Lake Estate" wedding website (give design-board.png as the style reference), matching the arch-topped portrait frame on screen 2 of the attached design board. ONE slim picture frame with a round-top arch (a tall rectangle whose top is a full semicircle), alone, seen perfectly straight from the front, filling about 88% of the image height, centred: a narrow moulding of burnished champagne gold leaf (#C7A978, highlights #E0C7A4) with a fine beaded inner edge and, just inside it, a very narrow black lacquer slip carrying one gold hairline. Refined and light, never heavy or baroque; no crest, no bow, no flowers, no keystone ornament. The opening inside the frame is COMPLETELY TRANSPARENT (a real hole in the alpha channel, nothing inside) and the frame ring is closed all the way round without any gap. Not cropped, at least 5% empty margin on every side. One soft light from the upper left. No cast shadow, no glow outside the frame. No text. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: ince kemer çerçeve; iç açıklık şeffaf ve halka kesintisiz kapalı; üst süs yok; gerçek alfa.
+Kullanım: home portresi (`hero_portrait`); açıklıktan foto maskesi çıkarılır; açılıştaki karttan uçan portre buraya oturur.
+
+#### W2.11 Yatay foto çerçevesi
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/frame_landscape.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+Production asset for the "Nocturne Lake Estate" wedding website (give design-board.png as the style reference), matching the landscape photo frames on screens 3 and 4 of the attached design board, from the same family as the arch-topped frame. ONE slim rectangular picture frame, landscape, alone, seen perfectly straight from the front, filling about 88% of the image width, centred: a narrow moulding of burnished champagne gold leaf (#C7A978, highlights #E0C7A4) with a fine beaded inner edge and, just inside it, a very narrow black lacquer slip carrying one gold hairline. Refined and light; no crest, no bow, no flowers, no corner ornaments. The opening inside is a rectangle of about 3:2 and is COMPLETELY TRANSPARENT (a real hole in the alpha channel, nothing inside); the frame ring is closed all the way round without any gap. Not cropped, at least 5% empty margin on every side. One soft light from the upper left. No cast shadow, no glow outside the frame. No text. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: kemer çerçeveyle aynı aile; dikdörtgen açıklık ~3:2, şeffaf ve halka kapalı; köşe süsü yok; gerçek alfa.
+Kullanım: story fotoğrafları (altında suya düşen yansıma CSS ile) ve details'teki mekân fotoğrafı.
+
+#### W2.12 Yaldız kenarlı siyah kart (3 dilim: üst süs · tekrarlanan orta · alt süs)
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/card_gilt.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+Production asset for the "Nocturne Lake Estate" wedding website (give design-board.png as the style reference), matching the RSVP card on screen 5 of the attached design board. ONE tall black cotton card (#121210, fine velvety tooth), alone, portrait 2:3, filling about 90% of the image height, centred, seen perfectly straight from the front, its edges hand-gilded with a thin bright champagne-gold edge all round. Inside it a fine DOUBLE champagne-gold foil border runs parallel to the edges. The card is designed so the website can cut it into three horizontal slices and stretch the middle one: TOP band (the top 20% of the card): one small centred gold-foil ornament — a tiny full-moon disc above three short, gently rippled hairlines, flanked by two fine horizontal hairlines; MIDDLE band (from 20% to 82% of the card's height): plain black paper with ONLY the two straight vertical lines of the double border running down each side, exactly the same at every height, nothing else; BOTTOM band (the last 18%): the double border turns the corners and closes, with one small centred ornament of two short rippled gold hairlines above it. No form fields, no photo window. Not cropped, at least 5% empty margin on every side. One soft light from the upper left. No cast shadow, no glow outside the card. No text, letters or numbers. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: orta bantta yalnız iki yandaki düz çift çizgi (yükseklik boyunca aynı, tekrarlanabilir); üstte ay + dalgacık süsü, altta dalgacık süsü; yaldız kenar; gerçek alfa.
+Kullanım: RSVP formu ve details programı/bilgi kartları; Claude üst · orta · alt diye keser, ortayı içeriğe göre uzatır.
+
+#### W2.13 Ayırıcı — ay yolu çizgisi
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/divider_moonpath.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+Production asset for the "Nocturne Lake Estate" wedding website (give design-board.png as the style reference), matching the small dividers of the attached design board. ONE delicate horizontal divider in champagne-gold foil, alone: a hair-fine line about 70% of the image width, perfectly level in the vertical middle of the canvas, that breaks into ever shorter glinting dashes towards both ends like moonlight on rippling water, with one small solid round gold "moon" dot at its centre. Very fine and elegant, with a subtle real foil sheen. Nothing else, plenty of empty space above and below. One soft light from the upper left. No cast shadow, no glow. No text. True transparent background PNG (a real alpha channel, not white, not a checkerboard).
+```
+Kontrol: tek ince yatay çizgi + ortada küçük ay noktası; uçlar kesik kesik; kenarlara değmiyor; gerçek alfa.
+Kullanım: başlık altları (home, story, details, rsvp); Claude dar şerit olarak kırpar; üstünden ışık süpürmesi.
+
+#### W2.14 Program ikonları — altı ayrı dosya
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/icon_ceremony.png`, `icon_toast.png`, `icon_dinner.png`, `icon_dancing.png`, `icon_dresscode.png`, `icon_boat.png` · her biri 1024×1024 · **Şeffaf zemin**
+
+```
+Production asset for the "Nocturne Lake Estate" wedding website (give design-board.png as the style reference), matching the small programme icons on screen 4 of the attached design board. ONE single line icon in hot-foil-stamped champagne gold (#C7A978 with a soft metallic sheen), alone, drawn with one even, fine stroke (about 2.5% of the image width), simple, elegant and clearly readable when shown at 32–40 px, filling about 60% of the square, centred, perfectly straight. No paper behind it, no circle or badge around it, no fill, no shading beyond the foil sheen. No cast shadow, no glow. No text, letters or numbers. True transparent background PNG (a real alpha channel, not white, not a checkerboard). Make six separate images, all in exactly the same line weight and style: icon_ceremony = two interlocked wedding rings; icon_toast = two champagne coupes touching at the rim; icon_dinner = a three-branch candelabra with three tall candles and tiny teardrop flames drawn as outlines; icon_dancing = a vintage gramophone with a flared horn; icon_dresscode = a classic bow tie; icon_boat = a classic wooden lake motor launch seen from the side on two short ripple lines (generic, no brand).
+```
+Kontrol: altı dosya, her biri tek ikon; hepsi aynı çizgi kalınlığı ve stilde; küçük boyda okunuyor; rozet/daire/dolgu yok; gerçek alfa.
+Kullanım: details programı (etiketten ikona eşleme: ceremony, champagne/cocktails, dinner, dancing, dress code, arrival/boat); ay yolu zaman çizgisinin üstünde.
+
+#### W2.15 Altın varak pulları (süzülen vurgular) — üç ayrı dosya
+**Kaydet:** `collections/22_Nocturne_Lake_Estate/assets/gpt/parts/gold_leaf_1.png`, `gold_leaf_2.png`, `gold_leaf_3.png` · her biri 1024×1024 · **Şeffaf zemin**
+
+```
+Production asset for the "Nocturne Lake Estate" wedding website (give design-board.png as the style reference), matching the drifting gold leaf of the attached design board. ONE single flake of genuine champagne gold leaf, alone, photographed for real: very thin, crinkled metal foil with irregular torn edges, catching the light in small bright facets (#E0C7A4 highlights, #C7A978 body, a few deeper #9C7F52 creases), filling about 45% of the square, centred, not cropped. Nothing else: no paper, no other flakes, no dust, no sparkle. One soft light from the upper left. No cast shadow, no glow. No text. True transparent background PNG (a real alpha channel, not white, not a checkerboard). Make three different flakes: gold_leaf_1 = a flat, irregular flake seen from above; gold_leaf_2 = a flake curling up at one edge; gold_leaf_3 = a smaller folded fragment seen slightly from the side.
+```
+Kontrol: üç dosya, her biri tek pul ve birbirinden farklı; parıltı/hâle yok; gerçek alfa.
+Kullanım: `MOTION.accents` — açılışta mühür kalkınca 6–8 pul süzülür, story'de 2–3 pul, RSVP gönderilince pul yağar.
+
+### Instructions for GPT — iş sırası ve teslim (PAKET 8)
+
+```
+Work only on PAKET 8 of collections/22_Nocturne_Lake_Estate/assets/gpt/GPT_PROMPTS.md in the repository muzaffergrl/davetiye-maker (branch main). Ignore every other section of that file: PAKET 2, 3, 6 and 7 are done, the old PAKET 5 is cancelled, and the note at the top of the file (ivory paper with flowers) is out of date — PAKET 8 replaces it.
+
+1. ONE chat, in this order. Send the "Instructions for GPT (send before the first image)" message of PAKET 8 first. Then W1, the design board: attach collections/22_Nocturne_Lake_Estate/assets/gpt/photos/hero_portrait.jpg and collections/22_Nocturne_Lake_Estate/assets/gpt/photos/story_2.jpg as the couple's identity reference only. The board is the design; if it is weak, make it again before going on (at most 3 tries).
+2. Then W2, one image per prompt, in the order W2.1 to W2.15, in the same chat. Give the finished design-board.png as the reference image of EVERY W2 image (same black paper, same champagne gold, same night lake, same light). For W2.2 also give moon_envelope_closed.png and edit it if your tool allows (the envelope's left, right and bottom edges must not move); for W2.6 also give night_lake.png.
+3. Use each English prompt exactly as written. One object per image. No text, letters, numbers, monograms, logos or watermarks in any W2 image (demo text is allowed on W1 only).
+4. Keep each image in the ratio of its Kaydet size: 1:1, 2:3 or 3:2 (W1 about 2.3:1). The pixel size may differ. Do not resize, crop, repaint or recolour any pixel with code — Claude crops and scales.
+5. Photo windows (W2.4, W2.10, W2.11) are transparent openings; a closed gold ring around them matters more than the opening itself. Never fill them with green or white.
+6. Counts (balusters, ripple lines, flake facets) do not matter; never regenerate for a count. Regenerate only for: a wrong object, text present, a cast/drop shadow or a glow outside the object, a fake background (white or checkerboard) instead of real alpha, an object touching the canvas edge, a wrong ratio, or (W2.2) envelope edges that visibly do not sit on W2.1. At most 2 attempts per part; then keep the best one, note the defect and move on.
+7. Delivery: commit every PNG to the repository at exactly the path on its Kaydet line, with exactly that file name (the parts in collections/22_Nocturne_Lake_Estate/assets/gpt/parts/, the board at collections/22_Nocturne_Lake_Estate/assets/gpt/mockups/design-board.png). No zip, no other folder, no download names, no "_final" or "(1)" suffixes. Push to branch main; only if you cannot push to main, push a branch named codex/nocturne-paket8 and say so. Pull before each push. Push after W1, then after every 4-5 parts ("22 PAKET 8: W1", "22 PAKET 8: W2 1/4", ...) so nothing is lost if the chat breaks; the last commit is "22 PAKET 8: teslim".
+8. Finally write collections/22_Nocturne_Lake_Estate/assets/gpt/parts/TESLIM.txt in Turkish: for every file the target size and the actual size, RGBA or RGB, the number of attempts, every difference from its Kontrol line (be specific), anything skipped and why, which reference images were attached, and one line confirming that no pixels were changed by code. If you cannot write to the repository at all, stop and say so clearly in the chat; do not hand the upload to the user.
+```

@@ -482,3 +482,281 @@ Kontrol (gözle; piksel ölçme yok): 1 adet düz, parlak, tek tonda yeşil alan
 ### 7.V Promo video (2. video) — GPT'ye verilmez
 Claude gerçek site kaydından üretir (`package/listing/video_promo.mp4`, 1080×1080, H.264, sessiz, 12–15 sn): açılış → sayfalar →
 düzenleyici → RSVP. Videoda gösterilen her şey gerçek siteden gelir; yapay zekâ videosu kullanılmaz.
+
+---
+
+## PAKET 8 — Jewel Box yeniden tasarım (2026-10-24)
+
+> Kullanıcı (2026-10-23): "21'den sonrası profesyonel bir tasarımcının elinden çıkmış gibi olmalı; her şablona özel tasarım,
+> bileşen, animasyon ve ses." Model: 21 Crimson Rose Atelier (önce W1 tasarım panosu, sonra panodan kesilmiş W2 parçaları).
+> Bu paket 23'ü **sıfırdan** yeniden tasarlar; bugünkü site (sekizgen kadife kitap kapağı + fildişi kâğıt + köşe gülleri)
+> çıta değildir ve tamamen değişebilir. Dosyanın başındaki eski talimat (bg_scene / v3-closed referansları) bu pakete
+> **uygulanmaz**. **GPT: read the "Instructions for GPT" block at the end of this section first, then W1, then W2.**
+
+### Sanat yönü
+
+- **Fikir — "Kutunun içi":** site, bir kuyumcunun patlıcan moru kadife mücevher kutusudur ve misafir onu **kuşbakışı**
+  görür. Açılış sayfası kapalı kutu; açılınca kapağın şampanya ipek astarında çiftin isimleri **varak baskı** gibi belirir
+  (kuyumcunun adı kutu kapağına nasıl basılırsa; canlı metin + CSS varak). Her iç sayfa kutunun bir **bölmesi**dir: ipek
+  panel, kadife tepsi hücresi, ipek cep. **Çiçek yok — süs mücevherdir:** inci, faset kesim ametist ve morganit, cilalı
+  rose gold, şampanya ipek, patlıcan moru ipek kadife.
+- **İmza bileşen — tırnaklı taş yuvası:** her fotoğraf emerald-cut (köşeleri kesik dikdörtgen) bir taş gibi dört rose gold
+  çift tırnakla tutulur; fotoğraf "mücevher"dir. Butonlar aynı kesik köşeli biçimde (CSS), geri sayım dört kadife tepsi
+  hücresinde, program ikonları küçük kadife hücrelerde, bölüm ayırıcıları inci dizisi.
+- **Ayrım:** 21 Crimson'ın mum ışıklı kan kırmızısı, gülleri, zarf + mühür, yırtık kâğıt, altın oval, albüm ve Didone'u
+  yok; burada mor + şampanya + rose gold, kuşbakışı kutu, mücevher dili. 32 Music Box'ın önden lake kutusu, aynası,
+  balerini, kurma anahtarı yok; burada yukarıdan kadife kutu, ametist klips, ipek astar, bölmeli tepsi.
+- **Açılış (hero):** kadifede kapalı kutu → dokununca (≤ 250 ms) ametist kabaşonlu klips içe basılır ve kalkar ("tık") →
+  kapak arka (üst) kenardaki menteşede 3B döner (ön yüz `rotateX 0→90°`, 90°'de ipek astar `-90°→0` devralır) ve kutunun
+  üstünde açık durur → astarda isimler soldan sağa varak ışığıyla belirir → orta ipek yuvada yatan fildişi kart çekme
+  kurdelesini gererek yükselir, hafif döner, öne gelir ve home'a uçar (VT); kutu kadifeye çekilir, 2–3 taş/inci kenardan
+  hafifçe kayar. Fade yok; klips, kapak, astar, kart ve taşlar ayrı ayrı hareket eder.
+- **Hareket imzası:** faset parıltısı (taş ve tırnak kenarında küçük dört köşeli ışık; CSS, bir kez), ipek üstünde ışık
+  süpürmesi, story'de kadife kaide üstünde dönen vitrin (silindir karusel, en yakına oturur), sayfa geçişi "tepsi kalkışı"
+  (sayfa hafifçe alçalıp kadifeye gömülür, yenisi gölgesiyle yükselir), RSVP'de kart ipek cepten kayarak çıkar, gönderilince
+  inciler kadifeye saçılır.
+- **Ses (G126 kancaları, yalnız dokunuştan sonra):** kadifeyle boğuk klips tıkı, yumuşak kapak "pof"u, isimler belirirken tek
+  kristal çın, kart yükselirken ipek hışırtısı. Lisansı belirsiz ses eklenmez.
+- **Font (Google Fonts):** **Forum** — isimler ve başlıklar: oyma Roma başlık harfleri, kuyumcu kapağı varak baskısı
+  hissi, Didone değil; **Lavishly Yours** — yalnız ampersand ve kısa script vurgular; gövde **Spectral** 300/400 + italik.
+  Forum ve Lavishly Yours 01–49'un hiçbirinde yok (Google Fonts'ta var, 2026-10-24 denendi). Castoro Titling 22 Nocturne'e ayrıldı.
+- **Palet (değişmez; G177 renk varyantları buna bağlı):** night `#1C0B1A` · aubergine `#2A1328` · plum `#4A2142` ·
+  champagne `#E8D3B0` · rose gold `#C99A86` · ivory `#F8EDE0`; yalnız taşlarda ametist `#5B2A6E`, morganit `#E9B9B0`.
+
+### W1 — Tasarım panosu (5 telefon ekranı; demo metin serbest, YALNIZ referans)
+
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/mockups/design-board.png` · ~1908×824 (≈ 2,3:1; araç bu oranı
+vermiyorsa 1536×1024, beş ekran tek sırada) · opak
+
+```
+Use case: ui-mockup. Create a high-fidelity art-direction board of FIVE mobile wedding-website screens for a luxury design called "Velvet Jewel Box", each screen exactly 390 by 844 in proportion, arranged in one horizontal row with even gaps and generous margins on a soft pale champagne-grey studio background. The five screens must look like one finished, coherent, best-selling premium product made by a top luxury stationery designer: rich, tactile, romantic, classic, never minimal, never cheap, never clip-art.
+
+THE CONCEPT: the whole website is the inside of a jeweller's velvet jewel casket, seen from directly above like a flat-lay. Materials only: deep aubergine silk velvet (#1C0B1A to #2A1328, lit pile #4A2142), smooth champagne silk linings (#E8D3B0), polished rose gold (#C99A86, highlights #EBC9B5), lustrous ivory pearls (#F8EDE0) and a few faceted gemstones (deep amethyst #5B2A6E, pale pink morganite #E9B9B0). NO flowers, no leaves, no roses in the decoration — the jewels are the decoration. Every photo is presented like a gemstone: an EMERALD-CUT shape (a rectangle with small cut corners) held by four slim rose-gold double claws (prongs) at its corners, like a stone in a ring setting. Buttons share that cut-corner gem shape. Small numbers and icons sit in small square velvet compartments like the cells of a fitted jewellery tray. Soft warm light from the upper left everywhere, real velvet pile, real silk sheen, real metal.
+
+TYPOGRAPHY: names and headings in engraved classical Roman titling capitals with small flared wedge serifs and gentle stroke contrast, widely letter-spaced, like gold foil lettering stamped inside a jeweller's box lid — NOT a Didone, NOT Bodoni, no ball terminals; a formal copperplate script with long hairline swashes ONLY for the ampersand and very short accents; small letter-spaced capitals and a light refined serif for body text. Champagne and rose-gold foil text on velvet, deep aubergine text on silk and ivory.
+
+Screen 1 — the closed box (opening page): on calm aubergine velvet seen from directly above, a CLOSED rectangular velvet jewel casket, landscape about 4:3, centred in the lower middle of the screen: softly rounded corners, a gently domed lid, slim rose-gold piping along every edge, a small empty rose-gold filigree cartouche with a tiny amethyst in the middle of the lid (no letters in it), and a small rose-gold push clasp set with an oval amethyst cabochon at the middle of its front (bottom) edge; a loose strand of pearls curls on the velvet beside the box. Above the box: small capitals "YOU ARE INVITED", the names "ISABELLE & JULIAN" large in the engraved capitals with a rose-gold script ampersand, a fine pearl-strand divider, "NOVEMBER 13, 2027 · NEW YORK". Below the box: "Tap to open" with a tiny faceted gem symbol.
+
+Screen 2 — home: the top 40% of the screen is the INSIDE OF THE OPENED LID, edge to edge: a smooth padded champagne silk centre panel surrounded by fine sunray pleats of champagne silk and rose-gold piping; foil-stamped in rose gold in the centre panel: "TOGETHER WITH THEIR FAMILIES", "ISABELLE & JULIAN", "Saturday, November 13, 2027". Overlapping the lower edge of the lid, centred: the couple's portrait in the emerald-cut rose-gold claw setting. Below, on aubergine velvet: a countdown of four small square velvet tray compartments with rose-gold rims holding "214 DAYS", "06 HOURS", "42 MINUTES", "18 SECONDS", then the top of a padded champagne silk card with a small rose-gold filigree crest and the line "request the pleasure of your company at the celebration of their marriage".
+
+Screen 3 — story: aubergine velvet page, heading "OUR STORY" with a short script accent "little treasures" and a pearl divider; a rotating jeweller's showcase: three of the couple's photos, each in its emerald-cut rose-gold claw setting, arranged on a curved carousel — the front photo large and straight (the proposal under a black umbrella at dusk, he holds an open little velvet ring box), the two side photos smaller and turned away in perspective — all floating above a round, low aubergine velvet display pedestal with a polished rose-gold band; under it the caption "A little velvet box" in script, "02 / 03", and two small cut-corner rose-gold outline arrow buttons.
+
+Screen 4 — details: a large padded champagne silk card (rose-gold piping, a small rose-gold filigree crest with an amethyst on top) on aubergine velvet: heading "THE EVENING", "Saturday, November 13, 2027"; a programme of three rows, each with a small fine rose-gold LINE icon (two interlocking rings / two champagne coupes / a domed dinner cloche) inside a tiny square aubergine velvet tray cell, then the time, the event in small capitals and the room in italic: "5:00 PM · THE CEREMONY · The Amethyst Salon", "6:00 PM · COCKTAIL HOUR · The Mirrored Gallery", "7:30 PM · DINNER & DANCING · The Grand Ballroom"; a single fine rose-gold line links the cells with a tiny pearl between rows; then "HALVERN HOUSE · NEW YORK", a small venue photo (a candlelit ballroom) in the same emerald-cut claw setting, and an aubergine velvet cut-corner button "View map" with a rose-gold edge.
+
+Screen 5 — RSVP: aubergine velvet page; at the bottom a wide pocket of pleated champagne silk with rose-gold piping along its top edge and a tiny pearl button, and out of it slides up a generous thick ivory reply card with gilded rose-gold bevelled edges and a small rose-gold filigree crest: heading "KINDLY REPLY", "by October 1, 2027", a real readable form: a "Your name" field, "Will you join us?" with two options "Joyfully accepts" and "Regretfully declines", "Number of guests" select showing "2", "Meal preference" select showing "Beef", and a large aubergine cut-corner button "Send reply" with a rose-gold edge.
+
+Use exactly this English sample text and no other words. The people in the photos are the same fictional couple as in the attached sample photos and must not resemble any real or famous person. Each screen has a clearly different composition. No device bezels, no phone frames, no hands, no laptop, no logos, no watermarks, no captions outside the screens. This is a design reference board, not a screenshot.
+```
+Kontrol: beş ekran tek sırada, 390×844 oranında; kuşbakışı kadife kutu ve açık kapağın ipek astarı tanınıyor; fotoğraflar
+emerald-cut tırnaklı yuvada; dekorda çiçek yok; başlık harfleri Didone değil (yuvarlak uç yok); form okunur; tarih
+"November 13, 2027"; ekranlar birbirinden farklı. Beğenilmezse yeniden üret (en çok 3 deneme); W2 bu panodan kesilir.
+
+### W2 — Parçalar (panodan kesilir; HER parçada `design-board.png` referans görsel; YAZI YOK)
+
+Ortak kurallar: tek görselde tek nesne · şeffaflar gerçek alfa · zemine düşen gölge yok · nesnenin dışında ışıma/hâle/ışın
+yok (site ekler) · ışık sol üstten · oran önemli, piksel değil (1:1, 2:3, 3:2 tuvaller; ince bantları Claude kırpar) · inci
+ve kıvrım **sayısı** önemli değil, sayı için yeniden üretme. **W2.3–W2.6 aynı 1536×1024 tuvalde, aynı konumda** (kutu,
+klips, açık kutu, kapak astarı): önce W2.3'ü üret, W2.4–W2.6'yı **W2.3'ü düzenleyerek** (image edit) üret.
+
+#### W2.1 Kadife zemin — telefon (açılış ve RSVP sayfası)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/velvet_page.png` · 1024×1536 · opak
+
+```
+A full-frame vertical photograph (2:3) of deep aubergine silk velvet seen from directly above, filling the whole canvas edge to edge, like the floor of a jeweller's display tray, matching the velvet of the attached design board: dense short velvet pile, #1C0B1A in the shadows, #2A1328 in the mid tones, #4A2142 where the pile catches the light. The velvet is smooth, calm and even: NO folds, no creases, no seams. One soft warm pool of light from the upper left fading gently across the frame and a subtle natural vignette toward the edges; the middle 70% of the frame stays calm and even so light text and a jewel box can sit on it. Photorealistic luxury jewellery still-life photography. No objects, no jewels, no pearls, no flowers, no shadows of objects, no text, letters, numbers, logos or watermarks.
+```
+Kontrol: kenardan kenara düz kadife; kıvrım yok; renk mor (kırmızı ya da kahverengi değil); nesne yok.
+Kullanım: index ve RSVP zemini (`cover`); geniş ekranda aynı görsel + CSS vinyet.
+
+#### W2.2 Kadife karo — dikişsiz (home, story, details zemini)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/velvet_tile.png` · 1024×1024 · opak · dikişsiz
+
+```
+A square seamless tileable texture of the same deep aubergine silk velvet as the attached design board, seen from directly above and filling the whole canvas edge to edge: only the fine natural velvet pile with subtle organic variation (average #2A1328, from #1C0B1A to #4A2142), lit perfectly evenly — NO light pool, NO vignette, NO folds, no creases, no pattern, no repeating marks. Every edge continues seamlessly into the opposite edge so the square can repeat in a grid without a visible seam. Photorealistic macro texture photography. No objects, no text, letters, numbers, logos or watermarks.
+```
+Kontrol: eşit ışık; kıvrım ve leke yok; sol–sağ ve üst–alt kenarlar aynı tonda (küçük dikiş farkını Claude kırparak/ofsetle giderir; yalnız bunun için yeniden üretme).
+Kullanım: uzun sayfaların zemini (`background-repeat`), üstünde CSS ışık süpürmesi.
+
+#### W2.3 Kapalı kutu — kuşbakışı, klips OLMADAN
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/box_closed.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+The closed jewel casket of the attached design board, alone, seen from DIRECTLY ABOVE (top-down, the camera looking straight down at the lid), perfectly straight, not rotated: a rectangular luxury jewel box, landscape about 4:3, covered in deep aubergine silk velvet (#2A1328, lit pile #4A2142), with softly rounded corners and a gently domed lid; a slim polished rose-gold piping (#C99A86) runs along every edge of the lid; in the centre of the lid a small rose-gold filigree cartouche with a tiny oval amethyst, completely empty inside (no letters, no monogram). The camera is tilted only very slightly toward the front, so a thin sliver of the box's front wall (about 3% of the image height) shows below the lid's front edge; the line where the lid's front edge meets that front wall is one crisp, straight, horizontal line with the rose-gold piping on it, clearly visible. NO clasp, no lock, no key, no ribbon, no bow, no jewellery on the box (the clasp is a separate image). Place it exactly: horizontally centred, about 72% of the image width, its top edge at about 10% and its bottom edge at about 90% of the image height. Photorealistic luxury jewellery still-life photography, one soft warm studio light from the upper left. Only this one object, complete, not cropped, with empty margin around it. No text, letters, numbers, monograms, logos or watermarks. No cast shadow or drop shadow onto the ground, no glow, halo, light rays, sparkles or haze outside the object's outline (the website adds its own light). True transparent background PNG with a real alpha channel — not white, not a checkerboard.
+```
+Kontrol: tam üstten, düz; klips/kurdele yok; kapak ön kenarı ile ön duvar arasındaki çizgi net ve yatay; kartuş boş; konum tarife yakın; gölge yok; gerçek alfa.
+Kullanım: kapalı hâl; Claude kapağı bu görselden keser (ön duvar şeridi gövdede kalır); kapak üst kenardaki menteşede `rotateX 0→90°`. Kartuşa istenirse `initials` canlı metin olarak konur.
+
+#### W2.4 Klips — tek başına, aynı tuvalde
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/clasp.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+Only the small rose-gold push clasp of the jewel box, alone, drawn exactly where it sits on the attached box_closed.png — the same 1536×1024 canvas, the same scale and the same top-down view (edit box_closed.png and remove the box, keeping only the clasp): horizontally centred over the middle of the lid's front edge, straddling the line between the lid and the front wall, about 9% of the image width wide: a polished rose-gold clasp plate (#C99A86, highlights #EBC9B5) with fine millegrain beading around an oval amethyst cabochon (#5B2A6E) set in a smooth bezel at its centre. Without the box behind it. Photorealistic luxury jewellery still-life photography, one soft warm studio light from the upper left. No text, letters, numbers, monograms, logos or watermarks. No cast shadow or drop shadow, no glow, halo, light rays or sparkles outside the object's outline. True transparent background PNG with a real alpha channel — not white, not a checkerboard; everything except the clasp is fully transparent.
+```
+Kontrol: yalnız klips; box_closed.png'nin üstüne konunca ön kenarın tam ortasında, kenar çizgisinin üstünde; kutu yok; gerçek alfa.
+Kullanım: dokununca kabaşon içe basılır (ölçek .92) ve klips kalkar (`rotateX`), "tık" sesi; sonra kapakla birlikte döner.
+
+#### W2.5 Açık kutu — kapaksız, içi görünür (aynı tuvalde)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/box_open.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+The SAME jewel box as the attached box_closed.png — the same 1536×1024 canvas, the same size, the same position and the same top-down view (edit box_closed.png so that the outer outline stays identical) — now with the lid removed (the lid is a separate image): we look straight down into the fitted interior. The velvet-covered rim and the thin front-wall sliver are exactly as in box_closed.png, with the rose-gold piping along the top of the rim, and there is a crisp, clearly visible edge where the rim meets the interior. Inside: a fitted aubergine velvet tray divided by slim velvet dividers into three compartments: a large CENTRAL compartment, portrait, about 5:7, lined with smooth champagne silk (#E8D3B0) and completely EMPTY (the invitation card is added separately), with one thin champagne silk pull-ribbon lying flat across its lower third; on the LEFT a narrow compartment with a padded velvet ring roll holding one slim rose-gold ring with a small amethyst; on the RIGHT a narrow compartment with a softly coiled strand of ivory pearls. Nothing on the rim, no lid, no card. Photorealistic luxury jewellery still-life photography, one soft warm studio light from the upper left. No text, letters, numbers, monograms, logos or watermarks. No cast shadow or drop shadow outside the box, no glow, halo, light rays or sparkles outside the object's outline. True transparent background PNG with a real alpha channel — not white, not a checkerboard.
+```
+Kontrol: box_closed.png'nin üstüne %50 saydam konunca dış çizgi (sol, sağ, alt kenar ve ön duvar şeridi) aynı yerde, aynı boyda — kayma gözle seçiliyorsa box_closed'u düzenleyerek yeniden üret; orta bölme boş, dikey ~5:7; yüzük ve inciler sade; gerçek alfa.
+Kullanım: kapak açılınca kalan gövde; kart orta bölmeden yükselir (Claude bölmeyi ölçer, kartı oraya oturtur); yüzük ve incilerde CSS faset parıltısı.
+
+#### W2.6 Kapağın içi — ipek astar (aynı tuvalde, menteşe ALTTA)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/lid_lining.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+The INSIDE of the same jewel-box lid, as seen when the lid stands open behind the box and faces the viewer straight on (front view, not tilted): exactly the same outer outline, size and position on the 1536×1024 canvas as the lid in the attached box_closed.png (rounded corners, slim rose-gold piping along its edge), with the HINGE EDGE at the BOTTOM of the image and two tiny rose-gold hinge knuckles on that bottom edge. The lining: a smooth, softly padded champagne silk centre panel (#E8D3B0, sheen #F3E4C8), about 70% of the lid's width and 60% of its height, completely calm and EMPTY (the couple's names are printed on it live by the website), surrounded by fine champagne silk pleats radiating outward from the panel to the lid's edges (a sunray-pleated lining), then a thin band of aubergine velvet and the rose-gold piping. No mirror, no pocket, no jewellery, no label. Photorealistic luxury jewellery still-life photography, one soft warm studio light from the upper left. No text, letters, numbers, monograms, logos or watermarks. No cast shadow or drop shadow, no glow, halo or light rays outside the object's outline. True transparent background PNG with a real alpha channel — not white, not a checkerboard.
+```
+Kontrol: dış çizgi box_closed'daki kapakla aynı boy ve biçim; orta panel boş ve sakin; pliler panelden dışa; menteşe kenarı altta; ayna yok; gerçek alfa.
+Kullanım: 90°'de devralan iç yüz (`rotateX -90°→0`, origin alt); home'un başında açık kapak; isimler orta panelde canlı metin + CSS varak ışığı.
+
+#### W2.7 Fildişi kart — 3 dilim (açılış kartı + RSVP yanıt kartı)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/ivory_card.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+One thick ivory cotton card (#F8EDE0), portrait, about 5:7, seen straight from the front, centred, about 80% of the image width, matching the reply card of the attached design board: crisp bevelled edges gilded in polished rose gold (a fine metallic edge all around), a subtle fine cotton-paper texture. At the top centre a small embossed rose-gold filigree crest with a tiny amethyst and two tiny pearls, staying within the top 15% of the card; at the bottom centre a smaller matching rose-gold filigree accent within the bottom 10% of the card. Everything between 18% and 88% of the card's height is COMPLETELY PLAIN, uniform ivory paper — no ornament, no line, no stain, no shading change — and the left and right edges are perfectly straight and vertical, so a thin horizontal slice of the middle can be repeated to make the card taller. Photorealistic luxury stationery still-life photography, one soft warm studio light from the upper left. Only this one card, complete, not cropped. No text, letters, numbers, monograms, logos or watermarks. No cast shadow or drop shadow, no glow or halo outside the card. True transparent background PNG with a real alpha channel — not white, not a checkerboard.
+```
+Kontrol: orta bant (%18–88) düz ve eşit; yan kenarlar dik; süs yalnız üstte ve altta; yazı yok; gerçek alfa.
+Kullanım: 3 dilim (üst süs / tekrar eden orta / alt süs): kutudan yükselen davet kartı (5:7, portre + "We're getting married") ve RSVP yanıt kartı (forma göre uzar).
+
+#### W2.8 İpek panel — 3 dilim (içerik kartı)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/silk_card.png` · 1024×1536 · **Şeffaf zemin**
+
+```
+One padded panel of smooth champagne silk (#E8D3B0, sheen #F3E4C8) stretched taut over a board like the lining of a jewel box, portrait about 2:3, seen straight from the front, centred, about 84% of the image width, matching the silk card of the attached design board, with a slim polished rose-gold piping along all four edges and gently rounded corners. At the top centre, overlapping the top piping, a small rose-gold filigree ornament with an oval amethyst cabochon, within the top 14% of the panel; at the bottom centre a smaller mirrored rose-gold accent with one pearl, within the bottom 10%. Between 18% and 88% of the panel's height the silk is completely plain, smooth and uniform — no folds, no wrinkles, no gradient, only a very low-contrast even sheen — and the left and right edges are perfectly straight and vertical, so a thin horizontal slice of the middle can be repeated to make the panel any height. Photorealistic luxury jewellery still-life photography, one soft warm studio light from the upper left. Only this one panel, complete, not cropped. No text, letters, numbers, monograms, logos or watermarks. No cast shadow or drop shadow, no glow or halo outside the panel. True transparent background PNG with a real alpha channel — not white, not a checkerboard.
+```
+Kontrol: orta bant düz, kıvrımsız, düşük kontrast; yan kenarlar dik; süs yalnız üstte ve altta; gerçek alfa.
+Kullanım: home davet metni, details programı ve blokları (Travel & stay, Menu, Registry, SSS), story başlıkları; içerik kadar uzar.
+
+#### W2.9 İpek cep (RSVP kartının çıktığı cep)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/silk_pocket.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+The front of a jewel-box lid pocket, alone, matching the pocket of the attached design board: a wide horizontal band of champagne silk (#E8D3B0) gathered into soft, even vertical pleats, with a slim polished rose-gold piping along its perfectly straight, horizontal top edge and a tiny pearl button at the centre of that top edge; its lower edge is straight as well. The band spans about 92% of the image width and occupies only the middle third of the image height (about 3:1); the rest of the canvas is empty. Seen straight from the front. Photorealistic luxury jewellery still-life photography, one soft warm studio light from the upper left. Only this one object, complete, not cropped. No text, letters, numbers, monograms, logos or watermarks. No cast shadow or drop shadow, no glow or halo outside the object. True transparent background PNG with a real alpha channel — not white, not a checkerboard.
+```
+Kontrol: tek parça pliseli ipek bant; üst kenar düz ve yatay; ortada inci düğme; gerçek alfa. Claude banda kırpar.
+Kullanım: RSVP: kart cebin arkasından kayarak çıkar; cep ekranın altında durur.
+
+#### W2.10 Tırnaklı taş yuvası — foto çerçevesi
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/gem_frame.png` · 1024×1536 · **Şeffaf zemin** · pencere boş (yeşil ya da şeffaf)
+
+```
+An emerald-cut gemstone SETTING used as a photo frame, alone, seen straight from the front, matching the photo settings of the attached design board: a slim polished rose-gold bezel (#C99A86, highlights #EBC9B5) shaped as a portrait rectangle with small cut (chamfered) corners — the window inside is a 4:5 portrait octagon — with a fine millegrain beaded inner edge, and at each of the four cut corners a pair of slim rose-gold claws (double prongs) that curl gently over the edge of the window, as if holding a stone. Refined and light, never heavy or baroque: no crest, no bow, no flowers, no gems on the frame. The frame is centred and fills about 88% of the image width. The inside of the window is EMPTY: flat pure green #00FF00 if you can keep it perfectly flat, otherwise fully transparent — either is accepted, as long as the rose-gold frame is closed all the way round and the window edge is crisp. Photorealistic luxury jewellery still-life photography, one soft warm studio light from the upper left. No text, letters, numbers, monograms, logos or watermarks. No cast shadow or drop shadow, no glow or halo outside the frame. True transparent background PNG with a real alpha channel around the frame — not white, not a checkerboard.
+```
+Kontrol: pencere 4:5 dikey sekizgen (köşeleri kesik); çerçeve her yerde kapalı ve ince; dört köşede çift tırnak; pencere düz yeşil ya da şeffaf (ikisi de kabul); gerçek alfa.
+Kullanım: bütün fotoğraflar (home portresi, açılış kartının portresi, story vitrini, mekân); Claude pencereyi ölçer, maskesini (`mask_gem.png`) çıkarır.
+
+#### W2.11 Tepsi hücresi (geri sayım ve ikon kuyusu)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/tray_cell.png` · 1024×1024 · **Şeffaf zemin**
+
+```
+A single small square compartment of a fitted jewellery tray, alone, seen from directly above, matching the countdown cells of the attached design board: four short inner walls covered in deep aubergine silk velvet sloping down to a flat, calm, slightly darker velvet floor (#1C0B1A to #2A1328), a slim polished rose-gold piping along the top of the rim, softly rounded outer corners. The floor (the inner 60% of the cell) is completely calm and empty so a number can be printed on it. The cell is square, centred and fills about 80% of the image. Photorealistic luxury jewellery still-life photography, one soft warm studio light from the upper left. No text, letters, numbers, monograms, logos or watermarks. No cast shadow or drop shadow, no glow or halo outside the cell. True transparent background PNG with a real alpha channel — not white, not a checkerboard.
+```
+Kontrol: kare; iç taban sakin ve boş; rose gold kenar; gerçek alfa.
+Kullanım: geri sayımın 4 hücresi; details program ikonlarının küçük kuyusu.
+
+#### W2.12 Kadife kaide (story vitrini)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/display_pedestal.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+A round, low jeweller's display pedestal (a short, wide cylinder like a ring-display plinth), alone, matching the pedestal of the attached design board: covered in deep aubergine silk velvet (#2A1328, lit pile #4A2142) with a polished rose-gold band around its top edge and another around its base, seen from the front at a slightly high eye level so its EMPTY top is a flat ellipse. It is about 80% of the image width, centred horizontally, sitting in the lower 55% of the image. Nothing on it. Photorealistic luxury jewellery still-life photography, one soft warm studio light from the upper left. Only this one object, complete, not cropped. No text, letters, numbers, monograms, logos or watermarks. No cast shadow or drop shadow onto the ground, no glow, halo or light rays outside the object. True transparent background PNG with a real alpha channel — not white, not a checkerboard.
+```
+Kontrol: tek kaide; üstü boş elips; iki rose gold bant; gerçek alfa.
+Kullanım: Story: fotoğraflar kaidenin üstünde silindir karusel olarak döner; bantta CSS ışık süpürmesi.
+
+#### W2.13 İnci dizisi ayırıcı
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/pearl_divider.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+A single straight horizontal strand of lustrous ivory pearls (#F8EDE0 with a soft rosy overtone), gently graduated — slightly larger in the middle, smaller toward the ends — lying perfectly straight and level, spanning about 90% of the image width across the vertical middle of the image; at its centre a small faceted oval amethyst drop (#5B2A6E) in a fine rose-gold bezel hangs just below the strand. Seen straight from the front. The exact number of pearls does not matter. Photorealistic luxury jewellery still-life photography, one soft warm studio light from the upper left. Only this one object, complete, not cropped. No text, letters, numbers, monograms, logos or watermarks. No cast shadow or drop shadow, no glow, halo, light rays or sparkles outside the pearls. True transparent background PNG with a real alpha channel — not white, not a checkerboard.
+```
+Kontrol: düz ve yatay dizi; ortada ametist damla; gerçek alfa. Claude ince banda kırpar.
+Kullanım: bölüm ayırıcı (başlık altı, açılışta isimlerin altı).
+
+#### W2.14 Filigran süs (başlık süsü)
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/filigree_crest.png` · 1536×1024 · **Şeffaf zemin**
+
+```
+A small symmetrical rose-gold filigree ornament like a jeweller's brooch, alone, horizontal (about 2.5:1), seen straight from the front, matching the crests of the attached design board: a central oval amethyst cabochon (#5B2A6E) in a fine beaded bezel, flanked left and right by delicate polished rose-gold scrolls (#C99A86, highlights #EBC9B5) and two tiny ivory pearls; light and refined, not heavy, no crown. It spans about 70% of the image width, centred in the image. Photorealistic luxury jewellery still-life photography, one soft warm studio light from the upper left. Only this one object, complete, not cropped. No text, letters, numbers, monograms, logos or watermarks. No cast shadow or drop shadow, no glow, halo, light rays or sparkles outside the ornament. True transparent background PNG with a real alpha channel — not white, not a checkerboard.
+```
+Kontrol: simetrik; ortada ametist; ince ve hafif; gerçek alfa.
+Kullanım: sayfa başlıklarının üstü (home, story, details, rsvp); üstünden ışık süpürmesi.
+
+#### W2.15–W2.19 Program ikonları — beş ayrı dosya
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/icon_rings.png`, `icon_coupes.png`, `icon_dinner.png`,
+`icon_music.png`, `icon_key.png` (hepsi aynı klasörde) · her biri 1024×1024 · **Şeffaf zemin**
+
+```
+A small LINE ICON of [SUBJECT], alone, drawn as fine engraved lines of polished rose-gold metal (#C99A86 with lighter #EBC9B5 highlights), like thin gold wire: one even stroke weight (about 2.5% of the image width), open outlines with no fill, no background shape, no circle or badge around it, no extra ornaments, matching the programme icons of the attached design board. Front view, centred, filling about 60% of the square. All five icons of this set (rings, coupes, cloche, music, key) share exactly the same line weight, colour and style. One soft warm light from the upper left on the metal. No text, letters, numbers, monograms, logos or watermarks. No cast shadow or drop shadow, no glow or halo outside the lines. True transparent background PNG with a real alpha channel — not white, not a checkerboard.
+[SUBJECT] — make five separate images:
+icon_rings  = two interlocking wedding rings, one with a tiny gem on top
+icon_coupes = two champagne coupes clinking, with a few tiny bubbles
+icon_dinner = a domed dinner cloche on a plate
+icon_music  = two joined musical eighth notes
+icon_key    = an antique ornate key with a filigree bow
+```
+Kontrol: beş dosya, her birinde tek ikon; çizgi kalınlığı ve rengi beşinde aynı; dolgu ve arka şekil yok; temiz alfa kenarı (Claude alfayı maske olarak kullanıp rengini değiştirebilir).
+Kullanım: details programı (rings = tören, coupes = kokteyl, dinner = akşam yemeği, music = dans), key = Travel & stay; ikonlar tepsi hücresinin içinde.
+
+#### W2.20–W2.22 Süzülen taşlar — üç ayrı dosya
+**Kaydet:** `collections/23_Velvet_Jewel_Box/assets/gpt/parts/gem_amethyst.png`, `gem_morganite.png`, `pearl.png`
+(aynı klasörde) · her biri 1024×1024 · **Şeffaf zemin**
+
+```
+A single loose [STONE], alone, lying as if on velvet but WITHOUT the velvet, seen three-quarter from above, centred, filling about 45% of the square, matching the gems of the attached design board: crisp, believable facets (or lustre) catching one soft warm studio light from the upper left, with tiny bright specular highlights ON the stone only. No setting, no prongs, no other stones, no velvet, no surface. Photorealistic luxury jewellery macro photography. No text, letters, numbers, monograms, logos or watermarks. No cast shadow or drop shadow, no glow, halo, light rays, star sparkles or haze outside the stone's outline (the website adds its own sparkle). True transparent background PNG with a real alpha channel — not white, not a checkerboard.
+[STONE] — make three separate images:
+gem_amethyst  = oval faceted deep amethyst (#5B2A6E, lighter violet facets)
+gem_morganite = pear-shaped faceted pale pink morganite (#E9B9B0)
+pearl         = round lustrous ivory pearl (#F8EDE0) with a soft rosy overtone and a bright window reflection
+```
+Kontrol: üç dosya, her birinde tek taş; yüzey/kadife yok; dışarı taşan parıltı yok; gerçek alfa.
+Kullanım: açılışta kapak kalkınca 2–3 taş kenardan kayar; home ve story kenarlarında yavaş paralaks; RSVP gönderilince inciler saçılır; parıltıyı site ekler.
+
+### Instructions for GPT (order of work, saving, delivery)
+
+**First message (send once, before the first image of this chat):**
+```
+You are the art director and still-life photographer of a luxury jewellery-inspired wedding stationery house. We are designing the mobile wedding website "Velvet Jewel Box" from scratch. Concept: the whole website is the inside of a jeweller's velvet jewel casket seen from directly above. Materials only: deep aubergine silk velvet (#1C0B1A, #2A1328, lit pile #4A2142), smooth champagne silk linings (#E8D3B0), polished rose gold (#C99A86, highlights #EBC9B5), lustrous ivory pearls (#F8EDE0) and a few faceted gemstones (amethyst #5B2A6E, pale pink morganite #E9B9B0). No flowers anywhere in the decoration — the jewels are the decoration. Photos are set like emerald-cut gemstones held by four rose-gold double claws. Everything must look photographed for real: rich, tactile, believable, magazine-quality luxury; never clip-art, never flat vector, never cheap stock. One soft warm studio light from the upper left in every image. The five attached photos show the fictional couple Isabelle and Julian; use them only for the photos inside the design board. Apart from the design board (W1), no image may contain text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard), with no cast shadow and no glow outside the object.
+```
+Attach these five images from the repository to that first message (couple reference for the board):
+`collections/23_Velvet_Jewel_Box/assets/gpt/photos/hero_portrait.jpg`, `story_1.jpg`, `story_2.jpg`, `story_3.jpg`,
+`venue.jpg`. **Do NOT attach** anything from `platform/themes/velvet-jewel-box/img/` (bg_scene, v3-closed, frames: the old
+look that this package replaces) and do NOT attach the Crimson Rose Atelier board (a different design). The instruction at
+the top of this file (bg_scene / v3-closed as style reference) does NOT apply to PAKET 8.
+
+**Order of work (one chat):**
+1. **W1** — generate the design board. If it misses its Kontrol line, generate it again (at most 3 tries). Save it at its
+   Kaydet path → commit `G23 PAKET 8: W1 design board` → push.
+2. **W2.1 → W2.22** in order, in the same chat. **Attach `mockups/design-board.png` as the reference image to every W2
+   request.** For W2.4 clasp, W2.5 box_open and W2.6 lid_lining also attach `parts/box_closed.png` and produce them by
+   **editing** it (same 1536×1024 canvas). Then check alignment: lay box_open.png and clasp.png over box_closed.png at 50%
+   opacity — the box's outer outline and its front-wall sliver must sit in the same place at the same size. If a shift is
+   visible, regenerate once; write any remaining difference in TESLIM.txt.
+3. Use every prompt **word for word**. In the icon and stone groups replace `[SUBJECT]` / `[STONE]` with the listed line;
+   each line is its own image and its own file.
+4. **Ratio matters, pixels do not:** only 1:1, 2:3 or 3:2 canvases (the board ~2.3:1). If the tool returns a different pixel
+   size, keep it. Do **not** resize, crop, repaint or colour-correct any image with code; Claude crops thin bands and cuts
+   the pieces.
+5. Photo window (W2.10): if flat green cannot be kept, a **transparent window is accepted**, as long as the rose-gold frame
+   is closed all the way round.
+6. Never regenerate because of the **number** of pearls, pleats or scrolls. If a part fails its Kontrol twice, save the best
+   try, write why in TESLIM.txt and move on.
+
+**Saving and committing:**
+- Repository `muzaffergrl/davetiye-maker`, branch **`main`**. If you cannot push to `main`, push to the branch
+  `codex/g23-paket8` and write that on the first line of TESLIM.txt.
+- Every file goes **exactly** to the path and name on its Kaydet line: W1 → `collections/23_Velvet_Jewel_Box/assets/gpt/mockups/`,
+  W2 → `collections/23_Velvet_Jewel_Box/assets/gpt/parts/`. No Downloads folder, no zip, no other collection, nothing under
+  `platform/`, no new folder, no renaming (`_final`, `_v2` …); rejected tries are not committed. Save as PNG.
+- Intermediate saves: commit + push after W1 and after every 4–5 W2 parts (`G23 PAKET 8: W2 checkpoint (n/5)`), finally
+  `G23 PAKET 8: W2 parts + TESLIM`. Run `git pull --rebase origin main` before every push.
+- Touch no other file; write no code; do not run `gpt_yerlestir.py` or `build_images.py`.
+
+**TESLIM.txt** → `collections/23_Velvet_Jewel_Box/assets/gpt/parts/TESLIM.txt` (plain text, Turkish or English):
+- Branch and last commit; how many files were delivered (expected: the board + 22 parts).
+- One line per file: name · target size → actual size · RGB/RGBA (is there a real alpha channel) · number of tries ·
+  any deviation from its Kontrol line (which point, why).
+- Alignment result: box_closed ↔ box_open, clasp and lid_lining (shift yes/no, roughly how much).
+- Skipped or missing files and why; anything you are unsure about.
