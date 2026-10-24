@@ -1,0 +1,187 @@
+22 NOCTURNE LAKE ESTATE — PAKET 8 TESLİMİ
+Tarih: 24 Ekim 2026
+Repo: muzaffergrl/davetiye-maker | Dal: main
+Kaynak: collections/22_Nocturne_Lake_Estate/assets/gpt/GPT_PROMPTS.md → yalnız PAKET 8.
+
+Sıra: W1 önce üretildi, ayrı commit ve main push yapıldı; ardından W2.1–W2.15 sırayla, tek sohbette üretildi. W2.14 altı, W2.15 üç ayrı PNG olarak üretildi. Toplam: 1 pano + 22 parça = 23 PNG. Üç parça iki deneme, diğerleri bir deneme: toplam 26 üretim.
+W1 main kaydı: 4187a324. W2 ara kayıtları, rebase sonrası: 2a5df928, 8eb025b4, 717d7743, 43c37ef4. Son commit mesajı: 22 PAKET 8: teslim.
+
+REFERANSLAR
+W1: collections/22_Nocturne_Lake_Estate/assets/gpt/photos/hero_portrait.jpg ve collections/22_Nocturne_Lake_Estate/assets/gpt/photos/story_2.jpg; yalnız kurgusal yetişkin çiftin kimliği/kıyafeti için.
+BÜTÜN W2 üretim ve yeniden üretimlerinde: collections/22_Nocturne_Lake_Estate/assets/gpt/mockups/design-board.png.
+W2.1 ikinci denemede ek olarak ilk ham kapalı zarf çıktısı: /workspace/generated_images/exec-b52f2bbf-fe2c-479d-b073-110f761c1177.png.
+W2.2 ek referans: collections/22_Nocturne_Lake_Estate/assets/gpt/parts/moon_envelope_closed.png; araçta bu dosyayı düzenleme talimatı verildi.
+W2.6 ek referans: collections/22_Nocturne_Lake_Estate/assets/gpt/parts/night_lake.png.
+Diğer parçalarda ek referans yok. Her üretime depodaki İngilizce prompt aynen verildi; tuval/yol ve tek dosya seçimi ek açıklama olarak belirtildi. Yeniden denemelerde düzeltme talebi de eklendi.
+
+DOĞRULAMA VE SINIRLAR
+23 dosyanın tamamı doğru Kaydet yolunda. Hiçbir görsel docs/qa altına konmadı. Ham imagegen dosyaları doğrudan kopyalandı; 23/23 hedef dosya kendi ham çıktısıyla bayt bayt aynı doğrulandı. Oranlar W2 için tam 1:1, 2:3 veya 3:2; W1 oran hatası yaklaşık %0,174. Piksel ölçülerinin farklı olmasına PAKET 8 izin verir.
+RGB: pano, iki göl ve kâğıt dokusu. Diğer 19 PNG RGBA; alfa=0 bölgeleri mevcut, beyaz/dama arka plan pişirilmemiş. RGBA nesne yüzeyleri çoğunlukla alfa 253–254/255, tamamı tam opak 255 değil. Bazı dış boşluklarda alfa 1–7/255 kalıntılar bulunur; aşağıdaki kenar-α tüm tuval dış sınırının en yüksek alfasıdır. Bu ham kalıntılar temizlenmedi.
+Kutu ölçüleri ana nesnenin alfa≥128 kutusudur; koordinatlar [sol,üst,sağ,alt), sıfır tabanlıdır. Düşük alfa kalıntısı bu kutuya dahil değildir. Ana nesneler hiçbir dosyada tuval sınırına değmiyor; bazı %5 pay hedefleri tutmadı, dosya notunda belirtilmiştir.
+W2.4, W2.10 ve W2.11 açıklıklarında alfa≤8 bölgesi dışarıya bağlanmıyor: halka/çevre kapalı; açıklık merkezleri alfa=0. Balüstrat aralığında alfa=0 örneği doğrulandı. Zarf gövdesi kenarları sayısal karşılaştırıldı; üst üste bindirilmiş yeni görsel üretilmedi.
+W2 görsellerinde göz kontrolünde harf, rakam, monogram, logo veya filigran görülmedi. Geniş, görünür dış hâle ya da düşen gölge görülmedi; düşük alfa kenar kalıntıları için aşağıdaki notlar geçerli.
+İkonlar aynı altın kontur ailesinde fakat çizgi kalınlıkları matematiksel olarak eşit değil; 32–40 px gerçek site görünümü bu oturumda denenmedi. Kâğıdın 2×2 görsel döşeme denetimi de uygulanmadı. Bunlar doğrulanmış gibi sunulmaz.
+
+DOSYA BAZINDA TESLİM
+
+1. W1 — collections/22_Nocturne_Lake_Estate/assets/gpt/mockups/design-board.png
+Hedef: yaklaşık 1908×824 px | Gerçek: 1907×825 px | RGB | Deneme: 1
+Kontrol / farklar: Beş ekran, ilk gökte ay yok, home ayı/yolu, story yansıması, dört program ikonu ve okunur RSVP formu mevcut. Sapmalar: home portresi soldan çok ortaya yakın; story fotoğrafı yataydan çok kareye yakın; panodaki zarf kesiminde geniş yumuşak tepeler yerine küçük kırıklar var. Bunlar W1 referansında kaldı. Demo yazılar görsele dahildir; yalnız W1'de izinlidir.
+Eklenen referans: W1 fotoğraf çifti (yukarıda).
+Ham çıktı SHA-256: 279c25fac1214aadf54b8f92ec33050a54328141a98b1fbd66abba8275adae68
+
+2. W2.1 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/moon_envelope_closed.png
+Hedef: 1024×1536 px | Gerçek: 1024×1536 px | RGBA | Deneme: 2
+Alfa: 0–254/255 | tuval kenarı α≤1 | ana nesne kutusu: [43, 696, 981, 1280]
+Kontrol / farklar: İkinci deneme seçildi. İlk deneme yan payı az olduğu için yenilendi; ikinci denemede de ana nesne genişliği %91,6 (istenen ~%84), alt kenarı %83,3 (istenen ~%88), sol/sağ pay ~%4,2 (istenen en az %5). Üst bölüm boş. Kapak ortada tek derin vadiye iniyor; iki geniş düzgün tepe yerine birkaç küçük ara kıvrım içeriyor. Ay ışığı çizgileri kapak kenarına değmiyor. Mühür/yazı yok.
+Eklenen referans: Pano; ikinci denemede ilk ham zarf çıktısı da eklendi (yukarıda).
+Ham çıktı SHA-256: ff97101d1a10604dd5151358ad66bdcbac13ec25f432d3b04274a6959cc9a42a
+
+3. W2.2 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/moon_envelope_open.png
+Hedef: 1024×1536 px | Gerçek: 1024×1536 px | RGBA | Deneme: 1
+Alfa: 0–254/255 | tuval kenarı α≤1 | ana nesne kutusu: [41, 296, 983, 1286]
+Kontrol / farklar: Kapalı zarf doğrudan düzenleme referansı verildi. Gövde sol/sağ/alt sınırları kapalıya göre sırasıyla -2/+2/+6 px; görünür hizası yakın ve %1,5 toleransı içinde, piksel piksel aynı değil. Ortadaki açık kapak tepesi sivri yerine yuvarlak; moiré dokusu ince düzenli çizgiden çok yumuşak su dalgası gibi. Ön cebin düz üst çizgisi yaklaşık y=713; kapalı gövdenin üstünden %10 aşağı hedefinin (~754) üstünde. Sol/sağ pay ~%4. Boş, mühür/kart yok.
+Eklenen referans: Pano + parts/moon_envelope_closed.png.
+Ham çıktı SHA-256: 74aa053a12663e256e83e198a0754871b58ed4e52fd2fc7ed1de86029c1f403d
+
+4. W2.3 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/moon_seal.png
+Hedef: 1024×1024 px | Gerçek: 1254×1254 px | RGBA | Deneme: 1
+Alfa: 0–255/255 | tuval kenarı α≤1 | ana nesne kutusu: [122, 111, 1138, 1102]
+Kontrol / farklar: Ortası boş ve pürüzsüz, dışı ay dokulu tek mühür. Nesne genişliği ~%81 (istenen ~%70); ay dokulu dış halka istenen ince alçak rölyeften daha geniş ve belirgin. Ortadaki boş disk mühür çapının yaklaşık %55'i (~%60 hedefi). Harf/monogram yok.
+Eklenen referans: Pano.
+Ham çıktı SHA-256: 0eea4e4b3a43a401e7496726af03183bda42c3ec49baebdd27644155006bd3b1
+
+5. W2.4 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/card_invite.png
+Hedef: 1536×1024 px | Gerçek: 1536×1024 px | RGBA | Deneme: 1
+Alfa: 0–254/255 | tuval kenarı α≤0 | ana nesne kutusu: [95, 115, 1442, 910]
+Kontrol / farklar: Sol kemer açıklığı gerçek alfa=0; halka/paper çevresi kapalı, sağ yüz boş. Kartın ana kutusu 1347×795 px (~1,69:1; nesne için ~3:2 istenmişti), tuval 3:2 doğru. Genişlik ~%87,7 (~%86 hedefi). Dış ve pencere kenarında yaldız mevcut.
+Eklenen referans: Pano.
+Ham çıktı SHA-256: a8da8da07b8ce68e0fce5922d33df519cba11e87c2c0ed6df1f118e92da7146f
+
+6. W2.5 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/night_lake.png
+Hedef: 1024×1536 px | Gerçek: 1024×1536 px | RGB | Deneme: 1
+Kontrol / farklar: Ay, yıldız, bulut, yazı ve ön plan nesnesi yok; ay yolu ortada alt kenara ulaşıyor. Ufuk yaklaşık %53 (~%55 hedefi). Göğün orta üstü boş; yan dağlar yaklaşık %35 yüksekliğinde başladığı için üst %45'in tamamı enlerde boş değil. Kıyı ışıkları birkaç küçük noktadan daha yoğun.
+Eklenen referans: Pano.
+Ham çıktı SHA-256: 21b473b2ef6f98f70701bf200c3984ee7338d37386d3d47ad23ab8ea9c706b77
+
+7. W2.6 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/night_lake_wide.png
+Hedef: 1536×1024 px | Gerçek: 1536×1024 px | RGB | Deneme: 1
+Kontrol / farklar: Dikey göl + pano birlikte referans verildi; aynı renk/ışık ve merkezde altın yol. Ay/yıldız/bulut yok. Ufuk yaklaşık %56. Yan dağlar yaklaşık %27 yüksekliğine kadar çıkıyor; üst %45'in tamamı enlerde boş değil. Kıyı ışıkları birkaç küçük noktadan daha yoğun.
+Eklenen referans: Pano + parts/night_lake.png.
+Ham çıktı SHA-256: 7d2139da2b0a054ed97e54bff89907d394e17cb5e2088d2a8bdc8c7f75af4e25
+
+8. W2.7 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/paper_tile.png
+Hedef: 1024×1024 px | Gerçek: 1254×1254 px | RGB | Deneme: 1
+Kontrol / farklar: Opak, siyah pamuk dokusu; nesne/yazı/çizgi ve belirgin vinyet yok. 2×2 görsel döşeme kontrolü bu oturumda yapılmadı; Claude için kaldı. Salt okunur kenar karşılaştırmasında ortalama RGB farkı yatay dikişte 6,82/255, dikeyde 5,00/255; orta komşu piksel farkı 5,12 ve 6,56. Bunlar tek başına dikişsizlik garantisi değildir. Dikiş düzeltmesi uygulanmadı.
+Eklenen referans: Pano.
+Ham çıktı SHA-256: 92747d75ecd3e2eabfce81fa3f907a5e4b2eff8ba95dc5d2a148bcec42af08f4
+
+9. W2.8 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/moon.png
+Hedef: 1024×1024 px | Gerçek: 1254×1254 px | RGBA | Deneme: 1
+Alfa: 0–255/255 | tuval kenarı α≤1 | ana nesne kutusu: [145, 143, 1110, 1100]
+Kontrol / farklar: Tek dolunay, dışı gerçek alfa, geniş görünür hâle yok. Çap yaklaşık %77 (~%70 hedefi); kenarda 1–2 px düzensizlik/çok düşük alfa kalıntısı var. Ay diski tam matematiksel daire değil (~965×957 px ana kutu).
+Eklenen referans: Pano.
+Ham çıktı SHA-256: 8b7a11dafc13b229c2c4aaf5a15326d8846509bcc6126e229f9155f14f598038
+
+10. W2.9 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/balustrade.png
+Hedef: 1536×1024 px | Gerçek: 1536×1024 px | RGBA | Deneme: 2
+Alfa: 0–254/255 | tuval kenarı α≤0 | ana nesne kutusu: [77, 330, 1460, 691]
+Kontrol / farklar: İkinci deneme seçildi; ilkinde yan boşluk yaklaşık %1,6 idi. Seçilende genişlik ~%90, sol/sağ pay ~%5; bütün bölüm ve iki kaide tam. Ana bant 1383×361 px (~3,83:1; ~3:1 hedefinden daha basık). Babalar arasındaki boşluklarda alfa=0 doğrulandı. Taştaki sıcak altın ışık serin ay ışığından daha baskın.
+Eklenen referans: Pano.
+Ham çıktı SHA-256: 1889b482e713a24f351fd4fb36c2c6ba83d1885eed02e50afa3d304603ce5600
+
+11. W2.10 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/frame_arch.png
+Hedef: 1024×1536 px | Gerçek: 1024×1536 px | RGBA | Deneme: 1
+Alfa: 0–254/255 | tuval kenarı α≤0 | ana nesne kutusu: [127, 69, 898, 1469]
+Kontrol / farklar: İç boşluk alfa=0 ve dışarıya bağlanmıyor; alt çizgi dahil halka kesintisiz kapalı, süs yok. Yükseklik ~%91,1 (~%88 hedefi), üst/alt pay ~%4,5/~%4,4 (en az %5 hedefinin altında); kenara değmiyor. İnce boncuklu altın ve siyah slip mevcut.
+Eklenen referans: Pano.
+Ham çıktı SHA-256: 5ab086b62a7eebc3c260ec073e672708889de10255bd288b735da3aa94dd50a8
+
+12. W2.11 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/frame_landscape.png
+Hedef: 1536×1024 px | Gerçek: 1536×1024 px | RGBA | Deneme: 1
+Alfa: 0–254/255 | tuval kenarı α≤1 | ana nesne kutusu: [65, 92, 1471, 932]
+Kontrol / farklar: İç boşluk alfa=0 ve dışarıya bağlanmıyor; halka kesintisiz kapalı; kemer çerçeveyle aynı altın/boncuk/siyah slip ailesi. Genişlik ~%91,5 (~%88 hedefi), yan pay ~%4,2 (en az %5 hedefinin altında). İç açıklık yaklaşık 1,8:1; ~3:2 hedeften daha yatay.
+Eklenen referans: Pano.
+Ham çıktı SHA-256: e9c07e8635d53361f6f4578ee8abf5fb8ba4f7d07dd557272ac8256afd171b91
+
+13. W2.12 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/card_gilt.png
+Hedef: 1024×1536 px | Gerçek: 1024×1536 px | RGBA | Deneme: 1
+Alfa: 0–254/255 | tuval kenarı α≤0 | ana nesne kutusu: [112, 110, 913, 1422]
+Kontrol / farklar: Üstte ay/dalgacık, altta dalgacık ve yaldızlı dış kenar var. Orta bantta yalnız düz çift yan çizgiler ve siyah kâğıt; yazı/form/pencere yok. Ana kart yüksekliği ~%85,4 (~%90 hedefi). Üç dilime kesme/uzatma bu oturumda uygulanmadı.
+Eklenen referans: Pano.
+Ham çıktı SHA-256: 11f57a3c86c5c158c22f321663ebd59d2d9d4771d65ee0dc51821102cd2ce6eb
+
+14. W2.13 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/divider_moonpath.png
+Hedef: 1536×1024 px | Gerçek: 1536×1024 px | RGBA | Deneme: 1
+Alfa: 0–253/255 | tuval kenarı α≤0 | ana nesne kutusu: [80, 489, 1456, 531]
+Kontrol / farklar: Tek ince yatay ayırıcı ve ortada küçük yuvarlak ay; uçlarda kesik çizgiler var. Ana genişlik ~%89,6 (~%70 hedefinden uzun). Merkez nokta düz dolgu yerine hafif ay dokulu. Kenarlara değmiyor; görünür geniş hâle yok.
+Eklenen referans: Pano.
+Ham çıktı SHA-256: a06b92d03477645804074dc54fe3147a500513abcbaf2498ddfbf617bfe9e52a
+
+15. W2.14 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/icon_ceremony.png
+Hedef: 1024×1024 px | Gerçek: 1254×1254 px | RGBA | Deneme: 2
+Alfa: 0–255/255 | tuval kenarı α≤0 | ana nesne kutusu: [197, 380, 1057, 913]
+Kontrol / farklar: İkinci deneme seçildi: ilkinde elmas taşlı yüzükler vardı, ikincide iki sade iç içe alyans var. Ana genişlik ~%68,6 (~%60 hedefi). Kontur tek düz çizgiden çok hafif kabartmalı metal şerit gibi; diğer ikonlarla kalınlık birebir aynı değil. RGB kanallarında kırmızı/sarı saçak kalıntıları var; dıştaki sarıların büyük kısmı alfa 1–2/255.
+Eklenen referans: Pano.
+Ham çıktı SHA-256: bb9d945e58a0265bff2b59b2b5d5fbd8eae9741248ccad5d620088febb7ce0e3
+
+16. W2.14 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/icon_toast.png
+Hedef: 1024×1024 px | Gerçek: 1254×1254 px | RGBA | Deneme: 1
+Alfa: 0–255/255 | tuval kenarı α≤1 | ana nesne kutusu: [184, 358, 1070, 928]
+Kontrol / farklar: Tek ikon: ağızları değen iki coupe; içleri boş, rozet/yazı yok. Ana genişlik ~%70,7 (~%60 hedefi). Hafif kabartmalı kontur; çizgi kalınlığı bütün ikonlarla birebir eşit değil. Düşük alfa renkli saçak kalıntıları mevcut.
+Eklenen referans: Pano.
+Ham çıktı SHA-256: 95e26d1eaddc7aa120b2951b4131ae323bb57007d5ecf0ecdc6d9a29d7af7ce0
+
+17. W2.14 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/icon_dinner.png
+Hedef: 1024×1024 px | Gerçek: 1254×1254 px | RGBA | Deneme: 1
+Alfa: 0–255/255 | tuval kenarı α≤1 | ana nesne kutusu: [302, 122, 953, 1137]
+Kontrol / farklar: Tek üç kollu şamdan, üç mum ve kontur alevler; rozet/yazı yok. Ana yükseklik ~%80,9 (~%60 hedefi). Kaide ve mum yuvaları basit tek çizgiden daha ayrıntılı/kabartmalı. Düşük alfa renkli saçak kalıntıları mevcut.
+Eklenen referans: Pano.
+Ham çıktı SHA-256: 4e9bcab4277563f5fee41e1f68d93a71dade77b3e214a35fcac346e1f4536e90
+
+18. W2.14 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/icon_dancing.png
+Hedef: 1024×1024 px | Gerçek: 1254×1254 px | RGBA | Deneme: 1
+Alfa: 0–255/255 | tuval kenarı α≤0 | ana nesne kutusu: [343, 175, 1078, 1121]
+Kontrol / farklar: Tek gramofon, açık horn ve küçük taban; rozet/yazı yok. Ana yükseklik ~%75,4 (~%60 hedefi); kutu merkezi yatayda tuval merkezinin yaklaşık %6,7 sağında. Horn içindeki birkaç çizgi ve taban küçük boy için ayrıntılı; kontur hafif kabartmalı. Düşük alfa renkli saçak kalıntıları mevcut.
+Eklenen referans: Pano.
+Ham çıktı SHA-256: c1d0aa048ce592dd9aa472401c4e92178871f0b618cd517e1d6bea113b95e735
+
+19. W2.14 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/icon_dresscode.png
+Hedef: 1024×1024 px | Gerçek: 1254×1254 px | RGBA | Deneme: 1
+Alfa: 0–255/255 | tuval kenarı α≤1 | ana nesne kutusu: [143, 401, 1110, 855]
+Kontrol / farklar: Tek papyon, boş iç ve orta düğüm; rozet/yazı yok. Ana genişlik ~%77,1 (~%60 hedefi). Kontur hafif kabartmalı; bütün ikonlarla kalınlığı birebir eşit değil. Düşük alfa renkli saçak kalıntıları mevcut.
+Eklenen referans: Pano.
+Ham çıktı SHA-256: e37ddfeda22e9fc89a7c96f6890c18f1dfeb4bba32f038ab8f2bb4705d2a7f1e
+
+20. W2.14 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/icon_boat.png
+Hedef: 1024×1024 px | Gerçek: 1254×1254 px | RGBA | Deneme: 1
+Alfa: 0–255/255 | tuval kenarı α≤0 | ana nesne kutusu: [114, 523, 1143, 855]
+Kontrol / farklar: Tek jenerik göl motoru ve iki dalga çizgisi; marka/yazı yok. Ana genişlik ~%82,1 (~%60 hedefi); dikeyde biraz aşağıda ve teknenin burnu hafif yukarı eğimli. Kabin/tekne çizgileri çok küçük boy için ayrıntılı; kontur hafif kabartmalı. Düşük alfa renkli saçak kalıntıları mevcut.
+Eklenen referans: Pano.
+Ham çıktı SHA-256: 30c4e96787123ee74b1ac266a9fe69a14d71410740288a8edcde3efc8fdbd529
+
+21. W2.15 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/gold_leaf_1.png
+Hedef: 1024×1024 px | Gerçek: 1254×1254 px | RGBA | Deneme: 1
+Alfa: 0–255/255 | tuval kenarı α≤1 | ana nesne kutusu: [207, 342, 1053, 912]
+Kontrol / farklar: Tek düz, yukarıdan görülen kırışık varak pulu; diğerlerinden farklı. Ana genişlik ~%67,5 (~%45 hedefi). Dış kenarda çok düşük alfa renkli kalıntılar var; görünür geniş hâle/gölge yok.
+Eklenen referans: Pano.
+Ham çıktı SHA-256: 9ec0bf5dded811e2ec6c1a1d112b4251f2caf388fcf48e8915f9e4091bf71080
+
+22. W2.15 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/gold_leaf_2.png
+Hedef: 1024×1024 px | Gerçek: 1254×1254 px | RGBA | Deneme: 1
+Alfa: 0–255/255 | tuval kenarı α≤1 | ana nesne kutusu: [240, 263, 1036, 1001]
+Kontrol / farklar: Tek pul, bir kenarı belirgin yukarı kıvrılmış; diğerlerinden farklı. Ana genişlik ~%63,5 (~%45 hedefi). Dış kenarda çok düşük alfa renkli kalıntılar var; görünür geniş hâle/gölge yok.
+Eklenen referans: Pano.
+Ham çıktı SHA-256: cf0d174d682e86e4737730142fa11c34d33ba2a139f0050fe9cd951d5cf853d0
+
+23. W2.15 — collections/22_Nocturne_Lake_Estate/assets/gpt/parts/gold_leaf_3.png
+Hedef: 1024×1024 px | Gerçek: 1254×1254 px | RGBA | Deneme: 1
+Alfa: 0–255/255 | tuval kenarı α≤1 | ana nesne kutusu: [339, 363, 936, 890]
+Kontrol / farklar: Tek küçük katlanmış parça, yandan görünüşü var ve ilk ikiden küçük; ana genişlik ~%47,6 (~%45 hedefi). Dış kenarda çok düşük alfa renkli kalıntılar var; görünür geniş hâle/gölge yok.
+Eklenen referans: Pano.
+Ham çıktı SHA-256: d164e555f23fa828f75f4d612dab8a2ec8be5d14a0b8a82e210d86c0ee4fca4e
+
+ATLANANLAR / KAPSAM
+PAKET 8 içinde atlanan dosya yok. İkinci denemelerden seçilmeyen ilk çıktılar pakete eklenmedi; seçilen her görsel Kaydet satırındaki sade adıyla yerleştirildi. Maksimum iki parça denemesi aşılmadı.
+PAKET 2, 3, 5/5R, 6/6R, 7 bu talebin dışında; üretilmedi/değiştirilmedi. Mevcut fotoğraflar tekrar üretilmedi. Tema montajı, kesim, maske, site animasyonu/sesleri, yayın ve gerçek telefon testi bu görsel tesliminin parçası değil; yapılmadı.
+Kodla hiçbir görsel pikseli değiştirilmedi: yeniden boyutlandırma, kırpma, yeniden boyama, renklendirme, alfa temizleme veya piksel düzeltmesi uygulanmadı.
