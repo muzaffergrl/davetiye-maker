@@ -148,7 +148,7 @@ seçmediği durumda Our Story'deki varsayılan parça.
 | 19 | Midnight Garden | `midnight-garden` | evening-strings | 90 `seal` · 960 `paper-soft` · 1320 `lantern` · 2380 `slide` · 3860 `stars` | 1. dalga |
 | 20 | Coastal Seaside | `coastal-seaside` | garden-waltz | 60 `wave` · 1150 `paper` · 2240 `slide` · 3660 `chime` | 1. dalga |
 | 21 | Crimson Rose Atelier | `crimson-rose-atelier` | **rose-nocturne** (kendi) | **kendi paketi** `fx/crimson-rose-atelier/`: 0 `crack` · 480 `flap` · 1150 `draw` · 2250 `reveal` · 3150 `bloom`; sayfa ipuçları: home `petal`, story `page`, rsvp `fold` + `stamp` | K59 yeniden tasarım (§5a) |
-| 22 | Nocturne Lake Estate | `nocturne-lake-estate` | evening-strings | 0 `sparkle` · 800 `vellum` · 1500 `paper` · 2000 `shimmer` · 2500 `slide-quick` · 3250 `stars` | yeniden tasarım (G422–G432) |
+| 22 | Nocturne Lake Estate | `nocturne-lake-estate` | **moonlit-terrace** (kendi) | **kendi paketi** `fx/nocturne-lake-estate/`: 0 `tick` · 150 `rise` · 650 `flap` · 1250 `moon` · 1350 `draw` · 2400 `reveal`; sayfa ipuçları: home `leaf`, story `ripple`, rsvp `press` + `clink` | K59, PAKET 8 açılışı (§5a) |
 | 23 | Velvet Jewel Box | `velvet-jewel-box` | music-box | 0 `sparkle` · 180 `brooch` · 700 `ribbon` · 1250 `velvet` · 1850 `slide-quick` · 2500 `chime` | yeniden tasarım (G422–G432) |
 | 24 | Grand Theatre Premiere | `grand-theatre-premiere` | evening-strings | 0 `slide-quick` · 650 `tear` · 1100 `cord` · 1600 `curtain` (sol 0,45) · 1740 `curtain` (sağ 0,45) · 2900 `slide-quick` · 3600 `chime-warm` | yeniden tasarım (G422–G432) |
 | 25 | Orient Express Voyage | `orient-express-voyage` | evening-strings | 0 `strap` · 450 `lock` · 1000 `paper-crisp` (sağ 0,30) · 1750 `slide` (sağ 0,30) · 2300 `whoosh` · 3050 `chime-warm` | yeniden tasarım (G422–G432) |
@@ -207,6 +207,11 @@ K59: 21 ve sonrası her tasarım kendi bileşenleri, animasyonu **ve kendi sesle
   kalıyordu) `level(limit=True)` önce bakışlı tepe sınırlayıcıyı (`soft_limit`: 1,5 ms önden iner, 40 ms'de döner, iki
   kanalda aynı kazanç) uygular; hedefe tavan altında ulaşan efektlere dokunmaz (21'in öbür 10 efekti bit bit aynı).
   Ölçüm (MP3, BS.1770 + ffmpeg ebur128): `crack` −20,2 LUFS / −1,7 dBTP; paketin 11 efekti −20,2…−24,4 LUFS.
+- **22 Nocturne Lake Estate (2026-10-24, PAKET 8):** cam, altın metal, siyah pamuk kâğıt, ipek, gece suyu ve hava; müzik
+  `moonlit-terrace` (La majör barkarol, 6/8, noktalı dörtlük = 48, 32 ölçü = 80 s, naylon gitar + piyano + yaylılar + cam
+  parıltıları, döngü). 12 efekt (MP3) −20,3…−24,4 LUFS, gerçek tepe ≤ −1,6 dBTP; müzik −17,95 LUFS (MP3), −4,9 dBTP.
+  `chime` RSVP başarısında audio.js'ten gelir; temanın `press` ve `clink`'i onun üstüne zamanlanır (öneri: press ≈ +300 ms,
+  clink ≈ +1100 ms ya da mühür/kadeh anında).
 
 ## 6. Oynatıcı (`platform/public/audio/audio.js`, G969)
 

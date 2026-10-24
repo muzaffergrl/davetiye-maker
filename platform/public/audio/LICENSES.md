@@ -16,7 +16,8 @@ Dış kaynaklı ses eklenecekse yalnız CC0 / kamu malı (beste **ve** kayıt) o
 bu tabloya yazılarak eklenir; CC-BY gibi atıf isteyen lisanslar kullanılmaz (AGENTS.md şart 9).
 
 Kamu malı kullanım notu: `first-light` parçasının armoni dizisi (I–V–vi–iii–IV–I–IV–V) 17. yüzyıldan kalma, telifsiz,
-çok yaygın bir akor dizisidir; ezgi ve düzenleme özgündür. Diğer parçaların akor dizileri ve ezgileri özgündür.
+çok yaygın bir akor dizisidir; ezgi ve düzenleme özgündür. `moonlit-terrace`'in A bölümü (I–V⁶–vi–iii⁶–IV–I⁶–ii⁷–V⁷)
+aynı telifsiz dizinin bir çeşididir; ezgi, B bölümü ve düzenleme özgündür. Diğer parçaların akor dizileri ve ezgileri özgündür.
 
 | Dosya | Tür | Süre | Boyut | Kaynak | Lisans | Üretim tarihi |
 |---|---|---|---|---|---|---|
@@ -104,3 +105,16 @@ tasarımda ortak efektlerin yerini alır (`tap` ve `chime` dahil); oynatıcı ve
 | `fx/crimson-rose-atelier/petal.mp3` | Efekt — home'a varışta yapraklar süzülür (çok yumuşak hava + arp flajoleleri) | 2,4 s | ~29 KB | aynı | aynı | 2026-10-23 |
 | `fx/crimson-rose-atelier/tap.mp3` | Efekt — sayfalar arası yumuşak tık | 0,3 s | ~4 KB | aynı | aynı | 2026-10-23 |
 | `fx/crimson-rose-atelier/chime.mp3` | Efekt — yanıt gönderildi: iki arp notası + celesta | 2,4 s | ~29 KB | aynı | aynı | 2026-10-23 |
+| `music/moonlit-terrace.mp3` | Fon müziği — Nocturne Lake Estate: naylon telli gitar, piyano, yaylılar; La majör barkarol (6/8), noktalı dörtlük = 48, döngü (elle bestelendi) | 80 s | ~1095 KB | `tools/audio_packs.py` (özgün sentez) | BKE Studio'nun kendi eseri, atıfsız | 2026-10-24 |
+| `fx/nocturne-lake-estate/tick.mp3` | Efekt — altın ay mühür kapağın vadisinden tık diye kurtulur (metal + mum, gölden hafif yankı) | 0,7 s | ~9 KB | aynı | aynı | 2026-10-24 |
+| `fx/nocturne-lake-estate/rise.mp3` | Efekt — mühür boş gökyüzüne yükselir: yükselen hava + La majör pentatonik cam tınıları | 1,9 s | ~23 KB | aynı | aynı | 2026-10-24 |
+| `fx/nocturne-lake-estate/flap.mp3` | Efekt — ağır siyah dağ profilli kapak menteşede kalkar, altın moire astar ışığı yakalar (ipek hışırtısı) | 1,5 s | ~18 KB | aynı | aynı | 2026-10-24 |
+| `fx/nocturne-lake-estate/moon.mp3` | Efekt — mühür ay olarak yerine oturur: üç oktav yaylıda tek sıcak La + cam dokunuşu | 2,8 s | ~34 KB | aynı | aynı | 2026-10-24 |
+| `fx/nocturne-lake-estate/draw.mp3` | Efekt — fildişi kart siyah cepten kayar (hızla değişen sürtünme) | 1,4 s | ~17 KB | aynı | aynı | 2026-10-24 |
+| `fx/nocturne-lake-estate/reveal.mp3` | Efekt — kart misafire doğru gelir: yaklaşan yumuşak hava + La majör (add9) cam akoru | 2,3 s | ~28 KB | aynı | aynı | 2026-10-24 |
+| `fx/nocturne-lake-estate/ripple.mp3` | Efekt — story'de fotoğraf değişir: camsı gitar flajoleti ve sudaki dalgalanan yansıması, iki damla | 1,9 s | ~23 KB | aynı | aynı | 2026-10-24 |
+| `fx/nocturne-lake-estate/leaf.mp3` | Efekt — home'da altın varak süzülür: gece havası, varak kıpırtısı, inen dört cam tınısı | 2,6 s | ~31 KB | aynı | aynı | 2026-10-24 |
+| `fx/nocturne-lake-estate/press.mp3` | Efekt — ay mühür yaldızlı siyah karta bastırılır, yerine oturur, kalkar | 0,9 s | ~11 KB | aynı | aynı | 2026-10-24 |
+| `fx/nocturne-lake-estate/clink.mp3` | Efekt — yanıt gönderildi: iki kristal şampanya kadehi tokuşur (+ hafif köpük) | 2,8 s | ~34 KB | aynı | aynı | 2026-10-24 |
+| `fx/nocturne-lake-estate/tap.mp3` | Efekt — sayfalar arası yumuşak tık (keçe + belli belirsiz cam) | 0,3 s | ~4 KB | aynı | aynı | 2026-10-24 |
+| `fx/nocturne-lake-estate/chime.mp3` | Efekt — yanıt gönderildi (audio.js): ay parlar — iki gitar flajoleti + cam Do# | 2,4 s | ~29 KB | aynı | aynı | 2026-10-24 |

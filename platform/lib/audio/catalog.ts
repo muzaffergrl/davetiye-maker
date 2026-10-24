@@ -35,6 +35,13 @@ export const MUSIC_TRACKS: readonly MusicTrack[] = [
     mood: 'Candlelit waltz for piano, harp and strings',
     url: '/audio/music/rose-nocturne.mp3',
   },
+  {
+    id: 'moonlit-terrace',
+    theme: 'nocturne-lake-estate',
+    label: 'Moonlit Terrace',
+    mood: 'Night serenade for piano, guitar and strings',
+    url: '/audio/music/moonlit-terrace.mp3',
+  },
 ];
 
 /** The tracks the panel offers for a design: its own tracks first, then the shared ones. */
@@ -150,8 +157,16 @@ export const DESIGN_SOUND: Readonly<Record<string, DesignSound>> = {
     opening: [[0, 'crack'], [480, 'flap'], [1150, 'draw'], [2250, 'reveal'], [3150, 'bloom']],
     cues: { story: ['page'], rsvp: ['fold', 'stamp'], home: ['petal'] },
   },
-  // 22 Nocturne Lake Estate: the crescent glints (glint) · the vellum band slides off (vellum) · the diamond flap (flap) · moonlight on the lining (light) · rise · forward
-  'nocturne-lake-estate': { music: 'evening-strings', opening: [[0, 'sparkle'], [800, 'vellum'], [1500, 'paper'], [2000, 'shimmer'], [2500, 'slide-quick'], [3250, 'stars']] },
+  // 22 Nocturne Lake Estate (own pack and music, K59; PAKET 8 opening): the gold moon seal clicks free (tick) · it rises
+  // into the empty sky (rise) · the mountain-cut flap lifts onto its moiré lining (flap) · the seal settles as the moon
+  // (moon: one warm string A) · the ivory card slides out of the pocket (draw) · it comes forward (reveal). Pages: gold
+  // leaf drifts on the home page, a photo and its reflection ripple (story), the moon seal is pressed and two coupes clink (rsvp).
+  'nocturne-lake-estate': {
+    music: 'moonlit-terrace',
+    pack: 'nocturne-lake-estate',
+    opening: [[0, 'tick'], [150, 'rise'], [650, 'flap'], [1250, 'moon'], [1350, 'draw'], [2400, 'reveal']],
+    cues: { home: ['leaf'], story: ['ripple'], rsvp: ['press', 'clink'] },
+  },
   // 23 Velvet Jewel Box: the diamond glints (glint) · the ring slides off the band (ring) · the band parts (ribbon) · the velvet flap (flap) · rise · forward
   'velvet-jewel-box': { music: 'music-box', opening: [[0, 'sparkle'], [180, 'brooch'], [700, 'ribbon'], [1250, 'velvet'], [1850, 'slide-quick'], [2500, 'chime']] },
   // 24 Grand Theatre Premiere: the ticket slides up (ticket) · tears (tear) · the cord unties (rope) · the left curtain (curtainL) · the right one (curtainR) · the programme rises (rise) · forward

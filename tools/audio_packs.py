@@ -795,6 +795,527 @@ def render_rose_nocturne() -> np.ndarray:
     return master(out, -1.5, 1.1)
 
 
+# ===================================================================================================== Nocturne Lake Estate
+#
+# PAKET 8 (2026-10-24): Lake Como on a black-tie night, the moon missing from the sky — it is the champagne-gold seal in
+# the valley of the black envelope's mountain-cut flap. The opening (site.js MOTION.envelope, same numbers in
+# lib/audio/catalog.ts):
+#   0     tick    the seal clicks free of the valley: a small metal-and-wax click
+#   150   rise    it lifts into the empty sky: rising air and a climbing shimmer of small glass tones (A major pentatonic)
+#   650   flap    the heavy black flap lifts on its hinge; as it passes upright its gold moiré lining catches the light
+#   1250  moon    the seal settles as the moon: one warm A (cellos, violas, violins in three octaves) blooming, a glass glint
+#   1350  draw    the ivory card slides out of the black pocket
+#   2400  reveal  it comes forward to the guest: a soft approaching whoosh, a faint glass A major (add 9) as it arrives
+# Pages: ripple (story, a photo changes: a glassy guitar harmonic and its wavering reflection on night water), leaf (home,
+# gold leaf drifting), press (rsvp, the moon seal pressed onto the gilt card), clink (rsvp sent, two crystal coupes), tap
+# (between pages), chime (audio.js on an RSVP's success: the moon brightens). Timbres: glass, gold metal, black cotton
+# paper, silk, night water and air, the nylon guitar of the music — none of 21's wax crack, harp sweep, roses or piano.
+
+
+#: silence before a sound that starts on a transient (the MP3 coder's pre-echo would otherwise reach the first sample)
+LEAD = 0.005
+
+
+def place(mix: Mix, x: np.ndarray, at: float, gain: float = 1.0):
+    """Mix.add for a sound whose start time may be negative (bowed_line's lead-in): the part before 0 is cut."""
+    if at < 0:
+        x = x[:, sec(-at):] if x.ndim == 2 else x[sec(-at):]
+        at = 0.0
+    mix.add(x, at, gain)
+
+
+def track_band(n, centre: np.ndarray, rng, bw=0.7, blocks=36):
+    """Band-passed noise whose centre follows `centre` (Hz, per sample): friction whose pitch follows the speed."""
+    src = rng.standard_normal(n)
+    out = np.zeros(n)
+    size = max(1, n // blocks)
+    win = np.hanning(2 * size)
+    for b in range(blocks + 1):
+        s0 = (b - 1) * size
+        c = float(centre[min(n - 1, max(0, s0 + size))])
+        y = bp(src, c / (1 + bw), min(c * (1 + bw), SR * 0.45))
+        lo, hi = max(0, s0), min(n, s0 + 2 * size)
+        if hi > lo:
+            out[lo:hi] += y[lo:hi] * win[lo - s0:hi - s0]
+    return out
+
+
+def finish_night(x: np.ndarray, rng, room=0.9, wet=0.16, tail=0.3, peak_db=-3.0, echo=0.0) -> np.ndarray:
+    """finish_fx outdoors by the lake: a short room and, with `echo`, one faint dark reflection from across the water
+    (crossed: it comes back from the other side)."""
+    if x.ndim == 1:
+        x = pan(x, 0)
+    x = np.concatenate([x, np.zeros((2, sec(tail)))], axis=1)
+    if echo:
+        dark = lp(x, 2400)
+        for ch, d in ((0, sec(0.19)), (1, sec(0.23))):
+            x[ch, d:] += dark[1 - ch, :-d] * echo
+    x = reverb(hp(x, 45), hall_ir(room, rng, 7000, 0.01, 0.9), wet)
+    fade = sec(0.04)
+    x[:, -fade:] *= np.linspace(1, 0, fade)
+    return x / np.max(np.abs(x)) * 10 ** (peak_db / 20)
+
+
+def nylon(m: int, dur: float, vel: float, rng, harmonic: bool = False) -> np.ndarray:
+    """A nylon-string classical guitar fingerpicked near the sound hole: pluck-position spectrum, warm (upper partials
+    die fast), two string polarisations (a quick and a slow decay, beating slowly), the pitch settling after the pluck,
+    flesh and a touch of nail; damped at `dur` (the next chord). `harmonic`: a natural harmonic sounding at m (almost a
+    pure tone, glassy, long). Mono; the guitar body is one resonance on the guitar bus (render_moonlit_terrace)."""
+    f0 = hz(m)
+    T = float(np.interp(m, [40, 52, 64, 76, 88], [6.5, 4.8, 3.3, 2.1, 1.4])) * (1.4 if harmonic else 1.0)
+    n = sec(dur + 0.3)
+    t = np.arange(n) / SR
+    base = 2 * math.pi * f0 * np.cumsum(1 + 0.0009 * vel * np.exp(-t / 0.06)) / SR
+    beta = 0.12 + 0.05 * rng.uniform()
+    bright = 0.6 + 0.3 * vel
+    out = np.zeros(n)
+    for k in range(1, 26):
+        stretch = k * math.sqrt(1 + 3e-5 * k * k)
+        if stretch * f0 > 7000:
+            break
+        if harmonic:
+            a = 0.45 ** (k - 1) / k ** 2.4
+        else:
+            a = abs(math.sin(k * math.pi * beta)) / k ** 1.1 * bright ** (k - 1)
+        tk = T / (1 + 0.5 * (k - 1))
+        ph = rng.uniform(0, 2 * math.pi)
+        beat = 2 * math.pi * rng.uniform(0.15, 0.45) * t
+        out += a * (0.55 * np.exp(-6.9 * t / (tk * 0.3)) * np.sin(stretch * base + ph)
+                    + 0.45 * np.exp(-6.9 * t / tk) * np.sin(stretch * base + beat + ph))
+    att = sec(0.0025 if harmonic else 0.0012)
+    out[:att] *= np.linspace(0, 1, att)
+    fn = sec(0.012)
+    tt = np.arange(fn) / SR
+    out[:fn] += lp(noise(fn, rng), 1200) * np.exp(-tt / 0.003) * 0.05 * vel  # flesh
+    nn = sec(0.004)
+    out[:nn] += bp(noise(nn, rng), 2500, 7000) * np.exp(-np.arange(nn) / sec(0.0008)) * (0.006 if harmonic else 0.02) * vel
+    rel = sec(dur)
+    if rel < n:
+        out[rel:] *= np.exp(-(t[rel:] - dur) / 0.07)
+    out[-sec(0.005):] *= np.linspace(1, 0, sec(0.005))
+    return out * vel
+
+
+def glass(f0: float, vel: float, rng, length=2.4, attack=0.03, decay=1.4, pan_to: float | None = None) -> np.ndarray:
+    """A glass tone (a crystal rim touched or rubbed): an almost pure partial and faint harmonics, two close rim modes
+    beating slowly, a soft attack (no click). Stereo."""
+    n = sec(length)
+    t = np.arange(n) / SR
+    ph = rng.uniform(0, 2 * math.pi)
+    beat = rng.uniform(0.6, 1.4)
+    x = np.sin(2 * math.pi * f0 * t + ph) + 0.35 * np.sin(2 * math.pi * (f0 + beat) * t + ph + 1.3)
+    x += 0.12 * np.sin(4 * math.pi * f0 * t + rng.uniform(0, 6.28)) * np.exp(-t / (decay * 0.5))
+    x += 0.04 * np.sin(6 * math.pi * f0 * t + rng.uniform(0, 6.28)) * np.exp(-t / (decay * 0.3))
+    x *= smoothstep(t / attack) * np.exp(-t / decay)
+    x[-sec(0.03):] *= np.linspace(1, 0, sec(0.03))
+    return pan(x * vel / 1.35, float(rng.uniform(-0.3, 0.3)) if pan_to is None else pan_to)
+
+
+#: a crystal coupe's rim modes (ratio to the lowest, amplitude, decay s): a thin bowl, so the upper modes die fast
+COUPE = [(1.0, 1.0, 2.2), (2.33, 0.32, 0.8), (4.16, 0.16, 0.3), (6.6, 0.07, 0.12)]
+
+
+def coupe(f0: float, vel: float, rng, length=2.6) -> np.ndarray:
+    """A crystal champagne coupe touched at the rim: every mode is split in two (the bowl is never perfectly round), so
+    the ring beats slowly; a short contact tick. Mono."""
+    n = sec(length)
+    t = np.arange(n) / SR
+    x = np.zeros(n)
+    for r, a, d in COUPE:
+        f = f0 * r
+        if f > SR * 0.45:
+            continue
+        s = rng.uniform(0.7, 2.2)
+        x += a * np.exp(-t / d) * (0.62 * np.sin(2 * math.pi * (f - s / 2) * t + rng.uniform(0, 6.28))
+                                   + 0.38 * np.sin(2 * math.pi * (f + s / 2) * t + rng.uniform(0, 6.28)))
+    x *= smoothstep(t / 0.0004)
+    m = sec(0.004)
+    x[:m] += bp(noise(m, rng), 2500, 9000) * np.exp(-np.arange(m) / sec(0.0005)) * 0.5
+    x[-sec(0.03):] *= np.linspace(1, 0, sec(0.03))
+    return x * vel
+
+
+def bubble(f0: float, d: float) -> np.ndarray:
+    """One small drop on the water: a Minnaert resonance rising in pitch as the bubble reaches the surface."""
+    t = np.arange(sec(d * 4)) / SR
+    return np.sin(2 * math.pi * np.cumsum(f0 * (1 + 0.6 * t / d)) / SR) * np.exp(-t / (d / 2.5)) * (1 - np.exp(-t / 0.002))
+
+
+def nl_tick(rng):
+    """The champagne-gold seal clicks free of the flap's valley: the thumb's pressure (wax giving under the gold disc),
+    a small bright click — a short snap, the little disc's metal ring, a wax body — and a softer second click as its rim
+    leaves the paper; one faint reflection comes back across the lake."""
+    n = sec(0.3)
+    x = np.zeros((2, n))
+    pn = sec(0.045)
+    x[:, :pn] += pan(bp(noise(pn, rng), 250, 1100) * np.sin(np.linspace(0, math.pi, pn)) ** 2 * 0.18, 0)
+    m = sec(0.12)
+    tt = np.arange(m) / SR
+    snap = bp(noise(m, rng), 1800, 9000) * np.exp(-tt / 0.0012) * 1.4
+    ring = sum(a * np.exp(-tt / d) * np.sin(2 * math.pi * f * tt + rng.uniform(0, 6.28))
+               for f, d, a in ((1720, 0.028, 0.5), (2630, 0.014, 0.28), (4100, 0.009, 0.16), (6350, 0.006, 0.12)))
+    body = np.sin(2 * math.pi * 520 * tt) * np.exp(-tt / 0.009) * 0.45
+    x[:, sec(0.04):sec(0.04) + m] += pan((snap + ring + body) * smoothstep(tt / 0.0004), 0)
+    m2 = sec(0.06)
+    t2 = np.arange(m2) / SR
+    second = bp(noise(m2, rng), 2200, 8000) * np.exp(-t2 / 0.0008) * 0.5 + np.sin(2 * math.pi * 1980 * t2) * np.exp(-t2 / 0.012) * 0.16
+    x[:, sec(0.058):sec(0.058) + m2] += pan(second * smoothstep(t2 / 0.0004), 0.15)
+    return finish_night(x, rng, 0.7, 0.14, 0.4, echo=0.1)
+
+
+def nl_rise(rng):
+    """The seal lifts into the empty sky (~1 s): air rising in pitch and opening out from the centre, and a climbing
+    shimmer of small glass tones (A major pentatonic, A5 → E7) that thins out towards the top, where the moon settles."""
+    mix = Mix(1.9)
+    n = sec(1.15)
+    t = np.arange(n) / SR
+    shape = smoothstep(t / 0.25) * np.clip((1.1 - t) / 0.55, 0, 1) ** 1.3
+    centre = 900 * (5200 / 900) ** smoothstep(t / 1.0)
+    a, b = track_band(n, centre, rng, 0.9), track_band(n, centre * 1.04, rng, 0.9)
+    w = smoothstep(t / 0.9)
+    mid = (a + b) / 2
+    mix.add(np.stack([mid * (1 - w) + a * w, mid * (1 - w) + b * w]) * shape * 0.16, 0)
+    notes = ["A5", "B5", "C#6", "E6", "F#6", "A6", "B6", "C#7", "E7"]
+    for i, nm in enumerate(notes):
+        k = i / (len(notes) - 1)
+        mix.add(glass(hz(midi(nm)), 0.5 * (1 - 0.55 * k), rng, 1.2, 0.006, 0.32 - 0.12 * k, -0.25 + 0.5 * k), 0.05 + 0.82 * k ** 0.85)
+    x = reverb(mix.buf, hall_ir(2.0, rng, 8000, 0.02, 1.1), 0.34)
+    fade = sec(0.4)
+    x[:, -fade:] *= np.linspace(1, 0, fade) ** 1.5
+    return x / np.max(np.abs(x)) * 10 ** (-4 / 20)
+
+
+def nl_flap(rng):
+    """The heavy black mountain-cut flap lifts on its hinge: the crease flexes (low cotton-paper creaks), a slow dark
+    push of air as the large flap turns, and as it passes upright its gold moiré lining turns into the light (a soft
+    silk swish, to the right); it settles open."""
+    n = sec(1.15)
+    t = np.arange(n) / SR
+    crease = grains(n, 380, rng, 500, 3200, 0.004, smoothstep(t / 0.04) * np.clip(1 - (t - 0.04) / 0.3, 0, 1)) * 0.7
+    swing_shape = np.sin(np.pi * np.clip((t - 0.03) / 0.8, 0, 1)) ** 1.4
+    swing = sweep_band(n, 320, 1100, rng, 1.0) * swing_shape * 0.6
+    push = bp(noise(n, rng), 90, 320) * swing_shape ** 2 * 0.5
+    silk_shape = np.sin(np.pi * np.clip((t - 0.5) / 0.38, 0, 1)) ** 2
+    silk = sweep_band(n, 2600, 5200, rng, 0.6) * silk_shape * 0.16 + grains(n, 200, rng, 3000, 9000, 0.0015, silk_shape) * 0.12
+    m = sec(0.08)
+    mono = crease + swing + push
+    mono[sec(0.84):sec(0.84) + m] += bp(noise(m, rng), 200, 1300) * env_ad(m, 0.003, 0.022) * 0.4
+    # it opens up and away: a little width from a second, independent swing (mid/side, so a mono phone loses nothing)
+    side = sweep_band(n, 340, 1150, rng, 1.0) * swing_shape * 0.18 * smoothstep(t / 0.9)
+    x = np.stack([mono + side, mono - side]) + pan(silk, 0.3)
+    return finish_night(x, rng, 1.0, 0.18, 0.3)
+
+
+def nl_moon(rng):
+    """The seal settles in the sky as the moon: one warm A — cellos, violas and violins in three octaves blooming in
+    together, held, let go — with a glass touch on the A above as it lands, in a soft wide hall."""
+    mix = Mix(2.8)
+    for section, nm, v, voices, g, at in (("cellos", "A2", 0.5, 3, 0.4, 0.04), ("violas", "A3", 0.58, 3, 0.42, 0.02),
+                                          ("violins", "A4", 0.62, 5, 0.44, 0.0)):
+        line, s0 = bowed_line([(at, 1.15, midi(nm), v)], rng, section, voices, g)
+        place(mix, line, s0)
+    mix.add(glass(hz(midi("A5")), 0.34, rng, 1.6, 0.004, 0.9, -0.1), 0.0)
+    mix.add(glass(hz(midi("A6")), 0.1, rng, 1.2, 0.004, 0.55, 0.15), 0.01)
+    x = reverb(mix.buf, hall_ir(2.8, rng, 6500, 0.03, 1.2), 0.4)
+    fade = sec(0.6)
+    x[:, -fade:] *= np.linspace(1, 0, fade) ** 1.5
+    return x / np.max(np.abs(x)) * 10 ** (-4 / 20)
+
+
+def nl_draw(rng):
+    """The ivory card slides out of the black pocket: smooth heavy card on cotton paper — the friction's pitch and grain
+    follow the card's speed (it gathers pace, then eases out), a faint whisper of its edge along the pocket mouth, a
+    soft release as it clears."""
+    n = sec(1.1)
+    t = np.arange(n) / SR
+    v = np.sin(np.pi * np.clip(t / 0.92, 0, 1)) ** 1.2 * smoothstep(t / 0.08)
+    glide = track_band(n, 480 + 1100 * v, rng, 0.65) * v ** 1.3 * 0.55
+    fibres = grains(n, 160, rng, 1400, 6000, 0.0018, v) * 0.28
+    edge = sweep_band(n, 3000, 4200, rng, 0.4) * v ** 2 * 0.05
+    mono = glide + fibres + edge
+    m = sec(0.05)
+    mono[sec(0.88):sec(0.88) + m] += bp(noise(m, rng), 900, 4500) * env_ad(m, 0.001, 0.012) * 0.35
+    return finish_night(pan(mono, -0.05), rng, 0.9, 0.16, 0.25)
+
+
+def nl_reveal(rng):
+    """The card comes forward to the guest: a soft whoosh that grows nearer (brighter, wider, louder), arrives and falls
+    away, and a faint glass A major (add 9) blooming as it arrives."""
+    mix = Mix(2.3)
+    n = sec(1.5)
+    t = np.arange(n) / SR
+    arr = 0.55
+    amp = np.where(t < arr, smoothstep(t / arr) ** 1.6, np.exp(-(t - arr) / 0.22))
+    centre = np.where(t < arr, 380 * (1900 / 380) ** np.clip(t / arr, 0, 1), 1900 * (900 / 1900) ** smoothstep((t - arr) / 0.5))
+    a, b = track_band(n, centre, rng, 1.0), track_band(n, centre * 1.03, rng, 1.0)
+    w = smoothstep(t / arr) * 0.9
+    mid = (a + b) / 2
+    mix.add(np.stack([mid * (1 - w) + a * w, mid * (1 - w) + b * w]) * amp * 0.5, 0)
+    for nm, v, p in (("A4", 0.3, -0.25), ("C#5", 0.22, 0.2), ("E5", 0.22, -0.05), ("B5", 0.12, 0.3)):
+        mix.add(glass(hz(midi(nm)), v, rng, 1.8, 0.18, 0.9, p), arr - 0.12)
+    x = reverb(mix.buf, hall_ir(2.2, rng, 7000, 0.02, 1.1), 0.3)
+    fade = sec(0.5)
+    x[:, -fade:] *= np.linspace(1, 0, fade) ** 1.5
+    return x / np.max(np.abs(x)) * 10 ** (-4 / 20)
+
+
+def nl_ripple(rng):
+    """A photo changes on the story page: a glassy guitar harmonic (E5) above the water, then its reflection — softer,
+    darker, a moment later, wavering as the water moves — over a gentle lap and two small drops."""
+    mix = Mix(1.9)
+    h = nylon(midi("E5"), 1.4, 0.7, rng, harmonic=True)
+    mix.add(pan(h, -0.1), LEAD, 0.8)
+    t = np.arange(len(h)) / SR
+    wob = 1 + 0.007 * np.sin(2 * math.pi * 5.5 * t) * np.exp(-t / 0.6)  # ±12 cents, calming
+    refl = np.interp(np.cumsum(wob) - wob[0], np.arange(len(h)), h)
+    refl *= 1 - 0.35 * (0.5 + 0.5 * np.sin(2 * math.pi * 6.2 * t)) * np.exp(-t / 0.7)
+    mix.add(pan(lp(refl, 2200), 0.25), LEAD + 0.16, 0.42)
+    m = sec(1.0)
+    tt = np.arange(m) / SR
+    lap = bp(noise(m, rng), 260, 1400) * np.sin(np.pi * np.clip(tt / 0.9, 0, 1)) ** 2 * (1 + 0.6 * np.sin(2 * math.pi * 5.2 * tt))
+    mix.add(pan(lap * 0.06, 0), 0.05)
+    for at, f0, d, p in ((0.12, 820, 0.05, -0.2), (0.34, 1150, 0.04, 0.3)):
+        mix.add(pan(bubble(f0, d) * 0.12, p), at)
+    x = reverb(mix.buf, hall_ir(1.8, rng, 7000, 0.02, 1.0), 0.3)
+    fade = sec(0.4)
+    x[:, -fade:] *= np.linspace(1, 0, fade)
+    return x / np.max(np.abs(x)) * 10 ** (-4 / 20)
+
+
+def nl_leaf(rng):
+    """Gold leaf drifts on the home page: a breath of night air, the faintest flutter of foil, and four small glass tones
+    drifting down (E6 · C#6 · B5 · A5), swaying left and right as leaves do."""
+    mix = Mix(2.6)
+    n = sec(2.0)
+    t = np.arange(n) / SR
+    shape = np.sin(np.pi * t / 2.0) ** 2
+    mix.add(pan(sweep_band(n, 2200, 900, rng, 1.1) * shape * 0.08, 0.1), 0)
+    mix.add(pan(grains(n, 90, rng, 4500, 11000, 0.0012, shape) * 0.05, -0.2), 0)
+    for i, (at, nm, p) in enumerate(((0.1, "E6", -0.35), (0.55, "C#6", 0.35), (0.95, "B5", -0.25), (1.35, "A5", 0.25))):
+        mix.add(glass(hz(midi(nm)), 0.32 - 0.03 * i, rng, 1.3, 0.02, 0.55, p), at)
+    x = reverb(mix.buf, hall_ir(2.4, rng, 7500, 0.025, 1.1), 0.42)
+    fade = sec(0.4)
+    x[:, -fade:] *= np.linspace(1, 0, fade)
+    return x / np.max(np.abs(x)) * 10 ** (-9 / 20)
+
+
+def nl_press(rng):
+    """The moon seal is pressed onto the gilt black card: the gold disc meets the paper (a soft heavy press with a
+    muted body, heard on a phone between 200 Hz and 2 kHz), seats with a small dull click and lifts off with a faint tack
+    of wax."""
+    n = sec(0.6)
+    t = np.arange(n) / SR
+    ph = 2 * math.pi * np.cumsum(140 + 45 * np.exp(-t / 0.02)) / SR
+    x = (np.sin(ph) + 0.5 * np.sin(2 * ph) + 0.2 * np.sin(3 * ph)) * np.exp(-t / 0.05) * smoothstep(t / 0.005) * 0.75
+    x += bp(noise(n, rng), 250, 1600) * env_ad(n, 0.004, 0.03) * 0.6
+    m = sec(0.05)
+    tt = np.arange(m) / SR
+    seat = bp(noise(m, rng), 1500, 5000) * np.exp(-tt / 0.0015) * 0.22 + np.sin(2 * math.pi * 1350 * tt) * np.exp(-tt / 0.01) * 0.08
+    x[sec(0.03):sec(0.03) + m] += seat * smoothstep(tt / 0.0004)
+    m2 = sec(0.09)
+    x[sec(0.36):sec(0.36) + m2] += grains(m2, 600, rng, 1200, 6000, 0.001, np.sin(np.pi * np.arange(m2) / m2)) * 0.1
+    return finish_night(pan(np.concatenate([np.zeros(sec(LEAD)), x]), 0), rng, 0.7, 0.12, 0.3, -3.5)
+
+
+def nl_clink(rng):
+    """A reply is sent: two crystal champagne coupes touch — a bright, warm ring (two glasses not quite in tune, each
+    rim mode beating slowly), a lighter second touch as they bounce, and the faintest fizz of champagne."""
+    mix = Mix(2.8)
+    mix.add(pan(coupe(1318.5, 1.0, rng), -0.22), 0.003)
+    mix.add(pan(coupe(1341.0, 0.8, rng), 0.22), 0.005)  # 1.7 % apart: a fast shimmer, not a rough beat
+    mix.add(pan(coupe(1318.5, 0.28, rng, 1.2), -0.2), 0.025)
+    n = sec(2.0)
+    t = np.arange(n) / SR
+    mix.add(pan(grains(n, 260, rng, 3500, 9000, 0.0006, np.exp(-t / 0.8) * smoothstep(t / 0.2)) * 0.035, 0.05), 0.04)
+    x = reverb(mix.buf, hall_ir(2.4, rng, 7500, 0.02, 1.1), 0.3)
+    fade = sec(0.5)
+    x[:, -fade:] *= np.linspace(1, 0, fade) ** 1.5
+    return x / np.max(np.abs(x)) * 10 ** (-4 / 20)
+
+
+def nl_tap(rng):
+    """Between pages: a soft felt tick on black card with the faintest glass touch."""
+    n = sec(0.16)
+    t = np.arange(n) / SR
+    felt = (np.sin(2 * math.pi * 560 * t) * np.exp(-t / 0.01) * 0.35 + np.sin(2 * math.pi * 1490 * t) * np.exp(-t / 0.004) * 0.1) * smoothstep(t / 0.0012)
+    paper = bp(noise(n, rng), 1100, 5200) * env_ad(n, 0.0008, 0.007) * 0.3
+    glint = np.sin(2 * math.pi * 1760 * t) * np.exp(-t / 0.05) * smoothstep(t / 0.003) * 0.05
+    lead = np.zeros(sec(LEAD))  # a few ms of silence: the MP3 coder's pre-echo of the tick stays out of sample 0
+    return finish_night(pan(np.concatenate([lead, felt + paper + glint]), 0), rng, 0.5, 0.1, 0.12, -6)
+
+
+def nl_chime(rng):
+    """A reply is sent (audio.js plays it on the RSVP's success, under the theme's press and clink): the moon brightens —
+    two glassy guitar harmonics (E5, A5) and a soft glass C#6 swelling over them."""
+    mix = Mix(2.4)
+    mix.add(pan(nylon(midi("E5"), 1.6, 0.6, rng, harmonic=True), -0.2), LEAD, 0.8)
+    mix.add(pan(nylon(midi("A5"), 1.5, 0.55, rng, harmonic=True), 0.2), 0.12, 0.75)
+    mix.add(glass(hz(midi("C#6")), 0.22, rng, 1.8, 0.25, 0.8, 0.0), 0.2)
+    x = reverb(mix.buf, hall_ir(2.2, rng, 7500, 0.02, 1.0), 0.34)
+    fade = sec(0.5)
+    x[:, -fade:] *= np.linspace(1, 0, fade)
+    return x / np.max(np.abs(x)) * 10 ** (-4 / 20)
+
+
+# ---------------------------------------------------------------------------------------- Moonlit Terrace (the music)
+#
+# A night serenade by the lake: a barcarolle in A major, 6/8, dotted crotchet = 48 (a bar = 2.5 s), 32 bars = 80 s,
+# looping (the outro's chords are the intro's, its Esus → E leads back to the first A).
+# Intro (4): the nylon guitar alone, then the cellos · A (8): the piano sings over the guitar's rocking arpeggios ·
+# A' (8): the violins take the tune, the violas hold the inner voices · B (8): Dmaj7 → C#m7 → Bm7 → E7, the piano again,
+# a violin counter-line beneath · Outro (4): the piano remembers the first phrase, the guitar leads home. A few glass
+# glints at phrase ends. Every note below is written by hand.
+
+ML_BPM = 48                      # dotted crotchets per minute
+ML_EIGHTH = 60 / (ML_BPM * 3)
+ML_BAR = 6 * ML_EIGHTH
+
+# guitar voicing per chord: (bass, [t0, t1, t2, t3]) — drop-D for the D chords; "x|y" = x on eighths 1–3, y on 4–6
+ML_CHORDS = {
+    "A": ("A2", ["E3", "A3", "C#4", "E4"]), "F#m7": ("F#2", ["C#3", "A3", "C#4", "E4"]),
+    "Dmaj7": ("D2", ["A2", "F#3", "C#4", "E4"]), "Esus": ("E2", ["B2", "A3", "B3", "E4"]),
+    "E": ("E2", ["B2", "G#3", "B3", "E4"]), "E/G#": ("G#2", ["E3", "B3", "E4", "G#4"]),
+    "F#m": ("F#2", ["C#3", "A3", "C#4", "F#4"]), "C#m/E": ("E2", ["C#3", "G#3", "C#4", "E4"]),
+    "D": ("D2", ["A2", "F#3", "A3", "D4"]), "A/C#": ("C#3", ["E3", "A3", "C#4", "E4"]),
+    "Bm7": ("B2", ["F#3", "A3", "D4", "F#4"]), "E7": ("E2", ["B2", "G#3", "D4", "E4"]),
+    "C#m7": ("C#3", ["G#3", "B3", "E4", "G#4"]),
+}
+ML_BARS = (["A", "F#m7", "Dmaj7", "Esus|E"]                                          # intro 0–3
+           + ["A", "E/G#", "F#m", "C#m/E", "D", "A/C#", "Bm7", "E7"]                 # A 4–11
+           + ["A", "E/G#", "F#m", "C#m/E", "D", "A/C#", "Bm7|E7", "A"]               # A' 12–19
+           + ["Dmaj7", "C#m7", "Bm7", "E7", "F#m", "C#m/E", "D", "Esus|E7"]          # B 20–27
+           + ["A", "F#m7", "Dmaj7", "Esus|E"])                                       # outro 28–31
+
+# the tunes: (note, eighths); None = a rest
+ML_A = [("C#5", 2), ("E5", 1), ("A5", 3), ("G#5", 2), ("F#5", 1), ("E5", 3), ("F#5", 2), ("A5", 1), ("C#6", 2), ("B5", 1),
+        ("G#5", 3), ("E5", 3), ("F#5", 2), ("A5", 1), ("D6", 2), ("C#6", 1), ("C#6", 3), ("B5", 2), ("A5", 1),
+        ("B5", 2), ("A5", 1), ("F#5", 2), ("D5", 1), ("E5", 3), ("D5", 2), ("B4", 1)]
+ML_A2 = [("C#5", 2), ("E5", 1), ("A5", 3), ("B5", 2), ("G#5", 1), ("E5", 3), ("F#5", 2), ("A5", 1), ("C#6", 2), ("E6", 1),
+         ("E6", 3), ("C#6", 2), ("B5", 1), ("A5", 2), ("F#5", 1), ("D6", 3), ("C#6", 2), ("B5", 1), ("A5", 2), ("E5", 1),
+         ("D6", 2), ("C#6", 1), ("B5", 2), ("G#5", 1), ("A5", 6)]
+ML_B = [("F#5", 3), ("E5", 2), ("F#5", 1), ("G#5", 3), ("E5", 3), ("D5", 2), ("F#5", 1), ("A5", 2), ("B5", 1),
+        ("G#5", 4), ("F#5", 1), ("E5", 1), ("C#6", 3), ("A5", 2), ("B5", 1), ("B5", 2), ("G#5", 1), ("E5", 3),
+        ("F#5", 2), ("A5", 1), ("D6", 2), ("C#6", 1), ("B5", 2), ("A5", 1), ("G#5", 2), ("E5", 1)]
+ML_B_COUNTER = [("A4", 6), ("G#4", 6), ("F#4", 3), ("A4", 3), ("D5", 6), ("C#5", 6), ("G#4", 6), ("A4", 3), ("F#4", 3),
+                ("A4", 3), ("G#4", 3)]
+ML_OUTRO = [("C#5", 2), ("E5", 1), ("A5", 3), ("A5", 2), ("F#5", 1), ("C#5", 3), ("F#5", 3), ("E5", 2), ("C#5", 1),
+            ("B4", 3), (None, 3)]
+# the violas' two inner voices, (low, high) per half bar from A' to the outro's second bar
+ML_VIOLAS = {12: [("A3", "C#4")], 13: [("G#3", "B3")], 14: [("A3", "C#4")], 15: [("G#3", "C#4")], 16: [("A3", "D4")],
+             17: [("A3", "C#4")], 18: [("A3", "D4"), ("G#3", "B3")], 19: [("A3", "C#4")], 20: [("A3", "C#4")],
+             21: [("G#3", "B3")], 22: [("A3", "D4")], 23: [("G#3", "D4")], 24: [("A3", "C#4")], 25: [("G#3", "C#4")],
+             26: [("A3", "D4")], 27: [("A3", "B3"), ("G#3", "D4")], 28: [("A3", "C#4")], 29: [("A3", "C#4")]}
+ML_GLINTS = [(7, 3, "E6"), (11, 3, "B5"), (19, 0, "A6"), (23, 3, "E6"), (27, 3, "B5"), (31, 0, "E6")]
+
+
+def ml_chord(bar: int, eighth: int):
+    name = ML_BARS[bar]
+    if "|" in name:
+        a, b = name.split("|")
+        name = a if eighth < 3 else b
+    return ML_CHORDS[name]
+
+
+def ml_line(seq, bar0):
+    """[(name, eighths)] from the start of bar0 → [(start s, length s, midi)] (rests dropped)."""
+    out, pos = [], bar0 * 6.0
+    for nm, k in seq:
+        if nm:
+            out.append((pos * ML_EIGHTH, k * ML_EIGHTH, midi(nm)))
+        pos += k
+    return out
+
+
+def render_moonlit_terrace() -> np.ndarray:
+    rng = np.random.default_rng(2210)
+    bars = len(ML_BARS)
+    loop = bars * ML_BAR
+    mix = Mix(loop + 9)
+    human = lambda: rng.uniform(-0.006, 0.01)  # noqa: E731
+
+    def section(bar):
+        return "intro" if bar < 4 else "A" if bar < 12 else "A2" if bar < 20 else "B" if bar < 28 else "outro"
+
+    # the nylon guitar: bass on 1, a rocking arpeggio up and back (bass · t0 · t1 · t3 · t2 · t1), each string left
+    # ringing until the chord changes or the same string is plucked again; a split bar plucks its second bass on 4
+    gtr = Mix(loop + 9)
+    level_of = {"intro": 1.2, "A": 0.9, "A2": 0.85, "B": 0.9, "outro": 1.1}
+    accent = [0.5, 0.32, 0.34, 0.4, 0.33, 0.3]
+    for bar in range(bars):
+        (b1, t1), (b2, t2) = ml_chord(bar, 0), ml_chord(bar, 3)
+        split = b1 != b2 or t1 != t2
+        plan = ([b1, t1[0], t1[1], b2, t2[1], t2[2]] if split else [b1, t1[0], t1[1], t1[3], t1[2], t1[1]])
+        events = [(e, midi(nm)) for e, nm in enumerate(plan)]
+        for i, (e, m) in enumerate(events):
+            end = 3 if split and e < 3 else 6
+            again = [f for f, mm in events[i + 1:] if mm == m and f < end]
+            stop = again[0] if again else end
+            v = accent[e] * level_of[section(bar)] * rng.uniform(0.93, 1.07)
+            s = bar * ML_BAR + e * ML_EIGHTH + human()
+            p = float(np.clip(0.18 + (m - 57) / 80, -0.1, 0.45))
+            gtr.add(pan(nylon(m, (stop - e) * ML_EIGHTH + 0.02, v, rng), p), max(0.0, s))
+    g = gtr.buf
+    for f, q, db in ((105, 1.4, 4), (205, 1.8, 3), (400, 1.5, 1.5), (1500, 0.9, -2)):
+        g = peak(g, f, q, db)
+    mix.add(lp(hp(g, 60), 6000), 0, 0.62)
+
+    # cellos: the bass of every bar, held (soft in the intro, from its third bar), a line per section
+    cel = []
+    for bar in range(2, bars):
+        split = ml_chord(bar, 0) != ml_chord(bar, 3)
+        v = {"intro": 0.34, "A": 0.44, "A2": 0.5, "B": 0.5, "outro": 0.4}[section(bar)] * (1 - 0.35 * max(0, bar - 29) / 2)
+        for e in ((0, 3) if split else (0,)):
+            length = ML_BAR * (0.5 if split else 1.0)
+            cel.append((bar * ML_BAR + e * ML_EIGHTH + 0.02, length * 0.97, midi(ml_chord(bar, e)[0]), v))
+    for b0, b1 in ((2, 12), (12, 20), (20, 28), (28, 32)):
+        notes = [c for c in cel if b0 * ML_BAR <= c[0] < b1 * ML_BAR]
+        line, s0 = bowed_line(notes, rng, "cellos", 4, 0.13)
+        place(mix, line, s0)
+
+    # violas: two held inner voices from A' to the outro, quieter under the piano in B, fading in the outro
+    for b0, b1 in ((12, 20), (20, 28), (28, 30)):
+        for voice in (0, 1):
+            notes = []
+            for bar in range(b0, b1):
+                parts = ML_VIOLAS[bar]
+                for h, pair in enumerate(parts):
+                    length = ML_BAR / len(parts)
+                    v = {12: 0.18, 13: 0.28}.get(bar, 0.36 if bar < 20 else 0.3 if bar < 28 else 0.24 - 0.08 * (bar - 28))
+                    notes.append((bar * ML_BAR + h * length, length, midi(pair[voice]), v))
+            line, s0 = bowed_line(notes, rng, "violas", 3, 0.11)
+            place(mix, line, s0)
+
+    # the tune: piano (A, B, outro), violins (A'); the violins' counter-line under the piano in B
+    for seq, bar0 in ((ML_A, 4), (ML_B, 20), (ML_OUTRO, 28)):
+        line = ml_line(seq, bar0)
+        half = max(1, len(line) // 2)
+        for i, (s, d, m) in enumerate(line):
+            v = rn_phrase_vel(i % half, half, 0.44, 0.64) * (0.8 if bar0 == 28 else 1.0)
+            mix.add(piano(m, d * 0.97, v, rng), s + human())
+    line = ml_line(ML_A2, 12)
+    notes = [(s, d * 0.995, m, rn_phrase_vel(i % 12, 12, 0.6, 0.88)) for i, (s, d, m) in enumerate(line)]
+    ln, s0 = bowed_line(notes, rng, "violins", 7, 0.32)
+    place(mix, ln, s0)
+    counter = [(s, d, m, 0.46) for s, d, m in ml_line(ML_B_COUNTER, 20)]
+    ln, s0 = bowed_line(counter, rng, "violins", 6, 0.18)
+    place(mix, ln, s0)
+
+    # moonlight on the water: glass glints at the ends of phrases
+    for bar, e, nm in ML_GLINTS:
+        mix.add(glass(hz(midi(nm)), 0.15, rng, 2.4, 0.03, 1.2), bar * ML_BAR + e * ML_EIGHTH)
+
+    x = mix.buf
+    x = reverb(x, hall_ir(3.2, rng, 6000, 0.03, 1.15), 0.32)
+    x = peak(x, 200, 0.8, 1.0)
+    x = peak(x, 3500, 0.9, -1.5)
+    # seamless loop: everything ringing past the end folds onto the start
+    n = sec(loop)
+    out = x[:, :n].copy()
+    tail = x[:, n:]
+    out[:, :tail.shape[1]] += tail[:, :n]
+    return master(out, -1.5, 1.1)
+
+
 PACKS = {
     "crimson-rose-atelier": {
         "seed": 2100,
@@ -805,6 +1326,15 @@ PACKS = {
         # light paper −21, air −22, the UI tick −24)
         "lufs": {"crack": -20, "flap": -20, "draw": -20, "reveal": -21, "bloom": -21, "page": -20, "fold": -21,
                  "stamp": -20, "petal": -22, "tap": -24, "chime": -21},
+    },
+    "nocturne-lake-estate": {
+        "seed": 2200,
+        "fx": {"tick": nl_tick, "rise": nl_rise, "flap": nl_flap, "moon": nl_moon, "draw": nl_draw, "reveal": nl_reveal,
+               "ripple": nl_ripple, "leaf": nl_leaf, "press": nl_press, "clink": nl_clink, "tap": nl_tap, "chime": nl_chime},
+        "music": {"moonlit-terrace": render_moonlit_terrace},
+        # the same scale: the hard click and the paper −20/−21, glass and tones −21/−22, air and the leaf −22/−23, tick −24
+        "lufs": {"tick": -21, "rise": -22, "flap": -20, "moon": -21, "draw": -20, "reveal": -22, "ripple": -22, "leaf": -23,
+                 "press": -20, "clink": -21, "tap": -24, "chime": -22},
     },
 }
 
