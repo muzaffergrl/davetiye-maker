@@ -42,9 +42,9 @@
   <section class="programme-body" data-scene="details-card">
     <h2 class="schedule-title" data-copy="schedule_title" data-step="title">Order of the Day</h2>
     <ol class="schedule" data-step="list">
-      <li data-repeat="schedule"><time data-field=".time"></time><div><h3 data-field=".label"></h3><p><span data-if=".location" data-field=".location"></span></p></div></li>
+      <li data-repeat="schedule"><time data-field=".time"></time><span class="icon sched-icon" aria-hidden="true"></span><div><h3 data-field=".label"></h3><p><span data-if=".location" data-field=".location"></span></p></div></li>
     </ol>
-    <span class="bloom thread-end" aria-hidden="true"></span>
+    <span class="bud thread-end" aria-hidden="true"></span>
     <p class="ceremony-line" data-if="ceremony_time !thank_you_on"><span data-copy="ceremony_line">The ceremony begins at</span> <span data-field="ceremony_time"></span></p>
     <p class="ceremony-line" data-if="ceremony_time thank_you_on"><span data-copy="ceremony_after">The ceremony began at</span> <span data-field="ceremony_time"></span></p>
     <div class="calendar" data-if="!thank_you_on">
@@ -61,6 +61,7 @@
       <span class="ph-mark" aria-hidden="true"><span>Your photo here</span></span>
     </div>
     <div class="venue-copy" data-step="copy">
+      <span class="icon icon-pin" aria-hidden="true"></span>
       <p class="venue-name" data-field="venue.name"></p>
       <p class="body-text" data-if="venue.address" data-field="venue.address"></p>
       <p class="eyebrow" data-if="!venue.address" data-field="venue.city_region_country"></p>
@@ -72,6 +73,7 @@
   </section>
   <section class="notes" data-scene="details-notes">
     <div class="detail-note" data-optional="dress_code" data-if="dress_code" data-step="note">
+      <span class="icon icon-dress" aria-hidden="true"></span>
       <h2 data-copy="dress_label">Dress code</h2>
       <p class="body-text" data-field="dress_code"></p>
     </div>

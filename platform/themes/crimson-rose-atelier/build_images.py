@@ -159,8 +159,12 @@ def optional_parts(manifest: dict) -> list[str]:
             fa[..., 3] = np.where(np.asarray(rim) > 0, 0, fa[..., 3])
             frame = Image.fromarray(fa.astype(np.uint8), "RGBA")
             tb.webp(frame, "oval_frame", [640], 86, manifest, out=OUT)
-            mask = Image.fromarray((green[y0:y1, x0:x1] * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(5))
-            mask.resize((400, round(400 * (y1 - y0) / (x1 - x0))), Image.LANCZOS).save(OUT / "mask_oval.png", optimize=True)
+            # a CSS mask reads the image's ALPHA: the window is opaque, the rest transparent (a grey PNG masks nothing)
+            win = Image.fromarray((green[y0:y1, x0:x1] * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(5))
+            win = win.resize((400, round(400 * (y1 - y0) / (x1 - x0))), Image.LANCZOS)
+            mask = Image.new("RGBA", win.size, (0, 0, 0, 0))
+            mask.putalpha(win)
+            mask.save(OUT / "mask_oval.png", optimize=True)
             W, H = im.size
             rules.append(".oval-frame{display:block;background:url(img/oval_frame-640.webp) 0 0/100% 100% no-repeat}"
                          f".framed{{--fx:{pct(x0 / W)};--fy:{pct(y0 / H)};--fw:{pct((x1 - x0) / W)};--fh:{pct((y1 - y0) / H)};"
@@ -230,7 +234,7 @@ def optional_parts(manifest: dict) -> list[str]:
             tb.webp(sq, f"icon_{key}", [96], 88, manifest, out=OUT)
             icons.append(f"--cra-icon-{key}:url(img/icon_{key}-96.webp)")
     if icons:
-        rules.append(":root{" + ";".join(icons) + "}.sched-icon{display:block}")
+        rules.append(":root{" + ";".join(icons) + "}.icon{display:block}")
         found.append(f"icons×{len(icons)}")
     if have("photo_corner.png"):
         im = trim(rgba(P / "photo_corner.png"))
@@ -240,7 +244,9 @@ def optional_parts(manifest: dict) -> list[str]:
     if have("gold_flourish.png"):
         im = trim(rgba(P / "gold_flourish.png"))
         tb.webp(im, "flourish", [600], 86, manifest, out=OUT)
-        rules.append(f".flourish{{display:block;aspect-ratio:{im.width}/{im.height};background:url(img/flourish-600.webp) 50%/contain no-repeat}}")
+        # the short gold rules under titles become this flourish (site.css: --rule-bg / --rule-w / --rule-h)
+        w = 150
+        rules.append(f":root{{--rule-bg:url(img/flourish-600.webp) 50%/contain no-repeat;--rule-w:{w}px;--rule-h:{round(w * im.height / im.width) + 2}px}}")
         found.append("gold_flourish")
     if have("ribbon_bow.png"):
         im = trim(rgba(P / "ribbon_bow.png"))

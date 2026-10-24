@@ -5,9 +5,15 @@
 @media(min-width:700px){:root{--cra-velvet:url(img/velvet_wide-1536.webp);--cra-velvet-2x:url(img/velvet_wide-1536.webp)}}
 .satin{display:block;aspect-ratio:1963/367;background:url(img/satin-1200.webp) 50% 100%/100% 100% no-repeat}
 :root{--cra-petals:"img/petal_1-96.webp img/petal_2-96.webp img/petal_3-96.webp img/petal_4-96.webp img/petal_5-96.webp"}
+.oval-frame{display:block;background:url(img/oval_frame-640.webp) 0 0/100% 100% no-repeat}.framed{--fx:15.42%;--fy:13.55%;--fw:69.34%;--fh:73.18%;aspect-ratio:1122/1402}.framed>.photo-slot{-webkit-mask:url(img/mask_oval.png) 0 0/100% 100% no-repeat;mask:url(img/mask_oval.png) 0 0/100% 100% no-repeat;border-radius:0;box-shadow:none}
 .torn{display:block;aspect-ratio:2172/244;background:url(img/torn_edge-1200.webp) 50% 0/100% 100% no-repeat}.sheet>.torn{bottom:auto;top:0;margin:0;translate:0 -52.05%}.sheet{box-shadow:none}
 .ribbon{display:block;aspect-ratio:208/1454;background:url(img/ribbon-180.webp) 50% 0/100% 100% no-repeat}
 .sprig{display:block;aspect-ratio:814/1054;background:url(img/sprig-120.webp) 50%/contain no-repeat}
 .leaf-face{background:url(img/album_page-720.webp) 0 0/100% 100% no-repeat;padding:12% 10% 12% 15%;aspect-ratio:990/1368}.js .book{aspect-ratio:990/1368}.js .album-leaf::after,.leaf-shade{-webkit-mask-image:url(img/album_page-720.webp);mask-image:url(img/album_page-720.webp)}
 .rose-corner{display:block;aspect-ratio:1367/1106;background:url(img/rose_corner-640.webp) 0 100%/100% 100% no-repeat}
 .bloom{display:block;background:url(img/rose_bloom-200.webp) 50%/contain no-repeat;background-image:image-set(url(img/rose_bloom-200.webp) 1x,url(img/rose_bloom-400.webp) 2x)}
+:root{--cra-icon-rings:url(img/icon_rings-96.webp);--cra-icon-toast:url(img/icon_toast-96.webp);--cra-icon-dinner:url(img/icon_dinner-96.webp);--cra-icon-dance:url(img/icon_dance-96.webp);--cra-icon-cake:url(img/icon_cake-96.webp);--cra-icon-sparkle:url(img/icon_sparkle-96.webp);--cra-icon-pin:url(img/icon_pin-96.webp);--cra-icon-dress:url(img/icon_dress-96.webp)}.icon{display:block}
+:root{--cra-corner:url(img/photo_corner-120.webp)}.corners{display:block}
+:root{--rule-bg:url(img/flourish-600.webp) 50%/contain no-repeat;--rule-w:150px;--rule-h:13px}
+.bow{display:block;aspect-ratio:1115/1025;background:url(img/bow-400.webp) 50%/contain no-repeat}
+.bud{display:block;aspect-ratio:1089/1054;background:url(img/rose_bud-200.webp) 50%/contain no-repeat}

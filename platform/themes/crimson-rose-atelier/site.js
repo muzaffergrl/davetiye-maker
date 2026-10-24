@@ -178,7 +178,7 @@ function petals(count, from) {
 function initEnvelope() {
   const stage = $('.stage');
   if (!stage) return;
-  const env = $('.env'), well = $('.card-well'), card = $('.env-card'), oval = $('.card-oval', card), E = MOTION.envelope;
+  const env = $('.env'), well = $('.card-well'), card = $('.env-card'), oval = $('.framed', card), E = MOTION.envelope;
   if (/[?&]replay=1(&|$)/.test(location.search)) root.classList.remove('is-opened');
   let state = root.classList.contains('is-opened') ? 'opened' : 'closed';
   const timers = [], anims = [];
@@ -361,6 +361,21 @@ function initAlbum() {
   addEventListener('hashchange', () => { const n = Number(location.hash.replace('#chapter-', '')) - 1; if (Number.isInteger(n) && n >= 0 && n <= last && n !== active) goTo(n); });
 }
 
+/* -- the day: each moment gets its PAKET 9 gold icon, chosen from the buyer's own label (first match wins) */
+const ICONS = [['rings', /ceremon|vow|wedding|i do|chapel|church|blessing/i], ['toast', /cocktail|toast|drink|champagne|aperitif|prosecco|welcome/i],
+  ['dinner', /dinner|supper|meal|lunch|brunch|feast|banquet|reception/i], ['dance', /danc|party|music|band|\bdj\b/i],
+  ['cake', /cake|dessert|sweet/i], ['sparkle', /send.?off|farewell|firework|sparkler|late|goodbye|night/i], ['pin', /arriv|gather|shuttle|transport|bus\b/i]];
+function initIcons() {
+  const list = $('.schedule');
+  if (!list || !getComputedStyle(root).getPropertyValue('--cra-icon-rings').trim()) return;
+  list.classList.add('has-icons');
+  $$('li', list).forEach((li, i) => {
+    const text = $$('h3, p', li).map((n) => n.textContent).join(' ');
+    const hit = ICONS.find(([, re]) => re.test(text));
+    $('.sched-icon', li)?.style.setProperty('--i', `var(--cra-icon-${hit ? hit[0] : (i ? 'sparkle' : 'rings')})`);
+  });
+}
+
 /* -- the day: the gold thread draws itself down the Order of the Day as the guest scrolls */
 function initThread() {
   const list = $('.schedule');
@@ -405,6 +420,7 @@ function boot() {
   initCountdown();
   initHome();
   initAlbum();
+  initIcons();
   initThread();
   initReply();
   root.dataset.js = 'ready';

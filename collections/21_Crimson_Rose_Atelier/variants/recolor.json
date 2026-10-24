@@ -164,6 +164,58 @@
     "album_page": {
       "recolor": "keep",
       "why": "plain ivory paper: no palette colour"
+    },
+    "oval_frame": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "icon_rings": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "icon_toast": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "icon_dinner": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "icon_dance": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "icon_cake": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "icon_sparkle": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "icon_pin": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "icon_dress": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "photo_corner": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "flourish": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "rose_bud": {
+      "recolor": "auto",
+      "group": "rose"
+    },
+    "bow": {
+      "recolor": "auto",
+      "group": "envelope"
     }
   },
   "print": {

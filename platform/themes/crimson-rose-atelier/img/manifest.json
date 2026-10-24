@@ -394,6 +394,21 @@
    }
   ]
  },
+ "oval_frame": {
+  "src_size": [
+   1122,
+   1402
+  ],
+  "ratio": 0.80029,
+  "files": [
+   {
+    "file": "oval_frame-640.webp",
+    "w": 640,
+    "h": 800,
+    "bytes": 72038
+   }
+  ]
+ },
  "torn_edge": {
   "src_size": [
    2172,
@@ -490,17 +505,203 @@
    }
   ]
  },
+ "icon_rings": {
+  "src_size": [
+   830,
+   830
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "icon_rings-96.webp",
+    "w": 96,
+    "h": 96,
+    "bytes": 6174
+   }
+  ]
+ },
+ "icon_toast": {
+  "src_size": [
+   894,
+   894
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "icon_toast-96.webp",
+    "w": 96,
+    "h": 96,
+    "bytes": 5994
+   }
+  ]
+ },
+ "icon_dinner": {
+  "src_size": [
+   966,
+   966
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "icon_dinner-96.webp",
+    "w": 96,
+    "h": 96,
+    "bytes": 6988
+   }
+  ]
+ },
+ "icon_dance": {
+  "src_size": [
+   814,
+   814
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "icon_dance-96.webp",
+    "w": 96,
+    "h": 96,
+    "bytes": 6082
+   }
+  ]
+ },
+ "icon_cake": {
+  "src_size": [
+   931,
+   931
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "icon_cake-96.webp",
+    "w": 96,
+    "h": 96,
+    "bytes": 7494
+   }
+  ]
+ },
+ "icon_sparkle": {
+  "src_size": [
+   749,
+   749
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "icon_sparkle-96.webp",
+    "w": 96,
+    "h": 96,
+    "bytes": 6714
+   }
+  ]
+ },
+ "icon_pin": {
+  "src_size": [
+   844,
+   844
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "icon_pin-96.webp",
+    "w": 96,
+    "h": 96,
+    "bytes": 7428
+   }
+  ]
+ },
+ "icon_dress": {
+  "src_size": [
+   1074,
+   1074
+  ],
+  "ratio": 1.0,
+  "files": [
+   {
+    "file": "icon_dress-96.webp",
+    "w": 96,
+    "h": 96,
+    "bytes": 4790
+   }
+  ]
+ },
+ "photo_corner": {
+  "src_size": [
+   958,
+   915
+  ],
+  "ratio": 1.04699,
+  "files": [
+   {
+    "file": "photo_corner-120.webp",
+    "w": 120,
+    "h": 115,
+    "bytes": 4832
+   }
+  ]
+ },
+ "flourish": {
+  "src_size": [
+   1863,
+   141
+  ],
+  "ratio": 13.21277,
+  "files": [
+   {
+    "file": "flourish-600.webp",
+    "w": 600,
+    "h": 45,
+    "bytes": 19092
+   }
+  ]
+ },
+ "bow": {
+  "src_size": [
+   1115,
+   1025
+  ],
+  "ratio": 1.0878,
+  "files": [
+   {
+    "file": "bow-400.webp",
+    "w": 400,
+    "h": 368,
+    "bytes": 25026
+   }
+  ]
+ },
+ "rose_bud": {
+  "src_size": [
+   1089,
+   1054
+  ],
+  "ratio": 1.03321,
+  "files": [
+   {
+    "file": "rose_bud-200.webp",
+    "w": 200,
+    "h": 194,
+    "bytes": 12794
+   }
+  ]
+ },
  "paket8": [
   "velvet",
   "velvet_wide",
   "satin_drape",
   "petals×5",
+  "oval_frame",
   "torn_edge",
   "ribbon",
   "gold_sprig",
   "album_page",
   "rose_corner",
-  "rose_bloom"
+  "rose_bloom",
+  "icons×8",
+  "photo_corner",
+  "gold_flourish",
+  "ribbon_bow",
+  "rose_bud"
  ],
  "og": {
   "size": [
@@ -531,5 +732,5 @@
    "light_above": 110
   }
  },
- "bytes_total": 2368991
+ "bytes_total": 2578441
 }
