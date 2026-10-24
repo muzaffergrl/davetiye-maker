@@ -11,14 +11,22 @@
 // envelope closed and a tap on the envelope still opens it; ?lang=tr lasts through the opening and a nav tap; one tap on
 // a design opens its demo on the same page; scrolling down hides the pill and scrolling up shows it; inside an iframe
 // there is no bar; the thumbnails are 3:5. Review 2026-10-23 (21 Crimson Rose Atelier): its story page opens at its title
-// (390, 1280) and at 900 / 1280 its roses run past the column with no sideways scroll. --shots writes a screenshot of each
-// width closed and open. Exit 1 on any failure.
+// (390, 1280) and at 900 / 1280 its roses run past the column with no sideways scroll.
+// Search (owner request 2026-10-24), at every width on the envelope page: the field sits between the links and the grid
+// and stays in view while the grid scrolls; on a touch screen opening does not focus it (no keyboard), with a mouse it
+// does; typing "rose" filters (and is read out), nothing found shows the message and "Show all designs", × clears, Esc
+// clears first and closes next, no sideways overflow, axe on the open panel while searching. At 360 / 390 / 1280 a Turkish
+// visitor typing "altın" and "kır"; at 1280 Enter opens the first result; at 390 a phone keyboard (a smaller visual
+// viewport) leaves the field and the first results above it.
+// --shots writes a screenshot of each width closed and open (and at 360 / 390 / 1280: "rose", "altın", nothing found).
+// Exit 1 on any failure.
 
 import { mkdirSync, mkdtempSync, readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import os from 'node:os';
 import path from 'node:path';
 import { parseArgs } from 'node:util';
+import type { Page } from 'playwright-core';
 import { loadChromium, startNext, waitForServer, type NextServer } from '../scripts/lib/browser.ts';
 
 const { values: args } = parseArgs({ options: { url: { type: 'string' }, shots: { type: 'string' } } });
@@ -46,6 +54,82 @@ const WIDTHS: Array<[number, number]> = [
   [768, 1024],
   [1280, 800],
 ];
+
+async function overflow(p: Page): Promise<boolean> {
+  return p.evaluate(() => {
+    const se = document.scrollingElement!;
+    const wide = (s: string) => [...document.querySelectorAll<HTMLElement>(s)].some((e) => e.scrollWidth > e.clientWidth + 1);
+    return se.scrollWidth > se.clientWidth || wide('.pdb-panel') || wide('.pdb-scroll') || wide('.pdb-search');
+  });
+}
+
+async function shownNames(p: Page): Promise<string[]> {
+  return p.evaluate(() => [...document.querySelectorAll('.pdb-item')].filter((a) => a.getClientRects().length).map((a) => a.querySelector('.pdb-item-name')!.textContent!));
+}
+
+/** The search in the open catalogue (envelope page, English); leaves it open with the field empty. */
+async function searchChecks(page: Page, w: number, at: string) {
+  const shots = args.shots;
+  const total = await page.locator('.pdb-item').count();
+  // between the links and the grid; still in view (and covering no card) when the grid is scrolled to its end
+  const place = await page.evaluate(() => {
+    const r = (s: string) => document.querySelector(s)!.getBoundingClientRect();
+    const list = document.querySelector<HTMLElement>('.pdb-scroll')!;
+    list.scrollTop = list.scrollHeight;
+    const after = r('.pdb-input');
+    return { links: r('.pdb-links').bottom, input: after, list: r('.pdb-scroll').top, scrolled: list.scrollTop > 0 };
+  });
+  check(
+    place.input.top >= place.links && place.input.bottom <= place.list + 1 && place.input.top >= 0 && place.input.height >= 44 && place.scrolled,
+    `${at}: search field between the links and the grid, in view while the grid scrolls (${JSON.stringify(place)})`,
+  );
+  check(place.input.width >= Math.min(w, 680) - 80, `${at}: search field full width (${Math.round(place.input.width)} px)`);
+  // "rose": live, read out after a pause
+  const tall = await page.evaluate(() => document.querySelector('.pdb-panel')!.getBoundingClientRect().height);
+  await page.fill('.pdb-input', 'rose');
+  await page.waitForTimeout(800);
+  const rose = await shownNames(page);
+  check(rose.length > 0 && rose.length < total && rose.includes('Blush Garden Rose') && rose.includes('Crimson Rose Atelier') && !rose.includes('Mediterranean Lemon'), `${at}: "rose" filters (${rose.length} of ${total})`);
+  check((await page.textContent('.pdb-panel [role="status"]')) === `Designs found: ${rose.length}`, `${at}: the count is read out`);
+  check(!(await overflow(page)), `${at}: no sideways overflow while searching`);
+  const clearBox = await page.locator('.pdb-clear').boundingBox();
+  check(!!clearBox && clearBox.width >= 44 && clearBox.height >= 44, `${at}: × shown, ≥ 44 px`);
+  if (shots && [360, 390, 1280].includes(w)) await page.screenshot({ path: path.join(shots, `${w}-search-rose.png`) });
+  // × clears, focus stays in the field
+  await page.click('.pdb-clear');
+  check((await page.inputValue('.pdb-input')) === '' && (await shownNames(page)).length === total, `${at}: × shows every design again`);
+  check(await page.evaluate(() => document.activeElement?.className === 'pdb-input'), `${at}: × leaves the focus in the field`);
+  // nothing found
+  await page.fill('.pdb-input', 'zzqx');
+  await page.waitForTimeout(100);
+  const none = await page.evaluate(() => ({
+    text: document.querySelector('.pdb-empty-text')?.textContent,
+    headings: [...document.querySelectorAll('.pdb-group')].filter((g) => g.getClientRects().length).length,
+    all: document.querySelector('.pdb-all')!.getBoundingClientRect().height,
+  }));
+  check(none.text === 'No designs match "zzqx"' && none.headings === 0 && none.all >= 44, `${at}: nothing found: message, no empty headings, "Show all designs" (${JSON.stringify(none)})`);
+  const short = await page.evaluate(() => document.querySelector('.pdb-panel')!.getBoundingClientRect().height);
+  check(Math.abs(short - tall) < 2, `${at}: the panel keeps its height while searching (${Math.round(tall)} → ${Math.round(short)} px)`);
+  check(!(await overflow(page)), `${at}: no sideways overflow (nothing found)`);
+  await page.addScriptTag({ content: AXE });
+  const axe = await page.evaluate(async () => {
+    const r = await (window as unknown as { axe: { run: (c: unknown, o: unknown) => Promise<{ violations: Array<{ id: string; impact: string }> }> } }).axe.run(
+      { include: [['.pdb']] },
+      { resultTypes: ['violations'] },
+    );
+    return r.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical').map((v) => v.id);
+  });
+  check(axe.length === 0, `${at}: axe serious/critical while searching: ${axe.join(', ') || 'none'}`);
+  if (shots && [360, 390, 1280].includes(w)) await page.screenshot({ path: path.join(shots, `${w}-search-empty.png`) });
+  await page.click('.pdb-all');
+  check((await page.inputValue('.pdb-input')) === '' && (await shownNames(page)).length === total, `${at}: "Show all designs" brings them back`);
+  // Esc: clears first, the panel stays open
+  await page.fill('.pdb-input', 'gold');
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(100);
+  const esc = await page.evaluate(() => ({ value: document.querySelector<HTMLInputElement>('.pdb-input')!.value, open: !document.querySelector<HTMLElement>('.pdb-panel')!.hidden }));
+  check(esc.value === '' && esc.open, `${at}: first Esc clears the search, the panel stays open`);
+}
 
 async function main() {
   await waitForServer(`${BASE}/start/demo/olive-ivory`, 90_000, server ?? undefined);
@@ -81,7 +165,10 @@ async function main() {
           const panel = document.querySelector<HTMLElement>('.pdb-panel')!;
           const r = panel.getBoundingClientRect();
           const se = document.scrollingElement!;
-          const small = [...panel.querySelectorAll('a, button')].map((e) => e.getBoundingClientRect()).filter((b) => b.width < 43.5 || b.height < 43.5).length;
+          // what is shown (the search's × and "Show all designs" wait hidden)
+          const small = [...panel.querySelectorAll('a, button, input')]
+            .map((e) => e.getBoundingClientRect())
+            .filter((b) => b.width && b.height && (b.width < 43.5 || b.height < 43.5)).length;
           return {
             expanded: document.querySelector('.pdb-pill')!.getAttribute('aria-expanded'),
             inside: r.left >= 0 && r.right <= innerWidth && r.top >= 0 && r.bottom <= innerHeight + 1,
@@ -93,7 +180,8 @@ async function main() {
         check(open.expanded === 'true', `${at}: Enter opens the catalogue`);
         check(open.inside, `${at}: catalogue inside the viewport`);
         check(!open.overflow, `${at}: no horizontal overflow (open)`);
-        check(open.focus === 'pdb-close', `${at}: focus moves to Close`);
+        // a touch screen: Close (no keyboard popping up); a mouse: straight into the search field
+        check(open.focus === (w < 800 ? 'pdb-close' : 'pdb-input'), `${at}: focus moves to ${w < 800 ? 'Close' : 'the search field'} (${open.focus})`);
         check(open.small === 0, `${at}: every target ≥ 44 px`);
         await page.addScriptTag({ content: AXE });
         const axe = await page.evaluate(async () => {
@@ -105,6 +193,7 @@ async function main() {
         });
         check(axe.length === 0, `${at}: axe serious/critical in the bar: ${axe.join(', ') || 'none'}`);
         if (args.shots) await page.screenshot({ path: path.join(args.shots, `${w}-${p.replace(/\W+/g, '_')}-open.png`) });
+        if (p === PAGES[0]) await searchChecks(page, w, at);
         await page.keyboard.press('Shift+Tab');
         check(await page.evaluate(() => document.querySelector('.pdb-panel')!.contains(document.activeElement)), `${at}: Shift+Tab stays inside`);
         await page.keyboard.press('Escape');
@@ -114,6 +203,75 @@ async function main() {
       }
       check(errors.length === 0, `${w}: no page errors ${errors.join(' | ')}`);
       await ctx.close();
+    }
+
+    // search: a Turkish visitor ("altın" = gold, "kır" = country / rustic, not "kırmızı" = red)
+    for (const [w, h] of WIDTHS.filter(([x]) => [360, 390, 1280].includes(x))) {
+      const touch = w < 800;
+      const c = await browser.newContext({ viewport: { width: w, height: h }, isMobile: touch, hasTouch: touch });
+      const p = await c.newPage();
+      await p.goto(`${BASE}/start/demo/olive-ivory?lang=tr`);
+      await p.waitForSelector('.pdb-pill');
+      await p.click('.pdb-pill');
+      await p.waitForTimeout(300);
+      const total = await p.locator('.pdb-item').count();
+      check((await p.getAttribute('.pdb-input', 'placeholder')) === 'Tasarım ara', `${w} tr: the field is Turkish`);
+      await p.fill('.pdb-input', 'altın');
+      await p.waitForTimeout(800);
+      const altin = await shownNames(p);
+      const said = await p.textContent('.pdb-panel [role="status"]');
+      check(altin.length > 5 && altin.length < total && altin.includes('Crimson Rose Atelier'), `${w} tr: "altın" finds the gold designs (${altin.length} of ${total})`);
+      check(said === `Bulunan tasarım: ${altin.length}`, `${w} tr: read out in Turkish (${said})`);
+      check(!(await overflow(p)), `${w} tr: no sideways overflow while searching`);
+      if (args.shots) await p.screenshot({ path: path.join(args.shots, `${w}-search-altin-tr.png`) });
+      await p.fill('.pdb-input', 'kır');
+      const kir = await shownNames(p);
+      check(kir.includes('Lavender Provence') && kir.includes('Sunflower Rustic Barn') && !kir.includes('Vintage Airmail Love Letter'), `${w} tr: "kır" = rustic, not "kırmızı" (${kir.join(', ')})`);
+      await p.fill('.pdb-input', 'zzqx');
+      check((await p.textContent('.pdb-empty-text')) === '"zzqx" ile eşleşen tasarım yok', `${w} tr: the empty message is Turkish`);
+      await c.close();
+    }
+    // search: Enter opens the first design shown (a mouse: the field has focus on opening)
+    {
+      const c = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+      const p = await c.newPage();
+      await p.goto(`${BASE}/start/demo/olive-ivory/details`);
+      await p.waitForSelector('.pdb-pill');
+      await p.click('.pdb-pill');
+      await p.waitForTimeout(300);
+      await p.keyboard.type('lemon');
+      const first = await p.evaluate(() => [...document.querySelectorAll<HTMLAnchorElement>('.pdb-item')].find((a) => a.getClientRects().length)?.getAttribute('href'));
+      await Promise.all([p.waitForURL(/mediterranean-lemon/, { timeout: 15_000 }).catch(() => undefined), p.keyboard.press('Enter')]);
+      check(first === '/start/demo/mediterranean-lemon/details' && p.url() === BASE + first, `1280: Enter opens the first result (${p.url()})`);
+      await c.close();
+    }
+    // search: the phone keyboard (a visual viewport shorter than the page): the field and the first results stay above it
+    {
+      const c = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+      await c.addInitScript(() => {
+        const vv = Object.assign(new EventTarget(), { width: innerWidth, height: innerHeight, offsetTop: 0, offsetLeft: 0, scale: 1 });
+        Object.defineProperty(window, 'visualViewport', { get: () => vv });
+        (window as unknown as { kb: (h: number) => void }).kb = (h: number) => {
+          vv.height = h;
+          vv.dispatchEvent(new Event('resize'));
+        };
+      });
+      const p = await c.newPage();
+      await p.goto(`${BASE}/start/demo/olive-ivory`);
+      await p.waitForSelector('.pdb-pill');
+      await p.tap('.pdb-pill');
+      await p.waitForTimeout(300);
+      await p.fill('.pdb-input', 'gold');
+      await p.evaluate(() => (window as unknown as { kb: (h: number) => void }).kb(470));
+      await p.waitForTimeout(200);
+      const kb = await p.evaluate(() => {
+        const r = (s: string) => document.querySelector(s)!.getBoundingClientRect();
+        const card = [...document.querySelectorAll('.pdb-item')].find((a) => a.getClientRects().length)!.getBoundingClientRect();
+        return { panel: r('.pdb-panel').bottom, input: r('.pdb-input').bottom, card: card.top, links: document.querySelector('.pdb-links')!.getClientRects().length };
+      });
+      check(kb.panel <= 471 && kb.input < 200 && kb.card < 470 - 60 && kb.links === 0, `390: with the keyboard open the panel ends above it (${JSON.stringify(kb)})`);
+      if (args.shots) await p.screenshot({ path: path.join(args.shots, '390-search-keyboard.png') });
+      await c.close();
     }
 
     const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });

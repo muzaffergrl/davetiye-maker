@@ -82,7 +82,9 @@
 .pdb .pdb-close:focus-visible,
 .pdb .pdb-link:focus-visible,
 .pdb .pdb-start:focus-visible,
-.pdb .pdb-item:focus-visible {
+.pdb .pdb-item:focus-visible,
+.pdb .pdb-clear:focus-visible,
+.pdb .pdb-all:focus-visible {
   outline: 2px solid var(--pdb-anchor);
   outline-offset: 3px;
 }
@@ -191,8 +193,23 @@
   transform-origin: 50% 100%;
   animation-name: pdb-in-up;
 }
-.pdb .pdb-panel[hidden],
-.pdb .pdb-backdrop[hidden] {
+.pdb [hidden] {
+  display: none !important;
+}
+/* searching: the panel keeps its full height (its max-height), so it does not jump as results come and go */
+.pdb[data-q] .pdb-panel {
+  height: 100vh;
+  height: 100dvh;
+}
+/* the phone keyboard is open (demo-bar.js: the visual viewport is shorter than the page): the panel ends above it,
+   anchored at the top, and gives the links' room to the results */
+.pdb[data-kb] .pdb-panel {
+  top: var(--pdb-top);
+  bottom: auto;
+  max-height: calc(var(--pdb-vh, 100dvh) - var(--pdb-top) - 8px);
+}
+.pdb[data-kb] .pdb-links,
+.pdb[data-kb] .pdb-start {
   display: none;
 }
 @keyframes pdb-fade {
@@ -293,6 +310,121 @@
 .pdb .pdb-start svg {
   width: 14px;
   height: 14px;
+}
+
+/* ------------------------------------------------------------------ search (owner request 2026-10-24) */
+.pdb .pdb-search {
+  position: relative;
+  flex: none;
+  margin: 0 14px 12px;
+}
+.pdb .pdb-lens {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  width: 18px;
+  height: 18px;
+  margin-top: -9px;
+  color: var(--pdb-muted);
+  pointer-events: none;
+}
+.pdb .pdb-input {
+  display: block;
+  width: 100%;
+  height: 46px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 46px 0 42px;
+  border: 1px solid var(--pdb-line);
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: none;
+  outline: none;
+  color: var(--pdb-ink);
+  /* 16 px: iOS does not zoom into the field */
+  font: 500 16px/1.2 var(--pdb-font);
+  letter-spacing: 0;
+  text-transform: none;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.pdb .pdb-input::placeholder {
+  color: var(--pdb-muted);
+  opacity: 1;
+}
+.pdb .pdb-input:focus {
+  border-color: var(--pdb-anchor);
+  box-shadow: 0 0 0 3px rgb(208 174 106 / 0.5);
+}
+.pdb .pdb-input::-webkit-search-cancel-button,
+.pdb .pdb-input::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+.pdb .pdb-clear {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--pdb-muted);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.pdb .pdb-clear:hover {
+  color: var(--pdb-anchor);
+  background: rgb(43 21 38 / 0.07);
+}
+.pdb .pdb-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.pdb .pdb-empty {
+  padding: 28px 8px 8px;
+  text-align: center;
+}
+.pdb .pdb-empty-text {
+  margin: 0 0 14px;
+  font: 500 14.5px/1.4 var(--pdb-font);
+  letter-spacing: 0;
+  text-align: center;
+  text-transform: none;
+  color: var(--pdb-ink);
+  overflow-wrap: anywhere;
+}
+.pdb .pdb-all {
+  width: auto;
+  min-height: 44px;
+  margin: 0;
+  padding: 0 18px;
+  border: 1px solid var(--pdb-line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--pdb-anchor);
+  font: 600 14px/1.2 var(--pdb-font);
+  letter-spacing: 0;
+  text-transform: none;
+  cursor: pointer;
+}
+.pdb .pdb-all:hover {
+  border-color: var(--pdb-gold);
 }
 
 .pdb .pdb-scroll {
@@ -419,7 +551,8 @@
     padding-left: 18px;
     padding-right: 18px;
   }
-  .pdb .pdb-start {
+  .pdb .pdb-start,
+  .pdb .pdb-search {
     margin-left: 18px;
     margin-right: 18px;
   }
@@ -428,7 +561,8 @@
 @media (prefers-reduced-motion: reduce) {
   .pdb .pdb-pill,
   .pdb .pdb-thumb img,
-  .pdb .pdb-link {
+  .pdb .pdb-link,
+  .pdb .pdb-input {
     transition: none;
   }
   .pdb .pdb-panel,

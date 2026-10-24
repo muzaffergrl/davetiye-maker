@@ -25,8 +25,11 @@ import {
   DEMO_BAR_DATA_ID,
   DEMO_BAR_GROUPS,
   DEMO_BAR_JS,
+  DEMO_BAR_SEARCH_WORDS,
   demoBarData,
+  demoBarFor,
   demoBarLang,
+  searchKeys,
   withDemoBar,
   type DemoBarData,
 } from '../lib/marketing/demo-bar.ts';
@@ -235,7 +238,7 @@ test('engine linkLang: page links keep the visitor\'s language only when the pag
 });
 
 test('every word of the bar exists in all five languages (market dictionaries)', async () => {
-  const keys = [...Object.values(DEMO_BAR_COPY), ...DEMO_BAR_GROUPS.map((g) => g.label)];
+  const keys = [...Object.values(DEMO_BAR_COPY), ...DEMO_BAR_GROUPS.map((g) => g.label), ...DEMO_BAR_SEARCH_WORDS.map(([w]) => w)];
   const market = expectedKeys('market');
   for (const k of keys) assert.ok(market.has(k), `the scanner finds ${JSON.stringify(k)}`);
   for (const lang of LANGS.filter((l) => l !== 'en')) {
@@ -244,10 +247,14 @@ test('every word of the bar exists in all five languages (market dictionaries)',
     const data = demoBarData({ current: { id: 'olive-ivory', name: 'Olive & Ivory' }, page: 'index', lang, dict });
     assert.equal(data.lang, lang);
     for (const [k, v] of Object.entries(data.copy)) assert.equal(v, dict[DEMO_BAR_COPY[k as keyof typeof DEMO_BAR_COPY]], `${lang} ${k}`);
+    assert.match(data.copy.noMatch, /\{q\}/, `${lang}: noMatch keeps {q}`);
+    assert.match(data.copy.found, /\{n\}/, `${lang}: found keeps {n}`);
+    // the search words are words: lower case, no punctuation, no digits (a typed number means a design's number)
+    for (const [w] of DEMO_BAR_SEARCH_WORDS) assert.match(dict[w], /^[\p{Ll}]+(?: [\p{Ll}]+)*$/u, `market/${lang} ${JSON.stringify(w)}: ${dict[w]}`);
   }
   // the script itself writes no words: every label comes from the page's JSON
   const js = readFileSync(JS_FILE, 'utf8').replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g, '');
-  for (const word of ['Live demo', 'Choose a design', 'Close', 'Home', 'All designs', 'Available', 'Coming soon', 'Start your website']) {
+  for (const word of ['Live demo', 'Choose a design', 'Close', 'Home', 'All designs', 'Available', 'Coming soon', 'Start your website', 'Search', 'Clear', 'No designs', 'Show all', 'Designs found']) {
     assert.ok(!js.includes(`'${word}`), `demo-bar.js hard-codes "${word}"`);
   }
 });
@@ -298,8 +305,10 @@ test('the pill is a real button that opens an accessible catalogue; Tab stays in
   const close = find(panel, (e) => e.className === 'pdb-close')!;
   assert.equal(doc.activeElement, close, 'focus moves into the catalogue');
   assert.equal(close.getAttribute('aria-label'), 'Close');
-  // Tab wraps
-  const focusables = panel.querySelectorAll('a[href], button');
+  // Tab wraps (around what is shown: the search's hidden × and "Show all designs" are left out)
+  const focusables = panel.querySelectorAll('a[href], button, input').filter((e) => e.getClientRects().length > 0);
+  assert.equal(focusables[focusables.length - 1].className, 'pdb-item');
+  assert.ok(focusables.some((e) => e.className === 'pdb-input'));
   panel.fire('keydown', { key: 'Tab', shiftKey: true });
   assert.equal(doc.activeElement, focusables[focusables.length - 1]);
   panel.fire('keydown', { key: 'Tab', shiftKey: false });
@@ -330,16 +339,278 @@ test('the pill sits opposite the theme\'s nav: at the top, at the bottom when th
   assert.equal(runBar(data, { nav: { top: 0, height: 64 } }).root!.getAttribute('data-edge'), 'bottom');
 });
 
+// ---------------------------------------------------------------- search (owner request 2026-10-24)
+
+/** A listed design's search text as the script reads it: name, number and its words. */
+function searchWordsOf(data: DemoBarData, id: string): string {
+  const it = data.groups.flatMap((g) => g.items).find((i) => i.id === id)!;
+  return [it.name, ...it.k.map((i) => data.words[i])].join(' ').toLowerCase();
+}
+
+test('search data: every design has its number and its words — English, plus the visitor\'s language on a localized visit', async () => {
+  const en = demoBarData({ current: { id: 'olive-ivory', name: 'Olive & Ivory' }, page: 'index', lang: null });
+  const items = en.groups.flatMap((g) => g.items);
+  // numbers: the collection's ("07"), one per design
+  for (const it of items) assert.match(it.no, /^\d{2}$/, it.id);
+  assert.equal(new Set(items.map((i) => i.no)).size, items.length);
+  assert.equal(items.find((i) => i.id === 'burgundy-velvet-autumn')!.no, '07');
+  assert.equal(items.find((i) => i.id === 'ivory-pearl-atelier')!.no, '49');
+  // every index points into the shared list; every listed word is used
+  for (const it of items) for (const k of it.k) assert.ok(en.words[k], `${it.id} ${k}`);
+  assert.deepEqual(new Set(items.flatMap((i) => i.k)).size, en.words.length);
+  // style, colour, palette and opening words from each design's own copy
+  const has = (data: DemoBarData, id: string, list: string[]) => {
+    const words = new Set(searchWordsOf(data, id).split(/[^\p{L}\p{N}]+/u));
+    for (const w of list) assert.ok(words.has(w), `${data.lang} ${id}: "${w}" in ${[...words].join(' ')}`);
+  };
+  const hasNot = (data: DemoBarData, id: string, list: string[]) => {
+    const words = new Set(searchWordsOf(data, id).split(/[^\p{L}\p{N}]+/u));
+    for (const w of list) assert.ok(!words.has(w), `${data.lang} ${id}: no "${w}"`);
+  };
+  has(en, 'blush-garden-rose', ['rose', 'pink', 'romantic', 'floral', 'garden', 'gold', 'sage', 'envelope']);
+  has(en, 'mediterranean-lemon', ['blue', 'yellow', 'cobalt', 'summer', 'destination']);
+  has(en, 'art-deco-black-tie', ['gatefold', 'art', 'deco', 'navy', 'gold', 'pearl']);
+  has(en, 'lavender-provence', ['pouch', 'rustic', 'boho', 'purple', 'lavender']);
+  has(en, 'tropical-destination', ['wallet', 'tropical', 'teal']);
+  has(en, 'enchanted-forest-storybook', ['book', 'forest', 'vintage']);
+  has(en, 'wildflower-meadow-vellum', ['sleeve', 'garden', 'rustic']);
+  has(en, 'coastal-seaside', ['beach', 'sea']);
+  has(en, 'winter-evergreen', ['winter', 'green', 'seasonal']);
+  // no false friends: rose gold / rose quartz are not roses, blackberries are not black, frosted vellum is not winter
+  hasNot(en, 'velvet-jewel-box', ['flowers', 'floral']);
+  hasNot(en, 'music-box-ballerina', ['flowers', 'floral']);
+  hasNot(en, 'burgundy-velvet-autumn', ['black']);
+  hasNot(en, 'wildflower-meadow-vellum', ['winter']);
+  // English words only on an English visit
+  assert.ok(!en.words.some((w) => /altın|zarf/.test(w)));
+  // a Turkish visit: the same words plus the Turkish ones
+  const tr = await demoBarFor('tr', { id: 'olive-ivory', name: 'Olive & Ivory' }, 'index');
+  has(tr, 'blush-garden-rose', ['gül', 'pembe', 'altın', 'zarf', 'romantik', 'çiçekli', 'bahçe', 'rose', 'gold', 'envelope']);
+  has(tr, 'lavender-provence', ['kır', 'rustik', 'kese', 'lavanta', 'mor']);
+  has(tr, 'olive-ivory', ['zeytin', 'dantel', 'mühür', 'yeşil']);
+  // every search word gives at least one listed design its word (no dead words)
+  const designs = catalogDesigns();
+  for (const [w] of DEMO_BAR_SEARCH_WORDS) assert.ok(designs.some((d) => searchKeys(d).includes(w)), `"${w}" finds no design`);
+});
+
+test('search: live, case- and accent-blind, every word must match, numbers, Turkish ı/İ', async () => {
+  const en = demoBarData({ current: { id: 'olive-ivory', name: 'Olive & Ivory' }, page: 'index', lang: null });
+  const all = en.groups.flatMap((g) => g.items.map((i) => i.id));
+  const bar = searchBar(en);
+  assert.deepEqual(bar.shown(), all, 'everything before typing');
+  const rose = bar.type('rose');
+  assert.ok(rose.includes('blush-garden-rose') && rose.includes('crimson-rose-atelier') && rose.length < all.length, rose.join());
+  assert.deepEqual(bar.type('ROSE'), rose);
+  assert.deepEqual(bar.type('  Rose  '), rose);
+  assert.deepEqual(bar.type('rosé'), rose);
+  // the start of a word while typing; a longer form of a word
+  assert.ok(bar.type('lav').includes('lavender-provence'));
+  assert.deepEqual(bar.type('roses'), rose);
+  // every word must match (AND), in the catalogue's order
+  const gold = bar.type('gold');
+  const both = bar.type('rose gold');
+  assert.deepEqual(both, rose.filter((id) => gold.includes(id)));
+  assert.ok(both.length > 0 && both.length < rose.length);
+  assert.deepEqual(bar.type('gold, rose'), both);
+  // numbers: "7" and "07" are design 07; a number with a word that design lacks: nothing
+  assert.deepEqual(bar.type('7'), ['burgundy-velvet-autumn']);
+  assert.deepEqual(bar.type('07'), ['burgundy-velvet-autumn']);
+  assert.deepEqual(bar.type('#49'), ['ivory-pearl-atelier']);
+  assert.deepEqual(bar.type('7 velvet'), ['burgundy-velvet-autumn']);
+  assert.deepEqual(bar.type('7 lemon'), []);
+  // opening objects
+  assert.deepEqual(bar.type('gatefold'), ['art-deco-black-tie', 'ivory-lace-pearls']);
+  assert.deepEqual(bar.type('pouch'), ['lavender-provence']);
+
+  // a Turkish visitor
+  const trData = await demoBarFor('tr', { id: 'olive-ivory', name: 'Olive & Ivory' }, 'index');
+  const tr = searchBar(trData);
+  const altin = tr.type('altın');
+  assert.ok(altin.length > 5 && altin.includes('crimson-rose-atelier'), altin.join());
+  for (const q of ['ALTIN', 'Altın', 'altin', 'ALTİN']) assert.deepEqual(tr.type(q), altin, q);
+  const gul = tr.type('gül');
+  assert.ok(gul.includes('blush-garden-rose') && gul.includes('crimson-rose-atelier'), gul.join());
+  for (const q of ['GÜL', 'gul', 'Gül']) assert.deepEqual(tr.type(q), gul, q);
+  // "kır" (country, rustic) is a word of its own: not "kırmızı" (red)
+  const kir = tr.type('kır');
+  assert.ok(kir.includes('lavender-provence') && kir.includes('sunflower-rustic-barn'), kir.join());
+  const red = tr.type('kırmızı');
+  assert.ok(red.includes('vintage-airmail-love-letter') && !kir.includes('vintage-airmail-love-letter'));
+  assert.ok(tr.type('kı').length >= new Set([...kir, ...red]).size, 'while typing, the start of a word');
+  // "zarf" = every design that opens from an envelope; "zarflı" the same
+  const zarf = tr.type('zarf');
+  assert.deepEqual(zarf, all.filter((id) => !['art-deco-black-tie', 'ivory-lace-pearls', 'lavender-provence', 'tropical-destination', 'enchanted-forest-storybook', 'wildflower-meadow-vellum'].includes(id)));
+  assert.deepEqual(tr.type('zarflı'), zarf);
+  assert.deepEqual(tr.type('İNCİ'), tr.type('inci'));
+  assert.ok(tr.type('inci').includes('ivory-lace-pearls'));
+  // English words still work on a Turkish visit
+  assert.deepEqual(tr.type('gold'), altin);
+  // German ß and French œ
+  const de = searchBar(await demoBarFor('de', { id: 'olive-ivory', name: 'Olive & Ivory' }, 'index'));
+  assert.ok(de.type('weiß').length > 0);
+  assert.deepEqual(de.type('WEISS'), de.type('weiß'));
+  const fr = searchBar(await demoBarFor('fr', { id: 'olive-ivory', name: 'Olive & Ivory' }, 'index'));
+  assert.ok(fr.type('nœud').includes('blush-garden-rose'));
+  assert.deepEqual(fr.type('noeud'), fr.type('nœud'));
+  assert.ok(fr.type('dentelle').includes('olive-ivory'));
+});
+
+test('search field: label, attributes, × and the group headings follow the results', () => {
+  const data = demoBarData({ current: { id: 'olive-ivory', name: 'Olive & Ivory' }, page: 'index', lang: null });
+  const bar = searchBar(data);
+  const { input } = bar;
+  assert.equal(input.tag, 'input');
+  for (const [k, v] of Object.entries({ type: 'search', enterkeyhint: 'search', autocomplete: 'off', spellcheck: 'false', placeholder: 'Search designs', 'aria-controls': 'pdb-list' }))
+    assert.equal(input.getAttribute(k), v, k);
+  const label = find(bar.panel, (e) => e.tag === 'label')!;
+  assert.equal(label.getAttribute('for'), input.id);
+  assert.equal(label.textContent, 'Search designs');
+  assert.equal(find(bar.panel, (e) => e.getAttribute('role') === 'search')!.children.includes(input), true);
+  // right above the grid, outside it (it stays in view while the grid scrolls)
+  const kids = bar.panel.children.map((c) => c.className);
+  assert.equal(kids[kids.indexOf('pdb-search') + 1], 'pdb-scroll');
+  assert.ok(kids.indexOf('pdb-links') < kids.indexOf('pdb-search'));
+  // the × only with something typed
+  const clear = bar.by('pdb-clear');
+  assert.equal(clear.getAttribute('aria-label'), 'Clear search');
+  assert.equal(bar.visible(clear), false);
+  bar.type('velvet');
+  assert.equal(bar.visible(clear), true);
+  // a group without results hides; the counts follow
+  const sections = findAll(bar.panel, (e) => e.tag === 'section');
+  const counts = findAll(bar.panel, (e) => e.className === 'pdb-count').map((c) => c.textContent);
+  assert.equal(bar.shown().length, 4);
+  assert.deepEqual(counts, ['2', '2']);
+  bar.type('07');
+  assert.deepEqual(sections.map((x) => bar.visible(x)), [true, false]);
+  assert.equal(findAll(bar.panel, (e) => e.className === 'pdb-count')[0].textContent, '1');
+  // the current design keeps its mark
+  bar.type('olive');
+  assert.equal(findAll(bar.panel, (e) => e.getAttribute('aria-current') === 'page' && bar.visible(e)).length, 1);
+  clear.fire('click');
+  assert.equal(input.value, '');
+  assert.equal(bar.doc.activeElement, input, '× puts the visitor back in the field');
+  assert.equal(bar.shown().length, data.groups.flatMap((g) => g.items).length);
+  assert.deepEqual(findAll(bar.panel, (e) => e.className === 'pdb-count').map((c) => c.textContent), data.groups.map((g) => String(g.items.length)));
+  assert.equal(bar.visible(clear), false);
+});
+
+test('search: nothing found = a friendly message and "Show all designs"; the count is read out after a pause', () => {
+  const data = demoBarData({ current: { id: 'olive-ivory', name: 'Olive & Ivory' }, page: 'index', lang: null });
+  const bar = searchBar(data);
+  const status = find(bar.panel, (e) => e.getAttribute('role') === 'status')!;
+  assert.equal(status.getAttribute('aria-live'), 'polite');
+  const empty = bar.by('pdb-empty');
+  assert.equal(bar.visible(empty), false);
+  assert.equal(bar.root!.hasAttribute('data-q'), false);
+  assert.deepEqual(bar.type('zzz unicorn'), []);
+  assert.equal(bar.visible(empty), true);
+  assert.equal(bar.root!.hasAttribute('data-q'), true, 'searching: the panel keeps its full height');
+  assert.match(readFileSync(CSS_FILE, 'utf8'), /\.pdb\[data-q\] \.pdb-panel \{\s*height: 100vh;\s*height: 100dvh;/);
+  assert.equal(bar.by('pdb-empty-text').textContent, 'No designs match "zzz unicorn"');
+  assert.ok(findAll(bar.panel, (e) => e.tag === 'section').every((x) => !bar.visible(x)), 'no empty headings');
+  // read out once, after the visitor pauses
+  assert.equal(status.textContent, '');
+  bar.type('zzz unicorns');
+  assert.equal(bar.pending(), 1, 'debounced: one pending announcement');
+  bar.flush();
+  assert.equal(status.textContent, 'No designs match "zzz unicorns"');
+  bar.type('velvet');
+  bar.flush();
+  assert.equal(status.textContent, 'Designs found: 4');
+  bar.type('zzz');
+  const all = bar.by('pdb-all');
+  assert.equal(all.tag, 'button');
+  assert.equal(all.textContent, 'Show all designs');
+  all.fire('click');
+  assert.equal(bar.input.value, '');
+  assert.equal(bar.visible(empty), false);
+  assert.equal(bar.root!.hasAttribute('data-q'), false);
+  assert.equal(bar.shown().length, data.groups.flatMap((g) => g.items).length);
+  assert.equal(bar.doc.activeElement, bar.input);
+  bar.flush();
+  assert.equal(status.textContent, `Designs found: ${bar.shown().length}`);
+});
+
+test('search keys: Enter opens the first result, ArrowDown goes into the grid, Esc clears first and closes next', () => {
+  const data = demoBarData({ current: { id: 'olive-ivory', name: 'Olive & Ivory' }, page: 'details', lang: 'tr' });
+  const bar = searchBar(data);
+  const { input, panel, win } = bar;
+  // Enter with nothing typed does nothing; with a query, the first design shown
+  const idle = input.fire('keydown', { key: 'Enter' });
+  assert.ok(idle.prevented);
+  assert.equal((win.location as { href: string }).href, '/start/demo/x');
+  bar.type('lemon');
+  const enter = input.fire('keydown', { key: 'Enter' });
+  assert.ok(enter.prevented);
+  assert.equal((win.location as { href: string }).href, '/start/demo/mediterranean-lemon/details?lang=tr');
+  // ArrowDown: the first design shown
+  bar.type('velvet');
+  input.fire('keydown', { key: 'ArrowDown' });
+  assert.equal(bar.doc.activeElement!.href, '/start/demo/burgundy-velvet-autumn/details?lang=tr');
+  // Esc: clears the search (the panel stays open), then closes
+  const esc = win.fire('keydown', { key: 'Escape' });
+  assert.ok(esc.prevented && esc.stopped);
+  assert.equal(input.value, '');
+  assert.equal(panel.hidden, false);
+  win.fire('keydown', { key: 'Escape' });
+  assert.equal(panel.hidden, true);
+  assert.equal(bar.doc.activeElement, bar.pill);
+  // the query resets when the catalogue closes (close button, backdrop, Esc, back from another demo)
+  bar.pill.fire('click');
+  bar.type('lemon');
+  find(panel, (e) => e.className === 'pdb-close')!.fire('click');
+  bar.pill.fire('click');
+  assert.equal(input.value, '');
+  assert.equal(bar.shown().length, data.groups.flatMap((g) => g.items).length);
+  bar.type('lemon');
+  win.fire('pageshow', { persisted: true });
+  assert.equal(input.value, '');
+  // typing never reaches the theme
+  for (const type of ['input', 'keydown', 'keyup']) assert.ok(input.fire(type).stopped, type);
+});
+
+test('search focus: a mouse or trackpad goes straight into the field; a touch screen does not (no keyboard popping up)', () => {
+  const data = demoBarData({ current: { id: 'olive-ivory', name: 'Olive & Ivory' }, page: 'index', lang: null });
+  assert.equal(searchBar(data, { fine: true }).doc.activeElement!.className, 'pdb-input');
+  assert.equal(searchBar(data, { fine: false }).doc.activeElement!.className, 'pdb-close');
+  assert.equal(searchBar(data).doc.activeElement!.className, 'pdb-close', 'no matchMedia: no autofocus');
+});
+
+test('the phone keyboard: the panel ends above it and leaves out the links (visualViewport)', () => {
+  const data = demoBarData({ current: { id: 'olive-ivory', name: 'Olive & Ivory' }, page: 'index', lang: null });
+  const vv = new FakeViewport(844);
+  const bar = searchBar(data, { vv });
+  const root = bar.root!;
+  assert.equal(root.hasAttribute('data-kb'), false);
+  vv.resize(420);
+  assert.equal(root.hasAttribute('data-kb'), true);
+  assert.equal(root.style.props['--pdb-vh'], '420px');
+  vv.resize(844);
+  assert.equal(root.hasAttribute('data-kb'), false);
+  assert.equal(root.style.props['--pdb-vh'], undefined);
+  // pinch zoom is not a keyboard
+  vv.resize(420, 2);
+  assert.equal(root.hasAttribute('data-kb'), false);
+  const css = readFileSync(CSS_FILE, 'utf8');
+  assert.match(css, /\.pdb\[data-kb\] \.pdb-panel \{[^}]*max-height: calc\(var\(--pdb-vh/);
+  assert.match(css, /\.pdb\[data-kb\] \.pdb-links,\s*\.pdb\[data-kb\] \.pdb-start \{\s*display: none/);
+});
+
 // ---------------------------------------------------------------- weight and safety
 
 test('weight: small static files, a small inline list', async () => {
+  // 2026-10-24 the search: js 12.3 → 18.2 KB (3.9 → 6.0 KB gzip), css 10.8 → 13.9 KB, the list 6.6 → 11.2 KB (1.5 → 3.9 KB
+  // gzip, its search words in two languages)
   const js = readFileSync(JS_FILE);
   const css = readFileSync(CSS_FILE);
-  assert.ok(js.length <= 14_000 && gzipSync(js).length <= 4_500, `demo-bar.js ${js.length} B, ${gzipSync(js).length} B gzip`);
-  assert.ok(css.length <= 12_000 && gzipSync(css).length <= 3_500, `demo-bar.css ${css.length} B, ${gzipSync(css).length} B gzip`);
-  const { $ } = await demo('/start/demo/olive-ivory/details?lang=de');
-  const json = $(`#${DEMO_BAR_DATA_ID}`).text();
-  assert.ok(json.length <= 10_000, `inline list ${json.length} B`);
+  assert.ok(js.length <= 19_000 && gzipSync(js).length <= 6_300, `demo-bar.js ${js.length} B, ${gzipSync(js).length} B gzip`);
+  assert.ok(css.length <= 14_500 && gzipSync(css).length <= 3_900, `demo-bar.css ${css.length} B, ${gzipSync(css).length} B gzip`);
+  for (const lang of LANGS) {
+    const { $ } = await demo(`/start/demo/olive-ivory/details?lang=${lang}`);
+    const json = $(`#${DEMO_BAR_DATA_ID}`).text();
+    assert.ok(json.length <= 12_000 && gzipSync(json).length <= 4_200, `${lang}: inline list ${json.length} B, ${gzipSync(json).length} B gzip`);
+  }
   assert.doesNotMatch(readFileSync(JS_FILE, 'utf8'), /localStorage|sessionStorage|document\.cookie|fetch\(|XMLHttpRequest|eval\(|innerHTML/);
 });
 
@@ -373,7 +644,15 @@ class El {
   children: El[] = [];
   parent: El | null = null;
   listeners: Record<string, Listener[]> = {};
-  style = { props: {} as Record<string, string>, setProperty(k: string, v: string) { this.props[k] = v; } };
+  style = {
+    props: {} as Record<string, string>,
+    setProperty(k: string, v: string) {
+      this.props[k] = v;
+    },
+    removeProperty(k: string) {
+      delete this.props[k];
+    },
+  };
   className = '';
   textContent = '';
   hidden = false;
@@ -399,8 +678,11 @@ class El {
     this.tag = tag;
     this.owner = owner;
   }
+  value = '';
   setAttribute(k: string, v: unknown) {
     this.attrs.set(k, String(v));
+    // reflected like the real DOM
+    if (k === 'id' || k === 'type') this[k] = String(v);
   }
   getAttribute(k: string) {
     return this.attrs.get(k) ?? null;
@@ -432,9 +714,14 @@ class El {
   getBoundingClientRect() {
     return this.rect;
   }
+  /** No box when it or an ancestor is hidden. */
+  getClientRects() {
+    for (let x: El | null = this; x; x = x.parent) if (x.hidden) return [];
+    return [this.rect];
+  }
   querySelectorAll(sel: string) {
-    assert.equal(sel, 'a[href], button');
-    return findAll(this, (e) => (e.tag === 'a' && Boolean(e.href)) || e.tag === 'button');
+    assert.equal(sel, 'a[href], button, input');
+    return findAll(this, (e) => (e.tag === 'a' && Boolean(e.href)) || e.tag === 'button' || e.tag === 'input');
   }
   /** Dispatch: the target's listeners, then its ancestors' (bubbling) unless stopped. */
   fire(type: string, init: Partial<FakeEvent> = {}): FakeEvent {
@@ -472,8 +759,14 @@ function findAll(root: El, pred: (e: El) => boolean): El[] {
 }
 const find = (root: El, pred: (e: El) => boolean) => findAll(root, pred)[0];
 
-/** Runs public/static/demo-bar.js against a fake document; `framed` = inside an iframe; `nav` = the theme's .site-nav. */
-function runBar(data: DemoBarData | null, opts: { framed?: boolean; nav?: { top: number; height: number } } = {}) {
+/**
+ * Runs public/static/demo-bar.js against a fake document; `framed` = inside an iframe; `nav` = the theme's .site-nav;
+ * `fine` = a mouse or trackpad ((pointer: fine)); `vv` = window.visualViewport. `flush()` runs the pending timers.
+ */
+function runBar(
+  data: DemoBarData | null,
+  opts: { framed?: boolean; nav?: { top: number; height: number }; fine?: boolean; vv?: FakeViewport } = {},
+) {
   const doc: { activeElement: El | null } & Record<string, unknown> = { activeElement: null };
   const body = new El('body', doc);
   const head = new El('head', doc);
@@ -507,6 +800,11 @@ function runBar(data: DemoBarData | null, opts: { framed?: boolean; nav?: { top:
   };
   win.self = win;
   win.top = opts.framed ? {} : win;
+  win.location = { href: '/start/demo/x' };
+  if (opts.fine !== undefined) win.matchMedia = (q: string) => ({ matches: q === '(pointer: fine)' && opts.fine });
+  if (opts.vv) win.visualViewport = opts.vv;
+  const timers = new Map<number, () => void>();
+  let timerId = 0;
   vm.runInNewContext(readFileSync(JS_FILE, 'utf8'), {
     window: win,
     document: doc,
@@ -515,7 +813,54 @@ function runBar(data: DemoBarData | null, opts: { framed?: boolean; nav?: { top:
       f();
       return 1;
     },
+    setTimeout: (f: () => void) => (timers.set(++timerId, f), timerId),
+    clearTimeout: (id: number) => timers.delete(id),
   });
   const root = body.children.find((c) => c.hasAttribute('data-demo-bar-ui')) ?? null;
-  return { doc, win, root, appended: body.children.length };
+  const flush = () => {
+    for (const [id, f] of [...timers]) {
+      timers.delete(id);
+      f();
+    }
+  };
+  return { doc, win, root, appended: body.children.length, flush, pending: () => timers.size };
+}
+
+/** window.visualViewport: its size and scale, and its resize event. */
+class FakeViewport {
+  height: number;
+  offsetTop = 0;
+  scale = 1;
+  listeners: Listener[] = [];
+  constructor(height: number) {
+    this.height = height;
+  }
+  addEventListener(t: string, f: Listener) {
+    if (t === 'resize') this.listeners.push(f);
+  }
+  resize(height: number, scale = 1) {
+    this.height = height;
+    this.scale = scale;
+    for (const f of this.listeners) f(fakeEvent('resize'));
+  }
+}
+
+/** The open catalogue of a fake bar with its search: type, read what shows. */
+function searchBar(data: DemoBarData, opts: Parameters<typeof runBar>[1] = {}) {
+  const bar = runBar(data, opts);
+  const panel = find(bar.root!, (e) => e.className === 'pdb-panel')!;
+  const input = find(panel, (e) => e.className === 'pdb-input')!;
+  const pill = find(bar.root!, (e) => e.className === 'pdb-pill')!;
+  const visible = (e: El) => e.getClientRects().length > 0;
+  const shown = () =>
+    findAll(panel, (e) => e.className === 'pdb-item')
+      .filter(visible)
+      .map((a) => a.href.split('/')[3].split('?')[0]);
+  const type = (q: string) => {
+    input.value = q;
+    input.fire('input');
+    return shown();
+  };
+  pill.fire('click');
+  return { ...bar, panel, input, pill, shown, type, visible, by: (cls: string) => find(panel, (e) => e.className === cls)! };
 }

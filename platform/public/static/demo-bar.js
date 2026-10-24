@@ -2,7 +2,9 @@
    On a live demo (/start/demo/<theme>) a slim pill names the design; it opens a catalogue of the other designs (one tap
    = that design's demo, same page, same ?lang=), "Home" and "All designs" of the sales site. Reads #demo-bar-data (the
    words are already in the visitor's language). Draws nothing inside a frame (the /start preview, the sales site's demo
-   dialog). No framework, no storage; the only request is the brand font. */
+   dialog). No framework, no storage; the only request is the brand font.
+   Search (owner request 2026-10-24): a field above the grid filters it as the visitor types — case, accents and Turkish
+   ı/İ ignored, every typed word must match the design's name, number or search words (D.words, built from its copy). */
 (function () {
   'use strict';
   var src = document.getElementById('demo-bar-data');
@@ -30,6 +32,7 @@
   var HOME = 'M4 11.5L12 4.5l8 7M6.5 9.5V19.5h11V9.5';
   var CHECK = 'M5.5 12.5l4 4 9-9';
   var ARROW = 'M5 12h13M13 6.5l5.5 5.5-5.5 5.5';
+  var LENS = 'M10.5 4.5a6 6 0 1 0 0 12a6 6 0 1 0 0-12zM15 15l4.5 4.5';
   /* corner controls of the themes and the platform (sound, Skip, language) the pill keeps clear of */
   var CORNERS = '.snd,.skip,[data-skip],.pl-lang';
 
@@ -37,6 +40,10 @@
     var n = document.createElement(tag);
     if (cls) n.className = cls;
     if (text != null) n.textContent = text;
+    return n;
+  }
+  function attrs(n, a) {
+    for (var k in a) n.setAttribute(k, a[k]);
     return n;
   }
   function icon(d, cls) {
@@ -81,12 +88,13 @@
   root.setAttribute('data-edge', 'top');
   root.lang = D.lang || 'en';
 
-  var pill = el('button', 'pdb-pill');
-  pill.type = 'button';
-  pill.setAttribute('aria-haspopup', 'dialog');
-  pill.setAttribute('aria-expanded', 'false');
-  pill.setAttribute('aria-controls', 'pdb-panel');
-  pill.setAttribute('aria-label', D.copy.eyebrow + ': ' + D.current.name + '. ' + D.copy.dialog);
+  var pill = attrs(el('button', 'pdb-pill'), {
+    type: 'button',
+    'aria-haspopup': 'dialog',
+    'aria-expanded': 'false',
+    'aria-controls': 'pdb-panel',
+    'aria-label': D.copy.eyebrow + ': ' + D.current.name + '. ' + D.copy.dialog,
+  });
   pill.appendChild(mark());
   pill.appendChild(label());
   pill.appendChild(icon(CHEVRON, 'pdb-chev'));
@@ -94,19 +102,13 @@
   var backdrop = el('div', 'pdb-backdrop');
   backdrop.hidden = true;
 
-  var panel = el('div', 'pdb-panel');
-  panel.id = 'pdb-panel';
+  var panel = attrs(el('div', 'pdb-panel'), { id: 'pdb-panel', role: 'dialog', 'aria-modal': 'true', 'aria-label': D.copy.dialog });
   panel.hidden = true;
-  panel.setAttribute('role', 'dialog');
-  panel.setAttribute('aria-modal', 'true');
-  panel.setAttribute('aria-label', D.copy.dialog);
 
   var head = el('div', 'pdb-head');
   head.appendChild(mark());
   head.appendChild(label());
-  var close = el('button', 'pdb-close');
-  close.type = 'button';
-  close.setAttribute('aria-label', D.copy.close);
+  var close = attrs(el('button', 'pdb-close'), { type: 'button', 'aria-label': D.copy.close });
   close.appendChild(icon(CLOSE));
   head.appendChild(close);
   panel.appendChild(head);
@@ -117,14 +119,42 @@
   panel.appendChild(links);
   if (D.links.start) panel.appendChild(link(D.links.start, ARROW, D.copy.start, 'pdb-start'));
 
+  // the search field: outside the scrolling grid, so it stays in view and never covers a card
+  var find = attrs(el('div', 'pdb-search'), { role: 'search' });
+  find.appendChild(attrs(el('label', 'pdb-sr', D.copy.search), { for: 'pdb-q' }));
+  find.appendChild(icon(LENS, 'pdb-lens'));
+  var input = attrs(el('input', 'pdb-input'), {
+    type: 'search',
+    id: 'pdb-q',
+    placeholder: D.copy.search,
+    enterkeyhint: 'search',
+    autocomplete: 'off',
+    autocapitalize: 'off',
+    autocorrect: 'off',
+    spellcheck: 'false',
+    'aria-controls': 'pdb-list',
+  });
+  find.appendChild(input);
+  var clear = attrs(el('button', 'pdb-clear'), { type: 'button', 'aria-label': D.copy.clear });
+  clear.hidden = true;
+  clear.appendChild(icon(CLOSE));
+  find.appendChild(clear);
+  panel.appendChild(find);
+
   var list = el('div', 'pdb-scroll');
+  list.id = 'pdb-list';
   var current = null;
+  var groups = [];
+  var known = Object.create(null); // every search word of the list: a typed word that is one matches whole words only
   D.groups.forEach(function (g, gi) {
     var section = el('section', 'pdb-group');
     var title = el('h2', 'pdb-group-title');
+    var count = el('span', 'pdb-count', String(g.items.length));
+    var rows = [];
+    groups.push({ section: section, count: count, rows: rows });
     title.id = 'pdb-group-' + gi;
     title.appendChild(el('span', null, g.label));
-    title.appendChild(el('span', 'pdb-count', String(g.items.length)));
+    title.appendChild(count);
     section.setAttribute('aria-labelledby', title.id);
     section.appendChild(title);
     var ul = el('ul', 'pdb-grid');
@@ -154,25 +184,139 @@
       a.appendChild(el('span', 'pdb-item-name', it.name));
       li.appendChild(a);
       ul.appendChild(li);
+      var text = it.name;
+      (it.k || []).forEach(function (i) {
+        text += ' ' + ((D.words || [])[i] || '');
+      });
+      var w = words(text);
+      w.forEach(function (x) {
+        known[x] = 1;
+      });
+      rows.push({ li: li, a: a, no: it.no ? +it.no : -1, w: w });
     });
     section.appendChild(ul);
     list.appendChild(section);
   });
+  var empty = el('div', 'pdb-empty');
+  empty.hidden = true;
+  var emptyText = el('p', 'pdb-empty-text');
+  var all = attrs(el('button', 'pdb-all', D.copy.showAll), { type: 'button' });
+  empty.appendChild(emptyText);
+  empty.appendChild(all);
+  list.appendChild(empty);
   panel.appendChild(list);
+  var status = attrs(el('div', 'pdb-sr'), { role: 'status', 'aria-live': 'polite' });
+  panel.appendChild(status);
 
   root.appendChild(pill);
   root.appendChild(backdrop);
   root.appendChild(panel);
 
+  // ---------------------------------------------------------------- search
+  // lower case, accents off (é → e, ü → u, ç → c, İ → i), Turkish dotless ı → i, ß → ss; split into words
+  function words(s) {
+    return String(s)
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/\u0131/g, 'i')
+      .replace(/\u00df/g, 'ss')
+      .replace(/\u0153/g, 'oe')
+      .replace(/\u00e6/g, 'ae')
+      .split(/[^\p{L}\p{N}]+/u)
+      .filter(Boolean);
+  }
+  // every typed word must match: a number = the design's number ("7", "07"); a whole search word = that word ("kır" is
+  // not "kırmızı"); else the start of a word ("lav" → lavender), or a longer form of one ("roses", "zarflı")
+  function hit(r, q) {
+    for (var i = 0; i < q.length; i++) {
+      var t = q[i];
+      var ok = false;
+      if (/^\d+$/.test(t)) ok = +t === r.no;
+      else
+        for (var j = 0; j < r.w.length && !ok; j++) {
+          var w = r.w[j];
+          ok = known[t] ? w === t : w.indexOf(t) === 0 || (w.length > 3 && t.indexOf(w) === 0);
+        }
+      if (!ok) return false;
+    }
+    return true;
+  }
+  var said = 0;
+  function filter(speak) {
+    var raw = input.value.trim();
+    var q = words(raw);
+    var n = 0;
+    groups.forEach(function (g) {
+      var c = 0;
+      g.rows.forEach(function (r) {
+        var on = !q.length || hit(r, q);
+        r.li.hidden = !on;
+        if (on) c++;
+      });
+      g.section.hidden = !c;
+      g.count.textContent = String(c);
+      n += c;
+    });
+    clear.hidden = !input.value;
+    // while searching the panel keeps its full height: no jumping as results come and go
+    if (input.value) root.setAttribute('data-q', '');
+    else root.removeAttribute('data-q');
+    empty.hidden = n > 0;
+    emptyText.textContent = n ? '' : D.copy.noMatch.replace('{q}', raw);
+    list.scrollTop = 0;
+    // read out once the visitor pauses (aria-live, polite)
+    clearTimeout(said);
+    if (!speak) status.textContent = '';
+    else
+      said = setTimeout(function () {
+        status.textContent = n ? D.copy.found.replace('{n}', n) : emptyText.textContent;
+      }, 600);
+  }
+  function first() {
+    for (var i = 0; i < groups.length; i++) for (var j = 0; j < groups[i].rows.length; j++) if (!groups[i].rows[j].li.hidden) return groups[i].rows[j].a;
+    return null;
+  }
+  function reset(speak) {
+    input.value = '';
+    filter(speak);
+  }
+  input.addEventListener('input', function () {
+    filter(true);
+  });
+  input.addEventListener('keydown', function (e) {
+    if (e.isComposing) return;
+    var a = first();
+    if (e.key === 'Enter') {
+      // Enter = the first design shown
+      e.preventDefault();
+      if (a && input.value.trim()) window.location.href = a.href;
+    } else if (e.key === 'ArrowDown' && a) {
+      e.preventDefault();
+      a.focus();
+    }
+  });
+  // the × in the field and "Show all designs": everything again, back in the field
+  function again() {
+    reset(true);
+    input.focus();
+  }
+  clear.addEventListener('click', again);
+  all.addEventListener('click', again);
+
   // ---------------------------------------------------------------- open / close
   function focusables() {
-    return panel.querySelectorAll('a[href], button');
+    return [].filter.call(panel.querySelectorAll('a[href], button, input'), function (n) {
+      return n.getClientRects().length > 0;
+    });
   }
+  // Esc: clears the search first, closes on the next
   function onKey(e) {
     if (e.key === 'Escape') {
       e.preventDefault();
       e.stopPropagation();
-      hide(true);
+      if (input.value) reset(true);
+      else hide(true);
     }
   }
   function onFocusIn(e) {
@@ -190,7 +334,8 @@
       var y = current.offsetTop - (list.clientHeight - current.offsetHeight) / 2;
       list.scrollTop = Math.max(0, y);
     }
-    close.focus({ preventScroll: true });
+    // a mouse or trackpad: straight into the search; a touch screen: no keyboard popping up
+    (window.matchMedia && window.matchMedia('(pointer: fine)').matches ? input : close).focus({ preventScroll: true });
     window.addEventListener('keydown', onKey, true);
     document.addEventListener('focusin', onFocusIn, true);
   }
@@ -202,6 +347,7 @@
     pill.setAttribute('aria-expanded', 'false');
     window.removeEventListener('keydown', onKey, true);
     document.removeEventListener('focusin', onFocusIn, true);
+    reset(false);
     if (restore) pill.focus({ preventScroll: true });
   }
   pill.addEventListener('click', function () {
@@ -219,18 +365,18 @@
     if (e.key !== 'Tab') return;
     var f = focusables();
     if (!f.length) return;
-    var first = f[0];
-    var last = f[f.length - 1];
-    if (e.shiftKey && document.activeElement === first) {
+    var a = f[0];
+    var z = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === a) {
       e.preventDefault();
-      last.focus();
-    } else if (!e.shiftKey && document.activeElement === last) {
+      z.focus();
+    } else if (!e.shiftKey && document.activeElement === z) {
       e.preventDefault();
-      first.focus();
+      a.focus();
     }
   });
-  // the theme never hears the bar's taps and keys (a tap on the pill must not open the envelope)
-  ['click', 'pointerdown', 'pointerup', 'mousedown', 'mouseup', 'touchstart', 'touchend', 'keydown', 'keyup'].forEach(function (type) {
+  // the theme never hears the bar's taps, keys and typing (a tap on the pill must not open the envelope)
+  ['click', 'pointerdown', 'pointerup', 'mousedown', 'mouseup', 'touchstart', 'touchend', 'keydown', 'keyup', 'input', 'change'].forEach(function (type) {
     root.addEventListener(
       type,
       function (e) {
@@ -324,6 +470,22 @@
   }
   function later() {
     if (!frame) frame = requestAnimationFrame(place);
+  }
+  // the phone keyboard (the visual viewport shrinks, the page does not): the panel ends above it and drops the links
+  var vv = window.visualViewport;
+  function fit() {
+    var kb = Math.abs(vv.scale - 1) < 0.01 && window.innerHeight - vv.height > 120;
+    if (kb) {
+      root.setAttribute('data-kb', '');
+      root.style.setProperty('--pdb-vh', Math.round(vv.offsetTop + vv.height) + 'px');
+    } else {
+      root.removeAttribute('data-kb');
+      root.style.removeProperty('--pdb-vh');
+    }
+  }
+  if (vv) {
+    vv.addEventListener('resize', fit);
+    vv.addEventListener('scroll', fit);
   }
 
   // ---------------------------------------------------------------- mount
