@@ -1,0 +1,276 @@
+27 RIAD LANTERN NIGHTS — PAKET 8 TESLİMİ
+Tarih: 24 Ekim 2026
+Repo: muzaffergrl/davetiye-maker
+Dal: main (codex/g27-paket8 gerekmedi)
+Son commit başlığı: 27 PAKET 8: teslim (bu TESLIM.txt dosyasını ekleyen commit).
+Görsellerin son ara kayıt commit'i: 81760f196747f33a532872b010b252d372fc0d1d — 27 PAKET 8: W2 4/4.
+Teslim commit'inin tam SHA'sı Git geçmişinde ve sohbetin son yanıtındadır; rapora kendi commit SHA'sını yazmak commit kimliğini değiştireceği için burada başlığı kullanıldı.
+
+TESLİM KAPSAMI VE SONUÇ
+28 PNG teslim edildi: 1 tasarım panosu + 27 ayrı üretim parçası.
+Ek olarak bu Türkçe TESLIM.txt vardır; toplam 29 yeni depo dosyası.
+W1: 2 deneme. W2 toplam 34 deneme. Genel toplam 36 imagegen üretimi.
+Hiçbir parça atlanmadı. En çok 2 denemeden sonra daha iyi olanın korunması kuralı uygulandı.
+Bu, kusursuz hiza onayı değildir: özellikle iki kapı kanadı ve kordon taban kapıyla tam çakışmıyor.
+Bunların kalan sapmaları aşağıda açıkça yazıldı. Story kemerinin omuzlarında ek loblar ve avlu sularında çiçeksi pembe kümeler de kaldı.
+
+KAYIT SIRASI
+Başlangıçta git pull --rebase origin main yapıldı; main kullanıldı.
+W1 seçilir seçilmez commit/push:5826fa49.
+W2.5 sonrası:7e1b7547 (W2 1/4).
+W2.10 sonrası:3afe6d58 (W2 2/4).
+W2.16 sonrası:62076a63 (W2 3/4).
+W2.21 sonrası:81760f19 (W2 4/4).
+Her push öncesi git pull --rebase origin main çalıştırıldı; eşzamanlı başka main commit'leri rebase ile korundu.
+Son kayıt:27 PAKET 8: teslim.
+
+YÖNTEM VE ALFA
+Yalnız dosyanın son PAKET 8 bölümündeki İngilizce prompt'lar kullanıldı; ana Instructions metni ilk üretimde ve sonraki üretimlerde korundu.
+Çok dosyalı iki prompt'ta özgün metin korundu, her çağrıda yalnız ilgili satırın tek dosyasının üretilmesi ayrıca belirtildi.
+Düzeltme denemelerinde aynı özgün prompt'a somut QA düzeltmesi eklendi.
+Tüm üretimler bu tek sohbette, W1 sonra W2.1–W2.21 sırasıyla yapıldı.
+Şeffaf istenen 21 dosyanın tamamı gerçek RGBA, opak 7 dosya RGB'dir. Beyaz/dama arka plan sahteciliği yoktur.
+RGBA dosyalardaki alfa min/max ve dış kutular her dosyada aşağıda yazıldı.
+Alfa değerleri0–255 ölçeğinde. Bazı dosyalarda saydam kenarlarda1–4 düzeyinde çok düşük alfa gürültüsü vardır; kodla silinmedi.
+Dış kutu, alfa>=128 piksellerinin (sol,üst,sağ,alt) kutusudur; sağ/alt koordinat hariçtir.
+Foto/kapı açıklıkları alfa<16 bağlantı bileşeniyle denetlendi: merkez alfa0 ve bileşen dış kenara bağlı değil; dört halka da kapalı.
+Bu sayısal okuma, gerçek PNG'yi değiştirmedi. %50 bindirmeler, 2×2 doku tekrarları ve40 px ikonlar yalnız tarayıcı CSS önizlemesinde gösterildi.
+QA ekran görüntüleri geçicidir; depoya veya docs/qa gibi başka bir teslim yoluna eklenmedi.
+28 PNG'nin tamamının SHA-256 değeri, seçilen imagegen kaynak PNG'siyle aynıdır: kopyalama bayt düzeyinde doğrulandı.
+KODLA HİÇBİR PİKSEL DEĞİŞTİRİLMEDİ: yeniden boyutlandırma, kırpma, alfa temizleme, boyama, renk değiştirme, birleştirme veya teslim PNG'sine yeniden kodlama yapılmadı.
+gpt_yerlestir.py ve build_images.py çalıştırılmadı; kod veya başka koleksiyon dosyası düzenlenmedi.
+
+HİZA SONUÇLARI (%50 OPAKLIKLA ÜST ÜSTE)
+portal_frame / portal_closed:
+  Belirgin kayma YOK. Dış kutuda sol/üst1 px, sağ/alt0 px fark. Kemer çizgisi görsel olarak çakışıyor.
+  İlk denemedeki yaklaşık13 px büyüme nedeniyle yeniden üretildi; ikinci deneme seçildi.
+portal_leaf_l / portal_closed:
+  Kayma VAR. Seçilen ikinci sürüm kutusu(160,79,524,1456).
+  Dikiş yaklaşıkx522, tabanx512'den≈10 px sağda. Üst kenar hedefy338'den≈259 px yukarı, alt kenar hedefy1375'ten≈81 px aşağı.
+  Kulp yaklaşık98 px yukarıda; çivi deseni tabanla çakışmıyor. İlk deneme daha da büyük ve dikişx648'di.
+portal_leaf_r / portal_closed:
+  Kayma VAR. Seçilen ikinci sürüm kutusu(512,268,824,1476).
+  Dikiş nominalx512 civarında, çizgi kalınlığıyla≈6 px sağa uzanıyor. Üst kenar hedefy338'den≈70 px yukarı, alt kenar≈101 px aşağı.
+  Kulp yaklaşık18 px sağda, yüksekliği tabana yakın. Sol kanatla çivi yıldızı tam birleşmiyor.
+portal_cord / portal_closed:
+  Kayma VAR. İkinci sürüm kutusu(388,859,637,1323).
+  İlmeklerin alt kıvrımları kulpların altına göre≈40–60 px yukarıda, düğüm hedefe göre≈28 px yukarıda.
+  İp hedef9px yerine≈15–20px kalın, uçlar hedefe göre≈110–122px aşağıda. İlk sürüm daha kalın ve daha yukarıdaydı.
+lamp_lit / lamp_unlit:
+  Belirgin kayma YOK. Her ikisinde sol240,üst7,sağ783; alt1520/1521:0–1px fark.
+  Zincir, üst halka ve gövde üst üste oturuyor. Yanık cam ve delikler yalnız nesne sınırında; görünen dış hâle yok.
+mashrabiya_panel / story_arch açıklığı:
+  Belirgin yana kayma YOK; merkez farkı≈1px sağa,≈11,5px yukarı.
+  Panel(110,127,915,1409), açıklık(173,214,850,1345). Panel hedefe göre büyük, fakat pencerenin tamamını örtüyor.
+  Dikdörtgen panelin fazlası çerçeve arkasında kalır. Delikler gerçek alfa, yaklaşık%43,76 açık alan.
+Kapı kanatları/kordon için ikinci deneme son sınırdı; kalan farklar kodla düzeltilmedi.
+
+EK ÖNİZLEME SONUÇLARI
+plaster_ivory:2×2 tekrarda büyük ton sıçraması yok; hafif dikiş seçiliyor. Karşılıklı kenar RGB ortalama mutlak farkı yatay3,09/dikey3,27.
+plaster_teal:2×2 tekrarda dağılım eşit; hafif ince birleşim seçiliyor. Aynı ölçüm yatay5,96/dikey5,17.
+Küçük dikiş için talimat gereği yeniden üretim yapılmadı.
+İkonlar40 px'te halka/çaydanlık/fener/ceket/anahtar olarak okunuyor. Fener ve anahtarın ince iç detayları kısmen kayboluyor.
+İkonların metal rengi yakın; tuval dolulukları ve hacimleri aynı değil, hedef düz metal tılsımdan bazıları daha hacimli.
+Galerinin ilk sürümünde alt balkon iç alanının%12,37'si şeffaftı. İkinci sürümde aynı örnek alanda%0: dolu sedir arkalık sağlandı.
+lamp_light merkezRGB(0,0,0), kenarlarda en çokRGB1: saf siyah hedefine en fazla1/255 sapma.
+Niş, galeri, kart, ayırıcı ve üç küçük nesne koyu teal arka planda ayrıca görüldü; sahte zemin veya görünür dış hâle görülmedi.
+
+DOSYA BAZINDA GERÇEK ÖLÇÜLER, DENEMELER VE SAPMALAR
+Bütün yollar collections/27_Riad_Lantern_Nights/assets/gpt/ köküne göredir.
+
+1. mockups/design-board.png
+  Hedef: 1908×824 (alternatif 1536×1024); gerçek: 1902×827; biçim: RGB; deneme: 2.
+  Gerçek alfa: YOK; hedef gereği tamamen opak RGB.
+  Kontrol/sapma: İkinci pano seçildi. İlkinde kapı duvarı fazla bitkili ve kordon püsküllüydü. Seçilende home foto nişi içindeki zellige ince bant zayıf; story kafesi yaklaşık üst %40'ta; galeri kemeri fistoları köşeli stilize. Pano yalnız yerleşim referansıdır.
+  Eklenen referanslar: photos/hero_portrait.jpg; photos/story_2.jpg; photos/venue.jpg.
+
+2. parts/portal_closed.png
+  Hedef: 1024×1536; gerçek: 1024×1536; biçim: RGBA; deneme: 1.
+  Gerçek alfa: VAR; aralık 0–254; tam saydam piksel %31.596; dış kutu (79,64,944,1480); tuval kenarında en yüksek alfa 1.
+  Kontrol/sapma: Gerçek alfa. Opak dış kutu ≈ x %7,7–92,2 · y %4,2–96,4; saçak hedefe göre yaklaşık %2,8 yukarıda, eşik %1,4 aşağıda. Halka kulplar ve dikiş okunur; pirinç çivi kompozisyonu tek sekiz kollu yıldızdan daha karmaşık. Kodla düzeltilmedi.
+  Eklenen referanslar: mockups/design-board.png.
+
+3. parts/portal_frame.png
+  Hedef: 1024×1536; gerçek: 1024×1536; biçim: RGBA; deneme: 2.
+  Gerçek alfa: VAR; aralık 0–254; tam saydam piksel %58.109; dış kutu (80,65,944,1480); tuval kenarında en yüksek alfa 1.
+  Açıklık: merkez alfa 0; kapalı halka EVET; gerçek açıklık kutusu (265,396,759,1384).
+  Kontrol/sapma: İlk deneme dış kutuda yaklaşık ±13 px genişledi ve tepe 13 px yükseldi; reddedildi. İkinci deneme seçildi; açıklık şeffaf, kapalı halka. %50 bindirmede dış kutu ve kemer çizgisi kontrol edildi. Seçilen sürümün dış kutusu (80,65,944,1480), taban (79,64,944,1480): kenarlarda0–1 px fark; kemer çizgisinde gözle belirgin kayma yok.
+  Eklenen referanslar: parts/portal_closed.png; mockups/design-board.png.
+
+4. parts/portal_leaf_l.png
+  Hedef: 1024×1536; gerçek: 1024×1536; biçim: RGBA; deneme: 2.
+  Gerçek alfa: VAR; aralık 0–254; tam saydam piksel %70.182; dış kutu (160,79,524,1456); tuval kenarında en yüksek alfa 1.
+  Kontrol/sapma: Kayma VAR. İlk denemede dikiş x648, tepe y31 idi. İkinci deneme seçildi: dikiş yaklaşık x522 (+10 px), tepe y79 (hedef y338'den yaklaşık 259 px yukarı), alt kenar y1455 (hedef1375'ten80 px aşağı), kulp yaklaşık (443,852) (taban kulp≈450,950; yaklaşık98 px yukarı). Yaprak büyüdü; tabandaki çivi yıldızıyla tam çakışmıyor. %50 bindirme yapıldı; iki deneme sınırı nedeniyle kodla düzeltilmeden bırakıldı.
+  Eklenen referanslar: parts/portal_closed.png; mockups/design-board.png.
+
+5. parts/portal_leaf_r.png
+  Hedef: 1024×1536; gerçek: 1024×1536; biçim: RGBA; deneme: 2.
+  Gerçek alfa: VAR; aralık 0–254; tam saydam piksel %77.184; dış kutu (512,268,824,1476); tuval kenarında en yüksek alfa 0.
+  Kontrol/sapma: Kayma VAR. İlk deneme dikiş x388, tepe y42: reddedildi. İkincide dikiş≈x518 (+6 px), tepe≈y269 (hedef338'e göre69 px yukarı), alt≈y1476 (hedef1375'e göre101 px aşağı), kulp≈588,948 (taban≈570,950;18 px sağda). %50 bindirmede daha iyi, ancak kanat fazla uzun/geniş ve sol kanatla yıldız deseni birleşmiyor. İki deneme sınırı nedeniyle bırakıldı.
+  Eklenen referanslar: parts/portal_closed.png; parts/portal_leaf_l.png; mockups/design-board.png.
+
+6. parts/portal_cord.png
+  Hedef: 1024×1536; gerçek: 1024×1536; biçim: RGBA; deneme: 2.
+  Gerçek alfa: VAR; aralık 0–254; tam saydam piksel %97.788; dış kutu (388,859,637,1323); tuval kenarında en yüksek alfa 0.
+  Kontrol/sapma: İlk deneme ilmek/düğüm fazla yukarıda ve kalındı. İkinci deneme seçildi. %50 bindirmede kayma VAR: ilmeklerin altı≈y925–944, taban halkalarının alt kıvrımı≈y975–990, yaklaşık40–60 px yukarıda; düğüm≈y940, hedef968'den28 px yukarıda. Kalınlık≈15–20 px (hedef9 px), uçlar≈y1260/1320 (hedef1152/1198'den~110–122 px aşağı). Kapı ve halkalar yok; gerçek alfa; iki deneme sınırı nedeniyle bırakıldı.
+  Eklenen referanslar: parts/portal_closed.png; mockups/design-board.png.
+
+7. parts/lamp_unlit.png
+  Hedef: 1024×1536; gerçek: 1024×1536; biçim: RGBA; deneme: 1.
+  Gerçek alfa: VAR; aralık 0–254; tam saydam piksel %71.527; dış kutu (240,7,783,1520); tuval kenarında en yüksek alfa 2.
+  Kontrol/sapma: Gerçek alfa, alev/parıltı yok; cam kehribar rengiyle dış ışığı yansıtıyor. Üst halka y≈%0,6–5,6 (hedef merkez%4); gövde≈x%24–76,y%20–99: hedef x28–72,y30–92'ye göre büyük. Kenara değmiyor, alt boşluk yaklaşık1%.
+  Eklenen referanslar: mockups/design-board.png.
+
+8. parts/lamp_lit.png
+  Hedef: 1024×1536; gerçek: 1024×1536; biçim: RGBA; deneme: 1.
+  Gerçek alfa: VAR; aralık 0–254; tam saydam piksel %71.561; dış kutu (240,7,783,1521); tuval kenarında en yüksek alfa 4.
+  Kontrol/sapma: Sönük fener düzenlendi; cam ve delikler yanık, dış alfa temiz. %50 bindirmede zincir/halka/gövde neredeyse birebir, belirgin kayma yok (dış kutuda≈0–1 px). Tabanın büyük gövde ve dar üst/alt boşluk sapması aynı.
+  Eklenen referanslar: parts/lamp_unlit.png; mockups/design-board.png.
+
+9. parts/lamp_light.png
+  Hedef: 1024×1024; gerçek: 1254×1254; biçim: RGB; deneme: 1.
+  Gerçek alfa: YOK; hedef gereği tamamen opak RGB.
+  Kontrol/sapma: Opak siyah zeminde altın yıldız/nokta/damla, merkez tam (0,0,0), fener/duvar/sis yok. Kenarlarda RGB en çok1: saf siyah hedefinden en fazla1/255 sapma var, kodla boyanmadı. Gerçek boyut1254×1254; kare oran korundu.
+  Eklenen referanslar: mockups/design-board.png; parts/lamp_lit.png.
+  Piksel sapması: araç kareyi1254×1254 verdi; oran1:1 korundu, yeniden boyutlandırılmadı.
+
+10. parts/courtyard_bluehour.png
+  Hedef: 1024×1536; gerçek: 1024×1536; biçim: RGB; deneme: 1.
+  Gerçek alfa: YOK; hedef gereği tamamen opak RGB.
+  Kontrol/sapma: Opak; ay/yıldız/bulut/insan/metin yok. Avlu, sedir galeri, fener, portakal ağacı, mermer çeşme ve soluk pembe yapraklar mevcut. Gök hedefteki koyu tealdan daha mavi/parlak; açık gök yüksekliği≈%18–20 (hedef28), %30–50 bandı ayrıntılı ve tam sakin değil. Çeşme haznesi yuvarlak-kabuklu, alttaki havuz çokgen; sağ bougainvillea hedefteki az miktardan yoğun. Sayı için tekrar yapılmadı.
+  Eklenen referanslar: mockups/design-board.png.
+
+11. parts/courtyard_bluehour_wide.png
+  Hedef: 1536×1024; gerçek: 1536×1024; biçim: RGB; deneme: 2.
+  Gerçek alfa: YOK; hedef gereği tamamen opak RGB.
+  Kontrol/sapma: Dikey avlu referansıyla aynı mimari/malzeme/ışık. İlkinde pembe öğeler belirgin bütün çiçek görünümündeydi; ikinci seçildi. Kalan sapma: bazı pembe yapraklar hâlâ çok yapraklı çiçeksi kümeler gibi görünüyor; gök≈%18 ve mavi (hedef28 ve koyu teal), sağ bougainvillea yoğun. Ay/yıldız/insan/metin yok. İki deneme sınırı nedeniyle bırakıldı.
+  Eklenen referanslar: parts/courtyard_bluehour.png; mockups/design-board.png.
+
+12. parts/plaster_ivory.png
+  Hedef: 1024×1024; gerçek: 1254×1254; biçim: RGB; deneme: 1.
+  Gerçek alfa: YOK; hedef gereği tamamen opak RGB.
+  Kontrol/sapma: Opak sıcak fildişi, düşük kontrastlı tadelakt, metin/leke/çatlak yok. Tarayıcıda 2×2 tekrarda büyük ton sıçraması yok; orta yatay/dikey birleşim hafif seçiliyor (RGB kenar MAE aşağıda). Talimat gereği yalnız küçük dikiş için tekrar yapılmadı.
+  Eklenen referanslar: mockups/design-board.png.
+  Piksel sapması: araç kareyi1254×1254 verdi; oran1:1 korundu, yeniden boyutlandırılmadı.
+
+13. parts/plaster_teal.png
+  Hedef: 1024×1024; gerçek: 1254×1254; biçim: RGB; deneme: 1.
+  Gerçek alfa: YOK; hedef gereği tamamen opak RGB.
+  Kontrol/sapma: Opak gece tealı tadelakt; fotoğrafsı yüzey, düşük kontrast, yazı/desen yok. Hedefteki cilalı yüzeye göre pürüzlü; 2×2 tekrar önizlemesi kontrol edildi; küçük dikiş için tekrar yapılmaz. Tarayıcıda 2×2 tekrarda ton dağılımı eşit, birleşim ince çizgi olarak hafif seçiliyor; belirgin büyük leke/gradyan yok.
+  Eklenen referanslar: mockups/design-board.png.
+  Piksel sapması: araç kareyi1254×1254 verdi; oran1:1 korundu, yeniden boyutlandırılmadı.
+
+14. parts/fountain_water.png
+  Hedef: 1536×1024; gerçek: 1536×1024; biçim: RGB; deneme: 1.
+  Gerçek alfa: YOK; hedef gereği tamamen opak RGB.
+  Kontrol/sapma: Opak; yalnız koyu teal su, kenarlarda tek pembe gül yaprakları ve beyaz portakal çiçekleri, ortası koyu ve boş. Havuz kenarı/karo/insan/bina yansıması/metin yok. Altın yansımalar hedefteki bulanık-sakinden biraz daha keskin/parlak.
+  Eklenen referanslar: mockups/design-board.png.
+
+15. parts/niche_portrait.png
+  Hedef: 1024×1536; gerçek: 1024×1536; biçim: RGBA; deneme: 1.
+  Gerçek alfa: VAR; aralık 0–254; tam saydam piksel %41.162; dış kutu (47,48,976,1498); tuval kenarında en yüksek alfa 1.
+  Açıklık: merkez alfa 0; kapalı halka EVET; gerçek açıklık kutusu (243,262,782,1186).
+  Kontrol/sapma: Gerçek alfa, foto açıklığı boş ve kapalı halka; zellige iç bant, alçı, sedir dış pervaz ve eşik mevcut. Pencere hedef≈x15–85,y21–80'e göre daha dar/uzun; dış kutu≈x4,7–95,3,y3,1–97,5 ile hedef7–93,6–93'ten büyük. Geometri kodla değiştirilmedi. Gerçek açıklık kutusu (243,262,782,1186); yaklaşık539×924, hedefe göre dar.
+  Eklenen referanslar: mockups/design-board.png.
+
+16. parts/story_arch.png
+  Hedef: 1024×1536; gerçek: 1024×1536; biçim: RGBA; deneme: 2.
+  Gerçek alfa: VAR; aralık 0–254; tam saydam piksel %61.655; dış kutu (22,31,1002,1507); tuval kenarında en yüksek alfa 0.
+  Açıklık: merkez alfa 0; kapalı halka EVET; gerçek açıklık kutusu (173,214,850,1345).
+  Kontrol/sapma: İlk denemede çok loblu sivri kemer ve dış boncuk vardı; ikinci seçildi, pirinç boncuk iç kenara geçti. Gerçek alfa açıklık ve kapalı halka. Kalan sapma: kemer hâlâ omuzlarda ek lob/kırık içeriyor, yalın at nalı kadar düzgün değil; dış kutu x≈%2–98,y%2–98 ile hedef8–92,5–95'ten büyük; iç açıklık hedefe göre geniş. İki deneme sınırı nedeniyle bırakıldı. Gerçek açıklık kutusu (173,214,850,1345);677×1131.
+  Eklenen referanslar: mockups/design-board.png.
+
+17. parts/mashrabiya_panel.png
+  Hedef: 1024×1536; gerçek: 1024×1536; biçim: RGBA; deneme: 1.
+  Gerçek alfa: VAR; aralık 0–254; tam saydam piksel %54.14; dış kutu (110,127,915,1409); tuval kenarında en yüksek alfa 1.
+  Kontrol/sapma: story_arch düzenlenerek üretildi; %50 bindirmede merkez≈x512,y770 ile pencereye göre belirgin merkez kayması YOK. Panel hedef x18–82,y14–90 yerine≈x11–89,y8–92: daha büyük; açıklığı bütünüyle kapatacak güvenlik payı var, çerçevenin arkasında fazlası gizlenebilir. Dikdörtgen, alt düz ray, merkezde yıldız rozet; delikler gerçek alfa (109 kapalı alfa deliği, toplam451075 piksel; panel dış kutusunda açık alan≈%43,76). Foto/çerçeve/cam yok. Panel kutusu merkezi (512,5,768), pencere kutusu merkezi(511,5,779,5): merkez farkı≈1 px sağa ve11,5 px yukarı; büyük panel açıklığın tamamını kaplıyor.
+  Eklenen referanslar: parts/story_arch.png; mockups/design-board.png.
+
+18. parts/gallery_arch.png
+  Hedef: 1536×1024; gerçek: 1536×1024; biçim: RGBA; deneme: 2.
+  Gerçek alfa: VAR; aralık 0–254; tam saydam piksel %46.898; dış kutu (23,31,1514,982); tuval kenarında en yüksek alfa 1.
+  Açıklık: merkez alfa 0; kapalı halka EVET; gerçek açıklık kutusu (130,115,1408,677).
+  Kontrol/sapma: Gerçek alfa foto açıklığı, halka kapalı; alçı lambrequin üst, mermer sütunçe, dolu sedir balkon mevcut. Dış kutu hedef5–95,6–94 yerine≈x1,5–98,5,y3–95; açıklığın altı≈%66 (hedef78), balkon daha yüksek; açıklık hedef≈16:9'a göre daha geniş/yassı. Balkon iç bölgesi alfa denetlendi. İlkinde balkonun iç bölgesinde %12,37 gerçek şeffaf delik vardı. İkinci denemede sedir arkalık eklendi; örneklenen alt balkon iç alanında şeffaf delik oranı %0 oldu. İki deneme sınırı nedeniyle seçilen en iyi sürüm bırakıldı.
+  Eklenen referanslar: mockups/design-board.png; parts/gallery_arch.png (ilk deneme, düzeltme referansı).
+
+19. parts/card_riad.png
+  Hedef: 1024×1536; gerçek: 1024×1536; biçim: RGBA; deneme: 1.
+  Gerçek alfa: VAR; aralık 0–254; tam saydam piksel %23.288; dış kutu (88,30,937,1494); tuval kenarında en yüksek alfa 1.
+  Kontrol/sapma: Gerçek alfa; metinsiz pamuk kart, üst yıldız ve alt zellige bant; orta bantta yalnız iki düz dikey altın çizgi var, tekrar dilimi için uygun. Dış kutu≈x8,6–91,4,y2–97 yerine hedef8–92,5–95: tepe daha yukarı, alt daha aşağı. Alt köşeler çok hafif yumuşak, tam keskin kare değil; alt zellige şerit≈%60 genişlik (hedef40).
+  Eklenen referanslar: mockups/design-board.png.
+
+20. parts/divider_star.png
+  Hedef: 1536×1024; gerçek: 1536×1024; biçim: RGBA; deneme: 1.
+  Gerçek alfa: VAR; aralık 0–253; tam saydam piksel %97.76; dış kutu (133,457,1403,566); tuval kenarında en yüksek alfa 0.
+  Kontrol/sapma: İnce yatay pirinç çizgi, ortada delikli sekiz kollu yıldız ve iki boncuk; gerçek alfa, metin yok. Genişlik≈%84 (hedef72), yıldız yüksekliği≈%10,5; seviye ve boşluk uygun. Dış hâle gerçek alfa önizlemesinde ayrıca denetlendi.
+  Eklenen referanslar: mockups/design-board.png.
+
+21. parts/icon_rings.png
+  Hedef: 1024×1024; gerçek: 1254×1254; biçim: RGBA; deneme: 1.
+  Gerçek alfa: VAR; aralık 0–255; tam saydam piksel %81.607; dış kutu (184,299,1089,970); tuval kenarında en yüksek alfa 1.
+  Kontrol/sapma: Tek pirinç piktogram: iki birbirine geçmiş kapalı halka, dış rozet/plaka/metin yok; gerçek alfa. Hedef60% yerine yaklaşık72% genişlik; halka yüzeyi sade ve düz, hafif fotoğrafsı kalınlık var. 40 px okunurluk önizlemesi set sonunda.
+  Eklenen referanslar: mockups/design-board.png.
+  Piksel sapması: araç kareyi1254×1254 verdi; oran1:1 korundu, yeniden boyutlandırılmadı.
+
+22. parts/icon_teapot.png
+  Hedef: 1024×1024; gerçek: 1254×1254; biçim: RGBA; deneme: 1.
+  Gerçek alfa: VAR; aralık 0–255; tam saydam piksel %75.686; dış kutu (134,150,1120,1091); tuval kenarında en yüksek alfa 1.
+  Kontrol/sapma: Tek Fas çaydanlığı: kıvrık ağız, kapak, kulp; tepsi/bardak/rozet/metin yok, gerçek alfa. Düz kesilmiş metal tılsımdan daha hacimli yüzey ve daha çok ince detay var; genişlik≈%79 (hedef60). Küçük boyutta siluet okunurluğu kontrol edildi.
+  Eklenen referanslar: mockups/design-board.png.
+  Piksel sapması: araç kareyi1254×1254 verdi; oran1:1 korundu, yeniden boyutlandırılmadı.
+
+23. parts/icon_lantern.png
+  Hedef: 1024×1024; gerçek: 1254×1254; biçim: RGBA; deneme: 1.
+  Gerçek alfa: VAR; aralık 0–255; tam saydam piksel %85.68; dış kutu (429,73,825,1149); tuval kenarında en yüksek alfa 1.
+  Kontrol/sapma: Tek pirinç asılı fener, kısa zincir, ışık/cam/rozet/metin yok; gerçek alfa. Hedef düz metal tılsımdan daha hacimli ve fazla delikli; yükseklik≈%86 (hedef60). Küçük boyutta temel siluet okunuyor; ince delikler kısmen kayboluyor.
+  Eklenen referanslar: mockups/design-board.png.
+  Piksel sapması: araç kareyi1254×1254 verdi; oran1:1 korundu, yeniden boyutlandırılmadı.
+
+24. parts/icon_attire.png
+  Hedef: 1024×1024; gerçek: 1254×1254; biçim: RGBA; deneme: 1.
+  Gerçek alfa: VAR; aralık 0–255; tam saydam piksel %59.446; dış kutu (222,59,1032,1176); tuval kenarında en yüksek alfa 1.
+  Kontrol/sapma: Askıda tek yemek ceketi, tamamı pirinç siluet ve ince oyma çizgiler; kumaş/fon/rozet/metin yok, gerçek alfa. Yükseklik≈%90 (hedef60), üst boşluk≈%4,5 (genel5%ten az), kenara değmiyor. Setten daha büyük tuval doluluğu var.
+  Eklenen referanslar: mockups/design-board.png.
+  Piksel sapması: araç kareyi1254×1254 verdi; oran1:1 korundu, yeniden boyutlandırılmadı.
+
+25. parts/icon_key.png
+  Hedef: 1024×1024; gerçek: 1254×1254; biçim: RGBA; deneme: 1.
+  Gerçek alfa: VAR; aralık 0–255; tam saydam piksel %89.31; dış kutu (401,121,853,1135); tuval kenarında en yüksek alfa 0.
+  Kontrol/sapma: Tek antika kapı anahtarı, delikli kulp, pirinç, metin/rozet/mücevher yok; gerçek alfa. Hedef düz metal tılsımdan hafif hacimli, tuval yüksekliği≈%81 (hedef60). 40 px'te anahtar silueti okunuyor.
+  Eklenen referanslar: mockups/design-board.png.
+  Piksel sapması: araç kareyi1254×1254 verdi; oran1:1 korundu, yeniden boyutlandırılmadı.
+
+26. parts/petal_rose.png
+  Hedef: 1024×1024; gerçek: 1254×1254; biçim: RGBA; deneme: 1.
+  Gerçek alfa: VAR; aralık 0–255; tam saydam piksel %78.923; dış kutu (272,298,999,951); tuval kenarında en yüksek alfa 0.
+  Kontrol/sapma: Tek soluk pembe Şam gülü yaprağı, üstten hafif çukur; bütün gül/su/yüzey/parıltı/metin yok, gerçek alfa. Genişlik≈%58 (hedef40), kesilme yok; renk kırmızı değil.
+  Eklenen referanslar: mockups/design-board.png.
+  Piksel sapması: araç kareyi1254×1254 verdi; oran1:1 korundu, yeniden boyutlandırılmadı.
+
+27. parts/petal_rose_curl.png
+  Hedef: 1024×1024; gerçek: 1254×1254; biçim: RGBA; deneme: 1.
+  Gerçek alfa: VAR; aralık 0–255; tam saydam piksel %83.774; dış kutu (286,386,1018,884); tuval kenarında en yüksek alfa 0.
+  Kontrol/sapma: Tek soluk pembe gül yaprağı, sağ kenarı belirgin kıvrık ve yandan; ilk yapraktan farklı. Yüzey/su/bütün çiçek/yazı yok, gerçek alfa. Genişlik≈%59 (hedef40), kesilme yok; tondaki hafif fark kodla değiştirilmedi.
+  Eklenen referanslar: mockups/design-board.png.
+  Piksel sapması: araç kareyi1254×1254 verdi; oran1:1 korundu, yeniden boyutlandırılmadı.
+
+28. parts/orange_blossom.png
+  Hedef: 1024×1024; gerçek: 1254×1254; biçim: RGBA; deneme: 1.
+  Gerçek alfa: VAR; aralık 0–255; tam saydam piksel %78.684; dış kutu (240,240,1027,1020); tuval kenarında en yüksek alfa 1.
+  Kontrol/sapma: Tek beyaz portakal çiçeği, beş mumsu taç yaprak ve açık sarı stamen; sap/yaprak/diğer nesne/yüzey/su/yazı yok, gerçek alfa. Genişlik≈%63 (hedef40), kesilme yok.
+  Eklenen referanslar: mockups/design-board.png.
+  Piksel sapması: araç kareyi1254×1254 verdi; oran1:1 korundu, yeniden boyutlandırılmadı.
+
+REFERANSLARIN SINIRI
+W1'e yalnız photos/hero_portrait.jpg, photos/story_2.jpg, photos/venue.jpg eklendi.
+Her W2 çağrısına seçilen mockups/design-board.png eklendi.
+Kapı düzenlemelerinde portal_closed; sağ kanatta ayrıca portal_leaf_l; yanık fenerde lamp_unlit; ışık deseninde lamp_lit;
+geniş avluda courtyard_bluehour; kafeste story_arch kullanıldı. Galeri düzeltmesinde o parçanın ilk denemesi de eklendi.
+PAKET 8 öncesi parts/ görselleri, platform/ img/ veya başka tasarım panosu referans verilmedi.
+
+SINIR VE DEVİR
+Eski paketler ve başka klasörlerin dosyaları değiştirilmedi. Yalnız yukarıdaki28 PNG ve bu TESLIM.txt eklendi.
+Reddedilen denemeler depoya commit edilmedi; yalnız seçilen sürümler tam Kaydet yolunda, özgün adla duruyor.
+Tasarım panosu bir referanstır; gerçek website/animasyon/ses/maskelerin kurulumu ve canlı test bu görsel üretim turunun kapsamı değildir.
+Tam hiza isteyen kapı animasyonu için kanat/kordon sapmaları dikkate alınmalıdır; bu parçalar için kusursuz hiza onayı verilmedi.
+Hiçbir piksel kodla değiştirilmedi.
