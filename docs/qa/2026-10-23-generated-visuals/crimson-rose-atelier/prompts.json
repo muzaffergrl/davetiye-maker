@@ -1,0 +1,110 @@
+{
+  "intro": "You are the art director and still-life photographer of a luxury wedding stationery house. We are finishing the website of a design called \"Crimson Rose Atelier\": deep oxblood and burgundy (#29070B, #4B0C17), ivory cotton paper (#F8EFDF), warm champagne gold (#C9A66D) and dark crimson red roses with dark olive leaves. The four attached images are the style reference of every image in this chat: design-board.png (the art direction), rose-branch.png (the exact roses), envelope-closed.png (the exact burgundy paper) and seal.png (the exact gold). Every image is ONE production asset for a website, photographed for real: rich, tactile, believable materials, one soft warm light from the upper left, magazine-quality luxury, never clip-art, never flat vector, never cheap stock. Never any text, letters, numbers, monograms, logos or watermarks. When an image asks for a transparent background it must be a TRUE transparent PNG (a real alpha channel, not white, not a checkerboard) and the object must stay at least 5% inside every edge unless the prompt says it fills the canvas.",
+  "assets": [
+    {
+      "name": "21-crimson-rose-atelier__velvet.png",
+      "width": 1024,
+      "height": 1536,
+      "transparent": false,
+      "prompt": "A full-frame vertical photograph (2:3) of deep oxblood crushed silk velvet (#29070B in the shadows, #5B1018 in the lit pile), filling the whole canvas edge to edge, lit by one soft warm light from the upper left as if by candlelight in a dark room. The velvet lies almost flat: the middle 60% of the frame (from 20% to 80% of the width and from 15% to 80% of the height) is a CALM, even, slightly darker area with only the fine velvet pile visible, so text and an envelope can sit on it. Only along the left edge, the right edge and the bottom 20% the velvet gathers into a few soft, large, luxurious folds with gentle rich highlights. A subtle natural vignette. No objects, no flowers, no petals, no gold, no envelope, no shadows of objects, no text."
+    },
+    {
+      "name": "21-crimson-rose-atelier__velvet_wide.png",
+      "width": 1536,
+      "height": 1024,
+      "transparent": false,
+      "prompt": "The same oxblood crushed silk velvet as velvet.png, now a full-frame horizontal photograph (3:2) filling the canvas edge to edge, the same color, pile, light from the upper left and vignette. The middle 60% of the width and the middle 70% of the height are a CALM, even area; a few soft large folds only along the left and right edges and the bottom. No objects, no flowers, no gold, no text."
+    },
+    {
+      "name": "21-crimson-rose-atelier__satin_drape.png",
+      "width": 1800,
+      "height": 700,
+      "transparent": true,
+      "prompt": "A length of deep burgundy silk satin fabric (#4B0C17 with luminous #8E2333 highlights) lying horizontally in soft, generous, flowing folds, seen from the front and slightly above, as if draped across the bottom of a table under an envelope. The fabric forms a wide horizontal band (about 2.6:1) whose upper edge is a soft irregular fabric edge with folds rising and falling; its left and right ends fade out naturally in folds. Rich liquid satin sheen, one soft warm light from the upper left. Nothing else: no petals, no roses, no ribbon, no envelope. True transparent background PNG around the fabric, no cast shadow outside it."
+    },
+    {
+      "name": "21-crimson-rose-atelier__petal_1.png",
+      "width": 512,
+      "height": 512,
+      "transparent": true,
+      "prompt": "A single loose petal of the same dark crimson red rose as in rose-branch.png, photographed for real, alone, on a fully transparent background: velvety deep red (#8E0F1E, darker #4A0610 at the base and in the curl, a soft luminous edge where the light catches it), natural fine veins, filling about 55% of the square, centred, not cropped. No stem, no leaf, no whole flower, no water drops, no shadow, no other petal. True transparent background PNG. (Make five different petals: 1 = a wide gently cupped petal seen from above, 2 = a petal curled at one edge, 3 = a narrow folded petal seen from the side, 4 = a small inner petal, 5 = a petal lit from behind so its edge glows.)\nMake petal 1."
+    },
+    {
+      "name": "21-crimson-rose-atelier__petal_2.png",
+      "width": 512,
+      "height": 512,
+      "transparent": true,
+      "prompt": "A single loose petal of the same dark crimson red rose as in rose-branch.png, photographed for real, alone, on a fully transparent background: velvety deep red (#8E0F1E, darker #4A0610 at the base and in the curl, a soft luminous edge where the light catches it), natural fine veins, filling about 55% of the square, centred, not cropped. No stem, no leaf, no whole flower, no water drops, no shadow, no other petal. True transparent background PNG. (Make five different petals: 1 = a wide gently cupped petal seen from above, 2 = a petal curled at one edge, 3 = a narrow folded petal seen from the side, 4 = a small inner petal, 5 = a petal lit from behind so its edge glows.)\nMake petal 2."
+    },
+    {
+      "name": "21-crimson-rose-atelier__petal_3.png",
+      "width": 512,
+      "height": 512,
+      "transparent": true,
+      "prompt": "A single loose petal of the same dark crimson red rose as in rose-branch.png, photographed for real, alone, on a fully transparent background: velvety deep red (#8E0F1E, darker #4A0610 at the base and in the curl, a soft luminous edge where the light catches it), natural fine veins, filling about 55% of the square, centred, not cropped. No stem, no leaf, no whole flower, no water drops, no shadow, no other petal. True transparent background PNG. (Make five different petals: 1 = a wide gently cupped petal seen from above, 2 = a petal curled at one edge, 3 = a narrow folded petal seen from the side, 4 = a small inner petal, 5 = a petal lit from behind so its edge glows.)\nMake petal 3."
+    },
+    {
+      "name": "21-crimson-rose-atelier__petal_4.png",
+      "width": 512,
+      "height": 512,
+      "transparent": true,
+      "prompt": "A single loose petal of the same dark crimson red rose as in rose-branch.png, photographed for real, alone, on a fully transparent background: velvety deep red (#8E0F1E, darker #4A0610 at the base and in the curl, a soft luminous edge where the light catches it), natural fine veins, filling about 55% of the square, centred, not cropped. No stem, no leaf, no whole flower, no water drops, no shadow, no other petal. True transparent background PNG. (Make five different petals: 1 = a wide gently cupped petal seen from above, 2 = a petal curled at one edge, 3 = a narrow folded petal seen from the side, 4 = a small inner petal, 5 = a petal lit from behind so its edge glows.)\nMake petal 4."
+    },
+    {
+      "name": "21-crimson-rose-atelier__petal_5.png",
+      "width": 512,
+      "height": 512,
+      "transparent": true,
+      "prompt": "A single loose petal of the same dark crimson red rose as in rose-branch.png, photographed for real, alone, on a fully transparent background: velvety deep red (#8E0F1E, darker #4A0610 at the base and in the curl, a soft luminous edge where the light catches it), natural fine veins, filling about 55% of the square, centred, not cropped. No stem, no leaf, no whole flower, no water drops, no shadow, no other petal. True transparent background PNG. (Make five different petals: 1 = a wide gently cupped petal seen from above, 2 = a petal curled at one edge, 3 = a narrow folded petal seen from the side, 4 = a small inner petal, 5 = a petal lit from behind so its edge glows.)\nMake petal 5."
+    },
+    {
+      "name": "21-crimson-rose-atelier__oval_frame.png",
+      "width": 1000,
+      "height": 1250,
+      "transparent": true,
+      "prompt": "A slim antique oval picture frame of warm champagne gold (#C9A66D, highlights #EBD3A0), the same gold as seal.png, seen straight from the front, filling the canvas (4:5): a fine beaded inner rim, a softly rounded polished outer moulding and a delicate hand-chased leaf pattern along it, refined and light, never heavy or baroque, no crest and no bow on top. The opening inside is an exact OVAL whose bounding box is 4:5 — from 6% to 94% of the image width and from 6% to 94% of the image height — and the whole opening is filled with flat pure green #00FF00 (no texture, no shading, crisp edge, nothing in front of it). Soft warm light from the upper left. Nothing else. True transparent background PNG outside the frame, no shadow outside the frame."
+    },
+    {
+      "name": "21-crimson-rose-atelier__torn_edge.png",
+      "width": 2048,
+      "height": 320,
+      "transparent": true,
+      "prompt": "The torn bottom edge of a sheet of thick deep oxblood cotton paper (#4B0C17, the same paper as envelope-closed.png), seen straight from the front on a fully transparent background. The oxblood paper fills the whole top 55% of the image edge to edge (from the left edge to the right edge), and below it the sheet ends in a hand-torn, gently irregular edge that wanders across the full width between 55% and 85% of the image height; along the tear a fine, pale cream fibrous rim (#EADCC5) of exposed paper core with tiny loose fibres. Below the tear everything is fully transparent. The left and right ends of the tear are at the same height so the strip can repeat side by side. Soft warm light from the upper left, no cast shadow, no objects, no text."
+    },
+    {
+      "name": "21-crimson-rose-atelier__ribbon.png",
+      "width": 500,
+      "height": 1800,
+      "transparent": true,
+      "prompt": "One long narrow deep burgundy silk satin ribbon (#5B1018 with luminous #9A2037 highlights, about 6% of the image width wide) hanging vertically from the very top edge of the image down to 90% of its height with a gentle natural S-curve and one soft twist, its lower end cut in a neat V (swallowtail). Rich satin sheen, soft warm light from the upper left. Nothing else, no bow, no knot. True transparent background PNG, no shadow outside the ribbon."
+    },
+    {
+      "name": "21-crimson-rose-atelier__gold_sprig.png",
+      "width": 600,
+      "height": 600,
+      "transparent": true,
+      "prompt": "One small delicate sprig of hot-foil stamped champagne gold leaves (#C9A66D, highlights #EBD3A0) — the same olive sprig as on seal.png — seven slender leaves on one fine curved stem, rising diagonally from bottom-left to top-right, as if pressed into paper: subtle relief, a fine metallic foil shine, filling about 70% of the square. No paper behind it, no berries, no text. True transparent background PNG, no shadow."
+    },
+    {
+      "name": "21-crimson-rose-atelier__album_page.png",
+      "width": 1024,
+      "height": 1400,
+      "transparent": true,
+      "prompt": "One thick handmade ivory cotton album page (#F6EDDD), seen straight from the front, filling about 92% of the canvas height, portrait: the left edge is straight (the bound side) with a soft gutter shadow running along it inside the page, the top, right and bottom edges are softly DECKLED (natural torn handmade edges). A warm subtle paper grain, the page completely EMPTY: no photo, no photo corners, no border, no flowers, no text. Soft warm light from the upper left. True transparent background PNG around the page, no cast shadow outside the page."
+    },
+    {
+      "name": "21-crimson-rose-atelier__rose_corner.png",
+      "width": 1400,
+      "height": 1100,
+      "transparent": true,
+      "prompt": "A lush corner arrangement of the same dark crimson red roses and dark olive leaves as rose-branch.png, flowing out of the bottom-left corner of the image towards the upper right: three open roses and two buds low in the corner, leaves and a few loose fallen petals reaching up and to the right, the arrangement touching the LEFT and BOTTOM edges of the canvas (it will sit in a page corner) and fading into open leaves towards the top-right, about 60% of the canvas filled. Photographed for real, soft warm light from the upper left. Nothing else, no vase, no ribbon. True transparent background PNG, no cast shadow outside the flowers."
+    },
+    {
+      "name": "21-crimson-rose-atelier__rose_bloom.png",
+      "width": 700,
+      "height": 700,
+      "transparent": true,
+      "prompt": "A single open dark crimson red rose bloom with two dark olive leaves, the same rose as rose-branch.png, seen three-quarter from above, centred, filling about 75% of the square, photographed for real with soft warm light from the upper left. No stem beyond a short piece, no vase, no other flowers. True transparent background PNG, no shadow."
+    }
+  ]
+}

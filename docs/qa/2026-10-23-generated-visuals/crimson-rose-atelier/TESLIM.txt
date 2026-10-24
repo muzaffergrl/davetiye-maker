@@ -1,0 +1,34 @@
+CRIMSON ROSE ATELIER — PNG TESLİMİ
+
+14 PNG, kullanıcının istediği indirme adlarıyla bu klasörde toplandı.
+İki opak kadife zemin RGB; diğer 12 dosya gerçek alfa kanallı RGBA PNG olarak doğrulandı.
+Görseller aynı sohbette, kullanıcının verdiği sırayla ve dört depo referansıyla üretildi.
+Pikseller kodla boyanmadı, yeniden boyutlandırılmadı veya kırpılmadı; üreticinin özgün çıktıları korundu.
+
+EKSİK VE ŞART FARKLARI
+- oval_frame: İki denemede de yeşil iç yüzeyin merkezi şeffaflaştı. Kullanıcının atlama talimatıyla teslim klasörüne alınmadı.
+- torn_edge: Hedef 2048×320 (6,4:1), çıktı 2172×724 (3:1). İkinci denemede de oran düzelmedi. İki uçta yırtık yüksekliği eşit değil; dikişsiz yatay tekrar doğrulanmadı.
+- ribbon: Temiz alfa kanallı ilk sürüm korundu. Hedef 500×1800, çıktı 946×1663. İkinci sürüm zeminde lekeler oluşturduğu için seçilmedi; kurdelede birden çok burgu görülüyor.
+- gold_sprig: Üç denemede de yedi yerine altı yaprak çıktı. Daha temiz ikinci sürüm seçildi.
+- satin_drape: Kumaş bütünüyle görünür, ancak sol ve sağ kenar boşlukları %5 şartından dardır.
+- İki kadife zemin dışındaki dosyaların piksel ölçüleri hedeflerden farklıdır. Torn_edge ve ribbon dışındakilerde tuval oranı farkı %0,3’ten azdır.
+
+ÖLÇÜ KAYDI (hedef → gerçek)
+velvet.png: 1024×1536 → 1024×1536
+velvet_wide.png: 1536×1024 → 1536×1024
+satin_drape.png: 1800×700 → 2009×783
+petal_1.png: 512×512 → 1254×1254
+petal_2.png: 512×512 → 1254×1254
+petal_3.png: 512×512 → 1254×1254
+petal_4.png: 512×512 → 1254×1254
+petal_5.png: 512×512 → 1254×1254
+oval_frame.png: ATLANDI
+torn_edge.png: 2048×320 → 2172×724
+ribbon.png: 500×1800 → 946×1663
+gold_sprig.png: 600×600 → 1254×1254
+album_page.png: 1024×1400 → 1073×1466
+rose_corner.png: 1400×1100 → 1415×1111
+rose_bloom.png: 700×700 → 1254×1254
+
+Kaynak istek: ISTEK.txt. Kullanılan temel prompt’lar: prompts.json. Teknik doğrulama ve dosya hash’leri: kontrol.json.
+gpt_yerlestir.py çalıştırılmadı; yerleştirme kullanıcının belirttiği gibi ona bırakıldı.

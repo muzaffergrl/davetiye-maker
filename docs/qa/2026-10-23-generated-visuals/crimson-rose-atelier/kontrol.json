@@ -1,0 +1,430 @@
+[
+  {
+    "file": "21-crimson-rose-atelier__velvet.png",
+    "target": [
+      1024,
+      1536
+    ],
+    "actual": [
+      1024,
+      1536
+    ],
+    "mode": "RGB",
+    "sha256": "ca93ce6ce1844d894b9514a930d966cf43af3fd6effede76332480659164f1b6",
+    "size_exact": true,
+    "ratio_error_percent": 0.0,
+    "opaque": true,
+    "notes": []
+  },
+  {
+    "file": "21-crimson-rose-atelier__velvet_wide.png",
+    "target": [
+      1536,
+      1024
+    ],
+    "actual": [
+      1536,
+      1024
+    ],
+    "mode": "RGB",
+    "sha256": "2ec10da1e2e2e472404ca38a7602be4cbce3f46af2aa92e79d7c7eba105f45eb",
+    "size_exact": true,
+    "ratio_error_percent": 0.0,
+    "opaque": true,
+    "notes": []
+  },
+  {
+    "file": "21-crimson-rose-atelier__satin_drape.png",
+    "target": [
+      1800,
+      700
+    ],
+    "actual": [
+      2009,
+      783
+    ],
+    "mode": "RGBA",
+    "sha256": "a74d0ded1a72c4f1827e7ec51d96a924bfd84a3675b515d3c145447a6bd47c2a",
+    "size_exact": false,
+    "ratio_error_percent": 0.22,
+    "true_alpha": true,
+    "object_bbox_alpha_gt_128": [
+      26,
+      236,
+      1984,
+      598
+    ],
+    "fully_transparent_fraction": 0.6789,
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "notes": [
+      "Üreticinin verdiği özgün çözünürlük korundu; hedef piksel ölçüsü farklı.",
+      "Kumaş bütünüyle görünür; sol/sağ boşluk istenen %5 sınırından dardır."
+    ]
+  },
+  {
+    "file": "21-crimson-rose-atelier__petal_1.png",
+    "target": [
+      512,
+      512
+    ],
+    "actual": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "3d8d25eee4855e641afb60c8279becd4625ffabcb469872db47d154f002c6986",
+    "size_exact": false,
+    "ratio_error_percent": 0.0,
+    "true_alpha": true,
+    "object_bbox_alpha_gt_128": [
+      214,
+      249,
+      1057,
+      977
+    ],
+    "fully_transparent_fraction": 0.7379,
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "notes": [
+      "Üreticinin verdiği özgün çözünürlük korundu; hedef piksel ölçüsü farklı."
+    ]
+  },
+  {
+    "file": "21-crimson-rose-atelier__petal_2.png",
+    "target": [
+      512,
+      512
+    ],
+    "actual": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "44b8daeb507726d244c6bc0de343877715d8b37fc85c92aa0c3c18243c2f23f6",
+    "size_exact": false,
+    "ratio_error_percent": 0.0,
+    "true_alpha": true,
+    "object_bbox_alpha_gt_128": [
+      181,
+      258,
+      1096,
+      1006
+    ],
+    "fully_transparent_fraction": 0.7252,
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "notes": [
+      "Üreticinin verdiği özgün çözünürlük korundu; hedef piksel ölçüsü farklı."
+    ]
+  },
+  {
+    "file": "21-crimson-rose-atelier__petal_3.png",
+    "target": [
+      512,
+      512
+    ],
+    "actual": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "084f506b0a3d11736558f59f58d242103b7b0b991cf66df97a0b0a3982b5d7d1",
+    "size_exact": false,
+    "ratio_error_percent": 0.0,
+    "true_alpha": true,
+    "object_bbox_alpha_gt_128": [
+      405,
+      176,
+      939,
+      1089
+    ],
+    "fully_transparent_fraction": 0.8442,
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "notes": [
+      "Üreticinin verdiği özgün çözünürlük korundu; hedef piksel ölçüsü farklı."
+    ]
+  },
+  {
+    "file": "21-crimson-rose-atelier__petal_4.png",
+    "target": [
+      512,
+      512
+    ],
+    "actual": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "c33a974b0618cfd55fb1e2ee21758cb16793a436d5048b66ad28e7f653a568f4",
+    "size_exact": false,
+    "ratio_error_percent": 0.0,
+    "true_alpha": true,
+    "object_bbox_alpha_gt_128": [
+      358,
+      288,
+      958,
+      962
+    ],
+    "fully_transparent_fraction": 0.8311,
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "notes": [
+      "Üreticinin verdiği özgün çözünürlük korundu; hedef piksel ölçüsü farklı."
+    ]
+  },
+  {
+    "file": "21-crimson-rose-atelier__petal_5.png",
+    "target": [
+      512,
+      512
+    ],
+    "actual": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "4fef81bf7b7ac1ca5ce2bf03aec72d598c17f0e2598b0c7e66254606b75d866c",
+    "size_exact": false,
+    "ratio_error_percent": 0.0,
+    "true_alpha": true,
+    "object_bbox_alpha_gt_128": [
+      232,
+      213,
+      1035,
+      1043
+    ],
+    "fully_transparent_fraction": 0.7129,
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "notes": [
+      "Üreticinin verdiği özgün çözünürlük korundu; hedef piksel ölçüsü farklı."
+    ]
+  },
+  {
+    "file": "21-crimson-rose-atelier__oval_frame.png",
+    "status": "skipped",
+    "reason": "İki üretimde de iç yeşil alanın merkezi şeffaflaştı; düz opak yeşil şartını karşılamadı."
+  },
+  {
+    "file": "21-crimson-rose-atelier__torn_edge.png",
+    "target": [
+      2048,
+      320
+    ],
+    "actual": [
+      2172,
+      724
+    ],
+    "mode": "RGBA",
+    "sha256": "71d4e087378788a1db498623249fa7115c2e64317636eafcfea202d96c4871db",
+    "size_exact": false,
+    "ratio_error_percent": 53.125,
+    "true_alpha": true,
+    "object_bbox_alpha_gt_128": [
+      0,
+      0,
+      2172,
+      491
+    ],
+    "fully_transparent_fraction": 0.3863,
+    "corner_alpha": [
+      205,
+      243,
+      0,
+      0
+    ],
+    "notes": [
+      "Üreticinin verdiği özgün çözünürlük korundu; hedef piksel ölçüsü farklı.",
+      "Tuval oranı hedefe uymuyor; doğrudan yerleşim için ölçü uyarlaması gerekir.",
+      "Yan yana tekrarın dikişsizliği doğrulanmadı; iki kenarın yırtık yüksekliği birebir aynı değildir."
+    ]
+  },
+  {
+    "file": "21-crimson-rose-atelier__ribbon.png",
+    "target": [
+      500,
+      1800
+    ],
+    "actual": [
+      946,
+      1663
+    ],
+    "mode": "RGBA",
+    "sha256": "8cbcd3a92f26afc0e82d165ea00f895ceae73fb00b000d177cccaad23a5f39b9",
+    "size_exact": false,
+    "ratio_error_percent": 104.787,
+    "true_alpha": true,
+    "object_bbox_alpha_gt_128": [
+      416,
+      0,
+      618,
+      1451
+    ],
+    "fully_transparent_fraction": 0.9263,
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "notes": [
+      "Üreticinin verdiği özgün çözünürlük korundu; hedef piksel ölçüsü farklı.",
+      "Tuval oranı hedefe uymuyor; doğrudan yerleşim için ölçü uyarlaması gerekir."
+    ]
+  },
+  {
+    "file": "21-crimson-rose-atelier__gold_sprig.png",
+    "target": [
+      600,
+      600
+    ],
+    "actual": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "6ad47d072c3376e7612599a7ce6c0d58cd79cab873d4af326748a494d4be25b0",
+    "size_exact": false,
+    "ratio_error_percent": 0.0,
+    "true_alpha": true,
+    "object_bbox_alpha_gt_128": [
+      299,
+      106,
+      1107,
+      1155
+    ],
+    "fully_transparent_fraction": 0.8444,
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "notes": [
+      "Üreticinin verdiği özgün çözünürlük korundu; hedef piksel ölçüsü farklı.",
+      "Üç üretimde de yedi yerine altı yaprak çıktı; seçilen ikinci sürüm altı yapraklıdır."
+    ]
+  },
+  {
+    "file": "21-crimson-rose-atelier__album_page.png",
+    "target": [
+      1024,
+      1400
+    ],
+    "actual": [
+      1073,
+      1466
+    ],
+    "mode": "RGBA",
+    "sha256": "0b6746320e0a562d29eb365f8ec84362027a0b566d11bb1a9770521073e320cf",
+    "size_exact": false,
+    "ratio_error_percent": 0.068,
+    "true_alpha": true,
+    "object_bbox_alpha_gt_128": [
+      52,
+      59,
+      1036,
+      1421
+    ],
+    "fully_transparent_fraction": 0.1577,
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "notes": [
+      "Üreticinin verdiği özgün çözünürlük korundu; hedef piksel ölçüsü farklı."
+    ]
+  },
+  {
+    "file": "21-crimson-rose-atelier__rose_corner.png",
+    "target": [
+      1400,
+      1100
+    ],
+    "actual": [
+      1415,
+      1111
+    ],
+    "mode": "RGBA",
+    "sha256": "85f248727575977e742905e9f731e292fc256e206af2ac393045b012b0809d3c",
+    "size_exact": false,
+    "ratio_error_percent": 0.071,
+    "true_alpha": true,
+    "object_bbox_alpha_gt_128": [
+      0,
+      10,
+      1364,
+      1111
+    ],
+    "fully_transparent_fraction": 0.4828,
+    "corner_alpha": [
+      0,
+      0,
+      4,
+      1
+    ],
+    "notes": [
+      "Üreticinin verdiği özgün çözünürlük korundu; hedef piksel ölçüsü farklı."
+    ]
+  },
+  {
+    "file": "21-crimson-rose-atelier__rose_bloom.png",
+    "target": [
+      700,
+      700
+    ],
+    "actual": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "153f432e2f42e345f4ac0964cdcc32520b4e684d8a17cf39db85f49dd75b3b09",
+    "size_exact": false,
+    "ratio_error_percent": 0.0,
+    "true_alpha": true,
+    "object_bbox_alpha_gt_128": [
+      63,
+      112,
+      1226,
+      1196
+    ],
+    "fully_transparent_fraction": 0.5274,
+    "corner_alpha": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "notes": [
+      "Üreticinin verdiği özgün çözünürlük korundu; hedef piksel ölçüsü farklı."
+    ]
+  }
+]
